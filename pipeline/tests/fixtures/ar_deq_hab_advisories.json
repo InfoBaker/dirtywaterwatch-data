@@ -1,0 +1,8 @@
+{"updated": "November 1, 2026", "advisories": [
+ {"waterbody": "Example Lake *", "county": "Sample County", "area": "Exampleville, AR", "date": "July 9, 2019", "lifted": "N/A"},
+ {"waterbody": "Lake Exemplar", "county": "LaSample County", "area": "Sampletown, AR", "date": "July 30, 2026", "lifted": ""},
+ {"waterbody": "Lake Specimen", "county": "Sample and Example Counties", "area": "Exampleville, AR", "date": "July 21, 2026", "lifted": "August 6, 2026"},
+ {"waterbody": "Sample River near Exampleville", "county": "Sample County", "area": "Exampleville, AR", "date": "August 6, 2020", "lifted": "N/A"},
+ {"waterbody": "Stream by Example Trail East of Lake Exemplar (coordinates 35.123456, -93.654321)", "county": "Sample County", "area": "Exampleville, AR", "date": "June 23, 2026", "lifted": "July 22, 2026"},
+ {"waterbody": "Lake Specimen - Example Bay *", "county": "Sample and Hot Springs County", "area": "Exampleville, AR", "date": "October 28, 2019", "lifted": "N/A"}
+]}

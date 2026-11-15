@@ -459,6 +459,34 @@ Puerto Rico (permits PR...; research/pr/profile.json; not live until data/rules.
   - Combined sewer outfalls: the 12 Puerto Nuevo outfalls (PR0021555) are in data/outfalls-pr.json from PRASA's own
     layer; no report in this dataset is typed CSO, so none is matched to them.
 
+Minnesota (permits MN...; research/mn/report.md section 2.2; not live until data/rules.json says so)
+  Minnesota issues its own permits and its law (Minn. Stat. 115.061) sends reports to the state's Duty Officer, which
+  publishes none. EPA's collection-system table lists 19 Minnesota permits, but the 2026-11-12 all-versions extract
+  holds one Minnesota report, from the one Minnesota system EPA permits directly: the Bois Forte Band's Lake Vermilion
+  collection system (MN0061310), a sanitary sewer overflow on 2024-06-18 (start and end that day, received 2024-06-25)
+  to "Pike Bay Lake Vermilion Tower Minnesota". Keyed on MN only, so every other state's records are unchanged:
+  - Time zone: STATE_TZ gives America/Chicago (Minnesota keeps one zone); MN is in STATE_ZONE_ALWAYS, so every
+    Minnesota record carries raw.time_zone.
+  - Free text: MN is in FREE_TEXT_STATES (the Illinois scrub) and STATE_NAME_SCRUB (mn_scrub_people: names by their
+    cues and every house number), though the one report has no description (re-review 2026-11-14 P1-5).
+  - Points kept to 0.001 degree (ROUND_POINT_STATES) in the record and in raw, and in the saved ZIP itself: before a
+    downloaded ZIP (current or all-versions) is saved, sanitize_zip rewrites only the Minnesota rows (points rounded,
+    free text scrubbed as above); every other row keeps its bytes, and a ZIP with nothing to change is saved as
+    downloaded (re-review 2026-11-14 P1-6).
+Indiana (permits IN...; research/in/report.md; not live until data/rules.json says so)
+  IDEM takes sewer overflow and bypass reports on its own State Form 48373 and says it will move them to EPA's
+  NeT-SewerOverflow system; until then almost nothing reaches this dataset. The 2026-11-12 extract (current and
+  all-versions) holds one Indiana row: a wet-weather bypass at Shelbyville's plant (IN0032867, 2026-08-12 21:30 to
+  2026-08-13 14:55, 5,055,000 gallons by automated monitoring, 'Big Blue River', filed through EPA's own system, ES1),
+  received the next day. Keyed on IN permits only, so every other state's records are unchanged:
+  - Time zone. Indiana straddles Eastern and Central time along county lines (49 CFR 71.5(b)): the event's own point
+    against the outlines of the twelve Central-time counties (data/reference/in-central-time-counties.json, written by
+    scripts/in_central_time_counties.py, which cites the rule and checks it against the U.S. DOT time-zone layer) is
+    read as America/Chicago; any other point as America/New_York (STATE_TZ); raw.timezone_note names the county that
+    decided it, and raw.time_zone carries the zone on every Indiana record (ZONE_ALWAYS_STATES).
+  - Free text: IN is in FREE_TEXT_STATES (the Illinois scrub) as a precaution; the one description names no person.
+  - No plant-point, repeated-point or type rule yet: the one report is a bypass, which keeps its point (the plant's).
+    When IDEM's reports arrive in volume, read them before adding any (research/in/expansion-research.md).
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -490,19 +518,26 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM", "UT", "KY"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM", "UT", "KY",
+          "MN", "IN"}
 STATES |= {"PR"}   # Puerto Rico (module docstring)
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",
             "NE": "America/Chicago", "AK": "America/Anchorage", "NM": "America/Denver", "UT": "America/Denver",
-            "KY": "America/New_York"}
+            "KY": "America/New_York",
+            "MN": "America/Chicago", "IN": "America/New_York"}
 STATE_TZ["PR"] = "America/Puerto_Rico"   # Atlantic Standard Time all year, no daylight time
 # states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
 # one of the counties of the reference file is read in that file's zone (module docstring, South Dakota and Nebraska)
 POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json",
-                    "KY": "ky-central-time-counties.json"}   # Kentucky: the Central-time counties (module docstring)
+                    "KY": "ky-central-time-counties.json",   # Kentucky: the Central-time counties (module docstring)
+                    "IN": "in-central-time-counties.json"}   # Indiana: the twelve Central-time counties (module docstring)
 # states whose records carry raw.time_zone whatever their times' precision (module docstring, Kentucky)
-ZONE_ALWAYS_STATES = {"KY"}
+ZONE_ALWAYS_STATES = {"KY", "IN"}
+# states of one zone whose records carry raw.time_zone (STATE_TZ) whatever their times' precision (Minnesota)
+STATE_ZONE_ALWAYS = {"MN"}
+# states whose event points are kept to 0.001 degree before anything is saved (Minnesota; wave 4 rule 4)
+ROUND_POINT_STATES = {"MN"}
 # states whose sewer overflow at the plant's own point (within REPEATED_POINT_PLANT_M of a point EPA's plant list gives
 # the permit) is the plant's location, not the overflow's, with no count of repeats (module docstring, Kentucky; review
 # 2026-11-08 P2-4): the point goes to raw.reported_point and the report is placed by the water it names or not at all
@@ -512,7 +547,7 @@ PLANT_POINT_STATES = {"KY"}
 AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
 STATE_TZ_WEST = {"AK": (AK_ALEUTIAN_WEST, "America/Adak")}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM", "KY"}
+FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM", "KY", "MN", "IN"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
 # a permit's shorthand receiving-water names -> the NHD name, keyed (permit, _alias_key(text)); module docstring,
@@ -783,7 +818,16 @@ def ky_scrub_people(v: str) -> str:
     return KY_PERSON_VERB.sub(lambda m: _ky_person(m, 1), v)
 
 
+def mn_scrub_people(v: str) -> str:
+    """Minnesota's free text with names found by their cues ("reported by ...") and every house number removed
+    (fieldmap.scrub_strict_names; re-review 2026-11-14 P1-5)."""
+    from ingest.generic.fieldmap import scrub_strict_names
+    return scrub_strict_names(v)
+
+
 STATE_PERSON_SCRUB = {"KY": ky_scrub_people}
+# states whose free text also goes through the names scrub before anything is saved (Minnesota; module docstring)
+STATE_NAME_SCRUB = {"MN": mn_scrub_people}
 # Kentucky's form writes durations and computed volumes as bare numbers ('Cause/Duration of Incident: 2615', '290 MIN X
 # 50 GAL = 14500'), which the house-number scrub took for addresses: a number after 'Duration of Incident:' or '=' is
 # kept (review 2026-11-08 P3-1)
@@ -1161,11 +1205,92 @@ def _get(url: str) -> tuple[zipfile.ZipFile, bytes, str | None]:
             parsedate_to_datetime(lm).isoformat().replace("+00:00", "Z") if lm else None)
 
 
+CSV_RECORD = re.compile(r'(?:"(?:[^"]|"")*"|[^"\r\n])*(?:\r\n|\n|\r|$)')
+MN_TEXT_COLUMNS = set(FREE_TEXT_FIELDS)
+
+
+def _sanitize_csv(text: str, states: set[str]) -> tuple[str, int]:
+    """(the table's text with only the rows of `states` rewritten, rows changed): the points rounded to 0.001 degree
+    and the free text (FREE_TEXT_FIELDS and *_other_text) scrubbed as the build scrubs it. Every other record keeps its
+    exact text; a changed row keeps its quoting and line ending."""
+    recs = [m.group(0) for m in CSV_RECORD.finditer(text) if m.group(0)]
+    if not recs:
+        return text, 0
+    head = next(csv.reader([recs[0].lstrip("\ufeff")]))
+    col = {c: i for i, c in enumerate(head)}
+    if "permit_identifier" not in col:
+        return text, 0
+    pi = col["permit_identifier"]
+    texts = [i for c, i in col.items() if c in MN_TEXT_COLUMNS or c.endswith("_other_text")]
+    points = [col[c] for c in ("latitude_measure", "longitude_measure") if c in col]
+    changed = 0
+    out = [recs[0]]
+    for r in recs[1:]:
+        body = r.rstrip("\r\n")
+        if not body:
+            out.append(r)
+            continue
+        row = next(csv.reader([body]))
+        if len(row) <= pi or row[pi][:2] not in states:
+            out.append(r)
+            continue
+        new = list(row)
+        for i in points:
+            if i < len(new) and new[i].strip():
+                try:
+                    v = float(new[i])
+                except ValueError:
+                    continue
+                if round(v, 3) != v:
+                    new[i] = f"{round(v, 3):.3f}"
+        for i in texts:
+            if i < len(new) and new[i].strip():
+                st = row[pi][:2]
+                t = scrub_free_text({"t": new[i]}, ["t"])["t"]
+                fn = STATE_PERSON_SCRUB.get(st) or STATE_NAME_SCRUB.get(st)
+                new[i] = fn(t) if fn else t
+        if new == row:
+            out.append(r)
+            continue
+        buf = io.StringIO()
+        csv.writer(buf, quoting=csv.QUOTE_ALL if body.startswith('"') else csv.QUOTE_MINIMAL,
+                   lineterminator=r[len(body):]).writerow(new)
+        out.append(buf.getvalue())
+        changed += 1
+    return "".join(out), changed
+
+
+def sanitize_zip(content: bytes, states: set[str] = ROUND_POINT_STATES) -> bytes:
+    """The ZIP as it may be saved: the rows of `states` (Minnesota) rewritten by _sanitize_csv in every table; every
+    other entry and row as downloaded. Unchanged bytes when no such row needed a change (re-review 2026-11-14 P1-6)."""
+    zf = zipfile.ZipFile(io.BytesIO(content))
+    new_data: dict[str, bytes] = {}
+    for info in zf.infolist():
+        if not info.filename.lower().endswith(".csv"):
+            continue
+        data = zf.read(info)
+        bom = data.startswith(b"\xef\xbb\xbf")
+        try:
+            text = data.decode("utf-8-sig")
+        except UnicodeDecodeError:
+            continue
+        fixed, n = _sanitize_csv(text, states)
+        if n:
+            new_data[info.filename] = (b"\xef\xbb\xbf" if bom else b"") + fixed.encode("utf-8")
+    if not new_data:
+        return content
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as out:
+        for info in zf.infolist():
+            out.writestr(info, new_data.get(info.filename) or zf.read(info))
+    return buf.getvalue()
+
+
 def _save(content: bytes, last_modified: str | None) -> str | None:
     prev = (read_json(BUILD_DIR / "events" / f"{SOURCE_ID}.json", {}) or {}).get("meta", {})
     if prev.get("last_modified") and prev.get("last_modified") == last_modified:
         return None   # same extract as last run: no second copy
-    return str(save_raw(SOURCE_ID, content, "zip").relative_to(ROOT))
+    return str(save_raw(SOURCE_ID, sanitize_zip(content), "zip").relative_to(ROOT))
 
 
 def fetch_current() -> tuple[dict[str, list[dict]], dict]:
@@ -1446,7 +1571,7 @@ def point_zone(state: str, lat, lon) -> tuple[str | None, str | None]:
         return STATE_TZ[state], (f"{county} is split by the boundary ({cite}) and the point lies on neither part of it "
                                  "in the U.S. DOT time-zone layer: read as Central")
     n = len(z["zone"])
-    words = {15: "fifteen", 18: "eighteen", 41: "forty-one"}.get(n, str(n))
+    words = {12: "twelve", 15: "fifteen", 18: "eighteen", 41: "forty-one"}.get(n, str(n))
     label = doc.get("zone_label", "Mountain")   # Kentucky's file lists Central-time counties
     split = " and ".join(c for c, *_ in z["split"])
     return STATE_TZ[state], (f"the event's point lies outside the {words} {label}-time counties"
@@ -1543,8 +1668,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             for rows_ in (i_rows, causes.get(k, []), acts.get(k, [])):
                 for x in rows_:
                     scrub_free_text(x, [c for c in x if c.endswith("_other_text")])
-            people = STATE_PERSON_SCRUB.get(state) or EXTRA_PERSON_SCRUB.get(state)
-            if people:   # module docstring, Kentucky and Puerto Rico
+            people = STATE_PERSON_SCRUB.get(state) or STATE_NAME_SCRUB.get(state) or EXTRA_PERSON_SCRUB.get(state)
+            if people:   # module docstring, Kentucky, Minnesota and Puerto Rico
                 for f in FREE_TEXT_FIELDS:
                     if isinstance(ev.get(f), str):
                         ev[f] = people(ev[f])
@@ -1681,6 +1806,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                 raw["ky_incident_id"] = m_inc.group(1)
         if ev_tz and state in ZONE_ALWAYS_STATES:
             raw["time_zone"] = ev_tz
+        if state in STATE_ZONE_ALWAYS and STATE_TZ.get(state):
+            raw["time_zone"] = STATE_TZ[state]          # Minnesota: one zone, no county file
         if state in RECORD_ZONE_STATES:   # module docstring, Puerto Rico
             raw["time_zone"] = ev_tz or STATE_TZ[state]
         if ev_tz and any(t and "T" not in t for t in (start, end)):
@@ -1710,6 +1837,11 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             raw["end_is_planned"] = True
             raw["planned_end_note"] = (f"the operator's planned end of an anticipated bypass ({PLANNED_LABEL}); the "
                                        "bypass runs to it unless a later report changes it")
+        if state in ROUND_POINT_STATES and lat is not None and lon is not None:
+            lat, lon = round(lat, 3), round(lon, 3)      # Minnesota: a reporter's point kept to 0.001 degree
+            for k in ("latitude_measure", "longitude_measure"):
+                if raw.get(k) not in (None, ""):
+                    raw[k] = f"{round(float(raw[k]), 3):.3f}"
         kept.append(event(
             source_id=SOURCE_ID, source_record_id=srid, event_type=etype,
             status=status,

@@ -1,0 +1,64 @@
+id: "mn-wlssd-overflows"
+name: "Resource Renew (Western Lake Superior Sanitary District) overflow points ArcGIS layer"
+url: "https://services3.arcgis.com/3RQJoZkAUQLOEu2Y/arcgis/rest/services/Overflows_view/FeatureServer/0"
+homepage: "https://wlssd.com/services/wastewater/overflows/"
+kind: "arcgis"
+level: "operator"
+# Read through the generic ArcGIS reader (the fetch block below) with the hook ingest/mn_transforms.mn_wlssd_record.
+#   The layer ("Overflow Points", UTM zone 15 asked in WGS84) is the District's own record of releases from its
+#   interceptors, pump stations and treatment plant in the Duluth region, shown on its overflows page ("Any overflows
+#   occurring in 2026 will be indicated on the map below"). Fields: OBJECTID, OverflowDate (epoch), FacilityType,
+#   GlobalID, ReleaseAmount (free text), StateWaters (Yes, No or blank) and the point. No person's data: every field is
+#   requested.
+# Real fetch 2026-11-14 (layer data last edited 2026-11-04): 117 rows, 2005 to 2026-11-04; by FacilityType Manhole 67,
+#   ForceMain 27, Treatmentplant 11, Other 7, PumpStation 4, blank 1 (106 sso, 11 plant_bypass); StateWaters blank 94,
+#   No 15, Yes 8; by year 2005 19, 2006 4, 2009 to 2014 8, 2015 5, 2016 7, 2017 8, 2018 7, 2020 2, 2021 9, 2022 7,
+#   2023 17, 2024 10, 2025 6, 2026 8. 84 rows hold exactly 00:00 UTC (a date only); 33 a time. ReleaseAmount blank on
+#   78 rows; a gallon figure on 24; "70 MGD" (a rate) on the two plant releases of 2026-11-02 and 2026-11-04.
+# Not in the layer: an end time, a receiving water's name, a publication or report time.
+cadence: "edited as releases occur; the newest row 2026-11-04 on 2026-11-14"
+license: "No licence stated on the layer"
+attribution: "Resource Renew (Western Lake Superior Sanitary District)"
+enabled: true
+role: "events"
+event_types: ["sso", "plant_bypass"]
+states: ["MN"]
+registry_ids: ["mn-wlssd-overflows"]
+access: ["arcgis"]
+access_detail: "Public ArcGIS Online feature service behind an ArcGIS dashboard (maxRecordCount 2000), no key; Query capability only."
+machine_readable: true
+legal_basis: "Minn. Stat. 115.061 (report to the agency; prompt notice to downstream users and the public); the layer is the District's voluntary public record"
+checked: "2026-11-14"
+fetch:
+  platform: "arcgis"
+  live: true
+  url: "https://services3.arcgis.com/3RQJoZkAUQLOEu2Y/arcgis/rest/services/Overflows_view/FeatureServer/0"
+  order_by: "OBJECTID"
+  geometry: true
+  metadata: false        # the layer's edit time is the source's health, never a record's time
+  time_zone: "America/Chicago"
+  bounds: [-97.3, 43.4, -89.4, 49.45]      # Minnesota; a point outside is not used (raw._coords_rejected)
+  safe_fields: [OBJECTID, OverflowDate, FacilityType, GlobalID, ReleaseAmount, StateWaters, _x, _y]
+  round_coords: 3
+  free_text: [FacilityType, ReleaseAmount, StateWaters]
+  free_text_scrub: strict_names     # names and every house number cut before the raw save (re-review 2026-11-14 P1-5)
+  record:
+    source_record_id: GlobalID
+    started_at: {field: OverflowDate, parse: epoch_ms, midnight: date}
+    event_type: {const: sso}
+    status: {const: unknown}
+    lat: {field: _y, parse: number}
+    lon: {field: _x, parse: number}
+    volume: {field: ReleaseAmount, bare_number_text: "gallons"}
+    authority: {const: "Resource Renew (Western Lake Superior Sanitary District), overflow points"}
+    source_url: {const: "https://wlssd.com/services/wastewater/overflows/"}
+  transform: "ingest.mn_transforms.mn_wlssd_record"
+  dedupe: {repeats: suffix}
+  history:
+    keep_missing: true
+    revisions: true
+  meta:
+    credit: "Resource Renew (Western Lake Superior Sanitary District), overflow points layer"
+    license: "No licence stated on the layer"
+    caveat: "The District's own record of releases from its interceptors, pump stations and treatment plant around Duluth. It gives the day (or the time) of each release, its kind and point, an amount as written and whether it reached waters of the state; no end and no receiving water's name. City sewers that feed the District (Duluth's own) are not in it."
+    time_basis: "OverflowDate: a value at exactly 00:00 UTC is a date entered without a time (84 of 117 rows), read as that date; any other value is an instant, shown in Central time."

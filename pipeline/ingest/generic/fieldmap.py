@@ -585,10 +585,11 @@ def safe_row(row: dict, block: dict) -> tuple[dict, list[str]]:
             continue
         if f in row or v is not None:
             out[f] = v
-    strict = block.get("free_text_scrub") == "strict"
+    mode = block.get("free_text_scrub")
     for f in block.get("free_text") or ():
         if isinstance(out.get(f), str):
-            out[f] = scrub_strict(out[f]) if strict else scrub(out[f])
+            out[f] = (scrub_strict_names(out[f]) if mode == "strict_names" else scrub_strict(out[f])
+                      if mode == "strict" else scrub(out[f]))
     # round_coords: a reporter's point (a bloom seen from a home) kept only to this many decimals, in the record's
     # raw.row and in data/raw alike (opt-in per block; review 2026-11-08 TN P2-3)
     nd = block.get("round_coords")
@@ -626,6 +627,21 @@ STREET_HOUSE = re.compile(
 HOUSE_RANGE = re.compile(r"(?<![\w.,/:#-])\d{2,6}[A-Za-z]?(?:-\d{2,6}[A-Za-z]?)+(?=\s{1,2}(?:[NSEW]\.?\s{1,2})?[A-Z])")
 UNIT_NUMBER = re.compile(r"\b(lot|apt|apartment|unit|suite|ste|space|spc|trailer|bldg|building)\.?\s*(?:no\.?|#)?\s*\d+[A-Za-z]?\b",
                          re.I)
+
+
+_REDACTOR = []
+
+
+def scrub_strict_names(text):
+    """free_text_scrub: strict_names (Minnesota and North Dakota, re-review 2026-11-14 P1-5): scrub_strict, then the
+    names the export's redactor finds by their cues ("reported by Pat Example", "Crews led by ..."), before anything is
+    saved. An addition: "strict" and the standard scrub are unchanged."""
+    if not isinstance(text, str):
+        return text
+    if not _REDACTOR:
+        from build import redact
+        _REDACTOR.append(redact.redactor_for([]))
+    return _REDACTOR[0].text(scrub_strict(text))
 
 
 def scrub_strict(text):
@@ -777,7 +793,8 @@ def water_state_module(st: str) -> str | None:
         return None
 
 
-HISTORY_KEYS = {"keep_missing", "revisions", "track", "missing_key", "supersede", "confirm_while_listed"}
+HISTORY_KEYS = {"keep_missing", "revisions", "track", "missing_key", "supersede", "supersede_unique",
+                "supersede_max_days", "supersede_reviewed", "confirm_while_listed"}
 
 
 def validate(block: dict, source_id: str = "") -> list[str]:
@@ -843,8 +860,8 @@ def validate(block: dict, source_id: str = "") -> list[str]:
     for f in block.get("free_text") or ():
         if f not in safe:
             errs.append(f"free_text field {f!r} is not a safe field")
-    if block.get("free_text_scrub") not in (None, "strict"):
-        errs.append("free_text_scrub is strict (or absent: the standard scrub)")
+    if block.get("free_text_scrub") not in (None, "strict", "strict_names"):
+        errs.append("free_text_scrub is strict or strict_names (or absent: the standard scrub)")
     if block.get("time_zone"):
         try:
             ZoneInfo(block["time_zone"])
@@ -912,6 +929,11 @@ def validate(block: dict, source_id: str = "") -> list[str]:
             continue
         for t in keys:
             errs += spec_errors(f"history.supersede[{i}]", {"template": t}, safe)
+    rv = h.get("supersede_reviewed")
+    if rv is not None and not (isinstance(rv, list) and all(
+            isinstance(x, dict) and set(x) == {"old", "new", "evidence"} and all(isinstance(v, str) and v.strip()
+                                                                                for v in x.values()) for x in rv)):
+        errs.append("history.supersede_reviewed is a list of {old, new, evidence} (source record ids and the evidence)")
     for k in ("max_error_share", "min_rows_ratio"):
         if k in block and not (isinstance(block[k], (int, float)) and 0 <= block[k] <= 1):
             errs.append(f"{k} is a share between 0 and 1")

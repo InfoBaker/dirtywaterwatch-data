@@ -410,9 +410,20 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
         _url(e.get("source_url")), _notice_url(e),
         ctx.links.url(e),
         _text(e.get("duplicate_of")), _text(superseded_by(e, ctx.ids)),
-        _text(e.get("sampled_at")), _text(e.get("time_precision")), _text(ended_precision),
+        _text(e.get("sampled_at")), _text(start_precision_text(e)), _text(ended_precision),
     ]
     return row, ops
+
+
+def start_precision_text(e: dict) -> str | None:
+    """The time_precision cell: the record's precision, and for a start that is only an upper bound (re-review P1-6:
+    a crew's response, a notification, a publication, a concern's receipt) "minute; on or before (response)", so the
+    started_at cell is never read as the discharge's start. Other records' cells are unchanged."""
+    b = status_mod.start_bound(e)
+    p = e.get("time_precision")
+    if not b:
+        return p
+    return f"{p or 'not stated'}; on or before ({b['started_at_kind']})"
 
 
 def _write(path: Path, rows: list[list[str]]) -> None:

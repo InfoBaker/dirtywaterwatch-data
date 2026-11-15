@@ -60,7 +60,7 @@ from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 
 from build.status import (ADVISORY_TYPES, BEACH_CHAR, BLOOM_CHAR, COARSE_PRECISION, DISCHARGE_TYPES, LOCAL, POINT_ADVISORY_TYPES,
-                          colours_whole_water, end_not_credible, event_intervals, event_state, find_duplicates,
+                          colours_whole_water, point_extent_only, end_not_credible, event_intervals, event_state, find_duplicates,
                           future_start, load_events, live_waters, load_rules, load_waters, make_resolver, parse_time, resolve_revisions)
 from common import (BUILD_DIR, DATA_DIR, OUT_DIR, discharger_alias_map, now_iso, read_json, rules_live_states,
                     system_wide_advisory, write_json)
@@ -85,8 +85,18 @@ STATE_NAMES = {"MA": "Massachusetts", "CT": "Connecticut", "RI": "Rhode Island",
                "AL": "Alabama", "TX": "Texas",
                "UT": "Utah",
                "OR": "Oregon",
-               "KY": "Kentucky", "OH": "Ohio"}
+               "KY": "Kentucky", "OH": "Ohio", "IN": "Indiana"}
 STATE_NAMES["TN"] = "Tennessee"
+STATE_NAMES["MN"] = "Minnesota"
+STATE_NAMES["ND"] = "North Dakota"
+STATE_NAMES["MO"] = "Missouri"
+STATE_NAMES["KS"] = "Kansas"
+STATE_NAMES["AR"] = "Arkansas"
+STATE_NAMES["WI"] = "Wisconsin"
+STATE_NAMES["DE"] = "Delaware"
+STATE_NAMES["SC"] = "South Carolina"
+STATE_NAMES["WV"] = "West Virginia"
+STATE_NAMES["LA"] = "Louisiana"
 STATE_NAMES["PR"] = "Puerto Rico"
 COUNT_RULE_LINE = "Verified reports where available, else notices; revisions and duplicates counted once."
 MONTHS_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -119,6 +129,8 @@ SOURCE_LABEL = {
     "ri-dem-cyano": "Rhode Island Department of Environmental Management cyanobacteria advisories",
     "ri-ridoh-beaches": "Rhode Island Department of Health beach closures",
     "vt-advisories": "Vermont advisories (cyanobacteria, Burlington beaches)",
+    "in-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for Indiana",
+    "wv-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for West Virginia",
 }
 
 # Per-source caveats, by chart; {first} and {last} are the source's coverage dates, written out.
@@ -138,6 +150,7 @@ TOTAL_NOTES = {
     "me-dep-cso-annual": "Maine's Department of Environmental Protection reports one total per community and year, for all of its combined sewer outlets; the total is shown in full on each water the community's outlets reach. Event-days: calendar days with any combined sewer discharge in the community.",
     "echo-cso-dmr-monthly": "Monthly totals each operator files with the U.S. Environmental Protection Agency for each outlet (discharge monitoring reports). They describe the same discharges the state notices report, so they are shown here and never added to the discharge counts. A month with no row counts as zero inside the date range.",
     "nh-permittees": "Portsmouth publishes monthly combined sewer overflow volumes for each outlet, not individual discharges.",
+    "in-echo-dmr-cso": "Monthly totals each Indiana operator files for each combined sewer outlet (number of discharges, hours and million gallons in discharge monitoring reports, published by the U.S. Environmental Protection Agency weeks after the month). They are shown here and never added to the discharge counts. An operator files a month with no discharge as such; a month with no row is one with no discharge or no report, which the reports do not tell apart, so it is left blank, never shown as zero.",
 }
 MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
                "November", "December"]
@@ -432,6 +445,9 @@ def gather(data: Data):
         et = ev.get("event_type") or "unknown"
         if is_total(ev) or system_wide_advisory(ev):
             continue            # a system-wide advisory is counted with the advisories, never as a discharge
+        if (ev.get("raw") or {}).get("_advice_not_a_discharge") is True:
+            stats["advice_not_a_discharge"] += 1
+            continue            # an operator's advice about a discharge recorded beside it (Florence): counted once
         if et not in DISCHARGE_TYPES and not (et == "unknown" and ev.get("source_id") in disch_sources):
             continue
         if eid in data.superseded:
@@ -532,7 +548,7 @@ def gather(data: Data):
         eff = data.effective.get(eid, ev)
         for slug in data.slugs(ev):
             w = data.waters[slug]
-            if ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(w):
+            if (ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(w)) or point_extent_only(ev):
                 continue
             if system_wide_advisory(ev):
                 k = (slug, ev.get("source_id"), (ev.get("raw") or {}).get("advisory_key"))
@@ -679,6 +695,10 @@ def total_measures(ev: dict) -> dict[str, float]:
         out["event_days"] = num(raw["event_days"])
     return out
 
+
+# monthly-total sources whose missing periods and missing measures are null in the totals chart, not zero
+# (Indiana's DMR totals, re-review 2026-11-14 P2-5); every other source's series are as before
+UNKNOWN_IS_NULL_SOURCES = frozenset({"in-echo-dmr-cso"})
 
 MEASURE_LABEL = {"gallons": ("Reported volume", "gallons"), "events": ("Discharges reported", "discharges"),
                  "hours": ("Hours of discharge reported", "hours"), "event_days": ("Days with a combined sewer discharge", "days")}
@@ -1046,15 +1066,25 @@ def build_entity(bucket: Bucket, data: Data, spans: dict, per: dict, name: str |
         meas = defaultdict(lambda nx=nx: [0.0] * nx)
         rows = [0] * len(x)
         perms = set()
+        month_meas = [[] for _ in range(nx)]          # the measures of each record of each period
         for e in evs:
             k = keyf(e)
             if k not in xi:
                 continue
             rows[xi[k]] += 1
             perms.add(e.get("discharger_name") or disch_key(e))
-            for mk, v in total_measures(e).items():
+            tm = total_measures(e)
+            month_meas[xi[k]].append(tm)
+            for mk, v in tm.items():
                 meas[mk][xi[k]] += v
-        series = [{"key": mk, "label": MEASURE_LABEL[mk][0], "unit": MEASURE_LABEL[mk][1], "values": [round(v, 1) for v in vals_]}
+        if sid in UNKNOWN_IS_NULL_SOURCES:
+            # a period with no record, or a record lacking the measure, is unknown (null), never zero (re-review
+            # 2026-11-14 P2-5): these sources list discharge periods only, so a missing one may be no report at all
+            for mk in meas:
+                meas[mk] = [None if not mm or any(mk not in m for m in mm) else meas[mk][i]
+                            for i, mm in enumerate(month_meas)]
+        series = [{"key": mk, "label": MEASURE_LABEL[mk][0], "unit": MEASURE_LABEL[mk][1],
+                   "values": [None if v is None else round(v, 1) for v in vals_]}
                   for mk, vals_ in sorted(meas.items(), key=lambda kv: list(MEASURE_LABEL).index(kv[0]))]
         cav = [TOTAL_NOTES.get(sid)]
         if len(perms) > 1:

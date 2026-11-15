@@ -1,0 +1,24 @@
+id: "mo-dnr-hab-map"
+name: "Missouri DNR Harmful Algal Bloom reports map (WQM_HAB_POINTS_PUBLIC)"
+url: "https://gis.dnr.mo.gov/host/rest/services/wqm/HAB_SUBMIT_POINTS/MapServer/6"
+homepage: "https://dnr.mo.gov/water/alerts-hazards/harmful-algal-bloom-hab-reports-map"
+kind: "arcgis"
+level: "state"
+# Read by ingest/mo_dnr_hab.py (source id mo-dnr-hab-map): the reports DNR's map shows as "Harmful Algal Bloom Present"
+# (BloomStat advise) or "Waterbody is CLOSED" (closed), as standing bloom advisories dated to the first read that shows
+# them and ended at the first read that no longer does; HABODat (the observation day) kept apart, never the start.
+# Real fetch 2026-11-15 (UTC): 283 reports, 39 under advise (one case open), none closed; 12 notice, 88 dissipated,
+#   20 not threatening, 20 not verified, 6 pending, 98 with no status.
+cadence: "every refresh"
+license: "none stated"
+attribution: "Missouri Department of Natural Resources"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["MO"]
+registry_ids: ["mo-dnr-hab-map"]
+access: ["arcgis"]
+access_detail: "Public ArcGIS map service, no key; layer 5 counts privately owned waters by county (not read)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-15"

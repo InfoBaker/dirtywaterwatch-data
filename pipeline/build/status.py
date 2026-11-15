@@ -160,6 +160,7 @@ REGISTRY_YIELDS_TO_NAMED_WATER = True
 # names with the permit's open registry outfalls on that water (Resolver.named_water_outfalls), so their reaches are
 # coloured (Oregon: Portland's CSO advisories; go-live audit 2026-11-08 P1-1)
 NAMED_WATER_OUTFALL_STATES = {"OR"}
+NAMED_WATER_OUTFALL_STATES.add("WI")  # Wisconsin: MMSD's Storm Update posts name a water (Lincoln Creek), never an outfall
 # rules.placement.no_outfall_all_waters (data/rules.json, a switch): a CSO report that names no water and no outfall
 # is placed on every water its permit's registry outfalls reach (a permit the registry lacks: every receiving water
 # data/dischargers.json lists, CSO reports only since review 2026-11-03 P3-1), with this note
@@ -178,7 +179,8 @@ COARSE_PRECISION = {"month", "year"}
 MONTHLY_CURRENT_DAYS = 90
 DAYS_TEXT = re.compile(r"(\d+)\s+days?\s+with\s+discharge", re.I)
 EVENTS_TEXT = re.compile(r"(\d+)\s+discharge\s+events?", re.I)
-EPA_MONTHLY_SOURCES = ("nj-echo-monthly", "echo-cso-dmr-monthly")
+EPA_MONTHLY_SOURCES = ("nj-echo-monthly", "echo-cso-dmr-monthly",
+                       "in-echo-dmr-cso", "wv-echo-dmr-cso")
 POINT_ADVISORY_TYPES = {"beach_advisory", "beach_closure", "rain_advisory", "hab_advisory"}
 WHOLE_WATER_KINDS = {"lake", "pond", "reservoir"}
 SMALL_WATER_KM2 = 50
@@ -186,6 +188,9 @@ SMALL_WATER_KM2 = 50
 # CONFIRM_DAYS after the source last confirmed it (the later of started_at and source_updated_at).
 AGING_TYPES = {"hab_advisory", "beach_advisory", "beach_closure", "rain_advisory", "shellfish_closure"}
 CONFIRM_DAYS = 14
+# advisory feeds whose end is seen only by polling: the colour stops CONFIRM_DAYS after the last read that showed the
+# advisory, however late its end is seen (verify2 P1-1; Delaware's map and DES's beach and bloom layers)
+POLL_END_HORIZON_SOURCES = {"de-dnrec-recreational-water", "sc-des-beach-monitoring", "sc-des-hab"}
 SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}
@@ -1029,6 +1034,35 @@ RECORD_POINT_WHY = ("the report gives no point: the marker is on the water it na
                     "not where the discharge or advisory was")
 
 
+# Kansas (re-review P1-3): KDHE's stream advisories give the waters and the county, never a point. An advisory naming its
+# water (raw.advisory_extent "named_water") placed on a record of that water gets its marker at a point of the record's
+# own line inside the county the advisory names, so the advisory shows in its colour; a record that has no line there
+# gives no point and the advisory is listed only (the state text says why). Keyed on these states, every other unchanged.
+COUNTY_RECORD_POINT_STATES = {"KS"}
+COUNTY_RECORD_POINT_WHY = ("the advisory gives no point: the marker is on the water it names, at a point of that water's "
+                           "mapped line inside the county the advisory names, not where the discharge was")
+
+
+def county_record_point(slug: str, waters: dict, state: str, county) -> tuple[float, float, str] | None:
+    """(lat, lon, basis) of a point on the water record's own geometry inside the named county (0.001 degree), or None
+    when the record has no geometry, the county is not known or the record does not reach it."""
+    c = named_county(state, county) if state in COUNTY_STATES else None
+    g = water_geometry(slug, waters)
+    if c is None or g is None or g.is_empty:
+        return None
+    outline = next((geom for gid, _, geom in state_counties(state) if gid == c[0]), None)
+    part = g.intersection(outline) if outline is not None else None
+    if part is None or part.is_empty:
+        return None
+    p = part.representative_point()
+    w = waters.get(slug) or {}
+    src = "NHDPlus" if str(w.get("source") or "").startswith("nhd") else (w.get("source") or "the water record")
+    gnis = f", GNIS {w['gnis_id']}" if w.get("gnis_id") else ""
+    return (round(p.y, 3), round(p.x, 3),
+            f"a point on the mapped line of {w.get('name') or slug} ({src}{gnis}) inside {c[1]}, the county the advisory "
+            "names")
+
+
 def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]:
     """(the slugs on the report's island, why others were set aside). A report with no island keeps them all."""
     from ingest import hi_doh_cwb_events as HI
@@ -1053,6 +1087,7 @@ def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]
 COUNTY_STATES = {"AL": "al-counties.json", "TX": "tx-counties.json", "OH": "oh-counties.json",
                  "OR": "or-counties.json"}      # DEQ's OERS spills: a point and a county (scripts/or_counties.py)
 COUNTY_STATES["TN"] = "tn-counties.json"       # Tennessee: TDEC's HAB layer gives points and names (no county field)
+COUNTY_STATES["IN"] = "in-counties.json"       # Indiana: IDEM's outfalls and beach samples give points (scripts/in_counties.py)
 # States whose reports give no point but their county as a field (Texas, final audit 2026-11-07 P1-2: TCEQ's table gives
 # raw.county, "Lubbock County"): the report's county is that field, matched by name to the outline file's county; the
 # rest of the rule is Alabama's. A report with neither keeps every slug (nothing to judge by).
@@ -1061,6 +1096,26 @@ COUNTY_STATES["UT"] = "ut-counties.json"       # Utah: DEQ's hotline log gives p
 COUNTY_FIELD_STATES.add("UT")    # a hotline report whose point is withheld (a private home) keeps its county field
 COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events Report give the county, no point
 COUNTY_FIELD_STATES.add("OH")    # Ohio: a spill whose point lies outside its county keeps only raw.county (audit P3-4)
+COUNTY_STATES["MN"] = "mn-counties.json"       # Minnesota: WLSSD's points; the Council's notices name a city (its county)
+COUNTY_FIELD_STATES.add("MN")    # a Metropolitan Council notice gives no point, only its city's county (raw.county)
+COUNTY_STATES["ND"] = "nd-counties.json"       # North Dakota: DEQ's bloom listing (lake and county) and archive points
+COUNTY_FIELD_STATES.add("ND")    # a bloom listing row or a septic row of the archive gives its county only
+COUNTY_STATES["MO"] = "mo-counties.json"       # Missouri: DNR's concern reports give a county field and no point
+COUNTY_FIELD_STATES.add("MO")
+COUNTY_LIST_STATES = {"MO"}    # raw.counties, an operator's several counties (KC Water, MSD), read for these states only
+COUNTY_STATES["KS"] = "ks-counties.json"       # Kansas: Leavenworth's and KDHE's reports give a county; HAB lakes a point
+COUNTY_FIELD_STATES.add("KS")
+COUNTY_STATES["AR"] = "ar-counties.json"; COUNTY_FIELD_STATES.add("AR")   # Arkansas: DEQ reports give no point; raw.county is the permit plant's
+COUNTY_STATES["WI"] = "wi-counties.json"       # Wisconsin: MMSD's posts give no point, only their county
+COUNTY_FIELD_STATES.add("WI")    # (Milwaukee): a name is placed only on a record reaching that county (Astra P2-9)
+COUNTY_STATES["DE"] = "de-counties.json"; COUNTY_FIELD_STATES.add("DE")   # Delaware: DNREC's releases give the county (ZIP or town), no point
+COUNTY_STATES["SC"] = "sc-counties.json"; COUNTY_FIELD_STATES.add("SC")   # South Carolina: Florence's notices give the county, no point
+COUNTY_FIELD_STATES.add("IN")    # Indiana: a record or outfall row with no point keeps its county (re-review P2-4)
+# States whose registry rows' county reaches the resolver's stand-in record for the outfall (outfall_waters and
+# Resolver.row_water): Indiana only, so no other state's ties change
+REGISTRY_COUNTY_STATES = {"IN"}
+COUNTY_STATES["LA"] = "la-counties.json"       # Louisiana: Baton Rouge's reports give a water name and the parish, no point
+COUNTY_FIELD_STATES.add("LA")
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}
@@ -1126,7 +1181,12 @@ def county_slugs(slugs: list, ev: dict, waters: dict, distance) -> tuple[list, s
     here = point_county(state, lat, lon)
     field = False
     if here is None and state in COUNTY_FIELD_STATES:
-        here = named_county(state, (ev.get("raw") or {}).get("county"))
+        names = (ev.get("raw") or {}).get("counties") if state in COUNTY_LIST_STATES else None
+        if isinstance(names, list) and names:      # an operator's area across county lines (KC Water: four counties)
+            found = [c for c in (named_county(state, n) for n in names) if c]
+            here = (frozenset(g for g, _ in found), " or ".join(n for _, n in found)) if found else None
+        else:
+            here = named_county(state, (ev.get("raw") or {}).get("county"))
         field = here is not None
     if here is None:
         return list(slugs), None
@@ -1134,7 +1194,8 @@ def county_slugs(slugs: list, ev: dict, waters: dict, distance) -> tuple[list, s
     for x in slugs:
         d = distance(x, lat, lon) if lat is not None and lon is not None else None
         rc = record_counties(state, waters.get(x) or {})
-        if (d is not None and d <= NAME_MATCH_M) or not rc or here[0] in rc:     # no box: nothing to judge by
+        inside = (here[0] & rc) if isinstance(here[0], frozenset) else here[0] in rc
+        if (d is not None and d <= NAME_MATCH_M) or not rc or inside:     # no box: nothing to judge by
             kept.append(x)
         else:
             off.append(x)
@@ -1158,6 +1219,24 @@ def qualified_only(name: str, text: str) -> bool:
         return False
     hits = [m.start() for m in re.finditer(rf"(?<= ){re.escape(name)}(?= )", text)]
     return bool(hits) and all(QUALIFIER_BEFORE.search(text[:i]) for i in hits)
+
+
+# States whose reports' water names keep every qualifier written before them (Arkansas: ingest/ar_transforms.py keeps
+# "Upper Little Sample Creek" whole), so any of these words before a matched name makes another water of it: the
+# report is not placed on the shorter namesake (verification 2026-11-15 P1-4). Keyed by state: no other state changes.
+STATE_QUALIFIER_BEFORE = {
+    "AR": re.compile(r"\b(?:little|middle|upper|lower|big|east|west|north|south)(?:\s+(?:fork|branch|prong))?"
+                     r"(?:\s+of(?:\s+the)?)?\s+$"),
+}
+
+
+def state_qualified_only(name: str, text: str, state: str | None) -> bool:
+    """qualified_only with the state's own wider qualifier list (STATE_QUALIFIER_BEFORE); False for other states."""
+    rx = STATE_QUALIFIER_BEFORE.get(state or "")
+    if not rx or not name:
+        return False
+    hits = [m.start() for m in re.finditer(rf"(?<= ){re.escape(name)}(?= )", text)]
+    return bool(hits) and all(rx.search(text[:i]) for i in hits)
 
 
 NAMED_ONLY_NONE = ("the report names no water; its source gives no location, so it is listed with its county and placed "
@@ -1911,7 +1990,7 @@ class Resolver:
         names = [n for n in found if not any(n != m and f" {n} " in f" {m} " for m in found)]
         # a qualified water is not its plain-named namesake: "little cuyahoga river" is not "cuyahoga river", nor
         # "west branch huron river" "huron river", when the qualified one has no record (Ohio go-live audit P2-2)
-        names = [n for n in names if not qualified_only(n, t)]
+        names = [n for n in names if not qualified_only(n, t) and not state_qualified_only(n, t, state)]
         out, notes, ambiguous = [], [], False
         for n in sorted(names):
             slugs = found[n]
@@ -2117,7 +2196,8 @@ class Resolver:
             out = (None, f"its receiving water '{name}' is a watershed label, not a water name")
             name = ""
         fake = {"npdes_permit": permit, "lat": row.get("lat"), "lon": row.get("lon"), "waterbody_text": name,
-                "raw": {"state": state, "town": row.get("city") or ""}}
+                "raw": {"state": state, "town": row.get("city") or "",
+                        **({"county": row["county"]} if state in REGISTRY_COUNTY_STATES and row.get("county") else {})}}
         slug = self.canon(row.get("water_slug"))
         if slug in self.waters:
             # a slug matched by name only must carry the receiving water's name (the registry once matched
@@ -2373,6 +2453,31 @@ class Resolver:
 
     def resolve(self, ev: dict) -> dict:
         out = self._resolve(ev)
+        parts = extent_part_points(ev)
+        if parts:
+            # an advisory whose authority drew it as several areas or lines (West Virginia DEP's bloom map only,
+            # EXTENT_PART_SOURCES): each part is placed by its own interior point, as the marker's part is, so a
+            # second lake the advisory covers is not left out; a water's colour still follows colours_whole_water
+            # and advisory_on_river (a large lake or a river keeps a marker only)
+            got = list(out.get("water_slugs") or [])
+            added, part_points = [], {}
+            for lat, lon in parts:
+                o = self._resolve({**ev, "lat": lat, "lon": lon})
+                for sl in o.get("water_slugs") or []:
+                    if sl not in got:
+                        got.append(sl)
+                        added.append(sl)
+                        part_points[sl] = [lat, lon]    # the part's own point: that water's marker sits there
+            if added:
+                if out.get("water_match") in (None, "none"):
+                    out["water_match"] = "geometry"
+                out["water_slugs"] = got
+                out.pop("unplaced_reason", None)
+            out["extent_parts"] = {"parts": len(parts) + 1, "waters_added": added,
+                                   **({"points": part_points} if part_points else {})}
+            out["note"] = "; ".join(x for x in (out.get("note"), (
+                f"the authority's advisory has {len(parts) + 1} parts; each is placed by its own point"
+                + (f" ({len(added)} more water{'s' if len(added) != 1 else ''})" if added else ""))) if x)
         if text_over_flag(ev):
             # the water comes from the notice's text against its form's flag: the placement says so (TEXT_OVER_FLAG)
             raw = ev.get("raw") or {}
@@ -2592,7 +2697,19 @@ def _iv(ev, start, end, rule, red=None, yellow=None):
             "authority": ev.get("authority") or ev.get("discharger_name"),
             "window_hours": (red or {}).get("hours"), "window_basis": (red or {}).get("rationale"),
             "red_rule": red, "yellow_rule": yellow,
-            "started_at": ev.get("started_at"), "ended_at": ev.get("ended_at")}
+            "started_at": ev.get("started_at"), "ended_at": ev.get("ended_at"),
+            **start_bound(ev)}
+
+
+def start_bound(ev: dict) -> dict:
+    """{"started_at_bound": "on_or_before", "started_at_kind": <kind>} for a record whose start is only the latest it
+    can have begun (a crew's response, a notification, a publication, a concern's receipt: raw.start_is_upper_bound,
+    the Missouri and Kansas feeds; re-review P1-6), else {}: the colour counts from that time, and every export says
+    the start is an upper bound, never the discharge's start. Keyed on the flag, so other records are unchanged."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    if raw.get("start_is_upper_bound") is True and ev.get("started_at"):
+        return {"started_at_bound": "on_or_before", "started_at_kind": raw.get("start_kind") or "not stated"}
+    return {}
 
 
 # A report placed on the water its text names although its form's flag said no water was reached (raw.reached_water
@@ -2640,6 +2757,11 @@ def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None
                                        "(no authority window applies)", "source": source}
 
 
+# sources whose poll-clock advisories keep closed observation periods in raw._advisory_observed.earlier_periods
+# (Nebraska's BeachWatch; Indiana's algae samples, re-review 2026-11-14 P2-3)
+EARLIER_PERIOD_SOURCES = frozenset({"ne-dwee-beachwatch", "in-idem-cyanobacteria"})
+
+
 def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None = None,
                     rules: dict | None = None) -> list[dict]:
     """The colour intervals one event sets on a water (its state, and the water record for the
@@ -2649,7 +2771,7 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
     rules = load_rules() if rules is None else rules
     earlier = []
     raw = ev.get("raw") or {}
-    if ev.get("source_id") == "ne-dwee-beachwatch" and ev.get("sampled_at") \
+    if ev.get("source_id") in EARLIER_PERIOD_SOURCES and ev.get("sampled_at") \
             and ev.get("time_precision") == "poll" and raw.get("_advisory_clock_version") == 1:
         # A corrected flag can reopen the same source sample. Replay its closed observation periods separately,
         # through the same age-out rules as the current one, without filling the observed inactive gaps.
@@ -2665,6 +2787,25 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
                      "raw": {**raw, "_advisory_observed": {}, "_last_seen_in_source": period["start"],
                              "ended_at_precision": "poll"}}
             earlier.extend(event_intervals(prior, state, now, water, rules))
+    if raw.get("_advisory_from") and ev.get("status") == "advisory_active":
+        # an authority's window that begins after the report (the Metropolitan Council's signs first given in a later
+        # update, ingest/mn_mces_spill_notices.py): the advisory runs from its own day, never backdated to the report;
+        # before it the record's own clock (raw._before_advisory: its status and end without the advisory). Keyed on
+        # the field, so no other feed changes (verification pass 2026-11-15 P1-2)
+        tz = event_zone(ev, state)
+        adv_from = parse_time(raw["_advisory_from"], tz)
+        s0 = parse_time(ev.get("started_at"), tz) or parse_time(ev.get("reported_at"), tz)
+        if adv_from is not None and s0 is not None and adv_from > s0:
+            before = raw.get("_before_advisory") if isinstance(raw.get("_before_advisory"), dict) else {}
+            prior_raw = {k: v for k, v in raw.items() if k not in ("_advisory_from", "_before_advisory",
+                                                                   "_unlisted_since", "_end_not_confirmed",
+                                                                   "_window_end_words", "ended_at_precision")}
+            if before.get("ended_at_precision"):
+                prior_raw["ended_at_precision"] = before["ended_at_precision"]
+            prior = {**ev, "status": before.get("status") or "unknown", "ended_at": before.get("ended_at"),
+                     "advice_window_hours": None, "advice_window_basis": None, "raw": prior_raw}
+            earlier.extend(_event_intervals(prior, state, now, water, rules))
+            ev = {**ev, "started_at": None, "reported_at": raw["_advisory_from"]}
     out = _event_intervals(ev, state, now, water, rules)
     why = end_not_credible(ev, now, rules) if out and ev.get("ended_at") else None
     if why:
@@ -2752,6 +2893,11 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             # while it is open (review 2026-11-07 P2-2); keyed on the record's flag, so other feeds are unchanged
             notice_end = (parse_time(raw.get("_notice_closed_at")) or end
                           or parse_time(raw.get("_last_seen_in_source")))
+            if raw.get("_open_notice_caution_hours") and not raw.get("_notice_closed_at") and end is None \
+                    and notice_end is not None:
+                # a notice still listed at its last read (DNREC's resampling label, ingest/de_dnrec_recwater.py): no
+                # closure was observed, so the caution holds its hours past that read; keyed on the record's field
+                notice_end = notice_end + timedelta(hours=float(raw["_open_notice_caution_hours"]))
             if notice_end is not None and notice_end > until:
                 until = notice_end
         iv = _iv(ev, start, until, "sample_caution", None, yellow)
@@ -2772,17 +2918,49 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             red["rationale"] = (f"in effect while the authority keeps the advisory (aged out {SYSTEM_WIDE_CONFIRM_HOURS} "
                                 "hours after the last read that showed it)")
 
-        if et in AGING_TYPES and ev.get("sampled_at") and ev.get("time_precision") == "poll" \
+        poll_confirmed = (ev.get("raw") or {}).get("_poll_confirmed") is True
+        if et in AGING_TYPES and (ev.get("sampled_at") or poll_confirmed) and ev.get("time_precision") == "poll" \
                 and (end is None or end_precision(ev) == "poll"):
             # A sample's later observed change is not an official lift date, nor evidence that the advisory
             # remained in effect through a polling gap. Keep ended_at as the observed change, but never extend
             # colour past the confirmation horizon, even when that change is learned months later (NE HAB).
+            earlier_periods = []
+            periods = (ev.get("raw") or {}).get("listed_periods") if poll_confirmed else None
+            if isinstance(periods, list) and len(periods) > 1:
+                # a polled layer listed the advisory again after a gap longer than the horizon (MO and KS HAB maps,
+                # ingest/poll_periods.py; verification pass 2026-11-15 P1-1): each earlier listing period is coloured
+                # on its own to CONFIRM_DAYS after its last listing read, the unread gap is a grey note only, and the
+                # last period runs on below from its own first read. Keyed on raw.listed_periods: no other feed has it
+                for i, p in enumerate(periods[:-1]):
+                    p_from, p_to, nxt = pt(p.get("from")), pt(p.get("to")), pt(periods[i + 1].get("from"))
+                    if p_from is None or p_to is None or nxt is None:
+                        continue
+                    p_from = max(start, p_from)
+                    p_cap = min(p_to + timedelta(days=CONFIRM_DAYS), nxt)
+                    iv = _iv(ev, p_from, p_cap, rule, dict(red, rationale=(
+                        f"listed by the authority at each read; aged out {CONFIRM_DAYS} days after the last read "
+                        "that listed it; a later read that lists it again does not confirm the unread period")), yellow)
+                    iv["confirmed"] = iso(p_to)
+                    earlier_periods.append(iv)
+                    if p_cap < nxt:
+                        gap = _iv(ev, p_cap, nxt, "not_reconfirmed", red, yellow)
+                        gap["confirmed"] = iso(p_to)
+                        earlier_periods.append(gap)
+                last_from = pt(periods[-1].get("from"))
+                if last_from is not None and last_from > start:
+                    start = last_from
             listed = pt((ev.get("raw") or {}).get("_last_seen_in_source"))
             confirmed = max(start, listed) if listed else start
             cap = confirmed + timedelta(days=CONFIRM_DAYS)
             until = min(end, cap) if end else cap
             red["rationale"] = (f"observed health alert, aged out {CONFIRM_DAYS} days after the last new confirmation; "
                                 "a later observed change does not confirm the intervening period or establish a lift date")
+            if poll_confirmed and not ev.get("sampled_at"):
+                # a layer polled with no sample date (KDHE's HAB layer, raw._poll_confirmed): the same limit, counted
+                # from the last read that listed the advisory (re-review P1-2); keyed on the flag, so no other feed changes
+                red["rationale"] = (f"listed by the authority at each read; aged out {CONFIRM_DAYS} days after the last "
+                                    "read that listed it; a later read that no longer lists it does not confirm the "
+                                    "unread period or establish a lift date")
             out = [_iv(ev, start, until, rule, red, yellow)]
             out[0]["confirmed"] = iso(confirmed)
             if end is None or end > cap:
@@ -2793,8 +2971,30 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                     note = _iv(ev, cap, note_until, "not_reconfirmed", red, yellow)
                     note["confirmed"] = iso(confirmed)
                     out.append(note)
-            return out
+            return earlier_periods + out
 
+        if end is not None and end_precision(ev) == "poll" and (
+                (st == "advisory_active" and (ev.get("raw") or {}).get("_ages_after_confirmation") is True)
+                or (st in ("advisory_active", "advisory_lifted") and ev.get("source_id") in POLL_END_HORIZON_SOURCES)):
+            # POLL_END_HORIZON_SOURCES: Delaware's map advisories and DES's beach and bloom advisories, whose end is
+            # the first poll that no longer showed them; the same limit, so a withdrawal seen months later never
+            # colours the unconfirmed months red after the fact (verify2 P1-1); keyed on these sources only
+            # an operator's advice confirmed only by its own publications whose withdrawal was seen at a poll
+            # (Florence, ingest/sc_florence_sso.py): the withdrawal is not a confirmation of the time between, so the
+            # colour stops CONFIRM_DAYS after the last confirmation however late the withdrawal is seen (verify
+            # P1-3); keyed on the record's flag, so no other feed changes
+            listed = pt((ev.get("raw") or {}).get("_last_seen_in_source"))
+            confirmed = max(start, listed) if listed else start
+            cap = confirmed + timedelta(days=CONFIRM_DAYS)
+            out = [_iv(ev, start, min(end, cap), rule, red, yellow)]
+            out[0]["confirmed"] = iso(confirmed)
+            if end > cap:
+                note = _iv(ev, cap, min(end, max(cap, start + timedelta(days=NOTE_DAYS))), "not_reconfirmed", red,
+                           yellow)
+                note["confirmed"] = iso(confirmed)
+                if note["end"] > note["start"]:
+                    out.append(note)
+            return out
         if st == "advisory_active":
             if end is not None:                       # an explicit end is the source's word
                 return [_iv(ev, start, end, rule, red, yellow)]
@@ -2805,7 +3005,10 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                 # at every fetch up to the first that no longer found it; it ends there, at or before that fetch
                 iv = _iv(ev, start, unlisted, rule, red, yellow)
                 iv["confirmed"] = iso(listed or start)
-                iv["ended_by"] = "no longer on the authority's map at this fetch"
+                # raw._window_end_words: the source's own words where the end is a dated notice, not a fetch (the
+                # Metropolitan Council's sign removal, ingest/mn_mces_spill_notices.py); keyed on the field
+                words = (ev.get("raw") or {}).get("_window_end_words")
+                iv["ended_by"] = words or "no longer on the authority's map at this fetch"
                 if (ev.get("raw") or {}).get("_end_not_confirmed") is True and et not in ADVISORY_TYPES:
                     # a sewage report under the authority's advisory that left its list without the authority's
                     # cancellation (ingest/hi_doh_cwb_events.py): its end is not confirmed, never a clean end at our
@@ -2816,7 +3019,8 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                     days = float(u.get("unresolved_yellow_days") or 30)
                     hours = float(((rules or {}).get("yellow") or {}).get("default_hours") or 72)
                     hatch_until = max(start + timedelta(days=days), unlisted + timedelta(hours=hours))
-                    iv["ended_by"] = ("no longer on the authority's list at this fetch, with no cancellation: "
+                    iv["ended_by"] = (f"{words}: the end is not confirmed" if words else
+                                      "no longer on the authority's list at this fetch, with no cancellation: "
                                       "the end is not confirmed")
                     un = _iv(ev, unlisted, hatch_until, "unresolved", red, yellow)
                     un["rule_applied"] = {"rule": "unresolved.unresolved_yellow_days", "days": days,
@@ -2834,7 +3038,10 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                         out.append(note)
                     return out
                 return [iv]
-            if et in AGING_TYPES or system_wide_advisory(ev):
+            if et in AGING_TYPES or system_wide_advisory(ev) \
+                    or (ev.get("raw") or {}).get("_ages_after_confirmation") is True:
+                # raw._ages_after_confirmation: an operator's advice confirmed only by its own publications (Florence,
+                # ingest/sc_florence_sso.py advice_record); keyed on the record's flag, so no other feed changes
                 confirmed = max(t for t in (start, pt(ev.get("source_updated_at")), listed) if t)
                 # a system-wide advisory read every hour (MSD-01) ages out SYSTEM_WIDE_CONFIRM_HOURS after the last
                 # read that showed it, so a page the feed can no longer read never keeps it red (review 2026-11-08 P3-7)
@@ -3141,6 +3348,34 @@ def reach_waters(reach: dict, waters: dict) -> list[str]:
     return found
 
 
+# sources whose records keep the authority's own multipart extent (raw.agency_extent, GeoJSON) for placement by part
+EXTENT_PART_SOURCES = {"wv-dep-hab-advisories"}
+
+
+def extent_part_points(ev: dict) -> list[tuple[float, float]]:
+    """(lat, lon) of each part of a multipart agency extent other than the part the record's marker is on: an
+    interior point of each polygon (outside its holes), the point half way along each line; three decimals. Empty
+    for every other source and for a single-part extent."""
+    if ev.get("source_id") not in EXTENT_PART_SOURCES:
+        return []
+    g = (ev.get("raw") or {}).get("agency_extent")
+    if not isinstance(g, dict) or g.get("type") not in ("MultiPolygon", "MultiLineString"):
+        return []
+    try:
+        from shapely.geometry import Point, shape
+        geoms = list(shape(g).geoms)
+    except Exception:
+        return []
+    out = []
+    mk = Point(float(ev["lon"]), float(ev["lat"])) if ev.get("lat") is not None and ev.get("lon") is not None else None
+    for part in geoms:
+        pt = part.representative_point() if part.geom_type == "Polygon" else part.interpolate(0.5, normalized=True)
+        if mk is not None and part.buffer(0.002).contains(mk):
+            continue                    # the marker's own part: placed by the marker
+        out.append((round(pt.y, 3), round(pt.x, 3)))
+    return out
+
+
 def names_its_water(ev: dict) -> bool:
     """An authority's advisory for the water it names (MDEQ's water contact advisories: raw.extent "named_water"):
     it colours the water it is placed on, and on a water that is not filled it also keeps its marker, so the map still
@@ -3148,6 +3383,13 @@ def names_its_water(ev: dict) -> bool:
     point there, as every advisory is (advisory_on_river: reaches, not whole rivers, 2026-11-07). Other beach, rain and HAB
     advisories speak for a beach or a station, not the whole water (colours_whole_water)."""
     return (ev.get("raw") or {}).get("advisory_extent") == "named_water"
+
+
+def part_of_water(ev: dict) -> bool:
+    """An authority's advisory for part of a water only (raw.advisory_extent "part_of_water": Arkansas DEQ's "Lake X -
+    Y Bay", a place described near a water): a marker at its own cited point, never the whole water's colour, whatever
+    the water's size (review 2026-11-14 P1-3). No other source writes this value, so no other state's output changes."""
+    return (ev.get("raw") or {}).get("advisory_extent") == "part_of_water"
 
 
 def stretch_text(ev: dict | None) -> str:
@@ -3204,6 +3446,13 @@ def advisory_on_river(ev: dict, w: dict, stretched: bool = False) -> bool:
 
 RIVER_POINT_WHY = ("the advisory is on a river or stream and names no stretch to draw: it is shown at its point, and "
                    "the river is not coloured whole")
+
+
+def point_extent_only(ev: dict) -> bool:
+    """A record whose authority delineates a part of a water (DES's bloom coves, ingest/sc_des_advisories.py): shown
+    at its point and listed on the water's page, never colouring the whole water whatever the water's area; keyed on
+    the record's raw._point_extent_only, so no other feed changes (re-review P2-3)."""
+    return (ev.get("raw") or {}).get("_point_extent_only") is True
 
 
 def colours_whole_water(w: dict) -> bool:
@@ -3425,7 +3674,7 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
     who = f" · {who}" if who else ""
     end = parse_time(iv.get("ended_at"))
     endtxt = end.astimezone(LOCAL).strftime("%b %-d %H:%M") if end else None
-    if iv.get("ended_by"):
+    if iv.get("ended_by") and parse_time(iv["ended_by"]):     # a time; words (raw._window_end_words) are not one
         endtxt = "by " + parse_time(iv["ended_by"]).astimezone(LOCAL).strftime("%b %-d %H:%M")
     rule = iv["rule"]
     at = where(iv)
@@ -3709,7 +3958,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     for ev in events:
         eid = ev["event_id"]
         began = parse_time(ev.get("started_at") or ev.get("reported_at")) if cache_before else None
-        if began is not None and began < cache_before:
+        # a multipart agency extent (EXTENT_PART_SOURCES only) is resolved afresh, so a placement cached before its
+        # parts carried their own points is not reused
+        if began is not None and began < cache_before and not extent_part_points(ev):
             h = record_hash(ev)
             hit = cache_old.get(eid)
             if hit and hit[0] == h:
@@ -3784,11 +4035,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             if not live:
                 continue
             on_river = advisory_on_river(ev, waters[slug], traced)
-            if on_river or (ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(waters[slug])):
+            pt_only = point_extent_only(ev)
+            if on_river or pt_only or (ev.get("event_type") in POINT_ADVISORY_TYPES
+                                       and (not colours_whole_water(waters[slug]) or part_of_water(ev))):
                 point_on.append(slug)
                 if on_river:
                     river_point.append(slug)
-                if on_river or not names_its_water(ev):
+                if on_river or pt_only or not names_its_water(ev):
                     continue                   # a station's advisory, or any advisory on a river: its marker only
             if slug in carried:
                 continue                       # a reach carries it (below)
@@ -3848,6 +4101,11 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         pick = point_on or ([] if (is_discharge and traced) or not is_discharge else nofill)
         rp = record_point(pick[0], waters) if (pick and live and not future and ev.get("lat") is None
                                                 and event_state(ev) in ISLAND_STATES) else None
+        if (not rp and pick and live and not future and ev.get("lat") is None and names_its_water(ev)
+                and event_state(ev) in COUNTY_RECORD_POINT_STATES):
+            rp = county_record_point(pick[0], waters, event_state(ev), (ev.get("raw") or {}).get("county"))
+            if rp:
+                placements[eid]["record_point"] = {"lat": rp[0], "lon": rp[1], "basis": rp[2]}
         if rp:
             ivs = event_intervals(eff, event_state(ev), now, water={**waters[pick[0]], "slug": pick[0]}, rules=rules)
             colouring = [iv for iv in ivs if iv["color"] != "grey"]
@@ -3864,17 +4122,31 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                "intervals": [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"]]
                                              for iv in sorted(ivs, key=lambda x: x["start"])],
                                "_ivs": ivs, "lat": rp[0], "lon": rp[1], "point_basis": rp[2],
-                               "why": RECORD_POINT_WHY})
+                               "why": (COUNTY_RECORD_POINT_WHY if event_state(ev) in COUNTY_RECORD_POINT_STATES
+                                       else RECORD_POINT_WHY)})
         # beach, rain and HAB advisories that colour no water: a marker of their own
         if ((ev.get("event_type") in POINT_ADVISORY_TYPES or point_on) and eid not in superseded and eid not in duplicates
                 and ev.get("lat") is not None and ev.get("lon") is not None
                 and (point_on or not pl["water_slugs"])):
             ivs = event_intervals(eff, event_state(ev), now, rules=rules)
             colouring = [iv for iv in ivs if iv["color"] != "grey"]
-            if colouring and any(iv["end"] is None or iv["end"] > h_start for iv in colouring):
+            # an advisory drawn as several parts (EXTENT_PART_SOURCES only): a water another part lies on has its
+            # marker at that part's point, not at the record's; the record's point keeps the marker of its own
+            # water, or of no water when its part colours none. Every other record: one marker, as before
+            part_pts = (pl.get("extent_parts") or {}).get("points") or {}
+            groups = [(point_on, None)]
+            if part_pts and any(x in part_pts for x in point_on):
+                own = [x for x in point_on if x not in part_pts]
+                groups = ([(own, None)] if own or not [x for x in pl["water_slugs"] if x not in part_pts] else []) \
+                    + [([x], part_pts[x]) for x in point_on if x in part_pts]
+            for g_on, g_pt in (groups if colouring and any(iv["end"] is None or iv["end"] > h_start
+                                                           for iv in colouring) else []):
                 col, act = status_at(ivs, now)
                 top = max(act, key=lambda iv: RANK[iv["color"]]) if act else None
-                points.append({"event_id": eid, "water_slugs": point_on, "status": col,
+                points.append({"event_id": eid, "water_slugs": g_on, "status": col,
+                               **({"part_point": {"lat": g_pt[0], "lon": g_pt[1],
+                                                  "basis": "a further part of the authority's own drawn area or "
+                                                           "line, by its own point"}} if g_pt else {}),
                                "category": category_of(ev.get("event_type")),
                                "rule": top["rule"] if top else None, "label": top["label"] if top else None,
                                "short": short_reason(top, ev) if top else None,
@@ -3889,13 +4161,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                **({"stretch_fallback": placements[eid]["stretch_fallback"]}
                                   if stretched and placements[eid].get("stretch_fallback") else {}),
                                "why": ("the advisory covers the stretch it names, drawn from end to end; the marker "
-                                       "is its point" if point_on and traced else
+                                       "is its point" if g_on and traced else
                                        (placements[eid]["stretch_fallback"] if stretched else RIVER_POINT_WHY)
-                                       if river_point and (names_its_water(ev) or
+                                       if [x for x in g_on if x in river_point] and (names_its_water(ev) or
                                                            ev.get("event_type") not in POINT_ADVISORY_TYPES)
                                        else "the advisory covers the water it names; the marker is its point"
-                                       if point_on and names_its_water(ev) else
-                                       "water is not a lake, pond or reservoir under 50 km²" if point_on
+                                       if g_on and names_its_water(ev) else
+                                       "water is not a lake, pond or reservoir under 50 km²" if g_on
                                        else "not placed on a water")})
 
     # the current map's monthly marks: an outfall whose latest report is a month total with discharge, its month

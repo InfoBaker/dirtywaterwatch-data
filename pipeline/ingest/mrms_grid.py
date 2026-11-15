@@ -3,12 +3,20 @@
 Used by ingest/rainfall.py (docs/rain-likely.md); not a feed. In place of one ImageServer `identify` per
 outfall point per hour, the hour's catalog items are looked up once (`query`: object id and valid end time
 of conus_QPE_01H and conus_QPE_24H, and of the 48 and 72-hour items when the history needs its earlier
-windows filled) and each item is exported once over a box around every outfall point (`exportImage`,
-locked to that object id, EPSG:4326, 0.01 degree pixels centred on the hundredths the points are rounded
-to, nearest neighbour, float32 GeoTIFF with LZW compression, no data as -9999). A pixel then holds what
-`identify` answers at the point (checked against identify at six points on 2026-11-03: equal to the
-hundredth). Sampling is local: the TIFF is read here (tiles or strips, LZW or none) with the standard
-library only.
+windows filled) and each item is exported over a box around the outfall points (`exportImage`, locked to that
+object id, EPSG:4326, 0.01 degree pixels centred on the hundredths the points are rounded to, nearest neighbour,
+float32 GeoTIFF with LZW compression, no data as -9999). A pixel then holds what `identify` answers at the point
+(checked against identify at six points on 2026-11-03: equal to the hundredth). Sampling is local: the TIFF is
+read here (tiles or strips, LZW or none) with the standard library only.
+
+The export is tiled (tiles(), since 2026-11-14): the points are grouped by the fixed 20-degree square their
+hundredth falls in and each square holding points is exported over a box shrunk to its points. Every box is on
+the one pixel lattice (centres on the hundredths), so a point's pixel holds the same value in its tile as in one
+box over every point; the contiguous United States is at most eight tiles (ten with a point on 60 W itself) of at
+most 2,010 x 2,010 pixels, under the service's maxImageWidth 15,000 and maxImageHeight 4,100. (One box over every
+point had held since 2026-11-03, until a registry point with its longitude's sign flipped, 41.57, +83.99 for an Ohio
+outfall at 83.99 W, stretched it to 20,796 pixels on 2026-11-08 and every hour fell back to the capped per-point
+path: points outside the radar's grid are now left out of every box, CONUS_EXTENT.)
 
 The values are as the service answers them: it states inches but answered millimetres (found 2026-11-07); the unit
 is decided in ingest/rainfall.py (decide_units) from the box maximum (Grid.max_read) and a gauge check, and
@@ -29,7 +37,14 @@ from datetime import UTC, datetime
 MRMS_URL = "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer"
 CELL = 0.01                    # degrees: the MRMS grid and the rounding of the outfall points
 MARGIN_CELLS = 5               # pixels of margin around the outfall points
-MAX_WIDTH, MAX_HEIGHT = 15000, 4100          # the service's maxImageWidth / maxImageHeight
+MAX_WIDTH, MAX_HEIGHT = 15000, 4100          # the service's maxImageWidth / maxImageHeight (its JSON, read 2026-11-14)
+TILE_CELLS = 2000              # the export tiles: fixed squares of 2,000 hundredths (20 degrees), aligned on multiples
+                               # of 20 degrees; a tile's box is shrunk to its points (at most 2,010 x 2,010 pixels)
+# The radar grid this reader reads: the catalog footprint of conus_QPE_24H (query with outSR 4326, read 2026-11-14:
+# 130 to 60 W, 20 to 55 N). A point outside it has no value in the grid (and would stretch a box for nothing): it is
+# left out of every box. The service also publishes alaska_QPE_* (176 to 126 W, 50 to 72 N), hawaii_QPE_* (164 to
+# 151 W, 15 to 26 N) and carib_QPE_* (90 to 60 W, 10 to 25 N, Puerto Rico and the Virgin Islands); they are not read.
+CONUS_EXTENT = {"xmin": -130.0, "ymin": 20.0, "xmax": -60.0, "ymax": 55.0}
 NODATA = -9999.0
 ITEM = "conus_QPE_{h:02d}H"
 
@@ -44,23 +59,66 @@ def iso(t: datetime | None) -> str | None:
 
 # ---------------------------------------------------------------- the box
 
+def in_extent(lat: float, lon: float, ext: dict = CONUS_EXTENT) -> bool:
+    """Whether a point lies in the radar grid read (CONUS_EXTENT), edges included."""
+    try:
+        la, lo = float(lat), float(lon)
+    except (TypeError, ValueError):
+        return False
+    return ext["ymin"] <= la <= ext["ymax"] and ext["xmin"] <= lo <= ext["xmax"]
+
+
+def cell_index(lat: float, lon: float) -> tuple[int, int]:
+    """(row index j, column index i) of the hundredth a point rounds to: the latitude and longitude times 100."""
+    return math.floor(float(lat) * 100 + 0.5), math.floor(float(lon) * 100 + 0.5)
+
+
 def grid_box(points) -> dict:
     """The export box for points [(lat, lon)]: pixel centres on the hundredths (indices are the coordinates
     times 100), MARGIN_CELLS around the outermost points. {xmin, ymin, xmax, ymax, width, height, i0, j1}:
-    i0 the column index of the westernmost centre, j1 the row index (latitude x 100) of the northernmost."""
-    pts = [(float(a), float(b)) for a, b in points]
-    if not pts:
+    i0 the column index of the westernmost centre, j1 the row index (latitude x 100) of the northernmost.
+    Raises over the service's limits (MAX_WIDTH, MAX_HEIGHT): tiles() keeps every box under them."""
+    idx = [cell_index(a, b) for a, b in points]
+    if not idx:
         raise ValueError("no points")
-    i0 = math.floor(min(lon for _, lon in pts) * 100 + 0.5) - MARGIN_CELLS
-    i1 = math.floor(max(lon for _, lon in pts) * 100 + 0.5) + MARGIN_CELLS
-    j0 = math.floor(min(lat for lat, _ in pts) * 100 + 0.5) - MARGIN_CELLS
-    j1 = math.floor(max(lat for lat, _ in pts) * 100 + 0.5) + MARGIN_CELLS
+    i0 = min(i for _, i in idx) - MARGIN_CELLS
+    i1 = max(i for _, i in idx) + MARGIN_CELLS
+    j0 = min(j for j, _ in idx) - MARGIN_CELLS
+    j1 = max(j for j, _ in idx) + MARGIN_CELLS
     w, h = i1 - i0 + 1, j1 - j0 + 1
     if w > MAX_WIDTH or h > MAX_HEIGHT:
         raise ValueError(f"box {w} x {h} pixels is over the service's limit")
     return {"xmin": round((i0 - 0.5) / 100, 3), "ymin": round((j0 - 0.5) / 100, 3),
             "xmax": round((i1 + 0.5) / 100, 3), "ymax": round((j1 + 0.5) / 100, 3), "width": w, "height": h,
             "i0": i0, "j1": j1}
+
+
+def tiles(points: dict, cells: int | None = None) -> list[dict]:
+    """The export tiles for points {key: (lat, lon)}: the points grouped by the fixed square of `cells` hundredths
+    (aligned on multiples of it) that their hundredth falls in, each group's box from grid_box (the one pixel lattice,
+    so a point's pixel holds the same value in its tile as in one box over every point), west to east and north to
+    south within a column: [{tile: "<west>,<south>" in degrees, box, keys (sorted)}]. Every point is in exactly one
+    tile. Points outside the radar grid are the caller's to leave out (in_extent)."""
+    cells = cells or TILE_CELLS
+    groups: dict[tuple[int, int], list] = {}
+    for k, (lat, lon) in points.items():
+        j, i = cell_index(lat, lon)
+        groups.setdefault((i // cells, j // cells), []).append(k)
+    out = []
+    for c, r in sorted(groups, key=lambda t: (t[0], -t[1])):
+        keys = sorted(groups[(c, r)])
+        out.append({"tile": f"{c * cells / 100:g},{r * cells / 100:g}", "box": grid_box([points[k] for k in keys]),
+                    "keys": keys})
+    return out
+
+
+def union_box(boxes) -> dict | None:
+    """{xmin, ymin, xmax, ymax} around boxes (the area the tiles read, for the gauge check); None for none."""
+    boxes = [b for b in boxes if b]
+    if not boxes:
+        return None
+    return {"xmin": min(b["xmin"] for b in boxes), "ymin": min(b["ymin"] for b in boxes),
+            "xmax": max(b["xmax"] for b in boxes), "ymax": max(b["ymax"] for b in boxes)}
 
 
 # ---------------------------------------------------------------- the TIFF
@@ -252,13 +310,25 @@ def export_params(objectid: int, box: dict) -> dict:
             "f": "image"}
 
 
+class ExportError(ValueError):
+    """An export answered with something other than an image; content keeps the answer's body (for its hash)."""
+
+    def __init__(self, msg: str, content: bytes | None = None):
+        super().__init__(msg)
+        self.content = content
+
+
 def export(session, objectid: int, box: dict, timeout: int = 120) -> bytes:
-    """One `exportImage` of a catalog item over the box: the TIFF bytes."""
+    """One `exportImage` of a catalog item over the box: the TIFF bytes. An error status or a body that is not an
+    image raises ExportError carrying the body."""
     r = session.get(f"{MRMS_URL}/exportImage", params=export_params(objectid, box), timeout=timeout)
-    r.raise_for_status()
+    try:
+        r.raise_for_status()
+    except Exception as e:  # noqa: BLE001
+        raise ExportError(f"{type(e).__name__}: {e}", getattr(r, "content", None)) from e
     ctype = r.headers.get("content-type", "")
     if "json" in ctype or "html" in ctype or r.content[:1] in (b"{", b"<"):
-        raise ValueError(f"no image in the answer ({ctype}): {r.content[:200]!r}")
+        raise ExportError(f"no image in the answer ({ctype}): {r.content[:200]!r}", r.content)
     return r.content
 
 

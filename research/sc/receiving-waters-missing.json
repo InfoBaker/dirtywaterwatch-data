@@ -1,0 +1,41 @@
+{
+ "about": "Water names in SC's records that data/receiving-waters-national.json does not hold for SC, one row per name and county with the number of records, how many are open now, up to five points ([lat, lon], 0.001 degree), towns and sources, for the names pass. Records naming no water and releases DNREC's form marks to ground only are left out (by_reason). Written by scripts/de_sc_report_water_names.py.",
+ "state": "SC",
+ "waters": 2,
+ "reports": 6,
+ "by_reason": {},
+ "rows": [
+  {
+   "name": "Jeffries Creek",
+   "county": "Florence",
+   "reports": 5,
+   "open": 3,
+   "points": [],
+   "towns": [
+    "Florence"
+   ],
+   "sources": {
+    "sc-florence-sso-notices": 5
+   },
+   "reason": "no water of that name in SC on the national list"
+  },
+  {
+   "name": "J. Strom Thurmond Reservoir",
+   "county": null,
+   "reports": 1,
+   "open": 1,
+   "points": [
+    [
+     33.811,
+     -82.308
+    ]
+   ],
+   "towns": [],
+   "sources": {
+    "sc-des-hab": 1
+   },
+   "reason": "no water of that name in SC on the national list"
+  }
+ ],
+ "resolved": []
+}
