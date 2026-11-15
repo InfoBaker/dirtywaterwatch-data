@@ -306,3 +306,34 @@ def test_a_corrected_water_with_an_earlier_date_is_still_a_correction():
                                 {"hab": st}, "2026-07-07T12:00:00Z")
     assert len(recs) == 1 and recs[0]["waterbody_text"] == "Lake Example Arm" and recs[0]["started_at"] == "2026-07-03"
     assert {x["field"] for x in recs[0]["raw"]["revisions"]} == {"water", "started_at"}
+
+
+# ------------------------------------------------- P2-2: Delaware's duplicate check reads the poll's Eastern day
+
+def _de_dup(first_poll: str, history_start: str):
+    s = json.loads((Path(__file__).resolve().parent / "fixtures" / "de" / "recwater.json").read_text())
+    st = copy.deepcopy(s["stations"])
+    for x in st:
+        x["CurrentAdvisory"] = 0 if x["UnitName"] == "Slaughter Beach" else 4
+    row = {"advisoryid": "9101", "advstartdate": history_start + "T00:00:00.000", "advdesc": "Example high result",
+           "advreason": "Enterococcus Monitor", "advtype": "Recreational Water Quality Advisory",
+           "unitname": "Slaughter Beach"}
+    t0 = datetime.fromisoformat(first_poll.replace("Z", "+00:00"))
+    t1 = t0 + timedelta(hours=30)
+    _, state = W.poll_records(st, [], {}, first_poll, t0.astimezone(W.TZ).date())
+    hist, _ = W.history_records([row], W.station_index(st), t1.astimezone(W.TZ).date(), iso(t1))
+    recs, _ = W.poll_records(st, hist, state, iso(t1), t1.astimezone(W.TZ).date())
+    assert len(recs) == 1
+    return recs[0]
+
+
+@pytest.mark.parametrize("first_poll, history_start, duplicate", [
+    ("2026-07-02T01:00:00Z", "2026-07-02", False),    # 9 p.m. EDT on July 1: seen the day before DNREC's start
+    ("2026-07-02T03:59:00Z", "2026-07-02", False),    # 11:59 p.m. EDT on July 1
+    ("2026-07-02T04:01:00Z", "2026-07-02", True),     # 12:01 a.m. EDT on July 2
+    ("2026-01-15T04:59:00Z", "2026-01-15", False),    # 11:59 p.m. EST on January 14
+    ("2026-01-15T05:01:00Z", "2026-01-15", True),     # 12:01 a.m. EST on January 15
+])
+def test_the_duplicate_check_reads_the_first_polls_eastern_day(first_poll, history_start, duplicate):
+    r = _de_dup(first_poll, history_start)
+    assert bool(r.get("duplicate_of")) is duplicate
