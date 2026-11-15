@@ -371,3 +371,33 @@ def test_review_a_cell_with_a_title_or_house_number_is_scrubbed():
     recs, _, saved = build(new("b1", S1, [row_]))
     blob = json.dumps(recs) + json.dumps(saved)
     assert "Example Person" not in blob and "12-B" not in blob
+
+
+# ---------------------------------------------------------------- Astra verification 2026-11-15 (last round)
+
+def test_verify_an_unreadable_reread_of_a_good_bulletin_keeps_every_record():
+    first, *_ = build(new("b1", S1, [A]), new("b2", S2, [A, B]))
+    assert kid(B) in by_key(first)
+    second, meta, _ = build(new("b1", S1, [A]), new("b2", S2, []), prev=first)
+    by = by_key(second)
+    assert kid(B) in by and by[kid(B)]["ended_at"] is None
+    assert by[kid(B)]["raw"]["_listed_in"] == by_key(first)[kid(B)]["raw"]["_listed_in"]
+    assert by[kid(A)]["ended_at"] is None and [u["bulletin"] for u in meta["unread"]] == ["b2"]
+    # the next good read of b2 replaces it as before
+    third, *_ = build(new("b1", S1, [A]), new("b2", S2, [A, B]), prev=second)
+    assert by_key(third)[kid(B)]["raw"]["_listed_in"] == by_key(first)[kid(B)]["raw"]["_listed_in"]
+
+
+def test_verify_a_later_omission_keeps_the_confirmed_interval():
+    from build import status as S
+    s_aug = "Tue, 04 Aug 2026 16:00:00 -0500"
+    first, *_ = W.build(feed(new("b1", s_aug, [A, B])), "2026-11-15T12:00:00Z", [])
+    assert by_key(first)[kid(A)]["raw"]["_last_seen_in_source"] == "2026-11-15T12:00:00Z"
+    s_nov = "Mon, 16 Nov 2026 10:00:00 -0700"
+    second, *_ = W.build(feed(new("b1", s_aug, [A, B]), new("b2", s_nov, [B])), "2026-11-16T18:00:00Z", first)
+    r = by_key(second)[kid(A)]
+    assert r["raw"]["ended_at_precision"] == "poll" and r["ended_at"] == "2026-11-16T17:00:00Z"
+    assert r["raw"]["_last_seen_in_source"] == "2026-11-15T12:00:00Z"
+    reds = [iv for iv in S.event_intervals(r, "WY", datetime(2026, 11, 17, tzinfo=timezone.utc))
+            if iv["color"] == "red"]
+    assert reds and max(iv["end"] for iv in reds) >= datetime(2026, 11, 15, 12, tzinfo=timezone.utc)
