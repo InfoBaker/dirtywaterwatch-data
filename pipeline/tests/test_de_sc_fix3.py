@@ -273,3 +273,36 @@ def test_a_delaware_unit_name_with_a_name_never_reaches_a_save(monkeypatch, tmp_
     assert "[name removed]" in blob
     assert W.scrub_unit_name("3 R's Road Beach (Delaware Seashore State Park)") == \
         "3 R's Road Beach (Delaware Seashore State Park)"      # a beach's own name keeps its number
+
+
+# ------------------------------------------------- P2-1: a new bloom episode leaves the earlier record as it was
+
+def _hab_feat(gid, x, y, day, name):
+    ms = int(datetime.fromisoformat(day + "T04:00:00+00:00").timestamp() * 1000)
+    return {"attributes": {"OBJECTID": 9, "NAME": name, "Algal_Bloom": "Microcystis", "Date": ms,
+                           "Advisory_Tier": "Watch", "Recreational_Guidance": None, "GlobalID": gid},
+            "centroid": {"x": x, "y": y}}
+
+
+def test_a_new_episode_with_a_new_water_and_point_leaves_the_earlier_record_as_it_was():
+    recs, st, _ = A.hab_records([_hab_feat("gy", -81.101, 34.101, "2026-07-04", "Lake Example")], [], {},
+                                "2026-07-06T12:00:00Z")
+    assert recs[0]["waterbody_text"] == "Lake Example"
+    # August: the same GlobalID, a later date, another water and point at once: a new episode
+    recs, st, _ = A.hab_records([_hab_feat("gy", -81.201, 34.201, "2026-08-10", "Other Example Lake")], [],
+                                {"hab": st}, "2026-08-11T12:00:00Z")
+    by = {r["started_at"]: r for r in recs}
+    july, aug = by["2026-07-04"], by["2026-08-10"]
+    assert july["waterbody_text"] == "Lake Example" and (july["lat"], july["lon"]) == (34.101, -81.101)
+    assert not july["raw"].get("revisions") and july["ended_at"] == "2026-08-11T12:00:00Z"
+    assert aug["waterbody_text"] == "Other Example Lake" and (aug["lat"], aug["lon"]) == (34.201, -81.201)
+    assert aug["ended_at"] is None and aug["raw"]["follows"] == july["source_record_id"]
+
+
+def test_a_corrected_water_with_an_earlier_date_is_still_a_correction():
+    recs, st, _ = A.hab_records([_hab_feat("gz", -81.101, 34.101, "2026-07-04", "Lake Example")], [], {},
+                                "2026-07-06T12:00:00Z")
+    recs, st, _ = A.hab_records([_hab_feat("gz", -81.101, 34.101, "2026-07-03", "Lake Example Arm")], [],
+                                {"hab": st}, "2026-07-07T12:00:00Z")
+    assert len(recs) == 1 and recs[0]["waterbody_text"] == "Lake Example Arm" and recs[0]["started_at"] == "2026-07-03"
+    assert {x["field"] for x in recs[0]["raw"]["revisions"]} == {"water", "started_at"}
