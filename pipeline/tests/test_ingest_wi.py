@@ -966,3 +966,159 @@ def test_v_4_the_caution_description_is_what_the_computed_intervals_show():
     assert (n, live, from_pub, passed, no_start) == (29, 22, 19, 7, 18)
     assert f"{live} of the {n} reports" in t and f"{no_start} give no start" in t and f"{passed} of them" in t
     assert f"{live} of the {n} reports" in y and f"{no_start} give no start" in y and f"{passed} of them" in y
+
+
+# ---------------------------------------------------------------- Astra verification 3, 2026-11-15 (round 4)
+
+def test_w_1_each_affirmed_type_is_kept_whatever_volume_the_other_carries():
+    t = "MMSD Storm Update"
+    for s in ("A combined sewer overflow of 100 gallons and a separate sewer overflow occurred on June 1, 2027.",
+              "A separate sewer overflow and a combined sewer overflow of 100 gallons occurred on June 1, 2027.",
+              "A combined sewer overflow of 100 gallons and a separate sewer overflow of 200 gallons occurred on "
+              "June 1, 2027.",
+              "Combined and separate sewer overflows occurred on June 1, 2027.",
+              "Separate and combined sewer overflows occurred on June 1, 2027.",
+              "Both a combined sewer overflow (CSO) and a sanitary sewer overflow (SSO) occurred on June 1, 2027.",
+              "CSOs and SSOs occurred on June 1, 2027."):
+        r = _recs(t, [t, s])
+        assert set(r) == {"cso", "sso"}, s
+        assert r["cso"]["started_at"] == r["sso"]["started_at"] == "2027-06-01", s
+        if "100 gallons" in s:
+            assert r["cso"]["volume_gal"] == 100, s
+            assert r["sso"]["volume_gal"] == (200 if "200" in s else None), s
+    # a quantified affirmed type next to a denied one: the affirmed one keeps its figure, the denied one is no record
+    for s in ("A combined sewer overflow of 100 gallons and no separate sewer overflow occurred on June 1, 2027.",
+              "No separate sewer overflow and a combined sewer overflow of 100 gallons occurred on June 1, 2027."):
+        r = _recs(t, [t, s])
+        assert set(r) == {"cso"} and r["cso"]["volume_gal"] == 100, s
+    # a figure for both together stays on the cso record, covering both
+    r = _recs(t, [t, "Combined and Sanitary Sewer Overflows: 5.14 billion gallons"])
+    assert set(r) == {"cso", "sso"} and r["cso"]["volume_gal"] is None and r["cso"]["raw"]["volume_covers"]
+
+
+def test_w_2_stated_minutes_and_ends_of_both_types_reach_the_status_engine():
+    from datetime import datetime, timezone
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    t, ST = "MMSD Storm Update", "06/05/26 09:00:am"
+    shared = ["A combined sewer overflow and a separate sewer overflow began on June 1, 2026 at 1:00 pm and ended "
+              "at 2:00 pm on June 2.",
+              "Combined and separate sewer overflows began on June 1, 2026 at 1:00 pm and ended at 2:00 pm on June 2.",
+              "A combined sewer overflow and a separate sewer overflow started at 1:00 pm on June 1, 2026 and "
+              "continued until 2:00 pm on June 2, 2026."]
+    for s in shared:
+        r = _recs(t, [t, s], stamp=ST)
+        for k in ("cso", "sso"):
+            assert r[k]["started_at"] == "2026-06-01T13:00:00-05:00", (s, k)
+            assert r[k]["ended_at"] == "2026-06-02T14:00:00-05:00" and r[k]["status"] == "ended", (s, k)
+            ivs = S.event_intervals(r[k], "WI", datetime(2026, 6, 10, tzinfo=timezone.utc), rules=rules)
+            ys = [iv for iv in ivs if iv["color"] == "yellow"]
+            # the caution runs from the stated end (June 2, 2 pm CDT) 72 hours, to June 5 at 2 pm; no hatched tail
+            assert ys and max(iv["end"] for iv in ys) == datetime(2026, 6, 5, 19, tzinfo=timezone.utc), (s, k)
+            assert not any(iv["color"] in ("unresolved", "grey") for iv in ivs), (s, k)
+    r = _recs(t, stamp=ST, lines=[t, "A combined sewer overflow began on June 1, 2026 at 1:00 pm and ended at 2:00 pm on June 2, "
+                     "and a separate sewer overflow began on June 3, 2026 at 4:00 am and ended at 6:00 am on June 3."])
+    assert (r["cso"]["started_at"], r["cso"]["ended_at"]) == ("2026-06-01T13:00:00-05:00", "2026-06-02T14:00:00-05:00")
+    assert (r["sso"]["started_at"], r["sso"]["ended_at"]) == ("2026-06-03T04:00:00-05:00", "2026-06-03T06:00:00-05:00")
+    # times stated in a following sentence for both overflows together
+    r = _recs(t, stamp=ST, lines=[t, "A combined sewer overflow and a separate sewer overflow occurred on June 1, 2026.",
+                  "Both overflows ended at 2:00 pm on June 2, 2026."])
+    assert r["cso"]["ended_at"] == r["sso"]["ended_at"] == "2026-06-02T14:00:00-05:00"
+    # an affirmed type keeps its time when the other is denied in the same sentence
+    r = _recs(t, stamp=ST, lines=[t, "A combined sewer overflow and no separate sewer overflow began on June 1, 2026 at 1:00 pm."])
+    assert set(r) == {"cso"} and r["cso"]["started_at"] == "2026-06-01T13:00:00-05:00"
+
+
+def test_w_3_a_denial_never_removes_the_affirmed_overflows_water(wisconsin_live):
+    t = "MMSD Storm Update"
+    res = S.Resolver(WI_WATERS, WI_OUTFALLS, placement_rules={"no_outfall_all_waters": True})
+    for s in ("A combined sewer overflow into Lincoln Creek and no separate sewer overflow occurred on June 1, 2027.",
+              "No separate sewer overflow and a combined sewer overflow into Lincoln Creek occurred on June 1, 2027.",
+              "A combined sewer overflow into Lincoln Creek occurred on June 1, 2027 and a separate sewer overflow "
+              "was prevented.",
+              "A combined sewer overflow into Lincoln Creek and no separate sewer overflow into the Milwaukee River "
+              "occurred on June 1, 2027."):
+        r = _recs(t, [t, s])
+        assert set(r) == {"cso"} and r["cso"]["waterbody_text"] == "Lincoln Creek", s
+        assert res.resolve(r["cso"])["water_slugs"] == ["lincoln-creek-wi"], s     # its own water, not every outfall's
+    # a shared water after both types belongs to the one it follows, and a denied water to no one
+    r = _recs(t, [t, "A combined sewer overflow and a separate sewer overflow into Honey Creek occurred on June 1, 2027."])
+    assert r["sso"]["waterbody_text"] == "Honey Creek" and r["cso"]["waterbody_text"] is None
+
+
+def test_w_4_a_storm_repair_or_cleanup_start_is_not_the_overflows_start():
+    from datetime import datetime, timezone
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    told = datetime(2027, 6, 5, 14, tzinfo=timezone.utc)
+    t = "MMSD Storm Update"
+    for lines in (["Heavy rain began on June 1, 2027 and led to a combined sewer overflow."],
+                  ["Heavy rain began on June 1, 2027 at 1:00 pm and led to a combined sewer overflow."],
+                  ["The storm started at 1:00 pm on June 1, 2027 and caused a combined sewer overflow that was "
+                   "reported."],
+                  ["A combined sewer overflow occurred after heavy rain began on June 1, 2027."],
+                  ["A combined sewer overflow was reported.", "Cleanup started on June 3, 2027."],
+                  ["A combined sewer overflow was reported.", "Repairs began at 8:00 am on June 3, 2027."],
+                  ["A combined sewer overflow was reported; crews started cleanup at 8:00 am on June 3, 2027."]):
+        r = _recs(t, [t] + lines)["cso"]
+        assert r["started_at"] is None and r["time_precision"] is None, lines
+        ivs = S.event_intervals(r, "WI", datetime(2027, 6, 6, tzinfo=timezone.utc), rules=rules)
+        assert any(iv["color"] == "yellow" and iv["start"] == told for iv in ivs), lines   # counted from the post
+    # the overflow's own start verbs stay starts
+    for s, d in (("A combined sewer overflow began on June 1, 2027 at 1:00 pm.", "2027-06-01T13:00:00-05:00"),
+                 ("The combined sewer overflow into Lincoln Creek started at 1:00 pm on June 1, 2027.",
+                  "2027-06-01T13:00:00-05:00"),
+                 ("MMSD initiated a combined sewer overflow on 6-1-27 after intense storms.", "2027-06-01"),
+                 ("After heavy rain, a combined sewer overflow occurred on June 1, 2027.", "2027-06-01")):
+        assert _recs(t, [t, s])["cso"]["started_at"] == d, s
+
+
+PRIVATE4 = ("Pat Example", "May Example", "Example Reports", "43.223", "43.2234", "-87.88", "43.12", "-87.98",
+            "43.1234", "-87.9876", "13'24")
+
+
+def test_w_5_names_private_places_and_coordinates_never_reach_either_save(monkeypatch, tmp_path):
+    monkeypatch.setattr(M, "PAUSE_S", 0)
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    saved, written = [], []
+    monkeypatch.setattr(M, "save_raw", lambda sid, content, ext: saved.append(content))
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: written.append((recs, kw)) or tmp_path / "x")
+    title = "Pat Example Reports Sewer Overflow"
+    html = (f'<h1 class="ccm-block-page-title page-title">{title}</h1><div>06/05/27 09:00:am</div>'
+            '<p>A combined sewer overflow occurred on June 1, 2027, and May Example saw it from the outfall.</p>'
+            '<p>The overflow came up in the basement of a residence on the east side.</p>'
+            '<p>The separate sewer overflow occurred on June 1, 2027 at 43.123456, -87.987654.</p>'
+            '<p>A combined sewer overflow was seen at 43.223456, -87.9 and near 43.1234 N 87.9876 W, '
+            '43°13\'24.4"N.</p>')
+    page = (f'<div class="ccm-block-page-list-title"><a href="https://www.mmsd.com/about-us/news/x-example" '
+            f'target="_self"><h3>{title}</h3></a></div><div class="ccm-block-page-list-date">Jun 5, 2027, 9:00 AM</div>')
+    monkeypatch.setattr(M.requests, "Session", lambda: FakeSession({1: page.encode()}, {"x-example": html.encode()}))
+    assert M.main(["--pages", "1"]) == 0
+    assert saved and written
+    blob = json.dumps(saved, ensure_ascii=False) + json.dumps(written, ensure_ascii=False, default=str)
+    for p in PRIVATE4:
+        assert p not in blob, p
+    recs = {r["event_type"]: r for r in written[-1][0]}
+    assert set(recs) == {"cso", "sso"}                       # the post is still read: its title still names an overflow
+    assert "Reports Sewer Overflow" in recs["cso"]["raw"]["title"]
+    # outside a private context, mixed-precision and lone coordinates are rounded component by component
+    assert M.safe_line("A combined sewer overflow at 43.223456, -87.9.") == "A combined sewer overflow at 43.223, -87.9."
+    assert M.safe_line("Overflow at latitude 43.223456 longitude -87.987654.") == \
+        "Overflow at latitude 43.223 longitude -87.988."
+    # an unknown place-word before a water or street suffix is a place, not a person; the source's words stay
+    assert M.safe_line("An overflow into Indian Creek near Example Avenue.") == \
+        "An overflow into Indian Creek near Example Avenue."
+    assert M.safe_line("Jones Island Water Reclamation Facility") == "Jones Island Water Reclamation Facility"
+
+
+def test_w_5_records_carried_from_an_earlier_run_are_scrubbed_again(monkeypatch, tmp_path):
+    monkeypatch.setattr(M, "PAUSE_S", 0)
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    old = list(built()[0].values())[0]
+    old = deepcopy(old)
+    old["raw"]["title"] = "Pat Example Reports Sewer Overflow"
+    old["raw"]["_type_basis"] = "MMSD's post: \"May Example saw an overflow at 43.223456, -87.9\""
+    old["raw"]["start_basis"] = "the basement of a residence at 43.1234, -87.9876"
+    recs, _ = M.build({"items": [], "posts": {}, "failed": []}, [old], FETCHED)
+    blob = json.dumps(recs, ensure_ascii=False)
+    for p in PRIVATE4:
+        assert p not in blob, p
+    assert recs[0]["source_record_id"] == old["source_record_id"] and recs[0]["started_at"] == old["started_at"]
