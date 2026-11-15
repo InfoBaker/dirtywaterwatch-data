@@ -1,6 +1,6 @@
 # Open combined sewer outfalls with no coordinates: sources and corrections
 
-Research of 2026-11-15 (15:08Z to __END__). Nothing in `data/outfalls-*.json` or `data/waters-*.json` is changed by this
+Research of 2026-11-15 (15:08Z to 18:55Z, with a pause for the usage limit; the research agent's notes for MI, NE and TN are in `notes-mi-ne-tn.md`). Nothing in `data/outfalls-*.json` or `data/waters-*.json` is changed by this
 branch; `corrections.json` holds the cited points, and the last sections say how to apply them and what tests prove it.
 
 ## Summary
@@ -10,14 +10,14 @@ branch; `corrections.json` holds the cited points, and the last sections say how
 | CT | 1 | 1 (CT DEEP's own CSO location layer) | 0 |
 | MA | 3 | 0 | 3: not outfalls; EPA reporting numbers for collection-system co-permittees |
 | MD | 16 | 0 | 16: no per-outfall source online; MDE's permit outfall tables needed |
-| MI | 4 | __MI__ | __MI_NO__ |
-| NE | 1 | __NE__ | __NE_NO__ |
-| TN | 1 | __TN__ | __TN_NO__ |
-| **Total** | **26** | **__TOTAL__** | **__TOTAL_NO__** |
+| MI | 4 | 0 | 4: permits terminated decades ago; no source places them |
+| NE | 1 | 0 | 1: described (64th and Dupont); the state fact sheet was unreachable |
+| TN | 1 | 0 | 1: permit gives Commerce Street, river mile 125.9, no coordinates |
+| **Total** | **26** | **1** | **25** |
 
 Needs the owner: (1) a records request to MDE for three western Maryland permits' outfall tables (the only way found to
 place 16 rows); (2) whether to reclassify the three Massachusetts co-permittee rows as kind "other" (they are not
-outfalls, and Williamstown and Lunenburg have no combined sewers in their parent permits); __OWNER_MORE__
+outfalls, and Williamstown and Lunenburg have no combined sewers in their parent permits); (3) the Nebraska fact sheet for NE0133680 from NDEE (ecmp.nebraska.gov was unreachable here), and TDEC or Clarksville for outfall 004's coordinates; (4) the terminated-permit question in the follow-ups.
 
 ## The list (re-derived 2026-11-15 15:15Z on origin/main 721d13f)
 
@@ -147,7 +147,56 @@ is posted online. A request to MDE's Wastewater Permits Program (or a Maryland P
 those three permits' outfall tables is the next step: an owner item. Until then the operators are read at the points
 listed above.
 
-__MI_NE_TN__
+### TN0020656 outfall 004 (Clarksville, Commerce Street): not located; place described, no coordinates
+
+- The state permit names the place but gives no coordinates. TDEC DataViewer, permit TN0020656 ("Clarksville STP and
+  Combined Sewer System", issued 2025-01-21, effective 2025-03-01): "limited untreated combined wastewater from Outfall
+  004 (Commerce Street)"; receiving stream "Barkley Reservoir (Cumberland River) at miles 125.0, 125.4, 125.9 and 126.2".
+  `https://dataviewers.tdec.tn.gov/dataviewers/f?p=2005:34051:::NO:34051:P34051_PERMIT_NUMBER:TN0020656`, read
+  2026-11-15 18:43Z.
+- The final permit (TDEC document, "Outgoing Final Permit", 21-JAN-2025, 129 pages; from the DataViewer's document list
+  for TN0020656, file type Permit) says at page A-9 and in the rationale (page R-6, PDF page 71): "The Commerce Street
+  Combined Sewer Overflow (Outfall 004) serves as a relief point for the combined sewer system", discharging "to
+  Barkley Reservoir at the Cumberland River mile 125.9 during wet weather only". It gives no latitude or longitude for
+  any outfall; its appended overflow table (TDEC event reports, with coordinates) has no Commerce Street row.
+  Read 2026-11-15 18:45Z.
+- EPA: the inventory and EPA's CSO map layer (`https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Combined_Sewer_Overflows/FeatureServer/0`,
+  data edited 2026-11-09) give 004 as "+36", "-87": whole degrees, not a place (002 and 006 have full points).
+- A river mile is a published locator, but turning mile 125.9 into a point needs a river-mile layer (US Army Corps of
+  Engineers, Nashville District); no source places the outfall itself, so no point is proposed. The operator is read
+  today at outfalls 002 (Gallows Hollow) and 006 (McClure Street), about 1 to 2 km away on the same river.
+
+### NE0133680 outfall 205R (Omaha, Saddle Creek retention treatment basin): not located; place described
+
+- EPA's inventory text: "City of Omaha Retention Treatment Basin located at 64th and Dupont."; no point. EPA's CSO map
+  layer (above) returns 26 Omaha outfalls and not 205R (read 2026-11-15 by the research agent, notes-mi-ne-tn.md).
+- Omaha's CSO annual report to the state (copy on the Nebraska Natural Resources Commission site,
+  `https://nrc.nebraska.gov/sites/default/files/doc/wfs/WSF2025AR4116.pdf`, section V.B "64th and Dupont Retention
+  Treatment Basin – Outfall 205R", PDF pages 46 to 47; read 2026-11-15 18:47Z): the Saddle Creek High Rate Treatment
+  Basin was "operationally complete on December 20, 2023" and discharges treated effluent as CSO 205R; its overflow
+  table (PDF page 120) lists "CSO 205 - 64th & Dupont St". No coordinates for 205 or 205R anywhere in the report.
+- The NDEE permit (modified, comment period 2025-01-30 to 2025-03-01, `https://dwee.nebraska.gov/node/4730`) and its
+  fact sheet are on NDEE's document system (`https://ecmp.nebraska.gov/publicaccess/...`), which did not answer from
+  this machine (no connection) and could not be opened in the browser pane. The fact sheet may give the outfall's
+  latitude and longitude: worth one fetch from another network.
+- The designer's papers place the basin "adjacent to the Little Papillion Creek and S 64th Avenue" (Wade Trim,
+  `https://wadetrim.com/wp-content/uploads/omaha-saddle-creek-rtb-weftec-23.pdf`): a description, not a point.
+
+### MI0037621 001, 002, 003 (Oakland County, Evergreen-Farmington CSO) and MI0051497 M23 (Westland): not located; permits terminated
+
+- Both permits are terminated in ICIS (ECHO detailed facility report service: "Terminated"; MI0037621 expired
+  1982-03-31, MI0051497 2001-10-01) and neither is in EPA's CSO map layer, which holds active outfalls only. ECHO's points
+  are a ZIP-code centroid (MI0037621) and an address geocode of 36601 Ford Road (MI0051497's FRS point), not outfalls;
+  the inventory's own facility point for MI0051497 (42.333333, -82.333333) lies in Ontario (research agent's notes,
+  read 2026-11-15).
+- The Evergreen-Farmington system's current CSO basins have their own permits and points in the registry (Acacia Park
+  MI0037427 103, Birmingham MI0025534 101, Bloomfield Village MI0048046 102); Westland's area is served by Wayne
+  County's later community CSO permits. No source found ties MI0037621's 001 to 003 or MI0051497's M23 to a successor
+  outfall or records them as eliminated (EGLE, the Oakland County Water Resources Commissioner and the Rouge River
+  program were searched).
+- These rows drive nothing today (no point and no plant row). Whether to keep them as open outfalls belongs with the
+  terminated-permit follow-up below.
+
 
 ## How the registry already records a corrected point
 
