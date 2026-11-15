@@ -95,3 +95,40 @@ def test_last_idaho_dhw_names_and_their_keys_are_scrubbed_before_every_save(monk
     for s in saves:
         for b in ("Example Person", "example person", "555-0142", "555 0142"):
             assert b not in s, (b, s[:300])
+
+
+# ------------------------------------------------------------------ Iowa news: a revision that cannot be read keeps the saved record
+
+from ingest import ia_dnr_news as N  # noqa: E402
+
+NEWS_URL = "https://www.iowadnr.gov/news-release/2026-11-01/x"
+NEWS_BODY = "<p>The City of Exampleton reported that its lift station discharged wastewater into Sample Creek.</p>"
+
+
+def _news_run(tmp_path, monkeypatch, body, pub, at):
+    monkeypatch.setattr(N, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(N, "_OPERATORS", {})
+    title = "Wastewater bypass in Exampleton"
+    rss = (f"<rss><channel><item><title>{title}</title><link>{NEWS_URL}</link>"
+           f"<pubDate>{pub}</pubDate></item></channel></rss>")
+    page = ("<html><body><h1>" + title + "</h1>\n<p>Sunday, November 1, 2026</p>\n<p>News Release</p>\n" + body
+            + "</body></html>")
+    monkeypatch.setattr(N, "get", lambda url: rss if url == N.RSS else page)
+    monkeypatch.setattr(N, "save_raw", lambda sid, data, ext: None)
+    out = {}
+    monkeypatch.setattr(N, "write_events", lambda sid, recs, **kw: out.update(recs=recs, **kw) or tmp_path / "e.json")
+    assert N.main(["--at", at]) == 0
+    return out
+
+
+@pytest.mark.parametrize("cut", ["", "<p>Image</p>", "<p>The Iowa Department of Natural Resources.</p>"])
+def test_last_iowa_news_a_revision_that_lost_its_body_keeps_the_saved_report_and_retries(tmp_path, monkeypatch, cut):
+    out = _news_run(tmp_path, monkeypatch, NEWS_BODY, "Sun, 01 Nov 2026 12:00:00 GMT", T0)
+    assert len(out["recs"]) == 1 and out.get("ok", True) is not False
+    out = _news_run(tmp_path, monkeypatch, cut, "Mon, 02 Nov 2026 12:00:00 GMT", T1)
+    assert len(out["recs"]) == 1 and "Sample Creek" in json.dumps(out["recs"])
+    assert out["ok"] is False and any(NEWS_URL in e for e in out["meta"]["errors"])
+    # the full revision is read on the next run and replaces it
+    out = _news_run(tmp_path, monkeypatch, NEWS_BODY.replace("Sample Creek", "Example River"),
+                    "Mon, 02 Nov 2026 12:00:00 GMT", T2)
+    assert len(out["recs"]) == 1 and "Example River" in json.dumps(out["recs"]) and out.get("ok", True) is not False
