@@ -807,7 +807,7 @@
    "permit": "ID0027979",
    "checked": "2026-11-14",
    "id": "id-elk-valley-subdivision-noncompliance-report",
-   "name": "Elk Valley Subdivision wastewater plant",
+   "name": "Elk Valley Subdivision wastewater plant (permit ID0027979)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -821,7 +821,7 @@
    "sources": [
     "id-deq-ipdes-noncompliance"
    ],
-   "note": "No web channel found: Elk Valley Subdivision wastewater plant reports overflows and other noncompliance to DEQ within 24 hours and in five days; the reports are not published, and no public notice requirement was found.",
+   "note": "No web channel found: Elk Valley Subdivision wastewater plant (permit ID0027979) reports overflows and other noncompliance to DEQ within 24 hours and in five days; the reports are not published, and no public notice requirement was found.",
    "barrier": "no_web_page"
   },
   {

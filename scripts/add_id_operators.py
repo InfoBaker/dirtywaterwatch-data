@@ -59,14 +59,16 @@ OWNERS = {
                                                  "tribal"),
     "HAYDEN AREA REGIONAL SEWER BOARD": ("id-hayden-harsb", "Hayden Area Regional Sewer Board", "authority"),
 }
+PERMIT_ONLY = "facility (permittee not named)"
 # permit -> (row id, name, legal_form, note): the private candidates
 PRIVATE = {
     "ID0024422": ("id-mid-valley-sewer-company", "Mid-Valley Sewer Company LLC", "investor-owned utility",
                   "EPA records the permittee as Mid-Valley Sewer Company LLC; Idaho DEQ's list names the plant The "
                   "Meadows LLC Wastewater Treatment Plant: one system, the permittee not confirmed from the permit."),
-    "ID0027979": ("id-elk-valley-subdivision", "Elk Valley Subdivision wastewater plant", None,
-                  "EPA types it privately owned; who holds the permit (a homeowners' association or the developer) "
-                  "was not read."),
+    # the permittee of record names only the plant: a permit-only row (as Kansas's and Minnesota's), never an operator
+    "ID0027979": ("id-elk-valley-subdivision", "Elk Valley Subdivision wastewater plant (permit ID0027979)",
+                  PERMIT_ONLY, "EPA types it privately owned; who holds the permit (a homeowners' association or the "
+                  "developer) is not established, so the row names the plant and its permit, not an operator."),
     "ID0028029": ("id-jug-mountain-ranch", "Jug Mountain Ranch LLC", "business or industrial",
                   "A resort community's plant; EPA types it mixed ownership."),
     "ID0030015": ("id-edge-resort", "Edge Resort (Downhill, LLC)", "campground or resort", None),
@@ -145,7 +147,7 @@ def build(epa: dict, research: list[dict], cand: list[dict], auth: dict) -> tupl
                 f"it: {'; '.join(sorted({str(x['owner']) for x in e}))}; facility type "
                 f"{'; '.join(sorted({str(x['type']) for x in e}))}. Permitting authority: "
                 + "; ".join(f"{p} {x['authority']} ({x['basis']})" for p, x in zip(permits, a)) + "."
-                + (f" {why}" if why else "") + (" Legal form read from the name." if lf not in (None, "city") else ""))
+                + (f" {why}" if why else "") + (" Legal form read from the name." if lf not in (None, "city", PERMIT_ONLY) else ""))
         if lf in ("investor-owned utility", "business or industrial", "campground or resort") or rid in (
                 "id-elk-valley-subdivision",):
             note = "Privately owned. " + note
@@ -161,6 +163,8 @@ def build(epa: dict, research: list[dict], cand: list[dict], auth: dict) -> tupl
                "source_areas": ["id", "federal"], "permitting_authority": sorted({x["authority"] for x in a})}
         if lf:
             row["legal_form"] = lf
+        if lf == PERMIT_ONLY:
+            row["permit_only"] = True
         rows.append(row)
     stats = {"rows": len(rows), "permits": sum(len(r["npdes_permits"]) for r in rows),
              "by_form": dict(Counter(r.get("legal_form") for r in rows)),
