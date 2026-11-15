@@ -85,7 +85,8 @@ kept; the article is cut at MMSD's standing advice block ("Text WATERDROP ...") 
 removed (common.strip_house_numbers). data/raw keeps that safe document only.
 
 Failures: a list page that cannot be read writes ok=False and keeps the previous records; a post that cannot be read is
-read again next run.
+read again next run, its earlier records kept as they were, while the posts read well in the same run are written at
+once (ok=False, last_ok_at unchanged: common.write_events partial=True).
 
 Run from pipeline/:  python -m ingest.wi_mmsd_storm_updates [--pages 2] [--file saved.json]
 """
@@ -742,14 +743,17 @@ def main(argv: list[str] | None = None) -> int:
                            "raw.period_end, never the overflow's end")}
     failed = doc.get("failed") or []
     if failed or stats["posts_without_report"]:
-        # an incomplete read is not a successful one (Astra review P1-4): ok=False keeps the previous file's records
-        # and its last_ok_at; the failed posts are listed for the next run, which reads every post not yet built
+        # an incomplete read is not a successful one (Astra review P1-4): ok=False keeps the previous file's
+        # last_ok_at, and the failed posts are listed for the next run. The records written are this run's: build()
+        # carried every earlier record of a failed post unchanged, and the posts read well are kept now, so one
+        # refused old post never freezes the feed or loses a new post that scrolls off (Astra re-review P1-5)
         why = "; ".join([f"{f.get('slug')}: {f.get('reason')}" for f in failed] +
                         [f"{x}: a stamped page with no report where one stood" for x in stats["posts_without_report"]])
         retry = [{k: f.get(k) for k in ("url", "slug", "title", "list_date")} for f in failed] + \
                 [{k: it.get(k) for k in ("url", "slug", "title", "list_date")} for it in doc.get("items") or []
                  if it.get("slug") in stats["posts_without_report"]]
-        write_events(SOURCE_ID, [], ok=False, error=f"posts not read: {why}"[:800], meta={"retry": retry})
+        write_events(SOURCE_ID, recs, ok=False, error=f"posts not read: {why}"[:800], meta={**meta, "retry": retry},
+                     partial=True)
         print(f"{SOURCE_ID}: incomplete ({why})", file=sys.stderr)
         return 1
     meta["retry"] = []
