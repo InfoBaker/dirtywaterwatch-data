@@ -1,0 +1,351 @@
+{
+ "about": "Receiving-water names in North Dakota's records (DEQ's harmful algal bloom listing, read 2026-11-14) that data/receiving-waters-national.json does not hold for ND, by name as typed, with the counties DEQ gives (a same-named lake elsewhere in the state is not the one listed: North Dakota has more than one Clear Lake and Buffalo Lake). DEQ's archive of incidents 1975-2020 names no water: its 36 sewage reports are placed by their own points or listed with their county.",
+ "state": "ND",
+ "waters": 19,
+ "reports": 19,
+ "left_out": [
+  {
+   "name": "Devils Lake",
+   "reports": 1,
+   "reason": "on the national list already"
+  },
+  {
+   "name": "(none)",
+   "reports": 36,
+   "reason": "DEQ's incident archive gives a point and a county, no water name"
+  }
+ ],
+ "rows": [
+  {
+   "name": "Antelope Lake",
+   "reports": 1,
+   "county": "Pierce County",
+   "counties": [
+    "Pierce County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Antelope Lake"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Blacktail Dam",
+   "reports": 1,
+   "county": "Williams County",
+   "counties": [
+    "Williams County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Blacktail Dam"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Bowman-Haley Dam",
+   "reports": 1,
+   "county": "Bowman County",
+   "counties": [
+    "Bowman County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Bowman - Haley Dam"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point",
+   "aliases_suggested": [
+    "Bowman-Haley Lake",
+    "Bowman-Haley Reservoir"
+   ]
+  },
+  {
+   "name": "Buffalo Lake",
+   "reports": 1,
+   "county": "Sargent County",
+   "counties": [
+    "Sargent County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Buffalo Lake"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Buffalo Lodge Lake",
+   "reports": 1,
+   "county": "McHenry County",
+   "counties": [
+    "McHenry County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Buffalo Lodge Lake"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Clear Lake",
+   "reports": 1,
+   "county": "Pierce County",
+   "counties": [
+    "Pierce County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Clear Lake"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Horsehead Lake",
+   "reports": 1,
+   "county": "Kidder County",
+   "counties": [
+    "Kidder County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Horsehead Lake"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Lake Ashtabula",
+   "reports": 1,
+   "county": "Barnes County",
+   "counties": [
+    "Barnes County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Lake Ashtabula"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Lake Brekken",
+   "reports": 1,
+   "county": "McLean County",
+   "counties": [
+    "McLean County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Lake Brekken"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Lake Darling",
+   "reports": 1,
+   "county": "Renville County",
+   "counties": [
+    "Renville County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Lake Darling"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point",
+   "aliases_suggested": [
+    "Lake Darling Reservoir"
+   ],
+   "note": "the listing gives Renville County; the reservoir also reaches Ward County"
+  },
+  {
+   "name": "Lake Ilo",
+   "reports": 1,
+   "county": "Dunn County",
+   "counties": [
+    "Dunn County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Lake Ilo"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Lake Isabel",
+   "reports": 1,
+   "county": "Kidder County",
+   "counties": [
+    "Kidder County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Lake Isabel"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Lake Tschida",
+   "reports": 1,
+   "county": "Grant County",
+   "counties": [
+    "Grant County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Lake Tschida"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Larimore Dam",
+   "reports": 1,
+   "county": "Grand Forks County",
+   "counties": [
+    "Grand Forks County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Larimore Dam"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "North Lake Washington",
+   "reports": 1,
+   "county": "Eddy County",
+   "counties": [
+    "Eddy County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "North Lake Washington"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Patterson Lake",
+   "reports": 1,
+   "county": "Stark County",
+   "counties": [
+    "Stark County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Patterson Lake"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "South Golden Lake",
+   "reports": 1,
+   "county": "Steele County",
+   "counties": [
+    "Steele County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "South Golden Lake"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "Sykeston Dam",
+   "reports": 1,
+   "county": "Wells County",
+   "counties": [
+    "Wells County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Sykeston Dam"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  },
+  {
+   "name": "West Lake Napoleon",
+   "reports": 1,
+   "county": "Logan County",
+   "counties": [
+    "Logan County"
+   ],
+   "points": [],
+   "sources": {
+    "nd-deq-hab-listings": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "West Lake Napoleon"
+   ],
+   "reason": "no record of that name in ND; DEQ's bloom listing gives the lake and its county, no point"
+  }
+ ]
+}

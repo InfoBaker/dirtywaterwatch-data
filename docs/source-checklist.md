@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1448 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1481 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -46,7 +46,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| **all** | **519** | **234** | **421** | **201** | **73** | **1448** |
+| mn | 7 | 0 | 5 | 4 | 2 | 18 |
+| nd | 6 | 0 | 7 | 1 | 1 | 15 |
+| **all** | **532** | **234** | **433** | **206** | **76** | **1481** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1675,3 +1677,46 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
 | `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
 | `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |
+
+## mn: Minnesota (18)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `mn-epa-cso-inventory` | EPA National CSO Inventory, Minnesota rows | used | fetched | outfalls | Confirms no open CSOs in Minnesota. |
+| `mn-epa-sobe` | EPA SOBE event tables, Minnesota permits | used | fetched | events | EPA's 2026-11-12 tables hold one Minnesota report: the Bois Forte Band's Lake Vermilion collection system (MN0061310), a sanitary sewer overflow on 2024-06-18 to Pike Bay, Lake Vermilion; 19 Minnesota permits in the collection-system table. Read by the echo-sewer-overflow feed (MN added). Minnesota's own permittees report to the state, which does not send the reports to EPA. |
+| `mn-law-stat-115-061` | Minn. Stat. 115.061 Duty to notify; avoiding water pollution (public notice paragraph (c), 2023 c 60; amended 2026 c 79) | used | fetched | law | Public notice duty for every POTW and domestic sewer owner after any discharge; channel may be in person, phone, radio, social media or web page; signs at impacted public use areas. No hour deadline ("Promptly"). |
+| `mn-mces-spill-notices` | Metropolitan Council Environmental Services, wastewater spill notices | used | fetched | events | Read by the mn_mces_spill_notices feed: three spills listed on 2026-11-14 (Excelsior May 2026, reached Mud Pond; Minneapolis and Golden Valley July 2026; Eagan November 2026, no water reached), with the Council's signs as its own window. |
+| `mn-mpca-collection-release-guidance` | MPCA guidance for collection-system releases (October 2026) | used | fetched | law | Read for the research of 2026-11-09: any amount of wastewater released is unauthorized; immediate Duty Officer report and prompt downstream notice; release sampling reports within 30 days. Cited in the state text. |
+| `mn-mpca-public-notification-guidance` | MPCA "Public Notification of Wastewater Releases: Notice to Downstream Users and Drinking Water Intakes" (wq-wwprm1-43, October 2026) | used | fetched | law | Defines whom to notify: "Any location within 25 miles downstream of the release which the public could encounter the receiving water"; "Notification should also be given when the release has ended." |
+| `mn-wlssd-overflows` | WLSSD "2026 Releases" overflow map layer (Duluth regional sewer system) | used | fetched | events | Read through the generic ArcGIS block mn-wlssd-overflows: 117 releases, 2005 to 2026-11-04, with the day or time, the kind of structure, an amount as written and whether waters of the state were reached; no end, no receiving water's name. |
+| `mn-duluth-press-releases` | City of Duluth press releases on sanitary sewer overflows (web subscriptions) | watch | access_failed | events | Registered as an unmonitored channel (no feed): the City's press releases, one mutable page per notice (the research of 2026-11-09 read the Chester Creek notice of October 2024, which kept its earlier warnings below the updates). duluthmn.gov did not answer the project's client on 2026-11-14 (connection timed out); no list or feed of the overflow notices was found. |
+| `mn-mdh-beach-locator` | MDH beach locator (local beach programs) | watch | fetched | advisories | Links Lake Superior's program and local programs (Minneapolis Parks, Three Rivers, Ramsey County); no statewide advisory feed. Registered as a channel. |
+| `mn-mpca-dmr-downloads` | MPCA discharge monitoring report downloads | watch | search_only | monitoring | Annual ZIPs of routine monitoring since 1998 and release sampling reports attached to DMRs (research 2026-11-09, directory only). Routine measurements are not spill events; the attachments' public access was not checked. |
+| `mn-mpca-hab` | MPCA harmful algal bloom information and reporting | watch | inferred | advisories | MPCA's harmful algae page gives guidance and a reporting route; local bodies decide advisories. No statewide list of current bloom advisories was found (2026-11-09 research). |
+| `mn-mpca-information-requests` | MPCA information requests | watch | fetched | law | The route to ask for a redacted export of release reports (Duty Officer numbers, dates, receiving waters, volumes). No request sent. |
+| `mn-mces` | Metropolitan Council Environmental Services (Twin Cities interceptors and plants) | rejected | inferred | events | The Council's home page; its spill notices are read as mn-mces-spill-notices. |
+| `mn-minneapolis-cso-reports` | Minneapolis / MCES CSO annual reports (joint permit MN0046744) | rejected | search_only | permits | No open CSO outfalls; history only. |
+| `mn-mpca-2017-release-data` | MPCA 2017 Municipal Wastewater Release Data (compiled for the Legislative-Citizen Commission) | rejected | search_only | events | One-off 2017 compilation; proves MPCA can extract releases if asked. |
+| `mn-mpca-wimn` | MPCA What's in My Neighborhood (sites dataset) | rejected | search_only | permits | A site/permit inventory, not an incident list; no sewage release events found in it. |
+| `mn-duty-officer` | Minnesota Duty Officer Program (DPS/BCA): one-call reporting of all discharges | unreachable | search_only | events | Every wastewater release is reported here first, but the reports are not published; a 2017 compilation for a legislative commission ("MPCA - 2017 Municipal Wastewater Release Data") shows the data exist. |
+| `mn-mdh-lake-superior-beaches` | MDH Minnesota Lake Superior Beach Monitoring Program (mnbeaches.org) | unreachable | access_failed | advisories | mnbeaches.org timed out on 2026-11-14 (connection, 60 s) as it failed on 2026-11-09; no advisory rows, sample schema or API seen. Registered as a channel with its barrier. |
+
+## nd: North Dakota (15)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `nd-deq-eir-legacy-general` | ND DEQ General Environmental Incidents - Historical (1975-2020) | used | fetched | events | Read by the nd_deq_eir_legacy feed through the archive's own search (sewage, sewer, septic): 36 sewage reports from 2003 to 2020 of the 4,452 incidents, with dates, county, point, volume and the containment flag; frozen (reports since 2021 are in HazConnect). |
+| `nd-deq-hab-listings` | ND DEQ harmful algal bloom advisories and warnings listing (PDF) | used | fetched | advisories | Read by the nd_deq_hab_listings feed: 14 advisories and 6 warnings on 2026-11-14 (file last modified 2026-10-08). |
+| `nd-fargo-ndpdes-permit` | City of Fargo NDPDES permit ND0022870 (draft, public notice ND-2023-021) | used | fetched | law | Special conditions 'Reporting, Record Keeping, and Public Notification for Unauthorized Sanitary Sewer Overflows': oral report to DEQ within 24 hours; plan for public notice; 'shall immediately notify the public, public health agencies, and other affected entities'. Channel is left to each permittee's plan. |
+| `nd-ndac-33-1-16-02-1-11` | N.D. Admin. Code 33.1-16-02.1-11(4) (spill reporting) | used | fetched | law | A spill or discharge that causes or is likely to cause water pollution is reported to DEQ immediately; no public-notice duty. Cited in the state text. |
+| `nd-ndg420000-general-permit` | NDPDES general permit NDG420000 (domestic treatment), Part IV(F) | used | fetched | law | Effective 2023-01-01 to 2027-12-31: oral notice to DEQ within 24 hours and a written account within five days of noncompliance that may endanger health or the environment, lagoon overflows and bypasses included. Cited in the state text. |
+| `nd-spill-reporting-procedures` | North Dakota unified spill/release reporting procedures (spill.nd.gov) | used | fetched | law | Defines immediate reporting criteria (public health, waterways impacted or threatened, injuries, evacuations, wildlife). No public-notice duty for the reporter. |
+| `nd-beach-ecoli` | Beach E. coli monitoring (state parks, lakes) | watch | search_only | monitoring | No statewide public beach E. coli program or results page found (search only). Local health units or Parks and Recreation may sample individual beaches. |
+| `nd-ceris-open-records` | CERIS-ND public open records | watch | access_failed | events | DEQ's permit reporting system's public records (noncompliance submittals, final permits); not read: the interface needs a browser. Registered as a channel. |
+| `nd-deq-hab-program` | ND DEQ harmful algal bloom advisories and warnings (Story Map and press releases) | watch | fetched | advisories | DEQ's HAB program page (advisory and warning categories, 1 May to 31 December); its listing PDF is read as nd-deq-hab-listings. The Story Map gave no readable body. |
+| `nd-deq-press-releases` | ND DEQ press releases (PDF) | watch | search_only | news | HAB advisories weekly; occasional spill notices. PDF only, no feed found. |
+| `nd-echo-dmr` | ECHO DMR monthly data for ND POTWs | watch | inferred | permits | No CSO permits in ND, so no CSO event counts; SSOs are not DMR parameters. |
+| `nd-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), ND rows | watch | fetched | events | 0 North Dakota reports in EPA's 2026-11-12 current and all-versions tables (5 North Dakota permits in the collection-system table). DEQ's own reporting system is CERIS-ND. Watched: a report would be read once ND is added to the feed. |
+| `nd-permit-factsheet-sso-tables` | NDPDES permit factsheet overflow and bypass tables (Fargo, Grand Forks) | watch | fetched | events | Not ingested: Fargo's package is image-only and Grand Forks' table could not be read safely by rule; history to reconcile with an agency export. Registered as a channel with its barrier. |
+| `nd-deq-eir-legacy-oilfield` | ND DEQ Oilfield Environmental Incidents - Historical (1975-2020) | rejected | search_only | events | Oilfield releases only; no sewage. |
+| `nd-hazconnect-public-incidents` | North Dakota Unified Spill Reporting System (HazConnect) public incident list | unreachable | access_failed | events | The public list answered 403 with Cloudflare's block page to the project's identified client on 2026-11-14, as on 2026-11-03 and 2026-11-09. A barrier to register, not to get around: the fix is a supported export or allow-listing from DEQ and the Department of Emergency Services. |

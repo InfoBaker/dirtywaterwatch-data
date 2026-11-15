@@ -1,0 +1,224 @@
+{
+ "state": "ND",
+ "source": {
+  "name": "USGS National Hydrography Dataset, Waterbody - Large Scale",
+  "url": "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/12",
+  "fetched_at": "2026-11-14"
+ },
+ "rule": "one point inside the named lake's NHD outline, in a county DEQ lists for it, 0.001 degree",
+ "lakes": [
+  {
+   "lake": "Devils Lake",
+   "counties": [
+    "Ramsey",
+    "Benson"
+   ],
+   "gnis_name": "Devils Lake",
+   "gnis_id": "01034194",
+   "lat": 48.025,
+   "lon": -98.955,
+   "county": "Ramsey County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Lake Brekken",
+   "counties": [
+    "McLean"
+   ],
+   "gnis_name": "Lake Brekken",
+   "gnis_id": "01028125",
+   "lat": 47.547,
+   "lon": -100.894,
+   "county": "McLean County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Lake Ilo",
+   "counties": [
+    "Dunn"
+   ],
+   "gnis_name": "Lake Ilo",
+   "gnis_id": "01029591",
+   "lat": 47.339,
+   "lon": -102.672,
+   "county": "Dunn County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Lake Ashtabula",
+   "counties": [
+    "Barnes"
+   ],
+   "gnis_name": "Lake Ashtabula",
+   "gnis_id": "01027758",
+   "lat": 47.179,
+   "lon": -97.979,
+   "county": "Barnes County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Lake Isabel",
+   "counties": [
+    "Kidder"
+   ],
+   "gnis_name": "Lake Isabel",
+   "gnis_id": "01029628",
+   "lat": 46.821,
+   "lon": -99.748,
+   "county": "Kidder County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Patterson Lake",
+   "counties": [
+    "Stark"
+   ],
+   "gnis_name": "Edward Arthur Patterson Lake",
+   "gnis_id": "01028817",
+   "lat": 46.858,
+   "lon": -102.857,
+   "county": "Stark County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Antelope Lake",
+   "counties": [
+    "Pierce"
+   ],
+   "gnis_name": "Antelope Lakes",
+   "gnis_id": "01027713",
+   "lat": 47.962,
+   "lon": -100.116,
+   "county": "Pierce County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Blacktail Dam",
+   "counties": [
+    "Williams"
+   ],
+   "gnis_name": "Blacktail Lake",
+   "gnis_id": "01028034",
+   "lat": 48.433,
+   "lon": -103.734,
+   "county": "Williams County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Horsehead Lake",
+   "counties": [
+    "Kidder"
+   ],
+   "gnis_name": "Horsehead Lake",
+   "gnis_id": "01029541",
+   "lat": 47.049,
+   "lon": -99.782,
+   "county": "Kidder County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Bowman - Haley Dam",
+   "counties": [
+    "Bowman"
+   ],
+   "gnis_name": "Bowman-Haley Lake",
+   "gnis_id": "01027630",
+   "lat": 45.979,
+   "lon": -103.26,
+   "county": "Bowman County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Lake Tschida",
+   "counties": [
+    "Grant"
+   ],
+   "gnis_name": "Lake Tschida",
+   "gnis_id": "01032544",
+   "lat": 46.609,
+   "lon": -101.857,
+   "county": "Grant County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Lake Darling",
+   "counties": [
+    "Renville"
+   ],
+   "gnis_name": "Lake Darling",
+   "gnis_id": "01028612",
+   "lat": 48.584,
+   "lon": -101.61,
+   "county": "Renville County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "Buffalo Lodge Lake",
+   "counties": [
+    "McHenry"
+   ],
+   "gnis_name": "Buffalo Lodge Lake",
+   "gnis_id": "01034744",
+   "lat": 48.327,
+   "lon": -100.756,
+   "county": "McHenry County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  },
+  {
+   "lake": "North Lake Washington",
+   "counties": [
+    "Eddy"
+   ],
+   "gnis_name": "North Washington Lake",
+   "gnis_id": "01030489",
+   "lat": 47.756,
+   "lon": -98.712,
+   "county": "Eddy County",
+   "basis": "a point inside the NHD waterbody of that GNIS name in the county DEQ lists"
+  }
+ ],
+ "without_point": [
+  {
+   "lake": "Sykeston Dam",
+   "counties": [
+    "Wells"
+   ],
+   "why": "no NHD waterbody named 'Sykeston Dam' in Wells County"
+  },
+  {
+   "lake": "West Lake Napoleon",
+   "counties": [
+    "Logan"
+   ],
+   "why": "no NHD waterbody named 'West Lake Napoleon' in Logan County"
+  },
+  {
+   "lake": "Clear Lake",
+   "counties": [
+    "Pierce"
+   ],
+   "why": "no NHD waterbody named 'Clear Lake' in Pierce County"
+  },
+  {
+   "lake": "Larimore Dam",
+   "counties": [
+    "Grand Forks"
+   ],
+   "why": "no NHD waterbody named 'Larimore Dam' in Grand Forks County"
+  },
+  {
+   "lake": "Buffalo Lake",
+   "counties": [
+    "Sargent"
+   ],
+   "why": "no NHD waterbody named 'Buffalo Lake' in Sargent County"
+  },
+  {
+   "lake": "South Golden Lake",
+   "counties": [
+    "Steele"
+   ],
+   "why": "no NHD waterbody named 'South Golden Lake' in Steele County"
+  }
+ ]
+}

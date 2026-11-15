@@ -1,0 +1,29 @@
+id: "nd-deq-eir-legacy-general"
+name: "ND DEQ General Environmental Incidents - Historical (1975-2020), the sewage rows"
+url: "https://deq.nd.gov/FOIA/Spills/defaultarc.aspx/"
+homepage: "https://deq.nd.gov/WQ/4_Spill_Investigations/Reports.aspx"
+kind: "html"
+level: "state"
+# Read by pipeline/ingest/nd_deq_eir_legacy.py through the archive's own search ("sewage", "sewer", "septic"; the search
+#   covers every column but the dates), at most once every 30 days (the archive is frozen at 2020): one record per
+#   incident whose contaminant names sewage, a sewer or a septic system, dated to the incident day, reported day kept,
+#   no end, the county's zone, the point to 0.001 degree (a septic or on-site housing row keeps its county only).
+# Real read 2026-11-14: 4,452 incidents in the archive; the searches return "sewage" 31, "sewer" 3, "septic" 3; 36 kept
+#   (32 sso, 4 plant_bypass: treated sewage or effluent), 2003-01-28 to 2020-12-10, 19 in Grand Forks County, Mountain
+#   time for 7 (Dunn, Stark, McKenzie); one ("potable water out of septic truck") dropped; EIR2032 a second filing of
+#   EIR2031. Volumes: 29 given (largest 500,000 gallons, Grand Forks, 2019-09-21, two reports), 7 blank.
+#   The archive gives no end, no receiving water and no party; summary PDFs per incident carry reporters' contacts and
+#   are not read.
+cadence: "frozen (1975 to 2020); re-read every 30 days"
+license: "none stated"
+attribution: "North Dakota Department of Environmental Quality"
+enabled: true
+role: "events"
+event_types: ["sso", "plant_bypass"]
+states: ["ND"]
+registry_ids: ["nd-deq-eir-legacy-general"]
+access: ["html"]
+access_detail: "ASP.NET table (15 rows a page, a search box and page postbacks); columns Incident ID, Date Reported, Date Incident, County, TwnRngSec, Latitude, Longitude, Contaminant, Volume, Units, Contained."
+machine_readable: false
+legal_basis: "N.D. Admin. Code 33.1-16-02.1-11(4) (immediate report of a spill to DEQ)"
+checked: "2026-11-14"
