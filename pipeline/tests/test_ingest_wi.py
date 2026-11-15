@@ -1021,6 +1021,18 @@ def test_w_2_stated_minutes_and_ends_of_both_types_reach_the_status_engine():
                      "and a separate sewer overflow began on June 3, 2026 at 4:00 am and ended at 6:00 am on June 3."])
     assert (r["cso"]["started_at"], r["cso"]["ended_at"]) == ("2026-06-01T13:00:00-05:00", "2026-06-02T14:00:00-05:00")
     assert (r["sso"]["started_at"], r["sso"]["ended_at"]) == ("2026-06-03T04:00:00-05:00", "2026-06-03T06:00:00-05:00")
+    # the other ways a post states a start and an end, for both types at once
+    for s in ("Combined and separate sewer overflows started on June 1, 2026 at 1:00 pm and stopped at 2:00 pm on "
+              "June 2, 2026.",
+              "A combined sewer overflow and a separate sewer overflow commenced on June 1, 2026, at around 1:00 pm "
+              "and ceased on June 2, 2026, at 2:00 pm."):
+        r = _recs(t, [t, s], stamp=ST)
+        for k in ("cso", "sso"):
+            assert r[k]["started_at"] == "2026-06-01T13:00:00-05:00", (s, k)
+            assert r[k]["ended_at"] == "2026-06-02T14:00:00-05:00", (s, k)
+    # an end not completed is still no end, in any of those words
+    r = _recs(t, [t, "A combined sewer overflow occurred on June 1, 2026 and has not stopped."], stamp=ST)
+    assert r["cso"]["ended_at"] is None
     # times stated in a following sentence for both overflows together
     r = _recs(t, stamp=ST, lines=[t, "A combined sewer overflow and a separate sewer overflow occurred on June 1, 2026.",
                   "Both overflows ended at 2:00 pm on June 2, 2026."])

@@ -166,21 +166,26 @@ STAMP = re.compile(r"^\s*(\d{2})/(\d{2})/(\d{2})\s+(\d{1,2}):(\d{2}):?\s*([ap])\
 CLOCK = r"(?P<h>\d{1,2})(?::(?P<mi>\d{2}))?\s*(?P<ap>[ap])\.?\s*m\.?"
 ANY_DATE = rf"(?:{MON}\s+{DAY}(?:,?\s+(?:19|20)\d\d)?|\d{{1,2}}[/-]\d{{1,2}}[/-](?:\d{{4}}|\d{{2}}))"
 START_RX = [
-    re.compile(rf"\bbegan\s+on\s+(?P<d>{ANY_DATE})\s+at\s+(?:around\s+|approximately\s+)?{CLOCK}", re.I),
-    re.compile(rf"\bstarted\s+(?:at\s+)?(?:approximately\s+)?{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
+    re.compile(rf"\b(?:began|started|commenced|occurred)\s+on\s+(?P<d>{ANY_DATE}),?\s+at\s+"
+               rf"(?:around\s+|approximately\s+|about\s+)?{CLOCK}", re.I),
+    re.compile(rf"\b(?:started|began|commenced)\s+(?:at\s+)?(?:approximately\s+|around\s+|about\s+)?{CLOCK}\s+on\s+"
+               rf"(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\b(?:around|approximately|at)\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
 ]
 # an end only from words saying the overflow did end ("ended at", "continued until"): "will continue until" and the
 # like are not ends (Astra re-review 2026-11-15 P1-3); NEGATED also refuses the clause
 END_RX = [
     re.compile(rf"\b(?:continued|lasted|ran|persisted)\s+until\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
-    re.compile(rf"\bended\s+at\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
-    re.compile(rf"\bended\s+on\s+(?P<d>{ANY_DATE}),?\s+at\s+{CLOCK}", re.I),
+    re.compile(rf"\b(?:ended|stopped|ceased|concluded)\s+(?:at\s+)?(?:approximately\s+|around\s+|about\s+)?{CLOCK}\s+"
+               rf"on\s+(?P<d>{ANY_DATE})", re.I),
+    re.compile(rf"\b(?:ended|stopped|ceased|concluded)\s+on\s+(?P<d>{ANY_DATE}),?\s+at\s+"
+               rf"(?:approximately\s+|around\s+|about\s+)?{CLOCK}", re.I),
 ]
 
 # the last cue before a time says whose time it is: "ended at 2:00 pm on June 2" is never a start (Astra re-review
 # 2026-11-15 P1-2)
-START_CUE = re.compile(r"\b(?:began|begin\w*|start\w*|occurred|occured|took place|triggered|initiated)\b", re.I)
+START_CUE = re.compile(r"\b(?:began|begin\w*|start\w*|commenc\w*|occurred|occured|took place|triggered|initiated)\b",
+                       re.I)
 END_CUE = re.compile(r"\b(?:ended|ending|end|until|stopped|ceased|concluded|lasted|continued)\b", re.I)
 
 
@@ -229,8 +234,8 @@ NEGATED = re.compile(r"\b(?:no|not|never|without|zero|none|neither|nor|if|unless
                      r"projected|avoid\w*|prevent\w*)\b", re.I)
 # a sentence is read clause by clause: "a combined sewer overflow occurred ..., but no separate sewer overflow occurred"
 # reports the first and denies the second (Astra re-review 2026-11-15 P1-1)
-CLAUSE = re.compile(r",?\s+(?:but|however,?|whereas|while)\s+|;\s*|,?\s+and\s+(?=(?:no|not|there was no|there were no)\b)",
-                    re.I)
+CLAUSE = re.compile(r",?\s+(?:but|however,?|whereas|while)\s+|;\s*|,?\s+and\s+(?=(?:no|not|there was no|there were no|"
+                    r"(?:it\s+|they\s+)?(?:has|have|had|did|was|were|is)\s+(?:not|yet to)|never)\b)", re.I)
 # the post says the sewage reached no water ("No wastewater entered Lake Michigan or nearby rivers")
 NO_WATER = re.compile(r"\bno (?:wastewater|sewage|overflow)\b[^.]{0,40}\b(?:entered|reached|went into|flowed into)\b[^.]*", re.I)
 # contact and media lines: the people named in them are not kept
@@ -240,7 +245,7 @@ NOT_REPORT = re.compile(r"\b(?:reduc\w*|prevent\w*|risk of|invest\w*|plan\w*|sin
                         r"protect\w*|captured|deep tunnel|storage|capacity|budget|project)\b", re.I)
 LOCAL = re.compile(r"local (?:and regional )?sewer systems?|systems? that are owned by municipalities|"
                    r"(?:were|was) reported by|municipal(?:ities|ity)? (?:sewer|system)", re.I)
-REPORT_CUE = re.compile(r"\b(?:took place|occurred|occured|occurring|started|began|led to|spill\w*|initiated|resulted|"
+REPORT_CUE = re.compile(r"\b(?:took place|occurred|occured|occurring|started|began|commenc\w*|led to|spill\w*|initiated|resulted|"
                         r"reporting|reported|"
                         r"regarding|estimated|volume)\b|:\s*\d", re.I)
 SPILL_CUE = re.compile(r"\b(?:spill\w*|releas\w*|discharg\w*|overflow\w*)\b", re.I)
@@ -579,7 +584,8 @@ def period(text: str, ref: date, skip_tied: bool = False) -> tuple[date, date | 
 # "took place", "began", "started", "initiated" or "triggered", or right after the overflow itself ("the wastewater
 # spill on September 18"), with no end, report or storm word between; an end stays an end and a reporting day stays a
 # reporting day (Astra verification 2026-11-15, earlier #2)
-START_TIE = re.compile(r"\b(?:began|begin\w*|start\w*|occurred|occured|occurring|took place|triggered|initiated)\b",
+START_TIE = re.compile(r"\b(?:began|begin\w*|start\w*|commenc\w*|occurred|occured|occurring|took place|triggered|"
+                       r"initiated)\b",
                        re.I)
 NOUN_ON = re.compile(r"\b(?:overflow|spill|release|discharge|bypass)\w*\s+on\s+$", re.I)
 REPORT_TIE = re.compile(r"\b(?:report\w*|posted|published|submitted|sent|notified|announced|filed|letter)\b", re.I)
