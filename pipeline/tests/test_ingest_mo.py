@@ -727,3 +727,22 @@ def test_kc_and_shared_links_treat_a_year_shaped_house_number_as_a_house_number(
         "https://x.org/news/overflow-may-27-2026/"
     assert K.safe_link("https://x.org/news/a-slug/", "https://x.org/?post_type=news1&p=9") == \
         "https://x.org/?post_type=news1&p=9"
+
+
+def test_kc_end_date_before_the_stop_verb_and_ambiguous_dates():
+    """Verification P2-2: the end clause's own date, before or after the verb; several dates before it: no end."""
+    from datetime import date
+    pub = date(2026, 6, 1)
+    t = K.times("Crews responded May 27, 2026 at 9:00 a.m. to an overflow. On May 29, 2026, the overflow stopped at "
+                "4:00 p.m.", pub)
+    assert t["start"].startswith("2026-05-27T09:00") and t["end"] == "2026-05-29T16:00:00-05:00"
+    t = K.times("Crews responded May 27 at 9:00 a.m. to an overflow. The overflow stopped May 28 at 4:00 p.m.", pub)
+    assert t["end"] == "2026-05-28T16:00:00-05:00"
+    t = K.times("Crews responded May 27 at 9:00 a.m. to an overflow. Between May 27 and May 29 the overflow stopped "
+                "at 4:00 p.m.", pub)
+    assert t["end"] is None
+    t = K.times("Crews responded May 27 at 9:00 a.m. to an overflow. The overflow stopped at 4:00 p.m.", pub)
+    assert t["end"] == "2026-05-27T16:00:00-05:00"
+    t = K.times("Crews responded Dec. 31, 2025 at 10:00 p.m. to an overflow. On Jan. 1, 2026, it stopped at 2:00 a.m.",
+                date(2026, 1, 2))
+    assert t["end"] == "2026-01-01T02:00:00-06:00"
