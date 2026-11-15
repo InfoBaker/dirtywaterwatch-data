@@ -60270,27 +60270,46 @@
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://dnr.mo.gov/water/alerts-hazards/harmful-algal-bloom-hab-reports-map",
+  "url": "https://gis.dnr.mo.gov/host/rest/services/wqm/HAB_SUBMIT_POINTS/MapServer/6",
   "access": [
-   "arcgis",
-   "html"
+   "arcgis"
   ],
-  "access_detail": null,
-  "machine_readable": false,
-  "sample_record": null,
-  "fields": [],
-  "fills_event_fields": [],
-  "cannot_fill": [],
-  "has_coordinates": false,
+  "access_detail": "The HAB Public Viewer experience (96d87e1fda0e445b90c23ce52d67a2d9) on DNR's HAB map page reads layer 6 (WQM_HAB_POINTS_PUBLIC) of gis.dnr.mo.gov's HAB_SUBMIT_POINTS service; queried 2026-11-15 (UTC): 283 reports, 39 under BloomStat advise; layer 5 counts privately owned waters by county; no key.",
+  "machine_readable": true,
+  "sample_record": {
+   "BloomStat": "advise",
+   "WBName": "Example Lake",
+   "HABODat": 1779062400000,
+   "CaseStatus": "Closed",
+   "HABCo": "Example County"
+  },
+  "fields": [
+   "globalid",
+   "BloomStat",
+   "WBName",
+   "HABODat",
+   "CaseStatus",
+   "HABCo"
+  ],
+  "fills_event_fields": [
+   "waterbody",
+   "coordinates",
+   "advice_text (DNR's map label)"
+  ],
+  "cannot_fill": [
+   "started_at (the observation day only)",
+   "ended_at"
+  ],
+  "has_coordinates": true,
   "has_outfall_ids": false,
-  "cadence": null,
+  "cadence": "as DNR edits the layer",
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "watch",
-  "status_reason": "An ArcGIS Experience app and a Survey123 form; the layer was not resolved in this build. Registered and watched for availability.",
-  "verified": "search_only",
-  "checked": "2026-11-14",
+  "status": "used",
+  "status_reason": "Read by ingest/mo_dnr_hab.py: the reports DNR's map shows as a bloom present or the water closed, dated to the reads that show them.",
+  "verified": "fetched",
+  "checked": "2026-11-15",
   "notes": "",
   "area": "mo"
  },
