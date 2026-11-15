@@ -13,7 +13,7 @@ Records (a map of what is in effect, read as a snapshot)
   - One record per row of any layer (source_record_id '<layer>-<OBJECTID>'), event_type hab_advisory (blooms, never
     sewage), status advisory_active while the map shows it; advice_text is DEP's Advisory text in its words.
   - started_at is the first read of the map that showed it (time_precision poll): DEP gives the day the bloom was
-    observed (raw.date_observed, a date on Eastern time), not the day an advisory was issued, so no issue date is
+    observed (raw.date_observed_utc, kept as DEP stores it; its precision unknown), not the day an advisory was issued, so no issue date is
     invented; reported_at, published_at and source_updated_at stay null. A row that leaves the map and comes back is
     a new episode; the earlier one is kept under '<key>~2'. raw._last_seen_in_source is the latest read
     that showed it, so the status build keeps it in effect while the map shows it.
@@ -143,23 +143,23 @@ def scrub_advisory(text: str) -> str | None:
     return out
 
 
-def observed(attrs: dict) -> tuple[str | None, str | None]:
-    """(the observation as DEP stores it, an instant in UTC; the day it names). An esri date field is an instant; a
-    value at exactly midnight UTC is a date entered with no time (the usual esri convention), so its day is the UTC
-    date; any other instant is dated in Eastern time. Both are kept: the instant in raw.date_observed_utc."""
+def observed(attrs: dict) -> tuple[str | None, int | None]:
+    """(the observation as DEP stores it, as a UTC instant; the stored value itself, epoch milliseconds). The layer's
+    metadata gives the field no time reference and does not say whether it holds a date or a time of day, so no
+    calendar day is read from it: the instant is kept as stored, its precision recorded as unknown."""
     v = attrs.get("Date_Observed", attrs.get("DateObserved"))
     try:
-        t = datetime.fromtimestamp(int(v) / 1000, UTC) if v not in (None, "") else None
+        ms = int(v) if v not in (None, "") else None
+        t = datetime.fromtimestamp(ms / 1000, UTC) if ms is not None else None
     except (TypeError, ValueError, OverflowError):
         return None, None
     if t is None:
         return None, None
-    day = t.date() if (t.hour, t.minute, t.second) == (0, 0, 0) else t.astimezone(ZoneInfo(TZ)).date()
-    return t.strftime("%Y-%m-%dT%H:%M:%SZ"), day.isoformat()
+    return t.strftime("%Y-%m-%dT%H:%M:%SZ"), ms
 
 
 def rows_of(answers: dict) -> dict[str, dict]:
-    """{'<layer>-<OBJECTID>': {kind, advisory, date_observed, lat, lon}}; ValueError for a layer error."""
+    """{'<layer>-<OBJECTID>': {kind, advisory, date_observed_utc, date_observed_source_ms, lat, lon, extent}}; ValueError for a layer error."""
     out = {}
     for lid, kind in LAYERS.items():
         doc = answers.get(str(lid))
@@ -171,10 +171,10 @@ def rows_of(answers: dict) -> dict[str, dict]:
         for f in doc["features"]:
             a = f.get("attributes") or {}
             lat, lon, extent = place(kind, f.get("geometry") or {})
-            utc, day = observed(a)
+            utc, ms = observed(a)
             text = " ".join(str(a.get("Advisory") or "").split())
             out[f"{lid}-{a.get('OBJECTID')}"] = {"kind": kind, "advisory": scrub_advisory(text),
-                                                 "date_observed": day, "date_observed_utc": utc, "lat": lat, "lon": lon,
+                                                 "date_observed_utc": utc, "date_observed_source_ms": ms, "lat": lat, "lon": lon,
                                                  "extent": extent}
     return out
 
@@ -204,11 +204,13 @@ def records(state: dict) -> list[dict]:
     out = []
     for k, it in sorted((state.get("items") or {}).items()):
         left = it.get("left_at")
-        raw = {"layer_row": k.split("~")[0], "geometry_kind": it.get("kind"), "date_observed": it.get("date_observed"),
-               "date_observed_utc": it.get("date_observed_utc"),
-               "date_observed_basis": ("Date_Observed: DEP's observation of the bloom, stored as an instant "
-                                       "(date_observed_utc); a value at midnight UTC is read as that date, any other "
-                                       "instant as its Eastern date"),
+        raw = {"layer_row": k.split("~")[0], "geometry_kind": it.get("kind"),
+               "date_observed_utc": it.get("date_observed_utc"), "date_observed_source_ms": it.get("date_observed_source_ms"),
+               "date_observed_precision": "unknown" if it.get("date_observed_utc") else None,
+               "date_observed_basis": ("Date_Observed: DEP's observation of the bloom, an esri date field kept as "
+                                       "stored (date_observed_utc, the instant in UTC; date_observed_source_ms, the "
+                                       "value itself); DEP's layer does not say whether it holds a date or a time of "
+                                       "day, nor in which zone, so no calendar day is read from it"),
                "agency_extent": it.get("extent"),
                "marker_basis": {"point": "DEP's point", "segment": "half way along DEP's segment",
                                 "area": "an interior point of DEP's area"}.get(it.get("kind")),

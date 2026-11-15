@@ -133,7 +133,7 @@ def test_bloom_map_snapshot_opens_at_the_poll_and_lifts_at_the_poll():
     r = H.records(state)[0]
     assert r["event_type"] == "hab_advisory" and r["status"] == "advisory_active"
     assert r["started_at"] == "2026-07-01T12:00:00Z" and r["time_precision"] == "poll"
-    assert r["reported_at"] is None and r["source_updated_at"] is None and r["raw"]["date_observed"]
+    assert r["reported_at"] is None and r["source_updated_at"] is None and r["raw"]["date_observed_utc"]
     assert (r["lat"], r["lon"]) == (39.123, -80.123)
     state = H.update(state, H.rows_of(_answers([])), "2026-07-08T12:00:00Z")
     r = H.records(state)[0]
@@ -289,11 +289,18 @@ def test_bloom_map_reappearance_keeps_the_earlier_episode():
     assert recs["1-7"]["started_at"] == "2026-07-20T12:00:00Z" and recs["1-7"]["status"] == "advisory_active"
 
 
-def test_observation_at_utc_midnight_is_that_date():
-    utc, day = H.observed({"Date_Observed": 1782864000000})      # 2026-07-01T00:00:00Z
-    assert (utc, day) == ("2026-07-01T00:00:00Z", "2026-07-01")
-    utc, day = H.observed({"Date_Observed": 1782876600000})      # 2026-07-01T03:30:00Z: June 30 in Eastern time
-    assert day == "2026-06-30" and utc == "2026-07-01T03:30:00Z"
+def test_observation_is_kept_as_stored_with_no_inferred_day():
+    """Re-review P2-9: UTC midnight and the instants beside it keep DEP's stored value; no calendar day is read."""
+    for ms, iso in ((1782864000000, "2026-07-01T00:00:00Z"), (1782863999000, "2026-06-30T23:59:59Z"),
+                    (1782864001000, "2026-07-01T00:00:01Z"), (1782876600000, "2026-07-01T03:30:00Z")):
+        assert H.observed({"Date_Observed": ms}) == (iso, ms)
+        a = _answers([7])
+        a["1"]["features"][0]["attributes"]["Date_Observed"] = ms
+        raw = H.records(H.update({}, H.rows_of(a), "2026-07-02T12:00:00Z"))[0]["raw"]
+        assert raw["date_observed_utc"] == iso and raw["date_observed_source_ms"] == ms
+        assert raw["date_observed_precision"] == "unknown" and "date_observed" not in raw
+        assert "no calendar day" in raw["date_observed_basis"]
+    assert H.observed({"DateObserved": None}) == (None, None)
 
 
 def test_state_text_counts_follow_the_outlet_file():
