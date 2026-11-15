@@ -1,5 +1,5 @@
 {
- "built": "2026-11-15T03:48:54Z",
+ "built": "2026-11-15T04:22:21Z",
  "counts": {
   "never_likely": 7,
   "permits": 538,
@@ -16,7 +16,7 @@
   "to": "2026-11-14T06:00:00Z"
  },
  "method": "Each operator's storms since 2015 (runs of days with at least 0.1 inch of rain at its combined sewer outfalls, NOAA MRMS radar) are paired with its own dated overflow reports. Discharge is possible from the smallest storm it ever reported an overflow after, rounded down to a step, and likely from the smallest step at which it reported an overflow after at least half of the storms of that size and of all larger storms together. Below the possible amount no caution is shown only when at least 30 storms that small are on record and none was followed by a report.",
- "method_version": 1,
+ "method_version": 2,
  "permits": {
   "CA0037664": {
    "bands": [],
@@ -27,7 +27,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SOUTHEAST WPCP, NORTH POINT WWF, BAYSIDE WWF",
    "not_used": {
     "advisories": 0,
@@ -76,7 +76,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "OCEANSIDE WPCP",
    "not_used": {
     "advisories": 0,
@@ -125,7 +125,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NPD MAJ-BAYSIDE CSO",
    "not_used": {
     "advisories": 0,
@@ -161,7 +161,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SACRAMENTO COMBINED WWCTS",
    "not_used": {
     "advisories": 0,
@@ -263,7 +263,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BRIDGEPORT WESTSIDE WPCA",
    "not_used": {
     "advisories": 0,
@@ -401,7 +401,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "HARTFORD WPCF",
    "not_used": {
     "advisories": 0,
@@ -548,7 +548,7 @@
     "rounded_in": 0.1,
     "size_in": 0.12
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NEW HAVEN EAST SHORE STP",
    "not_used": {
     "advisories": 0,
@@ -701,7 +701,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NORWICH WPCF",
    "not_used": {
     "advisories": 0,
@@ -864,7 +864,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "WATERBURY WPCF",
    "not_used": {
     "advisories": 0,
@@ -1002,7 +1002,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BRIDGEPORT EAST SIDE WPCF",
    "not_used": {
     "advisories": 0,
@@ -1141,7 +1141,7 @@
     "rounded_in": 0.25,
     "size_in": 0.26
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "D.C. WASA (BLUE PLAINS)",
    "not_used": {
     "advisories": 0,
@@ -1197,7 +1197,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "COLUMBUS WATER WORKS (COLUMBUS CSO)",
    "not_used": {
     "advisories": 0,
@@ -1233,7 +1233,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ALBANY, CITY OF (ALBANY CSO)",
    "not_used": {
     "advisories": 0,
@@ -1269,7 +1269,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ATLANTA, CITY OF (EAST AREA CSS)",
    "not_used": {
     "advisories": 0,
@@ -1365,7 +1365,7 @@
     "rounded_in": 0.25,
     "size_in": 0.28
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "ATLANTA, CITY OF (WEST AREA CSO)",
    "not_used": {
     "advisories": 0,
@@ -1417,7 +1417,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "OREGON STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -1513,7 +1513,7 @@
     "rounded_in": 2.0,
     "size_in": 4.14
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "LITCHFIELD STP",
    "not_used": {
     "advisories": 0,
@@ -1565,7 +1565,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Forest View",
    "not_used": {
     "advisories": 0,
@@ -1601,7 +1601,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FOX METRO WRD STP",
    "not_used": {
     "advisories": 0,
@@ -1697,7 +1697,7 @@
     "rounded_in": 1.0,
     "size_in": 1.24
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MORRIS - MAIN STP",
    "not_used": {
     "advisories": 0,
@@ -1749,7 +1749,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MONMOUTH MAIN STP",
    "not_used": {
     "advisories": 0,
@@ -1785,7 +1785,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GREATER PEORIA SANITARY AND SEWAGE DISTRICT",
    "not_used": {
     "advisories": 0,
@@ -1821,7 +1821,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PARIS STP, CITY OF ",
    "not_used": {
     "advisories": 0,
@@ -1857,7 +1857,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HARTFORD CSO OUTFALL, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -1893,7 +1893,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LEROY STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -1929,7 +1929,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FAIRBURY STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -1965,7 +1965,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CHARLESTON STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -2001,7 +2001,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "JACKSONVILLE STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -2104,7 +2104,7 @@
     "rounded_in": 0.5,
     "size_in": 0.58
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "TOLUCA SEWAGE TREATMENT PLANT, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -2241,7 +2241,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BELLEVILLE STP #1, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -2366,7 +2366,7 @@
     "rounded_in": 0.1,
     "size_in": 0.17
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "SHELBYVILLE STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -2445,7 +2445,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SANGAMON COUNTY WATER RECLAMATION DISTRICT ",
    "not_used": {
     "advisories": 0,
@@ -2481,7 +2481,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SPRING CREEK STP",
    "not_used": {
     "advisories": 0,
@@ -2517,7 +2517,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "STREATOR STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -2553,7 +2553,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WATSEKA SEWAGE TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -2589,7 +2589,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MOMENCE STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -2685,7 +2685,7 @@
     "rounded_in": 0.1,
     "size_in": 0.19
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "GEORGETOWN STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -2774,7 +2774,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GRANVILLE STP, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -2810,7 +2810,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FARMER CITY STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -2846,7 +2846,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GWA CSO STORMWATER FACILITY",
    "not_used": {
     "advisories": 0,
@@ -2949,7 +2949,7 @@
     "rounded_in": 2.0,
     "size_in": 2.17
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "JOLIET EASTSIDE STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -3067,7 +3067,7 @@
     "rounded_in": 0.25,
     "size_in": 0.41
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CARLINVILLE STP",
    "not_used": {
     "advisories": 0,
@@ -3161,7 +3161,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GALESBURG SANITARY DISTRICT STP",
    "not_used": {
     "advisories": 0,
@@ -3197,7 +3197,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MILFORD STP, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -3233,7 +3233,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GIBSON CITY WPCF, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -3269,7 +3269,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HAVANA STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -3362,7 +3362,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CAIRO STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -3414,7 +3414,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "OGLESBY STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -3516,7 +3516,7 @@
     "rounded_in": 1.0,
     "size_in": 1.2
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BEARDSTOWN SANITARY DISTRICT STP",
    "not_used": {
     "advisories": 0,
@@ -3599,7 +3599,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "A.J. LAROCCA WASTEWATER TREATMENT FACILITY",
    "not_used": {
     "advisories": 0,
@@ -3702,7 +3702,7 @@
     "rounded_in": 2.0,
     "size_in": 3.18
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "ALTON STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -3754,7 +3754,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BLOOMINGTON NORMAL WRD -WEST STP",
    "not_used": {
     "advisories": 0,
@@ -3850,7 +3850,7 @@
     "rounded_in": 2.0,
     "size_in": 4.45
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CANTON WEST STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -3902,7 +3902,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MWRD",
    "not_used": {
     "advisories": 0,
@@ -3988,7 +3988,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MWRDGC CALUMET WRP",
    "not_used": {
     "advisories": 0,
@@ -4044,7 +4044,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MWRDGC LEMONT WRP",
    "not_used": {
     "advisories": 0,
@@ -4080,7 +4080,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MWRDGC TERRENCE J O'BRIEN WTR RECLAMATION PLANT",
    "not_used": {
     "advisories": 0,
@@ -4116,7 +4116,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "COWDEN STP",
    "not_used": {
     "advisories": 0,
@@ -4152,7 +4152,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SANITARY DISTRICT OF DECATUR MAIN STP",
    "not_used": {
     "advisories": 0,
@@ -4188,7 +4188,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "METRO EAST FACILITY SANITARY DISTRICT",
    "not_used": {
     "advisories": 0,
@@ -4224,7 +4224,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "EFFINGHAM STP",
    "not_used": {
     "advisories": 0,
@@ -4260,7 +4260,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FOX RIVER WRD - ALBIN D PAGORSKI WRF",
    "not_used": {
     "advisories": 0,
@@ -4296,7 +4296,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LASALLE SOUTH STP, CITY OF ",
    "not_used": {
     "advisories": 0,
@@ -4332,7 +4332,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LINCOLN STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -4368,7 +4368,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MASON CITY STP",
    "not_used": {
     "advisories": 0,
@@ -4404,7 +4404,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MATTOON STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -4500,7 +4500,7 @@
     "rounded_in": 0.25,
     "size_in": 0.39
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "METROPOLIS STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -4589,7 +4589,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MORTON SEWAGE TREATMENT PLANT NO 2",
    "not_used": {
     "advisories": 0,
@@ -4625,7 +4625,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "OTTAWA WWTP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -4661,7 +4661,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PONTIAC WWTP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -4697,7 +4697,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "QUINCY STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -4733,7 +4733,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PERU - STP #1, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -4769,7 +4769,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ROCK ISLAND MAIN STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -4805,7 +4805,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SPRING VALLEY STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -4901,7 +4901,7 @@
     "rounded_in": 1.0,
     "size_in": 1.36
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CHRISTIAN COUNTY WRD STP",
    "not_used": {
     "advisories": 0,
@@ -5056,7 +5056,7 @@
     "rounded_in": 0.1,
     "size_in": 0.15
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "WOOD RIVER STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -5143,7 +5143,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BUREAU JUNCTION STP, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -5179,7 +5179,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "EAST ST LOUIS COMBINED SEWER, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -5275,7 +5275,7 @@
     "rounded_in": 0.25,
     "size_in": 0.37
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "ILLINOIS AMERICAN WATER COMPANY - GRANITE CITY WWTP",
    "not_used": {
     "advisories": 0,
@@ -5387,7 +5387,7 @@
     "rounded_in": 0.25,
     "size_in": 0.28
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "VILLA PARK WET WEATHER STP, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -5505,7 +5505,7 @@
     "rounded_in": 0.25,
     "size_in": 0.29
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "PEKIN STP #1",
    "not_used": {
     "advisories": 0,
@@ -5683,7 +5683,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CASEY - NORTHEAST STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -5779,7 +5779,7 @@
     "rounded_in": 0.25,
     "size_in": 0.25
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "PEORIA CSOS, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -5917,7 +5917,7 @@
     "rounded_in": 1.5,
     "size_in": 1.95
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MINONK STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -5969,7 +5969,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "COMBINED SEWER OVERFLOW ",
    "not_used": {
     "advisories": 0,
@@ -6005,7 +6005,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PROPHETSTOWN STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -6041,7 +6041,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CHICAGO CSO, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -6077,7 +6077,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "COMBINED SEWER OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -6113,7 +6113,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MWRDGC- JAMES KIRIE WRP",
    "not_used": {
     "advisories": 0,
@@ -6209,7 +6209,7 @@
     "rounded_in": 0.1,
     "size_in": 0.23
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "AURORA, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -6261,7 +6261,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Mt. Prospect",
    "not_used": {
     "advisories": 0,
@@ -6297,7 +6297,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SAUGET-ABRTF",
    "not_used": {
     "advisories": 0,
@@ -6333,7 +6333,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "COMBINED SEWER OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -6369,7 +6369,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MARSHALL STP, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -6405,7 +6405,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ELGIN, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -6441,7 +6441,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BLOOMINGTON CSOS",
    "not_used": {
     "advisories": 0,
@@ -6477,7 +6477,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Golf",
    "not_used": {
     "advisories": 0,
@@ -6513,7 +6513,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PHOENIX CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -6549,7 +6549,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "EVANSTON CSOS, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -6585,7 +6585,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MELROSE PARK CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -6621,7 +6621,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LYONS CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -6657,7 +6657,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MORTON GROVE CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -6693,7 +6693,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Arlington Heights",
    "not_used": {
     "advisories": 0,
@@ -6729,7 +6729,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Riverdale",
    "not_used": {
     "advisories": 0,
@@ -6765,7 +6765,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LAGRANGE PARK CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -6801,7 +6801,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LA GRANGE CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -6837,7 +6837,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "South Holland",
    "not_used": {
     "advisories": 0,
@@ -6873,7 +6873,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Dixmoor",
    "not_used": {
     "advisories": 0,
@@ -6909,7 +6909,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WILMETTE CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -6945,7 +6945,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Schiller Park",
    "not_used": {
     "advisories": 0,
@@ -6981,7 +6981,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Park Ridge",
    "not_used": {
     "advisories": 0,
@@ -7017,7 +7017,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "RIVERSIDE CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -7053,7 +7053,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CALUMET PARK CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -7089,7 +7089,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "DOLTON",
    "not_used": {
     "advisories": 0,
@@ -7125,7 +7125,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Burnham",
    "not_used": {
     "advisories": 0,
@@ -7161,7 +7161,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Forest Park",
    "not_used": {
     "advisories": 0,
@@ -7197,7 +7197,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HARVEY CSOS, CITY",
    "not_used": {
     "advisories": 0,
@@ -7233,7 +7233,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "RIVER GROVE CSOS,  VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -7269,7 +7269,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Maywood",
    "not_used": {
     "advisories": 0,
@@ -7305,7 +7305,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Stickney",
    "not_used": {
     "advisories": 0,
@@ -7341,7 +7341,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "RIVER FOREST CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -7377,7 +7377,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CALUMET CITY CSOS",
    "not_used": {
     "advisories": 0,
@@ -7413,7 +7413,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "DES PLAINES CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -7449,7 +7449,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LANSING CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -7485,7 +7485,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MARKHAM CSOS, CITY OF",
    "not_used": {
     "advisories": 0,
@@ -7521,7 +7521,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FRANKLIN PARK CSOS",
    "not_used": {
     "advisories": 0,
@@ -7557,7 +7557,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "North Riverside",
    "not_used": {
     "advisories": 0,
@@ -7593,7 +7593,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Blue Island",
    "not_used": {
     "advisories": 0,
@@ -7629,7 +7629,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BROOKFIELD CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -7665,7 +7665,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Summit",
    "not_used": {
     "advisories": 0,
@@ -7701,7 +7701,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LINCOLNWOOD CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -7737,7 +7737,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Niles",
    "not_used": {
     "advisories": 0,
@@ -7773,7 +7773,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SKOKIE, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -7809,7 +7809,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "POSEN CSOS, VILLAGE OF",
    "not_used": {
     "advisories": 0,
@@ -7845,7 +7845,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "RWRA MAX RHOADS WWTP",
    "not_used": {
     "advisories": 0,
@@ -7881,7 +7881,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MAYSVILLE STP",
    "not_used": {
     "advisories": 0,
@@ -7917,7 +7917,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HENDERSON STP",
    "not_used": {
     "advisories": 0,
@@ -7953,7 +7953,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MORGANFIELD WWTP",
    "not_used": {
     "advisories": 0,
@@ -7989,7 +7989,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NORTHERN KY SANITATION DISTRICT 1- DRY CREEK",
    "not_used": {
     "advisories": 0,
@@ -8025,7 +8025,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ASHLAND STP",
    "not_used": {
     "advisories": 0,
@@ -8061,7 +8061,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MORRIS FORMAN WQTC MSD",
    "not_used": {
     "advisories": 121,
@@ -8097,7 +8097,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PADUCAH/MCCRACKEN COUNTY JSA - PADUCAH",
    "not_used": {
     "advisories": 0,
@@ -8133,7 +8133,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FRANKFORT MUNICIPAL STP",
    "not_used": {
     "advisories": 0,
@@ -8169,7 +8169,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PINEVILLE STP",
    "not_used": {
     "advisories": 0,
@@ -8205,7 +8205,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HARLAN STP",
    "not_used": {
     "advisories": 0,
@@ -8241,7 +8241,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LOYALL STP",
    "not_used": {
     "advisories": 0,
@@ -8277,7 +8277,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CATLETTSBURG STP",
    "not_used": {
     "advisories": 0,
@@ -8379,7 +8379,7 @@
     "rounded_in": 0.25,
     "size_in": 0.34
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MONTAGUE W P C F",
    "not_used": {
     "advisories": 0,
@@ -8567,7 +8567,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "FALL RIVER W W T P",
    "not_used": {
     "advisories": 0,
@@ -9084,7 +9084,7 @@
     "rounded_in": 0.1,
     "size_in": 0.18
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "GREATER LAWRENCE SANITARY DISTRICT",
    "not_used": {
     "advisories": 0,
@@ -9349,7 +9349,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "LYNN REGIONAL W P C F",
    "not_used": {
     "advisories": 0,
@@ -9615,7 +9615,7 @@
     "rounded_in": 0.5,
     "size_in": 0.68
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "GLOUCESTER W P C F",
    "not_used": {
     "advisories": 0,
@@ -9796,7 +9796,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "LOWELL REGIONAL WW UTILITY",
    "not_used": {
     "advisories": 0,
@@ -10187,7 +10187,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NEW BEDFORD WASTEWATER TREATMENT FACILITY",
    "not_used": {
     "advisories": 0,
@@ -10813,7 +10813,7 @@
     "rounded_in": 0.1,
     "size_in": 0.17
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "TAUNTON W W T P",
    "not_used": {
     "advisories": 0,
@@ -10950,7 +10950,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "EAST FITCHBURG WWTF",
    "not_used": {
     "advisories": 0,
@@ -11355,7 +11355,7 @@
     "rounded_in": 0.1,
     "size_in": 0.13
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BOSTON WATER AND SEWER",
    "not_used": {
     "advisories": 0,
@@ -12096,7 +12096,7 @@
     "rounded_in": 0.1,
     "size_in": 0.13
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CHICOPEE W P C F",
    "not_used": {
     "advisories": 0,
@@ -12627,7 +12627,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "SPRINGFIELD W W T P",
    "not_used": {
     "advisories": 0,
@@ -13456,7 +13456,7 @@
     "rounded_in": 0.1,
     "size_in": 0.15
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "HAVERHILL W P A F",
    "not_used": {
     "advisories": 0,
@@ -13973,7 +13973,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "HOLYOKE W P C F",
    "not_used": {
     "advisories": 0,
@@ -14372,7 +14372,7 @@
     "rounded_in": 0.25,
     "size_in": 0.33
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CHELSEA - CSOS",
    "not_used": {
     "advisories": 0,
@@ -14573,7 +14573,7 @@
     "rounded_in": 0.1,
     "size_in": 0.21
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CAMBRIDGE CITY - CSOS",
    "not_used": {
     "advisories": 0,
@@ -14866,7 +14866,7 @@
     "rounded_in": 0.1,
     "size_in": 0.24
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "SOMERVILLE CSO SYSTEM",
    "not_used": {
     "advisories": 0,
@@ -15047,7 +15047,7 @@
     "rounded_in": 0.25,
     "size_in": 0.48
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "WORCESTER CSO FACILITY",
    "not_used": {
     "advisories": 0,
@@ -15207,7 +15207,7 @@
     "rounded_in": 0.1,
     "size_in": 0.2
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MWRA DEER ISLAND TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -15619,7 +15619,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "JOHN J. DIFONZO WATER RECLAMATION FACILITY",
    "not_used": {
     "advisories": 0,
@@ -15677,7 +15677,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CAMBRIDGE WWTP",
    "not_used": {
     "advisories": 0,
@@ -15713,7 +15713,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WESTERNPORT CSO",
    "not_used": {
     "advisories": 0,
@@ -15815,7 +15815,7 @@
     "rounded_in": 0.1,
     "size_in": 0.14
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "ALLEGANY COUNTY COMBINED SEWER",
    "not_used": {
     "advisories": 0,
@@ -15939,7 +15939,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "FROSTBURG COMBINED SEWER OVERF",
    "not_used": {
     "advisories": 0,
@@ -16063,7 +16063,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "LAVALE SANITARY COMMISSION CSO",
    "not_used": {
     "advisories": 0,
@@ -16135,7 +16135,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MILFORD HYDRO",
    "not_used": {
     "advisories": 0,
@@ -16171,7 +16171,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "AUBURN SEWERAGE DISTRICT",
    "not_used": {
     "advisories": 0,
@@ -16207,7 +16207,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GREATER AUGUSTA UTILITY DISTRICT",
    "not_used": {
     "advisories": 0,
@@ -16243,7 +16243,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BATH WWTF",
    "not_used": {
     "advisories": 0,
@@ -16279,7 +16279,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BIDDEFORD WWTF",
    "not_used": {
     "advisories": 0,
@@ -16315,7 +16315,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BREWER WWTF",
    "not_used": {
     "advisories": 0,
@@ -16351,7 +16351,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CALAIS WWTF",
    "not_used": {
     "advisories": 0,
@@ -16387,7 +16387,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MACHIAS WWTF",
    "not_used": {
     "advisories": 0,
@@ -16423,7 +16423,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MECHANIC FALLS WWTF",
    "not_used": {
     "advisories": 0,
@@ -16459,7 +16459,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "OLD TOWN WWTF",
    "not_used": {
     "advisories": 0,
@@ -16495,7 +16495,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ORONO WPCF",
    "not_used": {
     "advisories": 0,
@@ -16531,7 +16531,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ROCKLAND WWTF",
    "not_used": {
     "advisories": 0,
@@ -16567,7 +16567,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SKOWHEGAN WWTF",
    "not_used": {
     "advisories": 0,
@@ -16603,7 +16603,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SOUTH PORTLAND WWTF",
    "not_used": {
     "advisories": 0,
@@ -16639,7 +16639,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WINTERPORT WWTF",
    "not_used": {
     "advisories": 0,
@@ -16675,7 +16675,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BANGOR WWTF",
    "not_used": {
     "advisories": 0,
@@ -16711,7 +16711,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WESTBROOK/GORHAM WWTF",
    "not_used": {
     "advisories": 0,
@@ -16747,7 +16747,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "KENNEBEC STD WWTF",
    "not_used": {
     "advisories": 0,
@@ -16783,7 +16783,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LEWISTON COMBINED SEWER OVERFLOW",
    "not_used": {
     "advisories": 0,
@@ -16819,7 +16819,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SACO WWTF",
    "not_used": {
     "advisories": 0,
@@ -16855,7 +16855,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BAR HARBOR WWTF MAIN FACILITY",
    "not_used": {
     "advisories": 0,
@@ -16891,7 +16891,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PORTLAND, CITY OF COMBINED SEWER OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -16927,7 +16927,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LEWISTON AUBURN WPCA",
    "not_used": {
     "advisories": 0,
@@ -16963,7 +16963,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BELFAST WWTF",
    "not_used": {
     "advisories": 0,
@@ -16999,7 +16999,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MADAWASKA WWTF",
    "not_used": {
     "advisories": 0,
@@ -17035,7 +17035,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GARDINER WWTF",
    "not_used": {
     "advisories": 0,
@@ -17071,7 +17071,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "EAST END WWTF",
    "not_used": {
     "advisories": 0,
@@ -17107,7 +17107,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "RANDOLPH COMBINED SEWER OVERFLOW SYSTEM",
    "not_used": {
     "advisories": 0,
@@ -17143,7 +17143,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BAR HARBOR WWTF HULLS COVE FACILITY",
    "not_used": {
     "advisories": 0,
@@ -17179,7 +17179,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HAMPDEN COMBINED SEWER OVERFLOW",
    "not_used": {
     "advisories": 0,
@@ -17215,7 +17215,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WINSLOW COMBINED SEWER OVERFLOW",
    "not_used": {
     "advisories": 0,
@@ -17251,7 +17251,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MILFORD COMBINED SEWER OVERFLOW",
    "not_used": {
     "advisories": 0,
@@ -17287,7 +17287,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CAPE ELIZABETH, TOWN OF",
    "not_used": {
     "advisories": 0,
@@ -17396,7 +17396,7 @@
     "rounded_in": 0.1,
     "size_in": 0.2
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CHEBOYGAN WWTP",
    "not_used": {
     "advisories": 0,
@@ -17448,7 +17448,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MORENCI WWSL",
    "not_used": {
     "advisories": 0,
@@ -17484,7 +17484,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "YALE WWSL",
    "not_used": {
     "advisories": 0,
@@ -17520,7 +17520,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CAPAC WWSL",
    "not_used": {
     "advisories": 0,
@@ -17622,7 +17622,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BAY CITY WWTP",
    "not_used": {
     "advisories": 0,
@@ -17761,7 +17761,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "GLWA WRRF",
    "not_used": {
     "advisories": 0,
@@ -20040,7 +20040,7 @@
     "rounded_in": 0.25,
     "size_in": 0.32
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "EAST LANSING WRRF",
    "not_used": {
     "advisories": 0,
@@ -20184,7 +20184,7 @@
     "rounded_in": 0.75,
     "size_in": 0.83
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "ESSEXVILLE CSO RTB",
    "not_used": {
     "advisories": 0,
@@ -20309,7 +20309,7 @@
     "rounded_in": 0.1,
     "size_in": 0.12
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "IRON MOUNTAIN-KINGSFORD WWTP",
    "not_used": {
     "advisories": 0,
@@ -20462,7 +20462,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "LANSING WWTP",
    "not_used": {
     "advisories": 0,
@@ -21244,7 +21244,7 @@
     "rounded_in": 0.1,
     "size_in": 0.22
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MANISTIQUE WWTP",
    "not_used": {
     "advisories": 0,
@@ -21405,7 +21405,7 @@
     "rounded_in": 0.25,
     "size_in": 0.27
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MT CLEMENS WWTP",
    "not_used": {
     "advisories": 0,
@@ -21542,7 +21542,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NILES WWTP",
    "not_used": {
     "advisories": 0,
@@ -21673,7 +21673,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "SAGINAW TWP WWTP",
    "not_used": {
     "advisories": 0,
@@ -21804,7 +21804,7 @@
     "rounded_in": 0.25,
     "size_in": 0.31
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MARTIN RTB",
    "not_used": {
     "advisories": 0,
@@ -21898,7 +21898,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF BLOOMFIELD HILLS",
    "not_used": {
     "advisories": 0,
@@ -22000,7 +22000,7 @@
     "rounded_in": 0.1,
     "size_in": 0.13
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MILK RIVER CSO RTB",
    "not_used": {
     "advisories": 0,
@@ -22180,7 +22180,7 @@
     "rounded_in": 0.25,
     "size_in": 0.26
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BIRMINGHAM CSO RTB",
    "not_used": {
     "advisories": 0,
@@ -22368,7 +22368,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "DEARBORN CSO",
    "not_used": {
     "advisories": 0,
@@ -22778,7 +22778,7 @@
     "rounded_in": 0.25,
     "size_in": 0.35
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "SAGINAW WWTP",
    "not_used": {
     "advisories": 0,
@@ -22916,7 +22916,7 @@
     "rounded_in": 0.25,
     "size_in": 0.45
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CHAPATON RTB",
    "not_used": {
     "advisories": 0,
@@ -23129,7 +23129,7 @@
     "rounded_in": 0.25,
     "size_in": 0.41
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "GRAND RAPIDS WRRF",
    "not_used": {
     "advisories": 0,
@@ -23181,7 +23181,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GROSSE POINTE FARMS",
    "not_used": {
     "advisories": 0,
@@ -23217,7 +23217,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GROSSE POINTE SHORES CSO",
    "not_used": {
     "advisories": 0,
@@ -23319,7 +23319,7 @@
     "rounded_in": 0.25,
     "size_in": 0.34
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "GEORGE W KUHN DR DIST CSO RTB",
    "not_used": {
     "advisories": 0,
@@ -23486,7 +23486,7 @@
     "rounded_in": 0.1,
     "size_in": 0.15
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "ST JOSEPH CSO",
    "not_used": {
     "advisories": 0,
@@ -23601,7 +23601,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ECORSE CSO",
    "not_used": {
     "advisories": 0,
@@ -23703,7 +23703,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "RIVER ROUGE CSO RTB",
    "not_used": {
     "advisories": 0,
@@ -23818,7 +23818,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BELLEVILLE CSO",
    "not_used": {
     "advisories": 0,
@@ -23920,7 +23920,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "SOUTHGATE-WYANDOTTE CSO RTF",
    "not_used": {
     "advisories": 0,
@@ -24035,7 +24035,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GROSSE POINTE PARK CSO",
    "not_used": {
     "advisories": 0,
@@ -24137,7 +24137,7 @@
     "rounded_in": 0.25,
     "size_in": 0.33
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "OAKLAND CO-ACACIA PARK CSO RTB",
    "not_used": {
     "advisories": 0,
@@ -24291,7 +24291,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NORTH HOUGHTON CO W&SA CSO",
    "not_used": {
     "advisories": 0,
@@ -24527,7 +24527,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BLOOMFIELD VILLAGE CSO RTB",
    "not_used": {
     "advisories": 0,
@@ -24642,7 +24642,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF CRYSTAL FALLS",
    "not_used": {
     "advisories": 0,
@@ -24759,7 +24759,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "WAYNE CO/INKSTER/DRBRN HTS CSO",
    "not_used": {
     "advisories": 0,
@@ -24955,7 +24955,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "WAYNE CO/INKSTER CSO",
    "not_used": {
     "advisories": 0,
@@ -25235,7 +25235,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "WAYNE CO/DEARBORN HEIGHTS CSO",
    "not_used": {
     "advisories": 0,
@@ -25406,7 +25406,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF WESTLAND",
    "not_used": {
     "advisories": 0,
@@ -25508,7 +25508,7 @@
     "rounded_in": 0.1,
     "size_in": 0.19
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "WAYNE CO/RDFRD/LIVONIA CSO",
    "not_used": {
     "advisories": 0,
@@ -25819,7 +25819,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF GARDEN CITY",
    "not_used": {
     "advisories": 0,
@@ -25855,7 +25855,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WAYNE CO-LIVONIA CSO",
    "not_used": {
     "advisories": 0,
@@ -25891,7 +25891,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WAYNE CO-LIVONIA/WESTLAND CSO",
    "not_used": {
     "advisories": 0,
@@ -25927,7 +25927,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LIVONIA CSO",
    "not_used": {
     "advisories": 0,
@@ -26029,7 +26029,7 @@
     "rounded_in": 0.1,
     "size_in": 0.22
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "REDFORD TWP CSO",
    "not_used": {
     "advisories": 0,
@@ -26201,7 +26201,7 @@
     "rounded_in": 0.25,
     "size_in": 0.26
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "INKSTER/DEARBORN HEIGHTS CSO",
    "not_used": {
     "advisories": 0,
@@ -26295,7 +26295,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "DEARBORN CSO DEWATERING",
    "not_used": {
     "advisories": 0,
@@ -26398,7 +26398,7 @@
     "rounded_in": 0.5,
     "size_in": 0.61
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "OMAHA COMBINED SEWER OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -26503,7 +26503,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BERLIN POLLUTION CONTROL FACILITY",
    "not_used": {
     "advisories": 0,
@@ -26605,7 +26605,7 @@
     "rounded_in": 0.1,
     "size_in": 0.13
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NASHUA WASTEWATER TREATMENT FACILITY",
    "not_used": {
     "advisories": 0,
@@ -26902,7 +26902,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PORTSMOUTH CITY OF",
    "not_used": {
     "advisories": 0,
@@ -26995,7 +26995,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MANCHESTER CITY OF",
    "not_used": {
     "advisories": 0,
@@ -27141,7 +27141,7 @@
     "rounded_in": 0.1,
     "size_in": 0.17
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "EXETER  W W T P",
    "not_used": {
     "advisories": 0,
@@ -27253,7 +27253,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "TRENTON SEWER UTILITY",
    "not_used": {
     "advisories": 0,
@@ -27289,7 +27289,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "RIVER ROAD WWTP",
    "not_used": {
     "advisories": 0,
@@ -27325,7 +27325,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ADAMS STREET WWTP",
    "not_used": {
     "advisories": 0,
@@ -27361,7 +27361,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CAMDEN CNTY WATER RESOURCE RECOVERY FACILITY",
    "not_used": {
     "advisories": 0,
@@ -27397,7 +27397,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CAMDEN CITY",
    "not_used": {
     "advisories": 0,
@@ -27433,7 +27433,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GLOUCESTER CITY",
    "not_used": {
     "advisories": 0,
@@ -27469,7 +27469,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CAYUGA OPERATING COMPANY, LLC",
    "not_used": {
     "advisories": 0,
@@ -27565,7 +27565,7 @@
     "rounded_in": 0.25,
     "size_in": 0.32
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "GOUVERNEUR (V) WWTF",
    "not_used": {
     "advisories": 0,
@@ -27677,7 +27677,7 @@
     "rounded_in": 0.25,
     "size_in": 0.44
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "AMSTERDAM (C) WWTP",
    "not_used": {
     "advisories": 0,
@@ -27789,7 +27789,7 @@
     "rounded_in": 1.5,
     "size_in": 1.82
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CATSKILL (V) WWTP",
    "not_used": {
     "advisories": 0,
@@ -27901,7 +27901,7 @@
     "rounded_in": 0.5,
     "size_in": 0.67
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BOONVILLE (V) WWTP",
    "not_used": {
     "advisories": 0,
@@ -27953,7 +27953,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MEDINA (V) WWTP",
    "not_used": {
     "advisories": 0,
@@ -28049,7 +28049,7 @@
     "rounded_in": 0.25,
     "size_in": 0.43
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "AUBURN (C) STP",
    "not_used": {
     "advisories": 0,
@@ -28161,7 +28161,7 @@
     "rounded_in": 0.1,
     "size_in": 0.18
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "HUDSON (C) STP",
    "not_used": {
     "advisories": 0,
@@ -28280,7 +28280,7 @@
     "rounded_in": 0.1,
     "size_in": 0.24
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "LITTLE FALLS (C) WWTP",
    "not_used": {
     "advisories": 0,
@@ -28332,7 +28332,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "TARGET HILL WWTP",
    "not_used": {
     "advisories": 0,
@@ -28368,7 +28368,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "JOHNSON CITY (V) OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -28404,7 +28404,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BINGHAMTON (C) CSO'S",
    "not_used": {
     "advisories": 0,
@@ -28500,7 +28500,7 @@
     "rounded_in": 0.1,
     "size_in": 0.15
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF ALBANY COMBINED SEWER OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -28619,7 +28619,7 @@
     "rounded_in": 0.25,
     "size_in": 0.48
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "WATERTOWN (C) WPCP",
    "not_used": {
     "advisories": 0,
@@ -28731,7 +28731,7 @@
     "rounded_in": 0.5,
     "size_in": 0.56
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "PLATTSBURGH WATER POLLUTION CONTROL PLANT",
    "not_used": {
     "advisories": 0,
@@ -28843,7 +28843,7 @@
     "rounded_in": 0.1,
     "size_in": 0.13
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "COMBINED SEWER OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -29007,7 +29007,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - PORT RICHMOND WPCF",
    "not_used": {
     "advisories": 0,
@@ -29119,7 +29119,7 @@
     "rounded_in": 0.1,
     "size_in": 0.2
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - JAMAICA WWRF",
    "not_used": {
     "advisories": 0,
@@ -29221,7 +29221,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - WARD'S ISLAND WRRF",
    "not_used": {
     "advisories": 0,
@@ -29337,7 +29337,7 @@
     "rounded_in": 0.25,
     "size_in": 0.34
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - BOWERY BAY WRRF",
    "not_used": {
     "advisories": 0,
@@ -29439,7 +29439,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - OWLS HEAD WPCP",
    "not_used": {
     "advisories": 0,
@@ -29545,7 +29545,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - CONEY ISLAND WRRF",
    "not_used": {
     "advisories": 0,
@@ -29657,7 +29657,7 @@
     "rounded_in": 1.0,
     "size_in": 1.24
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - HUNT'S POINT WRRF",
    "not_used": {
     "advisories": 0,
@@ -29769,7 +29769,7 @@
     "rounded_in": 0.25,
     "size_in": 0.25
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - NEWTOWN CREEK WRRF",
    "not_used": {
     "advisories": 0,
@@ -29821,7 +29821,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - 26TH WARD WPCP",
    "not_used": {
     "advisories": 0,
@@ -29857,7 +29857,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - TALLMAN ISLAND WPCP",
    "not_used": {
     "advisories": 0,
@@ -29893,7 +29893,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - NORTH RIVER WPCP",
    "not_used": {
     "advisories": 0,
@@ -29989,7 +29989,7 @@
     "rounded_in": 0.1,
     "size_in": 0.14
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "POUGHKEEPSIE (C) WPCP",
    "not_used": {
     "advisories": 0,
@@ -30108,7 +30108,7 @@
     "rounded_in": 0.25,
     "size_in": 0.46
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NORTH TONAWANDA (C) WWTP",
    "not_used": {
     "advisories": 0,
@@ -30220,7 +30220,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NEWBURGH (C) WWTP",
    "not_used": {
     "advisories": 0,
@@ -30339,7 +30339,7 @@
     "rounded_in": 0.1,
     "size_in": 0.15
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NIAGARA FALLS (C) WWTP",
    "not_used": {
     "advisories": 0,
@@ -30451,7 +30451,7 @@
     "rounded_in": 0.25,
     "size_in": 0.26
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "YONKERS JOINT WWTP",
    "not_used": {
     "advisories": 0,
@@ -30570,7 +30570,7 @@
     "rounded_in": 0.1,
     "size_in": 0.15
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "LOCKPORT (C) WWTP",
    "not_used": {
     "advisories": 0,
@@ -30622,7 +30622,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NYCDEP - RED HOOK WRRF",
    "not_used": {
     "advisories": 0,
@@ -30724,7 +30724,7 @@
     "rounded_in": 0.1,
     "size_in": 0.17
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "METROPOLITAN SYRACUSE WWTP",
    "not_used": {
     "advisories": 0,
@@ -30789,7 +30789,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LEWISTON MASTER SD",
    "not_used": {
     "advisories": 0,
@@ -30885,7 +30885,7 @@
     "rounded_in": 1.0,
     "size_in": 1.12
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "DUNKIRK (C) WWTP",
    "not_used": {
     "advisories": 0,
@@ -30997,7 +30997,7 @@
     "rounded_in": 0.5,
     "size_in": 0.64
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "FRANK E VAN LARE STP",
    "not_used": {
     "advisories": 0,
@@ -31113,7 +31113,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BIRD ISLAND WWTF",
    "not_used": {
     "advisories": 0,
@@ -31229,7 +31229,7 @@
     "rounded_in": 0.1,
     "size_in": 0.14
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "GLENS FALLS (C) WWTP",
    "not_used": {
     "advisories": 0,
@@ -31341,7 +31341,7 @@
     "rounded_in": 0.1,
     "size_in": 0.16
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "OSWEGO (C) WEST SIDE WWTF",
    "not_used": {
     "advisories": 0,
@@ -31453,7 +31453,7 @@
     "rounded_in": 0.1,
     "size_in": 0.16
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "OSWEGO (C) EAST SIDE STP",
    "not_used": {
     "advisories": 0,
@@ -31505,7 +31505,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WATERFORD (T) WWTP",
    "not_used": {
     "advisories": 0,
@@ -31601,7 +31601,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "KINGSTON (C) WWTP",
    "not_used": {
     "advisories": 0,
@@ -31720,7 +31720,7 @@
     "rounded_in": 0.1,
     "size_in": 0.24
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CANASTOTA (V) WPCP",
    "not_used": {
     "advisories": 0,
@@ -31832,7 +31832,7 @@
     "rounded_in": 0.1,
     "size_in": 0.15
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "OGDENSBURG SECONDARY WWTP",
    "not_used": {
     "advisories": 0,
@@ -31944,7 +31944,7 @@
     "rounded_in": 0.1,
     "size_in": 0.15
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "COMBINED SEWER OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -32056,7 +32056,7 @@
     "rounded_in": 0.25,
     "size_in": 0.32
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "COHOES (C)",
    "not_used": {
     "advisories": 0,
@@ -32168,7 +32168,7 @@
     "rounded_in": 0.25,
     "size_in": 0.41
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MASSENA (V) WWTP",
    "not_used": {
     "advisories": 0,
@@ -32280,7 +32280,7 @@
     "rounded_in": 0.1,
     "size_in": 0.2
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "UTICA COMBINED SEWER OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -32392,7 +32392,7 @@
     "rounded_in": 0.1,
     "size_in": 0.16
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "COMBINED SEWER OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -32511,7 +32511,7 @@
     "rounded_in": 0.25,
     "size_in": 0.31
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CHEMUNG CO REGIONAL WWTP",
    "not_used": {
     "advisories": 0,
@@ -32623,7 +32623,7 @@
     "rounded_in": 0.5,
     "size_in": 0.59
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "TICONDEROGA SD#5 WPCP",
    "not_used": {
     "advisories": 0,
@@ -32735,7 +32735,7 @@
     "rounded_in": 0.1,
     "size_in": 0.16
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "COMBINED SEWER OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -32847,7 +32847,7 @@
     "rounded_in": 0.1,
     "size_in": 0.14
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "WASHINGTON CO SD#2 WWTP",
    "not_used": {
     "advisories": 0,
@@ -32899,7 +32899,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ELECTRIC AVE PUMP STATION",
    "not_used": {
     "advisories": 0,
@@ -32935,7 +32935,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SYRACUSE TERMINAL",
    "not_used": {
     "advisories": 0,
@@ -32971,7 +32971,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "UPPER SANDUSKY WWTP",
    "not_used": {
     "advisories": 0,
@@ -33007,7 +33007,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MONROEVILLE WWTP",
    "not_used": {
     "advisories": 0,
@@ -33043,7 +33043,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BRADFORD WASTEWATER TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -33079,7 +33079,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "VILLAGE OF GREENWICH WASTEWATER TREATMENT WORKS",
    "not_used": {
     "advisories": 0,
@@ -33115,7 +33115,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SWANTON WRRF",
    "not_used": {
     "advisories": 0,
@@ -33151,7 +33151,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CALDWELL WWTP",
    "not_used": {
     "advisories": 0,
@@ -33187,7 +33187,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NEW BOSTON WWTP",
    "not_used": {
     "advisories": 0,
@@ -33223,7 +33223,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NAPOLEON WASTEWATER TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -33259,7 +33259,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "VILLAGE OF DELTA WASTEWATER TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -33295,7 +33295,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PERRYSBURG WWTP",
    "not_used": {
     "advisories": 0,
@@ -33331,7 +33331,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PAYNE WWTP",
    "not_used": {
     "advisories": 0,
@@ -33367,7 +33367,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MCCONNELSVILLE SEWER TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -33403,7 +33403,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "POMEROY WWTP",
    "not_used": {
     "advisories": 0,
@@ -33439,7 +33439,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MONTPELIER WWTP",
    "not_used": {
     "advisories": 0,
@@ -33475,7 +33475,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NEWTON FALLS WPC",
    "not_used": {
     "advisories": 0,
@@ -33511,7 +33511,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "DESHLER WWTP",
    "not_used": {
     "advisories": 0,
@@ -33547,7 +33547,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "VILLAGE OF GREEN SPRINGS",
    "not_used": {
     "advisories": 0,
@@ -33583,7 +33583,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WAUSEON WATER RECLAMATION PLANT",
    "not_used": {
     "advisories": 0,
@@ -33619,7 +33619,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "AKRON WATER RECLAMATION FACILITY",
    "not_used": {
     "advisories": 0,
@@ -33655,7 +33655,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "AVON LAKE WPCF",
    "not_used": {
     "advisories": 0,
@@ -33757,7 +33757,7 @@
     "rounded_in": 0.25,
     "size_in": 0.31
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BOWLING GREEN",
    "not_used": {
     "advisories": 0,
@@ -33930,7 +33930,7 @@
     "rounded_in": 0.75,
     "size_in": 0.91
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "CLYDE WWTP",
    "not_used": {
     "advisories": 0,
@@ -34067,7 +34067,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "JACKSON PIKE WATER RESOURCE RECOVERY FACILITY",
    "not_used": {
     "advisories": 0,
@@ -34953,7 +34953,7 @@
     "rounded_in": 0.1,
     "size_in": 0.21
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "SOUTHERLY WASTEWATER TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -35040,7 +35040,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "DEFIANCE WWTP",
    "not_used": {
     "advisories": 0,
@@ -35076,7 +35076,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "DELPHOS WWTP",
    "not_used": {
     "advisories": 0,
@@ -35112,7 +35112,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ELYRIA WWTP",
    "not_used": {
     "advisories": 0,
@@ -35148,7 +35148,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF FINDLAY WATER POLLUTION CONTROL CENTER",
    "not_used": {
     "advisories": 0,
@@ -35184,7 +35184,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FOREST WWTP",
    "not_used": {
     "advisories": 0,
@@ -35220,7 +35220,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FREMONT WATER RECLAMATION CENTER",
    "not_used": {
     "advisories": 0,
@@ -35256,7 +35256,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GIRARD WWTP",
    "not_used": {
     "advisories": 0,
@@ -35292,7 +35292,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MUDDY CREEK WASTEWATER TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -35328,7 +35328,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HICKSVILLE WWTP",
    "not_used": {
     "advisories": 0,
@@ -35364,7 +35364,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "IRONTON WWTP",
    "not_used": {
     "advisories": 0,
@@ -35400,7 +35400,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LAKEWOOD WWTP",
    "not_used": {
     "advisories": 0,
@@ -35436,7 +35436,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LANCASTER WPCF",
    "not_used": {
     "advisories": 0,
@@ -35472,7 +35472,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LIMA WWTP",
    "not_used": {
     "advisories": 0,
@@ -35508,7 +35508,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF MARION, DIV OF WATER POLLUTION CONTROL",
    "not_used": {
     "advisories": 0,
@@ -35544,7 +35544,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MIDDLEPORT WWTP",
    "not_used": {
     "advisories": 0,
@@ -35580,7 +35580,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MIDDLETOWN WWTP",
    "not_used": {
     "advisories": 0,
@@ -35616,7 +35616,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MINGO JUNCTION STP",
    "not_used": {
     "advisories": 0,
@@ -35652,7 +35652,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF NEWARK WASTEWATER TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -35688,7 +35688,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "OAK HARBOR WWTP",
    "not_used": {
     "advisories": 0,
@@ -35724,7 +35724,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PORTSMOUTH LAWSON RUN WWTP",
    "not_used": {
     "advisories": 0,
@@ -35760,7 +35760,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF SANDUSKY WPC",
    "not_used": {
     "advisories": 0,
@@ -35796,7 +35796,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF SPRINGFIELD WWTP",
    "not_used": {
     "advisories": 0,
@@ -35832,7 +35832,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "STEUBENVILLE WWTP",
    "not_used": {
     "advisories": 0,
@@ -35868,7 +35868,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "TOLEDO BAY VIEW PARK WWTP",
    "not_used": {
     "advisories": 0,
@@ -35904,7 +35904,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "VAN WERT WWTP",
    "not_used": {
     "advisories": 0,
@@ -35940,7 +35940,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF WAPAKONETA WRF",
    "not_used": {
     "advisories": 0,
@@ -35976,7 +35976,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WILLARD WPCP",
    "not_used": {
     "advisories": 0,
@@ -36012,7 +36012,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF WOOSTER-WATER RESOURCE RECOVERYFACILITY",
    "not_used": {
     "advisories": 0,
@@ -36048,7 +36048,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "YOUNGSTOWN WWTP",
    "not_used": {
     "advisories": 0,
@@ -36084,7 +36084,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ZANESVILLE WWTP",
    "not_used": {
     "advisories": 0,
@@ -36120,7 +36120,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GIBSONBURG WWTP",
    "not_used": {
     "advisories": 0,
@@ -36156,7 +36156,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF EUCLID WWTP",
    "not_used": {
     "advisories": 0,
@@ -36279,7 +36279,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "Northeast Ohio Regional Sewer District",
    "not_used": {
     "advisories": 0,
@@ -38360,7 +38360,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "EASTERN OHIO REGIONAL WW AUTHORITY",
    "not_used": {
     "advisories": 0,
@@ -38396,7 +38396,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF NORWALK WWTP",
    "not_used": {
     "advisories": 0,
@@ -38432,7 +38432,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FOSTORIA WWTP",
    "not_used": {
     "advisories": 0,
@@ -38468,7 +38468,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PORT CLINTON WASTEWATER TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -38504,7 +38504,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BUCYRUS WWTP",
    "not_used": {
     "advisories": 0,
@@ -38540,7 +38540,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "TIFFIN WATER POLLUTION CONTROL CENTER",
    "not_used": {
     "advisories": 0,
@@ -38576,7 +38576,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "VILLAGE OF MALTA",
    "not_used": {
     "advisories": 0,
@@ -38612,7 +38612,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CINCINNATI GALBRAITH ROAD MSD SITE",
    "not_used": {
     "advisories": 0,
@@ -38648,7 +38648,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LISBON WWTP",
    "not_used": {
     "advisories": 0,
@@ -38684,7 +38684,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CORVALLIS STP",
    "not_used": {
     "advisories": 0,
@@ -38720,7 +38720,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "COLUMBIA BOULEVARD STP",
    "not_used": {
     "advisories": 4,
@@ -38756,7 +38756,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ASTORIA STP",
    "not_used": {
     "advisories": 0,
@@ -38792,7 +38792,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MONACA BORO STP",
    "not_used": {
     "advisories": 0,
@@ -38828,7 +38828,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PUNXSUTAWNEY BORO STP",
    "not_used": {
     "advisories": 0,
@@ -38864,7 +38864,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BRIDGEPORT BORO STP",
    "not_used": {
     "advisories": 0,
@@ -38900,7 +38900,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WAYNESBURG STP",
    "not_used": {
     "advisories": 0,
@@ -38936,7 +38936,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SEWICKLEY BORO STP",
    "not_used": {
     "advisories": 0,
@@ -38972,7 +38972,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FAYETTE CITY STP",
    "not_used": {
     "advisories": 0,
@@ -39008,7 +39008,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GLASSPORT BORO - STP",
    "not_used": {
     "advisories": 0,
@@ -39044,7 +39044,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NEWPORT STP",
    "not_used": {
     "advisories": 0,
@@ -39080,7 +39080,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "POINT MARION WWTP",
    "not_used": {
     "advisories": 0,
@@ -39116,7 +39116,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SMETHPORT BORO AUTH STP",
    "not_used": {
     "advisories": 0,
@@ -39152,7 +39152,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BLAIRSVILLE MUNI AUTH STP",
    "not_used": {
     "advisories": 0,
@@ -39188,7 +39188,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WELLSBORO MUNI AUTH",
    "not_used": {
     "advisories": 0,
@@ -39224,7 +39224,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MANSFIELD MUNI SEW AUTH",
    "not_used": {
     "advisories": 0,
@@ -39260,7 +39260,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BEDFORD STP",
    "not_used": {
     "advisories": 0,
@@ -39296,7 +39296,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PINE STREET STP KANE",
    "not_used": {
     "advisories": 0,
@@ -39332,7 +39332,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "KINZUA ROAD STP KANE",
    "not_used": {
     "advisories": 0,
@@ -39368,7 +39368,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CTL WAYNE REG AUTH",
    "not_used": {
     "advisories": 0,
@@ -39404,7 +39404,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ASHLAND BOROUGH WWTP",
    "not_used": {
     "advisories": 0,
@@ -39440,7 +39440,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MIDLAND BORO STP",
    "not_used": {
     "advisories": 0,
@@ -39476,7 +39476,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "TRI-BORO MUN AUTH",
    "not_used": {
     "advisories": 0,
@@ -39512,7 +39512,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ROCKWOOD BORO STP",
    "not_used": {
     "advisories": 0,
@@ -39548,7 +39548,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LEETSDALE MUN AUTH STP",
    "not_used": {
     "advisories": 0,
@@ -39584,7 +39584,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ST CLAIR WWTP",
    "not_used": {
     "advisories": 0,
@@ -39620,7 +39620,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FREEPORT BORO STP",
    "not_used": {
     "advisories": 0,
@@ -39722,7 +39722,7 @@
     "rounded_in": 0.1,
     "size_in": 0.15
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "ALCOSAN SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -39792,7 +39792,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BETHLEHEM CITY WWTP",
    "not_used": {
     "advisories": 0,
@@ -39828,7 +39828,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LATROBE MUNI AUTH STP",
    "not_used": {
     "advisories": 0,
@@ -39864,7 +39864,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WYOMING VALLEY SANITARY AUTHORITY WWTP",
    "not_used": {
     "advisories": 0,
@@ -39900,7 +39900,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ROCHESTER AREA JT SEW AUTH - STP",
    "not_used": {
     "advisories": 0,
@@ -39936,7 +39936,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MON VLY SEW AUTH STP",
    "not_used": {
     "advisories": 0,
@@ -39972,7 +39972,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FRANKLIN CITY STP",
    "not_used": {
     "advisories": 0,
@@ -40008,7 +40008,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HUNTINGDON STP",
    "not_used": {
     "advisories": 0,
@@ -40044,7 +40044,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "OIL CITY STP",
    "not_used": {
     "advisories": 0,
@@ -40146,7 +40146,7 @@
     "rounded_in": 0.1,
     "size_in": 0.18
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "ERIE CITY STP",
    "not_used": {
     "advisories": 0,
@@ -40317,7 +40317,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CLEARFIELD MUN SEW SYS STP",
    "not_used": {
     "advisories": 0,
@@ -40353,7 +40353,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LOWER LACKAWANNA VALLEY SANITARY AUTHORITY",
    "not_used": {
     "advisories": 0,
@@ -40389,7 +40389,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "COALDALE LANSFORD SUMMIT HLL SEW",
    "not_used": {
     "advisories": 0,
@@ -40425,7 +40425,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PA AMERICAN WATER COMPANY SCRANTON WWTP",
    "not_used": {
     "advisories": 0,
@@ -40461,7 +40461,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SUNBURY MUNI AUTH STP",
    "not_used": {
     "advisories": 0,
@@ -40497,7 +40497,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SCOTTDALE STP",
    "not_used": {
     "advisories": 0,
@@ -40533,7 +40533,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PHILA WATER DEPT - SOUTHEAST WPC PLANT",
    "not_used": {
     "advisories": 0,
@@ -40582,7 +40582,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PHILA WATER DEPT - SOUTHWEST WPC PLANT",
    "not_used": {
     "advisories": 0,
@@ -40631,7 +40631,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PHILA WATER DEPT - NORTHEAST WPC PLANT",
    "not_used": {
     "advisories": 0,
@@ -40684,7 +40684,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LANCASTER CITY WWTP",
    "not_used": {
     "advisories": 0,
@@ -40720,7 +40720,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CLAIRTON MUN AUTH STP",
    "not_used": {
     "advisories": 0,
@@ -40756,7 +40756,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CHARLEROI BORO AUTH STP",
    "not_used": {
     "advisories": 0,
@@ -40792,7 +40792,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CONNELLSVILLE STP",
    "not_used": {
     "advisories": 0,
@@ -40828,7 +40828,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MCKEESPORT STP",
    "not_used": {
     "advisories": 0,
@@ -40864,7 +40864,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GR HAZLETON JT SEW AUTH WWTP",
    "not_used": {
     "advisories": 0,
@@ -40900,7 +40900,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "DUQUESNE STP",
    "not_used": {
     "advisories": 0,
@@ -40936,7 +40936,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "TAMAQUA BORO",
    "not_used": {
     "advisories": 0,
@@ -40972,7 +40972,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ALTOONA EASTERLY STP",
    "not_used": {
     "advisories": 0,
@@ -41008,7 +41008,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ALTOONA WESTERLY STP",
    "not_used": {
     "advisories": 0,
@@ -41044,7 +41044,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WILLIAMSPORT SANITARY AUTHORITY - WEST STP",
    "not_used": {
     "advisories": 0,
@@ -41080,7 +41080,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WILLIAMSPORT SANI AUTH CENTRAL STP",
    "not_used": {
     "advisories": 0,
@@ -41116,7 +41116,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LRBSA - ARCHBALD WWTP",
    "not_used": {
     "advisories": 0,
@@ -41152,7 +41152,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LRBSA/ CLINTON TWP PLANT",
    "not_used": {
     "advisories": 0,
@@ -41188,7 +41188,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LRBSA - THROOP PLANT",
    "not_used": {
     "advisories": 0,
@@ -41224,7 +41224,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NEW KENSINGTON STP",
    "not_used": {
     "advisories": 0,
@@ -41260,7 +41260,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WARREN CITY WWTP",
    "not_used": {
     "advisories": 0,
@@ -41296,7 +41296,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HARRISBURG AWTF",
    "not_used": {
     "advisories": 0,
@@ -41332,7 +41332,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FARRELL MUN SEW",
    "not_used": {
     "advisories": 0,
@@ -41368,7 +41368,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SHAMOKIN-COAL TWP JT SEW AUTH",
    "not_used": {
     "advisories": 0,
@@ -41404,7 +41404,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "UPPER ALLEGHENY JT SANI AUTH STP",
    "not_used": {
     "advisories": 0,
@@ -41440,7 +41440,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "JEANNETTE STP",
    "not_used": {
     "advisories": 0,
@@ -41476,7 +41476,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GREATER GREENSBURG STP",
    "not_used": {
     "advisories": 0,
@@ -41512,7 +41512,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "KISKI VLY WPCA STP",
    "not_used": {
     "advisories": 0,
@@ -41548,7 +41548,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "W NEWTON BORO STP",
    "not_used": {
     "advisories": 0,
@@ -41584,7 +41584,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MINERSVILLE SEWER AUTHORITY WWTP",
    "not_used": {
     "advisories": 0,
@@ -41620,7 +41620,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "REYNOLDSVILLE STP",
    "not_used": {
     "advisories": 0,
@@ -41656,7 +41656,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CORRY WWTP",
    "not_used": {
     "advisories": 0,
@@ -41692,7 +41692,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "DRAVOSBURG BORO STP",
    "not_used": {
     "advisories": 0,
@@ -41728,7 +41728,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ELIZABETH BORO STP",
    "not_used": {
     "advisories": 0,
@@ -41764,7 +41764,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MID-CAMERON AUTHORITY",
    "not_used": {
     "advisories": 0,
@@ -41800,7 +41800,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "TITUSVILLE WWTP",
    "not_used": {
     "advisories": 0,
@@ -41836,7 +41836,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GALETON BORO WWTP",
    "not_used": {
     "advisories": 0,
@@ -41872,7 +41872,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "FORD CITY BORO MUNI SEW DISPOSAL AUTH WWTP",
    "not_used": {
     "advisories": 0,
@@ -41908,7 +41908,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "EVERETT STP",
    "not_used": {
     "advisories": 0,
@@ -41944,7 +41944,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SALTSBURG BORO STP",
    "not_used": {
     "advisories": 0,
@@ -41980,7 +41980,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HOLLIDAYSBURG REGIONAL STP",
    "not_used": {
     "advisories": 0,
@@ -42016,7 +42016,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "POTTSVILLE MAIN STP",
    "not_used": {
     "advisories": 0,
@@ -42052,7 +42052,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MAHANOY CITY MUN SEW AUTH",
    "not_used": {
     "advisories": 0,
@@ -42088,7 +42088,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SHENANDOAH MUN SEW AUTH",
    "not_used": {
     "advisories": 0,
@@ -42124,7 +42124,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PATTON BORO STP",
    "not_used": {
     "advisories": 0,
@@ -42160,7 +42160,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PGH CITY COMBINED SEW OVERFLOWS",
    "not_used": {
     "advisories": 0,
@@ -42196,7 +42196,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PGH WTP",
    "not_used": {
     "advisories": 0,
@@ -42232,7 +42232,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LEET TWP MUN AUTH - SEW COLL SYS",
    "not_used": {
     "advisories": 0,
@@ -42268,7 +42268,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ETNA BORO CSO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42304,7 +42304,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "INGRAM BORO CSO C 19 DISCHARGE",
    "not_used": {
     "advisories": 0,
@@ -42340,7 +42340,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "DALE BORO CSO SEW SYSTEM",
    "not_used": {
     "advisories": 0,
@@ -42376,7 +42376,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SALTSBURG STP",
    "not_used": {
     "advisories": 0,
@@ -42412,7 +42412,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PORT VUE BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42448,7 +42448,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "EASTON CITY CSOS AND PUMP STATIONS",
    "not_used": {
     "advisories": 0,
@@ -42484,7 +42484,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LACKAWANNA RIVER BASIN SEW AUTH MOOSIC CSO",
    "not_used": {
     "advisories": 0,
@@ -42520,7 +42520,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "STEELTON BORO SANITARY SEWERS",
    "not_used": {
     "advisories": 0,
@@ -42556,7 +42556,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "PITCAIRN BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42592,7 +42592,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BRADDOCK BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42628,7 +42628,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "HOMESTEAD BORO",
    "not_used": {
     "advisories": 0,
@@ -42664,7 +42664,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WILMERDING BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42700,7 +42700,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "RANKIN BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42736,7 +42736,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "GIRTYS RUN SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42772,7 +42772,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "WILKINS TOWNSHIP",
    "not_used": {
     "advisories": 0,
@@ -42808,7 +42808,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CRAFTON BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42844,7 +42844,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "MCKEES ROCKS BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42880,7 +42880,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ASPINWALL BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42916,7 +42916,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "N BRADDOCK BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42952,7 +42952,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "TURTLE CREEK BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -42988,7 +42988,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "E PGH BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -43024,7 +43024,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ARNOLD CITY SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -43060,7 +43060,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "W HOMESTEAD SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -43096,7 +43096,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CARNEGIE BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -43132,7 +43132,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SWISSVALE BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -43168,7 +43168,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "EXPORT BORO SEW",
    "not_used": {
     "advisories": 0,
@@ -43204,7 +43204,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "E ROCHESTER BORO CSO",
    "not_used": {
     "advisories": 0,
@@ -43240,7 +43240,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ROCHESTER BORO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -43276,7 +43276,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CORAOPOLIS CSO COLLECTION SYS",
    "not_used": {
     "advisories": 0,
@@ -43312,7 +43312,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "INGRAM BORO CSO C 19 DISCH",
    "not_used": {
     "advisories": 0,
@@ -43348,7 +43348,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ETNA BORO CSO SEW SYS",
    "not_used": {
     "advisories": 0,
@@ -43444,7 +43444,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NBC - BUCKLIN POINT WWTF",
    "not_used": {
     "advisories": 0,
@@ -43577,7 +43577,7 @@
     "rounded_in": 0.1,
     "size_in": 0.16
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NEWPORT WPCF",
    "not_used": {
     "advisories": 0,
@@ -43636,7 +43636,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NBC - FIELD'S POINT WWTF",
    "not_used": {
     "advisories": 0,
@@ -43752,7 +43752,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NBC - BUCKLIN POINT WWCS",
    "not_used": {
     "advisories": 0,
@@ -43804,7 +43804,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CITY OF NEWPORT WWCS",
    "not_used": {
     "advisories": 0,
@@ -43840,7 +43840,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NBC - FIELD'S POINT WWCS",
    "not_used": {
     "advisories": 0,
@@ -43876,7 +43876,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LEAD - DEADWOOD SANITARY DISTRICT",
    "not_used": {
     "advisories": 0,
@@ -43912,7 +43912,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LEAD, CITY OF (CSO)",
    "not_used": {
     "advisories": 0,
@@ -43948,7 +43948,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "NASHVILLE CENTRAL STP",
    "not_used": {
     "advisories": 0,
@@ -43984,7 +43984,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CLARKSVILLE GAS AND WATER DBA CLARKSVILLE WASTEWATER TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -44020,7 +44020,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "CHATTANOOGA - MOCCASIN BEND WWTP & COMBINED SEWER SYSTEM",
    "not_used": {
     "advisories": 0,
@@ -44123,7 +44123,7 @@
     "rounded_in": 1.0,
     "size_in": 1.44
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "LYNCHBURG REGIONAL WASTEWATER TREATMENT PLANT",
    "not_used": {
     "advisories": 0,
@@ -44175,7 +44175,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "ALEXANDRIA RENEW ENTERPRISES WRRF",
    "not_used": {
     "advisories": 0,
@@ -44290,7 +44290,7 @@
     "rounded_in": 0.1,
     "size_in": 0.1
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "RICHMOND WWTP",
    "not_used": {
     "advisories": 0,
@@ -44916,7 +44916,7 @@
     "rounded_in": 0.1,
     "size_in": 0.2
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BURLINGTON MAIN",
    "not_used": {
     "advisories": 0,
@@ -45073,7 +45073,7 @@
     "rounded_in": 0.1,
     "size_in": 0.23
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MIDDLEBURY",
    "not_used": {
     "advisories": 0,
@@ -45197,7 +45197,7 @@
     "rounded_in": 0.1,
     "size_in": 0.12
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "MONTPELIER WASTEWATER TREATMENT FACILITY",
    "not_used": {
     "advisories": 0,
@@ -45525,7 +45525,7 @@
     "rounded_in": 0.5,
     "size_in": 0.57
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NEWPORT CITY",
    "not_used": {
     "advisories": 0,
@@ -45656,7 +45656,7 @@
     "rounded_in": 0.25,
     "size_in": 0.38
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "BURLINGTON NORTH",
    "not_used": {
     "advisories": 0,
@@ -45794,7 +45794,7 @@
     "rounded_in": 0.25,
     "size_in": 0.41
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "NORTHFIELD",
    "not_used": {
     "advisories": 0,
@@ -45913,7 +45913,7 @@
     "rounded_in": 1.0,
     "size_in": 1.46
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "SPRINGFIELD",
    "not_used": {
     "advisories": 0,
@@ -46058,7 +46058,7 @@
     "rounded_in": 0.1,
     "size_in": 0.14
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "ST JOHNSBURY",
    "not_used": {
     "advisories": 0,
@@ -46575,7 +46575,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "RUTLAND",
    "not_used": {
     "advisories": 0,
@@ -46700,7 +46700,7 @@
     "rounded_in": 0.1,
     "size_in": 0.11
    },
-   "method_version": 1,
+   "method_version": 2,
    "name": "HARTFORD - WRJ",
    "not_used": {
     "advisories": 0,
@@ -46752,7 +46752,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SPOKANE RIVERSIDE PARK WATER RECLAMATION FACILITY",
    "not_used": {
     "advisories": 0,
@@ -46838,7 +46838,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "King County Wastewater Treatment Division",
    "not_used": {
     "advisories": 0,
@@ -46909,7 +46909,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "BREMERTON STP",
    "not_used": {
     "advisories": 0,
@@ -46945,7 +46945,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "SNOHOMISH STP",
    "not_used": {
     "advisories": 0,
@@ -46981,7 +46981,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "Seattle Public Utilities",
    "not_used": {
     "advisories": 0,
@@ -47042,7 +47042,7 @@
    "likely": null,
    "likely_in": null,
    "lowest_reported": null,
-   "method_version": 1,
+   "method_version": 2,
    "name": "LOTT BUDD INLET WATER RECLAMATION FACILITY",
    "not_used": {
     "advisories": 0,

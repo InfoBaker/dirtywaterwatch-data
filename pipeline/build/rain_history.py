@@ -55,8 +55,9 @@ Definitions (pure functions below; rules.rain_likely.history overrides the numbe
 The safety guarantee: a history removes a caution the fallback would show only on a quiet range that is "enough";
 one reported overflow in that range moves possible_in down to it. A usable history needs min_report_storms storms
 followed by a report, min_total_storms storms and min_period_days of observed days; anything less leaves the operator on
-the fallback, with the reason written beside its counts. An operator is computed only from a rain record that has
-every year it needs (real content in the cache); otherwise its previous entry stays.
+the fallback, with the reason written beside its counts. An operator is computed only from a rain record that covers
+every year it needs at every rain point (short_years); otherwise its previous entry of this method version stays, else
+it reads "not read yet" and the status build falls back to the cautious rule.
 """
 from __future__ import annotations
 
@@ -70,7 +71,8 @@ from zoneinfo import ZoneInfo
 
 from common import BUILD_DIR, DATA_DIR, read_json
 
-METHOD_VERSION = 1
+METHOD_VERSION = 2       # 2: the review fixes of 2026-11-14 (gaps keep followed storms, observed days, lag from
+#                          coverage, advisories left out); a version-1 file or entry is never loaded or carried forward
 LEVELS_BUILD = BUILD_DIR / "rain-levels.json"      # the daily pass writes here (pipeline state, kept between runs)
 LEVELS_SEED = DATA_DIR / "rain-levels.json"        # the copy in the repository: read until a daily pass has run
 RAIN_ZONE = ZoneInfo("America/Chicago")        # the rain record's calendar days (the point service's)
@@ -687,10 +689,28 @@ def _iem_have(lat, lon, years) -> bool:
     return True
 
 
-def missing_years(daily: dict[date, float], years: list[int], today: date) -> list[int]:
-    """The years needed with no day's value at any point (the current year only once a week of it has passed). Pure."""
-    have = {d.year for d, v in daily.items() if v is not None}
-    return [y for y in years if y not in have and not (y == today.year and today < date(y, 1, 8))]
+PAST_YEAR_MIN_DAYS = 360      # a past year at a point counts with at least this many dated values
+CURRENT_MAX_MISSING = 5       # the current year: values through the period's last day, the service's own gaps allowed
+
+
+def short_years(series: list[dict[date, float]], years: list[int], last: date, today: date) -> list[int]:
+    """The years the record needs that some rain point does not cover: a past year with fewer than
+    PAST_YEAR_MIN_DAYS dated values, or the current year missing more than CURRENT_MAX_MISSING of its days up to
+    the period's last day (last). An operator is never computed from such a record. Pure."""
+    out = []
+    for y in years:
+        for s in series:
+            got = {d for d, v in s.items() if d.year == y and v is not None}
+            if y < today.year:
+                ok = len(got) >= PAST_YEAR_MIN_DAYS
+            else:
+                end = min(last, date(y, 12, 31))
+                need = (end - date(y, 1, 1)).days + 1 if end >= date(y, 1, 1) else 0
+                ok = need - sum(1 for d in got if d <= end) <= CURRENT_MAX_MISSING
+            if not ok:
+                out.append(y)
+                break
+    return out
 
 
 def _round(x):
@@ -754,7 +774,9 @@ def build(offline: bool = False, budget: int = DEFAULT_BUDGET, only=None, today:
     reader = reader or _iem_reader
     have = have or _iem_have
     cuts = _cuts(rules)
-    prev_permits = (prev or {}).get("permits") or {} if (prev or {}).get("method_version") == METHOD_VERSION else {}
+    prev_permits = {p: e for p, e in (((prev or {}).get("permits") or {}) if (prev or {}).get("method_version")
+                                      == METHOD_VERSION else {}).items()
+                    if isinstance(e, dict) and e.get("method_version", METHOD_VERSION) == METHOD_VERSION}
 
     reg: dict[str, list[dict]] = defaultdict(list)
     for o in outfalls:
@@ -832,8 +854,9 @@ def build(offline: bool = False, budget: int = DEFAULT_BUDGET, only=None, today:
         elif not all(have(lat, lon, years) for lat, lon in pts):
             series = []             # a year at a point not read (a failed request): incomplete, not used
         daily = daily_max(series) if series else {}
-        if not series or missing_years(daily, years, today):
-            # never computed from a rain record missing a year it needs: the previous entry stays, else "not read"
+        period_last = min(cover, today) - timedelta(days=int(cfg["lag_days"]))
+        if not series or short_years(series, years, period_last, today):
+            # never computed from a rain record short of a year it needs: the previous entry stays, else "not read"
             not_read += 1
             permits[p] = prev_permits[p] if p in prev_permits else {**base, "why_not": NOT_READ}
             continue
