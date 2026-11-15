@@ -1088,9 +1088,14 @@ def test_an_incomplete_newer_month_never_clears_an_established_monthly_mark(tmp_
         return latest["MA0025321|002"], len(st["monthly_outfalls"]), st["waters"]["test-river-ma"]["status"]
 
     for sep in ({"hours": "0"}, {"hours": "0", "events": "E", "volume": "E"},
-                {"hours": "0", "events": ("conflict", "0", "2"), "volume": "0"}, {"events": "C"}):
+                {"hours": "0", "events": ("conflict", "0", "C"), "volume": "E"}, {"events": "C"}):
         obs, n, colour = mark(_sep(sep))
         assert obs["month"] == "2026-08" and obs["discharged"] is True and n == 1 and colour == "monthly", sep
+    # an equally ranked row filing a discharge makes September a discharge month in dispute (verification 3 P2-1)
+    obs = M.latest_months({("P", "002", "2026-08"): aug,
+                           ("P", "002", "2026-09"): _sep({"hours": "0", "events": ("conflict", "0", "2"),
+                                                          "volume": "0"})})["P|002"]
+    assert obs["month"] == "2026-09" and obs["discharged"] is True and obs["conflicting"] == ["events"]
     for sep in ({"hours": "0", "events": "0", "volume": "0"}, {"hours": "C", "events": "C", "volume": "C"}):
         obs, n, colour = mark(_sep(sep))
         assert obs["month"] == "2026-09" and obs["discharged"] is False and n == 0 and colour == "grey", sep
@@ -1115,7 +1120,8 @@ def _in_status(events_dir):
     st, _ = S.build(now=S.datetime(2025, 11, 20, 12, tzinfo=S.UTC), write=False, events_dir=events_dir,
                     waters=waters, outfalls=[], registry={}, reaches={}, flows=({}, {}), rules=rules,
                     placement_cache=False, live_only=True)
-    return len(st["monthly_outfalls"]), st["waters"]["sample-ditch-in"]["status"]
+    # a water with no record left is not listed: no report, grey
+    return len(st["monthly_outfalls"]), (st["waters"].get("sample-ditch-in") or {}).get("status", "grey")
 
 
 def _only(res_rows):
@@ -1165,10 +1171,135 @@ def test_a_no_discharge_month_whose_evidence_turns_conflicting_is_withdrawn_acro
     second = _dmr_main(tmp_path, monkeypatch, res, refresh=False)
     assert second["meta"]["conflicting_equal_revisions"]
     obs = second["meta"]["latest_month_by_outfall"]["IN0000004|002"]
-    assert obs["month"] == "2025-08" and obs["discharged"] is True
+    # round 4 (verification 3 P2-1): a conflict where one row files two events is a discharge month in dispute,
+    # September's own record, whatever order the rows came in; August's record stays
+    assert obs["month"] == "2025-09" and obs["discharged"] is True
+    assert sorted(r["source_record_id"] for r in second["records"]) == ["IN0000004:002:2025-08",
+                                                                       "IN0000004:002:2025-09"]
     assert second["meta"]["no_discharge_findings_withdrawn"] == {"IN0000004|002:2025-09": 1}
     assert _in_status(tmp_path / "events") == (1, "monthly")
     # a later run with no answer at all keeps the recomputed finding (the conflict stays in the evidence)
     third = _dmr_main(tmp_path, monkeypatch, {}, refresh=False)
-    assert third["meta"]["latest_month_by_outfall"]["IN0000004|002"]["month"] == "2025-08"
+    assert third["meta"]["latest_month_by_outfall"]["IN0000004|002"]["month"] == "2025-09"
+    assert len(third["records"]) == 2
     assert _in_status(tmp_path / "events") == (1, "monthly")
+
+
+# ------------------------------------------------------------------------------------------------ round 4 (P2-1)
+
+def _aug(events, hours="0", volume="0", version=None, received="28-SEP-25"):
+    """August rows for outfall 002 (only the parameters given; None leaves a parameter out)."""
+    out = {}
+    for code, v, unit in (("84165", events, "#/mo"), ("50037", hours, "hr/mo"), ("74063", volume, "Mgal")):
+        if v is None:
+            continue
+        rows = []
+        for x in (v if isinstance(v, list) else [v]):
+            row = _dmr("31-AUG-25", None if x == "C" else x, nodi="C" if x == "C" else None, unit=unit,
+                       received=received)
+            if version is not None:
+                row["VersionNmbr"] = version
+            rows.append(row)
+        out[code] = rows
+    return out
+
+
+def test_a_conflicting_revision_never_deletes_an_existing_discharge_month(tmp_path, monkeypatch):
+    """Astra verification 3 (2026-11-15) P2-1: August has one event, zero hours and zero volume; an equally ranked
+    revision files zero events. The conflict is not a no-discharge finding: the record stays, marked as disputed,
+    through another empty answer, until a higher revision settles it (successive main() runs, cache read back)."""
+    first = _dmr_main(tmp_path, monkeypatch, _only(_aug("1")), refresh=False)
+    assert [r["source_record_id"] for r in first["records"]] == ["IN0000004:002:2025-08"]
+    assert _in_status(tmp_path / "events") == (1, "monthly")
+    second = _dmr_main(tmp_path, monkeypatch, _only(_aug("0")), refresh=False)
+    assert second["meta"]["conflicting_equal_revisions"]
+    assert not second["meta"].get("months_withdrawn_by_the_source")
+    [r] = second["records"]
+    assert r["source_record_id"] == "IN0000004:002:2025-08" and r["raw"]["conflicting_rows"] == ["events"]
+    assert r["raw"]["conflicts"] == {"events": ["0", "1"]} and "in conflict" in r["volume_text"] and r["volume_gal"] is None
+    assert second["meta"]["latest_month_by_outfall"]["IN0000004|002"]["discharged"] is True
+    assert _in_status(tmp_path / "events") == (1, "monthly")
+    third = _dmr_main(tmp_path, monkeypatch, {}, refresh=False)          # another empty answer
+    assert [r["source_record_id"] for r in third["records"]] == ["IN0000004:002:2025-08"]
+    assert third["meta"]["latest_month_by_outfall"]["IN0000004|002"]["discharged"] is True
+    assert _in_status(tmp_path / "events") == (1, "monthly")
+    fourth = _dmr_main(tmp_path, monkeypatch, _only(_aug("0", version="1", received="15-OCT-25")), refresh=False)
+    assert fourth["records"] == [] and fourth["meta"]["months_withdrawn_by_the_source"]
+    obs = fourth["meta"]["latest_month_by_outfall"]["IN0000004|002"]
+    assert obs["month"] == "2025-08" and obs["discharged"] is False
+    assert _in_status(tmp_path / "events") == (0, "grey")
+
+
+import pytest  # noqa: E402
+
+
+@pytest.mark.parametrize("runs", [
+    [_aug("1"), _aug("0")],                       # the discharge first, the zero later
+    [_aug("0"), _aug("1")],                       # the zero first, the discharge later
+    [_aug(["1", "0"])],                           # both in one answer
+    [_aug(["0", "1"])],                           # both in one answer, the other order
+    [_aug("C"), _aug("1")],                       # NODI C first, then an equally ranked event
+    [_aug("1"), _aug("0", hours=None, volume=None)],   # a later partial answer with the conflicting row only
+])
+def test_a_disputed_month_resolves_the_same_whatever_the_order_of_arrival(tmp_path, monkeypatch, runs):
+    """Sibling cases of verification 3 P2-1: whichever order equally ranked rows that disagree on a discharge arrive
+    in, across runs (the cache read back) or in one answer, the month is one disputed record and keeps its mark."""
+    for i, run in enumerate(runs):
+        doc = _dmr_main(tmp_path, monkeypatch, _only(run), refresh=False)
+    [r] = doc["records"]
+    assert r["source_record_id"] == "IN0000004:002:2025-08" and r["raw"]["conflicting_rows"] == ["events"]
+    assert "1" in r["raw"]["conflicts"]["events"]
+    assert doc["meta"]["latest_month_by_outfall"]["IN0000004|002"]["discharged"] is True
+    assert _in_status(tmp_path / "events") == (1, "monthly")
+
+
+@pytest.mark.parametrize("runs, expect", [
+    # zero and NODI C disagree on form only: a complete no-discharge month, whatever the order
+    ([_aug(["0", "C"])], "clear"),
+    ([_aug("1"), _aug("0", version="1", received="15-OCT-25"), _aug("C", version="1", received="15-OCT-25")], "clear"),
+    # two different discharge counts: a discharge month, the count unknown
+    ([_aug(["1", "2"])], "record"),
+    # a complete zero month that later loses a parameter to another NODI code stays a no-discharge finding only
+    # while the remaining evidence is complete: an earlier discharge record is never withdrawn by a partial zero
+    ([_aug("1"), _aug("0", hours=None, volume=None, version="1", received="15-OCT-25")], "clear"),
+])
+def test_mixes_of_complete_incomplete_and_conflicting_months(tmp_path, monkeypatch, runs, expect):
+    for run in runs:
+        doc = _dmr_main(tmp_path, monkeypatch, _only(run), refresh=False)
+    obs = doc["meta"]["latest_month_by_outfall"].get("IN0000004|002")
+    if expect == "clear":
+        assert doc["records"] == [] and obs["discharged"] is False
+        assert _in_status(tmp_path / "events") == (0, "grey")
+    else:
+        assert [r["source_record_id"] for r in doc["records"]] == ["IN0000004:002:2025-08"]
+        assert obs["discharged"] is True and _in_status(tmp_path / "events") == (1, "monthly")
+
+
+def test_an_unconfirmed_zero_never_withdraws_an_earlier_discharge_month(tmp_path, monkeypatch):
+    """The withdrawal path itself (main()): the outfall files volume (July), August was filed with events and hours
+    only; a revision of August to zero events and zero hours, volume still never filed, is no complete no-discharge
+    finding: August's record is kept, marked, and every record held before is still there."""
+    def with_july(run):
+        run = {k: list(v) for k, v in run.items()}
+        run.setdefault("74063", []).append(_dmr("31-JUL-25", "0.4", unit="Mgal", received="28-AUG-25"))
+        run.setdefault("84165", []).append(_dmr("31-JUL-25", "1", received="28-AUG-25"))
+        run.setdefault("50037", []).append(_dmr("31-JUL-25", "1", unit="hr/mo", received="28-AUG-25"))
+        return run
+    first = _dmr_main(tmp_path, monkeypatch, _only(with_july(_aug("1", hours="2", volume=None))), refresh=False)
+    assert [r["source_record_id"] for r in first["records"]] == ["IN0000004:002:2025-08", "IN0000004:002:2025-07"]
+    second = _dmr_main(tmp_path, monkeypatch, _only(with_july(_aug("0", hours="0", volume=None, version="1",
+                                                                   received="15-OCT-25"))), refresh=False)
+    assert [r["source_record_id"] for r in second["records"]] == ["IN0000004:002:2025-08", "IN0000004:002:2025-07"]
+    assert not second["meta"].get("months_withdrawn_by_the_source")
+    kept = second["records"][0]["raw"]
+    assert kept["no_discharge_unconfirmed"]["since"] and kept["dmr"]["events"]["DMRValueNmbr"] == "1"
+    obs = second["meta"]["latest_month_by_outfall"]["IN0000004|002"]
+    assert obs["month"] == "2025-08" and obs["discharged"] is True and obs["no_discharge_unconfirmed"] is True
+    assert _in_status(tmp_path / "events") == (1, "monthly")
+    # the volume filed later as zero completes August: then it is withdrawn
+    third = _dmr_main(tmp_path, monkeypatch, _only(with_july(_aug("0", hours="0", volume="0", version="1",
+                                                                  received="15-OCT-25"))), refresh=False)
+    assert [r["source_record_id"] for r in third["records"]] == ["IN0000004:002:2025-07"]
+    assert third["meta"]["months_withdrawn_by_the_source"] == {"IN0000004:002:2025-08": 1}
+    obs = third["meta"]["latest_month_by_outfall"]["IN0000004|002"]
+    assert obs["month"] == "2025-08" and obs["discharged"] is False
