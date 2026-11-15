@@ -749,3 +749,16 @@ def test_each_part_of_a_multipart_bloom_has_its_marker_on_its_own_water_through_
         for f in f2:
             e = next(r for r in batch if r["event_id"] == f["id"])
             assert f["geometry"]["coordinates"] == [round(e["lon"], 5), round(e["lat"], 5)]
+
+
+def test_the_wv_rules_row_states_the_rain_caution_the_build_applies():
+    """Round 3 item 4: the caution runs only at an open combined sewer outfall placed on its water (rain_likely.targets
+    needs a water_slug); West Virginia's layer has open outlets with no water yet, so 'every open outlet' is not said."""
+    from build import rain_likely as RL
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    wv = rules["red"]["by_state"]["WV"]["basis"]
+    assert "rain caution at every open" not in wv
+    assert "applies its rain caution at each open combined sewer outfall with a location once the outfall is placed on its water" in wv
+    d = json.loads((ROOT / "data" / "outfalls-wv.json").read_text())
+    rows = d["outfalls"] if isinstance(d, dict) else d
+    assert any(RL.cso_open(r) and r.get("lat") is not None and not r.get("water_slug") for r in rows)

@@ -937,10 +937,7 @@ def test_the_public_claims_match_the_build():
     for p in ("research/in/sources.json", "scripts/add_in_register_rows.py", "data/sources/in-echo-dmr-cso.yaml"):
         assert "92 permits" not in (ROOT / p).read_text() and "(92:" not in (ROOT / p).read_text(), p
     rules = json.loads((ROOT / "data" / "rules.json").read_text())
-    # West Virginia's own row (integrated later) describes its own outlets' rain caution with its radar rule
-    others = {**rules, "red": {**rules["red"], "by_state": {k: v for k, v in rules["red"]["by_state"].items()
-                                                         if k != "WV"}}}
-    assert "rain caution at every open" not in json.dumps(others)
+    assert "rain caution at every open" not in json.dumps(rules)
     assert "with a location once the outfall is placed on its water" in json.dumps(rules)
 
 
