@@ -3,6 +3,16 @@
  "state": "WV",
  "waters": 1,
  "reports": 1,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in WV": 1
+ },
+ "build": {
+  "date": "2026-11-15",
+  "command": "python -m ingest.waters_from_nhd --names research/wv/receiving-waters-missing.json --state WV",
+  "records_built": 0,
+  "names_resolved": 0,
+  "network_requests": 0
+ },
  "rows": [
   {
    "name": "Jim Rum",
@@ -25,7 +35,7 @@
    "as_given": [
     "Jim Rum/Ohio River"
    ],
-   "reason": "not in data/receiving-waters-national.json for WV; likely Jim Run (on the national list for WV; DEP's layer writes 'Jim Rum')"
+   "reason": "no NHD flowline or waterbody of that name in WV; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   }
  ]
 }
