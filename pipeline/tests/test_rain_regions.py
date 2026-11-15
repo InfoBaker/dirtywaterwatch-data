@@ -243,7 +243,8 @@ def test_prudhoe_bay_without_radar_coverage_is_listed_never_read_and_never_fails
     assert a["grid"]["tiles_read"] == 2 and not a["grid"]["tiles_failed"] and not a["fallback"]["used"]
     assert m["outside_coverage"] == [k] and a["outside_coverage"] == [k] and a["counted"] == 4 == a["fresh"]
     assert "mrms" not in out["points"][k] and out["points"][k]["no_coverage"]["read_before"] is False
-    assert out["permits"]["AKG320002"]["h24"] is None and out["permits"]["AKG320002"]["valid_time"] is None
+    # its permittee has no point the radar can read: not a rain permittee (never said to be covered), named
+    assert "AKG320002" not in out["permits"] and m["unreadable_permits"] == ["AKG320002"]
     assert k not in m["failed"] and out["ok"] and m["readings_ok"] and RF.exit_code(out) == 0
     assert "(1 without radar coverage)" in RF.summary_line(out, 1.0)
     assert any("without radar coverage" in p and "AKG320002:006" in p for p in m["problems"])
@@ -285,11 +286,44 @@ def test_a_stale_regional_product_fails_the_stage_loudly_and_shows_no_reading(wo
     assert out["ok"] is False and "carib: 0 of 9 points in the carib radar grid" in out["error"]
     assert "its product is valid to 2026-08-10T09:00:00Z" in out["error"]
     assert "STALE product valid 2026-08-10T09:00:00Z" in RF.summary_line(out, 1.0)
-    # its readings, five hours old, are never shown as the permittee's this hour
+    # its readings, five hours old, are never shown as the permittee's this hour, but keep their product and how they
+    # were read (a caution in its tail cites them), and the history keeps them at their own hour
     row = out["permits"]["PR0021555"]
     assert row["h24"] is None and row["valid_time"] is None and row["points_reporting"] == 0
     assert row["last_reading"]["valid_time"] == RF.iso(VALID - timedelta(hours=5))
+    assert row["read"] == "grid" and row["product"].endswith("(carib_QPE_24H)")
     assert out["permits"]["AK0023213"]["h24"] is not None
+    hist = json.loads((world["tmp"] / "rainfall-history.json").read_text())
+    i = int((VALID - timedelta(hours=5) - RF.parse_t(hist["start"])).total_seconds() // 3600)
+    assert hist["permits"]["PR0021555"][i] == round(7.9 / 25.4, 2)
+
+
+def test_a_stale_product_read_by_the_fallback_is_still_called_stale(world):
+    out = RF.run(now=NOW, session=RegionNOAA(stale={"alaska": 5}, fail={"alaska"}))
+    a = out["mrms"]["regions"]["alaska"]
+    assert a["fallback"]["used"] and a["read"] == "point" and a["fresh"] == 0 and not a["readings_ok"]
+    assert a["product_valid_time"] == RF.iso(VALID - timedelta(hours=5)) and a["stale_product"]
+    line = RF.summary_line(out, 1.0)
+    assert "STALE product valid 2026-08-10T09:00:00Z" in line and "FALLBACK" in line and RF.exit_code(out) == 1
+
+
+def test_an_outage_in_the_same_hour_as_a_reading_sets_that_reading_aside(world, monkeypatch):
+    outs = lower48() + alaska()
+    monkeypatch.setattr(RF, "cso_outfalls", lambda: outs)
+    first = RF.run(now=NOW, session=RegionNOAA())
+    assert first["mrms"]["regions"]["alaska"]["fresh"] == 4
+    dark = {p: {h: -3.0 for h in RF.HOURS} for p in [*JUNEAU, AK_WET]}
+    out = RF.run(now=NOW + timedelta(minutes=10), session=RegionNOAA(wet=dark), force=True)
+    a = out["mrms"]["regions"]["alaska"]
+    assert a["fresh"] == 0 and a["counted"] == 4 and not a["readings_ok"] and RF.exit_code(out) == 1
+    for p in [*JUNEAU, AK_WET]:
+        pt = out["points"][key(p)]
+        assert "mrms" not in pt and pt["last_mrms"] == first["points"][key(p)]["mrms"]
+    assert out["permits"]["AK0023213"]["h24"] is None                      # never shown as this hour's dry reading
+    back = RF.run(now=NOW + timedelta(hours=1), session=RegionNOAA())     # the radar sees it again: read, mark gone
+    assert back["mrms"]["regions"]["alaska"]["fresh"] == 4
+    assert all("last_mrms" not in back["points"][key(p)] and "no_coverage" not in back["points"][key(p)]
+               for p in JUNEAU)
 
 
 def test_a_failed_regional_export_falls_back_in_that_region_only_and_keeps_its_unit(world):
