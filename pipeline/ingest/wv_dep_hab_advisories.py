@@ -188,6 +188,31 @@ def rows_of(answers: dict) -> dict[str, dict]:
     return out
 
 
+ADVICE_PREFIX = "West Virginia DEP algal bloom map: "
+
+
+def rescrub(state: dict) -> dict:
+    """Every episode and last-read row kept from an earlier run, its Advisory text scrubbed again (scrub_advisory, which
+    leaves scrubbed text as it is), so text saved before a check was added never reaches a write again, whether the
+    map later shows the row, leaves it out or cannot be read."""
+    for group in (state.get("items") or {}, state.get("last_rows") or {}):
+        for it in group.values():
+            if isinstance(it, dict) and it.get("advisory"):
+                it["advisory"] = scrub_advisory(it["advisory"])
+    return state
+
+
+def rescrub_records(recs: list[dict]) -> list[dict]:
+    """Records of an earlier events file (no state to rebuild them from), their advice text scrubbed again."""
+    for r in recs:
+        t = r.get("advice_text") or ""
+        if t.startswith(ADVICE_PREFIX):
+            r["advice_text"] = ADVICE_PREFIX + (scrub_advisory(t[len(ADVICE_PREFIX):]) or "")
+        elif t and scrub_advisory(t) != t:
+            r["advice_text"] = ADVICE_PREFIX + WITHHELD
+    return recs
+
+
 def update(state: dict, current: dict, at: str) -> dict:
     items = state.setdefault("items", {})
     for k, it in items.items():
@@ -234,7 +259,7 @@ def records(state: dict) -> list[dict]:
                          coord_source="agency_layer" if it.get("lat") is not None else None,
                          started_at=it["first_seen"], ended_at=left, time_precision="poll", reported_at=None,
                          published_at=None, source_updated_at=None, authority=AUTHORITY,
-                         advice_text=f"West Virginia DEP algal bloom map: {adv}" if adv else "West Virginia DEP algal bloom map (no advisory text given)",
+                         advice_text=f"{ADVICE_PREFIX}{adv}" if adv else "West Virginia DEP algal bloom map (no advisory text given)",
                          advice_window_hours=None, advice_window_basis=WINDOW_BASIS, source_url=PAGE, raw=raw))
         out[-1]["fetched_at"] = it.get("last_seen") or out[-1]["fetched_at"]
     return out
@@ -259,10 +284,18 @@ def main(argv=None) -> int:
         answers = json.loads(Path(argv[argv.index("--file") + 1]).read_text()) if "--file" in argv else fetch()
         current = rows_of(answers)
     except (requests.RequestException, OSError, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
+        # nothing is lifted or added, but text kept from an earlier run is scrubbed before it is written again
+        state = rescrub(read_json(STATE_PATH, {}) or {})
+        if state.get("items"):
+            write_json(STATE_PATH, state)
+            write_events(SOURCE_ID, records(state), ok=False, error=str(e), partial=True)
+        else:
+            prev = read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+            write_events(SOURCE_ID, rescrub_records(prev.get("records") or []), ok=False, error=str(e),
+                         partial=True)
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
-    state = read_json(STATE_PATH, {}) or {}
+    state = rescrub(read_json(STATE_PATH, {}) or {})
     if "--file" not in argv and current and state.get("last_rows") != current:
         save_raw(SOURCE_ID, json.dumps({"fetched_at": at, "rows": current}, indent=1).encode(), "json")
     state["last_rows"] = current
