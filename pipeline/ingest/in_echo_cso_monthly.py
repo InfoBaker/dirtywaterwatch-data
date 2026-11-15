@@ -247,10 +247,56 @@ def collect(results: dict[tuple[str, str], dict], reg: dict, stats: dict) -> tup
                     except ValueError:
                         stats["unparsed_period"][f"{permit}:{feat}:{pend}"] += 1
                         continue
+                    new = dict(row, _pend=pend, _param=par.get("ParameterDesc"))
                     prev = cells[(permit, feat, ym)].get(name)
-                    if prev is None or revision_key(row) > revision_key(prev):
-                        cells[(permit, feat, ym)][name] = dict(row, _pend=pend, _param=par.get("ParameterDesc"))
+                    if prev is None or revision_key(row) > _rank(prev):
+                        cells[(permit, feat, ym)][name] = new
+                    elif revision_key(row) == _rank(prev) and evidence(row) not in _evidences(prev):
+                        # equally ranked rows that disagree: neither is chosen (review 2026-11-14 P2-7); the
+                        # parameter is unknown this run whatever order the answer gives them
+                        rows_ = prev.get("_conflict") or [prev]
+                        cells[(permit, feat, ym)][name] = {
+                            "_conflict": sorted(rows_ + [new], key=lambda x: str(evidence(x))),
+                            "_pend": pend, "_param": par.get("ParameterDesc"), "_rank": revision_key(row)}
+                        stats["conflicting_equal_revisions"][f"{permit}:{feat}:{ym}:{name}"] += 1
     return dict(cells), names
+
+
+def evidence(row: dict) -> tuple:
+    """What a DMR row says: (its value, its NODI code)."""
+    return num(row.get("DMRValueNmbr")), str(row.get("NODICode") or "").upper()
+
+
+def _rank(entry: dict) -> tuple:
+    return entry["_rank"] if "_conflict" in entry else revision_key(entry)
+
+
+def _evidences(entry: dict) -> list[tuple]:
+    return [evidence(x) for x in entry["_conflict"]] if "_conflict" in entry else [evidence(entry)]
+
+
+def merge_previous(cells: dict, prev_records: list[dict], stats: dict) -> None:
+    """A parameter this run's answer does not give (missing, or two equally ranked rows that disagree) keeps the
+    previous run's row for that outfall-month (raw.dmr of the previous record): a partial answer never withdraws a
+    discharge; only a row that supersedes the earlier positive figure (zero or NODI C) does (review 2026-11-14 P1-1).
+    A month absent from this run's answer altogether is carried whole by main()."""
+    for r in prev_records:
+        raw = r.get("raw") or {}
+        key = (r.get("npdes_permit"), raw.get("permit_feature") or r.get("outfall_id"), raw.get("month"))
+        cell = cells.get(key)
+        if cell is None:
+            continue
+        for name, row in (raw.get("dmr") or {}).items():
+            cur = cell.get(name)
+            if cur is not None and "_conflict" not in cur and _says(cur):
+                continue
+            pend = datetime.strptime(r["ended_at"][:10], "%Y-%m-%d").strftime("%d-%b-%y").upper()
+            cell[name] = dict(row, _pend=pend, _param=row.get("parameter"), _from_previous_run=True)
+            stats["parameters_kept_from_previous_run"][f"{key[0]}:{key[1]}:{key[2]}:{name}"] += 1
+
+
+def _says(row: dict) -> bool:
+    return num(row.get("DMRValueNmbr")) is not None or str(row.get("NODICode") or "").upper() == "C"
 
 
 def figures(cell: dict) -> dict:
@@ -258,6 +304,8 @@ def figures(cell: dict) -> dict:
     out = {"no_discharge": False, "received": None}
     vals = {}
     for name, row in cell.items():
+        if "_conflict" in row:
+            continue
         if str(row.get("NODICode") or "").upper() == "C":
             vals[name] = 0.0
             out["no_discharge"] = True
@@ -342,7 +390,10 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) 
         raw = {"month": ym, "permit_feature": feat,
                "events": fg["events"], "hours": fg["hours"], "volume": fg["volume_raw"],
                "dmr": {name: {k: row.get(k) for k in RAW_FIELDS} | {"parameter": row.get("_param")}
-                       for name, row in sorted(cell.items())},
+                       | ({"from_previous_run": True} if row.get("_from_previous_run") else {})
+                       for name, row in sorted(cell.items()) if "_conflict" not in row},
+               **({"conflicting_rows": sorted(n for n, row in cell.items() if "_conflict" in row)}
+                  if any("_conflict" in row for row in cell.values()) else {}),
                "receiving_water_registry": o.get("receiving_water_echo"),
                "outfall_registry_file": o.get("_file"), "outfall_status": o.get("outfall_status"),
                "county": o.get("county"), "time_zone": tz, **({"volume_note": vol_note} if vol_note else {}),
@@ -439,11 +490,13 @@ def main(argv=None) -> int:
 
     stats = defaultdict(Counter)
     cells, names = collect(results, reg, stats)
+    prev_doc = read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+    merge_previous(cells, prev_doc.get("records") or [], stats)
     records = build_records(cells, names, reg, dischargers(), stats)
     # reconcile with the previous run (review 2026-11-14 P1-2): a month the source no longer lists at all is kept,
     # marked missing from the source; a month the source now reports as no discharge is withdrawn; a month whose
-    # cells now say nothing (no value, another NODI code) is kept as it was
-    prev_doc = read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+    # cells now say nothing (no value, another NODI code) is kept as it was; merge_previous has already put back
+    # every parameter this run's answer left out, so a month withdrawn here was corrected parameter by parameter
     ids = {r["event_id"] for r in records}
     for r in prev_doc.get("records") or []:
         if r.get("event_id") in ids:

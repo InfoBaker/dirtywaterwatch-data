@@ -663,3 +663,66 @@ def test_operators_are_never_named_after_a_plant_and_count_only_sewage_outlets()
     assert B.outfall_counts({"outfall": "001", "limit_set_names": ["MAIN OUTFALL"]})
     holder = next(r for r in rows if "INJ043168" in r["npdes_permits"])
     assert holder["name"] == "Holder of permit INJ043168" and holder["outfall_count"] is None
+
+
+def test_a_partial_dmr_answer_never_withdraws_an_earlier_discharge(tmp_path, monkeypatch):
+    """Astra re-review 2026-11-14 P1-1: zero hours with the events and volume rows missing keeps the discharge."""
+    first = _dmr_main(tmp_path, monkeypatch, _results())
+    assert first["records"][0]["volume_gal"] == 1_100_000
+    res = _results()
+    for code in ("84165", "74063"):                                  # events and volume rows missing for August
+        rows = res[("IN0000004", code)]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"]
+        rows[:] = [x for x in rows if x["MonitoringPeriodEndDate"] != "31-AUG-25"]
+    hours = res[("IN0000004", "50037")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][0]
+    hours.update(DMRValueNmbr="0")
+    part = _dmr_main(tmp_path, monkeypatch, res)
+    assert [r["source_record_id"] for r in part["records"]] == ["IN0000004:002:2025-08"]
+    r = part["records"][0]
+    assert r["volume_gal"] == 1_100_000 and r["raw"]["events"] == 1.0 and r["raw"]["hours"] == 0.0
+    assert r["raw"]["dmr"]["events"]["from_previous_run"] and "from_previous_run" not in r["raw"]["dmr"]["hours"]
+    assert not part["meta"].get("months_withdrawn_by_the_source")
+    # a wholly missing month is still carried; a full correction to no discharge still withdraws
+    gone = _dmr_main(tmp_path, monkeypatch, {})
+    assert gone["records"][0]["raw"]["_missing_from_source_since"]
+    res = _results()
+    for code in ("84165", "50037", "74063"):
+        row = res[("IN0000004", code)]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][0]
+        row.update(DMRValueNmbr=None, NODICode="C", NODIDesc="No Discharge", VersionNmbr="1")
+    fixed = _dmr_main(tmp_path, monkeypatch, res)
+    assert fixed["records"] == [] and fixed["meta"]["months_withdrawn_by_the_source"]
+    assert fixed["meta"]["latest_month_by_outfall"]["IN0000004|002"]["month"] == "2025-09"
+
+
+def test_equally_ranked_conflicting_dmr_rows_resolve_the_same_whatever_their_order(tmp_path, monkeypatch):
+    """Astra re-review 2026-11-14 P2-7."""
+    from collections import Counter, defaultdict
+
+    from ingest import in_echo_cso_monthly as M
+
+    def run(rows):
+        res = _results()
+        res[("IN0000004", "84165")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][:] = rows
+        stats = defaultdict(Counter)
+        cells, names = M.collect(res, _registry(), stats)
+        return cells, M.build_records(cells, names, _registry(), {}, stats), stats
+
+    three, zero = _dmr("31-AUG-25", "3"), _dmr("31-AUG-25", "0")
+    nodi = _dmr("31-AUG-25", None, nodi="C")
+    for a, b in ((three, zero), (three, nodi)):
+        c1, r1, s1 = run([a, b])
+        c2, r2, _ = run([b, a])
+        assert c1 == c2 and r1 == r2 and s1["conflicting_equal_revisions"]
+        assert r1[0]["raw"]["events"] is None and r1[0]["raw"]["conflicting_rows"] == ["events"]
+    # missing revision metadata on both rows is equal ranking too
+    bare = [{k: v for k, v in x.items() if k not in ("VersionNmbr", "ValueReceivedDate")} for x in (three, zero)]
+    assert run(bare)[0] == run(bare[::-1])[0]
+    # identical duplicates are no conflict
+    c, r, s = run([three, dict(three)])
+    assert not s["conflicting_equal_revisions"] and r[0]["raw"]["events"] == 3.0
+    # with a previous run, the conflicting parameter keeps the earlier authoritative row
+    first = _dmr_main(tmp_path, monkeypatch, _results())
+    assert first["records"][0]["raw"]["events"] == 1.0
+    res = _results()
+    res[("IN0000004", "84165")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][:] = [three, zero]
+    again = _dmr_main(tmp_path, monkeypatch, res)
+    assert again["records"][0]["raw"]["events"] == 1.0
