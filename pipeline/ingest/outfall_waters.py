@@ -171,7 +171,7 @@ def text_of(o: dict) -> str:
     stays as it is."""
     raw = str((o.get("receiving_water_override") or {}).get("water") or o.get("receiving_water_echo") or "").strip()
     if STATE_TEXT and raw and not (o.get("receiving_water_override") or {}).get("water"):
-        parts, _ = N.national_parts(raw)
+        parts, _ = N.national_parts(raw, o.get("state"))
         if parts:
             return " and ".join(parts)
     return raw
@@ -638,7 +638,7 @@ class Matcher:
         st, permit = o.get("state"), o.get("npdes_permit")
         lat, lon = o.get("lat"), o.get("lon")
         self._builder_far = None
-        keys = [N.compact(text)] + [N.compact(p) for p in N.national_parts(text)[0]]
+        keys = [N.compact(text)] + [N.compact(p) for p in N.national_parts(text, st)[0]]
         for k in keys:
             t = self.targets.get((st, k))
             if not t or not t.get("define_by") or permit not in (t.get("permits") or []) or not t.get("slugs"):
