@@ -30,6 +30,9 @@ Records (rules only; a snapshot read as a sequence of polls)
     long-term advisory has stood since before it), and the record ends at the first poll that no longer shows it
     (ended_at, raw.ended_at_precision poll, advisory_lifted). "No Advisory" is no record: grey, "no report", never
     clean. Out of season DES does not sample: no short-term advisory is not a finding.
+  - Both layers: a read that lists an advisory more than 14 days after the last read that listed it opens a new
+    observation period (raw.listed_periods, ingest/de_sc_periods.py); the status build colours each period on its own,
+    so the unread time between is never confirmed after the fact.
   - Bloom: a delineation whose Advisory_Tier is Watch or Advisory is a record (hab_advisory, plum; raw.advisory_level
     quotes DES's tier, "Watch" or "Advisory", both DES's own recreational notices). started_at is the Date field (a
     date stored at midnight Eastern: precision day); the advisory's area is the table's Advisory Area when the table
