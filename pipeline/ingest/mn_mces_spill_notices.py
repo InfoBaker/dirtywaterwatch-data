@@ -27,7 +27,10 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
     to stop"); a planned, attempted or negated one ("will stop", "could not stop") is no stop (STOP_DONE, STOP_NOT;
     verification pass 2026-11-15 P1-2). Otherwise unknown; never invented.
   - The signs: when the Council says it placed "Do Not Enter/ Sewage Spill" signs, that is its own advisory
-    (advisory_active, red while it stands; advice_text quotes the signs only, review P1-8). "Will be removed" is a
+    (advisory_active, red while it stands; advice_text quotes the signs only, review P1-8). Signs first given in an
+    update after the response day start the window on that notice's day (raw._advisory_from), never backdated; before
+    it the spill's own clock applies (raw._before_advisory: ended at the stop, else unknown; build/status.py;
+    verification pass 2026-11-15 P1-2), and a removal done after such signs ends the red at the end of that day. "Will be removed" is a
     removal announced, not one done: the signs stood to the end of that update's day at least (raw._unlisted_since,
     the end of that local day) and after it the end is not confirmed (raw._end_not_confirmed: hatched, then the
     unresolved rules), never a lift at the announcement. "Have been removed" with the spill's stop given: status ended
@@ -324,6 +327,17 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
         quote = up[1].group("q").strip()
         advice = f"The Council's signs at the affected areas: \"{quote}\" (its notice of {up[0]})."
         raw["signs"] = {"wording": quote, "posted_per_notice_of": up[0]}
+        # signs first given in an update after the response day: the Council's window starts on that notice's day,
+        # never backdated to the response; before it the spill's own clock applies (raw._before_advisory, read by
+        # build/status.py; verification pass 2026-11-15 P1-2)
+        late = bool(start) and bool(up[0]) and date.fromisoformat(up[0]) > start
+        if late:
+            raw["_advisory_from"] = up[0]
+            raw["_before_advisory"] = {"status": "ended" if stopped else "unknown",
+                                       "ended_at": stopped.isoformat() if stopped else None,
+                                       "ended_at_precision": "day" if stopped else None}
+            raw["advisory_from_basis"] = (f"the Council's signs are first given in its notice of {up[0]}, after the day "
+                                          f"it responded ({start.isoformat()}): its window starts on that notice's day")
         done = next((u for u in updates if SIGNS_REMOVED.search(u["text"])), None)
         if down or done:
             said = done or down
@@ -335,7 +349,7 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
                 "only that it was by that day" if done else
                 f"the update of {said['date']} says the signs will be removed: a removal announced, not one done; "
                 "the day they came down is not given")
-        if done and stopped:
+        if done and stopped and not late:
             # the spill ended on its stop day and the signs were down by the update's day: the Council's window runs
             # from the end of the stop day to the end of that update's day (red.event), the site's caution from the stop
             window_h = max(0.0, (day_end(date.fromisoformat(done["date"])) - day_end(stopped)).total_seconds() / 3600)
@@ -351,12 +365,14 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
             status, ended = "advisory_active", None
             raw["_unlisted_since"] = day_end(date.fromisoformat(said["date"])).astimezone(ZoneInfo("UTC")) \
                 .strftime("%Y-%m-%dT%H:%M:%SZ")
-            raw["_end_not_confirmed"] = True
+            if not (done and stopped):
+                raw["_end_not_confirmed"] = True
             raw["_window_end_words"] = (f"the Council's update of {said['date']} says its signs "
                                         f"{'have been' if done else 'will be'} removed; the day they came down is "
                                         "not given")
             raw["end_basis"] = (f"the Council's signs stood to the end of {said['date']} at least; their removal day "
                                 "is not given" + ("" if stopped else ", nor the spill's own stop")
+                                + ("; they were down by then" if done and stopped else "")
                                 + (f"; the spill itself stopped on {stopped.isoformat()}" if stopped else ""))
         else:
             status, ended = "advisory_active", None

@@ -2669,6 +2669,25 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
                      "raw": {**raw, "_advisory_observed": {}, "_last_seen_in_source": period["start"],
                              "ended_at_precision": "poll"}}
             earlier.extend(event_intervals(prior, state, now, water, rules))
+    if raw.get("_advisory_from") and ev.get("status") == "advisory_active":
+        # an authority's window that begins after the report (the Metropolitan Council's signs first given in a later
+        # update, ingest/mn_mces_spill_notices.py): the advisory runs from its own day, never backdated to the report;
+        # before it the record's own clock (raw._before_advisory: its status and end without the advisory). Keyed on
+        # the field, so no other feed changes (verification pass 2026-11-15 P1-2)
+        tz = event_zone(ev, state)
+        adv_from = parse_time(raw["_advisory_from"], tz)
+        s0 = parse_time(ev.get("started_at"), tz) or parse_time(ev.get("reported_at"), tz)
+        if adv_from is not None and s0 is not None and adv_from > s0:
+            before = raw.get("_before_advisory") if isinstance(raw.get("_before_advisory"), dict) else {}
+            prior_raw = {k: v for k, v in raw.items() if k not in ("_advisory_from", "_before_advisory",
+                                                                   "_unlisted_since", "_end_not_confirmed",
+                                                                   "_window_end_words", "ended_at_precision")}
+            if before.get("ended_at_precision"):
+                prior_raw["ended_at_precision"] = before["ended_at_precision"]
+            prior = {**ev, "status": before.get("status") or "unknown", "ended_at": before.get("ended_at"),
+                     "advice_window_hours": None, "advice_window_basis": None, "raw": prior_raw}
+            earlier.extend(_event_intervals(prior, state, now, water, rules))
+            ev = {**ev, "started_at": None, "reported_at": raw["_advisory_from"]}
     out = _event_intervals(ev, state, now, water, rules)
     why = end_not_credible(ev, now, rules) if out and ev.get("ended_at") else None
     if why:
