@@ -23,8 +23,10 @@ Records (a map of what is in effect, read as a snapshot)
     (exceededTransferLimit). The Advisory text is cut before it is saved anywhere (scrub_advisory: common.scrub_text,
     then every street house number, then every sentence naming who reported, sampled or can be called; text that
     cannot be cut to the advice alone is withheld).
-  - Placement by the agency's own geometry only: a point's position, a segment's middle vertex, an area's vertex mean,
-    rounded to three decimals (coord_source 'agency_layer'); raw.geometry_kind says which. No water name is invented.
+  - Placement by the agency's own geometry only: the marker is a point's position, the point half way along a
+    segment, or an interior point of an area (never a vertex mean, which can fall outside a concave area), rounded to
+    three decimals (coord_source 'agency_layer'); raw.geometry_kind and raw.marker_basis say which. DEP's segment or
+    area itself is kept in raw.agency_extent (GeoJSON, three decimals). No water name is invented.
 
 Run from pipeline/: python -m ingest.wv_dep_hab_advisories [--file saved.json] [--at 2026-11-14T12:00:00Z]
 Cadence: with the refresh (daily is enough; the map changes rarely).
@@ -55,19 +57,59 @@ START_BASIS = ("the first read of DEP's map that showed it: DEP gives the day th
 WINDOW_BASIS = "in effect while DEP's map shows it; DEP sets no fixed period"
 
 
-def place(kind: str, g: dict) -> tuple[float | None, float | None]:
+def _esri_area(g: dict):
+    """An esri polygon (rings: outer rings clockwise, holes counter-clockwise) as a shapely (Multi)Polygon."""
+    from shapely.geometry import LinearRing, MultiPolygon, Polygon
+    outers, holes = [], []
+    for ring in g.get("rings") or []:
+        if len(ring) < 4:
+            continue
+        lr = LinearRing([(float(x), float(y)) for x, y, *_ in ring])
+        (holes if lr.is_ccw else outers).append(lr)
+    polys = []
+    for o in outers:
+        po = Polygon(o)
+        polys.append(Polygon(o, [h for h in holes if po.contains(Polygon(h).representative_point())]))
+    if not polys:
+        return None
+    return polys[0] if len(polys) == 1 else MultiPolygon(polys)
+
+
+def _esri_line(g: dict):
+    from shapely.geometry import LineString, MultiLineString
+    paths = [[(float(x), float(y)) for x, y, *_ in p] for p in g.get("paths") or [] if len(p) >= 2]
+    if not paths:
+        return None
+    return LineString(paths[0]) if len(paths) == 1 else MultiLineString(paths)
+
+
+def _r3_coords(c):
+    return [round(c[0], 3), round(c[1], 3)] if isinstance(c[0], (int, float)) else [_r3_coords(x) for x in c]
+
+
+def place(kind: str, g: dict) -> tuple[float | None, float | None, dict | None]:
+    """(lat, lon, extent): the marker and DEP's own extent. A point is itself; a segment's marker lies on the line,
+    half way along it; an area's marker is an interior point of the polygon (shapely representative_point: inside
+    a concave shape, outside its holes, on one part of a multipart area), never the vertex mean, which can fall
+    outside. The extent is DEP's geometry as GeoJSON, every coordinate rounded to three decimals, kept for the
+    placement of the advisory's whole stretch or area (raw.agency_extent)."""
+    from shapely.geometry import mapping
     try:
         if kind == "point":
-            x, y = g["x"], g["y"]
-        elif kind == "segment":
-            pts = [p for path in g.get("paths") or [] for p in path]
-            x, y = pts[len(pts) // 2]
+            return round(float(g["y"]), 3), round(float(g["x"]), 3), None
+        geom = _esri_line(g) if kind == "segment" else _esri_area(g)
+        if geom is None or geom.is_empty:
+            return None, None, None
+        if kind == "segment":
+            pt = geom.interpolate(0.5, normalized=True) if geom.geom_type == "LineString" else \
+                max(geom.geoms, key=lambda x: x.length).interpolate(0.5, normalized=True)
         else:
-            pts = [p for ring in g.get("rings") or [] for p in ring]
-            x, y = sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts)
-        return round(float(y), 3), round(float(x), 3)
+            pt = geom.representative_point()
+        gj = mapping(geom)
+        extent = {"type": gj["type"], "coordinates": _r3_coords(gj["coordinates"])}
+        return round(pt.y, 3), round(pt.x, 3), extent
     except (KeyError, IndexError, TypeError, ValueError, ZeroDivisionError):
-        return None, None
+        return None, None, None
 
 
 STREET = (r"(?:Lane|Ln|Road|Rd|Street|St|Avenue|Ave|Drive|Dr|Court|Ct|Way|Boulevard|Blvd|Circle|Cir|Place|Pl|Pike|"
@@ -128,11 +170,12 @@ def rows_of(answers: dict) -> dict[str, dict]:
             raise ValueError(f"layer {lid} answered only part of its rows (exceededTransferLimit)")
         for f in doc["features"]:
             a = f.get("attributes") or {}
-            lat, lon = place(kind, f.get("geometry") or {})
+            lat, lon, extent = place(kind, f.get("geometry") or {})
             utc, day = observed(a)
             text = " ".join(str(a.get("Advisory") or "").split())
             out[f"{lid}-{a.get('OBJECTID')}"] = {"kind": kind, "advisory": scrub_advisory(text),
-                                                 "date_observed": day, "date_observed_utc": utc, "lat": lat, "lon": lon}
+                                                 "date_observed": day, "date_observed_utc": utc, "lat": lat, "lon": lon,
+                                                 "extent": extent}
     return out
 
 
@@ -166,6 +209,9 @@ def records(state: dict) -> list[dict]:
                "date_observed_basis": ("Date_Observed: DEP's observation of the bloom, stored as an instant "
                                        "(date_observed_utc); a value at midnight UTC is read as that date, any other "
                                        "instant as its Eastern date"),
+               "agency_extent": it.get("extent"),
+               "marker_basis": {"point": "DEP's point", "segment": "half way along DEP's segment",
+                                "area": "an interior point of DEP's area"}.get(it.get("kind")),
                "first_seen_at": it["first_seen"], "_last_seen_in_source": it.get("last_seen"),
                "start_basis": START_BASIS, "time_zone": TZ, "advisory_noun": "Algal bloom advisory"}
         if left:
