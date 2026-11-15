@@ -39,11 +39,11 @@ TODAY = "2026-11-14"
 def entry(possible_in=0.25, likely_in=1.0, quiet_enough=False, usable=True, why_not=None, outfalls=None, notes=()):
     """One operator's entry in the levels file's format (spec section 1)."""
     if not usable:
-        return {"permit": PERMIT, "name": "Test Water and Sewer", "state": "MA", "computed": TODAY, "method_version": 1,
+        return {"permit": PERMIT, "name": "Test Water and Sewer", "state": "MA", "computed": TODAY, "method_version": RH.METHOD_VERSION,
                 "usable": False, "why_not": why_not or "4 storms followed by a reported overflow (fewer than 10)",
                 "storms": 30, "followed": 4, "period": ["2022-07-01", "2026-10-31"]}
     rng = lambda lo, hi, n, k: {"lo": lo, "hi": hi, "storms": n, "followed": k, "share": round(k / n, 3)}  # noqa: E731
-    return {"permit": PERMIT, "name": "Test Water and Sewer", "state": "MA", "computed": TODAY, "method_version": 1,
+    return {"permit": PERMIT, "name": "Test Water and Sewer", "state": "MA", "computed": TODAY, "method_version": RH.METHOD_VERSION,
             "usable": True, "why_not": None, "period": ["2019-01-01", "2026-10-31"], "record_from": "2015-01-01",
             "storms": 408, "followed": 67, "reports": 90, "reports_with_no_storm": 3, "day_precision_reports": 0,
             "bands": [rng(0.1, 0.25, 157, 0), rng(0.25, 1.0, 207, 29), rng(1.0, None, 44, 38)],
@@ -61,7 +61,7 @@ def entry(possible_in=0.25, likely_in=1.0, quiet_enough=False, usable=True, why_
 
 
 def levels_file(permits: dict) -> dict:
-    return {"method_version": 1, "built": "2026-11-14T06:00:00Z", "today": TODAY, "method": "plain sentences",
+    return {"method_version": RH.METHOD_VERSION, "built": "2026-11-14T06:00:00Z", "today": TODAY, "method": "plain sentences",
             "rain_record": {"source_id": "iem-iemre-mrms-daily", "name": RL.RAIN_RECORD_NAME,
                             "url": "https://mesonet.agron.iastate.edu/iemre/", "first_day": "2015-01-01",
                             "day": "America/Chicago calendar days"},
@@ -208,7 +208,7 @@ def _analysed(sizes_followed):
     e = RH.analyse(daily, spans, end, cfg, end + timedelta(days=30))
     e.pop("_storms", None)
     e.pop("_every", None)
-    return {**e, "permit": PERMIT, "name": "Test", "state": "MA", "computed": TODAY, "method_version": 1, "sources": []}
+    return {**e, "permit": PERMIT, "name": "Test", "state": "MA", "computed": TODAY, "method_version": RH.METHOD_VERSION, "sources": []}
 
 
 def test_caution_from_the_rung_of_one_followed_small_storm_and_from_possible_in_when_quiet_enough():
@@ -255,7 +255,7 @@ def test_the_level_follows_the_peak_and_the_label_the_level(peak, kind, level, l
     ev = ep["rain"]["evidence"]
     assert ev["class"]["kind"] == kind and ev["level"] == level and ev["caution_in"] == 0.1 and ev["likely_in"] == 1.0
     assert ev["period"] == ["2019-01-01", "2026-10-31"] and ev["report_sources"] == ["ma-massdep"]
-    assert ev["rain_record"] == "iem-iemre-mrms-daily" and ev["method_version"] == 1 and ev["computed"] == TODAY
+    assert ev["rain_record"] == "iem-iemre-mrms-daily" and ev["method_version"] == RH.METHOD_VERSION and ev["computed"] == TODAY
     assert set(ev) == {"basis", "level", "caution_in", "likely_in", "class", "period", "lowest_reported", "quiet", "notes",
                        "why_no_history", "rule_text", "report_sources", "rain_record", "method_version", "computed"}
     p = blk["permits"][PERMIT]
@@ -324,7 +324,7 @@ def test_the_export_carries_level_evidence_and_the_outfalls_own_counts():
     lv = levels_file({PERMIT: entry(outfalls=oh)})
     st, _ = build(lv, values=wet(range(0, 6), v=1.2))
     pub = X.publicize(X.public_rain(st["rain_likely"]))
-    assert pub["label_by_level"]["possible"] == POSSIBLE and pub["levels"]["method_version"] == 1
+    assert pub["label_by_level"]["possible"] == POSSIBLE and pub["levels"]["method_version"] == RH.METHOD_VERSION
     p = pub["permits"][PERMIT]
     assert p["level"] == "likely" and p["evidence"]["basis"] == "operator_history" and p["history"]["storms"] == 408
     assert all(e["rain"]["evidence"]["class"]["kind"] == "likely" for e in pub["episodes"].values())
@@ -424,7 +424,23 @@ def test_a_thin_history_keeps_the_fallbacks_72_hours_across_the_start_of_the_sea
     assert fb_end == now - timedelta(hours=25) + timedelta(hours=72)       # below from 25 hours back, then 72 hours
     (ep,) = hist["rain_likely"]["episodes"].values()
     assert S.parse_time(ep["end"]) == fb_end and ep["rain"]["until_rule"] == \
-        "72 hours after the 24-hour total falls below 0.25 inch"
+        "72 hours after the 24-hour total falls below 0.25 inch, the operator's own rule"
+    # second pass P2-13: the end is cited by the rule that set it; start, amount and times stay the history's
+    r = ep["rain"]
+    er = r["end_rule"]
+    assert er == {"basis": "operator_rule", "threshold_in": 0.25, "tail_hours": 72, "rule": f"rain_likely.fallback.by_permit.{PERMIT}",
+                  "text": "the operator's own published rule", "source": "the operator",
+                  "last_above_at": S.iso(now - timedelta(hours=26)), "dropped_below_at": S.iso(now - timedelta(hours=25))}
+    assert r["threshold_in"] == 0.1 and r["threshold_kind"] == "operator_history"
+    assert r["above_from"] == S.iso(now - timedelta(hours=40))
+    assert r["last_above_at"] == S.iso(now - timedelta(hours=26)) and r["dropped_below_at"] == S.iso(now - timedelta(hours=25))
+    got = {(x["basis"], x["threshold_in"], x["tail_hours"], x["from"], x["until"]) for x in r["pieces_from"]}
+    assert ("operator_history", 0.1, 48, S.iso(now - timedelta(hours=40)), S.iso(now + timedelta(hours=23))) in got
+    assert ("operator_rule", 0.25, 72, S.iso(now - timedelta(hours=32)), S.iso(fb_end)) in got
+    ra = hist["waters"]["other-pond-ma"]["reasons"][0]["rule_applied"]
+    assert ra["threshold_in"] == 0.1 and ra["tail_hours"] == 72
+    assert ra["end_rule"] == {"basis": "operator_rule", "threshold_in": 0.25, "tail_hours": 72,
+                              "rule": f"rain_likely.fallback.by_permit.{PERMIT}"}
     assert _hours(fb, now) <= _hours(hist, now)
     assert ep["rain"]["evidence"]["basis"] == "operator_history" and ep["level"] == "possible"
     assert hist["rain_likely"]["permits"][PERMIT]["status"] == "likely"
@@ -460,6 +476,18 @@ def test_an_october_episode_running_into_november_keeps_its_own_rule_on_the_perm
     assert ep["rain"]["threshold_kind"] == "operator_rule" and p["episode"] == next(iter(st["rain_likely"]["episodes"]))
     assert p["evidence"]["basis"] == "operator_rule" and p["evidence"]["caution_in"] == 0.25
     assert p["level"] == "likely" and p["label"] == LIKELY and p["evidence"] == ep["rain"]["evidence"]
+    # second pass P2-7: every caution field of the row is the episode's, and so is the exported outfall's
+    for k in ("threshold_in", "threshold_basis", "threshold_rule", "threshold_text", "threshold_source", "threshold_kind",
+              "trigger_basis", "label"):
+        assert p[k] == ep["rain"][k], k
+    assert p["threshold_in"] == 0.25 and p["trigger_basis"] == "operator" and p["threshold_kind"] == "operator_rule"
+    pub = X.publicize(X.public_rain(st["rain_likely"]))
+    (row,) = XO.outfall_rows([{"npdes_permit": PERMIT, "outfall": "013", "state": "MA", "lat": 42.0, "lon": -72.0,
+                               "outfall_status": "CSO"}], {"MA"}, rain_permits=pub["permits"],
+                             levels=levels_file({PERMIT: entry(usable=False)}))
+    rr = row["rain"]
+    assert (rr["threshold_in"], rr["threshold_kind"], rr["trigger_basis"], rr["level"], rr["caution_in"]) == \
+        (0.25, "operator_rule", "operator", "likely", 0.25)
 
 
 def test_a_state_entry_applying_the_site_default_reads_as_the_site_default():
@@ -497,15 +525,15 @@ def test_no_public_text_of_the_levels_names_a_file_module_or_function():
 # ---------------------------------------------------------------- byte for byte against origin/main's code
 
 BASELINE = Path(__file__).resolve().parent / "fixtures" / "rain_likely_baseline_no_levels.json"
+BASELINE_COMMIT = "76c4655"      # origin/main when the levels work began (the merge base); its rain_likely.py and rules
 
 
-def baseline_cases():
+def baseline_cases(rules: dict):
     """Synthetic inputs (deterministic) for compute() with no levels file: an operator with a 10th-percentile row, one
     on the site default, a state entry applying the default, and an operator rule with a season, at three hours."""
     from datetime import UTC, datetime
     from tests.test_rain_likely import rain_input
-    rules = json.loads((Path(__file__).resolve().parents[2] / "data" / "rules.json").read_text())
-    rules = {"rain_likely": {k: v for k, v in rules["rain_likely"].items() if k != "history"}}
+    rules = {"rain_likely": rules["rain_likely"]}
     waters = {"p-ma": {"slug": "p-ma", "kind": "pond", "state": "MA"}, "p-md": {"slug": "p-md", "kind": "pond", "state": "MD"},
               "p-ky": {"slug": "p-ky", "kind": "pond", "state": "KY"}}
     cases = []
@@ -529,9 +557,9 @@ def baseline_cases():
     return cases
 
 
-def run_baseline(mod) -> list:
+def run_baseline(mod, rules: dict) -> list:
     out = []
-    for now, rain, rules, waters in baseline_cases():
+    for now, rain, rules, waters in baseline_cases(rules):
         by_water, by_reach, block = mod.compute(copy.deepcopy(rain), rules, [], now, now - timedelta(days=30), waters, [],
                                                 {}, lambda r, w: [])
         out.append(json.loads(json.dumps({"by_water": by_water, "by_reach": by_reach, "block": block}, sort_keys=True,
@@ -540,21 +568,36 @@ def run_baseline(mod) -> list:
 
 
 def test_no_levels_output_equals_origin_mains():
-    """The fixture was made once from origin/main's build/rain_likely.py (before the levels) by running this module:
-    python -m tests.test_rain_levels <path to that file>, from pipeline/ (git show origin/main:pipeline/build/rain_likely.py)."""
-    want = json.loads(BASELINE.read_text())["cases"]
-    got = run_baseline(RL)
+    """The fixture was made once from BASELINE_COMMIT's build/rain_likely.py and data/rules.json (before the levels) by
+    running this module from pipeline/: python -m tests.test_rain_levels (the command is in the fixture's _how). HEAD's
+    code runs on the same pinned rules: with no levels file it must give the same output."""
+    fx = json.loads(BASELINE.read_text())
+    assert fx["commit"] == BASELINE_COMMIT and "history" not in fx["rules"]["rain_likely"]
+    want = fx["cases"]
+    got = run_baseline(RL, fx["rules"])
     assert len(got) == len(want) == 3
     for g, w in zip(got, want):
         assert g == w
     assert any(iv["rule_applied"]["rationale"] for c in got for ivs in c["by_water"].values() for iv in ivs)
 
 
-if __name__ == "__main__":       # regenerate the baseline from another rain_likely.py (origin/main's, before the levels)
+if __name__ == "__main__":       # regenerate the baseline from BASELINE_COMMIT's code and rules (git show)
     import importlib.util
-    spec = importlib.util.spec_from_file_location("build.rain_likely_baseline", sys.argv[1])
-    old = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(old)
-    BASELINE.write_text(json.dumps({"_how": "made by `python -m tests.test_rain_levels <origin/main's "
-                                    "pipeline/build/rain_likely.py>` from pipeline/, 2026-11-14", "cases": run_baseline(old)},
-                                   indent=1, sort_keys=True) + "\n")
+    import subprocess
+    import tempfile
+
+    def show(path):
+        return subprocess.run(["git", "show", f"{BASELINE_COMMIT}:{path}"], check=True, capture_output=True,
+                              text=True).stdout
+    with tempfile.TemporaryDirectory() as d:
+        src = Path(d) / "rain_likely_baseline.py"
+        src.write_text(show("pipeline/build/rain_likely.py"))
+        spec = importlib.util.spec_from_file_location("build.rain_likely_baseline", src)
+        old = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(old)
+    pinned = {"rain_likely": json.loads(show("data/rules.json"))["rain_likely"]}
+    BASELINE.write_text(json.dumps({
+        "_how": (f"made by `python -m tests.test_rain_levels` from pipeline/: the compute() output of "
+                 f"`git show {BASELINE_COMMIT}:pipeline/build/rain_likely.py` on baseline_cases(), with the "
+                 f"rain_likely block of `git show {BASELINE_COMMIT}:data/rules.json` (kept here as rules)"),
+        "commit": BASELINE_COMMIT, "rules": pinned, "cases": run_baseline(old, pinned)}, indent=1, sort_keys=True) + "\n")

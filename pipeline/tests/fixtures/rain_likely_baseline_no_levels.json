@@ -1,5 +1,5 @@
 {
- "_how": "made by `python -m tests.test_rain_levels <origin/main's pipeline/build/rain_likely.py>` from pipeline/, 2026-11-14",
+ "_how": "made by `python -m tests.test_rain_levels` from pipeline/: the compute() output of `git show 76c4655:pipeline/build/rain_likely.py` on baseline_cases(), with the rain_likely block of `git show 76c4655:data/rules.json` (kept here as rules)",
  "cases": [
   {
    "block": {
@@ -2473,5 +2473,91 @@
     ]
    }
   }
- ]
+ ],
+ "commit": "76c4655",
+ "rules": {
+  "rain_likely": {
+   "compare": "The NOAA MRMS radar-only rainfall estimate for the 24 hours to the latest hour, read every hour at each outfall from the radar grid. NOAA's radar rainfall service labels its values as inches but has been publishing millimetres; since November 7, 2026 this site works out the unit from the values themselves and from nearby airport rain gauges, converts to inches, and records with each reading the unit it read.",
+   "doc": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+   "enabled": true,
+   "fallback": {
+    "_by_permit_doc": "An operator's own published rain trigger for one permit, in the operator's season (months), with its own caution length (tail_hours): it applies before the state's rule, and outside its months the state's rule or the default applies (build/rain_likely.py operator_rule).",
+    "by_permit": {
+     "KY0021466": {
+      "basis": "Sanitation District No. 1 of Northern Kentucky alerts the public from May through October when \"Rainfall of 0.25 inches or more is recorded in SD1's service area, including Boone, Campbell and Kenton counties\", and \"All advisories will remain in effect for 72 hours after rainfall\"; this site applies the same amount and the same 72 hours from radar rainfall at the District's combined sewer outfalls in those months (the District's other trigger, the Ohio River above 38 feet, is not applied here)",
+      "inches": 0.25,
+      "months": [
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "operator": "Sanitation District No. 1 of Northern Kentucky",
+      "source": "SD1 Wet Weather Overflow Notification Program (https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra)",
+      "tail_hours": 72,
+      "time_zone": "America/New_York"
+     }
+    },
+    "by_state": {
+     "DC": {
+      "basis": "District and county agencies recommend not swimming for 48 hours after half an inch of rain, as Anacostia Riverkeeper publishes their advice; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+      "inches": 0.1,
+      "source": "Anacostia Riverkeeper, Swim Guide listings for the District of Columbia",
+      "trigger_basis": "default"
+     },
+     "MD": {
+      "basis": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+      "inches": 0.1,
+      "source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
+      "trigger_basis": "default"
+     },
+     "ME": {
+      "basis": "Maine Healthy Beaches issues rainfall advisories after 1 inch or more of rain in 24 hours",
+      "inches": 1.0,
+      "source": "Maine Healthy Beaches program (Maine DEP)"
+     },
+     "NY": {
+      "basis": "New York lets operators issue combined sewer advisories from rainfall data or models; New York City's waterbody advisory model uses a rainfall threshold of 0.1 inch on most of its waters",
+      "inches": 0.1,
+      "source": "6 NYCRR 750-2.7(b)(2)(iii); New York City Department of Environmental Protection, Waterbody Advisory System"
+     },
+     "RI": {
+      "basis": "Rhode Island closes shellfish areas in Narragansett Bay after 0.5 inch of rain",
+      "inches": 0.5,
+      "source": "Rhode Island DEM shellfish program, rainfall closures"
+     }
+    },
+    "default": {
+     "basis": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
+     "cost_rationale": "What the default costs. This site's own analysis compared Massachusetts operators' verified reports (July 2022 to October 2026) and Michigan's discharge list (2001 to October 2026) with NOAA radar rainfall. By the operators' own rain figures, overflows that began with less than 0.1 inch of rain were about 3 percent of Massachusetts discharge days and 1 percent of Michigan's; by radar, the 0.1 inch default would have flagged 96 to 97 percent of past overflow days. But on about half of the days with 0.1 inch or more by radar at a Massachusetts operator's outfalls, no overflow was reported that day or in the next two (two days in three for the 12 Michigan operators tested), so where the default applies the caution will often show with no overflow following. In Massachusetts, the operators' own amounts cut those quiet days from 50 to 34 percent while keeping nine overflows in ten. A day with no report is not proof that no overflow happened: some overflows are reported late or not at all.",
+     "cost_source": "MassDEP Sewage Notification Data System, Verified Data Reports, July 2022 to October 2026; Michigan EGLE, MiEnviro CSO/SSO List, 2001 to October 2026; NOAA MRMS radar-only daily rainfall, via the Iowa Environmental Mesonet; analysis by DirtyWaterWatch, November 2026",
+     "inches": 0.1,
+     "source": "This site's methods page",
+     "trigger_basis": "default"
+    }
+   },
+   "forecast_source": "NOAA National Weather Service gridpoint forecast (api.weather.gov), quantitative precipitation, next 24 hours",
+   "label": "Discharge likely: heavy rain, no report received",
+   "label_by_basis": {
+    "default": "Discharge possible: heavy rain, no report received",
+    "operator": "Discharge likely: heavy rain, no report received",
+    "state": "Discharge likely: heavy rain, no report received"
+   },
+   "label_by_basis_rationale": "The label says how strong the estimate is. It reads \"discharge likely\" where the amount comes from the operator's own discharge history or from a rain trigger its state publishes, and \"discharge possible\" where only this site's default of 0.1 inch applies. The colour, the rule and how long the caution lasts are the same.",
+   "min_discharge_days": 10,
+   "notice_suppress_hours": 24,
+   "notice_suppress_rationale": "A discharge notice from the operator that began in the last 24 hours takes over: the waters it names follow the advisory rules above.",
+   "percentile": 10,
+   "rainfall_source": "NOAA National Weather Service, Multi-Radar Multi-Sensor (MRMS) radar-only precipitation estimate, 1 km",
+   "rainfall_stale_hours": 3,
+   "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)",
+   "tail_hours": 48,
+   "tail_rationale": "The caution lasts 48 hours after the 24-hour rainfall total falls back below the amount, as Massachusetts advises avoiding contact during rainstorms and for 48 hours after they end.",
+   "tail_source": "Massachusetts 314 CMR 16.09(4)",
+   "threshold_rationale": "The amount is the 10th percentile of the rainfall on the days the operator discharged: nine discharge days in ten had more rain. It is computed for each operator with at least 10 such days. In Massachusetts it is the rainfall the operator itself reported in its sewage notification reports since July 2022. In Michigan, whose discharge list gives the operator's rainfall for the whole event rather than for one day, it is the NOAA MRMS radar's daily rainfall at the operator's outfalls on the days its reported combined sewer and retention basin discharges began since 2015, the larger of that day's total and the day before's. Operators without that history use a published rule below.",
+   "threshold_source": "MassDEP Sewage Notification Data System, via the EEA Data Portal (Verified Data Reports, rainfall reported by each permittee); Michigan EGLE, MiEnviro CSO/SSO List, with NOAA MRMS daily rainfall via the Iowa Environmental Mesonet"
+  }
+ }
 }
