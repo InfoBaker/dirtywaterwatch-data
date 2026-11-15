@@ -242,3 +242,80 @@ def test_the_national_build_calls_the_corrections_before_it_writes():
     src = (ROOT / "scripts" / "match_outfalls.py").read_text()
     hook = src.index('_opc.for_builder("outfalls-us.json", out["outfalls"])')
     assert hook < src.index('tmp = out_path + ".tmp"\nwith open(tmp, "w") as fh:\n    json.dump(out, fh, indent=1)')
+
+
+# ------------------------------------------------ review 2026-11-15 (Astra): the evidence each correction rests on
+
+def _plants():
+    return json.loads((DATA / "outfalls-plants-us.json").read_text())["outfalls"]
+
+
+def _evidence_changed(how: str, key=BELMONT) -> list[dict]:
+    rows = [dict(r) for r in _plants()]
+    i = next(i for i, r in enumerate(rows) if (r.get("npdes_permit"), r.get("outfall")) == key)
+    if how == "moved":
+        rows[i].update(lat=39.8, lon=-86.3)
+    elif how == "not_feature":
+        rows[i]["coords_from"] = "facility"
+    elif how == "missing":
+        rows.pop(i)
+    elif how == "duplicated":
+        rows.append(dict(rows[i]))
+    return rows
+
+
+@pytest.mark.parametrize("how", ["moved", "not_feature", "missing", "duplicated"])
+def test_check_refuses_an_indiana_point_whose_epa_evidence_changed(mod, committed, how):
+    assert mod.check(committed, evidence=_plants()) == []
+    bad = mod.check(committed, evidence=_evidence_changed(how))
+    assert any("IN0023183 005" in b and "evidence" in b for b in bad)
+
+
+@pytest.mark.parametrize("how", ["moved", "missing", "duplicated"])
+def test_the_cli_check_exits_non_zero_when_the_evidence_changed(mod, tmp_path, monkeypatch, how):
+    f = tmp_path / "outfalls-plants-us.json"
+    f.write_text(json.dumps({"outfalls": _evidence_changed(how, FORT_WAYNE)}))
+    monkeypatch.setattr(mod, "EVIDENCE", f)
+    assert mod.main(["--check"]) == 1
+
+
+@pytest.mark.parametrize("how", ["moved", "not_feature", "missing", "duplicated"])
+def test_a_builder_refuses_before_the_fallback_when_the_evidence_changed(mod, committed, how):
+    rows = [_strip(_row(committed, BELMONT))]
+    rows[0].update(lat=None, lon=None, coords_from=None)
+    before = copy.deepcopy(rows)
+    with pytest.raises(SystemExit) as e:
+        mod.for_builder("outfalls-in.json", rows, evidence=_evidence_changed(how))
+    assert "IN0023183 005" in str(e.value) and "evidence" in str(e.value) and e.value.code != 0
+    assert rows == before                                     # nothing applied
+
+
+def test_the_indiana_builder_stops_when_the_evidence_changed(mod, tmp_path, monkeypatch):
+    bi = _load("build_in_outfalls")
+    f = tmp_path / "outfalls-plants-us.json"
+    f.write_text(json.dumps({"outfalls": _evidence_changed("moved")}))
+    m = _load("outfall_point_corrections")
+    m.EVIDENCE = f
+    monkeypatch.setattr(bi, "_point_corrections", lambda: m)
+    feats = [{"attributes": {"OBJECTID": 383, "NPDES_Number": BELMONT[0], "CSO_Number": "005 -- CSO",
+                             "Status": "Active", "Wastewater_Type": "Treated CSO"}, "geometry": None}]
+    with pytest.raises(SystemExit):
+        bi.build({"features": feats}, [], "2026-11-15T00:00:00Z")
+
+
+@pytest.mark.parametrize("change", [{"epa_reach_id": None}, {"epa_reach_id": "4100009000073"}, "delete"])
+def test_check_requires_epas_reach_kept_on_delta_014(mod, committed, change):
+    docs = copy.deepcopy(committed)
+    o = _row(docs, OH)
+    if change == "delete":
+        o.pop("epa_reach_id")
+    else:
+        o.update(change)
+    assert any("OH0020974 014" in b and "epa_reach_id" in b for b in mod.check(docs))
+
+
+def test_a_rebuilt_delta_row_with_another_reach_is_reported_not_corrected(mod, committed):
+    o = _as_epa_gives_it(_row(committed, OH), OH, set_aside=False)
+    o["reach_id"] = "4100009000073"
+    moved, bad = mod.apply_rows("outfalls-us.json", [o])
+    assert moved == [] and any("OH0020974 014" in b and "reach" in b for b in bad)

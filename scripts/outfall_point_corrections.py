@@ -18,11 +18,14 @@ outfalls are not rounded; the Indiana file's own three-decimal rule aside, 2 bel
 1. SIGN: EPA gives the longitude with its sign flipped (a point in Asia for an outfall in Ohio or Kentucky). The
    corrected point is EPA's with the sign of the longitude reversed. A rebuild meets EPA's row in one of two shapes:
    lat/lon as EPA gives them, or (scripts/match_outfalls.py's state-outline check, ingest.outfall_waters' guard) lat/lon
-   null with EPA's point set aside in echo_lat/echo_lon and coords_problem saying why; both are corrected.
+   null with EPA's point set aside in echo_lat/echo_lon and coords_problem saying why; both are corrected, when EPA's
+   reach for the point is the one recorded (kept in epa_reach_id, which --check requires).
 2. FEATURE: an Indiana outfall IDEM's CSO outfall layer lists without a point, and EPA's ICIS gives a point for the same
    permit feature (EPA's discharge-point file, data/outfalls-plants-us.json): that point, cited, at three decimals
    (scripts/build_in_outfalls.py rounds every point of data/outfalls-in.json so, EPA's included: Indiana review
-   2026-11-14 P1-5; coords_source gives EPA's full value).
+   2026-11-14 P1-5; coords_source gives EPA's full value). The point is used only while EPA's row still holds it: one
+   row for the permit and feature in data/outfalls-plants-us.json, at the recorded full-precision point, coords_from
+   permitted_feature; otherwise a builder stops and --check fails (review 2026-11-15).
 3. NO_POINT: an Indiana outfall no source places: no point, and no_point_reason says what was searched.
 
 Every entry states the row it expects. A row that is neither as expected nor already corrected is reported and left as
@@ -51,7 +54,8 @@ IDEM_LAYER = ("IDEM's CSO outfall layer (https://services5.arcgis.com/w1CjlfkUGY
 DISCHARGE_POINTS = ("EPA ECHO ICIS-NPDES discharge points (npdes_outfalls_layer.zip, NPDES_OUTFALLS_LAYER.csv, file "
                     "dated 2026-11-01; the row of data/outfalls-plants-us.json for the same permit and feature)")
 
-# (file, permit, outfall): EPA's point, the corrected point, coords_note, the source read
+# (file, permit, outfall): EPA's point, the corrected point, coords_note, the source read, EPA's reach for its point
+# (kept in epa_reach_id; None when EPA gives none)
 SIGN = {
     ("outfalls-us.json", "OH0020974", "014"): (
         (41.574444, 83.994722), (41.574444, -83.994722),
@@ -62,7 +66,8 @@ SIGN = {
         "Maumee's) is not used",
         {"name": "EPA ECHO: " + CSO_LAYER + " and " + OUTFALL_LAYER + ", permit OH0020974 feature 014: pf_lat 41.574444, "
                  "pf_lon 83.994722",
-         "url": "https://echo.epa.gov/detailed-facility-report?fid=110006322247", "read_at": READ}),
+         "url": "https://echo.epa.gov/detailed-facility-report?fid=110006322247", "read_at": READ},
+        "4050001002139"),
     ("outfalls-ky.json", "KYP000081", "001"): (
         (38.644, 83.834), (38.644, -83.834),
         "EPA gives this feature's longitude as +83.834, a point in Asia; the Western Mason County Sanitation District "
@@ -72,10 +77,15 @@ SIGN = {
         {"name": "EPA ECHO ICIS-NPDES discharge points (NPDES_PERM_FEATURE_COORDS, read 2026-11-03), permit KYP000081 "
                  "feature 001: 38.644, 83.834; ECHO detailed facility report service, facility 38.64569, -83.76106 "
                  "(not in " + OUTFALL_LAYER + ": a state-issued permit)",
-         "url": "https://echo.epa.gov/detailed-facility-report?fid=110040608955", "read_at": READ}),
+         "url": "https://echo.epa.gov/detailed-facility-report?fid=110040608955", "read_at": READ},
+        None),
 }
 
-# (file, permit, outfall): the point, coords_from, coords_note, the source read
+# the evidence a FEATURE point rests on: EPA's row for the same permit and feature in this file, at EPA's precision
+EVIDENCE = DATA / "outfalls-plants-us.json"
+
+# (file, permit, outfall): the point, coords_from, coords_note, the source read, EPA's own point and coords_from as
+# EVIDENCE must still hold them (checked before the point is used, by the builders and --check alike)
 FEATURE = {
     ("outfalls-in.json", "IN0023183", "005"): (
         (39.726, -86.19), "EPA permitted feature (IDEM's layer gives no point)",
@@ -83,7 +93,8 @@ FEATURE = {
         "list it; EPA's ICIS gives the permit's feature 005 its own point (EPA's discharge-point file, the Belmont "
         "plant's outfall to the West Fork White River), used here at three decimals, as every point of this file is",
         {"name": IDEM_LAYER + ", OBJECTID 383; " + DISCHARGE_POINTS + ": 39.726167, -86.190389",
-         "url": "https://echo.epa.gov/detailed-facility-report?fid=110011829129", "read_at": READ}),
+         "url": "https://echo.epa.gov/detailed-facility-report?fid=110011829129", "read_at": READ},
+        ((39.726167, -86.190389), "permitted_feature")),
     ("outfalls-in.json", "IN0032191", "001"): (
         (41.078, -85.098), "EPA permitted feature (IDEM's layer gives no point)",
         "IDEM's layer lists outfall 001 ('CSO - EPA requested 5/2005', Active, Untreated CSO) without a point, and EPA's "
@@ -91,7 +102,8 @@ FEATURE = {
         "carries the limit set 'CSO - EPA requested 05/2005' beside the plant's main outfall (EPA's discharge-point "
         "file; " + OUTFALL_LAYER + ": the same point), used here at three decimals, as every point of this file is",
         {"name": IDEM_LAYER + ", OBJECTID 238; " + DISCHARGE_POINTS + ": 41.0775, -85.097778; " + OUTFALL_LAYER,
-         "url": "https://echo.epa.gov/detailed-facility-report?fid=110009390756", "read_at": READ}),
+         "url": "https://echo.epa.gov/detailed-facility-report?fid=110009390756", "read_at": READ},
+        ((41.0775, -85.097778), "permitted_feature")),
 }
 
 
@@ -150,6 +162,9 @@ def state(table: str, o: dict, v) -> str:
         if _pt(o) == fix and _pt(o, "epa_lat", "epa_lon") == epa:
             return "corrected"
         if "epa_lat" not in o and (_pt(o) == epa or (_no_point(o) and _pt(o, "echo_lat", "echo_lon") == epa)):
+            if o.get("reach_id") != v[4]:
+                return (f"{k}: EPA's reach for its point is now {o.get('reach_id')!r}, not {v[4]!r}: look at it; not "
+                        f"changed")
             return "original"
         return (f"{k}: neither EPA's row as expected (EPA's point {epa}) nor the corrected row: lat/lon {_pt(o)}, echo "
                 f"{_pt(o, 'echo_lat', 'echo_lon')}, epa {_pt(o, 'epa_lat', 'epa_lon')}; not changed")
@@ -176,9 +191,10 @@ def write(table: str, o: dict, v) -> bool:
         o.pop(f, None)
     if table == "sign":
         (o["epa_lat"], o["epa_lon"]), (o["lat"], o["lon"]) = v[0], v[1]
-        if o.get("reach_id"):                    # EPA's reach for its own wrong point: evidence of the wrong place
-            o["epa_reach_id"] = o["reach_id"]
-            o["reach_id"] = None
+        if v[4] is not None:                     # EPA's reach for its own wrong point: evidence of the wrong place
+            o["epa_reach_id"] = v[4]
+            if o.get("reach_id") == v[4]:
+                o["reach_id"] = None
         o["coords_from"] = "permitted_feature"
         o["coords_note"], src = v[2], v[3]
     else:
@@ -204,20 +220,62 @@ def problems(table: str, o: dict, v) -> list[str]:
         want.update(coords_from=v[1], coords_note=v[2], coords_source={**v[3], "by": BY})
     bad = [f"{k}: {f} is {o.get(f)!r}, not {w!r}" for f, w in want.items() if o.get(f) != w]
     bad += [f"{k}: {f} present" for f in GONE if f in o]
-    if table == "sign" and o.get("reach_id") and o.get("reach_id") == o.get("epa_reach_id"):
-        bad.append(f"{k}: reach_id is EPA's reach for its wrong point again")
+    if table == "sign" and v[4] is not None:
+        if o.get("epa_reach_id") != v[4]:
+            bad.append(f"{k}: epa_reach_id is {o.get('epa_reach_id')!r}, not EPA's {v[4]!r}")
+        if o.get("reach_id") == v[4]:
+            bad.append(f"{k}: reach_id is EPA's reach for its wrong point again")
     return bad
 
 
-def apply_rows(name: str, rows: list[dict], strict: bool = False) -> tuple[list[dict], list[str]]:
+def load_evidence() -> list[dict] | None:
+    try:
+        return json.loads(EVIDENCE.read_text())["outfalls"]
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+
+
+def evidence_problems(name: str, evidence: list[dict] | None = None) -> list[str]:
+    """Each FEATURE point of data/<name> against EPA's row it rests on (EVIDENCE, or the rows given): exactly one row
+    for the permit and feature, at EPA's full-precision point and with EPA's coords_from. Empty when all hold."""
+    feats = [(key, v) for table, key, v in entries(name) if table == "feature"]
+    if not feats:
+        return []
+    rows = load_evidence() if evidence is None else evidence
+    if rows is None:
+        return [f"{p} {n}: the evidence file data/{EVIDENCE.name} cannot be read" for (p, n), _ in feats]
+    bad = []
+    for (p, n), v in feats:
+        (epa, cf) = v[4]
+        got = [r for r in rows if (str(r.get("npdes_permit") or ""), str(r.get("outfall") or "")) == (p, n)]
+        if len(got) != 1:
+            bad.append(f"{p} {n}: the evidence, EPA's row in data/{EVIDENCE.name}, is {len(got)} rows, expected 1")
+        elif _pt(got[0]) != epa or got[0].get("coords_from") != cf:
+            bad.append(f"{p} {n}: the evidence changed: EPA's row in data/{EVIDENCE.name} has {_pt(got[0])} "
+                       f"({got[0].get('coords_from')!r}), not {epa} ({cf!r})")
+    return bad
+
+
+def _has_feature_rows(name: str, rows: list[dict]) -> bool:
+    keys = {key for table, key, _ in entries(name) if table == "feature"}
+    return bool(keys) and any(_key(o) in keys for o in rows)
+
+
+def apply_rows(name: str, rows: list[dict], strict: bool = False,
+               evidence: list[dict] | None = None) -> tuple[list[dict], list[str]]:
     """Write the tables' entries for registry file `name` into its rows (in place). Returns the rows whose point moved
     and the problems (a row not as expected, or with strict, a row missing). A builder calls this before it writes: a
-    row of another state or not in this build is simply absent, and a row not as expected is left as it is and named."""
+    row of another state or not in this build is simply absent, and a row not as expected is left as it is and named.
+    A FEATURE point is used only while its evidence holds (evidence_problems); otherwise none is, and the problems
+    say why."""
     idx: dict[tuple[str, str], list[dict]] = {}
     for o in rows:
         idx.setdefault(_key(o), []).append(o)
-    moved, bad, todo = [], [], []
+    moved, todo = [], []
+    bad = evidence_problems(name, evidence) if strict or _has_feature_rows(name, rows) else []
     for table, key, v in entries(name):
+        if table == "feature" and bad:          # bad holds only the evidence problems here: no FEATURE point is used
+            continue
         got = idx.get(key) or []
         if len(got) != 1:
             if got or strict:
@@ -236,19 +294,27 @@ def apply_rows(name: str, rows: list[dict], strict: bool = False) -> tuple[list[
     return moved, bad
 
 
-def for_builder(name: str, rows: list[dict]) -> list[str]:
+def for_builder(name: str, rows: list[dict], evidence: list[dict] | None = None) -> list[str]:
     """A builder's call (scripts/match_outfalls.py, scripts/ky_outfall_corrections.py, scripts/build_in_outfalls.py):
-    the tables' entries for data/<name> written into its rows before it writes the file. A row not as expected is named
-    on stderr and left as it is (the data test and --check then fail); returns those problems."""
-    _, bad = apply_rows(name, rows)
+    the tables' entries for data/<name> written into its rows before it writes the file. When a FEATURE point's
+    evidence is missing, duplicated or changed, the build stops here (SystemExit, nothing applied): the point must be
+    looked at again. A row not as expected is named on stderr and left as it is (the data test and --check then
+    fail); returns those problems."""
+    if _has_feature_rows(name, rows):
+        ev = evidence_problems(name, evidence)
+        if ev:
+            raise SystemExit("outfall_point_corrections: refused, the evidence a point rests on is not as recorded: "
+                             + "; ".join(ev))
+    _, bad = apply_rows(name, rows, evidence=evidence)
     for b in bad:
         print(f"outfall_point_corrections: not changed: {b}", file=sys.stderr)
     return bad
 
 
-def check(docs: dict[str, dict]) -> list[str]:
+def check(docs: dict[str, dict], evidence: list[dict] | None = None) -> list[str]:
     bad = []
     for name in files():
+        bad += evidence_problems(name, evidence)
         idx: dict[tuple[str, str], list[dict]] = {}
         for o in docs[name]["outfalls"]:
             idx.setdefault(_key(o), []).append(o)
