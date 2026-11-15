@@ -859,3 +859,26 @@ def test_a_report_without_its_confirmation_number_fails_the_read(tmp_path, monke
     assert M.main(["--backfill", today, "--out", str(out)]) == 0
     doc = json.loads(out.read_text())
     assert doc["error"] is None and "unreadable_reports" not in doc["meta"]
+
+
+@pytest.mark.parametrize("area", [5.0, None])
+def test_a_lake_located_on_a_creek_is_the_whole_lake(tmp_path, monkeypatch, area):
+    """'Lake Specimen on Sample Creek' says where the lake lies, not a part of it: DEQ's advisory is for the whole
+    lake and colours it; 'Lake Exemplar - Example Bay' stays a part-of-lake marker (verification P2-7)."""
+    rows = [{"waterbody": "Lake Specimen on Sample Creek", "county": "Sample County", "area": "Exampleville, AR",
+             "date": "October 20, 2026", "lifted": ""},
+            {"waterbody": "Lake Exemplar - Example Bay", "county": "LaSample County", "area": "Sampletown, AR",
+             "date": "October 20, 2026", "lifted": ""}]
+    st = _ar_status(tmp_path, monkeypatch, rows, area)
+    assert (st["waters"].get("lake-specimen-ar") or {}).get("status") == "red"
+    assert (st["waters"].get("lake-exemplar-ar") or {}).get("status", "grey") == "grey"
+    recs = {r["waterbody_text"]: r for r in
+            json.loads((tmp_path / "events" / f"{H.SOURCE_ID}.json").read_text())["records"]}
+    spec = recs["Lake Specimen"]["raw"]
+    assert spec["advisory_extent"] == "named_water" and spec["_water_locator"] == "on Sample Creek"
+    assert "_water_qualifier" not in spec
+    assert recs["Lake Exemplar"]["raw"]["advisory_extent"] == "part_of_water"
+    assert T.hab_water("Huston Lake on Big Huston Creek") == ("Huston Lake", None)
+    assert T.hab_water("Lake Catherine - Spencer Bay *") == ("Lake Catherine", "Spencer Bay")
+    assert T.hab_water("Sample River near Exampleville") == ("Sample River", "near Exampleville")
+    assert T.hab_parts("Lake Specimen near Exampleville") == ("Lake Specimen", None, "near Exampleville")
