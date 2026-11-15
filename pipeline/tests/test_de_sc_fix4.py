@@ -263,6 +263,9 @@ def test_other_feeds_status_output_is_identical_to_the_base():
             if isinstance(v, dict):
                 v.pop("built", None)
         o.pop("built", None)
+        # the rain-levels feature (merged after the base) adds one key to the rules block; statuses, placements and
+        # every other key must still match the base's
+        (o.get("rules", {}).get("rain_likely") or {}).pop("label_by_level", None)
         outs.append(json.dumps(o, sort_keys=True))
     assert '"advisory_points": []' not in outs[0]
     assert outs[0] == outs[1]
