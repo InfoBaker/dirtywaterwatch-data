@@ -3,7 +3,7 @@ they are reproducible.
 
 Usage: pipeline/.venv/bin/python -I scripts/add_ok_register_rows.py [--dry-run]
 
-The law (research/ok/expansion-research.md, read 2026-11-09):
+The law (DEQ's Part III, reporting page and Form 605-011, read 2026-11-09; links below):
   - DEQ's municipal permits' standard conditions (Part III, revision of March 2017, B.6): oral notice to DEQ within 24
     hours of becoming aware of any collection-system bypass or overflow, a written report within five days (waivable);
     C.11 on unanticipated bypasses. DEQ's wastewater reporting page (modified 2026-09-04) asks for a telephone report

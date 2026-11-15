@@ -175,7 +175,7 @@ def test_oklahoma_rules_row_and_text():
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t
-    assert "48 hours" in t and "No sewage discharge report is published" in t and "never as the park's own notice" in t
+    assert "48 hours" in t and "No published sewage discharge report was found" in t and "never as the park's own notice" in t
 
 
 def test_oklahoma_missing_waters_list():
@@ -357,3 +357,22 @@ def test_p2_10_only_municipal_permits_carry_the_municipal_clause():
     for rid, r in reg.items():
         if rid.endswith("-deq-report"):
             assert "expansion-research.md" not in r["note"]
+
+
+def test_p2_12_p3_13_oklahoma_texts_and_counts_follow_the_registry():
+    from nv_ok_text_checks import OVERCLAIMS, bad_citations, counts, public_texts
+    texts = public_texts("OK")
+    assert [k for k, t in texts.items() if OVERCLAIMS.search(t)] == []
+    assert bad_citations(texts) == []
+    t = texts["state-text"]
+    c = counts("OK")
+    assert c == {"plant_permits": 316, "operators": 282, "operator_permits": 305, "permit_only_rows": 11,
+                 "permit_only_permits": 11, "points": 404, "other_permits": 7}
+    assert f"{c['operators']} operators hold {c['operator_permits']} of them" in t
+    assert f"{c['permit_only_permits']} permits whose records name only a plant or a facility" in t
+    assert "seven private permits more" in t and f"{c['points']} discharge points" in t
+    # the four places' five permits (P3-13): five permits under four places, as the registry has them
+    wet = [r for r in _ops() if r.get("permit_only") and any(p in r["npdes_permits"] for p in
+                                                             ("OKG580038", "OK0066666", "OK0100731", "OK0032417",
+                                                              "OK0032425"))]
+    assert len(wet) == 5 and "five of them, at Avant, Forgan, Minco and Wetumka's two plants, under four places" in t

@@ -190,7 +190,7 @@ def test_nevada_rules_row_and_text():
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t
-    assert "NRS 445A.467" in t and "West Wendover" in t and "No sewage discharge report is published" in t
+    assert "NRS 445A.467" in t and "West Wendover" in t and "No published sewage discharge report was found" in t
 
 
 def test_nevada_missing_waters_list():
@@ -410,3 +410,17 @@ def test_p2_9_operators_are_the_permittees_epa_records():
     assert "Amentum Services" in am["name"] and "federal facility" in am["notes"]
     reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]}
     assert reg["nv-truckee-meadows-wrf-ndep-report"]["basis_kind"] == "permit"
+
+
+def test_p2_12_nevada_texts_state_what_the_evidence_supports():
+    from nv_ok_text_checks import OVERCLAIMS, bad_citations, counts, public_texts
+    texts = public_texts("NV")
+    assert [k for k, t in texts.items() if OVERCLAIMS.search(t)] == []
+    assert bad_citations(texts) == []
+    t = texts["state-text"]
+    assert "operators' own websites were not searched one by one" in t and "November 9, 2026" in t
+    c = counts("NV")
+    assert c == {"plant_permits": 16, "operators": 13, "operator_permits": 15, "permit_only_rows": 1,
+                 "permit_only_permits": 1, "points": 35, "other_permits": 1}
+    assert (f"Nevada's {c['plant_permits']} sewage discharge permits" in t and f"{c['points']} discharge points" in t
+            and f"{c['operators']} operators hold {c['operator_permits']} of them" in t)

@@ -115,7 +115,7 @@
    "map_only",
    "email"
   ],
-  "access_detail": "Power BI Gov embed (no API); NDEP page ndep.nv.gov/water/rivers-streams-lakes/water-quality-monitoring/harmful-algal-bloom-program; weekly updates by email list (subscribe via NDEP \"Get Notices\", list \"Nevada Harmful Algal Bloom Updates\", or NEVADAHABS-subscribe-request@LISTSERV.STATE.NV.US).",
+  "access_detail": "Power BI Gov embed (no data download or public data address found on 2026-11-09); NDEP page ndep.nv.gov/water/rivers-streams-lakes/water-quality-monitoring/harmful-algal-bloom-program; weekly updates by email list (subscribe via NDEP \"Get Notices\", list \"Nevada Harmful Algal Bloom Updates\", or NEVADAHABS-subscribe-request@LISTSERV.STATE.NV.US).",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -128,7 +128,7 @@
   "license": null,
   "legal_basis": null,
   "status": "candidate",
-  "status_reason": "The only statewide bloom status, a Power BI report that draws its data as a picture: no rows, no download, no data endpoint (expansion research 2026-11-09). Registered as a channel with the barrier; a supported export is an owner request.",
+  "status_reason": "The only statewide bloom status found, a Power BI report: on 2026-11-09 the page returned only its script shell, in which no rows, no download and no data address were found (the report's own data calls were not examined). Registered as a channel with the barrier; a supported export is an owner request.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": "Watch/Warning advisories at Lahontan Reservoir and Washoe Lake in 2026 (news)."
