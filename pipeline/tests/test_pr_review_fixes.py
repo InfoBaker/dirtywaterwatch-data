@@ -236,3 +236,112 @@ def test_an_affirmed_fit_statement_and_a_negated_fit_list_are_read_as_written():
     nfl = post(4, "2026-11-13T12:00:00", [TROP],
                intro="Las siguientes playas aún no están aptas para bañistas por no exceder el BAV en un solo muestreo:")
     assert P.parse_notice(nfl)["kind"] == "unread"
+
+
+# ----------------------------------------------------------------- EPA's overflow tables, Puerto Rico rows
+
+import io
+import zipfile
+
+from ingest import echo_sewer_overflow_events as E
+from tests.test_ingest_pr import _fixture
+
+
+def _pr_build(rows_patch=None, extract="2026-11-12"):
+    t = copy.deepcopy(_fixture())
+    for k, patch in (rows_patch or {}).items():
+        for e in t["events"]:
+            if e["sewer_overflow_bypass_event_key"] == k:
+                e.update(patch)
+    kept, dropped, why = E.build(t, {"extract_date": extract, "last_modified": None, "now": "2026-11-14T00:00:00Z"})
+    return {r["raw"]["sewer_overflow_bypass_event_key"]: r for r in kept}, dropped
+
+
+def test_a_plant_point_bypass_and_bad_points_are_never_discharge_points(monkeypatch):
+    # Astra P1-4: a bypass and a report naming a plant keep their filed point only in raw.reported_point, and an
+    # invalid or missing point is never replaced by a geocoder, a model or a plant point
+    import build.report_geolocate as G
+    monkeypatch.setattr(G, "requests", None, raising=False)
+    kept, _ = _pr_build({"5009": {"latitude_measure": "40.712", "longitude_measure": "-74.006"},     # outside PR
+                         "5355": {"latitude_measure": "", "longitude_measure": ""},
+                         "26401": {"sewer_overflow_bypass_description_text": "Registro frente a PA RINCON (WWTP)"}})
+    bypass = kept["27372"]                                             # 'PA VEGA BAJA WWTP', a bypass
+    assert bypass["lat"] is None and bypass["raw"]["reported_point"] == [18.471, -66.397]
+    assert "diversion of flow at the treatment plant" in bypass["raw"]["point_note"]
+    plant_sso = kept["26401"]                                          # an SSO whose description names a plant
+    assert plant_sso["lat"] is None and "names a treatment plant" in plant_sso["raw"]["point_note"]
+    assert kept["5009"]["lat"] is None and "outside Puerto Rico" in kept["5009"]["raw"]["point_note"]
+    assert kept["5355"]["lat"] is None
+    for r in kept.values():
+        assert r["raw"]["_placement"] == "named_water_only"            # never geolocated, never a plant stand-in
+    station = kept["7222"]                                             # a pump station's own point stays
+    assert station["lat"] == 18.418 and station["coord_source"] == "source"
+    from build import provisional_outfalls as PO
+    assert all(PO.named_water_only(r) for r in kept.values() if r["lat"] is None)
+
+
+def test_every_pr_point_is_rounded_before_any_save(tmp_path, monkeypatch):
+    # Astra P1-6 and P1-5: the saved ZIP, the records and raw keep 0.001 degree; the free text is scrubbed in the ZIP
+    t = copy.deepcopy(_fixture())
+    for e in t["events"]:
+        e["latitude_measure"], e["longitude_measure"] = "18.4123456", "-66.0654321"
+    t["events"][-1]["sewer_overflow_bypass_description_text"] = "EA EXAMPLE: Sra. Rosa Ejemplo llamó al 787-555-0142"
+    from tests.test_ingest_ne import _zip
+    content = _zip(tmp_path, t).read_bytes()
+    clean = E.sanitize_zip(content)
+    zf = zipfile.ZipFile(io.BytesIO(clean))
+    blob = "".join(zf.read(n).decode("utf-8-sig") for n in zf.namelist())
+    assert "18.4123456" not in blob and "18.412" in blob and "Rosa Ejemplo" not in blob and "555-0142" not in blob
+    kept, dropped, _ = E.build(t, {"extract_date": "2026-11-12", "last_modified": None, "now": "2026-11-14T00:00:00Z"})
+
+    def coords(o):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                if k in ("lat", "lon", "latitude_measure", "longitude_measure") and v not in (None, ""):
+                    yield float(v)
+                elif k == "reported_point" and v:
+                    yield from (float(x) for x in v)
+                else:
+                    yield from coords(v)
+        elif isinstance(o, list):
+            for v in o:
+                yield from coords(v)
+    vals = list(coords(kept))
+    assert vals and all(round(v, 3) == v for v in vals)
+    assert "Rosa Ejemplo" not in json.dumps([kept, dropped], ensure_ascii=False)
+
+
+def test_the_extract_date_is_not_a_reports_publication():
+    # Astra P2-1: changing the extract's date changes no record's publication time or interval
+    a, _ = _pr_build(extract="2026-11-12")
+    b, _ = _pr_build(extract="2026-12-30")
+    for k in a:
+        assert a[k]["published_at"] is None and b[k]["published_at"] is None
+        assert (a[k]["started_at"], a[k]["ended_at"]) == (b[k]["started_at"], b[k]["ended_at"])
+        assert a[k]["raw"]["extract_date"] == "2026-11-12" and "no date each report was published" in a[k]["raw"]["publication_note"]
+    assert E.EXTRACT_DATE_NOT_PUBLICATION_STATES == {"PR"}
+
+
+def test_other_states_records_are_identical_to_main(monkeypatch):
+    # the same invented rows of other states, built with the PR rules and with every PR set emptied: identical
+    from tests.test_ingest_dc import _row
+    t = {"events": [_row(sewer_overflow_bypass_event_key="o1", latitude_measure="38.93012", longitude_measure="-77.04011"),
+                    _row(sewer_overflow_bypass_event_key="o2", permit_identifier="KY0000001",
+                         program_report_form_set_id="2", sewer_overflow_bypass_description_text="PA Example (WWTP) bypass"),
+                    _row(sewer_overflow_bypass_event_key="o3", permit_identifier="MN0000001",
+                         program_report_form_set_id="3", latitude_measure="47.123456", longitude_measure="-92.123456")],
+         "types": [{"sewer_overflow_bypass_event_key": k, "sewer_overflow_bypass_type_code": c,
+                    "sewer_overflow_bypass_type_desc": "", "sewer_overflow_bypass_type_code_sequence": "1"}
+                   for k, c in (("o1", "SSO"), ("o2", "BYP"), ("o3", "SSO"))],
+         "waters": [{"sewer_overflow_bypass_event_key": k, "name_receiving_water": "Rock Creek"} for k in ("o1", "o2", "o3")],
+         "impacts": [], "causes": []}
+    info = {"extract_date": "2026-11-12", "last_modified": None, "now": "2026-11-14T00:00:00Z"}
+    strip = lambda rs: [{k: v for k, v in r.items() if k != "fetched_at"} for r in rs]
+    with_pr = E.build(copy.deepcopy(t), info)
+    monkeypatch.setattr(E, "PLANT_TEXT_POINT_STATES", set())
+    monkeypatch.setattr(E, "STATE_POINT_BOX", {})
+    monkeypatch.setattr(E, "EXTRACT_DATE_NOT_PUBLICATION_STATES", set())
+    monkeypatch.setattr(E, "ROUND_POINT_STATES", {"MN"})
+    without = E.build(copy.deepcopy(t), info)
+    assert strip(with_pr[0]) == strip(without[0]) and with_pr[1] == without[1]
+    assert all(r["published_at"] == "2026-11-12" for r in with_pr[0])
