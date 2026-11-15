@@ -131,7 +131,7 @@ def parse_article(page: str) -> dict:
     end = re.search(r"\nTo report a release after hours|Secondary Navigation Menu", body)
     body = body[:end.start()] if end else body[:6000]
     d = date(int(m.group(3)), MONTHS.index(m.group(1)) + 1, int(m.group(2)))
-    return {"title": title, "date": d.isoformat(),
+    return {"title": scrub_sentences(strip_house_numbers(scrub_text(title))), "date": d.isoformat(),
             "body": scrub_sentences(strip_house_numbers(scrub_text(body.strip())))}
 
 
@@ -284,8 +284,14 @@ def split_types(rec_text: str) -> list[str]:
     return [""]
 
 
+def scrub_title(t: str | None) -> str | None:
+    """A release's title through the same scrub as its body (a title can carry a name or a telephone number)."""
+    return scrub_sentences(strip_house_numbers(scrub_text(t))) if t else t
+
+
 def records_for(art: dict, url: str, at: str) -> list[dict]:
-    art = {**art, "body": scrub_sentences(art["body"])}          # the scrub again on what the state file carried
+    # the scrub again on what the state file carried, the title included (Astra 2026-11-15 P1-5)
+    art = {**art, "body": scrub_sentences(art["body"]), "title": scrub_title(art.get("title"))}
     out = []
     for r in _records_for(art, url, at):
         kinds = split_types(r["raw"]["text"])
@@ -334,6 +340,11 @@ def main(argv=None) -> int:
             files[k] = Path(v).read_text()
     state = read_json(STATE_PATH, {}) or {}
     arts = state.setdefault("articles", {})
+    for a in arts.values():                     # carried titles scrubbed again before anything is saved (lessons 6)
+        if isinstance(a, dict):
+            a["title"] = scrub_title(a.get("title"))
+            if isinstance(a.get("article"), dict):
+                a["article"]["title"] = scrub_title(a["article"].get("title"))
     try:
         items = parse_rss(Path(argv[argv.index("--rss-file") + 1]).read_text() if "--rss-file" in argv else get(RSS))
         if "--backfill" in argv:
@@ -342,8 +353,8 @@ def main(argv=None) -> int:
         if not items:
             raise ValueError("the topic's feed lists no release: a failed read")
     except (requests.RequestException, OSError, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=scrub_title(str(e)))
+        print(f"{SOURCE_ID}: {scrub_title(str(e))}", file=sys.stderr)
         return 1
     errors = []
     for it in items:
@@ -356,9 +367,11 @@ def main(argv=None) -> int:
             page = files[it["url"]] if it["url"] in files else get(it["url"])
             art = parse_article(page)
         except (requests.RequestException, ValueError, KeyError) as e:
-            errors.append(f"{it['url']}: {e}")
+            errors.append(scrub_title(f"{it['url']}: {e}"))
             continue
-        arts[it["url"]] = {"title": it["title"], "rss_pubdate": it["rss_pubdate"], "article": art, "read_at": at,
+        # the title is matched as published (in memory) and saved only after the scrub
+        arts[it["url"]] = {"title": scrub_title(it["title"]), "rss_pubdate": it["rss_pubdate"], "article": art,
+                           "read_at": at,
                            "municipal": bool(MUNICIPAL.search(art["body"]))}
         if not files:
             save_raw(SOURCE_ID, json.dumps({"fetched_at": at, "url": it["url"], **art}, indent=1).encode(), "json")

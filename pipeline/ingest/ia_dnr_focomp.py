@@ -42,11 +42,14 @@ Records (one per bypass report)
     from the permittee; with no permit the operator is not established and none is named (DNR's facility name stays in
     raw.facility).
   - Identity: source_record_id the Incoming Report ID; source_url the report's page. A report that leaves the facility
-    page keeps its record (raw._unlisted_since). A report re-read later replaces its fields (raw._read_at).
+    page keeps its record (raw._unlisted_since). A report re-read later replaces its fields (raw._read_at) only when
+    the page carries every control of the form (REQUIRED_INPUTS and the rest) and loses no readable date the earlier
+    read had; otherwise the earlier fields stay, the report is retried first next run, and the feed's health is false.
   Privacy: the facility page names DNR staff and the report page the person who reported and the staff member who
   received it: none of those fields is read. Only the report's safe fields are kept; the details text goes through the
   strict scrub (common.scrub_text and every house number, before anything is saved) and the incident address keeps its
-  street only. data/raw/ keeps the parsed safe fields of each report read, never a page.
+  street only. A place described as a private home is found on the text as typed, before the scrub can withhold it,
+  and loses its point and street (private_home); a carried place description that was withheld loses them too. data/raw/ keeps the parsed safe fields of each report read, never a page.
 
 Run from pipeline/: python -m ingest.ia_dnr_focomp [--facility-budget N] [--report-budget N]
                     [--facility-file ID=page.html ...] [--report-file ID=page.html ...] [--at ISO]
@@ -157,17 +160,54 @@ def scrub(text: str) -> str:
     return strict_scrub(text or "") or ""
 
 
+# the form's controls a report page must carry for its fields to replace an earlier read (Astra 2026-11-15 P1-3): a
+# page that keeps the labels but renames or drops one of these is a failed read, never a record of nulls
+REQUIRED_INPUTS = ("IncomingReportID", "DateReceived", "ReceivedTime", "ReceivingStream", "IncidentStart",
+                   "IncidentStartTime", "IncidentEnd", "IncidentEndTime", "EstimatedGallons")
+REQUIRED_SELECTS = ("ByPassType", "ByPassLocationType")
+REQUIRED_TEXTAREAS = ("ReportDetails",)
+
+
+def check_form(seg: str) -> None:
+    """ValueError naming the controls the report form lacks (renamed or dropped)."""
+    missing = [n for n in REQUIRED_INPUTS if _input(seg, n) is None]
+    missing += [n for n in REQUIRED_SELECTS if not re.search(rf'<select\b[^>]*\bname="{n}"', seg)]
+    missing += [n for n in REQUIRED_TEXTAREAS if not re.search(rf'<textarea\b[^>]*\bname="{n}"', seg)]
+    if missing:
+        raise ValueError(f"the report form lacks {', '.join(missing)}: a partial read, the earlier fields are kept")
+
+
+def check_against(fields: dict, prev: dict | None) -> None:
+    """ValueError when a re-read would lose a readable date the earlier read had (a start, an end or the receipt
+    emptied or made unreadable): a malformed read, never a rewrite of what was known (lessons 4)."""
+    for d, t in (("incident_start", "incident_start_time"), ("incident_end", "incident_end_time"),
+                 ("date_received", "time_received")):
+        new = fields.get(d)
+        if new and not _us_date(new):
+            raise ValueError(f"unreadable {d}: a malformed read, the earlier fields are kept")
+        if prev and _us_date(prev.get(d) or "") and not _us_date(new or ""):
+            raise ValueError(f"{d} emptied where the earlier read had one: the earlier fields are kept")
+
+
 def parse_report(page: str) -> dict:
-    """The report's safe fields; ValueError when the page is not an incoming report. The reporter and the staff
-    member who received it are not read."""
+    """The report's safe fields; ValueError when the page is not an incoming report or its form is incomplete. The
+    reporter and the staff member who received it are not read. A place the report describes as a private home is
+    found before any text is withheld: its point and street are dropped (private_home)."""
     i = (page or "").find('name="IncomingReportID"')
     if i < 0 or "Incident Start" not in page:
         raise ValueError("not a FOCOMP incoming report page")
     seg = page[i:]
+    check_form(seg)
     num = lambda v: float(v) if v not in (None, "") and re.fullmatch(r"-?[\d.]+", v) else None  # noqa: E731
     lat, lon = num(_input(seg, "Latitude")), num(_input(seg, "Longitude"))
     gal = num(_input(seg, "EstimatedGallons"))
+    # the private-home test runs on the text as typed, before the scrub can withhold it (Astra 2026-11-15 P1-5)
+    home = home_place(_textarea(seg, "ReportDetails"), _input(seg, "Location"), _input(seg, "Address"),
+                      _textarea(seg, "StepsTaken"))
+    if home:
+        lat = lon = None
     return {
+        "private_home": bool(home),
         "report_id": _input(seg, "IncomingReportID"),
         "closed": _selected(seg, "IsClosed"),
         "date_received": _input(seg, "DateReceived"), "time_received": _input(seg, "ReceivedTime"),
@@ -177,8 +217,8 @@ def parse_report(page: str) -> dict:
         "incident_start": _input(seg, "IncidentStart"), "incident_start_time": _input(seg, "IncidentStartTime"),
         "incident_end": _input(seg, "IncidentEnd"), "incident_end_time": _input(seg, "IncidentEndTime"),
         "estimated_gallons": gal, "amount_unknown": _checked(seg, "AmountUnknown"),
-        "location": scrub(_input(seg, "Location") or "") or None,
-        "address": scrub(_input(seg, "Address") or "") or None,
+        "location": None if home else (scrub(_input(seg, "Location") or "") or None),
+        "address": None if home else (scrub(_input(seg, "Address") or "") or None),
         "city": _selected(seg, "CityID"), "county": _selected(seg, "CountyID"),
         "lat": round(lat, 3) if lat else None, "lon": round(lon, 3) if lon else None,
         "written_report_received": _input(seg, "WrittenDateReceived") or None,
@@ -256,7 +296,8 @@ def make_record(rep: dict, fac: dict, listed: dict, permit: tuple, at: str, ops:
     if (rep.get("bypass_type") or "").lower() == "basement backup":
         return None
     # the scrub again on every field carried from earlier state (a stricter scrub reaches old reads too)
-    home = home_place(rep.get("details"), rep.get("location"), rep.get("address"))      # before the text is withheld
+    home = rep.get("private_home") is True or home_place(rep.get("details"), rep.get("location"),
+                                                          rep.get("address"))      # before the text is withheld
     rep = {**rep, **{k: (strict_scrub(rep.get(k)) or None) for k in ("details", "steps_taken", "location", "address")}}
     home = home or home_place(rep.get("details"), rep.get("location"), rep.get("address"))
     if home:
@@ -330,18 +371,21 @@ def due_facilities(facs: list[dict], state: dict, at: str, budget: int) -> list[
 def reports_to_read(state: dict, at: str, budget: int) -> list[tuple[str, str]]:
     """[(facility id, report id)]: unread kept reports first (newest listed first), then open reports due a re-read."""
     reps = state.get("reports", {})
-    new, again = [], []
+    new, again, retry = [], [], []
     for rid, r in reps.items():
         if not KEEP_TYPES.search(r.get("label") or ""):
             continue
-        if not r.get("read_at"):
+        if r.get("retry") and r.get("read_at"):            # a re-read that failed: first in line (lessons 5)
+            retry.append((r["read_at"], r["fac"], rid))
+        elif not r.get("read_at"):
             if (r.get("listed") or "9999") >= BACKFILL_FROM:
                 new.append((r.get("listed") or "", r["fac"], rid))
         elif r.get("closed") != "Closed" and _hours_since(r["read_at"], at) >= REREAD_H:
             again.append((r["read_at"], r["fac"], rid))
     new.sort(reverse=True)
     again.sort()
-    return [(f, rid) for _, f, rid in new + again][:budget]
+    retry.sort()
+    return [(f, rid) for _, f, rid in retry + new + again][:budget]
 
 
 def fold_facility(state: dict, fac: dict, parsed: dict, at: str) -> None:
@@ -365,11 +409,14 @@ def scrub_state(state: dict) -> dict:
         f = r.get("fields")
         if not f:
             continue
-        home = home_place(f.get("details"), f.get("location"), f.get("address"))
+        home = f.get("private_home") is True or home_place(f.get("details"), f.get("location"), f.get("address"))
         for k in ("details", "steps_taken", "location", "address"):
             f[k] = strict_scrub(f.get(k)) or None
-        if home or home_place(f.get("details"), f.get("location"), f.get("address")):
-            f.update(lat=None, lon=None, address=None, location=None)
+        # a place whose own description was withheld (it may name a person) is treated as a private one: saved
+        # before the home test ran on the text as typed, it cannot be told apart (lessons 6)
+        placed_withheld = any(str(f.get(k) or "").startswith("[withheld") for k in ("location", "address"))
+        if home or placed_withheld or home_place(f.get("details"), f.get("location"), f.get("address")):
+            f.update(lat=None, lon=None, address=None, location=None, private_home=True)
     return state
 
 
@@ -444,11 +491,19 @@ def main(argv=None) -> int:
             page = rep_files[rid] if offline else get(REPORT_URL.format(fac=fid, rid=rid))
             fields = parse_report(page)
             r = state["reports"][rid]
+            check_against(fields, r.get("fields"))
             r.update(fields=fields, read_at=at, closed=fields["closed"])
+            r.pop("retry", None)
             saved.append({"report_id": rid, "facility": fid, **fields})
             read_r += 1
         except (requests.RequestException, ValueError) as e:
+            # the earlier fields stay; the report is read again first next run, and the feed is not healthy until then
+            if rid in state.get("reports", {}):
+                state["reports"][rid]["retry"] = True
             errors.append(f"report {rid}: {type(e).__name__}: {str(e)[:120]}")
+    for rid, r in sorted((state.get("reports") or {}).items()):
+        if r.get("retry") and not any(e.startswith(f"report {rid}:") for e in errors):
+            errors.append(f"report {rid}: an earlier read failed and it has not been read again yet")
     if saved and not offline:
         save_raw(SOURCE_ID, json.dumps({"fetched_at": at, "reports": saved}, indent=1).encode(), "json")
     write_json(STATE_PATH, scrub_state(state))
