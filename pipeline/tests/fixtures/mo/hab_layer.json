@@ -1,0 +1,6 @@
+{"features": [
+ {"attributes": {"globalid": "{AAAA0001-0000-0000-0000-000000000001}", "BloomStat": "advise", "WBName": "Example Lake, MO", "HABODat": 1779062400000, "CaseStatus": "Closed", "HABCo": "Boone County"}, "geometry": {"x": -92.3271234, "y": 38.9512345}},
+ {"attributes": {"globalid": "{AAAA0001-0000-0000-0000-000000000002}", "BloomStat": "advise", "WBName": "Sample Pond", "HABODat": 1793491200000, "CaseStatus": "Active", "HABCo": "Example County"}, "geometry": {"x": -91.5, "y": 39.0}},
+ {"attributes": {"globalid": "{AAAA0001-0000-0000-0000-000000000003}", "BloomStat": "notice", "WBName": "Suspected Lake", "HABODat": 1793491200000, "CaseStatus": "Closed", "HABCo": "Example County"}, "geometry": {"x": -91.4, "y": 39.1}},
+ {"attributes": {"globalid": "{AAAA0001-0000-0000-0000-000000000004}", "BloomStat": null, "WBName": "Old Report Lake", "HABODat": 0, "CaseStatus": "Closed", "HABCo": null}, "geometry": {"x": -91.3, "y": 39.2}}
+]}

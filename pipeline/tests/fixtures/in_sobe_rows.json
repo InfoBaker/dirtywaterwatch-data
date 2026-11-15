@@ -1,0 +1,186 @@
+{
+ "about": "Indiana rows of EPA's sewer overflow and bypass tables: the one Indiana report of the 2026-11-12 extract (Shelbyville's plant bypass, as filed: no person named; its point rounded to three decimals), and one synthetic report (key 'in-syn-1', permit IN0000001, an Example sewer overflow at a point in Evansville, Vanderburgh County) for the Central-time rule.",
+ "extract_date": "2026-11-12",
+ "events": [
+  {
+   "sewer_overflow_bypass_event_key": "27072",
+   "permit_identifier": "IN0032867",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "program_report_received_date": "2026-08-13",
+   "program_report_start_date": "2026-08-12",
+   "program_report_end_date": "2026-08-13",
+   "electronic_submission_type_code": "ES1",
+   "electr_submission_type_desc": "EPA electronic reporting system",
+   "program_report_npdes_data_group_number_code": "G9A",
+   "program_report_npdes_data_group_desc": "Sewer Overflow/Bypass Event Report ",
+   "payload_id": "316437099",
+   "transaction_type": "N",
+   "sewer_overflow_bypass_description_text": "Bypass due to Rain Event",
+   "sewer_overflow_bypass_reporting_requirement_code": "1",
+   "sewer_overflow_reporting_requirement_desc": "5-day reporting for noncompliance that may endanger health or the environment",
+   "wet_weather_occurance_indicator": "Y",
+   "sewer_overflow_structure_type_code": "",
+   "sewer_overflow_structure_type_desc": "",
+   "sewer_overflow_structure_type_code_other_text": "",
+   "collection_system_identifier": "",
+   "permitted_feature_identifier": "",
+   "latitude_measure": "39.528",
+   "longitude_measure": "-85.792",
+   "sewer_overflow_bypass_duration_hours": "17.42",
+   "sewer_overflow_bypass_start_datetime": "2026-08-12 21:30:00",
+   "sewer_overflow_bypass_end_datetime": "2026-08-13 14:55:00",
+   "discharge_quantification_method_code": "ARM",
+   "discharge_quantification_method_desc": "Automated Remote Monitoring",
+   "sewer_overflow_bypass_discharge_volume_gallons": "5055000.00",
+   "sewer_overflow_bypass_discharge_rate_gph": "",
+   "anticipated_bypass_text": "",
+   "anticipated_bypass_expect_limit_violation": "",
+   "anticipated_bypass_expect_limit_violation_text": "",
+   "event_transaction_type": "N",
+   "collection_system_owner_type_code": "",
+   "collection_system_owner_type_desc": "",
+   "collection_system_population": ""
+  },
+  {
+   "sewer_overflow_bypass_event_key": "in-syn-1",
+   "permit_identifier": "IN0000001",
+   "program_report_form_set_id": "9",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "program_report_received_date": "2026-07-06",
+   "program_report_start_date": "2026-07-04",
+   "program_report_end_date": "2026-07-04",
+   "electronic_submission_type_code": "ES1",
+   "electr_submission_type_desc": "EPA electronic reporting system",
+   "program_report_npdes_data_group_number_code": "G9A",
+   "program_report_npdes_data_group_desc": "Sewer Overflow/Bypass Event Report ",
+   "payload_id": "0",
+   "transaction_type": "N",
+   "sewer_overflow_bypass_description_text": "Example manhole overflow after heavy rain",
+   "sewer_overflow_bypass_reporting_requirement_code": "1",
+   "sewer_overflow_reporting_requirement_desc": "5-day reporting for noncompliance that may endanger health or the environment",
+   "wet_weather_occurance_indicator": "Y",
+   "sewer_overflow_structure_type_code": "",
+   "sewer_overflow_structure_type_desc": "",
+   "sewer_overflow_structure_type_code_other_text": "",
+   "collection_system_identifier": "",
+   "permitted_feature_identifier": "",
+   "latitude_measure": "37.975",
+   "longitude_measure": "-87.556",
+   "sewer_overflow_bypass_duration_hours": "2",
+   "sewer_overflow_bypass_start_datetime": "2026-07-04 19:00:00",
+   "sewer_overflow_bypass_end_datetime": "2026-07-04 21:00:00",
+   "discharge_quantification_method_code": "EST",
+   "discharge_quantification_method_desc": "Estimate",
+   "sewer_overflow_bypass_discharge_volume_gallons": "1000.00",
+   "sewer_overflow_bypass_discharge_rate_gph": "",
+   "anticipated_bypass_text": "",
+   "anticipated_bypass_expect_limit_violation": "",
+   "anticipated_bypass_expect_limit_violation_text": "",
+   "event_transaction_type": "N",
+   "collection_system_owner_type_code": "",
+   "collection_system_owner_type_desc": "",
+   "collection_system_population": ""
+  }
+ ],
+ "types": [
+  {
+   "sewer_overflow_bypass_event_key": "27072",
+   "permit_identifier": "IN0032867",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_type_code_id": "27058",
+   "sewer_overflow_bypass_type_code": "BYP",
+   "sewer_overflow_bypass_type_desc": "Bypass Event",
+   "sewer_overflow_bypass_type_code_sequence": "1"
+  },
+  {
+   "sewer_overflow_bypass_event_key": "in-syn-1",
+   "permit_identifier": "IN0000001",
+   "program_report_form_set_id": "9",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_type_code_id": "27058",
+   "sewer_overflow_bypass_type_code": "SSO",
+   "sewer_overflow_bypass_type_desc": "Sanitary Sewer Overflow",
+   "sewer_overflow_bypass_type_code_sequence": "1"
+  }
+ ],
+ "waters": [
+  {
+   "sewer_overflow_bypass_event_key": "27072",
+   "permit_identifier": "IN0032867",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_receiving_water_id": "22208",
+   "name_receiving_water": "Big Blue River"
+  },
+  {
+   "sewer_overflow_bypass_event_key": "in-syn-1",
+   "permit_identifier": "IN0000001",
+   "program_report_form_set_id": "9",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_receiving_water_id": "22208",
+   "name_receiving_water": "Pigeon Creek"
+  }
+ ],
+ "impacts": [
+  {
+   "sewer_overflow_bypass_event_key": "27072",
+   "permit_identifier": "IN0032867",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_impact_id": "29480",
+   "sewer_overflow_bypass_impact_code": "NOI",
+   "sewer_overflow_bypass_impact_desc": "No observable impacts",
+   "sewer_overflow_bypass_impact_other_text": ""
+  }
+ ],
+ "causes": [
+  {
+   "sewer_overflow_bypass_event_key": "27072",
+   "permit_identifier": "IN0032867",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_cause_id": "29684",
+   "sewer_overflow_bypass_cause_code": "FTP",
+   "sewer_overflow_bypass_cause_desc": "Flooding of Treatment Plant - Hurricane or Large Stormwater Event",
+   "sewer_overflow_bypass_cause_other_text": ""
+  }
+ ],
+ "actions": [
+  {
+   "sewer_overflow_bypass_event_key": "27072",
+   "permit_identifier": "IN0032867",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_bypass_corrective_action_id": "32762",
+   "sewer_overflow_bypass_corrective_action_code": "SER",
+   "sewer_overflow_bypass_corrective_action_desc": "Sewer Rehabilitation",
+   "sewer_overflow_bypass_corrective_action_other_text": ""
+  }
+ ],
+ "treatment": [
+  {
+   "sewer_overflow_bypass_event_key": "27072",
+   "permit_identifier": "IN0032867",
+   "program_report_form_set_id": "1",
+   "program_report_form_id": "1",
+   "sewer_overflow_bypass_event_id_ext": "1",
+   "sewer_overflow_treatment_id": "18597",
+   "sewer_overflow_treatment_code": "",
+   "sewer_overflow_treatment_desc": "",
+   "bypass_treatment_plant_equipment_code": "PTE",
+   "bypass_treatment_plant_equipment_desc": "Primary treatment equipment"
+  }
+ ],
+ "systems": []
+}

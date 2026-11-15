@@ -19,7 +19,7 @@
       "html",
       "csv"
     ],
-    "access_detail": "Public search page: plain HTML POST (no viewstate) to https://adeq.state.ar.us/water/enforcement/sso/data.aspx with T_FacilityName, T_NPID, T_MiscSearch, C_SSO/C_Bypass/C_Upset/C_Unpermitted (=1), T_DateStart, T_DateEnd (mm/dd/yyyy), Search=Search. Page says \"Data current as of 11/03/2026\"; a query for 2026-10-25 to 11-03 returned 7 SSOs including one reported 10/29/2026; October 2026 returned 41 SSOs (15 per page; export to Text, Excel, PDF links). A year-wide multi-type query returned 0 (likely a size limit), so query by month or week. Online reporting forms feed it directly (24 Hour Online Overflow Reporting Forms, each with a Web Confirmation Number). Sample raw/sso-search-sample.json, page raw/sso-search-recent.html.",
+    "access_detail": "Public search page: a plain HTML form POST (no view state, no session) to https://adeq.state.ar.us/water/enforcement/sso/data.aspx with T_FacilityName, T_NPID, T_MiscSearch, the four type boxes C_SSO/C_Bypass/C_Upset/C_Unpermitted, T_DateStart and T_DateEnd (mm/dd/yyyy, on the day the overflow began), Search=Search; result pages repeat the POST with the hidden PageNo, RecordsPerPage (1 to 100), Sort and SortASC. Ticking two or more type boxes returns nothing (the boxes combine with AND; the cause of the earlier year-wide zero); ticking none returns every type. Each result page states Recs Found and 'Data current as of' (11/13/2026 on 2026-11-14). The search reaches back to 1993 (about 46,000 reports). Text, Excel and PDF exports of a query are offered (download_query.aspx links generated per query).",
     "machine_readable": true,
     "sample_record": {
       "permit": "AR0047554",
@@ -69,13 +69,13 @@
     "has_coordinates": false,
     "has_outfall_ids": false,
     "cadence": "Live: reports filed online appear the next day or sooner. Rule: notify DEQ within 24 hours; 5-day written report for most.",
-    "history": "Access database snapshot back to at least 2014 (dates seen 2014-04 to 2020-09 in strings; ZIP Last-Modified 2025-08-13); the web search covers current reports",
+    "history": "The search holds reports from 1993 (most from 2001) to the day before; the Access ZIP is a 2025-08-13 snapshot.",
     "license": "None shown.",
     "legal_basis": "DEQ NPDES permit Part II reporting conditions (24 hours / 5 days)",
-    "status": "candidate",
-    "status_reason": "Statewide, dated, current to the day before, with volume, impact and cause; HTML only (POST search) and no coordinates.",
+    "status": "used",
+    "status_reason": "Read by this site: every report whose overflow began since 2025-01-01 (2,449 rows read 2026-11-14), polled by start day with each window's count checked; statewide, dated to the day, usually received the next day; no coordinates, county or receiving-water field.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": "Also a downloadable Access database NPDES_SSO_web.zip (5 MB, 28 MB .mdb) whose ZIP was last modified 2025-08-13, so it lags the web search; not parsed (no Access tools here). Location text is free text and may include customer addresses: show only to street level and run the name blocklist."
   },
   {
@@ -114,9 +114,9 @@
     "license": "None shown.",
     "legal_basis": null,
     "status": "candidate",
-    "status_reason": "History backfill once parsed (needs an Access reader such as mdbtools).",
+    "status_reason": "A bulk snapshot of the same reports for history before 2025; the ZIP's Last-Modified is still 2025-08-13 (HEAD request 2026-11-14, 5,065,954 bytes); not parsed (Microsoft Access).",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": ""
   },
   {
@@ -173,7 +173,7 @@
       "html",
       "pdf"
     ],
-    "access_detail": "HTML table \"Current Advisories\" (Waterbody Name, Nearest Area, AR County, Date Posted; Last Updated), empty on 2026-11-03; archive at /water/planning/hab/archive.aspx; each advisory and lift is a dated news-release PDF (e.g. 2026-08-17 Huston Lake; 2026-07-23 lifted Lake Alma). curl got a connection reset; WebFetch read it.",
+    "access_detail": "The Harmful Algal Blooms page (https://adeq.state.ar.us/water/planning/hab/) and its archive (archive.aspx) are drawn by script from https://adeq.state.ar.us/water/planning/hab/advisories.json: {updated, advisories: [{waterbody, county, area, date, lifted}]}; the current table shows rows with no lift date. Starred rows: 'Advisory posted by partner agency or HAB confirmed, but no advisory issued'.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [
@@ -197,10 +197,10 @@
     "history": "archive page; releases 2026 seen",
     "license": "None shown.",
     "legal_basis": "DEQ HAB Response Plan (2019)",
-    "status": "candidate",
-    "status_reason": "Small HTML table plus the archive: a snapshot state machine gives dated HAB advisories.",
+    "status": "used",
+    "status_reason": "Read by this site: the file behind the current-advisories table and the archive (advisories.json: 52 advisories since 2014, 4 in effect on 2026-11-14), with DEQ's posted and lifted days.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": ""
   },
   {
@@ -232,9 +232,9 @@
     "license": "public domain",
     "legal_basis": "40 CFR 127",
     "status": "rejected",
-    "status_reason": "No rows; Arkansas uses its own forms.",
+    "status_reason": "EPA's sewer overflow and bypass extracts dated 2026-11-12 (current and all versions) hold no Arkansas rows; DEQ publishes its own search instead.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": ""
   },
   {
@@ -333,9 +333,135 @@
     "license": null,
     "legal_basis": null,
     "status": "rejected",
-    "status_reason": "No program found (search only).",
+    "status_reason": "The 2026-11-03 'no beach program' finding was wrong: the Department of Health runs the Arkansas Swim Beach Program (ar-adh-swim-beach-status).",
     "verified": "search_only",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": ""
+  },
+  {
+    "id": "ar-adh-swim-beach-status",
+    "name": "Arkansas Department of Health, Arkansas Swim Beach Program: closed swim beaches",
+    "jurisdiction": "AR",
+    "operator": "Arkansas Department of Health, Marine Sanitation Program",
+    "operator_type": "state",
+    "role": "advisories",
+    "event_types": [
+      "beach_closure"
+    ],
+    "waters_covered": "public and private swim beaches (Corps of Engineers, state park, Forest Service and private); the list names beaches, not waters",
+    "water_slugs": [],
+    "url": "https://healthy.arkansas.gov/programs-services/public-health-safety/marine-sanitation/arkansas-swim-beach-program/",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Page answered the identified client 200 on 2026-11-14 (a 403 to the 2026-11-09 research). Under 'Closed Swim Beaches' it lists 'SB112 - Jefferson Ridge West' (one beach); no dates, no reason, no water, no point. E. coli standard: a sample above 126 per 100 ml triggers daily resampling.",
+    "machine_readable": false,
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "unstated",
+    "history": "none (current list only)",
+    "license": "none stated",
+    "legal_basis": "Rules Pertaining to Outdoor Bathing Places (ADH)",
+    "status": "used",
+    "status_reason": "Read by this site as a standing list: each listed beach is a closure from the first read that lists it until a read no longer does.",
+    "verified": "fetched",
+    "checked": "2026-11-14",
+    "notes": "The beach's water and point are not given and no GNIS feature of the name was found: the record is listed unplaced until a cited point is added."
+  },
+  {
+    "id": "ar-usace-swl-swim-beach-closures",
+    "name": "U.S. Army Corps of Engineers, Little Rock District: swim beach closures",
+    "jurisdiction": "AR",
+    "operator": "U.S. Army Corps of Engineers, Little Rock District",
+    "operator_type": "federal",
+    "role": "advisories",
+    "event_types": [
+      "beach_closure"
+    ],
+    "waters_covered": "Corps lake swim beaches in the district (Arkansas and Missouri)",
+    "water_slugs": [],
+    "url": "https://www.swl.usace.army.mil/Home/Swim-Beach-Closures/",
+    "access": [
+      "html"
+    ],
+    "access_detail": "403 Forbidden to this site's identified client on 2026-11-14 (also to the 2026-11-09 research). Indexed text describes closures for several causes, high water among them.",
+    "machine_readable": false,
+    "license": "none stated",
+    "legal_basis": null,
+    "status": "unreachable",
+    "status_reason": "The host refuses this site's identified client (403); a barrier to record, not something to get around.",
+    "verified": "fetched",
+    "checked": "2026-11-14"
+  },
+  {
+    "id": "ar-deq-seek-complaints",
+    "name": "Arkansas DEQ SEEK complaints search",
+    "jurisdiction": "AR",
+    "operator": "Arkansas Division of Environmental Quality",
+    "operator_type": "state",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "statewide complaints submitted on or after 2024-10-23",
+    "water_slugs": [],
+    "url": "https://adeq.state.ar.us/complaints/searches/",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Landing page read by the 2026-11-09 research; results not extracted. A complaint is the public's report, not a confirmed discharge; the search would show what staff found.",
+    "machine_readable": false,
+    "license": "none stated",
+    "legal_basis": null,
+    "status": "watch",
+    "status_reason": "Possible corroboration of overflows missing from the incident search; the public's complaints carry names and addresses and need a safe-field review before any reading.",
+    "verified": "search_only",
+    "checked": "2026-11-09"
+  },
+  {
+    "id": "ar-deq-water-quality-search",
+    "name": "Arkansas DEQ water-quality monitoring station search",
+    "jurisdiction": "AR",
+    "operator": "Arkansas Division of Environmental Quality",
+    "operator_type": "state",
+    "role": "monitoring",
+    "event_types": [],
+    "waters_covered": "DEQ's monitoring stations",
+    "water_slugs": [],
+    "url": "https://adeq.state.ar.us/techsvs/env_multi_lab/water_quality_station.aspx",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Indexed page calls results provisional and points to WQX for final results.",
+    "machine_readable": false,
+    "license": "none stated",
+    "legal_basis": null,
+    "status": "watch",
+    "status_reason": "Sample results, not advisories or discharge reports: context only.",
+    "verified": "search_only",
+    "checked": "2026-11-09"
+  },
+  {
+    "id": "ar-deq-email-lists",
+    "name": "Arkansas DEQ e-mail lists (news releases, including harmful algal bloom advisories)",
+    "jurisdiction": "AR",
+    "operator": "Arkansas Division of Environmental Quality",
+    "operator_type": "state",
+    "role": "news",
+    "event_types": [],
+    "waters_covered": "statewide",
+    "water_slugs": [],
+    "url": "https://www.adeq.state.ar.us/poa/pi/emaillists.aspx",
+    "access": [
+      "email"
+    ],
+    "access_detail": "Sign-up page for DEQ's lists; HAB advisories are announced in news releases.",
+    "machine_readable": false,
+    "license": "none stated",
+    "legal_basis": null,
+    "status": "watch",
+    "status_reason": "A voluntary notice channel (e-mail); the advisories it announces are read from advisories.json.",
+    "verified": "fetched",
+    "checked": "2026-11-03"
   }
 ]

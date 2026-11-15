@@ -1,0 +1,29 @@
+id: "wv-dep-hab-advisories"
+name: "West Virginia DEP algal bloom advisory map (points, segments, areas)"
+url: "https://tagis.dep.wv.gov/arcgis/rest/services/webMercator/algae_advisories/MapServer"
+homepage: "https://dep.wv.gov/WWE/watershed/Algae/Pages/Harmful-Algal-Blooms.aspx"
+kind: "arcgis"
+level: "state"
+# Feed row: written by pipeline/ingest/wv_dep_hab_advisories.py (data/build/events/wv-dep-hab-advisories.json; state file
+#   data/build/wv-dep-hab-advisories-state.json). Blooms, not sewage (hab_advisory).
+# Read 2026-11-14: layers 1 'Algal Bloom Location' (points), 2 'Algal Bloom Segments' (lines), 3 'Algal Bloom Area'
+#   (polygons), fields OBJECTID, Advisory and Date_Observed (DateObserved on layer 3): every layer answered with no row,
+#   and DEP's page says no advisory is in effect. The layers carry no water name, no edit date and no person.
+# Records: one per row while the map shows it, from the first read that showed it (time_precision poll; DEP gives the day
+#   the bloom was observed, kept as stored in raw.date_observed_utc, its precision unknown, not an issue date) to the first read that no longer does
+#   (raw.ended_at_precision poll); DEP's Advisory text as the advice; the point, the point half way along a segment or an
+#   interior point of an area, rounded to three decimals, with DEP's segment or area kept in raw.agency_extent.
+# Cannot fill: an issue or lift date given by DEP; the water's name.
+cadence: "with the refresh (the map lists only what is in effect)"
+license: "none stated"
+attribution: "West Virginia Department of Environmental Protection"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["WV"]
+registry_ids: ["wv-dep-hab-advisories"]
+access: ["arcgis"]
+access_detail: "MapServer layers 1 to 3, query where 1=1, outFields OBJECTID, Advisory and the observation date, geometry in WGS 84; no key."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"

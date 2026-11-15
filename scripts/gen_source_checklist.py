@@ -64,6 +64,17 @@ AREA_TITLES = {
     "tx": "Texas",
     "tn": "Tennessee",
     "oh": "Ohio",
+    "mn": "Minnesota",
+    "nd": "North Dakota",
+    "mo": "Missouri",
+    "ks": "Kansas",
+    "ar": "Arkansas",
+    "wi": "Wisconsin",
+    "de": "Delaware",
+    "sc": "South Carolina",
+    "in": "Indiana",
+    "wv": "West Virginia",
+    "la": "Louisiana",
     "pr": "Puerto Rico",
 }
 

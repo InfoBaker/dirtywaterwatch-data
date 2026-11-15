@@ -1,0 +1,1053 @@
+{
+ "about": "Water names in Indiana's records and outfall rows that data/receiving-waters-national.json does not hold for IN: IDEM's CSO outfall layer (each open outfall's receiving stream, read 2026-11-14), EPA's monthly DMR records and overflow tables (2026-11-12 extract), and IDEM's cyanobacteria layer's lakes, with the number of outfalls and records giving each, their counties and points.",
+ "state": "IN",
+ "waters": 49,
+ "reports": 1366,
+ "rows": [
+  {
+   "name": "Brookville Lake",
+   "reports": 130,
+   "counties": [],
+   "points": [
+    [
+     39.586,
+     -84.995
+    ],
+    [
+     39.498,
+     -84.987
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Cecil M. Harden Lake",
+   "reports": 97,
+   "counties": [],
+   "points": [
+    [
+     39.731,
+     -87.055
+    ],
+    [
+     39.747,
+     -87.076
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Worster Lake",
+   "reports": 85,
+   "counties": [],
+   "points": [
+    [
+     41.551,
+     -86.362
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Hardy Lake",
+   "reports": 77,
+   "counties": [],
+   "points": [
+    [
+     38.782,
+     -85.698
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Whitewater Lake",
+   "reports": 76,
+   "counties": [],
+   "points": [
+    [
+     39.615,
+     -84.966
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Monroe Lake",
+   "reports": 73,
+   "counties": [],
+   "points": [
+    [
+     39.022,
+     -86.482
+    ],
+    [
+     39.017,
+     -86.461
+    ],
+    [
+     39.08,
+     -86.431
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Mississinewa Lake",
+   "reports": 64,
+   "counties": [],
+   "points": [
+    [
+     40.702,
+     -85.936
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Salamonie Lake",
+   "reports": 62,
+   "counties": [],
+   "points": [
+    [
+     40.779,
+     -85.637
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Little Duck Creek",
+   "reports": 59,
+   "counties": [
+    "Madison"
+   ],
+   "points": [
+    [
+     40.267,
+     -85.829
+    ],
+    [
+     40.266,
+     -85.83
+    ],
+    [
+     40.265,
+     -85.832
+    ],
+    [
+     40.263,
+     -85.832
+    ],
+    [
+     40.266,
+     -85.831
+    ]
+   ],
+   "permits": [
+    "IN0032719"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Pouges Run",
+   "reports": 53,
+   "counties": [
+    "Marion"
+   ],
+   "points": [
+    [
+     39.774,
+     -86.139
+    ],
+    [
+     39.781,
+     -86.133
+    ],
+    [
+     39.786,
+     -86.126
+    ],
+    [
+     39.787,
+     -86.124
+    ],
+    [
+     39.786,
+     -86.121
+    ]
+   ],
+   "permits": [
+    "IN0023183"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Moore Prong",
+   "reports": 50,
+   "counties": [
+    "Blackford"
+   ],
+   "points": [
+    [
+     40.457,
+     -85.382
+    ],
+    [
+     40.45,
+     -85.388
+    ],
+    [
+     40.436,
+     -85.384
+    ]
+   ],
+   "permits": [
+    "IN0021628"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Ft. Harrison Dog Park",
+   "reports": 46,
+   "counties": [],
+   "points": [
+    [
+     39.878,
+     -86.017
+    ],
+    [
+     39.878,
+     -86.018
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Berlin Court Grand Ditch",
+   "reports": 43,
+   "counties": [
+    "Elkhart"
+   ],
+   "points": [
+    [
+     41.446,
+     -85.987
+    ],
+    [
+     41.447,
+     -85.99
+    ],
+    [
+     41.448,
+     -85.992
+    ],
+    [
+     41.448,
+     -85.994
+    ],
+    [
+     41.449,
+     -85.997
+    ]
+   ],
+   "permits": [
+    "IN0021466"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Little Calumet River",
+   "reports": 43,
+   "counties": [
+    "Lake"
+   ],
+   "points": [
+    [
+     41.56,
+     -87.274
+    ],
+    [
+     41.56,
+     -87.336
+    ],
+    [
+     41.574,
+     -87.32
+    ]
+   ],
+   "permits": [
+    "IN0022977"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Patoka Lake",
+   "reports": 35,
+   "counties": [],
+   "points": [
+    [
+     38.414,
+     -86.668
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Cagles Mill Lake",
+   "reports": 34,
+   "counties": [],
+   "points": [
+    [
+     39.475,
+     -86.898
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Sand Lake",
+   "reports": 31,
+   "counties": [],
+   "points": [
+    [
+     41.331,
+     -85.384
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Starve Hollow Lake",
+   "reports": 28,
+   "counties": [],
+   "points": [
+    [
+     38.814,
+     -86.081
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Ferdinand Lake",
+   "reports": 22,
+   "counties": [],
+   "points": [
+    [
+     38.256,
+     -86.776
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Bean Creek",
+   "reports": 20,
+   "counties": [
+    "Marion"
+   ],
+   "points": [
+    [
+     39.73,
+     -86.142
+    ],
+    [
+     39.729,
+     -86.14
+    ],
+    [
+     39.729,
+     -86.135
+    ]
+   ],
+   "permits": [
+    "IN0023183"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Indiana Harbor Canal",
+   "reports": 20,
+   "counties": [
+    "Lake"
+   ],
+   "points": [
+    [
+     41.649,
+     -87.465
+    ]
+   ],
+   "permits": [
+    "IN0022829"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Lake Freeman",
+   "reports": 19,
+   "counties": [
+    "White"
+   ],
+   "points": [
+    [
+     40.732,
+     -86.756
+    ]
+   ],
+   "permits": [
+    "IN0020176"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Bowery Brook",
+   "reports": 18,
+   "counties": [
+    "Henry"
+   ],
+   "points": [
+    [
+     39.937,
+     -85.374
+    ]
+   ],
+   "permits": [
+    "IN0023914"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Kunkel Lake",
+   "reports": 18,
+   "counties": [],
+   "points": [
+    [
+     40.72,
+     -85.106
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Sprunger Ditch",
+   "reports": 18,
+   "counties": [
+    "Adams"
+   ],
+   "points": [
+    [
+     40.66,
+     -84.939
+    ]
+   ],
+   "permits": [
+    "IN0021369"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Mud Run",
+   "reports": 17,
+   "counties": [
+    "Blackford"
+   ],
+   "points": [
+    [
+     40.451,
+     -85.356
+    ]
+   ],
+   "permits": [
+    "IN0021628"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Baker Branch",
+   "reports": 16,
+   "counties": [
+    "Henry"
+   ],
+   "points": [
+    [
+     39.907,
+     -85.377
+    ]
+   ],
+   "permits": [
+    "IN0023914"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Summit Lake",
+   "reports": 13,
+   "counties": [],
+   "points": [
+    [
+     40.026,
+     -85.308
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Big Duck Creek",
+   "reports": 12,
+   "counties": [
+    "Madison"
+   ],
+   "points": [
+    [
+     40.283,
+     -85.867
+    ]
+   ],
+   "permits": [
+    "IN0032719"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Lake James",
+   "reports": 11,
+   "counties": [],
+   "points": [
+    [
+     41.703,
+     -85.023
+    ],
+    [
+     41.71,
+     -85.036
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Sipe Ditch",
+   "reports": 11,
+   "counties": [
+    "Jay"
+   ],
+   "points": [
+    [
+     40.441,
+     -84.992
+    ]
+   ],
+   "permits": [
+    "IN0020095"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Main Beaver Dam Ditch",
+   "reports": 9,
+   "counties": [
+    "Lake"
+   ],
+   "points": [
+    [
+     41.438,
+     -87.361
+    ],
+    [
+     41.436,
+     -87.355
+    ],
+    [
+     41.423,
+     -87.374
+    ],
+    [
+     41.437,
+     -87.36
+    ]
+   ],
+   "permits": [
+    "IN0025763"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Deans Branch",
+   "reports": 8,
+   "counties": [
+    "Jefferson"
+   ],
+   "points": [
+    [
+     38.748,
+     -85.421
+    ]
+   ],
+   "permits": [
+    "IN0025666"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Mound Run",
+   "reports": 8,
+   "counties": [
+    "Henry"
+   ],
+   "points": [
+    [
+     39.919,
+     -85.377
+    ]
+   ],
+   "permits": [
+    "IN0023914"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Charley Creek",
+   "reports": 7,
+   "counties": [
+    "Wabash"
+   ],
+   "points": [
+    [
+     40.796,
+     -85.839
+    ],
+    [
+     40.805,
+     -85.823
+    ]
+   ],
+   "permits": [
+    "IN0024741"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Lake Lincoln",
+   "reports": 5,
+   "counties": [],
+   "points": [
+    [
+     38.103,
+     -86.995
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Big Eagle Creek",
+   "reports": 4,
+   "counties": [
+    "Marion"
+   ],
+   "points": [
+    [
+     39.77,
+     -86.233
+    ]
+   ],
+   "permits": [
+    "IN0032972"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Pleasant Run Creek",
+   "reports": 4,
+   "counties": [
+    "Marion"
+   ],
+   "points": [
+    [
+     39.776,
+     -86.064
+    ]
+   ],
+   "permits": [
+    "IN0023183"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Hominy Ditch",
+   "reports": 3,
+   "counties": [
+    "Jackson"
+   ],
+   "points": [
+    [
+     38.791,
+     -85.849
+    ]
+   ],
+   "permits": [
+    "IN0022683"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Spy Run Creek",
+   "reports": 3,
+   "counties": [
+    "Allen"
+   ],
+   "points": [
+    [
+     41.098,
+     -85.143
+    ]
+   ],
+   "permits": [
+    "IN0032191"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Wilson Ditch",
+   "reports": 3,
+   "counties": [
+    "Hamilton"
+   ],
+   "points": [
+    [
+     40.043,
+     -86.0
+    ],
+    [
+     40.041,
+     -86.006
+    ]
+   ],
+   "permits": [
+    "IN0020168"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Busseron Creek",
+   "reports": 2,
+   "counties": [
+    "Sullivan"
+   ],
+   "points": [
+    [
+     39.088,
+     -87.379
+    ]
+   ],
+   "permits": [
+    "IN0024554"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Deam Lake",
+   "reports": 2,
+   "counties": [],
+   "points": [
+    [
+     38.466,
+     -85.861
+    ]
+   ],
+   "permits": [],
+   "sources": [
+    "in-idem-cyanobacteria"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Travis Ditch",
+   "reports": 2,
+   "counties": [
+    "La Porte"
+   ],
+   "points": [
+    [
+     41.582,
+     -86.684
+    ]
+   ],
+   "permits": [
+    "IN0025577"
+   ],
+   "sources": [
+    "in-echo-dmr-cso",
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Boots Creek",
+   "reports": 1,
+   "counties": [
+    "Grant"
+   ],
+   "points": [
+    [
+     40.537,
+     -85.666
+    ]
+   ],
+   "permits": [
+    "IN0025585"
+   ],
+   "sources": [
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Christiana Creek",
+   "reports": 1,
+   "counties": [
+    "Elkhart"
+   ],
+   "points": [
+    [
+     41.695,
+     -85.967
+    ]
+   ],
+   "permits": [
+    "IN0025674"
+   ],
+   "sources": [
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Haw Creek",
+   "reports": 1,
+   "counties": [
+    "Bartholomew"
+   ],
+   "points": [
+    [
+     39.197,
+     -85.915
+    ]
+   ],
+   "permits": [
+    "IN0032573"
+   ],
+   "sources": [
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "John Diehl Drain",
+   "reports": 1,
+   "counties": [
+    "De Kalb"
+   ],
+   "points": [
+    [
+     41.353,
+     -85.067
+    ]
+   ],
+   "permits": [
+    "IN0020672"
+   ],
+   "sources": [
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  },
+  {
+   "name": "Windy Creek",
+   "reports": 1,
+   "counties": [
+    "Perry"
+   ],
+   "points": [
+    [
+     37.959,
+     -86.76
+    ]
+   ],
+   "permits": [
+    "IN0021016"
+   ],
+   "sources": [
+    "in-idem-cso-outfall-layer"
+   ],
+   "reason": "not in data/receiving-waters-national.json for IN"
+  }
+ ]
+}

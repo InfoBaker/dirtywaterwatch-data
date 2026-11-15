@@ -149,12 +149,17 @@ def slim_event(rec: dict) -> dict:
     own = (rec.get("raw") or {}).get("ended_at_precision") if isinstance(rec.get("raw"), dict) else None
     if rec.get("ended_at") and own and own != rec.get("time_precision"):
         out["ended_at_precision"] = own
+    out.update(status_mod.start_bound(rec))          # re-review P1-6: only records whose start is an upper bound
     return out
 
 
 def index_obj(rec: dict) -> dict:
     o = {k: rec.get(k) for k in INDEX_FIELDS}
     o.update(bounds_precision(rec))
+    if rec.get("started_at_bound"):                  # slim rows of a start that is an upper bound (re-review P1-6)
+        o.update(started_at_bound=rec["started_at_bound"], started_at_kind=rec.get("started_at_kind"))
+    else:
+        o.update(status_mod.start_bound(rec))
     o["state"] = rec.get("state") or status_mod.event_state(rec)     # public_record's, read with raw
     for k in ("lat", "lon"):
         if o[k] is not None:
@@ -1500,6 +1505,39 @@ def operator_outfalls(d: dict, by_permit: dict, by_operator: dict | None = None)
 
 # ---------------------------------------------------------------- main
 
+def advisory_point_features(st: dict, by_event: dict) -> list[dict]:
+    """The advisory-points.geojson features: beach, rain and HAB advisories that colour no water, one per status
+    advisory point (a further part of a multipart advisory at its own part_point)."""
+    pts = []
+    for ap in st.get("advisory_points") or []:
+        e = by_event.get(ap["event_id"])
+        if not e:
+            continue
+        # a report with no point of its own (Hawaii): the marker at the point of the water record status gave it
+        # a further part of an advisory the authority drew in several parts (status: part_point, West Virginia DEP's
+        # bloom map only): that water's marker at the part's own point, under its own feature id
+        pp = ap.get("part_point")
+        src = pp if pp else e if e.get("lat") is not None and e.get("lon") is not None else ap
+        if src.get("lat") is None or src.get("lon") is None:
+            continue
+        lon, lat = round(float(src["lon"]), 5), round(float(src["lat"]), 5)
+        fid = f"{e['event_id']}~{'+'.join(ap.get('water_slugs') or [])}" if pp else e["event_id"]
+        pts.append({"type": "Feature", "id": fid, "geometry": {"type": "Point", "coordinates": [lon, lat]},
+                    "properties": {"event_id": e["event_id"], "lat": lat, "lon": lon, "status": ap["status"],
+                                   "rule": ap.get("rule"), "type": e["event_type"], "event_status": e.get("status"),
+                                   "category": ap.get("category") or status_mod.category_of(e["event_type"]),
+                                   "authority": e.get("authority"), "name": e.get("waterbody_text"),
+                                   "started": e.get("started_at"), "ended": e.get("ended_at"), "until": ap.get("until"),
+                                   **bounds_precision(e),
+                                   "water_slugs": ap.get("water_slugs") or [], "why": ap.get("why"),
+                                   **({"point_basis": ap["point_basis"]} if ap.get("point_basis") else {}),
+                                   **({"point_basis": pp["basis"]} if pp else {}),
+                                   # replay: the strictest of these for the hour, not today's status
+                                   "intervals": ap.get("intervals") or [],
+                                   "fixture": e.get("fixture", False), "file": e.get("file")}})
+    return pts
+
+
 def export(include_fixtures: bool = False, include_restricted: bool = False) -> dict:
     if include_fixtures and os.environ.get("DWW_ALLOW_FIXTURES") != "1":
         raise SystemExit("export: refusing to write out/ with research fixture events; "
@@ -1697,28 +1735,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         for lo in launch_feats.values() if lo["lat"] is not None and lo["lon"] is not None]})
 
     # advisory markers: beach, rain and HAB advisories that colour no water
-    pts = []
-    for ap in st.get("advisory_points") or []:
-        e = by_event.get(ap["event_id"])
-        if not e:
-            continue
-        # a report with no point of its own (Hawaii): the marker at the point of the water record status gave it
-        src = e if e.get("lat") is not None and e.get("lon") is not None else ap
-        if src.get("lat") is None or src.get("lon") is None:
-            continue
-        lon, lat = round(float(src["lon"]), 5), round(float(src["lat"]), 5)
-        pts.append({"type": "Feature", "id": e["event_id"], "geometry": {"type": "Point", "coordinates": [lon, lat]},
-                    "properties": {"event_id": e["event_id"], "lat": lat, "lon": lon, "status": ap["status"],
-                                   "rule": ap.get("rule"), "type": e["event_type"], "event_status": e.get("status"),
-                                   "category": ap.get("category") or status_mod.category_of(e["event_type"]),
-                                   "authority": e.get("authority"), "name": e.get("waterbody_text"),
-                                   "started": e.get("started_at"), "ended": e.get("ended_at"), "until": ap.get("until"),
-                                   **bounds_precision(e),
-                                   "water_slugs": ap.get("water_slugs") or [], "why": ap.get("why"),
-                                   **({"point_basis": ap["point_basis"]} if ap.get("point_basis") else {}),
-                                   # replay: the strictest of these for the hour, not today's status
-                                   "intervals": ap.get("intervals") or [],
-                                   "fixture": e.get("fixture", False), "file": e.get("file")}})
+    pts = advisory_point_features(st, by_event)
     write_compact(OUT_DIR / "advisory-points.geojson", {"type": "FeatureCollection", "features": pts})
     # the outfalls whose latest report is a monthly total (docs/plan.md §2.x); scripts/export-outfalls.py merges
     # them into out/outfalls.json (`status: "monthly"`, days, month, received_at, label) for the map's points
