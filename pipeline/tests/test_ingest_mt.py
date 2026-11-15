@@ -216,3 +216,106 @@ def test_lesson_names_are_scrubbed_and_a_private_owners_name_withheld():
     assert "555-0100" not in json.dumps(recs)
     assert recs["f-2"]["waterbody_text"] == "Private water (name withheld)" and recs["f-2"]["lat"] is None
     assert "46.12345" not in json.dumps(recs)
+
+
+# ---------------------------------------------------------------- Astra review 2026-11-15 (fix/co-mt-wy-review)
+
+@pytest.mark.parametrize("note", ["not yet lifted 8/3/2026", "Not yet lifted, 8/3/2026", "yet to be lifted 8/3/2026",
+                                  "remains in effect until lifted 8/3/2026", "still in effect 8/3/2026"])
+def test_review_a_not_yet_lifted_note_is_not_a_lift(note):
+    doc = {"features": [row("G-1", "Example Lake", "7/9/2026", note)]}
+    r = M.build(doc, T0)[0][0]
+    assert r["status"] == "advisory_active" and r["ended_at"] is None
+    assert M.build(M.safe_rows(doc), T0)[0][0]["ended_at"] is None
+
+
+@pytest.mark.parametrize("note,end", [("sampled 7/28/2026, lifted 8/10/2026", "2026-08-10"),
+                                      ("lifted 8/10/2026 (sampled 7/28/2026)", "2026-08-10"),
+                                      ("7/28/2026 sample results below threshold; 8/10/2026 lifted", "2026-08-10"),
+                                      ("sampled 7/28/2026", None),
+                                      ("8/3/2026", "2026-08-03")])
+def test_review_a_sampling_date_is_not_the_lift_date(note, end):
+    doc = {"features": [row("G-2", "Example Lake", "7/9/2026", note)]}
+    assert M.build(doc, T0)[0][0]["ended_at"] == end
+    assert M.build(M.safe_rows(doc), T0)[0][0]["ended_at"] == end      # the sanitized raw save rebuilds the same
+
+
+def two_rows():
+    return {"features": [row("H-1", "Example Lake", "7/9/2026", None, level="Caution"),
+                         row("H-2", "Example Reservoir", "7/12/2026", None, level="Caution")]}
+
+
+def test_review_a_row_gone_from_a_shorter_answer_is_kept_and_the_read_is_incomplete():
+    first, meta1 = M.build(two_rows(), T0)
+    assert not meta1["incomplete"] and meta1["last_ok_rows"] == 2
+    short = {"features": [two_rows()["features"][0]]}
+    recs, meta = M.build(short, "2026-11-15T23:00:00Z", first, meta1)
+    by = {r["source_record_id"]: r for r in recs}
+    kept = by["h-2"]
+    assert kept["status"] == "advisory_active" and kept["ended_at"] is None and kept["started_at"] == "2026-07-12"
+    assert kept["raw"]["_last_seen_in_source"] == T0 and "no longer in DEQ's layer" in kept["raw"]["retained"]
+    assert meta["incomplete"] and meta["missing_rows"] == ["h-2"] and meta["last_ok_rows"] == 2
+
+
+def test_review_a_row_whose_advisory_fields_no_longer_read_is_kept():
+    first, meta1 = M.build(two_rows(), T0)
+    bad = two_rows()
+    bad["features"][1]["attributes"]["advisory_issued"] = ""
+    recs, meta = M.build(bad, "2026-11-15T23:00:00Z", first, meta1)
+    by = {r["source_record_id"]: r for r in recs}
+    assert by["h-2"]["ended_at"] is None and "no longer read" in by["h-2"]["raw"]["retained"]
+    assert meta["unreadable_rows"] == ["h-2"] and meta["incomplete"]
+
+
+def test_review_main_writes_an_incomplete_read_with_health_false(tmp_path, monkeypatch):
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    f1, f2 = tmp_path / "a.json", tmp_path / "b.json"
+    f1.write_text(json.dumps(two_rows()))
+    f2.write_text(json.dumps({"features": [two_rows()["features"][0]]}))
+    assert M.main(["--file", str(f1)]) == 0
+    assert M.main(["--file", str(f2)]) == 1
+    out = json.loads((tmp_path / "mt-deq-hab-map.json").read_text())
+    assert out["ok"] is False and {r["source_record_id"] for r in out["records"]} == {"h-1", "h-2"}
+    # a failed read after that keeps both, sanitized again
+    f3 = tmp_path / "c.json"
+    f3.write_text(json.dumps({"error": {"code": 500, "message": "call 555-0100"}}))
+    assert M.main(["--file", str(f3)]) == 1
+    out = json.loads((tmp_path / "mt-deq-hab-map.json").read_text())
+    assert len(out["records"]) == 2 and "555-0100" not in json.dumps(out)
+
+
+def test_review_replacement_dates_or_water_make_a_new_episode_and_keep_the_old():
+    first, meta1 = M.build({"features": [row("J-1", "Example Lake", "7/1/2026", "7/20/2026")]}, T0)
+    redated, _ = M.build({"features": [row("J-1", "Example Lake", "7/5/2026", "7/20/2026")]}, T0, first, meta1)
+    by = {r["source_record_id"]: r for r in redated}
+    assert by["j-1"]["started_at"] == "2026-07-01" and by["j-1"]["waterbody_text"] == "Example Lake"
+    assert by["j-1:2026-07-05"]["started_at"] == "2026-07-05"
+    renamed, _ = M.build({"features": [row("J-1", "Example Pond", "7/1/2026", "7/20/2026")]}, T0, first, meta1)
+    by = {r["source_record_id"]: r for r in renamed}
+    assert by["j-1"]["waterbody_text"] == "Example Lake"
+    assert by["j-1:2026-07-01"]["waterbody_text"] == "Example Pond"
+
+
+def test_review_the_raw_save_is_an_allowlist_with_private_points_removed():
+    priv = row("K-1", "Example pond", "7/9/2026", None, public="No", x=-111.912345, y=46.712345)
+    pub = row("K-2", "Example Lake", "7/9/2026", None, x=-111.912345, y=46.712345)
+    for f in (priv, pub):
+        f["attributes"].update({"desc_bloom": "seen by Dr. Example Person", "reporter_email": "x@example.org",
+                                "former_advisory": "Example Person"})
+    blob = json.dumps(M.safe_rows({"features": [priv, pub]}))
+    for s in ("Example Person", "x@example.org", "desc_bloom", "reporter_email", "former_advisory", "912345", "712345"):
+        assert s not in blob
+    saved = M.safe_rows({"features": [priv, pub]})["features"]
+    assert saved[0]["geometry"] is None and saved[1]["geometry"] == {"x": -111.912, "y": 46.712}
+
+
+def test_review_a_retained_record_is_sanitized_again():
+    old = M.build({"features": [row("L-1", "Example Lake", "7/9/2026", None)]}, T0)[0][0]
+    old["lat"], old["lon"] = 46.712345, -111.912345
+    old["raw"]["point_withheld"] = "private"
+    old["raw"]["desc"] = "Dr. Example Person"
+    recs, _ = M.build(two_rows(), T0, [old])
+    kept = next(r for r in recs if r["source_record_id"] == "l-1")
+    assert kept["lat"] is None and "Example Person" not in json.dumps(kept)
