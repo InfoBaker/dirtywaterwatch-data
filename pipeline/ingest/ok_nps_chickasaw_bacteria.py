@@ -24,7 +24,10 @@ Record rules (a sample is a sample: the accuracy-first rule of docs/generic-inge
   - A result below the threshold makes no record; every result read is counted in meta (places, dates, results,
     censored "<1" cells, the highest result and mean) with its qualifier kept, never read as zero. A bound keeps its
     meaning (exceedance): ">300" or "≥300" is at or above 235 (definite); ">200" or "<300" may be either side, a record
-    with raw.exceedance "possible" and a label saying so (the site errs on the side of caution); "<1" is below.
+    with raw.exceedance "possible" and a label saying so (the site errs on the side of caution); "<1" is below. A cell
+    in red with no number, or "too numerous to count", is a definite record; a cell that is neither a result nor a known
+    blank ("N/A", "-", "not sampled") is listed in meta.unread_cells, its earlier record kept unchanged, and the read is
+    saved with ok=False until it is read (lesson 5).
   - A sample still in the table whose result is now under the threshold was corrected by the park: its earlier record
     is dropped and the change logged in meta.corrected_below_threshold; a corrected high value replaces the old one in
     the same record. Only a sample whose date or cell has left the table is kept as missing (below).
@@ -148,9 +151,16 @@ def parse(page: str) -> dict:
         # its text withheld, named by a digest of the cell so the id never depends on row order (verification P1-3)
         place = clean_field(place, "place")
         vals = [read_value(open_tag + body) for open_tag, body in tds[1:]]
-        for v in vals:      # a cell that is not a result ("N/A", a note) keeps no text that could carry a person
+        for v in vals:      # a cell that is not a number keeps no text that could carry a person
             if v["value"] is None and v["text"]:
-                v["text"] = v["text"] if re.fullmatch(r"(?i)n/?a|-+|—|not sampled|no sample", v["text"]) else "[not a result]"
+                if re.fullmatch(r"(?i)n/?a|-+|—|not sampled|no sample", v["text"]):
+                    continue                                    # no result that week
+                if re.fullmatch(r"(?i)tntc|too numerous( to count)?", v["text"]):
+                    v["text"], v["uncountable"] = "too numerous to count", True     # above any limit
+                elif v["red"]:
+                    v["text"] = "[marked red, not a number]"    # the park's own mark of an exceedance
+                else:
+                    v["text"], v["unread"] = "[not a result]", True   # unread: listed, the read not healthy
         results = {d: vals[n] for n, d in enumerate(dates) if n < len(vals) and vals[n]["text"]}
         mean = vals[len(dates)] if has_mean and vals[len(dates)]["text"] else None
         rows.append({"place": place, "results": results, "mean": mean})
@@ -241,10 +251,22 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
     t = parse(page)
     recs: dict[str, dict] = {}
     observed: dict[str, str] = {}       # every sample identity the table shows now, with its cell text (Astra P2-6)
+    unread: list[dict] = []             # cells that are neither a result nor a known blank (lesson 5)
+    unread_ids: set[str] = set()
     n = {"results": 0, "censored": 0, "no_result": 0, "possible": 0}
     top = (None, None, None)
     for row in t["rows"]:
         for d, v in row["results"].items():
+            if v.get("unread"):
+                unread.append({"place": row["place"], "sampled_at": d})
+                unread_ids.add(f"{slug(row['place'])}:{d}")
+                continue
+            if v["value"] is None and (v.get("uncountable") or v["red"]):
+                # a red mark or "too numerous to count" is an exceedance with no number (verification round 2)
+                observed[f"{slug(row['place'])}:{d}"] = v["text"]
+                r = _record("weekly", row["place"], d, v, t["weekly"], fetched, t["key"], "definite")
+                recs[r["source_record_id"]] = r
+                continue
             if v["value"] is None:
                 n["no_result"] += 1
                 continue
@@ -259,6 +281,13 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                 recs[r["source_record_id"]] = r
                 n["possible"] += ex == "possible"
         mv = row["mean"]
+        if mv and mv.get("unread"):
+            unread.append({"place": row["place"], "sampled_at": t["dates"][-1], "kind": "mean"})
+            unread_ids.add(f"{slug(row['place'])}:mean:{t['dates'][-1]}")
+        elif mv and mv["value"] is None and (mv.get("uncountable") or mv["red"]):
+            observed[f"{slug(row['place'])}:mean:{t['dates'][-1]}"] = mv["text"]
+            r = _record("mean", row["place"], t["dates"][-1], mv, t["mean_limit"], fetched, t["key"], "definite")
+            recs[r["source_record_id"]] = r
         if mv and mv["value"] is not None:
             observed[f"{slug(row['place'])}:mean:{t['dates'][-1]}"] = mv["text"]
             ex = exceedance(mv, t["mean_limit"])
@@ -278,6 +307,12 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
             corrected.append({"source_record_id": sid, "was": ((p.get("raw") or {}).get("result") or {}).get("text"),
                               "now": observed[sid], "seen_at": fetched})
             continue
+        if sid in unread_ids:
+            # the sample's cell cannot be read this time: the earlier record stays as it was (never taken as a
+            # correction or as gone), and the read is not healthy until the cell is read
+            recs[sid] = recleaned(p)
+            kept += 1
+            continue
         p = recleaned(p)
         p["raw"] = {**(p.get("raw") or {}), "_missing_from_source_since":
                     (p.get("raw") or {}).get("_missing_from_source_since") or fetched}
@@ -292,7 +327,7 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
             "highest_mean": max(means) if means else None, "threshold_weekly": t["weekly"],
             "threshold_mean": t["mean_limit"], "over_threshold": sum(1 for r in out if r["sampled_at"] in t["dates"]
                                                                    and not r["raw"].get("_missing_from_source_since")),
-            "kept_from_previous": kept, "corrected_below_threshold": corrected,
+            "kept_from_previous": kept, "corrected_below_threshold": corrected, "unread_cells": unread,
             "cadence": "weekly in the summer swimming season (the park's words); page read daily",
             "time_note": "sample dates are Central-time days; no posting or removal date is published"}
     return out, meta
@@ -315,6 +350,12 @@ def main(argv=None) -> int:
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
         write_refused(SOURCE_ID, safe_error(e), EVENTS_DIR)
         print(f"{SOURCE_ID}: FAILED {safe_error(e)}", file=sys.stderr)
+        return 1
+    if meta["unread_cells"]:
+        # the readable results are saved; the unread cells are listed and the feed is not healthy until they are read
+        err = f"{len(meta['unread_cells'])} table cell(s) neither a result nor a known blank"
+        write_events(SOURCE_ID, recs, ok=False, partial=True, error=err, meta=meta)
+        print(f"{SOURCE_ID}: PARTIAL {err}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {meta['places']} places, {len(meta['sample_dates'])} dates, {meta['results']} results "
