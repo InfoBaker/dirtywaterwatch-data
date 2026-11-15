@@ -464,3 +464,29 @@ def test_the_part_of_water_extent_is_written_only_by_arkansas():
     hits = [p for d in ("pipeline/ingest", "data/sources") for p in (root / d).rglob("*")
             if p.is_file() and p.suffix in (".py", ".yaml", ".json") and "part_of_water" in p.read_text(errors="ignore")]
     assert {p.name for p in hits} == {"ar_transforms.py"}, hits
+
+
+@pytest.mark.parametrize("item", [
+    "SB901 &#8211; Example Beach &#8211; Jane Fixturename 501-555-0142",
+    "SB901 - Example Beach - Jane Fixturename 501-555-0142",
+    "SB901 - Example Beach 1234 Sample Road",
+    "SB901 - Example Beach, call 501 555 0142",
+    "SB901 - Example Beach jane@example.org",
+])
+def test_an_sb_item_carrying_a_contact_or_address_is_never_saved(tmp_path, monkeypatch, item):
+    out = tmp_path / "adh.json"
+    assert B.main(["--file", str(FIX / "ar_adh_swim_beaches.html"), "--out", str(out), "--at", "2026-11-14T12:00:00Z"]) == 0
+    writes = []
+    monkeypatch.setattr(B, "save_raw", lambda *a, **k: writes.append(repr(a)))
+    real = B.write_json
+    monkeypatch.setattr(B, "write_json", lambda p, d, *a, **k: (writes.append(json.dumps(d)), real(p, d, *a, **k)))
+    monkeypatch.setattr(B, "fetch", lambda: f"<main><h2>Closed Swim Beaches</h2><ul><li>{item}</li></ul><h2>Rules</h2></main>")
+    assert B.main(["--out", str(out), "--at", "2026-11-15T12:00:00Z"]) == 1
+    writes.append(out.read_text())
+    for w in writes:
+        for bad in ("Fixturename", "555", "1234", "example.org"):
+            assert bad not in w, (bad, w)
+    assert json.loads(out.read_text())["ok"] is False
+    # a plain name, with a short number, is still read
+    assert B.read(["SB903 - Example Beach 2"]) == {"SB903": "Example Beach 2"}
+    assert B.read(["SB904 \u2013 Sample Point West"]) == {"SB904": "Sample Point West"}

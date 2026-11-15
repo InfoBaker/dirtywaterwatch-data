@@ -58,6 +58,10 @@ HEADING = re.compile(r"Closed\s+Swim\s+Beaches", re.I)
 ITEM = re.compile(r"^\s*(SB\s*-?\s*\d+)\s*[\u2013\u2014-]+\s*([A-Za-z0-9][A-Za-z0-9 .,'&()/-]{0,80}?)\s*$", re.I)
 EMPTY = re.compile(r"^\s*(none|no (swim )?beaches (are )?(currently )?closed\.?|there are no closed swim beaches\.?)\s*$",
                    re.I)
+# a beach name as ADH writes one: words of letters, at most one short number ("Beach 2"), no second dash-separated
+# part, no run of three or more digits (a phone or a house number), no @ (review 2026-11-14 P1-5)
+NAME_OK = re.compile(r"^(?=.{2,60}$)(?!.*\d{3})(?!.*\s[\u2013\u2014-]\s)(?!.*@)[A-Za-z][A-Za-z .,'&()/-]*(?: \d{1,2})?"
+                     r"(?: [A-Za-z][A-Za-z .,'&()/-]*)?$")
 MARK = "\x00H "                    # a heading line: the list ends at the next one, whatever its words
 # a cited point per beach, when one is found: {SB id: (lat, lon, basis)}
 BEACH_POINTS: dict[str, tuple[float, float, str]] = {}
@@ -92,7 +96,13 @@ def read(lines: list[str]) -> dict[str, str]:
     for ln in lines:
         m = ITEM.match(ln)
         if m:
-            found[re.sub(r"[\s-]", "", m.group(1)).upper()] = m.group(2).strip()
+            name = m.group(2).strip()
+            if not NAME_OK.match(name) or len(name.split()) > 8:
+                # an SB item with more than a name after it (a contact, a phone, an address): the name cannot be
+                # told from it with confidence, so the run fails and nothing from the page is saved
+                raise ValueError("an SB item under 'Closed Swim Beaches' carries more than a beach name; nothing is "
+                                 "ended or saved")
+            found[re.sub(r"[\s-]", "", m.group(1)).upper()] = name
         elif EMPTY.match(ln):
             none_stated = True
         else:
