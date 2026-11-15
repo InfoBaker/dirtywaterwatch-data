@@ -13134,12 +13134,13 @@
    "operator_id": null,
    "agency": "Missouri Department of Natural Resources",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-15",
    "id": "mo-dnr-beach-status",
    "name": "Missouri Department of Natural Resources (state park beach status)",
    "channel_kind": "state_alert_page",
    "urls": [
-    "https://dnr.mo.gov/water/alerts-hazards/beaches"
+    "https://dnr.mo.gov/water/alerts-hazards/beaches",
+    "https://data.mo.gov/api/views/945m-hi5h/rows.json"
    ],
    "method": "html",
    "legal_basis": "RSMo 640.080: the Department posts a state park swim beach \"Swimming is Not Recommended\" when the weekly samples' geometric mean exceeds 190 E. coli per 100 mL",
@@ -13151,7 +13152,7 @@
    "every_hours": 24,
    "availability_only": true,
    "noun": "Notification page",
-   "note": "Weekly E. coli results and posting status of the state park swim beaches from Memorial Day to Labor Day, drawn by a script map on the page (each beach on its own page) with a GovDelivery sign-up. Bacteria, not sewage. The per-beach data were not read (out of season on 2026-11-14): watched for availability.",
+   "note": "Weekly E. coli results and posting status of the state park swim beaches from Memorial Day to Labor Day, shown on the Department's page (each beach on its own page, with a GovDelivery sign-up) and published as the open data set \"DNR Beaches Status\" (data.mo.gov 945m-hi5h), which answered on 2026-11-15: 17 beaches, every one closed for the season, last samples Aug 31, 2026, highest geometric mean 17.2 (posting threshold 190), so no beach advisory stands while the beaches are closed. Bacteria, not sewage. The data set is not yet collected: both URLs are watched for availability only until an ingester reads it (before Memorial Day 2027).",
    "sources": [
     "mo-dnr-beach-status"
    ],

@@ -826,3 +826,63 @@ def test_kc_stop_the_next_day_is_the_day_after_whatever_the_clock_order():
     utc = lambda dd, h: datetime(2026, 5, dd, h, tzinfo=timezone.utc)
     ivs = [(iv["color"], iv["start"], iv["end"]) for iv in S.event_intervals(rec, "MO", now)]
     assert ivs == [("red", utc(27, 14), utc(28, 21)), ("yellow", utc(28, 21), utc(31, 21))]
+
+
+class _Page:
+    def __init__(self, text="", content=b""):
+        self.text, self.content = text, content
+
+    def raise_for_status(self):
+        pass
+
+
+_IDX = '<a href="/document-search/water-pollution-control-concerns-report-may-2099">May 2099</a>'
+_PDF = "https://oembed-dnr.example.gov/sites/dnr/files/vfc/2099/07/main/Concern%20Summary-May-2099.pdf"
+_VIEWER = ('<div>Last revised 07/01/2099</div><iframe data-src="' + _PDF + '" src="/themes/common-assets/pdf-viewer/'
+           'viewer.html?file=' + _PDF.replace(":", "%3A").replace("/", "%2F") + '"></iframe>')
+
+
+def _site(monkeypatch, page_text):
+    def get(url, *a, **k):
+        if url == C.INDEX:
+            return _Page(_IDX)
+        if url.endswith(".pdf"):
+            return _Page(content=b"%PDF-invented")
+        return _Page(page_text)
+    monkeypatch.setattr(C.requests, "get", get)
+
+
+def test_concern_report_page_with_the_pdf_only_in_the_viewer_frame_is_read(monkeypatch):
+    """Audit P1-1: the document pages carry the PDF only in the viewer iframe's data-src."""
+    _site(monkeypatch, _VIEWER)
+    out = C.fetch([])
+    assert [m["pdf_url"] for _, m in out] == [_PDF] and out[0][1]["last_revised"] == "2099-07-01"
+
+
+def test_concern_report_page_without_a_pdf_link_fails_the_run_and_keeps_records(tmp_path, monkeypatch):
+    """Audit P1-1: a format change turns the feed red instead of emptying it."""
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    keep = _marble(*FEB, "2/10/2026", "Referred to the city.")
+    first, _, _ = C.run([(keep, {"pdf_url": "https://dnr.mo.gov/feb.pdf"})], [], AT)
+    common.write_events(C.SOURCE_ID, first)
+    _site(monkeypatch, "<div>Last revised 07/01/2099</div><p>No document here.</p>")
+    with pytest.raises(ValueError):
+        C.fetch([])
+    assert C.main([]) == 1
+    doc = json.loads((tmp_path / f"{C.SOURCE_ID}.json").read_text())
+    assert doc["ok"] is False and len(doc["records"]) == len(first) > 0
+
+
+def test_beach_dataset_and_bloom_years_are_stated_as_they_are():
+    """Audit P2-3 and P2-4: the bloom reports date from 2017; the beach results are an open data set, watched for
+    availability, not yet read, with no beach advisory standing while the beaches are closed for the season."""
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "mo.json").read_text())["channels"]}
+    row = reg["mo-dnr-beach-status"]
+    assert "https://data.mo.gov/api/views/945m-hi5h/rows.json" in row["urls"] and row["availability_only"] is True
+    assert "945m-hi5h" in row["note"] and "not yet collected" in row["note"] and "script" not in row["note"]
+    text = (ROOT / "research" / "mo" / "state-text.md").read_text()
+    assert "from 2023 on" not in text and "from 2017 on" in text and "drawn by a script" not in text
+    assert "state's open data portal" in text and "not yet" in text
+    assert "from 2023 to" not in Path(HAB.__file__).read_text()

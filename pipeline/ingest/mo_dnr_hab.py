@@ -9,8 +9,8 @@ Source
   code), WBName, HABODat (the day the bloom was observed), CaseStatus, HABCo (county) and globalid. DNR's map draws
   "advise" as "Harmful Algal Bloom Present" and "closed" as "Waterbody is CLOSED" whatever their age; "notice"
   (suspected), "dissap" (dissipated), "notthr" and "notver" (not threatening, not verified) only for 14 days after the
-  observation, then as expired; "report" is an investigation pending. Read 2026-11-15 (UTC): 283 reports from 2023 to
-  November 2026, 39 under "advise" (one with its case open), none "closed".
+  observation, then as expired; "report" is an investigation pending. Read 2026-11-15 (UTC): 283 reports from 2017 to
+  November 2026 (18 undated), 39 under "advise" (one with its case open), none "closed".
 
 Record rules (the accuracy-first clock, as Kansas's HAB layer, ingest/ks_kdhe_hab.py)
   - One record per report per spell under "advise" or "closed": source_record_id the report's globalid and the poll the
