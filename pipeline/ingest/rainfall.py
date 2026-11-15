@@ -34,7 +34,8 @@ are not read (OUTSIDE_RADAR_GRID) and their combined sewer permits stay covered 
 
 State and exit code: a point's reading is this hour's (fresh, is_fresh) when it was fetched in this product hour,
 has a 24-hour value, and is valid no more than FRESH_LAG_H hour before this hour's product (an answer of no data, or
-an old product, is not). rainfall.json `ok` is true only when at least MIN_OK_SHARE of the points in the radar grid
+an old product, is not; an identify answer is dated by its 24-hour total, parse_identify). A reading of an older
+product never replaces a newer one stored (the answer stays in the raw file). rainfall.json `ok` is true only when at least MIN_OK_SHARE of the points in the radar grid
 have this hour's reading and the per-point fallback was not needed; a fallback, even one that read every point it
 needed, sets ok false, names itself in `error`, `mrms.fallback` and the summary line (FALLBACK), and holds
 last_ok_at. The exit code is non-zero only when readings are missing or stale (fewer than MIN_OK_SHARE fresh:
@@ -51,7 +52,8 @@ identify at the wettest, at most four, where one had 2 mm or more; MRMS/gauge 0.
 over 25.4 inches) decides when it has a verdict (a conflict with the bound divides nothing); else the unit last
 determined (rainfall.json mrms.units_last_determined); before any, the stated inches. Millimetres are divided by
 25.4 before anything uses them (one unit a run: when a failed tile's points are read by identify, the unit is decided
-from the grid's values and theirs together, mrms.units.with_fallback when that changed it); rainfall.json mrms.units
+from the grid's values and theirs together before the identify check compares at it, mrms.units.with_fallback when
+that changed it); rainfall.json mrms.units
 (and each reading's units_read) records the unit, the basis and the evidence; the identify check compares in the same
 unit. Point readings stored before the check are
 dropped and reread. The history's readings stored before it are rescaled once, every stored hour as millimetres
@@ -521,10 +523,13 @@ def gauge_check(session, box: dict, valid_time: str, now: datetime) -> dict:
 
 def parse_identify(d: dict) -> dict:
     """{valid_time, h1 ... h72, problems}: Values pair with the catalog items in order; each item is
-    named conus_QPE_<NN>H. Accumulations must not shrink with the window (a check on the pairing)."""
+    named conus_QPE_<NN>H. Accumulations must not shrink with the window (a check on the pairing). valid_time is the
+    24-hour total's own product time (it drives the caution, the freshness and the history; else the latest); an
+    accumulation of another hour is left out, as the grid leaves it out (review 2026-11-15, P1-1)."""
     vals = (d.get("properties") or {}).get("Values") or []
     feats = (d.get("catalogItems") or {}).get("features") or []
     out, valid, problems = {f"h{h}": None for h in HOURS}, [], []
+    vt_of: dict[int, int] = {}
     if not feats and d.get("value") is not None and len(vals) <= 1:
         problems.append("no catalog items in the answer")
     for i, f in enumerate(feats):
@@ -543,10 +548,17 @@ def parse_identify(d: dict) -> dict:
             out[f"h{h}"] = round(v, 2) if v is not None else None
         if a.get("idp_validendtime"):
             valid.append(int(a["idp_validendtime"]))
+            vt_of[h] = int(a["idp_validendtime"])
     if valid:
-        out["valid_time"] = iso(datetime.fromtimestamp(max(valid) / 1000, UTC))
+        ref = vt_of.get(24) or max(valid)
+        out["valid_time"] = iso(datetime.fromtimestamp(ref / 1000, UTC))
         if len(set(valid)) > 1:
-            problems.append("catalog items have different valid times; the latest is used")
+            off = sorted(h for h, t in vt_of.items() if t != ref and h in HOURS)
+            for h in off:
+                out[f"h{h}"] = None
+            problems.append(f"catalog items have different valid times; the {'24-hour total' if 24 in vt_of else 'latest'}"
+                            f"'s ({out['valid_time']}) is used and the {', '.join(f'{h}-hour' for h in off) or 'no'} "
+                            f"total(s) of another hour left out")
     else:
         out["valid_time"] = None
         problems.append("no valid time in the answer")
@@ -659,6 +671,7 @@ def export_tile(session, objectid: int, box: dict, log: list | None = None) -> t
             return b, g
         except Exception as e:  # noqa: BLE001
             last = e
+            b = b if b is not None else getattr(e, "content", None)      # an error answer's body (ExportError)
             if log is not None:
                 log.append({"attempt": attempt + 1, "bytes": len(b) if b else None,
                             "sha256": hashlib.sha256(b).hexdigest() if b else None,
@@ -706,15 +719,16 @@ def read_grid(session, points: dict[str, dict], hours) -> dict:
         for h in use:                    # the 24-hour total first: a tile without it is failed, its others not read
             name = grid_mod.item_name(h)
             log: list = []
+            b = g = None
             try:
                 b, g = export_tile(session, cat[name]["objectid"], t["box"], log)
                 got = grid_mod.sample(g, {k: pts[k] for k in t["keys"]})
                 if h == 24 and all(v is None for v in got.values()):
-                    err = f"no 24-hour value at any of its {len(got)} point(s)"
-                    log.append({"attempt": len(log) + 1, "bytes": len(b), "sha256": hashlib.sha256(b).hexdigest(),
-                                **g.meta(), "error": err})
-                    raise ValueError(err)
+                    raise ValueError(f"no 24-hour value at any of its {len(got)} point(s)")
             except Exception as e:  # noqa: BLE001
+                if b is not None:        # an answer received and read, then rejected: its bytes and hash kept too
+                    log.append({"attempt": len(log) + 1, "bytes": len(b), "sha256": hashlib.sha256(b).hexdigest(),
+                                **(g.meta() if g is not None else {}), "error": f"{type(e).__name__}: {e}"[:300]})
                 err = f"{name}: {type(e).__name__}: {e}"[:300]
                 products[str(h)].setdefault("rejected", {})[t["tile"]] = log
                 if h == 24:
@@ -742,6 +756,8 @@ def read_grid(session, points: dict[str, dict], hours) -> dict:
     read_keys = [k for t in tiles if t["tile"] not in failed for k in t["keys"]]
     missing = sum(1 for k in read_keys if values[k].get("h24") is None)
     if missing > (1 - MIN_OK_SHARE) * len(read_keys):
+        evidence["values"] = {k: [values[k].get(f"h{h}") for h in use] for k in read_keys}
+        evidence["hours"] = use
         raise GridReadError(f"the 24-hour grid has no value at {missing} of {len(read_keys)} points", evidence)
     if missing:
         problems.append(f"no 24-hour value at {missing} point(s)")
@@ -769,7 +785,7 @@ def check_grid(session, grid: dict, points: dict[str, dict], factor: float = 1.0
     d = identify(session, points[k]["lat"], points[k]["lon"])
     m = parse_identify(d)
     out.update(identify_h24=to_inches(m["h24"], factor), identify_h24_as_read=m["h24"],
-               identify_valid_time=m["valid_time"], answer=d)
+               identify_valid_time=m["valid_time"], factor=factor, answer=d)
     m["h24"] = out["identify_h24"]
     if m["valid_time"] != grid["valid_time"]:
         out["result"] = "skipped: the product changed between the grid and the check"
@@ -1125,76 +1141,32 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         last_units = {"units_read": "mm", "basis": "history_repair", "determined_at": iso(now),
                       "evidence": {k: hist_repair.get(k) for k in ("first_hour_over_bound", "largest_before", "ranges")}}
 
-    # the grid: every point from its tile's export, one per accumulation per tile
+    # the grid: every point from its tile's export, one per accumulation per tile; a failed tile's points (or, when the
+    # grid fails or is discarded, every point) read by identify, the per-point fallback, at most `cap` calls in all
     fallback = {"used": False, "reason": None}
-    fb_todo: list[str] = []
-    g, hours, rejected = None, list(GRID_HOURS), []      # rejected: what a failed or discarded grid read had read
-    if todo and not point_only:
-        # the permittees with a point in the radar grid (one with none never gets a history to complete)
-        if backfill_needed(hist_old, {p for k in readable for p in points[k]["permits"]}, now):
-            hours += list(BACKFILL_HOURS)
-        chk, errs = None, []
-        grid_points = {k: points[k] for k in readable}
-        for attempt in range(2):           # a product replaced between the query and the export: query again
-            try:
-                g = read_grid(session, grid_points, hours)
-                break
-            except Exception as e:  # noqa: BLE001
-                errs.append(f"{type(e).__name__}: {e}"[:300])
-                if getattr(e, "evidence", None):
-                    rejected.append({"error": errs[-1], **e.evidence})
-                g = None
-                time.sleep(2 + 3 * attempt)
-        if g is not None:
-            gauge = run_gauge_check(session, g["box"], g["valid_time"], now)
-            units = decide_units(g["maxima"], last_units, gauge)
-            units["gauge_check"] = gauge
-            conv = {k: {f: to_inches(x, units["factor"]) for f, x in v.items()} for k, v in g["values"].items()}
-            try:
-                chk = check_grid(session, {**g, "values": conv}, points, units["factor"])
-            except Exception as e:  # noqa: BLE001
-                chk = {"result": f"skipped: identify failed ({type(e).__name__}: {e})"[:300]}
-            if chk.get("result") == "differs":
-                errs.append(f"check at {chk['point']}: grid {chk['grid_h24']} in, identify {chk['identify_h24']} in")
-                rejected.append({"error": errs[-1], "check": chk, "units": units, "hours": hours,
-                                 **{k: g[k] for k in ("catalog", "valid_time", "tiles", "products")},
-                                 "values": {k: [v.get(f"h{h}") for h in hours] for k, v in g["values"].items()}})
-                g = None
-        if g is not None:
-            # a failed tile's points (as todo has them, --force included): the per-point fallback; the grid's other
-            # points are not reread
-            failed_set = set(g["failed_points"])
-            fb_todo = [k for k in todo if k in failed_set]
-            if g["tiles_failed"]:
-                fallback = {"used": True, "reason": f"{len(g['tiles_failed'])} of {len(g['tiles'])} grid tile(s) "
-                                                    f"failed: " + "; ".join(g["tiles_failed"].values())[:300]}
-        else:
-            grid_info = {"used": False, "errors": errs,
-                         **({"check": {k: v for k, v in chk.items() if k != "answer"}} if chk else {})}
-            units = None
-            fb_todo = list(todo)
-            fallback = {"used": True, "reason": "grid read failed: " + "; ".join(errs)[:400]}
-            problems.append("grid read failed; per-point fallback: " + "; ".join(errs)[:400])
-    elif todo:
-        fb_todo = list(todo)               # --points: the per-point path by choice, not a fallback
+    g, hours, rejected, chk, errs = None, list(GRID_HOURS), [], None, []
+    answers, got = {}, {}                  # identify answers, and those with a 24-hour value (as read)
+    cap = FALLBACK_MAX_CALLS if limit is None else min(limit, FALLBACK_MAX_CALLS)
+    calls, asked, left = 0, set(), set()
 
-    # the per-point path: the fallback (or --points); answers as read, converted below
-    answers, got = {}, {}
-    if fb_todo:
-        cap = FALLBACK_MAX_CALLS if limit is None else min(limit, FALLBACK_MAX_CALLS)
-        order = fallback_order(points, fb_todo, cap)
-        skipped = len(fb_todo) - len(order)
-        if skipped:
-            problems.append(f"per-point fallback capped at {cap} calls: {skipped} point(s) keep their last reading")
+    def fetch(k):
+        p = points[k]
+        try:
+            d = identify(session, p["lat"], p["lon"])
+            time.sleep(MRMS_PAUSE_S)
+            return k, d, None
+        except Exception as e:  # noqa: BLE001
+            return k, None, f"{type(e).__name__}: {e}"[:300]
 
-        def fetch(k):
-            p = points[k]
-            try:
-                d = identify(session, p["lat"], p["lon"])
-                time.sleep(MRMS_PAUSE_S)
-                return k, d, None
-            except Exception as e:  # noqa: BLE001
-                return k, None, f"{type(e).__name__}: {e}"[:300]
+    def by_point(keys):
+        """identify at the points of keys not asked yet this run (fallback_order, within what is left of cap)."""
+        nonlocal calls
+        keys = [k for k in keys if k not in answers and k not in failed]
+        order = fallback_order(points, keys, cap - calls)
+        calls += len(order)
+        asked.update(keys)
+        left.difference_update(order)
+        left.update(set(keys) - set(order))
         with ThreadPoolExecutor(max_workers=MRMS_WORKERS) as pool:
             for k, d, err in pool.map(fetch, order):
                 if err:
@@ -1212,38 +1184,95 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                     failed[k] = "no 24-hour value in the answer"     # no data: the last reading stays, not fresh
                 else:
                     got[k] = m
-        fallback.update(points=len(fb_todo), cap=cap, called=len(order), read=len(got), failed=len(order) - len(got),
-                        left=skipped)
 
-    # the unit: decided once from every value the run read, the grid's and the fallback's (decide_units); a run that
-    # changes its mind with the fallback's answers says so
-    if got:
-        fb_max = {h: max((m[f"h{h}"] for m in got.values() if m.get(f"h{h}") is not None), default=None)
-                  for h in UNIT_BOUND_IN}
-        if g is None:
+    def fb_maxima():
+        return {h: max((m[f"h{h}"] for m in got.values() if m.get(f"h{h}") is not None), default=None)
+                for h in UNIT_BOUND_IN}
+
+    if todo and not point_only:
+        # the permittees with a point in the radar grid (one with none never gets a history to complete)
+        if backfill_needed(hist_old, {p for k in readable for p in points[k]["permits"]}, now):
+            hours += list(BACKFILL_HOURS)
+        grid_points = {k: points[k] for k in readable}
+        for attempt in range(2):           # a product replaced between the query and the export: query again
             try:
-                box = grid_mod.grid_box([(points[k]["lat"], points[k]["lon"]) for k in got])
-            except ValueError:
-                box = None
-            gauge = run_gauge_check(session, box, max(m["valid_time"] for m in got.values()), now) if box else None
-            units = decide_units(fb_max, last_units, gauge)
+                g = read_grid(session, grid_points, hours)
+                break
+            except Exception as e:  # noqa: BLE001
+                errs.append(f"{type(e).__name__}: {e}"[:300])
+                if getattr(e, "evidence", None):
+                    rejected.append({"error": errs[-1], **e.evidence})
+                g = None
+                time.sleep(2 + 3 * attempt)
+        if g is not None:
+            gauge = run_gauge_check(session, g["box"], g["valid_time"], now)
+            if g["tiles_failed"]:
+                # a failed tile's points (as todo has them, --force included); the grid's other points are not reread
+                fallback = {"used": True, "reason": f"{len(g['tiles_failed'])} of {len(g['tiles'])} grid tile(s) "
+                                                    f"failed: " + "; ".join(g["tiles_failed"].values())[:300]}
+                by_point([k for k in todo if k in set(g["failed_points"])])
+            # one unit a run, decided (decide_units) from every value read, the grid's and the fallback's, before the
+            # check compares at it
+            grid_only = decide_units(g["maxima"], last_units, gauge)
+            fm = fb_maxima() if got else {}
+            both = {h: max([x for x in (g["maxima"].get(h), fm.get(h)) if x is not None], default=None)
+                    for h in set(g["maxima"]) | set(fm)}
+            units = decide_units(both, last_units, gauge)
             units["gauge_check"] = gauge
-        else:
-            both = {h: max([x for x in (g["maxima"].get(h), fb_max.get(h)) if x is not None], default=None)
-                    for h in set(g["maxima"]) | set(fb_max)}
-            again = decide_units(both, last_units, units.get("gauge_check"))
-            if (again["units_read"], again["basis"]) != (units["units_read"], units["basis"]):
-                problems.append(f"the unit decided again with the per-point fallback's answers: {units['units_read']} "
-                                f"({units['basis']}) before, {again['units_read']} ({again['basis']}) with them")
-                units = {**again, "gauge_check": units.get("gauge_check"),
-                         "with_fallback": f"decided with the per-point fallback's answers (before them: "
-                                          f"{units['units_read']}, {units['basis']})"}
+            if (units["units_read"], units["basis"]) != (grid_only["units_read"], grid_only["basis"]):
+                units["with_fallback"] = (f"decided with the per-point fallback's answers (the grid's alone: "
+                                          f"{grid_only['units_read']}, {grid_only['basis']})")
+                problems.append(f"the unit decided with the per-point fallback's answers: {units['units_read']} "
+                                f"({units['basis']}); the grid's alone gave {grid_only['units_read']} "
+                                f"({grid_only['basis']})")
+            conv = {k: {f: to_inches(x, units["factor"]) for f, x in v.items()} for k, v in g["values"].items()}
+            try:
+                chk = check_grid(session, {**g, "values": conv}, points, units["factor"])
+            except Exception as e:  # noqa: BLE001
+                chk = {"result": f"skipped: identify failed ({type(e).__name__}: {e})"[:300]}
+            if chk.get("result") == "differs":
+                errs.append(f"check at {chk['point']}: grid {chk['grid_h24']} in, identify {chk['identify_h24']} in")
+                rejected.append({"error": errs[-1], "check": chk, "units": units, "hours": hours,
+                                 **{k: g[k] for k in ("catalog", "valid_time", "tiles", "products")},
+                                 "values": {k: [v.get(f"h{h}") for h in hours] for k, v in g["values"].items()}})
+                g, units = None, None
+        if g is None:
+            grid_info = {"used": False, "errors": errs,
+                         **({"check": {k: v for k, v in chk.items() if k != "answer"}} if chk else {})}
+            fallback = {"used": True, "reason": "grid read failed: " + "; ".join(errs)[:400]}
+            problems.append("grid read failed; per-point fallback: " + "; ".join(errs)[:400])
+            by_point(todo)
+    elif todo:
+        by_point(todo)                     # --points: the per-point path by choice, not a fallback
+    if got and units is None:              # the per-point path alone: the unit from every answer of the run
+        try:
+            box = grid_mod.grid_box([(points[k]["lat"], points[k]["lon"]) for k in got])
+        except ValueError:
+            box = None
+        gauge = run_gauge_check(session, box, max(m["valid_time"] for m in got.values()), now) if box else None
+        units = decide_units(fb_maxima(), last_units, gauge)
+        units["gauge_check"] = gauge
+    if left:
+        problems.append(f"per-point fallback capped at {cap} calls: {len(left)} point(s) keep their last reading")
+    if asked:
+        fallback.update(points=len(asked), cap=cap, called=calls, read=len(got), failed=calls - len(got),
+                        left=len(left))
+
+    # storage: a reading of an older product than the one stored never replaces it (the answers stay in the raw file)
+    older = []
+
+    def newer_stored(k, vt) -> bool:
+        a, b = parse_t((points[k].get("mrms") or {}).get("valid_time")), parse_t(vt)
+        return a is not None and b is not None and a > b
     if g is not None:
         fetched_at = iso(datetime.now(UTC))
         for k, v in g["values"].items():
             if v.get("h24") is None:
                 continue
             sampled += 1
+            if newer_stored(k, g["valid_time"]):
+                older.append(k)
+                continue
             points[k]["mrms"] = {**{f"h{h}": to_inches(v.get(f"h{h}"), units["factor"]) for h in hours},
                                  "valid_time": g["valid_time"], "fetched_at": fetched_at, "read": "grid",
                                  "product": PRODUCT, "units_read": units["units_read"]}
@@ -1260,7 +1289,13 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         for h in HOURS:
             m[f"h{h}"] = to_inches(m.get(f"h{h}"), units["factor"])
         m["units_read"] = units["units_read"]
+        if newer_stored(k, m["valid_time"]):
+            older.append(k)
+            continue
         points[k]["mrms"] = m
+    if older:
+        problems.append(f"{len(older)} point(s) answered with an older product than the reading stored; the newer "
+                        f"kept (e.g. {older[0]})")
     if answers:
         if read is None:
             read, sampled = "point", len(answers)

@@ -310,13 +310,25 @@ def export_params(objectid: int, box: dict) -> dict:
             "f": "image"}
 
 
+class ExportError(ValueError):
+    """An export answered with something other than an image; content keeps the answer's body (for its hash)."""
+
+    def __init__(self, msg: str, content: bytes | None = None):
+        super().__init__(msg)
+        self.content = content
+
+
 def export(session, objectid: int, box: dict, timeout: int = 120) -> bytes:
-    """One `exportImage` of a catalog item over the box: the TIFF bytes."""
+    """One `exportImage` of a catalog item over the box: the TIFF bytes. An error status or a body that is not an
+    image raises ExportError carrying the body."""
     r = session.get(f"{MRMS_URL}/exportImage", params=export_params(objectid, box), timeout=timeout)
-    r.raise_for_status()
+    try:
+        r.raise_for_status()
+    except Exception as e:  # noqa: BLE001
+        raise ExportError(f"{type(e).__name__}: {e}", getattr(r, "content", None)) from e
     ctype = r.headers.get("content-type", "")
     if "json" in ctype or "html" in ctype or r.content[:1] in (b"{", b"<"):
-        raise ValueError(f"no image in the answer ({ctype}): {r.content[:200]!r}")
+        raise ExportError(f"no image in the answer ({ctype}): {r.content[:200]!r}", r.content)
     return r.content
 
 

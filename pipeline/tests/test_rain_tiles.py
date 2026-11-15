@@ -155,7 +155,8 @@ class TileFails(FakeNOAA):
 
 class Faulty(FakeNOAA):
     """The service answering some tiles' exports wrongly: which(x centre, y centre) gives "shift" (the image a pixel
-    west of the box asked), "empty" (no data everywhere), "flaky" (an error the first time only) or None."""
+    west of the box asked), "empty" (no data everywhere), "short" (a truncated image: sampling fails), "flaky" (an
+    error the first time only) or None."""
 
     def __init__(self, which, **kw):
         super().__init__(**kw)
@@ -171,12 +172,13 @@ class Faulty(FakeNOAA):
             self.seen.add(key)
             self.calls.append("mrms_export")
             return Resp(status=502, body={"error": "bad gateway"})
-        if mode in ("shift", "empty"):
+        if mode in ("shift", "empty", "short"):
             self.calls.append("mrms_export")
             w, hh = (int(v) for v in params["size"].split(","))
             west = xmin - 0.01 if mode == "shift" else xmin
-            return Resp(content=make_tiff(w, hh, west, ymax, (lambda la, lo: rain_at(la, lo)) if mode == "shift"
-                                          else (lambda la, lo: G.NODATA), tile=64, lzw=False), ctype="image/tiff")
+            tif = make_tiff(w, hh, west, ymax, (lambda la, lo: G.NODATA) if mode == "empty"
+                            else (lambda la, lo: rain_at(la, lo)), tile=64, lzw=False)
+            return Resp(content=tif[:-16300] if mode == "short" else tif, ctype="image/tiff")   # 84 bytes of a block
         return super().get(url, params=params, headers=headers, timeout=timeout)
 
 
@@ -283,7 +285,8 @@ def test_a_fallback_answer_over_the_bound_makes_the_whole_run_millimetres(nation
     q = out["points"]["40.00,-75.00"]["mrms"]
     assert q["read"] == "grid" and q["h24"] == rain_at(40.0, -75.0) and q["units_read"] == "mm"
     assert out["mrms"]["units_last_determined"]["basis"] == "physical_bound"
-    assert any("decided again with the per-point fallback's answers" in x for x in out["mrms"]["problems"])
+    assert any("decided with the per-point fallback's answers" in x for x in out["mrms"]["problems"])
+    assert out["mrms"]["grid"]["check"]["factor"] == 25.4                # the check compared at the run's unit
 
 
 def test_a_gauge_reading_inches_against_a_fallback_answer_over_the_bound_divides_nothing(nation, monkeypatch):
@@ -370,7 +373,8 @@ def test_a_tile_read_on_its_second_attempt_is_no_fallback(nation):
     assert not m["grid"]["tiles_failed"] and not m["fallback"]["used"] and out["ok"] and RF.exit_code(out) == 0
     assert r["mrms_export"] == 2 * 5 + 2 and r["mrms_identify"] == 1  # each of its two exports failed once
     tile = mrms_raw(nation)["products"]["24"]["tiles"]["-120,40"]
-    assert tile["sha256"] and tile["rejected"][0]["error"].startswith("RuntimeError: HTTP 502")
+    assert tile["sha256"] and tile["rejected"][0]["error"].startswith("ExportError: RuntimeError: HTTP 502")
+    assert tile["rejected"][0]["sha256"] and tile["rejected"][0]["bytes"]       # the error answer's body, hashed
 
 
 def test_a_failed_tile_over_the_cap_leaves_points_stale_and_says_so(nation, monkeypatch):
@@ -451,3 +455,85 @@ def test_a_reading_of_an_old_product_is_not_fresh(nation):
     # an hour late is allowed (a product posted late)
     late = RF.run(now=NOW + timedelta(hours=1), session=FakeNOAA(), force=True)
     assert late["mrms"]["fresh"] == late["mrms"]["readable"] and late["ok"] and RF.exit_code(late) == 0
+
+
+# ---------------------------------------------------------------- Astra's second pass (2026-11-15)
+
+def identify_answer(values: dict, times: dict) -> dict:
+    names = {h: G.item_name(h) for h in RF.HOURS}
+    return {"properties": {"Values": [str(values.get(h, 0.0)) for h in RF.HOURS]},
+            "catalogItems": {"features": [{"attributes": {"name": names[h], "idp_validendtime": int(times[h].timestamp() * 1000)}}
+                                          for h in RF.HOURS]}}
+
+
+def test_an_identify_answer_of_mixed_hours_is_dated_by_its_24_hour_total():
+    old, new = VALID - timedelta(hours=2), VALID
+    m = RF.parse_identify(identify_answer({1: 0.1, 3: 0.2, 6: 0.3, 12: 0.4, 24: 0.5, 48: 0.6, 72: 0.7},
+                                          {h: (new if h == 1 else old) for h in RF.HOURS}))
+    assert m["valid_time"] == RF.iso(old) and m["h24"] == 0.5 and m["h1"] is None
+    assert "the 24-hour total's" in m["problems"][0] and "1-hour" in m["problems"][0]
+    assert not RF.is_fresh({**m, "fetched_at": RF.iso(NOW)}, NOW)       # two hours old: stale, though the 1 h is new
+
+
+class MixedHours(TileFails):
+    """Identify west of 100 W answering a 24-hour total three hours old beside a current 1-hour total."""
+
+    def get(self, url, params=None, headers=None, timeout=None):
+        if RF.request_kind(url) == "mrms_identify" and json.loads(params["geometry"])["x"] < -100:
+            return Resp(body=identify_answer({h: 0.3 for h in RF.HOURS},
+                                             {h: VALID - timedelta(hours=0 if h == 1 else 3) for h in RF.HOURS}))
+        return super().get(url, params=params, headers=headers, timeout=timeout)
+
+
+def test_a_fallback_answer_with_an_old_24_hour_total_is_not_fresh(nation):
+    out = RF.run(now=NOW, session=MixedHours(west_of=-100.0))
+    m = out["mrms"]
+    west = [k for k, p in out["points"].items() if p["lon"] < -100]
+    assert all(out["points"][k]["mrms"]["valid_time"] == RF.iso(VALID - timedelta(hours=3)) for k in west)
+    assert m["fresh"] == m["readable"] - 8 and out["ok"] is False
+
+
+def test_an_older_product_never_replaces_a_newer_reading(nation):
+    first = RF.run(now=NOW, session=FakeNOAA())
+    before = {k: p["mrms"] for k, p in first["points"].items()}
+
+    class Behind(FakeNOAA):              # the catalog three hours behind, everything else the same
+        def get(self, url, params=None, headers=None, timeout=None):
+            r = super().get(url, params=params, headers=headers, timeout=timeout)
+            if RF.request_kind(url) == "mrms_query":
+                for f in r.json()["features"]:
+                    f["attributes"]["idp_validendtime"] -= 3 * 3600 * 1000
+                return Resp(body=r.json())
+            return r
+    out = RF.run(now=NOW + timedelta(minutes=10), session=Behind(scale=1.0), force=True)
+    assert {k: p["mrms"] for k, p in out["points"].items()} == before
+    assert any("answered with an older product than the reading stored; the newer kept" in x
+               for x in out["mrms"]["problems"])
+    assert mrms_raw(nation)["values"]                              # the older answers are in the raw file
+
+
+def test_the_check_compares_at_the_runs_final_unit(nation):
+    # millimetres the grid alone cannot tell (no value over the bound in it), a failed tile's answer over the bound,
+    # and identify 0.02 mm off the grid at the check's point: within the tolerance in inches at the final unit, so the
+    # grid is kept (at the grid's own stated inches 0.02 is over the 0.011 tolerance and would have discarded it)
+    fake = TileFails(west_of=-100.0, scale=25.4, identify_off=0.02, identify_wet={(40.01, -100.01): 60.0})
+    out = RF.run(now=NOW, session=fake)
+    m = out["mrms"]
+    assert m["units"]["units_read"] == "mm" and m["grid"]["used"] and m["grid"]["check"]["result"] == "agrees"
+    assert m["grid"]["check"]["factor"] == 25.4 and m["read"] == "grid"
+
+
+def test_a_truncated_answer_keeps_its_hash_and_a_thin_grid_keeps_its_values(nation):
+    out = RF.run(now=NOW, session=Faulty(lambda x, y: "short" if x < -100 and y > 40 else None))
+    assert "-120,40" in out["mrms"]["grid"]["tiles_failed"]
+    rej = mrms_raw(nation)["products"]["24"]["rejected"]["-120,40"]
+    assert rej[-1]["sha256"] and rej[-1]["bytes"] and rej[-1]["width"] and "short" in rej[-1]["error"]
+
+    class Thin(FakeNOAA):                # no data at every other row: the grid has no value at most points
+        def raw(self, lat, lon, h):
+            return -3.0 if round(lat * 100) % 2 else super().raw(lat, lon, h)
+    with pytest.raises(RF.GridReadError) as e:
+        RF.read_grid(RF.CountingSession(Thin()), RF.group_points(nation["outfalls"]), [1, 24])
+    ev = e.value.evidence
+    assert ev["catalog"] and ev["products"]["24"]["tiles"] and ev["hours"] == [24, 1]
+    assert sum(1 for v in ev["values"].values() if v[0] is None) > 0.2 * len(ev["values"])
