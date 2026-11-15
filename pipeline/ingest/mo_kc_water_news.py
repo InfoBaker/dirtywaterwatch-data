@@ -222,11 +222,25 @@ def times(text: str, pub: date) -> dict:
         if not after or start is None:
             break
         h, mi = clock(after[0])
-        d2 = find_date(x[w.start():] if w else x, pub) or day
+        # the end clause's own date (verification P2-2): a date after the stop verb first, else the one date before
+        # it in the same sentence ("On May 29, 2026, the overflow stopped at 4:00 p.m."); several dates before the verb
+        # and none after is ambiguous: no end, never a guess; no date at all: the start's day
+        d2 = find_date(x[w.start():], pub) if DATE.search(x[w.start():]) else None
+        explicit = d2 is not None
+        if d2 is None:
+            before = list(DATE.finditer(x[:w.start()]))
+            if len(before) > 1:
+                break
+            if before:
+                d2, explicit = find_date(before[0].group(0), pub), True
+                if d2 is None:
+                    break
+            else:
+                d2 = day
         end = datetime(d2.year, d2.month, d2.day, h, mi, tzinfo=TZ)
         basis = "the time the post gives for the overflow's end"
         if end < start:
-            if re.search(r"next day|following day|the next morning", x, re.I) or d2 == day:
+            if re.search(r"next day|following day|the next morning", x, re.I) or (d2 == day and not explicit):
                 end += timedelta(days=1)
                 basis += " (before the start time, so the next day)"
         if end >= start:
