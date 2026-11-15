@@ -51,12 +51,11 @@ fetch:
     keep_missing: true
     revisions: true
     confirm_while_listed: true
-    # a row DEQ corrects is linked to its replacement only on evidence (supersede_typo): the old row left at the
-    # very read the new one appeared, every field DEQ gives is the same but one, and that one is a typo's distance
-    # away (the posting or lift day: one character; the water or town: two). A different lake in the same town on
-    # the same day, a later episode, or a link that is not one-to-one keeps both rows as separate advisories; a row
-    # that leaves the file ends at that read (confirm_while_listed).
-    supersede_typo: {waterbody: 2, county: 0, area: 2, date: 1, lifted: 1}
+    # a row that leaves the file is never linked to another as its corrected form on likeness alone: two lakes with
+    # near names, two episodes a week or a year apart differ by a character too (verification 2 P2-1). A link is made
+    # only from a reviewed correction listed here, {old, new, evidence} by source record id; every other row stays
+    # its own advisory and one that leaves the file ends at that read (confirm_while_listed), at poll precision.
+    supersede_reviewed: []
   meta:
     credit: "Arkansas Division of Environmental Quality, Harmful Algal Blooms: current advisories and archive"
     license: "No licence or terms stated on the page."

@@ -307,24 +307,58 @@ def test_hab_coordinates_are_rounded_before_any_save_key_or_record(monkeypatch, 
     assert "35-123" in stream["source_record_id"]
 
 
-def test_a_corrected_posting_day_is_one_advisory(monkeypatch, tmp_path):
+def _reviewed(monkeypatch, links):
+    """The bloom block with these reviewed corrections in history.supersede_reviewed."""
+    import copy
+    real = R.load_source
+    def load(sid):
+        row, block = real(sid)
+        if sid == H.SOURCE_ID:
+            block = copy.deepcopy(block)
+            block["history"]["supersede_reviewed"] = links
+        return row, block
+    monkeypatch.setattr(H.runner, "load_source", load)
+
+
+def test_a_corrected_posting_day_is_one_advisory_only_on_a_reviewed_link(monkeypatch, tmp_path):
+    """A one-character change in the posting day is no evidence of a correction (verification 2 P2-1): without a
+    reviewed link both advisories are kept and the row that left the file ends at that read; with one, the old row is
+    the corrected row's duplicate."""
     doc = json.loads((FIX / "ar_deq_hab_advisories.json").read_text())
     _, out = habs(monkeypatch, tmp_path, doc)
-    doc["advisories"][1]["date"] = "July 31, 2026"            # DEQ corrects Lake Exemplar's posting day (a typo)
+    doc["advisories"][1]["date"] = "July 31, 2026"            # DEQ changes Lake Exemplar's posting day
     recs, _ = habs(monkeypatch, tmp_path, doc, prev_out=out)
-    ex = [r for r in recs.values() if r["waterbody_text"] == "Lake Exemplar"]
-    assert len(ex) == 2 and sum(1 for r in ex if not r.get("duplicate_of")) == 1
-    assert [r for r in ex if not r.get("duplicate_of")][0]["started_at"].startswith("2026-07-31")
-    # a day further off than a typo is not evidence of a correction: both are kept, and the row that left the file
-    # ends at the read that no longer listed it (verification 2026-11-15 P2-1: err on the side of showing it)
-    doc["advisories"][1]["date"] = "August 1, 2026"
-    t2 = tmp_path / "b"
-    t2.mkdir()
-    _, out2 = habs(monkeypatch, t2, json.loads((FIX / "ar_deq_hab_advisories.json").read_text()))
-    recs, _ = habs(monkeypatch, t2, doc, prev_out=out2)
     ex = [r for r in recs.values() if r["waterbody_text"] == "Lake Exemplar"]
     assert len(ex) == 2 and not any(r.get("duplicate_of") for r in ex)
     assert [r for r in ex if r["started_at"].startswith("2026-07-30")][0]["raw"].get("_unlisted_since")
+    # the same change with a reviewed correction: one advisory
+    t2 = tmp_path / "b"
+    t2.mkdir()
+    _, out2 = habs(monkeypatch, t2, json.loads((FIX / "ar_deq_hab_advisories.json").read_text()))
+    _reviewed(monkeypatch, [{"old": "lake-exemplar-20260730", "new": "lake-exemplar-20260731",
+                             "evidence": "DEQ's archive page shows the posting day corrected (invented)"}])
+    recs, _ = habs(monkeypatch, t2, doc, prev_out=out2)
+    ex = [r for r in recs.values() if r["waterbody_text"] == "Lake Exemplar"]
+    assert len(ex) == 2 and sum(1 for r in ex if not r.get("duplicate_of")) == 1
+    assert [r for r in ex if not r.get("duplicate_of")][0]["started_at"].startswith("2026-07-31")
+
+
+@pytest.mark.parametrize("first,second", [
+    (("Lake Example A", "Sample County", "Sampletown, AR", "July 1, 2026", ""),
+     ("Lake Example B", "Sample County", "Sampletown, AR", "July 1, 2026", "")),       # two lakes, near names
+    (("Lake Exemplar", "Sample County", "Sampletown, AR", "July 1, 2026", ""),
+     ("Lake Exemplar", "Sample County", "Sampletown, AR", "July 9, 2026", "")),        # episodes eight days apart
+    (("Lake Exemplar", "Sample County", "Sampletown, AR", "July 1, 2025", ""),
+     ("Lake Exemplar", "Sample County", "Sampletown, AR", "July 1, 2026", "")),        # the same month a year apart
+])
+def test_closeness_of_two_bloom_rows_is_no_evidence_of_a_correction(monkeypatch, tmp_path, first, second):
+    """Verification 2 P2-1, the reviewer's three counterexamples: both stay independent records, the earlier one
+    keeps its own history and ends at the read that no longer listed it."""
+    _, out = habs(monkeypatch, tmp_path, _hab_doc(first))
+    recs, _ = habs(monkeypatch, tmp_path, _hab_doc(second), prev_out=out)
+    assert len(recs) == 2 and not any(r.get("duplicate_of") for r in recs.values())
+    gone = [r for r in recs.values() if r["raw"].get("_missing_from_source_since")]
+    assert len(gone) == 1 and gone[0]["raw"].get("_unlisted_since")
 
 
 # ---------------------------------------------------------------- the Department of Health's closed swim beaches
@@ -544,15 +578,14 @@ def test_revision_reconciliation_matches_only_unique_corrections(monkeypatch, tm
     recs, _ = habs(monkeypatch, t2, _hab_doc(("Lake Exemplar", "Sample County", "Exampleville, AR",
                                               "September 2, 2026", "")), prev_out=out2)
     assert len(recs) == 2 and not any(r.get("duplicate_of") for r in recs.values())
-    # a corrected posting day (same month) and a corrected spelling are still one advisory each
+    # a changed posting day and a changed spelling, with no reviewed link, are four advisories (verification 2 P2-1)
     t3 = tmp_path / "c"
     t3.mkdir()
     _, out3 = habs(monkeypatch, t3, _hab_doc(ex, sp))
     recs, _ = habs(monkeypatch, t3, _hab_doc(("Lake Exemplar", "Sample County", "Exampleville, AR", "July 31, 2026", ""),
                                              ("Lake Specimin", "Sample County", "Sampletown, AR", "July 30, 2026", "")),
                    prev_out=out3)
-    assert len(recs) == 4 and sum(1 for r in recs.values() if r.get("duplicate_of")) == 2
-    assert {r["waterbody_text"] for r in recs.values() if not r.get("duplicate_of")} == {"Lake Exemplar", "Lake Specimin"}
+    assert len(recs) == 4 and not any(r.get("duplicate_of") for r in recs.values())
     # two candidates for one disappearance: neither is chosen
     t4 = tmp_path / "d"
     t4.mkdir()
@@ -563,11 +596,46 @@ def test_revision_reconciliation_matches_only_unique_corrections(monkeypatch, tm
     assert len(recs) == 3 and not any(r.get("duplicate_of") for r in recs.values())
 
 
+def _other_feeds_history():
+    """carry_history over invented records with Maryland's and Tennessee's supersede keys and Kentucky's
+    confirm_while_listed block: the shared runner's output for feeds other than Arkansas's blooms."""
+    import copy
+    def rec(eid, row, start, status="discharge_reported", et="sso"):
+        return {"event_id": eid, "source_record_id": eid.split(":")[-1], "started_at": start, "ended_at": None,
+                "status": status, "event_type": et, "fetched_at": "2026-11-01T12:00:00Z", "duplicate_of": None,
+                "raw": {"row": row}}
+    out = {}
+    for sid in ("md-mde-overflows", "tn-tdec-events-report", "ky-dow-hab-viewer"):
+        _, block = R.load_source(sid)
+        row = lambda **k: {"npdes_no": "MD0000001", "permit_no": "TN0000001", "overflow_address": "Example Road",
+                           **k}
+        prev = [rec(f"{sid}:a", row(), "2026-10-01T00:00:00-04:00"),
+                rec(f"{sid}:b", row(npdes_no="MD0000002", permit_no="TN0000002"), "2026-10-02T00:00:00-04:00"),
+                rec(f"{sid}:c", row(npdes_no="MD0000003", permit_no="TN0000003"), "2026-10-03T00:00:00-04:00"),
+                rec(f"{sid}:e", row(npdes_no="MD0000004", permit_no="TN0000004", overflow_address="Sample Lane"),
+                    "2026-10-04T00:00:00-04:00")]
+        now = [rec(f"{sid}:a2", row(), "2026-10-01T00:00:00-04:00"),
+               rec(f"{sid}:c", row(npdes_no="MD0000003", permit_no="TN0000003", extra="x"), "2026-10-03T00:00:00-04:00"),
+               rec(f"{sid}:d", row(npdes_no="MD0000009", permit_no="TN0000009"), "2026-10-09T00:00:00-04:00"),
+               rec(f"{sid}:e2", row(npdes_no="MD0000004", permit_no="TN0000004", overflow_address="Sample Lane"),
+                   "2026-10-04T08:00:00-04:00")]
+        n = R.carry_history(now, copy.deepcopy(prev), block, "2026-11-02T12:00:00Z")
+        out[sid] = {"counts": dict(sorted(n.items())), "records": sorted(now, key=lambda r: r["event_id"])}
+    return json.loads(json.dumps(out, sort_keys=True))
+
+
+def test_other_feeds_history_is_unchanged_from_the_integration_commit():
+    """Verification 2 P2-1: the reviewed-link rule is Arkansas's blooms' alone; Maryland's, Tennessee's and
+    Kentucky's history handling gives exactly what it gave at 2b1184a (fixture written from that commit's runner)."""
+    golden = json.loads((FIX / "ar_other_feeds_history_2b1184a.json").read_text())
+    assert _other_feeds_history() == golden
+
+
 def test_the_unique_supersede_options_are_set_only_by_arkansas():
     """history.supersede_unique and supersede_max_days are opt-in in the shared runner; Tennessee's and Maryland's
     supersede keys keep their behaviour because no other source sets them."""
     hits = {p.name for p in (R.ROOT / "data" / "sources").glob("*.yaml")
-            if re.search(r"supersede_(unique|max_days|typo)", p.read_text())}
+            if re.search(r"supersede_(unique|max_days|typo|reviewed)", p.read_text())}
     assert hits == {"ar-deq-hab-advisories.yaml"}
 
 
@@ -844,8 +912,11 @@ def test_only_an_evidenced_correction_links_two_bloom_rows(monkeypatch, tmp_path
                                             ("Lake Exemplar", "Sample County", "Sampletown, AR", "July 31, 2026", "")),
                    prev_out=out)
     assert not any(r.get("duplicate_of") for r in recs.values())
-    # control: a one-character day fix, everything else the same, is one advisory
+    # a one-character day change is one advisory only with a reviewed link (verification 2 P2-1)
     recs = run("f", [ex], [("Lake Exemplar", "Sample County", "Sampletown, AR", "July 31, 2026", "")])
+    assert not any(r.get("duplicate_of") for r in recs.values())
+    _reviewed(monkeypatch, [{"old": "lake-exemplar-20260730", "new": "lake-exemplar-20260731", "evidence": "invented"}])
+    recs = run("g", [ex], [("Lake Exemplar", "Sample County", "Sampletown, AR", "July 31, 2026", "")])
     assert sum(1 for r in recs.values() if r.get("duplicate_of")) == 1
 
 
