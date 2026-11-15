@@ -586,3 +586,44 @@ def test_a_multipart_bloom_area_is_placed_on_every_water_it_covers_and_no_other(
         S._GEOM_CACHE.clear()
         r1 = S.Resolver(_two_lakes(), [], placement_rules={})
         assert r1.resolve(other) == r1._resolve(other)
+
+
+# --- round 3 (Astra verify2 P1-1, P1-2) ---
+
+def _hab_run(tmp_path, monkeypatch, answers, at, saved):
+    import common as C
+    monkeypatch.setattr(H, "save_raw", lambda sid, data, ext: saved.append(data.decode()))
+    monkeypatch.setattr(H, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(C, "EVENTS_DIR", tmp_path)
+    if isinstance(answers, Exception):
+        def boom():
+            raise answers
+        monkeypatch.setattr(H, "fetch", boom)
+    else:
+        monkeypatch.setattr(H, "fetch", lambda: answers)
+    rc = H.main(["--at", at])
+    return rc, [(tmp_path / "state.json").read_text() if (tmp_path / "state.json").exists() else "",
+                (tmp_path / f"{H.SOURCE_ID}.json").read_text()]
+
+
+def test_bloom_text_with_suffixed_numbers_contact_and_honorific_forms_never_reaches_a_write(tmp_path, monkeypatch):
+    """Astra verify2 P1-1: '123-A Example Lane', '12 1/2 example st', 'Contact Example Person', 'Dr. Example Person',
+    'dr. example person', 'please call Example Person' through the raw save, the state and the events."""
+    texts = {7: "Avoid contact near 123-A Example Lane. Do not swim.",
+             8: "Avoid the cove at 12 1/2 example st. Contact Example Person",
+             9: "Avoid contact with the water. Dr. Example Person sampled the bloom.",
+             10: "Keep pets out. Questions to dr. example person; please call Example Person."}
+    a = _answers(list(texts))
+    for f in a["1"]["features"]:
+        f["attributes"]["Advisory"] = texts[f["attributes"]["OBJECTID"]]
+    saved = []
+    rc, blobs = _hab_run(tmp_path, monkeypatch, a, "2026-07-01T12:00:00Z", saved)
+    assert rc == 0 and len(saved) == 1
+    for blob in saved + blobs:
+        for bad in ("123-A", "Example Lane", "12 1/2", "example st", "Example Person", "example person"):
+            assert bad not in blob, (bad, blob[:300])
+    recs = {r["source_record_id"]: r for r in json.loads(blobs[-1])["records"]}
+    assert recs["1-7"]["advice_text"].endswith("Do not swim.")
+    assert recs["1-9"]["advice_text"].endswith("Avoid contact with the water.")
+    assert recs["1-10"]["advice_text"].endswith("Keep pets out.")
+
