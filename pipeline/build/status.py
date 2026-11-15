@@ -4150,7 +4150,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         for s in pl["unknown_slugs"]:
             unknown_slugs[s] += 1
         eff = effective.get(eid, ev)
-        point_on, river_point = [], []
+        point_on, river_point, outline_less = [], [], []
         live = eid not in superseded and eid not in duplicates
         is_discharge = ev.get("event_type") in DISCHARGE_TYPES or (
             ev.get("event_type") == "unknown" and ev.get("status") == "ongoing")
@@ -4194,6 +4194,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     continue                   # a station's advisory, or any advisory on a river: its marker only
             elif ev.get("event_type") in POINT_ADVISORY_TYPES and no_outline_marker(ev, slug, waters):
                 point_on.append(slug)          # coloured whole as before, and its marker too: no outline to draw
+                outline_less.append(slug)
             if slug in carried:
                 continue                       # a reach carries it (below)
             tag = None
@@ -4324,7 +4325,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                                            ev.get("event_type") not in POINT_ADVISORY_TYPES)
                                        else "the advisory covers the water it names; the marker is its point"
                                        if g_on and names_its_water(ev) else
-                                       NO_OUTLINE_WHY if g_on and all(no_outline_marker(ev, x, waters) for x in g_on)
+                                       NO_OUTLINE_WHY if g_on and all(x in outline_less for x in g_on)
                                        else "water is not a lake, pond or reservoir under 50 km²" if g_on
                                        else "not placed on a water")})
 
