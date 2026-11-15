@@ -712,3 +712,61 @@ def test_text_after_a_beach_name_never_reaches_a_save(tmp_path, monkeypatch, ite
     else:
         assert r["raw"]["beach_name"] is None and r["outfall_name"] == "ADH swim beach SB901"
         assert r["raw"]["name_withheld_reason"]
+
+
+def _named_status(tmp_path, names, texts):
+    """A full status build with Arkansas live: one sewage report per (state, waterbody text) in `texts`, each placed
+    only by the name it gives, over invented streams named `names` in AR and KY."""
+    from datetime import UTC, datetime
+    from build import status as S
+    from common import event
+    d = tmp_path / "events"
+    d.mkdir(parents=True, exist_ok=True)
+    recs = [event(source_id=f"{st.lower()}-named-test", source_record_id=str(n), event_type="sso", status="ended",
+                  waterbody_text=text, started_at="2026-11-01T12:00:00Z", ended_at="2026-11-01T14:00:00Z",
+                  time_precision="date", raw={"state": st, "_placement": "named_water_only"})
+            for n, (st, text) in enumerate(texts)]
+    (d / "named-test.json").write_text(json.dumps({"source_id": "named-test", "ok": True, "records": recs,
+                                                      "last_ok_at": "2026-11-01T12:00:00Z"}))
+    waters = {}
+    for st, x in (("AR", -92.0), ("KY", -85.0)):
+        for i, name in enumerate(names):
+            slug = name.lower().replace(" ", "-") + f"-{st.lower()}"
+            line = [[x + i * 0.2, 34.5], [x + i * 0.2 + 0.05, 34.55]]
+            waters[slug] = {"slug": slug, "name": name, "kind": "river", "state": st, "bbox": [*line[0], *line[1]],
+                            "geometry": {"type": "LineString", "coordinates": line}}
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    rules = json.loads((R.ROOT / "data" / "rules.json").read_text())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"AR"})
+    rules["rain_likely"] = {**rules["rain_likely"], "enabled": False}
+    st, _ = S.build(now=datetime(2026, 11, 2, 12, tzinfo=UTC), write=False, events_dir=d, waters=waters, outfalls=[],
+                    registry={}, reaches={}, flows=({}, {}), rules=rules, placement_cache=False)
+    return {k: (st["waters"].get(k) or {}).get("status") or "grey" for k in waters}   # uncoloured: grey
+
+
+@pytest.mark.parametrize("qual", ["Upper", "Lower", "Big", "East Fork", "North"])
+def test_a_qualified_arkansas_name_never_lands_on_its_shorter_namesake(tmp_path, monkeypatch, qual):
+    """'Upper Little Sample Creek' is another water than 'Little Sample Creek': with only the shorter one known, an
+    Arkansas report stays unplaced; with both, it colours the qualified one only. Kentucky's identical report is
+    resolved as before (verification P1-4: no other state's output changes)."""
+    full = f"{qual} Little Sample Creek"
+    only_short = _named_status(tmp_path / "a", ["Little Sample Creek"], [("AR", full), ("KY", full)])
+    assert only_short["little-sample-creek-ar"] == "grey", only_short
+    # Kentucky's output is what it was without the Arkansas-keyed rule
+    from build import status as S
+    with monkeypatch.context() as m:
+        m.setattr(S, "STATE_QUALIFIER_BEFORE", {})
+        before = _named_status(tmp_path / "k", ["Little Sample Creek"], [("AR", full), ("KY", full)])
+    assert only_short["little-sample-creek-ky"] == before["little-sample-creek-ky"], (only_short, before)
+    assert before["little-sample-creek-ar"] == ("grey" if qual == "East Fork" else "yellow")  # the defect, reproduced
+    both = _named_status(tmp_path / "b", ["Little Sample Creek", full], [("AR", full)])
+    assert both[full.lower().replace(" ", "-") + "-ar"] == "yellow" and both["little-sample-creek-ar"] == "grey", both
+    # control: the plain name still places an Arkansas report
+    plain = _named_status(tmp_path / "c", ["Little Sample Creek"], [("AR", "Little Sample Creek")])
+    assert plain["little-sample-creek-ar"] == "yellow", plain
+
+
+def test_a_hyphenated_qualifier_stays_with_the_name():
+    assert T.water_names("overflow into Little-Sample Creek") == (["Little-Sample Creek"], [])
+    assert T.water_names("overflow into upper-Little Sample Creek") == (["Upper-Little Sample Creek"], [])
