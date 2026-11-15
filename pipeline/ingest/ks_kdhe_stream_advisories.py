@@ -32,8 +32,10 @@ Record rules
     rescission is no evidence, so the advisory ages out after the status build's 14 days; a failed run confirms nothing.
   - A release read again is reconciled (revise): its current county, waters, cause and advice replace the saved ones,
     the earliest publication time stays the start; a water it no longer names ends at that read (poll precision,
-    raw.revised_out), and a water it names again is open again (raw.revised_out_reads keeps the read that dropped it);
-    a water KDHE rescinded stays lifted. A rescission that names no county, for a water open in more than one county, lifts none
+    raw.revised_out), and a water it names again opens a new observed period, its own record (source_record_id
+    "<release>-<water>-p<n>", raw.period_of the first, started_at the read that saw it named again, time_precision
+    poll), so the earlier period keeps its end and the time between is never coloured; a water KDHE rescinded stays
+    lifted. A rescission that names no county, for a water open in more than one county, lifts none
     (rescissions_seen_ambiguous in meta).
   - raw.time_zone by the release's county (pipeline/zones.py kansas_zone); raw._placement "named_water_only".
   - The feed's offsets read -0600 in October as in November (KDHE's server states Central Standard Time year-round);
@@ -182,16 +184,10 @@ def revise(old: dict, new: dict) -> None:
     publication time stays the start (a later pubDate never moves the start later), and the status is kept."""
     for k in REVISABLE:
         old[k] = new[k]
-    if old.get("status") == "advisory_lifted" and old["raw"].get("revised_out") and not old["raw"].get("lifted_by"):
-        # the release names this water again after a revision had dropped it (verification P1-2): the earlier end was
-        # this site's reading of a revision, never KDHE's rescission, so the advisory is open again under KDHE's
-        # release; the read that dropped it is kept in raw.revised_out_reads. A rescission (lifted_by) stays lifted
-        old["raw"].setdefault("revised_out_reads", []).append(old.get("ended_at"))
-        old["status"], old["ended_at"] = "advisory_active", None
-        for k in ("revised_out", "ended_at_precision", "end_basis"):
-            old["raw"].pop(k, None)
     for k in ("title", "waters", "release_waters", "county", "time_zone", "cause"):
         old["raw"][k] = new["raw"][k]
+    if old["raw"].get("period_of"):
+        return          # a later observed period starts at the read that saw it named again, never at the release
     if new.get("started_at") and new["started_at"] != old.get("started_at"):
         seen = old["raw"].setdefault("publication_times_seen", [old.get("started_at")])
         if new["started_at"] not in seen:
@@ -205,10 +201,57 @@ def iso_utc(t: str) -> str:
     return datetime.fromisoformat(t).astimezone(timezone.utc).isoformat()
 
 
+def base_of(r: dict) -> str:
+    return r["raw"].get("period_of") or r["event_id"]
+
+
+def reopened(prior: dict, new: dict, at: str, n: int) -> dict:
+    """The release names a water again after a read that no longer named it (verification 2 P1-1): a new observed
+    period, its own record, from this read (poll precision), so the earlier period keeps its end and the time between
+    is never coloured; the release's publication time stays only on the first period."""
+    r = json.loads(json.dumps(new))
+    r["source_record_id"] = f"{new['source_record_id']}-p{n}"
+    r["event_id"] = f"{SOURCE_ID}:{r['source_record_id']}"
+    r["started_at"], r["time_precision"] = at, "poll"
+    r["raw"].update(period_of=base_of(prior), period=n, start_basis=(
+        "KDHE's release named this water again at this read, after an earlier read no longer named it: the advisory "
+        "is shown from this read, not from the release's publication; the earlier period keeps its own end"))
+    return r
+
+
+def split_reopened(recs: dict) -> None:
+    """An earlier save that reopened one record over a gap (raw.revised_out_reads): the first period ends at the read
+    that dropped the water, and the open period starts no earlier than its last confirming read, so the gap between is
+    never coloured (verification 2 P1-1)."""
+    for r in list(recs.values()):
+        reads = r["raw"].pop("revised_out_reads", None)
+        if not reads or r["raw"].get("period_of"):
+            continue
+        again = r["raw"].get("_last_seen_in_source") or r.get("fetched_at")
+        if again and (r["status"] == "advisory_active" or r["raw"].get("lifted_by")):
+            nxt = reopened(r, r, again, 2)
+            nxt.update(status=r["status"], ended_at=r.get("ended_at"))
+            if nxt["ended_at"] and iso_utc(nxt["ended_at"]) < iso_utc(again):
+                nxt["started_at"] = nxt["ended_at"]      # never a start after KDHE's own rescission
+            for k in ("_last_seen_in_source", "confirmed_by", "lifted_by", "ended_at_precision"):
+                if k in r["raw"]:
+                    nxt["raw"][k] = r["raw"][k]
+            recs[nxt["event_id"]] = nxt
+        r.update(status="advisory_lifted", ended_at=reads[0])
+        for k in ("lifted_by", "confirmed_by", "_last_seen_in_source"):
+            r["raw"].pop(k, None)
+        r["raw"].update(ended_at_precision="poll", revised_out=True, end_basis=REVISED_OUT_BASIS)
+
+
+REVISED_OUT_BASIS = ("KDHE's release no longer names this water at this read: the advisory is not shown for it after "
+                     "this read; not KDHE's lift time")
+
+
 def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
     for r in recs.values():
         migrate(r)
+    split_reopened(recs)
     stats = {"releases": 0, "issues": 0, "rescissions": 0, "lifted": 0, "rescissions_without_issue": 0,
              "revised_out": 0, "rescissions_ambiguous": 0}
     its = items(feed)
@@ -227,20 +270,30 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
             now = issue_records(it, waters, county)
             aid = now[0]["raw"]["release"]
             present.add(aid)
-            ids = {r["event_id"] for r in now}
+            ids = set()
             for r in now:
-                if r["event_id"] in recs:
-                    revise(recs[r["event_id"]], r)
-                else:
+                chain = sorted((x for x in recs.values() if base_of(x) == r["event_id"]),
+                               key=lambda x: x["raw"].get("period") or 1)
+                if not chain:
                     recs[r["event_id"]] = r
+                    ids.add(r["event_id"])
+                    continue
+                last = chain[-1]
+                if last["status"] == "advisory_lifted" and last["raw"].get("revised_out") \
+                        and not last["raw"].get("lifted_by"):
+                    # named again after a read that dropped it: a new observed period, never the old one reopened
+                    nxt = reopened(last, r, at, len(chain) + 1)
+                    recs[nxt["event_id"]] = nxt
+                    ids.add(nxt["event_id"])
+                else:
+                    revise(last, r)
+                    ids.add(last["event_id"])
             for r in recs.values():
                 # a water the release no longer names (KDHE revised it): its advisory ends at this read, at poll
                 # precision, never left open beside the water the release now names
                 if r["raw"].get("release") == aid and r["event_id"] not in ids and r["status"] == "advisory_active":
                     r.update(status="advisory_lifted", ended_at=at)
-                    r["raw"].update(ended_at_precision="poll", revised_out=True,
-                                    end_basis=("KDHE's release no longer names this water at this read: the advisory "
-                                               "is not shown for it after this read; not KDHE's lift time"))
+                    r["raw"].update(ended_at_precision="poll", revised_out=True, end_basis=REVISED_OUT_BASIS)
                     stats["revised_out"] += 1
         elif k == "lift":
             stats["rescissions"] += 1
@@ -249,7 +302,8 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
         when = iso(it["date"])
         names = {key(w) for w in waters}
         cands = [r for r in recs.values()
-                 if r["status"] == "advisory_active" and (r.get("started_at") or "") <= (when or "")
+                 if r["status"] == "advisory_active" and r.get("started_at") and when
+                 and iso_utc(r["started_at"]) <= iso_utc(when)
                  and names & {key(w) for w in r["raw"].get("waters") or []}
                  and not (county and r["raw"].get("county") and county != r["raw"]["county"])]
         if not county and len({r["raw"].get("county") for r in cands}) > 1:
