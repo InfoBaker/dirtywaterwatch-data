@@ -1,0 +1,97 @@
+{
+ "source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0/query?where=OBJECTID%3D13&outFields=*&f=json",
+ "read_at": "2026-11-15T15:20:53Z",
+ "note": "native geometry in the layer's spatial reference (wkid 102656 / EPSG 2234, CT State Plane, US feet); LATITUDE and LONGITUDE are the layer's own attribute fields",
+ "response": {
+  "objectIdFieldName": "OBJECTID",
+  "uniqueIdField": {
+   "name": "OBJECTID",
+   "isSystemMaintained": true
+  },
+  "globalIdFieldName": "",
+  "geometryType": "esriGeometryPoint",
+  "spatialReference": {
+   "wkid": 102656,
+   "latestWkid": 2234
+  },
+  "fields": [
+   {
+    "name": "OBJECTID",
+    "type": "esriFieldTypeOID",
+    "alias": "OBJECTID",
+    "sqlType": "sqlTypeOther",
+    "domain": null,
+    "defaultValue": null
+   },
+   {
+    "name": "FACILITY",
+    "type": "esriFieldTypeString",
+    "alias": "FACILITY",
+    "sqlType": "sqlTypeOther",
+    "length": 255,
+    "domain": null,
+    "defaultValue": null
+   },
+   {
+    "name": "OUTFALL_LOCATION",
+    "type": "esriFieldTypeString",
+    "alias": "OUTFALL_LOCATION",
+    "sqlType": "sqlTypeOther",
+    "length": 255,
+    "domain": null,
+    "defaultValue": null
+   },
+   {
+    "name": "RECEIVING_WATER",
+    "type": "esriFieldTypeString",
+    "alias": "RECEIVING_WATER",
+    "sqlType": "sqlTypeOther",
+    "length": 255,
+    "domain": null,
+    "defaultValue": null
+   },
+   {
+    "name": "CSO_NAME",
+    "type": "esriFieldTypeString",
+    "alias": "CSO OR CSO GROUP",
+    "sqlType": "sqlTypeOther",
+    "length": 100,
+    "domain": null,
+    "defaultValue": null
+   },
+   {
+    "name": "LATITUDE",
+    "type": "esriFieldTypeDouble",
+    "alias": "LATITUDE",
+    "sqlType": "sqlTypeOther",
+    "domain": null,
+    "defaultValue": null
+   },
+   {
+    "name": "LONGITUDE",
+    "type": "esriFieldTypeDouble",
+    "alias": "LONGITUDE",
+    "sqlType": "sqlTypeOther",
+    "domain": null,
+    "defaultValue": null
+   }
+  ],
+  "features": [
+   {
+    "attributes": {
+     "OBJECTID": 13,
+     "FACILITY": "Bridgeport West Side",
+     "OUTFALL_LOCATION": "Henry St & St of Atlantic St",
+     "RECEIVING_WATER": "Bridgeport Harbor",
+     "CSO_NAME": "BRIDGEPORT WEST 145 TIC",
+     "LATITUDE": 41.166149273344594,
+     "LONGITUDE": -73.18194339093611
+    },
+    "geometry": {
+     "x": 881069.1250416338,
+     "y": 621561.8749660552
+    }
+   }
+  ]
+ }
+}

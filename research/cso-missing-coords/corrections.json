@@ -1,0 +1,29 @@
+{
+ "generated": "2026-11-15",
+ "by": "research/cso-missing-coords (side session of the coordinator, research only: nothing applied)",
+ "rule": "a row is listed only when a public source places that permit's outfall with coordinates; coordinates are exactly as the source gives them (no rounding, no conversion except as noted); rows without a cited location are in report.md with what was searched",
+ "corrections": [
+  {
+   "npdes_permit": "CT0100056",
+   "outfall": "145",
+   "state": "CT",
+   "registry_file": "data/outfalls-new-england.json",
+   "lat": 41.166149273344594,
+   "lon": -73.18194339093611,
+   "coords_from": "state outfall layer",
+   "source_name": "CT DEEP 'CSO or CSO Group Locations' (ArcGIS service CSO_and_CSO_Groups, layer 0; service description: 'Locations of CSO outfalls for use in CSO event reporting'), record OBJECTID 13: FACILITY 'Bridgeport West Side', CSO_NAME 'BRIDGEPORT WEST 145 TIC', OUTFALL_LOCATION 'Henry St & St of Atlantic St', RECEIVING_WATER 'Bridgeport Harbor'; LATITUDE and LONGITUDE attribute fields",
+   "source_url": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0/query?where=OBJECTID%3D13&outFields=*&f=json",
+   "read_at": "2026-11-15T15:20:53Z",
+   "raw": "research/cso-missing-coords/evidence/ct-deep-cso-groups-objectid-13.json",
+   "epa_point_replaced": {
+    "lat": 41.04481,
+    "lon": -73.540018,
+    "source": "EPA ALL_CSO_DOWNLOADS.csv (fetched 2026-11-01) PF_LAT/PF_LON; the same in CT DEEP's NPDES_Outfalls layer (ICIS data pull 20260114), DMS longitude '- 73 32' 25\" 0'",
+    "why_not": "41.4 km from Bridgeport Harbor, in the Fivemile River basin (Norwalk-Darien): not this outfall's place (registry coords_problem)"
+   },
+   "corroboration": "CT DEEP's CSO reporting archive (CSO_Reporting_Archive_deepgis, layer deepgis.WPLR.CSO_ARCHIVE) holds five operator reports for regulator '145 TIC' (City of Bridgeport WPCA - West Side WPCF; 2017-10-25, 2021-07-08, 2021-07-09, 2021-09-02) whose map points lie at 41.16510 to 41.16590, -73.18037 to -73.18139, within about 150 m of the layer's point (raw/ct-deep-cso-archive-regulator-145.json)",
+   "confidence": "high",
+   "notes": "Same outfall number (145), operator and receiving water as EPA's row. The layer's street text ('Henry St & St of Atlantic St') differs from EPA's ('Henry Street and Main Street'); the number, the CSO name and the water agree, so it is read as the same outfall. The layer is the state's own list of CSO outfalls for the reporting the law requires (CGS 22a-424a). Keep source precision (registry outfalls are not rounded)."
+  }
+ ]
+}

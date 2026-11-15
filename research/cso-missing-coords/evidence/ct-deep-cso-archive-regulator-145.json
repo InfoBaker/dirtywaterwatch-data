@@ -1,0 +1,97 @@
+{
+ "source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_Reporting_Archive_deepgis/FeatureServer/0/query (CT DEEP CSO reporting archive, layer deepgis.WPLR.CSO_ARCHIVE)",
+ "query": "where=REGULATOR LIKE '145%'; outSR=4326",
+ "read_at": "2026-11-15T15:17Z (approximately; OBJECTID 13 re-read 2026-11-15T15:20:53Z)",
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 48468607,
+    "UTILITY_NAME": 1,
+    "UTILITY_LABEL": "City of Bridgeport WPCA - West Side WPCF",
+    "CSO_TOWN": "Bridgeport",
+    "REGULATOR": "145 TIC",
+    "RECEIVING_WATER_BODY": "Bridgeport Harbor",
+    "START_FLOW_DATETIME": 1625779800000,
+    "LATITUDE": 41.77177219,
+    "LONGITUDE": -72.66487614,
+    "CreationDate": null
+   },
+   "geometry": {
+    "x": -73.18118476866515,
+    "y": 41.16589702793562
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 48469641,
+    "UTILITY_NAME": 1,
+    "UTILITY_LABEL": "City of Bridgeport - West Side WPCF",
+    "CSO_TOWN": "Bridgeport",
+    "REGULATOR": "145 TIC",
+    "RECEIVING_WATER_BODY": null,
+    "START_FLOW_DATETIME": 1508893200000,
+    "LATITUDE": 41.16582836,
+    "LONGITUDE": -73.18037123,
+    "CreationDate": 1509392862000
+   },
+   "geometry": {
+    "x": -73.18037123384676,
+    "y": 41.16582836415471
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 48469648,
+    "UTILITY_NAME": 1,
+    "UTILITY_LABEL": "City of Bridgeport WPCA - West Side WPCF",
+    "CSO_TOWN": "Bridgeport",
+    "REGULATOR": "145 TIC",
+    "RECEIVING_WATER_BODY": "null",
+    "START_FLOW_DATETIME": 1508893200000,
+    "LATITUDE": 41.16582836,
+    "LONGITUDE": -73.18037123,
+    "CreationDate": 1509392862000
+   },
+   "geometry": {
+    "x": -73.18037123384676,
+    "y": 41.16582836415471
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 48470081,
+    "UTILITY_NAME": 1,
+    "UTILITY_LABEL": "City of Bridgeport WPCA - West Side WPCF",
+    "CSO_TOWN": "Bridgeport",
+    "REGULATOR": "145 TIC",
+    "RECEIVING_WATER_BODY": "Bridgeport Harbor",
+    "START_FLOW_DATETIME": 1625825700000,
+    "LATITUDE": 41.77177219,
+    "LONGITUDE": -72.66487614,
+    "CreationDate": null
+   },
+   "geometry": {
+    "x": -73.18138861685654,
+    "y": 41.16509742503944
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 48470281,
+    "UTILITY_NAME": 1,
+    "UTILITY_LABEL": "City of Bridgeport WPCA - West Side WPCF",
+    "CSO_TOWN": "Bridgeport",
+    "REGULATOR": "145 TIC",
+    "RECEIVING_WATER_BODY": "Bridgeport Harbor",
+    "START_FLOW_DATETIME": 1630546200000,
+    "LATITUDE": 41.77177219,
+    "LONGITUDE": -72.66487614,
+    "CreationDate": null
+   },
+   "geometry": {
+    "x": -73.18088436156853,
+    "y": 41.16589702756905
+   }
+  }
+ ]
+}

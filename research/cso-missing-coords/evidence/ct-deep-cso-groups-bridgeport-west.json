@@ -1,0 +1,337 @@
+{
+ "source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0/query (CT DEEP 'CSO or CSO Group Locations', layer description: Locations of CSO outfalls for use in CSO event reporting)",
+ "query": "where=FACILITY LIKE '%Bridgeport%' OR FACILITY LIKE '%West%'; outSR=4326; Bridgeport West Side rows kept",
+ "read_at": "2026-11-15T15:17Z (approximately; OBJECTID 13 re-read 2026-11-15T15:20:53Z)",
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 8,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "State St. & Dewey St.",
+    "RECEIVING_WATER": "Ash Creek",
+    "CSO_NAME": "BRIDGEPORT WEST 91 DEW",
+    "LATITUDE": 41.168615627240776,
+    "LONGITUDE": -73.22084977586364
+   },
+   "geometry": {
+    "x": -73.22085099962935,
+    "y": 41.16862399986717
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 9,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Brewster St & Seabright",
+    "RECEIVING_WATER": "Black Rock Harbor",
+    "CSO_NAME": "BRIDGEPORT WEST 38 SEAB",
+    "LATITUDE": 41.153405630035984,
+    "LONGITUDE": -73.21888177723086
+   },
+   "geometry": {
+    "x": -73.21888299944779,
+    "y": 41.15341399977271
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 10,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "St Stephens Rd & Anthony St",
+    "RECEIVING_WATER": "Burr Creek",
+    "CSO_NAME": "BRIDGEPORT WEST 87 ANTH",
+    "LATITUDE": 41.15909262928041,
+    "LONGITUDE": -73.21649477861072
+   },
+   "geometry": {
+    "x": -73.21649600039983,
+    "y": 41.15910100020492
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 11,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Howard & Wording",
+    "RECEIVING_WATER": "Cedar Creek",
+    "CSO_NAME": "BRIDGEPORT WEST 40 WORD",
+    "LATITUDE": 41.16195162940253,
+    "LONGITUDE": -73.20747178090399
+   },
+   "geometry": {
+    "x": -73.20747299995583,
+    "y": 41.16196000119262
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 12,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Admiral St & Harbor St",
+    "RECEIVING_WATER": "Cedar Creek",
+    "CSO_NAME": "BRIDGEPORT WEST 84 ARBOR",
+    "LATITUDE": 41.16547362777154,
+    "LONGITUDE": -73.2036517814033
+   },
+   "geometry": {
+    "x": -73.20365299943508,
+    "y": 41.165482000377445
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 13,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Henry St & St of Atlantic St",
+    "RECEIVING_WATER": "Bridgeport Harbor",
+    "CSO_NAME": "BRIDGEPORT WEST 145 TIC",
+    "LATITUDE": 41.166149273344594,
+    "LONGITUDE": -73.18194339093611
+   },
+   "geometry": {
+    "x": -73.18194460200867,
+    "y": 41.166157646826385
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 14,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "State St & Water St",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST WESTSIDE CSO",
+    "LATITUDE": 41.17679662454937,
+    "LONGITUDE": -73.18642178635196
+   },
+   "geometry": {
+    "x": -73.18642299950808,
+    "y": 41.17680499994749
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 15,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "John St West of Water St",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 49 WALL",
+    "LATITUDE": 41.17834662429804,
+    "LONGITUDE": -73.18691478618373
+   },
+   "geometry": {
+    "x": -73.18691599959197,
+    "y": 41.17835499998052
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 16,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Water St & Fairfield Ave",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 50 FAIR",
+    "LATITUDE": 41.179751623806865,
+    "LONGITUDE": -73.18658278629448
+   },
+   "geometry": {
+    "x": -73.18658399968008,
+    "y": 41.17975999977381
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 17,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Water St & Golden Hill St",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 51 HILL",
+    "LATITUDE": 41.18083362401462,
+    "LONGITUDE": -73.18616378692708
+   },
+   "geometry": {
+    "x": -73.1861650002426,
+    "y": 41.18084200020623
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 18,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Congress St at foot of Crescent St",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 195 OVER",
+    "LATITUDE": 41.183861622815115,
+    "LONGITUDE": -73.18668978668813
+   },
+   "geometry": {
+    "x": -73.18669100035524,
+    "y": 41.18386999957718
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 19,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Congress St & Main St",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 80 CON",
+    "LATITUDE": 41.183280623575214,
+    "LONGITUDE": -73.18825578581864
+   },
+   "geometry": {
+    "x": -73.18825699995584,
+    "y": 41.183289000170646
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 21,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Housatonic & City Yard",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 78 YARD",
+    "LATITUDE": 41.18746262240448,
+    "LONGITUDE": -73.18959678490103
+   },
+   "geometry": {
+    "x": -73.18959799972211,
+    "y": 41.187470999766596
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 23,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Housatonic between Com & Grand",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 75 COND",
+    "LATITUDE": 41.19005462258834,
+    "LONGITUDE": -73.1898117852832
+   },
+   "geometry": {
+    "x": -73.18981300032945,
+    "y": 41.19006300044672
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 24,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Housatonic & N. Washington",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 76 HOUS",
+    "LATITUDE": 41.19005462258834,
+    "LONGITUDE": -73.1898117852832
+   },
+   "geometry": {
+    "x": -73.18981300032945,
+    "y": 41.19006300044672
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 25,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Huntington Rd & Vernon St",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 33 HUNT",
+    "LATITUDE": 41.194196621197555,
+    "LONGITUDE": -73.1869897855899
+   },
+   "geometry": {
+    "x": -73.18699099997508,
+    "y": 41.19420499995755
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 26,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Pulaski, Congress & Crescent",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 67 CREP",
+    "LATITUDE": 41.18386162279228,
+    "LONGITUDE": -73.18661478670471
+   },
+   "geometry": {
+    "x": -73.18661600034763,
+    "y": 41.183869999556904
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 27,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Main Street & Capitol",
+    "RECEIVING_WATER": "Island Brook",
+    "CSO_NAME": "BRIDGEPORT WEST 101 CAP",
+    "LATITUDE": 41.199322620793005,
+    "LONGITUDE": -73.19745078153251
+   },
+   "geometry": {
+    "x": -73.19745199960003,
+    "y": 41.1993310001898
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 28,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Main Street & Fairview",
+    "RECEIVING_WATER": "Island Brook",
+    "CSO_NAME": "BRIDGEPORT WEST 196 FAIM",
+    "LATITUDE": 41.20178462001525,
+    "LONGITUDE": -73.19774078173566
+   },
+   "geometry": {
+    "x": -73.19774200004487,
+    "y": 41.20179299988034
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 29,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Water St & Union Sq",
+    "RECEIVING_WATER": "Pequonnock River",
+    "CSO_NAME": "BRIDGEPORT WEST 47 TER N&S",
+    "LATITUDE": 41.17631962506904,
+    "LONGITUDE": -73.18606778744054
+   },
+   "geometry": {
+    "x": -73.18606900045386,
+    "y": 41.176328000386604
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 30,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Mt. Grove Cemetery Dewey So.",
+    "RECEIVING_WATER": "Ash Creek",
+    "CSO_NAME": "BRIDGEPORT WEST CEM",
+    "LATITUDE": 41.16929362722294,
+    "LONGITUDE": -73.21992777596128
+   },
+   "geometry": {
+    "x": -73.21992899947048,
+    "y": 41.169302000012785
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 62,
+    "FACILITY": "Bridgeport West Side",
+    "OUTFALL_LOCATION": "Ferry Access Rd",
+    "RECEIVING_WATER": "Bridgeport Harbor",
+    "CSO_NAME": "BRIDGEPORT WEST RAIL S",
+    "LATITUDE": 41.17245016493416,
+    "LONGITUDE": -73.18451569443474
+   },
+   "geometry": {
+    "x": -73.18451690671512,
+    "y": 41.17245853955274
+   }
+  }
+ ]
+}
