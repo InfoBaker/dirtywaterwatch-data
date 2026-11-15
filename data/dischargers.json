@@ -456610,7 +456610,7 @@
  },
  {
   "id": "de-de0020010",
-  "name": "Town of Selbyville (Selbyville Wastewater Treatment Facility)",
+  "name": "Selbyville Wastewater Treatment Facility (permittee not recorded by EPA)",
   "state": "DE",
   "kind": "plant",
   "npdes_permit": "DE0020010",
@@ -456627,7 +456627,7 @@
   "towns": [
    "Selbyville"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: DE0020010 SELBYVILLE WASTEWATER TREATMENT FACILITY.",
+  "notes": "EPA ECHO ICIS-NPDES: DE0020010 SELBYVILLE WASTEWATER TREATMENT FACILITY. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -456637,11 +456637,11 @@
    "de",
    "federal"
   ],
-  "legal_form": "town"
+  "legal_form": null
  },
  {
   "id": "de-de0020028",
-  "name": "City of Rehoboth Beach (Rehoboth Beach Wastewater Treatment Plant)",
+  "name": "Rehoboth Beach Wastewater Treatment Plant (permittee not recorded by EPA)",
   "state": "DE",
   "kind": "plant",
   "npdes_permit": "DE0020028",
@@ -456660,7 +456660,7 @@
   "towns": [
    "Rehoboth Beach"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: DE0020028 REHOBOTH BEACH WASTEWATER TREATMENT PLANT.",
+  "notes": "EPA ECHO ICIS-NPDES: DE0020028 REHOBOTH BEACH WASTEWATER TREATMENT PLANT. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -456670,11 +456670,11 @@
    "de",
    "federal"
   ],
-  "legal_form": "city"
+  "legal_form": null
  },
  {
   "id": "de-de0020125",
-  "name": "Town of Laurel (Laurel Sewage Treatment Plant)",
+  "name": "Laurel Sewage Treatment Plant (permittee not recorded by EPA)",
   "state": "DE",
   "kind": "plant",
   "npdes_permit": "DE0020125",
@@ -456693,7 +456693,7 @@
   "towns": [
    "Laurel"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: DE0020125 LAUREL SEWAGE TREATMENT PLANT.",
+  "notes": "EPA ECHO ICIS-NPDES: DE0020125 LAUREL SEWAGE TREATMENT PLANT. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -456703,11 +456703,11 @@
    "de",
    "federal"
   ],
-  "legal_form": "town"
+  "legal_form": null
  },
  {
   "id": "de-de0020265",
-  "name": "City of Seaford (Seaford Wastewater Treatment Plant)",
+  "name": "Seaford Wastewater Treatment Plant (permittee not recorded by EPA)",
   "state": "DE",
   "kind": "plant",
   "npdes_permit": "DE0020265",
@@ -456726,7 +456726,7 @@
   "towns": [
    "Seaford"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: DE0020265 SEAFORD WASTEWATER TREATMENT PLANT.",
+  "notes": "EPA ECHO ICIS-NPDES: DE0020265 SEAFORD WASTEWATER TREATMENT PLANT. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -456736,7 +456736,7 @@
    "de",
    "federal"
   ],
-  "legal_form": "city"
+  "legal_form": null
  },
  {
   "id": "de-de0020320",
@@ -456777,6 +456777,39 @@
   "short_name": "City of Wilmington"
  },
  {
+  "id": "de-de0021491",
+  "name": "Milton Water Reclamation Facility (permittee not recorded by EPA)",
+  "state": "DE",
+  "kind": "plant",
+  "npdes_permit": "DE0021491",
+  "npdes_permits": [
+   "DE0021491"
+  ],
+  "receiving_waters": [
+   "Broadkill River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
+  "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Milton"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: DE0021491 MILTON WATER RECLAMATION FACILITY. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "de-de0021491"
+  ],
+  "source_areas": [
+   "de",
+   "federal"
+  ],
+  "legal_form": null
+ },
+ {
   "id": "de-de0021512",
   "name": "Howard Seymour Water Reclamation Plant, Lewes (permittee not recorded by EPA)",
   "state": "DE",
@@ -456808,6 +456841,103 @@
   "legal_form": null
  },
  {
+  "id": "de-de0021539",
+  "name": "Port Penn Wastewater Treatment Plant (permittee not recorded by EPA)",
+  "state": "DE",
+  "kind": "plant",
+  "npdes_permit": "DE0021539",
+  "npdes_permits": [
+   "DE0021539"
+  ],
+  "receiving_waters": [
+   "Delaware River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
+  "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Port Penn"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: DE0021539 PORT PENN WASTEWATER TREATMENT PLANT. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "de-de0021539"
+  ],
+  "source_areas": [
+   "de",
+   "federal"
+  ],
+  "legal_form": null
+ },
+ {
+  "id": "de-de0021555",
+  "name": "Delaware City Wastewater Treatment Plant (permittee not recorded by EPA)",
+  "state": "DE",
+  "kind": "plant",
+  "npdes_permit": "DE0021555",
+  "npdes_permits": [
+   "DE0021555"
+  ],
+  "receiving_waters": [
+   "Delaware River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
+  "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Delaware City"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: DE0021555 DELAWARE CITY WASTEWATER TREATMENT PLANT. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "de-de0021555"
+  ],
+  "source_areas": [
+   "de",
+   "federal"
+  ],
+  "legal_form": null
+ },
+ {
+  "id": "de-de0050008",
+  "name": "South Coastal Regional Wastewater Facility (permittee not recorded by EPA)",
+  "state": "DE",
+  "kind": "plant",
+  "npdes_permit": "DE0050008",
+  "npdes_permits": [
+   "DE0050008"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
+  "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Frankford"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: DE0050008 SOUTH COASTAL REGIONAL WASTEWATER. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "de-de0050008"
+  ],
+  "source_areas": [
+   "de",
+   "federal"
+  ],
+  "legal_form": null
+ },
+ {
   "id": "de-kent-county",
   "name": "Kent County Levy Court, Wastewater (Kent County Regional Resource Recovery Facility)",
   "state": "DE",
@@ -456831,7 +456961,7 @@
    "Frederica",
    "Milford"
   ],
-  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03). DE0020338: The Kent County Regional Resource Recovery Facility.",
+  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03). DE0020338: The Kent County Regional Resource Recovery Facility (EPA's permittee: 'KENT COUNTY WASTEWATER TREATMENT FACILITY').",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -456879,10 +457009,8 @@
   "name": "New Castle County Department of Public Works (sewer)",
   "state": "DE",
   "kind": "sso",
-  "npdes_permit": "DE0021539",
+  "npdes_permit": "DE0050547",
   "npdes_permits": [
-   "DE0021539",
-   "DE0021555",
    "DE0050547",
    "DE0051071"
   ],
@@ -456892,19 +457020,17 @@
    "White Clay Creek"
   ],
   "water_slugs": [],
-  "outfall_count": 3,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 4 rows for these permits)",
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 2 rows for these permits)",
   "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
    "Newark",
    "New Castle",
-   "Port Penn",
-   "Delaware City",
    "Middletown"
   ],
-  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03). DE0021539: Port Penn Wastewater Treatment Plant. DE0021555: Delaware City Wastewater Treatment Plant (EPA records New Castle). DE0050547: The MOT (Middletown-Odessa-Townsend) Wastewater Treatment Plant, New Castle County's (EPA's permit name: 'MOT Wastewater Treatment Plant - NCC'). DE0051071: DE0051071 is New Castle County's and DelDOT's municipal separate storm sewer permit (MS4): a storm sewer, not sewage; its EPA row is kind other in data/outfalls-de.json.",
+  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03). DE0050547: The MOT (Middletown-Odessa-Townsend) Wastewater Treatment Plant, New Castle County's (EPA's permittee: 'MOT Wastewater Treatment Plant - NCC'). DE0051071: DE0051071 is New Castle County's and DelDOT's municipal separate storm sewer permit (MS4): a storm sewer, not sewage; its EPA row is kind other in data/outfalls-de.json.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -456920,28 +457046,25 @@
   "id": "de-sussex-county",
   "name": "Sussex County Engineering, Environmental Services (wastewater)",
   "state": "DE",
-  "kind": "plant",
-  "npdes_permit": "DE0050008",
-  "npdes_permits": [
-   "DE0050008"
-  ],
+  "kind": "sso",
+  "npdes_permit": null,
+  "npdes_permits": [],
   "receiving_waters": [
    "Inland Bays",
    "Rehoboth Bay",
    "Indian River Bay"
   ],
   "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
+  "outfall_count": null,
+  "outfalls_source": null,
   "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
    "Georgetown",
-   "Lewes",
-   "Frankford"
+   "Lewes"
   ],
-  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03). DE0050008: Sussex County's South Coastal Regional Wastewater Facility.",
+  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03).",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -457004,39 +457127,6 @@
   ],
   "source_areas": [
    "de"
-  ],
-  "legal_form": "town"
- },
- {
-  "id": "de-town-of-milton",
-  "name": "Town of Milton (Milton Water Reclamation Facility)",
-  "state": "DE",
-  "kind": "plant",
-  "npdes_permit": "DE0021491",
-  "npdes_permits": [
-   "DE0021491"
-  ],
-  "receiving_waters": [
-   "Broadkill River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
-  "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": true,
-  "notification_signup_url": null,
-  "towns": [
-   "Milton"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: DE0021491 MILTON WATER RECLAMATION FACILITY. Tidewater Environmental Services operates the Milton plant under contract with the Town (not verified against the permit).",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "de-town-of-milton"
-  ],
-  "source_areas": [
-   "de",
-   "federal"
   ],
   "legal_form": "town"
  },
