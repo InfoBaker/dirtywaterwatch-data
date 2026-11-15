@@ -19,6 +19,11 @@ Notices (parse_notice): kind "exceed" (the "no son aptas" list, its stations), "
   A fit statement counts only when affirmed: a negation anywhere before it in its sentence ("no se encuentran aptas",
   "ninguna ... se encuentra apta", "aún no están aptas"), a condition ("si", "cuando", "una vez", "hasta que") or an
   exception ("excepto", "salvo") makes the notice unread, never a lift; the future ("se encontrarán") is not read.
+  The lift's subject must be the programme's beaches ("las playas que son parte del Programa de Playas", "todas las
+  playas incluidas en el Programa de Playas"): one beach that "se encuentra apta", or named beaches, lifts nothing
+  (unread). A plan, an expectation or a possibility ("se espera", "podrían", "pendiente") is a condition. The "no son
+  aptas" list is read only when it is not conditional or planned ("Si los resultados se confirman, ...": unread)
+  (Astra verify P1-3).
   The sampling date(s) are read from the text as DRNA writes them ("del 2 y 3 de noviembre de 2026"): sampled_at is
   the first day, raw.sample_dates the words. A sample date is never an advisory's start.
   Versions (merge_notice; Astra review P1-2): a post re-read with a different listing keeps every version read. A
@@ -177,14 +182,21 @@ EXCEED = re.compile(r"(no\s+son\s+aptas?\s+para\s+bañistas[^:]*)", re.I)
 ADVICE_FULL = re.compile(r"no\s+son\s+aptas?\s+para\s+bañistas\s+por\s+exceder\s+el\s+[“\"]\s*Beach\s+Action\s+Value\s*"
                          r"[”\"]\s*\(BAV\)\s+para\s+el\s+parámetro\s+de\s+Enterococos\s*\(\s*70\s+colonias\s*/\s*100\s*mL\s*\)",
                          re.I)
-ALL_FIT = re.compile(r"se\s+encuentran?\s+aptas?\s+para\s+bañistas", re.I)
+# the programme's own statement, its subject the programme's beaches (Astra verify P1-3): "las playas que son parte del
+# Programa de Playas" or "todas las playas incluidas en el Programa de Playas" (every form in the 280 posts read
+# 2026-11-14); one beach that "se encuentra apta", or named beaches, is not every beach and lifts nothing
+ALL_FIT = re.compile(r"(?:todas\s+)?las\s+playas\s+(?:que\s+son\s+parte\s+del|incluidas\s+en\s+el)\s+Programa\s+de\s+"
+                     r"Playas\s*,?\s*se\s+encuentran\s+aptas\s+para\s+bañistas", re.I)
 FIT_LIST = re.compile(r"\b(?:están|estan)\s+aptas?\s+para\s+bañistas\s+por\s+no\s+exceder", re.I)
 # Spanish negation, condition and exception around a statement that beaches are fit (lessons 1 and 11): "no se
 # encuentran aptas", "ninguna ... se encuentra apta", "aún no están aptas", "se encuentran aptas, excepto ...", "una
 # vez ... se encuentran aptas", "si los resultados ... se encuentran aptas" are not a lift
 NEGATED = re.compile(r"\b(?:no|ni|nunca|ninguna?s?|ningún|ningun|tampoco)\b", re.I)
 CONDITION = re.compile(r"\b(?:si|cuando|una\s+vez|hasta\s+que|en\s+cuanto|siempre\s+que|de\s+ser|en\s+caso\s+de|"
-                       r"tan\s+pronto)\b", re.I)
+                       r"tan\s+pronto|"
+                       # planned, expected or possible, not done (Astra verify P1-3)
+                       r"se\s+espera|se\s+anticipa|se\s+proyecta|se\s+prev[eé]|se\s+estima|podr[ií]an?|deber[ií]an?|"
+                       r"probablemente|posiblemente|pendiente)\b", re.I)
 EXCEPTION = re.compile(r"\b(?:excepto|salvo|con\s+excepci[oó]n|a\s+excepci[oó]n|menos\s+(?:la|las|el|los)|"
                        r"except[ou]ando)\b", re.I)
 STATION = re.compile(r"^\W*R\s*W+\s*-?\s*0*(\d{1,2})\s*([A-Z])?\s*$", re.I)
@@ -337,6 +349,16 @@ def affirmed(rx: re.Pattern, text: str) -> bool:
     return False
 
 
+def exceed_affirmed(text: str) -> re.Match | None:
+    """The "no son aptas para bañistas" statement when it is DRNA's finding, not a condition, a plan or an expectation
+    ("Si los resultados se confirman, la(s) siguiente(s) playa(s) no son aptas ...": Astra verify P1-3)."""
+    for m in EXCEED.finditer(text):
+        a = max(text.rfind(".", 0, m.start()), text.rfind(";", 0, m.start()), text.rfind(":", 0, m.start())) + 1
+        if not CONDITION.search(text[a:m.start()]):
+            return m
+    return None
+
+
 def _safe_unknown_name(name: str) -> str:
     """An unmatched row's beach name, kept only when it reads as a place (a beach word first, letters only, six words
     at most), else withheld: a cell that cannot be told apart from a person's name or address is not saved."""
@@ -379,7 +401,7 @@ def parse_notice(post: dict) -> dict:
         else:
             unknown.append({"station": None, "code": _safe_code(code), "name": _safe_unknown_name(name),
                             "municipio": _safe_town(town), "note": note})
-    ex = EXCEED.search(text)
+    ex = exceed_affirmed(text)
     if ex and (listed or unknown):
         kind = "exceed"
     elif affirmed(FIT_LIST, text) and (listed or unknown):
