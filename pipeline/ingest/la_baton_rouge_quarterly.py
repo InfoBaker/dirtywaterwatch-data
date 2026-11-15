@@ -43,6 +43,9 @@ Cadence and lag
   Every failed read (a fetch error, a failed check, a failed amendment) stays in state 'pending' (meta.pending) until a
   read of that report succeeds: each run is ok=False while anything is pending (last_ok_at does not advance), and a
   pending report is tried again every REREAD_DAYS whatever its number.
+  Where the state holds no accepted copy of a report whose rows the previous events file carries (no state file, an
+  emptied one, a failed first read), those rows are kept, the water cell checked again (retained), so a failed read
+  never drops an earlier record (meta.retained_from_previous_events).
   Each record's fetched_at is when its report was read. Reports are issued about a month after the quarter ends, so a row is one to four
   months old when it appears. FIRST_REPORT (91, October to December 2024) bounds the backfill.
 
@@ -264,6 +267,31 @@ def records(state: dict) -> list[dict]:
     return out
 
 
+def retained(prev: dict, state: dict) -> list[dict]:
+    """The previous events file's records for reports with no accepted copy in the state, the receiving-water cell
+    checked again (receiving_water) before they are written: a record is never lost because the state file is absent
+    or a read failed, and no earlier text bypasses the check (Astra verify3 P1-1)."""
+    accepted = {str(v.get("number")) for v in (state.get("reports") or {}).values() if v.get("layout_ok")}
+    out = []
+    for r in prev.get("records") or []:
+        if not isinstance(r, dict) or not r.get("source_record_id"):
+            continue
+        raw = dict(r.get("raw") or {})
+        if str(raw.get("report")) in accepted:
+            continue                        # the accepted copy in the state gives this report's rows
+        r = {**r, "raw": raw}
+        for cell in {raw.get("receiving_water_as_given"), r.get("waterbody_text")} - {None}:
+            w, why = receiving_water(cell)
+            if why:
+                r["waterbody_text"] = raw["receiving_water_as_given"] = None
+                r["water_slugs"], r["water_match"] = [], "none"
+                raw["placement_note"] = why + ": kept with its parish and permit, placed on no water"
+                break
+        raw["retained_from"] = "the previous events file (no accepted copy of this report in the state)"
+        out.append(r)
+    return out
+
+
 def report_links(page: str) -> dict[int, str]:
     out = {}
     for href, n in REPORT_LINK.findall(page):
@@ -418,6 +446,11 @@ def main(argv=None) -> int:
     migrate(state)
     write_json(STATE_PATH, state)
     recs = records(state)
+    # the state is the record of what was read; where it holds no accepted copy of a report whose rows the events file
+    # already carries (no state file, an emptied one, or a report whose re-read failed before it was ever accepted
+    # here), those earlier rows are kept, checked again, and never dropped by a failed or partial read
+    held = retained(read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}, state)
+    recs += held
     reps = state.get("reports") or {}
     meta = {"registry_ids": ["la-baton-rouge-quarterly-reports"], "index": INDEX, "first_report": FIRST_REPORT,
             "reports_read": {str(v.get("number")): {"period": v.get("period"), "issued": v.get("issued"),
@@ -430,6 +463,7 @@ def main(argv=None) -> int:
                                                "reason": unread_reason(v)}
                        for v in reps.values() if not v.get("layout_ok")},
             "errors": errors,
+            "retained_from_previous_events": sorted({str((r.get("raw") or {}).get("report")) for r in held}),
             "pending": dict(sorted((state.get("pending") or {}).items())),
             "cadence": (f"the index with the refresh; a new report once, the newest two and any report with no accepted "
                         f"copy again every {REREAD_DAYS} days")}
