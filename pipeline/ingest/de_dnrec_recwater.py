@@ -64,6 +64,36 @@ from ingest.de_dnrec_derns import scrub as _scrub
 def scrub_text(v: str) -> str:
     return _scrub(v) or ""
 
+
+def scrub_unit_name(v):
+    """A beach's name from the station layer or the history (UnitName, unitname): a contact sentence, telephone or
+    e-mail in it is cut before any save (verify2 P1-3). Street house numbers are not cut here: "3 R's Road Beach" is the
+    beach's own name, not an address."""
+    if not isinstance(v, str) or not v:
+        return v
+    from common import scrub_text as _common_scrub
+    from ingest.de_dnrec_derns import NAMED_PERSON, _cut_name
+    return NAMED_PERSON.sub(_cut_name, _common_scrub(v))
+
+
+def scrub_carried(prev: dict) -> dict:
+    """The state of an earlier run, its beach names scrubbed as a new read's are (verify2 P1-3): the map's episodes
+    (polls.*.name) and the carried history records (outfall_name, waterbody_text, raw.unit_name)."""
+    prev = json.loads(json.dumps(prev or {}))
+    for v in (prev.get("polls") or {}).values():
+        v["name"] = scrub_unit_name(v.get("name"))
+    for r in (prev.get("history") or {}).values():
+        for k in ("outfall_name", "waterbody_text"):
+            r[k] = scrub_unit_name(r.get(k))
+        raw = r.get("raw") or {}
+        raw["unit_name"] = scrub_unit_name(raw.get("unit_name"))
+        for k in ("advisory_description",):
+            if raw.get(k):
+                raw[k] = scrub_text(raw[k])
+        if r.get("advice_text"):
+            r["advice_text"] = scrub_text(r["advice_text"])
+    return prev
+
 SOURCE_ID = "de-dnrec-recreational-water"
 SOCRATA = ("https://data.delaware.gov/resource/ever-58ni.json?$select=advisoryid,advstartdate,advenddate,advdesc,"
            "advcomment,advreason,advtype,unitname&$order=advisoryid&$limit=50000")
@@ -381,6 +411,8 @@ def safe_rows(rows: list[dict]) -> list[dict]:
     out = []
     for r in rows:
         x = {k: r.get(k) for k in SAFE_ROW_FIELDS if r.get(k) is not None}
+        if x.get("unitname"):
+            x["unitname"] = scrub_unit_name(x["unitname"])        # verify2 P1-3
         for k in ("advdesc", "advcomment"):
             if x.get(k):
                 x[k] = scrub_text(x[k])
@@ -399,6 +431,8 @@ def safe_stations(stations: list[dict]) -> list[dict]:
     out = []
     for s in stations:
         x = {k: s.get(k) for k in SAFE_STATION_FIELDS}
+        if x.get("UnitName"):
+            x["UnitName"] = scrub_unit_name(x["UnitName"])        # verify2 P1-3
         lat, lon = point(s)
         x["Latitude"], x["Longitude"] = lat, lon
         out.append(x)
@@ -422,7 +456,7 @@ def carry_missing(hist: list[dict], prev_hist: dict, fetched_at: str) -> tuple[l
 def run(args) -> int:
     fetched_at = args.at or now_iso()
     today = datetime.fromisoformat(fetched_at.replace("Z", "+00:00")).astimezone(TZ).date()
-    prev = read_json(STATE_PATH, {}) or {}
+    prev = scrub_carried(read_json(STATE_PATH, {}) or {})
     if args.file:
         saved = json.loads(open(args.file).read())
         rows, stations = saved["advisories"], saved["stations"]

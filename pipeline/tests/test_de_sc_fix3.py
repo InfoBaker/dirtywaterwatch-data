@@ -159,3 +159,117 @@ def test_every_other_states_intervals_are_identical(monkeypatch):
         assert new == old, f.name
         n += len(recs)
     assert n
+
+
+# ------------------------------------------------- P1-3: titles and beach names scrubbed before any save
+
+SENT = ("Robin Sample", "843-555-0142", "302-555-0142", "1234 W", "pat@example.org")
+
+
+def _assert_clean(blob):
+    for x in SENT:
+        assert x not in blob, x
+
+
+def test_a_florence_title_with_a_telephone_and_house_number_never_reaches_a_save(monkeypatch, tmp_path):
+    from ingest import sc_florence_sso as F
+    fix = Path(__file__).resolve().parent / "fixtures" / "sc"
+    bad = "Notification of Sanitary Sewer Overflow at 1234 W Sample Street on Jeffries Creek, call 843-555-0142"
+    page = (fix / "florence_notice.html").read_text().replace(
+        "Notification of Sanitary Sewer Overflow on Jeffries Creek</span></h1>", bad + "</span></h1>")
+    assert bad in page
+    listing = (fix / "florence_list.html").read_text()
+    # carried state: an earlier run saved a title before this scrub, under another notice
+    nid, title, paras = F.article((fix / "florence_notice.html").read_text())
+    old = F.parse_notice(title, paras)
+    old["title"] = "Sewage Spill at 1234 W Sample Street, call Robin Sample at 843-555-0142"
+    carried = {"notices": {"/news/older": {"slug": "/news/older", "nid": "900", "last_read_at": "2026-11-14T00:00:00Z",
+                                           "versions": [{"parsed": old, "hash": "x", "first_seen_at": "2026-11-01T00:00:00Z",
+                                                         "last_seen_at": "2026-11-01T00:00:00Z"}]}},
+               "backfilled_at": "2026-11-01T00:00:00Z"}
+    (tmp_path / "state.json").write_text(json.dumps(carried))
+    saves = []
+    monkeypatch.setattr(F, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(F, "PAUSE_S", 0)
+    monkeypatch.setattr(F, "save_raw", lambda *a, **k: saves.append(json.dumps(a, default=str)))
+    monkeypatch.setattr(F, "write_json", lambda path, obj, *a, **k: saves.append(json.dumps(obj, default=str)))
+    monkeypatch.setattr(F, "write_events", lambda sid, recs, **k: saves.append(json.dumps([recs, k], default=str)))
+
+    class Resp:
+        def __init__(self, text):
+            self.text = text
+
+        def raise_for_status(self):
+            pass
+
+    class Sess:
+        headers = {}
+
+        def get(self, url, **k):
+            return Resp(listing.replace(">Notification of Sanitary Sewer Overflow", ">" + bad[:40]) if "city-news" in url
+                        else page)
+    monkeypatch.setattr(F.requests, "Session", Sess)
+    assert F.main(["--pages", "1"]) == 0
+    assert len(saves) == 3                                   # the state, the raw archive and the records
+    _assert_clean("\n".join(saves))
+    assert "Jeffries Creek" in "\n".join(saves)
+    # the --file path (a saved state) too
+    saves.clear()
+    f = tmp_path / "carried.json"
+    f.write_text(json.dumps(carried))
+    assert F.main(["--file", str(f)]) == 0
+    _assert_clean("\n".join(saves))
+
+
+def test_a_scrubbed_carried_title_is_rehashed_so_an_unchanged_page_is_no_revision():
+    from ingest import sc_florence_sso as F
+    fix = Path(__file__).resolve().parent / "fixtures" / "sc"
+    nid, title, paras = F.article((fix / "florence_notice.html").read_text())
+    p = F.parse_notice(title + " call 843-555-0142", paras)
+    st = {"notices": {}}
+    F.update_notice(st, "/news/x", nid, p, "2026-11-01T00:00:00Z")
+    raw_state = json.loads(json.dumps(st))
+    raw_state["notices"]["/news/x"]["versions"][0]["parsed"]["title"] = title + " call 843-555-0142"   # as an old run saved it
+    st2 = F.scrub_carried(raw_state)
+    assert F.update_notice(st2, "/news/x", nid, p, "2026-11-02T00:00:00Z") == "same"
+
+
+def test_a_delaware_unit_name_with_a_name_never_reaches_a_save(monkeypatch, tmp_path):
+    s = json.loads((Path(__file__).resolve().parent / "fixtures" / "de" / "recwater.json").read_text())
+    rows, stations = copy.deepcopy(s["advisories"]), copy.deepcopy(s["stations"])
+    sentence = " For questions call Robin Sample at 302-555-0142 or pat@example.org."
+    stations[0]["UnitName"] += sentence
+    stations[0]["CurrentAdvisory"] = 0                       # shown on the map: a poll record carries the name
+    rows[0]["unitname"] += sentence
+    carried = {"polls": {"station-1-2026": {"unit_id": "1", "code": 0, "name": "Old Beach" + sentence,
+                                            "started_at": "2026-11-01T00:00:00Z", "lat": 38.7, "lon": -75.1}},
+               "history": {"adv-old": {"event_id": "de-dnrec-recreational-water:adv-old", "source_record_id": "adv-old",
+                                       "outfall_name": "Old Beach" + sentence, "waterbody_text": "Old Beach" + sentence,
+                                       "advice_text": "Call Robin Sample.", "status": "advisory_lifted",
+                                       "started_at": "2020-07-01", "ended_at": "2020-07-02",
+                                       "raw": {"unit_name": "Old Beach" + sentence}}}}
+    (tmp_path / "state.json").write_text(json.dumps(carried))
+    saves = []
+    monkeypatch.setattr(W, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(W, "save_raw", lambda *a, **k: saves.append(json.dumps(a, default=str)))
+    monkeypatch.setattr(W, "write_json", lambda path, obj, *a, **k: saves.append(json.dumps(obj, default=str)))
+    monkeypatch.setattr(W, "write_events", lambda sid, recs, **k: saves.append(json.dumps([recs, k], default=str)))
+
+    class Resp:
+        def __init__(self, js):
+            self._js = js
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self._js
+    monkeypatch.setattr(W.requests, "get", lambda url, **k: Resp(rows) if url == W.SOCRATA else
+                        Resp({"features": [{"attributes": a} for a in stations]}))
+    assert W.main(["--at", "2026-11-14T18:00:00Z"]) == 0
+    assert len(saves) == 3                                   # the raw archive, the state and the records
+    blob = "\n".join(saves)
+    _assert_clean(blob)
+    assert "[name removed]" in blob
+    assert W.scrub_unit_name("3 R's Road Beach (Delaware Seashore State Park)") == \
+        "3 R's Road Beach (Delaware Seashore State Park)"      # a beach's own name keeps its number
