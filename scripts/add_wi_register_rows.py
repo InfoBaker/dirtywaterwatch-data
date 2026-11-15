@@ -56,9 +56,10 @@ INSTR = "https://dnr.wisconsin.gov/sites/default/files/topic/Wastewater/WW_SSOFo
 ECHO = "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 # rows that would carry people's names (SERTS's coordinator, a health department's contact) are not fetched until a reader
 # keeps only safe fields: the register's page monitor saves the page it reads (Astra review 2026-11-14 P1-6)
-UNREACHED_NOT_WATCHED = (" On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second "
-                         "network (refused). Not fetched: its pages can carry staff names, and no reader that keeps only "
-                         "safe fields exists yet (channel not verified in the research beyond the expansion pass).")
+UNREACHED_NOT_WATCHED = (" On 2026-11-14 and 2026-11-15 the host did not answer the build's client (connection timed "
+                         "out), nor a second network on 2026-11-14 (refused). Watched for availability only: its pages can "
+                         "carry staff names, so no page text or body is kept (metadata_only) and no record is made until a "
+                         "reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).")
 UNREACHED = (" On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second network "
              "(connection refused); the row is watched so the refresh records when it answers.")
 Q_NR210 = ('s. NR 210.21(5), Wis. Adm. Code, as the DNR\'s form 3400-184 instructions give it: "All overflows (SSOs & '
@@ -171,8 +172,8 @@ AGENCY = [
     {"id": "wi-dnr-serts-open-spills", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (SERTS open spill incidents)",
      "channel_kind": "state_alert_page", "urls": ["https://apps.dnr.wi.gov/rrbotw/sp-openspillincidents"],
-     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
-     "unmonitored_reason": "other", "publishes": "notices", "records": False,
+     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": True,
+     "unmonitored_reason": None, "publishes": "notices", "records": False, "availability_only": True, "every_hours": 24,
      "noun": "Voluntary page",
      "note": ("The DNR's list of open spill incidents of every substance, with CSV and Excel buttons: 271 open on "
               "2026-11-09, among them a sewage spill at Ashland (incident date, county, municipality, substance, "
@@ -183,8 +184,8 @@ AGENCY = [
     {"id": "wi-dnr-brrts-search", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (BRRTS on the Web search)",
      "channel_kind": "state_alert_page", "urls": ["https://apps.dnr.wi.gov/rrbotw/botw-search"], "method": "html",
-     "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other",
-     "publishes": "notices", "records": False,
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
+     "publishes": "notices", "records": False, "availability_only": True, "every_hours": 24,
      "noun": "Voluntary page",
      "note": ("The search form for closed spill and cleanup cases, where SERTS incidents go when they close; no "
               "closed sewage query was tested." + UNREACHED_NOT_WATCHED),
@@ -192,8 +193,8 @@ AGENCY = [
     {"id": "wi-dnr-beach-health", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (Wisconsin Beach Health)", "channel_kind": "state_alert_page",
      "urls": ["https://apps.dnr.wi.gov/beachhealth/"], "method": "html", "legal_basis": None,
-     "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other", "publishes": "status",
-     "records": False, "noun": "Voluntary page",
+     "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "publishes": "status",
+     "records": False, "availability_only": True, "every_hours": 24, "noun": "Voluntary page",
      "note": ("The DNR's beach report: advisories and closures with their reason (E. coli, algae) and dates, Great "
               "Lakes beaches under the BEACH Act and the inland beaches local health departments choose to report, in "
               "season (Memorial Day to Labor Day). Not ingested: its export and the map layer's keys were not read."
@@ -202,8 +203,8 @@ AGENCY = [
     {"id": "wi-dnr-beach-layer", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (beach monitoring map layer)", "channel_kind": "feed",
      "urls": ["https://dnrmaps.wi.gov/arcgis2/rest/services/OGW_Beach_Monitoring/BEACH_MONITORING_LOCATIONS/MapServer/1"],
-     "method": "json", "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other",
-     "publishes": "status", "records": False,
+     "method": "json", "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
+     "publishes": "status", "records": False, "availability_only": True, "every_hours": 24,
      "noun": "Data feed",
      "note": ("The ArcGIS layer behind the beach map: 441 beaches with STATUS, BEACH_ACTION, ISSUED, SAMPLEDATE and "
               "ECOLIVALUE (2026-11-03), \"No Data Available\" off season." + UNREACHED_NOT_WATCHED),
@@ -219,11 +220,12 @@ AGENCY = [
     {"id": "wi-milwaukee-health-beaches", "agency": "City of Milwaukee Health Department",
      "name": "City of Milwaukee Health Department (beach water report)", "channel_kind": "local_health_page",
      "urls": ["https://city.milwaukee.gov/Health/Services-and-Programs/disease-Control-and-Environment/recreational-Water/Beaches"],
-     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
-     "publishes": "status", "records": False, "every_hours": 24, "noun": "Voluntary page",
+     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "bot_wall",
+     "publishes": "status", "records": False, "noun": "Voluntary page",
      "note": ("The Health Department samples Bradford, McKinley and South Shore beaches, near the combined sewer area, "
               "daily from Memorial Day to Labor Day and posts a water report (MMSD's impacted-waters page links it). "
-              "Not read in this build."),
+              "On 2026-11-15 the page answered the site's client with a browser challenge (HTTP 403, \"Just a moment\"), "
+              "which this site does not get around: not read, and its advisories are not shown."),
      "sources": ["wi-mmsd-cso-impacted-waters"]},
     {"id": "wi-newspaper-notices", "agency": "Wisconsin sewer system owners",
      "name": "Wisconsin sewer system owners (newspaper notices under NR 210.21(5))", "channel_kind": "news_page",

@@ -4200,16 +4200,19 @@
    "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "other",
+   "monitored": true,
+   "unmonitored_reason": null,
    "publishes": "status",
    "records": false,
+   "availability_only": true,
+   "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "The DNR's beach report: advisories and closures with their reason (E. coli, algae) and dates, Great Lakes beaches under the BEACH Act and the inland beaches local health departments choose to report, in season (Memorial Day to Labor Day). Not ingested: its export and the map layer's keys were not read. On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second network (refused). Not fetched: its pages can carry staff names, and no reader that keeps only safe fields exists yet (channel not verified in the research beyond the expansion pass).",
+   "note": "The DNR's beach report: advisories and closures with their reason (E. coli, algae) and dates, Great Lakes beaches under the BEACH Act and the inland beaches local health departments choose to report, in season (Memorial Day to Labor Day). Not ingested: its export and the map layer's keys were not read. On 2026-11-14 and 2026-11-15 the host did not answer the build's client (connection timed out), nor a second network on 2026-11-14 (refused). Watched for availability only: its pages can carry staff names, so no page text or body is kept (metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).",
    "sources": [
     "wi-wdnr-beach-health"
    ],
-   "barrier": "not_verified"
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -4226,16 +4229,19 @@
    "method": "json",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "other",
+   "monitored": true,
+   "unmonitored_reason": null,
    "publishes": "status",
    "records": false,
+   "availability_only": true,
+   "every_hours": 24,
    "noun": "Data feed",
-   "note": "The ArcGIS layer behind the beach map: 441 beaches with STATUS, BEACH_ACTION, ISSUED, SAMPLEDATE and ECOLIVALUE (2026-11-03), \"No Data Available\" off season. On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second network (refused). Not fetched: its pages can carry staff names, and no reader that keeps only safe fields exists yet (channel not verified in the research beyond the expansion pass).",
+   "note": "The ArcGIS layer behind the beach map: 441 beaches with STATUS, BEACH_ACTION, ISSUED, SAMPLEDATE and ECOLIVALUE (2026-11-03), \"No Data Available\" off season. On 2026-11-14 and 2026-11-15 the host did not answer the build's client (connection timed out), nor a second network on 2026-11-14 (refused). Watched for availability only: its pages can carry staff names, so no page text or body is kept (metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).",
    "sources": [
     "wi-wdnr-beach-health"
    ],
-   "barrier": "not_verified"
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -4252,16 +4258,19 @@
    "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "other",
+   "monitored": true,
+   "unmonitored_reason": null,
    "publishes": "notices",
    "records": false,
+   "availability_only": true,
+   "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "The search form for closed spill and cleanup cases, where SERTS incidents go when they close; no closed sewage query was tested. On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second network (refused). Not fetched: its pages can carry staff names, and no reader that keeps only safe fields exists yet (channel not verified in the research beyond the expansion pass).",
+   "note": "The search form for closed spill and cleanup cases, where SERTS incidents go when they close; no closed sewage query was tested. On 2026-11-14 and 2026-11-15 the host did not answer the build's client (connection timed out), nor a second network on 2026-11-14 (refused). Watched for availability only: its pages can carry staff names, so no page text or body is kept (metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).",
    "sources": [
     "wi-wdnr-brrts-closed-spills"
    ],
-   "barrier": "not_verified"
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -4278,16 +4287,19 @@
    "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "other",
+   "monitored": true,
+   "unmonitored_reason": null,
    "publishes": "notices",
    "records": false,
+   "availability_only": true,
+   "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "The DNR's list of open spill incidents of every substance, with CSV and Excel buttons: 271 open on 2026-11-09, among them a sewage spill at Ashland (incident date, county, municipality, substance, cause, the coordinator's name). Closed incidents move to the BRRTS search, so a row that leaves the list has not ended. Not ingested: its export, paging and the share of sewage overflows it holds were not tested. On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second network (refused). Not fetched: its pages can carry staff names, and no reader that keeps only safe fields exists yet (channel not verified in the research beyond the expansion pass).",
+   "note": "The DNR's list of open spill incidents of every substance, with CSV and Excel buttons: 271 open on 2026-11-09, among them a sewage spill at Ashland (incident date, county, municipality, substance, cause, the coordinator's name). Closed incidents move to the BRRTS search, so a row that leaves the list has not ended. Not ingested: its export, paging and the share of sewage overflows it holds were not tested. On 2026-11-14 and 2026-11-15 the host did not answer the build's client (connection timed out), nor a second network on 2026-11-14 (refused). Watched for availability only: its pages can carry staff names, so no page text or body is kept (metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).",
    "sources": [
     "wi-wdnr-serts-open-spills"
    ],
-   "barrier": "not_verified"
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -6745,18 +6757,16 @@
    "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
    "publishes": "status",
    "records": false,
-   "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "The Health Department samples Bradford, McKinley and South Shore beaches, near the combined sewer area, daily from Memorial Day to Labor Day and posts a water report (MMSD's impacted-waters page links it). Not read in this build.",
+   "note": "The Health Department samples Bradford, McKinley and South Shore beaches, near the combined sewer area, daily from Memorial Day to Labor Day and posts a water report (MMSD's impacted-waters page links it). On 2026-11-15 the page answered the site's client with a browser challenge (HTTP 403, \"Just a moment\"), which this site does not get around: not read, and its advisories are not shown.",
    "sources": [
     "wi-mmsd-cso-impacted-waters"
    ],
-   "barrier": null,
-   "metadata_only": true
+   "barrier": "bot_wall"
   },
   {
    "state": "WI",
