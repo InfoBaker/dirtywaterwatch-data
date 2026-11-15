@@ -182,8 +182,10 @@ def lake_point(lake: str, counties: list[str]) -> dict | None:
     return None
 
 
-def zone_of(counties: list[str]) -> tuple[str, str]:
-    zs = [zones.north_dakota_zone(c) for c in counties] or [zones.north_dakota_zone(None)]
+def zone_of(counties: list[str], lat=None, lon=None) -> tuple[str, str]:
+    """The lake's zone: its point's side of the line in a split county (McKenzie, Sioux), else its counties'; Mountain
+    if any county is (the later day's end)."""
+    zs = [zones.north_dakota_zone(c, lat, lon) for c in counties] or [zones.north_dakota_zone(None, lat, lon)]
     mt = [z for z in zs if z[0] == zones.MOUNTAIN]
     return (mt or zs)[0]
 
@@ -205,7 +207,8 @@ def build(pdf: bytes, fetched: str, previous: list[dict], source_updated: str | 
         returned = srid != base and srid not in prev
         old = prev.get(srid) or {}
         oraw = old.get("raw") or {}
-        tz, basis = zone_of(x["counties"])
+        pt = lake_point(x["lake"], x["counties"])
+        tz, basis = zone_of(x["counties"], *((pt["lat"], pt["lon"]) if pt else (None, None)))
         start = old.get("started_at") or (fetched if returned else x["date"])
         hist = list(oraw.get("_level_history") or [{"level": x["level"], "seen_at": fetched, "date": x["date"]}])
         raw = {"lake": x["lake"], "counties": x["counties"], "county": (x["counties"] or [None])[0],
@@ -226,9 +229,11 @@ def build(pdf: bytes, fetched: str, previous: list[dict], source_updated: str | 
             raw["returned_after"] = oraw.get("returned_after") or prev[periods[-1]]["raw"].get("_unlisted_since")
             raw["start_basis"] = ("DEQ's posting of " + x["date"] + " listed again after it had left the listing: this "
                                   "period starts at the first read that showed it again (DEQ gives no date for it)")
-        pt = lake_point(x["lake"], x["counties"])
         if pt:
             raw["marker_point"] = pt
+        if any(zones.north_dakota_zone_uncertain(c, *((pt["lat"], pt["lon"]) if pt else (None, None)))
+               for c in x["counties"]):
+            raw["time_zone_uncertain"] = True
         out[srid] = event(
             source_id=SOURCE_ID, source_record_id=srid, event_type="hab_advisory", status="advisory_active",
             waterbody_text=x["lake"], started_at=start, time_precision="poll" if "T" in start else "day",
