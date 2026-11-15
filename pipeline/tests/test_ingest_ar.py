@@ -310,11 +310,21 @@ def test_hab_coordinates_are_rounded_before_any_save_key_or_record(monkeypatch, 
 def test_a_corrected_posting_day_is_one_advisory(monkeypatch, tmp_path):
     doc = json.loads((FIX / "ar_deq_hab_advisories.json").read_text())
     _, out = habs(monkeypatch, tmp_path, doc)
-    doc["advisories"][1]["date"] = "August 1, 2026"           # DEQ corrects Lake Exemplar's posting day
+    doc["advisories"][1]["date"] = "July 31, 2026"            # DEQ corrects Lake Exemplar's posting day (a typo)
     recs, _ = habs(monkeypatch, tmp_path, doc, prev_out=out)
     ex = [r for r in recs.values() if r["waterbody_text"] == "Lake Exemplar"]
     assert len(ex) == 2 and sum(1 for r in ex if not r.get("duplicate_of")) == 1
-    assert [r for r in ex if not r.get("duplicate_of")][0]["started_at"].startswith("2026-08-01")
+    assert [r for r in ex if not r.get("duplicate_of")][0]["started_at"].startswith("2026-07-31")
+    # a day further off than a typo is not evidence of a correction: both are kept, and the row that left the file
+    # ends at the read that no longer listed it (verification 2026-11-15 P2-1: err on the side of showing it)
+    doc["advisories"][1]["date"] = "August 1, 2026"
+    t2 = tmp_path / "b"
+    t2.mkdir()
+    _, out2 = habs(monkeypatch, t2, json.loads((FIX / "ar_deq_hab_advisories.json").read_text()))
+    recs, _ = habs(monkeypatch, t2, doc, prev_out=out2)
+    ex = [r for r in recs.values() if r["waterbody_text"] == "Lake Exemplar"]
+    assert len(ex) == 2 and not any(r.get("duplicate_of") for r in ex)
+    assert [r for r in ex if r["started_at"].startswith("2026-07-30")][0]["raw"].get("_unlisted_since")
 
 
 # ---------------------------------------------------------------- the Department of Health's closed swim beaches
@@ -557,7 +567,7 @@ def test_the_unique_supersede_options_are_set_only_by_arkansas():
     """history.supersede_unique and supersede_max_days are opt-in in the shared runner; Tennessee's and Maryland's
     supersede keys keep their behaviour because no other source sets them."""
     hits = {p.name for p in (R.ROOT / "data" / "sources").glob("*.yaml")
-            if re.search(r"supersede_(unique|max_days)", p.read_text())}
+            if re.search(r"supersede_(unique|max_days|typo)", p.read_text())}
     assert hits == {"ar-deq-hab-advisories.yaml"}
 
 
@@ -770,3 +780,40 @@ def test_a_qualified_arkansas_name_never_lands_on_its_shorter_namesake(tmp_path,
 def test_a_hyphenated_qualifier_stays_with_the_name():
     assert T.water_names("overflow into Little-Sample Creek") == (["Little-Sample Creek"], [])
     assert T.water_names("overflow into upper-Little Sample Creek") == (["Upper-Little Sample Creek"], [])
+
+
+def test_only_an_evidenced_correction_links_two_bloom_rows(monkeypatch, tmp_path):
+    """A vanished row is DEQ's correction of a new row only when it left at this very read, every other field DEQ
+    gives is the same, and the one changed field is a typo's distance away (a day, one character; a name, two):
+    a different lake in the same town on the same day, a later episode, and two vanished rows claiming one successor
+    through different fields stay separate records (verification P2-1)."""
+    def run(sub, first, second):
+        d = tmp_path / sub
+        d.mkdir()
+        _, out = habs(monkeypatch, d, _hab_doc(*first))
+        recs, _ = habs(monkeypatch, d, _hab_doc(*second), prev_out=out)
+        return recs
+    ex = ("Lake Exemplar", "Sample County", "Sampletown, AR", "July 30, 2026", "")
+    # a different lake, same county, town and posting day
+    recs = run("a", [ex], [("Lake Specimen", "Sample County", "Sampletown, AR", "July 30, 2026", "")])
+    assert len(recs) == 2 and not any(r.get("duplicate_of") for r in recs.values())
+    # a later episode of the same lake, seven days on
+    recs = run("b", [ex], [("Lake Exemplar", "Sample County", "Sampletown, AR", "August 6, 2026", "")])
+    assert len(recs) == 2 and not any(r.get("duplicate_of") for r in recs.values())
+    # two vanished rows, one by a changed day and one by a changed spelling, both pointing at one successor
+    recs = run("c", [("Lake Specimen", "Sample County", "Sampletown, AR", "July 30, 2026", ""),
+                     ("Lake Specimin", "Sample County", "Sampletown, AR", "July 31, 2026", "")],
+               [("Lake Specimen", "Sample County", "Sampletown, AR", "July 31, 2026", "")])
+    assert len(recs) == 3 and not any(r.get("duplicate_of") for r in recs.values())
+    # a row that left at an earlier read is never linked later
+    d = tmp_path / "e"
+    d.mkdir()
+    _, out = habs(monkeypatch, d, _hab_doc(ex))
+    habs(monkeypatch, d, _hab_doc(("Lake Other", "Other County", "Othertown, AR", "July 1, 2026", "")), prev_out=out)
+    recs, _ = habs(monkeypatch, d, _hab_doc(("Lake Other", "Other County", "Othertown, AR", "July 1, 2026", ""),
+                                            ("Lake Exemplar", "Sample County", "Sampletown, AR", "July 31, 2026", "")),
+                   prev_out=out)
+    assert not any(r.get("duplicate_of") for r in recs.values())
+    # control: a one-character day fix, everything else the same, is one advisory
+    recs = run("f", [ex], [("Lake Exemplar", "Sample County", "Sampletown, AR", "July 31, 2026", "")])
+    assert sum(1 for r in recs.values() if r.get("duplicate_of")) == 1

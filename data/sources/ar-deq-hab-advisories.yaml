@@ -51,16 +51,12 @@ fetch:
     keep_missing: true
     revisions: true
     confirm_while_listed: true
-    # a row DEQ corrects is matched to its replacement only when the match is unique and the replacement is new in
-    # this fetch (supersede_unique) and posted within 14 days of the old row (supersede_max_days): a corrected posting
-    # day by the water, county and lift day; a corrected spelling by the posting day, county, nearest town and lift
-    # day. Two lakes sharing a day and county, a later episode, or more than one candidate are kept as separate
-    # advisories.
-    supersede_unique: true
-    supersede_max_days: 14
-    supersede:
-      - ["{waterbody|slug|default:-}", "{county|slug|default:-}", "{lifted|slug|default:-}"]
-      - ["{@started_at|day}", "{county|slug|default:-}", "{area|slug|default:-}", "{lifted|slug|default:-}"]
+    # a row DEQ corrects is linked to its replacement only on evidence (supersede_typo): the old row left at the
+    # very read the new one appeared, every field DEQ gives is the same but one, and that one is a typo's distance
+    # away (the posting or lift day: one character; the water or town: two). A different lake in the same town on
+    # the same day, a later episode, or a link that is not one-to-one keeps both rows as separate advisories; a row
+    # that leaves the file ends at that read (confirm_while_listed).
+    supersede_typo: {waterbody: 2, county: 0, area: 2, date: 1, lifted: 1}
   meta:
     credit: "Arkansas Division of Environmental Quality, Harmful Algal Blooms: current advisories and archive"
     license: "No licence or terms stated on the page."

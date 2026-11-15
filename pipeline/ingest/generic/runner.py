@@ -364,6 +364,43 @@ def _supersede_keys(rec: dict, keys: list[str]) -> str | None:
     return None if any(p is None for p in parts) else "\x1f".join(parts)
 
 
+def _edits(a: str, b: str) -> int:
+    """Levenshtein distance between two short texts."""
+    row = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        nxt = [i]
+        for j, cb in enumerate(b, 1):
+            nxt.append(min(row[j] + 1, nxt[j - 1] + 1, row[j - 1] + (ca != cb)))
+        row = nxt
+    return row[-1]
+
+
+def _typo_links(records: list[dict], prev: dict, now: set, h: dict, mkey: str) -> dict:
+    """history.supersede_typo (opt-in; Arkansas, verification 2026-11-15 P2-1): {source field: most edits}. A record
+    that left the source at this read (listed at the last one) is the corrected row of a record new at this read only
+    on evidence: every one of these fields is the same but one, and that one differs by at most its edits (a typo:
+    "July 30" for "July 31", "Specimin" for "Specimen"). A vanished record with more than one such successor, or a
+    successor claimed by more than one vanished record, links nothing: both are kept as separate records.
+    {vanished event_id: successor record}."""
+    spec = {k: int(v) for k, v in (h.get("supersede_typo") or {}).items()}
+    def row(r):
+        rw = (r.get("raw") or {}).get("row") or {}
+        return {k: F.clean(rw.get(k)) or "" for k in spec}
+    new = [r for r in records if r["event_id"] not in prev]
+    cands: dict[str, list[dict]] = {}
+    for eid, p in prev.items():
+        if eid in now or (p.get("raw") or {}).get(mkey):        # left at an earlier read: never linked
+            continue
+        a = row(p)
+        for r in new:
+            b = row(r)
+            diff = [k for k in spec if a[k] != b[k]]
+            if len(diff) == 1 and _edits(a[diff[0]].lower(), b[diff[0]].lower()) <= spec[diff[0]]:
+                cands.setdefault(eid, []).append(r)
+    claimed = Counter(c[0]["event_id"] for c in cands.values() if len(c) == 1)
+    return {eid: c[0] for eid, c in cands.items() if len(c) == 1 and claimed[c[0]["event_id"]] == 1}
+
+
 def carry_history(records: list[dict], prev_records: list[dict], block: dict, fetched_at: str) -> Counter:
     """First sighting, revisions of the safe fields and tracked values across runs; records that left the source
     are kept with the missing mark (history.missing_key, raw._missing_from_source_since by default): the events
@@ -434,6 +471,7 @@ def carry_history(records: list[dict], prev_records: list[dict], block: dict, fe
                 left = Counter(_supersede_keys(p, keys) for p in gone)
                 idx = {k: v for k, v in idx.items() if v is not None and left.get(k) == 1}
             index.append((keys, idx))
+        typo = _typo_links(records, prev, now, h, mkey) if h.get("supersede_typo") else None
         for eid, p in prev.items():
             if eid in now:
                 continue
@@ -442,11 +480,13 @@ def carry_history(records: list[dict], prev_records: list[dict], block: dict, fe
             if listed:   # the first fetch that no longer found it: the status build ends the advisory there
                 p["raw"]["_unlisted_since"] = p["raw"].get("_unlisted_since") or p["raw"][mkey]
             succ = None
-            for keys, idx in index:
+            for keys, idx in ([] if typo is not None else index):
                 k = _supersede_keys(p, keys)
                 if k is not None and k in idx:
                     succ = idx[k]
                     break
+            if typo is not None:
+                succ = typo.get(eid)
             if succ is not None and h.get("supersede_max_days") is not None:
                 # history.supersede_max_days (opt-in): a corrected start lies within this many days of the old one;
                 # a later posting is a new episode, never a correction
