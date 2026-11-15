@@ -123,10 +123,13 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             method=None, legal_basis=f"permit {permit} (EPA Region 2): " + Q_EPA, basis_kind="permit",
             monitored=False, unmonitored_reason="feed_ingested", feed_source_id=FEED, publishes="notices",
             noun="Report to EPA", sources=["pr-epa-sobe"],
-            note=(f"{name} reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five "
+            note=(("The holder of " + name.replace("Permit ", "permit ", 1) if op.get("permit_only") else name)
+                  + " reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five "
                   "days; the electronic report is published in EPA's overflow tables, which the overflow module reads "
                   f"daily ({len(op.get('npdes_permits') or [])} permit(s) in this row). No public notice of its own is "
-                  "required by Puerto Rico law."))))
+                  "required by Puerto Rico law."
+                  + (" The body that holds the permit is not established (a permit-only row)." if op.get("permit_only")
+                     else "")))))
         if oid == "pr-prasa":
             rows.append(finish(base(
                 id="pr-prasa-cso-pages", operator_id=oid, name=name, permit="PR0021555", channel_kind="operator_page",
