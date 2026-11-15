@@ -352,7 +352,11 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
         if done and stopped and not late:
             # the spill ended on its stop day and the signs were down by the update's day: the Council's window runs
             # from the end of the stop day to the end of that update's day (red.event), the site's caution from the stop
-            window_h = max(0.0, (day_end(date.fromisoformat(done["date"])) - day_end(stopped)).total_seconds() / 3600)
+            # elapsed hours between the two local day-ends, both taken to UTC first (a 23- or 25-hour day across a
+            # daylight-saving change counts as it ran; verification pass 2026-11-15 P2-6)
+            utc = ZoneInfo("UTC")
+            window_h = max(0.0, (day_end(date.fromisoformat(done["date"])).astimezone(utc)
+                                 - day_end(stopped).astimezone(utc)).total_seconds() / 3600)
             window_basis = (f"the Council's \"{quote}\" signs stood from its notice of {up[0]} until its update of "
                             f"{done['date']} said they had been removed (to the end of that day)")
             raw["ended_at_precision"] = "day"
