@@ -535,14 +535,14 @@ def test_leavenworth_old_ids_and_addresses_migrate_to_one_record_per_page_throug
         doc = json.loads((tmp_path / f"{L.SOURCE_ID}.json").read_text())
         assert doc["count"] == 1
         r = doc["records"][0]
-        assert r["source_record_id"] == "sanitary-sewer-overflow-reported-may-27-2020-example-court"
+        assert r["source_record_id"] == "sanitary-sewer-overflow-reported-may-27-2020-b1200-example-court"
         assert r["raw"]["first_seen_at"] == "2026-11-01T00:00:00Z" and "page_text" not in r["raw"]
         blob = json.dumps(doc) + "".join(p.read_text() for p in (tmp_path / "raw").rglob("*.json"))
         for p in PERSONAL + ["1234"]:
             assert p not in blob
     assert L.record_id(L.record_id(path)) == L.record_id(path)
     assert L.record_id("/x/sanitary-sewer-overflow-1200-block-example-reported-thursday-oct-23-2025") == \
-        "sanitary-sewer-overflow-block-example-reported-thursday-oct-23-2025"
+        "sanitary-sewer-overflow-b1200-block-example-reported-thursday-oct-23-2025"
 
 
 def test_leavenworth_cites_the_year_page_not_the_address_page():
@@ -743,9 +743,9 @@ def test_leavenworth_year_shaped_house_numbers_and_old_saves_keep_nothing_person
     """Verification P1-4: a year-shaped house number leaves the identifier; an earlier save whose page is not read again
     loses names, phones and house numbers from its title, advice and place at the next read."""
     assert L.record_id("/x/sanitary-sewer-overflow-at-2026-example-lane-reported-may-27-2026") == \
-        "sanitary-sewer-overflow-at-example-lane-reported-may-27-2026"
+        "sanitary-sewer-overflow-at-b2000-example-lane-reported-may-27-2026"
     assert L.record_id("/x/sanitary-sewer-overflow-reported-april-27-2026-5678-sample-st") == \
-        "sanitary-sewer-overflow-reported-april-27-2026-sample-st"
+        "sanitary-sewer-overflow-reported-april-27-2026-b5600-sample-st"
     old = L.record("/x/sanitary-sewer-overflow-reported-may-27-2020-example-court",
                    _page("Sanitary Sewer Overflow Reported on May 27, 2020 at Example Court", "At 3:50 p.m. May 27, 2020."),
                    AT)
@@ -769,6 +769,9 @@ def test_leavenworth_distinct_same_day_pages_on_one_street_stay_two_records():
                "At 7:15 p.m. May 27, 2026, staff were notified. Posted May 27, 2026 at 8:30 PM")
     legacy = L.record(pa, ha, "2026-06-01T00:00:00Z")                  # the earlier save under the shared identifier
     legacy["raw"]["first_seen_at"] = "2026-06-01T00:00:00Z"
+    legacy["raw"].pop("id_version")
+    legacy["source_record_id"] = "sanitary-sewer-overflow-reported-may-27-2026-example-court"
+    legacy["event_id"] = f"{L.SOURCE_ID}:{legacy['source_record_id']}"
     recs, _ = L.run({pa: ha, pb: hb}, [legacy], AT)
     recs2, _ = L.run({pa: ha, pb: hb}, recs, "2026-11-15T00:00:00Z")
     recs3, _ = L.run({pa: ha, pb: hb}, recs2, "2026-11-16T00:00:00Z")
@@ -852,3 +855,76 @@ def test_a_facility_type_never_makes_a_plant_name_a_city():
            and not re.search(r"\bmunicipal\b", r["name"], re.I)            # the municipality's own plant
            and not any(p in ko.RESEARCH_NAME or p in mo.RESEARCH_NAME for p in r["npdes_permits"])]
     assert bad == []
+
+
+def test_leavenworth_a_title_ending_in_an_address_and_a_name_reaches_no_save_through_main(tmp_path, monkeypatch):
+    """Verification 2 P1-3: a title ending "at 1234 Example Court by Jane Example": the place, the title, the record id,
+    the events file and the raw save keep no house number and no name; a failed request saves no page address."""
+    import common
+    import requests
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    stem = "sanitary-sewer-overflow-reported-may-27-2026-1234-example-court-by-jane-example"
+    h = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 1234 Example Court by Jane Example",
+              "At 3:50 p.m. May 27, 2026, staff were notified of sewage in Five-Mile Creek.")
+    d = tmp_path / "pages"
+    d.mkdir()
+    (d / f"{stem}.html").write_text(h)
+    assert L.main(["--dir", str(d)]) == 0
+    doc = json.loads((tmp_path / f"{L.SOURCE_ID}.json").read_text())
+    r = doc["records"][0]
+    assert r["outfall_name"] == "Example Court" and "Jane" not in r["raw"]["title"]
+    assert r["source_record_id"] == "sanitary-sewer-overflow-reported-may-27-2026-b1200-example-court"
+    saves = [p.read_text() for p in (tmp_path / "raw").rglob("*") if p.is_file()]
+    assert saves
+    for blob in [json.dumps(doc)] + saves:
+        for p in PERSONAL + ["1234", "Jane", "jane"]:
+            assert p not in blob
+    # a failed request: the message names the page's address; the saved health carries none of it
+    url = L.BASE + "/publicworks/page/" + stem
+
+    def boom(u, **k):
+        raise requests.HTTPError(f"404 Client Error: Not Found for url: {url}")
+    monkeypatch.setattr(L.requests, "get", boom)
+    assert L.main([]) == 1
+    failed = (tmp_path / f"{L.SOURCE_ID}.json").read_text()
+    assert json.loads(failed)["ok"] is False and "HTTPError" in json.loads(failed)["error"]
+    for p in ["1234", "Jane", "jane", stem]:
+        assert p not in failed
+    assert len(json.loads(failed)["records"]) == 1
+    # an earlier save holding the name in its place and title loses it at the next read
+    old = json.loads(json.dumps(r))
+    old["outfall_name"] = "Example Court by Jane Example"
+    old["raw"]["title"] = "Sanitary Sewer Overflow Reported on May 27, 2026 at Example Court by Jane Example"
+    again, _ = L.run({}, [old], AT)
+    assert "Jane" not in json.dumps(again) and again[0]["outfall_name"] == "Example Court"
+
+
+def test_leavenworth_ids_do_not_depend_on_which_pages_are_read_together():
+    """Verification 2 P2: two pages of one street and one day (house numbers in different hundred blocks): read
+    together, one alone, on separate runs, in either order, or corrected, they stay two records with the same ids."""
+    pa = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2026-1234-example-court"
+    pb = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2026-5678-example-court"
+    ha = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 1234 Example Court",
+               "At 3:50 p.m. May 27, 2026, staff were notified.")
+    hb = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 5678 Example Court",
+               "At 7:15 p.m. May 27, 2026, staff were notified.")
+    ids = lambda rs: sorted(r["event_id"] for r in rs)
+    both, _ = L.run({pa: ha, pb: hb}, [], AT)
+    assert len(both) == 2
+    one, _ = L.run({pa: ha}, both, "2026-11-15T00:00:00Z")                 # one of the two read again
+    assert ids(one) == ids(both)
+    sep, _ = L.run({pa: ha}, [], AT)                                         # on separate runs
+    sep, _ = L.run({pb: hb}, sep, "2026-11-15T00:00:00Z")
+    assert ids(sep) == ids(both)
+    rev, _ = L.run(dict(reversed(list({pa: ha, pb: hb}.items()))), [], AT)  # the other order
+    assert ids(rev) == ids(both)
+    alone_b, _ = L.run({pb: hb}, [], AT)
+    assert alone_b[0]["event_id"] in ids(both)
+    fixed = ha.replace("staff were notified.", "staff were notified. The overflow stopped at 5:00 p.m.")
+    cor, _ = L.run({pa: fixed}, both, "2026-11-16T00:00:00Z")               # a correction to one page
+    assert ids(cor) == ids(both)
+    by = {r["started_at"]: r for r in cor}
+    assert by["2026-05-27T15:50:00-05:00"]["ended_at"] == "2026-05-27T17:00:00-05:00"
+    assert by["2026-05-27T19:15:00-05:00"]["ended_at"] is None
+    assert "1234" not in json.dumps(cor) and "5678" not in json.dumps(cor)
