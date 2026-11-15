@@ -570,7 +570,9 @@ def test_a_multipart_bloom_area_is_placed_on_every_water_it_covers_and_no_other(
     waters = _two_lakes()
     out = S.Resolver(waters, [], placement_rules={}).resolve(rec)
     assert out["water_slugs"] == ["example-lake-a-wv", "example-lake-b-wv"]
-    assert out["extent_parts"] == {"parts": 2, "waters_added": ["example-lake-b-wv"]}
+    assert {k: v for k, v in out["extent_parts"].items() if k != "points"} == \
+        {"parts": 2, "waters_added": ["example-lake-b-wv"]}
+    assert list(out["extent_parts"]["points"]) == ["example-lake-b-wv"]
     assert "example-pond-c-wv" not in out["water_slugs"]
     # a large second lake keeps a marker only (colours_whole_water), as for every state
     assert not S.colours_whole_water({**waters["example-lake-b-wv"], "area_km2": 10_000})
@@ -586,3 +588,177 @@ def test_a_multipart_bloom_area_is_placed_on_every_water_it_covers_and_no_other(
         S._GEOM_CACHE.clear()
         r1 = S.Resolver(_two_lakes(), [], placement_rules={})
         assert r1.resolve(other) == r1._resolve(other)
+
+
+# --- round 3 (Astra verify2 P1-1, P1-2) ---
+
+def _hab_run(tmp_path, monkeypatch, answers, at, saved):
+    import common as C
+    monkeypatch.setattr(H, "save_raw", lambda sid, data, ext: saved.append(data.decode()))
+    monkeypatch.setattr(H, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(C, "EVENTS_DIR", tmp_path)
+    if isinstance(answers, Exception):
+        def boom():
+            raise answers
+        monkeypatch.setattr(H, "fetch", boom)
+    else:
+        monkeypatch.setattr(H, "fetch", lambda: answers)
+    rc = H.main(["--at", at])
+    return rc, [(tmp_path / "state.json").read_text() if (tmp_path / "state.json").exists() else "",
+                (tmp_path / f"{H.SOURCE_ID}.json").read_text()]
+
+
+def test_bloom_text_with_suffixed_numbers_contact_and_honorific_forms_never_reaches_a_write(tmp_path, monkeypatch):
+    """Astra verify2 P1-1: '123-A Example Lane', '12 1/2 example st', 'Contact Example Person', 'Dr. Example Person',
+    'dr. example person', 'please call Example Person' through the raw save, the state and the events."""
+    texts = {7: "Avoid contact near 123-A Example Lane. Do not swim.",
+             8: "Avoid the cove at 12 1/2 example st. Contact Example Person",
+             9: "Avoid contact with the water. Dr. Example Person sampled the bloom.",
+             10: "Keep pets out. Questions to dr. example person; please call Example Person."}
+    a = _answers(list(texts))
+    for f in a["1"]["features"]:
+        f["attributes"]["Advisory"] = texts[f["attributes"]["OBJECTID"]]
+    saved = []
+    rc, blobs = _hab_run(tmp_path, monkeypatch, a, "2026-07-01T12:00:00Z", saved)
+    assert rc == 0 and len(saved) == 1
+    for blob in saved + blobs:
+        for bad in ("123-A", "Example Lane", "12 1/2", "example st", "Example Person", "example person"):
+            assert bad not in blob, (bad, blob[:300])
+    recs = {r["source_record_id"]: r for r in json.loads(blobs[-1])["records"]}
+    assert recs["1-7"]["advice_text"].endswith("Do not swim.")
+    assert recs["1-9"]["advice_text"].endswith("Avoid contact with the water.")
+    assert recs["1-10"]["advice_text"].endswith("Keep pets out.")
+
+
+def test_bloom_text_kept_from_an_earlier_run_is_scrubbed_before_any_write(tmp_path, monkeypatch):
+    """Astra verify2 P1-2: an active and a lifted episode saved before the scrub, with personal text in the state and
+    in the events file; then an empty map, then a failed fetch. Neither the state nor the events keep the text."""
+    leak = "Avoid contact near 123 example lane. Reporter: Example Person."
+    state = {"items": {"1-7": {"first_seen": "2026-06-01T00:00:00Z", "last_seen": "2026-06-30T00:00:00Z",
+                               "kind": "point", "advisory": leak, "lat": 39.123, "lon": -80.123, "extent": None},
+                       "1-8": {"first_seen": "2026-05-01T00:00:00Z", "last_seen": "2026-05-30T00:00:00Z",
+                               "left_at": "2026-06-01T00:00:00Z", "kind": "point", "advisory": leak,
+                               "lat": 39.2, "lon": -80.2, "extent": None}},
+             "last_rows": {"1-7": {"kind": "point", "advisory": leak}}}
+    (tmp_path / "state.json").write_text(json.dumps(state))
+    old = H.records(state)
+    (tmp_path / f"{H.SOURCE_ID}.json").write_text(json.dumps({"source_id": H.SOURCE_ID, "ok": True, "records": old,
+                                                              "count": len(old), "meta": {}}))
+    import requests
+    saved = []
+    rc, failed = _hab_run(tmp_path, monkeypatch, requests.ConnectionError("down"), "2026-07-01T12:00:00Z", saved)
+    assert rc == 1 and json.loads(failed[-1])["ok"] is False and json.loads(failed[-1])["count"] == 2
+    rc, empty = _hab_run(tmp_path, monkeypatch, _answers([]), "2026-07-02T12:00:00Z", saved)
+    assert rc == 0
+    for blob in saved + failed + empty:
+        for bad in ("123 example", "example lane", "Example Person"):
+            assert bad not in blob, (bad, blob[:300])
+    recs = {r["source_record_id"]: r for r in json.loads(empty[-1])["records"]}
+    assert recs["1-7"]["status"] == "advisory_lifted" and H.WITHHELD in recs["1-7"]["advice_text"]
+    # scrubbing again leaves scrubbed text as it is; with no state, the retained events are scrubbed on a failure
+    for t in (leak, "Avoid contact near 123 Example Lane. Do not swim.", "Avoid contact with the water."):
+        once = H.scrub_advisory(t)
+        assert H.scrub_advisory(once) == once
+    (tmp_path / "state.json").unlink()
+    (tmp_path / f"{H.SOURCE_ID}.json").write_text(json.dumps({"source_id": H.SOURCE_ID, "ok": True, "records": old,
+                                                              "count": len(old), "meta": {}}))
+    rc, nostate = _hab_run(tmp_path, monkeypatch, requests.ConnectionError("down"), "2026-07-03T12:00:00Z", saved)
+    assert rc == 1 and json.loads(nostate[-1])["count"] == 2
+    assert "Example Person" not in nostate[-1] and "123 example" not in nostate[-1]
+
+
+# --- round 3 (Astra verify2 P2-1) ---
+
+def _wv_status(tmp_path, recs, waters, now):
+    import copy
+    from datetime import datetime
+    tmp_path.mkdir(exist_ok=True)
+    by_src = {}
+    for r in recs:
+        by_src.setdefault(r["source_id"], []).append(r)
+    for sid, rs in by_src.items():
+        (tmp_path / f"{sid}.json").write_text(json.dumps({"source_id": sid, "ok": True, "last_ok_at": now,
+                                                          "meta": {}, "records": rs}))
+    rules = copy.deepcopy(S.load_rules())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"WV"})
+    S._GEOM_CACHE.clear()
+    st, _ = S.build(now=datetime.fromisoformat(now.replace("Z", "+00:00")), write=False, events_dir=tmp_path,
+                    waters=waters, outfalls=[], registry={}, reaches={}, flows=({}, {}), rules=rules,
+                    placement_cache=False)
+    return st
+
+
+def test_each_part_of_a_multipart_bloom_has_its_marker_on_its_own_water_through_status_and_export(tmp_path):
+    """Astra verify2 P2-1: DEP's area over small lake A (filled) and large lake B (a marker only): B's marker is at
+    B's part, not at A's point; A is coloured, not marked; a multipart line over two rivers marks each river at its
+    own part and colours neither whole. A single-part advisory and any other source keep one marker at the record's
+    point, with the export's feature id the event id."""
+    from export import build as X
+    ring = lambda x0, y0, d: [[x0, y0], [x0, y0 + d], [x0 + d, y0 + d], [x0 + d, y0], [x0, y0]]
+    waters = _two_lakes(area_b=10_000)
+    waters["example-river-a-wv"] = {"name": "Example River A", "kind": "river", "state": "WV",
+                                    "geometry": {"type": "LineString", "coordinates": [[-80.60, 39.10], [-80.50, 39.10]]},
+                                    "bbox": [-80.60, 39.10, -80.50, 39.10]}
+    waters["example-river-b-wv"] = {"name": "Example River B", "kind": "river", "state": "WV",
+                                    "geometry": {"type": "LineString", "coordinates": [[-80.30, 39.20], [-80.20, 39.20]]},
+                                    "bbox": [-80.30, 39.20, -80.20, 39.20]}
+    at, now = "2026-07-01T00:00:00Z", "2026-07-01T06:00:00Z"
+    area = {"1": {"features": []}, "2": {"features": [
+        {"attributes": {"OBJECTID": 6, "Advisory": "Avoid contact.", "Date_Observed": None},
+         "geometry": {"paths": [[[-80.58, 39.10], [-80.56, 39.10]], [[-80.28, 39.20], [-80.27, 39.20]]]}}]},
+            "3": {"features": [
+        {"attributes": {"OBJECTID": 5, "Advisory": "Avoid contact.", "DateObserved": None},
+         "geometry": {"rings": [ring(-80.495, 39.005, 0.01), ring(-80.395, 39.005, 0.01)]}}]}}
+    recs = H.records(H.update({}, H.rows_of(area), at))
+    st = _wv_status(tmp_path / "ev", recs, waters, now)
+    by_event = {r["event_id"]: r for r in recs}
+    feats = X.advisory_point_features(st, by_event)
+    lake = next(r for r in recs if r["source_record_id"] == "3-5")
+    line = next(r for r in recs if r["source_record_id"] == "2-6")
+    pl = st["placements"][lake["event_id"]]
+    assert pl["water_slugs"] == ["example-lake-a-wv", "example-lake-b-wv"]
+    assert set(pl["extent_parts"]["points"]) == {"example-lake-b-wv"}
+    lake_feats = [f for f in feats if f["properties"]["event_id"] == lake["event_id"]]
+    assert [f["properties"]["water_slugs"] for f in lake_feats] == [["example-lake-b-wv"]]
+    lon, lat = lake_feats[0]["geometry"]["coordinates"]
+    assert -80.395 < lon < -80.385 and 39.005 < lat < 39.015, (lon, lat)          # on lake B, not on lake A
+    assert lake_feats[0]["id"] != lake["event_id"] and lake_feats[0]["properties"]["status"] != "grey"
+    assert st["waters"]["example-lake-a-wv"]["status"] != "grey"                     # lake A filled
+    assert st["waters"]["example-lake-b-wv"].get("fill") is not True or \
+        st["waters"]["example-lake-b-wv"]["status"] == "grey"                          # lake B: its marker only
+    line_feats = {tuple(f["properties"]["water_slugs"]): f for f in feats
+                  if f["properties"]["event_id"] == line["event_id"]}
+    assert set(line_feats) == {("example-river-a-wv",), ("example-river-b-wv",)}
+    ra = line_feats[("example-river-a-wv",)]["geometry"]["coordinates"]
+    rb = line_feats[("example-river-b-wv",)]["geometry"]["coordinates"]
+    assert -80.58 <= ra[0] <= -80.56 and abs(ra[1] - 39.10) < 1e-3
+    assert -80.28 <= rb[0] <= -80.27 and abs(rb[1] - 39.20) < 1e-3
+    for slug in ("example-river-a-wv", "example-river-b-wv"):
+        assert st["waters"][slug]["status"] == "grey"                                   # no whole river coloured
+    # a single-part advisory, and the same multipart advisory under any other source: one marker at its own point
+    single = H.records(H.update({}, H.rows_of({"1": {"features": []}, "2": {"features": []}, "3": {"features": [
+        {"attributes": {"OBJECTID": 9, "Advisory": "Avoid contact.", "DateObserved": None},
+         "geometry": {"rings": [ring(-80.395, 39.005, 0.01)]}}]}}), at))
+    other = [{**r, "source_id": "ky-dow-hab-viewer", "event_id": "ky-dow-hab-viewer:" + r["source_record_id"]}
+             for r in recs]
+    for batch, sub in ((single, "s"), (other, "o")):
+        st2 = _wv_status(tmp_path / sub, batch, waters, now)
+        f2 = X.advisory_point_features(st2, {r["event_id"]: r for r in batch})
+        assert all("part_point" not in p for p in st2["advisory_points"])
+        assert len(f2) == len({f["properties"]["event_id"] for f in f2})
+        for f in f2:
+            e = next(r for r in batch if r["event_id"] == f["id"])
+            assert f["geometry"]["coordinates"] == [round(e["lon"], 5), round(e["lat"], 5)]
+
+
+def test_the_wv_rules_row_states_the_rain_caution_the_build_applies():
+    """Round 3 item 4: the caution runs only at an open combined sewer outfall placed on its water (rain_likely.targets
+    needs a water_slug); West Virginia's layer has open outlets with no water yet, so 'every open outlet' is not said."""
+    from build import rain_likely as RL
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    wv = rules["red"]["by_state"]["WV"]["basis"]
+    assert "rain caution at every open" not in wv
+    assert "applies its rain caution at each open combined sewer outfall with a location once the outfall is placed on its water" in wv
+    d = json.loads((ROOT / "data" / "outfalls-wv.json").read_text())
+    rows = d["outfalls"] if isinstance(d, dict) else d
+    assert any(RL.cso_open(r) and r.get("lat") is not None and not r.get("water_slug") for r in rows)

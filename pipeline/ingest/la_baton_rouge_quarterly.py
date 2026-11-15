@@ -129,6 +129,9 @@ def receiving_water(text: str) -> tuple[str | None, str | None]:
         return None, None
     if wv_la_privacy.has_address(t) or wv_la_privacy.names_a_person(t) or common.scrub_text(t) != t:
         return None, "the receiving-water cell held an address or personal text and is withheld"
+    if t.lower() not in NO_WATER and not wv_la_privacy.is_water_name(t):
+        # a cell that may be personal and cannot be told apart from a water's name ('Example Person') is withheld
+        return None, "the receiving-water cell is not a water's name and may be personal text, and is withheld"
     return t, None
 
 
@@ -391,10 +394,12 @@ def main(argv=None) -> int:
             r.raise_for_status()
             links = report_links(r.text)
         except requests.RequestException as e:
-            write_events(SOURCE_ID, [], ok=False, error=f"index: {e}")
+            # the index not read: nothing new is fetched, but the state and the retained records are written again
+            # from the state after its rows are checked again (migrate), so no earlier text bypasses the check
             print(f"{SOURCE_ID}: index not read ({e})", file=sys.stderr)
-            return 1
-        for n, url in due(state, links, at, "--refresh" in argv):
+            errors.append(f"index: {e}")
+            links = None
+        for n, url in (due(state, links, at, "--refresh" in argv) if links is not None else []):
             try:
                 pr = requests.get(url, headers=HEADERS, timeout=300)
                 pr.raise_for_status()
@@ -407,8 +412,9 @@ def main(argv=None) -> int:
             except Exception as e:                    # a report that cannot be read is named; the others go on
                 errors.append(f"report {n}: {type(e).__name__}: {e}")
                 note_failure(state, n, url, f"{type(e).__name__}: {e}", at)
-        state["index_read_at"] = at
-        state["index_reports"] = {str(k): v for k, v in sorted(links.items())}
+        if links is not None:
+            state["index_read_at"] = at
+            state["index_reports"] = {str(k): v for k, v in sorted(links.items())}
     migrate(state)
     write_json(STATE_PATH, state)
     recs = records(state)
