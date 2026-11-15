@@ -159,3 +159,82 @@ def test_other_states_keep_their_reading_of_the_same_text():
     imp = [{"sewer_overflow_bypass_impact_code": "OTH", "sewer_overflow_bypass_impact_other_text":
             "El derrame no afectó la quebrada"}]
     assert E.reached_water(ev, ["SSO"], [], imp, "IL") == E.reached_water(ev, ["SSO"], [], imp, "NE")
+
+
+# ----------------------------------------------------------------- P1-4: personal text never reaches a save
+
+SENT2 = ("Robin Ejemplo", "787-555-0142", "123-A", "45 1/2", "18.4123456", "-66.0654321")
+
+
+def test_a_matched_beachs_municipality_text_never_reaches_the_note(tmp_path, monkeypatch):
+    p = post(1, "2026-11-06T12:00:00", [("RW-31", "Tropical Beach", "Llame a Robin Ejemplo 787-555-0142")])
+    n = P.parse_notice(p)
+    assert n["listed"][0]["station"] == "RW-31"
+    blob = json.dumps([n, P.sanitize_notice(n)], ensure_ascii=False)
+    assert "Robin" not in blob and "555-0142" not in blob
+    # a note saved before this fix is rebuilt from the row's safe fields when carried
+    old = json.loads(json.dumps(n))
+    old["listed"][0]["note"] = "listed in Llame a Robin Ejemplo 787-555-0142; DRNA's station table has RW-31 in Naguabo"
+    clean = json.dumps(P.sanitize_notice(old), ensure_ascii=False)
+    assert "Robin" not in clean and "555-0142" not in clean and "RW-31" in clean
+    recs, _ = recs_of([p])
+    assert "Robin" not in json.dumps(recs, ensure_ascii=False)
+
+
+def _echo(tmp_path, desc=None, water=None, key=None):
+    import copy
+    from tests.test_ingest_pr import _fixture
+    t = copy.deepcopy(_fixture())
+    k = key or t["events"][0]["sewer_overflow_bypass_event_key"]
+    for e in t["events"]:
+        if e["sewer_overflow_bypass_event_key"] == k:
+            e["latitude_measure"], e["longitude_measure"] = "18.4123456", "-66.0654321"
+            if desc is not None:
+                e["sewer_overflow_bypass_description_text"] = desc
+    if water is not None:
+        t["waters"] = [w for w in t["waters"] if w["sewer_overflow_bypass_event_key"] != k] + [
+            {"sewer_overflow_bypass_event_key": k, "name_receiving_water": water}]
+    return t, k
+
+
+def _saved_zip_text(tmp_path, t):
+    import io
+    import zipfile
+    from tests.test_ingest_ne import _zip
+    zf = zipfile.ZipFile(io.BytesIO(E.sanitize_zip(_zip(tmp_path, t).read_bytes())))
+    return "".join(zf.read(n).decode("utf-8-sig") for n in zf.namelist())
+
+
+@pytest.mark.parametrize("desc", ["EA EJEMPLO frente al 123-A Calle Sol", "EA EJEMPLO en 45 1/2 Calle Luna",
+                                  "EA EJEMPLO, contacto Robin Ejemplo", "Robin Ejemplo reportó el desborde",
+                                  "Contact Robin Ejemplo at the station", "EA EJEMPLO: punto 18.4123456, -66.0654321"])
+def test_pr_description_forms_are_scrubbed_before_the_zip_and_the_record(tmp_path, desc):
+    t, k = _echo(tmp_path, desc=desc)
+    kept, dropped, _ = E.build(t, {"extract_date": "2026-11-12", "last_modified": None, "now": "2026-11-14T00:00:00Z"})
+    for blob in (_saved_zip_text(tmp_path, t), json.dumps([kept, dropped], ensure_ascii=False)):
+        for x in SENT2:
+            assert x not in blob, (x, desc)
+    if "18.41" in desc:
+        assert "18.412" in E.pr_scrub_people(desc)
+
+
+def test_a_receiving_water_text_with_a_name_and_phone_is_scrubbed_everywhere(tmp_path):
+    t, k = _echo(tmp_path, water="QUEBRADA EJEMPLO, avisó Sr. Robin Ejemplo 787-555-0142")
+    kept, dropped, _ = E.build(t, {"extract_date": "2026-11-12", "last_modified": None, "now": "2026-11-14T00:00:00Z"})
+    rec = next(r for r in kept if r["raw"]["sewer_overflow_bypass_event_key"] == k)
+    assert rec["waterbody_text"] and "QUEBRADA EJEMPLO" in rec["waterbody_text"]
+    for blob in (_saved_zip_text(tmp_path, t), json.dumps([kept, dropped], ensure_ascii=False)):
+        assert "Robin" not in blob and "555-0142" not in blob
+
+
+@pytest.mark.parametrize("desc", ["Desborde en residencia privada, EA EJEMPLO", "Overflow at a private residence",
+                                  "Desborde frente a la casa de un vecino"])
+def test_a_point_described_as_a_private_home_is_removed_not_rounded(tmp_path, desc):
+    t, k = _echo(tmp_path, desc=desc)
+    kept, dropped, _ = E.build(t, {"extract_date": "2026-11-12", "last_modified": None, "now": "2026-11-14T00:00:00Z"})
+    rec = next((r for r in kept if r["raw"]["sewer_overflow_bypass_event_key"] == k), None)
+    blob = json.dumps([kept, dropped], ensure_ascii=False)
+    assert "18.412" not in blob and "-66.065" not in blob
+    if rec:
+        assert rec["lat"] is None and "private home" in rec["raw"]["point_note"]
+    assert "18.412" not in _saved_zip_text(tmp_path, t)

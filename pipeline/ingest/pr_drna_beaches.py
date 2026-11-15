@@ -297,7 +297,9 @@ def station_of(code: str, name: str, town: str | None = None) -> tuple[str | Non
     town = town if town is not None else ""
     if by_code and (by_name == by_code or not n):
         if town and not same_town(town, by_code):
-            return by_code, f"listed in {town.strip()}; DRNA's station table has {by_code} in {STATIONS[by_code][1]}"
+            # the municipality as a municipality of Puerto Rico or withheld, never the cell's text (Astra verify P1-4)
+            return by_code, (f"listed in {_safe_town(town)}; DRNA's station table has {by_code} in "
+                             f"{STATIONS[by_code][1]}")
         return by_code, None
     if by_name and not by_code:
         if town and same_town(town, by_name):
@@ -308,7 +310,7 @@ def station_of(code: str, name: str, town: str | None = None) -> tuple[str | Non
         cm = STATION.match(code or "")
         listed_code = f"RW-{int(cm.group(1))}" if cm else None
         if (listed_code, by_name) in CODE_CORRECTIONS and town and same_town(town, by_name):
-            return by_name, (f"listed as {code.strip()}; the beach's name ({name.strip()}) is that of "
+            return by_name, (f"listed as {_safe_code(code)}; the beach's name ({STATIONS[by_name][0]}) is that of "
                              f"{by_name} in DRNA's station table")
         return None, f"the number is {by_code}'s and the name {by_name}'s in DRNA's station table"
     if by_code:
@@ -442,9 +444,13 @@ def sanitize_notice(n: dict) -> dict:
     for x in out.get("listed") or []:
         st = x.get("station")
         ok = st in STATIONS and norm(x.get("name") or "") in STATION_NAMES[st] | {""}
-        rows.append({"station": st, "code": _safe_code(x.get("code") or ""),
-                     "name": (x.get("name") or "") if ok else STATIONS[st][0] if st in STATIONS else "",
-                     "municipio": _safe_town(x.get("municipio") or ""), "note": x.get("note") if ok else None})
+        row = {"station": st, "code": _safe_code(x.get("code") or ""),
+               "name": (x.get("name") or "") if ok else STATIONS[st][0] if st in STATIONS else "",
+               "municipio": _safe_town(x.get("municipio") or ""), "note": None}
+        if ok and x.get("note"):   # the note rebuilt from the row's safe fields, never carried as text (verify P1-4)
+            again = station_of(row["code"], row["name"], row["municipio"] if row["municipio"] != "[withheld]" else "")
+            row["note"] = again[1] if again[0] == st else None
+        rows.append(row)
     out["listed"] = [r for r in rows if r["station"] in STATIONS]
     out["unknown"] = [{"station": None, "code": _safe_code(x.get("code") or ""),
                        "name": _safe_unknown_name(x.get("name") or ""),
