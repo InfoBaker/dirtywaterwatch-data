@@ -35,7 +35,11 @@ Record rules (rules only: no model, no geocoding)
     come from a combined sewer outfall) with the basis stated, never left unknown. A clause that names both types
     ("A combined sewer overflow and a separate sewer overflow occurred on June 1") gives both records, each with the
     words that belong to it (type_spans): its own date where each has one, the shared one where they share it, its own
-    water, and a denial only for the type it denies ("... and no separate sewer overflow").
+    water, and a denial only for the type it denies ("... and no separate sewer overflow"); each type's own figure
+    ("A combined sewer overflow of 100 gallons and a separate sewer overflow occurred"), stated minutes and end, and
+    water are read from its own words and the shared predicate, never lost to the other type's figure or denial.
+    "Combined and separate sewer overflows" names both; a denial joined by "or" or "nor" denies both; "Both overflows
+    ended at ..." gives the end to every type the post reports.
   - Times, America/Chicago (Milwaukee; raw.time_zone): the post's own stamp ("08/06/26 09:00:am") is published_at.
     reported_at stays null (the post gives the letter's subject, not its receipt date). started_at: a stated start
     ("started at 5:55 pm on April 2, 2024"; "around 10:00 a.m. on 9-3-26"), precision minute, when the nearest cue before
@@ -43,7 +47,10 @@ Record rules (rules only: no model, no geocoding)
     that overflow ties to its occurrence ("A combined sewer overflow occurred on June 1, 2027"; "the wastewater spill on
     September 18"), precision day (occurrence_day). A date after an end, a report or a storm word is not a start: "ended
     at 2:00 pm on June 2" stays the end, "was reported on June 2" is kept as raw.reported_day (never reported_at, never
-    a start), and where no start is tied raw.start_basis says the post gives none. The dates the title or
+    a start), and where no start is tied raw.start_basis says the post gives none. A start verb is the overflow's
+    only when the overflow is its subject or object: "Heavy rain began on June 1 and led to a combined sewer
+    overflow", "Repairs began at 8:00 am on June 3" and "crews started cleanup" give no start, and a repair's or a
+    cleanup's day is not the storm's period either (_overflow_subject). The dates the title or
     the opening sentence give for the storm ("August 1st, 2026", "Aug 9-10, 2025", "8-20-18") are not the overflow's
     start: they are kept as raw.period_start / raw.period_end and raw.started_after (a lower bound), started_at stays
     null and the status engine counts from the post's publication (Astra re-review 2026-11-15 P1-2). A date with no
@@ -89,8 +96,12 @@ Privacy: only the candidate posts' list items (titles scrubbed) and each one's s
 evidence sentences (project(): a type, a volume, a date, a water; nothing else, no signature) are kept; people named
 in the text ("Director Pat Example", "said ...", "Pat Example reported", any run of capitalised words holding none of
 the source's own words: KNOWN) are cut (scrub_names), "the home of ..." becomes "a private residence", a link label
-that is not about the letter becomes "letter", a point in a line describing a private home is removed entirely and
-any other point in the text is rounded to three decimals; the article is cut at MMSD's standing advice block ("Text WATERDROP ...") or at a contact line ("Questions:",
+that is not about the letter becomes "letter"; in a run of capitalised words, two or more of none of the source's own
+words, or one next to a known word that is also a name ("May Example"), are cut while the rest stays ("[name removed]
+Reports Sewer Overflow"), and a place's name before a place word ("Indian Creek") is kept; every point in a post (or a
+record) that describes a private home anywhere is removed entirely, whichever paragraph it is in, and any other point
+is rounded to three decimals figure by figure (a pair at any precision, a lone "43.1234 N", degrees-minutes-seconds cut
+to the minute); records carried from an earlier run are scrubbed again on every write (rescrub); the article is cut at MMSD's standing advice block ("Text WATERDROP ...") or at a contact line ("Questions:",
 "Media contact"), so the people named there are never kept, and telephone numbers and e-mails are scrubbed (common.scrub_text), house numbers
 removed (common.strip_house_numbers). data/raw keeps that safe document only.
 
@@ -155,30 +166,61 @@ STAMP = re.compile(r"^\s*(\d{2})/(\d{2})/(\d{2})\s+(\d{1,2}):(\d{2}):?\s*([ap])\
 CLOCK = r"(?P<h>\d{1,2})(?::(?P<mi>\d{2}))?\s*(?P<ap>[ap])\.?\s*m\.?"
 ANY_DATE = rf"(?:{MON}\s+{DAY}(?:,?\s+(?:19|20)\d\d)?|\d{{1,2}}[/-]\d{{1,2}}[/-](?:\d{{4}}|\d{{2}}))"
 START_RX = [
-    re.compile(rf"\bbegan\s+on\s+(?P<d>{ANY_DATE})\s+at\s+(?:around\s+|approximately\s+)?{CLOCK}", re.I),
-    re.compile(rf"\bstarted\s+(?:at\s+)?(?:approximately\s+)?{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
+    re.compile(rf"\b(?:began|started|commenced|occurred)\s+on\s+(?P<d>{ANY_DATE}),?\s+at\s+"
+               rf"(?:around\s+|approximately\s+|about\s+)?{CLOCK}", re.I),
+    re.compile(rf"\b(?:started|began|commenced)\s+(?:at\s+)?(?:approximately\s+|around\s+|about\s+)?{CLOCK}\s+on\s+"
+               rf"(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\b(?:around|approximately|at)\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
 ]
 # an end only from words saying the overflow did end ("ended at", "continued until"): "will continue until" and the
 # like are not ends (Astra re-review 2026-11-15 P1-3); NEGATED also refuses the clause
 END_RX = [
     re.compile(rf"\b(?:continued|lasted|ran|persisted)\s+until\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
-    re.compile(rf"\bended\s+at\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
-    re.compile(rf"\bended\s+on\s+(?P<d>{ANY_DATE}),?\s+at\s+{CLOCK}", re.I),
+    re.compile(rf"\b(?:ended|stopped|ceased|concluded)\s+(?:at\s+)?(?:approximately\s+|around\s+|about\s+)?{CLOCK}\s+"
+               rf"on\s+(?P<d>{ANY_DATE})", re.I),
+    re.compile(rf"\b(?:ended|stopped|ceased|concluded)\s+on\s+(?P<d>{ANY_DATE}),?\s+at\s+"
+               rf"(?:approximately\s+|around\s+|about\s+)?{CLOCK}", re.I),
 ]
 
 # the last cue before a time says whose time it is: "ended at 2:00 pm on June 2" is never a start (Astra re-review
 # 2026-11-15 P1-2)
-START_CUE = re.compile(r"\b(?:began|begin\w*|start\w*|occurred|occured|took place|triggered|initiated)\b", re.I)
+START_CUE = re.compile(r"\b(?:began|begin\w*|start\w*|commenc\w*|occurred|occured|took place|triggered|initiated)\b",
+                       re.I)
 END_CUE = re.compile(r"\b(?:ended|ending|end|until|stopped|ceased|concluded|lasted|continued)\b", re.I)
 
 
+# a start verb is the overflow's only when the overflow is its subject ("A combined sewer overflow began on June 1") or
+# its object ("MMSD initiated a combined sewer overflow"): rain, a storm, repairs, a cleanup or crews that began or
+# started something give no start (Astra verification 3, 2026-11-15, #2)
+OVERFLOW_NOUN = re.compile(r"\b(?:overflow|spill|release|discharge|bypass)\w*|\bcsos?\b|\bssos?\b", re.I)
+OTHER_SUBJECT = re.compile(r"\b(?:rain\w*|storm\w*|thunderstorm\w*|precipitation|snow\w*|flood\w*|weather|"
+                           r"repair\w*|clean-?up\w*|cleaning|work|crews?|construction|maintenance|inspection\w*|"
+                           r"investigation\w*|response|pumping|sampling|testing|monitoring|outage|power)\b", re.I)
+CLEANUP = re.compile(r"\b(?:repair\w*|clean-?up\w*|cleaning|crews?|construction|maintenance|inspection\w*|"
+                     r"investigation\w*|pumping|sampling|testing|monitoring)\b", re.I)
+OBJECT = re.compile(r"\s+(?:(?:an?|the|its|their)\s+)?(?:[\w-]+\s+){0,3}?(?:overflow|spill|release|discharge|bypass)\w*"
+                    r"|\s+(?:(?:an?|the)\s+)?(?:csos?|ssos?)\b", re.I)
+
+
+def _overflow_subject(text: str, cue: re.Match) -> bool:
+    """True when the start verb cue speaks of the overflow: the last overflow word before it with no other subject
+    between, or an overflow as its object."""
+    pre = text[:cue.start()]
+    last = None
+    for last in OVERFLOW_NOUN.finditer(pre):
+        pass
+    if last is not None and not OTHER_SUBJECT.search(pre[last.end():]):
+        return True
+    obj = OBJECT.match(text, cue.end())
+    return bool(obj and not OTHER_SUBJECT.search(obj.group(0)))
+
+
 def _start_owned(text: str, m: re.Match) -> bool:
-    """True when the nearest cue before the time m is a start cue, not an end cue."""
+    """True when the nearest cue before the time m is a start cue, not an end cue, and the overflow is what started."""
     pre = text[:m.start()] + text[m.start():m.end()].split(m.group("h"), 1)[0]
-    s = [x.end() for x in START_CUE.finditer(pre)]
+    s = list(START_CUE.finditer(pre))
     e = [x.end() for x in END_CUE.finditer(pre)]
-    return bool(s) and (not e or max(s) > max(e))
+    return bool(s) and (not e or s[-1].end() > max(e)) and _overflow_subject(text, s[-1])
 
 
 TYPE_WORDS = {"cso": re.compile(r"combined sewer overflows?|\bcsos?\b", re.I),
@@ -192,8 +234,8 @@ NEGATED = re.compile(r"\b(?:no|not|never|without|zero|none|neither|nor|if|unless
                      r"projected|avoid\w*|prevent\w*)\b", re.I)
 # a sentence is read clause by clause: "a combined sewer overflow occurred ..., but no separate sewer overflow occurred"
 # reports the first and denies the second (Astra re-review 2026-11-15 P1-1)
-CLAUSE = re.compile(r",?\s+(?:but|however,?|whereas|while)\s+|;\s*|,?\s+and\s+(?=(?:no|not|there was no|there were no)\b)",
-                    re.I)
+CLAUSE = re.compile(r",?\s+(?:but|however,?|whereas|while)\s+|;\s*|,?\s+and\s+(?=(?:no|not|there was no|there were no|"
+                    r"(?:it\s+|they\s+)?(?:has|have|had|did|was|were|is)\s+(?:not|yet to)|never)\b)", re.I)
 # the post says the sewage reached no water ("No wastewater entered Lake Michigan or nearby rivers")
 NO_WATER = re.compile(r"\bno (?:wastewater|sewage|overflow)\b[^.]{0,40}\b(?:entered|reached|went into|flowed into)\b[^.]*", re.I)
 # contact and media lines: the people named in them are not kept
@@ -203,7 +245,7 @@ NOT_REPORT = re.compile(r"\b(?:reduc\w*|prevent\w*|risk of|invest\w*|plan\w*|sin
                         r"protect\w*|captured|deep tunnel|storage|capacity|budget|project)\b", re.I)
 LOCAL = re.compile(r"local (?:and regional )?sewer systems?|systems? that are owned by municipalities|"
                    r"(?:were|was) reported by|municipal(?:ities|ity)? (?:sewer|system)", re.I)
-REPORT_CUE = re.compile(r"\b(?:took place|occurred|occured|occurring|started|began|led to|spill\w*|initiated|resulted|"
+REPORT_CUE = re.compile(r"\b(?:took place|occurred|occured|occurring|started|began|commenc\w*|led to|spill\w*|initiated|resulted|"
                         r"reporting|reported|"
                         r"regarding|estimated|volume)\b|:\s*\d", re.I)
 SPILL_CUE = re.compile(r"\b(?:spill\w*|releas\w*|discharg\w*|overflow\w*)\b", re.I)
@@ -220,6 +262,10 @@ WATER_INTO = re.compile(r"\b(?:overflow|discharge|release)\w*\s+(?:[\w-]+\s+){0,
                         r"(?P<w>(?:[A-Z][a-z]+\s+){1,3}(?:Creek|River|Harbor|Canal)|Lake Michigan)\b")
 WATER_LISTED = re.compile(r"[–—-]\s*(?P<w>(?:[A-Z][a-z]+\s+){1,3}(?:Creek|River|Harbor|Canal)|Lake Michigan)\s*:\s*"
                           r"\d[\d,]*(?:\.\d+)?\s*(?:million\s+)?gallons")
+# a sentence about the overflows together ("Both overflows ended at 2:00 pm on June 2") speaks for every type the post
+# reports (verification 3, #1)
+BOTH = re.compile(r"\bboth\b[^.;]{0,40}\boverflows\b|\b(?:the|these|those)\s+(?:two\s+)?overflows\b|"
+                  r"\beach overflow\b", re.I)
 CUT = re.compile(r"^\s*(?:Text WATERDROP|Receive Water Drop Alert|×\s*$)", re.I)
 
 
@@ -286,6 +332,10 @@ january february march april may june july august september october november dec
 jan feb mar apr jun jul aug sep sept oct nov dec monday tuesday wednesday thursday friday saturday sunday
 cso csos sso ssos street avenue road drive boulevard parkway highway st ave rd dr blvd n s e w
 mitchell international airport national weather service gauge gauges
+day days notification notifications help manage managing can could will do does take takes taken future steps
+total totals winter spring summer fall falls autumn heavy rains dangerous safety safe stay keep avoid contact
+basin management reach watershed grounds valley project projects flood floods program programs plan plans
+news press media statement statements frequently asked questions faq new latest week weekend today tonight
 """.split())
 RUN = re.compile(r"\b(?:[A-Z][a-z'’-]+|[A-Z]\.)(?:\s+(?:[A-Z][a-z'’-]+|[A-Z]\.))+")
 
@@ -312,22 +362,88 @@ HOME_OF = re.compile(rf"\b(?:the\s+)?(?:home|house|residence|property|yard|basem
                      rf"(?:\[name removed\]|{PNAME})")
 
 
+# an unknown word right before one of these is a place's name ("Indian Creek", "Example Avenue"), not a person's
+PLACE_SUFFIX = set("""
+creek creeks river rivers harbor harbour canal lake park street avenue road drive boulevard parkway highway lane court
+way place st ave rd dr blvd ln ct plant facility island county village city town valley bay beach pond ditch branch
+tributary airport station school center centre
+""".split())
+# known words that are also given names or surnames: next to an unknown word in a run they are part of the name ("May
+# Example", "Pat Jones"), and go with it (Astra verification 3, 2026-11-15, #6)
+NAMEISH = set("""
+may june april august lincoln wilson jones mitchell franklin brown butler fox root oak honey hales st grove park
+""".split())
+
+
+def _run_sub(m: re.Match) -> str:
+    """A run of capitalised words: two or more unknown words together, or one next to a name-like known word, are a
+    name and are cut with that word, unless they are a place's name before a place word; a run of known words only is
+    kept, and so is one unknown word among known ones ("Heavy Rains", "5-Day Letter")."""
+    ws = m.group(0).split()
+    unk = [not _known(w) for w in ws]
+    if not any(unk):
+        return m.group(0)
+    if all(unk):
+        return "[name removed]"
+    nameish = [re.sub(r"(?:'s|’s|[.,'’-])+$", "", w).lower() in NAMEISH for w in ws]
+    cut = [u and ((i > 0 and (unk[i - 1] or nameish[i - 1])) or (i + 1 < len(ws) and (unk[i + 1] or nameish[i + 1])))
+           for i, u in enumerate(unk)]
+    i = 0
+    while i < len(ws):
+        if cut[i]:
+            j = i
+            while j < len(ws) and cut[j]:
+                j += 1
+            if j < len(ws) and re.sub(r"[.,'’-]+$", "", ws[j]).lower() in PLACE_SUFFIX:
+                for k in range(i, j):
+                    cut[k] = False      # "Indian Creek": a place
+            i = j
+        else:
+            i += 1
+    for i in [i for i, c in enumerate(cut) if c]:
+        for k in (i - 1, i + 1):
+            if 0 <= k < len(ws) and not cut[k] and re.sub(r"(?:'s|’s|[.,'’-])+$", "", ws[k]).lower() in NAMEISH:
+                cut[k] = True
+    out, i = [], 0
+    while i < len(ws):
+        if cut[i]:
+            while i < len(ws) and cut[i]:
+                i += 1
+            out.append("[name removed]")
+        else:
+            out.append(ws[i])
+            i += 1
+    return " ".join(out)
+
+
 def scrub_names(s: str) -> str:
     s = HOME_OF.sub("a private residence", s)
     for rx, rep in NAME_RX:
         s = rx.sub(_name_sub(rep), s)
-    # any other run of capitalised words that holds none of the source's own words is a name
-    return RUN.sub(lambda m: m.group(0) if any(_known(w) for w in m.group(0).split()) else "[name removed]", s)
+    # in any other run of capitalised words, the words that are none of the source's own are a name; the known words
+    # around them stay ("[name removed] Reports Sewer Overflow"; Astra verification 3, #6)
+    return RUN.sub(_run_sub, s)
 
 
-def safe_line(s: str) -> str:
-    """Phones and e-mails scrubbed, house numbers removed, people's names cut, a point rounded to three decimals; a
-    month's day ("June 18 at 35th St.") is not a house number."""
+# every form of a point in free text (Astra verification 3, #6): a pair at any precision, a lone degree figure with
+# four or more decimals ("43.1234 N", "latitude 43.223456"), and degrees, minutes and seconds
+FINE = re.compile(r"(?<![\d.])(-?\d{1,3})\.(\d{4,})(?!\d)(?!\.\d)")
+DMS = re.compile(r"(\d{1,3})\s*°\s*(\d{1,2})\s*['′]\s*\d{1,2}(?:\.\d+)?\s*(?:\"|″|'')?")
+PRIVATE_POINT = re.compile(r"(?:\(\s*)?-?\d{1,3}\.\d+\s*°?\s*[NSEW]?\s*,?\s*-?\d{1,3}\.\d+\s*°?\s*[NSEW]?(?:\s*\))?|"
+                           r"-?\d{1,3}\.\d{3,}\s*°?\s*[NSEW]?|\d{1,3}\s*°\s*\d{1,2}\s*['′](?:\s*\d{1,2}(?:\.\d+)?\s*"
+                           r"(?:\"|″|'')?)?\s*[NSEW]?|-?\d{1,3}\.\d+\s*°?\s*[NSEW]\b")
+
+
+def safe_line(s: str, private: bool | None = None) -> str:
+    """Phones and e-mails scrubbed, house numbers removed, people's names cut; every point in a text that describes a
+    private home (private: the line itself, or the post or record it belongs to) removed, any other rounded to three
+    decimals, each figure on its own; a month's day ("June 18 at 35th St.") is not a house number."""
     glued = DATE_GLUE.sub(lambda m: m.group(1) + "\u2060_", s)
     s = strip_house_numbers(scrub_text(glued)).replace("\u2060_", " ")
-    if PRIVATE_PLACE.search(s):
-        s = ANY_COORD.sub("[location removed]", s)
-    s = COORD.sub(lambda m: f"{round(float(m.group(1)), 3)}{m.group(2)}{round(float(m.group(3)), 3)}", s)
+    if private or (private is None and PRIVATE_PLACE.search(s)):
+        s = PRIVATE_POINT.sub("[location removed]", s)
+    s = DMS.sub(lambda m: f"{m.group(1)}°{m.group(2)}'", s)
+    s = FINE.sub(lambda m: f"{round(float(m.group(1) + '.' + m.group(2)), 3)}", s)
     return scrub_names(s)
 
 
@@ -360,19 +476,24 @@ def page_doc(content: bytes | str) -> dict | None:
     body = re.sub(r"<(script|style|noscript)\b.*?</\1>", " ", body, flags=re.S | re.I)
     # one boundary for text and links alike: blocks are read in order and nothing after the cut is kept, a letter's
     # link label included (Astra review 2026-11-14 P1-6)
-    letters, lines = [], []
+    letters, lines, blocks = [], [], []
     for block in re.split(r"<(?:/?(?:p|div|li|ul|ol|h\d|tr|table|br|hr)\b)[^>]*>", body, flags=re.I):
         w = _words(re.sub(r"<[^>]+>", " ", block))
         if not w:
             continue
         if CUT.search(w) or CONTACT.search(w):
             break                       # MMSD's standing advice block, or a contact block naming people
+        blocks.append((block, w))
+    # a post that describes a private home anywhere has every point in it removed: the home in one paragraph and its
+    # point in the next are one place (Astra verification 3, #6)
+    private = any(PRIVATE_PLACE.search(w) for _, w in blocks)
+    for block, w in blocks:
         for m in re.finditer(r'<a\s[^>]*href="([^"]*download_file[^"]*)"[^>]*>(.*?)</a>', block, re.S | re.I):
-            label = safe_line(_words(re.sub(r"<[^>]+>", " ", m.group(2))))
+            label = safe_line(_words(re.sub(r"<[^>]+>", " ", m.group(2))), private)
             label = label if LABEL_OK.search(label or "") else "letter"     # a label that is not about the letter
             if label and {"url": m.group(1), "label": label} not in letters:
                 letters.append({"url": m.group(1), "label": label})
-        lines.append(safe_line(w))
+        lines.append(safe_line(w, private))
     stamp = next((x for x in lines[:4] if STAMP.match(x)), None)
     rest = [x for x in lines if x != stamp]
     # the title line (the page title block, first) is kept as it is (scrubbed); the article below it is projected
@@ -453,6 +574,8 @@ def period(text: str, ref: date, skip_tied: bool = False) -> tuple[date, date | 
                     for m in rx.finditer(text[:i])]
             if cues and max(cues)[1] in "er":
                 continue
+            if CLEANUP.search(re.split(r"[.;]", text[:i])[-1]):
+                continue                # a repair's or a cleanup's day is not the storm's (verification 3, #2)
         return first, last, words
     return None
 
@@ -461,7 +584,8 @@ def period(text: str, ref: date, skip_tied: bool = False) -> tuple[date, date | 
 # "took place", "began", "started", "initiated" or "triggered", or right after the overflow itself ("the wastewater
 # spill on September 18"), with no end, report or storm word between; an end stays an end and a reporting day stays a
 # reporting day (Astra verification 2026-11-15, earlier #2)
-START_TIE = re.compile(r"\b(?:began|begin\w*|start\w*|occurred|occured|occurring|took place|triggered|initiated)\b",
+START_TIE = re.compile(r"\b(?:began|begin\w*|start\w*|commenc\w*|occurred|occured|occurring|took place|triggered|"
+                       r"initiated)\b",
                        re.I)
 NOUN_ON = re.compile(r"\b(?:overflow|spill|release|discharge|bypass)\w*\s+on\s+$", re.I)
 REPORT_TIE = re.compile(r"\b(?:report\w*|posted|published|submitted|sent|notified|announced|filed|letter)\b", re.I)
@@ -477,18 +601,41 @@ def occurrence_day(text: str, ref: date) -> tuple[date, str] | None:
     """(day, words) of the first date text ties to the overflow's occurrence or start; None when none is tied."""
     for i, first, _, words in _date_hits(text, ref):
         pre = text[:i]
-        anchors = [m.end() for m in START_TIE.finditer(pre)] + ([len(pre)] if NOUN_ON.search(pre) else [])
+        verbs = list(START_TIE.finditer(pre))
+        if verbs and not _overflow_subject(text, verbs[-1]) and not NOUN_ON.search(pre):
+            continue                    # rain, a storm, repairs or a cleanup began: not the overflow (verification 3)
+        anchors = [m.end() for m in verbs] + ([len(pre)] if NOUN_ON.search(pre) else [])
         if anchors and not NOT_START.search(pre[max(anchors):]):
             return first, words
     return None
 
 
-def type_spans(s: str) -> list[tuple[str, str]]:
-    """[(type, its own words)] of a sentence naming more than one type: each mention with the words up to the next
-    one; a mention with no verb of its own ("A combined sewer overflow and a separate sewer overflow occurred on June
-    1") shares the predicate of the next mention that has one, without that mention's own article or denial ("A
-    combined sewer overflow and no separate sewer overflow occurred": the denial is the second's only; Astra
-    verification 2026-11-15, earlier #1)."""
+# two types named together ("Combined and separate sewer overflows occurred"; "separate and combined sewer
+# overflows"; "combined sewer and sanitary sewer overflows") are read as two mentions, each its own type (Astra
+# verification 3, 2026-11-15, #1)
+TWO_TYPES = re.compile(r"\b(?P<a>combined|separate|sanitary)(?:\s+sewer)?\s+(?P<j>and|&|or|nor)\s+"
+                       r"(?P<b>combined|separate|sanitary)\s+sewer\s+(?P<o>overflows?)\b", re.I)
+
+
+def expand_types(s: str) -> str:
+    return TWO_TYPES.sub(lambda m: f"{m.group('a')} sewer {m.group('o')} {m.group('j')} {m.group('b')} sewer "
+                                   f"{m.group('o')}", s)
+
+
+# where a borrowed predicate begins: the verb, a denial or a labelled figure, never the lender's own water, volume or
+# article ("A combined sewer overflow and a separate sewer overflow into Honey Creek occurred": "occurred ...")
+PRED = re.compile(REPORT_CUE.pattern + "|" + NEGATED.pattern + "|" + NOT_REPORT.pattern
+                  + r"|\b(?:did|was|were|has|have|had|is|are)\b", re.I)
+
+
+def type_spans(s: str) -> list[tuple[str, str, str]]:
+    """[(type, its own words, its own mention's words only)] of a sentence naming more than one type: each mention
+    with the words up to the next one; a mention with no verb of its own ("A combined sewer overflow and a separate
+    sewer overflow occurred on June 1") shares the predicate of the next mention that has one, from that mention's
+    verb on: never that mention's own article, denial, water or volume ("A combined sewer overflow and no separate
+    sewer overflow occurred": the denial is the second's only; Astra verification 2026-11-15, earlier #1; verification
+    3, #1). A denial joined by "or" or "nor" ("No combined sewer overflow or separate sewer overflow occurred";
+    "Neither ... nor ...") denies every type it joins."""
     ms = sorted((m.start(), m.end(), t) for t, rx in TYPE_WORDS.items() for m in rx.finditer(s))
     men: list[list] = []
     for a, b, t in ms:
@@ -505,9 +652,16 @@ def type_spans(s: str) -> list[tuple[str, str]]:
         if k == 0:
             starts.append(0)
             continue
-        q = re.search(r"\b(?:no|an?|the|any)\s+(?:[a-z]+\s+)?$", s[:a], re.I)
+        q = re.search(r"\b(?:no|an?|the|any|both)\s+(?:[a-z]+\s+)?$", s[:a], re.I)
         starts.append(q.start() if q and q.start() >= men[k - 1][1] else a)
-    segs = [s[starts[k]:(starts[k + 1] if k + 1 < len(men) else len(s))] for k in range(len(men))]
+    ends = [starts[k + 1] if k + 1 < len(men) else len(s) for k in range(len(men))]
+    segs = [s[starts[k]:ends[k]] for k in range(len(men))]
+    # a denial joined by "or" / "nor" carries to the next type
+    for k in range(1, len(men)):
+        joint = s[men[k - 1][1]:starts[k]]
+        if re.search(r"\b(?:or|nor)\b", joint, re.I) and NEGATED.search(s[starts[k - 1]:men[k - 1][1]]) \
+                and not NEGATED.search(segs[k]):
+            segs[k] = "no " + segs[k]
 
     def has_verb(k: int) -> bool:
         return bool(REPORT_CUE.search(segs[k]) or NEGATED.search(segs[k]) or NOT_REPORT.search(segs[k]))
@@ -517,8 +671,10 @@ def type_spans(s: str) -> list[tuple[str, str]]:
         if not has_verb(k):
             j = next((j for j in range(k + 1, len(men)) if has_verb(j)), None)
             if j is not None:
-                own = own + s[men[j][1]:starts[j + 1] if j + 1 < len(men) else len(s)]
-        out.append((t, own))
+                tail = s[men[j][1]:ends[j]]
+                v = PRED.search(tail)
+                own = own.rstrip() + " " + (tail[v.start():] if v else tail).lstrip()
+        out.append((t, own, segs[k]))
     return out
 
 
@@ -578,7 +734,14 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     tkey = _words(title).lower()
     lines = [x for x in doc.get("lines") or [] if _words(x).lower() != tkey]
     body = "\n".join(lines)
-    sents = [c for x in sentences(body) for c in clauses(x)]
+    quote: dict[str, str] = {}                              # a clause read with its types expanded -> MMSD's words
+    sents = []
+    for x in sentences(body):
+        ex = expand_types(x)
+        for c in clauses(ex):
+            sents.append(c)
+            if ex != x:
+                quote[c] = x
     lede = " ".join(sents[:3])
     per = period(title, ref) or period(lede, ref, skip_tied=True)
     facts = {"published": pub, "period": per, "types": {}, "local": [], "no_water": None}
@@ -589,6 +752,25 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
         return (bool(REPORT_CUE.search(x)) and not NEGATED.search(x) and not LOCAL.search(x)
                 and not any(_gal(z) == 0 for z in LABELLED.finditer(x)))
 
+    def _times(x: dict, text: str) -> None:
+        """The stated start, end and reporting day in text, for the one overflow x the text is about."""
+        if x.get("reported") is None:
+            rm = REPORTED_ON.search(text)
+            d = parse_date(rm.group("d"), ref) if rm else None
+            if d:
+                x["reported"] = (d, _words(rm.group("d")))
+        for key, rxs in (("start", START_RX), ("end", END_RX)):
+            if x[key]:
+                continue
+            for rx in rxs:
+                m = rx.search(text)
+                if m and key == "start" and not _start_owned(text, m):
+                    m = None
+                d = parse_date(m.group("d"), ref) if m else None
+                if d:
+                    x[key] = (_at(d, m), m.group(0))
+                    break
+
     def add(t: str, basis: str) -> dict:
         x = types.setdefault(t, {"basis": basis, "volume": None, "volume_text": None, "covers": None, "waters": [],
                                  "start": None, "end": None, "day": None, "reported": None})
@@ -597,8 +779,25 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     for s in sents:
         if LOCAL.search(s):
             facts["local"].append(s)
-    # labelled volumes first
-    for m in (m for x in sents if not NEGATED.search(x) and not LOCAL.search(x) for m in LABELLED.finditer(x)):
+    def units(x: str) -> list[tuple[str | None, str, str]]:
+        """[(type, its own words, its own mention's words)]: one per type a multi-type sentence names (type_spans), or
+        the sentence itself; a sentence with a figure for both types together is one unit."""
+        named = [t for t, rx in TYPE_WORDS.items() if rx.search(x)]
+        both = any(" and " in m.group("label").lower() for m in LABELLED.finditer(x))
+        sp = type_spans(x) if len(named) > 1 and not both else []
+        return sp or [(named[0] if len(named) == 1 else None, x, x)]
+
+    # labelled volumes first; a denial counts against the figure's own type only (verification 3, #1)
+    def labelled():
+        for x in sents:
+            if LOCAL.search(x):
+                continue
+            for _, own, seg in units(x):
+                if NEGATED.search(own):
+                    continue
+                yield from LABELLED.finditer(seg)
+
+    for m in labelled():
         if _gal(m) == 0:
             continue                    # "0 gallons": a stated zero is not a report
         label = m.group("label").lower()
@@ -619,17 +818,22 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
         if LOCAL.search(s) or any(_gal(z) == 0 for z in LABELLED.finditer(s)):
             continue
         named = [t for t, rx in TYPE_WORDS.items() if rx.search(s)]
-        spans = type_spans(s) if len(named) > 1 and not LABELLED.search(s) else []
-        for t, own in spans:
-            # both types in one clause: each affirmed type is its own record with its own day (earlier #1)
+        spans = [u for u in units(s) if u[0] and len(named) > 1]
+        for t, own, seg in spans:
+            # both types in one clause: each affirmed type is its own record with its own day, its own stated times
+            # and its own figure, whatever the other type carries (earlier #1; verification 3, #1)
             if affirmative(own) and not NOT_REPORT.search(own):
-                x = add(t, f"MMSD's post: \"{s[:240]}\"")
+                x = add(t, f"MMSD's post: \"{quote.get(s, s)[:240]}\"")
                 if x["day"] is None:
                     x["day"] = occurrence_day(own, ref)
+                _times(x, own)
+                figs = [f for f in FIGURE.finditer(seg) if not NOT_VOLUME.search(seg[max(0, f.start() - 60):f.end() + 20])]
+                if x["volume_text"] is None and len(figs) == 1 and not LABELLED.search(seg):
+                    x["volume"], x["volume_text"] = _gal(figs[0]), _words(figs[0].group(0))
         if spans or NOT_REPORT.search(s) and not LABELLED.search(s):
             continue
         if len(named) == 1 and affirmative(s):
-            x = add(named[0], f"MMSD's post: \"{s[:240]}\"")
+            x = add(named[0], f"MMSD's post: \"{quote.get(s, s)[:240]}\"")
             figs = [f for f in FIGURE.finditer(s) if not NOT_VOLUME.search(s[max(0, f.start() - 60):f.end() + 20])]
             if x["volume_text"] is None and len(figs) == 1:
                 x["volume"], x["volume_text"] = _gal(figs[0]), _words(figs[0].group(0))
@@ -673,10 +877,24 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                    "sanitary sewer overflow, the general case")
     # waters (never from a denial: "No overflow into Example Creek occurred")
     for s in sents:
-        if LOCAL.search(s) or NEGATED.search(s):
+        if LOCAL.search(s):
             continue
         named = [t for t, rx in TYPE_WORDS.items() if rx.search(s)]
-        for rx in (WATER_INTO, WATER_LISTED):
+        spans = [u for u in units(s) if u[0] and len(named) > 1]
+        rxs = (WATER_INTO, WATER_LISTED)
+        if spans:
+            # each affirmed type keeps the water its own words name; a denial of the other type takes nothing from it
+            # (verification 3, #1)
+            for t, own, _ in spans:
+                if t in types and affirmative(own) and not NOT_REPORT.search(own):
+                    for m in WATER_INTO.finditer(own):
+                        w = _words(m.group("w"))
+                        if w not in types[t]["waters"]:
+                            types[t]["waters"].append(w)
+            rxs = (WATER_LISTED,)
+        if NEGATED.search(s):
+            continue
+        for rx in rxs:
             for m in rx.finditer(s):
                 w = _words(m.group("w"))
                 t = named[0] if len(named) == 1 else ("sso" if rx is WATER_LISTED and "sso" in types else
@@ -703,28 +921,16 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     # one type gives that type its times; one naming none gives them only when the post reports a single type
     for x in sents:
         named = [t for t, rx in TYPE_WORDS.items() if rx.search(x) and t in types]
-        owners = named if len(named) == 1 else ([next(iter(types))] if not named and len(types) == 1 else [])
+        other = any(rx.search(x) for t, rx in TYPE_WORDS.items() if t not in named)  # a type not reported here
+        plural = not named and not other and len(types) > 1 and BOTH.search(x)
+        owners = ([] if other and named else named if len(named) == 1 else list(types) if plural else
+                  [next(iter(types))] if not named and len(types) == 1 else [])
         if NEGATED.search(x):
             continue                    # an expected, conditional or denied time is not a stated one (Astra P1-3)
         for t in owners:
-            if types[t].get("day") is None and len(named) == 1 and affirmative(x):
+            if types[t].get("day") is None and (len(named) == 1 or plural) and affirmative(x):
                 types[t]["day"] = occurrence_day(x, ref)   # only a day the sentence ties to the overflow (earlier #2)
-            if types[t].get("reported") is None:
-                rm = REPORTED_ON.search(x)
-                d = parse_date(rm.group("d"), ref) if rm else None
-                if d:
-                    types[t]["reported"] = (d, _words(rm.group("d")))
-            for key, rxs in (("start", START_RX), ("end", END_RX)):
-                if types[t][key]:
-                    continue
-                for rx in rxs:
-                    m = rx.search(x)
-                    if m and key == "start" and not _start_owned(x, m):
-                        m = None
-                    d = parse_date(m.group("d"), ref) if m else None
-                    if d:
-                        types[t][key] = (_at(d, m), m.group(0))
-                        break
+            _times(types[t], x)
     for x in sents:
         nw = NO_WATER.search(x)
         if nw:
@@ -874,6 +1080,27 @@ def fetch_safe(sess: requests.Session, pages: int, prev: dict[str, dict], retry:
             "items": items, "posts": docs, "failed": failed}
 
 
+# the free-text fields of a record: scrubbed again on every write, records carried from an earlier run included
+PROSE = ("title", "_type_basis", "start_basis", "end_basis", "local_overflows_text", "_no_water_reason",
+         "period_text", "reported_day_text")
+
+
+def rescrub(r: dict) -> dict:
+    """A record with its free text scrubbed as a new read would be (Astra verification 3, #6): a record whose text
+    describes a private home anywhere has every point in it removed."""
+    raw = r.get("raw") or {}
+    texts = [raw.get(k) for k in PROSE if isinstance(raw.get(k), str)] + \
+        [x.get("label") for x in raw.get("letters") or [] if isinstance(x, dict) and isinstance(x.get("label"), str)]
+    private = any(PRIVATE_PLACE.search(x) for x in texts)
+    for k in PROSE:
+        if isinstance(raw.get(k), str):
+            raw[k] = safe_line(raw[k], private)
+    for x in raw.get("letters") or []:
+        if isinstance(x, dict) and isinstance(x.get("label"), str):
+            x["label"] = safe_line(x["label"], private)
+    return r
+
+
 def build(doc: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[dict], dict]:
     recs: dict[str, dict] = {r["source_record_id"]: r for r in prev_records}
     read, not_read, pending, unparsed = 0, 0, 0, []
@@ -904,7 +1131,8 @@ def build(doc: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[di
             r["raw"]["_last_seen_in_source"] = fetched_at
             recs[r["source_record_id"]] = r
         read += 1
-    out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
+    out = sorted((rescrub(r) for r in recs.values()), key=lambda r: (r.get("started_at") or "", r["event_id"]),
+                 reverse=True)
     stats = {"list_items_seen": doc.get("list_items_seen", len(doc.get("items") or [])),
              "candidates": len(doc.get("items") or []), "posts_read": read, "not_read": not_read,
              "posts_not_read_this_run": pending, "posts_failed": len(doc.get("failed") or []),
