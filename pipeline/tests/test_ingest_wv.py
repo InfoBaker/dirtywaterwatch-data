@@ -886,3 +886,29 @@ def test_one_drawn_area_over_two_lakes_and_separate_pieces_of_one_river(tmp_path
     assert st["waters"]["example-river-a-wv"]["status"] == "grey"                   # no whole river coloured
     assert st["waters"].get("example-pond-d-wv", {}).get("status", "grey") == "grey"
     assert len({f["id"] for f in feats}) == len(feats)
+
+
+# --- round 4 (Astra verify3 P2-2) ---
+
+def test_every_public_wv_copy_states_the_rain_caution_only_where_an_outlet_is_placed():
+    """Astra verify3 P2-2: the state text, like the rules row, promises the rain caution only at an open combined sewer
+    outlet placed on its water (rain_likely.targets needs a water_slug), with the counts the registry gives."""
+    from build import rain_likely as RL
+    d = json.loads((ROOT / "data" / "outfalls-wv.json").read_text())
+    rows = d["outfalls"] if isinstance(d, dict) else d
+    open_ = [r for r in rows if RL.cso_open(r) and r.get("lat") is not None]
+    placed = [r for r in open_ if r.get("water_slug")]
+    text = (ROOT / "research" / "wv" / "state-text.md").read_text()
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    copies = {"state text": text, "rules row": rules["red"]["by_state"]["WV"]["basis"]}
+    prof = json.loads((ROOT / "data" / "state-profiles.json").read_text())
+    copies["state profile"] = json.dumps(prof.get("WV") if isinstance(prof, dict) else
+                                         [p for p in prof if p.get("state") == "WV"])
+    copies["notice channels"] = (ROOT / "data" / "notice-channels" / "wv.json").read_text()
+    for name, t in copies.items():
+        for overclaim in (r"below (each|every|all) open", r"rain caution at (each|every) open combined sewer "
+                          r"(outlet|outfall)(?! with a location once| once the outlet is placed)",
+                          r"(each|every|all) open combined sewer (outlet|outfall)s? (is|are) shown"):
+            assert not re.search(overclaim, t, re.I), (name, overclaim)
+    assert f"{len(placed)} of the {len(open_)} open outlets" in text
+    assert f"the other {len(open_) - len(placed)} are not yet placed on a water" in text
