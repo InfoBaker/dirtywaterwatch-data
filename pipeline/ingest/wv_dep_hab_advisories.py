@@ -20,8 +20,9 @@ Records (a map of what is in effect, read as a snapshot)
   - A row no longer on a map the module could read is lifted at that read (advisory_lifted, ended_at the read,
     raw.ended_at_precision 'poll'), an upper bound, not DEP's lift time. A layer that answers with an error makes the
     run ok=False: the records are kept and nothing is lifted; so does a layer that answers only part of its rows
-    (exceededTransferLimit). The Advisory text is scrubbed (common.scrub_text: e-mails, telephone numbers, names after
-    contact words, residence house numbers) before it is saved anywhere.
+    (exceededTransferLimit). The Advisory text is cut before it is saved anywhere (scrub_advisory: common.scrub_text,
+    then every street house number, then every sentence naming who reported, sampled or can be called; text that
+    cannot be cut to the advice alone is withheld).
   - Placement by the agency's own geometry only: a point's position, a segment's middle vertex, an area's vertex mean,
     rounded to three decimals (coord_source 'agency_layer'); raw.geometry_kind says which. No water name is invented.
 
@@ -31,6 +32,7 @@ Cadence: with the refresh (daily is enough; the map changes rarely).
 from __future__ import annotations
 
 import json
+import re
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
@@ -68,6 +70,37 @@ def place(kind: str, g: dict) -> tuple[float | None, float | None]:
         return None, None
 
 
+STREET = (r"(?:Lane|Ln|Road|Rd|Street|St|Avenue|Ave|Drive|Dr|Court|Ct|Way|Boulevard|Blvd|Circle|Cir|Place|Pl|Pike|"
+          r"Highway|Hwy|Route|Rte|Trail|Trl|Terrace|Ter|Parkway|Pkwy|Hollow|Holw|Ridge|Loop|Alley|Square|Sq)")
+# a house number before a street: '123 Example Lane', '12B N. Example St' (any street, not only a residence's)
+HOUSE_NUMBER_RE = re.compile(rf"(?<![\w.,/:-])\d{{1,6}}[A-Za-z]?(?=[ ]{{1,2}}(?:[NSEW]\.?[ ]{{1,2}})?(?:[A-Z0-9][\w'.-]*[ ]{{1,2}}){{1,4}}{STREET}\b)")
+# a clause that names who reported, sampled or can be called: the whole sentence is cut
+PERSON_CLAUSE_RE = re.compile(
+    r"(?i:\b(?:submitted|reported|sampled|collected|photographed|found|called in|sent|provided|observed|noticed)[ ]+by\b)"
+    r"|(?i:\b(?:contact(?:ing)?|call(?:ing)?))[ ]+(?!(?i:with)\b)(?:[A-Z]|(?i:us|the)\b|\[|\d)"
+    r"|(?i:\b(?:e-?mail|courtesy of|thanks to|resident|residents|homeowner|landowner|property owner|neighbou?r)\b)"
+    r"|\b(?:Mr|Mrs|Ms|Miss|Dr)\.?[ ]+[A-Z]|\[(?:name|phone|email) removed\]")
+# sentence breaks, not after a title or an initial ('Mrs. Example', 'N. Example Rd')
+SENTENCE_RE = re.compile(r"(?<=[.!?;])(?<!\bMr\.)(?<!\bMrs\.)(?<!\bMs\.)(?<!\bDr\.)(?<!\bSt\.)(?<!\b[A-Z]\.)[ ]+")
+WITHHELD = "(DEP's advisory text is withheld here: it could not be cut to the advisory alone)"
+
+
+def scrub_advisory(text: str) -> str | None:
+    """DEP's Advisory text, cut to the advice before anything is saved: common.scrub_text (e-mails, phones, contact
+    names), then every street house number, then every sentence that names who reported, sampled or can be called.
+    Text left with a capitalised name pair after 'by' or with nothing but removals is withheld (WITHHELD)."""
+    t = " ".join(str(text or "").split())
+    if not t:
+        return None
+    t = HOUSE_NUMBER_RE.sub(common.HOUSE_NUMBER_REMOVED, common.scrub_text(t))
+    kept = [x for x in SENTENCE_RE.split(t) if x and not PERSON_CLAUSE_RE.search(x)]
+    out = " ".join(kept).strip()
+    if not re.search(r"[A-Za-z]{3}", out.replace(common.HOUSE_NUMBER_REMOVED, "")) or \
+            re.search(r"\bby[ ]+[A-Z][a-z]+[ ]+[A-Z][a-z]+", out):
+        return WITHHELD
+    return out
+
+
 def observed(attrs: dict) -> tuple[str | None, str | None]:
     """(the observation as DEP stores it, an instant in UTC; the day it names). An esri date field is an instant; a
     value at exactly midnight UTC is a date entered with no time (the usual esri convention), so its day is the UTC
@@ -98,7 +131,7 @@ def rows_of(answers: dict) -> dict[str, dict]:
             lat, lon = place(kind, f.get("geometry") or {})
             utc, day = observed(a)
             text = " ".join(str(a.get("Advisory") or "").split())
-            out[f"{lid}-{a.get('OBJECTID')}"] = {"kind": kind, "advisory": common.scrub_text(text) if text else None,
+            out[f"{lid}-{a.get('OBJECTID')}"] = {"kind": kind, "advisory": scrub_advisory(text),
                                                  "date_observed": day, "date_observed_utc": utc, "lat": lat, "lon": lon}
     return out
 
