@@ -280,6 +280,9 @@ def make_record(rep: dict, fac: dict, listed: dict, permit: tuple, at: str, ops:
            "timezone_note": "Central time: DNR's field office records are Iowa local times", "_read_at": at,
            "date_basis": ("Incident Start and End as the field office entered them; Date and Time Received is when "
                           "DNR received the report")}
+    # placed only by the water the report names or its own point, never by the permit's or the plant's receiving
+    # water: a report with neither stays unplaced and listed (build/status.py own_place_only; Astra 2026-11-15 P2-4)
+    raw["_placement"] = "own_place_only"
     if (rep.get("bypass_type") or "").lower() == "anticipated bypass":
         raw["planned"] = True
     if end:
