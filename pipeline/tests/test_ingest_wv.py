@@ -778,7 +778,9 @@ TITLED = ["Avoid contact. Lt. Example Person sampled the bloom.",
           "Avoid contact. Trooper Example Person was told.",
           "Avoid contact. Rev. Example Person; Hon. Sample Name. Do not swim.",
           "Avoid contact. Example Person sampled the bloom.",
-          "Avoid contact. Example Q. Person noticed the scum."]
+          "Avoid contact. Example Q. Person noticed the scum.",
+          "Avoid contact. E. Example sampled the bloom.",
+          "Avoid contact. E.Q. Example reported it."]
 
 
 def test_rank_and_title_forms_are_cut_before_the_text_is_split(tmp_path, monkeypatch):
@@ -794,7 +796,8 @@ def test_rank_and_title_forms_are_cut_before_the_text_is_split(tmp_path, monkeyp
     assert H.scrub_advisory("Avoid contact. Cpl. Example. Do not swim.") == "Avoid contact. Do not swim."
     # ordinary advice and water names stay
     for keep in ("Avoid contact with the water. Do not swim.", "Chief Logan Lake: avoid contact. Keep pets out.",
-                 "See dep.wv.gov. Do not swim.", "Avoid the cove near St. Albans. Do not swim."):
+                 "See dep.wv.gov. Do not swim.", "Avoid the cove near St. Albans. Do not swim.",
+                 "Cheat Lake sampled positive for toxins. Avoid contact."):
         assert H.scrub_advisory(keep) == keep, keep
     ids = list(range(20, 20 + len(TITLED)))
     a = _answers(ids)

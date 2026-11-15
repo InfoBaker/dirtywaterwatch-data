@@ -50,8 +50,10 @@ TITLE_CAPS = (r"(?:Mr|Mrs|Ms|Mx|Miss|Dr|Prof|Rev|Fr|Lt|Sgt|Capt|Cpt|Col|Maj|Cpl|
 # the abbreviation with its period (any case), not part of an address or a web address ('dep.wv.gov.')
 TITLE_DOT_RE = re.compile(rf"(?<![\w./@-])(?i:{TITLE_ABBR})\.(?=[ ]*[A-Za-z])")
 TITLE_NAME_RE = re.compile(rf"{TITLE_DOT_RE.pattern}|(?<![\w./@-]){TITLE_CAPS}[ ]+[A-Z]|\b{TITLE_WORDS}[ ]+(?!(?i:{WATER_WORDS})\b)[A-Z][a-z]")
-# a name followed by what a person did ('Example Person sampled the bloom'): two capitalised words before the verb
-NAME_ACTS_RE = re.compile(r"\b[A-Z][a-z]+(?:[ ][A-Z]\.)?[ ]+[A-Z][a-z'-]+[ ]+(?:reported|sampled|collected|photographed|"
+# a name followed by what a person did ('Example Person sampled the bloom', 'E. Person sampled', 'E.P. Person
+# noticed'): two capitalised words, or initials and a capitalised word, before the verb
+NAME_ACTS_RE = re.compile(r"(?:\b[A-Z][a-z]+(?:[ ][A-Z]\.)?|\b[A-Z]\.(?:[ ]?[A-Z]\.)?)[ ]*"
+                          rf"(?!(?i:{WATER_WORDS}|reservoir|dam|park|marina|beach)\b)[A-Z][a-z'-]+[ ]+(?:reported|sampled|collected|photographed|"
                           r"found|noticed|observed|called|submitted|sent|said|stated|noted|confirmed|spotted|saw)\b")
 
 
