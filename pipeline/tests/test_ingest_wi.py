@@ -329,7 +329,7 @@ def test_state_text_is_in_the_page_shape_and_its_numbers_match_the_fetch():
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
     # the counts the text gives, re-derived from the fixture's posts where it holds them all (the 2026 posts)
     assert "21 such posts" in t and "29 reports" in t and "13 combined sewer overflows" in t
-    assert "2 spills at treatment plants" in t and "one to ten days" in t and "sends none" not in t
+    assert "2 spills at treatment plants" in t and "one to six days" in t and "sends none" not in t
     reg = json.loads((ROOT / "data" / "notice-channels" / "wi.json").read_text())["channels"]
     assert not [c["id"] for c in reg if "four to ten days" in (c.get("note") or "")]
     assert "331,500 gallons into Lincoln Creek on September 3, 2026, posted on September 8" in t
@@ -813,3 +813,25 @@ def test_r3_p2_10_the_wisconsin_set_additions_change_no_other_states_placement(w
     monkeypatch.setattr(S, "COUNTY_FIELD_STATES", S.COUNTY_FIELD_STATES - {"WI"})
     monkeypatch.setattr(S, "COUNTY_STATES", {k: v for k, v in S.COUNTY_STATES.items() if k != "WI"})
     assert run() == with_wi
+
+
+def test_r3_p2_11_delays_come_from_the_overflows_own_dates_and_watched_means_monitored():
+    from datetime import date
+    recs = built()[0].values()
+    first = {}
+    for r in recs:
+        if r["started_at"]:                                   # only a start the post gives for the overflow itself
+            d = (date.fromisoformat(r["published_at"][:10]) - date.fromisoformat(r["started_at"][:10])).days
+            first[r["raw"]["slug"]] = min(d, first.get(r["raw"]["slug"], d))
+    assert first and all(1 <= d <= 6 for d in first.values())  # the range the texts give (11 posts on the full list)
+    t = (ROOT / "research" / "wi" / "state-text.md").read_text()
+    y = (ROOT / "data" / "sources" / "wi-mmsd-storm-updates.yaml").read_text()
+    assert "one to six days after it began, four days at the median" in t and "one to ten" not in t
+    assert "Posted 1 to 6 days" not in y and "1 to 6 days after it (median 4)" in y.replace("\n#  ", "")
+    reg = json.loads((ROOT / "data" / "notice-channels" / "wi.json").read_text())["channels"]
+    for c in reg:
+        if re.search(r"\bwatched\b", c.get("note") or "") and "not watched" not in (c.get("note") or ""):
+            assert c["monitored"] is True, c["id"]
+    src = json.loads((ROOT / "research" / "wi" / "sources.json").read_text())
+    assert not any("reaches EPA's event tables" in (s.get("status_reason") or "") for s in src)
+    assert "City of Superior, combined sewer overflow page and 2025 annual notice" in t
