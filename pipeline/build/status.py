@@ -180,7 +180,7 @@ MONTHLY_CURRENT_DAYS = 90
 DAYS_TEXT = re.compile(r"(\d+)\s+days?\s+with\s+discharge", re.I)
 EVENTS_TEXT = re.compile(r"(\d+)\s+discharge\s+events?", re.I)
 EPA_MONTHLY_SOURCES = ("nj-echo-monthly", "echo-cso-dmr-monthly",
-                       "in-echo-dmr-cso")
+                       "in-echo-dmr-cso", "wv-echo-dmr-cso")
 POINT_ADVISORY_TYPES = {"beach_advisory", "beach_closure", "rain_advisory", "hab_advisory"}
 WHOLE_WATER_KINDS = {"lake", "pond", "reservoir"}
 SMALL_WATER_KM2 = 50
@@ -1111,6 +1111,8 @@ COUNTY_FIELD_STATES.add("IN")    # Indiana: a record or outfall row with no poin
 # States whose registry rows' county reaches the resolver's stand-in record for the outfall (outfall_waters and
 # Resolver.row_water): Indiana only, so no other state's ties change
 REGISTRY_COUNTY_STATES = {"IN"}
+COUNTY_STATES["LA"] = "la-counties.json"       # Louisiana: Baton Rouge's reports give a water name and the parish, no point
+COUNTY_FIELD_STATES.add("LA")
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}
@@ -2430,6 +2432,29 @@ class Resolver:
 
     def resolve(self, ev: dict) -> dict:
         out = self._resolve(ev)
+        parts = extent_part_points(ev)
+        if parts:
+            # an advisory whose authority drew it as several areas or lines (West Virginia DEP's bloom map only,
+            # EXTENT_PART_SOURCES): each part is placed by its own interior point, as the marker's part is, so a
+            # second lake the advisory covers is not left out; a water's colour still follows colours_whole_water
+            # and advisory_on_river (a large lake or a river keeps a marker only)
+            got = list(out.get("water_slugs") or [])
+            added = []
+            for lat, lon in parts:
+                o = self._resolve({**ev, "lat": lat, "lon": lon})
+                for sl in o.get("water_slugs") or []:
+                    if sl not in got:
+                        got.append(sl)
+                        added.append(sl)
+            if added:
+                if out.get("water_match") in (None, "none"):
+                    out["water_match"] = "geometry"
+                out["water_slugs"] = got
+                out.pop("unplaced_reason", None)
+            out["extent_parts"] = {"parts": len(parts) + 1, "waters_added": added}
+            out["note"] = "; ".join(x for x in (out.get("note"), (
+                f"the authority's advisory has {len(parts) + 1} parts; each is placed by its own point"
+                + (f" ({len(added)} more water{'s' if len(added) != 1 else ''})" if added else ""))) if x)
         if text_over_flag(ev):
             # the water comes from the notice's text against its form's flag: the placement says so (TEXT_OVER_FLAG)
             raw = ev.get("raw") or {}
@@ -3294,6 +3319,34 @@ def reach_waters(reach: dict, waters: dict) -> list[str]:
                 found.append(slug)
     _REACH_WATERS[key] = found
     return found
+
+
+# sources whose records keep the authority's own multipart extent (raw.agency_extent, GeoJSON) for placement by part
+EXTENT_PART_SOURCES = {"wv-dep-hab-advisories"}
+
+
+def extent_part_points(ev: dict) -> list[tuple[float, float]]:
+    """(lat, lon) of each part of a multipart agency extent other than the part the record's marker is on: an
+    interior point of each polygon (outside its holes), the point half way along each line; three decimals. Empty
+    for every other source and for a single-part extent."""
+    if ev.get("source_id") not in EXTENT_PART_SOURCES:
+        return []
+    g = (ev.get("raw") or {}).get("agency_extent")
+    if not isinstance(g, dict) or g.get("type") not in ("MultiPolygon", "MultiLineString"):
+        return []
+    try:
+        from shapely.geometry import Point, shape
+        geoms = list(shape(g).geoms)
+    except Exception:
+        return []
+    out = []
+    mk = Point(float(ev["lon"]), float(ev["lat"])) if ev.get("lat") is not None and ev.get("lon") is not None else None
+    for part in geoms:
+        pt = part.representative_point() if part.geom_type == "Polygon" else part.interpolate(0.5, normalized=True)
+        if mk is not None and part.buffer(0.002).contains(mk):
+            continue                    # the marker's own part: placed by the marker
+        out.append((round(pt.y, 3), round(pt.x, 3)))
+    return out
 
 
 def names_its_water(ev: dict) -> bool:
