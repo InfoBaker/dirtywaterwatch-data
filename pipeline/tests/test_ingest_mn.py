@@ -530,3 +530,16 @@ def test_v2_d_revision_headings_are_scrubbed_at_both_saves_and_carried_ones_too(
     store["records"][0]["raw"]["_revisions"][0]["headings"] = ["Reported by Pat Example at 1234 Example Street"]
     assert M.main([]) == 0
     assert "Pat Example" not in json.dumps(store) and "1234 Example" not in json.dumps(store)
+
+
+def test_v2_p3_a_first_seen_error_page_makes_no_record_and_fails_the_run(monkeypatch):
+    idx = ('<h2>Spill information</h2><ul><li><a href="/Wastewater-Water/Services/Interceptor-Services/Spills/'
+           'Example.aspx">Example City</a>, March 2026</li></ul>')
+    calls = []
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    monkeypatch.setattr(M, "read_json", lambda path, default=None: {"records": []})
+    monkeypatch.setattr(M, "save_raw", lambda *a: None)
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **k: calls.append((list(recs), k)) or "x")
+    monkeypatch.setattr(M, "fetch", lambda u: idx if u == M.INDEX_URL else "<html><h1>Service unavailable</h1></html>")
+    assert M.main([]) == 1
+    assert calls == [([], {"ok": False, "error": calls[0][1]["error"]})] and "not read" in calls[0][1]["error"]
