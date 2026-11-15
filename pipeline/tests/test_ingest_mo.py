@@ -1,0 +1,392 @@
+"""Missouri: KC Water's overflow posts (ingest/mo_kc_water_news.py), MSD Project Clear's alerts (ingest/mo_msd_alerts.py),
+DNR's concern reports (ingest/mo_dnr_concerns.py), DNR's outfall layer (scripts/mo_outfall_layer.py), the operator rows,
+the register, the rules row, the county-aware placement and the state text. Fixtures are synthetic, shaped on the real
+fetches of 2026-11-14 (Example names, placeholder house numbers and a placeholder telephone number); the concern
+report is a PDF written by the test. No network."""
+import importlib.util
+import json
+import re
+from pathlib import Path
+
+import pytest
+
+from build import status as S
+from ingest import mo_dnr_concerns as C
+from ingest import mo_kc_water_news as K
+from ingest import mo_msd_alerts as M
+import zones
+
+ROOT = Path(__file__).resolve().parents[2]
+FIX = Path(__file__).resolve().parent / "fixtures" / "mo"
+AT = "2026-11-14T18:00:00Z"
+PERSONAL = ["1234 Example", "5678 Sample", "4321 Example", "Jane Example", "573-555-0100", "555-0100", "Staff Example",
+            "media@example.org", "1234 Example Lane", "Example Neighbor"]
+
+
+def _script(name):
+    spec = importlib.util.spec_from_file_location(name, ROOT / "scripts" / f"{name}.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+# ---------------------------------------------------------------- KC Water
+
+def kc():
+    recs, stats = K.run([(FIX / "kc_feed.xml").read_bytes()], [], AT)
+    return {r["source_record_id"]: r for r in recs}, stats
+
+
+def test_kc_notice_response_time_is_an_upper_bound_with_its_end_volume_and_water():
+    recs, stats = kc()
+    r = recs["9001"]
+    assert r["event_type"] == "sso" and r["status"] == "unknown"
+    assert r["started_at"] == "2024-10-14T13:30:00-05:00" and r["time_precision"] == "minute"
+    assert r["raw"]["start_kind"] == "response" and r["raw"]["start_is_upper_bound"] is True
+    assert r["ended_at"] == "2024-10-14T20:00:00-05:00" and r["raw"]["ended_at_precision"] == "minute"
+    assert r["volume_gal"] == 39000 and r["waterbody_text"] == "Missouri River"
+    assert r["published_at"] == "2024-10-15T17:15:57-05:00" and r["reported_at"] is None
+    assert r["raw"]["time_zone"] == "America/Chicago" and r["discharger_id"] == "mo-kansas-city-mo0024911"
+    assert r["source_url"] == "https://www.kcwater.us/news/customers-advised-of-wastewater-overflow-near-example-street/"
+    assert r["raw"]["counties"] == ["Jackson County", "Clay County", "Platte County", "Cass County"]
+    assert stats["notices"] == 5 and stats["not_notices"] == 1 and stats["news_posts"] == 6
+
+
+def test_kc_update_is_a_copy_whose_end_completes_the_first_notice():
+    recs, _ = kc()
+    first, upd = recs["9002"], recs["9003"]
+    assert first["started_at"] == "2022-09-30T19:00:00-05:00" and first["raw"]["start_kind"] == "start"
+    assert upd["duplicate_of"] == first["event_id"] and first["duplicate_of"] is None
+    assert first["ended_at"] == "2022-10-01T01:30:00-05:00" and first["raw"]["end_from"] == upd["source_url"]
+    assert first["waterbody_text"] == "Brush Creek"
+
+
+def test_kc_heavy_rain_post_morning_time_and_bond_post_dropped():
+    recs, _ = kc()
+    r = recs["9004"]
+    assert r["started_at"] == "2020-07-27T07:46:00-05:00" and r["ended_at"] == "2020-07-27T15:14:00-05:00"
+    assert r["raw"]["multiple_sites"] is True and r["waterbody_text"] == "Rock Creek"
+    assert "Missouri River" in r["raw"]["waters_named"]
+    assert "Buckeye Creek" not in r["raw"]["waters_named"]          # a pump station's name, not a water reached
+    assert "9005" not in recs and "9007" not in recs
+
+
+def test_kc_unreadable_end_is_left_open_and_no_water_reached_is_unplaced():
+    r = kc()[0]["9006"]
+    assert r["ended_at"] is None                                      # "11:am" is not a time; never the start
+    assert r["raw"]["reached_water"] is False and r["waterbody_text"] is None
+
+
+def test_kc_records_and_raw_save_carry_no_house_number_or_contact():
+    recs, _ = kc()
+    blob = json.dumps(list(recs.values())) + K.safe_feed((FIX / "kc_feed.xml").read_bytes()).decode()
+    for p in PERSONAL:
+        assert p not in blob
+
+
+def test_kc_records_are_placed_by_named_water_only_and_the_raw_save_holds_no_post_text():
+    recs, _ = kc()
+    assert {r["raw"]["_placement"] for r in recs.values()} == {"named_water_only"}
+    assert not [r for r in recs.values() if "post_text" in r["raw"]]
+    saved = json.loads(K.safe_feed((FIX / "kc_feed.xml").read_bytes()))
+    assert len(saved["items"]) == 5 and not [i for i in saved["items"] if "text" in i]
+    assert not [i for i in saved["items"] if "Bonds" in i["title"]]
+
+
+def test_kc_first_page_404_is_a_failed_run(monkeypatch):
+    class Resp:
+        status_code, content = 404, b""
+
+        def raise_for_status(self):
+            raise K.requests.HTTPError("404")
+    monkeypatch.setattr(K.requests, "get", lambda *a, **k: Resp())
+    with pytest.raises(K.requests.HTTPError):
+        K.fetch(False)
+
+
+# ---------------------------------------------------------------- MSD
+
+def msd():
+    recs, stats = M.run([json.loads((FIX / "msd_posts.json").read_text())], [], AT)
+    return {r["source_record_id"]: r for r in recs}, stats
+
+
+def test_msd_weekday_is_the_latest_on_or_before_the_post_and_advice_is_quoted_not_dated():
+    recs, stats = msd()
+    r = recs["8001"]
+    assert r["started_at"] == "2023-12-20" and r["time_precision"] == "day"      # posted Thursday; found Wednesday
+    assert r["raw"]["start_kind"] == "discovered" and r["raw"]["start_is_upper_bound"] is True
+    assert r["ended_at"] is None and r["status"] == "unknown"
+    assert r["waterbody_text"] == "Fee Fee Creek" and "until the cleanup is complete" in r["advice_text"]
+    assert r["published_at"] == "2023-12-21T22:08:05Z" and r["raw"]["time_zone"] == "America/Chicago"
+    assert r["discharger_id"] == "mo-st-louis-mo0025151"
+    assert stats["notices"] == 4
+
+
+def test_msd_contained_spill_unplaced_follow_up_linked_sheen_and_press_coverage_dropped():
+    recs, _ = msd()
+    assert recs["8002"]["waterbody_text"] is None and recs["8002"]["started_at"] == "2024-05-08"
+    assert recs["8003"]["duplicate_of"] == recs["8002"]["event_id"]
+    assert "8004" not in recs and "8005" not in recs
+    r = recs["8006"]
+    assert r["started_at"] == "2015-06-12" and r["volume_gal"] == 77000 and r["waterbody_text"] == "Sugar Creek"
+
+
+# ---------------------------------------------------------------- DNR concern reports
+
+def _pdf(lines):
+    """A one-page text PDF: lines is [(x, y, text)] (the reader's own coordinates, top of page at y 760)."""
+    def esc(t):
+        return t.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
+    ops = "BT /F1 9 Tf " + " ".join(f"1 0 0 1 {x} {y} Tm ({esc(t)}) Tj" for x, y, t in lines) + " ET"
+    data = ops.encode("latin-1")
+    return (b"%PDF-1.4\n1 0 obj\n<< /Type /Catalog >>\nendobj\n2 0 obj\n<< /Length " + str(len(data)).encode() +
+            b" >>\nstream\n" + data + b"\nendstream\nendobj\n%%EOF\n")
+
+
+def _block(y, region, received, investigated, source, county, types, no, info, comments):
+    rows = [(28.8, y, region), (93.55, y, received), (166.8, y, source[0]), (352.8, y, types[0]), (495.0, y, "XX"),
+            (96.35, y - 12, investigated), (166.8, y - 12, source[1] if len(source) > 1 else county),
+            (166.8, y - 23, county), (28.8, y - 47, "Concern No."), (100.25, y - 47, f" {no}"),
+            (28.8, y - 68, "Concern Info"), (94.8, y - 68, info), (28.8, y - 92, "Comments"), (94.8, y - 92, comments)]
+    if len(types) > 1:
+        rows.append((352.8, y - 12, types[1]))
+    return rows
+
+
+def concern_pdf():
+    head = [(369.1, 760, "Water Pollution Control Detail Report"), (399.5, 745, "Concerns Investigated Between"),
+            (350.25, 730, "February 01, 2026 and February 28, 2026"),
+            (28.8, 714, 'Note: "Concern Info" refers to the information provided to the department by the concerned party.'),
+            (81.65, 680, "Date Received"), (166.8, 680, "Suspected Source"), (28.8, 668, "Region"),
+            (72.7, 668, "Investigation Date")]
+    b1 = _block(640, "KCRO", "2/16/2026", "2/18/2026", ["City of St.", "Joseph"], "Buchanan",
+                ["Bypass or Sewer Overflow"], 70001,
+                "From Webform - Date of Incident or Date First Noticed 02/15/2026 sewage entering Blacksnake Creek.",
+                "The sanitary sewer overflow (SSO) was entered into the SSO/Bypass Event System. The SSO Event ID is 25395.")
+    b2 = _block(520, "SWRO", "2/9/2026", "2/10/2026", ["Example Lagoon"], "Greene", ["Bypass or Sewer Overflow"], 70002,
+                "Jane Example at 1234 Example Lane, 573-555-0100, says sewage runs into a ditch.",
+                "No violations of the Missouri Clean Water Law were observed; no further actions.")
+    b3 = _block(400, "NERO", "2/5/2026", "2/6/2026", ["Example Neighbor"], "Pettis",
+                ["Single Family Residence", "Bypass or Sewer Overflow"], 70003,
+                "A septic tank overflows behind a house.", "Forwarded to the county health department.")
+    b4 = _block(280, "SERO", "2/12/2026", "2/13/2026", ["City of Marble", "Hill"], "Bollinger",
+                ["Bypass or Sewer Overflow"], 70004,
+                "Jane Example says a lift station overflows and sewage flows into Example Creek.",
+                "Referred to the city.")
+    b5 = _block(160, "SLRO", "2/20/2026", "2/21/2026", ["Example Mobile Home Park"], "Jefferson",
+                ["Land Disturbance"], 70005, "Mud in a creek.", "Letter of Warning issued.")
+    foot = [(28.8, 20, "Friday, March 6, 2026"), (525.8, 20, "Page 2 of 58")]
+    return _pdf(head + b1 + b2 + b3 + b4 + b5 + foot)
+
+
+def concerns():
+    meta = {"page_url": "https://dnr.mo.gov/document-search/example", "pdf_url": "https://dnr.mo.gov/example.pdf",
+            "last_revised": "2026-02-27"}
+    recs, stats, safe = C.run([(concern_pdf(), meta)], [], AT)
+    return {r["source_record_id"]: r for r in recs}, stats, safe
+
+
+def test_concern_blocks_parse_with_the_reports_own_clocks():
+    blocks, meta = C.blocks(concern_pdf())
+    assert [b["no"] for b in blocks] == ["70001", "70002", "70003", "70004", "70005"]
+    assert meta["period"] == ["2026-02-01", "2026-02-28"] and meta["generated"] == "2026-03-06"
+
+
+def test_allegation_filter_keeps_operator_reports_and_public_concerns_marked_drops_the_unsupported():
+    recs, stats, _ = concerns()
+    assert set(recs) == {"70001", "70004"}
+    assert stats["sewer_overflow_type"] == 4 and stats["drop_not_found"] == 1 and stats["drop_private"] == 1
+    op = recs["70001"]
+    assert op["raw"]["dnr_finding"] == "operator_reported" and op["raw"]["provenance"] == "operator"
+    assert op["raw"]["citizen_caution"] is False and op["raw"]["sso_event_id"] == "25395"
+    assert op["started_at"] == "2026-02-15" and op["reported_at"] == "2026-02-16" and op["time_precision"] == "day"
+    assert op["raw"]["investigated_on"] == "2026-02-18" and op["published_at"] is None and op["ended_at"] is None
+    assert op["discharger_name"] == "City of St. Joseph" and op["waterbody_text"] == "Blacksnake Creek"
+    assert op["raw"]["county"] == "Buchanan County" and op["raw"]["report_generated"] == "2026-03-06"
+    pub = recs["70004"]
+    assert pub["raw"]["dnr_finding"] == "not_stated" and pub["raw"]["citizen_caution"] is True
+    assert pub["raw"]["provenance"] == "public" and "not confirmed" in pub["authority"]
+    assert pub["started_at"] == "2026-02-12" and pub["raw"]["start_kind"] == "received"
+    assert pub["discharger_name"] == "City of Marble Hill"         # the pieces joined against Missouri's permit towns
+
+
+def test_concern_text_and_people_never_reach_records_or_the_raw_save():
+    recs, _, safe = concerns()
+    blob = json.dumps(list(recs.values())) + json.dumps(safe)
+    for p in PERSONAL + ["septic tank overflows behind", "runs into a ditch", "Example Lagoon", "Letter of Warning"]:
+        assert p not in blob
+    for r in recs.values():
+        assert "info" not in r["raw"] and "comments" not in r["raw"] and "source" not in r["raw"]
+
+
+def test_a_later_report_that_finds_nothing_withdraws_the_concern():
+    meta = {"pdf_url": "https://dnr.mo.gov/example.pdf"}
+    head = [(350.25, 730, "February 01, 2026 and February 28, 2026"), (28.8, 20, "Friday, March 6, 2026"),
+            (525.8, 20, "Page 2 of 5")]
+    kept = _pdf(head + _block(640, "SWRO", "2/9/2026", "2/10/2026", ["City of Marble", "Hill"], "Bollinger",
+                              ["Bypass or Sewer Overflow"], 70010, "A lift station overflows.", "Referred to the city."))
+    head2 = [(350.25, 730, "March 01, 2026 and March 31, 2026"), (28.8, 20, "Monday, April 6, 2026"),
+             (525.8, 20, "Page 2 of 5")]
+    later = _pdf(head2 + _block(640, "SWRO", "2/9/2026", "3/3/2026", ["City of Marble", "Hill"], "Bollinger",
+                                ["Bypass or Sewer Overflow"], 70010, "A lift station overflows.",
+                                "No violations were observed; no further action."))
+    for order in ([(kept, meta), (later, meta)], [(later, meta), (kept, meta)]):     # the report periods decide
+        recs, stats, _ = C.run(order, [], AT)
+        assert recs == [] and stats["withdrawn"] == 1
+    first, _, _ = C.run([(kept, meta)], [], AT)
+    recs, stats, _ = C.run([(later, meta)], first, AT)                                # across runs too
+    assert recs == [] and stats["withdrawn_concerns"][0]["concern_no"] == "70010"
+
+
+def test_concerns_and_msd_are_placed_by_named_water_only():
+    assert {r["raw"]["_placement"] for r in concerns()[0].values()} == {"named_water_only"}
+    assert {r["raw"]["_placement"] for r in msd()[0].values()} == {"named_water_only"}
+
+
+# ---------------------------------------------------------------- DNR outfall layer
+
+def test_outfall_layer_supersedes_epa_rows_adds_new_ones_and_holds_back_the_ethanol_plant():
+    L = _script("mo_outfall_layer")
+    doc = {"features": [
+        {"attributes": {"PERMIT_ID": "MO0025151", "P_FEAT_ID": "021", "CSO": "Y", "CA_NAME": "Metropolitan St. Louis "
+                        "Sewer District", "FAC_NAME": "MSD Lemay WWTP", "REC_STREAM": "River des Peres", "OBJECTID": 1},
+         "geometry": {"x": -90.2812345, "y": 38.5612345}},
+        {"attributes": {"PERMIT_ID": "MO0023043", "P_FEAT_ID": "003", "CSO": "Y", "CA_NAME": "City of St. Joseph",
+                        "FAC_NAME": "St Joseph WPF", "REC_STREAM": "Tributary to Missouri R.", "OBJECTID": 2},
+         "geometry": {"x": -94.862, "y": 39.767}},
+        {"attributes": {"PERMIT_ID": "MO0023043", "P_FEAT_ID": "001", "CSO": "N", "CA_NAME": "City of St. Joseph",
+                        "OBJECTID": 3}, "geometry": {"x": -94.9, "y": 39.7}}]}
+    epa = [{"npdes_permit": "MO0023043", "outfall": "003", "state": "MO", "outfall_status": "CSO", "outfall_kind": "cso"},
+           {"npdes_permit": "MO0024911", "outfall": "010", "state": "MO", "outfall_status": "CSO", "outfall_kind": "cso"},
+           {"npdes_permit": "MO0134198", "outfall": "009", "state": "MO", "outfall_status": "CSO", "outfall_kind": "cso"},
+           {"npdes_permit": "MO0025151", "outfall": "163", "state": "MO", "outfall_status": "CLS", "outfall_kind": "cso"}]
+    out = L.build(doc, epa, AT)
+    rows = {(r["npdes_permit"], r["outfall"]): r for r in out["outfalls"]}
+    assert rows[("MO0025151", "021")]["lat"] == 38.561234 and "supersedes" not in rows[("MO0025151", "021")]
+    assert rows[("MO0023043", "003")]["supersedes"]["file"] == "data/outfalls-us.json"
+    assert ("MO0023043", "001") not in rows                          # a plant outfall of a CSO permit
+    assert rows[("MO0134198", "009")]["outfall_kind"] == "other"
+    assert {x["npdes_permit"] for x in out["epa_not_on_state_layer"]} == {"MO0024911", "MO0134198"}
+
+
+def test_outfall_file_counts():
+    d = json.loads((ROOT / "data" / "outfalls-mo.json").read_text())
+    assert d["cso_by_permit"] == {"MO0023043": 14, "MO0023221": 3, "MO0024929": 5, "MO0025151": 120, "MO0117960": 4}
+    assert sum(1 for r in d["outfalls"] if r["outfall_kind"] == "other") == 1
+
+
+# ---------------------------------------------------------------- operators, register, rules, zone
+
+def mo_ops():
+    return [r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "MO"]
+
+
+def test_operator_rows_hold_every_permit_once_with_the_feeds_ids_as_aliases():
+    ops = mo_ops()
+    permits = [p for r in ops for p in r["npdes_permits"]]
+    assert len(permits) == len(set(permits))
+    plants = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+              if r.get("state") == "MO"}
+    assert plants <= set(permits)
+    alias = {a: r for r in ops for a in r.get("aliases") or []}
+    kc_row, msd_row = alias["mo-kansas-city-mo0024911"], alias["mo-st-louis-mo0025151"]
+    assert {"MO0024911", "MO0024929"} <= set(kc_row["npdes_permits"]) and kc_row["kind"] == "cso"
+    assert {"MO0025151", "MO0025178", "MO0004391"} <= set(msd_row["npdes_permits"])
+    assert msd_row["outfall_count"] == 120 and kc_row["outfall_count"] == 85
+    assert alias["mo-carrollton-mo0134198"]["kind"] == "plant"       # the ethanol plant is not a CSO operator
+    assert not [r for r in ops if r["name"].startswith("City of Kansas City") and r is not kc_row]
+
+
+def test_register_has_the_dnr_report_per_operator_and_the_feeds():
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "mo.json").read_text())["channels"]}
+    for r in mo_ops():
+        row = reg[f"{r['id']}-dnr-report"]
+        assert row["basis_kind"] == "law" and row["barrier"] == "no_web_page"
+    assert reg["mo-kansas-city-mo0024911-news"]["feed_source_id"] == "mo-kc-water-overflow-notices"
+    assert reg["mo-st-louis-mo0025151-alerts"]["feed_source_id"] == "mo-msd-stl-project-clear"
+    assert reg["mo-dnr-concern-reports"]["feed_source_id"] == "mo-dnr-concern-reports"
+    assert reg["mo-dnr-mogem-sso-reports"]["barrier"] == "login_required"
+    cso = [k for k in reg if "-cso-permit-notice-" in k]
+    assert len(cso) == 7 and not [k for k in cso if "mo0134198" in k]
+
+
+def test_rules_row_and_day_start_caution():
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    mo = rules["red"]["by_state"]["MO"]
+    assert mo["hours"] is None and "RSMo 640.080" in mo["source"] and not re.search(r"\b(safe|clean)\b", mo["basis"], re.I)
+    ds = rules["unresolved"]["day_start_caution"]["sources"]
+    assert "mo-msd-stl-project-clear" in ds and "mo-dnr-concern-reports" in ds
+
+
+def test_missouri_is_central_time():
+    assert zones.zone_for("MO") == "America/Chicago" and zones.zone_for("MO", 38.6, -90.2) == "America/Chicago"
+
+
+# ---------------------------------------------------------------- county-aware placement
+
+def _waters():
+    return {"brush-creek-kansas-city-mo": {"bbox": [-94.60, 39.02, -94.50, 39.06]},       # Jackson County
+            "brush-creek-elsewhere-mo": {"bbox": [-92.30, 37.10, -92.20, 37.15]}}         # far from Kansas City
+
+
+@pytest.fixture
+def mo_known(monkeypatch):
+    """Missouri counted as a state of the build (it is not live yet; the placement rule is the same once it is)."""
+    known = set(S.states()) | {"MO"}
+    monkeypatch.setattr(S, "states", lambda *a, **k: known)
+
+
+def test_counties_field_keeps_a_name_within_the_operators_counties_only(mo_known):
+    ev = {"raw": {"state": "MO", "counties": ["Jackson County", "Clay County", "Platte County", "Cass County"]},
+          "source_id": "mo-kc-water-overflow-notices"}
+    kept, why = S.county_slugs(["brush-creek-kansas-city-mo", "brush-creek-elsewhere-mo"], ev, _waters(),
+                               lambda *a: None)
+    assert kept == ["brush-creek-kansas-city-mo"] and "Jackson County or Clay County" in why
+
+
+def test_single_county_field_behaves_as_before(mo_known):
+    ev = {"raw": {"state": "MO", "county": "Jackson County"}, "source_id": "mo-dnr-concern-reports"}
+    kept, why = S.county_slugs(["brush-creek-kansas-city-mo", "brush-creek-elsewhere-mo"], ev, _waters(),
+                               lambda *a: None)
+    assert kept == ["brush-creek-kansas-city-mo"] and why.endswith("the county the report gives")
+    ev = {"raw": {"state": "MO"}, "source_id": "mo-dnr-concern-reports"}
+    assert S.county_slugs(["a", "b"], ev, {}, lambda *a: None) == (["a", "b"], None)
+
+
+def test_counties_list_is_not_read_for_other_states(monkeypatch):
+    """Tennessee's records carry raw.counties of their own; its placement is the same as before the Missouri rule
+    (Astra 2026-11-14 P1-10)."""
+    known = set(S.states()) | {"TN"}
+    monkeypatch.setattr(S, "states", lambda *a, **k: known)
+    ev = {"raw": {"state": "TN", "counties": ["Knox County"]}, "source_id": "tn-tdec-events-report"}
+    w = {"a-tn": {"bbox": [-83.95, 35.95, -83.90, 36.0]}, "b-tn": {"bbox": [-90.0, 35.1, -89.9, 35.2]}}
+    assert S.county_slugs(["a-tn", "b-tn"], ev, w, lambda *a: None) == (["a-tn", "b-tn"], None)
+
+
+# ---------------------------------------------------------------- state text and waters
+
+def test_state_text_is_in_the_page_shape():
+    t = (ROOT / "research" / "mo" / "state-text.md").read_text()
+    assert t.startswith("---\nstate: MO\nname: Missouri\nupdated: ")
+    for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
+              "Known problems in the data", "What this site does about it"):
+        assert f"**{h}.**" in t
+    assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
+    assert "99 posts from July 2016 to August 2025" in t and "89 posts from June 2013 to January 2026" in t
+    assert "945 concerns, 140 of them" in t and "146 combined sewer outfalls on five permits" in t
+
+
+def test_missing_waters_list_leaves_out_the_national_lists_names():
+    d = json.loads((ROOT / "research" / "mo" / "receiving-waters-missing.json").read_text())
+    names = _script("mo_report_water_names")
+    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())
+    held = {names.key(n) for w in nat["states"]["MO"]["waters"]
+            for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or []), *(w.get("gnis_names") or [])] if n}
+    assert d["state"] == "MO" and d["waters"] == len(d["rows"]) > 0
+    for r in d["rows"]:
+        assert names.key(r["name"]) not in held or r.get("resolved")
+        assert not re.search(r"(?i)presumed use|storm|outfall", r["name"])
+    keys = [(r["name"], r["county"]) for r in d["rows"]]
+    assert len(keys) == len(set(keys))

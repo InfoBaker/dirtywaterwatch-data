@@ -125,6 +125,16 @@
 #                  and echo_sewer_overflow_events (EPA's overflow tables, MN permits: the Bois Forte report)
 #                  North Dakota: nd_deq_hab_listings (DEQ's bloom advisories and warnings PDF) and nd_deq_eir_legacy (DEQ's
 #                  incident archive 1975-2020, the sewage rows, re-read every 30 days); HazConnect is a bot wall (register)
+#                  Missouri: mo_kc_water_news (KC Water's overflow news posts through the site search's RSS feed; the
+#                  first two pages each run, `--backfill` for the 2016- archive), mo_msd_alerts (MSD Project Clear's own
+#                  overflow alerts and releases through its WordPress API; `--backfill` for 2013-) and mo_dnr_concerns
+#                  (DNR's monthly Water Pollution Control concern reports, the sewer overflow concerns with the allegation
+#                  filter; each PDF read once); data/outfalls-mo.json is DNR's outfall layer (scripts/mo_outfall_layer.py)
+#                  Kansas: ks_leavenworth_sso (Leavenworth's Sanitary Sewer Overflow Transparency Reports: the index, the
+#                  last two years' pages and new overflow pages; `--backfill` for 2020-), ks_kdhe_stream_advisories (KDHE's
+#                  news flash feed: stream advisories issued and rescinded; the feed holds about a month) and ks_kdhe_hab
+#                  (KDHE's HAB status layer, lakes under a Hazard, Warning or Watch, dated to the polls); Mountain time in
+#                  Sherman, Wallace, Greeley and Hamilton counties (pipeline/zones.py kansas_zone)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

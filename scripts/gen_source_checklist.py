@@ -66,6 +66,8 @@ AREA_TITLES = {
     "oh": "Ohio",
     "mn": "Minnesota",
     "nd": "North Dakota",
+    "mo": "Missouri",
+    "ks": "Kansas",
 }
 
 HEADER = """# Source checklist

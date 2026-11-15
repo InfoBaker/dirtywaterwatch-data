@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1481 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1504 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -48,7 +48,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
 | mn | 7 | 0 | 5 | 4 | 2 | 18 |
 | nd | 6 | 0 | 7 | 1 | 1 | 15 |
-| **all** | **532** | **234** | **433** | **206** | **76** | **1481** |
+| mo | 6 | 0 | 5 | 2 | 0 | 13 |
+| ks | 4 | 0 | 4 | 1 | 1 | 10 |
+| **all** | **542** | **234** | **442** | **209** | **77** | **1504** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1720,3 +1722,36 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nd-permit-factsheet-sso-tables` | NDPDES permit factsheet overflow and bypass tables (Fargo, Grand Forks) | watch | fetched | events | Not ingested: Fargo's package is image-only and Grand Forks' table could not be read safely by rule; history to reconcile with an agency export. Registered as a channel with its barrier. |
 | `nd-deq-eir-legacy-oilfield` | ND DEQ Oilfield Environmental Incidents - Historical (1975-2020) | rejected | search_only | events | Oilfield releases only; no sewage. |
 | `nd-hazconnect-public-incidents` | North Dakota Unified Spill Reporting System (HazConnect) public incident list | unreachable | access_failed | events | The public list answered 403 with Cloudflare's block page to the project's identified client on 2026-11-14, as on 2026-11-03 and 2026-11-09. A barrier to register, not to get around: the fix is a supported export or allow-listing from DEQ and the Department of Emergency Services. |
+
+## mo: Missouri (13)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `mo-dnr-concern-reports` | Missouri DNR Water Pollution Control concern reports (monthly PDFs) | used | fetched | events | Read by ingest/mo_dnr_concerns.py: the sewer overflow concerns with the allegation filter; the concern text (people, homes) is never stored. |
+| `mo-dnr-cso-areas` | Missouri DNR CSO Areas | used | fetched | outfalls | Combined-sewer service areas. |
+| `mo-dnr-npdes-outfalls` | Missouri DNR NPDES Waste Water Outfalls (CSO flag) | used | fetched | outfalls | Read by scripts/mo_outfall_layer.py into data/outfalls-mo.json: 146 CSO features on five permits (MSD Lemay 120), 26 of them EPA's rows. |
+| `mo-dnr-sso-reporting-mogem` | Missouri DNR sanitary sewer overflow and bypass reporting (MoGEM) | used | fetched | law | States the 24-hour duty to DNR and the MoGEM online reporting system; no public output and no public notice duty. |
+| `mo-kc-water-overflow-notices` | KC Water overflow press releases and Smart Sewer site | used | fetched | events | Read by ingest/mo_kc_water_news.py: KC Water's own overflow posts, a selective record; times, gallons and the named water from its text. |
+| `mo-msd-stl-project-clear` | MSD Project Clear (St. Louis) sewer overflow pages | used | fetched | events | Read by ingest/mo_msd_alerts.py: MSD's own overflow alerts and releases, a selective record (no rule requiring them was found); days, rarely times, never an end. |
+| `mo-dnr-beach-status` | Missouri DNR state park beach status (weekly E. coli) | watch | search_only | advisories | The beach status map is drawn by a script with per-beach pages; out of season on 2026-11-14, its data were not read. Registered and watched for availability. |
+| `mo-dnr-hab-map` | Missouri DNR Harmful Algal Bloom reports map | watch | search_only | advisories | An ArcGIS Experience app and a Survey123 form; the layer was not resolved in this build. Registered and watched for availability. |
+| `mo-dnr-meerts-search` | Missouri DNR MEERTS historical incident search | watch | fetched | events | Registered and watched; not read. |
+| `mo-dnr-merlin-search` | Missouri DNR MERLIN environmental emergency public search | watch | fetched | events | Registered and watched; a form, not read. |
+| `mo-swim-guide` | Swim Guide Missouri state park beaches | watch | search_only | prior_art | Lists Missouri state park beaches; most show 'No data available'. |
+| `mo-dnr-environmental-concern` | Missouri DNR environmental concern / 24-hour spill line | rejected | fetched | events | Intake only (573-634-2436); no public list. |
+| `mo-msdis-npdes-outfalls` | MSDIS MO_NPDES_Outfalls (University of Missouri copy) | rejected | search_only | outfalls | Copy of the DNR layer; use the DNR source. |
+
+## ks: Kansas (10)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ks-kdhe-hab-status` | KDHE HAB Status service (Lake Points, Lake Status) | used | fetched | advisories | Read by ingest/ks_kdhe_hab.py: lakes under a Hazard, Warning or Watch, dated to the polls that list them. |
+| `ks-kdhe-stream-advisories` | KDHE stream advisories (news flash RSS) | used | fetched | advisories | Read by ingest/ks_kdhe_stream_advisories.py: issue and rescission pairs; the archive is what has been kept since the first read. |
+| `ks-law-kar-28-16-27` | K.A.R. 28-16-27: emergency or accidental discharge of sewage; report to the department | used | fetched | law | Immediate report to KDHE; planned bypass needs 7 days' notice and approval; no public notice. |
+| `ks-leavenworth-sso-transparency` | City of Leavenworth Sanitary Sewer Overflow Transparency Reports and per-event SSO pages | used | fetched | events | Read by ingest/ks_leavenworth_sso.py: the City's page per overflow, 2020 to 2026. |
+| `ks-kdhe-monitoring-sites` | KDHE Surface Water Monitoring Sites (lakes and streams) | watch | search_only | monitoring | Station locations for bacteria context; not an advisory source. |
+| `ks-kdhe-spills-dasc` | KDHE reported spills map layer (Spills_DASC) | watch | fetched | events | A lead: not a sewer-overflow record (few sewage rows, approximate points); registered and watched. |
+| `ks-topeka-stream-advisories` | City of Topeka stream advisories (Utilities, topeka.org news) | watch | search_only | advisories | City news answered 403 in the research; registered, not read. |
+| `ks-ug-kck-consent-decree` | Unified Government of Wyandotte County/Kansas City, Kansas: consent decree (2013) and overflow control plan | watch | search_only | permits | Collection System Release Response Plan under the decree; no public notice channel found. |
+| `ks-kdhe-incident-report` | KDHE incident report form and spill line | rejected | search_only | events | Intake form; no public incident list found. |
+| `ks-kdhe-hab-page` | KDHE HAB page and CivicAlerts press releases | unreachable | search_only | advisories | Answers 403 to automated clients (2026-11-14); the map layer carries the same lakes. |
