@@ -280,11 +280,11 @@ def test_hab_advisories_keep_deqs_dates_and_lift(monkeypatch, tmp_path):
 def test_a_hab_advisory_for_part_of_a_lake_or_a_described_place_never_colours_a_whole_water(monkeypatch, tmp_path):
     recs, _ = habs(monkeypatch, tmp_path)
     bay = recs["Lake Specimen2019-10-28"]
-    assert bay["raw"]["_water_qualifier"] == "Example Bay" and "advisory_extent" not in bay["raw"]
+    assert bay["raw"]["_water_qualifier"] == "Example Bay" and bay["raw"]["advisory_extent"] == "part_of_water"
     assert bay["raw"]["counties"][1] == "Hot Spring County"
     # a stream described by a lake it lies near: the lake is not the affected water; DEQ's own point places it
     stream = [r for r in recs.values() if r["raw"].get("_water_description")][0]
-    assert stream["waterbody_text"] is None and "advisory_extent" not in stream["raw"]
+    assert stream["waterbody_text"] is None and stream["raw"]["advisory_extent"] == "part_of_water"
     assert stream["raw"].get("_placement") != "named_water_only"
     assert (stream["lat"], stream["lon"], stream["coord_source"]) == (35.123, -93.654, "source")
 
@@ -403,3 +403,56 @@ def test_an_empty_truncated_or_moved_list_ends_nothing(tmp_path, monkeypatch, ba
     recs = json.loads(out.read_text())["records"]
     assert {r["status"] for r in recs} == {"advisory_lifted"}
     assert all(r["ended_at"] == "2026-11-16T12:00:00Z" and r["raw"]["ended_at_precision"] == "poll" for r in recs)
+
+
+def _ar_status(tmp_path, monkeypatch, rows, area):
+    """A full status build with Arkansas live over invented lakes: each `area` is a lake's km² (None: unknown)."""
+    from datetime import UTC, datetime
+    from build import status as S
+    recs, out = habs(monkeypatch, tmp_path, {"updated": "November 1, 2026", "advisories": rows})
+    d = tmp_path / "events"
+    d.mkdir(exist_ok=True)
+    doc = json.loads(out.read_text())
+    (d / f"{H.SOURCE_ID}.json").write_text(json.dumps({**doc, "last_ok_at": "2026-11-01T12:00:00Z"}))
+
+    def lake(slug, name, x, y):
+        ring = [[x, y], [x + 0.05, y], [x + 0.05, y + 0.05], [x, y + 0.05], [x, y]]
+        return slug, {"slug": slug, "name": name, "kind": "lake", "state": "AR", "area_km2": area,
+                      "bbox": [x, y, x + 0.05, y + 0.05], "geometry": {"type": "Polygon", "coordinates": [ring]}}
+    waters = dict([lake("lake-specimen-ar", "Lake Specimen", -93.0, 34.5),
+                   lake("lake-exemplar-ar", "Lake Exemplar", -93.52, 35.48)])
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    rules = json.loads((R.ROOT / "data" / "rules.json").read_text())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"AR"})
+    rules["rain_likely"] = {**rules["rain_likely"], "enabled": False}
+    st, _ = S.build(now=datetime(2026, 11, 2, 12, tzinfo=UTC), write=False, events_dir=d, waters=waters, outfalls=[],
+                    registry={}, reaches={}, flows=({}, {}), rules=rules, placement_cache=False)
+    return st
+
+
+@pytest.mark.parametrize("area", [5.0, 500.0, None])
+def test_a_bay_advisory_never_colours_its_lake_in_a_full_status_build(tmp_path, monkeypatch, area):
+    rows = [{"waterbody": "Lake Specimen - Example Bay", "county": "Sample County", "area": "Exampleville, AR",
+             "date": "October 20, 2026", "lifted": ""},
+            {"waterbody": "Lake Exemplar", "county": "LaSample County", "area": "Sampletown, AR",
+             "date": "October 20, 2026", "lifted": ""}]
+    st = _ar_status(tmp_path, monkeypatch, rows, area)
+    spec = st["waters"].get("lake-specimen-ar") or {}
+    assert spec.get("status") == "grey", spec          # the lake keeps no colour from an advisory for one bay
+    # control: DEQ's advisory for the whole lake still colours a small or unknown-area lake
+    if area != 500.0:
+        assert st["waters"]["lake-exemplar-ar"]["status"] == "red"
+    # the bay's marker is never drawn at the parent lake's point: it has none until DEQ or a cited source gives one
+    bay = [r for r in json.loads((tmp_path / "events" / f"{H.SOURCE_ID}.json").read_text())["records"]
+           if r["raw"].get("_water_qualifier")][0]
+    assert bay.get("lat") is None and bay["raw"]["advisory_extent"] == "part_of_water"
+
+
+def test_the_part_of_water_extent_is_written_only_by_arkansas():
+    """build/status.py part_of_water changes only records carrying this value; no other state's code or data writes
+    it, so every other state's status output is unchanged."""
+    root = R.ROOT
+    hits = [p for d in ("pipeline/ingest", "data/sources") for p in (root / d).rglob("*")
+            if p.is_file() and p.suffix in (".py", ".yaml", ".json") and "part_of_water" in p.read_text(errors="ignore")]
+    assert {p.name for p in hits} == {"ar_transforms.py"}, hits
