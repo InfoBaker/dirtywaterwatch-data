@@ -81,6 +81,8 @@ REREAD_H = 24
 BACKFILL_FROM = "2025-01-01"
 PERMIT_MATCH_M = 3000
 KEEP_TYPES = re.compile(r"bypass|overflow|\bSSO\b|\bCSO\b", re.I)
+# a Receiving Stream that names no water ("Varies", "N/A", "unknown", "ground"): no waterbody_text, kept in raw
+NO_WATER = re.compile(r"(?i)n/?a|none|unknown|varies|various|multiple|tbd|-+|\.+|(?:the\s+)?ground|land|dry ditch")
 CSO_TEXT = re.compile(r"combined sewer|\bCSO\b", re.I)
 ENTRY = re.compile(r'<tr\b[^>]*>\s*<td[^>]*>\s*(?P<d1>[\d/]*)\s*</td>\s*<td[^>]*>\s*(?P<d2>[\d/]*)\s*</td>\s*<td[^>]*>'
                    r'(?:(?!</tr>).)*?incomingReportID=(?P<rid>\d+)"[^>]*>\s*Incoming Report - (?P<label>.*?) - (?P=rid)\s*</a>', re.S)
@@ -234,7 +236,7 @@ def make_record(rep: dict, fac: dict, listed: dict, permit: tuple, at: str) -> d
     end, ep = local_time(rep["incident_end"], rep["incident_end_time"])
     recd, _ = local_time(rep["date_received"], rep["time_received"])
     water = None if rep["receiving_stream_na"] or not rep["receiving_stream"] or \
-        re.fullmatch(r"(?i)n/?a|none|unknown|-", rep["receiving_stream"] or "") else rep["receiving_stream"]
+        NO_WATER.fullmatch(rep["receiving_stream"].strip()) else rep["receiving_stream"].strip()
     gal = None if rep["amount_unknown"] else rep["estimated_gallons"]
     raw = {"facility": fac.get("name"), "st_fac_id": fac.get("st_fac_id"), "program_ids": fac.get("program_ids"),
            "report_type": listed.get("label"), "listed_action_date": listed.get("listed"),

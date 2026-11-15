@@ -230,3 +230,12 @@ def test_focomp_report_leaving_the_page_keeps_its_record(tmp_path, monkeypatch):
     F.fold_facility(state, FAC, {"reports": [], "lat": 41.5, "lon": -93.5}, "2026-11-20T00:00:00Z")
     recs = {r["source_record_id"]: r for r in F.records(state, {FAC["st_fac_id"]: FAC}, [PLANT])}
     assert recs["900001"]["raw"]["_unlisted_since"] == "2026-11-20T00:00:00Z"
+
+
+def test_focomp_a_stream_field_that_names_no_water_places_nothing():
+    rep = F.parse_report((FIX / "focomp-report-900001.html").read_text())
+    for v in ("Varies", "N/A", "unknown", "Ground"):
+        r = F.make_record(dict(rep, receiving_stream=v), FAC, {"label": "Wet weather bypass"}, (None, None), AT)
+        assert r["waterbody_text"] is None and r["raw"]["receiving_stream_as_typed"] == v
+    r = F.make_record(dict(rep, receiving_stream=" Cedar River "), FAC, {"label": "x"}, (None, None), AT)
+    assert r["waterbody_text"] == "Cedar River"
