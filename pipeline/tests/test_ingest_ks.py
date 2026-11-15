@@ -689,3 +689,43 @@ def test_kdhe_water_named_again_after_a_revision_is_open_again_and_a_rescission_
     r6, _ = A.run(_feed(a, lift), r5, "2026-11-03T19:00:00Z")
     ex6 = {x["source_record_id"]: x for x in r6}["50-examplecreek"]
     assert ex6["status"] == "advisory_lifted" and ex6["ended_at"] == "2026-11-03T09:00:00-06:00"
+
+
+def test_leavenworth_year_shaped_house_numbers_and_old_saves_keep_nothing_personal():
+    """Verification P1-4: a year-shaped house number leaves the identifier; an earlier save whose page is not read again
+    loses names, phones and house numbers from its title, advice and place at the next read."""
+    assert L.record_id("/x/sanitary-sewer-overflow-at-2026-example-lane-reported-may-27-2026") == \
+        "sanitary-sewer-overflow-at-example-lane-reported-may-27-2026"
+    assert L.record_id("/x/sanitary-sewer-overflow-reported-april-27-2026-5678-sample-st") == \
+        "sanitary-sewer-overflow-reported-april-27-2026-sample-st"
+    old = L.record("/x/sanitary-sewer-overflow-reported-may-27-2020-example-court",
+                   _page("Sanitary Sewer Overflow Reported on May 27, 2020 at Example Court", "At 3:50 p.m. May 27, 2020."),
+                   AT)
+    old["raw"]["title"] = "Overflow at 1234 Example Court reported by Mr. Jane Example"
+    old["advice_text"] = "Avoid the creek; call Jane Example at (913) 555-0199 or 1234 Example Court."
+    old["outfall_name"] = "1234 Example Court"
+    recs, _ = L.run({}, [old], "2026-11-15T00:00:00Z")
+    blob = json.dumps(recs)
+    for p in PERSONAL + ["1234", "Jane"]:
+        assert p not in blob
+
+
+def test_leavenworth_distinct_same_day_pages_on_one_street_stay_two_records():
+    """Verification P2-3: two pages, one day, one street, different house numbers: two records through a migration
+    and two refreshes, neither address kept."""
+    pa = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2026-1234-example-court"
+    pb = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2026-5678-example-court"
+    ha = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 1234 Example Court",
+               "At 3:50 p.m. May 27, 2026, staff were notified. Posted May 27, 2026 at 5:10 PM")
+    hb = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 5678 Example Court",
+               "At 7:15 p.m. May 27, 2026, staff were notified. Posted May 27, 2026 at 8:30 PM")
+    legacy = L.record(pa, ha, "2026-06-01T00:00:00Z")                  # the earlier save under the shared identifier
+    legacy["raw"]["first_seen_at"] = "2026-06-01T00:00:00Z"
+    recs, _ = L.run({pa: ha, pb: hb}, [legacy], AT)
+    recs2, _ = L.run({pa: ha, pb: hb}, recs, "2026-11-15T00:00:00Z")
+    recs3, _ = L.run({pa: ha, pb: hb}, recs2, "2026-11-16T00:00:00Z")
+    assert len(recs3) == 2 and len({r["event_id"] for r in recs3}) == 2
+    assert {r["started_at"] for r in recs3} == {"2026-05-27T15:50:00-05:00", "2026-05-27T19:15:00-05:00"}
+    assert {r["raw"]["first_seen_at"] for r in recs3} == {"2026-06-01T00:00:00Z"}
+    blob = json.dumps(recs3)
+    assert "1234" not in blob and "5678" not in blob
