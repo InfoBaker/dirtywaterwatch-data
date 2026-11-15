@@ -18,7 +18,8 @@ Records (a standing list read as a snapshot)
   - started_at is the first read of the page that found it (time_precision poll; raw.start_basis: the closure began
     earlier, on a day ADH does not give); reported_at, published_at and source_updated_at stay null. Each read that
     lists it confirms it (raw._last_seen_in_source); the first read that no longer lists it ends it (advisory_lifted,
-    ended_at that read, raw.ended_at_precision "poll"). A page whose heading cannot be found is ok=False: the records
+    ended_at that read, raw.ended_at_precision "poll"). A page whose heading cannot be found, or whose list is not
+    followed by a heading or the end of the page (a cut-short response), is ok=False: the records
     are kept and nothing ends.
   - Placement: ADH names the beach, not its water, and the page gives no point; USGS GNIS has no feature of the name.
     The record is listed and placed on no water (raw._placement named_water_only with no water text, raw.
@@ -63,15 +64,18 @@ EMPTY = re.compile(r"^\s*(none|no (swim )?beaches (are )?(currently )?closed\.?|
 NAME_OK = re.compile(r"^(?=.{2,60}$)(?!.*\d{3})(?!.*\s[\u2013\u2014-]\s)(?!.*@)[A-Za-z][A-Za-z .,'&()/-]*(?: \d{1,2})?"
                      r"(?: [A-Za-z][A-Za-z .,'&()/-]*)?$")
 MARK = "\x00H "                    # a heading line: the list ends at the next one, whatever its words
+END = "\x01end of the main content"  # the end of <main>, <body> or <html>: closes the list like a heading
 # a cited point per beach, when one is found: {SB id: (lat, lon, basis)}
 BEACH_POINTS: dict[str, tuple[float, float, str]] = {}
 
 
 def list_lines(page: str) -> list[str]:
     """The lines under the 'Closed Swim Beaches' heading up to the next heading of any kind (or the end of the main
-    content); ValueError without the heading. Nothing here is saved: read() keeps only recognised items."""
+    content); ValueError without the heading, or when neither follows the list (a response cut short). Nothing here is saved: read() keeps only recognised items."""
     s = re.sub(r"<(script|style|nav|header|footer)\b.*?</\1>", " ", page or "", flags=re.S | re.I)
-    s = re.sub(r"</main\b.*", " ", s, flags=re.S | re.I)
+    # the end of the main content (or of the page) closes the list like a heading; a response with neither after
+    # the list was cut short and is not read (verification 2026-11-15 P1-2)
+    s = re.sub(r"</(?:main|body|html)\b.*", "\n" + MARK + END, s, count=1, flags=re.S | re.I)
     s = re.sub(r"<h\d\b[^>]*>", "\n" + MARK, s, flags=re.I)
     s = re.sub(r"<(?:br|p|li|tr|div|ul|ol|section|table|dl|dt|dd)\b[^>]*>", "\n", s, flags=re.I)
     s = htmllib.unescape(re.sub(r"<[^>]+>", " ", s)).replace("\u200b", " ").replace("\xa0", " ")
@@ -83,9 +87,10 @@ def list_lines(page: str) -> list[str]:
     out = []
     for ln in lines[i + 1:]:
         if ln.startswith(MARK):
-            break
+            return out
         out.append(ln)
-    return out
+    raise ValueError("the 'Closed Swim Beaches' list is not followed by a heading or the end of the page: the "
+                     "response was cut short; nothing is ended or saved")
 
 
 def read(lines: list[str]) -> dict[str, str]:

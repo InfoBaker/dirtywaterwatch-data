@@ -651,3 +651,27 @@ def test_every_standing_bloom_advisory_has_a_cited_point_or_says_why_not(monkeyp
     assert (round(lat, 3), round(lon, 3)) == (lat, lon) and 34.40 < lat < 34.58 and -93.23 < lon < -93.02
     text = (R.ROOT / "research" / "ar" / "state-text.md").read_text()
     assert "Mom's Lake" in text and "Jefferson Ridge West" in text and "not drawn on the map" in text
+
+
+@pytest.mark.parametrize("cut", [
+    "<html><body><main><h2>Closed Swim Beaches</h2><ul><li>SB901 - Example Point West</li>",   # cut after one item
+    "<html><body><main><h2>Closed Swim Beaches</h2><ul><li>SB901 - Example Point West</li></ul>",  # cut after the list
+])
+def test_a_truncated_list_after_a_valid_item_ends_nothing(tmp_path, monkeypatch, cut):
+    """A response that stops after a valid SB item, with no following heading and no end of the page, is not a
+    complete read: SB902 stays active, the run fails and nothing is saved (verification P1-2)."""
+    out = tmp_path / "adh.json"
+    assert B.main(["--file", str(FIX / "ar_adh_swim_beaches.html"), "--out", str(out), "--at", "2026-11-14T12:00:00Z"]) == 0
+    saved = []
+    monkeypatch.setattr(B, "save_raw", lambda *a, **k: saved.append(a))
+    monkeypatch.setattr(B, "fetch", lambda: cut)
+    assert B.main(["--out", str(out), "--at", "2026-11-15T12:00:00Z"]) == 1
+    doc = json.loads(out.read_text())
+    assert doc["ok"] is False and not saved
+    assert {r["source_record_id"]: r["status"] for r in doc["records"]} == {"sb901": "advisory_active",
+                                                                            "sb902": "advisory_active"}
+    # the same list, closed by the end of the main content, is a complete read
+    monkeypatch.setattr(B, "fetch", lambda: cut.split("</ul>")[0] + "</ul></main></body></html>")
+    assert B.main(["--out", str(out), "--at", "2026-11-16T12:00:00Z"]) == 0
+    st = {r["source_record_id"]: r["status"] for r in json.loads(out.read_text())["records"]}
+    assert st == {"sb901": "advisory_active", "sb902": "advisory_lifted"}
