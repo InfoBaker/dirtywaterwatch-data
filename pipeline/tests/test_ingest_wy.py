@@ -83,7 +83,9 @@ def test_a_listed_row_starts_at_date_issued_and_is_confirmed_by_each_bulletin():
     r = by_key(recs)[kid(A)]
     assert (r["started_at"], r["time_precision"], r["ended_at"], r["status"]) == ("2026-07-09", "day", None,
                                                                                   "advisory_active")
-    assert r["raw"]["_last_seen_in_source"] == "2026-08-11T21:00:00Z" and r["raw"]["time_zone"] == "America/Denver"
+    # the latest table stands until a later bulletin drops it: confirmed at this read (Astra review 2026-11-15 P1)
+    assert r["raw"]["_last_seen_in_source"] == T0 and r["raw"]["time_zone"] == "America/Denver"
+    assert r["raw"]["_last_listed_in_bulletin"] == "2026-08-11T21:00:00Z"
     assert r["published_at"] == "2026-08-04T21:00:00Z" and r["event_type"] == "hab_advisory"
     assert r["raw"]["program_end_bound"]["date"] == "2026-12-31" and meta["current"] == 2
 
@@ -276,3 +278,89 @@ def test_missing_waters_list():
     doc = json.loads((ROOT / "research" / "wy" / "receiving-waters-missing.json").read_text())
     assert doc["state"] == "WY" and (doc["rows"] or doc.get("resolved_names"))
     assert all(r["name"] == r["name"].strip() and not r["name"].isupper() for r in doc["rows"])
+
+
+# ---------------------------------------------------------------- Astra review 2026-11-15 (fix/co-mt-wy-review)
+
+def _status(tmp_path, recs, now, waters=None):
+    """A full status build with Wyoming live over the given records (invented waters)."""
+    from build import status as S
+    d = tmp_path / "events"
+    d.mkdir(exist_ok=True)
+    (d / f"{W.SOURCE_ID}.json").write_text(json.dumps({"source_id": W.SOURCE_ID, "ok": True, "fetched_at": T0,
+                                                       "last_ok_at": T0, "meta": {}, "count": len(recs),
+                                                       "records": recs}))
+
+    def lake(slug, name, x, y):
+        ring = [[x, y], [x + 0.05, y], [x + 0.05, y + 0.05], [x, y + 0.05], [x, y]]
+        return slug, {"slug": slug, "name": name, "kind": "lake", "state": "WY", "area_km2": 5.0,
+                      "bbox": [x, y, x + 0.05, y + 0.05], "geometry": {"type": "Polygon", "coordinates": [ring]}}
+    waters = waters or dict([lake("example-lake-wy", "Example Lake", -106.0, 42.0),
+                             lake("example-reservoir-wy", "Example Reservoir", -107.0, 43.0)])
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"WY"})
+    rules["rain_likely"] = {**rules["rain_likely"], "enabled": False}
+    st, _ = S.build(now=now, write=False, events_dir=d, waters=waters, outfalls=[], registry={}, reaches={},
+                    flows=({}, {}), rules=rules, placement_cache=False)
+    return st
+
+
+def test_review_a_standing_list_stays_red_past_14_days(tmp_path):
+    later = "2026-10-20T12:00:00Z"                 # 70 days after the last bulletin, the list unchanged
+    recs, meta, _ = W.build(feed(new("b1", S1, [A, B]), new("b2", S2, [A, B])), later, [])
+    r = by_key(recs)[kid(A)]
+    assert r["status"] == "advisory_active" and r["ended_at"] is None and r["raw"]["_last_seen_in_source"] == later
+    assert "standing_basis" in r["raw"]
+    st = _status(tmp_path, recs, datetime(2026, 10, 20, 13, tzinfo=timezone.utc))
+    assert st["waters"]["example-lake-wy"]["status"] == "red"
+
+
+def test_review_the_programme_end_of_season_ends_a_standing_advisory():
+    after = "2027-01-02T12:00:00Z"
+    recs, meta, _ = W.build(feed(new("b1", S1, [A, B])), after, [])
+    r = by_key(recs)[kid(A)]
+    assert r["status"] == "advisory_lifted" and r["ended_at"] == "2027-01-01T07:00:00Z"
+    assert r["raw"]["ended_at_precision"] == "bound" and r["raw"]["expired_at_programme_end"] is True
+    assert r["raw"]["_last_seen_in_source"] == "2027-01-01T07:00:00Z" and meta["expired"] == 2
+
+
+def test_review_a_dropped_row_still_ends_and_a_lift_still_lifts_with_the_standing_rule():
+    recs, *_ = build(new("b1", S1, [A, B]), new("b2", S2, [B]))
+    r = by_key(recs)[kid(A)]
+    assert r["raw"]["ended_at_precision"] == "poll" and r["raw"]["_last_seen_in_source"] == "2026-08-04T21:00:00Z"
+
+
+@pytest.mark.parametrize("rows", [[], [("", "", "", "")]])
+def test_review_a_header_only_table_ends_nothing_and_is_unread(rows):
+    recs, meta, _ = build(new("b1", S1, [A, B]), new("b2", S2, rows))
+    assert all(r["ended_at"] is None for r in recs) and len(recs) == 2
+    assert [u["bulletin"] for u in meta["unread"]] == ["b2"]
+
+
+def test_review_a_corrected_bulletin_replaces_its_earlier_absence():
+    # run 1: b2 was read with B missing (a mistake); run 2: the same bulletin corrected, listing A and B again
+    first, *_ = build(new("b1", S1, [A, B]), new("b2", S2, [A]))
+    assert by_key(first)[kid(B)]["raw"]["ended_at_precision"] == "poll"
+    second, meta, _ = build(new("b1", S1, [A, B]), new("b2", S2, [A, B]), prev=first)
+    keys = [r["source_record_id"] for r in second]
+    assert keys.count(kid(B)) == 1 and not any("relisted" in k for k in keys)
+    b = by_key(second)[kid(B)]
+    assert b["ended_at"] is None and b["raw"]["_absent_in"] == [] and meta["relisted"] == 0
+    # the same when the earlier run's absence was saved without its link (records from before this fix)
+    for r in first:
+        r["raw"].pop("_absent_links", None)
+    again, *_ = build(new("b1", S1, [A, B]), new("b2", S2, [A, B]), prev=first)
+    assert by_key(again)[kid(B)]["ended_at"] is None
+
+
+def test_review_a_part_of_a_water_never_colours_the_whole_water(tmp_path):
+    part = ("Example Reservoir: West Causeway", "West Causeway", "Toxin", "8/18/2026")
+    recs, *_ = W.build(feed(new("b1", S1, [part, A])), "2026-08-20T12:00:00Z", [])
+    r = [x for x in recs if x["raw"].get("place") == "West Causeway"][0]
+    assert r["raw"]["advisory_extent"] == "part_of_water" and r["lat"] is None
+    assert "not known" in r["raw"]["placement_note"]
+    st = _status(tmp_path, recs, datetime(2026, 8, 20, 13, tzinfo=timezone.utc))
+    assert (st["waters"].get("example-reservoir-wy") or {}).get("status", "grey") == "grey"
+    assert st["waters"]["example-lake-wy"]["status"] == "red"         # control: a whole-water advisory colours
