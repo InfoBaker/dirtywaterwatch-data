@@ -17,8 +17,15 @@ the pull request that carries the changed registry files to a person for review.
                                           against the e-mail and phone patterns (common.EMAIL_RE, PHONE_RE) and the
                                           private name blocklist (data/build/name-blocklist.json, restored with the
                                           build state); prints where, never what
+    python scripts/state_batch.py scrub   --state NC [--text FILE ...]
+                                          with the blocklist here: a blocklisted name in the steps' diagnostic notes of
+                                          those files (NOTE_KEYS: target and skipped reasons, water_match,
+                                          no_water_reason, ...) and in the texts becomes "[name removed]"; a record's
+                                          own fields (name, slug, aliases, permittee, ...) are never changed
     python scripts/state_batch.py publish --state NC --body FILE [--date YYYY-MM-DD] [--dry-run]
-                                          the scan above (the blocklist required), then commit those files on a branch batch/<st>-<date> from the checked-out commit,
+                                          the scrub above, the size ceiling (MAX_FILE_BYTES, 90 MiB: GitHub refuses a
+                                          file over 100 MB) and the scan above (the blocklist required), then commit
+                                          those files on a branch batch/<st>-<date> from the checked-out commit,
                                           push it (replacing a branch of that name: the files are rebuilt from main and
                                           the caches each time) and open the pull request, or update the open one
 
@@ -120,6 +127,7 @@ REGIONAL_FILES = ("outfalls-new-england.json", "outfalls-mid-atlantic.json")
 # the batch cuts those lakes back to the state's waters (scripts/cut_lakes_to_state_waters.py), before the ties
 GREAT_LAKES_STATES = ("IL", "IN", "MI", "MN", "NY", "OH", "PA", "WI")
 REBUILDS_WATERS = ("waters", "osm", "names")
+REDACTED = "[name removed]"  # build.redact.REDACTED (checked by the tests), the marker the note scrub writes
 CSO_ZIP_URL = "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
 LINE_MAX = 400               # a printed count line kept in the summary, at most this long
 LINES_PER_STEP = 40
@@ -674,7 +682,9 @@ def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh
         "branch": branch,
         "commit": [["git", "checkout", "-B", branch],
                    ["git", "add", "--", *files],
-                   ["git", *who, "commit", "-m", msg],
+                   # only the batch's files (an unrelated staged change is never committed with them, so the size
+                   # ceiling checked on these files covers the whole commit)
+                   ["git", *who, "commit", "-m", msg, "--", *files],
                    ["git", "push", "--force", "origin", f"HEAD:refs/heads/{branch}"]],
         "find": [gh, "pr", "list", "--head", branch, "--state", "open", "--json", "number", "--jq", ".[0].number"],
         "edit": lambda n: [gh, "pr", "edit", str(n), "--title", ttl, "--body-file", str(body)],
@@ -701,6 +711,15 @@ def publish(st: str, body: Path, date: str | None = None, dry_run: bool = False,
     if not files:
         say("the steps changed none of the registry files: no branch, no pull request")
         return 0
+    # the steps' diagnostic notes lose a blocklisted name (scrub_files; a record's own fields are never changed), then
+    # the files are listed again: a file the scrub brought back to the commit's text is not part of the pull request
+    if scrub_files(files, [body], root):
+        files = changed_files(st, root)
+        if not files:
+            say("after the note scrub the registry files are as committed: no branch, no pull request")
+            return 0
+    if size_check(files, root) != 0:
+        return 1
     if scan(st, [body], require_blocklist, root) != 0:
         print("::error::the privacy scan found something (above): nothing is committed or pushed", flush=True)
         return 1
@@ -754,17 +773,165 @@ def publish(st: str, body: Path, date: str | None = None, dry_run: bool = False,
 
 # ---------------------------------------------------------------- privacy scan
 
-def strings(o, path="$"):
-    """(json path, string) for every key and string value."""
+def strings(o, path="$", hide=None):
+    """(json path, string) for every key and string value. hide(key) true: the key is named in the path by its
+    position (<key 3>), never by its text (a key can itself be a diagnostic quoting a name or a contact); it is still
+    yielded as a string, so it is still scanned."""
     if isinstance(o, dict):
-        for k, v in o.items():
-            yield f"{path}.{k}", str(k)
-            yield from strings(v, f"{path}.{k}")
+        for i, (k, v) in enumerate(o.items()):
+            seg = f"<key {i}>" if hide and hide(str(k)) else k
+            yield f"{path}.{seg}", str(k)
+            yield from strings(v, f"{path}.{seg}", hide)
     elif isinstance(o, list):
         for i, v in enumerate(o):
-            yield from strings(v, f"{path}[{i}]")
+            yield from strings(v, f"{path}[{i}]", hide)
     elif isinstance(o, str):
         yield path, o
+
+
+# ---------------------------------------------------------------- note scrub (before the scan)
+# The diagnostic text the steps write into the registry files (the NHD builder's target reasons, its skipped and failed-
+# place reasons and notes; the ties step's water_match, no_water_reason, coords_problem and replaced_match.why) can quote
+# a nearby water's name, and a water's name can share a word with the private-name blocklist (West Virginia, 2026-11-15:
+# "(nearby: <word> Run, ...)"). The owner's rule removes a blocklisted name everywhere, so publish replaces it with the
+# redactor's marker in these fields only, by the scan's own phrase rule (build.redact.BlockScan.scrub), before the scan.
+# Every other field (a record's name, slug, aliases, permittee, permit name, towns, ids, the source texts) is never
+# touched: a blocklisted name there still fails the scan and needs a person's decision.
+NOTE_KEYS = frozenset({"reason", "reason_detail", "notes", "how", "why", "water_match", "no_water_reason",
+                       "coords_problem"})
+STRUCTURAL_KEYS = frozenset({"name", "slug", "slugs", "aliases", "slug_aliases", "permittee", "permit_name", "towns",
+                             "town", "id", "ids", "npdes_permit", "permit", "permits", "water_slug", "water_name",
+                             "texts", "text", "records"})
+
+
+def scrub_notes(o, block, in_note: bool = False):
+    """(o with the blocklisted names in its note fields replaced, number of strings changed). Keys are never changed;
+    the value of a structural key is never entered, whatever it holds ({"records": {"reason": ...}} stays whole and
+    a name there still fails the scan); replaced_match is not a note, its why is."""
+    if isinstance(o, dict):
+        out, n = {}, 0
+        for k, v in o.items():
+            if k in STRUCTURAL_KEYS:
+                out[k] = v
+                continue
+            out[k], m = scrub_notes(v, block, k in NOTE_KEYS or in_note)
+            n += m
+        return out, n
+    if isinstance(o, list):
+        out, n = [], 0
+        for v in o:
+            x, m = scrub_notes(v, block, in_note)
+            out.append(x)
+            n += m
+        return out, n
+    if in_note and isinstance(o, str):
+        s = block.scrub(o)
+        return s, int(s != o)
+    return o, 0
+
+
+def _layouts():
+    """[(name, dumps)] the registry files are written in (each file keeps its own: the first that gives back the file's
+    text exactly is used to write it again)."""
+    if str(ROOT / "pipeline") not in sys.path:
+        sys.path.insert(0, str(ROOT / "pipeline"))
+    from common import dumps_plants, dumps_rows  # noqa: E402
+    return [("rows", dumps_rows), ("plants", dumps_plants),
+            ("indent=1", lambda d: json.dumps(d, indent=1)),
+            ("indent=1 newline", lambda d: json.dumps(d, indent=1) + "\n"),
+            ("indent=1 utf-8", lambda d: json.dumps(d, indent=1, ensure_ascii=False)),
+            ("indent=1 utf-8 newline", lambda d: json.dumps(d, indent=1, ensure_ascii=False) + "\n")]
+
+
+def dumps_like(text: str, doc_before, doc_after) -> str | None:
+    """doc_after in the layout that gives text back from doc_before byte for byte; None when no known layout does (a
+    number that does not round-trip, compact or CRLF text, another writer's layout): the file is then not rewritten."""
+    for _, f in _layouts():
+        try:
+            if f(doc_before) == text:
+                return f(doc_after)
+        except (KeyError, TypeError, AttributeError, ValueError):
+            continue
+    return None
+
+
+def scrub_files(files: list[str], texts: list[Path] = (), root: Path = ROOT) -> int:
+    """Replace the blocklisted names in the note fields of the files (and in the texts, line by line) with the
+    redactor's marker; nothing without a blocklist. Prints the file and the count, never a name. Returns the number of
+    strings changed."""
+    _, _, block = _patterns(root)
+    if block is None:
+        return 0
+    if block.found(REDACTED):
+        # a blocklist entry inside the marker itself: a scrub would nest markers on every rerun; nothing is changed
+        # and the scan refuses what it finds
+        print("::error::a blocklist entry matches the redaction marker itself: the note scrub changes nothing (the "
+              "privacy scan decides)", flush=True)
+        return 0
+    total = 0
+    for f in files:
+        p = root / f
+        try:
+            text = p.read_bytes().decode("utf-8")      # as stored: no newline translation
+            doc = json.loads(text)
+        except (OSError, ValueError):
+            continue                     # the scan reports a file it cannot read
+        new, n = scrub_notes(doc, block)
+        if not n:
+            continue
+        out = dumps_like(text, doc, new)
+        if out is None:
+            print(f"::error::{f}: {n} note(s) hold a blocklisted name, but no known layout gives the file back byte for "
+                  "byte, so the note scrub leaves it as it is (the privacy scan decides)", flush=True)
+            continue
+        tmp = p.with_suffix(p.suffix + ".tmp")
+        tmp.write_bytes(out.encode("utf-8"))
+        tmp.replace(p)
+        say(f"{f}: {n} note(s) with a blocklisted name replaced by the redaction marker")
+        total += n
+    for t in texts:
+        p = Path(t)
+        try:
+            lines = p.read_bytes().decode("utf-8").split("\n")
+        except (OSError, ValueError):
+            continue
+        new_lines = [block.scrub(x) for x in lines]
+        n = sum(a != b for a, b in zip(lines, new_lines))
+        if n:
+            p.write_bytes("\n".join(new_lines).encode("utf-8"))
+            say(f"{p.name}: {n} line(s) with a blocklisted name replaced by the redaction marker")
+            total += n
+    return total
+
+
+# ---------------------------------------------------------------- size ceiling
+# GitHub refuses a pushed file over 100 MB (Louisiana's batch, 2026-11-15: data/waters-nhd.json at 101.39 MB). publish
+# refuses a changed file over this ceiling before it commits, and tests/test_data_file_sizes.py fails first on main.
+MAX_FILE_BYTES = 90 * 1024 * 1024
+
+
+def oversized(files: list[str], root: Path = ROOT, limit: int | None = None) -> list[tuple[str, int]]:
+    """[(file, bytes)] of the files over limit (MAX_FILE_BYTES)."""
+    limit = MAX_FILE_BYTES if limit is None else limit
+    out = []
+    for f in files:
+        try:
+            n = (root / f).stat().st_size
+        except OSError:
+            continue
+        if n > limit:
+            out.append((f, n))
+    return out
+
+
+def size_check(files: list[str], root: Path = ROOT, limit: int | None = None) -> int:
+    """1, with an ::error:: naming each file and its size, when a file is over the ceiling; else 0."""
+    limit = MAX_FILE_BYTES if limit is None else limit
+    big = oversized(files, root, limit)
+    for f, n in big:
+        print(f"::error::{f} is {n:,} bytes ({n / 2**20:.1f} MiB), over the {limit / 2**20:.0f} MiB ceiling for a "
+              "committed file (GitHub refuses a file over 100 MB): nothing is committed or pushed", flush=True)
+    return 1 if big else 0
 
 
 def _patterns(root: Path):
@@ -790,11 +957,16 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
         say("no name blocklist here: e-mail and phone shapes only")
     hits = 0
 
+    def kinds_of(s: str) -> list[str]:
+        return [k for k, bad in (("an e-mail address", email.search(s)), ("a phone number", phone.search(s)),
+                                 ("a blocklisted name", block.found(s) if block else None)) if bad]
+
+    def hide(key: str) -> bool:                      # a key that is itself a finding is named by its position
+        return bool(kinds_of(key))
+
     def check(where: str, s: str) -> None:
         nonlocal hits
-        kinds = [k for k, bad in (("an e-mail address", email.search(s)), ("a phone number", phone.search(s)),
-                                  ("a blocklisted name", block.found(s) if block else None)) if bad]
-        for k in kinds:
+        for k in kinds_of(s):
             hits += 1
             print(f"::error::{where}: {k}", flush=True)
 
@@ -812,7 +984,7 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
         except ValueError:
             old = set()
         n = 0
-        for where, s in strings(new):
+        for where, s in strings(new, hide=hide):
             if s not in old:
                 n += 1
                 check(f"{f} {where}", s)
@@ -848,6 +1020,9 @@ def main(argv=None) -> int:
     s.add_argument("--state", required=True)
     s.add_argument("--text", action="append", default=[])
     s.add_argument("--require-blocklist", action="store_true")
+    s = sub.add_parser("scrub")
+    s.add_argument("--state", required=True)
+    s.add_argument("--text", action="append", default=[])
     s = sub.add_parser("publish")
     s.add_argument("--state", required=True)
     s.add_argument("--body", required=True)
@@ -871,6 +1046,11 @@ def main(argv=None) -> int:
             return 0
         if a.cmd == "scan":
             return scan(a.state, [Path(t) for t in a.text], a.require_blocklist)
+        if a.cmd == "scrub":
+            n = scrub_files(changed_files(valid_state(a.state)), [Path(t) for t in a.text])
+            if n:
+                say(f"note scrub: {n} string(s) changed")
+            return 0
         return publish(a.state, Path(a.body), a.date, a.dry_run, gh=os.environ.get("GH_BIN") or "gh",
                        require_blocklist=not a.no_blocklist_ok)
     except Refused as ex:

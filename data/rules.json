@@ -306,6 +306,36 @@
     "clock": "end_of_discharge",
     "basis": "Puerto Rico sets no period after a sewage discharge during which the water is to be avoided, and no Puerto Rico statute or rule requiring the public to be told of a sewer overflow or a bypass was found: the Puerto Rico Aqueduct and Sewer Authority (PRASA) and the other permittees report them to the U.S. Environmental Protection Agency, which writes Puerto Rico's permits, within 24 hours and in writing within five days, and EPA publishes the electronic reports in its overflow records with the day it received each (a median of 2 days after the start in 2025 and 2026), not the day each was published. PRASA's Puerto Nuevo permit requires a public notification process for its combined sewer overflows in San Juan, and its 2023 consent decree modification calls for posting them on PRASA's website; no posted overflow was found. The Department of Natural and Environmental Resources (DRNA) publishes a weekly notice of the beaches whose samples exceed the enterococci Beach Action Value, which it declares not fit for bathers; this site shows each as DRNA's own advisory from the notice that lists it until a notice says the beaches are fit for bathers; a later notice that only no longer lists a beach is not a lift, so its advisory is shown for 14 days after the last notice that listed it. This site marks a reported discharge while it runs and applies its own caution after it ends; times are read in Atlantic Standard Time, which Puerto Rico keeps all year",
     "source": "40 CFR 122.41(l)(6); 40 CFR part 127; U.S. EPA sewer overflow and bypass event data (ECHO); NPDES permit PR0021555 (2021), CSO permit conditions; United States v. PRASA, No. 3:15-cv-02283 (D.P.R.), 2023 modification; DRNA Programa de Monitoría de Playas y Notificación Pública (drna.pr.gov)"
+   },
+   "CO": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Colorado sets no period after a sewage discharge during which the water is to be avoided, and no Colorado statute or rule found requires the public to be told when one happens. Whoever's activity results in a spill or discharge that may pollute state waters must notify the Water Quality Control Division as soon as they know of it, and the discharge permits require an oral report within 24 hours of noncompliance that may endanger health or the environment and a written report within five days; the Division publishes none of these reports, and the U.S. Environmental Protection Agency's tables held no Colorado report on November 14, 2026. A large spill reaches the public when an agency issues an advisory, as Colorado Parks and Wildlife did after the Pueblo spill of August 2026; the Colorado Department of Public Health and Environment keeps a public sheet of algal bloom conditions for selected waters. Permits on tribal land and for federal facilities are issued by the U.S. Environmental Protection Agency, and their reports go to it. Times are read in Mountain time. This site marks a reported discharge while it runs and applies its own caution after it ends",
+    "source": "C.R.S. 25-8-601(2); Colorado Discharge Permit System permit standard conditions (CO0032999, Part II); Colorado Parks and Wildlife news release of August 30, 2026; CDPHE toxic algae status sheet"
+   },
+   "MT": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Montana sets no period after a sewage discharge during which the water is to be avoided, and no Montana statute, rule or permit found requires the public to be told when one happens. The discharge permits require serious noncompliance, a bypass or an upset to be reported to the Department of Environmental Quality or to Disaster and Emergency Services within 24 hours and in writing within five days, on the Department's sanitary sewer overflow form; the Department publishes none of these reports, and the U.S. Environmental Protection Agency's tables held no Montana report on November 14, 2026. The Department's harmful algal bloom map gives the date each bloom advisory was issued and lifted. Permits on tribal land are issued by the U.S. Environmental Protection Agency, and their reports go to it. Times are read in Mountain time. This site marks a reported discharge while it runs and applies its own caution after it ends",
+    "source": "MPDES permit standard conditions (MT0020168, Part II.I); Montana DEQ Sanitary Sewer Overflow Event Form (April 2020); Montana DEQ Harmful Algal Bloom map"
+   },
+   "WY": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Wyoming sets no period after a sewage discharge during which the water is to be avoided, and no Wyoming statute, rule or permit found requires the public to be told when one happens. The Department of Environmental Quality asks whoever owns or runs a collection system or treatment works to report a sanitary sewer overflow to it verbally within 24 hours of becoming aware of it and in writing within five days; the Department publishes none of these reports, its spill system's search needs a login, and the U.S. Environmental Protection Agency's tables held no Wyoming report on November 14, 2026. The Department of Health and the Department of Environmental Quality publish bloom and toxin advisories with the date each was issued; an advisory holds until the bloom has dissipated or the toxins are below the recreational levels, or until December 31, whichever comes first. Permits on the Wind River Reservation are issued by the U.S. Environmental Protection Agency, and their reports go to it. Times are read in Mountain time. This site marks a reported discharge while it runs and applies its own caution after it ends",
+    "source": "Wyoming DEQ, Sanitary Sewer Overflows (WYPDES program page, read 2026-11-14); Wyoming DEQ harmful cyanobacteria bloom program page and FAQ; Wyoming DEQ HCB bulletins (GovDelivery topic WYDEQ_42)"
+   },
+   "IA": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Iowa sets no period after a sewage discharge during which the water is to be avoided. An unanticipated bypass or upset must be reported to the Department of Natural Resources field office by telephone within 24 hours and in writing within five days; the Department decides whether the public must be told, and then the operator prepares the notice. The field offices' records of the reports are public, one page per report, with the times, the receiving stream and the gallons the field office entered; this site reads them for the facilities the Department classes major municipal. The Department publishes a news release when it asks the public to stay away, and the City of Waterloo posts each overflow and bypass on its own page. This site marks a reported discharge while it runs and applies its own caution after it ends; a report that names no water is listed with its operator and county",
+    "source": "567 IAC 63.6; Iowa DNR Field Office Compliance (incoming reports); Iowa DNR news releases; City of Waterloo, SSO & Bypass Public Notification"
+   },
+   "ID": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Idaho sets no period after a sewage discharge during which the water is to be avoided, and no Idaho statute, rule or permit condition found requires the public to be told of one. Permittees report overflows and other noncompliance to the Department of Environmental Quality (or, in Indian country, to the U.S. Environmental Protection Agency) by telephone within 24 hours and in writing within five days; neither publishes the reports, so this site shows no Idaho sewage report. The Department of Health and Welfare issues cyanobacteria health advisories on the Department of Environmental Quality's toxin results; the Department of Environmental Quality's table also lists Health Watch and Health Alert risk levels while results are pending, which this site shows with its own caution, never as an advisory, unless the table says the water is closed to recreational use, which this site shows as the authority's closure. Dates are read in Mountain time, and in Pacific time north of the Salmon River",
+    "source": "IDAPA 58.01.25; the West Boise Water Renewal Facility's IPDES permit (modified 2024), sections 2.2.7-2.2.8; Idaho DEQ, CyanoHAB Risk Data Table; Idaho DHW, Recreational Water Health Advisories; 49 CFR 71.9"
    }
   },
   "by_discharger": {
@@ -456,6 +486,7 @@
     "tn-tdec-hab-advisory-status",
     "ok-nps-chickasaw-bacteria",
     "ar-deq-hab-advisories",
+    "id-deq-cyanohab-risk-table",
     "de-dnrec-recreational-water"
    ],
    "flag": "_agency_label_only",
@@ -478,7 +509,9 @@
     "ar-deq-overflow-incidents",
     "wi-mmsd-storm-updates",
     "de-dnrec-derns-recent-releases",
-    "la-baton-rouge-quarterly"
+    "la-baton-rouge-quarterly",
+    "ia-dnr-news-releases",
+    "ia-dnr-focomp-incoming-reports"
    ],
    "hours": 72,
    "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024; the Tennessee Department of Environment and Conservation's Events Report, which gives no end date on most reports). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."

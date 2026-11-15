@@ -86,8 +86,9 @@ def test_another_sources_poll_ended_beach_keeps_its_colour(monkeypatch):
     with_pr = S.event_intervals(r, None, now, None, TEST_RULES)
     # integrate/second-1: Nevada adds its own source (nv-state-parks-hab); the set is pinned whole, so any other
     # addition still fails here
+    # Astra IA/ID review 2026-11-15 P2-3: Idaho adds its own source (id-deq-cyanohab-risk-table)
     assert S.POLL_END_HORIZON_SOURCES == {"de-dnrec-recreational-water", "sc-des-beach-monitoring", "sc-des-hab",
-                                          "nv-state-parks-hab", "pr-drna-beach-notices"}
+                                          "nv-state-parks-hab", "pr-drna-beach-notices", "id-deq-cyanohab-risk-table"}
     monkeypatch.setattr(S, "POLL_END_HORIZON_SOURCES", S.POLL_END_HORIZON_SOURCES - {"pr-drna-beach-notices"})
     assert with_pr == S.event_intervals(r, None, now, None, TEST_RULES)
 

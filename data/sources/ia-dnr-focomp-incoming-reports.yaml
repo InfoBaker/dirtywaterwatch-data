@@ -1,0 +1,28 @@
+id: "ia-dnr-focomp-incoming-reports"
+name: "Iowa DNR Field Office Compliance: bypass reports (incoming reports)"
+url: "https://programs.iowadnr.gov/focomp/Detail/FacilityDetail?facilityID=310634683"
+homepage: "https://programs.iowadnr.gov/focomp/"
+kind: "html"
+level: "state"
+# Read by ingest/ia_dnr_focomp.py: each facility page of the 105 facilities DNR classes major municipal (the nine
+#   combined sewer systems among them; data/reference/ia-focomp-facilities.json from the public site search), and each
+#   bypass report's page: incident start and end (date and time), received date and time, bypass type, location type
+#   (WWTP or Collection System), receiving stream, estimated gallons. Staff and reporter fields are never read.
+# Real read 2026-11-14/15: 105 facility pages, 359 bypass reports listed from 2025-01-01 on (incident starts 2024-07-24
+#   to 2026-11-05) at 76 facilities; 202 wet-weather, 155 non-wet-weather, 2 anticipated; location WWTP 79, collection
+#   system 125, not given 155; 351 with a start time, 8 with no start; a receiving stream named on 130 (4 more say
+#   None, Varies or unknown), gallons on 266; the field office received the report a median 0.3 days after the start.
+#   Basement backups make no record. The operator is the row holding the matched permit (349 of 359); details that
+#   may name a person are withheld (44 of the 359 reports' details).
+cadence: "20 facility pages and 60 report pages a run, the oldest first (a full pass about every five hours)"
+license: "none stated (public records)"
+attribution: "Iowa Department of Natural Resources, field office records"
+enabled: true
+role: "events"
+event_types: ["plant_bypass", "sso", "cso", "bypass"]
+states: ["IA"]
+access: ["html"]
+access_detail: "Public pages, no login: a facility page per site and a page per incoming report; no list, download or feed. Minor municipal and semi-public facilities (about 930) not read yet."
+machine_readable: false
+legal_basis: "567 IAC 63.6 (24-hour telephone report and five-day written report of an unanticipated bypass or upset)"
+checked: "2026-11-14"

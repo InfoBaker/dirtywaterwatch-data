@@ -63,9 +63,9 @@
   "license": "EPA public data; no restriction stated",
   "legal_basis": "40 CFR 127 (NPDES eRule Phase 2, from 2025-12-21); 40 CFR 122.41(l)(6) five-day written report",
   "status": "watch",
-  "status_reason": "0 MT event(s) in the 2026-11-03 extract; the state's permittees do not file through NeT. Montana permittees report on DEQ's own SSO form.",
+  "status_reason": "No Montana report in the current extract (5,751 events) or the all-versions extract (6,710 events) of 2026-11-14; the collection-system table lists three Montana permits, EPA's on tribal land (Polson, Ronan, Poplar). Watched.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -186,17 +186,16 @@
   "operator_type": "state",
   "role": "advisories",
   "event_types": [
-   "hab"
+   "hab_advisory"
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://dphhs.mt.gov/publichealth/Epidemiology/hab/",
+  "url": "https://gis.mtdeq.us/hosting/rest/services/Hosted/Harmful_Algal_Bloom_Survey_(Public_Web_Map)/FeatureServer/0",
   "access": [
-   "map_only",
-   "html"
+   "arcgis"
   ],
   "access_detail": null,
-  "machine_readable": false,
+  "machine_readable": true,
   "sample_record": {},
   "fields": [],
   "fills_event_fields": [],
@@ -207,10 +206,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "watch",
-  "status_reason": "HAB.mt.gov redirects to DPHHS's HAB page with a public map of reported blooms and health advisories (2026: Lake Helena, Canyon Ferry, Cooney Reservoir in June). The feature service behind the map was not traced (Public_Harmful_Algal_Bloom_Reports_WFL1 holds only base layers).",
+  "status": "used",
+  "status_reason": "The layer behind DEQ's HAB dashboard traced and read 2026-11-14 (445 rows, 2019-2026; DEQ's advisory level, issue and lift dates): read by the mt-deq-hab-map feed as 278 bloom advisories, safe fields only. HAB.mt.gov and dphhs.mt.gov did not resolve on 2026-11-14.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -272,9 +271,9 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "The only public trace of most discharges; DEQ press releases cover enforcement.",
+  "status_reason": "DEQ's July 21, 2023 Warm Springs Creek notice (expansion research) could not be read on 2026-11-14 (deq.mt.gov did not resolve); the register watches it. No record is made from it.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -335,6 +334,138 @@
   "status_reason": "Possible bacteria sampling; not searched.",
   "verified": "search_only",
   "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "mt-deq-hab-dashboard",
+  "name": "Montana DEQ Harmful Algal Bloom Dashboard (item 10c34f5c7da24c4188b9ddc220d43970)",
+  "jurisdiction": "MT",
+  "operator": "Montana Department of Environmental Quality",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab_advisory"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://gis.mtdeq.us/portal/apps/dashboards/10c34f5c7da24c4188b9ddc220d43970",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "The dashboard (a script page) shows web map 779d34abdc404ae3a63a33cfd94ddc2f, whose bloom layer is read directly (mt-hab-map); its item record is watched for a change of layer.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "notes": ""
+ },
+ {
+  "id": "mt-deq-warm-springs-2023",
+  "name": "Montana DEQ news: Warm Springs Creek wastewater discharge (July 21, 2023)",
+  "jurisdiction": "MT",
+  "operator": "Montana Department of Environmental Quality",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "plant_bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://deq.mt.gov/News/pressrelease-folder/news-article95",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "deq.mt.gov did not resolve for the build's client on 2026-11-14; the notice (over three million gallons of partially treated wastewater, DEQ notified June 23, 2023) is not recorded until it can be read. Watched.",
+  "verified": "search_only",
+  "checked": "2026-11-14",
+  "notes": ""
+ },
+ {
+  "id": "mt-deq-records-archive",
+  "name": "Montana DEQ released public records archive (GovQA)",
+  "jurisdiction": "MT",
+  "operator": "Montana Department of Environmental Quality",
+  "operator_type": "state",
+  "role": "news",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://montanadeq.govqa.us/WEBAPP/_rs/openrecordssummary.aspx?sSessionID=&view=1",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Request summaries are a discovery route, not incident records; they name requesters and properties and are not fetched.",
+  "verified": "prior_research",
+  "checked": "2026-11-14",
+  "notes": ""
+ },
+ {
+  "id": "mt-deq-facts-public-viewer",
+  "name": "Montana DEQ FACTS permitting and GIS permit viewer",
+  "jurisdiction": "MT",
+  "operator": "Montana Department of Environmental Quality",
+  "operator_type": "state",
+  "role": "permits",
+  "event_types": [],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://svc.mt.gov/deq/factspermitting",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "rejected",
+  "status_reason": "Where permittees file reports; no public overflow rows or export (expansion research, 2026-11-09).",
+  "verified": "prior_research",
+  "checked": "2026-11-14",
   "notes": ""
  }
 ]

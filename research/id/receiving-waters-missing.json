@@ -1,0 +1,361 @@
+{
+ "about": "Water names in Idaho's records that data/receiving-waters-national.json does not hold for ID: the lakes, reservoirs and ponds on the Department of Environmental Quality's CyanoHAB Risk Data Table, with the county the table gives and the Department of Health and Welfare's point for the listing ([lat, lon], 0.001 degree); a listing of one arm or part of a water keeps its part. Idaho publishes no sewage report, so no sewage record names a water. Written by scripts/ia_id_report_water_names.py.",
+ "state": "ID",
+ "waters": 19,
+ "reports": 19,
+ "reports_on_listed_waters": 0,
+ "by_reason": {},
+ "rows": [
+  {
+   "name": "Brownlee Reservoir",
+   "reports": 1,
+   "county": "Washington County",
+   "points": [
+    [
+     44.562,
+     -117.144
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Brownlee Reservoir"
+   ]
+  },
+  {
+   "name": "C J Strike Reservoir",
+   "reports": 1,
+   "county": "Elmore County",
+   "points": [
+    [
+     42.947,
+     -115.963
+    ]
+   ],
+   "parts": [
+    "Snake River Arm"
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "CJ Strike – Snake River Arm"
+   ]
+  },
+  {
+   "name": "C J Strike Reservoir",
+   "reports": 1,
+   "county": "Owyhee County",
+   "points": [
+    [
+     42.914,
+     -115.875
+    ]
+   ],
+   "parts": [
+    "Bruneau Arm"
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "CJ Strike – Bruneau Arm"
+   ]
+  },
+  {
+   "name": "Crane Creek Reservoir",
+   "reports": 1,
+   "county": "Washington County",
+   "points": [
+    [
+     44.363,
+     -116.582
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Crane Creek Reservoir"
+   ]
+  },
+  {
+   "name": "Deep Creek Reservoir",
+   "reports": 1,
+   "county": "Oneida County",
+   "points": [
+    [
+     42.223,
+     -112.185
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Deep Creek Reservoir"
+   ]
+  },
+  {
+   "name": "Fernan Lake",
+   "reports": 1,
+   "county": "Kootenai County",
+   "points": [
+    [
+     47.674,
+     -116.728
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Fernan Lake"
+   ]
+  },
+  {
+   "name": "Grasmere Reservoir",
+   "reports": 1,
+   "county": "Owyhee County",
+   "points": [
+    [
+     42.355,
+     -115.905
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Grasmere Reservoir"
+   ]
+  },
+  {
+   "name": "Hawkins Reservoir",
+   "reports": 1,
+   "county": "Bannock County",
+   "points": [
+    [
+     42.512,
+     -112.336
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Hawkins Reservoir"
+   ]
+  },
+  {
+   "name": "Hayden Lake",
+   "reports": 1,
+   "county": "Kootenai County",
+   "points": [
+    [
+     47.809,
+     -116.694
+    ]
+   ],
+   "parts": [
+    "North"
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Hayden Lake - North"
+   ]
+  },
+  {
+   "name": "Hells Canyon Reservoir",
+   "reports": 1,
+   "county": "Adams County",
+   "points": [
+    [
+     45.129,
+     -116.743
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Hells Canyon Reservoir"
+   ]
+  },
+  {
+   "name": "Henrys Lake",
+   "reports": 1,
+   "county": "Fremont County",
+   "points": [
+    [
+     44.643,
+     -111.405
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Henrys Lake"
+   ]
+  },
+  {
+   "name": "Hordemann Pond",
+   "reports": 1,
+   "county": "Latah County",
+   "points": [
+    [
+     46.739,
+     -116.975
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Hordemann Pond"
+   ]
+  },
+  {
+   "name": "Island Park Reservoir",
+   "reports": 1,
+   "county": "Fremont County",
+   "points": [
+    [
+     44.404,
+     -111.511
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Island Park Reservoir"
+   ]
+  },
+  {
+   "name": "Lake Lowell",
+   "reports": 1,
+   "county": "Canyon County",
+   "points": [
+    [
+     43.55,
+     -116.664
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Lake Lowell"
+   ]
+  },
+  {
+   "name": "Mann Lake",
+   "reports": 1,
+   "county": "Nez Perce County",
+   "points": [
+    [
+     46.372,
+     -116.853
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Mann Lake"
+   ]
+  },
+  {
+   "name": "Ririe Reservoir",
+   "reports": 1,
+   "county": "Bonneville County",
+   "points": [
+    [
+     43.503,
+     -111.757
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Ririe Reservoir"
+   ]
+  },
+  {
+   "name": "Sawyer's Pond",
+   "reports": 1,
+   "county": "Gem County",
+   "points": [
+    [
+     43.852,
+     -116.52
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Sawyer's Pond"
+   ]
+  },
+  {
+   "name": "Weston Reservoir",
+   "reports": 1,
+   "county": "Oneida County",
+   "points": [
+    [
+     42.12,
+     -112.121
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 0,
+   "as_typed": [
+    "Weston Reservoir"
+   ]
+  },
+  {
+   "name": "Winchester Lake",
+   "reports": 1,
+   "county": "Lewis County",
+   "points": [
+    [
+     46.235,
+     -116.62
+    ]
+   ],
+   "sources": {
+    "id-deq-cyanohab-risk-table": 1
+   },
+   "open": 1,
+   "as_typed": [
+    "Winchester Lake"
+   ]
+  }
+ ]
+}

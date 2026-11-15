@@ -357,3 +357,92 @@ def test_aa_list_and_sewage_filter():
     pages = {items[0]["href"]: {"html": page([RESCINDED, ORIGINAL], items[0]["title"]), "fetched_at": FETCHED}}
     recs, stats = A.build(items, pages, FETCHED)
     assert stats["bacteria_advisories_skipped"] == 1 and stats["sewage_notices"] == 1 and len(recs) == 2
+
+
+class FakeResp:
+    def __init__(self, d):
+        self.d = d
+
+    def raise_for_status(self):
+        pass
+
+    def json(self):
+        return self.d
+
+
+class FakeLayer:
+    """An invented SSO_Points2 layer: its description, count and query pages (no network)."""
+    def __init__(self, fields, rows, count=None, page=None):
+        self.fields, self.rows, self.count, self.page, self.requests = fields, rows, count, page, []
+        self.headers = {}
+
+    def get(self, url, params=None, timeout=None):
+        self.requests.append((url, dict(params or {})))
+        if url == B.LAYER:
+            return FakeResp({"id": 0, "name": "Sanitary Sewer Overflows", "maxRecordCount": 2000,
+                             "fields": [{"name": f} for f in self.fields]})
+        if (params or {}).get("returnCountOnly"):
+            return FakeResp({"count": len(self.rows) if self.count is None else self.count})
+        if self.page is not None:
+            return FakeResp(self.page)
+        out = (params or {}).get("outFields", "").split(",")
+        assert "*" not in out
+        return FakeResp({"features": [{"attributes": {k: v for k, v in r.items() if k in out}} for r in self.rows]})
+
+
+ROW = {"OBJECTID": 7, "SSO_DATE": 1791717300000, "START_DATETIME": 1791717300000, "END_DATETIME": 1791741000000,
+       "STATUS": "5DAY", "RESPONSIBILITY": "PRI", "LOCATION": "100 Example St", "Latitude": 39.30549853,
+       "Longitude": -76.60973024, "WAIVER_REASON": "Other", "COMMENT_RELIEF_REQUEST_TYPE": "invented comment"}
+
+
+def baltimore_run(tmp_path, monkeypatch, layer, earlier=None):
+    import common
+    events = tmp_path / "events"
+    events.mkdir(exist_ok=True)
+    monkeypatch.setattr(common, "EVENTS_DIR", events)
+    monkeypatch.setattr(B, "EVENTS_DIR", events)
+    monkeypatch.setattr(B, "STATE_FILE", tmp_path / "state.json")
+    monkeypatch.setattr(B, "ROOT", tmp_path)
+    saved = []
+    monkeypatch.setattr(B, "save_raw", lambda sid, b, ext: saved.append(b) or tmp_path / "raw.json")
+    monkeypatch.setattr(B.requests, "Session", lambda: layer)
+    if earlier is not None:
+        common.write_events(B.SOURCE_ID, earlier, ok=True)
+    rc = B.main([])
+    return rc, common.read_json(events / f"{B.SOURCE_ID}.json", {}), saved
+
+
+def test_baltimore_layer_without_a_core_field_fails_and_keeps_the_earlier_records(tmp_path, monkeypatch):
+    earlier, _ = B.build([B.safe_attributes(ROW)], FETCHED, [])
+    fields = [f for f in ROW if f != "STATUS"]          # the service's new shape: STATUS gone
+    layer = FakeLayer(fields, [{k: v for k, v in ROW.items() if k != "STATUS"}])
+    rc, out, saved = baltimore_run(tmp_path, monkeypatch, layer, earlier)
+    assert rc == 1 and out["ok"] is False and "STATUS" in out["error"] and saved == []
+    assert out["records"] == earlier and "_missing_from_layer_since" not in out["records"][0]["raw"]
+
+
+def test_baltimore_malformed_or_partial_read_saves_nothing(tmp_path, monkeypatch):
+    earlier, _ = B.build([B.safe_attributes(ROW)], FETCHED, [])
+    for layer in (FakeLayer(list(ROW), [ROW], page={"objectIdFieldName": "OBJECTID"}),   # no feature list
+                  FakeLayer(list(ROW), [ROW], count=2),                                    # short read
+                  FakeLayer(list(ROW), [], count=0)):                                      # empty layer
+        rc, out, saved = baltimore_run(tmp_path, monkeypatch, layer, earlier)
+        assert rc == 1 and out["ok"] is False and saved == [] and out["records"] == earlier
+
+
+def test_baltimore_asks_only_the_safe_fields_and_rounds_points_before_saving(tmp_path, monkeypatch):
+    old = B.to_record({**ROW, "OBJECTID": 6}, FETCHED, None)       # saved before the rules: eight decimals
+    layer = FakeLayer(list(ROW), [ROW])
+    rc, out, saved = baltimore_run(tmp_path, monkeypatch, layer, [old])
+    assert rc == 0 and out["ok"] is True
+    q = [p for u, p in layer.requests if u.endswith("/query") and not p.get("returnCountOnly")][0]
+    assert "WAIVER_REASON" not in q["outFields"] and "COMMENT_RELIEF_REQUEST_TYPE" not in q["outFields"]
+    page = saved[0].decode()
+    assert "39.3054" not in page and "invented comment" not in page and '"Latitude": 39.305' in page
+    recs = {r["event_id"]: r for r in out["records"]}
+    for r in recs.values():
+        assert (r["lat"], r["lon"]) == (39.305, -76.61)
+        assert (r["raw"]["Latitude"], r["raw"]["Longitude"]) == (39.305, -76.61)
+        assert "WAIVER_REASON" not in r["raw"] and "COMMENT_RELIEF_REQUEST_TYPE" not in r["raw"]
+    assert recs["md-baltimore-sso:6"]["raw"]["_missing_from_layer_since"]
+    assert recs["md-baltimore-sso:7"]["started_at"] == "2026-10-11T11:15:00-04:00"
