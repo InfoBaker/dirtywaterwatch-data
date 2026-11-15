@@ -75,6 +75,8 @@ AREA_TITLES = {
     "in": "Indiana",
     "wv": "West Virginia",
     "la": "Louisiana",
+    "nv": "Nevada",
+    "ok": "Oklahoma",
 }
 
 HEADER = """# Source checklist
