@@ -6,7 +6,7 @@ Source
   area, date, lifted}]}. Record rules: the fetch block in data/sources/ar-deq-hab-advisories.yaml and
   ingest/ar_transforms.py ar_hab_record, through the generic field map, history and redaction (ingest/generic/
   runner.build); this module only fetches, so that a coordinate pair DEQ writes inside a waterbody name ("Stream by ...
-  (coordinates 35.507114, -94.216947)") is rounded to 0.001 degree (ar_transforms.round_text_coords) before anything
+  (coordinates 35.123456, -93.654321)") is rounded to 0.001 degree (ar_transforms.round_text_coords) before anything
   is saved, mapped or used in a record key (review 2026-11-14 P1-6). data/raw keeps only those rounded safe rows
   (dww-safe-rows/1), and only when they change. A failed read keeps the previous records (ok false).
 
@@ -43,6 +43,22 @@ def rows_of(doc: dict, block: dict) -> list[dict]:
     return out
 
 
+def fetch() -> dict:
+    """DEQ's file; an HTTP error is never read as advisories, whatever its body (re-review P2-3)."""
+    r = requests.get(URL, headers=HEADERS, timeout=120)
+    r.raise_for_status()
+    return r.json()
+
+
+def check_doc(doc) -> None:
+    """ValueError unless the document is DEQ's {advisories: [rows]} or a dww-safe-rows/1 file of row objects."""
+    if not isinstance(doc, dict):
+        raise ValueError("the advisories file is not a JSON object")
+    rows = doc.get("rows") if doc.get("format") == runner.SAFE_ROWS_FORMAT else doc.get("advisories")
+    if not isinstance(rows, list) or not all(isinstance(r, dict) for r in rows):
+        raise ValueError("the advisories file has no list of advisory rows")
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--file", help="a saved advisories.json (or dww-safe-rows/1 file) to read instead of fetching")
@@ -53,13 +69,13 @@ def main(argv: list[str] | None = None) -> int:
     prev = (read_json(path, {}) or {}).get("records") or []
     fetched_at = now_iso()
     try:
-        doc = json.loads(Path(a.file).read_text()) if a.file else \
-            requests.get(URL, headers=HEADERS, timeout=120).json()
+        doc = json.loads(Path(a.file).read_text()) if a.file else fetch()
+        check_doc(doc)
         rows = doc["rows"] if doc.get("format") == runner.SAFE_ROWS_FORMAT else rows_of(doc, block)
         rows = [{**r, "waterbody": T.round_text_coords(r.get("waterbody"))} for r in rows]
         if not rows:
             raise ValueError("no advisories in the file")
-    except (requests.RequestException, ValueError, KeyError, OSError) as e:
+    except (requests.RequestException, ValueError, KeyError, TypeError, AttributeError, OSError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
         return 1
