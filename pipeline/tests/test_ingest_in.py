@@ -785,3 +785,28 @@ def test_a_cso_number_without_the_delimiter_is_scrubbed_and_an_error_answer_is_a
                         _idem(2, "IN0000008", "003C", "Active", 40.1, -86.6)]}
     out = json.dumps(B.sanitize(doc))
     assert "1234" not in out and "[house number removed] S Example St" in out and '"003C"' in out
+
+
+def test_a_reopened_algae_advisory_renders_both_intervals_and_other_sources_are_unchanged():
+    """Astra re-review 2026-11-14 P2-3: Advisory 12:00, Low Risk 13:00, Advisory 14:00 renders 12:00-13:00 and an open
+    interval from 14:00, the gap kept; a record of another source with the same fields replays nothing."""
+    from datetime import datetime as dt
+
+    from build import status as S
+    a, _ = _cyano([_one_sample("Advisory")], "2026-09-09T12:00:00Z")
+    b, _ = _cyano([_one_sample("Low Risk")], "2026-09-09T13:00:00Z", a)
+    c, _ = _cyano([_one_sample("Advisory")], "2026-09-09T14:00:00Z", b)
+    d, _ = _cyano([_one_sample("Low Risk")], "2026-09-09T15:00:00Z", c)
+    e, _ = _cyano([_one_sample("Advisory")], "2026-09-09T16:00:00Z", d)
+    now = dt.fromisoformat("2026-09-09T17:00:00+00:00")
+    ivs = S.event_intervals(e[0], "IN", now)
+    starts = sorted((S.parse_time(iv["start"]).isoformat(), iv.get("end") and S.parse_time(iv["end"]).isoformat())
+                    for iv in ivs)
+    assert starts[0][0] == "2026-09-09T12:00:00+00:00" and starts[0][1] is not None
+    assert S.parse_time(starts[0][1]) <= dt.fromisoformat("2026-09-09T13:00:00+00:00")
+    assert any(s == "2026-09-09T14:00:00+00:00" for s, _ in starts)
+    assert any(s == "2026-09-09T16:00:00+00:00" for s, _ in starts)
+    assert not any(s < "2026-09-09T16:00:00" and (en is None or en > "2026-09-09T16:00:00") for s, en in starts)
+    other = dict(e[0], source_id="xx-example-source")
+    assert len(S.event_intervals(other, "IN", now)) < len(ivs)
+    assert S.EARLIER_PERIOD_SOURCES == {"ne-dwee-beachwatch", "in-idem-cyanobacteria"}
