@@ -584,3 +584,37 @@ def test_p2_4_other_states_clocks_are_unchanged():
     for st, lat, lon in (("NE", 41.25, -96.0), ("TN", 36.16, -86.78), ("FL", 30.44, -84.28), ("OR", 45.52, -122.68)):
         assert zones.zone_for(st, lat, lon) == {"NE": zones.CENTRAL, "TN": zones.CENTRAL, "FL": "America/New_York",
                                                 "OR": "America/Los_Angeles"}[st]
+
+
+# ---------------------------------------------------------------- verification pass 2026-11-15 P1-5: residences
+
+@pytest.mark.parametrize("words", [
+    "Raw sewage from a private home at 1234 Example Street", "Sewage backup at a private dwelling",
+    "Sewage from a residence", "Septic tank overflow", "Sewage from onsite housing", "Sewage from on-site housing",
+    "Sewage from a house", "Sewage at a mobile home park lot", "Sewage from a farmstead", "Sewage at 1234 Example Road",
+])
+def test_v2_residential_rows_keep_their_county_only_at_both_saves(monkeypatch, words):
+    rows, _ = L.parse_page((FIX / "legacy-search-sample.html").read_text())
+    row = dict(next(r for r in rows if L.keep(r) and r["latitude"]))
+    row["contaminant"] = words
+    assert L.keep(row)
+    saved, written = [], []
+    monkeypatch.setattr(L, "fetch_search", lambda w, s: [row] if w == "sewage" else [])
+    monkeypatch.setattr(L.time, "sleep", lambda s: None)
+    monkeypatch.setattr(L, "read_json", lambda path, default=None: {})
+    monkeypatch.setattr(L, "save_raw", lambda sid, content, ext: saved.append(json.loads(content)))
+    monkeypatch.setattr(L, "write_events", lambda sid, recs, **k: written.append(list(recs)))
+    assert L.main(["--force"]) == 0
+    s, w = saved[0][0], written[0][0]
+    assert s["latitude"] is None and s["longitude"] is None and s["twn_rng_sec"] is None
+    assert w["lat"] is None and w["lon"] is None and w["raw"]["row"]["twn_rng_sec"] is None
+    assert w["raw"]["county"] and w["raw"]["point_withheld"]
+    lat, lon = row["latitude"], row["longitude"]
+    blob = json.dumps([saved, written])
+    assert lat not in blob and lon not in blob and str(round(float(lat), 3)) not in blob
+
+
+def test_v2_ordinary_sewage_rows_keep_their_points():
+    recs, _, _ = legacy()
+    kept = [r for r in recs.values() if r["lat"] is not None]
+    assert kept and all("point_withheld" not in r["raw"] for r in kept)
