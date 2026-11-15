@@ -209,6 +209,13 @@ def build(text: str, fetched: str, previous: list[dict], previous_rows: int | No
         records[rec["event_id"]] = rec
         n["advisories"] += 1
     kept = 0
+    # a row whose date cannot be read is not a withdrawal: an earlier record of that water this read did not
+    # reproduce is kept unchanged (never ended), the row is listed and the read is incomplete (health false, the last
+    # good row count kept) until the row reads again (lessons, items 4 and 5; Astra verification 2026-11-15 P1)
+    unreadable = [{"row": r["row"], "water": r["name"], "date_text": scrub(r["date_text"]) or ""}
+                  for r in rows if not r["date"]]
+    bad_waters = {slug(u["water"]) for u in unreadable}
+    held = []
     for p in previous:      # a current advisory the sheet no longer shows: ended at this read (a poll bound)
         if p["event_id"] in records:
             if p["status"] == "advisory_active" and (p.get("raw") or {}).get("_first_seen_at"):
@@ -216,6 +223,13 @@ def build(text: str, fetched: str, previous: list[dict], previous_rows: int | No
             continue
         p = sanitized(p)
         praw = dict(p.get("raw") or {})
+        if slug(praw.get("sheet_name") or "") in bad_waters and not praw.get("_unlisted_since"):
+            praw["_held"] = "a row of this water could not be read at the last read; the record is kept unchanged"
+            p["raw"] = praw
+            records[p["event_id"]] = p
+            held.append(p["event_id"])
+            kept += 1
+            continue
         if p.get("status") == "advisory_active" and not p.get("ended_at") and not praw.get("_unlisted_since"):
             # ended at this read as a poll bound; the colour stops 14 days after the last read that listed it however
             # late the absence is seen (raw._ages_after_confirmation; lessons, item 2)
@@ -232,8 +246,11 @@ def build(text: str, fetched: str, previous: list[dict], previous_rows: int | No
         r["raw"].setdefault("_first_seen_at", fetched)
     out = sorted(records.values(), key=lambda r: (r["started_at"] or "", r["event_id"]), reverse=True)
     last = max((r["date"] for r in rows if r["date"]), default=None)
+    incomplete = ([f"{len(unreadable)} rows whose date could not be read; {len(held)} earlier records held"]
+                  if held else [])
     meta = {"registry_ids": [SOURCE_ID], "url": PAGE, "landing": LANDING, "kept_from_previous": kept,
-            "last_ok_rows": len(rows),
+            "last_ok_rows": (previous_rows or len(rows)) if incomplete else len(rows),
+            "unreadable_rows": unreadable, "held_records": held, "incomplete": incomplete,
             "latest_update_date": last, **n,
             "cadence": "the sheet is read every run; CDPHE adds a row when a water's condition changes"}
     return out, meta
@@ -261,6 +278,11 @@ def main(argv=None) -> int:
                 if isinstance(r, dict)]
         write_events(SOURCE_ID, kept, ok=False, partial=True, error=scrub(f"{type(e).__name__}: {e}")[:300])
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        return 1
+    if meta["incomplete"]:
+        path = write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta,
+                            error="incomplete answer: " + "; ".join(meta["incomplete"]))
+        print(f"{SOURCE_ID}: INCOMPLETE {'; '.join(meta['incomplete'])} -> {path}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {meta['rows']} rows, {meta['waters']} waters, {meta['advisories']} advisories "

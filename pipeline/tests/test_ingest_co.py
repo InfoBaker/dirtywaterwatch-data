@@ -497,3 +497,21 @@ def test_verify_two_relisting_cycles_in_one_day_keep_both_intervals():
                     ("2026-11-16T19:00:00Z", "2026-11-16T20:00:00Z")]
     ids = [r["event_id"] for r in recs]
     assert len(ids) == len(set(ids))
+
+
+def test_verify_an_unreadable_row_is_not_a_withdrawal(tmp_path, monkeypatch):
+    rc, good = _run_sheet(tmp_path, monkeypatch, sheet(), T0)
+    em = next(r for r in good["records"] if r["source_record_id"] == "eleven-mile-reservoir:2026-08-03")
+    assert rc == 0 and em["status"] == "advisory_active" and em["ended_at"] is None
+    bad = sheet().replace("Eleven Mile Reservoir,Caution,8/3/2026", "Eleven Mile Reservoir,Caution,see note")
+    assert len(bad.splitlines()) == len(sheet().splitlines())
+    rc, out = _run_sheet(tmp_path, monkeypatch, bad, T1)
+    assert rc == 1 and out["ok"] is False
+    em2 = next(r for r in out["records"] if r["source_record_id"] == "eleven-mile-reservoir:2026-08-03")
+    assert em2["ended_at"] is None and em2["status"] == "advisory_active"
+    assert "_unlisted_since" not in em2["raw"] and em2["raw"]["_last_seen_in_source"] == T0
+    assert out["meta"]["unreadable_rows"] and out["meta"]["last_ok_rows"] == good["meta"]["last_ok_rows"]
+    # the next readable answer reads it again as before
+    rc, again = _run_sheet(tmp_path, monkeypatch, sheet(), "2026-11-16T23:30:00Z")
+    em3 = next(r for r in again["records"] if r["source_record_id"] == "eleven-mile-reservoir:2026-08-03")
+    assert rc == 0 and em3["ended_at"] is None and em3["raw"]["_last_seen_in_source"] == "2026-11-16T23:30:00Z"
