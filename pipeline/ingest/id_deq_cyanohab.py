@@ -160,20 +160,45 @@ def read_date(s: str) -> str | None:
         return None
 
 
+def layer_problem(doc: dict) -> str | None:
+    """Why DHW's layer answer cannot show that a water is gone, or None when it is a complete answer: an answer cut off
+    at the server's transfer limit (exceededTransferLimit) or a feature with no name is a partial read (lessons 4)."""
+    if not isinstance(doc, dict):
+        return "DHW's layer answer is not a JSON object"
+    if doc.get("exceededTransferLimit"):
+        return "DHW's layer answer was cut off at the server's transfer limit"
+    if any(not clean((f.get("attributes") or {}).get("LocationDiscription")) for f in doc.get("features") or []):
+        return "a feature of DHW's layer has no name"
+    return None
+
+
 def parse_layer(doc: dict) -> dict[str, dict]:
-    """{water key: {name, tier, lat, lon}} from DHW's layer answer (rounded to 0.001 degree); ValueError on an error."""
+    """{water key: {name, tier, lat, lon}} from DHW's layer answer (rounded to 0.001 degree); ValueError on an error.
+    The name is scrubbed before its key is made (lessons 6). A feature without a point keeps its water and tier with
+    lat and lon None: it still shows the water on DHW's map, so its advisory is never lifted for a missing point
+    (Astra verification 2026-11-15)."""
     if not isinstance(doc, dict) or doc.get("error") or "features" not in doc:
         raise ValueError(f"DHW's layer answered no features: {str(doc.get('error') if isinstance(doc, dict) else doc)[:200]}")
     out = {}
     for f in doc["features"]:
         a, g = f.get("attributes") or {}, f.get("geometry") or {}
-        name = clean(a.get("LocationDiscription"))
-        if not name or g.get("x") is None or g.get("y") is None:
+        name = scrub(clean(a.get("LocationDiscription")))
+        if not name:
             continue
+        lat = lon = None
+        try:
+            if g.get("x") is not None and g.get("y") is not None:
+                lat, lon = round(float(g["y"]), 3), round(float(g["x"]), 3)
+        except (TypeError, ValueError):
+            lat = lon = None
         out[key(name)] = {"name": name, "tier": clean(a.get("RiskTier")) or None,
-                          "shown": clean(a.get("DisplayOnWebsite")) or None,
-                          "lat": round(float(g["y"]), 3), "lon": round(float(g["x"]), 3)}
+                          "shown": clean(a.get("DisplayOnWebsite")) or None, "lat": lat, "lon": lon}
     return out
+
+
+def _placed(pt: dict | None) -> dict | None:
+    """The point when it has coordinates, else None."""
+    return pt if pt and pt.get("lat") is not None and pt.get("lon") is not None else None
 
 
 def split_water(water: str) -> tuple[str, str | None]:
@@ -212,18 +237,40 @@ def scrub_row(r: dict) -> dict:
     return {k: (scrub(v) if isinstance(v, str) else v) for k, v in r.items()}
 
 
+def _scrub_points(points: dict) -> dict:
+    """DHW's names scrubbed and their keys made again from the scrubbed names (a key is derived text, lessons 6)."""
+    out = {}
+    for v in points.values():
+        if isinstance(v, dict):
+            v = dict(v, name=scrub(clean(v.get("name"))))
+            out[key(v["name"] or "")] = v
+    return out
+
+
 def scrub_state(state: dict) -> dict:
-    """The scrub again on everything carried from earlier state (rows, snapshots, DHW's names), lessons 6."""
-    for ep in (state.get("episodes") or {}).values():
+    """The scrub again on everything carried from earlier state (rows, snapshots, DHW's names and their keys), lessons
+    6. An episode's key and id are made from its row's water, scrubbed, so they are made again here too."""
+    eps = {}
+    for sid, ep in (state.get("episodes") or {}).items():
         if isinstance(ep.get("row"), dict):
             ep["row"] = scrub_row(ep["row"])
+            if isinstance(ep.get("point"), dict):
+                ep["point"] = dict(ep["point"], name=scrub(clean(ep["point"].get("name"))))
+            old = ep.get("water_key") or ""
+            new = (("unread-" + slug(" ".join(str(x) for x in ep["row"].values()))[:60]) if old.startswith("unread-")
+                   else f"{slug(ep['row']['water'])}:{slug(ep['row']['county'])}")
+            if new != old and sid.startswith(old):
+                ep["water_key"], sid = new, new + sid[len(old):]
+        eps[sid] = ep
+    if "episodes" in state:
+        state["episodes"] = eps
     snap = state.get("last_snapshot")
     if isinstance(snap, dict):
         snap["rows"] = [scrub_row(r) for r in snap.get("rows") or [] if isinstance(r, dict)]
         if isinstance(snap.get("points"), dict):
-            snap["points"] = {k: dict(v, name=scrub(v.get("name"))) for k, v in snap["points"].items()}
+            snap["points"] = _scrub_points(snap["points"])
     if isinstance(state.get("points"), dict):
-        state["points"] = {k: dict(v, name=scrub(v.get("name"))) for k, v in state["points"].items()}
+        state["points"] = _scrub_points(state["points"])
     return state
 
 
@@ -238,16 +285,23 @@ def _on_layer(layer: dict, ep: dict) -> bool:
     return tier is None or tier == want
 
 
-def update(state: dict, rows: list[dict], at: str, layer: dict | None) -> dict:
+def update(state: dict, rows: list[dict], at: str, layer: dict | None, layer_partial: str | None = None) -> dict:
     """Fold one read of the table into the state: open, continue and close level episodes.
 
     A water shown at another level closes its episode at this read (DEQ's own row says so). A water the table no
     longer lists closes only on evidence that the read is complete (Astra 2026-11-15 P1-1): every row of this read is
     readable, and DHW's map, read in the same run, no longer shows the water at that level. Otherwise the episode stays
     open, pending (state.last_poll.pending, the feed's health false), and closes at the first read that has the
-    evidence, never earlier (raw.first_unlisted_at keeps the first read that missed it)."""
+    evidence, never earlier (raw.first_unlisted_at keeps the first read that missed it). A layer answer that is partial
+    (layer_partial: cut off at the transfer limit, a feature with no name) is no evidence of a disappearance; a water
+    whose feature has no point keeps the point of the last good read (Astra verification 2026-11-15)."""
     if layer is not None:
-        state["points"] = layer
+        before = state.get("points") or {}
+        merged = {k: (dict(v, lat=before[k]["lat"], lon=before[k]["lon"])
+                      if not _placed(v) and _placed(before.get(k)) else v) for k, v in layer.items()}
+        if layer_partial:
+            merged = {**before, **merged}           # a cut-off answer drops nothing it did not show
+        state["points"] = merged
         state["points_read_at"] = at
     eps = state.setdefault("episodes", {})
     seen = {}
@@ -271,6 +325,7 @@ def update(state: dict, rows: list[dict], at: str, layer: dict | None) -> dict:
             ep.setdefault("first_unlisted_at", at)
             why = ("rows of this read could not be read" if unread else
                    "DHW's map was not read in this run" if layer is None else
+                   f"DHW's map was read only in part ({layer_partial})" if layer_partial else
                    "DHW's map still shows the water at this level" if _on_layer(layer, ep) else None)
             if why:
                 ep["pending"] = why
@@ -306,7 +361,7 @@ def update(state: dict, rows: list[dict], at: str, layer: dict | None) -> dict:
         # the episode keeps the point it was first placed at: a later move of DHW's marker never rewrites an earlier
         # record's place (lessons 3); an episode with no point yet takes the first one the layer gives
         if not ep.get("point"):
-            pt = (state.get("points") or {}).get(key(r["water"]))
+            pt = _placed((state.get("points") or {}).get(key(r["water"])))
             if pt:
                 ep["point"] = dict(pt)
         d = read_date(r["collection_date"])
@@ -330,7 +385,7 @@ def records(state: dict) -> list[dict]:
         r = ep["row"]
         level, ended = ep["level"], ep.get("ended_at")
         base, part = split_water(r["water"])
-        pt = ep.get("point") or points.get(key(r["water"]))
+        pt = _placed(ep.get("point")) or _placed(points.get(key(r["water"])))
         # the county decides; in Idaho County (split by the Salmon River) the listing's own point does (lessons 9)
         zone = zones.idaho_zone(county=r["county"] or None, lat=(pt or {}).get("lat"), lon=(pt or {}).get("lon"))
         sample = sorted(ep["collection_dates"])[-1] if ep["collection_dates"] else None
@@ -406,11 +461,14 @@ def records(state: dict) -> list[dict]:
                 # hours past the last read that listed it, so it never turns grey before the next read (Astra
                 # 2026-11-15 P1-2; the status build's _open_notice_caution_hours, keyed on the record's field)
                 raw["_open_notice_caution_hours"] = 72
-            start = sample or ep["first_seen"][:10]
+            # no collection date: no calendar day is made from the read's UTC time; the start is the first read that
+            # listed it, marked poll (the notice began before), as the advisories are (Astra verification 2026-11-15)
+            start, precision = (sample, "day") if sample else (ep["first_seen"], "poll")
             if not sample:
-                raw["start_basis"] = "no collection date in the row: the first read that listed it"
+                raw["start_basis"] = ("no collection date in the row: the first read of DEQ's table that listed the "
+                                      "water at this level, so the notice began before this time")
             out.append(event(**common_f, event_type="hab_advisory", status="ended" if ended else "unknown",
-                             started_at=start, ended_at=ended, time_precision="day", sampled_at=sample,
+                             started_at=start, ended_at=ended, time_precision=precision, sampled_at=sample,
                              advice_text=(f"{name} (DEQ's CyanoHAB Risk Data Table, {r['data_type'] or 'no data type given'}"
                                           f", collection date {sample or 'not given'}): “{info}”" if info
                                           else f"{name} (DEQ's CyanoHAB Risk Data Table)"),
@@ -451,13 +509,14 @@ def main(argv=None) -> int:
         write_events(SOURCE_ID, [], ok=False, error=err)
         print(f"{SOURCE_ID}: {err}", file=sys.stderr)
         return 1
-    layer, layer_error = None, None
+    layer, layer_error, layer_partial = None, None, None
     try:
         doc = (json.loads(Path(argv[argv.index("--layer-file") + 1]).read_text()) if "--layer-file" in argv
                else (None if "--file" in argv else fetch_layer()))
         layer = parse_layer(doc) if doc is not None else None
-        if layer is not None:
-            layer = {k: dict(v, name=scrub(v["name"])) for k, v in layer.items()}
+        layer_partial = layer_problem(doc) if doc is not None else None
+        if layer_partial:
+            layer_error = f"DHW's layer: {layer_partial} (no water is ended on this read; the last good points are kept)"
     except (requests.RequestException, OSError, ValueError) as e:
         layer_error = scrub(f"DHW's layer: {e} (the last good points are kept)")
     state = scrub_state(read_json(STATE_PATH, {}) or {})
@@ -465,7 +524,7 @@ def main(argv=None) -> int:
     if "--file" not in argv and state.get("last_snapshot") != snapshot:
         save_raw(SOURCE_ID, json.dumps({"fetched_at": at, **snapshot}, indent=1).encode(), "json")
     state["last_snapshot"] = snapshot
-    state = update(state, rows, at, layer)
+    state = update(state, rows, at, layer, layer_partial)
     write_json(STATE_PATH, state)
     recs = records(state)
     meta = {"registry_ids": [SOURCE_ID, "id-dhw-recreational-advisories"], "url": URL, "layer": LAYER,
