@@ -668,3 +668,138 @@ def test_r3_p2_3_the_state_text_says_what_the_councils_notices_show_of_stops_and
     assert "no end for most spills" not in t
     assert "each gives the day the spill was stopped" in t
     assert "the day they came down is often not confirmed" in t
+
+
+# ---------------------------------------------------------------- verification pass 3, 2026-11-15 (Astra), round 4
+
+def _pages_in_order(*updates, newest_first=False):
+    """The page after each successive notice, its updates listed oldest first or (as the Council does) newest first."""
+    out = []
+    for n in range(1, len(updates) + 1):
+        ups = list(updates[:n])
+        if newest_first:
+            ups.reverse()
+        out.append(_page(*ups, intro_signs=False))
+    return out
+
+
+def _live_colour(tmp_path, r, y, mo, d, h=18):
+    """The resolved water's colour through the whole status build, Minnesota live, at the given time."""
+    from datetime import UTC, datetime
+    from build import status as S
+    now = datetime(y, mo, d, h, tzinfo=UTC)
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    r = copy.deepcopy(r)
+    slug = "example-pond-mn"
+    lat, lon, dd = 44.9, -93.3, 0.01
+    ring = [[lon - dd, lat - dd], [lon + dd, lat - dd], [lon + dd, lat + dd], [lon - dd, lat + dd], [lon - dd, lat - dd]]
+    waters = {slug: {"slug": slug, "name": "Example Pond", "kind": "lake", "state": "MN", "area_km2": 1.0,
+                     "bbox": [lon - dd, lat - dd, lon + dd, lat + dd], "geometry": {"type": "Polygon",
+                                                                                  "coordinates": [ring]}}}
+    r["waterbody_text"], r["water_slugs"], r["water_match"] = "Example Pond", [slug], "name"
+    d_ = tmp_path / f"run-{y}{mo:02d}{d:02d}{h:02d}"
+    d_.mkdir(parents=True, exist_ok=True)
+    (d_ / f"{M.SOURCE_ID}.json").write_text(json.dumps(
+        {"source_id": M.SOURCE_ID, "ok": True, "last_ok_at": now.isoformat(), "meta": {}, "records": [r]}))
+    rules = copy.deepcopy(S.load_rules())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"MN"})
+    st, _ = S.build(now=now, write=False, events_dir=d_, waters=waters, outfalls=[], registry={}, reaches={},
+                    flows=({}, {}), rules=rules, placement_cache=False)
+    return st["waters"][slug]["status"]
+
+
+_CONDITIONAL_DONE = [
+    "When crews have removed the signs, the advisory ends.",
+    "Whenever crews have removed the signs, the Council posts an update.",
+    "If the signs have been removed, the area may be used again.",
+    "Once crews have removed the signs, the area reopens.",
+    "After crews have removed the signs, the area reopens.",
+    "As soon as the signs have been removed, residents will be told.",
+    "Until the signs have been removed, stay out of the water.",
+    "The advisory stays in place until the signs have been removed.",
+    "Before the signs have been removed, the water will be tested again.",
+    "Crews are expected to have removed the signs by Friday.",
+    "Crews plan to remove the signs next week.",
+    "The signs are scheduled to be removed Friday.",
+    "The signs will be removed after the water tests clean.",
+]
+
+
+@pytest.mark.parametrize("newest_first", [False, True])
+@pytest.mark.parametrize("words", _CONDITIONAL_DONE)
+def test_r4_p1_1_a_conditional_or_planned_removal_is_no_removal_done_through_live_status(tmp_path, words,
+                                                                                        newest_first):
+    assert not M.removal_done(words)
+    r = _runs(*_pages_in_order(("3/12/2026", _SIGN), ("3/20/2026", words), newest_first=newest_first))
+    assert r["status"] == "advisory_active" and r["ended_at"] is None
+    assert "_unlisted_since" not in r["raw"] and "_end_not_confirmed" not in r["raw"]
+    assert not r["raw"]["signs"].get("removal_done")
+    for d in (15, 21, 26):
+        assert _live_colour(tmp_path, r, 2026, 3, d) == "red"
+    assert _live_colour(tmp_path, r, 2026, 4, 20) == "red"
+
+
+@pytest.mark.parametrize("words", [
+    "Crews have removed the signs.",
+    "The signs have been removed.",
+    "The signs were removed after the water tested clean.",
+    "After sampling showed normal levels, the signs were removed.",
+    "Signs warning the public “Do Not Enter/ Sewage Spill” have been removed.",
+])
+def test_r4_p1_1_an_affirmative_completed_removal_still_counts(words):
+    assert M.removal_done(words)
+    for newest_first in (False, True):
+        r = _runs(*_pages_in_order(("3/12/2026", _SIGN), ("3/20/2026", words), newest_first=newest_first))
+        assert r["raw"]["signs"]["removal_done"] is True and r["raw"]["_unlisted_since"] == "2026-03-21T05:00:00Z"
+
+
+_STILL_UP = [
+    "Crews have not removed the signs.",
+    "The signs remain in place.",
+    "Signs are still posted at the affected areas.",
+    "The signs have yet to be removed.",
+    "The signs will be removed when the water tests clean.",
+    "When crews have removed the signs, the advisory ends.",
+    "Signs warning the public “Do Not Enter/ Sewage Spill” have been placed again.",
+]
+
+
+@pytest.mark.parametrize("newest_first", [False, True])
+@pytest.mark.parametrize("earlier", ["Signs will be removed next week.", "The signs have been removed."])
+@pytest.mark.parametrize("confirm", _STILL_UP)
+def test_r4_p1_2_a_later_notice_that_the_signs_stand_cancels_an_earlier_removal(tmp_path, confirm, earlier,
+                                                                               newest_first):
+    pages = _pages_in_order(("3/12/2026", _SIGN), ("3/20/2026", earlier), ("3/25/2026", confirm),
+                            newest_first=newest_first)
+    mid = _runs(*pages[:2])
+    assert mid["raw"]["_unlisted_since"] == "2026-03-21T05:00:00Z"          # the earlier removal, on its own
+    r = _runs(*pages)                                                        # three successive runs
+    assert r["status"] == "advisory_active" and r["ended_at"] is None
+    assert "_unlisted_since" not in r["raw"] and "_end_not_confirmed" not in r["raw"]
+    assert not r["raw"]["signs"].get("removal_done") and "removal_announced_on" not in r["raw"]["signs"]
+    assert r["raw"]["signs"]["standing_per_notice_of"] == "2026-03-25"
+    for d in (21, 26):
+        assert _live_colour(tmp_path, r, 2026, 3, d) == "red"
+    assert _live_colour(tmp_path, r, 2026, 4, 20) == "red"
+
+
+@pytest.mark.parametrize("newest_first", [False, True])
+def test_r4_p1_2_the_latest_notice_decides_and_a_silent_one_changes_nothing(tmp_path, newest_first):
+    seq = lambda *u: _runs(*_pages_in_order(("3/12/2026", _SIGN), *u, newest_first=newest_first))
+    # a plan, then an update silent on the signs: the plan's cut-off stands (red to its day, then not red)
+    r = seq(("3/20/2026", "Signs will be removed next week."), ("3/25/2026", "Repairs are complete."))
+    assert r["raw"]["_unlisted_since"] == "2026-03-21T05:00:00Z" and r["raw"]["signs"]["removal_done"] is False
+    assert _live_colour(tmp_path, r, 2026, 3, 20) == "red" and _live_colour(tmp_path, r, 2026, 3, 26) != "red"
+    # a plan, then a removal done: the done one's day
+    r = seq(("3/20/2026", "Signs will be removed next week."), ("3/25/2026", "The signs have been removed."))
+    assert r["raw"]["_unlisted_since"] == "2026-03-26T05:00:00Z" and r["raw"]["signs"]["removal_done"] is True
+    # the signs stand, then a plan: the plan's day
+    r = seq(("3/20/2026", "The signs remain in place."), ("3/25/2026", "Signs will be removed next week."))
+    assert r["raw"]["_unlisted_since"] == "2026-03-26T05:00:00Z" and r["raw"]["signs"]["removal_done"] is False
+    # a removal said twice: the signs were down by the first
+    r = seq(("3/20/2026", "The signs have been removed."), ("3/25/2026", "The signs have been removed."))
+    assert r["raw"]["_unlisted_since"] == "2026-03-21T05:00:00Z"
+    # one notice that the signs stand now and will come down next week: a plan, cut at that notice
+    r = seq(("3/20/2026", "The signs remain in place. Signs will be removed next week."))
+    assert r["raw"]["_unlisted_since"] == "2026-03-21T05:00:00Z" and r["raw"]["signs"]["removal_done"] is False
