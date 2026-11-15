@@ -846,3 +846,41 @@ def test_a_county_without_a_point_constrains_indiana_placement(monkeypatch):
     from ingest import outfall_waters as OW
     assert OW.Matcher.fake(None, row, "Sample Creek")["raw"]["county"] == "Marion"
     assert "county" not in OW.Matcher.fake(None, dict(row, state="TX", county="Harris"), "x")["raw"]
+
+
+def _totals_chart(evs, sid):
+    import types
+    from datetime import UTC, datetime
+
+    from build import charts as C
+    b = C.Bucket("discharger", "example-in")
+    b.state = "IN"
+    b.totals = [dict(e, source_id=sid) for e in evs]
+    data = types.SimpleNamespace(history={}, status={}, waters={}, by_id={}, dropped={}, effective={}, placements={},
+                                 now=datetime(2026, 11, 14, tzinfo=UTC), rules={}, events=[], dischargers={})
+    doc = C.build_entity(b, data, {}, {}, "Example")
+    return {s["key"]: s["values"] for s in doc["charts"]["reported_totals"][0]["series"]}
+
+
+def _month_rec(ym, events=None, hours=None, gal=None, outfall="002"):
+    last = {"08": "31", "09": "30", "10": "31"}[ym[5:]]
+    params = {k: {"DMRValueNmbr": v} for k, v in (("events", events), ("duration", hours)) if v is not None}
+    return {"event_id": f"x:{outfall}:{ym}", "started_at": f"{ym}-01", "ended_at": f"{ym}-{last}",
+            "time_precision": "month", "event_type": "cso", "volume_gal": gal, "discharger_name": "Example",
+            "raw": {"parameters": params}}
+
+
+def test_monthly_totals_leave_missing_months_and_measures_blank_and_other_feeds_are_unchanged():
+    """Astra re-review 2026-11-14 P2-5: August and October with September absent are [1, None, 1], never 0; a month
+    whose record lacks a measure is None for that measure; an explicit zero stays zero; another source's series
+    keep the zero they always had."""
+    evs = [_month_rec("2025-08", 1, 4, 1_100_000), _month_rec("2025-10", 1, 4, 1_100_000)]
+    s = _totals_chart(evs, "in-echo-dmr-cso")
+    assert s["events"] == [1.0, None, 1.0] and s["hours"] == [4.0, None, 4.0]
+    assert s["gallons"] == [1_100_000.0, None, 1_100_000.0]
+    part = [_month_rec("2025-08", 2, 0, None), _month_rec("2025-09", 1, None, 500_000),
+            _month_rec("2025-09", 1, 3, 200_000, outfall="003")]
+    s = _totals_chart(part, "in-echo-dmr-cso")
+    assert s["events"] == [2.0, 2.0] and s["hours"] == [0.0, None] and s["gallons"] == [None, 700_000.0]
+    other = _totals_chart(evs, "xx-example-monthly")
+    assert other["events"] == [1.0, 0.0, 1.0] and other["gallons"] == [1_100_000.0, 0.0, 1_100_000.0]
