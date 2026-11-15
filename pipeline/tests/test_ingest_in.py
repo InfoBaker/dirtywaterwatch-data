@@ -499,7 +499,10 @@ def test_indiana_name_placement_is_county_aware(monkeypatch):
 
 def test_a_name_only_tie_beyond_25_km_is_refused_in_indiana():
     from ingest import outfall_waters as OW
-    assert OW.NAME_ONLY_CAP_M == {"TX": 25_000, "IN": 25_000}
+    assert OW.NAME_ONLY_CAP_M["TX"] == OW.NAME_ONLY_CAP_M["IN"] == 25_000
+    # no live state other than Texas has the cap (West Virginia and Louisiana, not live, add their own)
+    live = json.loads((ROOT / "data" / "rules.json").read_text())["live_states"]
+    assert {k for k in OW.NAME_ONLY_CAP_M if k in live} == {"TX"}
 
     class MT:
         waters = {"sample-creek-in": {"name": "Sample Creek", "kind": "river"}}
@@ -934,7 +937,10 @@ def test_the_public_claims_match_the_build():
     for p in ("research/in/sources.json", "scripts/add_in_register_rows.py", "data/sources/in-echo-dmr-cso.yaml"):
         assert "92 permits" not in (ROOT / p).read_text() and "(92:" not in (ROOT / p).read_text(), p
     rules = json.loads((ROOT / "data" / "rules.json").read_text())
-    assert "rain caution at every open" not in json.dumps(rules)
+    # West Virginia's own row (integrated later) describes its own outlets' rain caution with its radar rule
+    others = {**rules, "red": {**rules["red"], "by_state": {k: v for k, v in rules["red"]["by_state"].items()
+                                                         if k != "WV"}}}
+    assert "rain caution at every open" not in json.dumps(others)
     assert "with a location once the outfall is placed on its water" in json.dumps(rules)
 
 
