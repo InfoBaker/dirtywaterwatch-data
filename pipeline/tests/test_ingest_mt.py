@@ -328,3 +328,20 @@ def test_review_a_name_with_a_title_or_house_number_is_scrubbed():
     blob = json.dumps(M.build(doc, T0)[0]) + json.dumps(M.safe_rows(doc))
     for bad in ("Example Person", "12-B", "Pat Example"):
         assert bad not in blob, bad
+
+
+# ---------------------------------------------------------------- Astra verification 2026-11-15 (last round)
+
+@pytest.mark.parametrize("note,end", [("sampled 7/28 then lifted effective 8/3/2026", "2026-08-03"),
+                                      ("sampled 7/28/2026 lifted 8/3/2026", "2026-08-03"),
+                                      ("7/28/2026 sampled then lifted 8/3/2026", "2026-08-03"),
+                                      ("lifted 8/3/2026 after sampling 7/28/2026", "2026-08-03"),
+                                      ("lift planned for 8/3/2026", None),
+                                      ("planned lift 8/3/2026", None),
+                                      ("lift scheduled 8/3/2026", None),
+                                      ("anticipated lift date 8/3/2026", None),
+                                      ("lift date 8/3/2026 (tentative)", None)])
+def test_verify_the_lift_date_is_only_the_date_stated_as_the_lift(note, end):
+    doc = {"features": [row("V-1", "Example Lake", "7/9/2026", note, obs=ms(2026, 7, 9))]}
+    assert M.build(doc, T0)[0][0]["ended_at"] == end
+    assert M.build(M.safe_rows(doc), T0)[0][0]["ended_at"] == end

@@ -74,7 +74,10 @@ WORDS = ("caution", "closure", "toxin")
 NOT_A_LIFT = re.compile(r"\b(?:not|never|no|pending|will|would|to be|expected to|planned to|may|might|can|could|should|"
                         r"yet to|until|unless|awaiting|await)\b(?:\s+\w+){0,2}?\s+(?:be\s+)?lift|"
                         r"\blift(?:ed|ing)?\s+(?:is\s+)?(?:not|pending|when|if|once|until|unless|after)\b|"
-                        r"\bnot\s+yet\b|\bstill\s+(?:in\s+effect|active|in\s+place|posted)\b", re.I)
+                        r"\bnot\s+yet\b|\bstill\s+(?:in\s+effect|active|in\s+place|posted)\b|"
+                        # a planned, scheduled or expected lift is not a lift ("lift planned for 8/3/2026", "tentative")
+                        r"\b(?:plann\w*|schedul\w*|anticipat\w*|expect\w*|propos\w*|tentativ\w*|estimat\w*|"
+                        r"target\w*|projected|intend\w*)\b", re.I)
 LIFT_WORD = re.compile(r"\blift(?:ed)?\b|\brescinded\b|\bremoved\b", re.I)
 # a date labelled as something else in the lift note ("sampled 7/28, lifted 8/3"): not the lift date
 OTHER_DATE_WORD = re.compile(r"\b(?:sampl\w*|test\w*|result\w*|collect\w*|observ\w*|issued|report\w*|photo\w*|"
@@ -114,7 +117,8 @@ def dates_in(text: str | None, year: int | None) -> list[str]:
 def lift_dates(text: str | None, year: int | None) -> list[str]:
     """The dates of an affirmative, completed lift in DEQ's advisory_lifted note. A negated or conditional note gives
     none. The note is read clause by clause: when it says "lifted" anywhere, only the dates in a clause that says so
-    count (the date nearest the word where the clause also names a sampling or another dated step); otherwise a clause
+    count (each date belongs to the label written before it, or with none before it to the label after it, so in
+    "sampled 7/28 then lifted 8/3" only 8/3 is the lift); a planned, scheduled or expected lift is none; otherwise a clause
     of bare dates, or one that names no other dated step, is the lift date (the field is DEQ's lift field). A date
     labelled as a sampling, a test or a report is never the lift date."""
     t = str(text or "")
@@ -127,7 +131,7 @@ def lift_dates(text: str | None, year: int | None) -> list[str]:
             m = LIFT_WORD.search(c)
             if not m:
                 continue
-            found = [(abs(d.start() - m.start()), d.start()) for d in DATE.finditer(c)]
+            found = list(DATE.finditer(c))
             if not found:   # "8/3/2026 no new info, lifted": the date in the clause beside it, if not another step's
                 for j in (i - 1, i + 1):
                     if 0 <= j < len(clauses) and not LIFT_WORD.search(clauses[j]) \
@@ -135,11 +139,15 @@ def lift_dates(text: str | None, year: int | None) -> list[str]:
                         out += dates_in(clauses[j], year)
                         break
                 continue
-            if OTHER_DATE_WORD.search(c):
-                pos = min(found)[1]
-                out += dates_in(c[pos:], year)[:1]
-            else:
-                out += dates_in(c, year)
+            # each date belongs to the label written before it ("sampled 7/28 then lifted 8/3": 7/28 the sampling,
+            # 8/3 the lift), or, with none before it, to the label after it ("8/3 lifted"); only a lift's dates count
+            labels = sorted([(x.start(), "lift") for x in LIFT_WORD.finditer(c)]
+                            + [(x.start(), "other") for x in OTHER_DATE_WORD.finditer(c)])
+            for d in found:
+                before = [k for p, k in labels if p < d.start()]
+                after = [k for p, k in labels if p > d.start()]
+                if (before[-1] if before else after[0] if after else None) == "lift":
+                    out += dates_in(d.group(0), year)
         return out
     return [d for c in clauses if not OTHER_DATE_WORD.search(c) for d in dates_in(c, year)]
 
