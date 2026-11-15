@@ -1969,7 +1969,13 @@ REMAINDER_OVERLAP_MAX = 0.10   # a remainder with more of its length than this w
 # outlines, and the side channels and braids within SIDE_CHANNEL_M of the river record `to`, are those records'; a
 # rest shorter than REMAINDER_MIN_KM is dropped and the target rows naming it (slugs, reach_slugs) go to `to`, a longer
 # true remainder is cut to that rest (and takes `kind`, when given). A rerun of the state's batch therefore cannot
-# rebuild the copy. {(state, GNIS number): {"to", "on", "why", "kind"?}}
+# rebuild the copy. A record that is no remainder (no covers_part_of) but lies on other records is measured the same
+# way when a ruling names it (Kansas's Bull Creek; Arkansas's South Fork Spring River, a record of another name); an
+# unnamed water with no GNIS id is keyed by its slug. A ruling's "side_channels": False keeps every rest piece beyond
+# SAME_WATER_M, for a river whose true remainder adjoins the river record it was cut from (Kansas: the stretch between a
+# reservoir and the river's record is the river's own). With "rows_follow", the target rows naming a recut record go to
+# `to` as well (rows whose operators lie on the part that is `to`'s, the true remainder lying elsewhere).
+# {(state, GNIS number or slug): {"to", "on", "why", "kind"?, "side_channels"?, "rows_follow"?}}
 REMAINDER_ON = {
     ("MN", 649622): {
         "to": "pomme-de-terre-river-mn", "on": ["pomme-de-terre-river-mn"],
@@ -1982,14 +1988,86 @@ REMAINDER_ON = {
                "Sakakawea and most of the rest on Lake Oahe: the river's line through the reservoirs is the "
                "reservoirs' records, its braids beside the river are missouri-river-nd (ND go-live audit 2026-11-15, "
                "P2-2)"},
+    # South Carolina (SC go-live audit 2026-11-15, P2-2)
+    ("SC", 1246493): {
+        "to": "lynches-river-sc", "on": ["lynches-river-sc", "lynches-river-johnsonville-sc"],
+        "why": "the Lynches River's NHD copy was cut only against openboatlaunch's 2 km lynches-river-johnsonville-sc "
+               "and lay 47 per cent on lynches-river-sc: only the part off both records is the remainder (SC go-live "
+               "audit 2026-11-15, P2-2)"},
+    ("SC", 1250834): {
+        "to": "lake-hartwell-sc", "on": ["lake-hartwell-sc"],
+        "why": "the Seneca River's NHD line is drawn through Lake Hartwell and lay 83 per cent on lake-hartwell-sc: "
+               "the river's line through the reservoir is the reservoir's record (SC go-live audit 2026-11-15, P2-2)"},
+    ("SC", "unnamed-tributary-to-catawba-river-sc"): {
+        "to": "lake-wylie-sc", "on": ["lake-wylie-sc"],
+        "why": "the unnamed tributary at Tega Cay (NHDPlus COMID 9756970) lay wholly inside Lake Wylie's outline: "
+               "Tega Cay's outfalls discharge to Lake Wylie (SC go-live audit 2026-11-15, P2-2)"},
+    # Kansas (KS go-live audit 2026-11-15, P2-3): NHD records that lie on the reservoir they run through. The part within
+    # SAME_WATER_M of the reservoir is the reservoir's record; the stretch beyond it stays the river's record.
+    ("KS", 485443): {
+        "to": "republican-river-ks", "on": ["milford-lake-ks"], "side_channels": False,
+        "why": "the Republican River's NHD record lay 80 per cent on Milford Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 485505): {
+        "to": "big-blue-river-ks", "on": ["tuttle-creek-lake-ks"], "side_channels": False,
+        "why": "the Big Blue River's NHD record lay 73 per cent on Tuttle Creek Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 477526): {
+        "to": "cottonwood-river-ks", "on": ["marion-reservoir-ks", "north-cottonwood-river-ks"], "side_channels": False, "kind": "river",
+        "why": "the Cottonwood River's NHD record (kind canal) lay 70 per cent on openboatlaunch's North Cottonwood River and 20 per cent on Marion Reservoir (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 1095788): {
+        "to": "neosho-river-ks", "on": ["john-redmond-reservoir-ks"], "side_channels": False,
+        "why": "the Neosho River's NHD record lay 36 per cent on John Redmond Reservoir (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 1099243): {
+        "to": "verdigris-river-ks", "on": ["toronto-lake-ks"], "side_channels": False,
+        "why": "the Verdigris River's NHD record lay 37 per cent on Toronto Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 482756): {
+        "to": "wakarusa-river-ks", "on": ["clinton-lake-ks"], "side_channels": False,
+        "why": "the Wakarusa River's NHD record lay 37 per cent on Clinton Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 479723): {
+        "to": "hillsdale-lake-ks", "on": ["hillsdale-lake-ks"], "side_channels": False,
+        "why": "Bull Creek's NHD record (no remainder: built whole) lay 18 per cent on Hillsdale Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 477714): {
+        "to": "marais-des-cygnes-river-ks", "on": ["melvern-lake-ks"], "side_channels": False,
+        "why": "the Marais des Cygnes River's NHD record lay 17 per cent on Melvern Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 469680): {
+        "to": "big-hill-creek-ks", "on": ["big-hill-lake-ks"], "side_channels": False,
+        "why": "Big Hill Creek's NHD record lay 15 per cent on Big Hill Lake (KS go-live audit 2026-11-15, P2-3)"},
+    # Arkansas (AR go-live audit 2026-11-15, items 2 to 4)
+    ("AR", 76253): {
+        "to": "bayou-bartholomew-ar", "on": ["bayou-bartholomew-ar", "bartholomew-bayou-ar"], "rows_follow": True,
+        "why": "Bayou Bartholomew's NHD copy was cut only against openboatlaunch's bartholomew-bayou-ar and lay 95.5 "
+               "per cent within 300 m of openboatlaunch's bayou-bartholomew-ar, the same bayou; the true remainder is "
+               "the headwaters above Pine Bluff, while the row's operators (Dermott, Parkdale, Portland) are on the "
+               "lower bayou (AR go-live audit 2026-11-15, P2-1)"},
+    ("AR", 78762): {
+        "to": "white-river-ar", "on": ["white-river-ar", "bull-shoals-lake-ar", "beaver-lake-ar"], "kind": "river",
+        "why": "the White River's NHD remainder was cut only against white-river-ar and lay 52.7 per cent on Bull Shoals "
+               "Lake and 18.9 per cent on Beaver Lake: the river's line through the reservoirs is the reservoirs' "
+               "records (AR go-live audit 2026-11-15, P2-2)"},
+    ("AR", 558280): {
+        "to": "ouachita-river-ar", "on": ["ouachita-river-ar", "lake-ouachita-ar"], "kind": "river",
+        "why": "the Ouachita River's NHD remainder was cut only against ouachita-river-ar and lay 45.8 per cent on Lake "
+               "Ouachita, whose record that part is (AR go-live audit 2026-11-15, P2-2)"},
+    ("AR", 55029): {
+        "to": "south-spring-river-ar", "on": ["south-spring-river-ar"],
+        "why": "NHD's South Fork Spring River lay 81 per cent on openboatlaunch's south-spring-river-ar, "
+               "OpenStreetMap's name for the same river; a record of another name, so the NHD build never cut it "
+               "(AR go-live audit 2026-11-15, P2-3)"},
 }
 SIDE_CHANNEL_M = 1000          # a rest piece this close to the river record `to` is a side channel or braid of it
+
+
+def _ruled(w: dict) -> bool:
+    st = str(w.get("state") or "").upper()
+    return bool((w.get("gnis_id") and (st, gnis_num(w.get("gnis_id"))) in REMAINDER_ON)
+                or (st, w.get("slug")) in REMAINDER_ON)
 
 
 def _remainder_ruling(w: dict, existing: dict | None, lat0: float):
     """(ruling, the union of its outlines in metres buffered by SAME_WATER_M, the river `to` in metres) for a remainder
     REMAINDER_ON names, or None when it names none or an outline it needs is not on this machine."""
-    hand = REMAINDER_ON.get((str(w.get("state") or "").upper(), gnis_num(w.get("gnis_id"))))
+    st = str(w.get("state") or "").upper()
+    hand = REMAINDER_ON.get((st, gnis_num(w.get("gnis_id")))) if w.get("gnis_id") else None
+    hand = hand or REMAINDER_ON.get((st, w.get("slug")))      # an unnamed water (no GNIS id): keyed by its slug
     if not hand:
         return None
     geoms = [S.water_geometry(x, existing) for x in dict.fromkeys(list(hand["on"]) + [hand["to"]])]
@@ -2011,11 +2089,13 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
     actions, moved, drop = [], {}, set()
     for i, w in enumerate(rows):
         parent = w.get("covers_part_of")
-        if not parent or not w.get("geometry"):
-            continue
+        if not w.get("geometry") or not (parent or _ruled(w)):
+            continue                   # a record that is no remainder is measured only when a hand ruling names it
         g = shape(w["geometry"])
         lat0 = g.centroid.y
         ruling = _remainder_ruling(w, existing, lat0)
+        if not ruling and not parent:
+            continue
         hand = None
         if ruling:
             hand, near, river = ruling
@@ -2026,12 +2106,14 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
             if share <= REMAINDER_OVERLAP_MAX:
                 continue
             rest_m = gm.difference(near)
-            if not rest_m.is_empty:          # side channels and braids beside the river are the river's
+            if not rest_m.is_empty and hand.get("side_channels", True):   # side channels and braids are the river's
                 keep_parts = [x for x in getattr(rest_m, "geoms", [rest_m]) if x.distance(river) > SIDE_CHANNEL_M]
                 rest_m = shapely.union_all(keep_parts) if keep_parts else shapely.GeometryCollection()
             target = hand["to"]
             why = (f"{share:.0%} of the record lay within {SAME_WATER_M} m of {', '.join(hand['on'])} (hand ruling: "
                    f"{hand['why']})")
+        elif not parent:
+            continue                         # a ruled record that is no remainder, its outlines not on this machine
         else:
             eg = S.water_geometry(parent, existing)
             if eg is None:
@@ -2061,6 +2143,8 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
                    "bbox": [round(b[0], 5), round(b[1], 5), round(b[2], 5), round(b[3], 5)],
                    **({"kind": hand["kind"]} if hand and hand.get("kind") else {})}
         actions.append({"slug": w["slug"], "action": "recut", "to": target, "why": why})
+        if hand and hand.get("rows_follow"):     # the rows were placed on the part that is the river's: they follow it
+            moved[w["slug"]] = target
     if drop:
         rows[:] = [w for i, w in enumerate(rows) if i not in drop]
     for t in targets or []:
@@ -2721,6 +2805,12 @@ HAND: list[dict] = [
              "Kanawha Canal; these are its ways east of 77.431 W (both outfalls lie within 200 m of them)."),
     # service "hr": USGS NHD high-resolution flowlines (NHD_HR layer 6) by GNIS id or permanent identifier. The
     # medium-resolution NHDPlus V2.1 network the automatic pass reads has 4.9 km of Scajaquada Creek and none of the others.
+    dict(name="Jersey Creek", state="KS", kind="stream", source="nhd", service="hr", gnis_id="478633",
+         why="EPA's outfall list gives Jersey Creek as the receiving water of 25 combined sewer outfalls of the Unified "
+             "Government of Wyandotte County and Kansas City, Kansas (KS0038563); NHDPlus V2.1 has no flowline of that "
+             "name, so 24 of them had no water record (KS go-live audit 2026-11-15, P2-4). The USGS NHD high-resolution "
+             "flowlines carry Jersey Creek as GNIS 478633, 5.6 km in seven flowlines in Kansas City, Kansas, with its "
+             "culverted and artificial-path stretches, to the Missouri River."),
     dict(name="Scajaquada Creek", state="NY", kind="stream", source="nhd", service="hr", gnis_id="964557", supersede=True,
          why="NY DEC's sewage-release reports (Cheektowaga's and Depew's pump stations and sewers, 370 reports) name "
              "Scajaquada Creek at points 7 to 18 km up the creek from the 4.9 km the NHDPlus V2.1 network gives "

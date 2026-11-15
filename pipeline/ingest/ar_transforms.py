@@ -515,7 +515,9 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
 # from earlier state) it is cut to 0.001 degree, the event-point rule. Decimal degrees beyond three places are rounded;
 # degree-minute-second and degree-decimal-minute forms ("35°12'34.5\"N", "35 12 34.5 N", "N35 12.345") are converted
 # to decimal degrees at three places (west and south negative), so no finer form survives in words.
-FINE_DEGREE = re.compile(r"(?<![\d.:])(-?\d{1,3}\.\d{4,})(?![\d.])")
+# a number may follow a word and a colon ("Rd:35.123456", "Lat:35.123456") or end a sentence ("-93.654321. Overflow");
+# one after a digit and a colon is a time's seconds ("12:00:00.123456") and stays (audit ar-final item 1)
+FINE_DEGREE = re.compile(r"(?<![\d.])(?<!\d:)(-?\d{1,3}\.\d{4,})(?!\d)(?!\.\d)")
 _DEG = r"(?:°|º|˚|\bdeg(?:rees?)?\b\.?|d(?![A-Za-z]))"
 _MIN = r"(?:'|′|’|‘|\bmin(?:utes?)?\b\.?|m(?![A-Za-z]))"
 _SEC = r"(?:\"|″|”|“|''|’’|\bsec(?:onds?)?\b\.?|s(?![A-Za-z]))"
@@ -525,6 +527,7 @@ DMS_LEAD = re.compile(r"(?<![\w.'\"′″’”])([NSEW])\s*" + _DMS)           
 DMS_MARKED = re.compile(r"(?<![\w.])" + _DMS + r"(?:\s*([NSEW])(?![A-Za-z]))?")        # 35°12'34"N, 35°12.3'
 DMS_SPACED = re.compile(r"(?<![\w.])(-?\d{1,3})\s+(\d{1,2})\s+(\d{1,2}(?:\.\d+)?)\s*([NSEW])(?![A-Za-z])")
 DM_HEMI = re.compile(r"(?<![\w.])([NSEW])\s?(\d{1,3})\s+(\d{1,2}\.\d+)(?![\d.])")
+DM_TRAIL = re.compile(r"(?<![\w.])(-?\d{1,3})\s+(\d{1,2}\.\d+)\s*([NSEW])(?![A-Za-z])")         # 35 12.345 N
 # keys whose strings are times, identifiers, paths or quantities, never a place in words
 _NOT_PLACE_KEY = re.compile(r"(_at|_since|_id|_ids|url|path|volume.*|_gal|^event_id|^duplicate_of|^source_record_id)$")
 
@@ -567,6 +570,7 @@ def scrub_coord_text(text):
     t = DMS_MARKED.sub(marked, t)
     t = DMS_SPACED.sub(spaced, t)
     t = DM_HEMI.sub(hemi, t)
+    t = DM_TRAIL.sub(lambda m: _dec(m.group(1), m.group(2), None, m.group(3)) or m.group(0), t)
     return FINE_DEGREE.sub(fine, t)
 
 
