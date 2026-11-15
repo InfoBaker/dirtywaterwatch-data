@@ -668,6 +668,13 @@ def test_a_still_listed_resampling_notice_is_current_at_and_after_its_confirming
     ("1,000-2,000 gallons", None, {"kind": "range", "min_gal": 1000.0, "max_gal": 2000.0}),
     ("1,000 – 2,000 gallons", None, {"kind": "range", "min_gal": 1000.0, "max_gal": 2000.0}),
     ("50 gallons per minute", None, {"kind": "rate", "text": "50 gallons per minute"}),
+    ("< 1,000 gallons", None, {"kind": "upper_bound", "max_gal": 1000.0}),          # verify P2-4: symbolic bounds
+    ("<= 1,000 gallons", None, {"kind": "upper_bound", "max_gal": 1000.0}),
+    ("\u2264 1,000 gallons", None, {"kind": "upper_bound", "max_gal": 1000.0}),
+    ("> 1,000 gallons", None, {"kind": "lower_bound", "min_gal": 1000.0}),
+    (">=1,000 gallons", None, {"kind": "lower_bound", "min_gal": 1000.0}),
+    ("1,000+ gallons", None, {"kind": "lower_bound", "min_gal": 1000.0}),
+    ("1,000 + gal", None, {"kind": "lower_bound", "min_gal": 1000.0}),
 ])
 def test_a_quantity_is_a_figure_only_when_the_form_gives_one(q, gal, bounds):
     # re-review P2-4: bounds, ranges and rates are never numeric volumes
@@ -688,7 +695,7 @@ def test_the_state_texts_volume_statistics_count_only_figures():
     vols = [r["volume_gal"] for r in recs if r["volume_gal"] is not None]
     assert all(v < 10000 for v in vols)                     # no bound counted among the 10,000-gallon figures
     text = (ROOT / "research" / "de" / "state-text.md").read_text()
-    assert "median of 200 gallons" in text and "23 of them 10,000 gallons or more" in text
+    assert "median of 200 gallons" in text and "22 of them 10,000 gallons or more" in text and "571 as a figure" in text
     assert "completed years 2017 to 2025" in text
 
 
