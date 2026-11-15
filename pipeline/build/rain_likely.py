@@ -355,6 +355,55 @@ def history_threshold(permit: str, state: str | None, entry: dict, rules: dict) 
             "possible_in": float(entry["possible_in"]), "likely_in": entry.get("likely_in"), "fallback_in": fb}
 
 
+def fallback_episodes(permit: str, state: str | None, rules: dict, values: list, start: datetime, now: datetime,
+                      tail: float, stale_h: float) -> list[tuple[dict, dict]]:
+    """The episodes the fallback chain alone would give (the operator's own published rule in its season, its state's
+    rule or the site default; never a 10th-percentile row), each with the threshold record of its own start."""
+    none = {"permits": {}}
+    own = operator_rule(permit, rules)
+    if own is not None and own.get("months"):
+        t_own = threshold_for(permit, state, none, rules, None)
+        t_def = threshold_for(permit, state, none, rules, None, operator=False)
+        return [(ep, t_own) for ep in runs(values, start, float(t_own["threshold_in"]), now,
+                                           float(t_own.get("tail_hours") or tail), stale_h) if in_season(own, ep["start"])] \
+            + [(ep, t_def) for ep in runs(values, start, float(t_def["threshold_in"]), now, tail, stale_h)
+               if not in_season(own, ep["start"])]
+    t = threshold_for(permit, state, none, rules, now)
+    if t["threshold_in"] is None:
+        return []
+    return [(ep, t) for ep in runs(values, start, float(t["threshold_in"]), now,
+                                   float(t["tail_hours"]) if t.get("tail_hours") is not None else tail, stale_h)]
+
+
+def _later(a: datetime | None, b: datetime | None) -> bool:
+    """Whether end a is later than end b (None, an open end, is the latest)."""
+    return b is not None and (a is None or a > b)
+
+
+def union_episodes(hist_eps: list, fb_eps: list, thr: dict) -> list[tuple[dict, dict]]:
+    """The history's episodes and the fallback's, merged where they touch: the covered time is their union, the end
+    the later one, with the tail and the amount of the episode that sets it (thr's tail_hours and end_in); the record
+    stays the history's (thr), so the evidence and the level are the operator's own. Pure."""
+    tagged = sorted([(ep, t, True) for ep, t in hist_eps] + [(ep, t, False) for ep, t in fb_eps],
+                    key=lambda x: (x[0]["start"], not x[2]))
+    out: list[list] = []
+    for ep, t, _ in tagged:
+        rec = {**thr, "tail_hours": t.get("tail_hours"), "end_in": t.get("threshold_in")}
+        if out and (out[-1][0]["end"] is None or ep["start"] <= out[-1][0]["end"]):
+            m, mt = out[-1]
+            if ep["peak"] > m["peak"]:
+                m["peak"], m["peak_at"] = ep["peak"], ep["peak_at"]
+            m["last_above"] = max(m["last_above"], ep["last_above"])
+            if ep.get("rainfall_stale"):
+                m["rainfall_stale"] = True
+            if _later(ep["end"], m["end"]):
+                m["end"], m["dropped_at"] = ep["end"], ep.get("dropped_at")
+                out[-1][1] = rec
+        else:
+            out.append([dict(ep), rec])
+    return [(ep, t) for ep, t in out]
+
+
 def _cut(r: dict | None, keys=("lo", "hi", "storms", "followed")) -> dict | None:
     return {k: r.get(k) for k in keys} if isinstance(r, dict) else None
 
@@ -385,7 +434,10 @@ def evidence(thr: dict, entry: dict | None, levels: dict, level: str, cls: dict 
     hist = thr.get("kind") == "operator_history" and thr.get("possible_in") is not None
     e = entry or {}
     rr = (levels.get("rain_record") or {}).get("source_id") or RAIN_RECORD_ID
-    return {"basis": EVIDENCE_BASIS.get(thr.get("kind"), "site_default"), "level": level,
+    basis = EVIDENCE_BASIS.get(thr.get("kind"), "site_default")
+    if basis == "state_rule" and thr.get("trigger_basis") == "default":
+        basis = "site_default"          # a state entry applying this site's default amount (Maryland, the District)
+    return {"basis": basis, "level": level,
             "caution_in": thr.get("threshold_in"), "likely_in": thr.get("likely_in") if hist else None,
             "class": cls, "period": e.get("period"), "lowest_reported": e.get("lowest_reported"),
             "quiet": _cut(e.get("quiet"), ("lo", "hi", "storms", "followed", "enough")) if hist else None,
@@ -610,6 +662,11 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
         block["levels"] = {k: levels.get(k) for k in ("method_version", "built", "today", "method", "rain_record",
                                                       "counts", "crosscheck")}
         block["label_by_level"] = labels_by_level(rules)
+        # the rationale the records cite: the method of the levels (rules.rain_likely.history.doc); with no levels
+        # file the block's own doc stays, byte for byte
+        hdoc = (((rules or {}).get(RULE) or {}).get("history") or {}).get("doc")
+        if hdoc:
+            cfg = {**cfg, "doc": hdoc}
     for permit in sorted(set(series) | set(latest)):
         if permit in site_permits:
             continue                    # its caution comes from the shared site (_site_flags), never twice
@@ -646,6 +703,12 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
             else:
                 eps = [(ep, thr) for ep in runs(series.get(permit) or [], start, t_in, now, tail, stale_h)] \
                     if start else []
+            if (entry.get("quiet") or {}).get("enough") is not True and start:
+                # the safety guarantee (review 2026-11-14 P1-3): unless the record shows a long quiet range, every
+                # hour the fallback alone would show carries the caution, with at least the fallback's own tail
+                # (an operator rule's season can lengthen it); the history's evidence and level stay
+                eps = union_episodes(eps, fallback_episodes(permit, state, rules, series.get(permit) or [], start, now,
+                                                            tail, stale_h), thr)
         elif own is not None and own.get("months") and start:
             # an operator rule with a season: each episode takes the rule of its own start, read in the outfalls'
             # clock (review 2026-11-08 P2-3), never the build's time: in season the operator's amount and hours, out
@@ -678,7 +741,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 "rain_expected": qpf is not None and qpf >= t_in,
                 "status": "no_reading" if h24 is None else "below", "episode": None, "suppressed_by": [],
                 "waters": sorted(tags), "reaches": keys, **({"set_aside": aside} if aside else {})}
-        row_level = row_class = None
+        row_level = row_class = row_thr = None
         for ep, thr_e in eps:
             t_e = float(thr_e["threshold_in"])
             tail_e = float(thr_e["tail_hours"]) if thr_e.get("tail_hours") is not None else tail
@@ -697,7 +760,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 prow["episode"] = eid
                 prow["status"] = "likely" if active else "suppressed"
                 prow["suppressed_by"] = [] if active else by_notice
-                row_level, row_class = ep_level, ep_class
+                row_level, row_class, row_thr = ep_level, ep_class, thr_e
             if not pieces and not in_now:
                 continue
             rain_rec = {
@@ -710,7 +773,9 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 "peak_24h_in": round(ep["peak"], 2), "peak_at": iso(ep["peak_at"]),
                 "above_from": iso(ep["start"]), "last_above_at": iso(ep["last_above"]),
                 "dropped_below_at": iso(ep.get("dropped_at")), "until": iso(ep["end"]),
-                "until_rule": f"{tail_e:g} hours after the 24-hour total falls below the threshold",
+                "until_rule": (f"{tail_e:g} hours after the 24-hour total falls below {inch(thr_e['end_in'])}"
+                               if thr_e.get("end_in") is not None
+                               else f"{tail_e:g} hours after the 24-hour total falls below the threshold"),
                 "rain_24h_in": h24, "valid_time": info.get("valid_time"), "point": _point(info.get("h24_point")),
                 "qpf_24h_in": qpf, "qpf_update_time": info.get("qpf_update_time"),
                 "rainfall_source": RAINFALL_SOURCE, "rainfall_source_id": SOURCE_ID,
@@ -738,10 +803,11 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                   SOURCE_ID, "NOAA MRMS radar estimate")
         if levels is not None:
             # outside an episode a history row reads "possible" (no caution now); a fallback row its basis's level
+            # in an episode: the rule that episode's start took (review 2026-11-14 P2-7), never the build hour's
             lv = row_level or level_of(thr, None)
             prow["label"] = label_for_level(lv, rules)
             prow["level"] = lv
-            prow["evidence"] = evidence(thr, entry, levels, lv, row_class, why)
+            prow["evidence"] = evidence(row_thr or thr, entry, levels, lv, row_class, why)
             prow["history"] = history_row(entry)
         block["permits"][permit] = prow
         for slug in tags:
@@ -1081,8 +1147,8 @@ def history_facts(ev: dict) -> str:
             if ev.get("caution_in") is not None else ""
     rng = _band(c["lo"], c.get("hi"))
     if c.get("kind") == "below_lowest":
-        out = (f" · its own reports{when}: none of {c['storms']} storms of {rng} followed by a reported overflow, too "
-               f"few to rule one out")
+        out = (f" · its own reports{when}: none of {c['storms']} storms of {rng} followed by a reported overflow; "
+               f"that record is too short to start the caution any higher")
     else:
         out = f" · its own reports{when}: an overflow after {c['followed']} of {c['storms']} storms of {rng}"
         low = ev.get("lowest_reported") or {}

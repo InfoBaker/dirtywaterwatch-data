@@ -115,15 +115,6 @@ def _no_built(st):
     return st
 
 
-@pytest.mark.parametrize("vals", [wet(range(0, 6)), wet(range(20, 30), v=0.5), wet(range(0, 6), v=0.05)])
-def test_no_levels_file_is_byte_identical(vals):
-    a, ha = build(key=False, values=vals)
-    b, hb = build(None, values=vals)
-    assert json.dumps(_no_built(a), sort_keys=True, default=str) == json.dumps(_no_built(b), sort_keys=True, default=str)
-    assert json.dumps(_no_built(ha), sort_keys=True, default=str) == json.dumps(_no_built(hb), sort_keys=True, default=str)
-    assert "evidence" not in json.dumps(a["rain_likely"], default=str) and "label_by_level" not in a["rules"]["rain_likely"]
-
-
 def test_a_levels_file_without_the_operator_changes_only_the_new_fields():
     vals = wet(range(0, 6))
     a, _ = build(key=False, values=vals)
@@ -204,6 +195,10 @@ def _storm_days(sizes_followed, start=date(2020, 1, 1)):
         if followed:
             spans.append({"first": d, "last": d, "outfall": None, "precision": "minute", "source_id": "ma-massdep"})
         d += timedelta(days=16)
+    day = start                                     # every other day observed and dry (the minimums count them)
+    while day < d:
+        daily.setdefault(day, 0.0)
+        day += timedelta(days=1)
     return daily, spans, d
 
 
@@ -212,6 +207,7 @@ def _analysed(sizes_followed):
     cfg = RH.settings(RAIN_RULES)
     e = RH.analyse(daily, spans, end, cfg, end + timedelta(days=30))
     e.pop("_storms", None)
+    e.pop("_every", None)
     return {**e, "permit": PERMIT, "name": "Test", "state": "MA", "computed": TODAY, "method_version": 1, "sources": []}
 
 
@@ -374,3 +370,191 @@ def test_rules_json_history_block_matches_the_defaults_and_reads_plainly():
         assert not X.INTERNAL_WORDING.search(text) and "safe" not in text.lower()
         assert "—" not in text and " - " not in text and "–" not in text
     assert "NOAA MRMS" in h["source"] and "Iowa Environmental Mesonet" in h["source"]
+
+
+# ---------------------------------------------------------------- the review's findings (2026-11-14 evening)
+
+def _rules_with(by_permit=None, by_state=None):
+    rules = copy.deepcopy(RAIN_RULES)
+    if by_permit:
+        rules["rain_likely"]["fallback"]["by_permit"] = by_permit
+    if by_state:
+        rules["rain_likely"]["fallback"]["by_state"] = {**rules["rain_likely"]["fallback"]["by_state"], **by_state}
+    return rules
+
+
+SD1_STYLE = {PERMIT: {"inches": 0.25, "tail_hours": 72, "months": [5, 6, 7, 8, 9, 10], "time_zone": "America/New_York",
+                      "basis": "the operator's own published rule", "source": "the operator"}}
+
+
+def build_at(now, levels, rules, values):
+    from tests.test_rain_likely import rain_input
+    w = rain_world(values={})
+    w["rain"] = rain_input(values, now=now)
+    w["rain"]["levels"] = levels
+    w["rules"] = rules
+    return S.build(now=now, write=False, **w)
+
+
+def _hours(st, now) -> set:
+    out = set()
+    for ep in st["rain_likely"]["episodes"].values():
+        a = S.parse_time(ep["start"])
+        b = S.parse_time(ep["end"]) if ep["end"] else now + timedelta(days=30)    # open: still above, no end yet
+        while a < b:
+            out.add(a)
+            a += timedelta(hours=1)
+    return out
+
+
+def test_a_thin_history_keeps_the_fallbacks_72_hours_across_the_start_of_the_season():
+    """The reviewer's case (P1-3): 0.12 inch just before May 1 (New York time), 0.3 inch after midnight, an operator
+    rule of 0.25 inch and 72 hours from May to October, a thin history keeping the 0.1 inch fallback."""
+    from datetime import UTC, datetime
+    now = datetime(2026, 5, 2, 12, 0, tzinfo=UTC)          # May 1 00:00 in New York is 04:00 UTC, 32 hours back
+    vals = {b: 0.0 for b in range(0, 200)}
+    for b in range(33, 41):
+        vals[b] = 0.12
+    for b in range(26, 33):
+        vals[b] = 0.3
+    rules = _rules_with(by_permit=SD1_STYLE)
+    fb, _ = build_at(now, levels_file({PERMIT: entry(usable=False)}), rules, vals)
+    hist, _ = build_at(now, levels_file({PERMIT: entry(possible_in=0.25)}), rules, vals)
+    fb_end = max(S.parse_time(e["end"]) for e in fb["rain_likely"]["episodes"].values())
+    assert fb_end == now - timedelta(hours=25) + timedelta(hours=72)       # below from 25 hours back, then 72 hours
+    (ep,) = hist["rain_likely"]["episodes"].values()
+    assert S.parse_time(ep["end"]) == fb_end and ep["rain"]["until_rule"] == \
+        "72 hours after the 24-hour total falls below 0.25 inch"
+    assert _hours(fb, now) <= _hours(hist, now)
+    assert ep["rain"]["evidence"]["basis"] == "operator_history" and ep["level"] == "possible"
+    assert hist["rain_likely"]["permits"][PERMIT]["status"] == "likely"
+
+
+@pytest.mark.parametrize("seed", range(5))
+@pytest.mark.parametrize("now_s", ["2026-05-01T20:00:00+00:00", "2026-11-01T20:00:00+00:00",
+                                   "2026-05-03T04:00:00+00:00"])
+@pytest.mark.parametrize("p_in", [0.25, 0.5])
+def test_the_safety_property_holds_across_a_season_boundary(seed, now_s, p_in):
+    from datetime import datetime
+    now = datetime.fromisoformat(now_s)
+    vals = _series(seed)
+    rules = _rules_with(by_permit=SD1_STYLE)
+    fb, _ = build_at(now, levels_file({PERMIT: entry(usable=False)}), rules, vals)
+    hist, _ = build_at(now, levels_file({PERMIT: entry(possible_in=p_in)}), rules, vals)
+    assert _hours(fb, now) <= _hours(hist, now)
+
+
+def test_an_october_episode_running_into_november_keeps_its_own_rule_on_the_permit_row():
+    """P2-7: the episode began in the operator rule's season; the permit row's evidence, level and label follow the
+    rule that episode's start took, never the November build hour's site default."""
+    from datetime import UTC, datetime
+    now = datetime(2026, 11, 1, 14, 0, tzinfo=UTC)         # 10:00 on November 1 in New York
+    vals = {b: 0.0 for b in range(0, 200)}
+    for b in range(20, 26):                                # October 31 in New York, 0.3 inch
+        vals[b] = 0.3
+    rules = _rules_with(by_permit=SD1_STYLE, by_state={"MA": {"inches": 0.1, "basis": "the site default here",
+                                                              "source": "s", "trigger_basis": "default"}})
+    st, _ = build_at(now, levels_file({PERMIT: entry(usable=False)}), rules, vals)
+    p = st["rain_likely"]["permits"][PERMIT]
+    (ep,) = st["rain_likely"]["episodes"].values()
+    assert ep["rain"]["threshold_kind"] == "operator_rule" and p["episode"] == next(iter(st["rain_likely"]["episodes"]))
+    assert p["evidence"]["basis"] == "operator_rule" and p["evidence"]["caution_in"] == 0.25
+    assert p["level"] == "likely" and p["label"] == LIKELY and p["evidence"] == ep["rain"]["evidence"]
+
+
+def test_a_state_entry_applying_the_site_default_reads_as_the_site_default():
+    rules = _rules_with(by_state={"MA": {"inches": 0.1, "basis": "the state's advice, with this site's default",
+                                         "source": "s", "trigger_basis": "default"}})
+    st, _ = build(levels_file({PERMIT: entry(usable=False)}), rules=rules, values=wet(range(0, 6)))
+    ev = st["rain_likely"]["permits"][PERMIT]["evidence"]
+    assert ev["basis"] == "site_default" and ev["level"] == "possible"
+    assert ev["rule_text"] == "the state's advice, with this site's default"
+
+
+def test_the_rationale_is_the_methods_own_only_with_a_levels_file():
+    rules = json.loads((Path(__file__).resolve().parents[2] / "data" / "rules.json").read_text())
+    st0, _ = build(key=False, rules=rules, values=wet(range(0, 6)))
+    st1, _ = build(levels_file({PERMIT: entry()}), rules=rules, values=wet(range(0, 6)))
+    r0, r1 = st0["waters"]["other-pond-ma"]["reasons"][0], st1["waters"]["other-pond-ma"]["reasons"][0]
+    assert r0["rule_applied"]["rationale"] == rules["rain_likely"]["doc"] == r0["yellow_rule"]["rationale"]
+    assert r1["rule_applied"]["rationale"] == rules["rain_likely"]["history"]["doc"]
+
+
+PUBLIC_WORDS = re.compile(r"\.py\b|\.json\b|data/|build/|\bdef\b|_[a-z]+\(|rain_history|rain_likely\.py")
+
+
+def test_no_public_text_of_the_levels_names_a_file_module_or_function():
+    st, _ = build(levels_file({PERMIT: entry(possible_in=0.25)}), values=wet(range(0, 6), v=0.2))
+    p = st["rain_likely"]["permits"][PERMIT]
+    texts = [st["waters"]["other-pond-ma"]["reasons"][0]["short"], p["threshold_text"], p["threshold_source"],
+             p["label"], *RL.caution_coverage(st["rain_likely"], {"MA": {PERMIT}})["MA"]["sentence"].split(";"),
+             RL.NO_ENTRY]
+    for t in texts:
+        assert not PUBLIC_WORDS.search(t), t
+        assert "rule one out" not in t and "safe" not in t.lower()
+
+
+# ---------------------------------------------------------------- byte for byte against origin/main's code
+
+BASELINE = Path(__file__).resolve().parent / "fixtures" / "rain_likely_baseline_no_levels.json"
+
+
+def baseline_cases():
+    """Synthetic inputs (deterministic) for compute() with no levels file: an operator with a 10th-percentile row, one
+    on the site default, a state entry applying the default, and an operator rule with a season, at three hours."""
+    from datetime import UTC, datetime
+    from tests.test_rain_likely import rain_input
+    rules = json.loads((Path(__file__).resolve().parents[2] / "data" / "rules.json").read_text())
+    rules = {"rain_likely": {k: v for k, v in rules["rain_likely"].items() if k != "history"}}
+    waters = {"p-ma": {"slug": "p-ma", "kind": "pond", "state": "MA"}, "p-md": {"slug": "p-md", "kind": "pond", "state": "MD"},
+              "p-ky": {"slug": "p-ky", "kind": "pond", "state": "KY"}}
+    cases = []
+    for now in (datetime(2026, 8, 10, 12, 0, tzinfo=UTC), datetime(2026, 11, 1, 14, 0, tzinfo=UTC),
+                datetime(2026, 5, 1, 20, 0, tzinfo=UTC)):
+        rain = {"rainfall": {"permits": {}}, "history": None, "thresholds": {"permits": {}}}
+        for i, (permit, slug, v) in enumerate((("MA0101613", "p-ma", 0.35), ("MA0100552", "p-ma", 0.15),
+                                               ("MD0021598", "p-md", 0.6), ("KY0021466", "p-ky", 0.3))):
+            vals = {b: 0.0 for b in range(0, 200)}
+            for b in range(4 + 7 * i, 12 + 7 * i):
+                vals[b] = v
+            r = rain_input(vals, threshold=0.3, permit=permit, now=now)
+            info = r["rainfall"]["permits"][permit]
+            info.update(state=permit[:2], outfalls=[{"outfall": "001", "water_slug": slug, "water_match": "name"}])
+            rain["rainfall"].update({k: v for k, v in r["rainfall"].items() if k != "permits"})
+            rain["rainfall"]["permits"][permit] = info
+            rain["history"] = rain["history"] or {"start": r["history"]["start"], "permits": {}}
+            rain["history"]["permits"][permit] = r["history"]["permits"][permit]
+        rain["thresholds"]["permits"]["MA0101613"] = r["thresholds"]["permits"]["KY0021466"]
+        cases.append((now, rain, rules, waters))
+    return cases
+
+
+def run_baseline(mod) -> list:
+    out = []
+    for now, rain, rules, waters in baseline_cases():
+        by_water, by_reach, block = mod.compute(copy.deepcopy(rain), rules, [], now, now - timedelta(days=30), waters, [],
+                                                {}, lambda r, w: [])
+        out.append(json.loads(json.dumps({"by_water": by_water, "by_reach": by_reach, "block": block}, sort_keys=True,
+                                          default=str)))
+    return out
+
+
+def test_no_levels_output_equals_origin_mains():
+    """The fixture was made once from origin/main's build/rain_likely.py (before the levels) by running this module:
+    python -m tests.test_rain_levels <path to that file>, from pipeline/ (git show origin/main:pipeline/build/rain_likely.py)."""
+    want = json.loads(BASELINE.read_text())["cases"]
+    got = run_baseline(RL)
+    assert len(got) == len(want) == 3
+    for g, w in zip(got, want):
+        assert g == w
+    assert any(iv["rule_applied"]["rationale"] for c in got for ivs in c["by_water"].values() for iv in ivs)
+
+
+if __name__ == "__main__":       # regenerate the baseline from another rain_likely.py (origin/main's, before the levels)
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("build.rain_likely_baseline", sys.argv[1])
+    old = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(old)
+    BASELINE.write_text(json.dumps({"_how": "made by `python -m tests.test_rain_levels <origin/main's "
+                                    "pipeline/build/rain_likely.py>` from pipeline/, 2026-11-14", "cases": run_baseline(old)},
+                                   indent=1, sort_keys=True) + "\n")
