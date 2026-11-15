@@ -44,7 +44,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_names, scrub_text, write_events
 
 SOURCE_ID = "mt-deq-hab-map"
 LAYER = ("https://gis.mtdeq.us/hosting/rest/services/Hosted/Harmful_Algal_Bloom_Survey_(Public_Web_Map)/FeatureServer/0")
@@ -59,6 +59,13 @@ LICENCE = ("Data intended for reference and planning purposes only. DEQ takes no
 DATE = re.compile(r"(?<![\d/.])(\d{1,2})[/.](\d{1,2})(?:[/.](\d{4}|\d{2}))?(?![\d/])")
 NO_ADVISORY = re.compile(r"\bno advisory\b|\bnot issued\b", re.I)
 WORDS = ("caution", "closure", "toxin")
+# a lift note that is not a completed lift ("lift pending 8/3", "will lift 8/3 if no new info", "not lifted 8/3")
+NOT_A_LIFT = re.compile(r"\b(?:not|never|pending|will|would|to be|expected to|planned to|may|can)\s+(?:be\s+)?lift|"
+                        r"\blift(?:ed|ing)?\s+(?:is\s+)?(?:pending|when|if|once|until|unless|after)\b", re.I)
+NOT_A_LIFT_MARK = "not-a-lift"      # kept in the raw save so a rebuild from it reads the same
+REQUIRED = ("globalid", "name", "advisory_lvl", "advisory_issued", "advisory_lifted", "date_observed",
+            "public_accessible")
+COORD = re.compile(r"-?\d{1,3}\.\d{4,}")
 
 
 def query_url() -> str:
@@ -104,12 +111,43 @@ def clean(v) -> str | None:
     return None if s.upper() in ("", "NA", "N/A", "NONE") else s
 
 
-def build(doc: dict, fetched: str) -> tuple[list[dict], dict]:
+def periods(starts: list[str], lifts: list[str]) -> list[tuple[str, str | None]]:
+    """[(start, lift or None)]: the earliest issue date starts a period and the first lift date on or after it ends it;
+    an issue date after that lift starts a new period (a reissue in the same row is a second advisory, never one period
+    over the gap)."""
+    out, starts, lifts = [], sorted(set(starts)), sorted(set(lifts))
+    while starts:
+        s0 = starts[0]
+        end = next((d for d in lifts if d >= s0), None)
+        out.append((s0, end))
+        if end is None:
+            break
+        starts = [d for d in starts if d > end]
+    return out
+
+
+def safe_name(name: str, private: bool) -> str:
+    """The reported water name with e-mails, phones and staff names removed and long decimals (a point typed into the
+    name) cut; a private water's name with a possessive ("Example's pond") is withheld, as it may name the owner."""
+    n = scrub_names(scrub_text(" ".join(str(name or "").split())))
+    n = COORD.sub("[point removed]", n)
+    if private and re.search(r"\w'\s?s\b", n):
+        return "Private water (name withheld)"
+    return n
+
+
+def build(doc: dict, fetched: str, previous: list[dict] | None = None) -> tuple[list[dict], dict]:
     feats = doc.get("features")
     if feats is None:
         raise ValueError(f"no features in the layer's answer: {str(doc)[:200]}")
     if doc.get("exceededTransferLimit"):
         raise ValueError("the layer has more rows than one query returns; page it")
+    if not feats:
+        raise ValueError("the layer answered no rows (it holds hundreds): a failed read")
+    absent = sorted({k for f in feats for k in REQUIRED if k not in (f.get("attributes") or {})})
+    if absent:
+        raise ValueError(f"the layer's fields changed: missing {absent}")
+    prev = {r["event_id"]: r for r in previous or []}
     recs, n = [], {"rows": len(feats), "records": 0, "lifted": 0, "current": 0, "lapsed": 0, "no_issue_date": 0,
                    "no_advisory_text": 0, "green_algae": 0, "private_point_withheld": 0}
     for f in feats:
@@ -127,51 +165,68 @@ def build(doc: dict, fetched: str) -> tuple[list[dict], dict]:
         if not starts:
             n["no_issue_date"] += 1
             continue
-        start = min(starts)
-        lifts = [d for d in dates_in(a.get("advisory_lifted"), year) if d >= start]
-        water, place = water_name(a.get("name") or "")
-        county = clean(a.get("county"))
-        words = sorted({w for w in WORDS if w in issued_text.lower() or w in (a.get("advisory_lifted") or "").lower()})
+        lift_text = a.get("advisory_lifted") or ""
+        lifts = [] if NOT_A_LIFT.search(lift_text) or NOT_A_LIFT_MARK in lift_text else [d for d in dates_in(lift_text, year) if d >= min(starts)]
         g = f.get("geometry") or {}
         private = clean(a.get("public_accessible")) == "No"
+        water, place = water_name(safe_name(a.get("name") or "", private))
+        county = clean(a.get("county"))
+        words = sorted({w for w in WORDS if w in issued_text.lower() or w in (a.get("advisory_lifted") or "").lower()})
         lat = None if private or g.get("y") is None else round(float(g["y"]), 3)
         lon = None if private or g.get("x") is None else round(float(g["x"]), 3)
         if private:
             n["private_point_withheld"] += 1
         raw = {"water": water, "place": place, "county": county.title() if county else None, "time_zone": TZ,
                "advisory_level_at_read": level or "No Current Advisory", "issued_dates": sorted(set(starts)),
-               "lifted_dates": lifts, "words": words, "agency_field": clean(a.get("agency")),
+               "lifted_dates": lifts, "words": words,
+               "agency_field": scrub_names(scrub_text(clean(a.get("agency")) or "")) or None,
                "sample_date": clean(a.get("sample_date")), "microcystin": clean(a.get("microcystin")),
                "anatoxin": clean(a.get("anatoxin")), "licence": LICENCE, "dashboard": DASHBOARD,
                "start_basis": "the earliest date in DEQ's advisory_issued field (its issue date)",
                "text_note": "DEQ's advisory notes are not reproduced: they can name the people who reported a bloom"}
         if private:
             raw["point_withheld"] = "the report says the water is not publicly accessible: its county only"
-        if lifts:
-            status, end = "advisory_lifted", min(lifts)
-            raw["ended_at_precision"] = "day"
-            raw["end_basis"] = "the earliest date on or after the start in DEQ's advisory_lifted field (its lift date)"
-            n["lifted"] += 1
-        elif level in ("Caution", "Closure"):
-            status, end = "advisory_active", None
-            raw["_last_seen_in_source"] = fetched
-            raw["end_basis"] = f"DEQ's map shows the level {level} at this read"
-            n["current"] += 1
-        else:
-            status, end = "advisory_active", None
-            raw["end_basis"] = ("no lift date, and DEQ's map shows no current advisory at this read: the advisory is "
-                                "not confirmed after its issue date, so it ages out under the site's 14-day rule")
-            n["lapsed"] += 1
-        recs.append(event(source_id=SOURCE_ID, source_record_id=str(a.get("globalid") or "").strip("{}").lower(),
-                          event_type="hab_advisory", status=status, waterbody_text=water, lat=lat, lon=lon,
-                          coord_source="mt-deq-hab-map observation point" if lat is not None else None,
-                          coord_precision_m=100 if lat is not None else None, started_at=start, ended_at=end,
-                          time_precision="day", fetched_at=fetched, authority=AUTHORITY,
-                          advice_text=(f"DEQ's harmful algal bloom advisory for {a.get('name', '').strip()}"
-                                       + (f" ({', '.join(words)})" if words else "") + f", issued {start}"
-                                       + (f", lifted {end}." if end else "; no lift date given.")),
-                          source_url=DASHBOARD, raw=raw))
-        n["records"] += 1
+        gid = str(a.get("globalid") or "").strip("{}").lower()
+        pers = periods(starts, lifts)
+        for i, (start, lift) in enumerate(pers):
+            last = i == len(pers) - 1
+            r_raw = dict(raw)
+            srid = gid if i == 0 else f"{gid}:{start}"
+            if i:
+                r_raw["start_basis"] = ("an issue date in DEQ's advisory_issued field after the lift of the row's "
+                                        "earlier advisory: a reissue, its own record")
+            if lift:
+                status, end = "advisory_lifted", lift
+                r_raw["ended_at_precision"] = "day"
+                r_raw["end_basis"] = ("the earliest date on or after the start in DEQ's advisory_lifted field (its lift "
+                                      "date)")
+                n["lifted"] += 1
+            elif last and level in ("Caution", "Closure"):
+                status, end = "advisory_active", None
+                r_raw["_last_seen_in_source"] = fetched
+                r_raw["end_basis"] = f"DEQ's map shows the level {level} at this read"
+                n["current"] += 1
+            else:
+                status, end = "advisory_active", None
+                seen = ((prev.get(f"{SOURCE_ID}:{srid}") or {}).get("raw") or {}).get("_last_seen_in_source")
+                if seen:        # confirmed at earlier reads: those days stay confirmed (lessons, item 2)
+                    r_raw["_last_seen_in_source"] = seen
+                r_raw["end_basis"] = ("no lift date, and DEQ's map shows no current advisory at this read: the advisory "
+                                      "is not confirmed after " + ("the last read that showed it" if seen else
+                                                                   "its issue date") +
+                                      ", so it ages out under the site's 14-day rule")
+                n["lapsed"] += 1
+            recs.append(event(source_id=SOURCE_ID, source_record_id=srid,
+                              event_type="hab_advisory", status=status, waterbody_text=water, lat=lat, lon=lon,
+                              coord_source="mt-deq-hab-map observation point" if lat is not None else None,
+                              coord_precision_m=100 if lat is not None else None, started_at=start, ended_at=end,
+                              time_precision="day", fetched_at=fetched, authority=AUTHORITY,
+                              advice_text=(f"DEQ's harmful algal bloom advisory for "
+                                           f"{water}{f' ({place})' if place else ''}"
+                                           + (f" ({', '.join(words)})" if words else "") + f", issued {start}"
+                                           + (f", lifted {end}." if end else "; no lift date given.")),
+                              source_url=DASHBOARD, raw=r_raw))
+            n["records"] += 1
     recs.sort(key=lambda r: (r["started_at"], r["event_id"]), reverse=True)
     return recs, {"registry_ids": [SOURCE_ID], "url": LAYER, **n,
                   "cadence": "the layer is read every run; DEQ edits it through the season"}
@@ -187,7 +242,8 @@ def safe_rows(doc: dict) -> dict:
             t = a.get(k) or ""
             neg = " no advisory" if k == "advisory_issued" and NO_ADVISORY.search(t) else ""
             ds = [f"{int(d[5:7])}/{int(d[8:10])}/{d[:4]}" for d in dates_in(t, y)]
-            a[k] = " ".join(ds + [w for w in WORDS if w in t.lower()]) + neg if t else t
+            mark = [NOT_A_LIFT_MARK] if k == "advisory_lifted" and NOT_A_LIFT.search(t) else []
+            a[k] = " ".join(ds + [w for w in WORDS if w in t.lower()] + mark) + neg if t else t
         out.append({"attributes": a, "geometry": f.get("geometry")})
     return {"features": out, "exceededTransferLimit": doc.get("exceededTransferLimit", False)}
 
@@ -203,7 +259,8 @@ def main(argv=None) -> int:
             r.raise_for_status()
             doc = r.json()
             save_raw(SOURCE_ID, json.dumps(safe_rows(doc)), "json")
-        recs, meta = build(doc, fetched)
+        prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
+        recs, meta = build(doc, fetched, prev)
     except Exception as e:  # noqa: BLE001
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)

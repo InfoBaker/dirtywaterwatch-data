@@ -171,3 +171,48 @@ def test_missing_waters_list():
     assert doc["state"] == "MT" and doc["rows"]
     assert all(r["name"] == r["name"].strip() and not r["name"].isupper() for r in doc["rows"])
     assert any(r["county"] for r in doc["rows"])
+
+
+# ---------------------------------------------------------------- the reviews' lessons (2026-11-15), on invented data
+
+@pytest.mark.parametrize("note", ["lift pending 8/3/2026", "will be lifted 8/3/2026 if no new info",
+                                  "not lifted 8/3/2026", "8/3/2026 lifting when results allow"])
+def test_lesson_a_conditional_or_negated_lift_note_is_not_a_lift(note):
+    doc = {"features": [row("C-1", "Example Lake", "7/9/2026", note)]}
+    r = M.build(doc, T0)[0][0]
+    assert r["status"] == "advisory_active" and r["ended_at"] is None
+    assert M.build(M.safe_rows(doc), T0)[0][0]["ended_at"] is None      # the raw save rebuilds the same
+    done = {"features": [row("C-1", "Example Lake", "7/9/2026", "8/3/2026 no new info, lifted")]}
+    assert M.build(done, T0)[0][0]["ended_at"] == "2026-08-03"
+
+
+def test_lesson_a_reissue_in_the_same_row_is_a_second_record():
+    doc = {"features": [row("D-1", "Example Lake", "6/25/2026 initial; 9/1/2026 new advisory", "8/3/2026")]}
+    recs = {r["source_record_id"]: r for r in M.build(doc, T0)[0]}
+    assert (recs["d-1"]["started_at"], recs["d-1"]["ended_at"]) == ("2026-06-25", "2026-08-03")
+    again = recs["d-1:2026-09-01"]
+    assert again["started_at"] == "2026-09-01" and again["ended_at"] is None and again["status"] == "advisory_active"
+
+
+def test_lesson_a_confirmation_from_an_earlier_read_is_kept_when_the_level_goes():
+    cur = {"features": [row("E-1", "Example Lake", "7/9/2026", None, level="Caution")]}
+    first = M.build(cur, T0)[0]
+    gone = {"features": [row("E-1", "Example Lake", "7/9/2026", None, level="NA")]}
+    later = M.build(gone, "2026-11-20T00:00:00Z", first)[0][0]
+    assert later["raw"]["_last_seen_in_source"] == T0 and later["ended_at"] is None
+
+
+@pytest.mark.parametrize("doc", [{"features": []}, {"features": [{"attributes": {"globalid": "x", "name": "Example"}}]}])
+def test_lesson_an_empty_answer_or_renamed_fields_fail(doc):
+    with pytest.raises(ValueError):
+        M.build(doc, T0)
+
+
+def test_lesson_names_are_scrubbed_and_a_private_owners_name_withheld():
+    doc = {"features": [row("F-1", "Example Pond, call 555-0100", "7/9/2026", None),
+                        row("F-2", "Example's stock pond", "7/9/2026", None, public="No"),
+                        row("F-3", "Example Lake 46.12345 -111.98765", "7/9/2026", None)]}
+    recs = {r["source_record_id"]: r for r in M.build(doc, T0)[0]}
+    assert "555-0100" not in json.dumps(recs)
+    assert recs["f-2"]["waterbody_text"] == "Private water (name withheld)" and recs["f-2"]["lat"] is None
+    assert "46.12345" not in json.dumps(recs)

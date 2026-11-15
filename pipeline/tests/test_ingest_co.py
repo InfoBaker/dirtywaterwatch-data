@@ -92,7 +92,7 @@ def test_sheet_current_advisory_gone_from_a_later_read_ends_at_that_read():
     third, meta = A.build(gone, T1, first)
     b = [r for r in third if r["waterbody_text"] == "Barr Lake"][0]
     assert b["raw"]["_unlisted_since"] == T1 and b["raw"]["ended_at_precision"] == "poll"
-    assert b["ended_at"] is None and meta["kept_from_previous"] == 1
+    assert b["ended_at"] == T1 and b["raw"]["_ages_after_confirmation"] is True and meta["kept_from_previous"] == 1
 
 
 def test_sheet_changed_columns_fail_loudly():
@@ -110,7 +110,7 @@ def page_for(url: str, drop: str | None = None) -> str:
     n = next(x for x in C.NOTICES if x["url"] == url)
     qs = [q for r in n["records"] for q in r.get("quotes") or []]
     body = "".join(f"<p>{q}</p>" for q in qs if q != drop)
-    return f"<html><body><h1>Notice</h1><p>{CONTACT}</p>{body}</body></html>"
+    return f"<html><body><h1>Notice {n.get('anchor') or ''}</h1><p>{CONTACT}</p>{body}</body></html>"
 
 
 def getter(drop=None, fail=()):
@@ -144,7 +144,8 @@ def test_standing_notice_confirmed_while_shown_and_ended_at_the_first_read_witho
     second, _ = NS.build(C.SOURCE_ID, C.NOTICES, T1, first, getter=getter(drop=q), save=False)
     barr2 = next(r for r in second if r["source_record_id"].startswith("barr-lake"))
     assert barr2["raw"]["_unlisted_since"] == T1 and barr2["raw"]["_last_seen_in_source"] == T0
-    assert barr2["ended_at"] is None and barr2["raw"]["ended_at_precision"] == "poll"
+    assert barr2["ended_at"] == T1 and barr2["raw"]["ended_at_precision"] == "poll"
+    assert barr2["raw"]["_ages_after_confirmation"] is True
 
 
 def test_a_page_that_does_not_answer_keeps_the_previous_records_and_a_never_read_page_makes_none():
@@ -248,3 +249,61 @@ def test_missing_waters_list_names_the_records_waters_or_their_resolution():
     names = {r["name"] for r in doc["rows"]}
     assert doc["state"] == "CO" and doc["reports"] + doc["resolved_reports"] >= 4
     assert "Barr Lake" in names or doc["resolved_names"] >= 1
+
+
+# ---------------------------------------------------------------- the reviews' lessons (2026-11-15), on invented data
+
+def test_lesson_an_absence_seen_months_later_does_not_colour_the_gap():
+    from datetime import datetime, timedelta, timezone
+    from build import status as S
+    first, _ = A.build(sheet(), T0, [])
+    gone = "\n".join(line for line in sheet().splitlines() if not line.startswith("Barr Lake,"))
+    late = "2027-02-01T12:00:00Z"
+    b = [r for r in A.build(gone, late, first)[0] if r["waterbody_text"] == "Barr Lake"][0]
+    reds = [iv for iv in S.event_intervals(b, "CO", datetime(2027, 2, 2, tzinfo=timezone.utc)) if iv["color"] == "red"]
+    seen = datetime.fromisoformat(T0.replace("Z", "+00:00"))
+    assert reds and max(iv["end"] for iv in reds) <= seen + timedelta(days=14)
+
+
+def test_lesson_a_standing_notice_whose_page_is_not_the_page_ends_nothing():
+    first, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter(), save=False)
+
+    def error_page(url):
+        return 200, NS.page_text("<html><body>We are down for maintenance</body></html>"), None
+    second, meta = NS.build(C.SOURCE_ID, C.NOTICES, T1, first, getter=error_page, save=False)
+    barr = next(r for r in second if r["source_record_id"].startswith("barr-lake"))
+    assert barr["ended_at"] is None and "_unlisted_since" not in barr["raw"]
+    assert any("anchor" in (p["error"] or "") for p in meta["pages"])
+
+
+def test_lesson_the_john_martin_advisory_ages_although_its_type_is_sewage():
+    from datetime import datetime, timedelta, timezone
+    from build import status as S
+    recs, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter(), save=False)
+    adv = next(r for r in recs if r["source_record_id"].startswith("john-martin"))
+    ivs = S.event_intervals(adv, "CO", datetime(2026, 11, 15, tzinfo=timezone.utc))
+    reds = [iv for iv in ivs if iv["color"] == "red"]
+    assert reds and all(iv["end"] is not None for iv in reds)
+    assert max(iv["end"] for iv in reds) <= datetime(2026, 9, 1, 6, tzinfo=timezone.utc) + timedelta(days=14)
+
+
+def test_lesson_a_truncated_sheet_is_a_failed_read():
+    with pytest.raises(ValueError):
+        A.build("\n".join(sheet().splitlines()[:3]), T1, [], previous_rows=len(sheet().splitlines()) - 1)
+    with pytest.raises(ValueError):
+        A.build("Waterbody name,Condition Category,Update Date,Other notes\n", T1, [])
+
+
+def test_lesson_a_note_naming_a_person_is_scrubbed_in_records_and_the_raw_save():
+    text = sheet() + "\nExample Pond,Caution,9/1/2026,contact Example Person at 555-0100 or example.person@example.org\n"
+    recs, _ = A.build(text, T0, [])
+    blob = json.dumps(recs) + A.scrubbed_csv(text)
+    assert "555-0100" not in blob and "example.org" not in blob
+
+
+def test_lesson_reissue_after_no_bloom_is_a_second_record():
+    text = sheet() + "\nExample Pond,Caution,7/1/2026,\nExample Pond,No bloom reported,7/20/2026,\n" \
+        "Example Pond,Warning,9/1/2026,\n"
+    ponds = sorted((r["started_at"], r["ended_at"]) for r in A.build(text, T0, [])[0]
+                   if r["waterbody_text"] == "Example Pond")
+    assert ponds == [("2026-07-01", "2026-07-20"), ("2026-09-01", None)]

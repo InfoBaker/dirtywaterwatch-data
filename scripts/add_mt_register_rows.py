@@ -51,7 +51,7 @@ AGENCY = [
      "unmonitored_reason": "feed_ingested", "feed_source_id": "mt-deq-hab-map", "publishes": "status",
      "noun": "Data feed",
      "note": ("The layer behind DEQ's HAB dashboard: 445 bloom reports from 2019 to 2026 (2026-11-14), with DEQ's "
-              "advisory level and its issue and lift dates; read by the mt-deq-hab-map feed (276 advisories)."),
+              "advisory level and its issue and lift dates; read by the mt-deq-hab-map feed (278 advisories)."),
      "sources": ["mt-hab-map", "mt-deq-hab-dashboard"]},
     {"id": "mt-deq-hab-dashboard", "agency": "Montana Department of Environmental Quality",
      "name": "Montana Department of Environmental Quality (harmful algal bloom dashboard)",

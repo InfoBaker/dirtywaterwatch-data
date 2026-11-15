@@ -15,6 +15,9 @@ Notice kinds
   - "standing": a notice that stays on a page while it holds (a park's "red alert" line). Every read that shows its
     quotes confirms it (raw._last_seen_in_source); the first read that does not writes raw._unlisted_since at that read
     (a poll bound; the page gives no lift time), and the record keeps it.
+  A standing notice may name an "anchor" (text always on its page): an answer without it is not the page, and is a
+  failed read. The first read that does not show a standing notice also sets ended_at there (raw.ended_at_precision
+  poll, raw._ages_after_confirmation), so the colour stops 14 days after the last read that showed it.
   A page that cannot be fetched changes nothing: the previous records stay and the run's meta names the page. A notice
   never read successfully makes no record: the code claims only what it read.
 
@@ -81,6 +84,11 @@ def build(source_id: str, notices: list[dict], fetched: str, previous: list[dict
         quotes = [q for rec in n["records"] for q in rec.get("quotes") or []] + list(n.get("quotes") or [])
         quotes = list(dict.fromkeys(quotes))
         found, missing = check(text, quotes) if text is not None else ([], quotes)
+        anchor = n.get("anchor")
+        if text is not None and n["kind"] == "standing" and missing and anchor and norm(anchor) not in text.lower():
+            # the page answered but is not the notice's page (an error or maintenance page, a redesign): a failed
+            # read, nothing ends (lessons, item 4)
+            status, text, err = status, None, f"the page's anchor text ({anchor!r}) is not on the answer"
         pages.append({"notice": n["id"], "url": n["url"], "http_status": status, "error": err,
                       "quotes_found": len(found), "quotes_missing": len(missing) if text is not None else None,
                       "text_sha256": hashlib.sha256(text.encode()).hexdigest() if text else None})
@@ -106,7 +114,9 @@ def build(source_id: str, notices: list[dict], fetched: str, previous: list[dict
                     praw = old.get("raw") or {}
                     raw["_last_seen_in_source"] = praw.get("_last_seen_in_source")
                     raw["_unlisted_since"] = praw.get("_unlisted_since") or fetched
-                    raw["ended_at_precision"] = "poll"
+                    f["ended_at"] = raw["_unlisted_since"]
+                    raw["_ages_after_confirmation"] = True     # the colour stops 14 days after the last read that
+                    raw["ended_at_precision"] = "poll"         # showed it, however late the absence is seen
                     raw["end_basis"] = ("the first read of the page that no longer showed the notice (a poll bound; "
                                         "the page gives no lift time)")
             elif mine_missing:

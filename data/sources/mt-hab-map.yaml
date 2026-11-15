@@ -6,7 +6,7 @@ kind: "arcgis"
 level: "state"
 # Notes (research/mt, status used, verified fetched, checked 2026-11-14): The layer behind DEQ's HAB
 #   dashboard traced and read 2026-11-14 (445 rows, 2019-2026; DEQ's advisory level, issue and lift
-#   dates): read by the mt-deq-hab-map feed as 276 bloom advisories, safe fields only. HAB.mt.gov
+#   dates): read by the mt-deq-hab-map feed as 278 bloom advisories, safe fields only. HAB.mt.gov
 #   and dphhs.mt.gov did not resolve on 2026-11-14.
 cadence: null
 license: "none stated"

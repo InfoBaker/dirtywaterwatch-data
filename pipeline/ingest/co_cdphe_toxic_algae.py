@@ -42,7 +42,7 @@ from pathlib import Path
 
 import requests
 
-from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_names, scrub_text, write_events
 
 SOURCE_ID = "co-cdphe-toxic-algae"
 SHEET = "1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ"
@@ -95,7 +95,7 @@ def read_rows(text: str) -> list[dict]:
             continue
         out.append({"row": i + 2, "name": name, "condition": " ".join((r.get("Condition Category") or "").split()),
                     "date_text": (r.get("Update Date") or "").strip(), "date": parse_date(r.get("Update Date") or ""),
-                    "note": " ".join((r.get("Other notes") or "").split()) or None})
+                    "note": scrub_names(scrub_text(" ".join((r.get("Other notes") or "").split()))) or None})
     return out
 
 
@@ -117,8 +117,27 @@ def runs(rows: list[dict]) -> list[dict]:
     return out
 
 
-def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], dict]:
+def scrubbed_csv(text: str) -> str:
+    """The sheet with its notes scrubbed (common.scrub_text, scrub_names): what the raw save keeps."""
+    rows = list(csv.reader(io.StringIO(text)))
+    if not rows:
+        return ""
+    i = rows[0].index("Other notes") if "Other notes" in rows[0] else None
+    out = io.StringIO()
+    w = csv.writer(out, lineterminator="\n")
+    w.writerow(rows[0])
+    for r in rows[1:]:
+        if i is not None and i < len(r):
+            r = r[:i] + [scrub_names(scrub_text(r[i]))] + r[i + 1:]
+        w.writerow(r)
+    return out.getvalue()
+
+
+def build(text: str, fetched: str, previous: list[dict], previous_rows: int | None = None) -> tuple[list[dict], dict]:
     rows = read_rows(text)
+    if previous_rows and len(rows) < previous_rows:
+        # the sheet is a log that only grows: fewer rows than the last good read is a truncated or wrong answer
+        raise ValueError(f"the sheet has {len(rows)} rows, fewer than the {previous_rows} of the last read")
     records: dict[str, dict] = {}
     n = {"rows": len(rows), "waters": len({r["name"].lower() for r in rows}), "advisories": 0, "current": 0,
          "lifted": 0, "undated": 0}
@@ -181,7 +200,11 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
         p = dict(p)
         praw = dict(p.get("raw") or {})
         if p.get("status") == "advisory_active" and not p.get("ended_at") and not praw.get("_unlisted_since"):
+            # ended at this read as a poll bound; the colour stops 14 days after the last read that listed it however
+            # late the absence is seen (raw._ages_after_confirmation; lessons, item 2)
             praw["_unlisted_since"] = fetched
+            p["ended_at"] = fetched
+            praw["_ages_after_confirmation"] = True
             praw["ended_at_precision"] = "poll"
             praw["end_basis"] = ("the read that no longer found this advisory in the sheet (a poll bound; the sheet "
                                  "gives no lift)")
@@ -208,9 +231,10 @@ def main(argv=None) -> int:
             r = requests.get(URL, headers=HEADERS, timeout=90)
             r.raise_for_status()
             text = r.content.decode("utf-8-sig")
-            save_raw(SOURCE_ID, r.content, "csv")
-        prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
-        recs, meta = build(text, fetched, prev)
+            save_raw(SOURCE_ID, scrubbed_csv(text), "csv")
+        last = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+        prev = last.get("records", [])
+        recs, meta = build(text, fetched, prev, (last.get("meta") or {}).get("rows") if last.get("ok") else None)
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
