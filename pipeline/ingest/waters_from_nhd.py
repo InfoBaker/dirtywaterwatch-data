@@ -1969,7 +1969,9 @@ REMAINDER_OVERLAP_MAX = 0.10   # a remainder with more of its length than this w
 # outlines, and the side channels and braids within SIDE_CHANNEL_M of the river record `to`, are those records'; a
 # rest shorter than REMAINDER_MIN_KM is dropped and the target rows naming it (slugs, reach_slugs) go to `to`, a longer
 # true remainder is cut to that rest (and takes `kind`, when given). A rerun of the state's batch therefore cannot
-# rebuild the copy. {(state, GNIS number): {"to", "on", "why", "kind"?}}
+# rebuild the copy. A record that is no remainder (no covers_part_of) but lies on other records is measured the same
+# way when a ruling names it; an unnamed water with no GNIS id is keyed by its slug.
+# {(state, GNIS number or slug): {"to", "on", "why", "kind"?}}
 REMAINDER_ON = {
     ("MN", 649622): {
         "to": "pomme-de-terre-river-mn", "on": ["pomme-de-terre-river-mn"],
@@ -1982,14 +1984,36 @@ REMAINDER_ON = {
                "Sakakawea and most of the rest on Lake Oahe: the river's line through the reservoirs is the "
                "reservoirs' records, its braids beside the river are missouri-river-nd (ND go-live audit 2026-11-15, "
                "P2-2)"},
+    # South Carolina (SC go-live audit 2026-11-15, P2-2)
+    ("SC", 1246493): {
+        "to": "lynches-river-sc", "on": ["lynches-river-sc", "lynches-river-johnsonville-sc"],
+        "why": "the Lynches River's NHD copy was cut only against openboatlaunch's 2 km lynches-river-johnsonville-sc "
+               "and lay 47 per cent on lynches-river-sc: only the part off both records is the remainder (SC go-live "
+               "audit 2026-11-15, P2-2)"},
+    ("SC", 1250834): {
+        "to": "lake-hartwell-sc", "on": ["lake-hartwell-sc"],
+        "why": "the Seneca River's NHD line is drawn through Lake Hartwell and lay 83 per cent on lake-hartwell-sc: "
+               "the river's line through the reservoir is the reservoir's record (SC go-live audit 2026-11-15, P2-2)"},
+    ("SC", "unnamed-tributary-to-catawba-river-sc"): {
+        "to": "lake-wylie-sc", "on": ["lake-wylie-sc"],
+        "why": "the unnamed tributary at Tega Cay (NHDPlus COMID 9756970) lay wholly inside Lake Wylie's outline: "
+               "Tega Cay's outfalls discharge to Lake Wylie (SC go-live audit 2026-11-15, P2-2)"},
 }
 SIDE_CHANNEL_M = 1000          # a rest piece this close to the river record `to` is a side channel or braid of it
+
+
+def _ruled(w: dict) -> bool:
+    st = str(w.get("state") or "").upper()
+    return bool((w.get("gnis_id") and (st, gnis_num(w.get("gnis_id"))) in REMAINDER_ON)
+                or (st, w.get("slug")) in REMAINDER_ON)
 
 
 def _remainder_ruling(w: dict, existing: dict | None, lat0: float):
     """(ruling, the union of its outlines in metres buffered by SAME_WATER_M, the river `to` in metres) for a remainder
     REMAINDER_ON names, or None when it names none or an outline it needs is not on this machine."""
-    hand = REMAINDER_ON.get((str(w.get("state") or "").upper(), gnis_num(w.get("gnis_id"))))
+    st = str(w.get("state") or "").upper()
+    hand = REMAINDER_ON.get((st, gnis_num(w.get("gnis_id")))) if w.get("gnis_id") else None
+    hand = hand or REMAINDER_ON.get((st, w.get("slug")))      # an unnamed water (no GNIS id): keyed by its slug
     if not hand:
         return None
     geoms = [S.water_geometry(x, existing) for x in dict.fromkeys(list(hand["on"]) + [hand["to"]])]
@@ -2011,11 +2035,13 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
     actions, moved, drop = [], {}, set()
     for i, w in enumerate(rows):
         parent = w.get("covers_part_of")
-        if not parent or not w.get("geometry"):
-            continue
+        if not w.get("geometry") or not (parent or _ruled(w)):
+            continue                   # a record that is no remainder is measured only when a hand ruling names it
         g = shape(w["geometry"])
         lat0 = g.centroid.y
         ruling = _remainder_ruling(w, existing, lat0)
+        if not ruling and not parent:
+            continue
         hand = None
         if ruling:
             hand, near, river = ruling

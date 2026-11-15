@@ -123,3 +123,86 @@ def test_the_state_text_quotes_the_departments_layer_title():
     assert 'map layer titled "Swimming Advisory" lists 23 river and lake sites' in t
     assert "a site on that list is not a water found safe" in t
     assert "freshwater swimming sites" not in t
+
+
+# ---------------------------------------------------------------- P2-2: records lying on other records (REMAINDER_ON)
+
+def _lake_existing():
+    lake = [[-81.05, 35.0], [-80.95, 35.0], [-80.95, 35.1], [-81.05, 35.1], [-81.05, 35.0]]
+    return {"example-lake-xx": {"slug": "example-lake-xx", "name": "Example Lake", "kind": "reservoir", "state": "SC",
+                                "geometry": {"type": "Polygon", "coordinates": [lake]}},
+            "example-river-xx": {"slug": "example-river-xx", "name": "Example River", "kind": "river", "state": "SC",
+                                 "geometry": {"type": "LineString", "coordinates": [[-82.0, 34.0], [-82.0, 34.45]]}}}
+
+
+def _nhd_rulings_setup(monkeypatch, tmp_path, rulings):
+    from build import status as S
+    from ingest import waters_from_nhd as N
+    S._GEOM_CACHE.clear()
+    monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path / "none")
+    monkeypatch.setattr(N, "REMAINDER_ON", rulings)
+    return N
+
+
+def test_a_river_drawn_through_a_reservoir_is_dropped_and_its_rows_go_to_the_lake(monkeypatch, tmp_path):
+    N = _nhd_rulings_setup(monkeypatch, tmp_path, {("SC", 555): {"to": "example-lake-xx", "on": ["example-lake-xx"],
+                                                                  "why": "invented"}})
+    # no covers_part_of: an NHD record of its own, lying through the lake
+    rows = [{"slug": "example-creek-sc", "name": "Example Creek", "kind": "river", "state": "SC", "gnis_id": "555",
+             "geometry": {"type": "LineString", "coordinates": [[-81.0, 35.01], [-81.0, 35.09]]}},
+            {"slug": "other-creek-sc", "name": "Other Creek", "kind": "river", "state": "SC", "gnis_id": "556",
+             "geometry": {"type": "LineString", "coordinates": [[-81.0, 35.01], [-81.0, 35.09]]}}]
+    t = {"state": "SC", "name": "Example Creek", "slugs": ["example-creek-sc"], "reach_slugs": {"1": "example-creek-sc"}}
+    acts = N.recheck_remainders(rows, [t], _lake_existing(), "2026-11-15")
+    assert [a["action"] for a in acts] == ["dropped"] and acts[0]["to"] == "example-lake-xx"
+    assert [w["slug"] for w in rows] == ["other-creek-sc"]                 # a record no ruling names is untouched
+    assert t["slugs"] == ["example-lake-xx"] and t["reach_slugs"] == {"1": "example-lake-xx"}
+
+
+def test_an_unnamed_water_is_ruled_by_its_slug(monkeypatch, tmp_path):
+    N = _nhd_rulings_setup(monkeypatch, tmp_path, {("SC", "unnamed-tributary-to-example-sc"): {
+        "to": "example-lake-xx", "on": ["example-lake-xx"], "why": "invented"}})
+    rows = [{"slug": "unnamed-tributary-to-example-sc", "name": "Unnamed tributary", "kind": "stream", "state": "SC",
+             "gnis_id": None, "geometry": {"type": "LineString", "coordinates": [[-81.0, 35.04], [-81.0, 35.05]]}}]
+    t = {"state": "SC", "name": "Unnamed", "slugs": ["unnamed-tributary-to-example-sc"]}
+    assert [a["action"] for a in N.recheck_remainders(rows, [t], _lake_existing(), "2026-11-15")] == ["dropped"]
+    assert rows == [] and t["slugs"] == ["example-lake-xx"]
+
+
+def test_a_ruled_copy_of_a_river_drops_its_part_on_the_river_and_side_channels(monkeypatch, tmp_path):
+    N = _nhd_rulings_setup(monkeypatch, tmp_path, {("SC", 777): {"to": "example-river-xx", "on": ["example-river-xx"],
+                                                                  "why": "invented"}})
+    rows = [{"slug": "example-river-town-sc", "name": "Example River", "kind": "river", "state": "SC",
+             "gnis_id": "777", "covers_part_of": "example-river-stub-sc",
+             "geometry": {"type": "MultiLineString", "coordinates": [[[-82.0, 34.0], [-82.0, 34.45]],
+                                                                     [[-82.0055, 34.1], [-82.0055, 34.11]]]}}]
+    t = {"state": "SC", "name": "Example River", "slugs": ["example-river-town-sc"]}
+    assert [a["action"] for a in N.recheck_remainders(rows, [t], _lake_existing(), "2026-11-15")] == ["dropped"]
+    assert t["slugs"] == ["example-river-xx"]
+
+
+def test_without_a_ruling_a_record_that_is_no_remainder_is_never_measured(monkeypatch, tmp_path):
+    N = _nhd_rulings_setup(monkeypatch, tmp_path, {})
+    rows = [{"slug": "example-creek-sc", "name": "Example Creek", "kind": "river", "state": "SC", "gnis_id": "555",
+             "geometry": {"type": "LineString", "coordinates": [[-81.0, 35.01], [-81.0, 35.09]]}}]
+    assert N.recheck_remainders(rows, [], _lake_existing()) == [] and len(rows) == 1
+
+
+def test_the_south_carolina_rulings_are_recorded_and_applied_to_the_files():
+    from ingest import waters_from_nhd as N
+    gone = {"lynches-river-tradesville-sc": "lynches-river-sc", "seneca-river-sc": "lake-hartwell-sc",
+            "unnamed-tributary-to-catawba-river-sc": "lake-wylie-sc"}
+    assert N.REMAINDER_ON[("SC", 1246493)]["to"] == "lynches-river-sc"
+    assert N.REMAINDER_ON[("SC", 1250834)]["to"] == "lake-hartwell-sc"
+    assert N.REMAINDER_ON[("SC", "unnamed-tributary-to-catawba-river-sc")]["to"] == "lake-wylie-sc"
+    nhd = json.loads((ROOT / "data" / "waters-nhd.json").read_text())
+    assert not set(gone) & {w["slug"] for w in nhd["waters"]} and nhd["count"] == len(nhd["waters"])
+    for t in nhd["targets"]:
+        assert not set(gone) & (set(t.get("slugs") or []) | set((t.get("reach_slugs") or {}).values()))
+    plants = [json.loads(x.rstrip(",\n")) for x in (ROOT / "data" / "outfalls-plants-us.json").read_text().splitlines()
+              if x.startswith('{"') and '"state": "SC"' in x]
+    tied = {(r["npdes_permit"], r["outfall"]): r.get("water_slug") for r in plants}
+    assert not set(gone) & set(tied.values())
+    assert tied[("SC0020010", "001")] == "lake-hartwell-sc"
+    assert tied[("SC0026751", "001")] == tied[("SC0026751", "002")] == "lake-wylie-sc"
+    assert tied[("SC0025933", "001")] == tied[("SC0035378", "001")] == tied[("SC0042676", "001")] == "lynches-river-sc"
