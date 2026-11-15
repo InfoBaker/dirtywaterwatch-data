@@ -10,8 +10,10 @@ level: "state"
 #   (WWTP or Collection System), receiving stream, estimated gallons. Staff and reporter fields are never read.
 # Real read 2026-11-14/15: 105 facility pages, 359 bypass reports listed from 2025-01-01 on (incident starts 2024-07-24
 #   to 2026-11-05) at 76 facilities; 202 wet-weather, 155 non-wet-weather, 2 anticipated; location WWTP 79, collection
-#   system 125, not given 155; 351 with a start time, 8 with no start; a receiving stream on 131, gallons on 266;
-#   the field office received the report a median 0.3 days after the start. Basement backups make no record.
+#   system 125, not given 155; 351 with a start time, 8 with no start; a receiving stream named on 130 (4 more say
+#   None, Varies or unknown), gallons on 266; the field office received the report a median 0.3 days after the start.
+#   Basement backups make no record. The operator is the row holding the matched permit (349 of 359); details that
+#   may name a person are withheld (44 of the 359 reports' details).
 cadence: "20 facility pages and 60 report pages a run, the oldest first (a full pass about every five hours)"
 license: "none stated (public records)"
 attribution: "Iowa Department of Natural Resources, field office records"
