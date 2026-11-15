@@ -78,7 +78,11 @@ INDUSTRY = re.compile(r"\b(packaging|kraft|paper|weyerhaeuser|brick|mine|gravel|
                       r"tyson|lumber|chemical|refin\w*|plastics?)\b", re.I)
 WATER_WORD = r"(?:Creek|River|Bayou|Lake|Branch|Slough|Reservoir|Fork|Run)"
 CAP = r"(?:Mc[A-Z][a-z]+|St\.|[A-Z][a-z']+|De|La)"         # no full stop: a sentence ends the name
-WATER_NAME = re.compile(rf"\b((?:{CAP}[ \t]+){{1,4}}{WATER_WORD}\b|Lake(?:[ \t]+{CAP}){{1,3}}\b)")
+# no length cap: a long name is read whole and refused if too long to be one (MAX_NAME_WORDS), never cut short
+WATER_NAME = re.compile(rf"\b((?:{CAP}[ \t]+)+{WATER_WORD}\b|Lake(?:[ \t]+{CAP})+\b)")
+MAX_NAME_WORDS = 6
+CAPS_RUN = re.compile(r"\b[A-Z][A-Z'.]+(?:[ \t]+[A-Z][A-Z'.]+)+\b")
+WATER_WORD_RX = re.compile(rf"\b{WATER_WORD}\b", re.I)
 STREET_AFTER = re.compile(r"^\s*(street|st|road|rd|drive|dr|lane|ln|avenue|ave|blvd|circle|cir|court|ct|parkway|pkwy|"
                           r"loop|cove|cv|terrace|way|place|pl|trail|trl|estates|subdivision|park|apartments|"
                           r"manhole|lift|pump)\b", re.I)
@@ -95,8 +99,9 @@ STREETY = re.compile(r"\b(street|st|road|rd|drive|dr|lane|ln|avenue|ave|blvd|cir
                      r"loop|cove|cv|terrace|way|place|pl|trail|trl)\.?\s*$", re.I)
 
 
-QUALIFIER_BEFORE = re.compile(r"\b(little|middle|upper|lower|big|east|west|north|south)((?:\s+(?:fork|branch|prong))"
-                              r"(?:\s+of(?:\s+the)?)?)?\s+$", re.I)
+# a chain of qualifiers written before a name ("upper little Sample Creek", "west fork of the"): all of it stays
+QUALIFIER_BEFORE = re.compile(r"(?:\b(?:little|middle|upper|lower|big|east|west|north|south)(?:\s+(?:fork|branch|prong))?"
+                              r"(?:\s+of(?:\s+the)?)?\s+)+$", re.I)
 # words a sentence goes on with after a lake's name ("Lake Hamilton Due to rain"): not part of it
 TRAIL_STOP = {"due", "used", "approximately", "approx", "was", "were", "from", "after", "near", "and", "the", "at",
               "on", "in", "to", "area", "about", "around", "with", "by"}
@@ -116,6 +121,8 @@ def water_names(text: str) -> tuple[list[str], list[str]]:
     text = text or ""
     if text and not re.search(r"[a-z]", text):
         text = _title(text)
+    # a run of capitals inside mixed text ("overflow into TOWN CREEK") is read as a name when it holds a water word
+    text = CAPS_RUN.sub(lambda m: _title(m.group(0)) if WATER_WORD_RX.search(m.group(0)) else m.group(0), text)
     names, unused = [], []
     for m in WATER_NAME.finditer(text):
         words = m.group(1).split()
@@ -125,6 +132,9 @@ def water_names(text: str) -> tuple[list[str], list[str]]:
             while len(words) > 2 and words[-1].lower().strip(".,") in TRAIL_STOP:
                 words.pop()
         cand = " ".join(words).strip(" .,;")
+        if len(words) > MAX_NAME_WORDS:
+            unused.append(cand)                  # too long to be one name: refused, never shortened
+            continue
         if STREET_AFTER.match(text[m.end():]) or (words and STREET_AFTER.match(words[-1])):
             unused.append(cand)                  # "Lake Lane", "Mill Creek Estates": a street or a place
             continue
@@ -140,7 +150,7 @@ def water_names(text: str) -> tuple[list[str], list[str]]:
             unused.append(f"a tributary of {cand}")
             continue
         q = QUALIFIER_BEFORE.search(before.rstrip() + " ")
-        if q and not re.match(r"(little|middle|upper|lower|big|east|west|north|south)\b", cand, re.I):
+        if q:
             cand = re.sub(r"\bOf\b", "of", re.sub(r"\bThe\b", "the", _title(q.group(0).strip()))) + " " + cand
         names.append(cand)
     return list(dict.fromkeys(names)), list(dict.fromkeys(unused))
