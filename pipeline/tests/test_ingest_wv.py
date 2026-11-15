@@ -429,3 +429,19 @@ def test_bloom_area_marker_is_inside_deps_area_and_the_extent_is_kept():
     r = H.records(H.update({}, H.rows_of(a), "2026-07-01T12:00:00Z"))[0]
     assert r["raw"]["agency_extent"]["type"] == "Polygon" and r["raw"]["marker_basis"] == "an interior point of DEP's area"
     assert shape(r["raw"]["agency_extent"]).buffer(1e-9).contains(Point(r["lon"], r["lat"]))
+
+
+def test_absence_statements_keep_their_scope_and_dates():
+    """Re-review P2-10: every absence the WV text states is bounded to what was read and when."""
+    t = (ROOT / "research" / "wv" / "state-text.md").read_text()
+    para = re.search(r"\*\*What is not published\.\*\*(.+)", t).group(1)
+    assert "not from the operators" not in para and "exists in West Virginia" not in para
+    assert "not searched one by one" in para and "November 3, 2026" in para
+    assert "January 2025 to November 14, 2026" in para
+    src = json.loads((ROOT / "research" / "wv" / "sources.json").read_text())
+    dmr = [s for s in (src if isinstance(src, list) else src.get("sources") or []) if "59 permits file no line" in
+           str(s.get("access_detail"))]
+    assert dmr and "January 2025 to 2026-11-14" in dmr[0]["access_detail"]
+    assert "59 report nothing at any combined sewer outlet" in para and "none of the 61 combined sewer permits" in para
+    prof = json.loads((ROOT / "research" / "wv" / "profile.json").read_text())
+    assert '"sobe_events_2026_11_03": 0' in json.dumps(prof)

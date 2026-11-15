@@ -9,7 +9,7 @@ level: "municipal"
 #   equal the report's own summary): 219 discharges, October 2024 to September 2026 less the
 #   withheld quarters; Reports 91, 92 and 97 withheld.
 # Access detail (research, quoted): Index read 2026-11-14 (reports 1 to 98); Reports 91 to 98
-#   (October 2024 to September 2026) fetched once each. Part D's collection-system tables: date,
+#   (October 2024 to September 2026) first fetched on that day; the newest two reports and any report with no accepted copy are read again every 30 days. Part D's collection-system tables: date,
 #   address, cause, action, prevention, receiving water, gallons, lab values; the plants' discharges
 #   are scanned forms.
 # Can fill: day, cause, receiving water, volume, permit
@@ -23,7 +23,7 @@ role: "events"
 event_types: ["sso"]
 states: ["LA"]
 access: ["pdf"]
-access_detail: "Index read 2026-11-14 (reports 1 to 98); Reports 91 to 98 (October 2024 to September 2026) fetched once each. Part D's collection-system tables: date, address, cause, action, prevention, receiving water, gallons, lab values; the plants' discharges are scanned forms."
+access_detail: "Index read 2026-11-14 (reports 1 to 98); Reports 91 to 98 (October 2024 to September 2026) first fetched on that day; the newest two reports and any report with no accepted copy are read again every 30 days. Part D's collection-system tables: date, address, cause, action, prevention, receiving water, gallons, lab values; the plants' discharges are scanned forms."
 machine_readable: false
 legal_basis: "Consent decree (2002), Paragraph 26, Section XI"
 checked: "2026-11-14"
