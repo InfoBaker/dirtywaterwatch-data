@@ -96,8 +96,12 @@ Privacy: only the candidate posts' list items (titles scrubbed) and each one's s
 evidence sentences (project(): a type, a volume, a date, a water; nothing else, no signature) are kept; people named
 in the text ("Director Pat Example", "said ...", "Pat Example reported", any run of capitalised words holding none of
 the source's own words: KNOWN) are cut (scrub_names), "the home of ..." becomes "a private residence", a link label
-that is not about the letter becomes "letter", a point in a line describing a private home is removed entirely and
-any other point in the text is rounded to three decimals; the article is cut at MMSD's standing advice block ("Text WATERDROP ...") or at a contact line ("Questions:",
+that is not about the letter becomes "letter"; in a run of capitalised words, two or more of none of the source's own
+words, or one next to a known word that is also a name ("May Example"), are cut while the rest stays ("[name removed]
+Reports Sewer Overflow"), and a place's name before a place word ("Indian Creek") is kept; every point in a post (or a
+record) that describes a private home anywhere is removed entirely, whichever paragraph it is in, and any other point
+is rounded to three decimals figure by figure (a pair at any precision, a lone "43.1234 N", degrees-minutes-seconds cut
+to the minute); records carried from an earlier run are scrubbed again on every write (rescrub); the article is cut at MMSD's standing advice block ("Text WATERDROP ...") or at a contact line ("Questions:",
 "Media contact"), so the people named there are never kept, and telephone numbers and e-mails are scrubbed (common.scrub_text), house numbers
 removed (common.strip_house_numbers). data/raw keeps that safe document only.
 
@@ -323,6 +327,10 @@ january february march april may june july august september october november dec
 jan feb mar apr jun jul aug sep sept oct nov dec monday tuesday wednesday thursday friday saturday sunday
 cso csos sso ssos street avenue road drive boulevard parkway highway st ave rd dr blvd n s e w
 mitchell international airport national weather service gauge gauges
+day days notification notifications help manage managing can could will do does take takes taken future steps
+total totals winter spring summer fall falls autumn heavy rains dangerous safety safe stay keep avoid contact
+basin management reach watershed grounds valley project projects flood floods program programs plan plans
+news press media statement statements frequently asked questions faq new latest week weekend today tonight
 """.split())
 RUN = re.compile(r"\b(?:[A-Z][a-z'’-]+|[A-Z]\.)(?:\s+(?:[A-Z][a-z'’-]+|[A-Z]\.))+")
 
@@ -349,22 +357,88 @@ HOME_OF = re.compile(rf"\b(?:the\s+)?(?:home|house|residence|property|yard|basem
                      rf"(?:\[name removed\]|{PNAME})")
 
 
+# an unknown word right before one of these is a place's name ("Indian Creek", "Example Avenue"), not a person's
+PLACE_SUFFIX = set("""
+creek creeks river rivers harbor harbour canal lake park street avenue road drive boulevard parkway highway lane court
+way place st ave rd dr blvd ln ct plant facility island county village city town valley bay beach pond ditch branch
+tributary airport station school center centre
+""".split())
+# known words that are also given names or surnames: next to an unknown word in a run they are part of the name ("May
+# Example", "Pat Jones"), and go with it (Astra verification 3, 2026-11-15, #6)
+NAMEISH = set("""
+may june april august lincoln wilson jones mitchell franklin brown butler fox root oak honey hales st grove park
+""".split())
+
+
+def _run_sub(m: re.Match) -> str:
+    """A run of capitalised words: two or more unknown words together, or one next to a name-like known word, are a
+    name and are cut with that word, unless they are a place's name before a place word; a run of known words only is
+    kept, and so is one unknown word among known ones ("Heavy Rains", "5-Day Letter")."""
+    ws = m.group(0).split()
+    unk = [not _known(w) for w in ws]
+    if not any(unk):
+        return m.group(0)
+    if all(unk):
+        return "[name removed]"
+    nameish = [re.sub(r"(?:'s|’s|[.,'’-])+$", "", w).lower() in NAMEISH for w in ws]
+    cut = [u and ((i > 0 and (unk[i - 1] or nameish[i - 1])) or (i + 1 < len(ws) and (unk[i + 1] or nameish[i + 1])))
+           for i, u in enumerate(unk)]
+    i = 0
+    while i < len(ws):
+        if cut[i]:
+            j = i
+            while j < len(ws) and cut[j]:
+                j += 1
+            if j < len(ws) and re.sub(r"[.,'’-]+$", "", ws[j]).lower() in PLACE_SUFFIX:
+                for k in range(i, j):
+                    cut[k] = False      # "Indian Creek": a place
+            i = j
+        else:
+            i += 1
+    for i in [i for i, c in enumerate(cut) if c]:
+        for k in (i - 1, i + 1):
+            if 0 <= k < len(ws) and not cut[k] and re.sub(r"(?:'s|’s|[.,'’-])+$", "", ws[k]).lower() in NAMEISH:
+                cut[k] = True
+    out, i = [], 0
+    while i < len(ws):
+        if cut[i]:
+            while i < len(ws) and cut[i]:
+                i += 1
+            out.append("[name removed]")
+        else:
+            out.append(ws[i])
+            i += 1
+    return " ".join(out)
+
+
 def scrub_names(s: str) -> str:
     s = HOME_OF.sub("a private residence", s)
     for rx, rep in NAME_RX:
         s = rx.sub(_name_sub(rep), s)
-    # any other run of capitalised words that holds none of the source's own words is a name
-    return RUN.sub(lambda m: m.group(0) if any(_known(w) for w in m.group(0).split()) else "[name removed]", s)
+    # in any other run of capitalised words, the words that are none of the source's own are a name; the known words
+    # around them stay ("[name removed] Reports Sewer Overflow"; Astra verification 3, #6)
+    return RUN.sub(_run_sub, s)
 
 
-def safe_line(s: str) -> str:
-    """Phones and e-mails scrubbed, house numbers removed, people's names cut, a point rounded to three decimals; a
-    month's day ("June 18 at 35th St.") is not a house number."""
+# every form of a point in free text (Astra verification 3, #6): a pair at any precision, a lone degree figure with
+# four or more decimals ("43.1234 N", "latitude 43.223456"), and degrees, minutes and seconds
+FINE = re.compile(r"(?<![\d.])(-?\d{1,3})\.(\d{4,})(?!\d)(?!\.\d)")
+DMS = re.compile(r"(\d{1,3})\s*°\s*(\d{1,2})\s*['′]\s*\d{1,2}(?:\.\d+)?\s*(?:\"|″|'')?")
+PRIVATE_POINT = re.compile(r"(?:\(\s*)?-?\d{1,3}\.\d+\s*°?\s*[NSEW]?\s*,?\s*-?\d{1,3}\.\d+\s*°?\s*[NSEW]?(?:\s*\))?|"
+                           r"-?\d{1,3}\.\d{3,}\s*°?\s*[NSEW]?|\d{1,3}\s*°\s*\d{1,2}\s*['′](?:\s*\d{1,2}(?:\.\d+)?\s*"
+                           r"(?:\"|″|'')?)?\s*[NSEW]?|-?\d{1,3}\.\d+\s*°?\s*[NSEW]\b")
+
+
+def safe_line(s: str, private: bool | None = None) -> str:
+    """Phones and e-mails scrubbed, house numbers removed, people's names cut; every point in a text that describes a
+    private home (private: the line itself, or the post or record it belongs to) removed, any other rounded to three
+    decimals, each figure on its own; a month's day ("June 18 at 35th St.") is not a house number."""
     glued = DATE_GLUE.sub(lambda m: m.group(1) + "\u2060_", s)
     s = strip_house_numbers(scrub_text(glued)).replace("\u2060_", " ")
-    if PRIVATE_PLACE.search(s):
-        s = ANY_COORD.sub("[location removed]", s)
-    s = COORD.sub(lambda m: f"{round(float(m.group(1)), 3)}{m.group(2)}{round(float(m.group(3)), 3)}", s)
+    if private or (private is None and PRIVATE_PLACE.search(s)):
+        s = PRIVATE_POINT.sub("[location removed]", s)
+    s = DMS.sub(lambda m: f"{m.group(1)}°{m.group(2)}'", s)
+    s = FINE.sub(lambda m: f"{round(float(m.group(1) + '.' + m.group(2)), 3)}", s)
     return scrub_names(s)
 
 
@@ -397,19 +471,24 @@ def page_doc(content: bytes | str) -> dict | None:
     body = re.sub(r"<(script|style|noscript)\b.*?</\1>", " ", body, flags=re.S | re.I)
     # one boundary for text and links alike: blocks are read in order and nothing after the cut is kept, a letter's
     # link label included (Astra review 2026-11-14 P1-6)
-    letters, lines = [], []
+    letters, lines, blocks = [], [], []
     for block in re.split(r"<(?:/?(?:p|div|li|ul|ol|h\d|tr|table|br|hr)\b)[^>]*>", body, flags=re.I):
         w = _words(re.sub(r"<[^>]+>", " ", block))
         if not w:
             continue
         if CUT.search(w) or CONTACT.search(w):
             break                       # MMSD's standing advice block, or a contact block naming people
+        blocks.append((block, w))
+    # a post that describes a private home anywhere has every point in it removed: the home in one paragraph and its
+    # point in the next are one place (Astra verification 3, #6)
+    private = any(PRIVATE_PLACE.search(w) for _, w in blocks)
+    for block, w in blocks:
         for m in re.finditer(r'<a\s[^>]*href="([^"]*download_file[^"]*)"[^>]*>(.*?)</a>', block, re.S | re.I):
-            label = safe_line(_words(re.sub(r"<[^>]+>", " ", m.group(2))))
+            label = safe_line(_words(re.sub(r"<[^>]+>", " ", m.group(2))), private)
             label = label if LABEL_OK.search(label or "") else "letter"     # a label that is not about the letter
             if label and {"url": m.group(1), "label": label} not in letters:
                 letters.append({"url": m.group(1), "label": label})
-        lines.append(safe_line(w))
+        lines.append(safe_line(w, private))
     stamp = next((x for x in lines[:4] if STAMP.match(x)), None)
     rest = [x for x in lines if x != stamp]
     # the title line (the page title block, first) is kept as it is (scrubbed); the article below it is projected
@@ -995,6 +1074,27 @@ def fetch_safe(sess: requests.Session, pages: int, prev: dict[str, dict], retry:
             "items": items, "posts": docs, "failed": failed}
 
 
+# the free-text fields of a record: scrubbed again on every write, records carried from an earlier run included
+PROSE = ("title", "_type_basis", "start_basis", "end_basis", "local_overflows_text", "_no_water_reason",
+         "period_text", "reported_day_text")
+
+
+def rescrub(r: dict) -> dict:
+    """A record with its free text scrubbed as a new read would be (Astra verification 3, #6): a record whose text
+    describes a private home anywhere has every point in it removed."""
+    raw = r.get("raw") or {}
+    texts = [raw.get(k) for k in PROSE if isinstance(raw.get(k), str)] + \
+        [x.get("label") for x in raw.get("letters") or [] if isinstance(x, dict) and isinstance(x.get("label"), str)]
+    private = any(PRIVATE_PLACE.search(x) for x in texts)
+    for k in PROSE:
+        if isinstance(raw.get(k), str):
+            raw[k] = safe_line(raw[k], private)
+    for x in raw.get("letters") or []:
+        if isinstance(x, dict) and isinstance(x.get("label"), str):
+            x["label"] = safe_line(x["label"], private)
+    return r
+
+
 def build(doc: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[dict], dict]:
     recs: dict[str, dict] = {r["source_record_id"]: r for r in prev_records}
     read, not_read, pending, unparsed = 0, 0, 0, []
@@ -1025,7 +1125,8 @@ def build(doc: dict, prev_records: list[dict], fetched_at: str) -> tuple[list[di
             r["raw"]["_last_seen_in_source"] = fetched_at
             recs[r["source_record_id"]] = r
         read += 1
-    out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
+    out = sorted((rescrub(r) for r in recs.values()), key=lambda r: (r.get("started_at") or "", r["event_id"]),
+                 reverse=True)
     stats = {"list_items_seen": doc.get("list_items_seen", len(doc.get("items") or [])),
              "candidates": len(doc.get("items") or []), "posts_read": read, "not_read": not_read,
              "posts_not_read_this_run": pending, "posts_failed": len(doc.get("failed") or []),

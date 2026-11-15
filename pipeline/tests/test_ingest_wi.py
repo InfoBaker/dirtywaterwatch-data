@@ -913,7 +913,9 @@ def test_v_3_names_and_private_home_points_never_reach_a_save(monkeypatch, tmp_p
     for p in ("Pat Example", "Sam Sample", "Lee Example", "Example reported", "home of",
               "43.123", "-87.988", "43.223", "-87.888", "43.12", "43.22"):
         assert p not in blob, p
-    assert "43.023, -87.918" in blob                            # a point not described as a home is kept, rounded
+    # the post describes a private home: every point in it is removed, the outfall's too (verification 3, #6); a
+    # point in a post with no private home is rounded (test_w_5_...)
+    assert "43.023" not in blob and "-87.918" not in blob
     recs = {r["event_type"]: r for r in written[-1][0]}
     assert set(recs) == {"cso", "sso"} and recs["cso"]["waterbody_text"] == "Lincoln Creek"
     assert recs["cso"]["started_at"] == "2027-06-01"
