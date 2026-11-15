@@ -1127,3 +1127,17 @@ def test_leavenworth_same_block_pages_keep_their_own_ids_in_every_order(tmp_path
     priv = L.ids_path().read_text()
     assert L.ids_path().parent != tmp_path and "1234-" not in priv and "1256-" not in priv
     assert "1234" not in json.dumps(doc) and "1256" not in json.dumps(doc)
+
+
+def test_leavenworth_next_day_stop_follows_the_sentence_date_and_never_precedes_the_start():
+    """Verification 3 P2-2's sibling: "On May 27 ... it stopped the next day at 1:00 p.m." ends May 28, never May 27
+    before the start; "the following morning" likewise; an end that would fall before the start is no end."""
+    t = "Sanitary Sewer Overflow Reported on May 27, 2020 at Example Court"
+    n = "At 3:50 p.m. May 27, 2020, staff were notified of sewage in Five-Mile Creek. "
+    path = "/x/sanitary-sewer-overflow-reported-may-27-2020-example-court"
+    end = lambda b: L.record(path, _page(t, n + b), AT)["ended_at"]
+    assert end("On May 27, 2020 the overflow was contained and it stopped the next day at 1:00 p.m.") == \
+        "2020-05-28T13:00:00-05:00"
+    assert end("The overflow stopped the following morning at 9:00 a.m.") == "2020-05-28T09:00:00-05:00"
+    assert end("The overflow stopped the next day at 4:00 p.m.") == "2020-05-28T16:00:00-05:00"
+    assert end("On May 27, 2020 the overflow stopped at 1:00 p.m.") is None

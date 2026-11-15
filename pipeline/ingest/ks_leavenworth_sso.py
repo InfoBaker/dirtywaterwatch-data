@@ -55,7 +55,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
-from ingest.mo_kc_water_news import DATE, _month, date_positions, migrate_water_text, safe_text, sentences, water_text, waters
+from ingest.mo_kc_water_news import DATE, NEXT_DAY, _month, date_positions, migrate_water_text, safe_text, sentences, water_text, waters
 
 SOURCE_ID = "ks-leavenworth-sso-transparency"
 BASE = "https://www.leavenworthks.gov"
@@ -281,10 +281,12 @@ def record(path: str, h: str, at: str, cite: str | None = None) -> dict:
             if eday is None:
                 break                                # several dates and none is the end's: no end, never a guess
             e = datetime(eday.year, eday.month, eday.day, h_, mi, tzinfo=TZ)
-            if not dm and re.search(r"next day|following day|next morning", s, re.I):
-                e += timedelta(days=1)
+            if NEXT_DAY.search(s) and not DATE.search(s[w.start():]):
+                e += timedelta(days=1)       # the day after the sentence's own date or the report day (verification 3)
             elif not dm and prec == "minute" and e < datetime.fromisoformat(start):
                 e += timedelta(days=1)
+            if prec == "minute" and e < datetime.fromisoformat(start):
+                break                        # an end before the start is no end, never a guess
             end, end_basis = e.isoformat(), "the stop time the City's page gives"
         break
     v = re.search(r"([\d,]+)\s*gallons", clean)

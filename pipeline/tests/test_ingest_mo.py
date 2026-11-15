@@ -795,3 +795,34 @@ def test_kc_stop_today_is_the_publication_day_and_a_dated_stop_survives_a_day_on
     t = K.times("Crews responded May 27 at 9:00 a.m. to an overflow. It stopped yesterday at 4:00 p.m.",
                 date(2026, 5, 29))
     assert t["end"] == "2026-05-28T16:00:00-05:00"
+
+
+def test_kc_stop_the_next_day_is_the_day_after_whatever_the_clock_order():
+    """Verification 3 P2-2: a response May 27 at 9:00 a.m. that "stopped the next day at 4:00 p.m." ends May 28 (the
+    later clock no longer keeps it on May 27); an earlier clock, "the following morning", a day-only start, a dated
+    sentence before the stop and "the next day" before the verb all end the day after; the caution intervals follow."""
+    from datetime import date, datetime, timezone
+    pub = date(2026, 5, 29)
+    t = lambda s: K.times(s, pub)
+    r = "KC Water crews responded to an overflow at 9:00 a.m. on May 27, 2026. "
+    assert t(r + "The overflow stopped the next day at 4:00 p.m.")["end"] == "2026-05-28T16:00:00-05:00"
+    assert t(r + "The overflow stopped the next day at 4:00 a.m.")["end"] == "2026-05-28T04:00:00-05:00"
+    assert t(r + "It stopped the following morning at 10:30 a.m.")["end"] == "2026-05-28T10:30:00-05:00"
+    assert t(r + "It was stopped at 6:00 p.m. the next day.")["end"] == "2026-05-28T18:00:00-05:00"
+    assert t(r + "The next day the overflow stopped at 1:00 p.m.")["end"] == "2026-05-28T13:00:00-05:00"
+    assert t(r + "It stopped at 4:00 p.m.")["end"] == "2026-05-27T16:00:00-05:00"          # no next-day words: same day
+    assert t(r + "It stopped at 4:00 a.m.")["end"] == "2026-05-28T04:00:00-05:00"          # before the start: next day
+    d = t("KC Water crews responded to an overflow on May 27, 2026. The overflow stopped the next day at 4:00 p.m.")
+    assert d["precision"] == "day" and d["end"] == "2026-05-28T16:00:00-05:00"
+    e = t(r + "On May 28, 2026 crews worked on it and it stopped the next day at 4:00 p.m.")
+    assert e["end"] == "2026-05-29T16:00:00-05:00"
+    # the interval: red from the response to the next day's stop, then the 72-hour caution
+    item = {"title": "Customers Advised of Wastewater Overflow near Example Street",
+            "link": "https://www.kcwater.us/news/example-9/", "date": "Fri, 29 May 2026 22:00:00 +0000",
+            "guid": "https://www.kcwater.us/?post_type=news1&p=9",
+            "html": f"<p>{r}The overflow stopped the next day at 4:00 p.m. About 500 gallons entered Brush Creek.</p>"}
+    rec = K.record(item, AT)
+    now = datetime(2026, 6, 10, tzinfo=timezone.utc)
+    utc = lambda dd, h: datetime(2026, 5, dd, h, tzinfo=timezone.utc)
+    ivs = [(iv["color"], iv["start"], iv["end"]) for iv in S.event_intervals(rec, "MO", now)]
+    assert ivs == [("red", utc(27, 14), utc(28, 21)), ("yellow", utc(28, 21), utc(31, 21))]
