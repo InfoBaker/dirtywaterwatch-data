@@ -995,3 +995,54 @@ def test_revision_precedence_holds_between_runs(tmp_path, monkeypatch):
     r = eq["records"][0]["raw"]
     assert r["events"] is None and r["conflicting_rows"] == ["events"] and r["hours"] == 3.0
     assert eq["meta"]["conflicting_equal_revisions"]
+
+
+def test_the_algae_feed_saves_only_a_bounded_error_on_every_failure_path(tmp_path, monkeypatch):
+    """Astra verification 2026-11-15 P1-2: an ArcGIS error object, a malformed answer and an HTTP failure each leave
+    the previous records, ok false and an error category; no answer text reaches the events file, raw or state."""
+    import requests as rq
+
+    from ingest.generic import arcgis, runner
+    person = "Pat Example, 12 Sample Street"
+    monkeypatch.setattr(runner, "STATE_DIR", tmp_path / "state")
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw", raising=False)
+    saved = []
+    monkeypatch.setattr(runner, "save_raw", lambda *a, **k: saved.append(a))
+    out = tmp_path / "in-idem-cyanobacteria.json"
+    prev = {"event_id": "in-idem-cyanobacteria:keep", "source_id": "in-idem-cyanobacteria"}
+
+    def resp(code):
+        r = rq.Response()
+        r.status_code, r._content = code, person.encode()
+        return r
+
+    def http_fail(*a, **k):
+        raise rq.HTTPError(f"500 Server Error: {person}", response=resp(500))
+
+    def malformed(*a, **k):
+        raise ValueError(f"not JSON: {person}")
+
+    cases = {"ArcGIS error (code 400)": lambda *a, **k: {"error": {"code": 400, "message": person,
+                                                                    "details": [person]}},
+             "HTTP 500": http_fail, "malformed response": malformed,
+             "timeout": lambda *a, **k: (_ for _ in ()).throw(rq.Timeout(person))}
+    for want, fake in cases.items():
+        common.write_events("in-idem-cyanobacteria", [prev], ok=True, path=out, meta={"rows": 1})
+        monkeypatch.setattr(arcgis, "get_json", fake)
+        monkeypatch.setattr(arcgis, "get", lambda *a, **k: resp(200))
+        assert runner.run("in-idem-cyanobacteria", out=str(out)) == 1
+        doc = json.loads(out.read_text())
+        assert doc["ok"] is False and doc["records"] == [prev] and doc["error"] == want, (want, doc["error"])
+        assert "Pat" not in out.read_text() and "Sample Street" not in out.read_text()
+    assert not saved and not list((tmp_path / "state").glob("*")) if (tmp_path / "state").exists() else True
+
+
+def test_bounded_errors_are_keyed_to_the_algae_feed_only():
+    """No other source sets bounded_errors, so their error text is as before."""
+    import yaml
+    hits = sorted(p.stem for p in (common.ROOT / "data" / "sources").glob("*.yaml")
+                  if "bounded_errors" in ((yaml.safe_load(p.read_text()) or {}).get("fetch") or {}))
+    assert hits == ["in-idem-cyanobacteria"]
+    from ingest.generic import arcgis
+    err = {"code": 400, "message": "Invalid query"}
+    assert str(arcgis.ArcGISError(err)) == f"ArcGIS error: {err}"      # every other source's message as before

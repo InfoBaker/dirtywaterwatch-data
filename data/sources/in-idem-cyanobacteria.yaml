@@ -41,6 +41,9 @@ fetch:
   time_zone: "America/New_York"
   bounds: [-88.1, 37.7, -84.7, 41.8]
   round_coords: 3
+  # a failed run saves and prints only an error category (HTTP code, timeout, ArcGIS error code, malformed response),
+  # never the service's error object or answer text
+  bounded_errors: true
   # the layer keeps every season: a short answer is a failure, not the season
   safe_fields: [objectid, advisory_level, beach_name, waterbody, date_, year_, location_id, sample_id, project,
                 microcystin, anatoxin_a, cylindrospermopsin, saxitoxin, total_count, dominant_taxa, _x, _y]
