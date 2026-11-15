@@ -364,3 +364,10 @@ def test_review_a_part_of_a_water_never_colours_the_whole_water(tmp_path):
     st = _status(tmp_path, recs, datetime(2026, 8, 20, 13, tzinfo=timezone.utc))
     assert (st["waters"].get("example-reservoir-wy") or {}).get("status", "grey") == "grey"
     assert st["waters"]["example-lake-wy"]["status"] == "red"         # control: a whole-water advisory colours
+
+
+def test_review_a_cell_with_a_title_or_house_number_is_scrubbed():
+    row_ = ("Example Lake", "Dock of Dr. Example Person, 12-B Sample Road", "Bloom", "7/9/2026")
+    recs, _, saved = build(new("b1", S1, [row_]))
+    blob = json.dumps(recs) + json.dumps(saved)
+    assert "Example Person" not in blob and "12-B" not in blob
