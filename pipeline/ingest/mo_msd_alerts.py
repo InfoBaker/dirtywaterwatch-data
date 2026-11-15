@@ -152,6 +152,7 @@ def record(p: dict, at: str) -> dict:
     v, flag, vtext = volume(text)
     plant = bool(re.search(r"treatment plant", title, re.I))
     raw = {"state": "MO", "time_zone": "America/Chicago", "place_key": place_key(title),
+           "place_key_version": PLACE_KEY_VERSION,
            "is_follow_up": bool(FOLLOW_UP.search(title)), "start_kind": kind, "day_read_from": how,
            "start_is_upper_bound": kind in ("discovered", "reported", "publication", "stated"),
            "start_basis": ("the post gives no day for the overflow: dated to the post's own day, on or before which it "
@@ -175,11 +176,19 @@ def record(p: dict, at: str) -> dict:
 
 
 def permalink(p: dict) -> str:
-    """The post's address, or msdprojectclear.org/?p=<id> where the address carries a house number (P1-9)."""
+    """msdprojectclear.org/?p=<id>, the post's numeric permalink, so a name or address in its slug is never kept
+    (verification P1-4); the post's address only when it has no id."""
     return safe_link(p["link"], f"https://msdprojectclear.org/?p={p['id']}" if p.get("id") else None)
 
 
+PLACE_KEY_VERSION = 2
+
+
 def place_key(title: str) -> str:
+    """The key that ties a follow-up post to its first post: the last place the title names, read from the scrubbed
+    title (safe_text), so a person's name in a title never becomes part of the key (verification P1-4)."""
+    title = safe_text(common.strip_house_numbers(title or "")) or ""
+    title = title.replace("[name removed]", " ")
     title = re.sub(r"\s*\b(?:completed?|update[ds]?|halted)\b\s*$", "", title, flags=re.I).strip(" :-")
     m = re.search(r".*\b(?:in|near|at|into|along)\s+(?:the\s+)?([A-Z][\w .'-]+)$", title, re.I)   # the last place
     return re.sub(r"[^a-z]", "", (m.group(1) if m else title).lower())
@@ -191,9 +200,11 @@ def link_follow_ups(recs: dict[str, dict]) -> int:
     for r in recs.values():
         if not r["raw"].get("is_follow_up"):
             continue
-        k = r["raw"].get("place_key") or place_key(r["raw"].get("title") or "")
+        k = r["raw"].get("place_key")
+        if not k:                                     # no key, no tie (never every keyless post to every other)
+            continue
         d = datetime.fromisoformat(r["started_at"][:10])
-        cands = [f for f in firsts if (f["raw"].get("place_key") or place_key(f["raw"].get("title") or "")) == k and
+        cands = [f for f in firsts if f["raw"].get("place_key") == k and
                  0 <= (d - datetime.fromisoformat(f["started_at"][:10])).days <= 14]
         if not cands:
             continue
@@ -209,7 +220,14 @@ def link_follow_ups(recs: dict[str, dict]) -> int:
 def run(pages: list[list[dict]], prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
     for r in recs.values():
-        r["raw"].setdefault("place_key", place_key(r["raw"].get("title") or ""))
+        if r["raw"].get("place_key_version") != PLACE_KEY_VERSION:
+            # a key made by an earlier version from the unscrubbed title can hold a name: remade from the title when
+            # the save still has it, else dropped (the post's next read remakes it); verification P1-4
+            if r["raw"].get("title"):
+                r["raw"]["place_key"] = place_key(r["raw"]["title"])
+            else:
+                r["raw"].pop("place_key", None)
+            r["raw"]["place_key_version"] = PLACE_KEY_VERSION
         r["raw"].pop("title", None)                   # the post title is no longer kept (re-review P1-9)
         migrate_water_text(r)
         r["advice_text"] = safe_text(r.get("advice_text"))

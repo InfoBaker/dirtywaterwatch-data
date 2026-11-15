@@ -47,7 +47,7 @@ def test_kc_notice_response_time_is_an_upper_bound_with_its_end_volume_and_water
     assert r["volume_gal"] == 39000 and r["waterbody_text"] == "Missouri River"
     assert r["published_at"] == "2024-10-15T17:15:57-05:00" and r["reported_at"] is None
     assert r["raw"]["time_zone"] == "America/Chicago" and r["discharger_id"] == "mo-kansas-city-mo0024911"
-    assert r["source_url"] == "https://www.kcwater.us/news/customers-advised-of-wastewater-overflow-near-example-street/"
+    assert r["source_url"] == "https://www.kcwater.us/?post_type=news1&p=9001"     # its numeric permalink (P1-4)
     assert r["raw"]["counties"] == ["Jackson County", "Clay County", "Platte County", "Cass County"]
     assert stats["notices"] == 5 and stats["not_notices"] == 1 and stats["news_posts"] == 6
 
@@ -652,9 +652,11 @@ def test_names_phones_and_addresses_never_reach_titles_advice_links_or_the_raw_s
 def test_safe_text_keeps_places_and_safe_link_keeps_plain_addresses():
     assert K.safe_text("avoid the creek by Example Creek") == "avoid the creek by Example Creek"
     assert "Jane" not in K.safe_text("reported by Jane Example near the plant")
-    assert K.safe_link("https://x.org/news/overflow-near-example-street/", "https://x.org/?p=1") == \
+    # with no numeric permalink the address stays unless it carries a number outside a date (verification P1-4: a
+    # numeric permalink, where there is one, is always used instead)
+    assert K.safe_link("https://x.org/news/overflow-near-example-street/", None) == \
         "https://x.org/news/overflow-near-example-street/"
-    assert K.safe_link("https://x.org/news/overflow-on-june-3-2024/", "https://x.org/?p=1") == \
+    assert K.safe_link("https://x.org/news/overflow-on-june-3-2024/", "https://x.org/news/") == \
         "https://x.org/news/overflow-on-june-3-2024/"
     assert K.safe_link("https://x.org/news/overflow-at-1234-example-st/", "https://x.org/?p=1") == "https://x.org/?p=1"
 
@@ -697,3 +699,31 @@ def test_a_concern_reclassified_outside_the_sewer_category_loses_its_sewage_reco
     # a concern never filed as sewer is still not read
     r4, s4, _ = C.run([(resid, {})], [], AT)
     assert r4 == [] and "70010" not in s4["decisions"]
+
+
+def test_msd_names_in_titles_and_slugs_never_reach_the_key_the_link_or_the_raw_save():
+    """Verification P1-4: a title "Overflow reported by Jane Example" and a name-bearing slug: the place key, the
+    record and safe_posts carry neither; an earlier save's unscrubbed key is dropped at the next read."""
+    p = {"id": 8101, "date_gmt": "2026-05-27T15:00:00", "modified_gmt": "2026-05-27T15:00:00",
+         "link": "https://msdprojectclear.org/newsroom/alerts/overflow-reported-by-jane-example/",
+         "title": {"rendered": "Overflow reported by Jane Example"},
+         "content": {"rendered": "<p>An overflow was discovered Tuesday into Example Creek.</p>"}}
+    recs, _ = M.run([[p]], [], AT)
+    blob = json.dumps(recs) + json.dumps(M.safe_posts([p]))
+    assert "jane" not in blob.lower() and recs[0]["source_url"] == "https://msdprojectclear.org/?p=8101"
+    old = json.loads(json.dumps(recs[0]))
+    old["raw"]["place_key"] = "overflowreportedbyjaneexample"
+    old["raw"].pop("place_key_version")
+    again, _ = M.run([], [old], AT)
+    assert "jane" not in json.dumps(again).lower()
+
+
+def test_kc_and_shared_links_treat_a_year_shaped_house_number_as_a_house_number():
+    """Verification P1-4: only a number in a date position is exempt."""
+    assert K.safe_link("https://x.org/news/overflow-at-2026-example-lane/", None) == \
+        "https://x.org/news/overflow-at-2026-example-lane/"     # no permalink to fall back on: unchanged
+    assert K.safe_link("https://x.org/news/overflow-at-2026-example-lane/", "https://x.org/news/") == "https://x.org/news/"
+    assert K.safe_link("https://x.org/news/overflow-may-27-2026/", "https://x.org/news/") == \
+        "https://x.org/news/overflow-may-27-2026/"
+    assert K.safe_link("https://x.org/news/a-slug/", "https://x.org/?post_type=news1&p=9") == \
+        "https://x.org/?post_type=news1&p=9"

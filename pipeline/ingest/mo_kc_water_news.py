@@ -273,7 +273,7 @@ def water_text(ws: list[str] | None) -> str | None:
 _PLACE_WORDS = re.compile(r"\b(?:Creek|River|Lake|Branch|Fork|Run|Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Boulevard|Blvd|"
                           r"Lane|Ln|Court|Ct|Park|Station|Plant|County|City|Heights|Valley|Hills?)\.?$")
 _PERSON = re.compile(r"\b((?i:by|from|resident|residents|homeowner|neighbou?r|caller|called|call|contact|"
-                     r"mr\.|mrs\.|ms\.|dr\.))(\s+)([A-Z][a-z]+(?:\s+[A-Z]\.)?(?:\s+[A-Z][a-z]+)?)")
+                     r"mr\.|mrs\.|ms\.|dr\.))(\s+)((?:(?:Mr|Mrs|Ms|Dr)\.?\s+)?[A-Z][a-z]+(?:\s+[A-Z]\.)?(?:\s+[A-Z][a-z]+)?)")
 
 
 def safe_text(s: str | None) -> str | None:
@@ -287,14 +287,44 @@ def safe_text(s: str | None) -> str | None:
                        f"{m.group(1)}{m.group(2)}[name removed]", s)
 
 
+MONTH_TOKENS = {"jan", "january", "feb", "february", "mar", "march", "apr", "april", "may", "jun", "june", "jul",
+                "july", "aug", "august", "sep", "sept", "september", "oct", "october", "nov", "november", "dec",
+                "december"}
+_YEAR = re.compile(r"(?:19|20)\d\d")
+
+
+def date_positions(toks: list[str]) -> set[int]:
+    """The indices of the number tokens of an address slug that stand in a date: a day after its month, a year after
+    its month or its month and day ("may-27-2026", "june-2026"), or an ISO date ("2026-05-27"). A year-shaped number
+    anywhere else ("overflow-at-2026-example-lane") is not a date and is treated as a house number (verification P1-4)."""
+    out: set[int] = set()
+    low = [t.lower() for t in toks]
+    for i, t in enumerate(low):
+        if t in MONTH_TOKENS:
+            j = i + 1
+            if j < len(toks) and toks[j].isdigit() and 1 <= int(toks[j]) <= 31 and len(toks[j]) <= 2:
+                out.add(j)
+                j += 1
+            if j < len(toks) and _YEAR.fullmatch(toks[j]):
+                out.add(j)
+        elif _YEAR.fullmatch(t) and i + 2 < len(toks) and toks[i + 1].isdigit() and toks[i + 2].isdigit() \
+                and 1 <= int(toks[i + 1]) <= 12 and 1 <= int(toks[i + 2]) <= 31 and len(toks[i + 1]) <= 2 \
+                and len(toks[i + 2]) <= 2:
+            out.update((i, i + 1, i + 2))
+    return out
+
+
+_NUMERIC_PERMALINK = re.compile(r"[?&]p=\d+$")
+
+
 def safe_link(link: str, permalink: str | None) -> str:
-    """The post's address, or its numeric permalink (?p=<id>) where the address carries a number that is not a year
-    or a day after its month (a house number in the slug; re-review P1-9)."""
+    """The post's numeric permalink (?p=<id>) whenever there is one, so a name or address in the post's slug is never
+    kept (verification P1-4); otherwise the post's address unless it carries a number outside a date position."""
+    if permalink and _NUMERIC_PERMALINK.search(permalink):
+        return permalink
     toks = re.split(r"[-/]", link.rstrip("/").rsplit("/", 1)[-1])
-    months = {"jan", "january", "feb", "february", "mar", "march", "apr", "april", "may", "jun", "june", "jul", "july",
-              "aug", "august", "sep", "sept", "september", "oct", "october", "nov", "november", "dec", "december"}
-    bad = any(t.isdigit() and not (re.fullmatch(r"(?:19|20)\d\d", t) or (i and toks[i - 1].lower() in months))
-              for i, t in enumerate(toks))
+    dated = date_positions(toks)
+    bad = any(t.isdigit() and i not in dated for i, t in enumerate(toks))
     return permalink if bad and permalink else link
 
 

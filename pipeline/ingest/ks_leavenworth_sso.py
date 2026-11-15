@@ -47,7 +47,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
-from ingest.mo_kc_water_news import DATE, _month, migrate_water_text, safe_text, sentences, water_text, waters
+from ingest.mo_kc_water_news import DATE, _month, date_positions, migrate_water_text, safe_text, sentences, water_text, waters
 
 SOURCE_ID = "ks-leavenworth-sso-transparency"
 BASE = "https://www.leavenworthks.gov"
@@ -63,22 +63,15 @@ ADVICE = re.compile(r"[^.]*\b(?:stay (?:away from|out of)|avoid)\b[^.]*\.", re.I
 POSTED = re.compile(r"Posted\s+([A-Z][a-z]+)\.?\s*(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s*([ap])\.?m", re.I)
 
 
-MONTH_TOKENS = {"jan", "january", "feb", "february", "mar", "march", "apr", "april", "may", "jun", "june", "jul", "july",
-                "aug", "august", "sep", "sept", "september", "oct", "october", "nov", "november", "dec", "december"}
-
-
 def record_id(path: str) -> str:
     """The page's path name with every number dropped but a year and a day after its month
     ("sanitary-sewer-overflow-reported-april-27-2026-evergreen-st"): the identifier carries no house or block number.
     Idempotent, so an identifier made by an earlier version maps to the same one (re-review P1-8)."""
     toks = path.rstrip("/").rsplit("/", 1)[-1].split("-")
-    out = []
-    for i, t in enumerate(toks):
-        if t.isdigit() and not (re.fullmatch(r"(?:19|20)\d\d", t) or (i and toks[i - 1].lower() in MONTH_TOKENS
-                                                                  and int(t) <= 31)):
-            continue
-        out.append(t)
-    return "-".join(out)
+    # a number is kept only in a date position: a year-shaped house number is dropped too (verification P1-4); a
+    # page's posting stamp ("-p202604271530", added where two pages share an identifier) is kept
+    dated = date_positions(toks)
+    return "-".join(t for i, t in enumerate(toks) if not t.isdigit() or i in dated)
 
 
 # raw fields an earlier version saved that the records no longer carry
@@ -102,6 +95,13 @@ def migrate(prev: list[dict]) -> dict[str, dict]:
             r["source_url"] = raw.get("cited_page") or INDEX
         raw.setdefault("cited_page", r["source_url"])
         migrate_water_text(r)
+        # every retained free-text field through the same scrub as a fresh read, for a record whose page is not read
+        # again (verification P1-4)
+        raw["title"] = safe_text(raw.get("title"))
+        r["advice_text"] = safe_text(r.get("advice_text"))
+        if r.get("outfall_name"):
+            r["outfall_name"] = re.sub(r"\[house number removed\]\s*", "", safe_text(r["outfall_name"])).strip(" .-") \
+                or None
         old = out.get(r["event_id"])
         if old:
             firsts = [x for x in (old["raw"].get("first_seen_at"), raw.get("first_seen_at")) if x]
@@ -263,12 +263,32 @@ def run(pages: dict[str, str], prev: list[dict], at: str,
     """cites: page path -> the year page that lists it (the citation without a street address)."""
     recs = migrate(prev)
     stats = {"pages": 0, "undated": 0}
-    for path, h in sorted(pages.items()):
-        r = record(path, h, at, (cites or {}).get(path))
+    read = [record(path, h, at, (cites or {}).get(path)) for path, h in sorted(pages.items())]
+    groups: dict[str, list[dict]] = {}
+    for r in read:
+        groups.setdefault(r["event_id"], []).append(r)
+    for base, rs in groups.items():
+        if len(rs) < 2:
+            continue
+        # distinct pages whose identifiers match once the house numbers are dropped (two overflows on one street on
+        # one day; verification P2-3): each gets its posting stamp, then an ordinal if that is shared too; the earlier
+        # save under the shared identifier is replaced by them (its first sighting kept)
+        legacy = recs.pop(base, None)
+        seen: dict[str, int] = {}
+        for r in rs:
+            stamp = re.sub(r"\D", "", r.get("published_at") or "")[:12]
+            rid = f"{r['source_record_id']}-p{stamp}" if stamp else r["source_record_id"]
+            seen[rid] = seen.get(rid, 0) + 1
+            if seen[rid] > 1 or not stamp:
+                rid = f"{rid}-n{seen[rid]}"
+            r["source_record_id"], r["event_id"] = rid, f"{SOURCE_ID}:{rid}"
+            if legacy:
+                r["raw"]["first_seen_at"] = (legacy.get("raw") or {}).get("first_seen_at")
+    for r in read:
         stats["pages"] += 1
         stats["undated"] += r["started_at"] is None
         old = recs.get(r["event_id"])
-        r["raw"]["first_seen_at"] = (old or {}).get("raw", {}).get("first_seen_at") or at
+        r["raw"]["first_seen_at"] = (old or {}).get("raw", {}).get("first_seen_at") or r["raw"].get("first_seen_at") or at
         recs[r["event_id"]] = r
     for r in recs.values():
         r["fetched_at"] = at
