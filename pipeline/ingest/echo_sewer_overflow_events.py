@@ -449,13 +449,24 @@ Puerto Rico (permits PR...; research/pr/profile.json; not live until data/rules.
   - Descriptions: PRASA's description field names the structure, not what happened ('EA <place> (PUMP STATION)',
     'EBAS <place>', 'PA <town> (WWTP)': estación de bombas, planta de alcantarillado), so a water word in it is a
     place name ('EBAS RIO GRANDE PLAZA') and is not read as a water reached (DESCRIPTION_IS_PLACE_STATES).
-  - Points: a point several reports of one permit share is the named pump station or plant the descriptions give
-    (each shared point carries one structure's name), which is where the overflow happened, so PR is not in
-    REPEATED_POINT_STATES or PLANT_POINT_STATES and every point is kept.
+  - Points (Astra PR review P1-4, P1-6): a report's point is the place PRASA filed. A pump station's point is where
+    its overflow happened and is kept (a point several reports of one permit share is one named station; PR is not in
+    REPEATED_POINT_STATES). A treatment plant's point is not a discharge point (PLANT_TEXT_POINT_STATES,
+    pr_plant_point): a bypass (a diversion at the plant; 77 on the 2026-11-12 extract), a report whose description
+    names a plant ('PA <town> (WWTP)', 'planta'; 16) or whose point lies within REPEATED_POINT_PLANT_M of the permit's
+    plant point (13) keeps the point only in raw.reported_point with raw.point_note; so does a point outside Puerto
+    Rico (STATE_POINT_BOX). Such a report is placed by the water it names or not at all, and every PR record carries
+    raw._placement "named_water_only", so build/provisional_outfalls.py never geolocates it from its text or stands a
+    plant point in for it. On that extract 146 of the 252 kept reports keep their own point. Points are kept to
+    0.001 degree before anything is saved (ROUND_POINT_STATES: the saved ZIP's PR rows, the record, raw, reported_point).
+  - Publication (Astra PR review P2-1): the ZIP entry's date is the extract's, not a report's publication, so PR
+    records leave published_at empty and carry raw.extract_date and raw.publication_note
+    (EXTRACT_DATE_NOT_PUBLICATION_STATES); program_report_received_date is the day EPA received the report.
   - Free text: the 796 distinct free-text values of the extract (descriptions, other structure, cause, action and
     impact texts) name structures, equipment and highways ('Carr. 306, Lajas'), no person and no street address;
     PR is in FREE_TEXT_STATES (the Illinois scrub: house numbers, phones, e-mails) and EXTRA_PERSON_SCRUB removes a
-    name after a courtesy title ('Sr.', 'Sra.', 'Ing.', 'Lcdo.') should a future report carry one.
+    name after a courtesy title ('Sr.', 'Sra.', 'Ing.', 'Lcdo.') should a future report carry one; both run on the PR
+    rows of the ZIP before it is saved (sanitize_zip, Astra PR review P1-5).
   - Combined sewer outfalls: the 12 Puerto Nuevo outfalls (PR0021555) are in data/outfalls-pr.json from PRASA's own
     layer; no report in this dataset is typed CSO, so none is matched to them.
 
@@ -542,6 +553,36 @@ ROUND_POINT_STATES = {"MN"}
 # the permit) is the plant's location, not the overflow's, with no count of repeats (module docstring, Kentucky; review
 # 2026-11-08 P2-4): the point goes to raw.reported_point and the report is placed by the water it names or not at all
 PLANT_POINT_STATES = {"KY"}
+# Puerto Rico (module docstring; Astra PR review P1-4 and P1-6): its points kept to 0.001 degree before anything is
+# saved, as Minnesota's (the saved ZIP's PR rows, the record, raw); and a report's point taken as a plant's is never a
+# discharge point (pr_plant_point): a bypass (a diversion at the treatment plant), a description naming a treatment plant,
+# or a point within REPEATED_POINT_PLANT_M of the permit's plant point; it goes to raw.reported_point and the report is
+# placed by the water it names or not at all (raw._placement "named_water_only": never geolocated from text, never
+# stood in by a plant point). A point outside STATE_POINT_BOX is not a point of the state and is treated the same way.
+ROUND_POINT_STATES |= {"PR"}
+PLANT_TEXT_POINT_STATES = {"PR"}
+# states whose records carry no per-record publication time (Astra PR review P2-1): the ZIP entry's date is the
+# extract's, not a report's publication, so it stays in raw.extract_date and the run's meta; the other states keep theirs
+EXTRACT_DATE_NOT_PUBLICATION_STATES = {"PR"}
+STATE_POINT_BOX = {"PR": (17.8, 18.6, -67.95, -65.2)}     # lat min, lat max, lon min, lon max (Mona to Culebra)
+PR_PLANT_TEXT = re.compile(r"\b(?:WWTP|WWTF|STP|WTP|PTAS|PRASA\s+plant|treatment\s+plant|planta(?:\s+de\s+"
+                           r"(?:tratamiento|alcantarillado))?|(?-i:PA\s+[A-Z]+)|PRETRATAMIENTO|PRE-?TREATMENT)\b", re.I)
+
+
+def pr_plant_point(etype: str, desc: str, point: tuple[float, float], plants: list) -> str | None:
+    """Why a Puerto Rico report's point is taken as a treatment plant's and not the discharge's, or None."""
+    if etype == "bypass":
+        return ("a bypass is a diversion of flow at the treatment plant: the report's point is the plant's, not where "
+                "the bypassed flow reached a water, so the report is placed by the water it names or not at all")
+    m = PR_PLANT_TEXT.search(desc or "")
+    if m:
+        return (f"the report's description names a treatment plant ({m.group(0)!r}): its point is taken as the "
+                "plant's, not the overflow's, so the report is placed by the water it names or not at all")
+    near = min((metres(point, p_) for p_ in plants), default=None)
+    if near is not None and near <= REPEATED_POINT_PLANT_M:
+        return (f"the report's point lies {near:.0f} m from the point EPA's plant list gives the permit: taken as the "
+                "plant's location, not the overflow's, so the report is placed by the water it names or not at all")
+    return None
 # a state's part in another zone, by the event's own point: [(lon_min, lon_max, lat_min, lat_max)], zone. The Aleutian
 # Islands west of 169 deg 30 min W are Hawaii-Aleutian time (49 CFR 71.12; the rest of Alaska 71.11); module docstring
 AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
@@ -1247,7 +1288,7 @@ def _sanitize_csv(text: str, states: set[str]) -> tuple[str, int]:
             if i < len(new) and new[i].strip():
                 st = row[pi][:2]
                 t = scrub_free_text({"t": new[i]}, ["t"])["t"]
-                fn = STATE_PERSON_SCRUB.get(st) or STATE_NAME_SCRUB.get(st)
+                fn = STATE_PERSON_SCRUB.get(st) or STATE_NAME_SCRUB.get(st) or EXTRA_PERSON_SCRUB.get(st)
                 new[i] = fn(t) if fn else t
         if new == row:
             out.append(r)
@@ -1631,7 +1672,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
     all_points = report_points(tables["events"])
     plant_pts = plant_points({p for p, _, _ in all_points}
                              | {str(e.get("permit_identifier") or "") for e in tables["events"]
-                                if str(e.get("permit_identifier") or "")[:2] in PLANT_POINT_STATES})
+                                if str(e.get("permit_identifier") or "")[:2] in PLANT_POINT_STATES | PLANT_TEXT_POINT_STATES})
     for ev in tables["events"]:
         permit = ev["permit_identifier"]
         state = permit[:2]
@@ -1772,6 +1813,18 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                               "the permit: taken as the plant's location, not the overflow's, so the report is "
                               "placed by the water it names or not at all")
                 lat = lon = coord_src = None
+        if state in STATE_POINT_BOX and lat is not None:   # module docstring, Puerto Rico
+            la0, la1, lo0, lo1 = STATE_POINT_BOX[state]
+            if not (la0 <= lat <= la1 and lo0 <= lon <= lo1):
+                plant_note = ([lat, lon], "the report's point lies outside Puerto Rico: not used, so the report is placed "
+                              "by the water it names or not at all")
+                lat = lon = coord_src = None
+        if state in PLANT_TEXT_POINT_STATES and lat is not None and coord_src == "source":
+            why_plant = pr_plant_point(etype, ev.get("sewer_overflow_bypass_description_text") or "", (lat, lon),
+                                       plant_pts.get(permit, []))
+            if why_plant:
+                plant_note = ([lat, lon], why_plant)
+                lat = lon = coord_src = None
         start, end = zoned(start, state, ev_tz), zoned(end, state, ev_tz)
         sysrow = systems.get((permit, ev.get("collection_system_identifier") or ""), {})
         d = disc.get(permit, {})
@@ -1800,6 +1853,14 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         raw.update(type_notes)
         if plant_note:
             raw["reported_point"], raw["point_note"] = plant_note
+            if state in PLANT_TEXT_POINT_STATES:
+                raw["reported_point"] = [round(float(x), 3) for x in plant_note[0]]
+        if state in PLANT_TEXT_POINT_STATES:
+            raw["_placement"] = "named_water_only"
+        if state in EXTRACT_DATE_NOT_PUBLICATION_STATES:
+            raw["extract_date"] = info.get("extract_date")
+            raw["publication_note"] = ("EPA's file gives no date each report was published; extract_date is the date of "
+                                       "the file read, and program_report_received_date the day EPA received the report")
         if state == "KY":   # the Cabinet's incident number (module docstring, Kentucky)
             m_inc = KY_INCIDENT.search(ev.get("sewer_overflow_bypass_description_text") or "")
             if m_inc:
@@ -1842,6 +1903,12 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             for k in ("latitude_measure", "longitude_measure"):
                 if raw.get(k) not in (None, ""):
                     raw[k] = f"{round(float(raw[k]), 3):.3f}"
+        elif state in PLANT_TEXT_POINT_STATES:   # Puerto Rico: the filed point of an unplaced report too (P1-6)
+            for k in ("latitude_measure", "longitude_measure"):
+                try:
+                    raw[k] = f"{round(float(raw[k]), 3):.3f}"
+                except (KeyError, TypeError, ValueError):
+                    pass
         kept.append(event(
             source_id=SOURCE_ID, source_record_id=srid, event_type=etype,
             status=status,
@@ -1852,7 +1919,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             lat=lat, lon=lon, coord_source=coord_src,
             started_at=start, ended_at=end, time_precision=precision,
             reported_at=ev.get("program_report_received_date") or None,
-            published_at=info.get("extract_date"), source_updated_at=info.get("last_modified"),
+            published_at=None if state in EXTRACT_DATE_NOT_PUBLICATION_STATES else info.get("extract_date"),
+            source_updated_at=info.get("last_modified"),
             material=MATERIAL.get(etype), volume_gal=vol_gal,
             volume_text=(f"{vol_gal:,} gallons" + (f" ({qm})" if qm else "")) if vol_gal is not None else None,
             estimate_flag=flag, authority=AUTHORITY,

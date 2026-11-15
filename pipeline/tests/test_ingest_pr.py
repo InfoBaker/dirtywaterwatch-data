@@ -100,7 +100,7 @@ def test_times_carry_atlantic_standard_time_all_year():
 def test_a_shared_point_is_the_named_station_and_is_kept():
     kept, _, _ = _by_key()
     a, b = kept["27660"], kept["4060"]
-    assert (a["lat"], a["lon"]) == (b["lat"], b["lon"]) == (18.352444, -65.69833)
+    assert (a["lat"], a["lon"]) == (b["lat"], b["lon"]) == (18.352, -65.698)
     assert "point_note" not in a["raw"] and "reported_point" not in a["raw"]
 
 
