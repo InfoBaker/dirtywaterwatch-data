@@ -5,12 +5,12 @@ homepage: "https://echo.epa.gov/trends/loading-tool/water-pollution-search"
 kind: "api"
 level: "federal"
 # Feed row: written by pipeline/ingest/in_echo_cso_monthly.py (data/build/events/in-echo-dmr-cso.json).
-# Built 2026-11-14: per permit with an open combined sewer outfall in the registry (92: IDEM's layer, else EPA's
+# Built 2026-11-14: per permit with an open combined sewer outfall in the registry (91: IDEM's layer, else EPA's
 #   inventory), the three monthly parameters IDEM's CSO permits ask per outfall ('Effluent Gross', MO TOTAL):
 #   84165 discharge events (#/mo), 50037 duration (hr/mo), 74063 overflow volume (Mgal), January 2025 to date.
 #   Real fetch: 4,484 outfall-months with a discharge from 73 permits (January 2025 to October 2026), 7,228 outfall-
 #   months filed NODI C ('No Discharge'); 22,526 million gallons and 16,489 events in all. A median 24 days from the
-#   month's end to EPA's receipt. 19 permits have no record: 18 filed no discharge or no CSO DMR in the window, and
+#   month's end to EPA's receipt. 18 permits have no record: 17 filed no discharge or no CSO DMR in the window, and
 #   ECHO calls IN0020215 an invalid NPDES ID. Indianapolis (IN0023183) has rows to December 2025 only; its 2026 DMRs
 #   were not in ECHO on 2026-11-14.
 # Records: month precision (the monthly mark, never red or yellow; build/status.py EPA_MONTHLY_SOURCES); placed at the

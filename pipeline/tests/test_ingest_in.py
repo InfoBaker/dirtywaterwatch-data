@@ -913,3 +913,21 @@ def test_a_facility_name_never_becomes_the_operator_and_permit_only_rows_are_not
     chans = json.loads((ROOT / "data" / "notice-channels" / "in.json").read_text())["channels"]
     names = {c.get("operator_id"): json.dumps(c) for c in chans if c.get("operator_id") == "in-in0042960"}
     assert names and "Putnamville" not in "".join(names.values())
+
+
+def test_the_public_claims_match_the_build():
+    """Astra re-review 2026-11-14 P2-9: the permit count is the registry's, the lag is EPA's receipt (not publication),
+    and the rain caution is qualified by location and placement wherever it is described."""
+    import re
+
+    from ingest import in_echo_cso_monthly as M
+    n = len(M.permits_to_read(M.registry_outfalls()))
+    text = (ROOT / "research" / "in" / "state-text.md").read_text()
+    m = re.search(r"from (\d+) of the (\d+) permits with an open combined sewer outfall", text)
+    assert m and int(m.group(2)) == n == 91
+    assert "appearing a median" not in text and "received a median of 24 days" in text
+    for p in ("research/in/sources.json", "scripts/add_in_register_rows.py", "data/sources/in-echo-dmr-cso.yaml"):
+        assert "92 permits" not in (ROOT / p).read_text() and "(92:" not in (ROOT / p).read_text(), p
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    assert "rain caution at every open" not in json.dumps(rules)
+    assert "with a location once the outfall is placed on its water" in json.dumps(rules)
