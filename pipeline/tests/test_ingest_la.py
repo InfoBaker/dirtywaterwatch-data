@@ -361,3 +361,20 @@ def test_dash_variants_and_parish_departments_name_the_permittee():
     assert len(held) == len(set(held)) and "LA0073539" in held
     owner_row = [o for o in rows if "LA0073539" in (o.get("npdes_permits") or [])][0]
     assert owner_row["id"] == "la-st-charles-parish-council"
+
+
+def test_baton_rouge_source_descriptions_follow_the_counts_and_the_reread_rule():
+    """Re-review P2-10: the YAMLs' counts add up and their cadence is the code's."""
+    feed = (ROOT / "data" / "sources" / "la-baton-rouge-quarterly.yaml").read_text()
+    reports = (ROOT / "data" / "sources" / "la-baton-rouge-quarterly-reports.yaml").read_text()
+    pairs = re.search(r"\((\d+) discharges: ([\d+, ]+)\)", feed)
+    assert int(pairs.group(1)) == sum(int(x) for x in re.findall(r"\d+", pairs.group(2))) == 219
+    assert "102 of the 219 rows" in feed and "(most rows)" not in feed
+    for text in (feed, reports):
+        assert "fetched once each" not in text and "each report fetched once" not in text
+        assert f"every {Q.REREAD_DAYS} days" in text
+    state = ROOT / "data" / "build" / "la-baton-rouge-state.json"
+    if state.is_file():                       # the fetched reports, where this clone holds them
+        recs = Q.records(json.loads(state.read_text()))
+        none = [r for r in recs if (r.get("waterbody_text") or "").strip().lower() in Q.NO_WATER]
+        assert len(recs) == 219 and len(none) == 102
