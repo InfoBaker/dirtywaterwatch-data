@@ -1,0 +1,23 @@
+id: "ia-waterloo-sso-notices"
+name: "City of Waterloo SSO & Bypass Public Notification"
+url: "https://www.ci.waterloo.ia.us/departments/waste_management/sso_and_bypass_public_notification.php"
+homepage: "https://www.ci.waterloo.ia.us/departments/waste_management/sso_and_bypass_public_notification.php"
+kind: "html"
+level: "operator"
+# Read by ingest/ia_waterloo_sso.py: the list "Recent SSO and Bypass Events", one paragraph per event: start (or the
+#   time the City was notified) to the minute, the place (street or lift station; house numbers removed), gallons,
+#   duration or stop time, cause. No receiving water and no point: placed on no water, listed with Black Hawk County.
+# Real read 2026-11-14: 17 notices (2025-10-23 to 2026-10-01; 13 on 2026-10-01 in one wet-weather event); 16 with an
+#   end from the stated duration or stop time, 1 with none; 14 with gallons (1,785,390 in all).
+cadence: "hourly with the refresh"
+license: "none stated"
+attribution: "City of Waterloo Waste Management Services"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["IA"]
+access: ["html"]
+access_detail: "Public page; the linked folder of report forms is not read."
+machine_readable: false
+legal_basis: "567 IAC 63.6; the City: 'under the Iowa Department of Natural Resources (IADNR) and Environmental Protection Agency (EPA) the city is required to notify the public'"
+checked: "2026-11-14"
