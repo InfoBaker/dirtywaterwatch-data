@@ -1321,3 +1321,22 @@ def test_a_link_the_former_closeness_rule_wrote_is_removed_unless_reviewed(monke
     again = {r["event_id"]: r for r in json.loads(out.read_text())["records"]}
     assert not again[ra["event_id"]].get("duplicate_of")
     assert again[ra["event_id"]]["raw"]["_duplicate_link_removed"] == got["raw"]["_duplicate_link_removed"]
+
+
+SNAPSHOT = R.ROOT / "data" / "raw" / "ar-deq-overflow-incidents" / "20261114T181220Z.json"
+
+
+@pytest.mark.skipif(not SNAPSHOT.exists(), reason="the 2026-11-14 safe-rows snapshot is in data/raw, not in git")
+def test_the_state_texts_report_counts_follow_the_snapshot_replay(tmp_path):
+    """Verification 3 P3: the state text's counts are the replay of the 2026-11-14 read (distinct reports, a repeat
+    of a confirmation number counted once): reports naming a water, reports with no stop day, a stop day before the
+    start."""
+    out = tmp_path / "ev.json"
+    assert M.main(["--file", str(SNAPSHOT), "--out", str(out)]) == 0
+    recs = [r for r in json.loads(out.read_text())["records"] if not r.get("duplicate_of")]
+    named = sum(1 for r in recs if r.get("waterbody_text"))
+    no_stop = sum(1 for r in recs if not (r["raw"]["row"].get("date_stopped") or "").strip())
+    before = sum(1 for r in recs if (r["raw"]["row"].get("date_stopped") or "").strip() and not r.get("ended_at"))
+    text = (R.ROOT / "research" / "ar" / "state-text.md").read_text()
+    assert (len(recs), named, no_stop, before) == (2398, 237, 81, 9)
+    assert "as 237 reports do" in text and "Eighty-one reports give no day" in text and "nine give a day before" in text
