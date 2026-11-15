@@ -38,7 +38,10 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
     that update's day (red.event; the site's 72-hour caution counts from the stop, review P1-3). "Have been removed"
     with no stop: red to the end of that day, then the end is not confirmed, as above. The removal's own day is never
     given (raw.signs.removal_note, raw.signs.removal_done). Without signs: ended at the stop day, else unknown with
-    no end.
+    no end. Only an affirmative removal counts: a negated, planned-on-a-condition or conditional sentence ("crews have
+    not removed the signs", "will be removed when the water tests clean") is neither a removal done nor one announced,
+    and the signs stand (removal_done, removal_announced). The signs' day is the earliest notice that gives them,
+    whatever order the page lists its updates in (verification pass 2 2026-11-15 P1-1).
   - Water: "Wastewater reached nearby Mud Pond" gives waterbody_text "Mud Pond" (raw.reached_water true). "No waterbodies
     were impacted" is raw.reached_water false with the Council's words (kept, placed on no water). A water named only
     as nearby or tested and found unaffected ("Bassett Creek and Wirth Lake are nearby", "did not impact the water
@@ -58,7 +61,9 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
   - Privacy: the pages carry the Council's office contact only. data/raw keeps the index and, per page, its title, its
     dated headings and its text's hash, not the narrative (raw_save_doc); the record's quoted sentences (NARRATIVE_KEYS)
     and advice go through common.strip_personal, scrub_text, the house-number scrub and the strict scrub with names
-    (scrubbed(); review P1-6, re-review P1-5).
+    (scrubbed(); review P1-6, re-review P1-5). The index label is scrubbed before the town is taken from it (raw.city,
+    raw.county_basis, meta.cities_without_county), and a failed run writes the previous records scrubbed the same way
+    (ok false, partial; verification pass 2 2026-11-15 P1-3).
 
 Run from pipeline/:  python -m ingest.mn_mces_spill_notices [--dir saved_dir]   (index.html and the pages by name)
 """
@@ -131,6 +136,34 @@ SIGNS_DOWN = re.compile(r"\b(?:signs?)\b[^.]*\b(?:will be|have been|has been|wer
 # a removal done (the signs are down by the update's day), not one announced for later ("will be removed next week")
 SIGNS_REMOVED = re.compile(r"\bsigns?\b[^.]*\b(?:have been|has been|were|are now)\s+removed\b|\bremoved the\b[^.]*\bsigns?\b",
                            re.I)
+# a removal sentence counts only when it is affirmative: a negated one ("crews have not removed the signs", "the signs
+# have yet to be removed") or a planned or conditional one ("will be removed when the water tests clean", "if") is no
+# removal, done or announced; the signs' own quoted wording ("Do Not Enter") is set aside first (verification pass 2
+# 2026-11-15 P1-1)
+REMOVAL_NEG = re.compile(r"\b(?:not|never|no|yet\s+to|unable|cannot|fail(?:ed|s)?)\b|n['’]t\b", re.I)
+REMOVAL_MODAL = re.compile(r"\b(?:will|would|shall|should|may|might|could|can|plan(?:s|ned)?|expect(?:s|ed)?|"
+                           r"intend(?:s|ed)?|going\s+to|scheduled|if|unless|until|once|pending|provided)\b", re.I)
+REMOVAL_CONDITION = re.compile(r"\b(?:if|unless|until|once|when|whenever|pending|provided|after\s+(?:the\s+)?"
+                               r"(?:water|area|results?|tests?|sampl\w*)|as\s+soon\s+as|depending)\b", re.I)
+
+
+def _plain_sentences(text: str) -> list[str]:
+    """The text's sentences with quoted wording (the signs' own "Do Not Enter") set aside."""
+    t = re.sub(r"[“\"][^”\"]*[”\"]", "\"\"", text or "")
+    return [x for x in re.split(r"(?<=[.!?])\s+", t) if x.strip()]
+
+
+def removal_done(text: str) -> bool:
+    """An affirmative, completed removal of the signs in this text (never a negated, planned or conditional one)."""
+    return any(SIGNS_REMOVED.search(x) and not REMOVAL_NEG.search(x) and not REMOVAL_MODAL.search(x)
+               for x in _plain_sentences(text))
+
+
+def removal_announced(text: str) -> bool:
+    """A removal announced for later without a condition ("will be removed", "will be removed next week"); a negated
+    or conditional one ("will not be removed", "will be removed when ...") is no announcement."""
+    return any(SIGNS_DOWN.search(x) and not REMOVAL_NEG.search(x) and not REMOVAL_CONDITION.search(x)
+               for x in _plain_sentences(text))
 
 
 def slug(s: str) -> str:
@@ -206,7 +239,7 @@ def scrubbed(o):
 # (the revision history's headings and the index label included, carried ones too; verification pass 2026-11-15 P1-5)
 NARRATIVE_KEYS = ("title", "location_text", "spill_stopped_words", "_reached_water_words", "_no_water_reason",
                   "updates", "signs", "time_of_day_words", "_revisions", "label", "_window_end_words", "end_basis",
-                  "advisory_from_basis")
+                  "advisory_from_basis", "city", "county_basis")
 
 
 def scrub_narrative(rec: dict) -> dict:
@@ -244,12 +277,15 @@ def label_city_month(label: str) -> tuple[str | None, int | None, int | None]:
 
 
 def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> dict:
-    city_label, lab_month, lab_year = label_city_month(item.get("label") or "")
+    # the index label scrubbed before anything is derived from it: the town (raw.city, raw.county_basis,
+    # meta.cities_without_county) never carries what the label's scrub removes (verification pass 2 2026-11-15 P1-3)
+    label = scrubbed(item.get("label") or "") or None
+    city_label, lab_month, lab_year = label_city_month(label or "")
     intro, updates = parsed["intro"], parsed["updates"]
     perr = []
     m = RESPONDED.search(intro)
     start = None
-    raw: dict = {"label": item.get("label"), "title": parsed["title"], "time_zone": TZ, "page_url": item["url"],
+    raw: dict = {"label": label, "title": parsed["title"], "time_zone": TZ, "page_url": item["url"],
                  "index_url": INDEX_URL}
     if m:
         mo, dy = MONTHS[m.group("month").lower()], int(m.group("day"))
@@ -328,9 +364,15 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
     if stopped:
         raw["spill_stopped_on"] = stopped.isoformat()
     # the Council's signs: its own advisory
-    up = next(((u["date"], x) for u in [{"date": start.isoformat() if start else None, "text": intro}] + updates
-               for x in [SIGNS_UP.search(u["text"])] if x), None)
-    down = next((u for u in updates if SIGNS_DOWN.search(u["text"])), None)
+    # the signs are first documented on the earliest notice that gives them, whatever order the page lists its updates
+    # in (the Council lists the newest first): a newer update that repeats the wording never moves it later
+    # (verification pass 2 2026-11-15 P1-1); the first account is dated the response day
+    ups = [(u["date"], x) for u in [{"date": start.isoformat() if start else None, "text": intro}] + updates
+           for x in [SIGNS_UP.search(u["text"])] if x]
+    up = min(ups, key=lambda t: t[0] or "") if ups else None
+    after_up = sorted((u for u in updates if not up or not up[0] or u["date"] >= up[0]), key=lambda u: u["date"])
+    # a removal announced: the latest such update (the signs stood to its day at least)
+    down = next((u for u in reversed(after_up) if removal_announced(u["text"])), None)
     status, ended, advice = ("ended" if stopped else "unknown"), (stopped.isoformat() if stopped else None), None
     window_h, window_basis = None, None
     tz = ZoneInfo(TZ)
@@ -352,7 +394,8 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
                                        "ended_at_precision": "day" if stopped else None}
             raw["advisory_from_basis"] = (f"the Council's signs are first given in its notice of {up[0]}, after the day "
                                           f"it responded ({start.isoformat()}): its window starts on that notice's day")
-        done = next((u for u in updates if SIGNS_REMOVED.search(u["text"])), None)
+        # a removal done: the earliest update on or after the signs' notice that says so affirmatively
+        done = next((u for u in after_up if removal_done(u["text"])), None)
         if down or done:
             said = done or down
             d = date.fromisoformat(said["date"])
@@ -471,7 +514,7 @@ def build(index_page: str, pages: dict[str, str | None], fetched: str, previous:
     recs = sorted((scrub_narrative(json.loads(json.dumps(r))) for r in out.values()), key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r["event_id"]),
                   reverse=True)
     meta = {"registry_ids": [SOURCE_ID], "url": INDEX_URL, "on_index": len(items), "pages_unread": unread,
-            "kept_from_previous": kept, "cities_without_county": sorted({c for c in no_county if c}),
+            "kept_from_previous": kept, "cities_without_county": sorted({scrubbed(c) for c in no_county if c}),
             "advisory_active": sum(1 for r in recs if r["status"] == "advisory_active"),
             "cadence": "index and each listed page read every run; the Council posts and updates a page per spill",
             "credit": "Metropolitan Council Environmental Services",
@@ -490,7 +533,8 @@ def fetch(url: str) -> str:
 def main(argv=None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     fetched = now_iso()
-    prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
+    prev_doc = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+    prev = prev_doc.get("records", [])
     try:
         if "--dir" in argv:
             d = Path(argv[argv.index("--dir") + 1])
@@ -513,7 +557,14 @@ def main(argv=None) -> int:
         if meta["pages_unread"]:
             raise RuntimeError(f"spill pages not read: {', '.join(meta['pages_unread'])}")
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
+        # the previous records are kept, but scrubbed as a successful run scrubs them (their quoted fields, revision
+        # headings and town included), so a failed run never re-saves text written before a scrub rule existed;
+        # health stays false and last_ok_at the previous one (partial; verification pass 2 2026-11-15 P1-3)
+        kept = [scrub_narrative(json.loads(json.dumps(p))) for p in prev]
+        cities = (prev_doc.get("meta") or {}).get("cities_without_county")
+        write_events(SOURCE_ID, kept, ok=False, partial=True, error=f"{type(e).__name__}: {e}",
+                     meta={"cities_without_county": sorted({scrubbed(c) for c in cities if c})}
+                     if isinstance(cities, list) else None)
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
