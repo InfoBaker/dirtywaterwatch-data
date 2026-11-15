@@ -129,6 +129,8 @@ def operator_rows(dis: list[dict]) -> list[dict]:
         if op.get("state") != "ND":
             continue
         oid, name, permit = op["id"], op["name"], op.get("npdes_permit")
+        if op.get("permit_only"):
+            continue        # the permittee is not established: no operator row (re-review 2026-11-14 P2-3)
         rows.append(finish(base(
             id=f"{oid}-spill-report", operator_id=oid, name=name, permit=permit, channel_kind="state_alert_page",
             urls=[HAZ], method="html", legal_basis=LAW, basis_kind="law", monitored=False,

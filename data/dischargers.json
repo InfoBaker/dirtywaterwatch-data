@@ -451387,7 +451387,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -451453,7 +451453,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -451517,7 +451517,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -451568,8 +451568,8 @@
  },
  {
   "id": "mn-arlington-wwtp",
-  "name": "Arlington WWTP",
-  "short_name": "Arlington WWTP",
+  "name": "Permit MN0020834 (Arlington WWTP)",
+  "short_name": "Permit MN0020834 (Arlington WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -451583,13 +451583,14 @@
   "water_slugs": [],
   "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 outfalls of 3 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Arlington"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Arlington WWTP (MN0020834).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Arlington WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Municipal or Water District). Plants: Arlington WWTP (MN0020834).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -451649,7 +451650,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -451680,7 +451681,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -451779,7 +451780,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -452237,7 +452238,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -452303,7 +452304,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -467493,7 +467494,7 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 outfalls of 2 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -467559,7 +467560,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -467742,8 +467743,8 @@
  },
  {
   "id": "mn-detroit-lakes-water-reclamation-facility",
-  "name": "Detroit Lakes Water Reclamation Facility",
-  "short_name": "Detroit Lakes Water Reclamation Facility",
+  "name": "Permit MN0020192 (Detroit Lakes Water Reclamation Facility)",
+  "short_name": "Permit MN0020192 (Detroit Lakes Water Reclamation Facility)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -467757,13 +467758,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Detroit Lakes"
   ],
-  "notes": "Owner: EPA ICIS-NPDES facility name (no permittee of record). Plants: Detroit Lakes Water Reclamation Facility (MN0020192).",
+  "notes": "Permit only: EPA ICIS-NPDES facility name (no permittee of record) gives only the plant's name ('Detroit Lakes Water Reclamation Facility'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Municipality). Plants: Detroit Lakes Water Reclamation Facility (MN0020192).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -467907,8 +467909,8 @@
  },
  {
   "id": "mn-east-grand-forks-wwtp",
-  "name": "East Grand Forks WWTP",
-  "short_name": "East Grand Forks WWTP",
+  "name": "Permit MN0021814 (East Grand Forks WWTP)",
+  "short_name": "Permit MN0021814 (East Grand Forks WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -467922,13 +467924,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "East Grand Forks"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: East Grand Forks WWTP (MN0021814).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('East Grand Forks WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: POTW). Plants: East Grand Forks WWTP (MN0021814).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -468072,8 +468075,8 @@
  },
  {
   "id": "mn-franklin-wwtp",
-  "name": "Franklin WWTP",
-  "short_name": "Franklin WWTP",
+  "name": "Permit MN0021083 (Franklin WWTP)",
+  "short_name": "Permit MN0021083 (Franklin WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -468085,13 +468088,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Franklin"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Franklin WWTP (MN0021083).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Franklin WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: POTW). Plants: Franklin WWTP (MN0021083).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -468249,7 +468253,7 @@
   "water_slugs": [],
   "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 outfalls of 3 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -468280,7 +468284,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -468379,7 +468383,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -468412,7 +468416,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -468478,7 +468482,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -468639,7 +468643,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -468672,7 +468676,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -469035,7 +469039,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -469299,7 +469303,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [],
@@ -469379,8 +469383,8 @@
  },
  {
   "id": "mn-madison-wwtp",
-  "name": "Madison WWTP",
-  "short_name": "Madison WWTP",
+  "name": "Permit MN0051764 (Madison WWTP)",
+  "short_name": "Permit MN0051764 (Madison WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -469392,13 +469396,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Madison"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Madison WWTP (MN0051764).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Madison WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: POTW). Plants: Madison WWTP (MN0051764).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -469578,7 +469583,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -469712,7 +469717,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -469745,7 +469750,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -469878,7 +469883,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -469932,8 +469937,8 @@
  },
  {
   "id": "mn-montevideo-wwtp",
-  "name": "Montevideo WWTP",
-  "short_name": "Montevideo WWTP",
+  "name": "Permit MN0020133 (Montevideo WWTP)",
+  "short_name": "Permit MN0020133 (Montevideo WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -469945,13 +469950,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Montevideo"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Montevideo WWTP (MN0020133).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Montevideo WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Municipal or Water District). Plants: Montevideo WWTP (MN0020133).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -469963,8 +469969,8 @@
  },
  {
   "id": "mn-montgomery-wwtp",
-  "name": "Montgomery WWTP",
-  "short_name": "Montgomery WWTP",
+  "name": "Permit MN0024210 (Montgomery WWTP)",
+  "short_name": "Permit MN0024210 (Montgomery WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -469976,13 +469982,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Montgomery"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Montgomery WWTF (MN0024210).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Montgomery WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: POTW). Plants: Montgomery WWTF (MN0024210).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -469994,8 +470001,8 @@
  },
  {
   "id": "mn-moose-lake-wwtp",
-  "name": "Moose Lake WWTP",
-  "short_name": "Moose Lake WWTP",
+  "name": "Permit MN0020699 (Moose Lake WWTP)",
+  "short_name": "Permit MN0020699 (Moose Lake WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -470009,13 +470016,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Moose Lake"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Moose Lake WWTP (MN0020699).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Moose Lake WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: POTW). Plants: Moose Lake WWTP (MN0020699).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -470076,7 +470084,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -470094,8 +470102,8 @@
  },
  {
   "id": "mn-new-prague-wwtp",
-  "name": "New Prague WWTP",
-  "short_name": "New Prague WWTP",
+  "name": "Permit MN0020150 (New Prague WWTP)",
+  "short_name": "Permit MN0020150 (New Prague WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -470109,13 +470117,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "New Prague"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: New Prague WWTP (MN0020150).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('New Prague WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Municipal or Water District). Plants: New Prague WWTP (MN0020150).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -470206,7 +470215,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -470356,8 +470365,8 @@
  },
  {
   "id": "mn-odin-ormsby-wwtp",
-  "name": "Odin-Ormsby WWTP",
-  "short_name": "Odin-Ormsby WWTP",
+  "name": "Permit MN0069442 (Odin-Ormsby WWTP)",
+  "short_name": "Permit MN0069442 (Odin-Ormsby WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -470371,13 +470380,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Ormsby"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Odin-Ormsby WWTP (MN0069442).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Odin-Ormsby WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: POTW). Plants: Odin-Ormsby WWTP (MN0069442).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -470699,7 +470709,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -470831,7 +470841,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -470897,7 +470907,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -470930,7 +470940,7 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 outfalls of 2 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -471161,7 +471171,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -471192,7 +471202,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -471276,8 +471286,8 @@
  },
  {
   "id": "mn-shakopee-mdewakanton-sioux-wrf",
-  "name": "Shakopee Mdewakanton Sioux WRF",
-  "short_name": "Shakopee Mdewakanton Sioux WRF",
+  "name": "Permit MN0067938 (Shakopee Mdewakanton Sioux WRF)",
+  "short_name": "Permit MN0067938 (Shakopee Mdewakanton Sioux WRF)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -471289,13 +471299,14 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 outfalls of 2 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Prior Lake"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Smsc Water Reclamation Facility (MN0067938).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Shakopee Mdewakanton Sioux WRF'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Municipal or Water District). Plants: Smsc Water Reclamation Facility (MN0067938).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -471452,7 +471463,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -471518,7 +471529,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -471536,8 +471547,8 @@
  },
  {
   "id": "mn-stephen-wastewater-treatment-facility",
-  "name": "Stephen Wastewater Treatment Facility",
-  "short_name": "Stephen Wastewater Treatment Facility",
+  "name": "Permit MNG585162 (Stephen Wastewater Treatment Facility)",
+  "short_name": "Permit MNG585162 (Stephen Wastewater Treatment Facility)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -471551,13 +471562,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Stephen"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Stephen WWTP (MNG585162).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Stephen Wastewater Treatment Facility'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Privately Owned Facility). Plants: Stephen WWTP (MNG585162).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -471584,7 +471596,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -471617,7 +471629,7 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 outfalls of 2 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -471648,7 +471660,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -471681,7 +471693,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -471748,7 +471760,7 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 outfalls of 2 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -471995,8 +472007,8 @@
  },
  {
   "id": "mn-wabasso-wwtp",
-  "name": "Wabasso WWTP",
-  "short_name": "Wabasso WWTP",
+  "name": "Permit MN0025151 (Wabasso WWTP)",
+  "short_name": "Permit MN0025151 (Wabasso WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -472008,13 +472020,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Wabasso"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Wabasso WWTF (MN0025151).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Wabasso WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: POTW). Plants: Wabasso WWTF (MN0025151).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -472363,8 +472376,8 @@
  },
  {
   "id": "mn-whitewater-river-wwtp",
-  "name": "Whitewater River WWTP",
-  "short_name": "Whitewater River WWTP",
+  "name": "Permit MN0046868 (Whitewater River WWTP)",
+  "short_name": "Permit MN0046868 (Whitewater River WWTP)",
   "legal_form": null,
   "state": "MN",
   "kind": "plant",
@@ -472378,13 +472391,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Saint Charles"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Whitewater River Regional WWTP (MN0046868).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Whitewater River WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Municipality). Plants: Whitewater River Regional WWTP (MN0046868).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -472442,7 +472456,7 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -472547,7 +472561,7 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
-  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a private sewer system owner as it binds a public one.",
+  "notification_channel": "Minn. Stat. 115.061: (a) every person must notify the Minnesota Pollution Control Agency immediately (through the Minnesota Duty Officer) of a discharge that may pollute waters of the state; (c) promptly after that, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient means it has (in person, telephone, radio, social media, a web page or another expedited form), post signs at impacted public use areas or tell the body that runs them, and give the date and time of the discharge, the material, a warning of the health risk and its contact. The Duty Officer's reports are not published and no statewide list of the notices exists. Its own public channel was not searched individually. The statute binds a privately owned domestic sewer system owner as it binds a public one.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
@@ -472835,9 +472849,9 @@
  },
  {
   "id": "nd-cannonball-lagoon",
-  "name": "Cannonball Lagoon",
-  "short_name": "Cannonball Lagoon",
-  "legal_form": "tribal",
+  "name": "Permit NDG589315 (Cannonball Lagoon)",
+  "short_name": "Permit NDG589315 (Cannonball Lagoon)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589315",
@@ -472850,13 +472864,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Cannon Ball"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Cannonball Lagoon (NDG589315).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Cannonball Lagoon'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: Cannonball Lagoon (NDG589315).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -482167,9 +482182,9 @@
  },
  {
   "id": "nd-east-dunseith-wastewater-treatment-lagoons",
-  "name": "East Dunseith Wastewater Treatment Lagoons",
-  "short_name": "East Dunseith Wastewater Treatment Lagoons",
-  "legal_form": "tribal",
+  "name": "Permit NDG589402 (East Dunseith Wastewater Treatment Lagoons)",
+  "short_name": "Permit NDG589402 (East Dunseith Wastewater Treatment Lagoons)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589402",
@@ -482182,13 +482197,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Rolette"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: East Dunseith Wastewater Treatment Lagoons (NDG589402).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('East Dunseith Wastewater Treatment Lagoons'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: East Dunseith Wastewater Treatment Lagoons (NDG589402).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -482368,9 +482384,9 @@
  },
  {
   "id": "nd-fort-yates-lagoon-system",
-  "name": "Fort Yates Lagoon System",
-  "short_name": "Fort Yates Lagoon System",
-  "legal_form": "tribal",
+  "name": "Permit NDG589312 (Fort Yates Lagoon System)",
+  "short_name": "Permit NDG589312 (Fort Yates Lagoon System)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589312",
@@ -482381,13 +482397,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Fort Yates"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Fort Yates Lagoon System (NDG589312).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Fort Yates Lagoon System'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: Fort Yates Lagoon System (NDG589312).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -482465,9 +482482,9 @@
  },
  {
   "id": "nd-garrison-power-plant",
-  "name": "Garrison Power Plant",
-  "short_name": "Garrison Power Plant",
-  "legal_form": "federal facility",
+  "name": "Permit ND0020605 (Garrison Power Plant)",
+  "short_name": "Permit ND0020605 (Garrison Power Plant)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "ND0020605",
@@ -482481,13 +482498,14 @@
   "water_slugs": [],
   "outfall_count": 10,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 10 outfalls of 10 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Riverdale"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Garrison Power Plant (ND0020605).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Garrison Power Plant'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Federal Facility (U.S. Government)). Plants: Garrison Power Plant (ND0020605).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -482567,9 +482585,9 @@
  },
  {
   "id": "nd-grand-forks-wtp",
-  "name": "Grand Forks WTP",
-  "short_name": "Grand Forks WTP",
-  "legal_form": "city",
+  "name": "Permit ND0000191 (Grand Forks WTP)",
+  "short_name": "Permit ND0000191 (Grand Forks WTP)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "ND0000191",
@@ -482582,13 +482600,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Grand Forks"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Grand Forks WTP (ND0000191).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Grand Forks WTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: POTW). Plants: Grand Forks WTP (ND0000191).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -482633,9 +482652,9 @@
  },
  {
   "id": "nd-green-acres-wastewater-treatment-lagoons",
-  "name": "Green Acres Wastewater Treatment Lagoons",
-  "short_name": "Green Acres Wastewater Treatment Lagoons",
-  "legal_form": "tribal",
+  "name": "Permit NDG589403 (Green Acres Wastewater Treatment Lagoons)",
+  "short_name": "Permit NDG589403 (Green Acres Wastewater Treatment Lagoons)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589403",
@@ -482648,13 +482667,14 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 outfalls of 2 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Rolette"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Green Acre Wastewater Treatment Lagoons (NDG589403).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Green Acres Wastewater Treatment Lagoons'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: Green Acre Wastewater Treatment Lagoons (NDG589403).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -482866,9 +482886,9 @@
  },
  {
   "id": "nd-kenel-lagoon",
-  "name": "Kenel Lagoon",
-  "short_name": "Kenel Lagoon",
-  "legal_form": "tribal",
+  "name": "Permit NDG589311 (Kenel Lagoon)",
+  "short_name": "Permit NDG589311 (Kenel Lagoon)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589311",
@@ -482881,13 +482901,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Fort Yates"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Kenel Lagoon System (NDG589311).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Kenel Lagoon'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: Kenel Lagoon System (NDG589311).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -483029,9 +483050,9 @@
  },
  {
   "id": "nd-maddock-wtp",
-  "name": "Maddock WTP",
-  "short_name": "Maddock WTP",
-  "legal_form": "city",
+  "name": "Permit NDG320346 (Maddock WTP)",
+  "short_name": "Permit NDG320346 (Maddock WTP)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG320346",
@@ -483044,13 +483065,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Maddock"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: City of Maddock (NDG320346).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Maddock WTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Municipal or Water District). Plants: City of Maddock (NDG320346).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -483096,8 +483118,8 @@
  },
  {
   "id": "nd-mandaree-lagoon",
-  "name": "Mandaree Lagoon",
-  "short_name": "Mandaree Lagoon",
+  "name": "Permit NDG589102 (Mandaree Lagoon)",
+  "short_name": "Permit NDG589102 (Mandaree Lagoon)",
   "legal_form": null,
   "state": "ND",
   "kind": "plant",
@@ -483109,13 +483131,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "New Town"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Mandaree Lagoon (NDG589102).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Mandaree Lagoon'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: POTW). Plants: Mandaree Lagoon (NDG589102).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -483362,8 +483385,8 @@
  },
  {
   "id": "nd-new-town-water-resource-recovery-facility",
-  "name": "New Town Water Resource Recovery Facility",
-  "short_name": "New Town Water Resource Recovery Facility",
+  "name": "Permit NDG589108 (New Town Water Resource Recovery Facility)",
+  "short_name": "Permit NDG589108 (New Town Water Resource Recovery Facility)",
   "legal_form": null,
   "state": "ND",
   "kind": "plant",
@@ -483378,13 +483401,14 @@
   "water_slugs": [],
   "outfall_count": 3,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 outfalls of 3 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "New Town"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: New Town Water Resource Recovery Facility (NDG589108).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('New Town Water Resource Recovery Facility'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: County Government). Plants: New Town Water Resource Recovery Facility (NDG589108).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -483555,9 +483579,9 @@
  },
  {
   "id": "nd-ojibwa-millennium-school-wastewater-treatment-lagoons",
-  "name": "Ojibwa Millennium School Wastewater Treatment Lagoons",
-  "short_name": "Ojibwa Millennium School Wastewater Treatment Lagoons",
-  "legal_form": "tribal",
+  "name": "Permit NDG589410 (Ojibwa Millennium School Wastewater Treatment Lagoons)",
+  "short_name": "Permit NDG589410 (Ojibwa Millennium School Wastewater Treatment Lagoons)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589410",
@@ -483570,13 +483594,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Rolette County"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Ojibwa Millennium School Wwt Lagoons (NDG589410).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Ojibwa Millennium School Wastewater Treatment Lagoons'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: Ojibwa Millennium School Wwt Lagoons (NDG589410).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -483588,8 +483613,8 @@
  },
  {
   "id": "nd-parshall-wastewater-treatment-facility",
-  "name": "Parshall Wastewater Treatment Facility",
-  "short_name": "Parshall Wastewater Treatment Facility",
+  "name": "Permit NDG589109 (Parshall Wastewater Treatment Facility)",
+  "short_name": "Permit NDG589109 (Parshall Wastewater Treatment Facility)",
   "legal_form": null,
   "state": "ND",
   "kind": "plant",
@@ -483603,13 +483628,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Parshall"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Parshall Wastewater Treatment Facility (NDG589109).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Parshall Wastewater Treatment Facility'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Municipal or Water District). Plants: Parshall Wastewater Treatment Facility (NDG589109).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -483652,9 +483678,9 @@
  },
  {
   "id": "nd-porcupine-lagoon",
-  "name": "Porcupine Lagoon",
-  "short_name": "Porcupine Lagoon",
-  "legal_form": "tribal",
+  "name": "Permit NDG589305 (Porcupine Lagoon)",
+  "short_name": "Permit NDG589305 (Porcupine Lagoon)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589305",
@@ -483667,13 +483693,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Fort Yates"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Porcupine Community Lagoon System (NDG589305).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Porcupine Lagoon'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: Porcupine Community Lagoon System (NDG589305).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -483879,9 +483906,9 @@
  },
  {
   "id": "nd-rock-creek-lagoon",
-  "name": "Rock Creek Lagoon",
-  "short_name": "Rock Creek Lagoon",
-  "legal_form": "tribal",
+  "name": "Permit NDG589308 (Rock Creek Lagoon)",
+  "short_name": "Permit NDG589308 (Rock Creek Lagoon)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589308",
@@ -483892,13 +483919,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Fort Yates"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Rock Creek Lagoon System (Bullhead Lagoons) (NDG589308).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Rock Creek Lagoon'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: Rock Creek Lagoon System (Bullhead Lagoons) (NDG589308).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -483910,9 +483938,9 @@
  },
  {
   "id": "nd-san-haven-wastewater-treatment-lagoons",
-  "name": "San Haven Wastewater Treatment Lagoons",
-  "short_name": "San Haven Wastewater Treatment Lagoons",
-  "legal_form": "tribal",
+  "name": "Permit NDG589405 (San Haven Wastewater Treatment Lagoons)",
+  "short_name": "Permit NDG589405 (San Haven Wastewater Treatment Lagoons)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589405",
@@ -483925,13 +483953,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Rolette County"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: San Haven Wastewater Treatment Lagoons (NDG589405).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('San Haven Wastewater Treatment Lagoons'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: San Haven Wastewater Treatment Lagoons (NDG589405).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -484073,9 +484102,9 @@
  },
  {
   "id": "nd-shell-valley-wastewater-treatment-lagoons",
-  "name": "Shell Valley Wastewater Treatment Lagoons",
-  "short_name": "Shell Valley Wastewater Treatment Lagoons",
-  "legal_form": "tribal",
+  "name": "Permit NDG589406 (Shell Valley Wastewater Treatment Lagoons)",
+  "short_name": "Permit NDG589406 (Shell Valley Wastewater Treatment Lagoons)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589406",
@@ -484088,13 +484117,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Rolette"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Shell Valley Wastewater Treatment Lagoons (NDG589406).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Shell Valley Wastewater Treatment Lagoons'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: Shell Valley Wastewater Treatment Lagoons (NDG589406).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -484106,9 +484136,9 @@
  },
  {
   "id": "nd-snake-creek-pumping-plant",
-  "name": "Snake Creek Pumping Plant",
-  "short_name": "Snake Creek Pumping Plant",
-  "legal_form": "federal facility",
+  "name": "Permit ND0023892 (Snake Creek Pumping Plant)",
+  "short_name": "Permit ND0023892 (Snake Creek Pumping Plant)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "ND0023892",
@@ -484122,13 +484152,14 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 outfalls of 2 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Coleharbor"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Snake Creek Pumping Plant (ND0023892).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Snake Creek Pumping Plant'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Federal Facility (U.S. Government)). Plants: Snake Creek Pumping Plant (ND0023892).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -484209,9 +484240,9 @@
  },
  {
   "id": "nd-st-marys-wastewater-treatment-lagoons",
-  "name": "St. Marys Wastewater Treatment Lagoons",
-  "short_name": "St. Marys Wastewater Treatment Lagoons",
-  "legal_form": "tribal",
+  "name": "Permit NDG589407 (St. Marys Wastewater Treatment Lagoons)",
+  "short_name": "Permit NDG589407 (St. Marys Wastewater Treatment Lagoons)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589407",
@@ -484224,13 +484255,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Rolette"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: St Marys Wastewater Treatment Lagoons (NDG589407).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('St. Marys Wastewater Treatment Lagoons'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: St Marys Wastewater Treatment Lagoons (NDG589407).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -484242,9 +484274,9 @@
  },
  {
   "id": "nd-st-michaels-wastewater-treatment-lagoons",
-  "name": "St. Michaels Wastewater Treatment Lagoons",
-  "short_name": "St. Michaels Wastewater Treatment Lagoons",
-  "legal_form": "tribal",
+  "name": "Permit NDG589202 (St. Michaels Wastewater Treatment Lagoons)",
+  "short_name": "Permit NDG589202 (St. Michaels Wastewater Treatment Lagoons)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589202",
@@ -484255,13 +484287,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Fort Totten"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: St Michaels Wastewater Treatment Lagoon (NDG589202).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('St. Michaels Wastewater Treatment Lagoons'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: St Michaels Wastewater Treatment Lagoon (NDG589202).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -484273,9 +484306,9 @@
  },
  {
   "id": "nd-standing-rock-mri-wtp",
-  "name": "Standing Rock MRI WTP",
-  "short_name": "Standing Rock MRI WTP",
-  "legal_form": "city",
+  "name": "Permit ND0030970 (Standing Rock MRI WTP)",
+  "short_name": "Permit ND0030970 (Standing Rock MRI WTP)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "ND0030970",
@@ -484288,13 +484321,14 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 0 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Fort Yates"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Fort Yates WTP (ND0030970).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Standing Rock MRI WTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Municipal or Water District). Plants: Fort Yates WTP (ND0030970).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -484570,9 +484604,9 @@
  },
  {
   "id": "nd-tokio-wastewater-treatment-lagoons",
-  "name": "Tokio Wastewater Treatment Lagoons",
-  "short_name": "Tokio Wastewater Treatment Lagoons",
-  "legal_form": "tribal",
+  "name": "Permit NDG589205 (Tokio Wastewater Treatment Lagoons)",
+  "short_name": "Permit NDG589205 (Tokio Wastewater Treatment Lagoons)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589205",
@@ -484585,13 +484619,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Tokio"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Tokio Wastewater Treatment Lagoons (NDG589205).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('Tokio Wastewater Treatment Lagoons'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: Tokio Wastewater Treatment Lagoons (NDG589205).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -484674,7 +484709,7 @@
   "id": "nd-u-s-bia-four-winds-tate-topa-school-lagoon",
   "name": "U.S. BIA Four Winds Tate Topa School Lagoon",
   "short_name": "U.S. BIA Four Winds Tate Topa School Lagoon",
-  "legal_form": null,
+  "legal_form": "city",
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589206",
@@ -484848,8 +484883,8 @@
  },
  {
   "id": "nd-vac-u-jet-south-wwtp",
-  "name": "Vac U Jet South WWTP",
-  "short_name": "Vac U Jet South WWTP",
+  "name": "Permit NDG427082 (Vac U Jet South WWTP)",
+  "short_name": "Permit NDG427082 (Vac U Jet South WWTP)",
   "legal_form": null,
   "state": "ND",
   "kind": "plant",
@@ -484861,13 +484896,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Watford City"
   ],
-  "notes": "Owner: EPA ICIS-NPDES facility name (no permittee of record). Plants: Vac U Jet South WWTP (NDG427082).",
+  "notes": "Permit only: EPA ICIS-NPDES facility name (no permittee of record) gives only the plant's name ('Vac U Jet South WWTP'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Privately Owned Facility). Plants: Vac U Jet South WWTP (NDG427082).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -484912,9 +484948,9 @@
  },
  {
   "id": "nd-west-acres-wastewater-treatment-lagoon",
-  "name": "West Acres Wastewater Treatment Lagoon",
-  "short_name": "West Acres Wastewater Treatment Lagoon",
-  "legal_form": "tribal",
+  "name": "Permit NDG589201 (West Acres Wastewater Treatment Lagoon)",
+  "short_name": "Permit NDG589201 (West Acres Wastewater Treatment Lagoon)",
+  "legal_form": null,
   "state": "ND",
   "kind": "plant",
   "npdes_permit": "NDG589201",
@@ -484927,13 +484963,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Fort Totten"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: West Acres Wastewater Treatment Lagoon (NDG589201).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('West Acres Wastewater Treatment Lagoon'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: Tribal Government). Plants: West Acres Wastewater Treatment Lagoon (NDG589201).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [
@@ -484978,8 +485015,8 @@
  },
  {
   "id": "nd-white-shield-south-lagoon",
-  "name": "White Shield South Lagoon",
-  "short_name": "White Shield South Lagoon",
+  "name": "Permit NDG589104 (White Shield South Lagoon)",
+  "short_name": "Permit NDG589104 (White Shield South Lagoon)",
   "legal_form": null,
   "state": "ND",
   "kind": "plant",
@@ -484991,13 +485028,14 @@
   "water_slugs": [],
   "outfall_count": 1,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 outfalls of 1 rows)",
+  "permit_only": true,
   "notification_channel": "No North Dakota statute or rule requires the public to be told of a sewage discharge. N.D. Admin. Code 33.1-16-02.1-11(4) requires a spill or discharge that causes or is likely to cause water pollution to be reported to the Department of Environmental Quality immediately (by telephone or through spill.nd.gov); the permits' standard conditions (the domestic-treatment general permit NDG420000, Part IV(F), and the individual permits) add an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public incident list refuses automated readers; reports from 1975 to 2020 are in the Department's public archive. Electronic reports through EPA's NeT-SewerOverflow: none from a North Dakota permit in EPA's 2026-11-12 tables. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "New Town"
   ],
-  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: White Shield South Wastewater Treatment System (NDG589104).",
+  "notes": "Permit only: EPA ICIS-NPDES permittee of record gives only the plant's name ('White Shield South Lagoon'), not the body that holds the permit; the operator is not established here, so this row is not counted as an operator (EPA's facility type: POTW). Plants: White Shield South Wastewater Treatment System (NDG589104).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [

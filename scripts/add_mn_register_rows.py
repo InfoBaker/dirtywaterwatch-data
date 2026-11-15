@@ -14,7 +14,9 @@ The law (research/mn/report.md section 2.1 in the site repository; research/mn/e
   - MPCA guidance wq-wwprm1-43 (November 2023) and wq-wwprm1-59 (October 2026): public locations within 25 miles
     downstream; a notice when the release has ended.
 Rows
-  - Per operator (every Minnesota row of data/dischargers.json): <id>-public-notice (law basis, 115.061(c)). Three are
+  - Per operator whose legal form puts it in the statute's scope (duty_applies: a public body's plant, or a private
+    owner of a domestic sewer system; re-review 2026-11-14 P2-5): <id>-public-notice (law basis, 115.061(c)). A
+    business, a tribal or federal body, an unknown permittee and a permit-only row get none. Three are
     read or monitored: the Metropolitan Council (its spill pages, read by mn-mces-spill-notices), the Western Lake
     Superior Sanitary District (its overflow map, read by mn-wlssd-overflows) and the City of Duluth (its press releases:
     the host did not answer the project's client on 2026-11-14, so unmonitored, other). Every other operator's channel
@@ -130,6 +132,28 @@ def base(**kw) -> dict:
     return r
 
 
+# 115.061(c) binds "a publicly owned treatment works or a publicly or privately owned domestic sewer system owner"
+# (re-review 2026-11-14 P2-5): its duty is assigned to a row only where the row's legal form establishes that scope (a
+# public body's plant permit; a private owner of a domestic system: homes, a park, a camp, an institution). A business
+# or industrial permittee, a tribal or federal body (whether the state statute binds it is not established here), a
+# withheld or unknown permittee, and a permit-only row (scripts/icis_operators.py) get no duty row.
+PUBLIC_POTW = {"city", "town", "county", "special district", "authority", "state facility"}
+PRIVATE_DOMESTIC = {"homeowners' association", "mobile-home park", "campground or resort", "institution", "private club",
+                    "investor-owned utility", "member-owned utility"}
+
+
+def duty_applies(op: dict) -> str | None:
+    """The statute's own scope words that the row's legal form establishes, or None."""
+    if op.get("permit_only"):
+        return None
+    lf = op.get("legal_form")
+    if lf in PUBLIC_POTW:
+        return "a publicly owned treatment works"
+    if lf in PRIVATE_DOMESTIC:
+        return "a privately owned domestic sewer system owner"
+    return None
+
+
 def operator_rows(dis: list[dict]) -> list[dict]:
     rows = []
     for op in dis:
@@ -146,6 +170,9 @@ def operator_rows(dis: list[dict]) -> list[dict]:
                       "EPA publishes them in its overflow tables, read by the echo-sewer-overflow feed (one report, "
                       "2024-06-18)."))))
         own = OWN.get(oid)
+        scope = duty_applies(op)
+        if not own and not scope:
+            continue
         if own:
             rows.append(finish(base(id=f"{oid}-public-notice", operator_id=oid, name=name, permit=permit,
                                     legal_basis=LAW, basis_kind="law", **own)))
@@ -158,9 +185,10 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             id=f"{oid}-public-notice", operator_id=oid, name=name, permit=permit, channel_kind="operator_page",
             urls=[], method=None, legal_basis=LAW, basis_kind="law", monitored=False, unmonitored_reason="other",
             publishes="unknown", records=False, noun="Public notice of a discharge", sources=["mn-law-stat-115-061"],
-            note=(f"{name} must tell downstream users and the public of a discharge by the means it chooses (in person, "
-                  "telephone, radio, social media or a web page) and post signs at affected public use areas; its "
-                  f"own public channel was not searched individually.{private}"))))
+            note=(f"As {scope} (its legal form here: {op.get('legal_form')}), {name} must tell downstream users and the "
+                  "public of a discharge by the means it chooses (in person, telephone, radio, social media or a web "
+                  f"page) and post signs at affected public use areas; its own public channel was not searched "
+                  f"individually.{private}"))))
     return rows
 
 

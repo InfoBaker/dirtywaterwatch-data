@@ -252,34 +252,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-cannonball-lagoon",
-   "agency": null,
-   "permit": "NDG589315",
-   "checked": "2026-11-14",
-   "id": "nd-cannonball-lagoon-spill-report",
-   "name": "Cannonball Lagoon",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Cannonball Lagoon reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-center-coal-county",
    "agency": null,
    "permit": "ND0025321",
@@ -8254,34 +8226,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-east-dunseith-wastewater-treatment-lagoons",
-   "agency": null,
-   "permit": "NDG589402",
-   "checked": "2026-11-14",
-   "id": "nd-east-dunseith-wastewater-treatment-lagoons-spill-report",
-   "name": "East Dunseith Wastewater Treatment Lagoons",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "East Dunseith Wastewater Treatment Lagoons reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": null,
    "agency": "U.S. Environmental Protection Agency (ECHO)",
    "permit": null,
@@ -8473,34 +8417,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-fort-yates-lagoon-system",
-   "agency": null,
-   "permit": "NDG589312",
-   "checked": "2026-11-14",
-   "id": "nd-fort-yates-lagoon-system-spill-report",
-   "name": "Fort Yates Lagoon System",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Fort Yates Lagoon System reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-freeway-147-truck-stop",
    "agency": null,
    "permit": "NDG324813",
@@ -8553,34 +8469,6 @@
     "nd-ndg420000-general-permit"
    ],
    "note": "Garrison Dam NFH reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-garrison-power-plant",
-   "agency": null,
-   "permit": "ND0020605",
-   "checked": "2026-11-14",
-   "id": "nd-garrison-power-plant-spill-report",
-   "name": "Garrison Power Plant",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Garrison Power Plant reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
    "barrier": "bot_wall"
   },
   {
@@ -8641,34 +8529,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-grand-forks-wtp",
-   "agency": null,
-   "permit": "ND0000191",
-   "checked": "2026-11-14",
-   "id": "nd-grand-forks-wtp-spill-report",
-   "name": "Grand Forks WTP",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Grand Forks WTP reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-great-river-energy",
    "agency": null,
    "permit": "ND0000299",
@@ -8693,34 +8553,6 @@
     "nd-ndg420000-general-permit"
    ],
    "note": "Great River Energy reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-green-acres-wastewater-treatment-lagoons",
-   "agency": null,
-   "permit": "NDG589403",
-   "checked": "2026-11-14",
-   "id": "nd-green-acres-wastewater-treatment-lagoons-spill-report",
-   "name": "Green Acres Wastewater Treatment Lagoons",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Green Acres Wastewater Treatment Lagoons reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
    "barrier": "bot_wall"
   },
   {
@@ -8920,34 +8752,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-kenel-lagoon",
-   "agency": null,
-   "permit": "NDG589311",
-   "checked": "2026-11-14",
-   "id": "nd-kenel-lagoon-spill-report",
-   "name": "Kenel Lagoon",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Kenel Lagoon reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-lake-metigoshe-recreation",
    "agency": null,
    "permit": "NDG325330",
@@ -9060,34 +8864,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-maddock-wtp",
-   "agency": null,
-   "permit": "NDG320346",
-   "checked": "2026-11-14",
-   "id": "nd-maddock-wtp-spill-report",
-   "name": "Maddock WTP",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Maddock WTP reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-mandan",
    "agency": null,
    "permit": "ND0022861",
@@ -9112,34 +8888,6 @@
     "nd-ndg420000-general-permit"
    ],
    "note": "City of Mandan reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-mandaree-lagoon",
-   "agency": null,
-   "permit": "NDG589102",
-   "checked": "2026-11-14",
-   "id": "nd-mandaree-lagoon-spill-report",
-   "name": "Mandaree Lagoon",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Mandaree Lagoon reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
    "barrier": "bot_wall"
   },
   {
@@ -9340,34 +9088,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-new-town-water-resource-recovery-facility",
-   "agency": null,
-   "permit": "NDG589108",
-   "checked": "2026-11-14",
-   "id": "nd-new-town-water-resource-recovery-facility-spill-report",
-   "name": "New Town Water Resource Recovery Facility",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "New Town Water Resource Recovery Facility reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-nps-juniper-campground-lagoons",
    "agency": null,
    "permit": "NDG126417",
@@ -9508,62 +9228,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-ojibwa-millennium-school-wastewater-treatment-lagoons",
-   "agency": null,
-   "permit": "NDG589410",
-   "checked": "2026-11-14",
-   "id": "nd-ojibwa-millennium-school-wastewater-treatment-lagoons-spill-report",
-   "name": "Ojibwa Millennium School Wastewater Treatment Lagoons",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Ojibwa Millennium School Wastewater Treatment Lagoons reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-parshall-wastewater-treatment-facility",
-   "agency": null,
-   "permit": "NDG589109",
-   "checked": "2026-11-14",
-   "id": "nd-parshall-wastewater-treatment-facility-spill-report",
-   "name": "Parshall Wastewater Treatment Facility",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Parshall Wastewater Treatment Facility reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": null,
    "agency": "North Dakota Department of Environmental Quality",
    "permit": null,
@@ -9615,34 +9279,6 @@
     "nd-ndg420000-general-permit"
    ],
    "note": "Ponderosa RV Campground reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-porcupine-lagoon",
-   "agency": null,
-   "permit": "NDG589305",
-   "checked": "2026-11-14",
-   "id": "nd-porcupine-lagoon-spill-report",
-   "name": "Porcupine Lagoon",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Porcupine Lagoon reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
    "barrier": "bot_wall"
   },
   {
@@ -9815,62 +9451,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-rock-creek-lagoon",
-   "agency": null,
-   "permit": "NDG589308",
-   "checked": "2026-11-14",
-   "id": "nd-rock-creek-lagoon-spill-report",
-   "name": "Rock Creek Lagoon",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Rock Creek Lagoon reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-san-haven-wastewater-treatment-lagoons",
-   "agency": null,
-   "permit": "NDG589405",
-   "checked": "2026-11-14",
-   "id": "nd-san-haven-wastewater-treatment-lagoons-spill-report",
-   "name": "San Haven Wastewater Treatment Lagoons",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "San Haven Wastewater Treatment Lagoons reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-schmitz-inc",
    "agency": null,
    "permit": "NDG221971",
@@ -9983,62 +9563,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-shell-valley-wastewater-treatment-lagoons",
-   "agency": null,
-   "permit": "NDG589406",
-   "checked": "2026-11-14",
-   "id": "nd-shell-valley-wastewater-treatment-lagoons-spill-report",
-   "name": "Shell Valley Wastewater Treatment Lagoons",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Shell Valley Wastewater Treatment Lagoons reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-snake-creek-pumping-plant",
-   "agency": null,
-   "permit": "ND0023892",
-   "checked": "2026-11-14",
-   "id": "nd-snake-creek-pumping-plant-spill-report",
-   "name": "Snake Creek Pumping Plant",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Snake Creek Pumping Plant reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-south-central-regional-water-district",
    "agency": null,
    "permit": "ND0026301",
@@ -10091,90 +9615,6 @@
     "nd-ndg420000-general-permit"
    ],
    "note": "Spirit lake Casino and Resort reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-st-marys-wastewater-treatment-lagoons",
-   "agency": null,
-   "permit": "NDG589407",
-   "checked": "2026-11-14",
-   "id": "nd-st-marys-wastewater-treatment-lagoons-spill-report",
-   "name": "St. Marys Wastewater Treatment Lagoons",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "St. Marys Wastewater Treatment Lagoons reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-st-michaels-wastewater-treatment-lagoons",
-   "agency": null,
-   "permit": "NDG589202",
-   "checked": "2026-11-14",
-   "id": "nd-st-michaels-wastewater-treatment-lagoons-spill-report",
-   "name": "St. Michaels Wastewater Treatment Lagoons",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "St. Michaels Wastewater Treatment Lagoons reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-standing-rock-mri-wtp",
-   "agency": null,
-   "permit": "ND0030970",
-   "checked": "2026-11-14",
-   "id": "nd-standing-rock-mri-wtp-spill-report",
-   "name": "Standing Rock MRI WTP",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Standing Rock MRI WTP reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
    "barrier": "bot_wall"
   },
   {
@@ -10403,34 +9843,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-tokio-wastewater-treatment-lagoons",
-   "agency": null,
-   "permit": "NDG589205",
-   "checked": "2026-11-14",
-   "id": "nd-tokio-wastewater-treatment-lagoons-spill-report",
-   "name": "Tokio Wastewater Treatment Lagoons",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Tokio Wastewater Treatment Lagoons reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-trenton-water-users-assoc",
    "agency": null,
    "permit": "NDG324244",
@@ -10627,34 +10039,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-vac-u-jet-south-wwtp",
-   "agency": null,
-   "permit": "NDG427082",
-   "checked": "2026-11-14",
-   "id": "nd-vac-u-jet-south-wwtp-spill-report",
-   "name": "Vac U Jet South WWTP",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "Vac U Jet South WWTP reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-wcco-belting-inc",
    "agency": null,
    "permit": "ND0026263",
@@ -10683,34 +10067,6 @@
   },
   {
    "state": "ND",
-   "operator_id": "nd-west-acres-wastewater-treatment-lagoon",
-   "agency": null,
-   "permit": "NDG589201",
-   "checked": "2026-11-14",
-   "id": "nd-west-acres-wastewater-treatment-lagoon-spill-report",
-   "name": "West Acres Wastewater Treatment Lagoon",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "West Acres Wastewater Treatment Lagoon reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
    "operator_id": "nd-west-fargo",
    "agency": null,
    "permit": "ND0022616",
@@ -10735,34 +10091,6 @@
     "nd-ndg420000-general-permit"
    ],
    "note": "City of West Fargo reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
-   "barrier": "bot_wall"
-  },
-  {
-   "state": "ND",
-   "operator_id": "nd-white-shield-south-lagoon",
-   "agency": null,
-   "permit": "NDG589104",
-   "checked": "2026-11-14",
-   "id": "nd-white-shield-south-lagoon-spill-report",
-   "name": "White Shield South Lagoon",
-   "channel_kind": "state_alert_page",
-   "urls": [
-    "https://northdakota.hazconnect.com/ListIncidentPublic.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "N.D. Admin. Code 33.1-16-02.1-11(4): immediate report to the Department of Environmental Quality of a spill or discharge that causes or is likely to cause water pollution; the permit's standard conditions (NDG420000 Part IV(F) for the domestic-treatment general permit; 40 CFR 122.41(l)(6)): an oral report within 24 hours and a written one within five days",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "publishes": "notices",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nd-hazconnect-public-incidents",
-    "nd-ndac-33-1-16-02-1-11",
-    "nd-ndg420000-general-permit"
-   ],
-   "note": "White Shield South Lagoon reports a spill or overflow to DEQ immediately, and under its permit within 24 hours and in writing within five days. Since 2021 the reports go into the unified spill system, whose public list answers 403 to the project's identified client; no North Dakota rule requires it to tell the public.",
    "barrier": "bot_wall"
   },
   {
