@@ -31,9 +31,10 @@ Records
   build/status.py EPA_MONTHLY_SOURCES), and the charts never add them to the discharge counts. NODI C months and months
   with every figure zero are not records; they are counted in meta and kept per outfall in
   meta.latest_month_by_outfall (a newer month of no discharge clears an older monthly mark only when every
-  parameter the outfall's DMRs carry is a zero or NODI C that month). Other NODI codes and empty
-  values say nothing. Only 'Effluent Gross' lines at external outfalls of the registry's CSO rows are read; a plant's
-  own outfall and an internal monitoring point are counted in meta and skipped. raw.time_zone is the outfall's county's
+  parameter the outfall's DMRs carry, in any month any run has read, is a zero or NODI C that month; a
+  no-discharge finding whose evidence later turns conflicting is withdrawn and recomputed: reconcile_latest).
+  Other NODI codes and empty values say nothing. Only 'Effluent Gross' lines at external outfalls of the registry's
+  CSO rows are read; a plant's own outfall and an internal monitoring point are counted in meta and skipped. raw.time_zone is the outfall's county's
   zone (zones.indiana_zone: the month is a calendar month on that clock); the point, receiving water and water record
   come from the registry row.
 
@@ -41,9 +42,10 @@ Revisions and history (Astra review 2026-11-14)
   Two rows for one outfall, parameter and month: the higher VersionNmbr, then the later receipt, wins (revision_key),
   never the larger value. Each run is reconciled with the previous file: a month the source no longer lists at all is
   kept with raw._missing_from_source_since; a month the source now files as no discharge is withdrawn (counted in
-  meta.months_withdrawn_by_the_source); latest_month_by_outfall keeps the previous observation of an outfall this run
-  did not read. An outfall whose registry point is the treatment plant's (coords_from facility) gets no point
-  (raw.point_note); points are rounded to three decimals. raw.parameters gives the chart builder events and hours.
+  meta.months_withdrawn_by_the_source); latest_month_by_outfall is recomputed from the evidence of every run
+  (reconcile_latest), so an outfall this run did not read keeps its observation. An outfall whose registry point is
+  the treatment plant's (coords_from facility) gets no point (raw.point_note); points are rounded to three decimals.
+  raw.parameters gives the chart builder events and hours.
 
 Lag and cadence
   DMRs are due on the 28th of the following month in Indiana and ECHO refreshes weekly, so a month appears four to eight
@@ -443,6 +445,44 @@ def latest_months(cells: dict) -> dict[str, dict]:
     return dict(sorted(out.items()))
 
 
+def store_cells(store: dict) -> dict:
+    """The evidence store (merge_previous) as cells: (permit, feature, month) -> {param: row or conflict}, every
+    outfall-month any run has read, with its winning row per parameter."""
+    cells: dict[tuple, dict] = defaultdict(dict)
+    for k, stored in store.items():
+        permit, feat, ym, name = k.split("|")
+        cells[(permit, feat, ym)][name] = (
+            {"_conflict": stored["conflict"], "_rank": tuple(stored["rank"]), "_pend": None}
+            if "conflict" in stored else dict(stored, _pend=None))
+    return dict(cells)
+
+
+def reconcile_latest(prev: dict, store: dict, stats: dict) -> dict:
+    """meta.latest_month_by_outfall from the evidence kept across runs (verification 2, 2026-11-15, P2-1): the
+    parameters an outfall reports are those any run has read for it, so a newer month this run's answer holds only
+    in part never clears an established monthly mark; and a no-discharge finding whose evidence has since become
+    conflicting (or incomplete) is withdrawn and recomputed from the months that remain (counted in
+    meta.no_discharge_findings_withdrawn). An earlier observation of a month the store holds no evidence for (a
+    file written before the store) is kept while it is the newer one."""
+    sc = store_cells(store)
+    derived = latest_months(sc)
+    known: dict[str, set] = defaultdict(set)
+    for permit, feat, ym in sc:
+        known[f"{permit}|{feat}"].add(ym)
+    out = {}
+    for k in sorted(set(prev) | set(derived)):
+        p, v = prev.get(k), derived.get(k)
+        pm = (p or {}).get("month") if isinstance(p, dict) else None
+        if pm and pm not in known[k] and (v is None or pm > v["month"]):
+            out[k] = p
+            continue
+        if pm and p.get("discharged") is False and (v is None or v["month"] < pm):
+            stats["no_discharge_findings_withdrawn"][f"{k}:{pm}"] += 1
+        if v is not None:
+            out[k] = v
+    return out
+
+
 def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) -> list[dict]:
     records = []
     for (permit, feat, ym), cell in sorted(cells.items()):
@@ -582,7 +622,8 @@ def main(argv=None) -> int:
     stats = defaultdict(Counter)
     cells, names = collect(results, reg, stats)
     prev_doc = read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
-    save_cache(merge_previous(cells, prev_doc.get("records") or [], stats, evidence_store))
+    store = merge_previous(cells, prev_doc.get("records") or [], stats, evidence_store)
+    save_cache(store)
     records = build_records(cells, names, reg, dischargers(), stats)
     # reconcile with the previous run (review 2026-11-14 P1-2): a month the source no longer lists at all is kept,
     # marked missing from the source; a month the source now reports as no discharge is withdrawn; a month whose
@@ -603,10 +644,7 @@ def main(argv=None) -> int:
         records.append(r)
         stats["records_carried_from_previous_run"]["records"] += 1
     records.sort(key=lambda r: (r["started_at"], r["event_id"]), reverse=True)
-    latest = dict((prev_doc.get("meta") or {}).get("latest_month_by_outfall") or {})
-    for k, v in latest_months(cells).items():
-        if k not in latest or v["month"] >= latest[k].get("month", ""):
-            latest[k] = v
+    latest = reconcile_latest((prev_doc.get("meta") or {}).get("latest_month_by_outfall") or {}, store, stats)
     per_permit = Counter(r["npdes_permit"] for r in records)
     meta = {"registry_ids": [SOURCE_ID], "since": args.since,
             "parameters": {c: n for c, n in PARAMS.items()}, "permits": permits,
