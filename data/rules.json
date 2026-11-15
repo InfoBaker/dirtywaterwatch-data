@@ -601,6 +601,41 @@
    "default": "Discharge possible: heavy rain, no report received"
   },
   "label_by_basis_rationale": "The label says how strong the estimate is. It reads \"discharge likely\" where the amount comes from the operator's own discharge history or from a rain trigger its state publishes, and \"discharge possible\" where only this site's default of 0.1 inch applies. The colour, the rule and how long the caution lasts are the same.",
+  "history": {
+   "doc": "Where an operator has enough dated overflow reports, this site pairs every storm at its outfalls since 2015 with the operator's own reports. The caution reads discharge possible from the smallest storm after which the operator ever reported an overflow, rounded down to the next step, and discharge likely from the smallest step at which it reported an overflow after at least half of the storms of that size and of all larger storms together. Below the possible amount no caution shows only where at least 30 storms that small are on record over at least three years and none was followed by a reported overflow; otherwise the caution starts where a published rule or this site's default would start it, and lasts at least as long. This is an estimate, not a report, and it never replaces a red advisory.",
+   "source": "The operators' own dated combined sewer overflow reports, as the operators and state agencies publish them in the sources this site reads; NOAA MRMS daily rainfall totals at each operator's outfalls, from the Iowa Environmental Mesonet reanalysis point service, from 2015.",
+   "label_by_level": {
+    "likely": "Discharge likely: heavy rain, no report received",
+    "possible": "Discharge possible: heavy rain, no report received"
+   },
+   "label_by_level_rationale": "With an operator's own record the label follows the storm: \"discharge likely\" when the rain of the last 24 hours reaches the amount after which the operator reported an overflow after at least half of the storms, and \"discharge possible\" below it. A water reads \"discharge likely\" when any of its operators' cautions does.",
+   "rungs_in": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+   ],
+   "rungs_in_rationale": "The steps every amount is rounded down to, in inches of rain in a day, so an amount is never read more finely than the record supports.",
+   "likely_share": 0.5,
+   "likely_share_rationale": "The caution reads discharge likely from the step at which an overflow was reported after at least half of the storms of that size and larger, the cautious choice.",
+   "quiet_min_storms": 30,
+   "quiet_min_storms_rationale": "No caution shows below the smallest storm followed by a reported overflow only when at least 30 storms that small are on record, over at least three years, and none was followed by one.",
+   "quiet_min_period_days": 1095,
+   "quiet_min_period_days_rationale": "Three years of record are needed before small storms can be read as quiet: one or two years of reports cannot show how a system behaves across wet and dry seasons.",
+   "min_storms": 10,
+   "min_storms_rationale": "A size of storm needs at least 10 storms on record before it can set the discharge likely amount; thinner sizes are pooled with their neighbours.",
+   "min_report_storms": 10,
+   "min_report_storms_rationale": "An operator's record is used only when at least 10 storms were followed by a reported overflow.",
+   "min_total_storms": 20,
+   "min_total_storms_rationale": "An operator's record is used only when it holds at least 20 storms.",
+   "min_period_days": 365,
+   "min_period_days_rationale": "An operator's record is used only when it covers at least a year, so every season is in it.",
+   "_system_changes_doc": "A completed project that changed how often a system overflows (a tunnel, a storage basin, sewer separation), cited by its source: {\"<permit>\": [{\"from\": \"YYYY-MM-DD\", \"what\": \"plain words\", \"source\": \"citation\"}]}. The record for that operator then starts on that day. Until one is cited, a drop in reporting is stated and the whole record is kept.",
+   "system_changes": {}
+  },
   "percentile": 10,
   "min_discharge_days": 10,
   "threshold_rationale": "The amount is the 10th percentile of the rainfall on the days the operator discharged: nine discharge days in ten had more rain. It is computed for each operator with at least 10 such days. In Massachusetts it is the rainfall the operator itself reported in its sewage notification reports since July 2022. In Michigan, whose discharge list gives the operator's rainfall for the whole event rather than for one day, it is the NOAA MRMS radar's daily rainfall at the operator's outfalls on the days its reported combined sewer and retention basin discharges began since 2015, the larger of that day's total and the day before's. Operators without that history use a published rule below.",
