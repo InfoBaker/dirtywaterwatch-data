@@ -475,7 +475,7 @@ def test_r2_p1_4_a_stamped_holding_page_keeps_the_records_and_main_fails_an_inco
     assert "storm-update-august-1st-2026:cso" in {r["source_record_id"] for r in again}
     assert stats["posts_without_report"] == ["storm-update-august-1st-2026"]
     written = {}
-    monkeypatch.setattr(M, "write_events", lambda sid, recs, ok=True, error=None, meta=None: written.update(
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, ok=True, error=None, meta=None, partial=False: written.update(
         ok=ok, error=error, meta=meta) or tmp_path / "x.json")
     monkeypatch.setattr(M, "read_json", lambda *a, **k: {"records": list(recs.values())})
     f = tmp_path / "doc.json"
@@ -595,3 +595,58 @@ def test_r3_p1_4_a_holding_page_under_any_title_keeps_every_field(slug):
         if k.startswith(slug + ":"):
             assert after[k] == r                      # start, end, volume and reached_water as before
     assert stats["posts_without_report"] == [slug]
+
+
+def _post_html(title, stamp, text):
+    return (f'<h1 class="ccm-block-page-title page-title">{title}</h1><div>{stamp}</div><p>{text}</p>').encode()
+
+
+def test_r3_p1_5_a_failed_old_post_never_freezes_a_new_one(monkeypatch, tmp_path):
+    import common
+    monkeypatch.setattr(M, "PAUSE_S", 0)
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(M, "save_raw", lambda *a, **k: None)
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: common.write_events(
+        sid, recs, path=tmp_path / f"{sid}.json", **kw))
+    out = tmp_path / f"{M.SOURCE_ID}.json"
+    old = ("storm-update-example-old", "MMSD Storm Update May 1, 2027")
+    new = ("storm-update-example-new", "MMSD Storm Update June 1, 2027")
+    good_old = _post_html(old[1], "05/05/27 09:00:am", "A combined sewer overflow occurred on May 1, 2027.")
+    good_new = _post_html(new[1], "06/05/27 09:00:am", "A separate sewer overflow occurred on June 1, 2027.")
+
+    class Sess(FakeSession):
+        def get(self, url, params=None, headers=None, timeout=None):
+            if not params and self.posts.get(M.slug_of(url)) is None:
+                raise M.requests.ConnectionError("refused")
+            return super().get(url, params, headers, timeout)
+
+    def run(pages, posts):
+        monkeypatch.setattr(M.requests, "Session", lambda: Sess({1: _list_page(pages)}, posts))
+        return M.main(["--pages", "1"])
+
+    assert run([old], {old[0]: good_old}) == 0                     # the first good run
+    first_ok = json.loads(out.read_text())["last_ok_at"]
+    # 30 days on, the old post is refused while a new one is posted: the new one is written at once, health false
+    monkeypatch.setattr(M, "now_iso", lambda: "2027-07-10T00:00:00Z")
+    assert run([new, old], {new[0]: good_new}) == 1
+    f = json.loads(out.read_text())
+    ids = {r["source_record_id"] for r in f["records"]}
+    assert {f"{old[0]}:cso", f"{new[0]}:sso"} <= ids
+    assert f["ok"] is False and f["last_ok_at"] == first_ok and [x["slug"] for x in f["meta"]["retry"]] == [old[0]]
+    # the new post scrolls off before the old one recovers: still kept
+    assert run([("budget", "Budget news")], {}) == 1
+    f = json.loads(out.read_text())
+    assert f"{new[0]}:sso" in {r["source_record_id"] for r in f["records"]} and f["ok"] is False
+    # recovery: healthy again, nothing lost
+    assert run([("budget", "Budget news")], {old[0]: good_old, new[0]: good_new}) == 0
+    f = json.loads(out.read_text())
+    assert f["ok"] is True and {f"{old[0]}:cso", f"{new[0]}:sso"} <= {r["source_record_id"] for r in f["records"]}
+
+
+def test_r3_p1_5_write_events_default_failure_path_is_unchanged(tmp_path):
+    import common
+    p = tmp_path / "x.json"
+    common.write_events("x", [{"event_id": "a"}], ok=True, path=p)
+    common.write_events("x", [{"event_id": "b"}], ok=False, error="down", path=p)
+    f = json.loads(p.read_text())
+    assert [r["event_id"] for r in f["records"]] == ["a"] and f["ok"] is False
