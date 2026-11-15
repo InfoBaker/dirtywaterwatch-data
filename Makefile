@@ -120,6 +120,9 @@
 #                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
 #                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
 #                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
+#                  Puerto Rico: echo_sewer_overflow_events (EPA's overflow tables, PR permits: PRASA's reports, the only dated record;
+#                  Atlantic Standard Time all year) and pr_drna_beaches (DRNA's weekly beach notices, WordPress JSON: the beaches over the
+#                  enterococci value, one advisory per run of notices; its state file data/build/pr-drna-beach-notices-state.json)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
