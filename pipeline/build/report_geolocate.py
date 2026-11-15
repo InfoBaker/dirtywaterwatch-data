@@ -77,6 +77,7 @@ STATE_NAMES["SC"] = "South Carolina"
 STATE_NAMES["LA"] = "Louisiana"
 STATE_NAMES["NV"] = "Nevada"
 STATE_NAMES["OK"] = "Oklahoma"
+STATE_NAMES["PR"] = "Puerto Rico"
 PRECISION = {"address": 50, "intersection": 30, "pump_station": 100, "plant": 250, "frs_plant": 250}
 NEAR_OPERATOR_KM = 30
 TOWN_MISMATCH_NEAR_KM = 10

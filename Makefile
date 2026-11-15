@@ -167,6 +167,9 @@
 #                  Oklahoma: ok_nps_chickasaw_bacteria (the National Park Service's E. coli table for Chickasaw
 #                  National Recreation Area: a result over the posted threshold is a sample caution, never an
 #                  advisory; no sewage feed exists)
+#                  Puerto Rico: echo_sewer_overflow_events (EPA's overflow tables, PR permits: PRASA's reports, the only dated record;
+#                  Atlantic Standard Time all year) and pr_drna_beaches (DRNA's weekly beach notices, WordPress JSON: the beaches over the
+#                  enterococci value, one advisory per run of notices; its state file data/build/pr-drna-beach-notices-state.json)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
