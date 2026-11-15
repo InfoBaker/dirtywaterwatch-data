@@ -211,7 +211,7 @@ def test_adding_minnesota_leaves_other_states_records_unchanged(monkeypatch):
     monkeypatch.setattr(E, "STATES", E.STATES - {"MN"})
     monkeypatch.setattr(E, "STATE_ZONE_ALWAYS", E.STATE_ZONE_ALWAYS - {"MN"})
     monkeypatch.setattr(E, "FREE_TEXT_STATES", E.FREE_TEXT_STATES - {"MN"})
-    monkeypatch.setattr(E, "STATE_PERSON_SCRUB", {k: v for k, v in E.STATE_PERSON_SCRUB.items() if k != "MN"})
+    monkeypatch.setattr(E, "STATE_NAME_SCRUB", {})
     without = E.build(copy.deepcopy(ut), {"extract_date": "2026-11-04"})[0]
     strip = [{k: v for k, v in r.items() if k != "fetched_at"} for r in with_mn]
     assert strip == [{k: v for k, v in r.items() if k != "fetched_at"} for r in without] and strip

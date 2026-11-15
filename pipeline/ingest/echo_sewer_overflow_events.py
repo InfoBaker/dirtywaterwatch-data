@@ -431,7 +431,7 @@ Minnesota (permits MN...; research/mn/report.md section 2.2; not live until data
   to "Pike Bay Lake Vermilion Tower Minnesota". Keyed on MN only, so every other state's records are unchanged:
   - Time zone: STATE_TZ gives America/Chicago (Minnesota keeps one zone); MN is in STATE_ZONE_ALWAYS, so every
     Minnesota record carries raw.time_zone.
-  - Free text: MN is in FREE_TEXT_STATES (the Illinois scrub) and STATE_PERSON_SCRUB (mn_scrub_people: names by their
+  - Free text: MN is in FREE_TEXT_STATES (the Illinois scrub) and STATE_NAME_SCRUB (mn_scrub_people: names by their
     cues and every house number), though the one report has no description (re-review 2026-11-14 P1-5).
   - Points kept to 0.001 degree (ROUND_POINT_STATES) in the record and in raw, and in the saved ZIP itself: before a
     downloaded ZIP (current or all-versions) is saved, sanitize_zip rewrites only the Minnesota rows (points rounded,
@@ -772,7 +772,9 @@ def mn_scrub_people(v: str) -> str:
     return scrub_strict_names(v)
 
 
-STATE_PERSON_SCRUB = {"KY": ky_scrub_people, "MN": mn_scrub_people}
+STATE_PERSON_SCRUB = {"KY": ky_scrub_people}
+# states whose free text also goes through the names scrub before anything is saved (Minnesota; module docstring)
+STATE_NAME_SCRUB = {"MN": mn_scrub_people}
 # Kentucky's form writes durations and computed volumes as bare numbers ('Cause/Duration of Incident: 2615', '290 MIN X
 # 50 GAL = 14500'), which the house-number scrub took for addresses: a number after 'Duration of Incident:' or '=' is
 # kept (review 2026-11-08 P3-1)
@@ -1141,7 +1143,8 @@ def _sanitize_csv(text: str, states: set[str]) -> tuple[str, int]:
             if i < len(new) and new[i].strip():
                 st = row[pi][:2]
                 t = scrub_free_text({"t": new[i]}, ["t"])["t"]
-                new[i] = STATE_PERSON_SCRUB[st](t) if st in STATE_PERSON_SCRUB else t
+                fn = STATE_PERSON_SCRUB.get(st) or STATE_NAME_SCRUB.get(st)
+                new[i] = fn(t) if fn else t
         if new == row:
             out.append(r)
             continue
@@ -1555,8 +1558,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             for rows_ in (i_rows, causes.get(k, []), acts.get(k, [])):
                 for x in rows_:
                     scrub_free_text(x, [c for c in x if c.endswith("_other_text")])
-            if state in STATE_PERSON_SCRUB:   # module docstring, Kentucky
-                people = STATE_PERSON_SCRUB[state]
+            if state in STATE_PERSON_SCRUB or state in STATE_NAME_SCRUB:   # module docstring, Kentucky, Minnesota
+                people = STATE_PERSON_SCRUB.get(state) or STATE_NAME_SCRUB[state]
                 for f in FREE_TEXT_FIELDS:
                     if isinstance(ev.get(f), str):
                         ev[f] = people(ev[f])
