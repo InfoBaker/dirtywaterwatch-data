@@ -70,7 +70,8 @@ def test_a_record_starts_at_the_first_read_never_at_the_update_date():
     assert r["raw"]["time_zone"] == "America/Los_Angeles" and r["raw"]["level"] == "Watch"
     assert r["raw"]["placement_hint"] == {"name": "Lahontan Reservoir", "county": "Churchill County", "state": "NV",
                                           "basis": r["raw"]["placement_hint"]["basis"]}
-    assert r["lat"] is None and r["coord_source"] is None                  # no GNIS feature: placed by name and county
+    assert (r["lat"], r["lon"], r["coord_source"]) == (39.395, -119.186, "nhd")   # inside NHD's lake polygon
+    assert "136854961" in r["raw"]["point_url"] and r["raw"]["county"] == "Churchill County"
     m = next(x for x in recs if x["waterbody_text"] == "Marlette Lake")
     assert (m["lat"], m["lon"], m["coord_source"]) == (39.174, -119.902, "gnis") and "860477" in m["raw"]["point_url"]
     assert r["source_record_id"] == "lahontan-reservoir:2026-11-14"
@@ -236,3 +237,53 @@ def test_p1_1_none_beside_a_listed_water_is_not_read():
     page = AUG26.replace("<p><strong>Lahontan State", "<p>None at this time.</p><p><strong>Lahontan State", 1)
     with pytest.raises(ValueError, match="not completely readable"):
         P.parse(page)
+
+
+def _lake(name, slug, lon0, lat0, d=0.03):
+    return {"slug": slug, "name": name, "kind": "lake", "state": "NV", "bbox": [lon0 - d, lat0 - d, lon0 + d, lat0 + d],
+            "geometry": {"type": "Polygon", "coordinates": [[[lon0 - d, lat0 - d], [lon0 + d, lat0 - d],
+                                                              [lon0 + d, lat0 + d], [lon0 - d, lat0 + d],
+                                                              [lon0 - d, lat0 - d]]]}}
+
+
+@pytest.fixture
+def nv_live(monkeypatch):
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"NV"})
+    return S
+
+
+def test_p1_2_every_standing_advisory_has_a_cited_point_in_its_county():
+    from build import status as S
+    recs, _ = P.build(AUG26, T1, [])
+    assert len(recs) == 4
+    for r in recs:
+        assert r["lat"] is not None and r["coord_source"] in ("gnis", "nhd"), r["waterbody_text"]
+        assert r["raw"]["point_url"].startswith("https://") and r["raw"]["point_basis"]
+        assert (r["lat"], r["lon"]) == (round(r["lat"], 3), round(r["lon"], 3))
+        assert r["raw"]["county"] == P.WATERS[r["waterbody_text"]][0]
+    by = {r["waterbody_text"]: r for r in recs}
+    # the NHD points lie in the park's county by the Census outline (Lahontan's in Lyon, across the Churchill line)
+    assert S.point_county("NV", by["Rye Patch Reservoir"]["lat"], by["Rye Patch Reservoir"]["lon"])[1] == "Pershing County"
+    assert S.point_county("NV", by["Washoe Lake"]["lat"], by["Washoe Lake"]["lon"])[1] == "Washoe County"
+    assert S.point_county("NV", by["Lahontan Reservoir"]["lat"], by["Lahontan Reservoir"]["lon"])[1] in (
+        "Churchill County", "Lyon County")
+    assert "00843409" not in json.dumps(recs)                               # Lincoln County's Rye Patch is not used
+
+
+def test_p1_2_a_nevada_name_goes_only_to_the_water_in_its_county(nv_live):
+    S = nv_live
+    assert S.COUNTY_STATES["NV"] == "nv-counties.json" and "NV" in S.COUNTY_FIELD_STATES
+    assert len(json.loads((ROOT / "data" / "reference" / "nv-counties.json").read_text())["counties"]) == 17
+    waters = {"rye-patch-reservoir-nv": _lake("Rye Patch Reservoir", "rye-patch-reservoir-nv", -118.316, 40.59, 0.05),
+              "rye-patch-reservoir-lincoln-nv": _lake("Rye Patch Reservoir", "rye-patch-reservoir-lincoln-nv",
+                                                      -114.955, 38.013, 0.002)}
+    recs, _ = P.build(AUG26, T1, [])
+    rye = next(r for r in recs if r["waterbody_text"] == "Rye Patch Reservoir")
+    res = S.Resolver(waters, [], placement_rules={})
+    assert res.resolve(rye)["water_slugs"] == ["rye-patch-reservoir-nv"]
+    # with no point (a water whose point is not cited), the county field alone refuses the Lincoln namesake
+    bare = {**rye, "lat": None, "lon": None, "coord_source": None}
+    assert res.resolve(bare)["water_slugs"] == ["rye-patch-reservoir-nv"]
+    alone = S.Resolver({"rye-patch-reservoir-lincoln-nv": waters["rye-patch-reservoir-lincoln-nv"]}, [], placement_rules={})
+    assert alone.resolve(bare)["water_slugs"] == []

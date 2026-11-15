@@ -26,10 +26,11 @@ Record rules
     failed request never lifts an advisory. A section reading "None at this time." lists no
     water at that level; it says nothing of waters outside the state parks.
   - Water: the paragraph's own words name it ("Lahontan Reservoir, located in ..."), else the heading. WATERS gives
-    each known water its county (for the county-aware name placement and raw.placement_hint) and, where the U.S.
-    Geological Survey's Geographic Names Information System holds the feature in that county, its point (coord_source
-    "gnis", raw.point_basis and raw.point_url). A water not in WATERS keeps its name, placed by name only, with
-    raw.placement_note saying so.
+    each known water its county (raw.county and raw.placement_hint: the status build's county-aware name placement,
+    COUNTY_FIELD_STATES, takes a name only on a water record reaching that county) and a cited point: the USGS GNIS
+    feature in that county (coord_source "gnis") or a point inside the lake's USGS National Hydrography Dataset
+    polygon (coord_source "nhd"), with raw.point_basis and raw.point_url. A water not in WATERS keeps its name, no
+    point, placed by name only, with raw.placement_note saying so.
   - Clock: Nevada's (pipeline/zones.py nevada_zone, 49 CFR 71.9(b)): Pacific except West Wendover; raw.time_zone.
   - Privacy: only the headings and the advisory paragraphs are read; the page names no person. The raw save keeps the
     advisory sections only (the page's footer contact lines are not kept); strip_personal runs on raw.
@@ -61,16 +62,22 @@ HEADING = re.compile(r"<p>\s*<strong>\s*(?P<name>[^<(]+?)\s*\(\s*Updated:?\s*(?P
                      r"\s*\)\s*</strong>\s*</p>", re.I)
 NONE = re.compile(r"None at this time", re.I)
 GNIS = "https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/{}"
-# water as the parks' text names it -> (county, GNIS point or None). The points are features of the U.S. Geological
-# Survey's Geographic Names Information System (The National Map's geonames service, layer Other Hydrographic Features,
-# read 2026-11-14) in the county named; GNIS holds no Lahontan Reservoir or Washoe Lake, and its Rye Patch Reservoir is
-# a different water in Lincoln County, so those three are placed by name and county only.
+NHD = ("https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/12/query?where=permanent_identifier%3D%27{}%27"
+       "&outFields=gnis_name,gnis_id,permanent_identifier&f=json")
+# water as the parks' text names it -> (county, point or None). A point is (name, lat, lon, id, kind): kind "gnis" is a
+# feature of the U.S. Geological Survey's Geographic Names Information System (The National Map's geonames service,
+# layer Other Hydrographic Features, read 2026-11-14) in the county named; kind "nhd" is a point inside the lake's own
+# polygon in the USGS National Hydrography Dataset (Waterbody layer 12, read 2026-11-15, GNIS id in the record; the
+# representative point of the polygon, or of the union of its parts, rounded to 0.001 degree), checked to lie in the
+# park's county by the Census outline (data/reference/nv-counties.json), except Lahontan Reservoir, which runs across
+# the Churchill-Lyon line (its point falls in Lyon County). Rye Patch Reservoir's namesake in Lincoln County (GNIS
+# 00843409) is a different water and is not used.
 WATERS = {
-    "Lahontan Reservoir": ("Churchill County", None),
-    "Rye Patch Reservoir": ("Pershing County", None),
-    "Washoe Lake": ("Washoe County", None),
-    "Marlette Lake": ("Carson City", ("Marlette Lake", 39.174, -119.902, 860477)),
-    "Wild Horse Reservoir": ("Elko County", ("Wild Horse Reservoir", 41.671, -115.809, 862000)),
+    "Lahontan Reservoir": ("Churchill County", ("Lahontan Reservoir", 39.395, -119.186, "136854961", "nhd", "00858052")),
+    "Rye Patch Reservoir": ("Pershing County", ("Rye Patch Reservoir", 40.59, -118.316, "145843564", "nhd", "00858164")),
+    "Washoe Lake": ("Washoe County", ("Washoe Lake", 39.281, -119.81, "65204631", "nhd", "00861907")),
+    "Marlette Lake": ("Carson City", ("Marlette Lake", 39.174, -119.902, 860477, "gnis", None)),
+    "Wild Horse Reservoir": ("Elko County", ("Wild Horse Reservoir", 41.671, -115.809, 862000, "gnis", None)),
 }
 START_BASIS = ("the first read of the parks' page that listed this water: the page gives the date of its last update, "
                "not the date the advisory was issued")
@@ -179,12 +186,18 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                "start_basis": START_BASIS, "_first_seen_at": praw.get("_first_seen_at") or fetched,
                "_last_seen_in_source": fetched, "page_url": URL,
                "updated_note": "the parks' update date beside the water's name, Pacific time; not an issue date",
+               "county": county, "state": "NV",
                "placement_hint": {"name": it["water"], "county": county, "state": "NV",
                                   "basis": "the water the parks' advisory names, in the county that holds it"}}
         if it.get("also_listed"):
             raw["also_listed"] = it["also_listed"]
         lat = lon = None
-        if gnis:
+        if gnis and gnis[4] == "nhd":
+            lat, lon = gnis[1], gnis[2]
+            raw["point_basis"] = (f"{gnis[0]}: a point inside the lake's polygon in the USGS National Hydrography "
+                                  f"Dataset (waterbody {gnis[3]}, GNIS {gnis[5]}), rounded to 0.001 degree")
+            raw["point_url"] = NHD.format(gnis[3])
+        elif gnis:
             lat, lon = gnis[1], gnis[2]
             raw["point_basis"] = f"{gnis[0]}: USGS GNIS feature {gnis[3]} (Other Hydrographic Features), {county}"
             raw["point_url"] = GNIS.format(gnis[3])
@@ -192,7 +205,7 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
             raw["placement_note"] = "a water the crosswalk does not know: placed by its name only"
         records[srid] = event(
             source_id=SOURCE_ID, source_record_id=srid, event_type="hab_advisory", status="advisory_active",
-            waterbody_text=it["water"], lat=lat, lon=lon, coord_source="gnis" if gnis else None,
+            waterbody_text=it["water"], lat=lat, lon=lon, coord_source=gnis[4] if gnis else None,
             coord_precision_m=500 if gnis else None, started_at=started, time_precision="poll",
             source_updated_at=it["updated"], fetched_at=fetched, authority=AUTHORITY,
             advice_text=f"HAB {it['level']} Advisory (Nevada State Parks): {it['text']}", source_url=URL, raw=raw)

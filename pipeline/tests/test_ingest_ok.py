@@ -177,3 +177,63 @@ def test_oklahoma_missing_waters_list():
     listed = {r["name"] for r in d["rows"]} | {r["name"] for r in d.get("resolved", [])}
     assert {N.PLACES[p][0] for p in N.PLACES} <= listed
     assert all(r["county"] == "Murray County" for r in d["rows"])
+
+
+# ---- review fixes (Astra, 2026-11-15) --------------------------------------------------------------------------
+
+from build import status as S  # noqa: E402
+
+
+def _line(name, slug, coords, st="OK", kind="river"):
+    xs, ys = [c[0] for c in coords], [c[1] for c in coords]
+    return {"slug": slug, "name": name, "kind": kind, "state": st, "bbox": [min(xs), min(ys), max(xs), max(ys)],
+            "geometry": {"type": "LineString", "coordinates": coords}}
+
+
+# synthetic waters: Rock Creek in Murray County (the park), a namesake in Osage County (about 240 km north), a qualified
+# name in Murray County
+OK_WATERS = {
+    "rock-creek-ok": _line("Rock Creek", "rock-creek-ok", [[-96.99, 34.50], [-96.96, 34.51]]),
+    "rock-creek-osage-ok": _line("Rock Creek", "rock-creek-osage-ok", [[-96.40, 36.60], [-96.37, 36.62]]),
+    "little-rock-creek-ok": _line("Little Rock Creek", "little-rock-creek-ok", [[-97.05, 34.45], [-97.04, 34.46]]),
+}
+
+
+@pytest.fixture
+def ok_live(monkeypatch):
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"OK"})
+    return S
+
+
+def _hole_record(value="300"):
+    page = re.sub(r"(40 Ft Hole</strong></td>\s*<td[^>]*>)[^<]*", lambda m: m.group(1) + value, PAGE, count=1)
+    recs, _ = N.build(page, T1, [])
+    return next(r for r in recs if r["raw"]["place"] == "40 Ft Hole")
+
+
+def test_p1_2_county_aware_placement_takes_the_murray_county_water_only(ok_live):
+    assert S.COUNTY_STATES["OK"] == "ok-counties.json" and "OK" in S.COUNTY_FIELD_STATES
+    assert S.named_county("OK", "Murray County")[1] == "Murray County"
+    assert len(json.loads((ROOT / "data" / "reference" / "ok-counties.json").read_text())["counties"]) == 77
+    hole = _hole_record()
+    assert hole["lat"] is None and hole["raw"]["county"] == "Murray County" and hole["waterbody_text"] == "Rock Creek"
+    res = S.Resolver(OK_WATERS, [], placement_rules={})
+    assert res.resolve(hole)["water_slugs"] == ["rock-creek-ok"]           # not Osage's namesake, not Little Rock Creek
+    alone = S.Resolver({"rock-creek-osage-ok": OK_WATERS["rock-creek-osage-ok"]}, [], placement_rules={})
+    assert alone.resolve(hole)["water_slugs"] == []                        # a sole wrong-county namesake is refused
+    little = S.Resolver({"little-rock-creek-ok": OK_WATERS["little-rock-creek-ok"]}, [], placement_rules={})
+    assert little.resolve(hole)["water_slugs"] == []                       # a qualified name is another water
+
+
+def test_p1_2_the_nv_ok_additions_change_no_other_states_placement(ok_live, monkeypatch):
+    from test_ingest_or import OUTFALLS, SLOUGH, WILL, bes
+    evs = list(bes()[0].values())
+
+    def run():
+        res = S.Resolver({"willamette-river-or": WILL, "columbia-slough-or": SLOUGH}, OUTFALLS, placement_rules={})
+        return json.dumps([res.resolve(e) for e in evs], sort_keys=True, default=str)
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"OR", "NV", "OK"})
+    with_new = run()
+    monkeypatch.setattr(S, "COUNTY_FIELD_STATES", S.COUNTY_FIELD_STATES - {"NV", "OK"})
+    monkeypatch.setattr(S, "COUNTY_STATES", {k: v for k, v in S.COUNTY_STATES.items() if k not in ("NV", "OK")})
+    assert run() == with_new
