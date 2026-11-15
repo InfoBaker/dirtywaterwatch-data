@@ -405,6 +405,8 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
     for e in events:
         if e.get("event_type") not in SEWAGE or e.get("duplicate_of"):
             continue
+        if (e.get("raw") or {}).get("_advice_not_a_discharge"):
+            continue           # a City's advice notice tied to its overflow (Florence): the overflow is the report
         t = in_window_at(e)
         if t is None or t < start or t > now + timedelta(days=1):
             continue
