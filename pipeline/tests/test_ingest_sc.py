@@ -868,3 +868,33 @@ def test_a_revised_des_date_or_water_for_one_globalid_is_taken_and_a_later_episo
     # the next read keeps the new record open and the earlier one ended
     recs, st, _ = A.hab_records([g], [], {"hab": st}, "2026-08-11T13:00:00Z")
     assert sorted((r["started_at"], r["ended_at"] is None) for r in recs) == [("2026-07-05", False), ("2026-08-10", True)]
+
+
+def test_the_shared_changes_leave_an_unflagged_record_as_it_was():
+    # the status and charts additions of this round are keyed on raw flags only Florence sets: a record of another
+    # state with a poll-precision end keeps its explicit end, and an unflagged sso is still counted as a discharge
+    from datetime import datetime, timezone
+    from build import status
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    ev = {"event_id": "ne-x:1", "source_id": "ne-x", "event_type": "beach_advisory", "status": "advisory_active",
+          "started_at": "2026-01-01", "time_precision": "day", "ended_at": "2026-06-01T12:00:00Z",
+          "raw": {"ended_at_precision": "poll", "_last_seen_in_source": "2026-01-01"}}
+    ivs = status.event_intervals(ev, "NE", datetime(2026, 6, 2, tzinfo=timezone.utc), None, rules)
+    red = [i for i in ivs if i["color"] == "red"]
+    assert red and red[0]["end"] == datetime(2026, 6, 1, 12, tzinfo=timezone.utc)
+    from build import charts as C
+    st, _, _ = _florence_one()
+    plain = [r for r in F.records(st, T0) if not r["source_record_id"].endswith("-advice")]
+    plain2 = copy.deepcopy(plain[0])
+    plain2.update(event_id="x:2", source_record_id="2")
+
+    class D:
+        def __getattr__(self, name):
+            return lambda *a, **k: None
+    d = D()
+    d.events, d.superseded, d.duplicates, d.effective, d.dropped = plain + [plain2], set(), {}, {}, {}
+    d.waters = {"c": {"state": "SC", "kind": "stream", "name": "C"}}
+    d.status, d.slugs = {}, (lambda ev: ["c"])
+    d.origin, d.operator_short, d.water_links = (lambda ev: ("SC", None)), (lambda ev: "F"), (lambda ev: [("c", "local")])
+    buckets, stats, _ = C.gather(d)
+    assert len(buckets[("water", "c")].events) == 2 and not stats.get("advice_not_a_discharge")
