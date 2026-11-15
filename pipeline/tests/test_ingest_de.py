@@ -434,7 +434,8 @@ def test_the_shared_rule_texts_other_states_cite_are_unchanged():
     for k in ("sample_caution", "day_start_caution"):
         assert not re.search(r"Delaware|Florence|DNREC", rules[k]["rationale"] + rules[k].get("source", ""))
     assert rules["sample_caution"]["sources"][-1] == "de-dnrec-recreational-water"
-    assert rules["day_start_caution"]["sources"][-2:] == ["de-dnrec-derns-recent-releases", "sc-florence-sso-notices"]
+    assert rules["day_start_caution"]["sources"][-1] == "de-dnrec-derns-recent-releases"
+    assert "sc-florence-sso-notices" not in rules["day_start_caution"]["sources"]    # no start: re-review P1-1
 
 
 def test_the_notification_clock_and_an_unverified_owner_are_stated_as_the_sources_give_them():

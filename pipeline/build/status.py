@@ -2836,7 +2836,10 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                         out.append(note)
                     return out
                 return [iv]
-            if et in AGING_TYPES or system_wide_advisory(ev):
+            if et in AGING_TYPES or system_wide_advisory(ev) \
+                    or (ev.get("raw") or {}).get("_ages_after_confirmation") is True:
+                # raw._ages_after_confirmation: an operator's advice confirmed only by its own publications (Florence,
+                # ingest/sc_florence_sso.py advice_record); keyed on the record's flag, so no other feed changes
                 confirmed = max(t for t in (start, pt(ev.get("source_updated_at")), listed) if t)
                 # a system-wide advisory read every hour (MSD-01) ages out SYSTEM_WIDE_CONFIRM_HOURS after the last
                 # read that showed it, so a page the feed can no longer read never keeps it red (review 2026-11-08 P3-7)
