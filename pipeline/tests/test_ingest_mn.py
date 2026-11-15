@@ -445,3 +445,36 @@ def test_v2_a_stop_needs_a_completed_affirmative_action(words, stopped):
         assert _at(r, 2026, 3, 4, 12)[0] == "yellow"            # unknown: the no-end rules, never a stop's caution end
     else:
         assert r["status"] == "ended" and r["ended_at"] == stopped
+
+
+def test_v2_b_signs_placed_after_a_stop_start_the_councils_window_on_their_own_day():
+    sign = "Signs warning the public “Do Not Enter/ Sewage Spill” will be placed today."
+    page = ("<h1>Example</h1><p>The Council responded Monday afternoon, March 2, to a wastewater spill in Example City."
+            " Crews stopped the spill within hours.</p>"
+            f"<p>3/12/2026 - Second Notice</p><p>{sign}</p><h3>Contact us</h3>")
+    r = _one(page)
+    assert r["raw"]["spill_stopped_on"] == "2026-03-02" and r["raw"]["_advisory_from"] == "2026-03-12"
+    assert r["reported_at"] == "2026-03-02" and r["started_at"] is None
+    assert _at(r, 2026, 3, 2, 20) == ("red", ["discharge"])          # the spill's own day
+    assert _at(r, 2026, 3, 5, 12)[0] == "yellow"                       # the site's caution after the stop
+    assert _at(r, 2026, 3, 6, 12)[0] == "grey"                         # never red before the signs (was red)
+    assert _at(r, 2026, 3, 12, 4)[0] == "grey"                         # before March 12 began (CDT: 05:00 UTC)
+    assert _at(r, 2026, 3, 12, 5, 30) == ("red", ["advisory_active"])
+    # a later removal done: red to the end of that day, then nothing of the advisory
+    done = page.replace("<h3>Contact us", "<p>3/20/2026 - Third Notice</p><p>Signs have been removed.</p><h3>Contact us")
+    d = _one(done)
+    assert d["raw"]["_unlisted_since"] == "2026-03-21T05:00:00Z" and not d["raw"].get("_end_not_confirmed")
+    assert d["advice_window_hours"] is None
+    assert _at(d, 2026, 3, 6, 12)[0] == "grey" and _at(d, 2026, 3, 20, 20)[0] == "red"
+    assert _at(d, 2026, 3, 21, 6)[0] == "grey"
+    # no stop given: before the signs, the no-end rules from the response day (never red); red from the signs' day
+    nostop = page.replace(" Crews stopped the spill within hours.", "")
+    n = _one(nostop)
+    assert n["raw"]["_before_advisory"]["status"] == "unknown"
+    assert _at(n, 2026, 3, 6, 12)[0] == "yellow" and _at(n, 2026, 3, 12, 6)[0] == "red"
+
+
+def test_v2_b_signs_in_the_first_account_keep_the_window_from_the_response_day():
+    recs, _ = mces()
+    assert "_advisory_from" not in recs["Excelsior"]["raw"]                     # posted per the notice of the day
+    assert recs["Minneapolis and Golden Valley"]["raw"]["_advisory_from"] == "2026-07-10"
