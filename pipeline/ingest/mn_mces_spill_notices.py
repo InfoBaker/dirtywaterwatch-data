@@ -43,8 +43,9 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
     and meta.cities_without_county names it. The street location sentence is kept through the house-number scrub.
   - Operator: discharger_id mn-mces (the Metropolitan Council's row); no plant permit is assigned (an interceptor spill
     is not a plant's discharge).
-  - A listed page that does not read as a notice (an error page: no response day, no dated update) keeps its previous
-    record, and a page that cannot be read fails the run (ok=False, every previous record kept; review P1-4).
+  - A listed page that does not read as a notice (an error page: no response day, no dated update), first seen or
+    not, makes no record and keeps its previous one, and it or a page that cannot be read fails the run (ok=False,
+    every previous record kept; review P1-4, re-review P1-3).
   - Revisions: each page's text hash; a changed page appends {seen_at, sha256, headings} to raw._revisions. A page that
     leaves the list (one-year retention) keeps its record with raw.gone_from_index_since; one whose signs were still up
     gets raw._unlisted_since and raw._end_not_confirmed (hatched: the lifting was never seen). A page that cannot be
@@ -368,11 +369,13 @@ def build(index_page: str, pages: dict[str, str | None], fetched: str, previous:
             continue
         parsed = parse_page(page)
         if not page_reads(parsed):
-            if it["url"] in prev_by_url:            # a page that is not the notice (an error page): keep the record
+            # a page that is not the notice (an error page), first seen or not: never a record of its own; the
+            # previous record stays and the run fails (re-review 2026-11-14 P1-3)
+            if it["url"] in prev_by_url:
                 p = prev_by_url[it["url"]]
                 out[p["event_id"]] = p
-                unread.append(it["url"])
-                continue
+            unread.append(it["url"])
+            continue
         rec = build_one(it, parsed, fetched, prev_by_url.get(it["url"]))
         if not rec["raw"].get("county"):
             no_county.append(rec["raw"].get("city"))
