@@ -538,7 +538,7 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
 STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM", "UT", "KY",
-          "MN", "IN"}
+          "MN", "IN", "SC"}
 STATES |= {"PR"}   # Puerto Rico (module docstring)
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",

@@ -595,7 +595,9 @@ def test_state_text_is_in_the_page_shape():
               "Known problems in the data", "What this site does about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
-    assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
+    # the one use of "safe" is the audit's negation: a site on DES's list is not a water found safe (P1-1)
+    bare = t.replace("a site on that list is not a water found safe", "")
+    assert not re.search(r"\b(safe|clean)\b", bare, re.I) and ".json" not in t and ".py" not in t
     assert "48-1-95" in t and "City of Florence" in t and "21 long-term" in t and "18 on the Grand Strand" in t
 
 
