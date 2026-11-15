@@ -82,7 +82,7 @@ AGENCY = [
     {"id": "nv-ndep-hab-program", "agency": "Nevada Division of Environmental Protection",
      "name": "Nevada Division of Environmental Protection (harmful algal bloom program)",
      "channel_kind": "state_alert_page", "urls": [HAB_PAGE], "method": "html", "legal_basis": None,
-     "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "publishes": "link_only",
+     "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "metadata_only": True, "publishes": "link_only",
      "link_text": "the statewide HAB dashboard and the weekly e-mail list", "records": False, "every_hours": 24,
      "noun": "Voluntary page", "sources": ["nv-ndep-hab-dashboard"],
      "note": ("NDEP's bloom program page (read 2026-11-09 in the expansion research) links the statewide dashboard and "
@@ -102,7 +102,7 @@ AGENCY = [
     {"id": "nv-nps-lake-mead-habs", "agency": "National Park Service, Lake Mead National Recreation Area",
      "name": "National Park Service, Lake Mead (harmful algal blooms page)", "channel_kind": "shared_site",
      "urls": ["https://www.nps.gov/lake/planyourvisit/harmful-blue-green-algae-blooms-habs.htm"], "method": "html",
-     "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "metadata_only": True,
      "publishes": "notices", "records": False, "every_hours": 24, "noun": "Voluntary page",
      "sources": ["nv-nps-lake-mead-habs"],
      "note": ("The park's bloom page: general advice, intermittent monitoring and public reports; its page date "

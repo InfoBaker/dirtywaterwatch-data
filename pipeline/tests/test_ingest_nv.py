@@ -52,7 +52,8 @@ def test_the_page_is_read_by_section_and_water():
         ("Watch", "Marlette Lake", "2026-06-17"), ("Watch", "Washoe Lake", "2026-07-20")]
     assert items[0]["heading"] == "Lahontan State Recreation Area"
     assert "Visual assessments have indicated a possible bloom" in items[0]["text"]
-    assert sections.count("<section") == 3
+    saved = json.loads(sections)
+    assert list(saved["levels"]) == ["Watch", "Warning", "Danger"] and len(saved["levels"]["Watch"]) == 4
     items, _ = P.parse(NOV25)
     assert [(i["level"], i["water"], i["updated"]) for i in items] == [
         ("Watch", "Rye Patch Reservoir", "2025-10-08"), ("Warning", "Lahontan Reservoir", "2025-10-16")]
@@ -287,3 +288,62 @@ def test_p1_2_a_nevada_name_goes_only_to_the_water_in_its_county(nv_live):
     assert res.resolve(bare)["water_slugs"] == ["rye-patch-reservoir-nv"]
     alone = S.Resolver({"rye-patch-reservoir-lincoln-nv": waters["rye-patch-reservoir-lincoln-nv"]}, [], placement_rules={})
     assert alone.resolve(bare)["water_slugs"] == []
+
+
+# synthetic personal data placed inside the read sections (invented)
+PRIVATE = ("Pat Example", "775-555-0100", "pat@example.org", "1234-A Example St", "39.12345", "Jane Sample")
+
+
+def _poisoned():
+    extra = (" Contact Pat Example at 775-555-0100 or pat@example.org. A bloom was seen near the home of Jane Sample, "
+             "1234-A Example St, at 39.12345, -119.54321. Dr. Jane Sample reported it.")
+    return AUG26.replace("Visual assessments have indicated a possible bloom.",
+                         "Visual assessments have indicated a possible bloom." + extra, 1).replace(
+        '<p>Marlette Lake, located', '<p class="x" data-owner="Pat Example">Marlette Lake, located', 1)
+
+
+class _Resp:
+    def __init__(self, text):
+        self.text, self.headers, self.status_code = text, {}, 200
+
+    def raise_for_status(self):
+        return None
+
+
+def test_p1_4_nothing_personal_reaches_any_save(tmp_path, monkeypatch):
+    import common
+    saved = []
+    monkeypatch.setattr(P, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(P, "save_raw", lambda src, body, ext: saved.append((ext, body)) or tmp_path / "raw")
+    writes = []
+    real = common.write_events
+    monkeypatch.setattr(P, "write_events", lambda *a, **k: writes.append((a, k)) or real(
+        *a, **{**k, "path": tmp_path / f"{P.SOURCE_ID}.json"}))
+    monkeypatch.setattr(P.requests, "get", lambda *a, **k: _Resp(_poisoned()))
+    assert P.main([]) == 0
+    assert len(saved) == 1 and saved[0][0] == "json" and "<" not in saved[0][1] and "data-owner" not in saved[0][1]
+    blob = saved[0][1] + json.dumps(writes, default=str) + (tmp_path / f"{P.SOURCE_ID}.json").read_text()
+    for p in PRIVATE:
+        assert p not in blob, p
+    doc = json.loads((tmp_path / f"{P.SOURCE_ID}.json").read_text())
+    lah = next(r for r in doc["records"] if r["waterbody_text"] == "Lahontan Reservoir")
+    assert lah["raw"]["sentences_withheld"] == 3 and "Visual assessments" in lah["advice_text"]
+    assert "Dr." not in lah["advice_text"] and "Contact" not in lah["advice_text"]
+    # the failed-read path: an error carrying page text is cleaned before the health file
+    monkeypatch.setattr(P, "parse", lambda page: (_ for _ in ()).throw(ValueError("Contact Pat Example at 775-555-0100")))
+    assert P.main([]) == 1
+    assert not any(p in (tmp_path / f"{P.SOURCE_ID}.json").read_text() for p in PRIVATE)
+
+
+def test_p1_4_watched_nevada_pages_keep_no_body_and_no_text(tmp_path):
+    from ingest import notification_pages as NP
+    from test_ingest_wi import _np_run
+    rows = [r for r in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]
+            if r.get("monitored")]
+    assert len(rows) == 2 and all(r["metadata_only"] is True and r["records"] is False for r in rows)
+    personal = b"<html><body><p>Contact Pat Example, 775-555-0100, pat@example.org, 1234-A Example St.</p></body></html>"
+    out, saved = _np_run(NP, rows, {u: personal for r in rows for u in r["urls"]}, tmp_path, "2026-11-15T12:00:00Z")
+    assert saved == []
+    blob = json.dumps(out["snaps"], default=str) + "".join(p.read_text() for p in (tmp_path / "store").rglob("*.json"))
+    assert not any(p in blob for p in PRIVATE)

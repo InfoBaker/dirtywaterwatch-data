@@ -63,7 +63,7 @@ AGENCY = [
     {"id": "ok-deq-wastewater-reporting-page", "agency": "Oklahoma Department of Environmental Quality",
      "name": "Oklahoma Department of Environmental Quality (wastewater reporting requirements page)",
      "channel_kind": "state_alert_page", "urls": [REPORTING], "method": "html", "legal_basis": None,
-     "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "publishes": "documents",
+     "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "metadata_only": True, "publishes": "documents",
      "records": False, "every_hours": 24, "noun": "Voluntary page", "sources": ["ok-deq-wastewater-reporting"],
      "note": ("DEQ's instructions to operators (last modified 2026-09-04): a telephone report within 48 hours of the "
               "event and a written follow-up in five days (also written five business days). Watched for a change of "
@@ -78,7 +78,7 @@ AGENCY = [
     {"id": "ok-deq-npdes-dischargers-layer", "agency": "Oklahoma Department of Environmental Quality",
      "name": "Oklahoma Department of Environmental Quality (NPDES Dischargers map layer)", "channel_kind": "shared_site",
      "urls": ["https://gis.deq.ok.gov/server/rest/services/WaterQWeb/MapServer/4"], "method": "json",
-     "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "metadata_only": True,
      "publishes": "documents", "records": False, "every_hours": 168, "noun": "Voluntary page",
      "sources": ["ok-deq-gis-waterqweb"],
      "note": ("DEQ's map layer of permitted discharge points (1,499 rows, 872 permits, \"Data set updated 06/14/2026\"): "
@@ -96,7 +96,7 @@ AGENCY = [
     {"id": "ok-travelok-lake-conditions", "agency": "Oklahoma Tourism and Recreation Department",
      "name": "Oklahoma Tourism and Recreation Department (lake conditions)", "channel_kind": "state_alert_page",
      "urls": ["https://www.travelok.com/state-parks/lake-conditions"], "method": "html", "legal_basis": None,
-     "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "publishes": "unknown",
+     "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "metadata_only": True, "publishes": "unknown",
      "records": False, "every_hours": 24, "noun": "Voluntary page", "sources": ["ok-otrd-checkmyoklake"],
      "note": ("The state's lake chooser for current conditions and blue-green algae (the successor of Check My OK "
               "Lake, whose host failed in November); the selected-lake results and their dates were not exposed to the "
