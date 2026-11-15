@@ -2453,31 +2453,32 @@ class Resolver:
 
     def resolve(self, ev: dict) -> dict:
         out = self._resolve(ev)
-        parts = extent_part_points(ev)
-        if parts:
-            # an advisory whose authority drew it as several areas or lines (West Virginia DEP's bloom map only,
-            # EXTENT_PART_SOURCES): each part is placed by its own interior point, as the marker's part is, so a
-            # second lake the advisory covers is not left out; a water's colour still follows colours_whole_water
-            # and advisory_on_river (a large lake or a river keeps a marker only)
-            got = list(out.get("water_slugs") or [])
-            added, part_points = [], {}
-            for lat, lon in parts:
-                o = self._resolve({**ev, "lat": lat, "lon": lon})
-                for sl in o.get("water_slugs") or []:
-                    if sl not in got:
-                        got.append(sl)
-                        added.append(sl)
-                        part_points[sl] = [lat, lon]    # the part's own point: that water's marker sits there
-            if added:
-                if out.get("water_match") in (None, "none"):
-                    out["water_match"] = "geometry"
+        hits = extent_hits(ev, self.waters, event_state(ev))
+        if hits is not None:
+            # an advisory the authority drew as an area or a line (West Virginia DEP's bloom map only,
+            # EXTENT_PART_SOURCES): placed on every water its drawn extent crosses (Astra verify3 P2-1), each affected
+            # piece of a water with its own point, so two lakes under one area are both placed and two separate pieces
+            # of one river are two markers; the piece holding the record's point is marked there. A water's colour
+            # still follows colours_whole_water and advisory_on_river (a large lake or a river keeps markers only)
+            got = [sl for sl in hits["waters"]]
+            if got:
+                prior = out.get("water_slugs") or []
                 out["water_slugs"] = got
+                out["water_match"] = "geometry"
                 out.pop("unplaced_reason", None)
-            out["extent_parts"] = {"parts": len(parts) + 1, "waters_added": added,
-                                   **({"points": part_points} if part_points else {})}
+                dropped = [sl for sl in prior if sl not in got]
+            else:
+                dropped = []
+            out["extent_parts"] = {"parts": hits["parts"], "waters_added": [sl for sl in got if sl not in
+                                                                            (hits["own"] or [])],
+                                   "record_point_marker": hits["record_point_marker"], "own": hits["own"],
+                                   **({"points": hits["points"]} if hits["points"] else {})}
             out["note"] = "; ".join(x for x in (out.get("note"), (
-                f"the authority's advisory has {len(parts) + 1} parts; each is placed by its own point"
-                + (f" ({len(added)} more water{'s' if len(added) != 1 else ''})" if added else ""))) if x)
+                f"the authority's drawn {'area' if hits['area'] else 'line'} ({hits['parts']} part"
+                f"{'s' if hits['parts'] != 1 else ''}) crosses {len(got)} water{'s' if len(got) != 1 else ''}; each "
+                f"affected piece is placed by its own point"
+                + (f"; not placed on {', '.join(dropped)}, which the drawn extent does not cross" if dropped else "")))
+                if x)
         if text_over_flag(ev):
             # the water comes from the notice's text against its form's flag: the placement says so (TEXT_OVER_FLAG)
             raw = ev.get("raw") or {}
@@ -3352,28 +3353,113 @@ def reach_waters(reach: dict, waters: dict) -> list[str]:
 EXTENT_PART_SOURCES = {"wv-dep-hab-advisories"}
 
 
-def extent_part_points(ev: dict) -> list[tuple[float, float]]:
-    """(lat, lon) of each part of a multipart agency extent other than the part the record's marker is on: an
-    interior point of each polygon (outside its holes), the point half way along each line; three decimals. Empty
-    for every other source and for a single-part extent."""
+EXTENT_LINE_TOL_DEG = 0.0015       # a drawn line lies along a water within about 130 m (DEP draws along the stream)
+EXTENT_MARK_TOL_DEG = 0.002        # the record's point is on a piece within about 200 m
+
+
+def agency_extent(ev: dict):
+    """The authority's own drawn extent (raw.agency_extent, GeoJSON) as shapely parts, for EXTENT_PART_SOURCES only;
+    None for every other source or when there is none."""
     if ev.get("source_id") not in EXTENT_PART_SOURCES:
-        return []
+        return None
     g = (ev.get("raw") or {}).get("agency_extent")
-    if not isinstance(g, dict) or g.get("type") not in ("MultiPolygon", "MultiLineString"):
-        return []
+    if not isinstance(g, dict) or g.get("type") not in ("Polygon", "MultiPolygon", "LineString", "MultiLineString"):
+        return None
     try:
-        from shapely.geometry import Point, shape
-        geoms = list(shape(g).geoms)
+        from shapely.geometry import shape
+        geom = shape(g)
+        return [p for p in (list(geom.geoms) if g["type"].startswith("Multi") else [geom]) if not p.is_empty]
     except Exception:
+        return None
+
+
+def _pieces(geom) -> list:
+    """The pieces of an intersection that have extent (areas, lines), not the points where outlines only touch."""
+    if geom is None or geom.is_empty:
         return []
-    out = []
+    if hasattr(geom, "geoms"):
+        return [q for p in geom.geoms for q in _pieces(p)]
+    if geom.geom_type == "Polygon":
+        return [geom] if geom.area > 1e-10 else []
+    if geom.geom_type == "LineString":
+        return [geom] if geom.length > 1e-7 else []
+    return []
+
+
+def _piece_point(piece) -> tuple[float, float]:
+    pt = piece.representative_point() if piece.geom_type == "Polygon" else piece.interpolate(0.5, normalized=True)
+    return round(pt.y, 3), round(pt.x, 3)
+
+
+def extent_hits(ev: dict, waters: dict, state: str | None) -> dict | None:
+    """Where the authority's drawn extent meets the water records (EXTENT_PART_SOURCES only; None otherwise):
+    {waters: [slug, ...] (the record point's water first), points: {slug: [[lat, lon], ...]} for every affected piece
+    except the one the record's point is on, own: the waters whose piece holds the record's point, parts, area,
+    record_point_marker: whether the record's own point keeps a marker (its part crosses no water)}. An area is cut
+    by each water's outline (a lake inside a hole is not crossed); a line is taken within EXTENT_LINE_TOL_DEG of it.
+    The pieces of one water are kept apart, so separate affected parts of a river each have a point."""
+    parts = agency_extent(ev)
+    if not parts:
+        return None
+    from shapely.geometry import Point
+    from shapely.ops import unary_union
+    area = parts[0].geom_type == "Polygon"
+    zones = parts if area else [p.buffer(EXTENT_LINE_TOL_DEG) for p in parts]
+    whole = unary_union(zones)
+    minx, miny, maxx, maxy = whole.bounds
     mk = Point(float(ev["lon"]), float(ev["lat"])) if ev.get("lat") is not None and ev.get("lon") is not None else None
-    for part in geoms:
-        pt = part.representative_point() if part.geom_type == "Polygon" else part.interpolate(0.5, normalized=True)
-        if mk is not None and part.buffer(0.002).contains(mk):
-            continue                    # the marker's own part: placed by the marker
-        out.append((round(pt.y, 3), round(pt.x, 3)))
-    return out
+    own_part = next((z for z in zones if mk is not None and z.buffer(EXTENT_MARK_TOL_DEG).contains(mk)), None)
+    found, points, own = [], {}, []
+    own_part_hit = False
+    for slug, w in waters.items():
+        b = w.get("bbox")
+        if (state and w.get("state") != state) or not b or b[0] > maxx or b[2] < minx or b[1] > maxy or b[3] < miny:
+            continue
+        wg = water_geometry(slug, waters)
+        if wg is None:
+            continue
+        wparts = list(wg.geoms) if wg.geom_type == "GeometryCollection" else [wg]
+        try:
+            pieces = _pieces(unary_union([wp.intersection(whole) for wp in wparts]))
+        except Exception:
+            continue
+        if not pieces:
+            continue
+        found.append(slug)
+        if own_part is not None and any(own_part.intersects(p) for p in pieces):
+            own_part_hit = True
+        pts = []
+        for p in pieces:
+            if mk is not None and p.buffer(EXTENT_MARK_TOL_DEG).contains(mk):
+                own.append(slug)            # the record's point is on this piece: its marker is there
+                continue
+            q = list(_piece_point(p))
+            if q not in pts:
+                pts.append(q)
+        if pts:
+            points[slug] = pts
+    found.sort(key=lambda s: (s not in own, s))
+    return {"waters": found, "points": points, "own": sorted(set(own)), "parts": len(parts), "area": area,
+            "record_point_marker": own_part is None or not own_part_hit}
+
+
+def _part_point_list(v) -> list:
+    """A water's part points: [[lat, lon], ...] (one per affected piece); a single [lat, lon] from an older placement."""
+    if isinstance(v, (list, tuple)) and len(v) == 2 and all(isinstance(x, (int, float)) for x in v):
+        return [list(v)]
+    return [list(x) for x in v or []]
+
+
+def extent_part_points(ev: dict) -> list[tuple[float, float]]:
+    """(lat, lon) of each part of a multipart agency extent other than the part the record's marker is on (kept for
+    the placement cache gate: a record with a drawn extent is resolved afresh). Empty for every other source and for
+    a single-part extent."""
+    parts = agency_extent(ev)
+    if not parts or len(parts) < 2:
+        return []
+    from shapely.geometry import Point
+    mk = Point(float(ev["lon"]), float(ev["lat"])) if ev.get("lat") is not None and ev.get("lon") is not None else None
+    return [_piece_point(p) for p in parts if not (mk is not None and p.buffer(EXTENT_MARK_TOL_DEG).contains(mk))]
 
 
 def names_its_water(ev: dict) -> bool:
@@ -3960,7 +4046,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         began = parse_time(ev.get("started_at") or ev.get("reported_at")) if cache_before else None
         # a multipart agency extent (EXTENT_PART_SOURCES only) is resolved afresh, so a placement cached before its
         # parts carried their own points is not reused
-        if began is not None and began < cache_before and not extent_part_points(ev):
+        if began is not None and began < cache_before and agency_extent(ev) is None:
             h = record_hash(ev)
             hit = cache_old.get(eid)
             if hit and hit[0] == h:
@@ -4133,20 +4219,26 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             # an advisory drawn as several parts (EXTENT_PART_SOURCES only): a water another part lies on has its
             # marker at that part's point, not at the record's; the record's point keeps the marker of its own
             # water, or of no water when its part colours none. Every other record: one marker, as before
-            part_pts = (pl.get("extent_parts") or {}).get("points") or {}
-            groups = [(point_on, None)]
+            ext = pl.get("extent_parts") or {}
+            part_pts = ext.get("points") or {}
+            groups = [(point_on, None, 0)]
             if part_pts and any(x in part_pts for x in point_on):
-                own = [x for x in point_on if x not in part_pts]
-                groups = ([(own, None)] if own or not [x for x in pl["water_slugs"] if x not in part_pts] else []) \
-                    + [([x], part_pts[x]) for x in point_on if x in part_pts]
-            for g_on, g_pt in (groups if colouring and any(iv["end"] is None or iv["end"] > h_start
+                own = [x for x in point_on if x not in part_pts or x in (ext.get("own") or [])]
+                # the record's own point keeps a marker for its own water's piece, or, when its part crosses no
+                # water, of no water; an area that only lies between the waters it crosses gets none there
+                keep_own = own or (ext.get("record_point_marker", True)
+                                   and not [x for x in pl["water_slugs"] if x not in part_pts])
+                groups = ([(own, None, 0)] if keep_own else []) \
+                    + [([x], pt, k) for x in point_on if x in part_pts for k, pt in enumerate(_part_point_list(part_pts[x]))]
+            for g_on, g_pt, g_k in (groups if colouring and any(iv["end"] is None or iv["end"] > h_start
                                                            for iv in colouring) else []):
                 col, act = status_at(ivs, now)
                 top = max(act, key=lambda iv: RANK[iv["color"]]) if act else None
                 points.append({"event_id": eid, "water_slugs": g_on, "status": col,
                                **({"part_point": {"lat": g_pt[0], "lon": g_pt[1],
                                                   "basis": "a further part of the authority's own drawn area or "
-                                                           "line, by its own point"}} if g_pt else {}),
+                                                           "line, by its own point",
+                                                  **({"piece": g_k} if g_k else {})}} if g_pt else {}),
                                "category": category_of(ev.get("event_type")),
                                "rule": top["rule"] if top else None, "label": top["label"] if top else None,
                                "short": short_reason(top, ev) if top else None,
