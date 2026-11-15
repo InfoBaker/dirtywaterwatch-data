@@ -450,7 +450,10 @@ def test_p3_14_the_generators_and_shared_rules_leave_other_states_identical(monk
     from build import status as S
     assert "nv-state-parks-hab" in S.POLL_END_HORIZON_SOURCES and {"de-dnrec-recreational-water", "sc-des-beach-monitoring",
                                                                    "sc-des-hab"} <= S.POLL_END_HORIZON_SOURCES
-    assert len(S.POLL_END_HORIZON_SOURCES) == 4
+    # integrate/second-1: Puerto Rico adds its own source (pr-drna-beach-notices); the set is pinned whole, so any
+    # other addition still fails here
+    assert S.POLL_END_HORIZON_SOURCES == {"de-dnrec-recreational-water", "sc-des-beach-monitoring", "sc-des-hab",
+                                          "nv-state-parks-hab", "pr-drna-beach-notices"}
 
 
 def test_p1_4_records_carried_from_earlier_reads_are_cleaned_again():
