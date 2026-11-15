@@ -37,8 +37,8 @@ Cache and cadence
 
 Failures
   A permit whose request fails three times keeps its cached answer and is named in meta.fetch; any failed request
-  makes the run ok=False, the records (from the cache) still written. A permit ECHO calls invalid is 'not in ECHO',
-  no failure, and keeps what an earlier answer showed. Each record's fetched_at is when ECHO was asked. The answers name the facility (a public plant), no person.
+  makes the run ok=False, the records (from the cache) still written. A permit ECHO calls invalid is 'not in ECHO':
+  a rejected request, so the run is ok=False too, and the permit keeps what an earlier answer showed. Each record's fetched_at is when ECHO was asked. The answers name the facility (a public plant), no person.
 
 Run from pipeline/:  python -m ingest.wv_echo_cso_monthly [--since 2025-01-01] [--refresh] [--cache FILE]
 """
@@ -239,13 +239,15 @@ def main(argv=None) -> int:
                  "permits_asked": len(outlets), "fetch": fetch_log,
                  "permits_with_cso_lines": sorted(p for p, e in cache["permits"].items() if e.get("lines")),
                  "cadence": "weekly per permit; DMRs reach ECHO weeks after the month"})
-    failed = {p: v for p, v in fetch_log.items() if v.startswith("failed")}
+    # a permit ECHO calls invalid is a rejected request, not an answer: the run is degraded (not ok), the cached months
+    # and their original fetch times kept
+    failed = {p: v for p, v in fetch_log.items() if v.startswith("failed") or v == "not in ECHO"}
     if failed:
         # the records come from the cache, which keeps every earlier answer, so they are complete; the run is not ok
         # and names the permits whose request failed (all of them, or some)
         out = common.EVENTS_DIR / f"{SOURCE_ID}.json"
         write_json(out, {"source_id": SOURCE_ID, "fetched_at": now_iso(), "ok": False,
-                         "error": f"{len(failed)} of {len(fetch_log)} requests failed: {failed}",
+                         "error": f"{len(failed)} of {len(fetch_log)} requests failed or were rejected: {failed}",
                          "last_ok_at": (read_json(out, {}) or {}).get("last_ok_at"), "meta": meta,
                          "count": len(records), "records": records})
         print(f"{SOURCE_ID}: {len(failed)} requests failed; {len(records)} outlet-months from the cache", file=sys.stderr)
