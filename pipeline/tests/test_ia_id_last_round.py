@@ -187,3 +187,19 @@ def test_last_iowa_focomp_receiving_stream_is_scrubbed_before_every_save(tmp_pat
     for s in saves:
         for b in ("Example Person", "123-A", "45-B"):
             assert b not in s, (b, s[:300])
+
+
+# ------------------------------------------------------------------ Idaho's state text states what the code does
+
+def test_last_idaho_state_text_follows_the_implemented_cases():
+    """Each statement is tied to the test that shows it: the disappearance rule (test_p1_1_* and the partial-layer
+    test above), the closure (test_p1_2_an_explicit_recreational_closure_*), the caution held between reads
+    (test_p1_2_a_listed_watch_*) and the undated row (the poll-start test above)."""
+    from pathlib import Path
+    t = (Path(__file__).resolve().parents[2] / "research" / "id" / "state-text.md").read_text()
+    assert "Health Watch and Health Alert are the Department's risk levels while results are pending" in t
+    assert "never as an advisory" not in t and "or drops the water" not in t
+    assert "every row of that reading could be read" in t and "read in full at the same time" in t
+    assert "closed to recreational use is shown as the agencies' closure" in t
+    assert "until 72 hours after the latest reading that listed it" in t
+    assert "dated from the first reading that listed it" in t
