@@ -7,10 +7,11 @@ Underwood Creeks; Astra review 2026-11-14 P2-9). The outlines: U.S. Census Burea
 State_County MapServer layer 1 (counties), state 55, generalised by the service to 0.001 degree, as
 scripts/al_counties.py reads Alabama's.
 
-Writes data/reference/wi-counties.json: each county's name, GEOID and outline (coordinates rounded to 4 decimals).
+Writes data/reference/wi-counties.json: each county's name, GEOID and outline (coordinates rounded to 4 decimals, as
+the other states' county files: public Census boundaries, not report points, which are rounded to 3).
 
 Run from the repository root:
-  pipeline/.venv/bin/python scripts/ut_counties.py [--file counties.geojson]
+  pipeline/.venv/bin/python scripts/wi_counties.py [--file counties.geojson]
 """
 from __future__ import annotations
 
