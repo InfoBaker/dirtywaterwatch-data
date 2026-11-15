@@ -61487,7 +61487,7 @@
   "license": null,
   "legal_basis": "RSMo 640.080 (search): GM 190 E. coli/100 mL; signs 'Swimming is Not Recommended'",
   "status": "watch",
-  "status_reason": "The beach status map is drawn by a script with per-beach pages; out of season on 2026-11-14, its data were not read. Registered and watched for availability.",
+  "status_reason": "The beach results are published as the open data set \"DNR Beaches Status\" (data.mo.gov 945m-hi5h, rows.json), which answered on 2026-11-15: 17 beaches, all closed for the season, so no beach advisory stands. Not yet collected; registered and watched for availability until an ingester reads it.",
   "verified": "search_only",
   "checked": "2026-11-14",
   "notes": "",
