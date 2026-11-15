@@ -481,6 +481,12 @@ def records(notices: list[dict], at: str, confirmed: dict | None = None) -> tupl
             runs.append({"station": None, "notices": [(step, x)], "end": None, "unknown": True})
     newest_listing = newest if newest and not newest_unread else None
     out = [_record(r, at, newest_listing, confirmed or {}) for r in runs]
+    seen: dict[str, int] = {}
+    for r in out:      # two withheld unmatched rows of one notice would share an id: the second gets a suffix
+        n = seen[r["event_id"]] = seen.get(r["event_id"], 0) + 1
+        if n > 1:
+            r["source_record_id"] += f"-{n}"
+            r["event_id"] += f"-{n}"
     unread = [n for n in ns if _versions(n)[-1].get("kind") == "unread"]
     blocking = [n["id"] for n in unread if first_readable and n["published"] > first_readable]
     if newest_unread and newest[2] not in blocking:

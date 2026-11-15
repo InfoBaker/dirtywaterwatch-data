@@ -530,3 +530,9 @@ def test_other_states_match_mains_own_module(tmp_path):
     old = OLD.build(copy.deepcopy(t), info)
     assert strip(new[0]) == strip(old[0]) and len(strip(new[0])) == 3
     assert strip(new[1]) == strip(old[1])
+
+
+def test_two_withheld_rows_of_one_notice_keep_two_ids():
+    recs, _ = recs_of([post(1, "2026-11-06T12:00:00", [("x", "Llame al 787-555-0142", "Naguabo"),
+                                                       ("y", "Escriba a pat@example.org", "Naguabo")])])
+    assert len(recs) == 2 and all(r["lat"] is None for r in recs.values())
