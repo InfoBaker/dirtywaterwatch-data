@@ -35,11 +35,13 @@ Record rules (rules only: no model, no geocoding)
     come from a combined sewer outfall) with the basis stated, never left unknown.
   - Times, America/Chicago (Milwaukee; raw.time_zone): the post's own stamp ("08/06/26 09:00:am") is published_at.
     reported_at stays null (the post gives the letter's subject, not its receipt date). started_at: a stated start
-    ("started at 5:55 pm on April 2, 2024"; "around 10:00 a.m. on 9-3-26"), precision minute; else the first day of the
-    dates the title or the opening sentence gives ("August 1st, 2026", "Aug 9-10, 2025", "April 1 thru 4, 2024",
-    "February 27 to March 1st, 2023", "8-20-18", "starting on 3/14/2019"), precision day; a date with no year takes the
-    post's year, or the year before when that would put it after the post. The last day of a stated range is kept as
-    raw.period_end (the storm's dates, never the overflow's end). ended_at only from a stated end ("ended at 8:10 pm on
+    ("started at 5:55 pm on April 2, 2024"; "around 10:00 a.m. on 9-3-26"), precision minute, when the nearest cue before
+    the time is a start and not an end ("ended at 2:00 pm on June 2" is never a start); else the day a sentence about
+    that overflow gives ("A combined sewer overflow occurred on June 1, 2027"), precision day. The dates the title or
+    the opening sentence give for the storm ("August 1st, 2026", "Aug 9-10, 2025", "8-20-18") are not the overflow's
+    start: they are kept as raw.period_start / raw.period_end and raw.started_after (a lower bound), started_at stays
+    null and the status engine counts from the post's publication (Astra re-review 2026-11-15 P1-2). A date with no
+    year takes the post's year, or the year before when that would put it after the post. ended_at only from a stated, completed end ("ended at 8:10 pm on
     April 4, 2024"; "ended on March 1st, 2023, at 8:00 am"; "began on January 6 at around 11:25 PM and continued until
     2:22 AM on January 7, 2026"): raw.ended_at_precision minute, status ended. A stated time belongs to the overflow its
     own sentence names; a sentence naming none gives it only when the post reports one type. A date with no year in a
@@ -146,11 +148,27 @@ START_RX = [
     re.compile(rf"\bstarted\s+(?:at\s+)?(?:approximately\s+)?{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\b(?:around|approximately|at)\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
 ]
+# an end only from words saying the overflow did end ("ended at", "continued until"): "will continue until" and the
+# like are not ends (Astra re-review 2026-11-15 P1-3); NEGATED also refuses the clause
 END_RX = [
-    re.compile(rf"\buntil\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
+    re.compile(rf"\b(?:continued|lasted|ran|persisted)\s+until\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\bended\s+at\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\bended\s+on\s+(?P<d>{ANY_DATE}),?\s+at\s+{CLOCK}", re.I),
 ]
+
+# the last cue before a time says whose time it is: "ended at 2:00 pm on June 2" is never a start (Astra re-review
+# 2026-11-15 P1-2)
+START_CUE = re.compile(r"\b(?:began|begin\w*|start\w*|occurred|occured|took place|triggered|initiated)\b", re.I)
+END_CUE = re.compile(r"\b(?:ended|ending|end|until|stopped|ceased|concluded|lasted|continued)\b", re.I)
+
+
+def _start_owned(text: str, m: re.Match) -> bool:
+    """True when the nearest cue before the time m is a start cue, not an end cue."""
+    pre = text[:m.start()] + text[m.start():m.end()].split(m.group("h"), 1)[0]
+    s = [x.end() for x in START_CUE.finditer(pre)]
+    e = [x.end() for x in END_CUE.finditer(pre)]
+    return bool(s) and (not e or max(s) > max(e))
+
 
 TYPE_WORDS = {"cso": re.compile(r"combined sewer overflows?|\bcsos?\b", re.I),
               "sso": re.compile(r"(?:separate|sanitary) sewer overflows?|\bssos?\b|(?:sanitary )?sewer release|"
@@ -498,6 +516,8 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                     continue
                 for rx in rxs:
                     m = rx.search(x)
+                    if m and key == "start" and not _start_owned(x, m):
+                        m = None
                     d = parse_date(m.group("d"), ref) if m else None
                     if d:
                         types[t][key] = (_at(d, m), m.group(0))
@@ -548,15 +568,17 @@ def records_for(item: dict, doc: dict, fetched_at: str) -> list[dict]:
             start, sprec = x["day"][0].isoformat(), "day"
             raw["start_basis"] = f"the date the post's sentence about this overflow gives (\"{x['day'][1]}\")"
         elif per:
-            start, sprec = per[0].isoformat(), "day"
-            raw["start_basis"] = (f"the first day of the dates the post gives for the storm (\"{per[2]}\"); the post "
-                                  "gives no date of its own for this overflow, so it began on or after this day")
+            # the storm's dates are not the overflow's start: kept as the period and a lower bound only, so the status
+            # engine counts from the post's own report time (Astra re-review 2026-11-15 P1-2)
+            raw["started_after"] = per[0].isoformat()
+            raw["start_basis"] = (f"the post gives the storm's dates (\"{per[2]}\") and no start of its own for this "
+                                  "overflow: it began on or after raw.started_after; no start is recorded")
         else:
             raw["start_basis"] = "the post states no date for the overflow"
         end = None
-        d0 = date.fromisoformat(start[:10]) if start else None
+        d0 = date.fromisoformat((start or raw.get("started_after") or "")[:10]) if (start or per) else None
         first = x["start"][0] if x["start"] else (datetime(d0.year, d0.month, d0.day, tzinfo=TZ) if d0 else None)
-        if x["end"] and first is not None and x["end"][0] >= first:
+        if x["end"] and (first is None or x["end"][0] >= first):
             end = x["end"][0].isoformat()
             raw["ended_at_precision"], raw["end_basis"] = "minute", f"MMSD's post: \"{x['end'][1]}\""
         if x["waters"]:
@@ -573,7 +595,7 @@ def records_for(item: dict, doc: dict, fetched_at: str) -> list[dict]:
             fetched_at=fetched_at, material=MATERIAL[t], volume_gal=x["volume"], volume_text=x["volume_text"],
             estimate_flag="estimated" if x["volume_text"] else "unknown", authority=AUTHORITY,
             source_url=item["url"], raw=raw,
-            parse_error=None if start else "no overflow date found in the post")
+            parse_error=None if start or per else "no overflow date found in the post")
         out.append(rec)
     return out
 
