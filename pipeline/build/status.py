@@ -3602,6 +3602,17 @@ def colours_whole_water(w: dict) -> bool:
     return a is None or a < SMALL_WATER_KM2
 
 
+NO_OUTLINE_WHY = "the advisory covers the water it is placed on, which has no outline to draw; the marker is its point"
+
+
+def no_outline_marker(ev: dict, slug: str, waters: dict) -> bool:
+    """An advisory with its own cited point, placed on a water record that has no outline here: the whole-water fill
+    has nothing for the map to draw, so the record keeps its marker at its point on that water as well (ND go-live
+    audit 2026-11-15, P1-1: Clear Lake and Antelope Lake, Pierce County). A general rule for every state: an
+    authority's standing advisory is always visible. It only adds a marker; the water's colour is unchanged."""
+    return ev.get("lat") is not None and ev.get("lon") is not None and water_geometry(slug, waters) is None
+
+
 def _filled(ev: dict) -> int:
     return sum(1 for k, v in ev.items() if not k.startswith("_") and k != "raw" and v not in (None, "", [], {}))
 
@@ -4181,6 +4192,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     river_point.append(slug)
                 if on_river or pt_only or not names_its_water(ev):
                     continue                   # a station's advisory, or any advisory on a river: its marker only
+            elif ev.get("event_type") in POINT_ADVISORY_TYPES and no_outline_marker(ev, slug, waters):
+                point_on.append(slug)          # coloured whole as before, and its marker too: no outline to draw
             if slug in carried:
                 continue                       # a reach carries it (below)
             tag = None
@@ -4311,7 +4324,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                                            ev.get("event_type") not in POINT_ADVISORY_TYPES)
                                        else "the advisory covers the water it names; the marker is its point"
                                        if g_on and names_its_water(ev) else
-                                       "water is not a lake, pond or reservoir under 50 km²" if g_on
+                                       NO_OUTLINE_WHY if g_on and all(no_outline_marker(ev, x, waters) for x in g_on)
+                                       else "water is not a lake, pond or reservoir under 50 km²" if g_on
                                        else "not placed on a water")})
 
     # the current map's monthly marks: an outfall whose latest report is a month total with discharge, its month
