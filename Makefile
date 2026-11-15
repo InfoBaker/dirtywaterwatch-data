@@ -140,6 +140,8 @@
 #                  unpermitted discharge since 2025, day precision; ingest/ar_transforms.py), the generic JSON block
 #                  ar-deq-hab-advisories (DEQ's bloom advisories with the days posted and lifted) and
 #                  ar_adh_swim_beaches (the Department of Health's closed swim beaches, a standing list)
+#                  Wisconsin: wi_mmsd_storm_updates (the Milwaukee Metropolitan Sewerage District's Storm Update posts:
+#                  the overflows it reports to the DNR, dated by the post, two list pages a run; the DNR publishes none)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
