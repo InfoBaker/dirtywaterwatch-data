@@ -2809,7 +2809,10 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                 # at every fetch up to the first that no longer found it; it ends there, at or before that fetch
                 iv = _iv(ev, start, unlisted, rule, red, yellow)
                 iv["confirmed"] = iso(listed or start)
-                iv["ended_by"] = "no longer on the authority's map at this fetch"
+                # raw._window_end_words: the source's own words where the end is a dated notice, not a fetch (the
+                # Metropolitan Council's sign removal, ingest/mn_mces_spill_notices.py); keyed on the field
+                words = (ev.get("raw") or {}).get("_window_end_words")
+                iv["ended_by"] = words or "no longer on the authority's map at this fetch"
                 if (ev.get("raw") or {}).get("_end_not_confirmed") is True and et not in ADVISORY_TYPES:
                     # a sewage report under the authority's advisory that left its list without the authority's
                     # cancellation (ingest/hi_doh_cwb_events.py): its end is not confirmed, never a clean end at our
@@ -2820,7 +2823,8 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                     days = float(u.get("unresolved_yellow_days") or 30)
                     hours = float(((rules or {}).get("yellow") or {}).get("default_hours") or 72)
                     hatch_until = max(start + timedelta(days=days), unlisted + timedelta(hours=hours))
-                    iv["ended_by"] = ("no longer on the authority's list at this fetch, with no cancellation: "
+                    iv["ended_by"] = (f"{words}: the end is not confirmed" if words else
+                                      "no longer on the authority's list at this fetch, with no cancellation: "
                                       "the end is not confirmed")
                     un = _iv(ev, unlisted, hatch_until, "unresolved", red, yellow)
                     un["rule_applied"] = {"rule": "unresolved.unresolved_yellow_days", "days": days,
@@ -3429,7 +3433,7 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
     who = f" · {who}" if who else ""
     end = parse_time(iv.get("ended_at"))
     endtxt = end.astimezone(LOCAL).strftime("%b %-d %H:%M") if end else None
-    if iv.get("ended_by"):
+    if iv.get("ended_by") and parse_time(iv["ended_by"]):     # a time; words (raw._window_end_words) are not one
         endtxt = "by " + parse_time(iv["ended_by"]).astimezone(LOCAL).strftime("%b %-d %H:%M")
     rule = iv["rule"]
     at = where(iv)
