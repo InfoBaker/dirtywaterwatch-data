@@ -356,3 +356,30 @@ def test_monthly_report_points_are_three_decimals_in_good_and_degraded_runs(tmp_
             assert (r["lat"], r["lon"]) == (37.712, -81.171), r
         raw = (tmp_path / f"{M.SOURCE_ID}.json").read_text()
         assert "37.712345" not in raw and "81.170555" not in raw
+
+
+def test_bloom_map_text_loses_house_numbers_and_reporting_names_before_any_write(tmp_path, monkeypatch):
+    """Re-review P1-5: house numbers and reporting/contact clauses never reach the raw save, the state or a record."""
+    import common as C
+    texts = {7: "Avoid contact near 123 Example Lane. Sample submitted by Example Person.",
+             8: "Avoid contact with the water. Reported by Mrs. Example; call 3045550100 for details.",
+             9: "Bloom observed on the cove at 45B N. Example Rd. Contact Example Person at the marina.",
+             10: "Submitted by Example Person"}
+    a = _answers(list(texts))
+    for f in a["1"]["features"]:
+        f["attributes"]["Advisory"] = texts[f["attributes"]["OBJECTID"]]
+    saved = []
+    monkeypatch.setattr(H, "save_raw", lambda sid, data, ext: saved.append(data.decode()))
+    monkeypatch.setattr(H, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(C, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(H, "fetch", lambda: a)
+    assert H.main(["--at", "2026-07-01T12:00:00Z"]) == 0
+    written = saved + [(tmp_path / "state.json").read_text(), (tmp_path / f"{H.SOURCE_ID}.json").read_text()]
+    assert len(saved) == 1
+    for blob in written:
+        for bad in ("123 Example", "45B", "Example Person", "Mrs. Example", "3045550100", "555"):
+            assert bad not in blob, (bad, blob[:300])
+    recs = {r["source_record_id"]: r for r in json.loads(written[-1])["records"]}
+    assert recs["1-7"]["advice_text"].endswith("Avoid contact near [house number removed] Example Lane.")
+    assert recs["1-8"]["advice_text"].endswith("Avoid contact with the water.")
+    assert H.WITHHELD in recs["1-10"]["advice_text"]
