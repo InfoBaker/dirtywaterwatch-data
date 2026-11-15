@@ -1060,6 +1060,7 @@ def test_w_4_a_storm_repair_or_cleanup_start_is_not_the_overflows_start():
                   ["A combined sewer overflow was reported; crews started cleanup at 8:00 am on June 3, 2027."]):
         r = _recs(t, [t] + lines)["cso"]
         assert r["started_at"] is None and r["time_precision"] is None, lines
+        assert r["raw"].get("started_after") != "2027-06-03", lines          # a cleanup's day is no lower bound either
         ivs = S.event_intervals(r, "WI", datetime(2027, 6, 6, tzinfo=timezone.utc), rules=rules)
         assert any(iv["color"] == "yellow" and iv["start"] == told for iv in ivs), lines   # counted from the post
     # the overflow's own start verbs stay starts
