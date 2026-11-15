@@ -258,7 +258,8 @@ def test_2_an_advisory_whose_withdrawal_is_seen_weeks_later_is_not_red_over_the_
     from tests.test_status import TEST_RULES
     state = H.update({}, [ROW], "2026-06-02T12:00:00Z", PT)
     state = H.update(state, [ROW], "2026-06-20T12:00:00Z", None)          # last confirmed
-    state = H.update(state, [], "2026-08-01T12:00:00Z", None)             # first read after a six-week outage
+    state = H.update(state, [], "2026-08-01T12:00:00Z", {})               # first read after a six-week outage
+    # (DHW's map, read in the same run, no longer shows it: the evidence a disappearance needs, Astra P1-1)
     r = H.records(state)[0]
     assert r["status"] == "advisory_lifted" and r["raw"]["ended_at_precision"] == "poll"
     assert r["ended_at"] == "2026-08-01T12:00:00Z" and r["raw"]["_last_seen_in_source"] == "2026-06-20T12:00:00Z"
@@ -270,7 +271,7 @@ def test_2_an_advisory_whose_withdrawal_is_seen_weeks_later_is_not_red_over_the_
 
 def test_3_a_reissue_is_a_new_record_and_never_moves_the_earlier_one():
     state = H.update({}, [ROW], "2026-06-02T12:00:00Z", PT)
-    state = H.update(state, [], "2026-06-10T12:00:00Z", None)
+    state = H.update(state, [], "2026-06-10T12:00:00Z", {})
     moved = {H.key("Example Lake"): dict(PT[H.key("Example Lake")], lat=47.6, lon=-116.8)}
     state = H.update(state, [dict(ROW, collection_date="09/01/2026")], "2026-09-02T12:00:00Z", moved)
     recs = sorted(H.records(state), key=lambda r: r["started_at"])

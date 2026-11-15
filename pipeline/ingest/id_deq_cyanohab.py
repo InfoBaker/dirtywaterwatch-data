@@ -28,13 +28,22 @@ Records (a list read as a snapshot; never an invented date)
     the first read that listed it at that level (time_precision poll; raw.start_basis says the advisory began before);
     sampled_at the row's Collection Date (a sample date, never an issue date); raw._last_seen_in_source the latest
     read that listed it, so the status build keeps it red while DEQ lists it. When a read shows the water at a lower
-    level or no longer lists it, the advisory record ends at that read (advisory_lifted, ended_at the read,
-    raw.ended_at_precision "poll", raw.end_basis says which), an upper bound, not DHW's lift time.
+    level, the advisory record ends at that read (advisory_lifted, ended_at the read, raw.ended_at_precision "poll",
+    raw.end_basis says which), an upper bound, not DHW's lift time. A water the table no longer lists ends only on
+    evidence that the read is complete: every row of the read readable and DHW's layer, read in the same run, no longer
+    showing the water at that level; until then it stays in effect (raw.first_unlisted_at, the feed's health false).
+    A read after more than 14 days without one starts a new listing period (raw.listed_periods), so a later read never
+    confirms the unread gap. A named part ("Hayden Lake - North") is raw.advisory_extent "part_of_water": DHW's marker,
+    never the whole lake's colour.
+  - Closure: a row whose More Information closes the water ("Waterbody closed to recreational use.", affirmative only)
+    is the authority's closure whatever DEQ's level: advisory_active while listed, raw.closure_words, quoted as the
+    table's (a level of its own, so the closure's end is the read that no longer shows it).
   - Watch and Alert (DEQ's risk levels while results are pending, or after a Health Alert expired): never an advisory
     here. Each is a hab_advisory record with status unknown, raw._agency_label_only (DEQ's level) and
     raw._caution_to_notice_end, and the source is in data/rules.json unresolved.sample_caution: the status build shows
     the site's caution, from the Collection Date (time_precision day) for 72 hours or until the read that no longer
-    lists the water at that level (raw._notice_closed_at), whichever is later; DEQ's words are quoted, never as DHW's
+    lists the water at that level (raw._notice_closed_at), whichever is later; while listed, 72 hours past the last
+    read that listed it (raw._open_notice_caution_hours), so it holds between reads; DEQ's words are quoted, never as DHW's
     advisory. An Alert row whose More Information says the water is "closed to recreational use" keeps that sentence
     in advice_text, quoted as the table's.
   - Identity: one record per water (the table's Waterbody, case and punctuation ignored, with its County) and level
@@ -45,8 +54,8 @@ Records (a list read as a snapshot; never an invented date)
   - A page whose table cannot be found, or with no rows, is ok=False: the records stay and nothing ends.
   - Clock: the record's zone is its county's (pipeline/zones.py idaho_zone: Pacific north of the Salmon River, 49 CFR
     71.9), in raw.time_zone; the Collection Date is that zone's calendar day.
-  Privacy: the table carries no personal data; strip_personal runs on raw all the same, and only the table's rows (as
-  read) and DHW's safe fields are saved to data/raw/, only when they change.
+  Privacy: the table carries no personal data today; every row, DHW's names and the carried state go through
+  ingest/ia_id_privacy.scrub before any save (raw, state, records, error text), and errors never quote the page.
 
 Run from pipeline/: python -m ingest.id_deq_cyanohab [--file saved.html] [--layer-file layer.json] [--at ISO]
 Cadence: daily is enough (DEQ edits the table a few times a week in season); it runs with the refresh.
@@ -64,6 +73,8 @@ import requests
 
 import zones
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from ingest.ia_id_privacy import scrub
+from ingest.poll_periods import GAP_DAYS
 
 SOURCE_ID = "id-deq-cyanohab-risk-table"
 URL = "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-harmful-algal-blooms/"
@@ -80,7 +91,18 @@ HEADERS_EXPECTED = ["Risk Level", "Waterbody", "County", "Data Type", "Collectio
 LEVELS = {"health advisory": ("advisory", True), "advisory": ("advisory", True),
           "alert": ("alert", False), "health alert": ("alert", False),
           "watch": ("watch", False), "health watch": ("watch", False)}
-LEVEL_NAMES = {"advisory": "Health Advisory", "alert": "Health Alert", "watch": "Health Watch"}
+LEVEL_NAMES = {"advisory": "Health Advisory", "alert": "Health Alert", "watch": "Health Watch",
+               "closure": "Closed to recreational use"}
+# DHW's layer tier -> the table's level, for the cross-check before a disappearance ends anything
+LAYER_LEVELS = {"health advisory": "advisory", "advisory": "advisory", "health alert": "alert", "alert": "alert",
+                "health watch": "watch", "watch": "watch"}
+# an explicit closure in the row's More Information ("Waterbody closed to recreational use."): the authority's own
+# closure, red while listed and quoted as the table's; a negated, conditional or future closure is not one (lessons 1)
+CLOSURE_RE = re.compile(r"(?i)\bclosed\s+to\s+(?:all\s+)?(?:recreation(?:al)?(?:\s+use)?|public\s+use|swimming|"
+                        r"(?:all\s+)?water\s+contact|the\s+public)\b")
+CLOSURE_NEG_RE = re.compile(r"(?i)\b(?:not|no\s+longer|never|if|unless|when|whether|may|might|could|would|should|will|"
+                            r"shall|can|reopen\w*|re-open\w*|lift\w*|previously|was|were)\b")
+CLOSURE_BASIS = "closed while DEQ's CyanoHAB Risk Data Table lists the closure (the table's own words)"
 LEVEL_RULE = ("Idaho DEQ: Health Watch and Health Alert are risk levels “that provide timely public information "
               "while toxin test results are pending”; a Health Advisory is issued by the Department of Health and "
               "Welfare where “an active, toxic bloom has been confirmed”")
@@ -116,7 +138,8 @@ def parse_table(page: str) -> list[dict]:
     rows = re.findall(r"<tr\b.*?</tr>", m.group(0), re.S | re.I)
     cells = [[clean(c) for c in re.findall(r"<t[hd]\b[^>]*>(.*?)</t[hd]>", r, re.S | re.I)] for r in rows]
     if not cells or cells[0][:6] != HEADERS_EXPECTED:
-        raise ValueError(f"the table's headers are not DEQ's ({cells[0] if cells else None})")
+        # the error names the column count only: the page's text never reaches the error metadata (lessons 6)
+        raise ValueError(f"the table's headers are not DEQ's ({len(cells[0]) if cells else 0} header cells)")
     out = [dict(zip(("level", "water", "county", "data_type", "collection_date", "info"), c + [""] * (6 - len(c))))
            for c in cells[1:] if any(c)]
     if not out:
@@ -165,25 +188,98 @@ def split_water(water: str) -> tuple[str, str | None]:
     return base, part
 
 
+def closure_words(info: str) -> str | None:
+    """The sentence of the row's More Information that closes the water ("Waterbody closed to recreational use."),
+    or None; "will be closed if", "is not closed", "was closed" are not a closure in effect (lessons 1)."""
+    for sentence in re.split(r"(?<=[.!?;])\s+", clean(info)):
+        m = CLOSURE_RE.search(sentence)
+        if m and not CLOSURE_NEG_RE.search(sentence[:m.start()]):
+            return sentence
+    return None
+
+
+def row_level(r: dict) -> str | None:
+    """The row's level key ('advisory', 'alert', 'watch'), 'closure' where its More Information closes the water, or
+    None when the reader cannot read the level."""
+    lv = LEVELS.get(clean(r.get("level")).lower())
+    if not lv:
+        return None
+    return "closure" if closure_words(r.get("info") or "") else lv[0]
+
+
+def scrub_row(r: dict) -> dict:
+    """Every text field of a row through the Iowa and Idaho scrub (ingest/ia_id_privacy.py) before any save."""
+    return {k: (scrub(v) if isinstance(v, str) else v) for k, v in r.items()}
+
+
+def scrub_state(state: dict) -> dict:
+    """The scrub again on everything carried from earlier state (rows, snapshots, DHW's names), lessons 6."""
+    for ep in (state.get("episodes") or {}).values():
+        if isinstance(ep.get("row"), dict):
+            ep["row"] = scrub_row(ep["row"])
+    snap = state.get("last_snapshot")
+    if isinstance(snap, dict):
+        snap["rows"] = [scrub_row(r) for r in snap.get("rows") or [] if isinstance(r, dict)]
+        if isinstance(snap.get("points"), dict):
+            snap["points"] = {k: dict(v, name=scrub(v.get("name"))) for k, v in snap["points"].items()}
+    if isinstance(state.get("points"), dict):
+        state["points"] = {k: dict(v, name=scrub(v.get("name"))) for k, v in state["points"].items()}
+    return state
+
+
+def _on_layer(layer: dict, ep: dict) -> bool:
+    """True when DHW's layer, read in this run, still shows the episode's water at its level (a tier the reader does
+    not know counts as shown: the disappearance waits)."""
+    pt = layer.get(key(ep["row"]["water"]))
+    if not pt:
+        return False
+    tier = LAYER_LEVELS.get(clean(pt.get("tier")).lower())
+    want = "alert" if ep["level"] == "closure" else ep["level"]
+    return tier is None or tier == want
+
+
 def update(state: dict, rows: list[dict], at: str, layer: dict | None) -> dict:
-    """Fold one read of the table into the state: open, continue and close level episodes."""
+    """Fold one read of the table into the state: open, continue and close level episodes.
+
+    A water shown at another level closes its episode at this read (DEQ's own row says so). A water the table no
+    longer lists closes only on evidence that the read is complete (Astra 2026-11-15 P1-1): every row of this read is
+    readable, and DHW's map, read in the same run, no longer shows the water at that level. Otherwise the episode stays
+    open, pending (state.last_poll.pending, the feed's health false), and closes at the first read that has the
+    evidence, never earlier (raw.first_unlisted_at keeps the first read that missed it)."""
     if layer is not None:
         state["points"] = layer
         state["points_read_at"] = at
     eps = state.setdefault("episodes", {})
     seen = {}
+    unread = 0
     for r in rows:
-        lv = LEVELS.get(clean(r["level"]).lower())
+        lv = row_level(r)
         wk = f"{slug(r['water'])}:{slug(r['county'])}"
         if not lv or not r["water"]:
             wk = "unread-" + slug(" ".join(r.values()))[:60]
-        seen[wk] = (lv[0] if lv else "unknown", r)
+            unread += 1
+        seen[wk] = (lv or "unknown", r)
+    pending = []
     for sid, ep in eps.items():
         if ep.get("ended_at"):
             continue
         cur = seen.get(ep["water_key"])
         if cur is None:
-            ep.update(ended_at=at, end_basis=END_GONE)
+            if ep["level"] == "unknown":         # an unreadable row read since, or gone: nothing coloured it
+                ep.update(ended_at=at, end_basis=END_GONE)
+                continue
+            ep.setdefault("first_unlisted_at", at)
+            why = ("rows of this read could not be read" if unread else
+                   "DHW's map was not read in this run" if layer is None else
+                   "DHW's map still shows the water at this level" if _on_layer(layer, ep) else None)
+            if why:
+                ep["pending"] = why
+                pending.append(sid)
+                continue
+            ep.pop("pending", None)
+            ep.update(ended_at=at, end_basis=END_GONE,
+                      end_evidence="every row of this read was readable and DHW's map, read in the same run, no "
+                                   "longer showed the water at this level")
         elif cur[0] != ep["level"]:
             ep.update(ended_at=at, end_basis=END_LEVEL.format(LEVEL_NAMES.get(cur[0], cur[1]["level"])))
     open_by_key = {ep["water_key"]: sid for sid, ep in eps.items() if not ep.get("ended_at")}
@@ -196,6 +292,16 @@ def update(state: dict, rows: list[dict], at: str, layer: dict | None) -> dict:
                 sid, n = f"{wk}:{lv}:{at[:10]}~{n}", n + 1
             eps[sid] = {"water_key": wk, "level": lv, "first_seen": at, "collection_dates": []}
         ep = eps[sid]
+        for k in ("first_unlisted_at", "pending"):
+            ep.pop(k, None)
+        # listing periods: a read after an unread gap longer than the confirmation horizon starts a new period, so
+        # a later listing never confirms the gap (lessons 2; build/status.py colours each period on its own)
+        periods = ep.setdefault("periods", [{"from": ep["first_seen"], "to": ep.get("last_seen") or ep["first_seen"]}])
+        last = periods[-1]
+        if _days(last["to"], at) > GAP_DAYS:
+            periods.append({"from": at, "to": at})
+        elif at > last["to"]:
+            last["to"] = at
         ep.update(last_seen=at, row=r)
         # the episode keeps the point it was first placed at: a later move of DHW's marker never rewrites an earlier
         # record's place (lessons 3); an episode with no point yet takes the first one the layer gives
@@ -206,8 +312,15 @@ def update(state: dict, rows: list[dict], at: str, layer: dict | None) -> dict:
         d = read_date(r["collection_date"])
         if d and d not in ep["collection_dates"]:
             ep["collection_dates"].append(d)
-    state["last_poll"] = {"at": at, "rows": len(rows), "listed": sorted(seen)}
+    state["last_poll"] = {"at": at, "rows": len(rows), "listed": sorted(seen), "unread_rows": unread,
+                          "pending": sorted(pending)}
     return state
+
+
+def _days(a: str, b: str) -> float:
+    from datetime import datetime
+    t = [datetime.fromisoformat(str(x).replace("Z", "+00:00")) for x in (a, b)]
+    return (t[1] - t[0]).total_seconds() / 86400
 
 
 def records(state: dict) -> list[dict]:
@@ -239,12 +352,40 @@ def records(state: dict) -> list[dict]:
                        point_url=LAYER_ITEM, dhw_risk_tier=pt.get("tier"))
         if ended:
             raw.update(ended_at_precision="poll", end_basis=ep.get("end_basis"))
+            if ep.get("end_evidence"):
+                raw["end_evidence"] = ep["end_evidence"]
+        if ep.get("first_unlisted_at"):
+            raw.update(first_unlisted_at=ep["first_unlisted_at"], unlisted_pending=ep.get("pending"))
+        periods = ep.get("periods") or []
+        if len(periods) > 1:
+            # listed again after an unread gap: each period is coloured on its own (build/status.py
+            # POLL_END_HORIZON_SOURCES), so the reappearance never confirms the gap (Astra 2026-11-15 P2-3)
+            raw.update(listed_periods=[dict(p) for p in periods],
+                       periods_basis=(f"reads of DEQ's table that listed the water; a read after more than {GAP_DAYS} "
+                                      "days without one starts a new period, and the time between is not confirmed"))
+        if part:
+            # an advisory for part of a water ("Hayden Lake - North", "CJ Strike - Bruneau Arm"): a marker at DHW's
+            # point, never the whole water's colour (build/status.py part_of_water; Astra 2026-11-15 P2-5)
+            raw["advisory_extent"] = "part_of_water"
         info = r["info"]
         common_f = dict(source_id=SOURCE_ID, source_record_id=sid, waterbody_text=base, water_slugs=[],
                         water_match="none", lat=lat, lon=lon, coord_source="source" if pt else None,
                         coord_precision_m=150 if pt else None, reported_at=None, published_at=None,
                         source_updated_at=None, authority=AUTHORITY, source_url=URL)
-        if level == "advisory":
+        if level == "closure":
+            # the row's own closure ("Waterbody closed to recreational use."): the authority's closure, red while the
+            # table lists it, quoted as the table's; DEQ's level is kept (Astra 2026-11-15 P1-2)
+            words = closure_words(info)
+            raw.update(start_basis=START_BASIS, closure_words=words,
+                       _closure_level=LEVEL_NAMES.get(LEVELS.get(clean(r["level"]).lower(), ("",))[0], r["level"]))
+            out.append(event(**common_f, event_type="hab_advisory",
+                             status="advisory_lifted" if ended else "advisory_active",
+                             started_at=ep["first_seen"], ended_at=ended, time_precision="poll", sampled_at=sample,
+                             advice_text=(f"Closed to recreational use (DEQ's CyanoHAB Risk Data Table, {r['level']}, "
+                                          f"{r['data_type'] or 'no data type given'}, collection date "
+                                          f"{sample or 'not given'}): “{info}”"),
+                             advice_window_hours=None, advice_window_basis=CLOSURE_BASIS, raw=raw))
+        elif level == "advisory":
             raw["start_basis"] = START_BASIS
             out.append(event(**common_f, event_type="hab_advisory",
                              status="advisory_lifted" if ended else "advisory_active",
@@ -255,11 +396,16 @@ def records(state: dict) -> list[dict]:
                              advice_window_hours=None, advice_window_basis=WINDOW_BASIS, raw=raw))
         elif level in ("alert", "watch"):
             name = LEVEL_NAMES[level]
-            raw.update(_agency_label_only=f"DEQ's {name}: a risk level, not an advisory",
+            raw.update(_agency_label_only=True, _label_basis=f"DEQ's {name}: a risk level, not an advisory",
                        _agency_label=f"{name} (Idaho DEQ)", _caution_to_notice_end=True,
                        _notice_end_basis="DEQ's table still listed the water at this level")
             if ended:
                 raw["_notice_closed_at"] = ended
+            else:
+                # a notice in DEQ's current listing stays in effect between reads: the caution holds the sample-caution
+                # hours past the last read that listed it, so it never turns grey before the next read (Astra
+                # 2026-11-15 P1-2; the status build's _open_notice_caution_hours, keyed on the record's field)
+                raw["_open_notice_caution_hours"] = 72
             start = sample or ep["first_seen"][:10]
             if not sample:
                 raw["start_basis"] = "no collection date in the row: the first read that listed it"
@@ -272,7 +418,7 @@ def records(state: dict) -> list[dict]:
         else:
             out.append(event(**common_f, event_type="unknown", status="ended" if ended else "unknown",
                              started_at=ep["first_seen"], ended_at=ended, time_precision="poll", raw=raw,
-                             parse_error=f"a row the reader cannot read: {r!r}"))
+                             parse_error=scrub(f"a row the reader cannot read: {r!r}")))
         if level != "unknown" and r["collection_date"] and not read_date(r["collection_date"]):
             out[-1]["parse_error"] = f"unreadable Collection Date {r['collection_date']!r}"
     return out
@@ -295,22 +441,26 @@ def main(argv=None) -> int:
     at = argv[argv.index("--at") + 1] if "--at" in argv else now_iso()
     try:
         page = Path(argv[argv.index("--file") + 1]).read_text() if "--file" in argv else fetch_page()
-        rows = parse_table(page)
+        # the scrub runs on every row before anything is saved or carried (lessons 6; Astra 2026-11-15 P1-5)
+        rows = [scrub_row(r) for r in parse_table(page)]
         if not any(LEVELS.get(clean(r["level"]).lower()) and r["water"] for r in rows):
             # not one row the reader can read (renamed levels, shifted columns): a failed read, nothing ends
             raise ValueError("no row of DEQ's table could be read")
     except (requests.RequestException, OSError, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        err = scrub(str(e))
+        write_events(SOURCE_ID, [], ok=False, error=err)
+        print(f"{SOURCE_ID}: {err}", file=sys.stderr)
         return 1
     layer, layer_error = None, None
     try:
         doc = (json.loads(Path(argv[argv.index("--layer-file") + 1]).read_text()) if "--layer-file" in argv
                else (None if "--file" in argv else fetch_layer()))
         layer = parse_layer(doc) if doc is not None else None
+        if layer is not None:
+            layer = {k: dict(v, name=scrub(v["name"])) for k, v in layer.items()}
     except (requests.RequestException, OSError, ValueError) as e:
-        layer_error = f"DHW's layer: {e} (the last good points are kept)"
-    state = read_json(STATE_PATH, {}) or {}
+        layer_error = scrub(f"DHW's layer: {e} (the last good points are kept)")
+    state = scrub_state(read_json(STATE_PATH, {}) or {})
     snapshot = {"rows": rows, "points": layer}
     if "--file" not in argv and state.get("last_snapshot") != snapshot:
         save_raw(SOURCE_ID, json.dumps({"fetched_at": at, **snapshot}, indent=1).encode(), "json")
@@ -322,12 +472,20 @@ def main(argv=None) -> int:
             "last_poll": state.get("last_poll"), "points_read_at": state.get("points_read_at"),
             "layer_error": layer_error,
             "cadence": "with the refresh; DEQ edits the table a few times a week in season"}
-    unread = [r for r in recs if r.get("parse_error")]
-    if unread:
-        # an unreadable row is kept (parse_error) and read again next run; the feed is not healthy until it is read
+    unread = [r for r in recs if r.get("parse_error") and not r.get("ended_at")]
+    pending = (state.get("last_poll") or {}).get("pending") or []
+    if unread or pending:
+        # an unreadable row is kept (parse_error) and read again next run; a water the table no longer lists without
+        # evidence that the read is complete stays open (pending); the feed is not healthy until both are settled
         meta["unread"] = [r["source_record_id"] for r in unread][:20]
-        path = write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta,
-                            error=f"{len(unread)} row(s) of DEQ's table the reader cannot read")
+        meta["pending_unlisted"] = pending[:20]
+        why = []
+        if unread:
+            why.append(f"{len(unread)} row(s) of DEQ's table the reader cannot read")
+        if pending:
+            why.append(f"{len(pending)} water(s) no longer in DEQ's table without evidence the read is complete "
+                       "(kept in effect)")
+        path = write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta, error="; ".join(why))
     else:
         path = write_events(SOURCE_ID, recs, meta=meta)
     act = sum(1 for r in recs if r["status"] == "advisory_active")
