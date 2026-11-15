@@ -162,6 +162,11 @@
 #                  scripts/build_wv_outfalls.py --fetch)
 #                  Louisiana: la_baton_rouge_quarterly (Baton Rouge's consent-decree quarterly reports, Part D collection-
 #                  system tables read with pypdf; a report used only when its rows match its own summary; each report once)
+#                  Nevada: nv_state_parks_hab (the state parks' HAB Advisory page: Watch, Warning and Danger bloom
+#                  advisories at waters in state parks, from the first read that lists them; no sewage feed exists)
+#                  Oklahoma: ok_nps_chickasaw_bacteria (the National Park Service's E. coli table for Chickasaw
+#                  National Recreation Area: a result over the posted threshold is a sample caution, never an
+#                  advisory; no sewage feed exists)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

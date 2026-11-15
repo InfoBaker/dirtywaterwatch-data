@@ -1,0 +1,27 @@
+id: "nv-ndep-hab-dashboard"
+name: "Nevada HAB Dashboard (Office of State Epidemiology, Power BI) and weekly HAB email list"
+url: "https://app.powerbigov.us/view?r=eyJrIjoiZDIxMmZiZjktMTlhMS00ZTgxLWFmNTAtY2Y5Yzc3NzE0MTU4IiwidCI6ImU0YTM0MGU2LWI4OWUtNGU2OC04ZWFhLTE1NDRkMjcwMzk4MCJ9"
+homepage: "https://app.powerbigov.us/view?r=eyJrIjoiZDIxMmZiZjktMTlhMS00ZTgxLWFmNTAtY2Y5Yzc3NzE0MTU4IiwidCI6ImU0YTM0MGU2LWI4OWUtNGU2OC04ZWFhLTE1NDRkMjcwMzk4MCJ9"
+kind: "email"
+level: "state"
+# Notes (research/nv, status candidate, verified fetched, checked 2026-11-14): The only statewide
+#   bloom status found, a Power BI report: on 2026-11-09 the page returned only its script shell, in which
+#   no rows, no download and no data address were found (the report's own data calls were not examined). Registered as a channel with the barrier; a supported
+#   export is an owner request.
+# Access detail (research, quoted): Power BI Gov embed (no data download or public data address found on 2026-11-09); NDEP page
+#   ndep.nv.gov/water/rivers-streams-lakes/water-quality-monitoring/harmful-algal-bloom-program;
+#   weekly updates by email list (subscribe via NDEP "Get Notices", list "Nevada Harmful Algal Bloom
+#   Updates", or NEVADAHABS-subscribe-request@LISTSERV.STATE.NV.US).
+# Research notes: Watch/Warning advisories at Lahontan Reservoir and Washoe Lake in 2026 (news).
+cadence: "weekly in season"
+license: "none stated"
+attribution: "Nevada HAB Task Force (NDEP, State Parks, NDOW, NDA, OSE)"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["NV"]
+access: ["map_only", "email"]
+access_detail: "Power BI Gov embed (no data download or public data address found on 2026-11-09); NDEP page ndep.nv.gov/water/rivers-streams-lakes/water-quality-monitoring/harmful-algal-bloom-program; weekly updates by email list (subscribe via NDEP \"Get Notices\", list \"Nevada Harmful Algal Bloom Updates\", or NEVADAHABS-subscribe-request@LISTSERV.STATE.NV.US)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-14"
