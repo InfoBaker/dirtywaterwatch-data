@@ -264,8 +264,9 @@ def build(dis: list[dict]) -> tuple[list[dict], Counter]:
         # the plant-only test reads the name alone: EPA's facility type ("POTW", "Municipal or Water District") says
         # what kind of body might hold the permit, never which one, so it cannot make a plant's name an operator
         # (verification P2-1)
+        # a name that calls the plant "Municipal" names the municipality's plant: kept under EPA's municipal type
         if form(disp, None) is None and p not in RESEARCH_NAME and FACILITY_LABEL.search(disp) \
-                and not BODY_WORDS.search(disp):
+                and not BODY_WORDS.search(disp) and not re.search(r"\bmunicipal\b", disp, re.I):
             # a permittee of record that names only a plant ("Beattie Wastewater Plant", "Twehous Acres WWTF") with no
             # body whose legal form can be read: a permit-only row under the facility, not an operator (re-review P2-1)
             groups[f"facility:{p}"] = {"name": f"{disp} (permit {p})", "legal_form": "facility (permittee not named)",

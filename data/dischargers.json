@@ -452572,9 +452572,9 @@
  },
  {
   "id": "mo-cape-girardeau-municipal-wwtf",
-  "name": "Cape Girardeau Municipal WWTF (permit MO0136328)",
-  "short_name": "Cape Girardeau Municipal WWTF (permit MO0136328)",
-  "legal_form": "facility (permittee not named)",
+  "name": "Cape Girardeau Municipal WWTF",
+  "short_name": "Cape Girardeau Municipal WWTF",
+  "legal_form": "city",
   "state": "MO",
   "kind": "plant",
   "npdes_permit": "MO0136328",
@@ -452588,11 +452588,13 @@
   "water_slugs": [],
   "outfall_count": 2,
   "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
-  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually. The permit's conditions bind every NPDES permittee, public or private.",
+  "notification_channel": "Missouri's permitted wastewater facilities report sewer overflows and bypasses to the Department of Natural Resources within 24 hours of discovery, through its MoGEM portal (DNR's sewer overflow guidance and the permits' standard conditions); DNR publishes no list of those reports, and no statute or rule requiring public notice of a sewage discharge was found. DNR's monthly Water Pollution Control concern reports publish the concerns it investigated, sewer overflows among them, two to four months later. Its own public channel was not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
-  "towns": [],
-  "notes": "Owner: EPA's permittee of record names only the plant; the body that holds the permit is not established.",
+  "towns": [
+   "Cape Girardeau"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permittee of record. Plants: Cape Girardeau WWTP (MO0136328).",
   "verified": "inferred",
   "checked": "2026-11-14",
   "aliases": [

@@ -801,5 +801,6 @@ def test_a_facility_type_never_makes_a_plant_name_a_city():
     ko = _ko()
     bad = [r["name"] for r in rows if r["legal_form"] == "city" and ko.FACILITY_LABEL.search(r["name"])
            and not ko.BODY_WORDS.search(r["name"]) and ko.form(r["name"], None) is None
+           and not re.search(r"\bmunicipal\b", r["name"], re.I)            # the municipality's own plant
            and not any(p in ko.RESEARCH_NAME or p in mo.RESEARCH_NAME for p in r["npdes_permits"])]
     assert bad == []
