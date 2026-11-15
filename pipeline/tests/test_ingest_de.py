@@ -555,3 +555,35 @@ def test_a_still_listed_resampling_notice_is_current_at_and_after_its_confirming
     # closed at a later poll: the caution runs to the closure, as before
     recs, _ = W.poll_records(map_codes(s["stations"], {}), [], state, "2026-11-15T18:00:00Z", date(2026, 11, 15))
     assert recs[0]["raw"]["_notice_closed_at"] == "2026-11-15T18:00:00Z"
+
+
+@pytest.mark.parametrize("q,gal,bounds", [
+    ("Equal To 1,500.00 GALLONS", 1500.0, None),                       # comma and decimals kept whole
+    ("Equal to 250 GAL", 250.0, None),
+    ("Less Than 1,000 GALLONS", None, {"kind": "upper_bound", "max_gal": 1000.0}),
+    ("Greater Than 10,000 Gallons", None, {"kind": "lower_bound", "min_gal": 10000.0}),
+    ("1,000-2,000 gallons", None, {"kind": "range", "min_gal": 1000.0, "max_gal": 2000.0}),
+    ("1,000 – 2,000 gallons", None, {"kind": "range", "min_gal": 1000.0, "max_gal": 2000.0}),
+    ("50 gallons per minute", None, {"kind": "rate", "text": "50 gallons per minute"}),
+])
+def test_a_quantity_is_a_figure_only_when_the_form_gives_one(q, gal, bounds):
+    # re-review P2-4: bounds, ranges and rates are never numeric volumes
+    v, text, flag = D.volume({"quantity": q})
+    assert v == gal and text == q and flag == ("estimated" if gal is not None else "unknown")
+    assert D.volume_bounds({"quantity": q}) == bounds
+
+
+def test_the_state_texts_volume_statistics_count_only_figures():
+    # re-review P2-4: the published median and threshold count only "equal to" figures, from the parser
+    import statistics
+    st = state_with_details()
+    for k, q in zip(list(st["rows"])[:4], ["Equal To 100 GALLONS", "Equal To 300 GALLONS",
+                                           "Less Than 50,000 GALLONS", "Greater Than 20,000 GALLONS"]):
+        if st["rows"][k].get("detail"):
+            st["rows"][k]["detail"]["quantity"] = q
+    recs, _ = D.build(st, T0)
+    vols = [r["volume_gal"] for r in recs if r["volume_gal"] is not None]
+    assert all(v < 10000 for v in vols)                     # no bound counted among the 10,000-gallon figures
+    text = (ROOT / "research" / "de" / "state-text.md").read_text()
+    assert "median of 200 gallons" in text and "23 of them 10,000 gallons or more" in text
+    assert "completed years 2017 to 2025" in text

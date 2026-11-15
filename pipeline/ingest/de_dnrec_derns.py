@@ -474,20 +474,61 @@ def parse_time(s: str | None) -> tuple[str | None, str | None]:
     return None, None
 
 
-GALLONS = re.compile(r"(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\s*(?:\+\s*)?(?:gal\b|gallons?\b|gals?\b)", re.I)
+_NUM = r"(?<![\d,.])(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)"
+_GAL = r"\s*(?:\+\s*)?(?:gal\b|gallons?\b|gals?\b)"
+GALLONS = re.compile(_NUM + _GAL, re.I)
+# "1,000-2,000 gallons", "1,000 to 2,000 gallons": a range, never one figure
+GALLON_RANGE = re.compile(_NUM + r"\s*(?:gal\w*\s*)?(?:-|–|—|to)\s*" + _NUM + _GAL, re.I)
+# "Less Than 1,000 gallons", "> 500 gal": a bound, never a measured figure
+BOUND_WORDS = re.compile(r"\b(?:(less|fewer)\s+than|under|below|up\s+to|<|(greater|more)\s+than|over|in\s+excess\s+of|"
+                         r"at\s+least|>)\s*$", re.I)
+# "50 gallons per minute": a rate, never a volume
+RATE = re.compile(_GAL + r"\s*(?:per|/|a|an)\s*(?:min|minute|hour|hr|day|second|sec)\b", re.I)
+
+
+def _n(s: str) -> float:
+    return float(s.replace(",", ""))
+
+
+def volume_parts(q: str) -> tuple[float | None, dict | None]:
+    """(gallons, bounds) of a DERNS quantity: one complete figure (commas and decimals kept whole) is gallons; a range,
+    a "less than" / "greater than" figure or a rate is no figure but structured bounds (re-review P2-4)."""
+    m = GALLON_RANGE.search(q)
+    if m:
+        lo, hi = sorted((_n(m.group(1)), _n(m.group(2))))
+        return None, {"kind": "range", "min_gal": lo, "max_gal": hi}
+    m = GALLONS.search(q)
+    if not m:
+        return None, None
+    if RATE.search(q[m.start(0):]):
+        return None, {"kind": "rate", "text": q[m.start(0):].strip()[:80]}
+    b = BOUND_WORDS.search(q[:m.start(0)])
+    if b:
+        upper = bool(re.search(r"less|fewer|under|below|up\s+to|<", b.group(0), re.I))
+        return None, {"kind": "upper_bound" if upper else "lower_bound",
+                      ("max_gal" if upper else "min_gal"): _n(m.group(1))}
+    if len(GALLONS.findall(q)) > 1:
+        return None, {"kind": "several_figures"}
+    return _n(m.group(1)), None
 
 
 def volume(detail: dict | None) -> tuple[float | None, str | None, str]:
     q = (detail or {}).get("quantity") or ""
-    m = GALLONS.search(q)
-    if m:
-        return float(m.group(1).replace(",", "")), q, "estimated"
+    if GALLONS.search(q):
+        gal, _ = volume_parts(q)
+        return (gal, q, "estimated") if gal is not None else (None, q, "unknown")
     if q and q.upper() not in ("N/A", "NA", "UNKNOWN", "NONE", ""):
         return None, q, "unknown"
     m = GALLONS.search((detail or {}).get("text") or "")
     if m:
         return None, f"{m.group(0)} (in the release's text)", "unknown"
     return None, None, "unknown"
+
+
+def volume_bounds(detail: dict | None) -> dict | None:
+    """The quantity's structured bounds (raw.volume_bounds) when it is a range, a bound or a rate."""
+    q = (detail or {}).get("quantity") or ""
+    return volume_parts(q)[1] if GALLONS.search(q) else None
 
 
 # ---------------------------------------------------------------- records
@@ -546,6 +587,8 @@ def build_record(entry: dict, fetched_at: str) -> dict | None:
     elif released and "Water" in released:
         raw["reached_water"] = True
     vol, vtext, flag = volume(det)
+    if volume_bounds(det):
+        raw["volume_bounds"] = volume_bounds(det)
     precautions = d.get("precautions")
     advice = precautions if precautions and precautions.strip().lower() not in ("none", "n/a", "na", "unknown") else None
     rec = event(source_id=SOURCE_ID, source_record_id=entry["key"], event_type=etype, status="unknown",
