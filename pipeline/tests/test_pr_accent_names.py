@@ -280,3 +280,13 @@ def test_pr_holds_name_and_existing_forms():
     assert N.holds_name(rec, "RIO CIBUCO")
     existing = {"rio-cibuco-pr": {**rec, "slug": "rio-cibuco-pr"}}
     assert N.same_named_existing(existing, "PR", "Cibuco River") == ["rio-cibuco-pr"]
+
+
+def test_pr_las_is_the_spanish_article():
+    """'LAS ARENAS CREEK' (a PRASA report) is a creek; LAS with no word after it stays a land-application system, and
+    every other state reads 'LAS' as before."""
+    assert N.report_name_parts("LAS ARENAS CREEK", "PR")[0] == ["LAS ARENAS CREEK"]
+    assert N.national_parts("PLANT LAS", "PR")[1] == "a land-application system, not a surface water"
+    for st in (None, "GA", "NM", "TX"):
+        assert N.report_name_parts("LAS ARENAS CREEK", st)[1] == "a land-application system, not a surface water"
+        assert N.national_parts("CHATHAM COUNTY LAS", st) == N.national_parts("CHATHAM COUNTY LAS")

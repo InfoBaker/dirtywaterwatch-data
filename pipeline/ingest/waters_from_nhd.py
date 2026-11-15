@@ -1081,7 +1081,13 @@ NATIONAL_WORD_FIX = [(re.compile(r"(?<=[a-z])crk\b", re.I), " Creek"),
 UNNAMED_SEG = re.compile(r"\b(unnamed|un-named|unnam|trib|tributary|tri|unt|ut)\b", re.I)
 
 
-def national_parts(text: str) -> tuple[list[str], str | None]:
+# Puerto Rico's 'Las' is the Spanish article ('LAS ARENAS CREEK'): there LAS is a land-application system only with no
+# word after it ('CHATHAM COUNTY LAS')
+LAND_APPLICATION_ES = re.compile(r"\b(las(?!\s+[a-z])|land\s+application|spray\s*field|percolation|infiltration|reuse)\b",
+                                 re.I)
+
+
+def national_parts(text: str, state=None) -> tuple[list[str], str | None]:
     """(water names, reason): the waters a national row's receiving-water text names. EPA's text for the states not yet
     built carries path notation ('BOGGY CRK/SPRING CRK/FLINT RIVER', 'GROVE CRK TRIB/S. FORK/BROAD RIVER-SAV RB': the
     first water receives the discharge, the rest are where it flows; an unnamed tributary's segment hands on to the
@@ -1100,7 +1106,9 @@ def national_parts(text: str) -> tuple[list[str], str | None]:
             reason = reason or "a river basin in EPA's receiving-water field, not a water"
             break
         why = next((w for rx, w in NATIONAL_NOT_WATER if rx.search(cut)
-                    and not (w.startswith("a road") and has_kind(words(cut)))), None)
+                    and not (w.startswith("a road") and has_kind(words(cut)))
+                    and not (S.folds(state) and w.startswith("a land-application")
+                             and not LAND_APPLICATION_ES.search(cut))), None)
         if why:
             reason = reason or why
             break
@@ -1168,10 +1176,10 @@ def collect_state_targets(states, existing: dict, national: dict | None = None, 
                 how = "reach" if (w.get("reach_ids") or w.get("nhdplus_ids")) else "point" if w.get("points") else "name"
                 note = (f"the registry's slug {w.get('water_slug')} is no water record on file (openboatlaunch's "
                         f"extract for {st} is not here): defined by {how}")
-            parts, why = national_parts(S.state_split_text(w.get("name") or "", st))
+            parts, why = national_parts(S.state_split_text(w.get("name") or "", st), st)
             if not parts:
                 for alt in w.get("names_seen") or []:
-                    parts, _ = national_parts(S.state_split_text(alt, st))
+                    parts, _ = national_parts(S.state_split_text(alt, st), st)
                     if parts:
                         break
             if not parts:
@@ -4797,7 +4805,7 @@ CREEK_BASIN = re.compile(r"^(?P<creek>(?:[\w'’.-]+\s+){1,4}?(?:creek|branch|br
 REPORT_TOWN_M = 3000        # a water of the name within 3 km of a town the reports give (the name pass's rule)
 
 
-def report_name_parts(text: str) -> tuple[list[str], str | None, bool]:
+def report_name_parts(text: str, state=None) -> tuple[list[str], str | None, bool]:
     """(water names, reason, tributary) for one receiving-water name as a report gives it. A tributary of a named water
     ('Tributary to Proctor Creek', 'UT Eno River', 'Ditch feeding Rocky Creek', 'Bull creek tributary') gives the named
     water (the tributary has no name of its own and its water reaches that one), tributary True; so does a sewershed
@@ -4847,7 +4855,7 @@ def report_name_parts(text: str) -> tuple[list[str], str | None, bool]:
                     else "a kind of water with no name"), False
     if STREET_NAME.match(t) and not has_kind(words(t)[:-1]):
         return [], "a street name, not a water", False
-    parts, why = national_parts(t)
+    parts, why = national_parts(t, state)
     if not parts and why and why.startswith(("a county", "a road")) and has_kind(words(t)):
         parts = split_names(t, False)       # 'County Home Branch', 'Mill Road Branch': a water's own name
     if not parts and named_after_all(t, why):
@@ -5066,7 +5074,7 @@ def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, wat
     is built, and its row notes where the resolver puts it today."""
     targets, done, skipped = {}, [], {}
     for r in rows:
-        parts, why, trib = report_name_parts(S.state_split_text(r["name"], state))
+        parts, why, trib = report_name_parts(S.state_split_text(r["name"], state), state)
         if not parts and why == OPEN_SEA and ocean_record_named(resolver, r["name"], state):
             # the open ocean has a record in this state that the shoreline rule walks (data/rules.json
             # reach.shoreline.oceans): the name is that water's, not "no water"
