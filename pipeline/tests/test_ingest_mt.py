@@ -377,3 +377,19 @@ def test_verify_result_fields_never_carry_personal_text_to_a_save(tmp_path, monk
     f.write_text(json.dumps({"error": {"code": 500}}))
     assert M.main(["--file", str(f)]) == 1
     clean_blob((tmp_path / "mt-deq-hab-map.json").read_text())
+
+
+def test_verify_the_state_text_and_source_note_say_what_the_code_does():
+    t = (ROOT / "research" / "mt" / "state-text.md").read_text()
+    y = (ROOT / "data" / "sources" / "mt-deq-hab-map.yaml").read_text()
+    for doc in (t, y):
+        assert "earliest date in the lift note" not in doc and "the earliest date of each is the issue and the lift" not in doc
+    assert "planned" in t and "last read that showed it" in t and not re.search(r"\b(safe|clean)\b", t)
+    # the two cases the text describes: confirmed while the map shows it, unconfirmed (aged from its issue) otherwise
+    first, _ = M.build({"features": [row("S-1", "Example Lake", "7/9/2026", None, level="Caution"),
+                                     row("S-2", "Example Pond", "7/9/2026", None)]}, T0)
+    by = {r["source_record_id"]: r for r in first}
+    assert by["s-1"]["raw"]["_last_seen_in_source"] == T0 and "_last_seen_in_source" not in by["s-2"]["raw"]
+    later, _ = M.build({"features": [row("S-1", "Example Lake", "7/9/2026", None),
+                                     row("S-2", "Example Pond", "7/9/2026", None)]}, "2026-11-20T23:00:00Z", first)
+    assert {r["source_record_id"]: r for r in later}["s-1"]["raw"]["_last_seen_in_source"] == T0
