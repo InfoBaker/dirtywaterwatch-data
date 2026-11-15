@@ -154,19 +154,17 @@ def test_the_nhd_builder_says_nhdplus_has_no_alaska_data():
     assert feats == [] and why == f"{N.nhdplus_gap('AK')}: NLDI snaps no point there"
 
 
-def test_the_radar_reads_no_state_outside_its_grid():
-    """The rainfall product is the contiguous states' grid (conus_QPE_*). Juneau's outfalls (58.3 N) and the pipeline
-    row at Prudhoe Bay (70.26 N) would stretch the one export box for every state to 8,146 x 3,883 pixels and get no
-    value; Alaska's combined sewer permits stay listed in rain_caution_states with covered false."""
+def test_alaskas_outfalls_are_read_from_the_alaska_grid():
+    """Since 2026-11-15 the radar reads each region's own grid (alaska_QPE_*): Juneau's three combined sewer outfalls
+    are read there; the pipeline row at Prudhoe Bay is no combined sewer (excluded_not_sewage) and is not read."""
     from ingest import rainfall as RF
-    from build import rain_likely as RL
-    assert RF.radar_states({"AK", "WA", "NY"}) == {"WA", "NY"}
-    assert {"AK", "HI", "PR"} <= RF.OUTSIDE_RADAR_GRID
+    from ingest import mrms_grid as G
+    assert RF.radar_states({"AK", "WA", "NY"}) == {"AK", "WA", "NY"}
+    assert "AK" not in RF.OUTSIDE_RADAR_GRID and G.region_of("AK") == "alaska"
     got = RF.cso_outfalls(live={"AK"})
-    assert got == []
-    cov = RL.caution_coverage({"enabled": True, "permits": {}}, {"AK": {"AK0023213"}})["AK"]
-    assert cov["covered"] is False and cov["cso_permits"] == 1
-    assert "does not read rainfall" in cov["sentence"]
+    assert sorted(o["outfall"] for o in got) == ["002", "003", "004"] and {o["permit"] for o in got} == {"AK0023213"}
+    pts = RF.group_points(got)
+    assert all(p["region"] == "alaska" and G.in_extent(p["lat"], p["lon"], G.ALASKA_EXTENT) for p in pts.values())
 
 
 def test_alaskas_monitored_rows_start_with_page_health_only():

@@ -11,7 +11,9 @@ through common.load_outfall_registry: the ECHO CSO inventory, national; plant ou
 data/build/ma-cso-outfalls.json (MassDEP layer) and data/build/me-cso-outfalls.json (Maine DEP layer), in the
 live states (build/status.py states(): a state going live brings its outfalls with it), New Jersey's included
 except the permits on the permittees' shared site (ingest/nj_cso_likely.py), which keep the site; rounded to 0.01
-degree (about 1 km, the MRMS grid); one point serves every outfall in it.
+degree (about 1 km, the MRMS grid); one point serves every outfall in it. Each point belongs to its state's radar
+region (mrms_grid.region_of: Alaska, Hawaii, the Caribbean for Puerto Rico and the Virgin Islands, the conus for every
+other state).
 
 Observed: NOAA MRMS radar-only QPE from the ImageServer `obs/mrms_qpe`
 (https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer), product valid
@@ -28,24 +30,45 @@ path of before, the fallback: one `identify` per point (1/3/6/12/24/48/72-hour t
 FALLBACK_MAX_CALLS points (one per permittee first, wettest first). Readings are kept per clock hour
 (rainfall.json; --force rereads). Negative values are no data.
 
-Outside the lower 48: the service also publishes alaska_QPE_*, hawaii_QPE_* and carib_QPE_* (Puerto Rico and the
-Virgin Islands) grids (catalog, 2026-11-14); this module reads conus_QPE_* only, so Alaska, Hawaii and Puerto Rico
-are not read (OUTSIDE_RADAR_GRID) and their combined sewer permits stay covered false in out/coverage.json.
+Regions (since 2026-11-15, read_region): the service publishes four grids, conus_QPE_*, alaska_QPE_*, hawaii_QPE_* and
+carib_QPE_* (research/mrms/regions-2026-11-15.md: each stored in Web Mercator, updated in the same hourly cycle, its
+0.01 degree export equal to identify at Juneau and San Juan). Each region with points is read on its own, the same way:
+one catalog query serves every region, then its own tiles (at most two for Alaska, one for Puerto Rico), its own unit,
+its own check at its wettest point and its own per-point fallback (at most REGION_FALLBACK_MAX_CALLS outside the
+conus), its readings citing its own product (product_name). rainfall.json mrms.regions holds each region's points,
+freshness, product time, fallback, requests and (outside the conus) grid and unit; mrms.grid, mrms.units and
+mrms.fallback stay the conus's. A point outside its region's grid is left out and listed (mrms.outside_grid). Where
+MRMS answers no coverage (-3: no radar sees the place, as at Prudhoe Bay) at a point never read, the point is outside
+radar coverage: listed (mrms.outside_coverage), never fresh, no reading to show, never a failed tile or a fallback, and
+not counted for the exit code; at a point read before it is an outage, its reading missing and counted
+(points[].no_coverage.read_before).
+
+Outside a grid: Guam, American Samoa and the Northern Mariana Islands have none in the service (OUTSIDE_RADAR_GRID):
+their combined sewer permits would stay covered false in out/coverage.json. Hawaii has a grid but no combined sewer
+outfall (2026-11-15): nothing is read there until one is registered. Puerto Rico's are read once it is live
+(radar_states follows the live states).
 
 State and exit code: a point's reading is this hour's (fresh, is_fresh) when it was fetched in this product hour,
 has a 24-hour value, and is valid no more than FRESH_LAG_H hour before this hour's product (an answer of no data, or
 an old product, is not; an identify answer is dated by its 24-hour total, parse_identify). A reading of an older
-product never replaces a newer one stored (the answer stays in the raw file). rainfall.json `ok` is true only when at least MIN_OK_SHARE of the points in the radar grid
-have this hour's reading and the per-point fallback was not needed; a fallback, even one that read every point it
-needed, sets ok false, names itself in `error`, `mrms.fallback` and the summary line (FALLBACK), and holds
-last_ok_at. The exit code is non-zero only when readings are missing or stale (fewer than MIN_OK_SHARE fresh:
-mrms.readings_ok). The forecast's deferrals (QPF_FETCH_MAX, LOOKUP_MAX) are by design and never fail the stage.
+product never replaces a newer one stored (the answer stays in the raw file). Each region is judged on its own:
+readings_ok when at least MIN_OK_SHARE of its points (those outside radar coverage left out) have this hour's reading;
+its product's own hour is recorded (mrms.regions[].product_valid_time) and one older than FRESH_LAG_H is said loudly
+(stale_product, STALE on the summary line, in `error`). rainfall.json `ok` is true only when every region's readings
+are and no region's per-point fallback was needed; a fallback, even one that read every point it needed, sets ok
+false, names itself (and its region) in `error`, the region's fallback and the summary line (FALLBACK), and holds
+last_ok_at. The exit code is non-zero only when readings are missing or stale (in some region, fewer than
+MIN_OK_SHARE fresh: mrms.readings_ok). A permittee whose newest reading is older than the rain caution's stale window
+(permit_summary, shown_hours) shows no reading, never an old total as this hour's. The forecast's deferrals (QPF_FETCH_MAX, LOOKUP_MAX) are by design and never fail the stage.
 
 Unit (found 2026-11-07): the service describes its values as inches, but answers millimetres (identify at Bucklin
 Point, RI, valid 2026-11-07T02:00Z: 1.6, 15.8, 26.7, 40.1, 51.3, 52.4, 52.4 for 1 to 72 hours; maxValues 118.7; the
 Providence gauge 17.8 to 26.4 mm in the hour to 00:51Z), and already did on 2026-11-03 (the Calais export in
 tests/fixtures: 3.8 to 7.3 where IEM's MRMS daily is 0.22 in). So every run decides the unit from the data
-(decide_units), never from the description alone: a box maximum (the largest value in the grid blocks read, or in
+(decide_units, once per region, from that region's evidence and its own last determination; outside the conus its
+whole-region statistics, mrms_grid.statistics, and its own gauges, REGION_GAUGES, beside its few pixels; each regional
+grid answered millimetres on 2026-11-15: alaska_QPE_24H 93.3, carib_QPE_72H 292), never from the description alone:
+a box maximum (the largest value in the grid blocks read, or in
 the run's identify answers) over 50 for 24 hours (the US record, 49.69 in, Kauai, 2018) or 155 for 72 hours (the
 world record, 154.7 in, La Reunion, 1980) is millimetres; the gauge check (gauge_check: airport gauges in the box from api.weather.gov, mm, against
 identify at the wettest, at most four, where one had 2 mm or more; MRMS/gauge 0.4 to 2.5 is millimetres, the same
@@ -69,7 +92,8 @@ cell comes from /points/{lat},{lon} once (data/build/nws-gridpoints.json; at mos
 lookups a run); each grid cell is fetched at most every 3 hours (at most QPF_FETCH_MAX a run, the
 oldest first). Shown as "rain expected", never as a discharge.
 
-Requests: rainfall.json `requests` counts this run's calls by kind. Before the grid (2026-11-02, 319
+Requests: rainfall.json `requests` counts this run's calls by kind (and mrms.regions[].requests each region's; outside
+the conus one statistics request a region an hour, and its gauge's observations). Before the grid (2026-11-02, 319
 New England points) a run made 319 identify calls and, every third hour, 196 forecast calls: about
 BASELINE_REQUESTS_PER_HOUR an hour. The caps keep any run within twice that (tests/test_rain_grid.py).
 
@@ -116,12 +140,18 @@ HOURS = (1, 3, 6, 12, 24, 48, 72)
 GRID_HOURS = (1, 24)           # read as grids every hour
 BACKFILL_HOURS = (48, 72)      # read as grids only when a permittee's history lacks the windows they imply
 PRODUCT = "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, 24-hour total (conus_QPE_24H)"
+
+
+def product_name(region: str = "conus") -> str:
+    """The product a reading cites: its region's 24-hour item (mrms_grid.REGIONS)."""
+    return PRODUCT if region == "conus" else PRODUCT.replace("conus_QPE_24H", grid_mod.item_name(24, region))
+
 SHARED_SITE_STATES = ("NJ",)  # its permits on the permittees' shared site (ingest/nj_cso_likely.py) keep the site
-# The radar product is the contiguous United States grid (conus_QPE_*: 20 to 55 N, 130 to 60 W). A live state outside it
-# is not read: its points would have no value, and Juneau (58.3 N) with the pipeline row at Prudhoe Bay (70.26 N) would
-# stretch the one export box from 5,575 x 1,648 to 8,146 x 3,883 pixels for every state (Alaska final audit,
-# 2026-11-07). Its combined sewer permits stay in out/coverage.json rain_caution_states with covered false.
-OUTSIDE_RADAR_GRID = frozenset({"AK", "HI", "PR", "VI", "GU", "AS", "MP"})
+# The radar product has four regional grids (mrms_grid.REGIONS: conus, alaska, hawaii, carib, each read from its own
+# catalog items since 2026-11-15; Alaska, Hawaii, Puerto Rico and the Virgin Islands were not read before). Guam,
+# American Samoa and the Northern Mariana Islands have no grid in the service: a live one is not read, and its combined
+# sewer permits stay in out/coverage.json rain_caution_states with covered false.
+OUTSIDE_RADAR_GRID = frozenset({"GU", "AS", "MP"})
 # a point's source tag by registry file (rainfall.json outfalls[].source; a national file: "echo-registry")
 REGISTRY_SOURCE = {"data/outfalls-new-england.json": "echo", "data/outfalls-mid-atlantic.json": "echo-mid-atlantic",
                    "data/build/outfalls-reported.json": "reported-cso"}   # a combined sewer outfall the reports place
@@ -169,6 +199,11 @@ GAUGE_SETTLE = timedelta(minutes=20)  # observations fetched this long after the
 GAUGE_TIMEOUT_S = 20                  # one attempt per station; the first failure skips the others (the run goes on)
 GAUGE_RATIO_MM = (0.4, 2.5)    # MRMS / gauge in this range: millimetres; the same over 25.4: inches
 GAUGE_CACHE = RAW_DIR / "nws-gauges" / "observations.json"
+# Each region outside the conus has its own gauge list (api.weather.gov /stations, coordinates read 2026-11-15), used
+# only for that region's gauge check (its extent as the box): its airport, beside its outfalls
+REGION_GAUGES = {"alaska": {"PAJN": (58.35, -134.58)},      # Juneau International Airport
+                 "carib": {"TJSJ": (18.45, -66.00)},       # San Juan, Luis Munoz Marin International Airport
+                 "hawaii": {"PHNL": (21.33, -157.94)}}     # Honolulu, Daniel K. Inouye International Airport
 # Readings known to be millimetres before the check (repair_history_units): the unit from then on, until the bound
 # says otherwise, is millimetres (the last unit determined).
 KNOWN_MM_AT = {
@@ -183,7 +218,8 @@ REPAIR_VERSION = 3             # 1: hours before the first evidence kept as inch
 BACKFILL_REACH_H = 50          # a reading after the check fills windows up to 48 hours before its valid time, which
                                # can be an hour before the check
 BASELINE_REQUESTS_PER_HOUR = 384   # 319 identify + 196 forecast cells / 3 (2026-11-02, before the grid)
-FALLBACK_MAX_CALLS = 350       # per-point identify calls when the grid fails
+FALLBACK_MAX_CALLS = 350       # per-point identify calls when the grid fails (the conus)
+REGION_FALLBACK_MAX_CALLS = 25 # the same in each other region (a few dozen points at most)
 FRESH_LAG_H = 1                # a reading is this hour's (fresh) when fetched this hour, with a 24-hour value, valid no
                                # more than this many hours before this hour's product (one posted late); older is stale
 LOOKUP_MAX = 100               # new NWS /points lookups a run
@@ -223,6 +259,7 @@ def parse_duration(s: str) -> timedelta | None:
 # ---------------------------------------------------------------- requests
 
 REQUEST_KINDS = (("/exportImage", "mrms_export"), ("/identify", "mrms_identify"), ("/query", "mrms_query"),
+                 ("/computeStatisticsHistograms", "mrms_statistics"),
                  ("/points/", "nws_points"), ("/gridpoints/", "nws_gridpoints"), ("/stations/", "nws_stations"))
 
 
@@ -269,7 +306,8 @@ def point_key(lat: float, lon: float) -> str:
 
 def radar_states(live: set[str] | None = None) -> set[str]:
     """The states whose combined sewer outfalls the radar reads: the live states (build/status.py states(), the
-    one list the site's state pages and the export use) inside the radar grid (OUTSIDE_RADAR_GRID left out). In
+    one list the site's state pages and the export use) with a radar grid (OUTSIDE_RADAR_GRID left out; a state goes
+    to its region's grid, mrms_grid.region_of). In
     New Jersey the permits on the permittees' shared site are left to it (cso_outfalls); its other permits are read
     like any other state's."""
     if live is None:
@@ -353,7 +391,7 @@ def group_points(outfalls: list[dict]) -> dict[str, dict]:
     for o in outfalls:
         k = point_key(o["lat"], o["lon"])
         p = pts.setdefault(k, {"lat": round(o["lat"], 2), "lon": round(o["lon"], 2), "outfalls": [], "permits": [],
-                               "states": []})
+                               "states": [], "region": grid_mod.region_of(o["state"])})
         p["outfalls"].append(f"{o['permit']}:{o['outfall'] or '?'}")
         for f, v in (("permits", o["permit"]), ("states", o["state"])):
             if v not in p[f]:
@@ -464,15 +502,17 @@ def gauge_verdict(pairs: list[dict]) -> dict:
                     + ({"mm": "millimetres", "in": "inches"}.get(v) or "no verdict")}
 
 
-def gauge_check(session, box: dict, valid_time: str, now: datetime) -> dict:
-    """Once a run: the observations of the GAUGES inside the box from GAUGE_EARLY before the valid time to it (kept in
+def gauge_check(session, box: dict, valid_time: str, now: datetime, gauges: dict | None = None) -> dict:
+    """Once a run (once a region): the observations of the GAUGES (or the gauges given: a region's own list,
+    REGION_GAUGES) inside the box from GAUGE_EARLY before the valid time to it (kept in
     GAUGE_CACHE per valid time, refetched when fetched less than GAUGE_SETTLE after it; one attempt each, and the
     first failure skips the stations left, so api.weather.gov being down costs one timeout), and MRMS identify at the wettest (at most GAUGE_IDENTIFY_MAX,
     kept per valid time) where a gauge had at least GAUGE_MIN_MM: {verdict, ratio, ..., pairs, fetched}."""
     vt = parse_t(valid_time)
     cache = read_json(GAUGE_CACHE, {}) or {}
     obs_c, idf_c = cache.setdefault("observations", {}), cache.setdefault("identify", {})
-    inside = [st for st, (la, lo) in sorted(GAUGES.items())
+    gauges = GAUGES if gauges is None else gauges
+    inside = [st for st, (la, lo) in sorted(gauges.items())
               if box["ymin"] <= la <= box["ymax"] and box["xmin"] <= lo <= box["xmax"]]
     if not inside:
         return {"verdict": None, "text": "skipped: no gauge of the list in the box", "valid_time": valid_time,
@@ -503,7 +543,7 @@ def gauge_check(session, box: dict, valid_time: str, now: datetime) -> dict:
     for p in wet[:GAUGE_IDENTIFY_MAX]:
         c = idf_c.get(p["station"]) or {}
         if c.get("valid_time") != valid_time:
-            la, lo = GAUGES[p["station"]]
+            la, lo = gauges[p["station"]]
             try:
                 m = parse_identify(identify(session, la, lo))
             except Exception as e:  # noqa: BLE001
@@ -521,19 +561,24 @@ def gauge_check(session, box: dict, valid_time: str, now: datetime) -> dict:
 
 # ---------------------------------------------------------------- MRMS: per point (the fallback)
 
-def parse_identify(d: dict) -> dict:
+def parse_identify(d: dict, region: str | None = None) -> dict:
     """{valid_time, h1 ... h72, problems}: Values pair with the catalog items in order; each item is
-    named conus_QPE_<NN>H. Accumulations must not shrink with the window (a check on the pairing). valid_time is the
-    24-hour total's own product time (it drives the caution, the freshness and the history; else the latest); an
-    accumulation of another hour is left out, as the grid leaves it out (review 2026-11-15, P1-1)."""
+    named <region>_QPE_<NN>H. With region, only that region's items are read (where two grids overlap, as carib and
+    conus south of 25 N, identify answers both). Accumulations must not shrink with the window (a check on the pairing).
+    valid_time is the 24-hour total's own product time (it drives the caution, the freshness and the history; else the
+    latest); an accumulation of another hour is left out, as the grid leaves it out (review 2026-11-15, P1-1).
+    no_coverage: true when the 24-hour item holds MRMS's no coverage (mrms_grid.NO_COVERAGE; h24 is then None)."""
     vals = (d.get("properties") or {}).get("Values") or []
     feats = (d.get("catalogItems") or {}).get("features") or []
     out, valid, problems = {f"h{h}": None for h in HOURS}, [], []
     vt_of: dict[int, int] = {}
     if not feats and d.get("value") is not None and len(vals) <= 1:
         problems.append("no catalog items in the answer")
+    nocov = False
     for i, f in enumerate(feats):
         a = f.get("attributes") or {}
+        if region and not str(a.get("name") or "").startswith(f"{region}_QPE_"):
+            continue
         m = re.search(r"QPE_(\d+)H", str(a.get("name") or ""))
         if not m or i >= len(vals):
             continue
@@ -543,6 +588,7 @@ def parse_identify(d: dict) -> dict:
         except (TypeError, ValueError):
             v = None
         if v is not None and (v < 0 or v != v):
+            nocov = nocov or (h == 24 and v == grid_mod.NO_COVERAGE)
             v = None                         # negative pixels are no data
         if h in HOURS:
             out[f"h{h}"] = round(v, 2) if v is not None else None
@@ -566,6 +612,8 @@ def parse_identify(d: dict) -> dict:
     if any(b + 0.005 < a for a, b in zip(seq, seq[1:])):
         problems.append("accumulations shrink with the window: values and catalog items may be mispaired")
     out["problems"] = problems
+    if nocov and out["h24"] is None:
+        out["no_coverage"] = True
     return out
 
 
@@ -681,18 +729,23 @@ def export_tile(session, objectid: int, box: dict, log: list | None = None) -> t
     raise last
 
 
-def read_grid(session, points: dict[str, dict], hours) -> dict:
-    """One catalog query, then each accumulation exported tile by tile (mrms_grid.tiles: the 20-degree squares that
-    hold points, each box shrunk to its points, every box under the service's limits) and sampled at every point of
-    the tile. Returns {values: {key: {h1, h24, ...}}, maxima: {hours: the largest value read}, valid_time, products,
-    tiles, tiles_failed: {tile: error}, failed_points, box (around the tiles read), problems, catalog}, the values in
-    the service's unit as read (run() decides the unit and converts). A tile whose 24-hour export fails twice, is not
-    where it was asked, or has no 24-hour value at any of its points is failed: its points get no grid value and are
-    listed in failed_points (run() reads them by point, the fallback). Raises when the catalog cannot be read, every
-    tile fails, or the tiles read have no 24-hour value at most of their points."""
-    names = [grid_mod.item_name(h) for h in hours]
-    cat, cat_raw = grid_mod.catalog(session, names)
-    n24 = grid_mod.item_name(24)
+def read_grid(session, points: dict[str, dict], hours, region: str = "conus", cat: tuple | None = None,
+              seen=None) -> dict:
+    """One catalog query (or cat: (parsed, answer) of a query that asked for this region's items among others), then
+    each accumulation of the region's grid exported tile by tile (mrms_grid.tiles: the 20-degree squares that hold
+    points, each box shrunk to its points, every box under the service's limits) and sampled at every point of the
+    tile. Returns {values: {key: {h1, h24, ...}}, maxima: {hours: the largest value read}, valid_time, products,
+    tiles, tiles_failed: {tile: error}, failed_points, no_coverage (the points where MRMS answers no coverage), box
+    (around the tiles read), problems, catalog, region}, the values in the service's unit as read (run() decides the
+    unit and converts). A tile whose 24-hour export fails twice, is not where it was asked, or has no 24-hour value at
+    any of its points is failed: its points get no grid value and are listed in failed_points (run() reads them by
+    point, the fallback); a tile whose points all answer no coverage and were never read (seen: the points read before,
+    read_before) is not failed: those points are outside radar coverage, which no fallback changes. Raises when the
+    catalog cannot be read, every tile fails, or the tiles read have no 24-hour value at most of their points (those
+    outside radar coverage left out of the count)."""
+    names = [grid_mod.item_name(h, region) for h in hours]
+    cat, cat_raw = grid_mod.catalog(session, names) if cat is None else cat
+    n24 = grid_mod.item_name(24, region)
     if n24 not in cat:
         raise GridReadError(f"{n24} not in the catalog answer", {"catalog": cat_raw})
     vt = cat[n24]["valid_time"]
@@ -701,8 +754,10 @@ def read_grid(session, points: dict[str, dict], hours) -> dict:
     values: dict[str, dict] = {k: {} for k in points}
     products, problems, maxima = {}, [], {}
     use = [24]
+    seen = set(seen or ())
+    no_cov: set[str] = set()
     for h in hours:
-        name = grid_mod.item_name(h)
+        name = grid_mod.item_name(h, region)
         c = cat.get(name)
         if not c:
             problems.append(f"{name}: not in the catalog answer")
@@ -717,14 +772,16 @@ def read_grid(session, points: dict[str, dict], hours) -> dict:
     failed: dict[str, str] = {}
     for t in tiles:
         for h in use:                    # the 24-hour total first: a tile without it is failed, its others not read
-            name = grid_mod.item_name(h)
+            name = grid_mod.item_name(h, region)
             log: list = []
             b = g = None
             try:
                 b, g = export_tile(session, cat[name]["objectid"], t["box"], log)
                 got = grid_mod.sample(g, {k: pts[k] for k in t["keys"]})
-                if h == 24 and all(v is None for v in got.values()):
+                dark = grid_mod.no_coverage(g, {k: pts[k] for k in t["keys"]}) if h == 24 else set()
+                if h == 24 and all(v is None for v in got.values()) and not set(got) <= dark - seen:
                     raise ValueError(f"no 24-hour value at any of its {len(got)} point(s)")
+                no_cov |= dark
             except Exception as e:  # noqa: BLE001
                 if b is not None:        # an answer received and read, then rejected: its bytes and hash kept too
                     log.append({"attempt": len(log) + 1, "bytes": len(b), "sha256": hashlib.sha256(b).hexdigest(),
@@ -754,13 +811,18 @@ def read_grid(session, points: dict[str, dict], hours) -> dict:
                             + "; ".join(f"{k}: {v}" for k, v in failed.items()), evidence)
     failed_points = sorted(k for t in tiles if t["tile"] in failed for k in t["keys"])
     read_keys = [k for t in tiles if t["tile"] not in failed for k in t["keys"]]
-    missing = sum(1 for k in read_keys if values[k].get("h24") is None)
-    if missing > (1 - MIN_OK_SHARE) * len(read_keys):
+    counted = [k for k in read_keys if k not in no_cov - seen]            # outside radar coverage: not counted
+    missing = sum(1 for k in counted if values[k].get("h24") is None)
+    if missing > (1 - MIN_OK_SHARE) * len(counted):
         evidence["values"] = {k: [values[k].get(f"h{h}") for h in use] for k in read_keys}
         evidence["hours"] = use
-        raise GridReadError(f"the 24-hour grid has no value at {missing} of {len(read_keys)} points", evidence)
+        raise GridReadError(f"the 24-hour grid has no value at {missing} of {len(counted)} points", evidence)
     if missing:
         problems.append(f"no 24-hour value at {missing} point(s)")
+    if no_cov:
+        problems.append(f"no radar coverage (MRMS {grid_mod.NO_COVERAGE:g}) at {len(no_cov)} point(s), "
+                        f"{len(no_cov & seen)} of them read before (an outage): "
+                        + ", ".join(sorted(no_cov)[:10]))
     if failed:
         problems.append(f"{len(failed)} of {len(tiles)} grid tile(s) failed, their {len(failed_points)} point(s) read "
                         f"by point: " + "; ".join(f"{k}: {v}" for k, v in failed.items())[:400])
@@ -770,20 +832,20 @@ def read_grid(session, points: dict[str, dict], hours) -> dict:
     for k in failed_points:
         values.pop(k, None)
     return {"values": values, "maxima": maxima, "valid_time": vt, "products": products, "tiles": tile_rows,
-            "tiles_failed": failed, "failed_points": failed_points,
+            "tiles_failed": failed, "failed_points": failed_points, "no_coverage": sorted(no_cov),
             "box": grid_mod.union_box(t["box"] for t in tiles if t["tile"] not in failed),
-            "problems": problems, "catalog": cat_raw}
+            "problems": problems, "catalog": cat_raw, "region": region}
 
 
-def check_grid(session, grid: dict, points: dict[str, dict], factor: float = 1.0) -> dict:
-    """identify at the wettest point: the grid's value there must be identify's (same valid time). The grid's
-    values are in inches (converted); identify's answer is converted with the same factor before the comparison
-    (both come from the same service in the same unit)."""
+def check_grid(session, grid: dict, points: dict[str, dict], factor: float = 1.0, region: str | None = None) -> dict:
+    """identify at the wettest point: the grid's value there must be identify's (same valid time; the region's items
+    only). The grid's values are in inches (converted); identify's answer is converted with the same factor before the
+    comparison (both come from the same service in the same unit)."""
     vals = grid["values"]
     k = max(sorted(vals), key=lambda x: vals[x].get("h24") if vals[x].get("h24") is not None else -1.0)
     out = {"point": k, "grid_h24": vals[k].get("h24")}
     d = identify(session, points[k]["lat"], points[k]["lon"])
-    m = parse_identify(d)
+    m = parse_identify(d, region)
     out.update(identify_h24=to_inches(m["h24"], factor), identify_h24_as_read=m["h24"],
                identify_valid_time=m["valid_time"], factor=factor, answer=d)
     m["h24"] = out["identify_h24"]
@@ -1053,6 +1115,14 @@ def write_history(hist: dict) -> None:
     tmp.replace(HISTORY)
 
 
+def shown_hours() -> float:
+    """How old a permittee's newest reading may be and still be shown as its reading (permit_summary): the rain
+    caution's own stale window (rules.json rain_likely.rainfall_stale_hours, build/rain_likely.py settings, and the hour
+    it allows beyond it)."""
+    from build.rain_likely import settings
+    return float(settings(read_json(DATA_DIR / "rules.json", {}) or {})["rainfall_stale_hours"]) + 1
+
+
 def permit_summary(points: dict[str, dict], outfalls: list[dict]) -> dict[str, dict]:
     """Per permittee: its points, the maxima at the latest valid time, how the wettest was read (grid
     or point) and from which product, and its forecast maximum."""
@@ -1096,58 +1166,89 @@ def permit_summary(points: dict[str, dict], outfalls: list[dict]) -> dict[str, d
     return out
 
 
+def shown_permits(permits: dict[str, dict], now: datetime) -> dict[str, dict]:
+    """The permittees as rainfall.json shows them: one whose newest reading is older than shown_hours() (its region's
+    product stopped, its points lost radar coverage, its reads failed) shows no reading (valid_time and the totals
+    None, as a permittee never read), never an old total as if it were this hour's; that reading stays under
+    last_reading, and the row keeps its product and how it was read (a caution still in its tail cites them). The
+    history is built from permit_summary's rows, before this (review 2026-11-15 P1-1)."""
+    shown = timedelta(hours=shown_hours())
+    out = {}
+    for permit, row in permits.items():
+        vt = parse_t(row.get("valid_time"))
+        if vt is not None and vt < now - shown:
+            row = {**row, "last_reading": {"valid_time": row["valid_time"], "h24": row["h24"],
+                                           "h24_point": row["h24_point"],
+                                           "why": f"older than {shown.total_seconds() / 3600:g} hours: not shown as "
+                                                  f"this hour's"}}
+            row.update({f"h{h}": None for h in HOURS})
+            row.update(valid_time=None, h24_point=None, points_reporting=0)
+        out[permit] = row
+    return out
+
+
 # ---------------------------------------------------------------- run
 
-def run_gauge_check(session, box, valid_time, now) -> dict:
+def run_gauge_check(session, box, valid_time, now, gauges: dict | None = None) -> dict:
     """gauge_check, never failing the run."""
     try:
-        return gauge_check(session, box, valid_time, now)
+        return gauge_check(session, box, valid_time, now, gauges)
     except Exception as e:  # noqa: BLE001
         return {"verdict": None, "text": f"skipped: {type(e).__name__}: {e}"[:300]}
 
 
-def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: datetime | None = None,
-        point_only: bool = False, session=None) -> dict:
-    now = now or datetime.now(UTC)
-    prev = read_json(OUT, {}) or {}
-    outfalls = cso_outfalls()
-    points = group_points(outfalls)
-    old_points = prev.get("points") or {}
-    for k, p in points.items():                # keep the last readings until replaced
-        for f in ("mrms", "qpf"):
-            if (old_points.get(k) or {}).get(f):
-                p[f] = old_points[k][f]
-        if p.get("mrms") and not p["mrms"].get("units_read"):
-            del p["mrms"]                      # read before the unit was checked (2026-11-07): reread, never kept
-    # a point outside the radar grid (a coordinate error in a registry, such as a longitude with its sign flipped) has
-    # no value there and would stretch a box for nothing: it is never read and never counted as missing
-    outside = sorted(k for k, p in points.items() if not grid_mod.in_extent(p["lat"], p["lon"]))
-    for k in outside:
-        points[k].pop("mrms", None)
-        points[k]["outside_grid"] = True
-    readable = [k for k in points if not points[k].get("outside_grid")]
-    prev_mrms = prev.get("mrms") or {}
-    last_units = prev_mrms.get("units_last_determined")
-    units: dict | None = None
-    todo = [k for k in readable if needs_mrms(points[k].get("mrms"), now, force)]
-    base = session or requests.Session()
-    base.headers.update(HEADERS)
-    session = CountingSession(base)
-    raw, failed, problems = {}, {}, []
-    grid_info: dict = {"used": False}
-    read, sampled = None, 0
-    hist_old, hist_repair = repair_history_units(read_json(HISTORY), now)   # once: readings before the check
-    if not last_units and hist_repair.get("last_unit") == "mm":   # the repair's unit is the last one determined
-        last_units = {"units_read": "mm", "basis": "history_repair", "determined_at": iso(now),
-                      "evidence": {k: hist_repair.get(k) for k in ("first_hour_over_bound", "largest_before", "ranges")}}
+def read_before(p: dict) -> bool:
+    """Whether the radar has seen the point: a reading is stored for it, or one was when MRMS first answered no coverage
+    there (no_coverage.read_before). MRMS's no coverage at such a point is an outage, its reading missing; at a point
+    never read, the place is outside radar coverage (listed, never fresh, not counted for the exit code)."""
+    return bool(p.get("mrms")) or bool((p.get("no_coverage") or {}).get("read_before"))
 
-    # the grid: every point from its tile's export, one per accumulation per tile; a failed tile's points (or, when the
-    # grid fails or is discarded, every point) read by identify, the per-point fallback, at most `cap` calls in all
+
+def outage_now(p: dict) -> bool:
+    """Whether the radar's newest word at a point read before is no coverage: its no_coverage mark is as new as its
+    stored reading or newer. The reading stays (the history and the citation keep it) but is never fresh and never
+    shown as the permittee's this hour (review 2026-11-15, pass 2)."""
+    nc, m = p.get("no_coverage") or {}, p.get("mrms") or {}
+    a, b = parse_t(nc.get("valid_time")), parse_t(m.get("valid_time"))
+    return a is not None and b is not None and a >= b
+
+
+def region_statistics(session, g: dict, region: str) -> dict:
+    """Unit evidence beyond the few pixels around a region's points: its 24-hour item (the one exported; g: the grid
+    read, or {"products": {"24": {item, objectid, valid_time}}} from the catalog when the grid read failed) over its
+    whole extent (mrms_grid.statistics, one request); never failing the run."""
+    p = (g.get("products") or {}).get("24") or {}
+    try:
+        st = grid_mod.statistics(session, p["objectid"], grid_mod.REGIONS[region])
+        return {"item": p.get("item"), "objectid": p.get("objectid"), "valid_time": p.get("valid_time"),
+                "extent": grid_mod.REGIONS[region], **st}
+    except Exception as e:  # noqa: BLE001
+        return {"item": p.get("item"), "objectid": p.get("objectid"), "error": f"{type(e).__name__}: {e}"[:300]}
+
+
+def read_region(session, region: str, points: dict[str, dict], keys: list[str], todo: list[str], hours: list[int],
+                now: datetime, last_units: dict | None, point_only: bool = False, cap: int = FALLBACK_MAX_CALLS,
+                cat: tuple | None = None) -> dict:
+    """One region's hour (mrms_grid.REGIONS): its points (keys) read from its own grid (read_grid, the first attempt on
+    cat, the catalog answer the regions share), a failed tile's points (or, when its grid read fails or is discarded,
+    every point to read, todo) by identify, at most cap calls, the region's items only (parse_identify); one unit for
+    the region (decide_units, unchanged), from its grid's values, its fallback's answers and, outside the conus, its
+    statistics (region_statistics: its own few pixels seldom tell), with its own gauges (REGION_GAUGES; the conus: the
+    GAUGES in its tiles' box) and its own last determination; the check at its wettest point; and its readings stored
+    in points (an older product never replaces a newer reading). Returns {g, units, check, fallback, grid_info, raw,
+    answers, got, failed, dark (key: valid time where MRMS answered no coverage), valued (key: valid time, read with a 24-hour
+    value), problems, sampled, read}."""
+    conus = region == "conus"
+    tag = "" if conus else f"{region}: "
+    prod = product_name(region)
+    gauges = None if conus else (REGION_GAUGES.get(region) or {})
+    answers, got, failed, dark, problems = {}, {}, {}, {}, []
+    raw: dict = {}
+    grid_info: dict = {"used": False}
     fallback = {"used": False, "reason": None}
-    g, hours, rejected, chk, errs = None, list(GRID_HOURS), [], None, []
-    answers, got = {}, {}                  # identify answers, and those with a 24-hour value (as read)
-    cap = FALLBACK_MAX_CALLS if limit is None else min(limit, FALLBACK_MAX_CALLS)
+    g, rejected, chk, errs, units, stats = None, [], None, [], None, None
     calls, asked, left = 0, set(), set()
+    seen = {k for k in keys if read_before(points[k])}
 
     def fetch(k):
         p = points[k]
@@ -1158,30 +1259,34 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         except Exception as e:  # noqa: BLE001
             return k, None, f"{type(e).__name__}: {e}"[:300]
 
-    def by_point(keys):
-        """identify at the points of keys not asked yet this run (fallback_order, within what is left of cap)."""
+    def by_point(ks):
+        """identify at the points of ks not asked yet this run (fallback_order, within what is left of cap)."""
         nonlocal calls
-        keys = [k for k in keys if k not in answers and k not in failed]
-        order = fallback_order(points, keys, cap - calls)
+        ks = [k for k in ks if k not in answers and k not in failed]
+        order = fallback_order(points, ks, cap - calls)
         calls += len(order)
-        asked.update(keys)
+        asked.update(ks)
         left.difference_update(order)
-        left.update(set(keys) - set(order))
+        left.update(set(ks) - set(order))
         with ThreadPoolExecutor(max_workers=MRMS_WORKERS) as pool:
             for k, d, err in pool.map(fetch, order):
                 if err:
                     failed[k] = err
                     continue
                 answers[k] = d
-                m = parse_identify(d)
+                m = parse_identify(d, region)
                 m["fetched_at"] = iso(datetime.now(UTC))
-                m["read"], m["product"] = "point", PRODUCT
+                m["read"], m["product"] = "point", prod
                 for pr in m.pop("problems"):
-                    problems.append(f"{k}: {pr}")
+                    problems.append(f"{tag}{k}: {pr}")
+                nocov = m.pop("no_coverage", False)
                 if not m.get("valid_time"):
                     failed[k] = "no valid time"
                 elif m.get("h24") is None:
-                    failed[k] = "no 24-hour value in the answer"     # no data: the last reading stays, not fresh
+                    if nocov:
+                        dark[k] = m["valid_time"]
+                    if not nocov or k in seen:       # no data, or a radar outage: the last reading stays, not fresh
+                        failed[k] = "no 24-hour value in the answer"
                 else:
                     got[k] = m
 
@@ -1189,14 +1294,18 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         return {h: max((m[f"h{h}"] for m in got.values() if m.get(f"h{h}") is not None), default=None)
                 for h in UNIT_BOUND_IN}
 
+    def with_stats(maxima):
+        """The grid's maxima with the region's largest 24-hour value (statistics) beside them."""
+        v = (stats or {}).get("max")
+        if v is None or v < 0:
+            return maxima
+        return {**maxima, 24: max(x for x in (maxima.get(24), v) if x is not None)}
+
     if todo and not point_only:
-        # the permittees with a point in the radar grid (one with none never gets a history to complete)
-        if backfill_needed(hist_old, {p for k in readable for p in points[k]["permits"]}, now):
-            hours += list(BACKFILL_HOURS)
-        grid_points = {k: points[k] for k in readable}
         for attempt in range(2):           # a product replaced between the query and the export: query again
             try:
-                g = read_grid(session, grid_points, hours)
+                g = read_grid(session, {k: points[k] for k in keys}, hours, region, cat if attempt == 0 else None,
+                              seen)
                 break
             except Exception as e:  # noqa: BLE001
                 errs.append(f"{type(e).__name__}: {e}"[:300])
@@ -1205,29 +1314,35 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                 g = None
                 time.sleep(2 + 3 * attempt)
         if g is not None:
-            gauge = run_gauge_check(session, g["box"], g["valid_time"], now)
+            gauge = run_gauge_check(session, g["box"] if conus else grid_mod.REGIONS[region], g["valid_time"], now,
+                                    gauges)
+            if not conus:
+                stats = region_statistics(session, g, region)
             if g["tiles_failed"]:
                 # a failed tile's points (as todo has them, --force included); the grid's other points are not reread
                 fallback = {"used": True, "reason": f"{len(g['tiles_failed'])} of {len(g['tiles'])} grid tile(s) "
                                                     f"failed: " + "; ".join(g["tiles_failed"].values())[:300]}
                 by_point([k for k in todo if k in set(g["failed_points"])])
-            # one unit a run, decided (decide_units) from every value read, the grid's and the fallback's, before the
-            # check compares at it
-            grid_only = decide_units(g["maxima"], last_units, gauge)
+            # one unit for the region, decided (decide_units) from every value read, the grid's and the fallback's,
+            # before the check compares at it
+            gm = with_stats(g["maxima"])
+            grid_only = decide_units(gm, last_units, gauge)
             fm = fb_maxima() if got else {}
-            both = {h: max([x for x in (g["maxima"].get(h), fm.get(h)) if x is not None], default=None)
-                    for h in set(g["maxima"]) | set(fm)}
+            both = {h: max([x for x in (gm.get(h), fm.get(h)) if x is not None], default=None)
+                    for h in set(gm) | set(fm)}
             units = decide_units(both, last_units, gauge)
             units["gauge_check"] = gauge
+            if stats is not None:
+                units["statistics"] = stats
             if (units["units_read"], units["basis"]) != (grid_only["units_read"], grid_only["basis"]):
                 units["with_fallback"] = (f"decided with the per-point fallback's answers (the grid's alone: "
                                           f"{grid_only['units_read']}, {grid_only['basis']})")
-                problems.append(f"the unit decided with the per-point fallback's answers: {units['units_read']} "
+                problems.append(f"{tag}the unit decided with the per-point fallback's answers: {units['units_read']} "
                                 f"({units['basis']}); the grid's alone gave {grid_only['units_read']} "
                                 f"({grid_only['basis']})")
             conv = {k: {f: to_inches(x, units["factor"]) for f, x in v.items()} for k, v in g["values"].items()}
             try:
-                chk = check_grid(session, {**g, "values": conv}, points, units["factor"])
+                chk = check_grid(session, {**g, "values": conv}, points, units["factor"], region)
             except Exception as e:  # noqa: BLE001
                 chk = {"result": f"skipped: identify failed ({type(e).__name__}: {e})"[:300]}
             if chk.get("result") == "differs":
@@ -1240,26 +1355,36 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
             grid_info = {"used": False, "errors": errs,
                          **({"check": {k: v for k, v in chk.items() if k != "answer"}} if chk else {})}
             fallback = {"used": True, "reason": "grid read failed: " + "; ".join(errs)[:400]}
-            problems.append("grid read failed; per-point fallback: " + "; ".join(errs)[:400])
+            problems.append(f"{tag}grid read failed; per-point fallback: " + "; ".join(errs)[:400])
             by_point(todo)
     elif todo:
         by_point(todo)                     # --points: the per-point path by choice, not a fallback
     if got and units is None:              # the per-point path alone: the unit from every answer of the run
-        try:
-            box = grid_mod.grid_box([(points[k]["lat"], points[k]["lon"]) for k in got])
-        except ValueError:
-            box = None
-        gauge = run_gauge_check(session, box, max(m["valid_time"] for m in got.values()), now) if box else None
-        units = decide_units(fb_maxima(), last_units, gauge)
+        vt_got = max(m["valid_time"] for m in got.values())
+        c24 = (cat or ({}, {}))[0].get(grid_mod.item_name(24, region)) if not conus else None
+        if c24 and stats is None:          # a region's identify answers alone seldom tell: its statistics, from the
+            stats = region_statistics(session, {"products": {"24": {"item": grid_mod.item_name(24, region), **c24}}},
+                                      region)     # catalog's 24-hour item, as the grid's would have been
+        if conus:
+            try:
+                box = grid_mod.grid_box([(points[k]["lat"], points[k]["lon"]) for k in got])
+            except ValueError:
+                box = None
+            gauge = run_gauge_check(session, box, vt_got, now) if box else None
+        else:
+            gauge = run_gauge_check(session, grid_mod.REGIONS[region], vt_got, now, gauges)
+        units = decide_units(with_stats(fb_maxima()), last_units, gauge)
         units["gauge_check"] = gauge
+        if stats is not None:
+            units["statistics"] = stats
     if left:
-        problems.append(f"per-point fallback capped at {cap} calls: {len(left)} point(s) keep their last reading")
+        problems.append(f"{tag}per-point fallback capped at {cap} calls: {len(left)} point(s) keep their last reading")
     if asked:
         fallback.update(points=len(asked), cap=cap, called=calls, read=len(got), failed=calls - len(got),
                         left=len(left))
 
     # storage: a reading of an older product than the one stored never replaces it (the answers stay in the raw file)
-    older = []
+    older, valued, read, sampled = [], {}, None, 0
 
     def newer_stored(k, vt) -> bool:
         a, b = parse_t((points[k].get("mrms") or {}).get("valid_time")), parse_t(vt)
@@ -1270,13 +1395,16 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
             if v.get("h24") is None:
                 continue
             sampled += 1
+            valued[k] = g["valid_time"]
             if newer_stored(k, g["valid_time"]):
                 older.append(k)
                 continue
             points[k]["mrms"] = {**{f"h{h}": to_inches(v.get(f"h{h}"), units["factor"]) for h in hours},
                                  "valid_time": g["valid_time"], "fetched_at": fetched_at, "read": "grid",
-                                 "product": PRODUCT, "units_read": units["units_read"]}
-        problems.extend(g["problems"])
+                                 "product": prod, "units_read": units["units_read"]}
+        for k in g["no_coverage"]:
+            dark.setdefault(k, g["valid_time"])
+        problems.extend(f"{tag}{x}" for x in g["problems"])
         read = "grid"
         raw = {"read": "grid", "catalog": g["catalog"], "box": g["box"], "tiles": g["tiles"],
                "products": g["products"], "check": chk, "hours": hours, "units": units,
@@ -1289,13 +1417,14 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         for h in HOURS:
             m[f"h{h}"] = to_inches(m.get(f"h{h}"), units["factor"])
         m["units_read"] = units["units_read"]
+        valued[k] = m["valid_time"]
         if newer_stored(k, m["valid_time"]):
             older.append(k)
             continue
         points[k]["mrms"] = m
     if older:
-        problems.append(f"{len(older)} point(s) answered with an older product than the reading stored; the newer "
-                        f"kept (e.g. {older[0]})")
+        problems.append(f"{tag}{len(older)} point(s) answered with an older product than the reading stored; the "
+                        f"newer kept (e.g. {older[0]})")
     if answers:
         if read is None:
             read, sampled = "point", len(answers)
@@ -1305,8 +1434,105 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
             raw["fallback"] = {"answers": answers, **{k: v for k, v in fallback.items() if k != "used"}}
     if rejected:                            # what a failed or discarded grid read had read (hashes, the check)
         raw = {"read": read, "grid": grid_info, **raw, "grid_rejected": rejected}
+    return {"g": g, "units": units, "check": chk, "fallback": fallback, "grid_info": grid_info, "raw": raw,
+            "answers": answers, "got": got, "failed": failed, "dark": dark, "valued": valued, "problems": problems,
+            "sampled": sampled, "read": read}
+
+
+def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: datetime | None = None,
+        point_only: bool = False, session=None) -> dict:
+    now = now or datetime.now(UTC)
+    prev = read_json(OUT, {}) or {}
+    outfalls = cso_outfalls()
+    points = group_points(outfalls)
+    old_points = prev.get("points") or {}
+    for k, p in points.items():                # keep the last readings until replaced
+        for f in ("mrms", "qpf", "no_coverage"):
+            if (old_points.get(k) or {}).get(f):
+                p[f] = old_points[k][f]
+        if p.get("mrms") and not p["mrms"].get("units_read"):
+            del p["mrms"]                      # read before the unit was checked (2026-11-07): reread, never kept
+    # a point outside its region's radar grid (a coordinate error in a registry, such as a longitude with its sign
+    # flipped) has no value there and would stretch a box for nothing: it is never read and never counted as missing
+    outside = sorted(k for k, p in points.items()
+                     if not grid_mod.in_extent(p["lat"], p["lon"], grid_mod.REGIONS[p["region"]]))
+    for k in outside:
+        points[k].pop("mrms", None)
+        points[k].pop("no_coverage", None)
+        points[k]["outside_grid"] = True
+    readable = [k for k in points if not points[k].get("outside_grid")]
+    prev_mrms = prev.get("mrms") or {}
+    prev_regions = prev_mrms.get("regions") or {}
+    last_units = prev_mrms.get("units_last_determined")
+    # a point whose newest answer is no coverage (outage_now) is asked again every run, not only in the next product hour
+    # (its stored reading's fetch time would hold it back: review 2026-11-15, pass 3)
+    todo = [k for k in readable if needs_mrms(points[k].get("mrms"), now, force) or outage_now(points[k])]
+    base = session or requests.Session()
+    base.headers.update(HEADERS)
+    session = CountingSession(base)
+    hist_old, hist_repair = repair_history_units(read_json(HISTORY), now)   # once: readings before the check
+    if not last_units and hist_repair.get("last_unit") == "mm":   # the repair's unit is the last one determined
+        last_units = {"units_read": "mm", "basis": "history_repair", "determined_at": iso(now),
+                      "evidence": {k: hist_repair.get(k) for k in ("first_hour_over_bound", "largest_before", "ranges")}}
+
+    # each region with points (mrms_grid.REGIONS, in its order): its grid hours (the 48 and 72-hour totals when one of
+    # its permittees' history lacks the windows they imply), one catalog query for every region's items, then each
+    # region read on its own (read_region): its tiles, its unit, its check, its fallback
+    regions = [r for r in grid_mod.REGIONS if any(points[k]["region"] == r for k in readable)]
+    keys_of = {r: [k for k in readable if points[k]["region"] == r] for r in regions}
+    todo_of = {r: [k for k in todo if points[k]["region"] == r] for r in regions}
+    hours_of = {r: list(GRID_HOURS) + (list(BACKFILL_HOURS) if todo_of[r] and not point_only and backfill_needed(
+        hist_old, {p for k in keys_of[r] for p in points[k]["permits"]}, now) else []) for r in regions}
+    cat, problems = None, []
+    names = [grid_mod.item_name(h, r) for r in regions if todo_of[r] and not point_only for h in hours_of[r]]
+    if names:
+        try:
+            cat = grid_mod.catalog(session, names)
+        except Exception as e:  # noqa: BLE001
+            problems.append(f"catalog query failed, each region queries its own: {type(e).__name__}: {e}"[:300])
+    res: dict[str, dict] = {}
+    for r in regions:
+        before = Counter(session.counts)
+        cap = FALLBACK_MAX_CALLS if r == "conus" else REGION_FALLBACK_MAX_CALLS
+        last = last_units if r == "conus" else (prev_regions.get(r) or {}).get("units_last_determined")
+        res[r] = read_region(session, r, points, keys_of[r], todo_of[r], hours_of[r], now, last, point_only,
+                             cap if limit is None else min(limit, cap), cat)
+        res[r]["requests"] = dict(sorted((session.counts - before).items()))
+    c = res.get("conus") or {}
+    units, grid_info = c.get("units"), c.get("grid_info") or {"used": False}
+    read = next((res[r]["read"] for r in regions if res[r]["read"]), None)
+    sampled = sum(x["sampled"] for x in res.values())
+    failed: dict[str, str] = {}
+    for x in res.values():
+        failed.update(x["failed"])
+        problems.extend(x["problems"])
+    raw = dict(c.get("raw") or {})
+    reg_raw = {r: x["raw"] for r, x in res.items() if r != "conus" and x["raw"]}
+    if reg_raw:
+        raw["regions"] = reg_raw
     if raw:
         save_raw("noaa-mrms-qpe", gzip.compress(json.dumps(raw).encode()), "json.gz")
+
+    # radar coverage: a point where MRMS answered no coverage this run is marked (no_coverage: since, the latest valid
+    # time, and whether it had been read then, read_before), the mark kept until a value is read there. A marked point
+    # never read is outside radar coverage: listed, never fresh, not counted for the exit code (it has no reading to
+    # show as dry). One read before is an outage: its reading missing, counted; while the outage is the newest answer
+    # there (outage_now), its stored reading stays (the history and the citation keep it) but is never fresh and never
+    # shown. The mark goes only with a value at least as new as it (an older product never clears it).
+    dark_now, valued = {}, {}
+    for x in res.values():
+        dark_now.update(x["dark"])
+        valued.update(x["valued"])
+    for k in readable:
+        nc = points[k].get("no_coverage")
+        if k in valued and (not nc or (parse_t(valued[k]) or now) >= (parse_t(nc.get("valid_time")) or now)):
+            points[k].pop("no_coverage", None)
+        elif k in dark_now:
+            nc = nc or {"since": iso(now), "read_before": bool(points[k].get("mrms"))}
+            newest = max((t for t in (dark_now[k], nc.get("valid_time")) if parse_t(t)), key=parse_t)
+            points[k]["no_coverage"] = {**nc, "valid_time": newest, "seen_at": iso(now)}
+    dimmed = {k for k in readable if outage_now(points[k])}
+    uncovered = sorted(k for k in readable if points[k].get("no_coverage") and not read_before(points[k]))
 
     # forecast: point -> grid cell (kept), each cell at most every QPF_CACHE_H hours
     qpf_info = {"service": f"{NWS}/gridpoints/{{wfo}}/{{x}},{{y}} quantitativePrecipitation", "window_hours": QPF_WINDOW_H,
@@ -1357,34 +1583,100 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                             **qpf_next(g.get("values") or [], now)}
         grid_data = {c: g for c, g in grid_data.items() if c in cells}
 
-    fresh = [k for k in readable if is_fresh(points[k].get("mrms"), now)]
     vts = [parse_t((p.get("mrms") or {}).get("valid_time")) for p in points.values() if p.get("mrms")]
     valid_time = max(vts) if vts else None
-    # readings_ok (the exit code): at least MIN_OK_SHARE of the points in the radar grid have this hour's reading. ok
-    # (the source's state): that, and the grid read without the per-point fallback; a fallback is never ok, even
-    # when it reads every point it needs. The forecast's deferrals (QPF_FETCH_MAX, LOOKUP_MAX) are by design and
-    # never fail either.
-    readings_ok = bool(readable) and len(fresh) >= MIN_OK_SHARE * len(readable)
-    pfb = prev_mrms.get("fallback") or {}
-    if not todo and pfb.get("used") and prev_mrms.get("valid_time") == iso(valid_time):
-        # nothing to read this hour: the readings are the earlier run's, its fallback included
-        fallback = {**pfb, "carried_from": prev.get("fetched_at")}
-    ok = readings_ok and not fallback["used"]
-    reasons = []
-    if not readings_ok:
-        reasons.append(f"{len(fresh)} of {len(readable)} points in the radar grid have this hour's reading; "
-                       f"{len(failed)} failed" + (f" (e.g. {next(iter(failed.values()))})" if failed else ""))
-    if fallback["used"]:
-        reasons.append(f"per-point fallback ({fallback['reason']}): {fallback.get('read', 0)} of "
-                       f"{fallback.get('points', 0)} point(s) read by identify, {fallback.get('left', 0)} left at the "
-                       f"cap of {fallback.get('cap', FALLBACK_MAX_CALLS)}")
-    elif not readings_ok and grid_info.get("errors"):
-        reasons.append("; ".join(grid_info["errors"])[:300])
+    # per region (freshness judged against the region's own product: is_fresh, and its catalog hour): readings_ok when
+    # at least MIN_OK_SHARE of its points (those outside radar coverage left out) have this hour's reading. The run's
+    # readings_ok (the exit code): every region's. ok (the source's state): that, and no region's grid needing the
+    # per-point fallback; a fallback is never ok, even when it reads every point it needs. The forecast's deferrals
+    # (QPF_FETCH_MAX, LOOKUP_MAX) are by design and never fail either.
+    expected = hour_floor(now - timedelta(minutes=PRODUCT_READY_MIN))
+    unc_set = set(uncovered)
+    regions_out: dict[str, dict] = {}
+    fresh: list[str] = []
+    reasons: list[str] = []
+    for r in regions:
+        x, prv, conus = res[r], prev_regions.get(r) or {}, r == "conus"
+        ks = keys_of[r]
+        counted = [k for k in ks if k not in unc_set]
+        fr = [k for k in counted if is_fresh(points[k].get("mrms"), now) and k not in dimmed]
+        fresh += fr
+        rv = [parse_t(points[k]["mrms"].get("valid_time")) for k in ks if points[k].get("mrms")]
+        rvt = max((t for t in rv if t), default=None)
+        pv = (x["g"] or {}).get("valid_time") if x["g"] else None
+        if pv is None and (x["got"] or x["dark"]):   # no grid: the newest 24-hour product the identify answers gave
+            pv = iso(max(parse_t(t) for t in [*(m["valid_time"] for m in x["got"].values()), *x["dark"].values()]))
+        if pv is None and not todo_of[r]:
+            pv = prv.get("product_valid_time")        # nothing to read this hour: the product read earlier this hour
+        stale = parse_t(pv) is not None and parse_t(pv) < expected - timedelta(hours=FRESH_LAG_H)
+        fb = x["fallback"]
+        pfb = (prev_mrms.get("fallback") if conus else prv.get("fallback")) or {}
+        same = (prev_mrms.get("valid_time") == iso(valid_time)) if conus else (prv.get("valid_time") == iso(rvt))
+        if not todo_of[r] and pfb.get("used") and same:
+            # nothing to read this hour: the readings are the earlier run's, its fallback included
+            fb = {**pfb, "carried_from": prev.get("fetched_at")}
+        rok = len(fr) >= MIN_OK_SHARE * len(counted)
+        o = {"points": len(ks) + sum(1 for k in outside if points[k]["region"] == r), "readable": len(ks),
+             "outside_grid": [k for k in outside if points[k]["region"] == r],
+             "outside_coverage": [k for k in ks if k in unc_set], "counted": len(counted), "fresh": len(fr),
+             "valid_time": iso(rvt), "product_valid_time": pv, "stale_product": stale, "readings_ok": rok,
+             "read": x["read"], "fetched": x["sampled"], "failed": len(x["failed"]), "fallback": fb,
+             "requests": x["requests"], "product": product_name(r)}
+        if not conus:
+            u = x["units"]
+            if u:
+                u = {**u, "determined_at": iso(now), "service_states": "inches", "rule": UNIT_RULE}
+            o.update(grid=x["grid_info"], units=u or prv.get("units"),
+                     units_last_determined=u if u and u["basis"] in ("physical_bound", "gauge_check")
+                     else prv.get("units_last_determined"))
+        regions_out[r] = o
+        where = "the radar grid" if conus else f"the {r} radar grid"
+        if not rok:
+            reasons.append(f"{'' if conus else r + ': '}{len(fr)} of {len(counted)} points in {where} have this hour's "
+                           f"reading; {len(x['failed'])} failed"
+                           + (f" (e.g. {next(iter(x['failed'].values()))})" if x["failed"] else "")
+                           + (f"; its product is valid to {pv}, older than this hour's by more than {FRESH_LAG_H} h"
+                              if stale else ""))
+        if fb["used"]:
+            reasons.append(f"{'' if conus else r + ': '}per-point fallback ({fb['reason']}): {fb.get('read', 0)} of "
+                           f"{fb.get('points', 0)} point(s) read by identify, {fb.get('left', 0)} left at the cap of "
+                           f"{fb.get('cap', FALLBACK_MAX_CALLS if conus else REGION_FALLBACK_MAX_CALLS)}")
+        elif not rok and x["grid_info"].get("errors"):
+            reasons.append(f"{'' if conus else r + ': '}" + "; ".join(x["grid_info"]["errors"])[:300])
+        if stale:
+            problems.append(f"{'' if conus else r + ': '}the product is valid to {pv}, more than {FRESH_LAG_H} h "
+                            f"before this hour's ({iso(expected)}): its readings are not this hour's")
+    fallback = (regions_out.get("conus") or {}).get("fallback") or {"used": False, "reason": None}
+    readings_ok = bool(readable) and all(o["readings_ok"] for o in regions_out.values())
+    ok = readings_ok and not any(o["fallback"]["used"] for o in regions_out.values())
     error = None if ok else "; ".join(reasons)[:600]
     if outside:
         problems.append(f"{len(outside)} point(s) outside the radar grid, not read: "
                         + ", ".join(f"{k} ({', '.join(points[k]['outfalls'][:3])})" for k in outside[:10]))
-    permits = permit_summary(points, outfalls)
+    if uncovered:
+        problems.append(f"{len(uncovered)} point(s) without radar coverage (MRMS {grid_mod.NO_COVERAGE:g} where no "
+                        f"reading was ever had), not read: "
+                        + ", ".join(f"{k} ({', '.join(points[k]['outfalls'][:3])})" for k in uncovered[:10]))
+    # a permittee with no point the radar can read (every point outside its grid or outside radar coverage) is not a
+    # rain permittee: never listed as one the caution covers (review 2026-11-15 P1-3), named in mrms.unreadable_permits
+    # (a permittee with one such point and others read keeps every outfall: the caution colours the waters below each)
+    unreadable_pts = set(outside) | set(uncovered)
+    rows = permit_summary(points, outfalls)
+    unreadable = sorted(p for p, row in rows.items() if all(k in unreadable_pts for k in row["points"]))
+    for p in unreadable:
+        del rows[p]
+    # shown: the points whose radar now answers no coverage (outage_now) left out of the totals; a permittee left with
+    # none keeps its product and how it was read, and its reading under last_reading (a caution in its tail cites them)
+    view = {k: ({f: v for f, v in p.items() if f != "mrms"} if k in dimmed else p) for k, p in points.items()}
+    shown = permit_summary(view, outfalls)
+    for p, row in shown.items():
+        full = rows.get(p)
+        if full and row["h24"] is None and full["h24"] is not None:
+            row.update(product=full["product"], read=full["read"],
+                       last_reading={"valid_time": full["valid_time"], "h24": full["h24"],
+                                     "h24_point": full["h24_point"],
+                                     "why": "the radar answers no coverage at its points now: not shown as this hour's"})
+    permits = shown_permits({p: shown[p] for p in rows}, now)
     counts = session.summary()
     if units:
         units = {**units, "determined_at": iso(now), "service_states": "inches", "rule": UNIT_RULE}
@@ -1395,24 +1687,26 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         "mrms": {"service": MRMS_URL, "product": "NOAA MRMS radar-only quantitative precipitation estimate, 1 km, "
                                                  "1-hour and 24-hour totals (grid); 1/3/6/12/24/48/72-hour "
                                                  "(per-point fallback); in inches, converted from millimetres when the "
-                                                 "service's values are millimetres (units)",
+                                                 "service's values are millimetres (units); each point from its "
+                                                 "region's grid (regions: conus, alaska, hawaii, carib)",
                  "units": units or prev_mrms.get("units"), "units_last_determined": last_determined,
                  "history_units_repair": hist_repair if hist_repair.get("changed") else prev_mrms.get("history_units_repair"),
                  "credit": "NOAA National Weather Service, Multi-Radar Multi-Sensor (MRMS)",
                  "read": read, "grid": grid_info,
                  "valid_time": iso(valid_time), "points": len(points), "outfalls": len(outfalls),
                  "permits": len(permits), "states": sorted({o["state"] for o in outfalls}),
-                 "readable": len(readable), "outside_grid": outside, "fetched": sampled, "fresh": len(fresh),
-                 "readings_ok": readings_ok, "fallback": fallback,
-                 "failed": failed, "problems": problems[:50]},
+                 "readable": len(readable), "outside_grid": outside, "outside_coverage": uncovered,
+                 "unreadable_permits": unreadable,
+                 "fetched": sampled, "fresh": len(fresh), "readings_ok": readings_ok, "fallback": fallback,
+                 "failed": failed, "problems": problems[:50], "regions": regions_out},
         "qpf": {**qpf_info, "credit": "NOAA National Weather Service, api.weather.gov gridpoint forecast",
                 "grids": len(grid_data)},
         "requests": counts,
         "points": points, "permits": permits, "grids": grid_data,
     }
     write_json(OUT, out)
-    if any(r.get("valid_time") for r in permits.values()):
-        write_history(update_history(hist_old, permits, now))
+    if any(r.get("valid_time") for r in rows.values()):
+        write_history(update_history(hist_old, rows, now))
     return out
 
 
@@ -1420,7 +1714,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--force", action="store_true", help="reread every point and grid cell now")
     ap.add_argument("--no-qpf", action="store_true", help="skip the NWS forecast")
-    ap.add_argument("--limit", type=int, help="at most N per-point MRMS calls this run (the fallback)")
+    ap.add_argument("--limit", type=int, help="at most N per-point MRMS calls in each region this run (the fallback)")
     ap.add_argument("--points", action="store_true", help="per-point identify calls instead of the grid")
     ap.add_argument("--repair-units", action="store_true",
                     help="only rescale the history's readings stored before the unit check (also done by any run)")
@@ -1442,31 +1736,60 @@ def main() -> int:
 
 
 def summary_line(out: dict, seconds: float) -> str:
-    """The run's one line: how the radar was read (the grid's tiles and exports, the fallback said loudly), the
-    readings fresh of the points in the radar grid, the forecast, and this run's requests by kind."""
+    """The run's one line: how the radar was read (the conus grid's tiles and exports, then each other region's: its
+    tiles, exports, readings fresh of its points and its product's time; a fallback said loudly, FALLBACK, and a stale
+    product, STALE), the readings fresh of the points in the radar grids (those outside radar coverage named), the
+    forecast, and this run's requests by kind."""
     m, q, r = out["mrms"], out["qpf"], out["requests"]
     gi, fb = m.get("grid") or {}, m.get("fallback") or {}
+    regs = m.get("regions") or {}
+    cx = regs.get("conus") or {}
+    rq = cx.get("requests") or {}
     if gi.get("used"):
-        how = (f"read by grid ({gi.get('tiles_read')} of {len(gi.get('tiles') or [])} tiles, {r['mrms_export']} "
-               f"exports), {gi.get('sampled')} sampled from the grid")
+        how = (f"read by grid ({gi.get('tiles_read')} of {len(gi.get('tiles') or [])} tiles, "
+               f"{rq.get('mrms_export', 0) if cx else r['mrms_export']} exports), {gi.get('sampled')} sampled from "
+               f"the grid")
+    elif cx or not regs:
+        how = f"read by {(cx.get('read') if cx else m['read']) or 'nothing'}, {cx.get('fetched', m['fetched'])} sampled"
     else:
-        how = f"read by {m['read'] or 'nothing'}, {m['fetched']} sampled"
+        how = "conus: no point"
     if fb.get("used"):
         how += (f"; FALLBACK per point ({fb.get('reason')}): {fb.get('read', 0)} of {fb.get('points', 0)} read, "
                 f"{fb.get('left', 0)} left at the cap of {fb.get('cap')}")[:400]
+    if cx.get("stale_product"):
+        how += f"; STALE product valid {cx.get('product_valid_time')}"
+    for name, x in regs.items():
+        if name == "conus":
+            continue
+        g, xr, xf = x.get("grid") or {}, x.get("requests") or {}, x.get("fallback") or {}
+        part = (f"{name} by grid ({g.get('tiles_read')} of {len(g.get('tiles') or [])} tiles, "
+                f"{xr.get('mrms_export', 0)} exports, {xr.get('mrms_statistics', 0)} statistics)" if g.get("used")
+                else f"{name} by {x.get('read') or 'nothing'}")
+        part += f", {x.get('fresh')} fresh of {x.get('counted')}"
+        if x.get("outside_coverage"):
+            part += f" ({len(x['outside_coverage'])} without radar coverage)"
+        part += f", valid {x.get('valid_time')}"
+        if x.get("stale_product"):
+            part += f", STALE product valid {x.get('product_valid_time')}"
+        if xf.get("used"):
+            part += (f", FALLBACK per point ({xf.get('reason')}): {xf.get('read', 0)} of {xf.get('points', 0)} "
+                     f"read, {xf.get('left', 0)} left at the cap of {xf.get('cap')}")[:300]
+        how += "; " + part
     outside = f", {len(m['outside_grid'])} outside the radar grid" if m.get("outside_grid") else ""
+    nocov = f" ({len(m['outside_coverage'])} without radar coverage)" if m.get("outside_coverage") else ""
+    stats = f", {r['mrms_statistics']} statistics" if r.get("mrms_statistics") else ""
     return (f"rainfall: {m['points']} points ({m['outfalls']} outfalls, {m['permits']} permittees, "
-            f"{','.join(m['states'])}{outside}), {how}, {m['fresh']} fresh of {m['readable']}, {len(m['failed'])} failed, "
-            f"valid {m['valid_time']}; QPF {q['grids']} grid cells ({q['fetched']} fetched, {q['cached']} cached, "
-            f"{q['deferred']} deferred, {q['lookups']} lookups, {q['lookups_deferred']} lookups deferred, "
-            f"{len(q['failed'])} failed); requests {r['total']} (MRMS {r['noaa_mrms']}: {r['mrms_query']} query, "
-            f"{r['mrms_export']} export, {r['mrms_identify']} identify; NWS {r['noaa_nws']}); ok={out['ok']} "
-            f"readings_ok={m['readings_ok']} in {seconds:.0f} s")
+            f"{','.join(m['states'])}{outside}), {how}, {m['fresh']} fresh of {m['readable']}{nocov}, "
+            f"{len(m['failed'])} failed, valid {m['valid_time']}; QPF {q['grids']} grid cells ({q['fetched']} fetched, "
+            f"{q['cached']} cached, {q['deferred']} deferred, {q['lookups']} lookups, {q['lookups_deferred']} lookups "
+            f"deferred, {len(q['failed'])} failed); requests {r['total']} (MRMS {r['noaa_mrms']}: {r['mrms_query']} "
+            f"query, {r['mrms_export']} export, {r['mrms_identify']} identify{stats}; NWS {r['noaa_nws']}); "
+            f"ok={out['ok']} readings_ok={m['readings_ok']} in {seconds:.0f} s")
 
 
 def exit_code(out: dict) -> int:
-    """Non-zero only when readings are missing: fewer than MIN_OK_SHARE of the points in the radar grid have this
-    hour's reading. A fallback that read what it needed says so in ok and the summary line, not in the exit code; the
+    """Non-zero only when readings are missing or stale: in some region, fewer than MIN_OK_SHARE of its points in the
+    radar grid (those outside radar coverage left out) have this hour's reading. A fallback that read what it needed says so in ok and the summary line, not in the exit code; the
     forecast's deferrals never fail the stage."""
     return 0 if (out.get("mrms") or {}).get("readings_ok") else 1
 
