@@ -1,0 +1,20 @@
+{
+ "source_id": "ks-kdhe-stream-advisories",
+ "about": "KDHE stream advisories issued before the news flash feed's window, entered by hand from the release (the release pages answer 403 to automated reading, so each row is taken from the release's text as search engines index it). Each row stays open until a rescission is read in KDHE's feed or entered here (\"rescission\": {\"date\": \"YYYY-MM-DD\", \"url\": ..., \"title\": ...}). Read by pipeline/ingest/ks_kdhe_stream_advisories.py.",
+ "releases": [
+  {
+   "release": "2004",
+   "url": "https://www.kdhe.ks.gov/CivicAlerts.aspx?aid=2004",
+   "other_urls": ["https://www.kdhe.ks.gov/m/newsflash/home/detail/2004"],
+   "title": null,
+   "noun": "Stream and lake advisory",
+   "published": "2026-06-25",
+   "entered": "2026-11-15",
+   "entered_from": "KDHE's release of June 25, 2026 as indexed by search engines (the release page answers 403); no rescission found in two searches or in KDHE's feed (Oct 16 to Nov 10, 2026)",
+   "county": "Scott County",
+   "waters": ["Ladder Creek", "Scott Lake"],
+   "cause": "livestock waste",
+   "note": "Ladder Creek and its unnamed tributaries from the Scott-Wichita county line to Scott Lake (Lake Scott State Park), for E. coli after rain over feedlots, until further notice"
+  }
+ ]
+}

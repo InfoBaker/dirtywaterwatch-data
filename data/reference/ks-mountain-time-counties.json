@@ -1,0 +1,173 @@
+{
+ "state": "KS",
+ "zone": "America/Denver",
+ "other_zone": "America/Chicago",
+ "zone_label": "Mountain",
+ "rule": "The Central-Mountain boundary in Kansas (49 CFR 71.7(d)) runs along the east lines of Sherman, Wallace, Greeley and Hamilton counties, with the north lines of Sherman, Logan's west part and Wichita between them; the four counties listed lie wholly west of it, in the Mountain zone. The rest of the state keeps Central time.",
+ "law": {
+  "cite": "49 CFR 71.7(d)",
+  "url": "https://www.ecfr.gov/current/title-49/subtitle-A/part-71/section-71.7",
+  "read": "2026-11-14"
+ },
+ "source": {
+  "name": "U.S. Census Bureau TIGERweb, State_County layer 1",
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where=STATE%3D%2720%27&outFields=NAME,GEOID,BASENAME&returnGeometry=true&maxAllowableOffset=0.001&outSR=4326&f=geojson",
+  "fetched_at": "2026-11-14T18:14:05Z",
+  "note": "the four counties' outlines copied from data/reference/ks-counties.json"
+ },
+ "counties": [
+  {
+   "county": "Greeley County",
+   "geoid": "20071",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -102.0453,
+       38.5887
+      ],
+      [
+       -102.0445,
+       38.2624
+      ],
+      [
+       -101.5675,
+       38.2631
+      ],
+      [
+       -101.5671,
+       38.6997
+      ],
+      [
+       -102.0452,
+       38.6976
+      ],
+      [
+       -102.0453,
+       38.5887
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "county": "Hamilton County",
+   "geoid": "20075",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -102.0448,
+       38.262
+      ],
+      [
+       -102.0445,
+       37.9846
+      ],
+      [
+       -102.0422,
+       37.7385
+      ],
+      [
+       -101.5271,
+       37.7363
+      ],
+      [
+       -101.527,
+       37.8276
+      ],
+      [
+       -101.5428,
+       37.8276
+      ],
+      [
+       -101.5412,
+       38.0182
+      ],
+      [
+       -101.5423,
+       38.2632
+      ],
+      [
+       -102.0448,
+       38.262
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "county": "Sherman County",
+   "geoid": "20181",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -101.6152,
+       39.1342
+      ],
+      [
+       -101.3917,
+       39.1351
+      ],
+      [
+       -101.3891,
+       39.5684
+      ],
+      [
+       -102.0498,
+       39.5682
+      ],
+      [
+       -102.0472,
+       39.1331
+      ],
+      [
+       -101.6152,
+       39.1342
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "county": "Wallace County",
+   "geoid": "20199",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -101.6514,
+       38.6991
+      ],
+      [
+       -101.4844,
+       38.7002
+      ],
+      [
+       -101.4782,
+       39.1348
+      ],
+      [
+       -102.0472,
+       39.1331
+      ],
+      [
+       -102.0452,
+       38.6976
+      ],
+      [
+       -101.6514,
+       38.6991
+      ]
+     ]
+    ]
+   }
+  }
+ ],
+ "split_counties": []
+}
