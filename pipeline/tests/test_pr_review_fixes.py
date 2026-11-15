@@ -177,7 +177,7 @@ def test_every_save_of_the_beach_feed_is_clean(tmp_path, monkeypatch):
                         or real_write(path, obj))
     monkeypatch.setattr(P, "write_events", lambda sid, recs, **kw: saved.append(
         json.dumps(recs, ensure_ascii=False)) or common.write_events(sid, recs, path=tmp_path / "ev.json", **kw))
-    assert P.main(["--at", AT]) == 0
+    assert P.main(["--at", AT]) == 1      # the newest notice has unmatched rows: written, not healthy (verify P1-2)
     assert len(saved) == 3
     for blob in saved:
         for x in SENT:
