@@ -28,7 +28,9 @@ Record rules (a sample is a sample: the accuracy-first rule of docs/generic-inge
   - Placement: each place's water as the park describes it (Travertine Creek, Rock Creek, Veterans Lake, Lake of the
     Arbuckles), Murray County, with the USGS GNIS point of the named feature where GNIS has it (PLACES); never the
     outfall of Sulphur's plant, and never a cause: a high result is not a sewage report.
-  - Privacy: only the table and the key are read; the page names no person. The raw save keeps the table and key only.
+  - Privacy (Astra P1-4): only the table and the key are read; the place names are scrubbed, a cell that is not a result
+    keeps no text, the key line's sentences that can carry a person are withheld (nv_state_parks_hab.clean_text), and
+    the raw save is that cleaned JSON (saved_form), never the page's markup; a failure's text is cleaned the same way.
 
 Run from pipeline/:  python -m ingest.ok_nps_chickasaw_bacteria [--file saved.html]
 """
@@ -42,7 +44,8 @@ from pathlib import Path
 
 import requests
 
-from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events
+from ingest.nv_state_parks_hab import PERSONAL_SENTENCE, clean_text, safe_error
 
 SOURCE_ID = "ok-nps-chickasaw-bacteria"
 URL = "https://www.nps.gov/chic/planyourvisit/bathing-beach-monitoring-program.htm"
@@ -119,19 +122,38 @@ def parse(page: str) -> dict:
     if not dates:
         raise ValueError("no sample dates in the table's first row")
     rows = []
-    for tr in trs[1:]:
+    for n_row, tr in enumerate(trs[1:], 1):
         tds = re.findall(r"(<td[^>]*>)(.*?)</td>", tr, re.S)
         place = text_of(tds[0][1]) if tds else ""
         if not place:
             continue
+        if PERSONAL_SENTENCE.search(place):      # a place cell that can carry a person: kept as a row, its text withheld
+            place = f"place withheld (row {n_row})"
+        place = scrub_text(place)
         vals = [read_value(open_tag + body) for open_tag, body in tds[1:]]
+        for v in vals:      # a cell that is not a result ("N/A", a note) keeps no text that could carry a person
+            if v["value"] is None and v["text"]:
+                v["text"] = v["text"] if re.fullmatch(r"(?i)n/?a|-+|—|not sampled|no sample", v["text"]) else "[not a result]"
         results = {d: vals[n] for n, d in enumerate(dates) if n < len(vals) and vals[n]["text"]}
         mean = vals[len(dates)] if len(vals) > len(dates) and vals[len(dates)]["text"] else None
         rows.append({"place": place, "results": results, "mean": mean})
     if not rows:
         raise ValueError("no sampling place in the table")
-    section = page[i:k + 4]
-    return {"dates": dates, "rows": rows, "weekly": weekly, "mean_limit": mean_limit, "key": key, "section": section}
+    key = clean_text(key)[0]
+    out = {"dates": dates, "rows": rows, "weekly": weekly, "mean_limit": mean_limit, "key": key}
+    return {**out, "section": saved_form(out)}
+
+
+def saved_form(t: dict) -> str:
+    """What the raw save keeps (Astra P1-4): the dates, each place's cell texts and red marks, the threshold line, as
+    JSON; no page markup, no attribute."""
+    import json
+    return json.dumps({"url": URL, "dates": t["dates"], "weekly": t["weekly"], "mean_limit": t["mean_limit"],
+                       "key": t["key"],
+                       "rows": [{"place": r["place"],
+                                 "results": {d: {"text": v["text"], "red": v["red"]} for d, v in r["results"].items()},
+                                 "mean": {"text": r["mean"]["text"], "red": r["mean"]["red"]} if r["mean"] else None}
+                                for r in t["rows"]]}, ensure_ascii=False, indent=1)
 
 
 def _record(kind: str, place: str, sample: str, v: dict, limit: float, fetched: str, key: str) -> dict:
@@ -231,10 +253,10 @@ def main(argv=None) -> int:
         prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
         recs, meta = build(page, fetched, prev)
         if "--file" not in argv:
-            save_raw(SOURCE_ID, parse(page)["section"], "html")      # the table and its key only
+            save_raw(SOURCE_ID, parse(page)["section"], "json")      # the cleaned table and key only
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=safe_error(e))
+        print(f"{SOURCE_ID}: FAILED {safe_error(e)}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {meta['places']} places, {len(meta['sample_dates'])} dates, {meta['results']} results "

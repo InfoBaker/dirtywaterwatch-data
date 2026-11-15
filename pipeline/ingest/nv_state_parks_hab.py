@@ -32,8 +32,11 @@ Record rules
     polygon (coord_source "nhd"), with raw.point_basis and raw.point_url. A water not in WATERS keeps its name, no
     point, placed by name only, with raw.placement_note saying so.
   - Clock: Nevada's (pipeline/zones.py nevada_zone, 49 CFR 71.9(b)): Pacific except West Wendover; raw.time_zone.
-  - Privacy: only the headings and the advisory paragraphs are read; the page names no person. The raw save keeps the
-    advisory sections only (the page's footer contact lines are not kept); strip_personal runs on raw.
+  - Privacy (Astra P1-4): only the headings and the advisory paragraphs are read. In a paragraph every sentence that can
+    carry a person (a contact, telephone, e-mail, home, residence, a title before a name, "reported") is withheld whole
+    (raw.sentences_withheld counts them), the rest scrubbed (scrub_text) and any coordinate in it rounded to three
+    decimals, before anything is saved. The raw save is that cleaned JSON (saved_form), never the page's markup; a
+    failure's text in the health file is cleaned the same way (safe_error).
 
 Run from pipeline/:  python -m ingest.nv_state_parks_hab [--file saved.html]
 """
@@ -94,6 +97,31 @@ def text_of(fragment: str) -> str:
     return re.sub(r"\s+", " ", html.unescape(t).replace("\xa0", " ")).strip()
 
 
+# a sentence that can carry a person (a contact, a telephone or e-mail, a home or residence, a title before a name, a
+# report by someone): withheld whole, since a name in it cannot be told apart from a place (Astra P1-4)
+PERSONAL_SENTENCE = re.compile(r"@|\b(?:contact(?:ed|ing)?|call(?:ed|ing)?|phone|telephone|tel|e-?mail|fax|home|homes|"
+                               r"residen(?:ce|ces|t|ts|tial)|house|neighbou?rs?|owner|reported|complain\w*|resident|"
+                               r"(?:Dr|Mr|Mrs|Ms|Miss)\.?(?=\s+[A-Z]))\b|\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}", re.I)
+COORD_IN_TEXT = re.compile(r"(?<![\d.])(-?\d{1,3}\.\d{4,})(?![\d.])")
+
+
+def clean_text(s: str) -> tuple[str, int]:
+    """(the text with every sentence that can carry a person withheld, the rest scrubbed and any coordinate in it rounded
+    to three decimals, the number of sentences withheld)."""
+    kept, withheld = [], 0
+    for sent in re.split(r"(?<=[.!?])(?<!\bDr\.)(?<!\bMr\.)(?<!\bMs\.)(?<!\bMrs\.)(?<!\bSt\.)\s+", s or ""):
+        if PERSONAL_SENTENCE.search(sent):
+            withheld += 1
+            continue
+        kept.append(COORD_IN_TEXT.sub(lambda m: f"{round(float(m.group(1)), 3):.3f}", sent))
+    return scrub_text(" ".join(x for x in kept if x).strip()), withheld
+
+
+def safe_error(e: Exception) -> str:
+    """A failure's text for the health file: its class and its message cleaned like the page's text."""
+    return f"{type(e).__name__}: {clean_text(str(e))[0] or 'details withheld'}"
+
+
 def parse_date(s: str) -> str:
     s = re.sub(r"\s+", " ", s.replace(".", "")).strip()
     for fmt in ("%B %d, %Y", "%b %d, %Y", "%B %d,%Y"):
@@ -112,7 +140,8 @@ def water_of(heading: str, text: str) -> str:
 
 
 def parse(page: str) -> tuple[list[dict], str]:
-    """([{level, heading, water, updated, text}], the advisory sections' html); ValueError when a section is missing."""
+    """([{level, heading, water, updated, text}], the cleaned JSON the raw save keeps); ValueError when a section is
+    missing or not completely readable."""
     found: dict[str, str] = {}
     for m in SECTION.finditer(page):
         found.setdefault(m.group(1).title(), m.group(2))
@@ -138,11 +167,23 @@ def parse(page: str) -> tuple[list[dict], str]:
             seg = body[h.end(): heads[i + 1].start() if i + 1 < len(heads) else len(body)]
             seg = re.split(r"</div>", seg)[0]
             text = text_of(seg)
-            heading = text_of(h.group("name"))
-            out.append({"level": lv, "heading": heading, "water": water_of(heading, text),
-                        "updated": parse_date(h.group("date")), "text": scrub_text(text)})
-    sections = "\n".join(f"<section data-level=\"{lv}\">{found[lv]}</section>" for lv in LEVELS)
-    return out, sections
+            heading = scrub_text(text_of(h.group("name")))
+            clean, withheld = clean_text(text)
+            item = {"level": lv, "heading": heading, "water": water_of(heading, text),
+                    "updated": parse_date(h.group("date")), "text": clean}
+            if withheld:
+                item["sentences_withheld"] = withheld
+            out.append(item)
+    return out, saved_form(out)
+
+
+def saved_form(items: list[dict]) -> str:
+    """What the raw save keeps (Astra P1-4): the read items only, each field cleaned, as JSON; no page markup."""
+    import json
+    return json.dumps({"url": URL, "levels": {lv: [{k: it[k] for k in ("heading", "water", "updated", "text",
+                                                                        "sentences_withheld") if k in it}
+                                                   for it in items if it["level"] == lv] for lv in LEVELS}},
+                      ensure_ascii=False, indent=1)
 
 
 def local_day(fetched: str, tz: str) -> str:
@@ -191,6 +232,8 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                                   "basis": "the water the parks' advisory names, in the county that holds it"}}
         if it.get("also_listed"):
             raw["also_listed"] = it["also_listed"]
+        if it.get("sentences_withheld"):
+            raw["sentences_withheld"] = it["sentences_withheld"]
         lat = lon = None
         if gnis and gnis[4] == "nhd":
             lat, lon = gnis[1], gnis[2]
@@ -246,13 +289,13 @@ def main(argv=None) -> int:
         prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
         recs, meta = build(page, fetched, prev)
         if "--file" not in argv:
-            save_raw(SOURCE_ID, parse(page)[1], "html")      # the advisory sections only
+            save_raw(SOURCE_ID, parse(page)[1], "json")      # the cleaned items only, never the page
             if r.headers.get("Last-Modified"):
                 meta["page_last_modified"] = parsedate_to_datetime(r.headers["Last-Modified"]).strftime(
                     "%Y-%m-%dT%H:%M:%SZ")
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=safe_error(e))
+        print(f"{SOURCE_ID}: FAILED {safe_error(e)}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {meta['on_page']} on the page {meta['by_level']}, {len(recs)} records, "

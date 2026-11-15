@@ -237,3 +237,32 @@ def test_p1_2_the_nv_ok_additions_change_no_other_states_placement(ok_live, monk
     monkeypatch.setattr(S, "COUNTY_FIELD_STATES", S.COUNTY_FIELD_STATES - {"NV", "OK"})
     monkeypatch.setattr(S, "COUNTY_STATES", {k: v for k, v in S.COUNTY_STATES.items() if k not in ("NV", "OK")})
     assert run() == with_new
+
+
+def test_p1_4_nothing_personal_reaches_any_save(tmp_path, monkeypatch):
+    import common
+    from test_ingest_nv import PRIVATE, _Resp
+    from ingest import notification_pages as NP
+    from test_ingest_wi import _np_run
+    page = PAGE.replace("40 Ft Hole</strong>", "40 Ft Hole (call Pat Example 775-555-0100)</strong>").replace(
+        "Threshold limit", "Questions: pat@example.org, Jane Sample at home, 1234-A Example St. Threshold limit", 1)
+    page = re.sub(r"(Veterans Lake</strong></td>\s*<td[^>]*>)[^<]*", lambda m: m.group(1) + "see Jane Sample", page, count=1)
+    saved, writes = [], []
+    monkeypatch.setattr(N, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(N, "save_raw", lambda src, body, ext: saved.append((ext, body)) or tmp_path / "raw")
+    real = common.write_events
+    monkeypatch.setattr(N, "write_events", lambda *a, **k: writes.append((a, k)) or real(
+        *a, **{**k, "path": tmp_path / f"{N.SOURCE_ID}.json"}))
+    monkeypatch.setattr(N.requests, "get", lambda *a, **k: _Resp(page))
+    assert N.main([]) == 0
+    assert len(saved) == 1 and saved[0][0] == "json" and "<td" not in saved[0][1] and "style" not in saved[0][1]
+    blob = saved[0][1] + json.dumps(writes, default=str) + (tmp_path / f"{N.SOURCE_ID}.json").read_text()
+    for p in PRIVATE:
+        assert p not in blob, p
+    rows = [r for r in json.loads((ROOT / "data" / "notice-channels" / "ok.json").read_text())["channels"]
+            if r.get("monitored")]
+    assert len(rows) == 3 and all(r["metadata_only"] is True and r["records"] is False for r in rows)
+    personal = b"<html><body><p>Contact Pat Example, 775-555-0100, pat@example.org, 1234-A Example St.</p></body></html>"
+    out, raws = _np_run(NP, rows, {u: personal for r in rows for u in r["urls"]}, tmp_path, "2026-11-15T12:00:00Z")
+    assert raws == []
