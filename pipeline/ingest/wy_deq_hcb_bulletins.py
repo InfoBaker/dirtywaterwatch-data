@@ -264,8 +264,17 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
     # what earlier runs observed (the feed keeps only ~25 bulletins). A bulletin in this read replaces everything
     # earlier runs observed from it (by its link, or its sent time for an absence saved without one): a corrected
     # bulletin's earlier listing, absence or lift is never kept beside its correction (Astra review 2026-11-15 P1)
-    now_links = {b["link"] for b in bulletins}
-    now_sent = {b["sent"] for b in bulletins}
+    # only a bulletin whose table this read could read replaces earlier observations: an unreadable reread of a good
+    # bulletin (a header with no rows, a changed table) keeps what was read from it before, and stays unread
+    # (lessons, items 4 and 5; Astra verification 2026-11-15 P1)
+    now_links = {b["link"] for b in bulletins if b["rows"] is not None}
+    now_sent = {b["sent"] for b in bulletins if b["rows"] is not None}
+    lift_links = {b["link"] for b in bulletins}
+    # a confirmation at an earlier read (the standing list) is kept apart from the bulletin observations, so a later
+    # omission never erases the interval already confirmed (Astra verification 2026-11-15 P1)
+    confirmed = {p.get("event_id"): (p.get("raw") or {}).get("_confirmed_at_read")
+                 or ((p.get("raw") or {}).get("_last_seen_in_source") if (p.get("raw") or {}).get("standing_basis")
+                     else None) for p in previous}
     for p in previous:
         raw = p.get("raw") or {}
         k = raw.get("row_key")
@@ -278,7 +287,7 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
         absent.setdefault(k, set()).update(t for t in raw.get("_absent_in") or []
                                            if t not in now_sent and links.get(t) not in now_links)
         absent_link.update({t: lk for t, lk in links.items() if t in absent[k]})
-        if raw.get("_lift") and raw["_lift"].get("link") not in now_links:
+        if raw.get("_lift") and raw["_lift"].get("link") not in lift_links:
             lifts.setdefault(slug(raw["water"]), [])
             if raw["_lift"] not in lifts[slug(raw["water"])]:
                 lifts[slug(raw["water"])].append(raw["_lift"])
@@ -331,6 +340,11 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                     lift = lf
                     break
             srid = k if i == 0 else f"{k}:relisted-{local_day(per['from'])}"
+            conf = confirmed.get(f"{SOURCE_ID}:{srid}")
+            bound = per["absent"] or (lift["sent"] if lift else None)
+            if not conf or conf < per["from"] or (bound and conf >= bound):
+                conf = None
+            last_conf = max(last, conf) if conf else last
             year_end = f"{inf['issued'][:4]}-12-31" if i == 0 else f"{local_day(per['from'])[:4]}-12-31"
             raw = {"row_key": k, "water": inf["water"], "place": inf.get("place"), "location": inf["location"],
                    "advisory_type": inf["advisory_type"], "issued": inf["issued"], "lat": inf["lat"],
@@ -338,13 +352,15 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                    "_listed_in": {t: seen[k][t] for t in per["seen"]},
                    "_absent_in": sorted(absent.get(k, set())),
                    "_absent_links": {t: absent_link[t] for t in sorted(absent.get(k, set())) if t in absent_link},
-                   "_last_seen_in_source": last, "_first_seen_at": per["from"],
+                   "_last_seen_in_source": last_conf, "_first_seen_at": per["from"],
                    "program_end_bound": {"date": year_end, "basis": FAQ_END},
                    "placement_hint": {"name": inf["water"], "state": "WY",
                                       "basis": ("the point the agency writes in the water's name" if inf["lat"]
                                                 is not None else "the water the bulletin names; it gives no point")},
                    "date_note": ("Date Issued is the agency's date for the advisory (day, Mountain time); the "
                                  "bulletin's sent time confirms it is still listed")}
+            if conf:
+                raw["_confirmed_at_read"] = conf
             if inf.get("place"):
                 # "Granite Reservoir: West Causeway": the advisory is for that part of the water, never the whole
                 # water's colour (build/status.py part_of_water); with no cited point for the part it is listed with
@@ -382,13 +398,15 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                                          "authority's current advisory list; no later bulletin has dropped or lifted it")
                 if datetime.fromisoformat(fetched.replace("Z", "+00:00")) >= expiry:
                     status, end = "advisory_lifted", expiry.strftime("%Y-%m-%dT%H:%M:%SZ")
-                    raw["_last_seen_in_source"] = max(last, min(fetched, end))
+                    raw["_last_seen_in_source"] = max(last_conf, min(fetched, end))
+                    raw["_confirmed_at_read"] = raw["_last_seen_in_source"]
                     raw.update({"ended_at_precision": "bound", "expired_at_programme_end": True,
                                 "end_basis": ("the programme's stated end of season (December 31, Mountain time) "
                                               "passed while the advisory was still listed: " + FAQ_END)})
                     n["expired"] = n.get("expired", 0) + 1
                 else:
-                    raw["_last_seen_in_source"] = max(last, fetched)
+                    raw["_last_seen_in_source"] = max(last_conf, fetched)
+                    raw["_confirmed_at_read"] = raw["_last_seen_in_source"]
                     raw["end_basis"] = ("still listed in the latest readable bulletin table: in effect until a later "
                                         f"bulletin drops or lifts it, or the programme's end of season ({year_end})")
                     n["current"] += 1
