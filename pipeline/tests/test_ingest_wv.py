@@ -539,3 +539,50 @@ def test_every_public_copy_of_the_dmr_absence_states_its_period_and_scope():
         assert "No West Virginia permit reports" not in t and "No West Virginia\n#   permit" not in t, name
     wv = [v for v in json.dumps(rules).split('"WV": {')[1:] if "combined sewer overflows" in v][0]
     assert "Of the 61 permits" in wv and "January 2025 to November 14, 2026" in wv
+
+
+def _two_lakes(area_b=3):
+    def sq(x0, y0, d):
+        return {"type": "Polygon", "coordinates": [[[x0, y0], [x0 + d, y0], [x0 + d, y0 + d], [x0, y0 + d], [x0, y0]]]}
+    return {"example-lake-a-wv": {"name": "Example Lake A", "kind": "lake", "state": "WV", "area_km2": 3,
+                                  "geometry": sq(-80.50, 39.00, 0.02), "bbox": [-80.50, 39.00, -80.48, 39.02]},
+            "example-lake-b-wv": {"name": "Example Lake B", "kind": "lake", "state": "WV", "area_km2": area_b,
+                                  "geometry": sq(-80.40, 39.00, 0.02), "bbox": [-80.40, 39.00, -80.38, 39.02]},
+            "example-pond-c-wv": {"name": "Example Pond C", "kind": "lake", "state": "WV", "area_km2": 0.1,
+                                  "geometry": sq(-80.30, 39.00, 0.01), "bbox": [-80.30, 39.00, -80.29, 39.01]}}
+
+
+def _area_record(rings):
+    a = {"1": {"features": []}, "2": {"features": []}, "3": {"features": [
+        {"attributes": {"OBJECTID": 5, "Advisory": "Avoid contact.", "DateObserved": None}, "geometry": {"rings": rings}}]}}
+    return H.records(H.update({}, H.rows_of(a), "2026-07-01T00:00:00Z"))[0]
+
+
+def test_a_multipart_bloom_area_is_placed_on_every_water_it_covers_and_no_other():
+    """Verification P2-5: DEP's area over two lakes places the advisory on both (each by its own interior point),
+    leaves a nearby lake alone, follows the whole-water rule per lake, and changes nothing for any other source."""
+    import copy
+    S._GEOM_CACHE.clear()
+    ring = lambda x0, y0, d: [[x0, y0], [x0, y0 + d], [x0 + d, y0 + d], [x0 + d, y0], [x0, y0]]     # clockwise
+    hole = lambda x0, y0, d: list(reversed(ring(x0, y0, d)))
+    rec = _area_record([ring(-80.495, 39.005, 0.01), ring(-80.395, 39.005, 0.01), hole(-80.394, 39.006, 0.008)])
+    assert rec["raw"]["agency_extent"]["type"] == "MultiPolygon"
+    waters = _two_lakes()
+    out = S.Resolver(waters, [], placement_rules={}).resolve(rec)
+    assert out["water_slugs"] == ["example-lake-a-wv", "example-lake-b-wv"]
+    assert out["extent_parts"] == {"parts": 2, "waters_added": ["example-lake-b-wv"]}
+    assert "example-pond-c-wv" not in out["water_slugs"]
+    # a large second lake keeps a marker only (colours_whole_water), as for every state
+    assert not S.colours_whole_water({**waters["example-lake-b-wv"], "area_km2": 10_000})
+    assert S.colours_whole_water(waters["example-lake-b-wv"])
+    single = _area_record([ring(-80.495, 39.005, 0.01)])
+    S._GEOM_CACHE.clear()
+    assert S.Resolver(_two_lakes(), [], placement_rules={}).resolve(single)["water_slugs"] == ["example-lake-a-wv"]
+    assert "extent_parts" not in S.Resolver(_two_lakes(), [], placement_rules={}).resolve(single)
+    # every other source: the branch never runs and the resolver's answer is the one it gave before
+    for sid in ("ne-transforms", "oh-epa-spills", "la-baton-rouge-quarterly", "wv-echo-dmr-cso"):
+        other = copy.deepcopy({**rec, "source_id": sid})
+        assert S.extent_part_points(other) == []
+        S._GEOM_CACHE.clear()
+        r1 = S.Resolver(_two_lakes(), [], placement_rules={})
+        assert r1.resolve(other) == r1._resolve(other)
