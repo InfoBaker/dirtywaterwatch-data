@@ -22,8 +22,9 @@ Records (a map of what is in effect, read as a snapshot)
     run ok=False: the records are kept and nothing is lifted; so does a layer that answers only part of its rows
     (exceededTransferLimit). The Advisory text is cut before it is saved anywhere (scrub_advisory: common.scrub_text,
     then every street house number, then every sentence naming who reported, sampled or can be called, or still
-    holding an address in any case or a label such as 'Reporter:' (ingest.wv_la_privacy); text that cannot be cut to
-    the advice alone is withheld).
+    holding an address in any case or a label such as 'Reporter:', or a title before a name ('Lt.', 'Sgt.', 'Officer',
+    found before the text is split into sentences), or a name followed by what a person did ('... sampled the
+    bloom') (ingest.wv_la_privacy); text that cannot be cut to the advice alone is withheld).
   - Placement by the agency's own geometry only: the marker is a point's position, the point half way along a
     segment, or an interior point of an area (never a vertex mean, which can fall outside a concave area), rounded to
     three decimals (coord_source 'agency_layer'); raw.geometry_kind and raw.marker_basis say which. DEP's segment or
@@ -130,6 +131,7 @@ PERSON_CLAUSE_RE = re.compile(
 # (a title in any case: 'dr. example person' stays one sentence, so the honorific check sees the name after it)
 SENTENCE_RE = re.compile(r"(?<=[.!?;])(?<!\b(?i:mr)\.)(?<!\b(?i:mrs)\.)(?<!\b(?i:ms)\.)(?<!\b(?i:mx)\.)(?<!\b(?i:dr)\.)"
                          r"(?<!\b(?i:prof)\.)(?<!\b(?i:rev)\.)(?<!\bSt\.)(?<!\b[A-Z]\.)[ ]+")
+TITLE_MARK = "\u0000"
 WITHHELD = "(DEP's advisory text is withheld here: it could not be cut to the advisory alone)"
 
 
@@ -143,7 +145,11 @@ def scrub_advisory(text: str) -> str | None:
     t = HOUSE_NUMBER_RE.sub(common.HOUSE_NUMBER_REMOVED, common.scrub_text(t))
     # then, in any case, every sentence still holding an address or a label of who reported, sampled, collected or
     # can be called ('123 example lane', 'Reporter: ...', 'Sample collector: ...'; ingest.wv_la_privacy) is cut
-    kept = [x for x in SENTENCE_RE.split(t) if x and not PERSON_CLAUSE_RE.search(x)
+    # a title before a name is found before the text is split (Astra verify3 P1-2): its period becomes a mark the
+    # splitter does not break at, so 'Lt. Example Person sampled the bloom.' stays one sentence, and a sentence holding
+    # the mark is cut whatever follows the title ('Sgt.', 'capt.', 'Lt. Col.' and the rest, wv_la_privacy.TITLE_ABBR)
+    t = wv_la_privacy.TITLE_DOT_RE.sub(lambda m: m.group(0)[:-1] + TITLE_MARK, t)
+    kept = [x for x in SENTENCE_RE.split(t) if x and TITLE_MARK not in x and not PERSON_CLAUSE_RE.search(x)
             and not wv_la_privacy.has_address(x) and not wv_la_privacy.names_a_person(x)]
     out = " ".join(kept).strip()
     if not re.search(r"[A-Za-z]{3}", out.replace(common.HOUSE_NUMBER_REMOVED, "")) or \

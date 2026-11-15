@@ -630,3 +630,12 @@ def test_a_recovered_read_replaces_the_retained_rows_with_no_duplicate(monkeypat
     code, out = _run_at(monkeypatch, tmp_path, "2026-11-02T00:00:00Z")
     assert code == 0 and out["count"] == 3 and out["meta"]["retained_from_previous_events"] == []
     assert len({r["source_record_id"] for r in out["records"]}) == 3
+
+
+def test_title_forms_in_the_water_cell_are_withheld_and_water_names_after_a_title_word_are_not():
+    """Astra verify3 P1-2, the sibling in Louisiana's water cell (the shared wv_la_privacy check)."""
+    for cell in ("Lt. Example Person", "Sgt Example Person", "sgt. example", "Officer Example Person",
+                 "Ward Creek - Lt. Example"):
+        assert Q.receiving_water(cell)[0] is None, cell
+    for ok in ("Ranger Creek", "Judge Bayou", "Ward Creek", "Bayou Manchac"):
+        assert Q.receiving_water(ok) == (ok, None), ok
