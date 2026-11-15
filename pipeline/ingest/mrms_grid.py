@@ -18,11 +18,24 @@ point had held since 2026-11-03, until a registry point with its longitude's sig
 outfall at 83.99 W, stretched it to 20,796 pixels on 2026-11-08 and every hour fell back to the capped per-point
 path: points outside the radar's grid are now left out of every box, CONUS_EXTENT.)
 
-The values are as the service answers them: it states inches but answered millimetres (found 2026-11-07); the unit
-is decided in ingest/rainfall.py (decide_units) from the box maximum (Grid.max_read) and a gauge check, and
-millimetres converted there, before anything uses them.
+Regions (since 2026-11-15): the service publishes four grids, each its own catalog items, conus_QPE_*, alaska_QPE_*,
+hawaii_QPE_* and carib_QPE_* (Puerto Rico and the Virgin Islands), all stored in Web Mercator (EPSG:3857: pixels of
+1,189 m for conus, 1,408 m for Alaska, 573 m for Hawaii and 1,125 m for the Caribbean, raster info read 2026-11-15)
+and updated in the same hourly cycle (the four regions' items of an hour are filed within a minute of each other). A
+point is read from its state's region (REGION_OF_STATE: every other state from conus), never from a grid that only
+overlaps it (carib's footprint overlaps the conus south of 25 N; identify there answers both). Each region is
+exported on the same 0.01 degree lattice in EPSG:4326 (the service resamples, nearest neighbour), locked to the
+region's own item: at Juneau, San Juan and the wettest pixels near them, every exported pixel equalled identify
+locked to the same item, to the tenth (2026-11-15, research/mrms/regions-2026-11-15.md). MRMS writes NO_COVERAGE
+(-3) where no radar sees (every pixel around Prudhoe Bay, 70.26 N, in alaska_QPE_*); the export's own NODATA marks
+pixels outside the raster. no_coverage() tells the two apart.
 
-Pure except catalog() and export(), which take a requests session.
+The values are as the service answers them: it states inches but answered millimetres (found 2026-11-07, and in each
+region on 2026-11-15: alaska_QPE_24H held 93.3 and carib_QPE_72H 292, impossible as inches); the unit is decided in
+ingest/rainfall.py (decide_units, per region) from the box maximum (Grid.max_read), a region's statistics
+(statistics()) and a gauge check, and millimetres converted there, before anything uses them.
+
+Pure except catalog(), export() and statistics(), which take a requests session.
 """
 from __future__ import annotations
 
@@ -40,17 +53,32 @@ MARGIN_CELLS = 5               # pixels of margin around the outfall points
 MAX_WIDTH, MAX_HEIGHT = 15000, 4100          # the service's maxImageWidth / maxImageHeight (its JSON, read 2026-11-14)
 TILE_CELLS = 2000              # the export tiles: fixed squares of 2,000 hundredths (20 degrees), aligned on multiples
                                # of 20 degrees; a tile's box is shrunk to its points (at most 2,010 x 2,010 pixels)
-# The radar grid this reader reads: the catalog footprint of conus_QPE_24H (query with outSR 4326, read 2026-11-14:
-# 130 to 60 W, 20 to 55 N). A point outside it has no value in the grid (and would stretch a box for nothing): it is
-# left out of every box. The service also publishes alaska_QPE_* (176 to 126 W, 50 to 72 N), hawaii_QPE_* (164 to
-# 151 W, 15 to 26 N) and carib_QPE_* (90 to 60 W, 10 to 25 N, Puerto Rico and the Virgin Islands); they are not read.
+# The radar grids this reader reads: each region's catalog footprint (query with outSR 4326; conus read 2026-11-14,
+# the others 2026-11-15, each rounded to the degree its corners sit on). A point outside its region's grid has no value
+# there (and would stretch a box for nothing): it is left out of every box and listed.
 CONUS_EXTENT = {"xmin": -130.0, "ymin": 20.0, "xmax": -60.0, "ymax": 55.0}
-NODATA = -9999.0
-ITEM = "conus_QPE_{h:02d}H"
+ALASKA_EXTENT = {"xmin": -176.0, "ymin": 50.0, "xmax": -126.0, "ymax": 72.0}
+HAWAII_EXTENT = {"xmin": -164.0, "ymin": 15.0, "xmax": -151.0, "ymax": 26.0}
+CARIB_EXTENT = {"xmin": -90.0, "ymin": 10.0, "xmax": -60.0, "ymax": 25.0}
+REGIONS = {"conus": CONUS_EXTENT, "alaska": ALASKA_EXTENT, "hawaii": HAWAII_EXTENT, "carib": CARIB_EXTENT}
+# A state's region; every state not here is read from conus. Guam, American Samoa and the Northern Mariana Islands have
+# no grid in this service (ingest/rainfall.py OUTSIDE_RADAR_GRID).
+REGION_OF_STATE = {"AK": "alaska", "HI": "hawaii", "PR": "carib", "VI": "carib"}
+NODATA = -9999.0               # the export's own: no raster there
+NO_COVERAGE = -3.0             # MRMS's own: the raster is there, no radar sees the place (service minValues -3)
+STATS_PIXEL_DEG = 0.02         # statistics(): a region at 0.02 degree (a full-resolution request is over the limit)
+ITEM = "{region}_QPE_{h:02d}H"
 
 
-def item_name(hours: int) -> str:
-    return ITEM.format(h=hours)
+def item_name(hours: int, region: str = "conus") -> str:
+    if region not in REGIONS:
+        raise ValueError(f"unknown region {region!r}")
+    return ITEM.format(region=region, h=hours)
+
+
+def region_of(state) -> str:
+    """The radar region a state's points are read from (REGION_OF_STATE, else conus)."""
+    return REGION_OF_STATE.get(str(state or "").upper(), "conus")
 
 
 def iso(t: datetime | None) -> str | None:
@@ -60,7 +88,7 @@ def iso(t: datetime | None) -> str | None:
 # ---------------------------------------------------------------- the box
 
 def in_extent(lat: float, lon: float, ext: dict = CONUS_EXTENT) -> bool:
-    """Whether a point lies in the radar grid read (CONUS_EXTENT), edges included."""
+    """Whether a point lies in a radar grid (ext: a REGIONS extent; CONUS_EXTENT by default), edges included."""
     try:
         la, lo = float(lat), float(lon)
     except (TypeError, ValueError):
@@ -232,6 +260,10 @@ class Grid:
     def cell(self, lat: float, lon: float) -> tuple[int, int]:
         return math.floor((self.y0 - float(lat)) / self.dy), math.floor((float(lon) - self.x0) / self.dx)
 
+    def raw(self, lat: float, lon: float) -> float | None:
+        """The pixel containing the point as stored (negatives and NaN included); None outside the image."""
+        return self.pixel(*self.cell(lat, lon))
+
     def value(self, lat: float, lon: float) -> float | None:
         v = self.pixel(*self.cell(lat, lon))
         if v is None or v != v or v < 0:
@@ -290,7 +322,7 @@ def parse_catalog(d: dict) -> dict[str, dict]:
 def catalog(session, names: list[str], timeout: int = 30) -> tuple[dict, dict]:
     """One `query` for the named catalog items: (parsed, the answer)."""
     for n in names:
-        if not re.fullmatch(r"conus_QPE_\d\dH", n):
+        if not re.fullmatch(rf"(?:{'|'.join(REGIONS)})_QPE_\d\dH", n):
             raise ValueError(f"unexpected item name {n!r}")
     where = "name IN (" + ",".join(f"'{n}'" for n in names) + ")"
     r = session.get(f"{MRMS_URL}/query", params={"where": where, "outFields": "objectid,name,idp_validendtime",
@@ -335,3 +367,30 @@ def export(session, objectid: int, box: dict, timeout: int = 120) -> bytes:
 def sample(grid: Grid, points: dict[str, tuple[float, float]]) -> dict[str, float | None]:
     """{point key: value} for every point."""
     return {k: grid.value(lat, lon) for k, (lat, lon) in points.items()}
+
+
+def no_coverage(grid: Grid, points: dict[str, tuple[float, float]]) -> set[str]:
+    """The points whose pixel holds MRMS's NO_COVERAGE (no radar sees the place), as against the export's NODATA (no
+    raster there) or NaN: sample() gives None for all three."""
+    return {k for k, (lat, lon) in points.items() if grid.raw(lat, lon) == NO_COVERAGE}
+
+
+def statistics(session, objectid: int, extent: dict, pixel_deg: float = STATS_PIXEL_DEG, timeout: int = 60) -> dict:
+    """One `computeStatisticsHistograms` of a catalog item over a region's extent at pixel_deg degrees: {min, max, mean,
+    count, pixel_deg} as the service computes them (NO_COVERAGE pixels included in min and mean). Raises on an error
+    answer."""
+    p = {"geometry": json.dumps({**{k: extent[k] for k in ("xmin", "ymin", "xmax", "ymax")},
+                                 "spatialReference": {"wkid": 4326}}),
+         "geometryType": "esriGeometryEnvelope",
+         "pixelSize": json.dumps({"x": pixel_deg, "y": pixel_deg, "spatialReference": {"wkid": 4326}}),
+         "mosaicRule": json.dumps({"mosaicMethod": "esriMosaicLockRaster", "lockRasterIds": [int(objectid)]}),
+         "f": "json"}
+    r = session.get(f"{MRMS_URL}/computeStatisticsHistograms", params=p, timeout=timeout)
+    r.raise_for_status()
+    d = r.json()
+    if "error" in d:
+        raise ValueError(f"service error {d['error']}")
+    st = (d.get("statistics") or [None])[0]
+    if not isinstance(st, dict) or st.get("max") is None:
+        raise ValueError("no statistics in the answer")
+    return {**{k: st.get(k) for k in ("min", "max", "mean", "count")}, "pixel_deg": pixel_deg}
