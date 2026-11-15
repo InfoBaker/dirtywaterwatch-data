@@ -147,8 +147,11 @@ def test_parish_outlines_and_county_aware_placement():
 
 def test_industrial_cso_rows_are_other():
     rows = json.loads((ROOT / "data" / "outfalls-la.json").read_text())["outfalls"]
-    assert {r["npdes_permit"] for r in rows} == {"LA0005754", "LA0127268"}
+    assert {r["npdes_permit"] for r in rows if r["supersedes"].startswith("data/outfalls-us.json")} == {"LA0005754",
+                                                                                                         "LA0127268"}
     assert all(r["outfall_kind"] == "other" and r["kind_note"] for r in rows)
+    # the sediment-dewatering pond and a permit with no outfall number are no sewage outfall (rule 6)
+    assert "LA0117161" in {r["npdes_permit"] for r in rows}
     import common
     reg = [r for r in common.load_outfall_registry(provisional=False) if r.get("state") == "LA"]
     assert not [r for r in reg if r["outfall_kind"] == "cso"]
@@ -181,3 +184,43 @@ def test_state_text_and_missing_waters():
     assert doc["state"] == "LA" and doc["waters"] == len(doc["rows"])
     assert all("East Baton Rouge Parish" in r["counties"] for r in doc["rows"])
     assert not [r for r in doc["rows"] if r["name"].lower() in ("none", "lateral", "canal")]
+
+
+def test_named_water_only_so_a_none_row_never_takes_the_plants_water():
+    recs = Q.records({"reports": {"98": {**_parsed(), "number": 98, "url": "https://example.org/r98.pdf"}}})
+    assert all(S.named_water_only(r) for r in recs)
+
+
+def _pdf_state(monkeypatch, pages_by_content):
+    monkeypatch.setattr(Q, "pdf_pages", lambda content: pages_by_content[content])
+
+
+def test_a_failed_copy_never_replaces_an_accepted_report(monkeypatch):
+    bad = [SUMMARY, TABLE_N]                       # the South table missing: 0 read against 1
+    _pdf_state(monkeypatch, {b"good": [SUMMARY, TABLE_N, TABLE_S], b"bad": bad})
+    state = {}
+    _, err = Q.read_report(state, "https://example.org/r98.pdf", 98, b"good", "2026-11-01T00:00:00Z")
+    assert err is None and len(Q.records(state)) == 3
+    _, err = Q.read_report(state, "https://example.org/r98-amended.pdf", 98, b"bad", "2026-11-14T00:00:00Z")
+    assert err and "kept" in err
+    recs = Q.records(state)
+    assert len(recs) == 3 and all(r["source_url"] == "https://example.org/r98.pdf" for r in recs)
+    assert recs[0]["fetched_at"] == "2026-11-01T00:00:00Z"
+    assert [a["layout_ok"] for a in state["reports"]["98"]["attempts"]] == [True, False]
+    # recovery: a good copy under the new address replaces it, with no duplicate ids
+    _pdf_state(monkeypatch, {b"good2": [SUMMARY, TABLE_N, TABLE_S]})
+    Q.read_report(state, "https://example.org/r98-v2.pdf", 98, b"good2", "2026-11-20T00:00:00Z")
+    recs = Q.records(state)
+    assert len(recs) == len({r["source_record_id"] for r in recs}) == 3
+
+
+def test_reports_are_kept_by_number_and_due_rules():
+    state = {"reports": {"https://example.org/r95.pdf": {"number": 95, "layout_ok": True, "rows": [],
+                                                        "read_at": "2026-11-14T00:00:00Z"}}}
+    Q.migrate(state)
+    assert list(state["reports"]) == ["95"] and state["reports"]["95"]["url"] == "https://example.org/r95.pdf"
+    links = {95: "https://example.org/r95.pdf", 96: "https://example.org/r96.pdf", 90: "https://example.org/r90.pdf"}
+    assert Q.due(state, links, "2026-11-15T00:00:00Z") == [(96, "https://example.org/r96.pdf")]
+    assert (95, "https://example.org/r95.pdf") in Q.due(state, links, "2026-12-30T00:00:00Z")   # re-read after 30 days
+    assert (95, "https://example.org/r95-b.pdf") in Q.due(state, {95: "https://example.org/r95-b.pdf"},
+                                                         "2026-11-15T00:00:00Z")

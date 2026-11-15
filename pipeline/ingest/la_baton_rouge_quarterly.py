@@ -34,8 +34,11 @@ Records
   to data/build/la-baton-rouge-state.json; the PDF itself is never written to data/raw.
 
 Cadence and lag
-  The index is read with the refresh (daily is enough); a report is fetched once (its URL and SHA-256 kept in the
-  state file) unless --refresh. Reports are issued about a month after the quarter ends, so a row is one to four
+  The index is read with the refresh (daily is enough); reports are kept by number in the state file with their URL,
+  SHA-256 and every read (attempts). A report is fetched when its number is new or its address changed, and the
+  newest two again every REREAD_DAYS (an amended copy at the same address); --refresh reads all again. A copy that
+  fails the layout check never replaces an accepted one: the accepted copy stays and the run is ok=False, naming it.
+  Each record's fetched_at is when its report was read. Reports are issued about a month after the quarter ends, so a row is one to four
   months old when it appears. FIRST_REPORT (91, October to December 2024) bounds the backfill.
 
 Run from pipeline/: python -m ingest.la_baton_rouge_quarterly [--file report.pdf --report 98 --url URL] [--refresh]
@@ -52,6 +55,7 @@ from urllib.parse import urljoin
 
 import requests
 
+import common
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
 
 SOURCE_ID = "la-baton-rouge-quarterly"
@@ -166,9 +170,10 @@ def parse_report(pages: list[str]) -> dict:
 
 def records(state: dict) -> list[dict]:
     out = []
-    for url, rep in sorted((state.get("reports") or {}).items(), key=lambda kv: kv[1].get("number") or 0):
+    for _, rep in sorted(migrate(state).get("reports", {}).items(), key=lambda kv: kv[1].get("number") or 0):
         if not rep.get("layout_ok"):
             continue
+        url = rep.get("url")
         seen: dict = {}
         for r in rep["rows"]:
             k = (r["permit"], r["date"])
@@ -179,7 +184,9 @@ def records(state: dict) -> list[dict]:
                    "report_page": r.get("page"), "district": r.get("name"), "agency_interest": r.get("ai"),
                    "county": COUNTY, "cause": r.get("cause"),
                    "receiving_water_as_given": water, "gallons_as_given": r.get("gallons_text"),
-                   "time_zone": TZ, "layout_check": rep.get("check"),
+                   "time_zone": TZ, "layout_check": rep.get("check"), "report_sha256": rep.get("sha256"),
+                   # placed only on the water the row names, never at the plant or an outfall of the permit
+                   "_placement": "named_water_only",
                    "date_basis": "the table's Date column (a date; the City gives no time and no end)"}
             per = rep.get("period") or []
             if len(per) == 2 and not (per[0] <= r["date"] <= per[1]):
@@ -197,6 +204,7 @@ def records(state: dict) -> list[dict]:
                 material="untreated sewage", volume_gal=r.get("gallons"),
                 volume_text=f"{r.get('gallons_text')} gallons" if r.get("gallons_text") else None,
                 estimate_flag="unknown", authority=AUTHORITY, source_url=url, raw=raw))
+            out[-1]["fetched_at"] = rep.get("read_at") or out[-1]["fetched_at"]   # when the report was read
     return out
 
 
@@ -207,11 +215,62 @@ def report_links(page: str) -> dict[int, str]:
     return out
 
 
-def read_report(state: dict, url: str, number: int, content: bytes, at: str) -> dict:
+def migrate(state: dict) -> dict:
+    """Reports keyed by report number (a state file of the first build keyed them by URL)."""
+    reps = state.get("reports") or {}
+    if any(str(k).startswith("http") or "/" in str(k) for k in reps):
+        state["reports"] = {str(v.get("number")): {**v, "url": v.get("url") or k} for k, v in reps.items()}
+    state.setdefault("reports", {})
+    return state
+
+
+def read_report(state: dict, url: str, number: int, content: bytes, at: str) -> tuple[dict, str | None]:
+    """Parse a report and keep it under its number. A report that fails the layout check never replaces one that
+    passed (an amended copy under a new address, or a re-read): the accepted version stays, the failed attempt is
+    kept in attempts and named as an error. Returns (the report kept, the error or None)."""
+    migrate(state)
     rep = parse_report(pdf_pages(content))
-    rep.update(number=number, sha256=hashlib.sha256(content).hexdigest(), read_at=at)
-    state.setdefault("reports", {})[url] = rep
-    return rep
+    rep.update(number=number, url=url, sha256=hashlib.sha256(content).hexdigest(), read_at=at)
+    key = str(number)
+    prev = state["reports"].get(key)
+    attempt = {k: rep.get(k) for k in ("url", "sha256", "read_at", "layout_ok", "check")}
+    if prev and prev.get("layout_ok") and not rep.get("layout_ok"):
+        prev.setdefault("attempts", []).append(attempt)
+        return prev, (f"report {number}: a new copy ({url}) failed the layout check; the accepted copy of "
+                      f"{prev.get('read_at')} is kept")
+    rep["attempts"] = (prev or {}).get("attempts", []) + [attempt]
+    if prev and prev.get("sha256") != rep["sha256"]:
+        rep["replaces"] = {k: prev.get(k) for k in ("url", "sha256", "read_at")}
+    state["reports"][key] = rep
+    return rep, None
+
+
+REREAD_DAYS = 30        # the newest two reports are read again this often, for an amended copy at the same address
+
+
+def due(state: dict, links: dict[int, str], now: str, refresh: bool = False) -> list[tuple[int, str]]:
+    """The reports to fetch: new numbers, a number whose address changed, and the newest two when their last read is
+    older than REREAD_DAYS."""
+    from datetime import datetime as _dt
+    migrate(state)
+    out = []
+    newest = sorted(n for n in links if n >= FIRST_REPORT)[-2:]
+    for n, url in sorted(links.items()):
+        if n < FIRST_REPORT:
+            continue
+        rep = state["reports"].get(str(n))
+        tried = {a.get("url") for a in (rep or {}).get("attempts", [])} | {(rep or {}).get("url")}
+        if refresh or rep is None or url not in tried:
+            out.append((n, url))
+            continue
+        last = max([a.get("read_at") or "" for a in rep.get("attempts", [])] + [rep.get("read_at") or ""])
+        try:
+            age = (_dt.fromisoformat(now.replace("Z", "+00:00")) - _dt.fromisoformat(last.replace("Z", "+00:00"))).days
+        except ValueError:
+            age = REREAD_DAYS
+        if n in newest and age >= REREAD_DAYS:
+            out.append((n, url))
+    return out
 
 
 def main(argv=None) -> int:
@@ -221,7 +280,10 @@ def main(argv=None) -> int:
     errors = []
     if "--file" in argv:
         url = argv[argv.index("--url") + 1] if "--url" in argv else Path(argv[argv.index("--file") + 1]).name
-        read_report(state, url, int(argv[argv.index("--report") + 1]), Path(argv[argv.index("--file") + 1]).read_bytes(), at)
+        _, err = read_report(state, url, int(argv[argv.index("--report") + 1]),
+                             Path(argv[argv.index("--file") + 1]).read_bytes(), at)
+        if err:
+            errors.append(err)
     else:
         try:
             r = requests.get(INDEX, headers=HEADERS, timeout=120)
@@ -231,17 +293,18 @@ def main(argv=None) -> int:
             write_events(SOURCE_ID, [], ok=False, error=f"index: {e}")
             print(f"{SOURCE_ID}: index not read ({e})", file=sys.stderr)
             return 1
-        for n, url in sorted(links.items()):
-            if n < FIRST_REPORT or (url in (state.get("reports") or {}) and "--refresh" not in argv):
-                continue
+        for n, url in due(state, links, at, "--refresh" in argv):
             try:
                 pr = requests.get(url, headers=HEADERS, timeout=300)
                 pr.raise_for_status()
-                read_report(state, url, n, pr.content, at)
+                _, err = read_report(state, url, n, pr.content, at)
+                if err:
+                    errors.append(err)
             except Exception as e:                    # a report that cannot be read is named; the others go on
                 errors.append(f"report {n}: {type(e).__name__}: {e}")
         state["index_read_at"] = at
         state["index_reports"] = {str(k): v for k, v in sorted(links.items())}
+    migrate(state)
     write_json(STATE_PATH, state)
     recs = records(state)
     reps = state.get("reports") or {}
@@ -253,7 +316,15 @@ def main(argv=None) -> int:
             "plant_events_not_itemised": {str(v.get("number")): sum(s.get("plant") or 0 for s in v["summary"].values())
                                           for v in reps.values()},
             "errors": errors, "cadence": "the index with the refresh; each report once"}
-    path = write_events(SOURCE_ID, recs, ok=not errors, error="; ".join(errors) or None, meta=meta)
+    if errors:
+        # the records come from the accepted reports in the state file, so they are complete: written, but the run
+        # is not ok (a failed fetch or a failed re-read is named)
+        path = common.EVENTS_DIR / f"{SOURCE_ID}.json"
+        write_json(path, {"source_id": SOURCE_ID, "fetched_at": now_iso(), "ok": False, "error": "; ".join(errors),
+                          "last_ok_at": (read_json(path, {}) or {}).get("last_ok_at"), "meta": meta,
+                          "count": len(recs), "records": recs})
+    else:
+        path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {len(recs)} rows from {sum(1 for v in reps.values() if v.get('layout_ok'))} reports "
           f"({len(meta['failed_checks'])} failed the layout check) -> {path}")
     return 0 if not errors else 1
