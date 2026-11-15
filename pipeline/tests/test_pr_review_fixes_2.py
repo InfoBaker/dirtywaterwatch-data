@@ -191,9 +191,13 @@ def _echo(tmp_path, desc=None, water=None, key=None):
             e["latitude_measure"], e["longitude_measure"] = "18.4123456", "-66.0654321"
             if desc is not None:
                 e["sewer_overflow_bypass_description_text"] = desc
-    if water is not None:
-        t["waters"] = [w for w in t["waters"] if w["sewer_overflow_bypass_event_key"] != k] + [
-            {"sewer_overflow_bypass_event_key": k, "name_receiving_water": water}]
+    if water is not None:   # EPA's table carries the permit on every row, as the saved extract's does
+        permit = {e["sewer_overflow_bypass_event_key"]: e["permit_identifier"] for e in t["events"]}
+        t["waters"] = [{"sewer_overflow_bypass_event_key": w["sewer_overflow_bypass_event_key"],
+                        "permit_identifier": permit.get(w["sewer_overflow_bypass_event_key"], ""),
+                        "name_receiving_water": w["name_receiving_water"]}
+                       for w in t["waters"] if w["sewer_overflow_bypass_event_key"] != k] + [
+            {"sewer_overflow_bypass_event_key": k, "permit_identifier": permit[k], "name_receiving_water": water}]
     return t, k
 
 
