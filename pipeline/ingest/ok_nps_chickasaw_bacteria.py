@@ -36,7 +36,10 @@ Record rules (a sample is a sample: the accuracy-first rule of docs/generic-inge
     whose result leaves the table keeps its record with raw._missing_from_source_since (its sample date is unchanged).
   - Placement: each place's water as the park describes it (Travertine Creek, Rock Creek, Veterans Lake, Lake of the
     Arbuckles), Murray County, with the USGS GNIS point of the named feature where GNIS has it (PLACES); never the
-    outfall of Sulphur's plant, and never a cause: a high result is not a sewage report.
+    outfall of Sulphur's plant, and never a cause: a high result is not a sewage report. A result speaks for its sampling
+    place only (raw._point_extent_only): a marker at the place's cited point, listed on the water's page, never the
+    whole water's colour; a place with no cited point (the four on Lake of the Arbuckles, 40 Ft Hole) gets none and its
+    raw.placement_note says its place on the map is not known.
   - Privacy (Astra P1-4): only the table and the key are read; the place names are scrubbed, a cell that is not a result
     keeps no text, the key line's sentences that can carry a person are withheld (nv_state_parks_hab.clean_text), and
     the raw save is that cleaned JSON (saved_form), never the page's markup; a failure's text is cleaned the same way.
@@ -212,11 +215,18 @@ def _record(kind: str, place: str, sample: str, v: dict, limit: float, fetched: 
            "sample_note": "the sample date is the date of the sample, not the date a notice was posted or removed",
            "placement_hint": {"name": water or place, "county": "Murray County", "state": "OK",
                               "basis": "the park's description of the sampling place"}}
+    # a result speaks for its swimming place, not the whole water (verification pass P2): shown at the place's own
+    # cited point and listed on the water's page, never colouring the water whole (status.point_extent_only)
+    raw["_point_extent_only"] = True
+    raw["extent_note"] = f"the result of one sampling place ({place}), not of the whole water"
     lat = lon = None
     if gnis:
         lat, lon = gnis[1], gnis[2]
         raw["point_basis"] = f"{gnis[0]}: USGS GNIS feature {gnis[3]} (Other Hydrographic Features), Murray County"
         raw["point_url"] = GNIS.format(gnis[3])
+    else:
+        raw["placement_note"] = (f"no cited public point for this sampling place: its place on the map is not known; "
+                                 f"listed on the page of {water or 'its water'}, never colouring it whole")
     return event(source_id=SOURCE_ID, source_record_id=srid, event_type="beach_advisory", status="unknown",
                  waterbody_text=water or place, outfall_name=place, lat=lat, lon=lon,
                  coord_source="gnis" if gnis else None, coord_precision_m=300 if gnis else None,
