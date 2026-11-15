@@ -13,7 +13,8 @@ Source
   transparency practice: no Kansas rule requires them (K.A.R. 28-16-27 sends overflows to KDHE only).
 
 Record rules
-  - One record per overflow page (source_record_id the page's path name). event_type "sso" (a collection-system
+  - One record per overflow page (source_record_id the page's path name with a house number turned into its hundred
+    block, "b1200", and anything from a person word on cut: record_id; the page's own identity, whatever else is read). event_type "sso" (a collection-system
     overflow, a lift station's included); status unknown: the City's advice ("stay away from the creek water until
     testing is done and signs are removed") has no date and is kept as advice_text, never turned into an end.
   - Times (America/Chicago; Leavenworth County keeps Central time): the day is the title's date (the text's first date
@@ -30,7 +31,9 @@ Record rules
   - Place: the street block of the title with its house number dropped (outfall_name); raw.county Leavenworth County.
 
 Privacy: the pages name streets and, once, a facility's telephone number; house numbers and telephone numbers are
-dropped before anything is stored (common.strip_house_numbers, common.scrub_text). data/raw keeps the parsed safe fields.
+dropped before anything is stored (common.strip_house_numbers, common.scrub_text), a title's tail from a person word on
+("by Jane Example") is cut (safe_title), and a failed request's message keeps no page address (safe_error). data/raw
+keeps the parsed safe fields.
 Run from pipeline/:  python -m ingest.ks_leavenworth_sso [--backfill] [--dir saved_pages/]
 """
 from __future__ import annotations
@@ -63,15 +66,34 @@ ADVICE = re.compile(r"[^.]*\b(?:stay (?:away from|out of)|avoid)\b[^.]*\.", re.I
 POSTED = re.compile(r"Posted\s+([A-Z][a-z]+)\.?\s*(\d{1,2}),\s*(\d{4})\s+at\s+(\d{1,2}):(\d{2})\s*([ap])\.?m", re.I)
 
 
+PERSON_TOKENS = {"by", "from", "resident", "residents", "homeowner", "caller", "contact", "call", "mr", "mrs", "ms", "dr"}
+BLOCK = re.compile(r"b\d+")
+ID_VERSION = 2          # raw.id_version: the identifier is record_id's hundred-block form (verification 2 P2)
+
+
 def record_id(path: str) -> str:
-    """The page's path name with every number dropped but a year and a day after its month
-    ("sanitary-sewer-overflow-reported-april-27-2026-evergreen-st"): the identifier carries no house or block number.
-    Idempotent, so an identifier made by an earlier version maps to the same one (re-review P1-8)."""
+    """The page's own stable identity, from its path name alone (verification 2 P2): a number in a date position is
+    kept, a house number becomes its hundred block ("1234" -> "b1200", the granularity the City itself uses in titles
+    such as "1200 block of Metropolitan"), and everything from a person word on ("-by-jane-example") is cut
+    ("sanitary-sewer-overflow-reported-april-27-2026-b500-evergreen-st"). It never depends on which other pages are
+    read with it, and carries no house number. Idempotent ("b1200" is kept as it is)."""
     toks = path.rstrip("/").rsplit("/", 1)[-1].split("-")
-    # a number is kept only in a date position: a year-shaped house number is dropped too (verification P1-4); a
-    # page's posting stamp ("-p202604271530", added where two pages share an identifier) is kept
+    for i, t in enumerate(toks):
+        if t.lower() in PERSON_TOKENS and i > 0:
+            toks = toks[:i]
+            break
+    # a number is kept only in a date position: a year-shaped house number is a house number too (verification P1-4)
     dated = date_positions(toks)
-    return "-".join(t for i, t in enumerate(toks) if not t.isdigit() or i in dated)
+    return "-".join(t if not t.isdigit() or i in dated else f"b{int(t) // 100 * 100}" for i, t in enumerate(toks))
+
+
+def legacy_id(rid: str) -> str:
+    """The identifier an earlier version gave the same page: every house number dropped (no block), and a collision
+    suffix ("-p<posting stamp>", "-n<k>") of the round before taken off."""
+    toks = [t for t in rid.split("-") if not BLOCK.fullmatch(t)]
+    while toks and re.fullmatch(r"n\d+|p\d{12}", toks[-1]):
+        toks.pop()
+    return "-".join(toks)
 
 
 # raw fields an earlier version saved that the records no longer carry
@@ -97,11 +119,11 @@ def migrate(prev: list[dict]) -> dict[str, dict]:
         migrate_water_text(r)
         # every retained free-text field through the same scrub as a fresh read, for a record whose page is not read
         # again (verification P1-4)
-        raw["title"] = safe_text(raw.get("title"))
+        raw["title"] = safe_title(raw.get("title"))
         r["advice_text"] = safe_text(r.get("advice_text"))
         if r.get("outfall_name"):
-            r["outfall_name"] = re.sub(r"\[house number removed\]\s*", "", safe_text(r["outfall_name"])).strip(" .-") \
-                or None
+            r["outfall_name"] = re.sub(r"\[house number removed\]\s*", "", safe_text(PERSON_TAIL.sub(
+                "", r["outfall_name"])) or "").strip(" .-") or None
         old = out.get(r["event_id"])
         if old:
             firsts = [x for x in (old["raw"].get("first_seen_at"), raw.get("first_seen_at")) if x]
@@ -140,8 +162,25 @@ def title_day(title: str) -> date | None:
         return None
 
 
+PERSON_TAIL = re.compile(r"\s+(?:by|from|resident|residents|homeowner|caller|contact|call|per)\b.*$", re.I)
+
+
+def safe_title(title: str | None) -> str | None:
+    """A page title as it may be saved: everything from a person word on cut ("... at 1234 Example Court by Jane
+    Example" keeps "... at Example Court"; verification 2 P1-3), then the shared scrub."""
+    return safe_text(PERSON_TAIL.sub("", title)) if title else title
+
+
+def safe_error(e: Exception) -> str:
+    """A failed request's message as it may be saved: an overflow page's address carries a street address, so every
+    address of the City's site is replaced by the index page's (verification 2 P1-3)."""
+    msg = re.sub(r"https?://(?:www\.)?leavenworthks\.gov/\S*", lambda m: INDEX if m.group(0).rstrip(".,;)") ==
+                 INDEX else "[a page of the City's site]", str(e))
+    return f"{type(e).__name__}: {safe_text(msg)}"
+
+
 def place_of(title: str) -> str | None:
-    t = re.sub(r"(?i)transparency report", "", title)
+    t = re.sub(r"(?i)transparency report", "", PERSON_TAIL.sub("", title))
     m = re.search(r"\b(?:at|in the|20\d\d)\s+((?:\d+\s+(?:and\s+\d+\s+)?)?[A-Z0-9][\w .'-]*?)\s*(?:reported\b.*)?$", t)
     if not m:
         m = re.search(r"Overflow:\s*(.+?)\s*-", t)
@@ -150,7 +189,8 @@ def place_of(title: str) -> str | None:
     s = common.strip_house_numbers(m.group(1)).strip(" .-")
     s = re.sub(r"\[house number removed\]\s*", "", s)
     s = re.sub(r"\b\d+\s+(?!blocks?\b)", "", s)          # "151 Walnut Creek", "1300 Sanders": a number not a block's
-    return re.sub(r"\s+", " ", s).strip(" .-") or None
+    s = re.sub(r"\s+", " ", safe_text(s) or "").strip(" .-")
+    return re.sub(r"\s*\[name removed\].*$", "", s).strip(" .-") or None
 
 
 def end_day(s: str, w: re.Match, day: date) -> tuple[date | None, bool]:
@@ -233,13 +273,13 @@ def record(path: str, h: str, at: str, cite: str | None = None) -> dict:
             pub = None
     prison = bool(re.search(r"Bureau of Prisons|\bBOP\b", clean))
     raw = {"state": "KS", "time_zone": "America/Chicago", "county": "Leavenworth County",
-           "title": safe_text(title), "start_kind": kind,
+           "title": safe_title(title), "start_kind": kind,
            "start_is_upper_bound": kind in ("notified", "found", "arrived", "stated", None),
            "start_basis": ("the day in the page's title; the page gives no clock time it can be read by" if prec == "day"
                            else f"the time the City's page gives ({kind}); the overflow began at or before it"),
            "waters_named": ws, "reached_water": True if ws or re.search(r"\bcreek\b|\bstream\b", clean, re.I) else None,
            "volume_basis": "the City's estimate" if v else None, "provenance": "operator",
-           "_placement": "named_water_only", "cited_page": cite or INDEX,
+           "_placement": "named_water_only", "cited_page": cite or INDEX, "id_version": ID_VERSION,
            "citation_note": ("the City's transparency report page that lists this overflow; the overflow's own page "
                              "address carries a street address, so it is not kept"),
            "time_basis": "the City's clock times, read as Central time (America/Chicago)"}
@@ -264,31 +304,36 @@ def run(pages: dict[str, str], prev: list[dict], at: str,
     recs = migrate(prev)
     stats = {"pages": 0, "undated": 0}
     read = [record(path, h, at, (cites or {}).get(path)) for path, h in sorted(pages.items())]
-    groups: dict[str, list[dict]] = {}
+    taken: dict[str, int] = {}
     for r in read:
-        groups.setdefault(r["event_id"], []).append(r)
-    for base, rs in groups.items():
-        if len(rs) < 2:
-            continue
-        # distinct pages whose identifiers match once the house numbers are dropped (two overflows on one street on
-        # one day; verification P2-3): each gets its posting stamp, then an ordinal if that is shared too; the earlier
-        # save under the shared identifier is replaced by them (its first sighting kept)
-        legacy = recs.pop(base, None)
-        seen: dict[str, int] = {}
-        for r in rs:
-            stamp = re.sub(r"\D", "", r.get("published_at") or "")[:12]
-            rid = f"{r['source_record_id']}-p{stamp}" if stamp else r["source_record_id"]
-            seen[rid] = seen.get(rid, 0) + 1
-            if seen[rid] > 1 or not stamp:
-                rid = f"{rid}-n{seen[rid]}"
+        # two pages of one read in the same hundred block of one street on one day (none among the City's pages on
+        # 2026-11-14): the later path in order gets an ordinal rather than overwrite the first
+        n = taken[r["event_id"]] = taken.get(r["event_id"], 0) + 1
+        if n > 1:
+            rid = f"{r['source_record_id']}-n{n}"
             r["source_record_id"], r["event_id"] = rid, f"{SOURCE_ID}:{rid}"
-            if legacy:
-                r["raw"]["first_seen_at"] = (legacy.get("raw") or {}).get("first_seen_at")
+    legacy = [k for k, x in recs.items() if (x.get("raw") or {}).get("id_version") != ID_VERSION]
+    gone: set[str] = set()
+    for r in read:
+        # an earlier save of the same page under the identifier an earlier version gave it (no block, or a
+        # collision suffix) and the same scrubbed title: replaced by this page's record, its first sighting kept
+        leg = legacy_id(r["source_record_id"])
+        for k in legacy:
+            x = recs.get(k) or {}
+            if k == r["event_id"] or not x or legacy_id(x["source_record_id"]) != leg \
+                    or (x.get("raw") or {}).get("title") not in (None, r["raw"]["title"]):
+                continue
+            firsts = [f for f in ((x.get("raw") or {}).get("first_seen_at"), r["raw"].get("first_seen_at")) if f]
+            r["raw"]["first_seen_at"] = min(firsts) if firsts else None
+            gone.add(k)
+    for k in gone:
+        recs.pop(k, None)
     for r in read:
         stats["pages"] += 1
         stats["undated"] += r["started_at"] is None
         old = recs.get(r["event_id"])
-        r["raw"]["first_seen_at"] = (old or {}).get("raw", {}).get("first_seen_at") or r["raw"].get("first_seen_at") or at
+        firsts = [f for f in ((old or {}).get("raw", {}).get("first_seen_at"), r["raw"].get("first_seen_at")) if f]
+        r["raw"]["first_seen_at"] = min(firsts) if firsts else at
         recs[r["event_id"]] = r
     for r in recs.values():
         r["fetched_at"] = at
@@ -334,8 +379,8 @@ def main(argv=None) -> int:
             pages, years, cites = fetch(prev, "--backfill" in argv)
         recs, stats = run(pages, prev, now_iso(), cites)
     except (requests.RequestException, OSError, ValueError, KeyError, IndexError, TypeError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=safe_error(e))
+        print(f"{SOURCE_ID}: {safe_error(e)}", file=sys.stderr)
         return 1
     save_raw(SOURCE_ID, json.dumps([{k: r.get(k) for k in ("source_url", "started_at", "ended_at", "volume_gal",
                                                            "waterbody_text", "outfall_name")} | {"title": r["raw"]["title"]}

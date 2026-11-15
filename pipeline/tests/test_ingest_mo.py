@@ -762,3 +762,36 @@ def test_kc_notices_with_invalid_publication_dates_fail_the_run_and_keep_the_rec
     assert K.main(["--file", str(bad)]) == 1
     out = json.loads((tmp_path / f"{K.SOURCE_ID}.json").read_text())
     assert out["ok"] is False and len(out["records"]) == len(recs) > 0
+
+
+def test_kc_stop_today_is_the_publication_day_and_a_dated_stop_survives_a_day_only_start():
+    """Verification 2 P2: a post published May 29 about a response on May 27 that "stopped today at 4:00 p.m." ends
+    May 29, not May 27; a stop with its own date is kept when the start has only a day; the caution intervals follow."""
+    from datetime import datetime, timezone
+
+    def item(body, pid):
+        return {"title": "Customers Advised of Wastewater Overflow near Example Street",
+                "link": f"https://www.kcwater.us/news/example-{pid}/", "date": "Fri, 29 May 2026 22:00:00 +0000",
+                "guid": f"https://www.kcwater.us/?post_type=news1&p={pid}", "html": f"<p>{body}</p>"}
+    now = datetime(2026, 6, 10, tzinfo=timezone.utc)
+    utc = lambda dd, h: datetime(2026, 5, dd, h, tzinfo=timezone.utc)
+    r = K.record(item("KC Water crews responded to a wastewater overflow near Example Street at 9:00 a.m. on "
+                      "Wednesday, May 27, 2026. The overflow stopped today at 4:00 p.m. About 500 gallons entered "
+                      "Brush Creek.", "1"), AT)
+    assert r["started_at"] == "2026-05-27T09:00:00-05:00" and r["ended_at"] == "2026-05-29T16:00:00-05:00"
+    ivs = [(iv["color"], iv["start"], iv["end"]) for iv in S.event_intervals(r, "MO", now)]
+    assert ivs == [("red", utc(27, 14), utc(29, 21)),
+                   ("yellow", utc(29, 21), datetime(2026, 6, 1, 21, tzinfo=timezone.utc))]
+    r2 = K.record(item("KC Water crews responded to a wastewater overflow near Example Street on Wednesday, May 27, "
+                       "2026. The overflow stopped May 28 at 4:00 p.m. About 500 gallons entered Brush Creek.", "2"), AT)
+    assert r2["time_precision"] == "day" and r2["ended_at"] == "2026-05-28T16:00:00-05:00"
+    assert r2["raw"]["ended_at_precision"] == "minute"
+    ivs2 = [(iv["color"], iv["start"], iv["end"]) for iv in S.event_intervals(r2, "MO", now)]
+    assert ivs2 == [("red", utc(27, 5), utc(28, 21)), ("yellow", utc(28, 21), utc(31, 21))]
+    # a day-only start and a stop with no date of its own: the end day is not known, so no end
+    from datetime import date
+    t = K.times("Crews responded May 27 to an overflow. The overflow stopped at 4:00 p.m.", date(2026, 5, 29))
+    assert t["precision"] == "day" and t["end"] is None
+    t = K.times("Crews responded May 27 at 9:00 a.m. to an overflow. It stopped yesterday at 4:00 p.m.",
+                date(2026, 5, 29))
+    assert t["end"] == "2026-05-28T16:00:00-05:00"
