@@ -225,7 +225,11 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
                    None)
         lat, lon = _pt(geom)
         if cur is None:
-            state[f"{stat}-{re.sub(r'[^0-9T]', '', now)[:13]}"] = {"station": stat, "label": adv, "county": a.get("COUNTY"),
+            key = base = f"{stat}-{re.sub(r'[^0-9T]', '', now)[:13]}"
+            n = 2
+            while key in state:                        # a reopening within the same minute: its own episode
+                key, n = f"{base}-{n}", n + 1
+            state[key] = {"station": stat, "label": adv, "county": a.get("COUNTY"),
                                            "huc12": a.get("HUC_12"), "lat": lat, "lon": lon, "started_at": now,
                                            "last_seen_at": now}
         else:

@@ -289,6 +289,19 @@ def test_an_advisory_reopened_the_same_day_is_a_second_record():
     assert {r["source_record_id"] for r in recs2} == set(by)                          # stable across later runs
 
 
+def test_a_station_reopened_within_the_same_minute_keeps_both_episodes():
+    # re-review P2-1
+    s = saved()
+    one = [copy.deepcopy(f) for f in s["beach"] if f["attributes"]["STAT"] == "LC-080"]
+    _, st, _ = A.beach_records(one, {}, "2026-11-14T18:00:01Z")
+    one[0]["attributes"]["ADVISORY"] = "No Advisory"
+    _, st, _ = A.beach_records(one, {"beach": st}, "2026-11-14T18:00:20Z")
+    one[0]["attributes"]["ADVISORY"] = "Long-Term"
+    recs, _, _ = A.beach_records(one, {"beach": st}, "2026-11-14T18:00:40Z")
+    assert sorted((r["started_at"], r["ended_at"]) for r in recs) == [
+        ("2026-11-14T18:00:01Z", "2026-11-14T18:00:20Z"), ("2026-11-14T18:00:40Z", None)]
+
+
 def test_a_short_term_advisory_and_a_closure_by_label():
     s = saved()
     f = copy.deepcopy(s["beach"])
