@@ -424,3 +424,30 @@ def test_p2_12_nevada_texts_state_what_the_evidence_supports():
                  "permit_only_permits": 1, "points": 35, "other_permits": 1}
     assert (f"Nevada's {c['plant_permits']} sewage discharge permits" in t and f"{c['points']} discharge points" in t
             and f"{c['operators']} operators hold {c['operator_permits']} of them" in t)
+
+
+def test_p3_14_the_generators_and_shared_rules_leave_other_states_identical(monkeypatch):
+    import importlib.util
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    dis = json.loads((ROOT / "data" / "dischargers.json").read_text())
+    others = [r for r in dis if r.get("state") not in ("NV", "OK")]
+    for name in ("add_nv_operators", "add_ok_operators"):
+        spec = importlib.util.spec_from_file_location(name, ROOT / "scripts" / f"{name}.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        out, _ = mod.build(dis)
+        assert [r for r in out if r.get("state") not in ("NV", "OK")] == others, name
+    import add_nv_register_rows as NR
+    import add_ok_register_rows as OR
+    assert {r["state"] for r in NR.operator_rows(dis)} == {"NV"} and {r["state"] for r in OR.operator_rows(dis)} == {"OK"}
+    # the clock: Nevada's rule is reached only for NV
+    pts = [(None, None), (40.737, -114.06), (36.17, -115.14), (39.0, -95.0), (35.5, -97.5), (41.9, -87.6)]
+    before = {(st, p): zones.zone_for(st, *p) for st in zones.STATE_ZONES if st != "NV" for p in pts}
+    monkeypatch.setattr(zones, "nevada_zone", lambda *a, **k: (_ for _ in ()).throw(AssertionError("NV rule used")))
+    assert {(st, p): zones.zone_for(st, *p) for st in zones.STATE_ZONES if st != "NV" for p in pts} == before
+    # the status build's additions are keyed to NV and OK sources and states only
+    from build import status as S
+    assert "nv-state-parks-hab" in S.POLL_END_HORIZON_SOURCES and {"de-dnrec-recreational-water", "sc-des-beach-monitoring",
+                                                                   "sc-des-hab"} <= S.POLL_END_HORIZON_SOURCES
+    assert len(S.POLL_END_HORIZON_SOURCES) == 4
