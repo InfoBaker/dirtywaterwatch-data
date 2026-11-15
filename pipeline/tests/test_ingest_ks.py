@@ -470,6 +470,7 @@ def test_kdhe_confirms_only_while_its_own_release_is_in_the_feed_and_reconciles_
              "KDHE issued a stream advisory after a sewage discharge.")
     older = ("Stream Advisory Rescinded for Other Creek in Example County", "40", "Mon, 26 Oct 2026 09:00:00 -0600", "x")
     first, _ = A.run(_feed(issue, older), [], "2026-11-02T18:00:00Z")
+    pristine = json.loads(json.dumps(first))
     # the issue is gone; an unrelated older item remains: no confirmation
     recs, _ = A.run(_feed(older), first, "2026-11-20T18:00:00Z")
     r = {x["source_record_id"]: x for x in recs}["50-examplecreek"]
@@ -490,7 +491,7 @@ def test_kdhe_confirms_only_while_its_own_release_is_in_the_feed_and_reconciles_
     assert s["status"] == "advisory_active" and s["raw"]["county"] == "Douglas County" and stats["revised_out"] == 1
     # the same water, the county and date revised: the earliest publication stays the start
     rev2 = ("Stream Advisory Issued for Example Creek in Douglas County", "50", "Wed, 04 Nov 2026 09:00:00 -0600", "x")
-    recs2, _ = A.run(_feed(rev2), first, "2026-11-04T18:00:00Z")
+    recs2, _ = A.run(_feed(rev2), pristine, "2026-11-04T18:00:00Z")
     e = {x["source_record_id"]: x for x in recs2}["50-examplecreek"]
     assert e["raw"]["county"] == "Douglas County" and e["started_at"] == "2026-11-02T09:00:00-06:00"
     assert e["raw"]["publication_times_seen"] == ["2026-11-02T09:00:00-06:00", "2026-11-04T09:00:00-06:00"]
@@ -534,14 +535,14 @@ def test_leavenworth_old_ids_and_addresses_migrate_to_one_record_per_page_throug
         doc = json.loads((tmp_path / f"{L.SOURCE_ID}.json").read_text())
         assert doc["count"] == 1
         r = doc["records"][0]
-        assert r["source_record_id"] == "sanitary-sewer-overflow-reported-may-27-2020-example-court"
+        assert r["source_record_id"] == "sanitary-sewer-overflow-reported-may-27-2020-b1200-example-court"
         assert r["raw"]["first_seen_at"] == "2026-11-01T00:00:00Z" and "page_text" not in r["raw"]
         blob = json.dumps(doc) + "".join(p.read_text() for p in (tmp_path / "raw").rglob("*.json"))
         for p in PERSONAL + ["1234"]:
             assert p not in blob
     assert L.record_id(L.record_id(path)) == L.record_id(path)
     assert L.record_id("/x/sanitary-sewer-overflow-1200-block-example-reported-thursday-oct-23-2025") == \
-        "sanitary-sewer-overflow-block-example-reported-thursday-oct-23-2025"
+        "sanitary-sewer-overflow-b1200-block-example-reported-thursday-oct-23-2025"
 
 
 def test_leavenworth_cites_the_year_page_not_the_address_page():
@@ -669,9 +670,10 @@ def test_mo_hab_listing_again_after_an_outage_keeps_two_periods():
     assert all(len(r["raw"]["listed_periods"]) == 2 for r in recs if r["status"] == "advisory_active")
 
 
-def test_kdhe_water_named_again_after_a_revision_is_open_again_and_a_rescission_stays_lifted():
-    """Verification P1-2: Example Creek -> Sample Creek -> Example Creek in one release leaves Example Creek open (the
-    drop was a revision, not KDHE's rescission); unchanged reads keep it so; a rescinded water stays lifted."""
+def test_kdhe_water_named_again_after_a_revision_opens_a_new_period_and_a_rescission_stays_lifted():
+    """Verification P1-2, verification 2 P1-1: Example Creek -> Sample Creek -> Example Creek in one release keeps two
+    periods for Example Creek (the drop was a revision, not KDHE's rescission); unchanged reads keep the second open; a
+    rescinded water stays lifted."""
     a = ("Stream Advisory Issued for Example Creek in Shawnee County", "50", "Mon, 02 Nov 2026 09:00:00 -0600", "Sewage.")
     b = ("Stream Advisory Issued for Sample Creek in Shawnee County", "50", "Mon, 02 Nov 2026 09:00:00 -0600", "Sewage.")
     r1, _ = A.run(_feed(a), [], "2026-11-02T18:00:00Z")
@@ -679,25 +681,71 @@ def test_kdhe_water_named_again_after_a_revision_is_open_again_and_a_rescission_
     r3, _ = A.run(_feed(a), r2, "2026-11-02T20:00:00Z")
     r4, s4 = A.run(_feed(a), r3, "2026-11-02T21:00:00Z")
     by = {x["source_record_id"]: x for x in r4}
-    ex = by["50-examplecreek"]
-    assert ex["status"] == "advisory_active" and ex["ended_at"] is None and "revised_out" not in ex["raw"]
-    assert ex["raw"]["revised_out_reads"] == ["2026-11-02T19:00:00Z"] and ex["started_at"] == "2026-11-02T09:00:00-06:00"
-    assert ex["raw"]["_last_seen_in_source"] == "2026-11-02T21:00:00Z"
-    assert by["50-samplecreek"]["status"] == "advisory_lifted" and s4["open"] == 1
+    ex, ex2 = by["50-examplecreek"], by["50-examplecreek-p2"]
+    assert ex["status"] == "advisory_lifted" and ex["ended_at"] == "2026-11-02T19:00:00Z" and ex["raw"]["revised_out"]
+    assert ex["started_at"] == "2026-11-02T09:00:00-06:00"
+    assert ex2["status"] == "advisory_active" and ex2["ended_at"] is None and "revised_out" not in ex2["raw"]
+    assert ex2["started_at"] == "2026-11-02T20:00:00Z" and ex2["time_precision"] == "poll"
+    assert ex2["raw"]["period_of"] == ex["event_id"] and ex2["raw"]["_last_seen_in_source"] == "2026-11-02T21:00:00Z"
+    assert by["50-samplecreek"]["status"] == "advisory_lifted" and s4["open"] == 1 and len(r4) == 3
     lift = ("Stream Advisory Rescinded for Example Creek in Shawnee County", "51", "Tue, 03 Nov 2026 09:00:00 -0600", "x")
     r5, _ = A.run(_feed(a, lift), r4, "2026-11-03T18:00:00Z")
     r6, _ = A.run(_feed(a, lift), r5, "2026-11-03T19:00:00Z")
-    ex6 = {x["source_record_id"]: x for x in r6}["50-examplecreek"]
-    assert ex6["status"] == "advisory_lifted" and ex6["ended_at"] == "2026-11-03T09:00:00-06:00"
+    by6 = {x["source_record_id"]: x for x in r6}
+    assert by6["50-examplecreek-p2"]["status"] == "advisory_lifted"
+    assert by6["50-examplecreek-p2"]["ended_at"] == "2026-11-03T09:00:00-06:00" and len(r6) == 3
+    assert by6["50-examplecreek"]["ended_at"] == "2026-11-02T19:00:00Z"
+
+
+def test_kdhe_january_listed_removed_june_relisted_is_two_periods_through_the_status_build():
+    """Verification 2 P1-1: listed January 1, no longer named January 2, named again June 1: two authority periods,
+    never one red period over the gap, in status, history and the export."""
+    from datetime import datetime, timezone
+    from build import status as S
+    from export import build as X
+    a = ("Stream Advisory Issued for Example Creek in Shawnee County", "60", "Thu, 01 Jan 2026 09:00:00 -0600", "Sewage.")
+    b = ("Stream Advisory Issued for Sample Creek in Shawnee County", "60", "Thu, 01 Jan 2026 09:00:00 -0600", "Sewage.")
+    recs, _ = A.run(_feed(a), [], "2026-01-01T18:00:00Z")
+    recs, _ = A.run(_feed(b), recs, "2026-01-02T18:00:00Z")
+    recs, _ = A.run(_feed(a), recs, "2026-06-01T18:00:00Z")
+    recs, _ = A.run(_feed(a), recs, "2026-06-10T18:00:00Z")
+    ex = [r for r in recs if r["raw"]["waters"] == ["Example Creek"]]
+    assert len(ex) == 2
+    now = datetime(2026, 6, 15, tzinfo=timezone.utc)
+    red = sorted((iv["start"], iv["end"]) for r in ex for iv in S.event_intervals(r, "KS", now)
+                 if iv["color"] == "red")
+    d = lambda m, dd, h: datetime(2026, m, dd, h, tzinfo=timezone.utc)
+    assert red == [(d(1, 1, 15), d(1, 2, 18)), (d(6, 1, 18), d(6, 24, 18))]    # 14 days after June 10's read
+    gap0, gap1 = d(1, 2, 18), d(6, 1, 18)
+    for r in ex:
+        for iv in S.event_intervals(r, "KS", now):
+            assert iv["end"] is not None and iv["end"] <= gap0 or iv["start"] >= gap1
+    # history and export: two records with their own bounds, the first ended at the January read
+    slim = {X.slim_event(r)["event_id"]: X.slim_event(r) for r in ex}
+    first = slim["ks-kdhe-stream-advisories:60-examplecreek"]
+    second = slim["ks-kdhe-stream-advisories:60-examplecreek-p2"]
+    assert first["ended_at"] == "2026-01-02T18:00:00Z" and first["status"] == "advisory_lifted"
+    assert second["started_at"] == "2026-06-01T18:00:00Z" and second["status"] == "advisory_active"
+    # an earlier save that reopened one record over the gap (raw.revised_out_reads) is split at the next read
+    old = json.loads(json.dumps(next(r for r in ex if not r["raw"].get("period_of"))))
+    old.update(status="advisory_active", ended_at=None)
+    for k in ("revised_out", "ended_at_precision", "end_basis"):
+        old["raw"].pop(k)
+    old["raw"].update(revised_out_reads=["2026-01-02T18:00:00Z"], _last_seen_in_source="2026-06-10T18:00:00Z")
+    again, _ = A.run(_feed(a), [old], "2026-06-11T18:00:00Z")
+    by = {x["source_record_id"]: x for x in again}
+    assert by["60-examplecreek"]["ended_at"] == "2026-01-02T18:00:00Z"
+    assert by["60-examplecreek-p2"]["started_at"] == "2026-06-10T18:00:00Z" and len(again) == 2
+    assert all("revised_out_reads" not in x["raw"] for x in again)
 
 
 def test_leavenworth_year_shaped_house_numbers_and_old_saves_keep_nothing_personal():
     """Verification P1-4: a year-shaped house number leaves the identifier; an earlier save whose page is not read again
     loses names, phones and house numbers from its title, advice and place at the next read."""
     assert L.record_id("/x/sanitary-sewer-overflow-at-2026-example-lane-reported-may-27-2026") == \
-        "sanitary-sewer-overflow-at-example-lane-reported-may-27-2026"
+        "sanitary-sewer-overflow-at-b2000-example-lane-reported-may-27-2026"
     assert L.record_id("/x/sanitary-sewer-overflow-reported-april-27-2026-5678-sample-st") == \
-        "sanitary-sewer-overflow-reported-april-27-2026-sample-st"
+        "sanitary-sewer-overflow-reported-april-27-2026-b5600-sample-st"
     old = L.record("/x/sanitary-sewer-overflow-reported-may-27-2020-example-court",
                    _page("Sanitary Sewer Overflow Reported on May 27, 2020 at Example Court", "At 3:50 p.m. May 27, 2020."),
                    AT)
@@ -721,6 +769,9 @@ def test_leavenworth_distinct_same_day_pages_on_one_street_stay_two_records():
                "At 7:15 p.m. May 27, 2026, staff were notified. Posted May 27, 2026 at 8:30 PM")
     legacy = L.record(pa, ha, "2026-06-01T00:00:00Z")                  # the earlier save under the shared identifier
     legacy["raw"]["first_seen_at"] = "2026-06-01T00:00:00Z"
+    legacy["raw"].pop("id_version")
+    legacy["source_record_id"] = "sanitary-sewer-overflow-reported-may-27-2026-example-court"
+    legacy["event_id"] = f"{L.SOURCE_ID}:{legacy['source_record_id']}"
     recs, _ = L.run({pa: ha, pb: hb}, [legacy], AT)
     recs2, _ = L.run({pa: ha, pb: hb}, recs, "2026-11-15T00:00:00Z")
     recs3, _ = L.run({pa: ha, pb: hb}, recs2, "2026-11-16T00:00:00Z")
@@ -804,3 +855,76 @@ def test_a_facility_type_never_makes_a_plant_name_a_city():
            and not re.search(r"\bmunicipal\b", r["name"], re.I)            # the municipality's own plant
            and not any(p in ko.RESEARCH_NAME or p in mo.RESEARCH_NAME for p in r["npdes_permits"])]
     assert bad == []
+
+
+def test_leavenworth_a_title_ending_in_an_address_and_a_name_reaches_no_save_through_main(tmp_path, monkeypatch):
+    """Verification 2 P1-3: a title ending "at 1234 Example Court by Jane Example": the place, the title, the record id,
+    the events file and the raw save keep no house number and no name; a failed request saves no page address."""
+    import common
+    import requests
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    stem = "sanitary-sewer-overflow-reported-may-27-2026-1234-example-court-by-jane-example"
+    h = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 1234 Example Court by Jane Example",
+              "At 3:50 p.m. May 27, 2026, staff were notified of sewage in Five-Mile Creek.")
+    d = tmp_path / "pages"
+    d.mkdir()
+    (d / f"{stem}.html").write_text(h)
+    assert L.main(["--dir", str(d)]) == 0
+    doc = json.loads((tmp_path / f"{L.SOURCE_ID}.json").read_text())
+    r = doc["records"][0]
+    assert r["outfall_name"] == "Example Court" and "Jane" not in r["raw"]["title"]
+    assert r["source_record_id"] == "sanitary-sewer-overflow-reported-may-27-2026-b1200-example-court"
+    saves = [p.read_text() for p in (tmp_path / "raw").rglob("*") if p.is_file()]
+    assert saves
+    for blob in [json.dumps(doc)] + saves:
+        for p in PERSONAL + ["1234", "Jane", "jane"]:
+            assert p not in blob
+    # a failed request: the message names the page's address; the saved health carries none of it
+    url = L.BASE + "/publicworks/page/" + stem
+
+    def boom(u, **k):
+        raise requests.HTTPError(f"404 Client Error: Not Found for url: {url}")
+    monkeypatch.setattr(L.requests, "get", boom)
+    assert L.main([]) == 1
+    failed = (tmp_path / f"{L.SOURCE_ID}.json").read_text()
+    assert json.loads(failed)["ok"] is False and "HTTPError" in json.loads(failed)["error"]
+    for p in ["1234", "Jane", "jane", stem]:
+        assert p not in failed
+    assert len(json.loads(failed)["records"]) == 1
+    # an earlier save holding the name in its place and title loses it at the next read
+    old = json.loads(json.dumps(r))
+    old["outfall_name"] = "Example Court by Jane Example"
+    old["raw"]["title"] = "Sanitary Sewer Overflow Reported on May 27, 2026 at Example Court by Jane Example"
+    again, _ = L.run({}, [old], AT)
+    assert "Jane" not in json.dumps(again) and again[0]["outfall_name"] == "Example Court"
+
+
+def test_leavenworth_ids_do_not_depend_on_which_pages_are_read_together():
+    """Verification 2 P2: two pages of one street and one day (house numbers in different hundred blocks): read
+    together, one alone, on separate runs, in either order, or corrected, they stay two records with the same ids."""
+    pa = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2026-1234-example-court"
+    pb = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2026-5678-example-court"
+    ha = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 1234 Example Court",
+               "At 3:50 p.m. May 27, 2026, staff were notified.")
+    hb = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 5678 Example Court",
+               "At 7:15 p.m. May 27, 2026, staff were notified.")
+    ids = lambda rs: sorted(r["event_id"] for r in rs)
+    both, _ = L.run({pa: ha, pb: hb}, [], AT)
+    assert len(both) == 2
+    one, _ = L.run({pa: ha}, both, "2026-11-15T00:00:00Z")                 # one of the two read again
+    assert ids(one) == ids(both)
+    sep, _ = L.run({pa: ha}, [], AT)                                         # on separate runs
+    sep, _ = L.run({pb: hb}, sep, "2026-11-15T00:00:00Z")
+    assert ids(sep) == ids(both)
+    rev, _ = L.run(dict(reversed(list({pa: ha, pb: hb}.items()))), [], AT)  # the other order
+    assert ids(rev) == ids(both)
+    alone_b, _ = L.run({pb: hb}, [], AT)
+    assert alone_b[0]["event_id"] in ids(both)
+    fixed = ha.replace("staff were notified.", "staff were notified. The overflow stopped at 5:00 p.m.")
+    cor, _ = L.run({pa: fixed}, both, "2026-11-16T00:00:00Z")               # a correction to one page
+    assert ids(cor) == ids(both)
+    by = {r["started_at"]: r for r in cor}
+    assert by["2026-05-27T15:50:00-05:00"]["ended_at"] == "2026-05-27T17:00:00-05:00"
+    assert by["2026-05-27T19:15:00-05:00"]["ended_at"] is None
+    assert "1234" not in json.dumps(cor) and "5678" not in json.dumps(cor)

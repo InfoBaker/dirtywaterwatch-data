@@ -29,8 +29,9 @@ Record rules
     and raw.start_kind says what it was: "start" (the text says the overflow began, started or occurred), "response"
     (KC Water's crews responded: the overflow began at or before it, raw.start_is_upper_bound), "report" (another
     party reported it). No time: day precision. An end ("ended", "ceased", "stopped") with a clock time is ended_at,
-    raw.ended_at_precision minute, on the same day unless the sentence gives its own date or the time is before the
-    start (the next day). "Continues" leaves the end open.
+    raw.ended_at_precision minute, on the same day unless the sentence gives its own date ("today" or "this
+    afternoon" is the post's day, "yesterday" the day before) or the time is before the start (the next day); a start
+    with only a day keeps an end that gives its own date. "Continues" leaves the end open.
   - Volume: the first "N gallons" that is not a rate ("gallons per minute" is kept only as text); "approximately" or
     "estimated" makes it estimated.
   - Water: a named creek, river, branch, lake or fork in a sentence that says the wastewater entered, reached, flowed,
@@ -172,6 +173,14 @@ def find_date(s: str, pub: date) -> date | None:
     return None
 
 
+RELATIVE_DAY = re.compile(r"\b(today|tonight|this (?:morning|afternoon|evening)|yesterday)\b", re.I)
+
+
+def relative_day(m: re.Match, pub: date) -> date:
+    """A day the post gives relative to itself: its publication day ("today", "this afternoon"), or the day before."""
+    return pub - timedelta(days=1) if m.group(1).lower() == "yesterday" else pub
+
+
 def clock(m: re.Match) -> tuple[int, int]:
     if m.group(4):
         return (12, 0) if m.group(4).lower() == "noon" else (0, 0)
@@ -219,31 +228,41 @@ def times(text: str, pub: date) -> dict:
         # the end time is the one after the end word ("It ended later that same day at 4:45 p.m.")
         w = re.search(r"\b(?:ended|ceased|stopped)\b", x, re.I)
         after = [m for m in ems if w and m.start() > w.start()]
-        if not after or start is None:
+        if not after:
             break
         h, mi = clock(after[0])
         # the end clause's own date (verification P2-2): a date after the stop verb first, else the one date before
         # it in the same sentence ("On May 29, 2026, the overflow stopped at 4:00 p.m."); several dates before the verb
-        # and none after is ambiguous: no end, never a guess; no date at all: the start's day
-        d2 = find_date(x[w.start():], pub) if DATE.search(x[w.start():]) else None
-        explicit = d2 is not None
-        if d2 is None:
-            before = list(DATE.finditer(x[:w.start()]))
+        # and none after is ambiguous: no end, never a guess. A day relative to the post ("stopped today at 4:00
+        # p.m.") is the publication day (verification 2 P2): never the start's day. No date at all: the start's day
+        tail, head = x[w.start():], x[:w.start()]
+        explicit = True
+        if DATE.search(tail):
+            d2 = find_date(tail, pub)
+        elif RELATIVE_DAY.search(tail):
+            d2 = relative_day(RELATIVE_DAY.search(tail), pub)
+        else:
+            before = list(DATE.finditer(head))
             if len(before) > 1:
                 break
             if before:
-                d2, explicit = find_date(before[0].group(0), pub), True
-                if d2 is None:
-                    break
+                d2 = find_date(before[0].group(0), pub)
+            elif RELATIVE_DAY.search(head):
+                d2 = relative_day(RELATIVE_DAY.search(head), pub)
             else:
-                d2 = day
+                d2, explicit = day, False
+        if d2 is None:
+            break
+        if start is None and not explicit:
+            break       # a day-only start and a stop with no date of its own: which day it ended is not known
         end = datetime(d2.year, d2.month, d2.day, h, mi, tzinfo=TZ)
         basis = "the time the post gives for the overflow's end"
-        if end < start:
+        if start is not None and end < start:
             if re.search(r"next day|following day|the next morning", x, re.I) or (d2 == day and not explicit):
                 end += timedelta(days=1)
                 basis += " (before the start time, so the next day)"
-        if end >= start:
+        # a day-only start: an explicit dated stop is kept when it is on or after the start's day (verification 2 P2)
+        if (end >= start) if start is not None else (d2 >= day):
             out.update(end=end.isoformat(), end_basis=basis)
         break
     return out
