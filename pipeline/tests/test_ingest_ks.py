@@ -588,3 +588,21 @@ def test_the_not_a_discharge_rule_reads_feature_ids_and_limit_sets():
     mo_ops = {r["id"]: r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "MO"}
     sk = next(r for r in mo_ops.values() if "MO0022969" in r["npdes_permits"])
     assert sk["outfall_count"] == 1                                 # its INF feature is not counted
+
+
+def test_the_permit_exception_and_the_advisory_limits_are_stated_alike_everywhere():
+    """Re-review P2-5: K.A.R. 28-16-27's scope (a discharge a valid permit does not provide for, as the saved research
+    records it) in the register, the rules row, the operator rows and the state text; the state text states the 14-day
+    limit and the advisories whose place is not known."""
+    prof = json.loads((ROOT / "research" / "ks" / "profile.json").read_text())
+    assert "not provided for by permit" in json.dumps(prof)
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "ks.json").read_text())["channels"]}
+    law_rows = [c for c in reg.values() if "K.A.R. 28-16-27" in (c.get("legal_basis") or "")]
+    assert law_rows and all("valid permit does not provide for" in c["legal_basis"] for c in law_rows)
+    assert all("permit does not provide for" in c["note"] for k, c in reg.items() if k.endswith("-kdhe-report"))
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())["red"]["by_state"]["KS"]
+    assert "valid permit does not provide for" in rules["basis"] and "14 days" in rules["basis"]
+    assert all("valid permit does not" in r["notification_channel"] for r in ks_ops())
+    t = (ROOT / "research" / "ks" / "state-text.md").read_text()
+    assert "a valid permit does not provide for" in t and "14 days after the last read that confirmed it" in t
+    assert "its place on the map is not known" in t and "publishes no list or map layer" in t

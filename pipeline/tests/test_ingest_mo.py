@@ -375,7 +375,7 @@ def test_state_text_is_in_the_page_shape():
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
     assert "99 posts from July 2016 to August 2025" in t and "89 posts from June 2013 to January 2026" in t
-    assert "945 concerns, 140 of them" in t and "146 combined sewer outfalls on five permits" in t
+    assert "945 entries (a concern investigated over more than one month appears in each month's report), 140 of them" in t and "131 distinct concerns" in t and "146 combined sewer outfalls on five permits" in t
 
 
 def test_missing_waters_list_leaves_out_the_national_lists_names():
