@@ -399,3 +399,90 @@ def test_an_incomplete_summary_or_a_missing_district_never_passes_or_replaces(mo
     Q.read_report(state, "https://example.org/r98.pdf", 98, b"good", "2026-11-01T00:00:00Z")
     _, err = Q.read_report(state, "https://example.org/r98-b.pdf", 98, b"short", "2026-11-14T00:00:00Z")
     assert err and len(Q.records(state)) == 3
+
+
+class _Resp:
+    def __init__(self, text="", content=b""):
+        self.text, self.content = text, content
+
+    def raise_for_status(self):
+        pass
+
+
+def _live(monkeypatch, tmp_path, links, contents):
+    """main() against a fake index and fake PDFs: links {n: url}, contents {url: bytes or an exception}."""
+    import common
+    state_path, events = tmp_path / "state.json", tmp_path / "events"
+    events.mkdir(exist_ok=True)
+    monkeypatch.setattr(Q, "STATE_PATH", state_path)
+    monkeypatch.setattr(common, "EVENTS_DIR", events)
+    index = " ".join(f'<a href="{u}">' for u in links.values())
+
+    def get(url, **kw):
+        if url == Q.INDEX:
+            return _Resp(text=index)
+        c = contents[url]
+        if isinstance(c, Exception):
+            raise c
+        return _Resp(content=c)
+    monkeypatch.setattr(Q.requests, "get", get)
+
+
+def _run_at(monkeypatch, tmp_path, at):
+    monkeypatch.setattr(Q, "now_iso", lambda: at)
+    import common
+    monkeypatch.setattr(common, "now_iso", lambda: at)
+    code = Q.main([])
+    return code, json.loads((tmp_path / "events" / f"{Q.SOURCE_ID}.json").read_text())
+
+
+def test_failure_health_holds_until_a_successful_recovery(monkeypatch, tmp_path):
+    """Verification P1-2 (Baton Rouge): failure, a run that retries nothing, a repeated failure, then recovery; the
+    records, the run's health and last_ok_at at each step."""
+    url = "https://example.org/98th-Quarterly-Report.pdf"
+    _pdf_state(monkeypatch, {b"good": [SUMMARY, TABLE_N, TABLE_S], b"bad": [SUMMARY, TABLE_N]})
+    _live(monkeypatch, tmp_path, {98: url}, {url: b"bad"})
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-01T00:00:00Z")
+    assert code == 1 and out["ok"] is False and out["count"] == 0 and out["last_ok_at"] is None
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-02T00:00:00Z")      # nothing due: still not ok
+    assert code == 1 and out["ok"] is False and "98" in out["error"] and out["last_ok_at"] is None
+    assert "98" in out["meta"]["pending"]
+    code, out = _run_at(monkeypatch, tmp_path, "2026-12-05T00:00:00Z")      # retried, fails again
+    assert code == 1 and out["ok"] is False and out["meta"]["pending"]["98"]["since"] == "2026-11-01T00:00:00Z"
+    _live(monkeypatch, tmp_path, {98: url}, {url: b"good"})
+    code, out = _run_at(monkeypatch, tmp_path, "2027-01-10T00:00:00Z")      # recovered
+    assert code == 0 and out["ok"] is True and out["count"] == 3 and out["last_ok_at"] == "2027-01-10T00:00:00Z"
+    assert out["meta"]["pending"] == {}
+
+
+def test_a_fetch_error_is_pending_until_read(monkeypatch, tmp_path):
+    import requests
+    url = "https://example.org/98th-Quarterly-Report.pdf"
+    _pdf_state(monkeypatch, {b"good": [SUMMARY, TABLE_N, TABLE_S]})
+    _live(monkeypatch, tmp_path, {98: url}, {url: requests.ConnectionError("down")})
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-01T00:00:00Z")
+    assert code == 1 and "98" in out["meta"]["pending"]
+    _live(monkeypatch, tmp_path, {98: url}, {url: b"good"})
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-02T00:00:00Z")
+    assert code == 0 and out["ok"] is True and out["count"] == 3
+
+
+def test_a_failed_amendment_to_an_older_report_is_retried(monkeypatch, tmp_path):
+    """Verification P2-6: an accepted report 95, a failed amended copy, newer reports 97 and 98; the amendment is
+    tried again on the re-read cadence and, once read, replaces 95 with no duplicate."""
+    links = {95: "https://example.org/95th-Quarterly-Report.pdf", 97: "https://example.org/97th-Quarterly-Report.pdf",
+             98: "https://example.org/98th-Quarterly-Report.pdf"}
+    amended = "https://example.org/95th-Quarterly-Report-amended.pdf"
+    _pdf_state(monkeypatch, {b"good": [SUMMARY, TABLE_N, TABLE_S], b"bad": [SUMMARY, TABLE_N]})
+    _live(monkeypatch, tmp_path, links, {u: b"good" for u in links.values()})
+    assert _run_at(monkeypatch, tmp_path, "2026-11-01T00:00:00Z")[0] == 0
+    _live(monkeypatch, tmp_path, {**links, 95: amended}, {**{u: b"good" for u in links.values()}, amended: b"bad"})
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-02T00:00:00Z")
+    assert code == 1 and "95" in out["meta"]["pending"] and out["count"] == 9
+    state = json.loads((tmp_path / "state.json").read_text())
+    assert (95, amended) in Q.due(state, {**links, 95: amended}, "2027-03-01T00:00:00Z")
+    _live(monkeypatch, tmp_path, {**links, 95: amended}, {**{u: b"good" for u in links.values()}, amended: b"good"})
+    code, out = _run_at(monkeypatch, tmp_path, "2027-03-01T00:00:00Z")
+    assert code == 0 and out["ok"] is True and out["count"] == 9
+    assert len({r["source_record_id"] for r in out["records"]}) == 9
+    assert {r["source_url"] for r in out["records"] if r["raw"]["report"] == 95} == {amended}

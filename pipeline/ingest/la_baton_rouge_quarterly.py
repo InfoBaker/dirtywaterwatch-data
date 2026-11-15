@@ -39,6 +39,9 @@ Cadence and lag
   SHA-256 and every read (attempts). A report is fetched when its number is new or its address changed, and the
   newest two again every REREAD_DAYS (an amended copy at the same address); --refresh reads all again. A copy that
   fails the layout check never replaces an accepted one: the accepted copy stays and the run is ok=False, naming it.
+  Every failed read (a fetch error, a failed check, a failed amendment) stays in state 'pending' (meta.pending) until a
+  read of that report succeeds: each run is ok=False while anything is pending (last_ok_at does not advance), and a
+  pending report is tried again every REREAD_DAYS whatever its number.
   Each record's fetched_at is when its report was read. Reports are issued about a month after the quarter ends, so a row is one to four
   months old when it appears. FIRST_REPORT (91, October to December 2024) bounds the backfill.
 
@@ -249,7 +252,25 @@ def migrate(state: dict) -> dict:
     if any(str(k).startswith("http") or "/" in str(k) for k in reps):
         state["reports"] = {str(v.get("number")): {**v, "url": v.get("url") or k} for k, v in reps.items()}
     state.setdefault("reports", {})
+    pend = state.setdefault("pending", {})
+    for k, v in state["reports"].items():
+        # a state file from before pending was kept: a report with no accepted copy is unresolved since its last read
+        if not v.get("layout_ok") and k not in pend:
+            pend[k] = {"url": v.get("url"), "reason": unread_reason(v), "since": v.get("read_at"),
+                       "last_tried": v.get("read_at")}
     return state
+
+
+def note_failure(state: dict, number: int, url: str, reason: str, at: str) -> None:
+    """A failed read of a report (a fetch error, a copy that fails the layout check, a rejected amendment) stays
+    pending, whether or not an accepted copy is kept, until a read of that report succeeds: the run is not ok while
+    anything is pending, and a pending report is tried again on the re-read cadence (due)."""
+    prev = state.setdefault("pending", {}).get(str(number)) or {}
+    state["pending"][str(number)] = {"url": url, "reason": reason, "since": prev.get("since") or at, "last_tried": at}
+
+
+def note_success(state: dict, number: int) -> None:
+    state.setdefault("pending", {}).pop(str(number), None)
 
 
 def read_report(state: dict, url: str, number: int, content: bytes, at: str) -> tuple[dict, str | None]:
@@ -302,13 +323,16 @@ def due(state: dict, links: dict[int, str], now: str, refresh: bool = False) -> 
         if n < FIRST_REPORT:
             continue
         rep = state["reports"].get(str(n))
+        pend = (state.get("pending") or {}).get(str(n))
         tried = {a.get("url") for a in (rep or {}).get("attempts", [])} | {(rep or {}).get("url")}
         if refresh or rep is None or url not in tried:
             out.append((n, url))
             continue
-        # a report with no accepted copy is tried again on the re-read cadence, whatever its number
-        unread = not rep.get("layout_ok")
-        last = max([a.get("read_at") or "" for a in rep.get("attempts", [])] + [rep.get("read_at") or ""])
+        # a report with no accepted copy, or whose last read failed (an amended copy that could not be read, with
+        # the older accepted copy kept), is tried again on the re-read cadence, whatever its number
+        unread = not rep.get("layout_ok") or pend is not None
+        last = max([a.get("read_at") or "" for a in rep.get("attempts", [])] + [rep.get("read_at") or "",
+                                                                                (pend or {}).get("last_tried") or ""])
         try:
             age = (_dt.fromisoformat(now.replace("Z", "+00:00")) - _dt.fromisoformat(last.replace("Z", "+00:00"))).days
         except ValueError:
@@ -325,10 +349,13 @@ def main(argv=None) -> int:
     errors = []
     if "--file" in argv:
         url = argv[argv.index("--url") + 1] if "--url" in argv else Path(argv[argv.index("--file") + 1]).name
-        _, err = read_report(state, url, int(argv[argv.index("--report") + 1]),
-                             Path(argv[argv.index("--file") + 1]).read_bytes(), at)
+        n = int(argv[argv.index("--report") + 1])
+        _, err = read_report(state, url, n, Path(argv[argv.index("--file") + 1]).read_bytes(), at)
         if err:
             errors.append(err)
+            note_failure(state, n, url, err, at)
+        else:
+            note_success(state, n)
     else:
         try:
             r = requests.get(INDEX, headers=HEADERS, timeout=120)
@@ -345,8 +372,12 @@ def main(argv=None) -> int:
                 _, err = read_report(state, url, n, pr.content, at)
                 if err:
                     errors.append(err)
+                    note_failure(state, n, url, err, at)
+                else:
+                    note_success(state, n)
             except Exception as e:                    # a report that cannot be read is named; the others go on
                 errors.append(f"report {n}: {type(e).__name__}: {e}")
+                note_failure(state, n, url, f"{type(e).__name__}: {e}", at)
         state["index_read_at"] = at
         state["index_reports"] = {str(k): v for k, v in sorted(links.items())}
     migrate(state)
@@ -364,8 +395,12 @@ def main(argv=None) -> int:
                                                "reason": unread_reason(v)}
                        for v in reps.values() if not v.get("layout_ok")},
             "errors": errors,
+            "pending": dict(sorted((state.get("pending") or {}).items())),
             "cadence": (f"the index with the refresh; a new report once, the newest two and any report with no accepted "
                         f"copy again every {REREAD_DAYS} days")}
+    # a failure not retried this run is still unresolved: the run stays not ok until a read of that report succeeds
+    errors += [f"report {k}: unresolved since {v.get('since')} ({v.get('reason')}); tried again on the re-read cadence"
+               for k, v in sorted((state.get("pending") or {}).items()) if v.get("last_tried") != at]
     if errors:
         # the records come from the accepted reports in the state file, so they are complete: written, but the run
         # is not ok (a failed fetch or a failed re-read is named)
