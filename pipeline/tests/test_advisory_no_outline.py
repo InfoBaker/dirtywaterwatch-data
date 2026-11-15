@@ -85,3 +85,13 @@ def test_an_advisory_with_no_point_on_a_water_with_no_outline_gets_no_invented_m
     st = _build(tmp_path, monkeypatch, [rec], {slug: _lake(slug, "ND")}, "ND")
     assert st["waters"][slug]["status"] == "red"
     assert [p for p in st["advisory_points"] if p["event_id"] == rec["event_id"]] == []
+
+
+def test_a_marker_on_a_water_that_is_not_coloured_whole_keeps_its_reason(tmp_path, monkeypatch):
+    # a beach advisory on a bay with no outline was a marker already: its reason is unchanged
+    slug = "example-bay-oh"
+    rec = _record("OH", slug, event_type="beach_advisory")
+    bay = {**_lake(slug, "OH"), "name": "Example Bay", "kind": "bay"}
+    st = _build(tmp_path, monkeypatch, [rec], {slug: bay}, "OH")
+    pts = [p for p in st["advisory_points"] if p["event_id"] == rec["event_id"]]
+    assert len(pts) == 1 and pts[0]["why"] == "water is not a lake, pond or reservoir under 50 km²"
