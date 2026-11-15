@@ -440,3 +440,47 @@ def test_every_named_water_is_placed_and_a_kdhe_river_advisory_gets_a_cited_poin
     assert pl[f"{A.SOURCE_ID}:2-samplecreek"]["water_slugs"] == ["sample-creek-ks"]
     assert f"{A.SOURCE_ID}:3-nowherecreek" in {e["event_id"] if isinstance(e, dict) else e
                                                 for e in st["unplaced_events"]}
+
+
+def test_kdhe_confirms_only_while_its_own_release_is_in_the_feed_and_reconciles_revisions():
+    """Re-review P1-4."""
+    issue = ("Stream Advisory Issued for Example Creek in Shawnee County", "50", "Mon, 02 Nov 2026 09:00:00 -0600",
+             "KDHE issued a stream advisory after a sewage discharge.")
+    older = ("Stream Advisory Rescinded for Other Creek in Example County", "40", "Mon, 26 Oct 2026 09:00:00 -0600", "x")
+    first, _ = A.run(_feed(issue, older), [], "2026-11-02T18:00:00Z")
+    # the issue is gone; an unrelated older item remains: no confirmation
+    recs, _ = A.run(_feed(older), first, "2026-11-20T18:00:00Z")
+    r = {x["source_record_id"]: x for x in recs}["50-examplecreek"]
+    assert r["status"] == "advisory_active" and r["raw"]["_last_seen_in_source"] == "2026-11-02T18:00:00Z"
+    # repeated unchanged reads are idempotent
+    again, _ = A.run(_feed(issue, older), first, "2026-11-02T19:00:00Z")
+    again2, _ = A.run(_feed(issue, older), again, "2026-11-02T20:00:00Z")
+    assert len(again2) == 1 and again2[0]["started_at"] == first[0]["started_at"]
+    # KDHE revises the release: Sample Creek in Douglas County, a later pubDate
+    rev = ("Stream Advisory Issued for Sample Creek in Douglas County", "50", "Tue, 03 Nov 2026 09:00:00 -0600",
+           "KDHE issued a stream advisory after a wastewater discharge.")
+    recs, stats = A.run(_feed(rev), first, "2026-11-03T18:00:00Z")
+    by = {x["source_record_id"]: x for x in recs}
+    assert by["50-examplecreek"]["status"] == "advisory_lifted" and by["50-examplecreek"]["raw"]["revised_out"] is True
+    assert by["50-examplecreek"]["ended_at"] == "2026-11-03T18:00:00Z"
+    assert by["50-examplecreek"]["raw"]["ended_at_precision"] == "poll"
+    s = by["50-samplecreek"]
+    assert s["status"] == "advisory_active" and s["raw"]["county"] == "Douglas County" and stats["revised_out"] == 1
+    # the same water, the county and date revised: the earliest publication stays the start
+    rev2 = ("Stream Advisory Issued for Example Creek in Douglas County", "50", "Wed, 04 Nov 2026 09:00:00 -0600", "x")
+    recs2, _ = A.run(_feed(rev2), first, "2026-11-04T18:00:00Z")
+    e = {x["source_record_id"]: x for x in recs2}["50-examplecreek"]
+    assert e["raw"]["county"] == "Douglas County" and e["started_at"] == "2026-11-02T09:00:00-06:00"
+    assert e["raw"]["publication_times_seen"] == ["2026-11-02T09:00:00-06:00", "2026-11-04T09:00:00-06:00"]
+
+
+def test_a_county_less_rescission_lifts_only_when_one_county_holds_the_water():
+    two = _feed(("Stream Advisory Issued for Alpha Creek in Shawnee County", "1", "Mon, 02 Nov 2026 09:00:00 -0600", "s"),
+                ("Stream Advisory Issued for Alpha Creek in Riley County", "2", "Mon, 02 Nov 2026 10:00:00 -0600", "s"),
+                ("Stream Advisory Rescinded for Alpha Creek", "3", "Wed, 04 Nov 2026 09:00:00 -0600", "Rescinded."))
+    recs, stats = A.run(two, [], AT)
+    assert {r["status"] for r in recs} == {"advisory_active"} and stats["rescissions_ambiguous"] == 1
+    one = _feed(("Stream Advisory Issued for Alpha Creek in Shawnee County", "1", "Mon, 02 Nov 2026 09:00:00 -0600", "s"),
+                ("Stream Advisory Rescinded for Alpha Creek", "3", "Wed, 04 Nov 2026 09:00:00 -0600", "Rescinded."))
+    recs, stats = A.run(one, [], AT)
+    assert [r["status"] for r in recs] == ["advisory_lifted"] and stats["rescissions_ambiguous"] == 0
