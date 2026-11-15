@@ -169,3 +169,81 @@ def test_adding_kansas_changes_no_other_states_record(monkeypatch):
     assert with_ks == without_ks and len(with_ks) >= 3
     ks = [r for r in kept if str(r.get("npdes_permit")).startswith("KS")]
     assert len(ks) == 1 and "Sherman County" in ks[0]["raw"]["timezone_note"]
+
+
+# ------------------------------------------------------------------------------------------------ P2-3 reservoirs
+
+import pytest                                                      # noqa: E402
+
+from build import status as S                                      # noqa: E402
+from ingest import waters_from_nhd as N                            # noqa: E402
+from tests.test_remainder_rulings import _existing, _target, line  # noqa: E402
+
+
+@pytest.fixture
+def _no_obl(monkeypatch, tmp_path):
+    S._GEOM_CACHE.clear()
+    monkeypatch.setattr(S, "OBL_WATER_DIR", tmp_path / "none")
+    yield
+    S._GEOM_CACHE.clear()
+
+
+def test_a_river_record_on_its_reservoir_keeps_the_stretch_beside_its_river_record(monkeypatch, _no_obl):
+    """side_channels False: the part on the reservoir is the reservoir's, and the true remainder that adjoins the river
+    record it was cut from (within SIDE_CHANNEL_M of it) stays, where a braid ruling would have dropped it."""
+    ruling = {"to": "example-river-xx", "on": ["example-lake-xx"], "why": "invented"}
+    # the copy: 22 km through the lake, then 16 km of river from the lake down to 0.5 km short of the river record
+    geom = {"type": "MultiLineString", "coordinates": [[[-95.0, 46.6], [-95.0, 46.8]], [[-95.0, 46.6], [-95.0, 46.455]]]}
+    for flag, kept in ((False, True), (True, False)):
+        monkeypatch.setattr(N, "REMAINDER_ON", {("KS", 222): {**ruling, "side_channels": flag}})
+        S._GEOM_CACHE.clear()
+        rows = [{"slug": "example-river-lake-ks", "name": "Example River", "kind": "river", "state": "KS",
+                 "gnis_id": "222", "covers_part_of": "example-river-xx", "geometry": geom}]
+        acts = N.recheck_remainders(rows, [_target("example-river-lake-ks")], _existing(), "2026-11-15")
+        if kept:
+            assert [a["action"] for a in acts] == ["recut"] and 15.0 < rows[0]["length_km"] < 16.5
+            assert rows[0]["bbox"][3] < 46.6
+        else:
+            assert [a["action"] for a in acts] == ["dropped"]
+
+
+def test_a_ruled_record_that_is_no_remainder_is_cut_against_its_reservoir(monkeypatch, _no_obl):
+    monkeypatch.setattr(N, "REMAINDER_ON", {("KS", 333): {"to": "example-lake-xx", "on": ["example-lake-xx"],
+                                                          "side_channels": False, "why": "invented"}})
+    rows = [{"slug": "example-creek-ks", "name": "Example Creek", "kind": "river", "state": "KS", "gnis_id": "333",
+             "geometry": {"type": "MultiLineString", "coordinates": [[[-95.0, 46.6], [-95.0, 46.8]],
+                                                                     [[-94.5, 47.0], [-94.5, 47.09]]]}},
+            {"slug": "other-creek-ks", "name": "Other Creek", "kind": "river", "state": "KS", "gnis_id": "444",
+             "geometry": {"type": "MultiLineString", "coordinates": [[[-95.0, 46.6], [-95.0, 46.8]]]}}]
+    acts = N.recheck_remainders(rows, [], _existing(), "2026-11-15")
+    assert [(a["slug"], a["action"]) for a in acts] == [("example-creek-ks", "recut")]
+    assert 9.0 < rows[0]["length_km"] < 11.0 and rows[1]["geometry"]["coordinates"] == [[[-95.0, 46.6], [-95.0, 46.8]]]
+
+
+KS_RULED = {"republican-river-republican-ks": 485443, "big-blue-river-grant-ks": 485505,
+            "cottonwood-river-falls-ks": 477526, "neosho-river-council-grove-ks": 1095788,
+            "verdigris-river-neodesha-ks": 1099243, "wakarusa-river-auburn-ks": 482756, "bull-creek-ks": 479723,
+            "marais-des-cygnes-river-reading-ks": 477714, "big-hill-creek-liberty-ks": 469680}
+
+
+def test_the_nine_kansas_records_are_ruled_and_cut_in_the_file():
+    nhd = {w["slug"]: w for w in json.loads((ROOT / "data" / "waters-nhd.json").read_text())["waters"]}
+    for slug, gnis in KS_RULED.items():
+        hand = N.REMAINDER_ON[("KS", gnis)]
+        assert hand["side_channels"] is False and "KS go-live audit 2026-11-15" in hand["why"]
+        assert N.gnis_num(nhd[slug]["gnis_id"]) == gnis
+    assert nhd["republican-river-republican-ks"]["length_km"] < 2.0          # 7.3 km, 80 per cent on Milford Lake
+    assert nhd["cottonwood-river-falls-ks"]["kind"] == "river"
+
+
+# ------------------------------------------------------------------------------------------------ P2-4 Jersey Creek
+
+def test_jersey_creek_has_a_cited_record_and_kansas_city_kansas_outfalls_are_tied_to_it():
+    spec = [h for h in N.HAND if h["name"] == "Jersey Creek" and h["state"] == "KS"]
+    assert len(spec) == 1 and spec[0]["gnis_id"] == "478633" and "KS0038563" in spec[0]["why"]
+    w = {x["slug"]: x for x in json.loads((ROOT / "data" / "waters-nhd.json").read_text())["waters"]}["jersey-creek-ks"]
+    assert w["hand"] and w["gnis_id"] == "478633" and w["state"] == "KS" and "NHD" in w["note"]
+    from common import load_outfall_registry
+    tied = [o for o in load_outfall_registry(ROOT / "data") if o.get("npdes_permit") == "KS0038563"
+            and o.get("water_slug") == "jersey-creek-ks"]
+    assert len(tied) == 25
