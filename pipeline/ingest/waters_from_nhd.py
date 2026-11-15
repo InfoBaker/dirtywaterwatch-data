@@ -184,7 +184,8 @@ from shapely.ops import linemerge, unary_union
 from shapely.strtree import STRtree
 
 from build import status as S
-from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, ROOT, gnis_num, now_iso, same_gnis, read_json, write_json
+from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, ROOT, gnis_num, now_iso, same_gnis, read_json,
+                    write_json, write_rows_json)
 from ingest import waters_extra as WX
 
 NLDI_HYDROLOCATION = "https://api.water.usgs.gov/nldi/linked-data/hydrolocation"
@@ -2756,7 +2757,7 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
     rechecked += recheck_osm_lakes(rows, targets_rows)
     if rechecked:
         problems = list(problems) + [f"{a['slug']}: {a['action']} ({a['why']})" for a in rechecked]
-    write_json(OUT, {
+    write_rows_json(OUT, {
         "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); "
                   "hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the "
                   "Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); "
@@ -4552,7 +4553,7 @@ def tidy_main(states, path=None, aliases_path=None) -> int:
     new["stats"] = {**(new.get("stats") or {}), "state_builds": dict(sorted(builds.items()))}
     if actions or voiced:
         new["count"] = len(new["waters"])
-        write_json(path, new)
+        write_rows_json(path, new)
     if aliases:
         cur = read_json(aliases_path) or {}
         for k, v in aliases.items():

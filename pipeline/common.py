@@ -138,6 +138,40 @@ def write_json(path: Path, obj) -> None:
     tmp.replace(path)
 
 
+# The row lists of a large registry file (data/waters-nhd.json) that dumps_rows writes one row per line.
+ROW_LIST_KEYS = ("waters", "targets", "skipped", "problems")
+
+
+def dumps_rows(obj, row_keys=ROW_LIST_KEYS) -> str:
+    """A JSON document laid out to stay small and still diff by record (data/waters-nhd.json, 2026-11-15: at indent=1
+    every coordinate took its own line and the file passed GitHub's 100 MB limit). The top-level keys keep their order;
+    each list under row_keys is written one row per line with compact separators; every other value (the header
+    strings, stats) is written at indent=1 as before. ensure_ascii=False, default=str (as write_json); the same data
+    gives the same bytes; the text ends with one newline. json.loads gives back exactly what json.loads of the
+    indent=1 file gave. A value that is not a non-empty dict is written at indent=1 (with the newline)."""
+    if not isinstance(obj, dict) or not obj:
+        return json.dumps(obj, indent=1, ensure_ascii=False, default=str) + "\n"
+    parts = []
+    for k, v in obj.items():
+        key = json.dumps(k if isinstance(k, str) else str(k), ensure_ascii=False)
+        if k in row_keys and isinstance(v, list):
+            body = ("[\n" + ",\n".join("  " + json.dumps(x, separators=(",", ":"), ensure_ascii=False, default=str)
+                                       for x in v) + "\n ]") if v else "[]"
+        else:
+            # indent=1 nested one level down (a string holds no raw newline: json escapes it)
+            body = json.dumps(v, indent=1, ensure_ascii=False, default=str).replace("\n", "\n ")
+        parts.append(f" {key}: {body}")
+    return "{\n" + ",\n".join(parts) + "\n}\n"
+
+
+def write_rows_json(path: Path, obj, row_keys=ROW_LIST_KEYS) -> None:
+    """write_json with the dumps_rows layout: every writer of data/waters-nhd.json goes through here."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(dumps_rows(obj, row_keys))
+    tmp.replace(path)
+
+
 def read_json(path: Path, default=None):
     return json.loads(path.read_text()) if path.exists() else default
 

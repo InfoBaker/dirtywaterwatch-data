@@ -98,7 +98,8 @@ def run(state: str, dry_run: bool = False, doc: dict | None = None, state_shape=
     doc["problems"] = [p for p in doc.get("problems") or []
                        if not (p.split(":", 1)[0] in done and f"outside {state} bbox" in p and inside(p.split(":", 1)[0]))]
     if write and not dry_run and changed:
-        WATERS.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n")
+        from common import write_rows_json      # the file's one layout (common.dumps_rows)
+        write_rows_json(WATERS, doc)
     return {"changed": changed, "problems": doc["problems"]}
 
 
