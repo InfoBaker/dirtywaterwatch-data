@@ -366,15 +366,31 @@ def round_text_coords(text):
     return COORDS.sub(lambda m: f"(coordinates {round(float(m.group(1)), 3)}, {round(float(m.group(2)), 3)})", text)
 
 
-def hab_water(text: str) -> tuple[str, str | None]:
-    """(the water's name, the qualifier DEQ adds): "Lake Catherine - Spencer Bay *" -> ("Lake Catherine", "Spencer
-    Bay"); "Huston Lake on Big Huston Creek" -> ("Huston Lake", "on Big Huston Creek"); the star and a coordinate
-    note are not part of the name."""
+# "on Big Huston Creek", "near Exampleville" after a lake's name: where the lake lies (the stream it is on, the town
+# near it), not a part of it; the advisory is DEQ's for the whole lake (verification 2026-11-15 P2-7). After a river's
+# name it stays a part (its stretch near the town), and "by ...", a bay or an arm after a dash, stay a part.
+LOCATOR = re.compile(rf"^(?:on\s+(?:{CAP}\s+)+{WATER_WORD}|near\s+(?:{CAP}\s*)+)$")
+
+
+def hab_parts(text: str) -> tuple[str, str | None, str | None]:
+    """(the water's name, the part of it DEQ names, where DEQ says it lies): "Lake Catherine - Spencer Bay *" ->
+    ("Lake Catherine", "Spencer Bay", None); "Huston Lake on Big Huston Creek" -> ("Huston Lake", None, "on Big
+    Huston Creek"); the star and a coordinate note are not part of the name."""
     t = COORDS.sub("", text or "").replace("’", "'").rstrip(" *").strip()
     m = re.match(r"^(.*?)\s+(?:-\s+(.+)|((?:on|near|by)\s+.+))$", t)
     if m and not t.lower().startswith("stream"):
-        return m.group(1).strip(), (m.group(2) or m.group(3)).strip()
-    return t, None
+        extra = (m.group(2) or m.group(3)).strip()
+        if m.group(3) and LOCATOR.match(extra) and re.search(r"\b(?:lake|reservoir|pond)\b", m.group(1), re.I):
+            # only a lake is located so: "Sample River near Exampleville" is the river's stretch near the town
+            return m.group(1).strip(), None, extra
+        return m.group(1).strip(), extra, None
+    return t, None, None
+
+
+def hab_water(text: str) -> tuple[str, str | None]:
+    """(the water's name, the part of it DEQ names): hab_parts without the locator."""
+    name, qualifier, _ = hab_parts(text)
+    return name, qualifier
 
 
 def hab_counties(text: str) -> list[str]:
@@ -393,7 +409,7 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     _local_midnights(rec)
     raw_name = F.clean(row.get("waterbody"))
     star = raw_name.endswith("*")
-    name, qualifier = hab_water(raw_name)
+    name, qualifier, locator = hab_parts(raw_name)
     rec["event_type"] = "hab_advisory"
     described = bool(DESCRIBED.match(name or ""))
     if described:
@@ -406,6 +422,9 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     if qualifier:
         # "Lake Catherine - Spencer Bay": DEQ's advisory is for part of the lake, never the whole lake's colour
         notes["_water_qualifier"] = qualifier
+    if locator:
+        # "Huston Lake on Big Huston Creek": where the lake lies; the advisory is for the whole lake
+        notes["_water_locator"] = locator
     counties = hab_counties(row.get("county"))
     if counties:
         notes["county"] = f"{counties[0]} County"
