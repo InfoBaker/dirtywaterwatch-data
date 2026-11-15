@@ -359,7 +359,7 @@ def test_state_text_is_in_the_page_shape():
     assert "press release" in t and "Appendix B" in t and "whichever is later" in t
     assert "onto the ground where the public has access" in t and "Wastewater Branch" in t
     assert not re.search(r"\b(owner|decision|coordinator)\b", t, re.I)
-    assert "Brown Water Advisories" in t and "contiguous United States" in t
+    assert "Brown Water Advisories" in t and "the federal inventory lists none in Hawaii" in t
 
 
 def check_missing_waters(d: dict, national: dict) -> None:
