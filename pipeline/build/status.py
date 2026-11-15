@@ -2642,6 +2642,11 @@ def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None
                                        "(no authority window applies)", "source": source}
 
 
+# sources whose poll-clock advisories keep closed observation periods in raw._advisory_observed.earlier_periods
+# (Nebraska's BeachWatch; Indiana's algae samples, re-review 2026-11-14 P2-3)
+EARLIER_PERIOD_SOURCES = frozenset({"ne-dwee-beachwatch", "in-idem-cyanobacteria"})
+
+
 def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None = None,
                     rules: dict | None = None) -> list[dict]:
     """The colour intervals one event sets on a water (its state, and the water record for the
@@ -2651,7 +2656,7 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
     rules = load_rules() if rules is None else rules
     earlier = []
     raw = ev.get("raw") or {}
-    if ev.get("source_id") == "ne-dwee-beachwatch" and ev.get("sampled_at") \
+    if ev.get("source_id") in EARLIER_PERIOD_SOURCES and ev.get("sampled_at") \
             and ev.get("time_precision") == "poll" and raw.get("_advisory_clock_version") == 1:
         # A corrected flag can reopen the same source sample. Replay its closed observation periods separately,
         # through the same age-out rules as the current one, without filling the observed inactive gaps.
