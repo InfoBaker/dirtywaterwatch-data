@@ -100,6 +100,37 @@ def test_delta_014_lies_among_the_permits_other_outfalls_and_epas_wrong_reach_is
     assert o["epa_reach_id"] == "4050001002139" and not o.get("reach_id")
 
 
+@pytest.mark.parametrize("key", [BELMONT, FORT_WAYNE])
+def test_an_indiana_outfall_idem_lists_without_a_point_has_epas_point_for_the_same_feature(committed, key):
+    o = _row(committed, key)
+    # EPA's point for the same permit feature, at three decimals as every point of data/outfalls-in.json is
+    # (scripts/build_in_outfalls.py, Indiana review 2026-11-14 P1-5); the citation gives EPA's full value
+    assert (o["lat"], o["lon"]) == FIXED[key] == (round(ICIS[key][0], 3), round(ICIS[key][1], 3))
+    plant = next(r for r in json.loads((DATA / "outfalls-plants-us.json").read_text())["outfalls"]
+                 if (r.get("npdes_permit"), r.get("outfall")) == key)
+    assert (plant["lat"], plant["lon"]) == ICIS[key] and plant["coords_from"] == "permitted_feature"
+    assert f"{ICIS[key][0]}, {ICIS[key][1]}" in o["coords_source"]["name"]
+    assert o["coords_from"] == "EPA permitted feature (IDEM's layer gives no point)" and "point_note" not in o
+    assert "OBJECTID" in o["coords_source"]["name"] and o["coords_source"]["by"].startswith("scripts/outfall_point")
+
+
+@pytest.mark.parametrize("key", NO_POINT)
+def test_an_indiana_outfall_no_source_places_says_what_was_searched(committed, key):
+    o = _row(committed, key)
+    assert o["lat"] is None and o["lon"] is None
+    r = o["no_point_reason"]
+    assert "IDEM's CSO outfall layer" in r and "EPA's map of active combined sewer outfalls" in r
+    assert "NPDES outfall layer" in r and "No point is used" in r
+
+
+def test_no_open_indiana_combined_sewer_outfall_is_without_a_point_and_a_reason():
+    rows = [o for o in common.load_outfall_registry(provisional=False) if o.get("state") == "IN"
+            and o["outfall_kind"] == "cso" and not str(o.get("outfall_status") or "").upper().startswith("CLS")]
+    assert rows
+    assert [(o["npdes_permit"], o["outfall"]) for o in rows if o.get("lat") is None
+            and not o.get("no_point_reason") and not o.get("coords_problem")] == []
+
+
 @pytest.mark.parametrize("set_aside", [False, True])
 def test_a_rebuilt_row_from_epas_data_is_corrected_again(mod, committed, set_aside):
     for key in (OH, KY):
@@ -109,6 +140,25 @@ def test_a_rebuilt_row_from_epas_data_is_corrected_again(mod, committed, set_asi
         assert bad == [] and moved == rows
         assert mod.problems("sign", rows[0], mod.SIGN[(FILE[key], *key)]) == []
         assert (rows[0]["lat"], rows[0]["lon"]) == FIXED[key] and (rows[0]["epa_lat"], rows[0]["epa_lon"]) == EPA[key]
+
+
+def test_the_indiana_rows_as_the_builder_writes_them_are_corrected_again(mod, committed):
+    rows = []
+    for key in (BELMONT, FORT_WAYNE):
+        o = _strip(_row(committed, key))
+        o.update(lat=None, lon=None, coords_from=None)
+        rows.append(o)
+    for key in NO_POINT:
+        o = dict(_row(committed, key))
+        o.pop("no_point_reason")
+        rows.append(o)
+    docs = {"outfalls-in.json": {"outfalls": rows}}
+    moved, bad = mod.apply_rows("outfalls-in.json", rows)
+    assert bad == [] and [(o["npdes_permit"], o["outfall"]) for o in moved] == [BELMONT, FORT_WAYNE]
+    for key in (BELMONT, FORT_WAYNE):
+        assert (_row(docs, key)["lat"], _row(docs, key)["lon"]) == FIXED[key]
+    for key in NO_POINT:
+        assert _row(docs, key)["no_point_reason"] == mod.NO_POINT[("outfalls-in.json", *key)][1]
 
 
 def test_a_rerun_on_the_committed_files_changes_nothing(mod, committed):
@@ -122,6 +172,9 @@ def test_a_rerun_on_the_committed_files_changes_nothing(mod, committed):
 @pytest.mark.parametrize("key,change", [
     (OH, {"lat": 41.6, "lon": 83.99}),                       # EPA's point changed: look at it, do not overwrite
     (KY, {"lon": -83.9, "epa_lat": None}),
+    (BELMONT, {"lat": 39.7, "lon": -86.2}),                  # a point from somewhere else now
+    (("IN0032468", "022"), {"lat": 40.4, "lon": -86.9}),     # a row that gained a point
+    (("IN0020001", "102"), {"outfall_name": "Main Street"}),
 ])
 def test_changed_evidence_is_reported_and_the_row_left_as_it_is(mod, committed, key, change):
     o = {**_row(committed, key), **change}
@@ -137,9 +190,11 @@ def test_check_catches_a_row_put_back_and_epas_reach_restored(mod, committed):
     o = _row(docs, OH)
     o["reach_id"] = o["epa_reach_id"]
     _row(docs, KY)["coords_problem"] = "restored by hand"
+    _row(docs, ("IN0020133", "005")).pop("no_point_reason")
     bad = mod.check(docs)
     assert any("OH0020974 014" in b and "reach" in b for b in bad)
     assert any("KYP000081 001" in b and "coords_problem" in b for b in bad)
+    assert any("IN0020133 005" in b for b in bad)
 
 
 def test_a_failed_run_writes_nothing(mod, committed, tmp_path, monkeypatch):
@@ -165,6 +220,22 @@ def test_the_kentucky_builder_writes_the_correction_again(committed, tmp_path, m
     o = json.loads((tmp_path / "outfalls-ky.json").read_text())["outfalls"][0]
     assert (o["lat"], o["lon"]) == FIXED[KY] and (o["epa_lat"], o["epa_lon"]) == EPA[KY]
     assert o["outfall_kind"] == "other" and "coords_problem" not in o
+
+
+def test_the_indiana_builder_writes_the_corrections_again(committed):
+    bi = _load("build_in_outfalls")
+    feats = []
+    for oid, (p, n), text in ((383, BELMONT, "005 -- CSO"), (238, FORT_WAYNE, "001 -- CSO - EPA requested 5/2005")):
+        feats.append({"attributes": {"OBJECTID": oid, "NPDES_Number": p, "CSO_Number": text, "Status": "Active",
+                                     "Wastewater_Type": "Untreated CSO"}, "geometry": None})
+    epa = [{"npdes_permit": p, "outfall": n, "state": "IN", "outfall_status": "CSO|DSW|SW", "coords_from": "facility",
+            "lat": 40.0, "lon": -85.0, "outfall_name": _row(committed, (p, n))["outfall_name"]} for p, n in NO_POINT]
+    out = bi.build({"features": feats}, epa, "2026-11-15T00:00:00Z")
+    got = {(o["npdes_permit"], o["outfall"]): o for o in out["outfalls"]}
+    for key in (BELMONT, FORT_WAYNE):
+        assert (got[key]["lat"], got[key]["lon"]) == FIXED[key]
+    for key in NO_POINT:
+        assert got[key]["lat"] is None and got[key]["no_point_reason"].startswith("EPA's national CSO inventory")
 
 
 def test_the_national_build_calls_the_corrections_before_it_writes():

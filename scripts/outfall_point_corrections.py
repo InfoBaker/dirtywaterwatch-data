@@ -76,7 +76,23 @@ SIGN = {
 }
 
 # (file, permit, outfall): the point, coords_from, coords_note, the source read
-FEATURE: dict = {}
+FEATURE = {
+    ("outfalls-in.json", "IN0023183", "005"): (
+        (39.726, -86.19), "EPA permitted feature (IDEM's layer gives no point)",
+        "IDEM's layer lists outfall 005 ('CSO', Active, Treated CSO) without a point, and EPA's CSO inventory does not "
+        "list it; EPA's ICIS gives the permit's feature 005 its own point (EPA's discharge-point file, the Belmont "
+        "plant's outfall to the West Fork White River), used here at three decimals, as every point of this file is",
+        {"name": IDEM_LAYER + ", OBJECTID 383; " + DISCHARGE_POINTS + ": 39.726167, -86.190389",
+         "url": "https://echo.epa.gov/detailed-facility-report?fid=110011829129", "read_at": READ}),
+    ("outfalls-in.json", "IN0032191", "001"): (
+        (41.078, -85.098), "EPA permitted feature (IDEM's layer gives no point)",
+        "IDEM's layer lists outfall 001 ('CSO - EPA requested 5/2005', Active, Untreated CSO) without a point, and EPA's "
+        "CSO inventory does not list it; EPA's ICIS gives the permit's feature 001 its own point, and that feature "
+        "carries the limit set 'CSO - EPA requested 05/2005' beside the plant's main outfall (EPA's discharge-point "
+        "file; " + OUTFALL_LAYER + ": the same point), used here at three decimals, as every point of this file is",
+        {"name": IDEM_LAYER + ", OBJECTID 238; " + DISCHARGE_POINTS + ": 41.0775, -85.097778; " + OUTFALL_LAYER,
+         "url": "https://echo.epa.gov/detailed-facility-report?fid=110009390756", "read_at": READ}),
+}
 
 
 def _searched(idem: str, cso: str, outfalls: str) -> str:
@@ -86,7 +102,18 @@ def _searched(idem: str, cso: str, outfalls: str) -> str:
 
 
 # (file, permit, outfall): EPA's outfall text, no_point_reason
-NO_POINT: dict = {}
+NO_POINT = {
+    ("outfalls-in.json", "IN0020001", "102"): ("", _searched(
+        "five Ridgeville points (002, 003, 004 twice, 101), none 102", "004 and 101 for this permit",
+        "features 001 to 004 and 101")),
+    ("outfalls-in.json", "IN0020133", "002"): ("", _searched(
+        "one Greensburg point (006, inactive)", "007 for this permit", "features 001, 006 and 007")),
+    ("outfalls-in.json", "IN0020133", "005"): ("", _searched(
+        "one Greensburg point (006, inactive)", "007 for this permit", "features 001, 006 and 007")),
+    ("outfalls-in.json", "IN0032468", "022"): ("CSO - Greenbush St bending weir (emergency overflow)", _searched(
+        "thirteen Lafayette points, none 022", "ten outfalls for this permit, not 022",
+        "seventeen features, not 022 (ECHO's effluent service lists feature 022's monitoring, without a location)")),
+}
 
 GONE = ("coords_problem", "echo_lat", "echo_lon", "echo_coords_from", "no_point_reason", "point_note")
 
