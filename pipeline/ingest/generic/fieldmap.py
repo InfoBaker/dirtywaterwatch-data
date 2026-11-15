@@ -794,7 +794,7 @@ def water_state_module(st: str) -> str | None:
 
 
 HISTORY_KEYS = {"keep_missing", "revisions", "track", "missing_key", "supersede", "supersede_unique",
-                "supersede_max_days", "supersede_typo", "confirm_while_listed"}
+                "supersede_max_days", "supersede_reviewed", "confirm_while_listed"}
 
 
 def validate(block: dict, source_id: str = "") -> list[str]:
@@ -929,6 +929,11 @@ def validate(block: dict, source_id: str = "") -> list[str]:
             continue
         for t in keys:
             errs += spec_errors(f"history.supersede[{i}]", {"template": t}, safe)
+    rv = h.get("supersede_reviewed")
+    if rv is not None and not (isinstance(rv, list) and all(
+            isinstance(x, dict) and set(x) == {"old", "new", "evidence"} and all(isinstance(v, str) and v.strip()
+                                                                                for v in x.values()) for x in rv)):
+        errs.append("history.supersede_reviewed is a list of {old, new, evidence} (source record ids and the evidence)")
     for k in ("max_error_share", "min_rows_ratio"):
         if k in block and not (isinstance(block[k], (int, float)) and 0 <= block[k] <= 1):
             errs.append(f"{k} is a share between 0 and 1")
