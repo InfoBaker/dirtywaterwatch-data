@@ -33,7 +33,8 @@ Records (rules only)
   - Place: the station's own point (the layer's Latitude and Longitude, rounded to three decimals: a public beach),
     joined by the beach's name (raw.unit_id); a beach of the history with no station keeps its name only
     (waterbody_text, placed by name). coord_source "station".
-  - Keys: the history's advisoryid ("adv-731"); the poll records "station-<UnitID>-<first poll date>".
+  - Keys: the history's advisoryid ("adv-731"); the poll records "station-<UnitID>-<first poll minute>", "-2", "-3" for
+    a reopening within the same minute. A poll episode a history row later covers is kept with duplicate_of that row.
 
 Privacy: the fields hold no person; DNREC's text goes through the Delaware scrubber (de_dnrec_derns.scrub). data/raw keeps the safe rows only.
 Cadence: hourly with the refresh (the history is updated as DNREC posts; the map in season). Run from pipeline/:
@@ -226,10 +227,12 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
     """The current-status snapshot: records opened and closed at polls (module docstring)."""
     # a history row in effect today, of the same kind as the map's status (an advisory, or DNREC's resampling label),
     # already carries it; a row aged out for want of an end (raw.status_basis) never does
-    open_hist = {(norm(r["raw"].get("unit_name")), "label" if r["raw"].get("_agency_label_only") else "advisory")
-                 for r in history
+    # (re-review P2-1: a history row with no end yet, still in effect, carries it too)
+    def hkey(r):
+        return norm(r["raw"].get("unit_name")), "label" if r["raw"].get("_agency_label_only") else "advisory"
+    open_hist = {hkey(r) for r in history
                  if r["status"] in ("advisory_active", "unknown") and not r["raw"].get("status_basis")
-                 and r.get("ended_at") and r["ended_at"] >= today.isoformat()
+                 and (not r.get("ended_at") or r["ended_at"] >= today.isoformat())
                  and (r.get("started_at") or "") <= today.isoformat()}
     state = {k: dict(v) for k, v in (prev.get("polls") or {}).items()}
     showing, explicit = {}, {}
@@ -242,7 +245,10 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
     for uid, (s, code) in showing.items():
         cur = next((v for v in state.values() if v["unit_id"] == uid and not v.get("ended_at") and v["code"] == code), None)
         if cur is None:
-            key = f"station-{uid}-{re.sub(r'[^0-9T]', '', fetched_at)[:13]}"
+            key = base = f"station-{uid}-{re.sub(r'[^0-9T]', '', fetched_at)[:13]}"
+            n = 2
+            while key in state:                              # a reopening within the same minute: its own episode
+                key, n = f"{base}-{n}", n + 1
             lat, lon = point(s)
             state[key] = {"unit_id": uid, "code": code, "name": s.get("UnitName"), "started_at": fetched_at,
                           "lat": lat, "lon": lon}
@@ -260,6 +266,13 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
     recs = []
     for key, v in sorted(state.items()):
         etype, kind = POLL_CODES[v["code"]]
+        # a history row that arrived later and covers this poll episode is DNREC's own record of it: the poll record is
+        # kept (its observations stay) but marked its duplicate, so the advisory is counted once (re-review P2-1)
+        day0 = v["started_at"][:10]
+        cover = next((r for r in history if hkey(r) == (norm(v["name"]), kind)
+                      and r["status"] in ("advisory_active", "advisory_lifted", "unknown")
+                      and not r["raw"].get("status_basis") and r.get("started_at")
+                      and r["started_at"] <= day0 and (not r.get("ended_at") or r["ended_at"] >= day0)), None)
         lat, lon = point({"Latitude": v.get("lat"), "Longitude": v.get("lon")})
         raw = {"state": "DE", "time_zone": "America/New_York", "unit_id": v["unit_id"], "unit_name": v["name"],
                "current_advisory_code": v["code"], "current_advisory_label": CODES[v["code"]],
@@ -280,7 +293,10 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
                           waterbody_text=beach_water(v["name"]) or v["name"], outfall_name=v["name"], lat=lat, lon=lon, coord_source="station",
                           coord_precision_m=100, started_at=v["started_at"], ended_at=v.get("ended_at"),
                           time_precision="poll", fetched_at=fetched_at, authority=AUTHORITY,
-                          source_url=BEACH_URL.format(v["unit_id"]), raw=raw))
+                          source_url=BEACH_URL.format(v["unit_id"]), raw=raw,
+                          duplicate_of=cover["event_id"] if cover else None))
+        if cover:
+            recs[-1]["raw"]["duplicate_basis"] = "DNREC's history lists this advisory (its own dates); counted once there"
     return recs, {"polls": state}
 
 

@@ -510,3 +510,29 @@ def test_no_sentinel_reaches_any_save_from_the_recreational_water_feed(monkeypat
     assert len(saves) >= 3
     for x in ("Pat Example", "Robin Sample", "1234 Sample", "302-555-0142", "pat@example.org"):
         assert x not in blob, x
+
+
+def test_history_and_map_count_one_advisory_and_same_minute_reopenings_stay_apart():
+    # re-review P2-1
+    s = rec()
+    st = map_codes(s["stations"], {"Slaughter Beach": 0})
+    row = {"advisoryid": "9001", "advstartdate": "2026-07-01T00:00:00.000", "advdesc": "Example high result",
+           "advreason": "Enterococcus Monitor", "advtype": "Recreational Water Quality Advisory",
+           "unitname": "Slaughter Beach"}
+    # a history row with no end yet, in effect, plus the map's matching status: one active record, not two
+    hist, _ = W.history_records([row], W.station_index(st), date(2026, 7, 2), T0)
+    assert hist[0]["status"] == "advisory_active" and hist[0]["ended_at"] is None
+    recs, _ = W.poll_records(st, hist, {}, T0, date(2026, 7, 2))
+    assert recs == []
+    # the map first, the history row later: the poll record is kept but marked the history's duplicate
+    _, state = W.poll_records(st, [], {}, "2026-07-02T18:00:00Z", date(2026, 7, 2))
+    recs, state = W.poll_records(st, hist, state, "2026-07-02T19:00:00Z", date(2026, 7, 2))
+    assert len(recs) == 1 and recs[0]["duplicate_of"] == hist[0]["event_id"]
+    active = [r for r in hist + recs if r["status"] == "advisory_active" and not r.get("duplicate_of")]
+    assert len(active) == 1
+    # opened 18:00:01, closed 18:00:20, reopened 18:00:40: three polls, two episodes, both kept
+    _, st1 = W.poll_records(st, [], {}, "2026-07-03T18:00:01Z", date(2026, 7, 3))
+    _, st1 = W.poll_records(map_codes(s["stations"], {}), [], st1, "2026-07-03T18:00:20Z", date(2026, 7, 3))
+    recs, _ = W.poll_records(st, [], st1, "2026-07-03T18:00:40Z", date(2026, 7, 3))
+    assert sorted((r["started_at"], r["ended_at"]) for r in recs) == [
+        ("2026-07-03T18:00:01Z", "2026-07-03T18:00:20Z"), ("2026-07-03T18:00:40Z", None)]
