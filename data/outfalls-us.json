@@ -66486,9 +66486,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66516,9 +66516,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66546,9 +66546,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66576,9 +66576,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66606,9 +66606,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66636,9 +66636,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66666,9 +66666,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66696,9 +66696,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66726,9 +66726,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66756,9 +66756,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66786,9 +66786,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66816,9 +66816,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66846,9 +66846,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66876,9 +66876,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "'(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_match": "none: '(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66906,9 +66906,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
    "point_shared_by": 2
   },
   {
@@ -66937,9 +66937,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "'(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_match": "none: '(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66967,9 +66967,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -66997,9 +66997,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67027,9 +67027,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67057,9 +67057,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67087,8 +67087,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ks) is the only water of the receiving water's name ('Missouri River') in the state, 1.0 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ks) is the only water of the receiving water's name ('Missouri River') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67116,9 +67116,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "'(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_match": "none: '(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67146,9 +67146,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "'(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_match": "none: '(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67176,8 +67176,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ks) is the only water of the receiving water's name ('Missouri River') in the state, 1.7 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ks) is the only water of the receiving water's name ('Missouri River') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67205,8 +67205,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ks) is the only water of the receiving water's name ('Missouri River') in the state, 1.8 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ks) is the only water of the receiving water's name ('Missouri River') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67235,7 +67235,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 30 m from Kansas River (kansas-river-ks), the nearest openboatlaunch water within 400 m; the receiving water ('Missouri River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67264,7 +67264,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 83 m from Kansas River (kansas-river-ks), whose name shares a word with the receiving water ('Kansas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67293,7 +67293,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 95 m from Kansas River (kansas-river-ks), whose name shares a word with the receiving water ('Kansas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67321,9 +67321,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "'(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_match": "none: '(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67352,7 +67352,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 41 m from Kansas River (kansas-river-ks), whose name shares a word with the receiving water ('Kansas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67381,7 +67381,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 94 m from Kansas River (kansas-river-ks), whose name shares a word with the receiving water ('Kansas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67410,7 +67410,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 30 m from Kansas River (kansas-river-ks), whose name shares a word with the receiving water ('Kansas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67439,7 +67439,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 43 m from Kansas River (kansas-river-ks), whose name shares a word with the receiving water ('Kansas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67457,19 +67457,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110017592292",
    "lat": 39.104549,
    "lon": -94.662256,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "mattoon-creek-ks",
+   "water_name": "Mattoon Creek",
+   "water_kind": "stream",
+   "distance_m": 755,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Mattoon Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Mattoon Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Mattoon Creek' by name; Mattoon Creek (mattoon-creek-ks, NHDPlus V2.1 record), 755 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67487,19 +67486,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110017592292",
    "lat": 39.106373,
    "lon": -94.660916,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "mattoon-creek-ks",
+   "water_name": "Mattoon Creek",
+   "water_kind": "stream",
+   "distance_m": 958,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Mattoon Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Mattoon Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Mattoon Creek' by name; Mattoon Creek (mattoon-creek-ks, NHDPlus V2.1 record), 958 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67527,9 +67525,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67557,9 +67555,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "'(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_match": "none: '(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67587,9 +67585,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
    "point_shared_by": 2
   },
   {
@@ -67618,8 +67616,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ks) is the only water of the receiving water's name ('Missouri River') in the state, 1.3 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Missouri River (missouri-river-ks) is the only water of the receiving water's name ('Missouri River') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67647,9 +67645,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67677,8 +67675,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Kansas River (kansas-river-ks) is the only water of the receiving water's name ('Kansas River') in the state, 0.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Kansas River (kansas-river-ks) is the only water of the receiving water's name ('Kansas River') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67707,7 +67705,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 25 m from Kansas River (kansas-river-ks), the nearest openboatlaunch water within 400 m; the receiving water ('Jersey Creek') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67735,9 +67733,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "'(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_match": "none: '(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67765,9 +67763,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67795,9 +67793,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67825,9 +67823,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "'(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_match": "none: '(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67855,9 +67853,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Jersey Creek' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'Jersey Creek' in KS",
+   "water_match": "none: no record named 'Jersey Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0038563",
@@ -67885,9 +67883,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named '(No Waterbody)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "'(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_match": "none: '(No Waterbody)': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Missouri River, Kansas River, Jersey Creek, Mattoon Creek, Missouri R) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0039128",
@@ -67915,8 +67913,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 206 m from Missouri River (missouri-river-ks), the nearest openboatlaunch water within 400 m; the receiving water ('White Clay Cr (1024001131)') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 206 m from Missouri River (missouri-river-ks), the nearest openboatlaunch water within 400 m; the receiving water ('White Clay Creek') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0039128",
@@ -67944,8 +67942,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 346 m from Missouri River (missouri-river-ks), the nearest openboatlaunch water within 400 m; the receiving water ('White Clay Cr (1024001131)') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 346 m from Missouri River (missouri-river-ks), the nearest openboatlaunch water within 400 m; the receiving water ('White Clay Creek') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0039128",
@@ -67973,9 +67971,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'White Clay Cr (1024001131)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'White Clay Cr (1024001131)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'White Clay Creek' in KS",
+   "water_match": "none: no record named 'White Clay Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0039128",
@@ -68003,9 +68001,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'White Clay Cr (1024001131)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'White Clay Cr (1024001131)' in KS; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "no record named 'White Clay Creek' in KS",
+   "water_match": "none: no record named 'White Clay Creek' in KS",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0039128",
@@ -68033,8 +68031,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 171 m from Missouri River (missouri-river-ks), whose name shares a word with the receiving water ('Missouri R (1024001111)'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 171 m from Missouri River (missouri-river-ks), whose name shares a word with the receiving water ('Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0039128",
@@ -68062,8 +68060,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 195 m from Missouri River (missouri-river-ks), whose name shares a word with the receiving water ('Missouri R (1024001111)'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 195 m from Missouri River (missouri-river-ks), whose name shares a word with the receiving water ('Missouri River'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0042722",
@@ -68092,7 +68090,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 21 m from Kansas River (kansas-river-ks), whose name shares a word with the receiving water ('Kansas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0042722",
@@ -68121,7 +68119,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 391 m from Kansas River (kansas-river-ks), whose name shares a word with the receiving water ('Kansas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0042722",
@@ -68139,19 +68137,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000574708",
    "lat": 39.066473,
    "lon": -95.687589,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "kansas-river-ks",
+   "water_name": "Kansas River",
+   "water_kind": "river",
+   "distance_m": 506,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "no_water_reason": "EPA's only text is a watershed name ('Kansas River'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: EPA's only text is a watershed name ('Kansas River'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Kansas River' by name; Kansas River (kansas-river-ks, openboatlaunch), 506 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0042722",
@@ -68169,19 +68166,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000574708",
    "lat": 39.05954,
    "lon": -95.679627,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "kansas-river-ks",
+   "water_name": "Kansas River",
+   "water_kind": "river",
+   "distance_m": 609,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "no_water_reason": "EPA's only text is a watershed name ('Kansas River'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: EPA's only text is a watershed name ('Kansas River'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Kansas River' by name; Kansas River (kansas-river-ks, openboatlaunch), 609 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KS0042722",
@@ -68210,7 +68206,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
    "water_match": "EPA's point lies 157 m from Kansas River (kansas-river-ks), whose name shares a word with the receiving water ('Kansas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "KS0042722",
@@ -68228,19 +68224,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000574708",
    "lat": 39.068814,
    "lon": -95.65958,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "kansas-river-ks",
+   "water_name": "Kansas River",
+   "water_kind": "river",
+   "distance_m": 641,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "no_water_reason": "EPA's only text is a watershed name ('Kansas River'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: EPA's only text is a watershed name ('Kansas River'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Kansas River' by name; Kansas River (kansas-river-ks, openboatlaunch), 641 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "KY0020095",

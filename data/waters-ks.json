@@ -1,0 +1,3284 @@
+{
+ "state": "KS",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 96,
+ "waters": [
+  {
+   "slug": "arkansas-river-ks",
+   "name": "Arkansas River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Alden",
+    "Arkansas City",
+    "Chase",
+    "Derby",
+    "Great Bend",
+    "Hutchinson",
+    "Oxford",
+    "Wichita"
+   ],
+   "bbox": [
+    -102.327367,
+    36.988399,
+    -96.923663,
+    38.357444
+   ],
+   "wikidata": "Q8319",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "71st-street-access-ks",
+    "arkansas-city-west-access-ks",
+    "arkansas-river-boat-launch-ks",
+    "arkansas-river-park-ks",
+    "carey-park-ks",
+    "cave-park-slipway-ks",
+    "chapin-park-ks",
+    "cowtown-access-ks",
+    "derby-access-ks",
+    "garvey-park-ks",
+    "great-bend-access-ks",
+    "herman-hill-park-ks",
+    "hwy54-kellogg-access-ks",
+    "lincoln-street-access-ks",
+    "lower-grouse-creek-access-ks",
+    "sim-park-ks",
+    "south-alden-access-ks",
+    "west-raymond-access-ks"
+   ],
+   "water_id": "arkansas-river-ar",
+   "gnis_id": "78956",
+   "geometry_hash": "cf99876eae0a6daf948c6eca0220f2b4935713ae76c877df8e58ba82209473ca",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "atchison-state-fishing-lake-ks",
+   "name": "Atchison State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Atchison"
+   ],
+   "bbox": [
+    -95.182077,
+    39.631649,
+    -95.170677,
+    39.637322
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.25,
+   "launches": [
+    "atchison-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "atchison-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "7296d5ba6c3ea209ee3367a131b59b247e2fee053a737205380dcbee140294b4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-blue-river-ks",
+   "name": "Big Blue River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Olsburg",
+    "Randolph",
+    "Rocky Ford"
+   ],
+   "bbox": [
+    -96.732044,
+    39.186046,
+    -96.51803,
+    40.048797
+   ],
+   "wikidata": "Q4905162",
+   "charted": false,
+   "area_km2": 2.038,
+   "launches": [
+    "big-blue-river-boat-launch-ks",
+    "rocky-ford-access-ks",
+    "swede-creek-marsh-boat-ramp-ks"
+   ],
+   "water_id": "big-blue-river-ks",
+   "gnis_id": "485505",
+   "geometry_hash": "f4197dbd1bf7c14763402ad27a7c1c5f039a8812dc349073765ac4930bd600c7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-creek-ks",
+   "name": "Big Creek",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Hays"
+   ],
+   "bbox": [
+    -100.316005,
+    38.756802,
+    -98.918633,
+    39.03502
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-creek-boat-launch-ks"
+   ],
+   "water_id": "big-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "e3771a0048543ac58197b4d60cd3bf3dde7ae069c7d933e87bdf1f5d676e8808",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-hill-creek-ks",
+   "name": "Big Hill Creek",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Grove"
+   ],
+   "bbox": [
+    -95.452692,
+    37.33515,
+    -95.4357,
+    37.413389
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hwy-160-horse-trail-boat-ramp-ks"
+   ],
+   "water_id": "big-hill-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "611b86bb4024a5c88bf86cf9a7ca7910ec4afb8880ef0ebb4a3c4fbad85c43a9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-hill-lake-ks",
+   "name": "Big Hill Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Cherryvale",
+    "Grove",
+    "Parsons"
+   ],
+   "bbox": [
+    -95.472124,
+    37.2667,
+    -95.438412,
+    37.335486
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.369,
+   "launches": [
+    "mound-valley-boat-ramp-ks",
+    "rae-bridge-boat-ramp-ks",
+    "timber-hill-park-boat-ramp-ks"
+   ],
+   "water_id": "big-hill-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "9d6470e506bd351a869f5b2dccc7402f7bfe0ce4713d157cda587d2e21295922",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bourbon-state-fishing-lake-ks",
+   "name": "Bourbon State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Uniontown"
+   ],
+   "bbox": [
+    -95.075688,
+    37.785043,
+    -95.059006,
+    37.797452
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.355,
+   "launches": [
+    "bourbon-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "bourbon-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "03fa7ddf5c3c6bf50aabd0b30708f7d62c7747d4990bc05d094025cd73d152f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brown-state-fishing-lake-ks",
+   "name": "Brown State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Robinson"
+   ],
+   "bbox": [
+    -95.377745,
+    39.84399,
+    -95.368016,
+    39.854894
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.271,
+   "launches": [
+    "brown-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "brown-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "02d07fb390e56a6e968e72b2cfec882b18d98f8d5d6893fcce9bae98495feadc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "carr-creek-ks",
+   "name": "Carr Creek",
+   "kind": "stream",
+   "state": "KS",
+   "towns": [
+    "Cawker City"
+   ],
+   "bbox": [
+    -98.459808,
+    39.297194,
+    -98.443446,
+    39.448949
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "carr-creek-boat-launch-ks"
+   ],
+   "water_id": "carr-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "86b160b5c28a73186097b35a1278db3598fdce26fe6a295ba0e805869f19c909",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-bluff-reservoir-ks",
+   "name": "Cedar Bluff Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Ransom"
+   ],
+   "bbox": [
+    -99.842716,
+    38.756459,
+    -99.722079,
+    38.812121
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 16.959,
+   "launches": [
+    "cedar-bluff-reservoir-boat-launch-near-ransom-ks-14",
+    "cedar-bluff-reservoir-boat-launch-near-ransom-ks-12",
+    "cedar-bluff-reservoir-boat-launch-near-ransom-ks-9",
+    "north-cabins-east-boat-ramp-ks",
+    "cedar-bluff-reservoir-boat-launch-near-ransom-ks-3",
+    "cedar-bluff-reservoir-boat-launch-near-ransom-ks-5",
+    "cedar-bluff-reservoir-boat-launch-near-ransom-ks-4",
+    "cedar-bluff-reservoir-boat-launch-near-ransom-ks-13",
+    "south-shore-cabin-area-high-level-boat-ramp-ks",
+    "south-shore-cabin-area-low-level-boat-ramp-ks",
+    "south-shore-cabin-area-normal-water-boat-ramp-ks"
+   ],
+   "water_id": "cedar-bluff-reservoir-ks",
+   "gnis_id": null,
+   "geometry_hash": "0fbf78af1dd135afc3d33239b52d5fee4684eae9102b2854d9095717bf2ce8ee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-ks",
+   "name": "Cedar Creek",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "De Soto"
+   ],
+   "bbox": [
+    -94.926942,
+    38.825487,
+    -94.850776,
+    38.98424
+   ],
+   "wikidata": "Q56507204",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cedar-creek-boat-launch-ks"
+   ],
+   "water_id": "cedar-creek-ks",
+   "gnis_id": "479175",
+   "geometry_hash": "3509409af79e6582e7b2f07d87b628b6fc51b75766272214af9d02d23be6a711",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-valley-reservoir-ks",
+   "name": "Cedar Valley Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Garnett"
+   ],
+   "bbox": [
+    -95.33727,
+    38.218996,
+    -95.305784,
+    38.257079
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.267,
+   "launches": [],
+   "water_id": "cedar-valley-reservoir-ks",
+   "gnis_id": null,
+   "geometry_hash": "332727cbd0553bebd3452e99962c07ca059c157f7d7805a582884ba2d9fb3057",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cedar-valley-reservoir-boat-launch-near-garnett-ks"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chase-state-fishing-lake-ks",
+   "name": "Chase State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Cottonwood Falls"
+   ],
+   "bbox": [
+    -96.597462,
+    38.362505,
+    -96.579937,
+    38.370883
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.426,
+   "launches": [
+    "chase-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "chase-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "0e0dbb580d9614fe96a6cfefbaa6134ab884d2e77bbdfb5dee22348239d7ee7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cheney-reservoir-ks",
+   "name": "Cheney Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Castleton",
+    "Cheney",
+    "Haven",
+    "Mount Vernon",
+    "Pretty Prairie",
+    "Saint Joe"
+   ],
+   "bbox": [
+    -97.904354,
+    37.7177,
+    -97.774518,
+    37.824492
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 38.886,
+   "launches": [
+    "county-line-boat-ramp-1-ks",
+    "cheney-reservoir-boat-launch-near-mount-vernon-ks-3",
+    "cheney-reservoir-boat-launch-near-castleton-ks-2",
+    "cheney-reservoir-boat-launch-near-saint-joe-ks-2",
+    "cheney-reservoir-boat-launch-near-castleton-ks",
+    "cheney-reservoir-boat-launch-near-saint-joe-ks-4",
+    "cheney-reservoir-boat-launch-near-cheney-ks-2",
+    "cheney-reservoir-boat-launch-near-haven-ks",
+    "cheney-reservoir-boat-launch-near-mount-vernon-ks",
+    "cheney-reservoir-boat-launch-near-mount-vernon-ks-4",
+    "cheney-reservoir-boat-launch-near-pretty-prairie-ks",
+    "cheney-reservoir-boat-launch-near-mount-vernon-ks-2",
+    "cheney-reservoir-boat-launch-near-cheney-ks"
+   ],
+   "water_id": "cheney-reservoir-ks",
+   "gnis_id": null,
+   "geometry_hash": "05e2aacd3557f43bd5ca9b8aa6ec5b73858166ab46c9df0be95c19fc8b1a07ce",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clark-county-state-lake-ks",
+   "name": "Clark County State Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [],
+   "bbox": [
+    -99.791974,
+    37.38229,
+    -99.778004,
+    37.406395
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.163,
+   "launches": [
+    "clark-county-state-lake-boat-launch-ks-2",
+    "clark-county-state-lake-boat-launch-near-ashland-ks"
+   ],
+   "water_id": "clark-county-state-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "ee196642f6a1736dd0453385086e38dc71b7d991cb4272534e638632badd985e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clinton-lake-ks",
+   "name": "Clinton Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Clinton",
+    "Lawrence"
+   ],
+   "bbox": [
+    -95.444962,
+    38.876568,
+    -95.32803,
+    38.958007
+   ],
+   "wikidata": "Q5134177",
+   "charted": false,
+   "area_km2": 28.421,
+   "launches": [
+    "clinton-lake-boat-launch-near-clinton-ks-8",
+    "clinton-lake-boat-launch-near-clinton-ks-7",
+    "clinton-lake-boat-launch-near-clinton-ks-6",
+    "clinton-lake-boat-launch-near-clinton-ks-5",
+    "clinton-lake-boat-ramp-1-ks",
+    "clinton-lake-boat-launch-near-clinton-ks",
+    "clinton-lake-boat-ramp-2-ks",
+    "clinton-lake-boat-ramp-3-ks-2",
+    "clinton-lake-boat-ramp-3-ks",
+    "clinton-lake-boat-launch-near-clinton-ks-2"
+   ],
+   "water_id": "clinton-lake-ks",
+   "gnis_id": "479837",
+   "geometry_hash": "fd166172b45c97bd82857c101cd506998177496051f1dfce0feb46f742ff5b45",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-river-ks",
+   "name": "Cottonwood River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Cottonwood Falls",
+    "Emporia"
+   ],
+   "bbox": [
+    -97.070268,
+    38.234303,
+    -96.051544,
+    38.404997
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cottonwood-river-boat-launch-near-cottonwood-falls-ks",
+    "cottonwood-river-boat-launch-near-emporia-ks"
+   ],
+   "water_id": "cottonwood-river-ks",
+   "gnis_id": null,
+   "geometry_hash": "570d6ae71f660b716a00f0787749fd3427db61584f77f5edbc1418e1e3db0ded",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "council-grove-lake-ks",
+   "name": "Council Grove Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Council Grove"
+   ],
+   "bbox": [
+    -96.556462,
+    38.677928,
+    -96.492853,
+    38.729039
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 11.484,
+   "launches": [
+    "canning-creek-north-boat-ramp-ks",
+    "canning-creek-south-boat-ramp-ks",
+    "kit-carson-cove-boat-ramp-ks",
+    "neosho-park-boat-ramp-ks",
+    "north-richey-cove-boat-ramp-ks",
+    "richey-cove-boat-ramp-ks",
+    "santa-fe-trail-boat-ramp-ks"
+   ],
+   "water_id": "council-grove-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "21e61296b76f3430f23d177e137293ddd3aeacf6d4f1e53fe5a33715da3a264c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cowley-state-fishing-lake-ks",
+   "name": "Cowley State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Vinton"
+   ],
+   "bbox": [
+    -96.805303,
+    37.091746,
+    -96.790548,
+    37.103806
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.309,
+   "launches": [
+    "cowley-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "cowley-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "49c6a7f0fe54b1538574380b4ea42c799f38709a8b019f1ffe33356f475a1982",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crawford-state-fishing-lake-ks",
+   "name": "Crawford State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Farlington",
+    "Girard"
+   ],
+   "bbox": [
+    -94.823044,
+    37.62598,
+    -94.805242,
+    37.645437
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.556,
+   "launches": [
+    "crawford-state-fishing-lake-boat-launch-near-farlington-ks",
+    "crawford-state-fishing-lake-boat-launch-near-girard-ks"
+   ],
+   "water_id": "crawford-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "50faab571e21e13c868c4ce79b731cccbc88f3f54400c155c046a5068e23144a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deep-creek-ks",
+   "name": "Deep Creek",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Pillsbury Crossing"
+   ],
+   "bbox": [
+    -96.499679,
+    39.039595,
+    -96.370289,
+    39.163122
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pillsbury-crossing-ks"
+   ],
+   "water_id": "deep-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "6fd7d5ad0eb34354a50d54c0ac62056ce5995aec19f4ce971a5ca03e3f1e0549",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "delaware-river-ks",
+   "name": "Delaware River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Thompsonville",
+    "Valley Falls"
+   ],
+   "bbox": [
+    -95.547527,
+    39.060555,
+    -95.396802,
+    39.562555
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "delaware-river-boat-launch-near-valley-falls-ks",
+    "delaware-river-boat-launch-near-valley-falls-ks-2",
+    "delaware-river-boat-launch-near-thompsonville-ks",
+    "west-river-boat-ramp-ks"
+   ],
+   "water_id": "delaware-river-ks",
+   "gnis_id": null,
+   "geometry_hash": "aa0e34659008d4ef7155db56b3910437949a7840105f8c059b066cad2f6724d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "douglas-state-fishing-lake-ks",
+   "name": "Douglas State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Baldwin City"
+   ],
+   "bbox": [
+    -95.164489,
+    38.79193,
+    -95.152356,
+    38.80582
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.708,
+   "launches": [
+    "douglas-state-fishing-lake-boat-launch-near-baldwin-city-ks-2",
+    "douglas-state-fishing-lake-boat-launch-near-baldwin-city-ks"
+   ],
+   "water_id": "douglas-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "5c7ee11490f540c65b8b7c6f681d64b1fb0aa97eda7a40a17716fb9a846aaa96",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dragoon-creek-ks",
+   "name": "Dragoon Creek",
+   "kind": "stream",
+   "state": "KS",
+   "towns": [
+    "Lyndon"
+   ],
+   "bbox": [
+    -96.120806,
+    38.674436,
+    -95.663731,
+    38.862895
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dragoon-creek-boat-launch-near-lyndon-ks-2"
+   ],
+   "water_id": "dragoon-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "351dbf2df1f4631166b50fac8a38b5b5e253c80d77bc0fcff7e4a9b983f6b5f7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eagle-creek-ks",
+   "name": "Eagle Creek",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Hartford"
+   ],
+   "bbox": [
+    -96.269865,
+    38.253178,
+    -95.876523,
+    38.283275
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blue-wing-boat-launch-ks"
+   ],
+   "water_id": "eagle-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "4668e31868859f2bb11622213506dcef33224ae551ab82b0c6966253476df383",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eight-mile-creek-ks",
+   "name": "Eight Mile Creek",
+   "kind": "stream",
+   "state": "KS",
+   "towns": [
+    "Ottawa"
+   ],
+   "bbox": [
+    -95.292567,
+    38.620557,
+    -95.284082,
+    38.637875
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "eight-mile-creek-boat-launch-ks"
+   ],
+   "water_id": "eight-mile-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "073174669361e73e0e3c9224b4ddfde647245d90fac6b20d02359cb3a1d854b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "el-dorado-lake-ks",
+   "name": "El Dorado Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Chelsea",
+    "El Dorado"
+   ],
+   "bbox": [
+    -96.827624,
+    37.833622,
+    -96.737068,
+    37.945398
+   ],
+   "wikidata": "Q5351188",
+   "charted": false,
+   "area_km2": 30.413,
+   "launches": [
+    "el-dorado-lake-boat-launch-near-el-dorado-ks-3",
+    "el-dorado-lake-boat-launch-near-chelsea-ks",
+    "el-dorado-lake-boat-launch-near-chelsea-ks-2",
+    "el-dorado-lake-boat-launch-near-el-dorado-ks-4",
+    "el-dorado-wildlife-area-boat-ramp-chelsea-ks",
+    "el-dorado-wildlife-area-boat-ramp-ks",
+    "el-dorado-wildlife-area-boat-ramp-ks-2",
+    "el-dorado-lake-boat-launch-near-el-dorado-ks-2",
+    "shady-creek-eastern-boat-ramp-ks"
+   ],
+   "water_id": "el-dorado-lake-ks",
+   "gnis_id": "479839",
+   "geometry_hash": "3dc5da62c197dfcdad1078ab30b1999fd17254aa973c3e3dbaee0b6d6c9fca8f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "el-dorado-lake-boat-launch-near-el-dorado-ks",
+    "shady-creek-marina-south-boat-ramp-ks",
+    "walnut-valley-sailing-club-east-boat-ramp-ks",
+    "walnut-valley-sailing-club-west-boat-ramp-ks"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elk-city-lake-ks",
+   "name": "Elk City Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Independence"
+   ],
+   "bbox": [
+    -95.838472,
+    37.222681,
+    -95.771497,
+    37.276983
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.874,
+   "launches": [
+    "elk-city-lake-boat-launch-ks"
+   ],
+   "water_id": "elk-city-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "1367cb3805dccd37479b49b9b3555c00fc716e1cc822f70baad431513932660c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "elk-river-ks",
+   "name": "Elk River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Elk City"
+   ],
+   "bbox": [
+    -96.469113,
+    37.250673,
+    -95.694163,
+    37.578351
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "card-creek-boat-ramp-ks"
+   ],
+   "water_id": "elk-river-ks",
+   "gnis_id": null,
+   "geometry_hash": "9fa58b30c3299454c7ad898d6a140a663310fc76bbcd628b46e2e57239b9ee44",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fall-river-ks",
+   "name": "Fall River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Fall River",
+    "Fredonia"
+   ],
+   "bbox": [
+    -96.358694,
+    37.394976,
+    -95.663211,
+    37.856819
+   ],
+   "wikidata": "Q14689493",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fall-river-boat-launch-near-fall-river-ks",
+    "fall-river-boat-launch-near-fredonia-ks"
+   ],
+   "water_id": "fall-river-ks",
+   "gnis_id": "474646",
+   "geometry_hash": "2b979dadd00327451782ebf71a715a3e63dc3704b3d6f209235bf4f4e11ef98c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fall-river-lake-ks",
+   "name": "Fall River Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Fall River"
+   ],
+   "bbox": [
+    -96.121922,
+    37.646335,
+    -96.053662,
+    37.685159
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.267,
+   "launches": [
+    "fall-river-lake-boat-launch-near-fall-river-ks-3",
+    "lakeshore-drive-boat-ramp-ks",
+    "fall-river-lake-boat-launch-near-fall-river-ks",
+    "rock-ridge-cove-north-boat-ramp-ks",
+    "rock-ridge-north-ks",
+    "fall-river-lake-boat-launch-near-fall-river-ks-2",
+    "whitehall-bay-boat-ramp-ks"
+   ],
+   "water_id": "fall-river-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "e395aebdb216cea4f50ec47ed523e4bbd97e9dcf0b0e03aa47f3166ce3e70c3f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "geary-state-fishing-lake-ks",
+   "name": "Geary State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Junction City"
+   ],
+   "bbox": [
+    -96.866823,
+    38.894875,
+    -96.854753,
+    38.905588
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.374,
+   "launches": [
+    "geary-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "geary-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "bf1dd667647b5b50d2b2cd6673a25dc261607d0047bcb9c45e9b0c84a997fdf0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grouse-creek-ks",
+   "name": "Grouse Creek",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Arkansas City",
+    "Silverdale"
+   ],
+   "bbox": [
+    -96.923736,
+    37.001084,
+    -96.515826,
+    37.58264
+   ],
+   "wikidata": "Q87901783",
+   "charted": false,
+   "area_km2": 0.469,
+   "launches": [
+    "grouse-creek-boat-launch-near-arkansas-city-ks",
+    "grouse-creek-boat-launch-near-silverdale-ks"
+   ],
+   "water_id": "grouse-creek-ks",
+   "gnis_id": "475047",
+   "geometry_hash": "f37e11893550ff6524063024da3d9a9a43d4f189f5e790192b8adc158e08d335",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hillsdale-lake-ks",
+   "name": "Hillsdale Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Gardner",
+    "Paola"
+   ],
+   "bbox": [
+    -94.987127,
+    38.643068,
+    -94.86965,
+    38.720966
+   ],
+   "wikidata": "Q1618816",
+   "charted": false,
+   "area_km2": 19.051,
+   "launches": [
+    "antioch-boat-ramp-ks",
+    "hillsdale-lake-boat-launch-near-paola-ks-6",
+    "hillsdale-lake-boat-launch-near-paola-ks-2",
+    "marysville-boat-ramp-ks",
+    "hillsdale-lake-boat-launch-near-paola-ks-3"
+   ],
+   "water_id": "hillsdale-lake-ks",
+   "gnis_id": "485186",
+   "geometry_hash": "c3330b22757b61e6e7166ee3fa6a6ded0e7b72619b9819d25bae781ccda507c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "john-redmond-reservoir-ks",
+   "name": "John Redmond Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "New Strawn",
+    "Ottumwa"
+   ],
+   "bbox": [
+    -95.848482,
+    38.216301,
+    -95.752941,
+    38.290631
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 33.212,
+   "launches": [
+    "john-redmond-reservoir-boat-launch-near-new-strawn-ks",
+    "john-redmond-reservoir-boat-launch-near-new-strawn-ks-2",
+    "hickory-creek-west-boat-ramp-ks"
+   ],
+   "water_id": "john-redmond-reservoir-ks",
+   "gnis_id": null,
+   "geometry_hash": "a26ddb03941293cce0be2fc55bc94bbb2e0f33acf03214b4740331c60bd1f9bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kanopolis-reservoir-ks",
+   "name": "Kanopolis Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Venango",
+    "Yankee Run"
+   ],
+   "bbox": [
+    -98.041858,
+    38.602305,
+    -97.965451,
+    38.685976
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.622,
+   "launches": [
+    "kanopolis-reservoir-boat-launch-near-venango-ks-3",
+    "kanopolis-reservoir-boat-launch-near-yankee-run-ks-2",
+    "kanopolis-reservoir-boat-launch-near-venango-ks",
+    "kanopolis-reservoir-boat-launch-near-venango-ks-2",
+    "yankee-run-boat-ramp-ks"
+   ],
+   "water_id": "kanopolis-reservoir-ks",
+   "gnis_id": null,
+   "geometry_hash": "e7ba94a6533dfa833056c540e04120cde648d848f4b2c6715b477a08850ed9bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kansas-river-ks",
+   "name": "Kansas River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Belvue",
+    "De Soto",
+    "Edwardsville",
+    "Eudora",
+    "Kansas City",
+    "Lawrence",
+    "Lecompton",
+    "Manhattan",
+    "Menoken",
+    "Ogden",
+    "Saint George",
+    "Tecumseh"
+   ],
+   "bbox": [
+    -96.801039,
+    38.953639,
+    -94.6079,
+    39.211514
+   ],
+   "wikidata": "Q1367638",
+   "charted": true,
+   "area_km2": 33.52,
+   "launches": [
+    "belvue-access-ks",
+    "blue-river-access-ramp-ks",
+    "boggs-landing-ks",
+    "kansas-river-boat-launch-near-de-soto-ks",
+    "kansas-river-boat-launch-near-edwardsville-ks",
+    "kansas-river-boat-launch-near-eudora-ks",
+    "kansas-river-boat-launch-near-kansas-city-ks",
+    "kaw-point-ks",
+    "kaw-state-park-ks",
+    "lawrence-eighth-street-boat-ramp-ks",
+    "lawrence-riverfront-park-boat-ramp-ks",
+    "manhattan-pillsbury-dr-access-ks",
+    "ogden-boat-ramp-ks",
+    "perry-lecompton-rising-sun-river-access-ks",
+    "seward-ave-access-ks",
+    "topeka-coffer-dam-access-ks",
+    "wamego-access-ks"
+   ],
+   "water_id": "kansas-river-ks",
+   "gnis_id": "485184",
+   "geometry_hash": "95acbd5f798f1f321c6b827a897e201ab495f1ff4499db67d2e55615d7caba64",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "keith-sebelius-lake-ks",
+   "name": "Keith Sebelius Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Norton"
+   ],
+   "bbox": [
+    -100.003959,
+    39.780058,
+    -99.926265,
+    39.816848
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.974,
+   "launches": [
+    "horseshoe-boat-ramp-ks",
+    "lenora-boat-ramp-ks",
+    "keith-sebelius-lake-boat-launch-near-norton-ks",
+    "keith-sebelius-lake-boat-launch-near-norton-ks-3",
+    "spillway-boat-ramp-ks"
+   ],
+   "water_id": "keith-sebelius-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "63c5b819f0b0e7acc67a0e753d6d5ec387df5e8f3ca4046591b2ed3852a7d42b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kill-creek-lake-ks",
+   "name": "Kill Creek Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "De Soto"
+   ],
+   "bbox": [
+    -94.975641,
+    38.910053,
+    -94.96717,
+    38.914043
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.104,
+   "launches": [
+    "kill-creek-lake-boat-launch-ks"
+   ],
+   "water_id": "kill-creek-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "318ea0afdaaae86f989e7ce0c9d914eeafb777883e746dfebdca7f04ca920aba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kingman-state-fishing-lake-ks",
+   "name": "Kingman State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Kingman"
+   ],
+   "bbox": [
+    -98.26918,
+    37.649005,
+    -98.254643,
+    37.660651
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.533,
+   "launches": [
+    "kingman-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "kingman-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "3bef4308d3e42fa6488179f992b5a4729aa8b33f9cead63649073e871ff9d5d1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kirwin-reservoir-ks",
+   "name": "Kirwin Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Kirwin"
+   ],
+   "bbox": [
+    -99.244407,
+    39.612589,
+    -99.120279,
+    39.674213
+   ],
+   "wikidata": "Q6416306",
+   "charted": false,
+   "area_km2": 19.768,
+   "launches": [
+    "low-water-boat-ramp-ks",
+    "north-shore-boat-ramp-ks",
+    "scout-cove-boat-ramp-ks",
+    "south-shore-boat-ramp-north-ks",
+    "south-shore-boat-ramp-south-ks"
+   ],
+   "water_id": "kirwin-reservoir-ks",
+   "gnis_id": "472040",
+   "geometry_hash": "b6c3850d9140749714b45b9274b466e3163c578c63d7d9c6bb3a9e2d4959b060",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "grays-park-boat-launch-ks"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-clymer-ks",
+   "name": "Lake Clymer",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Latham"
+   ],
+   "bbox": [
+    -96.694976,
+    37.545726,
+    -96.680755,
+    37.554422
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.43,
+   "launches": [
+    "lake-clymer-boat-launch-near-latham-ks"
+   ],
+   "water_id": "lake-clymer-ks",
+   "gnis_id": null,
+   "geometry_hash": "90068123e6770ffe2192693788ae5c04b45ffe2d3ee0239cf176e8bc3ad91392",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-garnett-ks",
+   "name": "Lake Garnett",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Garnett"
+   ],
+   "bbox": [
+    -95.244601,
+    38.294197,
+    -95.238285,
+    38.305724
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.181,
+   "launches": [
+    "lake-garnett-boat-launch-ks"
+   ],
+   "water_id": "lake-garnett-ks",
+   "gnis_id": null,
+   "geometry_hash": "8519a3da9ce37d1c15603f1b1fe6993e228916d22afddce153db9fd1fa0a3f69",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-kahola-ks",
+   "name": "Lake Kahola",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Council Grove"
+   ],
+   "bbox": [
+    -96.440909,
+    38.515552,
+    -96.411161,
+    38.529599
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.406,
+   "launches": [],
+   "water_id": "lake-kahola-ks",
+   "gnis_id": null,
+   "geometry_hash": "bcf72e270ebade29bd40c6279c5b2ca5e174bd5ffc22f4e97ec07f84a0fa90ba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-kahola-boat-launch-near-council-grove-ks-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lenexa-ks",
+   "name": "Lake Lenexa",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Lenexa"
+   ],
+   "bbox": [
+    -94.844516,
+    38.961073,
+    -94.836238,
+    38.968005
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.123,
+   "launches": [
+    "lake-lenexa-boat-launch-ks"
+   ],
+   "water_id": "lake-lenexa-ks",
+   "gnis_id": null,
+   "geometry_hash": "e301b72d86eac1eb25b3687e72c2b0a494e437664e9c0c396ee8cacf6de0a98c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mckinley-ks",
+   "name": "Lake McKinley",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Parsons"
+   ],
+   "bbox": [
+    -95.20507,
+    37.419184,
+    -95.19638,
+    37.42964
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.282,
+   "launches": [
+    "lake-mckinley-boat-launch-ks"
+   ],
+   "water_id": "lake-mckinley-ks",
+   "gnis_id": null,
+   "geometry_hash": "f3ce73a9b93c9a7d83c646d1328eb9f5408634e9712fb3ede2936cd143b33cbd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-meade-ks",
+   "name": "Lake Meade",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Meade"
+   ],
+   "bbox": [
+    -100.438834,
+    37.162868,
+    -100.430719,
+    37.169757
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.268,
+   "launches": [
+    "lake-meade-boat-launch-near-meade-ks"
+   ],
+   "water_id": "lake-meade-ks",
+   "gnis_id": null,
+   "geometry_hash": "1b9546aaa35041cb0d4c18b0b93092c419e92be5d75aa65b9d18a57d4a82911b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-olathe-ks",
+   "name": "Lake Olathe",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Olathe"
+   ],
+   "bbox": [
+    -94.876045,
+    38.867287,
+    -94.860342,
+    38.882901
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.606,
+   "launches": [
+    "lake-olathe-boat-launch-near-olathe-ks"
+   ],
+   "water_id": "lake-olathe-ks",
+   "gnis_id": null,
+   "geometry_hash": "5e3b23ded3674baeb2f89c3d24152596e384af38e3248c2d5446095513f82e77",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-shawnee-ks",
+   "name": "Lake Shawnee",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Topeka"
+   ],
+   "bbox": [
+    -95.635481,
+    38.986262,
+    -95.61452,
+    39.014737
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.535,
+   "launches": [],
+   "water_id": "lake-shawnee-ks",
+   "gnis_id": null,
+   "geometry_hash": "9be78ba49ff51a08359fc33d8e8db308abbc813520844a8582a966dc776e8257",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-shawnee-boat-launch-near-topeka-ks-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "leavenworth-state-fishing-lake-ks",
+   "name": "Leavenworth State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Tonganoxie"
+   ],
+   "bbox": [
+    -95.158471,
+    39.121783,
+    -95.141318,
+    39.13408
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.62,
+   "launches": [
+    "leavenworth-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "leavenworth-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "a4c1b0612f1fb5d9b64ca350fc9adb7811f5f2241e11c8bc6d6b72a117650070",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lexington-lake-ks",
+   "name": "Lexington Lake",
+   "kind": "lake",
+   "state": "KS",
+   "towns": [
+    "De Soto"
+   ],
+   "bbox": [
+    -95.009761,
+    38.964823,
+    -95.005896,
+    38.970693
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.101,
+   "launches": [
+    "lexington-lake-boat-launch-near-de-soto-ks"
+   ],
+   "water_id": "lexington-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "c12cbd6ca9aa53e29b7ea0868a602a0b7997dd5f84c9528c26d796be53da88e1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lovewell-reservoir-ks",
+   "name": "Lovewell Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Mankato"
+   ],
+   "bbox": [
+    -98.123117,
+    39.881748,
+    -98.026032,
+    39.914153
+   ],
+   "wikidata": "Q6692539",
+   "charted": false,
+   "area_km2": 10.875,
+   "launches": [
+    "lovewell-reservoir-boat-launch-near-mankato-ks",
+    "lovewell-reservoir-boat-launch-near-mankato-ks-3",
+    "lovewell-reservoir-boat-launch-near-mankato-ks-5",
+    "lovewell-reservoir-boat-launch-near-mankato-ks-4",
+    "white-rock-creek-boat-ramp-ks"
+   ],
+   "water_id": "lovewell-reservoir-ks",
+   "gnis_id": "471872",
+   "geometry_hash": "a19cd0c803f23a6ceda49865df30ebf4be6b968d6f301fd7ba7823a4c08a8a30",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lovewell-reservoir-boat-launch-near-mankato-ks-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lyon-state-fishing-lake-ks",
+   "name": "Lyon State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Emporia"
+   ],
+   "bbox": [
+    -96.07302,
+    38.537024,
+    -96.056632,
+    38.548436
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.561,
+   "launches": [
+    "lyon-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "lyon-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "f217cd8a2747d57c49b21ce93bad43ccfb26d45dbecd92cf65359bf408b77f28",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "marais-des-cygnes-river-ks",
+   "name": "Marais des Cygnes River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Boicourt",
+    "Osawatomie",
+    "Trading Post"
+   ],
+   "bbox": [
+    -95.940846,
+    38.054962,
+    -94.15998,
+    38.622219
+   ],
+   "wikidata": "Q1892251",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "marais-des-cygnes-river-boat-launch-near-osawatomie-ks",
+    "marais-des-cygnes-river-boat-launch-near-trading-post-ks"
+   ],
+   "water_id": "marais-des-cygnes-river-ks",
+   "gnis_id": "477714",
+   "geometry_hash": "3c09b16d2a4c16c7574d9fe9c81ca62cb5d59e6a8f4fa1ac4869e95cb45d5728",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "marion-reservoir-ks",
+   "name": "Marion Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Durham",
+    "Eastshore",
+    "Hillsboro",
+    "Marion"
+   ],
+   "bbox": [
+    -97.187662,
+    38.361078,
+    -97.07537,
+    38.458441
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 25.138,
+   "launches": [
+    "cottonwood-point-northern-boat-ramp-ks",
+    "cottonwood-point-southern-boat-ramp-ks",
+    "durham-cove-boat-ramp-ks",
+    "french-creek-cove-boat-ramp-ks",
+    "marion-reservoir-boat-launch-ks",
+    "marion-cove-campgound-boat-ramp-ks",
+    "marion-reservoir-fishing-area-boat-ramp-ks"
+   ],
+   "water_id": "marion-reservoir-ks",
+   "gnis_id": null,
+   "geometry_hash": "7b38092ba82588fd7c14004cd0989ea2b72625266a7d313c0e3e550961a5622c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "marmaton-river-ks",
+   "name": "Marmaton River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Fort Scott"
+   ],
+   "bbox": [
+    -95.165382,
+    37.800514,
+    -94.544815,
+    37.924764
+   ],
+   "wikidata": "Q3294496",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "gunn-park-boat-ramp-ks",
+    "marmaton-river-carry-in-access-ks"
+   ],
+   "water_id": "marmaton-river-ks",
+   "gnis_id": "721891",
+   "geometry_hash": "d0a7c9d9edfebde960c4c32305a1052b3f050f3e36ad205637ddfd6939c81693",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mcpherson-state-fishing-lake-ks",
+   "name": "McPherson State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "McPherson"
+   ],
+   "bbox": [
+    -97.4716,
+    38.473759,
+    -97.466961,
+    38.482039
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.155,
+   "launches": [
+    "mcpherson-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "mcpherson-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "02217ca459ab99f7cc74fddb735717d5e25e1506f1d89309fff3f17b78ceb6a9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "melvern-lake-ks",
+   "name": "Melvern Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Arvonia",
+    "Lyndon",
+    "Olivet"
+   ],
+   "bbox": [
+    -95.907465,
+    38.470982,
+    -95.706299,
+    38.533748
+   ],
+   "wikidata": "Q6813835",
+   "charted": false,
+   "area_km2": 26.892,
+   "launches": [
+    "melvern-lake-boat-launch-near-olivet-ks",
+    "melvern-lake-boat-launch-near-lyndon-ks",
+    "melvern-lake-boat-launch-near-lyndon-ks-2",
+    "melvern-lake-boat-launch-near-lyndon-ks-3",
+    "melvern-lake-boat-launch-near-arvonia-ks",
+    "lyndon-boat-launch-ks",
+    "melvern-lake-boat-launch-near-arvonia-ks-2",
+    "melvern-lake-boat-launch-near-arvonia-ks-3"
+   ],
+   "water_id": "melvern-lake-ks",
+   "gnis_id": "479604",
+   "geometry_hash": "f00341c3179c06c1e38f34a59fd491e8a691d7080dac5fcb36a7b52ee1b329c2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "miami-state-fishing-lake-ks",
+   "name": "Miami State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Fontana"
+   ],
+   "bbox": [
+    -94.79573,
+    38.416444,
+    -94.785733,
+    38.42649
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.409,
+   "launches": [
+    "miami-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "miami-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "76b497d8054a55843a10f72b412a8dd9ee1be673f7a1e9f3440e9188767d5654",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "milford-lake-ks",
+   "name": "Milford Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Junction City",
+    "Milford",
+    "Wakefield"
+   ],
+   "bbox": [
+    -97.022844,
+    39.059818,
+    -96.884681,
+    39.242753
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 61.105,
+   "launches": [
+    "city-of-milford-boat-ramp-ks",
+    "alida-ks",
+    "milford-lake-boat-launch-near-junction-city-ks-7",
+    "milford-lake-boat-launch-near-junction-city-ks-3",
+    "milford-lake-boat-launch-near-junction-city-ks-2",
+    "farnum-creek-boat-ramp-ks",
+    "milford-lake-boat-launch-near-junction-city-ks",
+    "milford-lake-boat-launch-near-junction-city-ks-8",
+    "milford-lake-boat-launch-near-milford-ks",
+    "outlet-area-boat-ramp-ks",
+    "milford-lake-boat-launch-near-junction-city-ks-6",
+    "school-creek-boat-ramp-ks",
+    "timber-creek-boat-ramp-ks"
+   ],
+   "water_id": "milford-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "6e054def068a2ffc5e1b480a37d1c0497c6189df5d968873fa5e6862a014d43d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "flagstop-rv-and-resort-ks",
+    "milford-lake-boat-launch-near-junction-city-ks-9"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mine-creek-ks",
+   "name": "Mine Creek",
+   "kind": "stream",
+   "state": "KS",
+   "towns": [
+    "Pleasanton"
+   ],
+   "bbox": [
+    -94.797069,
+    38.121306,
+    -94.6008,
+    38.206406
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mine-remnant-pond-launch-ks"
+   ],
+   "water_id": "mine-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "7bfeb9d68e0bb979fec03e2bfa1b83321233930a4986ca6eebe64945521e71f3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "miola-lake-ks",
+   "name": "Miola Lake",
+   "kind": "lake",
+   "state": "KS",
+   "towns": [
+    "Paola"
+   ],
+   "bbox": [
+    -94.851193,
+    38.582824,
+    -94.839091,
+    38.603439
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.778,
+   "launches": [
+    "miola-lake-boat-launch-near-paola-ks"
+   ],
+   "water_id": "miola-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "4f01efe12a6584139fb551d1ab7bcf68b9563ee1c8827308fd04de9e0241853f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "missouri-river-ks",
+   "name": "Missouri River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Atchison",
+    "Elwood",
+    "Leavenworth"
+   ],
+   "bbox": [
+    -95.657629,
+    39.11002,
+    -93.83981,
+    40.31391
+   ],
+   "wikidata": "Q5419",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "missouri-river-boat-launch-near-atchison-ks",
+    "missouri-river-boat-launch-near-leavenworth-ks"
+   ],
+   "water_id": "missouri-river-ia",
+   "gnis_id": "756398",
+   "geometry_hash": "936f4ef0f19f3385ea73877c177959e54499ea24e1fd64f7172c42743368f380",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "montgomery-state-fishing-lake-ks",
+   "name": "Montgomery State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Independence"
+   ],
+   "bbox": [
+    -95.704189,
+    37.16048,
+    -95.686059,
+    37.167165
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.336,
+   "launches": [
+    "montgomery-state-fishing-lake-boat-launch-near-independence-ks-2",
+    "montgomery-state-fishing-lake-boat-launch-near-independence-ks"
+   ],
+   "water_id": "montgomery-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "a010d7a88a12f14b01deaae572b7f7e47a07d1663944603e249ed3dc405b87c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "munkers-creek-ks",
+   "name": "Munkers Creek",
+   "kind": "stream",
+   "state": "KS",
+   "towns": [
+    "Council Grove"
+   ],
+   "bbox": [
+    -96.514013,
+    38.680717,
+    -96.46535,
+    38.858163
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "council-grove-wildlife-area-boat-ramp-ks"
+   ],
+   "water_id": "munkers-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "9087a47e370e53faf96e731342c09af12bdb4c7b530ff69e293ad5b3949f68b3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "neosho-river-ks",
+   "name": "Neosho River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Burlington",
+    "Chanute",
+    "Chetopa",
+    "Council Grove",
+    "Hartford",
+    "Humboldt",
+    "Iola",
+    "Jacobs Creek Landing",
+    "Neosho Falls",
+    "Oswego"
+   ],
+   "bbox": [
+    -96.74714,
+    36.869286,
+    -94.922646,
+    38.783294
+   ],
+   "wikidata": "Q516393",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "gilmore-creek-wetland-boat-ramp-ks",
+    "neosho-river-boat-launch-near-hartford-ks",
+    "humboldt-access-ks",
+    "jacob-s-creek-boat-ramp-ks",
+    "neosho-river-boat-launch-near-burlington-ks",
+    "neosho-river-boat-launch-near-chanute-ks",
+    "neosho-river-boat-launch-near-chanute-ks-2",
+    "neosho-river-boat-launch-near-chetopa-ks",
+    "neosho-river-boat-launch-near-iola-ks",
+    "neosho-river-boat-launch-near-neosho-falls-ks",
+    "neosho-river-boat-launch-near-oswego-ks",
+    "neosho-river-boat-launch-near-burlington-ks-2"
+   ],
+   "water_id": "neosho-river-ks",
+   "gnis_id": "1095788",
+   "geometry_hash": "872cccbb4ade298b3535deb427f036a7087a445984f623811d0987164599a899",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-cottonwood-river-ks",
+   "name": "North Cottonwood River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Durham"
+   ],
+   "bbox": [
+    -97.380621,
+    38.356888,
+    -97.070161,
+    38.522722
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "broken-bridge-boat-ramp-ks"
+   ],
+   "water_id": "north-cottonwood-river-ks",
+   "gnis_id": null,
+   "geometry_hash": "58e4c7a5dcfb53a3b1dbd6ac85ae7008112a6a82da3faee7b890ed19006c04d4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "osage-city-reservoir-ks",
+   "name": "Osage City Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Osage City"
+   ],
+   "bbox": [
+    -95.838525,
+    38.608382,
+    -95.829907,
+    38.61931
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.196,
+   "launches": [
+    "city-lake-boat-ramp-ks"
+   ],
+   "water_id": "osage-city-reservoir-ks",
+   "gnis_id": null,
+   "geometry_hash": "b5c71d2755578407b39745d9e1d7a4d46a2f0c7051a1d5951b8b9758eec82608",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "osage-state-fishing-lake-ks",
+   "name": "Osage State Fishing Lake",
+   "kind": "lake",
+   "state": "KS",
+   "towns": [
+    "Carbondale"
+   ],
+   "bbox": [
+    -95.675128,
+    38.762024,
+    -95.663509,
+    38.778871
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.537,
+   "launches": [
+    "osage-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "osage-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "05e1e1177ae269b7136e63932e02ddc33e7b1a5e3b66540f0431e49f3584e29e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "perry-lake-ks",
+   "name": "Perry Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Indian Ridge",
+    "Lake Ridge",
+    "Lakeside Village",
+    "Oskaloosa",
+    "Ozawkie",
+    "Perry",
+    "West Shore"
+   ],
+   "bbox": [
+    -95.520885,
+    39.10889,
+    -95.389174,
+    39.262657
+   ],
+   "wikidata": "Q7169824",
+   "charted": false,
+   "area_km2": 42.588,
+   "launches": [
+    "perry-lake-boat-launch-near-lakeside-village-ks",
+    "perry-lake-boat-launch-near-ozawkie-ks",
+    "perry-lake-boat-launch-near-oskaloosa-ks-3",
+    "perry-lake-boat-launch-near-lake-ridge-ks",
+    "perry-lake-boat-launch-near-perry-ks-5",
+    "perry-lake-boat-launch-near-oskaloosa-ks-4",
+    "perry-lake-boat-launch-near-oskaloosa-ks-5",
+    "perry-lake-boat-launch-near-oskaloosa-ks-10"
+   ],
+   "water_id": "perry-lake-ks",
+   "gnis_id": "478491",
+   "geometry_hash": "afa8f27cf0fdfbfee7aa9bcd2882b5dc6595653b57df28b1f8da895234704ca6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "perry-lake-boat-launch-near-indian-ridge-ks",
+    "perry-lake-boat-launch-near-perry-ks-4",
+    "perry-lake-boat-launch-near-west-shore-ks",
+    "perry-lake-boat-launch-near-lake-ridge-ks-2",
+    "perry-lake-boat-launch-near-lake-ridge-ks-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pomona-lake-ks",
+   "name": "Pomona Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Lyndon"
+   ],
+   "bbox": [
+    -95.667092,
+    38.647223,
+    -95.551918,
+    38.702684
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 15.353,
+   "launches": [
+    "pomona-lake-boat-launch-near-lyndon-ks-18",
+    "dragoon-access-boat-ramp-ks",
+    "pomona-lake-boat-launch-near-lyndon-ks-11",
+    "pomona-lake-boat-launch-near-lyndon-ks",
+    "pomona-lake-boat-launch-near-lyndon-ks-14",
+    "pomona-lake-boat-launch-near-lyndon-ks-16",
+    "pomona-lake-boat-launch-near-lyndon-ks-3",
+    "pomona-lake-boat-launch-near-lyndon-ks-8",
+    "pomona-lake-boat-launch-near-lyndon-ks-7"
+   ],
+   "water_id": "pomona-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "44da34a938e51c527ee9663143c4bdc9ae1c7dea6d388d9d472858292ef51669",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pottawatomie-state-fishing-lake-number-two-ks",
+   "name": "Pottawatomie State Fishing Lake Number Two",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Manhattan"
+   ],
+   "bbox": [
+    -96.531305,
+    39.227691,
+    -96.521589,
+    39.234245
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.288,
+   "launches": [
+    "pottawatomie-state-fishing-lake-number-two-boat-launch-ks"
+   ],
+   "water_id": "pottawatomie-state-fishing-lake-number-two-ks",
+   "gnis_id": null,
+   "geometry_hash": "cd2683f1d70fa3c0fc37c38a85db78a43af3457e5e908fe9ee71332e033b8855",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "republican-river-ks",
+   "name": "Republican River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Junction City",
+    "Wakefield"
+   ],
+   "bbox": [
+    -98.376552,
+    39.043268,
+    -96.801039,
+    40.070993
+   ],
+   "wikidata": "Q673908",
+   "charted": false,
+   "area_km2": 3.283,
+   "launches": [
+    "republican-river-boat-launch-near-junction-city-ks",
+    "republican-river-boat-launch-near-wakefield-ks"
+   ],
+   "water_id": "republican-river-ks",
+   "gnis_id": "485443",
+   "geometry_hash": "fcdafc3bcdbf663724e4790e72b4df86cea3005fcd802dc8855dbb5b4651b836",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "saline-river-ks",
+   "name": "Saline River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Russell"
+   ],
+   "bbox": [
+    -99.575207,
+    38.857467,
+    -97.501031,
+    39.119213
+   ],
+   "wikidata": "Q2618310",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cedar-creek-boat-ramp-ks",
+    "saline-river-boat-launch-ks"
+   ],
+   "water_id": "saline-river-ks",
+   "gnis_id": "485315",
+   "geometry_hash": "64820ec294103378d20576efb0e5d96fc9d4e652ea452ee79b6145ce599b2633",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "scott-state-fishing-lake-ks",
+   "name": "Scott State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [],
+   "bbox": [
+    -100.928844,
+    38.667233,
+    -100.91244,
+    38.691513
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.427,
+   "launches": [
+    "scott-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "scott-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "4b1f0452c43a52ca08181e8efdc14ac0b771934ff71878218df94a9d1d9b158b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shawnee-mission-lake-ks",
+   "name": "Shawnee Mission Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Lenexa"
+   ],
+   "bbox": [
+    -94.810341,
+    38.979605,
+    -94.794093,
+    38.987594
+   ],
+   "wikidata": "Q34923010",
+   "charted": false,
+   "area_km2": 0.467,
+   "launches": [
+    "shawnee-mission-lake-boat-launch-ks"
+   ],
+   "water_id": "shawnee-mission-lake-ks",
+   "gnis_id": "479200",
+   "geometry_hash": "3987af525f0e483c76300c2429426547eac3e3df933564edfe55b07fdd0a1443",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shawnee-state-fishing-lake-ks",
+   "name": "Shawnee State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Grove"
+   ],
+   "bbox": [
+    -95.810719,
+    39.200024,
+    -95.800822,
+    39.213389
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.497,
+   "launches": [
+    "shawnee-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "shawnee-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "5cc334de860041fbc16441a03b4ef1961f7c88ead8c39eec2b6d3eb982b5b805",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shoal-creek-ks",
+   "name": "Shoal Creek",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Galena"
+   ],
+   "bbox": [
+    -94.722359,
+    36.894566,
+    -94.133481,
+    37.064137
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "shoal-creek-boat-launch-ks"
+   ],
+   "water_id": "shoal-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "064746c39724152baa94483ec9359120799c2f4b10d374902435082fb4abbd26",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "smoky-hill-river-ks",
+   "name": "Smoky Hill River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Salina"
+   ],
+   "bbox": [
+    -102.369558,
+    38.520838,
+    -96.798987,
+    39.060079
+   ],
+   "wikidata": "Q177627",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "smoky-hill-river-boat-launch-ks"
+   ],
+   "water_id": "smoky-hill-river-ks",
+   "gnis_id": "485314",
+   "geometry_hash": "021692f48d4d69d428d519495272c73ad2ac5f1aa56978da4d07210fa22a2ca1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "solomon-river-ks",
+   "name": "Solomon River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Minneapolis"
+   ],
+   "bbox": [
+    -98.43348,
+    38.903713,
+    -97.369115,
+    39.49909
+   ],
+   "wikidata": "Q4113728",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "solomon-river-boat-launch-ks"
+   ],
+   "water_id": "solomon-river-ks",
+   "gnis_id": "482755",
+   "geometry_hash": "3752c3a8db233aaaa5ec5221846a3085ad45b7fb2136c3bc6e69d43313a3411c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-ninnescah-river-ks",
+   "name": "South Fork Ninnescah River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Pratt"
+   ],
+   "bbox": [
+    -98.888051,
+    37.539039,
+    -97.704339,
+    37.671907
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-fork-ninnescah-river-boat-launch-ks"
+   ],
+   "water_id": "south-fork-ninnescah-river-ks",
+   "gnis_id": null,
+   "geometry_hash": "7b17b2c90ddfbb05e3183faabbfad6a83fc3014bb4b972142d6267ee119a576d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-lake-ks",
+   "name": "South Lake",
+   "kind": "lake",
+   "state": "KS",
+   "towns": [
+    "Haysville"
+   ],
+   "bbox": [
+    -97.358922,
+    37.593849,
+    -97.355366,
+    37.596881
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.067,
+   "launches": [
+    "south-lake-boat-launch-ks"
+   ],
+   "water_id": "south-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "84a2f3c09643754e40caf5e10ec5ffabb20973041301c26582a779a1bff3ba73",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spring-river-ks",
+   "name": "Spring River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Baxter Springs",
+    "Lowell"
+   ],
+   "bbox": [
+    -94.765858,
+    36.793672,
+    -94.698195,
+    37.064137
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "spring-river-boat-launch-near-baxter-springs-ks",
+    "spring-river-boat-launch-near-lowell-ks"
+   ],
+   "water_id": "spring-river-ks",
+   "gnis_id": null,
+   "geometry_hash": "94d342cbb7b6978751ca35543e4a60d03bf2b61f8fe918856bc8c4322d2b6a73",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ten-mile-creek-ks",
+   "name": "Ten Mile Creek",
+   "kind": "stream",
+   "state": "KS",
+   "towns": [
+    "Carbondale"
+   ],
+   "bbox": [
+    -95.73011,
+    38.699723,
+    -95.62335,
+    38.790001
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ten-mile-creek-boat-launch-ks"
+   ],
+   "water_id": "ten-mile-creek-ks",
+   "gnis_id": null,
+   "geometry_hash": "ab135a0a924c5ad6d1d1b83ada3fa5364b8c4cd83892d8abcf35f7ca27d3c6b5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "toronto-lake-ks",
+   "name": "Toronto Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Toronto"
+   ],
+   "bbox": [
+    -95.988573,
+    37.741082,
+    -95.907326,
+    37.794968
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.722,
+   "launches": [
+    "holiday-hill-boat-ramp-ks",
+    "holiday-hill-boat-ramp-toronto-ks",
+    "toronto-lake-boat-launch-near-toronto-ks-2",
+    "toronto-lake-boat-launch-near-toronto-ks-4",
+    "toronto-lake-boat-launch-near-toronto-ks",
+    "toronto-lake-boat-launch-near-toronto-ks-3"
+   ],
+   "water_id": "toronto-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "daaaec87f91c4c69000f898fff2cc33d2edce34f80325a0d15fd16ec4a005dca",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tuttle-creek-lake-ks",
+   "name": "Tuttle Creek Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Manhattan",
+    "Randolph"
+   ],
+   "bbox": [
+    -96.735427,
+    39.253946,
+    -96.581172,
+    39.445274
+   ],
+   "wikidata": "Q7334450",
+   "charted": false,
+   "area_km2": 41.592,
+   "launches": [
+    "tuttle-creek-lake-boat-launch-near-manhattan-ks",
+    "tuttle-creek-lake-boat-launch-near-manhattan-ks-3",
+    "oak-canyon-boat-ramp-ks",
+    "stockdale-park-ks",
+    "tuttle-creek-lake-boat-launch-near-manhattan-ks-2",
+    "tuttle-creek-lake-boat-launch-near-manhattan-ks-7",
+    "tuttle-creek-lake-boat-launch-near-randolph-ks"
+   ],
+   "water_id": "tuttle-creek-lake-ks",
+   "gnis_id": "472898",
+   "geometry_hash": "ecc7e121f37b8d992f6c973ca49569bddc2ab846e3f1f606244c1152a0c6ca71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "verdigris-river-ks",
+   "name": "Verdigris River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Coffeyville",
+    "Independence"
+   ],
+   "bbox": [
+    -96.166821,
+    36.675928,
+    -95.54073,
+    38.152502
+   ],
+   "wikidata": "Q943521",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "verdigris-river-boat-launch-near-coffeyville-ks",
+    "verdigris-river-boat-launch-near-independence-ks"
+   ],
+   "water_id": "verdigris-river-ks",
+   "gnis_id": "1099243",
+   "geometry_hash": "987ea1e910e7fe7790ba917de592ca7e738ab28ada941ddf7778f2feb7a96d22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "waconda-lake-ks",
+   "name": "Waconda Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Cawker City",
+    "Glen Elder"
+   ],
+   "bbox": [
+    -98.493494,
+    39.446781,
+    -98.312153,
+    39.53116
+   ],
+   "wikidata": "Q7361672",
+   "charted": false,
+   "area_km2": 46.31,
+   "launches": [
+    "waconda-lake-boat-launch-near-cawker-city-ks-2",
+    "waconda-lake-boat-launch-near-cawker-city-ks-4",
+    "waconda-lake-boat-launch-near-glen-elder-ks-3",
+    "waconda-lake-boat-launch-near-cawker-city-ks-3",
+    "waconda-lake-boat-launch-near-glen-elder-ks-2",
+    "waconda-lake-boat-launch-near-cawker-city-ks",
+    "waconda-lake-boat-launch-near-glen-elder-ks"
+   ],
+   "water_id": "waconda-lake-ks",
+   "gnis_id": "479836",
+   "geometry_hash": "50115c555cf02935a8f4fb2e90e8f5a6211ffb6c8359dc59c00bdf35e0283063",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wakarusa-river-ks",
+   "name": "Wakarusa River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Clinton"
+   ],
+   "bbox": [
+    -95.818629,
+    38.870142,
+    -95.084508,
+    38.955459
+   ],
+   "wikidata": "Q7960826",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wakarusa-river-boat-launch-near-clinton-ks-2"
+   ],
+   "water_id": "wakarusa-river-ks",
+   "gnis_id": "482756",
+   "geometry_hash": "36002c650ace4d2bf19e9cfd006c8d3449c25e888ac6d33731ee005ee2807cdd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "walnut-river-ks",
+   "name": "Walnut River",
+   "kind": "river",
+   "state": "KS",
+   "towns": [
+    "Arkansas City",
+    "El Dorado",
+    "Winfield"
+   ],
+   "bbox": [
+    -97.047931,
+    37.043522,
+    -96.556381,
+    38.049654
+   ],
+   "wikidata": "Q7963656",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "arkansas-city-access-ks",
+    "walnut-river-boat-launch-near-el-dorado-ks",
+    "walnut-river-boat-launch-near-winfield-ks"
+   ],
+   "water_id": "walnut-river-ks",
+   "gnis_id": "470063",
+   "geometry_hash": "dc970623eea645a4e15c289736adbf9b5b1fc7a3a5ab0cf56bfff538668af3ba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "webster-reservoir-ks",
+   "name": "Webster Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Webster"
+   ],
+   "bbox": [
+    -99.509156,
+    39.379774,
+    -99.422997,
+    39.418933
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 11.618,
+   "launches": [
+    "webster-reservoir-boat-launch-near-webster-ks-4",
+    "webster-reservoir-boat-launch-near-webster-ks-3",
+    "webster-reservoir-boat-launch-near-webster-ks"
+   ],
+   "water_id": "webster-reservoir-ks",
+   "gnis_id": null,
+   "geometry_hash": "42dcc82bf32f246451f4c979f6a71011ad2cc578e308e01cf79f937191e300c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "webster-reservoir-boat-launch-near-webster-ks-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wilson-reservoir-ks",
+   "name": "Wilson Reservoir",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Dorrance",
+    "Sylvan Grove",
+    "Wilson"
+   ],
+   "bbox": [
+    -98.670428,
+    38.907727,
+    -98.476461,
+    38.969417
+   ],
+   "wikidata": "Q1592426",
+   "charted": false,
+   "area_km2": 34.494,
+   "launches": [
+    "wilson-reservoir-boat-launch-near-dorrance-ks-4",
+    "wilson-reservoir-boat-launch-near-dorrance-ks",
+    "wilson-reservoir-boat-launch-near-dorrance-ks-5",
+    "wilson-reservoir-boat-launch-near-dorrance-ks-6",
+    "wilson-reservoir-boat-launch-near-dorrance-ks-2",
+    "wilson-reservoir-boat-launch-near-sylvan-grove-ks",
+    "spillway-west-boat-ramp-ks",
+    "wilson-reservoir-boat-launch-near-dorrance-ks-3",
+    "wilson-state-park-boat-launch-ks"
+   ],
+   "water_id": "wilson-reservoir-ks",
+   "gnis_id": "472533",
+   "geometry_hash": "a1342ec6c5cae617ec35856f9a54236191625e4b288c121eef589741c77b7ba9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wilson-state-fishing-lake-ks",
+   "name": "Wilson State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Buffalo"
+   ],
+   "bbox": [
+    -95.678687,
+    37.691697,
+    -95.664839,
+    37.708731
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.403,
+   "launches": [
+    "wilson-state-fishing-lake-boat-launch-near-buffalo-ks-2"
+   ],
+   "water_id": "wilson-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "9387f4773016fb4d144a304b9abde6c2a9ffd8b0564ea40ae03c19ebb1399fad",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "winfield-city-lake-timber-creek-reservoir-ks",
+   "name": "Winfield City Lake (Timber Creek Reservoir)",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Floral",
+    "Wilmot",
+    "Winfield"
+   ],
+   "bbox": [
+    -96.897158,
+    37.341116,
+    -96.842824,
+    37.36314
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.245,
+   "launches": [
+    "large-boat-ramp-ks",
+    "personal-watercraft-ks",
+    "sailboat-boat-ramp-ks",
+    "winfield-city-lake-timber-creek-reservoir-boat-launch-near-wilmot-ks-2",
+    "winfield-city-lake-timber-creek-reservoir-boat-launch-near-wilmot-ks-3"
+   ],
+   "water_id": "winfield-city-lake-timber-creek-reservoir-ks",
+   "gnis_id": null,
+   "geometry_hash": "c015ef70e5d86451912bd08e0c7057d595c2769ede8564ee32720b0210e2a447",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "woodson-state-fishing-lake-ks",
+   "name": "Woodson State Fishing Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Yates Center"
+   ],
+   "bbox": [
+    -95.85196,
+    37.787585,
+    -95.838709,
+    37.81051
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.653,
+   "launches": [
+    "woodson-state-fishing-lake-boat-launch-ks"
+   ],
+   "water_id": "woodson-state-fishing-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "573262dda848640b7d883c865f741cbe493ca87035c1dcbb6250e14702a6e5ff",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wyandotte-county-lake-ks",
+   "name": "Wyandotte County Lake",
+   "kind": "reservoir",
+   "state": "KS",
+   "towns": [
+    "Vinewood"
+   ],
+   "bbox": [
+    -94.794068,
+    39.150653,
+    -94.770138,
+    39.173086
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.301,
+   "launches": [
+    "wyco-lake-boat-ramp-ks"
+   ],
+   "water_id": "wyandotte-county-lake-ks",
+   "gnis_id": null,
+   "geometry_hash": "72b3a1ae2137d6893174cb6c4910e490242b0c230bbfea889183d29d5951dfae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
