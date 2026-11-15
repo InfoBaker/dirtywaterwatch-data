@@ -516,7 +516,9 @@ def test_the_part_of_water_extent_is_written_only_by_arkansas():
     root = R.ROOT
     hits = [p for d in ("pipeline/ingest", "data/sources") for p in (root / d).rglob("*")
             if p.is_file() and p.suffix in (".py", ".yaml", ".json") and "part_of_water" in p.read_text(errors="ignore")]
-    assert {p.name for p in hits} == {"ar_transforms.py"}, hits
+    # Wyoming's bulletins write it for a row naming a part of its water ("Granite Reservoir: West Causeway"; Astra
+    # review 2026-11-15 P2, fix/co-mt-wy-review), keyed to that one Wyoming source
+    assert {p.name for p in hits} == {"ar_transforms.py", "wy_deq_hcb_bulletins.py"}, hits
 
 
 @pytest.mark.parametrize("item", [

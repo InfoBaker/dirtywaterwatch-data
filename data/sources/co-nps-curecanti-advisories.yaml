@@ -1,0 +1,21 @@
+id: "co-nps-curecanti-advisories"
+name: "National Park Service, Curecanti National Recreation Area: algae news releases (Blue Mesa Reservoir)"
+url: "https://www.nps.gov/cure/learn/news/toxic-algae-detected-in-blue-mesa-reservoir.htm"
+homepage: "https://www.nps.gov/cure/learn/news/toxic-algae-detected-in-blue-mesa-reservoir.htm"
+kind: "html"
+level: "federal"
+# Notes (research/co, status used, verified fetched, checked 2026-11-14): The August 13, 2026
+#   release (toxic algae at low levels in the Iola Basin, yellow caution signs) is read in the
+#   co-official-notices reviewed set; the park's news RSS did not answer on 2026-11-14.
+cadence: null
+license: "none stated"
+attribution: "National Park Service"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["CO"]
+access: ["html"]
+access_detail: null
+machine_readable: false
+legal_basis: null
+checked: "2026-11-14"
