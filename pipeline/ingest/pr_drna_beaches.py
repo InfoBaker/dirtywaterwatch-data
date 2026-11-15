@@ -38,7 +38,10 @@ Records (the accuracy-first pattern, docs/generic-ingesters.md: sampled_at apart
   - a later list without the beach (an omission): ended_at that notice's publication with raw.ended_at_precision
     "poll" and raw._last_seen_in_source the last notice that listed it; DRNA states no lift, so the status build stops
     the colour 14 days after that notice (status.POLL_END_HORIZON_SOURCES) however long DRNA waits between notices;
-  - a list with a row no station is matched to ends nothing (the row may be the beach) and reconfirms nothing.
+  - a list with a row no station is matched to, a row with fewer than three cells, or a table or row opened and not
+    closed ends nothing (the unread part may be the beach) and reconfirms nothing; when it is the newest notice the feed
+    is written with ok false (partial, meta.incomplete_blocking) until a complete notice is read (Astra verify P1-2).
+    A post with no id or no date_gmt is never skipped silently: meta.malformed_posts lists it and the feed is not ok.
   raw.end_basis, raw.ended_by_notice and raw.end_url cite the notice. A run the newest notice lists is
   advisory_active with no end and raw._last_seen_in_source this poll's time; when the newest notice cannot be read the
   confirmation stays where the last run left it (state file "confirmed"), and the feed is written with ok false
@@ -231,14 +234,31 @@ def text_of(html: str) -> str:
     return re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", " ", t))).strip()
 
 
-def table_rows(html: str) -> list[tuple[str, str, str]]:
-    out = []
-    for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", html or "", re.S | re.I):
+def table_read(html: str) -> tuple[list[tuple[str, str, str]], dict]:
+    """(rows, what was incomplete) of a notice's table (Astra verify P1-2). A row with fewer than three cells is kept
+    (padded) and counted as short; a table or row opened and not closed is counted. A notice with either ends no
+    advisory (the missing part may be any beach) and, when it is the newest, fails the feed's health."""
+    out, short = [], 0
+    h = html or ""
+    for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", h, re.S | re.I):
         cells = [text_of(c) for c in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", tr, re.S | re.I)]
-        if len(cells) < 2 or not any(cells) or fold(cells[0]).startswith("estaci"):
+        if not any(cells) or fold(cells[0]).startswith("estaci"):
             continue
+        if len(cells) < 3:
+            short += 1
         out.append(tuple((cells + ["", "", ""])[:3]))
-    return out
+    unclosed = (len(re.findall(r"<table\b", h, re.I)) > len(re.findall(r"</table>", h, re.I))
+                or len(re.findall(r"<tr\b", h, re.I)) > len(re.findall(r"</tr>", h, re.I)))
+    inc = {}
+    if short:
+        inc["short_rows"] = short
+    if unclosed:
+        inc["table_not_closed"] = True
+    return out, inc
+
+
+def table_rows(html: str) -> list[tuple[str, str, str]]:
+    return table_read(html)[0]
 
 
 def code_station(code: str) -> str | None:
@@ -347,7 +367,7 @@ def parse_notice(post: dict) -> dict:
     pub = (post.get("date_gmt") or "")[:19] + "Z" if post.get("date_gmt") else None
     mod = (post.get("modified_gmt") or "")[:19] + "Z" if post.get("modified_gmt") else None
     sampled, words = sample_date(text, pub or "2000-01")
-    rows = table_rows(html)
+    rows, incomplete = table_read(html)
     listed, unknown = [], []
     for code, name, town in rows:
         if not (code or name):
@@ -374,13 +394,18 @@ def parse_notice(post: dict) -> dict:
         advice = re.sub(r"\s+", " ", full.group(0)) if full else "no son aptas para bañistas"
     link = post.get("link") if isinstance(post.get("link"), str) and post["link"].startswith(LINK_PREFIX) else None
     return {"id": post.get("id"), "published": pub, "modified": mod, "link": link, "kind": kind,
-            "sampled": sampled, "sample_words": words, "advice": advice, "listed": listed, "unknown": unknown}
+            "sampled": sampled, "sample_words": words, "advice": advice, "listed": listed, "unknown": unknown,
+            "incomplete": incomplete}
 
 
 def sanitize_notice(n: dict) -> dict:
     """A notice carried from an earlier state file, cut to the same fields and forms parse_notice saves (lesson 6)."""
     keep = ("id", "published", "modified", "link", "kind", "sampled", "sample_words", "advice", "listed", "unknown")
     out = {k: n.get(k) for k in keep}
+    inc = n.get("incomplete") if isinstance(n.get("incomplete"), dict) else {}
+    out["incomplete"] = {k: v for k, v in inc.items() if (k == "short_rows" and isinstance(v, int)
+                                                          and not isinstance(v, bool)) or (k == "table_not_closed"
+                                                                                           and v is True)}
     for k in ("modified_latest",):
         if isinstance(n.get(k), str) and re.fullmatch(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ", n[k]):
             out[k] = n[k]
@@ -471,8 +496,10 @@ def records(notices: list[dict], at: str, confirmed: dict | None = None) -> tupl
             ends, how = set(open_runs), "explicit"
         elif kind == "fit_list":
             ends, how = {x["station"] for x in v["listed"]} & set(open_runs), "explicit"
-        elif v.get("unknown"):
-            ends, how = set(), None        # an incomplete list: an unread row may be any beach, so none is ended
+        elif v.get("unknown") or v.get("incomplete"):
+            # an incomplete list (a row no station is matched to, a short row, a table cut off): the unread part may be
+            # any beach, so none is ended (Astra verify P1-2)
+            ends, how = set(), None
         else:
             ends, how = set(open_runs) - set(listed), "omission"
         if i and how:
@@ -500,11 +527,17 @@ def records(notices: list[dict], at: str, confirmed: dict | None = None) -> tupl
     blocking = [n["id"] for n in unread if first_readable and n["published"] > first_readable]
     if newest_unread and newest[2] not in blocking:
         blocking.append(newest[2])
+    # the newest readable notice read incompletely (an unmatched or short row, a table cut off): the records read are
+    # kept, nothing is ended by it, and the feed is not healthy until a complete notice is read (Astra verify P1-2)
+    newest_read = readable_steps[-1] if readable_steps else None
+    incomplete_blocking = ([newest_read[2]] if newest_read and newest_read[5].get("kind") in ("exceed", "fit_list")
+                           and (newest_read[5].get("unknown") or newest_read[5].get("incomplete")) else [])
     meta = {"notices": len(ns), "by_kind": {k: sum(1 for n in ns if _versions(n)[-1].get("kind") == k)
                                              for k in ("exceed", "all_fit", "fit_list", "unread")},
             "unread_notices": [n["id"] for n in unread],
             "unread_blocking": blocking,
             "unread_before_first_readable": [n["id"] for n in unread if n["id"] not in blocking],
+            "incomplete_blocking": incomplete_blocking,
             "late_revisions": late,
             "revised_notices": sorted(n["id"] for n in ns if len(_versions(n)) > 1),
             "newest_notice": readable_steps[-1][1] if readable_steps else None,
@@ -633,6 +666,11 @@ def main(argv=None) -> int:
         print(f"{SOURCE_ID}: {type(e).__name__}", file=sys.stderr)
         return 1
     parsed = [parse_notice(p) for p in posts if isinstance(p, dict) and p.get("id") and p.get("date_gmt")]
+    # a post that cannot be placed in time or identified is never skipped silently: listed, and the feed not healthy
+    # (Astra verify P1-2); its id only, nothing else of it is saved
+    malformed = [{"id": p.get("id") if isinstance(p, dict) and isinstance(p.get("id"), int) else None,
+                  "why": "not a post" if not isinstance(p, dict) else "no id" if not p.get("id") else "no date_gmt"}
+                 for p in posts if not (isinstance(p, dict) and p.get("id") and p.get("date_gmt"))]
     if not parsed:
         write_events(SOURCE_ID, [], ok=False, error="no notices in the response")
         return 1
@@ -641,19 +679,23 @@ def main(argv=None) -> int:
     notices = sorted(known.values(), key=lambda n: (n.get("published") or "", n["id"]))
     recs, meta = records(notices, at, state.get("confirmed") or {})
     meta.update(registry_ids=[SOURCE_ID], url=URL, station_table=TABLE_URL,
-                cadence="weekly notices; read with the refresh")
+                cadence="weekly notices; read with the refresh", malformed_posts=malformed)
     if not files:
         save_raw(SOURCE_ID, json.dumps(parsed, ensure_ascii=False), "json")
         write_json(STATE_PATH, {"source_id": SOURCE_ID, "updated": at, "notices": notices,
                                 "confirmed": {r["event_id"]: r["raw"]["_last_seen_in_source"] for r in recs
                                               if r["status"] == "advisory_active"
                                               and r["raw"].get("_last_seen_in_source")}})
-    if meta["unread_blocking"]:
-        # a notice that cannot be read after the first readable one (the newest above all): the records read are kept
-        # and written, the confirmations stay where they were, and the feed is not healthy until it is read (P1-3)
-        path = write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta,
-                            error=f"notices not read: {meta['unread_blocking']}")
-        print(f"{SOURCE_ID}: {len(recs)} records; notices not read: {meta['unread_blocking']}", file=sys.stderr)
+    if meta["unread_blocking"] or meta["incomplete_blocking"] or malformed:
+        # a notice that cannot be read after the first readable one (the newest above all), a newest notice read
+        # incompletely, or a post with no id or date: the records read are kept and written, the confirmations stay
+        # where they were, and the feed is not healthy until it is read (P1-3; Astra verify P1-2)
+        why = "; ".join(x for x in (
+            f"notices not read: {meta['unread_blocking']}" if meta["unread_blocking"] else "",
+            f"newest notice read incompletely: {meta['incomplete_blocking']}" if meta["incomplete_blocking"] else "",
+            f"posts with no id or date: {len(malformed)}" if malformed else "") if x)
+        path = write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta, error=why)
+        print(f"{SOURCE_ID}: {len(recs)} records; {why}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {len(recs)} records from {len(notices)} notices "
