@@ -39,7 +39,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json DE0051071",
-   "kind_note": "New Castle County's and the Delaware Department of Transportation's municipal separate storm sewer system permit (MS4; EPA's permit name 'NEW CASTLE COUNTY-MS4', facility 'NEW CASTLE COUNTY-DELDOT MS4'): a storm sewer permit, not a sewage outfall, although EPA lists a POTW component; kept off the map and out of the outfall count."
+   "kind_note": "New Castle County's and the Delaware Department of Transportation's municipal separate storm sewer system permit (MS4; EPA's permit name 'NEW CASTLE COUNTY-MS4', facility 'NEW CASTLE COUNTY-DELDOT MS4'): a storm sewer permit, not a sewage outfall, although EPA lists a POTW component; kept off the map and out of the outfall count.",
+   "water_slug": "delaware-river-de",
+   "water_name": "Delaware River",
+   "water_kind": "river",
+   "distance_m": null,
+   "match": "name_only",
+   "water_match": "NHD builder: the NHD builder's water for 'DELAWARE RIVER' in DE (as found for the permits that name it: GNIS name in DE, 1.1 km from New Castle, Port Penn); Delaware River (delaware-river-de, NHDPlus V2.1 record), no point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   }
  ]
 }

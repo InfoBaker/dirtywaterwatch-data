@@ -1,11 +1,23 @@
 {
  "about": "Water names in DE's records that data/receiving-waters-national.json does not hold for DE, one row per name and county with the number of records, how many are open now, up to five points ([lat, lon], 0.001 degree), towns and sources, for the names pass. Records naming no water and releases DNREC's form marks to ground only are left out (by_reason). Written by scripts/de_sc_report_water_names.py.",
  "state": "DE",
- "waters": 68,
- "reports": 331,
+ "waters": 42,
+ "reports": 146,
  "by_reason": {
-  "names no water": 387,
-  "the report says it reached no water": 805
+  "no NHD flowline or waterbody of that name in DE": 34,
+  "1 NHD water of that name in DE, none within reach of the reports' places": 5,
+  "the open sea (no NHD record)": 1,
+  "2 NHD waters of that name in DE and the reports give no place to choose one": 1,
+  "3 NHD waters of that name in DE, none within reach of the reports' places": 1
+ },
+ "resolved_names": 35,
+ "resolved_reports": 203,
+ "build": {
+  "date": "2026-11-15",
+  "command": "python -m ingest.waters_from_nhd --names research/de/receiving-waters-missing.json --state DE",
+  "records_built": 10,
+  "names_resolved": 35,
+  "network_requests": 45
  },
  "rows": [
   {
@@ -39,64 +51,7 @@
    "sources": {
     "de-dnrec-recreational-water": 85
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Lake Como",
-   "county": null,
-   "reports": 55,
-   "open": 0,
-   "points": [
-    [
-     39.295,
-     -75.6
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "de-dnrec-recreational-water": 55
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Delaware Bay",
-   "county": null,
-   "reports": 54,
-   "open": 0,
-   "points": [
-    [
-     38.914,
-     -75.304
-    ],
-    [
-     38.829,
-     -75.212
-    ],
-    [
-     38.783,
-     -75.131
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "de-dnrec-recreational-water": 54
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Silver Lake",
-   "county": "Kent",
-   "reports": 26,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Dover"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 2,
-    "de-dnrec-recreational-water": 24
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "the open sea (no NHD record)"
   },
   {
    "name": "Rehoboth Bay",
@@ -113,66 +68,7 @@
    "sources": {
     "de-dnrec-recreational-water": 18
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "St. Jones River",
-   "county": "Kent",
-   "reports": 11,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Dover",
-    "Dover Air Force Base"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 11
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "White Clay Creek",
-   "county": "New Castle",
-   "reports": 8,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Newark",
-    "Wilmington",
-    "Kirkwood"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 8
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Indian River",
-   "county": "Sussex",
-   "reports": 4,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Millsboro"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 4
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Army Creek",
-   "county": "New Castle",
-   "reports": 2,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "New Castle"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 2
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Calf Run",
@@ -186,7 +82,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 2
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Christiana River",
@@ -201,7 +97,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 2
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Cypress Branch",
@@ -213,95 +109,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 2
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Indian River Bay",
-   "county": null,
-   "reports": 2,
-   "open": 0,
-   "points": [
-    [
-     38.592,
-     -75.132
-    ],
-    [
-     38.607,
-     -75.146
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "de-dnrec-recreational-water": 2
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Lums Pond",
-   "county": "New Castle",
-   "reports": 2,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Kirkwood"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1,
-    "de-dnrec-recreational-water": 1
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Mispillion River",
-   "county": null,
-   "reports": 2,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 2
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Polly Branch",
-   "county": "Sussex",
-   "reports": 2,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Selbyville"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 2
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Red Lion Creek",
-   "county": "New Castle",
-   "reports": 2,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Bear"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 2
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "White Clay Creek",
-   "county": null,
-   "reports": 2,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 2
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "2 NHD waters of that name in DE and the reports give no place to choose one"
   },
   {
    "name": "Alapocus Creek",
@@ -315,7 +123,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Alapocus Run",
@@ -329,7 +137,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Brandywine River",
@@ -341,7 +149,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Brandywine River",
@@ -355,7 +163,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Broadkill Creek",
@@ -369,7 +177,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Burton's Pond",
@@ -383,7 +191,13 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Lewes",
+     "reason": "no NHD water of that name within 3 km of Lewes (the nearest is 10.0 km away)"
+    }
+   ]
   },
   {
    "name": "Bye Creek",
@@ -395,19 +209,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Chestnut Run",
-   "county": "New Castle",
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Christiana Creek",
@@ -421,7 +223,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Christiana Creek Branch",
@@ -435,7 +237,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Christiana Marsh",
@@ -449,7 +251,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "City Branch Canal",
@@ -463,35 +265,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Cypress Branch",
-   "county": "Kent",
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Dover"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Cypress Branch Creek",
-   "county": "Kent",
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Magnolia"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Doe Run Creek",
@@ -505,7 +279,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Dragon Run Creek",
@@ -519,7 +293,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "East Branch",
@@ -533,7 +307,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Hershey Run",
@@ -547,7 +321,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Hyde Run",
@@ -561,19 +335,13 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Indian River",
-   "county": null,
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Wilmington",
+     "reason": "no NHD water of that name within 3 km of Wilmington (the nearest is 4.0 km away)"
+    }
+   ]
   },
   {
    "name": "Jenny'S Run",
@@ -585,7 +353,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Leatherems Run",
@@ -599,7 +367,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Letherems Run",
@@ -613,7 +381,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Lewes Canal",
@@ -627,7 +395,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Lewes Rehoboth Canal",
@@ -641,33 +409,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Lums Pond",
-   "county": null,
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Magazine Ditch",
-   "county": "New Castle",
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "New Castle"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Mill Creek",
@@ -681,7 +423,13 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "3 NHD waters of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Greenwood",
+     "reason": "no NHD water of that name within 3 km of Greenwood (the nearest is 48.5 km away)"
+    }
+   ]
   },
   {
    "name": "Naamans Creek",
@@ -695,7 +443,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Nammans Creek",
@@ -709,7 +457,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "None Such Creek",
@@ -723,7 +471,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Nonesuch Creek",
@@ -737,7 +485,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Noxontown Pond",
@@ -749,7 +497,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Peachtree Run",
@@ -761,7 +509,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Red Clay Creek",
@@ -775,7 +523,13 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Wilmington",
+     "reason": "no NHD water of that name within 3 km of Wilmington (the nearest is 3.8 km away)"
+    }
+   ]
   },
   {
    "name": "Rehoboth Bay",
@@ -789,21 +543,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Rossakatum Branch",
-   "county": "Sussex",
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Laurel"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Rossakatum Creek",
@@ -817,19 +557,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Silver Lake",
-   "county": null,
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "South Branch Naaman Creek",
@@ -843,19 +571,13 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "St. Jones River",
-   "county": null,
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Wilmington",
+     "reason": "no NHD water of that name within 3 km of Wilmington (the nearest is 5.5 km away)"
+    }
+   ]
   },
   {
    "name": "Stonewater Creek",
@@ -869,7 +591,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Sunset Lake",
@@ -883,47 +605,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Tidbury Creek",
-   "county": "Kent",
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Camden"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Trap Pond",
-   "county": null,
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Trap Pond",
-   "county": "Sussex",
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [
-    "Laurel"
-   ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Trunk Ditch",
@@ -937,19 +619,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
-  },
-  {
-   "name": "Turkey Run",
-   "county": "New Castle",
-   "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "White Clay Creek River",
@@ -961,7 +631,7 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Wood Creek",
@@ -975,137 +645,419 @@
    "sources": {
     "de-dnrec-derns-recent-releases": 1
    },
-   "reason": "no water of that name in DE on the national list"
+   "reason": "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Greenwood",
+     "reason": "no NHD water of that name within 3 km of Greenwood (the nearest is 38.2 km away)"
+    }
+   ]
   }
  ],
  "resolved": [
   {
+   "name": "Lake Como",
+   "reports": 55,
+   "slugs": [
+    "lake-como-de"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     39.295,
+     -75.6
+    ]
+   ]
+  },
+  {
+   "name": "Delaware Bay",
+   "reports": 54,
+   "slugs": [
+    "delaware-bay-de"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.914,
+     -75.304
+    ],
+    [
+     38.829,
+     -75.212
+    ],
+    [
+     38.783,
+     -75.131
+    ]
+   ]
+  },
+  {
+   "name": "Silver Lake",
+   "reports": 26,
+   "slugs": [
+    "silver-lake-de"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Dover"
+   ],
+   "county": "Kent"
+  },
+  {
+   "name": "St. Jones River",
+   "reports": 11,
+   "slugs": [
+    "st-jones-river-de"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Dover",
+    "Dover Air Force Base"
+   ],
+   "county": "Kent"
+  },
+  {
+   "name": "White Clay Creek",
+   "reports": 8,
+   "slugs": [
+    "white-clay-creek-de"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Newark",
+    "Wilmington",
+    "Kirkwood"
+   ],
+   "county": "New Castle",
+   "places_failed": [
+    {
+     "town": "Wilmington",
+     "reason": "no NHD water of that name within 3 km of Wilmington (the nearest is 5.5 km away)"
+    }
+   ]
+  },
+  {
    "name": "Broad Creek",
-   "county": "Sussex",
    "reports": 6,
-   "open": 0,
-   "points": [],
+   "slugs": [
+    "broad-creek-de"
+   ],
+   "how": "a water record already holds the name",
    "towns": [
     "Laurel"
    ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 6
-   },
-   "how": "the national list holds the name",
-   "national_key": "broad creek"
+   "county": "Sussex"
+  },
+  {
+   "name": "Indian River",
+   "reports": 4,
+   "slugs": [
+    "indian-river-de"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Millsboro"
+   ],
+   "county": "Sussex"
+  },
+  {
+   "name": "Army Creek",
+   "reports": 2,
+   "slugs": [
+    "army-creek-de"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "New Castle"
+   ],
+   "county": "New Castle"
   },
   {
    "name": "Brandywine Creek",
-   "county": "New Castle",
    "reports": 2,
-   "open": 0,
-   "points": [],
+   "slugs": [
+    "brandywine-creek-de"
+   ],
+   "how": "a water record already holds the name",
    "towns": [
     "Wilmington"
    ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 2
-   },
-   "how": "the national list holds the name",
-   "national_key": "brandywine creek"
+   "county": "New Castle"
   },
   {
    "name": "Broad Creek",
-   "county": null,
    "reports": 2,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 2
-   },
-   "how": "the national list holds the name",
-   "national_key": "broad creek"
+   "slugs": [
+    "broad-creek-de"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Indian River Bay",
+   "reports": 2,
+   "slugs": [
+    "indian-river-bay-de"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.592,
+     -75.132
+    ],
+    [
+     38.607,
+     -75.146
+    ]
+   ]
   },
   {
    "name": "Little Mill Creek",
-   "county": "New Castle",
    "reports": 2,
-   "open": 0,
-   "points": [],
+   "slugs": [
+    "little-mill-creek-de"
+   ],
+   "how": "a water record already holds the name",
    "towns": [
     "Wilmington",
     "Brookside"
    ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 2
-   },
-   "how": "the national list holds the name",
-   "national_key": "little mill creek"
+   "county": "New Castle"
+  },
+  {
+   "name": "Lums Pond",
+   "reports": 2,
+   "slugs": [
+    "lums-pond-de"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Kirkwood"
+   ],
+   "county": "New Castle"
+  },
+  {
+   "name": "Mispillion River",
+   "reports": 2,
+   "slugs": [
+    "mispillion-river-de"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Polly Branch",
+   "reports": 2,
+   "slugs": [
+    "polly-branch-de"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Selbyville"
+   ],
+   "county": "Sussex"
+  },
+  {
+   "name": "Red Lion Creek",
+   "reports": 2,
+   "slugs": [
+    "red-lion-creek-de"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Bear"
+   ],
+   "county": "New Castle"
   },
   {
    "name": "Shellpot Creek",
-   "county": null,
    "reports": 2,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 2
-   },
-   "how": "the national list holds the name",
-   "national_key": "shellpot creek"
+   "slugs": [
+    "shellpot-creek-de"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "White Clay Creek",
+   "reports": 2,
+   "slugs": [
+    "white-clay-creek-de"
+   ],
+   "how": "record built from the name",
+   "places_failed": [
+    {
+     "town": "Wilmington",
+     "reason": "no NHD water of that name within 3 km of Wilmington (the nearest is 5.5 km away)"
+    }
+   ]
   },
   {
    "name": "Brandywine Creek",
-   "county": null,
    "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "how": "the national list holds the name",
-   "national_key": "brandywine creek"
+   "slugs": [
+    "brandywine-creek-de"
+   ],
+   "how": "a water record already holds the name"
   },
   {
    "name": "Broadkill River",
-   "county": "Sussex",
    "reports": 1,
-   "open": 0,
-   "points": [],
+   "slugs": [
+    "broadkill-river-de"
+   ],
+   "how": "a water record already holds the name",
    "towns": [
     "Milton"
    ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "how": "the national list holds the name",
-   "national_key": "broadkill river"
+   "county": "Sussex"
+  },
+  {
+   "name": "Chestnut Run",
+   "reports": 1,
+   "slugs": [
+    "chestnut-run-de"
+   ],
+   "how": "record built from the name",
+   "county": "New Castle"
+  },
+  {
+   "name": "Cypress Branch",
+   "reports": 1,
+   "slugs": [
+    "cypress-branch-de"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Dover"
+   ],
+   "county": "Kent"
+  },
+  {
+   "name": "Cypress Branch Creek",
+   "reports": 1,
+   "slugs": [
+    "cypress-branch-de"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Magnolia"
+   ],
+   "county": "Kent"
+  },
+  {
+   "name": "Indian River",
+   "reports": 1,
+   "slugs": [
+    "indian-river-de"
+   ],
+   "how": "a water record already holds the name"
   },
   {
    "name": "Little Mill Creek",
-   "county": null,
    "reports": 1,
-   "open": 0,
-   "points": [],
-   "towns": [],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "how": "the national list holds the name",
-   "national_key": "little mill creek"
+   "slugs": [
+    "little-mill-creek-de"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Lums Pond",
+   "reports": 1,
+   "slugs": [
+    "lums-pond-de"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Magazine Ditch",
+   "reports": 1,
+   "slugs": [
+    "magazine-ditch-de"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "New Castle"
+   ],
+   "county": "New Castle"
   },
   {
    "name": "Nanticoke River",
-   "county": "Sussex",
    "reports": 1,
-   "open": 0,
-   "points": [],
+   "slugs": [
+    "nanticoke-river-de"
+   ],
+   "how": "a water record already holds the name",
    "towns": [
     "Seaford"
    ],
-   "sources": {
-    "de-dnrec-derns-recent-releases": 1
-   },
-   "how": "the national list holds the name",
-   "national_key": "nanticoke river"
+   "county": "Sussex"
+  },
+  {
+   "name": "Rossakatum Branch",
+   "reports": 1,
+   "slugs": [
+    "rossakatum-branch-de"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Laurel"
+   ],
+   "county": "Sussex"
+  },
+  {
+   "name": "Silver Lake",
+   "reports": 1,
+   "slugs": [
+    "silver-lake-de"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "St. Jones River",
+   "reports": 1,
+   "slugs": [
+    "st-jones-river-de"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Tidbury Creek",
+   "reports": 1,
+   "slugs": [
+    "tidbury-creek-de"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Camden"
+   ],
+   "county": "Kent"
+  },
+  {
+   "name": "Trap Pond",
+   "reports": 1,
+   "slugs": [
+    "trap-pond-de"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Trap Pond",
+   "reports": 1,
+   "slugs": [
+    "trap-pond-de"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Laurel"
+   ],
+   "county": "Sussex"
+  },
+  {
+   "name": "Turkey Run",
+   "reports": 1,
+   "slugs": [
+    "turkey-run-de"
+   ],
+   "how": "record built from the name",
+   "county": "New Castle"
   }
  ]
 }

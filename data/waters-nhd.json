@@ -1,8 +1,8 @@
 {
  "source": "USGS NLDI hydrolocation and EPA NHDPlus V2.1 MapServer (pipeline/ingest/waters_from_nhd.py); hand records (hand: true) also from the USGS NHD high-resolution flowlines (The National Map) and the Census TIGER/Line hydrography (TIGERweb Hydro, with the USGS GNIS feature of the name); towns: Census 2020 county subdivisions (TIGERweb). Rows with source 'osm' (fallback_for 'nhd'): data (c) OpenStreetMap contributors, ODbL",
- "built": "2026-11-15T15:37:15Z",
+ "built": "2026-11-15T15:47:59Z",
  "partial": false,
- "count": 7484,
+ "count": 7499,
  "note": "Receiving waters named by outfalls and notices that have no openboatlaunch or waters-extra record. Same row shape as waters-extra.json plus gnis_id, comids, nhd_fcodes and the number of targets mapped to the row; launches and advisories empty, charted not checked.",
  "stats": {
   "targets": 1816,
@@ -1109,6 +1109,135 @@
        "why": "San Francisco Bay (san-francisco-bay-ca) carries the name 'SF Bay' and reaches the operators' towns (alameda, san mateo)"
       }
      ]
+    }
+   },
+   "DE": {
+    "built": "2026-11-15T15:46:16Z",
+    "targets": 12,
+    "targets_by_define_by": {
+     "reach": 7,
+     "point": 3,
+     "unnamed": 2
+    },
+    "targets_mapped": 11,
+    "targets_mapped_by": {
+     "name": 3,
+     "reach": 3,
+     "point (NHD high resolution)": 1,
+     "point": 2,
+     "unnamed": 2
+    },
+    "targets_failed": 1,
+    "failed_reasons": {
+     "no NHD flowline or waterbody of that name within 2 km": 1
+    },
+    "records": 5,
+    "records_by_define_by": {
+     "name": 1,
+     "point": 2,
+     "unnamed": 2
+    },
+    "records_by_kind": {
+     "river": 1,
+     "canal": 1,
+     "stream": 3
+    },
+    "no_water": {
+     "no receiving-water name, no point and no NHD reach in EPA's records for this outfall": 1
+    },
+    "run": {
+     "requests": {
+      "tiger": 2,
+      "reach2": 2,
+      "name2": 5,
+      "gnis2": 8,
+      "name4": 2,
+      "nldi-position": 6,
+      "near2": 6,
+      "near4": 4,
+      "nldi-nav": 2,
+      "comid2": 2,
+      "nhd-hr-near": 3,
+      "nhd-hr": 1
+     },
+     "network_requests": 43,
+     "cached": {},
+     "failed": {},
+     "stopped": null,
+     "other_places": {
+      "places": 1,
+      "resolved": 1,
+      "found": 0,
+      "seconds": 1.7
+     },
+     "osm": {
+      "by_state": {
+       "DE": {
+        "targets": 1,
+        "queries": 1,
+        "sent": 1,
+        "failed": null,
+        "via": [
+         "https://lz4.overpass-api.de/api/interpreter"
+        ]
+       }
+      },
+      "left_for_next_run": 0
+     }
+    },
+    "write": {
+     "mode": "merge",
+     "existing_records": 7484,
+     "run_records": 5,
+     "replaced": 0,
+     "added": 5,
+     "kept": 7484,
+     "dropped": 0,
+     "written": 7489
+    },
+    "report_names": {
+     "built": "2026-11-15T15:47:56Z",
+     "file": "research/de/receiving-waters-missing.json",
+     "names": 77,
+     "reports": 349,
+     "names_no_water": 1,
+     "waters_named": 75,
+     "already_a_record": 23,
+     "targets": 52,
+     "targets_mapped": 12,
+     "records": 10,
+     "targets_failed": 40,
+     "failed_reasons": {
+      "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports": 26,
+      "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flo": 6,
+      "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name w": 5,
+      "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the points;": 1,
+      "2 NHD waters of that name in DE and the reports give no place to choose one": 1,
+      "3 NHD waters of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name ": 1
+     },
+     "network_requests": 45,
+     "requests": {
+      "name2": 2,
+      "name4": 2,
+      "gnis2": 9,
+      "nhd-hr-near": 31,
+      "nhd-hr": 1
+     },
+     "cached": {
+      "tiger": 2
+     },
+     "failed": {},
+     "stopped": null,
+     "write": {
+      "mode": "merge",
+      "existing_records": 7489,
+      "run_records": 10,
+      "replaced": 0,
+      "added": 10,
+      "kept": 7489,
+      "dropped": 0,
+      "written": 7499
+     }
     }
    },
    "FL": {
@@ -13408,6 +13537,16 @@
    "state": "KS",
    "text": "Unnamed Stream (11070201946)",
    "reason": "not a water name"
+  },
+  {
+   "state": "DE",
+   "text": "unnamed outfall DE0050008:None",
+   "reason": "no receiving-water name, no point and no NHD reach in EPA's records for this outfall"
+  },
+  {
+   "state": "DE",
+   "text": "Atlantic Ocean",
+   "reason": "the open sea (no NHD record)"
   }
  ],
  "targets": [
@@ -394394,6 +394533,1644 @@
    "county": "Faulkner County",
    "from": "reports",
    "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "DELAWARE RIVER",
+   "texts": [
+    "DELAWARE RIVER"
+   ],
+   "outfalls": 3,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "New Castle",
+    "Port Penn"
+   ],
+   "slugs": [
+    "delaware-river-de"
+   ],
+   "how": [
+    "GNIS name in DE, 1.1 km from New Castle, Port Penn"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "name",
+   "permits": [
+    "DE0021539",
+    "DE0021555",
+    "DE0051071"
+   ],
+   "notes": [
+    "EPA's reaches for it are unnamed in NHDPlus V2.1: defined by name"
+   ],
+   "places_failed": [
+    {
+     "lon": -75.5851,
+     "lat": 39.57644,
+     "reason": "no NHD flowline or waterbody of that name within 2 km (nearby: Dragon Creek)"
+    }
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "APPOQUINIMINK RIVER",
+   "texts": [
+    "APPOQUINIMINK RIVER"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "New Castle"
+   ],
+   "slugs": [
+    "appoquinimink-river-de"
+   ],
+   "how": [
+    "EPA's NHD reach/NHDPlus id 02040205000936, 4653732: GNIS 'Appoquinimink River' (213568); no snapping; the same water as existing record appoquinimink-river-de"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "reach",
+   "permits": [
+    "DE0050547"
+   ],
+   "reach_slugs": {
+    "02040205000936": "appoquinimink-river-de",
+    "4653732": "appoquinimink-river-de"
+   }
+  },
+  {
+   "state": "DE",
+   "name": "BROAD CREEK",
+   "texts": [
+    "BROAD CREEK"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Laurel"
+   ],
+   "slugs": [
+    "broad-creek-de"
+   ],
+   "how": [
+    "GNIS name in DE, crossing Laurel; the same water as existing record broad-creek-de"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "name",
+   "permits": [
+    "DE0020125"
+   ],
+   "notes": [
+    "EPA's reaches for it are unnamed in NHDPlus V2.1: defined by name"
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "Broadkill River",
+   "texts": [
+    "Broadkill River"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Milton"
+   ],
+   "slugs": [
+    "broadkill-river-de"
+   ],
+   "how": [
+    "EPA's NHD reach/NHDPlus id 02040207010230, 8077960: GNIS 'Broadkill River' (213715); no snapping; the same water as existing record broadkill-river-de"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "reach",
+   "permits": [
+    "DE0021491"
+   ],
+   "reach_slugs": {
+    "02040207010230": "broadkill-river-de",
+    "8077960": "broadkill-river-de"
+   }
+  },
+  {
+   "state": "DE",
+   "name": "LEWES and REHOBOTH CANAL",
+   "texts": [
+    "LEWES AND REHOBOTH CANAL"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Rehoboth Beach"
+   ],
+   "slugs": [
+    "lewes-and-rehoboth-canal-de"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Lewes and Rehoboth Canal' (GNIS 214215) 26 m from the point (38.70011, -75.09328); the same water as existing record lewes-and-rehoboth-canal-de"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "point (NHD high resolution)",
+   "permits": [
+    "DE0020028"
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "MURDERKILL RIVER",
+   "texts": [
+    "MURDERKILL RIVER"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Milford"
+   ],
+   "slugs": [
+    "murderkill-river-de"
+   ],
+   "how": [
+    "the only NHD water of that name in DE; the same water as existing record murderkill-river-de"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "name",
+   "permits": [
+    "DE0020338"
+   ],
+   "notes": [
+    "EPA's reaches for it are unnamed in NHDPlus V2.1: defined by name"
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "Nanticoke River",
+   "texts": [
+    "Nanticoke River"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Seaford"
+   ],
+   "slugs": [
+    "nanticoke-river-de"
+   ],
+   "how": [
+    "EPA's NHD reach/NHDPlus id 02080109011489, 8392668: GNIS 'Nanticoke River' (586142); no snapping; the same water as existing record nanticoke-river-de"
+   ],
+   "reason": null,
+   "define_by": "reach",
+   "defined_by": "reach",
+   "permits": [
+    "DE0020265"
+   ],
+   "reach_slugs": {
+    "02080109011489": "nanticoke-river-de",
+    "8392668": "nanticoke-river-de"
+   }
+  },
+  {
+   "state": "DE",
+   "name": "Silverbrook Run",
+   "texts": [
+    "Silverbrook Run/Little Mill Creek"
+   ],
+   "outfalls": 2,
+   "events": 0,
+   "points": 2,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name within 2 km (nearby: Chestnut Run, Little Mill Creek); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "define_by": "point",
+   "defined_by": null,
+   "permits": [
+    "DE0020320"
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "Little Mill Creek",
+   "texts": [
+    "Little Mill Creek"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [
+    "little-mill-creek-de"
+   ],
+   "how": [
+    "nearest flowline named 'Little Mill Creek' (752 m; NLDI COMID 4651288 is 'unnamed')"
+   ],
+   "reason": null,
+   "define_by": "point",
+   "defined_by": "point",
+   "permits": [
+    "DE0020320"
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "Shellpot Creek",
+   "texts": [
+    "Shellpot Creek"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [
+    "shellpot-creek-de"
+   ],
+   "how": [
+    "NLDI position COMID 4651906 (327 m)"
+   ],
+   "reason": null,
+   "define_by": "point",
+   "defined_by": "point",
+   "permits": [
+    "DE0020320"
+   ]
+  },
+  {
+   "state": "DE",
+   "name": null,
+   "texts": [
+    "unnamed outfall DE0020010 None"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 1,
+   "towns": [
+    "Selbyville"
+   ],
+   "slugs": [
+    "unnamed-tributary-to-dirickson-creek-de"
+   ],
+   "how": [
+    "EPA's NHD reach/NHDPlus id 8410149, 02040303067810: an unnamed NHDPlus flowline, tributary to Dirickson Creek (NLDI downstream)"
+   ],
+   "reason": null,
+   "define_by": "unnamed",
+   "defined_by": "unnamed",
+   "permits": [
+    "DE0020010"
+   ],
+   "outfall_ref": [
+    "DE0020010",
+    null
+   ],
+   "reach_slugs": {
+    "02040303067810": "unnamed-tributary-to-dirickson-creek-de",
+    "8410149": "unnamed-tributary-to-dirickson-creek-de"
+   }
+  },
+  {
+   "state": "DE",
+   "name": null,
+   "texts": [
+    "unnamed outfall DE0021512 None"
+   ],
+   "outfalls": 1,
+   "events": 0,
+   "points": 0,
+   "towns": [
+    "Lewes"
+   ],
+   "slugs": [
+    "unnamed-stream-near-rehoboth-beach-de"
+   ],
+   "how": [
+    "EPA's NHD reach/NHDPlus id 8409259, 02040303067120: an unnamed NHDPlus flowline with no named water within 50 km downstream"
+   ],
+   "reason": null,
+   "define_by": "unnamed",
+   "defined_by": "unnamed",
+   "permits": [
+    "DE0021512"
+   ],
+   "outfall_ref": [
+    "DE0021512",
+    null
+   ],
+   "reach_slugs": {
+    "02040303067120": "unnamed-stream-near-rehoboth-beach-de",
+    "8409259": "unnamed-stream-near-rehoboth-beach-de"
+   }
+  },
+  {
+   "state": "DE",
+   "name": "Lake Como",
+   "texts": [
+    "Lake Como"
+   ],
+   "outfalls": 0,
+   "events": 55,
+   "points": 1,
+   "towns": [],
+   "slugs": [
+    "lake-como-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 55
+  },
+  {
+   "state": "DE",
+   "name": "Delaware Bay",
+   "texts": [
+    "Delaware Bay"
+   ],
+   "outfalls": 0,
+   "events": 54,
+   "points": 3,
+   "towns": [],
+   "slugs": [
+    "delaware-bay-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 54
+  },
+  {
+   "state": "DE",
+   "name": "Silver Lake",
+   "texts": [
+    "Silver Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "silver-lake-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "St. Jones River",
+   "texts": [
+    "St. Jones River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "st-jones-river-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Broad Creek",
+   "texts": [
+    "Broad Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "broad-creek-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "DE",
+   "name": "Indian River",
+   "texts": [
+    "Indian River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "indian-river-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Brandywine Creek",
+   "texts": [
+    "Brandywine Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "brandywine-creek-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Indian River Bay",
+   "texts": [
+    "Indian River Bay"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 2,
+   "towns": [],
+   "slugs": [
+    "indian-river-bay-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "DE",
+   "name": "Little Mill Creek",
+   "texts": [
+    "Little Mill Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "little-mill-creek-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Lums Pond",
+   "texts": [
+    "Lums Pond"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "lums-pond-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Mispillion River",
+   "texts": [
+    "Mispillion River"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "mispillion-river-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "DE",
+   "name": "Shellpot Creek",
+   "texts": [
+    "Shellpot Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "shellpot-creek-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "DE",
+   "name": "Broadkill River",
+   "texts": [
+    "Broadkill River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Milton"
+   ],
+   "slugs": [
+    "broadkill-river-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Nanticoke River",
+   "texts": [
+    "Nanticoke River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Seaford"
+   ],
+   "slugs": [
+    "nanticoke-river-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Trap Pond",
+   "texts": [
+    "Trap Pond"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Laurel"
+   ],
+   "slugs": [
+    "trap-pond-de"
+   ],
+   "how": [
+    "already a water record: the status resolver places reports of this name on it"
+   ],
+   "reason": null,
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Rehoboth Bay",
+   "texts": [
+    "Rehoboth Bay"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Millsboro"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "White Clay Creek",
+   "texts": [
+    "White Clay Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "white-clay-creek-de"
+   ],
+   "how": [
+    "the only NHD water of that name in DE (the reports give no place)"
+   ],
+   "reason": null,
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name"
+  },
+  {
+   "state": "DE",
+   "name": "Army Creek",
+   "texts": [
+    "Army Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "New Castle"
+   ],
+   "slugs": [
+    "army-creek-de"
+   ],
+   "how": [
+    "GNIS name in DE, crossing New Castle"
+   ],
+   "reason": null,
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name"
+  },
+  {
+   "state": "DE",
+   "name": "Calf Run",
+   "texts": [
+    "Calf Run"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "DE",
+   "name": "Christiana River",
+   "texts": [
+    "Christiana River"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Christiana",
+    "Newark"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "DE",
+   "name": "Cypress Branch",
+   "texts": [
+    "Cypress Branch"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Dover"
+   ],
+   "slugs": [
+    "cypress-branch-de"
+   ],
+   "how": [
+    "GNIS name in DE, 1320 m from Dover (2 waters of that name in DE)"
+   ],
+   "reason": null,
+   "county": "Kent",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "DE",
+   "name": "None Such Creek",
+   "texts": [
+    "None Such Creek",
+    "Nonesuch Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "New Castle"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 2
+  },
+  {
+   "state": "DE",
+   "name": "Polly Branch",
+   "texts": [
+    "Polly Branch"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Selbyville"
+   ],
+   "slugs": [
+    "polly-branch-de"
+   ],
+   "how": [
+    "GNIS name in DE, crossing Selbyville"
+   ],
+   "reason": null,
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name"
+  },
+  {
+   "state": "DE",
+   "name": "Red Lion Creek",
+   "texts": [
+    "Red Lion Creek"
+   ],
+   "outfalls": 0,
+   "events": 2,
+   "points": 0,
+   "towns": [
+    "Bear"
+   ],
+   "slugs": [
+    "red-lion-creek-de"
+   ],
+   "how": [
+    "GNIS name in DE, 89 m from Bear"
+   ],
+   "reason": null,
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 2,
+   "defined_by": "name"
+  },
+  {
+   "state": "DE",
+   "name": "Alapocus Creek",
+   "texts": [
+    "Alapocus Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Alapocus Run",
+   "texts": [
+    "Alapocus Run"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Brandywine River",
+   "texts": [
+    "Brandywine River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Broadkill Creek",
+   "texts": [
+    "Broadkill Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Milton"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Burton's Pond",
+   "texts": [
+    "Burton's Pond"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Lewes"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1,
+   "places_failed": [
+    {
+     "town": "Lewes",
+     "reason": "no NHD water of that name within 3 km of Lewes (the nearest is 10.0 km away)"
+    }
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "Bye Creek",
+   "texts": [
+    "Bye Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Chestnut Run",
+   "texts": [
+    "Chestnut Run"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "chestnut-run-de"
+   ],
+   "how": [
+    "the only NHD water of that name in DE (the reports give no place)"
+   ],
+   "reason": null,
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "DE",
+   "name": "Christiana Creek",
+   "texts": [
+    "Christiana Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Christiana"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Christiana Creek Branch",
+   "texts": [
+    "Christiana Creek Branch"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Christiana"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Christiana Marsh",
+   "texts": [
+    "Christiana Marsh"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "New Castle"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "City Branch Canal",
+   "texts": [
+    "City Branch Canal"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Delaware City"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1,
+   "notes": [
+    "the status resolver gives the name to branch-canal-de (another name): the name's own water is built"
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "Cypress Branch Creek",
+   "texts": [
+    "Cypress Branch Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Magnolia"
+   ],
+   "slugs": [
+    "cypress-branch-de"
+   ],
+   "how": [
+    "GNIS name in DE, 2581 m from Magnolia (2 waters of that name in DE)"
+   ],
+   "reason": null,
+   "county": "Kent",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "DE",
+   "name": "Doe Run Creek",
+   "texts": [
+    "Doe Run Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Newark"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Dragon Run Creek",
+   "texts": [
+    "Dragon Run Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Bear"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "East Branch",
+   "texts": [
+    "East Branch"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Newark"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Hershey Run",
+   "texts": [
+    "Hershey Run"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Hyde Run",
+   "texts": [
+    "Hyde Run"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1,
+   "places_failed": [
+    {
+     "town": "Wilmington",
+     "reason": "no NHD water of that name within 3 km of Wilmington (the nearest is 4.0 km away)"
+    }
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "Jenny'S Run",
+   "texts": [
+    "Jenny'S Run"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Leatherems Run",
+   "texts": [
+    "Leatherems Run"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Christiana"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Letherems Run",
+   "texts": [
+    "Letherems Run"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Newark"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Lewes Canal",
+   "texts": [
+    "Lewes Canal"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Lewes"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Lewes Rehoboth Canal",
+   "texts": [
+    "Lewes Rehoboth Canal"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Lewes"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Magazine Ditch",
+   "texts": [
+    "Magazine Ditch"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "New Castle"
+   ],
+   "slugs": [
+    "magazine-ditch-de"
+   ],
+   "how": [
+    "NHD high resolution: flowline named 'Magazine Ditch' (GNIS 214263) 508 m from New Castle"
+   ],
+   "reason": null,
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name (NHD high resolution)"
+  },
+  {
+   "state": "DE",
+   "name": "Mill Creek",
+   "texts": [
+    "Mill Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Greenwood"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "3 NHD waters of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1,
+   "places_failed": [
+    {
+     "town": "Greenwood",
+     "reason": "no NHD water of that name within 3 km of Greenwood (the nearest is 48.5 km away)"
+    }
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "Naamans Creek",
+   "texts": [
+    "Naamans Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "New Castle"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Nammans Creek",
+   "texts": [
+    "Nammans Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Claymont"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Noxontown Pond",
+   "texts": [
+    "Noxontown Pond"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Peachtree Run",
+   "texts": [
+    "Peachtree Run"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Red Clay Creek",
+   "texts": [
+    "Red Clay Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1,
+   "places_failed": [
+    {
+     "town": "Wilmington",
+     "reason": "no NHD water of that name within 3 km of Wilmington (the nearest is 3.8 km away)"
+    }
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "Rossakatum Branch",
+   "texts": [
+    "Rossakatum Branch"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Laurel"
+   ],
+   "slugs": [
+    "rossakatum-branch-de"
+   ],
+   "how": [
+    "GNIS name in DE, crossing Laurel"
+   ],
+   "reason": null,
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "DE",
+   "name": "Rossakatum Creek",
+   "texts": [
+    "Rossakatum Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Laurel"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "South Branch Naaman Creek",
+   "texts": [
+    "South Branch Naaman Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Wilmington"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1,
+   "places_failed": [
+    {
+     "town": "Wilmington",
+     "reason": "no NHD water of that name within 3 km of Wilmington (the nearest is 5.5 km away)"
+    }
+   ]
+  },
+  {
+   "state": "DE",
+   "name": "Stonewater Creek",
+   "texts": [
+    "Stonewater Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Millsboro"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "Sussex",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Sunset Lake",
+   "texts": [
+    "Sunset Lake"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Newark"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Tidbury Creek",
+   "texts": [
+    "Tidbury Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Camden"
+   ],
+   "slugs": [
+    "tidbury-creek-de"
+   ],
+   "how": [
+    "GNIS name in DE, crossing Camden"
+   ],
+   "reason": null,
+   "county": "Kent",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "DE",
+   "name": "Trunk Ditch",
+   "texts": [
+    "Trunk Ditch"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Frederica"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "Kent",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Turkey Run",
+   "texts": [
+    "Turkey Run"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [
+    "turkey-run-de"
+   ],
+   "how": [
+    "the only NHD water of that name in DE (the reports give no place)"
+   ],
+   "reason": null,
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1,
+   "defined_by": "name"
+  },
+  {
+   "state": "DE",
+   "name": "White Clay Creek River",
+   "texts": [
+    "White Clay Creek River"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [],
+   "slugs": [],
+   "how": [],
+   "reason": "no NHD flowline or waterbody of that name in DE; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "from": "reports",
+   "reports": 1
+  },
+  {
+   "state": "DE",
+   "name": "Wood Creek",
+   "texts": [
+    "Wood Creek"
+   ],
+   "outfalls": 0,
+   "events": 1,
+   "points": 0,
+   "towns": [
+    "Greenwood"
+   ],
+   "slugs": [],
+   "how": [],
+   "reason": "1 NHD water of that name in DE, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "county": "New Castle",
+   "from": "reports",
+   "reports": 1,
+   "places_failed": [
+    {
+     "town": "Greenwood",
+     "reason": "no NHD water of that name within 3 km of Greenwood (the nearest is 38.2 km away)"
+    }
+   ]
   }
  ],
  "waters": [
@@ -492717,6 +494494,205 @@
       [
        -97.061085,
        32.334948
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "army-creek-de",
+   "name": "Army Creek",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [
+    "New Castle"
+   ],
+   "bbox": [
+    -75.64265,
+    39.63446,
+    -75.57108,
+    39.65608
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 8.11,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "213572",
+   "comids": [
+    4651438,
+    4651444,
+    4651450,
+    4651452,
+    4651458,
+    4651468,
+    4651952,
+    4652198,
+    24902764,
+    24902766
+   ],
+   "nhd_fcodes": [
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-15T15:46:34Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 10 network flowlines with GNIS id 213572 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.642647,
+       39.634456
+      ],
+      [
+       -75.642056,
+       39.635394
+      ],
+      [
+       -75.637794,
+       39.638873
+      ],
+      [
+       -75.636729,
+       39.640361
+      ],
+      [
+       -75.636285,
+       39.640704
+      ],
+      [
+       -75.635515,
+       39.641048
+      ],
+      [
+       -75.632881,
+       39.641094
+      ],
+      [
+       -75.631963,
+       39.641414
+      ],
+      [
+       -75.631638,
+       39.641712
+      ],
+      [
+       -75.631105,
+       39.643863
+      ],
+      [
+       -75.63078,
+       39.644504
+      ],
+      [
+       -75.629951,
+       39.645305
+      ],
+      [
+       -75.629063,
+       39.645671
+      ],
+      [
+       -75.625066,
+       39.646335
+      ],
+      [
+       -75.622905,
+       39.647823
+      ],
+      [
+       -75.622224,
+       39.648693
+      ],
+      [
+       -75.621662,
+       39.648853
+      ],
+      [
+       -75.620181,
+       39.648921
+      ],
+      [
+       -75.618879,
+       39.649333
+      ],
+      [
+       -75.616866,
+       39.649425
+      ],
+      [
+       -75.616184,
+       39.649608
+      ],
+      [
+       -75.615356,
+       39.65002
+      ],
+      [
+       -75.612187,
+       39.652354
+      ],
+      [
+       -75.609,
+       39.651262
+      ],
+      [
+       -75.608447,
+       39.651427
+      ],
+      [
+       -75.60594,
+       39.653086
+      ],
+      [
+       -75.605318,
+       39.6532
+      ],
+      [
+       -75.604489,
+       39.654619
+      ],
+      [
+       -75.603452,
+       39.655534
+      ],
+      [
+       -75.602564,
+       39.656015
+      ],
+      [
+       -75.601557,
+       39.656083
+      ],
+      [
+       -75.600492,
+       39.655328
+      ],
+      [
+       -75.599248,
+       39.655099
+      ],
+      [
+       -75.595814,
+       39.654869
+      ],
+      [
+       -75.592853,
+       39.654296
+      ],
+      [
+       -75.586978,
+       39.65105
+      ],
+      [
+       -75.571084,
+       39.638021
       ]
      ]
     ]
@@ -1566937,6 +1568913,108 @@
    }
   },
   {
+   "slug": "chestnut-run-de",
+   "name": "Chestnut Run",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [
+    "Elsmere"
+   ],
+   "bbox": [
+    -75.60702,
+    39.73646,
+    -75.59924,
+    39.75833
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 2.63,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "213794",
+   "comids": [
+    4651252,
+    4651276,
+    4651902,
+    4652128,
+    4652130
+   ],
+   "nhd_fcodes": [
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-15T15:46:35Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 5 network flowlines with GNIS id 213794 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.599445,
+       39.758334
+      ],
+      [
+       -75.599238,
+       39.756892
+      ],
+      [
+       -75.600307,
+       39.753712
+      ],
+      [
+       -75.601226,
+       39.75243
+      ],
+      [
+       -75.601054,
+       39.752288
+      ],
+      [
+       -75.601263,
+       39.749114
+      ],
+      [
+       -75.600996,
+       39.748656
+      ],
+      [
+       -75.600848,
+       39.747626
+      ],
+      [
+       -75.601649,
+       39.745796
+      ],
+      [
+       -75.602183,
+       39.745338
+      ],
+      [
+       -75.604229,
+       39.741974
+      ],
+      [
+       -75.604556,
+       39.738129
+      ],
+      [
+       -75.604734,
+       39.737763
+      ],
+      [
+       -75.607017,
+       39.736459
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "chestuee-creek-tn",
    "name": "Chestuee Creek",
    "kind": "stream",
@@ -1895083,6 +1897161,171 @@
    }
   },
   {
+   "slug": "cypress-branch-de",
+   "name": "Cypress Branch",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [
+    "Rising Sun-Lebanon"
+   ],
+   "bbox": [
+    -75.51202,
+    39.08868,
+    -75.47123,
+    39.10128
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 4.51,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "213851",
+   "comids": [
+    8075340
+   ],
+   "nhd_fcodes": [
+    46006
+   ],
+   "fetched_at": "2026-11-15T15:46:36Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 1 network flowlines with GNIS id 213851 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 2,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.512019,
+       39.088675
+      ],
+      [
+       -75.510785,
+       39.088856
+      ],
+      [
+       -75.510197,
+       39.089268
+      ],
+      [
+       -75.509638,
+       39.09016
+      ],
+      [
+       -75.508138,
+       39.09144
+      ],
+      [
+       -75.507431,
+       39.092744
+      ],
+      [
+       -75.505077,
+       39.095397
+      ],
+      [
+       -75.504576,
+       39.096403
+      ],
+      [
+       -75.503223,
+       39.097547
+      ],
+      [
+       -75.501606,
+       39.098506
+      ],
+      [
+       -75.500812,
+       39.09878
+      ],
+      [
+       -75.499656,
+       39.098867
+      ],
+      [
+       -75.497627,
+       39.097702
+      ],
+      [
+       -75.49748,
+       39.097405
+      ],
+      [
+       -75.497744,
+       39.096901
+      ],
+      [
+       -75.497743,
+       39.096352
+      ],
+      [
+       -75.497184,
+       39.09594
+      ],
+      [
+       -75.495715,
+       39.095621
+      ],
+      [
+       -75.494803,
+       39.095142
+      ],
+      [
+       -75.492483,
+       39.09519
+      ],
+      [
+       -75.489254,
+       39.096589
+      ],
+      [
+       -75.488432,
+       39.096544
+      ],
+      [
+       -75.487726,
+       39.096179
+      ],
+      [
+       -75.484996,
+       39.096777
+      ],
+      [
+       -75.482558,
+       39.097099
+      ],
+      [
+       -75.479974,
+       39.097811
+      ],
+      [
+       -75.478272,
+       39.09866
+      ],
+      [
+       -75.475395,
+       39.099784
+      ],
+      [
+       -75.474338,
+       39.100014
+      ],
+      [
+       -75.472224,
+       39.101114
+      ],
+      [
+       -75.471226,
+       39.101275
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "cypress-creek-al",
    "name": "Cypress Creek",
    "kind": "river",
@@ -1940223,6 +1942466,294 @@
       [
        -96.90767,
        32.796939
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "delaware-river-de",
+   "name": "Delaware River",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Wilmington"
+   ],
+   "bbox": [
+    -75.58211,
+    39.26555,
+    -75.34905,
+    39.80121
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 74.04,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "217887",
+   "comids": [
+    4495990,
+    4496020,
+    4496040,
+    4496108,
+    4496128,
+    4496220,
+    4496226,
+    4496234,
+    4496242,
+    4496248,
+    4496278,
+    4496300,
+    24903424,
+    24903444,
+    24903452,
+    24903456,
+    24903464,
+    24903474,
+    24903478,
+    24903486,
+    24903534,
+    24903538,
+    24903558,
+    24903566,
+    24903610,
+    24903612,
+    24903614,
+    24903626,
+    24903630,
+    24903632,
+    24903638,
+    24903640,
+    24903658,
+    24903666,
+    24903668,
+    24903670,
+    24903672,
+    24903698,
+    24903700,
+    24903702,
+    24903704,
+    24903740,
+    24903742,
+    24903746,
+    24903750,
+    24903782,
+    24903784,
+    24903800,
+    24945753,
+    24945757,
+    24946868,
+    25015872,
+    166754167,
+    932040186,
+    932040187,
+    932040366,
+    932040367,
+    932040368,
+    932040369,
+    932040370
+   ],
+   "nhd_fcodes": [
+    55800
+   ],
+   "fetched_at": "2026-11-15T15:44:06Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 60 network flowlines with GNIS id 217887 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.413821,
+       39.801208
+      ],
+      [
+       -75.427064,
+       39.795631
+      ],
+      [
+       -75.43755,
+       39.789456
+      ],
+      [
+       -75.443605,
+       39.785242
+      ],
+      [
+       -75.463389,
+       39.768087
+      ],
+      [
+       -75.481347,
+       39.744709
+      ],
+      [
+       -75.503551,
+       39.714118
+      ],
+      [
+       -75.519216,
+       39.687547
+      ],
+      [
+       -75.529485,
+       39.669735
+      ],
+      [
+       -75.534502,
+       39.662791
+      ],
+      [
+       -75.548671,
+       39.653887
+      ],
+      [
+       -75.571084,
+       39.638021
+      ],
+      [
+       -75.582111,
+       39.628378
+      ],
+      [
+       -75.579277,
+       39.6118
+      ],
+      [
+       -75.570332,
+       39.602253
+      ],
+      [
+       -75.559906,
+       39.594049
+      ],
+      [
+       -75.551167,
+       39.589282
+      ],
+      [
+       -75.547184,
+       39.586576
+      ],
+      [
+       -75.540322,
+       39.583259
+      ],
+      [
+       -75.534483,
+       39.578728
+      ],
+      [
+       -75.529717,
+       39.573321
+      ],
+      [
+       -75.528597,
+       39.567232
+      ],
+      [
+       -75.528346,
+       39.562359
+      ],
+      [
+       -75.54273,
+       39.54086
+      ],
+      [
+       -75.54481,
+       39.535723
+      ],
+      [
+       -75.549343,
+       39.517053
+      ],
+      [
+       -75.552282,
+       39.506675
+      ],
+      [
+       -75.558297,
+       39.49246
+      ],
+      [
+       -75.559808,
+       39.485996
+      ],
+      [
+       -75.558275,
+       39.480353
+      ],
+      [
+       -75.551189,
+       39.458112
+      ],
+      [
+       -75.548008,
+       39.449636
+      ],
+      [
+       -75.517895,
+       39.443197
+      ],
+      [
+       -75.504452,
+       39.440176
+      ],
+      [
+       -75.498823,
+       39.431504
+      ],
+      [
+       -75.487035,
+       39.41445
+      ],
+      [
+       -75.481919,
+       39.408
+      ],
+      [
+       -75.472026,
+       39.396492
+      ],
+      [
+       -75.464852,
+       39.387312
+      ],
+      [
+       -75.461419,
+       39.383196
+      ],
+      [
+       -75.444503,
+       39.365164
+      ],
+      [
+       -75.437392,
+       39.357243
+      ],
+      [
+       -75.398157,
+       39.317508
+      ],
+      [
+       -75.389815,
+       39.308355
+      ],
+      [
+       -75.375378,
+       39.293365
+      ],
+      [
+       -75.357176,
+       39.275387
+      ],
+      [
+       -75.349052,
+       39.265552
       ]
      ]
     ]
@@ -3380805,6 +3383336,436 @@
    }
   },
   {
+   "slug": "little-mill-creek-de",
+   "name": "Little Mill Creek",
+   "kind": "canal",
+   "state": "DE",
+   "towns": [
+    "Elsmere",
+    "Greenville"
+   ],
+   "bbox": [
+    -75.62036,
+    39.71803,
+    -75.56737,
+    39.77639
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 11.66,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "214235",
+   "comids": [
+    4651198,
+    4651216,
+    4651244,
+    4651278,
+    4651294,
+    4651296,
+    4651310,
+    4651314,
+    4651318,
+    4651320,
+    4651900,
+    4651916,
+    4651920,
+    4651922,
+    4652104,
+    4652108,
+    4652120,
+    4652140,
+    4652142,
+    4652146,
+    4652148,
+    4652154,
+    4652360
+   ],
+   "nhd_fcodes": [
+    33600,
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-15T15:44:20Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 23 network flowlines with GNIS id 214235 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.606854,
+       39.776392
+      ],
+      [
+       -75.607566,
+       39.775682
+      ],
+      [
+       -75.608041,
+       39.774836
+      ],
+      [
+       -75.607901,
+       39.7748
+      ],
+      [
+       -75.608469,
+       39.774564
+      ],
+      [
+       -75.608664,
+       39.773577
+      ],
+      [
+       -75.609346,
+       39.772891
+      ],
+      [
+       -75.610622,
+       39.771998
+      ],
+      [
+       -75.611452,
+       39.770808
+      ],
+      [
+       -75.611512,
+       39.76939
+      ],
+      [
+       -75.611245,
+       39.768703
+      ],
+      [
+       -75.610978,
+       39.768337
+      ],
+      [
+       -75.610365,
+       39.767972
+      ],
+      [
+       -75.609357,
+       39.766783
+      ],
+      [
+       -75.609081,
+       39.763874
+      ],
+      [
+       -75.608369,
+       39.76337
+      ],
+      [
+       -75.607006,
+       39.762844
+      ],
+      [
+       -75.60665,
+       39.762501
+      ],
+      [
+       -75.60662,
+       39.762112
+      ],
+      [
+       -75.607036,
+       39.760944
+      ],
+      [
+       -75.608252,
+       39.758954
+      ],
+      [
+       -75.608044,
+       39.757397
+      ],
+      [
+       -75.608875,
+       39.756734
+      ],
+      [
+       -75.610328,
+       39.756528
+      ],
+      [
+       -75.611217,
+       39.756116
+      ],
+      [
+       -75.612997,
+       39.753462
+      ],
+      [
+       -75.614005,
+       39.751516
+      ],
+      [
+       -75.615073,
+       39.751196
+      ],
+      [
+       -75.615547,
+       39.75083
+      ],
+      [
+       -75.616176,
+       39.749802
+      ],
+      [
+       -75.617599,
+       39.748429
+      ],
+      [
+       -75.617807,
+       39.747651
+      ],
+      [
+       -75.619408,
+       39.745637
+      ],
+      [
+       -75.620297,
+       39.745248
+      ],
+      [
+       -75.620356,
+       39.744264
+      ],
+      [
+       -75.619764,
+       39.742845
+      ],
+      [
+       -75.61923,
+       39.742387
+      ],
+      [
+       -75.618785,
+       39.742364
+      ],
+      [
+       -75.617095,
+       39.74328
+      ],
+      [
+       -75.616058,
+       39.743577
+      ],
+      [
+       -75.614931,
+       39.743325
+      ],
+      [
+       -75.614516,
+       39.742936
+      ],
+      [
+       -75.614368,
+       39.742273
+      ],
+      [
+       -75.614487,
+       39.741563
+      ],
+      [
+       -75.614309,
+       39.741128
+      ],
+      [
+       -75.61336,
+       39.740648
+      ],
+      [
+       -75.612293,
+       39.740533
+      ],
+      [
+       -75.610425,
+       39.741082
+      ],
+      [
+       -75.609388,
+       39.741105
+      ],
+      [
+       -75.609062,
+       39.74083
+      ],
+      [
+       -75.609092,
+       39.739503
+      ],
+      [
+       -75.608143,
+       39.738862
+      ],
+      [
+       -75.607195,
+       39.737031
+      ],
+      [
+       -75.607017,
+       39.736459
+      ],
+      [
+       -75.606988,
+       39.73504
+      ],
+      [
+       -75.603965,
+       39.732728
+      ],
+      [
+       -75.603787,
+       39.731744
+      ],
+      [
+       -75.603372,
+       39.731172
+      ],
+      [
+       -75.601624,
+       39.730165
+      ],
+      [
+       -75.599816,
+       39.729958
+      ],
+      [
+       -75.597267,
+       39.730439
+      ],
+      [
+       -75.594421,
+       39.731719
+      ],
+      [
+       -75.592671,
+       39.732978
+      ],
+      [
+       -75.590033,
+       39.733046
+      ],
+      [
+       -75.589589,
+       39.733206
+      ],
+      [
+       -75.588254,
+       39.73435
+      ],
+      [
+       -75.587246,
+       39.734464
+      ],
+      [
+       -75.58609,
+       39.735219
+      ],
+      [
+       -75.584845,
+       39.735493
+      ],
+      [
+       -75.584578,
+       39.735356
+      ],
+      [
+       -75.583926,
+       39.734074
+      ],
+      [
+       -75.582949,
+       39.733433
+      ],
+      [
+       -75.580785,
+       39.732517
+      ],
+      [
+       -75.579689,
+       39.731418
+      ],
+      [
+       -75.579572,
+       39.729724
+      ],
+      [
+       -75.579692,
+       39.727138
+      ],
+      [
+       -75.579337,
+       39.726268
+      ],
+      [
+       -75.578211,
+       39.725467
+      ],
+      [
+       -75.577086,
+       39.724162
+      ],
+      [
+       -75.576819,
+       39.723384
+      ],
+      [
+       -75.575101,
+       39.722536
+      ],
+      [
+       -75.573975,
+       39.722467
+      ],
+      [
+       -75.572463,
+       39.722856
+      ],
+      [
+       -75.57113,
+       39.72297
+      ],
+      [
+       -75.570498,
+       39.722701
+      ],
+      [
+       -75.570449,
+       39.721711
+      ],
+      [
+       -75.569765,
+       39.720853
+      ],
+      [
+       -75.569172,
+       39.720663
+      ],
+      [
+       -75.568493,
+       39.72068
+      ],
+      [
+       -75.568435,
+       39.719833
+      ],
+      [
+       -75.567374,
+       39.718028
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "little-minnesota-river-sd",
    "name": "Little Minnesota River",
    "kind": "river",
@@ -3679326,6 +3682287,116 @@
       [
        -90.243818,
        38.124959
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "magazine-ditch-de",
+   "name": "Magazine Ditch",
+   "kind": "canal",
+   "state": "DE",
+   "towns": [],
+   "bbox": [
+    -75.55467,
+    39.69245,
+    -75.52999,
+    39.69765
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 2.58,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "214263",
+   "comids": [],
+   "nhd_fcodes": [
+    46003,
+    46006
+   ],
+   "fetched_at": "2026-11-15T15:47:14Z",
+   "towns_from": "the Census places of the reports' points",
+   "note": "USGS National Hydrography Dataset, high resolution (The National Map NHD MapServer, layer 6 'Flowline - Large Scale'): 3 flowlines with GNIS id 214263 within 0.5 degrees of the outfall's point, cut to the state, merged and simplified to ~10 m; NHDPlus V2.1 has no flowline of that name",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.554669,
+       39.695157
+      ],
+      [
+       -75.554373,
+       39.695298
+      ],
+      [
+       -75.553763,
+       39.696984
+      ],
+      [
+       -75.55104,
+       39.697647
+      ],
+      [
+       -75.549664,
+       39.69712
+      ],
+      [
+       -75.545361,
+       39.696929
+      ],
+      [
+       -75.543147,
+       39.696579
+      ],
+      [
+       -75.54203,
+       39.696966
+      ],
+      [
+       -75.541344,
+       39.696938
+      ],
+      [
+       -75.538612,
+       39.697281
+      ],
+      [
+       -75.538419,
+       39.697203
+      ],
+      [
+       -75.537947,
+       39.695816
+      ],
+      [
+       -75.537116,
+       39.695674
+      ],
+      [
+       -75.536317,
+       39.695818
+      ],
+      [
+       -75.535797,
+       39.69555
+      ],
+      [
+       -75.535272,
+       39.695006
+      ],
+      [
+       -75.535148,
+       39.694274
+      ],
+      [
+       -75.529992,
+       39.692446
       ]
      ]
     ]
@@ -4768352,6 +4771423,204 @@
    }
   },
   {
+   "slug": "polly-branch-de",
+   "name": "Polly Branch",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [
+    "Selbyville"
+   ],
+   "bbox": [
+    -75.25983,
+    38.46127,
+    -75.21102,
+    38.47357
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 5.69,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "217405",
+   "comids": [
+    8410155,
+    8410489
+   ],
+   "nhd_fcodes": [
+    46006
+   ],
+   "fetched_at": "2026-11-15T15:46:34Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 2 network flowlines with GNIS id 217405 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.259827,
+       38.473568
+      ],
+      [
+       -75.258546,
+       38.473544
+      ],
+      [
+       -75.256858,
+       38.47281
+      ],
+      [
+       -75.255607,
+       38.472556
+      ],
+      [
+       -75.253772,
+       38.472646
+      ],
+      [
+       -75.25092,
+       38.471956
+      ],
+      [
+       -75.250017,
+       38.471933
+      ],
+      [
+       -75.248675,
+       38.472206
+      ],
+      [
+       -75.246638,
+       38.473101
+      ],
+      [
+       -75.245416,
+       38.4734
+      ],
+      [
+       -75.244047,
+       38.473516
+      ],
+      [
+       -75.243319,
+       38.473379
+      ],
+      [
+       -75.241309,
+       38.472397
+      ],
+      [
+       -75.236236,
+       38.468945
+      ],
+      [
+       -75.235334,
+       38.468809
+      ],
+      [
+       -75.232364,
+       38.469178
+      ],
+      [
+       -75.22992,
+       38.470073
+      ],
+      [
+       -75.229075,
+       38.470165
+      ],
+      [
+       -75.228464,
+       38.470074
+      ],
+      [
+       -75.2259,
+       38.469184
+      ],
+      [
+       -75.225027,
+       38.469047
+      ],
+      [
+       -75.22424,
+       38.469048
+      ],
+      [
+       -75.221824,
+       38.469462
+      ],
+      [
+       -75.21734,
+       38.469305
+      ],
+      [
+       -75.217107,
+       38.469077
+      ],
+      [
+       -75.21635,
+       38.469031
+      ],
+      [
+       -75.214865,
+       38.469284
+      ],
+      [
+       -75.212826,
+       38.468782
+      ],
+      [
+       -75.211893,
+       38.468028
+      ],
+      [
+       -75.211542,
+       38.466288
+      ],
+      [
+       -75.211163,
+       38.465464
+      ],
+      [
+       -75.211016,
+       38.464594
+      ],
+      [
+       -75.211132,
+       38.46432
+      ],
+      [
+       -75.211423,
+       38.464113
+      ],
+      [
+       -75.212122,
+       38.464021
+      ],
+      [
+       -75.213548,
+       38.464158
+      ],
+      [
+       -75.21544,
+       38.463836
+      ],
+      [
+       -75.216895,
+       38.46253
+      ],
+      [
+       -75.217446,
+       38.46127
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "polly-creek-ga",
    "name": "Polly Creek",
    "kind": "stream",
@@ -4974677,6 +4977946,199 @@
       [
        -76.513379,
        39.307721
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "red-lion-creek-de",
+   "name": "Red Lion Creek",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [],
+   "bbox": [
+    -75.68243,
+    39.5967,
+    -75.61391,
+    39.60755
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 6.74,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "214526",
+   "comids": [
+    4651500,
+    4651502,
+    4651504,
+    4651512,
+    4652212,
+    4652384
+   ],
+   "nhd_fcodes": [
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-15T15:46:35Z",
+   "towns_from": "the Census places of the reports' points",
+   "note": "NHDPlus V2.1: 6 network flowlines with GNIS id 214526 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.682426,
+       39.596703
+      ],
+      [
+       -75.681598,
+       39.596909
+      ],
+      [
+       -75.680149,
+       39.598077
+      ],
+      [
+       -75.678463,
+       39.59865
+      ],
+      [
+       -75.674677,
+       39.599133
+      ],
+      [
+       -75.673731,
+       39.599499
+      ],
+      [
+       -75.672991,
+       39.599911
+      ],
+      [
+       -75.671542,
+       39.601171
+      ],
+      [
+       -75.670567,
+       39.602796
+      ],
+      [
+       -75.669562,
+       39.603964
+      ],
+      [
+       -75.668379,
+       39.60433
+      ],
+      [
+       -75.666574,
+       39.604377
+      ],
+      [
+       -75.665835,
+       39.60456
+      ],
+      [
+       -75.665036,
+       39.604972
+      ],
+      [
+       -75.662375,
+       39.607125
+      ],
+      [
+       -75.661842,
+       39.607354
+      ],
+      [
+       -75.660925,
+       39.607194
+      ],
+      [
+       -75.659563,
+       39.60605
+      ],
+      [
+       -75.65832,
+       39.605661
+      ],
+      [
+       -75.657285,
+       39.605662
+      ],
+      [
+       -75.656368,
+       39.605959
+      ],
+      [
+       -75.655184,
+       39.606005
+      ],
+      [
+       -75.652078,
+       39.605777
+      ],
+      [
+       -75.649477,
+       39.605275
+      ],
+      [
+       -75.648016,
+       39.605673
+      ],
+      [
+       -75.644871,
+       39.604897
+      ],
+      [
+       -75.64334,
+       39.60554
+      ],
+      [
+       -75.643235,
+       39.605906
+      ],
+      [
+       -75.641704,
+       39.606548
+      ],
+      [
+       -75.635594,
+       39.605538
+      ],
+      [
+       -75.635203,
+       39.605729
+      ],
+      [
+       -75.631184,
+       39.605065
+      ],
+      [
+       -75.630479,
+       39.605346
+      ],
+      [
+       -75.623392,
+       39.605906
+      ],
+      [
+       -75.621823,
+       39.607553
+      ],
+      [
+       -75.615184,
+       39.6075
+      ],
+      [
+       -75.613911,
+       39.606055
       ]
      ]
     ]
@@ -5210940,6 +5214402,341 @@
       [
        -77.200546,
        35.831025
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "rossakatum-branch-de",
+   "name": "Rossakatum Branch",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [
+    "Laurel"
+   ],
+   "bbox": [
+    -75.56913,
+    38.50013,
+    -75.52092,
+    38.55513
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 9.89,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "214566",
+   "comids": [
+    8391906,
+    8391934,
+    8392014
+   ],
+   "nhd_fcodes": [
+    46006
+   ],
+   "fetched_at": "2026-11-15T15:46:36Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 3 network flowlines with GNIS id 214566 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.521155,
+       38.500132
+      ],
+      [
+       -75.521181,
+       38.502156
+      ],
+      [
+       -75.520918,
+       38.502659
+      ],
+      [
+       -75.520975,
+       38.503301
+      ],
+      [
+       -75.521528,
+       38.503805
+      ],
+      [
+       -75.522838,
+       38.504584
+      ],
+      [
+       -75.522866,
+       38.50495
+      ],
+      [
+       -75.52374,
+       38.505294
+      ],
+      [
+       -75.523885,
+       38.505684
+      ],
+      [
+       -75.523621,
+       38.50724
+      ],
+      [
+       -75.523647,
+       38.509346
+      ],
+      [
+       -75.523847,
+       38.512207
+      ],
+      [
+       -75.524224,
+       38.513535
+      ],
+      [
+       -75.526348,
+       38.515346
+      ],
+      [
+       -75.529726,
+       38.516424
+      ],
+      [
+       -75.531008,
+       38.51654
+      ],
+      [
+       -75.532553,
+       38.516358
+      ],
+      [
+       -75.534243,
+       38.515627
+      ],
+      [
+       -75.536136,
+       38.516132
+      ],
+      [
+       -75.537592,
+       38.5173
+      ],
+      [
+       -75.539572,
+       38.518355
+      ],
+      [
+       -75.542133,
+       38.520485
+      ],
+      [
+       -75.542628,
+       38.520714
+      ],
+      [
+       -75.544319,
+       38.520281
+      ],
+      [
+       -75.545047,
+       38.520533
+      ],
+      [
+       -75.546647,
+       38.522594
+      ],
+      [
+       -75.546296,
+       38.52399
+      ],
+      [
+       -75.547606,
+       38.525296
+      ],
+      [
+       -75.548218,
+       38.525228
+      ],
+      [
+       -75.548889,
+       38.524816
+      ],
+      [
+       -75.5509,
+       38.524291
+      ],
+      [
+       -75.551338,
+       38.523467
+      ],
+      [
+       -75.551979,
+       38.522849
+      ],
+      [
+       -75.553319,
+       38.523102
+      ],
+      [
+       -75.554806,
+       38.523057
+      ],
+      [
+       -75.555767,
+       38.52331
+      ],
+      [
+       -75.558039,
+       38.524547
+      ],
+      [
+       -75.558971,
+       38.524616
+      ],
+      [
+       -75.560689,
+       38.52535
+      ],
+      [
+       -75.562729,
+       38.52574
+      ],
+      [
+       -75.563311,
+       38.526061
+      ],
+      [
+       -75.564185,
+       38.527343
+      ],
+      [
+       -75.564971,
+       38.527732
+      ],
+      [
+       -75.566514,
+       38.529496
+      ],
+      [
+       -75.568407,
+       38.530618
+      ],
+      [
+       -75.568961,
+       38.531122
+      ],
+      [
+       -75.568697,
+       38.53277
+      ],
+      [
+       -75.569105,
+       38.533503
+      ],
+      [
+       -75.569133,
+       38.534189
+      ],
+      [
+       -75.568433,
+       38.534876
+      ],
+      [
+       -75.568462,
+       38.535746
+      ],
+      [
+       -75.56817,
+       38.536272
+      ],
+      [
+       -75.567499,
+       38.536707
+      ],
+      [
+       -75.567149,
+       38.537187
+      ],
+      [
+       -75.56674,
+       38.538446
+      ],
+      [
+       -75.566069,
+       38.539613
+      ],
+      [
+       -75.565601,
+       38.541101
+      ],
+      [
+       -75.565659,
+       38.542222
+      ],
+      [
+       -75.5649,
+       38.542954
+      ],
+      [
+       -75.565657,
+       38.544466
+      ],
+      [
+       -75.56417,
+       38.545243
+      ],
+      [
+       -75.563295,
+       38.545517
+      ],
+      [
+       -75.563002,
+       38.547188
+      ],
+      [
+       -75.562331,
+       38.547897
+      ],
+      [
+       -75.563059,
+       38.548813
+      ],
+      [
+       -75.562854,
+       38.549775
+      ],
+      [
+       -75.564165,
+       38.550508
+      ],
+      [
+       -75.564398,
+       38.550828
+      ],
+      [
+       -75.566671,
+       38.552478
+      ],
+      [
+       -75.566465,
+       38.554217
+      ],
+      [
+       -75.56594,
+       38.554606
+      ],
+      [
+       -75.565415,
+       38.554743
+      ],
+      [
+       -75.565094,
+       38.555132
       ]
      ]
     ]
@@ -5561197,6 +5564994,397 @@
       [
        -93.267463,
        43.499378
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "shellpot-creek-de",
+   "name": "Shellpot Creek",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [
+    "Edgemoor",
+    "Wilmington"
+   ],
+   "bbox": [
+    -75.53315,
+    39.72772,
+    -75.49368,
+    39.81847
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 13.1,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "214637",
+   "comids": [
+    4651106,
+    4651144,
+    4651162,
+    4651218,
+    4651238,
+    4651260,
+    4651906,
+    4652080,
+    4652082,
+    4652126,
+    24902754,
+    24902756
+   ],
+   "nhd_fcodes": [
+    46003,
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-15T15:44:22Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 12 network flowlines with GNIS id 214637 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.531491,
+       39.818465
+      ],
+      [
+       -75.531791,
+       39.816703
+      ],
+      [
+       -75.531584,
+       39.815994
+      ],
+      [
+       -75.531616,
+       39.814003
+      ],
+      [
+       -75.531114,
+       39.81192
+      ],
+      [
+       -75.530019,
+       39.810203
+      ],
+      [
+       -75.529872,
+       39.808601
+      ],
+      [
+       -75.529991,
+       39.808349
+      ],
+      [
+       -75.531744,
+       39.807
+      ],
+      [
+       -75.532933,
+       39.805788
+      ],
+      [
+       -75.532758,
+       39.803156
+      ],
+      [
+       -75.533115,
+       39.802035
+      ],
+      [
+       -75.533146,
+       39.801234
+      ],
+      [
+       -75.532969,
+       39.800616
+      ],
+      [
+       -75.531665,
+       39.799013
+      ],
+      [
+       -75.531341,
+       39.79748
+      ],
+      [
+       -75.531045,
+       39.796999
+      ],
+      [
+       -75.530037,
+       39.796289
+      ],
+      [
+       -75.528822,
+       39.795601
+      ],
+      [
+       -75.527309,
+       39.795028
+      ],
+      [
+       -75.525976,
+       39.793882
+      ],
+      [
+       -75.524879,
+       39.793285
+      ],
+      [
+       -75.52405,
+       39.792416
+      ],
+      [
+       -75.523783,
+       39.792301
+      ],
+      [
+       -75.52221,
+       39.792414
+      ],
+      [
+       -75.521202,
+       39.792116
+      ],
+      [
+       -75.519661,
+       39.790993
+      ],
+      [
+       -75.519365,
+       39.790421
+      ],
+      [
+       -75.518476,
+       39.789528
+      ],
+      [
+       -75.517646,
+       39.789115
+      ],
+      [
+       -75.512989,
+       39.788973
+      ],
+      [
+       -75.511625,
+       39.788514
+      ],
+      [
+       -75.511299,
+       39.788216
+      ],
+      [
+       -75.511093,
+       39.787438
+      ],
+      [
+       -75.511514,
+       39.784006
+      ],
+      [
+       -75.510566,
+       39.782769
+      ],
+      [
+       -75.510567,
+       39.782243
+      ],
+      [
+       -75.509503,
+       39.780273
+      ],
+      [
+       -75.508585,
+       39.779426
+      ],
+      [
+       -75.507815,
+       39.778327
+      ],
+      [
+       -75.50758,
+       39.777228
+      ],
+      [
+       -75.507967,
+       39.776542
+      ],
+      [
+       -75.508739,
+       39.775947
+      ],
+      [
+       -75.512952,
+       39.774944
+      ],
+      [
+       -75.514229,
+       39.774007
+      ],
+      [
+       -75.516425,
+       39.773163
+      ],
+      [
+       -75.518415,
+       39.771036
+      ],
+      [
+       -75.518179,
+       39.770349
+      ],
+      [
+       -75.518151,
+       39.769388
+      ],
+      [
+       -75.518627,
+       39.768084
+      ],
+      [
+       -75.518155,
+       39.766711
+      ],
+      [
+       -75.518333,
+       39.76639
+      ],
+      [
+       -75.518334,
+       39.765635
+      ],
+      [
+       -75.517627,
+       39.762843
+      ],
+      [
+       -75.517776,
+       39.762179
+      ],
+      [
+       -75.518995,
+       39.76051
+      ],
+      [
+       -75.519054,
+       39.760075
+      ],
+      [
+       -75.518848,
+       39.759708
+      ],
+      [
+       -75.51701,
+       39.758814
+      ],
+      [
+       -75.516655,
+       39.758448
+      ],
+      [
+       -75.516508,
+       39.757944
+      ],
+      [
+       -75.516864,
+       39.757555
+      ],
+      [
+       -75.516984,
+       39.75696
+      ],
+      [
+       -75.516038,
+       39.754831
+      ],
+      [
+       -75.516039,
+       39.753939
+      ],
+      [
+       -75.516455,
+       39.753367
+      ],
+      [
+       -75.516368,
+       39.752246
+      ],
+      [
+       -75.517141,
+       39.751239
+      ],
+      [
+       -75.517142,
+       39.750598
+      ],
+      [
+       -75.515963,
+       39.749572
+      ],
+      [
+       -75.51383,
+       39.748563
+      ],
+      [
+       -75.513356,
+       39.748174
+      ],
+      [
+       -75.513387,
+       39.747396
+      ],
+      [
+       -75.513655,
+       39.746618
+      ],
+      [
+       -75.513123,
+       39.745954
+      ],
+      [
+       -75.512546,
+       39.74461
+      ],
+      [
+       -75.512637,
+       39.742844
+      ],
+      [
+       -75.513296,
+       39.742314
+      ],
+      [
+       -75.513543,
+       39.74146
+      ],
+      [
+       -75.511976,
+       39.739979
+      ],
+      [
+       -75.509222,
+       39.738299
+      ],
+      [
+       -75.505262,
+       39.735279
+      ],
+      [
+       -75.498021,
+       39.730727
+      ],
+      [
+       -75.493683,
+       39.727717
       ]
      ]
     ]
@@ -6349598,6 +6353786,401 @@
    }
   },
   {
+   "slug": "tidbury-creek-de",
+   "name": "Tidbury Creek",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [
+    "Camden",
+    "Highland Acres",
+    "Rising Sun-Lebanon"
+   ],
+   "bbox": [
+    -75.58249,
+    39.05056,
+    -75.50028,
+    39.11629
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 12.97,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "214745",
+   "comids": [
+    8074762,
+    8074782,
+    8074784,
+    8074818,
+    8075278,
+    8075780,
+    8075796,
+    8075802
+   ],
+   "nhd_fcodes": [
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-15T15:46:37Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 8 network flowlines with GNIS id 214745 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.574338,
+       39.050563
+      ],
+      [
+       -75.574952,
+       39.053516
+      ],
+      [
+       -75.574892,
+       39.055049
+      ],
+      [
+       -75.57821,
+       39.05457
+      ],
+      [
+       -75.578709,
+       39.054662
+      ],
+      [
+       -75.579031,
+       39.055325
+      ],
+      [
+       -75.579589,
+       39.055486
+      ],
+      [
+       -75.581143,
+       39.057958
+      ],
+      [
+       -75.581642,
+       39.059057
+      ],
+      [
+       -75.581905,
+       39.060591
+      ],
+      [
+       -75.582462,
+       39.061255
+      ],
+      [
+       -75.582491,
+       39.061873
+      ],
+      [
+       -75.582227,
+       39.062285
+      ],
+      [
+       -75.580376,
+       39.063749
+      ],
+      [
+       -75.579906,
+       39.064596
+      ],
+      [
+       -75.580022,
+       39.067205
+      ],
+      [
+       -75.581313,
+       39.068991
+      ],
+      [
+       -75.581753,
+       39.070089
+      ],
+      [
+       -75.581635,
+       39.070662
+      ],
+      [
+       -75.581341,
+       39.070913
+      ],
+      [
+       -75.579197,
+       39.071462
+      ],
+      [
+       -75.575791,
+       39.071804
+      ],
+      [
+       -75.574087,
+       39.073817
+      ],
+      [
+       -75.573323,
+       39.074343
+      ],
+      [
+       -75.572176,
+       39.076883
+      ],
+      [
+       -75.570412,
+       39.079972
+      ],
+      [
+       -75.56903,
+       39.081345
+      ],
+      [
+       -75.567885,
+       39.082146
+      ],
+      [
+       -75.565417,
+       39.083014
+      ],
+      [
+       -75.562773,
+       39.083053
+      ],
+      [
+       -75.561995,
+       39.083435
+      ],
+      [
+       -75.561272,
+       39.084209
+      ],
+      [
+       -75.560958,
+       39.085307
+      ],
+      [
+       -75.560181,
+       39.085689
+      ],
+      [
+       -75.559471,
+       39.085717
+      ],
+      [
+       -75.557749,
+       39.086283
+      ],
+      [
+       -75.556692,
+       39.0861
+      ],
+      [
+       -75.554314,
+       39.08532
+      ],
+      [
+       -75.553257,
+       39.085273
+      ],
+      [
+       -75.551289,
+       39.085844
+      ],
+      [
+       -75.548469,
+       39.086072
+      ],
+      [
+       -75.546736,
+       39.086666
+      ],
+      [
+       -75.545883,
+       39.087466
+      ],
+      [
+       -75.545177,
+       39.088427
+      ],
+      [
+       -75.543649,
+       39.089547
+      ],
+      [
+       -75.542914,
+       39.089822
+      ],
+      [
+       -75.53931,
+       39.090256
+      ],
+      [
+       -75.538727,
+       39.090542
+      ],
+      [
+       -75.536617,
+       39.090317
+      ],
+      [
+       -75.53552,
+       39.090645
+      ],
+      [
+       -75.533505,
+       39.091842
+      ],
+      [
+       -75.531824,
+       39.092456
+      ],
+      [
+       -75.530358,
+       39.09349
+      ],
+      [
+       -75.530148,
+       39.094222
+      ],
+      [
+       -75.528931,
+       39.095553
+      ],
+      [
+       -75.52816,
+       39.097753
+      ],
+      [
+       -75.528335,
+       39.098622
+      ],
+      [
+       -75.528157,
+       39.09979
+      ],
+      [
+       -75.527216,
+       39.100682
+      ],
+      [
+       -75.526011,
+       39.101413
+      ],
+      [
+       -75.524627,
+       39.103746
+      ],
+      [
+       -75.523009,
+       39.10505
+      ],
+      [
+       -75.522009,
+       39.106125
+      ],
+      [
+       -75.520188,
+       39.106123
+      ],
+      [
+       -75.517455,
+       39.106418
+      ],
+      [
+       -75.516193,
+       39.106165
+      ],
+      [
+       -75.515899,
+       39.105936
+      ],
+      [
+       -75.515341,
+       39.105958
+      ],
+      [
+       -75.514458,
+       39.10701
+      ],
+      [
+       -75.513341,
+       39.107307
+      ],
+      [
+       -75.513252,
+       39.108108
+      ],
+      [
+       -75.51281,
+       39.108611
+      ],
+      [
+       -75.510224,
+       39.109387
+      ],
+      [
+       -75.509606,
+       39.110004
+      ],
+      [
+       -75.508224,
+       39.110461
+      ],
+      [
+       -75.506784,
+       39.111352
+      ],
+      [
+       -75.506812,
+       39.111581
+      ],
+      [
+       -75.50737,
+       39.112039
+      ],
+      [
+       -75.507751,
+       39.11268
+      ],
+      [
+       -75.507955,
+       39.113527
+      ],
+      [
+       -75.509042,
+       39.113872
+      ],
+      [
+       -75.508982,
+       39.114581
+      ],
+      [
+       -75.505747,
+       39.116134
+      ],
+      [
+       -75.503808,
+       39.116293
+      ],
+      [
+       -75.502017,
+       39.115673
+      ],
+      [
+       -75.500283,
+       39.1159
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "tide-mill-creek-nh",
    "name": "Tide Mill Creek",
    "kind": "stream",
@@ -6485913,6 +6490496,129 @@
    }
   },
   {
+   "slug": "turkey-run-de",
+   "name": "Turkey Run",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [],
+   "bbox": [
+    -75.53266,
+    39.76808,
+    -75.51863,
+    39.78762
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 2.66,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "214771",
+   "comids": [
+    4651210,
+    4651220,
+    4652100,
+    4652102
+   ],
+   "nhd_fcodes": [
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-15T15:46:38Z",
+   "towns_from": "the Census places of the reports' points",
+   "note": "NHDPlus V2.1: 4 network flowlines with GNIS id 214771 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.532659,
+       39.787617
+      ],
+      [
+       -75.529934,
+       39.785006
+      ],
+      [
+       -75.529223,
+       39.783724
+      ],
+      [
+       -75.528097,
+       39.782899
+      ],
+      [
+       -75.527802,
+       39.782167
+      ],
+      [
+       -75.52712,
+       39.781457
+      ],
+      [
+       -75.525344,
+       39.778755
+      ],
+      [
+       -75.524574,
+       39.778136
+      ],
+      [
+       -75.523418,
+       39.777609
+      ],
+      [
+       -75.523181,
+       39.777334
+      ],
+      [
+       -75.522591,
+       39.775319
+      ],
+      [
+       -75.522651,
+       39.774496
+      ],
+      [
+       -75.523277,
+       39.772322
+      ],
+      [
+       -75.52313,
+       39.771361
+      ],
+      [
+       -75.522182,
+       39.770628
+      ],
+      [
+       -75.521828,
+       39.769735
+      ],
+      [
+       -75.521473,
+       39.769368
+      ],
+      [
+       -75.520494,
+       39.769139
+      ],
+      [
+       -75.519902,
+       39.768429
+      ],
+      [
+       -75.518627,
+       39.768084
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "turkey-run-oh",
    "name": "Turkey Run",
    "kind": "stream",
@@ -6553025,6 +6557731,55 @@
    }
   },
   {
+   "slug": "unnamed-stream-near-rehoboth-beach-de",
+   "name": "Unnamed stream near Rehoboth Beach",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [
+    "Rehoboth Beach"
+   ],
+   "bbox": [
+    -75.09788,
+    38.6898,
+    -75.097,
+    38.68997
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 0.08,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": null,
+   "comids": [
+    8409259
+   ],
+   "nhd_fcodes": [
+    56600
+   ],
+   "fetched_at": "2026-11-15T15:44:24Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: the unnamed network flowline COMID 8409259, cut to the state and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.097876,
+       38.689805
+      ],
+      [
+       -75.097,
+       38.689965
+      ]
+     ]
+    ]
+   }
+  },
+  {
    "slug": "unnamed-stream-near-rogers-city-mi",
    "name": "Unnamed stream near Rogers City",
    "kind": "stream",
@@ -6577049,6 +6581804,135 @@
       [
        -85.145306,
        43.105077
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "unnamed-tributary-to-dirickson-creek-de",
+   "name": "Unnamed tributary to Dirickson Creek",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [
+    "Selbyville"
+   ],
+   "bbox": [
+    -75.20352,
+    38.46811,
+    -75.16397,
+    38.47805
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 4.49,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": null,
+   "comids": [
+    8410149
+   ],
+   "nhd_fcodes": [
+    46006
+   ],
+   "fetched_at": "2026-11-15T15:44:23Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: the unnamed network flowline COMID 8410149, upstream of Dirickson Creek (GNIS 213887, the first named water downstream by NLDI navigation), cut to the state and simplified to ~10 m",
+   "targets": 1,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.203517,
+       38.476663
+      ],
+      [
+       -75.198798,
+       38.474972
+      ],
+      [
+       -75.198882,
+       38.471287
+      ],
+      [
+       -75.198648,
+       38.470349
+      ],
+      [
+       -75.195881,
+       38.469984
+      ],
+      [
+       -75.1946,
+       38.469641
+      ],
+      [
+       -75.192357,
+       38.468841
+      ],
+      [
+       -75.190988,
+       38.46811
+      ],
+      [
+       -75.190318,
+       38.468156
+      ],
+      [
+       -75.189737,
+       38.469003
+      ],
+      [
+       -75.18732,
+       38.4696
+      ],
+      [
+       -75.183158,
+       38.47125
+      ],
+      [
+       -75.181762,
+       38.472807
+      ],
+      [
+       -75.17987,
+       38.474319
+      ],
+      [
+       -75.178968,
+       38.475876
+      ],
+      [
+       -75.178095,
+       38.476517
+      ],
+      [
+       -75.176115,
+       38.476587
+      ],
+      [
+       -75.174805,
+       38.477206
+      ],
+      [
+       -75.173349,
+       38.477412
+      ],
+      [
+       -75.171166,
+       38.478054
+      ],
+      [
+       -75.167205,
+       38.477552
+      ],
+      [
+       -75.163973,
+       38.477599
       ]
      ]
     ]
@@ -6919126,6 +6924010,716 @@
       [
        -77.389118,
        43.081061
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "slug": "white-clay-creek-de",
+   "name": "White Clay Creek",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Newark",
+    "North Star"
+   ],
+   "bbox": [
+    -75.76685,
+    39.68869,
+    -75.62127,
+    39.7379
+   ],
+   "wikidata": null,
+   "charted": null,
+   "area_km2": null,
+   "length_km": 23.09,
+   "launches": [],
+   "advisories": [],
+   "aliases": [],
+   "source": "nhd",
+   "gnis_id": "214832",
+   "comids": [
+    4651246,
+    4651254,
+    4651270,
+    4651292,
+    4651302,
+    4651330,
+    4651352,
+    4651374,
+    4651388,
+    4651394,
+    4651396,
+    4651398,
+    4651886,
+    4651934,
+    4651938,
+    4651944,
+    4652178,
+    4652182,
+    4652184,
+    4655446
+   ],
+   "nhd_fcodes": [
+    46006,
+    55800
+   ],
+   "fetched_at": "2026-11-15T15:46:33Z",
+   "towns_from": "Census 2020 places (incorporated and designated) crossed (TIGERweb)",
+   "note": "NHDPlus V2.1: 20 network flowlines with GNIS id 214832 in DE's box, cut to the state, merged and simplified to ~10 m",
+   "targets": 2,
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       -75.766001,
+       39.737905
+      ],
+      [
+       -75.76535,
+       39.737849
+      ],
+      [
+       -75.761824,
+       39.736816
+      ],
+      [
+       -75.761498,
+       39.73661
+      ],
+      [
+       -75.761203,
+       39.735831
+      ],
+      [
+       -75.760522,
+       39.73535
+      ],
+      [
+       -75.759486,
+       39.734113
+      ],
+      [
+       -75.759607,
+       39.732946
+      ],
+      [
+       -75.76035,
+       39.731482
+      ],
+      [
+       -75.760441,
+       39.730315
+      ],
+      [
+       -75.760708,
+       39.729858
+      ],
+      [
+       -75.761923,
+       39.729973
+      ],
+      [
+       -75.762427,
+       39.729882
+      ],
+      [
+       -75.762813,
+       39.729402
+      ],
+      [
+       -75.762933,
+       39.728555
+      ],
+      [
+       -75.764356,
+       39.728511
+      ],
+      [
+       -75.764801,
+       39.728237
+      ],
+      [
+       -75.765098,
+       39.727802
+      ],
+      [
+       -75.766077,
+       39.727231
+      ],
+      [
+       -75.766849,
+       39.725904
+      ],
+      [
+       -75.766791,
+       39.725035
+      ],
+      [
+       -75.766703,
+       39.724851
+      ],
+      [
+       -75.7654,
+       39.724324
+      ],
+      [
+       -75.765163,
+       39.724049
+      ],
+      [
+       -75.76484,
+       39.721966
+      ],
+      [
+       -75.764013,
+       39.720295
+      ],
+      [
+       -75.761171,
+       39.718599
+      ],
+      [
+       -75.758418,
+       39.716376
+      ],
+      [
+       -75.7583,
+       39.716124
+      ],
+      [
+       -75.759075,
+       39.713081
+      ],
+      [
+       -75.759585,
+       39.709191
+      ],
+      [
+       -75.757545,
+       39.706878
+      ],
+      [
+       -75.756629,
+       39.705344
+      ],
+      [
+       -75.754913,
+       39.703877
+      ],
+      [
+       -75.754499,
+       39.703007
+      ],
+      [
+       -75.752605,
+       39.701838
+      ],
+      [
+       -75.752401,
+       39.699847
+      ],
+      [
+       -75.752611,
+       39.698291
+      ],
+      [
+       -75.755553,
+       39.693008
+      ],
+      [
+       -75.755553,
+       39.692733
+      ],
+      [
+       -75.754518,
+       39.691931
+      ],
+      [
+       -75.753424,
+       39.690625
+      ],
+      [
+       -75.753395,
+       39.690236
+      ],
+      [
+       -75.752507,
+       39.689663
+      ],
+      [
+       -75.750789,
+       39.689639
+      ],
+      [
+       -75.74966,
+       39.689404
+      ],
+      [
+       -75.749008,
+       39.689474
+      ],
+      [
+       -75.748031,
+       39.689864
+      ],
+      [
+       -75.740686,
+       39.690398
+      ],
+      [
+       -75.73796,
+       39.689989
+      ],
+      [
+       -75.735352,
+       39.689396
+      ],
+      [
+       -75.734908,
+       39.68942
+      ],
+      [
+       -75.734346,
+       39.689901
+      ],
+      [
+       -75.734379,
+       39.692075
+      ],
+      [
+       -75.734231,
+       39.692258
+      ],
+      [
+       -75.733757,
+       39.692373
+      ],
+      [
+       -75.731476,
+       39.692375
+      ],
+      [
+       -75.727419,
+       39.692997
+      ],
+      [
+       -75.725818,
+       39.692449
+      ],
+      [
+       -75.72487,
+       39.69229
+      ],
+      [
+       -75.723241,
+       39.692337
+      ],
+      [
+       -75.719924,
+       39.693278
+      ],
+      [
+       -75.719036,
+       39.693279
+      ],
+      [
+       -75.718057,
+       39.692845
+      ],
+      [
+       -75.717672,
+       39.692502
+      ],
+      [
+       -75.716752,
+       39.691221
+      ],
+      [
+       -75.714795,
+       39.690193
+      ],
+      [
+       -75.713373,
+       39.689942
+      ],
+      [
+       -75.711507,
+       39.690081
+      ],
+      [
+       -75.710381,
+       39.68967
+      ],
+      [
+       -75.708987,
+       39.688847
+      ],
+      [
+       -75.708365,
+       39.688687
+      ],
+      [
+       -75.707477,
+       39.688986
+      ],
+      [
+       -75.707092,
+       39.689283
+      ],
+      [
+       -75.706708,
+       39.689787
+      ],
+      [
+       -75.706827,
+       39.690542
+      ],
+      [
+       -75.706147,
+       39.691367
+      ],
+      [
+       -75.706177,
+       39.691893
+      ],
+      [
+       -75.707422,
+       39.69235
+      ],
+      [
+       -75.707334,
+       39.692945
+      ],
+      [
+       -75.705647,
+       39.69409
+      ],
+      [
+       -75.704136,
+       39.694618
+      ],
+      [
+       -75.700343,
+       39.693705
+      ],
+      [
+       -75.69744,
+       39.693707
+      ],
+      [
+       -75.69359,
+       39.694671
+      ],
+      [
+       -75.693442,
+       39.694877
+      ],
+      [
+       -75.69368,
+       39.69554
+      ],
+      [
+       -75.694391,
+       39.695792
+      ],
+      [
+       -75.695694,
+       39.695699
+      ],
+      [
+       -75.696702,
+       39.69595
+      ],
+      [
+       -75.697206,
+       39.696316
+      ],
+      [
+       -75.696644,
+       39.697095
+      ],
+      [
+       -75.69389,
+       39.698561
+      ],
+      [
+       -75.692113,
+       39.698997
+      ],
+      [
+       -75.690987,
+       39.699066
+      ],
+      [
+       -75.689655,
+       39.699571
+      ],
+      [
+       -75.688796,
+       39.700075
+      ],
+      [
+       -75.687345,
+       39.70035
+      ],
+      [
+       -75.685627,
+       39.701083
+      ],
+      [
+       -75.684442,
+       39.70097
+      ],
+      [
+       -75.683552,
+       39.700581
+      ],
+      [
+       -75.6829,
+       39.699963
+      ],
+      [
+       -75.682544,
+       39.699346
+      ],
+      [
+       -75.680855,
+       39.698797
+      ],
+      [
+       -75.678543,
+       39.69754
+      ],
+      [
+       -75.678158,
+       39.697563
+      ],
+      [
+       -75.676233,
+       39.698777
+      ],
+      [
+       -75.675641,
+       39.69896
+      ],
+      [
+       -75.673271,
+       39.698892
+      ],
+      [
+       -75.669775,
+       39.699626
+      ],
+      [
+       -75.668383,
+       39.699467
+      ],
+      [
+       -75.667434,
+       39.699078
+      ],
+      [
+       -75.666693,
+       39.698552
+      ],
+      [
+       -75.66616,
+       39.697889
+      ],
+      [
+       -75.665774,
+       39.697729
+      ],
+      [
+       -75.665271,
+       39.697935
+      ],
+      [
+       -75.664323,
+       39.698782
+      ],
+      [
+       -75.664739,
+       39.699628
+      ],
+      [
+       -75.663495,
+       39.700659
+      ],
+      [
+       -75.662814,
+       39.701025
+      ],
+      [
+       -75.661777,
+       39.701163
+      ],
+      [
+       -75.659377,
+       39.700317
+      ],
+      [
+       -75.65828,
+       39.700317
+      ],
+      [
+       -75.657629,
+       39.700592
+      ],
+      [
+       -75.655378,
+       39.702332
+      ],
+      [
+       -75.654904,
+       39.703202
+      ],
+      [
+       -75.654609,
+       39.705628
+      ],
+      [
+       -75.654165,
+       39.70636
+      ],
+      [
+       -75.652684,
+       39.707002
+      ],
+      [
+       -75.650699,
+       39.707506
+      ],
+      [
+       -75.647143,
+       39.707094
+      ],
+      [
+       -75.646165,
+       39.707529
+      ],
+      [
+       -75.645573,
+       39.70753
+      ],
+      [
+       -75.645276,
+       39.707049
+      ],
+      [
+       -75.645394,
+       39.706202
+      ],
+      [
+       -75.646461,
+       39.705081
+      ],
+      [
+       -75.646668,
+       39.704348
+      ],
+      [
+       -75.649659,
+       39.701327
+      ],
+      [
+       -75.649659,
+       39.700594
+      ],
+      [
+       -75.648918,
+       39.69913
+      ],
+      [
+       -75.646399,
+       39.697208
+      ],
+      [
+       -75.645391,
+       39.696911
+      ],
+      [
+       -75.64474,
+       39.696911
+      ],
+      [
+       -75.643169,
+       39.697232
+      ],
+      [
+       -75.642488,
+       39.697575
+      ],
+      [
+       -75.641688,
+       39.698124
+      ],
+      [
+       -75.641985,
+       39.699475
+      ],
+      [
+       -75.641145,
+       39.700171
+      ],
+      [
+       -75.64034,
+       39.700038
+      ],
+      [
+       -75.638905,
+       39.699162
+      ],
+      [
+       -75.638261,
+       39.699056
+      ],
+      [
+       -75.635279,
+       39.699459
+      ],
+      [
+       -75.634691,
+       39.699746
+      ],
+      [
+       -75.634173,
+       39.699788
+      ],
+      [
+       -75.631856,
+       39.700812
+      ],
+      [
+       -75.629679,
+       39.701348
+      ],
+      [
+       -75.627621,
+       39.70088
+      ],
+      [
+       -75.623401,
+       39.700311
+      ],
+      [
+       -75.622505,
+       39.699907
+      ],
+      [
+       -75.621875,
+       39.699164
+      ],
+      [
+       -75.621708,
+       39.697986
+      ],
+      [
+       -75.621267,
+       39.697465
       ]
      ]
     ]
