@@ -259,7 +259,13 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
 # ---------------------------------------------------------------- blooms
 
 def match_hab(state: dict, o: dict, seen: set) -> str | None:
-    """The open record an observation continues: the same water and DES date, and the same area when both give one."""
+    """The open record an observation continues: the same layer feature (GlobalID) first; else the same water and DES
+    date, and the same area when both give one, only when exactly one open record fits (re-review P1-4)."""
+    if o.get("layer_id"):
+        for key, v in state.items():
+            if key not in seen and not v.get("ended_at") and v.get("layer_id") == o["layer_id"]:
+                return key
+    fits = []
     for key, v in state.items():
         if key in seen or v.get("ended_at"):
             continue
@@ -267,38 +273,82 @@ def match_hab(state: dict, o: dict, seen: set) -> str | None:
             continue
         if v.get("area") and o.get("area") and v["area"].lower() != o["area"].lower():
             continue
-        return key
+        if o.get("layer_id") and v.get("layer_id") and v["layer_id"] != o["layer_id"]:
+            continue                                   # another delineation's record
+        fits.append(key)
+    if len(fits) == 1:
+        return fits[0]
+    if o.get("area"):
+        same = [k for k in fits if (state[k].get("area") or "").lower() == o["area"].lower()]
+        if len(same) == 1:
+            return same[0]
     return None
 
 
+def _row_fits(t: dict, water: str | None, start: str | None) -> bool:
+    return bool(_norm(t["water"])) and _norm(t["water"]) in _norm(water) and _date(t["issued"]) == (start or "")[:10]
+
+
 def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now: str) -> tuple[list[dict], dict, dict]:
+    """Layer delineations and table rows, reconciled. A delineation is tied to a table row (and so to its named area)
+    only by evidence: its GlobalID was tied to that area before, or it is the only delineation and the row the only
+    row for that water and DES date. Where two or more share a water and date with nothing to tell them apart, no
+    point is assigned: the rows stand as table records without a point and the delineations are counted
+    (meta.counts.ambiguous_delineations), never swapped between coves (re-review P1-4)."""
     state = {k: dict(v) for k, v in (prev.get("hab") or {}).items()}
-    counts = {"delineations_listed": len(features), "table_rows": None if table is None else len(table)}
+    counts = {"delineations_listed": len(features), "table_rows": None if table is None else len(table),
+              "ambiguous_delineations": 0}
     obs, used_rows = [], set()
+    feats = []
     for f in features:
         a = f.get("attributes") or {}
         tier = HAB_TIERS.get((a.get("Advisory_Tier") or "").strip().lower())
         if not tier:
             continue
         start, prec = _epoch_date(a.get("Date"))
-        row = None
-        for i, t in enumerate(table or []):
-            if i not in used_rows and _norm(t["water"]) and _norm(t["water"]) in _norm(a.get("NAME")) \
-                    and _date(t["issued"]) == (start or "")[:10]:
-                row = t
-                used_rows.add(i)
-                break
         lat, lon = _pt(f.get("centroid"))
-        obs.append({"tier": tier, "water": a.get("NAME"), "organism": a.get("Algal_Bloom"),
-                    "guidance": a.get("Recreational_Guidance"), "started_at": start, "precision": prec,
-                    "area": (row or {}).get("area"), "lat": lat, "lon": lon, "from": "layer"})
-    for i, t in enumerate(table or []):
+        lid = a.get("GlobalID") or (f"oid-{a['OBJECTID']}" if a.get("OBJECTID") is not None else None)
+        feats.append({"tier": tier, "water": a.get("NAME"), "organism": a.get("Algal_Bloom"),
+                      "guidance": a.get("Recreational_Guidance"), "started_at": start, "precision": prec,
+                      "area": None, "lat": lat, "lon": lon, "from": "layer", "layer_id": lid})
+    rows = list(enumerate(table or []))
+    # 1. a delineation already tied to an area keeps it: its row is the one naming that area
+    known = {v["layer_id"]: v.get("area") for v in state.values() if v.get("layer_id") and not v.get("ended_at")}
+    for o in feats:
+        area = known.get(o["layer_id"])
+        if area:
+            o["area"] = area
+            hit = next((i for i, t in rows if i not in used_rows and _row_fits(t, o["water"], o["started_at"])
+                        and (t["area"] or "").lower() == area.lower()), None)
+            if hit is not None:
+                used_rows.add(hit)
+            o["_tied"] = True
+    # 2. the rest pair only one to one within a water and date
+    for o in feats:
+        if o.get("_tied"):
+            continue
+        cand = [i for i, t in rows if i not in used_rows and _row_fits(t, o["water"], o["started_at"])]
+        others = [x for x in feats if x is not o and not x.get("_tied")
+                  and any(_row_fits(rows[i][1], x["water"], x["started_at"]) for i in cand)]
+        if len(cand) == 1 and not others:
+            used_rows.add(cand[0])
+            o["area"] = rows[cand[0]][1]["area"] or None
+            o["_tied"] = True
+        elif cand:
+            o["_ambiguous"] = True
+    for o in feats:
+        if o.pop("_ambiguous", False):
+            counts["ambiguous_delineations"] += 1
+            continue                                   # its rows stand as table records; its point is not assigned
+        o.pop("_tied", None)
+        obs.append(o)
+    for i, t in rows:
         if i in used_rows:
             continue
         start = _date(t["issued"])
         obs.append({"tier": HAB_TIERS.get(t["level"].strip().lower(), t["level"].strip()), "water": t["water"],
                     "organism": None, "guidance": None, "started_at": start, "precision": "day" if start else None,
-                    "area": t["area"] or None, "lat": None, "lon": None, "from": "table"})
+                    "area": t["area"] or None, "lat": None, "lon": None, "from": "table", "layer_id": None})
     seen = set()
     for o in obs:
         key = match_hab(state, o, seen)
@@ -310,7 +360,7 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
                 key, n = f"{base}-{n}", n + 1
             state[key] = {**o, "first_seen_at": now}
         v = state[key]
-        for k in ("tier", "area", "guidance", "organism", "lat", "lon"):
+        for k in ("tier", "area", "guidance", "organism", "lat", "lon", "layer_id"):
             if o.get(k) is not None:
                 v[k] = o[k]                            # a table read keeps the layer's point and organism
         v["from"] = "layer" if (o["from"] == "layer" or v.get("from") == "layer") else "table"

@@ -332,6 +332,39 @@ def test_two_coves_issued_the_same_day_stay_two_records():
     assert {r["source_record_id"] for r in recs2} == {r["source_record_id"] for r in recs}
 
 
+def _feat(gid, x, y, ms=1783137600000):
+    return {"attributes": {"OBJECTID": 1, "NAME": "Lake Example", "Algal_Bloom": "Microcystis", "Date": ms,
+                           "Advisory_Tier": "Advisory", "Recreational_Guidance": None, "GlobalID": gid},
+            "centroid": {"x": x, "y": y}}
+
+
+def test_two_coves_on_one_water_and_date_never_exchange_points():
+    # re-review P1-4: a delineation is tied to a cove only by evidence; reordering never moves a point
+    ex = {"level": "Advisory", "area": "Example Cove", "water": "Lake Example", "issued": "07/04/2026"}
+    sa = {"level": "Advisory", "area": "Sample Cove", "water": "Lake Example", "issued": "07/04/2026"}
+    fx, fy = _feat("gx", -81.101, 34.101), _feat("gy", -81.202, 34.202)
+    # nothing tells two new delineations apart: two cove records, no point assigned, both orders alike
+    for fs, tb in (([fx, fy], [ex, sa]), ([fy, fx], [sa, ex])):
+        recs, _, n = A.hab_records(fs, tb, {}, T0)
+        assert {r["outfall_name"]: r["lat"] for r in recs} == {"Example Cove": None, "Sample Cove": None}
+        assert n["ambiguous_delineations"] == 2
+    # Example Cove alone first: its delineation is tied to it
+    recs, st, _ = A.hab_records([fx], [ex], {}, T0)
+    assert recs[0]["lat"] == 34.101
+    # Sample Cove joins; layer and table in either order: each keeps its own point
+    for fs, tb in (([fy, fx], [sa, ex]), ([fx, fy], [ex, sa])):
+        recs, st, _ = A.hab_records(fs, tb, {"hab": st}, T1)
+        assert {r["outfall_name"]: r["lat"] for r in recs} == {"Example Cove": 34.101, "Sample Cove": 34.202}
+    ids = {r["outfall_name"]: r["source_record_id"] for r in recs}
+    # layer -> table only -> layer: identities and points held
+    recs, st, _ = A.hab_records([], [sa, ex], {"hab": st}, T2)
+    assert {r["outfall_name"]: (r["source_record_id"], r["lat"]) for r in recs} == {
+        "Example Cove": (ids["Example Cove"], 34.101), "Sample Cove": (ids["Sample Cove"], 34.202)}
+    recs, st, _ = A.hab_records([fy, fx], [ex, sa], {"hab": st}, T2.replace("20:", "21:"))
+    assert {r["outfall_name"]: (r["source_record_id"], r["lat"], r["ended_at"]) for r in recs} == {
+        "Example Cove": (ids["Example Cove"], 34.101, None), "Sample Cove": (ids["Sample Cove"], 34.202, None)}
+
+
 def test_an_unreadable_table_fails_the_bloom_feed_and_keeps_its_records(monkeypatch, tmp_path):
     import common
     monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
