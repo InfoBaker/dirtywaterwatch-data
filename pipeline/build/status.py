@@ -2830,6 +2830,31 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             # A sample's later observed change is not an official lift date, nor evidence that the advisory
             # remained in effect through a polling gap. Keep ended_at as the observed change, but never extend
             # colour past the confirmation horizon, even when that change is learned months later (NE HAB).
+            earlier_periods = []
+            periods = (ev.get("raw") or {}).get("listed_periods") if poll_confirmed else None
+            if isinstance(periods, list) and len(periods) > 1:
+                # a polled layer listed the advisory again after a gap longer than the horizon (MO and KS HAB maps,
+                # ingest/poll_periods.py; verification pass 2026-11-15 P1-1): each earlier listing period is coloured
+                # on its own to CONFIRM_DAYS after its last listing read, the unread gap is a grey note only, and the
+                # last period runs on below from its own first read. Keyed on raw.listed_periods: no other feed has it
+                for i, p in enumerate(periods[:-1]):
+                    p_from, p_to, nxt = pt(p.get("from")), pt(p.get("to")), pt(periods[i + 1].get("from"))
+                    if p_from is None or p_to is None or nxt is None:
+                        continue
+                    p_from = max(start, p_from)
+                    p_cap = min(p_to + timedelta(days=CONFIRM_DAYS), nxt)
+                    iv = _iv(ev, p_from, p_cap, rule, dict(red, rationale=(
+                        f"listed by the authority at each read; aged out {CONFIRM_DAYS} days after the last read "
+                        "that listed it; a later read that lists it again does not confirm the unread period")), yellow)
+                    iv["confirmed"] = iso(p_to)
+                    earlier_periods.append(iv)
+                    if p_cap < nxt:
+                        gap = _iv(ev, p_cap, nxt, "not_reconfirmed", red, yellow)
+                        gap["confirmed"] = iso(p_to)
+                        earlier_periods.append(gap)
+                last_from = pt(periods[-1].get("from"))
+                if last_from is not None and last_from > start:
+                    start = last_from
             listed = pt((ev.get("raw") or {}).get("_last_seen_in_source"))
             confirmed = max(start, listed) if listed else start
             cap = confirmed + timedelta(days=CONFIRM_DAYS)
@@ -2852,7 +2877,7 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                     note = _iv(ev, cap, note_until, "not_reconfirmed", red, yellow)
                     note["confirmed"] = iso(confirmed)
                     out.append(note)
-            return out
+            return earlier_periods + out
 
         if st == "advisory_active":
             if end is not None:                       # an explicit end is the source's word

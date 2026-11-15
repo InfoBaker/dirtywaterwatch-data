@@ -40,6 +40,7 @@ from pathlib import Path
 import requests
 
 import common
+from ingest import poll_periods
 import zones
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
 
@@ -155,7 +156,7 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
                 r["raw"]["kdhe_level"] = x["level"]
                 r["advice_text"] = ADVICE[x["level"]]
             r["raw"]["status_date"] = x["status_date"]
-        r["raw"]["_last_seen_in_source"] = at
+        poll_periods.seen(r, at)
         if x.get("conflicting_levels"):
             r["raw"]["conflicting_levels"] = x["conflicting_levels"]
     for wid, r in open_by.items():
