@@ -24,11 +24,12 @@ Reading the PDF
   says so ("None", "No current advisories"), else the read fails and nothing is lifted.
 
 Record rules
-  - One hab_advisory record per posting: source_record_id <lake>:<counties in alphabetical order>:<level>:<Date Posted>
-    (DEQ gives no row id). raw.level "advisory" or "warning" (the table the row is in). A lake moved to the other table
-    or reposted after leaving the listing is a new posting and a new record; the earlier one ends at the read that no
-    longer lists it, so a gap is never rewritten as a standing advisory (review P2-1). A record that comes back under
-    the same key carries every earlier absence in raw._absences.
+  - One hab_advisory record per observed period of a posting: source_record_id <lake>:<counties in alphabetical
+    order>:<level>:<Date Posted> (DEQ gives no row id). raw.level "advisory" or "warning" (the table the row is in). A
+    lake moved to the other table or reposted with a new date is a new posting and a new record; the earlier one ends
+    at the read that no longer lists it (review P2-1). The same posting listed again after it left the listing is a
+    new period, <key>~2, ~3 ..., started at the read that shows it again (time_precision poll, raw.returned_after the
+    earlier period's end): the earlier period keeps its end, so the gap is never coloured (re-review P2-1).
   - started_at: the Date Posted, precision day, DEQ's own posting of the advisory or warning (raw.date_note); bloom
     onset and sampling are not given. published_at the same day. source_updated_at the file's Last-Modified time.
   - Status: advisory_active while the row is listed (raw._last_seen_in_source each read: DEQ's own window, red); the
@@ -193,11 +194,19 @@ def build(pdf: bytes, fetched: str, previous: list[dict], source_updated: str | 
     out: dict[str, dict] = {}
     for x in rows:
         counties = sorted(x["counties"])
-        srid = (f"{slug(x['lake'])}:{'-'.join(slug(c) for c in counties) or 'no-county'}:{x['level']}:{x['date']}")
+        base = (f"{slug(x['lake'])}:{'-'.join(slug(c) for c in counties) or 'no-county'}:{x['level']}:{x['date']}")
+        # one record per observed period of a posting (re-review 2026-11-14 P2-1): the open one continues; a posting
+        # that left the listing and comes back unchanged is a new period from the read that shows it again (precision
+        # poll), so the gap stays a gap and the earlier period keeps its end
+        periods = sorted((k for k in prev if k == base or k.startswith(base + "~")),
+                         key=lambda k: int(k.rsplit("~", 1)[1]) if "~" in k else 1)
+        open_ = [k for k in periods if prev[k].get("status") == "advisory_active"]
+        srid = open_[-1] if open_ else (f"{base}~{len(periods) + 1}" if periods else base)
+        returned = srid != base and srid not in prev
         old = prev.get(srid) or {}
         oraw = old.get("raw") or {}
         tz, basis = zone_of(x["counties"])
-        start = x["date"]                     # each posting is its own episode: a reposted lake is a new record
+        start = old.get("started_at") or (fetched if returned else x["date"])
         hist = list(oraw.get("_level_history") or [{"level": x["level"], "seen_at": fetched, "date": x["date"]}])
         raw = {"lake": x["lake"], "counties": x["counties"], "county": (x["counties"] or [None])[0],
                "level": x["level"], "level_meaning": LEVEL_MEANING[x["level"]], "date_posted": x["date"],
@@ -213,17 +222,17 @@ def build(pdf: bytes, fetched: str, previous: list[dict], source_updated: str | 
                "advisory_extent": "named_water",
                "_level_history": hist, "_first_seen_at": oraw.get("_first_seen_at") or fetched,
                "_last_seen_in_source": fetched}
-        absences = list(oraw.get("_absences") or [])
-        if oraw.get("_unlisted_since"):
-            absences.append({"from": oraw["_unlisted_since"], "to": fetched})
-        if absences:
-            raw["_absences"] = absences
+        if returned or oraw.get("returned_after"):
+            raw["returned_after"] = oraw.get("returned_after") or prev[periods[-1]]["raw"].get("_unlisted_since")
+            raw["start_basis"] = ("DEQ's posting of " + x["date"] + " listed again after it had left the listing: this "
+                                  "period starts at the first read that showed it again (DEQ gives no date for it)")
         pt = lake_point(x["lake"], x["counties"])
         if pt:
             raw["marker_point"] = pt
         out[srid] = event(
             source_id=SOURCE_ID, source_record_id=srid, event_type="hab_advisory", status="advisory_active",
-            waterbody_text=x["lake"], started_at=start, time_precision="day", published_at=x["date"],
+            waterbody_text=x["lake"], started_at=start, time_precision="poll" if "T" in start else "day",
+            published_at=x["date"],
             lat=pt["lat"] if pt else None, lon=pt["lon"] if pt else None,
             coord_source=pt["coord_source"] if pt else None, coord_precision_m=100 if pt else None,
             source_updated_at=source_updated, fetched_at=fetched, authority=AUTHORITY,

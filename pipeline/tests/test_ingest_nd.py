@@ -99,11 +99,13 @@ def test_a_row_that_leaves_the_listing_ends_at_that_read_and_can_come_back():
     assert old["status"] == "advisory_lifted" and old["ended_at"] == "2026-11-15T18:00:00Z"
     assert old["raw"]["ended_at_precision"] == "poll" and old["raw"]["_unlisted_since"] == "2026-11-15T18:00:00Z"
     assert meta["lifted_this_read"] == 1 and len(gone) == 19
-    back = dict(first["Lake Ilo"], raw=dict(first["Lake Ilo"]["raw"], _unlisted_since="2026-11-15T18:00:00Z"))
+    back = dict(first["Lake Ilo"], status="advisory_lifted", ended_at="2026-11-15T18:00:00Z",
+                raw=dict(first["Lake Ilo"]["raw"], _unlisted_since="2026-11-15T18:00:00Z", ended_at_precision="poll"))
     recs, _ = H.build(PDF, "2026-11-16T18:00:00Z", [back])
-    ilo = next(r for r in recs if r["waterbody_text"] == "Lake Ilo")
-    assert ilo["status"] == "advisory_active" and ilo["raw"]["_absences"] == [{"from": "2026-11-15T18:00:00Z",
-                                                                               "to": "2026-11-16T18:00:00Z"}]
+    ilo = sorted((r for r in recs if r["waterbody_text"] == "Lake Ilo"), key=lambda r: r["source_record_id"])
+    assert [r["status"] for r in ilo] == ["advisory_lifted", "advisory_active"]       # the gap stays a gap
+    assert ilo[1]["source_record_id"] == ilo[0]["source_record_id"] + "~2"
+    assert ilo[1]["started_at"] == "2026-11-16T18:00:00Z" and ilo[1]["time_precision"] == "poll"
 
 
 def test_p2_1_a_lake_moved_to_the_warning_table_is_a_new_posting_and_the_advisory_ends_at_the_read():
@@ -120,18 +122,12 @@ def test_p2_1_a_lake_moved_to_the_warning_table_is_a_new_posting_and_the_advisor
     assert new["status"] == "advisory_active" and new["started_at"] == "2026-08-26"     # never merged back to July
 
 
-def test_p2_1_absences_carry_and_county_order_is_one_key():
+def test_p2_1_county_order_is_one_key():
     first, _ = hab()
     d = first["Devils Lake"]
     assert d["source_record_id"].startswith("devils-lake:benson-ramsey:")
-    back = dict(d, raw=dict(d["raw"], _unlisted_since="2026-11-15T18:00:00Z",
-                            _absences=[{"from": "2026-10-01T00:00:00Z", "to": "2026-10-02T00:00:00Z"}]))
-    recs, _ = H.build(PDF, "2026-11-16T18:00:00Z", [back])
-    dv = next(r for r in recs if r["waterbody_text"] == "Devils Lake")
-    assert dv["raw"]["_absences"] == [{"from": "2026-10-01T00:00:00Z", "to": "2026-10-02T00:00:00Z"},
-                                      {"from": "2026-11-15T18:00:00Z", "to": "2026-11-16T18:00:00Z"}]
-    again, _ = H.build(PDF, "2026-11-17T18:00:00Z", [dv])
-    assert next(r for r in again if r["waterbody_text"] == "Devils Lake")["raw"]["_absences"] == dv["raw"]["_absences"]
+    again, _ = H.build(PDF, "2026-11-17T18:00:00Z", [d])
+    assert [r["event_id"] for r in again if r["waterbody_text"] == "Devils Lake"] == [d["event_id"]]
 
 
 def test_p1_5_a_damaged_row_or_a_missing_table_fails_and_lifts_nothing(monkeypatch):
@@ -511,3 +507,40 @@ def test_p1_5_archive_contaminant_text_carries_no_name_or_address_at_any_save(mo
     assert L.main(["--force"]) == 0
     out = json.dumps([saved, written])
     assert saved and written and "Pat Example" not in out and "1234 Example" not in out
+
+
+
+# ---------------------------------------------------------------- re-review 2026-11-14 P2-1: observed periods
+
+def test_p2_1_a_returning_posting_keeps_its_gap_through_status(monkeypatch):
+    from datetime import datetime, timezone
+    from build import status as S
+    row = {"level": "advisory", "lake": "Example Lake", "counties": ["Kidder"], "date": "2026-07-01"}
+    monkeypatch.setattr(H, "parse", lambda pdf: [dict(row)] if listed[0] else [])
+    listed = [True]
+
+    def read(when, prev):
+        recs, _ = H.build(b"", when, prev)
+        return recs
+    r1 = read("2026-07-02T18:00:00Z", [])
+    r1 = read("2026-07-05T18:00:00Z", r1)                             # repeated unchanged read: one record
+    assert len(r1) == 1 and r1[0]["started_at"] == "2026-07-01"
+    listed[0] = False
+    r2 = read("2026-07-10T18:00:00Z", r1)
+    assert r2[0]["status"] == "advisory_lifted" and r2[0]["ended_at"] == "2026-07-10T18:00:00Z"
+    listed[0] = True
+    r3 = read("2026-08-01T18:00:00Z", r2)
+    r3 = read("2026-08-02T18:00:00Z", r3)                             # unchanged again: the same second period
+    assert len(r3) == 2
+    now = datetime(2026, 8, 5, tzinfo=timezone.utc)
+
+    def colour(y, mo, d):
+        at = datetime(y, mo, d, 12, tzinfo=timezone.utc)
+        cs = [S.status_at(S.event_intervals(r, "ND", now), at)[0] for r in r3]
+        return "red" if "red" in cs else cs
+    assert colour(2026, 7, 5) == "red"
+    assert colour(2026, 7, 20) != "red"                               # the gap: DEQ did not list it
+    assert colour(2026, 8, 3) == "red"
+    row["date"] = "2026-08-20"                                         # reposted with a new date: a new posting
+    r4 = read("2026-08-21T18:00:00Z", r3)
+    assert len(r4) == 3 and any(r["started_at"] == "2026-08-20" and r["status"] == "advisory_active" for r in r4)
