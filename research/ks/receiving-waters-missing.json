@@ -1,11 +1,21 @@
 {
  "about": "Water names in Kansas's records that data/receiving-waters-national.json does not hold for KS: the creek Leavenworth's overflow pages name, the waters KDHE's stream advisories name and the lakes under KDHE's bloom advisories; one row per name and county (the county of the record's point, else the county it gives), with the number of reports, how many are open now, up to five of their points ([lat, lon], 0.001 degree) and the operator, so the names pass builds each name where the reports are. Records naming no water are left out (by_reason). Written by scripts/ks_report_water_names.py.",
  "state": "KS",
- "waters": 17,
- "reports": 17,
  "reports_on_listed_waters": 4,
+ "waters": 14,
+ "reports": 14,
  "by_reason": {
-  "no water named": 22
+  "no NHD flowline or waterbody of that name in KS": 13,
+  "1 NHD water of that name in KS, none within reach of the reports' places": 1
+ },
+ "resolved_names": 3,
+ "resolved_reports": 3,
+ "build": {
+  "date": "2026-11-15",
+  "command": "python -m ingest.waters_from_nhd --names research/ks/receiving-waters-missing.json --state KS",
+  "records_built": 3,
+  "names_resolved": 3,
+  "network_requests": 0
  },
  "rows": [
   {
@@ -25,7 +35,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Butler County State Fishing Lake",
@@ -44,7 +55,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Elkhorn Lake",
@@ -63,23 +75,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
-  },
-  {
-   "name": "Five-Mile Creek",
-   "reports": 1,
-   "county": "Leavenworth County",
-   "points": [],
-   "towns": [
-    "City of Leavenworth"
    ],
-   "sources": {
-    "ks-leavenworth-sso-transparency": 1
-   },
-   "open": 0,
-   "places_from": [
-    "ks-leavenworth-sso-transparency"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Fraizer Lake",
@@ -98,7 +95,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Frisco Lake",
@@ -117,6 +115,14 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
+   ],
+   "reason": "1 NHD water of that name in KS, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15",
+   "places_failed": [
+    {
+     "lon": -94.805,
+     "lat": 38.871,
+     "reason": "no NHD water of that name within 2 km of the reports' point (38.87100, -94.80500) (the nearest is 138.2 km away)"
+    }
    ]
   },
   {
@@ -136,7 +142,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Hain State Fishing Lake",
@@ -155,7 +162,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Jetmore Lake",
@@ -174,7 +182,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Kill Creek Park Lake",
@@ -193,26 +202,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
-  },
-  {
-   "name": "Lake Afton",
-   "reports": 1,
-   "county": "Sedgwick County",
-   "points": [
-    [
-     37.611,
-     -97.627
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "ks-kdhe-hab-status": 1
-   },
-   "open": 1,
-   "places_from": [
-    "ks-kdhe-hab-status"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Lake Charles",
@@ -231,7 +222,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Lake Scott State Park",
@@ -250,7 +242,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Marion County State Fishing Lake",
@@ -269,7 +262,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Melvern Outlet Pond",
@@ -288,7 +282,8 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Neodesha Riverwalk Park Pond",
@@ -307,23 +302,58 @@
    "open": 1,
    "places_from": [
     "ks-kdhe-hab-status"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in KS; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Five-Mile Creek",
+   "reports": 1,
+   "slugs": [
+    "fivemile-creek-ks"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "City of Leavenworth"
+   ],
+   "places_from": [
+    "ks-leavenworth-sso-transparency"
+   ],
+   "county": "Leavenworth County"
+  },
+  {
+   "name": "Lake Afton",
+   "reports": 1,
+   "slugs": [
+    "lake-afton-ks"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     37.611,
+     -97.627
+    ]
+   ],
+   "places_from": [
+    "ks-kdhe-hab-status"
+   ],
+   "county": "Sedgwick County"
   },
   {
    "name": "Seven-Mile Creek",
    "reports": 1,
-   "county": "Leavenworth County",
-   "points": [],
+   "slugs": [
+    "sevenmile-creek-ks"
+   ],
+   "how": "record built from the name",
    "towns": [
     "City of Leavenworth"
    ],
-   "sources": {
-    "ks-leavenworth-sso-transparency": 1
-   },
-   "open": 0,
    "places_from": [
     "ks-leavenworth-sso-transparency"
-   ]
+   ],
+   "county": "Leavenworth County"
   }
  ]
 }
