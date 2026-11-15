@@ -12,8 +12,11 @@ level: "state"
 #   into an advisory), 5 whose note says no advisory was issued, 38 DEQ marked Green Algae/Other. 6 rows at waters the
 #   report calls not publicly accessible keep their county only.
 # Times: DEQ's advisory_issued and advisory_lifted fields are free text holding dates ("7/21: based on photos", "8/3/2026
-#   no new info"); the earliest date of each is the issue and the lift date, day precision, Mountain time; a date with
-#   no year takes the year of the observation. Most lifts come 14 days after the issue with "no new info".
+#   no new info"); the earliest date of the issue note is the issue date, and the lift date is the date the lift note
+#   gives for the lift itself (a sampling or test date is not the lift; a pending, planned or conditional lift is none),
+#   day precision, Mountain time; a date with no year takes the year of the observation. Most lifts come 14 days after
+#   the issue with "no new info". With no lift date: confirmed at each read while the map shows Caution or Closure, then
+#   aged by the 14-day rule from the last read that showed it (from the issue date if none did).
 # Privacy: the reporter's description, photo link and illness answers are never requested; the advisory notes can name
 #   people, so only their dates and the words caution, closure and toxin are kept, in records and in the raw save.
 # Terms (the item's licence): "Data intended for reference and planning purposes only ... DEQ cannot verify accuracy or
