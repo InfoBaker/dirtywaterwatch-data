@@ -1970,10 +1970,12 @@ REMAINDER_OVERLAP_MAX = 0.10   # a remainder with more of its length than this w
 # rest shorter than REMAINDER_MIN_KM is dropped and the target rows naming it (slugs, reach_slugs) go to `to`, a longer
 # true remainder is cut to that rest (and takes `kind`, when given). A rerun of the state's batch therefore cannot
 # rebuild the copy. A record that is no remainder (no covers_part_of) but lies on other records is measured the same
-# way when a ruling names it (Kansas's Bull Creek); an unnamed water with no GNIS id is keyed by its slug. A ruling's
-# "side_channels": False keeps every rest piece beyond SAME_WATER_M, for a river whose true remainder adjoins the river
-# record it was cut from (Kansas: the stretch between a reservoir and the river's record is the river's own).
-# {(state, GNIS number or slug): {"to", "on", "why", "kind"?, "side_channels"?}}
+# way when a ruling names it (Kansas's Bull Creek; Arkansas's South Fork Spring River, a record of another name); an
+# unnamed water with no GNIS id is keyed by its slug. A ruling's "side_channels": False keeps every rest piece beyond
+# SAME_WATER_M, for a river whose true remainder adjoins the river record it was cut from (Kansas: the stretch between a
+# reservoir and the river's record is the river's own). With "rows_follow", the target rows naming a recut record go to
+# `to` as well (rows whose operators lie on the part that is `to`'s, the true remainder lying elsewhere).
+# {(state, GNIS number or slug): {"to", "on", "why", "kind"?, "side_channels"?, "rows_follow"?}}
 REMAINDER_ON = {
     ("MN", 649622): {
         "to": "pomme-de-terre-river-mn", "on": ["pomme-de-terre-river-mn"],
@@ -2029,6 +2031,27 @@ REMAINDER_ON = {
     ("KS", 469680): {
         "to": "big-hill-creek-ks", "on": ["big-hill-lake-ks"], "side_channels": False,
         "why": "Big Hill Creek's NHD record lay 15 per cent on Big Hill Lake (KS go-live audit 2026-11-15, P2-3)"},
+    # Arkansas (AR go-live audit 2026-11-15, items 2 to 4)
+    ("AR", 76253): {
+        "to": "bayou-bartholomew-ar", "on": ["bayou-bartholomew-ar", "bartholomew-bayou-ar"], "rows_follow": True,
+        "why": "Bayou Bartholomew's NHD copy was cut only against openboatlaunch's bartholomew-bayou-ar and lay 95.5 "
+               "per cent within 300 m of openboatlaunch's bayou-bartholomew-ar, the same bayou; the true remainder is "
+               "the headwaters above Pine Bluff, while the row's operators (Dermott, Parkdale, Portland) are on the "
+               "lower bayou (AR go-live audit 2026-11-15, P2-1)"},
+    ("AR", 78762): {
+        "to": "white-river-ar", "on": ["white-river-ar", "bull-shoals-lake-ar", "beaver-lake-ar"], "kind": "river",
+        "why": "the White River's NHD remainder was cut only against white-river-ar and lay 52.7 per cent on Bull Shoals "
+               "Lake and 18.9 per cent on Beaver Lake: the river's line through the reservoirs is the reservoirs' "
+               "records (AR go-live audit 2026-11-15, P2-2)"},
+    ("AR", 558280): {
+        "to": "ouachita-river-ar", "on": ["ouachita-river-ar", "lake-ouachita-ar"], "kind": "river",
+        "why": "the Ouachita River's NHD remainder was cut only against ouachita-river-ar and lay 45.8 per cent on Lake "
+               "Ouachita, whose record that part is (AR go-live audit 2026-11-15, P2-2)"},
+    ("AR", 55029): {
+        "to": "south-spring-river-ar", "on": ["south-spring-river-ar"],
+        "why": "NHD's South Fork Spring River lay 81 per cent on openboatlaunch's south-spring-river-ar, "
+               "OpenStreetMap's name for the same river; a record of another name, so the NHD build never cut it "
+               "(AR go-live audit 2026-11-15, P2-3)"},
 }
 SIDE_CHANNEL_M = 1000          # a rest piece this close to the river record `to` is a side channel or braid of it
 
@@ -2120,6 +2143,8 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
                    "bbox": [round(b[0], 5), round(b[1], 5), round(b[2], 5), round(b[3], 5)],
                    **({"kind": hand["kind"]} if hand and hand.get("kind") else {})}
         actions.append({"slug": w["slug"], "action": "recut", "to": target, "why": why})
+        if hand and hand.get("rows_follow"):     # the rows were placed on the part that is the river's: they follow it
+            moved[w["slug"]] = target
     if drop:
         rows[:] = [w for i, w in enumerate(rows) if i not in drop]
     for t in targets or []:
