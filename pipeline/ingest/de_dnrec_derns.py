@@ -61,11 +61,16 @@ Lifecycle
     data/build/de-dnrec-derns-state.json (safe fields only) and carried, so a release that leaves the first pages is
     never dropped. Details are read for at most DETAILS_PER_RUN releases a run, newest first, and read again while a
     release is under RECHECK_DAYS old; a changed detail is kept with its earlier version's hash (raw._revisions).
-  - A list, a search or a detail page that cannot be read is ok=False: the previous records stay and nothing is
-    dropped. A detail page that failed MAX_DETAIL_FAILURES reads is asked for again once every RETRY_HOURS (backoff,
-    never given up), and while any candidate's detail is unresolved the run stays ok=False with the keys in
-    meta.unresolved_details, so a failure is never turned into success by no longer asking (re-review P1-2). Every
-    requested page of the Recent Releases list must carry rows: an error or consent page in its place fails the run.
+  - A Recent Releases page that cannot be read is ok=False: the previous records stay and nothing is dropped. Every
+    requested page of the list must carry rows: an error or consent page in its place fails the run. A substance
+    search whose result page is not DERNS's search page (an error or refusal page) is a failed read, never "no
+    results": the backfill is not marked done, the terms not read are asked again on the next run, and the run is
+    ok=False while it is open (verify P2-1).
+  - A detail page that cannot be read does not hold the feed: the readable releases are kept and updated, the
+    unreadable one is listed in meta.unread with its reason and last try and asked again on the next run (after
+    MAX_DETAIL_FAILURES reads, once every RETRY_HOURS, never given up), and no record is lifted or removed because
+    of it (a release whose detail was read before keeps that detail). A run in which a detail page failed is
+    ok=False and names it, with the records still written (the pattern of Baton Rouge's quarterly reports).
   - raw._placement "named_water_only": a release is never geolocated from its street, plant or pump station
     (build/provisional_outfalls.py); only a water its notes name places it.
 
@@ -93,6 +98,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+import common
 from common import (BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, strip_house_numbers,
                     write_events, write_json)
 
@@ -233,6 +239,13 @@ def list_rows(page: str) -> list[dict]:
     return out
 
 
+def is_search_page(page: str) -> bool:
+    """A page that is DERNS's own release search (its form state and its release grid), so an empty grid on it is a
+    real zero-result answer; an error or refusal page lacks them."""
+    return bool(re.search(r'id="__VIEWSTATE"', page) and re.search(r"ucReleaseSearch", page)
+                and re.search(r"grvReleases", page))
+
+
 def page_count(page: str) -> int:
     sel = re.search(r'<select[^>]*ddlPageSelector[^>]*>(.*?)</select>', page, re.S)
     return len(re.findall(r"<option", sel.group(1))) if sel else 1
@@ -357,6 +370,9 @@ class Client:
         page = self.post(d)
         n = page_count(page)
         rows = list_rows(page)
+        if not rows and not is_search_page(page):
+            # an error, refusal or consent page in place of the results is a failed read, never "no results"
+            raise RuntimeError(f"search {term!r}: the result page is not DERNS's search page")
         for _ in range(1, n):
             page = self.post(self._next(page, term))
             got = list_rows(page)
@@ -629,7 +645,7 @@ def retry_due(e: dict, now_dt: datetime) -> bool:
 
 
 def unresolved_details(state: dict) -> list[str]:
-    """Candidate releases whose detail page has failed and never been read: the feed is not healthy while any."""
+    """Candidate releases whose detail page has failed and never been read (listed in meta.unread, retried)."""
     return sorted(k for k, e in state.get("rows", {}).items()
                   if e.get("detail") is None and e.get("detail_failures", 0) > 0)
 
@@ -667,6 +683,8 @@ def read_details(client: Client, state: dict, keys: list[str], now: str) -> dict
             n["details_failed"] += 1
             state["rows"][k]["detail_failures"] = state["rows"][k].get("detail_failures", 0) + 1
             state["rows"][k]["detail_failed_at"] = now
+            state["rows"][k]["detail_error"] = f"{type(e).__name__}: {e}"[:200]
+            n.setdefault("failed_keys", []).append(k)
             print(f"{SOURCE_ID}: detail {k}: {e}", file=sys.stderr)
             continue
         if d is None:
@@ -674,6 +692,8 @@ def read_details(client: Client, state: dict, keys: list[str], now: str) -> dict
             e = state["rows"][k]
             e["detail_failures"] = e.get("detail_failures", 0) + 1
             e["detail_failed_at"] = now
+            e["detail_error"] = "the page carries no release fields (an error or refusal page)"
+            n.setdefault("failed_keys", []).append(k)
             continue
         d = safe_detail(d)
         h = hashlib.sha256(json.dumps(d, sort_keys=True).encode()).hexdigest()[:16]
@@ -683,6 +703,8 @@ def read_details(client: Client, state: dict, keys: list[str], now: str) -> dict
             n["details_changed"] += 1
         e.update(detail=d, detail_hash=h, detail_read_at=now)
         e.pop("detail_failed_at", None)
+        e.pop("detail_error", None)
+        e.pop("detail_failures", None)
         n["details_read"] += 1
     return n
 
@@ -730,37 +752,67 @@ def run(args) -> int:
         return 0
     state = rescrub(read_json(STATE_PATH, None) or {"format": SAFE_FORMAT, "rows": {}})
     client = Client()
-    counts = {}
+    counts, errors = {}, []
     try:
         rows = client.recent(args.pages)
-        if args.backfill or not state.get("backfilled_at"):
-            for term in SEARCH_TERMS:
-                rows += client.search(term)
-            state["backfilled_at"] = now
-        counts.update(merge(state, rows, now))
     except (requests.RequestException, RuntimeError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=META)
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
+    if args.backfill or not state.get("backfilled_at"):
+        # each substance search is read whole or not at all; a term that failed is asked again on the next run and
+        # the backfill is marked done only when every term was read (verify P2-1)
+        done = set() if args.backfill else set(state.get("backfill_terms_done") or [])
+        for term in SEARCH_TERMS:
+            if term in done:
+                continue
+            try:
+                rows += client.search(term)
+                done.add(term)
+            except (requests.RequestException, RuntimeError) as e:
+                errors.append(f"search {term!r} not read ({type(e).__name__}: {e})")
+        if done >= set(SEARCH_TERMS):
+            state["backfilled_at"] = now
+            state.pop("backfill_terms_done", None)
+        else:
+            state["backfill_terms_done"] = sorted(done)
+    counts.update(merge(state, rows, now))
     counts.update(read_details(client, state, due_for_detail(state, now_dt, args.details), now))
+    failed_keys = counts.pop("failed_keys", [])
     state["format"], state["updated_at"] = SAFE_FORMAT, now
     write_json(STATE_PATH, state)
     save_raw(SOURCE_ID, json.dumps(state, indent=1, sort_keys=True), "json")
-    unresolved = unresolved_details(state)
-    if counts.get("details_failed") or unresolved:
-        # a detail page that failed (an error, or a page that is not a release's detail), this run or earlier and not
-        # yet read: the published records stay as they were (ok=False) until every one is read; what was read is kept
-        # in the state for the next run (re-review P1-2)
-        write_events(SOURCE_ID, [], ok=False,
-                     error=f"{counts.get('details_failed', 0)} release detail page(s) not read this run; "
-                           f"{len(unresolved)} unresolved",
-                     meta={**META, "unresolved_details": unresolved})
-        print(f"{SOURCE_ID}: FAILED {counts}", file=sys.stderr)
-        return 1
     recs, reasons = build(state, now)
-    write_events(SOURCE_ID, recs, meta={**META, "counts": {**counts, **reasons}})
-    print(f"{SOURCE_ID}: {len(recs)} sewage records; {counts}; {reasons}")
+    meta = {**META, "counts": {**counts, **reasons}, "unread": unread(state)}
+    if state.get("backfill_terms_done") is not None:
+        meta["backfill_terms_not_read"] = [t for t in SEARCH_TERMS if t not in state["backfill_terms_done"]]
+    if failed_keys:
+        errors.append(f"{len(failed_keys)} release detail page(s) not read this run "
+                      f"({', '.join(sorted(failed_keys)[:10])}); listed in meta.unread and asked again next run")
+    if errors:
+        # the readable releases are written and updated; the run says what it could not read (ok=False). No record
+        # is lifted or removed for an unread page: the state keeps every release and every detail read before.
+        path = common.EVENTS_DIR / f"{SOURCE_ID}.json"
+        write_json(path, {"source_id": SOURCE_ID, "fetched_at": now_iso(), "ok": False, "error": "; ".join(errors),
+                          "last_ok_at": (read_json(path, {}) or {}).get("last_ok_at"), "meta": meta,
+                          "count": len(recs), "records": [common.scrub_discharger(r) for r in recs]})
+        print(f"{SOURCE_ID}: {len(recs)} sewage records, NOT OK: {'; '.join(errors)}", file=sys.stderr)
+        return 1
+    write_events(SOURCE_ID, recs, meta=meta)
+    print(f"{SOURCE_ID}: {len(recs)} sewage records; {counts}; {reasons}; unread {len(meta['unread'])}")
     return 0
+
+
+def unread(state: dict) -> dict:
+    """The candidate releases whose detail page has never been read: why, when last tried, how many tries."""
+    out = {}
+    for k in unresolved_details(state):
+        e = state["rows"][k]
+        out[k] = {"release_number": (e.get("list") or {}).get("release_number"),
+                  "last_tried": e.get("detail_failed_at"), "tries": e.get("detail_failures", 0),
+                  "reason": e.get("detail_error") or "the detail page could not be read",
+                  "retry": f"next run, then once every {RETRY_HOURS} h after {MAX_DETAIL_FAILURES} failed reads"}
+    return out
 
 
 def main(argv=None) -> int:
