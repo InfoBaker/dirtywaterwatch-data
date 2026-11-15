@@ -17,6 +17,8 @@ Safe fields (requested by name; nothing else is read or saved): globalid, name, 
   (0.001 degree, WGS84). Never requested: desc_bloom (the reporter's description), pic_url, the illness questions and
   the survey's other answers. The advisory_issued and advisory_lifted texts can name people ("reported by ..."): only
   the dates read from them and the words caution, closure and toxin are kept; the text itself is never stored or saved.
+  sample_date, microcystin and anatoxin are free text too: they are kept to their dates, numbers and the result
+  vocabulary (safe_result: any other word withheld, decimals of a typed point rounded) on every save path.
 
 Record rules
   - A row is a record when advisory_issued gives a date and does not say no advisory was issued, and DEQ's level is not
@@ -194,6 +196,36 @@ def safe_name(name: str, private: bool) -> str:
     return n
 
 
+# the words DEQ's sample_date, microcystin and anatoxin fields use (dates, results, units, test kinds); any other word
+# in them is withheld, so a name, a street or a note can never reach a save (Astra verification 2026-11-15 P1)
+RESULT_WORDS = frozenset("""detect detects detected detection nondetect non not nd no none na n a absent present
+    positive negative pos neg low high moderate below above less greater than limit reporting rl mdl ug mg ng l ml
+    ppb ppm per test tests tested testing strip strips kit lab laboratory sample samples sampled sampling result
+    results pending based on as of at and or from for in new info id identification taxa taxon photo photos visual
+    observed observation toxin toxins microcystin microcystins anatoxin cylindrospermopsin saxitoxin cyano
+    cyanobacteria bloom elisa qpcr pcr water beach shore shoreline open surface dock ramp""".split())
+_WITHHELD = "[withheld]"
+
+
+def safe_result(v):
+    """A sample date or a toxin result kept to its dates, numbers and the result vocabulary: e-mails and phones are
+    scrubbed, decimals of four places or more (a point typed into the field) rounded to three, and every other word
+    withheld."""
+    if v is None or isinstance(v, bool):
+        return None
+    if isinstance(v, (int, float)):
+        return v
+    t = clean(v)
+    if not t:
+        return None
+    t = re.sub(r"\[[^\]]*\]", "\x00", scrub(t))        # the scrubbers' own marks become one withheld mark
+    t = re.sub(r"-?\d{1,3}\.\d{4,}", lambda m: f"{float(m.group(0)):.3f}", t)
+    t = re.sub(r"\d+-[A-Za-z]\b|[A-Za-z]+", lambda m: m.group(0) if m.group(0).lower() in RESULT_WORDS
+               else "\x00", t)
+    t = re.sub(r"\x00(?:[\s.,'&/-]*\x00)*", _WITHHELD, t)
+    return " ".join(t.split()) or None
+
+
 def slug(v: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", (v or "").lower()).strip("-") or "water"
 
@@ -219,6 +251,11 @@ def sanitized(r: dict) -> dict:
     for k in ("water", "place"):
         if raw.get(k):
             raw[k] = safe_name(raw[k], private)
+    for k in ("sample_date", "microcystin", "anatoxin"):
+        if k in raw:
+            raw[k] = safe_result(raw[k])
+    if raw.get("agency_field"):
+        raw["agency_field"] = scrub(str(raw["agency_field"])) or None
     r["waterbody_text"] = safe_name(r.get("waterbody_text") or "", private) or r.get("waterbody_text")
     if private or r.get("lat") is None or r.get("lon") is None:
         r["lat"] = r["lon"] = None
@@ -280,8 +317,8 @@ def build(doc: dict, fetched: str, previous: list[dict] | None = None,
                "advisory_level_at_read": level or "No Current Advisory", "issued_dates": sorted(set(starts)),
                "lifted_dates": lifts, "words": words,
                "agency_field": scrub(clean(a.get("agency")) or "") or None,
-               "sample_date": clean(a.get("sample_date")), "microcystin": clean(a.get("microcystin")),
-               "anatoxin": clean(a.get("anatoxin")), "licence": LICENCE, "dashboard": DASHBOARD,
+               "sample_date": safe_result(a.get("sample_date")), "microcystin": safe_result(a.get("microcystin")),
+               "anatoxin": safe_result(a.get("anatoxin")), "licence": LICENCE, "dashboard": DASHBOARD,
                "start_basis": "the earliest date in DEQ's advisory_issued field (its issue date)",
                "text_note": "DEQ's advisory notes are not reproduced: they can name the people who reported a bloom"}
         if private:
@@ -385,6 +422,9 @@ def safe_rows(doc: dict) -> dict:
             a["name"] = safe_name(a.get("name") or "", private)
         if a.get("agency") not in (None, ""):
             a["agency"] = scrub(clean(a.get("agency")) or "") or None
+        for k in ("sample_date", "microcystin", "anatoxin"):
+            if k in a:
+                a[k] = safe_result(a[k])
         t = str(a.get("advisory_issued") or "")
         if t:
             neg = " no advisory" if NO_ADVISORY.search(t) else ""

@@ -345,3 +345,35 @@ def test_verify_the_lift_date_is_only_the_date_stated_as_the_lift(note, end):
     doc = {"features": [row("V-1", "Example Lake", "7/9/2026", note, obs=ms(2026, 7, 9))]}
     assert M.build(doc, T0)[0][0]["ended_at"] == end
     assert M.build(M.safe_rows(doc), T0)[0][0]["ended_at"] == end
+
+
+BAD_RESULT = "8/1/2026 sampled by Pat Example at 12-B Sample Road (46.712345, -111.912345) call 406-555-0100"
+
+
+def test_verify_result_fields_never_carry_personal_text_to_a_save(tmp_path, monkeypatch):
+    doc = {"features": [row("P-1", "Example Lake", "7/9/2026", None, level="Caution")]}
+    doc["features"][0]["attributes"].update({"sample_date": BAD_RESULT, "microcystin": "Pat Example: 0.5 ug/L",
+                                             "anatoxin": "Non detect, per Dr. Example"})
+
+    def clean_blob(blob):
+        for bad in ("Pat", "Example\"", "Dr.", "12-B", "Sample Road", "712345", "912345", "555-0100"):
+            assert bad not in blob, bad
+    raw = json.dumps(M.safe_rows(doc))
+    clean_blob(raw)
+    assert "8/1/2026" in raw and "0.5 ug/L" in raw and "46.712" in raw
+    recs = M.build(doc, T0)[0]
+    clean_blob(json.dumps(recs))
+    assert recs[0]["raw"]["microcystin"].endswith("0.5 ug/L") and "Non detect" in recs[0]["raw"]["anatoxin"]
+    # a record carried from earlier state, and the failure path
+    old = json.loads(json.dumps(recs[0]))
+    old["raw"].update({"sample_date": BAD_RESULT, "microcystin": BAD_RESULT, "anatoxin": BAD_RESULT})
+    kept = M.build({"features": [row("P-2", "Example Pond", "7/9/2026", None)]}, T0, [old])[0]
+    clean_blob(json.dumps(kept))
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    (tmp_path / "mt-deq-hab-map.json").write_text(json.dumps({"records": [old]}))
+    f = tmp_path / "bad.json"
+    f.write_text(json.dumps({"error": {"code": 500}}))
+    assert M.main(["--file", str(f)]) == 1
+    clean_blob((tmp_path / "mt-deq-hab-map.json").read_text())
