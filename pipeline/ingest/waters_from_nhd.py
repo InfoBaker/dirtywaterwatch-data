@@ -1969,7 +1969,10 @@ REMAINDER_OVERLAP_MAX = 0.10   # a remainder with more of its length than this w
 # outlines, and the side channels and braids within SIDE_CHANNEL_M of the river record `to`, are those records'; a
 # rest shorter than REMAINDER_MIN_KM is dropped and the target rows naming it (slugs, reach_slugs) go to `to`, a longer
 # true remainder is cut to that rest (and takes `kind`, when given). A rerun of the state's batch therefore cannot
-# rebuild the copy. {(state, GNIS number): {"to", "on", "why", "kind"?}}
+# rebuild the copy. A ruling may also name a record that is no remainder (no covers_part_of: Kansas's Bull Creek); and
+# "side_channels": False keeps every rest piece beyond SAME_WATER_M, for a river whose true remainder adjoins the river
+# record it was cut from (Kansas: the stretch between a reservoir and the river's record is the river's own).
+# {(state, GNIS number): {"to", "on", "why", "kind"?, "side_channels"?}}
 REMAINDER_ON = {
     ("MN", 649622): {
         "to": "pomme-de-terre-river-mn", "on": ["pomme-de-terre-river-mn"],
@@ -1982,6 +1985,35 @@ REMAINDER_ON = {
                "Sakakawea and most of the rest on Lake Oahe: the river's line through the reservoirs is the "
                "reservoirs' records, its braids beside the river are missouri-river-nd (ND go-live audit 2026-11-15, "
                "P2-2)"},
+    # Kansas (KS go-live audit 2026-11-15, P2-3): NHD records that lie on the reservoir they run through. The part within
+    # SAME_WATER_M of the reservoir is the reservoir's record; the stretch beyond it stays the river's record.
+    ("KS", 485443): {
+        "to": "republican-river-ks", "on": ["milford-lake-ks"], "side_channels": False,
+        "why": "the Republican River's NHD record lay 80 per cent on Milford Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 485505): {
+        "to": "big-blue-river-ks", "on": ["tuttle-creek-lake-ks"], "side_channels": False,
+        "why": "the Big Blue River's NHD record lay 73 per cent on Tuttle Creek Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 477526): {
+        "to": "cottonwood-river-ks", "on": ["marion-reservoir-ks", "north-cottonwood-river-ks"], "side_channels": False, "kind": "river",
+        "why": "the Cottonwood River's NHD record (kind canal) lay 70 per cent on openboatlaunch's North Cottonwood River and 20 per cent on Marion Reservoir (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 1095788): {
+        "to": "neosho-river-ks", "on": ["john-redmond-reservoir-ks"], "side_channels": False,
+        "why": "the Neosho River's NHD record lay 36 per cent on John Redmond Reservoir (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 1099243): {
+        "to": "verdigris-river-ks", "on": ["toronto-lake-ks"], "side_channels": False,
+        "why": "the Verdigris River's NHD record lay 37 per cent on Toronto Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 482756): {
+        "to": "wakarusa-river-ks", "on": ["clinton-lake-ks"], "side_channels": False,
+        "why": "the Wakarusa River's NHD record lay 37 per cent on Clinton Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 479723): {
+        "to": "hillsdale-lake-ks", "on": ["hillsdale-lake-ks"], "side_channels": False,
+        "why": "Bull Creek's NHD record (no remainder: built whole) lay 18 per cent on Hillsdale Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 477714): {
+        "to": "marais-des-cygnes-river-ks", "on": ["melvern-lake-ks"], "side_channels": False,
+        "why": "the Marais des Cygnes River's NHD record lay 17 per cent on Melvern Lake (KS go-live audit 2026-11-15, P2-3)"},
+    ("KS", 469680): {
+        "to": "big-hill-creek-ks", "on": ["big-hill-lake-ks"], "side_channels": False,
+        "why": "Big Hill Creek's NHD record lay 15 per cent on Big Hill Lake (KS go-live audit 2026-11-15, P2-3)"},
 }
 SIDE_CHANNEL_M = 1000          # a rest piece this close to the river record `to` is a side channel or braid of it
 
@@ -2011,7 +2043,8 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
     actions, moved, drop = [], {}, set()
     for i, w in enumerate(rows):
         parent = w.get("covers_part_of")
-        if not parent or not w.get("geometry"):
+        named = (str(w.get("state") or "").upper(), gnis_num(w.get("gnis_id"))) in REMAINDER_ON
+        if not (parent or named) or not w.get("geometry"):
             continue
         g = shape(w["geometry"])
         lat0 = g.centroid.y
@@ -2026,12 +2059,14 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
             if share <= REMAINDER_OVERLAP_MAX:
                 continue
             rest_m = gm.difference(near)
-            if not rest_m.is_empty:          # side channels and braids beside the river are the river's
+            if not rest_m.is_empty and hand.get("side_channels", True):   # side channels and braids are the river's
                 keep_parts = [x for x in getattr(rest_m, "geoms", [rest_m]) if x.distance(river) > SIDE_CHANNEL_M]
                 rest_m = shapely.union_all(keep_parts) if keep_parts else shapely.GeometryCollection()
             target = hand["to"]
             why = (f"{share:.0%} of the record lay within {SAME_WATER_M} m of {', '.join(hand['on'])} (hand ruling: "
                    f"{hand['why']})")
+        elif not parent:
+            continue                         # a ruled record that is no remainder, its outlines not on this machine
         else:
             eg = S.water_geometry(parent, existing)
             if eg is None:
@@ -2721,6 +2756,12 @@ HAND: list[dict] = [
              "Kanawha Canal; these are its ways east of 77.431 W (both outfalls lie within 200 m of them)."),
     # service "hr": USGS NHD high-resolution flowlines (NHD_HR layer 6) by GNIS id or permanent identifier. The
     # medium-resolution NHDPlus V2.1 network the automatic pass reads has 4.9 km of Scajaquada Creek and none of the others.
+    dict(name="Jersey Creek", state="KS", kind="stream", source="nhd", service="hr", gnis_id="478633",
+         why="EPA's outfall list gives Jersey Creek as the receiving water of 25 combined sewer outfalls of the Unified "
+             "Government of Wyandotte County and Kansas City, Kansas (KS0038563); NHDPlus V2.1 has no flowline of that "
+             "name, so 24 of them had no water record (KS go-live audit 2026-11-15, P2-4). The USGS NHD high-resolution "
+             "flowlines carry Jersey Creek as GNIS 478633, 5.6 km in seven flowlines in Kansas City, Kansas, with its "
+             "culverted and artificial-path stretches, to the Missouri River."),
     dict(name="Scajaquada Creek", state="NY", kind="stream", source="nhd", service="hr", gnis_id="964557", supersede=True,
          why="NY DEC's sewage-release reports (Cheektowaga's and Depew's pump stations and sewers, 370 reports) name "
              "Scajaquada Creek at points 7 to 18 km up the creek from the 4.9 km the NHDPlus V2.1 network gives "
