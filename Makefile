@@ -120,6 +120,11 @@
 #                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
 #                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
 #                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
+#                  Minnesota: mn_mces_spill_notices (the Metropolitan Council's spill pages: the day it responded, its signs as
+#                  its window), the generic ArcGIS block mn-wlssd-overflows (Resource Renew's overflow points; ingest/mn_transforms.py)
+#                  and echo_sewer_overflow_events (EPA's overflow tables, MN permits: the Bois Forte report)
+#                  North Dakota: nd_deq_hab_listings (DEQ's bloom advisories and warnings PDF) and nd_deq_eir_legacy (DEQ's
+#                  incident archive 1975-2020, the sewage rows, re-read every 30 days); HazConnect is a bot wall (register)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

@@ -423,6 +423,16 @@ Kentucky (permits KY...; research/ky/report.md section 2.2; not live until data/
     keep the phrase). The blocklist still runs on the export. Known problem: one Louisville MSD report gives an end
     14 minutes before its start (2026-01-01, 'Cause/Duration of Incident: -14'); times are read as filed.
 
+Minnesota (permits MN...; research/mn/report.md section 2.2; not live until data/rules.json says so)
+  Minnesota issues its own permits and its law (Minn. Stat. 115.061) sends reports to the state's Duty Officer, which
+  publishes none. EPA's collection-system table lists 19 Minnesota permits, but the 2026-11-12 all-versions extract
+  holds one Minnesota report, from the one Minnesota system EPA permits directly: the Bois Forte Band's Lake Vermilion
+  collection system (MN0061310), a sanitary sewer overflow on 2024-06-18 (start and end that day, received 2024-06-25)
+  to "Pike Bay Lake Vermilion Tower Minnesota". Keyed on MN only, so every other state's records are unchanged:
+  - Time zone: STATE_TZ gives America/Chicago (Minnesota keeps one zone); MN is in STATE_ZONE_ALWAYS, so every
+    Minnesota record carries raw.time_zone.
+  - No free-text or repeated-point rule: the one report has no description and its own point; the point is kept to
+    0.001 degree (ROUND_POINT_STATES), in the record and in raw.
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -454,17 +464,23 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 # the all-versions ZIP: every submitted version of each report, read for its current rows when URL fails
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
-STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM", "UT", "KY"}
+STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM", "UT", "KY",
+          "MN"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",
             "NE": "America/Chicago", "AK": "America/Anchorage", "NM": "America/Denver", "UT": "America/Denver",
-            "KY": "America/New_York"}
+            "KY": "America/New_York",
+            "MN": "America/Chicago"}
 # states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
 # one of the counties of the reference file is read in that file's zone (module docstring, South Dakota and Nebraska)
 POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json",
                     "KY": "ky-central-time-counties.json"}   # Kentucky: the Central-time counties (module docstring)
 # states whose records carry raw.time_zone whatever their times' precision (module docstring, Kentucky)
 ZONE_ALWAYS_STATES = {"KY"}
+# states of one zone whose records carry raw.time_zone (STATE_TZ) whatever their times' precision (Minnesota)
+STATE_ZONE_ALWAYS = {"MN"}
+# states whose event points are kept to 0.001 degree before anything is saved (Minnesota; wave 4 rule 4)
+ROUND_POINT_STATES = {"MN"}
 # states whose sewer overflow at the plant's own point (within REPEATED_POINT_PLANT_M of a point EPA's plant list gives
 # the permit) is the plant's location, not the overflow's, with no count of repeats (module docstring, Kentucky; review
 # 2026-11-08 P2-4): the point goes to raw.reported_point and the report is placed by the water it names or not at all
@@ -1581,6 +1597,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                 raw["ky_incident_id"] = m_inc.group(1)
         if ev_tz and state in ZONE_ALWAYS_STATES:
             raw["time_zone"] = ev_tz
+        if state in STATE_ZONE_ALWAYS and STATE_TZ.get(state):
+            raw["time_zone"] = STATE_TZ[state]          # Minnesota: one zone, no county file
         if ev_tz and any(t and "T" not in t for t in (start, end)):
             # a date with no time keeps no offset: the zone it is a day of goes with it, so the status build ends the
             # day in the event's own zone, not New York's (SOL 2026-11-07 wave 2 P1-1)
@@ -1608,6 +1626,11 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             raw["end_is_planned"] = True
             raw["planned_end_note"] = (f"the operator's planned end of an anticipated bypass ({PLANNED_LABEL}); the "
                                        "bypass runs to it unless a later report changes it")
+        if state in ROUND_POINT_STATES and lat is not None and lon is not None:
+            lat, lon = round(lat, 3), round(lon, 3)      # Minnesota: a reporter's point kept to 0.001 degree
+            for k in ("latitude_measure", "longitude_measure"):
+                if raw.get(k) not in (None, ""):
+                    raw[k] = f"{round(float(raw[k]), 3):.3f}"
         kept.append(event(
             source_id=SOURCE_ID, source_record_id=srid, event_type=etype,
             status=status,
