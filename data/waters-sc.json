@@ -1,0 +1,7193 @@
+{
+ "state": "SC",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 213,
+ "waters": [
+  {
+   "slug": "adams-mill-pond-sc",
+   "name": "Adams Mill Pond",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Camden"
+   ],
+   "bbox": [
+    -80.523816,
+    34.282851,
+    -80.517737,
+    34.286058
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.1,
+   "launches": [
+    "goodale-state-park-sc"
+   ],
+   "water_id": "adams-mill-pond-sc",
+   "gnis_id": null,
+   "geometry_hash": "df93ede5c09658e28457de9ca834c9cf6a8203979ce263566f2f4620525a405e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "andrew-jackson-state-park-lake-sc",
+   "name": "Andrew Jackson State Park Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Van Wyck"
+   ],
+   "bbox": [
+    -80.809035,
+    34.843709,
+    -80.805162,
+    34.848334
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.068,
+   "launches": [
+    "andrew-jackson-state-park-sc"
+   ],
+   "water_id": "andrew-jackson-state-park-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "5b6abfa957c0a116cfb1aef8697d00905950fa10ddb5550d20637ed247697a33",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ashepoo-river-sc",
+   "name": "Ashepoo River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Ashepoo Siding"
+   ],
+   "bbox": [
+    -80.566126,
+    32.489139,
+    -80.409093,
+    32.76021
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "brickyard-ferry-sc"
+   ],
+   "water_id": "ashepoo-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "c03b2dc45c466b175c8f9f4a28ef3ceb5e4f85d91186f3f4d668e51aa2d7282d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ashley-river-sc",
+   "name": "Ashley River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Ashley Retreat",
+    "Charleston",
+    "Coventry Place",
+    "Covington Hills",
+    "Hanahan",
+    "Murray Landing",
+    "North Charleston",
+    "White Church Place"
+   ],
+   "bbox": [
+    -80.301766,
+    32.758593,
+    -79.867011,
+    33.196845
+   ],
+   "wikidata": "Q4805571",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "city-marina-leeds-ave-sc",
+    "herbert-h-jessen-sc",
+    "howard-bridgman-access-at-bacons-bridge-sc",
+    "northbridge-park-sc",
+    "ashley-river-carry-in-access-sc",
+    "wo-thomas-jr-boat-landing-sc"
+   ],
+   "water_id": "ashley-river-sc",
+   "gnis_id": "1220257",
+   "geometry_hash": "921a1998e9d979c91682c7eda8b226edf49fd6fda79f165601f59bb951f4260a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "atlantic-intracoastal-waterway-awendaw-sc",
+   "name": "Atlantic Intracoastal Waterway",
+   "kind": "canal",
+   "state": "SC",
+   "towns": [
+    "Awendaw"
+   ],
+   "bbox": [
+    -79.661709,
+    32.918632,
+    -79.543331,
+    33.042006
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "buck-hall-sc"
+   ],
+   "water_id": "atlantic-intracoastal-waterway-awendaw-sc",
+   "gnis_id": null,
+   "geometry_hash": "27a45e612f94532c0ad4bba7ee7f4d4f77196e5ffa0d7a32ea89f02fb5034b07",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "atlantic-intracoastal-waterway-boat-launch-near-awendaw-sc-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "atlantic-intracoastal-waterway-sc",
+   "name": "Atlantic Intracoastal Waterway",
+   "kind": "canal",
+   "state": "SC",
+   "towns": [
+    "Briarcliffe Acres",
+    "Coopers",
+    "Enterprise Landing",
+    "Fantasy Harbour",
+    "Myrtle Beach",
+    "Socastee"
+   ],
+   "bbox": [
+    -79.065159,
+    33.665962,
+    -78.661498,
+    33.847992
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "enterprise-sc",
+    "highway-22-and-17-interchange-sc",
+    "highway-544-sc",
+    "rosewood-sc"
+   ],
+   "water_id": "atlantic-intracoastal-waterway-sc",
+   "gnis_id": null,
+   "geometry_hash": "021ba3037f1937402a3672047bbc2ba2fcc677f1a117903f1b8f93ac20f8aa4a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "private-boat-ramp-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "awendaw-creek-sc",
+   "name": "Awendaw Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Awendaw"
+   ],
+   "bbox": [
+    -79.57788,
+    33.029661,
+    -79.531781,
+    33.040369
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.387,
+   "launches": [
+    "awendaw-creek-canoe-launch-sc"
+   ],
+   "water_id": "awendaw-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "51125e133fe399e58911ef1db87655172cbd115ddab327e6b3942ae853f84f66",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "b-047-sc",
+   "name": "B-047",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Pomaria",
+    "Strother"
+   ],
+   "bbox": [
+    -81.423553,
+    34.260609,
+    -81.332317,
+    34.494263
+   ],
+   "wikidata": "Q921949",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "strother-s-landing-sc"
+   ],
+   "water_id": "b-047-sc",
+   "gnis_id": "1251826",
+   "geometry_hash": "a89c9cb8d9656f8ef51601add0a30846da5c6d479ff73c44cc8cb8e4656a5d4e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "back-river-hardeeville-sc",
+   "name": "Back River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Hardeeville"
+   ],
+   "bbox": [
+    -81.136727,
+    32.083102,
+    -81.037819,
+    32.215689
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "back-river-hardeeville-sc",
+   "gnis_id": null,
+   "geometry_hash": "2e83c9bb721ad4fa7efd2c0d569ccf483f98482a61f77d6f2e668534da4dc26a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "back-river-boat-launch-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "back-river-sc",
+   "name": "Back River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Hanahan",
+    "North Charleston"
+   ],
+   "bbox": [
+    -80.004438,
+    32.967807,
+    -79.937155,
+    33.081663
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bushy-park-fresh-water-sc",
+    "bushy-park-salt-water-sc"
+   ],
+   "water_id": "back-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "f8a784093d50224d72d5925f1374d44bd11496c8fc8bf250921750d9cf382bb0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "barnwell-state-park-lake-sc",
+   "name": "Barnwell State Park Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Blackville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "barnwell-state-park-sc"
+   ],
+   "water_id": "barnwell-state-park-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "battery-creek-sc",
+   "name": "Battery Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Battery Marina Village",
+    "Port Royal"
+   ],
+   "bbox": [
+    -80.721772,
+    32.367494,
+    -80.676916,
+    32.414987
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "parris-island-sc",
+    "port-royal-sc"
+   ],
+   "water_id": "battery-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "20d1983be64e465566cb0fdb1d4c820a3830c1a938d49d12c388bc08dd02449a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beaufort-river-sc",
+   "name": "Beaufort River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Beaufort",
+    "Port Royal"
+   ],
+   "bbox": [
+    -80.68792,
+    32.257605,
+    -80.654463,
+    32.456612
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "freedom-mall-sc",
+    "pigeon-point-sc"
+   ],
+   "water_id": "beaufort-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "db9a10907cacc803f2d548cb7ab0f8bd0984e8b68087a384b6e3a218ffd16dd2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "port-royal-boat-launch-sc-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-bay-creek-sc",
+   "name": "Big Bay Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Edisto Beach"
+   ],
+   "bbox": [
+    -80.383745,
+    32.492226,
+    -80.272897,
+    32.574269
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 5.112,
+   "launches": [
+    "live-oak-sc"
+   ],
+   "water_id": "big-bay-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "15309a6e1d7e2a002b5c33f847691e6ae2dcff689ccf7a43972ad1cb4de7fcd2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "big-bay-creek-boat-launch-near-edisto-beach-sc-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "black-creek-sc",
+   "name": "Black Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Florence"
+   ],
+   "bbox": [
+    -80.415229,
+    34.239547,
+    -79.617259,
+    34.758668
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "highway-327-sc"
+   ],
+   "water_id": "black-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "34e9f73ffb69f74fd37b4c78f9b29ad9f3ae5b2639e27ebb86bb910638de7fc1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "black-mingo-creek-sc",
+   "name": "Black Mingo Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Cow Head Landing",
+    "Union Crossroads"
+   ],
+   "bbox": [
+    -79.450439,
+    33.552776,
+    -79.391763,
+    33.641113
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cowhead-landing-sc",
+    "mingo-sc"
+   ],
+   "water_id": "black-mingo-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "aefc3a222143b92b45b94d514115defbc8eed93781a8a6cf79ab483dcd6bd2af",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "black-river-georgetown-sc",
+   "name": "Black River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Georgetown",
+    "Post Foot Landing"
+   ],
+   "bbox": [
+    -80.249576,
+    33.397652,
+    -79.234336,
+    34.210285
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "peters-creek-sc",
+    "pringles-ferry-sc"
+   ],
+   "water_id": "black-river-georgetown-sc",
+   "gnis_id": "1246903",
+   "geometry_hash": "1dc67962619f0563c3e5aff378614e8afd4e899b0e88a54b0b448108765b7f0d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "black-river-sc",
+   "name": "Black River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Andrews",
+    "Brown's Ferry",
+    "Dunbar Landing",
+    "Kingstree"
+   ],
+   "bbox": [
+    -79.838091,
+    33.457752,
+    -79.453055,
+    33.662945
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "ben-ervin-park-sc",
+    "browns-ferry-sc",
+    "gilland-memorial-park-sc",
+    "mill-street-sc",
+    "old-pumping-station-sc",
+    "pea-house-sc",
+    "pine-tree-sc",
+    "pump-house-sc",
+    "rocky-point-sc"
+   ],
+   "water_id": "black-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "33c34d01ff53d4441000b020320bc3143bdc65c049c148d1b26a5d1f6bf9cd74",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bohicket-creek-sc",
+   "name": "Bohicket Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Kiawah Island",
+    "Rockville"
+   ],
+   "bbox": [
+    -80.206124,
+    32.578837,
+    -80.075578,
+    32.700269
+   ],
+   "wikidata": "Q32844728",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cherry-point-sc"
+   ],
+   "water_id": "bohicket-creek-sc",
+   "gnis_id": "1220876",
+   "geometry_hash": "92da3a10d5a4293ee78032416f1e45b459b79d52880081faae86b4544136de96",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boyd-creek-sc",
+   "name": "Boyd Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Knowles"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "tuten-sc"
+   ],
+   "water_id": "boyd-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boyd-s-mill-pond-sc",
+   "name": "Boyd's Mill Pond",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Honea Path"
+   ],
+   "bbox": [
+    -82.213601,
+    34.452426,
+    -82.199419,
+    34.476374
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.711,
+   "launches": [
+    "karl-h-dixon-memorial-park-sc"
+   ],
+   "water_id": "boyd-s-mill-pond-sc",
+   "gnis_id": null,
+   "geometry_hash": "4d4f37f319b81b6a30064520e6632c504c248dc004ed81a205bb51e09ae3d7df",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "breach-inlet-sc",
+   "name": "Breach Inlet",
+   "kind": "bay",
+   "state": "SC",
+   "towns": [
+    "Sullivan's Island"
+   ],
+   "bbox": [
+    -79.831469,
+    32.75736,
+    -79.803021,
+    32.777029
+   ],
+   "wikidata": "Q32845817",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "station-26-landing-sc"
+   ],
+   "water_id": "breach-inlet-sc",
+   "gnis_id": null,
+   "geometry_hash": "47a4aeca4090bde9e6c4f9b3e26f3e0e3e5acd65793342ea0aa1d8889a64a66a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T13:15:22+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brickyard-creek-sc",
+   "name": "Brickyard Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Red Bluff Estates"
+   ],
+   "bbox": [
+    -80.692304,
+    32.456612,
+    -80.651432,
+    32.504763
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "brickyard-creek-boat-launch-sc"
+   ],
+   "water_id": "brickyard-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "bf9a4b658bbd6eb94fd54fe24537aba9c23c7876b2e2aed361189d68742499ba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "broad-creek-sc",
+   "name": "Broad Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Hilton Head Island"
+   ],
+   "bbox": [
+    -80.829145,
+    32.145835,
+    -80.702516,
+    32.200954
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "broad-creek-boat-launch-sc"
+   ],
+   "water_id": "broad-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "8d37f261585e8932594e6059ed9ad0a8d02e401e5325d905ce39ea761a24bdc6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "broad-river-alston-sc",
+   "name": "Broad River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Alston",
+    "Carlisle",
+    "Clayton",
+    "Columbia",
+    "Gaffney",
+    "Hickory Grove",
+    "Lockhart",
+    "Neal Shoals",
+    "Peak",
+    "Riverview Terrace",
+    "Union"
+   ],
+   "bbox": [
+    -81.757327,
+    34.004722,
+    -81.059196,
+    35.220422
+   ],
+   "wikidata": "Q921949",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "99-island-sc",
+    "bowens-river-access-and-parking-area-sc",
+    "broad-river-canoe-access-sc",
+    "cherokee-ford-recreation-area-sc",
+    "columbia-canal-diversion-dam-sc",
+    "dalton-s-landing-sc",
+    "harbison-state-forest-canoe-access-sc",
+    "lockhart-put-in-below-lockhart-dam-2-sc",
+    "lockhart-take-out-above-lockhart-dam-1-sc",
+    "neal-shoals-dam-canoe-access-sc",
+    "ninety-nine-island-canoe-access-sc",
+    "peake-alston-canoe-access-sc",
+    "pick-hill-access-sc",
+    "riverfront-park-access-sc",
+    "sandy-broad-river-sc",
+    "shelton-ferry-sc",
+    "woods-ferry-sc",
+    "woods-ferry-recreation-area-sc"
+   ],
+   "water_id": "broad-river-alston-sc",
+   "gnis_id": "1251826",
+   "geometry_hash": "f890befdeae2e0ef015125848303750cee23c1edf74febe55d5162d62487e479",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "broad-river-sc",
+   "name": "Broad River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Beaufort"
+   ],
+   "bbox": [
+    -80.847489,
+    32.286401,
+    -80.708018,
+    32.529195
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "broad-river-boat-launch-sc"
+   ],
+   "water_id": "broad-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "0669763c9033cd281796f29588c7d5d5ee9d72f01e5ccb337529405c2c0a4ef6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "broadway-lake-sc",
+   "name": "Broadway Lake",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Anderson"
+   ],
+   "bbox": [
+    -82.59756,
+    34.447553,
+    -82.577507,
+    34.470079
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.992,
+   "launches": [
+    "mcfalls-sc"
+   ],
+   "water_id": "broadway-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "43805678e7fa0553996357819973a430bef5194fa47442a8272b5814a3d62025",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "buggy-branch-sc",
+   "name": "Buggy Branch",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Stokes Bluff Landing"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "web-launch-sc"
+   ],
+   "water_id": "buggy-branch-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bull-creek-sc",
+   "name": "Bull Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Bucksport"
+   ],
+   "bbox": [
+    -79.14658,
+    33.599512,
+    -79.095731,
+    33.664398
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "port-harrelson-sc"
+   ],
+   "water_id": "bull-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "a1bcb256afa285dccfb36e7877f1d542052c09e44e1a6b30adf221441bfc4145",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "capers-creek-sc",
+   "name": "Capers Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Beaufort"
+   ],
+   "bbox": [
+    -80.630656,
+    32.368751,
+    -80.625001,
+    32.376289
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.153,
+   "launches": [
+    "capers-sc"
+   ],
+   "water_id": "capers-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "1860328e566ec3257677c4f810181f3775d691a08d53f7a1f3203f42b5c5dab0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "catawba-river-sc",
+   "name": "Catawba River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Fort Lawn",
+    "Fort Mill",
+    "Great Falls",
+    "Lancaster",
+    "Riverview",
+    "Rock Hill"
+   ],
+   "bbox": [
+    -81.007735,
+    34.53565,
+    -80.859383,
+    35.020773
+   ],
+   "wikidata": "Q1050460",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "catawba-nation-hand-carry-boat-launch-sc",
+    "cedar-creek-sc",
+    "highway-9-sc",
+    "hwy-9-access-point-sc",
+    "landsford-canal-state-park-put-in-sc",
+    "landsford-canal-take-out-sc",
+    "river-park-in-rock-hill-sc",
+    "riverwalk-canoe-and-kayak-launch-sc"
+   ],
+   "water_id": "catawba-river-nc",
+   "gnis_id": "1010097",
+   "geometry_hash": "b023ed5581ad6bd40d60faad4636c23ce7af825dbc030bbc23c9056575a55b7c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "catawba-riverkeeper-fish-camp-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-reservoir-sc",
+   "name": "Cedar Creek Reservoir",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Great Falls"
+   ],
+   "bbox": [
+    -80.896677,
+    34.536385,
+    -80.864323,
+    34.570774
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.445,
+   "launches": [
+    "debutary-sc",
+    "stumpy-pond-sc"
+   ],
+   "water_id": "cedar-creek-reservoir-sc",
+   "gnis_id": null,
+   "geometry_hash": "a45c57e5a8501e9adecf4f5da8e8cdb659de0f34291a6f12c68f887866df6a02",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-sc",
+   "name": "Cedar Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Columbia",
+    "Saint Matthews"
+   ],
+   "bbox": [
+    -80.860503,
+    33.779058,
+    -80.744661,
+    33.844036
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bannister-s-bridge-sc",
+    "cedar-creek-road-sc"
+   ],
+   "water_id": "cedar-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "70f8b3db5c9ff5f11b76e65af1e1e4e26e341d3a4337545a30d0a33587b65e6f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "charleston-harbor-sc",
+   "name": "Charleston Harbor",
+   "kind": "bay",
+   "state": "SC",
+   "towns": [
+    "Charleston"
+   ],
+   "bbox": null,
+   "wikidata": "Q2898567",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sunrise-park-sc"
+   ],
+   "water_id": "charleston-harbor-sc",
+   "gnis_id": "1221517",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chattooga-river-sc",
+   "name": "Chattooga River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Long Bottom Ford",
+    "Long Creek",
+    "Walhalla"
+   ],
+   "bbox": [
+    -83.353325,
+    34.715982,
+    -83.098338,
+    35.031413
+   ],
+   "wikidata": "Q834880",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "earl-s-ford-sc",
+    "hwy-28-chattooga-river-access-sc",
+    "hwy-76-chattooga-river-access-sc",
+    "woodall-shoals-chattooga-river-access-sc"
+   ],
+   "water_id": "chattooga-river-ga",
+   "gnis_id": "1010187",
+   "geometry_hash": "717d85e7fb57ea67edecce657d0d6387d14779c09f8d69a0f5b5eddfe00e6241",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chauga-river-sc",
+   "name": "Chauga River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Chauga Heights"
+   ],
+   "bbox": [
+    -83.232536,
+    34.605213,
+    -83.1463,
+    34.848459
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chau-ram-park-sc"
+   ],
+   "water_id": "chauga-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "5bb06e69a17b0cb67b9853fe0b0bb5d90c598e156a1f4d4f93e5115a3bbc34c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chechessee-river-sc",
+   "name": "Chechessee River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Riverdale"
+   ],
+   "bbox": [
+    -80.841822,
+    32.284072,
+    -80.708018,
+    32.384237
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "edgar-glenn-sc"
+   ],
+   "water_id": "chechessee-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "b9a7455b572723c18c9a12c873e2d9aa9983c397c37ef6fc2be3c764bedb8ab8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chehaw-river-sc",
+   "name": "Chehaw River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Wiggins"
+   ],
+   "bbox": [
+    -80.590112,
+    32.578436,
+    -80.530897,
+    32.653053
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "old-chehaw-sc"
+   ],
+   "water_id": "chehaw-river-sc",
+   "gnis_id": "1247264",
+   "geometry_hash": "9ed00d5a11e37456cceae66e0bd428f19919d27de1daf0bef437f7df40acae5a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chessie-creek-sc",
+   "name": "Chessie Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Walterboro"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chessie-sc"
+   ],
+   "water_id": "chessie-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chester-state-park-lake-sc",
+   "name": "Chester State Park Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Chester"
+   ],
+   "bbox": [
+    -81.247205,
+    34.668407,
+    -81.232759,
+    34.680913
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chester-state-park-lake-sc"
+   ],
+   "water_id": "chester-state-park-lake-sc",
+   "gnis_id": "1238961",
+   "geometry_hash": "27e57e6d6bd14ce4ce88744d921fc9586e62705aa3dd0d171d001234e201cbfb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chicken-creek-sc",
+   "name": "Chicken Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Goose Creek"
+   ],
+   "bbox": [
+    -79.959708,
+    33.039561,
+    -79.94223,
+    33.085965
+   ],
+   "wikidata": "Q19600711",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dunham-creek-sc"
+   ],
+   "water_id": "chicken-creek-sc",
+   "gnis_id": "1229550",
+   "geometry_hash": "3b501dad9003547be94d03b6ee2cbd2d126c1bfb28a952591e6e9e2f4a32a272",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "church-creek-sc",
+   "name": "Church Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Parsonage Point"
+   ],
+   "bbox": [
+    -80.101224,
+    32.823502,
+    -80.0354,
+    32.862257
+   ],
+   "wikidata": "Q56512166",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "pier-point-sc"
+   ],
+   "water_id": "church-creek-sc",
+   "gnis_id": "1221592",
+   "geometry_hash": "24e5660c3ee7067d6535317980aba9e93507f2e702db1fd76f8c5c503952f410",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clark-creek-sc",
+   "name": "Clark Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Johnsonville"
+   ],
+   "bbox": [
+    -79.376377,
+    33.797995,
+    -79.324328,
+    33.837041
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "snow-lake-sc"
+   ],
+   "water_id": "clark-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "54a0ad9d4a148cdd2846d4b4aac486abb14020fe3d556fdc74ffdae311add996",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clarks-hill-lake-sc",
+   "name": "Clarks Hill Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Bordeaux",
+    "Buffalo",
+    "Calhoun Falls",
+    "Clarks Hill",
+    "Lethia",
+    "Little River Subdivision",
+    "McCormick",
+    "Modoc",
+    "Modoc Subdivision",
+    "Parksville"
+   ],
+   "bbox": [
+    -82.648224,
+    33.576034,
+    -82.180986,
+    34.025186
+   ],
+   "wikidata": "Q6477865",
+   "charted": false,
+   "area_km2": 248.712,
+   "launches": [
+    "baker-creek-state-park-sc",
+    "bakers-creek-welcome-center-sc",
+    "benningsfield-creek-boat-ramp-sc",
+    "buffalo-creek-subdivision-sc",
+    "calhoun-park-sc",
+    "catfish-bay-sc",
+    "dorden-creek-sc",
+    "dorn-boating-event-facility-sc",
+    "hamilton-branch-state-park-sc",
+    "hawe-creek-campsite-sc",
+    "hickory-knob-state-park-sc",
+    "landrum-creek-sc",
+    "leroys-ferry-sc",
+    "little-river-quarry-sc",
+    "little-river-subdivision-sc",
+    "long-cane-creek-sc",
+    "long-cane-creek-picnic-area-sc",
+    "mcintosh-sc",
+    "modoc-camp-area-sc",
+    "modoc-park-sc",
+    "modoc-shores-sc",
+    "mt-carmel-park-sc",
+    "mt-pleasant-sc",
+    "new-bordeaux-sc",
+    "parksville-sc",
+    "scotts-ferry-sc",
+    "scotts-ferry-south-boat-ramp-sc",
+    "thurmond-recreation-area-sc",
+    "volunteer-village-boat-ramp-sc"
+   ],
+   "water_id": "clarks-hill-lake-ga",
+   "gnis_id": "335836",
+   "geometry_hash": "791f618c65705fb8b7a9e95e1bf832004fe7ad9ca523b0410c5a93db8394ee93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "colleton-river-sc",
+   "name": "Colleton River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Bluffton"
+   ],
+   "bbox": [
+    -80.881616,
+    32.290275,
+    -80.787903,
+    32.335125
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "he-trask-sr-sc"
+   ],
+   "water_id": "colleton-river-sc",
+   "gnis_id": "1247344",
+   "geometry_hash": "60e8747fb65c7858348a80f1726b5d304bf538a606c61904090e1303e5c0436a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "combahee-river-sc",
+   "name": "Combahee River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Blake",
+    "Hickory Hill",
+    "Salkehatchie",
+    "Yemassee"
+   ],
+   "bbox": [
+    -80.880071,
+    32.676083,
+    -80.765894,
+    32.792713
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "combahee-river-boat-launch-sc",
+    "highway-21-yemassee-sc",
+    "line-canal-canoe-access-sc",
+    "steel-bridge-sc",
+    "sugar-hill-sc"
+   ],
+   "water_id": "combahee-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "80fc97c01f7d44227f9c0eb7be8d8341a60a8522c9ddf37e14edc3327a93472d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "congaree-creek-sc",
+   "name": "Congaree Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Cayce"
+   ],
+   "bbox": [
+    -81.080282,
+    33.915674,
+    -81.025007,
+    33.944981
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "congaree-creek-canoe-launch-sc"
+   ],
+   "water_id": "congaree-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "a5663cdcef8a2bba2d651f73a40628161b29bff653f039da8a913cc37e416f45",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "congaree-river-sc",
+   "name": "Congaree River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Columbia",
+    "Saint Matthews",
+    "West Columbia"
+   ],
+   "bbox": [
+    -81.061906,
+    33.743023,
+    -80.619129,
+    34.005273
+   ],
+   "wikidata": "Q2992976",
+   "charted": false,
+   "area_km2": 0.893,
+   "launches": [
+    "barney-jordan-sc",
+    "bates-bridge-boat-landing-sc",
+    "granby-park-access-sc",
+    "thomas-h-newman-sc",
+    "west-columbia-riverwalk-sc"
+   ],
+   "water_id": "congaree-river-sc",
+   "gnis_id": "1249468",
+   "geometry_hash": "a859a3fe020bb680690fcad3675f255058215ff51089601d45a1aaf06c3192e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coo-saw-river-sc",
+   "name": "Coo saw River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Beaufort",
+    "Seabrook"
+   ],
+   "bbox": [
+    -80.812239,
+    32.474941,
+    -80.558504,
+    32.541789
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 26.373,
+   "launches": [
+    "grays-hill-sc",
+    "seabrook-sc"
+   ],
+   "water_id": "coo-saw-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "a86c70d9461fae8c2830f0e9e5392b422d3ada6245b6f385d44225d1ea2ff141",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cooper-river-sc",
+   "name": "Cooper River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Charleston",
+    "North Charleston"
+   ],
+   "bbox": [
+    -79.964641,
+    32.789241,
+    -79.900335,
+    33.066585
+   ],
+   "wikidata": "Q5167806",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "r-m-hendrick-s-virginia-av-park-sc"
+   ],
+   "water_id": "cooper-river-sc",
+   "gnis_id": "1229589",
+   "geometry_hash": "1fc0e8915623847ed507e5f6dd46da6eb9463b34db523f8aa4c0ff9e4de6eb25",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "charleston-boat-launch-sc",
+    "charleston-boat-launch-sc-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "coosawhatchie-river-possum-corner-sc",
+   "name": "Coosawhatchie River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Possum Corner"
+   ],
+   "bbox": [
+    -81.021068,
+    32.642885,
+    -80.945445,
+    32.760229
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "corner-lake-sc"
+   ],
+   "water_id": "coosawhatchie-river-possum-corner-sc",
+   "gnis_id": null,
+   "geometry_hash": "f5b7f3c50d0dabcb52da20ef905389175150108792ed95c2ab9f0a19adbe8cd0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coosawhatchie-river-sc",
+   "name": "Coosawhatchie River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Ridgeland"
+   ],
+   "bbox": [
+    -80.957913,
+    32.529195,
+    -80.847489,
+    32.642005
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dawson-creek-sc"
+   ],
+   "water_id": "coosawhatchie-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "8b6da599593f2e36ffc1c82a11c24efe8a0c381f410ada4d8bac3b23cb40cf23",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cowen-creek-sc",
+   "name": "Cowen Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Frogmore"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "penn-center-dock-sc"
+   ],
+   "water_id": "cowen-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-springs-lake-sc",
+   "name": "Crystal Springs Lake",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -81.236669,
+    33.831413,
+    -81.232971,
+    33.83972
+   ],
+   "wikidata": "Q34881985",
+   "charted": false,
+   "area_km2": 0.099,
+   "launches": [],
+   "water_id": "crystal-springs-lake-sc",
+   "gnis_id": "1221863",
+   "geometry_hash": "54b711f89f6a8768c263abd46d35522a4e0cc4a051db7917a93515c10856f66f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "crystal-springs-lake-boat-launch-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cuckholds-creek-sc",
+   "name": "Cuckholds Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "White Hall"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cuckholds-sc"
+   ],
+   "water_id": "cuckholds-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cypress-bay-sc",
+   "name": "Cypress Bay",
+   "kind": "bay",
+   "state": "SC",
+   "towns": [
+    "Myrtle Beach"
+   ],
+   "bbox": null,
+   "wikidata": "Q34663034",
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "cypress-bay-sc",
+   "gnis_id": "1221890",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cypress-bay-boat-launch-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dawho-river-sc",
+   "name": "Dawho River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Barrelville",
+    "Little Edisto"
+   ],
+   "bbox": [
+    -80.389586,
+    32.622372,
+    -80.270876,
+    32.657737
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dawho-boat-launch-sc",
+    "dawhoo-sc"
+   ],
+   "water_id": "dawho-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "5a65575fdf368f73efb7aec61f872b06b546aaceaaddcd1dd77b683f174709db",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "echaw-creek-sc",
+   "name": "Echaw Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Price Landing"
+   ],
+   "bbox": [
+    -79.651346,
+    33.159865,
+    -79.546607,
+    33.256728
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pitch-landing-sc"
+   ],
+   "water_id": "echaw-creek-sc",
+   "gnis_id": "1229675",
+   "geometry_hash": "c07a2c9fe3717c8121b7e7d050c32e1f34e7f135eaa1b397cf2f8ceb308f2857",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "edisto-river-sc",
+   "name": "Edisto River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Branchville",
+    "Canadys",
+    "Cottageville",
+    "Goodhope Landing",
+    "Kelsey Cove Landing",
+    "Lowndes Landing",
+    "Martins Landing",
+    "Mas Old Field Landing",
+    "Norman Landing",
+    "Ponpon",
+    "Ridgeville",
+    "Saint George"
+   ],
+   "bbox": [
+    -80.89053,
+    32.64382,
+    -80.385139,
+    33.264183
+   ],
+   "wikidata": "Q5338455",
+   "charted": true,
+   "area_km2": 2.116,
+   "launches": [
+    "colleton-state-park-sc",
+    "givhans-ferry-state-park-sc",
+    "good-hope-sc",
+    "long-creek-sc",
+    "lowndes-sc",
+    "mars-oldfield-sc",
+    "martins-sc",
+    "minnie-gruber-rumph-landing-at-stokes-bridge-sc",
+    "sullivans-ferry-sc",
+    "t-coke-weeks-sc",
+    "t-w-messervy-sc",
+    "west-bank-sc",
+    "willtown-bluff-sc",
+    "zig-zag-sc"
+   ],
+   "water_id": "edisto-river-sc",
+   "gnis_id": "1222239",
+   "geometry_hash": "ef78944205cae47ef3713d1b13b726a7f2e0655361374455c3fc6488da212734",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "elliott-cut-sc",
+   "name": "Elliott Cut",
+   "kind": "canal",
+   "state": "SC",
+   "towns": [
+    "Charleston"
+   ],
+   "bbox": [
+    -80.004009,
+    32.766022,
+    -79.981483,
+    32.769414
+   ],
+   "wikidata": "Q34749216",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "riverland-terrace-sc"
+   ],
+   "water_id": "elliott-cut-sc",
+   "gnis_id": "1222268",
+   "geometry_hash": "3c6660fbb4b5ecac7e2136b46f0933be67c3affb1cfcb93d25c92c05f792c0d2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "enoree-river-sc",
+   "name": "Enoree River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Clinton",
+    "Maybinton",
+    "Newberry",
+    "Pelham",
+    "Taylors",
+    "Whitmire"
+   ],
+   "bbox": [
+    -82.34344,
+    34.406176,
+    -81.411066,
+    34.964247
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "339-boat-ramp-sc",
+    "brazzelman-s-bridge-sc",
+    "horseshoe-falls-musgrove-mill-river-access-sc",
+    "keitt-s-bridge-sc",
+    "park-at-taylors-mill-sc",
+    "pelham-mill-park-sc"
+   ],
+   "water_id": "enoree-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "c76823e421c65013cd73bd76bba2b57fa092b09390154593c6dfa6ac0185924f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "estherville-minim-creek-canal-sc",
+   "name": "Estherville Minim Creek Canal",
+   "kind": "canal",
+   "state": "SC",
+   "towns": [
+    "Georgetown"
+   ],
+   "bbox": [
+    -79.280178,
+    33.184219,
+    -79.256459,
+    33.260929
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "south-island-ferry-sc"
+   ],
+   "water_id": "estherville-minim-creek-canal-sc",
+   "gnis_id": null,
+   "geometry_hash": "df479bd05face397b6f89c84e757057426e607ad451499f7914a0e64f31babf8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "euhaw-creek-sc",
+   "name": "Euhaw Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Bolon Hall Landing"
+   ],
+   "bbox": [
+    -80.845298,
+    32.38959,
+    -80.788371,
+    32.415435
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bolan-hall-sc"
+   ],
+   "water_id": "euhaw-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "d7fc7ab0874bbb8810f87a072cbcce8559e6614a5ab75b587493a0b86fd147e1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eureka-lake-sc",
+   "name": "Eureka Lake",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Cheraw"
+   ],
+   "bbox": [
+    -79.921468,
+    34.620828,
+    -79.892579,
+    34.643564
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.764,
+   "launches": [
+    "cheraw-state-park-sc",
+    "eureka-lake-boat-launch-sc"
+   ],
+   "water_id": "eureka-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "792f18e198b07df6b88367302f2d31538af1c4ca5db20091f741d41bb3ac7242",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "factory-creek-sc",
+   "name": "Factory Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Beaufort"
+   ],
+   "bbox": [
+    -80.667975,
+    32.419131,
+    -80.646981,
+    32.44387
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "white-hall-sc"
+   ],
+   "water_id": "factory-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "7c8fec51963302b86eedb8790f63ced5ef8c78d124e9ee403e11c37947562eed",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fishing-creek-reservoir-sc",
+   "name": "Fishing Creek Reservoir",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Great Falls",
+    "Springs Park"
+   ],
+   "bbox": [
+    -80.902909,
+    34.600718,
+    -80.868267,
+    34.684091
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.005,
+   "launches": [
+    "fishing-creek-boat-launch-sc",
+    "springs-park-access-area-sc"
+   ],
+   "water_id": "fishing-creek-reservoir-sc",
+   "gnis_id": null,
+   "geometry_hash": "761cb85b1da22fe33ba694f89238f9adf7d8f337e2a6a84c6a18e8731ad10096",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fishing-creek-sc",
+   "name": "Fishing Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Great Falls"
+   ],
+   "bbox": [
+    -81.259842,
+    34.594194,
+    -80.894936,
+    35.047303
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "nitrolee-access-area-sc"
+   ],
+   "water_id": "fishing-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "fd79cdc2eab4fed290e3ad90a0af0edaff51ea1fa3d02aa313385b8a98bd4f6b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "folly-river-sc",
+   "name": "Folly River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Folly Beach"
+   ],
+   "bbox": [
+    -79.978474,
+    32.638965,
+    -79.914644,
+    32.679479
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "folly-river-boat-launch-sc"
+   ],
+   "water_id": "folly-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "186e243e2ed9ec5f289ed2bccef505a975b7b8a751a401b4c92028b5df60738d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gibson-pond-sc",
+   "name": "Gibson Pond",
+   "kind": "pond",
+   "state": "SC",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -81.251467,
+    33.966675,
+    -81.243184,
+    33.969682
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.085,
+   "launches": [
+    "gibson-pond-boat-launch-sc"
+   ],
+   "water_id": "gibson-pond-sc",
+   "gnis_id": null,
+   "geometry_hash": "be3042054f7414cd1f85be9f389a19bb3969ea8a30f70379e5163bc3735cc837",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "goose-creek-reservoir-sc",
+   "name": "Goose Creek Reservoir",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Hanahan"
+   ],
+   "bbox": [
+    -80.04037,
+    32.928601,
+    -80.008807,
+    32.978073
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.162,
+   "launches": [
+    "john-r-bettis-sc"
+   ],
+   "water_id": "goose-creek-reservoir-sc",
+   "gnis_id": null,
+   "geometry_hash": "5cd2f4b61293dd754e86a115416aed2c8cb2c5fc19e4664205ad99c9e01a1c79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "great-falls-reservoir-sc",
+   "name": "Great Falls Reservoir",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Great Falls"
+   ],
+   "bbox": [
+    -80.895937,
+    34.577555,
+    -80.885651,
+    34.60139
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.79,
+   "launches": [
+    "canal-street-access-sc"
+   ],
+   "water_id": "great-falls-reservoir-sc",
+   "gnis_id": null,
+   "geometry_hash": "d22247d408f79e9d6600521ca33e6b01ffba89569bf4000083a046d1898428f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "great-pee-dee-river-sc",
+   "name": "Great Pee Dee River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Blenheim",
+    "Bostick",
+    "Bucksport",
+    "Cheraw",
+    "Conway",
+    "Florence",
+    "Georgetown",
+    "Johnsonville",
+    "Pamplico",
+    "Pee Dee",
+    "Plantersville",
+    "Port Hill Landing"
+   ],
+   "bbox": [
+    -79.881669,
+    33.198143,
+    -79.138149,
+    34.721275
+   ],
+   "wikidata": "Q2061230",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bosticks-sc",
+    "dewitts-bluff-sc",
+    "dunham-bluff-sc",
+    "ellisons-sc",
+    "highway-301-sc",
+    "laney-sc",
+    "lewis-d-kirven-sr-cashua-ferry-sc",
+    "new-society-hill-sc",
+    "petersfield-sc",
+    "samworth-wma-sc",
+    "society-hill-sc",
+    "staples-lake-sc",
+    "tanyard-landing-sc",
+    "tom-blue-hunts-bluff-sc",
+    "yauhannah-sc"
+   ],
+   "water_id": "great-pee-dee-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "cbebad2e8a38f902e75618c92cf9dca8cded9292f73239c1e5c28279f40cb53e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "great-pee-dee-river-boat-launch-near-plantersville-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "gunter-lake-sc",
+   "name": "Gunter Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Peters Ferry Landing"
+   ],
+   "bbox": [
+    -79.319955,
+    33.946085,
+    -79.314639,
+    33.954401
+   ],
+   "wikidata": "Q35703782",
+   "charted": false,
+   "area_km2": 0.075,
+   "launches": [
+    "gunters-lake-boat-launch-sc"
+   ],
+   "water_id": "gunter-lake-sc",
+   "gnis_id": "1245868",
+   "geometry_hash": "ec59164bfd5c7b79a69fffe354e709cb898c11bca186d70f8349bb7ad99ff33f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "haigh-creek-sc",
+   "name": "Haigh Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Beaufort"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "wallace-sc"
+   ],
+   "water_id": "haigh-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-creek-sc",
+   "name": "Horseshoe Creek",
+   "kind": "canal",
+   "state": "SC",
+   "towns": [
+    "Walterboro"
+   ],
+   "bbox": [
+    -80.489414,
+    32.841176,
+    -80.473139,
+    32.868362
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "prices-bridge-sc"
+   ],
+   "water_id": "horseshoe-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "205570c16a9564249fbfeaaf89be867d4c729dcd48f0e584e03f332451ed0f59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "huger-creek-sc",
+   "name": "Huger Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Limerick"
+   ],
+   "bbox": [
+    -79.811724,
+    33.128802,
+    -79.801467,
+    33.134211
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "huger-park-sc"
+   ],
+   "water_id": "huger-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "d5eb89e51cbb278f65b4f239b564bbcc43a4a81bbc451a530c4eac8fc443cc8b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hunt-pond-sc",
+   "name": "Hunt Pond",
+   "kind": "pond",
+   "state": "SC",
+   "towns": [
+    "Lake Frances"
+   ],
+   "bbox": [
+    -81.176959,
+    33.906822,
+    -81.165288,
+    33.910143
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.183,
+   "launches": [],
+   "water_id": "hunt-pond-sc",
+   "gnis_id": null,
+   "geometry_hash": "3db761e9ee21aad8f5a491ce6eddb8debd7930b35340fc8939ff8ef5c99b2203",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hunt-pond-boat-launch-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "huspah-creek-sc",
+   "name": "Huspah Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Lobeco"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "paige-point-sc"
+   ],
+   "water_id": "huspah-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "intracoastal-waterway-mount-pleasant-sc",
+   "name": "Intracoastal Waterway",
+   "kind": "canal",
+   "state": "SC",
+   "towns": [
+    "Mount Pleasant"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "pitt-street-bridge-sc"
+   ],
+   "water_id": "intracoastal-waterway-mount-pleasant-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "intracoastal-waterway-north-myrtle-beach-sc",
+   "name": "Intracoastal Waterway",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "North Myrtle Beach"
+   ],
+   "bbox": [
+    -78.684658,
+    33.833734,
+    -78.666453,
+    33.844404
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.194,
+   "launches": [
+    "north-myrtle-beach-sc"
+   ],
+   "water_id": "intracoastal-waterway-north-myrtle-beach-sc",
+   "gnis_id": null,
+   "geometry_hash": "1e67512d0a2057744dff19db21e384eafe4fd2f96dcb05ab1313576bccedcb30",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "intracoastal-waterway-sc",
+   "name": "Intracoastal Waterway",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Little River",
+    "North Myrtle Beach"
+   ],
+   "bbox": [
+    -78.667519,
+    33.842167,
+    -78.32097,
+    33.978271
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 14.185,
+   "launches": [
+    "johnny-causey-boating-facility-sc",
+    "t-craig-campbell-sc"
+   ],
+   "water_id": "intracoastal-waterway-calabash-nc",
+   "gnis_id": null,
+   "geometry_hash": "7e741bd265c6843f1fd35eeef85865d9f623e7d38a788c67e5efbd3ff683366c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "island-creek-sc",
+   "name": "Island Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Shell Bluff Landing"
+   ],
+   "bbox": [
+    -81.826829,
+    33.224275,
+    -81.775623,
+    33.284564
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "swamp-boat-ramp-sc"
+   ],
+   "water_id": "island-creek-sc",
+   "gnis_id": "1223466",
+   "geometry_hash": "b291b7121755258c6fe715f5d1d744d41862eb4a42731b46e24d2e706d02869c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jenkins-creek-sc",
+   "name": "Jenkins Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Beaufort"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "eddings-sc"
+   ],
+   "water_id": "jenkins-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jeremy-creek-sc",
+   "name": "Jeremy Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "McClellanville"
+   ],
+   "bbox": [
+    -79.478097,
+    33.077447,
+    -79.459291,
+    33.094834
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.102,
+   "launches": [
+    "mclellanville-landing-sc"
+   ],
+   "water_id": "jeremy-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "ae6b383b9a68e8b7dfdf251e07592b3f6c0ee96b1f09f5350cec8904eb3870d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "john-d-long-lake-sc",
+   "name": "John D. Long Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Lockhart"
+   ],
+   "bbox": [
+    -81.517257,
+    34.772497,
+    -81.504973,
+    34.778903
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.256,
+   "launches": [
+    "john-d-long-boat-launch-sc"
+   ],
+   "water_id": "john-d-long-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "da520a19d3be55850788f59a94ffcb3f7555f36b999b7749173e21bd26252ed7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "johns-creek-sc",
+   "name": "Johns Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Union"
+   ],
+   "bbox": [
+    -81.775578,
+    34.570872,
+    -81.741079,
+    34.618387
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sedalia-lake-sc",
+    "wildcat-lake-sc"
+   ],
+   "water_id": "johns-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "0f2913c5524dd4df2c8873d1c935f2cf8654c30e79156eac86b8eebbb6237ffd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jonesville-town-pond-sc",
+   "name": "Jonesville Town Pond",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Jonesville"
+   ],
+   "bbox": [
+    -81.683768,
+    34.851737,
+    -81.678833,
+    34.857627
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.096,
+   "launches": [
+    "jonesville-reservoir-sc"
+   ],
+   "water_id": "jonesville-town-pond-sc",
+   "gnis_id": null,
+   "geometry_hash": "3005b40e5bbf8af233795635a95b3c729d3034ddc637363da74493ac4cec99f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "keowee-river-sc",
+   "name": "Keowee River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Seneca"
+   ],
+   "bbox": [
+    -82.933836,
+    34.695907,
+    -82.849345,
+    34.977021
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "holders-sc"
+   ],
+   "water_id": "keowee-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "f4bc0297918c3ea4c335ab7e0f9991fbc00a4a656e902cd04e402d5e871e36d1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-bee-sc",
+   "name": "Lake Bee",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Chesterfield"
+   ],
+   "bbox": [
+    -80.238975,
+    34.574973,
+    -80.23632,
+    34.578613
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.053,
+   "launches": [
+    "lake-bee-boat-launch-sc"
+   ],
+   "water_id": "lake-bee-sc",
+   "gnis_id": null,
+   "geometry_hash": "2232688204d898edddc5574983a7a6f8e717002a3d96b2a6bcb760061197632e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-blalock-sc",
+   "name": "Lake Blalock",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Mayo"
+   ],
+   "bbox": [
+    -81.953743,
+    35.051686,
+    -81.860856,
+    35.112786
+   ],
+   "wikidata": "Q6474990",
+   "charted": false,
+   "area_km2": 3.933,
+   "launches": [
+    "lake-blalock-park-sc"
+   ],
+   "water_id": "lake-blalock-sc",
+   "gnis_id": null,
+   "geometry_hash": "393bdc4a8a950b4c509ac2b01e96455232091fe0b26d2a8d9264455c02b6cbcc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cherokee-sc",
+   "name": "Lake Cherokee",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Gaffney"
+   ],
+   "bbox": [
+    -81.5821,
+    35.040345,
+    -81.571351,
+    35.046603
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.195,
+   "launches": [
+    "lake-cherokee-boat-launch-sc"
+   ],
+   "water_id": "lake-cherokee-sc",
+   "gnis_id": null,
+   "geometry_hash": "8204b46213c9649b777ad03298c3582fb0038230cb0b741dcbf62704ba878981",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cooley-sc",
+   "name": "Lake Cooley",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Lyman"
+   ],
+   "bbox": [
+    -82.123741,
+    34.991143,
+    -82.0856,
+    35.015222
+   ],
+   "wikidata": "Q29899642",
+   "charted": false,
+   "area_km2": 1.253,
+   "launches": [
+    "lake-cooley-boat-launch-sc"
+   ],
+   "water_id": "lake-cooley-sc",
+   "gnis_id": "1248212",
+   "geometry_hash": "c4002d5058a09682281c7354bd8185a7e7afd9b110dd12adf2492873a3699432",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-crawford-sc",
+   "name": "Lake Crawford",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Clover"
+   ],
+   "bbox": [
+    -81.344821,
+    35.148031,
+    -81.341052,
+    35.15045
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.03,
+   "launches": [
+    "king-s-mountain-state-park-clover-sc"
+   ],
+   "water_id": "lake-crawford-sc",
+   "gnis_id": null,
+   "geometry_hash": "e12b243ed91a9cfe5b2b80f4609c4917badc3bb202cdf336261963974aa5835d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cunningham-sc",
+   "name": "Lake Cunningham",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Greer"
+   ],
+   "bbox": [
+    -82.283783,
+    34.975164,
+    -82.244815,
+    34.986943
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.638,
+   "launches": [
+    "lake-cunningham-recreation-facility-sc"
+   ],
+   "water_id": "lake-cunningham-sc",
+   "gnis_id": null,
+   "geometry_hash": "c75e3481113dc5bee154d7ef2466a2d5c89a61c7ed2a40f036ce1b797f97deda",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-edgar-brown-barnwell-sc",
+   "name": "Lake Edgar Brown",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Barnwell"
+   ],
+   "bbox": [
+    -81.370347,
+    33.246133,
+    -81.366673,
+    33.253721
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.149,
+   "launches": [
+    "ramp-c-sc"
+   ],
+   "water_id": "lake-edgar-brown-barnwell-sc",
+   "gnis_id": null,
+   "geometry_hash": "43323ddeff373baeae371dde35694487c7edbcb296d2a8300d8281613675b198",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-edgar-brown-barnwell-sc-2",
+   "name": "Lake Edgar Brown",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Barnwell"
+   ],
+   "bbox": [
+    -81.368976,
+    33.252962,
+    -81.362986,
+    33.261751
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.197,
+   "launches": [
+    "ramp-d-sc"
+   ],
+   "water_id": "lake-edgar-brown-barnwell-sc-2",
+   "gnis_id": null,
+   "geometry_hash": "505c77912f7afe3b59cd66c9789c882fed9bdafa0ba6af6f1cd0ba9b1f32a392",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-edgar-brown-sc",
+   "name": "Lake Edgar Brown",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Barnwell"
+   ],
+   "bbox": [
+    -81.371479,
+    33.246217,
+    -81.363043,
+    33.262738
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.097,
+   "launches": [
+    "ramp-a-sc",
+    "ramp-e-sc"
+   ],
+   "water_id": "lake-edgar-brown-sc",
+   "gnis_id": null,
+   "geometry_hash": "1f8c68f5065a765cb3f7330e6c5a710465d2595f24311e213fbbf90a74c8552b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-george-warren-sc",
+   "name": "Lake George Warren",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Hampton"
+   ],
+   "bbox": [
+    -81.181413,
+    32.823812,
+    -81.163487,
+    32.839104
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.824,
+   "launches": [
+    "lake-warren-1-sc",
+    "lake-warren-3-sc"
+   ],
+   "water_id": "lake-george-warren-sc",
+   "gnis_id": null,
+   "geometry_hash": "12657e76124d309b30af945505c4e3a9b65a539df7c6a38f37d6e4aabb270fc4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-greenwood-sc",
+   "name": "Lake Greenwood",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Greenwood",
+    "Greenwood Shores",
+    "Harbor Heights",
+    "Lake Shores",
+    "Lota",
+    "Ninety Six",
+    "Waterloo"
+   ],
+   "bbox": [
+    -82.185883,
+    34.168714,
+    -81.895858,
+    34.362821
+   ],
+   "wikidata": "Q6476034",
+   "charted": false,
+   "area_km2": 38.199,
+   "launches": [
+    "greenwood-access-area-sc",
+    "greenwood-county-boat-ramp-sc",
+    "greenwood-shores-sc",
+    "greenwood-state-park-campground-ramp-sc",
+    "greenwood-state-park-ramp-sc",
+    "laurens-shrine-club-sc",
+    "riverfork-boat-ramp-sc",
+    "souls-harbor-sc"
+   ],
+   "water_id": "lake-greenwood-sc",
+   "gnis_id": "1237668",
+   "geometry_hash": "54ebb219f3dccde81e27782f010d76f407e9abec55b0111c152b634c2e1c71f1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-greenwood-boat-launch-near-lota-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hartwell-sc",
+   "name": "Lake Hartwell",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Anderson",
+    "Bridgewater",
+    "Central",
+    "Clemson",
+    "Double Springs",
+    "Fair Play",
+    "Fairfield Acres",
+    "Fairplay Shores",
+    "Friendship Shores",
+    "Green Hill Plantation",
+    "Holland Store",
+    "Hunters Trail"
+   ],
+   "bbox": [
+    -83.282597,
+    34.337566,
+    -82.657431,
+    34.760734
+   ],
+   "wikidata": "Q1800945",
+   "charted": false,
+   "area_km2": 200.643,
+   "launches": [
+    "18-mile-creek-sc",
+    "apple-island-sc",
+    "asbury-sc",
+    "brown-road-sc",
+    "broyles-sc",
+    "camp-creek-sc",
+    "choestoa-park-sc",
+    "choestoa-park-seneca-sc",
+    "coneross-creek-sc",
+    "denver-sc",
+    "double-springs-sc",
+    "durham-access-area-sc",
+    "fairplay-sc",
+    "friendship-sc",
+    "glenn-ford-access-area-pendleton-sc",
+    "glenn-ford-access-area-sc",
+    "green-pond-sc",
+    "hattons-ford-sc",
+    "honea-path-boat-ramp-sc",
+    "hurricane-creek-sc",
+    "island-point-sc",
+    "jacks-sc",
+    "jarrett-access-area-sc",
+    "lake-hartwell-state-park-fairplay-shores-sc",
+    "lake-hartwell-state-park-sc",
+    "lawrence-bridge-sc",
+    "madden-bridge-road-access-sc",
+    "martin-creek-sc",
+    "mullins-ford-sc",
+    "oconee-point-sc",
+    "ponderosa-sc",
+    "richland-creek-sc",
+    "river-bend-sc",
+    "river-forks-sc",
+    "sadlers-creek-state-park-sc",
+    "seneca-creek-clemson-sc",
+    "seneca-creek-sc",
+    "singing-pines-sc",
+    "south-union-sc",
+    "south-union-sc-2",
+    "springfield-campground-sc",
+    "swaneys-landing-boat-ramp-sc",
+    "tabor-access-sc",
+    "timberland-sc",
+    "townville-sc",
+    "twelve-mile-sc",
+    "twin-lakes-sc",
+    "weldon-sc",
+    "white-city-sc"
+   ],
+   "water_id": "lake-hartwell-ga",
+   "gnis_id": "356215",
+   "geometry_hash": "42ef0c6f0c00c175b85282b41bc530041a9efa6533f918e35d4f036e7bc79b35",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-hartwell-boat-launch-near-huntington-heights-sc",
+    "lake-hartwell-boat-launch-near-huntington-heights-sc-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-issaqueena-sc",
+   "name": "Lake Issaqueena",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Clemson"
+   ],
+   "bbox": [
+    -82.865396,
+    34.734445,
+    -82.857441,
+    34.751561
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.333,
+   "launches": [
+    "lake-issaqueena-boat-launch-sc"
+   ],
+   "water_id": "lake-issaqueena-sc",
+   "gnis_id": null,
+   "geometry_hash": "7ddf696dad6df37c08b656773a23bda76f9d7774c1cbd76c8d38380b0c1fb5df",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-jocassee-sc",
+   "name": "Lake Jocassee",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Salem"
+   ],
+   "bbox": [
+    -82.995429,
+    34.952531,
+    -82.886189,
+    35.071528
+   ],
+   "wikidata": "Q6476352",
+   "charted": false,
+   "area_km2": 28.757,
+   "launches": [
+    "devil-s-fork-state-park-hand-carry-launch-sc",
+    "double-springs-devils-fork-1-sc",
+    "main-boat-ramp-jocassee-1-sc",
+    "roundhouse-point-devils-fork-2-sc",
+    "villas-boat-ramp-jocassee-2-sc"
+   ],
+   "water_id": "lake-jocassee-sc",
+   "gnis_id": "1230532",
+   "geometry_hash": "c05617c8572fc0e0e5317a3296645dd8bacb6b127f1f98332347abcda2dd22fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-johnson-sc",
+   "name": "Lake Johnson",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Spartanburg"
+   ],
+   "bbox": [
+    -81.839484,
+    34.877935,
+    -81.831877,
+    34.885146
+   ],
+   "wikidata": "Q34898519",
+   "charted": false,
+   "area_km2": 0.141,
+   "launches": [
+    "lake-edwin-johnson-sc"
+   ],
+   "water_id": "lake-johnson-sc",
+   "gnis_id": "1238659",
+   "geometry_hash": "0e55a8c63f6bf1c2775b4b4080d0df699cb5c884e0ad4b914949619ad33c3c10",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-keowee-sc",
+   "name": "Lake Keowee",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Eastatoe",
+    "Eleven Oaks",
+    "Fall Creek",
+    "Nine Times",
+    "Port Santorini",
+    "Salem",
+    "Saxony Forest",
+    "Seneca",
+    "Six Mile",
+    "Walhalla",
+    "Water Plantation"
+   ],
+   "bbox": [
+    -83.009289,
+    34.697379,
+    -82.833672,
+    34.963912
+   ],
+   "wikidata": "Q6476437",
+   "charted": false,
+   "area_km2": 63.013,
+   "launches": [
+    "cane-creek-sc",
+    "crowe-creek-sc",
+    "fall-creek-north-sc",
+    "high-falls-sc",
+    "keowee-town-access-sc",
+    "lake-keowee-boat-launch-near-eastatoe-sc-2",
+    "mile-creek-sc",
+    "south-cove-sc",
+    "stamp-creek-access-sc",
+    "warpath-sc"
+   ],
+   "water_id": "lake-keowee-sc",
+   "gnis_id": "1238598",
+   "geometry_hash": "c93b64677b5f0b6b5480cc781b39a48718a14c7f17864c3afa977bd9ac2cb381",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "keowee-marina-boat-slip-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-marion-sc",
+   "name": "Lake Marion",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Adams Landing",
+    "Eadytown",
+    "Eagle Point",
+    "Elloree",
+    "Eutaw Springs",
+    "Eutawville",
+    "Ferguson Landing",
+    "Fountain Lake",
+    "Log Jam Landing",
+    "Packs Landing",
+    "Prioleau",
+    "Rodgers"
+   ],
+   "bbox": [
+    -80.559524,
+    33.3804,
+    -80.139802,
+    33.684014
+   ],
+   "wikidata": "Q4309904",
+   "charted": false,
+   "area_km2": 275.527,
+   "launches": [
+    "borrow-pit-sc",
+    "c-alex-harvin-iii-sc",
+    "calhoun-subdivision-sc",
+    "cathead-sc",
+    "eutaw-springs-sc",
+    "hickory-top-boat-landing-sc",
+    "indian-bluff-park-sc",
+    "john-c-land-iii-sc",
+    "low-falls-sc",
+    "rimini-sc",
+    "rowland-subdivision-sc",
+    "santee-state-park-sc",
+    "spiers-sc",
+    "taw-caw-creek-sc",
+    "taw-caw-park-sc",
+    "white-oak-iii-sc",
+    "wyboo-boat-ramp-and-fishing-pier-sc"
+   ],
+   "water_id": "lake-marion-sc",
+   "gnis_id": "1224315",
+   "geometry_hash": "94b4c4a4c8e2745a28bee536e00eddd33cf63f9d5199ebb8b7c4d1d4cb2dfdf0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-marion-boat-launch-near-shad-moss-village-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-monticello-sc",
+   "name": "Lake Monticello",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Monticello"
+   ],
+   "bbox": [
+    -81.340504,
+    34.294497,
+    -81.284993,
+    34.393498
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 24.114,
+   "launches": [
+    "lake-monticello-east-sc",
+    "lake-monticello-west-sc",
+    "subimpoundment-sc"
+   ],
+   "water_id": "lake-monticello-sc",
+   "gnis_id": null,
+   "geometry_hash": "e91c4f8a0aa9772edc4872a4e788fde46d2e369abc81f76acaba74a51d8e8282",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-moultrie-sc",
+   "name": "Lake Moultrie",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Bonneau Beach",
+    "Chicora",
+    "Cross",
+    "Cross Cross Roads",
+    "Moncks Corner",
+    "Moorefield",
+    "St. Stephen",
+    "Sugar Hill"
+   ],
+   "bbox": [
+    -80.165388,
+    33.210524,
+    -79.965708,
+    33.415623
+   ],
+   "wikidata": "Q6476999",
+   "charted": false,
+   "area_km2": 207.096,
+   "launches": [
+    "amos-lee-gourdine-sc",
+    "augustus-m-flood-sc",
+    "e-jarvis-morris-sc",
+    "fred-l-day-sc",
+    "hatchery-sc",
+    "henderson-g-guerry-sc",
+    "hines-drive-access-sc",
+    "richardsons-sc",
+    "thornley-forest-ii-sc"
+   ],
+   "water_id": "lake-moultrie-sc",
+   "gnis_id": "1230046",
+   "geometry_hash": "6d95837620a15812f8b9d3a48cfd79b881b09ea6fa8e22915206c6b15eb9be95",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-murray-sc",
+   "name": "Lake Murray",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Ballentine",
+    "Ballentine Landing",
+    "Batesburg-Leesville",
+    "East Shore",
+    "Hallmark Shores",
+    "Jug Hole",
+    "Lake Point",
+    "Lexington",
+    "Living Inn",
+    "Milmont Shores",
+    "Newberry",
+    "Pine Point"
+   ],
+   "bbox": [
+    -81.690075,
+    33.998485,
+    -81.216525,
+    34.1716
+   ],
+   "wikidata": "Q6477034",
+   "charted": false,
+   "area_km2": 178.389,
+   "launches": [
+    "hilton-sc",
+    "kempsons-bridge-sc",
+    "lake-murray-dam-sc",
+    "lake-murray-estates-sc",
+    "larry-koon-sc",
+    "larry-koon-landing-shull-island-sc",
+    "murray-shores-sc",
+    "river-bend-batesburg-leesville-sc",
+    "rocky-point-shady-acres-sc",
+    "sunset-recreation-area-sc",
+    "tournament-ramp-billy-dreher-island-lexington-sc",
+    "tournament-ramp-billy-dreher-island-sc"
+   ],
+   "water_id": "lake-murray-sc",
+   "gnis_id": "1224900",
+   "geometry_hash": "43948a0f0c4e20308b6b3530628366a759d7e2657b1b7bdeb7ff7ca262860b84",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-murray-boat-launch-near-batesburg-leesville-sc-11",
+    "lake-murray-boat-launch-near-batesburg-leesville-sc-2",
+    "lake-murray-boat-launch-near-batesburg-leesville-sc-3",
+    "lake-murray-boat-launch-near-east-shore-sc",
+    "lake-murray-boat-launch-near-lexington-sc",
+    "lake-murray-boat-launch-near-lexington-sc-3",
+    "lake-murray-boat-launch-near-lexington-sc-6",
+    "lake-murray-boat-launch-near-pine-point-sc-3",
+    "lake-murray-boat-launch-near-selwood-shores-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-norton-sc",
+   "name": "Lake Norton",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Fork"
+   ],
+   "bbox": [
+    -79.26621,
+    34.328017,
+    -79.259765,
+    34.334986
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.189,
+   "launches": [
+    "little-pee-dee-state-park-sc"
+   ],
+   "water_id": "lake-norton-sc",
+   "gnis_id": null,
+   "geometry_hash": "cae3be30cbefa3cf34575cf44457d8821392ae371234109538aff52733894298",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-oliphant-sc",
+   "name": "Lake Oliphant",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Lowrys"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lake-oliphant-boat-launch-sc"
+   ],
+   "water_id": "lake-oliphant-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-oolenoy-sc",
+   "name": "Lake Oolenoy",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Pickens"
+   ],
+   "bbox": [
+    -82.697826,
+    35.016377,
+    -82.687811,
+    35.024681
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.184,
+   "launches": [
+    "table-rock-state-park-pickens-sc",
+    "table-rock-state-park-sc"
+   ],
+   "water_id": "lake-oolenoy-sc",
+   "gnis_id": null,
+   "geometry_hash": "0621d21af25965201632bb597327a11337906ff7b10d6043c4f47b35347d9dd8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-placid-sc",
+   "name": "Lake Placid",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Sylvan Hills"
+   ],
+   "bbox": [
+    -82.371318,
+    34.927124,
+    -82.366404,
+    34.929112
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.034,
+   "launches": [
+    "paris-mountain-state-park-sc"
+   ],
+   "water_id": "lake-placid-sc",
+   "gnis_id": null,
+   "geometry_hash": "50fa4f2b133db63a0555d08fd127c6270d8c2d0b7a86e1a3655f363e0f7dbe94",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-rabon-sc",
+   "name": "Lake Rabon",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Laurens"
+   ],
+   "bbox": [
+    -82.156956,
+    34.476445,
+    -82.130707,
+    34.518463
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.94,
+   "launches": [
+    "lake-rabon-park-sc"
+   ],
+   "water_id": "lake-rabon-sc",
+   "gnis_id": null,
+   "geometry_hash": "cfe911be6e8bf6d820541be9b6673331778b8f5eec801972cc8186f8cb9004ce",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-robinson-green-hill-sc",
+   "name": "Lake Robinson",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Green Hill"
+   ],
+   "bbox": [
+    -80.174235,
+    34.400866,
+    -80.14192,
+    34.490299
+   ],
+   "wikidata": "Q34900838",
+   "charted": false,
+   "area_km2": 7.815,
+   "launches": [
+    "lake-robinson-boat-launch-sc"
+   ],
+   "water_id": "lake-robinson-green-hill-sc",
+   "gnis_id": "1238481",
+   "geometry_hash": "78a21cd820d4761c733cff39d392987dd62c40454422fbc0d890b6d09e99b30f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-robinson-sc",
+   "name": "Lake Robinson",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Greer"
+   ],
+   "bbox": [
+    -82.329418,
+    34.992298,
+    -82.29293,
+    35.041404
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.941,
+   "launches": [
+    "j-verne-smith-park-sc"
+   ],
+   "water_id": "lake-robinson-sc",
+   "gnis_id": null,
+   "geometry_hash": "782578572cbcdd198b494d2d3e07fe961e9c1b20493dc422b45ec2b9072dc328",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-secession-sc",
+   "name": "Lake Secession",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Iva"
+   ],
+   "bbox": [
+    -82.616054,
+    34.256743,
+    -82.561781,
+    34.358145
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.727,
+   "launches": [
+    "highway-184-sc"
+   ],
+   "water_id": "lake-secession-sc",
+   "gnis_id": null,
+   "geometry_hash": "ebca45146668e979ab2eb89e56348437fbeee40ceece20e4ea5ef803d7511347",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-wallace-bennettsville-sc",
+   "name": "Lake Wallace",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Bennettsville"
+   ],
+   "bbox": [
+    -79.680941,
+    34.62976,
+    -79.668509,
+    34.64714
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.013,
+   "launches": [
+    "lake-wallace-boat-launch-sc"
+   ],
+   "water_id": "lake-wallace-bennettsville-sc",
+   "gnis_id": null,
+   "geometry_hash": "bc84051aa8b02e041dd6b33d111480221136154138b2837b92494b901fe7290b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-wallace-sc",
+   "name": "Lake Wallace",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Bennettsville"
+   ],
+   "bbox": [
+    -79.684595,
+    34.630531,
+    -79.66758,
+    34.655408
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.573,
+   "launches": [
+    "lower-impoundment-sc",
+    "ski-impoundment-sc"
+   ],
+   "water_id": "lake-wallace-sc",
+   "gnis_id": null,
+   "geometry_hash": "4440ee6c7d248979344764e7a998a4189054ea5d865dbbb38b7907f5c555c605",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-wateree-sc",
+   "name": "Lake Wateree",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Bucklick",
+    "Colonel Creek Landing",
+    "Dutchman Creek",
+    "Lugoff",
+    "Red Hill",
+    "Taylors Creek"
+   ],
+   "bbox": [
+    -80.937438,
+    34.333,
+    -80.699,
+    34.541914
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 44.165,
+   "launches": [
+    "beaver-creek-sc",
+    "buck-hill-sc",
+    "clearwater-cove-sc",
+    "colonel-creek-sc",
+    "june-creek-sc",
+    "lake-wateree-state-park-sc",
+    "molly-creek-access-area-boat-ramp-sc",
+    "taylor-creek-sc",
+    "wateree-creek-access-area-sc"
+   ],
+   "water_id": "lake-wateree-sc",
+   "gnis_id": null,
+   "geometry_hash": "506dcf64586d2764747e7041df05c21d222a45fdd6fa040840ce6a9fa94008bc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-whelchel-sc",
+   "name": "Lake Whelchel",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Forest Lake Homes"
+   ],
+   "bbox": [
+    -81.64684,
+    35.104663,
+    -81.61963,
+    35.116168
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.666,
+   "launches": [
+    "lake-whelchel-boat-ramp-sc"
+   ],
+   "water_id": "lake-whelchel-sc",
+   "gnis_id": null,
+   "geometry_hash": "57226474919a646843c1f36223297d2672308804457e88400d8f946a77c12ead",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-william-c-bowen-sc",
+   "name": "Lake William C Bowen",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Inman"
+   ],
+   "bbox": [
+    -82.11985,
+    35.099064,
+    -82.017191,
+    35.123804
+   ],
+   "wikidata": "Q29578083",
+   "charted": false,
+   "area_km2": 5.488,
+   "launches": [
+    "lake-bowen-sc"
+   ],
+   "water_id": "lake-william-c-bowen-sc",
+   "gnis_id": "1251450",
+   "geometry_hash": "266a56c09fa458f77c9e9acc3d90f2410faced640d0c372af15503d9998ede8c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-wylie-sc",
+   "name": "Lake Wylie",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Island View Landing",
+    "Lake Wylie",
+    "Tega Cay"
+   ],
+   "bbox": [
+    -81.112292,
+    35.012494,
+    -80.982685,
+    35.250145
+   ],
+   "wikidata": "Q1794421",
+   "charted": false,
+   "area_km2": 35.876,
+   "launches": [
+    "allison-creek-sc",
+    "buster-boyd-sc",
+    "ebenezer-sc",
+    "fort-mill-sc",
+    "nivens-creek-sc"
+   ],
+   "water_id": "lake-wylie-nc",
+   "gnis_id": "1227721",
+   "geometry_hash": "9685c0931b64237317f29bf9948fee8c53f4c5e8277a2496cbc1966a4db946b0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "tega-cay-marina-boat-ramp-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-york-sc",
+   "name": "Lake York",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Clover"
+   ],
+   "bbox": [
+    -81.343295,
+    35.121575,
+    -81.33471,
+    35.13155
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.216,
+   "launches": [
+    "king-s-mountain-state-park-sc"
+   ],
+   "water_id": "lake-york-sc",
+   "gnis_id": null,
+   "geometry_hash": "ed00f6e057a5fae30d193e87af61e3a3b617854ffaf90dad45522ce61e6acddc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lancaster-reservoir-sc",
+   "name": "Lancaster Reservoir",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Lancaster"
+   ],
+   "bbox": [
+    -80.755042,
+    34.700051,
+    -80.745982,
+    34.705573
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.22,
+   "launches": [
+    "william-l-catoe-bear-creek-sc"
+   ],
+   "water_id": "lancaster-reservoir-sc",
+   "gnis_id": null,
+   "geometry_hash": "d9e33665538a1cbda80f23835b327a2bec3ef4087a56c5240101cf12f139e736",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "langley-pond-sc",
+   "name": "Langley Pond",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Langley"
+   ],
+   "bbox": [
+    -81.846578,
+    33.519805,
+    -81.821151,
+    33.541292
+   ],
+   "wikidata": "Q52011461",
+   "charted": false,
+   "area_km2": 1.026,
+   "launches": [
+    "langley-pond-boat-ramp-sc"
+   ],
+   "water_id": "langley-pond-sc",
+   "gnis_id": "1223813",
+   "geometry_hash": "c902d37f4bb33f088a9e9250fc8c05a04c42d528d524a8349adbbd526788708c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lawsons-fork-creek-sc",
+   "name": "Lawsons Fork Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Spartanburg"
+   ],
+   "bbox": [
+    -82.131962,
+    34.94078,
+    -81.791099,
+    35.046423
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "edwin-m-griffin-nature-preserve-sc",
+    "glendale-shoals-preserve-sc"
+   ],
+   "water_id": "lawsons-fork-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "99eea6d743035cfcd6201b0838c2ad8a754edc53d3a5b523cfa0f4035c3c3deb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lick-fork-lake-sc",
+   "name": "Lick Fork Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Edgefield"
+   ],
+   "bbox": [
+    -82.043104,
+    33.726328,
+    -82.041066,
+    33.730451
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.039,
+   "launches": [
+    "lick-fork-lake-recreation-area-sc"
+   ],
+   "water_id": "lick-fork-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "696153571e02b983e3d392509a62df949b080f820f8d59a4ed7eeb05494a9422",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-pee-dee-river-sc",
+   "name": "Little Pee Dee River",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Conway",
+    "Davis Landing",
+    "Dillon",
+    "Floydale",
+    "Fork",
+    "Galivants Ferry",
+    "Hughes Landing",
+    "Locust Tree Landing",
+    "Mullins",
+    "Nichols",
+    "Pitch Landing",
+    "Pitts Landing"
+   ],
+   "bbox": [
+    -79.505494,
+    33.705976,
+    -79.16564,
+    34.614418
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "carmichaels-bridge-heritage-trust-landing-sc",
+    "davis-sc",
+    "dillon-county-park-sc",
+    "floydale-bridge-sc",
+    "fort-retch-sc",
+    "gilcrest-sc",
+    "gilcrest-landing-sc",
+    "highway-301-landing-sc",
+    "huggins-sc",
+    "hughes-sc",
+    "joseph-holiday-sc",
+    "knife-island-sc",
+    "locust-tree-sc",
+    "moccasins-bluff-sc",
+    "pitts-sc",
+    "punch-bowl-sc",
+    "red-bluff-sc",
+    "s-41-huggins-bridge-landing-sc",
+    "sampson-sc",
+    "sandy-bluff-sc"
+   ],
+   "water_id": "little-pee-dee-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "db4601ed886d07b7b2b68bc55264200babf5faa439cb3be8eeb140f56d9ca79e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "long-bay-sc",
+   "name": "Long Bay",
+   "kind": "bay",
+   "state": "SC",
+   "towns": [
+    "Futch Beach",
+    "Murrells Inlet"
+   ],
+   "bbox": [
+    -79.18034,
+    33.210372,
+    -78.000001,
+    33.914727
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2862.278,
+   "launches": [],
+   "water_id": "long-bay-sc",
+   "gnis_id": null,
+   "geometry_hash": "a31a9d4d0c9cb260608dff8fb9944d11a38fbd2fb332949162137c4159201f71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "long-bay-boat-launch-near-murrells-inlet-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lowthers-lake-sc",
+   "name": "Lowthers Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Florence"
+   ],
+   "bbox": [
+    -79.727235,
+    34.300786,
+    -79.687719,
+    34.334615
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.483,
+   "launches": [
+    "whipples-sc"
+   ],
+   "water_id": "lowthers-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "64721cf2bab51a0f5763df907ad5efd826a71e7e15992c18c9fa15d4221057df",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lucy-point-creek-sc",
+   "name": "Lucy Point Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Wilkins"
+   ],
+   "bbox": [
+    -80.61885,
+    32.475,
+    -80.597541,
+    32.486329
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.664,
+   "launches": [
+    "sams-point-sc"
+   ],
+   "water_id": "lucy-point-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "84fc09cb6b29fa8aa23bb75cb593ea189005eb4f22071a01acbc4958ac79f219",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lumber-river-sc",
+   "name": "Lumber River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Nichols"
+   ],
+   "bbox": [
+    -79.165993,
+    34.195357,
+    -79.06743,
+    34.303645
+   ],
+   "wikidata": "Q3267277",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "causey-sc",
+    "ricefield-cove-sc"
+   ],
+   "water_id": "lumber-river-nc",
+   "gnis_id": "989127",
+   "geometry_hash": "dc89664688e0bbd41903136e393e743dd82c70769cb9841b44fe4ebac59588c6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lyman-lake-sc",
+   "name": "Lyman Lake",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Greer"
+   ],
+   "bbox": [
+    -82.208545,
+    34.981666,
+    -82.185184,
+    35.016938
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.366,
+   "launches": [
+    "lake-lyman-boat-launch-sc"
+   ],
+   "water_id": "lyman-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "2a54a17321ffd2ca03a7b53a4aec9e5603b6566270b60d7e54146c43d0507208",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lynches-river-johnsonville-sc",
+   "name": "Lynches River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Johnsonville"
+   ],
+   "bbox": [
+    -79.3902,
+    33.832761,
+    -79.366036,
+    33.84209
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "persimmon-bluff-landing-sc"
+   ],
+   "water_id": "lynches-river-johnsonville-sc",
+   "gnis_id": null,
+   "geometry_hash": "c798f75260ae41030c734675179b084cf46e9501ddbe8bd242aa71fbc2d7f733",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lynches-river-sc",
+   "name": "Lynches River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Bass Crossroads",
+    "Bishopville",
+    "Carters Crossroads",
+    "Coward",
+    "Effingham",
+    "Elim",
+    "Johnsonville",
+    "Lake City"
+   ],
+   "bbox": [
+    -80.226872,
+    33.846723,
+    -79.499782,
+    34.285468
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "half-moon-sc",
+    "highway-15-sc",
+    "highway-401-sc",
+    "highway-52-sc",
+    "indigo-landing-sc",
+    "jefford-s-landing-sc",
+    "lee-state-park-1-sc",
+    "lee-state-park-2-sc",
+    "lee-state-park-3-sc",
+    "lee-state-park-4-sc",
+    "lynches-river-county-park-access-sc",
+    "odell-venters-sc",
+    "wicklow-landing-sc"
+   ],
+   "water_id": "lynches-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "0a32bf03093660709296edd8bde398aac4d3f24710ad45f1bec2519add5478a9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mackay-creek-sc",
+   "name": "Mackay Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Buckingham Landing",
+    "Hilton Head Island"
+   ],
+   "bbox": [
+    -80.791657,
+    32.200584,
+    -80.75878,
+    32.276467
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "buckingham-sc",
+    "cc-haigh-jr-sc",
+    "dick-s-point-boat-ramp-sc"
+   ],
+   "water_id": "mackay-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "ee23bd17a9f8d44caf9566aa54c7b08b0db143c6c51dc1df640f9946a769a3dd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "main-creek-sc",
+   "name": "Main Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Garden City Beach"
+   ],
+   "bbox": [
+    -79.011309,
+    33.573121,
+    -79.003651,
+    33.578629
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.208,
+   "launches": [
+    "stanley-drive-landing-sc"
+   ],
+   "water_id": "main-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "55c95e63b8fc09265156ab5818b0c26119bc342e6411dfb804ce6da719996fe1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "martins-lake-sc",
+   "name": "Martins Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "McBee"
+   ],
+   "bbox": [
+    -80.223722,
+    34.553331,
+    -80.215427,
+    34.562236
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.185,
+   "launches": [
+    "martins-lake-boat-launch-sc"
+   ],
+   "water_id": "martins-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "1ecb0f950f93d888f844f4a2ec5781636257c2207c67e1d5a161247dc0c0d305",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "may-river-sc",
+   "name": "May River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Bluffton",
+    "Brighton Beach"
+   ],
+   "bbox": [
+    -80.878472,
+    32.195569,
+    -80.785666,
+    32.230605
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "alljoy-sc",
+    "public-boat-dock-facility-sc",
+    "warf-street-sc"
+   ],
+   "water_id": "may-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "a615c33d4887fa3f123a8d5323fc31ea3ba3980edef5f6155eb5f665672baeb8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mays-lake-sc",
+   "name": "Mays Lake",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Chesterfield"
+   ],
+   "bbox": [
+    -80.1851,
+    34.575289,
+    -80.175417,
+    34.579407
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.15,
+   "launches": [
+    "mays-lake-boat-launch-sc"
+   ],
+   "water_id": "mays-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "a6520c8d862a6450436e32c4c2ed49881ffd54cd33b58139fc62b02bedd91b1e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-saluda-river-sc",
+   "name": "Middle Saluda River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Caesars Head"
+   ],
+   "bbox": [
+    -82.641127,
+    35.015641,
+    -82.520119,
+    35.128708
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "jones-gap-trail-bridge-sc"
+   ],
+   "water_id": "middle-saluda-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "2c6c506ef4522fd5830b53516067b53bacf1478bcf9d80f3eddf51e0318eaf0a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mosquito-creek-sc",
+   "name": "Mosquito Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Bennetts Point"
+   ],
+   "bbox": [
+    -80.456478,
+    32.551191,
+    -80.428751,
+    32.587999
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.78,
+   "launches": [
+    "bennetts-point-sc"
+   ],
+   "water_id": "mosquito-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "d8dec127b90f5e9fd6131f4738de9aa1eb4fb2e081a0f62fc008b2cd9bf025f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mountain-lakes-sc",
+   "name": "Mountain Lakes",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Mountain Lakes"
+   ],
+   "bbox": [
+    -81.267532,
+    34.656911,
+    -81.256978,
+    34.66462
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.218,
+   "launches": [
+    "mountain-lake-sc"
+   ],
+   "water_id": "mountain-lakes-sc",
+   "gnis_id": null,
+   "geometry_hash": "4714b6fcd94f68fa605943212acba9335184d9a0ab61c0daba5e77330298eca2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "murrells-inlet-sc",
+   "name": "Murrells Inlet",
+   "kind": "bay",
+   "state": "SC",
+   "towns": [
+    "Murrells Inlet"
+   ],
+   "bbox": [
+    -79.060515,
+    33.519241,
+    -79.017869,
+    33.572029
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 2.422,
+   "launches": [
+    "murrells-inlet-boat-launch-sc"
+   ],
+   "water_id": "murrells-inlet-sc",
+   "gnis_id": null,
+   "geometry_hash": "02b0c8bb47c702fc25ae2578227f858a7453770559f03bccdae879a865c5cb87",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "new-river-cook-landing-sc",
+   "name": "New River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Cook Landing"
+   ],
+   "bbox": [
+    -81.008695,
+    32.044961,
+    -80.851375,
+    32.212294
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cooks-sc"
+   ],
+   "water_id": "new-river-cook-landing-sc",
+   "gnis_id": null,
+   "geometry_hash": "7db31af82aac624d80b1d84e61bbfc9e45648f6127b2f4c072a2bbaf78b707b8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "new-river-sc",
+   "name": "New River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Pritchardville"
+   ],
+   "bbox": [
+    -81.016391,
+    32.215008,
+    -81.0037,
+    32.25188
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "new-river-boat-launch-sc"
+   ],
+   "water_id": "new-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "7b234cd09486cf8670b324278e22dd8085a92c0a65a0944d6e9c1f1516c8b494",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-edisto-river-sc",
+   "name": "North Fork Edisto River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Branchville",
+    "North",
+    "Orangeburg",
+    "Rowesville",
+    "Woodford"
+   ],
+   "bbox": [
+    -81.460576,
+    33.264003,
+    -80.858216,
+    33.796999
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "baughmans-sc",
+    "carson-s-park-sc",
+    "kill-kare-sc",
+    "livingston-sc",
+    "orangeburg-city-boat-landing-sc",
+    "poole-s-mill-landing-sc",
+    "rowes-bridge-sc",
+    "slab-sc"
+   ],
+   "water_id": "north-fork-edisto-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "403d8fc13e3e055f9ef0209d7b56c37a66b5ea04650d6bbcd369189a6a783499",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-saluda-river-sc",
+   "name": "North Saluda River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Terry Creek"
+   ],
+   "bbox": [
+    -82.525755,
+    34.952471,
+    -82.416881,
+    35.144316
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "les-mullinax-park-sc",
+    "river-road-river-access-and-parking-area-sc"
+   ],
+   "water_id": "north-saluda-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "0db97a621ff243e51956703100bad960c8715c14b3d798e7f8825c4c8e447dc8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-santee-river-sc",
+   "name": "North Santee River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Crow Hill",
+    "Georgetown"
+   ],
+   "bbox": [
+    -79.459632,
+    33.132321,
+    -79.243008,
+    33.240351
+   ],
+   "wikidata": "Q2223479",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "collins-landing-sc",
+    "harris-landing-sc",
+    "pole-yard-sc"
+   ],
+   "water_id": "north-santee-river-sc",
+   "gnis_id": "1250783",
+   "geometry_hash": "1ab4c648e102dc58698258c303ae54beee1a6f9284b715dfaa610df785203ed5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-winbee-creek-sc",
+   "name": "North Winbee Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Chisolms"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "winbee-creek-sc"
+   ],
+   "water_id": "north-winbee-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "nowell-creek-sc",
+   "name": "Nowell Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "North Charleston"
+   ],
+   "bbox": [
+    -79.937371,
+    32.860742,
+    -79.874109,
+    32.901248
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "nowell-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "92e9329a7b1b3f46b51abe4ac236a71d313c8f8c6ded47d4111c76f3514ab50e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "nowell-creek-boat-launch-near-north-charleston-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ocella-creek-sc",
+   "name": "Ocella Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Rockville"
+   ],
+   "bbox": [
+    -80.235006,
+    32.560053,
+    -80.198055,
+    32.57287
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sea-cloud-landing-sc"
+   ],
+   "water_id": "ocella-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "7bc75dbd71d525b1f7a26ba5c7f4174d82e8ca97c320ede0ece89381934e602f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "oconee-state-park-lake-number-one-sc",
+   "name": "Oconee State Park Lake Number One",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Walhalla"
+   ],
+   "bbox": [
+    -83.104318,
+    34.864364,
+    -83.101541,
+    34.868742
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.052,
+   "launches": [
+    "oconee-state-park-sc"
+   ],
+   "water_id": "oconee-state-park-lake-number-one-sc",
+   "gnis_id": null,
+   "geometry_hash": "846e9b8071e8b93ab06bd522d151a1cf8c314e0188b97b1c546c51f4776d8758",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "old-levi-mill-lake-sc",
+   "name": "Old Levi Mill Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Wedgefield"
+   ],
+   "bbox": [
+    -80.548882,
+    33.803044,
+    -80.543286,
+    33.804544
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.036,
+   "launches": [
+    "poinsett-state-park-sc"
+   ],
+   "water_id": "old-levi-mill-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "e8361771853564d999d01443a29c4fa8ae520d0b49f153cee1c126f1ed159676",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pacolet-river-sc",
+   "name": "Pacolet River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Central Pacolet",
+    "Converse",
+    "Saratt"
+   ],
+   "bbox": [
+    -81.963234,
+    34.839326,
+    -81.457276,
+    35.110839
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clifton-old-town-river-access-and-parking-area-sc",
+    "pacolet-park-lower-pacolet-shoals-put-in-sc",
+    "pacolet-river-boat-launch-sc",
+    "upper-pacolet-shoals-take-out-sc"
+   ],
+   "water_id": "pacolet-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "e1d1f3770c3fb346c513f72e5ca090cc875073cfca0d1e51acc63963168f890b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "parr-reservoir-sc",
+   "name": "Parr Reservoir",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Pomaria"
+   ],
+   "bbox": [
+    -81.398434,
+    34.25811,
+    -81.330471,
+    34.308106
+   ],
+   "wikidata": "Q7139719",
+   "charted": false,
+   "area_km2": 6.261,
+   "launches": [
+    "cannons-creek-sc",
+    "hellers-creek-sc"
+   ],
+   "water_id": "parr-reservoir-sc",
+   "gnis_id": "1237670",
+   "geometry_hash": "bb926a9dd8007a6bb7efe2a6a56b8dfa8c94a96e90d46200a699fb621a190b49",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "parsons-mountain-lake-sc",
+   "name": "Parsons Mountain Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Abbeville"
+   ],
+   "bbox": [
+    -82.362426,
+    34.094938,
+    -82.354794,
+    34.100657
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.136,
+   "launches": [
+    "parsons-mountain-lake-boat-launch-sc"
+   ],
+   "water_id": "parsons-mountain-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "e8214e1ef46fc4e0267051b84840742deeddf05b195e4a27884f73424e40fc0a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pawleys-creek-pawleys-island-sc",
+   "name": "Pawleys Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Pawleys Island"
+   ],
+   "bbox": [
+    -79.132972,
+    33.425026,
+    -79.114578,
+    33.44587
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "shell-road-sc",
+    "tom-crocker-sc"
+   ],
+   "water_id": "pawleys-creek-pawleys-island-sc",
+   "gnis_id": null,
+   "geometry_hash": "40499b332a49a1b3d67c590d6c89511fb6c9017286103940bc5cd8ec78104b8d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pawleys-creek-sc",
+   "name": "Pawleys Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Pawleys Island"
+   ],
+   "bbox": [
+    -79.141008,
+    33.397378,
+    -79.130329,
+    33.417468
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "pritchard-street-sc"
+   ],
+   "water_id": "pawleys-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "457589892b0a71665792456ba0331bfcd48ad19c912cd0484a53826f6705d803",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "penny-creek-sc",
+   "name": "Penny Creek",
+   "kind": "canal",
+   "state": "SC",
+   "towns": [
+    "Shiloh"
+   ],
+   "bbox": [
+    -80.404581,
+    32.746314,
+    -80.403854,
+    32.75018
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "penny-creek-boat-launch-sc"
+   ],
+   "water_id": "penny-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "8f6719be0b62345479c72bb80d88ef85297e64ec4e706b6fe2004a5b38cc9c7b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "peters-creek-sc",
+   "name": "Peters Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Post Foot Landing"
+   ],
+   "bbox": [
+    -79.297959,
+    33.499175,
+    -79.23368,
+    33.541312
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "peters-creek-landing-sc"
+   ],
+   "water_id": "peters-creek-sc",
+   "gnis_id": "1225388",
+   "geometry_hash": "9efe0f88243e818fa6fdf5821eeade6313a9ff896934f5c2e50577eef9bdeb8c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pocotaligo-river-sc",
+   "name": "Pocotaligo River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Manning"
+   ],
+   "bbox": [
+    -80.3578,
+    33.691166,
+    -80.017181,
+    33.877938
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "pocotaligo-swamp-park-access-sc"
+   ],
+   "water_id": "pocotaligo-river-sc",
+   "gnis_id": "1250198",
+   "geometry_hash": "cb480e04a001a410cafe40521108bb48366f45aa454c9b0fd47c037edd792c2d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pool-d-sc",
+   "name": "Pool D",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "McBee"
+   ],
+   "bbox": [
+    -80.228874,
+    34.562405,
+    -80.225051,
+    34.567914
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.094,
+   "launches": [
+    "pool-d-boat-launch-sc"
+   ],
+   "water_id": "pool-d-sc",
+   "gnis_id": null,
+   "geometry_hash": "c76f1d1f5f7a664530c61c63f1648dd596e0d57e0f6479fe422ef30beab18b45",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pool-l-sc",
+   "name": "Pool L",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Chesterfield"
+   ],
+   "bbox": [
+    -80.224024,
+    34.628785,
+    -80.217753,
+    34.632515
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.1,
+   "launches": [
+    "pool-l-boat-launch-sc"
+   ],
+   "water_id": "pool-l-sc",
+   "gnis_id": null,
+   "geometry_hash": "0de0c1683029aea12291cc59e8ae2b6c7570249fa9dc4943cf4e2e37d2a9a0e4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "prestwood-lake-sc",
+   "name": "Prestwood Lake",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Hartsville",
+    "North Hartsville"
+   ],
+   "bbox": [
+    -80.091318,
+    34.373099,
+    -80.068113,
+    34.388393
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.737,
+   "launches": [
+    "sonovista-park-sc"
+   ],
+   "water_id": "prestwood-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "2b1a98946800834c749afc0f07b25b5941735c5dc8a2620618207158ef0c407b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "quenby-creek-sc",
+   "name": "Quenby Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Huger"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "ralph-hamer-sr-sc"
+   ],
+   "water_id": "quenby-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rantowles-creek-sc",
+   "name": "Rantowles Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "North Charleston"
+   ],
+   "bbox": [
+    -80.131169,
+    32.780601,
+    -80.120471,
+    32.786859
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.081,
+   "launches": [
+    "bulow-sc"
+   ],
+   "water_id": "rantowles-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "b58039a7f63402ef81027e711f7340e377ece9ca3a52b5d073518ba361bba701",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "reedy-river-sc",
+   "name": "Reedy River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Fork Shoals",
+    "Greenville",
+    "Honea Path"
+   ],
+   "bbox": [
+    -82.469279,
+    34.360502,
+    -82.122859,
+    34.978051
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.322,
+   "launches": [
+    "cedar-falls-sc",
+    "cleveland-park-river-access-and-parking-area-sc",
+    "tumblin-shoals-south-charlie-lollis-memorial-park-sc"
+   ],
+   "water_id": "reedy-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "cc18fb5a9c842d9f09bc483cf991ce75f743b6d1e58ffbcc2a240f51ef8643ed",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "richard-b-russell-lake-sc",
+   "name": "Richard B. Russell Lake",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Anderson",
+    "Calhoun Falls",
+    "Iva",
+    "Lowndesville"
+   ],
+   "bbox": [
+    -82.821441,
+    34.023189,
+    -82.581509,
+    34.358565
+   ],
+   "wikidata": "Q7337958",
+   "charted": false,
+   "area_km2": 76.596,
+   "launches": [
+    "allen-creek-sc",
+    "beer-garden-creek-sc",
+    "blue-hole-sc",
+    "calhoun-falls-state-recreational-area-sc",
+    "felkel-sc",
+    "greg-shoals-sc",
+    "harpers-ferry-sc",
+    "jim-rampey-recreation-area-sc",
+    "latimer-sc",
+    "manor-sc",
+    "millwood-sc",
+    "mountain-view-sc",
+    "sanders-ferry-sc",
+    "smith-mcgee-sc"
+   ],
+   "water_id": "richard-b-russell-lake-ga",
+   "gnis_id": "325846",
+   "geometry_hash": "5cb0d09cc7095ceb2a3feec44fff40d7ba5f5edd59c5b3d31ac91b3934bd8973",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hesters-marina-ramp-abandoned-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "russ-creek-conway-sc",
+   "name": "Russ Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Conway"
+   ],
+   "bbox": [
+    -79.215147,
+    33.727316,
+    -79.202807,
+    33.743187
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "parker-sc"
+   ],
+   "water_id": "russ-creek-conway-sc",
+   "gnis_id": null,
+   "geometry_hash": "f307159393d28916b9b17fe59572698d5d037c5e9958f20ecc57189c8549a059",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "russ-creek-sc",
+   "name": "Russ Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Conway"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sanders-sc"
+   ],
+   "water_id": "russ-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "saint-helena-sound-sc",
+   "name": "Saint helena sound",
+   "kind": "sound",
+   "state": "SC",
+   "towns": [
+    "Beaufort"
+   ],
+   "bbox": [
+    -80.609709,
+    32.543756,
+    -80.536991,
+    32.571409
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 4.049,
+   "launches": [
+    "fields-point-sc"
+   ],
+   "water_id": "saint-helena-sound-sc",
+   "gnis_id": null,
+   "geometry_hash": "a13e5ffe1fa8f1cce1206f1c954104fac8fdcdd5eecd34afd11b203d2fa4c60c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "salkehatchie-river-sc",
+   "name": "Salkehatchie River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Barnwell",
+    "Bufords Bridge",
+    "Hampton",
+    "Jennys"
+   ],
+   "bbox": [
+    -81.209446,
+    32.792677,
+    -80.879964,
+    33.133537
+   ],
+   "wikidata": "Q1486708",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bufords-bridge-sc",
+    "goat-hill-sc",
+    "rays-crossing-sc",
+    "rivers-bridge-sc",
+    "sc-641-landing-sc"
+   ],
+   "water_id": "salkehatchie-river-sc",
+   "gnis_id": "1250734",
+   "geometry_hash": "0f014b4059bb33a5249d164d35ea6847ebaf4055ab3ba73364e64c06d5543e0b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "saluda-river-sc",
+   "name": "Saluda River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Berea",
+    "Gardendale",
+    "Hallmark",
+    "Lexington",
+    "Pelzer",
+    "Powdersville",
+    "Silverstreet",
+    "Ware Shoals",
+    "West Columbia"
+   ],
+   "bbox": [
+    -82.525834,
+    33.995005,
+    -81.050322,
+    34.952471
+   ],
+   "wikidata": "Q7406275",
+   "charted": false,
+   "area_km2": 4.665,
+   "launches": [
+    "beacham-road-access-sc",
+    "dolly-cooper-park-access-sc",
+    "dr-james-a-timmerman-sc",
+    "higgins-bridge-sc",
+    "hope-ferry-sc",
+    "sce-g-access-gardendale-sc",
+    "saluda-river-boat-launch-near-west-columbia-sc",
+    "saluda-shoals-lower-boat-ramp-sc",
+    "saluda-shoals-park-sc",
+    "ware-shoals-irvin-pitts-park-sc"
+   ],
+   "water_id": "saluda-river-sc",
+   "gnis_id": "1250741",
+   "geometry_hash": "c0cac310cd9684d5472f5864fed7158e07574996edff898bf621bdd742c0f7bb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sampit-river-sc",
+   "name": "Sampit River",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Georgetown"
+   ],
+   "bbox": [
+    -79.420167,
+    33.347288,
+    -79.27609,
+    33.372476
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "carroll-ashmore-campbell-marine-complex-sc",
+    "east-bay-street-sc"
+   ],
+   "water_id": "sampit-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "4fb0773c4991a692a01e0d8c79f717d54a4da1dfe4763674e595448607972cae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "santee-river-sc",
+   "name": "Santee River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Jamestown",
+    "Pleasant Hill Landing",
+    "St. Stephen",
+    "Wilsons Landing"
+   ],
+   "bbox": [
+    -80.630465,
+    33.229436,
+    -79.459632,
+    33.743023
+   ],
+   "wikidata": "Q2223479",
+   "charted": true,
+   "area_km2": 0.116,
+   "launches": [
+    "arrowhead-landing-sc",
+    "highway-52-st-stephen-sc",
+    "laurel-hill-landing-sc",
+    "lenuds-sc",
+    "mcconnels-sc",
+    "wilsons-sc"
+   ],
+   "water_id": "santee-river-sc",
+   "gnis_id": "1250783",
+   "geometry_hash": "2545ee5a98842d8d5e6e96b42316b4393554edba569a0e685a9b840d635ff4d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "savannah-river-sc",
+   "name": "Savannah River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Allendale",
+    "Clarks Hill",
+    "Grays Landing",
+    "Hardeeville",
+    "Jackson",
+    "Johnsons Landing",
+    "Little Hell Landing",
+    "New Landing",
+    "North Augusta",
+    "Purysburgh",
+    "Steel Creek Landing",
+    "Stokes Bluff Landing"
+   ],
+   "bbox": [
+    -82.855807,
+    32.034661,
+    -80.848339,
+    34.443899
+   ],
+   "wikidata": "Q370750",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "b-c-sc",
+    "becks-ferry-sc",
+    "cohens-bluff-sc",
+    "furys-ferry-sc",
+    "jackson-sc",
+    "johnsons-sc",
+    "little-hell-sc",
+    "millstone-sc",
+    "riverview-park-sc",
+    "savannah-river-bluffs-hp-sc",
+    "steel-creek-sc",
+    "stokes-bluff-sc",
+    "thurmond-dam-sc"
+   ],
+   "water_id": "savannah-river-ga",
+   "gnis_id": "1253486",
+   "geometry_hash": "68ddfaa34e95426f5a92f4586b96d3976252e078d2dd85c97fa3b1a9bef52c48",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sesquicentennial-lake-sc",
+   "name": "Sesquicentennial Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Columbia"
+   ],
+   "bbox": [
+    -80.906267,
+    34.082507,
+    -80.902727,
+    34.088416
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.095,
+   "launches": [
+    "sesquicentennial-state-park-sc"
+   ],
+   "water_id": "sesquicentennial-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "7be0e588facf20d852043bc26916b205ad6f62bc148ea2adb242e23cc16cad71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sewee-bay-sc",
+   "name": "Sewee Bay",
+   "kind": "bay",
+   "state": "SC",
+   "towns": [
+    "Garris Landing"
+   ],
+   "bbox": [
+    -79.663957,
+    32.908421,
+    -79.630991,
+    32.946149
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.661,
+   "launches": [
+    "garris-landing-sc"
+   ],
+   "water_id": "sewee-bay-sc",
+   "gnis_id": null,
+   "geometry_hash": "a01ec2a1e65b92e3c7d3b441382d80e30869f59f5058a2230ed44062bf0af263",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shealy-s-pond-sc",
+   "name": "Shealy's Pond",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Lexington"
+   ],
+   "bbox": [
+    -81.236958,
+    33.859694,
+    -81.233554,
+    33.863538
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.02,
+   "launches": [
+    "shealy-s-pond-paddle-launch-sc"
+   ],
+   "water_id": "shealy-s-pond-sc",
+   "gnis_id": null,
+   "geometry_hash": "b90755c4ef3aca13f78a01cb3c4ea44a472cb2cd1330fdf6c8ce4111236509e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shem-creek-sc",
+   "name": "Shem Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Mount Pleasant"
+   ],
+   "bbox": [
+    -79.89803,
+    32.787381,
+    -79.873091,
+    32.798899
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.215,
+   "launches": [
+    "harry-m-hallman-jr-sc"
+   ],
+   "water_id": "shem-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "bcdfd17cfcde28c3ba5c0a3321ac697226e96d3777f07ede0411882a42f39ea3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "madere-s-landing-sc",
+    "shem-creek-boat-launch-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "skinface-pond-sc",
+   "name": "Skinface Pond",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Jackson"
+   ],
+   "bbox": [
+    -81.783303,
+    33.237768,
+    -81.777493,
+    33.239699
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.039,
+   "launches": [
+    "skinface-pond-boat-launch-sc"
+   ],
+   "water_id": "skinface-pond-sc",
+   "gnis_id": null,
+   "geometry_hash": "8b43f941364ad555b6346697f13a0d9a40047125b52041c71d5a7631e0072b14",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "slade-lake-sc",
+   "name": "Slade Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Edgefield"
+   ],
+   "bbox": [
+    -81.919775,
+    33.778184,
+    -81.908183,
+    33.781649
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.155,
+   "launches": [
+    "slades-lake-sc"
+   ],
+   "water_id": "slade-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "73f5486d8d564c2e66f7bf7d09eb989495dd8a04aa2dd844411d858d1ce067db",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-edisto-river-sc",
+   "name": "South Fork Edisto River",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Aiken",
+    "Bamberg",
+    "Denmark",
+    "Kitchings Mill",
+    "Springfield",
+    "Williston",
+    "Windsor"
+   ],
+   "bbox": [
+    -81.793553,
+    33.262173,
+    -80.886605,
+    33.818852
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "aiken-sp-canoe-trail-put-in-sc",
+    "aiken-sp-canoe-trail-take-out-sc",
+    "aiken-state-park-sc",
+    "bobcat-sc",
+    "brabhams-sc",
+    "claudes-sc",
+    "davis-bridge-sc",
+    "highway-21-sc",
+    "hog-pen-sc"
+   ],
+   "water_id": "south-fork-edisto-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "1d3d4a84d59460fbce353040bae62c0b906e3053016a8af5d41980d5568034a3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-saluda-river-sc",
+   "name": "South Saluda River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Travelers Rest"
+   ],
+   "bbox": [
+    -82.62476,
+    34.952471,
+    -82.525755,
+    35.074636
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "naturaland-trust-river-access-and-parking-area-sc",
+    "scdnr-river-access-sc"
+   ],
+   "water_id": "south-saluda-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "b380834907ae9469f7c8b50f0a8622f39caf4d48ac5ce7bca8853bb97ec22cab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-tyger-river-sc",
+   "name": "South Tyger River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Duncan",
+    "Reidville"
+   ],
+   "bbox": [
+    -82.36658,
+    34.755421,
+    -81.931843,
+    35.070358
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beech-springs-landing-kayak-launch-sc",
+    "tyger-berry-landing-sc"
+   ],
+   "water_id": "south-tyger-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "0a9920d1d58ec3c9d5050041033b094011b0d1d0057741c4a0d5d08f97f8ebc8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "station-creek-sc",
+   "name": "Station Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Longwood"
+   ],
+   "bbox": [
+    -80.643668,
+    32.277911,
+    -80.625001,
+    32.298145
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.439,
+   "launches": [
+    "station-creek-boat-launch-sc"
+   ],
+   "water_id": "station-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "ab9c2ccd1ebdc2024361592026ef2c38eab604b64e28e5f129a11e63359f7366",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "steamboat-creek-sc",
+   "name": "Steamboat Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Steamboat Landing"
+   ],
+   "bbox": [
+    -80.296929,
+    32.60198,
+    -80.267364,
+    32.61487
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.724,
+   "launches": [
+    "steamboat-sc"
+   ],
+   "water_id": "steamboat-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "eff722ca32d9644ad6edded9d0dd9db2dc6df160960abe6273498dcbd8de91a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stevens-creek-sc",
+   "name": "Stevens Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "North Augusta"
+   ],
+   "bbox": [
+    -82.234164,
+    33.565242,
+    -82.02583,
+    33.897542
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "stevens-creek-boat-launch-sc"
+   ],
+   "water_id": "stevens-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "2cd0286229c2572c8e137efdec683431521c00dfb55b202888b8f8e414cb420d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stono-river-sc",
+   "name": "Stono River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Carolina Bay",
+    "Folly Beach",
+    "Shell Point"
+   ],
+   "bbox": [
+    -80.172024,
+    32.638876,
+    -79.987305,
+    32.786884
+   ],
+   "wikidata": "Q7619471",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "battery-island-sol-legare-sc",
+    "john-p-limehouse-sc"
+   ],
+   "water_id": "stono-river-sc",
+   "gnis_id": "1226912",
+   "geometry_hash": "fcf88046b57250e093f8afd3c902ec945627c6986c8c65976ce1946fec8b7247",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sunrise-lake-sc",
+   "name": "Sunrise Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Heath Springs"
+   ],
+   "bbox": [
+    -80.675586,
+    34.617609,
+    -80.669594,
+    34.620457
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sunrise-lake-boat-launch-sc"
+   ],
+   "water_id": "sunrise-lake-sc",
+   "gnis_id": "1226968",
+   "geometry_hash": "337339070065154703fd66da95309e8dae98d0353e3cdcce863695602ade7559",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tailrace-canal-sc",
+   "name": "Tailrace Canal",
+   "kind": "canal",
+   "state": "SC",
+   "towns": [
+    "Moncks Corner",
+    "Stony Landing"
+   ],
+   "bbox": [
+    -79.990813,
+    33.185802,
+    -79.968279,
+    33.244501
+   ],
+   "wikidata": "Q49269259",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "old-santee-canal-park-dock-sc",
+    "william-dennis-sc"
+   ],
+   "water_id": "tailrace-canal-sc",
+   "gnis_id": "1251111",
+   "geometry_hash": "5ca50259c739acce74ffd707862476d413c2876a7f5879e9059165d795ff8123",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "thicketty-creek-wcd-lake-number-26-sc",
+   "name": "Thicketty Creek Wcd Lake Number 26",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "Macedonia"
+   ],
+   "bbox": [
+    -81.789611,
+    35.071659,
+    -81.776942,
+    35.087622
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.389,
+   "launches": [
+    "thicketty-creek-sc"
+   ],
+   "water_id": "thicketty-creek-wcd-lake-number-26-sc",
+   "gnis_id": null,
+   "geometry_hash": "d6d760dabb3258f52b3e2c68af5dbbfb8ab1f974be8487bb399cf4a23550368a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "toogoodoo-creek-sc",
+   "name": "Toogoodoo Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Barrelville",
+    "Meggett"
+   ],
+   "bbox": [
+    -80.312389,
+    32.648371,
+    -80.261701,
+    32.69046
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.328,
+   "launches": [
+    "roxbury-park-sc",
+    "toogoodoo-sc"
+   ],
+   "water_id": "toogoodoo-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "da5e02cf12233c9d233fd3fa813b0b237fdfeab12b73522fa4215e718948b1f0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "toogoodoo-river-sc",
+   "name": "Toogoodoo River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Bears Bluff"
+   ],
+   "bbox": [
+    -80.307245,
+    32.645428,
+    -80.201938,
+    32.72122
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 8.455,
+   "launches": [
+    "toogoodoo-river-boat-launch-sc"
+   ],
+   "water_id": "toogoodoo-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "4ca20bb4da48192ad4779299948533b435610b7de7d7b903ac3b28d6a187db12",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "town-creek-charleston-sc",
+   "name": "Town Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Charleston"
+   ],
+   "bbox": [
+    -79.937507,
+    32.796711,
+    -79.924072,
+    32.820559
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.914,
+   "launches": [
+    "town-creek-boat-launch-sc"
+   ],
+   "water_id": "town-creek-charleston-sc",
+   "gnis_id": null,
+   "geometry_hash": "b07f9fad4a2ed575b5fca88c789dfa592c76127d559bacba26c8667b9e0c328c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "town-creek-sc",
+   "name": "Town Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Pickens"
+   ],
+   "bbox": [
+    -82.743062,
+    34.882471,
+    -82.645883,
+    34.942601
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "reece-mill-road-river-access-and-parking-area-sc",
+    "town-creek-park-river-access-and-parking-area-pickens-sc",
+    "town-creek-park-river-access-and-parking-area-sc",
+    "town-creek-park-river-access-and-parking-area-sc-2"
+   ],
+   "water_id": "town-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "e6df8270c3c43ee3bacc00fd85ffdbf92e825b2d72fef9f17e1e07d7003c2448",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tugalo-lake-sc",
+   "name": "Tugalo Lake",
+   "kind": "reservoir",
+   "state": "SC",
+   "towns": [
+    "Battle Creek"
+   ],
+   "bbox": [
+    -83.367983,
+    34.713682,
+    -83.325725,
+    34.756291
+   ],
+   "wikidata": "Q6478168",
+   "charted": false,
+   "area_km2": 1.863,
+   "launches": [
+    "lake-tugalo-boat-ramp-sc"
+   ],
+   "water_id": "tugalo-lake-ga",
+   "gnis_id": "330060",
+   "geometry_hash": "d42ec15bc36271d9b629c58f976db4d1fa0dc30988a41f6882eacc607a3775b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "twelvemile-creek-sc",
+   "name": "Twelvemile Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Cateechee",
+    "Pickens"
+   ],
+   "bbox": [
+    -82.793714,
+    34.760619,
+    -82.737407,
+    34.894206
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bargain-exchange-flea-market-sc",
+    "future-cateechee-beach-park-sc"
+   ],
+   "water_id": "twelvemile-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "db82f8bdbcbac7f84ec14e26e46a13a228cbd9a71c4dcd22e26996462df76e6c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tyger-river-sc",
+   "name": "Tyger River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Adams Ford",
+    "Carlisle",
+    "Union",
+    "Woodruff"
+   ],
+   "bbox": [
+    -81.931843,
+    34.486787,
+    -81.423553,
+    34.759456
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beatys-bridge-sc",
+    "cedar-bluff-bridge-access-sc",
+    "gordon-s-bridge-sc",
+    "minnow-bridge-road-access-sc",
+    "rose-hill-sc",
+    "rose-hill-union-sc",
+    "tyger-10-nature-park-walnut-grove-road-sc"
+   ],
+   "water_id": "tyger-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "743f7a24feffb43d34c4ceaea55622c69e029b85a243a569880be4c7ea6a9beb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-three-runs-sc",
+   "name": "Upper Three Runs",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Jackson"
+   ],
+   "bbox": [
+    -81.778918,
+    33.220653,
+    -81.581933,
+    33.513363
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "box-landing-sc"
+   ],
+   "water_id": "upper-three-runs-sc",
+   "gnis_id": null,
+   "geometry_hash": "e6dda66400903ac26e438199d85b8c90e9ec190c94bcc2163f725fd557c78bd5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "waccamaw-river-sc",
+   "name": "Waccamaw River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Bucksport",
+    "Conway",
+    "Heritage",
+    "Longs",
+    "North Myrtle Beach",
+    "Peachtree Landing",
+    "Pitch Landing",
+    "Red Bluff Crossroads",
+    "Rheuark Landing",
+    "The Reserve",
+    "Toddville",
+    "Wachesaw Landing"
+   ],
+   "bbox": [
+    -79.266227,
+    33.353731,
+    -78.644204,
+    33.950176
+   ],
+   "wikidata": "Q7958732",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "big-savannah-lake-landing-sc",
+    "bucksport-sc",
+    "bucksville-sc",
+    "chris-anderson-sc",
+    "conway-marina-sc",
+    "cox-ferry-recreational-area-canoe-kayak-launch-sc",
+    "danny-knight-sc",
+    "hagley-sc",
+    "lees-sc",
+    "peach-tree-sc",
+    "pitch-sc",
+    "reaves-ferry-sc",
+    "sandy-island-sc",
+    "savannah-bluff-sc",
+    "toddville-launch-sc",
+    "wacca-wache-sc"
+   ],
+   "water_id": "waccamaw-river-nc",
+   "gnis_id": "1251304",
+   "geometry_hash": "d26fc92a7a4e4cde6a7405bfd6e3272f37942c560d9c5a4889cd6dec261f602f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wadboo-creek-sc",
+   "name": "Wadboo Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Moncks Corner"
+   ],
+   "bbox": [
+    -79.970121,
+    33.185802,
+    -79.906227,
+    33.316734
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "henry-brown-bridge-sc",
+    "rembert-c-dennis-sc"
+   ],
+   "water_id": "wadboo-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "7c6d644dd5dde241eba5620a8868e004b0a8f7278cbbb63173ed4bcf3a4dc4e0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wadmacon-creek-sc",
+   "name": "Wadmacon Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "Price Landing"
+   ],
+   "bbox": [
+    -79.564683,
+    33.238161,
+    -79.450851,
+    33.28679
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sandhole-sc"
+   ],
+   "water_id": "wadmacon-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "673fc3512cc47e21cb1bf6e6633f5081f607ff5e738a57667d61335c85eacedc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wambaw-creek-sc",
+   "name": "Wambaw Creek",
+   "kind": "stream",
+   "state": "SC",
+   "towns": [
+    "McClellanville",
+    "Wambaw Corner"
+   ],
+   "bbox": [
+    -79.607585,
+    33.133164,
+    -79.446712,
+    33.213508
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "highway-45-bridge-sc",
+    "stills-sc",
+    "wambaw-elmwood-landing-sc"
+   ],
+   "water_id": "wambaw-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "3e2472978caa8b74587e2a6a282d574b0a04f2cd66bb6d0afb620e2022ae0761",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wando-river-sc",
+   "name": "Wando River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Chandler",
+    "Charleston",
+    "Martins Point Landing",
+    "Mount Pleasant",
+    "Wando"
+   ],
+   "bbox": [
+    -79.909955,
+    32.816838,
+    -79.674471,
+    32.993151
+   ],
+   "wikidata": "Q7967277",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "paradise-sc",
+    "remleys-point-sc"
+   ],
+   "water_id": "wando-river-sc",
+   "gnis_id": "1230462",
+   "geometry_hash": "8c2425d33ca7e8af66966a700b86077c4a276bf0ca1ac117c6710506e8f09980",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "75-ton-tavelift-sc",
+    "mount-pleasant-boat-launch-sc-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wappoo-creek-sc",
+   "name": "Wappoo Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Charleston",
+    "Edgewater Park"
+   ],
+   "bbox": [
+    -80.008052,
+    32.766259,
+    -79.948492,
+    32.777817
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "wappoo-cut-sc"
+   ],
+   "water_id": "wappoo-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": "6d6dea541ceb92601c085b7a9da1e92a523a9d7d6dea994adbd53b8e94b62a28",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "wappoo-creek-boat-launch-sc"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "wards-creek-sc",
+   "name": "Wards Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Oceanmarsh Subdivision"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "butchs-island-sc"
+   ],
+   "water_id": "wards-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wateree-river-sc",
+   "name": "Wateree River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Camden",
+    "Eastover",
+    "Lugoff"
+   ],
+   "bbox": [
+    -80.92878,
+    33.743023,
+    -80.597672,
+    34.47129
+   ],
+   "wikidata": "Q3566675",
+   "charted": false,
+   "area_km2": 1.695,
+   "launches": [
+    "access-point-below-wateree-dam-sc",
+    "camden-riverfront-environmental-park-sc",
+    "highway-1-sc",
+    "lugoff-sc",
+    "wt-billy-tolar-sc",
+    "water-river-veterans-park-sc"
+   ],
+   "water_id": "wateree-river-sc",
+   "gnis_id": "1249440",
+   "geometry_hash": "68be0235ce897f7b9d5b01d7586ac8881e0123dc38efbc9960559805bd7498e7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wee-tee-lake-sc",
+   "name": "Wee Tee Lake",
+   "kind": "lake",
+   "state": "SC",
+   "towns": [
+    "St. Stephen"
+   ],
+   "bbox": [
+    -79.787671,
+    33.348258,
+    -79.756172,
+    33.398041
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.426,
+   "launches": [
+    "wee-tee-boat-launch-sc"
+   ],
+   "water_id": "wee-tee-lake-sc",
+   "gnis_id": null,
+   "geometry_hash": "2fd98e76d5bb20d8a360946f5f6aa2a1991cef7cdf38b00d0ac26d0670245cb2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "williams-creek-sc",
+   "name": "Williams Creek",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Futch Beach"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cherry-grove-sc"
+   ],
+   "water_id": "williams-creek-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "woods-bay-sc",
+   "name": "Woods Bay",
+   "kind": "bay",
+   "state": "SC",
+   "towns": [
+    "Olanta"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "woods-bay-state-park-sc"
+   ],
+   "water_id": "woods-bay-sc",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wright-river-sc",
+   "name": "Wright River",
+   "kind": "river",
+   "state": "SC",
+   "towns": [
+    "Turnbridge Landing"
+   ],
+   "bbox": [
+    -81.04655,
+    32.043201,
+    -80.843985,
+    32.128161
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "turn-bridge-sc"
+   ],
+   "water_id": "wright-river-sc",
+   "gnis_id": null,
+   "geometry_hash": "b2186c1b3f3a0d630d4d713a4fda71833814480ffa680624db6e414fb4e51850",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
