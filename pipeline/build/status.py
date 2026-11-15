@@ -2802,6 +2802,24 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                     out.append(note)
             return out
 
+        if st == "advisory_active" and end is not None and end_precision(ev) == "poll" \
+                and (ev.get("raw") or {}).get("_ages_after_confirmation") is True:
+            # an operator's advice confirmed only by its own publications whose withdrawal was seen at a poll
+            # (Florence, ingest/sc_florence_sso.py): the withdrawal is not a confirmation of the time between, so the
+            # colour stops CONFIRM_DAYS after the last confirmation however late the withdrawal is seen (verify
+            # P1-3); keyed on the record's flag, so no other feed changes
+            listed = pt((ev.get("raw") or {}).get("_last_seen_in_source"))
+            confirmed = max(start, listed) if listed else start
+            cap = confirmed + timedelta(days=CONFIRM_DAYS)
+            out = [_iv(ev, start, min(end, cap), rule, red, yellow)]
+            out[0]["confirmed"] = iso(confirmed)
+            if end > cap:
+                note = _iv(ev, cap, min(end, max(cap, start + timedelta(days=NOTE_DAYS))), "not_reconfirmed", red,
+                           yellow)
+                note["confirmed"] = iso(confirmed)
+                if note["end"] > note["start"]:
+                    out.append(note)
+            return out
         if st == "advisory_active":
             if end is not None:                       # an explicit end is the source's word
                 return [_iv(ev, start, end, rule, red, yellow)]
