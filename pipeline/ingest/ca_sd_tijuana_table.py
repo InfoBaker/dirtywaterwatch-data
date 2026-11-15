@@ -29,11 +29,11 @@ Record rules (one record per table row)
     when USIBWC must report, not when each row was reported or posted); raw._first_seen_at is the first fetch that
     showed the row. source_updated_at is a date the row's own notes give for the report ("Volume reported by USIBWC
     on 04/30/2026"), else null.
-  - End: a date at or after the start -> ended. An end cell that starts with "Ongoing" -> ongoing with no end (the status build's rule for an
-    ongoing report with no end applies, counted from the start). A blank or other end -> unknown with no end ("end
-    not confirmed"). An end before the start is kept as published (ended_at), one more than a day after the read
-    only in raw._end_as_published (the shared rule would draw a window to it), with status unknown and raw._end_not_used: the status build's shared rule (unresolved.implausible_end) then draws
-    no window from it. No end is ever made up.
+  - End: a date at or after the start -> ended. An end cell that starts with "Ongoing" -> ongoing with no end (the
+    status build's rule for an ongoing report with no end applies, counted from the start). A blank or other end ->
+    unknown with no end ("end not confirmed"). An end before the start is kept as published (ended_at), one more than
+    a day after the read only in raw._end_as_published (the shared rule would draw a window to it); both have status
+    unknown and raw._end_not_used, and no window is drawn from them. No end is ever made up.
   - Event type, by a written rule on the table's own Event Type wording (EVENT_KINDS; never a model): "Spill Event"
     (the page: a release of waste "from any portion of USIBWC's Facility"), "Dry Weather Canyon Collector
     Transboundary Flow Event" (a dry-weather flow across the border in one of the five collector canyons not captured
