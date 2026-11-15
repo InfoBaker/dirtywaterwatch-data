@@ -30,7 +30,8 @@ Records
   totals, not events: the status build gives them the monthly mark and never red or yellow (time_precision month;
   build/status.py EPA_MONTHLY_SOURCES), and the charts never add them to the discharge counts. NODI C months and months
   with every figure zero are not records; they are counted in meta and kept per outfall in
-  meta.latest_month_by_outfall (a newer month of no discharge clears an older monthly mark). Other NODI codes and empty
+  meta.latest_month_by_outfall (a newer month of no discharge clears an older monthly mark only when every
+  parameter the outfall's DMRs carry is a zero or NODI C that month). Other NODI codes and empty
   values say nothing. Only 'Effluent Gross' lines at external outfalls of the registry's CSO rows are read; a plant's
   own outfall and an internal monitoring point are counted in meta and skipped. raw.time_zone is the outfall's county's
   zone (zones.indiana_zone: the month is a calendar month on that clock); the point, receiving water and water record
@@ -422,9 +423,18 @@ def latest_months(cells: dict) -> dict[str, dict]:
     """{"<permit>|<outfall>": {month, discharged, events, received_at}}: each outfall's latest month the DMRs speak of,
     no-discharge months included (build/status.py latest_observations)."""
     out: dict[str, dict] = {}
+    # the parameters each outfall's DMRs carry (any month read): a month with no discharge clears an earlier
+    # monthly mark only when every one of them is a zero or NODI C, none missing, in conflict or another NODI code
+    # (verification 2026-11-15 P2-3: zero hours with events and volume missing is not a confirmed no-discharge month)
+    carried: dict[tuple, set] = defaultdict(set)
+    for (permit, feat, _), cell in cells.items():
+        carried[(permit, feat)] |= set(cell)
     for (permit, feat, ym), cell in cells.items():
         fg = figures(cell)
         if not fg["said"]:
+            continue
+        if not fg["any"] and not all(name in cell and "_conflict" not in cell[name] and _says(cell[name])
+                                     for name in carried[(permit, feat)]):
             continue
         k = f"{permit}|{feat}"
         cur = out.get(k)

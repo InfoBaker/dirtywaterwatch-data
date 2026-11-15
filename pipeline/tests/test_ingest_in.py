@@ -1046,3 +1046,51 @@ def test_bounded_errors_are_keyed_to_the_algae_feed_only():
     from ingest.generic import arcgis
     err = {"code": 400, "message": "Invalid query"}
     assert str(arcgis.ArcGISError(err)) == f"ArcGIS error: {err}"      # every other source's message as before
+
+
+def _sep(values, outfall="002"):
+    """A September cell of one outfall: values maps parameter name -> value, 'C' (NODI C), 'E' (another NODI code)
+    or ('conflict', a, b)."""
+    from ingest import in_echo_cso_monthly as M
+    cell = {}
+    for name, v in values.items():
+        if isinstance(v, tuple):
+            rows = [_dmr("30-SEP-26", x, received="28-OCT-26") for x in v[1:]]
+            cell[name] = {"_conflict": rows, "_pend": "30-SEP-26", "_param": name, "_rank": M.revision_key(rows[0])}
+        elif v in ("C", "E"):
+            cell[name] = dict(_dmr("30-SEP-26", None, nodi=v, received="28-OCT-26"), _pend="30-SEP-26")
+        else:
+            cell[name] = dict(_dmr("30-SEP-26", v, received="28-OCT-26"), _pend="30-SEP-26")
+    return cell
+
+
+def test_an_incomplete_newer_month_never_clears_an_established_monthly_mark(tmp_path):
+    """Astra verification 2026-11-15 P2-3: September with only zero hours (events and volume missing, in conflict or
+    filed with another NODI code) is no confirmed no-discharge month; a complete one clears the August mark."""
+    from build import status as S
+    from ingest import in_echo_cso_monthly as M
+    from tests.test_monthly_mark import month_rec
+    from tests.test_status import tmp_events, world
+    aug = {name: dict(_dmr("31-AUG-26", "2", received="28-SEP-26"), _pend="31-AUG-26") for name in M.PARAMS.values()}
+
+    def mark(sep):
+        latest = M.latest_months({("MA0025321", "002", "2026-08"): aug, ("MA0025321", "002", "2026-09"): sep})
+        rec = month_rec("aug", "2026-08", outfall="002")
+        d = tmp_events([rec])
+        p = d / "ma-test.json"
+        body = json.loads(p.read_text())
+        p.write_text(json.dumps({**body, "source_id": "nj-echo-monthly",
+                                 "meta": {"latest_month_by_outfall": latest}}))
+        st, _ = S.build(now=S.datetime(2026, 11, 3, 12, tzinfo=S.UTC), write=False, **world(d))
+        return latest["MA0025321|002"], len(st["monthly_outfalls"]), st["waters"]["test-river-ma"]["status"]
+
+    for sep in ({"hours": "0"}, {"hours": "0", "events": "E", "volume": "E"},
+                {"hours": "0", "events": ("conflict", "0", "2"), "volume": "0"}, {"events": "C"}):
+        obs, n, colour = mark(_sep(sep))
+        assert obs["month"] == "2026-08" and obs["discharged"] is True and n == 1 and colour == "monthly", sep
+    for sep in ({"hours": "0", "events": "0", "volume": "0"}, {"hours": "C", "events": "C", "volume": "C"}):
+        obs, n, colour = mark(_sep(sep))
+        assert obs["month"] == "2026-09" and obs["discharged"] is False and n == 0 and colour == "grey", sep
+    # a newer month with a discharge is still the latest whatever is missing
+    obs = M.latest_months({("P", "002", "2026-08"): aug, ("P", "002", "2026-09"): _sep({"hours": "3"})})["P|002"]
+    assert obs["month"] == "2026-09" and obs["discharged"] is True
