@@ -98,6 +98,18 @@ def _name_key(name) -> str:
     return " ".join(sorted(w for w in s.split() if w not in ("river", "r", "of", "the")))
 
 
+# the one word a source may drop from a name without naming another water ('Tygart River' for 'Tygart Valley River');
+# any other extra word ('Little', 'North Fork', 'Krout Creek of') makes it another water
+SPELLING_WORDS = {"valley"}
+
+
+def _same_water(name, tie) -> bool:
+    """A receiving-water name agrees with a tie's water: the same key, or the same but for SPELLING_WORDS. 'Little
+    Coal River' never ties to 'Coal River' nor the reverse, and an empty or unnamed name ties to nothing."""
+    a, b = set(_name_key(name).split()), set(_name_key(tie).split())
+    return bool(a and b) and (a == b or (a ^ b) <= SPELLING_WORDS and bool(a & b))
+
+
 ALIAS_NOTE = ("EPA's inventory code for DEP's outlet {dep} of the same permit (paired by point, {d:.0f} m apart): one "
               "physical outlet, shown once, as DEP's row; this row only retires EPA's code")
 NO_OUTFALL_NOTE = ("EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a "
@@ -162,18 +174,21 @@ def build(rows: list[dict], epa_rows: list[dict], fetched_at: str, plant_rows: l
             if e["outfall"] != num:
                 row["epa_outfall"] = e["outfall"]
             d = _metres(row["lat"], row["lon"], e.get("lat"), e.get("lon"))
-            dep_name = _first_name(row["receiving_water_echo"])
-            # the tie is EPA's water record: DEP's stream must name that water (not EPA's text, which can disagree
-            # with its own tie: 'Little Wheeling Creek' rows tied to Big Wheeling Creek)
-            same_name = bool(dep_name) and _name_key(dep_name) == _name_key(e.get("water_name"))
             dep_blank = not (row["receiving_water_echo"] or "").strip()
-            if dep_blank and e.get("receiving_water_echo"):
+            if dep_blank and (e.get("receiving_water_echo") or "").strip():
                 row["receiving_water_echo"] = e["receiving_water_echo"]
                 row["receiving_water_from"] = "EPA's inventory row (DEP's layer names no stream for this outlet)"
-            same_name = same_name or dep_blank        # nothing in DEP's layer contradicts EPA's tie
+            # the tie is EPA's water record: the row's effective receiving water (DEP's stream, or EPA's text where DEP
+            # names none) must name that water ('Little Wheeling Creek' rows tied to Big Wheeling Creek are refused).
+            # Only a row with no receiving-water text at all takes the tie unchecked: nothing contradicts it.
+            text = (row["receiving_water_echo"] or "").strip()
+            eff = _first_name(text)
+            same_name = _same_water(eff, e.get("water_name")) if eff else not text
             if not same_name and e.get("water_slug"):
-                row["carry_refused"] = (f"EPA's tie ({e.get('water_name')}) not carried: DEP names the receiving stream "
-                                        f"{dep_name or 'not at all'}; the water batch ties DEP's point and stream")
+                whose = "EPA's row (DEP names none)" if row.get("receiving_water_from") else "DEP"
+                row["carry_refused"] = (f"EPA's tie ({e.get('water_name')}) not carried: {whose} names the receiving "
+                                        f"stream {eff or ('an unnamed tributary' if text else 'not at all')}; the "
+                                        "water batch ties the outlet's own point and stream")
             if e.get("water_slug") and d is not None and d <= CARRY_TIE_M and same_name:
                 row.update(water_slug=e["water_slug"], water_name=e.get("water_name"), water_kind=e.get("water_kind"),
                            match="carried from EPA's row",
