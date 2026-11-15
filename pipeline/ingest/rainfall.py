@@ -1123,13 +1123,9 @@ def shown_hours() -> float:
     return float(settings(read_json(DATA_DIR / "rules.json", {}) or {})["rainfall_stale_hours"]) + 1
 
 
-def permit_summary(points: dict[str, dict], outfalls: list[dict], now: datetime | None = None) -> dict[str, dict]:
+def permit_summary(points: dict[str, dict], outfalls: list[dict]) -> dict[str, dict]:
     """Per permittee: its points, the maxima at the latest valid time, how the wettest was read (grid
-    or point) and from which product, and its forecast maximum. With now: a permittee whose newest reading is older
-    than shown_hours() (its region's product stopped, its points lost radar coverage, its reads failed) shows no
-    reading (valid_time and the totals None, as a permittee never read), never an old total as if it were this hour's;
-    that reading stays under last_reading."""
-    shown = timedelta(hours=shown_hours()) if now is not None else None
+    or point) and from which product, and its forecast maximum."""
     by_permit = defaultdict(list)
     for k, p in points.items():
         for permit in p["permits"]:
@@ -1166,14 +1162,27 @@ def permit_summary(points: dict[str, dict], outfalls: list[dict], now: datetime 
         row["qpf_24h_in"] = max(q)[0] if q else None
         row["qpf_point"] = max(q)[1] if q else None
         row["qpf_update_time"] = (points[row["qpf_point"]].get("qpf") or {}).get("update_time") if q else None
-        if shown is not None and vt is not None and vt < now - shown:
-            row["last_reading"] = {"valid_time": row["valid_time"], "h24": row["h24"], "h24_point": row["h24_point"],
-                                   "read": row["read"], "product": row["product"],
-                                   "why": f"older than {shown.total_seconds() / 3600:g} hours: not shown as this "
-                                          f"hour's"}
+        out[permit] = row
+    return out
+
+
+def shown_permits(permits: dict[str, dict], now: datetime) -> dict[str, dict]:
+    """The permittees as rainfall.json shows them: one whose newest reading is older than shown_hours() (its region's
+    product stopped, its points lost radar coverage, its reads failed) shows no reading (valid_time and the totals
+    None, as a permittee never read), never an old total as if it were this hour's; that reading stays under
+    last_reading, and the row keeps its product and how it was read (a caution still in its tail cites them). The
+    history is built from permit_summary's rows, before this (review 2026-11-15 P1-1)."""
+    shown = timedelta(hours=shown_hours())
+    out = {}
+    for permit, row in permits.items():
+        vt = parse_t(row.get("valid_time"))
+        if vt is not None and vt < now - shown:
+            row = {**row, "last_reading": {"valid_time": row["valid_time"], "h24": row["h24"],
+                                           "h24_point": row["h24_point"],
+                                           "why": f"older than {shown.total_seconds() / 3600:g} hours: not shown as "
+                                                  f"this hour's"}}
             row.update({f"h{h}": None for h in HOURS})
-            row.update(valid_time=None, h24_point=None, points_reporting=0,
-                       read="plant_point" if row["read"] == "plant_point" else None, product=None)
+            row.update(valid_time=None, h24_point=None, points_reporting=0)
         out[permit] = row
     return out
 
@@ -1192,7 +1201,7 @@ def read_before(p: dict) -> bool:
     """Whether the radar has seen the point: a reading is stored for it, or one was when MRMS first answered no coverage
     there (no_coverage.read_before). MRMS's no coverage at such a point is an outage, its reading missing; at a point
     never read, the place is outside radar coverage (listed, never fresh, not counted for the exit code)."""
-    return bool(p.get("mrms")) or bool((p.get("no_coverage") or {}).get("read_before"))
+    return bool(p.get("mrms")) or bool(p.get("last_mrms")) or bool((p.get("no_coverage") or {}).get("read_before"))
 
 
 def region_statistics(session, g: dict, region: str) -> dict:
@@ -1429,7 +1438,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     points = group_points(outfalls)
     old_points = prev.get("points") or {}
     for k, p in points.items():                # keep the last readings until replaced
-        for f in ("mrms", "qpf", "no_coverage"):
+        for f in ("mrms", "qpf", "no_coverage", "last_mrms"):
             if (old_points.get(k) or {}).get(f):
                 p[f] = old_points[k][f]
         if p.get("mrms") and not p["mrms"].get("units_read"):
@@ -1496,8 +1505,8 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     # radar coverage: a point where MRMS answered no coverage this run is marked (no_coverage: since, the latest valid
     # time, and whether it had been read then, read_before), the mark kept until a value is read there. A marked point
     # never read is outside radar coverage: listed, never fresh, not counted for the exit code (it has no reading to
-    # show as dry). One read before is an outage: its reading missing, counted, its last reading kept (permit_summary
-    # stops showing it as the permittee's after shown_hours()).
+    # show as dry). One read before is an outage: its reading missing, counted; when the outage is the newest answer,
+    # its stored reading is set aside (last_mrms: never fresh, never shown, the point read again next hour).
     dark_now, valued = {}, set()
     for x in res.values():
         dark_now.update(x["dark"])
@@ -1508,6 +1517,13 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         elif k in dark_now:
             nc = points[k].get("no_coverage") or {"since": iso(now), "read_before": bool(points[k].get("mrms"))}
             points[k]["no_coverage"] = {**nc, "valid_time": dark_now[k], "seen_at": iso(now)}
+            stored = parse_t((points[k].get("mrms") or {}).get("valid_time"))
+            if stored is not None and parse_t(dark_now[k]) is not None and parse_t(dark_now[k]) >= stored:
+                # the radar's newest word there is no coverage: the stored reading is no longer this hour's (never
+                # fresh, never shown) and the point is read again next hour; it is kept, as read, under last_mrms
+                points[k]["last_mrms"] = points[k].pop("mrms")
+        if k in valued:
+            points[k].pop("last_mrms", None)
     uncovered = sorted(k for k in readable if points[k].get("no_coverage") and not read_before(points[k]))
 
     # forecast: point -> grid cell (kept), each cell at most every QPF_CACHE_H hours
@@ -1580,6 +1596,8 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         rv = [parse_t(points[k]["mrms"].get("valid_time")) for k in ks if points[k].get("mrms")]
         rvt = max((t for t in rv if t), default=None)
         pv = (x["g"] or {}).get("valid_time") if x["g"] else None
+        if pv is None and (x["got"] or x["dark"]):   # no grid: the newest 24-hour product the identify answers gave
+            pv = iso(max(parse_t(t) for t in [*(m["valid_time"] for m in x["got"].values()), *x["dark"].values()]))
         if pv is None and not todo_of[r]:
             pv = prv.get("product_valid_time")        # nothing to read this hour: the product read earlier this hour
         stale = parse_t(pv) is not None and parse_t(pv) < expected - timedelta(hours=FRESH_LAG_H)
@@ -1631,7 +1649,15 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         problems.append(f"{len(uncovered)} point(s) without radar coverage (MRMS {grid_mod.NO_COVERAGE:g} where no "
                         f"reading was ever had), not read: "
                         + ", ".join(f"{k} ({', '.join(points[k]['outfalls'][:3])})" for k in uncovered[:10]))
-    permits = permit_summary(points, outfalls, now)
+    # a permittee with no point the radar can read (every point outside its grid or outside radar coverage) is not a
+    # rain permittee: never listed as one the caution covers (review 2026-11-15 P1-3), named in mrms.unreadable_permits
+    # (a permittee with one such point and others read keeps every outfall: the caution colours the waters below each)
+    unreadable_pts = set(outside) | set(uncovered)
+    rows = permit_summary(points, outfalls)
+    unreadable = sorted(p for p, row in rows.items() if all(k in unreadable_pts for k in row["points"]))
+    for p in unreadable:
+        del rows[p]
+    permits = shown_permits(rows, now)
     counts = session.summary()
     if units:
         units = {**units, "determined_at": iso(now), "service_states": "inches", "rule": UNIT_RULE}
@@ -1651,6 +1677,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                  "valid_time": iso(valid_time), "points": len(points), "outfalls": len(outfalls),
                  "permits": len(permits), "states": sorted({o["state"] for o in outfalls}),
                  "readable": len(readable), "outside_grid": outside, "outside_coverage": uncovered,
+                 "unreadable_permits": unreadable,
                  "fetched": sampled, "fresh": len(fresh), "readings_ok": readings_ok, "fallback": fallback,
                  "failed": failed, "problems": problems[:50], "regions": regions_out},
         "qpf": {**qpf_info, "credit": "NOAA National Weather Service, api.weather.gov gridpoint forecast",
@@ -1659,8 +1686,8 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         "points": points, "permits": permits, "grids": grid_data,
     }
     write_json(OUT, out)
-    if any(r.get("valid_time") for r in permits.values()):
-        write_history(update_history(hist_old, permits, now))
+    if any(r.get("valid_time") for r in rows.values()):
+        write_history(update_history(hist_old, rows, now))
     return out
 
 
