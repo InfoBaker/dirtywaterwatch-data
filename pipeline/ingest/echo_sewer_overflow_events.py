@@ -469,7 +469,12 @@ Puerto Rico (permits PR...; research/pr/profile.json; not live until data/rules.
     impact texts) name structures, equipment and highways ('Carr. 306, Lajas'), no person and no street address;
     PR is in FREE_TEXT_STATES (the Illinois scrub: house numbers, phones, e-mails) and EXTRA_PERSON_SCRUB removes a
     name after a courtesy title ('Sr.', 'Sra.', 'Ing.', 'Lcdo.') should a future report carry one; both run on the PR
-    rows of the ZIP before it is saved (sanitize_zip, Astra PR review P1-5).
+    rows of the ZIP before it is saved (sanitize_zip, Astra PR review P1-5). Astra verify P1-4 adds, for PR only: the
+    receiving-water text through the same scrub (pr_scrub_water; kept byte for byte when only spacing would change),
+    house numbers with a letter or fraction, a name after 'contacto' or 'casa de' or before 'reportó', coordinates in the
+    text kept to 0.001 degree (pr_scrub_people), and a report whose description places it at a private home loses its
+    point (PRIVATE_HOME_STATES: removed in the saved ZIP, the record and raw, never rounded). None of these forms is on
+    the 2026-11-12 extract: its PR records and its saved ZIP are byte for byte as before.
   - Combined sewer outfalls: the 12 Puerto Nuevo outfalls (PR0021555) are in data/outfalls-pr.json from PRASA's own
     layer; no report in this dataset is typed CSO, so none is matched to them.
 
@@ -1061,8 +1066,42 @@ PR_PERSON = re.compile(r"\b(?:Sr|Sra|Srta|Ing|Lcdo|Lcda|Dra?|Don|Doña|Mr|Mrs|Ms
                        r"[A-ZÁÉÍÓÚÑ][\wáéíóúñü'-]+(?:\s+(?:de\s+(?:la\s+)?)?[A-ZÁÉÍÓÚÑ][\wáéíóúñü'-]+){0,3}")
 
 
+# forms the Illinois scrub does not see (Astra verify P1-4; none on the 2026-11-12 extract): a house number with a
+# letter or a fraction ('123-A Calle Sol', '45 1/2 Calle Luna'), a name after 'contacto' or before a verb of reporting
+# ('Robin Ejemplo reportó'), a name after 'casa de', 'residencia de', 'home of'; a coordinate in the text is kept to 0.001
+# degree like the report's own point
+PR_HOUSE_NUMBER = re.compile(r"(?:#\s*)?\b\d{1,6}(?:\s*-\s*[A-Za-z]\b|\s+\d/\d\b)")
+_PR_NAME = r"[A-ZÁÉÍÓÚÑ][\wáéíóúñü'-]+(?:\s+(?:de\s+(?:la\s+)?)?[A-ZÁÉÍÓÚÑ][\wáéíóúñü'-]+){0,3}"
+PR_NAME_ROLE = re.compile(r"(?i:\b(contacto|contactar\s+a|casa\s+de|residencia\s+de|hogar\s+de|vivienda\s+de|"
+                          r"home\s+of|house\s+of|residence\s+of)\b\s*:?\s*)" + _PR_NAME)
+PR_NAME_VERB = re.compile(_PR_NAME + r"(?=\s+(?i:report[oó]|inform[oó]|llam[oó]|notific[oó]|indic[oó]|reported|called|"
+                                     r"notified|said)\b)")
+PR_TEXT_COORD = re.compile(r"(?<![\d.])(-?\d{1,3}\.\d{4,})(?![\d.])")
+
+
 def pr_scrub_people(v: str) -> str:
-    return PR_PERSON.sub("[name removed]", v)
+    v = PR_PERSON.sub("[name removed]", v)
+    v = PR_NAME_ROLE.sub(lambda m: m.group(1) + " [name removed]", v)
+    v = PR_NAME_VERB.sub("[name removed]", v)
+    v = PR_HOUSE_NUMBER.sub("[number removed]", v)
+    return PR_TEXT_COORD.sub(lambda m: f"{round(float(m.group(1)), 3):.3f}", v)
+
+
+# a report whose description places it at a private home: its point is removed, not rounded (Astra verify P1-4; none on
+# the 2026-11-12 extract)
+PR_PRIVATE_HOME = re.compile(r"(?i:\b(?:residencias?|casas?|viviendas?|hogar(?:es)?|homes?|houses?|residences?|"
+                             r"private\s+property|propiedad\s+privada)\b)")
+PRIVATE_HOME_STATES = {"PR": PR_PRIVATE_HOME}
+# states whose receiving-water text goes through the same scrub as their free text before it is read or saved
+WATER_NAME_SCRUB_STATES = {"PR"}
+
+
+def pr_scrub_water(w):
+    """A receiving-water text through the free-text scrub; kept byte for byte when the scrub only changed spacing."""
+    if not isinstance(w, str) or not w.strip():
+        return w
+    t = pr_scrub_people(scrub_free_text({"t": w}, ["t"])["t"])
+    return w if " ".join(t.split()) == " ".join(w.split()) else t
 
 
 EXTRA_PERSON_SCRUB = {"PR": pr_scrub_people}
@@ -1280,6 +1319,8 @@ def _sanitize_csv(text: str, states: set[str]) -> tuple[str, int]:
         return text, 0
     pi = col["permit_identifier"]
     texts = [i for c, i in col.items() if c in MN_TEXT_COLUMNS or c.endswith("_other_text")]
+    water_col = col.get("name_receiving_water")
+    desc_col = col.get("sewer_overflow_bypass_description_text")
     points = [col[c] for c in ("latitude_measure", "longitude_measure") if c in col]
     changed = 0
     out = [recs[0]]
@@ -1293,7 +1334,13 @@ def _sanitize_csv(text: str, states: set[str]) -> tuple[str, int]:
             out.append(r)
             continue
         new = list(row)
+        st = row[pi][:2]
+        home = (st in PRIVATE_HOME_STATES and desc_col is not None and desc_col < len(row)
+                and PRIVATE_HOME_STATES[st].search(row[desc_col]))
         for i in points:
+            if home and i < len(new):   # a private home's point is removed before the save (Astra verify P1-4)
+                new[i] = ""
+                continue
             if i < len(new) and new[i].strip():
                 try:
                     v = float(new[i])
@@ -1307,6 +1354,8 @@ def _sanitize_csv(text: str, states: set[str]) -> tuple[str, int]:
                 t = scrub_free_text({"t": new[i]}, ["t"])["t"]
                 fn = STATE_PERSON_SCRUB.get(st) or STATE_NAME_SCRUB.get(st) or EXTRA_PERSON_SCRUB.get(st)
                 new[i] = fn(t) if fn else t
+        if water_col is not None and st in WATER_NAME_SCRUB_STATES and water_col < len(new) and new[water_col].strip():
+            new[water_col] = pr_scrub_water(new[water_col])
         if new == row:
             out.append(r)
             continue
@@ -1709,6 +1758,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         if state in TYPE_FROM_TEXT_STATES:   # Kentucky: every report filed BYP (module docstring)
             t_codes, type_notes = type_from_text(ev, t_codes)
         w_names = [r["name_receiving_water"] for r in rws.get(k, [])]
+        if state in WATER_NAME_SCRUB_STATES:   # Puerto Rico (Astra verify P1-4): a name or phone in the water's text
+            w_names = [pr_scrub_water(w) for w in w_names]
         i_rows = imps.get(k, [])
         ok, reason = reached_water(ev, t_codes, w_names, i_rows, state)
         why[(state, "kept" if ok else "dropped", reason)] += 1
@@ -1842,6 +1893,11 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             if why_plant:
                 plant_note = ([lat, lon], why_plant)
                 lat = lon = coord_src = None
+        home = (state in PRIVATE_HOME_STATES
+                and PRIVATE_HOME_STATES[state].search(ev.get("sewer_overflow_bypass_description_text") or ""))
+        if home:   # a private home's point is removed, not rounded or kept in raw (Astra verify P1-4)
+            lat = lon = coord_src = None
+            plant_note = None
         start, end = zoned(start, state, ev_tz), zoned(end, state, ev_tz)
         sysrow = systems.get((permit, ev.get("collection_system_identifier") or ""), {})
         d = disc.get(permit, {})
@@ -1868,6 +1924,11 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         })
         raw.update(ne_notes)
         raw.update(type_notes)
+        if home:
+            for k2 in ("latitude_measure", "longitude_measure"):
+                raw.pop(k2, None)
+            raw["point_note"] = ("the report's description places it at a private home: its point is not kept, so the "
+                                 "report is placed by the water it names or not at all")
         if plant_note:
             raw["reported_point"], raw["point_note"] = plant_note
             if state in PLANT_TEXT_POINT_STATES:
