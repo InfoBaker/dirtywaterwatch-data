@@ -287,3 +287,41 @@ def test_state_text_counts_follow_the_outlet_file():
     t = (ROOT / "research" / "wv" / "state-text.md").read_text()
     assert f"({named} of the {len(open_rows)} open outlets)" in t
     assert f"{len(open_rows)} open combined sewer outlets" in t
+
+
+def _blank_dep_with_epa_text(epa_text, tie_name):
+    return B.build([_dep("WV0000001", "C001", 39.1, -80.1, stream="")],
+                   [{**_epa("WV0000001", "C001", 39.1, -80.1, slug="example-creek-wv"), "water_name": tie_name,
+                     "receiving_water_echo": epa_text}], "2026-11-14T00:00:00Z")["outfalls"][0]
+
+
+def test_a_blank_dep_stream_takes_epas_tie_only_when_epas_text_names_that_water(monkeypatch):
+    """Re-review P1-1: DEP names no stream, EPA's row says 'Little Example Creek' but ties 'Example Creek'."""
+    r = _blank_dep_with_epa_text("LITTLE EXAMPLE CREEK", "Example Creek")
+    assert r["receiving_water_echo"] == "LITTLE EXAMPLE CREEK" and r["receiving_water_from"]
+    assert "water_slug" not in r and "EPA's row (DEP names none)" in r["carry_refused"]
+    for text in ("Unnamed Tributary/Example Creek", "Krout Creek of Example Creek", "NORTH FORK/EXAMPLE CREEK"):
+        assert "water_slug" not in _blank_dep_with_epa_text(text, "Example Creek"), text
+    assert "water_slug" not in _blank_dep_with_epa_text("EXAMPLE CREEK", "Little Example Creek")
+    # agreeing text, a spelling variant, or no text anywhere: the tie is carried
+    assert _blank_dep_with_epa_text("EXAMPLE CREEK", "Example Creek")["water_slug"] == "example-creek-wv"
+    assert _blank_dep_with_epa_text("EXAMPLE RIVER", "Example Valley River")["water_slug"] == "example-creek-wv"
+    assert _blank_dep_with_epa_text("", "Example Creek")["water_slug"] == "example-creek-wv"
+    # through the resolver, with WV live: the refused row never lands on the plain creek beside its point
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"WV"})
+    r = _blank_dep_with_epa_text("LITTLE EXAMPLE CREEK", "Example Creek")
+    waters = {"example-creek-wv": {"slug": "example-creek-wv", "name": "Example Creek", "kind": "river", "state": "WV",
+                                   "towns": [], "bbox": [-80.11, 39.09, -80.09, 39.11]}}
+    slug, how = S.Resolver(waters, [], placement_rules={}).row_water({**r, "_file": "data/outfalls-wv.json"})
+    assert slug is None, how
+    ok = _blank_dep_with_epa_text("EXAMPLE CREEK", "Example Creek")
+    assert S.Resolver(waters, [], placement_rules={}).row_water({**ok, "_file": "data/outfalls-wv.json"})[0] \
+        == "example-creek-wv"
+
+
+def test_the_committed_wv_registry_carries_no_tie_its_text_contradicts():
+    doc = json.loads((ROOT / "data" / "outfalls-wv.json").read_text())
+    for r in doc["outfalls"]:
+        if r.get("match") == "carried from EPA's row":
+            name = B._first_name(r["receiving_water_echo"])
+            assert (not (r["receiving_water_echo"] or "").strip()) or (name and B._same_water(name, r["water_name"])), r
