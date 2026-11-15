@@ -681,3 +681,65 @@ def test_r3_p1_6_inline_names_never_reach_a_raw_save_or_a_record(monkeypatch, tm
     assert [r["event_type"] for r in recs] == ["cso"] and recs[0]["waterbody_text"] == "Lincoln Creek"
     assert recs[0]["started_at"] == "2027-06-01"
     assert any("Combined Sewer Overflow" in x["label"] for x in recs[0]["raw"]["letters"])
+
+
+def _np_run(np_mod, rows, bodies, tmp_path, at):
+    from datetime import datetime, timezone
+    saved = []
+
+    def fetcher(url, browser=False):
+        b = bodies[url]
+        if isinstance(b, int):
+            return {"at": at, "ok": False, "http_status": b, "error": f"HTTP {b}",
+                    "body": b"<p>Error. Call Pat Example at 414-555-0100</p>"}
+        return {"at": at, "ok": True, "http_status": 200, "final_url": url, "content_type": "text/html", "error": None,
+                "body": b}
+    out = np_mod.run(rows, now=datetime.fromisoformat(at.replace("Z", "+00:00")).astimezone(timezone.utc),
+                     fetcher=fetcher, store=tmp_path / "store", root=tmp_path,
+                     raw_saver=lambda src, body, ext: saved.append(body) or tmp_path / "raw.bin")
+    return out, saved
+
+
+def test_r3_p1_7_watched_wisconsin_pages_keep_no_body_and_no_text(tmp_path):
+    from ingest import notification_pages as NP
+    reg = json.loads((ROOT / "data" / "notice-channels" / "wi.json").read_text())["channels"]
+    rows = [r for r in reg if r.get("monitored")]
+    assert rows and all(r.get("metadata_only") is True and r.get("records") is False for r in rows)
+    personal = ("<html><body><h1>Example page</h1><p>Contact Pat Example, 414-555-0100, pat@example.org, "
+                "1234 N Example St.</p></body></html>").encode()
+    urls = [u for r in rows for u in r["urls"]]
+    for k, bodies in enumerate(({u: personal for u in urls}, {u: 503 for u in urls},
+                                {u: personal.replace(b"Example page", b"Example page 2") for u in urls})):
+        out, saved = _np_run(NP, rows, bodies, tmp_path, ("2026-11-15T12:00:00Z", "2026-11-23T12:00:00Z",
+                                                          "2026-12-01T12:00:00Z")[k])
+        assert saved == []                                    # no response body, good or error, is saved
+        blob = json.dumps(out["snaps"], default=str) + "".join(p.read_text() for p in (tmp_path / "store").rglob("*.json"))
+        for p in PRIVATE[:5]:
+            assert p not in blob, p
+    assert out["stats"]["reachable"] == len(set(urls))         # still watched: availability recorded
+    assert any(c.get("added") for s in out["snaps"].values() for c in s.get("changes") or [])   # a change still shows
+
+
+def test_r3_p1_7_other_states_pages_are_watched_as_before(tmp_path):
+    import importlib.util
+    import subprocess
+    from ingest import notification_pages as NP
+    old_src = subprocess.run(["git", "show", "fa9fb34:pipeline/ingest/notification_pages.py"], cwd=ROOT,
+                             capture_output=True, text=True)
+    if old_src.returncode != 0:
+        pytest.skip("the state branch's commit is not in this clone")
+    f = tmp_path / "np_state_branch.py"
+    f.write_text(old_src.stdout)
+    spec = importlib.util.spec_from_file_location("np_state_branch", f)
+    OLD = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(OLD)
+    rows = [{"id": "zz-example", "state": "ZZ", "monitored": True, "urls": ["https://example.org/notices"],
+             "method": "html", "records": True, "dated_lines_are_notices": True, "channel_kind": "operator_page"}]
+    body = b"<html><body><p>Overflow notice</p><p>11/14/2026 Example overflow at Example Creek</p></body></html>"
+    outs = []
+    for mod, d in ((NP, tmp_path / "new"), (OLD, tmp_path / "old")):
+        d.mkdir()
+        out, saved = _np_run(mod, rows, {rows[0]["urls"][0]: body}, d, "2026-11-15T12:00:00Z")
+        outs.append((json.dumps({k: out[k] for k in ("records", "snaps", "stats")}, sort_keys=True, default=str)
+                     .replace(str(d), "D"), saved))
+    assert outs[0] == outs[1] and outs[0][1] == [body]

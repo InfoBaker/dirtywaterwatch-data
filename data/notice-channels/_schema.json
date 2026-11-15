@@ -31,6 +31,7 @@
    "records": "false: never make records from this channel (default true)",
    "availability_only": "true: monitor page availability without checking current status; requires records: false (no notice records from this row) (default false)",
    "dated_lines_are_notices": "true: any added dated line is a notice (an event table)",
+   "metadata_only": "true: keep no page text and no response body: data/raw keeps nothing and the snapshot holds only the hash of the text, so a page that can carry a person's name, telephone or address is watched for availability and change without saving it; requires records: false (default false)",
    "default_event_type": "event type of a notice whose words name none (common.EVENT_TYPES)",
    "every_hours": "fetch at most this often (default: every refresh)",
    "headers": "'browser' to send a browser user agent (hosts that refuse others)",
