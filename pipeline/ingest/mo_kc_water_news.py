@@ -270,9 +270,18 @@ def water_text(ws: list[str] | None) -> str | None:
     return "; ".join(ws) if ws else None
 
 
+# raw fields an earlier version saved (the post's own text) that the records no longer carry (re-review P1-8)
+FORBIDDEN_RAW = ("post_text", "text", "page_text", "html", "content")
+
+
 def migrate_water_text(r: dict) -> None:
-    """A record saved before water_text (its waterbody_text the first water only) gets every water at the next read."""
+    """An earlier save brought to the current rules at the next read: every water the report names (an earlier
+    waterbody_text held the first only), the post's text dropped and the named-water placement guard set."""
     raw = r.get("raw") or {}
+    for k in FORBIDDEN_RAW:
+        raw.pop(k, None)
+    if raw.get("state") in ("MO", "KS") and isinstance(raw.get("waters_named"), list):
+        raw.setdefault("_placement", "named_water_only")
     ws = raw.get("waters_named")
     if isinstance(ws, list) and len(ws) > 1 and r.get("waterbody_text") == ws[0] and raw.get("reached_water") is not False:
         r["waterbody_text"] = water_text(ws)
