@@ -9,8 +9,8 @@ Source
   parameters, January 2025 to date): 59 file nothing at any CSO outlet (their reports cover the treatment plant's own
   outfalls only); two file a monthly line at outlet C002, 'Effluent Gross': Princeton Sanitary Board (WV0023094) and
   the City of Beckley (WV0023183), each with 50050 'Flow, in conduit or thru treatment plant' (MGD), total residual
-  chlorine and fecal coliform. No West Virginia permit reports a number of overflow events, hours or volume at a CSO
-  outlet. So this feed reads 50050 per permit: it shows, for the outlets that report one, the months in which the
+  chlorine and fecal coliform. None of the 61 reported a number of overflow events, hours or volume at a CSO outlet
+  in that period (read 2026-11-14). So this feed reads 50050 per permit: it shows, for the outlets that report one, the months in which the
   operator reported flow leaving the outlet.
 
 Permits
