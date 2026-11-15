@@ -248,19 +248,68 @@ ROLE = (r"(?:executive\s+director|deputy\s+director|director|manager|engineer|sp
         r"officer|coordinator|specialist|dr|mr|mrs|ms|mx)\.?")
 PNAME = r"(?:[A-Z][a-z'’-]+|[A-Z]\.)(?:\s+(?:[A-Z][a-z'’-]+|[A-Z]\.)){0,3}"
 NAME_RX = [
-    (re.compile(rf"\b(?i:{ROLE})\s+{PNAME}"), "[name removed]"),
-    (re.compile(rf"\b(said|says|according to|stated by|quoted)\s+{PNAME}"), r"\1 [name removed]"),
-    (re.compile(rf"\b{PNAME}\s+(?=(?:said|says|stated|explained|noted|added|told)\b)"), "[name removed] "),
-    (re.compile(rf"\b{PNAME},\s+(?=(?:an?\s+|the\s+|MMSD'?s?\s+)?(?:[\w-]+\s+){{0,3}}(?i:{ROLE})\b)"), "[name removed], "),
+    (re.compile(rf"\b(?i:{ROLE})\s+(?P<n>{PNAME})"), "[name removed]"),
+    (re.compile(rf"\b(?P<v>said|says|according to|stated by|quoted)\s+(?P<n>{PNAME})"), r"\g<v> [name removed]"),
+    # a name before a speech or report verb ("Pat Example reported ..."; Astra verification 2026-11-15, earlier #6)
+    (re.compile(rf"\b(?P<n>{PNAME})\s+(?=(?:said|says|stated|explained|noted|added|told|reported|reports|confirmed|"
+                rf"announced|wrote|observed|noticed|called|saw|found|discovered)\b)"), "[name removed] "),
+    (re.compile(rf"\b(?P<n>{PNAME}),\s+(?=(?:an?\s+|the\s+|MMSD'?s?\s+)?(?:[\w-]+\s+){{0,3}}(?i:{ROLE})\b)"),
+     "[name removed], "),
 ]
-# a private point in the text is cut to three decimals, as every report point is
+# the capitalised words MMSD's posts use for itself, its plants, the waters, the places and the overflow types: a run of
+# capitalised words is a person's name unless it holds one of these (Astra verification 2026-11-15, earlier #6). A name
+# before a verb is kept only when every word is one of these ("The Milwaukee Metropolitan Sewerage District reported")
+KNOWN = set("""
+a an the this that these those there their it its in on at of for from to into by with and or but after before during
+between through until since while when where as no not any all one two three four five six seven eight nine ten
+mmsd dnr epa wi wisconsin milwaukee metropolitan sewerage district department natural resources state city county
+village town north south east west northern southern eastern western upper lower greater regional public
+combined separate sanitary sewer sewers sewage overflow overflows overflowed release releases spill spills wastewater
+water waters stormwater storm storms update updates alert alerts letter letters notice report reports reporting
+reported dnr's mmsd's treatment plant plants reclamation facility facilities deep tunnel tunnels system systems
+lake michigan creek creeks river rivers harbor harbour canal estuary inner outer bay beach beaches park
+kinnickinnic menomonee milwaukee root lincoln wilson honey underwood oak jones island south shore little
+wauwatosa west allis greenfield glendale shorewood whitefish fox point bayside hills brown deer cudahy st francis
+franklin greendale hales corners mequon thiensville brookfield elm grove butler falls germantown new berlin
+caledonia muskego superior veolia accidental heavy rain rainfall flooding flood volume volumes estimated
+gallons million billion steps taken prevent other discharges discharge impacted impact map view see more
+information update read about overview background summary next what why how who our we you
+january february march april may june july august september october november december
+jan feb mar apr jun jul aug sep sept oct nov dec monday tuesday wednesday thursday friday saturday sunday
+cso csos sso ssos street avenue road drive boulevard parkway highway st ave rd dr blvd n s e w
+mitchell international airport national weather service gauge gauges
+""".split())
+RUN = re.compile(r"\b(?:[A-Z][a-z'’-]+|[A-Z]\.)(?:\s+(?:[A-Z][a-z'’-]+|[A-Z]\.))+")
+
+
+def _known(w: str) -> bool:
+    return re.sub(r"(?:'s|’s|[.,'’-])+$", "", w).lower() in KNOWN
+
+
+def _name_sub(rep: str):
+    def f(m: re.Match) -> str:
+        if all(_known(w) for w in m.group("n").split()):
+            return m.group(0)               # the district, a plant, a water or a place, not a person
+        return m.expand(rep)
+    return f
+
+
+# a point described as a private home is removed entirely, not rounded (Astra verification 2026-11-15, earlier #6);
+# other points in the text are cut to three decimals, as every report point is
 COORD = re.compile(r"(-?\d{1,3}\.\d{4,})(\s*,\s*)(-?\d{1,3}\.\d{4,})")
+ANY_COORD = re.compile(r"(?:\(\s*)?-?\d{1,3}\.\d+\s*,\s*-?\d{1,3}\.\d+(?:\s*\))?")
+PRIVATE_PLACE = re.compile(r"\b(?:home|homes|house|houses|residen\w*|dwelling|apartment|condo\w*|basement|backyard|"
+                           r"yard|driveway|private property|property owner)\b", re.I)
+HOME_OF = re.compile(rf"\b(?:the\s+)?(?:home|house|residence|property|yard|basement|apartment)\s+of\s+"
+                     rf"(?:\[name removed\]|{PNAME})")
 
 
 def scrub_names(s: str) -> str:
+    s = HOME_OF.sub("a private residence", s)
     for rx, rep in NAME_RX:
-        s = rx.sub(rep, s)
-    return s
+        s = rx.sub(_name_sub(rep), s)
+    # any other run of capitalised words that holds none of the source's own words is a name
+    return RUN.sub(lambda m: m.group(0) if any(_known(w) for w in m.group(0).split()) else "[name removed]", s)
 
 
 def safe_line(s: str) -> str:
@@ -268,6 +317,8 @@ def safe_line(s: str) -> str:
     month's day ("June 18 at 35th St.") is not a house number."""
     glued = DATE_GLUE.sub(lambda m: m.group(1) + "\u2060_", s)
     s = strip_house_numbers(scrub_text(glued)).replace("\u2060_", " ")
+    if PRIVATE_PLACE.search(s):
+        s = ANY_COORD.sub("[location removed]", s)
     s = COORD.sub(lambda m: f"{round(float(m.group(1)), 3)}{m.group(2)}{round(float(m.group(3)), 3)}", s)
     return scrub_names(s)
 
