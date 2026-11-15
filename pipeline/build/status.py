@@ -3151,6 +3151,13 @@ def names_its_water(ev: dict) -> bool:
     return (ev.get("raw") or {}).get("advisory_extent") == "named_water"
 
 
+def part_of_water(ev: dict) -> bool:
+    """An authority's advisory for part of a water only (raw.advisory_extent "part_of_water": Arkansas DEQ's "Lake X -
+    Y Bay", a place described near a water): a marker at its own cited point, never the whole water's colour, whatever
+    the water's size (review 2026-11-14 P1-3). No other source writes this value, so no other state's output changes."""
+    return (ev.get("raw") or {}).get("advisory_extent") == "part_of_water"
+
+
 def stretch_text(ev: dict | None) -> str:
     """' · from X to Y' for an advisory whose source names its ends (the record's `stretch`, else raw.stretch), else ''."""
     g = (ev or {}).get("stretch") or {}
@@ -3785,7 +3792,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             if not live:
                 continue
             on_river = advisory_on_river(ev, waters[slug], traced)
-            if on_river or (ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(waters[slug])):
+            if on_river or (ev.get("event_type") in POINT_ADVISORY_TYPES
+                            and (not colours_whole_water(waters[slug]) or part_of_water(ev))):
                 point_on.append(slug)
                 if on_river:
                     river_point.append(slug)

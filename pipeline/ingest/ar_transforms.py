@@ -425,7 +425,9 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
         rec["lat"], rec["lon"] = round(float(m.group(1)), 3), round(float(m.group(2)), 3)
         rec["coord_source"], rec["coord_precision_m"] = "source", 150
         notes["_point_basis"] = "the coordinates DEQ gives in the advisory's waterbody name, rounded to 0.001 degree"
-    else:
+    elif not qualifier and not described:
+        # the parent lake's GNIS point is never used for a bay, an arm or a described place: that would draw the
+        # marker at the wrong place (review 2026-11-14 P1-3); such a row has a point only where DEQ gives one
         pt = next((GNIS_POINTS[(name.lower(), c)] for c in counties if (name.lower(), c) in GNIS_POINTS), None)
         if pt:
             rec["lat"], rec["lon"] = pt[1], pt[2]
@@ -434,3 +436,7 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
                                      "geonames, read 2026-11-14): the water, not where the bloom was sampled")
     if not described and not qualifier:
         notes["advisory_extent"] = "named_water"      # DEQ names the lake itself as the advisory's water
+    else:
+        # part of a water, or a place described near one: the status build draws its marker only and never colours
+        # the water it is placed on, whatever the water's size (build/status.py part_of_water)
+        notes["advisory_extent"] = "part_of_water"
