@@ -1047,6 +1047,13 @@ COUNTY_RECORD_POINT_WHY = ("the advisory gives no point: the marker is on the wa
                            "mapped line inside the county the advisory names, not where the discharge was")
 
 
+# South Carolina (final audit 2026-11-15 P2-1): a DES bloom watch or advisory listed only in the program page's table
+# (DES drew no delineation) names its water and area but gives no point; it gets its marker at a point of the named
+# water's record, so it is not left grey and unseen. Keyed on the source; Florence's advice records stay unmapped.
+RECORD_POINT_SOURCES = {"sc-des-hab"}
+TABLE_RECORD_POINT_BASIS = "the water's record point: DES's table names the water and area but DES drew no delineation"
+
+
 def county_record_point(slug: str, waters: dict, state: str, county) -> tuple[float, float, str] | None:
     """(lat, lon, basis) of a point on the water record's own geometry inside the named county (0.001 degree), or None
     when the record has no geometry, the county is not known or the record does not reach it."""
@@ -4257,6 +4264,12 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 and event_state(ev) in COUNTY_RECORD_POINT_STATES):
             rp = county_record_point(pick[0], waters, event_state(ev), (ev.get("raw") or {}).get("county"))
             if rp:
+                placements[eid]["record_point"] = {"lat": rp[0], "lon": rp[1], "basis": rp[2]}
+        if (not rp and pick and live and not future and ev.get("lat") is None
+                and ev.get("source_id") in RECORD_POINT_SOURCES):
+            rp = record_point(pick[0], waters)
+            if rp:
+                rp = (rp[0], rp[1], TABLE_RECORD_POINT_BASIS)
                 placements[eid]["record_point"] = {"lat": rp[0], "lon": rp[1], "basis": rp[2]}
         if rp:
             ivs = event_intervals(eff, event_state(ev), now, water={**waters[pick[0]], "slug": pick[0]}, rules=rules)
