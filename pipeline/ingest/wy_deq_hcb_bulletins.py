@@ -35,8 +35,18 @@ Record rules
     ("has lifted the ... advisory for Lake DeSmet"); a negated or conditional sentence ("will be lifted when", "has not
     lifted") ends nothing. ended_at is the bulletin's sent time, raw.ended_at_precision "bound" (lifted by then),
     status advisory_lifted.
-  - A row still listed has no end: the status build ages it 14 days after its last confirming bulletin. The program's
-    December 31 limit is kept as raw.program_end_bound (an upper bound from the FAQ, never an observed end).
+  - A row in the latest readable table stands: that table is the authority's current advisory list, and an advisory
+    on it stays in effect until a later bulletin drops or lifts it or the programme's stated end of season (December
+    31, FAQ_END) passes. It is confirmed at each read that finds the list unchanged (raw._last_seen_in_source the read
+    time, raw._last_listed_in_bulletin the bulletin), so it never turns grey while the list stands; after December 31
+    it ends at the programme's end (status advisory_lifted, raw.ended_at_precision "bound",
+    raw.expired_at_programme_end). raw.program_end_bound keeps the limit.
+  - A table with its header and no rows is unread (meta.unread, health false), never evidence that every row ended.
+    A bulletin in the current read replaces everything earlier runs observed from it (by link, or by sent time for
+    absences saved before raw._absent_links), so a corrected bulletin leaves no stale absence and no false relisting.
+  - A water written with its part ("Granite Reservoir: West Causeway") is an advisory for that part:
+    raw.advisory_extent "part_of_water" (a marker at a cited point, never the whole water's colour); with no point the
+    record says so in raw.placement_note.
   - No point except the one the agency writes in a name; otherwise placed by the water's name (state WY).
 
 Run from pipeline/:  python -m ingest.wy_deq_hcb_bulletins [--file saved.rss]
@@ -180,6 +190,9 @@ def read_table(desc: str) -> tuple[list[dict] | None, str | None]:
             water, place = (x.strip() for x in water.split(":", 1))
         rows.append({"key": key, "water": water, "place": place or None, "location": loc or None, "type": typ_n,
                      "issued": day, "lat": lat, "lon": lon})
+    if not rows:
+        # a header with no rows is not evidence that every advisory ended (Astra review 2026-11-15 P1): unread
+        return None, "the table has its header and no advisory rows"
     return rows, None
 
 
@@ -245,18 +258,30 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
     seen: dict[str, dict[str, str]] = {}
     absent: dict[str, set[str]] = {}
     lifts: dict[str, list[dict]] = {}
-    for p in previous:                      # what earlier runs observed (the feed keeps only ~25 bulletins)
+    absent_link: dict[str, str] = {}
+    # what earlier runs observed (the feed keeps only ~25 bulletins). A bulletin in this read replaces everything
+    # earlier runs observed from it (by its link, or its sent time for an absence saved without one): a corrected
+    # bulletin's earlier listing, absence or lift is never kept beside its correction (Astra review 2026-11-15 P1)
+    now_links = {b["link"] for b in bulletins}
+    now_sent = {b["sent"] for b in bulletins}
+    for p in previous:
         raw = p.get("raw") or {}
         k = raw.get("row_key")
         if not k:
             continue
         info.setdefault(k, {kk: raw.get(kk) for kk in ("water", "place", "location", "advisory_type", "issued", "lat", "lon")})
-        seen.setdefault(k, {}).update(raw.get("_listed_in") or {})
-        absent.setdefault(k, set()).update(raw.get("_absent_in") or [])
-        if raw.get("_lift"):
+        seen.setdefault(k, {}).update({t: lk for t, lk in (raw.get("_listed_in") or {}).items()
+                                       if lk not in now_links and t not in now_sent})
+        links = raw.get("_absent_links") or {}
+        absent.setdefault(k, set()).update(t for t in raw.get("_absent_in") or []
+                                           if t not in now_sent and links.get(t) not in now_links)
+        absent_link.update({t: lk for t, lk in links.items() if t in absent[k]})
+        if raw.get("_lift") and raw["_lift"].get("link") not in now_links:
             lifts.setdefault(slug(raw["water"]), [])
             if raw["_lift"] not in lifts[slug(raw["water"])]:
                 lifts[slug(raw["water"])].append(raw["_lift"])
+    for k in [k for k in seen if not seen[k]]:
+        seen.pop(k)                         # listed only in bulletins this read replaces
     for b in bulletins:
         if b["lift"]:
             lf = {"sent": b["sent"], "link": b["link"], "sentence": b["lift"]["sentence"],
@@ -275,7 +300,9 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
         for k in list(seen):
             if k not in here and min(seen[k]) < b["sent"]:
                 absent.setdefault(k, set()).add(b["sent"])
+                absent_link[b["sent"]] = b["link"]
     records = []
+    latest_keys = {r["key"] for r in tables[-1]["rows"]}
     n = {"bulletins": len(bulletins), "tables_read": len(tables), "rows_latest_table": len(tables[-1]["rows"]),
          "advisories": 0, "current": 0, "unlisted": 0, "lifted": 0, "relisted": 0}
     for k, inf in info.items():
@@ -308,6 +335,7 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                    "lon": inf["lon"], "time_zone": TZ, "_agency_label": f"{inf['advisory_type']} advisory",
                    "_listed_in": {t: seen[k][t] for t in per["seen"]},
                    "_absent_in": sorted(absent.get(k, set())),
+                   "_absent_links": {t: absent_link[t] for t in sorted(absent.get(k, set())) if t in absent_link},
                    "_last_seen_in_source": last, "_first_seen_at": per["from"],
                    "program_end_bound": {"date": year_end, "basis": FAQ_END},
                    "placement_hint": {"name": inf["water"], "state": "WY",
@@ -315,6 +343,15 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                                                 is not None else "the water the bulletin names; it gives no point")},
                    "date_note": ("Date Issued is the agency's date for the advisory (day, Mountain time); the "
                                  "bulletin's sent time confirms it is still listed")}
+            if inf.get("place"):
+                # "Granite Reservoir: West Causeway": the advisory is for that part of the water, never the whole
+                # water's colour (build/status.py part_of_water); with no cited point for the part it is listed with
+                # its water and the reason, never drawn at the water's own point (Astra review 2026-11-15 P2)
+                raw["advisory_extent"] = "part_of_water"
+                if inf["lat"] is None:
+                    raw["placement_note"] = (f"the advisory is for {inf['place']}, a part of {inf['water']}; the "
+                                             "bulletin gives no point for it, so it is listed with the water and its "
+                                             "place on the map is not known")
             if i:
                 raw["start_basis"] = ("listed again in the bulletin of this time after a readable bulletin had not "
                                       "listed it: a new period, its start the first bulletin that showed it again")
@@ -331,8 +368,30 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                             "end_basis": ("the first readable bulletin table that no longer listed it (a poll bound; "
                                           "the agency sent no lift for it)")})
                 n["unlisted"] += 1
+            elif k in latest_keys and per is periods[-1]:
+                # the latest readable table is the authority's standing statement: the advisory stays in effect until
+                # a later bulletin drops or lifts it, or the programme's stated end of season passes (WDEQ's FAQ,
+                # FAQ_END). It is confirmed at this read, so it does not age out while the list still stands
+                # (Astra review 2026-11-15 P1); the bulletin that last listed it stays in _last_listed_in_bulletin
+                end_day = date.fromisoformat(year_end)
+                expiry = datetime(end_day.year + 1, 1, 1, tzinfo=ZONE).astimezone(timezone.utc)
+                raw["_last_listed_in_bulletin"] = last
+                raw["standing_basis"] = (f"listed in the latest readable bulletin table ({tables[-1]['sent']}), the "
+                                         "authority's current advisory list; no later bulletin has dropped or lifted it")
+                if datetime.fromisoformat(fetched.replace("Z", "+00:00")) >= expiry:
+                    status, end = "advisory_lifted", expiry.strftime("%Y-%m-%dT%H:%M:%SZ")
+                    raw["_last_seen_in_source"] = max(last, min(fetched, end))
+                    raw.update({"ended_at_precision": "bound", "expired_at_programme_end": True,
+                                "end_basis": ("the programme's stated end of season (December 31, Mountain time) "
+                                              "passed while the advisory was still listed: " + FAQ_END)})
+                    n["expired"] = n.get("expired", 0) + 1
+                else:
+                    raw["_last_seen_in_source"] = max(last, fetched)
+                    raw["end_basis"] = ("still listed in the latest readable bulletin table: in effect until a later "
+                                        f"bulletin drops or lifts it, or the programme's end of season ({year_end})")
+                    n["current"] += 1
             else:
-                raw["end_basis"] = "still listed in the latest readable bulletin table"
+                raw["end_basis"] = "still listed in the last readable bulletin table that showed it"
                 n["current"] += 1
             n["relisted"] += bool(i)
             loc = ", ".join(x for x in (inf.get("place"), inf["location"]) if x)
@@ -370,7 +429,7 @@ def main(argv=None) -> int:
         prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
         recs, meta, saved = build(text, fetched, prev)
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}"[:300])
+        write_events(SOURCE_ID, [], ok=False, error=scrub_text(f"{type(e).__name__}: {e}")[:300])
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
     if "--file" not in argv:

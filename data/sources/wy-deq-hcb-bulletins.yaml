@@ -11,7 +11,8 @@ level: "state"
 #   (2026-10-28), 4 no longer listed by a later table (ended at that bulletin, a poll bound), 1 lifted by its bulletin.
 # Times: Date Issued is the agency's day (Mountain time); a bulletin's sent time (pubDate, converted to UTC) confirms a
 #   listed row; the first readable table that no longer lists a row ends it as a poll bound; a lift bulletin's sent time
-#   is a bound for its lift. The program's December 31 limit is kept as an upper bound, never an observed end.
+#   is a bound for its lift. A row in the latest readable table stands (the agencies' current list) and is confirmed
+#   at each read until a later bulletin drops or lifts it or the program's December 31 end of season passes.
 # Privacy: the bulletins name staff with e-mail and telephone; only the parsed rows are saved (data/raw/).
 cadence: "a bulletin when an advisory is issued or lifted; the feed is read every run"
 license: null
