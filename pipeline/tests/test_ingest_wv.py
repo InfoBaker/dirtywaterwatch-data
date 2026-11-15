@@ -762,3 +762,63 @@ def test_the_wv_rules_row_states_the_rain_caution_the_build_applies():
     d = json.loads((ROOT / "data" / "outfalls-wv.json").read_text())
     rows = d["outfalls"] if isinstance(d, dict) else d
     assert any(RL.cso_open(r) and r.get("lat") is not None and not r.get("water_slug") for r in rows)
+
+
+# --- round 4 (Astra verify3 P1-2) ---
+
+TITLED = ["Avoid contact. Lt. Example Person sampled the bloom.",
+          "Avoid contact. Sgt. Example Person reported it.",
+          "Avoid contact. sgt. example person reported it.",
+          "Avoid contact. Capt. Example Person; Lt. Col. Sample Name collected it.",
+          "Avoid contact. Cpl. Example. Do not swim.",
+          "Avoid contact. Det. Example Person. Do not swim.",
+          "Avoid contact. Sgt Example Person was there.",
+          "Avoid contact. Officer Example Person confirmed it.",
+          "Avoid contact. Trooper Example Person was told.",
+          "Avoid contact. Rev. Example Person; Hon. Sample Name. Do not swim.",
+          "Avoid contact. Example Person sampled the bloom.",
+          "Avoid contact. Example Q. Person noticed the scum."]
+
+
+def test_rank_and_title_forms_are_cut_before_the_text_is_split(tmp_path, monkeypatch):
+    """Astra verify3 P1-2: 'Lt.', 'Sgt.' and their siblings before a name, in any case and with or without the period,
+    and a name followed by what a person did, never reach the raw save, the state or the events, on a fresh read
+    and when replayed from an earlier run's state and events (a failed read, then an empty map); the advice kept."""
+    for t in TITLED:
+        out = H.scrub_advisory(t)
+        for bad in ("Example", "example", "Sample Name"):
+            assert bad not in out, (t, out)
+        assert out.startswith("Avoid contact.") and "\u0000" not in out, (t, out)
+        assert H.scrub_advisory(out) == out
+    assert H.scrub_advisory("Avoid contact. Cpl. Example. Do not swim.") == "Avoid contact. Do not swim."
+    # ordinary advice and water names stay
+    for keep in ("Avoid contact with the water. Do not swim.", "Chief Logan Lake: avoid contact. Keep pets out.",
+                 "See dep.wv.gov. Do not swim.", "Avoid the cove near St. Albans. Do not swim."):
+        assert H.scrub_advisory(keep) == keep, keep
+    ids = list(range(20, 20 + len(TITLED)))
+    a = _answers(ids)
+    for f, t in zip(a["1"]["features"], TITLED):
+        f["attributes"]["Advisory"] = t
+    saved = []
+    rc, blobs = _hab_run(tmp_path, monkeypatch, a, "2026-07-01T12:00:00Z", saved)
+    assert rc == 0 and len(saved) == 1
+    # an earlier state and events written before this check, then a failed read and an empty map
+    state = {"items": {"1-7": {"first_seen": "2026-06-01T00:00:00Z", "last_seen": "2026-06-30T00:00:00Z",
+                               "kind": "point", "advisory": TITLED[0], "lat": 39.123, "lon": -80.123, "extent": None}},
+             "last_rows": {"1-7": {"kind": "point", "advisory": TITLED[1]}}}
+    d = tmp_path / "replay"
+    d.mkdir()
+    (d / "state.json").write_text(json.dumps(state))
+    old = H.records(json.loads(json.dumps(state)))
+    for r in old:
+        r["advice_text"] = H.ADVICE_PREFIX + TITLED[0]
+    (d / f"{H.SOURCE_ID}.json").write_text(json.dumps({"source_id": H.SOURCE_ID, "ok": True, "records": old,
+                                                       "count": len(old), "meta": {}}))
+    import requests
+    rc, failed = _hab_run(d, monkeypatch, requests.ConnectionError("down"), "2026-07-02T12:00:00Z", saved)
+    assert rc == 1 and json.loads(failed[-1])["count"] == 1
+    rc, empty = _hab_run(d, monkeypatch, _answers([]), "2026-07-03T12:00:00Z", saved)
+    assert rc == 0
+    for blob in saved + blobs + failed + empty:
+        for bad in ("Example", "example person", "Sample Name"):
+            assert bad not in blob, (bad, blob[:300])
