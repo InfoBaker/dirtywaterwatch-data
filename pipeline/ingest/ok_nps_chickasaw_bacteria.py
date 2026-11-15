@@ -22,7 +22,12 @@ Record rules (a sample is a sample: the accuracy-first rule of docs/generic-inge
     way, its label saying the park posts a sign at that level under its procedure and that the page does not say a
     sign was posted.
   - A result below the threshold makes no record; every result read is counted in meta (places, dates, results,
-    censored "<1" cells, the highest result and mean) with its qualifier kept, never read as zero.
+    censored "<1" cells, the highest result and mean) with its qualifier kept, never read as zero. A bound keeps its
+    meaning (exceedance): ">300" or "≥300" is at or above 235 (definite); ">200" or "<300" may be either side, a record
+    with raw.exceedance "possible" and a label saying so (the site errs on the side of caution); "<1" is below.
+  - A sample still in the table whose result is now under the threshold was corrected by the park: its earlier record
+    is dropped and the change logged in meta.corrected_below_threshold; a corrected high value replaces the old one in
+    the same record. Only a sample whose date or cell has left the table is kept as missing (below).
   - A page whose table, dates or threshold line cannot be read writes ok=False and the previous records stay. A record
     whose result leaves the table keeps its record with raw._missing_from_source_since (its sample date is unchanged).
   - Placement: each place's water as the park describes it (Travertine Creek, Rock Creek, Veterans Lake, Lake of the
@@ -156,25 +161,30 @@ def saved_form(t: dict) -> str:
                                 for r in t["rows"]]}, ensure_ascii=False, indent=1)
 
 
-def _record(kind: str, place: str, sample: str, v: dict, limit: float, fetched: str, key: str) -> dict:
+def _record(kind: str, place: str, sample: str, v: dict, limit: float, fetched: str, key: str,
+            ex: str = "definite") -> dict:
     water, gnis = PLACES.get(place, (None, None))
     q = (v["qualifier"] or "") + (f"{v['value']:g}" if v["value"] is not None else v["text"])
     if kind == "weekly":
         srid = f"{slug(place)}:{sample}"
         what = f"weekly result {q} in the sample of {sample}"
         label = (f"Values in red exceed threshold value (the park's key); threshold limit weekly {limit:g}"
-                 if v["red"] else f"at or above the park's weekly threshold limit of {limit:g}")
+                 if v["red"] else f"at or above the park's weekly threshold limit of {limit:g}" if ex == "definite"
+                 else f"a bound that may be at or above the park's weekly threshold limit of {limit:g}")
         advice = (f"National Park Service, Chickasaw National Recreation Area: E. coli result {q} at {place} in the "
                   f"sample of {sample} ({label}; the table states no unit). A sample result, not a posted notice.")
     else:
         srid = f"{slug(place)}:mean:{sample}"
         what = f"geometric mean {q} with the sample of {sample}"
         label = (f"Values in red exceed threshold value (the park's key); threshold limit 30-day geometric mean {limit:g}"
-                 if v["red"] else f"at or above the park's 30-day geometric mean threshold of {limit:g}")
+                 if v["red"] else f"at or above the park's 30-day geometric mean threshold of {limit:g}"
+                 if ex == "definite" else f"a bound that may be at or above the park's 30-day geometric mean threshold "
+                 f"of {limit:g}")
         advice = (f"National Park Service, Chickasaw National Recreation Area: geometric mean {q} at {place} with the "
                   f"sample of {sample} ({label}). The park's procedure: \"{POSTING}\" The page does not say whether a "
                   "sign was posted, or when.")
     raw = {"place": place, "water": water, "county": "Murray County", "state": "OK", "result": v, "kind": kind,
+           "exceedance": ex,
            "threshold": limit, "threshold_line": key, "time_zone": TZ, "unit_note": "the table states no unit",
            "_agency_label_only": True, "_agency_label": label, "page_url": URL,
            "sample_note": "the sample date is the date of the sample, not the date a notice was posted or removed",
@@ -193,32 +203,68 @@ def _record(kind: str, place: str, sample: str, v: dict, limit: float, fetched: 
                  parse_error=None if water else f"a sampling place the crosswalk does not know: {place}")
 
 
+UPPER = {">": "gt", ">=": "ge", "≥": "ge"}
+LOWER = {"<": "lt", "<=": "le", "≤": "le"}
+
+
+def exceedance(v: dict, limit: float) -> str | None:
+    """'definite', 'possible' or None for a result against the limit (Astra P2-7). Red in the park's table is the park's
+    own mark (definite). A plain number at or above the limit is definite. A bound keeps its meaning: '>300' or '≥300'
+    against 235 is definite, '>200' possible (the true value may lie either side); '<1' is below, '<300' possible."""
+    if v["red"]:
+        return "definite"
+    x, q = v["value"], v["qualifier"]
+    if x is None:
+        return None
+    if not q:
+        return "definite" if x >= limit else None
+    if q in UPPER:                      # the true value is above (or at, for >=) x
+        return "definite" if x >= limit else "possible"
+    if q in LOWER:                      # the true value is below (or at, for <=) x
+        return None if (x <= limit if q == "<" else x < limit) else "possible"
+    return None
+
+
 def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], dict]:
     t = parse(page)
     recs: dict[str, dict] = {}
-    n = {"results": 0, "censored": 0, "no_result": 0}
+    observed: dict[str, str] = {}       # every sample identity the table shows now, with its cell text (Astra P2-6)
+    n = {"results": 0, "censored": 0, "no_result": 0, "possible": 0}
     top = (None, None, None)
     for row in t["rows"]:
         for d, v in row["results"].items():
             if v["value"] is None:
                 n["no_result"] += 1
                 continue
+            observed[f"{slug(row['place'])}:{d}"] = v["text"]
             n["results"] += 1
             n["censored"] += bool(v["qualifier"])
             if top[0] is None or v["value"] > top[0]:
                 top = (v["value"], row["place"], d)
-            if v["red"] or (not v["qualifier"] and v["value"] >= t["weekly"]):
-                r = _record("weekly", row["place"], d, v, t["weekly"], fetched, t["key"])
+            ex = exceedance(v, t["weekly"])
+            if ex:
+                r = _record("weekly", row["place"], d, v, t["weekly"], fetched, t["key"], ex)
                 recs[r["source_record_id"]] = r
+                n["possible"] += ex == "possible"
         mv = row["mean"]
-        if mv and mv["value"] is not None and (mv["red"] or (not mv["qualifier"] and mv["value"] >= t["mean_limit"])):
-            r = _record("mean", row["place"], t["dates"][-1], mv, t["mean_limit"], fetched, t["key"])
-            recs[r["source_record_id"]] = r
-    kept = 0
+        if mv and mv["value"] is not None:
+            observed[f"{slug(row['place'])}:mean:{t['dates'][-1]}"] = mv["text"]
+            ex = exceedance(mv, t["mean_limit"])
+            if ex:
+                r = _record("mean", row["place"], t["dates"][-1], mv, t["mean_limit"], fetched, t["key"], ex)
+                recs[r["source_record_id"]] = r
+                n["possible"] += ex == "possible"
+    kept, corrected = 0, []
     for p in previous:
         sid = p.get("source_record_id")
         if sid in recs:
             recs[sid]["raw"]["_first_seen_at"] = (p.get("raw") or {}).get("_first_seen_at") or p.get("fetched_at")
+            continue
+        if sid in observed:
+            # the same sample is still in the table with a result now under the threshold: the park corrected it, so
+            # the earlier value and its caution are not kept as the sample's (the change is logged in meta)
+            corrected.append({"source_record_id": sid, "was": ((p.get("raw") or {}).get("result") or {}).get("text"),
+                              "now": observed[sid], "seen_at": fetched})
             continue
         p = dict(p)
         p["raw"] = {**(p.get("raw") or {}), "_missing_from_source_since":
@@ -234,7 +280,7 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
             "highest_mean": max(means) if means else None, "threshold_weekly": t["weekly"],
             "threshold_mean": t["mean_limit"], "over_threshold": sum(1 for r in out if r["sampled_at"] in t["dates"]
                                                                    and not r["raw"].get("_missing_from_source_since")),
-            "kept_from_previous": kept,
+            "kept_from_previous": kept, "corrected_below_threshold": corrected,
             "cadence": "weekly in the summer swimming season (the park's words); page read daily",
             "time_note": "sample dates are Central-time days; no posting or removal date is published"}
     return out, meta

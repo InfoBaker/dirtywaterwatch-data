@@ -79,8 +79,12 @@ def test_the_status_build_gives_the_sites_caution_never_the_authoritys_advisory(
 
 def test_a_result_that_leaves_the_table_keeps_its_record_and_an_unreadable_page_keeps_all(tmp_path, monkeypatch):
     first, _ = N.build(_over(), T1, [])
-    second, meta = N.build(PAGE, T2, first)
-    assert meta["kept_from_previous"] == 2
+    # the table moves on four weeks: the earlier samples have left it (not corrected), so their records stay
+    later = PAGE
+    for a, b in (("8/27/26", "9/24/26"), ("8/20/26", "9/17/26"), ("8/13/26", "9/10/26"), ("8/6/26", "9/3/26")):
+        later = later.replace(a, b)
+    second, meta = N.build(later, T2, first)
+    assert meta["kept_from_previous"] == 2 and meta["corrected_below_threshold"] == []
     assert all(r["raw"]["_missing_from_source_since"] == T2 for r in second)
     assert all(r["sampled_at"] in ("2026-08-20", "2026-08-27") for r in second)
     with pytest.raises(ValueError, match="threshold"):
@@ -266,3 +270,50 @@ def test_p1_4_nothing_personal_reaches_any_save(tmp_path, monkeypatch):
     personal = b"<html><body><p>Contact Pat Example, 775-555-0100, pat@example.org, 1234-A Example St.</p></body></html>"
     out, raws = _np_run(NP, rows, {u: personal for r in rows for u in r["urls"]}, tmp_path, "2026-11-15T12:00:00Z")
     assert raws == []
+
+
+def _cell(page, place, n, text):
+    """The n-th result cell (0-based) of a place's row set to text (invented values)."""
+    def sub(m):
+        cells = re.findall(r"<td[^>]*>[^<]*</td>", m.group(2))
+        cells[n] = re.sub(r">[^<]*<", f">{text}<", cells[n], count=1)
+        return m.group(1) + "\n".join(cells)
+    return re.sub(rf"({re.escape(place)}</strong></td>\s*)((?:<td[^>]*>[^<]*</td>\s*)+)", sub, page, count=1)
+
+
+def test_p2_6_a_corrected_sample_is_the_parks_corrected_value():
+    hi = _cell(PAGE, "Bear Falls", 2, "260.0")                       # Bear Falls, 2026-08-20
+    first, _ = N.build(hi, T1, [])
+    assert [r["source_record_id"] for r in first] == ["bear-falls:2026-08-20"]
+    # high -> low: the park corrected it; no caution stays on the sample
+    second, meta = N.build(_cell(hi, "Bear Falls", 2, "20.0"), T2, first)
+    assert second == [] and meta["kept_from_previous"] == 0
+    assert meta["corrected_below_threshold"] == [{"source_record_id": "bear-falls:2026-08-20", "was": "260.0",
+                                                  "now": "20.0", "seen_at": T2}]
+    # low -> high: a record from the read that shows it
+    third, _ = N.build(hi, "2026-11-16T20:00:00Z", second)
+    assert [r["raw"]["result"]["text"] for r in third] == ["260.0"]
+    # high -> other high: the same record with the corrected value
+    fourth, _ = N.build(_cell(hi, "Bear Falls", 2, "300.0"), "2026-11-17T20:00:00Z", third)
+    assert [(r["source_record_id"], r["raw"]["result"]["text"]) for r in fourth] == [("bear-falls:2026-08-20", "300.0")]
+    # a mean corrected below its limit
+    m_hi = _cell(PAGE, "Bear Falls", 4, "150.0")
+    m1, _ = N.build(m_hi, T1, [])
+    assert [r["source_record_id"] for r in m1] == ["bear-falls:mean:2026-08-27"]
+    m2, meta = N.build(_cell(m_hi, "Bear Falls", 4, "100.0"), T2, m1)
+    assert m2 == [] and meta["corrected_below_threshold"][0]["source_record_id"] == "bear-falls:mean:2026-08-27"
+
+
+@pytest.mark.parametrize("text,kind,expect", [
+    (">300", 2, "definite"), ("≥300", 2, "definite"), (">=235", 2, "definite"), (">200", 2, "possible"),
+    ("<300", 2, "possible"), ("<1", 2, None), ("<235", 2, None), ("≤235", 2, "possible"), ("120", 2, None),
+    (">130", 4, "definite"), (">100", 4, "possible"), ("<100", 4, None),
+])
+def test_p2_7_a_qualified_result_keeps_its_bound(text, kind, expect):
+    recs, meta = N.build(_cell(PAGE, "Bear Falls", kind, text), T1, [])
+    assert [r["raw"]["exceedance"] for r in recs] == ([expect] if expect else [])
+    if expect:
+        r = recs[0]
+        assert r["raw"]["result"]["text"] == text and r["raw"]["_agency_label_only"] is True
+        assert ("may be at or above" in r["raw"]["_agency_label"]) == (expect == "possible")
+        assert text.replace(">=", "≥") in r["advice_text"] or text in r["advice_text"] or r["raw"]["result"]["qualifier"]
