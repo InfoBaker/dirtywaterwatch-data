@@ -188,6 +188,9 @@ SMALL_WATER_KM2 = 50
 # CONFIRM_DAYS after the source last confirmed it (the later of started_at and source_updated_at).
 AGING_TYPES = {"hab_advisory", "beach_advisory", "beach_closure", "rain_advisory", "shellfish_closure"}
 CONFIRM_DAYS = 14
+# advisory feeds whose end is seen only by polling: the colour stops CONFIRM_DAYS after the last read that showed the
+# advisory, however late its end is seen (verify2 P1-1; Delaware's map and DES's beach and bloom layers)
+POLL_END_HORIZON_SOURCES = {"de-dnrec-recreational-water", "sc-des-beach-monitoring", "sc-des-hab"}
 SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}
@@ -2968,8 +2971,12 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                     out.append(note)
             return earlier_periods + out
 
-        if st == "advisory_active" and end is not None and end_precision(ev) == "poll" \
-                and (ev.get("raw") or {}).get("_ages_after_confirmation") is True:
+        if end is not None and end_precision(ev) == "poll" and (
+                (st == "advisory_active" and (ev.get("raw") or {}).get("_ages_after_confirmation") is True)
+                or (st in ("advisory_active", "advisory_lifted") and ev.get("source_id") in POLL_END_HORIZON_SOURCES)):
+            # POLL_END_HORIZON_SOURCES: Delaware's map advisories and DES's beach and bloom advisories, whose end is
+            # the first poll that no longer showed them; the same limit, so a withdrawal seen months later never
+            # colours the unconfirmed months red after the fact (verify2 P1-1); keyed on these sources only
             # an operator's advice confirmed only by its own publications whose withdrawal was seen at a poll
             # (Florence, ingest/sc_florence_sso.py): the withdrawal is not a confirmation of the time between, so the
             # colour stops CONFIRM_DAYS after the last confirmation however late the withdrawal is seen (verify

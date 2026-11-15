@@ -350,17 +350,17 @@ def revise_hab(state: dict, key: str, o: dict, now: str, seen: set) -> tuple[str
     the earlier one kept. A date after that day cannot be the same advisory's start: the earlier record ends at this
     poll (a poll bound, DES re-dated the delineation) and the new date opens a new record, never backdated."""
     v = state[key]
-    if o.get("water") and _canon(o["water"]) != _canon(v.get("water")):
-        v.setdefault("revisions", []).append({"seen_at": now, "field": "water", "was": v.get("water"),
-                                              "now": o["water"]})
-        v["water"] = o["water"]
     new, old = o.get("started_at"), v.get("started_at")
-    if not new or new == old:
-        return key, v
     first_day = datetime.fromisoformat((v.get("first_seen_at") or now).replace("Z", "+00:00")).astimezone(TZ).date()
-    if new[:10] <= first_day.isoformat():
-        v.setdefault("revisions", []).append({"seen_at": now, "field": "started_at", "was": old, "now": new})
-        v["started_at"], v["precision"] = new, o.get("precision")
+    # decided before the earlier record is touched (verify2 P2-1): a new episode leaves its water and point as they were
+    if not new or new == old or new[:10] <= first_day.isoformat():
+        if o.get("water") and _canon(o["water"]) != _canon(v.get("water")):
+            v.setdefault("revisions", []).append({"seen_at": now, "field": "water", "was": v.get("water"),
+                                                  "now": o["water"]})
+            v["water"] = o["water"]
+        if new and new != old:
+            v.setdefault("revisions", []).append({"seen_at": now, "field": "started_at", "was": old, "now": new})
+            v["started_at"], v["precision"] = new, o.get("precision")
         return key, v
     v["ended_at"] = now
     v["end_basis_redated"] = new

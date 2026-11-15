@@ -351,11 +351,14 @@ def test_one_unreadable_detail_page_never_freezes_the_feed_it_is_listed_unread_a
         assert "2026-2844" not in ids                    # wastewater, detail unread: pending, not invented
         u = out["meta"]["unread"]["2026-2844"]
         assert u["reason"] and u["last_tried"] and u["release_number"] == "17764"
-    # a run inside the backoff does not ask for the broken page: ok, records current, the page still listed unread
+    # a run inside the backoff does not ask for the broken page: still not ok while it is unread (verify2 P2-4), the
+    # readable records current, the page still listed unread
     clock["t"] = "2026-11-14T21:00:00Z"
-    assert D.main(["--details", "400"]) == 0
+    assert D.main(["--details", "400"]) == 1
     out = json.loads(out_path.read_text())
-    assert out["ok"] is True and "2026-2844" in out["meta"]["unread"] and len(out["records"]) == 5
+    assert out["ok"] is False and "2026-2844" in out["error"] and "retry" in out["error"]
+    assert "2026-2844" in out["meta"]["unread"] and len(out["records"]) == 5
+    assert out["fetched_at"] == "2026-11-14T21:00:00Z"                     # written and updated this run
     st = json.loads((tmp_path / "state.json").read_text())
     assert "2026-2844" in D.due_for_detail(st, datetime(2026, 11, 15, 22, tzinfo=timezone.utc), 400)
     broken.clear()                                       # the page comes back after the backoff
