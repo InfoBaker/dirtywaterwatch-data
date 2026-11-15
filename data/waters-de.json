@@ -1,0 +1,2028 @@
+{
+ "state": "DE",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 63,
+ "waters": [
+  {
+   "slug": "abbotts-pond-de",
+   "name": "Abbotts Pond",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Milford"
+   ],
+   "bbox": [
+    -75.477576,
+    38.8798,
+    -75.475433,
+    38.885888
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.06,
+   "launches": [
+    "abbotts-pond-boat-launch-de"
+   ],
+   "water_id": "abbotts-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "95604b153f165e43068cb26aef8f8a1b0f2d376c3cbf2008e4ca4f52f54c87d4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "andrews-lake-de",
+   "name": "Andrews Lake",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Riverview"
+   ],
+   "bbox": [
+    -75.517487,
+    39.020694,
+    -75.508592,
+    39.025194
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.078,
+   "launches": [
+    "andrews-lake-boat-launch-de"
+   ],
+   "water_id": "andrews-lake-de",
+   "gnis_id": null,
+   "geometry_hash": "0bb0d192681e10e2369699174b4dded33d0f4d1c753c0666aedba8c1cc0cf2a6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "appoquinimink-river-de",
+   "name": "Appoquinimink River",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Odessa"
+   ],
+   "bbox": [
+    -75.705191,
+    39.43652,
+    -75.579333,
+    39.467458
+   ],
+   "wikidata": "Q4781673",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "odessa-access-area-de"
+   ],
+   "water_id": "appoquinimink-river-de",
+   "gnis_id": "213568",
+   "geometry_hash": "b4b21e6e1e36482a78ce0bbb8ade06cbb058f5f9c27e3cd74cf41dc84fa89f6c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "assawoman-bay-de",
+   "name": "Assawoman Bay",
+   "kind": "bay",
+   "state": "DE",
+   "towns": [
+    "Bayville"
+   ],
+   "bbox": [
+    -75.134013,
+    38.385602,
+    -75.055049,
+    38.472761
+   ],
+   "wikidata": "Q4808611",
+   "charted": true,
+   "area_km2": 24.998,
+   "launches": [],
+   "water_id": "assawoman-bay-de",
+   "gnis_id": "582951",
+   "geometry_hash": "83817e58603e697641a714162c4abb476d5c7c606ccf9b885366a908a721705f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "assawoman-bay-boat-launch-near-bayville-de-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "assawoman-canal-de",
+   "name": "Assawoman Canal",
+   "kind": "canal",
+   "state": "DE",
+   "towns": [
+    "Ocean View",
+    "South Bethany"
+   ],
+   "bbox": [
+    -75.090399,
+    38.503911,
+    -75.063858,
+    38.558743
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.083,
+   "launches": [
+    "assawoman-canal-carry-in-access-de"
+   ],
+   "water_id": "assawoman-canal-de",
+   "gnis_id": null,
+   "geometry_hash": "8f3d946a44a23474e6c86ffc89a834caef1fe8915af531096ecb20a9d8feac2f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "becks-pond-de",
+   "name": "Becks Pond",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Heather Woods"
+   ],
+   "bbox": [
+    -75.715499,
+    39.6196,
+    -75.702647,
+    39.625229
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.108,
+   "launches": [
+    "becks-pond-boat-launch-de"
+   ],
+   "water_id": "becks-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "29f0d8ff131f18a7003e9cfe81fcdad1e0665ef7552a2a4515e2809821e2c039",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blackbird-creek-de",
+   "name": "Blackbird Creek",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Middletown",
+    "Stave Landing"
+   ],
+   "bbox": [
+    -75.675443,
+    39.358759,
+    -75.575297,
+    39.440087
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dnerr-blackbird-creek-reserve-de",
+    "staves-landing-de"
+   ],
+   "water_id": "blackbird-creek-de",
+   "gnis_id": null,
+   "geometry_hash": "0bd2327f0aafe11b22762d2b3dcd09f5e691d70e09d70387a4baa1785a8c2b3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blairs-pond-de",
+   "name": "Blairs Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Milford"
+   ],
+   "bbox": [
+    -75.490506,
+    38.895992,
+    -75.484528,
+    38.905485
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.138,
+   "launches": [
+    "blairs-pond-boat-launch-de"
+   ],
+   "water_id": "blairs-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "6427f2480cbb2e98d33bea46a612d46692c294aaa8117d6b06ba901d60bdac3d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "branch-canal-de",
+   "name": "Branch Canal",
+   "kind": "canal",
+   "state": "DE",
+   "towns": [
+    "Delaware City"
+   ],
+   "bbox": [
+    -75.599703,
+    39.556177,
+    -75.5856,
+    39.579201
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.185,
+   "launches": [
+    "fort-dupont-de"
+   ],
+   "water_id": "branch-canal-de",
+   "gnis_id": null,
+   "geometry_hash": "c9bbfd7e6c1d31140ad695ecefb1e3f232baec49a911003087401162cc7b23d4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brandywine-creek-de",
+   "name": "Brandywine Creek",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Talleyville"
+   ],
+   "bbox": [
+    -75.601578,
+    39.731785,
+    -75.526238,
+    39.87194
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "brandywine-creek-state-park-de"
+   ],
+   "water_id": "brandywine-creek-de",
+   "gnis_id": null,
+   "geometry_hash": "f9ffca39d15e97dec915906eef58aa386fae6b0120cbca6b4ba7240039ee8e6c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "broad-creek-de",
+   "name": "Broad Creek",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Hoagland Subdivision",
+    "Laurel"
+   ],
+   "bbox": [
+    -75.675433,
+    38.556878,
+    -75.545201,
+    38.572562
+   ],
+   "wikidata": "Q32846375",
+   "charted": true,
+   "area_km2": 1.148,
+   "launches": [
+    "laurel-kayak-canoe-launch-de",
+    "laurel-river-park-de",
+    "phillips-landing-de"
+   ],
+   "water_id": "broad-creek-de",
+   "gnis_id": "213711",
+   "geometry_hash": "89e8f6afa1d556d7a6dbd723c7333ce57a55eac239698496279111d865c07d7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "broadkill-river-de",
+   "name": "Broadkill River",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Green Hill",
+    "Milton"
+   ],
+   "bbox": [
+    -75.313027,
+    38.776456,
+    -75.160807,
+    38.81031
+   ],
+   "wikidata": "Q4096645",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lewes-boat-ramp-de",
+    "milton-memorial-park-de"
+   ],
+   "water_id": "broadkill-river-de",
+   "gnis_id": "213715",
+   "geometry_hash": "3483de628ea6503e6f36ca6102c6362796bdaaa8c993c5fd6a24d2ff4c7c96ba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ceder-creek-de",
+   "name": "Ceder Creek",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Cedar Beach"
+   ],
+   "bbox": [
+    -75.377405,
+    38.869035,
+    -75.313052,
+    38.945858
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lacy-nichols-boat-launch-de"
+   ],
+   "water_id": "ceder-creek-de",
+   "gnis_id": null,
+   "geometry_hash": "c04fcb4e5a6fa23f58bb01548084cfc0d304c99a60a972806b99d4447967483a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chipmans-pond-de",
+   "name": "Chipmans Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Laurel"
+   ],
+   "bbox": [
+    -75.53978,
+    38.561456,
+    -75.531419,
+    38.571217
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.202,
+   "launches": [
+    "chipman-pond-boat-launch-de"
+   ],
+   "water_id": "chipmans-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "b8f55be5370ba8244773f90daaf5dc67fbc36efbe6dda54e47acc43fcd9d76fa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "christina-river-de",
+   "name": "Christina River",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "New Castle",
+    "Newport"
+   ],
+   "bbox": [
+    -75.812994,
+    39.631352,
+    -75.501219,
+    39.736587
+   ],
+   "wikidata": "Q11103025",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "christina-river-access-area-de",
+    "churchmans-road-de"
+   ],
+   "water_id": "christina-river-de",
+   "gnis_id": "213799",
+   "geometry_hash": "8e50883d2fd7728284d0bf30d071b3694fe8f9d2a1518820bbb9bd50245ffe70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "concord-pond-de",
+   "name": "Concord Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Concord"
+   ],
+   "bbox": [
+    -75.554943,
+    38.64096,
+    -75.537139,
+    38.647336
+   ],
+   "wikidata": "Q34881275",
+   "charted": false,
+   "area_km2": 0.284,
+   "launches": [
+    "concord-pond-boat-launch-de",
+    "concord-pond-carry-in-access-de"
+   ],
+   "water_id": "concord-pond-de",
+   "gnis_id": "213824",
+   "geometry_hash": "758be4029001df423b6378584806b7797e42cbc74278b59c4d8c00d7eea6992f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coursey-pond-de",
+   "name": "Coursey Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Milford"
+   ],
+   "bbox": [
+    -75.524743,
+    38.985686,
+    -75.510657,
+    38.990612
+   ],
+   "wikidata": "Q34881689",
+   "charted": false,
+   "area_km2": 0.235,
+   "launches": [
+    "coursey-pond-boat-launch-de"
+   ],
+   "water_id": "coursey-pond-de",
+   "gnis_id": "213834",
+   "geometry_hash": "d945378f10139199717cd4657fdb4cd80cd201a1ee93cd70ac4a24da28947217",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "craigs-pond-de",
+   "name": "Craigs Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Craigs Mill"
+   ],
+   "bbox": [
+    -75.652975,
+    38.627378,
+    -75.646153,
+    38.631469
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.058,
+   "launches": [
+    "craigs-pond-boat-launch-de"
+   ],
+   "water_id": "craigs-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "da7bcb89a2739e496bdb6d554dc6de730427dae71a10978fdbd0d374bdb961d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "delaware-bay-de",
+   "name": "Delaware Bay",
+   "kind": "bay",
+   "state": "DE",
+   "towns": [
+    "Bowers"
+   ],
+   "bbox": [
+    -75.412779,
+    38.781549,
+    -74.885703,
+    39.292295
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1400.256,
+   "launches": [
+    "ted-harvey-conservation-area-bowers-de"
+   ],
+   "water_id": "delaware-bay-de",
+   "gnis_id": null,
+   "geometry_hash": "9c8b1465d8cc5ed0c24c348bc8a7065fb26df37181ee62ddc538f72e511b2d9e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "derby-pond-de",
+   "name": "Derby Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Woodside"
+   ],
+   "bbox": [
+    -75.563671,
+    39.082934,
+    -75.558859,
+    39.088203
+   ],
+   "wikidata": "Q34883154",
+   "charted": false,
+   "area_km2": 0.082,
+   "launches": [
+    "derby-pond-boat-launch-de"
+   ],
+   "water_id": "derby-pond-de",
+   "gnis_id": "213879",
+   "geometry_hash": "c329db8198bc670b355ca65421104f881536958a4ffbdf81aa4866466b2d4159",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fleetwood-pond-de",
+   "name": "Fleetwood Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Foord Landing"
+   ],
+   "bbox": [
+    -75.265769,
+    38.815378,
+    -75.259214,
+    38.82072
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.073,
+   "launches": [
+    "prime-hook-national-wildlife-refuge-de-2"
+   ],
+   "water_id": "fleetwood-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "4e35a03348895105747dfa81bb5bfe435785c90efc4853c8eb762ec163060388",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "garrison-s-lake-de",
+   "name": "Garrison's Lake",
+   "kind": "reservoir",
+   "state": "DE",
+   "towns": [
+    "Cheswold"
+   ],
+   "bbox": [
+    -75.604673,
+    39.241712,
+    -75.587652,
+    39.245866
+   ],
+   "wikidata": "Q34886594",
+   "charted": false,
+   "area_km2": 0.334,
+   "launches": [
+    "garrisons-lake-boat-ramp-de"
+   ],
+   "water_id": "garrison-s-lake-de",
+   "gnis_id": "216733",
+   "geometry_hash": "0bd4eb9ddd53a29e2821bfe61d09b7a55d0527198b9e0446a7effba89acd07ba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "griffith-lake-de",
+   "name": "Griffith Lake",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Haven Lake Estates"
+   ],
+   "bbox": [
+    -75.479549,
+    38.905661,
+    -75.464656,
+    38.911841
+   ],
+   "wikidata": "Q34888024",
+   "charted": false,
+   "area_km2": 0.173,
+   "launches": [
+    "griffith-lake-boat-launch-de"
+   ],
+   "water_id": "griffith-lake-de",
+   "gnis_id": "216876",
+   "geometry_hash": "7e07e17a1ecca91645873f16281a7ed2fcd34c739ad6baca5f746168c4b8c090",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "haven-lake-de",
+   "name": "Haven Lake",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Milford"
+   ],
+   "bbox": [
+    -75.46061,
+    38.907941,
+    -75.444051,
+    38.913695
+   ],
+   "wikidata": "Q5683692",
+   "charted": false,
+   "area_km2": 0.324,
+   "launches": [
+    "haven-lake-boat-launch-de"
+   ],
+   "water_id": "haven-lake-de",
+   "gnis_id": "214063",
+   "geometry_hash": "64cdfbbad34c078270b0a6fafbc8c4220665455a6f1bd440aa5003fcf9219fdd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hearns-pond-de",
+   "name": "Hearns Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Hearns Mill"
+   ],
+   "bbox": [
+    -75.61137,
+    38.678562,
+    -75.593995,
+    38.691018
+   ],
+   "wikidata": "Q34889505",
+   "charted": false,
+   "area_km2": 0.217,
+   "launches": [
+    "hearns-pond-boat-launch-de"
+   ],
+   "water_id": "hearns-pond-de",
+   "gnis_id": "214073",
+   "geometry_hash": "81e528b05e11fe2c286c5fde11470fd4a5eb9636b4720b327832eb6c4eb85d10",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "horseys-pond-de",
+   "name": "Horseys Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Laurel"
+   ],
+   "bbox": [
+    -75.582529,
+    38.532598,
+    -75.575187,
+    38.54655
+   ],
+   "wikidata": "Q34890665",
+   "charted": false,
+   "area_km2": 0.222,
+   "launches": [
+    "horsey-pond-boat-launch-de"
+   ],
+   "water_id": "horseys-pond-de",
+   "gnis_id": "216817",
+   "geometry_hash": "93c47dd39fb735d69e9772fd55a63b80b9b201ed4a6b4246ed7f8059c25b324f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ice-harbor-de",
+   "name": "Ice Harbor",
+   "kind": "bay",
+   "state": "DE",
+   "towns": [
+    "Port Penn"
+   ],
+   "bbox": null,
+   "wikidata": "Q49380191",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "augustine-beach-de",
+    "augustine-wildlife-area-de"
+   ],
+   "water_id": "ice-harbor-de",
+   "gnis_id": "217180",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "indian-river-bay-de",
+   "name": "Indian River Bay",
+   "kind": "bay",
+   "state": "DE",
+   "towns": [
+    "Bayside Hamlet",
+    "Bethany Beach",
+    "Bookhammer Landing",
+    "Buck Hill Landing",
+    "Calhoun Landing",
+    "Dewey Beach",
+    "Lingo Landing",
+    "Long Neck",
+    "Millsboro",
+    "Millville",
+    "Pine Water Landing",
+    "Pot-Nets Seaside"
+   ],
+   "bbox": [
+    -75.285045,
+    38.556479,
+    -75.062483,
+    38.715426
+   ],
+   "wikidata": "Q6021455",
+   "charted": true,
+   "area_km2": 74.945,
+   "launches": [
+    "burton-island-de",
+    "creeks-end-de",
+    "delaware-seashore-state-park-de",
+    "delaware-seashore-state-park-dewey-beach-de",
+    "holts-landing-state-park-calhoun-landing-de",
+    "holts-landing-state-park-de",
+    "indian-river-marina-de",
+    "james-farm-ecological-preserve-de",
+    "love-creek-fishing-access-de",
+    "masseys-landing-boat-launch-de",
+    "piney-point-de",
+    "rosedale-beach-de",
+    "savages-ditch-de"
+   ],
+   "water_id": "indian-river-bay-de",
+   "gnis_id": "214142",
+   "geometry_hash": "f6f3392eb97c5678db0bb6c0cf7eaa62334d4db7da22d209f2b5cdfd525aaa70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "angola-by-the-bay-de",
+    "bay-city-boat-ramp-de",
+    "indian-river-bay-boat-launch-near-bethany-beach-de",
+    "indian-river-bay-boat-launch-near-long-neck-de",
+    "indian-river-bay-boat-launch-near-long-neck-de-2",
+    "indian-river-bay-boat-launch-near-millsboro-de",
+    "indian-river-bay-boat-launch-near-pine-water-landing-de-4",
+    "leisure-point-boat-ramp-de",
+    "malone-s-bayside-marina-de",
+    "mariner-s-cove-boat-ramp-de",
+    "pontoon-point-boat-ramp-de",
+    "pot-nets-bayside-boat-ramp-de",
+    "pot-nets-coveside-boat-ramp-de",
+    "pot-nets-creekside-boat-ramp-de",
+    "pot-nets-dockside-boat-ramp-de",
+    "pot-nets-seaside-boat-ramp-de",
+    "rehoboth-shores-boat-ramp-de",
+    "riverdale-boat-ramp-de",
+    "unpowered-boatslip-de",
+    "winding-creek-village-boat-ramp-de"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "indian-river-de",
+   "name": "Indian River",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Millsboro"
+   ],
+   "bbox": [
+    -75.297541,
+    38.583863,
+    -75.164785,
+    38.599916
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "cupola-park-de",
+    "cupola-park-millsboro-de"
+   ],
+   "water_id": "indian-river-de",
+   "gnis_id": null,
+   "geometry_hash": "f6a2d87a03d8326aea1ba6b1b3803f93d57227dfd4585b76339a859b64940cc0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ingrams-pond-de",
+   "name": "Ingrams Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Millsboro"
+   ],
+   "bbox": [
+    -75.337344,
+    38.583182,
+    -75.326487,
+    38.589737
+   ],
+   "wikidata": "Q34891674",
+   "charted": false,
+   "area_km2": 0.217,
+   "launches": [
+    "ingrams-pond-boat-launch-de"
+   ],
+   "water_id": "ingrams-pond-de",
+   "gnis_id": "217371",
+   "geometry_hash": "321b6fcbe02644484955f5c8d58134007268b41b5ca740036aae479492931cbc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "killens-pond-de",
+   "name": "Killens Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "D and K Mobile Home Park"
+   ],
+   "bbox": [
+    -75.547364,
+    38.979611,
+    -75.529282,
+    38.983773
+   ],
+   "wikidata": "Q34895087",
+   "charted": false,
+   "area_km2": 0.316,
+   "launches": [
+    "killens-pond-state-park-de"
+   ],
+   "water_id": "killens-pond-de",
+   "gnis_id": "217871",
+   "geometry_hash": "d40c92113123cd415feebe26934886b86eb6392fddbdc664acb9cd81a84cc73d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-como-de",
+   "name": "Lake Como",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Smyrna"
+   ],
+   "bbox": [
+    -75.611379,
+    39.286204,
+    -75.600016,
+    39.296776
+   ],
+   "wikidata": "Q34898255",
+   "charted": false,
+   "area_km2": 0.184,
+   "launches": [
+    "lake-como-recreation-area-de"
+   ],
+   "water_id": "lake-como-de",
+   "gnis_id": "213820",
+   "geometry_hash": "7cf4fcd238507ad862995456a9e20e5d8943f96d5e1dcd1f5275618c05527c50",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "leipsic-river-de",
+   "name": "Leipsic River",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Leipsic"
+   ],
+   "bbox": [
+    -75.614519,
+    39.233733,
+    -75.4063,
+    39.251985
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "leipsic-river-boat-launch-de"
+   ],
+   "water_id": "leipsic-river-de",
+   "gnis_id": null,
+   "geometry_hash": "76e3994b3c8dff5839e5837ef5902bb2a69d60445238ce1e99a6286221df4c2f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lewes-and-rehoboth-canal-de",
+   "name": "Lewes and Rehoboth Canal",
+   "kind": "canal",
+   "state": "DE",
+   "towns": [
+    "Lewes",
+    "Rehoboth Beach"
+   ],
+   "bbox": [
+    -75.160573,
+    38.689363,
+    -75.082031,
+    38.788827
+   ],
+   "wikidata": "Q14685575",
+   "charted": true,
+   "area_km2": 0.841,
+   "launches": [
+    "canal-front-park-de",
+    "henlopen-acres-marina-de"
+   ],
+   "water_id": "lewes-and-rehoboth-canal-de",
+   "gnis_id": null,
+   "geometry_hash": "a04d0caf0a2b68b9b73591c4543ef80dd52d735ca68874da66c257bbb041dfd7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-assawoman-bay-de",
+   "name": "Little Assawoman Bay",
+   "kind": "bay",
+   "state": "DE",
+   "towns": [
+    "Bayville",
+    "Bethany Beach",
+    "Fenwick Island"
+   ],
+   "bbox": [
+    -75.129096,
+    38.453142,
+    -75.052217,
+    38.520846
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 9.625,
+   "launches": [
+    "assawoman-wildlife-area-de",
+    "cannon-street-park-de",
+    "fenwick-island-state-park-de",
+    "mulberry-landing-de",
+    "sassafras-landing-bethany-beach-de",
+    "sassafras-landing-de",
+    "strawberry-landing-de"
+   ],
+   "water_id": "little-assawoman-bay-de",
+   "gnis_id": null,
+   "geometry_hash": "5be5e148130cf8cbf9bc24685eef6aa297ff3f78e5e44d1bc1309e5135bccfe9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-river-de",
+   "name": "Little River",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Little Creek",
+    "Little Creek Landing"
+   ],
+   "bbox": [
+    -75.463283,
+    39.156432,
+    -75.409122,
+    39.162137
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "little-creek-fishing-boating-access-de",
+    "little-creek-wildlife-area-de-2"
+   ],
+   "water_id": "little-river-de",
+   "gnis_id": null,
+   "geometry_hash": "e43a1d7a425cc65d390e08a3e44a6592303968974fe81953887d0ece8bd96cc3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lums-pond-de",
+   "name": "Lums Pond",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Parkside"
+   ],
+   "bbox": [
+    -75.732758,
+    39.552539,
+    -75.704671,
+    39.567025
+   ],
+   "wikidata": "Q49305072",
+   "charted": false,
+   "area_km2": 0.787,
+   "launches": [
+    "lums-pond-state-park-de",
+    "lums-pond-state-park-parkside-de"
+   ],
+   "water_id": "lums-pond-de",
+   "gnis_id": "214259",
+   "geometry_hash": "c363c6a1e542d6a85ee4d6c86d0771651412c12717dbd663c5159e8017f70522",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mcginnis-pond-de",
+   "name": "McGinnis Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Lexington Mill"
+   ],
+   "bbox": [
+    -75.52167,
+    39.032907,
+    -75.510344,
+    39.039714
+   ],
+   "wikidata": "Q34906660",
+   "charted": false,
+   "area_km2": 0.14,
+   "launches": [
+    "mcginnis-pond-boat-launch-de"
+   ],
+   "water_id": "mcginnis-pond-de",
+   "gnis_id": "214292",
+   "geometry_hash": "cbf5ede1735426ab4678c1485fb91319fe5e3b5b9f04d0d38eea6585cbfbf4ff",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "millsboro-pond-de",
+   "name": "Millsboro Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Millsboro"
+   ],
+   "bbox": [
+    -75.304562,
+    38.593344,
+    -75.29099,
+    38.606333
+   ],
+   "wikidata": "Q34907716",
+   "charted": true,
+   "area_km2": 0.549,
+   "launches": [
+    "millsboro-pond-boat-launch-de"
+   ],
+   "water_id": "millsboro-pond-de",
+   "gnis_id": "214322",
+   "geometry_hash": "40c7912cd0610c85fea30b0c170ac797e974cd6cf7df960e1cdd10587587cc37",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mispillion-river-de",
+   "name": "Mispillion River",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Milford"
+   ],
+   "bbox": [
+    -75.427075,
+    38.913198,
+    -75.309152,
+    38.962023
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.348,
+   "launches": [
+    "n-e-front-st-public-access-facility-de"
+   ],
+   "water_id": "mispillion-river-de",
+   "gnis_id": null,
+   "geometry_hash": "8c04b14fe558ac14da0130a9c6e4ba91f080caea7784f7d959e771125e762c46",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "moore-s-lake-de",
+   "name": "Moore's Lake",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Kent Acres"
+   ],
+   "bbox": [
+    -75.529022,
+    39.125066,
+    -75.517746,
+    39.128678
+   ],
+   "wikidata": "Q14685679",
+   "charted": false,
+   "area_km2": 0.107,
+   "launches": [
+    "moores-lake-boat-launch-de"
+   ],
+   "water_id": "moore-s-lake-de",
+   "gnis_id": "214334",
+   "geometry_hash": "9b53e0b906f0d412d7b7ebc6c361d0b85e69de4ff8e8b2a848e83caaf7ea6594",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mud-millpond-de",
+   "name": "Mud Millpond",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Choptank Mills"
+   ],
+   "bbox": [
+    -75.745482,
+    39.067727,
+    -75.734656,
+    39.074608
+   ],
+   "wikidata": "Q34909097",
+   "charted": false,
+   "area_km2": 0.157,
+   "launches": [
+    "mud-mill-pond-de"
+   ],
+   "water_id": "mud-millpond-de",
+   "gnis_id": "214356",
+   "geometry_hash": "69ed774ca96fa358fc6b4b47be34c5380722ea9cc5116cc34d483b5484399aee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "murderkill-river-de",
+   "name": "Murderkill River",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Bowers"
+   ],
+   "bbox": [
+    -75.576663,
+    38.975864,
+    -75.392561,
+    39.059786
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bowers-beach-de"
+   ],
+   "water_id": "murderkill-river-de",
+   "gnis_id": null,
+   "geometry_hash": "2c1600ad5aa1a1f74d35f8111f23c50981113e88911e598b999691b40a89b81a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "nanticoke-river-de",
+   "name": "Nanticoke River",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Blades",
+    "Seaford",
+    "Woodland"
+   ],
+   "bbox": [
+    -75.757205,
+    38.522564,
+    -75.564327,
+    38.661912
+   ],
+   "wikidata": "Q2720679",
+   "charted": true,
+   "area_km2": 2.87,
+   "launches": [
+    "city-of-seaford-de",
+    "nanticoke-river-marina-park-de",
+    "woodland-wharf-de"
+   ],
+   "water_id": "nanticoke-river-de",
+   "gnis_id": "586142",
+   "geometry_hash": "ec6fdb7272684f7cfc93467752fa1fc3ab9d2850f72839936c4abd2262818de4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "newton-pond-de",
+   "name": "Newton Pond",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Milford"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "newton-pond-carry-in-access-de"
+   ],
+   "water_id": "newton-pond-de",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pierson-cove-de",
+   "name": "Pierson Cove",
+   "kind": "bay",
+   "state": "DE",
+   "towns": [
+    "Woodland Beach"
+   ],
+   "bbox": [
+    -75.480719,
+    39.334551,
+    -75.474481,
+    39.338849
+   ],
+   "wikidata": "Q49387935",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "woodland-beach-de",
+    "woodland-beach-wildlife-area-de"
+   ],
+   "water_id": "pierson-cove-de",
+   "gnis_id": "216399",
+   "geometry_hash": "8971fe251351d6acf7e1ecb56688f8f9900a1cc8f5352f413eb5c96e6a01dfe2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "portsville-pond-de",
+   "name": "Portsville Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Portsville"
+   ],
+   "bbox": [
+    -75.632346,
+    38.554477,
+    -75.628398,
+    38.561594
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.074,
+   "launches": [
+    "portsville-pond-boat-launch-de"
+   ],
+   "water_id": "portsville-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "b945c3684c4e9c4e96ec2140d54cbdc57c2776440f5fd327094cfea02727a835",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "primehook-creek-de",
+   "name": "Primehook Creek",
+   "kind": "stream",
+   "state": "DE",
+   "towns": [
+    "Foord Landing"
+   ],
+   "bbox": [
+    -75.306804,
+    38.823821,
+    -75.225985,
+    38.844229
+   ],
+   "wikidata": "Q35290508",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "prime-hook-national-wildlife-refuge-foord-landing-de"
+   ],
+   "water_id": "primehook-creek-de",
+   "gnis_id": "214496",
+   "geometry_hash": "566ff63d0d5585197e6985e654cc7b9cf80c61bbfe3bca2caa5f0f00105e2ff1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "raccoon-pond-de",
+   "name": "Raccoon Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Laurel"
+   ],
+   "bbox": [
+    -75.461063,
+    38.508421,
+    -75.45729,
+    38.515683
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.052,
+   "launches": [
+    "raccoon-pond-carry-in-access-de"
+   ],
+   "water_id": "raccoon-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "c85c89c4d702f4d87b1ed584d8b83c9b79530bb60fe2af716c49f48db70951c0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "records-pond-de",
+   "name": "Records Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Laurel"
+   ],
+   "bbox": [
+    -75.568003,
+    38.556426,
+    -75.547886,
+    38.560872
+   ],
+   "wikidata": "Q34918536",
+   "charted": true,
+   "area_km2": 0.315,
+   "launches": [
+    "records-pond-boat-ramp-de"
+   ],
+   "water_id": "records-pond-de",
+   "gnis_id": "214521",
+   "geometry_hash": "27f71702a93cb751ef40f2a5f83684571e9d29e609cec865c9c9de5486927675",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "silver-lake-de",
+   "name": "Silver Lake",
+   "kind": "reservoir",
+   "state": "DE",
+   "towns": [
+    "Dover"
+   ],
+   "bbox": [
+    -75.543905,
+    39.168276,
+    -75.520428,
+    39.182924
+   ],
+   "wikidata": "Q34923655",
+   "charted": false,
+   "area_km2": 0.638,
+   "launches": [
+    "silver-lake-dover-de"
+   ],
+   "water_id": "silver-lake-de",
+   "gnis_id": null,
+   "geometry_hash": "7e048fe1321c15fd3fe145b510b63e4c48aa1a425c85b35069053fbc86f399c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "slaughter-neck-ditch-de",
+   "name": "Slaughter Neck Ditch",
+   "kind": "canal",
+   "state": "DE",
+   "towns": [
+    "Milford"
+   ],
+   "bbox": [
+    -75.327094,
+    38.872983,
+    -75.274448,
+    38.921278
+   ],
+   "wikidata": "Q35261524",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "prime-hook-national-wildlife-refuge-milford-de"
+   ],
+   "water_id": "slaughter-neck-ditch-de",
+   "gnis_id": "214664",
+   "geometry_hash": "cc41b53d8d1a3170a2e82b61abb6255b8e22795bd4574aef934134e6069c604f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "st-jones-river-de",
+   "name": "St. Jones River",
+   "kind": "river",
+   "state": "DE",
+   "towns": [
+    "Lebanon",
+    "Magnolia"
+   ],
+   "bbox": [
+    -75.521556,
+    39.066181,
+    -75.399987,
+    39.16833
+   ],
+   "wikidata": "Q7589042",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lebanon-landing-de",
+    "scotton-landing-de"
+   ],
+   "water_id": "st-jones-river-de",
+   "gnis_id": "217883",
+   "geometry_hash": "b4e5bc72bf8678a7ad87a21edf9f331055fd0ec83798b5f20fb1a9cd8b8ea21c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tibury-creek-de",
+   "name": "Tibury Creek",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Highland Acres"
+   ],
+   "bbox": [
+    -75.512336,
+    39.111423,
+    -75.510144,
+    39.113013
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.006,
+   "launches": [
+    "tidbury-creek-county-park-de",
+    "tidbury-creek-county-park-highland-acres-de"
+   ],
+   "water_id": "tibury-creek-de",
+   "gnis_id": null,
+   "geometry_hash": "7f03c58b5dc09bf4a1d868f39b4cc9d66bea80e8e2694c6c30e840baa8e56ab5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "trap-pond-de",
+   "name": "Trap Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Pepper"
+   ],
+   "bbox": [
+    -75.482469,
+    38.519047,
+    -75.465755,
+    38.529909
+   ],
+   "wikidata": "Q34931013",
+   "charted": false,
+   "area_km2": 0.348,
+   "launches": [
+    "trap-pond-state-park-de"
+   ],
+   "water_id": "trap-pond-de",
+   "gnis_id": "214758",
+   "geometry_hash": "8381ea52d866c9f3971c8f8dfe9f114ad3e8fd8e3de9995d2dd81b6d38eede92",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "trussum-pond-de",
+   "name": "Trussum Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Lowe"
+   ],
+   "bbox": [
+    -75.513495,
+    38.518045,
+    -75.509245,
+    38.525792
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.138,
+   "launches": [
+    "trussum-pond-carry-in-access-de"
+   ],
+   "water_id": "trussum-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "2e76776379e1699fab47456eeecb562f2de7e0dee9bd6ed7703e9f976b1f998d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tubmill-pond-de",
+   "name": "Tubmill Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Milford"
+   ],
+   "bbox": [
+    -75.431427,
+    38.941598,
+    -75.427591,
+    38.943132
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.037,
+   "launches": [
+    "tubmill-pond-boat-launch-de"
+   ],
+   "water_id": "tubmill-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "3bc267d14537a94a1b7cfc411ef07507a607e584665f332a8d9b45a64216998b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "turkle-pond-de",
+   "name": "Turkle Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Foord Landing"
+   ],
+   "bbox": [
+    -75.260861,
+    38.82186,
+    -75.257839,
+    38.824667
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.043,
+   "launches": [
+    "prime-hook-national-wildlife-refuge-de"
+   ],
+   "water_id": "turkle-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "f7e7cfdeb0437c970996c903ff7404a76cef3ba37ccfda41866007e53ebb659e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tussock-pond-de",
+   "name": "Tussock Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Laurel"
+   ],
+   "bbox": [
+    -75.637885,
+    38.538097,
+    -75.634341,
+    38.541989
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.027,
+   "launches": [
+    "tussock-pond-boat-launch-de"
+   ],
+   "water_id": "tussock-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "c40936b7f1f82a79bd31c9888a74c25229df9921ece93f4cb3e21b37c2312bb1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wagamons-pond-de",
+   "name": "Wagamons Pond",
+   "kind": "lake",
+   "state": "DE",
+   "towns": [
+    "Milton"
+   ],
+   "bbox": [
+    -75.31976,
+    38.771475,
+    -75.312629,
+    38.778081
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.152,
+   "launches": [
+    "wagamons-pond-boat-launch-de"
+   ],
+   "water_id": "wagamons-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "a2ec3aff15c58e5ae64c5736f73d2210a3bff2016b866db9c9ed4dde24ed5908",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "waples-pond-de",
+   "name": "Waples Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Waples"
+   ],
+   "bbox": [
+    -75.317893,
+    38.820609,
+    -75.308098,
+    38.825015
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.172,
+   "launches": [
+    "waples-pond-carry-in-access-de"
+   ],
+   "water_id": "waples-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "f2f28f0cfcad48c3cd205eeccacce948dd079502dc45055aad145a0c14648751",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "waples-pond-waples-de",
+   "name": "Waples Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Waples"
+   ],
+   "bbox": [
+    -75.309037,
+    38.823023,
+    -75.306832,
+    38.825511
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.034,
+   "launches": [
+    "waples-pond-carry-in-access-de-2"
+   ],
+   "water_id": "waples-pond-waples-de",
+   "gnis_id": null,
+   "geometry_hash": "03f66cbc4a9bbb33450ed56da41b40fee47f8c5e27689670ae7125f659de7638",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "williams-pond-de",
+   "name": "Williams Pond",
+   "kind": "pond",
+   "state": "DE",
+   "towns": [
+    "Seaford"
+   ],
+   "bbox": [
+    -75.606908,
+    38.642239,
+    -75.582734,
+    38.658617
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.338,
+   "launches": [
+    "seaford-canoe-launch-de"
+   ],
+   "water_id": "williams-pond-de",
+   "gnis_id": null,
+   "geometry_hash": "3e6deb5373b31f04d386107cbe3413fcaabdba8eccac7a518a6cf90d5b7734db",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
