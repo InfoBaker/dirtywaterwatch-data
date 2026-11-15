@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 EVENTS = ROOT / "data" / "build" / "events"
 NATIONAL = ROOT / "data" / "receiving-waters-national.json"
 OUT = ROOT / "research" / "mo" / "receiving-waters-missing.json"
-FEEDS = ("mo-kc-water-overflow-notices", "mo-msd-stl-project-clear", "mo-dnr-concern-reports")
+FEEDS = ("mo-kc-water-overflow-notices", "mo-msd-stl-project-clear", "mo-dnr-concern-reports", "mo-dnr-hab-map")
 STATE_OUTFALLS = ROOT / "data" / "outfalls-mo.json"
 NOT_A_WATER = re.compile(r"\bpresumed use\b|\b100k extent\b|\bstorm\s*(?:water|drain|sewer)\b|\boutfall\b|\bditch\b|\bgutter\b|\bstreet\b|\bground\b", re.I)
 
@@ -99,9 +99,10 @@ def main() -> int:
         row["towns"] = row["towns"][:4]
     out = sorted(rows.values(), key=lambda r: (-r["reports"], r["name"], r["county"] or ""))
     doc = {"about": ("Water names in Missouri's records that data/receiving-waters-national.json does not hold for MO: "
-                     "the water KC Water's and MSD's overflow posts and DNR's concern reports name, and the receiving "
-                     "stream of each combined sewer outfall on DNR's outfall layer; one row per name and county (the "
-                     "county a concern gives, else the counties of the operator's area), with the number of reports, "
+                     "every water KC Water's and MSD's overflow posts and DNR's concern reports name, the waters DNR's "
+                     "bloom map shows a bloom on, and the receiving stream of each combined sewer outfall on DNR's "
+                     "outfall layer; one row per name and county (the county of the record's point, else the county a "
+                     "concern gives, else the counties of the operator's area), with the number of reports, "
                      "the outfall count and points of the outfalls, and the operator, so the names pass builds each "
                      "name where the reports are. Records naming no water are left out (by_reason). Written by "
                      "scripts/mo_report_water_names.py."),

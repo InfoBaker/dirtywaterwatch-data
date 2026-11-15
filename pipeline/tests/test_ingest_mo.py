@@ -378,18 +378,39 @@ def test_state_text_is_in_the_page_shape():
     assert "945 entries (a concern investigated over more than one month appears in each month's report), 140 of them" in t and "131 distinct concerns" in t and "146 combined sewer outfalls on five permits" in t
 
 
-def test_missing_waters_list_leaves_out_the_national_lists_names():
-    d = json.loads((ROOT / "research" / "mo" / "receiving-waters-missing.json").read_text())
+def check_missing_waters(d: dict, nat: dict) -> None:
+    """The invariants of research/mo/receiving-waters-missing.json, true as the state build writes it and after a water
+    batch moves some or all of its names into `resolved` (re-review P2-6)."""
     names = _script("mo_report_water_names")
-    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())
     held = {names.key(n) for w in nat["states"]["MO"]["waters"]
             for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or []), *(w.get("gnis_names") or [])] if n}
-    assert d["state"] == "MO" and d["waters"] == len(d["rows"]) > 0
-    for r in d["rows"]:
+    rows, resolved = d["rows"], d.get("resolved") or []
+    rows = rows if isinstance(rows, list) else []
+    assert d["state"] == "MO" and d["waters"] == len(rows) and len(rows) + len(resolved) > 0
+    for r in rows:
         assert names.key(r["name"]) not in held or r.get("resolved")
         assert not re.search(r"(?i)presumed use|storm|outfall", r["name"])
-    keys = [(r["name"], r["county"]) for r in d["rows"]]
+    keys = [(r["name"], r["county"]) for r in rows]
     assert len(keys) == len(set(keys))
+    for r in resolved:
+        assert r.get("name") and r.get("slugs"), r
+
+
+def _batch(d: dict, share: float) -> dict:
+    rows = list(d["rows"])
+    n = round(len(rows) * share)
+    done = [{"name": r["name"], "reports": r["reports"], "slugs": [r["name"].lower().replace(" ", "-") + "-mo"],
+             "how": "built from NHD"} for r in rows[:n]]
+    return {**d, "rows": rows[n:], "waters": len(rows) - n, "resolved": done}
+
+
+def test_missing_waters_list_leaves_out_the_national_lists_names():
+    d = json.loads((ROOT / "research" / "mo" / "receiving-waters-missing.json").read_text())
+    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())
+    check_missing_waters(d, nat)
+    if not d.get("resolved"):                                  # before the batch: the same holds part- and fully-done
+        check_missing_waters(_batch(d, 0.5), nat)
+        check_missing_waters(_batch(d, 1.0), nat)
 
 
 # ---------------------------------------------------------------- re-review fixes (2026-11-15)

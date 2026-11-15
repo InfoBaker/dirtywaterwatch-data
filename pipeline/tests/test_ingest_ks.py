@@ -290,20 +290,42 @@ def test_state_text_is_in_the_page_shape():
     assert "Sherman, Wallace, Greeley and Hamilton counties keep Mountain time" in t
 
 
-def test_missing_waters_list_rows_are_unique_and_unlisted():
-    d = json.loads((ROOT / "research" / "ks" / "receiving-waters-missing.json").read_text())
-    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())
-
+def check_missing_waters(d: dict, nat: dict) -> None:
+    """The invariants of research/ks/receiving-waters-missing.json, true as the state build writes it and after a water
+    batch moves some or all of its names into `resolved` (re-review P2-6): no pending name is one the national list
+    holds (unless the row itself says resolved), one row per name and county, and each resolved name has its records."""
     def k(n):
         s = re.sub(r"^\s*(?:trib(?:utary|\.)?\s+to|tributary of)\s+", "", (n or "").lower())
         return re.sub(r"\br\.?$", "river", re.sub(r"[^a-z0-9 ]", "", re.sub(r"\s+tributary$", "", s))).replace(" ", "")
     held = {k(n) for w in nat["states"]["KS"]["waters"]
             for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or []), *(w.get("gnis_names") or [])] if n}
-    assert d["state"] == "KS" and d["waters"] == len(d["rows"]) > 0
-    for r in d["rows"]:
+    rows, resolved = d["rows"], d.get("resolved") or []
+    rows = rows if isinstance(rows, list) else []
+    assert d["state"] == "KS" and d["waters"] == len(rows) and len(rows) + len(resolved) > 0
+    for r in rows:
         assert k(r["name"]) not in held or r.get("resolved")
-    keys = [(r["name"], r["county"]) for r in d["rows"]]
+    keys = [(r["name"], r["county"]) for r in rows]
     assert len(keys) == len(set(keys))
+    for r in resolved:
+        assert r.get("name") and r.get("slugs"), r
+
+
+def _batch(d: dict, share: float) -> dict:
+    """The file as a water batch leaves it: the first share of its names moved into `resolved` with a record each."""
+    rows = list(d["rows"])
+    n = round(len(rows) * share)
+    done = [{"name": r["name"], "reports": r["reports"], "slugs": [f"{k}-example-ks" for k in [r["name"].lower()]],
+             "how": "built from NHD"} for r in rows[:n]]
+    return {**d, "rows": rows[n:], "waters": len(rows) - n, "resolved": done}
+
+
+def test_missing_waters_list_rows_are_unique_and_unlisted():
+    d = json.loads((ROOT / "research" / "ks" / "receiving-waters-missing.json").read_text())
+    nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())
+    check_missing_waters(d, nat)
+    if not d.get("resolved"):                                  # before the batch: the same holds part- and fully-done
+        check_missing_waters(_batch(d, 0.5), nat)
+        check_missing_waters(_batch(d, 1.0), nat)
 
 
 # ---------------------------------------------------------------- re-review fixes (2026-11-15)
