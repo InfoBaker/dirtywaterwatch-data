@@ -1,8 +1,6 @@
 {
  "about": "Receiving-water names in Minnesota's records (the Metropolitan Council's spill notices, read 2026-11-14; EPA's overflow tables for Minnesota permits, the extract of 2026-11-12) that data/receiving-waters-national.json does not hold for MN, by name as typed, with the county, the number of reports and the points where the reports give them. Resource Renew (WLSSD) releases name no water and are placed by their own points; notices saying no water was reached, and waters a notice names only as nearby or tested and found unaffected (Bassett Creek, Wirth Lake), are left out.",
  "state": "MN",
- "waters": 2,
- "reports": 2,
  "left_out": [
   {
    "name": "Bassett Creek",
@@ -15,6 +13,19 @@
    "reason": "named only as nearby"
   }
  ],
+ "waters": 2,
+ "reports": 2,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in MN": 1,
+  "the name of a town (Pike Bay), not of a water: no NHD water of that name in MN": 1
+ },
+ "build": {
+  "date": "2026-11-15",
+  "command": "python -m ingest.waters_from_nhd --names research/mn/receiving-waters-missing.json --state MN",
+  "records_built": 0,
+  "names_resolved": 0,
+  "network_requests": 0
+ },
  "rows": [
   {
    "name": "Mud Pond",
@@ -30,7 +41,7 @@
    "as_typed": [
     "Mud Pond"
    ],
-   "reason": "no record of that name in MN; Minnesota has many Mud Ponds: the one in Excelsior (Hennepin County), beside Studer Pond and a community garden, per the Council's notice of 2026-05-29"
+   "reason": "no NHD flowline or waterbody of that name in MN; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Pike Bay",
@@ -57,7 +68,7 @@
    "aliases_suggested": [
     "Lake Vermilion"
    ],
-   "reason": "no record of that name in MN; Pike Bay of Lake Vermilion near Tower, the Bois Forte Band's report of 2024-06-18"
+   "reason": "the name of a town (Pike Bay), not of a water: no NHD water of that name in MN"
   }
  ]
 }
