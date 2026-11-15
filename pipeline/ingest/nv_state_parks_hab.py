@@ -25,7 +25,8 @@ Record rules
     first seen after the page went unread never colours the unread weeks red.
   - A page on which any of the three sections cannot be found, or a section that is not completely readable (a bold
     heading or an "Updated" date the reader cannot take, text before the first heading, "None at this time" beside a
-    listed water), writes ok=False and the previous records stay: a template change, one changed date format or a
+    listed water, an advisory paragraph
+    with no heading read before it, a heading in any other form), writes ok=False and the previous records stay: a template change, one changed date format or a
     failed request never lifts an advisory. A section reading "None at this time." lists no
     water at that level; it says nothing of waters outside the state parks.
   - Water: the paragraph's own words name it ("Lahontan Reservoir, located in ..."), else the heading. WATERS gives
@@ -135,6 +136,18 @@ def safe_error(e: Exception) -> str:
     return f"{type(e).__name__}: {clean_text(str(e))[0] or 'details withheld'}"
 
 
+# a paragraph that states an advisory ("Marlette Lake, located in ..., has been placed under a HAB Watch Advisory")
+ADVISORY_PARAGRAPH = re.compile(r"\blocated in\b|\b(?:placed|upgraded|downgraded|raised|lowered|moved|elevated|reduced|"
+                                r"issued|remains?)\b[^.]{0,60}\badvisory\b|\bunder an?\b[^.]{0,40}\badvisory\b", re.I)
+OTHER_HEADING = re.compile(r"<(?:h[1-6]|b|dt|th|caption|summary)\b", re.I)
+
+
+def advisory_paragraphs(fragment: str) -> int:
+    """The number of blocks (paragraphs, list items, divisions, line breaks) in the fragment that state an advisory."""
+    blocks = re.split(r"<(?:p|li|div|br|h[1-6]|tr|td|section|article)\b[^>]*>", fragment, flags=re.I)
+    return sum(1 for b in blocks if ADVISORY_PARAGRAPH.search(text_of(b)))
+
+
 def parse_date(s: str) -> str:
     s = re.sub(r"\s+", " ", s.replace(".", "")).strip()
     for fmt in ("%B %d, %Y", "%b %d, %Y", "%B %d,%Y"):
@@ -176,6 +189,16 @@ def parse(page: str) -> tuple[list[dict], str]:
         if bold != len(heads) or dated != len(heads) or lead or (heads and NONE.search(text_of(body))):
             raise ValueError(f"the {lv} section is not completely readable: {len(heads)} heading(s) read of "
                              f"{max(bold, dated)} on the page")
+        # every advisory paragraph of the section belongs to a heading read (verification pass P1-1): a heading in
+        # another form (<h3>, <b>, a plain paragraph, none at all) leaves its paragraph under the previous water or
+        # alone, and that water would otherwise be lifted. Each heading's stretch, to the next heading or the section's
+        # end (past any closing </div>), holds exactly one advisory paragraph; a section with no heading holds none.
+        stretches = [body[h.end(): heads[i + 1].start() if i + 1 < len(heads) else len(body)]
+                     for i, h in enumerate(heads)] or [body]
+        counts = [advisory_paragraphs(x) for x in stretches]
+        if OTHER_HEADING.search(body) or (counts != [1] * len(heads) if heads else counts != [0]):
+            raise ValueError(f"the {lv} section is not completely readable: advisory paragraphs {counts} beside "
+                             f"{len(heads)} heading(s) read")
         for i, h in enumerate(heads):
             seg = body[h.end(): heads[i + 1].start() if i + 1 < len(heads) else len(body)]
             seg = re.split(r"</div>", seg)[0]
