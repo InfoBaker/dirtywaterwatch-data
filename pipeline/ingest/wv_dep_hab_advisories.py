@@ -21,8 +21,9 @@ Records (a map of what is in effect, read as a snapshot)
     raw.ended_at_precision 'poll'), an upper bound, not DEP's lift time. A layer that answers with an error makes the
     run ok=False: the records are kept and nothing is lifted; so does a layer that answers only part of its rows
     (exceededTransferLimit). The Advisory text is cut before it is saved anywhere (scrub_advisory: common.scrub_text,
-    then every street house number, then every sentence naming who reported, sampled or can be called; text that
-    cannot be cut to the advice alone is withheld).
+    then every street house number, then every sentence naming who reported, sampled or can be called, or still
+    holding an address in any case or a label such as 'Reporter:' (ingest.wv_la_privacy); text that cannot be cut to
+    the advice alone is withheld).
   - Placement by the agency's own geometry only: the marker is a point's position, the point half way along a
     segment, or an interior point of an area (never a vertex mean, which can fall outside a concave area), rounded to
     three decimals (coord_source 'agency_layer'); raw.geometry_kind and raw.marker_basis say which. DEP's segment or
@@ -44,6 +45,7 @@ import requests
 
 import common
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from ingest import wv_la_privacy
 
 SOURCE_ID = "wv-dep-hab-advisories"
 SERVICE = "https://tagis.dep.wv.gov/arcgis/rest/services/webMercator/algae_advisories/MapServer"
@@ -135,7 +137,10 @@ def scrub_advisory(text: str) -> str | None:
     if not t:
         return None
     t = HOUSE_NUMBER_RE.sub(common.HOUSE_NUMBER_REMOVED, common.scrub_text(t))
-    kept = [x for x in SENTENCE_RE.split(t) if x and not PERSON_CLAUSE_RE.search(x)]
+    # then, in any case, every sentence still holding an address or a label of who reported, sampled, collected or
+    # can be called ('123 example lane', 'Reporter: ...', 'Sample collector: ...'; ingest.wv_la_privacy) is cut
+    kept = [x for x in SENTENCE_RE.split(t) if x and not PERSON_CLAUSE_RE.search(x)
+            and not wv_la_privacy.has_address(x) and not wv_la_privacy.names_a_person(x)]
     out = " ".join(kept).strip()
     if not re.search(r"[A-Za-z]{3}", out.replace(common.HOUSE_NUMBER_REMOVED, "")) or \
             re.search(r"\bby[ ]+[A-Z][a-z]+[ ]+[A-Z][a-z]+", out):

@@ -496,3 +496,33 @@ def test_echo_an_older_cache_with_a_rejection_on_record_is_not_ok(tmp_path, monk
                                                              "not_in_echo": True}}}
     rc, doc = _run_dmr(tmp_path, monkeypatch, {"WV0000003": (None, "not in ECHO")}, cache)
     assert rc == 1 and doc["ok"] is False and doc["meta"]["fetch"] == {} and "WV0000003" in doc["error"]
+
+
+def test_bloom_text_in_any_case_and_with_labelled_names_never_reaches_a_write(tmp_path, monkeypatch):
+    """Verification P1-3: lowercase and uppercase addresses and colon-labelled reporting and contact names, through
+    the raw save, the state and the records."""
+    import common as C
+    texts = {7: "Avoid contact near 123 example lane. Reporter: Example Person.",
+             8: "Avoid contact near 123 EXAMPLE LANE. Sample collector: Example Person",
+             9: "Do not swim. Contact: Example Person",
+             10: "Avoid the cove. Caller - Example Person; observer: Example Person."}
+    a = _answers(list(texts))
+    for f in a["1"]["features"]:
+        f["attributes"]["Advisory"] = texts[f["attributes"]["OBJECTID"]]
+    saved = []
+    monkeypatch.setattr(H, "save_raw", lambda sid, data, ext: saved.append(data.decode()))
+    monkeypatch.setattr(H, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(C, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(H, "fetch", lambda: a)
+    assert H.main(["--at", "2026-07-01T12:00:00Z"]) == 0
+    written = saved + [(tmp_path / "state.json").read_text(), (tmp_path / f"{H.SOURCE_ID}.json").read_text()]
+    assert len(saved) == 1
+    for blob in written:
+        for bad in ("123 e", "123 E", "example lane", "EXAMPLE LANE", "Example Person"):
+            assert bad not in blob, (bad, blob[:300])
+    recs = {r["source_record_id"]: r for r in json.loads(written[-1])["records"]}
+    assert H.WITHHELD in recs["1-7"]["advice_text"]
+    assert recs["1-9"]["advice_text"].endswith("Do not swim.")
+    assert recs["1-10"]["advice_text"].endswith("Avoid the cove.")
+    assert H.scrub_advisory("Avoid contact with the water within 100 feet of the dock.") == \
+        "Avoid contact with the water within 100 feet of the dock."
