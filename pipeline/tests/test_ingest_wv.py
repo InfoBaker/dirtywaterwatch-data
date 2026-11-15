@@ -526,3 +526,16 @@ def test_bloom_text_in_any_case_and_with_labelled_names_never_reaches_a_write(tm
     assert recs["1-10"]["advice_text"].endswith("Avoid the cove.")
     assert H.scrub_advisory("Avoid contact with the water within 100 feet of the dock.") == \
         "Avoid contact with the water within 100 feet of the dock."
+
+
+def test_every_public_copy_of_the_dmr_absence_states_its_period_and_scope():
+    """Verification P2-7: the rules rationale, the source description and the channel note bound the DMR finding to
+    the 61 permits and the period read; no copy says it of every West Virginia permit without a period."""
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    texts = {"rules": json.dumps(rules, ensure_ascii=False),
+             "yaml": (ROOT / "data" / "sources" / "wv-echo-dmr-cso.yaml").read_text(),
+             "channels": (ROOT / "data" / "notice-channels" / "wv.json").read_text()}
+    for name, t in texts.items():
+        assert "No West Virginia permit reports" not in t and "No West Virginia\n#   permit" not in t, name
+    wv = [v for v in json.dumps(rules).split('"WV": {')[1:] if "combined sewer overflows" in v][0]
+    assert "Of the 61 permits" in wv and "January 2025 to November 14, 2026" in wv

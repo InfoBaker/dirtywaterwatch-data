@@ -8,8 +8,8 @@ level: "federal"
 # Built 2026-11-14: every one of the 61 permits with an open combined sewer outlet in DEP's layer was asked once for all
 #   parameters, January 2025 to date. 59 file no line at any combined sewer outlet (their reports cover the plant's own
 #   outfalls). Two file a monthly line at outlet C002 ('Effluent Gross'): Princeton Sanitary Board (WV0023094) and the
-#   City of Beckley (WV0023183), each 50050 flow (MGD), total residual chlorine and fecal coliform. No West Virginia
-#   permit reports a number of overflows, hours or a volume at a combined sewer outlet.
+#   City of Beckley (WV0023183), each 50050 flow (MGD), total residual chlorine and fecal coliform. None of the 61
+#   reported a number of overflows, hours or a volume at a combined sewer outlet in that period (read 2026-11-14).
 # Real read: Beckley's C002 16 months with flow reported (January 2025 to September 2026; daily maximum up to 5.8 MGD),
 #   5 months filed no discharge; Princeton's C002 21 months filed NODI C (no discharge). Median 24 days from the month's
 #   end to EPA's receipt.
