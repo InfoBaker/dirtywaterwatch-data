@@ -87,14 +87,21 @@ def list_lines(page: str) -> list[str]:
 def read(lines: list[str]) -> dict[str, str]:
     """{SB id: beach name}. Every line under the heading must be an SB item or a statement that none is closed;
     anything else (a maintenance notice, a changed layout, a contact block) is ValueError, so an unreadable list ends
-    nothing and is never saved."""
-    found = {}
+    nothing and is never saved. Zero beaches is accepted only with ADH's explicit statement that none is closed."""
+    found, none_stated = {}, False
     for ln in lines:
         m = ITEM.match(ln)
         if m:
             found[re.sub(r"[\s-]", "", m.group(1)).upper()] = m.group(2).strip()
-        elif not EMPTY.match(ln):
+        elif EMPTY.match(ln):
+            none_stated = True
+        else:
             raise ValueError("a line under 'Closed Swim Beaches' is not a beach item; nothing is ended or saved")
+    if not found and not none_stated:
+        # an empty, truncated or moved list (the heading followed by nothing or by another heading) is not ADH saying
+        # that no beach is closed: only an explicit statement may end the closures (review 2026-11-14 P1-2)
+        raise ValueError("the 'Closed Swim Beaches' list is empty without a statement that none is closed; "
+                         "nothing is ended or saved")
     return found
 
 
