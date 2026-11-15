@@ -632,3 +632,22 @@ def test_public_bloom_descriptions_match_the_placement_rules():
     # the code paths the words describe
     rec = {"waterbody": "Lake Specimen - Example Bay", "county": "Sample County", "date": "July 1, 2026", "lifted": ""}
     assert T.hab_water(rec["waterbody"]) == ("Lake Specimen", "Example Bay")
+
+
+def test_every_standing_bloom_advisory_has_a_cited_point_or_says_why_not(monkeypatch, tmp_path):
+    """Re-review P1-1: Lake Hamilton is placed at a point inside its NHD waterbody; a lake with no cited point (Mom's
+    Lake) keeps no invented one, and the state text says which places are not drawn and why."""
+    real = dict(T.NHD_POINTS)
+    monkeypatch.setattr(T, "NHD_POINTS", {("lake sample", "Sample"): ("1", "2", 35.25, -93.25)})
+    recs, _ = habs(monkeypatch, tmp_path, _hab_doc(
+        ("Lake Sample", "Sample County", "Exampleville, AR", "July 24, 2026", ""),
+        ("Example Pond", "Sample County", "Exampleville, AR", "July 24, 2026", "")))
+    r = recs["Lake Sample2026-07-24"]
+    assert (r["lat"], r["lon"]) == (35.25, -93.25) and "National Hydrography Dataset" in r["raw"]["_point_basis"]
+    assert r["raw"]["advisory_extent"] == "named_water"
+    assert recs["Example Pond2026-07-24"].get("lat") is None
+    # the real table: Lake Hamilton in Garland County, inside the water, at 0.001 degree
+    lat, lon = real[("lake hamilton", "Garland")][2:]
+    assert (round(lat, 3), round(lon, 3)) == (lat, lon) and 34.40 < lat < 34.58 and -93.23 < lon < -93.02
+    text = (R.ROOT / "research" / "ar" / "state-text.md").read_text()
+    assert "Mom's Lake" in text and "Jefferson Ridge West" in text and "not drawn on the map" in text
