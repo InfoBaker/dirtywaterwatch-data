@@ -63,9 +63,9 @@
   "license": "EPA public data; no restriction stated",
   "legal_basis": "40 CFR 127 (NPDES eRule Phase 2, from 2025-12-21); 40 CFR 122.41(l)(6) five-day written report",
   "status": "watch",
-  "status_reason": "0 WY event(s) in the 2026-11-03 extract; the state's permittees do not file through NeT. Wyoming permittees report SSOs to WDEQ by phone and written notice.",
+  "status_reason": "No Wyoming report in the current or the all-versions extract of 2026-11-14; the collection-system table lists one Wyoming permit, EPA's lagoon general permit coverage WYG589101 on the Wind River Reservation. Watched.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -96,9 +96,9 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "'Reporting of the SSO should occur verbally within 24 hours of becoming aware of the event' and in writing 'Within a five day period after the event' (hand written or electronic). Applies to municipal, state, federal, regional, industrial and private collection systems. No public notification duty and no public list.",
+  "status_reason": "'Reporting of the SSO should occur verbally within 24 hours of becoming aware of the event'; written notification to WDEQ within five days. The reporting duty cited in the register and the rules row; WDEQ publishes no list of the reports.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -128,9 +128,9 @@
   "license": null,
   "legal_basis": null,
   "status": "rejected",
-  "status_reason": "Public side is a report form only. The app bundle (fetched) shows Incident Search, Complaint Search and HCB Search routes all marked requiresAuth, against an API at deqspills-api.wyo.gov. Incidents are not public.",
+  "status_reason": "The public side is a report form; the app's incident search needs a login (a script shell to the build's client, 2026-11-14). Recorded as a login barrier in the register.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -178,10 +178,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Public, 88 waterbodies, wide format: per-year Bloom Advisory Issued and Toxin Advisory Issued dates and toxin locations, 2017-2025; last edited 2025-11-10. Historical only: the 2026 current list is in the Story Map text and GovDelivery bulletins (about 26 waterbodies by 2026-09-04).",
+  "status": "watch",
+  "status_reason": "The original layer could not be read; the historical layer WDEQ_ALL_Past_HCB_Advisories (layer 1, 78 rows, wide per-year columns, last data edit 2025-06-17) answered its metadata and count on 2026-11-14. Not read in this build: the current advisories come from the bulletins (wy-deq-hcb-bulletins). Watched.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -213,10 +213,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Current-year Bloom Advisory, Toxin Advisory and Under Investigation lists (wyohcbs.org redirects to deq.wyoming.gov/harmful-cyanobacterial-blooms/). Toxin advisory lasts until two samples a day apart fall below thresholds or 31 December. Bulletins at content.govdelivery.com/accounts/WYDEQ.",
+  "status": "watch",
+  "status_reason": "The StoryMap (a script page) shows the current lists; its rows are the same as the bulletins' table, which is read (wy-deq-hcb-bulletins). Watched.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -308,9 +308,77 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "Issues the advisories; duplicates DEQ lists.",
+  "status_reason": "The Department of Health issues the advisories with WDEQ; its posts duplicate the bulletins. Watched.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
+  "notes": ""
+ },
+ {
+  "id": "wy-deq-hcb-bulletins",
+  "name": "Wyoming DEQ HCB bulletins (GovDelivery topic WYDEQ_42, RSS)",
+  "jurisdiction": "WY",
+  "operator": "Wyoming Department of Environmental Quality",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab_advisory"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://public.govdelivery.com/topics/WYDEQ_42/feed.rss",
+  "access": [
+   "rss"
+  ],
+  "access_detail": null,
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "a bulletin per issue or lift",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Read 2026-11-15: 25 bulletins (2026-07-31 to 2026-10-28), 22 with the table of current advisories (water, location, Bloom or Toxin, Date Issued) and one lift (three press releases have no table); read by the wy-deq-hcb-bulletins feed as 71 advisories (66 still listed in the latest table, 4 no longer listed, 1 lifted). The bulletins name staff: only the parsed rows are saved.",
+  "verified": "fetched",
+  "checked": "2026-11-15",
+  "notes": ""
+ },
+ {
+  "id": "wy-deq-hudson-2024",
+  "name": "Wyoming DEQ news: Hudson wastewater release updates (June 2024)",
+  "jurisdiction": "WY",
+  "operator": "Wyoming Department of Environmental Quality",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://deq.wyoming.gov/2024/06/the-department-of-environmental-quality-provides-update-on-hudson-wastewater-release/",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "The two June 2024 updates answered HTTP 500 to the build's client on 2026-11-14; no record is made until they can be read. Watched.",
+  "verified": "search_only",
+  "checked": "2026-11-14",
   "notes": ""
  }
 ]

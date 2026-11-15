@@ -1,0 +1,416 @@
+{
+ "about": "Water names in Wyoming's records that data/receiving-waters-national.json does not hold for WY: the waters the state's advisory and notice records name, one row per name and county, with the number of records, how many are open, the county and up to five points where the source gives them. Records naming no water are counted in by_reason. EPA's outfall registry gives every plant outfall its receiving water separately. Written by scripts/mountain_report_water_names.py.",
+ "state": "WY",
+ "waters": 40,
+ "reports": 64,
+ "by_reason": {},
+ "resolved_names": 1,
+ "resolved_reports": 7,
+ "rows": [
+  {
+   "name": "Boysen Reservoir",
+   "reports": 10,
+   "open": 10,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 10
+   }
+  },
+  {
+   "name": "Glendo Reservoir",
+   "reports": 5,
+   "open": 5,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 5
+   }
+  },
+  {
+   "name": "Wheatland Reservoir #3",
+   "reports": 4,
+   "open": 2,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 4
+   }
+  },
+  {
+   "name": "Alcova Reservoir",
+   "reports": 3,
+   "open": 3,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 3
+   }
+  },
+  {
+   "name": "Grayrocks Reservoir",
+   "reports": 2,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 2
+   }
+  },
+  {
+   "name": "Hawk Springs Reservoir",
+   "reports": 2,
+   "open": 2,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 2
+   }
+  },
+  {
+   "name": "Pathfinder Reservoir",
+   "reports": 2,
+   "open": 2,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 2
+   }
+  },
+  {
+   "name": "Saratoga Lake",
+   "reports": 2,
+   "open": 2,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 2
+   }
+  },
+  {
+   "name": "Seminoe Reservoir",
+   "reports": 2,
+   "open": 2,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 2
+   }
+  },
+  {
+   "name": "Wheatland Reservoir #1",
+   "reports": 2,
+   "open": 2,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 2
+   }
+  },
+  {
+   "name": "Beck Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Big Sandy Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Bighorn Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Blue Lake (Wind River Range)",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Brooks Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Deaver Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Diamond Lake (Bosler Reservoir)",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Flaming Gorge Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Fontenelle Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Goshen Hole Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Granite Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Guernsey Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "High Savery Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Kemmerer City Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Keyhole Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Lake DeSmet",
+   "reports": 1,
+   "open": 0,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Leazenby Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Little Soda Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Louis Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "McKenzie Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Miller Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Ocean Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Sloans Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Sodergreen Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "South Worland Pond",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Unnamed Lake- Wind River Range",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [
+    [
+     42.808,
+     -109.327
+    ]
+   ],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "V Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Viva Naughton Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Wind River Lake",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  },
+  {
+   "name": "Woodruff Narrows Reservoir",
+   "reports": 1,
+   "open": 1,
+   "county": null,
+   "points": [],
+   "sources": {
+    "wy-deq-hcb-bulletins": 1
+   }
+  }
+ ]
+}
