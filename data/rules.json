@@ -234,6 +234,18 @@
     "clock": "end_of_discharge",
     "basis": "North Dakota sets no period after a sewage discharge during which the water is to be avoided, and no North Dakota statute or rule requires the public to be told of a sewage discharge. A spill or discharge likely to pollute water must be reported to the Department of Environmental Quality immediately, and the permits require an oral report within 24 hours and a written one within five days. Reports since 2021 go into the state's unified spill system, whose public list refuses automated reading; the Department's archive holds the reports of 1975 to 2020. The Department posts harmful algal bloom advisories and warnings by lake from May to December. Dates are read in Central time, and in Mountain time in the southwestern counties. This site marks a reported discharge while it runs and applies its own caution after it ends",
     "source": "N.D. Admin. Code 33.1-16-02.1-11(4); NDPDES general permit NDG420000 Part IV(F); North Dakota Department of Environmental Quality, General Environmental Incidents - Historical and harmful algal bloom listing; 49 CFR 71.7(a)"
+   },
+   "MO": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Missouri sets no period after a sewage discharge during which the water is to be avoided, and no Missouri statute or rule requiring the public to be told of a sewer overflow or a bypass was found: permitted wastewater facilities report them to the Department of Natural Resources within 24 hours of discovery, through its online portal, and those reports are not published. The Department's monthly concern reports, issued two to four months later, list the concerns it investigated; a concern is the reporting party's account unless the Department's comments say what it found. Kansas City's KC Water and St. Louis's Metropolitan Sewer District post some overflows on their own websites, and combined sewer operators post signs at their outfalls. State park swim beaches are posted 'Swimming is Not Recommended' when weekly E. coli samples exceed the state standard. This site marks a reported discharge while it runs and applies its own caution after it ends; a concern reported by the public is shown with this site's caution only",
+    "source": "Missouri Department of Natural Resources, sewer overflow reporting guidance (MoGEM) and Water Pollution Control concern reports; RSMo 640.080; KC Water news; MSD Project Clear alerts"
+   },
+   "KS": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Kansas sets no period after a sewage discharge during which the water is to be avoided, and no Kansas statute or rule requiring the public to be told of a sewer overflow or a bypass was found: an emergency or accidental sewage discharge is reported to the Kansas Department of Health and Environment immediately, and a planned bypass needs its approval seven days ahead; those reports are not published. KDHE issues a stream advisory, asking people to avoid contact with a stretch of water, when it judges one needed, and rescinds it by a later release; KDHE and the state parks agency post advisories for harmful algal blooms on lakes. The City of Leavenworth posts each of its sewer overflows. This site shows KDHE's advisories in KDHE's own window, marks a reported discharge while it runs and applies its own caution after it ends; four western counties keep Mountain time",
+    "source": "K.A.R. 28-16-27; KDHE stream advisories (news flash) and Harmful Algal Blooms map; City of Leavenworth Sanitary Sewer Overflow Transparency Reports; 49 CFR 71.7(d)"
    }
   },
   "by_discharger": {
@@ -397,7 +409,9 @@
     "oh-columbus-sewer-overflow",
     "mn-wlssd-overflows",
     "mn-mces-spill-notices",
-    "nd-deq-eir-legacy-general"
+    "nd-deq-eir-legacy-general",
+    "mo-msd-stl-project-clear",
+    "mo-dnr-concern-reports"
    ],
    "hours": 72,
    "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024; the Tennessee Department of Environment and Conservation's Events Report, which gives no end date on most reports). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
