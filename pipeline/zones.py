@@ -279,12 +279,15 @@ def zone_for(state: str | None, lat=None, lon=None) -> str | None:
 # Missouri, along the Yellowstone and a township staircase (R. 102 W. and R. 101 W.) to the Little Missouri, along the
 # Little Missouri and the Missouri to Mercer County's western land line, south along Mercer's west line, along Morton
 # County's southwestern line to Sioux County, west along Sioux's north line to State Highway 31 and down Highway 31 to
-# South Dakota. West and south of it is Mountain time: these nine counties whole, and the parts of McKenzie County
-# (west of the staircase) and Sioux County (west of Highway 31). A record in a split county is read in Mountain time,
-# the later day's end, as South Dakota's Stanley County is (sd_danr_hab_advisories): a caution never ends early.
-ND_MOUNTAIN_COUNTIES = frozenset({"ADAMS", "BILLINGS", "BOWMAN", "DUNN", "GOLDEN VALLEY", "GRANT", "HETTINGER", "SLOPE",
+# South Dakota. West and south of it is Mountain time: these eight counties whole, and the parts of McKenzie County
+# (west of the staircase and south of the Little Missouri), Dunn County (south and east of the Little Missouri, which the
+# line follows through the county to the Missouri: its part toward Lake Sakakawea is Central; verification pass 2
+# 2026-11-15 P2-1) and Sioux County (west of Highway 31). A record in a split county is read on the side its point lies
+# on; with no point, in Mountain time, the later day's end, as South Dakota's Stanley County is
+# (sd_danr_hab_advisories), and marked as assumed: a caution never ends early.
+ND_MOUNTAIN_COUNTIES = frozenset({"ADAMS", "BILLINGS", "BOWMAN", "GOLDEN VALLEY", "GRANT", "HETTINGER", "SLOPE",
                                   "STARK"})
-ND_SPLIT_COUNTIES = frozenset({"MCKENZIE", "SIOUX"})
+ND_SPLIT_COUNTIES = frozenset({"DUNN", "MCKENZIE", "SIOUX"})
 ND_ZONE_CITE = "49 CFR 71.7(a)"
 
 
@@ -314,7 +317,7 @@ def nd_point_county(lat, lon) -> str | None:
 
 @functools.lru_cache(maxsize=1)
 def _nd_split_parts():
-    """{county key: the Mountain part's geometry} of McKenzie and Sioux (data/reference/nd-split-county-zones.json:
+    """{county key: the Mountain part's geometry} of Dunn, McKenzie and Sioux (data/reference/nd-split-county-zones.json:
     USDOT/BTS NTAD time zones cut to the county outlines)."""
     import json
     from pathlib import Path
@@ -327,8 +330,8 @@ def _nd_split_parts():
 
 
 def north_dakota_split_side(county, lat, lon) -> str | None:
-    """MOUNTAIN or CENTRAL for a point in McKenzie or Sioux County, from the cited line (NTAD), or None (no point, not
-    a split county, or no line file)."""
+    """MOUNTAIN or CENTRAL for a point in Dunn, McKenzie or Sioux County, from the cited line (NTAD), or None (no point,
+    not a split county, no line file, or a point that does not lie in that county: its side there is not known)."""
     if lat is None or lon is None or tn_county_key(county or "") not in ND_SPLIT_COUNTIES:
         return None
     try:
@@ -338,11 +341,17 @@ def north_dakota_split_side(county, lat, lon) -> str | None:
         return None
     if part is None:
         return None
+    try:
+        inside = nd_point_county(lat, lon)
+    except (OSError, ImportError, ValueError, KeyError):
+        inside = None
+    if inside is not None and tn_county_key(inside) != tn_county_key(county):
+        return None
     return MOUNTAIN if part.covers(Point(float(lon), float(lat))) else CENTRAL
 
 
 def north_dakota_zone_uncertain(county=None, lat=None, lon=None) -> bool:
-    """True when the record's zone is assumed, not known: a McKenzie or Sioux County record whose point cannot be
+    """True when the record's zone is assumed, not known: a Dunn, McKenzie or Sioux County record whose point cannot be
     placed on a side of the line (re-review 2026-11-14 P2-4)."""
     if not (county and str(county).strip()):
         try:
@@ -353,7 +362,7 @@ def north_dakota_zone_uncertain(county=None, lat=None, lon=None) -> bool:
 
 
 def north_dakota_zone(county=None, lat=None, lon=None) -> tuple[str, str]:
-    """(zone, basis) for a North Dakota record: Mountain in ND_MOUNTAIN_COUNTIES; in the two split counties the side
+    """(zone, basis) for a North Dakota record: Mountain in ND_MOUNTAIN_COUNTIES; in the three split counties the side
     of the line the record's point lies on (data/reference/nd-split-county-zones.json, re-review 2026-11-14 P2-4), and
     with no point Mountain time, the later day's end, stated as assumed (north_dakota_zone_uncertain); Central
     elsewhere and when no county is known (the state's larger part). The county is the one the source gives, else the

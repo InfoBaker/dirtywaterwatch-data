@@ -44,7 +44,7 @@ def ops():
 def test_north_dakota_zone_by_county(county, zone):
     z, basis = zones.north_dakota_zone(county)
     assert z == zone and "49 CFR 71.7(a)" in basis
-    if county in ("McKenzie", "Sioux County"):
+    if county in ("Dunn", "McKenzie", "Sioux County"):
         assert "split" in basis and "later day's end" in basis
 
 
@@ -618,3 +618,62 @@ def test_v2_ordinary_sewage_rows_keep_their_points():
     recs, _, _ = legacy()
     kept = [r for r in recs.values() if r["lat"] is not None]
     assert kept and all("point_withheld" not in r["raw"] for r in kept)
+
+
+# ---------------------------------------------------------------- verification pass 2 2026-11-15 P2-1: Dunn County
+
+@pytest.mark.parametrize("lat,lon,zone", [
+    (47.30, -102.80, zones.MOUNTAIN), (47.36, -102.64, zones.MOUNTAIN),      # south of the Little Missouri (Lake Ilo)
+    (47.75, -102.60, zones.CENTRAL), (47.62, -102.80, zones.CENTRAL)])       # north of it, toward Lake Sakakawea
+def test_r3_p2_1_a_dunn_point_is_read_on_its_side_of_the_little_missouri(lat, lon, zone):
+    assert zones.nd_point_county(lat, lon) == "Dunn County"
+    for given in ("Dunn County", "Dunn", None):
+        z, basis = zones.north_dakota_zone(given, lat, lon)
+        assert z == zone and "split" in basis and "side" in basis
+        assert zones.north_dakota_zone_uncertain(given, lat, lon) is False
+    assert zones.zone_for("ND", lat, lon) == zone
+    row = dict(next(r for r in L.parse_page((FIX / "legacy-search-sample.html").read_text())[0]
+                    if L.keep(r) and r["latitude"]))
+    rec = L.record(dict(row, county="Dunn", latitude=str(lat), longitude=str(lon)), FETCHED)
+    assert rec["raw"]["time_zone"] == zone and "time_zone_uncertain" not in rec["raw"]
+
+
+def test_r3_p2_1_a_county_only_dunn_record_carries_the_split_county_uncertainty():
+    z, basis = zones.north_dakota_zone("Dunn County")
+    assert z == zones.MOUNTAIN and "not known" in basis and zones.north_dakota_zone_uncertain("Dunn")
+    row = dict(next(r for r in L.parse_page((FIX / "legacy-search-sample.html").read_text())[0]
+                    if L.keep(r) and r["latitude"]))
+    blind = L.record(dict(row, county="Dunn", latitude="", longitude=""), FETCHED)
+    assert blind["raw"]["time_zone"] == zones.MOUNTAIN and blind["raw"]["time_zone_uncertain"] is True
+    # a point outside the county it is given with: its side there is not known
+    assert zones.north_dakota_split_side("Dunn County", 46.88, -102.79) is None        # Stark County
+    assert zones.north_dakota_zone_uncertain("Dunn County", 46.88, -102.79) is True
+
+
+def test_r3_p2_1_no_other_states_zones_change():
+    """zones.zone_for on a grid over every state's box is identical to the module at 2b1184a; in North Dakota only
+    Dunn County's Central side differs."""
+    import subprocess
+    import types
+    src = subprocess.run(["git", "show", "2b1184a:pipeline/zones.py"], capture_output=True, text=True, check=True,
+                         cwd=Path(zones.__file__).parent).stdout
+    old = types.ModuleType("zones_2b1184a")
+    old.__file__ = zones.__file__
+    exec(compile(src, "zones_2b1184a", "exec"), old.__dict__)
+    boxes = {"NE": (40.0, 43.0, -104.0, -95.3), "SD": (42.5, 45.9, -104.0, -96.5), "KY": (36.5, 39.1, -89.5, -82.0),
+             "TN": (35.0, 36.7, -90.3, -81.7), "FL": (29.5, 31.0, -87.6, -84.0), "OR": (42.0, 46.2, -124.5, -116.5),
+             "KS": (37.0, 40.0, -102.0, -94.6), "IN": (37.8, 41.7, -88.1, -84.8), "MN": (43.5, 49.0, -97.2, -89.5),
+             "TX": (26.0, 36.5, -106.6, -93.5), "ND": (45.95, 48.99, -104.0, -96.6)}
+    for st, (la0, la1, lo0, lo1) in boxes.items():
+        for i in range(9):
+            for j in range(9):
+                lat, lon = la0 + (la1 - la0) * i / 8, lo0 + (lo1 - lo0) * j / 8
+                new, was = zones.zone_for(st, lat, lon), old.zone_for(st, lat, lon)
+                if st == "ND" and new != was:
+                    assert zones.nd_point_county(lat, lon) == "Dunn County" and new == zones.CENTRAL
+                else:
+                    assert new == was, (st, lat, lon)
+    for st in zones.STATE_ZONES:
+        assert zones.zone_for(st) == old.zone_for(st)
+    for c in ("Stark", "Cass", "McKenzie", "Sioux County", "Mercer", None):
+        assert zones.north_dakota_zone(c) == old.north_dakota_zone(c)
