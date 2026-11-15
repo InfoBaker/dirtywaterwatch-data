@@ -505,3 +505,49 @@ def test_no_unrounded_point_is_written_in_arkansas_code_comments_tests_or_texts(
     for f in files:
         for a, b in pair.findall(f.read_text(errors="ignore")):
             assert (a, b) == ("35.123456", "-93.654321"), (f.name, a, b)
+
+
+def _hab_doc(*rows):
+    return {"updated": "November 1, 2026", "advisories": [
+        {"waterbody": w, "county": c, "area": a, "date": d, "lifted": l} for w, c, a, d, l in rows]}
+
+
+def test_revision_reconciliation_matches_only_unique_corrections(monkeypatch, tmp_path):
+    ex = ("Lake Exemplar", "Sample County", "Exampleville, AR", "July 30, 2026", "")
+    sp = ("Lake Specimen", "Sample County", "Sampletown, AR", "July 30, 2026", "")
+    _, out = habs(monkeypatch, tmp_path, _hab_doc(ex, sp))
+    # two lakes share a posting day and county: removing one never makes it a copy of the other
+    recs, _ = habs(monkeypatch, tmp_path, _hab_doc(ex), prev_out=out)
+    assert not any(r.get("duplicate_of") for r in recs.values())
+    # a later episode of the same lake: the older one is kept, not a copy
+    t2 = tmp_path / "b"
+    t2.mkdir()
+    _, out2 = habs(monkeypatch, t2, _hab_doc(ex))
+    recs, _ = habs(monkeypatch, t2, _hab_doc(("Lake Exemplar", "Sample County", "Exampleville, AR",
+                                              "September 2, 2026", "")), prev_out=out2)
+    assert len(recs) == 2 and not any(r.get("duplicate_of") for r in recs.values())
+    # a corrected posting day (same month) and a corrected spelling are still one advisory each
+    t3 = tmp_path / "c"
+    t3.mkdir()
+    _, out3 = habs(monkeypatch, t3, _hab_doc(ex, sp))
+    recs, _ = habs(monkeypatch, t3, _hab_doc(("Lake Exemplar", "Sample County", "Exampleville, AR", "July 31, 2026", ""),
+                                             ("Lake Specimin", "Sample County", "Sampletown, AR", "July 30, 2026", "")),
+                   prev_out=out3)
+    assert len(recs) == 4 and sum(1 for r in recs.values() if r.get("duplicate_of")) == 2
+    assert {r["waterbody_text"] for r in recs.values() if not r.get("duplicate_of")} == {"Lake Exemplar", "Lake Specimin"}
+    # two candidates for one disappearance: neither is chosen
+    t4 = tmp_path / "d"
+    t4.mkdir()
+    _, out4 = habs(monkeypatch, t4, _hab_doc(ex))
+    recs, _ = habs(monkeypatch, t4, _hab_doc(("Lake Exemplar", "Sample County", "Exampleville, AR", "July 28, 2026", ""),
+                                             ("Lake Exemplar", "Sample County", "Exampleville, AR", "July 29, 2026", "")),
+                   prev_out=out4)
+    assert len(recs) == 3 and not any(r.get("duplicate_of") for r in recs.values())
+
+
+def test_the_unique_supersede_options_are_set_only_by_arkansas():
+    """history.supersede_unique and supersede_max_days are opt-in in the shared runner; Tennessee's and Maryland's
+    supersede keys keep their behaviour because no other source sets them."""
+    hits = {p.name for p in (R.ROOT / "data" / "sources").glob("*.yaml")
+            if re.search(r"supersede_(unique|max_days)", p.read_text())}
+    assert hits == {"ar-deq-hab-advisories.yaml"}

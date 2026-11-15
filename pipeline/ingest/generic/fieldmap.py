@@ -777,7 +777,8 @@ def water_state_module(st: str) -> str | None:
         return None
 
 
-HISTORY_KEYS = {"keep_missing", "revisions", "track", "missing_key", "supersede", "confirm_while_listed"}
+HISTORY_KEYS = {"keep_missing", "revisions", "track", "missing_key", "supersede", "supersede_unique",
+                "supersede_max_days", "confirm_while_listed"}
 
 
 def validate(block: dict, source_id: str = "") -> list[str]:
