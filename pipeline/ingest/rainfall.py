@@ -1464,7 +1464,9 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     prev_mrms = prev.get("mrms") or {}
     prev_regions = prev_mrms.get("regions") or {}
     last_units = prev_mrms.get("units_last_determined")
-    todo = [k for k in readable if needs_mrms(points[k].get("mrms"), now, force)]
+    # a point whose newest answer is no coverage (outage_now) is asked again every run, not only in the next product hour
+    # (its stored reading's fetch time would hold it back: review 2026-11-15, pass 3)
+    todo = [k for k in readable if needs_mrms(points[k].get("mrms"), now, force) or outage_now(points[k])]
     base = session or requests.Session()
     base.headers.update(HEADERS)
     session = CountingSession(base)

@@ -359,3 +359,16 @@ def test_an_older_answer_after_an_outage_neither_clears_it_nor_replaces_the_newe
     pt = out["points"][key(AK_WET)]
     assert pt["mrms"] == first["points"][key(AK_WET)]["mrms"] and RF.outage_now(pt)     # 13:00's zero rejected
     assert pt["no_coverage"]["valid_time"] == RF.iso(VALID) and out["mrms"]["regions"]["alaska"]["fresh"] == 3
+
+
+def test_an_outage_point_is_asked_again_on_the_next_run_of_the_same_hour(world, monkeypatch):
+    alaska_only(world, monkeypatch)
+    RF.run(now=NOW, session=RegionNOAA())
+    dark = {p: {h: -3.0 for h in RF.HOURS} for p in [*JUNEAU, AK_WET]}
+    RF.run(now=NOW + timedelta(minutes=10), force=True, session=RegionNOAA(wet=dark))
+    fake = RegionNOAA()                                   # the radar sees the places again; a normal, unforced run
+    out = RF.run(now=NOW + timedelta(minutes=20), session=fake)
+    a = out["mrms"]["regions"]["alaska"]
+    assert a["read"] == "grid" and a["fresh"] == 4 and a["readings_ok"] and RF.exit_code(out) == 0
+    assert {r for r, _ in fake.exports} == {"alaska"}    # only the outage's region is asked again
+    assert all("no_coverage" not in out["points"][key(p)] for p in [*JUNEAU, AK_WET])
