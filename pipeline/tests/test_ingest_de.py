@@ -591,6 +591,8 @@ def test_no_sentinel_reaches_any_save_from_the_recreational_water_feed(monkeypat
     rows[0]["advcomment"] = "Call Pat Example at 1234 Sample Street or 302-555-0142."
     rows[0]["advdesc"] = "Contact: Pat Example, pat@example.org"
     rows[0]["contact_name"] = "Robin Sample"
+    rows[1]["advreason"] = "For questions call Robin Sample."            # verify P1-6: a categorical field
+    rows[2]["advtype"] = "Notice from Robin Sample"
     saves = []
     monkeypatch.setattr(W, "save_raw", lambda *a, **k: saves.append(json.dumps(a, default=str)))
     monkeypatch.setattr(W, "write_json", lambda path, obj, *a, **k: saves.append(json.dumps(obj, default=str)))
@@ -718,3 +720,77 @@ def test_an_owner_is_named_only_where_epas_permittee_names_it():
         row = next(r for r in rows.values() if p in r["npdes_permits"])
         assert row["npdes_permits"] == [p] and not row.get("legal_form"), p
         assert "permittee not recorded by EPA" in row["name"], p
+
+
+def _current(r, at, rules):
+    from build import status
+    return any(i["start"] <= at and (i["end"] is None or i["end"] > at) and i.get("color") not in (None, "grey")
+               for i in status.event_intervals(r, "DE", at, None, rules))
+
+
+def _shown(recs):
+    return [r for r in recs if not r.get("duplicate_of")]
+
+
+def test_the_maps_current_status_keeps_a_no_end_history_advisory_current_on_day_21():
+    # verify P1-1 (case 1): a history advisory with no end, still on the map on day 21, is not grey
+    from datetime import datetime, timezone
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    s = rec()
+    st = map_codes(s["stations"], {"Slaughter Beach": 0})
+    row = {"advisoryid": "9101", "advstartdate": "2026-07-01T00:00:00.000", "advreason": "Bacteria",
+           "advtype": "Recreational Water Quality Advisory", "unitname": "Slaughter Beach"}
+    state = {}
+    for d in range(1, 22):
+        at = f"2026-07-{d:02d}T16:00:00Z"
+        hist, _ = W.history_records([row], W.station_index(st), date(2026, 7, d), at)
+        polls, state = W.poll_records(st, hist, state, at, date(2026, 7, d))
+    at = datetime(2026, 7, 21, 17, tzinfo=timezone.utc)
+    shown = _shown(hist + polls)
+    assert len(shown) == 1 and _current(shown[0], at, rules)
+    assert shown[0]["raw"]["_last_seen_in_source"] == "2026-07-21T16:00:00Z"
+    # the map stops showing it: no new confirmation, so it ages out 14 days after the last one, as before
+    hist, _ = W.history_records([row], W.station_index(st), date(2026, 7, 22), "2026-07-22T16:00:00Z")
+    polls, state = W.poll_records(map_codes(s["stations"], {}), hist, state, "2026-07-22T16:00:00Z", date(2026, 7, 22))
+    assert hist[0]["raw"]["_last_seen_in_source"] == "2026-07-21T16:00:00Z"
+    assert not _current(hist[0], datetime(2026, 8, 6, tzinfo=timezone.utc), rules)
+
+
+def test_the_maps_current_status_keeps_a_no_end_history_resampling_notice_current_on_day_6():
+    # verify P1-1 (case 2)
+    from datetime import datetime, timezone
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    s = rec()
+    st = map_codes(s["stations"], {"Slaughter Beach": 2})
+    row = {"advisoryid": "9102", "advstartdate": "2026-07-01T00:00:00.000", "advreason": "Enterococcus Monitor",
+           "advtype": "Recreational Water Quality Resampling Underway", "unitname": "Slaughter Beach"}
+    state = {}
+    for d in range(1, 7):
+        at = f"2026-07-{d:02d}T16:00:00Z"
+        hist, _ = W.history_records([row], W.station_index(st), date(2026, 7, d), at)
+        polls, state = W.poll_records(st, hist, state, at, date(2026, 7, d))
+    shown = _shown(hist + polls)
+    assert len(shown) == 1 and shown[0]["raw"].get("_agency_label_only")
+    assert _current(shown[0], datetime(2026, 7, 6, 17, tzinfo=timezone.utc), rules)
+
+
+def test_a_poll_episode_the_map_still_shows_after_the_historys_end_date_is_not_its_duplicate():
+    # verify P1-1 (case 3): the map shows an advisory from July 1; history later says July 1 to July 3; the map
+    # still shows it on July 5: current, not grey
+    from datetime import datetime, timezone
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    s = rec()
+    st = map_codes(s["stations"], {"Slaughter Beach": 0})
+    _, state = W.poll_records(st, [], {}, "2026-07-01T16:00:00Z", date(2026, 7, 1))
+    row = {"advisoryid": "9103", "advstartdate": "2026-07-01T00:00:00.000", "advenddate": "2026-07-03T00:00:00.000",
+           "advreason": "Bacteria", "advtype": "Recreational Water Quality Advisory", "unitname": "Slaughter Beach"}
+    hist, _ = W.history_records([row], W.station_index(st), date(2026, 7, 2), "2026-07-02T16:00:00Z")
+    polls, state = W.poll_records(st, hist, state, "2026-07-02T16:00:00Z", date(2026, 7, 2))
+    assert polls[0]["duplicate_of"] == hist[0]["event_id"]          # inside the history's dates: counted once
+    for d in (3, 4, 5):
+        at = f"2026-07-{d:02d}T16:00:00Z"
+        hist, _ = W.history_records([row], W.station_index(st), date(2026, 7, d), at)
+        polls, state = W.poll_records(st, hist, state, at, date(2026, 7, d))
+    p = polls[0]
+    assert p.get("duplicate_of") is None and p["raw"]["continues_after"] == hist[0]["event_id"]
+    assert _current(p, datetime(2026, 7, 5, 17, tzinfo=timezone.utc), rules)
