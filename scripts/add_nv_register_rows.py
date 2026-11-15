@@ -173,6 +173,10 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             basis, kind = Q_LAW + (("; " + Q_PERMIT.format(permit=permit)) if permit else ""), "law"
             what = ("its notice to NDEP under NRS 445A.467 (online or by telephone)"
                     + (" and its permit's noncompliance reports" if permit else ""))
+        elif op.get("permit_only"):
+            basis, kind = Q_PERMIT.format(permit=permit), "permit"
+            what = ("the permit's noncompliance reports (whether NRS 445A.467 also binds the holder depends on who "
+                    "holds the permit, which is not established here)")
         else:
             basis, kind = Q_PERMIT.format(permit=permit), "permit"
             what = ("its permit's noncompliance reports (NRS 445A.467 binds local governments, not "

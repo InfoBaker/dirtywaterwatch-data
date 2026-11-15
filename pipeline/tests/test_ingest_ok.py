@@ -125,7 +125,9 @@ def test_every_oklahoma_permit_is_in_exactly_one_row():
     held = {p for r in _ops() for p in r["npdes_permits"]}
     assert wanted <= held and len(plants) == 316
     okc = next(r for r in _ops() if r["id"] == "ok-oklahoma-city-water-utilities-trust")
-    assert len(okc["npdes_permits"]) == 5 and "ok-okc-utilities" in okc["aliases"]
+    assert okc["npdes_permits"] == ["OK0027553", "OK0027561"] and "ok-okc-utilities" in okc["aliases"]
+    city = next(r for r in _ops() if r["id"] == "ok-city-of-oklahoma-city")
+    assert city["npdes_permits"] == ["OK0030520", "OK0036978", "OK0038385"] and city["legal_form"] == "city"
     for rid in ("ok-tulsa", "ok-broken-arrow", "ok-norman", "ok-lawton", "ok-sulphur"):
         assert sum(rid in r["aliases"] for r in _ops()) == 1
 
@@ -134,9 +136,10 @@ def test_oklahoma_legal_forms_scope_and_no_individual():
     from ingest import dischargers_schema as DS
     rows = _ops()
     assert not DS.check_legal_forms(rows)
-    tribal = {r["id"] for r in rows if r["legal_form"] == "tribal"}
-    assert {"ok-seneca-cayuga-tribe", "ok-otoe-missouria-tribe", "ok-kickapoo-wwtp",
-            "ok-chickasaw-tribal-utilities-authority"} == tribal
+    assert {r["id"] for r in rows if r["legal_form"] == "tribal"} == {"ok-seneca-cayuga-tribe",
+                                                                      "ok-chickasaw-tribal-utilities-authority"}
+    tribal = {"ok-seneca-cayuga-tribe", "ok-chickasaw-tribal-utilities-authority", "ok-permit-ok0044695",
+              "ok-permit-ok0044733"}                 # the two permit-only rows of tribal scope keep the tribal channel
     for r in rows:
         assert ("tribal permit" in r["notification_channel"]) == (r["id"] in tribal), r["id"]
     choctaw = next(r for r in rows if r["id"] == "ok-choctaw-utilities-authority")
@@ -317,3 +320,40 @@ def test_p2_7_a_qualified_result_keeps_its_bound(text, kind, expect):
         assert r["raw"]["result"]["text"] == text and r["raw"]["_agency_label_only"] is True
         assert ("may be at or above" in r["raw"]["_agency_label"]) == (expect == "possible")
         assert text.replace(">=", "≥") in r["advice_text"] or text in r["advice_text"] or r["raw"]["result"]["qualifier"]
+
+
+def test_p2_9_operators_are_the_permittees_epa_records():
+    from nv_ok_evidence import unsupported
+    assert unsupported("OK") == []
+    rows = {r["id"]: r for r in _ops()}
+    po = {rid for rid, r in rows.items() if r.get("permit_only")}
+    assert po == {f"ok-permit-{p.lower()}" for p in ("OKG580038", "OK0066666", "OK0100731", "OK0032417", "OK0032425",
+                                                     "OK0029190", "OKG580062", "OK0044695", "OK0044733", "OK0037982",
+                                                     "OK0044971")}
+    assert all(rows[r]["legal_form"] is None and "not counted as an operator" in rows[r]["notes"] for r in po)
+    assert not [r for r in rows.values() if "owner not read" in r["name"] or "wastewater plant" in r["name"]]
+    assert "ok-norman" in rows["ok-permit-ok0029190"]["aliases"]
+
+
+def test_p2_10_only_municipal_permits_carry_the_municipal_clause():
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "ok.json").read_text())["channels"]}
+    ops = {r["id"]: r for r in _ops()}
+    # an industrial company's permit (not read): the federal condition, unverified; never Part III B.6
+    for rid in ("ok-vicinity-energy-tulsa-llc", "ok-umicore-optical-materials"):
+        b = reg[f"{rid}-deq-report"]["legal_basis"]
+        assert "Part III B.6" not in b and "unverified" in b, rid
+        assert "Part III" not in ops[rid]["notification_channel"] and "unverified" in ops[rid]["notification_channel"]
+    # a municipal POTW permit: the municipal clause
+    tulsa = reg["ok-tulsa-metropolitan-utility-authority-deq-report"]["legal_basis"]
+    assert "Part III B.6" in tulsa and "unverified" not in tulsa
+    # a general-permit coverage: its own words, unverified
+    b = reg["ok-mounds-public-works-authority-deq-report"]["legal_basis"]
+    assert "OK0022888, Part III B.6" in b and "general permit coverage OKG580003" in b and "unverified" in b
+    # a state prison's permit and a mobile-home park's: not municipal by EPA's record
+    for rid in ("ok-oklahoma-department-of-corrections", "ok-lone-elm-mobile-home-park"):
+        assert "Part III B.6" not in reg[f"{rid}-deq-report"]["legal_basis"], rid
+    # tribal: the issuing agency not read
+    assert "tribal; issuing agency not read" in reg["ok-permit-ok0044733-deq-report"]["legal_basis"]
+    for rid, r in reg.items():
+        if rid.endswith("-deq-report"):
+            assert "expansion-research.md" not in r["note"]

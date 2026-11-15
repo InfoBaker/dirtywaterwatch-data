@@ -5,6 +5,30 @@
  "channels": [
   {
    "state": "NV",
+   "operator_id": "nv-amentum-services-hawthorne",
+   "agency": null,
+   "permit": "NV0021946",
+   "checked": "2026-11-14",
+   "id": "nv-amentum-services-hawthorne-ndep-report",
+   "name": "Amentum Services, Inc. (Hawthorne Army Depot)",
+   "channel_kind": "state_alert_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "NPDES permit NV0021946 (NDEP): the 24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), to NDEP",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "none",
+   "records": false,
+   "noun": "Report to the state",
+   "sources": [
+    "nv-law-sb276-2025"
+   ],
+   "note": "Amentum Services, Inc. (Hawthorne Army Depot) reports a sewage discharge to NDEP: its permit's noncompliance reports (NRS 445A.467 binds local governments, not private holders). NDEP publishes no list of them; no public notice is required: no web channel found. The permit itself was not read: the federal standard condition is assumed. (research/nv/expansion-research.md)",
+   "barrier": "no_web_page"
+  },
+  {
+   "state": "NV",
    "operator_id": "nv-churchill-county",
    "agency": null,
    "permit": "NV0023582",
@@ -287,30 +311,6 @@
     "nv-epa-sobe"
    ],
    "note": "EPA's sewer overflow and bypass tables hold no Nevada report and list no Nevada collection system (current and all-versions extracts of 2026-11-12, https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); Nevada's permittees report to NDEP. Checked again at each state build; the state is not read from these tables.",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "NV",
-   "operator_id": "nv-hawthorne-army-depot",
-   "agency": null,
-   "permit": "NV0021946",
-   "checked": "2026-11-14",
-   "id": "nv-hawthorne-army-depot-ndep-report",
-   "name": "U.S. Army, Hawthorne Army Depot",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "NPDES permit NV0021946 (NDEP): the 24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), to NDEP",
-   "basis_kind": "permit",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "nv-law-sb276-2025"
-   ],
-   "note": "U.S. Army, Hawthorne Army Depot reports a sewage discharge to NDEP: its permit's noncompliance reports (NRS 445A.467 binds local governments, not the federal government). NDEP publishes no list of them; no public notice is required: no web channel found. The permit itself was not read: the federal standard condition is assumed. (research/nv/expansion-research.md)",
    "barrier": "no_web_page"
   },
   {
@@ -687,12 +687,12 @@
    "permit": "NV0020150",
    "checked": "2026-11-14",
    "id": "nv-truckee-meadows-wrf-ndep-report",
-   "name": "Truckee Meadows Water Reclamation Facility (Reno and Sparks)",
+   "name": "Permit NV0020150 (Truckee Meadows Water Reclamation Facility)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
-   "legal_basis": "NRS 445A.467(1)(a): a city, county, unincorporated town, general improvement district, wastewater district or water authority \"that has been notified or is aware of the incident shall notify the Division electronically on the Internet website of the Division or by telephone\"; NPDES permit NV0020150 (NDEP): the 24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), to NDEP",
-   "basis_kind": "law",
+   "legal_basis": "NPDES permit NV0020150 (NDEP): the 24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), to NDEP",
+   "basis_kind": "permit",
    "monitored": false,
    "unmonitored_reason": "other",
    "publishes": "none",
@@ -701,7 +701,7 @@
    "sources": [
     "nv-law-sb276-2025"
    ],
-   "note": "Truckee Meadows Water Reclamation Facility (Reno and Sparks) reports a sewage discharge to NDEP: its notice to NDEP under NRS 445A.467 (online or by telephone) and its permit's noncompliance reports. NDEP publishes no list of them; no public notice is required: no web channel found. The permit itself was not read: the federal standard condition is assumed. (research/nv/expansion-research.md)",
+   "note": "Permit NV0020150 (Truckee Meadows Water Reclamation Facility) reports a sewage discharge to NDEP: the permit's noncompliance reports (whether NRS 445A.467 also binds the holder depends on who holds the permit, which is not established here). NDEP publishes no list of them; no public notice is required: no web channel found. The permit itself was not read: the federal standard condition is assumed. (research/nv/expansion-research.md)",
    "barrier": "no_web_page"
   }
  ]

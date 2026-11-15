@@ -44,6 +44,12 @@ NPS = "https://www.nps.gov/chic/planyourvisit/bathing-beach-monitoring-program.h
 Q_PERMIT = ("OPDES permit {permit}, Part III B.6 (DEQ's municipal standard conditions, March 2017): oral notice to DEQ "
             "within 24 hours of becoming aware of any collection-system bypass or overflow, a written report within "
             "five days")
+Q_GENERAL = ("OPDES general permit coverage {permit} (DEQ's general permit for small lagoon systems, not read): the "
+             "24-hour and five-day noncompliance reports of 40 CFR 122.41(l)(6), which OAC 252:606 incorporates, "
+             "assumed, unverified")
+Q_UNRESOLVED = ("OPDES permit {permit} (not a municipal POTW permit in EPA's record; not read): the 24-hour and "
+                "five-day noncompliance reports of 40 CFR 122.41(l)(6), which OAC 252:606 incorporates, assumed, "
+                "unverified; DEQ's municipal standard conditions not asserted")
 Q_TRIBAL = ("NPDES permit {permit} (tribal; issuing agency not read): the 24-hour and five-day noncompliance reports of "
             "40 CFR 122.41(l)(6), to the issuing agency")
 NOTE_CONFLICT = ("DEQ's three instructions differ: the permit's standard conditions say 24 hours from awareness, DEQ's "
@@ -139,7 +145,7 @@ OWN = [
      "publishes": "none", "records": False, "sources": ["ok-okc-tulsa-utilities"],
      "note": ("Tulsa's Water and Sewer page (https://cityoftulsa.org/government/departments/water-and-sewer/) asks the "
               "public to report a sewer overflow by telephone only; no published list of overflows was found.")},
-    {"id": "ok-okc-news", "operator_id": "ok-oklahoma-city-water-utilities-trust", "name": "City of Oklahoma City",
+    {"id": "ok-okc-news", "operator_id": "ok-city-of-oklahoma-city", "name": "City of Oklahoma City",
      "channel_kind": "news_page", "urls": [], "method": None, "legal_basis": None,
      "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "other", "publishes": "notices",
      "records": False, "sources": ["ok-okc-tulsa-utilities"],
@@ -156,23 +162,46 @@ def base(**kw) -> dict:
     return r
 
 
+def _plants() -> dict:
+    out = {}
+    for r in json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]:
+        if r.get("state") == "OK" and r.get("npdes_permit"):
+            out.setdefault(r["npdes_permit"], r)
+    return out
+
+
+def legal_basis(op: dict, plants: dict) -> tuple[str, dict]:
+    """(the legal basis each of the row's permits supports, grouped; the scopes), Astra P2-10: the municipal Part III
+    B.6 only for a permit EPA records as a municipal POTW."""
+    from add_ok_operators import permit_scope
+    lf = "permit only" if op.get("permit_only") else op.get("legal_form")
+    q = {"municipal": Q_PERMIT, "general": Q_GENERAL, "unresolved": Q_UNRESOLVED, "tribal": Q_TRIBAL}
+    scopes = {p: permit_scope(p, plants.get(p), lf) for p in op.get("npdes_permits") or []}
+    return "; ".join(q[sc].format(permit=p) for p, sc in sorted(scopes.items())), scopes
+
+
 def operator_rows(dis: list[dict]) -> list[dict]:
     rows = []
+    plants = _plants()
     for op in dis:
         if op.get("state") != "OK" or "ok" not in (op.get("source_areas") or []):
             continue
         oid, name, ps = op["id"], op["name"], op.get("npdes_permits") or []
         permit = ps[0] if ps else None
-        tribal = op.get("legal_form") == "tribal"
+        basis, scopes = legal_basis(op, plants)
+        tribal = bool(scopes) and all(sc == "tribal" for sc in scopes.values())
         rows.append(finish(base(
             id=f"{oid}-deq-report", operator_id=oid, name=name, permit=permit, channel_kind="state_alert_page",
-            urls=[], method=None, legal_basis=(Q_TRIBAL if tribal else Q_PERMIT).format(permit=permit),
+            urls=[], method=None, legal_basis=basis,
             basis_kind="permit", monitored=False, unmonitored_reason="other", publishes="none", records=False,
             noun="Report to the state", sources=["ok-deq-opdes-rules"],
             note=(f"{name} reports a bypass or overflow under its permit to "
                   + ("the issuing agency (DEQ or EPA Region 6; not read)" if tribal else "DEQ")
-                  + "; no list is published and no public notice is required: no web channel found. The permit itself "
-                  "was not read: the standard condition is assumed. (research/ok/expansion-research.md)"))))
+                  + "; no list is published and no public notice duty was found: no web channel found. The permit "
+                  "itself was not read: "
+                  + ("DEQ's municipal standard condition is assumed for a municipal POTW permit; for any other, the "
+                     "federal condition, unverified." if set(scopes.values()) - {"tribal"} else
+                     "the federal condition is assumed.")))))
     return rows
 
 

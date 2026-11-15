@@ -52,12 +52,48 @@ CANDIDATES = ROOT / "research" / "ok" / "private-utilities-candidates.json"
 DEQ = ROOT / "data" / "raw" / "ok-deq-gis" / "layer4-rows.json"
 CHECKED = "2026-11-14"
 PART3 = "https://oklahoma.gov/content/dam/ok/en/deq/documents/water-division/MunyPart3modified_3-17-17.pdf"
-LAW = ("DEQ issues Oklahoma's discharge permits (OPDES). The municipal permits' standard conditions (Part III, revision of "
-       "March 2017, section B.6) require oral notice to DEQ within 24 hours of becoming aware of any collection-system "
-       "bypass or overflow and a written report within five days; DEQ's wastewater reporting page asks for a telephone "
-       "report within 48 hours of the event and a written follow-up in five days, and DEQ's bypass form (605-011, revised "
-       "October 2025) for 24 hours and five days. DEQ publishes no list of the reports, EPA's overflow tables hold no "
-       f"Oklahoma report (2026-11-12 extract), and no duty to tell the public was found ({PART3}).")
+# the reporting condition each permit's scope supports (Astra P2-10): DEQ's municipal standard conditions only for a
+# permit EPA records as a municipal POTW; a general-permit coverage or any other permit gets the federal condition,
+# marked assumed and unverified, since no permit was read
+SCOPE_TEXT = {
+    "municipal": ("DEQ's municipal permits' standard conditions (Part III, revision of March 2017, section B.6) require "
+                  "oral notice to DEQ within 24 hours of becoming aware of any collection-system bypass or overflow and "
+                  f"a written report within five days ({PART3}); the permit itself was not read."),
+    "general": ("A coverage under DEQ's general permit for small lagoon systems (OKG58); the general permit was not read, "
+                "so its reporting condition is not asserted: the 24-hour and five-day reports of 40 CFR 122.41(l)(6), "
+                "which OAC 252:606 incorporates, are assumed, unverified."),
+    "unresolved": ("EPA does not record a municipal POTW permit here; the permit was not read, so DEQ's municipal "
+                   "standard conditions are not asserted: the 24-hour and five-day reports of 40 CFR 122.41(l)(6), "
+                   "which OAC 252:606 incorporates, are assumed, unverified."),
+}
+COMMON = ("DEQ's wastewater reporting page asks for a telephone report within 48 hours of the event and a written "
+          "follow-up in five days, and DEQ's bypass form (605-011, revised October 2025) for 24 hours and five days. DEQ "
+          "publishes no list of the reports, EPA's overflow tables hold no Oklahoma report (2026-11-12 extract), and no "
+          "duty to tell the public was found.")
+MUNICIPAL_TYPES = {"Municipal or Water District", "Municipality", "POTW"}
+PUBLIC_FORMS = {"city", "town", "authority", "special district", "county", "permit only"}
+
+
+def permit_scope(permit: str, plant: dict | None, lf: str | None) -> str:
+    """'tribal', 'general', 'municipal' or 'unresolved' for one permit, from EPA's record of it and the row's form."""
+    if lf == "tribal" or permit in TRIBAL_SCOPE:
+        return "tribal"
+    if permit.startswith("OKG"):
+        return "general"
+    if plant and plant.get("facility_type") in MUNICIPAL_TYPES and "POTW" in (plant.get("permit_components") or []) \
+            and lf in PUBLIC_FORMS:
+        return "municipal"
+    return "unresolved"
+
+
+def scope_text(scopes: dict[str, str]) -> str:
+    """The reporting sentences for a row's permits, grouped by scope (each group named when the row mixes scopes)."""
+    groups: dict[str, list[str]] = defaultdict(list)
+    for p, sc in sorted(scopes.items()):
+        groups[sc].append(p)
+    if len(groups) == 1:
+        return SCOPE_TEXT[next(iter(groups))]
+    return " ".join(f"{', '.join(ps)}: {SCOPE_TEXT[sc]}" for sc, ps in groups.items())
 TRIBAL = ("A tribal permit: whether DEQ or EPA Region 6 issued it was not read from the permit (EPA, not the state, "
           "administers the Clean Water Act program on tribal land where the state has no authority). Either way the "
           "permit's 24-hour and five-day noncompliance reports go to the issuing agency (40 CFR 122.41(l)(6)), which "
@@ -74,8 +110,6 @@ OVERRIDES = {
     "OK0022888": ("Mounds Public Works Authority", None, "authority", "EPA records the owner as \"Mounds WTF\"."),
     "OKG580003": ("Mounds Public Works Authority", None, "authority", None),
     "OK0022951": ("Oklahoma Department of Corrections", None, "state facility", None),
-    "OK0037982": ("Oklahoma Department of Corrections", None, "state facility", None),
-    "OK0044971": ("Oklahoma Department of Corrections", None, "state facility", None),
     "OKG580069": ("Oklahoma Department of Corrections", None, "state facility", None),
     "OK0026221": ("Tulsa Metropolitan Utility Authority", None, "authority", None),
     "OK0026239": ("Tulsa Metropolitan Utility Authority", None, "authority", "EPA records the owner as \"TMUA\"."),
@@ -85,12 +119,10 @@ OVERRIDES = {
                   "Broken Arrow and Bixby, by its name; its members were not read)."),
     "OK0027553": ("Oklahoma City Water Utilities Trust", None, "authority", None),
     "OK0027561": ("Oklahoma City Water Utilities Trust", None, "authority", None),
-    "OK0030520": ("Oklahoma City Water Utilities Trust", None, "authority",
-                  "EPA records the owner as \"Oklahoma City, City of\"; the Trust runs the city's plants."),
-    "OK0036978": ("Oklahoma City Water Utilities Trust", None, "authority",
-                  "EPA records the owner as \"OK City, City of\"; the Trust runs the city's plants."),
-    "OK0038385": ("Oklahoma City Water Utilities Trust", None, "authority",
-                  "EPA records the owner as \"OK City, City of\"; the Trust runs the city's plants."),
+    "OK0030520": ("City of Oklahoma City", None, "city",
+                  "EPA records the owner as \"Oklahoma City, City of- Dunjee Park\"."),
+    "OK0036978": ("City of Oklahoma City", None, "city", "EPA records the owner as \"OK City, City of-North Canadian\"."),
+    "OK0038385": ("City of Oklahoma City", None, "city", "EPA records the owner as \"OK City, City of-South Canadian\"."),
     "OK0026077": ("Bethany/Warr Acres Public Works Authority", None, "authority", None),
     "OK0026085": ("Del City Municipal Services Authority", None, "authority", None),
     "OK0026972": ("Seminole County Rural Water and Sewer Management District No. 3", None, "special district", None),
@@ -98,9 +130,6 @@ OVERRIDES = {
                   "The Wyandotte plant, as EPA records it."),
     "OK0028622": ("Okfuskee County Rural Water District No. 1", None, "special district",
                   "The Boley plant, as EPA records it."),
-    "OK0029190": ("City of Norman", None, "city",
-                  "EPA records the owner as \"Norman WWTF\" and the facility as the Norman Water Reclamation Facility; "
-                  "the city owns the plant (research/ok)."),
     "OK0030236": ("City of Seneca, Missouri", "City of Seneca", "city",
                   "EPA records the owner as \"Seneca, City of (Missouri)\": a Missouri city whose plant permit is "
                   "Oklahoma's."),
@@ -132,12 +161,6 @@ OVERRIDES = {
     "OK0042684": ("Thomas Park, LLC", None, "business or industrial", None),
     "OK0043257": ("Wagoner County Rural Water, Sewer, Gas and Solid Waste Management District No. 4", None,
                   "special district", None),
-    "OK0044695": ("Otoe-Missouria Tribe (treatment facility)", "Otoe-Missouria Tribe", "tribal",
-                  "EPA records the facility as permittee (\"OTOE MISSOURIA TREATMENT FACIL\") and types it non-POTW."),
-    "OK0044733": ("Kickapoo Tribe of Oklahoma (Kickapoo WWTP)", "Kickapoo WWTP", "tribal",
-                  "EPA records the plant as permittee and types it privately owned; EPA's collection-system table types "
-                  "the owner a tribal government (KICKAPOO WWTP SSCS, population 500). The tribe's own name for the "
-                  "permittee was not read."),
     "OK0045721": ("Chickasaw Tribal Utilities Authority", None, "tribal", "The WinStar plant, as EPA records it."),
     "OK0045764": ("Indian Nations Council, Boy Scouts of America (Camp Tom Hale)", "Indian Nations Council, BSA",
                   "institution", None),
@@ -163,7 +186,6 @@ OVERRIDES = {
     "OK0034266": ("City of Lone Grove", None, "city", None),
     "OK0045951": ("City of Newkirk", None, "city", "EPA records the owner as \"Newkirk WTF\"."),
     "OKG580023": ("Bluejacket Public Works Authority", None, "authority", None),
-    "OKG580062": ("City of Sand Springs", None, "city", "EPA records the owner as \"Sand Springs-Sand Creek WWTF\"."),
     "OKG580068": ("Town of Gans", None, "town", "EPA records the owner as \"Gans WWTF\"."),
     # private candidates outside the plant list (research/ok/private-utilities-candidates.json)
     "OK0002461": ("Vicinity Energy Tulsa, LLC", None, "business or industrial",
@@ -179,9 +201,17 @@ OVERRIDES = {
                   "EPA records the industrial park plant (OK0038849, \"Heavener UA-Industrial Park\") as a food "
                   "processor's code (NAICS 311615)."),
 }
-# owners EPA names only by a plant: the owner is not read, legal_form null (NM's rule)
-UNREAD = {"OKG580038": "Avant", "OK0066666": "Forgan", "OK0100731": "Minco", "OK0032417": "Wetumka",
-          "OK0032425": "Wetumka"}
+# permits whose holder EPA does not name (both its owner and facility fields give only a plant): a permit-only row per
+# permit, "Permit OK... (<plant>)", permit_only true, legal_form null, left out of operator counts (main's rule,
+# scripts/icis_operators.py; Astra P2-9), never named after the plant or an inferred town or tribe
+PERMIT_ONLY = {"OKG580038", "OK0066666", "OK0100731", "OK0032417", "OK0032425",   # Avant, Forgan, Minco, Wetumka (2)
+               "OK0029190",       # "Norman WWTF" / "Norman Water Reclamation Facility"
+               "OKG580062",       # "Sand Springs-Sand Creek WWTF" in both fields
+               "OK0044695",       # "Otoe Missouria Treatment Facil" in both fields, EPA type NON-POTW
+               "OK0044733",       # "Kickapoo WWTP" in both fields; EPA's collection-system table types the owner tribal
+               "OK0037982", "OK0044971"}   # two correctional centers named in both fields (the department not named)
+# permits whose scope is tribal by EPA's owner type or the facility's own name: the tribal channel, issuer not read
+TRIBAL_SCOPE = {"OK0044695", "OK0044733"}
 ABBR = [(r"\bPWA\b", "Public Works Authority"), (r"\bPUA\b", "Public Utilities Authority"),
         (r"\bMUA\b", "Metropolitan Utility Authority"), (r"\bMSA\b", "Municipal Services Authority"),
         (r"\bMIA\b", "Municipal Improvement Authority"), (r"\bMA\b", "Municipal Authority"),
@@ -207,10 +237,12 @@ def owner(permit: str, permit_name: str | None, permittee: str | None) -> tuple[
     """(name, short, legal_form, note) of the permit's owner."""
     if permit in OVERRIDES:
         return OVERRIDES[permit]
-    if permit in UNREAD:
-        place = UNREAD[permit]
-        return (f"{place} wastewater plant (owner not read)", f"{place} wastewater plant", None,
-                f"EPA records the plant's name as the owner (\"{permit_name or permittee}\"); the owner was not read.")
+    if permit in PERMIT_ONLY:
+        plant = tidy(permittee or permit_name or "")
+        return (f"Permit {permit} ({plant})", f"Permit {permit} ({plant})", "permit only",
+                f"Permit only: EPA ICIS-NPDES gives only the plant's name as owner (\"{permit_name or permittee}\") "
+                f"and facility (\"{permittee or permit_name}\"), not the body that holds the permit; the operator is "
+                "not established here, so this row is not counted as an operator.")
     raw = (permit_name or permittee or "").strip()
     s = re.split(r"\s*-\s*|\s+-|-\s+", raw)[0] if re.search(r"-", raw) else raw
     s = FACILITY.sub("", s).strip(" ,")
@@ -244,10 +276,12 @@ def deq_status(path: Path = DEQ) -> tuple[dict[str, set], bool]:
     return out, True
 
 
-def channel(lf: str | None) -> str:
-    if lf == "tribal":
+def channel(lf: str | None, scopes: dict[str, str]) -> str:
+    if scopes and all(sc == "tribal" for sc in scopes.values()):
         return TRIBAL
-    return LAW + (PRIVATE if lf in PRIVATE_FORMS or lf == "state facility" else "") + OWN
+    rest = {p: sc for p, sc in scopes.items() if sc != "tribal"}
+    return ("DEQ issues Oklahoma's discharge permits (OPDES). " + scope_text(rest) + " " + COMMON
+            + (PRIVATE if lf in PRIVATE_FORMS or lf == "state facility" else "") + OWN)
 
 
 def build(dis: list[dict], deq_path: Path = DEQ) -> tuple[list[dict], dict]:
@@ -269,7 +303,7 @@ def build(dis: list[dict], deq_path: Path = DEQ) -> tuple[list[dict], dict]:
         first = (pl.get(p) or [{}])[0]
         c = cands.get(p) or {}
         name, short, lf, note = owner(p, first.get("permit_name"), first.get("permittee") or c.get("facility"))
-        rid = f"ok-{slug(short or name)}"
+        rid = f"ok-permit-{p.lower()}" if lf == "permit only" else f"ok-{slug(short or name)}"
         row = by_row.setdefault(rid, {"name": name, "short": short or name, "lf": lf, "permits": [], "notes": []})
         if row["lf"] != lf:
             raise SystemExit(f"{rid}: legal forms disagree ({row['lf']} and {lf})")
@@ -280,7 +314,7 @@ def build(dis: list[dict], deq_path: Path = DEQ) -> tuple[list[dict], dict]:
     for r in json.loads(RESEARCH.read_text()):
         research[r["id"]] = r
     city_of = {"ok-okc-utilities": "ok-oklahoma-city-water-utilities-trust", "ok-tulsa": "ok-tulsa-metropolitan-utility-authority",
-               "ok-broken-arrow": "ok-city-of-broken-arrow", "ok-norman": "ok-city-of-norman",
+               "ok-broken-arrow": "ok-city-of-broken-arrow", "ok-norman": "ok-permit-ok0029190",
                "ok-lawton": "ok-city-of-lawton", "ok-sulphur": "ok-sulphur-municipal-authority"}
     aliases: dict[str, list[str]] = defaultdict(list)
     for rid in research:
@@ -309,12 +343,15 @@ def build(dis: list[dict], deq_path: Path = DEQ) -> tuple[list[dict], dict]:
         if m["notes"]:
             note += " " + " ".join(dict.fromkeys(m["notes"]))
         kind = "collection_system" if ps == ["OK0044733"] else "plant"
-        new.append({"id": rid, "name": m["name"], "short_name": m["short"], "legal_form": m["lf"], "state": "OK",
+        scopes = {p: permit_scope(p, (pl.get(p) or [None])[0], m["lf"]) for p in ps}
+        po = m["lf"] == "permit only"
+        new.append({"id": rid, "name": m["name"], "short_name": m["short"], "legal_form": None if po else m["lf"],
+                    **({"permit_only": True} if po else {}), "state": "OK",
                     "kind": "sso" if kind == "collection_system" else "plant", "npdes_permit": ps[0], "npdes_permits": ps,
                     "receiving_waters": waters, "water_slugs": [], "outfall_count": len(rows) or None,
                     "outfalls_source": (f"EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, {len(rows)} rows)"
                                         if rows else None),
-                    "notification_channel": channel(m["lf"]), "notification_feed_machine_readable": False,
+                    "notification_channel": channel(m["lf"], scopes), "notification_feed_machine_readable": False,
                     "notification_signup_url": None, "towns": towns, "notes": note, "verified": "fetched",
                     "checked": CHECKED, "aliases": list(dict.fromkeys([rid] + aliases.get(rid, []))),
                     "source_areas": ["ok"]})
@@ -326,6 +363,9 @@ def build(dis: list[dict], deq_path: Path = DEQ) -> tuple[list[dict], dict]:
     stats = {"rows": len(new), "permits": sum(len(r["npdes_permits"]) for r in new),
              "discharge_points": sum(r["outfall_count"] or 0 for r in new),
              "multi_permit_rows": sum(1 for r in new if len(r["npdes_permits"]) > 1), "deq_layer_read": have_deq,
+             "permit_only_rows": sum(1 for r in new if r.get("permit_only")),
+             "permit_only_permits": sum(len(r["npdes_permits"]) for r in new if r.get("permit_only")),
+             "operators": sum(1 for r in new if not r.get("permit_only")),
              "legal_form": dict(Counter(r["legal_form"] for r in new)), "kind": dict(Counter(r["kind"] for r in new))}
     return keep + new, stats
 
