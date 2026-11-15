@@ -141,6 +141,14 @@ def compact(s: str) -> str:
     return re.sub(r"[^a-z0-9]", "", s)
 
 
+# a name that is a plant's, not a body's (re-review P2-1): read only where form() finds no legal form
+FACILITY_LABEL = re.compile(r"\b(?:wastewater|waste water|treatment|wwtf|wwtp|stp|lagoons?|plant|plt|facility|complex|"
+                            r"community center|res)\b", re.I)
+# words that make a name a body's even when it holds a plant word ("Lake Area Waste Water Association Inc")
+BODY_WORDS = re.compile(r"\b(?:association|assn|inc|llc|l\.l\.c|corp(?:oration)?|company|co|district|commission|"
+                        r"society|foundation|trust|board|authority|city of|county)\b", re.I)
+
+
 def form(name: str, facility_type: str | None) -> str | None:
     n = name.lower()
     if name in FORM_BY_NAME:
@@ -236,10 +244,16 @@ def build(dis: list[dict]) -> tuple[list[dict], Counter]:
                                        "legal_form": "facility (permittee not named)", "permits": [p], "private": True,
                                        "basis": "EPA's permittee name reads as an individual's: not named here"}
             continue
-        elif pl and pl[0].get("permittee"):
-            name, basis = pl[0]["permittee"], "EPA ICIS-NPDES facility name (no permittee of record)"
-        elif cso.get(p):
-            name, basis = cso[p][0]["permittee"], "EPA's CSO inventory (the facility's name)"
+        elif (pl and pl[0].get("permittee")) or cso.get(p):
+            # EPA gives no permittee of record, only the facility's name: a permit-only row under the facility, never
+            # an operator (re-review P2-1); left out of operator counts by its legal form, one row per permit
+            fac = pl[0]["permittee"] if pl and pl[0].get("permittee") else cso[p][0]["permittee"]
+            groups[f"facility:{p}"] = {"name": f"{tidy(fac)} (permit {p})", "legal_form": "facility (permittee not named)",
+                                       "permits": [p], "private": False, "id_name": tidy(fac),
+                                       "basis": ("EPA records no permittee for this permit, only the facility's name "
+                                                 "(" + ("ICIS-NPDES" if pl and pl[0].get("permittee") else
+                                                        "the CSO inventory") + "); the operator is not established")}
+            continue
         elif res_by_permit.get(p):
             name, basis = res_by_permit[p]["name"], "the research row's name"
         else:
@@ -247,6 +261,19 @@ def build(dis: list[dict]) -> tuple[list[dict], Counter]:
         disp = tidy(name)
         ft = pl[0].get("facility_type") if pl else None
         lf = form(disp, ft)
+        # the plant-only test reads the name alone: EPA's facility type ("POTW", "Municipal or Water District") says
+        # what kind of body might hold the permit, never which one, so it cannot make a plant's name an operator
+        # (verification P2-1)
+        # a name that calls the plant "Municipal" names the municipality's plant: kept under EPA's municipal type
+        if form(disp, None) is None and p not in RESEARCH_NAME and FACILITY_LABEL.search(disp) \
+                and not BODY_WORDS.search(disp) and not re.search(r"\bmunicipal\b", disp, re.I):
+            # a permittee of record that names only a plant ("Beattie Wastewater Plant", "Twehous Acres WWTF") with no
+            # body whose legal form can be read: a permit-only row under the facility, not an operator (re-review P2-1)
+            groups[f"facility:{p}"] = {"name": f"{disp} (permit {p})", "legal_form": "facility (permittee not named)",
+                                       "permits": [p], "private": False, "id_name": disp,
+                                       "basis": ("EPA's permittee of record names only the plant; the body that holds "
+                                                 "the permit is not established")}
+            continue
         private = False
         if c and p not in public_by_name and lf not in PUBLIC_FORMS:
             lf = c.get("legal_form_proposed") if c.get("legal_form_proposed") in PRIVATE_FORMS else None
@@ -273,7 +300,7 @@ def build(dis: list[dict]) -> tuple[list[dict], Counter]:
     for k, g in sorted(groups.items(), key=lambda kv: kv[1]["name"].lower()):
         ps = list(dict.fromkeys(g["permits"]))
         rs = g.get("research") or []
-        rid = rs[0]["id"] if rs else f"mo-{slug(g['name'])}"
+        rid = rs[0]["id"] if rs else f"mo-{slug(g.get('id_name') or g['name'])}"
         if rid in ids:
             rid = f"{rid}-{ps[0].lower()}"
         new.append(make_row(rid, g, ps, rs, plants, cso, cands))
@@ -313,11 +340,25 @@ def channel(name: str, rs: list[dict], is_cso: bool, private: bool) -> str:
     return s
 
 
+# what a permitted feature's limit-set names say it is (re-review P2-2): an influent sampling point, a connection into
+# the collection system, or a land-application or storage basin is not a discharge to a water; a frequency name
+# ("MONTHLY", "Quarterly") says nothing either way
+_NOT_DISCHARGE_NAME = re.compile(r"\binfluent\b|\bcollection system\b|\bland app|\bstorage basin\b|\birrigat|"
+                                 r"\boperational monitoring\b|\bdewater", re.I)
+_DISCHARGE_NAME = re.compile(r"\beffluent\b|\bdischarge\b|\boutfall\b|\boverflow\b|\bbypass\b", re.I)
+
+
 def influent_only(x: dict) -> bool:
-    """A plant-table row whose limit sets describe only an influent connection to the collection system."""
+    """A plant-table row that is not a discharge to a water: its feature id is the influent's ("INF"), or every one of
+    its limit sets is an influent, collection-system, land-application, storage-basin or dewatering set. A row with a
+    frequency-only set beside an influent one ("MONTHLY | Influent Monitoring | Quarterly", an outfall that also reports
+    its influent) or any effluent, discharge or outfall set is counted."""
+    if re.fullmatch(r"INF\w*", str(x.get("outfall") or "").strip(), re.I):
+        return True
     names = [str(n) for n in x.get("limit_set_names") or []]
-    return bool(names) and any(re.search(r"\binfluent to\b", n, re.I) for n in names) and \
-        not any(re.search(r"effluent|discharge|outfall", n, re.I) for n in names)
+    if not names or any(_DISCHARGE_NAME.search(n) for n in names):
+        return False
+    return all(_NOT_DISCHARGE_NAME.search(n) for n in names)
 
 
 def make_row(rid, g, ps, rs, plants, cso, cands, kind=None) -> dict:

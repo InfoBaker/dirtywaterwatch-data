@@ -53,7 +53,8 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
-from ingest.mo_kc_water_news import TIME, clock, find_date, sentences, volume, waters
+from ingest.mo_kc_water_news import (TIME, clock, find_date, migrate_water_text, safe_link, safe_text, sentences, volume,
+                                     water_text, waters)
 
 SOURCE_ID = "mo-msd-stl-project-clear"
 API = "https://msdprojectclear.org/wp-json/wp/v2/posts"
@@ -150,7 +151,8 @@ def record(p: dict, at: str) -> dict:
                 ws.append(w)
     v, flag, vtext = volume(text)
     plant = bool(re.search(r"treatment plant", title, re.I))
-    raw = {"state": "MO", "time_zone": "America/Chicago", "title": title,
+    raw = {"state": "MO", "time_zone": "America/Chicago", "place_key": place_key(title),
+           "place_key_version": PLACE_KEY_VERSION,
            "is_follow_up": bool(FOLLOW_UP.search(title)), "start_kind": kind, "day_read_from": how,
            "start_is_upper_bound": kind in ("discovered", "reported", "publication", "stated"),
            "start_basis": ("the post gives no day for the overflow: dated to the post's own day, on or before which it "
@@ -165,14 +167,28 @@ def record(p: dict, at: str) -> dict:
     return event(
         source_id=SOURCE_ID, source_record_id=str(p["id"]), event_type="plant_bypass" if plant else "sso",
         status="unknown", discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER,
-        waterbody_text=ws[0] if ws else None, started_at=start, time_precision=prec,
+        waterbody_text=water_text(ws), started_at=start, time_precision=prec,
         published_at=(datetime.fromisoformat(p["date_gmt"]).replace(tzinfo=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
                       if p.get("date_gmt") else None),
         fetched_at=at, material="wastewater", volume_gal=v, volume_text=vtext, estimate_flag=flag,
-        authority=AUTHORITY, advice_text=avoid.group(0).strip() if avoid else None, source_url=p["link"], raw=raw)
+        authority=AUTHORITY, advice_text=safe_text(avoid.group(0).strip()) if avoid else None,
+        source_url=permalink(p), raw=raw)
+
+
+def permalink(p: dict) -> str:
+    """msdprojectclear.org/?p=<id>, the post's numeric permalink, so a name or address in its slug is never kept
+    (verification P1-4); the post's address only when it has no id."""
+    return safe_link(p["link"], f"https://msdprojectclear.org/?p={p['id']}" if p.get("id") else None)
+
+
+PLACE_KEY_VERSION = 2
 
 
 def place_key(title: str) -> str:
+    """The key that ties a follow-up post to its first post: the last place the title names, read from the scrubbed
+    title (safe_text), so a person's name in a title never becomes part of the key (verification P1-4)."""
+    title = safe_text(common.strip_house_numbers(title or "")) or ""
+    title = title.replace("[name removed]", " ")
     title = re.sub(r"\s*\b(?:completed?|update[ds]?|halted)\b\s*$", "", title, flags=re.I).strip(" :-")
     m = re.search(r".*\b(?:in|near|at|into|along)\s+(?:the\s+)?([A-Z][\w .'-]+)$", title, re.I)   # the last place
     return re.sub(r"[^a-z]", "", (m.group(1) if m else title).lower())
@@ -184,9 +200,11 @@ def link_follow_ups(recs: dict[str, dict]) -> int:
     for r in recs.values():
         if not r["raw"].get("is_follow_up"):
             continue
-        k = place_key(r["raw"]["title"])
+        k = r["raw"].get("place_key")
+        if not k:                                     # no key, no tie (never every keyless post to every other)
+            continue
         d = datetime.fromisoformat(r["started_at"][:10])
-        cands = [f for f in firsts if place_key(f["raw"]["title"]) == k and
+        cands = [f for f in firsts if f["raw"].get("place_key") == k and
                  0 <= (d - datetime.fromisoformat(f["started_at"][:10])).days <= 14]
         if not cands:
             continue
@@ -201,6 +219,19 @@ def link_follow_ups(recs: dict[str, dict]) -> int:
 
 def run(pages: list[list[dict]], prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
+    for r in recs.values():
+        if r["raw"].get("place_key_version") != PLACE_KEY_VERSION:
+            # a key made by an earlier version from the unscrubbed title can hold a name: remade from the title when
+            # the save still has it, else dropped (the post's next read remakes it); verification P1-4
+            if r["raw"].get("title"):
+                r["raw"]["place_key"] = place_key(r["raw"]["title"])
+            else:
+                r["raw"].pop("place_key", None)
+            r["raw"]["place_key_version"] = PLACE_KEY_VERSION
+        r["raw"].pop("title", None)                   # the post title is no longer kept (re-review P1-9)
+        migrate_water_text(r)
+        r["advice_text"] = safe_text(r.get("advice_text"))
+        r["source_url"] = safe_link(r.get("source_url") or "", f"https://msdprojectclear.org/?p={r.get('source_record_id')}")
     stats = {"posts": 0, "own_posts": 0, "notices": 0}
     for page in pages:
         for p in page:
@@ -223,8 +254,8 @@ def run(pages: list[list[dict]], prev: list[dict], at: str) -> tuple[list[dict],
 
 
 def safe_posts(page: list[dict]) -> list[dict]:
-    return [{"id": p["id"], "date_gmt": p.get("date_gmt"), "modified_gmt": p.get("modified_gmt"), "link": p["link"],
-             "title": common.strip_house_numbers(html.unescape(p["title"]["rendered"])),
+    return [{"id": p["id"], "date_gmt": p.get("date_gmt"), "modified_gmt": p.get("modified_gmt"), "link": permalink(p),
+             "place_key": place_key(common.strip_house_numbers(html.unescape(p["title"]["rendered"]))),
              } for p in page if is_notice(p)]
 
 
@@ -252,11 +283,13 @@ def main(argv=None) -> int:
             pages = [json.loads(Path(a).read_text()) for a in argv[argv.index("--file") + 1:] if not a.startswith("--")]
         else:
             pages = fetch("--backfill" in argv)
-    except (requests.RequestException, OSError, ValueError) as e:
+        # parsing and reconciliation inside the handler: a post without its publication time, or a malformed one,
+        # fails the run with the earlier records kept, never escapes without a health write (re-review P2-4)
+        recs, stats = run(pages, prev, now_iso())
+    except (requests.RequestException, OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
-    recs, stats = run(pages, prev, now_iso())
     out = write_events(SOURCE_ID, recs, meta={
         "registry_ids": [SOURCE_ID], "url": HOME, "api": API, **stats,
         "credit": "Metropolitan St. Louis Sewer District (MSD Project Clear), alerts and news releases",

@@ -47,7 +47,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
-from ingest.mo_kc_water_news import DATE, _month, sentences, waters
+from ingest.mo_kc_water_news import DATE, _month, date_positions, migrate_water_text, safe_text, sentences, water_text, waters
 
 SOURCE_ID = "ks-leavenworth-sso-transparency"
 BASE = "https://www.leavenworthks.gov"
@@ -64,10 +64,50 @@ POSTED = re.compile(r"Posted\s+([A-Z][a-z]+)\.?\s*(\d{1,2}),\s*(\d{4})\s+at\s+(\
 
 
 def record_id(path: str) -> str:
-    """The page's path name with its street numbers dropped ("sanitary-sewer-overflow-reported-april-27-2026-evergreen-
-    st"): the page address keeps the City's slug as the citation, the identifier carries no house number."""
-    slug = path.rstrip("/").rsplit("/", 1)[-1]
-    return re.sub(r"-\d+(?=-[a-z])(?!-20\d\d)", "", re.sub(r"(20\d\d)", r"\1", slug))
+    """The page's path name with every number dropped but a year and a day after its month
+    ("sanitary-sewer-overflow-reported-april-27-2026-evergreen-st"): the identifier carries no house or block number.
+    Idempotent, so an identifier made by an earlier version maps to the same one (re-review P1-8)."""
+    toks = path.rstrip("/").rsplit("/", 1)[-1].split("-")
+    # a number is kept only in a date position: a year-shaped house number is dropped too (verification P1-4); a
+    # page's posting stamp ("-p202604271530", added where two pages share an identifier) is kept
+    dated = date_positions(toks)
+    return "-".join(t for i, t in enumerate(toks) if not t.isdigit() or i in dated)
+
+
+# raw fields an earlier version saved that the records no longer carry
+FORBIDDEN_RAW = ("page_text", "text", "narrative")
+
+
+def migrate(prev: list[dict]) -> dict[str, dict]:
+    """Earlier saves brought to the current rules at the next read (re-review P1-8, P1-9): one record per page under
+    the canonical identifier (an identifier with a house number maps onto it; the newer read wins, the first sighting
+    is kept), the page address that carries a house number replaced by the City's index page as the citation, no
+    page text kept."""
+    out: dict[str, dict] = {}
+    for r in sorted(prev, key=lambda x: x.get("fetched_at") or ""):
+        rid = record_id(r.get("source_record_id") or "")
+        r["source_record_id"], r["event_id"] = rid, f"{SOURCE_ID}:{rid}"
+        raw = r.setdefault("raw", {})
+        for k in FORBIDDEN_RAW:
+            raw.pop(k, None)
+        url = r.get("source_url") or ""
+        if url.startswith(BASE + "/publicworks/page/sanitary-sewer-overflow"):
+            r["source_url"] = raw.get("cited_page") or INDEX
+        raw.setdefault("cited_page", r["source_url"])
+        migrate_water_text(r)
+        # every retained free-text field through the same scrub as a fresh read, for a record whose page is not read
+        # again (verification P1-4)
+        raw["title"] = safe_text(raw.get("title"))
+        r["advice_text"] = safe_text(r.get("advice_text"))
+        if r.get("outfall_name"):
+            r["outfall_name"] = re.sub(r"\[house number removed\]\s*", "", safe_text(r["outfall_name"])).strip(" .-") \
+                or None
+        old = out.get(r["event_id"])
+        if old:
+            firsts = [x for x in (old["raw"].get("first_seen_at"), raw.get("first_seen_at")) if x]
+            raw["first_seen_at"] = min(firsts) if firsts else None
+        out[r["event_id"]] = r
+    return out
 
 
 def clock(m: re.Match) -> tuple[int, int]:
@@ -113,7 +153,32 @@ def place_of(title: str) -> str | None:
     return re.sub(r"\s+", " ", s).strip(" .-") or None
 
 
-def record(path: str, h: str, at: str) -> dict:
+def end_day(s: str, w: re.Match, day: date) -> tuple[date | None, bool]:
+    """(the end clause's date, whether the sentence gave one): a date after the stop verb first ("stopped May 29 at 4
+    p.m."), else the one date before it in the same sentence ("On May 29, 2020, the overflow stopped at 4 p.m."); a
+    sentence with several dates before the verb and none after is ambiguous (None, True: no end). A date without a year
+    takes the report day's year, or the next when it would fall before the report day (December 31 to January 1)."""
+    after = list(DATE.finditer(s[w.start():]))
+    before = [m for m in DATE.finditer(s[:w.start()])]
+    if after:
+        dm = after[0]
+    elif len(before) == 1:
+        dm = before[0]
+    elif len(before) > 1:
+        return None, True
+    else:
+        return day, False
+    try:
+        y = int(dm.group(3)) if dm.group(3) else day.year
+        d = date(y, _month(dm.group(1)), int(dm.group(2)))
+        if not dm.group(3) and d < day:
+            d = date(y + 1, d.month, d.day)
+        return d, True
+    except (ValueError, StopIteration):
+        return None, True
+
+
+def record(path: str, h: str, at: str, cite: str | None = None) -> dict:
     title, text = page_text(h)
     clean = common.scrub_text(common.strip_house_numbers(text))
     day = title_day(title)
@@ -142,13 +207,9 @@ def record(path: str, h: str, at: str) -> dict:
         tm = next((m for m in AMPM.finditer(s) if m.start() > w.start()), None)
         if tm and day:
             h_, mi = clock(tm)
-            dm = DATE.search(s[w.start():])          # "stopped May 29 at 4 p.m.": the end clause's own date first
-            eday = day
-            if dm:
-                try:
-                    eday = date(int(dm.group(3)) if dm.group(3) else day.year, _month(dm.group(1)), int(dm.group(2)))
-                except (ValueError, StopIteration):
-                    eday = day
+            eday, dm = end_day(s, w, day)            # the end clause's own date, before or after the verb (P2-3)
+            if eday is None:
+                break                                # several dates and none is the end's: no end, never a guess
             e = datetime(eday.year, eday.month, eday.day, h_, mi, tzinfo=TZ)
             if not dm and re.search(r"next day|following day|next morning", s, re.I):
                 e += timedelta(days=1)
@@ -172,13 +233,15 @@ def record(path: str, h: str, at: str) -> dict:
             pub = None
     prison = bool(re.search(r"Bureau of Prisons|\bBOP\b", clean))
     raw = {"state": "KS", "time_zone": "America/Chicago", "county": "Leavenworth County",
-           "title": common.strip_house_numbers(title), "start_kind": kind,
+           "title": safe_text(title), "start_kind": kind,
            "start_is_upper_bound": kind in ("notified", "found", "arrived", "stated", None),
            "start_basis": ("the day in the page's title; the page gives no clock time it can be read by" if prec == "day"
                            else f"the time the City's page gives ({kind}); the overflow began at or before it"),
            "waters_named": ws, "reached_water": True if ws or re.search(r"\bcreek\b|\bstream\b", clean, re.I) else None,
            "volume_basis": "the City's estimate" if v else None, "provenance": "operator",
-           "_placement": "named_water_only",
+           "_placement": "named_water_only", "cited_page": cite or INDEX,
+           "citation_note": ("the City's transparency report page that lists this overflow; the overflow's own page "
+                             "address carries a street address, so it is not kept"),
            "time_basis": "the City's clock times, read as Central time (America/Chicago)"}
     if end:
         raw["ended_at_precision"], raw["end_basis"] = "minute", end_basis
@@ -188,22 +251,44 @@ def record(path: str, h: str, at: str) -> dict:
     return event(
         source_id=SOURCE_ID, source_record_id=record_id(path), event_type="sso", status="unknown",
         discharger_id=None if prison else DISCHARGER_ID, discharger_name=None if prison else DISCHARGER,
-        outfall_name=place_of(title), waterbody_text=ws[0] if ws else None, started_at=start,
+        outfall_name=place_of(title), waterbody_text=water_text(ws), started_at=start,
         time_precision=prec if start else None, ended_at=end, published_at=pub, reported_at=None, fetched_at=at,
         material="sewage", volume_gal=vol, volume_text=v.group(0) if v else None, estimate_flag=flag,
-        authority=AUTHORITY, advice_text=adv.group(0).strip() if adv else None, source_url=BASE + path,
+        authority=AUTHORITY, advice_text=safe_text(adv.group(0).strip()) if adv else None, source_url=cite or INDEX,
         parse_error=None if day else "no date in the page's title or text", raw=raw)
 
 
-def run(pages: dict[str, str], prev: list[dict], at: str) -> tuple[list[dict], dict]:
-    recs = {r["event_id"]: r for r in prev}
+def run(pages: dict[str, str], prev: list[dict], at: str,
+        cites: dict[str, str] | None = None) -> tuple[list[dict], dict]:
+    """cites: page path -> the year page that lists it (the citation without a street address)."""
+    recs = migrate(prev)
     stats = {"pages": 0, "undated": 0}
-    for path, h in sorted(pages.items()):
-        r = record(path, h, at)
+    read = [record(path, h, at, (cites or {}).get(path)) for path, h in sorted(pages.items())]
+    groups: dict[str, list[dict]] = {}
+    for r in read:
+        groups.setdefault(r["event_id"], []).append(r)
+    for base, rs in groups.items():
+        if len(rs) < 2:
+            continue
+        # distinct pages whose identifiers match once the house numbers are dropped (two overflows on one street on
+        # one day; verification P2-3): each gets its posting stamp, then an ordinal if that is shared too; the earlier
+        # save under the shared identifier is replaced by them (its first sighting kept)
+        legacy = recs.pop(base, None)
+        seen: dict[str, int] = {}
+        for r in rs:
+            stamp = re.sub(r"\D", "", r.get("published_at") or "")[:12]
+            rid = f"{r['source_record_id']}-p{stamp}" if stamp else r["source_record_id"]
+            seen[rid] = seen.get(rid, 0) + 1
+            if seen[rid] > 1 or not stamp:
+                rid = f"{rid}-n{seen[rid]}"
+            r["source_record_id"], r["event_id"] = rid, f"{SOURCE_ID}:{rid}"
+            if legacy:
+                r["raw"]["first_seen_at"] = (legacy.get("raw") or {}).get("first_seen_at")
+    for r in read:
         stats["pages"] += 1
         stats["undated"] += r["started_at"] is None
         old = recs.get(r["event_id"])
-        r["raw"]["first_seen_at"] = (old or {}).get("raw", {}).get("first_seen_at") or at
+        r["raw"]["first_seen_at"] = (old or {}).get("raw", {}).get("first_seen_at") or r["raw"].get("first_seen_at") or at
         recs[r["event_id"]] = r
     for r in recs.values():
         r["fetched_at"] = at
@@ -218,18 +303,22 @@ def fetch(prev: list[dict], backfill: bool) -> tuple[dict[str, str], list[str]]:
     if not backfill:
         years = years[:2]
     paths: list[str] = []
+    cites: dict[str, str] = {}
     for ypath, _ in years:
         y = requests.get(BASE + ypath, headers=HEADERS, timeout=(20, 120))
         y.raise_for_status()
-        paths += [p for p in EVENT_LINK.findall(y.text) if "transparency-report" not in p or "reported" in p or
-                  re.search(r"overflow-\d", p) or "kickapoo" in p]
+        found = [p for p in EVENT_LINK.findall(y.text) if "transparency-report" not in p or "reported" in p or
+                 re.search(r"overflow-\d", p) or "kickapoo" in p]
+        paths += found
+        for p in found:
+            cites.setdefault(p, BASE + ypath)
     pages = {}
     for p in dict.fromkeys(paths):
         # the last two years' pages are read again each run, so a page the City corrects is read again
         r = requests.get(BASE + p, headers=HEADERS, timeout=(20, 120))
         r.raise_for_status()                          # a refused page is a failed run, never an empty one
         pages[p] = r.text
-    return pages, [y for y, _ in years]
+    return pages, [y for y, _ in years], cites
 
 
 def main(argv=None) -> int:
@@ -240,14 +329,14 @@ def main(argv=None) -> int:
         if "--dir" in argv:
             d = Path(argv[argv.index("--dir") + 1])
             pages = {f"/publicworks/page/{f.stem}": f.read_text() for f in sorted(d.glob("*.html"))}
-            years = []
+            years, cites = [], {}
         else:
-            pages, years = fetch(prev, "--backfill" in argv)
-    except (requests.RequestException, OSError) as e:
+            pages, years, cites = fetch(prev, "--backfill" in argv)
+        recs, stats = run(pages, prev, now_iso(), cites)
+    except (requests.RequestException, OSError, ValueError, KeyError, IndexError, TypeError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
-    recs, stats = run(pages, prev, now_iso())
     save_raw(SOURCE_ID, json.dumps([{k: r.get(k) for k in ("source_url", "started_at", "ended_at", "volume_gal",
                                                            "waterbody_text", "outfall_name")} | {"title": r["raw"]["title"]}
                                     for r in recs], ensure_ascii=False, indent=1), "json")

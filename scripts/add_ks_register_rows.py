@@ -41,8 +41,8 @@ CHECKED = "2026-11-14"
 LAW = "ks-law-kar-28-16-27"
 LEAVENWORTH = "ks-leavenworth"
 Q_RULE = ('K.A.R. 28-16-27: an emergency or accidental discharge of sewage to waters of the state "shall be immediately '
-          'reported to the state department of health"; a planned bypass needs notice and approval at least seven days '
-          "ahead")
+          'reported to the state department of health"; it applies to a discharge a valid permit does not provide for; '
+          "a planned bypass needs notice and approval at least seven days ahead")
 Q_CSO = ("NPDES combined sewer permit {permit}: public notification of overflows is one of the nine minimum controls of "
          "EPA's Combined Sewer Overflow Control Policy (59 FR 18688, 1994), which the permit is expected to carry; the "
          "permit's own clause was not read")
@@ -158,8 +158,8 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             id=f"{oid}-kdhe-report", operator_id=oid, name=name, permit=None, channel_kind="state_alert_page", urls=[],
             method=None, legal_basis=Q_RULE, basis_kind="law", monitored=False, unmonitored_reason="other",
             publishes="none", records=False, noun="Report to the state", sources=[LAW],
-            note=(f"No web channel found: {name} reports an emergency or accidental sewage discharge to KDHE "
-                  "immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes "
+            note=(f"No web channel found: {name} reports an emergency or accidental sewage discharge that its "
+                  "permit does not provide for to KDHE immediately (K.A.R. 28-16-27); KDHE publishes no list (ks-kdhe-district-reports). An overflow becomes "
                   f"public only when KDHE issues a stream advisory (ks-kdhe-stream-advisories).{private} No public "
                   "notice is required by statute or rule. (research/ks/report.md §2.1)"))))
         for p in ps:

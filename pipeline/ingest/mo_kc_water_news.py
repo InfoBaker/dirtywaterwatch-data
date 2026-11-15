@@ -222,11 +222,25 @@ def times(text: str, pub: date) -> dict:
         if not after or start is None:
             break
         h, mi = clock(after[0])
-        d2 = find_date(x[w.start():] if w else x, pub) or day
+        # the end clause's own date (verification P2-2): a date after the stop verb first, else the one date before
+        # it in the same sentence ("On May 29, 2026, the overflow stopped at 4:00 p.m."); several dates before the verb
+        # and none after is ambiguous: no end, never a guess; no date at all: the start's day
+        d2 = find_date(x[w.start():], pub) if DATE.search(x[w.start():]) else None
+        explicit = d2 is not None
+        if d2 is None:
+            before = list(DATE.finditer(x[:w.start()]))
+            if len(before) > 1:
+                break
+            if before:
+                d2, explicit = find_date(before[0].group(0), pub), True
+                if d2 is None:
+                    break
+            else:
+                d2 = day
         end = datetime(d2.year, d2.month, d2.day, h, mi, tzinfo=TZ)
         basis = "the time the post gives for the overflow's end"
         if end < start:
-            if re.search(r"next day|following day|the next morning", x, re.I) or d2 == day:
+            if re.search(r"next day|following day|the next morning", x, re.I) or (d2 == day and not explicit):
                 end += timedelta(days=1)
                 basis += " (before the start time, so the next day)"
         if end >= start:
@@ -264,6 +278,87 @@ def waters(text: str) -> list[str]:
     return out
 
 
+def water_text(ws: list[str] | None) -> str | None:
+    """Every water a report names, in its order, for placement ("Rock Creek; Missouri River"): the placement reads each
+    name in the text, so no affected water is dropped for the first (re-review P1-3). raw.waters_named keeps the list."""
+    return "; ".join(ws) if ws else None
+
+
+_PLACE_WORDS = re.compile(r"\b(?:Creek|River|Lake|Branch|Fork|Run|Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Boulevard|Blvd|"
+                          r"Lane|Ln|Court|Ct|Park|Station|Plant|County|City|Heights|Valley|Hills?)\.?$")
+_PERSON = re.compile(r"\b((?i:by|from|resident|residents|homeowner|neighbou?r|caller|called|call|contact|"
+                     r"mr\.|mrs\.|ms\.|dr\.))(\s+)((?:(?:Mr|Mrs|Ms|Dr)\.?\s+)?[A-Z][a-z]+(?:\s+[A-Z]\.)?(?:\s+[A-Z][a-z]+)?)")
+
+
+def safe_text(s: str | None) -> str | None:
+    """Free text cut to what may be saved (re-review P1-9): house numbers, phones and emails scrubbed (common), and a
+    capitalised name after "by", "from", "resident", "call", "contact" or a courtesy title removed unless it ends in
+    a place word ("by Example Creek" stays)."""
+    if not s:
+        return s
+    s = common.scrub_text(common.strip_house_numbers(s))
+    return _PERSON.sub(lambda m: m.group(0) if _PLACE_WORDS.search(m.group(3)) else
+                       f"{m.group(1)}{m.group(2)}[name removed]", s)
+
+
+MONTH_TOKENS = {"jan", "january", "feb", "february", "mar", "march", "apr", "april", "may", "jun", "june", "jul",
+                "july", "aug", "august", "sep", "sept", "september", "oct", "october", "nov", "november", "dec",
+                "december"}
+_YEAR = re.compile(r"(?:19|20)\d\d")
+
+
+def date_positions(toks: list[str]) -> set[int]:
+    """The indices of the number tokens of an address slug that stand in a date: a day after its month, a year after
+    its month or its month and day ("may-27-2026", "june-2026"), or an ISO date ("2026-05-27"). A year-shaped number
+    anywhere else ("overflow-at-2026-example-lane") is not a date and is treated as a house number (verification P1-4)."""
+    out: set[int] = set()
+    low = [t.lower() for t in toks]
+    for i, t in enumerate(low):
+        if t in MONTH_TOKENS:
+            j = i + 1
+            if j < len(toks) and toks[j].isdigit() and 1 <= int(toks[j]) <= 31 and len(toks[j]) <= 2:
+                out.add(j)
+                j += 1
+            if j < len(toks) and _YEAR.fullmatch(toks[j]):
+                out.add(j)
+        elif _YEAR.fullmatch(t) and i + 2 < len(toks) and toks[i + 1].isdigit() and toks[i + 2].isdigit() \
+                and 1 <= int(toks[i + 1]) <= 12 and 1 <= int(toks[i + 2]) <= 31 and len(toks[i + 1]) <= 2 \
+                and len(toks[i + 2]) <= 2:
+            out.update((i, i + 1, i + 2))
+    return out
+
+
+_NUMERIC_PERMALINK = re.compile(r"[?&]p=\d+$")
+
+
+def safe_link(link: str, permalink: str | None) -> str:
+    """The post's numeric permalink (?p=<id>) whenever there is one, so a name or address in the post's slug is never
+    kept (verification P1-4); otherwise the post's address unless it carries a number outside a date position."""
+    if permalink and _NUMERIC_PERMALINK.search(permalink):
+        return permalink
+    toks = re.split(r"[-/]", link.rstrip("/").rsplit("/", 1)[-1])
+    dated = date_positions(toks)
+    bad = any(t.isdigit() and i not in dated for i, t in enumerate(toks))
+    return permalink if bad and permalink else link
+
+
+# raw fields an earlier version saved (the post's own text) that the records no longer carry (re-review P1-8)
+FORBIDDEN_RAW = ("post_text", "text", "page_text", "html", "content")
+
+
+def migrate_water_text(r: dict) -> None:
+    """An earlier save brought to the current rules at the next read: every water the report names (an earlier
+    waterbody_text held the first only), the post's text dropped and the named-water placement guard set."""
+    raw = r.get("raw") or {}
+    for k in FORBIDDEN_RAW:
+        raw.pop(k, None)
+    if raw.get("state") in ("MO", "KS") and isinstance(raw.get("waters_named"), list):
+        raw.setdefault("_placement", "named_water_only")
+    ws = raw.get("waters_named")
+    if isinstance(ws, list) and len(ws) > 1 and r.get("waterbody_text") == ws[0] and raw.get("reached_water") is not False:
+        r["waterbody_text"] = water_text(ws)
+
+
 def place_text(title: str) -> str | None:
     m = re.search(r"\b(?:near|at)\s+(.+)$", UPDATE.sub("", title), re.I)
     return common.strip_house_numbers(m.group(1)).strip(" .") if m else None
@@ -275,16 +370,18 @@ def record(it: dict, at: str) -> dict | None:
     if not is_notice(title, text):
         return None
     pub = pub_dt(it)
-    if pub is None:                                   # no publication time: nothing to read a year or "today" by
-        return None
+    if pub is None:
+        # a notice without a usable publication time: nothing to read a year or "today" by, and dropping it would
+        # be a silent loss; the run fails with the earlier records kept (verification P2-5)
+        raise ValueError(f"KC Water notice {it.get('guid') or it.get('link')} has no usable publication time")
     t = times(text, pub.date())
     v, flag, vtext = volume(text)
     ws = waters(text)
     plant = bool(re.search(r"treatment plant[^.]{0,60}\b(?:overflow|spill|bypass)|\bWWTP\b", text, re.I)) and \
         not re.search(r"pump station", title, re.I)
     pid = post_id(it)
-    place = place_text(title)
-    raw = {"state": "MO", "time_zone": "America/Chicago", "title": common.strip_house_numbers(title),
+    place = safe_text(place_text(title))
+    raw = {"state": "MO", "time_zone": "America/Chicago",
            "is_update": bool(UPDATE.match(it["title"])), "start_kind": t["start_kind"],
            "start_is_upper_bound": t["start_kind"] in ("response", "report", "stated"),
            "start_basis": {"start": "the time the post says the overflow began",
@@ -301,17 +398,17 @@ def record(it: dict, at: str) -> dict | None:
     if not t["start"]:
         return event(source_id=SOURCE_ID, source_record_id=pid, event_type="sso", status="unknown",
                      discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, outfall_name=place,
-                     waterbody_text=ws[0] if ws else None, published_at=pub.isoformat() if pub else None,
-                     reported_at=None, fetched_at=at, authority=AUTHORITY, source_url=it["link"],
+                     waterbody_text=water_text(ws), published_at=pub.isoformat() if pub else None,
+                     reported_at=None, fetched_at=at, authority=AUTHORITY, source_url=safe_link(it["link"], it["guid"]),
                      parse_error="no date for the overflow in the post", raw=raw)
     return event(
         source_id=SOURCE_ID, source_record_id=pid, event_type="plant_bypass" if plant else "sso", status="unknown",
         discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, outfall_name=place,
-        waterbody_text=ws[0] if ws and raw["reached_water"] is not False else None,
+        waterbody_text=water_text(ws) if raw["reached_water"] is not False else None,
         started_at=t["start"], ended_at=t["end"], time_precision=t["precision"],
         published_at=pub.isoformat() if pub else None, reported_at=None, fetched_at=at,
         material="wastewater", volume_gal=v, volume_text=vtext, estimate_flag=flag, authority=AUTHORITY,
-        source_url=it["link"], raw=raw)
+        source_url=safe_link(it["link"], it["guid"]), raw=raw)
 
 
 def link_updates(recs: dict[str, dict]) -> int:
@@ -343,6 +440,13 @@ def link_updates(recs: dict[str, dict]) -> int:
 
 def run(feeds: list[bytes], prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
+    for r in recs.values():
+        migrate_water_text(r)
+        r["raw"].pop("title", None)                   # the post title is no longer kept (re-review P1-9)
+        r["raw"]["place_text"] = safe_text(r["raw"].get("place_text"))
+        r["outfall_name"] = safe_text(r.get("outfall_name"))
+        r["source_url"] = safe_link(r.get("source_url") or "", r["raw"].get("guid") or
+                                    f"https://www.kcwater.us/?post_type=news1&p={r.get('source_record_id')}")
     stats = {"items": 0, "news_posts": 0, "notices": 0, "not_notices": 0, "undated": 0}
     seen = set()
     for body in feeds:
@@ -379,8 +483,8 @@ def safe_feed(body: bytes) -> bytes:
     for it in items(body):                            # the notices only, their titles scrubbed; never the post text
         if not is_notice(UPDATE.sub("", it["title"]), post_text(it["html"])) or "/news/" not in it["link"]:
             continue
-        keep.append({"title": common.scrub_text(common.strip_house_numbers(it["title"])), "link": it["link"],
-                     "date": it["date"], "guid": it["guid"]})
+        keep.append({"place": safe_text(place_text(UPDATE.sub("", it["title"]).strip())),
+                     "link": safe_link(it["link"], it["guid"]), "date": it["date"], "guid": it["guid"]})
     return json.dumps({"url": FEED, "items": keep}, ensure_ascii=False, indent=1).encode()
 
 
@@ -405,11 +509,12 @@ def main(argv=None) -> int:
             feeds = [Path(a).read_bytes() for a in argv[argv.index("--file") + 1:] if not a.startswith("--")]
         else:
             feeds = fetch("--backfill" in argv)
-    except (requests.RequestException, OSError, ET.ParseError) as e:
+        recs, stats = run(feeds, prev, now_iso())    # parsing inside the handler (re-review P2-4)
+    except (requests.RequestException, OSError, ET.ParseError, ValueError, KeyError, TypeError, AttributeError,
+            IndexError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
-    recs, stats = run(feeds, prev, now_iso())
     out = write_events(SOURCE_ID, recs, meta={
         "registry_ids": [SOURCE_ID], "url": INDEX, "feed": FEED, **stats,
         "credit": "KC Water, City of Kansas City, Missouri (news posts)",

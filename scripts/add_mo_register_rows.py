@@ -110,14 +110,15 @@ AGENCY = [
               "sewage. The per-beach data were not read (out of season on 2026-11-14): watched for availability."),
      "sources": ["mo-dnr-beach-status"]},
     {"id": "mo-dnr-hab-map", "agency": "Missouri Department of Natural Resources",
-     "name": "Missouri Department of Natural Resources (HAB reports map)", "channel_kind": "state_alert_page",
-     "urls": ["https://dnr.mo.gov/water/alerts-hazards/harmful-algal-bloom-hab-reports-map"], "method": "html",
-     "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
-     "publishes": "status", "records": False, "every_hours": 24, "availability_only": True,
-     "noun": "Voluntary page",
-     "note": ("The page embeds an ArcGIS Experience map of reported and verified blooms (reports fade after two weeks) "
-              "and a Survey123 report form. The map's layer was not resolved in this build, so blooms are not read; "
-              "watched for availability."),
+     "name": "Missouri Department of Natural Resources (HAB reports map)", "channel_kind": "feed",
+     "urls": ["https://gis.dnr.mo.gov/host/rest/services/wqm/HAB_SUBMIT_POINTS/MapServer/6",
+              "https://dnr.mo.gov/water/alerts-hazards/harmful-algal-bloom-hab-reports-map"], "method": "json",
+     "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "feed_ingested",
+     "feed_source_id": "mo-dnr-hab-map", "publishes": "status", "noun": "Data feed",
+     "note": ("The public layer behind DNR's HAB map: one point per bloom report, with DNR's status. The reports DNR's "
+              "map shows as a harmful algal bloom present, or the water closed, are read as standing bloom advisories "
+              "(39 on 2026-11-15, observed from May to November 2026); suspected, dissipated and unverified reports "
+              "are counted, not shown. Privately owned waters are only counted by county. Blooms, not sewage."),
      "sources": ["mo-dnr-hab-map"]},
     {"id": "mo-epa-echo-overflow-events", "agency": "U.S. Environmental Protection Agency (ECHO)",
      "name": "U.S. Environmental Protection Agency (ECHO)", "channel_kind": "feed",
