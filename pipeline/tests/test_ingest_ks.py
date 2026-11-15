@@ -470,6 +470,7 @@ def test_kdhe_confirms_only_while_its_own_release_is_in_the_feed_and_reconciles_
              "KDHE issued a stream advisory after a sewage discharge.")
     older = ("Stream Advisory Rescinded for Other Creek in Example County", "40", "Mon, 26 Oct 2026 09:00:00 -0600", "x")
     first, _ = A.run(_feed(issue, older), [], "2026-11-02T18:00:00Z")
+    pristine = json.loads(json.dumps(first))
     # the issue is gone; an unrelated older item remains: no confirmation
     recs, _ = A.run(_feed(older), first, "2026-11-20T18:00:00Z")
     r = {x["source_record_id"]: x for x in recs}["50-examplecreek"]
@@ -490,7 +491,7 @@ def test_kdhe_confirms_only_while_its_own_release_is_in_the_feed_and_reconciles_
     assert s["status"] == "advisory_active" and s["raw"]["county"] == "Douglas County" and stats["revised_out"] == 1
     # the same water, the county and date revised: the earliest publication stays the start
     rev2 = ("Stream Advisory Issued for Example Creek in Douglas County", "50", "Wed, 04 Nov 2026 09:00:00 -0600", "x")
-    recs2, _ = A.run(_feed(rev2), first, "2026-11-04T18:00:00Z")
+    recs2, _ = A.run(_feed(rev2), pristine, "2026-11-04T18:00:00Z")
     e = {x["source_record_id"]: x for x in recs2}["50-examplecreek"]
     assert e["raw"]["county"] == "Douglas County" and e["started_at"] == "2026-11-02T09:00:00-06:00"
     assert e["raw"]["publication_times_seen"] == ["2026-11-02T09:00:00-06:00", "2026-11-04T09:00:00-06:00"]
@@ -669,9 +670,10 @@ def test_mo_hab_listing_again_after_an_outage_keeps_two_periods():
     assert all(len(r["raw"]["listed_periods"]) == 2 for r in recs if r["status"] == "advisory_active")
 
 
-def test_kdhe_water_named_again_after_a_revision_is_open_again_and_a_rescission_stays_lifted():
-    """Verification P1-2: Example Creek -> Sample Creek -> Example Creek in one release leaves Example Creek open (the
-    drop was a revision, not KDHE's rescission); unchanged reads keep it so; a rescinded water stays lifted."""
+def test_kdhe_water_named_again_after_a_revision_opens_a_new_period_and_a_rescission_stays_lifted():
+    """Verification P1-2, verification 2 P1-1: Example Creek -> Sample Creek -> Example Creek in one release keeps two
+    periods for Example Creek (the drop was a revision, not KDHE's rescission); unchanged reads keep the second open; a
+    rescinded water stays lifted."""
     a = ("Stream Advisory Issued for Example Creek in Shawnee County", "50", "Mon, 02 Nov 2026 09:00:00 -0600", "Sewage.")
     b = ("Stream Advisory Issued for Sample Creek in Shawnee County", "50", "Mon, 02 Nov 2026 09:00:00 -0600", "Sewage.")
     r1, _ = A.run(_feed(a), [], "2026-11-02T18:00:00Z")
@@ -679,16 +681,62 @@ def test_kdhe_water_named_again_after_a_revision_is_open_again_and_a_rescission_
     r3, _ = A.run(_feed(a), r2, "2026-11-02T20:00:00Z")
     r4, s4 = A.run(_feed(a), r3, "2026-11-02T21:00:00Z")
     by = {x["source_record_id"]: x for x in r4}
-    ex = by["50-examplecreek"]
-    assert ex["status"] == "advisory_active" and ex["ended_at"] is None and "revised_out" not in ex["raw"]
-    assert ex["raw"]["revised_out_reads"] == ["2026-11-02T19:00:00Z"] and ex["started_at"] == "2026-11-02T09:00:00-06:00"
-    assert ex["raw"]["_last_seen_in_source"] == "2026-11-02T21:00:00Z"
-    assert by["50-samplecreek"]["status"] == "advisory_lifted" and s4["open"] == 1
+    ex, ex2 = by["50-examplecreek"], by["50-examplecreek-p2"]
+    assert ex["status"] == "advisory_lifted" and ex["ended_at"] == "2026-11-02T19:00:00Z" and ex["raw"]["revised_out"]
+    assert ex["started_at"] == "2026-11-02T09:00:00-06:00"
+    assert ex2["status"] == "advisory_active" and ex2["ended_at"] is None and "revised_out" not in ex2["raw"]
+    assert ex2["started_at"] == "2026-11-02T20:00:00Z" and ex2["time_precision"] == "poll"
+    assert ex2["raw"]["period_of"] == ex["event_id"] and ex2["raw"]["_last_seen_in_source"] == "2026-11-02T21:00:00Z"
+    assert by["50-samplecreek"]["status"] == "advisory_lifted" and s4["open"] == 1 and len(r4) == 3
     lift = ("Stream Advisory Rescinded for Example Creek in Shawnee County", "51", "Tue, 03 Nov 2026 09:00:00 -0600", "x")
     r5, _ = A.run(_feed(a, lift), r4, "2026-11-03T18:00:00Z")
     r6, _ = A.run(_feed(a, lift), r5, "2026-11-03T19:00:00Z")
-    ex6 = {x["source_record_id"]: x for x in r6}["50-examplecreek"]
-    assert ex6["status"] == "advisory_lifted" and ex6["ended_at"] == "2026-11-03T09:00:00-06:00"
+    by6 = {x["source_record_id"]: x for x in r6}
+    assert by6["50-examplecreek-p2"]["status"] == "advisory_lifted"
+    assert by6["50-examplecreek-p2"]["ended_at"] == "2026-11-03T09:00:00-06:00" and len(r6) == 3
+    assert by6["50-examplecreek"]["ended_at"] == "2026-11-02T19:00:00Z"
+
+
+def test_kdhe_january_listed_removed_june_relisted_is_two_periods_through_the_status_build():
+    """Verification 2 P1-1: listed January 1, no longer named January 2, named again June 1: two authority periods,
+    never one red period over the gap, in status, history and the export."""
+    from datetime import datetime, timezone
+    from build import status as S
+    from export import build as X
+    a = ("Stream Advisory Issued for Example Creek in Shawnee County", "60", "Thu, 01 Jan 2026 09:00:00 -0600", "Sewage.")
+    b = ("Stream Advisory Issued for Sample Creek in Shawnee County", "60", "Thu, 01 Jan 2026 09:00:00 -0600", "Sewage.")
+    recs, _ = A.run(_feed(a), [], "2026-01-01T18:00:00Z")
+    recs, _ = A.run(_feed(b), recs, "2026-01-02T18:00:00Z")
+    recs, _ = A.run(_feed(a), recs, "2026-06-01T18:00:00Z")
+    recs, _ = A.run(_feed(a), recs, "2026-06-10T18:00:00Z")
+    ex = [r for r in recs if r["raw"]["waters"] == ["Example Creek"]]
+    assert len(ex) == 2
+    now = datetime(2026, 6, 15, tzinfo=timezone.utc)
+    red = sorted((iv["start"], iv["end"]) for r in ex for iv in S.event_intervals(r, "KS", now)
+                 if iv["color"] == "red")
+    d = lambda m, dd, h: datetime(2026, m, dd, h, tzinfo=timezone.utc)
+    assert red == [(d(1, 1, 15), d(1, 2, 18)), (d(6, 1, 18), d(6, 24, 18))]    # 14 days after June 10's read
+    gap0, gap1 = d(1, 2, 18), d(6, 1, 18)
+    for r in ex:
+        for iv in S.event_intervals(r, "KS", now):
+            assert iv["end"] is not None and iv["end"] <= gap0 or iv["start"] >= gap1
+    # history and export: two records with their own bounds, the first ended at the January read
+    slim = {X.slim_event(r)["event_id"]: X.slim_event(r) for r in ex}
+    first = slim["ks-kdhe-stream-advisories:60-examplecreek"]
+    second = slim["ks-kdhe-stream-advisories:60-examplecreek-p2"]
+    assert first["ended_at"] == "2026-01-02T18:00:00Z" and first["status"] == "advisory_lifted"
+    assert second["started_at"] == "2026-06-01T18:00:00Z" and second["status"] == "advisory_active"
+    # an earlier save that reopened one record over the gap (raw.revised_out_reads) is split at the next read
+    old = json.loads(json.dumps(next(r for r in ex if not r["raw"].get("period_of"))))
+    old.update(status="advisory_active", ended_at=None)
+    for k in ("revised_out", "ended_at_precision", "end_basis"):
+        old["raw"].pop(k)
+    old["raw"].update(revised_out_reads=["2026-01-02T18:00:00Z"], _last_seen_in_source="2026-06-10T18:00:00Z")
+    again, _ = A.run(_feed(a), [old], "2026-06-11T18:00:00Z")
+    by = {x["source_record_id"]: x for x in again}
+    assert by["60-examplecreek"]["ended_at"] == "2026-01-02T18:00:00Z"
+    assert by["60-examplecreek-p2"]["started_at"] == "2026-06-10T18:00:00Z" and len(again) == 2
+    assert all("revised_out_reads" not in x["raw"] for x in again)
 
 
 def test_leavenworth_year_shaped_house_numbers_and_old_saves_keep_nothing_personal():
