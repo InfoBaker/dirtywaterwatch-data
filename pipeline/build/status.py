@@ -1074,6 +1074,8 @@ COUNTY_FIELD_STATES.add("KS")
 COUNTY_STATES["AR"] = "ar-counties.json"; COUNTY_FIELD_STATES.add("AR")   # Arkansas: DEQ reports give no point; raw.county is the permit plant's
 COUNTY_STATES["WI"] = "wi-counties.json"       # Wisconsin: MMSD's posts give no point, only their county
 COUNTY_FIELD_STATES.add("WI")    # (Milwaukee): a name is placed only on a record reaching that county (Astra P2-9)
+COUNTY_STATES["DE"] = "de-counties.json"; COUNTY_FIELD_STATES.add("DE")   # Delaware: DNREC's releases give the county (ZIP or town), no point
+COUNTY_STATES["SC"] = "sc-counties.json"; COUNTY_FIELD_STATES.add("SC")   # South Carolina: Florence's notices give the county, no point
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}

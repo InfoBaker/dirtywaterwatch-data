@@ -142,6 +142,12 @@
 #                  ar_adh_swim_beaches (the Department of Health's closed swim beaches, a standing list)
 #                  Wisconsin: wi_mmsd_storm_updates (the Milwaukee Metropolitan Sewerage District's Storm Update posts:
 #                  the overflows it reports to the DNR, dated by the post, two list pages a run; the DNR publishes none)
+#                  Delaware: de_dnrec_derns (DNREC's DERNS Recent Releases: the sewage and sanitary-wastewater
+#                  releases by rule, a few detail pages a run; state data/build/de-dnrec-derns-state.json) and
+#                  de_dnrec_recwater (DNREC's beach advisory history on data.delaware.gov and the FirstMap stations)
+#                  South Carolina: sc_florence_sso (the City of Florence's sewer overflow notices),
+#                  sc_des_advisories (DES's beach station layer, long-term and short-term advisories, and its bloom
+#                  delineations and watch table, polled; state data/build/sc-des-advisories-state.json)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older

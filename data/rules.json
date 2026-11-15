@@ -258,6 +258,18 @@
     "clock": "end_of_discharge",
     "basis": "Wisconsin law sets no period after a sewage discharge during which the water is to be avoided. Every sanitary sewer overflow and treatment facility overflow must be publicly noticed promptly, by the communications the operator's emergency response plan names; the Department of Natural Resources' instructions make a notice to a daily newspaper the minimum when the overflow reaches surface water, and no web posting or hour deadline is set (s. NR 210.21(5), Wis. Adm. Code). The overflow is reported to the Department within 24 hours and on its form within five business days; the Department publishes none of these reports, and the U.S. Environmental Protection Agency's tables held no Wisconsin report on November 12, 2026. The two combined sewer permittees, the Milwaukee Metropolitan Sewerage District and the City of Superior, are in the Great Lakes Basin and owe an electronic public notice within four hours of a combined sewer overflow (40 CFR 122.38). The Milwaukee Metropolitan Sewerage District posts what it reported to the Department, with the dates and the volume, a few days after each overflow of its regional system. Times are read in Central time. Permits on tribal land are issued by the U.S. Environmental Protection Agency, and their reports go to it rather than to the Department. This site marks a reported discharge from its start to its end where the post gives both and applies its own caution after it ends; a report dated only to the day with no end shows caution for 72 hours from the start of that day, and one with a time but no end shows caution for 14 days from its report, then the end is marked not confirmed until 30 days after it began; a combined sewer overflow that names no outfall is shown on every water the district's outfalls discharge to",
     "source": "Wis. Adm. Code NR 210.21(5) (as the DNR's form 3400-184 instructions give it); 40 CFR 122.38; Milwaukee Metropolitan Sewerage District Storm Update posts"
+   },
+   "DE": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "Delaware sets no period after a sewage release during which the water is to be avoided. Anyone causing an environmental release, which for sewage means 10,000 gallons or more, must report it to the Department of Natural Resources and Environmental Control as soon as it is known; the Department must post it on its website no later than one business day after the report, and notify the district's legislators and registered neighbours within 12 hours of being informed. Discharges in compliance with a permit are exempt, so Wilmington's combined sewer overflows, the state's only ones, are not reported there: each outfall carries a sign. The Department's release list gives the release's time and place, not its end. The Department's Recreational Water Program posts advisories and closures at monitored beaches with their own start and end dates. This site marks a reported release while it runs and applies its own caution after it ends",
+    "source": "7 Del. C. 6002(20), 6014(b) and 6028(a); Delaware DNREC Environmental Release Notification System (Recent Releases); DNREC Recreational Water Program"
+   },
+   "SC": {
+    "hours": null,
+    "clock": "end_of_discharge",
+    "basis": "South Carolina sets no period after a sewage spill during which the water is to be avoided. A wastewater utility must report a significant spill (5,000 gallons or more of untreated or partially treated sewage) to the Department of Environmental Services within 24 hours and in writing within five days, and give public notice within 24 hours of discovering it, through a channel the law does not name; the Department gives the notice when the utility does not. Spills caused by natural disasters, a third party's direct act or other acts of God are excluded. The Department publishes no list of the reports it receives. The City of Florence posts a notice for each overflow of 5,000 gallons or more. The Department posts swimming advisories at its beach monitoring stations and harmful algal bloom watches and advisories. This site marks a reported spill while it runs and applies its own caution after it ends",
+    "source": "S.C. Code 48-1-95(A)(5), (B) and (E); City of Florence sanitary sewer overflow notices; SC DES Beach Monitoring; SC DES Harmful Algal Bloom Monitoring"
    }
   },
   "by_discharger": {
@@ -406,7 +418,8 @@
     "hi-doh-cwb-events-api",
     "tx-glo-beach-watch",
     "tn-tdec-hab-advisory-status",
-    "ar-deq-hab-advisories"
+    "ar-deq-hab-advisories",
+    "de-dnrec-recreational-water"
    ],
    "flag": "_agency_label_only",
    "hours": 72,
@@ -426,7 +439,9 @@
     "mo-msd-stl-project-clear",
     "mo-dnr-concern-reports",
     "ar-deq-overflow-incidents",
-    "wi-mmsd-storm-updates"
+    "wi-mmsd-storm-updates",
+    "de-dnrec-derns-recent-releases",
+    "sc-florence-sso-notices"
    ],
    "hours": 72,
    "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024; the Tennessee Department of Environment and Conservation's Events Report, which gives no end date on most reports). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
