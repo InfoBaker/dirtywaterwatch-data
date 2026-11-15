@@ -32,8 +32,10 @@ Record rules
     raw.time_zone_uncertain (re-review 2026-11-14 P2-4).
   - Volume: gallons as given; barrels (DEQ: "One barrel = 42 US gallons") converted, raw.volume_as_given keeps the
     figure; a blank volume is unknown, never zero.
-  - Place: the row's point, rounded to 0.001 degree before anything is saved; a septic system's or on-site housing's
-    row (PRIVATE_PLACE) keeps its county only (no point). The table names no receiving water: a report is placed from
+  - Place: the row's point, rounded to 0.001 degree before anything is saved; a private residence's (home, house,
+    dwelling, residence, cabin, trailer, farmstead, apartment, a street address with a house number), a septic
+    system's or on-site housing's row (residential_place, read before any scrub) keeps its county only: no point, no
+    township, range or section (verification pass 2026-11-15 P1-5). The table names no receiving water: a report is placed from
     its point by the status build or listed with its county; nothing is geocoded.
   - Duplicates: two rows with the same incident day, point, contaminant and volume are one incident filed twice; the
     later Incident ID is duplicate_of the earlier (EIR2032 of EIR2031, 2013-08-31, Dunn County).
@@ -72,7 +74,18 @@ COLUMNS = ("incident_id", "date_reported", "date_incident", "county", "twn_rng_s
 SEWAGE = re.compile(r"\bsewage\b|\bsanitary\s+sewer\b|\bsewer\b|\bseptic\b", re.I)
 NOT_SEWAGE = re.compile(r"\bpotable\s+water\b", re.I)
 TREATED = re.compile(r"\btreated\b|\beffluent\b", re.I)
-PRIVATE_PLACE = re.compile(r"\bseptic\b|\bonsite\s+housing\b|\bresiden", re.I)
+# a private residence or on-site system: the row keeps its county only (verification pass 2026-11-15 P1-5); read on the
+# text as DEQ wrote it, before any scrub, and a street address with a house number counts too (residential_place)
+PRIVATE_PLACE = re.compile(r"\bseptic\b|\bon-?\s?site\b|\bresiden|\bprivate\b|\bhomes?\b|\bhouses?\b|\bhousing\b|"
+                           r"\bdwellings?\b|\bcabins?\b|\btrailers?\b|\bfarmsteads?\b|\bfarm\s?house|\bapartments?\b",
+                           re.I)
+
+
+def residential_place(text: str) -> bool:
+    """True where the contaminant text points at a private place: PRIVATE_PLACE's words, or a street address with a
+    house number (the house-number scrub would change it)."""
+    t = text or ""
+    return bool(PRIVATE_PLACE.search(t)) or common.strip_house_numbers(t) != t
 BARREL_GAL = 42
 
 
@@ -144,12 +157,12 @@ def safe_row(row: dict) -> dict:
         # names (by their cues), house numbers, phones and emails cut before any save (re-review 2026-11-14 P1-5)
         out["contaminant"] = scrub_strict_names(common.strip_house_numbers(common.scrub_text(out["contaminant"])))
     lat, lon = _num(row.get("latitude")), _num(row.get("longitude"))
-    private = bool(PRIVATE_PLACE.search(row.get("contaminant") or ""))
+    private = residential_place(row.get("contaminant") or "")
     out["latitude"] = None if private or lat is None else round(lat, 3)
     out["longitude"] = None if private or lon is None else round(lon, 3)
     if private:
         out["twn_rng_sec"] = None
-        out["point_withheld"] = "a septic system or on-site housing: the county only"
+        out["point_withheld"] = "a private residence, septic system or on-site housing: the county only"
     return out
 
 
