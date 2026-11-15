@@ -18,18 +18,21 @@ What is read (privacy)
   common.scrub_text and every raw passes common.strip_personal (in event()) and build.redact last.
 
 Record rules (one record per table row)
-  - Key: the table has no identifier, so source_record_id is the row's start date and discharge location
-    ("2024-06-17-goat-canyon"; a second row with both the same gets "-2"). A change of the tracked fields across runs
-    is kept in raw._revisions; a row that leaves the table keeps its record with raw._missing_from_table_since.
+  - Key: the table has no identifier, so source_record_id is the row's start date, the water its location names and a
+    hash of the location ("2024-06-17-goat-canyon-<6 hex>"; a second row with both the same gets "-n2"). A change of
+    the tracked fields (notes included) across runs is kept in raw._revisions; a row that leaves the table keeps its
+    record with raw._missing_from_table_since. A Board correction of a row's start date or location makes a new key:
+    the old record stays, marked missing from the table (no row identity survives such an edit).
+  - Text: the location and the notes pass common.scrub_text and strip_house_numbers before any use.
   - Times: the table gives dates only (Pacific): started_at and ended_at are bare dates, time_precision "day",
     raw.time_zone America/Los_Angeles. reported_at and published_at are null: the table gives neither (the page says
     when USIBWC must report, not when each row was reported or posted); raw._first_seen_at is the first fetch that
     showed the row. source_updated_at is a date the row's own notes give for the report ("Volume reported by USIBWC
     on 04/30/2026"), else null.
-  - End: a date at or after the start -> ended. "Ongoing ..." -> ongoing with no end (the status build's rule for an
+  - End: a date at or after the start -> ended. An end cell that starts with "Ongoing" -> ongoing with no end (the status build's rule for an
     ongoing report with no end applies, counted from the start). A blank or other end -> unknown with no end ("end
-    not confirmed"). An end before the start, or more than a day after the read, is kept as published (ended_at)
-    with status unknown and raw._end_not_used: the status build's shared rule (unresolved.implausible_end) then draws
+    not confirmed"). An end before the start is kept as published (ended_at), one more than a day after the read
+    only in raw._end_as_published (the shared rule would draw a window to it), with status unknown and raw._end_not_used: the status build's shared rule (unresolved.implausible_end) then draws
     no window from it. No end is ever made up.
   - Event type, by a written rule on the table's own Event Type wording (EVENT_KINDS; never a model): "Spill Event"
     (the page: a release of waste "from any portion of USIBWC's Facility"), "Dry Weather Canyon Collector
