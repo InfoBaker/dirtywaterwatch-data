@@ -1,0 +1,4988 @@
+{
+ "state": "WV",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 147,
+ "waters": [
+  {
+   "slug": "back-creek-wv",
+   "name": "Back Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Glengary",
+    "Hedgesville",
+    "Martinsburg",
+    "Shanghai"
+   ],
+   "bbox": [
+    -78.370903,
+    39.23527,
+    -77.987184,
+    39.600823
+   ],
+   "wikidata": "Q31852444",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "jones-springs-wv",
+    "mccubbins-ford-wv",
+    "rt-9-bridge-wv",
+    "shanghai-wv"
+   ],
+   "water_id": "back-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "3a052dd522c0b1837b48976f0b3dd8a1aa5f5cd45e6e339e11be53e017f10356",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "back-fork-elk-river-wv",
+   "name": "Back Fork Elk River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Webster Springs"
+   ],
+   "bbox": [
+    -80.417935,
+    38.478881,
+    -80.12452,
+    38.619579
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "back-fork-of-elk-river-c-r-wv"
+   ],
+   "water_id": "back-fork-elk-river-wv",
+   "gnis_id": null,
+   "geometry_hash": "462115f69934ee347af468638d10978c1908e2ff6b0a89aee0768971f459a677",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-rock-lake-wv",
+   "name": "Bear Rock Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Valley Grove"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bear-rock-wma-wv"
+   ],
+   "water_id": "bear-rock-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bee-run-wv",
+   "name": "Bee Run",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Wallback"
+   ],
+   "bbox": [
+    -81.127102,
+    38.575157,
+    -81.122399,
+    38.575816
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wallback-lake-2-wv"
+   ],
+   "water_id": "bee-run-wv",
+   "gnis_id": null,
+   "geometry_hash": "32d4ef6d5cf60ab3aec9a5d5ef4a3da7ec1f28c34e0640db5ad4b350b25e5312",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beech-fork-lake-wv",
+   "name": "Beech Fork Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Bowen",
+    "Wayne"
+   ],
+   "bbox": [
+    -82.421828,
+    38.267767,
+    -82.336923,
+    38.323892
+   ],
+   "wikidata": "Q4879576",
+   "charted": false,
+   "area_km2": 2.866,
+   "launches": [
+    "beech-fork-lake-dam-wv",
+    "beech-fork-state-park-boat-launch-wv"
+   ],
+   "water_id": "beech-fork-lake-wv",
+   "gnis_id": "1535532",
+   "geometry_hash": "ee06976a40a04dc2f3f536ba48772a2887ca00829d3544e8e47f786830c78274",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beech-fork-wv",
+   "name": "Beech Fork",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Winslow"
+   ],
+   "bbox": [
+    -82.454185,
+    38.296858,
+    -82.32174,
+    38.32078
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "aquatic-trail-stream-access-wv"
+   ],
+   "water_id": "beech-fork-wv",
+   "gnis_id": null,
+   "geometry_hash": "3c3da00a6c73678054d4a9d761160669e355e17fbc36fa3b99e676172103925d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-coal-river-wv",
+   "name": "Big Coal River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Brounland",
+    "Coopertown",
+    "Dartmont",
+    "Orgas",
+    "Sharlow",
+    "Whitesville"
+   ],
+   "bbox": [
+    -81.799477,
+    37.969417,
+    -81.526672,
+    38.2731
+   ],
+   "wikidata": "Q32840845",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dartmont-park-wv",
+    "john-slack-park-wv",
+    "sproul-brier-crk-wv",
+    "whitesville-wv"
+   ],
+   "water_id": "big-coal-river-wv",
+   "gnis_id": "1535815",
+   "geometry_hash": "b8c00e31f901cfc51fb981ab20b1aa981d70ca03050437eb8c51ee419846b006",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-ditch-lake-wv",
+   "name": "Big Ditch Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Cowen"
+   ],
+   "bbox": [
+    -80.575758,
+    38.403365,
+    -80.569114,
+    38.412927
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.252,
+   "launches": [
+    "big-ditch-lake-boat-launch-wv"
+   ],
+   "water_id": "big-ditch-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "ff4f02e429dc744b74449c76e393ed0e337bebf086d985f7b3179ef1984b7741",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-run-lake-wv",
+   "name": "Big Run Lake",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Mannington"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-run-lake-carry-in-access-wv"
+   ],
+   "water_id": "big-run-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-sandy-creek-wv",
+   "name": "Big Sandy Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Brandonville",
+    "Bruceton Mills",
+    "Clifton Mills",
+    "Rockville"
+   ],
+   "bbox": [
+    -79.749018,
+    39.596426,
+    -79.618491,
+    39.737338
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bruceton-mills-dam-wv",
+    "clifton-mills-bridge-wv",
+    "rockville-bridge-wv",
+    "state-line-bridge-wv"
+   ],
+   "water_id": "big-sandy-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "7469e72721ad3f3786243af13a03168efcdaac3753c9fd84cd493cac78f229da",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-sandy-river-wv",
+   "name": "Big Sandy River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Kenova"
+   ],
+   "bbox": [
+    -82.644207,
+    38.118151,
+    -82.571313,
+    38.418998
+   ],
+   "wikidata": "Q859238",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "virginia-point-park-wv"
+   ],
+   "water_id": "big-sandy-river-ky",
+   "gnis_id": "487249",
+   "geometry_hash": "9b7dfdabeec25d889e20acd7752e1f92158acb53d4ab14a289f73464f3b25504",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-wheeling-creek-wv",
+   "name": "Big Wheeling Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Wheeling"
+   ],
+   "bbox": [
+    -80.725232,
+    40.027212,
+    -80.650431,
+    40.080797
+   ],
+   "wikidata": "Q4469997",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "tunnel-green-park-wv"
+   ],
+   "water_id": "big-wheeling-creek-wv",
+   "gnis_id": "1548996",
+   "geometry_hash": "adbe0c3642d2e9ed44cbfbe151cfd81525f7c9a69eb7640b90a7ce913345c91e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "black-fork-wv",
+   "name": "Black Fork",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Hendricks",
+    "Parsons"
+   ],
+   "bbox": [
+    -79.679569,
+    39.071782,
+    -79.63074,
+    39.111802
+   ],
+   "wikidata": "Q880258",
+   "charted": false,
+   "area_km2": 0.245,
+   "launches": [
+    "hendricks-foot-bridge-wv"
+   ],
+   "water_id": "black-fork-wv",
+   "gnis_id": "1550368",
+   "geometry_hash": "f1f1657153600f23f016645dbeb305af0d5506ca7bdfddace998dac93bac4849",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blackwater-river-wv",
+   "name": "Blackwater River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Davis"
+   ],
+   "bbox": [
+    -79.630752,
+    39.032304,
+    -79.388491,
+    39.143361
+   ],
+   "wikidata": "Q670181",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blackwater-camp-70-2-wv",
+    "blackwater-pipeline-wv",
+    "davis-riverfront-park-wv"
+   ],
+   "water_id": "blackwater-river-wv",
+   "gnis_id": "1550382",
+   "geometry_hash": "8193bddd9263354e9eab062f6b37c5ff1e99b06974624d574ffa255a270b449d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bluestone-lake-wv",
+   "name": "Bluestone Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Hinton"
+   ],
+   "bbox": [
+    -80.948802,
+    37.599075,
+    -80.8837,
+    37.641294
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.351,
+   "launches": [
+    "bluestone-lake-pit-area-wv"
+   ],
+   "water_id": "bluestone-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "b1dd683b7bfe57b9bbbd5ae9c497d7a98dd9ff4fb9e995426ad0f4f187beb315",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bluestone-river-wv",
+   "name": "Bluestone River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Hinton"
+   ],
+   "bbox": [
+    -81.333721,
+    37.275261,
+    -80.913241,
+    37.615315
+   ],
+   "wikidata": "Q886078",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bluestone-state-park-wv"
+   ],
+   "water_id": "bluestone-river-wv",
+   "gnis_id": "1550405",
+   "geometry_hash": "cee7eb796a89bd5d55b441b6d87566d2b341e90764a79618a65a2c49c112d244",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boley-lake-wv",
+   "name": "Boley Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Landisburg"
+   ],
+   "bbox": [
+    -80.957643,
+    37.97398,
+    -80.950141,
+    37.977412
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.065,
+   "launches": [
+    "boley-lake-babcock-sp-wv"
+   ],
+   "water_id": "boley-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "181a983c7a94a53a94c5a91324559e7dafce7275e2fba19befeffc724aaf728b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brushy-fork-wv",
+   "name": "Brushy Fork",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Franklin"
+   ],
+   "bbox": [
+    -79.33911,
+    38.407745,
+    -79.313757,
+    38.476736
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brushy-fork-lake-carry-in-access-wv"
+   ],
+   "water_id": "brushy-fork-wv",
+   "gnis_id": null,
+   "geometry_hash": "c7040a249298ec7a388c20645980669b16c45aeb66e4932d8ef18b746e6a8ce1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "buckhannon-river-wv",
+   "name": "Buckhannon River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Alexander",
+    "Boulder",
+    "Buckhannon",
+    "Hampton"
+   ],
+   "bbox": [
+    -80.240881,
+    38.783718,
+    -80.07593,
+    39.096888
+   ],
+   "wikidata": "Q4983118",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "alexander-wv",
+    "boulder-rangoon-wv",
+    "buckhannnon-city-wv",
+    "dnr-hall-road-wv",
+    "dnr-river-road-wv",
+    "hall-wv",
+    "hampton-bridge-wv",
+    "north-river-front-park-wv",
+    "pringle-tree-park-wv",
+    "rock-quarry-wv"
+   ],
+   "water_id": "buckhannon-river-wv",
+   "gnis_id": "1536596",
+   "geometry_hash": "33198dc5e433dcd08b0ffec035ec605ad84ed02f0911624f2e2911a85add1f13",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "buffalo-creek-wv",
+   "name": "Buffalo Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Bethany",
+    "Wellsburg"
+   ],
+   "bbox": [
+    -80.615518,
+    40.18289,
+    -80.452236,
+    40.264592
+   ],
+   "wikidata": "Q48743910",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "betheny-city-park-wv",
+    "buffalo-hukill-run-road-wv"
+   ],
+   "water_id": "buffalo-creek-wv",
+   "gnis_id": "1170602",
+   "geometry_hash": "73644f83a8755c52b04954ba8a2bb97acd656d4827005a81e3a1bf115492bcbd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "burnsville-lake-wv",
+   "name": "Burnsville Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Burnsville",
+    "Napier"
+   ],
+   "bbox": [
+    -80.624058,
+    38.76712,
+    -80.546839,
+    38.844045
+   ],
+   "wikidata": "Q5000176",
+   "charted": false,
+   "area_km2": 3.455,
+   "launches": [
+    "bulltown-campground-wv",
+    "bulltown-day-use-area-wv",
+    "burnsville-dam-wv"
+   ],
+   "water_id": "burnsville-lake-wv",
+   "gnis_id": "1560649",
+   "geometry_hash": "57000389d5618afa88b4fd64f5542041661bb1f9399ac325d7bf5df5aba63618",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cacapon-river-wv",
+   "name": "Cacapon River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Berkeley Springs",
+    "Capon Bridge",
+    "Capon Lake",
+    "Hooks Mills",
+    "Largent",
+    "Paw Paw",
+    "Wardensville",
+    "Yellow Spring"
+   ],
+   "bbox": [
+    -78.636703,
+    39.076762,
+    -78.273469,
+    39.621065
+   ],
+   "wikidata": "Q5015888",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cacapon-crossing-wv",
+    "cacapon-river-boat-launch-near-berkeley-springs-wv",
+    "cacapon-river-boat-launch-near-berkeley-springs-wv-2",
+    "capon-bridge-wv",
+    "capon-lake-wv",
+    "fishers-ford-bridge-wv",
+    "great-cacapon-wv",
+    "hooks-mill-wv",
+    "cacapon-river-boat-launch-near-largent-wv",
+    "power-house-wv",
+    "rt-127-bridge-wv",
+    "wardensville-wv",
+    "yellow-springs-wv",
+    "yellow-springs-north-wv"
+   ],
+   "water_id": "cacapon-river-wv",
+   "gnis_id": "1550579",
+   "geometry_hash": "831d89067c1621b85c0726207dc22c8bdacfb9e85c31b77bb49d7c6838dcdde9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cacapon-state-park-lake-wv",
+   "name": "Cacapon State Park Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Omps"
+   ],
+   "bbox": [
+    -78.298525,
+    39.50009,
+    -78.295851,
+    39.501765
+   ],
+   "wikidata": "Q34960155",
+   "charted": false,
+   "area_km2": 0.024,
+   "launches": [
+    "cacapon-state-park-wv"
+   ],
+   "water_id": "cacapon-state-park-lake-wv",
+   "gnis_id": "1557920",
+   "geometry_hash": "2f66fec16b25071a1c02c4c72509554114826d6e02a84c432105e0e2425e9dae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "camp-run-wv",
+   "name": "Camp Run",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Miles"
+   ],
+   "bbox": [
+    -79.12762,
+    38.746867,
+    -79.091725,
+    38.757166
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "camp-run-lake-boat-launch-wv"
+   ],
+   "water_id": "camp-run-wv",
+   "gnis_id": null,
+   "geometry_hash": "cd3d02288c6f06fd54f2db4c8df67ccad3f48d4e6495251f3361d236461627df",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "castleman-run-lake-wv",
+   "name": "Castleman Run Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Potomac"
+   ],
+   "bbox": [
+    -80.535084,
+    40.164614,
+    -80.533108,
+    40.167718
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.048,
+   "launches": [
+    "castleman-run-lake-wma-wv"
+   ],
+   "water_id": "castleman-run-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "d224e5ee2851d628fe0955fff7cbad8e392651e947ffe8e6737fae70734d1457",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "charles-fork-lake-wv",
+   "name": "Charles Fork Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Spencer"
+   ],
+   "bbox": [
+    -81.34942,
+    38.750458,
+    -81.340132,
+    38.771503
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.215,
+   "launches": [
+    "charles-fork-lake-boat-launch-wv"
+   ],
+   "water_id": "charles-fork-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "942d99a46229426477824771a0213b3aac3a9c51efa2a599645ec9b242138444",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cheat-lake-wv",
+   "name": "Cheat Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Cheat Lake",
+    "Sunset Beach"
+   ],
+   "bbox": [
+    -79.897987,
+    39.653844,
+    -79.841804,
+    39.720309
+   ],
+   "wikidata": "Q5088911",
+   "charted": false,
+   "area_km2": 5.511,
+   "launches": [
+    "cheat-lake-ices-ferry-bridge-wv",
+    "cheat-lake-park-wv",
+    "cheat-lake-sunset-beach-wv"
+   ],
+   "water_id": "cheat-lake-wv",
+   "gnis_id": "1537226",
+   "geometry_hash": "08fc620a82a9f27ba1b55f6b965f84f1830040fc2cc17bfc693a8fda4defbe10",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cheat-river-wv",
+   "name": "Cheat River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Hannahsville",
+    "Macomber",
+    "Masontown",
+    "Parsons",
+    "Preston",
+    "Rowlesburg",
+    "Ruthbelle",
+    "Saint George"
+   ],
+   "bbox": [
+    -79.890493,
+    39.110901,
+    -79.633731,
+    39.736631
+   ],
+   "wikidata": "Q1068697",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "albright-foc-wv",
+    "hannahsville-ford-co-rt-wv",
+    "holly-meadow-bridge-wv",
+    "jenkinsburg-bridge-wv",
+    "preston-foc-wv",
+    "rowlesburg-city-park-wv",
+    "saint-george-bridge-wv"
+   ],
+   "water_id": "cheat-river-wv",
+   "gnis_id": "1171616",
+   "geometry_hash": "5a79f759bb273125dc47699f63d765467f9e3634343a01fd5441ca849e0a5db1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chief-cornstalk-lake-wv",
+   "name": "Chief Cornstalk Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Point Pleasant"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chief-cornstalk-wma-lake-wv"
+   ],
+   "water_id": "chief-cornstalk-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coal-river-wv",
+   "name": "Coal River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Alum Creek",
+    "Lower Falls",
+    "Saint Albans",
+    "Tornado"
+   ],
+   "bbox": [
+    -81.869559,
+    38.2731,
+    -81.799165,
+    38.397235
+   ],
+   "wikidata": "Q5137771",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "alum-creek-lions-club-park-wv",
+    "lower-falls-wv",
+    "meadowood-park-wv",
+    "river-bend-wv",
+    "st-albans-coal-river-group-wv"
+   ],
+   "water_id": "coal-river-wv",
+   "gnis_id": "1537464",
+   "geometry_hash": "6995fadd4345c02321e2aeae404a62b6e6bfc1aa54d616209becdec0ae8a0fa5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "conaway-run-lake-wv",
+   "name": "Conaway Run Lake",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Centerville"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "conway-run-lake-boat-launch-wv"
+   ],
+   "water_id": "conaway-run-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deckers-creek-wv",
+   "name": "Deckers Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Reedsville"
+   ],
+   "bbox": [
+    -79.961729,
+    39.498114,
+    -79.802384,
+    39.629593
+   ],
+   "wikidata": "Q5249304",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "upper-deckers-creek-wma-wv"
+   ],
+   "water_id": "deckers-creek-wv",
+   "gnis_id": "1538098",
+   "geometry_hash": "6f425d0c0efc32e876110a7cfd1be93328b1f8356fb082c67db50ca76ddf2d3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deegan-lake-wv",
+   "name": "Deegan Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Bridgeport"
+   ],
+   "bbox": [
+    -80.25304,
+    39.265222,
+    -80.247139,
+    39.268087
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.064,
+   "launches": [
+    "deegan-lake-boat-launch-wv"
+   ],
+   "water_id": "deegan-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "64ea3f3a4f70eee482be32714b1042bad0c098a511aa1f9ca2e7f495100cdc81",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dent-s-run-reservoir-on-buffalo-creek-wv",
+   "name": "Dent's Run Reservoir on Buffalo Creek",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Mannington"
+   ],
+   "bbox": [
+    -80.388893,
+    39.544996,
+    -80.384207,
+    39.55552
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.119,
+   "launches": [
+    "dents-run-lake-wv"
+   ],
+   "water_id": "dent-s-run-reservoir-on-buffalo-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "c614b3641f954afc5585a90afabc342c673584767e487f62c6860f1e6991be6c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dog-run-lake-wv",
+   "name": "Dog Run Lake",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Salem"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dog-run-boat-launch-wv"
+   ],
+   "water_id": "dog-run-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dry-fork-wv",
+   "name": "Dry Fork",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Gladwin"
+   ],
+   "bbox": [
+    -79.649568,
+    38.733314,
+    -79.500297,
+    39.072061
+   ],
+   "wikidata": "Q4167566",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dry-fork-at-mill-run-wv"
+   ],
+   "water_id": "dry-fork-wv",
+   "gnis_id": "1550963",
+   "geometry_hash": "2f974f0fd7ddef65068e43c69f4ce178715177c884c66c032daf258fb0e1ba7f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dunkard-creek-wv",
+   "name": "Dunkard Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Holman",
+    "Price"
+   ],
+   "bbox": [
+    -80.270184,
+    39.703299,
+    -79.969758,
+    39.765534
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "buckeye-bridge-wv",
+    "mason-dixon-park-wv"
+   ],
+   "water_id": "dunkard-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "2d51cab4ad8ac5f23040487c9cf5422e1690e1a7f4242b711050d725e8e25b67",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dunkard-fork-wv",
+   "name": "Dunkard Fork",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Alley Grove"
+   ],
+   "bbox": [
+    -80.526051,
+    39.892987,
+    -80.478287,
+    39.95108
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dunkard-fork-wma-wv"
+   ],
+   "water_id": "dunkard-fork-wv",
+   "gnis_id": null,
+   "geometry_hash": "9f82ddee04f9b8aafac21f14f3bb7c18266626e1c4e9b669dfca16901920b3c0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-branch-twelvepole-creek-wv",
+   "name": "East Branch Twelvepole Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Stiltner"
+   ],
+   "bbox": [
+    -82.445531,
+    38.144744,
+    -82.378149,
+    38.211245
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "east-lynn-lake-tailwaters-wv"
+   ],
+   "water_id": "east-branch-twelvepole-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "3522ea8111af3a860581be21516e2d7f251d4a58eec50318fe57e2c670fc81f7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-lynn-lake-wv",
+   "name": "East Lynn Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Brabant",
+    "Kiahsville",
+    "Stiltner"
+   ],
+   "bbox": [
+    -82.39394,
+    38.068624,
+    -82.297538,
+    38.144845
+   ],
+   "wikidata": "Q5328898",
+   "charted": false,
+   "area_km2": 3.604,
+   "launches": [
+    "east-fork-central-boat-ramp-wv",
+    "east-lynn-lake-east-fork-campground-area-5-wv",
+    "east-lynn-lake-east-fork-ramp-wv",
+    "east-lynn-lake-lick-creek-ramp-wv"
+   ],
+   "water_id": "east-lynn-lake-wv",
+   "gnis_id": "1538510",
+   "geometry_hash": "4cd963aa75b3746275a2665fb4a37eaa36439fb5f173333a905417c5f88b9726",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "east-lynn-lake-marina-wv"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "elk-fork-lake-wv",
+   "name": "Elk Fork Lake",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Ripley"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "elk-fork-lake-boat-launch-wv"
+   ],
+   "water_id": "elk-fork-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "elk-river-wv",
+   "name": "Elk River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Bakers Run",
+    "Big Chimney",
+    "Blue Creek",
+    "Clay",
+    "Clay Junction",
+    "Clendenin",
+    "Dorfee",
+    "Duck",
+    "Frametown",
+    "Gassaway",
+    "Hartland",
+    "Ivydale"
+   ],
+   "bbox": [
+    -81.646172,
+    38.353733,
+    -80.115845,
+    38.677537
+   ],
+   "wikidata": "Q5364110",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "baltimore-run-wv",
+    "big-chimney-wv",
+    "blue-creek-wv",
+    "clay-county-courthouse-wv",
+    "clendenin-wv",
+    "clendenin-south-wv",
+    "coonskin-park-boat-slide-wv",
+    "dorfee-wv",
+    "duck-wv",
+    "elk-river-rail-road-bridge-wv",
+    "frametown-wv",
+    "hartland-bridge-wv",
+    "ivydale-wv",
+    "jack-bend-downstream-wv",
+    "jack-bend-upstream-wv",
+    "jim-compton-wma-wv",
+    "king-shoals-wv",
+    "mary-l-chilton-road-side-park-wv",
+    "queen-shoals-wv",
+    "slaty-fork-c-r-wv",
+    "strange-creek-wv",
+    "sutton-lake-bakers-run-campground-wv",
+    "sutton-lake-bee-run-wv",
+    "sutton-dam-tailwaters-wv",
+    "tate-creek-wv",
+    "wvdoh-clay-wv",
+    "webster-springs-park-wv",
+    "whitaker-falls-wv"
+   ],
+   "water_id": "elk-river-wv",
+   "gnis_id": "1551032",
+   "geometry_hash": "73845013702834bc23f567f5ce0bc618de2ea37521a8aadebcb4233747cd092b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "elkwater-fork-lake-wv",
+   "name": "Elkwater Fork Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Valley Head"
+   ],
+   "bbox": [
+    -80.070301,
+    38.586141,
+    -80.05979,
+    38.598472
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.201,
+   "launches": [
+    "elkwater-fork-lake-carry-in-access-wv"
+   ],
+   "water_id": "elkwater-fork-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "c4be0d8a0969f579818bb78bb49fccbea34514bfbd4f64d8d8718ab38ff5265c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fairfax-pond-wv",
+   "name": "Fairfax Pond",
+   "kind": "pond",
+   "state": "WV",
+   "towns": [
+    "Reedsville"
+   ],
+   "bbox": [
+    -79.797018,
+    39.491197,
+    -79.79151,
+    39.49475
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.082,
+   "launches": [
+    "fairfax-pond-carry-in-access-wv"
+   ],
+   "water_id": "fairfax-pond-wv",
+   "gnis_id": null,
+   "geometry_hash": "0fee965b0780b75e9367b18f4996f9bfcbeccc39bd1961c49b7faae35547a5ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flat-run-lake-wv",
+   "name": "Flat Run Lake",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Fairview"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "flat-run-lake-carry-in-access-wv"
+   ],
+   "water_id": "flat-run-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fort-ashby-lake-wv",
+   "name": "Fort Ashby Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Fort Ashby"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fort-ashby-lake-carry-in-access-wv"
+   ],
+   "water_id": "fort-ashby-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "french-creek-wv",
+   "name": "French Creek",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Belmont"
+   ],
+   "bbox": [
+    -81.256987,
+    39.348356,
+    -81.188632,
+    39.386256
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "ohio-river-french-creek-embayment-wv"
+   ],
+   "water_id": "french-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "84d4f508a2afafd3d00b1c0c33edef45f8da502ddda7de578eb3da23a67751e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "frozencamp-lake-right-fork-wv",
+   "name": "Frozencamp Lake - Right Fork",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Louther"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "frozencamp-lake-right-fork-boat-launch-wv"
+   ],
+   "water_id": "frozencamp-lake-right-fork-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gauley-river-wv",
+   "name": "Gauley River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Beech Glen",
+    "Curtin",
+    "Marybill",
+    "Mason Branch",
+    "Persinger Ford",
+    "Summersville",
+    "Swiss",
+    "Woods Ferry"
+   ],
+   "bbox": [
+    -81.19785,
+    38.161534,
+    -80.231982,
+    38.439071
+   ],
+   "wikidata": "Q1496014",
+   "charted": false,
+   "area_km2": 2.137,
+   "launches": [
+    "gauley-river-at-mouth-of-panther-creek-wv",
+    "gauley-tailwaters-river-access-summersville-wv",
+    "gauley-tailwaters-river-access-wv",
+    "jodie-wv",
+    "masons-branch-river-access-wv",
+    "mouth-of-cherry-wv",
+    "persinger-creek-wv",
+    "summersville-lake-winter-ramp-wv",
+    "upper-swiss-river-access-wv",
+    "woods-ferry-river-access-wv"
+   ],
+   "water_id": "gauley-river-wv",
+   "gnis_id": "1551216",
+   "geometry_hash": "03cc9d8f2c3012919fa8abaf69adfb2b94311af4c165112a7d382e05d6fecba2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "greenbrier-river-wv",
+   "name": "Greenbrier River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Alderson",
+    "Anthony",
+    "Bargers Springs",
+    "Buckeye",
+    "Falling Spring",
+    "Hinton",
+    "Lewisburg",
+    "Marlinton",
+    "North Caldwell",
+    "Ronceverte",
+    "Seebert",
+    "Snowflake"
+   ],
+   "bbox": [
+    -80.8963,
+    37.6023,
+    -79.831912,
+    38.543887
+   ],
+   "wikidata": "Q1544689",
+   "charted": false,
+   "area_km2": 2.226,
+   "launches": [
+    "anthony-boat-launch-wv",
+    "barger-springs-wv",
+    "buckeye-bridge-wv-2",
+    "caldwell-wv",
+    "fort-spring-wv",
+    "i-64-bridge-wv",
+    "marlinton-bridge-wv",
+    "renick-wv",
+    "roncerverte-city-park-wv",
+    "ronceverte-south-wv",
+    "spring-creek-wv",
+    "st-rt-3-bridge-at-alderson-wv",
+    "stillwell-park-wv",
+    "talcott-wv",
+    "watoga-state-park-wv",
+    "willowwood-wv"
+   ],
+   "water_id": "greenbrier-river-wv",
+   "gnis_id": "1551294",
+   "geometry_hash": "50f9c4a40a44d33452561e448c5d01b4cfe4e033a101dc4818dd2803f1f312e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "guyandotte-river-wv",
+   "name": "Guyandotte River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Atenville",
+    "Barboursville",
+    "Big Branch",
+    "Branchland",
+    "Brenton",
+    "Chapmanville",
+    "Earling",
+    "Elmore",
+    "Godby Heights",
+    "Greenville",
+    "Huntington",
+    "Itmann"
+   ],
+   "bbox": [
+    -82.391743,
+    37.561099,
+    -81.219191,
+    38.434371
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "branchland-wv",
+    "cr-14-bridge-wv",
+    "chapmanville-wv",
+    "city-of-mullens-wv",
+    "earling-wv",
+    "farmdale-bridge-wv",
+    "guyandotte-campground-wv",
+    "guyandotte-ramp-wv",
+    "harts-creek-wv",
+    "itmann-wv",
+    "justice-wv",
+    "man-wv",
+    "mouth-of-horse-creek-wv",
+    "peach-creek-wv",
+    "rd-bailey-lake-tailwaters-wv",
+    "rocky-creek-wv",
+    "salt-rock-wv",
+    "shawnee-island-park-wv",
+    "st-rt-16-bridge-pineville-wv",
+    "st-rt-16-bridge-at-mullens-wv",
+    "wylo-wv"
+   ],
+   "water_id": "guyandotte-river-wv",
+   "gnis_id": null,
+   "geometry_hash": "ccb8648f52105c05433f030f9f190eca4f9a1d253ee3e07566f1bfb2ef1e8d00",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "handley-pond-wv",
+   "name": "Handley Pond",
+   "kind": "pond",
+   "state": "WV",
+   "towns": [
+    "Marlinton"
+   ],
+   "bbox": [
+    -80.189386,
+    38.313022,
+    -80.187067,
+    38.315206
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.023,
+   "launches": [
+    "handley-wma-lake-wv"
+   ],
+   "water_id": "handley-pond-wv",
+   "gnis_id": null,
+   "geometry_hash": "8c504a5f18c667e9c6bcddade17889db64755d4c2ba093ec83f5f7123b4e6798",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hawes-run-wv",
+   "name": "Hawes Run",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Brandywine"
+   ],
+   "bbox": [
+    -79.242696,
+    38.598019,
+    -79.200858,
+    38.63093
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brandywine-lake-recreation-area-wv"
+   ],
+   "water_id": "hawes-run-wv",
+   "gnis_id": null,
+   "geometry_hash": "5336e7e088eaedacba2f8348f159914aa877fce9143b68f4ae762fbb937e2ffb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hinkel-lake-wv",
+   "name": "Hinkel Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Bridgeport"
+   ],
+   "bbox": [
+    -80.255374,
+    39.271035,
+    -80.253016,
+    39.275014
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.026,
+   "launches": [
+    "hinkle-lake-wv"
+   ],
+   "water_id": "hinkel-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "d7250e2043ffd008059fba6863c0d51b7e9ba6c69232e3713d70922c24960ab1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "holly-river-wv",
+   "name": "Holly River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Holly"
+   ],
+   "bbox": [
+    -80.591774,
+    38.655617,
+    -80.542937,
+    38.670774
+   ],
+   "wikidata": "Q14714059",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sutton-lake-gerald-r-freeman-campground-wv"
+   ],
+   "water_id": "holly-river-wv",
+   "gnis_id": "1540396",
+   "geometry_hash": "ae0a04cfdb53ef11379842a0b84da3113be79b4ff8ccca812d8e797b30806e53",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "holly-river-boat-launch-near-holly-wv"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "horse-creek-lake-wv",
+   "name": "Horse Creek Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Brenton"
+   ],
+   "bbox": [
+    -81.711221,
+    37.572456,
+    -81.707704,
+    37.574683
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.027,
+   "launches": [
+    "horse-creek-wma-lake-wv"
+   ],
+   "water_id": "horse-creek-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "0ac609ce3276b63b82851022157b6a5dd8fc434533b1a40ac88f37db2a76ab4e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "huey-run-wv",
+   "name": "Huey Run",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Logansport"
+   ],
+   "bbox": [
+    -80.421809,
+    39.49471,
+    -80.407486,
+    39.51818
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "huey-run-boat-launch-wv"
+   ],
+   "water_id": "huey-run-wv",
+   "gnis_id": "1540550",
+   "geometry_hash": "b268b3a6df260df25791c88a24bd9b204ca79928b56dbf38302986381d084d85",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hughes-river-wv",
+   "name": "Hughes River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Cisco"
+   ],
+   "bbox": [
+    -81.396244,
+    39.118189,
+    -81.277454,
+    39.148202
+   ],
+   "wikidata": "Q14714073",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hughes-river-chucks-ford-wv"
+   ],
+   "water_id": "hughes-river-wv",
+   "gnis_id": "1540572",
+   "geometry_hash": "0d0cf22469712d40f028768acc79155f8ad69ab89c3f410e151bf177582b6dc4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jennings-randolph-lake-wv",
+   "name": "Jennings Randolph Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Elk Garden"
+   ],
+   "bbox": [
+    -79.162741,
+    39.402499,
+    -79.118714,
+    39.435974
+   ],
+   "wikidata": "Q6179058",
+   "charted": false,
+   "area_km2": 3.604,
+   "launches": [
+    "howell-run-wv"
+   ],
+   "water_id": "jennings-randolph-lake-md",
+   "gnis_id": "583296",
+   "geometry_hash": "186b540ce1730dff4f3883e7370516dca41a95ed3a3cd3a682ef5f3e097d970d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jimmy-lewis-lake-wv",
+   "name": "Jimmy Lewis Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Yards"
+   ],
+   "bbox": [
+    -81.294816,
+    37.30539,
+    -81.288154,
+    37.309937
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.035,
+   "launches": [
+    "jimmy-lewis-lake-pinnacle-rock-sp-wv"
+   ],
+   "water_id": "jimmy-lewis-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "b7fcfd33dea37997d346479280a148c7c2948ed5aa8575af548fc2e46d7f0c2a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kanawha-river-wv",
+   "name": "Kanawha River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Buffalo",
+    "Charleston",
+    "Chesapeake",
+    "Dunbar",
+    "Glasgow",
+    "Glen Ferris",
+    "Hansford",
+    "Leon",
+    "Nitro",
+    "Poca",
+    "Point Pleasant",
+    "Saint Albans"
+   ],
+   "bbox": [
+    -82.144674,
+    38.121621,
+    -81.197006,
+    38.837884
+   ],
+   "wikidata": "Q918867",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "buffalo-boat-ramp-wv",
+    "city-of-nitro-wv",
+    "daniel-boone-park-wv",
+    "glasgow-wv",
+    "hansford-wv",
+    "kanawha-falls-wv",
+    "leon-public-access-area-wv",
+    "montgomery-boat-launch-wv",
+    "point-pleasant-launch-ramp-wv",
+    "raymond-city-boat-launch-wv",
+    "shawnee-state-park-wv",
+    "st-albans-roadside-park-wv",
+    "winfield-bridge-wv"
+   ],
+   "water_id": "kanawha-river-wv",
+   "gnis_id": "1551620",
+   "geometry_hash": "c57e5dbe6f3a8036ba16930b6ac44ea228f18969a20952dfc10061a036e930f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kimsey-run-lake-wv",
+   "name": "Kimsey Run Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Moorefield"
+   ],
+   "bbox": [
+    -78.820853,
+    38.956155,
+    -78.813479,
+    38.962725
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.195,
+   "launches": [
+    "kimsey-run-lake-boat-launch-wv"
+   ],
+   "water_id": "kimsey-run-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "f8f8c8f2185fdd86954e8be45fb4c14f0b1ab6bc718489eb208eb22081b5706a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "krodel-lake-wv",
+   "name": "Krodel Lake",
+   "kind": "pond",
+   "state": "WV",
+   "towns": [
+    "Point Pleasant"
+   ],
+   "bbox": [
+    -82.129149,
+    38.835688,
+    -82.122732,
+    38.839564
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.083,
+   "launches": [
+    "krodel-park-wv"
+   ],
+   "water_id": "krodel-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "b78930d2e6477bf72856b00cd1863da390cdd67d9330c388f8671359415377cb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-berwind-wv",
+   "name": "Lake Berwind",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Berwind"
+   ],
+   "bbox": [
+    -81.708171,
+    37.258349,
+    -81.698821,
+    37.262866
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.055,
+   "launches": [
+    "berwind-lake-wma-wv"
+   ],
+   "water_id": "lake-berwind-wv",
+   "gnis_id": null,
+   "geometry_hash": "2ba790221e867b8007c6a7bdd4862b04fe401133168f7b4a43daeb401c6dd165",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-buffalo-wv",
+   "name": "Lake Buffalo",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Durbin"
+   ],
+   "bbox": [
+    -79.705606,
+    38.529848,
+    -79.697968,
+    38.533333
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.087,
+   "launches": [
+    "buffalo-lake-boat-launch-wv"
+   ],
+   "water_id": "lake-buffalo-wv",
+   "gnis_id": null,
+   "geometry_hash": "7231a3bb3ace9f11922922567de218561ab74999429000f8abf9a282ceb5e804",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-sherwood-wv",
+   "name": "Lake Sherwood",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Trainer"
+   ],
+   "bbox": [
+    -80.014452,
+    37.999595,
+    -80.000341,
+    38.01336
+   ],
+   "wikidata": "Q6477718",
+   "charted": false,
+   "area_km2": 0.603,
+   "launches": [
+    "lake-sherwood-boat-launch-wv"
+   ],
+   "water_id": "lake-sherwood-wv",
+   "gnis_id": "1551681",
+   "geometry_hash": "56d7ad04a8bd48151d7ef64f3be7377fb8001c54b5247e688b4648ed30932330",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-stephens-wv",
+   "name": "Lake Stephens",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Beckley"
+   ],
+   "bbox": [
+    -81.315317,
+    37.777391,
+    -81.277261,
+    37.809052
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.992,
+   "launches": [
+    "stephens-lake-boat-launch-wv"
+   ],
+   "water_id": "lake-stephens-wv",
+   "gnis_id": null,
+   "geometry_hash": "81b58b87f114161a5652b66ae9153c78df4b07e0f14a69094d1a69309cde9b74",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "stephens-lake-marina-wv"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "larenim-lake-wv",
+   "name": "Larenim Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Keyser"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "larenim-park-lake-wv"
+   ],
+   "water_id": "larenim-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "laurel-fork-wv",
+   "name": "Laurel Fork",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Oceana"
+   ],
+   "bbox": [
+    -81.627159,
+    37.661951,
+    -81.386531,
+    37.730946
+   ],
+   "wikidata": "Q14714126",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "oceana-wv"
+   ],
+   "water_id": "laurel-fork-wv",
+   "gnis_id": "1541451",
+   "geometry_hash": "0761751322d9f5fd8a75797dfa3659bcbf2865d9d872f79a96bc5be758c97235",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "laurel-lake-wv",
+   "name": "Laurel Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Parsley"
+   ],
+   "bbox": [
+    -82.218834,
+    37.841903,
+    -82.205123,
+    37.845567
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.09,
+   "launches": [
+    "laurel-lake-wma-wv"
+   ],
+   "water_id": "laurel-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "bd4cc74265484169fbef501a0ad6210b4c20eb229a0ff7bb5cc15b078855e90a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lee-creek-wv",
+   "name": "Lee Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Humphrey"
+   ],
+   "bbox": [
+    -81.743243,
+    39.148252,
+    -81.719647,
+    39.158764
+   ],
+   "wikidata": "Q25207658",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "lee-creek-carry-in-access-wv"
+   ],
+   "water_id": "lee-creek-wv",
+   "gnis_id": "1541603",
+   "geometry_hash": "06dc625730be5385fc50cf4e80902c31fc5ac95438b6b2f5027decc2b948c45e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "left-fork-wv",
+   "name": "Left Fork",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Palermo"
+   ],
+   "bbox": [
+    -82.060578,
+    38.150518,
+    -82.004794,
+    38.166847
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "upper-mud-river-lake-access-wv"
+   ],
+   "water_id": "left-fork-wv",
+   "gnis_id": null,
+   "geometry_hash": "d31c0b65904eca94831e51c1b78be1d2822ea51258e4c1d7f3197aa0cdddaac5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-beaver-lake-wv",
+   "name": "Little Beaver Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Crow"
+   ],
+   "bbox": [
+    -81.083955,
+    37.749857,
+    -81.078065,
+    37.754891
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.065,
+   "launches": [
+    "little-beaver-state-park-wv"
+   ],
+   "water_id": "little-beaver-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "b47925d03920f73a0ca87f214efeb488b51ae2dcdf646bcbd9bc006078b74c98",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-coal-river-wv",
+   "name": "Little Coal River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Adams",
+    "Danville",
+    "Forks of Coal",
+    "Irene",
+    "Lory",
+    "Madison"
+   ],
+   "bbox": [
+    -81.859641,
+    38.056136,
+    -81.799477,
+    38.2731
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "don-r-kuhn-wv",
+    "lick-creek-park-wv",
+    "madison-city-park-wv",
+    "the-forks-of-coal-wv",
+    "upper-waterways-park-wv"
+   ],
+   "water_id": "little-coal-river-wv",
+   "gnis_id": null,
+   "geometry_hash": "c896928c0410cdc901c7762533a360764424107deb469c186332bd92831c098a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-kanawha-river-wv",
+   "name": "Little Kanawha River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Burnsville",
+    "Cabot Station",
+    "Creston",
+    "Elizabeth",
+    "Gilmer",
+    "Grantsville",
+    "Hattie",
+    "Leachtown",
+    "Palestine",
+    "Parkersburg",
+    "Revel",
+    "Sand Fork"
+   ],
+   "bbox": [
+    -81.571839,
+    38.727624,
+    -80.277281,
+    39.266113
+   ],
+   "wikidata": "Q671902",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "burnsville-lake-tailwaters-wv",
+    "little-kanawha-river-creston-wv",
+    "little-kanawha-river-gilmer-braxton-county-line-wv",
+    "little-kanawha-river-grantsville-wv",
+    "little-kanawha-river-leachtown-wv",
+    "little-kanawha-river-leading-creek-wv",
+    "little-kanawha-river-lock-4-wv",
+    "little-kanawha-river-sanoma-bridge-wv",
+    "little-kanawha-river-sportsman-park-wv",
+    "little-kanawha-river-spring-valley-wv",
+    "little-kanawha-river-wells-lock-left-bank-wv",
+    "little-kanawha-river-wells-lock-right-bank-wv",
+    "little-kanawha-river-glenville-wv",
+    "little-kanwaha-river-corning-park-wv"
+   ],
+   "water_id": "little-kanawha-river-wv",
+   "gnis_id": "1542136",
+   "geometry_hash": "39deffc2ee43fc9c540eadb52cdbfb6da616de702a770d9a1b525c533d997a7c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "long-branch-lake-wv",
+   "name": "Long Branch Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Pipestem"
+   ],
+   "bbox": [
+    -80.985107,
+    37.532711,
+    -80.980461,
+    37.537655
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.061,
+   "launches": [
+    "pipestem-long-branch-lake-wv"
+   ],
+   "water_id": "long-branch-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "76d583809eb83eb2db28ace0b7e8ca01b32e33086c5c978c90038fe74b34cf68",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mason-lake-wv",
+   "name": "Mason Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Core"
+   ],
+   "bbox": [
+    -80.120357,
+    39.685456,
+    -80.113007,
+    39.687717
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.045,
+   "launches": [
+    "pedlar-mason-lake-wv"
+   ],
+   "water_id": "mason-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "ccd55e91ff9eb87ab3f5f124a2b339c9d99be6209ffd219d2a7e1b0f53425e6f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "meadow-river-wv",
+   "name": "Meadow River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Rainelle"
+   ],
+   "bbox": [
+    -80.951216,
+    37.95176,
+    -80.691345,
+    38.193778
+   ],
+   "wikidata": "Q6803275",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "charmco-roadside-park-wv"
+   ],
+   "water_id": "meadow-river-wv",
+   "gnis_id": "1552050",
+   "geometry_hash": "ad15bf2a52e0a54d2f3bc4fbca1aae3da659550fa2d74141fb748cc3809bdbf1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-fork-river-wv",
+   "name": "Middle Fork River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Audra"
+   ],
+   "bbox": [
+    -80.109389,
+    38.745645,
+    -80.028952,
+    39.061928
+   ],
+   "wikidata": "Q6841420",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "audra-state-park-wv"
+   ],
+   "water_id": "middle-fork-river-wv",
+   "gnis_id": "1552064",
+   "geometry_hash": "dee95dcd99399b2d2c1b9ae8349d8f4f44906326e27e8911a4878c66cd291204",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-island-creek-wv",
+   "name": "Middle Island Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Blue",
+    "Middlebourne",
+    "Sugar Valley",
+    "West Union"
+   ],
+   "bbox": [
+    -81.202607,
+    39.284739,
+    -80.728333,
+    39.507507
+   ],
+   "wikidata": "Q6841472",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "middle-island-creek-blue-wv",
+    "middle-island-creek-buffalo-run-wv",
+    "middle-island-creek-purgatory-run-wv",
+    "middle-island-creek-sellers-road-wv",
+    "middle-island-creek-sugar-creek-wv",
+    "middle-island-creek-the-y-junction-18-74-wv",
+    "middle-island-creek-the-jug-wv"
+   ],
+   "water_id": "middle-island-creek-wv",
+   "gnis_id": "1552067",
+   "geometry_hash": "a4e9abe8d486932686c04220a45680517126b043c80fab88604d1a8a1e4ab842",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mill-creek-reservoir-wv",
+   "name": "Mill Creek Reservoir",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Belington"
+   ],
+   "bbox": [
+    -79.910733,
+    39.005917,
+    -79.908292,
+    39.008364
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.038,
+   "launches": [
+    "mill-creek-carry-in-access-wv"
+   ],
+   "water_id": "mill-creek-reservoir-wv",
+   "gnis_id": null,
+   "geometry_hash": "7114212e434d5b331fd7db553c4714ee174d025c06336dfb804988f4725c374a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mill-creek-wv",
+   "name": "Mill Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Cottageville",
+    "Ripley",
+    "Ripley Landing"
+   ],
+   "bbox": [
+    -81.843977,
+    38.779055,
+    -81.638573,
+    38.885261
+   ],
+   "wikidata": "Q6858266",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "mill-creek-cedar-lakes-wv",
+    "mill-creek-jackson-county-fairgrounds-wv",
+    "mill-creek-junction-62-33-wv",
+    "rollins-lake-carry-down-wv"
+   ],
+   "water_id": "mill-creek-wv",
+   "gnis_id": "1543321",
+   "geometry_hash": "c02ecf92afb91d93535c6299823d40fa6a3d604975805444be462b09a37ee4d7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "moncove-lake-wv",
+   "name": "Moncove Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Roxalia"
+   ],
+   "bbox": [
+    -80.354299,
+    37.614635,
+    -80.343812,
+    37.626005
+   ],
+   "wikidata": "Q34908046",
+   "charted": false,
+   "area_km2": 0.354,
+   "launches": [
+    "moncove-lake-state-park-wv"
+   ],
+   "water_id": "moncove-lake-wv",
+   "gnis_id": "1552171",
+   "geometry_hash": "864d8b75fbc541eebfc72730affa14da8c1eee3235bd76eac15bf2eb0c2c590d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "monongahela-river-wv",
+   "name": "Monongahela River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Fairmont",
+    "Little Falls",
+    "Lowsville",
+    "Morgantown",
+    "Radcliff",
+    "Star City",
+    "Uffington",
+    "Van Voorhis"
+   ],
+   "bbox": [
+    -80.152545,
+    39.464812,
+    -79.910644,
+    39.728952
+   ],
+   "wikidata": "Q643780",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fairmont-pallatine-park-wv",
+    "fort-martin-wv",
+    "little-falls-wv",
+    "morgantown-walnut-street-wv",
+    "pricketts-fort-state-park-wv",
+    "star-city-riverfront-park-wv",
+    "uffington-wv",
+    "vanvoorhis-wv",
+    "whiteday-creek-mouth-shoreline-wv"
+   ],
+   "water_id": "monongahela-river-pa",
+   "gnis_id": "1209053",
+   "geometry_hash": "c4a4080a7f22bbc501935dceb3241a76fac5e37743ba6b288cb4799a54873072",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mount-storm-lake-wv",
+   "name": "Mount Storm Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Bismarck"
+   ],
+   "bbox": [
+    -79.285584,
+    39.156616,
+    -79.23754,
+    39.208112
+   ],
+   "wikidata": "Q6923891",
+   "charted": false,
+   "area_km2": 4.492,
+   "launches": [
+    "mount-storm-lake-boat-launch-wv"
+   ],
+   "water_id": "mount-storm-lake-wv",
+   "gnis_id": "1543767",
+   "geometry_hash": "d1a854f28c03166ccee4d0929eeb1f0b0f4e34b42cc7a857e36c2a9a8330aab3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mountain-valley-lake-wv",
+   "name": "Mountain Valley Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Jumping Branch"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mountain-valley-carry-in-access-wv"
+   ],
+   "water_id": "mountain-valley-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mountwood-park-lake-wv",
+   "name": "Mountwood Park Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Deerwalk"
+   ],
+   "bbox": [
+    -81.313854,
+    39.237561,
+    -81.303643,
+    39.248583
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.165,
+   "launches": [
+    "mountwood-lake-wv"
+   ],
+   "water_id": "mountwood-park-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "4f21f6d7b532bb7a3618518de09ecbb4c5150e7ac83e62f474bf875065e4c524",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mud-river-wv",
+   "name": "Mud River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Barboursville",
+    "Howells Mill",
+    "Milton",
+    "Palermo",
+    "Yates Crossing"
+   ],
+   "bbox": [
+    -82.295416,
+    38.111218,
+    -82.015438,
+    38.447581
+   ],
+   "wikidata": "Q12062150",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cr-25-wv",
+    "howells-mill-bridge-wv",
+    "i-64-bridge-ona-wv",
+    "us-rt-60-bridge-milton-wv",
+    "upper-mud-river-lake-ramp-wv",
+    "yates-crossings-bridge-wv"
+   ],
+   "water_id": "mud-river-wv",
+   "gnis_id": "1543911",
+   "geometry_hash": "7c35820b283b6893eea07b83abc234e6d67d1ff3d3322a011ee34c3348854d09",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "new-river-wv",
+   "name": "New River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Beckley",
+    "Bertha",
+    "Brooks",
+    "Crumps Bottom",
+    "Farley",
+    "Gauley Bridge",
+    "Glade",
+    "Hinton",
+    "MacDougal",
+    "McCreery",
+    "Meadow Creek",
+    "Neponset"
+   ],
+   "bbox": [
+    -81.362784,
+    37.055709,
+    -80.477434,
+    38.161534
+   ],
+   "wikidata": "Q952823",
+   "charted": false,
+   "area_km2": 16.694,
+   "launches": [
+    "akers-river-access-wv",
+    "bellepoint-wv",
+    "bluestone-lake-bertha-campground-wv",
+    "bluestone-lake-tailwaters-wv",
+    "brooklyn-river-access-wv",
+    "brookside-river-access-wv",
+    "bull-falls-campground-wv",
+    "cedar-branch-campground-wv",
+    "cunard-commercial-river-access-wv",
+    "cunard-private-boater-river-access-wv",
+    "dun-glen-river-access-wv",
+    "fayette-station-commercial-river-access-wv",
+    "fayette-station-private-boater-river-access-wv",
+    "glade-creek-river-access-wv",
+    "grandview-sandbar-river-access-wv",
+    "hawks-nest-state-park-wv",
+    "hellems-beach-river-access-wv",
+    "indian-creek-campground-wv",
+    "indian-creek-dickinsons-wv",
+    "indian-creek-lawson-s-wv",
+    "mccreery-river-access-wv",
+    "meadow-creek-access-wv",
+    "meadow-creek-river-access-wv",
+    "mill-creek-river-access-wv",
+    "sandstone-east-wv",
+    "sandstone-falls-river-access-wv",
+    "sandstone-falls-takeout-wv",
+    "shanklins-ferry-campground-lower-wv",
+    "shanklins-ferry-campground-upper-wv",
+    "stone-cliff-lower-river-access-wv",
+    "stone-cliff-upper-river-access-wv",
+    "thayer-river-access-wv",
+    "tug-creek-river-access-wv"
+   ],
+   "water_id": "new-river-sparta-nc",
+   "gnis_id": "1552301",
+   "geometry_hash": "2e019bd2348ffeb1dabc8e8946b15d4f14b6da111d0af3478924f4b3d9ab893c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-bend-lake-wv",
+   "name": "North Bend Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Harrisville"
+   ],
+   "bbox": [
+    -81.099279,
+    39.210364,
+    -81.042092,
+    39.225742
+   ],
+   "wikidata": "Q7054140",
+   "charted": false,
+   "area_km2": 0.925,
+   "launches": [
+    "north-bend-lake-cokeley-wv",
+    "north-bend-lake-rocky-hoover-wv",
+    "north-bend-lake-third-run-wv"
+   ],
+   "water_id": "north-bend-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "f5da2af480c71e58c66a40b99382ef89d8848e20d71660893d14670c01650587",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-branch-potomac-river-wv",
+   "name": "North Branch Potomac River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Keyser",
+    "Warnocks",
+    "Wiley Ford"
+   ],
+   "bbox": [
+    -79.499147,
+    39.195043,
+    -78.586939,
+    39.64869
+   ],
+   "wikidata": "Q14006686",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "barnum-wv",
+    "keyser-wv",
+    "wiley-ford-wv"
+   ],
+   "water_id": "north-branch-potomac-river-md",
+   "gnis_id": "586218",
+   "geometry_hash": "624774163d03ea28ce4c39686de6085ccb6a7e61bf0a2e03a19731883148fb36",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-blackwater-river-wv",
+   "name": "North Fork Blackwater River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Thomas"
+   ],
+   "bbox": [
+    -79.521706,
+    39.112261,
+    -79.481623,
+    39.188153
+   ],
+   "wikidata": "Q141086159",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "thomas-city-park-wv"
+   ],
+   "water_id": "north-fork-blackwater-river-wv",
+   "gnis_id": "1552325",
+   "geometry_hash": "b10b2f9b283f64620d083e6bdece25f3b87eace755d20d091e6bae8033d3abf4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-river-wv",
+   "name": "North River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "North River Mills"
+   ],
+   "bbox": [
+    -78.766973,
+    39.136252,
+    -78.420768,
+    39.409273
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-river-mills-wv"
+   ],
+   "water_id": "north-river-wv",
+   "gnis_id": null,
+   "geometry_hash": "4fcac6fab15f05e079aa8101d5506a3134e917049f49113a4e15b36efe8d3064",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "o-brien-lake-wv",
+   "name": "O'Brien Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Statts Mills"
+   ],
+   "bbox": [
+    -81.64678,
+    38.724182,
+    -81.598621,
+    38.761006
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.932,
+   "launches": [
+    "o-brien-lake-boat-launch-wv"
+   ],
+   "water_id": "o-brien-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "17287d58af898eed6786b8957da0b93724afa527c62f51d39aadd2428469ab6d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ohio-river-wv",
+   "name": "Ohio River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Ashton",
+    "Chester",
+    "Clover",
+    "Hogsett",
+    "Humphrey",
+    "Huntington",
+    "Mason",
+    "McMechen",
+    "Moundsville",
+    "New Cumberland",
+    "New Martinsville",
+    "Paden City"
+   ],
+   "bbox": [
+    -82.860103,
+    38.401394,
+    -80.393731,
+    40.647441
+   ],
+   "wikidata": "Q4915",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "belleville-boat-ramp-wv",
+    "chester-city-park-wv",
+    "fish-creek-public-access-site-wv",
+    "green-bottom-wma-wv",
+    "harris-river-front-park-wv",
+    "mason-wv",
+    "moundsville-riverfront-park-wv",
+    "new-cumberland-vfd-wv",
+    "new-martinsville-park-wv",
+    "ohio-river-lock-19-wv",
+    "ohio-river-ravenswood-wv",
+    "ohio-river-carry-in-access-wv",
+    "paden-city-park-public-access-ramp-wv",
+    "st-mary-s-marina-boat-ramp-wv",
+    "wellsburg-city-park-wv",
+    "wellsburg-wwtp-wv",
+    "wheeling-island-public-access-ramp-wv",
+    "williamstown-boat-ramp-wv"
+   ],
+   "water_id": "ohio-river-il",
+   "gnis_id": "425264",
+   "geometry_hash": "7aee5bdec75baff4b4c4ff1983386b80e2982a161600cbb8ff33fd7fa0431301",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "kennedy-camping-marina-wv"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "oldtown-creek-wv",
+   "name": "Oldtown Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Point Pleasant"
+   ],
+   "bbox": [
+    -82.139435,
+    38.873948,
+    -82.052237,
+    38.915688
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "mcclintic-lake-ponds-wv"
+   ],
+   "water_id": "oldtown-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "b28da74658dca4dbc5d84ea6a0e11f92f88ace90bbbdb80602babd7d636019dc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "opequon-creek-wv",
+   "name": "Opequon Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Martinsburg",
+    "Middleway"
+   ],
+   "bbox": [
+    -78.073171,
+    39.212097,
+    -77.863134,
+    39.524509
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "priest-springs-wv",
+    "rt-45-bridge-wv",
+    "stone-bridge-wv"
+   ],
+   "water_id": "opequon-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "2e6e08376c9830baddf87208ca6b13a2fbc71c5820fccb5d63051a619ca28090",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "owen-davy-fork-wv",
+   "name": "Owen Davy Fork",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Curtisville"
+   ],
+   "bbox": [
+    -80.467481,
+    39.515262,
+    -80.44409,
+    39.524054
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "curtisville-lake-wv"
+   ],
+   "water_id": "owen-davy-fork-wv",
+   "gnis_id": null,
+   "geometry_hash": "31129f89d712ccaf63f7c7a00b40a4735eaa64026f523bf98aa3a3f3fc0438c5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "parker-hollow-lake-wv",
+   "name": "Parker Hollow Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Needmore"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "parker-hollow-boat-launch-wv"
+   ],
+   "water_id": "parker-hollow-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "patterson-creek-wv",
+   "name": "Patterson Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Headsville",
+    "Romney"
+   ],
+   "bbox": [
+    -79.103755,
+    39.119171,
+    -78.789962,
+    39.485484
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "headsville-wv",
+    "patterson-creek-carry-in-access-wv"
+   ],
+   "water_id": "patterson-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "7a5053486571ef44050d2ee0a0332efca2254e6af9c5e249e0ddd0550b1e54f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pendleton-lake-wv",
+   "name": "Pendleton Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Davis"
+   ],
+   "bbox": [
+    -79.500136,
+    39.115524,
+    -79.495973,
+    39.119994
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.041,
+   "launches": [
+    "pendleton-lake-carry-in-access-wv"
+   ],
+   "water_id": "pendleton-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "99df69fda4fc7de93b9e64fd44782ee31bde4c4611723c48da03c0efd2b77d0d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pennsboro-water-supply-lake-wv",
+   "name": "Pennsboro Water Supply Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Pennsboro"
+   ],
+   "bbox": [
+    -80.92678,
+    39.28154,
+    -80.922574,
+    39.285026
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.036,
+   "launches": [
+    "pennsboro-ws-reservior-wv"
+   ],
+   "water_id": "pennsboro-water-supply-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "b4da41e5ff4a13f685cb0ce967f5b21d8f9dc38edffed1e8fe9b429e7c68c27e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "plum-orchard-lake-wv",
+   "name": "Plum Orchard Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Oak Hill"
+   ],
+   "bbox": [
+    -81.230209,
+    37.936207,
+    -81.204556,
+    37.952032
+   ],
+   "wikidata": "Q7205340",
+   "charted": false,
+   "area_km2": 0.612,
+   "launches": [
+    "plum-orchard-lake-boat-launch-oak-hill-wv",
+    "plum-orchard-lake-boat-launch-wv",
+    "plum-orchard-lake-boat-launch-wv-2"
+   ],
+   "water_id": "plum-orchard-lake-wv",
+   "gnis_id": "1545059",
+   "geometry_hash": "a5e1277684265c89452695aa9190ba6001dae52e1848261e1a61a08f44ebb9e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pocatalico-river-wv",
+   "name": "Pocatalico River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Poca",
+    "Sissonville"
+   ],
+   "bbox": [
+    -81.819136,
+    38.44694,
+    -81.249408,
+    38.672405
+   ],
+   "wikidata": "Q7206292",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "poca-wv",
+    "pocatalico-pas-wv"
+   ],
+   "water_id": "pocatalico-river-wv",
+   "gnis_id": "1545083",
+   "geometry_hash": "d8147490efe8992940dae437668b23db1b64751c9b4fa1e51b7954da6b46b0fc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "potomac-river-wv",
+   "name": "Potomac River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Cherry Run",
+    "Falling Waters",
+    "Four Locks",
+    "Little Georgetown",
+    "Paw Paw",
+    "Shepherdstown"
+   ],
+   "bbox": [
+    -78.586939,
+    39.229258,
+    -77.459012,
+    39.697154
+   ],
+   "wikidata": "Q179444",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cherry-run-wv",
+    "dam-4-wv",
+    "paw-paw-wv",
+    "shepherdstown-wv"
+   ],
+   "water_id": "potomac-river-md",
+   "gnis_id": "597915",
+   "geometry_hash": "ba91c42c30e6d33f81afb19dccce08a25f975fae7a8a3435977ac308e27c2b5a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "r-d-bailey-lake-wv",
+   "name": "R. D. Bailey Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Big Branch",
+    "Justice"
+   ],
+   "bbox": [
+    -81.823536,
+    37.593267,
+    -81.753319,
+    37.628532
+   ],
+   "wikidata": "Q7273557",
+   "charted": false,
+   "area_km2": 2.255,
+   "launches": [
+    "downstream-area-winter-boat-ramp-wv",
+    "rd-bailey-lake-boat-launch-wv"
+   ],
+   "water_id": "r-d-bailey-lake-wv",
+   "gnis_id": "1549549",
+   "geometry_hash": "ab73b7ce517b37f51385d535e956e6af9a774ce1876dc947783e5bbc9699b046",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ridenour-lake-wv",
+   "name": "Ridenour Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Nitro"
+   ],
+   "bbox": [
+    -81.832172,
+    38.414387,
+    -81.827223,
+    38.417743
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.087,
+   "launches": [
+    "ridenour-lake-boat-launch-wv"
+   ],
+   "water_id": "ridenour-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "afde174bcf2404b28a4f2195f803b613963b14546f3fce5555ba8df412e9fe1f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rockcliff-lake-wv",
+   "name": "Rockcliff Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Rockland"
+   ],
+   "bbox": [
+    -78.739101,
+    38.956552,
+    -78.736037,
+    38.961134
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.047,
+   "launches": [
+    "rockcliff-lake-boat-launch-wv"
+   ],
+   "water_id": "rockcliff-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "fd72225f14660f1407b7f473dcc8eb1bcabf6184248f7b9752249bb3c146881b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rockhouse-lake-wv",
+   "name": "Rockhouse Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Mifflin"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rockhouse-lake-boat-launch-wv"
+   ],
+   "water_id": "rockhouse-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rollins-lake-wv",
+   "name": "Rollins Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Ripley"
+   ],
+   "bbox": [
+    -81.765677,
+    38.822244,
+    -81.760702,
+    38.82722
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.155,
+   "launches": [
+    "rollins-lake-boat-launch-wv"
+   ],
+   "water_id": "rollins-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "e1dfd4ae1cd98d51d28e5d02d5b9cdfd2fc322db0d92c05ffa9729f98a978026",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "saltlick-pond-wv",
+   "name": "Saltlick Pond",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Corley"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "saltlick-pond-boat-launch-wv"
+   ],
+   "water_id": "saltlick-pond-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "seneca-creek-wv",
+   "name": "Seneca Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Seneca Rocks"
+   ],
+   "bbox": [
+    -79.545938,
+    38.717607,
+    -79.37181,
+    38.863467
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "seneca-creek-c-r-wv"
+   ],
+   "water_id": "seneca-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "14490f3c3be602d6e9c26cb34902384959d93b5f75cc1a23018b9362476ad7e3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "seneca-lake-wv",
+   "name": "Seneca Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Marlinton"
+   ],
+   "bbox": [
+    -79.943626,
+    38.305963,
+    -79.938337,
+    38.307703
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.021,
+   "launches": [
+    "seneca-lake-carry-in-access-wv"
+   ],
+   "water_id": "seneca-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "b5ea0dedb167277b61d2464f00ae235aed190d936000c528a89192abc4aa17e8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shavers-fork-wv",
+   "name": "Shavers Fork",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Parsons"
+   ],
+   "bbox": [
+    -79.986363,
+    38.397294,
+    -79.676869,
+    39.111212
+   ],
+   "wikidata": "Q2277445",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "us-219-bridge-wv"
+   ],
+   "water_id": "shavers-fork-wv",
+   "gnis_id": "1552850",
+   "geometry_hash": "e8c583a5ff3f46fd92b1d8329cd90a9cb098b178f416b52681091553eb7e9256",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shenandoah-river-wv",
+   "name": "Shenandoah River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Bloomery",
+    "Bolivar",
+    "Charles Town",
+    "Shannondale"
+   ],
+   "bbox": [
+    -78.188767,
+    38.944321,
+    -77.726259,
+    39.322776
+   ],
+   "wikidata": "Q777907",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-eddy-wv",
+    "bloomery-wv",
+    "canoe-kajak-access-only-wv",
+    "shenandoah-river-boat-launch-near-bolivar-wv",
+    "millville-wv",
+    "millville-below-dam-wv",
+    "moulton-park-wv",
+    "shannondale-springs-wma-wv"
+   ],
+   "water_id": "shenandoah-river-va",
+   "gnis_id": "1556740",
+   "geometry_hash": "acdc3258dd8cc99600573903a47b51b99f871a3619c75af25c61821586be78fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sleepy-creek-lake-wv",
+   "name": "Sleepy Creek Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Berkeley Springs",
+    "Martinsburg"
+   ],
+   "bbox": [
+    -78.165517,
+    39.500633,
+    -78.146587,
+    39.532138
+   ],
+   "wikidata": "Q7333268",
+   "charted": false,
+   "area_km2": 0.801,
+   "launches": [
+    "myers-point-wv",
+    "sawmill-cove-wv",
+    "sleepy-creek-lake-dam-wv"
+   ],
+   "water_id": "sleepy-creek-lake-wv",
+   "gnis_id": "1534776",
+   "geometry_hash": "cce547911d3c957c420b629172c9b96eab69ce344ce353bf9d5c9e822ae04562",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-branch-potomac-river-wv",
+   "name": "South Branch Potomac River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Blues Beach",
+    "Green Spring",
+    "McNeill",
+    "Millesons Mill",
+    "Moorefield",
+    "Pancake",
+    "Petersburg",
+    "Romney",
+    "Sector",
+    "Wapocomo"
+   ],
+   "bbox": [
+    -79.537898,
+    38.481929,
+    -78.565687,
+    39.528566
+   ],
+   "wikidata": "Q35310201",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blue-beach-bridge-wv",
+    "blue-ford-north-wv",
+    "blue-ford-south-wv",
+    "fisher-bridge-wv",
+    "fisher-bridge-south-wv",
+    "fort-mill-ridge-wv",
+    "hanging-rock-wv",
+    "harmison-s-wv",
+    "indian-rocks-wv",
+    "maple-landing-wv",
+    "mcneil-wv",
+    "milleson-s-mill-bridge-wv",
+    "mouth-of-south-branch-wv",
+    "old-fields-bridge-wv",
+    "petersburg-wv",
+    "romney-bridge-wv",
+    "stoney-run-wv",
+    "welton-park-wv",
+    "welton-park-ramp-2-wv"
+   ],
+   "water_id": "south-branch-potomac-river-wv",
+   "gnis_id": "1552968",
+   "geometry_hash": "8e7953f15c6d50294878498182fdaedebb8bd9ee7d0ecae0080f2274bdc13d1e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-hughes-river-wv",
+   "name": "South Fork Hughes River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Beatrice",
+    "Girta"
+   ],
+   "bbox": [
+    -81.277454,
+    39.062836,
+    -80.745248,
+    39.208971
+   ],
+   "wikidata": "Q35316626",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-fork-hughes-river-haught-site-wv",
+    "south-fork-hughes-river-junction-47-53-wv"
+   ],
+   "water_id": "south-fork-hughes-river-wv",
+   "gnis_id": "1547073",
+   "geometry_hash": "413ea4edcd52e0a92035a8fdce097979fc5e6d993d3d77e733019ae371bea105",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-mill-creek-wv",
+   "name": "South Mill Creek",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Petersburg"
+   ],
+   "bbox": [
+    -79.191722,
+    38.830084,
+    -79.101146,
+    38.962003
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-mill-creek-lake-boat-launch-wv"
+   ],
+   "water_id": "south-mill-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "f207d514600f37c5d51795a987113c7f85f5878709b4e896088c4e3488060288",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spruce-knob-lake-wv",
+   "name": "Spruce Knob Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Osceola"
+   ],
+   "bbox": [
+    -79.59087,
+    38.701324,
+    -79.585274,
+    38.704135
+   ],
+   "wikidata": "Q17299817",
+   "charted": false,
+   "area_km2": 0.101,
+   "launches": [
+    "spruce-knob-lake-boat-launch-wv"
+   ],
+   "water_id": "spruce-knob-lake-wv",
+   "gnis_id": "1553015",
+   "geometry_hash": "056e4ecdff156b65f09e1d5d929046315fd6e77776d45a8cce69713c6a4830a1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stonecoal-reservoir-wv",
+   "name": "Stonecoal Reservoir",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Buckhannon",
+    "McCuetown",
+    "Weston"
+   ],
+   "bbox": [
+    -80.384206,
+    38.955675,
+    -80.311271,
+    38.988356
+   ],
+   "wikidata": "Q34928296",
+   "charted": false,
+   "area_km2": 2.162,
+   "launches": [
+    "pringle-fork-wv",
+    "stonecoal-wma-wv",
+    "stonecoal-wma-2-wv"
+   ],
+   "water_id": "stonecoal-reservoir-wv",
+   "gnis_id": "1547473",
+   "geometry_hash": "f48655e47510cb933a83cb6ca488fd8c8e988b417806864a39e6ed9d68aaa34b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stonewall-jackson-lake-wv",
+   "name": "Stonewall Jackson Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Vandalia",
+    "Weston"
+   ],
+   "bbox": [
+    -80.514904,
+    38.884511,
+    -80.396916,
+    39.005165
+   ],
+   "wikidata": "Q7337042",
+   "charted": false,
+   "area_km2": 8.225,
+   "launches": [
+    "glady-launch-wv",
+    "vandalia-access-trail-wv",
+    "vandalia-bay-launch-wv"
+   ],
+   "water_id": "stonewall-jackson-lake-wv",
+   "gnis_id": "2813679",
+   "geometry_hash": "93377f6fdece13f3bf828fafa092a86ab90444952924acaf1e35e377ae51af5c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "summersville-lake-wv",
+   "name": "Summersville Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Summersville"
+   ],
+   "bbox": [
+    -80.912721,
+    38.207866,
+    -80.807547,
+    38.286395
+   ],
+   "wikidata": "Q7637679",
+   "charted": false,
+   "area_km2": 9.496,
+   "launches": [
+    "summersville-lake-boat-launch-near-summersville-wv",
+    "delete-launch-wv",
+    "salmon-run-winter-boat-ramp-wv",
+    "summersville-lake-marina-launch-wv",
+    "summersville-lake-battle-run-wv",
+    "summersville-lake-salmon-run-pier-wv"
+   ],
+   "water_id": "summersville-lake-wv",
+   "gnis_id": "1553142",
+   "geometry_hash": "0c86e9f8e1ab0305a3bcb75aa14d3d19195cc88395593abed29b0c7067f43bb6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "summit-lake-wv",
+   "name": "Summit Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "North Bend"
+   ],
+   "bbox": [
+    -80.439111,
+    38.249109,
+    -80.434702,
+    38.256036
+   ],
+   "wikidata": "Q7334127",
+   "charted": false,
+   "area_km2": 0.146,
+   "launches": [
+    "summit-lake-boat-launch-wv"
+   ],
+   "water_id": "summit-lake-wv",
+   "gnis_id": "1553143",
+   "geometry_hash": "a48f8994d290b71c0e1c0e2ea6c54fc5ad3ad6d270ec5fd5b6a1251f5dbbb69f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sutton-lake-wv",
+   "name": "Sutton Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Sutton"
+   ],
+   "bbox": [
+    -80.693104,
+    38.637357,
+    -80.587926,
+    38.677566
+   ],
+   "wikidata": "Q7338042",
+   "charted": false,
+   "area_km2": 4.19,
+   "launches": [
+    "sutton-lake-boat-launch-wv"
+   ],
+   "water_id": "sutton-lake-wv",
+   "gnis_id": "1547782",
+   "geometry_hash": "1554af049cca05bb8e6fb38d816e7c518ee27732b12bde62d437c7669f54cd4c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "teter-creek-lake-wv",
+   "name": "Teter Creek Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Kirt"
+   ],
+   "bbox": [
+    -79.877665,
+    39.103996,
+    -79.871324,
+    39.109557
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.141,
+   "launches": [
+    "teter-creek-lake-boat-launch-wv"
+   ],
+   "water_id": "teter-creek-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "daf7e69c339d2cc45d5622dacd40d21d8c5d3b98464a5bf5a5d2118ce1858a81",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tomlinson-run-lake-wv",
+   "name": "Tomlinson Run Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "New Manchester"
+   ],
+   "bbox": [
+    -80.590838,
+    40.540111,
+    -80.584866,
+    40.548415
+   ],
+   "wikidata": "Q107392257",
+   "charted": false,
+   "area_km2": 0.086,
+   "launches": [
+    "tomlinson-run-st-park-wv"
+   ],
+   "water_id": "tomlinson-run-lake-wv",
+   "gnis_id": "1548126",
+   "geometry_hash": "50f5a1137f031f84d6aea1eec316bcaaf2cdc50d90221926c84dbb602467c6bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tracy-lake-wv",
+   "name": "Tracy Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Pennsboro"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tracy-lake-boat-launch-wv"
+   ],
+   "water_id": "tracy-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tuckahoe-lake-wv",
+   "name": "Tuckahoe Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "White Sulphur Springs"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tuckahoe-lake-boat-launch-wv"
+   ],
+   "water_id": "tuckahoe-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tug-fork-wv",
+   "name": "Tug Fork",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Iaeger",
+    "Maher",
+    "Matewan",
+    "Welch"
+   ],
+   "bbox": [
+    -82.601609,
+    37.33385,
+    -81.482602,
+    38.118151
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "city-of-welch-wv",
+    "haffield-bottom-roadside-park-wv",
+    "iaeger-wv",
+    "maher-wv"
+   ],
+   "water_id": "tug-fork-ky",
+   "gnis_id": null,
+   "geometry_hash": "0ea5acea0da9a6dcb89558a42ace5a5365be17713d0a22a461091980430e0a04",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "turkey-run-lake-wv",
+   "name": "Turkey Run Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Ravenswood"
+   ],
+   "bbox": [
+    -81.773407,
+    38.965185,
+    -81.767442,
+    38.968215
+   ],
+   "wikidata": "Q34931477",
+   "charted": true,
+   "area_km2": 0.1,
+   "launches": [
+    "turkey-run-lake-boat-launch-wv"
+   ],
+   "water_id": "turkey-run-lake-wv",
+   "gnis_id": "2043482",
+   "geometry_hash": "56133e9f61b1a4bbea6aa1b1e1c7e52a9d345d3bf5f9a9bf026a6401383efc26",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "turkey-run-wv",
+   "name": "Turkey Run",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Viola"
+   ],
+   "bbox": [
+    -80.585875,
+    39.96528,
+    -80.560813,
+    40.000527
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "turkey-run-lake-carry-in-access-wv"
+   ],
+   "water_id": "turkey-run-wv",
+   "gnis_id": null,
+   "geometry_hash": "e2691a54e4f6af71b457b0a5b151a5e649002c6ef360bec1ed4a7fe6028fb9d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "twelvepole-creek-wv",
+   "name": "Twelvepole Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Kenova"
+   ],
+   "bbox": [
+    -82.562013,
+    38.211245,
+    -82.427479,
+    38.403162
+   ],
+   "wikidata": "Q7857673",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "pilgrim-glass-wv"
+   ],
+   "water_id": "twelvepole-creek-wv",
+   "gnis_id": "1548392",
+   "geometry_hash": "aa2f2b8f3709d65b24381fc4a7498c3054d19324ac8fec3803a11bc8e2886908",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tygart-lake-wv",
+   "name": "Tygart Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Cove Run",
+    "Grafton"
+   ],
+   "bbox": [
+    -80.036004,
+    39.248531,
+    -79.936746,
+    39.312996
+   ],
+   "wikidata": "Q35046356",
+   "charted": false,
+   "area_km2": 6.223,
+   "launches": [
+    "doe-run-subimpoundment-wv",
+    "tygart-lake-cove-run-wv",
+    "tygart-lake-pleasant-creek-wma-wv",
+    "tygart-lake-state-park-ramp-no-1-wv",
+    "tygart-lake-state-park-ramp-no-2-wv"
+   ],
+   "water_id": "tygart-lake-wv",
+   "gnis_id": "1548442",
+   "geometry_hash": "77c471ba9fb1b786a01c5c4761370dd2267c960e8566ea2e494981946554e06d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tygart-valley-river-wv",
+   "name": "Tygart Valley River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Arden",
+    "Beverly",
+    "Elkins",
+    "Grafton",
+    "Mill Creek",
+    "Moatsville",
+    "Norton",
+    "Park View",
+    "Philippi"
+   ],
+   "bbox": [
+    -80.181784,
+    38.458517,
+    -79.845481,
+    39.464812
+   ],
+   "wikidata": "Q2462596",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "arden-bridge-wv",
+    "burnt-bridge-wv",
+    "cr-39-bridge-wv",
+    "camp-towles-wv",
+    "meridan-mine-wv",
+    "moatsville-bridge-wv",
+    "philippi-wv",
+    "philippi-covered-bridge-wv",
+    "scotts-ford-wv",
+    "tygart-dam-tailwater-wv",
+    "tygart-river-wv",
+    "us-rt-33-bridge-under-wv"
+   ],
+   "water_id": "tygart-valley-river-wv",
+   "gnis_id": "1553309",
+   "geometry_hash": "5bf079bac097a91bd64701240cae9e3bac51d8f3fd99524460a320bbb11e9935",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-cove-run-wv",
+   "name": "Upper Cove Run",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Basore"
+   ],
+   "bbox": [
+    -78.865708,
+    38.808636,
+    -78.82615,
+    38.875317
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "upper-cove-run-lake-carry-in-access-wv"
+   ],
+   "water_id": "upper-cove-run-wv",
+   "gnis_id": "1553320",
+   "geometry_hash": "1b2a0beceb0ae47a782de259480f2c09712aaf5ba46a9731fdba1b2d98c573d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-glade-run-wv",
+   "name": "Upper Glade Run",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Webster Springs"
+   ],
+   "bbox": [
+    -80.486984,
+    38.416749,
+    -80.480495,
+    38.425767
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "camp-ceaser-lake-wv"
+   ],
+   "water_id": "upper-glade-run-wv",
+   "gnis_id": null,
+   "geometry_hash": "31f5da12933d2f16eda6e6fd236a312e514dfe45490c53910a9811d5fb8ba3ca",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wallback-lake-wv",
+   "name": "Wallback Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Wallback"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wallback-lake-boat-launch-wv"
+   ],
+   "water_id": "wallback-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "warden-lake-wv",
+   "name": "Warden Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Wardensville"
+   ],
+   "bbox": [
+    -78.59981,
+    39.129275,
+    -78.595561,
+    39.138589
+   ],
+   "wikidata": "Q7338057",
+   "charted": false,
+   "area_km2": 0.172,
+   "launches": [
+    "warden-lake-wma-wv"
+   ],
+   "water_id": "warden-lake-wv",
+   "gnis_id": "1553379",
+   "geometry_hash": "4ba5c00dff673dc9954e8fc9d3d1ff3298791380d21339a8268362d82177dda4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "watoga-lake-wv",
+   "name": "Watoga Lake",
+   "kind": "reservoir",
+   "state": "WV",
+   "towns": [
+    "Marlinton"
+   ],
+   "bbox": [
+    -80.128757,
+    38.116716,
+    -80.120959,
+    38.118815
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.051,
+   "launches": [
+    "watoga-state-park-lake-wv"
+   ],
+   "water_id": "watoga-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "bc2294562e4326b4be4b2714b2c39b73513495a9b6a2ca28def08cb47a5e8149",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-fork-river-wv",
+   "name": "West Fork River",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Brownsville",
+    "Clarksburg",
+    "Country Club",
+    "Cox Town",
+    "Deanville",
+    "Goodhope",
+    "Jackson Mill",
+    "Jacksonville",
+    "Monongah",
+    "Roanoke",
+    "Spelter",
+    "West Milford"
+   ],
+   "bbox": [
+    -80.503496,
+    38.852486,
+    -80.152545,
+    39.47704
+   ],
+   "wikidata": "Q3388682",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bendale-bridge-wv",
+    "clarksburg-baseball-complex-wv",
+    "georgetown-launch-wv",
+    "goodhope-wv",
+    "hartland-dam-wv",
+    "highland-dam-wv",
+    "highland-slide-wv",
+    "jackson-mill-wv",
+    "jacksonville-launch-wv",
+    "limestone-run-wv",
+    "middle-run-bridge-wv",
+    "monongah-wv",
+    "stonewall-jackson-lake-wv",
+    "stonewall-jackson-tailwaters-at-dam-wv",
+    "two-lick-dam-wv",
+    "west-fork-river-2-carry-in-access-wv",
+    "west-fork-river-carry-in-access-wv",
+    "west-milford-dam-wv",
+    "west-milford-slide-wv",
+    "weston-wv",
+    "worthington-city-park-downstream-wv",
+    "worthington-city-park-upstream-wv"
+   ],
+   "water_id": "west-fork-river-wv",
+   "gnis_id": "1548931",
+   "geometry_hash": "d8f7de19b73d6fc3724bf932635f55ec29237f127949e312f1c0003b701235f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wheeling-creek-structure-number-seven-dam-wv",
+   "name": "Wheeling Creek Structure Number Seven Dam",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Twilight"
+   ],
+   "bbox": [
+    -80.582009,
+    40.028071,
+    -80.57688,
+    40.034793
+   ],
+   "wikidata": "Q31584816",
+   "charted": false,
+   "area_km2": 0.074,
+   "launches": [
+    "middle-wheeling-creek-lake-wv"
+   ],
+   "water_id": "wheeling-creek-structure-number-seven-dam-wv",
+   "gnis_id": "1559197",
+   "geometry_hash": "ef507dff40e70ee9264a35274f9f2e23e9bbec3aa46bae705dd7850b78c453e1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wheeling-creek-wv",
+   "name": "Wheeling Creek",
+   "kind": "stream",
+   "state": "WV",
+   "towns": [
+    "Viola",
+    "Wheeling"
+   ],
+   "bbox": [
+    -80.659514,
+    39.949309,
+    -80.528279,
+    40.027212
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "burches-run-bridge-wv",
+    "viola-bridge-wv"
+   ],
+   "water_id": "wheeling-creek-wv",
+   "gnis_id": null,
+   "geometry_hash": "201caccffb17cdd7761567a26cd12c87da298d30f4572505225c7606575c9e24",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "whetstone-lake-wv",
+   "name": "Whetstone Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Mannington"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "whetstone-lake-carry-in-access-wv"
+   ],
+   "water_id": "whetstone-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-run-lake-wv",
+   "name": "Wolf Run Lake",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Viola"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "wolf-run-carry-in-access-wv"
+   ],
+   "water_id": "wolf-run-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "woodrum-lake-wv",
+   "name": "Woodrum Lake",
+   "kind": "lake",
+   "state": "WV",
+   "towns": [
+    "Fletcher"
+   ],
+   "bbox": [
+    -81.589287,
+    38.611143,
+    -81.557323,
+    38.649676
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.093,
+   "launches": [
+    "woodrum-lake-boat-launch-wv"
+   ],
+   "water_id": "woodrum-lake-wv",
+   "gnis_id": null,
+   "geometry_hash": "182defb441763d916202f8f6b96e8859b4178eac6c439fddac3faf539a3ba2f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wv-fork-fish-creek-wv",
+   "name": "WV Fork Fish Creek",
+   "kind": "river",
+   "state": "WV",
+   "towns": [
+    "Adaline"
+   ],
+   "bbox": [
+    -80.821623,
+    39.695971,
+    -80.506952,
+    39.822828
+   ],
+   "wikidata": "Q34878467",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "fish-creek-adaline-fishing-and-boating-access-wv"
+   ],
+   "water_id": "wv-fork-fish-creek-wv",
+   "gnis_id": "1548947",
+   "geometry_hash": "91eaa21de87156865c361ff30479afb4e0d561716fdac7076b82d903b0609734",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
