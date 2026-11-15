@@ -330,7 +330,8 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
         etype, kind = POLL_CODES[v["code"]]
         # a history row that arrived later and covers this poll episode is DNREC's own record of it: the poll record is
         # kept (its observations stay) but marked its duplicate, so the advisory is counted once (re-review P2-1)
-        day0 = v["started_at"][:10]
+        # the first poll's Eastern calendar day: a UTC poll time after 8 or 7 p.m. is the day before (verify2 P2-2)
+        day0 = datetime.fromisoformat(v["started_at"].replace("Z", "+00:00")).astimezone(TZ).date().isoformat()
         # the episode's last observation (its observed end, else its last read): a history row covers the episode
         # only when it covers that too; the map still showing the status after the row's end date is a continuation
         # beyond DNREC's record and stays its own record (verify P1-1)
