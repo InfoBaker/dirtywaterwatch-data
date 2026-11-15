@@ -89,14 +89,14 @@ AGENCY = [
      "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
      "unmonitored_reason": "other", "publishes": "results", "records": False, "noun": "Sampling results",
      "sources": ["pr-estuario-bacteria"],
-     "note": ("Periodic PDF reports of bacteria in the Condado lagoon and San Juan's beaches; printed only in reports, "
-              "no current list (research: search only).")},
+     "note": ("Periodic PDF reports of bacteria in the Condado lagoon and San Juan's beaches; whether a current "
+              "list is published was not verified (research: search only).")},
     {"id": "pr-surfrider-bwtf", "agency": "Surfrider Foundation (Blue Water Task Force, Puerto Rico chapters)",
      "name": "Surfrider Foundation Blue Water Task Force, Rincón and Isabela", "channel_kind": "group_results",
      "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
      "unmonitored_reason": "other", "publishes": "results", "records": False, "noun": "Sampling results",
      "sources": ["pr-surfrider-bwtf"],
-     "note": "Volunteer bacteria results; channel not researched beyond the programme page (search only)."},
+     "note": "Volunteer bacteria results; whether a current list is published was not verified: the channel was not researched beyond the programme page (search only)."},
     {"id": "pr-epa-beacon", "agency": "U.S. Environmental Protection Agency (BEACON 2.0)",
      "name": "U.S. EPA BEACON 2.0, Puerto Rico beaches", "channel_kind": "shared_site", "urls": [],
      "method": None, "legal_basis": "BEACH Act, 33 U.S.C. 1346: the states' and territories' notification data reported "

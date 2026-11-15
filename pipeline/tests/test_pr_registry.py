@@ -81,7 +81,7 @@ def test_state_text_is_in_the_page_shape_and_names_puerto_rico():
     assert "{{share_line}}" in t and "Of Puerto Rico's reports" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I)
     assert not re.search(r"\bthe state\b|\bthis state\b", t, re.I) and ".json" not in t and ".py" not in t
-    assert "green flag" in t and "shows grey" in t and "never translated" in t
+    assert "green flag" in t and "no beach advisory record" in t and "never translated" in t
 
 
 def test_missing_waters_list_leaves_out_held_and_generic_names():

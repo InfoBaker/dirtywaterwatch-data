@@ -294,8 +294,9 @@
    "sources": [
     "pr-estuario-bacteria"
    ],
-   "note": "Periodic PDF reports of bacteria in the Condado lagoon and San Juan's beaches; printed only in reports, no current list (research: search only).",
-   "barrier": "print_only"
+   "note": "Periodic PDF reports of bacteria in the Condado lagoon and San Juan's beaches; whether a current list is published was not verified (research: search only).",
+   "barrier": null,
+   "barrier_review": "the register does not say what keeps it off the web: periodic pdf reports of bacteria in the condado lagoon and san juan's beaches; whether a current list is published was n"
   },
   {
    "state": "PR",
@@ -443,8 +444,9 @@
    "sources": [
     "pr-surfrider-bwtf"
    ],
-   "note": "Volunteer bacteria results; channel not researched beyond the programme page (search only).",
-   "barrier": "not_verified"
+   "note": "Volunteer bacteria results; whether a current list is published was not verified: the channel was not researched beyond the programme page (search only).",
+   "barrier": null,
+   "barrier_review": "the register does not say what keeps it off the web: volunteer bacteria results; whether a current list is published was not verified: the channel was not researched beyond "
   },
   {
    "state": "PR",

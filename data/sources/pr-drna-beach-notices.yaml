@@ -7,19 +7,22 @@ level: "state"
 # Notes (research/pr, status used, verified fetched, checked 2026-11-14): Read by
 #   ingest/pr_drna_beaches.py: 280 notices (2019-10-11 to 2026-11-13: 220 lists of beaches over the
 #   Beach Action Value, 56 'all fit', one list of fit beaches, 3 PDF-only); 601 advisories, one per
-#   run of consecutive notices listing a beach, from the publication of the first notice to the
-#   publication of the next that no longer lists it; sampling date kept apart; each station at its
-#   Water Quality Portal point (PR_BEACH_WQX).
-# Access detail (research, quoted): GET
+#   run of consecutive notices listing a beach, from the publication of the first notice (started_at;
+#   the sampling date is sampled_at only, never the start). 192 end at a notice that the beaches are fit
+#   (DRNA's own lift, minute precision); 408 end at the first later notice that no longer lists the
+#   beach, an observation with poll precision, not a lift; 1 in effect. Each station at its Water
+#   Quality Portal point (PR_BEACH_WQX). Revised posts keep every version read.
+# Access detail (research of 2026-11-04, quoted; 280 posts on the 2026-11-14 read): GET
 #   https://www.drna.pr.gov/wp-json/wp/v2/posts?categories=1424&per_page=100&_fields=id,date,modified,title,link,content
 #   (no auth; X-WP-Total 278). content.rendered holds the sampling dates and an HTML table Estación
 #   | Nombre de la Playa | Municipio of beaches that exceed the BAV; a PDF copy and the station
 #   table PDF (https://www.drna.pr.gov/wp-content/uploads/2020/06/Tabla-playas.pdf) are linked.
 #   Sample: research/pr/raw/drna-beach-posts.json.
-# Can fill: source_record_id (post id), published_at (date), started_at (sampling date, from text),
+# Can fill (research of 2026-11-04, superseded: the ingester takes started_at from the publication,
+#   never the sampling date): source_record_id (post id), published_at (date), started_at (sampling date, from text),
 #   waterbody/location_text (beach, municipality), authority, advice_text ('no son aptas para
 #   bañistas'), source_url
-# Cannot fill: ended_at (only implied by the next week's list); coordinates (station table has none;
+# Cannot fill: a lift time, except where a notice says the beaches are fit; coordinates (station table has none;
 #   BEACON or WQX may); volume
 # Waters: 36 to 38 coastal beaches (stations RW-1 to RW-39)
 # History: 2019-10-11 to date (278 posts)

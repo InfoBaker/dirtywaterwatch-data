@@ -391,3 +391,25 @@ def test_only_evidenced_outfalls_are_counted():
     assert not m.evidenced_outfall({"outfall": "CS1", "feature_type": "CSS", "coords_from": "permitted_feature"})
     prasa = next(r for r in json.loads((root / "data" / "dischargers.json").read_text()) if r["id"] == "pr-prasa")
     assert prasa["outfall_count"] == 67 and "55 discharge point(s)" in prasa["notes"] and "PR0020834" in prasa["notes"]
+
+
+# ----------------------------------------------------------------- public text against the evidence
+
+def test_public_text_keeps_the_legal_exception_and_calls_unverified_channels_unverified():
+    # Astra P2-6 and P2-1: the text follows the register's evidence and says what the extract date is not
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[2]
+    t = (root / "research" / "pr" / "state-text.md").read_text()
+    reg = {r["id"]: r for r in json.loads((root / "data" / "notice-channels" / "pr.json").read_text())["channels"]}
+    assert "With no duty to tell the public" not in t and "Puerto Nuevo permit's duty to notify the public" in t
+    for rid in ("pr-estuario-bacteria", "pr-surfrider-bwtf"):
+        assert "search only" in reg[rid]["note"] and "not verified" in reg[rid]["note"]
+    assert "not a current list" not in t and "was not verified" in t
+    assert "shows grey" not in t and "no beach advisory record" in t
+    assert "does not say when each report was published" in t and "reaches that file" not in t
+    assert "plant its description names" not in t and "no place is guessed from the text" in t
+    assert not __import__("re").search(r"\busually\b", t)
+    rules = json.loads((root / "data" / "rules.json").read_text())["red"]["by_state"]["PR"]["basis"]
+    assert "usually" not in rules and "not a lift" in rules
+    src = (root / "data" / "sources" / "pr-drna-beach-notices.yaml").read_text()
+    assert "never the sampling date" in src and "poll precision" in src
