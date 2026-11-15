@@ -10,9 +10,9 @@ level: "state"
 #   (polygons), fields OBJECTID, Advisory and Date_Observed (DateObserved on layer 3): every layer answered with no row,
 #   and DEP's page says no advisory is in effect. The layers carry no water name, no edit date and no person.
 # Records: one per row while the map shows it, from the first read that showed it (time_precision poll; DEP gives the day
-#   the bloom was observed, kept as raw.date_observed_utc and its day, not an issue date) to the first read that no longer does
-#   (raw.ended_at_precision poll); DEP's Advisory text as the advice; the point, a segment's middle vertex or an area's
-#   vertex mean, rounded to three decimals.
+#   the bloom was observed, kept as stored in raw.date_observed_utc, its precision unknown, not an issue date) to the first read that no longer does
+#   (raw.ended_at_precision poll); DEP's Advisory text as the advice; the point, the point half way along a segment or an
+#   interior point of an area, rounded to three decimals, with DEP's segment or area kept in raw.agency_extent.
 # Cannot fill: an issue or lift date given by DEP; the water's name.
 cadence: "with the refresh (the map lists only what is in effect)"
 license: "none stated"
