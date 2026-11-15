@@ -40,7 +40,11 @@ Record rules
     carry a person (a contact, telephone, e-mail, home, residence, a title before a name, "reported") is withheld whole
     (raw.sentences_withheld counts them), the rest scrubbed (scrub_text) and any coordinate in it rounded to three
     decimals, before anything is saved. The raw save is that cleaned JSON (saved_form), never the page's markup; a
-    failure's text in the health file is cleaned the same way (safe_error).
+    failure's text in the health file is cleaned the same way (safe_error). The heading and the water name are name
+    fields (clean_field): one that can carry a person (a title, a contact word, a house number, a coordinate) is
+    withheld whole and named by a digest, the advisory kept with no point. A refused or failed read saves the earlier
+    records only after recleaned and deep_clean (write_refused); a carried point is rounded to three decimals, or
+    removed when the record's text ties it to a home (verification pass P1-3, P1-4).
 
 Run from pipeline/:  python -m ingest.nv_state_parks_hab [--file saved.html]
 """
@@ -103,10 +107,53 @@ def text_of(fragment: str) -> str:
 
 # a sentence that can carry a person (a contact, a telephone or e-mail, a home or residence, a title before a name, a
 # report by someone): withheld whole, since a name in it cannot be told apart from a place (Astra P1-4)
+# (a title with its full stop, "Dr. Jane", is matched outside the closing word boundary: verification pass P1-3)
 PERSONAL_SENTENCE = re.compile(r"@|\b(?:contact(?:ed|ing)?|call(?:ed|ing)?|phone|telephone|tel|e-?mail|fax|home|homes|"
-                               r"residen(?:ce|ces|t|ts|tial)|house|neighbou?rs?|owner|reported|complain\w*|resident|"
-                               r"(?:Dr|Mr|Mrs|Ms|Miss)\.?(?=\s+[A-Z]))\b|\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}", re.I)
+                               r"residen(?:ce|ces|t|ts|tial)|house|neighbou?rs?|owner|reported|complain\w*|resident)\b|"
+                               r"\b(?:Dr|Mr|Mrs|Ms|Miss)\.?(?=\s+[A-Z])|\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}", re.I)
 COORD_IN_TEXT = re.compile(r"(?<![\d.])(-?\d{1,3}\.\d{4,})(?![\d.])")
+# a house number before a street ("1234-A Example St", "12 1/2 Main Street")
+HOUSE_NUMBER = re.compile(r"\b\d{1,6}(?:-?[A-Z]\b|\s+\d/\d)?\s+(?:[NSEW]\.?\s+)?[A-Z][\w']*(?:\s+[A-Z][\w']*)?\s+(?:St|"
+                          r"Street|Ave|Avenue|Rd|Road|Dr|Drive|Ln|Lane|Ct|Court|Way|Blvd|Boulevard|Pl|Place|Cir|Circle|"
+                          r"Hwy|Highway|Trl|Trail|Ter|Terrace|Pkwy|Parkway)\b", re.I)
+# words that tie a point to a private home: a carried record whose text says so loses its point (lesson 6)
+HOME_WORDS = re.compile(r"\b(?:home|homes|house|residen\w*|private propert\w*)\b", re.I)
+SAFE_KEYS = re.compile(r"(?:^|_)(?:url|key|id|ids|at|date|zone|state|level|kind)$", re.I)
+NAME_FIELDS = ("waterbody_text", "outfall_name", "discharger_name", "place_text", "city")
+
+
+def personal_field(s: str) -> bool:
+    """A name field (a heading, a water, a place) that can carry a person: a contact word, a title before a name, a
+    telephone or e-mail, a home, a house number before a street or a coordinate."""
+    return bool(PERSONAL_SENTENCE.search(s or "") or HOUSE_NUMBER.search(s or "") or COORD_IN_TEXT.search(s or ""))
+
+
+def clean_field(s: str, what: str = "water") -> str:
+    """A name field cleaned before any save (verification pass P1-3): one that can carry a person is withheld whole,
+    named by a digest of its text so the record's id never depends on order; the rest scrubbed."""
+    if not isinstance(s, str) or not s:
+        return s
+    if personal_field(s):
+        import hashlib
+        return f"{what} withheld {hashlib.sha256(s.encode()).hexdigest()[:10]}"
+    return scrub_text(s)
+
+
+def deep_clean(v, key: str = ""):
+    """Every string of a carried record or its metadata cleaned: personal keys dropped (strip_personal), an id, time or
+    address of the source scrubbed, a name field withheld when it can carry a person, any other text cleaned sentence
+    by sentence (clean_text)."""
+    if isinstance(v, dict):
+        return {k: deep_clean(x, str(k)) for k, x in strip_personal(v).items()}
+    if isinstance(v, list):
+        return [deep_clean(x, key) for x in v]
+    if isinstance(v, str):
+        if SAFE_KEYS.search(key):
+            return scrub_text(v)
+        if key in ("heading", "water", "place", "name"):
+            return clean_field(v, "place" if key == "place" else "water")
+        return clean_text(v)[0]
+    return v
 
 
 def clean_text(s: str) -> tuple[str, int]:
@@ -114,7 +161,8 @@ def clean_text(s: str) -> tuple[str, int]:
     to three decimals, the number of sentences withheld)."""
     kept, withheld = [], 0
     for sent in re.split(r"(?<=[.!?])(?<!\bDr\.)(?<!\bMr\.)(?<!\bMs\.)(?<!\bMrs\.)(?<!\bSt\.)\s+", s or ""):
-        if PERSONAL_SENTENCE.search(sent):
+        named = re.match(r"\s*(.+?),\s+located in\b", sent)
+        if PERSONAL_SENTENCE.search(sent) or HOUSE_NUMBER.search(sent) or (named and personal_field(named.group(1))):
             withheld += 1
             continue
         kept.append(COORD_IN_TEXT.sub(lambda m: f"{round(float(m.group(1)), 3):.3f}", sent))
@@ -122,13 +170,36 @@ def clean_text(s: str) -> tuple[str, int]:
 
 
 def recleaned(p: dict) -> dict:
-    """A record carried from an earlier read, cleaned again before it is saved (lesson 6: every save path)."""
+    """A record carried from an earlier read, cleaned again before it is saved (lesson 6: every save path, the refused
+    read's included: verification pass P1-4): every text field and the whole of raw (deep_clean), the name fields
+    withheld when they can carry a person, the point rounded to three decimals, or removed when the record's text ties
+    it to a home. A clean record comes back unchanged."""
+    import json
+    home = bool(HOME_WORDS.search(json.dumps({k: p.get(k) for k in ("advice_text", "raw", *NAME_FIELDS)},
+                                             ensure_ascii=False, default=str)))
     p = dict(p)
-    p["raw"] = strip_personal(p.get("raw") or {})
-    for k in ("advice_text", "waterbody_text", "outfall_name"):
+    p["raw"] = deep_clean(p.get("raw") or {})
+    for k in ("advice_text", "parse_error"):
         if isinstance(p.get(k), str):
-            p[k] = clean_text(p[k])[0] if k == "advice_text" else scrub_text(p[k])
+            p[k] = clean_text(p[k])[0]
+    for k in NAME_FIELDS:
+        if isinstance(p.get(k), str):
+            p[k] = clean_field(p[k], "place" if k == "outfall_name" else "water")
+    if p.get("lat") is not None and p.get("lon") is not None:
+        if home:
+            p.update(lat=None, lon=None, coord_source=None, coord_precision_m=None)
+            p["raw"]["point_removed"] = "the record's text tied its point to a home: the point is not kept"
+        else:
+            p["lat"], p["lon"] = round(float(p["lat"]), 3), round(float(p["lon"]), 3)
     return p
+
+
+def write_refused(source_id: str, error: str, events_dir: Path) -> None:
+    """A refused or failed read (verification pass P1-4): the earlier records and metadata are saved again only after
+    they are cleaned (recleaned, deep_clean); the read is not ok and last_ok_at stays the previous one."""
+    prev = read_json(events_dir / f"{source_id}.json", {}) or {}
+    recs = [recleaned(r) for r in prev.get("records") or [] if isinstance(r, dict)]
+    write_events(source_id, recs, ok=False, partial=True, error=error, meta=deep_clean(prev.get("meta") or {}))
 
 
 def safe_error(e: Exception) -> str:
@@ -203,9 +274,9 @@ def parse(page: str) -> tuple[list[dict], str]:
             seg = body[h.end(): heads[i + 1].start() if i + 1 < len(heads) else len(body)]
             seg = re.split(r"</div>", seg)[0]
             text = text_of(seg)
-            heading = scrub_text(text_of(h.group("name")))
+            heading = clean_field(text_of(h.group("name")))
             clean, withheld = clean_text(text)
-            item = {"level": lv, "heading": heading, "water": water_of(heading, text),
+            item = {"level": lv, "heading": heading, "water": clean_field(water_of(heading, clean)),
                     "updated": parse_date(h.group("date")), "text": clean}
             if withheld:
                 item["sentences_withheld"] = withheld
@@ -260,6 +331,7 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
         history = list(praw.get("level_history") or [])
         if not history or history[-1].get("level") != it["level"] or history[-1].get("updated") != it["updated"]:
             history.append({"level": it["level"], "updated": it["updated"], "seen_at": fetched})
+        history = deep_clean(history)
         raw = {"water_key": k, "heading": it["heading"], "level": it["level"], "level_history": history,
                "updated_date": it["updated"], "time_zone": tz,
                "time_zone_basis": "Nevada: Pacific time except West Wendover (49 CFR 71.9(b))",
@@ -333,7 +405,7 @@ def main(argv=None) -> int:
                 meta["page_last_modified"] = parsedate_to_datetime(r.headers["Last-Modified"]).strftime(
                     "%Y-%m-%dT%H:%M:%SZ")
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
-        write_events(SOURCE_ID, [], ok=False, error=safe_error(e))
+        write_refused(SOURCE_ID, safe_error(e), EVENTS_DIR)
         print(f"{SOURCE_ID}: FAILED {safe_error(e)}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)

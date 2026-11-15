@@ -50,8 +50,8 @@ from pathlib import Path
 
 import requests
 
-from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events
-from ingest.nv_state_parks_hab import PERSONAL_SENTENCE, clean_text, recleaned, safe_error
+from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from ingest.nv_state_parks_hab import clean_field, clean_text, recleaned, safe_error, write_refused
 
 SOURCE_ID = "ok-nps-chickasaw-bacteria"
 URL = "https://www.nps.gov/chic/planyourvisit/bathing-beach-monitoring-program.htm"
@@ -144,10 +144,9 @@ def parse(page: str) -> dict:
         place = text_of(tds[0][1])
         if not place:
             raise ValueError("a table row has results and no place")
-        if PERSONAL_SENTENCE.search(place):      # a place cell that can carry a person: kept as a row, its text withheld,
-            import hashlib                       # named by a digest of the cell so the id never depends on row order
-            place = f"place withheld {hashlib.sha256(place.encode()).hexdigest()[:10]}"
-        place = scrub_text(place)
+        # a place cell that can carry a person (a contact word, a title, a house number, a coordinate): kept as a row,
+        # its text withheld, named by a digest of the cell so the id never depends on row order (verification P1-3)
+        place = clean_field(place, "place")
         vals = [read_value(open_tag + body) for open_tag, body in tds[1:]]
         for v in vals:      # a cell that is not a result ("N/A", a note) keeps no text that could carry a person
             if v["value"] is None and v["text"]:
@@ -314,7 +313,7 @@ def main(argv=None) -> int:
         if "--file" not in argv:
             save_raw(SOURCE_ID, parse(page)["section"], "json")      # the cleaned table and key only
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
-        write_events(SOURCE_ID, [], ok=False, error=safe_error(e))
+        write_refused(SOURCE_ID, safe_error(e), EVENTS_DIR)
         print(f"{SOURCE_ID}: FAILED {safe_error(e)}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)

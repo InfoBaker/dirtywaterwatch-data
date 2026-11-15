@@ -103,3 +103,95 @@ def test_r2_2_a_row_of_results_with_no_place_and_a_header_past_the_mean_are_refu
     with pytest.raises(ValueError, match="column"):
         N.parse(extra)
     assert len(N.parse(PAGE)["rows"]) == 10
+
+
+# ---- privacy on every derived field and on the refused-read path --------------------------------------------------
+
+PRIVATE = ("Jane Sample", "Pat Example", "1234-A", "775-555-0100", "pat@example.org", "39.12345", "34.12345", "96.54321")
+
+
+def _saves(monkeypatch, tmp_path, mod, page):
+    import common
+    from test_ingest_nv import _Resp
+    saved, writes = [], []
+    monkeypatch.setattr(mod, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(mod, "save_raw", lambda src, body, ext: saved.append(body) or tmp_path / "raw")
+    real = common.write_events
+    monkeypatch.setattr(mod, "write_events", lambda *a, **k: writes.append((a, k)) or real(
+        *a, **{**k, "path": tmp_path / f"{mod.SOURCE_ID}.json"}))
+    monkeypatch.setattr(mod.requests, "get", lambda *a, **k: _Resp(page))
+    code = mod.main([])
+    blob = "".join(saved) + json.dumps(writes, default=str) + (tmp_path / f"{mod.SOURCE_ID}.json").read_text()
+    return code, blob
+
+
+@pytest.mark.parametrize("name", ["Dr. Jane Sample", "1234-A Example St", "the home of Jane Sample",
+                                  "Jane Sample's place at 39.12345 -119.54321"])
+def test_r2_3_a_personal_heading_or_water_name_never_reaches_a_save(tmp_path, monkeypatch, name):
+    page = AUG26.replace("<strong>Marlette Lake (Updated", f"<strong>{name} (Updated", 1).replace(
+        "<p>Marlette Lake, located", f"<p>{name}, located", 1)
+    code, blob = _saves(monkeypatch, tmp_path, P, page)
+    assert code == 0
+    for p in PRIVATE:
+        assert p not in blob, (name, p)
+    doc = json.loads((tmp_path / f"{P.SOURCE_ID}.json").read_text())
+    assert doc["count"] == 4 and all(r["status"] == "advisory_active" for r in doc["records"])   # the advisory kept
+    w = [r for r in doc["records"] if r["waterbody_text"].startswith("water withheld")]
+    assert len(w) == 1 and w[0]["lat"] is None
+
+
+@pytest.mark.parametrize("place", ["1234-A Example St at 34.12345 -96.54321", "Dr. Jane Sample's dock",
+                                   "home of Jane Sample", "34.12345, -96.54321"])
+def test_r2_3_a_personal_place_cell_never_reaches_a_save(tmp_path, monkeypatch, place):
+    page = PAGE.replace("<strong>Veterans Lake</strong>", f"<strong>{place}</strong>", 1)
+    code, blob = _saves(monkeypatch, tmp_path, N, page)
+    assert code == 0
+    for p in PRIVATE:
+        assert p not in blob, (place, p)
+
+
+def _poisoned_previous(mod, recs):
+    out = []
+    for r in recs:
+        out.append({**r, "lat": 39.12345, "lon": -119.54321, "waterbody_text": "Dr. Jane Sample",
+                    "outfall_name": "1234-A Example St",
+                    "advice_text": r["advice_text"] + " Seen at the home of Jane Sample. Dr. Pat Example said so.",
+                    "raw": {**r["raw"], "note": "Contact Pat Example at 775-555-0100 or pat@example.org",
+                            "prose": "Dr. Jane Sample saw it near 1234-A Example St at 39.12345, -119.54321."}})
+    return out
+
+
+@pytest.mark.parametrize("mod", ["nv", "ok"])
+def test_r2_4_records_kept_on_a_refused_read_are_cleaned_before_the_save(tmp_path, monkeypatch, mod):
+    import common
+    M = P if mod == "nv" else N
+    if mod == "nv":
+        recs, meta = P.build(AUG26, T1, [])
+    else:
+        recs, meta = N.build(_bear(PAGE, [C.format(v) for v in ("66.3", "105.0", "260.0", "122.3", "108.4")]), T1, [])
+    path = tmp_path / f"{M.SOURCE_ID}.json"
+    common.write_events(M.SOURCE_ID, _poisoned_previous(M, recs), meta={**meta, "note": "call Pat Example"}, path=path)
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+
+    def refused(*a, **k):
+        raise ConnectionError("refused")
+    monkeypatch.setattr(M.requests, "get", refused)
+    assert M.main([]) == 1
+    doc = json.loads(path.read_text())
+    assert doc["ok"] is False and doc["count"] == len(recs) and doc["last_ok_at"]
+    for p in PRIVATE:
+        assert p not in json.dumps(doc), p
+    for r in doc["records"]:
+        assert r["lat"] is None or (r["lat"], r["lon"]) == (round(r["lat"], 3), round(r["lon"], 3))
+        assert r["status"] == next(x for x in recs if x["source_record_id"] == r["source_record_id"])["status"]
+    # a point a withheld sentence tied to a home is removed, not rounded
+    assert all(r["lat"] is None for r in doc["records"])
+
+
+def test_r2_4_the_recleaner_leaves_a_clean_record_unchanged():
+    recs, _ = P.build(AUG26, T1, [])
+    assert [P.recleaned(r) for r in recs] == recs
+    ok, _ = N.build(_bear(PAGE, [C.format(v) for v in ("66.3", "105.0", "260.0", "122.3", "108.4")]), T1, [])
+    assert [P.recleaned(r) for r in ok] == ok
