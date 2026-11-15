@@ -78229,8 +78229,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-la) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state, 0.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-la) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "LA0127268",
@@ -78248,19 +78248,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110070208769",
    "lat": 30.217861,
    "lon": -93.2975,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "maple-fork-la",
+   "water_name": "Maple Fork",
+   "water_kind": "stream",
+   "distance_m": 1911,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "no_water_reason": "EPA's only text is a watershed name ('Maple Fork-Bayou D'Inde'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: EPA's only text is a watershed name ('Maple Fork-Bayou D'Inde'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Maple Fork-Bayou D'Inde' by name; Maple Fork (maple-fork-la, NHDPlus V2.1 record), 1911 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MI0020303",
