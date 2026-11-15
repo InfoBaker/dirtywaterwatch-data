@@ -150,7 +150,6 @@ OWNERS = {
     "alicemanufacturingcoinc": ("sc-alice-manufacturing", "Alice Manufacturing Co., Inc.", "business or industrial"),
     "cogsdilltoolproductsinc": ("sc-cogsdill-tool", "Cogsdill Tool Products, Inc.", "business or industrial"),
     "sswasherette": ("sc-ss-washerette", "S&S Washerette", "business or industrial"),
-    "chesneecityof": ("sc-spartanburg-water", None, None),
     "ecwsatrentonwwtf": ("sc-edgefield-cwsa", None, None),
     "sssdpacoletmillswwtp": ("sc-spartanburg-water", None, None),
     "rewapiedmontwwtp": ("sc-rewa", None, None),
@@ -282,6 +281,16 @@ def load_epa() -> dict[str, dict]:
     return out
 
 
+# re-review P2-5: an owner is named from EPA's permittee field only. These keys are a facility's name (EPA's permittee
+# field gives a plant, or EPA records "(Unknown Permittee)" and the facility's name was read for an owner): the permit
+# is its own row, named for the facility with "(owner not recorded by EPA)", with no legal form, and is no operator.
+FACILITY_DERIVED = {k for _, k in FACILITY_OWNERS if k != "privatetrustwalterboro"} | {
+    "lexingtoncoventrywoodswwtp", "stmatthewssouthplant", "westpelzerwwtf", "springfieldwwtp1", "springfieldwwtp2",
+    "pagelandnorthwestwwtf", "hiltonheadreverseosmosis"}
+UNVERIFIED_NOTE = ("EPA's permittee field gives the facility, not its owner; the owner was not verified against the "
+                   "permit, so the row is the permit's and names no owner.")
+
+
 def owner_key(o: dict) -> str:
     own = o.get("owner")
     if own and own not in ("(Unknown Permittee)",) and key(own) in OWNERS:
@@ -320,6 +329,7 @@ OTHER = Counter(r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls
 def build(epa: dict, research: list[dict], cand: dict) -> list[dict]:
     rows: dict[str, dict] = {}
     held: dict[str, str] = {}
+    permit_only: set[str] = set()
     for r in research:
         extra, kind, lf, short, name = RESEARCH_ROWS[r["id"]]
         permits = list(dict.fromkeys(p for p in [r.get("npdes_permit"), *extra] if p))
@@ -338,7 +348,11 @@ def build(epa: dict, research: list[dict], cand: dict) -> list[dict]:
             rid, name, lf = {**PRIVATE, **PUBLIC_BY_NAME}[p]
         else:
             k = owner_key(o)
-            if k in OWNERS:
+            if k in FACILITY_DERIVED:
+                fac = o.get("facility") if o.get("facility") not in (None, "[name removed]") else o.get("owner")
+                rid, name, lf = f"sc-{p.lower()}", f"{title(fac or p)} (owner not recorded by EPA)", None
+                permit_only.add(rid)
+            elif k in OWNERS:
                 rid, name, lf = OWNERS[k]
             else:
                 name = pretty(o["owner"] if o.get("owner") and o["owner"] != "(Unknown Permittee)" else o["facility"])
@@ -372,7 +386,7 @@ def build(epa: dict, research: list[dict], cand: dict) -> list[dict]:
         if not name and rid in named:
             name, lf = named[rid]
         name = name or pretty(epa[permits[0]].get("owner") or epa[permits[0]]["facility"])
-        lf = lf or form(name)
+        lf = None if rid in permit_only else (lf or form(name))
         towns = sorted({title(epa[p]["city"]) for p in permits if epa[p].get("city")})
         waters = list(dict.fromkeys(w for p in permits for w in epa[p]["waters"]))
         facs = "; ".join(f"{p} {epa[p]['facility']}" for p in permits if epa[p].get("facility") not in (None, "[name removed]"))
@@ -382,6 +396,8 @@ def build(epa: dict, research: list[dict], cand: dict) -> list[dict]:
                      "candidates.json); not in the plant registry.")
         if lf in PRIVATE_FORMS and not note.startswith("Privately"):
             note = "Privately owned. " + note
+        if rid in permit_only:
+            note += " " + UNVERIFIED_NOTE
         rows[rid] = base_row(rid, name, permits, "plant", lf, towns, waters, 0, note)
         for p in permits:
             held[p] = rid
