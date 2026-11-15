@@ -312,17 +312,19 @@ def test_no_release_is_geolocated_from_its_street_or_plant():
     assert all(P.named_water_only(r) for r in recs.values())
 
 
-def test_a_failed_detail_page_fails_every_run_until_it_is_read_and_is_retried_with_backoff(monkeypatch, tmp_path):
-    # re-review P1-2: four failed runs, then recovery; the feed never declares success while a candidate's detail is
-    # unresolved, and the earlier records stay throughout
+def test_one_unreadable_detail_page_never_freezes_the_feed_it_is_listed_unread_and_retried(monkeypatch, tmp_path):
+    # coordinator, last round (replaces the earlier hold): the readable releases are written and updated, the one
+    # broken detail page is listed in meta.unread with its reason and retried, and no record is lifted or removed
     import common
+    from datetime import datetime, timezone
     monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
     monkeypatch.setattr(D, "STATE_PATH", tmp_path / "state.json")
     monkeypatch.setattr(D, "save_raw", lambda *a, **k: None)
-    (tmp_path / f"{D.SOURCE_ID}.json").write_text(json.dumps({"records": [{"event_id": "x"}], "meta": {}}))
+    (tmp_path / f"{D.SOURCE_ID}.json").write_text(json.dumps({"records": [{"event_id": "old"}], "meta": {}}))
     (tmp_path / "state.json").write_text(json.dumps({"rows": {}, "backfilled_at": T0}))
-    good = {"on": False}
-    page = D.parse_detail((FIX / "derns_detail_water.html").read_text())
+    broken = {"2026-2844"}
+    pages = {"2026-2850": "derns_detail_water.html", "2026-2849": "derns_detail_ground.html",
+             "2026-2844": "derns_detail_textwater.html"}
 
     class Half(D.Client):
         def __init__(self):
@@ -332,29 +334,130 @@ def test_a_failed_detail_page_fails_every_run_until_it_is_read_and_is_retried_wi
             return listing()
 
         def detail(self, key):
-            if good["on"]:
-                return {**copy.deepcopy(page), "key": key}
-            return None                                  # a page that is not a release's detail (an error page)
+            if key in broken:
+                return None                              # a page that is not a release's detail (an error page)
+            return D.parse_detail((FIX / pages.get(key, "derns_detail_water.html")).read_text())
     monkeypatch.setattr(D, "Client", Half)
-    clock = iter(["2026-11-14T18:00:00Z", "2026-11-14T19:00:00Z", "2026-11-14T20:00:00Z", "2026-11-14T21:00:00Z",
-                  "2026-11-15T22:00:00Z", "2026-11-16T23:00:00Z"])
-    monkeypatch.setattr(D, "now_iso", lambda: next(clock))
-    for _ in range(4):
-        assert D.main([]) == 1
-        out = json.loads((tmp_path / f"{D.SOURCE_ID}.json").read_text())
-        assert out["ok"] is False and out["records"] == [{"event_id": "x"}] and out["meta"]["unresolved_details"]
-    st = json.loads((tmp_path / "state.json").read_text())
-    from datetime import datetime, timezone
-    pending = D.unresolved_details(st)
-    assert pending and all(st["rows"][k]["detail"] is None for k in pending)          # retained throughout
-    # backoff: not asked again within RETRY_HOURS of the last failure, asked again after it
-    assert not set(pending) & set(D.due_for_detail(st, datetime(2026, 11, 14, 22, tzinfo=timezone.utc), 400))
-    assert set(pending) <= set(D.due_for_detail(st, datetime(2026, 11, 15, 22, tzinfo=timezone.utc), 400))
-    good["on"] = True                                     # recovery, after the backoff
+    clock = {"t": ""}
+    monkeypatch.setattr(D, "now_iso", lambda: clock["t"])
+    out_path = tmp_path / f"{D.SOURCE_ID}.json"
+    for t in ("2026-11-14T18:00:00Z", "2026-11-14T19:00:00Z", "2026-11-14T20:00:00Z"):   # three failed reads
+        clock["t"] = t
+        assert D.main(["--details", "400"]) == 1
+        out = json.loads(out_path.read_text())
+        ids = {r["source_record_id"] for r in out["records"]}
+        assert out["ok"] is False and "2026-2844" in out["error"]
+        assert {"2026-2850", "2026-2849", "2026-2845"} <= ids and "old" not in ids   # readable ones written
+        assert "2026-2844" not in ids                    # wastewater, detail unread: pending, not invented
+        u = out["meta"]["unread"]["2026-2844"]
+        assert u["reason"] and u["last_tried"] and u["release_number"] == "17764"
+    # a run inside the backoff does not ask for the broken page: ok, records current, the page still listed unread
+    clock["t"] = "2026-11-14T21:00:00Z"
     assert D.main(["--details", "400"]) == 0
-    out = json.loads((tmp_path / f"{D.SOURCE_ID}.json").read_text())
+    out = json.loads(out_path.read_text())
+    assert out["ok"] is True and "2026-2844" in out["meta"]["unread"] and len(out["records"]) == 5
     st = json.loads((tmp_path / "state.json").read_text())
-    assert out["ok"] is True and not D.unresolved_details(st) and "unresolved_details" not in out["meta"]
+    assert "2026-2844" in D.due_for_detail(st, datetime(2026, 11, 15, 22, tzinfo=timezone.utc), 400)
+    broken.clear()                                       # the page comes back after the backoff
+    clock["t"] = "2026-11-15T22:00:00Z"
+    assert D.main(["--details", "400"]) == 0
+    out = json.loads(out_path.read_text())
+    assert out["ok"] is True and out["meta"]["unread"] == {}
+    assert "2026-2844" in {r["source_record_id"] for r in out["records"]}
+
+
+def test_a_failed_recheck_of_a_read_release_keeps_its_record_and_detail(monkeypatch, tmp_path):
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(D, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(D, "save_raw", lambda *a, **k: None)
+    st = state_with_details()
+    st["backfilled_at"] = T0
+    (tmp_path / "state.json").write_text(json.dumps(st))
+
+    class Down(D.Client):
+        def __init__(self):
+            super().__init__(pause=0)
+
+        def recent(self, pages):
+            return listing()
+
+        def detail(self, key):
+            raise requests.ConnectionError("down")
+    import requests
+    monkeypatch.setattr(D, "Client", Down)
+    monkeypatch.setattr(D, "now_iso", lambda: "2026-11-15T12:00:00Z")
+    before, _ = records(copy.deepcopy(st))
+    assert D.main(["--details", "400"]) == 1
+    out = json.loads((tmp_path / f"{D.SOURCE_ID}.json").read_text())
+    after = {r["source_record_id"]: r for r in out["records"]}
+    assert set(after) == set(before) and after["2026-2850"]["volume_gal"] == before["2026-2850"]["volume_gal"]
+    assert out["ok"] is False                            # read before: not unread, still in the records
+    assert not {"2026-2850", "2026-2849", "2026-2844"} & set(out["meta"]["unread"])
+
+
+def _search_client(result_page, list_page):
+    class C(D.Client):
+        def __init__(self):
+            super().__init__(pause=0)
+
+        def get(self, url):
+            return list_page
+
+        def post(self, data):
+            return result_page["page"]
+    return C
+
+
+def test_an_unreadable_search_result_page_is_a_failed_read_not_no_results():
+    page1 = (FIX / "derns_list.html").read_text()
+    res = {"page": "<html><body><h1>Service Unavailable</h1></body></html>"}
+    with pytest.raises(RuntimeError, match="not DERNS's search page"):
+        _search_client(res, page1)().search("SEWAGE")
+    # a real zero-result answer: the search page with its grid and no release rows
+    empty = re.sub(r"<tr[^>]*>\s*<td[^>]*><a href=\"ReleaseDetail[^\n]*</tr>", "", page1)
+    empty = re.sub(r"<select[^>]*ddlPageSelector.*?</select>", "", empty, flags=re.S)
+    assert not D.list_rows(empty) and D.is_search_page(empty)
+    res["page"] = empty
+    assert _search_client(res, page1)().search("GREY WATER") == []
+
+
+def test_a_refused_backfill_search_keeps_failure_health_and_is_retried_until_read(monkeypatch, tmp_path):
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(D, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(D, "save_raw", lambda *a, **k: None)
+    monkeypatch.setattr(D, "now_iso", lambda: "2026-11-15T12:00:00Z")
+    down = {"on": True}
+    asked = []
+
+    class S(D.Client):
+        def __init__(self):
+            super().__init__(pause=0)
+
+        def recent(self, pages):
+            return listing()
+
+        def search(self, term):
+            asked.append(term)
+            if down["on"] and term == "SEWAGE":
+                raise RuntimeError(f"search {term!r}: the result page is not DERNS's search page")
+            return []
+
+        def detail(self, key):
+            return None
+    monkeypatch.setattr(D, "Client", S)
+    assert D.main(["--details", "0"]) == 1
+    st = json.loads((tmp_path / "state.json").read_text())
+    out = json.loads((tmp_path / f"{D.SOURCE_ID}.json").read_text())
+    assert "backfilled_at" not in st and "SEWAGE" not in st["backfill_terms_done"]
+    assert out["ok"] is False and "SEWAGE" in out["error"] and out["meta"]["backfill_terms_not_read"] == ["SEWAGE"]
+    assert out["records"]                                # the list's readable releases are still written
+    asked.clear()
+    down["on"] = False
+    assert D.main(["--details", "0"]) == 0
+    st = json.loads((tmp_path / "state.json").read_text())
+    assert asked == ["SEWAGE"] and st["backfilled_at"] and "backfill_terms_done" not in st
 
 
 def test_an_error_page_in_place_of_a_requested_list_page_fails_the_read(monkeypatch):
