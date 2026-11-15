@@ -1,62 +1,27 @@
 {
  "about": "Water names in Missouri's records that data/receiving-waters-national.json does not hold for MO: every water KC Water's and MSD's overflow posts and DNR's concern reports name, the waters DNR's bloom map shows a bloom on, and the receiving stream of each combined sewer outfall on DNR's outfall layer; one row per name and county (the county of the record's point, else the county a concern gives, else the counties of the operator's area), with the number of reports, the outfall count and points of the outfalls, and the operator, so the names pass builds each name where the reports are. Records naming no water are left out (by_reason). Written by scripts/mo_report_water_names.py.",
  "state": "MO",
- "waters": 71,
- "reports": 110,
  "reports_on_listed_waters": 107,
+ "waters": 48,
+ "reports": 61,
  "by_reason": {
-  "no water named": 117,
-  "the same report as another source's": 16
+  "no NHD flowline or waterbody of that name in MO": 42,
+  "3 NHD waters of that name in MO and the reports give no place to choose one": 2,
+  "2 NHD waters of that name in MO and the reports give no place to choose one": 1,
+  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 1,
+  "part of a sewer, drainage or treatment works, not a public water": 1,
+  "4 NHD waters of that name in MO and the reports give no place to choose one": 1
+ },
+ "resolved_names": 23,
+ "resolved_reports": 49,
+ "build": {
+  "date": "2026-11-15",
+  "command": "python -m ingest.waters_from_nhd --names research/mo/receiving-waters-missing.json --state MO",
+  "records_built": 17,
+  "names_resolved": 23,
+  "network_requests": 39
  },
  "rows": [
-  {
-   "name": "Coldwater Creek",
-   "reports": 10,
-   "county": "St. Louis County or St. Louis city",
-   "points": [],
-   "towns": [
-    "Metropolitan St. Louis Sewer District"
-   ],
-   "sources": {
-    "mo-msd-stl-project-clear": 10
-   },
-   "open": 0,
-   "places_from": [
-    "mo-msd-stl-project-clear"
-   ]
-  },
-  {
-   "name": "Line Creek",
-   "reports": 7,
-   "county": "Jackson County or Clay County or Platte County or Cass County",
-   "points": [],
-   "towns": [
-    "City of Kansas City, Missouri (KC Water)"
-   ],
-   "sources": {
-    "mo-kc-water-overflow-notices": 7
-   },
-   "open": 0,
-   "places_from": [
-    "mo-kc-water-overflow-notices"
-   ]
-  },
-  {
-   "name": "Burlington Creek",
-   "reports": 4,
-   "county": "Jackson County or Clay County or Platte County or Cass County",
-   "points": [],
-   "towns": [
-    "City of Kansas City, Missouri (KC Water)"
-   ],
-   "sources": {
-    "mo-kc-water-overflow-notices": 4
-   },
-   "open": 0,
-   "places_from": [
-    "mo-kc-water-overflow-notices"
-   ]
-  },
   {
    "name": "Kiefer Creek",
    "reports": 4,
@@ -71,23 +36,8 @@
    "open": 0,
    "places_from": [
     "mo-msd-stl-project-clear"
-   ]
-  },
-  {
-   "name": "Little Blue River",
-   "reports": 4,
-   "county": "Jackson County or Clay County or Platte County or Cass County",
-   "points": [],
-   "towns": [
-    "City of Kansas City, Missouri (KC Water)"
    ],
-   "sources": {
-    "mo-kc-water-overflow-notices": 4
-   },
-   "open": 0,
-   "places_from": [
-    "mo-kc-water-overflow-notices"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "River des Peres",
@@ -103,7 +53,8 @@
    "open": 0,
    "places_from": [
     "mo-msd-stl-project-clear"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Buckeye Creek",
@@ -119,23 +70,8 @@
    "open": 0,
    "places_from": [
     "mo-kc-water-overflow-notices"
-   ]
-  },
-  {
-   "name": "Maline Creek",
-   "reports": 3,
-   "county": "St. Louis County or St. Louis city",
-   "points": [],
-   "towns": [
-    "Metropolitan St. Louis Sewer District"
    ],
-   "sources": {
-    "mo-msd-stl-project-clear": 3
-   },
-   "open": 0,
-   "places_from": [
-    "mo-msd-stl-project-clear"
-   ]
+   "reason": "2 NHD waters of that name in MO and the reports give no place to choose one"
   },
   {
    "name": "Alex George Lake",
@@ -151,23 +87,8 @@
    "open": 0,
    "places_from": [
     "mo-kc-water-overflow-notices"
-   ]
-  },
-  {
-   "name": "Dyke Branch Creek",
-   "reports": 2,
-   "county": "Jackson County or Clay County or Platte County or Cass County",
-   "points": [],
-   "towns": [
-    "City of Kansas City, Missouri (KC Water)"
    ],
-   "sources": {
-    "mo-kc-water-overflow-notices": 2
-   },
-   "open": 0,
-   "places_from": [
-    "mo-kc-water-overflow-notices"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Little Shoal Creek",
@@ -183,26 +104,8 @@
    "open": 0,
    "places_from": [
     "mo-kc-water-overflow-notices"
-   ]
-  },
-  {
-   "name": "Lone Jack Lake",
-   "reports": 2,
-   "county": "Jackson County",
-   "points": [
-    [
-     38.894,
-     -94.195
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "mo-dnr-hab-map": 2
-   },
-   "open": 2,
-   "places_from": [
-    "mo-dnr-hab-map"
-   ]
+   "reason": "3 NHD waters of that name in MO and the reports give no place to choose one"
   },
   {
    "name": "Madisyn Branch",
@@ -218,7 +121,8 @@
    "open": 0,
    "places_from": [
     "mo-dnr-concern-reports"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Penn Valley Lake",
@@ -234,7 +138,8 @@
    "open": 0,
    "places_from": [
     "mo-kc-water-overflow-notices"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Randolph Creek",
@@ -250,23 +155,8 @@
    "open": 0,
    "places_from": [
     "mo-kc-water-overflow-notices"
-   ]
-  },
-  {
-   "name": "Round Grove Creek",
-   "reports": 2,
-   "county": "Jackson County or Clay County or Platte County or Cass County",
-   "points": [],
-   "towns": [
-    "City of Kansas City, Missouri (KC Water)"
    ],
-   "sources": {
-    "mo-kc-water-overflow-notices": 2
-   },
-   "open": 0,
-   "places_from": [
-    "mo-kc-water-overflow-notices"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Tipton Park Lake",
@@ -289,7 +179,8 @@
    "open": 2,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Town Fork Creek",
@@ -305,7 +196,8 @@
    "open": 0,
    "places_from": [
     "mo-kc-water-overflow-notices"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Anita B Dorman Education Pond",
@@ -324,7 +216,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Anita B Gorman Education Pond",
@@ -343,7 +236,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Blacksnake Creek",
@@ -359,7 +253,8 @@
    "open": 0,
    "places_from": [
     "mo-dnr-concern-reports"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Blind Pony Lake",
@@ -378,7 +273,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Briars pond",
@@ -397,7 +293,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Carter Creek",
@@ -411,7 +308,8 @@
    "open": 0,
    "places_from": [
     "mo-dnr-concern-reports"
-   ]
+   ],
+   "reason": "3 NHD waters of that name in MO and the reports give no place to choose one"
   },
   {
    "name": "Catclaw Lake",
@@ -430,7 +328,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Catfish Cove (Forest Park Hatchery)",
@@ -449,22 +348,10 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
-  },
-  {
-   "name": "Caulks Creek",
-   "reports": 1,
-   "county": "St. Louis County or St. Louis city",
-   "points": [],
-   "towns": [
-    "Metropolitan St. Louis Sewer District"
    ],
-   "sources": {
-    "mo-msd-stl-project-clear": 1
-   },
-   "open": 0,
-   "places_from": [
-    "mo-msd-stl-project-clear"
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15",
+   "parts": [
+    "Catfish Cove"
    ]
   },
   {
@@ -484,7 +371,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Charles Fessen Lake",
@@ -503,26 +391,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
-  },
-  {
-   "name": "Cleveland Lake",
-   "reports": 1,
-   "county": "Cass County",
-   "points": [
-    [
-     38.807,
-     -94.552
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "mo-dnr-hab-map": 1
-   },
-   "open": 1,
-   "places_from": [
-    "mo-dnr-hab-map"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Corby Pond St. Joseph",
@@ -541,7 +411,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Eagles Parkway Trail Project",
@@ -560,7 +431,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "East Fork Line Creek",
@@ -576,21 +448,8 @@
    "open": 0,
    "places_from": [
     "mo-kc-water-overflow-notices"
-   ]
-  },
-  {
-   "name": "Fall Creek",
-   "reports": 1,
-   "county": "Taney County",
-   "points": [],
-   "towns": [],
-   "sources": {
-    "mo-dnr-concern-reports": 1
-   },
-   "open": 0,
-   "places_from": [
-    "mo-dnr-concern-reports"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Fee Fee Creek",
@@ -606,7 +465,8 @@
    "open": 0,
    "places_from": [
     "mo-msd-stl-project-clear"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Fern Ridge Creek",
@@ -622,7 +482,8 @@
    "open": 0,
    "places_from": [
     "mo-msd-stl-project-clear"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Gingras Creek",
@@ -638,7 +499,8 @@
    "open": 0,
    "places_from": [
     "mo-msd-stl-project-clear"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Hagen Lake",
@@ -657,7 +519,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Hampton Branch Creek",
@@ -673,7 +536,8 @@
    "open": 0,
    "places_from": [
     "mo-msd-stl-project-clear"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Harbors at Lake Chesterfield",
@@ -692,20 +556,10 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
-  },
-  {
-   "name": "Humphrey Creek",
-   "reports": 1,
-   "county": "Miller County",
-   "points": [],
-   "towns": [],
-   "sources": {
-    "mo-dnr-concern-reports": 1
-   },
-   "open": 0,
-   "places_from": [
-    "mo-dnr-concern-reports"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15",
+   "parts": [
+    "Harbors"
    ]
   },
   {
@@ -722,7 +576,8 @@
    "open": 0,
    "places_from": [
     "mo-dnr-concern-reports"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Jackrabbit",
@@ -741,23 +596,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
-  },
-  {
-   "name": "Keifer Creek",
-   "reports": 1,
-   "county": "St. Louis County or St. Louis city",
-   "points": [],
-   "towns": [
-    "Metropolitan St. Louis Sewer District"
    ],
-   "sources": {
-    "mo-msd-stl-project-clear": 1
-   },
-   "open": 0,
-   "places_from": [
-    "mo-msd-stl-project-clear"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Lac Michel terre du lac",
@@ -776,26 +616,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
-  },
-  {
-   "name": "Lake Allaman",
-   "reports": 1,
-   "county": "Clinton County",
-   "points": [
-    [
-     39.657,
-     -94.214
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "mo-dnr-hab-map": 1
-   },
-   "open": 1,
-   "places_from": [
-    "mo-dnr-hab-map"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Lake Bluestem",
@@ -814,7 +636,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Lake Chesterfield (and tributary)",
@@ -833,25 +656,10 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
-  },
-  {
-   "name": "Lake Nell",
-   "reports": 1,
-   "county": "Jackson County",
-   "points": [
-    [
-     38.881,
-     -94.322
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "mo-dnr-hab-map": 1
-   },
-   "open": 1,
-   "places_from": [
-    "mo-dnr-hab-map"
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15",
+   "parts": [
+    "Lake Chesterfield"
    ]
   },
   {
@@ -868,42 +676,8 @@
    "open": 0,
    "places_from": [
     "mo-msd-stl-project-clear"
-   ]
-  },
-  {
-   "name": "Mallard Lake",
-   "reports": 1,
-   "county": "St. Louis County or St. Louis city",
-   "points": [],
-   "towns": [
-    "Metropolitan St. Louis Sewer District"
    ],
-   "sources": {
-    "mo-msd-stl-project-clear": 1
-   },
-   "open": 0,
-   "places_from": [
-    "mo-msd-stl-project-clear"
-   ]
-  },
-  {
-   "name": "Manito Lake",
-   "reports": 1,
-   "county": "Moniteau County",
-   "points": [
-    [
-     38.591,
-     -92.803
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "mo-dnr-hab-map": 1
-   },
-   "open": 1,
-   "places_from": [
-    "mo-dnr-hab-map"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Maplewood Estates",
@@ -922,23 +696,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
-  },
-  {
-   "name": "Martigney Creek",
-   "reports": 1,
-   "county": "St. Louis County or St. Louis city",
-   "points": [],
-   "towns": [
-    "Metropolitan St. Louis Sewer District"
    ],
-   "sources": {
-    "mo-msd-stl-project-clear": 1
-   },
-   "open": 0,
-   "places_from": [
-    "mo-msd-stl-project-clear"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "McCredie Watershed W-1 Reservoir",
@@ -957,7 +716,11 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "records": [
+    "mccredie-watershed-w-1-reservoir-mo"
+   ],
+   "reason": "a water record holds this water but not this spelling (mccredie-watershed-w-1-reservoir-mo): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Neighborhood detention pond",
@@ -976,7 +739,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "part of a sewer, drainage or treatment works, not a public water"
   },
   {
    "name": "Pebble Creek",
@@ -992,7 +756,8 @@
    "open": 0,
    "places_from": [
     "mo-msd-stl-project-clear"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Pierce City City Park Recreational Pond",
@@ -1011,7 +776,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Prairie Hallow Lake (James A Reed)",
@@ -1030,41 +796,10 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
-  },
-  {
-   "name": "Riss Lake",
-   "reports": 1,
-   "county": "Jackson County or Clay County or Platte County or Cass County",
-   "points": [],
-   "towns": [
-    "City of Kansas City, Missouri (KC Water)"
    ],
-   "sources": {
-    "mo-kc-water-overflow-notices": 1
-   },
-   "open": 0,
-   "places_from": [
-    "mo-kc-water-overflow-notices"
-   ]
-  },
-  {
-   "name": "Roadside Lake",
-   "reports": 1,
-   "county": "Franklin County",
-   "points": [
-    [
-     38.605,
-     -91.277
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "mo-dnr-hab-map": 1
-   },
-   "open": 1,
-   "places_from": [
-    "mo-dnr-hab-map"
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15",
+   "parts": [
+    "Prairie Hallow Lake"
    ]
   },
   {
@@ -1084,23 +819,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
-  },
-  {
-   "name": "Searcy Branch",
-   "reports": 1,
-   "county": "Jackson County or Clay County or Platte County or Cass County",
-   "points": [],
-   "towns": [
-    "City of Kansas City, Missouri (KC Water)"
    ],
-   "sources": {
-    "mo-kc-water-overflow-notices": 1
-   },
-   "open": 0,
-   "places_from": [
-    "mo-kc-water-overflow-notices"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Smith Creek",
@@ -1116,45 +836,8 @@
    "open": 0,
    "places_from": [
     "mo-msd-stl-project-clear"
-   ]
-  },
-  {
-   "name": "Spring Fork Lake",
-   "reports": 1,
-   "county": "Pettis County",
-   "points": [
-    [
-     38.567,
-     -93.24
-    ]
    ],
-   "towns": [],
-   "sources": {
-    "mo-dnr-hab-map": 1
-   },
-   "open": 1,
-   "places_from": [
-    "mo-dnr-hab-map"
-   ]
-  },
-  {
-   "name": "Tributary to Jemerson Creek",
-   "reports": 1,
-   "county": "Boone County",
-   "points": [
-    [
-     38.769,
-     -92.29
-    ]
-   ],
-   "towns": [],
-   "sources": {
-    "mo-dnr-hab-map": 1
-   },
-   "open": 1,
-   "places_from": [
-    "mo-dnr-hab-map"
-   ]
+   "reason": "4 NHD waters of that name in MO and the reports give no place to choose one"
   },
   {
    "name": "Turtle Pond at Caldwell Memorial CA",
@@ -1173,6 +856,10 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15",
+   "parts": [
+    "Turtle Pond"
    ]
   },
   {
@@ -1192,7 +879,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Wellsville conservation lake",
@@ -1211,7 +899,8 @@
    "open": 1,
    "places_from": [
     "mo-dnr-hab-map"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "River des Peres",
@@ -1247,7 +936,8 @@
    "outfalls": 28,
    "places_from": [
     "mo-dnr-npdes-outfalls"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
   },
   {
    "name": "Tributary to River des Peres",
@@ -1283,7 +973,376 @@
    "outfalls": 38,
    "places_from": [
     "mo-dnr-npdes-outfalls"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MO; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15",
+   "parts": [
+    "River des Peres"
    ]
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Coldwater Creek",
+   "reports": 10,
+   "slugs": [
+    "coldwater-creek-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ],
+   "county": "St. Louis County or St. Louis city"
+  },
+  {
+   "name": "Line Creek",
+   "reports": 7,
+   "slugs": [
+    "line-creek-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ],
+   "county": "Jackson County or Clay County or Platte County or Cass County"
+  },
+  {
+   "name": "Burlington Creek",
+   "reports": 4,
+   "slugs": [
+    "burlington-creek-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ],
+   "county": "Jackson County or Clay County or Platte County or Cass County"
+  },
+  {
+   "name": "Little Blue River",
+   "reports": 4,
+   "slugs": [
+    "little-blue-river-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ],
+   "county": "Jackson County or Clay County or Platte County or Cass County"
+  },
+  {
+   "name": "Maline Creek",
+   "reports": 3,
+   "slugs": [
+    "maline-creek-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ],
+   "county": "St. Louis County or St. Louis city"
+  },
+  {
+   "name": "Dyke Branch Creek",
+   "reports": 2,
+   "slugs": [
+    "dyke-branch-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ],
+   "county": "Jackson County or Clay County or Platte County or Cass County"
+  },
+  {
+   "name": "Lone Jack Lake",
+   "reports": 2,
+   "slugs": [
+    "lone-jack-lake-mo"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.894,
+     -94.195
+    ]
+   ],
+   "places_from": [
+    "mo-dnr-hab-map"
+   ],
+   "county": "Jackson County"
+  },
+  {
+   "name": "Round Grove Creek",
+   "reports": 2,
+   "slugs": [
+    "round-grove-creek-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ],
+   "county": "Jackson County or Clay County or Platte County or Cass County"
+  },
+  {
+   "name": "Caulks Creek",
+   "reports": 1,
+   "slugs": [
+    "caulks-creek-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ],
+   "county": "St. Louis County or St. Louis city"
+  },
+  {
+   "name": "Cleveland Lake",
+   "reports": 1,
+   "slugs": [
+    "cleveland-lake-mo"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.807,
+     -94.552
+    ]
+   ],
+   "places_from": [
+    "mo-dnr-hab-map"
+   ],
+   "county": "Cass County"
+  },
+  {
+   "name": "Fall Creek",
+   "reports": 1,
+   "slugs": [
+    "fall-creek-mo"
+   ],
+   "how": "record built from the name",
+   "places_from": [
+    "mo-dnr-concern-reports"
+   ],
+   "county": "Taney County"
+  },
+  {
+   "name": "Humphrey Creek",
+   "reports": 1,
+   "slugs": [
+    "humphrey-creek-mo"
+   ],
+   "how": "record built from the name",
+   "places_from": [
+    "mo-dnr-concern-reports"
+   ],
+   "county": "Miller County"
+  },
+  {
+   "name": "Keifer Creek",
+   "reports": 1,
+   "slugs": [
+    "keifer-creek-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ],
+   "county": "St. Louis County or St. Louis city"
+  },
+  {
+   "name": "Lake Allaman",
+   "reports": 1,
+   "slugs": [
+    "lake-allaman-mo"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     39.657,
+     -94.214
+    ]
+   ],
+   "places_from": [
+    "mo-dnr-hab-map"
+   ],
+   "county": "Clinton County"
+  },
+  {
+   "name": "Lake Nell",
+   "reports": 1,
+   "slugs": [
+    "lake-nell-mo"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.881,
+     -94.322
+    ]
+   ],
+   "places_from": [
+    "mo-dnr-hab-map"
+   ],
+   "county": "Jackson County"
+  },
+  {
+   "name": "Mallard Lake",
+   "reports": 1,
+   "slugs": [
+    "mallard-lake-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ],
+   "county": "St. Louis County or St. Louis city"
+  },
+  {
+   "name": "Manito Lake",
+   "reports": 1,
+   "slugs": [
+    "manito-lake-mo"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.591,
+     -92.803
+    ]
+   ],
+   "places_from": [
+    "mo-dnr-hab-map"
+   ],
+   "county": "Moniteau County"
+  },
+  {
+   "name": "Martigney Creek",
+   "reports": 1,
+   "slugs": [
+    "martigney-creek-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Metropolitan St. Louis Sewer District"
+   ],
+   "places_from": [
+    "mo-msd-stl-project-clear"
+   ],
+   "county": "St. Louis County or St. Louis city"
+  },
+  {
+   "name": "Riss Lake",
+   "reports": 1,
+   "slugs": [
+    "riss-lake-mo"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ],
+   "county": "Jackson County or Clay County or Platte County or Cass County"
+  },
+  {
+   "name": "Roadside Lake",
+   "reports": 1,
+   "slugs": [
+    "roadside-lake-mo"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.605,
+     -91.277
+    ]
+   ],
+   "places_from": [
+    "mo-dnr-hab-map"
+   ],
+   "county": "Franklin County"
+  },
+  {
+   "name": "Searcy Branch",
+   "reports": 1,
+   "slugs": [
+    "searcy-branch-mo"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "City of Kansas City, Missouri (KC Water)"
+   ],
+   "places_from": [
+    "mo-kc-water-overflow-notices"
+   ],
+   "county": "Jackson County or Clay County or Platte County or Cass County"
+  },
+  {
+   "name": "Spring Fork Lake",
+   "reports": 1,
+   "slugs": [
+    "spring-fork-lake-mo"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     38.567,
+     -93.24
+    ]
+   ],
+   "places_from": [
+    "mo-dnr-hab-map"
+   ],
+   "county": "Pettis County"
+  },
+  {
+   "name": "Tributary to Jemerson Creek",
+   "reports": 1,
+   "slugs": [
+    "jemerson-creek-mo"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     38.769,
+     -92.29
+    ]
+   ],
+   "places_from": [
+    "mo-dnr-hab-map"
+   ],
+   "county": "Boone County"
   }
  ]
 }
