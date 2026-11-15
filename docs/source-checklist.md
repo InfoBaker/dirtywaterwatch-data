@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1460 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1473 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -47,7 +47,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
 | co | 6 | 0 | 3 | 2 | 1 | 12 |
-| **all** | **525** | **234** | **424** | **203** | **74** | **1460** |
+| mt | 4 | 0 | 7 | 1 | 1 | 13 |
+| **all** | **529** | **234** | **431** | **204** | **75** | **1473** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1693,3 +1694,21 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `co-cdphe-incident-reporting` | CDPHE Reportable Environmental Hazards Line and Online Incident Reporting System (Google Form) | rejected | fetched | events | Intake only; reports are not published. The page answered 403 to the build's client on 2026-11-14. |
 | `co-swim-guide` | Swim Guide affiliates in Colorado | rejected | search_only | monitoring | None found (search only). |
 | `co-pueblo-wastewater-notices` | City of Pueblo news (the August 2026 sewage discharge to the Arkansas River) | unreachable | fetched | events | The host did not answer the build's client on 2026-11-14 (connection timed out, the RSS route too); the register watches it. The spill is recorded from CPW's advisory. |
+
+## mt: Montana (13)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `mt-deq-spill-complaint` | Montana DEQ spill/complaint reporting and enforcement spill policy | used | fetched | law | Spill policy (rev. 2025-10-24): releases reported to the DES 24-hour line (406) 431-0411; spills that 'enter or may enter state water' must go to the NRC. Covers petroleum and hazardous substances; sewage not named. No public spill list found. |
+| `mt-deq-sso-form` | Montana DEQ Sanitary Sewer Overflow (SSO) Event Form (Rev. 2.0, April 2020) | used | fetched | law | Written 5-day report under ARM 17.30.1342(12)(f)(i) after a 24-hour oral report. Asks for start/end time, volume and method, lat/long, receiving water, manhole number, whether the SSO reached water. Reports go to DEQ only; no public output found. |
+| `mt-hab-map` | Montana HAB reports and advisories map (HAB.mt.gov, DPHHS and DEQ) | used | fetched | advisories | The layer behind DEQ's HAB dashboard traced and read 2026-11-14 (445 rows, 2019-2026; DEQ's advisory level, issue and lift dates): read by the mt-deq-hab-map feed as 276 bloom advisories, safe fields only. HAB.mt.gov and dphhs.mt.gov did not resolve on 2026-11-14. |
+| `mt-mpdes-24h-clause` | MPDES municipal permit standard conditions (e.g. MT0020168): 24-hour notice of noncompliance | used | fetched | law | Report 'as soon as possible, but no later than twenty-four (24) hours' to the Water Protection Bureau or DES; written within five days. No public notification clause found in this permit; Missoula's permit (MT0022594) is a scanned image and could not be searched. |
+| `mt-beach-ecoli` | Beach E. coli monitoring | watch | search_only | monitoring | No statewide beach bacteria program found (search only). |
+| `mt-deq-hab-dashboard` | Montana DEQ Harmful Algal Bloom Dashboard (item 10c34f5c7da24c4188b9ddc220d43970) | watch | fetched | advisories | The dashboard (a script page) shows web map 779d34abdc404ae3a63a33cfd94ddc2f, whose bloom layer is read directly (mt-hab-map); its item record is watched for a change of layer. |
+| `mt-deq-hab-storymap` | Montana DEQ Harmful Algal Bloom Observations Story Map | watch | fetched | advisories | Narrative; no service URL in its data. |
+| `mt-deq-records-archive` | Montana DEQ released public records archive (GovQA) | watch | prior_research | news | Request summaries are a discovery route, not incident records; they name requesters and properties and are not fetched. |
+| `mt-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), MT rows | watch | fetched | events | No Montana report in the current extract (5,751 events) or the all-versions extract (6,710 events) of 2026-11-14; the collection-system table lists three Montana permits, EPA's on tribal land (Polson, Ronan, Poplar). Watched. |
+| `mt-news-spills` | Montana news coverage of wastewater discharges (Warm Springs Creek 2023, Columbia Falls, Holland Lake) | watch | search_only | news | DEQ's July 21, 2023 Warm Springs Creek notice (expansion research) could not be read on 2026-11-14 (deq.mt.gov did not resolve); the register watches it. No record is made from it. |
+| `mt-watershed-groups` | Watershed groups (Clark Fork Coalition, Gallatin River Task Force, Missoula Water Quality District) | watch | search_only | monitoring | Possible bacteria sampling; not searched. |
+| `mt-deq-facts-public-viewer` | Montana DEQ FACTS permitting and GIS permit viewer | rejected | prior_research | permits | Where permittees file reports; no public overflow rows or export (expansion research, 2026-11-09). |
+| `mt-deq-warm-springs-2023` | Montana DEQ news: Warm Springs Creek wastewater discharge (July 21, 2023) | unreachable | search_only | events | deq.mt.gov did not resolve for the build's client on 2026-11-14; the notice (over three million gallons of partially treated wastewater, DEQ notified June 23, 2023) is not recorded until it can be read. Watched. |

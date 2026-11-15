@@ -1063,6 +1063,8 @@ COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events R
 COUNTY_FIELD_STATES.add("OH")    # Ohio: a spill whose point lies outside its county keeps only raw.county (audit P3-4)
 COUNTY_STATES["CO"] = "co-counties.json"       # Colorado: the official notices name their county, no point
 COUNTY_FIELD_STATES.add("CO")    # (raw.county: Pueblo for the Arkansas River spill; scripts/mountain_counties.py)
+COUNTY_STATES["MT"] = "mt-counties.json"       # Montana: DEQ's HAB layer gives points and a county field
+COUNTY_FIELD_STATES.add("MT")    # (a private pond's report keeps its county only)
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}
