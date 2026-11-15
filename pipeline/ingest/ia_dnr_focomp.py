@@ -177,9 +177,17 @@ def check_form(seg: str) -> None:
         raise ValueError(f"the report form lacks {', '.join(missing)}: a partial read, the earlier fields are kept")
 
 
+def _clock(t: str | None) -> bool:
+    """True for a readable clock value ('09:00', '9:05'); the form's time controls carry 24-hour HH:MM."""
+    m = re.fullmatch(r"(\d{1,2}):(\d{2})", (t or "").strip())
+    return bool(m and int(m.group(1)) < 24 and int(m.group(2)) < 60)
+
+
 def check_against(fields: dict, prev: dict | None) -> None:
-    """ValueError when a re-read would lose a readable date the earlier read had (a start, an end or the receipt
-    emptied or made unreadable): a malformed read, never a rewrite of what was known (lessons 4)."""
+    """ValueError when a read carries a date or clock value it cannot read, or a re-read would lose a readable date or
+    clock the earlier read had (a start, an end or the receipt emptied or made unreadable): a malformed read, never a
+    rewrite of what was known and never a midnight made from a damaged clock (lessons 4; Astra verification
+    2026-11-15). A clock left blank on a first read is the source giving no time (day precision)."""
     for d, t in (("incident_start", "incident_start_time"), ("incident_end", "incident_end_time"),
                  ("date_received", "time_received")):
         new = fields.get(d)
@@ -187,6 +195,11 @@ def check_against(fields: dict, prev: dict | None) -> None:
             raise ValueError(f"unreadable {d}: a malformed read, the earlier fields are kept")
         if prev and _us_date(prev.get(d) or "") and not _us_date(new or ""):
             raise ValueError(f"{d} emptied where the earlier read had one: the earlier fields are kept")
+        clock = (fields.get(t) or "").strip()
+        if clock and not _clock(clock):
+            raise ValueError(f"unreadable {t}: a malformed read, the earlier fields are kept")
+        if prev and _clock(prev.get(t)) and not clock:
+            raise ValueError(f"{t} emptied where the earlier read had one: the earlier fields are kept")
 
 
 def parse_report(page: str) -> dict:
@@ -212,7 +225,8 @@ def parse_report(page: str) -> dict:
         "closed": _selected(seg, "IsClosed"),
         "date_received": _input(seg, "DateReceived"), "time_received": _input(seg, "ReceivedTime"),
         "bypass_type": _selected(seg, "ByPassType"), "location_type": _selected(seg, "ByPassLocationType"),
-        "receiving_stream": _input(seg, "ReceivingStream") or None,
+        # free text typed by the reporter: the strict scrub before any save (Astra verification 2026-11-15)
+        "receiving_stream": scrub(_input(seg, "ReceivingStream") or "") or None,
         "receiving_stream_na": _checked(seg, "ReceivingStreamNA"),
         "incident_start": _input(seg, "IncidentStart"), "incident_start_time": _input(seg, "IncidentStartTime"),
         "incident_end": _input(seg, "IncidentEnd"), "incident_end_time": _input(seg, "IncidentEndTime"),
@@ -308,6 +322,7 @@ def make_record(rep: dict, fac: dict, listed: dict, permit: tuple, at: str, ops:
     end, ep = local_time(rep["incident_end"], rep["incident_end_time"])
     recd, _ = local_time(rep["date_received"], rep["time_received"])
     water = None if rep["receiving_stream_na"] or not rep["receiving_stream"] or \
+        rep["receiving_stream"].startswith("[withheld") or \
         NO_WATER.fullmatch(rep["receiving_stream"].strip()) else rep["receiving_stream"].strip()
     gal = None if rep["amount_unknown"] else rep["estimated_gallons"]
     raw = {"facility": fac.get("name"), "st_fac_id": fac.get("st_fac_id"), "program_ids": fac.get("program_ids"),
@@ -410,7 +425,7 @@ def scrub_state(state: dict) -> dict:
         if not f:
             continue
         home = f.get("private_home") is True or home_place(f.get("details"), f.get("location"), f.get("address"))
-        for k in ("details", "steps_taken", "location", "address"):
+        for k in ("details", "steps_taken", "location", "address", "receiving_stream"):
             f[k] = strict_scrub(f.get(k)) or None
         # a place whose own description was withheld (it may name a person) is treated as a private one: saved
         # before the home test ran on the text as typed, it cannot be told apart (lessons 6)
