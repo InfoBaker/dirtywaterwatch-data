@@ -60,7 +60,7 @@ from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 
 from build.status import (ADVISORY_TYPES, BEACH_CHAR, BLOOM_CHAR, COARSE_PRECISION, DISCHARGE_TYPES, LOCAL, POINT_ADVISORY_TYPES,
-                          colours_whole_water, end_not_credible, event_intervals, event_state, find_duplicates,
+                          colours_whole_water, point_extent_only, end_not_credible, event_intervals, event_state, find_duplicates,
                           future_start, load_events, live_waters, load_rules, load_waters, make_resolver, parse_time, resolve_revisions)
 from common import (BUILD_DIR, DATA_DIR, OUT_DIR, discharger_alias_map, now_iso, read_json, rules_live_states,
                     system_wide_advisory, write_json)
@@ -533,7 +533,7 @@ def gather(data: Data):
         eff = data.effective.get(eid, ev)
         for slug in data.slugs(ev):
             w = data.waters[slug]
-            if ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(w):
+            if (ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(w)) or point_extent_only(ev):
                 continue
             if system_wide_advisory(ev):
                 k = (slug, ev.get("source_id"), (ev.get("raw") or {}).get("advisory_key"))

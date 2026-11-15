@@ -3216,6 +3216,13 @@ RIVER_POINT_WHY = ("the advisory is on a river or stream and names no stretch to
                    "the river is not coloured whole")
 
 
+def point_extent_only(ev: dict) -> bool:
+    """A record whose authority delineates a part of a water (DES's bloom coves, ingest/sc_des_advisories.py): shown
+    at its point and listed on the water's page, never colouring the whole water whatever the water's area; keyed on
+    the record's raw._point_extent_only, so no other feed changes (re-review P2-3)."""
+    return (ev.get("raw") or {}).get("_point_extent_only") is True
+
+
 def colours_whole_water(w: dict) -> bool:
     """Beach, rain and HAB advisories colour a whole water only on a lake, pond or reservoir under
     SMALL_WATER_KM2 (an unknown area counts as small)."""
@@ -3794,11 +3801,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             if not live:
                 continue
             on_river = advisory_on_river(ev, waters[slug], traced)
-            if on_river or (ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(waters[slug])):
+            pt_only = point_extent_only(ev)
+            if on_river or pt_only or (ev.get("event_type") in POINT_ADVISORY_TYPES
+                                       and not colours_whole_water(waters[slug])):
                 point_on.append(slug)
                 if on_river:
                     river_point.append(slug)
-                if on_river or not names_its_water(ev):
+                if on_river or pt_only or not names_its_water(ev):
                     continue                   # a station's advisory, or any advisory on a river: its marker only
             if slug in carried:
                 continue                       # a reach carries it (below)

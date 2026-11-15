@@ -398,6 +398,10 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
         raw = {"state": "SC", "time_zone": "America/New_York", "advisory_level": v["tier"],
                "advisory_area": v.get("area"), "organism": v.get("organism"), "read_from": v.get("from"),
                "_last_seen_in_source": v.get("last_seen_at"), "first_seen_at": v.get("first_seen_at"),
+               "_point_extent_only": True,
+               "extent_basis": ("DES delineates a cove or arm of the water, not the whole water: the advisory is shown "
+                                "at the centre of DES's delineation where one is tied to it, and listed on the water's "
+                                "page; the water is not coloured whole"),
                "start_basis": ("DES's date for the watch or advisory (a date, no time of day)" if v.get("started_at")
                                else "the first poll that listed it; DES gave no date")}
         if v.get("lat") is not None:
