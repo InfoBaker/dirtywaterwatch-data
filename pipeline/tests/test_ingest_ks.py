@@ -748,3 +748,38 @@ def test_kdhe_release_without_a_usable_publication_date_fails_the_run_and_keeps_
     # a release of another kind (not read) with a bad date changes nothing
     other = _feed(("Boil Water Advisory for Example", "53", "garbled", "x"))
     assert A.run(other, recs, AT)[1]["releases"] == 1
+
+
+def test_hab_readers_take_a_corrected_name_and_point_under_the_same_id():
+    """Verification P2-4: the same id with a corrected name and point: the record moves, the old place is kept as a
+    revision, the time zone follows the county; an unchanged read keeps the identity and adds nothing."""
+    from ingest import mo_dnr_hab as M
+    p1 = json.loads((FIX / "hab_poll1.json").read_text())
+    recs, _ = H.run(p1, [], AT)
+    fixed = json.loads(json.dumps(p1))
+    for f in fixed["features"]:
+        if f["attributes"].get("WATERBODY_ID") == "LM9001":
+            f["attributes"]["WATERBODY_NAME"] = "Corrected Example Lake"
+            f["geometry"] = {"x": -101.75432, "y": 38.01234}            # Hamilton County: Mountain time
+    recs2, s2 = H.run(fixed, recs, "2026-11-15T18:00:00Z")
+    r = next(x for x in recs2 if x["raw"]["waterbody_id"] == "LM9001")
+    assert r["waterbody_text"] == "Corrected Example Lake" and (r["lat"], r["lon"]) == (38.012, -101.754)
+    orig = next(x for x in recs if x["raw"]["waterbody_id"] == "LM9001")
+    assert r["raw"]["time_zone"] == "America/Denver" and r["event_id"] == orig["event_id"]
+    assert r["raw"]["place_revisions"][0]["was"]["waterbody_text"] == "Example County State Fishing Lake"
+    assert s2["opened"] == 0
+    recs3, _ = H.run(fixed, recs2, "2026-11-16T18:00:00Z")
+    r3 = next(x for x in recs3 if x["raw"]["waterbody_id"] == "LM9001")
+    assert len(r3["raw"]["place_revisions"]) == 1 and r3["event_id"] == r["event_id"]
+    doc = json.loads((Path(__file__).resolve().parent / "fixtures" / "mo" / "hab_layer.json").read_text())
+    m1, _ = M.run(doc, [], AT)
+    doc2 = json.loads(json.dumps(doc))
+    a = doc2["features"][0]
+    a["attributes"]["WBName"] = "Corrected Lake, MO"
+    a["attributes"]["HABCo"] = "Boone"
+    a["geometry"] = {"x": -92.4, "y": 38.9}
+    m2, _ = M.run(doc2, m1, "2026-11-15T18:00:00Z")
+    rid = str(a["attributes"]["globalid"]).strip("{} ").lower()
+    mr = next(x for x in m2 if x["raw"]["report_id"] == rid)
+    assert mr["waterbody_text"] == "Corrected Lake" and (mr["lat"], mr["lon"]) == (38.9, -92.4)
+    assert mr["raw"]["county"] == "Boone" and len(mr["raw"]["place_revisions"]) == 1

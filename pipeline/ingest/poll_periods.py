@@ -26,3 +26,24 @@ def seen(r: dict, at: str) -> None:
         last["to"] = at
     raw["listed_periods"] = periods
     raw["_last_seen_in_source"] = at
+
+
+def revise_place(r: dict, at: str, *, name, lat, lon, county=None) -> bool:
+    """The layer corrected the advisory's name or point under the same id (verification P2-4): the current values
+    replace the saved ones (points already rounded to 0.001 degree), the earlier ones are kept in
+    raw.place_revisions with the read that changed them. True when anything changed."""
+    new = {"waterbody_text": name, "lat": lat, "lon": lon}
+    old = {k: r.get(k) for k in new}
+    changed = {k: v for k, v in new.items() if v is not None and v != old[k]}
+    if county is not None and county != r["raw"].get("county"):
+        changed["county"] = county
+    if not changed:
+        return False
+    r["raw"].setdefault("place_revisions", []).append(
+        {"read_at": at, "was": {k: (r["raw"].get(k) if k == "county" else old[k]) for k in changed}})
+    for k, v in changed.items():
+        if k == "county":
+            r["raw"]["county"] = v
+        else:
+            r[k] = v
+    return True

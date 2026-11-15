@@ -139,6 +139,7 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
                 r["raw"].update(dnr_code=x["code"], dnr_label=SHOWN[x["code"]])
                 r["advice_text"] = f"DNR's map: {SHOWN[x['code']]}."
             r["raw"]["case_status"] = x["case_status"]
+            poll_periods.revise_place(r, at, name=x["name"], lat=x["lat"], lon=x["lon"], county=x["county"])
         poll_periods.seen(r, at)
     for rid, r in open_by.items():
         if rid not in now:
