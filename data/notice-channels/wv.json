@@ -7510,7 +7510,7 @@
    "permit": "WVG415318",
    "checked": "2026-11-14",
    "id": "wv-r-j-realty-llc-dep-spill-line",
-   "name": "R&j Realty LLC",
+   "name": "R&J Realty LLC",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -7524,7 +7524,7 @@
    "sources": [
     "wv-law-spill-rule"
    ],
-   "note": "R&j Realty LLC must report a spill or accidental discharge to DEP's emergency spill line, by telephone only; DEP publishes no list and no public notice is required. The permit itself was not read.",
+   "note": "R&J Realty LLC must report a spill or accidental discharge to DEP's emergency spill line, by telephone only; DEP publishes no list and no public notice is required. The permit itself was not read.",
    "barrier": "phone_only"
   },
   {

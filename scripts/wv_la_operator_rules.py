@@ -37,7 +37,7 @@ def title(s: str) -> str:
     out = []
     for i, w in enumerate(s.split()):
         lw = w.lower()
-        if lw.strip(".,") in UPPER:
+        if lw.strip(".,") in UPPER or re.fullmatch(r"[a-z]&[a-z][.,]?", lw):     # 'L&R', 'A&M'
             out.append(w.upper())
         elif i and lw in SMALL:
             out.append(lw)
@@ -121,7 +121,11 @@ RULES = [
 def owner_text(permit_name: str, state: str) -> str:
     s = clean(permit_name)
     if state == "LA":
-        s = clean(re.split(r"\s*-{1,2}\s+|\s+-{1,2}\s*|-{1,2}(?=[A-Z][a-z]|[A-Z]{2,})(?<=[a-z.)]-)", s, maxsplit=1)[0])
+        # the owner is the part before the dash, spaced or not, single or double ('Dept--Destrehan WWTP',
+        # 'COUNCIL--DESTREHAN WWTP', 'Council -- Plant', 'City of Shreveport-Lucas WWTP')
+        s = clean(re.split(r"\s*-{1,2}\s+|\s+-{1,2}\s*|(?<=[a-z.)])-{1,2}(?=[A-Z][a-z]|[A-Z]{2,})|(?<=[A-Z.)])--(?=[A-Z])"
+                           r"|(?<=[A-Z.)])-(?=[A-Z][A-Z0-9 &'.,]*\b(?:WWTP|WWTF|STP|PLANT|FACILITY|LAGOON|POND)\b)",
+                           s, maxsplit=1)[0])
     return s
 
 
@@ -136,6 +140,13 @@ def owner(permit_name, permittee, facility_type, state: str, permit: str, overri
         alt = municipal(owner_text(permittee, state))
         if alt and not municipal(raw) and re.search(r"\b(?:wwtp|wwtf|stp|plant|facility|pond|lagoon)\b", raw, re.I):
             return alt[0], alt[1], "municipal (permittee field)"
+        # a department of a parish ('St. Charles Parish Wastewater Dept') when the permittee field names the
+        # governing body ('ST. CHARLES PARISH COUNCIL--DESTREHAN WWTP'): the body is the permittee
+        body = owner_text(permittee, state)
+        if (re.search(r"\b(?:dept|department|division|utilities|wastewater|sewer(?:age)?)\b", raw, re.I)
+                and re.search(r"\bparish (?:council|government|police jury)\b|\bpolice jury\b|\bcity[- ]parish\b",
+                              body, re.I)):
+            return re.sub(r"\bPh\b", "Parish", title(body)), "county", "parish body (permittee field)"
     if not raw or "name removed" in raw.lower():
         return f"Holder of permit {permit}", "facility (permittee not named)", "no name"
     m = municipal(raw)

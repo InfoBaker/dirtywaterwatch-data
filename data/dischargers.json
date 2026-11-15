@@ -460277,8 +460277,8 @@
  },
  {
   "id": "wv-r-j-realty-llc",
-  "name": "R&j Realty LLC",
-  "short_name": "R&j Realty LLC",
+  "name": "R&J Realty LLC",
+  "short_name": "R&J Realty LLC",
   "legal_form": "business or industrial",
   "state": "WV",
   "kind": "plant",
@@ -460298,7 +460298,7 @@
   "towns": [
    "Ravenswood"
   ],
-  "notes": "WVG415318: EPA records the permittee as \"R&j Realty LLC\"",
+  "notes": "WVG415318: EPA records the permittee as \"R&J Realty LLC\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -468426,8 +468426,8 @@
  },
  {
   "id": "la-d-m-septic-tank-llc",
-  "name": "D&m Septic Tank LLC",
-  "short_name": "D&m Septic Tank LLC",
+  "name": "D&M Septic Tank LLC",
+  "short_name": "D&M Septic Tank LLC",
   "legal_form": "business or industrial",
   "state": "LA",
   "kind": "plant",
@@ -468447,7 +468447,7 @@
   "towns": [
    "Breaux Bridge"
   ],
-  "notes": "LA0126974: EPA records the permittee as \"D&m Septic Tank LLC\"",
+  "notes": "LA0126974: EPA records the permittee as \"D&M Septic Tank LLC\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -469244,9 +469244,9 @@
   ]
  },
  {
-  "id": "la-l-r-utilities-inc-southern-pines-stp",
-  "name": "L&r Utilities Inc-Southern Pines STP",
-  "short_name": "L&r Utilities Inc-Southern Pines STP",
+  "id": "la-l-r-utilities-inc",
+  "name": "L&R Utilities Inc",
+  "short_name": "L&R Utilities Inc",
   "legal_form": "investor-owned utility",
   "state": "LA",
   "kind": "plant",
@@ -469264,11 +469264,11 @@
   "towns": [
    "Calhoun"
   ],
-  "notes": "LA0127349: EPA records the permittee as \"L&r Utilities Inc-Southern Pines STP\"",
+  "notes": "LA0127349: EPA records the permittee as \"L&R Utilities Inc-Southern Pines STP\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
-   "la-l-r-utilities-inc-southern-pines-stp"
+   "la-l-r-utilities-inc"
   ],
   "source_areas": [
    "la"
@@ -470705,8 +470705,8 @@
  },
  {
   "id": "la-s-h-farm-llc",
-  "name": "S&h Farm, LLC",
-  "short_name": "S&h Farm, LLC",
+  "name": "S&H Farm, LLC",
+  "short_name": "S&H Farm, LLC",
   "legal_form": "business or industrial",
   "state": "LA",
   "kind": "plant",
@@ -470724,7 +470724,7 @@
   "towns": [
    "Saint Amant"
   ],
-  "notes": "LAG536653: EPA records the permittee as \"S&h Farm, LLC - St Amant RV & Storage\"",
+  "notes": "LAG536653: EPA records the permittee as \"S&H Farm, LLC - St Amant RV & Storage\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -471203,60 +471203,30 @@
   "npdes_permit": "LA0032131",
   "npdes_permits": [
    "LA0032131",
-   "LA0073521"
+   "LA0073521",
+   "LA0073539"
   ],
   "receiving_waters": [
    "GEORGE COUSIN CANAL",
+   "MISSISSIPPI RIVER",
    "PROVIDENCE CANAL"
   ],
   "water_slugs": [],
-  "outfall_count": 3,
+  "outfall_count": 4,
   "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
   "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
+   "Destrehan",
    "Hahnville",
    "Luling"
   ],
-  "notes": "LA0032131: EPA records the permittee as \"St. Charles Parish Council - Luling Oxidation Pond\"; LA0073521: EPA records the permittee as \"St. Charles Parish Council - Hahnville STP\"",
+  "notes": "LA0032131: EPA records the permittee as \"St. Charles Parish Council - Luling Oxidation Pond\"; LA0073521: EPA records the permittee as \"St. Charles Parish Council - Hahnville STP\"; LA0073539: EPA records the permittee as \"St. Charles Parish Wastewater Dept--Destrehan WWTP\"",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
    "la-st-charles-parish-council"
-  ],
-  "source_areas": [
-   "la"
-  ]
- },
- {
-  "id": "la-st-charles-parish-wastewater-dept-destrehan-wwtp",
-  "name": "St. Charles Parish Wastewater Dept--Destrehan WWTP",
-  "short_name": "St. Charles Parish Wastewater Dept--Destrehan WWTP",
-  "legal_form": "county",
-  "state": "LA",
-  "kind": "plant",
-  "npdes_permit": "LA0073539",
-  "npdes_permits": [
-   "LA0073539"
-  ],
-  "receiving_waters": [
-   "MISSISSIPPI RIVER"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json)",
-  "notification_channel": "Louisiana's rules on unauthorized discharges (LAC 33:I Chapter 39) send an emergency discharge to the State Police hotline within the first hour and a discharge above a reportable quantity within 24 hours, with a written report to LDEQ within seven calendar days; other permit excursions go to LDEQ's Single Point of Contact, and the permit's standard conditions add the federal 24-hour and five-day reports (40 CFR 122.41(l)(6)). LDEQ keeps the reports in its document system, which is searched one document at a time behind a reCAPTCHA; no list is published and no duty to tell the public was found. The operator's own pages were not searched individually unless named here.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Destrehan"
-  ],
-  "notes": "LA0073539: EPA records the permittee as \"St. Charles Parish Wastewater Dept--Destrehan WWTP\"",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "la-st-charles-parish-wastewater-dept-destrehan-wwtp"
   ],
   "source_areas": [
    "la"

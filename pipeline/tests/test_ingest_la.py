@@ -336,3 +336,28 @@ def test_the_25_km_cap_is_measured_from_a_point_set_aside_as_suspect():
         o = row(st)
         OW.apply(o, res, MT(30_000.0))
         assert o["water_slug"] == "example-bayou-la" and o["distance_m"] is None          # unchanged
+
+
+def test_dash_variants_and_parish_departments_name_the_permittee():
+    """Re-review P2-8: spaced, unspaced and doubled dashes; a parish department under its governing body."""
+    import sys as _s
+    _s.path.insert(0, str(ROOT / "scripts"))
+    import wv_la_operator_rules as R
+    for pn in ("Example Parish Council - Example WWTP", "Example Parish Council-Example WWTP",
+               "Example Parish Council--Example WWTP", "Example Parish Council -- Example WWTP",
+               "Example Parish Council --Example WWTP", "EXAMPLE PARISH COUNCIL--EXAMPLE WWTP"):
+        assert R.owner_text(pn, "LA").lower() == "example parish council", pn
+    assert R.owner_text("City of Example-Sample WWTP", "LA") == "City of Example"
+    assert R.owner_text("EXAMPLE UTILITIES INC-SAMPLE PINES STP", "LA") == "EXAMPLE UTILITIES INC"
+    assert R.owner_text("EXAMPLE-SAMPLE SEWERAGE DISTRICT", "LA") == "EXAMPLE-SAMPLE SEWERAGE DISTRICT"
+    name, form, how = R.owner("Example Parish Wastewater Dept--Example WWTP", "EXAMPLE PARISH COUNCIL--EXAMPLE WWTP",
+                              "Municipal or Water District", "LA", "LA0000009", [])
+    assert (name, form) == ("Example Parish Council", "county") and "WWTP" not in name and "Dept" not in name
+    # the committed rows: no operator name keeps a plant suffix after a dash, and every permit is held once
+    dis = json.loads((ROOT / "data" / "dischargers.json").read_text())
+    rows = [o for o in (dis if isinstance(dis, list) else dis.get("dischargers") or dis.get("operators")) if o.get("state") == "LA"]
+    assert not [o["name"] for o in rows if re.search(r"-{1,2}\s*\S.*\b(?:WWTP|STP|Plant)\b", o["name"])]
+    held = [p for o in rows for p in o.get("npdes_permits") or []]
+    assert len(held) == len(set(held)) and "LA0073539" in held
+    owner_row = [o for o in rows if "LA0073539" in (o.get("npdes_permits") or [])][0]
+    assert owner_row["id"] == "la-st-charles-parish-council"

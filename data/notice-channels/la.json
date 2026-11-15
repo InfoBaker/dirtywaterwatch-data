@@ -2387,7 +2387,7 @@
    "permit": "LA0126974",
    "checked": "2026-11-14",
    "id": "la-d-m-septic-tank-llc-ldeq-report",
-   "name": "D&m Septic Tank LLC",
+   "name": "D&M Septic Tank LLC",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -2402,7 +2402,7 @@
     "la-lac-33-i-ch39",
     "la-ldeq-spoc"
    ],
-   "note": "D&m Septic Tank LLC reports an unauthorized discharge to the State Police hotline by telephone and to LDEQ by telephone or LDEQ's online intake form (whose tracking number goes to the filer only), then in writing; LDEQ publishes no list and no public notice is required. No web channel found for the public. The permit itself was not read.",
+   "note": "D&M Septic Tank LLC reports an unauthorized discharge to the State Police hotline by telephone and to LDEQ by telephone or LDEQ's online intake form (whose tracking number goes to the filer only), then in writing; LDEQ publishes no list and no public notice is required. No web channel found for the public. The permit itself was not read.",
    "barrier": "no_web_page"
   },
   {
@@ -3030,12 +3030,12 @@
   },
   {
    "state": "LA",
-   "operator_id": "la-l-r-utilities-inc-southern-pines-stp",
+   "operator_id": "la-l-r-utilities-inc",
    "agency": null,
    "permit": "LA0127349",
    "checked": "2026-11-14",
-   "id": "la-l-r-utilities-inc-southern-pines-stp-ldeq-report",
-   "name": "L&r Utilities Inc-Southern Pines STP",
+   "id": "la-l-r-utilities-inc-ldeq-report",
+   "name": "L&R Utilities Inc",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -3050,7 +3050,7 @@
     "la-lac-33-i-ch39",
     "la-ldeq-spoc"
    ],
-   "note": "L&r Utilities Inc-Southern Pines STP reports an unauthorized discharge to the State Police hotline by telephone and to LDEQ by telephone or LDEQ's online intake form (whose tracking number goes to the filer only), then in writing; LDEQ publishes no list and no public notice is required. No web channel found for the public. The permit itself was not read.",
+   "note": "L&R Utilities Inc reports an unauthorized discharge to the State Police hotline by telephone and to LDEQ by telephone or LDEQ's online intake form (whose tracking number goes to the filer only), then in writing; LDEQ publishes no list and no public notice is required. No web channel found for the public. The permit itself was not read.",
    "barrier": "no_web_page"
   },
   {
@@ -4158,7 +4158,7 @@
    "permit": "LAG536653",
    "checked": "2026-11-14",
    "id": "la-s-h-farm-llc-ldeq-report",
-   "name": "S&h Farm, LLC",
+   "name": "S&H Farm, LLC",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -4173,7 +4173,7 @@
     "la-lac-33-i-ch39",
     "la-ldeq-spoc"
    ],
-   "note": "S&h Farm, LLC reports an unauthorized discharge to the State Police hotline by telephone and to LDEQ by telephone or LDEQ's online intake form (whose tracking number goes to the filer only), then in writing; LDEQ publishes no list and no public notice is required. No web channel found for the public. The permit itself was not read.",
+   "note": "S&H Farm, LLC reports an unauthorized discharge to the State Police hotline by telephone and to LDEQ by telephone or LDEQ's online intake form (whose tracking number goes to the filer only), then in writing; LDEQ publishes no list and no public notice is required. No web channel found for the public. The permit itself was not read.",
    "barrier": "no_web_page"
   },
   {
@@ -4571,31 +4571,6 @@
     "la-ldeq-spoc"
    ],
    "note": "St. Charles Parish Council reports an unauthorized discharge to the State Police hotline by telephone and to LDEQ by telephone or LDEQ's online intake form (whose tracking number goes to the filer only), then in writing; LDEQ publishes no list and no public notice is required. No web channel found for the public. The permit itself was not read.",
-   "barrier": "no_web_page"
-  },
-  {
-   "state": "LA",
-   "operator_id": "la-st-charles-parish-wastewater-dept-destrehan-wwtp",
-   "agency": null,
-   "permit": "LA0073539",
-   "checked": "2026-11-14",
-   "id": "la-st-charles-parish-wastewater-dept-destrehan-wwtp-ldeq-report",
-   "name": "St. Charles Parish Wastewater Dept--Destrehan WWTP",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "LAC 33:I.3915 and 3917 (an emergency discharge to the Louisiana State Police hotline within the first hour; a discharge above a reportable quantity within 24 hours of learning of it) and LAC 33:I.3925 (a written 'Unauthorized Discharge Notification Report' to LDEQ within seven calendar days); other permit excursions to LDEQ's Single Point of Contact; the permit's standard conditions add the reports of 40 CFR 122.41(l)(6)",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "none",
-   "records": false,
-   "noun": "Report to the state",
-   "sources": [
-    "la-lac-33-i-ch39",
-    "la-ldeq-spoc"
-   ],
-   "note": "St. Charles Parish Wastewater Dept--Destrehan WWTP reports an unauthorized discharge to the State Police hotline by telephone and to LDEQ by telephone or LDEQ's online intake form (whose tracking number goes to the filer only), then in writing; LDEQ publishes no list and no public notice is required. No web channel found for the public. The permit itself was not read.",
    "barrier": "no_web_page"
   },
   {
