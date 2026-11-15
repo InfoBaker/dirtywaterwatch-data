@@ -173,6 +173,7 @@ def find_date(s: str, pub: date) -> date | None:
     return None
 
 
+NEXT_DAY = re.compile(r"\b(?:the\s+)?(?:next|following)\s+(?:day|morning|afternoon|evening|night)\b", re.I)
 RELATIVE_DAY = re.compile(r"\b(today|tonight|this (?:morning|afternoon|evening)|yesterday)\b", re.I)
 
 
@@ -237,12 +238,21 @@ def times(text: str, pub: date) -> dict:
         # p.m.") is the publication day (verification 2 P2): never the start's day. No date at all: the start's day
         tail, head = x[w.start():], x[:w.start()]
         explicit = True
+        before = list(DATE.finditer(head))
         if DATE.search(tail):
             d2 = find_date(tail, pub)
+        elif NEXT_DAY.search(x):
+            # "stopped the next day at 4:00 p.m.": the day after the start's day (or after the one date the sentence
+            # gives before the stop), whatever the clock order (verification 3 P2-2)
+            if len(before) > 1:
+                break
+            d0 = find_date(before[0].group(0), pub) if before else day
+            if d0 is None:
+                break
+            d2 = d0 + timedelta(days=1)
         elif RELATIVE_DAY.search(tail):
             d2 = relative_day(RELATIVE_DAY.search(tail), pub)
         else:
-            before = list(DATE.finditer(head))
             if len(before) > 1:
                 break
             if before:
@@ -258,7 +268,7 @@ def times(text: str, pub: date) -> dict:
         end = datetime(d2.year, d2.month, d2.day, h, mi, tzinfo=TZ)
         basis = "the time the post gives for the overflow's end"
         if start is not None and end < start:
-            if re.search(r"next day|following day|the next morning", x, re.I) or (d2 == day and not explicit):
+            if d2 == day and not explicit:
                 end += timedelta(days=1)
                 basis += " (before the start time, so the next day)"
         # a day-only start: an explicit dated stop is kept when it is on or after the start's day (verification 2 P2)
