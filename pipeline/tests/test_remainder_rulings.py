@@ -98,9 +98,16 @@ def test_the_audits_rulings_are_recorded(state, gnis, to):
     assert N.REMAINDER_ON[(state, gnis)]["to"] == to
 
 
-
-def test_the_minnesota_file_carries_no_pomme_de_terre_copy():
+def test_the_files_carry_neither_copy_and_their_rows_point_at_the_river():
     nhd = json.loads((ROOT / "data" / "waters-nhd.json").read_text())
-    assert "pomme-de-terre-river-hodges-mn" not in {w["slug"] for w in nhd["waters"]}
-    for t in nhd["targets"]:
-        assert "pomme-de-terre-river-hodges-mn" not in set(t.get("slugs") or []) | set((t.get("reach_slugs") or {}).values())
+    slugs = {w["slug"] for w in nhd["waters"]}
+    gone = {"pomme-de-terre-river-hodges-mn": "pomme-de-terre-river-mn", "missouri-river-east-oliver-nd": "missouri-river-nd"}
+    assert not set(gone) & slugs
+    for t in nhd["targets"]:                      # no target row names either copy
+        assert not set(gone) & (set(t.get("slugs") or []) | set((t.get("reach_slugs") or {}).values()))
+    from common import load_outfall_registry       # no outfall is tied to either copy
+    assert not [o for o in load_outfall_registry(ROOT / "data") if o.get("water_slug") in gone]
+    plants = [json.loads(x.rstrip(",\n")) for x in (ROOT / "data" / "outfalls-plants-us.json").read_text().splitlines()
+              if x.startswith('{"') and ('"ND0022349"' in x or '"NDG589311"' in x)]
+    tied = {(r["npdes_permit"], r["outfall"]): r["water_slug"] for r in plants}
+    assert tied[("ND0022349", "002")] == tied[("NDG589311", "NODI")] == "missouri-river-nd"
