@@ -494,7 +494,7 @@ def test_indiana_name_placement_is_county_aware(monkeypatch):
           "raw": {"state": "IN"}}
     kept, why = S.county_slugs(list(waters), ev, waters, lambda slug, lat, lon: 50_000)
     assert kept == ["mill-creek-st-joseph-in"] and "St. Joseph" in why
-    assert S.COUNTY_STATES["OH"] == "oh-counties.json" and "IN" not in S.COUNTY_FIELD_STATES
+    assert S.COUNTY_STATES["OH"] == "oh-counties.json" and "IN" in S.COUNTY_FIELD_STATES
 
 
 def test_a_name_only_tie_beyond_25_km_is_refused_in_indiana():
@@ -810,3 +810,39 @@ def test_a_reopened_algae_advisory_renders_both_intervals_and_other_sources_are_
     other = dict(e[0], source_id="xx-example-source")
     assert len(S.event_intervals(other, "IN", now)) < len(ivs)
     assert S.EARLIER_PERIOD_SOURCES == {"ne-dwee-beachwatch", "in-idem-cyanobacteria"}
+
+
+def _in_water(slug, bbox):
+    return {"slug": slug, "name": "Sample Creek", "kind": "river", "state": "IN", "towns": [], "bbox": bbox,
+            "aliases": None}
+
+
+def _in_report(rid, county, text="Sample Creek"):
+    return {"event_id": f"in-echo-dmr-cso:{rid}", "source_id": "in-echo-dmr-cso", "source_record_id": rid,
+            "event_type": "cso", "status": "ended", "waterbody_text": text, "water_slugs": [], "water_match": "none",
+            "lat": None, "lon": None, "npdes_permit": None, "outfall_id": None,
+            "raw": {"state": "IN", "county": county}, "time_precision": "month", "started_at": "2025-08-01"}
+
+
+def test_a_county_without_a_point_constrains_indiana_placement(monkeypatch):
+    """Astra re-review 2026-11-14 P2-4: a Marion County record with no point is not put on St. Joseph County's Sample
+    Creek; with both namesakes it goes to Marion's; a qualified name is still refused; other states unchanged."""
+    import copy
+
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"IN"})
+    stj = _in_water("sample-creek-st-joseph-in", [-86.30, 41.60, -86.20, 41.70])
+    mar = _in_water("sample-creek-marion-in", [-86.20, 39.70, -86.10, 39.80])
+    one = S.Resolver({stj["slug"]: copy.deepcopy(stj)}, [], placement_rules={})
+    assert one.resolve(_in_report("a", "Marion"))["water_slugs"] == []
+    assert one.resolve(_in_report("b", "St. Joseph"))["water_slugs"] == [stj["slug"]]
+    both = S.Resolver({stj["slug"]: copy.deepcopy(stj), mar["slug"]: copy.deepcopy(mar)}, [], placement_rules={})
+    assert both.resolve(_in_report("c", "Marion"))["water_slugs"] == [mar["slug"]]
+    assert both.resolve(_in_report("d", "Marion", "Little Sample Creek"))["water_slugs"] == []
+    # the registry row's county reaches the resolver's stand-in record for an outfall with no point (Indiana only)
+    row = {"npdes_permit": "IN0000007", "outfall": "002", "state": "IN", "county": "Marion", "lat": None, "lon": None,
+           "receiving_water_echo": "Sample Creek"}
+    assert S.REGISTRY_COUNTY_STATES == {"IN"}
+    from ingest import outfall_waters as OW
+    assert OW.Matcher.fake(None, row, "Sample Creek")["raw"]["county"] == "Marion"
+    assert "county" not in OW.Matcher.fake(None, dict(row, state="TX", county="Harris"), "x")["raw"]

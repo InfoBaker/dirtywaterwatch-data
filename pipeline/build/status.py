@@ -1063,6 +1063,10 @@ COUNTY_STATES["UT"] = "ut-counties.json"       # Utah: DEQ's hotline log gives p
 COUNTY_FIELD_STATES.add("UT")    # a hotline report whose point is withheld (a private home) keeps its county field
 COUNTY_FIELD_STATES.add("TN")    # Tennessee: TDEC's posted streams and Events Report give the county, no point
 COUNTY_FIELD_STATES.add("OH")    # Ohio: a spill whose point lies outside its county keeps only raw.county (audit P3-4)
+COUNTY_FIELD_STATES.add("IN")    # Indiana: a record or outfall row with no point keeps its county (re-review P2-4)
+# States whose registry rows' county reaches the resolver's stand-in record for the outfall (outfall_waters and
+# Resolver.row_water): Indiana only, so no other state's ties change
+REGISTRY_COUNTY_STATES = {"IN"}
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}
@@ -2119,7 +2123,8 @@ class Resolver:
             out = (None, f"its receiving water '{name}' is a watershed label, not a water name")
             name = ""
         fake = {"npdes_permit": permit, "lat": row.get("lat"), "lon": row.get("lon"), "waterbody_text": name,
-                "raw": {"state": state, "town": row.get("city") or ""}}
+                "raw": {"state": state, "town": row.get("city") or "",
+                        **({"county": row["county"]} if state in REGISTRY_COUNTY_STATES and row.get("county") else {})}}
         slug = self.canon(row.get("water_slug"))
         if slug in self.waters:
             # a slug matched by name only must carry the receiving water's name (the registry once matched
