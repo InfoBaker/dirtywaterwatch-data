@@ -112,20 +112,43 @@ def _text(s: str) -> str:
 
 
 def hab_table(page: str) -> list[dict] | None:
-    """The program page's "HAB Watches & Advisories" rows, or None when the table is not on the page (a page that
-    could not be read: nothing is ended)."""
+    """The program page's "HAB Watches & Advisories" rows, or None when the table is not on the page or is not in the
+    shape DES publishes (a page that could not be read, an error row, changed columns, a cut-off table: nothing is
+    ended). An empty list only from a whole table with no rows, or DES's "no current watches" line (re-review P1-3)."""
     i = page.find("HAB Watches")
     if i < 0:
         return None
     m = re.search(r"<table.*?</table>", page[i:], re.S)
     if not m:
         return [] if re.search(r"no current watches", page[i:i + 3000], re.I) else None
+    head = [_text(c).lower() for c in re.findall(r"<th[^>]*>(.*?)</th>", m.group(0), re.S)]
+    if head and not re.search(r"level|advisory|watch", head[0]):
+        return None                                    # the columns changed: not read as DES's table
     rows = []
     for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", m.group(0), re.S):
         cells = [_text(c) for c in re.findall(r"<td[^>]*>(.*?)</td>", tr, re.S)]
-        if len(cells) >= 4 and any(cells):
-            rows.append({"level": cells[0], "area": cells[1], "water": cells[2], "issued": cells[3]})
+        if not any(cells):
+            continue                                   # a header row or an empty spacer
+        if len(cells) < 4 or cells[0].strip().lower() not in HAB_TIERS or not _date(cells[3]) or not cells[2]:
+            if len(cells) == 1 and re.search(r"no current watches", cells[0], re.I):
+                continue
+            return None                                # an error row or a row not in DES's shape
+        rows.append({"level": cells[0], "area": cells[1], "water": cells[2], "issued": cells[3]})
     return rows
+
+
+def check_layer(js, required: tuple[str, ...]) -> list[dict]:
+    """A layer query's features, or ValueError for an error, a cut-off (exceededTransferLimit) or changed fields: an
+    incomplete response never ends a record (re-review P1-3)."""
+    if not isinstance(js, dict) or js.get("error") or not isinstance(js.get("features"), list):
+        raise ValueError("the layer returned an error or no feature list")
+    if js.get("exceededTransferLimit"):
+        raise ValueError("the layer response was cut off (exceededTransferLimit)")
+    for f in js["features"]:
+        a = (f or {}).get("attributes")
+        if not isinstance(a, dict) or any(k not in a for k in required):
+            raise ValueError(f"a feature lacks the fields {required}")
+    return js["features"]
 
 
 def _date(s: str | None) -> str | None:
@@ -350,8 +373,7 @@ def run(args) -> int:
         try:
             r = requests.get(BEACH_LAYER, headers=HEADERS, timeout=TIMEOUT)
             r.raise_for_status()
-            js = r.json()
-            beach = js["features"]
+            beach = check_layer(r.json(), ("STAT", "ADVISORY"))
             if not beach:
                 raise RuntimeError("no stations")
         except (requests.RequestException, ValueError, KeyError, RuntimeError) as e:
@@ -360,7 +382,7 @@ def run(args) -> int:
         try:
             r = requests.get(HAB_LAYER, headers=HEADERS, timeout=TIMEOUT)
             r.raise_for_status()
-            hab = r.json()["features"]
+            hab = check_layer(r.json(), ("NAME", "Date", "Advisory_Tier"))
             p = requests.get(HAB_PAGE, headers=HEADERS, timeout=TIMEOUT)
             p.raise_for_status()
             table = hab_table(p.text)

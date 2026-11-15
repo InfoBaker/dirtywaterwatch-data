@@ -363,6 +363,55 @@ def test_an_unreadable_table_fails_the_bloom_feed_and_keeps_its_records(monkeypa
     assert json.loads((tmp_path / "sc-des-beach-monitoring.json").read_text())["ok"] is True
 
 
+def test_malformed_tables_and_incomplete_layers_fail_and_end_nothing(monkeypatch, tmp_path):
+    # re-review P1-3: an error row, changed columns or a cut-off table is not an empty listing; an incomplete layer
+    # response is refused; the previous records stay and no bloom ends
+    head = "<h2>HAB Watches &amp; Advisories</h2><table><tr><th>Advisory Level</th></tr>"
+    assert A.hab_table(head + "<tr><td>Service unavailable</td></tr></table>") is None
+    assert A.hab_table("<h2>HAB Watches</h2><table><tr><th>Lake</th></tr><tr><td>Advisory</td><td>Example Cove</td>"
+                       "<td>Lake Example</td><td>07/04/2026</td></tr></table>") is None
+    assert A.hab_table(head + "<tr><td>Advisory</td><td>Example Cove</td><td>Lake Example</td><td>soon</td></tr>"
+                       "</table>") is None
+    assert A.hab_table(head + "<tr><td>Advisory</td><td>Example Cove</td>") is None          # cut off
+    assert A.hab_table(head + "</table>") == []                                          # a whole, empty table
+    import pytest
+    for js in ({"error": {"code": 500}}, {"features": [], "exceededTransferLimit": True},
+               {"features": [{"attributes": {"NAME": "Lake Example"}}]}, None):
+        with pytest.raises(ValueError):
+            A.check_layer(js, ("NAME", "Date", "Advisory_Tier"))
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(A, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(A, "save_raw", lambda *a, **k: None)
+    s = saved()
+    _, hstate, _ = A.hab_records(s["hab"], s["hab_table"], {}, T0)
+    (tmp_path / "state.json").write_text(json.dumps({"hab": hstate}))
+    (tmp_path / "sc-des-hab.json").write_text(json.dumps({"records": [{"event_id": "x"}], "meta": {}}))
+
+    class Resp:
+        def __init__(self, js=None, text=""):
+            self._js, self.text = js, text
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self._js
+
+    def fake_get(url, **k):
+        if "BW_Monitoring" in url:
+            return Resp({"features": s["beach"]})
+        if "algal_hydro" in url:
+            return Resp({"features": []})
+        return Resp(text=head + "<tr><td>Service unavailable</td></tr></table>")
+    monkeypatch.setattr(A.requests, "get", fake_get)
+    assert A.main(["--at", T1]) == 1
+    out = json.loads((tmp_path / "sc-des-hab.json").read_text())
+    assert out["ok"] is False and out["records"] == [{"event_id": "x"}]
+    st = json.loads((tmp_path / "state.json").read_text())
+    assert all(not v.get("ended_at") for v in st["hab"].values())
+
+
 def test_points_are_rounded_before_anything_is_saved():
     f = [{"attributes": {"STAT": "X"}, "geometry": {"x": -79.123456, "y": 33.654321}}]
     assert A.safe_features(f, "geometry")[0]["geometry"] == {"x": -79.123, "y": 33.654}
