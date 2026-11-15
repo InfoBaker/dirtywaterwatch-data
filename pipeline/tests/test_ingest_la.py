@@ -295,3 +295,44 @@ def test_a_report_with_no_accepted_copy_is_tried_again_on_the_reread_cadence():
     state["reports"]["96"] = {"number": 96, "url": links[96], "layout_ok": True, "rows": [], "read_at": "2026-11-01T00:00:00Z"}
     assert Q.due(state, links, "2026-11-10T00:00:00Z") == []
     assert (91, links[91]) in Q.due(state, links, "2026-12-05T00:00:00Z")
+
+
+def test_the_25_km_cap_is_measured_from_a_point_set_aside_as_suspect():
+    """Re-review P2-6: apply() clears a suspect point (coords_problem) before measuring; in WV and LA the cap is
+    measured from that point, so a 30 km name-only tie is refused and a 20 km one kept. Texas and other states keep
+    the earlier behaviour (no distance, no cap)."""
+    from ingest import outfall_waters as OW
+
+    class MT:
+        def __init__(self, d):
+            self.d = d
+        waters = {"example-bayou-la": {"name": "Example Bayou", "kind": "river"}}
+
+        def dist(self, s, lat, lon):
+            return None if lat is None or lon is None else self.d
+
+        def source_of(self, s):
+            return "nhd"
+
+        def no_outline(self, s):
+            return False
+
+        def evidence_of(self):
+            return {}
+    res = {"slug": "example-bayou-la", "step": "name", "how": "the only record of that name",
+           "coords_problem": "point 12 km from its named water"}
+
+    def row(st):
+        return {"state": st, "npdes_permit": f"{st}0000001", "lat": 30.4, "lon": -91.1,
+                "receiving_water_echo": "EXAMPLE BAYOU"}
+    for st in ("WV", "LA"):
+        o = row(st)
+        OW.apply(o, res, MT(30_000.0))
+        assert o["water_slug"] is None and "30 km" in o["no_water_reason"] and o["echo_lat"] == 30.4
+        o = row(st)
+        OW.apply(o, res, MT(20_000.0))
+        assert o["water_slug"] == "example-bayou-la" and o["lat"] is None and o["match"] == "name_only"
+    for st in ("TX", "OK"):
+        o = row(st)
+        OW.apply(o, res, MT(30_000.0))
+        assert o["water_slug"] == "example-bayou-la" and o["distance_m"] is None          # unchanged
