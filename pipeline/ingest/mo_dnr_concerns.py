@@ -60,7 +60,7 @@ import requests
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
 from ingest import nh_pdftext
-from ingest.mo_kc_water_news import waters
+from ingest.mo_kc_water_news import migrate_water_text, water_text, waters
 
 SOURCE_ID = "mo-dnr-concern-reports"
 INDEX = "https://dnr.mo.gov/commissions-boards-councils/clean-water-commission"
@@ -265,7 +265,7 @@ def record(b: dict, meta: dict, keys, at: str) -> tuple[str, dict | None, dict]:
            "time_basis": "dates only, Central time; no end is given"}
     rec = event(source_id=SOURCE_ID, source_record_id=b["no"], event_type="sso", status="unknown",
                 discharger_name=operator, npdes_permit=raw["permit_named"],
-                waterbody_text=ws[0] if ws else None, started_at=start, time_precision="day",
+                waterbody_text=water_text(ws), started_at=start, time_precision="day",
                 reported_at=received, published_at=None, fetched_at=at, material="sewage",
                 authority=AUTHORITY + (" (the operator's report)" if find == "operator_reported" else
                                        " (the Department's finding)" if find == "observed" else
@@ -277,6 +277,8 @@ def record(b: dict, meta: dict, keys, at: str) -> tuple[str, dict | None, dict]:
 def run(reports: list[tuple[bytes, dict]], prev: list[dict], at: str) -> tuple[list[dict], dict, list[dict]]:
     keys = _county_keys()
     recs = {r["event_id"]: r for r in prev}
+    for r in recs.values():
+        migrate_water_text(r)
     stats, safe_rows, withdrawn = Counter(), [], []
     parsed = []
     for pdf, meta in reports:

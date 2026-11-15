@@ -65,7 +65,7 @@ def test_kc_heavy_rain_post_morning_time_and_bond_post_dropped():
     recs, _ = kc()
     r = recs["9004"]
     assert r["started_at"] == "2020-07-27T07:46:00-05:00" and r["ended_at"] == "2020-07-27T15:14:00-05:00"
-    assert r["raw"]["multiple_sites"] is True and r["waterbody_text"] == "Rock Creek"
+    assert r["raw"]["multiple_sites"] is True and r["waterbody_text"] == "Rock Creek; Missouri River"
     assert "Missouri River" in r["raw"]["waters_named"]
     assert "Buckeye Creek" not in r["raw"]["waters_named"]          # a pump station's name, not a water reached
     assert "9005" not in recs and "9007" not in recs
@@ -129,7 +129,7 @@ def test_msd_contained_spill_unplaced_follow_up_linked_sheen_and_press_coverage_
     assert recs["8003"]["duplicate_of"] == recs["8002"]["event_id"]
     assert "8004" not in recs and "8005" not in recs
     r = recs["8006"]
-    assert r["started_at"] == "2015-06-12" and r["volume_gal"] == 77000 and r["waterbody_text"] == "Sugar Creek"
+    assert r["started_at"] == "2015-06-12" and r["volume_gal"] == 77000 and r["waterbody_text"] == "Sugar Creek; Mississippi River"
 
 
 # ---------------------------------------------------------------- DNR concern reports

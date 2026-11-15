@@ -264,6 +264,20 @@ def waters(text: str) -> list[str]:
     return out
 
 
+def water_text(ws: list[str] | None) -> str | None:
+    """Every water a report names, in its order, for placement ("Rock Creek; Missouri River"): the placement reads each
+    name in the text, so no affected water is dropped for the first (re-review P1-3). raw.waters_named keeps the list."""
+    return "; ".join(ws) if ws else None
+
+
+def migrate_water_text(r: dict) -> None:
+    """A record saved before water_text (its waterbody_text the first water only) gets every water at the next read."""
+    raw = r.get("raw") or {}
+    ws = raw.get("waters_named")
+    if isinstance(ws, list) and len(ws) > 1 and r.get("waterbody_text") == ws[0] and raw.get("reached_water") is not False:
+        r["waterbody_text"] = water_text(ws)
+
+
 def place_text(title: str) -> str | None:
     m = re.search(r"\b(?:near|at)\s+(.+)$", UPDATE.sub("", title), re.I)
     return common.strip_house_numbers(m.group(1)).strip(" .") if m else None
@@ -301,13 +315,13 @@ def record(it: dict, at: str) -> dict | None:
     if not t["start"]:
         return event(source_id=SOURCE_ID, source_record_id=pid, event_type="sso", status="unknown",
                      discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, outfall_name=place,
-                     waterbody_text=ws[0] if ws else None, published_at=pub.isoformat() if pub else None,
+                     waterbody_text=water_text(ws), published_at=pub.isoformat() if pub else None,
                      reported_at=None, fetched_at=at, authority=AUTHORITY, source_url=it["link"],
                      parse_error="no date for the overflow in the post", raw=raw)
     return event(
         source_id=SOURCE_ID, source_record_id=pid, event_type="plant_bypass" if plant else "sso", status="unknown",
         discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, outfall_name=place,
-        waterbody_text=ws[0] if ws and raw["reached_water"] is not False else None,
+        waterbody_text=water_text(ws) if raw["reached_water"] is not False else None,
         started_at=t["start"], ended_at=t["end"], time_precision=t["precision"],
         published_at=pub.isoformat() if pub else None, reported_at=None, fetched_at=at,
         material="wastewater", volume_gal=v, volume_text=vtext, estimate_flag=flag, authority=AUTHORITY,
@@ -343,6 +357,8 @@ def link_updates(recs: dict[str, dict]) -> int:
 
 def run(feeds: list[bytes], prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
+    for r in recs.values():
+        migrate_water_text(r)
     stats = {"items": 0, "news_posts": 0, "notices": 0, "not_notices": 0, "undated": 0}
     seen = set()
     for body in feeds:

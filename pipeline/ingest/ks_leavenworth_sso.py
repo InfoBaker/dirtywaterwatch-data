@@ -47,7 +47,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
-from ingest.mo_kc_water_news import DATE, _month, sentences, waters
+from ingest.mo_kc_water_news import DATE, _month, migrate_water_text, sentences, water_text, waters
 
 SOURCE_ID = "ks-leavenworth-sso-transparency"
 BASE = "https://www.leavenworthks.gov"
@@ -188,7 +188,7 @@ def record(path: str, h: str, at: str) -> dict:
     return event(
         source_id=SOURCE_ID, source_record_id=record_id(path), event_type="sso", status="unknown",
         discharger_id=None if prison else DISCHARGER_ID, discharger_name=None if prison else DISCHARGER,
-        outfall_name=place_of(title), waterbody_text=ws[0] if ws else None, started_at=start,
+        outfall_name=place_of(title), waterbody_text=water_text(ws), started_at=start,
         time_precision=prec if start else None, ended_at=end, published_at=pub, reported_at=None, fetched_at=at,
         material="sewage", volume_gal=vol, volume_text=v.group(0) if v else None, estimate_flag=flag,
         authority=AUTHORITY, advice_text=adv.group(0).strip() if adv else None, source_url=BASE + path,
@@ -197,6 +197,8 @@ def record(path: str, h: str, at: str) -> dict:
 
 def run(pages: dict[str, str], prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
+    for r in recs.values():
+        migrate_water_text(r)
     stats = {"pages": 0, "undated": 0}
     for path, h in sorted(pages.items()):
         r = record(path, h, at)
