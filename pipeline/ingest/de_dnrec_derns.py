@@ -69,8 +69,9 @@ Lifecycle
   - A detail page that cannot be read does not hold the feed: the readable releases are kept and updated, the
     unreadable one is listed in meta.unread with its reason and last try and asked again on the next run (after
     MAX_DETAIL_FAILURES reads, once every RETRY_HOURS, never given up), and no record is lifted or removed because
-    of it (a release whose detail was read before keeps that detail). A run in which a detail page failed is
-    ok=False and names it, with the records still written (the pattern of Baton Rouge's quarterly reports).
+    of it (a release whose detail was read before keeps that detail). A run in which a detail page failed, or while a
+    failed page is still unread (its retry back-off included), is ok=False and names it, with the records still
+    written and updated (the pattern of Baton Rouge's quarterly reports; verify2 P2-4).
   - raw._placement "named_water_only": a release is never geolocated from its street, plant or pump station
     (build/provisional_outfalls.py); only a water its notes name places it.
 
@@ -792,6 +793,12 @@ def run(args) -> int:
     if failed_keys:
         errors.append(f"{len(failed_keys)} release detail page(s) not read this run "
                       f"({', '.join(sorted(failed_keys)[:10])}); listed in meta.unread and asked again next run")
+    waiting = [k for k in meta["unread"] if k not in failed_keys]
+    if waiting:
+        # a failed detail page still unread, not asked this run (its retry back-off): the feed stays not ok on every
+        # run until it is read, while the readable releases are still written (verify2 P2-4)
+        errors.append(f"{len(waiting)} release detail page(s) still unread after a failed read "
+                      f"({', '.join(waiting[:10])}); waiting for the retry, listed in meta.unread")
     if errors:
         # the readable releases are written and updated; the run says what it could not read (ok=False). No record
         # is lifted or removed for an unread page: the state keeps every release and every detail read before.
