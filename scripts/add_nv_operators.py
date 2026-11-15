@@ -115,7 +115,7 @@ SPARKS = {"id": "nv-city-of-sparks", "name": "City of Sparks (sewer collection s
           "notes": ("The city's sewers deliver to the Truckee Meadows Water Reclamation Facility (NV0020150); the system "
                     "holds no NPDES permit of its own. A 2022 spill from its system into the Truckee River was not "
                     "reported to NDEP (NDEP's later findings, as reported by the press), the case that led to NRS "
-                    "445A.467 (research/nv/report.md §2.3).")}
+                    "445A.467 (the site repository's research/nv/report.md §2.3).")}
 PRIVATE_FORMS = {"investor-owned utility", "member-owned utility", "homeowners' association", "mobile-home park",
                  "campground or resort", "private club", "business or industrial", "institution",
                  "facility (permittee not named)"}

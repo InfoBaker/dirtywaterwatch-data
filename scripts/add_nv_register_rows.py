@@ -3,7 +3,7 @@ they are reproducible.
 
 Usage: pipeline/.venv/bin/python -I scripts/add_nv_register_rows.py [--dry-run]
 
-The law (research/nv/report.md §2.1 in the site repository; research/nv/expansion-research.md):
+The law (NRS 445A.467, read 2026-11-09; the site repository's research/nv/report.md §2.1):
   - NRS 445A.467 (added in 2025 by SB 276; official chapter read 2026-11-09, revision of 2026-04-15): "Any city, county,
     unincorporated town, general improvement district, wastewater district or water authority of this State that has
     powers, duties or jurisdiction within the area of the incident that has been notified or is aware of the incident
@@ -60,7 +60,7 @@ AGENCY = [
      "note": ("The notice goes to NDEP through its online intake (Nevada Environmental Activities, a reporting form "
               "and account login) or by telephone; no deadline is set, and NDEP passes it to an Indian tribe that may "
               "be affected. NDEP publishes no list of the notices and no public view of the intake was found: no web "
-              f"channel found. ({STATUTE}; research/nv/expansion-research.md)")},
+              f"channel found. ({STATUTE})")},
     {"id": "nv-epa-echo-overflow-events", "agency": "U.S. Environmental Protection Agency (ECHO)",
      "name": "U.S. Environmental Protection Agency (ECHO)", "channel_kind": "feed", "urls": [], "method": None,
      "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "none_found",
@@ -91,8 +91,8 @@ AGENCY = [
      "name": "Nevada harmful algal bloom dashboard (Power BI)", "channel_kind": "state_alert_page",
      "urls": [DASHBOARD], "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
      "unmonitored_reason": "image_only", "publishes": "status", "records": False, "sources": ["nv-ndep-hab-dashboard"],
-     "note": ("The state's only statewide bloom status, shown in a Power BI report that draws the data as a picture: the "
-              "page is a script shell with no rows, no download and no data endpoint (expansion research 2026-11-09). Not read; a supported export is "
+     "note": ("The only statewide bloom status found, shown in a Power BI report: the "
+              "page returned only its script shell on 2026-11-09, in which no rows, no download and no data address were found (the report's own data calls were not examined). Not read; a supported export is "
               "an owner request. Blooms, not sewage.")},
     {"id": "nv-ndep-hab-email", "agency": "Nevada Division of Environmental Protection",
      "name": "Nevada harmful algal bloom weekly e-mail update", "channel_kind": "email_list", "urls": [],
@@ -188,7 +188,7 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             publishes="none", records=False, noun="Report to the state", sources=["nv-law-sb276-2025"],
             note=(f"{name} reports a sewage discharge to NDEP: {what}. NDEP publishes no list of them; no public notice "
                   "is required: no web channel found. The permit itself was not read: the federal standard condition "
-                  "is assumed. (research/nv/expansion-research.md)"))))
+                  "is assumed."))))
     return rows
 
 
