@@ -1059,6 +1059,37 @@ def test_a_lake_located_on_a_creek_is_the_whole_lake(tmp_path, monkeypatch, area
     assert T.hab_parts("Lake Specimen near Exampleville") == ("Lake Specimen", None, "near Exampleville")
 
 
+def test_a_bloom_advisory_that_leaves_the_file_ends_at_poll_precision(tmp_path, monkeypatch):
+    """Verification 2 P2-3: Lake Exemplar listed at one read and gone at the next ends at the second read; the end is
+    marked poll precision (raw.ended_at_precision) and DEQ's posting precision (day) is unchanged; the status build
+    ends the interval at that read."""
+    from datetime import datetime as dt
+    ex = {"waterbody": "Lake Exemplar", "county": "LaSample County", "area": "Sampletown, AR",
+          "date": "October 20, 2026", "lifted": ""}
+    sp = {"waterbody": "Lake Specimen", "county": "Sample County", "area": "Exampleville, AR",
+          "date": "October 21, 2026", "lifted": "October 25, 2026"}
+    _, out = habs(monkeypatch, tmp_path, {"updated": "x", "advisories": [ex, sp]})
+    first = {r["waterbody_text"]: r for r in json.loads(out.read_text())["records"]}
+    assert "ended_at_precision" not in first["Lake Exemplar"]["raw"]
+    monkeypatch.setattr(H, "now_iso", lambda: "2026-11-01T06:00:00Z")
+    habs(monkeypatch, tmp_path, {"updated": "x", "advisories": [sp]}, prev_out=out)
+    recs = {r["waterbody_text"]: r for r in json.loads(out.read_text())["records"]}
+    gone = recs["Lake Exemplar"]
+    assert gone["raw"]["_unlisted_since"] == "2026-11-01T06:00:00Z" and gone["ended_at"] is None
+    assert gone["raw"]["ended_at_precision"] == "poll" and gone["time_precision"] == "day"
+    assert "first read" in gone["raw"]["end_basis"]
+    # DEQ's own lift keeps its day precision
+    assert recs["Lake Specimen"]["raw"]["ended_at_precision"] == "day"
+    # through the status build: the interval ends at that read, before which the advisory was red
+    from datetime import UTC
+    from build import status as S
+    rules = json.loads((R.ROOT / "data" / "rules.json").read_text())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"AR"})
+    ivs = S.event_intervals({**gone, "source_id": H.SOURCE_ID}, "AR", dt(2026, 11, 2, 12, tzinfo=UTC), None, rules)
+    assert ivs and ivs[0]["color"] == "red"
+    assert max(i["end"] for i in ivs if i["end"] is not None) == dt(2026, 11, 1, 6, tzinfo=UTC)
+
+
 def test_a_standing_advisory_with_no_cited_point_is_listed_by_the_build(tmp_path, monkeypatch):
     """Verification P1-1: a standing bloom advisory with no cited point (as Mom's Lake) is never given one, and the
     AR-live status build lists it among the state's unplaced events rather than dropping it."""
