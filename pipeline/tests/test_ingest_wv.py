@@ -383,3 +383,42 @@ def test_bloom_map_text_loses_house_numbers_and_reporting_names_before_any_write
     assert recs["1-7"]["advice_text"].endswith("Avoid contact near [house number removed] Example Lane.")
     assert recs["1-8"]["advice_text"].endswith("Avoid contact with the water.")
     assert H.WITHHELD in recs["1-10"]["advice_text"]
+
+
+def test_bloom_area_marker_is_inside_deps_area_and_the_extent_is_kept():
+    """Re-review P2-7: concave areas, holes, multipart areas and segments. Rings are esri's (outer clockwise)."""
+    from shapely.geometry import Point, shape
+    # a U-shaped cove: its vertex mean (39.156, -80.167 style) falls in the open middle, outside the water
+    u = [[-80.20, 39.20], [-80.18, 39.20], [-80.18, 39.12], [-80.14, 39.12], [-80.14, 39.20], [-80.12, 39.20],
+         [-80.12, 39.10], [-80.20, 39.10], [-80.20, 39.20]]
+    from shapely.geometry import LinearRing
+    u_cw = list(reversed(u)) if LinearRing(u).is_ccw else u
+    lat, lon, ext = H.place("area", {"rings": [u_cw]})
+    area = shape(ext)
+    mean = (sum(p[1] for p in u_cw) / len(u_cw), sum(p[0] for p in u_cw) / len(u_cw))
+    assert not area.contains(Point(mean[1], mean[0]))               # the old marker lay outside the area
+    assert area.buffer(1e-9).contains(Point(lon, lat))
+    assert all(len(str(c).split(".")[-1]) <= 3 for ring in ext["coordinates"] for pt in ring for c in pt)
+    # a lake with an island: the marker is never on the island
+    outer = [[-80.0, 39.0], [-80.0, 39.1], [-79.9, 39.1], [-79.9, 39.0], [-80.0, 39.0]]          # clockwise
+    hole = [[-79.97, 39.03], [-79.93, 39.03], [-79.93, 39.07], [-79.97, 39.07], [-79.97, 39.03]]  # counter-clockwise
+    lat, lon, ext = H.place("area", {"rings": [outer, hole]})
+    poly = shape(ext)
+    assert len(poly.interiors) == 1 and poly.buffer(1e-9).contains(Point(lon, lat))
+    assert not shape({"type": "Polygon", "coordinates": [hole]}).contains(Point(lon, lat))
+    # two separate coves: one multipart area, the marker on one of its parts
+    other = [[-79.5, 39.5], [-79.5, 39.6], [-79.4, 39.6], [-79.4, 39.5], [-79.5, 39.5]]
+    lat, lon, ext = H.place("area", {"rings": [outer, other]})
+    assert ext["type"] == "MultiPolygon" and shape(ext).buffer(1e-9).contains(Point(lon, lat))
+    # a stream segment: the marker on the line, half way along, and the line kept
+    line = [[-80.3, 39.3], [-80.3, 39.4], [-80.1, 39.4]]
+    lat, lon, ext = H.place("segment", {"paths": [line]})
+    assert ext["type"] == "LineString" and shape(ext).distance(Point(lon, lat)) < 0.001
+    assert (lat, lon) == (39.4, -80.25)
+    # the record carries the extent and says how its marker was chosen
+    a = {"1": {"features": []}, "2": {"features": []},
+         "3": {"features": [{"attributes": {"OBJECTID": 5, "Advisory": "Avoid contact", "DateObserved": 1786000000000},
+                             "geometry": {"rings": [outer, hole]}}]}}
+    r = H.records(H.update({}, H.rows_of(a), "2026-07-01T12:00:00Z"))[0]
+    assert r["raw"]["agency_extent"]["type"] == "Polygon" and r["raw"]["marker_basis"] == "an interior point of DEP's area"
+    assert shape(r["raw"]["agency_extent"]).buffer(1e-9).contains(Point(r["lon"], r["lat"]))
