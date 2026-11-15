@@ -132,6 +132,21 @@ def check_ids(rows: list[dict]) -> tuple[list[dict], int]:
     return good, bad
 
 
+# a decimal degree written to more than three places ("35.123456, -93.654321", "Lat 35.1234 Long -93.6543"): a filer's
+# point in the report's own words, which can be a home; rounded to 0.001 degree before any save (verification 2 P1-3)
+FINE_DEGREE = re.compile(r"(?<![\d.])(-?\d{1,3}\.\d{4,})(?![\d.])")
+COORD_TEXT_FIELDS = ("location", "cause", "action_taken", "overflow_type", "environmental_damage", "impact")
+
+
+def round_coords(row: dict) -> dict:
+    """The row with every decimal degree in its free text rounded to three places (the event-point rule); a number
+    beyond 180 is not a degree and stays."""
+    def r3(m):
+        v = float(m.group(1))
+        return f"{round(v, 3):.3f}" if abs(v) <= 180 else m.group(1)
+    return {**row, **{f: FINE_DEGREE.sub(r3, row[f]) for f in COORD_TEXT_FIELDS if isinstance(row.get(f), str)}}
+
+
 def text(fragment: str) -> str:
     t = re.sub(r"<br\s*/?>", " ", fragment or "", flags=re.I)
     t = re.sub(r"<[^>]+>", " ", t)
@@ -313,6 +328,7 @@ def main(argv: list[str] | None = None) -> int:
             elif last_deep:
                 info["deep_read_at"] = last_deep
         rows, no_id = check_ids(rows)
+        rows = [round_coords(r) for r in rows]
     except (requests.RequestException, SearchFailed, ValueError, OSError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
@@ -324,7 +340,7 @@ def main(argv: list[str] | None = None) -> int:
         p = save_raw(SOURCE_ID, json.dumps(doc, ensure_ascii=False, sort_keys=True).encode(), "json")
         raw_path = str(p.relative_to(ROOT))
     polled = len(rows)
-    rows = rows + carried_rows(prev, start, {r.get("confirmation_no") for r in rows})
+    rows = rows + [round_coords(r) for r in carried_rows(prev, start, {r.get("confirmation_no") for r in rows})]
     try:
         records, stats = runner.build(SOURCE_ID, block, rows, fetched_at, prev, None)
     except Exception as e:  # noqa: BLE001 - a run that cannot finish keeps the previous records
