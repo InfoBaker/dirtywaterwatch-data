@@ -101,3 +101,79 @@ def test_a_result_that_leaves_the_table_keeps_its_record_and_an_unreadable_page_
 
 def test_the_fixture_names_no_person():
     assert not re.search(r"@|\(\d{3}\)\s*\d{3}-\d{4}|\bMr\.|\bMs\.", PAGE)
+
+
+# ---- the registry rows -----------------------------------------------------------------------------------------
+
+def _ops():
+    return [r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "OK"]
+
+
+def test_every_oklahoma_permit_is_in_exactly_one_row():
+    from collections import Counter
+    every = Counter(p for r in json.loads((ROOT / "data" / "dischargers.json").read_text())
+                    for p in dict.fromkeys([r.get("npdes_permit"), *(r.get("npdes_permits") or [])]) if p)
+    plants = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
+              if r.get("state") == "OK"}
+    cand = json.loads((ROOT / "research" / "ok" / "private-utilities-candidates.json").read_text())
+    wanted = plants | {c["npdes_permit"] for c in cand["candidates"]}
+    assert all(every[p] == 1 for p in wanted), [p for p in wanted if every[p] != 1]
+    held = {p for r in _ops() for p in r["npdes_permits"]}
+    assert wanted <= held and len(plants) == 316
+    okc = next(r for r in _ops() if r["id"] == "ok-oklahoma-city-water-utilities-trust")
+    assert len(okc["npdes_permits"]) == 5 and "ok-okc-utilities" in okc["aliases"]
+    for rid in ("ok-tulsa", "ok-broken-arrow", "ok-norman", "ok-lawton", "ok-sulphur"):
+        assert sum(rid in r["aliases"] for r in _ops()) == 1
+
+
+def test_oklahoma_legal_forms_scope_and_no_individual():
+    from ingest import dischargers_schema as DS
+    rows = _ops()
+    assert not DS.check_legal_forms(rows)
+    tribal = {r["id"] for r in rows if r["legal_form"] == "tribal"}
+    assert {"ok-seneca-cayuga-tribe", "ok-otoe-missouria-tribe", "ok-kickapoo-wwtp",
+            "ok-chickasaw-tribal-utilities-authority"} == tribal
+    for r in rows:
+        assert ("tribal permit" in r["notification_channel"]) == (r["id"] in tribal), r["id"]
+    choctaw = next(r for r in rows if r["id"] == "ok-choctaw-utilities-authority")
+    assert choctaw["legal_form"] == "authority"                  # the City of Choctaw's, not a tribal body
+    hidden = next(r for r in rows if "OK0034835" in r["npdes_permits"])
+    assert hidden["legal_form"] == "facility (permittee not named)" and "OK0034835" in hidden["name"]
+    for r in rows:
+        assert "[name removed]" not in r["name"]
+    channel = rows[0]["notification_channel"] if rows[0]["legal_form"] != "tribal" else rows[1]["notification_channel"]
+    assert "24 hours" in channel and "48 hours" in channel and "605-011" in channel
+
+
+def test_oklahoma_register_rows():
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "ok.json").read_text())["channels"]}
+    for r in _ops():
+        row = reg[f"{r['id']}-deq-report"]
+        assert row["urls"] == [] and row["barrier"] == "no_web_page" and row["records"] is False
+    assert reg["ok-nps-chickasaw-bacteria"]["feed_source_id"] == N.SOURCE_ID
+    assert reg["ok-usace-tulsa-district"]["barrier"] == "bot_wall"
+    assert reg["ok-owrb-monitoring-data"]["barrier"] == "login_required"
+    assert reg["ok-tulsa-sewer-overflow-line"]["barrier"] == "phone_only"
+    assert "48 hours" in reg["ok-deq-bypass-sso-report"]["note"] and reg["ok-deq-wastewater-reporting-page"]["monitored"]
+
+
+def test_oklahoma_rules_row_and_text():
+    ok = json.loads((ROOT / "data" / "rules.json").read_text())["red"]["by_state"]["OK"]
+    assert ok["hours"] is None and "Part III B.6" in ok["source"] and "48 hours" in ok["basis"]
+    assert not re.search(r"\b(safe|clean)\b", ok["basis"], re.I)
+    t = (ROOT / "research" / "ok" / "state-text.md").read_text()
+    assert t.startswith("---\nstate: OK\nname: Oklahoma\nupdated: ")
+    for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
+              "Known problems in the data", "What this site does about it"):
+        assert f"**{h}.**" in t
+    assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
+    assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t
+    assert "48 hours" in t and "No sewage discharge report is published" in t and "never as the park's own notice" in t
+
+
+def test_oklahoma_missing_waters_list():
+    d = json.loads((ROOT / "research" / "ok" / "receiving-waters-missing.json").read_text())
+    assert d["state"] == "OK" and d["waters"] == len(d["rows"])
+    listed = {r["name"] for r in d["rows"]} | {r["name"] for r in d.get("resolved", [])}
+    assert {N.PLACES[p][0] for p in N.PLACES} <= listed
+    assert all(r["county"] == "Murray County" for r in d["rows"])
