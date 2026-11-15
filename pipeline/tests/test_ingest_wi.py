@@ -923,3 +923,46 @@ def test_v_3_names_and_private_home_points_never_reach_a_save(monkeypatch, tmp_p
     assert M.safe_line("The Milwaukee Metropolitan Sewerage District reported an overflow into the Kinnickinnic "
                        "River and Wilson Park Creek.") == ("The Milwaukee Metropolitan Sewerage District reported an "
                                                           "overflow into the Kinnickinnic River and Wilson Park Creek.")
+
+
+def _caution_at_publication(recs):
+    """(records, in caution when posted, of those counted from the post itself, caution already passed) from the
+    status engine's own intervals at each post's publication time."""
+    from datetime import datetime, timezone
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    n = live = from_pub = passed = 0
+    for r in recs:
+        pub = datetime.fromisoformat(r["published_at"]).astimezone(timezone.utc)
+        ys = [iv for iv in S.event_intervals(r, "WI", pub, rules=rules)
+              if iv["color"] in ("yellow", "red") and iv["start"] <= pub < iv["end"]]
+        n += 1
+        live += bool(ys)
+        from_pub += any(iv["start"] == pub and iv["color"] == "yellow" for iv in ys)
+        passed += not ys
+    return n, live, from_pub, passed
+
+
+def test_v_4_the_caution_description_is_what_the_computed_intervals_show():
+    t = (ROOT / "research" / "wi" / "state-text.md").read_text()
+    y = (ROOT / "data" / "sources" / "wi-mmsd-storm-updates.yaml").read_text().replace("\n#  ", "")
+    for words in ("usually passed", "usually run", "has usually"):
+        assert words not in t and words not in y
+    # on the fixture: a record with no start is in caution when posted, counted from the post itself; a record dated
+    # to the day is past its 72 hours unless posted within them
+    recs = list(built()[0].values())
+    for r in recs:
+        n, live, from_pub, _ = _caution_at_publication([r])
+        if r["started_at"] is None:
+            assert live and from_pub, r["source_record_id"]
+    # on the full saved list (git-ignored; read when present): the figures the texts give
+    raw = ROOT / "data" / "raw" / "wi-mmsd-storm-updates"
+    if not (raw / "safe-full.json").exists():
+        pytest.skip("the full saved list is not in this clone")
+    safe = json.loads((raw / "safe-full.json").read_text())
+    posts = {i["slug"]: M.page_doc((raw / "posts" / f"{i['slug']}.html").read_bytes()) for i in safe["items"]}
+    full, _ = M.build({**safe, "posts": posts, "failed": []}, [], FETCHED)
+    n, live, from_pub, passed = _caution_at_publication(full)
+    no_start = sum(1 for r in full if not r["started_at"])
+    assert (n, live, from_pub, passed, no_start) == (29, 22, 19, 7, 18)
+    assert f"{live} of the {n} reports" in t and f"{no_start} give no start" in t and f"{passed} of them" in t
+    assert f"{live} of the {n} reports" in y and f"{no_start} give no start" in y and f"{passed} of them" in y
