@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1693 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1717 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -63,7 +63,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | co | 6 | 0 | 3 | 2 | 1 | 12 |
 | mt | 4 | 0 | 7 | 1 | 1 | 13 |
 | wy | 2 | 0 | 5 | 2 | 1 | 10 |
-| **all** | **606** | **236** | **526** | **229** | **96** | **1693** |
+| ia | 6 | 1 | 5 | 1 | 0 | 13 |
+| id | 3 | 0 | 8 | 0 | 0 | 11 |
+| **all** | **615** | **237** | **539** | **230** | **96** | **1717** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -2022,3 +2024,37 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `wy-deq-chapter4` | Wyoming Water Quality Rules Chapter 4 (oil and hazardous substance releases), revised 2026-01-12 | rejected | search_only | law | Oil and hazardous substances; sewage not named. |
 | `wy-deq-spills-portal` | WDEQ Spills and Complaints portal (deqspills.wyo.gov) | rejected | fetched | events | The public side is a report form; the app's incident search needs a login (a script shell to the build's client, 2026-11-14). Recorded as a login barrier in the register. |
 | `wy-deq-hudson-2024` | Wyoming DEQ news: Hudson wastewater release updates (June 2024) | unreachable | search_only | events | The two June 2024 updates answered HTTP 500 to the build's client on 2026-11-14; no record is made until they can be read. Watched. |
+
+## ia: Iowa (13)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ia-dnr-focomp-incoming-reports` | Iowa DNR Field Office Compliance (FOCOMP): incoming bypass reports | used | fetched | events | Built: ingest/ia_dnr_focomp.py; 359 reports listed from 2025 on, from 76 of the 105 major municipal facilities, in the state file of 2026-11-15. |
+| `ia-dnr-news-releases` | Iowa DNR news releases on wastewater bypasses and discharges | used | fetched | events | Built: ingest/ia_dnr_news.py reads the advisory topic's RSS (https://www.iowadnr.gov/topics/203/feed) and, once, its listing pages; four municipal releases from November 2024 to October 2026 (five records) on 2026-11-15. |
+| `ia-epa-cso-inventory` | EPA National CSO Inventory, Iowa rows | used | fetched | outfalls | Baseline outfalls. |
+| `ia-law-iac-567-63-6` | Iowa Admin. Code 567-63.6(455B) Bypasses and upsets (incl. public notices) | used | fetched | law | Regulator report by phone within 24 hours, written report within 5 days; a public notice only if DNR decides one is necessary. |
+| `ia-legis-cso-communities` | Iowa legislative document listing the nine combined-sewer communities | used | search_only | permits | Matches the EPA seed exactly. |
+| `ia-waterloo-sso-notices` | City of Waterloo SSO and Bypass Public Notification page | used | fetched | events | Built: ingest/ia_waterloo_sso.py; 17 notices (October 2025 to October 2026) on 2026-11-14. |
+| `ia-aquia-beaches` | Iowa DNR AQuIA beach monitoring (weekly E. coli and microcystin, advisories) | candidate | fetched | advisories | Registered (data/sources/ia-aquia-beaches.yaml, enabled false): the weekly results answered [] off season on 2026-11-14; build at the 2027 season when real rows can be tested. |
+| `ia-des-moines-wra-cso-elimination` | Des Moines WRA / City of Des Moines final CSO elimination (2025) | watch | search_only | news | Inventory likely stale for Des Moines; confirm before showing open outfalls. |
+| `ia-dnr-focomp-spills` | Iowa DNR Field Office Compliance database: Spill Search | watch | fetched | events | Sewage bypasses are mostly not filed as spills (7 sewage rows in three years); staff names appear in results and must never be stored. |
+| `ia-echo-dmr-cso` | ECHO DMR CSO parameters for Iowa CSO permits | watch | inferred | events | Possible monthly fallback for the nine CSO cities; unknown. |
+| `ia-iowa-environmental-council-beach-recaps` | Iowa Environmental Council beach season recaps | watch | search_only | prior_art | Annual summaries; context. |
+| `ia-wwpie-permits` | Iowa DNR Wastewater Permit Information Exchange (WWPIE) | watch | search_only | permits | Permit text source for CSO notice clauses; not read. |
+| `ia-epa-sobe` | EPA SOBE event tables, Iowa permits | rejected | fetched | events | Nothing from Iowa yet. |
+
+## id: Idaho (11)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `id-boise-west-permit` | West Boise permit ID0023981 (EPA Region 10, 2016 modification): overflow public notification | used | fetched | law | Part II.P requires an overflow emergency response and public notification plan; Part III.I: 'The permittee must immediately notify the public, health agencies and other affected entities...'. Channel left to the plan. IPDES reissuances are assumed to carry the same language (a city's IPDES rule comments say municipal permits carry standard SSO language). |
+| `id-deq-cyanohab-risk-table` | Idaho DEQ CyanoHAB Risk Data Table | used | fetched | advisories | Built: ingest/id_deq_cyanohab.py; 19 rows on 2026-11-14 (13 Health Advisory, 1 Alert, 5 Watch). |
+| `id-dhw-recreational-advisories` | Idaho DHW Recreational Water Health Advisories (map layer) | used | fetched | advisories | Read by ingest/id_deq_cyanohab.py for each listing's point (all 19 rows of 2026-11-14 matched a DHW point). |
+| `id-boise-sso-news` | City of Boise SSO statement (news, 2025-11-03) | watch | fetched | news | West Boise power surge overflow into the Thurman Drain area (2025-11-01); city statement via media, no web notice found. |
+| `id-deq-cyan-satellite` | Idaho DEQ CyAN satellite potential cyanobacteria detections | watch | search_only | monitoring | Satellite screening, not advisories. |
+| `id-deq-ipdes-noncompliance` | Idaho DEQ IPDES noncompliance reporting (24-hour notice to DEQ regional offices) | watch | search_only | law | Overflows are phoned to DEQ regional offices within 24 hours (Caldwell 2024 letter cites IPDES permit Part III.G). No public list, map or eRule output found; SOBE shows a single Idaho row, so IPDES permittees do not file through NeT. |
+| `id-deq-ipdes-outfalls-tfro` | Idaho DEQ TFRO IPDES Outfalls and Permits layers | watch | search_only | outfalls | Regional outfall layer only; EPA ICIS features cover the state. |
+| `id-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), ID rows | watch | fetched | events | 1 ID event(s) in the 2026-11-03 extract; the state's permittees do not file through NeT. One Kamiah basement backup (2023-12-17, received 2024-11-01). |
+| `id-hab-advisory-layer` | Idaho Recreation Water Health Advisories (ArcGIS: Algal_Bloom_Health_Advisory_vl and Boise city notices) | watch | fetched | advisories | Superseded for the build by DHW's current advisories layer (id-dhw-recreational-advisories) and DEQ's CyanoHAB Risk Data Table (id-deq-cyanohab-risk-table), which the feed reads. |
+| `id-phd-advisories` | Public Health District advisories (Panhandle, Central District, Southwest) | watch | search_only | advisories | PHDs issue the HAB recreation advisories that feed the DEQ map; no sewage-spill advisory found 2025-2026. |
+| `id-spokane-riverkeeper` | Spokane Riverkeeper / Lake Coeur d'Alene groups | watch | search_only | monitoring | Washington-based; covers the Spokane River below Post Falls and Coeur d'Alene. Not fetched. |

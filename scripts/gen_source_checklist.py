@@ -81,6 +81,8 @@ AREA_TITLES = {
     "co": "Colorado",
     "mt": "Montana",
     "wy": "Wyoming",
+    "ia": "Iowa",
+    "id": "Idaho",
 }
 
 HEADER = """# Source checklist

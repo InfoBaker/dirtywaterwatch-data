@@ -177,6 +177,13 @@
 #                  and lift dates; the state publishes no overflow list)
 #                  Wyoming: wy_deq_hcb_bulletins (WDEQ's HCB bulletin topic, RSS: bloom and toxin advisories with the
 #                  date issued, ended by a lift bulletin or by a later table that no longer lists them)
+#                  Iowa: ia_dnr_focomp (DNR's Field Office Compliance incoming bypass reports of the 105 major municipal
+#                  facilities, one page per report, 20 facility and 60 report pages a run; state data/build/ia-dnr-focomp-
+#                  state.json), ia_waterloo_sso (the City of Waterloo's SSO and bypass notices) and ia_dnr_news (DNR's
+#                  advisory-topic releases on municipal wastewater discharges)
+#                  Idaho: id_deq_cyanohab (DEQ's CyanoHAB Risk Data Table with DHW's advisory points: Health Advisory
+#                  as the authority's advisory, Watch and Alert as the site's caution; Pacific or Mountain time by
+#                  county, 49 CFR 71.9; state data/build/id-deq-cyanohab-state.json); Idaho publishes no sewage report
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
