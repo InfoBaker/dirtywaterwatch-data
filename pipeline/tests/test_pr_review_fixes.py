@@ -490,3 +490,43 @@ def test_a_pr_name_written_without_its_accent_needs_the_alias_the_batch_adds(mon
 def test_no_pr_water_is_live_until_the_switch():
     rules = json.loads((__import__("pathlib").Path(__file__).resolve().parents[2] / "data" / "rules.json").read_text())
     assert "PR" not in rules["live_states"]
+
+
+def test_other_states_match_mains_own_module(tmp_path):
+    # Astra P3-2: the other states' records built by main's module (at the merge base) and by this branch's: identical
+    import importlib.util
+    import subprocess
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[2]
+    try:
+        base = subprocess.run(["git", "merge-base", "HEAD", "origin/main"], cwd=root, capture_output=True, text=True,
+                              check=True).stdout.strip()
+        src = subprocess.run(["git", "show", f"{base}:pipeline/ingest/echo_sewer_overflow_events.py"], cwd=root,
+                             capture_output=True, text=True, check=True).stdout
+    except (OSError, subprocess.CalledProcessError):
+        pytest.skip("no git history of origin/main here")
+    if '"PR"' in src:
+        pytest.skip("the merge base already carries Puerto Rico")
+    f = tmp_path / "echo_main.py"
+    f.write_text(src)
+    spec = importlib.util.spec_from_file_location("echo_main_base", f)
+    OLD = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(OLD)
+    from tests.test_ingest_dc import _row
+    t = copy.deepcopy(_fixture())
+    t["events"] += [_row(sewer_overflow_bypass_event_key="o1", latitude_measure="38.93012", longitude_measure="-77.04011"),
+                    _row(sewer_overflow_bypass_event_key="o2", permit_identifier="KY0000001",
+                         program_report_form_set_id="2", sewer_overflow_bypass_description_text="PA Example (WWTP)"),
+                    _row(sewer_overflow_bypass_event_key="o3", permit_identifier="MN0000001",
+                         program_report_form_set_id="3", latitude_measure="47.123456", longitude_measure="-92.123456")]
+    t["types"] += [{"sewer_overflow_bypass_event_key": k, "sewer_overflow_bypass_type_code": c,
+                    "sewer_overflow_bypass_type_desc": "", "sewer_overflow_bypass_type_code_sequence": "1"}
+                   for k, c in (("o1", "SSO"), ("o2", "BYP"), ("o3", "SSO"))]
+    t["waters"] += [{"sewer_overflow_bypass_event_key": k, "name_receiving_water": "Rock Creek"} for k in ("o1", "o2", "o3")]
+    info = {"extract_date": "2026-11-12", "last_modified": None, "now": "2026-11-14T00:00:00Z"}
+    strip = lambda rs: [{k: v for k, v in r.items() if k != "fetched_at"} for r in rs
+                        if not str(r.get("npdes_permit") or r.get("permit") or "").startswith("PR")]
+    new = E.build(copy.deepcopy(t), info)
+    old = OLD.build(copy.deepcopy(t), info)
+    assert strip(new[0]) == strip(old[0]) and len(strip(new[0])) == 3
+    assert strip(new[1]) == strip(old[1])
