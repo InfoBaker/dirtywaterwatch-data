@@ -29,8 +29,9 @@ Records (a standing list read as a snapshot)
   - Every line under the heading must be an SB item or a statement that none is closed; anything else (a maintenance
     notice, a changed layout) fails the run (ok=False) and ends nothing. A beach that leaves the list and comes back
     is a new episode and a new record (sbNNN-<first read>), so each closure keeps its own period.
-Privacy: the list ends at the next heading of any kind; only the recognised SB numbers and names are kept in state and
-data/raw (when they change), never the page's lines, so a contact block is never saved.
+Privacy: the list ends at the next heading of any kind; only the recognised SB numbers and the reviewed names in
+BEACH_NAMES are kept in state and data/raw (when they change), never the page's lines or text after a name, so a
+contact block is never saved. An SB item whose name is not in BEACH_NAMES is kept by its number, name withheld.
 
 Run from pipeline/:  python -m ingest.ar_adh_swim_beaches [--file saved.html] [--at 2026-11-14T12:00:00Z]
 """
@@ -65,6 +66,16 @@ NAME_OK = re.compile(r"^(?=.{2,60}$)(?!.*\d{3})(?!.*\s[\u2013\u2014-]\s)(?!.*@)[
                      r"(?: [A-Za-z][A-Za-z .,'&()/-]*)?$")
 MARK = "\x00H "                    # a heading line: the list ends at the next one, whatever its words
 END = "\x01end of the main content"  # the end of <main>, <body> or <html>: closes the list like a heading
+# The reviewed list of ADH's beach names, each as ADH's own page lists it: {SB id: (name, citation)}. Only a name in
+# this list is kept, and only that name, so text the page puts after a beach name (a contact, a house number) never
+# reaches a save; an SB item whose id is not here, or whose text does not begin with the listed name, is kept by its
+# SB number with the name withheld until the list is reviewed (verification 2026-11-15 P1-5).
+BEACH_NAMES: dict[str, tuple[str, str]] = {
+    "SB112": ("Jefferson Ridge West", "ADH, Arkansas Swim Beach Program page, under 'Closed Swim Beaches', read "
+                                      "2026-11-14 (research/ar/sources.json)"),
+}
+NAME_WITHHELD = ("the name ADH lists for this beach is not yet in the reviewed list of ADH beach names, so it is not "
+                 "kept; the closure is listed by ADH's beach number")
 # a cited point per beach, when one is found: {SB id: (lat, lon, basis)}
 BEACH_POINTS: dict[str, tuple[float, float, str]] = {}
 
@@ -93,8 +104,8 @@ def list_lines(page: str) -> list[str]:
                      "response was cut short; nothing is ended or saved")
 
 
-def read(lines: list[str]) -> dict[str, str]:
-    """{SB id: beach name}. Every line under the heading must be an SB item or a statement that none is closed;
+def read(lines: list[str]) -> dict[str, str | None]:
+    """{SB id: the reviewed beach name, or None when the page's name is not in BEACH_NAMES}. Every line under the heading must be an SB item or a statement that none is closed;
     anything else (a maintenance notice, a changed layout, a contact block) is ValueError, so an unreadable list ends
     nothing and is never saved. Zero beaches is accepted only with ADH's explicit statement that none is closed."""
     found, none_stated = {}, False
@@ -107,7 +118,10 @@ def read(lines: list[str]) -> dict[str, str]:
                 # told from it with confidence, so the run fails and nothing from the page is saved
                 raise ValueError("an SB item under 'Closed Swim Beaches' carries more than a beach name; nothing is "
                                  "ended or saved")
-            found[re.sub(r"[\s-]", "", m.group(1)).upper()] = name
+            k = re.sub(r"[\s-]", "", m.group(1)).upper()
+            known = BEACH_NAMES.get(k, (None,))[0]
+            # only the reviewed name is kept, never the page's own text: anything after it is cut here
+            found[k] = known if known and re.match(re.escape(known) + r"(?![A-Za-z0-9])", name, re.I) else None
         elif EMPTY.match(ln):
             none_stated = True
         else:
@@ -158,12 +172,15 @@ def records(state: dict) -> list[dict]:
         for n, ep in enumerate(it.get("episodes") or []):
             left = ep.get("left_at")
             rid = k.lower() if n == 0 else f"{k.lower()}-{re.sub(r'[^0-9T]', '', ep['first_seen'])[:13]}"
-            raw = {"beach_id": k, "beach_name": it.get("name"), "first_seen_at": ep["first_seen"], "episode": n + 1,
+            name = it.get("name")
+            raw = {"beach_id": k, "beach_name": name, "first_seen_at": ep["first_seen"], "episode": n + 1,
                    "_last_seen_in_source": ep.get("last_seen"), "start_basis": START_BASIS, "state": "AR",
                    "time_zone": "America/Chicago", "advisory_noun": "Swim beach closure"}
             if left:
                 raw.update(left_page_at=left, ended_at_precision="poll",
                            end_basis="the first read of the page that no longer listed it, not a reopening date ADH gives")
+            if not name:
+                raw["name_withheld_reason"] = NAME_WITHHELD
             pt = BEACH_POINTS.get(k)
             extra = {}
             if pt:
@@ -174,7 +191,7 @@ def records(state: dict) -> list[dict]:
                 raw.update(_placement="named_water_only",
                            unplaced_reason="ADH names the beach, not its water, and gives no point")
             out.append(event(source_id=SOURCE_ID, source_record_id=rid, event_type="beach_closure",
-                             status="advisory_lifted" if left else "advisory_active", outfall_name=it.get("name"),
+                             status="advisory_lifted" if left else "advisory_active", outfall_name=name or f"ADH swim beach {k}",
                              started_at=ep["first_seen"], ended_at=left, time_precision="poll", authority=AUTHORITY,
                              advice_text=ADVICE, source_url=URL, raw=raw, **extra))
     return out
