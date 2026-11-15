@@ -665,3 +665,23 @@ def test_an_owner_is_named_from_epas_permittee_never_from_a_facility():
                if "SC0025763" in r["npdes_permits"])
     # a row that names no permittee for privacy keeps the convention (docs/legal-forms.md)
     assert rows["sc-sc0029475"]["legal_form"] == "facility (permittee not named)"
+
+
+def test_the_state_texts_cite_their_reads_and_say_what_the_code_does():
+    # re-review P2-6: direct links and read dates on empirical claims; calculated counts marked as this site's; the
+    # Florence and bloom descriptions match the records (no start, separate advice, no whole-reservoir colour)
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())["unresolved"]
+    sc = (ROOT / "research" / "sc" / "state-text.md").read_text()
+    for url in ("https://www.cityofflorencesc.gov/city-news", "https://gis.des.sc.gov/beachaccess/",
+                "https://des.sc.gov/programs/bureau-water/aquatic-science/harmful-algal-blooms"):
+        assert f"]({url})" in sc
+    assert "this site's count" in sc and "November 14, 2026" in sc
+    assert "gives no start for the overflow" in sc and "never as the whole lake or reservoir" in sc
+    assert f"for {int(rules['unknown_status_yellow_days'])} days from that day" in sc
+    assert "50 square kilometres" not in sc and "red for up to 7 days" not in sc
+    de = (ROOT / "research" / "de" / "state-text.md").read_text()
+    for url in ("https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx",
+                "https://data.delaware.gov/Energy-and-Environment/Recreational-Water-Advisories/ever-58ni",
+                "https://recwaters.dnrec.delaware.gov/"):
+        assert f"]({url})" in de
+    assert "calculated from the Department's list" in de
