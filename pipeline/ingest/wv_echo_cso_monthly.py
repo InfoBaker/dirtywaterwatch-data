@@ -38,7 +38,9 @@ Cache and cadence
 Failures
   A permit whose request fails three times keeps its cached answer and is named in meta.fetch; any failed request
   makes the run ok=False, the records (from the cache) still written. A permit ECHO calls invalid is 'not in ECHO':
-  a rejected request, so the run is ok=False too, and the permit keeps what an earlier answer showed. Each record's fetched_at is when ECHO was asked. The answers name the facility (a public plant), no person.
+  a rejected request, so the run is ok=False too, and the permit keeps what an earlier answer showed. A failed or
+  rejected permit stays in cache.unresolved (meta.unresolved) until ECHO answers for it: every run is ok=False until
+  then, whether or not the permit is asked again that run, and last_ok_at does not advance. Each record's fetched_at is when ECHO was asked. The answers name the facility (a public plant), no person.
 
 Run from pipeline/:  python -m ingest.wv_echo_cso_monthly [--since 2025-01-01] [--refresh] [--cache FILE]
 """
@@ -215,6 +217,11 @@ def main(argv=None) -> int:
     if cache.get("since") != args.since:
         cache = {"since": args.since, "permits": {}}
     fetch_log: dict[str, str] = {}
+    # a failed or rejected request stays unresolved, whatever the cadence, until ECHO answers for that permit
+    unresolved = {p: v for p, v in (cache.get("unresolved") or {}).items() if p in outlets}
+    for p, e in cache["permits"].items():     # a cache from before unresolved was kept: a rejection still on record
+        if p in outlets and e.get("not_in_echo") and p not in unresolved:
+            unresolved[p] = {"reason": "not in ECHO", "since": e.get("asked_at"), "last_tried": e.get("asked_at")}
     if not args.cache:
         now = datetime.now(UTC)
         due = sorted(outlets, key=lambda p: (cache["permits"].get(p) or {}).get("asked_at") or "")
@@ -232,21 +239,30 @@ def main(argv=None) -> int:
             if res is not None:
                 t = now_iso()
                 cache["permits"][p] = {**compact(res, outlets[p]), "asked_at": t, "answered_at": t}
-            elif how == "not in ECHO":
-                # a rejection never empties what an earlier answer showed: the lines stay, the rejection is noted
-                prev = cache["permits"].get(p) or {"name": None, "lines": {}}
-                cache["permits"][p] = {**prev, "answered_at": prev.get("answered_at") or prev.get("asked_at"),
-                                       "asked_at": now_iso(), "not_in_echo": True}
+                unresolved.pop(p, None)
+            else:
+                t = now_iso()
+                unresolved[p] = {"reason": how, "since": (unresolved.get(p) or {}).get("since") or t, "last_tried": t}
+                if how == "not in ECHO":
+                    # a rejection never empties what an earlier answer showed: the lines stay, the rejection is noted
+                    prev = cache["permits"].get(p) or {"name": None, "lines": {}}
+                    cache["permits"][p] = {**prev, "answered_at": prev.get("answered_at") or prev.get("asked_at"),
+                                           "asked_at": t, "not_in_echo": True}
             time.sleep(1)
+        cache["unresolved"] = dict(sorted(unresolved.items()))
         write_json(path, cache)
     records, meta = build(cache, outlets)
     meta.update({"registry_ids": [SOURCE_ID], "since": args.since,
                  "permits_asked": len(outlets), "fetch": fetch_log,
                  "permits_with_cso_lines": sorted(p for p, e in cache["permits"].items() if e.get("lines")),
+                 "unresolved": dict(sorted(unresolved.items())),
                  "cadence": "weekly per permit; DMRs reach ECHO weeks after the month"})
     # a permit ECHO calls invalid is a rejected request, not an answer: the run is degraded (not ok), the cached months
     # and their original fetch times kept
     failed = {p: v for p, v in fetch_log.items() if v.startswith("failed") or v == "not in ECHO"}
+    # a permit whose last request failed or was rejected and was not asked again this run is still unresolved
+    failed.update({p: f"unresolved since {v.get('since')} ({v.get('reason')})" for p, v in unresolved.items()
+                   if p not in failed})
     if failed:
         # the records come from the cache, which keeps every earlier answer, so they are complete; the run is not ok
         # and names the permits whose request failed (all of them, or some)

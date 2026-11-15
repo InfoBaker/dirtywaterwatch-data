@@ -445,3 +445,54 @@ def test_absence_statements_keep_their_scope_and_dates():
     assert "59 report nothing at any combined sewer outlet" in para and "none of the 61 combined sewer permits" in para
     prof = json.loads((ROOT / "research" / "wv" / "profile.json").read_text())
     assert '"sobe_events_2026_11_03": 0' in json.dumps(prof)
+
+
+def test_echo_failure_health_holds_until_a_successful_answer(tmp_path, monkeypatch):
+    """Verification P1-2 (ECHO): a rejection, a cached run that asks nothing, a repeated rejection, then an answer;
+    the records, the run's health and last_ok_at at each step."""
+    import common as C
+    ok_answer = {"CWPName": "EXAMPLE", "PermFeatures": [{"PermFeatureNmbr": "C002", "Parameters": [
+        {"ParameterCode": "50050", "MonitoringLocationDesc": "Effluent Gross",
+         "DischargeMonitoringReports": [_line("31-OCT-26", "2.0")]}]}]}
+    cache = {"since": "2025-01-01", "permits": {"WV0000003": _cached("WV0000003")}}
+    rc, doc = _run_dmr(tmp_path, monkeypatch, {"WV0000003": (None, "not in ECHO")}, cache)
+    assert rc == 1 and doc["ok"] is False and doc["count"] == 1 and doc["last_ok_at"] is None
+    calls = []
+
+    def rerun(answer):
+        monkeypatch.setattr(M, "fetch", lambda p, since: calls.append(p) or answer)
+        return M.main([]), json.loads((tmp_path / f"{M.SOURCE_ID}.json").read_text())
+    rc, doc = rerun((None, "not in ECHO"))                    # cached: no request, still unresolved
+    assert calls == [] and rc == 1 and doc["ok"] is False and "WV0000003" in doc["error"]
+    assert doc["last_ok_at"] is None and doc["records"][0]["fetched_at"] == "2020-01-01T00:00:00Z"
+    cache_doc = json.loads((tmp_path / "cache.json").read_text())
+    cache_doc["permits"]["WV0000003"]["asked_at"] = "2020-01-02T00:00:00Z"      # a week on: asked again
+    (tmp_path / "cache.json").write_text(json.dumps(cache_doc))
+    rc, doc = rerun((None, "not in ECHO"))
+    assert calls == ["WV0000003"] and rc == 1 and doc["ok"] is False
+    u = doc["meta"]["unresolved"]["WV0000003"]
+    assert u["since"] <= u["last_tried"] and u["reason"] == "not in ECHO"
+    cache_doc = json.loads((tmp_path / "cache.json").read_text())
+    cache_doc["permits"]["WV0000003"]["asked_at"] = "2020-01-03T00:00:00Z"
+    (tmp_path / "cache.json").write_text(json.dumps(cache_doc))
+    rc, doc = rerun((ok_answer, "live"))                       # recovered
+    assert rc == 0 and doc["ok"] is True and doc["last_ok_at"] and doc["meta"]["unresolved"] == {}
+
+
+def test_echo_network_failure_not_retried_for_budget_stays_unresolved(tmp_path, monkeypatch):
+    cache = {"since": "2025-01-01", "permits": {"WV0000003": _cached("WV0000003")}}
+    rc, doc = _run_dmr(tmp_path, monkeypatch, {"WV0000003": (None, "failed (x)")}, cache)
+    assert rc == 1
+    monkeypatch.setattr(M, "MAX_LIVE_REQUESTS", 0)
+    rc = M.main([])
+    doc = json.loads((tmp_path / f"{M.SOURCE_ID}.json").read_text())
+    assert rc == 1 and doc["ok"] is False and "WV0000003" in doc["error"]
+
+
+def test_echo_an_older_cache_with_a_rejection_on_record_is_not_ok(tmp_path, monkeypatch):
+    from datetime import UTC, datetime
+    recent = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    cache = {"since": "2025-01-01", "permits": {"WV0000003": {**_cached("WV0000003"), "asked_at": recent,
+                                                             "not_in_echo": True}}}
+    rc, doc = _run_dmr(tmp_path, monkeypatch, {"WV0000003": (None, "not in ECHO")}, cache)
+    assert rc == 1 and doc["ok"] is False and doc["meta"]["fetch"] == {} and "WV0000003" in doc["error"]
