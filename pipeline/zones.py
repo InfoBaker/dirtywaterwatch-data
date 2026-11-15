@@ -7,13 +7,17 @@ New York's put a Pacific, Central or Mountain day's end one to three hours early
                Florida by its Eastern-Central boundary (florida_zone), South Dakota, Nebraska and Kentucky by the county
                files of data/reference used by the EPA overflow tables (ingest.echo_sewer_overflow_events.point_zone;
                Kentucky's forty-one Central-time counties, 49 CFR 71.5(c)), Oregon by Malheur County (oregon_zone),
-               Tennessee by its county (a name, or the county a point lies in: tennessee_zone). Any other state gets
+               Tennessee by its county (a name, or the county a point lies in: tennessee_zone), North Dakota by its county
+               (north_dakota_zone, 49 CFR 71.7(a)), Kansas by its county (49 CFR 71.7(d): kansas_zone), Indiana by its
+               county (a name, or the county a point lies in: indiana_zone, the twelve Central-time counties of 49 CFR
+               71.5(b)), Nevada by West Wendover's city limits (nevada_zone, 49 CFR 71.9(b)). Any other state gets
                STATE_ZONES; a state the table does not know gets None (the caller's default).
 
 Not a feed (no __main__)."""
 from __future__ import annotations
 
 import functools
+import re
 
 EASTERN, CENTRAL, MOUNTAIN, PACIFIC = "America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles"
 
@@ -173,6 +177,119 @@ def tennessee_zone(county=None, lat=None, lon=None) -> str:
         return CENTRAL
 
 
+# Kansas (49 CFR 71.7(d), read in eCFR 2026-11-14): the Central-Mountain line runs along the east lines of Sherman,
+# Wallace, Greeley and Hamilton counties (with the north lines of Sherman, Logan's west part and Wichita between them),
+# so those four counties keep Mountain time and the other 101 Central; no county is split. A record's county is its
+# own county field when the source gives one, else the county whose Census outline (data/reference/ks-counties.json,
+# scripts/ks_counties.py) holds its point; with neither it is Central (the state's larger part).
+KS_MOUNTAIN_COUNTIES = frozenset({"SHERMAN", "WALLACE", "GREELEY", "HAMILTON"})
+
+
+@functools.lru_cache(maxsize=1)
+def _ks_county_shapes():
+    import json
+    from pathlib import Path
+
+    from shapely.geometry import shape
+    from shapely.validation import make_valid
+    p = Path(__file__).resolve().parents[1] / "data" / "reference" / "ks-counties.json"
+    doc = json.loads(p.read_text())
+    return [(c["county"], make_valid(shape(c["geometry"]))) for c in doc["counties"]]
+
+
+def ks_point_county(lat, lon) -> str | None:
+    """The Kansas county a point lies in ('Sherman County'), or None (outside Kansas, or no point)."""
+    if lat is None or lon is None:
+        return None
+    from shapely.geometry import Point
+    pt = Point(float(lon), float(lat))
+    for county, g in _ks_county_shapes():
+        if g.covers(pt):
+            return county
+    return None
+
+
+def kansas_zone(county=None, lat=None, lon=None) -> str:
+    """Kansas's zone: Mountain in the four KS_MOUNTAIN_COUNTIES (by the county's name when given, else by the county the
+    point lies in), Central elsewhere and when neither is given."""
+    c = tn_county_key(county) if county and str(county).strip() else None
+    if c is None:
+        try:
+            pc = ks_point_county(lat, lon)
+        except (OSError, ImportError, ValueError):
+            pc = None
+        c = tn_county_key(pc) if pc else None
+    return MOUNTAIN if c in KS_MOUNTAIN_COUNTIES else CENTRAL
+
+
+# Indiana (49 CFR 71.5(b), read in eCFR 2026-11-14): the Eastern-Central line follows county lines, leaving six
+# northwestern counties (Lake, Porter, LaPorte, Starke, Jasper, Newton) and six southwestern ones (Gibson, Posey,
+# Vanderburgh, Warrick, Spencer, Perry) wholly in Central time and the other eighty Eastern; none split
+# (scripts/in_central_time_counties.py checks them against the U.S. DOT time-zone layer and writes their outlines to
+# data/reference/in-central-time-counties.json, which the point rule reads through _county_zone)
+IN_CENTRAL_COUNTIES = frozenset({"GIBSON", "JASPER", "LAKE", "LAPORTE", "NEWTON", "PERRY", "PORTER", "POSEY", "SPENCER",
+                                 "STARKE", "VANDERBURGH", "WARRICK"})
+
+
+def in_county_key(county) -> str:
+    """'La Porte County' -> 'LAPORTE', 'St. Joseph' -> 'STJOSEPH' (spaces, periods and the word County dropped)."""
+    import re
+    c = re.sub(r"\s+county\s*$", "", str(county or "").strip(), flags=re.I)
+    return re.sub(r"[\s.']+", "", c).upper()
+
+
+def indiana_zone(county=None, lat=None, lon=None) -> str:
+    """Indiana's zone: Central in the twelve IN_CENTRAL_COUNTIES (by the county's name when given, else by the county
+    the point lies in, data/reference/in-central-time-counties.json), Eastern elsewhere and when neither is given (the
+    state's larger part)."""
+    if county and str(county).strip():
+        return CENTRAL if in_county_key(county) in IN_CENTRAL_COUNTIES else EASTERN
+    if lat is None or lon is None:
+        return EASTERN
+    try:
+        return _county_zone("IN", float(lat), float(lon)) or EASTERN
+    except (RuntimeError, ImportError, ValueError, OSError):
+        return EASTERN          # the county file missing: the state's larger part
+# Nevada (49 CFR 71.9(b) and (d), read in eCFR 2026-11-14): the Mountain-Pacific line follows the Utah-Nevada boundary
+# except around the City of West Wendover, whose northern, western and southern limits it follows: West Wendover keeps
+# Mountain time, the rest of Nevada Pacific (towns that keep Mountain time by custom, such as Jackpot, are Pacific in
+# law). The city's outline: data/reference/nv-west-wendover.json (scripts/nv_west_wendover.py, TIGERweb Incorporated
+# Places); without the file, its box (114.113 W to the state line, 40.725 N to 40.756 N).
+NV_WEST_WENDOVER_BOX = (-114.1135, 40.7250, -114.0400, 40.7560)
+
+
+@functools.lru_cache(maxsize=1)
+def _west_wendover_outline():
+    try:
+        import json
+        from pathlib import Path
+
+        from shapely.geometry import shape
+        doc = json.loads((Path(__file__).resolve().parent.parent / "data" / "reference" / "nv-west-wendover.json").read_text())
+        return shape(doc["place"]["geometry"])
+    except (OSError, ValueError, KeyError, ImportError):
+        return None
+
+
+def nevada_zone(lat=None, lon=None, place: str | None = None) -> str:
+    """Nevada's zone: Mountain inside West Wendover's city limits (by the place's name when the source gives one, else
+    the point against the city's outline), Pacific elsewhere and when neither is given."""
+    if place and str(place).strip():
+        return MOUNTAIN if str(place).strip().lower().removesuffix(" city") == "west wendover" else PACIFIC
+    if lat is None or lon is None:
+        return PACIFIC
+    lat, lon = float(lat), float(lon)
+    outline = _west_wendover_outline()
+    if outline is not None:
+        # the city's east side is the state line: the strip between its rounded outline and the line is the city's
+        w, s_, e, n = outline.bounds
+        inside = outline.buffer(0.0005).covers(_point(lon, lat)) or (s_ <= lat <= n and e - 0.001 <= lon)
+    else:
+        w, s_, e, n = NV_WEST_WENDOVER_BOX
+        inside = w <= lon <= e and s_ <= lat <= n
+    return MOUNTAIN if inside else PACIFIC
+
+
 def zone_for(state: str | None, lat=None, lon=None) -> str | None:
     """The IANA zone for a record of this state at this point (module docstring); None for an unknown state."""
     st = (state or "").upper()
@@ -182,9 +299,134 @@ def zone_for(state: str | None, lat=None, lon=None) -> str | None:
         return oregon_zone(lat, lon)
     if st == "TN" and lat is not None and lon is not None:
         return tennessee_zone(lat=lat, lon=lon)
+    if st == "ND" and lat is not None and lon is not None:
+        return north_dakota_zone(lat=lat, lon=lon)[0]
+    if st == "KS" and lat is not None and lon is not None:
+        return kansas_zone(lat=lat, lon=lon)
+    if st == "IN":
+        return indiana_zone(lat=lat, lon=lon)
+    if st == "NV":
+        return nevada_zone(lat, lon)
     if st in ("SD", "NE", "KY") and lat is not None and lon is not None:
         try:
             return _county_zone(st, float(lat), float(lon)) or STATE_ZONES[st]
         except (RuntimeError, ImportError, ValueError):
             return STATE_ZONES[st]          # the county file missing: the state's larger part
     return STATE_ZONES.get(st)
+
+
+# North Dakota (49 CFR 71.7(a), read in eCFR 2026-11-14): the Central-Mountain line runs down the Montana line to the
+# Missouri, along the Yellowstone and a township staircase (R. 102 W. and R. 101 W.) to the Little Missouri, along the
+# Little Missouri and the Missouri to Mercer County's western land line, south along Mercer's west line, along Morton
+# County's southwestern line to Sioux County, west along Sioux's north line to State Highway 31 and down Highway 31 to
+# South Dakota. West and south of it is Mountain time: these eight counties whole, and the parts of McKenzie County
+# (west of the staircase and south of the Little Missouri), Dunn County (south and east of the Little Missouri, which the
+# line follows through the county to the Missouri: its part toward Lake Sakakawea is Central; verification pass 2
+# 2026-11-15 P2-1) and Sioux County (west of Highway 31). A record in a split county is read on the side its point lies
+# on; with no point, in Mountain time, the later day's end, as South Dakota's Stanley County is
+# (sd_danr_hab_advisories), and marked as assumed: a caution never ends early.
+ND_MOUNTAIN_COUNTIES = frozenset({"ADAMS", "BILLINGS", "BOWMAN", "GOLDEN VALLEY", "GRANT", "HETTINGER", "SLOPE",
+                                  "STARK"})
+ND_SPLIT_COUNTIES = frozenset({"DUNN", "MCKENZIE", "SIOUX"})
+ND_ZONE_CITE = "49 CFR 71.7(a)"
+
+
+@functools.lru_cache(maxsize=1)
+def _nd_county_shapes():
+    import json
+    from pathlib import Path
+
+    from shapely.geometry import shape
+    from shapely.validation import make_valid
+    p = Path(__file__).resolve().parents[1] / "data" / "reference" / "nd-counties.json"
+    doc = json.loads(p.read_text())
+    return [(c["county"], make_valid(shape(c["geometry"]))) for c in doc["counties"]]
+
+
+def nd_point_county(lat, lon) -> str | None:
+    """The North Dakota county a point lies in ('Stark County'), or None (no point, outside, or no outline file)."""
+    if lat is None or lon is None:
+        return None
+    from shapely.geometry import Point
+    pt = Point(float(lon), float(lat))
+    for county, g in _nd_county_shapes():
+        if g.covers(pt):
+            return county
+    return None
+
+
+@functools.lru_cache(maxsize=1)
+def _nd_split_parts():
+    """{county key: the Mountain part's geometry} of Dunn, McKenzie and Sioux (data/reference/nd-split-county-zones.json:
+    USDOT/BTS NTAD time zones cut to the county outlines)."""
+    import json
+    from pathlib import Path
+
+    from shapely.geometry import shape
+    from shapely.validation import make_valid
+    p = Path(__file__).resolve().parents[1] / "data" / "reference" / "nd-split-county-zones.json"
+    doc = json.loads(p.read_text())
+    return {tn_county_key(c["county"]): make_valid(shape(c["mountain_part"])) for c in doc["counties"]}
+
+
+def north_dakota_split_side(county, lat, lon) -> str | None:
+    """MOUNTAIN or CENTRAL for a point in Dunn, McKenzie or Sioux County, from the cited line (NTAD), or None (no point,
+    not a split county, no line file, or a point that does not lie in that county: its side there is not known)."""
+    if lat is None or lon is None or tn_county_key(county or "") not in ND_SPLIT_COUNTIES:
+        return None
+    try:
+        from shapely.geometry import Point
+        part = _nd_split_parts().get(tn_county_key(county))
+    except (OSError, ImportError, ValueError, KeyError):
+        return None
+    if part is None:
+        return None
+    try:
+        inside = nd_point_county(lat, lon)
+    except (OSError, ImportError, ValueError, KeyError):
+        inside = None
+    if inside is not None and tn_county_key(inside) != tn_county_key(county):
+        return None
+    return MOUNTAIN if part.covers(Point(float(lon), float(lat))) else CENTRAL
+
+
+def north_dakota_zone_uncertain(county=None, lat=None, lon=None) -> bool:
+    """True when the record's zone is assumed, not known: a Dunn, McKenzie or Sioux County record whose point cannot be
+    placed on a side of the line (re-review 2026-11-14 P2-4)."""
+    if not (county and str(county).strip()):
+        try:
+            county = nd_point_county(lat, lon)
+        except (OSError, ImportError, ValueError, KeyError):
+            county = None
+    return tn_county_key(county or "") in ND_SPLIT_COUNTIES and north_dakota_split_side(county, lat, lon) is None
+
+
+def north_dakota_zone(county=None, lat=None, lon=None) -> tuple[str, str]:
+    """(zone, basis) for a North Dakota record: Mountain in ND_MOUNTAIN_COUNTIES; in the three split counties the side
+    of the line the record's point lies on (data/reference/nd-split-county-zones.json, re-review 2026-11-14 P2-4), and
+    with no point Mountain time, the later day's end, stated as assumed (north_dakota_zone_uncertain); Central
+    elsewhere and when no county is known (the state's larger part). The county is the one the source gives, else the
+    one the point lies in."""
+    if not (county and str(county).strip()):
+        try:
+            county = nd_point_county(lat, lon)
+        except (OSError, ImportError, ValueError, KeyError):
+            county = None
+        how = "the county the point lies in"
+    else:
+        how = "the county the source gives"
+    if not county:
+        return CENTRAL, f"no county known: Central time, the state's larger part ({ND_ZONE_CITE})"
+    key = tn_county_key(county)
+    name = re.sub(r"(?i)\s+county$", "", str(county).strip())
+    if key in ND_MOUNTAIN_COUNTIES:
+        return MOUNTAIN, f"{name} County keeps Mountain time ({ND_ZONE_CITE}; {how})"
+    if key in ND_SPLIT_COUNTIES:
+        side = north_dakota_split_side(county, lat, lon)
+        if side:
+            return side, (f"{name} County is split by the line ({ND_ZONE_CITE}); the record's point lies on its "
+                          f"{'Mountain' if side == MOUNTAIN else 'Central'} side (USDOT/BTS NTAD time zones; {how})")
+        return MOUNTAIN, (f"{name} County is split by the line ({ND_ZONE_CITE}) and the record gives no point: its zone "
+                          f"is not known; this site assumes Mountain time, the later day's end, so a date read in it "
+                          f"may be an hour later than the source's own clock ({how})")
+    return CENTRAL, f"{name} County keeps Central time ({ND_ZONE_CITE}; {how})"

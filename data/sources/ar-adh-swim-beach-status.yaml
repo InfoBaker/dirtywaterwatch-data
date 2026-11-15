@@ -1,0 +1,30 @@
+id: "ar-adh-swim-beach-status"
+name: "Arkansas Department of Health, Arkansas Swim Beach Program: closed swim beaches"
+url: "https://healthy.arkansas.gov/programs-services/public-health-safety/marine-sanitation/arkansas-swim-beach-program/"
+homepage: "https://healthy.arkansas.gov/programs-services/public-health-safety/marine-sanitation/arkansas-swim-beach-program/"
+kind: "html"
+level: "state"
+# Read by ingest/ar_adh_swim_beaches.py: the beaches listed under "Closed Swim Beaches" as standing closures in the
+#   Department's words, one record per beach (ADH's SB number), from the first read that lists it (the page gives no
+#   date) until a read no longer does. On 2026-11-14 the list held one beach, "SB112 - Jefferson Ridge West". The page
+#   gives no date, reason, water or point, and USGS GNIS has no feature of that name: the record is listed and placed on
+#   no water until a cited point is added. The page answered this site's identified client (200) on 2026-11-14; the
+#   2026-11-09 research had a 403.
+# The program (the page, quoted): it "monitors all sample results submitted to the Public Health Lab and advises the
+#   State Parks Commission, Environmental Health specialists, U.S. Forest Service, both the Little Rock and Vicksburg
+#   Corps of Engineer Districts, and all private swim beaches with the status of opening or closing beaches to
+#   swimmers"; a sample above 126 E. coli per 100 ml triggers daily resampling. The "140 swim beach sites" the page
+#   gives is a 2007 figure.
+cadence: "every run (one page; the list changes rarely)"
+license: "No licence or terms stated on the page."
+attribution: "Arkansas Department of Health, Marine Sanitation Program"
+enabled: true
+role: "advisories"
+event_types: ["beach_closure"]
+states: ["AR"]
+registry_ids: ["ar-adh-swim-beach-status"]
+access: ["html"]
+access_detail: "A WordPress page; the list is plain HTML under the heading 'Closed Swim Beaches' (SB number and name per line). No dates."
+machine_readable: false
+legal_basis: "Arkansas Department of Health, Rules Pertaining to Outdoor Bathing Places"
+checked: "2026-11-14"

@@ -1,0 +1,25 @@
+id: "mn-epa-sobe"
+name: "EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), Minnesota permits"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Read by the national module pipeline/ingest/echo_sewer_overflow_events.py (source id echo-sewer-overflow), Minnesota
+#   permits added 2026-11-14: Central time, raw.time_zone on every record.
+# Real read 2026-11-14 (the 2026-11-12 current and all-versions extracts): one report under a Minnesota permit, the Bois
+#   Forte Band's Lake Vermilion collection system (MN0061310, permitted by EPA Region 5), a sanitary sewer overflow on
+#   2024-06-18 (start and end that day; flooding of the collection system), receiving water "Pike Bay Lake Vermilion
+#   Tower Minnesota", received 2024-06-25 (7 days after). EPA's collection-system table lists 19 Minnesota permits.
+#   Minnesota's own permittees report to the state's Duty Officer, not through this tool.
+cadence: "EPA refreshes daily. Minnesota rows (2026-11-12 extract): 1 report (SSO), received 7 days after the start."
+license: "EPA public data"
+attribution: "US EPA (data filed through EPA's NeT eRule tool)"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["MN"]
+access: ["csv"]
+access_detail: "Daily ZIP from ECHO (no auth). One Minnesota report (Bois Forte, MN0061310, 2024-06-18); 19 Minnesota permits in EPA's collection-system table."
+machine_readable: true
+legal_basis: "40 CFR 122.41(l)(6) and Part 127 (electronic reporting) for the permits EPA writes; Minn. Stat. 115.061 (the report to the state) leaves no public record"
+checked: "2026-11-14"

@@ -86,9 +86,9 @@
   "license": "Public use, no warranty (service metadata)",
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Fills the biggest inventory gap: MSD St. Louis Lemay has 120 CSO outfalls here but 0 open in the EPA inventory. Kansas City Blue River (80 in EPA) and MSD Bissell Point are not flagged here.",
+  "status_reason": "Read by scripts/mo_outfall_layer.py into data/outfalls-mo.json: 146 CSO features on five permits (MSD Lemay 120), 26 of them EPA's rows.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -138,12 +138,13 @@
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://msdprojectclear.org/customers/problems-tips/sewer-overflows/",
+  "url": "https://msdprojectclear.org/newsroom/alerts/",
   "access": [
+   "api",
    "html"
   ],
-  "access_detail": "curl got a JavaScript verification page; WebFetch got 'Please wait while your request is being verified'.",
-  "machine_readable": false,
+  "access_detail": "The site's WordPress REST API (wp-json/wp/v2/posts) answers the identified client: 845 posts on 2026-11-14, 275 under the District's own alerts, press-releases and post-types paths; 89 of them overflow notices since June 2013 (79 overflows, 10 follow-ups). The earlier bot-wall finding (2026-11-03) does not hold for these pages.",
+  "machine_readable": true,
   "sample_record": null,
   "fields": [],
   "fills_event_fields": [],
@@ -154,10 +155,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "Bot wall. Customer letters (city sites) describe outfall signs: do not play, swim or fish during possible sewage overflow; locations by phone (314) 768-6260.",
-  "verified": "search_only",
-  "checked": "2026-11-03",
+  "status": "used",
+  "status_reason": "Read by ingest/mo_msd_alerts.py: MSD's own overflow alerts and releases, a selective record (no rule requiring them was found); days, rarely times, never an end.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -166,19 +167,20 @@
   "jurisdiction": "MO",
   "operator": "City of Kansas City, Missouri (KC Water)",
   "operator_type": "municipal",
-  "role": "news",
+  "role": "events",
   "event_types": [
    "sso",
    "cso"
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://www.kcsmartsewer.us/",
+  "url": "https://www.kcwater.us/news/",
   "access": [
+   "rss",
    "html"
   ],
-  "access_detail": "kcsmartsewer.us returned 403 to curl. Press releases on overflows republished by Patch (e.g. 8136 Troost, 4000 Mersington) say signs are posted near the site.",
-  "machine_readable": false,
+  "access_detail": "KC Water's news archive is not in the site's REST API and has no feed of its own; the site search's RSS feed (search/overflow/feed/rss2/?paged=N) carries the posts with their full text: 99 overflow notices, July 2016 to August 2025, on 2026-11-14. kcsmartsewer.us still answers 403.",
+  "machine_readable": true,
   "sample_record": null,
   "fields": [],
   "fills_event_fields": [],
@@ -189,10 +191,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Occasional dated press releases for large SSOs; no CSO notification found.",
-  "verified": "search_only",
-  "checked": "2026-11-03",
+  "status": "used",
+  "status_reason": "Read by ingest/mo_kc_water_news.py: KC Water's own overflow posts, a selective record; times, gallons and the named water from its text.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -225,10 +227,10 @@
   "history": null,
   "license": null,
   "legal_basis": "RSMo 640.080 (search): GM 190 E. coli/100 mL; signs 'Swimming is Not Recommended'",
-  "status": "candidate",
-  "status_reason": "Dated, authority beach status in season; HAB closures shown separately (Pomme de Terre 2026).",
+  "status": "watch",
+  "status_reason": "The beach status map is drawn by a script with per-beach pages; out of season on 2026-11-14, its data were not read. Registered and watched for availability.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -243,27 +245,46 @@
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://dnr.mo.gov/water/alerts-hazards/harmful-algal-bloom-hab-reports-map",
+  "url": "https://gis.dnr.mo.gov/host/rest/services/wqm/HAB_SUBMIT_POINTS/MapServer/6",
   "access": [
-   "arcgis",
-   "html"
+   "arcgis"
   ],
-  "access_detail": null,
-  "machine_readable": false,
-  "sample_record": null,
-  "fields": [],
-  "fills_event_fields": [],
-  "cannot_fill": [],
-  "has_coordinates": false,
+  "access_detail": "The HAB Public Viewer experience (96d87e1fda0e445b90c23ce52d67a2d9) on DNR's HAB map page reads layer 6 (WQM_HAB_POINTS_PUBLIC) of gis.dnr.mo.gov's HAB_SUBMIT_POINTS service; queried 2026-11-15 (UTC): 283 reports, 39 under BloomStat advise; layer 5 counts privately owned waters by county; no key.",
+  "machine_readable": true,
+  "sample_record": {
+   "BloomStat": "advise",
+   "WBName": "Example Lake",
+   "HABODat": 1779062400000,
+   "CaseStatus": "Closed",
+   "HABCo": "Example County"
+  },
+  "fields": [
+   "globalid",
+   "BloomStat",
+   "WBName",
+   "HABODat",
+   "CaseStatus",
+   "HABCo"
+  ],
+  "fills_event_fields": [
+   "waterbody",
+   "coordinates",
+   "advice_text (DNR's map label)"
+  ],
+  "cannot_fill": [
+   "started_at (the observation day only)",
+   "ended_at"
+  ],
+  "has_coordinates": true,
   "has_outfall_ids": false,
-  "cadence": null,
+  "cadence": "as DNR edits the layer",
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "ArcGIS-based HAB map linked from the alerts page; service not resolved in this round.",
-  "verified": "search_only",
-  "checked": "2026-11-03",
+  "status": "used",
+  "status_reason": "Read by ingest/mo_dnr_hab.py: the reports DNR's map shows as a bloom present or the water closed, dated to the reads that show them.",
+  "verified": "fetched",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -362,5 +383,117 @@
   "verified": "search_only",
   "checked": "2026-11-03",
   "notes": ""
+ },
+ {
+  "id": "mo-dnr-concern-reports",
+  "name": "Missouri DNR Water Pollution Control concern reports (monthly PDFs)",
+  "jurisdiction": "MO",
+  "operator": "Missouri Department of Natural Resources",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso",
+   "bypass"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://dnr.mo.gov/commissions-boards-councils/clean-water-commission",
+  "access": [
+   "pdf",
+   "html"
+  ],
+  "access_detail": "Linked from the Clean Water Commission's page with its meetings; six reports on 2026-11-14 (December 2025 to May 2026), 945 concerns, 140 typed 'Bypass or Sewer Overflow'; generated text PDFs, read without a PDF library.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [
+   "started_at",
+   "reported_at",
+   "waterbody_text"
+  ],
+  "cannot_fill": [
+   "coordinates",
+   "ended_at",
+   "volume"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "monthly, with the Commission meetings, two to four months after the month",
+  "history": "December 2025 on",
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Read by ingest/mo_dnr_concerns.py: the sewer overflow concerns with the allegation filter; the concern text (people, homes) is never stored.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "notes": null
+ },
+ {
+  "id": "mo-dnr-merlin-search",
+  "name": "Missouri DNR MERLIN environmental emergency public search",
+  "jurisdiction": "MO",
+  "operator": "Missouri Department of Natural Resources",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://apps5.mo.gov/merlin/publicSearch.action",
+  "access": [
+   "html"
+  ],
+  "access_detail": "A search form (incidents since November 2021) with no export; no sewage query verified.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": "2021-11 on",
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Registered and watched; a form, not read.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "notes": null
+ },
+ {
+  "id": "mo-dnr-meerts-search",
+  "name": "Missouri DNR MEERTS historical incident search",
+  "jurisdiction": "MO",
+  "operator": "Missouri Department of Natural Resources",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://dnrservices.mo.gov/env/esp/meerts/search",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Incidents to October 2021; detail pages failed (2026-11-09).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": "to 2021-10",
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Registered and watched; not read.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "notes": null
  }
 ]

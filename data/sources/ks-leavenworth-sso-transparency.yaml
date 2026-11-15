@@ -1,0 +1,28 @@
+id: "ks-leavenworth-sso-transparency"
+name: "City of Leavenworth Sanitary Sewer Overflow Transparency Reports"
+url: "https://www.leavenworthks.gov/publicworks/page/sanitary-sewer-overflow-transparency-report"
+homepage: "https://www.leavenworthks.gov/publicworks/page/sanitary-sewer-overflow-transparency-report"
+kind: "html"
+level: "utility"
+# Read by ingest/ks_leavenworth_sso.py (source id ks-leavenworth-sso-transparency): an index of yearly pages, each listing
+#   the City's overflow pages; each page is Water Pollution Control's account of one overflow.
+# Real fetch 2026-11-14: 7 yearly pages (2020 to 2026), 28 overflow pages: 2020 6, 2021 2, 2022 6, 2023 7, 2024 3,
+#   2025 2, 2026 2 (to April 27). 24 give a clock time (18 the time staff were notified, 5 when they found it, 1 when
+#   they arrived: each the latest the overflow can have begun), 4 the day only; 15 a stop time; 18 an estimated volume
+#   (20 to 9,000 gallons); 6 name the creek (Three-Mile Creek 4, Five-Mile and Seven-Mile Creek), the rest say "the
+#   creek" or a storm inlet. Two concern a lift station serving the federal prison and are not assigned to the City.
+# The City's advice ("stay away from the creek water until testing is done and signs are removed") is kept as advice;
+#   it has no date and is never turned into one. Telephone and house numbers are dropped.
+cadence: "a page a few times a year, posted within days"
+license: "none stated"
+attribution: "City of Leavenworth, Kansas, Water Pollution Control"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["KS"]
+registry_ids: ["ks-leavenworth-sso-transparency"]
+access: ["html"]
+access_detail: "HTML pages, no key; the identified client was answered on 2026-11-14 (403 to plain clients on 2026-11-03)."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-14"

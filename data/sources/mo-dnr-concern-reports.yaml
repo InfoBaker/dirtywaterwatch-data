@@ -1,0 +1,33 @@
+id: "mo-dnr-concern-reports"
+name: "Missouri DNR Water Pollution Control concern reports (monthly PDFs)"
+url: "https://dnr.mo.gov/commissions-boards-councils/clean-water-commission"
+homepage: "https://dnr.mo.gov/commissions-boards-councils/clean-water-commission"
+kind: "pdf"
+level: "state"
+# Read by ingest/mo_dnr_concerns.py (source id mo-dnr-concern-reports): the Clean Water Commission's page links a document
+#   page per month, each with a PDF of the concerns the Department investigated that month (region, dates received and
+#   investigated, suspected source, city and county, type, the concerned party's text and the Department's comments).
+# Real fetch 2026-11-14: six reports (December 2025 to May 2026; the first three linked with the April 8 meeting, the
+#   rest with July 15; footers dated a week after the month, document pages revised up to two months later), 945
+#   concern entries, 140 typed "Bypass or Sewer Overflow", for 131 concerns (9 appear in two monthly reports; the
+#   later report's finding decides, so a concern a later report finds unsupported is withdrawn). The allegation filter,
+#   by each concern's latest entry: 4 dropped as private septic systems, 12 sent to a health department, 25 where the
+#   Department found nothing; 90 kept: 3 the operator's own report (cross-referenced to the SSO/Bypass Event System,
+#   St. Joseph's 25395 among them), 15 where the Department's comments report what it found, 72 the public's report
+#   with no finding stated (marked as the public's).
+# Kept per record: concern number, region, county, dates, types, finding, SSO event id, a named water and a city
+#   operator when the block names one. Never kept: the concern text, the comments, the suspected-source text, inspector
+#   initials (people and private homes). The PDF is read in memory and never saved.
+cadence: "monthly with the Commission's meetings, two to four months after the month"
+license: "none stated"
+attribution: "Missouri Department of Natural Resources, Water Protection Program"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["MO"]
+registry_ids: ["mo-dnr-concern-reports"]
+access: ["pdf", "html"]
+access_detail: "Document pages under /document-search/water-pollution-control-concerns-report-<month>-<year>, each linking one PDF; generated text, read by the pure-Python reader."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-14"

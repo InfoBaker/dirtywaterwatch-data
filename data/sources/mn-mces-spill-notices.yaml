@@ -1,0 +1,30 @@
+id: "mn-mces-spill-notices"
+name: "Metropolitan Council Environmental Services, wastewater spill notices"
+url: "https://metrocouncil.org/Wastewater-Water/Services/Interceptor-Services/Spills.aspx"
+homepage: "https://metrocouncil.org/Wastewater-Water/Services/Interceptor-Services/Spills.aspx"
+kind: "html"
+level: "operator"
+# Read by pipeline/ingest/mn_mces_spill_notices.py: the index's "Spill information" list and each linked page, one sso
+#   record per spill, the day the Council responded as reported_at (the spill's start is not given and stays null);
+#   the Council's "Do Not Enter/ Sewage Spill" signs are its own window (advisory_active; "will be removed" is no lift:
+#   standing to the end of that update's day, then the end not confirmed; "have been removed" ends the window with
+#   that day); the water a notice says was reached is placed (by name, county-aware), a notice saying no water was
+#   reached is kept and placed nowhere.
+# Real read 2026-11-14: three spills listed. Excelsior (responded 2026-05-29, stopped that day; reached Mud Pond; signs
+#   posted, their removal announced 2026-06-01, not confirmed), Minneapolis and Golden Valley (responded and stopped
+#   2026-07-09; a low-lying area connected to Bassett Creek, which sampling found unaffected; signs, removal announced
+#   2026-07-16, not confirmed), Eagan (2026-11-03; contained in under an hour; no waterbody impacted). The index says
+#   notices stay posted for one year.
+cadence: "event-driven; the index and each page read every run (four requests, two seconds apart)"
+license: "none stated"
+attribution: "Metropolitan Council Environmental Services"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["MN"]
+registry_ids: ["mn-mces-spill-notices"]
+access: ["html"]
+access_detail: "An HTML index linking one page per spill, each with the first account and dated update headings; no feed or API."
+machine_readable: false
+legal_basis: "Minn. Stat. 115.061(c): prompt notice to potentially impacted downstream users and the public; signs at impacted public use areas"
+checked: "2026-11-14"

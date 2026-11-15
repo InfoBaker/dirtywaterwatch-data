@@ -1,0 +1,725 @@
+{
+"hasZ": false,
+"exceededTransferLimit": false,
+"hasM": false,
+"objectIdFieldName": "objectid",
+"fields": [
+{
+"defaultValue": null,
+"length": 4,
+"type": "esriFieldTypeOID",
+"modelName": "objectid",
+"name": "objectid",
+"alias": "OBJECTID"
+},
+{
+"modelName": "advisory_level",
+"defaultValue": null,
+"name": "advisory_level",
+"length": 255,
+"alias": "Advisory_Level",
+"type": "esriFieldTypeString"
+},
+{
+"modelName": "advisory_symbology",
+"defaultValue": null,
+"name": "advisory_symbology",
+"length": 255,
+"alias": "Advisory_Symbology",
+"type": "esriFieldTypeString"
+},
+{
+"modelName": "beach_name",
+"defaultValue": null,
+"name": "beach_name",
+"length": 255,
+"alias": "Beach_Name",
+"type": "esriFieldTypeString"
+},
+{
+"modelName": "waterbody",
+"defaultValue": null,
+"name": "waterbody",
+"length": 255,
+"alias": "Waterbody",
+"type": "esriFieldTypeString"
+},
+{
+"modelName": "date_",
+"defaultValue": null,
+"name": "date_",
+"alias": "Date_",
+"type": "esriFieldTypeDateOnly"
+},
+{
+"modelName": "year_",
+"defaultValue": null,
+"name": "year_",
+"alias": "Year_",
+"type": "esriFieldTypeDouble"
+},
+{
+"modelName": "month_",
+"defaultValue": null,
+"name": "month_",
+"length": 255,
+"alias": "Month_",
+"type": "esriFieldTypeString"
+},
+{
+"modelName": "location_id",
+"defaultValue": null,
+"name": "location_id",
+"length": 255,
+"alias": "Location_ID",
+"type": "esriFieldTypeString"
+},
+{
+"modelName": "sample_id",
+"defaultValue": null,
+"name": "sample_id",
+"length": 255,
+"alias": "Sample_ID",
+"type": "esriFieldTypeString"
+},
+{
+"modelName": "project",
+"defaultValue": null,
+"name": "project",
+"length": 255,
+"alias": "Project",
+"type": "esriFieldTypeString"
+},
+{
+"modelName": "microcystin",
+"defaultValue": null,
+"name": "microcystin",
+"alias": "Microcystin",
+"type": "esriFieldTypeDouble"
+},
+{
+"modelName": "anatoxin_a",
+"defaultValue": null,
+"name": "anatoxin_a",
+"alias": "Anatoxin_a",
+"type": "esriFieldTypeDouble"
+},
+{
+"modelName": "cylindrospermopsin",
+"defaultValue": null,
+"name": "cylindrospermopsin",
+"alias": "Cylindrospermopsin",
+"type": "esriFieldTypeDouble"
+},
+{
+"modelName": "saxitoxin",
+"defaultValue": null,
+"name": "saxitoxin",
+"alias": "Saxitoxin",
+"type": "esriFieldTypeDouble"
+},
+{
+"modelName": "total_count",
+"defaultValue": null,
+"name": "total_count",
+"alias": "Total_Count",
+"type": "esriFieldTypeDouble"
+},
+{
+"modelName": "dominant_taxa",
+"defaultValue": null,
+"name": "dominant_taxa",
+"length": 255,
+"alias": "Dominant_Taxa",
+"type": "esriFieldTypeString"
+},
+{
+"modelName": "latitude",
+"defaultValue": null,
+"name": "latitude",
+"alias": "Latitude",
+"type": "esriFieldTypeDouble"
+},
+{
+"modelName": "longitude",
+"defaultValue": null,
+"name": "longitude",
+"alias": "Longitude",
+"type": "esriFieldTypeDouble"
+}
+],
+"spatialReference": {
+"latestWkid": 4326,
+"wkid": 4326
+},
+"geometryType": "esriGeometryPoint",
+"features": [
+{
+"attributes": {
+"cylindrospermopsin": 1.215,
+"anatoxin_a": -1,
+"total_count": -2,
+"sample_id": "AC69083",
+"latitude": 39.878,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "NR",
+"location_id": "WWU-09-0027",
+"month_": "Sep",
+"advisory_level": "Dog Park Closed",
+"beach_name": "Ft Ben Harrison State Park Dog Lake - East",
+"year_": 2026,
+"waterbody": "Ft. Harrison Dog Park",
+"advisory_symbology": "No Swimming",
+"saxitoxin": 0.141,
+"objectid": 1,
+"date_": "2026-09-14",
+"microcystin": -1,
+"longitude": -86.017
+},
+"geometry": {
+"x": -86.017,
+"y": 39.878
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": 0.844,
+"anatoxin_a": -1,
+"total_count": -2,
+"sample_id": "AC69059",
+"latitude": 39.878,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "NR",
+"location_id": "WWU-09-0027",
+"month_": "Sep",
+"advisory_level": "Dog Park Closed",
+"beach_name": "Ft Ben Harrison State Park Dog Lake - East",
+"year_": 2026,
+"waterbody": "Ft. Harrison Dog Park",
+"advisory_symbology": "No Swimming",
+"saxitoxin": 0.154,
+"objectid": 2,
+"date_": "2026-09-08",
+"microcystin": -1,
+"longitude": -86.017
+},
+"geometry": {
+"x": -86.017,
+"y": 39.878
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": 750000,
+"sample_id": "AC69056",
+"latitude": 40.702,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Merismopedia sp.",
+"location_id": "WMI-06-0001",
+"month_": "Sep",
+"advisory_level": "Advisory",
+"beach_name": "Mississinewa Lake Miami SRA",
+"year_": 2026,
+"waterbody": "Mississinewa Lake",
+"advisory_symbology": "Advisory",
+"saxitoxin": 0.099,
+"objectid": 3,
+"date_": "2026-09-08",
+"microcystin": 1.821,
+"longitude": -85.936
+},
+"geometry": {
+"x": -85.936,
+"y": 40.702
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": 61000,
+"sample_id": "AC68921",
+"latitude": 41.71,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Aphanothece sp.",
+"location_id": "LMJ-08-0033",
+"month_": "Aug",
+"advisory_level": "Low Risk",
+"beach_name": "Pokagon SP - Main Beach",
+"year_": 2026,
+"waterbody": "Lake James",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 5,
+"date_": "2026-08-31",
+"microcystin": -1,
+"longitude": -85.036
+},
+"geometry": {
+"x": -85.036,
+"y": 41.71
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": 0.365,
+"anatoxin_a": 0.669,
+"total_count": -2,
+"sample_id": "AC68968",
+"latitude": 39.878,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "NR",
+"location_id": "WWU-09-0027",
+"month_": "Aug",
+"advisory_level": "Dog Park Closed",
+"beach_name": "Ft Ben Harrison State Park Dog Lake - East",
+"year_": 2026,
+"waterbody": "Ft. Harrison Dog Park",
+"advisory_symbology": "No Swimming",
+"saxitoxin": 0.124,
+"objectid": 7,
+"date_": "2026-08-31",
+"microcystin": -1,
+"longitude": -86.017
+},
+"geometry": {
+"x": -86.017,
+"y": 39.878
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": 260000,
+"sample_id": "AC68662",
+"latitude": 40.702,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Aphanocapsa sp.",
+"location_id": "WMI-06-0001",
+"month_": "Aug",
+"advisory_level": "Advisory",
+"beach_name": "Mississinewa Lake Miami SRA",
+"year_": 2026,
+"waterbody": "Mississinewa Lake",
+"advisory_symbology": "Advisory",
+"saxitoxin": -1,
+"objectid": 24,
+"date_": "2026-08-11",
+"microcystin": 3.825,
+"longitude": -85.936
+},
+"geometry": {
+"x": -85.936,
+"y": 40.702
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": 47000,
+"sample_id": "AC68657",
+"latitude": 41.71,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Aphanocapsa sp.",
+"location_id": "LMJ-08-0033",
+"month_": "Aug",
+"advisory_level": "Low Risk",
+"beach_name": "Pokagon SP - Main Beach",
+"year_": 2026,
+"waterbody": "Lake James",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 27,
+"date_": "2026-08-10",
+"microcystin": -1,
+"longitude": -85.036
+},
+"geometry": {
+"x": -85.036,
+"y": 41.71
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": 0.311,
+"anatoxin_a": -1,
+"total_count": -2,
+"sample_id": "AC68667",
+"latitude": 39.878,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "NR",
+"location_id": "WWU-09-0027",
+"month_": "Aug",
+"advisory_level": "Dog Park Low Risk",
+"beach_name": "Ft Ben Harrison State Park Dog Lake - East",
+"year_": 2026,
+"waterbody": "Ft. Harrison Dog Park",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 28,
+"date_": "2026-08-10",
+"microcystin": -1,
+"longitude": -86.017
+},
+"geometry": {
+"x": -86.017,
+"y": 39.878
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": 150000,
+"sample_id": "AC68632",
+"latitude": 40.702,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Microcystis sp.",
+"location_id": "WMI-06-0001",
+"month_": "Jul",
+"advisory_level": "Advisory",
+"beach_name": "Mississinewa Lake Miami SRA",
+"year_": 2026,
+"waterbody": "Mississinewa Lake",
+"advisory_symbology": "Advisory",
+"saxitoxin": -1,
+"objectid": 42,
+"date_": "2026-07-28",
+"microcystin": -1,
+"longitude": -85.936
+},
+"geometry": {
+"x": -85.936,
+"y": 40.702
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": -2,
+"sample_id": "AC68668",
+"latitude": 39.878,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "NR",
+"location_id": "WWU-09-0027",
+"month_": "Jul",
+"advisory_level": "Dog Park Low Risk",
+"beach_name": "Ft Ben Harrison State Park Dog Lake - East",
+"year_": 2026,
+"waterbody": "Ft. Harrison Dog Park",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 45,
+"date_": "2026-07-27",
+"microcystin": -1,
+"longitude": -86.017
+},
+"geometry": {
+"x": -86.017,
+"y": 39.878
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": 98000,
+"sample_id": "AC68260",
+"latitude": 40.702,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Microcystis sp.",
+"location_id": "WMI-06-0001",
+"month_": "Jul",
+"advisory_level": "Low Risk",
+"beach_name": "Mississinewa Lake Miami SRA",
+"year_": 2026,
+"waterbody": "Mississinewa Lake",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 54,
+"date_": "2026-07-14",
+"microcystin": 2.693,
+"longitude": -85.936
+},
+"geometry": {
+"x": -85.936,
+"y": 40.702
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": -2,
+"sample_id": "AC68265",
+"latitude": 39.878,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "NR",
+"location_id": "WWU-09-0027",
+"month_": "Jul",
+"advisory_level": "Dog Park Low Risk",
+"beach_name": "Ft Ben Harrison State Park Dog Lake - East",
+"year_": 2026,
+"waterbody": "Ft. Harrison Dog Park",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 56,
+"date_": "2026-07-13",
+"microcystin": -1,
+"longitude": -86.017
+},
+"geometry": {
+"x": -86.017,
+"y": 39.878
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": 66000,
+"sample_id": "AC68255",
+"latitude": 41.71,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Cyanodictyon sp.",
+"location_id": "LMJ-08-0033",
+"month_": "Jul",
+"advisory_level": "Low Risk",
+"beach_name": "Pokagon SP - Main Beach",
+"year_": 2026,
+"waterbody": "Lake James",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 59,
+"date_": "2026-07-13",
+"microcystin": -1,
+"longitude": -85.036
+},
+"geometry": {
+"x": -85.036,
+"y": 41.71
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -2,
+"anatoxin_a": -1,
+"total_count": 20000,
+"sample_id": "AC68090",
+"latitude": 40.702,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Aphanizomenon flos-aquae",
+"location_id": "WMI-06-0001",
+"month_": "Jun",
+"advisory_level": "Low Risk",
+"beach_name": "Mississinewa Lake Miami SRA",
+"year_": 2026,
+"waterbody": "Mississinewa Lake",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 68,
+"date_": "2026-06-23",
+"microcystin": -1,
+"longitude": -85.936
+},
+"geometry": {
+"x": -85.936,
+"y": 40.702
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -2,
+"anatoxin_a": -1,
+"total_count": 110000,
+"sample_id": "AC67943",
+"latitude": 40.702,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Aphanizomenon flos-aquae",
+"location_id": "WMI-06-0001",
+"month_": "Jun",
+"advisory_level": "Advisory",
+"beach_name": "Mississinewa Lake Miami SRA",
+"year_": 2026,
+"waterbody": "Mississinewa Lake",
+"advisory_symbology": "Advisory",
+"saxitoxin": -1,
+"objectid": 79,
+"date_": "2026-06-16",
+"microcystin": 0.314,
+"longitude": -85.936
+},
+"geometry": {
+"x": -85.936,
+"y": 40.702
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -2,
+"anatoxin_a": -1,
+"total_count": 16000,
+"sample_id": "AC67938",
+"latitude": 41.71,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Chroococcales",
+"location_id": "LMJ-08-0033",
+"month_": "Jun",
+"advisory_level": "Low Risk",
+"beach_name": "Pokagon SP - Main Beach",
+"year_": 2026,
+"waterbody": "Lake James",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 81,
+"date_": "2026-06-15",
+"microcystin": -1,
+"longitude": -85.036
+},
+"geometry": {
+"x": -85.036,
+"y": 41.71
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": -2,
+"sample_id": "AC67948",
+"latitude": 39.878,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "NR",
+"location_id": "WWU-09-0027",
+"month_": "Jun",
+"advisory_level": "Dog Park Low Risk",
+"beach_name": "Ft Ben Harrison State Park Dog Lake - East",
+"year_": 2026,
+"waterbody": "Ft. Harrison Dog Park",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 84,
+"date_": "2026-06-15",
+"microcystin": -1,
+"longitude": -86.017
+},
+"geometry": {
+"x": -86.017,
+"y": 39.878
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -2,
+"anatoxin_a": -1,
+"total_count": 3100,
+"sample_id": "AC48586",
+"latitude": 40.702,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Pseudanabaena sp.",
+"location_id": "WMI-06-0001",
+"month_": "May",
+"advisory_level": "Low Risk",
+"beach_name": "Mississinewa Lake Miami SRA",
+"year_": 2026,
+"waterbody": "Mississinewa Lake",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 95,
+"date_": "2026-05-19",
+"microcystin": -1,
+"longitude": -85.936
+},
+"geometry": {
+"x": -85.936,
+"y": 40.702
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": -2,
+"sample_id": "AC48591",
+"latitude": 39.878,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "NR",
+"location_id": "WWU-09-0027",
+"month_": "May",
+"advisory_level": "Dog Park Low Risk",
+"beach_name": "Ft Ben Harrison State Park Dog Lake - East",
+"year_": 2026,
+"waterbody": "Ft. Harrison Dog Park",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 101,
+"date_": "2026-05-18",
+"microcystin": -1,
+"longitude": -86.017
+},
+"geometry": {
+"x": -86.017,
+"y": 39.878
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -2,
+"anatoxin_a": -1,
+"total_count": 17000,
+"sample_id": "AC48581",
+"latitude": 41.71,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "Chroococcales",
+"location_id": "LMJ-08-0033",
+"month_": "May",
+"advisory_level": "Low Risk",
+"beach_name": "Pokagon SP - Main Beach",
+"year_": 2026,
+"waterbody": "Lake James",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 102,
+"date_": "2026-05-18",
+"microcystin": -1,
+"longitude": -85.036
+},
+"geometry": {
+"x": -85.036,
+"y": 41.71
+}
+},
+{
+"attributes": {
+"cylindrospermopsin": -1,
+"anatoxin_a": -1,
+"total_count": -2,
+"sample_id": "AC47967",
+"latitude": 39.878,
+"project": "2026 Cyanobacteria and Cyanotoxins Beach Project",
+"dominant_taxa": "NR",
+"location_id": "WWU-09-0027",
+"month_": "Feb",
+"advisory_level": "Dog Park Low Risk",
+"beach_name": "Ft Ben Harrison State Park Dog Lake - East",
+"year_": 2026,
+"waterbody": "Ft. Harrison Dog Park",
+"advisory_symbology": "Low Risk",
+"saxitoxin": -1,
+"objectid": 115,
+"date_": "2026-02-24",
+"microcystin": -1,
+"longitude": -86.017
+},
+"geometry": {
+"x": -86.017,
+"y": 39.878
+}
+}
+]
+}
