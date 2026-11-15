@@ -729,3 +729,22 @@ def test_leavenworth_distinct_same_day_pages_on_one_street_stay_two_records():
     assert {r["raw"]["first_seen_at"] for r in recs3} == {"2026-06-01T00:00:00Z"}
     blob = json.dumps(recs3)
     assert "1234" not in blob and "5678" not in blob
+
+
+def test_kdhe_release_without_a_usable_publication_date_fails_the_run_and_keeps_the_records(tmp_path, monkeypatch):
+    """Verification P2-5: an issue or a rescission with no usable pubDate fails the run through main()."""
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    ok = _feed(("Stream Advisory Issued for Example Creek in Shawnee County", "50", "Mon, 02 Nov 2026 09:00:00 -0600", "s"))
+    recs, _ = A.run(ok, [], AT)
+    common.write_events(A.SOURCE_ID, recs)
+    for bad in (_feed(("Stream Advisory Issued for Sample Creek in Shawnee County", "51", "", "s")),
+                _feed(("Stream Advisory Rescinded for Example Creek in Shawnee County", "52", "garbled", "x"))):
+        f = tmp_path / "bad.xml"
+        f.write_bytes(bad)
+        assert A.main(["--file", str(f)]) == 1
+        out = json.loads((tmp_path / f"{A.SOURCE_ID}.json").read_text())
+        assert out["ok"] is False and [r["status"] for r in out["records"]] == ["advisory_active"]
+    # a release of another kind (not read) with a bad date changes nothing
+    other = _feed(("Boil Water Advisory for Example", "53", "garbled", "x"))
+    assert A.run(other, recs, AT)[1]["releases"] == 1

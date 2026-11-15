@@ -746,3 +746,19 @@ def test_kc_end_date_before_the_stop_verb_and_ambiguous_dates():
     t = K.times("Crews responded Dec. 31, 2025 at 10:00 p.m. to an overflow. On Jan. 1, 2026, it stopped at 2:00 a.m.",
                 date(2026, 1, 2))
     assert t["end"] == "2026-01-01T02:00:00-06:00"
+
+
+def test_kc_notices_with_invalid_publication_dates_fail_the_run_and_keep_the_records(tmp_path, monkeypatch):
+    """Verification P2-5: a notice whose pubDate cannot be read fails the run through main(), never a successful
+    run with the notices dropped."""
+    import re as _re
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    good = (FIX / "kc_feed.xml").read_bytes()
+    recs, _ = K.run([good], [], AT)
+    common.write_events(K.SOURCE_ID, recs)
+    bad = tmp_path / "bad.xml"
+    bad.write_bytes(_re.sub(rb"<pubDate>[^<]*</pubDate>", b"<pubDate>not a date</pubDate>", good))
+    assert K.main(["--file", str(bad)]) == 1
+    out = json.loads((tmp_path / f"{K.SOURCE_ID}.json").read_text())
+    assert out["ok"] is False and len(out["records"]) == len(recs) > 0

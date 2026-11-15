@@ -370,8 +370,10 @@ def record(it: dict, at: str) -> dict | None:
     if not is_notice(title, text):
         return None
     pub = pub_dt(it)
-    if pub is None:                                   # no publication time: nothing to read a year or "today" by
-        return None
+    if pub is None:
+        # a notice without a usable publication time: nothing to read a year or "today" by, and dropping it would
+        # be a silent loss; the run fails with the earlier records kept (verification P2-5)
+        raise ValueError(f"KC Water notice {it.get('guid') or it.get('link')} has no usable publication time")
     t = times(text, pub.date())
     v, flag, vtext = volume(text)
     ws = waters(text)

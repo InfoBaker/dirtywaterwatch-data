@@ -215,6 +215,11 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
     stats["releases"] = len(its)
     lifts, orphan, ambiguous = [], [], []
     present: set[str] = set()           # the issuing releases this read holds (re-review P1-4)
+    for it in its:
+        if kind(it["title"])[0] and iso(it["date"]) is None:
+            # an issue or rescission without a usable publication time cannot be dated: the run fails with the
+            # earlier records kept, never an advisory with no start or a lift with no time (verification P2-5)
+            raise ValueError(f"KDHE stream advisory release {it.get('link')} has no usable publication time")
     for it in sorted(its, key=lambda x: iso(x["date"]) or ""):
         k, waters, county = kind(it["title"])
         if k == "issue":
