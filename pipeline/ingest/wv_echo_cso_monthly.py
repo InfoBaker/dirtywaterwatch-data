@@ -36,9 +36,9 @@ Cache and cadence
   eight weeks after the month.
 
 Failures
-  A permit whose request fails three times keeps its cached answer and is named in meta.fetch; a run in which every
-  request asked fails is ok=False and the previous records stay. A permit ECHO calls invalid is 'not in ECHO', no
-  failure. The answers name the facility (a public plant), no person.
+  A permit whose request fails three times keeps its cached answer and is named in meta.fetch; any failed request
+  makes the run ok=False, the records (from the cache) still written. A permit ECHO calls invalid is 'not in ECHO',
+  no failure, and keeps what an earlier answer showed. Each record's fetched_at is when ECHO was asked. The answers name the facility (a public plant), no person.
 
 Run from pipeline/:  python -m ingest.wv_echo_cso_monthly [--since 2025-01-01] [--refresh] [--cache FILE]
 """
@@ -186,9 +186,11 @@ def build(cache: dict, outlets: dict[str, dict[str, dict]]) -> tuple[list[dict],
                     volume_text=f"flow reported at outlet {outlet} in {ym}: {parts}; monthly report, not an event",
                     estimate_flag="unknown", authority=AUTHORITY,
                     source_url=f"https://echo.epa.gov/effluent-charts#{permit}",
-                    raw={"month": ym, "permit_feature": outlet, "parameter": PARAM,
+                    raw={"month": ym, "permit_feature": outlet, "parameter": PARAM, "asked_at": entry.get("answered_at") or entry.get("asked_at"),
                          "lines": [{k: r.get(k) for k in KEEP} for r in rs], "time_zone": TZ,
                          "note": "monthly DMR flow at a combined sewer outlet (a rate in MGD), not an individual event"}))
+    for r in records:     # when ECHO was asked for the answer the record comes from, not this build's time
+        r["fetched_at"] = r["raw"].get("asked_at") or r["fetched_at"]
     records.sort(key=lambda r: (r["started_at"], r["event_id"]), reverse=True)
     meta = {"no_discharge_months": dict(no_dis), "latest_month_by_outfall": dict(sorted(latest.items())),
             "median_days_month_end_to_receipt": statistics.median(lags) if lags else None}
@@ -223,9 +225,13 @@ def main(argv=None) -> int:
             res, how = fetch(p, since)
             fetch_log[p] = how
             if res is not None:
-                cache["permits"][p] = {**compact(res, outlets[p]), "asked_at": now_iso()}
+                t = now_iso()
+                cache["permits"][p] = {**compact(res, outlets[p]), "asked_at": t, "answered_at": t}
             elif how == "not in ECHO":
-                cache["permits"][p] = {"name": None, "lines": {}, "asked_at": now_iso(), "not_in_echo": True}
+                # a rejection never empties what an earlier answer showed: the lines stay, the rejection is noted
+                prev = cache["permits"].get(p) or {"name": None, "lines": {}}
+                cache["permits"][p] = {**prev, "answered_at": prev.get("answered_at") or prev.get("asked_at"),
+                                       "asked_at": now_iso(), "not_in_echo": True}
             time.sleep(1)
         write_json(path, cache)
     records, meta = build(cache, outlets)
@@ -233,10 +239,16 @@ def main(argv=None) -> int:
                  "permits_asked": len(outlets), "fetch": fetch_log,
                  "permits_with_cso_lines": sorted(p for p, e in cache["permits"].items() if e.get("lines")),
                  "cadence": "weekly per permit; DMRs reach ECHO weeks after the month"})
-    tried = [v for v in fetch_log.values() if not v.startswith("not asked")]
-    if tried and all(v.startswith("failed") for v in tried):
-        write_events(SOURCE_ID, [], ok=False, error=f"every request failed: {fetch_log}", meta=meta)
-        print(f"{SOURCE_ID}: every request failed; the previous records are kept", file=sys.stderr)
+    failed = {p: v for p, v in fetch_log.items() if v.startswith("failed")}
+    if failed:
+        # the records come from the cache, which keeps every earlier answer, so they are complete; the run is not ok
+        # and names the permits whose request failed (all of them, or some)
+        out = common.EVENTS_DIR / f"{SOURCE_ID}.json"
+        write_json(out, {"source_id": SOURCE_ID, "fetched_at": now_iso(), "ok": False,
+                         "error": f"{len(failed)} of {len(fetch_log)} requests failed: {failed}",
+                         "last_ok_at": (read_json(out, {}) or {}).get("last_ok_at"), "meta": meta,
+                         "count": len(records), "records": records})
+        print(f"{SOURCE_ID}: {len(failed)} requests failed; {len(records)} outlet-months from the cache", file=sys.stderr)
         return 1
     out = write_events(SOURCE_ID, records, meta=meta)
     print(f"{SOURCE_ID}: {len(records)} outlet-months -> {out}")

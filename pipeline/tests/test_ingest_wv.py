@@ -32,7 +32,7 @@ def _epa(permit, outfall, lat, lon, status="CSO", slug="example-river-wv"):
 
 
 def test_outlets_pair_with_epa_by_code_and_by_point():
-    dep = [_dep("WV0000001", "C001", 39.1, -80.1), _dep("WV0000001", "C002A", 39.2, -80.2),
+    dep = [_dep("WV0000001", "C001", 39.1, -80.1, stream="Example River/Ohio River"), _dep("WV0000001", "C002A", 39.2, -80.2),
            _dep("WV0000001", "C003", 39.3, -80.3, end="2026/10/27")]
     epa = [_epa("WV0000001", "C001", 39.1001, -80.1), _epa("WV0000001", "XXX2", 39.2005, -80.2),
            _epa("WV0000001", "C003", 39.3, -80.3)]
@@ -44,7 +44,28 @@ def test_outlets_pair_with_epa_by_code_and_by_point():
     assert rows["C003"]["outfall_status"].startswith("CLS") and common._closed(rows["C003"])
     assert rows["C001"]["water_slug"] == "example-river-wv" and rows["C001"]["match"] == "carried from EPA's row"
     assert doc["open"] == 2 and len(doc["status_differs_from_epa"]) == 1
+    # EPA's 'XXX2' is retired under its own code: one physical outlet
+    alias = [r for r in doc["outfalls"] if r["outfall"] == "XXX2"]
+    assert alias and alias[0]["outfall_kind"] == "other" and common._closed(alias[0])
+    # a different stream (Example Run) does not take EPA's tie to Example River
+    assert "water_slug" not in rows["C002A"] and "carry_refused" in rows["C002A"]
     assert all("rp_name" not in r and "A Person" not in json.dumps(r) for r in doc["outfalls"])
+
+
+def test_a_qualified_name_never_takes_the_plain_waters_tie():
+    doc = B.build([_dep("WV0000001", "C001", 39.1, -80.1, stream="Little Example Creek/Example Creek")],
+                  [{**_epa("WV0000001", "C001", 39.1, -80.1), "water_name": "Example Creek"}], "2026-11-14T00:00:00Z")
+    r = doc["outfalls"][0]
+    assert "water_slug" not in r and "Little Example Creek" in r["carry_refused"]
+    doc = B.build([_dep("WV0000001", "C001", 39.1, -80.1, stream="Ohio")],
+                  [{**_epa("WV0000001", "C001", 39.1, -80.1), "water_name": "Ohio River"}], "2026-11-14T00:00:00Z")
+    assert doc["outfalls"][0]["water_slug"] == "example-river-wv"     # a spelling variant is the same water
+
+
+def test_registry_loads_each_wv_outlet_once():
+    reg = [r for r in common.load_outfall_registry(provisional=False) if r.get("state") == "WV"]
+    cso = [r for r in reg if r["outfall_kind"] == "cso"]
+    assert len(cso) == 792 and sum(1 for r in cso if not common._closed(r)) == 519
 
 
 def test_xxx_row_far_from_every_outlet_is_not_paired():
@@ -60,7 +81,8 @@ def test_fetch_never_asks_every_field():
 def test_real_outlet_file():
     doc = json.loads((ROOT / "data" / "outfalls-wv.json").read_text())
     assert doc["open"] == 519 and doc["open_permits"] == 61 and doc["count"] == 792
-    assert all(r["outfall_kind"] == "cso" and r["state"] == "WV" for r in doc["outfalls"])
+    assert all(r["state"] == "WV" for r in doc["outfalls"])
+    assert sum(1 for r in doc["outfalls"] if r["outfall_kind"] == "cso") == 792
 
 
 def _line(end, value, base="MO AVG", nodi=None, received="20-OCT-26"):
@@ -133,7 +155,8 @@ def test_operators_hold_every_permit_once_and_name_no_person():
               if r.get("state") == "WV"}
     held = [p for r in dis for p in r["npdes_permits"]]
     assert len(held) == len(set(held)) and plants <= set(held)
-    cso = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-wv.json").read_text())["outfalls"]}
+    cso = {r["npdes_permit"] for r in json.loads((ROOT / "data" / "outfalls-wv.json").read_text())["outfalls"]
+           if r["outfall_kind"] == "cso"}
     assert cso <= {p for r in dis if r["kind"] == "cso" for p in r["npdes_permits"]}
     assert not [r["name"] for r in dis if R.person_shaped(r["name"])]
     assert len({r["id"] for r in dis}) == len(dis)
@@ -182,3 +205,39 @@ def test_missing_waters_list():
     names = {r["name"] for r in doc["rows"]} | set((doc.get("resolved") or {}).keys() if isinstance(
         doc.get("resolved"), dict) else [x.get("name") for x in doc.get("resolved") or []])
     assert "Jim Rum" in names or not doc["rows"]
+
+
+def _run_dmr(tmp_path, monkeypatch, answers, cache):
+    import common as C
+    monkeypatch.setattr(C, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(M, "CACHE_FILE", tmp_path / "cache.json")
+    (tmp_path / "cache.json").write_text(json.dumps(cache))
+    outlets = {p: {"C002": {"npdes_permit": p, "outfall": "C002", "lat": 37.7, "lon": -81.2}} for p in answers}
+    monkeypatch.setattr(M, "cso_outlets", lambda: outlets)
+    monkeypatch.setattr(M, "fetch", lambda p, since: answers[p])
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    rc = M.main([])
+    return rc, json.loads((tmp_path / f"{M.SOURCE_ID}.json").read_text())
+
+
+def _cached(p):
+    return {"name": "EXAMPLE", "asked_at": "2020-01-01T00:00:00Z",
+            "lines": {"C002": [_line("30-SEP-26", "1.5")]}}
+
+
+def test_a_rejection_keeps_the_months_an_earlier_answer_showed(tmp_path, monkeypatch):
+    cache = {"since": "2025-01-01", "permits": {"WV0000003": _cached("WV0000003")}}
+    rc, doc = _run_dmr(tmp_path, monkeypatch, {"WV0000003": (None, "not in ECHO")}, cache)
+    assert rc == 0 and doc["ok"] and doc["count"] == 1
+    assert doc["records"][0]["fetched_at"] == "2020-01-01T00:00:00Z"
+
+
+def test_a_partial_failure_is_not_ok_and_keeps_every_record(tmp_path, monkeypatch):
+    cache = {"since": "2025-01-01", "permits": {"WV0000003": _cached("WV0000003"), "WV0000004": _cached("WV0000004")}}
+    ok_answer = {"CWPName": "EXAMPLE", "PermFeatures": [{"PermFeatureNmbr": "C002", "Parameters": [
+        {"ParameterCode": "50050", "MonitoringLocationDesc": "Effluent Gross",
+         "DischargeMonitoringReports": [_line("31-OCT-26", "2.0")]}]}]}
+    rc, doc = _run_dmr(tmp_path, monkeypatch, {"WV0000003": (ok_answer, "live"), "WV0000004": (None, "failed (x)")},
+                       cache)
+    assert rc == 1 and doc["ok"] is False and "1 of 2" in doc["error"]
+    assert {r["npdes_permit"] for r in doc["records"]} == {"WV0000003", "WV0000004"}
