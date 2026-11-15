@@ -47,7 +47,10 @@ Record rules (rules only: no model, no geocoding)
     that overflow ties to its occurrence ("A combined sewer overflow occurred on June 1, 2027"; "the wastewater spill on
     September 18"), precision day (occurrence_day). A date after an end, a report or a storm word is not a start: "ended
     at 2:00 pm on June 2" stays the end, "was reported on June 2" is kept as raw.reported_day (never reported_at, never
-    a start), and where no start is tied raw.start_basis says the post gives none. The dates the title or
+    a start), and where no start is tied raw.start_basis says the post gives none. A start verb is the overflow's
+    only when the overflow is its subject or object: "Heavy rain began on June 1 and led to a combined sewer
+    overflow", "Repairs began at 8:00 am on June 3" and "crews started cleanup" give no start, and a repair's or a
+    cleanup's day is not the storm's period either (_overflow_subject). The dates the title or
     the opening sentence give for the storm ("August 1st, 2026", "Aug 9-10, 2025", "8-20-18") are not the overflow's
     start: they are kept as raw.period_start / raw.period_end and raw.started_after (a lower bound), started_at stays
     null and the status engine counts from the post's publication (Astra re-review 2026-11-15 P1-2). A date with no
@@ -177,12 +180,38 @@ START_CUE = re.compile(r"\b(?:began|begin\w*|start\w*|occurred|occured|took plac
 END_CUE = re.compile(r"\b(?:ended|ending|end|until|stopped|ceased|concluded|lasted|continued)\b", re.I)
 
 
+# a start verb is the overflow's only when the overflow is its subject ("A combined sewer overflow began on June 1") or
+# its object ("MMSD initiated a combined sewer overflow"): rain, a storm, repairs, a cleanup or crews that began or
+# started something give no start (Astra verification 3, 2026-11-15, #2)
+OVERFLOW_NOUN = re.compile(r"\b(?:overflow|spill|release|discharge|bypass)\w*|\bcsos?\b|\bssos?\b", re.I)
+OTHER_SUBJECT = re.compile(r"\b(?:rain\w*|storm\w*|thunderstorm\w*|precipitation|snow\w*|flood\w*|weather|"
+                           r"repair\w*|clean-?up\w*|cleaning|work|crews?|construction|maintenance|inspection\w*|"
+                           r"investigation\w*|response|pumping|sampling|testing|monitoring|outage|power)\b", re.I)
+CLEANUP = re.compile(r"\b(?:repair\w*|clean-?up\w*|cleaning|crews?|construction|maintenance|inspection\w*|"
+                     r"investigation\w*|pumping|sampling|testing|monitoring)\b", re.I)
+OBJECT = re.compile(r"\s+(?:(?:an?|the|its|their)\s+)?(?:[\w-]+\s+){0,3}?(?:overflow|spill|release|discharge|bypass)\w*"
+                    r"|\s+(?:(?:an?|the)\s+)?(?:csos?|ssos?)\b", re.I)
+
+
+def _overflow_subject(text: str, cue: re.Match) -> bool:
+    """True when the start verb cue speaks of the overflow: the last overflow word before it with no other subject
+    between, or an overflow as its object."""
+    pre = text[:cue.start()]
+    last = None
+    for last in OVERFLOW_NOUN.finditer(pre):
+        pass
+    if last is not None and not OTHER_SUBJECT.search(pre[last.end():]):
+        return True
+    obj = OBJECT.match(text, cue.end())
+    return bool(obj and not OTHER_SUBJECT.search(obj.group(0)))
+
+
 def _start_owned(text: str, m: re.Match) -> bool:
-    """True when the nearest cue before the time m is a start cue, not an end cue."""
+    """True when the nearest cue before the time m is a start cue, not an end cue, and the overflow is what started."""
     pre = text[:m.start()] + text[m.start():m.end()].split(m.group("h"), 1)[0]
-    s = [x.end() for x in START_CUE.finditer(pre)]
+    s = list(START_CUE.finditer(pre))
     e = [x.end() for x in END_CUE.finditer(pre)]
-    return bool(s) and (not e or max(s) > max(e))
+    return bool(s) and (not e or s[-1].end() > max(e)) and _overflow_subject(text, s[-1])
 
 
 TYPE_WORDS = {"cso": re.compile(r"combined sewer overflows?|\bcsos?\b", re.I),
@@ -461,6 +490,8 @@ def period(text: str, ref: date, skip_tied: bool = False) -> tuple[date, date | 
                     for m in rx.finditer(text[:i])]
             if cues and max(cues)[1] in "er":
                 continue
+            if CLEANUP.search(re.split(r"[.;]", text[:i])[-1]):
+                continue                # a repair's or a cleanup's day is not the storm's (verification 3, #2)
         return first, last, words
     return None
 
@@ -485,7 +516,10 @@ def occurrence_day(text: str, ref: date) -> tuple[date, str] | None:
     """(day, words) of the first date text ties to the overflow's occurrence or start; None when none is tied."""
     for i, first, _, words in _date_hits(text, ref):
         pre = text[:i]
-        anchors = [m.end() for m in START_TIE.finditer(pre)] + ([len(pre)] if NOUN_ON.search(pre) else [])
+        verbs = list(START_TIE.finditer(pre))
+        if verbs and not _overflow_subject(text, verbs[-1]) and not NOUN_ON.search(pre):
+            continue                    # rain, a storm, repairs or a cleanup began: not the overflow (verification 3)
+        anchors = [m.end() for m in verbs] + ([len(pre)] if NOUN_ON.search(pre) else [])
         if anchors and not NOT_START.search(pre[max(anchors):]):
             return first, words
     return None
