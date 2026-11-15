@@ -1,0 +1,32 @@
+id: "la-baton-rouge-quarterly"
+name: "City of Baton Rouge and Parish of East Baton Rouge: consent-decree quarterly reports, unauthorized discharges (Part D)"
+url: "https://brprojects.com/baton-rouge-sso-program/program-overview/regulatory-information/"
+homepage: "https://brprojects.com/baton-rouge-sso-program/program-overview/regulatory-information/"
+kind: "pdf"
+level: "local"
+# Feed row: written by pipeline/ingest/la_baton_rouge_quarterly.py (data/build/events/la-baton-rouge-quarterly.json; the
+#   parsed rows of every report read are kept in data/build/la-baton-rouge-state.json, a new report fetched once, then the newest two reports and any report with no accepted copy are read again every 30 days).
+# Read 2026-11-14: the index lists the quarterly reports to EPA and LDEQ since 2002, Report 98 (July to September 2026,
+#   issued October 30, 2026) the newest. Reports 91 to 98 (October 2024 to September 2026) read with pypdf's layout text.
+#   A report is used only when the rows read for each collection system (North LA0036439, AI 4843; South LA0036412,
+#   AI 4841) equal its own Part D summary: 93, 94, 95, 96 and 98 pass (219 discharges: 7+40, 7+32, 9+31, 15+50, 9+19);
+#   91 (North's table not found), 92 (South 55 of 56) and 97 (North 23 read against 21) are withheld. The plants'
+#   discharges (1 to 8 a quarter) are scanned forms with no text: counted from the summary, not itemised.
+# Records: one per row, sso, status unknown (no end given), day precision in Central time (the site's caution for 72
+#   hours from the start of the day: data/rules.json unresolved.day_start_caution), published_at the report's issue
+#   date, the gallons given, the receiving water as written; 'None' or no water (102 of the 219 rows) kept with the parish and permit and
+#   placed on no water. No address is kept. Delay: the rows are one to four months old when the report appears.
+# Cannot fill: a time of day; an end; a point; the plants' discharges.
+cadence: "the index with the refresh; a new report fetched once, the newest two reports and any report with no accepted copy are read again every 30 days (quarterly, about a month after the quarter)"
+license: "none stated (public record)"
+attribution: "City of Baton Rouge and Parish of East Baton Rouge"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["LA"]
+registry_ids: ["la-baton-rouge-quarterly-reports"]
+access: ["pdf"]
+access_detail: "The regulatory information page links each report as a PDF (about 2.5 MB, 76 pages); Part D's collection-system tables are text, the plant forms are images."
+machine_readable: false
+legal_basis: "Consent decree (2002), Paragraph 26, Section XI"
+checked: "2026-11-14"

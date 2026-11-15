@@ -1,0 +1,31 @@
+{
+ "about": "Water names in West Virginia's outlet rows and records that data/receiving-waters-national.json does not hold for WV: DEP's NPDES Outlets layer (each open combined sewer outlet's receiving stream, read 2026-11-14), EPA's monthly DMR records and DEP's bloom map, with the number of outlets and records giving each, their counties and points.",
+ "state": "WV",
+ "waters": 1,
+ "reports": 1,
+ "rows": [
+  {
+   "name": "Jim Rum",
+   "reports": 1,
+   "counties": [
+    "Marshall"
+   ],
+   "points": [
+    [
+     39.979,
+     -80.732
+    ]
+   ],
+   "permits": [
+    "WV0020141"
+   ],
+   "sources": [
+    "wv-dep-npdes-outlets"
+   ],
+   "as_given": [
+    "Jim Rum/Ohio River"
+   ],
+   "reason": "not in data/receiving-waters-national.json for WV; likely Jim Run (on the national list for WV; DEP's layer writes 'Jim Rum')"
+  }
+ ]
+}

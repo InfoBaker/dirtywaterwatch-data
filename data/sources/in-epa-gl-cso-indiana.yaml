@@ -1,0 +1,22 @@
+id: "in-epa-gl-cso-indiana"
+name: "EPA: Combined Sewer Overflows in the Great Lakes Basin, Indiana"
+url: "https://www.epa.gov/npdes/combined-sewer-overflows-great-lakes-basin-indiana"
+homepage: "https://www.epa.gov/npdes/combined-sewer-overflows-great-lakes-basin-indiana"
+kind: "html"
+level: "federal"
+# Notes (research/in, status used, verified fetched, checked 2026-11-03): Seeds the channel column
+#   for Great Lakes basin operators.
+# Access detail (research, quoted): Fetched (raw/epa-gl-cso-indiana.html): 22 operators, websites
+#   and annual notices.
+cadence: null
+license: "none stated"
+attribution: "U.S. EPA"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["IN"]
+access: ["html"]
+access_detail: "Fetched (raw/epa-gl-cso-indiana.html): 22 operators, websites and annual notices."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-03"
