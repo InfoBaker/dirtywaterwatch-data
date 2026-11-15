@@ -850,7 +850,7 @@
    "permit": "MO0050580",
    "checked": "2026-11-14",
    "id": "mo-cape-girardeau-mo0050580-cso-permit-notice-mo0050580",
-   "name": "Cape Girardeau WWTF",
+   "name": "Cape Girardeau WWTF (permit MO0050580)",
    "channel_kind": "operator_page",
    "urls": [],
    "method": null,
@@ -862,7 +862,7 @@
    "sources": [
     "mo-dnr-sso-reporting-mogem"
    ],
-   "note": "What Cape Girardeau WWTF's combined sewer permit MO0050580 requires the public to be told, and how, was not verified in the research: the permit's notification clause was not read. (research/mo/expansion-research.md)",
+   "note": "What Cape Girardeau WWTF (permit MO0050580)'s combined sewer permit MO0050580 requires the public to be told, and how, was not verified in the research: the permit's notification clause was not read. (research/mo/expansion-research.md)",
    "barrier": "not_verified"
   },
   {
@@ -872,7 +872,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "mo-cape-girardeau-mo0050580-dnr-report",
-   "name": "Cape Girardeau WWTF",
+   "name": "Cape Girardeau WWTF (permit MO0050580)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -886,7 +886,7 @@
    "sources": [
     "mo-dnr-sso-reporting-mogem"
    ],
-   "note": "No web channel found: Cape Girardeau WWTF reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). No public notice is required by statute or rule. (research/mo/report.md §2.1)",
+   "note": "No web channel found: Cape Girardeau WWTF (permit MO0050580) reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/mo/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
@@ -19815,7 +19815,7 @@
    "permit": null,
    "checked": "2026-11-14",
    "id": "mo-twehous-acres-wwtf-dnr-report",
-   "name": "Twehous Acres WWTF",
+   "name": "Twehous Acres WWTF (permit MO0089338)",
    "channel_kind": "state_alert_page",
    "urls": [],
    "method": null,
@@ -19829,7 +19829,7 @@
    "sources": [
     "mo-dnr-sso-reporting-mogem"
    ],
-   "note": "No web channel found: Twehous Acres WWTF reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). No public notice is required by statute or rule. (research/mo/report.md §2.1)",
+   "note": "No web channel found: Twehous Acres WWTF (permit MO0089338) reports a sewer overflow or bypass to DNR within 24 hours through MoGEM; DNR publishes no list (mo-dnr-mogem-sso-reports). An overflow becomes public only when a concern report names it, months later (mo-dnr-concern-reports). The duty binds the permittee, public or private. No public notice is required by statute or rule. (research/mo/report.md §2.1)",
    "barrier": "no_web_page"
   },
   {
