@@ -43,7 +43,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json SC0043583 001",
-   "kind_note": "A reverse-osmosis drinking-water plant (the facility's name: 'isle of palms w&s r o'): its discharge is the treatment's concentrate, not sewage, although epa lists a potw component; kept off the map and out of the outfall count."
+   "kind_note": "A reverse-osmosis drinking-water plant (the facility's name: 'isle of palms w&s r o'): its discharge is the treatment's concentrate, not sewage, although epa lists a potw component; kept off the map and out of the outfall count.",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-isle-of-palms-sc, 164 m); the permit's listed receiving waters (Intracoastal Waterway, Hamlin Creek) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-isle-of-palms-sc) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: unnamed-stream-near-isle-of-palms-sc, 164 m); the permit's listed receiving waters (Intracoastal Waterway, Hamlin Creek) cannot be told apart for this outfall; the NHD record at the outfall (unnamed-stream-near-isle-of-palms-sc) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "SC0043583",
@@ -85,7 +93,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json SC0043583 002",
-   "kind_note": "A reverse-osmosis drinking-water plant (the facility's name: 'isle of palms w&s r o'): its discharge is the treatment's concentrate, not sewage, although epa lists a potw component; kept off the map and out of the outfall count."
+   "kind_note": "A reverse-osmosis drinking-water plant (the facility's name: 'isle of palms w&s r o'): its discharge is the treatment's concentrate, not sewage, although epa lists a potw component; kept off the map and out of the outfall count.",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Swinton Creek); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Swinton Creek); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "SC0047724",
@@ -129,7 +145,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json SC0047724 001",
-   "kind_note": "A reverse-osmosis drinking-water plant (the facility's name: 'south island psd ro wtp'): its discharge is the treatment's concentrate, not sewage, although epa lists a potw component; kept off the map and out of the outfall count."
+   "kind_note": "A reverse-osmosis drinking-water plant (the facility's name: 'south island psd ro wtp'): its discharge is the treatment's concentrate, not sewage, although epa lists a potw component; kept off the map and out of the outfall count.",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: broad-creek-sc, 377 m); the NHD record at the outfall (unnamed-stream-near-hilton-head-island-sc) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: broad-creek-sc, 377 m); the NHD record at the outfall (unnamed-stream-near-hilton-head-island-sc) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "SC0048461",
@@ -168,7 +192,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json SC0048461",
-   "kind_note": "Epa's row gives no outfall and no receiving water, and the facility is a tree farm ('gsw&sa yauhannah tree farm'), where the authority applies treated wastewater to land: no outfall to a water; kept off the map and out of the outfall count."
+   "kind_note": "Epa's row gives no outfall and no receiving water, and the facility is a tree farm ('gsw&sa yauhannah tree farm'), where the authority applies treated wastewater to land: no outfall to a water; kept off the map and out of the outfall count.",
+   "water_slug": "bradley-branch-sc",
+   "water_name": "Bradley Branch",
+   "water_kind": "stream",
+   "distance_m": 1275,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 9179050 (EPA), no snapping; Bradley Branch (bradley-branch-sc, NHDPlus V2.1 record), 1275 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "SC0048526",
@@ -207,7 +238,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json SC0048526",
-   "kind_note": "A reverse-osmosis drinking-water plant (the facility's name: 'hilton head psd reverse osmosis wtp'): its discharge is the treatment's concentrate, not sewage, although epa lists a potw component; kept off the map and out of the outfall count."
+   "kind_note": "A reverse-osmosis drinking-water plant (the facility's name: 'hilton head psd reverse osmosis wtp'): its discharge is the treatment's concentrate, not sewage, although epa lists a potw component; kept off the map and out of the outfall count.",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Broad Creek, not 'Skull Creek'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Broad Creek); no NHD high-resolution flowline of that name within 3 km of the points; OSM feature of that name is 5.5 km from the points",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Broad Creek, not 'Skull Creek'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Broad Creek); no NHD high-resolution flowline of that name within 3 km of the points; OSM feature of that name is 5.5 km from the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "SC0049336",
@@ -250,7 +289,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json SC0049336 001",
-   "kind_note": "A reverse-osmosis drinking-water plant (the facility's name: 'town of edisto beach ro wtp'): its discharge is the treatment's concentrate, not sewage, although epa lists a potw component; kept off the map and out of the outfall count."
+   "kind_note": "A reverse-osmosis drinking-water plant (the facility's name: 'town of edisto beach ro wtp'): its discharge is the treatment's concentrate, not sewage, although epa lists a potw component; kept off the map and out of the outfall count.",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Atlantic Ocean' in SC",
+   "no_water_reason": "no record named 'Atlantic Ocean' in SC",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "SCG646061",
@@ -292,7 +339,14 @@
    "coords_note": "3 of this permit's outfalls share this one point in ICIS",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json SCG646061 01A",
-   "kind_note": "A water treatment plant's general permit (scg64, south carolina's general permit for water treatment plants; facility 'scpsa (santee cooper)/lake marion regional water system'): a drinking-water plant's discharge, not sewage; kept off the map and out of the outfall count."
+   "kind_note": "A water treatment plant's general permit (scg64, south carolina's general permit for water treatment plants; facility 'scpsa (santee cooper)/lake marion regional water system'): a drinking-water plant's discharge, not sewage; kept off the map and out of the outfall count.",
+   "water_slug": "lake-marion-sc",
+   "water_name": "Lake Marion",
+   "water_kind": "reservoir",
+   "distance_m": 497,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Lake Marion' by name; Lake Marion (lake-marion-sc, openboatlaunch), 497 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "SCG646061",
@@ -332,7 +386,14 @@
    "coords_note": "3 of this permit's outfalls share this one point in ICIS",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json SCG646061 06A",
-   "kind_note": "A water treatment plant's general permit (scg64, south carolina's general permit for water treatment plants; facility 'scpsa (santee cooper)/lake marion regional water system'): a drinking-water plant's discharge, not sewage; kept off the map and out of the outfall count."
+   "kind_note": "A water treatment plant's general permit (scg64, south carolina's general permit for water treatment plants; facility 'scpsa (santee cooper)/lake marion regional water system'): a drinking-water plant's discharge, not sewage; kept off the map and out of the outfall count.",
+   "water_slug": "lake-marion-sc",
+   "water_name": "Lake Marion",
+   "water_kind": "reservoir",
+   "distance_m": 497,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Lake Marion' by name; Lake Marion (lake-marion-sc, openboatlaunch), 497 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "SCG646061",
@@ -369,7 +430,14 @@
    "coords_note": "3 of this permit's outfalls share this one point in ICIS",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json SCG646061 08A",
-   "kind_note": "A water treatment plant's general permit (scg64, south carolina's general permit for water treatment plants; facility 'scpsa (santee cooper)/lake marion regional water system'): a drinking-water plant's discharge, not sewage; kept off the map and out of the outfall count."
+   "kind_note": "A water treatment plant's general permit (scg64, south carolina's general permit for water treatment plants; facility 'scpsa (santee cooper)/lake marion regional water system'): a drinking-water plant's discharge, not sewage; kept off the map and out of the outfall count.",
+   "water_slug": "lake-marion-sc",
+   "water_name": "Lake Marion",
+   "water_kind": "reservoir",
+   "distance_m": 497,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Lake Marion' by name; Lake Marion (lake-marion-sc, openboatlaunch), 497 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "SCG646061",
@@ -407,7 +475,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-plants-us.json SCG646061 09A",
-   "kind_note": "A water treatment plant's general permit (scg64, south carolina's general permit for water treatment plants; facility 'scpsa (santee cooper)/lake marion regional water system'): a drinking-water plant's discharge, not sewage; kept off the map and out of the outfall count."
+   "kind_note": "A water treatment plant's general permit (scg64, south carolina's general permit for water treatment plants; facility 'scpsa (santee cooper)/lake marion regional water system'): a drinking-water plant's discharge, not sewage; kept off the map and out of the outfall count.",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's record for 'Cooper River' for this permit, cooper-river-charleston-sc, is 95.4 km from EPA's point and does not reach the permittee's town (santee): likely another water of that name, not matched",
+   "no_water_reason": "the NHD builder's record for 'Cooper River' for this permit, cooper-river-charleston-sc, is 95.4 km from EPA's point and does not reach the permittee's town (santee): likely another water of that name, not matched",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   }
  ]
 }
