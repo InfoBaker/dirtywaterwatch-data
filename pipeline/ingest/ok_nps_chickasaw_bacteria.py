@@ -50,7 +50,7 @@ from pathlib import Path
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events
-from ingest.nv_state_parks_hab import PERSONAL_SENTENCE, clean_text, safe_error
+from ingest.nv_state_parks_hab import PERSONAL_SENTENCE, clean_text, recleaned, safe_error
 
 SOURCE_ID = "ok-nps-chickasaw-bacteria"
 URL = "https://www.nps.gov/chic/planyourvisit/bathing-beach-monitoring-program.htm"
@@ -127,13 +127,14 @@ def parse(page: str) -> dict:
     if not dates:
         raise ValueError("no sample dates in the table's first row")
     rows = []
-    for n_row, tr in enumerate(trs[1:], 1):
+    for tr in trs[1:]:
         tds = re.findall(r"(<td[^>]*>)(.*?)</td>", tr, re.S)
         place = text_of(tds[0][1]) if tds else ""
         if not place:
             continue
-        if PERSONAL_SENTENCE.search(place):      # a place cell that can carry a person: kept as a row, its text withheld
-            place = f"place withheld (row {n_row})"
+        if PERSONAL_SENTENCE.search(place):      # a place cell that can carry a person: kept as a row, its text withheld,
+            import hashlib                       # named by a digest of the cell so the id never depends on row order
+            place = f"place withheld {hashlib.sha256(place.encode()).hexdigest()[:10]}"
         place = scrub_text(place)
         vals = [read_value(open_tag + body) for open_tag, body in tds[1:]]
         for v in vals:      # a cell that is not a result ("N/A", a note) keeps no text that could carry a person
@@ -266,7 +267,7 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
             corrected.append({"source_record_id": sid, "was": ((p.get("raw") or {}).get("result") or {}).get("text"),
                               "now": observed[sid], "seen_at": fetched})
             continue
-        p = dict(p)
+        p = recleaned(p)
         p["raw"] = {**(p.get("raw") or {}), "_missing_from_source_since":
                     (p.get("raw") or {}).get("_missing_from_source_since") or fetched}
         recs[sid] = p

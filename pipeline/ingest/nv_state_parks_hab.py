@@ -55,7 +55,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events
+from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, strip_personal, write_events
 from zones import nevada_zone
 
 SOURCE_ID = "nv-state-parks-hab"
@@ -118,6 +118,16 @@ def clean_text(s: str) -> tuple[str, int]:
             continue
         kept.append(COORD_IN_TEXT.sub(lambda m: f"{round(float(m.group(1)), 3):.3f}", sent))
     return scrub_text(" ".join(x for x in kept if x).strip()), withheld
+
+
+def recleaned(p: dict) -> dict:
+    """A record carried from an earlier read, cleaned again before it is saved (lesson 6: every save path)."""
+    p = dict(p)
+    p["raw"] = strip_personal(p.get("raw") or {})
+    for k in ("advice_text", "waterbody_text", "outfall_name"):
+        if isinstance(p.get(k), str):
+            p[k] = clean_text(p[k])[0] if k == "advice_text" else scrub_text(p[k])
+    return p
 
 
 def safe_error(e: Exception) -> str:
@@ -194,10 +204,6 @@ def episode_stamp(fetched: str) -> str:
     return datetime.fromisoformat(fetched.replace("Z", "+00:00")).astimezone(ZoneInfo("UTC")).strftime("%Y%m%dT%H%M%SZ")
 
 
-def local_day(fetched: str, tz: str) -> str:
-    return datetime.fromisoformat(fetched.replace("Z", "+00:00")).astimezone(ZoneInfo(tz)).date().isoformat()
-
-
 def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], dict]:
     items, _ = parse(page)
     # one entry per water: a water listed twice (two levels at once) keeps the higher level, the other in raw
@@ -267,7 +273,7 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
         sid = p.get("source_record_id")
         if sid in records:
             continue
-        p = dict(p)
+        p = recleaned(p)
         raw = dict(p.get("raw") or {})
         if p.get("status") == "advisory_active":
             p.update(status="advisory_lifted", ended_at=fetched)

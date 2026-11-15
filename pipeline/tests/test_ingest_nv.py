@@ -451,3 +451,20 @@ def test_p3_14_the_generators_and_shared_rules_leave_other_states_identical(monk
     assert "nv-state-parks-hab" in S.POLL_END_HORIZON_SOURCES and {"de-dnrec-recreational-water", "sc-des-beach-monitoring",
                                                                    "sc-des-hab"} <= S.POLL_END_HORIZON_SOURCES
     assert len(S.POLL_END_HORIZON_SOURCES) == 4
+
+
+def test_p1_4_records_carried_from_earlier_reads_are_cleaned_again():
+    from ingest import ok_nps_chickasaw_bacteria as N
+    first, _ = P.build(AUG26, T1, [])
+    dirty = [{**r, "advice_text": r["advice_text"] + " Contact Pat Example at 775-555-0100.",
+              "raw": {**r["raw"], "note": "call pat@example.org"}} for r in first]
+    empty = re.sub(r"(HAB Watch Advisories</label>.*?<div class=\"typography\">).*?(</div>)",
+                   lambda m: m.group(1) + "<p>None at this time.</p>" + m.group(2), AUG26, count=1, flags=re.S)
+    out, _ = P.build(empty, T2, dirty)
+    assert not any(p in json.dumps(out) for p in PRIVATE)
+    old = {**first[0], "source_id": N.SOURCE_ID, "source_record_id": "bear-falls:2026-07-01",
+           "advice_text": "E. coli result. Contact Pat Example at 775-555-0100.", "sampled_at": "2026-07-01",
+           "raw": {"note": "pat@example.org"}}
+    page = (Path(__file__).parent / "fixtures" / "ok_nps_chickasaw_bacteria.html").read_text()
+    out, _ = N.build(page, T2, [old])
+    assert len(out) == 1 and not any(p in json.dumps(out) for p in PRIVATE)
