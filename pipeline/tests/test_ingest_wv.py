@@ -627,3 +627,39 @@ def test_bloom_text_with_suffixed_numbers_contact_and_honorific_forms_never_reac
     assert recs["1-9"]["advice_text"].endswith("Avoid contact with the water.")
     assert recs["1-10"]["advice_text"].endswith("Keep pets out.")
 
+
+def test_bloom_text_kept_from_an_earlier_run_is_scrubbed_before_any_write(tmp_path, monkeypatch):
+    """Astra verify2 P1-2: an active and a lifted episode saved before the scrub, with personal text in the state and
+    in the events file; then an empty map, then a failed fetch. Neither the state nor the events keep the text."""
+    leak = "Avoid contact near 123 example lane. Reporter: Example Person."
+    state = {"items": {"1-7": {"first_seen": "2026-06-01T00:00:00Z", "last_seen": "2026-06-30T00:00:00Z",
+                               "kind": "point", "advisory": leak, "lat": 39.123, "lon": -80.123, "extent": None},
+                       "1-8": {"first_seen": "2026-05-01T00:00:00Z", "last_seen": "2026-05-30T00:00:00Z",
+                               "left_at": "2026-06-01T00:00:00Z", "kind": "point", "advisory": leak,
+                               "lat": 39.2, "lon": -80.2, "extent": None}},
+             "last_rows": {"1-7": {"kind": "point", "advisory": leak}}}
+    (tmp_path / "state.json").write_text(json.dumps(state))
+    old = H.records(state)
+    (tmp_path / f"{H.SOURCE_ID}.json").write_text(json.dumps({"source_id": H.SOURCE_ID, "ok": True, "records": old,
+                                                              "count": len(old), "meta": {}}))
+    import requests
+    saved = []
+    rc, failed = _hab_run(tmp_path, monkeypatch, requests.ConnectionError("down"), "2026-07-01T12:00:00Z", saved)
+    assert rc == 1 and json.loads(failed[-1])["ok"] is False and json.loads(failed[-1])["count"] == 2
+    rc, empty = _hab_run(tmp_path, monkeypatch, _answers([]), "2026-07-02T12:00:00Z", saved)
+    assert rc == 0
+    for blob in saved + failed + empty:
+        for bad in ("123 example", "example lane", "Example Person"):
+            assert bad not in blob, (bad, blob[:300])
+    recs = {r["source_record_id"]: r for r in json.loads(empty[-1])["records"]}
+    assert recs["1-7"]["status"] == "advisory_lifted" and H.WITHHELD in recs["1-7"]["advice_text"]
+    # scrubbing again leaves scrubbed text as it is; with no state, the retained events are scrubbed on a failure
+    for t in (leak, "Avoid contact near 123 Example Lane. Do not swim.", "Avoid contact with the water."):
+        once = H.scrub_advisory(t)
+        assert H.scrub_advisory(once) == once
+    (tmp_path / "state.json").unlink()
+    (tmp_path / f"{H.SOURCE_ID}.json").write_text(json.dumps({"source_id": H.SOURCE_ID, "ok": True, "records": old,
+                                                              "count": len(old), "meta": {}}))
+    rc, nostate = _hab_run(tmp_path, monkeypatch, requests.ConnectionError("down"), "2026-07-03T12:00:00Z", saved)
+    assert rc == 1 and json.loads(nostate[-1])["count"] == 2
+    assert "Example Person" not in nostate[-1] and "123 example" not in nostate[-1]
