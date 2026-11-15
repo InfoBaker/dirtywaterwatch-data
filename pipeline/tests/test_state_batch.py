@@ -766,3 +766,231 @@ def test_a_great_lakes_state_has_its_lakes_cut_after_its_waters_are_rebuilt():
     assert B.count_lines("cut", ["lake-michigan-il: 57137.2 km2 -> 4055.3 km2, bbox [1]", "1 records cut; problems left: 0",
                                  "noise"]) == ["lake-michigan-il: 57137.2 km2 -> 4055.3 km2, bbox [1]",
                                                "1 records cut; problems left: 0"]
+
+
+# ---------------------------------------------------------------- note scrub and size ceiling (2026-11-15)
+# West Virginia's batch: an NHD stream's name in a diagnostic reason ("nearby: <word> Run") shared a word with the
+# blocklist, and the scan refused the commit. Louisiana's: data/waters-nhd.json passed GitHub's 100 MB limit.
+# "Zorvath" is an invented word, never a real name.
+
+def _wv_like(root: Path) -> None:
+    from common import write_rows_json
+    write_rows_json(root / "data/waters-nhd.json", {
+        "stats": {"state_builds": {"NC": {"built": "2026-11-15T00:00:00Z"}}},
+        "problems": [],
+        "targets": [{"state": "NC", "name": "Neuse River", "slugs": [],
+                     "reason": "no NHD flowline or waterbody of that name within 2 km (nearby: Zorvath Run, Neuse "
+                               "River, Popenoe Run)",
+                     "places_failed": [{"lat": 35.1, "lon": -78.1, "reason": "nearby: ZORVATH RUN"}],
+                     "texts": ["Neuse River"]}],
+        "waters": [{"slug": "neuse-river-nc", "state": "NC", "name": "Neuse River"}]})
+    write(root, "data/outfalls-us.json", {"outfalls": [{
+        "state": "NC", "npdes_permit": "NC0000001", "permittee": "Town of Neuse", "water_slug": None,
+        "water_match": "none: NHD builder: no NHD flowline (nearby: Zorvath Run)",
+        "no_water_reason": "NHD builder: nearby: Zorvath Run",
+        "replaced_match": {"water_name": "Neuse River", "why": "Zorvath Run lies closer"}}]})
+
+
+def test_publish_scrubs_a_blocklisted_name_in_the_notes_and_the_scan_passes(tmp_path, capsys):
+    from common import dumps_rows
+    root = repo(tmp_path)
+    body = tmp_path / "body.md"
+    body.write_text("counts\n- 1 x nearby: Zorvath Run\n")
+    write(root, "data/build/name-blocklist.json", {"names": ["Zorvath"]})
+    _wv_like(root)
+    assert B.publish("NC", body, "2026-11-15", dry_run=True, root=root) == 0
+    out = capsys.readouterr().out
+    assert "Zorvath" not in out and "zorvath" not in out.lower()
+    assert "data/waters-nhd.json: 2 note(s) with a blocklisted name replaced" in out
+    assert "data/outfalls-us.json: 3 note(s)" in out and "body.md: 1 line(s)" in out
+    assert "privacy scan: 0 finding(s)" in out
+    text = (root / "data/waters-nhd.json").read_text()
+    d = json.loads(text)
+    assert text == dumps_rows(d)                                       # the file keeps its layout
+    t = d["targets"][0]
+    assert t["reason"].endswith("(nearby: [name removed] Run, Neuse River, Popenoe Run)")
+    assert t["places_failed"][0]["reason"] == "nearby: [name removed] RUN"
+    assert t["name"] == "Neuse River" and t["texts"] == ["Neuse River"]
+    o = json.loads((root / "data/outfalls-us.json").read_text())["outfalls"][0]
+    assert (root / "data/outfalls-us.json").read_text() == json.dumps({"outfalls": [o]}, indent=1)
+    assert o["water_match"] == "none: NHD builder: no NHD flowline (nearby: [name removed] Run)"
+    assert o["no_water_reason"] == "NHD builder: nearby: [name removed] Run"
+    assert o["replaced_match"] == {"water_name": "Neuse River", "why": "[name removed] Run lies closer"}
+    assert o["permittee"] == "Town of Neuse"
+    assert "Zorvath" not in body.read_text()
+    # stable: a second pass changes nothing, and the scan finds nothing
+    before = {f: (root / f).read_text() for f in ("data/waters-nhd.json", "data/outfalls-us.json")}
+    assert B.scrub_files(["data/waters-nhd.json", "data/outfalls-us.json"], [body], root) == 0
+    assert before == {f: (root / f).read_text() for f in before}
+    assert B.scan("NC", [body], require_blocklist=True, root=root) == 0
+
+
+def test_a_blocklisted_name_in_a_record_field_still_fails_the_scan(tmp_path, capsys):
+    root = repo(tmp_path)
+    body = tmp_path / "body.md"
+    body.write_text("counts\n")
+    write(root, "data/build/name-blocklist.json", {"names": ["Zorvath"]})
+    write(root, "data/waters-nhd.json", {
+        "targets": [{"state": "NC", "name": "Zorvath Run", "slugs": ["zorvath-run-nc"], "reason": "built"}],
+        "waters": [{"slug": "zorvath-run-nc", "state": "NC", "name": "Zorvath Run", "aliases": ["Zorvath Run"],
+                    "towns": ["Zorvath"]}]})
+    write(root, "data/outfalls-us.json", {"outfalls": [{"state": "NC", "npdes_permit": "NC0000001",
+                                                        "permittee": "Zorvath Holdings", "permit_name": "Zorvath"}]})
+    gh, log = fake_gh(tmp_path, "")
+    assert B.publish("NC", body, "2026-11-15", root=root, gh=str(gh)) == 1
+    out = capsys.readouterr().out
+    for where in ("data/waters-nhd.json $.targets[0].name", "data/waters-nhd.json $.waters[0].name",
+                  "data/waters-nhd.json $.waters[0].aliases[0]", "data/waters-nhd.json $.waters[0].towns[0]",
+                  "data/outfalls-us.json $.outfalls[0].permittee", "data/outfalls-us.json $.outfalls[0].permit_name"):
+        assert f"{where}: a blocklisted name" in out
+    assert "Zorvath" not in out and not log.exists()
+    d = json.loads((root / "data/waters-nhd.json").read_text())
+    assert d["waters"][0]["name"] == "Zorvath Run" and d["targets"][0]["slugs"] == ["zorvath-run-nc"]
+
+
+def test_without_a_blocklist_the_notes_are_left_alone(tmp_path, capsys):
+    root = repo(tmp_path)
+    _wv_like(root)
+    before = (root / "data/waters-nhd.json").read_text()
+    body = tmp_path / "body.md"
+    body.write_text("nearby: Zorvath Run\n")
+    assert B.scrub_files(["data/waters-nhd.json", "data/outfalls-us.json"], [body], root) == 0
+    assert (root / "data/waters-nhd.json").read_text() == before and "Zorvath" in body.read_text()
+    assert capsys.readouterr().out == ""                               # nothing said about names
+
+
+def test_scrub_notes_touches_note_keys_only():
+    from build.redact import BlockScan
+    block = BlockScan(["Zorvath", "Ada Zorvath"])
+    doc = {"reason": "Ada Zorvath and zorvath", "name": "Zorvath", "slug": "zorvath-nc",
+           "notes": ["Zorvath Run"], "how": ["near Zorvath"], "stats": {"failed_reasons": {"Zorvath": 1}},
+           "replaced_match": {"water_name": "Zorvath Run", "why": "Zorvath"}, "Zorvathing": "Zorvathing"}
+    new, n = B.scrub_notes(doc, block)
+    assert n == 4
+    assert new["reason"] == "[name removed] and [name removed]"
+    assert new["notes"] == ["[name removed] Run"] and new["how"] == ["near [name removed]"]
+    assert new["name"] == "Zorvath" and new["slug"] == "zorvath-nc"
+    assert new["stats"] == {"failed_reasons": {"Zorvath": 1}}         # keys are never changed (the scan sees them)
+    assert new["replaced_match"] == {"water_name": "Zorvath Run", "why": "[name removed]"}
+    assert block.scrub(new["reason"]) == new["reason"] and not block.found(new["reason"])
+
+
+def test_dumps_like_keeps_each_files_layout():
+    from common import dumps_plants, dumps_rows
+    doc = {"source": "s", "outfalls": [{"a": "é"}], "cso_features_not_in_inventory": []}
+    after = {**doc, "outfalls": [{"a": "è"}]}
+    for f in (dumps_rows, dumps_plants, lambda d: json.dumps(d, indent=1),
+              lambda d: json.dumps(d, indent=1, ensure_ascii=False) + "\n"):
+        assert B.dumps_like(f(doc), doc, after) == f(after)
+
+
+def test_publish_refuses_a_file_over_the_size_ceiling(tmp_path, capsys, monkeypatch):
+    root = repo(tmp_path)
+    body = tmp_path / "body.md"
+    body.write_text("counts\n")
+    write(root, "data/waters-nhd.json", {"waters": [{"slug": "neuse-river-nc", "state": "NC", "pad": "x" * 2000}],
+                                         "targets": []})
+    size = (root / "data/waters-nhd.json").stat().st_size
+    monkeypatch.setattr(B, "MAX_FILE_BYTES", 1000)
+    gh, log = fake_gh(tmp_path, "")
+    assert B.publish("NC", body, "2026-11-15", root=root, gh=str(gh), require_blocklist=False) == 1
+    out = capsys.readouterr().out
+    assert f"::error::data/waters-nhd.json is {size:,} bytes" in out and "nothing is committed or pushed" in out
+    assert not log.exists() and git(root, "branch", "--list", "batch/*") == ""
+    assert B.size_check(["data/waters-nhd.json"], root, limit=size) == 0          # at the ceiling: allowed
+    assert B.MAX_FILE_BYTES == 1000 and B.oversized(["data/waters-nhd.json", "data/missing.json"], root) == \
+        [("data/waters-nhd.json", size)]
+    monkeypatch.undo()
+    assert B.MAX_FILE_BYTES == 90 * 1024 * 1024
+
+
+# ---------------------------------------------------------------- review fixes (Astra, 2026-11-15)
+
+def test_scrub_refuses_a_file_no_known_layout_reproduces(tmp_path, capsys):
+    """Review P1: a file is rewritten only when a known layout gives back its text byte for byte (numbers that do not
+    round-trip, compact text, CRLF): otherwise it is left as it is, said with an ::error::, and the scan decides."""
+    root = repo(tmp_path)
+    write(root, "data/build/name-blocklist.json", {"names": ["Zorvath"]})
+    cases = {"big-number": '{\n "reason": "near Zorvath Run",\n "n": 9007199254740993.0\n}',
+             "compact": '{"reason":"near Zorvath Run"}',
+             "crlf": '{\r\n "reason": "near Zorvath Run"\r\n}'}
+    for name, text in cases.items():
+        p = root / "data" / f"waters-{name}.json"
+        p.write_bytes(text.encode())
+        capsys.readouterr()
+        assert B.scrub_files([f"data/waters-{name}.json"], [], root) == 0
+        assert p.read_bytes() == text.encode()
+        out = capsys.readouterr().out
+        assert f"::error::data/waters-{name}.json" in out and "Zorvath" not in out
+    # a layout that reproduces the file is rewritten with only the note changed
+    p = root / "data" / "waters-ok.json"
+    p.write_text(json.dumps({"reason": "near Zorvath Run", "n": 1.5}, indent=1))
+    assert B.scrub_files(["data/waters-ok.json"], [], root) == 1
+    assert p.read_text() == json.dumps({"reason": "near [name removed] Run", "n": 1.5}, indent=1)
+
+
+def test_a_structural_key_protects_its_whole_subtree():
+    from build.redact import BlockScan
+    block = BlockScan(["Zorvath"])
+    doc = {"records": {"reason": "Zorvath"}, "name": {"notes": ["Zorvath"]}, "reason": {"slug": "zorvath", "why": "Zorvath"}}
+    new, n = B.scrub_notes(doc, block)
+    assert new["records"] == {"reason": "Zorvath"} and new["name"] == {"notes": ["Zorvath"]}
+    assert new["reason"] == {"slug": "zorvath", "why": "[name removed]"} and n == 1
+
+
+def test_scan_never_prints_a_key_that_holds_a_name_or_contact(tmp_path, capsys):
+    root = repo(tmp_path)
+    write(root, "data/build/name-blocklist.json", {"names": ["Zorvath"]})
+    write(root, "data/waters-nhd.json", {"stats": {"failed_reasons": {"near Zorvath Run": 1, "call pat@example.org": 2,
+                                                                      "plain": {"x Zorvath": 3}}},
+                                         "waters": [], "targets": []})
+    assert B.scan("NC", root=root) == 1
+    out = capsys.readouterr().out
+    assert "Zorvath" not in out and "pat@example.org" not in out
+    assert "$.stats.failed_reasons.<key 0>: a blocklisted name" in out
+    assert "$.stats.failed_reasons.<key 1>: an e-mail address" in out
+    assert "$.stats.failed_reasons.plain.<key 0>: a blocklisted name" in out
+
+
+def test_publish_commits_only_the_batch_files(tmp_path, monkeypatch):
+    """Review P2: an unrelated staged file is never committed with the batch (git commit -- <the files>), so the size
+    ceiling, checked on those files, covers everything the commit holds."""
+    root = repo(tmp_path)
+    body = tmp_path / "body.md"
+    body.write_text("counts\n")
+    write(root, "data/build/name-blocklist.json", {"names": ["Jordan Quill"]})
+    write(root, "data/waters-nhd.json", {"waters": [{"slug": "neuse-river-nc", "state": "NC"}], "targets": []})
+    write(root, "data/huge.json", {"pad": "x" * 5000})
+    git(root, "add", "data/huge.json")
+    gh, log = fake_gh(tmp_path, "")
+    assert B.publish("NC", body, "2026-11-15", root=root, gh=str(gh)) == 0
+    files = git(tmp_path / "origin.git", "show", "--name-only", "--format=", "batch/nc-2026-11-15").split()
+    assert files == ["data/waters-nhd.json"]
+    c = B.publish_cmds("NC", "2026-11-15", Path("b.md"), ["data/waters-nhd.json"])
+    assert c["commit"][2][-2:] == ["--", "data/waters-nhd.json"]
+
+
+def test_scrub_refuses_when_a_blocklist_entry_matches_the_marker(tmp_path, capsys):
+    from build.redact import REDACTED, BlockScan
+    block = BlockScan(["removed"])
+    assert block.scrub("removed Run") == "removed Run"                 # no nested markers, no change
+    root = repo(tmp_path)
+    write(root, "data/build/name-blocklist.json", {"names": ["removed"]})
+    write(root, "data/waters-nhd.json", {"targets": [{"reason": "near removed Run"}], "waters": []})
+    before = (root / "data/waters-nhd.json").read_text()
+    assert B.scrub_files(["data/waters-nhd.json"], [], root) == 0
+    assert (root / "data/waters-nhd.json").read_text() == before
+    assert "::error::" in capsys.readouterr().out
+    assert B.scan("NC", root=root) == 1                               # the scan refuses, as it should
+    assert B.REDACTED == REDACTED == "[name removed]"
+
+
+def test_scrub_command_is_silent_without_a_blocklist_or_a_change(tmp_path, capsys, monkeypatch):
+    root = repo(tmp_path)
+    monkeypatch.setattr(B, "ROOT", root)
+    monkeypatch.setattr(B, "valid_state", lambda s, r=root: "NC")
+    monkeypatch.setattr(B, "changed_files", lambda st, r=root: ["data/waters-nhd.json"])
+    monkeypatch.setattr(B, "_patterns", lambda r: (__import__("re").compile("@x@"), __import__("re").compile("#y#"),
+                                                     None))
+    assert B.main(["scrub", "--state", "NC"]) == 0
+    assert capsys.readouterr().out == ""
