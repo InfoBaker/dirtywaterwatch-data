@@ -448,3 +448,12 @@ def test_review_the_state_text_matches_the_retained_record_behaviour():
     q = C.NOTICES[0]["records"][0]["quotes"]                # every sentence of the dated notice changed
     second, _ = NS.build(C.SOURCE_ID, C.NOTICES, T1, first, getter=getter(drop=q), save=False)
     assert {r["event_id"] for r in first} <= {r["event_id"] for r in second}
+
+
+def test_review_the_mountain_scrub_and_notice_set_are_used_only_by_these_three_states():
+    """No other state's output can change: the new scrub and the notice set are imported by CO, MT and WY only."""
+    users = {p.name for p in (ROOT / "pipeline").rglob("*.py") if "tests" not in p.parts
+             and re.search(r"mountain_scrub|notice_set", p.read_text(errors="ignore"))
+             and p.name not in ("mountain_scrub.py", "notice_set.py")}
+    assert users == {"co_cdphe_toxic_algae.py", "co_official_notices.py", "mt_deq_hab_map.py",
+                     "wy_deq_hcb_bulletins.py"}, users
