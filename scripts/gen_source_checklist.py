@@ -80,6 +80,7 @@ AREA_TITLES = {
     "pr": "Puerto Rico",
     "co": "Colorado",
     "mt": "Montana",
+    "wy": "Wyoming",
 }
 
 HEADER = """# Source checklist

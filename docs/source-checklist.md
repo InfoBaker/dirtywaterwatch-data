@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1683 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1693 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -62,7 +62,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | pr | 6 | 0 | 4 | 1 | 0 | 11 |
 | co | 6 | 0 | 3 | 2 | 1 | 12 |
 | mt | 4 | 0 | 7 | 1 | 1 | 13 |
-| **all** | **604** | **236** | **521** | **227** | **95** | **1683** |
+| wy | 2 | 0 | 5 | 2 | 1 | 10 |
+| **all** | **606** | **236** | **526** | **229** | **96** | **1693** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -2006,3 +2007,18 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `mt-watershed-groups` | Watershed groups (Clark Fork Coalition, Gallatin River Task Force, Missoula Water Quality District) | watch | search_only | monitoring | Possible bacteria sampling; not searched. |
 | `mt-deq-facts-public-viewer` | Montana DEQ FACTS permitting and GIS permit viewer | rejected | prior_research | permits | Where permittees file reports; no public overflow rows or export (expansion research, 2026-11-09). |
 | `mt-deq-warm-springs-2023` | Montana DEQ news: Warm Springs Creek wastewater discharge (July 21, 2023) | unreachable | search_only | events | deq.mt.gov did not resolve for the build's client on 2026-11-14; the notice (over three million gallons of partially treated wastewater, DEQ notified June 23, 2023) is not recorded until it can be read. Watched. |
+
+## wy: Wyoming (10)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `wy-deq-hcb-bulletins` | Wyoming DEQ HCB bulletins (GovDelivery topic WYDEQ_42, RSS) | used | fetched | advisories | Read 2026-11-15: 25 bulletins (2026-07-31 to 2026-10-28), 22 with the table of current advisories (water, location, Bloom or Toxin, Date Issued) and one lift (three press releases have no table); read by the wy-deq-hcb-bulletins feed as 71 advisories (66 still listed in the latest table, 4 no longer listed, 1 lifted). The bulletins name staff: only the parsed rows are saved. |
+| `wy-deq-sso-page` | WDEQ WYPDES Sanitary Sewer Overflows page | used | fetched | law | 'Reporting of the SSO should occur verbally within 24 hours of becoming aware of the event'; written notification to WDEQ within five days. The reporting duty cited in the register and the rules row; WDEQ publishes no list of the reports. |
+| `wy-beach-ecoli` | Beach E. coli monitoring | watch | search_only | monitoring | No statewide beach bacteria program found (search only). |
+| `wy-deq-hcb-advisories-layer` | WDEQ All HCB Advisories feature service (2017-2025) | watch | fetched | advisories | The original layer could not be read; the historical layer WDEQ_ALL_Past_HCB_Advisories (layer 1, 78 rows, wide per-year columns, last data edit 2025-06-17) answered its metadata and count on 2026-11-14. Not read in this build: the current advisories come from the bulletins (wy-deq-hcb-bulletins). Watched. |
+| `wy-deq-hcb-current` | WDEQ current HCB advisories (Story Map and GovDelivery bulletins) | watch | fetched | advisories | The StoryMap (a script page) shows the current lists; its rows are the same as the bulletins' table, which is read (wy-deq-hcb-bulletins). Watched. |
+| `wy-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), WY rows | watch | fetched | events | No Wyoming report in the current or the all-versions extract of 2026-11-14; the collection-system table lists one Wyoming permit, EPA's lagoon general permit coverage WYG589101 on the Wind River Reservation. Watched. |
+| `wy-wdh-hcb` | Wyoming Department of Health HCB notices | watch | search_only | advisories | The Department of Health issues the advisories with WDEQ; its posts duplicate the bulletins. Watched. |
+| `wy-deq-chapter4` | Wyoming Water Quality Rules Chapter 4 (oil and hazardous substance releases), revised 2026-01-12 | rejected | search_only | law | Oil and hazardous substances; sewage not named. |
+| `wy-deq-spills-portal` | WDEQ Spills and Complaints portal (deqspills.wyo.gov) | rejected | fetched | events | The public side is a report form; the app's incident search needs a login (a script shell to the build's client, 2026-11-14). Recorded as a login barrier in the register. |
+| `wy-deq-hudson-2024` | Wyoming DEQ news: Hudson wastewater release updates (June 2024) | unreachable | search_only | events | The two June 2024 updates answered HTTP 500 to the build's client on 2026-11-14; no record is made until they can be read. Watched. |
