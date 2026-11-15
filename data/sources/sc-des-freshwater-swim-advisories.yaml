@@ -1,0 +1,29 @@
+id: "sc-des-freshwater-swim-advisories"
+name: "South Carolina DES: the map layer titled \"Swimming Advisory\" (SCDES Water Advisories, river and lake sites)"
+url: "https://gis.des.sc.gov/gisserver/rest/services/water/Water_Advisories/MapServer/0"
+homepage: "https://gis.des.sc.gov/gisserver/rest/services/water/Water_Advisories/MapServer"
+kind: "arcgis"
+level: "state"
+# Ingester: pipeline/ingest/sc_des_advisories.py (source id sc-des-freshwater-swim-advisories), a polled snapshot,
+#   rules only, read with DES's beach and bloom layers.
+# Read 2026-11-15: 23 sites (returnCountOnly 23), among them Cayce Riverwalk, Granby Park (two stations), Falls Park,
+#   Glendale Shoals, Cherokee Falls Dam, 99 Island Dam, Parr Reservoir Landing and Big Salkehatchie Landing; stations
+#   R1-012 to R8-044. The service's description is "SCDES Water Advisories"; the layer has no description, no date
+#   field and no status field. 23 records: DES's listing, each at the layer's point rounded to three decimals, dated
+#   from the first read that listed it (the layer gives no date), never colouring a whole river or lake.
+# Fields read: OBJECTID, Name, Station and the point (outSR 4326). Phone, Contact, PicURL and PicNAME are never
+#   requested. A read that is cut off, fails, errs, returns no site, lacks a station or returns fewer sites than the
+#   layer counts ends nothing; the first complete read without a site ends it at that read.
+cadence: "No dates on the layer; read hourly with the refresh."
+license: "none stated"
+attribution: "South Carolina Department of Environmental Services, SCDES Water Advisories"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["SC"]
+registry_ids: ["sc-des-freshwater-swim-advisories"]
+access: ["arcgis"]
+access_detail: "MapServer layer 0 query (where 1=1, outFields OBJECTID, Name, Station, outSR 4326) and its returnCountOnly count, no token."
+machine_readable: true
+legal_basis: "Voluntary: no South Carolina statute requires the listing"
+checked: "2026-11-15"
