@@ -39,6 +39,10 @@ Records (rules only; a snapshot read as a sequence of polls)
     name, no point). The polygon itself is not drawn: its centroid, rounded to three decimals, is the record's point
     (coord_source "des_delineation"), so the marker sits on the cove DES delineated and the whole reservoir is never
     coloured. "HAB Not Present" is no record.
+  - A table row joins a delineation only when the whole water name matches (generic words cut, qualifiers such as
+    "Little" kept; WATER_ALIASES for names DES's pages show are one water). DES's revised date or water for the same
+    GlobalID is taken with the earlier value kept (raw.revisions); a date after the day this site first saw the
+    record is a later advisory: the earlier record ends at that poll and the new one is its own (raw.follows).
   - Keys: beach "<STAT>-<first poll date>"; bloom "<GlobalID>-<date>" (the table-only row: "table-<water>-<date>").
 
 Privacy: the layers' Creator and Editor fields (staff accounts) and the beach layer's GlobalID are never requested;
@@ -307,7 +311,7 @@ def match_hab(state: dict, o: dict, seen: set) -> str | None:
     for key, v in state.items():
         if key in seen or v.get("ended_at"):
             continue
-        if _norm(v.get("water")) != _norm(o["water"]) or (v.get("started_at") or "") != (o["started_at"] or ""):
+        if _canon(v.get("water")) != _canon(o["water"]) or (v.get("started_at") or "") != (o["started_at"] or ""):
             continue
         if v.get("area") and o.get("area") and v["area"].lower() != o["area"].lower():
             continue
@@ -323,8 +327,51 @@ def match_hab(state: dict, o: dict, seen: set) -> str | None:
     return None
 
 
+# a table name and a layer name for one water, where DES's own pages show both names for it: none needed so far (the
+# table's "J. Strom Thurmond" and the layer's "J. Strom Thurmond Reservoir" are one name once the generic word is cut)
+WATER_ALIASES: dict[str, str] = {}
+
+
+def _canon(s: str | None) -> str:
+    n = _norm(s)
+    return WATER_ALIASES.get(n, n)
+
+
 def _row_fits(t: dict, water: str | None, start: str | None) -> bool:
-    return bool(_norm(t["water"])) and _norm(t["water"]) in _norm(water) and _date(t["issued"]) == (start or "")[:10]
+    """A table row is a layer delineation's only when the whole water name is the same (generic words cut, every
+    qualifier kept: "Little Example Lake" is never "Example Lake") and DES's date is the same (verify P1-5)."""
+    return bool(_canon(t["water"])) and _canon(t["water"]) == _canon(water) and _date(t["issued"]) == (start or "")[:10]
+
+
+def revise_hab(state: dict, key: str, o: dict, now: str, seen: set) -> tuple[str, dict]:
+    """DES's own fields for one delineation (GlobalID) changed between reads (verify P2-2). A changed water is a
+    correction, kept with its earlier value (raw.revisions). A changed date is a correction when it is on or before
+    the day this site first saw the record (an advisory seen that day began by then): started_at takes DES's new date,
+    the earlier one kept. A date after that day cannot be the same advisory's start: the earlier record ends at this
+    poll (a poll bound, DES re-dated the delineation) and the new date opens a new record, never backdated."""
+    v = state[key]
+    if o.get("water") and _canon(o["water"]) != _canon(v.get("water")):
+        v.setdefault("revisions", []).append({"seen_at": now, "field": "water", "was": v.get("water"),
+                                              "now": o["water"]})
+        v["water"] = o["water"]
+    new, old = o.get("started_at"), v.get("started_at")
+    if not new or new == old:
+        return key, v
+    first_day = datetime.fromisoformat((v.get("first_seen_at") or now).replace("Z", "+00:00")).astimezone(TZ).date()
+    if new[:10] <= first_day.isoformat():
+        v.setdefault("revisions", []).append({"seen_at": now, "field": "started_at", "was": old, "now": new})
+        v["started_at"], v["precision"] = new, o.get("precision")
+        return key, v
+    v["ended_at"] = now
+    v["end_basis_redated"] = new
+    seen.add(key)
+    base = (f"hab-{_norm(o['water']) or 'water'}-{new}-"
+            f"{re.sub(r'[^a-z0-9]+', '-', (o.get('area') or v.get('area') or 'area').lower()).strip('-')}")
+    nk, n = base, 2
+    while nk in state:
+        nk, n = f"{base}-{n}", n + 1
+    state[nk] = {**o, "area": o.get("area") or v.get("area"), "first_seen_at": now, "follows": key}
+    return nk, state[nk]
 
 
 def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now: str) -> tuple[list[dict], dict, dict]:
@@ -398,6 +445,8 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
                 key, n = f"{base}-{n}", n + 1
             state[key] = {**o, "first_seen_at": now}
         v = state[key]
+        if o["from"] == "layer" and o.get("layer_id") and v.get("layer_id") == o["layer_id"]:
+            key, v = revise_hab(state, key, o, now, seen)
         for k in ("tier", "area", "guidance", "organism", "lat", "lon", "layer_id"):
             if o.get(k) is not None:
                 v[k] = o[k]                            # a table read keeps the layer's point and organism
@@ -427,6 +476,13 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
             raw.update(ended_at_precision="poll",
                        end_basis=("the first poll at which DES's table and map no longer listed it (the table lists "
                                   "only active watches and advisories); DES's lift time is not published"))
+            if v.get("end_basis_redated"):
+                raw["end_basis"] = (f"the first poll at which DES dated this delineation {v['end_basis_redated']}, "
+                                    "after this site first saw the earlier advisory: a later advisory, its own record")
+        if v.get("revisions"):
+            raw["revisions"] = v["revisions"]
+        if v.get("follows"):
+            raw["follows"] = v["follows"]
         organism = v.get("organism") or "organism not given"
         recs.append(event(
             source_id=HAB_ID, source_record_id=key, event_type="hab_advisory",

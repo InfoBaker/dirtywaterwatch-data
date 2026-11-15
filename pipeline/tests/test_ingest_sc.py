@@ -812,3 +812,59 @@ def test_the_pages_conditional_explanation_is_never_an_empty_listing(monkeypatch
         assert out["ok"] is False and out["records"] == [{"event_id": "x"}]
         st = json.loads((tmp_path / "state.json").read_text())
         assert all(not v.get("ended_at") for v in st["hab"].values())
+
+
+def _named_feat(gid, name, x, y, ms=1783137600000):
+    f = _feat(gid, x, y, ms)
+    f["attributes"]["NAME"] = name
+    return f
+
+
+def test_qualified_water_names_never_join_or_exchange_points():
+    # verify P1-5: "Little Example Lake" and "Example Lake", same date, layer and table in both orders
+    little = _named_feat("gl", "Little Example Lake", -81.101, 34.101)
+    plain = {"level": "Advisory", "area": "Example Cove", "water": "Example Lake", "issued": "07/04/2026"}
+    recs, _, _ = A.hab_records([little], [plain], {}, T0)
+    by = {(r["waterbody_text"], r["outfall_name"]): r["lat"] for r in recs}
+    assert by == {("Little Example Lake", None): 34.101, ("Example Lake", "Example Cove"): None}
+    plain_f = _named_feat("gp", "Example Lake", -81.202, 34.202)
+    lit_row = {"level": "Watch", "area": "Little Cove", "water": "Little Example Lake", "issued": "07/04/2026"}
+    recs, _, _ = A.hab_records([plain_f], [lit_row], {}, T0)
+    by = {(r["waterbody_text"], r["outfall_name"]): r["lat"] for r in recs}
+    assert by == {("Example Lake", None): 34.202, ("Little Example Lake", "Little Cove"): None}
+    # both waters on both sides, in either order: each row joins its own water's delineation only
+    for fs, tb in (([little, plain_f], [plain, lit_row]), ([plain_f, little], [lit_row, plain])):
+        recs, _, _ = A.hab_records(fs, tb, {}, T0)
+        by = {(r["waterbody_text"], r["outfall_name"]): r["lat"] for r in recs}
+        assert by == {("Little Example Lake", "Little Cove"): 34.101, ("Example Lake", "Example Cove"): 34.202}
+    # the same water in both, generic word cut: still joined (DES's "J. Strom Thurmond" table name)
+    t = _named_feat("gt", "J. Strom Thurmond Reservoir", -82.3, 33.7)
+    row = {"level": "Watch", "area": "Cedar Point Cove", "water": "J. Strom Thurmond", "issued": "07/04/2026"}
+    recs, _, _ = A.hab_records([t], [row], {}, T0)
+    assert len(recs) == 1 and recs[0]["outfall_name"] == "Cedar Point Cove" and recs[0]["lat"] == 33.7
+
+
+def test_a_revised_des_date_or_water_for_one_globalid_is_taken_and_a_later_episode_is_its_own_record():
+    # verify P2-2
+    day = 86400000
+    recs, st, _ = A.hab_records([_feat("gx", -81.101, 34.101)], [], {}, "2026-07-06T12:00:00Z")
+    assert recs[0]["started_at"] == "2026-07-04"
+    # DES corrects the date to July 5 (on or before the day first seen): the record takes it, the earlier kept
+    f = _feat("gx", -81.101, 34.101, 1783137600000 + day)
+    f["attributes"]["NAME"] = "Lake Example Arm"
+    recs, st, _ = A.hab_records([f], [], {"hab": st}, "2026-07-07T12:00:00Z")
+    assert len(recs) == 1
+    r = recs[0]
+    assert r["started_at"] == "2026-07-05" and r["waterbody_text"] == "Lake Example Arm" and r["ended_at"] is None
+    assert {x["field"] for x in r["raw"]["revisions"]} == {"started_at", "water"}
+    # a month on, DES dates the same delineation August 10: a later advisory, never backdated to July
+    g = _feat("gx", -81.101, 34.101, 1783137600000 + 37 * day)
+    g["attributes"]["NAME"] = "Lake Example Arm"
+    recs, st, _ = A.hab_records([g], [], {"hab": st}, "2026-08-11T12:00:00Z")
+    by = {r["started_at"]: r for r in recs}
+    assert set(by) == {"2026-07-05", "2026-08-10"}
+    assert by["2026-07-05"]["ended_at"] == "2026-08-11T12:00:00Z" and by["2026-07-05"]["raw"]["ended_at_precision"] == "poll"
+    assert by["2026-08-10"]["ended_at"] is None and by["2026-08-10"]["raw"]["follows"] == by["2026-07-05"]["source_record_id"]
+    # the next read keeps the new record open and the earlier one ended
+    recs, st, _ = A.hab_records([g], [], {"hab": st}, "2026-08-11T13:00:00Z")
+    assert sorted((r["started_at"], r["ended_at"] is None) for r in recs) == [("2026-07-05", False), ("2026-08-10", True)]
