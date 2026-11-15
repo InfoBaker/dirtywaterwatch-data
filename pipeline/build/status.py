@@ -1116,6 +1116,10 @@ COUNTY_FIELD_STATES.add("IN")    # Indiana: a record or outfall row with no poin
 REGISTRY_COUNTY_STATES = {"IN"}
 COUNTY_STATES["LA"] = "la-counties.json"       # Louisiana: Baton Rouge's reports give a water name and the parish, no point
 COUNTY_FIELD_STATES.add("LA")
+# Nevada and Oklahoma (Astra P1-2): the parks' bloom advisories and the Park Service's Chickasaw samples give a water name
+# and its county (raw.county; scripts/nv_ok_counties.py), so a same-named water in another county is not taken
+COUNTY_STATES["NV"] = "nv-counties.json"; COUNTY_FIELD_STATES.add("NV")
+COUNTY_STATES["OK"] = "ok-counties.json"; COUNTY_FIELD_STATES.add("OK")
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}

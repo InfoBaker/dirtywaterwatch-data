@@ -11,7 +11,14 @@
    "sources": {
     "nv-state-parks-hab": 1
    },
-   "seen_in": "the parks' page, Internet Archive copies of 2025-11-12 and 2026-08-13"
+   "seen_in": "the parks' page, Internet Archive copies of 2025-11-12 and 2026-08-13",
+   "points": [
+    [
+     39.395,
+     -119.186
+    ]
+   ],
+   "point_basis": "USGS National Hydrography Dataset waterbody 136854961 (GNIS 00858052): a point inside the lake's polygon, read 2026-11-15"
   },
   {
    "name": "Rye Patch Reservoir",
@@ -20,7 +27,14 @@
    "sources": {
     "nv-state-parks-hab": 1
    },
-   "seen_in": "the parks' page, Internet Archive copies of 2025-11-12 and 2026-08-13"
+   "seen_in": "the parks' page, Internet Archive copies of 2025-11-12 and 2026-08-13",
+   "points": [
+    [
+     40.59,
+     -118.316
+    ]
+   ],
+   "point_basis": "USGS National Hydrography Dataset waterbody 145843564 (GNIS 00858164): a point inside the lake's polygon, read 2026-11-15"
   },
   {
    "name": "Marlette Lake",
@@ -45,7 +59,14 @@
    "sources": {
     "nv-state-parks-hab": 1
    },
-   "seen_in": "the parks' page, Internet Archive copies of 2026-08-13"
+   "seen_in": "the parks' page, Internet Archive copies of 2026-08-13",
+   "points": [
+    [
+     39.281,
+     -119.81
+    ]
+   ],
+   "point_basis": "USGS National Hydrography Dataset waterbody 65204631 (GNIS 00861907): a point inside the lake's polygon, read 2026-11-15"
   },
   {
    "name": "Wild Horse Reservoir",
