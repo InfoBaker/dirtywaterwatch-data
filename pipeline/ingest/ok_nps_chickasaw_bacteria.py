@@ -28,7 +28,8 @@ Record rules (a sample is a sample: the accuracy-first rule of docs/generic-inge
   - A sample still in the table whose result is now under the threshold was corrected by the park: its earlier record
     is dropped and the change logged in meta.corrected_below_threshold; a corrected high value replaces the old one in
     the same record. Only a sample whose date or cell has left the table is kept as missing (below).
-  - A page whose table, dates or threshold line cannot be read writes ok=False and the previous records stay. A record
+  - A page whose table, dates or threshold line cannot be read, or one of whose rows does not fit the header cell for
+    cell (a missing, extra, merged or spanning cell, a row of results with no place, a column after the mean), writes ok=False and the previous records stay. A record
     whose result leaves the table keeps its record with raw._missing_from_source_since (its sample date is unchanged).
   - Placement: each place's water as the park describes it (Travertine Creek, Rock Creek, Veterans Lake, Lake of the
     Arbuckles), Murray County, with the USGS GNIS point of the named feature where GNIS has it (PLACES); never the
@@ -113,25 +114,36 @@ def parse(page: str) -> dict:
     weekly, mean_limit = float(m.group(1)), float(m.group(2))
     trs = re.findall(r"<tr[^>]*>(.*?)</tr>", table, re.S)
     head = re.findall(r"<td[^>]*>(.*?)</td>", trs[0], re.S)
-    dates = []
-    for h in head[1:]:
+    dates, has_mean = [], False
+    for n, h in enumerate(head[1:], 1):
         t = text_of(h)
         dm = re.fullmatch(r"(\d{1,2})/(\d{1,2})/(\d{2,4})", t)
         if dm:
             y = int(dm.group(3))
             dates.append(date(y + 2000 if y < 100 else y, int(dm.group(1)), int(dm.group(2))).isoformat())
         elif "geometric mean" in t.lower():
+            if n != len(head) - 1:      # a column after the mean has no known role (verification pass P1-2)
+                raise ValueError(f"a column after the geometric mean: {[text_of(x) for x in head[n + 1:]]!r}")
+            has_mean = True
             break
         else:
             raise ValueError(f"unreadable date column {t!r}")
+    width = len(head)
     if not dates:
         raise ValueError("no sample dates in the table's first row")
     rows = []
     for tr in trs[1:]:
         tds = re.findall(r"(<td[^>]*>)(.*?)</td>", tr, re.S)
-        place = text_of(tds[0][1]) if tds else ""
+        if not any(text_of(b) for _, b in tds) and not re.search(r"<th\b", tr, re.I):
+            continue                    # an empty spacer row
+        # a row must fit the header cell for cell (verification pass P1-2): a missing, extra, merged or spanning cell
+        # would put a result under another week's date, so the read is refused and the earlier records stay
+        if len(tds) != width or re.search(r"<t[dh]\b", tr.replace("<td", "", len(tds)), re.I) or any(
+                re.search(r"\b(?:col|row)span\s*=", o, re.I) for o, _ in tds):
+            raise ValueError(f"a table row does not fit the header: {len(tds)} cell(s) for {width} columns")
+        place = text_of(tds[0][1])
         if not place:
-            continue
+            raise ValueError("a table row has results and no place")
         if PERSONAL_SENTENCE.search(place):      # a place cell that can carry a person: kept as a row, its text withheld,
             import hashlib                       # named by a digest of the cell so the id never depends on row order
             place = f"place withheld {hashlib.sha256(place.encode()).hexdigest()[:10]}"
@@ -141,7 +153,7 @@ def parse(page: str) -> dict:
             if v["value"] is None and v["text"]:
                 v["text"] = v["text"] if re.fullmatch(r"(?i)n/?a|-+|—|not sampled|no sample", v["text"]) else "[not a result]"
         results = {d: vals[n] for n, d in enumerate(dates) if n < len(vals) and vals[n]["text"]}
-        mean = vals[len(dates)] if len(vals) > len(dates) and vals[len(dates)]["text"] else None
+        mean = vals[len(dates)] if has_mean and vals[len(dates)]["text"] else None
         rows.append({"place": place, "results": results, "mean": mean})
     if not rows:
         raise ValueError("no sampling place in the table")
