@@ -771,3 +771,44 @@ def test_a_contact_name_outside_the_contact_block_never_reaches_a_save(monkeypat
     assert F.scrub_person("Notification of Sanitary Sewer Overflow on Jeffries Creek") == \
         "Notification of Sanitary Sewer Overflow on Jeffries Creek"
     assert F.scrub_person("Please call the City at its office.") == "Please call the City at its office."
+
+
+EXPLAIN = ("<h2>HAB Watches &amp; Advisories</h2><p>Any active, recreational watches and/or advisories will appear in "
+           "the table below. If it is empty, there are no current watches and/or advisories listed.</p>")
+
+
+def test_the_pages_conditional_explanation_is_never_an_empty_listing(monkeypatch, tmp_path):
+    # verify P1-4: the paragraph stands with or without the table; missing or cut-off tables fail and end nothing
+    assert A.hab_table(EXPLAIN) is None                                                  # no table
+    assert A.hab_table(EXPLAIN + "<table><tr><th>Advisory Level</th></tr><tr><td>Watch</td>") is None   # cut off
+    assert A.hab_table(EXPLAIN + "<table><tr><th>Advisory Level</th></tr></table>") == []    # a whole, empty table
+    assert A.hab_table("<h2>HAB Watches</h2><p>There are currently no active watches or advisories.</p>") == []
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(A, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(A, "save_raw", lambda *a, **k: None)
+    s = saved()
+    _, hstate, _ = A.hab_records(s["hab"], s["hab_table"], {}, T0)
+    assert hstate
+    (tmp_path / "state.json").write_text(json.dumps({"hab": hstate}))
+    (tmp_path / "sc-des-hab.json").write_text(json.dumps({"records": [{"event_id": "x"}], "meta": {}}))
+
+    class Resp:
+        def __init__(self, js=None, text=""):
+            self._js, self.text = js, text
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self._js
+
+    for page in (EXPLAIN, EXPLAIN + "<table><tr><th>Advisory Level</th></tr><tr><td>Watch</td>"):
+        monkeypatch.setattr(A.requests, "get", lambda url, page=page, **k: Resp({"features": s["beach"]})
+                            if "BW_Monitoring" in url else Resp({"features": []}) if "algal_hydro" in url
+                            else Resp(text=page))
+        assert A.main(["--at", T1]) == 1
+        out = json.loads((tmp_path / "sc-des-hab.json").read_text())
+        assert out["ok"] is False and out["records"] == [{"event_id": "x"}]
+        st = json.loads((tmp_path / "state.json").read_text())
+        assert all(not v.get("ended_at") for v in st["hab"].values())
