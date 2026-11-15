@@ -23,6 +23,11 @@ level: "state"
 #   that finds the water gone is used); lat/lon
 # History: current advisories only; the Internet Archive holds monthly copies since 2025-10
 # Research notes: Waters in Nevada state parks only.
+# Barrier (Astra P1-3): no successful current read. An ordinary request (the project's user agent, curl) timed out on
+#   2026-11-14 (ports 443 and 80, twice, and the ingester's live run) and on 2026-11-15T10:25Z (connect timeout after 40
+#   s); the user agent is not changed and no archive copy seeds current status. The feed's health stays ok:false with
+#   last_ok_at null until a read succeeds; Nevada stays out of live_states until first_successful_read is set here.
+first_successful_read: null
 cadence: "updated when a level changes; no fixed schedule"
 license: "none stated"
 attribution: "Nevada Division of State Parks"
