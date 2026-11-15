@@ -285,7 +285,13 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
             raw["_missing_from_source_since"] = v["missing_since"]
         if kind == "label":
             raw.update(_agency_label_only=True, _agency_label=CODES[v["code"]], _label_basis=LABEL_BASIS,
-                       _caution_to_notice_end=True, _notice_closed_at=v.get("ended_at") or raw["_last_seen_in_source"])
+                       _caution_to_notice_end=True)
+            if v.get("ended_at"):
+                raw["_notice_closed_at"] = v["ended_at"]
+            else:
+                # still listed: no closure observed. The caution stays current for the site's caution hours after the
+                # last read that listed it (re-review P2-2), never ending at that read
+                raw["_open_notice_caution_hours"] = 72
             status = "unknown"
         else:
             status = "advisory_lifted" if v.get("ended_at") else "advisory_active"

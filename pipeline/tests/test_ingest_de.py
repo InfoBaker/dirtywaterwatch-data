@@ -536,3 +536,22 @@ def test_history_and_map_count_one_advisory_and_same_minute_reopenings_stay_apar
     recs, _ = W.poll_records(st, [], st1, "2026-07-03T18:00:40Z", date(2026, 7, 3))
     assert sorted((r["started_at"], r["ended_at"]) for r in recs) == [
         ("2026-07-03T18:00:01Z", "2026-07-03T18:00:20Z"), ("2026-07-03T18:00:40Z", None)]
+
+
+def test_a_still_listed_resampling_notice_is_current_at_and_after_its_confirming_poll():
+    # re-review P2-2: first seen November 1, confirmed November 14 18:00: not grey at 18:00
+    from datetime import datetime, timezone
+    from build import status
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    s = rec()
+    st = map_codes(s["stations"], {"Lewes Beach (Savannah Beach)": 2})
+    _, state = W.poll_records(st, [], {}, "2026-11-01T18:00:00Z", date(2026, 11, 1))
+    recs, state = W.poll_records(st, [], state, "2026-11-14T18:00:00Z", date(2026, 11, 14))
+    r = recs[0]
+    assert r["ended_at"] is None and "_notice_closed_at" not in r["raw"]
+    for at in (datetime(2026, 11, 14, 18, tzinfo=timezone.utc), datetime(2026, 11, 15, 18, tzinfo=timezone.utc)):
+        ivs = status.event_intervals(r, "DE", at, None, rules)
+        assert any(i["start"] <= at and (i["end"] is None or i["end"] > at) for i in ivs), at
+    # closed at a later poll: the caution runs to the closure, as before
+    recs, _ = W.poll_records(map_codes(s["stations"], {}), [], state, "2026-11-15T18:00:00Z", date(2026, 11, 15))
+    assert recs[0]["raw"]["_notice_closed_at"] == "2026-11-15T18:00:00Z"
