@@ -33,7 +33,7 @@ Records (the accuracy-first pattern, docs/generic-ingesters.md: sampled_at apart
   and a green flag at a beach are never records here, and never a clean or passing status (grey: no report).
 
 Stations (STATIONS): DRNA's station table (Identificaciones de las Playas, wp-content/uploads/2020/06/Tabla-playas.pdf:
-  37 stations RW-1 to RW-39) with one public point each, the station's own monitoring location in the Water Quality
+  36 stations RW-1 to RW-39) with one public point each, the station's own monitoring location in the Water Quality
   Portal (organization PR_BEACH_WQX, Puerto Rico Environmental Quality Board (Beach), whose beach program DRNA
   continues; read 2026-11-14), cited in raw.point_basis and raw.point_url (coord_source "station_point"; rounded to
   three decimals). The notice's station number is normalised (RW-06 -> RW-6, RWW-28 -> RW-28, RW14A -> RW-14, RW-1A ->

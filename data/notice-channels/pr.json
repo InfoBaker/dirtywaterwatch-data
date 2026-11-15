@@ -171,7 +171,7 @@
    "sources": [
     "pr-drna-beach-notices"
    ],
-   "note": "DRNA's weekly notice lists the beaches whose enterococci samples exceed the Beach Action Value as not fit for bathers (280 notices since 2019-10; 37 stations). Read by its own module every refresh. No terms of use stated on the API.",
+   "note": "DRNA's weekly notice lists the beaches whose enterococci samples exceed the Beach Action Value as not fit for bathers (280 notices since 2019-10; 36 stations in its table). Read by its own module every refresh. No terms of use stated on the API.",
    "barrier": null
   },
   {
