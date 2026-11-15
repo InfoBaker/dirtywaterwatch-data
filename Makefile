@@ -148,6 +148,12 @@
 #                  South Carolina: sc_florence_sso (the City of Florence's sewer overflow notices),
 #                  sc_des_advisories (DES's beach station layer, long-term and short-term advisories, and its bloom
 #                  delineations and watch table, polled; state data/build/sc-des-advisories-state.json)
+#                  Indiana: in_echo_cso_monthly (EPA's discharge monitoring reports: each combined sewer outfall's
+#                  monthly events, hours and million gallons, month precision; a compact weekly cache in data/build,
+#                  at most 120 requests a run), echo_sewer_overflow_events (EPA's overflow tables, IN permits; Eastern or
+#                  Central time by the event's county, data/reference/in-central-time-counties.json) and the generic
+#                  ArcGIS block in-idem-cyanobacteria (IDEM's beach samples with IDEM's advisory level; ingest/
+#                  in_transforms.py); IDEM's outfall layer is data/outfalls-in.json (scripts/build_in_outfalls.py)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
