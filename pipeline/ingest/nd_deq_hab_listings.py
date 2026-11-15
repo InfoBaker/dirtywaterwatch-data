@@ -17,8 +17,11 @@ Reading the PDF
   page's order before the text is read (ingest.nh_pdftext's operators), then rows are rebuilt by their y position and
   the columns by x (the lake left of 300 pt, the county to 450 pt, the date beyond). Letters drawn apart ("N" + "orth
   Lake Washington") are joined. A file in which either table heading is missing, or any row cannot be read whole as a
-  lake, county and date, writes ok=False and the previous records stay, so nothing is lifted by a bad read; both tables
-  found and empty is DEQ's own empty listing (review 2026-11-14 P1-5).
+  lake, county and date, writes ok=False and the previous records stay, so nothing is lifted by a bad read (review
+  2026-11-14 P1-5). Re-review P1-4: a row's county must be a North Dakota county (data/reference/nd-counties.json),
+  so a lost county cell fails the read instead of changing the record's key; a file of more than one page, or one
+  whose content stream is missing or cannot be decoded, fails; a table with no rows counts as empty only where it
+  says so ("None", "No current advisories"), else the read fails and nothing is lifted.
 
 Record rules
   - One hab_advisory record per posting: source_record_id <lake>:<counties in alphabetical order>:<level>:<Date Posted>
@@ -72,23 +75,39 @@ LEVEL_MEANING = {"advisory": "DEQ's advisory: a harmful algal bloom is present",
                  "warning": ("DEQ's warning: the bloom covers a significant part of the water and toxins are above the "
                              "recreational threshold")}
 DATE = re.compile(r"^(\d{1,2})/(\d{1,2})/(\d{4})$")
+# a table's own statement that it is empty ("None", "No current advisories"): the only evidence of an empty table
+NONE_SAID = re.compile(r"^(?:none|no(?:current)?(?:advisories|advisory|warnings?)(?:atthistime)?)\.?$")
+
+
+def _nd_counties() -> set[str]:
+    doc = json.loads((Path(__file__).resolve().parents[2] / "data" / "reference" / "nd-counties.json").read_text())
+    return {c["county"].removesuffix(" County") for c in doc["counties"]}
 
 
 def slug(s: str) -> str:
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", (s or "").lower())).strip("-")
 
 
+PAGE = re.compile(rb"/Type\s*/Page(?![A-Za-z])")
+
+
 def page_items(pdf: bytes) -> list[dict]:
-    """Positioned text of the first page, its content streams joined in the page's /Contents order (a cell cut between
-    two streams is read whole); falls back to nh_pdftext.text_items when the page names no /Contents array."""
+    """Positioned text of the listing's one page, its content streams joined in the page's /Contents order (a cell cut
+    between two streams is read whole). ValueError when the file has more or fewer than one page (a listing that runs
+    onto a second page is not read in part) or a content stream the page names is missing or cannot be decoded
+    (re-review 2026-11-14 P1-4)."""
     objs = P._streams(pdf)
-    m = re.search(rb"/Contents\s*\[([^\]]*)\]", pdf)
+    pages = [head for head, _ in objs.values() if PAGE.search(head)]
+    if len(pages) != 1:
+        raise ValueError(f"the listing has {len(pages)} pages; only a one-page listing is read whole")
+    m = re.search(rb"/Contents\s*\[([^\]]*)\]", pages[0]) or re.search(rb"/Contents\s+(\d+\s+\d+\s+R)", pages[0])
     nums = [int(x) for x in re.findall(rb"(\d+)\s+\d+\s+R", m.group(1))] if m else []
     if not nums:
-        nums = [int(x) for x in re.findall(rb"/Contents\s+(\d+)\s+\d+\s+R", pdf)[:1]]
-    if not nums:
-        return P.text_items(pdf)
-    data = b"\n".join(objs[n][1] or b"" for n in nums if n in objs)
+        raise ValueError("the listing's page names no content stream")
+    bad = [n for n in nums if n not in objs or objs[n][1] is None]
+    if bad:
+        raise ValueError(f"content stream(s) {bad} of the listing's page are missing or cannot be decoded")
+    data = b"\n".join(objs[n][1] for n in nums)
     items: list[dict] = []
     P._run(data, items, 1)
     return items
@@ -103,7 +122,8 @@ def parse(pdf: bytes) -> list[dict]:
             continue
         y = next((k for k in rows if abs(k - it["y"]) <= 3), it["y"])
         rows.setdefault(y, []).append(it)
-    out, level, seen, broken = [], None, set(), []
+    out, level, seen, broken, said_empty = [], None, set(), [], set()
+    counties_known = _nd_counties()
     for y in sorted(rows, reverse=True):
         cells = sorted(rows[y], key=lambda i: i["x"])
         line = "".join(c["text"] for c in cells).strip()
@@ -118,21 +138,28 @@ def parse(pdf: bytes) -> list[dict]:
             continue
         if level is None or "lakename" in low or low in ("dateposted", "countydateposted"):
             continue
+        if NONE_SAID.match(low):
+            said_empty.add(level)
+            continue
         lake = "".join(c["text"] for c in cells if c["x"] < 300).strip()
         county = "".join(c["text"] for c in cells if 300 <= c["x"] < 450).strip()
         dtext = "".join(c["text"] for c in cells if c["x"] >= 450).strip()
         m = DATE.match(re.sub(r"\s+", "", dtext))
-        if not lake or not m:
-            broken.append(line)                 # a row with text that is not a whole lake, county and date
+        cs = [c.strip() for c in county.split("/") if c.strip()]
+        if not lake or not m or not cs or any(c not in counties_known for c in cs):
+            broken.append(line)     # not a whole lake, North Dakota county (or counties) and date: the read fails
             continue
         lake = re.sub(r"\s*-\s*", " - ", re.sub(r"\s+", " ", lake))
-        out.append({"level": level, "lake": lake, "counties": [c.strip() for c in county.split("/") if c.strip()],
+        out.append({"level": level, "lake": lake, "counties": cs,
                     "date": f"{m.group(3)}-{int(m.group(1)):02d}-{int(m.group(2)):02d}"})
     if seen != {"advisory", "warning"}:
         raise ValueError(f"the listing's tables were not all found (found: {sorted(seen) or 'none'})")
     if broken:
         raise ValueError(f"{len(broken)} row(s) of the listing could not be read whole: {broken[:3]}")
-    return out          # both tables found and every row read: an empty list is DEQ's own empty listing
+    empty = {"advisory", "warning"} - {x["level"] for x in out} - said_empty
+    if empty:
+        raise ValueError(f"no rows and no statement that the table is empty: {sorted(empty)}")
+    return out          # both tables found, every row read whole, a table empty only where it says so
 
 
 POINTS = Path(__file__).resolve().parents[2] / "data" / "reference" / "nd-hab-lake-points.json"

@@ -146,7 +146,11 @@ def test_p1_5_a_damaged_row_or_a_missing_table_fails_and_lifts_nothing(monkeypat
         H.parse(PDF)
     empty = [i for i in items if re.sub(r"\s", "", i["text"]).lower() in ("a", "dvisories", "warning")]
     monkeypatch.setattr(H, "page_items", lambda pdf: empty)
-    assert H.parse(PDF) == []                        # DEQ's own empty listing reads as empty, not as a failure
+    with pytest.raises(ValueError, match="no statement that the table is empty"):
+        H.parse(PDF)                                 # two bare headings are no evidence of an empty listing
+    said = empty + [{"text": "None", "x": 60.0, "y": 400.0}, {"text": "None", "x": 60.0, "y": 200.0}]
+    monkeypatch.setattr(H, "page_items", lambda pdf: said)
+    assert H.parse(PDF) == []                        # each table saying it is empty reads as DEQ's empty listing
 
 
 def test_p1_1_each_listed_lake_with_an_nhd_outline_in_its_county_has_a_cited_point():
@@ -437,3 +441,53 @@ def test_p1_1_every_standing_listing_is_visible_before_and_after_its_water_is_re
     pts = {p["event_id"] for p in st["advisory_points"] if p["status"] == "red"}
     if area >= 50:
         assert pts == marked           # a large lake keeps its marker where the listing has a point
+
+
+# ---------------------------------------------------------------- re-review 2026-11-14 P1-4: a whole read or none
+
+def test_p1_4_a_lost_county_cell_fails_the_read_and_keeps_the_advisory(monkeypatch):
+    first, _ = hab()
+    items = H.page_items(PDF)
+    clear = next(i for i in items if i["text"].strip().startswith("Clear Lake"))
+    no_county = [i for i in items if not (abs(i["y"] - clear["y"]) <= 3 and 300 <= i["x"] < 450)]
+    assert len(no_county) < len(items)
+    monkeypatch.setattr(H, "page_items", lambda pdf: no_county)
+    with pytest.raises(ValueError, match="could not be read whole"):
+        H.parse(PDF)
+    bogus = [dict(i, text="Example") if (abs(i["y"] - clear["y"]) <= 3 and 300 <= i["x"] < 450) else i for i in items]
+    monkeypatch.setattr(H, "page_items", lambda pdf: bogus)
+    with pytest.raises(ValueError, match="could not be read whole"):     # not a North Dakota county
+        H.parse(PDF)
+
+
+def _main_with(monkeypatch, pdf, previous):
+    written = []
+
+    class Resp:
+        content, headers = pdf, {}
+
+        def raise_for_status(self):
+            return None
+    monkeypatch.setattr(H.requests, "get", lambda *a, **k: Resp())
+    monkeypatch.setattr(H, "save_raw", lambda *a, **k: None)
+    monkeypatch.setattr(H, "read_json", lambda path, default=None: {"records": list(previous)})
+    monkeypatch.setattr(H, "write_events", lambda sid, recs, **k: written.append((list(recs), k)))
+    return H.main([]), written
+
+
+def test_p1_4_a_second_page_or_a_missing_stream_fails_and_lifts_nothing(monkeypatch):
+    first, _ = hab()
+    two_pages = PDF.replace(b"%%EOF", b"\n999 0 obj\n<< /Type /Page /Contents 998 0 R >>\nendobj\n%%EOF", 1)
+    with pytest.raises(ValueError, match="2 pages"):
+        H.parse(two_pages)
+    rc, written = _main_with(monkeypatch, two_pages, first.values())
+    assert rc == 1 and written[0][1]["ok"] is False and written[0][0] == []      # previous records kept by the writer
+    m = re.search(rb"/Contents\s*\[\s*(\d+)", PDF)
+    gone = PDF.replace(m.group(0), m.group(0).replace(m.group(1), b"9999"), 1)       # a stream the page names, absent
+    with pytest.raises(ValueError, match="missing or cannot be decoded"):
+        H.parse(gone)
+    rc, written = _main_with(monkeypatch, gone, first.values())
+    assert rc == 1 and written[0][1]["ok"] is False
+    rc, written = _main_with(monkeypatch, PDF, first.values())
+    assert rc == 0 and len(written[0][0]) == 20
+    assert all(r["status"] == "advisory_active" for r in written[0][0])
