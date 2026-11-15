@@ -212,7 +212,7 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 92 permits, January 2025 to October 2026, a median 24 days after the month. Month precision: the monthly mark only.",
+  "status_reason": "Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 91 permits, January 2025 to October 2026, received by EPA a median 24 days after the month. Month precision: the monthly mark only.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "notes": ""
@@ -747,10 +747,9 @@
   "url": "https://portal.idem.in.gov/BeachAlert/",
   "access": [
    "map_only",
-   "email",
-   "login"
+   "email"
   ],
-  "access_detail": "Microsoft Power Apps portal (replaced BeachGuard in 2021). Beach Map (ArcGIS JS 4.17), Beach List (entity grid idem_beach: 'There are no records to display. You don't have permissions to view these records.' without sign-in), Alerts. Email or text alerts with an Access Indiana account.",
+  "access_detail": "Microsoft Power Apps portal (replaced BeachGuard in 2021). Beach Map (ArcGIS JS 4.17), Beach List (entity grid idem_beach; the page's client-side templates include a no-records line, a permissions line and an error line side by side, so the shell alone shows none of them to be the answer; whether the grid's data call answers without sign-in was not verified, 2026-11-14), Alerts. Email or text alerts with an Access Indiana account.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],

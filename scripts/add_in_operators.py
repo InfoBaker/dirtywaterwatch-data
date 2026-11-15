@@ -250,6 +250,12 @@ def bare(pn: str) -> str:
     return out or pn
 
 
+PERMIT_ONLY = "facility (permittee not named)"
+UNESTABLISHED = ("EPA records the permittee as the plant ({kind}; owner typed \"{t}\"); the plant's name does not "
+                 "establish who holds the permit, so the row names the permit's holder, not the plant, and is not "
+                 "counted as a named operator.")
+
+
 def owner_of_plant(pn: str, ftype: str | None) -> tuple[str | None, str | None, str | None, str | None]:
     """(id, name, legal form, note) for a plant EPA names (module docstring); (None, None, None, note) when the owner
     cannot be read from the name, so the row is the permit's holder, unnamed."""
@@ -268,35 +274,35 @@ def owner_of_plant(pn: str, ftype: str | None) -> tuple[str | None, str | None, 
         name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "special district", None
     if t.startswith("State"):
-        name = smart_title(bare(pn))
-        return f"in-{slug(name)}", name, "state facility", None
+        return None, None, PERMIT_ONLY, UNESTABLISHED.format(kind="a state facility", t=t)
     if t.startswith("Federal"):
-        name = smart_title(bare(pn))
-        return f"in-{slug(name)}", name, "federal facility", None
+        return None, None, PERMIT_ONLY, UNESTABLISHED.format(kind="a federal facility", t=t)
     if re.search(r"\breuse authority\b|\bauthority\b", pn, re.I):
         name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "authority", None
-    if INSTITUTION.search(pn):
-        name = smart_title(bare(pn))
-        return f"in-{slug(name)}", name, "institution", None
-    if SCHOOL.search(pn) or re.search(r"\beducational center\b", pn, re.I):
+    if re.search(r"\bschool corp(?:oration)?\b", pn, re.I) and not INSTITUTION.search(pn):
         name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "special district", "A public school corporation's plant."
+    # a facility's own name (an institution, a school building, a park, a campground) does not establish who holds
+    # its permit (re-review 2026-11-14 P2-6): the row is the permit's holder, unnamed, the facility kept in the notes
+    if COMPANY.search(pn) and (INSTITUTION.search(pn) or MHP.search(pn) or CAMP.search(pn)) \
+            and not t.startswith(("State", "Federal")):
+        name = smart_title(bare(pn))
+        lf = ("mobile-home park" if MHP.search(pn) else "campground or resort" if CAMP.search(pn) else "institution")
+        return f"in-{slug(name)}", name, lf, None
     if INSTITUTION.search(pn):
-        name = smart_title(bare(pn))
-        return f"in-{slug(name)}", name, "institution", None
+        return None, None, PERMIT_ONLY, UNESTABLISHED.format(kind="an institution's plant", t=t or "not given")
+    if SCHOOL.search(pn) or re.search(r"\beducational center\b", pn, re.I):
+        return None, None, PERMIT_ONLY, UNESTABLISHED.format(kind="a school's plant", t=t or "not given")
     if MHP.search(pn):
-        name = smart_title(bare(pn))
-        return f"in-{slug(name)}", name, "mobile-home park", None
+        return None, None, PERMIT_ONLY, UNESTABLISHED.format(kind="a mobile-home park's plant", t=t or "not given")
     if CAMP.search(pn) or re.search(r"\bjellystone\b|\bwater park\b", pn, re.I):
-        name = smart_title(bare(pn))
-        return f"in-{slug(name)}", name, "campground or resort", None
+        return None, None, PERMIT_ONLY, UNESTABLISHED.format(kind="a campground's or resort's plant", t=t or "not given")
     if COUNTY_BODY.search(pn):
         name = smart_title(bare(pn))
         return f"in-{slug(name)}", name, "county", None
-    if STORE.search(pn):
-        name = smart_title(bare(pn))
-        return f"in-{slug(name)}", name, "business or industrial", None
+    if STORE.search(pn) and not COMPANY.search(pn):
+        return None, None, PERMIT_ONLY, UNESTABLISHED.format(kind="a business's plant", t=t or "not given")
     stem = PLANT_WORDS.sub("", " " + pn).strip(" -#0123456789")
     hit = place_prefix(stem) if (t.startswith("Municipal") or t == "POTW" or not t) else None
     if hit:
@@ -365,18 +371,19 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
                     else f"Holder of permit {p}")
             rid = f"in-{p.lower()}"
             meta.setdefault(rid, {"name": name, "short": name, "lf": "facility (permittee not named)",
-                                  "note": "EPA's permittee name reads as an individual's: not named here."})
+                                  "note": "EPA's permittee name reads as an individual's: not named here.",
+                                  "person": True})
         elif pn and person(pn):
             rid = f"in-{p.lower()}"
             meta.setdefault(rid, {"name": f"Holder of permit {p}", "short": f"Holder of permit {p}",
-                                  "lf": "facility (permittee not named)", "note": None})
+                                  "lf": "facility (permittee not named)", "note": None, "person": True})
         elif pn:
             if (p in cso or p in idem) and (ftype or "").startswith("Mixed"):
                 ftype = "Municipal or Water District"   # a combined sewer is a city's or town's old system
             rid, name, lf, note = owner_of_plant(pn, ftype)
             if rid is None:
-                rid, name = f"in-{p.lower()}", f"Holder of permit {p}"
-            if c and c.get("legal_form_proposed") and lf in (None, "business or industrial"):
+                rid, name, lf = f"in-{p.lower()}", f"Holder of permit {p}", PERMIT_ONLY
+            if c and c.get("legal_form_proposed") and lf in (None, "business or industrial") and rid != f"in-{p.lower()}":
                 lf = c["legal_form_proposed"]
             meta.setdefault(rid, {"name": name, "short": name, "lf": lf, "note": note})
         elif c:
@@ -386,7 +393,7 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
                                   "note": "EPA types it privately owned."})
         else:
             rid = f"in-{p.lower()}"
-            meta.setdefault(rid, {"name": f"Holder of permit {p}", "short": f"Holder of permit {p}", "lf": None,
+            meta.setdefault(rid, {"name": f"Holder of permit {p}", "short": f"Holder of permit {p}", "lf": PERMIT_ONLY,
                                   "note": "The permit's record was not read, so the holder is not named here."})
         by_row[rid].append(p)
     by_row["in-town-of-highland"]   # Highland's sewer overflow reports (research), no permit in EPA's lists
@@ -420,7 +427,8 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
             r0 = (plants.get(p) or cso.get(p) or [{}])[0]
             n = smart_title(r0.get("permit_name") or r0.get("permittee") or "")
             return p if not n or PERSON_PLANT.search(n) else f"{p} {n}"
-        facs = "; ".join(fac(p) for p in ps) if m["lf"] != "facility (permittee not named)" else ps[0]
+        # the plant's name is kept in the notes, except where it is a person's (the permittee read as an individual)
+        facs = "; ".join(fac(p) for p in ps) if not m.get("person") else ps[0]
         note = f"EPA ICIS-NPDES: {facs}." if ps else ""
         n_reports = sum(reports[p] for p in ps)
         if n_reports:
@@ -462,6 +470,9 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
     if dup:
         raise SystemExit(f"duplicate ids: {dup}")
     stats = {"rows": len(new), "permits": sum(len(r["npdes_permits"]) for r in new),
+             # permit-only rows (the responsible body not established) are not counted as named operators
+             "named_operators": sum(1 for r in new if r.get("legal_form") != PERMIT_ONLY),
+             "permit_only_rows": sum(1 for r in new if r.get("legal_form") == PERMIT_ONLY),
              "legal_form": dict(Counter(r.get("legal_form") for r in new)), "kind": dict(Counter(r["kind"] for r in new)),
              "held_elsewhere": sorted(p for p in set(plants) if p in held_elsewhere),
              "multi_permit_rows": {r["id"]: r["npdes_permits"] for r in new if len(r["npdes_permits"]) > 1}}

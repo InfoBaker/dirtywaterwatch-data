@@ -1107,6 +1107,10 @@ COUNTY_STATES["WI"] = "wi-counties.json"       # Wisconsin: MMSD's posts give no
 COUNTY_FIELD_STATES.add("WI")    # (Milwaukee): a name is placed only on a record reaching that county (Astra P2-9)
 COUNTY_STATES["DE"] = "de-counties.json"; COUNTY_FIELD_STATES.add("DE")   # Delaware: DNREC's releases give the county (ZIP or town), no point
 COUNTY_STATES["SC"] = "sc-counties.json"; COUNTY_FIELD_STATES.add("SC")   # South Carolina: Florence's notices give the county, no point
+COUNTY_FIELD_STATES.add("IN")    # Indiana: a record or outfall row with no point keeps its county (re-review P2-4)
+# States whose registry rows' county reaches the resolver's stand-in record for the outfall (outfall_waters and
+# Resolver.row_water): Indiana only, so no other state's ties change
+REGISTRY_COUNTY_STATES = {"IN"}
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}
@@ -2169,7 +2173,8 @@ class Resolver:
             out = (None, f"its receiving water '{name}' is a watershed label, not a water name")
             name = ""
         fake = {"npdes_permit": permit, "lat": row.get("lat"), "lon": row.get("lon"), "waterbody_text": name,
-                "raw": {"state": state, "town": row.get("city") or ""}}
+                "raw": {"state": state, "town": row.get("city") or "",
+                        **({"county": row["county"]} if state in REGISTRY_COUNTY_STATES and row.get("county") else {})}}
         slug = self.canon(row.get("water_slug"))
         if slug in self.waters:
             # a slug matched by name only must carry the receiving water's name (the registry once matched
@@ -2704,6 +2709,11 @@ def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None
                                        "(no authority window applies)", "source": source}
 
 
+# sources whose poll-clock advisories keep closed observation periods in raw._advisory_observed.earlier_periods
+# (Nebraska's BeachWatch; Indiana's algae samples, re-review 2026-11-14 P2-3)
+EARLIER_PERIOD_SOURCES = frozenset({"ne-dwee-beachwatch", "in-idem-cyanobacteria"})
+
+
 def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None = None,
                     rules: dict | None = None) -> list[dict]:
     """The colour intervals one event sets on a water (its state, and the water record for the
@@ -2713,7 +2723,7 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
     rules = load_rules() if rules is None else rules
     earlier = []
     raw = ev.get("raw") or {}
-    if ev.get("source_id") == "ne-dwee-beachwatch" and ev.get("sampled_at") \
+    if ev.get("source_id") in EARLIER_PERIOD_SOURCES and ev.get("sampled_at") \
             and ev.get("time_precision") == "poll" and raw.get("_advisory_clock_version") == 1:
         # A corrected flag can reopen the same source sample. Replay its closed observation periods separately,
         # through the same age-out rules as the current one, without filling the observed inactive gaps.

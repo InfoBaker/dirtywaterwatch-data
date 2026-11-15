@@ -44,7 +44,7 @@ SHORT_RUNS_TO_ACCEPT = 3      # a short response that persists this many runs in
 COMMON_KEYS = {"platform", "live", "time_zone", "safe_fields", "reviewed_fields", "free_text", "filter", "bounds",
                "record", "transform", "waters", "dedupe", "post", "after_history", "history", "meta", "raw_notes", "decoded_times",
                "headers", "browser_headers", "max_error_share", "min_rows_ratio", "after", "module",
-               "short_runs_to_accept", "free_text_scrub", "operator_fields", "round_coords"}
+               "short_runs_to_accept", "free_text_scrub", "operator_fields", "round_coords", "bounded_errors"}
 PLATFORM_KEYS = {
     "socrata": {"domain", "dataset", "format", "metadata", "where", "order", "page_size", "max_rows", "if_changed"},
     "arcgis": {"url", "where", "out_fields", "order_by", "cursor_field", "page_size", "max_rows", "geometry", "metadata",
@@ -596,6 +596,27 @@ def public_meta(block_meta: dict) -> dict:
     return {META_ALIASES.get(k, k): v for k, v in (block_meta or {}).items()}
 
 
+def error_category(e: Exception) -> str:
+    """A bounded category for a failed run, never an answer's text or the exception's own message."""
+    import requests
+    if getattr(e, "code", None) is not None and type(e).__name__ == "ArcGISError":
+        return f"ArcGIS error (code {int(e.code)})"
+    if type(e).__name__ == "ArcGISError":
+        return "ArcGIS error"
+    if isinstance(e, requests.HTTPError):
+        code = getattr(getattr(e, "response", None), "status_code", None)
+        return f"HTTP {int(code)}" if isinstance(code, int) else "HTTP error"
+    if isinstance(e, requests.Timeout):
+        return "timeout"
+    if isinstance(e, requests.ConnectionError):
+        return "connection error"
+    if isinstance(e, requests.RequestException):
+        return "request error"
+    if isinstance(e, ValueError):
+        return "malformed response"
+    return f"run error ({type(e).__name__})"
+
+
 def run(source_id: str, file: str | None = None, meta_file: str | None = None, out: str | None = None,
         sources_dir: Path = SOURCES_DIR) -> int:
     row, block = load_source(source_id, sources_dir)
@@ -631,10 +652,15 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
         if kept is not None:
             print(f"{source_id}: {kept}")
             return 0
+    def failed(e: Exception) -> str:
+        # bounded_errors (a source whose error text could quote its answer: in-idem-cyanobacteria, verification
+        # 2026-11-15 P1-2): only a category is saved and printed; every other source keeps its message as before
+        return error_category(e) if block.get("bounded_errors") else f"{type(e).__name__}: {e}"
+
     try:
         rows, pmeta, raw_path = fetch_rows(source_id, block, file, meta_file)
     except Exception as e:  # noqa: BLE001
-        return fail(f"{type(e).__name__}: {e}")
+        return fail(failed(e))
     prev_doc = read_json(path, {}) or {}
     prev = prev_doc.get("records", [])
     # a failed run keeps the last good run's meta, so meta.rows is the last good count; short_runs counts the short
@@ -670,7 +696,7 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
     try:
         records, stats = build(source_id, block, rows, fetched_at, prev, pmeta, extra)
     except Exception as e:  # noqa: BLE001 - a run that cannot finish keeps the previous records
-        return fail(f"{type(e).__name__}: {e}")
+        return fail(failed(e))
     if short is not None:
         stats["short_response_accepted"] = short
     if snapshot:
