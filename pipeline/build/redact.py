@@ -882,8 +882,10 @@ class BlockScan:
     def scrub(self, text: str) -> str:
         """The text with every blocklisted name that found() finds replaced by REDACTED, by the same phrase rule
         (_phrase_re, longest name first), so found() finds nothing in the result and a second scrub changes nothing.
-        Unchanged when nothing is found. (A blocklisted name made of the marker's own words would still be found,
-        and the scan then refuses, as it should.)"""
+        Unchanged when nothing is found, and unchanged when a blocklisted name matches inside the marker itself (a
+        scrub would nest markers on every rerun): the scan then refuses, as it should."""
+        if self.found(REDACTED):
+            return text
         for _ in range(len(self.phrases) + 1):
             hits = self.found(text)
             if not hits:

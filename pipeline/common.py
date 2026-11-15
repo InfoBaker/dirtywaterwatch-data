@@ -153,7 +153,8 @@ def dumps_rows(obj, row_keys=ROW_LIST_KEYS) -> str:
         return json.dumps(obj, indent=1, ensure_ascii=False, default=str) + "\n"
     parts = []
     for k, v in obj.items():
-        key = json.dumps(k if isinstance(k, str) else str(k), ensure_ascii=False)
+        # the key exactly as json.dumps writes it (True -> "true", None -> "null", 1.5 -> "1.5"; a tuple refused)
+        key = json.dumps({k: 0}, ensure_ascii=False)[1:-4]
         if k in row_keys and isinstance(v, list):
             body = ("[\n" + ",\n".join("  " + json.dumps(x, separators=(",", ":"), ensure_ascii=False, default=str)
                                        for x in v) + "\n ]") if v else "[]"
