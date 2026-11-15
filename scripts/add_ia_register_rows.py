@@ -57,8 +57,9 @@ AGENCY = [
      "urls": ["https://www.iowadnr.gov/topics/203/feed"], "method": "rss", "legal_basis": LAW, "basis_kind": "law",
      "monitored": False, "unmonitored_reason": "feed_ingested", "feed_source_id": "ia-dnr-news-releases",
      "publishes": "notices", "noun": "News releases", "sources": ["ia-dnr-news-releases", "ia-dnr-advisory-rss"],
-     "note": ("DNR's releases when it decides the public must be told: five municipal wastewater releases from November "
-              "2024 to October 2026 in the advisory topic. Read by the feed.")},
+     "note": ("DNR's releases when it decides the public must be told: four municipal wastewater releases from November "
+              "2024 to October 2026 in the advisory topic (five records: one release names two places), and one "
+              "release about a company's process wastewater, which is not a sewage report. Read by the feed.")},
     {"id": "ia-dnr-focomp-spill-search", "agency": "Iowa Department of Natural Resources",
      "name": "Iowa DNR (spill search)", "channel_kind": "state_alert_page",
      "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
@@ -133,7 +134,7 @@ def operator_rows(dis: list[dict]) -> list[dict]:
                 records=False, noun="CSO public notification", sources=["ia-epa-cso-inventory"],
                 note=(f"No web channel found: {name}'s public notification of combined sewer overflows under its "
                       "permit; no web notice was found (search only) and the permit was not read. Its bypass reports "
-                      "to DNR are read from FOCOMP."))))
+                      "to DNR are read from FOCOMP." + DMWRA_TIMEOUT.get(permit, "")))))
         if "IA0042650" in (op.get("npdes_permits") or []):
             rows.append(finish(base(
                 id=f"{oid}-sso-bypass-page", operator_id=oid, name=name, permit="IA0042650",
@@ -144,6 +145,13 @@ def operator_rows(dis: list[dict]) -> list[dict]:
                       "place, gallons and duration (17 on 2026-11-14); the City says IADNR and EPA require it to "
                       "notify the public. Read by the feed."))))
     return rows
+
+
+# the Authority's own site did not answer the project's ordinary requests (connect time-out, twice, 2026-11-14): its
+# 2025 notice on eliminating combined sewer overflows could not be read, so its three open outfalls keep the caution
+DMWRA_TIMEOUT = {"IA0044130": (" The Authority's site (www.dmmwra.org) did not answer the project's ordinary requests "
+                               "on 2026-11-14 (connect time-out, twice), so its notice on eliminating its combined sewer "
+                               "overflows could not be read.")}
 
 
 def run(dry_run: bool = False) -> dict:

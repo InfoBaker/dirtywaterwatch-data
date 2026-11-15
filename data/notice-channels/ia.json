@@ -721,7 +721,7 @@
    "sources": [
     "ia-epa-cso-inventory"
    ],
-   "note": "No web channel found: Des Moines Metropolitan Wastewater Reclamation Authority's public notification of combined sewer overflows under its permit; no web notice was found (search only) and the permit was not read. Its bypass reports to DNR are read from FOCOMP.",
+   "note": "No web channel found: Des Moines Metropolitan Wastewater Reclamation Authority's public notification of combined sewer overflows under its permit; no web notice was found (search only) and the permit was not read. Its bypass reports to DNR are read from FOCOMP. The Authority's site (www.dmmwra.org) did not answer the project's ordinary requests on 2026-11-14 (connect time-out, twice), so its notice on eliminating its combined sewer overflows could not be read.",
    "barrier": "no_web_page"
   },
   {
@@ -870,7 +870,7 @@
     "ia-dnr-news-releases",
     "ia-dnr-advisory-rss"
    ],
-   "note": "DNR's releases when it decides the public must be told: five municipal wastewater releases from November 2024 to October 2026 in the advisory topic. Read by the feed.",
+   "note": "DNR's releases when it decides the public must be told: four municipal wastewater releases from November 2024 to October 2026 in the advisory topic (five records: one release names two places), and one release about a company's process wastewater, which is not a sewage report. Read by the feed.",
    "barrier": null
   },
   {
