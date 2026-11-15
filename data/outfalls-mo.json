@@ -550,7 +550,14 @@
     "outfall": "003",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 111,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 111 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -588,7 +595,14 @@
     "outfall": "004",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 133,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 133 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -626,7 +640,14 @@
     "outfall": "005",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 147,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 147 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -664,7 +685,14 @@
     "outfall": "006",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 152,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 152 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -702,7 +730,14 @@
     "outfall": "007",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 179,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 179 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -740,7 +775,14 @@
     "outfall": "008",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 183,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 183 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -778,7 +820,14 @@
     "outfall": "009",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 212,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 212 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -816,7 +865,14 @@
     "outfall": "010",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 169,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 169 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -854,7 +910,14 @@
     "outfall": "011",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 160,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 160 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -892,7 +955,14 @@
     "outfall": "012",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 160,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 160 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -930,7 +1000,14 @@
     "outfall": "013",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 913,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 913 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -968,7 +1045,14 @@
     "outfall": "014",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 263,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 263 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -1006,7 +1090,14 @@
     "outfall": "015",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 1728,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 1728 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023043",
@@ -1044,7 +1135,15 @@
     "outfall": "016",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Roys Branch' in MO",
+   "no_water_reason": "no record named 'Roys Branch' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023221",
@@ -1082,7 +1181,15 @@
     "outfall": "W02",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: 'Sewer Creek': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Sewer Creek) cannot be told apart for this outfall",
+   "no_water_reason": "'Sewer Creek': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Sewer Creek) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023221",
@@ -1120,7 +1227,15 @@
     "outfall": "W03",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: 'Sewer Creek': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Sewer Creek) cannot be told apart for this outfall",
+   "no_water_reason": "'Sewer Creek': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Sewer Creek) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0023221",
@@ -1158,7 +1273,15 @@
     "outfall": "W05",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: 'Sewer Creek': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Sewer Creek) cannot be told apart for this outfall",
+   "no_water_reason": "'Sewer Creek': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Sewer Creek) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0024929",
@@ -1196,7 +1319,14 @@
     "outfall": "002",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 183,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 183 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0024929",
@@ -1234,7 +1364,14 @@
     "outfall": "003",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 148,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 148 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0024929",
@@ -1272,7 +1409,14 @@
     "outfall": "004",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": "missouri-river-mo",
+   "water_name": "Missouri River",
+   "water_kind": "river",
+   "distance_m": 220,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Missouri R' by name; Missouri River (missouri-river-mo, openboatlaunch), 220 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0024929",
@@ -1310,7 +1454,15 @@
     "outfall": "005",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the record of that name was set aside by the placement guard: missouri-river-mo, name match too far (2.9 km) and the report's town (kansas) is not among the water's towns (Augusta, Bellefontaine Neighbors, Bernheimer, Boonville)",
+   "no_water_reason": "the record of that name was set aside by the placement guard: missouri-river-mo, name match too far (2.9 km) and the report's town (kansas) is not among the water's towns (Augusta, Bellefontaine Neighbors, Bernheimer, Boonville)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0024929",
@@ -1348,7 +1500,15 @@
     "outfall": "006",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the record of that name was set aside by the placement guard: missouri-river-mo, name match too far (4.2 km) and the report's town (kansas) is not among the water's towns (Augusta, Bellefontaine Neighbors, Bernheimer, Boonville)",
+   "no_water_reason": "the record of that name was set aside by the placement guard: missouri-river-mo, name match too far (4.2 km) and the report's town (kansas) is not among the water's towns (Augusta, Bellefontaine Neighbors, Bernheimer, Boonville)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1378,7 +1538,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861264,
    "gis_loc_id": 171214,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1408,7 +1576,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863665,
    "gis_loc_id": 171215,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1438,7 +1614,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864467,
    "gis_loc_id": 171216,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1468,7 +1652,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863268,
    "gis_loc_id": 171217,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1498,7 +1690,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865263,
    "gis_loc_id": 171218,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1528,7 +1728,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864064,
    "gis_loc_id": 171219,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1558,7 +1766,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863269,
    "gis_loc_id": 171220,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1588,7 +1804,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863666,
    "gis_loc_id": 171221,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1618,7 +1842,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3860868,
    "gis_loc_id": 171222,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1648,7 +1880,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864468,
    "gis_loc_id": 171223,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1678,7 +1918,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864065,
    "gis_loc_id": 171224,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1708,7 +1956,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865264,
    "gis_loc_id": 171225,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1738,7 +1994,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863667,
    "gis_loc_id": 171226,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1768,7 +2032,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864067,
    "gis_loc_id": 171228,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1798,7 +2070,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863668,
    "gis_loc_id": 171229,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1828,7 +2108,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861265,
    "gis_loc_id": 171230,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1858,7 +2146,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863270,
    "gis_loc_id": 171231,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1888,7 +2184,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864068,
    "gis_loc_id": 171232,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1918,7 +2222,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865265,
    "gis_loc_id": 171234,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1948,7 +2260,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861266,
    "gis_loc_id": 171233,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -1978,7 +2298,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864866,
    "gis_loc_id": 171235,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2008,7 +2336,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862869,
    "gis_loc_id": 171236,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2038,7 +2374,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864069,
    "gis_loc_id": 171237,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: EPA's point lies on Deer Creek (117 m), not on a water named 'River des Peres': the inventory's name and point disagree; no record named 'River des Peres' in MO",
+   "no_water_reason": "EPA's point lies on Deer Creek (117 m), not on a water named 'River des Peres': the inventory's name and point disagree; no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2068,7 +2412,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862870,
    "gis_loc_id": 171238,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2098,7 +2450,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864070,
    "gis_loc_id": 171239,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2128,7 +2488,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861267,
    "gis_loc_id": 171240,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2158,7 +2526,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865663,
    "gis_loc_id": 171241,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2188,7 +2564,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865266,
    "gis_loc_id": 171242,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2218,7 +2602,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865664,
    "gis_loc_id": 171243,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2248,7 +2640,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864071,
    "gis_loc_id": 171244,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2278,7 +2678,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862871,
    "gis_loc_id": 171245,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2308,7 +2716,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864072,
    "gis_loc_id": 171246,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2338,7 +2754,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862872,
    "gis_loc_id": 171247,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2368,7 +2792,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861268,
    "gis_loc_id": 171248,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2398,7 +2830,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864469,
    "gis_loc_id": 171250,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2428,7 +2868,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861269,
    "gis_loc_id": 171251,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2458,7 +2906,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862873,
    "gis_loc_id": 171252,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2488,7 +2944,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865665,
    "gis_loc_id": 171253,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2518,7 +2982,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861270,
    "gis_loc_id": 171254,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2548,7 +3020,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865666,
    "gis_loc_id": 171255,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2578,7 +3058,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863271,
    "gis_loc_id": 171256,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2608,7 +3096,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863272,
    "gis_loc_id": 171257,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Davis Creek, Gans Creek, not 'Extent-Remaining Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Gans Creek)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Davis Creek, Gans Creek, not 'Extent-Remaining Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Gans Creek)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2638,7 +3134,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864470,
    "gis_loc_id": 171258,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Davis Creek, Gans Creek, not 'Extent-Remaining Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Gans Creek)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Davis Creek, Gans Creek, not 'Extent-Remaining Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Gans Creek)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2668,7 +3172,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863273,
    "gis_loc_id": 171259,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2698,7 +3210,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863669,
    "gis_loc_id": 171260,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Davis Creek, Gans Creek, not 'Extent-Remaining Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Gans Creek)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Davis Creek, Gans Creek, not 'Extent-Remaining Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Gans Creek)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2728,7 +3248,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865268,
    "gis_loc_id": 171261,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Davis Creek, Gans Creek, not 'Extent-Remaining Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Gans Creek)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Davis Creek, Gans Creek, not 'Extent-Remaining Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Gans Creek)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2758,7 +3286,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861271,
    "gis_loc_id": 171262,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Presumed Use Stream' in MO",
+   "no_water_reason": "no record named 'Presumed Use Stream' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2788,7 +3324,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865667,
    "gis_loc_id": 171263,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Presumed Use Stream' in MO",
+   "no_water_reason": "no record named 'Presumed Use Stream' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2818,7 +3362,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863670,
    "gis_loc_id": 171264,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2848,7 +3400,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864471,
    "gis_loc_id": 171265,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Presumed Use Stream' in MO",
+   "no_water_reason": "no record named 'Presumed Use Stream' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2878,7 +3438,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862874,
    "gis_loc_id": 171266,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2908,7 +3476,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3860869,
    "gis_loc_id": 171267,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2938,7 +3514,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864472,
    "gis_loc_id": 171268,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Presumed Use Stream' in MO",
+   "no_water_reason": "no record named 'Presumed Use Stream' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2968,7 +3552,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864867,
    "gis_loc_id": 171269,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -2998,7 +3590,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3860870,
    "gis_loc_id": 171270,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3028,7 +3628,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865269,
    "gis_loc_id": 171271,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3058,7 +3666,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864868,
    "gis_loc_id": 171272,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3088,7 +3704,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864473,
    "gis_loc_id": 171273,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3118,7 +3742,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864869,
    "gis_loc_id": 171274,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3148,7 +3780,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3860871,
    "gis_loc_id": 171275,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3178,7 +3818,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864474,
    "gis_loc_id": 171276,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3208,7 +3856,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862875,
    "gis_loc_id": 171277,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3238,7 +3894,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865270,
    "gis_loc_id": 171278,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3268,7 +3932,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861272,
    "gis_loc_id": 171279,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3298,7 +3970,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865668,
    "gis_loc_id": 171280,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3328,7 +4008,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865271,
    "gis_loc_id": 171281,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3358,7 +4046,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861273,
    "gis_loc_id": 171282,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3388,7 +4084,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865669,
    "gis_loc_id": 171283,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3418,7 +4122,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865272,
    "gis_loc_id": 171284,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3448,7 +4160,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861274,
    "gis_loc_id": 171285,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3478,7 +4198,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865670,
    "gis_loc_id": 171286,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3508,7 +4236,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865273,
    "gis_loc_id": 171287,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3538,7 +4274,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861275,
    "gis_loc_id": 171288,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3568,7 +4312,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865671,
    "gis_loc_id": 171289,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3598,7 +4350,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865274,
    "gis_loc_id": 171290,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3628,7 +4388,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861276,
    "gis_loc_id": 171291,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "deer-creek-mo",
+   "water_name": "Deer Creek",
+   "water_kind": "stream",
+   "distance_m": 27,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Deer Creek' by name; Deer Creek (deer-creek-mo, NHDPlus V2.1 record), 27 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3658,7 +4425,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865672,
    "gis_loc_id": 171292,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "deer-creek-mo",
+   "water_name": "Deer Creek",
+   "water_kind": "stream",
+   "distance_m": 5,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Deer Creek' by name; Deer Creek (deer-creek-mo, NHDPlus V2.1 record), 5 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3688,7 +4462,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865275,
    "gis_loc_id": 171293,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "deer-creek-mo",
+   "water_name": "Deer Creek",
+   "water_kind": "stream",
+   "distance_m": 17,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Deer Creek' by name; Deer Creek (deer-creek-mo, NHDPlus V2.1 record), 17 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3718,7 +4499,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863671,
    "gis_loc_id": 171294,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "deer-creek-mo",
+   "water_name": "Deer Creek",
+   "water_kind": "stream",
+   "distance_m": 182,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Deer Creek' by name; Deer Creek (deer-creek-mo, NHDPlus V2.1 record), 182 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3748,7 +4536,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863274,
    "gis_loc_id": 171295,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3778,7 +4574,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863672,
    "gis_loc_id": 171296,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3808,7 +4612,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863275,
    "gis_loc_id": 171297,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3838,7 +4650,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863673,
    "gis_loc_id": 171298,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3868,7 +4688,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862876,
    "gis_loc_id": 171299,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3898,7 +4726,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864073,
    "gis_loc_id": 171300,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3928,7 +4764,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862877,
    "gis_loc_id": 171301,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3958,7 +4802,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864074,
    "gis_loc_id": 171302,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -3988,7 +4840,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862878,
    "gis_loc_id": 171303,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4018,7 +4878,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864075,
    "gis_loc_id": 171304,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4048,7 +4916,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862879,
    "gis_loc_id": 171305,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4078,7 +4954,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862880,
    "gis_loc_id": 171307,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4108,7 +4992,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864076,
    "gis_loc_id": 171306,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4138,7 +5030,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864077,
    "gis_loc_id": 171308,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4168,7 +5068,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3862881,
    "gis_loc_id": 171309,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4198,7 +5106,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864078,
    "gis_loc_id": 171310,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4228,7 +5144,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861277,
    "gis_loc_id": 171311,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4258,7 +5182,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865673,
    "gis_loc_id": 171312,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4288,7 +5220,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865276,
    "gis_loc_id": 171313,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4318,7 +5258,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861278,
    "gis_loc_id": 171314,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4348,7 +5296,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865674,
    "gis_loc_id": 171315,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4378,7 +5334,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865277,
    "gis_loc_id": 171316,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4408,7 +5372,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3861279,
    "gis_loc_id": 171317,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "mississippi-river-mo",
+   "water_name": "Mississippi River",
+   "water_kind": "river",
+   "distance_m": 445,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mississippi R' by name; Mississippi River (mississippi-river-mo, openboatlaunch), 445 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4438,7 +5409,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865675,
    "gis_loc_id": 171318,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "mississippi-river-mo",
+   "water_name": "Mississippi River",
+   "water_kind": "river",
+   "distance_m": 454,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mississippi R' by name; Mississippi River (mississippi-river-mo, openboatlaunch), 454 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4468,7 +5446,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865278,
    "gis_loc_id": 171319,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "mississippi-river-mo",
+   "water_name": "Mississippi River",
+   "water_kind": "river",
+   "distance_m": 446,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mississippi R' by name; Mississippi River (mississippi-river-mo, openboatlaunch), 446 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4498,7 +5483,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863674,
    "gis_loc_id": 171320,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "mississippi-river-mo",
+   "water_name": "Mississippi River",
+   "water_kind": "river",
+   "distance_m": 335,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Mississippi R' by name; Mississippi River (mississippi-river-mo, openboatlaunch), 335 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4528,7 +5520,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864870,
    "gis_loc_id": 171321,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "mississippi-river-mo",
+   "water_name": "Mississippi River",
+   "water_kind": "river",
+   "distance_m": 433,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mississippi R' by name; Mississippi River (mississippi-river-mo, openboatlaunch), 433 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4558,7 +5557,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3860872,
    "gis_loc_id": 171322,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "mississippi-river-mo",
+   "water_name": "Mississippi River",
+   "water_kind": "river",
+   "distance_m": 517,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mississippi R' by name; Mississippi River (mississippi-river-mo, openboatlaunch), 517 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4588,7 +5594,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864079,
    "gis_loc_id": 171323,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "mississippi-river-mo",
+   "water_name": "Mississippi River",
+   "water_kind": "river",
+   "distance_m": 515,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mississippi R' by name; Mississippi River (mississippi-river-mo, openboatlaunch), 515 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4618,7 +5631,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3865676,
    "gis_loc_id": 171324,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "mississippi-river-mo",
+   "water_name": "Mississippi River",
+   "water_kind": "river",
+   "distance_m": 486,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mississippi R' by name; Mississippi River (mississippi-river-mo, openboatlaunch), 486 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4648,7 +5668,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863276,
    "gis_loc_id": 171325,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "mississippi-river-mo",
+   "water_name": "Mississippi River",
+   "water_kind": "river",
+   "distance_m": 422,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mississippi R' by name; Mississippi River (mississippi-river-mo, openboatlaunch), 422 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4678,7 +5705,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863675,
    "gis_loc_id": 171326,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "deer-creek-mo",
+   "water_name": "Deer Creek",
+   "water_kind": "stream",
+   "distance_m": 66,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Deer Creek' by name; Deer Creek (deer-creek-mo, NHDPlus V2.1 record), 66 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4708,7 +5742,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863277,
    "gis_loc_id": 171327,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "deer-creek-mo",
+   "water_name": "Deer Creek",
+   "water_kind": "stream",
+   "distance_m": 151,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Deer Creek' by name; Deer Creek (deer-creek-mo, NHDPlus V2.1 record), 151 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4738,7 +5779,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863676,
    "gis_loc_id": 171328,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4768,7 +5817,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863278,
    "gis_loc_id": 171329,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4798,7 +5855,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863677,
    "gis_loc_id": 171330,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4828,7 +5893,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863279,
    "gis_loc_id": 171331,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "no_water_reason": "the NHD builder's records for 'Black Creek' (black-creek-mo) lie elsewhere in the state",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4858,7 +5931,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3863678,
    "gis_loc_id": 171332,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are named Parker Branch, not 'Presumed Use Streams'; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Parker Branch, Snow Branch)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4888,7 +5969,14 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864475,
    "gis_loc_id": 171333,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": "mississippi-river-mo",
+   "water_name": "Mississippi River",
+   "water_kind": "river",
+   "distance_m": 406,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'Mississippi R' by name; Mississippi River (mississippi-river-mo, openboatlaunch), 406 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4918,7 +6006,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3864871,
    "gis_loc_id": 171334,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0025151",
@@ -4948,7 +6044,15 @@
    "page_url": "https://dnr.mo.gov/data-e-services/geographic-information-systems",
    "source_record_id": 3860873,
    "gis_loc_id": 171335,
-   "fetched_at": "2026-11-14T18:04:15Z"
+   "fetched_at": "2026-11-14T18:04:15Z",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'River des Peres' in MO",
+   "no_water_reason": "no record named 'River des Peres' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0117960",
@@ -4986,7 +6090,15 @@
     "outfall": "002",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the record of that name was set aside by the placement guard: coon-creek-mo, name match too far (4.4 km) and the report's town (moberly) is not among the water's towns (Prairie, South Sugar Creek, Union); NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Crooked Creek, West Fork Cuivre River); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "no_water_reason": "the record of that name was set aside by the placement guard: coon-creek-mo, name match too far (4.4 km) and the report's town (moberly) is not among the water's towns (Prairie, South Sugar Creek, Union); NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Crooked Creek, West Fork Cuivre River); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0117960",
@@ -5024,7 +6136,15 @@
     "outfall": "003",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: the record of that name was set aside by the placement guard: coon-creek-mo, name match too far (3.9 km) and the report's town (moberly) is not among the water's towns (Prairie, South Sugar Creek, Union); NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Crooked Creek, West Fork Cuivre River); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "no_water_reason": "the record of that name was set aside by the placement guard: coon-creek-mo, name match too far (3.9 km) and the report's town (moberly) is not among the water's towns (Prairie, South Sugar Creek, Union); NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Crooked Creek, West Fork Cuivre River); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0117960",
@@ -5062,7 +6182,15 @@
     "outfall": "004",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Sweet Spring Creek' in MO",
+   "no_water_reason": "no record named 'Sweet Spring Creek' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0117960",
@@ -5100,7 +6228,15 @@
     "outfall": "005",
     "outfall_status": "CSO",
     "note": "EPA's row for the same permit and outfall; DNR's point and receiving stream"
-   }
+   },
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no record named 'Sweet Spring Creek' in MO",
+   "no_water_reason": "no record named 'Sweet Spring Creek' in MO",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "MO0134198",
@@ -5118,19 +6254,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110037500362",
    "lat": 39.3664613,
    "lon": -93.447602,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "little-wakenda-creek-mo",
+   "water_name": "Little Wakenda Creek",
+   "water_kind": "stream",
+   "distance_m": 948,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Tributary to Little Wakenda Creek' in MO; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Tributary to Little Wakenda Creek' in MO; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "name: its receiving water 'Little Wakenda Creek' by name; Little Wakenda Creek (little-wakenda-creek-mo, NHDPlus V2.1 record), 948 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
    "kind_note": "An ethanol plant's outfall that EPA's CSO inventory flags as a combined sewer overflow; the permit is an industrial one and no combined sewer is shown, so the row is kept off the map and out of the outfall count until the permit confirms one.",
    "checked": "2026-11-14",
    "supersedes": {
