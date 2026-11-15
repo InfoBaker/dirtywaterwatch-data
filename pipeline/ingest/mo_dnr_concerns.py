@@ -255,6 +255,7 @@ def record(b: dict, meta: dict, keys, at: str) -> tuple[str, dict | None, dict]:
            "report_generated": meta.get("generated"), "page_last_revised": meta.get("last_revised"),
            "page_url": meta.get("page_url"),
            "start_kind": "incident" if start == incident else "received",
+           "start_is_upper_bound": start != incident,
            "start_basis": ("the incident or first-noticed date the concern gives" if start == incident else
                            "the date the Department received the concern; the overflow began on or before it"),
            "finding_basis": {"operator_reported": "the Department's comments or the concern cross-reference the "

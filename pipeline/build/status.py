@@ -2632,7 +2632,19 @@ def _iv(ev, start, end, rule, red=None, yellow=None):
             "authority": ev.get("authority") or ev.get("discharger_name"),
             "window_hours": (red or {}).get("hours"), "window_basis": (red or {}).get("rationale"),
             "red_rule": red, "yellow_rule": yellow,
-            "started_at": ev.get("started_at"), "ended_at": ev.get("ended_at")}
+            "started_at": ev.get("started_at"), "ended_at": ev.get("ended_at"),
+            **start_bound(ev)}
+
+
+def start_bound(ev: dict) -> dict:
+    """{"started_at_bound": "on_or_before", "started_at_kind": <kind>} for a record whose start is only the latest it
+    can have begun (a crew's response, a notification, a publication, a concern's receipt: raw.start_is_upper_bound,
+    the Missouri and Kansas feeds; re-review P1-6), else {}: the colour counts from that time, and every export says
+    the start is an upper bound, never the discharge's start. Keyed on the flag, so other records are unchanged."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    if raw.get("start_is_upper_bound") is True and ev.get("started_at"):
+        return {"started_at_bound": "on_or_before", "started_at_kind": raw.get("start_kind") or "not stated"}
+    return {}
 
 
 # A report placed on the water its text names although its form's flag said no water was reached (raw.reached_water
