@@ -36,7 +36,13 @@ NHDPlus V2.1 attributes come from one EPA MapServer layer 2 query per trace. Flo
 ordered by hydroseq (upstream first) and cut at the first tidal flowline, the first flowline in a
 lake/pond or reservoir (wbarea_ftype 390/436), estuary (493) or on the coastline (fcode 56600), or at
 rules.json reach.cap_km
-(40 km), whichever comes first. Cache: data/build/reaches/<permit>-<outfall>.json for 30 days; a
+(40 km), whichever comes first. With rules.json reach.tidal_river.enabled (off by default), a tidal flowline of a
+river (NHDPlus tidal 1 in a StreamRiver area, 460, or in no area) no longer ends the trace: it goes on along the tidal
+river, its segments marked tidal_river (no travel time), and is still cut at an estuary, the coastline, a lake or
+reservoir, other tidal water ("tidal") or the cap; a trace that starts in tidal water is unchanged
+("tidal_at_outfall"). A record traced under that rule carries tidal_river: true; with the switch on, a cached trace
+cut at "tidal" without it is due again; with it off, load_reaches() drops a cached record's tidal_river segments, so
+the output is the rule-off trace. Cache: data/build/reaches/<permit>-<outfall>.json for 30 days; a
 failed trace is retried after 1, 2, 4 ... days (at most 30); a cached trace whose outfall moved is
 traced again first; one whose water or name changed is updated without a request.
 
@@ -131,6 +137,7 @@ STRETCH_RULE = ("the stretch the authority's advisory names, traced from its ups
 LAKE_FTYPES = {390, 436}          # NHD LakePond, Reservoir
 ESTUARY_FTYPES = {493}            # NHD Estuary
 COASTLINE_FCODE = 56600           # NHD Coastline flowlines: the sea, not a river
+RIVER_AREA_FTYPES = {460}         # NHD StreamRiver: a tidal flowline here (or in no area) is a tidal river
 CFS = 0.0283168466
 G = 9.80665
 STATE_FIPS = {"CT": "09", "MA": "25", "ME": "23", "NH": "33", "RI": "44", "VT": "50", "NY": "36"}
@@ -258,6 +265,16 @@ def cap_km(rules: dict | None = None) -> float:
     return float(((rules or load_rules()).get("reach") or {}).get("cap_km") or 40)
 
 
+def tidal_river_rule(rules: dict | None = None) -> dict:
+    """data/rules.json reach.tidal_river (the switch, its rationale and its wording), {} when absent."""
+    return ((rules if rules is not None else load_rules()).get("reach") or {}).get("tidal_river") or {}
+
+
+def tidal_river_on(rules: dict | None = None) -> bool:
+    """Whether a trace goes on along a tidal river (reach.tidal_river.enabled is true; off when absent)."""
+    return tidal_river_rule(rules).get("enabled") is True
+
+
 def shore_rule(rules: dict | None = None) -> dict:
     """data/rules.json reach.shoreline with its defaults (build/shoreline.py rule)."""
     return SH.rule(rules if rules is not None else load_rules())
@@ -309,9 +326,18 @@ def ordered(flowlines: list[dict], attrs: dict) -> list[dict]:
     return sorted(flowlines, key=order) if all(attrs.get(f["comid"]) for f in flowlines) else list(flowlines)
 
 
-def build_segments(flowlines: list[dict], attrs: dict, cap: float) -> tuple[list[dict], str]:
+def river_area(a: dict) -> bool:
+    """The flowline runs in a river's own area (NHD StreamRiver, 460) or in no area at all."""
+    return not (a.get("wbareacomid") or 0) > 0 or a.get("wbarea_ftype") is None or a.get("wbarea_ftype") in RIVER_AREA_FTYPES
+
+
+def build_segments(flowlines: list[dict], attrs: dict, cap: float,
+                   tidal_river: bool = False) -> tuple[list[dict], str]:
     """flowlines: [{"comid", "coords"}] in NLDI order; attrs: {comid: NHDPlus attributes}.
-    Returns (segments upstream first with km_start/km_end, cut_reason)."""
+    Returns (segments upstream first with km_start/km_end, cut_reason).
+    tidal_river (rules.json reach.tidal_river.enabled): a tidal flowline of a river below the start no longer ends
+    the trace; its segment is marked tidal_river. A lake or reservoir, an estuary, the coastline, tidal water that is
+    not a river ("tidal") and the cap still cut it, and a trace that starts in tidal water is unchanged."""
     lines = ordered(flowlines, attrs)
     segs, km = [], 0.0
     for i, f in enumerate(lines):
@@ -319,13 +345,16 @@ def build_segments(flowlines: list[dict], attrs: dict, cap: float) -> tuple[list
         if not a or a.get("tidal") is None:
             # unknown flowline: its tidal and lake flags cannot be checked, so the trace stops here
             return segs, "attributes unavailable"
-        if a.get("tidal") == 1:
+        tidal = a.get("tidal") == 1
+        if tidal and (i == 0 or not tidal_river):
             return segs, "tidal_at_outfall" if i == 0 else "tidal"
         ft = a.get("wbarea_ftype")
         if (a.get("wbareacomid") or 0) > 0 and ft in LAKE_FTYPES:
             return segs, "lake_at_outfall" if i == 0 else "lake_or_reservoir"
         if ((a.get("wbareacomid") or 0) > 0 and ft in ESTUARY_FTYPES) or a.get("fcode") == COASTLINE_FCODE:
             return segs, "tidal_at_outfall" if i == 0 else "estuary"
+        if tidal and not river_area(a):
+            return segs, "tidal"            # tidal water that is not a river channel (a marsh, the open sea)
         coords = f["coords"]
         length = seg_km(coords)
         if length <= 0:
@@ -333,17 +362,30 @@ def build_segments(flowlines: list[dict], attrs: dict, cap: float) -> tuple[list
         if km + length >= cap:
             coords = cut_line(coords, cap - km)
             length = cap - km
-            segs.append(segment(f["comid"], a, coords, km, km + length))
+            segs.append(segment(f["comid"], a, coords, km, km + length, tidal))
             return segs, "cap_km"
-        segs.append(segment(f["comid"], a, coords, km, km + length))
+        segs.append(segment(f["comid"], a, coords, km, km + length, tidal))
         km += length
     return segs, "end_of_trace"
 
 
-def segment(comid, a, coords, k0, k1) -> dict:
+def segment(comid, a, coords, k0, k1, tidal_river: bool = False) -> dict:
     keep = {k: a.get(k) for k in ATTR_FIELDS if k != "comid"}
     return {"comid": comid, "km_start": round(k0, 3), "km_end": round(k1, 3), **keep,
+            **({"tidal_river": True} if tidal_river else {}),
             "coords": [[round(x, 6), round(y, 6)] for x, y in coords]}
+
+
+def without_tidal_river(d: dict) -> dict:
+    """A cached record as the rule-off trace would be (reach.tidal_river off): its segments before the first
+    tidal_river one, cut at "tidal". A record with no tidal_river segment is returned as it is."""
+    segs = d.get("segments") or []
+    i = next((k for k, sg in enumerate(segs) if sg.get("tidal_river")), None)
+    if i is None:
+        return d
+    out = {k: v for k, v in d.items() if k != "tidal_river"}
+    out.update(segments=segs[:i], cut_reason="tidal", length_km=round(segs[i - 1]["km_end"], 3) if i else 0.0)
+    return out
 
 
 def _gnis(s) -> str:
@@ -471,14 +513,17 @@ def path_slope(segments: list[dict]) -> float:
 def travel(segments: list[dict], q_ratio: float) -> list[dict]:
     """Cumulative arrival hours (peak, fastest, leading edge) at each segment's start and end.
     Per flowline: its drainage area and mean annual flow (qe_ma), flow = q_ratio x qe_ma, and the
-    trace's mean slope; a flowline without usable attributes takes the previous velocities."""
+    trace's mean slope; a flowline without usable attributes, or in tidal water (a tidal_river segment, marked so
+    here too), gets no time, and no segment below it does."""
     out, t_p, t_f = [], 0.0, 0.0
-    slope = path_slope(segments)
+    # tidal water (reach.tidal_river): no travel time there, and its floored slope never slows the river above it
+    slope = path_slope([s for s in segments if not s.get("tidal_river")])
     if not usable(q_ratio):
         q_ratio = None
     for s in segments:
+        tidal = bool(s.get("tidal_river"))
         da, qa = s.get("totdasqkm"), s.get("qe_ma")
-        vp, vf = jobson(da, qa, qa * q_ratio, slope) if q_ratio and usable(da, qa) else (None, None)
+        vp, vf = jobson(da, qa, qa * q_ratio, slope) if q_ratio and usable(da, qa) and not tidal else (None, None)
         length_m = (s["km_end"] - s["km_start"]) * 1000
         start_p, start_f = t_p, t_f
         if t_p is not None and vp and vf:
@@ -492,7 +537,8 @@ def travel(segments: list[dict], q_ratio: float) -> list[dict]:
         out.append({"hours_typical_start": r(start_p), "hours_typical": r(t_p),
                     "hours_fast_start": r(start_f), "hours_fast": r(t_f),
                     "hours_leading_edge": r(0.89 * t_p) if t_p is not None else None,
-                    "velocity_peak_ms": round(vp, 3) if vp else None, "velocity_max_ms": round(vf, 3) if vf else None})
+                    "velocity_peak_ms": round(vp, 3) if vp else None, "velocity_max_ms": round(vf, 3) if vf else None,
+                    **({"tidal_river": True} if tidal else {})})
     return out
 
 
@@ -972,7 +1018,10 @@ def trace(o: dict, cap: float, prev: dict | None = None) -> dict:
                 rec["error"] = ((info.get("start") or {}).get("why") or (info.get("end") or {}).get("why")
                                 or "no flowlines on the stretch")
         else:
-            segs, why = build_segments(lines, attrs, cap)
+            on = tidal_river_on()
+            segs, why = build_segments(lines, attrs, cap, tidal_river=on)
+            if on:
+                rec["tidal_river"] = True       # traced under reach.tidal_river (plan(): such a trace is not due again)
         rec["segments"], rec["cut_reason"] = segs, why
         rec["length_km"] = round(segs[-1]["km_end"], 3) if segs else 0.0
         rec["river"] = (segs[0].get("gnis_name") if segs else (attrs.get(lines[0]["comid"]) or {}).get("gnis_name"))
@@ -1129,16 +1178,24 @@ META_FIELDS = ("water_slug", "name", "sources", "state", "outfall_kind", "file",
                "rain_caution", "advisory", "stretch", "event_ids", "rule")
 
 
-def plan(cands: list[dict], cached: dict[str, dict], now: datetime) -> tuple[list[dict], list[tuple[dict, dict]]]:
+def tidal_due(d: dict | None, tidal_river: bool) -> bool:
+    """With reach.tidal_river on, a cached trace cut at the head of tide before the rule (no tidal_river mark)."""
+    return bool(tidal_river and d and d.get("cut_reason") == "tidal" and not d.get("tidal_river")
+                and d.get("kind") != ADVISORY_KIND)
+
+
+def plan(cands: list[dict], cached: dict[str, dict], now: datetime,
+         tidal_river: bool = False) -> tuple[list[dict], list[tuple[dict, dict]]]:
     """(the outfalls to trace in order, [(candidate, cached record)] whose fields changed but need no trace).
     Order: event points, never traced or moved (CSO, then plant), failures due again (oldest first),
-    traces older than CACHE_DAYS (oldest first)."""
+    traces older than CACHE_DAYS (oldest first). tidal_river (reach.tidal_river on): a trace cut at "tidal"
+    before the rule is due at once, with the stale traces (first among them)."""
     todo, touch = [], []
     for c in cands:
         d = cached.get(c["key"])
         kind = 1 if c.get("outfall_kind") == "plant" else 0
         if c.get("sources") == ["event-point"]:
-            if not d or not fresh_rec(d, now):
+            if not d or not fresh_rec(d, now) or tidal_due(d, tidal_river):
                 todo.append(((0, 0, ""), c))
             continue
         if c.get("kind") == ADVISORY_KIND:        # an advisory's stretch: as an event point, again when an end moves
@@ -1153,6 +1210,9 @@ def plan(cands: list[dict], cached: dict[str, dict], now: datetime) -> tuple[lis
         if not fresh_rec(d, now):
             tier = 2 if d.get("cut_reason") == "no_trace" else 3
             todo.append(((tier, kind, d.get("fetched_at") or ""), c))
+            continue
+        if tidal_due(d, tidal_river):
+            todo.append(((3, kind, ""), c))
             continue
         if any(c.get(f) != d.get(f) for f in META_FIELDS if f in c):
             touch.append((c, d))
@@ -1297,15 +1357,17 @@ class TraceLock:
 
 
 def load_reaches() -> dict[str, dict]:
+    """The cached records by key; with reach.tidal_river off, each as the rule-off trace (without_tidal_river)."""
     out = {}
     if not REACH_DIR.exists():
         return out
+    on = tidal_river_on()
     for p in sorted(REACH_DIR.glob("*.json")):
         try:
             d = json.loads(p.read_text())
         except Exception:
             continue
-        out[d.get("key") or p.stem] = d
+        out[d.get("key") or p.stem] = d if on else without_tidal_river(d)
     return out
 
 
@@ -1940,7 +2002,7 @@ def run_traces(cands: list[dict], cap: float, budget: Budget, force: bool = Fals
     ignored). Returns (the run record, the cached records after the run)."""
     now = datetime.now(UTC)
     cached = load_reaches()
-    todo, touch = (list(cands), []) if force else plan(cands, cached, now)
+    todo, touch = (list(cands), []) if force else plan(cands, cached, now, tidal_river_on())
     for c, d in touch:                       # water, name, sources or kind changed: no request needed
         d.update({f: c[f] for f in META_FIELDS if f in c})
         write_json(REACH_DIR / f"{c['key']}.json", d)
