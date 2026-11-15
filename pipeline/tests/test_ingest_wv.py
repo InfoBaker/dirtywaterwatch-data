@@ -571,7 +571,7 @@ def test_a_multipart_bloom_area_is_placed_on_every_water_it_covers_and_no_other(
     out = S.Resolver(waters, [], placement_rules={}).resolve(rec)
     assert out["water_slugs"] == ["example-lake-a-wv", "example-lake-b-wv"]
     assert {k: v for k, v in out["extent_parts"].items() if k != "points"} == \
-        {"parts": 2, "waters_added": ["example-lake-b-wv"]}
+        {"parts": 2, "waters_added": ["example-lake-b-wv"], "own": ["example-lake-a-wv"], "record_point_marker": False}
     assert list(out["extent_parts"]["points"]) == ["example-lake-b-wv"]
     assert "example-pond-c-wv" not in out["water_slugs"]
     # a large second lake keeps a marker only (colours_whole_water), as for every state
@@ -580,7 +580,8 @@ def test_a_multipart_bloom_area_is_placed_on_every_water_it_covers_and_no_other(
     single = _area_record([ring(-80.495, 39.005, 0.01)])
     S._GEOM_CACHE.clear()
     assert S.Resolver(_two_lakes(), [], placement_rules={}).resolve(single)["water_slugs"] == ["example-lake-a-wv"]
-    assert "extent_parts" not in S.Resolver(_two_lakes(), [], placement_rules={}).resolve(single)
+    # round 4: a single part is placed by its drawn extent too; the one lake it crosses holds its point (no part point)
+    assert "points" not in S.Resolver(_two_lakes(), [], placement_rules={}).resolve(single)["extent_parts"]
     # every other source: the branch never runs and the resolver's answer is the one it gave before
     for sid in ("ne-transforms", "oh-epa-spills", "la-baton-rouge-quarterly", "wv-echo-dmr-cso"):
         other = copy.deepcopy({**rec, "source_id": sid})
@@ -822,3 +823,66 @@ def test_rank_and_title_forms_are_cut_before_the_text_is_split(tmp_path, monkeyp
     for blob in saved + blobs + failed + empty:
         for bad in ("Example", "example person", "Sample Name"):
             assert bad not in blob, (bad, blob[:300])
+
+
+# --- round 4 (Astra verify3 P2-1) ---
+
+def test_one_drawn_area_over_two_lakes_and_separate_pieces_of_one_river(tmp_path):
+    """Astra verify3 P2-1: a single polygon over the ends of two lakes is placed on both, with no marker on the land
+    between them; a polygon with a hole that one river crosses twice gives that river two markers, one on each piece,
+    and colours it nowhere whole; a lake inside the hole is not placed; a line drawn along two separate stretches of
+    one river gives two markers on it. Every marker lies on its water's affected piece."""
+    from export import build as X
+    waters = _two_lakes(area_b=10_000)
+    waters["example-river-a-wv"] = {"name": "Example River A", "kind": "river", "state": "WV",
+                                    "geometry": {"type": "LineString", "coordinates": [[-80.70, 39.30], [-80.50, 39.30]]},
+                                    "bbox": [-80.70, 39.30, -80.50, 39.30]}
+    waters["example-pond-d-wv"] = {"name": "Example Pond D", "kind": "lake", "state": "WV", "area_km2": 0.05,
+                                   "geometry": {"type": "Polygon", "coordinates": [[[-80.605, 39.295], [-80.595, 39.295],
+                                                [-80.595, 39.305], [-80.605, 39.305], [-80.605, 39.295]]]},
+                                   "bbox": [-80.605, 39.295, -80.595, 39.305]}
+    at, now = "2026-07-01T00:00:00Z", "2026-07-01T06:00:00Z"
+    box = lambda x0, y0, x1, y1: [[x0, y0], [x0, y1], [x1, y1], [x1, y0], [x0, y0]]
+    answers = {"1": {"features": []}, "2": {"features": [
+        {"attributes": {"OBJECTID": 8, "Advisory": "Avoid contact.", "Date_Observed": None},
+         "geometry": {"paths": [[[-80.69, 39.3002], [-80.67, 39.3002]], [[-80.53, 39.2998], [-80.51, 39.2998]]]}}]},
+        "3": {"features": [
+            # over the east end of lake A and the west end of lake B, the land between them in the middle
+            {"attributes": {"OBJECTID": 5, "Advisory": "Avoid contact.", "DateObserved": None},
+             "geometry": {"rings": [box(-80.485, 39.005, -80.395, 39.015)]}},
+            # a ring with a hole round pond D: river A crosses it on both sides of the hole
+            {"attributes": {"OBJECTID": 6, "Advisory": "Avoid contact.", "DateObserved": None},
+             "geometry": {"rings": [box(-80.64, 39.28, -80.56, 39.32),
+                                    list(reversed(box(-80.62, 39.29, -80.58, 39.31)))]}}]}}
+    recs = H.records(H.update({}, H.rows_of(answers), at))
+    st = _wv_status(tmp_path / "ev", recs, waters, now)
+    by_event = {r["event_id"]: r for r in recs}
+    feats = X.advisory_point_features(st, by_event)
+    lakes = next(r for r in recs if r["source_record_id"] == "3-5")
+    holed = next(r for r in recs if r["source_record_id"] == "3-6")
+    line = next(r for r in recs if r["source_record_id"] == "2-8")
+    # two lakes under one area
+    assert sorted(st["placements"][lakes["event_id"]]["water_slugs"]) == ["example-lake-a-wv", "example-lake-b-wv"]
+    assert st["waters"]["example-lake-a-wv"]["status"] != "grey"                   # the small lake is filled
+    f5 = [f for f in feats if f["properties"]["event_id"] == lakes["event_id"]]
+    assert [f["properties"]["water_slugs"] for f in f5] == [["example-lake-b-wv"]]  # no marker on the land between
+    lon, lat = f5[0]["geometry"]["coordinates"]
+    assert -80.40 <= lon <= -80.395 and 39.005 <= lat <= 39.015, (lon, lat)       # on lake B's affected end
+    # a hole: the pond inside it is not placed; the river's two pieces each have a marker, the river not coloured
+    assert st["placements"][holed["event_id"]]["water_slugs"] == ["example-river-a-wv"]
+    f6 = sorted((f for f in feats if f["properties"]["event_id"] == holed["event_id"]),
+                key=lambda f: f["geometry"]["coordinates"][0])
+    assert [f["properties"]["water_slugs"] for f in f6] == [["example-river-a-wv"]] * 2
+    assert -80.64 <= f6[0]["geometry"]["coordinates"][0] <= -80.62
+    assert -80.58 <= f6[1]["geometry"]["coordinates"][0] <= -80.56
+    assert all(abs(f["geometry"]["coordinates"][1] - 39.30) < 1e-3 for f in f6)
+    assert len({f["id"] for f in f6}) == 2
+    # a line along two separate stretches of one river: two markers on the river
+    f8 = sorted((f for f in feats if f["properties"]["event_id"] == line["event_id"]),
+                key=lambda f: f["geometry"]["coordinates"][0])
+    assert [f["properties"]["water_slugs"] for f in f8] == [["example-river-a-wv"]] * 2
+    assert -80.69 <= f8[0]["geometry"]["coordinates"][0] <= -80.67
+    assert -80.53 <= f8[1]["geometry"]["coordinates"][0] <= -80.51
+    assert st["waters"]["example-river-a-wv"]["status"] == "grey"                   # no whole river coloured
+    assert st["waters"].get("example-pond-d-wv", {}).get("status", "grey") == "grey"
+    assert len({f["id"] for f in feats}) == len(feats)
