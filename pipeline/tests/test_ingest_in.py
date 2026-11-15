@@ -1100,3 +1100,78 @@ def test_an_incomplete_newer_month_never_clears_an_established_monthly_mark(tmp_
     # a newer month with a discharge is still the latest whatever is missing
     obs = M.latest_months({("P", "002", "2026-08"): aug, ("P", "002", "2026-09"): _sep({"hours": "3"})})["P|002"]
     assert obs["month"] == "2026-09" and obs["discharged"] is True
+
+
+# ------------------------------------------------------------------------------------------------ round 3 (P2-1)
+
+def _in_status(events_dir):
+    """A status build with Indiana live and the record's water (sample-ditch-in) resolved; the monthly outfalls
+    and the water's colour."""
+    from build import status as S
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    line = {"type": "LineString", "coordinates": [[-86.71, 41.6], [-86.69, 41.6]]}
+    waters = {"sample-ditch-in": {"slug": "sample-ditch-in", "name": "Sample Ditch", "kind": "river", "state": "IN",
+                                  "bbox": [-86.71, 41.6, -86.69, 41.6], "geometry": line}}
+    rules = copy.deepcopy(S.load_rules())
+    rules["live_states"] = sorted(set(rules.get("live_states") or []) | {"IN"})
+    st, _ = S.build(now=S.datetime(2025, 11, 20, 12, tzinfo=S.UTC), write=False, events_dir=events_dir,
+                    waters=waters, outfalls=[], registry={}, reaches={}, flows=({}, {}), rules=rules,
+                    placement_cache=False, live_only=True)
+    return len(st["monthly_outfalls"]), st["waters"]["sample-ditch-in"]["status"]
+
+
+def _only(res_rows):
+    """An answer per parameter code holding only the rows given for outfall 002 ({code: [rows]})."""
+    res = _results()
+    for code in ("84165", "50037", "74063"):
+        feats = res[("IN0000004", code)]["PermFeatures"]
+        feats[:] = [f for f in feats if f["PermFeatureNmbr"] == "002"]
+        feats[0]["Parameters"][0]["DischargeMonitoringReports"][:] = res_rows.get(code, [])
+    return res
+
+
+def test_a_newer_month_with_only_zero_hours_never_clears_an_august_mark_across_runs(tmp_path, monkeypatch):
+    """Astra verification 2 (2026-11-15) P2-1, first sequence: August's discharge, then a later answer holding only
+    September with zero hours. Which parameters the outfall reports is judged from the evidence kept across runs, so
+    September is incomplete and the August mark stays (successive main() runs, the saved cache read back)."""
+    aug = {"84165": [_dmr("31-AUG-25", "1")], "50037": [_dmr("31-AUG-25", "4", unit="hr/mo")],
+           "74063": [_dmr("31-AUG-25", "1.1", unit="Mgal")]}
+    first = _dmr_main(tmp_path, monkeypatch, _only(aug), refresh=False)
+    assert first["meta"]["latest_month_by_outfall"]["IN0000004|002"]["month"] == "2025-08"
+    assert _in_status(tmp_path / "events") == (1, "monthly")
+    sep = {"50037": [_dmr("30-SEP-25", "0", unit="hr/mo", received="28-OCT-25")]}
+    second = _dmr_main(tmp_path, monkeypatch, _only(sep), refresh=False)
+    assert [r["source_record_id"] for r in second["records"]] == ["IN0000004:002:2025-08"]
+    obs = second["meta"]["latest_month_by_outfall"]["IN0000004|002"]
+    assert obs["month"] == "2025-08" and obs["discharged"] is True
+    assert _in_status(tmp_path / "events") == (1, "monthly")
+    # the missing parameters filed later as zero complete September: then it clears the mark
+    full = {"84165": [_dmr("30-SEP-25", "0", received="28-OCT-25")], **sep,
+            "74063": [_dmr("30-SEP-25", "0", unit="Mgal", received="28-OCT-25")]}
+    third = _dmr_main(tmp_path, monkeypatch, _only(full), refresh=False)
+    obs = third["meta"]["latest_month_by_outfall"]["IN0000004|002"]
+    assert obs["month"] == "2025-09" and obs["discharged"] is False
+    assert _in_status(tmp_path / "events") == (0, "grey")
+
+
+def test_a_no_discharge_month_whose_evidence_turns_conflicting_is_withdrawn_across_runs(tmp_path, monkeypatch):
+    """Astra verification 2 (2026-11-15) P2-1, second sequence: September confirmed zero, then an equally ranked,
+    conflicting September event count. The no-discharge finding is withdrawn and recomputed: August's mark returns."""
+    first = _dmr_main(tmp_path, monkeypatch, _results(), refresh=False)
+    obs = first["meta"]["latest_month_by_outfall"]["IN0000004|002"]
+    assert obs["month"] == "2025-09" and obs["discharged"] is False
+    assert _in_status(tmp_path / "events") == (0, "grey")
+    res = _results()
+    rows = res[("IN0000004", "84165")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"]
+    rows[1] = _dmr("30-SEP-25", "2", received="28-OCT-25")       # same rank as the stored NODI C, a different count
+    second = _dmr_main(tmp_path, monkeypatch, res, refresh=False)
+    assert second["meta"]["conflicting_equal_revisions"]
+    obs = second["meta"]["latest_month_by_outfall"]["IN0000004|002"]
+    assert obs["month"] == "2025-08" and obs["discharged"] is True
+    assert second["meta"]["no_discharge_findings_withdrawn"] == {"IN0000004|002:2025-09": 1}
+    assert _in_status(tmp_path / "events") == (1, "monthly")
+    # a later run with no answer at all keeps the recomputed finding (the conflict stays in the evidence)
+    third = _dmr_main(tmp_path, monkeypatch, {}, refresh=False)
+    assert third["meta"]["latest_month_by_outfall"]["IN0000004|002"]["month"] == "2025-08"
+    assert _in_status(tmp_path / "events") == (1, "monthly")
