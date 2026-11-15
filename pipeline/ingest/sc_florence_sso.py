@@ -164,7 +164,29 @@ def article(page: str) -> tuple[str | None, str | None, list[str]]:
             t = CONTACT_SENTENCE.sub("", t).strip()
             if t:
                 paras.append(scrub_person(scrub_text(strip_house_numbers(t))))
-    return (nid.group(1) if nid else None), (scrub_person(_text(title.group(1))) if title else None), paras
+    return (nid.group(1) if nid else None), (scrub_title(_text(title.group(1))) if title else None), paras
+
+
+def scrub_title(v: str | None) -> str | None:
+    """A notice's title, scrubbed as its paragraphs are (house number, telephone, e-mail, name) before any save
+    (verify2 P1-3)."""
+    if not v:
+        return v
+    return scrub_person(scrub_text(strip_house_numbers(v)))
+
+
+def scrub_carried(state: dict) -> dict:
+    """The saved state of earlier runs, every version's title scrubbed as a new read's is (verify2 P1-3). A version
+    whose title changes is rehashed, so the next read of the unchanged page is 'same', never a revision that would
+    count as the City's new confirmation of its advice."""
+    for n in (state.get("notices") or {}).values():
+        for v in n.get("versions") or []:
+            p = v.get("parsed") or {}
+            t = scrub_title(p.get("title"))
+            if t != p.get("title"):
+                p["title"] = t
+                v["hash"] = hashlib.sha256(json.dumps(p, sort_keys=True).encode()).hexdigest()[:16]
+    return state
 
 
 # a person named after a verb of contact or an honorific outside the contact block ("For questions call Pat
@@ -206,7 +228,7 @@ def _ymd(mon: str, d: str, y: str | None, release: date | None) -> date | None:
 
 def parse_notice(title: str | None, paras: list[str]) -> dict:
     text = " ".join(paras)
-    out: dict = {"title": title}
+    out: dict = {"title": scrub_title(title)}        # the list's title too, when the page gives none (verify2 P1-3)
     m = RELEASE_RE.search(text)
     release = _ymd(m.group(1), m.group(2), m.group(3), None) if m else None
     out["release_date"] = release.isoformat() if release else None
@@ -299,7 +321,7 @@ def records(state: dict, fetched_at: str) -> list[dict]:
             key = n["nid"] if i == 0 else f"{n['nid']}-v{i + 1}"
             raw = {"state": "SC", "time_zone": "America/New_York", "node": n["nid"], "slug": slug,
                    "_placement": "named_water_only",
-                   "title": p.get("title"), "release_date": p.get("release_date"),
+                   "title": scrub_title(p.get("title")), "release_date": p.get("release_date"),
                    # the day the City received notice of or responded to the overflow, and the release's date, are
                    # kept as such: neither is the overflow's start, which the notices never give (review 2026-11-14
                    # re-review P1-1)
@@ -387,12 +409,12 @@ META = {"credit": "City of Florence, South Carolina, City News",
 def run(args) -> int:
     now = now_iso()
     if args.file:
-        state = json.loads(open(args.file).read())
+        state = scrub_carried(json.loads(open(args.file).read()))
         recs = records(state, now)
         write_events(SOURCE_ID, recs, meta=META, path=args.out)
         print(f"{SOURCE_ID}: {len(recs)} records from {args.file}")
         return 0
-    state = read_json(STATE_PATH, None) or {"format": SAFE_FORMAT, "notices": {}}
+    state = scrub_carried(read_json(STATE_PATH, None) or {"format": SAFE_FORMAT, "notices": {}})
     s = requests.Session()
     s.headers.update(HEADERS)
     pages = BACKFILL_PAGES if (args.backfill or not state.get("backfilled_at")) else args.pages
