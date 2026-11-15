@@ -16,7 +16,8 @@ Why a set and not a feed
      operator: the notice says the spill was in Pueblo, and the research found the city's own follow-up; started
      2026-08-26, ended 2026-08-27, both to the day as the notice gives them; the volume as stated) and CPW's advisory
      (status advisory_active from 2026-08-31, no end: CPW said it would update the advisory and no update was found, so
-     the status build's 14-day rule ages it). The notice's mention of Lake Hasty's separate algae restriction is not a
+     raw._ages_after_confirmation makes the status build's 14-day rule age it, as the type sso alone would
+     not). The notice's mention of Lake Hasty's separate algae restriction is not a
      record here (the CDPHE sheet carries Lake Hasty, co-cdphe-toxic-algae).
   2. National Park Service, Curecanti National Recreation Area, "Toxic Algae detected in Blue Mesa Reservoir",
      2026-08-13: toxic algae at low levels in the Iola Basin, posted with yellow caution signs. A hab_advisory from the
@@ -87,11 +88,12 @@ NOTICES = [
                      "in the Arkansas River and John Martin Reservoir.",
                      "CDPHE will collect water-quality samples at the park, and CPW will update the advisory as "
                      "sampling results become available."],
-          "raw": {"time_zone": TZ, "advisory_extent": "named_water",
+          "raw": {"time_zone": TZ, "advisory_extent": "named_water", "_ages_after_confirmation": True,
                   "also_named": "the Arkansas River at John Martin Reservoir State Park",
                   "start_basis": "the notice: the advisory begins Monday, August 31, 2026",
                   "end_basis": ("no end given: CPW said it would update the advisory as sampling results became "
-                                "available; no update was found"),
+                                "available; no update was found. Aged 14 days from its start (raw._ages_after_confirmation: "
+                                "the type sso has no aging of its own)"),
                   "county": "Bent",
                   "placement_hint": {"name": "John Martin Reservoir", "county": "Bent", "state": "CO",
                                      "basis": "the reservoir the advisory names (John Martin Reservoir State Park)"}}},
@@ -118,6 +120,7 @@ NOTICES = [
                                      "basis": "the reservoir the release names"}}},
      ]},
     {"id": "cpw-barr-lake-red-alert", "kind": "standing", "url": CPW_BARR, "reviewed": "2026-11-14",
+     "anchor": "Barr Lake",
      "records": [
          {"source_record_id": "barr-lake-red-alert-2026-08-03", "event_type": "hab_advisory",
           "status": "advisory_active", "waterbody_text": "Barr Lake", "started_at": "2026-08-03T19:00:00-06:00",
