@@ -478,3 +478,24 @@ def test_v2_b_signs_in_the_first_account_keep_the_window_from_the_response_day()
     recs, _ = mces()
     assert "_advisory_from" not in recs["Excelsior"]["raw"]                     # posted per the notice of the day
     assert recs["Minneapolis and Golden Valley"]["raw"]["_advisory_from"] == "2026-07-10"
+
+
+@pytest.mark.parametrize("month,day,label,removed,hours,red_end", [
+    ("March", 7, "March 2026", "3/9/2026", 47.0, (2026, 3, 10, 5)),        # spring forward on March 8
+    ("October", 31, "October 2026", "11/2/2026", 49.0, (2026, 11, 3, 6)),  # fall back on November 1
+])
+def test_v2_c_the_councils_window_counts_elapsed_hours_across_daylight_saving(month, day, label, removed, hours,
+                                                                              red_end):
+    from datetime import datetime, timedelta, timezone
+    from build import status as S
+    page = (f"<h1>Example</h1><p>The Council responded afternoon, {month} {day}, to a wastewater spill in Example City."
+            " Crews stopped the spill within hours. Signs warning the public “Do Not Enter/ Sewage Spill” "
+            f"will be placed.</p><p>{removed} - Second Notice</p><p>Signs have been removed.</p><h3>Contact us</h3>")
+    r = M.build_one({"url": INDEX + "Example.aspx", "label": f"Example City, {label}"}, M.parse_page(page), FETCHED,
+                    None)
+    assert r["status"] == "ended" and r["advice_window_hours"] == hours
+    ivs = S.event_intervals(r, "MN", datetime(2026, 11, 14, 18, tzinfo=timezone.utc))
+    win = [iv for iv in ivs if iv["rule"] == "authority_window"]
+    assert len(win) == 1 and win[0]["end"] == datetime(*red_end, tzinfo=timezone.utc)
+    assert S.status_at(ivs, win[0]["end"] - timedelta(minutes=30))[0] == "red"
+    assert S.status_at(ivs, win[0]["end"] + timedelta(minutes=30))[0] != "red"
