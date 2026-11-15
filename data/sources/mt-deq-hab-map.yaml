@@ -25,7 +25,7 @@ enabled: true
 role: "advisories"
 event_types: ["hab_advisory"]
 states: ["MT"]
-registry_ids: ["mt-hab-map", "mt-deq-hab-dashboard"]
+registry_ids: ["mt-hab-map"]
 access: ["arcgis"]
 access_detail: "ArcGIS FeatureServer layer 0, outFields globalid,name,county,agency,sample_date,advisory_lvl,advisory_issued,advisory_lifted,date_observed,microcystin,anatoxin,public_accessible; outSR 4326, geometryPrecision 3."
 machine_readable: true
