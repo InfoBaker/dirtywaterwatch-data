@@ -65,8 +65,19 @@ STATE_NAMES = {"CT": "Connecticut", "MA": "Massachusetts", "RI": "Rhode Island",
                "AL": "Alabama", "TX": "Texas",
                "UT": "Utah",
                "OR": "Oregon",
-               "KY": "Kentucky", "OH": "Ohio"}
+               "KY": "Kentucky", "OH": "Ohio", "IN": "Indiana"}
 STATE_NAMES["TN"] = "Tennessee"
+STATE_NAMES["MN"] = "Minnesota"
+STATE_NAMES["ND"] = "North Dakota"
+STATE_NAMES["MO"] = "Missouri"
+STATE_NAMES["KS"] = "Kansas"
+STATE_NAMES["AR"] = "Arkansas"
+STATE_NAMES["WI"] = "Wisconsin"
+STATE_NAMES["SC"] = "South Carolina"
+STATE_NAMES["LA"] = "Louisiana"
+STATE_NAMES["NV"] = "Nevada"
+STATE_NAMES["OK"] = "Oklahoma"
+STATE_NAMES["PR"] = "Puerto Rico"
 STATE_NAMES["IA"] = "Iowa"
 STATE_NAMES["ID"] = "Idaho"
 PRECISION = {"address": 50, "intersection": 30, "pump_station": 100, "plant": 250, "frs_plant": 250}

@@ -27,6 +27,14 @@ threshold on that site is "above", the same episodes, 48-hour tail, notice suppr
 the record cites the site (rain.basis "site_flag", source_id nj-cso-likely). Its history is
 data/build/nj-cso-likely-history.json (one observation per hourly fetch). caution_coverage() says, per state,
 whether and how the caution is computed (out/coverage.json rain_caution_states).
+
+Levels from the operator's own history (2026-11-14, build/rain_history.py, data/rain-levels.json): when the levels file
+is loaded (rain["levels"]), an operator with a usable history takes its amounts from it before its own published rule,
+its state's rule or the default: the caution starts at caution_amount() and each episode is "likely" or "possible" by
+its peak against the operator's "likely" amount; an operator whose entry is not usable goes to the fallback chain
+(never to the 10th-percentile row) with the reason. Every rain record, episode and permit row then carries "level" and
+an "evidence" record (the facts the public sentences are built from), and the labels follow the level. With no levels
+file the output is what it was, byte for byte.
 """
 from __future__ import annotations
 
@@ -57,6 +65,24 @@ LABEL_POSSIBLE = "Discharge possible: heavy rain, no report received"
 LABELS = {"operator": LABEL, "state": LABEL, "default": LABEL_POSSIBLE}
 BASIS_OF_KIND = {"operator_history": "operator", "shared_site": "operator", "state": "state", "site_default": "default",
                  "operator_rule": "operator"}
+# Levels from each operator's own overflow history (build/rain_history.py, data/rain-levels.json; method version 1,
+# 2026-11-14). With a levels file loaded the label follows the level of the caution, not the basis of its amount: an
+# episode is "likely" when its peak reaches the operator's own "likely" amount, else "possible"; an operator on a
+# fallback keeps its basis's label (its own published rule and its state's rule "likely", the site default
+# "possible"). trigger_basis keeps its three values so older readers still work. With no levels file nothing here
+# changes a byte.
+LEVELS = ("likely", "possible")
+LEVEL_OF_BASIS = {"operator": "likely", "state": "likely", "default": "possible"}
+EVIDENCE_BASIS = {"operator_history": "operator_history", "operator_rule": "operator_rule", "state": "state_rule",
+                  "site_default": "site_default", "shared_site": "shared_site"}
+NO_ENTRY = "no dated overflow report from this operator in a source this site reads"
+HISTORY_FIELDS = ("usable", "why_not", "period", "record_from", "storms", "followed", "reports", "reports_with_no_storm",
+                  "day_precision_reports", "bands", "lowest_reported", "possible_in", "likely_in", "quiet", "possible",
+                  "likely", "left_out", "notes", "sources")
+RAIN_RECORD_ID = "iem-iemre-mrms-daily"
+RAIN_RECORD_NAME = "NOAA MRMS daily rainfall totals, from the Iowa Environmental Mesonet reanalysis point service"
+MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
+          "December")
 SOURCE_ID = "noaa-mrms-qpe-imageserver"
 QPF_SOURCE_ID = "nws-api-gridpoint-qpf"
 RAINFALL_SOURCE = "NOAA MRMS radar-only rainfall estimate (1 km), 24-hour total"
@@ -111,6 +137,33 @@ def label_for(basis: str | None, rules_or_cfg: dict | None = None) -> str:
     return lab.get(basis or "operator") or lab["operator"]
 
 
+def labels_by_level(rules: dict) -> dict[str, str]:
+    """The caution's label by level (rules.rain_likely.history.label_by_level, else the "likely" and "possible" labels
+    of label_by_basis: the same two strings)."""
+    rl = (rules or {}).get(RULE) or {}
+    given = (rl.get("history") or {}).get("label_by_level") or {}
+    lab = labels(rules)
+    return {"likely": given.get("likely") or lab["operator"], "possible": given.get("possible") or lab["default"]}
+
+
+def label_for_level(level: str | None, rules: dict | None = None) -> str:
+    lab = labels_by_level(rules or {})
+    return lab.get(level or "likely") or lab["likely"]
+
+
+def strongest_level(levels) -> str | None:
+    """"likely" when any of the levels is, else "possible" when any is given, else None."""
+    got = {lv for lv in levels if lv}
+    return next((lv for lv in LEVELS if lv in got), None)
+
+
+def reason_rank(r: dict) -> tuple:
+    """The order of several rain reasons on one water: by level when they carry one ("likely" first), then by the
+    basis of the amount (TRIGGER_BASES); a reason with no level sorts by its basis alone, as before."""
+    b = {x: n for n, x in enumerate(TRIGGER_BASES)}.get(r.get("trigger_basis"), len(TRIGGER_BASES))
+    return (LEVELS.index(r["level"]) if r.get("level") in LEVELS else 0, b)
+
+
 def basis_of(row: dict) -> str:
     """A permittee row's or rain record's trigger basis, worked out from its threshold fields when it carries none."""
     if row.get("trigger_basis") in TRIGGER_BASES:
@@ -134,10 +187,11 @@ def enabled(rules: dict) -> bool:
 
 
 def load_inputs() -> dict:
+    from build import rain_history
     return {"rainfall": read_json(BUILD_DIR / "rainfall.json") or {},
             "history": read_json(BUILD_DIR / "rainfall-history.json") or {},
             "thresholds": read_json(BUILD_DIR / "rain-thresholds.json") or {},
-            "dischargers": discharger_index(), "site_flags": site_inputs()}
+            "dischargers": discharger_index(), "site_flags": site_inputs(), "levels": rain_history.load_levels()}
 
 
 def shared_site_permits(build_dir=None) -> set[str]:
@@ -238,6 +292,193 @@ def threshold_for(permit: str, state: str | None, thresholds: dict, rules: dict,
     return {"threshold_in": r.get("inches"), "basis": "published", "rule": key, "text": r.get("basis"),
             "source": r.get("source"), "n_discharge_days": row.get("n_discharge_days"), "since": row.get("since"),
             "until": row.get("until"), "name": row.get("name"), "kind": kind, "trigger_basis": basis}
+
+
+# ---------------------------------------------------------------- levels from the operator's own history
+
+def history_usable(entry: dict | None) -> bool:
+    return bool(entry) and entry.get("usable") is True and entry.get("possible_in") is not None
+
+
+def fallback_amount(permit: str, state: str | None, rules: dict) -> float | None:
+    """The amount the fallback chain would start the caution at (the operator's own published rule, its state's rule,
+    else the site default; never a 10th-percentile row), the smallest over the operator rule's season and the rest of
+    the year, so a history never starts the caution later than the fallback would at any time of year."""
+    got = [threshold_for(permit, state, {}, rules, None, operator=False)["threshold_in"]]
+    own = operator_rule(permit, rules)
+    if own is not None:
+        got.append(own["inches"])
+    got = [float(x) for x in got if x is not None]
+    return min(got) if got else None
+
+
+def caution_amount(entry: dict, fallback_in: float | None, rules: dict) -> float:
+    """The rain from which the caution shows (spec "Rules of the levels"): the operator's "possible" amount when that
+    is the lowest step or the range below it is long and quiet (quiet.enough); otherwise the smaller of that amount and
+    the fallback's, so a thin history never removes a caution the fallback shows."""
+    from build import rain_history
+    rungs = [float(x) for x in rain_history.settings(rules)["rungs_in"]]
+    p_in = float(entry["possible_in"])
+    if p_in <= rungs[0] + 1e-9 or (entry.get("quiet") or {}).get("enough") is True or fallback_in is None:
+        return p_in
+    return min(p_in, float(fallback_in))
+
+
+def month_year(day: str | None) -> str | None:
+    try:
+        y, m = int(str(day)[:4]), int(str(day)[5:7])
+        return f"{MONTHS[m - 1]} {y}"
+    except (ValueError, IndexError, TypeError):
+        return None
+
+
+def inch(v) -> str:
+    """0.25 inch, 1 inch, 1.5 inches."""
+    return f"{float(v):g} inch" if float(v) <= 1 else f"{float(v):g} inches"
+
+
+def history_threshold(permit: str, state: str | None, entry: dict, rules: dict) -> dict:
+    """threshold_for's record for an operator with a usable history (data/rain-levels.json): the caution's amount, the
+    "likely" amount and the facts they rest on. trigger_basis stays "operator" (older readers); kind operator_history."""
+    fb = fallback_amount(permit, state, rules)
+    caution = caution_amount(entry, fb, rules)
+    period = entry.get("period") or [None, None]
+    a, b = month_year(period[0]), month_year(period[1])
+    text = (f"this operator's own overflow reports{f' from {a} to {b}' if a and b else ''}: the caution shows from "
+            f"{inch(caution)} of rain in 24 hours")
+    srcs = sorted({s.get("source_id") for s in entry.get("sources") or [] if s.get("source_id")})
+    return {"threshold_in": caution, "basis": "history", "rule": f"{RULE}.history",
+            "text": text, "source": "the operator's own overflow reports"
+            + (f" ({', '.join(srcs)})" if srcs else "") + f"; {RAIN_RECORD_NAME}",
+            "n_discharge_days": None, "since": period[0], "until": period[1], "name": entry.get("name"),
+            "kind": "operator_history", "trigger_basis": "operator",
+            "possible_in": float(entry["possible_in"]), "likely_in": entry.get("likely_in"), "fallback_in": fb}
+
+
+def fallback_episodes(permit: str, state: str | None, rules: dict, values: list, start: datetime, now: datetime,
+                      tail: float, stale_h: float) -> list[tuple[dict, dict]]:
+    """The episodes the fallback chain alone would give (the operator's own published rule in its season, its state's
+    rule or the site default; never a 10th-percentile row), each with the threshold record of its own start."""
+    none = {"permits": {}}
+    own = operator_rule(permit, rules)
+    if own is not None and own.get("months"):
+        t_own = threshold_for(permit, state, none, rules, None)
+        t_def = threshold_for(permit, state, none, rules, None, operator=False)
+        return [(ep, t_own) for ep in runs(values, start, float(t_own["threshold_in"]), now,
+                                           float(t_own.get("tail_hours") or tail), stale_h) if in_season(own, ep["start"])] \
+            + [(ep, t_def) for ep in runs(values, start, float(t_def["threshold_in"]), now, tail, stale_h)
+               if not in_season(own, ep["start"])]
+    t = threshold_for(permit, state, none, rules, now)
+    if t["threshold_in"] is None:
+        return []
+    return [(ep, t) for ep in runs(values, start, float(t["threshold_in"]), now,
+                                   float(t["tail_hours"]) if t.get("tail_hours") is not None else tail, stale_h)]
+
+
+def _later(a: datetime | None, b: datetime | None) -> bool:
+    """Whether end a is later than end b (None, an open end, is the latest)."""
+    return b is not None and (a is None or a > b)
+
+
+RULE_WORDS = {"operator_history": "the level from the operator's own overflow reports",
+              "operator_rule": "the operator's own rule", "state_rule": "the state's rule",
+              "site_default": "this site's default"}
+
+
+def evidence_basis(thr: dict) -> str:
+    """The evidence basis of a threshold record (spec section 2; a state entry applying this site's default amount,
+    Maryland's or the District's, reads as the site default)."""
+    basis = EVIDENCE_BASIS.get(thr.get("kind"), "site_default")
+    return "site_default" if basis == "state_rule" and thr.get("trigger_basis") == "default" else basis
+
+
+def union_episodes(hist_eps: list, fb_eps: list, thr: dict, site_tail: float = 48) -> list[tuple[dict, dict]]:
+    """The history's episodes and the fallback's, merged where they touch: the covered time is their union. The
+    episode's start, peak, last_above and dropped_at are the history threshold's (when a history episode is in the
+    group); its end is the later one, cited by end_rule (the rule, amount, tail and times of the episode that ended
+    later) with pieces_from (every contributing interval). The record stays the history's (thr), so the evidence and
+    the level are the operator's own; its tail_hours and end_in are the end rule's. Pure."""
+    tagged = sorted([(ep, t, True) for ep, t in hist_eps] + [(ep, t, False) for ep, t in fb_eps],
+                    key=lambda x: (x[0]["start"], not x[2]))
+    groups: list[list] = []
+    for ep, t, h in tagged:
+        if groups and any(m[0]["end"] is None for m in groups[-1]) or \
+                (groups and ep["start"] <= max(m[0]["end"] for m in groups[-1])):
+            groups[-1].append((ep, t, h))
+        else:
+            groups.append([(ep, t, h)])
+    out = []
+    for g in groups:
+        hist = [m for m in g if m[2]] or g
+        ender = g[0]
+        for m in g[1:]:
+            if _later(m[0]["end"], ender[0]["end"]) or (m[0]["end"] == ender[0]["end"] and m[2] and not ender[2]):
+                ender = m
+        h_last = max(hist, key=lambda m: (m[0]["end"] is None, m[0]["end"] or m[0]["start"]))
+        top = max(g, key=lambda m: m[0]["peak"])
+        ep = {"start": min(m[0]["start"] for m in g), "peak": top[0]["peak"], "peak_at": top[0]["peak_at"],
+              "last_above": max(m[0]["last_above"] for m in hist), "dropped_at": h_last[0].get("dropped_at"),
+              "end": ender[0]["end"]}
+        if any(m[0].get("rainfall_stale") for m in g):
+            ep["rainfall_stale"] = True
+        e_ep, e_t, e_h = ender
+        tail_e = e_t.get("tail_hours") if e_t.get("tail_hours") is not None else site_tail
+        rec = {**thr, "tail_hours": tail_e, "end_in": e_t.get("threshold_in"),
+               "end_rule": {"basis": evidence_basis(e_t), "threshold_in": e_t.get("threshold_in"),
+                            "tail_hours": tail_e, "rule": e_t.get("rule"), "text": e_t.get("text"),
+                            "source": e_t.get("source"), "last_above_at": iso(e_ep["last_above"]),
+                            "dropped_below_at": iso(e_ep.get("dropped_at"))},
+               "pieces_from": [{"basis": evidence_basis(t), "threshold_in": t.get("threshold_in"),
+                                "tail_hours": t.get("tail_hours") if t.get("tail_hours") is not None else site_tail,
+                                "rule": t.get("rule"), "from": iso(m["start"]),
+                                "until": iso(m["end"])} for m, t, _ in g]}
+        out.append((ep, rec))
+    return out
+
+
+def _cut(r: dict | None, keys=("lo", "hi", "storms", "followed")) -> dict | None:
+    return {k: r.get(k) for k in keys} if isinstance(r, dict) else None
+
+
+def episode_class(entry: dict, peak: float | None) -> dict | None:
+    """The range an episode's peak falls in, with the operator's counts for it (spec section 2 "class")."""
+    if peak is None or not history_usable(entry):
+        return None
+    l_in, p_in = entry.get("likely_in"), float(entry["possible_in"])
+    if l_in is not None and peak >= float(l_in) - 1e-9:
+        return {"kind": "likely", **(_cut(entry.get("likely")) or {})}
+    if peak >= p_in - 1e-9:
+        return {"kind": "possible", **(_cut(entry.get("possible") or entry.get("likely")) or {})}
+    return {"kind": "below_lowest", **(_cut(entry.get("quiet")) or {})}
+
+
+def level_of(thr: dict, peak: float | None) -> str:
+    """An episode's level: by its peak against the operator's own "likely" amount on a history, else by the basis of
+    the fallback amount (operator rule and state rule "likely", the site default "possible")."""
+    if thr.get("kind") == "operator_history" and thr.get("possible_in") is not None:
+        l_in = thr.get("likely_in")
+        return "likely" if l_in is not None and peak is not None and peak >= float(l_in) - 1e-9 else "possible"
+    return LEVEL_OF_BASIS.get(thr.get("trigger_basis"), "likely")
+
+
+def evidence(thr: dict, entry: dict | None, levels: dict, level: str, cls: dict | None, why: str | None) -> dict:
+    """The evidence record (spec section 2) for one permit row or episode."""
+    hist = thr.get("kind") == "operator_history" and thr.get("possible_in") is not None
+    e = entry or {}
+    rr = (levels.get("rain_record") or {}).get("source_id") or RAIN_RECORD_ID
+    return {"basis": evidence_basis(thr), "level": level,
+            "caution_in": thr.get("threshold_in"), "likely_in": thr.get("likely_in") if hist else None,
+            "class": cls, "period": e.get("period"), "lowest_reported": e.get("lowest_reported"),
+            "quiet": _cut(e.get("quiet"), ("lo", "hi", "storms", "followed", "enough")) if hist else None,
+            "notes": list(e.get("notes") or []), "why_no_history": None if hist else why,
+            "rule_text": None if hist else thr.get("text"),
+            "report_sources": sorted({s.get("source_id") for s in e.get("sources") or [] if s.get("source_id")}),
+            "rain_record": rr, "method_version": e.get("method_version") or levels.get("method_version"),
+            "computed": e.get("computed") or levels.get("today")}
+
+
+def history_row(entry: dict | None) -> dict | None:
+    return {k: entry.get(k) for k in HISTORY_FIELDS} if isinstance(entry, dict) else None
 
 
 # ---------------------------------------------------------------- the rule in time
@@ -444,12 +685,29 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
     if not rf:
         block["problems"].append("no rainfall readings yet (data/build/rainfall.json missing)")
     site_permits = set(((rain or {}).get("site_flags") or {}).get("permits") or [])
+    levels = (rain or {}).get("levels") if isinstance((rain or {}).get("levels"), dict) else None
+    lv_permits = (levels or {}).get("permits") or {}
+    if levels is not None:
+        block["levels"] = {k: levels.get(k) for k in ("method_version", "built", "today", "method", "rain_record",
+                                                      "counts", "crosscheck")}
+        block["label_by_level"] = labels_by_level(rules)
+        # the rationale the records cite: the method of the levels (rules.rain_likely.history.doc); with no levels
+        # file the block's own doc stays, byte for byte
+        hdoc = (((rules or {}).get(RULE) or {}).get("history") or {}).get("doc")
+        if hdoc:
+            cfg = {**cfg, "doc": hdoc}
     for permit in sorted(set(series) | set(latest)):
         if permit in site_permits:
             continue                    # its caution comes from the shared site (_site_flags), never twice
         info = latest.get(permit) or {}
         state = info.get("state") or permit[:2]
-        thr = threshold_for(permit, state, thresholds, rules, now)
+        entry = lv_permits.get(permit) if levels is not None else None
+        use_hist = history_usable(entry)
+        # an entry that is not usable: the fallback chain, never the 10th-percentile row; no entry: as before
+        thr_src = {"permits": {}} if entry is not None and not use_hist else thresholds
+        why = None if use_hist else ((entry or {}).get("why_not") or NO_ENTRY)
+        thr = history_threshold(permit, state, entry, rules) if use_hist else threshold_for(permit, state, thr_src,
+                                                                                             rules, now)
         if thr["threshold_in"] is None:
             continue
         t_in = float(thr["threshold_in"])
@@ -461,12 +719,31 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                                               reach_waters_fn)
         stale_h = float(cfg["rainfall_stale_hours"])
         own = operator_rule(permit, rules)
-        if own is not None and own.get("months") and start:
+        if use_hist:
+            # the history's amounts all year; the tail is the site's, or the operator rule's own in its season when
+            # that is longer
+            own_tail = float(own["tail_hours"]) if own is not None and own.get("tail_hours") is not None else None
+            if own_tail is not None and own_tail > tail and start:
+                t_long = {**thr, "tail_hours": own_tail}
+                eps = sorted([(ep, t_long) for ep in runs(series.get(permit) or [], start, t_in, now, own_tail, stale_h)
+                              if in_season(own, ep["start"])]
+                             + [(ep, thr) for ep in runs(series.get(permit) or [], start, t_in, now, tail, stale_h)
+                                if not in_season(own, ep["start"])], key=lambda x: x[0]["start"])
+            else:
+                eps = [(ep, thr) for ep in runs(series.get(permit) or [], start, t_in, now, tail, stale_h)] \
+                    if start else []
+            if (entry.get("quiet") or {}).get("enough") is not True and start:
+                # the safety guarantee (review 2026-11-14 P1-3): unless the record shows a long quiet range, every
+                # hour the fallback alone would show carries the caution, with at least the fallback's own tail
+                # (an operator rule's season can lengthen it); the history's evidence and level stay
+                eps = union_episodes(eps, fallback_episodes(permit, state, rules, series.get(permit) or [], start, now,
+                                                            tail, stale_h), thr, tail)
+        elif own is not None and own.get("months") and start:
             # an operator rule with a season: each episode takes the rule of its own start, read in the outfalls'
             # clock (review 2026-11-08 P2-3), never the build's time: in season the operator's amount and hours, out
             # of season the state's rule or the default
-            t_own = threshold_for(permit, state, thresholds, rules, None)
-            t_def = threshold_for(permit, state, thresholds, rules, None, operator=False)
+            t_own = threshold_for(permit, state, thr_src, rules, None)
+            t_def = threshold_for(permit, state, thr_src, rules, None, operator=False)
             eps = sorted([(ep, t_own) for ep in runs(series.get(permit) or [], start, float(t_own["threshold_in"]), now,
                                                      float(t_own.get("tail_hours") or tail), stale_h)
                           if in_season(own, ep["start"])]
@@ -493,10 +770,15 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 "rain_expected": qpf is not None and qpf >= t_in,
                 "status": "no_reading" if h24 is None else "below", "episode": None, "suppressed_by": [],
                 "waters": sorted(tags), "reaches": keys, **({"set_aside": aside} if aside else {})}
+        row_level = row_class = row_thr = None
         for ep, thr_e in eps:
             t_e = float(thr_e["threshold_in"])
             tail_e = float(thr_e["tail_hours"]) if thr_e.get("tail_hours") is not None else tail
             eid = f"rain_likely:{permit}:{ep['start'].strftime('%Y%m%dT%H')}Z"
+            ep_level = ep_class = None
+            if levels is not None:
+                ep_level = level_of(thr_e, round(ep["peak"], 2))
+                ep_class = episode_class(entry, round(ep["peak"], 2)) if use_hist else None
             pieces = [(a, b) for a, b in subtract(ep["start"], ep["end"], blocks)
                       if (b is None or b > h_start) and a <= now]
             by_notice = sorted({e for s, e in starts.get(permit, []) if s <= now
@@ -507,6 +789,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 prow["episode"] = eid
                 prow["status"] = "likely" if active else "suppressed"
                 prow["suppressed_by"] = [] if active else by_notice
+                row_level, row_class, row_thr = ep_level, ep_class, thr_e
             if not pieces and not in_now:
                 continue
             rain_rec = {
@@ -519,7 +802,10 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 "peak_24h_in": round(ep["peak"], 2), "peak_at": iso(ep["peak_at"]),
                 "above_from": iso(ep["start"]), "last_above_at": iso(ep["last_above"]),
                 "dropped_below_at": iso(ep.get("dropped_at")), "until": iso(ep["end"]),
-                "until_rule": f"{tail_e:g} hours after the 24-hour total falls below the threshold",
+                "until_rule": (f"{tail_e:g} hours after the 24-hour total falls below {inch(thr_e['end_in'])}, "
+                               f"{RULE_WORDS.get(thr_e['end_rule']['basis'], 'the rule applied')}"
+                               if thr_e.get("end_rule") and thr_e.get("end_in") is not None
+                               else f"{tail_e:g} hours after the 24-hour total falls below the threshold"),
                 "rain_24h_in": h24, "valid_time": info.get("valid_time"), "point": _point(info.get("h24_point")),
                 "qpf_24h_in": qpf, "qpf_update_time": info.get("qpf_update_time"),
                 "rainfall_source": RAINFALL_SOURCE, "rainfall_source_id": SOURCE_ID,
@@ -530,16 +816,41 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                 "rainfall_stale": bool(ep.get("rainfall_stale")) or stale,
                 "suppressed_by": by_notice,
             }
+            if levels is not None:      # the level the label follows, and the facts behind it (spec section 2)
+                rain_rec["label"] = label_for_level(ep_level, rules)
+                rain_rec["level"] = ep_level
+                rain_rec["evidence"] = evidence(thr_e, entry, levels, ep_level, ep_class, why)
+                if thr_e.get("end_rule"):   # the history's caution with the fallback's own episode: what set the end
+                    rain_rec["end_rule"] = thr_e["end_rule"]
+                    rain_rec["pieces_from"] = thr_e["pieces_from"]
             rule_applied = {"rule": RULE, "threshold_in": t_e, "threshold_basis": thr_e["basis"], "tail_hours": tail_e,
-                            "trigger_basis": thr_e["trigger_basis"], "rationale": cfg["doc"], "source": cfg["source"]}
+                            "trigger_basis": thr_e["trigger_basis"], "rationale": cfg["doc"], "source": cfg["source"],
+                            # the amount is the history's (the start); the tail is the end rule's, cited here
+                            **({"end_rule": {k: thr_e["end_rule"][k] for k in ("basis", "threshold_in", "tail_hours",
+                                                                                 "rule")}}
+                               if levels is not None and thr_e.get("end_rule") else {})}
             block["episodes"][eid] = {"permit": permit, "discharger_name": name, "discharger_id": dis.get("id"),
                                       "state": state, "trigger_basis": thr_e["trigger_basis"],
+                                      **({"level": ep_level} if levels is not None else {}),
                                       "label": rain_rec["label"], "start": iso(ep["start"]),
                                       "end": iso(ep["end"]), "active": active, "in_effect": in_now,
                                       "pieces": [[iso(a), iso(b)] for a, b in pieces], "waters": sorted(tags),
                                       "reaches": keys, "rain": rain_rec}
             _emit(pieces, eid, ep, permit, rain_rec, rule_applied, cfg, tail_e, keys, tags, reach_of, by_water, by_reach,
                   SOURCE_ID, "NOAA MRMS radar estimate")
+        if levels is not None:
+            # outside an episode a history row reads "possible" (no caution now); a fallback row its basis's level
+            # in an episode: the rule that episode's start took (review 2026-11-14 P2-7), never the build hour's
+            if row_thr is not None:     # every caution field from the episode in effect (second pass P2-7)
+                prow.update({"threshold_in": float(row_thr["threshold_in"]), "threshold_basis": row_thr["basis"],
+                             "threshold_rule": row_thr["rule"], "threshold_text": row_thr["text"],
+                             "threshold_source": row_thr.get("source"), "threshold_kind": row_thr["kind"],
+                             "trigger_basis": row_thr["trigger_basis"]})
+            lv = row_level or level_of(thr, None)
+            prow["label"] = label_for_level(lv, rules)
+            prow["level"] = lv
+            prow["evidence"] = evidence(row_thr or thr, entry, levels, lv, row_class, why)
+            prow["history"] = history_row(entry)
         block["permits"][permit] = prow
         for slug in tags:
             w = block["waters"].setdefault(slug, {"permits": [], "rain_24h_in": None, "qpf_24h_in": None,
@@ -554,7 +865,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
             w["rain_expected"] = w["rain_expected"] or prow["rain_expected"]
             w["likely"] = w["likely"] or prow["status"] == "likely"
     _site_flags((rain or {}).get("site_flags") or {}, cfg, now, h_start, waters, reaches, reach_waters_fn, starts, supp,
-                tail, block, by_water, by_reach)
+                tail, block, by_water, by_reach, levels, rules)
     # each water: the bases of its operators' amounts, and the one its caution reads by (the likely ones first)
     for w in block["waters"].values():
         rows = [block["permits"].get(p) or {} for p in w["permits"]]
@@ -563,6 +874,10 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
         w["trigger_basis"] = (strongest_basis(r.get("trigger_basis") for r in rows if r.get("status") == "likely")
                               or strongest_basis(w["trigger_bases"]))
         w["label"] = label_for(w["trigger_basis"], cfg)
+        if levels is not None:      # "likely" when any of its operators' active episodes is likely
+            w["level"] = "likely" if any(r.get("status") == "likely" and r.get("level") == "likely" for r in rows) \
+                else "possible"
+            w["label"] = label_for_level(w["level"], rules)
     aside = sum(len(p.get("set_aside") or []) for p in block["permits"].values())
     if aside:
         block["problems"].append(f"{aside} lake or pond placement(s) set aside: outfall matched by distance only "
@@ -581,6 +896,7 @@ def _emit(pieces, eid, ep, permit, rain_rec, rule_applied, cfg, tail, keys, tags
     for a, b in pieces:
         iv = {"start": a, "end": b, "color": "yellow", "rule": RULE, "label": rain_rec.get("label") or cfg["label"],
               "trigger_basis": rain_rec.get("trigger_basis"),
+              **({"level": rain_rec["level"]} if rain_rec.get("level") else {}),
               "rule_applied": rule_applied, "event_id": eid, "source_id": source_id, "fixture": False,
               "event_type": None, "event_status": None, "authority": authority,
               "window_hours": tail, "window_basis": rain_rec["until_rule"], "red_rule": None,
@@ -616,10 +932,12 @@ def site_series(obs: list, now: datetime) -> tuple[datetime | None, list]:
 
 
 def _site_flags(site: dict, cfg: dict, now, h_start, waters, reaches, reach_waters_fn, starts, supp, tail, block,
-                by_water, by_reach) -> None:
-    """New Jersey's shared notification site: its exceedance flag as the caution at its permits' outfalls."""
+                by_water, by_reach, levels: dict | None = None, rules: dict | None = None) -> None:
+    """New Jersey's shared notification site: its exceedance flag as the caution at its permits' outfalls. With a
+    levels file the records carry level "likely" and evidence basis "shared_site" (the site's own thresholds stand)."""
     if not site:
         return
+    site_thr = {"kind": "shared_site", "trigger_basis": "operator", "threshold_in": None}
     snap, hist = site.get("snapshot") or {}, site.get("history") or {}
     rows = {r.get("npdes_permit"): r for r in snap.get("permittees") or [] if r.get("npdes_permit")}
     obs = hist.get("observations") or {}
@@ -699,13 +1017,25 @@ def _site_flags(site: dict, cfg: dict, now, h_start, waters, reaches, reach_wate
                 "rain_24h_in": None, "valid_time": None, "point": pt, "qpf_24h_in": None,
                 "rainfall_source": SITE_RAIN, "rainfall_source_id": SITE_SOURCE_ID,
                 "rainfall_stale": bool(ep.get("rainfall_stale")) or stale, "suppressed_by": by_notice}
+            if levels is not None:
+                rain_rec["label"] = label_for_level("likely", rules)
+                rain_rec["level"] = "likely"
+                rain_rec["evidence"] = evidence({**site_thr, "text": prow["threshold_text"]},
+                                                ((levels.get("permits") or {}).get(permit)), levels, "likely", None, None)
             block["episodes"][eid] = {"permit": permit, "discharger_name": name, "discharger_id": row.get("discharger_id"),
-                                      "state": "NJ", "trigger_basis": "operator", "label": rain_rec["label"],
+                                      "state": "NJ", "trigger_basis": "operator",
+                                      **({"level": "likely"} if levels is not None else {}), "label": rain_rec["label"],
                                       "start": iso(ep["start"]), "end": iso(ep["end"]), "active": active,
                                       "in_effect": in_now, "pieces": [[iso(a), iso(b)] for a, b in pieces],
                                       "waters": sorted(tags), "reaches": keys, "rain": rain_rec}
             _emit(pieces, eid, ep, permit, rain_rec, rule_applied, cfg, tail, keys, tags, reach_of, by_water, by_reach,
                   SITE_SOURCE_ID, "New Jersey CSO permittees' shared notification site")
+        if levels is not None:
+            entry = (levels.get("permits") or {}).get(permit)
+            prow["label"] = label_for_level("likely", rules)
+            prow["level"] = "likely"
+            prow["evidence"] = evidence({**site_thr, "text": prow["threshold_text"]}, entry, levels, "likely", None, None)
+            prow["history"] = history_row(entry)
         block["permits"][permit] = prow
         for slug in tags:
             w = block["waters"].setdefault(slug, {"permits": [], "rain_24h_in": None, "qpf_24h_in": None,
@@ -733,6 +1063,8 @@ def caution_coverage(block: dict, cso_states=()) -> dict[str, dict]:
         e = out.setdefault(st, {"covered": on, "methods": [], "permits": 0, "waters": set(), "sources": []})
         e["permits"] += 1
         e["waters"].update(p.get("waters") or [])
+        if (p.get("evidence") or {}).get("basis") == "operator_history":
+            e["history_permits"] = e.get("history_permits", 0) + 1     # levels from its own overflow reports
         b = basis_of(p)
         if b not in e.setdefault("trigger_bases", []):
             e["trigger_bases"].append(b)
@@ -776,11 +1108,15 @@ def caution_coverage(block: dict, cso_states=()) -> dict[str, dict]:
                 whose = ("this site's default amount" if e.get("threshold_kind") == "site_default"
                          else "the published amount")
                 parts["radar"] = f"NOAA radar rainfall at their outfalls, against {whose} of {e['threshold_in']:g} in"
+            if e.get("history_permits"):
+                parts["radar"] = ("NOAA radar rainfall at their outfalls, against amounts from each operator's own "
+                                  "overflow reports where it has enough of them, else a published amount or this "
+                                  "site's default")
             how = " and ".join(parts[m] for m in e["methods"])
             of = f" of the {e['cso_permits']}" if missing else ""
             bases = set(e["trigger_bases"])
             word = ('"discharge possible"' if bases == {"default"} else '"discharge likely" or "discharge possible"'
-                    if "default" in bases else '"discharge likely"')
+                    if "default" in bases or e.get("history_permits") else '"discharge likely"')
             e["sentence"] = (f"The {word} caution covers {e['permits']}{of} combined sewer operator"
                              f"{'' if e['permits'] == 1 and not missing else 's'} here, from {how}.")
             if at_plant.get(st):
@@ -816,10 +1152,12 @@ def water_context(block: dict, slug: str) -> dict | None:
     perms = [{"permit": p, **{k: (block["permits"].get(p) or {}).get(k) for k in
                               ("name", "threshold_in", "threshold_basis", "threshold_rule", "threshold_kind",
                                "trigger_basis", "rain_24h_in", "valid_time", "qpf_24h_in", "qpf_update_time",
-                               "rain_expected", "status", "episode")}}
+                               "rain_expected", "status", "episode")},
+              **({"level": (block["permits"].get(p) or {}).get("level")} if "level" in w else {})}
              for p in w["permits"]]
     return {"rain_24h_in": w["rain_24h_in"], "qpf_24h_in": w["qpf_24h_in"], "rain_expected": w["rain_expected"],
             "likely": w["likely"], "trigger_basis": w.get("trigger_basis"), "trigger_bases": w.get("trigger_bases") or [],
+            **({"level": w["level"]} if "level" in w else {}),
             "label": w.get("label") or label_for(w.get("trigger_basis")), "valid_time": (block.get("rainfall") or {}).get("valid_time"),
             "rainfall_source": RAINFALL_SOURCE, "forecast_source": "NWS gridpoint forecast (api.weather.gov), next 24 hours",
             "rainfall_stale": (block.get("rainfall") or {}).get("stale"), "permits": perms}
@@ -834,6 +1172,38 @@ def health_file(rain: dict) -> dict | None:
             "last_ok_at": rf.get("last_ok_at"), "fixture": False, "records": (rf.get("mrms") or {}).get("points")}
 
 
+def _band(lo, hi) -> str:
+    return f"{inch(lo)} or more" if hi is None else f"{float(lo):g} to {inch(hi)}"
+
+
+def history_facts(ev: dict) -> str:
+    """The reason line's facts for a caution from the operator's own history, compactly, in the public sentences'
+    facts (spec section 3): " · its own reports, July 2022 to October 2026: an overflow after 159 of 188 storms of
+    0.25 inch or more"."""
+    period = ev.get("period") or [None, None]
+    a, b = month_year(period[0]), month_year(period[1])
+    when = f", {a} to {b}" if a and b else ""
+    c = ev.get("class") or {}
+    if c.get("storms") is None or c.get("lo") is None:
+        return f" · caution from {inch(ev['caution_in'])}, from its own overflow reports{when}" \
+            if ev.get("caution_in") is not None else ""
+    rng = _band(c["lo"], c.get("hi"))
+    if c.get("kind") == "below_lowest":
+        out = (f" · its own reports{when}: none of {c['storms']} storms of {rng} followed by a reported overflow; "
+               f"that record is too short to start the caution any higher")
+    else:
+        out = f" · its own reports{when}: an overflow after {c['followed']} of {c['storms']} storms of {rng}"
+        low = ev.get("lowest_reported") or {}
+        if c.get("kind") == "possible" and low.get("size_in") is not None and low.get("rounded_in") is not None \
+                and float(low["size_in"]) > float(low["rounded_in"]) + 1e-9:
+            out += f"; smallest storm followed {inch(low['size_in'])}, rounded down to {inch(low['rounded_in'])}"
+    for n in ev.get("notes") or []:
+        if n.get("what") == "reported_less_since" and n.get("after"):
+            out += (f"; fewer reports since {n.get('year')} ({n['after'][0]} of {n['after'][1]} larger storms), whole "
+                    f"record used")
+    return out
+
+
 def short(iv: dict, where: str = "") -> str:
     r = iv.get("rain") or {}
     label = r.get("label") or iv.get("label") or label_for(r.get("trigger_basis") or iv.get("trigger_basis"))
@@ -843,6 +1213,10 @@ def short(iv: dict, where: str = "") -> str:
         return f"{label}{who} · {wins} rainfall over the threshold on the permittees' shared notification site{where}"
     peak = r.get("peak_24h_in")
     thr = r.get("threshold_in")
+    ev = r.get("evidence") or {}
+    if ev.get("basis") == "operator_history" and ev.get("why_no_history") is None:
+        amt = f" · {peak:.2f} inch{'es' if peak > 1 else ''} in 24 hours (radar)" if peak is not None else ""
+        return f"{label}{who}{amt}{history_facts(ev)}{where}"
     kind = " (this site's default)" if (r.get("trigger_basis") or iv.get("trigger_basis")) == "default" else ""
     rain = f" · {peak:.2f} in in 24 h (radar), threshold {thr:.2f} in{kind}" if peak is not None and thr is not None else ""
     return f"{label}{who}{rain}{where}"

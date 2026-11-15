@@ -18,7 +18,7 @@
       "html",
       "pdf"
     ],
-    "access_detail": "Public document search (Kendo JavaScript app; the old querydef.aspx URL redirects to /edmsv2). Noncompliance reports and SPOC written unauthorized-discharge notification reports are filed per facility; whether sewer overflow reports are indexed by type was not confirmed. No list, map or API of overflows.",
+    "access_detail": "The public EDMS (edms.deq.louisiana.gov/edmsv2) is a JavaScript application whose document search is guarded by a reCAPTCHA (2026-11-14: the app bundle carries the reCAPTCHA client); the bounded pilot for Baton Rouge's AI 4843 and 4841 could not run without passing a CAPTCHA, which this project does not do.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -34,10 +34,10 @@
     "history": "decades (per facility)",
     "license": "unknown",
     "legal_basis": "LAC 33:I Chapter 39; LPDES permit conditions",
-    "status": "watch",
-    "status_reason": "Only public trace of overflow reports found; needs a per-facility PDF crawl to test.",
+    "status": "unreachable",
+    "status_reason": "A CAPTCHA guards the search: no document read; registered as a barrier (records request or a supported export needed).",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": "Page shell fetched; a document search was not run."
   },
   {
@@ -138,9 +138,9 @@
     "license": "public domain",
     "legal_basis": "40 CFR 127",
     "status": "rejected",
-    "status_reason": "No Louisiana rows; LDEQ uses its own reporting.",
+    "status_reason": "Rechecked 2026-11-14 (current and all-versions extracts): no Louisiana report; 17 Louisiana collection-system permits are listed in EPA's permits table.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": ""
   },
   {
@@ -178,9 +178,9 @@
     "license": "unknown",
     "legal_basis": "BEACH Act",
     "status": "unreachable",
-    "status_reason": "403 from this machine; owner or a browser fetch needed to see the advisory table format.",
+    "status_reason": "Both addresses answer 403 to this project's client (2026-11-14): registered as a barrier (bot wall); a data request to LDH is the owner's item.",
     "verified": "search_only",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": ""
   },
   {
@@ -272,7 +272,7 @@
     ],
     "waters_covered": "New Orleans (Lake Pontchartrain, Mississippi River, Bayou St. John via pumping)",
     "water_slugs": [],
-    "url": "https://swbno.org/docs_consentdecree.asp",
+    "url": "https://www.swbno.org/Wastewater/ConsentDecree",
     "access": [
       "pdf"
     ],
@@ -289,9 +289,9 @@
     "license": "unknown",
     "legal_basis": "Consent decree",
     "status": "watch",
-    "status_reason": "Possible totals; no event list.",
-    "verified": "search_only",
-    "checked": "2026-11-03",
+    "status_reason": "Index and the Q3 2026 report read 2026-11-14: 624 pages of program progress, no dated list of overflows; the index is watched daily in the register.",
+    "verified": "fetched",
+    "checked": "2026-11-14",
     "notes": ""
   },
   {
@@ -323,9 +323,9 @@
     "license": null,
     "legal_basis": "Consent decree",
     "status": "watch",
-    "status_reason": "Notice terms unread.",
+    "status_reason": "EPA's settlement page: context; the City-Parish's quarterly reports are the feed (la-baton-rouge-quarterly-reports).",
     "verified": "search_only",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": ""
   },
   {
@@ -393,9 +393,188 @@
     "license": "public domain",
     "legal_basis": null,
     "status": "rejected",
-    "status_reason": "Not sewage CSOs; exclude from sewage CSO counts or label as industrial.",
+    "status_reason": "EPA's two Louisiana 'CSO' rows are petrochemical plants' combined outfalls: kind other in data/outfalls-la.json, off the combined sewer outlets and the rain caution.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": ""
+  },
+  {
+    "id": "la-baton-rouge-quarterly-reports",
+    "name": "City of Baton Rouge and Parish of East Baton Rouge consent-decree quarterly reports (Part D)",
+    "jurisdiction": "LA",
+    "operator": "City of Baton Rouge and Parish of East Baton Rouge",
+    "operator_type": "municipal",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": null,
+    "water_slugs": [],
+    "url": "https://brprojects.com/baton-rouge-sso-program/program-overview/regulatory-information/",
+    "access": [
+      "pdf"
+    ],
+    "access_detail": "Index read 2026-11-14 (reports 1 to 98); Reports 91 to 98 (October 2024 to September 2026) fetched once each. Part D's collection-system tables: date, address, cause, action, prevention, receiving water, gallons, lab values; the plants' discharges are scanned forms.",
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [
+      "Date",
+      "Cause",
+      "Rec. Waters",
+      "Amt. Gals"
+    ],
+    "fills_event_fields": [
+      "day",
+      "cause",
+      "receiving water",
+      "volume",
+      "permit"
+    ],
+    "cannot_fill": [
+      "time of day",
+      "end",
+      "coordinates"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "quarterly, issued about a month after the quarter",
+    "history": "Reports since 2002 (read from Report 91)",
+    "license": "public record, none stated",
+    "legal_basis": "Consent decree (2002), Paragraph 26, Section XI",
+    "status": "used",
+    "status_reason": "Read by the la-baton-rouge-quarterly feed: 5 of 8 reports pass the layout check (rows per collection system equal the report's own summary): 219 discharges, October 2024 to September 2026 less the withheld quarters; Reports 91, 92 and 97 withheld.",
+    "verified": "fetched",
+    "checked": "2026-11-14",
+    "notes": null
+  },
+  {
+    "id": "la-shreveport-consent-decree",
+    "name": "City of Shreveport consent-decree annual reports (Attachment 3 SSO table)",
+    "jurisdiction": "LA",
+    "operator": "City of Shreveport",
+    "operator_type": "municipal",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": null,
+    "water_slugs": [],
+    "url": "https://cleanwatershreveport.com/consent-decree-public-repository/",
+    "access": [
+      "pdf"
+    ],
+    "access_detail": null,
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": null,
+    "status": "unreachable",
+    "status_reason": "The host made no connection with this project's client on 2026-11-14 (twice); the research's reading (131 rows, May 2025 to May 2026) is not verified here.",
+    "verified": "search_only",
+    "checked": "2026-11-14",
+    "notes": null
+  },
+  {
+    "id": "la-ldeq-written-notification-guidance",
+    "name": "LDEQ written notification procedures",
+    "jurisdiction": "LA",
+    "operator": "LDEQ",
+    "operator_type": "state",
+    "role": "law",
+    "event_types": [],
+    "waters_covered": null,
+    "water_slugs": [],
+    "url": "https://www.deq.louisiana.gov/page/written-notification-procedures",
+    "access": [
+      "html"
+    ],
+    "access_detail": null,
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": null,
+    "status": "used",
+    "status_reason": "Nonbinding summary of the seven-day written report.",
+    "verified": "search_only",
+    "checked": "2026-11-14",
+    "notes": null
+  },
+  {
+    "id": "la-pontchartrain-weekly-results",
+    "name": "Pontchartrain Conservancy weekly results page",
+    "jurisdiction": "LA",
+    "operator": "Pontchartrain Conservancy",
+    "operator_type": "nonprofit",
+    "role": "context",
+    "event_types": [],
+    "waters_covered": null,
+    "water_slugs": [],
+    "url": "https://scienceforourcoast.org/water-quality/water-quality-results",
+    "access": [
+      "html"
+    ],
+    "access_detail": null,
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": null,
+    "status": "watch",
+    "status_reason": "Spreadsheet rows and reuse terms not verified.",
+    "verified": "search_only",
+    "checked": "2026-11-14",
+    "notes": null
+  },
+  {
+    "id": "la-ldh-beach-alternate",
+    "name": "LDH beach monitoring page (alternate address)",
+    "jurisdiction": "LA",
+    "operator": "Louisiana Department of Health",
+    "operator_type": "state",
+    "role": "advisories",
+    "event_types": [],
+    "waters_covered": null,
+    "water_slugs": [],
+    "url": "https://ldh.la.gov/page/beach-monitoring-program",
+    "access": [
+      "html"
+    ],
+    "access_detail": null,
+    "machine_readable": false,
+    "sample_record": null,
+    "fields": [],
+    "fills_event_fields": [],
+    "cannot_fill": [],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": null,
+    "history": null,
+    "license": null,
+    "legal_basis": null,
+    "status": "unreachable",
+    "status_reason": "403 to this project's client (2026-11-14).",
+    "verified": "fetched",
+    "checked": "2026-11-14",
+    "notes": null
   }
 ]

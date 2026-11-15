@@ -1,0 +1,25 @@
+id: "mo-dnr-npdes-outfalls"
+name: "Missouri DNR NPDES Waste Water Outfalls (CSO flag)"
+url: "https://gis.dnr.mo.gov/host/rest/services/waste/NPDES_WasteWaterOutfalls/MapServer/1"
+homepage: "https://gis.dnr.mo.gov/host/rest/services/waste/NPDES_WasteWaterOutfalls/MapServer/1"
+kind: "arcgis"
+level: "state"
+# Notes (research/mo, status used, verified fetched, checked 2026-11-14): Read by
+#   scripts/mo_outfall_layer.py into data/outfalls-mo.json: 146 CSO features on five permits (MSD
+#   Lemay 120), 26 of them EPA's rows.
+# Access detail (research, quoted): Queried CSO='Y': 146 outfalls (MO0025151 MSD Lemay 120, St.
+#   Joseph 14, KC Westside 5, Moberly 4, Macon 3), with points; saved
+#   raw/mo-dnr-cso-outfalls-2026-11-03.json.
+# Can fill: coordinates, waterbody
+cadence: null
+license: "Public use, no warranty (service metadata)"
+attribution: "Missouri DNR"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["MO"]
+access: ["arcgis"]
+access_detail: "Queried CSO='Y': 146 outfalls (MO0025151 MSD Lemay 120, St. Joseph 14, KC Westside 5, Moberly 4, Macon 3), with points; saved raw/mo-dnr-cso-outfalls-2026-11-03.json."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"

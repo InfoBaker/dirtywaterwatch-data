@@ -1,0 +1,22 @@
+id: "mo-dnr-cso-areas"
+name: "Missouri DNR CSO Areas"
+url: "https://gis.dnr.mo.gov/host/rest/services/waste/CSO_Areas/MapServer/0"
+homepage: "https://gis.dnr.mo.gov/host/rest/services/waste/CSO_Areas/MapServer/0"
+kind: "arcgis"
+level: "state"
+# Notes (research/mo, status used, verified fetched, checked 2026-11-03): Combined-sewer service
+#   areas.
+# Access detail (research, quoted): 4 polygons: Metropolitan St. Louis Sewer District, City of
+#   Macon, City of Kansas City, City of St. Joseph.
+cadence: null
+license: "none stated"
+attribution: "Missouri DNR"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["MO"]
+access: ["arcgis"]
+access_detail: "4 polygons: Metropolitan St. Louis Sewer District, City of Macon, City of Kansas City, City of St. Joseph."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-03"
