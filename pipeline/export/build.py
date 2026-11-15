@@ -149,12 +149,17 @@ def slim_event(rec: dict) -> dict:
     own = (rec.get("raw") or {}).get("ended_at_precision") if isinstance(rec.get("raw"), dict) else None
     if rec.get("ended_at") and own and own != rec.get("time_precision"):
         out["ended_at_precision"] = own
+    out.update(status_mod.start_bound(rec))          # re-review P1-6: only records whose start is an upper bound
     return out
 
 
 def index_obj(rec: dict) -> dict:
     o = {k: rec.get(k) for k in INDEX_FIELDS}
     o.update(bounds_precision(rec))
+    if rec.get("started_at_bound"):                  # slim rows of a start that is an upper bound (re-review P1-6)
+        o.update(started_at_bound=rec["started_at_bound"], started_at_kind=rec.get("started_at_kind"))
+    else:
+        o.update(status_mod.start_bound(rec))
     o["state"] = rec.get("state") or status_mod.event_state(rec)     # public_record's, read with raw
     for k in ("lat", "lon"):
         if o[k] is not None:

@@ -50,32 +50,35 @@ def main() -> int:
             if r.get("duplicate_of"):
                 left_out["the same report as another source's"] += 1
                 continue
-            name = (r.get("waterbody_text") or "").strip()
-            if not name:
-                left_out["no water named"] += 1
-                continue
-            if NOT_A_WATER.search(name):
-                left_out["a drain, outfall or street, not a water"] += 1
-                continue
-            if key(name) in held:
-                listed += 1
-                continue
-            lat, lon = r.get("lat"), r.get("lon")
-            here = S.point_county("KS", lat, lon)
-            county = (here[1] if here else None) or raw.get("county") or " or ".join(raw.get("counties") or []) or None
-            row = rows.setdefault((name, county), {"name": name, "reports": 0, "county": county, "points": [],
-                                                   "towns": [], "sources": {}, "open": 0})
-            row["reports"] += 1
-            row["sources"][sid] = row["sources"].get(sid, 0) + 1
-            if r.get("status") in ("advisory_active", "ongoing"):
-                row["open"] += 1
-            if lat is not None and lon is not None:
-                pt = [round(float(lat), 3), round(float(lon), 3)]
-                if pt not in row["points"] and len(row["points"]) < 5:
-                    row["points"].append(pt)
-            town = r.get("discharger_name")
-            if town and town not in row["towns"]:
-                row["towns"].append(town)
+            text = (r.get("waterbody_text") or "").strip()
+            named = raw.get("waters_named") if isinstance(raw.get("waters_named"), list) else None
+            # every water a report names counts (re-review P1-3: "Rock Creek; Missouri River" is two names)
+            for name in ([n.strip() for n in named if n and n.strip()] if text and named else [text]):
+                if not name:
+                    left_out["no water named"] += 1
+                    continue
+                if NOT_A_WATER.search(name):
+                    left_out["a drain, outfall or street, not a water"] += 1
+                    continue
+                if key(name) in held:
+                    listed += 1
+                    continue
+                lat, lon = r.get("lat"), r.get("lon")
+                here = S.point_county("KS", lat, lon)
+                county = (here[1] if here else None) or raw.get("county") or " or ".join(raw.get("counties") or []) or None
+                row = rows.setdefault((name, county), {"name": name, "reports": 0, "county": county, "points": [],
+                                                       "towns": [], "sources": {}, "open": 0})
+                row["reports"] += 1
+                row["sources"][sid] = row["sources"].get(sid, 0) + 1
+                if r.get("status") in ("advisory_active", "ongoing"):
+                    row["open"] += 1
+                if lat is not None and lon is not None:
+                    pt = [round(float(lat), 3), round(float(lon), 3)]
+                    if pt not in row["points"] and len(row["points"]) < 5:
+                        row["points"].append(pt)
+                town = r.get("discharger_name")
+                if town and town not in row["towns"]:
+                    row["towns"].append(town)
     for row in rows.values():
         row["places_from"] = sorted(row["sources"])
         row["towns"] = row["towns"][:4]
