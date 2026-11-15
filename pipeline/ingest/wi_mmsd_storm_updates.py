@@ -157,8 +157,14 @@ TYPE_WORDS = {"cso": re.compile(r"combined sewer overflows?|\bcsos?\b", re.I),
                                 r"sewage release", re.I),
               "plant_bypass": re.compile(r"treatment plant (?:wastewater )?spill|wastewater spill", re.I)}
 # a statement that something did not happen, might happen or was prevented is not a report of an overflow
-NEGATED = re.compile(r"\b(?:no|not|never|without|zero|none|neither|nor|if|may|might|could|would|possible|potential|"
-                     r"potentially|forecast\w*|expected|avoid\w*|prevent\w*)\b", re.I)
+# "May 1, 2027" is a month, not a modal (Astra re-review 2026-11-15 P1-1)
+NEGATED = re.compile(r"\b(?:no|not|never|without|zero|none|neither|nor|if|unless|may(?!,?\s+\d)|might|could|would|"
+                     r"should|shall|will|possible|potential|potentially|forecast\w*|expected|scheduled|anticipated|"
+                     r"projected|avoid\w*|prevent\w*)\b", re.I)
+# a sentence is read clause by clause: "a combined sewer overflow occurred ..., but no separate sewer overflow occurred"
+# reports the first and denies the second (Astra re-review 2026-11-15 P1-1)
+CLAUSE = re.compile(r",?\s+(?:but|however,?|whereas|while)\s+|;\s*|,?\s+and\s+(?=(?:no|not|there was no|there were no)\b)",
+                    re.I)
 # the post says the sewage reached no water ("No wastewater entered Lake Michigan or nearby rivers")
 NO_WATER = re.compile(r"\bno (?:wastewater|sewage|overflow)\b[^.]{0,40}\b(?:entered|reached|went into|flowed into)\b[^.]*", re.I)
 # contact and media lines: the people named in them are not kept
@@ -171,6 +177,7 @@ LOCAL = re.compile(r"local (?:and regional )?sewer systems?|systems? that are ow
 REPORT_CUE = re.compile(r"\b(?:took place|occurred|occured|occurring|started|began|led to|spill\w*|initiated|resulted|"
                         r"reporting|reported|"
                         r"regarding|estimated|volume)\b|:\s*\d", re.I)
+SPILL_CUE = re.compile(r"\b(?:spill\w*|releas\w*|discharg\w*|overflow\w*)\b", re.I)
 GENERIC_OVERFLOW = re.compile(r"\b(?:sewer )?overflows?\b", re.I)
 VOL = r"(?P<n>\d[\d,]*(?:\.\d+)?)\s*(?P<u>million|billion)?\s*gallons"
 LABELLED = re.compile(
@@ -344,6 +351,11 @@ def sentences(text: str) -> list[str]:
     return [_words(p) for p in parts if _words(p)]
 
 
+def clauses(sentence: str) -> list[str]:
+    """A sentence's clauses: each is read on its own for occurrence, denial and times."""
+    return [c.strip() for c in CLAUSE.split(sentence) if c and c.strip()]
+
+
 def _gal(m: re.Match) -> int:
     n = float(m.group("n").replace(",", ""))
     u = (m.group("u") or "").lower()
@@ -355,9 +367,12 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     per type, and the bases."""
     pub = stamp_time(doc.get("stamp"))
     ref = pub.date() if pub else _list_date(list_date)     # never the clock of the machine reading it
-    lines = doc.get("lines") or []
+    # the title repeated as the article's first line is not evidence: a stamped holding page keeps it, and a spill
+    # title would otherwise report itself (Astra re-review 2026-11-15 P1-1, P1-4)
+    tkey = _words(title).lower()
+    lines = [x for x in doc.get("lines") or [] if _words(x).lower() != tkey]
     body = "\n".join(lines)
-    sents = sentences(body)
+    sents = [c for x in sentences(body) for c in clauses(x)]
     lede = " ".join(sents[:3])
     per = period(title, ref) or period(lede, ref)
     facts = {"published": pub, "period": per, "types": {}, "local": [], "no_water": None}
@@ -412,9 +427,12 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                 if len(figs2) == 1 and not NEGATED.search(nxt) and not any(rx.search(nxt) for rx in TYPE_WORDS.values()):
                     x["volume"], x["volume_text"] = _gal(figs2[0]), _words(figs2[0].group(0))
     # a spill or release post whose title names it ("Treatment Plant Spill January 7, 2026")
+    # only when the article itself reports a spill or release (a title alone is no evidence: "No wastewater spill
+    # occurred" or a holding page makes no record; Astra re-review 2026-11-15 P1-1, P1-4)
+    body_says = next((x for x in sents if affirmative(x) and SPILL_CUE.search(x)), None)
     for t in ("plant_bypass", "sso"):
-        if TYPE_WORDS[t].search(title) and not NEGATED.search(title) and not types:
-            add(t, f"MMSD's post is titled \"{title}\"")
+        if TYPE_WORDS[t].search(title) and not NEGATED.search(title) and not types and body_says:
+            add(t, f"MMSD's post is titled \"{title}\" and reports: \"{body_says[:240]}\"")
     # the letters' own labels ("DNR Letter for: Combined Sewer Overflow / Separate Sewer Overflows")
     reported = any(affirmative(x) and (GENERIC_OVERFLOW.search(x) or any(r.search(x) for r in TYPE_WORDS.values()))
                    for x in sents[:6])

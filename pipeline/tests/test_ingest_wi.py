@@ -516,3 +516,24 @@ def test_r2_p2_10_a_timed_start_with_no_end_gets_14_days_from_its_report_as_the_
     t = (ROOT / "research" / "wi" / "state-text.md").read_text()
     assert "one with a time but no end shows caution for 14 days from its report" in t
     assert "under a Wisconsin permit" in t and "tribal land" in t
+
+
+# ---------------------------------------------------------------- Astra re-review 2026-11-15 (fix/wi-review)
+
+def test_r3_p1_1_occurrence_is_read_per_clause_and_a_month_is_not_a_modal():
+    t = "MMSD Storm Update May 1, 2027"
+    r = _recs(t, [t, "A combined sewer overflow occurred on May 1, 2027."])
+    assert set(r) == {"cso"} and r["cso"]["started_at"] == "2027-05-01"
+    r = _recs(t, [t, "A combined sewer overflow occurred on May 1, 2027, but no separate sewer overflow occurred."])
+    assert set(r) == {"cso"}
+    r = _recs(t, [t, "No combined sewer overflow occurred, but a separate sewer overflow occurred on May 1, 2027."])
+    assert set(r) == {"sso"} and r["sso"]["started_at"] == "2027-05-01"
+    assert _recs(t, [t, "A combined sewer overflow may occur on May 1, 2027."]) == {}
+    # the member municipalities' own overflows are theirs, not MMSD's
+    assert _recs(t, [t, "Separate sewer overflows were reported by local sewer systems that are owned by municipalities."]) == {}
+    # a spill title is not evidence: the body must report the spill
+    s = "Treatment Plant Spill May 1, 2027"
+    assert _recs(s, [s, "No wastewater spill occurred at the plant."]) == {}
+    assert _recs(s, [s, "Temporarily unavailable"]) == {}
+    assert set(_recs(s, [s, "Equipment failure led to an estimated 1,000 gallons of wastewater spilling onto land."])) \
+        == {"plant_bypass"}
