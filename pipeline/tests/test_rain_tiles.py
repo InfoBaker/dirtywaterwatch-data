@@ -537,3 +537,28 @@ def test_a_truncated_answer_keeps_its_hash_and_a_thin_grid_keeps_its_values(nati
     ev = e.value.evidence
     assert ev["catalog"] and ev["products"]["24"]["tiles"] and ev["hours"] == [24, 1]
     assert sum(1 for v in ev["values"].values() if v[0] is None) > 0.2 * len(ev["values"])
+
+
+def test_a_partial_fallback_then_a_discarded_grid_asks_each_point_once_within_one_cap(nation, monkeypatch):
+    # two tiles fail (8 points read by identify), then the check disagrees and the whole grid is discarded: the rest
+    # are read by identify within what is left of one cap, nobody twice; the unit is decided from the identify answers
+    # alone (one over the bound: millimetres) and each converted once; the raw file keeps the answers and the grid
+    monkeypatch.setattr(RF, "FALLBACK_MAX_CALLS", 20)
+    fake = TileFails(west_of=-100.0, scale=25.4, identify_off=0.5, identify_wet={(40.01, -100.01): 60.0})
+    out = RF.run(now=NOW, session=fake)
+    m, fb, r = out["mrms"], out["mrms"]["fallback"], out["requests"]
+    assert m["read"] == "point" and m["grid"]["used"] is False and m["grid"]["check"]["result"] == "differs"
+    assert fb["called"] == 20 and fb["points"] == m["readable"] and fb["read"] + fb["failed"] + fb["left"] == fb["points"]
+    assert fb["left"] == m["readable"] - 20 and r["mrms_identify"] == 20 + 1          # the 20 and the check, no repeat
+    raw = mrms_raw(nation)
+    assert len(raw["answers"]) == 20 and all(f"{p['lat']:.2f},{p['lon']:.2f}" in raw["answers"]
+                                              for p in out["points"].values() if p["lon"] < -100)
+    assert raw["grid_rejected"][0]["check"]["result"] == "differs" and raw["grid_rejected"][0]["products"]["24"]["tiles"]
+    u = m["units"]
+    assert u["units_read"] == "mm" and u["basis"] == "physical_bound" and "with_fallback" not in u
+    assert out["points"]["40.01,-100.01"]["mrms"]["h24"] == round((60.0 + 0.5) / 25.4, 2)
+    for k in raw["answers"]:
+        lat, lon = map(float, k.split(","))
+        if (lat, lon) != (40.01, -100.01):
+            assert out["points"][k]["mrms"]["h24"] == round(round(rain_at(lat, lon) * 25.4 + 0.5, 2) / 25.4, 2)
+    assert not m["readings_ok"] and RF.exit_code(out) == 1 and out["ok"] is False
