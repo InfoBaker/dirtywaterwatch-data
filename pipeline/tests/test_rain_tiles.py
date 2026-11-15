@@ -421,14 +421,29 @@ class NoData(TileFails):
         return r
 
 
+def read_an_hour_before(path: Path) -> dict:
+    """The rainfall.json at path as if its readings were the previous hour's (fetched and valid an hour earlier)."""
+    d = json.loads(path.read_text())
+    for p in d["points"].values():
+        if p.get("mrms"):
+            p["mrms"].update(fetched_at=RF.iso(NOW - timedelta(hours=1)), valid_time=RF.iso(VALID - timedelta(hours=1)))
+    path.write_text(json.dumps(d))
+    return d
+
+
 def test_a_fallback_answer_of_no_data_is_not_a_fresh_reading(nation):
+    # the points were read the hour before (MRMS -3 at them now is an outage, not a place outside radar coverage)
+    RF.run(now=NOW, session=FakeNOAA())
+    first = read_an_hour_before(nation["tmp"] / "rainfall.json")
     out = RF.run(now=NOW, session=NoData(west_of=-100.0))
     m = out["mrms"]
     west = [k for k, p in out["points"].items() if p["lon"] < -100]
-    assert all("mrms" not in out["points"][k] for k in west)              # nothing stored for them
+    for k in west:                                                        # nothing new stored for them, not fresh
+        assert out["points"][k]["mrms"] == first["points"][k]["mrms"] and not RF.is_fresh(out["points"][k]["mrms"], NOW)
+        assert out["points"][k]["no_coverage"]["read_before"] is True
     assert {m["failed"][k] for k in west} == {"no 24-hour value in the answer"}
     assert m["fresh"] == m["readable"] - 8 and m["fallback"]["read"] == 0 and m["fallback"]["failed"] == 8
-    assert out["ok"] is False
+    assert m["outside_coverage"] == [] and out["ok"] is False
 
 
 def test_a_set_read_by_point_with_no_data_fails_the_stage(tmp_path, monkeypatch):
@@ -441,9 +456,12 @@ def test_a_set_read_by_point_with_no_data_fails_the_stage(tmp_path, monkeypatch)
     monkeypatch.setattr(RF, "GAUGE_CACHE", tmp_path / "gauges.json")
     monkeypatch.setattr(RF, "save_raw", lambda *a, **k: None)
     monkeypatch.setattr(RF.time, "sleep", lambda s: None)
+    RF.run(now=NOW, session=FakeNOAA(), qpf=False)
+    read_an_hour_before(tmp_path / "rainfall.json")                   # read the hour before
     out = RF.run(now=NOW, session=NoData(west_of=0.0), qpf=False)     # every export fails, identify answers no data
     m = out["mrms"]
     assert m["fresh"] == 0 and not m["readings_ok"] and RF.exit_code(out) == 1 and out["ok"] is False
+    assert m["outside_coverage"] == [] and len(m["failed"]) == 10
 
 
 def test_a_reading_of_an_old_product_is_not_fresh(nation):
@@ -532,8 +550,9 @@ def test_a_truncated_answer_keeps_its_hash_and_a_thin_grid_keeps_its_values(nati
     class Thin(FakeNOAA):                # no data at every other row: the grid has no value at most points
         def raw(self, lat, lon, h):
             return -3.0 if round(lat * 100) % 2 else super().raw(lat, lon, h)
-    with pytest.raises(RF.GridReadError) as e:
-        RF.read_grid(RF.CountingSession(Thin()), RF.group_points(nation["outfalls"]), [1, 24])
+    pts = RF.group_points(nation["outfalls"])
+    with pytest.raises(RF.GridReadError) as e:      # points read before: no coverage at them now is an outage
+        RF.read_grid(RF.CountingSession(Thin()), pts, [1, 24], seen=set(pts))
     ev = e.value.evidence
     assert ev["catalog"] and ev["products"]["24"]["tiles"] and ev["hours"] == [24, 1]
     assert sum(1 for v in ev["values"].values() if v[0] is None) > 0.2 * len(ev["values"])
