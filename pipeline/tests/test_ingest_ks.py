@@ -90,7 +90,7 @@ def test_leavenworth_refused_page_is_a_failed_run(monkeypatch, tmp_path):
     common.write_events(L.SOURCE_ID, [{"event_id": "x", "raw": {}}])
     assert L.main([]) == 1
     out = json.loads((tmp_path / f"{L.SOURCE_ID}.json").read_text())
-    assert out["ok"] is False and out["records"] == [{"event_id": "x", "raw": {}}]
+    assert out["ok"] is False and [r["event_id"] for r in out["records"]] == ["x"]     # kept, scrubbed (verification 3)
 
 
 # ---------------------------------------------------------------- KDHE stream advisories
@@ -928,3 +928,216 @@ def test_leavenworth_ids_do_not_depend_on_which_pages_are_read_together():
     assert by["2026-05-27T15:50:00-05:00"]["ended_at"] == "2026-05-27T17:00:00-05:00"
     assert by["2026-05-27T19:15:00-05:00"]["ended_at"] is None
     assert "1234" not in json.dumps(cor) and "5678" not in json.dumps(cor)
+
+
+def _kdhe_red(tmp_path, recs, now):
+    """The red KDHE advisory points and red intervals after `now` with Kansas counted live."""
+    from datetime import datetime
+    from build import status as S
+    waters = dict([_line("example-creek-ks", "Example Creek", "KS", [[-95.8, 39.0], [-95.7, 39.05]])])
+    st = _mo_ks_build(tmp_path, {A.SOURCE_ID: recs}, waters, now=now)
+    t = datetime.fromisoformat(now.replace("Z", "+00:00"))
+    pts = [p for p in st["advisory_points"] if p["event_id"].startswith(A.SOURCE_ID) and p["status"] == "red"]
+    ivs = [iv for r in recs for iv in S.event_intervals(r, "KS", t) if iv["color"] == "red"
+           and (iv["end"] is None or iv["end"] > t)]
+    return pts, ivs
+
+
+def test_kdhe_every_order_of_listing_rescission_and_relisting_ends_red_after_the_rescission(tmp_path):
+    """Verification 3 P1-1: a water named, no longer named, then named again in a read that also holds its rescission
+    never reopens; the same when the rescission was read while the water was dropped (and later leaves the feed);
+    a period first seen after a rescission published earlier ends where it starts; another county's rescission does
+    not block; repeated reads keep all of it, through the status build with Kansas live."""
+    a = ("Stream Advisory Issued for Example Creek in Shawnee County", "70", "Mon, 02 Nov 2026 09:00:00 -0600", "Sewage.")
+    b = ("Stream Advisory Issued for Sample Creek in Shawnee County", "70", "Mon, 02 Nov 2026 09:00:00 -0600", "Sewage.")
+    lift = ("Stream Advisory Rescinded for Example Creek in Shawnee County", "71", "Tue, 03 Nov 2026 09:00:00 -0600",
+            "Rescinded.")
+    other = ("Stream Advisory Rescinded for Example Creek in Douglas County", "72", "Tue, 03 Nov 2026 09:00:00 -0600",
+             "Rescinded.")
+    nolift = ("Stream Advisory Rescinded for Example Creek", "73", "Tue, 03 Nov 2026 09:00:00 -0600", "Rescinded.")
+    r1, _ = A.run(_feed(a), [], "2026-11-02T18:00:00Z")
+    r2, _ = A.run(_feed(b), r1, "2026-11-02T19:00:00Z")
+    held = json.loads(json.dumps(r2))
+    ex = lambda rs: sorted((x for x in rs if x["raw"]["waters"] == ["Example Creek"]), key=lambda x: x["event_id"])
+
+    # 1. named again in the same read as its rescission, then read again and again (with and without the rescission)
+    r3, s3 = A.run(_feed(a, lift), json.loads(json.dumps(held)), "2026-11-04T18:00:00Z")
+    r4, _ = A.run(_feed(a, lift), r3, "2026-11-04T19:00:00Z")
+    r5, s5 = A.run(_feed(a), r4, "2026-11-05T18:00:00Z")
+    assert len(ex(r5)) == 1 and ex(r5)[0]["status"] == "advisory_lifted" and s5["open"] == 0
+    assert ex(r5)[0]["ended_at"] == "2026-11-02T19:00:00Z" and ex(r5)[0]["raw"]["rescinded_by"]["link"].endswith("71")
+    assert s3["rescissions_without_issue"] == 0 and s3["lifted"] == 0
+    for rs, now in ((r3, "2026-11-04T18:30:00Z"), (r5, "2026-11-05T18:30:00Z")):
+        assert _kdhe_red(tmp_path, rs, now) == ([], [])
+
+    # 2. the rescission read while the water was dropped, then it leaves the feed, then the water is named again
+    q3, sq3 = A.run(_feed(b, lift), json.loads(json.dumps(held)), "2026-11-03T18:00:00Z")
+    assert sq3["rescissions_without_issue"] == 0
+    q4, _ = A.run(_feed(a), q3, "2026-11-20T18:00:00Z")
+    q5, sq5 = A.run(_feed(a), q4, "2026-11-21T18:00:00Z")
+    assert len(ex(q5)) == 1 and sq5["open"] == 0
+    assert _kdhe_red(tmp_path, q5, "2026-11-21T18:30:00Z") == ([], [])
+
+    # 3. a period first seen after a rescission published before that read, the rescission read only later
+    p3, _ = A.run(_feed(a), json.loads(json.dumps(held)), "2026-11-03T16:00:00Z")      # 10:00 -0600, after 09:00
+    p2 = [x for x in ex(p3) if x["raw"].get("period_of")][0]
+    assert p2["status"] == "advisory_active"
+    p4, _ = A.run(_feed(a, lift), p3, "2026-11-03T18:00:00Z")
+    p2 = [x for x in ex(p4) if x["raw"].get("period_of")][0]
+    assert p2["status"] == "advisory_lifted" and p2["ended_at"] == p2["started_at"] == "2026-11-03T16:00:00Z"
+    p5, s5 = A.run(_feed(a, lift), p4, "2026-11-03T19:00:00Z")
+    assert len(ex(p5)) == 2 and s5["open"] == 0
+    assert _kdhe_red(tmp_path, p5, "2026-11-03T19:30:00Z") == ([], [])
+
+    # 4. another county's rescission does not block the new period; a county-less one for a water held in two
+    # counties lifts none (it is kept in meta, ambiguous)
+    o3, _ = A.run(_feed(a, other), json.loads(json.dumps(held)), "2026-11-04T18:00:00Z")
+    assert [x["status"] for x in ex(o3)] == ["advisory_lifted", "advisory_active"]
+    pts, ivs = _kdhe_red(tmp_path, o3, "2026-11-04T18:30:00Z")
+    assert len(pts) == 1 and ivs
+    d = ("Stream Advisory Issued for Example Creek in Douglas County", "74", "Mon, 02 Nov 2026 10:00:00 -0600", "x")
+    n1, _ = A.run(_feed(a, d), [], "2026-11-02T18:00:00Z")
+    n2, sn2 = A.run(_feed(a, d, nolift), n1, "2026-11-03T18:00:00Z")
+    assert all(x["status"] == "advisory_active" for x in n2) and sn2["rescissions_ambiguous"] == 1
+
+    # 5. issued and rescinded, then dropped and named again: stays lifted at KDHE's time
+    k1, _ = A.run(_feed(a, lift), [], "2026-11-03T18:00:00Z")
+    k2, _ = A.run(_feed(b, lift), k1, "2026-11-03T19:00:00Z")
+    k3, sk3 = A.run(_feed(a), k2, "2026-11-04T18:00:00Z")
+    assert len(ex(k3)) == 1 and ex(k3)[0]["ended_at"] == "2026-11-03T09:00:00-06:00" and sk3["open"] == 0
+
+
+def test_leavenworth_every_failure_path_saves_and_prints_no_address_or_name(tmp_path, monkeypatch, capsys):
+    """Verification 3 P1-2: a connection, retry, proxy, TLS, timeout, cut-off or refused request whose message carries a
+    bare page path ("Max retries exceeded with url: /publicworks/page/...-1234-example-court-by-jane-example"), at the
+    index, a year page or an overflow page, a parse error naming the page and an unreadable saved page: the whole
+    events file and stderr keep no house number, name or path; nothing reaches the raw folder; every earlier record is
+    kept, an older save's house number and name scrubbed on the failed path too."""
+    import common
+    import requests
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    stem = "sanitary-sewer-overflow-reported-may-27-2026-1234-example-court-by-jane-example"
+    rel = "/publicworks/page/" + stem
+    msg = (f"HTTPSConnectionPool(host='www.leavenworthks.gov', port=443): Max retries exceeded with url: {rel} "
+           "(Caused by NewConnectionError('x'))")
+    resp = requests.Response()
+    resp.status_code, resp.url = 403, L.BASE + rel
+
+    class Odd(requests.ConnectionError):
+        pass
+    errors = [requests.ConnectionError(msg), requests.exceptions.SSLError(msg), requests.exceptions.ProxyError(msg),
+              requests.exceptions.ReadTimeout(msg), requests.exceptions.ConnectTimeout(msg),
+              requests.exceptions.RetryError(msg), requests.exceptions.ChunkedEncodingError(msg),
+              requests.exceptions.TooManyRedirects(msg), requests.exceptions.InvalidURL(rel),
+              requests.HTTPError(f"403 Client Error: Forbidden for url: {rel}", response=resp), Odd(msg),
+              requests.RequestException(msg)]
+    idx = '<a href="/publicworks/page/2026-sanitary-sewer-overflow-transparency-report">2026</a>'
+    yr = f'<a href="{rel}">x</a>'
+    old = {"event_id": f"{L.SOURCE_ID}:old", "source_record_id": "sanitary-sewer-overflow-reported-may-1-2020-example-st",
+           "outfall_name": "1234 Example St by Jane Example", "advice_text": "Call Jane Example at 913-555-0100.",
+           "raw": {"title": "Sanitary Sewer Overflow Reported on May 1, 2020 at 1234 Example St by Jane Example"}}
+    bad = ["1234", "Jane", "jane", "555-0100", stem, "overflow-reported-may-27", "Max retries", "HTTPSConnectionPool"]
+    for stage in ("index", "year", "page"):
+        for err in errors:
+            common.write_events(L.SOURCE_ID, [json.loads(json.dumps(old))], meta={"credit": "x"})
+
+            def get(u, _e=err, _s=stage, **k):
+                if u == L.INDEX and _s != "index":
+                    return type("R", (), {"text": idx, "raise_for_status": lambda self: None})()
+                if u.endswith("transparency-report") and _s == "page":
+                    return type("R", (), {"text": yr, "raise_for_status": lambda self: None})()
+                raise _e
+            monkeypatch.setattr(L.requests, "get", get)
+            assert L.main([]) == 1, (stage, err)
+            blob = (tmp_path / f"{L.SOURCE_ID}.json").read_text()
+            doc = json.loads(blob)
+            assert doc["ok"] is False and len(doc["records"]) == 1 and doc["meta"] == {"credit": "x"}
+            assert doc["error"].split(":")[0] in L.ERROR_TEXT, doc["error"]
+            printed = capsys.readouterr().err
+            for b in bad:
+                assert b not in blob and b not in printed, (stage, type(err).__name__, b)
+    assert "HTTP 403" in L.safe_error(errors[9]) and L.safe_error(errors[10]).startswith("ConnectionError:")
+    # a parse error that names the page, and a saved page that cannot be read
+    monkeypatch.setattr(L, "record", lambda path, *a, **k: (_ for _ in ()).throw(ValueError(f"bad page {path}")))
+    d = tmp_path / "pages"
+    d.mkdir()
+    (d / f"{stem}.html").write_text(_page("Sanitary Sewer Overflow Reported on May 27, 2026", "x"))
+    assert L.main(["--dir", str(d)]) == 1
+    (d / f"{stem}.html").unlink()
+    (d / f"{stem}.html").mkdir()
+    monkeypatch.undo()
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    assert L.main(["--dir", str(d)]) == 1
+    blob, printed = (tmp_path / f"{L.SOURCE_ID}.json").read_text(), capsys.readouterr().err
+    for b in bad:
+        assert b not in blob and b not in printed
+    assert len(json.loads(blob)["records"]) == 1 and not (tmp_path / "raw").exists()
+
+
+def test_leavenworth_same_block_pages_keep_their_own_ids_in_every_order(tmp_path, monkeypatch):
+    """Verification 3 P2-1: 1234 and 1256 Example Court on one day share the hundred block (b1200). Read together, the
+    second alone, on separate runs in either order, one disappearing, one corrected, or through main across runs: two
+    records, each page's id and times its own; a save from before the id map keeps each page on its own record."""
+    import common
+    pa = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2026-1234-example-court"
+    pb = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2026-1256-example-court"
+    ha = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 1234 Example Court",
+               "At 3:50 p.m. May 27, 2026, staff were notified.")
+    hb = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 1256 Example Court",
+               "At 7:15 p.m. May 27, 2026, staff were notified.")
+    starts = lambda rs: {r["event_id"]: r["started_at"] for r in rs}
+    ida: dict = {}
+    both, _ = L.run({pa: ha, pb: hb}, [], AT, ids=ida)
+    want = starts(both)
+    assert len(want) == 2 and sorted(want.values()) == ["2026-05-27T15:50:00-05:00", "2026-05-27T19:15:00-05:00"]
+    b_only, _ = L.run({pb: hb}, both, "2026-11-15T00:00:00Z", ids=ida)              # the second alone
+    assert starts(b_only) == want
+    a_gone, _ = L.run({pb: hb}, b_only, "2026-11-16T00:00:00Z", ids=ida)            # the first not read again
+    assert starts(a_gone) == want
+    for order in ((pa, pb), (pb, pa)):                                              # separate runs, either order
+        m: dict = {}
+        sep, _ = L.run({order[0]: {pa: ha, pb: hb}[order[0]]}, [], AT, ids=m)
+        sep, _ = L.run({order[1]: {pa: ha, pb: hb}[order[1]]}, sep, "2026-11-15T00:00:00Z", ids=m)
+        sep, _ = L.run({order[0]: {pa: ha, pb: hb}[order[0]]}, sep, "2026-11-16T00:00:00Z", ids=m)
+        assert len(sep) == 2 and sorted(starts(sep).values()) == sorted(want.values())
+        assert len({r["event_id"] for r in sep}) == 2
+    fixed = hb.replace("At 7:15 p.m.", "At 7:45 p.m.")                              # a correction to the second
+    cor, _ = L.run({pb: fixed}, both, "2026-11-17T00:00:00Z", ids=ida)
+    by = starts(cor)
+    assert set(by) == set(want) and sorted(by.values()) == ["2026-05-27T15:50:00-05:00", "2026-05-27T19:45:00-05:00"]
+    # a save from before the id map (both read together under base and -n2): each page finds its own record
+    legacy, _ = L.run({pb: hb}, json.loads(json.dumps(both)), "2026-11-18T00:00:00Z", ids={})
+    assert starts(legacy) == want
+    # through main: the id map persists between runs and holds no house number
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    for pages in ({pa: ha}, {pb: hb}, {pb: hb}, {pa: ha, pb: hb}):
+        d = tmp_path / "pages"
+        if d.exists():
+            for f in d.iterdir():
+                f.unlink()
+        d.mkdir(exist_ok=True)
+        for p, h in pages.items():
+            (d / (p.rsplit("/", 1)[-1] + ".html")).write_text(h)
+        assert L.main(["--dir", str(d)]) == 0
+    doc = json.loads((tmp_path / f"{L.SOURCE_ID}.json").read_text())
+    assert sorted(r["started_at"] for r in doc["records"]) == sorted(want.values())
+    priv = L.ids_path().read_text()
+    assert L.ids_path().parent != tmp_path and "1234-" not in priv and "1256-" not in priv
+    assert "1234" not in json.dumps(doc) and "1256" not in json.dumps(doc)
+
+
+def test_leavenworth_next_day_stop_follows_the_sentence_date_and_never_precedes_the_start():
+    """Verification 3 P2-2's sibling: "On May 27 ... it stopped the next day at 1:00 p.m." ends May 28, never May 27
+    before the start; "the following morning" likewise; an end that would fall before the start is no end."""
+    t = "Sanitary Sewer Overflow Reported on May 27, 2020 at Example Court"
+    n = "At 3:50 p.m. May 27, 2020, staff were notified of sewage in Five-Mile Creek. "
+    path = "/x/sanitary-sewer-overflow-reported-may-27-2020-example-court"
+    end = lambda b: L.record(path, _page(t, n + b), AT)["ended_at"]
+    assert end("On May 27, 2020 the overflow was contained and it stopped the next day at 1:00 p.m.") == \
+        "2020-05-28T13:00:00-05:00"
+    assert end("The overflow stopped the following morning at 9:00 a.m.") == "2020-05-28T09:00:00-05:00"
+    assert end("The overflow stopped the next day at 4:00 p.m.") == "2020-05-28T16:00:00-05:00"
+    assert end("On May 27, 2020 the overflow stopped at 1:00 p.m.") is None
