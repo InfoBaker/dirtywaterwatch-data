@@ -296,7 +296,7 @@ def main(argv=None) -> int:
             feed = r.content
             save_raw(SOURCE_ID, safe_feed(feed), "json")
         recs, stats = run(feed, prev, now_iso())
-    except (requests.RequestException, OSError, ET.ParseError) as e:
+    except (requests.RequestException, OSError, ET.ParseError, ValueError, KeyError, TypeError, IndexError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1

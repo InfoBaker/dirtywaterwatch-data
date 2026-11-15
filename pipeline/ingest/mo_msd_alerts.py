@@ -265,11 +265,13 @@ def main(argv=None) -> int:
             pages = [json.loads(Path(a).read_text()) for a in argv[argv.index("--file") + 1:] if not a.startswith("--")]
         else:
             pages = fetch("--backfill" in argv)
-    except (requests.RequestException, OSError, ValueError) as e:
+        # parsing and reconciliation inside the handler: a post without its publication time, or a malformed one,
+        # fails the run with the earlier records kept, never escapes without a health write (re-review P2-4)
+        recs, stats = run(pages, prev, now_iso())
+    except (requests.RequestException, OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
-    recs, stats = run(pages, prev, now_iso())
     out = write_events(SOURCE_ID, recs, meta={
         "registry_ids": [SOURCE_ID], "url": HOME, "api": API, **stats,
         "credit": "Metropolitan St. Louis Sewer District (MSD Project Clear), alerts and news releases",
