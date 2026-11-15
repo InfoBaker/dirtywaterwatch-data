@@ -46,6 +46,8 @@ fetch:
     authority: {const: "Arkansas Division of Environmental Quality (harmful algal bloom advisories)"}
     source_url: {const: "https://adeq.state.ar.us/water/planning/hab/"}
   transform: "ingest.ar_transforms.ar_hab_record"
+  # an advisory that leaves the file with no lift date ends at that read, at poll precision (raw.ended_at_precision)
+  after_history: "ingest.ar_transforms.ar_hab_poll_ends"
   dedupe: {repeats: suffix}
   history:
     keep_missing: true
