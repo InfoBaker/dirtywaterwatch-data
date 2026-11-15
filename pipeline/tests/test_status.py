@@ -717,6 +717,150 @@ def test_reach_cuts_at_tidal_lake_estuary_and_the_cap():
     assert [x["comid"] for x in segs] == [1, 2, 3] and why == "end_of_trace"
 
 
+def test_tidal_river_switch_off_changes_nothing():
+    """reach.tidal_river off (the default, and the rules file as committed): every cut as before the switch."""
+    import json as _json
+    from common import DATA_DIR
+    rules = _json.loads((DATA_DIR / "rules.json").read_text())
+    assert R.tidal_river_on(rules) is False and R.tidal_river_on({}) is False
+    assert R.tidal_river_on({"reach": {"tidal_river": {"enabled": "yes"}}}) is False      # only a real true turns it on
+    lines = [fl(1, -72.0, -71.9), fl(2, -71.9, -71.8), fl(3, -71.8, -71.7)]
+    worlds = [{1: attrs(1, 30), 2: attrs(2, 20, tidal=1), 3: attrs(3, 10)},
+              {1: attrs(1, 30), 2: attrs(2, 20, tidal=1, wb=7, ftype=460), 3: attrs(3, 10, tidal=1)},
+              {1: attrs(1, 30, tidal=1), 2: attrs(2, 20), 3: attrs(3, 10)},
+              {1: attrs(1, 30), 2: attrs(2, 20, wb=99, ftype=493), 3: attrs(3, 10)},
+              {1: attrs(1, 30), 2: attrs(2, 20), 3: attrs(3, 10)}]
+    for w in worlds:
+        for cap in (40, 12, 5):
+            assert R.build_segments(lines, w, cap) == R.build_segments(lines, w, cap, tidal_river=False)
+            segs, _ = R.build_segments(lines, w, cap)
+            assert not any("tidal_river" in sg for sg in segs)
+            band = R.travel(segs, 0.5)
+            assert not any("tidal_river" in b for b in band)
+    segs, why = R.build_segments(lines, worlds[1], 40)
+    assert why == "tidal" and [x["comid"] for x in segs] == [1]
+
+
+def test_tidal_river_switch_on_goes_on_to_the_cap_and_still_stops_at_estuary_coast_and_lake():
+    lines = [fl(1, -72.0, -71.9), fl(2, -71.9, -71.8), fl(3, -71.8, -71.7), fl(4, -71.7, -71.6)]
+    river = lambda c, h, **k: attrs(c, h, tidal=1, **k)        # noqa: E731
+    # a tidal river (no area, or a StreamRiver area 460) goes on, marked, to the cap
+    w = {1: attrs(1, 40), 2: river(2, 30), 3: river(3, 20, wb=7, ftype=460), 4: river(4, 10)}
+    segs, why = R.build_segments(lines, w, 20, tidal_river=True)
+    assert why == "cap_km" and abs(segs[-1]["km_end"] - 20) < 0.01 and [x["comid"] for x in segs] == [1, 2, 3]
+    assert [bool(x.get("tidal_river")) for x in segs] == [False, True, True]
+    segs, why = R.build_segments(lines, w, 40, tidal_river=True)
+    assert why == "end_of_trace" and len(segs) == 4 and all(x.get("tidal_river") for x in segs[1:])
+    # still cut at an estuary, the coastline, a lake or reservoir, and tidal water that is not a river channel
+    for bad, want in ((river(3, 20, wb=9, ftype=493), "estuary"), ({**river(3, 20), "fcode": 56600}, "estuary"),
+                      (river(3, 20, wb=9, ftype=390), "lake_or_reservoir"),
+                      (river(3, 20, wb=9, ftype=436), "lake_or_reservoir"),
+                      (river(3, 20, wb=9, ftype=445), "tidal"), (river(3, 20, wb=9, ftype=466), "tidal")):
+        segs, why = R.build_segments(lines, {**w, 3: bad}, 40, tidal_river=True)
+        assert why == want and [x["comid"] for x in segs] == [1, 2], (bad, why)
+    # a trace that starts in tidal water is unchanged (no stretch)
+    segs, why = R.build_segments(lines, {**w, 1: river(1, 40)}, 40, tidal_river=True)
+    assert why == "tidal_at_outfall" and segs == []
+    # unknown attributes still stop it
+    segs, why = R.build_segments(lines, {**w, 3: {}}, 40, tidal_river=True)
+    assert why == "attributes unavailable" and len(segs) == 2
+
+
+def test_tidal_segments_carry_no_travel_time_and_leave_the_river_above_unchanged():
+    lines = [fl(1, -72.0, -71.9), fl(2, -71.9, -71.8), fl(3, -71.8, -71.7)]
+    w = {1: attrs(1, 30), 2: attrs(2, 20, tidal=1), 3: attrs(3, 10, tidal=1)}
+    w[2]["slope"] = w[3]["slope"] = 1e-5                     # NHDPlus floors the tidal slope
+    on, _ = R.build_segments(lines, w, 40, tidal_river=True)
+    off, _ = R.build_segments(lines, w, 40)
+    band_on, band_off = R.travel(on, 0.6), R.travel(off, 0.6)
+    assert band_on[0] == band_off[0] and band_on[0]["hours_typical"] > 0      # the river above: the same time
+    for b in band_on[1:]:
+        assert b["tidal_river"] is True and b["hours_typical"] is None and b["hours_fast"] is None
+        assert b["hours_leading_edge"] is None and b["velocity_peak_ms"] is None
+    assert band_on[1]["hours_typical_start"] == band_on[0]["hours_typical"]   # reached at the head of tide
+
+
+def test_tidal_river_cache_reads_as_the_rule_off_trace_and_is_due_when_on(tmp_path, monkeypatch):
+    lines = [fl(1, -72.0, -71.9), fl(2, -71.9, -71.8), fl(3, -71.8, -71.7)]
+    w = {1: attrs(1, 30), 2: attrs(2, 20, tidal=1), 3: attrs(3, 10, tidal=1)}
+    on, why_on = R.build_segments(lines, w, 40, tidal_river=True)
+    off, why_off = R.build_segments(lines, w, 40)
+    rec = {"key": "X-1", "segments": on, "cut_reason": why_on, "length_km": on[-1]["km_end"], "tidal_river": True}
+    back = R.without_tidal_river(rec)
+    assert back["segments"] == off and back["cut_reason"] == why_off == "tidal" and "tidal_river" not in back
+    assert back["length_km"] == off[-1]["km_end"]
+    plain = {"key": "Y-1", "segments": off, "cut_reason": "tidal", "length_km": off[-1]["km_end"]}
+    assert R.without_tidal_river(plain) is plain
+    # load_reaches: off drops the tidal stretch, on keeps it
+    monkeypatch.setattr(R, "REACH_DIR", tmp_path)
+    (tmp_path / "X-1.json").write_text(json.dumps(rec))
+    monkeypatch.setattr(R, "tidal_river_on", lambda rules=None: False)
+    assert R.load_reaches()["X-1"] == back
+    monkeypatch.setattr(R, "tidal_river_on", lambda rules=None: True)
+    assert R.load_reaches()["X-1"] == rec
+    # plan(): a trace cut at the head of tide before the rule is due when it is on, and only then
+    now = NOW
+    d = {**plain, "lat": 42.0, "lon": -72.0, "fetched_at": iso(NOW - H)}
+    c = {"key": "Y-1", "lat": 42.0, "lon": -72.0, "sources": ["registry"]}
+    assert R.plan([c], {"Y-1": d}, now)[0] == []
+    assert R.plan([c], {"Y-1": d}, now, tidal_river=True)[0] == [c]
+    assert R.plan([c], {"Y-1": {**d, "tidal_river": True}}, now, tidal_river=True)[0] == []
+
+
+def test_tidal_segment_label_and_stop_text_follow_the_record(monkeypatch):
+    import json as _json
+    from common import DATA_DIR
+    from export import build as X
+    rules = _json.loads((DATA_DIR / "rules.json").read_text())
+    assert X.TIDAL_RIVER_TEXT == rules["reach"]["tidal_river"]["label"]
+    lines = [fl(1, -72.0, -71.9), fl(2, -71.9, -71.8), fl(3, -71.8, -71.7)]
+    w = {1: attrs(1, 30), 2: attrs(2, 20, tidal=1), 3: attrs(3, 10, tidal=1, wb=9, ftype=445)}
+    segs, why = R.build_segments(lines, w, 40, tidal_river=True)
+    assert why == "tidal" and [bool(x.get("tidal_river")) for x in segs] == [False, True]
+    r = {**_reach(), "segments": segs, "cut_reason": why, "length_km": segs[-1]["km_end"], "tidal_river": True}
+    monkeypatch.setattr(R, "load_reaches", lambda: {r["key"]: r})
+    monkeypatch.setattr(R, "cap_km", lambda rules=None: 40.0)
+    band = R.travel(segs, 0.5)
+    st = {"reach_events_active": [{"event_id": "ma-test:r", "reach": r["key"], "status": "red", "rule": "ongoing",
+                                   "short": "CSO ongoing", "hours_since_start": 3.0, "gauge": None,
+                                   "flow_cfs": None, "flow_time": None, "flow_basis": "x",
+                                   "segments": [{"i": i, **b, "reached_fast": True, "reached_typical": True}
+                                                for i, b in enumerate(band)]}],
+          "reaches": {r["key"]: {"status": "red"}}}
+    feats, paths = X.reach_features(st, {"ma-test:r": {"started_at": iso(NOW - 3 * H)}})
+    seg = [f["properties"] for f in feats if f["properties"]["feature"] == "segment"]
+    assert "would typically reach here" in seg[0]["label"] and "tidal_river" not in seg[0]
+    assert seg[1]["tidal_river"] is True and X.TIDAL_RIVER_TEXT in seg[1]["label"]
+    assert seg[1]["arrival_hours_typical"] is None and "not necessarily safe outside the line" in seg[1]["label"]
+    stop = [f["properties"] for f in feats if f["properties"]["feature"] == "stop"][0]
+    assert stop["label"].startswith("Below this point the tidal water is no longer a river channel")
+    p = paths[0]["properties"]
+    assert p["tidal_from_km"] == segs[1]["km_start"] and p["tidal_label"] == X.TIDAL_RIVER_TEXT
+    assert p["stop_label"] == stop["label"]
+    # a record cut at the head of tide under the old rule keeps the old words, and no tidal properties
+    old = {**_reach(), "cut_reason": "tidal"}
+    monkeypatch.setattr(R, "load_reaches", lambda: {old["key"]: old})
+    _, paths = X.reach_features({"reaches": {}}, {})
+    assert paths[0]["properties"]["stop_label"].startswith("Below this point the river is tidal")
+    assert "tidal_from_km" not in paths[0]["properties"] and "tidal_label" not in paths[0]["properties"]
+
+
+def test_out_rules_read_as_the_tidal_switch_stands():
+    import json as _json
+    from common import DATA_DIR
+    from export import build as X
+    rules = _json.loads((DATA_DIR / "rules.json").read_text())
+    tr = rules["reach"]["tidal_river"]
+    assert tr["enabled"] is False and tr["rationale"] and "40 kilometres" in tr["cap_rationale"]
+    out = X.tidal_river_rules(rules)
+    before = {**rules, "reach": {k: v for k, v in rules["reach"].items() if k != "tidal_river"}}
+    assert _json.dumps(out, indent=1, ensure_ascii=False) == _json.dumps(before, indent=1, ensure_ascii=False)
+    assert "tidal water" in out["reach"]["cap_rationale"] and out["reach"]["stop_at"][0] == "tidal"
+    on = X.tidal_river_rules({**rules, "reach": {**rules["reach"], "tidal_river": {**tr, "enabled": True}}})
+    assert on["reach"]["cap_rationale"] == tr["cap_rationale"] and on["reach"]["stop_at"] == tr["stop_at"]
+    assert on["reach"]["tidal_river"]["label"] == tr["label"] and "tidal_river" in on["reach"]
+
+
 def test_jobson_matches_the_springfield_worked_example():
     # downstream-approach.md 5.4: Thompsonville DA 25,019 km2, Qa 18,254 cfs, slope 2.56e-4;
     # downtown outfall 013 to the state line 8.6 km: ~5.0 h (3.0) at 6,920 cfs, ~2.6 h (1.7) at 30,000 cfs
