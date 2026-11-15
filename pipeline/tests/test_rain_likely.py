@@ -384,7 +384,7 @@ def test_the_label_follows_the_basis_of_the_amount(case, label, kind):
     assert r["rule_applied"]["tail_hours"] == 48 and r["rule_applied"]["trigger_basis"] == case
     assert r["label"] == label and r["trigger_basis"] == case and r["short"].startswith(label)
     assert r["rain"]["trigger_basis"] == case and r["rain"]["label"] == label and r["rain"]["threshold_kind"] == kind
-    assert ("(this site's default)" in r["short"]) is (case == "default")
+    assert ("(our default)" in r["short"]) is (case == "default")
     assert pond["reason_short"].startswith(label) and river["reasons"][0]["trigger_basis"] == case
     assert pond["rain"]["trigger_basis"] == case and pond["rain"]["label"] == label
     assert pond["rain"]["permits"][0]["trigger_basis"] == case
@@ -480,7 +480,7 @@ def test_coverage_says_possible_where_only_the_default_applies():
         "RI0100315": {**row, "state": "RI", "threshold_in": 0.5, "threshold_kind": "state", "trigger_basis": "state",
                       "waters": ["e-ri"]}}})
     assert cov["MI"]["sentence"].startswith('The "discharge possible" caution covers 1 combined sewer operator')
-    assert "this site's default amount of 0.1 in" in cov["MI"]["sentence"] and cov["MI"]["trigger_bases"] == ["default"]
+    assert "our default amount of 0.1 in" in cov["MI"]["sentence"] and cov["MI"]["trigger_bases"] == ["default"]
     assert cov["MD"]["sentence"].startswith('The "discharge possible" caution') and cov["MD"]["threshold_kind"] == "site_default"
     assert cov["MA"]["sentence"].startswith('The "discharge likely" or "discharge possible" caution covers 2')
     assert cov["MA"]["trigger_bases"] == ["operator", "default"]
@@ -492,7 +492,7 @@ def test_rules_json_labels_by_basis_and_states_the_defaults_cost_with_its_source
     assert rl["label"] == LIKELY
     assert rl["label_by_basis"] == {"operator": LIKELY, "state": LIKELY, "default": POSSIBLE}
     assert RL.labels(json.loads((DATA_DIR / "rules.json").read_text())) == rl["label_by_basis"]
-    assert "discharge possible" in rl["doc"] and "discharge likely" in rl["doc"] and "0.1 inch" in rl["doc"]
+    assert f'"{POSSIBLE}"' in rl["doc"] and f'"{LIKELY}"' in rl["doc"] and "0.1 inch" in rl["doc"]   # the labels in full
     assert "discharge possible" in rl["label_by_basis_rationale"]
     d = rl["fallback"]["default"]
     assert d["inches"] == 0.1 and d["trigger_basis"] == "default"

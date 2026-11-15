@@ -46,9 +46,9 @@ from common import BUILD_DIR, DATA_DIR, load_outfall_registry, read_json, system
 RULE = "rain_likely"
 # the site default where the state publishes no rain trigger of its own (owner, 2026-11-03: no other operator's
 # permit is named; the methods page is its citation)
-SITE_DEFAULT_TEXT = ("this site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the "
-                     "state publishes no rain trigger of its own")
-SITE_DEFAULT_SOURCE = "This site's methods page"
+SITE_DEFAULT_TEXT = ("our default: 0.1 inch of rain in 24 hours at a combined sewer outfall, used where neither the "
+                     "operator's overflow reports nor a published rain rule sets an amount")
+SITE_DEFAULT_SOURCE = "Our methods page"
 SITE_SOURCE_ID = "nj-cso-likely"
 SITE_NAME = "the New Jersey CSO permittees' shared notification site (njcsonotifications.com)"
 SITE_URL = "https://njcsonotifications.com/"
@@ -382,7 +382,7 @@ def _later(a: datetime | None, b: datetime | None) -> bool:
 
 RULE_WORDS = {"operator_history": "the level from the operator's own overflow reports",
               "operator_rule": "the operator's own rule", "state_rule": "the state's rule",
-              "site_default": "this site's default"}
+              "site_default": "our default"}
 
 
 def evidence_basis(thr: dict) -> str:
@@ -1105,13 +1105,13 @@ def caution_coverage(block: dict, cso_states=()) -> dict[str, dict]:
         if e["covered"] and e["permits"]:
             parts = dict(names)
             if e.get("threshold_in") is not None:
-                whose = ("this site's default amount" if e.get("threshold_kind") == "site_default"
+                whose = ("our default amount" if e.get("threshold_kind") == "site_default"
                          else "the published amount")
                 parts["radar"] = f"NOAA radar rainfall at their outfalls, against {whose} of {e['threshold_in']:g} in"
             if e.get("history_permits"):
                 parts["radar"] = ("NOAA radar rainfall at their outfalls, against amounts from each operator's own "
-                                  "overflow reports where it has enough of them, else a published amount or this "
-                                  "site's default")
+                                  "overflow reports where it has enough of them, else a published amount or our "
+                                  "default")
             how = " and ".join(parts[m] for m in e["methods"])
             of = f" of the {e['cso_permits']}" if missing else ""
             bases = set(e["trigger_bases"])
@@ -1217,6 +1217,6 @@ def short(iv: dict, where: str = "") -> str:
     if ev.get("basis") == "operator_history" and ev.get("why_no_history") is None:
         amt = f" · {peak:.2f} inch{'es' if peak > 1 else ''} in 24 hours (radar)" if peak is not None else ""
         return f"{label}{who}{amt}{history_facts(ev)}{where}"
-    kind = " (this site's default)" if (r.get("trigger_basis") or iv.get("trigger_basis")) == "default" else ""
+    kind = " (our default)" if (r.get("trigger_basis") or iv.get("trigger_basis")) == "default" else ""
     rain = f" · {peak:.2f} in in 24 h (radar), threshold {thr:.2f} in{kind}" if peak is not None and thr is not None else ""
     return f"{label}{who}{rain}{where}"
