@@ -172,16 +172,34 @@ def fetch(permit: str, code: str, since: date) -> tuple[dict | None, str]:
             js = r.json()
             msg = str(((js.get("Results") or {}).get("Error") or {}).get("ErrorMessage") or "")
             if "is invalid" in msg:
-                return None, f"not in ECHO ({' '.join(msg.split())})"     # an answer, not a failure: never retried
+                # an answer, not a failure: never retried; only ECHO's fixed wording is kept, never other answer text
+                return None, f"not in ECHO (NPDES ID {permit} is invalid!)"
             if (js.get("Results") or {}).get("Message") != "Success":
-                raise ValueError(str(js)[:200])
+                raise ValueError("answer not Success")
             # only what the records read is saved (the answer also carries the plant's street address)
             save_raw(SOURCE_ID, json.dumps({"Results": compact(js["Results"])}).encode(), f"{permit}-{code}.json")
             return js["Results"], "live"
         except (requests.RequestException, ValueError) as e:
-            err = f"{type(e).__name__}: {e}"
+            err = error_category(e)
             time.sleep(3 * (i + 1))
     return None, f"failed ({err})"
+
+
+def error_category(e: Exception) -> str:
+    """A bounded category for a failed request, never the answer's text or the exception's own message (which can
+    quote the answer: re-review 2026-11-14 P1-2)."""
+    if isinstance(e, requests.HTTPError):
+        code = getattr(getattr(e, "response", None), "status_code", None)
+        return f"HTTP {int(code)}" if isinstance(code, int) else "HTTP error"
+    if isinstance(e, requests.Timeout):
+        return "timeout"
+    if isinstance(e, requests.ConnectionError):
+        return "connection error"
+    if isinstance(e, requests.RequestException):
+        return "request error"
+    if str(e) == "answer not Success":
+        return "answer not Success"
+    return "malformed answer"
 
 
 def month_bounds(period_end: str) -> tuple[str, str, str]:

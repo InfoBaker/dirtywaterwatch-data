@@ -726,3 +726,62 @@ def test_equally_ranked_conflicting_dmr_rows_resolve_the_same_whatever_their_ord
     res[("IN0000004", "84165")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][:] = [three, zero]
     again = _dmr_main(tmp_path, monkeypatch, res)
     assert again["records"][0]["raw"]["events"] == 1.0
+
+
+def test_no_answer_text_reaches_any_saved_file_on_any_path(tmp_path, monkeypatch):
+    """Astra re-review 2026-11-14 P1-2: successful, refused, malformed and non-success answers; raw, cache, events,
+    meta and error text are all inspected."""
+    import requests as rq
+
+    from ingest import in_echo_cso_monthly as M
+    secret = ("Jane Example", "1234 S Example St", "555-0100")
+    saved = []
+    monkeypatch.setattr(M, "save_raw", lambda sid, body, name: saved.append(body.decode()))
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    good = _results()[("IN0000004", "84165")]
+    good = dict(good, FacStreet="1234 S Example St", ContactName="Jane Example")
+
+    class R:
+        def __init__(self, js=None, bad=False, status=200):
+            self.js, self.bad, self.status_code = js, bad, status
+
+        def raise_for_status(self):
+            if self.status_code >= 400:
+                raise rq.HTTPError("500 for Jane Example at 1234 S Example St", response=self)
+
+        def json(self):
+            if self.bad:
+                raise rq.JSONDecodeError("Expecting value: <html>Jane Example 555-0100</html>", "x", 0)
+            return self.js
+    answers = {"84165": R({"Results": dict(good, Message="Success")}),
+               "50037": R({"Results": {"Message": "Failed", "Detail": "Jane Example, 1234 S Example St, 555-0100"}}),
+               "74063": R(bad=True)}
+    monkeypatch.setattr(M.requests, "get", lambda url, params, **k: answers[params["parameter_code"]])
+    monkeypatch.setattr(M, "CACHE_FILE", tmp_path / "cache.json")
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: common.write_events(
+        sid, recs, path=tmp_path / "events" / f"{sid}.json", **kw))
+    monkeypatch.setattr(M, "registry_outfalls", lambda rows=None: _registry())
+    assert M.main(["--since", "2025-01-01", "--refresh"]) == 1
+    first = json.loads((tmp_path / "events" / "in-echo-dmr-cso.json").read_text())
+    assert "answer not Success" in first["error"] and "request error" in first["error"]
+    answers["84165"] = R({"Results": {"Error": {"ErrorMessage": "NPDES ID IN0000004 is invalid! Call Jane Example"}}})
+    answers["50037"] = R(status=500)
+    M.main(["--since", "2025-01-01", "--refresh"])
+    files = "".join(p.read_text() for p in tmp_path.rglob("*.json")) + "".join(saved)
+    assert saved and "Success" in saved[0]
+    for s in secret:
+        assert s not in files
+    doc = json.loads((tmp_path / "events" / "in-echo-dmr-cso.json").read_text())
+    assert doc["ok"] is False
+    assert json.loads((tmp_path / "cache.json").read_text())["answers"]["IN0000004-84165"]["invalid"] == \
+        "NPDES ID IN0000004 is invalid!"
+
+
+def test_a_cso_number_without_the_delimiter_is_scrubbed_and_an_error_answer_is_a_category():
+    """Astra re-review 2026-11-14 P1-2."""
+    B = _script("build_in_outfalls")
+    doc = {"features": [_idem(1, "IN0000008", "CSO at 1234 S Example St", "Active", 40.1, -86.6),
+                        _idem(2, "IN0000008", "003C", "Active", 40.1, -86.6)]}
+    out = json.dumps(B.sanitize(doc))
+    assert "1234" not in out and "[house number removed] S Example St" in out and '"003C"' in out
