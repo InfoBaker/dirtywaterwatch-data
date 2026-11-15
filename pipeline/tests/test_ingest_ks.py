@@ -783,3 +783,23 @@ def test_hab_readers_take_a_corrected_name_and_point_under_the_same_id():
     mr = next(x for x in m2 if x["raw"]["report_id"] == rid)
     assert mr["waterbody_text"] == "Corrected Lake" and (mr["lat"], mr["lon"]) == (38.9, -92.4)
     assert mr["raw"]["county"] == "Boone" and len(mr["raw"]["place_revisions"]) == 1
+
+
+def test_a_facility_type_never_makes_a_plant_name_a_city():
+    """Verification P2-1: EPA's POTW or municipal facility type does not turn a plant-only name into a city; the
+    committed rows of both states hold no operator row of any public form named for a plant only."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("mo_ops2", ROOT / "scripts" / "add_mo_operators.py")
+    mo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mo)
+    for m in (mo, _ko()):
+        assert m.form("Humphreys WWTF", "POTW") == "city" and m.form("Humphreys WWTF", None) is None
+    rows = [r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") in ("MO", "KS")]
+    by = {r["id"]: r for r in rows}
+    for i in ("mo-baring-north-wwtf", "mo-humphreys-wwtf", "ks-liberal-wastewater-plant", "ks-louisburg-wastewater-plant-1"):
+        assert by[i]["legal_form"] == "facility (permittee not named)", i
+    ko = _ko()
+    bad = [r["name"] for r in rows if r["legal_form"] == "city" and ko.FACILITY_LABEL.search(r["name"])
+           and not ko.BODY_WORDS.search(r["name"]) and ko.form(r["name"], None) is None
+           and not any(p in ko.RESEARCH_NAME or p in mo.RESEARCH_NAME for p in r["npdes_permits"])]
+    assert bad == []
