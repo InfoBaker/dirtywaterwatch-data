@@ -256,3 +256,42 @@ def test_a_name_only_tie_beyond_25_km_is_refused_in_wv_and_la():
     o = {"state": "OK", "npdes_permit": "OK0000001", "lat": 35.0, "lon": -97.0, "receiving_water_echo": "EXAMPLE BAYOU"}
     OW.apply(o, res, MT(30_000.0))
     assert o["water_slug"] == "example-bayou-la"                                # other states unchanged
+
+
+def test_every_failed_layout_check_is_an_error_and_named_unread(monkeypatch, tmp_path):
+    """Re-review P1-2: a first-time failure, a repeated failure with no accepted copy, a failed replacement and a
+    recovery; the run's health and exit code as well as the records kept."""
+    import common
+    bad = [SUMMARY, TABLE_N]
+    _pdf_state(monkeypatch, {b"good": [SUMMARY, TABLE_N, TABLE_S], b"bad": bad, b"bad2": bad})
+    state_path, events = tmp_path / "state.json", tmp_path / "events"
+    events.mkdir()
+    monkeypatch.setattr(Q, "STATE_PATH", state_path)
+    monkeypatch.setattr(common, "EVENTS_DIR", events)
+
+    def run(content, url, number=98):
+        f = tmp_path / f"{number}-{url[-6:]}"
+        f.write_bytes(content)
+        code = Q.main(["--file", str(f), "--report", str(number), "--url", url])
+        return code, json.loads((events / f"{Q.SOURCE_ID}.json").read_text())
+
+    code, out = run(b"bad", "https://example.org/r98.pdf")                 # first acquisition fails
+    assert code == 1 and out["ok"] is False and "98" in out["error"] and out["count"] == 0
+    assert out["meta"]["failed_checks"] == ["98"] and "summary's count" in out["meta"]["unread"]["98"]["reason"]
+    code, out = run(b"bad2", "https://example.org/r98-b.pdf")              # fails again, still no accepted copy
+    assert code == 1 and out["ok"] is False and out["count"] == 0 and "98" in out["meta"]["unread"]
+    code, out = run(b"good", "https://example.org/r98-c.pdf")              # recovery
+    assert code == 0 and out["ok"] is True and out["count"] == 3 and out["meta"]["unread"] == {}
+    code, out = run(b"bad", "https://example.org/r98-d.pdf")               # a failed replacement keeps the rows
+    assert code == 1 and out["ok"] is False and out["count"] == 3
+    assert {r["source_url"] for r in out["records"]} == {"https://example.org/r98-c.pdf"}
+
+
+def test_a_report_with_no_accepted_copy_is_tried_again_on_the_reread_cadence():
+    state = {"reports": {"91": {"number": 91, "url": "https://example.org/r91.pdf", "layout_ok": False, "rows": [],
+                                "read_at": "2026-11-01T00:00:00Z", "check": {}, "summary": {}}}}
+    links = {91: "https://example.org/r91.pdf", 95: "https://example.org/r95.pdf", 96: "https://example.org/r96.pdf"}
+    state["reports"]["95"] = {"number": 95, "url": links[95], "layout_ok": True, "rows": [], "read_at": "2026-11-01T00:00:00Z"}
+    state["reports"]["96"] = {"number": 96, "url": links[96], "layout_ok": True, "rows": [], "read_at": "2026-11-01T00:00:00Z"}
+    assert Q.due(state, links, "2026-11-10T00:00:00Z") == []
+    assert (91, links[91]) in Q.due(state, links, "2026-12-05T00:00:00Z")

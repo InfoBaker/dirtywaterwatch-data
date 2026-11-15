@@ -242,7 +242,19 @@ def read_report(state: dict, url: str, number: int, content: bytes, at: str) -> 
     if prev and prev.get("sha256") != rep["sha256"]:
         rep["replaces"] = {k: prev.get(k) for k in ("url", "sha256", "read_at")}
     state["reports"][key] = rep
+    if not rep.get("layout_ok"):
+        # no accepted copy of this report (a first read or a repeated one): it gives no rows and the run says so
+        return rep, f"report {number}: {url} failed the layout check ({unread_reason(rep)}); no rows are taken from it"
     return rep, None
+
+
+def unread_reason(rep: dict) -> str:
+    """Why a report gives no rows: the permits whose table rows do not match the report's own summary count."""
+    bad = {p: c for p, c in (rep.get("check") or {}).items() if c.get("read") != c.get("summary_collection")}
+    if not rep.get("summary") or not bad:
+        return "its summary table was not found"
+    return "discharge rows read against the summary's count: " + ", ".join(
+        f"{p} {c.get('read')} of {c.get('summary_collection')}" for p, c in sorted(bad.items()))
 
 
 REREAD_DAYS = 30        # the newest two reports are read again this often, for an amended copy at the same address
@@ -263,12 +275,14 @@ def due(state: dict, links: dict[int, str], now: str, refresh: bool = False) -> 
         if refresh or rep is None or url not in tried:
             out.append((n, url))
             continue
+        # a report with no accepted copy is tried again on the re-read cadence, whatever its number
+        unread = not rep.get("layout_ok")
         last = max([a.get("read_at") or "" for a in rep.get("attempts", [])] + [rep.get("read_at") or ""])
         try:
             age = (_dt.fromisoformat(now.replace("Z", "+00:00")) - _dt.fromisoformat(last.replace("Z", "+00:00"))).days
         except ValueError:
             age = REREAD_DAYS
-        if n in newest and age >= REREAD_DAYS:
+        if (n in newest or unread) and age >= REREAD_DAYS:
             out.append((n, url))
     return out
 
@@ -315,7 +329,12 @@ def main(argv=None) -> int:
             "failed_checks": sorted(str(v.get("number")) for v in reps.values() if not v.get("layout_ok")),
             "plant_events_not_itemised": {str(v.get("number")): sum(s.get("plant") or 0 for s in v["summary"].values())
                                           for v in reps.values()},
-            "errors": errors, "cadence": "the index with the refresh; each report once"}
+            "unread": {str(v.get("number")): {"url": v.get("url"), "last_tried": v.get("read_at"),
+                                               "reason": unread_reason(v)}
+                       for v in reps.values() if not v.get("layout_ok")},
+            "errors": errors,
+            "cadence": (f"the index with the refresh; a new report once, the newest two and any report with no accepted "
+                        f"copy again every {REREAD_DAYS} days")}
     if errors:
         # the records come from the accepted reports in the state file, so they are complete: written, but the run
         # is not ok (a failed fetch or a failed re-read is named)
