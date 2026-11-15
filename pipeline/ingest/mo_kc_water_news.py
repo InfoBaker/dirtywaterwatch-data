@@ -463,11 +463,12 @@ def main(argv=None) -> int:
             feeds = [Path(a).read_bytes() for a in argv[argv.index("--file") + 1:] if not a.startswith("--")]
         else:
             feeds = fetch("--backfill" in argv)
-    except (requests.RequestException, OSError, ET.ParseError) as e:
+        recs, stats = run(feeds, prev, now_iso())    # parsing inside the handler (re-review P2-4)
+    except (requests.RequestException, OSError, ET.ParseError, ValueError, KeyError, TypeError, AttributeError,
+            IndexError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
-    recs, stats = run(feeds, prev, now_iso())
     out = write_events(SOURCE_ID, recs, meta={
         "registry_ids": [SOURCE_ID], "url": INDEX, "feed": FEED, **stats,
         "credit": "KC Water, City of Kansas City, Missouri (news posts)",

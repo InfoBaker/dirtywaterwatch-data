@@ -636,3 +636,21 @@ def test_safe_text_keeps_places_and_safe_link_keeps_plain_addresses():
     assert K.safe_link("https://x.org/news/overflow-on-june-3-2024/", "https://x.org/?p=1") == \
         "https://x.org/news/overflow-on-june-3-2024/"
     assert K.safe_link("https://x.org/news/overflow-at-1234-example-st/", "https://x.org/?p=1") == "https://x.org/?p=1"
+
+
+def test_msd_post_without_a_publication_time_or_malformed_fails_the_run_and_keeps_the_records(tmp_path, monkeypatch):
+    """Re-review P2-4."""
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    good = json.loads((FIX / "msd_posts.json").read_text())
+    recs, _ = M.run([good], [], AT)
+    common.write_events(M.SOURCE_ID, recs)
+    first = json.loads((tmp_path / f"{M.SOURCE_ID}.json").read_text())
+    nodate = [{**p, "date_gmt": None} for p in good]
+    broken = [{**good[0], "title": None}]
+    for bad in (nodate, [{**p, "date_gmt": "not a date"} for p in good], broken):
+        f = tmp_path / "page.json"
+        f.write_text(json.dumps(bad))
+        assert M.main(["--file", str(f)]) == 1
+        out = json.loads((tmp_path / f"{M.SOURCE_ID}.json").read_text())
+        assert out["ok"] is False and out["records"] == first["records"]
