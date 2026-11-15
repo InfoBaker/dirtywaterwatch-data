@@ -35,10 +35,14 @@ Record rules
   - Clock: raw.time_zone from the county (pipeline/zones.py north_dakota_zone, 49 CFR 71.7(a)): Mountain for the
     southwestern counties (Lake Tschida in Grant County, Bowman-Haley Dam in Bowman County, Patterson Lake in Stark
     County, Lake Ilo in Dunn County), Central elsewhere; a county set read in Mountain time if any county is.
-  - Marker: the listing gives no coordinates; a cited point inside the lake's NHD outline in a county DEQ lists
-    (data/reference/nd-hab-lake-points.json, scripts/nd_hab_lake_points.py; 14 of the 20 lakes of 2026-11-14) is the
-    record's lat/lon (coord_source nhd_waterbody, raw.marker_point with the GNIS id), so the advisory draws its marker
-    on a large lake too (review P1-1). A lake with no such outline gets none.
+  - Marker: the listing gives no coordinates; the cited point of the one GNIS lake of its name in a county DEQ lists
+    (data/reference/nd-hab-lake-points.json, scripts/nd_hab_lake_points.py: inside its NHD outline, coord_source
+    nhd_waterbody, else the GNIS gazetteer point, coord_source gnis_point; 15 of the 20 lakes of 2026-11-14) is the
+    record's lat/lon (raw.marker_point with the GNIS id), so the advisory draws its marker on a large lake too (review
+    P1-1). A lake with no identified water gets none; it stays in the records, filed under ND, and the state text
+    names it.
+    raw.advisory_extent "named_water": DEQ lists the lake, so a listed advisory placed on a lake colours that lake
+    whatever its size and keeps its marker where it has a point (re-review 2026-11-14 P1-1).
   - Place: placed by the lake's name, county-aware: raw.county the first county DEQ gives (the status
     build's COUNTY_FIELD_STATES), raw.counties all of them, raw.placement_hint {name, counties, state}. A lake with no
     water record is listed in research/nd/receiving-waters-missing.json with its counties.
@@ -144,7 +148,9 @@ def lake_point(lake: str, counties: list[str]) -> dict | None:
     for r in doc.get("lakes") or []:
         if r["lake"] == lake and set(r["counties"]) == set(counties):
             return {"lat": r["lat"], "lon": r["lon"], "gnis_name": r["gnis_name"], "gnis_id": r["gnis_id"],
-                    "county": r["county"], "basis": r["basis"], "source": (doc.get("source") or {}).get("url")}
+                    "county": r["county"], "basis": r["basis"],
+                    "coord_source": r.get("coord_source") or "nhd_waterbody",
+                    "source": r.get("source_url") or (doc.get("source") or {}).get("url")}
     return None
 
 
@@ -174,6 +180,10 @@ def build(pdf: bytes, fetched: str, previous: list[dict], source_updated: str | 
                "placement_hint": {"name": x["lake"], "counties": x["counties"], "state": "ND",
                                   "basis": "the counties DEQ lists beside the lake: a same-named lake elsewhere in the "
                                            "state is not this one"},
+               # DEQ lists the lake, not a beach or a station: the advisory colours the lake it is placed on, a large
+               # one too, and keeps its marker where it has a point (build/status.py names_its_water; re-review
+               # 2026-11-14 P1-1: a point-less advisory on a lake of 50 km2 or more was grey with no marker)
+               "advisory_extent": "named_water",
                "_level_history": hist, "_first_seen_at": oraw.get("_first_seen_at") or fetched,
                "_last_seen_in_source": fetched}
         absences = list(oraw.get("_absences") or [])
@@ -188,7 +198,7 @@ def build(pdf: bytes, fetched: str, previous: list[dict], source_updated: str | 
             source_id=SOURCE_ID, source_record_id=srid, event_type="hab_advisory", status="advisory_active",
             waterbody_text=x["lake"], started_at=start, time_precision="day", published_at=x["date"],
             lat=pt["lat"] if pt else None, lon=pt["lon"] if pt else None,
-            coord_source="nhd_waterbody" if pt else None, coord_precision_m=100 if pt else None,
+            coord_source=pt["coord_source"] if pt else None, coord_precision_m=100 if pt else None,
             source_updated_at=source_updated, fetched_at=fetched, authority=AUTHORITY,
             advice_text=LEVEL_MEANING[x["level"]], source_url=URL, raw=raw)
     lifted = 0
