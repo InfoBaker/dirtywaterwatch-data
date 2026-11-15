@@ -566,15 +566,19 @@ def event(**f) -> dict:
 
 
 def write_events(source_id: str, records: list[dict], ok: bool = True, error: str | None = None, meta: dict | None = None,
-                 path: Path | None = None) -> Path:
+                 path: Path | None = None, partial: bool = False) -> Path:
     """Write data/build/events/<source>.json (or path). On failure (ok=False) keep the previous records and
-    record the error, so a feed outage never empties a water's history."""
+    record the error, so a feed outage never empties a water's history. partial=True (with ok=False): a run that read
+    some items and failed others, whose records already carry the previous ones for what failed: the given records
+    are written, health stays false and last_ok_at stays the previous one (wi_mmsd_storm_updates, Astra re-review
+    2026-11-15 P1-5); the default is unchanged for every other caller."""
     path = Path(path) if path is not None else EVENTS_DIR / f"{source_id}.json"
     prev = read_json(path, {}) or {}
     if not ok:
         # the retained records keep the previous file's meta (coverage, registry ids and above all
         # distribution_discouraged); only fetch health changes. A caller's meta adds to it.
-        records = prev.get("records", [])
+        if not partial:
+            records = prev.get("records", [])
         prev_meta = prev.get("meta") or {}
         meta = {**prev_meta, **(meta or {})}
         if prev_meta.get("distribution_discouraged"):

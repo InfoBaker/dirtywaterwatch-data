@@ -310,7 +310,7 @@ def make_row(rid, g, ps, rs, plants, cso, kind=None) -> dict:
         out["great_lakes_basin"] = True
     if rid == "wi-mmsd":
         out["notification_channel"] += (" MMSD posts a Storm Update on its news page with each overflow it reports to "
-                                         "the DNR, with the dates and volume, about five days after the overflow "
+                                         "the DNR, with the dates and volume, about four days after the overflow "
                                          "(https://www.mmsd.com/about-us/news).")
         out["notification_signup_url"] = "https://mmsd.com/what-you-can-do/water-drop-alert"
         out["notes"] += (" The Water Drop Alert text messages ask residents to use less water before heavy rain; they "
