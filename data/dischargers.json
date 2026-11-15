@@ -618092,8 +618092,8 @@
    "RIO MARICAO"
   ],
   "water_slugs": [],
-  "outfall_count": 68,
-  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 56 rows); PRASA's CSO layer (data/outfalls-pr.json, 12 rows)",
+  "outfall_count": 67,
+  "outfalls_source": "EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, 55 rows); PRASA's CSO layer (data/outfalls-pr.json, 12 rows)",
   "notification_channel": "EPA Region 2 issues the permit; its conditions require the 24-hour oral and five-day written report of an overflow, bypass or other noncompliance that may endanger health or the environment to EPA (40 CFR 122.41(l)(6)), filed electronically through NeT-SewerOverflow and published in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No Puerto Rico statute or rule requiring the public to be told of a sewage discharge was found. PRASA's Puerto Nuevo permit (PR0021555, 2021) requires a public notification process for combined sewer overflows, and the 2023 modification of its consent decree (United States v. PRASA, No. 3:15-cv-02283, D.P.R.) adds posting of the Puerto Nuevo overflows and their estimated volume on PRASA's website; PRASA's pages show the outfall locations, precautions and a form to report an overflow, and no overflow events were found posted there.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
@@ -618147,7 +618147,7 @@
    "Yabucoa",
    "Yauco"
   ],
-  "notes": "EPA ICIS-NPDES: 53 plant permit(s), 56 discharge point(s). EPA's CSO inventory: 12 combined sewer outfalls of PR0021555 (Puerto Nuevo, San Juan); PRASA's own layer gives each outfall's point and receiving water. EPA's collection-system table: 51 PRASA systems. EPA's overflow tables (2026-11-12 extract): 252 report(s) read as reaching a water, from 35 permit(s). The island's public water and sewer authority: every PRASA plant, its collection systems and the Puerto Nuevo combined sewer system (San Juan), under one consent decree (United States v. PRASA, No. 3:15-cv-02283, D.P.R., 2016, modified 2023).",
+  "notes": "EPA ICIS-NPDES: 52 plant permit(s), 55 discharge point(s). EPA's list gives PR0020834 only the facility's point, no outfall: not counted as an outfall. EPA's CSO inventory: 12 combined sewer outfalls of PR0021555 (Puerto Nuevo, San Juan); PRASA's own layer gives each outfall's point and receiving water. EPA's collection-system table: 51 PRASA systems. EPA's overflow tables (2026-11-12 extract): 252 report(s) read as reaching a water, from 35 permit(s). The island's public water and sewer authority: every PRASA plant, its collection systems and the Puerto Nuevo combined sewer system (San Juan), under one consent decree (United States v. PRASA, No. 3:15-cv-02283, D.P.R., 2016, modified 2023). Operator named from the permittee: EPA's permittee of record for each of these permits begins \"PRASA\" (data/outfalls-plants-us.json, data/outfalls-us.json).",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618159,8 +618159,8 @@
  },
  {
   "id": "pr-balneario-cana-gorda",
-  "name": "Balneario de Caña Gorda (Guánica)",
-  "short_name": "Balneario de Caña Gorda",
+  "name": "Permit PR0025917 (Balneario de Caña Gorda, Guánica)",
+  "short_name": "Permit PR0025917 (Balneario de Caña Gorda, Guánica)",
   "legal_form": null,
   "state": "PR",
   "kind": "sso",
@@ -618178,7 +618178,7 @@
   "towns": [
    "Guánica"
   ],
-  "notes": "EPA's collection-system table: PR0025917 BALNEARIO DE CANA GORDA COLLECTION SYSTEM (Municipality). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA records the facility as \"BALNEARIO DE CANA GORDA\" and its collection-system table types the owner Municipality; the owner was not read.",
+  "notes": "EPA's collection-system table: PR0025917 BALNEARIO DE CANA GORDA COLLECTION SYSTEM (Municipality). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA's collection-system table types the owner Municipality; the body that holds the permit is not established. A permit-only row: EPA's name of record for the permit names a facility, not the body that holds the permit, so no operator is named and the row is not counted as an operator.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618186,7 +618186,8 @@
   ],
   "source_areas": [
    "pr"
-  ]
+  ],
+  "permit_only": true
  },
  {
   "id": "pr-casa-castaner",
@@ -618209,7 +618210,7 @@
   "towns": [
    "Lares"
   ],
-  "notes": "EPA's collection-system table: PR0024333 Casa Castañer Sanitary Collection System (Privately Owned Facility). No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "notes": "EPA's collection-system table: PR0024333 Casa Castañer Sanitary Collection System (Privately Owned Facility). No report under these permits is in EPA's overflow tables (2026-11-12 extract). Operator named from the permittee: EPA's name of record for the permit is \"CASA CASTANER INC\" (Lares).",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618221,9 +618222,9 @@
  },
  {
   "id": "pr-castaner-general-hospital",
-  "name": "Castañer General Hospital (Lares)",
-  "short_name": "Castañer General Hospital",
-  "legal_form": "institution",
+  "name": "Permit PR0025283 (Castañer General, Lares)",
+  "short_name": "Permit PR0025283 (Castañer General, Lares)",
+  "legal_form": null,
   "state": "PR",
   "kind": "sso",
   "npdes_permit": "PR0025283",
@@ -618234,13 +618235,13 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
-  "notification_channel": "EPA Region 2 issues the permit; its conditions require the 24-hour oral and five-day written report of an overflow, bypass or other noncompliance that may endanger health or the environment to EPA (40 CFR 122.41(l)(6)), filed electronically through NeT-SewerOverflow and published in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No Puerto Rico statute or rule requiring the public to be told of a sewage discharge was found. The permit binds a private permittee as it binds a public one. The operator's own pages were not searched individually.",
+  "notification_channel": "EPA Region 2 issues the permit; its conditions require the 24-hour oral and five-day written report of an overflow, bypass or other noncompliance that may endanger health or the environment to EPA (40 CFR 122.41(l)(6)), filed electronically through NeT-SewerOverflow and published in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No Puerto Rico statute or rule requiring the public to be told of a sewage discharge was found. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
    "Lares"
   ],
-  "notes": "EPA's collection-system table: PR0025283 Hospital Sanitary Collection System (Privately Owned Facility). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA records the facility as \"CASTANER GENERAL\"; its collection-system table calls it a hospital system.",
+  "notes": "EPA's collection-system table: PR0025283 Hospital Sanitary Collection System (Privately Owned Facility). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA's collection-system table calls it a hospital system; the body that holds the permit is not established. A permit-only row: EPA's name of record for the permit names a facility, not the body that holds the permit, so no operator is named and the row is not counted as an operator.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618248,13 +618249,14 @@
   ],
   "source_areas": [
    "pr"
-  ]
+  ],
+  "permit_only": true
  },
  {
   "id": "pr-centro-vacacional-maricao",
-  "name": "Centro Vacacional (Maricao)",
-  "short_name": "Centro Vacacional, Maricao",
-  "legal_form": "state facility",
+  "name": "Permit PR0025925 (Centro Vacacional, Maricao)",
+  "short_name": "Permit PR0025925 (Centro Vacacional, Maricao)",
+  "legal_form": null,
   "state": "PR",
   "kind": "sso",
   "npdes_permit": "PR0025925",
@@ -618271,7 +618273,7 @@
   "towns": [
    "Maricao"
   ],
-  "notes": "EPA's collection-system table: PR0025925 CENTRO VACACIONAL COLLECTION SYSTEM (State Government). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA's collection-system table types the owner State Government; the agency that runs it was not read.",
+  "notes": "EPA's collection-system table: PR0025925 CENTRO VACACIONAL COLLECTION SYSTEM (State Government). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA's collection-system table types the owner State Government; the agency that holds the permit is not established. A permit-only row: EPA's name of record for the permit names a facility, not the body that holds the permit, so no operator is named and the row is not counted as an operator.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618279,13 +618281,14 @@
   ],
   "source_areas": [
    "pr"
-  ]
+  ],
+  "permit_only": true
  },
  {
   "id": "pr-coco-beach-utility",
-  "name": "Coco Beach Utility Company, Inc. (Río Grande)",
-  "short_name": "Coco Beach Utility",
-  "legal_form": "investor-owned utility",
+  "name": "Permit PR0026425 (Coco Beach WWTP, Río Grande)",
+  "short_name": "Permit PR0026425 (Coco Beach WWTP, Río Grande)",
+  "legal_form": null,
   "state": "PR",
   "kind": "sso",
   "npdes_permit": "PR0026425",
@@ -618296,13 +618299,13 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
-  "notification_channel": "EPA Region 2 issues the permit; its conditions require the 24-hour oral and five-day written report of an overflow, bypass or other noncompliance that may endanger health or the environment to EPA (40 CFR 122.41(l)(6)), filed electronically through NeT-SewerOverflow and published in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No Puerto Rico statute or rule requiring the public to be told of a sewage discharge was found. The permit binds a private permittee as it binds a public one. The operator's own pages were not searched individually.",
+  "notification_channel": "EPA Region 2 issues the permit; its conditions require the 24-hour oral and five-day written report of an overflow, bypass or other noncompliance that may endanger health or the environment to EPA (40 CFR 122.41(l)(6)), filed electronically through NeT-SewerOverflow and published in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No Puerto Rico statute or rule requiring the public to be told of a sewage discharge was found. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
    "Río Grande"
   ],
-  "notes": "EPA's collection-system table: PR0026425 Coco Beach Sanitary Collection System (Privately Owned Facility). No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "notes": "EPA's collection-system table: PR0026425 Coco Beach Sanitary Collection System (Privately Owned Facility). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA's name of record is the plant's; the body that holds the permit is not established. A permit-only row: EPA's name of record for the permit names a facility, not the body that holds the permit, so no operator is named and the row is not counted as an operator.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618310,7 +618313,8 @@
   ],
   "source_areas": [
    "pr"
-  ]
+  ],
+  "permit_only": true
  },
  {
   "id": "pr-consejo-condominios-costeros",
@@ -618333,7 +618337,7 @@
   "towns": [
    "Río Grande"
   ],
-  "notes": "EPA's collection-system table: PR0026310 Condominios Sanitary Collection System (Privately Owned Facility). No report under these permits is in EPA's overflow tables (2026-11-12 extract). A council of coastal condominiums in Río Grande.",
+  "notes": "EPA's collection-system table: PR0026310 Condominios Sanitary Collection System (Privately Owned Facility). No report under these permits is in EPA's overflow tables (2026-11-12 extract). A council of coastal condominiums in Río Grande. Operator named from the permittee: EPA's name of record for the permit is \"CONSEJO DE CONDOMINIOS COSTEROS, INC.\" (Río Grande).",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618364,7 +618368,7 @@
   "towns": [
    "Cabo Rojo"
   ],
-  "notes": "EPA's collection-system table: PR0021326 DEPARTMENT OF NATURAL AND ENVIRONMENTAL RESOURCES (State Government). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA's collection-system table types the owner State Government; the facility was not read.",
+  "notes": "EPA's collection-system table: PR0021326 DEPARTMENT OF NATURAL AND ENVIRONMENTAL RESOURCES (State Government). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA's collection-system table types the owner State Government. Operator named from the permittee: EPA's name of record for the permit is \"DEPARTMENT OF NATURAL AND ENVIRONMENTAL RESOURCES\" (Cabo Rojo).",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618376,9 +618380,9 @@
  },
  {
   "id": "pr-isleta-marina",
-  "name": "Isleta Marina, Inc. (Fajardo)",
-  "short_name": "Isleta Marina",
-  "legal_form": "campground or resort",
+  "name": "Permit PR0021539 (Isleta Marina WWTP, Fajardo)",
+  "short_name": "Permit PR0021539 (Isleta Marina WWTP, Fajardo)",
+  "legal_form": null,
   "state": "PR",
   "kind": "sso",
   "npdes_permit": "PR0021539",
@@ -618389,13 +618393,13 @@
   "water_slugs": [],
   "outfall_count": null,
   "outfalls_source": null,
-  "notification_channel": "EPA Region 2 issues the permit; its conditions require the 24-hour oral and five-day written report of an overflow, bypass or other noncompliance that may endanger health or the environment to EPA (40 CFR 122.41(l)(6)), filed electronically through NeT-SewerOverflow and published in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No Puerto Rico statute or rule requiring the public to be told of a sewage discharge was found. The permit binds a private permittee as it binds a public one. The operator's own pages were not searched individually.",
+  "notification_channel": "EPA Region 2 issues the permit; its conditions require the 24-hour oral and five-day written report of an overflow, bypass or other noncompliance that may endanger health or the environment to EPA (40 CFR 122.41(l)(6)), filed electronically through NeT-SewerOverflow and published in EPA's overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary). No Puerto Rico statute or rule requiring the public to be told of a sewage discharge was found. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
    "Fajardo"
   ],
-  "notes": "EPA's collection-system table: PR0021539 Isleta Marina Sanitary Collection System (Privately Owned Facility). No report under these permits is in EPA's overflow tables (2026-11-12 extract).",
+  "notes": "EPA's collection-system table: PR0021539 Isleta Marina Sanitary Collection System (Privately Owned Facility). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA's name of record is the plant's; the body that holds the permit is not established. A permit-only row: EPA's name of record for the permit names a facility, not the body that holds the permit, so no operator is named and the row is not counted as an operator.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618403,13 +618407,14 @@
   ],
   "source_areas": [
    "pr"
-  ]
+  ],
+  "permit_only": true
  },
  {
   "id": "pr-mayaguez-public-works",
-  "name": "Municipio de Mayagüez, Municipal Public Works",
-  "short_name": "Mayagüez Public Works",
-  "legal_form": "city",
+  "name": "Permit PR0023396 (Municipal Public Works, Mayagüez)",
+  "short_name": "Permit PR0023396 (Municipal Public Works, Mayagüez)",
+  "legal_form": null,
   "state": "PR",
   "kind": "sso",
   "npdes_permit": "PR0023396",
@@ -618426,7 +618431,7 @@
   "towns": [
    "Mayagüez"
   ],
-  "notes": "EPA's collection-system table: PR0023396 MUNICIPAL PUBLIC WORKS COLLECTION SYSTEM (Municipality). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA records the facility as \"MUNICIPAL PUBLIC WORKS\" (Mayagüez), owner type Municipality.",
+  "notes": "EPA's collection-system table: PR0023396 MUNICIPAL PUBLIC WORKS COLLECTION SYSTEM (Municipality). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA's collection-system table types the owner Municipality; the body that holds the permit is not established from EPA's records. A permit-only row: EPA's name of record for the permit names a facility, not the body that holds the permit, so no operator is named and the row is not counted as an operator.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618434,12 +618439,13 @@
   ],
   "source_areas": [
    "pr"
-  ]
+  ],
+  "permit_only": true
  },
  {
   "id": "pr-villas-del-gigante-plant",
-  "name": "Villas del Gigante wastewater plant (Carolina)",
-  "short_name": "Villas del Gigante plant",
+  "name": "Permit PR0026042 (Villas del Gigante, Carolina)",
+  "short_name": "Permit PR0026042 (Villas del Gigante, Carolina)",
   "legal_form": null,
   "state": "PR",
   "kind": "sso",
@@ -618459,7 +618465,7 @@
   "towns": [
    "Carolina"
   ],
-  "notes": "EPA ICIS-NPDES: 1 plant permit(s), 1 discharge point(s). EPA's collection-system table: PR0026042 VILLAS DEL GIGANTE, CAROLINA COLLECTION SYSTEM (Municipality). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA records the permittee as the facility (\"VILLAS DEL GIGANTE, CAROLINA\") and types it \"Municipal or Water District\"; the owner was not read.",
+  "notes": "EPA ICIS-NPDES: 1 plant permit(s), 1 discharge point(s). EPA's collection-system table: PR0026042 VILLAS DEL GIGANTE, CAROLINA COLLECTION SYSTEM (Municipality). No report under these permits is in EPA's overflow tables (2026-11-12 extract). EPA types it \"Municipal or Water District\"; the body that holds the permit is not established. A permit-only row: EPA's name of record for the permit names a facility, not the body that holds the permit, so no operator is named and the row is not counted as an operator.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -618467,6 +618473,7 @@
   ],
   "source_areas": [
    "pr"
-  ]
+  ],
+  "permit_only": true
  }
 ]

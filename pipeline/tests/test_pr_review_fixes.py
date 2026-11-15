@@ -345,3 +345,49 @@ def test_other_states_records_are_identical_to_main(monkeypatch):
     without = E.build(copy.deepcopy(t), info)
     assert strip(with_pr[0]) == strip(without[0]) and with_pr[1] == without[1]
     assert all(r["published_at"] == "2026-11-12" for r in with_pr[0])
+
+
+# ----------------------------------------------------------------- operators from the permittee; evidenced outfalls
+
+def _ops_script():
+    import importlib.util
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[2]
+    spec = importlib.util.spec_from_file_location("add_pr_operators", root / "scripts" / "add_pr_operators.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m, root
+
+
+def test_operators_are_named_from_the_permittee_and_facilities_stay_permit_only():
+    # Astra P2-3: a facility-only name (invented here) never becomes an operator; the rows on file follow the rule
+    m, root = _ops_script()
+    assert m.owner("PR0099999", {"PR0099999": [{"permittee": "PRASA EJEMPLO WWTP"}]}, {})[0] == "pr-prasa"
+    rid, name, short, lf, note, evidence = m.owner("PR0026042", {}, {})
+    assert name.startswith("Permit PR0026042 (") and lf is None and evidence is None and "permit-only" in note
+    for p, (rid, name, short, lf, note, evidence) in m.OWNERS.items():
+        assert evidence and "name of record" in evidence and lf, p
+    with pytest.raises(SystemExit):
+        m.owner("PR0099998", {"PR0099998": [{"permittee": "Playa Ejemplo"}]}, {})
+    ops = [r for r in json.loads((root / "data" / "dischargers.json").read_text()) if r.get("state") == "PR"]
+    only = [r for r in ops if r.get("permit_only")]
+    named = [r for r in ops if not r.get("permit_only")]
+    assert len(only) == 7 and len(named) == 4
+    assert all(r["legal_form"] is None and r["name"].startswith("Permit PR") for r in only)
+    assert all("Operator named from the permittee" in r["notes"] for r in named)
+    reg = json.loads((root / "data" / "notice-channels" / "pr.json").read_text())["channels"]
+    for r in reg:
+        if r.get("operator_id") in {o["id"] for o in only}:
+            assert r["note"].startswith("The holder of permit") and "not established" in r["note"]
+
+
+def test_only_evidenced_outfalls_are_counted():
+    # Astra P2-4: a facility placeholder, a row with no feature type or another feature type never counts
+    m, root = _ops_script()
+    assert m.evidenced_outfall({"outfall": "001", "feature_type": "EXO", "coords_from": "permitted_feature"})
+    assert not m.evidenced_outfall({"outfall": None, "feature_type": None, "coords_from": "facility"})
+    assert not m.evidenced_outfall({"outfall": "001", "feature_type": None, "coords_from": "permitted_feature"})
+    assert not m.evidenced_outfall({"outfall": "D01", "feature_type": "DEW", "coords_from": "permitted_feature"})
+    assert not m.evidenced_outfall({"outfall": "CS1", "feature_type": "CSS", "coords_from": "permitted_feature"})
+    prasa = next(r for r in json.loads((root / "data" / "dischargers.json").read_text()) if r["id"] == "pr-prasa")
+    assert prasa["outfall_count"] == 67 and "55 discharge point(s)" in prasa["notes"] and "PR0020834" in prasa["notes"]

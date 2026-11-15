@@ -14,8 +14,13 @@ Inputs
   4. research/pr/dischargers.json (the row pr-prasa) and research/pr/private-utilities-candidates.json (3 private
      permits). The facility names of the nine are EPA ECHO's (cwa_rest_services.get_facility_info, read 2026-11-14).
 Rules
-  - OWNERS gives each permit outside PRASA its row, named from the permittee as EPA records it (never a person), with
-    legal_form from docs/legal-forms.md; a body whose form was not read keeps null. Every PRASA permit (permittee "PRASA
+  - OWNERS gives a permit outside PRASA an operator row only where EPA's name of record for the permit names a body
+    (an agency, a company "..., INC."; never a person), with legal_form from docs/legal-forms.md and the evidence in
+    the notes; PERMIT_ONLY keeps the seven whose name of record is a plant, a beach, a hospital or a centre as
+    permit-only rows ("Permit <id> (<facility>)", permit_only true, legal form null), not counted as operators
+    (Astra PR review P2-3): 4 operators and 7 permit-only rows.
+  - outfall_count counts EPA's external outfalls (feature type EXO with an outfall id) and PRASA's CSO layer only; a
+    plant row with only the facility's point (PR0020834) is named in the notes and not counted (P2-4): PRASA 55 + 12. Every PRASA permit (permittee "PRASA
     ...") is in the row pr-prasa (legal form "authority": a public corporation created by law, Ley Núm. 40 de 1 de mayo
     de 1945).
   - kind: "cso" for PRASA (its Puerto Nuevo permit holds the island's combined sewer outfalls); "sso" when a permit of
@@ -62,36 +67,58 @@ PRIVATE_FORMS = {"investor-owned utility", "member-owned utility", "homeowners' 
 PRASA = ("pr-prasa", "Autoridad de Acueductos y Alcantarillados de Puerto Rico (PRASA)", "PRASA", "authority",
          "The island's public water and sewer authority: every PRASA plant, its collection systems and the Puerto "
          "Nuevo combined sewer system (San Juan), under one consent decree (United States v. PRASA, No. "
-         "3:15-cv-02283, D.P.R., 2016, modified 2023).")
-# permit -> (row id, name, short name, legal form, note) for the permits that are not PRASA's
+         "3:15-cv-02283, D.P.R., 2016, modified 2023).",
+         "EPA's permittee of record for each of these permits begins \"PRASA\" (data/outfalls-plants-us.json, "
+         "data/outfalls-us.json)")
+# permit -> (row id, name, short name, legal form, note, permittee evidence) for the permits that are not PRASA's.
+# Operators are named from the permittee only (Astra PR review P2-3): a row is an operator where EPA's name of record for
+# the permit (ECHO's facility name, cwa_rest_services.get_facility_info, read 2026-11-14) names a body: an agency or a
+# company ("..., INC."). Where it names only a plant, a beach, a hospital or a centre, the body that holds the permit
+# is not established: the row is a permit-only row ("Permit <id> (<facility>)", permit_only true, legal form null),
+# left out of operator counts, and no operator page or duty is given to it.
 OWNERS = {
-    "PR0026042": ("pr-villas-del-gigante-plant", "Villas del Gigante wastewater plant (Carolina)",
-                  "Villas del Gigante plant", None,
-                  "EPA records the permittee as the facility (\"VILLAS DEL GIGANTE, CAROLINA\") and types it "
-                  "\"Municipal or Water District\"; the owner was not read."),
     "PR0021326": ("pr-drna-cabo-rojo", "Departamento de Recursos Naturales y Ambientales (DRNA), Cabo Rojo facility",
                   "DRNA (Cabo Rojo)", "state facility",
-                  "EPA's collection-system table types the owner State Government; the facility was not read."),
-    "PR0025925": ("pr-centro-vacacional-maricao", "Centro Vacacional (Maricao)", "Centro Vacacional, Maricao",
-                  "state facility",
-                  "EPA's collection-system table types the owner State Government; the agency that runs it was not "
-                  "read."),
-    "PR0025917": ("pr-balneario-cana-gorda", "Balneario de Caña Gorda (Guánica)", "Balneario de Caña Gorda", None,
-                  "EPA records the facility as \"BALNEARIO DE CANA GORDA\" and its collection-system table types the "
-                  "owner Municipality; the owner was not read."),
-    "PR0023396": ("pr-mayaguez-public-works", "Municipio de Mayagüez, Municipal Public Works", "Mayagüez Public Works",
-                  "city", "EPA records the facility as \"MUNICIPAL PUBLIC WORKS\" (Mayagüez), owner type Municipality."),
-    "PR0024333": ("pr-casa-castaner", "Casa Castañer, Inc. (Lares)", "Casa Castañer", "business or industrial", None),
-    "PR0025283": ("pr-castaner-general-hospital", "Castañer General Hospital (Lares)", "Castañer General Hospital",
-                  "institution", "EPA records the facility as \"CASTANER GENERAL\"; its collection-system table calls "
-                  "it a hospital system."),
-    "PR0021539": ("pr-isleta-marina", "Isleta Marina, Inc. (Fajardo)", "Isleta Marina", "campground or resort", None),
+                  "EPA's collection-system table types the owner State Government.",
+                  "EPA's name of record for the permit is \"DEPARTMENT OF NATURAL AND ENVIRONMENTAL RESOURCES\" (Cabo Rojo)"),
+    "PR0024333": ("pr-casa-castaner", "Casa Castañer, Inc. (Lares)", "Casa Castañer", "business or industrial", None,
+                  "EPA's name of record for the permit is \"CASA CASTANER INC\" (Lares)"),
     "PR0026310": ("pr-consejo-condominios-costeros", "Consejo de Condominios Costeros, Inc. (Río Grande)",
                   "Consejo de Condominios Costeros", "homeowners' association",
-                  "A council of coastal condominiums in Río Grande."),
-    "PR0026425": ("pr-coco-beach-utility", "Coco Beach Utility Company, Inc. (Río Grande)", "Coco Beach Utility",
-                  "investor-owned utility", None),
+                  "A council of coastal condominiums in Río Grande.",
+                  "EPA's name of record for the permit is \"CONSEJO DE CONDOMINIOS COSTEROS, INC.\" (Río Grande)"),
 }
+# permit -> (row id, the facility as EPA records it, note): permit-only rows
+PERMIT_ONLY = {
+    "PR0026042": ("pr-villas-del-gigante-plant", "Villas del Gigante, Carolina",
+                  "EPA types it \"Municipal or Water District\"; the body that holds the permit is not established."),
+    "PR0025925": ("pr-centro-vacacional-maricao", "Centro Vacacional, Maricao",
+                  "EPA's collection-system table types the owner State Government; the agency that holds the permit is "
+                  "not established."),
+    "PR0025917": ("pr-balneario-cana-gorda", "Balneario de Caña Gorda, Guánica",
+                  "EPA's collection-system table types the owner Municipality; the body that holds the permit is not "
+                  "established."),
+    "PR0023396": ("pr-mayaguez-public-works", "Municipal Public Works, Mayagüez",
+                  "EPA's collection-system table types the owner Municipality; the body that holds the permit is not "
+                  "established from EPA's records."),
+    "PR0025283": ("pr-castaner-general-hospital", "Castañer General, Lares",
+                  "EPA's collection-system table calls it a hospital system; the body that holds the permit is not "
+                  "established."),
+    "PR0021539": ("pr-isleta-marina", "Isleta Marina WWTP, Fajardo",
+                  "EPA's name of record is the plant's; the body that holds the permit is not established."),
+    "PR0026425": ("pr-coco-beach-utility", "Coco Beach WWTP, Río Grande",
+                  "EPA's name of record is the plant's; the body that holds the permit is not established."),
+}
+PERMIT_ONLY_NOTE = (" A permit-only row: EPA's name of record for the permit names a facility, not the body that holds "
+                    "the permit, so no operator is named and the row is not counted as an operator.")
+
+
+def evidenced_outfall(r: dict) -> bool:
+    """A discharge point EPA's list gives as an external outfall of the permit: a row with only the facility's point
+    (outfall and feature type empty, coords_from "facility") is not one (Astra PR review P2-4)."""
+    return bool(r.get("outfall")) and r.get("feature_type") == "EXO" and r.get("coords_from") != "facility"
+
+
 TOWNS = {"PR0021326": "Cabo Rojo", "PR0025925": "Maricao", "PR0025917": "Guánica", "PR0023396": "Mayagüez",
          "PR0024333": "Lares", "PR0025283": "Lares", "PR0021539": "Fajardo", "PR0026310": "Río Grande",
          "PR0026425": "Río Grande"}
@@ -136,9 +163,12 @@ def epa_reports() -> Counter:
 def owner(p: str, pl: dict, cs: dict) -> tuple:
     if p in OWNERS:
         return OWNERS[p]
+    if p in PERMIT_ONLY:
+        rid, fac, note = PERMIT_ONLY[p]
+        return (rid, f"Permit {p} ({fac})", f"Permit {p} ({fac})", None, note + PERMIT_ONLY_NOTE, None)
     names = [r.get("permittee") or "" for r in pl.get(p, []) + cs.get(p, [])]
     if names and all(n.upper().startswith("PRASA") for n in names):
-        return (PRASA[0], None, None, None, None)
+        return (PRASA[0], None, None, None, None, None)
     raise SystemExit(f"permit without an owner: {p} {names}")
 
 
@@ -161,18 +191,24 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
             meta[o[0]] = o
     new = []
     for rid, ps in by_row.items():
-        _, name, short, lf, note = meta[rid]
-        rows = [r for p in ps for r in pl.get(p, [])]
+        _, name, short, lf, note, evidence = meta[rid]
+        permit_only = evidence is None
+        all_rows = [r for p in ps for r in pl.get(p, [])]
+        rows = [r for r in all_rows if evidenced_outfall(r)]
+        placeholders = [r for r in all_rows if not evidenced_outfall(r)]
         cso_rows = [r for p in ps for r in cs.get(p, [])]
-        towns = sorted({smart_title(r["city"]) for r in rows + cso_rows if r.get("city")})
+        towns = sorted({smart_title(r["city"]) for r in all_rows + cso_rows if r.get("city")})
         if not towns:     # the city ECHO gives the facility (read 2026-11-14)
             towns = sorted({TOWNS[p] for p in ps if p in TOWNS})
-        waters = list(dict.fromkeys(r["receiving_water_echo"].strip() for r in rows + cso_rows
+        waters = list(dict.fromkeys(r["receiving_water_echo"].strip() for r in all_rows + cso_rows
                                     if r.get("receiving_water_echo")))[:10]
         parts = []
         if rows:
             parts.append(f"EPA ICIS-NPDES: {len({r['npdes_permit'] for r in rows})} plant permit(s), {len(rows)} "
                          "discharge point(s).")
+        if placeholders:
+            parts.append("EPA's list gives " + ", ".join(sorted({r["npdes_permit"] for r in placeholders}))
+                         + " only the facility's point, no outfall: not counted as an outfall.")
         if cso_rows:
             parts.append(f"EPA's CSO inventory: {len(cso_rows)} combined sewer outfalls of {', '.join(sorted(cs))} "
                          "(Puerto Nuevo, San Juan); PRASA's own layer gives each outfall's point and receiving water.")
@@ -191,9 +227,11 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
             parts.append("No report under these permits is in EPA's overflow tables (2026-11-12 extract).")
         if note:
             parts.append(note)
+        if evidence:
+            parts.append(f"Operator named from the permittee: {evidence}.")
         kind = "cso" if cso_rows else "sso" if any(p in sy or reports[p] for p in ps) else "plant"
         channel = LAW + (PRASA_NOTE if rid == PRASA[0] else (PRIVATE_NOTE if lf in PRIVATE_FORMS else "") + OWN)
-        new.append({"id": rid, "name": name, "short_name": short or name, "legal_form": lf, "state": "PR",
+        row = {"id": rid, "name": name, "short_name": short or name, "legal_form": lf, "state": "PR",
                     "kind": kind, "npdes_permit": ps[0], "npdes_permits": list(ps),
                     "receiving_waters": waters, "water_slugs": [], "outfall_count": len(rows) + len(cso_rows) or None,
                     "outfalls_source": ("; ".join(x for x in (
@@ -203,7 +241,10 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
                     "notification_channel": channel, "notification_feed_machine_readable": True,
                     "notification_signup_url": None, "towns": towns or (["island-wide"] if rid == PRASA[0] else []),
                     "notes": " ".join(parts).strip(), "verified": "fetched", "checked": CHECKED,
-                    "aliases": [rid], "source_areas": ["pr"]})
+                    "aliases": [rid], "source_areas": ["pr"]}
+        if permit_only:
+            row["permit_only"] = True
+        new.append(row)
     new.sort(key=lambda r: (r["id"] != PRASA[0], r["id"]))
     ids = Counter(r["id"] for r in keep + new)
     dup = [i for i, k in ids.items() if k > 1]
@@ -211,6 +252,9 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
         raise SystemExit(f"duplicate ids: {dup}")
     stats = {"rows": len(new), "permits": sum(len(r["npdes_permits"]) for r in new),
              "prasa_permits": len(by_row[PRASA[0]]), "permits_with_reports": sum(1 for p in permits if reports[p]),
+             "operators": sum(1 for r in new if not r.get("permit_only")),
+             "permit_only_rows": sum(1 for r in new if r.get("permit_only")),
+             "outfalls": {r["id"]: r["outfall_count"] for r in new if r["outfall_count"]},
              "legal_form": dict(Counter(r.get("legal_form") for r in new)), "kind": dict(Counter(r["kind"] for r in new))}
     first = next((i for i, d in enumerate(dis) if d.get("state") == "PR" and "pr" in (d.get("source_areas") or [])), None)
     if first is None:

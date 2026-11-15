@@ -10,7 +10,7 @@
    "permit": "PR0025917",
    "checked": "2026-11-14",
    "id": "pr-balneario-cana-gorda-epa-report",
-   "name": "Balneario de Caña Gorda (Guánica)",
+   "name": "Permit PR0025917 (Balneario de Caña Gorda, Guánica)",
    "channel_kind": "feed",
    "urls": [],
    "method": null,
@@ -24,7 +24,7 @@
    "sources": [
     "pr-epa-sobe"
    ],
-   "note": "Balneario de Caña Gorda (Guánica) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law.",
+   "note": "The holder of permit PR0025917 (Balneario de Caña Gorda, Guánica) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law. The body that holds the permit is not established (a permit-only row).",
    "barrier": null
   },
   {
@@ -58,7 +58,7 @@
    "permit": "PR0025283",
    "checked": "2026-11-14",
    "id": "pr-castaner-general-hospital-epa-report",
-   "name": "Castañer General Hospital (Lares)",
+   "name": "Permit PR0025283 (Castañer General, Lares)",
    "channel_kind": "feed",
    "urls": [],
    "method": null,
@@ -72,7 +72,7 @@
    "sources": [
     "pr-epa-sobe"
    ],
-   "note": "Castañer General Hospital (Lares) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law.",
+   "note": "The holder of permit PR0025283 (Castañer General, Lares) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law. The body that holds the permit is not established (a permit-only row).",
    "barrier": null
   },
   {
@@ -82,7 +82,7 @@
    "permit": "PR0025925",
    "checked": "2026-11-14",
    "id": "pr-centro-vacacional-maricao-epa-report",
-   "name": "Centro Vacacional (Maricao)",
+   "name": "Permit PR0025925 (Centro Vacacional, Maricao)",
    "channel_kind": "feed",
    "urls": [],
    "method": null,
@@ -96,7 +96,7 @@
    "sources": [
     "pr-epa-sobe"
    ],
-   "note": "Centro Vacacional (Maricao) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law.",
+   "note": "The holder of permit PR0025925 (Centro Vacacional, Maricao) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law. The body that holds the permit is not established (a permit-only row).",
    "barrier": null
   },
   {
@@ -106,7 +106,7 @@
    "permit": "PR0026425",
    "checked": "2026-11-14",
    "id": "pr-coco-beach-utility-epa-report",
-   "name": "Coco Beach Utility Company, Inc. (Río Grande)",
+   "name": "Permit PR0026425 (Coco Beach WWTP, Río Grande)",
    "channel_kind": "feed",
    "urls": [],
    "method": null,
@@ -120,7 +120,7 @@
    "sources": [
     "pr-epa-sobe"
    ],
-   "note": "Coco Beach Utility Company, Inc. (Río Grande) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law.",
+   "note": "The holder of permit PR0026425 (Coco Beach WWTP, Río Grande) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law. The body that holds the permit is not established (a permit-only row).",
    "barrier": null
   },
   {
@@ -304,7 +304,7 @@
    "permit": "PR0021539",
    "checked": "2026-11-14",
    "id": "pr-isleta-marina-epa-report",
-   "name": "Isleta Marina, Inc. (Fajardo)",
+   "name": "Permit PR0021539 (Isleta Marina WWTP, Fajardo)",
    "channel_kind": "feed",
    "urls": [],
    "method": null,
@@ -318,7 +318,7 @@
    "sources": [
     "pr-epa-sobe"
    ],
-   "note": "Isleta Marina, Inc. (Fajardo) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law.",
+   "note": "The holder of permit PR0021539 (Isleta Marina WWTP, Fajardo) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law. The body that holds the permit is not established (a permit-only row).",
    "barrier": null
   },
   {
@@ -328,7 +328,7 @@
    "permit": "PR0023396",
    "checked": "2026-11-14",
    "id": "pr-mayaguez-public-works-epa-report",
-   "name": "Municipio de Mayagüez, Municipal Public Works",
+   "name": "Permit PR0023396 (Municipal Public Works, Mayagüez)",
    "channel_kind": "feed",
    "urls": [],
    "method": null,
@@ -342,7 +342,7 @@
    "sources": [
     "pr-epa-sobe"
    ],
-   "note": "Municipio de Mayagüez, Municipal Public Works reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law.",
+   "note": "The holder of permit PR0023396 (Municipal Public Works, Mayagüez) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law. The body that holds the permit is not established (a permit-only row).",
    "barrier": null
   },
   {
@@ -453,7 +453,7 @@
    "permit": "PR0026042",
    "checked": "2026-11-14",
    "id": "pr-villas-del-gigante-plant-epa-report",
-   "name": "Villas del Gigante wastewater plant (Carolina)",
+   "name": "Permit PR0026042 (Villas del Gigante, Carolina)",
    "channel_kind": "feed",
    "urls": [],
    "method": null,
@@ -467,7 +467,7 @@
    "sources": [
     "pr-epa-sobe"
    ],
-   "note": "Villas del Gigante wastewater plant (Carolina) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law.",
+   "note": "The holder of permit PR0026042 (Villas del Gigante, Carolina) reports an overflow or bypass to EPA Region 2 within 24 hours and in writing within five days; the electronic report is published in EPA's overflow tables, which the overflow module reads daily (1 permit(s) in this row). No public notice of its own is required by Puerto Rico law. The body that holds the permit is not established (a permit-only row).",
    "barrier": null
   }
  ]
