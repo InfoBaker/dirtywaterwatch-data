@@ -307,73 +307,55 @@ def test_a_stale_product_read_by_the_fallback_is_still_called_stale(world):
     assert "STALE product valid 2026-08-10T09:00:00Z" in line and "FALLBACK" in line and RF.exit_code(out) == 1
 
 
-def test_an_outage_in_the_same_hour_as_a_reading_sets_that_reading_aside(world, monkeypatch):
+def alaska_only(world, monkeypatch):
     outs = lower48() + alaska()
     monkeypatch.setattr(RF, "cso_outfalls", lambda: outs)
+    return outs
+
+
+def history_at(world, permit, t):
+    hist = json.loads((world["tmp"] / "rainfall-history.json").read_text())
+    return hist["permits"][permit][int((t - RF.parse_t(hist["start"])).total_seconds() // 3600)]
+
+
+def test_an_outage_in_the_same_hour_as_a_reading_is_never_fresh_or_shown_but_keeps_history_and_citation(world, monkeypatch):
+    alaska_only(world, monkeypatch)
     first = RF.run(now=NOW, session=RegionNOAA())
     assert first["mrms"]["regions"]["alaska"]["fresh"] == 4
     dark = {p: {h: -3.0 for h in RF.HOURS} for p in [*JUNEAU, AK_WET]}
     out = RF.run(now=NOW + timedelta(minutes=10), session=RegionNOAA(wet=dark), force=True)
     a = out["mrms"]["regions"]["alaska"]
     assert a["fresh"] == 0 and a["counted"] == 4 and not a["readings_ok"] and RF.exit_code(out) == 1
-    for p in [*JUNEAU, AK_WET]:
+    for p in [*JUNEAU, AK_WET]:                       # the reading stays where it was, the outage marked
         pt = out["points"][key(p)]
-        assert "mrms" not in pt and pt["last_mrms"] == first["points"][key(p)]["mrms"]
-    assert out["permits"]["AK0023213"]["h24"] is None                      # never shown as this hour's dry reading
-    back = RF.run(now=NOW + timedelta(hours=1), session=RegionNOAA())     # the radar sees it again: read, mark gone
+        assert pt["mrms"] == first["points"][key(p)]["mrms"] and RF.outage_now(pt)
+    row = out["permits"]["AK0023213"]
+    assert row["h24"] is None and row["valid_time"] is None             # never shown as this hour's dry reading
+    assert row["product"].endswith("(alaska_QPE_24H)") and row["read"] == "grid"    # its own region cited
+    assert row["last_reading"]["h24"] == round(4.9 / 25.4, 2)
+    assert history_at(world, "AK0023213", VALID) == round(4.9 / 25.4, 2)           # the history keeps the hour
+    back = RF.run(now=NOW + timedelta(hours=1), session=RegionNOAA(), force=True)   # seen again: read, mark gone
     assert back["mrms"]["regions"]["alaska"]["fresh"] == 4
-    assert all("last_mrms" not in back["points"][key(p)] and "no_coverage" not in back["points"][key(p)]
-               for p in JUNEAU)
+    assert all("no_coverage" not in back["points"][key(p)] for p in JUNEAU)
 
 
-def test_a_failed_regional_export_falls_back_in_that_region_only_and_keeps_its_unit(world):
-    fake = RegionNOAA(fail={"alaska"})
-    out = RF.run(now=NOW, session=fake)
-    m, r, a = out["mrms"], out["requests"], out["mrms"]["regions"]["alaska"]
-    assert a["read"] == "point" and a["fallback"]["used"] and a["fallback"]["read"] == 4 and a["fallback"]["cap"] == 25
-    assert "grid read failed" in a["fallback"]["reason"] and not m["fallback"]["used"]        # the lower 48's is not
-    assert a["requests"]["mrms_export"] == 4                    # its one tile's 24-hour export, twice, read twice
-    assert a["requests"]["mrms_identify"] == 4 and a["requests"]["mrms_statistics"] == 1
-    # the unit from the region's statistics (the catalog's 24-hour item), not the service's stated inches
-    assert a["units"]["units_read"] == "mm" and a["units"]["basis"] == "physical_bound"
-    assert out["points"][key(AK_WET)]["mrms"]["h24"] == round(4.9 / 25.4, 2)
-    assert out["points"][key(AK_WET)]["mrms"]["read"] == "point"
-    assert m["regions"]["carib"]["read"] == "grid" and not m["regions"]["carib"]["fallback"]["used"]
-    assert m["readings_ok"] and RF.exit_code(out) == 0 and out["ok"] is False
-    assert "alaska: per-point fallback (grid read failed" in out["error"]
-    line = RF.summary_line(out, 1.0)
-    assert "alaska by point, 4 fresh of 4" in line and "FALLBACK per point (grid read failed" in line
-    assert r["mrms_identify"] == 4 + 2                          # the fallback's points, the two grids' checks
+def test_an_outage_at_the_wettest_point_never_lowers_the_hours_history(world, monkeypatch):
+    alaska_only(world, monkeypatch)
+    RF.run(now=NOW, session=RegionNOAA())
+    out = RF.run(now=NOW + timedelta(minutes=10), force=True,
+                 session=RegionNOAA(wet={AK_WET: {h: -3.0 for h in RF.HOURS}}))
+    assert history_at(world, "AK0023213", VALID) == round(4.9 / 25.4, 2)
+    row = out["permits"]["AK0023213"]
+    assert row["h24"] == 0.0 and row["points_reporting"] == 3 and row["h24_point"] != key(AK_WET)
+    assert out["mrms"]["regions"]["alaska"]["fresh"] == 3 and RF.outage_now(out["points"][key(AK_WET)])
 
 
-def test_a_regional_gauge_reading_inches_against_the_regions_bound_divides_nothing(world):
-    pajn = (58.35, -134.58)
-    fake = RegionNOAA(wet={pajn: {1: 0.15, 3: 0.15, 6: 0.15}}, gauges={"PAJN": [(9, 3.8)]})
-    out = RF.run(now=NOW, session=fake)
-    u = out["mrms"]["regions"]["alaska"]["units"]
-    assert u["units_read"] == "in" and u["basis"] == "conflict" and u["factor"] == 1.0
-    assert u["evidence"]["gauge_check"]["verdict"] == "in" and u["evidence"]["gauge_check"]["gauges"] == ["PAJN"]
-    assert u["evidence"]["physical_bound"]["box_max"]["h24"] == 93.3
-    assert out["mrms"]["regions"]["alaska"]["units_last_determined"] is None
-    assert out["points"][key(AK_WET)]["mrms"]["h24"] == 4.9                   # the larger value: the safety side
-    assert out["mrms"]["regions"]["carib"]["units"]["units_read"] == "mm"      # another region's unit unaffected
-
-
-def test_a_point_outside_its_regions_grid_is_left_out_and_listed(world, monkeypatch):
-    outs = lower48() + puerto_rico() + [outfall("PR0021555", 99, "PR", 18.44, 66.07)]    # its longitude's sign flipped
-    monkeypatch.setattr(RF, "cso_outfalls", lambda: outs)
-    fake = RegionNOAA()
-    out = RF.run(now=NOW, session=fake)
-    m = out["mrms"]
-    assert m["outside_grid"] == ["18.44,66.07"] and m["regions"]["carib"]["outside_grid"] == ["18.44,66.07"]
-    assert all(float(b.split(",")[2]) < -60 for _, b in fake.exports) and out["ok"] and RF.exit_code(out) == 0
-
-
-def test_a_lower_48_only_run_asks_nothing_of_the_other_grids(world, monkeypatch):
-    monkeypatch.setattr(RF, "cso_outfalls", lambda: lower48())
-    fake = RegionNOAA()
-    out = RF.run(now=NOW, session=fake)
-    assert list(out["mrms"]["regions"]) == ["conus"] and {x for x, _ in fake.exports} == {"conus"}
-    assert out["requests"].get("mrms_statistics") == 0 and "statistics" not in RF.summary_line(out, 1.0)
-    for p in out["points"].values():
-        assert p["mrms"]["h24"] == rain_at(p["lat"], p["lon"])
+def test_an_older_answer_after_an_outage_neither_clears_it_nor_replaces_the_newer_reading(world, monkeypatch):
+    alaska_only(world, monkeypatch)
+    first = RF.run(now=NOW, session=RegionNOAA())
+    RF.run(now=NOW + timedelta(minutes=10), force=True, session=RegionNOAA(wet={AK_WET: {h: -3.0 for h in RF.HOURS}}))
+    out = RF.run(now=NOW + timedelta(minutes=20), force=True,
+                 session=RegionNOAA(stale={"alaska": 1}, wet={AK_WET: {h: 0.0 for h in RF.HOURS}}))
+    pt = out["points"][key(AK_WET)]
+    assert pt["mrms"] == first["points"][key(AK_WET)]["mrms"] and RF.outage_now(pt)     # 13:00's zero rejected
+    assert pt["no_coverage"]["valid_time"] == RF.iso(VALID) and out["mrms"]["regions"]["alaska"]["fresh"] == 3

@@ -438,8 +438,8 @@ def test_a_fallback_answer_of_no_data_is_not_a_fresh_reading(nation):
     out = RF.run(now=NOW, session=NoData(west_of=-100.0))
     m = out["mrms"]
     west = [k for k, p in out["points"].items() if p["lon"] < -100]
-    for k in west:              # nothing new stored; the reading of before set aside (never fresh, never shown)
-        assert "mrms" not in out["points"][k] and out["points"][k]["last_mrms"] == first["points"][k]["mrms"]
+    for k in west:              # nothing new stored; the reading of before kept, never fresh, its outage marked
+        assert out["points"][k]["mrms"] == first["points"][k]["mrms"] and RF.outage_now(out["points"][k])
         assert out["points"][k]["no_coverage"]["read_before"] is True
     assert {m["failed"][k] for k in west} == {"no 24-hour value in the answer"}
     assert m["fresh"] == m["readable"] - 8 and m["fallback"]["read"] == 0 and m["fallback"]["failed"] == 8
