@@ -312,13 +312,17 @@ def test_no_release_is_geolocated_from_its_street_or_plant():
     assert all(P.named_water_only(r) for r in recs.values())
 
 
-def test_a_failed_detail_page_fails_the_run_and_stops_being_asked_for(monkeypatch, tmp_path):
+def test_a_failed_detail_page_fails_every_run_until_it_is_read_and_is_retried_with_backoff(monkeypatch, tmp_path):
+    # re-review P1-2: four failed runs, then recovery; the feed never declares success while a candidate's detail is
+    # unresolved, and the earlier records stay throughout
     import common
     monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
     monkeypatch.setattr(D, "STATE_PATH", tmp_path / "state.json")
     monkeypatch.setattr(D, "save_raw", lambda *a, **k: None)
     (tmp_path / f"{D.SOURCE_ID}.json").write_text(json.dumps({"records": [{"event_id": "x"}], "meta": {}}))
     (tmp_path / "state.json").write_text(json.dumps({"rows": {}, "backfilled_at": T0}))
+    good = {"on": False}
+    page = D.parse_detail((FIX / "derns_detail_water.html").read_text())
 
     class Half(D.Client):
         def __init__(self):
@@ -328,17 +332,47 @@ def test_a_failed_detail_page_fails_the_run_and_stops_being_asked_for(monkeypatc
             return listing()
 
         def detail(self, key):
+            if good["on"]:
+                return {**copy.deepcopy(page), "key": key}
             return None                                  # a page that is not a release's detail (an error page)
     monkeypatch.setattr(D, "Client", Half)
-    assert D.main([]) == 1
-    out = json.loads((tmp_path / f"{D.SOURCE_ID}.json").read_text())
-    assert out["ok"] is False and out["records"] == [{"event_id": "x"}]
-    st = json.loads((tmp_path / "state.json").read_text())
-    for _ in range(2):
-        D.main([])
+    clock = iter(["2026-11-14T18:00:00Z", "2026-11-14T19:00:00Z", "2026-11-14T20:00:00Z", "2026-11-14T21:00:00Z",
+                  "2026-11-15T22:00:00Z", "2026-11-16T23:00:00Z"])
+    monkeypatch.setattr(D, "now_iso", lambda: next(clock))
+    for _ in range(4):
+        assert D.main([]) == 1
+        out = json.loads((tmp_path / f"{D.SOURCE_ID}.json").read_text())
+        assert out["ok"] is False and out["records"] == [{"event_id": "x"}] and out["meta"]["unresolved_details"]
     st = json.loads((tmp_path / "state.json").read_text())
     from datetime import datetime, timezone
-    assert D.due_for_detail(st, datetime(2026, 11, 14, 18, tzinfo=timezone.utc), 40) == []
+    pending = D.unresolved_details(st)
+    assert pending and all(st["rows"][k]["detail"] is None for k in pending)          # retained throughout
+    # backoff: not asked again within RETRY_HOURS of the last failure, asked again after it
+    assert not set(pending) & set(D.due_for_detail(st, datetime(2026, 11, 14, 22, tzinfo=timezone.utc), 400))
+    assert set(pending) <= set(D.due_for_detail(st, datetime(2026, 11, 15, 22, tzinfo=timezone.utc), 400))
+    good["on"] = True                                     # recovery, after the backoff
+    assert D.main(["--details", "400"]) == 0
+    out = json.loads((tmp_path / f"{D.SOURCE_ID}.json").read_text())
+    st = json.loads((tmp_path / "state.json").read_text())
+    assert out["ok"] is True and not D.unresolved_details(st) and "unresolved_details" not in out["meta"]
+
+
+def test_an_error_page_in_place_of_a_requested_list_page_fails_the_read(monkeypatch):
+    page1 = (FIX / "derns_list.html").read_text()
+
+    class Two(D.Client):
+        def __init__(self):
+            super().__init__(pause=0)
+
+        def get(self, url):
+            return page1
+
+        def post(self, data):
+            return "<html><body><h1>Please accept the terms to continue</h1></body></html>"
+    monkeypatch.setattr(D, "page_count", lambda p: 2)
+    monkeypatch.setattr(D.Client, "_next", staticmethod(lambda page, term: {}))
+    with pytest.raises(RuntimeError, match="page 2"):
+        Two().recent(2)
 
 
 # ---------------------------------------------------------------- registry, register, rules, text, waters

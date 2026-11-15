@@ -62,7 +62,10 @@ Lifecycle
     never dropped. Details are read for at most DETAILS_PER_RUN releases a run, newest first, and read again while a
     release is under RECHECK_DAYS old; a changed detail is kept with its earlier version's hash (raw._revisions).
   - A list, a search or a detail page that cannot be read is ok=False: the previous records stay and nothing is
-    dropped; a detail page that fails MAX_DETAIL_FAILURES reads is no longer asked for.
+    dropped. A detail page that failed MAX_DETAIL_FAILURES reads is asked for again once every RETRY_HOURS (backoff,
+    never given up), and while any candidate's detail is unresolved the run stays ok=False with the keys in
+    meta.unresolved_details, so a failure is never turned into success by no longer asking (re-review P1-2). Every
+    requested page of the Recent Releases list must carry rows: an error or consent page in its place fails the run.
   - raw._placement "named_water_only": a release is never geolocated from its street, plant or pump station
     (build/provisional_outfalls.py); only a water its notes name places it.
 
@@ -105,7 +108,8 @@ PAUSE_S = 1.5
 PAGES = 3
 DETAILS_PER_RUN = 40
 RECHECK_DAYS = 14
-MAX_DETAIL_FAILURES = 3   # a detail page that failed this many reads is no longer asked for (meta counts it)
+MAX_DETAIL_FAILURES = 3   # a detail page that failed this many reads is then retried once every RETRY_HOURS
+RETRY_HOURS = 24
 P = "ctl00$ctl00$ContentPlaceHolderBody$ContentPlaceHolder1$ucReleaseSearch$"
 SEARCH_TERMS = ["SEWAGE", "SEWER", "SANITARY", "SEPTIC", "WASTEWATER", "WASTE WATER", "GREY WATER", "GRAY WATER",
                 "EFFLUENT", "MIXED LIQUOR"]
@@ -337,9 +341,12 @@ class Client:
         rows = list_rows(page)
         if not rows:
             raise RuntimeError("the Recent Releases list showed no rows")
-        for _ in range(1, min(pages, page_count(page))):
+        for i in range(1, min(pages, page_count(page))):
             page = self.post(self._next(page, None))
-            rows += list_rows(page)
+            got = list_rows(page)
+            if not got:          # an error or consent page in place of a requested page is never accepted
+                raise RuntimeError(f"Recent Releases page {i + 1}: no release rows on the page")
+            rows += got
         return rows
 
     def search(self, term: str) -> list[dict]:
@@ -570,6 +577,20 @@ def merge(state: dict, rows: list[dict], now: str) -> dict:
     return n
 
 
+def retry_due(e: dict, now_dt: datetime) -> bool:
+    """A detail that failed MAX_DETAIL_FAILURES reads is retried once every RETRY_HOURS, never given up."""
+    last = e.get("detail_failed_at")
+    if not last:
+        return True
+    return now_dt - datetime.fromisoformat(last.replace("Z", "+00:00")) >= timedelta(hours=RETRY_HOURS)
+
+
+def unresolved_details(state: dict) -> list[str]:
+    """Candidate releases whose detail page has failed and never been read: the feed is not healthy while any."""
+    return sorted(k for k, e in state.get("rows", {}).items()
+                  if e.get("detail") is None and e.get("detail_failures", 0) > 0)
+
+
 def due_for_detail(state: dict, now_dt: datetime, limit: int) -> list[str]:
     def started(e):
         t, _ = parse_time(e["list"].get("release_time"))
@@ -580,7 +601,7 @@ def due_for_detail(state: dict, now_dt: datetime, limit: int) -> list[str]:
         if kind in ("not_candidate", "industrial", "treated_effluent") and e.get("detail") is not None:
             continue
         if e.get("detail") is None:
-            if e.get("detail_failures", 0) < MAX_DETAIL_FAILURES:
+            if e.get("detail_failures", 0) < MAX_DETAIL_FAILURES or retry_due(e, now_dt):
                 out.append(e["key"])
             continue
         t, _ = parse_time(e["list"].get("release_time"))
@@ -602,12 +623,14 @@ def read_details(client: Client, state: dict, keys: list[str], now: str) -> dict
         except requests.RequestException as e:
             n["details_failed"] += 1
             state["rows"][k]["detail_failures"] = state["rows"][k].get("detail_failures", 0) + 1
+            state["rows"][k]["detail_failed_at"] = now
             print(f"{SOURCE_ID}: detail {k}: {e}", file=sys.stderr)
             continue
         if d is None:
             n["details_failed"] += 1
             e = state["rows"][k]
             e["detail_failures"] = e.get("detail_failures", 0) + 1
+            e["detail_failed_at"] = now
             continue
         d = safe_detail(d)
         h = hashlib.sha256(json.dumps(d, sort_keys=True).encode()).hexdigest()[:16]
@@ -616,6 +639,7 @@ def read_details(client: Client, state: dict, keys: list[str], now: str) -> dict
             e.setdefault("revisions", []).append({"seen_at": now, "previous_hash": e["detail_hash"]})
             n["details_changed"] += 1
         e.update(detail=d, detail_hash=h, detail_read_at=now)
+        e.pop("detail_failed_at", None)
         n["details_read"] += 1
     return n
 
@@ -679,11 +703,15 @@ def run(args) -> int:
     state["format"], state["updated_at"] = SAFE_FORMAT, now
     write_json(STATE_PATH, state)
     save_raw(SOURCE_ID, json.dumps(state, indent=1, sort_keys=True), "json")
-    if counts.get("details_failed"):
-        # a detail page that failed (an error, or a page that is not a release's detail): the published records stay
-        # as they were (ok=False); what was read is kept in the state for the next run
-        write_events(SOURCE_ID, [], ok=False, error=f"{counts['details_failed']} release detail page(s) not read",
-                     meta=META)
+    unresolved = unresolved_details(state)
+    if counts.get("details_failed") or unresolved:
+        # a detail page that failed (an error, or a page that is not a release's detail), this run or earlier and not
+        # yet read: the published records stay as they were (ok=False) until every one is read; what was read is kept
+        # in the state for the next run (re-review P1-2)
+        write_events(SOURCE_ID, [], ok=False,
+                     error=f"{counts.get('details_failed', 0)} release detail page(s) not read this run; "
+                           f"{len(unresolved)} unresolved",
+                     meta={**META, "unresolved_details": unresolved})
         print(f"{SOURCE_ID}: FAILED {counts}", file=sys.stderr)
         return 1
     recs, reasons = build(state, now)
