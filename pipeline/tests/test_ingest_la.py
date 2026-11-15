@@ -562,3 +562,71 @@ def test_suffixed_house_numbers_contact_and_honorific_forms_never_reach_the_stat
     w = {r["started_at"]: r for r in out2["records"]}
     for d in ("2026-09-04", "2026-08-12"):
         assert w[d]["waterbody_text"] is None and "withheld" in w[d]["raw"]["placement_note"]
+
+
+# --- round 4 (Astra verify3 P1-1) ---
+
+def test_a_failed_read_keeps_every_earlier_record_with_or_without_the_state_file(monkeypatch, tmp_path):
+    """Astra verify3 P1-1: after a good run (three records from report 98), every combination of the state file
+    present, absent or emptied with the index, the report fetch, the summary or the table check failing keeps all
+    three records, their dates and the health history (ok false, last_ok_at the good run's), and the retained
+    records are checked again before they are written (a name put into the events file is withheld)."""
+    import requests
+    url = "https://example.org/98th-Quarterly-Report.pdf"
+    amended = "https://example.org/98th-Quarterly-Report-rev.pdf"
+    pages = {b"good": [SUMMARY, TABLE_N, TABLE_S], b"nosummary": [TABLE_N, TABLE_S], b"short": [SUMMARY, TABLE_N]}
+    failures = {
+        "index": None,
+        "fetch": {url: requests.ConnectionError("down"), amended: requests.ConnectionError("down")},
+        "summary": {url: b"nosummary", amended: b"nosummary"},
+        "table": {url: b"short", amended: b"short"},
+    }
+    for state_mode in ("present", "absent", "empty"):
+        for kind, contents in failures.items():
+            d = tmp_path / f"{state_mode}-{kind}"
+            d.mkdir()
+            _pdf_state(monkeypatch, pages)
+            _live(monkeypatch, d, {98: url}, {url: b"good"})
+            code, good = _run_at(monkeypatch, d, "2026-11-01T00:00:00Z")
+            assert code == 0 and good["count"] == 3
+            dates = sorted(r["started_at"] for r in good["records"])
+            ev = json.loads(json.dumps(good))
+            ev["records"][0]["waterbody_text"] = ev["records"][0]["raw"]["receiving_water_as_given"] = \
+                "Dr. Example Person"
+            (d / "events" / f"{Q.SOURCE_ID}.json").write_text(json.dumps(ev))
+            if state_mode == "absent":
+                (d / "state.json").unlink()
+            elif state_mode == "empty":
+                (d / "state.json").write_text("{}")
+            # an amended copy at a new address makes the report due when the state still holds it
+            links = {98: amended if state_mode == "present" else url}
+            if contents is None:
+                _live(monkeypatch, d, links, {})
+
+                def down(u, **kw):
+                    raise requests.ConnectionError("index down")
+                monkeypatch.setattr(Q.requests, "get", down)
+            else:
+                _live(monkeypatch, d, links, contents)
+            code, out = _run_at(monkeypatch, d, "2026-11-02T00:00:00Z")
+            case = (state_mode, kind)
+            assert code == 1 and out["ok"] is False, case
+            assert out["count"] == 3 and sorted(r["started_at"] for r in out["records"]) == dates, case
+            assert len({r["source_record_id"] for r in out["records"]}) == 3, case
+            assert out["last_ok_at"] == "2026-11-01T00:00:00Z", case
+            assert "Example Person" not in json.dumps(out), case
+            assert "Example Person" not in (d / "state.json").read_text(), case
+            # a second failed run keeps them again
+            code, out = _run_at(monkeypatch, d, "2026-11-03T00:00:00Z")
+            assert code == 1 and out["count"] == 3 and out["last_ok_at"] == "2026-11-01T00:00:00Z", case
+
+
+def test_a_recovered_read_replaces_the_retained_rows_with_no_duplicate(monkeypatch, tmp_path):
+    url = "https://example.org/98th-Quarterly-Report.pdf"
+    _pdf_state(monkeypatch, {b"good": [SUMMARY, TABLE_N, TABLE_S]})
+    _live(monkeypatch, tmp_path, {98: url}, {url: b"good"})
+    assert _run_at(monkeypatch, tmp_path, "2026-11-01T00:00:00Z")[0] == 0
+    (tmp_path / "state.json").unlink()
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-02T00:00:00Z")
+    assert code == 0 and out["count"] == 3 and out["meta"]["retained_from_previous_events"] == []
+    assert len({r["source_record_id"] for r in out["records"]}) == 3
