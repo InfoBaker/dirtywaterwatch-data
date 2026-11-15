@@ -272,8 +272,8 @@ def test_a_plant_point_bypass_and_bad_points_are_never_discharge_points(monkeypa
     assert plant_sso["lat"] is None and "names a treatment plant" in plant_sso["raw"]["point_note"]
     assert kept["5009"]["lat"] is None and "outside Puerto Rico" in kept["5009"]["raw"]["point_note"]
     assert kept["5355"]["lat"] is None
-    for r in kept.values():
-        assert r["raw"]["_placement"] == "named_water_only"            # never geolocated, never a plant stand-in
+    for r in kept.values():                                            # never geolocated, never a plant stand-in
+        assert (r["raw"].get("_placement") == "named_water_only") == (r["lat"] is None)
     station = kept["7222"]                                             # a pump station's own point stays
     assert station["lat"] == 18.418 and station["coord_source"] == "source"
     from build import provisional_outfalls as PO
@@ -413,3 +413,80 @@ def test_public_text_keeps_the_legal_exception_and_calls_unverified_channels_unv
     assert "usually" not in rules and "not a lift" in rules
     src = (root / "data" / "sources" / "pr-drna-beach-notices.yaml").read_text()
     assert "never the sampling date" in src and "poll precision" in src
+
+
+# ----------------------------------------------------------------- water batch readiness (P2-5), PR made live here only
+
+def _pr_resolver(monkeypatch, extra=()):
+    def river(slug, name, town, coords, aliases=(), geometry=True):
+        xs, ys = [c[0] for c in coords], [c[1] for c in coords]
+        w = {"slug": slug, "name": name, "kind": "river", "state": "PR", "towns": [town],
+             "bbox": [min(xs), min(ys), max(xs), max(ys)], "aliases": list(aliases), "source": "nhd", "launches": [],
+             "advisories": [], "extra": True}
+        if geometry:
+            w["geometry"] = {"type": "LineString", "coordinates": coords}
+        return w
+    waters = {w["slug"]: w for w in [
+        river("quebrada-ejemplo-humacao-pr", "Quebrada Ejemplo", "Humacao", [[-65.83, 18.15], [-65.80, 18.16]]),
+        river("quebrada-ejemplo-arecibo-pr", "Quebrada Ejemplo", "Arecibo", [[-66.73, 18.46], [-66.70, 18.47]]),
+        river("rio-muestra-pr", "Río Muestra", "Caguas", [[-66.05, 18.20], [-65.95, 18.30]], aliases=["Rio Muestra"]),
+        *extra]}
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"PR"})
+    S._GEOM_CACHE.clear()
+    return S.Resolver(waters, [], {}, {}, S.load_rules().get("placement") or {})
+
+
+def _ev(text, lat, lon, **kw):
+    e = {"event_id": "echo-sewer-overflow:PR0099999:1:1", "source_id": "echo-sewer-overflow", "event_type": "sso",
+         "status": "ended", "npdes_permit": "PR0099999", "waterbody_text": text, "water_slugs": [],
+         "water_match": "none", "lat": lat, "lon": lon, "raw": {}, "started_at": "2026-11-01T10:00:00-04:00"}
+    e.update(kw)
+    return e
+
+
+def test_pr_placement_once_its_waters_are_loaded(monkeypatch):
+    R = _pr_resolver(monkeypatch)
+    try:
+        # a name shared by two municipalities' streams: the one at the report's point, never the other
+        assert R.resolve(_ev("QUEBRADA EJEMPLO", 18.155, -65.82))["water_slugs"] == ["quebrada-ejemplo-humacao-pr"]
+        # the same name with no point: not placed (ambiguous), never one of the two by guess
+        assert R.resolve(_ev("QUEBRADA EJEMPLO", None, None, raw={"_placement": "named_water_only"}))["water_slugs"] == []
+        # a name whose only record lies far beyond the name limit from the report's point: refused
+        assert R.resolve(_ev("QUEBRADA EJEMPLO", 18.0, -66.6))["water_slugs"] == []
+        assert R.resolve(_ev("Río Muestra", 18.5, -67.1))["water_slugs"] == []
+        # a unique name with no point (a plant's point set aside): placed by the name it gives
+        out = R.resolve(_ev("RIO MUESTRA", None, None, raw={"_placement": "named_water_only"}))
+        assert out["water_slugs"] == ["rio-muestra-pr"] and out["water_match"] == "name"
+        # an unresolved name: unplaced, and a report with no point is never put on its permit's outfalls' water
+        out = R.resolve(_ev("CAÑO SIN NOMBRE EN EL MAPA", None, None, raw={"_placement": "named_water_only"}))
+        assert out["water_slugs"] == []
+        # a beach advisory is a marker at its station: never placed on the river whose line it touches
+        beach = _ev("Tropical Beach (Naguabo)", 18.25, -66.0, event_type="beach_advisory", status="advisory_active",
+                    source_id="pr-drna-beach-notices", event_id="pr-drna-beach-notices:RW-31:1", npdes_permit=None,
+                    coord_source="station_point", raw={"_placement": "named_water_only", "state": "PR"})
+        assert R.resolve(beach)["water_slugs"] == []
+        rec = recs_of([post(1, "2026-11-06T12:00:00", [TROP])])[0]["RW-31:1"]
+        assert rec["raw"]["_placement"] == "named_water_only" and rec["water_slugs"] == []
+    finally:
+        S._GEOM_CACHE.clear()
+
+
+def test_a_pr_name_written_without_its_accent_needs_the_alias_the_batch_adds(monkeypatch):
+    # status.norm_name drops accented letters ("Río" -> "r o"), so PRASA's "RIO MUESTRA" finds the NHD name "Río
+    # Muestra" only through an alias without the accent: the PR water batch must add one for every accented name
+    R = _pr_resolver(monkeypatch, extra=[{"slug": "rio-acento-pr", "name": "Río Acento", "kind": "river", "state": "PR",
+                                         "towns": ["Ponce"], "bbox": [-66.62, 18.0, -66.6, 18.02], "aliases": [],
+                                         "source": "nhd", "launches": [], "advisories": [], "extra": True,
+                                         "geometry": {"type": "LineString",
+                                                      "coordinates": [[-66.62, 18.0], [-66.6, 18.02]]}}])
+    try:
+        assert R.resolve(_ev("RIO ACENTO", None, None, raw={"_placement": "named_water_only"}))["water_slugs"] == []
+        assert R.resolve(_ev("RIO MUESTRA", None, None, raw={"_placement": "named_water_only"}))["water_slugs"] == [
+            "rio-muestra-pr"]
+    finally:
+        S._GEOM_CACHE.clear()
+
+
+def test_no_pr_water_is_live_until_the_switch():
+    rules = json.loads((__import__("pathlib").Path(__file__).resolve().parents[2] / "data" / "rules.json").read_text())
+    assert "PR" not in rules["live_states"]

@@ -522,6 +522,9 @@ def _record(run: dict, at: str, newest, confirmed: dict) -> dict:
                        (f"DRNA's revision of its notice published {first['published']} (post {first['id']}), dated "
                         f"{first['time']} (its modified_gmt), added the beach; the original notice did not list it"),
         "bav_rule": "Beach Action Value for enterococci, 70 colonies per 100 mL (DRNA's notice)",
+        # a marker at the station only: never placed on a water by its point or a registry (a river mouth near a
+        # beach is not the beach), so no water is coloured for it (status.named_water_only)
+        "_placement": "named_water_only",
     }
     notes = sorted({x["note"] for _, x in run["notices"] if x.get("note")})
     if notes:
