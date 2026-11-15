@@ -230,3 +230,37 @@ def _cell_at(page, n, inner):
                   lambda m: m.group(1) + "\n".join(
                       (f'<td style="text-align: center;">{inner}</td>' if i == n else c)
                       for i, c in enumerate(re.findall(r"<td[^>]*>[^<]*</td>", m.group(2)))) + "\n", page, count=1)
+
+
+# ---- Oklahoma: a swimming place's result never colours the whole lake ------------------------------------------
+
+@pytest.mark.parametrize("place", ["Buckhorn Pavilion", "Buckhorn Loop D", "Point Day Use", "Goddard Youth Camp"])
+def test_r2_6_a_sampling_place_result_never_colours_lake_of_the_arbuckles(monkeypatch, tmp_path, place):
+    from datetime import datetime
+    from build import status as S
+    from test_ingest_nv import ROOT
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    rules["live_states"] = list(rules["live_states"]) + ["OK"]          # in this test only (the switch is not made)
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"OK"})
+    # the place's 8/6 result raised to 400 (invented); the build is run the next day, inside the 72-hour caution
+    page = re.sub(rf"({re.escape(place)}</strong></td>\s*<td[^>]*>)[^<]*", lambda m: m.group(1) + "400.0", PAGE, count=1)
+    recs, _ = N.build(page, T1, [])
+    r = [x for x in recs if x["raw"]["place"] == place]
+    assert r and all(x["raw"]["_point_extent_only"] is True for x in r)
+    assert all(x["lat"] is None and "not known" in x["raw"]["placement_note"] for x in r)   # no cited point: none made
+    d = 0.05
+    box = {"type": "Polygon", "coordinates": [[[-97.05 - d, 34.43 - d], [-97.05 + d, 34.43 - d], [-97.05 + d, 34.43 + d],
+                                               [-97.05 - d, 34.43 + d], [-97.05 - d, 34.43 - d]]]}
+    lake = {"slug": "lake-of-the-arbuckles-ok", "name": "Lake of the Arbuckles", "kind": "reservoir", "state": "OK",
+            "bbox": [-97.05 - d, 34.43 - d, -97.05 + d, 34.43 + d], "geometry": box, "county": "Murray County"}
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    (tmp_path / f"{N.SOURCE_ID}.json").write_text(json.dumps({"source_id": N.SOURCE_ID, "ok": True, "last_ok_at": T1,
+                                                               "meta": {}, "records": recs}))
+    st, _ = S.build(now=datetime.fromisoformat("2026-08-07T12:00:00+00:00"), write=False, events_dir=tmp_path,
+                    waters={"lake-of-the-arbuckles-ok": lake}, outfalls=[], registry={}, reaches={}, flows=({}, {}),
+                    rules=rules, placement_cache=None)
+    w = st["waters"]["lake-of-the-arbuckles-ok"]
+    assert r[0]["event_id"] in w["events"]                       # listed on the lake's page
+    assert w["status"] == "grey"                                 # never the whole lake's colour
+    assert any(a["event_id"] == r[0]["event_id"] for a in st["advisory_points"]) or r[0]["lat"] is None
