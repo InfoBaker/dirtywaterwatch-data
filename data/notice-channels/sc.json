@@ -746,6 +746,33 @@
   },
   {
    "state": "SC",
+   "operator_id": null,
+   "agency": "South Carolina Department of Environmental Services",
+   "permit": null,
+   "checked": "2026-11-15",
+   "id": "sc-des-swim-safety-page",
+   "name": "SC DES (swim safety pages)",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://des.sc.gov/programs/bureau-water/recreational-waters/swim-safety",
+    "https://des.sc.gov/programs/bureau-water/recreational-waters/swim-safety/natural-swimming-areas"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "notices",
+   "records": false,
+   "noun": "Voluntary page",
+   "sources": [
+    "sc-des-freshwater-swim-advisories"
+   ],
+   "note": "DES's swim-safety pages, among them the natural swimming areas page, which may describe the 'Swimming Advisory' layer's sites, answered 'Access denied' to this site's requests and 403 to a browser on 2026-11-15; what a site on the layer means could not be read from DES. The layer itself is read as a feed.",
+   "barrier": "bot_wall"
+  },
+  {
+   "state": "SC",
    "operator_id": "sc-dewees-utility",
    "agency": null,
    "permit": "SC0046817",

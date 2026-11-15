@@ -131,12 +131,23 @@ def rows() -> list[dict]:
              urls=["https://gis.des.sc.gov/gisserver/rest/services/water/Water_Advisories/MapServer/0"], method="json",
              legal_basis=None, basis_kind="voluntary", monitored=False, unmonitored_reason="feed_ingested",
              feed_source_id="sc-des-freshwater-swim-advisories", publishes="status", noun="Data feed",
-             sources=["sc-des-freshwater-swim-advisories"],
+             sources=["sc-des-freshwater-swim-advisories"], checked="2026-11-15",
              note=("DES's map layer titled 'Swimming Advisory' (SCDES Water Advisories, layer 0): 23 river and lake "
                    "sites on 2026-11-15 (name, station, point; the contact and telephone fields are not read) with "
                    "no date and no status. Each site is shown at its point as DES's listing, dated from the first "
                    "read that listed it."),
              barrier=None),
+        base(agency=DES, id="sc-des-swim-safety-page", name="SC DES (swim safety pages)",
+             channel_kind="state_alert_page",
+             urls=["https://des.sc.gov/programs/bureau-water/recreational-waters/swim-safety",
+                   "https://des.sc.gov/programs/bureau-water/recreational-waters/swim-safety/natural-swimming-areas"],
+             method="html", legal_basis=None, basis_kind="voluntary", monitored=False, unmonitored_reason="bot_wall",
+             publishes="notices", records=False, noun="Voluntary page", sources=["sc-des-freshwater-swim-advisories"],
+             checked="2026-11-15",
+             note=("DES's swim-safety pages, among them the natural swimming areas page, which may describe the 'Swimming Advisory"
+                   "' layer's sites, answered 'Access denied' to this site's requests and 403 to a browser on 2026-11-15; what a s"
+                   "ite on the layer means could not be read from DES. The layer itself is read as a feed."),
+             barrier="bot_wall"),
         base(agency=DES, id="sc-des-shellfish-closures", name="SC DES (shellfish closure map)",
              channel_kind="state_alert_page", urls=[], method=None, legal_basis=None, basis_kind="voluntary",
              monitored=False, unmonitored_reason="other", publishes="notices", records=False,
