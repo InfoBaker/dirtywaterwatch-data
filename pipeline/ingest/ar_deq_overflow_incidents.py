@@ -118,7 +118,7 @@ NO_ID_REASON = ("no readable Web Confirmation Number (DEQ's key for the report);
                 "again at the next")
 
 
-def check_ids(rows: list[dict]) -> tuple[list[dict], int]:
+def check_ids(rows: list[dict]) -> tuple[list[dict], int, str | None]:
     """(the reports that carry DEQ's Web Confirmation Number, how many did not). The number is the record key: a
     report without one would be keyed 'no-id' and collapse with every other such report, so it is never built or
     saved. A few such reports are left out of this read (the events file says how many and why; the next read asks
@@ -129,7 +129,11 @@ def check_ids(rows: list[dict]) -> tuple[list[dict], int]:
     if bad and (not good or bad > max(1, MAX_NO_ID_SHARE * len(rows))):
         raise SearchFailed(f"{bad} of {len(rows)} reports have no readable Web Confirmation Number (a blank number or "
                            "a changed detail row); nothing is saved")
-    return good, bad
+    days = [started_day(r) for r in rows if r not in good]
+    known = [d for d in days if d is not None]
+    # the earliest overflow day among those left out: the next read goes back at least that far (None: unknown)
+    retry = min(known).isoformat() if known and len(known) == len(days) else None
+    return good, bad, retry
 
 
 # a decimal degree written to more than three places ("35.123456, -93.654321", "Lat 35.1234 Long -93.6543"): a filer's
@@ -322,13 +326,27 @@ def main(argv: list[str] | None = None) -> int:
                                      <= today - timedelta(days=DEEP_EVERY_DAYS))
             start = (date.fromisoformat(a.backfill) if a.backfill
                      else DEEP_FROM if deep else today - timedelta(days=WINDOW_DAYS))
+            # a report left out of an earlier read (no confirmation number) is asked for again until it is read
+            # (verification 2 P2-2): the read goes back to the earliest day among them
+            retry_from = (prev_doc.get("meta") or {}).get("retry_from")
+            if retry_from:
+                start = min(start, date.fromisoformat(retry_from))
             rows, info = fetch(start, today)
             if start <= DEEP_FROM:
                 info["deep_read_at"] = fetched_at
             elif last_deep:
                 info["deep_read_at"] = last_deep
-        rows, no_id = check_ids(rows)
+        rows, no_id, retry_day = check_ids(rows)
         rows = [round_coords(r) for r in rows]
+        if no_id:
+            # an incomplete read: the weekly deep read is not counted as done, and the next read goes back to the
+            # earliest report left out (or to this read's start where its day is unknown)
+            info["retry_from"] = retry_day or start.isoformat()
+            if not a.file:
+                if last_deep:
+                    info["deep_read_at"] = last_deep
+                else:
+                    info.pop("deep_read_at", None)
     except (requests.RequestException, SearchFailed, ValueError, OSError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
@@ -353,8 +371,15 @@ def main(argv: list[str] | None = None) -> int:
             "generic": True, "registry_ids": row.get("registry_ids") or [], "timezone": block.get("time_zone"),
             "rows_polled": polled, "rows_carried": len(rows) - polled, **info}
     path_notes_to_meta(records, meta)
-    out = write_events(SOURCE_ID, records, ok=True, error=f"{no_id} report(s): {NO_ID_REASON}" if no_id else None,
-                       meta=meta, path=path)
+    if no_id:
+        # an incomplete read (verification 2 P2-2): the readable reports are written, the run is not ok, last_ok_at
+        # stays the previous one and the error stays until the left-out reports are read
+        meta.setdefault("deep_read_at", None)
+        write_events(SOURCE_ID, records, ok=False, error=f"{no_id} report(s): {NO_ID_REASON}", meta=meta, path=path,
+                     partial=True)
+        print(f"{SOURCE_ID}: incomplete, {no_id} report(s) left out ({NO_ID_REASON})", file=sys.stderr)
+        return 1
+    out = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta, path=path)
     print(f"{SOURCE_ID}: {polled} rows polled ({info.get('window_start')}..{info.get('window_end')}), "
           f"{len(rows) - polled} carried -> {len(records)} records; types {stats.get('by_type')}; -> {out}")
     return 0
