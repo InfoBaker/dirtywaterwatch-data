@@ -543,3 +543,62 @@ def test_v2_p3_a_first_seen_error_page_makes_no_record_and_fails_the_run(monkeyp
     monkeypatch.setattr(M, "fetch", lambda u: idx if u == M.INDEX_URL else "<html><h1>Service unavailable</h1></html>")
     assert M.main([]) == 1
     assert calls == [([], {"ok": False, "error": calls[0][1]["error"]})] and "not read" in calls[0][1]["error"]
+
+
+# ---------------------------------------------------------------- verification pass 2, 2026-11-15 (Astra), round 3
+
+_SIGN = "Signs warning the public “Do Not Enter/ Sewage Spill” will be placed today."
+
+
+def _runs(*pages):
+    """Successive runs: each page built with the previous run's record, as main() does."""
+    prev = None
+    for p in pages:
+        prev = _one(p, previous=prev)
+    return prev
+
+
+@pytest.mark.parametrize("words", [
+    "Crews have not removed the signs.",
+    "The signs have not been removed.",
+    "Signs have yet to be removed.",
+    "Crews haven't removed the signs.",
+    "Signs warning the public “Do Not Enter/ Sewage Spill” will not be removed.",
+    "Signs will be removed when the water tests clean.",
+    "Signs will be removed once sampling shows normal levels.",
+    "The signs could be removed if results improve.",
+])
+def test_r3_p1_1_a_negated_or_conditional_removal_never_ends_the_signs(words):
+    first = _page(("3/12/2026", _SIGN), intro_signs=False)
+    later = first.replace("<h3>Contact us", f"<p>3/20/2026 - Notice</p><p>{words}</p><h3>Contact us")
+    r = _runs(first, later)
+    assert r["status"] == "advisory_active" and r["ended_at"] is None
+    assert "_unlisted_since" not in r["raw"] and "_end_not_confirmed" not in r["raw"]
+    assert "removal_done" not in r["raw"]["signs"]
+    for d in (15, 21, 28):                                           # red while the signs stand, never grey
+        c, rules = _at(r, 2026, 3, d, 18)
+        assert c == "red" and "advisory_active" in rules
+
+
+def test_r3_p1_1_an_affirmative_removal_still_counts_with_the_signs_quoted():
+    first = _page(("3/12/2026", _SIGN), intro_signs=False)
+    done = first.replace("<h3>Contact us", "<p>3/20/2026 - Notice</p><p>Signs warning the public “Do Not Enter/ Sewage "
+                                           "Spill” have been removed.</p><h3>Contact us")
+    r = _runs(first, done)
+    assert r["raw"]["signs"]["removal_done"] is True and r["raw"]["_unlisted_since"] == "2026-03-21T05:00:00Z"
+    assert _at(r, 2026, 3, 20, 18)[0] == "red"
+
+
+def test_r3_p1_1_the_signs_date_is_the_earliest_notice_whatever_the_page_order():
+    # the Council lists its newest update first; a newer update that repeats the signs never moves their day later
+    first = ("<h1>Example</h1><p>The Council responded Monday afternoon, March 2, to a wastewater spill in Example City."
+             f"</p><p>3/12/2026 - Second Notice</p><p>{_SIGN}</p><h3>Contact us</h3>")
+    second = first.replace("<p>3/12/2026", "<p>3/20/2026 - Third Notice</p><p>Signs warning the public “Do Not Enter/ "
+                                           "Sewage Spill” have been placed around affected areas.</p><p>3/12/2026")
+    a, b = _one(first), _runs(first, second)
+    for r in (a, b):
+        assert r["raw"]["signs"]["posted_per_notice_of"] == "2026-03-12" and r["raw"]["_advisory_from"] == "2026-03-12"
+        c, rules = _at(r, 2026, 3, 15, 18)
+        assert c == "red" and "advisory_active" in rules
+        assert _at(r, 2026, 3, 11, 18)[0] != "red"
+    assert b["raw"]["updates"][0]["date"] == "2026-03-20"              # the page's own order is kept in the record
