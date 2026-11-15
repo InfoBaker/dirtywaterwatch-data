@@ -138,9 +138,9 @@ def test_each_caution_cites_its_own_threshold_and_says_what_kind_it_is():
     assert ny["kind"] == "state" and ny["rule"] == "rain_likely.fallback.by_state.NY" and "6 NYCRR" in ny["source"]
     vt = RL.threshold_for("VT0100871", "VT", stale, rules)
     assert vt["kind"] == "site_default" and vt["threshold_in"] == 0.1
-    assert vt["text"] == ("This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where "
-                          "the state publishes no rain trigger of its own")
-    assert vt["source"] == "This site's methods page"
+    assert vt["text"] == ("Our default: 0.1 inch of rain in 24 hours at a combined sewer outfall, used where neither "
+                          "the operator's overflow reports nor a published rain rule sets an amount")
+    assert vt["source"] == "Our methods page"
     assert "MA0101613" not in json.dumps(vt) and "Springfield" not in json.dumps(vt)
     assert "MA0101613" not in json.dumps(rules) and "Springfield" not in json.dumps(rules)
     assert RL.threshold_for("MA0101613", "MA", stale, rules)["kind"] == "operator_history"
@@ -154,3 +154,41 @@ def test_each_caution_cites_its_own_threshold_and_says_what_kind_it_is():
     assert st["waters"]["other-pond-ma"]["reasons"][0]["rain"]["threshold_kind"] == "operator_history"
     from build import rain_thresholds as RT
     assert RT.fallback_for("NY", rules)["kind"] == "state" and RT.fallback_for("VT", rules)["kind"] == "site_default"
+
+
+def test_the_rain_rule_names_the_default_as_ours_and_says_what_the_caution_is_once():
+    """Public wording (owner, 2026-11-15): the default is "our default", the caution is described once in the positive
+    with one parenthesis, and a reported discharge or an official advisory takes precedence."""
+    rules = json.loads((Path(X.__file__).resolve().parents[2] / "data" / "rules.json").read_text())
+    rl = rules["rain_likely"]
+
+    def texts(o):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                if not str(k).startswith("_"):
+                    yield from texts(v)
+        elif isinstance(o, list):
+            for v in o:
+                yield from texts(v)
+        elif isinstance(o, str):
+            yield o
+    for t in texts(rl):
+        low = t.lower()
+        assert "this site's default" not in low and "the site's default" not in low, t
+        assert "this site applies its" not in low and "stricter default" not in low, t
+        assert "estimate, not a report" not in low and "never replaces" not in low and "does not mean" not in low, t
+        assert not {"safe", "clean"} & set(low.replace(".", " ").replace(",", " ").split()), t
+    doc = rl["doc"]
+    assert doc.count("(not a report or finding)") == 1
+    assert doc.endswith("This is our caution, based on rainfall (not a report or finding).")
+    precedence = "A reported discharge or an official advisory takes precedence over this rain caution."
+    assert precedence in doc and precedence in rl["history"]["doc"]
+    assert " our default of 0.1 inch applies" in doc
+    d = rl["fallback"]["default"]
+    assert d["basis"].startswith("Our default: 0.1 inch of rain in 24 hours") and d["source"] == "Our methods page"
+    assert RL.SITE_DEFAULT_TEXT == d["basis"][0].lower() + d["basis"][1:] and RL.SITE_DEFAULT_SOURCE == d["source"]
+    for st in ("MD", "DC"):                 # the entries that apply the default say so as ours
+        e = rl["fallback"]["by_state"][st]
+        assert e["trigger_basis"] == "default" and e["basis"].endswith(
+            "so we apply our default of 0.1 inch in 24 hours at combined sewer outfalls")
+    assert RL.RULE_WORDS["site_default"] == "our default"
