@@ -1,0 +1,31 @@
+id: "mo-kc-water-overflow-notices"
+name: "KC Water wastewater overflow notices (news posts, read through the site search's RSS feed)"
+url: "https://www.kcwater.us/search/overflow/feed/rss2/"
+homepage: "https://www.kcwater.us/news/"
+kind: "rss"
+level: "utility"
+# Read by ingest/mo_kc_water_news.py (source id mo-kc-water-overflow-notices). KC Water (City of Kansas City, Missouri)
+#   posts some of its overflows as news ("Customers Advised of Wastewater Overflow near ...", "KC Water Wastewater
+#   Facilities Experience Effects of Heavy Rain"); the news post type is not in the site's REST API and has no feed, so
+#   the site search's RSS feed is read (ten posts a page, full text in content:encoded, pubDate with its offset).
+# Real fetch 2026-11-14: 16 feed pages for "overflow" and 3 for "sewage", 152 news posts, 99 overflow notices (93
+#   overflows and 6 "UPDATE:" posts linked to their first notice) from 2016-07-14 to 2025-08-04: 2016 2, 2017 15, 2018 7,
+#   2019 23, 2020 14, 2021 7, 2022 11, 2023 6, 2024 7, 2025 1. Of the 93: 86 name a receiving water (Blue River, Brush
+#   Creek, the Missouri River, Rock Creek and Line Creek most often), 7 none; 68 are dated by KC Water's response time
+#   (an upper bound of the start), 22 by the start the post states, 2 by the time it was reported, 1 by an unlabelled
+#   time; 91 to the minute and 2 to the day; 74 give an end time; 49 a volume. Archive check: the news index (21 pages, 206 posts) links 49 overflow posts, all in
+#   the feed; the feed holds 50 older ones the index no longer links. None posted since August 2025.
+# Not in the posts: coordinates, an outfall or permit, an advisory lift. House numbers in titles and text are dropped.
+cadence: "irregular; KC Water posts some overflows the day after"
+license: "none stated; City of Kansas City, Missouri website"
+attribution: "KC Water, City of Kansas City, Missouri"
+enabled: true
+role: "events"
+event_types: ["sso", "plant_bypass"]
+states: ["MO"]
+registry_ids: ["mo-kc-water-overflow-notices"]
+access: ["rss", "html"]
+access_detail: "Site search RSS feed (search/overflow/feed/rss2/?paged=N), no key; the hourly run reads two pages, --backfill all. kcsmartsewer.us answers 403."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"

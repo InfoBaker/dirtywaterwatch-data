@@ -1,0 +1,45 @@
+{
+ "source": "EPA ICIS-NPDES plant rows (data/outfalls-plants-us.json) for Delaware, read 2026-11-14; EPA's row is kept and named in supersedes",
+ "rule": "a municipal separate storm sewer permit (MS4) is kind other: no sewage outfall",
+ "count": 1,
+ "outfalls": [
+  {
+   "npdes_permit": "DE0051071",
+   "permittee": "NEW CASTLE COUNTY-DELDOT MS4",
+   "permit_name": "NEW CASTLE COUNTY-MS4",
+   "state": "DE",
+   "city": "NEW CASTLE",
+   "outfall": null,
+   "outfall_name": null,
+   "outfall_status": null,
+   "feature_type": null,
+   "receiving_water_echo": "DELAWARE RIVER",
+   "reach_id": null,
+   "reach_gnis_name": null,
+   "nhdplus_id": null,
+   "lat": null,
+   "lon": null,
+   "coords_from": null,
+   "coords_note": "the facility's point (ICIS_FACILITIES geocode): ICIS has no outfall coordinates for this permit, so this is a point for the treatment plant or the permittee's address, not the outfall's own point",
+   "in_icis": "YES",
+   "permit_status": "EXP",
+   "permit_type": "NPD",
+   "permit_components": [
+    "POTW"
+   ],
+   "plant_basis": "potw_component",
+   "facility_type": "POTW",
+   "major_minor": "Major",
+   "design_flow_mgd": null,
+   "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110014336986",
+   "outfall_kind": "other",
+   "country": "US",
+   "source": "fed-echo-icis-npdes-national-dataset",
+   "fetched_at": "2026-11-03T21:24:38Z",
+   "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
+   "checked": "2026-11-14",
+   "supersedes": "data/outfalls-plants-us.json DE0051071",
+   "kind_note": "New Castle County's and the Delaware Department of Transportation's municipal separate storm sewer system permit (MS4; EPA's permit name 'NEW CASTLE COUNTY-MS4', facility 'NEW CASTLE COUNTY-DELDOT MS4'): a storm sewer permit, not a sewage outfall, although EPA lists a POTW component; kept off the map and out of the outfall count."
+  }
+ ]
+}

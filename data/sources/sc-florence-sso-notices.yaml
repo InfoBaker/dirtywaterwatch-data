@@ -1,0 +1,31 @@
+id: "sc-florence-sso-notices"
+name: "City of Florence (South Carolina) sanitary sewer overflow notices"
+url: "https://www.cityofflorencesc.gov/city-news"
+homepage: "https://www.cityofflorencesc.gov/city-news"
+kind: "html"
+level: "operator"
+# Ingester: pipeline/ingest/sc_florence_sso.py (source id sc-florence-sso-notices), rules only.
+# Read 2026-11-14: the news list (38 pages, 446 items), five "Notification of Sanitary Sewer Overflow" releases, all on
+#   Jeffries Creek (one spelled Jefferies): released 2024-03-12 (an estimated 115,200 gallons, responded 2024-03-03),
+#   2024-08-01 (an estimated 972,000 gallons of combined stormwater and wastewater, notified 2024-07-23), 2025-05-08
+#   (more than 5,000 gallons, notice 2025-05-06), 2025-08-15 (more than 5,000 gallons, notice that day) and 2025-10-14
+#   (more than 5,000 gallons, responded "yesterday"). Five records, day precision, Eastern time; the three of 2025
+#   advise avoiding the creek "until further notice" and the City has published no lift.
+# The day each notice gives is the day the City learned of or responded to the overflow, not its start; no notice gives
+#   an end. Released 0 to 9 days after that day (median 2).
+# A page address rewritten for a new overflow becomes a new record and never overwrites the earlier one.
+# Privacy: the media-contact block (a staff name, telephone and e-mail) and "please contact" sentences are cut before
+#   anything is kept; house numbers near manholes are removed.
+cadence: "Posted by the City after each overflow of 5,000 gallons or more, within a few days."
+license: "none stated"
+attribution: "City of Florence, South Carolina"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["SC"]
+registry_ids: ["sc-florence-sso-notices"]
+access: ["html"]
+access_detail: "https://www.cityofflorencesc.gov/city-news?page=N (Drupal news list, about ten items a page) and each notice's page /news/<slug> (node id in the body class); no feed."
+machine_readable: false
+legal_basis: "S.C. Code 48-1-95(E): public notice of a significant spill (5,000 gallons or more) within 24 hours of discovery; the City's policy of public notification for sanitary sewer overflows of 5,000 gallons or more"
+checked: "2026-11-14"

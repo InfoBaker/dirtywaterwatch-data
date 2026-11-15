@@ -1,0 +1,27 @@
+id: "ks-kdhe-stream-advisories"
+name: "KDHE stream advisories (news flash RSS feed)"
+url: "https://www.kdhe.ks.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"
+homepage: "https://www.kdhe.ks.gov/m/newsflash"
+kind: "rss"
+level: "state"
+# Read by ingest/ks_kdhe_stream_advisories.py (source id ks-kdhe-stream-advisories): KDHE's news flash feed, about a month
+#   of releases; "Stream Advisory Issued for ..." opens an advisory in KDHE's own window and "Stream Advisory Rescinded
+#   for ..." ends it. Real fetch 2026-11-14: 42 releases (2026-10-15 to 2026-11-13), most of them boil water advisories
+#   (drinking water, not read), 3 weekly blue-green algae releases (read from the HAB layer instead) and one stream
+#   advisory rescission (McIntyre Creek, Tuttle Creek Reservoir, the Big Blue and Kansas rivers, 2026-10-29) whose issue
+#   is older than the feed: counted, not turned into a record. The release pages and the news index answer 403 to the
+#   identified client, so no older advisory can be read; the archive is what this feed keeps from its first run.
+# The feed's times read -0600 in October as in November; kept as stated.
+cadence: "irregular; a stream advisory a few times a year"
+license: "none stated"
+attribution: "Kansas Department of Health and Environment"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory"]
+states: ["KS"]
+registry_ids: ["ks-kdhe-stream-advisories"]
+access: ["rss"]
+access_detail: "CivicPlus RSS feed, no key; kdhe.ks.gov's pages answer 403 to automated clients."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"

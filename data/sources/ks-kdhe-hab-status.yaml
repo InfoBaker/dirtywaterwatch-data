@@ -1,0 +1,24 @@
+id: "ks-kdhe-hab-status"
+name: "KDHE Harmful Algal Bloom status map layer (Lake Points Statewide)"
+url: "https://maps.kdhe.ks.gov/kdhe_doe/rest/services/HAB/HAB_County/MapServer/0"
+homepage: "https://www.kdhe.ks.gov/777/Harmful-Algal-Blooms"
+kind: "arcgis"
+level: "state"
+# Read by ingest/ks_kdhe_hab.py (source id ks-kdhe-hab-status): one point per lake under a Hazard, Warning or Watch.
+# Real fetch 2026-11-14: 16 points on 15 lakes (Kill Creek Park Lake has two): 7 lakes under a Warning, 8 under a Watch;
+#   StatusDate 2026-10-30 17:00 UTC on every row, KDHE's update of its table, not each advisory's start. Each advisory is
+#   dated to the first poll that lists it and ends at the first that no longer does (both poll times, never KDHE's).
+#   KDHE's season is April 1 to October 31 but an advisory can outlast it; the layer, not the calendar, is followed.
+cadence: "weekly in season (KDHE's Friday releases); the layer as KDHE edits it"
+license: "none stated"
+attribution: "Kansas Department of Health and Environment"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["KS"]
+registry_ids: ["ks-kdhe-hab-status"]
+access: ["arcgis"]
+access_detail: "Public ArcGIS map service, no key; layer 2 holds the lakes' outlines (not read)."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"
