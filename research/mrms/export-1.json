@@ -1,0 +1,375 @@
+{
+ "catalog": {
+  "objectIdFieldName": "objectid",
+  "fields": [
+   {
+    "name": "objectid",
+    "type": "esriFieldTypeOID",
+    "alias": "objectid",
+    "domain": null
+   },
+   {
+    "name": "name",
+    "type": "esriFieldTypeString",
+    "alias": "name",
+    "domain": null,
+    "length": 200
+   },
+   {
+    "name": "idp_validendtime",
+    "type": "esriFieldTypeDate",
+    "alias": "Period End Time",
+    "domain": null,
+    "length": 8
+   }
+  ],
+  "features": [
+   {
+    "attributes": {
+     "objectid": 159148838,
+     "name": "alaska_QPE_24H",
+     "idp_validendtime": 1794747600000
+    }
+   },
+   {
+    "attributes": {
+     "objectid": 159149638,
+     "name": "carib_QPE_24H",
+     "idp_validendtime": 1794747600000
+    }
+   }
+  ]
+ },
+ "regions": {
+  "alaska": {
+   "item": "alaska_QPE_24H",
+   "objectid": 159148838,
+   "valid_time": "2026-11-15T13:00:00Z",
+   "box": {
+    "xmin": -135.655,
+    "ymin": 57.845,
+    "xmax": -133.945,
+    "ymax": 58.655,
+    "width": 171,
+    "height": 81,
+    "i0": -13565,
+    "j1": 5865
+   },
+   "bytes": 5934,
+   "sha256": "9360c893c626e2ccd4f2d9eeff285c679ce733ad0913224a92c6da2d4ec9b7bd",
+   "meta": {
+    "width": 171,
+    "height": 81,
+    "west": -135.655,
+    "north": 58.655,
+    "pixel_deg": [
+     0.01,
+     0.01
+    ],
+    "compression": 5,
+    "blocks_read": 2,
+    "blocks": 2
+   },
+   "georef_problems": [],
+   "pixel_classes": {
+    "pos": 4280,
+    "zero": 9571
+   },
+   "max_read": 4.9,
+   "compare": [
+    {
+     "lat": 57.85,
+     "lon": -135.51,
+     "export": 4.900000095367432,
+     "identify": "4.9",
+     "identify_items": [
+      "alaska_QPE_24H"
+     ]
+    },
+    {
+     "lat": 57.85,
+     "lon": -135.52,
+     "export": 4.800000190734863,
+     "identify": "4.8",
+     "identify_items": [
+      "alaska_QPE_24H"
+     ]
+    },
+    {
+     "lat": 57.85,
+     "lon": -135.53,
+     "export": 4.800000190734863,
+     "identify": "4.8",
+     "identify_items": [
+      "alaska_QPE_24H"
+     ]
+    },
+    {
+     "lat": 57.85,
+     "lon": -135.5,
+     "export": 4.700000286102295,
+     "identify": "4.7",
+     "identify_items": [
+      "alaska_QPE_24H"
+     ]
+    },
+    {
+     "lat": 58.08,
+     "lon": -135.65,
+     "export": 4.0,
+     "identify": "4",
+     "identify_items": [
+      "alaska_QPE_24H"
+     ]
+    },
+    {
+     "lat": 58.3,
+     "lon": -134.42,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "alaska_QPE_24H"
+     ]
+    },
+    {
+     "lat": 58.3,
+     "lon": -134.41,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "alaska_QPE_24H"
+     ]
+    },
+    {
+     "lat": 58.28,
+     "lon": -134.39,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "alaska_QPE_24H"
+     ]
+    },
+    {
+     "lat": 58.35,
+     "lon": -134.58,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "alaska_QPE_24H"
+     ]
+    }
+   ]
+  },
+  "carib": {
+   "item": "carib_QPE_24H",
+   "objectid": 159149638,
+   "valid_time": "2026-11-15T13:00:00Z",
+   "box": {
+    "xmin": -67.355,
+    "ymin": 17.845,
+    "xmax": -65.445,
+    "ymax": 18.655,
+    "width": 191,
+    "height": 81,
+    "i0": -6735,
+    "j1": 1865
+   },
+   "bytes": 3336,
+   "sha256": "b211b082d1391bcafa66f859700c7877a1571d56ba1567b8bb9a29e786f6a840",
+   "meta": {
+    "width": 191,
+    "height": 81,
+    "west": -67.355,
+    "north": 18.655,
+    "pixel_deg": [
+     0.01,
+     0.01
+    ],
+    "compression": 5,
+    "blocks_read": 2,
+    "blocks": 2
+   },
+   "georef_problems": [],
+   "pixel_classes": {
+    "zero": 14764,
+    "pos": 706,
+    "nocov(-3)": 1
+   },
+   "max_read": 7.9,
+   "compare": [
+    {
+     "lat": 18.08,
+     "lon": -66.73,
+     "export": 7.90000057220459,
+     "identify": "7.9",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.09,
+     "lon": -66.73,
+     "export": 6.90000057220459,
+     "identify": "6.9",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.07,
+     "lon": -66.73,
+     "export": 6.199999809265137,
+     "identify": "6.2",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.02,
+     "lon": -66.7,
+     "export": 5.300000190734863,
+     "identify": "5.3",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.02,
+     "lon": -66.71,
+     "export": 5.100000381469727,
+     "identify": "5.1",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.43,
+     "lon": -66.06,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.43,
+     "lon": -66.08,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.44,
+     "lon": -66.07,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.44,
+     "lon": -66.08,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.45,
+     "lon": -66.08,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.45,
+     "lon": -66.09,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.46,
+     "lon": -66.12,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.47,
+     "lon": -66.12,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    },
+    {
+     "lat": 18.43,
+     "lon": -66.01,
+     "export": 0.0,
+     "identify": "0",
+     "identify_items": [
+      "carib_QPE_24H"
+     ]
+    }
+   ]
+  },
+  "prudhoe": {
+   "item": "alaska_QPE_24H",
+   "objectid": 159148838,
+   "valid_time": "2026-11-15T13:00:00Z",
+   "box": {
+    "xmin": -148.755,
+    "ymin": 70.145,
+    "xmax": -148.495,
+    "ymax": 70.375,
+    "width": 26,
+    "height": 23,
+    "i0": -14875,
+    "j1": 7037
+   },
+   "bytes": 1451,
+   "sha256": "019b52b09088b2a9962bebb85d0f8783c92731e88695cae33a914e2f9351b23a",
+   "meta": {
+    "width": 26,
+    "height": 23,
+    "west": -148.755,
+    "north": 70.375,
+    "pixel_deg": [
+     0.01,
+     0.01
+    ],
+    "compression": 5,
+    "blocks_read": 1,
+    "blocks": 1
+   },
+   "georef_problems": [],
+   "pixel_classes": {
+    "nocov(-3)": 598
+   },
+   "max_read": 0.0,
+   "compare": [
+    {
+     "lat": 70.26,
+     "lon": -148.62,
+     "export": -3.0,
+     "identify": "-3",
+     "identify_items": [
+      "alaska_QPE_24H"
+     ]
+    }
+   ]
+  }
+ }
+}

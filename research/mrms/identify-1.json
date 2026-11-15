@@ -1,0 +1,1447 @@
+{
+ "juneau_58.30_-134.42": {
+  "lat": 58.3,
+  "lon": -134.42,
+  "fetched_at": "2026-11-15T13:20:35.560698+00:00",
+  "answer": {
+   "objectId": 0,
+   "name": "Pixel",
+   "value": "0",
+   "location": {
+    "x": -14963565.952431832,
+    "y": 8030603.978274526,
+    "spatialReference": {
+     "wkid": 102100,
+     "latestWkid": 3857
+    }
+   },
+   "properties": {
+    "Values": [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   "catalogItems": {
+    "objectIdFieldName": "objectid",
+    "features": [
+     {
+      "attributes": {
+       "objectid": 159137638,
+       "name": "alaska_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794745320000,
+       "idp_filedate": 1794744501000,
+       "idp_subset": "alaska_QPE_24H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159139238,
+       "name": "alaska_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745490000,
+       "idp_filedate": 1794744508000,
+       "idp_subset": "alaska_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159140838,
+       "name": "alaska_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745693000,
+       "idp_filedate": 1794744516000,
+       "idp_subset": "alaska_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159142438,
+       "name": "alaska_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748095000,
+       "idp_filedate": 1794748049000,
+       "idp_subset": "alaska_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159144038,
+       "name": "alaska_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748269000,
+       "idp_filedate": 1794748058000,
+       "idp_subset": "alaska_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159145638,
+       "name": "alaska_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748430000,
+       "idp_filedate": 1794748064000,
+       "idp_subset": "alaska_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159147238,
+       "name": "alaska_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748610000,
+       "idp_filedate": 1794748070000,
+       "idp_subset": "alaska_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     }
+    ]
+   },
+   "catalogItemVisibilities": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "juneau_58.28_-134.39": {
+  "lat": 58.28,
+  "lon": -134.39,
+  "fetched_at": "2026-11-15T13:20:37.171251+00:00",
+  "answer": {
+   "objectId": 0,
+   "name": "Pixel",
+   "value": "0",
+   "location": {
+    "x": -14960226.367708033,
+    "y": 8026368.238950553,
+    "spatialReference": {
+     "wkid": 102100,
+     "latestWkid": 3857
+    }
+   },
+   "properties": {
+    "Values": [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   "catalogItems": {
+    "objectIdFieldName": "objectid",
+    "features": [
+     {
+      "attributes": {
+       "objectid": 159137638,
+       "name": "alaska_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794745320000,
+       "idp_filedate": 1794744501000,
+       "idp_subset": "alaska_QPE_24H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159139238,
+       "name": "alaska_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745490000,
+       "idp_filedate": 1794744508000,
+       "idp_subset": "alaska_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159140838,
+       "name": "alaska_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745693000,
+       "idp_filedate": 1794744516000,
+       "idp_subset": "alaska_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159142438,
+       "name": "alaska_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748095000,
+       "idp_filedate": 1794748049000,
+       "idp_subset": "alaska_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159144038,
+       "name": "alaska_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748269000,
+       "idp_filedate": 1794748058000,
+       "idp_subset": "alaska_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159145638,
+       "name": "alaska_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748430000,
+       "idp_filedate": 1794748064000,
+       "idp_subset": "alaska_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159147238,
+       "name": "alaska_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748610000,
+       "idp_filedate": 1794748070000,
+       "idp_subset": "alaska_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     }
+    ]
+   },
+   "catalogItemVisibilities": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "prudhoe_70.26_-148.62": {
+  "lat": 70.26,
+  "lon": -148.62,
+  "fetched_at": "2026-11-15T13:20:38.807512+00:00",
+  "answer": {
+   "objectId": 0,
+   "name": "Pixel",
+   "value": "-3",
+   "location": {
+    "x": -16544302.721696319,
+    "y": 11153871.779636398,
+    "spatialReference": {
+     "wkid": 102100,
+     "latestWkid": 3857
+    }
+   },
+   "properties": {
+    "Values": [
+     "-3",
+     "-3",
+     "-3",
+     "-3",
+     "-3",
+     "-3",
+     "-3"
+    ]
+   },
+   "catalogItems": {
+    "objectIdFieldName": "objectid",
+    "features": [
+     {
+      "attributes": {
+       "objectid": 159137638,
+       "name": "alaska_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794745320000,
+       "idp_filedate": 1794744501000,
+       "idp_subset": "alaska_QPE_24H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159139238,
+       "name": "alaska_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745490000,
+       "idp_filedate": 1794744508000,
+       "idp_subset": "alaska_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159140838,
+       "name": "alaska_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745693000,
+       "idp_filedate": 1794744516000,
+       "idp_subset": "alaska_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159142438,
+       "name": "alaska_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748095000,
+       "idp_filedate": 1794748049000,
+       "idp_subset": "alaska_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159144038,
+       "name": "alaska_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748269000,
+       "idp_filedate": 1794748058000,
+       "idp_subset": "alaska_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159145638,
+       "name": "alaska_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748430000,
+       "idp_filedate": 1794748064000,
+       "idp_subset": "alaska_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159147238,
+       "name": "alaska_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748610000,
+       "idp_filedate": 1794748070000,
+       "idp_subset": "alaska_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     }
+    ]
+   },
+   "catalogItemVisibilities": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "pajn_58.35_-134.58": {
+  "lat": 58.3547,
+  "lon": -134.5763,
+  "fetched_at": "2026-11-15T13:20:40.710173+00:00",
+  "answer": {
+   "objectId": 0,
+   "name": "Pixel",
+   "value": "0",
+   "location": {
+    "x": -14980965.188842822,
+    "y": 8042200.965836225,
+    "spatialReference": {
+     "wkid": 102100,
+     "latestWkid": 3857
+    }
+   },
+   "properties": {
+    "Values": [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   "catalogItems": {
+    "objectIdFieldName": "objectid",
+    "features": [
+     {
+      "attributes": {
+       "objectid": 159137638,
+       "name": "alaska_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794745320000,
+       "idp_filedate": 1794744501000,
+       "idp_subset": "alaska_QPE_24H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159139238,
+       "name": "alaska_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745490000,
+       "idp_filedate": 1794744508000,
+       "idp_subset": "alaska_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159140838,
+       "name": "alaska_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745693000,
+       "idp_filedate": 1794744516000,
+       "idp_subset": "alaska_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159142438,
+       "name": "alaska_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748095000,
+       "idp_filedate": 1794748049000,
+       "idp_subset": "alaska_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159144038,
+       "name": "alaska_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748269000,
+       "idp_filedate": 1794748058000,
+       "idp_subset": "alaska_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159145638,
+       "name": "alaska_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748430000,
+       "idp_filedate": 1794748064000,
+       "idp_subset": "alaska_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159147238,
+       "name": "alaska_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748610000,
+       "idp_filedate": 1794748070000,
+       "idp_subset": "alaska_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     }
+    ]
+   },
+   "catalogItemVisibilities": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "sanjuan_18.44_-66.07": {
+  "lat": 18.44,
+  "lon": -66.07,
+  "fetched_at": "2026-11-15T13:20:42.296888+00:00",
+  "answer": {
+   "objectId": 0,
+   "name": "Pixel",
+   "value": "0",
+   "location": {
+    "x": -7354878.7567115845,
+    "y": 2089114.6379969523,
+    "spatialReference": {
+     "wkid": 102100,
+     "latestWkid": 3857
+    }
+   },
+   "properties": {
+    "Values": [
+     "0",
+     "0",
+     "1.2",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   "catalogItems": {
+    "objectIdFieldName": "objectid",
+    "features": [
+     {
+      "attributes": {
+       "objectid": 159138438,
+       "name": "carib_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794745395000,
+       "idp_filedate": 1794744504000,
+       "idp_subset": "carib_QPE_24H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159140038,
+       "name": "carib_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745581000,
+       "idp_filedate": 1794744511000,
+       "idp_subset": "carib_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159141638,
+       "name": "carib_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745774000,
+       "idp_filedate": 1794744519000,
+       "idp_subset": "carib_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159143238,
+       "name": "carib_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748182000,
+       "idp_filedate": 1794748055000,
+       "idp_subset": "carib_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159144838,
+       "name": "carib_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748346000,
+       "idp_filedate": 1794748060000,
+       "idp_subset": "carib_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159146438,
+       "name": "carib_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748516000,
+       "idp_filedate": 1794748066000,
+       "idp_subset": "carib_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159148038,
+       "name": "carib_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748704000,
+       "idp_filedate": 1794748073000,
+       "idp_subset": "carib_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     }
+    ]
+   },
+   "catalogItemVisibilities": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "sanjuan_18.47_-66.12": {
+  "lat": 18.47,
+  "lon": -66.12,
+  "fetched_at": "2026-11-15T13:20:43.835279+00:00",
+  "answer": {
+   "objectId": 0,
+   "name": "Pixel",
+   "value": "0",
+   "location": {
+    "x": -7360444.731251249,
+    "y": 2092635.2803440324,
+    "spatialReference": {
+     "wkid": 102100,
+     "latestWkid": 3857
+    }
+   },
+   "properties": {
+    "Values": [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   "catalogItems": {
+    "objectIdFieldName": "objectid",
+    "features": [
+     {
+      "attributes": {
+       "objectid": 159138438,
+       "name": "carib_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794745395000,
+       "idp_filedate": 1794744504000,
+       "idp_subset": "carib_QPE_24H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159140038,
+       "name": "carib_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745581000,
+       "idp_filedate": 1794744511000,
+       "idp_subset": "carib_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159141638,
+       "name": "carib_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745774000,
+       "idp_filedate": 1794744519000,
+       "idp_subset": "carib_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159143238,
+       "name": "carib_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748182000,
+       "idp_filedate": 1794748055000,
+       "idp_subset": "carib_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159144838,
+       "name": "carib_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748346000,
+       "idp_filedate": 1794748060000,
+       "idp_subset": "carib_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159146438,
+       "name": "carib_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748516000,
+       "idp_filedate": 1794748066000,
+       "idp_subset": "carib_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159148038,
+       "name": "carib_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748704000,
+       "idp_filedate": 1794748073000,
+       "idp_subset": "carib_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     }
+    ]
+   },
+   "catalogItemVisibilities": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "tjsj_18.44_-66.00": {
+  "lat": 18.4325,
+  "lon": -66.0108,
+  "fetched_at": "2026-11-15T13:20:45.513390+00:00",
+  "answer": {
+   "objectId": 0,
+   "name": "Pixel",
+   "value": "0",
+   "location": {
+    "x": -7348288.642856623,
+    "y": 2088234.573486729,
+    "spatialReference": {
+     "wkid": 102100,
+     "latestWkid": 3857
+    }
+   },
+   "properties": {
+    "Values": [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   "catalogItems": {
+    "objectIdFieldName": "objectid",
+    "features": [
+     {
+      "attributes": {
+       "objectid": 159138438,
+       "name": "carib_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794745395000,
+       "idp_filedate": 1794744504000,
+       "idp_subset": "carib_QPE_24H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159140038,
+       "name": "carib_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745581000,
+       "idp_filedate": 1794744511000,
+       "idp_subset": "carib_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159141638,
+       "name": "carib_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745774000,
+       "idp_filedate": 1794744519000,
+       "idp_subset": "carib_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159143238,
+       "name": "carib_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748182000,
+       "idp_filedate": 1794748055000,
+       "idp_subset": "carib_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159144838,
+       "name": "carib_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748346000,
+       "idp_filedate": 1794748060000,
+       "idp_subset": "carib_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159146438,
+       "name": "carib_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748516000,
+       "idp_filedate": 1794748066000,
+       "idp_subset": "carib_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159148038,
+       "name": "carib_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748704000,
+       "idp_filedate": 1794748073000,
+       "idp_subset": "carib_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     }
+    ]
+   },
+   "catalogItemVisibilities": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "suspect_18.44_-66.44": {
+  "lat": 18.44075,
+  "lon": -66.44075,
+  "fetched_at": "2026-11-15T13:20:46.957250+00:00",
+  "answer": {
+   "objectId": 0,
+   "name": "Pixel",
+   "value": "0",
+   "location": {
+    "x": -7396150.45792319,
+    "y": 2089202.646560342,
+    "spatialReference": {
+     "wkid": 102100,
+     "latestWkid": 3857
+    }
+   },
+   "properties": {
+    "Values": [
+     "0",
+     "0",
+     "0.1",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   "catalogItems": {
+    "objectIdFieldName": "objectid",
+    "features": [
+     {
+      "attributes": {
+       "objectid": 159138438,
+       "name": "carib_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794745395000,
+       "idp_filedate": 1794744504000,
+       "idp_subset": "carib_QPE_24H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159140038,
+       "name": "carib_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745581000,
+       "idp_filedate": 1794744511000,
+       "idp_subset": "carib_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159141638,
+       "name": "carib_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745774000,
+       "idp_filedate": 1794744519000,
+       "idp_subset": "carib_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159143238,
+       "name": "carib_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748182000,
+       "idp_filedate": 1794748055000,
+       "idp_subset": "carib_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159144838,
+       "name": "carib_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748346000,
+       "idp_filedate": 1794748060000,
+       "idp_subset": "carib_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159146438,
+       "name": "carib_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748516000,
+       "idp_filedate": 1794748066000,
+       "idp_subset": "carib_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159148038,
+       "name": "carib_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748704000,
+       "idp_filedate": 1794748073000,
+       "idp_subset": "carib_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     }
+    ]
+   },
+   "catalogItemVisibilities": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "honolulu_21.31_-157.86": {
+  "lat": 21.31,
+  "lon": -157.86,
+  "fetched_at": "2026-11-15T13:20:48.540137+00:00",
+  "answer": {
+   "objectId": 0,
+   "name": "Pixel",
+   "value": "1.2",
+   "location": {
+    "x": -17572894.81662617,
+    "y": 2428881.3952632565,
+    "spatialReference": {
+     "wkid": 102100,
+     "latestWkid": 3857
+    }
+   },
+   "properties": {
+    "Values": [
+     "1.2",
+     "2.4",
+     "4.2",
+     "0",
+     "0",
+     "0",
+     "0.2"
+    ]
+   },
+   "catalogItems": {
+    "objectIdFieldName": "objectid",
+    "features": [
+     {
+      "attributes": {
+       "objectid": 159138038,
+       "name": "hawaii_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794745360000,
+       "idp_filedate": 1794744503000,
+       "idp_subset": "hawaii_QPE_24H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159139638,
+       "name": "hawaii_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745542000,
+       "idp_filedate": 1794744510000,
+       "idp_subset": "hawaii_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159141238,
+       "name": "hawaii_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745728000,
+       "idp_filedate": 1794744518000,
+       "idp_subset": "hawaii_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159142838,
+       "name": "hawaii_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748133000,
+       "idp_filedate": 1794748052000,
+       "idp_subset": "hawaii_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159144438,
+       "name": "hawaii_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748311000,
+       "idp_filedate": 1794748059000,
+       "idp_subset": "hawaii_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159146038,
+       "name": "hawaii_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748473000,
+       "idp_filedate": 1794748065000,
+       "idp_subset": "hawaii_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159147638,
+       "name": "hawaii_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748661000,
+       "idp_filedate": 1794748071000,
+       "idp_subset": "hawaii_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     }
+    ]
+   },
+   "catalogItemVisibilities": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "keywest_24.56_-81.78": {
+  "lat": 24.56,
+  "lon": -81.78,
+  "fetched_at": "2026-11-15T13:20:50.007993+00:00",
+  "answer": {
+   "objectId": 0,
+   "name": "Pixel",
+   "value": "0",
+   "location": {
+    "x": -9103707.957073912,
+    "y": 2821796.5447124112,
+    "spatialReference": {
+     "wkid": 102100,
+     "latestWkid": 3857
+    }
+   },
+   "properties": {
+    "Values": [
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   "catalogItems": {
+    "objectIdFieldName": "objectid",
+    "features": [
+     {
+      "attributes": {
+       "objectid": 159138438,
+       "name": "carib_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794745395000,
+       "idp_filedate": 1794744504000,
+       "idp_subset": "carib_QPE_24H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159138838,
+       "name": "conus_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745446000,
+       "idp_filedate": 1794744507000,
+       "idp_subset": "conus_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159140038,
+       "name": "carib_QPE_48H",
+       "category": 1,
+       "idp_ingestdate": 1794745581000,
+       "idp_filedate": 1794744511000,
+       "idp_subset": "carib_QPE_48H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159140438,
+       "name": "conus_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745635000,
+       "idp_filedate": 1794744515000,
+       "idp_subset": "conus_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159141638,
+       "name": "carib_QPE_72H",
+       "category": 1,
+       "idp_ingestdate": 1794745774000,
+       "idp_filedate": 1794744519000,
+       "idp_subset": "carib_QPE_72H",
+       "idp_validendtime": 1794744000000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159142038,
+       "name": "conus_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748054000,
+       "idp_filedate": 1794748046000,
+       "idp_subset": "conus_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159143238,
+       "name": "carib_QPE_01H",
+       "category": 1,
+       "idp_ingestdate": 1794748182000,
+       "idp_filedate": 1794748055000,
+       "idp_subset": "carib_QPE_01H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159143638,
+       "name": "conus_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748227000,
+       "idp_filedate": 1794748056000,
+       "idp_subset": "conus_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159144838,
+       "name": "carib_QPE_03H",
+       "category": 1,
+       "idp_ingestdate": 1794748346000,
+       "idp_filedate": 1794748060000,
+       "idp_subset": "carib_QPE_03H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159145238,
+       "name": "conus_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748387000,
+       "idp_filedate": 1794748062000,
+       "idp_subset": "conus_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159146438,
+       "name": "carib_QPE_06H",
+       "category": 1,
+       "idp_ingestdate": 1794748516000,
+       "idp_filedate": 1794748066000,
+       "idp_subset": "carib_QPE_06H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159146838,
+       "name": "conus_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748568000,
+       "idp_filedate": 1794748068000,
+       "idp_subset": "conus_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159148038,
+       "name": "carib_QPE_12H",
+       "category": 1,
+       "idp_ingestdate": 1794748704000,
+       "idp_filedate": 1794748073000,
+       "idp_subset": "carib_QPE_12H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     },
+     {
+      "attributes": {
+       "objectid": 159148438,
+       "name": "conus_QPE_24H",
+       "category": 1,
+       "idp_ingestdate": 1794748752000,
+       "idp_filedate": 1794748075000,
+       "idp_subset": "conus_QPE_24H",
+       "idp_validendtime": 1794747600000,
+       "st_area_shape_": null,
+       "st_perimeter_shape_": null
+      }
+     }
+    ]
+   },
+   "catalogItemVisibilities": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ }
+}

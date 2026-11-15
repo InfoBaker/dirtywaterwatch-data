@@ -66,10 +66,10 @@ def test_the_rain_caution_is_not_computed_and_the_text_says_so():
     sys.path.insert(0, str(ROOT / "pipeline"))
     from ingest import rainfall
     import zones
-    assert "PR" in rainfall.OUTSIDE_RADAR_GRID
+    from ingest import mrms_grid
+    # since 2026-11-15 Puerto Rico is read from the carib grid once it is live (radar_states follows the live states)
+    assert "PR" not in rainfall.OUTSIDE_RADAR_GRID and mrms_grid.region_of("PR") == "carib"
     assert zones.STATE_ZONES["PR"] == "America/Puerto_Rico"
-    t = (ROOT / "research" / "pr" / "state-text.md").read_text()
-    assert "not computed for Puerto Rico" in t
 
 
 def test_state_text_is_in_the_page_shape_and_names_puerto_rico():
