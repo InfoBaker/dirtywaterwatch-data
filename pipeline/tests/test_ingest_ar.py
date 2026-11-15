@@ -1115,6 +1115,15 @@ FINE_FORMS = ("123456", "654321", "35.1234 ", "°", "34.5\"", "12.345'", "45.678
     ("35d 12m 34s N, 93d 45m 12s W", "35.209, -93.753"),
     ("at 35.123456, -93.654321", "at 35.123, -93.654"),
     ("Lat 35.1234 Long -93.6543", "Lat 35.123 Long -93.654"),
+    # audit ar-final item 1: the forms today's rows use (synthetic digits), each number on its own
+    ("Example Rd and Sample Rd:35.123456, -93.654321. Overflow entered a ditch",
+     "Example Rd and Sample Rd:35.123, -93.654. Overflow entered a ditch"),
+    ("35.123, -93.654321. Lift station pumping into a creek", "35.123, -93.654. Lift station pumping into a creek"),
+    ("Sample Street near the 100 block. Lat/Long: 35.123, -93.654321. A tree fell",
+     "Sample Street near the 100 block. Lat/Long: 35.123, -93.654. A tree fell"),
+    ("Lat:35.123456 Long:-93.654321", "Lat:35.123 Long:-93.654"),
+    ("35 12.345 N, 93 45.678 W", "35.206, -93.761"),
+    ("ended 11:30.123456 per log", None),
     # not coordinates: unchanged
     ("Lift station 3, 120 gallons at 11:30", None), ("pump 4 min", None), ("12 m upstream", None),
     ("Manhole MH-12 on 5th St", None), ("2.5 MG over 3 days", None), ("(coordinates 35.123, -93.654)", None),
@@ -1149,7 +1158,9 @@ def _no_fine(doc_or_text):
 
 
 @pytest.mark.parametrize("location", ["at 35.123456, -93.654321", "35°12'34.5\"N 93°45'12\"W",
-                                      "N 35° 12.345' W 93° 45.678'"])
+                                      "N 35° 12.345' W 93° 45.678'", "Sample Rd:35.123456, -93.654321.",
+                                      "35.123, -93.654321. Overflow", "Lat/Long: 35.123, -93.654321.",
+                                      "35 12.345 N, 93 45.678 W"])
 @pytest.mark.parametrize("path", ["reread", "disappeared", "failed_fetch", "failed_build"])
 def test_a_point_kept_by_an_older_rule_is_cut_on_every_save_path(tmp_path, monkeypatch, location, path):
     """Verification 3 P1: a finer point an older rule left in the events file (raw.row, outfall name, revisions'
