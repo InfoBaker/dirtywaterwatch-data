@@ -611,7 +611,7 @@
   }
  },
  "rain_likely": {
-  "doc": "Combined sewers overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, the waters below its outfalls are shown yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain trigger its state publishes, the caution reads: discharge likely, no report received. Where neither exists and this site's default of 0.1 inch applies, it reads: discharge possible, no report received, because at that amount many rainy days pass with no overflow. This is an estimate, not a report. Radar rainfall at an outfall is not the rain over the whole area the sewer drains, a yellow water does not mean a discharge happened, and some operators report late or not at all. It never replaces a red advisory.",
+  "doc": "Combined sewers can overflow when it rains hard, and a notice can arrive hours or days after a discharge begins, or not at all. When radar shows that the rain of the last 24 hours at any outfall of a combined sewer system has reached the amount set for that system, and its operator has not reported a discharge that began in the last 24 hours, we show the waters below its outfalls in yellow. Where the amount is the one at which that system has discharged before, from its own reports, or a rain rule its operator or its state publishes, the caution reads \"Discharge likely: heavy rain, no report received\". Where none exists and our default of 0.1 inch applies, it reads \"Discharge possible: heavy rain, no report received\", because at that amount many rainy days pass with no overflow. Radar measures the rain at the outfalls, which can differ from the rain over the whole area the sewer drains. A reported discharge or an official advisory takes precedence over this rain caution. This is our caution, based on rainfall (not a report or finding).",
   "enabled": true,
   "label": "Discharge likely: heavy rain, no report received",
   "label_by_basis": {
@@ -619,9 +619,9 @@
    "state": "Discharge likely: heavy rain, no report received",
    "default": "Discharge possible: heavy rain, no report received"
   },
-  "label_by_basis_rationale": "The label says how strong the estimate is. It reads \"discharge likely\" where the amount comes from the operator's own discharge history or from a rain trigger its state publishes, and \"discharge possible\" where only this site's default of 0.1 inch applies. The colour, the rule and how long the caution lasts are the same.",
+  "label_by_basis_rationale": "The label says how strong the estimate is. It reads \"discharge likely\" where the amount comes from the operator's own discharge history or from a rain trigger its state publishes, and \"discharge possible\" where only our default of 0.1 inch applies. The colour, the rule and how long the caution lasts are the same.",
   "history": {
-   "doc": "Where an operator has enough dated overflow reports, this site pairs every storm at its outfalls since 2015 with the operator's own reports. The caution reads discharge possible from the smallest storm after which the operator ever reported an overflow, rounded down to the next step, and discharge likely from the smallest step at which it reported an overflow after at least half of the storms of that size and of all larger storms together. Below the possible amount no caution shows only where at least 30 storms that small are on record over at least three years and none was followed by a reported overflow; otherwise the caution starts where a published rule or this site's default would start it, and lasts at least as long. This is an estimate, not a report, and it never replaces a red advisory.",
+   "doc": "Where an operator has enough dated overflow reports, we pair every storm at its outfalls since 2015 with the operator's own reports. The caution reads discharge possible from the smallest storm after which the operator ever reported an overflow, rounded down to the next step, and discharge likely from the smallest step at which it reported an overflow after at least half of the storms of that size and of all larger storms together. Below the possible amount no caution shows only where at least 30 storms that small are on record over at least three years and none was followed by a reported overflow; otherwise the caution starts where a published rule or our default would start it, and lasts at least as long. A reported discharge or an official advisory takes precedence over this rain caution.",
    "source": "The operators' own dated combined sewer overflow reports, as the operators and state agencies publish them in the sources this site reads; NOAA MRMS daily rainfall totals at each operator's outfalls, from the Iowa Environmental Mesonet reanalysis point service, from 2015.",
    "label_by_level": {
     "likely": "Discharge likely: heavy rain, no report received",
@@ -669,8 +669,8 @@
   "fallback": {
    "default": {
     "inches": 0.1,
-    "basis": "This site's default: 0.1 inch of rain in 24 hours at a combined sewer outfall, applied where the state publishes no rain trigger of its own",
-    "source": "This site's methods page",
+    "basis": "Our default: 0.1 inch of rain in 24 hours at a combined sewer outfall, used where neither the operator's overflow reports nor a published rain rule sets an amount",
+    "source": "Our methods page",
     "trigger_basis": "default",
     "cost_rationale": "What the default costs. This site's own analysis compared Massachusetts operators' verified reports (July 2022 to October 2026) and Michigan's discharge list (2001 to October 2026) with NOAA radar rainfall. By the operators' own rain figures, overflows that began with less than 0.1 inch of rain were about 3 percent of Massachusetts discharge days and 1 percent of Michigan's; by radar, the 0.1 inch default would have flagged 96 to 97 percent of past overflow days. But on about half of the days with 0.1 inch or more by radar at a Massachusetts operator's outfalls, no overflow was reported that day or in the next two (two days in three for the 12 Michigan operators tested), so where the default applies the caution will often show with no overflow following. In Massachusetts, the operators' own amounts cut those quiet days from 50 to 34 percent while keeping nine overflows in ten. A day with no report is not proof that no overflow happened: some overflows are reported late or not at all.",
     "cost_source": "MassDEP Sewage Notification Data System, Verified Data Reports, July 2022 to October 2026; Michigan EGLE, MiEnviro CSO/SSO List, 2001 to October 2026; NOAA MRMS radar-only daily rainfall, via the Iowa Environmental Mesonet; analysis by DirtyWaterWatch, November 2026"
@@ -693,13 +693,13 @@
     },
     "MD": {
      "inches": 0.1,
-     "basis": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+     "basis": "Maryland's beach program advises avoiding swimming within 48 hours of a heavy rain event, and Anne Arundel County puts its beaches under a no-contact advisory after half an inch of rain. The local half-inch figure is advice for beaches, so we apply our default of 0.1 inch in 24 hours at combined sewer outfalls",
      "source": "Maryland Department of the Environment, Healthy Beaches; Anne Arundel County Department of Health, recreational water closings and advisories",
      "trigger_basis": "default"
     },
     "DC": {
      "inches": 0.1,
-     "basis": "District and county agencies recommend not swimming for 48 hours after half an inch of rain, as Anacostia Riverkeeper publishes their advice; this site applies its stricter default of 0.1 inch in 24 hours at combined sewer outfalls, because the local half-inch figure is advice for beaches, not a measure of when a combined sewer overflows",
+     "basis": "District and county agencies recommend not swimming for 48 hours after half an inch of rain, as Anacostia Riverkeeper publishes their advice. The local half-inch figure is advice for beaches, so we apply our default of 0.1 inch in 24 hours at combined sewer outfalls",
      "source": "Anacostia Riverkeeper, Swim Guide listings for the District of Columbia",
      "trigger_basis": "default"
     }
