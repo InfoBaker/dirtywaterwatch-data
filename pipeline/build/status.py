@@ -2460,19 +2460,21 @@ class Resolver:
             # second lake the advisory covers is not left out; a water's colour still follows colours_whole_water
             # and advisory_on_river (a large lake or a river keeps a marker only)
             got = list(out.get("water_slugs") or [])
-            added = []
+            added, part_points = [], {}
             for lat, lon in parts:
                 o = self._resolve({**ev, "lat": lat, "lon": lon})
                 for sl in o.get("water_slugs") or []:
                     if sl not in got:
                         got.append(sl)
                         added.append(sl)
+                        part_points[sl] = [lat, lon]    # the part's own point: that water's marker sits there
             if added:
                 if out.get("water_match") in (None, "none"):
                     out["water_match"] = "geometry"
                 out["water_slugs"] = got
                 out.pop("unplaced_reason", None)
-            out["extent_parts"] = {"parts": len(parts) + 1, "waters_added": added}
+            out["extent_parts"] = {"parts": len(parts) + 1, "waters_added": added,
+                                   **({"points": part_points} if part_points else {})}
             out["note"] = "; ".join(x for x in (out.get("note"), (
                 f"the authority's advisory has {len(parts) + 1} parts; each is placed by its own point"
                 + (f" ({len(added)} more water{'s' if len(added) != 1 else ''})" if added else ""))) if x)
@@ -3956,7 +3958,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     for ev in events:
         eid = ev["event_id"]
         began = parse_time(ev.get("started_at") or ev.get("reported_at")) if cache_before else None
-        if began is not None and began < cache_before:
+        # a multipart agency extent (EXTENT_PART_SOURCES only) is resolved afresh, so a placement cached before its
+        # parts carried their own points is not reused
+        if began is not None and began < cache_before and not extent_part_points(ev):
             h = record_hash(ev)
             hit = cache_old.get(eid)
             if hit and hit[0] == h:
@@ -4126,10 +4130,23 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 and (point_on or not pl["water_slugs"])):
             ivs = event_intervals(eff, event_state(ev), now, rules=rules)
             colouring = [iv for iv in ivs if iv["color"] != "grey"]
-            if colouring and any(iv["end"] is None or iv["end"] > h_start for iv in colouring):
+            # an advisory drawn as several parts (EXTENT_PART_SOURCES only): a water another part lies on has its
+            # marker at that part's point, not at the record's; the record's point keeps the marker of its own
+            # water, or of no water when its part colours none. Every other record: one marker, as before
+            part_pts = (pl.get("extent_parts") or {}).get("points") or {}
+            groups = [(point_on, None)]
+            if part_pts and any(x in part_pts for x in point_on):
+                own = [x for x in point_on if x not in part_pts]
+                groups = ([(own, None)] if own or not [x for x in pl["water_slugs"] if x not in part_pts] else []) \
+                    + [([x], part_pts[x]) for x in point_on if x in part_pts]
+            for g_on, g_pt in (groups if colouring and any(iv["end"] is None or iv["end"] > h_start
+                                                           for iv in colouring) else []):
                 col, act = status_at(ivs, now)
                 top = max(act, key=lambda iv: RANK[iv["color"]]) if act else None
-                points.append({"event_id": eid, "water_slugs": point_on, "status": col,
+                points.append({"event_id": eid, "water_slugs": g_on, "status": col,
+                               **({"part_point": {"lat": g_pt[0], "lon": g_pt[1],
+                                                  "basis": "a further part of the authority's own drawn area or "
+                                                           "line, by its own point"}} if g_pt else {}),
                                "category": category_of(ev.get("event_type")),
                                "rule": top["rule"] if top else None, "label": top["label"] if top else None,
                                "short": short_reason(top, ev) if top else None,
@@ -4144,13 +4161,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                **({"stretch_fallback": placements[eid]["stretch_fallback"]}
                                   if stretched and placements[eid].get("stretch_fallback") else {}),
                                "why": ("the advisory covers the stretch it names, drawn from end to end; the marker "
-                                       "is its point" if point_on and traced else
+                                       "is its point" if g_on and traced else
                                        (placements[eid]["stretch_fallback"] if stretched else RIVER_POINT_WHY)
-                                       if river_point and (names_its_water(ev) or
+                                       if [x for x in g_on if x in river_point] and (names_its_water(ev) or
                                                            ev.get("event_type") not in POINT_ADVISORY_TYPES)
                                        else "the advisory covers the water it names; the marker is its point"
-                                       if point_on and names_its_water(ev) else
-                                       "water is not a lake, pond or reservoir under 50 km²" if point_on
+                                       if g_on and names_its_water(ev) else
+                                       "water is not a lake, pond or reservoir under 50 km²" if g_on
                                        else "not placed on a water")})
 
     # the current map's monthly marks: an outfall whose latest report is a month total with discharge, its month

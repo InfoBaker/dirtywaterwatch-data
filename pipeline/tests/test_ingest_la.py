@@ -515,3 +515,50 @@ def test_an_older_state_row_with_an_address_in_the_water_cell_is_cleaned_before_
     state = {"reports": {"98": {**rep, "number": 98, "url": "https://example.org/r98.pdf"}}}
     recs = Q.records(state)
     assert "123 EXAMPLE" not in json.dumps(state) and "123 EXAMPLE" not in json.dumps(recs)
+
+
+# --- round 3 (Astra verify2 P1-1) ---
+
+def test_suffixed_house_numbers_contact_and_honorific_forms_never_reach_the_state_or_the_events(monkeypatch, tmp_path):
+    """Astra verify2 P1-1: '123-A Example Lane', '12 1/2 Example St', 'Contact Example Person' and 'Dr. Example
+    Person' in the Rec. Waters cell of an accepted report: withheld before the state file and every events write (a
+    good run, and a later run whose index read fails), the rows kept and placed on no water."""
+    import requests
+    cells = ["123-A Example Lane", "12 1/2 Example St", "Contact Example Person", "Dr. Example Person",
+             "dr. example person", "Example Person", "Ward Creek, contact Example Person"]
+    for cell in cells:
+        assert Q.receiving_water(cell)[0] is None, cell
+    for ok in ("Ward Creek", "Bayou Fountain", "Clay Cut Bayou", "Harelson Lateral", "University Lake", "Canal", "None"):
+        assert Q.receiving_water(ok) == (ok, None), ok
+    table = TABLE_N.replace(_row("9/4/2026", "200 Sample Ave", "Blockage - Collection Line", "Example", "1,130"),
+                            _row("9/4/2026", "200 Sample Ave", "Blockage - Collection Line", "123-A Example Lane", "1,130"))
+    table = table.replace(_cont(addr="Unit", water="Bayou"), _cont(addr="Unit"))
+    table_s = TABLE_S.replace("Example Creek", "Contact Example Person")
+    url = "https://example.org/98th-Quarterly-Report.pdf"
+    _pdf_state(monkeypatch, {b"pdf": [SUMMARY, table, table_s]})
+    _live(monkeypatch, tmp_path, {98: url}, {url: b"pdf"})
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-01T00:00:00Z")
+    assert code == 0 and out["count"] == 3
+    blobs = [(tmp_path / "state.json").read_text(), json.dumps(out)]
+    # an older state written before this check, then an index read that fails: the state and the retained events
+    # are cleaned before they are written again
+    state = json.loads(blobs[0])
+    state["reports"]["98"]["rows"][0]["receiving_water"] = "Dr. Example Person"
+    state["reports"]["98"]["rows"][0].pop("receiving_water_withheld", None)
+    (tmp_path / "state.json").write_text(json.dumps(state))
+    ev = json.loads(blobs[1])
+    ev["records"][0]["waterbody_text"] = ev["records"][0]["raw"]["receiving_water_as_given"] = "Dr. Example Person"
+    (tmp_path / "events" / f"{Q.SOURCE_ID}.json").write_text(json.dumps(ev))
+
+    def down(url, **kw):
+        raise requests.ConnectionError("index down")
+    monkeypatch.setattr(Q.requests, "get", down)
+    code, out2 = _run_at(monkeypatch, tmp_path, "2026-11-02T00:00:00Z")
+    assert code == 1 and out2["ok"] is False and out2["count"] == 3 and "index" in out2["error"]
+    blobs += [(tmp_path / "state.json").read_text(), json.dumps(out2)]
+    for blob in blobs:
+        for bad in ("123-A", "Example Lane", "Example Person", "example person"):
+            assert bad not in blob, (bad, blob[:300])
+    w = {r["started_at"]: r for r in out2["records"]}
+    for d in ("2026-09-04", "2026-08-12"):
+        assert w[d]["waterbody_text"] is None and "withheld" in w[d]["raw"]["placement_note"]
