@@ -2783,7 +2783,8 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             red["rationale"] = (f"in effect while the authority keeps the advisory (aged out {SYSTEM_WIDE_CONFIRM_HOURS} "
                                 "hours after the last read that showed it)")
 
-        if et in AGING_TYPES and ev.get("sampled_at") and ev.get("time_precision") == "poll" \
+        poll_confirmed = (ev.get("raw") or {}).get("_poll_confirmed") is True
+        if et in AGING_TYPES and (ev.get("sampled_at") or poll_confirmed) and ev.get("time_precision") == "poll" \
                 and (end is None or end_precision(ev) == "poll"):
             # A sample's later observed change is not an official lift date, nor evidence that the advisory
             # remained in effect through a polling gap. Keep ended_at as the observed change, but never extend
@@ -2794,6 +2795,12 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             until = min(end, cap) if end else cap
             red["rationale"] = (f"observed health alert, aged out {CONFIRM_DAYS} days after the last new confirmation; "
                                 "a later observed change does not confirm the intervening period or establish a lift date")
+            if poll_confirmed and not ev.get("sampled_at"):
+                # a layer polled with no sample date (KDHE's HAB layer, raw._poll_confirmed): the same limit, counted
+                # from the last read that listed the advisory (re-review P1-2); keyed on the flag, so no other feed changes
+                red["rationale"] = (f"listed by the authority at each read; aged out {CONFIRM_DAYS} days after the last "
+                                    "read that listed it; a later read that no longer lists it does not confirm the "
+                                    "unread period or establish a lift date")
             out = [_iv(ev, start, until, rule, red, yellow)]
             out[0]["confirmed"] = iso(confirmed)
             if end is None or end > cap:
