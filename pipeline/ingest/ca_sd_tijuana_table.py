@@ -71,7 +71,7 @@ from pathlib import Path
 import requests
 
 from common import BUILD_DIR, EVENTS_DIR, HEADERS, ROOT, event, now_iso, read_json, save_raw, scrub_text, \
-    write_events, write_json
+    strip_house_numbers, write_events, write_json
 
 SOURCE_ID = "ca-sd-regional-board-ibwc-spills"
 PAGE_URL = ("https://www.waterboards.ca.gov/sandiego/water_issues/programs/tijuana_river_valley_strategy/"
@@ -90,7 +90,7 @@ REPORTED_BY = ("the US Section of the International Boundary and Water Commissio
 COLUMNS = {"start date": "start", "end date": "end", "event type": "event_type", "discharge location": "location",
            "approximate discharge volume": "volume", "volume recovered": "recovered", "notes": "notes"}
 NEEDED = ("start", "end", "event_type", "location")
-TRACKED = ("start", "end", "event_type", "location", "volume", "recovered")
+TRACKED = ("start", "end", "event_type", "location", "volume", "recovered", "notes")
 
 # the table's Event Type wording -> kinds (the page's own definitions); each kind is a sewage discharge (sso)
 EVENT_KINDS = (
@@ -128,10 +128,16 @@ WATER_NAMES = (
 VALLEY_BOX = (-117.16, 32.50, -116.95, 32.62)
 
 DATE = re.compile(r"^\s*(\d{1,2})/(\d{1,2})/(\d{2}|\d{4})\s*$")
-ONGOING = re.compile(r"\bongoing\b", re.I)
+# an end cell that says the event goes on: it starts with "Ongoing" ("Ongoing intermittent flows"); "No longer
+# ongoing" or any other wording is not read as ongoing (review 2026-11-15 P1-6)
+ONGOING = re.compile(r"^\s*ongoing\b(?!.*\b(?:ended|stopped|ceased|no longer)\b)", re.I)
 NONE_TEXT = re.compile(r"^\s*(none|n/?a|-+|0|unknown|tbd)?\s*\.?\s*$", re.I)
 NONE_WORD = re.compile(r"^\s*(none|0)\s*\.?\s*(gallons?)?\s*$", re.I)
-VOLUME = re.compile(r"([\d][\d,]*(?:\.\d+)?)\s*(billion|million|thousand)?\s*(?:gallons?|gal)\b", re.I)
+# the whole cell must be one plain amount ("302,000 gallons", "1.61 million gallons", ".5 million gallons"); a range,
+# a bound ("<1,000"), a sign, a rate ("per day", "/day") or anything else is kept as text with no number (review
+# 2026-11-15 P1-5)
+VOLUME = re.compile(r"^\s*(?:approximately\s+|approx\.?\s+|about\s+|~\s*)?(\d[\d,]*(?:\.\d+)?|\.\d+)\s*"
+                    r"(billion|million|thousand)?\s*(?:gallons?|gal\.?)\s*\.?\s*$", re.I)
 SCALE = {"billion": 1e9, "million": 1e6, "thousand": 1e3, None: 1}
 REPORTED_ON = re.compile(r"\breported\b[^.]{0,60}?\bon\s+(\d{1,2}/\d{1,2}/\d{4})", re.I)
 PAGE_UPDATED = re.compile(r"Page\s+last\s+updated\s*(?:<!--.*?-->\s*)*(\d{1,2}/\d{1,2}/\d{2,4})", re.I | re.S)
@@ -221,8 +227,8 @@ def gallons(v) -> int | None:
     s = clean(v)
     if not s or NONE_TEXT.match(s):
         return None
-    m = VOLUME.search(s)
-    if not m:
+    m = VOLUME.match(s)
+    if not m or (m.group(1).count(",") and not re.fullmatch(r"\d{1,3}(?:,\d{3})+(?:\.\d+)?", m.group(1))):
         return None
     try:
         n = float(m.group(1).replace(",", ""))
@@ -276,20 +282,36 @@ def valley_waters(waters: dict | None = None) -> dict[str, dict[str, list[str]]]
                 out[name]["slugs"].append(slug)
     resolver = status.Resolver(ca, [], placement_rules={})
     for name, _, _ in WATER_NAMES:
+        # every record the status build's name match could pick for the name (an ambiguous match the build settles by
+        # the operator's towns included: review 2026-11-15 P1-4): the names, aliases and stems it holds, as by_name
+        # reads them
+        t = f" {status.norm_name(name)} "
+        cand = set()
+        for (st, n), slugs in resolver.names.items():
+            if st == "CA" and f" {n} " in t:
+                cand.update(slugs)
+        for table in (resolver.exact, resolver.stems):
+            cand.update(table.get(("CA", status.norm_name(name))) or [])
         got, _, _ = resolver.by_name(name, "CA", None, None, {"raw": {}})
-        out[name]["elsewhere"] = sorted(s for s in got if s not in out[name]["slugs"])
+        cand.update(got)
+        out[name]["elsewhere"] = sorted(s for s in cand if s not in out[name]["slugs"])
         out[name]["slugs"].sort()
     return {k: v for k, v in out.items() if v["slugs"] or v["elsewhere"]}
 
 
 def record_ids(rows: list[dict]) -> list[str]:
+    """The row's start date, the water its location names (a fixed name, or "site"), and six hex digits of a hash of
+    the location as published: no free text of the table reaches an identifier (review 2026-11-15 P1-2). A second row
+    with the same start and location gets "-n2" (a suffix no hash can end in, so it never meets another row's key)."""
     seen: Counter = Counter()
     out = []
     for r in rows:
         d = parse_date(r.get("start"))
-        base = f"{d.isoformat() if d else 'no-start'}-{slugify(clean(r.get('location')))}"
+        loc = clean(r.get("location")).lower()
+        base = (f"{d.isoformat() if d else 'no-start'}-{slugify(water_name(loc) or 'site')}-"
+                f"{hashlib.sha256(loc.encode()).hexdigest()[:6]}")
         seen[base] += 1
-        out.append(base if seen[base] == 1 else f"{base}-{seen[base]}")
+        out.append(base if seen[base] == 1 else f"{base}-n{seen[base]}")
     return out
 
 
@@ -297,8 +319,9 @@ def record_ids(rows: list[dict]) -> list[str]:
 
 def build_record(row: dict, rid: str, fetched_at: str, prev: dict | None, placed: dict) -> dict:
     a = {k: clean(row.get(k)) for k in COLUMNS.values()}
-    if a.get("notes"):
-        a["notes"] = scrub_text(a["notes"])
+    for k in ("location", "notes"):        # typed text: a name, a mailbox, a phone or a house number never kept
+        if a.get(k):
+            a[k] = strip_house_numbers(scrub_text(a[k]))
     base = dict(source_id=SOURCE_ID, source_record_id=rid, fetched_at=fetched_at, source_url=PAGE_URL)
     p_raw = (prev or {}).get("raw") or {}
     raw = {"row": a, "time_zone": TZ}
@@ -349,7 +372,12 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, placed: dict) -> di
     elif end is not None and end > fetched + timedelta(days=1):
         implausible = "lies after the page was read"
     if implausible:
-        status, ended_at = "unknown", end.isoformat()
+        # an end before the start stays in ended_at (the status build's shared rule draws no window from it); an end
+        # after the read stays only in raw: the shared rule allows ends up to 31 days ahead, so in ended_at it would
+        # draw a discharge window to a day that has not come (review 2026-11-15 P1-1)
+        status = "unknown"
+        ended_at = end.isoformat() if implausible == "is before the start" else None
+        raw["_end_as_published"] = end.isoformat()
         raw["_end_not_used"] = f"the end as published ({end.isoformat()}) {implausible}"
         raw["_end_basis"] = ("the table gives an end that " + implausible + ", most likely a typing error: it is kept "
                              "as published and not used, so the event has no confirmed end (the site's rule for an "
@@ -489,16 +517,25 @@ def main(argv=None) -> int:
     state = read_json(state_path, {}) or {}
     prev_doc = read_json(out, {}) or {}
     prev = prev_doc.get("records", [])
-    last = state.get("fetched_at")
-    if not args.file and not args.force and prev and last and prev_doc.get("ok") is not False:
+    # one request at most every MIN_HOURS hours, a failed one included (review 2026-11-15 P2-8): after a good read the
+    # last records are written again as healthy; after a failed one the events file is left as it is (ok false, the
+    # records kept) until the next request
+    last = state.get("attempted_at") or state.get("fetched_at")
+    if not args.file and not args.force and last:
         age = datetime.fromisoformat(fetched_at.replace("Z", "+00:00")) - \
             datetime.fromisoformat(last.replace("Z", "+00:00"))
         if age < timedelta(hours=MIN_HOURS):
-            meta = {**(prev_doc.get("meta") or {}), "checked_at": fetched_at,
-                    "not_read_this_run": f"the page is read at most every {MIN_HOURS} hours; last read {last}"}
-            write_events(SOURCE_ID, prev, ok=True, error=None, meta=meta, path=out)
-            print(f"{SOURCE_ID}: read {last}; {len(prev)} records kept")
-            return 0
+            if prev and prev_doc.get("ok") is not False:
+                meta = {**(prev_doc.get("meta") or {}), "checked_at": fetched_at,
+                        "not_read_this_run": f"the page is read at most every {MIN_HOURS} hours; last read {last}"}
+                write_events(SOURCE_ID, prev, ok=True, error=None, meta=meta, path=out)
+                print(f"{SOURCE_ID}: read {last}; {len(prev)} records kept")
+                return 0
+            if prev_doc:
+                print(f"{SOURCE_ID}: the last request ({last}) failed; next request {MIN_HOURS} hours after it")
+                return 0
+    if not args.file:
+        state["attempted_at"] = fetched_at
     try:
         if args.file:
             text = Path(args.file).read_text(encoding="utf-8", errors="replace")
@@ -511,6 +548,7 @@ def main(argv=None) -> int:
         if not rows or len(rows) * 2 < good:
             raise RuntimeError(f"{len(rows)} rows in the table (last good read {good}): read as an outage")
     except Exception as e:  # noqa: BLE001
+        write_json(state_path, state)
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=out)
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1

@@ -18,6 +18,10 @@ AT = "2026-11-15T22:00:00Z"
 NONE_PLACED: dict = {}
 
 
+def ID(start, location):
+    return M.record_ids([{"start": start, "location": location}])[0]
+
+
 def rows():
     return M.read_rows(FIX.read_text())
 
@@ -52,7 +56,7 @@ def test_every_row_is_a_record_with_the_sources_own_dates_volume_and_no_point():
     assert stats["rows_in_table"] == 16 and stats["records"] == 16
     assert stats["by_year"] == {"2023": 1, "2024": 4, "2025": 8, "2026": 3}
     assert stats["by_status"] == {"ended": 15, "ongoing": 1}
-    r = by_id(recs)["2024-06-17-goat-canyon"]
+    r = by_id(recs)[ID("06/17/2024", "Goat Canyon")]
     assert r["event_type"] == "sso" and r["status"] == "ended"
     assert (r["started_at"], r["ended_at"], r["time_precision"]) == ("2024-06-17", "2024-09-16", "day")
     assert r["raw"]["time_zone"] == "America/Los_Angeles" and r["raw"]["ended_at_precision"] == "day"
@@ -63,7 +67,7 @@ def test_every_row_is_a_record_with_the_sources_own_dates_volume_and_no_point():
     assert r["discharger_id"] == "ca-usibwc-south-bay" and r["npdes_permit"] == "CA0108928"
     assert r["source_url"] == M.PAGE_URL and r["authority"] == M.AUTHORITY
     assert r["raw"]["event_kinds"] == ["facility_spill", "canyon_collector_flow"]
-    h = by_id(recs)["2024-06-17-hollister-street-pump-station"]
+    h = by_id(recs)[ID("06/17/2024", "Hollister Street Pump Station")]
     assert h["volume_gal"] == 302_000 and h["raw"]["volume_recovered_gal"] == 48_000
     assert h["volume_text"] == "302,000 gallons (approximate discharge volume); 48,000 gallons recovered"
     assert h["waterbody_text"] is None and h["raw"]["named_water"] is None
@@ -76,18 +80,18 @@ def test_times_are_kept_apart_and_no_report_or_publication_date_is_made_up():
     for r in recs:
         assert r["reported_at"] is None and r["published_at"] is None
         assert r["fetched_at"] == AT and r["raw"]["_first_seen_at"] == AT
-    t = by_id(recs)["2023-10-11-tijuana-river"]
+    t = by_id(recs)[ID("10/11/2023", "Tijuana River")]
     assert t["source_updated_at"] == "2026-04-30"                  # "Volume reported by USIBWC on 04/30/2026"
     assert "04/30/2026" in t["raw"]["_source_updated_basis"]
-    assert by_id(recs)["2024-06-17-goat-canyon"]["source_updated_at"] is None
+    assert by_id(recs)[ID("06/17/2024", "Goat Canyon")]["source_updated_at"] is None
     # the first time a row was seen is kept across runs
     later, _ = M.build(rows(), "2026-11-16T22:00:00Z", recs, NONE_PLACED)
-    assert by_id(later)["2024-06-17-goat-canyon"]["raw"]["_first_seen_at"] == AT
+    assert by_id(later)[ID("06/17/2024", "Goat Canyon")]["raw"]["_first_seen_at"] == AT
 
 
 def test_ongoing_is_ongoing_with_no_end_and_a_blank_end_is_never_made_up():
     recs, _ = build()
-    t = by_id(recs)["2023-10-11-tijuana-river"]
+    t = by_id(recs)[ID("10/11/2023", "Tijuana River")]
     assert t["status"] == "ongoing" and t["ended_at"] is None and t["volume_gal"] == 66_100_000_000
     assert t["raw"]["event_kinds"] == ["river_transboundary_flow"] and t["raw"]["transboundary"] is True
     assert t["discharger_id"] is None and t["npdes_permit"] is None and "USIBWC" in t["raw"]["reported_by"]
@@ -107,7 +111,7 @@ def test_an_end_before_the_start_is_kept_as_published_and_not_used():
     rs = rows()
     rs[1]["end"] = "06/10/2024"                    # Hollister Street, start 06/17/2024
     recs, _ = build(rs)
-    r = by_id(recs)["2024-06-17-hollister-street-pump-station"]
+    r = by_id(recs)[ID("06/17/2024", "Hollister Street Pump Station")]
     assert r["status"] == "unknown" and r["ended_at"] == "2024-06-10"
     assert "is before the start" in r["raw"]["_end_not_used"] and "ended_at_precision" not in r["raw"]
     now = datetime(2024, 6, 20, tzinfo=UTC)
@@ -141,10 +145,10 @@ def test_the_event_type_follows_the_tables_wording_and_unread_wording_is_unknown
     rs = rows()
     rs[1]["event_type"] = "Odor complaint"
     recs, _ = build(rs)
-    r = by_id(recs)["2024-06-17-hollister-street-pump-station"]
+    r = by_id(recs)[ID("06/17/2024", "Hollister Street Pump Station")]
     assert r["event_type"] == "unknown" and r["parse_error"] == "event type not read: 'Odor complaint'"
     # a flow that is not a Spill Event of the facility joins no operator
-    f = by_id(build()[0])["2026-03-14-stewarts-drain"]
+    f = by_id(build()[0])[ID("3/14/2026", "Stewart's Drain")]
     assert f["discharger_id"] is None and f["raw"]["transboundary"] is True
 
 
@@ -174,9 +178,9 @@ def test_a_report_is_placed_only_on_a_water_record_in_the_tijuana_river_valley()
     assert placed["Tijuana River"] == {"slugs": ["tijuana-river-ca"], "elsewhere": []}
     assert placed["Goat Canyon"] == {"slugs": [], "elsewhere": ["goat-canyon-ca"]}
     recs, stats = build(placed=placed)
-    t = by_id(recs)["2023-10-11-tijuana-river"]
+    t = by_id(recs)[ID("10/11/2023", "Tijuana River")]
     assert t["water_slugs"] == ["tijuana-river-ca"] and t["water_match"] == "name"
-    g = by_id(recs)["2024-06-17-goat-canyon"]
+    g = by_id(recs)[ID("06/17/2024", "Goat Canyon")]
     assert g["water_slugs"] == [] and g["waterbody_text"] is None and g["raw"]["named_water"] == "Goat Canyon"
     assert stats["placed"] == 1 and stats["unplaced"] == 15
     # the status build places them the same way: the river on its record, the far canyon nowhere, never the ocean
@@ -204,9 +208,9 @@ def test_a_row_that_leaves_the_table_keeps_its_record_and_revisions_are_kept():
     rs = rows()[1:]
     rs[0]["volume"] = "310,000 gallons"
     later, stats = M.build(rs, "2026-11-20T22:00:00Z", recs, NONE_PLACED)
-    gone = by_id(later)["2023-10-11-tijuana-river"]
+    gone = by_id(later)[ID("10/11/2023", "Tijuana River")]
     assert gone["raw"]["_missing_from_table_since"] == "2026-11-20T22:00:00Z" and stats["kept_missing_from_table"] == 1
-    h = by_id(later)["2024-06-17-hollister-street-pump-station"]
+    h = by_id(later)[ID("06/17/2024", "Hollister Street Pump Station")]
     assert h["volume_gal"] == 310_000 and h["raw"]["_revisions"][0]["volume"] == "302,000 gallons"
 
 
@@ -239,10 +243,127 @@ def test_the_ongoing_river_flow_since_2023_sets_no_colour_now_and_an_ended_spill
     from its start to the end of its end day, then the site's caution."""
     recs, _ = build()
     rules = S.load_rules()
-    t = by_id(recs)["2023-10-11-tijuana-river"]
+    t = by_id(recs)[ID("10/11/2023", "Tijuana River")]
     now = datetime(2026, 11, 15, 22, tzinfo=UTC)
     assert [iv for iv in S.event_intervals(t, "CA", now, None, rules) if iv["end"] is None or iv["end"] > now] == []
-    s = by_id(recs)["2026-03-14-stewarts-drain"]
+    s = by_id(recs)[ID("3/14/2026", "Stewart's Drain")]
     ivs = S.event_intervals(s, "CA", datetime(2026, 3, 16, tzinfo=UTC), None, rules)
     assert ivs[0]["rule"] == "discharge" and ivs[0]["color"] == "red"
     assert any(iv["color"] == "yellow" for iv in ivs)
+
+
+# ---------------------------------------------------------------- review 2026-11-15 (Astra) findings
+
+
+def test_an_end_after_the_read_is_kept_in_raw_only_and_draws_no_window():
+    """P1-1: the shared rule allows ends up to 31 days ahead, so a future end in ended_at would draw a window."""
+    rs = rows()
+    rs[1].update(start="11/14/2026", end="11/17/2026")
+    recs, _ = build(rs)
+    r = by_id(recs)[M.record_ids(rs)[1]]
+    assert r["status"] == "unknown" and r["ended_at"] is None
+    assert r["raw"]["_end_as_published"] == "2026-11-17" and "after the page was read" in r["raw"]["_end_not_used"]
+    rules = S.load_rules()
+    now = datetime(2026, 11, 15, 22, tzinfo=UTC)
+    ivs = S.event_intervals(r, "CA", now, None, rules)
+    assert not [iv for iv in ivs if iv["rule"] == "discharge"]
+    assert all(iv["end"] is None or iv["end"] < datetime(2026, 11, 17, tzinfo=UTC) or iv["rule"] != "discharge"
+               for iv in ivs)
+
+
+def test_no_name_mailbox_phone_or_house_number_reaches_any_field_or_identifier():
+    """P1-2: typed text in the location is scrubbed before it is used anywhere, and identifiers carry no free text."""
+    from build import redact
+    rs = rows()
+    rs[1]["location"] = "Goat Canyon; contact Jane Doe at jane.doe@example.com, phone 619-555-0123"
+    rs[2]["location"] = "Goat Canyon near the home at 123 Main Street"
+    rs[3]["notes"] = "Call Jane Doe at 619-555-0123 or jane.doe@example.com."
+    recs, _ = build(rs)
+    blob = json.dumps(redact.redact_events(recs))
+    for bad in ("Jane", "Doe", "jane", "555-0123", "example.com", "123 Main"):
+        assert bad not in blob, bad
+    r = by_id(recs)[M.record_ids(rs)[2]]
+    assert r["outfall_name"] == "Goat Canyon near the home at [house number removed] Main Street"
+    assert all(set(x["source_record_id"]) <= set("0123456789abcdefghijklmnopqrstuvwxyz-") for x in recs)
+
+
+def test_identifiers_are_unique_and_never_meet_another_rows():
+    """P1-3: same start and location, and a location ending in a number, give distinct keys."""
+    rs = [{"start": "06/17/2024", "location": "Goat Canyon"}, {"start": "06/17/2024", "location": "Goat Canyon"},
+          {"start": "06/17/2024", "location": "Goat Canyon 2"}]
+    ids = M.record_ids(rs)
+    assert len(set(ids)) == 3 and ids[1] == ids[0] + "-n2"
+    assert M.record_ids(rows()) == M.record_ids(rows())          # stable across reads
+
+
+def test_a_same_named_water_outside_the_valley_withholds_the_name_even_when_the_name_is_ambiguous():
+    """P1-4: two Goat Canyons outside the valley (one in San Diego, USIBWC's town): the name match the status build
+    settles by the operator's towns must not take it."""
+    waters = {"goat-canyon-ca": {**_water("goat-canyon-ca", "Goat Canyon", [-117.15, 32.80, -117.10, 32.85], "stream"),
+                                 "towns": ["San Diego"]},
+              "goat-canyon-ca-2": _water("goat-canyon-ca-2", "Goat Canyon", [-120.5, 38.0, -120.4, 38.1], "stream")}
+    placed = M.valley_waters(waters)
+    assert placed["Goat Canyon"] == {"slugs": [], "elsewhere": ["goat-canyon-ca", "goat-canyon-ca-2"]}
+    recs, _ = build(placed=placed)
+    res = S.Resolver(waters, [], discharger_towns={"ca-usibwc-south-bay": ["San Diego"], "CA0108928": ["San Diego"]},
+                     placement_rules={})
+    for r in recs:
+        if (r.get("raw") or {}).get("named_water") == "Goat Canyon":
+            assert r["waterbody_text"] is None and res.resolve(r)["water_slugs"] == []
+
+
+def test_a_volume_that_is_not_one_plain_amount_has_no_number():
+    """P1-5: ranges, bounds, signs and rates are kept as text, never a total."""
+    assert M.gallons(".5 million gallons") == 500_000
+    assert M.gallons("1.61 million gallons") == 1_610_000 and M.gallons("41,105 gallons") == 41_105
+    for v in ("-100 gallons", "1-2 million gallons", "<1,000 gallons", "1 million gallons/day",
+              "1 million gallons per day", "1,00 gallons", "up to 5,000 gallons"):
+        assert M.gallons(v) is None, v
+    rs = rows()
+    rs[1]["volume"] = "<1,000 gallons"
+    r = by_id(build(rs)[0])[M.record_ids(rs)[1]]
+    assert r["volume_gal"] is None and "<1,000 gallons" in r["volume_text"] and "volume not read" in r["parse_error"]
+
+
+def test_only_an_end_that_says_ongoing_is_ongoing():
+    """P1-6: "No longer ongoing" is not ongoing."""
+    rs = rows()
+    rs[1]["end"] = "No longer ongoing"
+    rs[2]["end"] = "Ongoing, stopped 11/2"
+    recs, _ = build(rs)
+    for i in (1, 2):
+        r = by_id(recs)[M.record_ids(rs)[i]]
+        assert r["status"] == "unknown" and r["ended_at"] is None and "end not read" in r["parse_error"]
+
+
+def test_a_change_of_the_notes_alone_is_kept_as_a_revision():
+    """P2-7."""
+    recs, _ = build()
+    rs = rows()
+    rs[0]["notes"] = rs[0]["notes"].replace("04/30/2026", "05/31/2026")
+    later, _ = M.build(rs, "2026-11-20T22:00:00Z", recs, NONE_PLACED)
+    t = by_id(later)[ID("10/11/2023", "Tijuana River")]
+    assert t["source_updated_at"] == "2026-05-31" and "04/30/2026" in t["raw"]["_revisions"][0]["notes"]
+
+
+def test_a_failed_request_is_not_repeated_within_six_hours(tmp_path, monkeypatch):
+    """P2-8: one request at most every six hours, a failed one included; the failed health stays."""
+    out, state = tmp_path / "e.json", tmp_path / "s.json"
+    assert M.main(["--file", str(FIX), "--out", str(out), "--state", str(state)]) == 0
+    calls = []
+
+    class Fail:
+        status_code = 503
+
+        def raise_for_status(self):
+            raise RuntimeError("503")
+
+    monkeypatch.setattr(M.requests, "get", lambda *a, **k: calls.append(1) or Fail())
+    times = iter(["2026-11-15T12:00:00Z", "2026-11-15T13:00:00Z", "2026-11-15T19:00:00Z"])
+    monkeypatch.setattr(M, "now_iso", lambda: next(times))
+    json.dump({"fetched_at": "2026-11-15T05:00:00Z", "last_rows": 16}, state.open("w"))
+    assert M.main(["--out", str(out), "--state", str(state)]) == 1 and len(calls) == 1
+    assert M.main(["--out", str(out), "--state", str(state)]) == 0 and len(calls) == 1      # within six hours
+    doc = json.loads(out.read_text())
+    assert doc["ok"] is False and len(doc["records"]) == 16
+    assert M.main(["--out", str(out), "--state", str(state)]) == 1 and len(calls) == 2      # seven hours later
