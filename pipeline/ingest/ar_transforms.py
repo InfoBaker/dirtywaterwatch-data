@@ -401,6 +401,26 @@ def hab_counties(text: str) -> list[str]:
     return ["Hot Spring" if c == "Hot Springs" else c for c in out]         # the county is Hot Spring
 
 
+HAB_POLL_END = ("the first read of DEQ's advisories file that no longer listed it; DEQ gave no lift date, so the "
+                "advisory ended at or before that read")
+
+
+@F.hook
+def ar_hab_poll_ends(records: list[dict], ctx: F.Ctx) -> dict:
+    """after_history (the bloom feed): an advisory DEQ stopped listing without a lift date ends at the first read that
+    no longer listed it (raw._unlisted_since, which the status build uses as the end); that end is marked poll
+    precision (raw.ended_at_precision "poll", as Nebraska's observed ends are), while time_precision stays DEQ's
+    posting precision (verification 2 P2-3)."""
+    n = 0
+    for r in records:
+        raw = r.get("raw") or {}
+        if raw.get("_unlisted_since") and not r.get("ended_at") and r.get("status") == "advisory_active":
+            raw["ended_at_precision"] = "poll"
+            raw["end_basis"] = HAB_POLL_END
+            n += 1
+    return {"ends_seen_at_a_read": n} if n else {}
+
+
 @F.hook
 def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     notes["state"] = "AR"
