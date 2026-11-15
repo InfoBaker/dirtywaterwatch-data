@@ -4,11 +4,15 @@ Source
   Baltimore City Department of Public Works, "Sanitary Sewer Overflow (SSO) Public Notices"
   (ArcGIS Experience f064b1b0addd4017ac179f1652e182e0), map service layer
   https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SSO_Points2/MapServer/0
-  queried as JSON (where 1=1, every field, paged by OBJECTID). About 100 rows: every City SSO of the
+  queried as JSON (where 1=1, the safe fields only, paged by OBJECTID; the layer's description and count are read
+  first, and a missing core field, a malformed page, an empty layer or a short read fail the run). About 100 rows: every City SSO of the
   last ~four months (the interactive-maps page: "the most recent four months"), with START_DATETIME,
   END_DATETIME, EST_VOLUME (gallons), EST_FLOW (gpm), STATUS, REC_WATERS, WATERSHED, RESPONSIBILITY,
   SITE_TYPE (Standard / Structured SSO / ENS), Latitude/Longitude and waiver/penalty fields. No
   licence on the service (copyrightText empty); credit "Baltimore City Department of Public Works".
+
+Points: Latitude/Longitude are rounded to three decimals (about 100 m) before the raw page or the events file is
+  saved (a private-lateral SSO's point marks a home).
 
 Record rules (research/md/report.md 2.3, sources.json md-baltimore-dpw-sso-map)
   - One sso record per OBJECTID (source_record_id). The layer keeps ~four months, so records of
@@ -91,6 +95,15 @@ RESPONSIBILITY = {
     "FAC": (None, "Facility (not named by the source)"),
     "UNK": (None, None),
 }
+# the safe fields (data/sources/md-baltimore-sso.yaml fetch.safe_fields): every field but the two free-text waiver and
+# relief comments (WAIVER_REASON, COMMENT_RELIEF_REQUEST_TYPE), which no record uses and which can carry names
+SAFE_FIELDS = ("OBJECTID", "SSO_DATE", "LOCATION", "EST_VOLUME", "EST_FLOW", "STATUS", "REC_WATERS", "WATERSHED",
+               "START_DATETIME", "END_DATETIME", "RESPONSIBILITY", "Latitude", "Longitude", "SITE_TYPE",
+               "SENSITIVE_AREA", "WAIVER_REQUESTED", "WAIVER_GRANTED", "PENALTY", "WAIVER_CLOSED", "WAIVER_DENIED",
+               "ENTER_STORM", "CLEANUP_REQ", "STIPULATED_PENALTY_WAIVED", "STIPULATED_PENALTY_ASSESSED",
+               "ANNUAL_ADJUSTMENT")
+# the fields the record's identity, times and status rest on: a layer without one of them is a failed read
+REQUIRED_FIELDS = ("OBJECTID", "SSO_DATE", "START_DATETIME", "END_DATETIME", "STATUS")
 SITE_RE = re.compile(r"\bSSO\s+Site\s*#\s*(\d+)", re.I)
 
 
@@ -117,25 +130,72 @@ def fnum(v):
     return f if f == f else None
 
 
-def query_layer(sess: requests.Session) -> tuple[list[dict], bytes]:
-    """Every feature (attributes only; Latitude/Longitude are fields) and the raw pages as one JSON."""
+def safe_attributes(a: dict) -> dict:
+    """The safe fields of one row, its point rounded to three decimals (about 100 m) before anything is saved."""
+    out = {k: a.get(k) for k in SAFE_FIELDS if k in a}
+    for k in ("Latitude", "Longitude"):
+        v = fnum(out.get(k))
+        if v is not None:
+            out[k] = round(v, 3)
+    return out
+
+
+def layer_fields(sess: requests.Session) -> tuple[list[str], list[str], int]:
+    """(the safe fields the layer still has, the safe fields it no longer has, its maxRecordCount). A layer that
+    lacks a field the records rest on is a failed read: no record may keep a time or status the source no longer
+    gives as if it still gave it."""
+    r = sess.get(LAYER, params={"f": "json"}, timeout=(15, 60))
+    r.raise_for_status()
+    d = r.json()
+    if "error" in d:
+        raise RuntimeError(f"ArcGIS error (layer description): {d['error']}")
+    names = {f.get("name") for f in d.get("fields") or [] if isinstance(f, dict)}
+    if not names:
+        raise RuntimeError("the layer description lists no fields")
+    gone = [f for f in SAFE_FIELDS if f not in names]
+    lost = [f for f in REQUIRED_FIELDS if f in gone]
+    if lost:
+        raise RuntimeError(f"the layer no longer has the field(s) {', '.join(lost)} (layer {d.get('id')!r} "
+                           f"{d.get('name')!r}); fields now: {', '.join(sorted(n for n in names if n))}")
+    return [f for f in SAFE_FIELDS if f in names], gone, int(d.get("maxRecordCount") or 1000)
+
+
+def query_layer(sess: requests.Session) -> tuple[list[dict], bytes, list[str]]:
+    """Every feature (safe attributes only; Latitude/Longitude are fields), the raw pages as one JSON (points already
+    rounded) and the safe fields the layer no longer has. A malformed page, an empty layer or a read that does not
+    return the layer's own count raises, so the caller keeps the earlier records and saves nothing new."""
+    fields, gone, max_count = layer_fields(sess)
+    r = sess.get(f"{LAYER}/query", params={"where": "1=1", "returnCountOnly": "true", "f": "json"}, timeout=(15, 60))
+    r.raise_for_status()
+    c = r.json()
+    if "error" in c:
+        raise RuntimeError(f"ArcGIS error (count): {c['error']}")
+    count = c.get("count")
+    if not isinstance(count, int) or count <= 0:
+        raise RuntimeError(f"the layer's count is {count!r}: an empty or unreadable layer is treated as a failed read")
     feats, pages, offset = [], [], 0
     while True:
-        params = {"where": "1=1", "outFields": "*", "returnGeometry": "false", "orderByFields": "OBJECTID",
-                  "resultOffset": offset, "resultRecordCount": 1000, "f": "json"}
+        params = {"where": "1=1", "outFields": ",".join(fields), "returnGeometry": "false",
+                  "orderByFields": "OBJECTID", "resultOffset": offset,
+                  "resultRecordCount": min(1000, max_count), "f": "json"}
         r = sess.get(f"{LAYER}/query", params=params, timeout=(15, 90))
         r.raise_for_status()
         d = r.json()
         if "error" in d:
             raise RuntimeError(f"ArcGIS error: {d['error']}")
-        pages.append(d)
-        got = d.get("features") or []
+        got = d.get("features")
+        if not isinstance(got, list) or any(not isinstance(f, dict) for f in got):
+            raise RuntimeError(f"malformed page at offset {offset}: no feature list")
+        got = [{"attributes": safe_attributes(f.get("attributes") or {})} for f in got]
+        pages.append({**{k: v for k, v in d.items() if k not in ("features", "fields")}, "features": got})
         feats += got
         if not d.get("exceededTransferLimit") or not got or offset > 50_000:
             break
         offset += len(got)
-    raw = json.dumps({"layer": LAYER, "pages": pages}, ensure_ascii=False).encode()
-    return [f.get("attributes") or {} for f in feats], raw
+    if len(feats) != count:
+        raise RuntimeError(f"partial read: {len(feats)} rows of the layer's count {count}")
+    raw = json.dumps({"layer": LAYER, "fields_requested": fields, "pages": pages}, ensure_ascii=False).encode()
+    return [f["attributes"] for f in feats], raw, gone
 
 
 def decoded_dates(a: dict) -> dict:
@@ -283,16 +343,17 @@ def main(argv=None) -> int:
     ap.add_argument("--file", help="read this saved query response instead of the layer")
     args = ap.parse_args(argv)
     fetched_at = now_iso()
+    gone: list[str] = []
     try:
         if args.file:
             d = json.loads(Path(args.file).read_text())
             pages = d.get("pages") or [d]
-            features = [f.get("attributes") or {} for p in pages for f in p.get("features") or []]
+            features = [safe_attributes(f.get("attributes") or {}) for p in pages for f in p.get("features") or []]
             raw_bytes = None
         else:
             sess = requests.Session()
             sess.headers.update(HEADERS)
-            features, raw_bytes = query_layer(sess)
+            features, raw_bytes, gone = query_layer(sess)
     except Exception as e:  # noqa: BLE001
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
@@ -307,11 +368,21 @@ def main(argv=None) -> int:
         state["fetched_at"] = fetched_at
         write_json(STATE_FILE, state)
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
+    for r in prev:      # records saved before the safe-field and three-decimal rules
+        for k in ("lat", "lon"):
+            if fnum(r.get(k)) is not None:
+                r[k] = round(float(r[k]), 3)
+        rr = r.get("raw") or {}
+        for k in ("WAIVER_REASON", "COMMENT_RELIEF_REQUEST_TYPE"):     # not safe fields
+            rr.pop(k, None)
+        for k in ("Latitude", "Longitude"):
+            if fnum(rr.get(k)) is not None:
+                rr[k] = round(float(rr[k]), 3)
     records, stats = build(features, fetched_at, prev)
     records = redact.redact_events(records)      # private individuals' names in quoted text (build/redact.py)
     meta = {**stats, "layer": LAYER, "raw_path": raw_path, "time_basis": TIME_BASIS,
             "credit": "Baltimore City Department of Public Works, Sewer Overflow Map (SSO_Points2)",
-            "registry_ids": ["md-baltimore-dpw-sso-map"]}
+            "registry_ids": ["md-baltimore-dpw-sso-map"], "safe_fields_missing_from_layer": gone}
     path_notes_to_meta(records, meta)
     path = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta)
     print(f"{SOURCE_ID}: {stats['layer_rows']} layer rows, {stats['kept_from_earlier_runs']} kept from earlier runs; "
