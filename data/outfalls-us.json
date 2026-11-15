@@ -82636,7 +82636,7 @@
    "receiving_water_source": "state",
    "water_match": "name and town: its receiving water 'ROUGE RIVER' by name and the permittee's town (farmington hills): the only record of that name there (the text reads 'ROUGE RIVER', the record 'River Rouge'); River Rouge (river-rouge-mi, openboatlaunch), no point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_point_reason": "EPA's inventory carries no coordinates for this outfall and Michigan's state layers give none; an overflow here is read at the operator's plant until a point is found (MI go-live 2026-11-04)"
+   "no_point_reason": "EPA lists permit MI0037621 as terminated (ICIS through ECHO's facility report service, read 2026-11-15; the permit expired 1982-03-31) and its outfalls are not in EPA's map of active combined sewer outfalls. No source found places this outfall: EPA's inventory gives no point, and EGLE, the Oakland County Water Resources Commissioner and the Rouge River program were searched on 2026-11-15. No point is used; the row drives no rain reading (the permit has no plant row to stand in)."
   },
   {
    "npdes_permit": "MI0037621",
@@ -82666,7 +82666,7 @@
    "receiving_water_source": "state",
    "water_match": "name and town: its receiving water 'ROUGE RIVER' by name and the permittee's town (farmington hills): the only record of that name there (the text reads 'ROUGE RIVER', the record 'River Rouge'); River Rouge (river-rouge-mi, openboatlaunch), no point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_point_reason": "EPA's inventory carries no coordinates for this outfall and Michigan's state layers give none; an overflow here is read at the operator's plant until a point is found (MI go-live 2026-11-04)"
+   "no_point_reason": "EPA lists permit MI0037621 as terminated (ICIS through ECHO's facility report service, read 2026-11-15; the permit expired 1982-03-31) and its outfalls are not in EPA's map of active combined sewer outfalls. No source found places this outfall: EPA's inventory gives no point, and EGLE, the Oakland County Water Resources Commissioner and the Rouge River program were searched on 2026-11-15. No point is used; the row drives no rain reading (the permit has no plant row to stand in)."
   },
   {
    "npdes_permit": "MI0037621",
@@ -82696,7 +82696,7 @@
    "receiving_water_source": "state",
    "water_match": "name and town: its receiving water 'ROUGE RIVER' by name and the permittee's town (farmington hills): the only record of that name there (the text reads 'ROUGE RIVER', the record 'River Rouge'); River Rouge (river-rouge-mi, openboatlaunch), no point",
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
-   "no_point_reason": "EPA's inventory carries no coordinates for this outfall and Michigan's state layers give none; an overflow here is read at the operator's plant until a point is found (MI go-live 2026-11-04)"
+   "no_point_reason": "EPA lists permit MI0037621 as terminated (ICIS through ECHO's facility report service, read 2026-11-15; the permit expired 1982-03-31) and its outfalls are not in EPA's map of active combined sewer outfalls. No source found places this outfall: EPA's inventory gives no point, and EGLE, the Oakland County Water Resources Commissioner and the Rouge River program were searched on 2026-11-15. No point is used; the row drives no rain reading (the permit has no plant row to stand in)."
   },
   {
    "npdes_permit": "MI0043982",
@@ -83246,7 +83246,8 @@
    "water_matched_by": "ingest.outfall_waters (2026-11-04)",
    "echo_lat": 42.333333,
    "echo_lon": -82.333333,
-   "coords_problem": "ECHO's point (42.333333, -82.333333) is 101.4 km from middle-river-rouge-mi, the only 'Middle River Rouge' in the permittee's town; it cannot be this outfall's (a mistyped coordinate or another place's point)"
+   "coords_problem": "ECHO's point (42.333333, -82.333333) is 101.4 km from middle-river-rouge-mi, the only 'Middle River Rouge' in the permittee's town; it cannot be this outfall's (a mistyped coordinate or another place's point)",
+   "no_point_reason": "EPA lists permit MI0051497 as terminated (ICIS through ECHO's facility report service, read 2026-11-15; the permit expired 2001-10-01) and its outfalls are not in EPA's map of active combined sewer outfalls. No source found places this outfall: EPA's inventory gives no point, and EGLE, the Oakland County Water Resources Commissioner and the Rouge River program were searched on 2026-11-15. No point is used; the row drives no rain reading (the permit has no plant row to stand in)."
   },
   {
    "npdes_permit": "MI0051501",
