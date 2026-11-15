@@ -476431,5 +476431,4253 @@
    "federal"
   ],
   "legal_form": "city"
+ },
+ {
+  "id": "id-aberdeen",
+  "name": "City of Aberdeen",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020176",
+  "npdes_permits": [
+   "ID0020176"
+  ],
+  "receiving_waters": [
+   "LITTLE HOLE DRAW"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Aberdeen"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020176 ABERDEEN, CITY OF - ABERDEEN WWTP. Owner as EPA records it: ABERDEEN, CITY OF; facility type Municipality. Permitting authority: ID0020176 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-aberdeen"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-ahsahka-water-and-sewer-district",
+  "name": "Ahsahka Water and Sewer District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0025224",
+  "npdes_permits": [
+   "ID0025224"
+  ],
+  "receiving_waters": [
+   "CLEARWATER RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Nez Perce Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ahsahka"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0025224 AHSAHKA WATER AND SEWER DISTRICT - WWTF. Owner as EPA records it: AHSAHKA WATER AND SEWER DISTRICT; facility type Municipal or Water District. Permitting authority: ID0025224 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-ahsahka-water-and-sewer-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-american-falls",
+  "name": "City of American Falls",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020753",
+  "npdes_permits": [
+   "ID0020753"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "American Falls"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020753 AMERICAN FALLS, CITY OF - AMERICAN FALLS WWTP. Owner as EPA records it: AMERICAN FALLS, CITY OF; facility type Municipality. Permitting authority: ID0020753 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-american-falls"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-ashton",
+  "name": "City of Ashton",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0023710",
+  "npdes_permits": [
+   "ID0023710"
+  ],
+  "receiving_waters": [
+   "SEWER CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "The permit is not on Idaho DEQ's list of issued IPDES permits and its plant lies outside a reservation (an expired or administratively continued permit DEQ has not listed): its issuer was not confirmed. Either way the 24-hour and five-day noncompliance reports go to the permitting authority and are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ashton"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0023710 ASHTON, CITY OF - ASHTON WWTP. Owner as EPA records it: ASHTON, CITY OF; facility type POTW. Permitting authority: ID0023710 unconfirmed (not on Idaho DEQ's list of issued IPDES permits and outside a reservation: an expired or administratively continued permit DEQ has not listed; the issuer was not confirmed).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-ashton"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "unconfirmed"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-avimor-water-reclamation",
+  "name": "Avimor Water Reclamation Facility (Puttman Infrastructure, Inc.)",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0030091",
+  "npdes_permits": [
+   "ID0030091"
+  ],
+  "receiving_waters": [
+   "Spring Valley Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Boise"
+  ],
+  "notes": "Privately owned. EPA ECHO ICIS-NPDES: ID0030091 AVIMOR WATER RECLAMATION FACILITY. Owner as EPA records it: Puttman Infrastructure, Inc.; facility type Privately Owned Facility. Permitting authority: ID0030091 IDEQ (on Idaho DEQ's list of issued IPDES permits). A planned community's plant, owned by its developer's company. Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-avimor-water-reclamation"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "business or industrial"
+ },
+ {
+  "id": "id-blackfoot",
+  "name": "City of Blackfoot",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020044",
+  "npdes_permits": [
+   "ID0020044"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Blackfoot"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020044 BLACKFOOT, CITY OF - BLACKFOOT WWTP. Owner as EPA records it: BLACKFOOT, CITY OF; facility type Municipality. Permitting authority: ID0020044 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-blackfoot"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-boise",
+  "name": "City of Boise",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020443",
+  "npdes_permits": [
+   "ID0020443",
+   "ID0023981"
+  ],
+  "receiving_waters": [
+   "Boise River",
+   "Dixie Slough"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 3 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Boise"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020443 BOISE, CITY OF - LANDER STREET WWTP; ID0023981 BOISE, CITY OF - WEST BOISE WWTP. Owner as EPA records it: BOISE, CITY OF; facility type Municipality. Permitting authority: ID0020443 IDEQ (on Idaho DEQ's list of issued IPDES permits); ID0023981 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-boise"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-bonners-ferry",
+  "name": "City of Bonners Ferry",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020222",
+  "npdes_permits": [
+   "ID0020222"
+  ],
+  "receiving_waters": [
+   "KOOTENAI RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Bonners Ferry"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020222 BONNERS FERRY, CITY OF - BONNERS FERRY WWTP. Owner as EPA records it: BONNERS FERRY, CITY OF; facility type Municipality. Permitting authority: ID0020222 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-bonners-ferry"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-bovill",
+  "name": "City of Bovill",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022861",
+  "npdes_permits": [
+   "ID0022861"
+  ],
+  "receiving_waters": [
+   "Potlatch River - 4th Order"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Bovill"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022861 BOVILL, CITY OF - BOVILL WWTP. Owner as EPA records it: BOVILL, CITY OF; facility type Municipality. Permitting authority: ID0022861 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-bovill"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-buhl",
+  "name": "City of Buhl",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020664",
+  "npdes_permits": [
+   "ID0020664"
+  ],
+  "receiving_waters": [
+   "MUD CREEK (EAST FORK)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Buhl"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020664 BUHL, CITY OF - BUHL WWTP. Owner as EPA records it: BUHL, CITY OF; facility type Municipal or Water District. Permitting authority: ID0020664 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-buhl"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-burley",
+  "name": "City of Burley",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0000663",
+  "npdes_permits": [
+   "ID0000663",
+   "ID0020095"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER RM 652.2",
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Burley"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0000663 BURLEY INDUSTRIAL WWTP; ID0020095 BURLEY, CITY OF - BURLEY WWTP. Owner as EPA records it: BURLEY, CITY OF; facility type Municipality. Permitting authority: ID0000663 IDEQ (on Idaho DEQ's list of issued IPDES permits); ID0020095 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-burley"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-caldwell",
+  "name": "City of Caldwell",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021504",
+  "npdes_permits": [
+   "ID0021504"
+  ],
+  "receiving_waters": [
+   "BOISE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Caldwell"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021504 CALDWELL, CITY OF - CALDWELL WWTP. Owner as EPA records it: CALDWELL, CITY OF; facility type Municipality. Permitting authority: ID0021504 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-caldwell"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-cambridge",
+  "name": "City of Cambridge",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021806",
+  "npdes_permits": [
+   "ID0021806"
+  ],
+  "receiving_waters": [
+   "WEISER RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cambridge"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021806 CAMBRIDGE, CITY OF - CAMBRIDGE WWTP. Owner as EPA records it: CAMBRIDGE, CITY OF; facility type Municipality. Permitting authority: ID0021806 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-cambridge"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-carey",
+  "name": "City of Carey",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0025747",
+  "npdes_permits": [
+   "ID0025747"
+  ],
+  "receiving_waters": [
+   "LITTLE WOOD RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Carey"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0025747 CAREY, CITY OF - CAREY WWTP. Owner as EPA records it: CAREY, CITY OF; facility type Municipality. Permitting authority: ID0025747 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-carey"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-cascade",
+  "name": "City of Cascade",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0023167",
+  "npdes_permits": [
+   "ID0023167"
+  ],
+  "receiving_waters": [
+   "PAYETTE RIVER (RM 38)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cascade"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0023167 CASCADE, CITY OF - CASCADE WWTP. Owner as EPA records it: CASCADE, CITY OF; facility type Municipality. Permitting authority: ID0023167 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-cascade"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-clarkia-water-and-sewer-district",
+  "name": "Clarkia Water and Sewer District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0025071",
+  "npdes_permits": [
+   "ID0025071"
+  ],
+  "receiving_waters": [
+   "ST. MARIES RIVER (MIDDLE FORK)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Clarkia"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0025071 CLARKIA WATER AND SEWER DISTRICT - WWTP. Owner as EPA records it: CLARKIA WATER AND SEWER DISTRICT; facility type Municipal or Water District. Permitting authority: ID0025071 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-clarkia-water-and-sewer-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-coeur-d-alene",
+  "name": "City of Coeur D Alene",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022853",
+  "npdes_permits": [
+   "ID0022853"
+  ],
+  "receiving_waters": [
+   "SPOKANE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Coeur D'Alene"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022853 COEUR D'ALENE, CITY OF - COEUR D'ALENE WWTP. Owner as EPA records it: COEUR D ALENE, CITY OF; facility type Municipality. Permitting authority: ID0022853 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-coeur-d-alene",
+   "id-coeur-dalene"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-cottonwood",
+  "name": "City of Cottonwood",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021849",
+  "npdes_permits": [
+   "ID0021849"
+  ],
+  "receiving_waters": [
+   "COTTONWOOD CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cottonwood"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021849 COTTONWOOD, CITY OF - COTTONWOOD WWTP. Owner as EPA records it: COTTONWOOD, CITY OF; facility type Municipal or Water District. Permitting authority: ID0021849 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-cottonwood"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-council",
+  "name": "City of Council",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020087",
+  "npdes_permits": [
+   "ID0020087"
+  ],
+  "receiving_waters": [
+   "WEISER RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Council"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020087 COUNCIL, CITY OF - COUNCIL WWTP. Owner as EPA records it: COUNCIL, CITY OF; facility type Municipality. Permitting authority: ID0020087 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-council"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-craigmont",
+  "name": "City of Craigmont",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021288",
+  "npdes_permits": [
+   "ID0021288"
+  ],
+  "receiving_waters": [
+   "LAWYERS CREEK (NORTH FORK)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "The permit is not on Idaho DEQ's list of issued IPDES permits and its plant lies outside a reservation (an expired or administratively continued permit DEQ has not listed): its issuer was not confirmed. Either way the 24-hour and five-day noncompliance reports go to the permitting authority and are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Craigmont"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021288 CRAIGMONT, CITY OF - CRAIGMONT WWTP. Owner as EPA records it: CRAIGMONT, CITY OF; facility type Municipal or Water District. Permitting authority: ID0021288 unconfirmed (not on Idaho DEQ's list of issued IPDES permits and outside a reservation: an expired or administratively continued permit DEQ has not listed; the issuer was not confirmed).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-craigmont"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "unconfirmed"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-culdesac",
+  "name": "City of Culdesac",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0024490",
+  "npdes_permits": [
+   "ID0024490"
+  ],
+  "receiving_waters": [
+   "LAPWAI CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Nez Perce Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Culdesac"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0024490 CULDESAC, CITY OF - CULDESAC WWTP. Owner as EPA records it: CULDESAC, CITY OF; facility type Municipality. Permitting authority: ID0024490 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-culdesac"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-deary",
+  "name": "City of Deary",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020788",
+  "npdes_permits": [
+   "ID0020788"
+  ],
+  "receiving_waters": [
+   "Mount Deary Creek/Big Bear Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Deary"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020788 DEARY, CITY OF - DEARY WWTP. Owner as EPA records it: DEARY, CITY OF; facility type Municipality. Permitting authority: ID0020788 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-deary"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-dover",
+  "name": "City of Dover",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0027693",
+  "npdes_permits": [
+   "ID0027693"
+  ],
+  "receiving_waters": [
+   "PEND ORIELLE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Dover"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0027693 DOVER, CITY OF - DOVER WWTP. Owner as EPA records it: DOVER, CITY OF; facility type Municipality. Permitting authority: ID0027693 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-dover"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-driggs",
+  "name": "City of Driggs",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020141",
+  "npdes_permits": [
+   "ID0020141"
+  ],
+  "receiving_waters": [
+   "TETON RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Driggs"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020141 DRIGGS, CITY OF - DRIGGS WWTP. Owner as EPA records it: DRIGGS, CITY OF; facility type Municipality. Permitting authority: ID0020141 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-driggs"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-eastern-idaho-regional-sewer-district",
+  "name": "Eastern Idaho Regional Sewer District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020133",
+  "npdes_permits": [
+   "ID0020133"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Shelley"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020133 EASTERN IDAHO REGIONAL SEWER DISTRICT - OXBOW WWTP. Owner as EPA records it: EASTERN IDAHO REGIONAL SEWER DISTRICT; facility type Municipal or Water District. Permitting authority: ID0020133 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-eastern-idaho-regional-sewer-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-edge-resort",
+  "name": "Edge Resort (Downhill, LLC)",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0030015",
+  "npdes_permits": [
+   "ID0030015"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "The permit is not on Idaho DEQ's list of issued IPDES permits and its plant lies outside a reservation (an expired or administratively continued permit DEQ has not listed): its issuer was not confirmed. Either way the 24-hour and five-day noncompliance reports go to the permitting authority and are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Garden Valley"
+  ],
+  "notes": "Privately owned. EPA ECHO ICIS-NPDES: ID0030015 DOWNHILL, LLC. Owner as EPA records it: Edge Resort; facility type Privately Owned Facility. Permitting authority: ID0030015 unconfirmed (not in the plant list). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-edge-resort"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "unconfirmed"
+  ],
+  "legal_form": "campground or resort"
+ },
+ {
+  "id": "id-elk-city-water-and-sewer-association",
+  "name": "Elk City Water and Sewer Association",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022012",
+  "npdes_permits": [
+   "ID0022012"
+  ],
+  "receiving_waters": [
+   "BIG ELK CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Elk City"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022012 ELK CITY WATER AND SEWER ASSOCIATION - ELK CITY WWTP. Owner as EPA records it: ELK CITY WATER AND SEWER ASSOCIATION; facility type Municipal or Water District. Permitting authority: ID0022012 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-elk-city-water-and-sewer-association"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "member-owned utility"
+ },
+ {
+  "id": "id-elk-river",
+  "name": "City of Elk River",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020362",
+  "npdes_permits": [
+   "ID0020362"
+  ],
+  "receiving_waters": [
+   "ELK CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Elk River"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020362 ELK RIVER, CITY OF - ELK RIVER WWTP. Owner as EPA records it: ELK RIVER, CITY OF; facility type Municipality. Permitting authority: ID0020362 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-elk-river"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-elk-valley-subdivision",
+  "name": "Elk Valley Subdivision wastewater plant",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0027979",
+  "npdes_permits": [
+   "ID0027979"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "The permit is not on Idaho DEQ's list of issued IPDES permits and its plant lies outside a reservation (an expired or administratively continued permit DEQ has not listed): its issuer was not confirmed. Either way the 24-hour and five-day noncompliance reports go to the permitting authority and are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pine"
+  ],
+  "notes": "Privately owned. EPA ECHO ICIS-NPDES: ID0027979 ELK VALLEY SUBDIVISION - WWTP. Owner as EPA records it: ELK VALLEY SUBDIVISION; facility type Privately Owned Facility. Permitting authority: ID0027979 unconfirmed (not in the plant list). EPA types it privately owned; who holds the permit (a homeowners' association or the developer) was not read.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-elk-valley-subdivision"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "unconfirmed"
+  ]
+ },
+ {
+  "id": "id-emida",
+  "name": "City of Emida",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0028487",
+  "npdes_permits": [
+   "ID0028487"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Emida"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0028487 EMIDA WATER & SEWER ASSOCIATION INC - EMIDA WWTF. Owner as EPA records it: EMIDA, CITY OF  (WASTE WATER FACILITY); facility type Municipal or Water District. Permitting authority: ID0028487 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-emida"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-emmett",
+  "name": "City of Emmett",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020311",
+  "npdes_permits": [
+   "ID0020311"
+  ],
+  "receiving_waters": [
+   "PAYETTE RIVER AT RIVER MILE 31.5"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Emmett"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020311 EMMETT, CITY OF - EMMETT WWTP. Owner as EPA records it: EMMETT, CITY OF; facility type Municipality. Permitting authority: ID0020311 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-emmett"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-fairfield",
+  "name": "City of Fairfield",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0024384",
+  "npdes_permits": [
+   "ID0024384"
+  ],
+  "receiving_waters": [
+   "SOLDIER CREEK VIA UNNAMED DRAINAGE"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fairfield"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0024384 FAIRFIELD, CITY OF - FAIRFIELD WWTP. Owner as EPA records it: FAIRFIELD, CITY OF; facility type Municipality. Permitting authority: ID0024384 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-fairfield"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-filer",
+  "name": "City of Filer",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020061",
+  "npdes_permits": [
+   "ID0020061"
+  ],
+  "receiving_waters": [
+   "CEDAR DRAW, SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Filer"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020061 FILER, CITY OF - FILER WWTP. Owner as EPA records it: FILER, CITY OF; facility type Municipality. Permitting authority: ID0020061 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-filer"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-firth",
+  "name": "City of Firth",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0024988",
+  "npdes_permits": [
+   "ID0024988"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Firth"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0024988 FIRTH, CITY OF - FIRTH WWTP. Owner as EPA records it: FIRTH, CITY OF; facility type Municipality. Permitting authority: ID0024988 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-firth"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-franklin",
+  "name": "City of Franklin",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0025569",
+  "npdes_permits": [
+   "ID0025569"
+  ],
+  "receiving_waters": [
+   "CUB RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Franklin"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0025569 FRANKLIN, CITY OF - FRANKLIN WWTP. Owner as EPA records it: FRANKLIN, CITY OF; facility type Municipality. Permitting authority: ID0025569 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-franklin"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-fruitland",
+  "name": "City of Fruitland",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020338",
+  "npdes_permits": [
+   "ID0020338",
+   "ID0021199"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER AT RIVER MILE 373",
+   "PAYETTE RIVER (TRIB OF SNAKE RIVER)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fruitland"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020338 FRUITLAND, CITY OF - SNAKE RIVER WWTP; ID0021199 FRUITLAND, CITY OF - PAYETTE RIVER WWTP. Owner as EPA records it: FRUITLAND, CITY OF; facility type Municipal or Water District. Permitting authority: ID0020338 IDEQ (on Idaho DEQ's list of issued IPDES permits); ID0021199 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-fruitland"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-genesee",
+  "name": "City of Genesee",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020125",
+  "npdes_permits": [
+   "ID0020125",
+   "ID0030112"
+  ],
+  "receiving_waters": [
+   "COW CREEK",
+   "Cow Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Genesee"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020125 GENESEE, CITY OF - GENESEE WWTP; ID0030112 GENESEE, CITY OF - GENESEE WWTP. Owner as EPA records it: GENESEE CITY OF; GENESEE, CITY OF; facility type Municipality. Permitting authority: ID0020125 IDEQ (on Idaho DEQ's list of issued IPDES permits); ID0030112 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-genesee"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-glenns-ferry",
+  "name": "City of Glenns Ferry",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022004",
+  "npdes_permits": [
+   "ID0022004"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Glenns Ferry"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022004 GLENNS FERRY, CITY OF - GLENNS FERRY WWTP. Owner as EPA records it: GLENNS FERRY, CITY OF; facility type Municipal or Water District. Permitting authority: ID0022004 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-glenns-ferry"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-gooding",
+  "name": "City of Gooding",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020028",
+  "npdes_permits": [
+   "ID0020028"
+  ],
+  "receiving_waters": [
+   "LITTLE WOOD RIVER/BIG WOOD RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Gooding"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020028 GOODING, CITY OF - GOODING WWTP. Owner as EPA records it: GOODING, CITY OF; facility type Municipality. Permitting authority: ID0020028 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-gooding"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-grace",
+  "name": "City of Grace",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0023825",
+  "npdes_permits": [
+   "ID0023825"
+  ],
+  "receiving_waters": [
+   "Bear River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Grace"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0023825 GRACE, CITY OF - GRACE WWTP. Owner as EPA records it: GRACE, CITY OF; facility type Municipality. Permitting authority: ID0023825 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-grace"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-grangeville",
+  "name": "City of Grangeville",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020036",
+  "npdes_permits": [
+   "ID0020036"
+  ],
+  "receiving_waters": [
+   "THREE MILE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Grangeville"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020036 GRANGEVILLE, CITY OF - GRANGEVILLE WWTP. Owner as EPA records it: GRANGEVILLE, CITY OF; facility type Municipality. Permitting authority: ID0020036 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-grangeville"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-greenleaf",
+  "name": "City of Greenleaf",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0028304",
+  "npdes_permits": [
+   "ID0028304"
+  ],
+  "receiving_waters": [
+   "WEST END DRAIN"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Greenleaf"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0028304 GREENLEAF, CITY OF - GREENLEAF WWTP. Owner as EPA records it: GREENLEAF, CITY OF; facility type Municipal or Water District. Permitting authority: ID0028304 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-greenleaf"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-hagerman",
+  "name": "City of Hagerman",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0025941",
+  "npdes_permits": [
+   "ID0025941"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER (RIVER MILE 576)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Hagerman"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0025941 HAGERMAN, CITY OF - HAGERMAN WWTP. Owner as EPA records it: HAGERMAN, CITY OF; facility type Municipality. Permitting authority: ID0025941 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-hagerman"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-hailey",
+  "name": "City of Hailey",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020303",
+  "npdes_permits": [
+   "ID0020303"
+  ],
+  "receiving_waters": [
+   "BIG WOOD RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Hailey"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020303 HAILEY, CITY OF - WOODSIDE WWTF. Owner as EPA records it: HAILEY, CITY OF; facility type Municipality. Permitting authority: ID0020303 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-hailey"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-hansen",
+  "name": "City of Hansen",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022446",
+  "npdes_permits": [
+   "ID0022446"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER_VIA AGRICULTURAL DITCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Hansen"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022446 HANSEN, CITY OF - HANSEN WWTP. Owner as EPA records it: HANSEN, CITY OF; facility type Municipality. Permitting authority: ID0022446 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-hansen"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-harrison",
+  "name": "City of Harrison",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021997",
+  "npdes_permits": [
+   "ID0021997"
+  ],
+  "receiving_waters": [
+   "ANDERSON SLOUGH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Harrison"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021997 HARRISON, CITY OF - HARRISON WWTP. Owner as EPA records it: HARRISON, CITY OF; facility type Municipal or Water District. Permitting authority: ID0021997 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-harrison"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-hayden-harsb",
+  "name": "Hayden Area Regional Sewer Board",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0026590",
+  "npdes_permits": [
+   "ID0026590"
+  ],
+  "receiving_waters": [
+   "SPOKANE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Hayden"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0026590 HAYDEN AREA REGIONAL SEWER BOARD - HARSB WWTP. Owner as EPA records it: HAYDEN AREA REGIONAL SEWER BOARD; facility type Municipal or Water District. Permitting authority: ID0026590 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-hayden-harsb"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "authority"
+ },
+ {
+  "id": "id-heyburn",
+  "name": "City of Heyburn",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020940",
+  "npdes_permits": [
+   "ID0020940"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Heyburn"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020940 HEYBURN, CITY OF - HEYBURN WWTP. Owner as EPA records it: HEYBURN, CITY OF; facility type Municipality. Permitting authority: ID0020940 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-heyburn"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-homedale",
+  "name": "City of Homedale",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020427",
+  "npdes_permits": [
+   "ID0020427"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Homedale"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020427 HOMEDALE, CITY OF - HOMEDALE WWTP. Owner as EPA records it: HOMEDALE, CITY OF; facility type Municipality. Permitting authority: ID0020427 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-homedale"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-horseshoe-bend",
+  "name": "City of Horseshoe Bend",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021024",
+  "npdes_permits": [
+   "ID0021024"
+  ],
+  "receiving_waters": [
+   "PAYETTE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Horseshoe Bend"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021024 HORSESHOE BEND, CITY OF - HORSESHOE BEND WWTP. Owner as EPA records it: HORSESHOE BEND, CITY OF; facility type Municipal or Water District. Permitting authority: ID0021024 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-horseshoe-bend"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-idaho-falls",
+  "name": "City of Idaho Falls",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021261",
+  "npdes_permits": [
+   "ID0021261"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Idaho Falls"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021261 IDAHO FALLS, CITY OF - IDAHO FALLS WWTP. Owner as EPA records it: IDAHO FALLS, CITY OF; facility type Municipality. Permitting authority: ID0021261 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-idaho-falls"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-inkom",
+  "name": "City of Inkom",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020249",
+  "npdes_permits": [
+   "ID0020249"
+  ],
+  "receiving_waters": [
+   "PORTNEUF RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "The permit is not on Idaho DEQ's list of issued IPDES permits and its plant lies outside a reservation (an expired or administratively continued permit DEQ has not listed): its issuer was not confirmed. Either way the 24-hour and five-day noncompliance reports go to the permitting authority and are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Inkom"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020249 INKOM, CITY OF - INKOM WWTP. Owner as EPA records it: INKOM, CITY OF; facility type POTW. Permitting authority: ID0020249 unconfirmed (not on Idaho DEQ's list of issued IPDES permits and outside a reservation: an expired or administratively continued permit DEQ has not listed; the issuer was not confirmed).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-inkom"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "unconfirmed"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-jerome",
+  "name": "City of Jerome",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020168",
+  "npdes_permits": [
+   "ID0020168"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER VIA J CANAL"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Jerome"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020168 JEROME, CITY OF - JEROME WWTP. Owner as EPA records it: JEROME, CITY OF; facility type Municipality. Permitting authority: ID0020168 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-jerome"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-jug-mountain-ranch",
+  "name": "Jug Mountain Ranch LLC",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0028029",
+  "npdes_permits": [
+   "ID0028029"
+  ],
+  "receiving_waters": [
+   "Cold Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Mccall"
+  ],
+  "notes": "Privately owned. EPA ECHO ICIS-NPDES: ID0028029 JUG MOUNTAIN RANCH LLC - JUG MOUNTAIN RANCH WWTF. Owner as EPA records it: Jug Mountain Ranch LLC; facility type Mixed Ownership (e.g., Public/Private). Permitting authority: ID0028029 IDEQ (on Idaho DEQ's list of issued IPDES permits). A resort community's plant; EPA types it mixed ownership. Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-jug-mountain-ranch"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "business or industrial"
+ },
+ {
+  "id": "id-juliaetta",
+  "name": "City of Juliaetta",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0023761",
+  "npdes_permits": [
+   "ID0023761"
+  ],
+  "receiving_waters": [
+   "POTLATCH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Juliaetta"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0023761 JULIAETTA, CITY OF - JULIAETTA WWTP. Owner as EPA records it: JULIAETTA, CITY OF; facility type Municipality. Permitting authority: ID0023761 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-juliaetta"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-kamiah",
+  "name": "City of Kamiah",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0028002",
+  "npdes_permits": [
+   "ID0028002"
+  ],
+  "receiving_waters": [
+   "MIDDLE FORK CLEARWATER RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Nez Perce Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kamiah"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0028002 KAMIAH, CITY OF - KAMIAH WWTP. Owner as EPA records it: KAMIAH, CITY OF; facility type Municipality. Permitting authority: ID0028002 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-kamiah"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-kendrick",
+  "name": "City of Kendrick",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0024554",
+  "npdes_permits": [
+   "ID0024554"
+  ],
+  "receiving_waters": [
+   "POTLATCH RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kendrick"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0024554 KENDRICK, CITY OF - KENDRICK WWTP. Owner as EPA records it: KENDRICK, CITY OF; facility type Municipal or Water District. Permitting authority: ID0024554 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-kendrick"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-ketchum",
+  "name": "City of Ketchum",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020281",
+  "npdes_permits": [
+   "ID0020281"
+  ],
+  "receiving_waters": [
+   "BIG WOOD RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ketchum"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020281 KETCHUM, CITY OF - KETCHUM/SUN VALLEY WWTP. Owner as EPA records it: CITY OF KETCHUM; facility type Municipality. Permitting authority: ID0020281 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-ketchum"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-kooskia",
+  "name": "City of Kooskia",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021814",
+  "npdes_permits": [
+   "ID0021814"
+  ],
+  "receiving_waters": [
+   "S.F. CLEARWATER RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Nez Perce Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kooskia"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021814 KOOSKIA, CITY OF - KOOSKIA WWTP. Owner as EPA records it: KOOSKIA, CITY OF; facility type Municipality. Permitting authority: ID0021814 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-kooskia"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-kootenai-ponderay-sewer-district",
+  "name": "Kootenai-Ponderay Sewer District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021229",
+  "npdes_permits": [
+   "ID0021229"
+  ],
+  "receiving_waters": [
+   "UNNAMED TRIB TO BOYER SLOUGH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Sandpoint"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021229 KOOTENAI-PONDERAY SEWER DISTRICT - KOOTENAI-PONDERAY WWTP. Owner as EPA records it: KOOTENAI-PONDERAY SEWER DISTRICT; facility type Municipal or Water District. Permitting authority: ID0021229 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-kootenai-ponderay-sewer-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-kuna",
+  "name": "City of Kuna",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0028355",
+  "npdes_permits": [
+   "ID0028355"
+  ],
+  "receiving_waters": [
+   "INDIAN CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kuna"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0028355 KUNA, CITY OF - KUNA WWTP. Owner as EPA records it: KUNA, CITY OF; facility type Municipality. Permitting authority: ID0028355 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-kuna"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-lava-hot-springs",
+  "name": "City of Lava Hot Springs",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021822",
+  "npdes_permits": [
+   "ID0021822"
+  ],
+  "receiving_waters": [
+   "PORTNEUF RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Lava Hot Springs"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021822 LAVA HOT SPRINGS, CITY OF - LAVA HOT SPRINGS WWTP. Owner as EPA records it: LAVA HOT SPRINGS, CITY OF; facility type Municipal or Water District. Permitting authority: ID0021822 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-lava-hot-springs"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-lewiston",
+  "name": "City of Lewiston",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022055",
+  "npdes_permits": [
+   "ID0022055"
+  ],
+  "receiving_waters": [
+   "CLEARWATER,ARM OF- GRANITE DAM POOL"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Lewiston"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022055 LEWISTON, CITY OF - LEWISTON WWTP. Owner as EPA records it: LEWISTON, CITY OF; facility type Municipality. Permitting authority: ID0022055 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-lewiston"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-mackay",
+  "name": "City of Mackay",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0023027",
+  "npdes_permits": [
+   "ID0023027"
+  ],
+  "receiving_waters": [
+   "BIG LOST RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Mackay"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0023027 MACKAY, CITY OF - MACKAY WWTP. Owner as EPA records it: MACKAY, CITY OF; facility type Municipality. Permitting authority: ID0023027 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-mackay"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-marsing",
+  "name": "City of Marsing",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021202",
+  "npdes_permits": [
+   "ID0021202"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Marsing"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021202 MARSING, CITY OF - MARSING WWTP. Owner as EPA records it: MARSING, CITY OF; facility type Municipal or Water District. Permitting authority: ID0021202 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-marsing"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-meridian",
+  "name": "City of Meridian",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020192",
+  "npdes_permits": [
+   "ID0020192"
+  ],
+  "receiving_waters": [
+   "FIVE MILE CREEK, BOISE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Meridian"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020192 MERIDIAN, CITY OF - MERIDIAN WWTP. Owner as EPA records it: MERIDIAN, CITY OF; facility type Municipality. Permitting authority: ID0020192 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-meridian"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-mid-valley-sewer-company",
+  "name": "Mid-Valley Sewer Company LLC",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0024422",
+  "npdes_permits": [
+   "ID0024422"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "The permit is not on Idaho DEQ's list of issued IPDES permits and its plant lies outside a reservation (an expired or administratively continued permit DEQ has not listed): its issuer was not confirmed. Either way the 24-hour and five-day noncompliance reports go to the permitting authority and are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ketchum"
+  ],
+  "notes": "Privately owned. EPA ECHO ICIS-NPDES: ID0024422 MID-VALLEY SEWER COMPANY LLC - WWTP. Owner as EPA records it: MID-VALLEY SEWER COMPANY LLC; facility type Privately Owned Facility. Permitting authority: ID0024422 unconfirmed (not in the plant list). EPA records the permittee as Mid-Valley Sewer Company LLC; Idaho DEQ's list names the plant The Meadows LLC Wastewater Treatment Plant: one system, the permittee not confirmed from the permit. Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-mid-valley-sewer-company"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "unconfirmed"
+  ],
+  "legal_form": "investor-owned utility"
+ },
+ {
+  "id": "id-middleton",
+  "name": "City of Middleton",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021831",
+  "npdes_permits": [
+   "ID0021831"
+  ],
+  "receiving_waters": [
+   "BOISE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Middleton"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021831 MIDDLETON, CITY OF - MIDDLETON WWTP. Owner as EPA records it: MIDDLETON, CITY OF; facility type Municipal or Water District. Permitting authority: ID0021831 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-middleton"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-montpelier",
+  "name": "City of Montpelier",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0025585",
+  "npdes_permits": [
+   "ID0025585"
+  ],
+  "receiving_waters": [
+   "BEAR RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Montpelier"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0025585 MONTPELIER, CITY OF - MONTPELIER WWTF. Owner as EPA records it: MONTPELIER, CITY OF; facility type Municipality. Permitting authority: ID0025585 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-montpelier"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-moscow",
+  "name": "City of Moscow",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021491",
+  "npdes_permits": [
+   "ID0021491"
+  ],
+  "receiving_waters": [
+   "PARADISE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Moscow"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021491 MOSCOW, CITY OF - MOSCOW  WWTP. Owner as EPA records it: MOSCOW, CITY OF; facility type Municipality. Permitting authority: ID0021491 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-moscow"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-moyie-springs",
+  "name": "City of Moyie Springs",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0030040",
+  "npdes_permits": [
+   "ID0030040"
+  ],
+  "receiving_waters": [
+   "Kootenai River - Moyie River to Deep Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Moyie Springs"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0030040 MOYIE SPRINGS, CITY OF - MOYIE SPRINGS WWTP. Owner as EPA records it: City of Moyie Springs; facility type Municipality. Permitting authority: ID0030040 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-moyie-springs"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-nampa",
+  "name": "City of Nampa",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022063",
+  "npdes_permits": [
+   "ID0022063"
+  ],
+  "receiving_waters": [
+   "INDIAN CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Nampa"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022063 NAMPA, CITY OF - NAMPA WWTP. Owner as EPA records it: NAMPA, CITY OF; facility type Municipality. Permitting authority: ID0022063 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-nampa"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-new-meadows",
+  "name": "City of New Meadows",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0023159",
+  "npdes_permits": [
+   "ID0023159"
+  ],
+  "receiving_waters": [
+   "LITTLE SALMON RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "New Meadows"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0023159 NEW MEADOWS, CITY OF - NEW MEADOWS WWTP. Owner as EPA records it: NEW MEADOWS, CITY OF; facility type Municipal or Water District. Permitting authority: ID0023159 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-new-meadows"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-new-plymouth",
+  "name": "City of New Plymouth",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020389",
+  "npdes_permits": [
+   "ID0020389"
+  ],
+  "receiving_waters": [
+   "Unnamed Drainage Ditch"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "New Plymouth"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020389 NEW PLYMOUTH, CITY OF - NEW PLYMOUTH WWTP. Owner as EPA records it: NEW PLYMOUTH, CITY OF; facility type Municipal or Water District. Permitting authority: ID0020389 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-new-plymouth"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-nez-perce-tribe",
+  "name": "Nez Perce Tribe (Water Resources Division)",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0028347",
+  "npdes_permits": [
+   "ID0028347"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Nez Perce Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Lapwai"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0028347 NEZ PERCE TRIBE - LAPWAI VALLEY WWTP. Owner as EPA records it: NEZ PERCE TRIBE WATER RESOURCES DIVISION; facility type Tribal Government. Permitting authority: ID0028347 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-nez-perce-tribe"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "tribal"
+ },
+ {
+  "id": "id-nezperce",
+  "name": "City of Nezperce",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020397",
+  "npdes_permits": [
+   "ID0020397"
+  ],
+  "receiving_waters": [
+   "LONG HOLLOW CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Nez Perce Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Nezperce"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020397 NEZPERCE, CITY OF - NEZPERCE WWTP. Owner as EPA records it: NEZPERCE, CITY OF; facility type Municipality. Permitting authority: ID0020397 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-nezperce"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-north-idaho-correctional-institution",
+  "name": "Idaho Department of Correction, North Idaho Correctional Institution",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0025887",
+  "npdes_permits": [
+   "ID0025887"
+  ],
+  "receiving_waters": [
+   "UNNAMED CREEK TO LAWYER CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cottonwood"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0025887 NORTH IDAHO CORRECTIONAL INSTITUTION - WWTP. Owner as EPA records it: NORTH IDAHO CORRECTIONAL INSTITUTION; facility type State Government. Permitting authority: ID0025887 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-north-idaho-correctional-institution"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "state facility"
+ },
+ {
+  "id": "id-notus",
+  "name": "City of Notus",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021016",
+  "npdes_permits": [
+   "ID0021016"
+  ],
+  "receiving_waters": [
+   "CONWAY GULCH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Notus"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021016 NOTUS, CITY OF - NOTUS WWTP. Owner as EPA records it: NOTUS, CITY OF; facility type Municipality. Permitting authority: ID0021016 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-notus"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-orofino",
+  "name": "City of Orofino",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020150",
+  "npdes_permits": [
+   "ID0020150"
+  ],
+  "receiving_waters": [
+   "CLEARWATER RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Nez Perce Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Orofino"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020150 OROFINO, CITY OF - OROFINO WWTP. Owner as EPA records it: OROFINO, CITY OF; facility type Municipality. Permitting authority: ID0020150 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-orofino"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-parma",
+  "name": "City of Parma",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021776",
+  "npdes_permits": [
+   "ID0021776"
+  ],
+  "receiving_waters": [
+   "SAND HOLLOW CREEK TO BOISE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Parma"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021776 PARMA, CITY OF - PARMA WWTP. Owner as EPA records it: PARMA, CITY OF; facility type Municipal or Water District. Permitting authority: ID0021776 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-parma"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-payette",
+  "name": "City of Payette",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020672",
+  "npdes_permits": [
+   "ID0020672"
+  ],
+  "receiving_waters": [
+   "Payette River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Payette"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020672 PAYETTE, CITY OF - PAYETTE WWTP. Owner as EPA records it: PAYETTE, CITY OF; facility type Municipality. Permitting authority: ID0020672 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-payette"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-payette-lakes-recreational-water-and-sewer-district",
+  "name": "Payette Lakes Recreational Water and Sewer District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020231",
+  "npdes_permits": [
+   "ID0020231"
+  ],
+  "receiving_waters": [
+   "PAYETTE RIVER (NORTH FORK)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Mccall"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020231 PAYETTE LAKES RECREATIONAL WATER AND SEWER DISTRICT (PLRWSD) - MCCALL WWTP. Owner as EPA records it: PAYETTE LAKES RECREATIONAL WATER AND SEWER DISTRICT - MCCALL WWTP; facility type Municipality. Permitting authority: ID0020231 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-payette-lakes-recreational-water-and-sewer-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-pierce",
+  "name": "City of Pierce",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020206",
+  "npdes_permits": [
+   "ID0020206"
+  ],
+  "receiving_waters": [
+   "OROFINO CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pierce"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020206 PIERCE, CITY OF - PIERCE WWTP. Owner as EPA records it: PIERCE, CITY OF; facility type Municipality. Permitting authority: ID0020206 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-pierce"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-plummer",
+  "name": "City of Plummer",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022781",
+  "npdes_permits": [
+   "ID0022781"
+  ],
+  "receiving_waters": [
+   "PLUMMER CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Coeur d'Alene Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Plummer"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022781 PLUMMER, CITY OF - PLUMMER WWTP. Owner as EPA records it: PLUMMER, CITY OF; facility type Municipality. Permitting authority: ID0022781 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Coeur d'Alene Reservation (Census TIGERweb), where EPA Region 10 issues permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-plummer"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-pocatello",
+  "name": "City of Pocatello",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021784",
+  "npdes_permits": [
+   "ID0021784"
+  ],
+  "receiving_waters": [
+   "PORTNEUF RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pocatello"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021784 POCATELLO, CITY OF - POCATELLO WATER POLLUTION CONTROL FACILITY (WPCF). Owner as EPA records it: POCATELLO, CITY OF; facility type Municipality. Permitting authority: ID0021784 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-pocatello"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-post-falls",
+  "name": "City of Post Falls",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0025852",
+  "npdes_permits": [
+   "ID0025852"
+  ],
+  "receiving_waters": [
+   "SPOKANE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Post Falls"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0025852 CITY OF POST FALLS WATER RECLAMATION FACILITY. Owner as EPA records it: POST FALLS, CITY OF; facility type Municipality. Permitting authority: ID0025852 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-post-falls"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-potlatch",
+  "name": "City of Potlatch",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022501",
+  "npdes_permits": [
+   "ID0022501"
+  ],
+  "receiving_waters": [
+   "PALOUSE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Potlatch"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022501 POTLATCH, CITY OF - POTLATCH WWTP. Owner as EPA records it: POTLATCH, CITY OF; facility type Municipal or Water District. Permitting authority: ID0022501 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-potlatch"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-preston",
+  "name": "City of Preston",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020214",
+  "npdes_permits": [
+   "ID0020214"
+  ],
+  "receiving_waters": [
+   "WORM CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Preston"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020214 PRESTON, CITY OF - PRESTON WWTP. Owner as EPA records it: PRESTON, CITY OF; facility type Municipality. Permitting authority: ID0020214 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-preston"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-priest-river",
+  "name": "City of Priest River",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020800",
+  "npdes_permits": [
+   "ID0020800"
+  ],
+  "receiving_waters": [
+   "PEND ORIELLE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Priest River"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020800 PRIEST RIVER, CITY OF - PRIEST RIVER WWTP. Owner as EPA records it: PRIEST RIVER, CITY OF; facility type Municipality. Permitting authority: ID0020800 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-priest-river"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-princeton-hampton-water-sewer-district",
+  "name": "Princeton-Hampton Water & Sewer District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0028436",
+  "npdes_permits": [
+   "ID0028436"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Princeton"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0028436 PRINCETON-HAMPTON WATER AND SEWER DISTRICT - WWTP. Owner as EPA records it: PRINCETON-HAMPTON WATER & SEWER DISTRICT; facility type Municipal or Water District. Permitting authority: ID0028436 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-princeton-hampton-water-sewer-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-rexburg",
+  "name": "City of Rexburg",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0023817",
+  "npdes_permits": [
+   "ID0023817"
+  ],
+  "receiving_waters": [
+   "SOUTH FORK TETON RIVER, REXBURG CANAL"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Rexburg"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0023817 REXBURG, CITY OF - REXBURG WWTP. Owner as EPA records it: REXBURG, CITY OF; facility type Municipality. Permitting authority: ID0023817 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-rexburg"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-richfield",
+  "name": "City of Richfield",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021211",
+  "npdes_permits": [
+   "ID0021211"
+  ],
+  "receiving_waters": [
+   "LITTLE WOOD RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Richfield"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021211 RICHFIELD, CITY OF - RICHFIELD WWTP. Owner as EPA records it: RICHFIELD, CITY OF; facility type Municipality. Permitting authority: ID0021211 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-richfield"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-rigby",
+  "name": "City of Rigby",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020010",
+  "npdes_permits": [
+   "ID0020010"
+  ],
+  "receiving_waters": [
+   "DRY BED CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Rigby"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020010 RIGBY, CITY OF - RIGBY WWTP. Owner as EPA records it: RIGBY, CITY OF; facility type Municipal or Water District. Permitting authority: ID0020010 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-rigby"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-riggins",
+  "name": "City of Riggins",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020931",
+  "npdes_permits": [
+   "ID0020931"
+  ],
+  "receiving_waters": [
+   "SALMON RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Riggins"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020931 RIGGINS,L CITY OF - RIGGINS WWTP. Owner as EPA records it: RIGGINS, CITY OF; facility type Municipality. Permitting authority: ID0020931 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-riggins"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-ririe",
+  "name": "City of Ririe",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0026174",
+  "npdes_permits": [
+   "ID0026174"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ririe"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0026174 RIRIE, CITY OF - RIRIE WWTP. Owner as EPA records it: RIRIE, CITY OF; facility type Municipality. Permitting authority: ID0026174 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-ririe"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-riverside-water-and-sewer-district",
+  "name": "Riverside Water and Sewer District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0024503",
+  "npdes_permits": [
+   "ID0024503"
+  ],
+  "receiving_waters": [
+   "CLEARWATER RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Nez Perce Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Orofino"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0024503 RIVERSIDE WATER AND SEWER DISTRICT - WWTP. Owner as EPA records it: RIVERSIDE WATER AND SEWER DISTRICT; facility type Municipal or Water District. Permitting authority: ID0024503 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-riverside-water-and-sewer-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-roberts",
+  "name": "City of Roberts",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0026913",
+  "npdes_permits": [
+   "ID0026913"
+  ],
+  "receiving_waters": [
+   "ROBERTS SLOUGH"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Roberts"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0026913 ROBERTS, CITY OF - ROBERTS WWTP. Owner as EPA records it: ROBERTS, CITY OF; facility type Municipality. Permitting authority: ID0026913 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-roberts"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-rockland",
+  "name": "City of Rockland",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022047",
+  "npdes_permits": [
+   "ID0022047"
+  ],
+  "receiving_waters": [
+   "ROCK CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Rockland"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022047 ROCKLAND, CITY OF - ROCKLAND WWTP. Owner as EPA records it: ROCKLAND, CITY OF; facility type Municipality. Permitting authority: ID0022047 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-rockland"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-salmon",
+  "name": "City of Salmon",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020001",
+  "npdes_permits": [
+   "ID0020001"
+  ],
+  "receiving_waters": [
+   "SALMON RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Salmon"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020001 SALMON, CITY OF - SALMON WWTP. Owner as EPA records it: SALMON, CITY OF; facility type Municipality. Permitting authority: ID0020001 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-salmon"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-sandpoint",
+  "name": "City of Sandpoint",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020842",
+  "npdes_permits": [
+   "ID0020842",
+   "ID0024350"
+  ],
+  "receiving_waters": [
+   "PEND OREILLE RIVER",
+   "SAND CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found. One of its permits' issuers was not confirmed.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Sandpoint"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020842 SANDPOINT, CITY OF - SANDPOINT WWTP; ID0024350 CITY OF SANDPOINT - SAND CREEK WTP. Owner as EPA records it: SANDPOINT, CITY OF; facility type Municipality; POTW. Permitting authority: ID0020842 IDEQ (on Idaho DEQ's list of issued IPDES permits); ID0024350 unconfirmed (not on Idaho DEQ's list of issued IPDES permits and outside a reservation: an expired or administratively continued permit DEQ has not listed; the issuer was not confirmed).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-sandpoint"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ",
+   "unconfirmed"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-santa-fernwood-sewer-district",
+  "name": "Santa-Fernwood Sewer District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022845",
+  "npdes_permits": [
+   "ID0022845"
+  ],
+  "receiving_waters": [
+   "ST. MARIES RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fernwood"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022845 SANTA FERNWOOD SEWER DISTRICT - SANTA FERNWOOD WWTF. Owner as EPA records it: SANTA-FERNWOOD SEWER DISTRICT; facility type Municipal or Water District. Permitting authority: ID0022845 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-santa-fernwood-sewer-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-shoshone",
+  "name": "City of Shoshone",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0023728",
+  "npdes_permits": [
+   "ID0023728"
+  ],
+  "receiving_waters": [
+   "LITTLE WOOD RIVER (RM 21)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Shoshone"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0023728 SHOSHONE, CITY OF - SHOSHONE WWTP. Owner as EPA records it: SHOSHONE, CITY OF; facility type Municipality. Permitting authority: ID0023728 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-shoshone"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-smelterville",
+  "name": "City of Smelterville",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020117",
+  "npdes_permits": [
+   "ID0020117"
+  ],
+  "receiving_waters": [
+   "SOUTH FORK COEUR D'ALENE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Smelterville"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020117 SMELTERVILLE, CITY OF - SMELTERVILLE WWTP. Owner as EPA records it: SMELTERVILLE, CITY OF; facility type Municipality. Permitting authority: ID0020117 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-smelterville"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-soda-springs-wwtp",
+  "name": "City of Soda Springs WWTP",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020818",
+  "npdes_permits": [
+   "ID0020818"
+  ],
+  "receiving_waters": [
+   "BEAR RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Soda Springs"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020818 SODA SPRINGS, CITY OF - SODA SPRINGS WWTP. Owner as EPA records it: SODA SPRINGS WWTP, CITY OF; facility type Municipality. Permitting authority: ID0020818 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-soda-springs-wwtp"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-south-fork-coeur-d-alene-river-sewer-district",
+  "name": "South Fork Coeur d'Alene River Sewer District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021296",
+  "npdes_permits": [
+   "ID0021296",
+   "ID0021300"
+  ],
+  "receiving_waters": [
+   "SOUTH FORK COEUR D'ALENE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Osburn",
+   "Smelterville"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021296 SOUTH FORK COEUR D'ALENE RIVER SEWER DISTRICT - MULLAN WWTP; ID0021300 SOUTH FORK COEUR D'ALENE SEWER DISTRICT - PAGE WWTP. Owner as EPA records it: SOUTH FORK COEUR D ALENE RIVER SEWER DISTRICT; facility type Municipal or Water District. Permitting authority: ID0021296 IDEQ (on Idaho DEQ's list of issued IPDES permits); ID0021300 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-south-fork-coeur-d-alene-river-sewer-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-st-anthony",
+  "name": "City of St. Anthony",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020401",
+  "npdes_permits": [
+   "ID0020401"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER (HENRY'S FORK)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Saint Anthony"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020401 ST ANTHONY, CITY OF - ST ANTHONY WWTP. Owner as EPA records it: ST. ANTHONY, CITY OF; facility type Municipal or Water District. Permitting authority: ID0020401 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-st-anthony"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-st-maries",
+  "name": "City of St. Maries",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022799",
+  "npdes_permits": [
+   "ID0022799"
+  ],
+  "receiving_waters": [
+   "ST. JOE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Coeur d'Alene Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Saint Maries"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022799 ST MARIES, CITY OF - ST MARIES WWTP. Owner as EPA records it: ST. MARIES, CITY OF; facility type Municipality. Permitting authority: ID0022799 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Coeur d'Alene Reservation (Census TIGERweb), where EPA Region 10 issues permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-st-maries"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-star-sewer-and-water-district",
+  "name": "Star Sewer and Water District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0023591",
+  "npdes_permits": [
+   "ID0023591"
+  ],
+  "receiving_waters": [
+   "LAWRENCE-KENNEDY CANAL"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Star"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0023591 STAR SEWER AND WATER DISTRICT - STAR WWTP. Owner as EPA records it: STAR SEWER AND WATER DISTRICT; facility type Municipal or Water District. Permitting authority: ID0023591 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-star-sewer-and-water-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-tensed",
+  "name": "City of Tensed",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0025101",
+  "npdes_permits": [
+   "ID0025101"
+  ],
+  "receiving_waters": [
+   "HANGMAN CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Coeur d'Alene Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Tensed"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0025101 TENSED, CITY OF - TENSED WWTP. Owner as EPA records it: TENSED, CITY OF; facility type Municipality. Permitting authority: ID0025101 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Coeur d'Alene Reservation (Census TIGERweb), where EPA Region 10 issues permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-tensed"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-troy",
+  "name": "City of Troy",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0023604",
+  "npdes_permits": [
+   "ID0023604"
+  ],
+  "receiving_waters": [
+   "LITTLE BEAR CREEK (WEST FORK)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Troy"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0023604 TROY, CITY OF - TROY WWTP. Owner as EPA records it: TROY, CITY OF; facility type Municipality. Permitting authority: ID0023604 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-troy"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-twin-falls",
+  "name": "City of Twin Falls",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0021270",
+  "npdes_permits": [
+   "ID0021270"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER RM 608.5",
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Twin Falls"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0021270 TWIN FALLS, CITY OF - TWIN FALLS WWTP. Owner as EPA records it: TWIN FALLS, CITY OF; facility type Municipality. Permitting authority: ID0021270 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-twin-falls"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-viola-water-and-sewer-district",
+  "name": "Viola Water and Sewer District",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0026310",
+  "npdes_permits": [
+   "ID0026310"
+  ],
+  "receiving_waters": [
+   "FOURMILE CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Viola"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0026310 VIOLA WATER AND SEWER DISTRICT - WWTP. Owner as EPA records it: VIOLA WATER AND SEWER DISTRICT; facility type Municipal or Water District. Permitting authority: ID0026310 IDEQ (on Idaho DEQ's list of issued IPDES permits). Legal form read from the name.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-viola-water-and-sewer-district"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "special district"
+ },
+ {
+  "id": "id-weippe",
+  "name": "City of Weippe",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020354",
+  "npdes_permits": [
+   "ID0020354"
+  ],
+  "receiving_waters": [
+   "Jim Ford Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Weippe"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020354 WEIPPE, CITY OF - WEIPPE WWTP. Owner as EPA records it: WEIPPE, CITY OF; facility type Municipality. Permitting authority: ID0020354 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-weippe"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-weiser",
+  "name": "City of Weiser",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020290",
+  "npdes_permits": [
+   "ID0020290"
+  ],
+  "receiving_waters": [
+   "SNAKE RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Weiser"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020290 WEISER, CITY OF - WEISER WWTP. Owner as EPA records it: WEISER, CITY OF; facility type Municipality. Permitting authority: ID0020290 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-weiser"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-white-bird",
+  "name": "City of White Bird",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0024252",
+  "npdes_permits": [
+   "ID0024252"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "White Bird"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0024252 WHITE BIRD, CITY OF - WHITE BIRD WWTP. Owner as EPA records it: WHITE BIRD, CITY OF - WHITE BIRD WWTP; facility type Municipality. Permitting authority: ID0024252 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-white-bird"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-wilder",
+  "name": "City of Wilder",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020265",
+  "npdes_permits": [
+   "ID0020265"
+  ],
+  "receiving_waters": [
+   "WILDER DRAIN DITCH,A TRIBUTARY"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "Idaho DEQ issues this permit (IPDES). Its conditions require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by telephone within 24 hours and in writing within five days; DEQ publishes no list of these reports, and EPA's overflow tables hold one Idaho report (December 2023), so the reports are not public. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Wilder"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020265 WILDER, CITY OF - WILDER WWTP. Owner as EPA records it: WILDER, CITY OF; facility type Municipality. Permitting authority: ID0020265 IDEQ (on Idaho DEQ's list of issued IPDES permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-wilder"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "IDEQ"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-winchester",
+  "name": "City of Winchester",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0020184",
+  "npdes_permits": [
+   "ID0020184"
+  ],
+  "receiving_waters": [
+   "LAPWAI CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Nez Perce Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Winchester"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0020184 WINCHESTER, CITY OF - WINCHESTER WWTP. Owner as EPA records it: WINCHESTER, CITY OF; facility type Municipality. Permitting authority: ID0020184 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-winchester"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "id-worley",
+  "name": "City of Worley",
+  "state": "ID",
+  "kind": "plant",
+  "npdes_permit": "ID0022713",
+  "npdes_permits": [
+   "ID0022713"
+  ],
+  "receiving_waters": [
+   "ROCK CREEK"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "EPA Region 10 issues this permit: the plant lies on the Coeur d'Alene Reservation, in Indian country, where EPA keeps permitting. The 24-hour and five-day noncompliance reports go to EPA; none is public in EPA's overflow tables. No duty to tell the public was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Worley"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: ID0022713 WORLEY, CITY OF - WORLEY WWTP. Owner as EPA records it: WORLEY, CITY OF; facility type Municipality. Permitting authority: ID0022713 EPA (not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Coeur d'Alene Reservation (Census TIGERweb), where EPA Region 10 issues permits).",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "id-worley"
+  ],
+  "source_areas": [
+   "id",
+   "federal"
+  ],
+  "permitting_authority": [
+   "EPA"
+  ],
+  "legal_form": "city"
  }
 ]
