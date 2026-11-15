@@ -545,30 +545,31 @@
    "outfall_status": "CSO",
    "feature_type": "EXO",
    "receiving_water_echo": "Bridgeport Harbor",
-   "reach_id": "1100006000887",
+   "reach_id": null,
    "in_icis": "YES",
    "permit_status": "ADC",
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039877194",
-   "lat": null,
-   "lon": null,
+   "lat": 41.166149273344594,
+   "lon": -73.18194339093611,
    "water_slug": "bridgeport-harbor-ct",
    "water_name": "Bridgeport Harbor",
    "water_kind": "bay",
-   "distance_m": null,
+   "distance_m": 0,
    "alternatives": [],
-   "match": "name_only",
-   "water_match": "name and town: its receiving water 'Bridgeport Harbor' by name and the permittee's town (bridgeport, fairfield): the only record of that name there; the research lists Bridgeport Harbor for the permit (data/dischargers.json); Bridgeport Harbor (bridgeport-harbor-ct, openboatlaunch), no point; replaces scripts/match_outfalls.py's match by name alone to Bridgeport Harbor (bridgeport-harbor-ct): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (41.4 km; limit 5.0 km: 5 km for a bay or sound))",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
-   "replaced_match": {
-    "water_slug": "bridgeport-harbor-ct",
-    "water_name": "Bridgeport Harbor",
-    "match": "name_only",
-    "by": "scripts/match_outfalls.py (2026-11-01)",
-    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (41.4 km; limit 5.0 km: 5 km for a bay or sound))"
-   },
-   "echo_lat": 41.04481,
-   "echo_lon": -73.540018,
-   "coords_problem": "ECHO's point (41.04481, -73.540018) is 41.4 km from bridgeport-harbor-ct, the only 'Bridgeport Harbor' in the permittee's town; it cannot be this outfall's (a mistyped coordinate or another place's point)"
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Bridgeport Harbor' by name; Bridgeport Harbor (bridgeport-harbor-ct, openboatlaunch), 0 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
+   "epa_lat": 41.04481,
+   "epa_lon": -73.540018,
+   "epa_reach_id": "1100006000887",
+   "coords_from": "state outfall layer",
+   "coords_note": "Connecticut DEEP's 'CSO or CSO Group Locations' layer (the state's list of CSO outfalls for event reporting), record 'BRIDGEPORT WEST 145 TIC' (Henry St & St of Atlantic St, Bridgeport Harbor), its LATITUDE and LONGITUDE fields, read 2026-11-15; EPA's point (epa_lat, epa_lon) lies 41.4 km away in the Fivemile River basin",
+   "coords_source": {
+    "name": "CT DEEP 'CSO or CSO Group Locations' (ArcGIS service CSO_and_CSO_Groups, layer 0; service description: 'Locations of CSO outfalls for use in CSO event reporting'), record OBJECTID 13: FACILITY 'Bridgeport West Side', CSO_NAME 'BRIDGEPORT WEST 145 TIC', OUTFALL_LOCATION 'Henry St & St of Atlantic St', RECEIVING_WATER 'Bridgeport Harbor'; LATITUDE and LONGITUDE attribute fields",
+    "url": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0/query?where=OBJECTID%3D13&outFields=*&f=json",
+    "read_at": "2026-11-15T15:20:53Z",
+    "by": "scripts/cso_coord_corrections.py (2026-11-15)"
+   }
   },
   {
    "npdes_permit": "CT0100056",
@@ -8279,7 +8280,10 @@
    "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
    "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
    "water_matched_by": "ingest.outfall_waters (2026-11-03)",
-   "no_point_reason": "a collection-system co-permittee listing (EPA's outfall name: 'collection system reports with co-permittee Hoosac'), not an outfall at a place: no point in EPA's inventory, EPA's discharge-point file or MassDEP's CSO layer"
+   "no_point_reason": "a collection-system co-permittee listing (EPA's outfall name: 'collection system reports with co-permittee Hoosac'), not an outfall at a place: no point in EPA's inventory, EPA's discharge-point file or MassDEP's CSO layer",
+   "outfall_kind": "other",
+   "kind_note": "EPA's national CSO inventory (ECHO ALL_CSO_DOWNLOADS.csv, fetched 2026-11-01) lists permit MAC010510 ('Williamstown Sewer Collection System') with one outfall 001 whose text, 'collection system reports with co-permittee Hoosac', is a reporting note: a sewer collection system that reports as a co-permittee of the Hoosac Water Quality District's permit MA0100510, which has no combined sewer outfall in the inventory. Not an outfall at a place: kept off the map and out of the outfall counts and the rain caution.",
+   "checked": "2026-11-15"
   },
   {
    "npdes_permit": "MAC010617",
@@ -8306,7 +8310,10 @@
    "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
    "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
    "water_matched_by": "ingest.outfall_waters (2026-11-03)",
-   "no_point_reason": "a collection-system co-permittee listing (EPA's outfall name: 'collection system reports with copermittee Leominster'), not an outfall at a place: no point in EPA's inventory, EPA's discharge-point file or MassDEP's CSO layer"
+   "no_point_reason": "a collection-system co-permittee listing (EPA's outfall name: 'collection system reports with copermittee Leominster'), not an outfall at a place: no point in EPA's inventory, EPA's discharge-point file or MassDEP's CSO layer",
+   "outfall_kind": "other",
+   "kind_note": "EPA's national CSO inventory (ECHO ALL_CSO_DOWNLOADS.csv, fetched 2026-11-01) lists permit MAC010617 ('Lunenberg Sewer Collection System') with one outfall 001 whose text, 'collection system reports with copermittee Leominster', is a reporting note: the Town of Lunenburg is a co-permittee of the permit issued to Leominster (MA0100617) for operation and maintenance of the collection system it owns (EPA Region 1, draft NPDES permit MA0100986 (Fitchburg Easterly WWTF) and fact sheet, December 2023, https://www.epa.gov/system/files/documents/2023-12/draftma0100986permit2023.pdf, read 2026-11-15, fact sheet, co-permittees), and Leominster's permit has no combined sewer outfall in the inventory. Not an outfall at a place: kept off the map and out of the outfall counts and the rain caution.",
+   "checked": "2026-11-15"
   },
   {
    "npdes_permit": "MAC010986",
@@ -8333,7 +8340,10 @@
    "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
    "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
    "water_matched_by": "ingest.outfall_waters (2026-11-03)",
-   "no_point_reason": "a collection-system co-permittee listing (EPA's outfall name: 'co-permittee CSOs'), not an outfall at a place: no point in EPA's inventory, EPA's discharge-point file or MassDEP's CSO layer"
+   "no_point_reason": "a collection-system co-permittee listing (EPA's outfall name: 'co-permittee CSOs'), not an outfall at a place: no point in EPA's inventory, EPA's discharge-point file or MassDEP's CSO layer",
+   "outfall_kind": "other",
+   "kind_note": "EPA's national CSO inventory (ECHO ALL_CSO_DOWNLOADS.csv, fetched 2026-11-01) lists permit MAC010986 ('Westminster Department of Public Works') with one outfall 001 whose text, 'co-permittee CSOs', is a reporting note: MAC010986 is the reporting number the Fitchburg Easterly permit MA0100986 assigns the Town of Westminster, a co-permittee for Parts I.B (unauthorized discharges), I.C (operation and maintenance of its sanitary collection system) and I.D only (EPA Region 1, draft NPDES permit MA0100986 (Fitchburg Easterly WWTF) and fact sheet, December 2023, https://www.epa.gov/system/files/documents/2023-12/draftma0100986permit2023.pdf, read 2026-11-15, page 1). The permit's nine combined sewer overflows are the City of Fitchburg's and are registry rows of MA0100986. Not an outfall at a place: kept off the map and out of the outfall counts and the rain caution.",
+   "checked": "2026-11-15"
   },
   {
    "npdes_permit": "MAG250958",

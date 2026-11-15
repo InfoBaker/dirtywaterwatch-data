@@ -15,9 +15,11 @@ branch; `corrections.json` holds the cited points, and the last sections say how
 | TN | 1 | 0 | 1: permit gives Commerce Street, river mile 125.9, no coordinates |
 | **Total** | **26** | **1** | **25** |
 
-Needs the owner: (1) a records request to MDE for three western Maryland permits' outfall tables (the only way found to
-place 16 rows); (2) whether to reclassify the three Massachusetts co-permittee rows as kind "other" (they are not
-outfalls, and Williamstown and Lunenburg have no combined sewers in their parent permits); (3) the Nebraska fact sheet for NE0133680 from NDEE (ecmp.nebraska.gov was unreachable here), and TDEC or Clarksville for outfall 004's coordinates; (4) the terminated-permit question in the follow-ups.
+Decided and applied on 2026-11-15 (scripts/cso_coord_corrections.py; see "Applied" at the end): Bridgeport 145 takes
+CT DEEP's point; the three Massachusetts co-permittee listings become kind "other"; the four Michigan rows keep no
+point with a true no_point_reason. No records request was filed with MDE (decided 2026-11-15: proceed on the data in
+hand), so the 16 Maryland rows stay without a point and their operators are read where they are today. The Nebraska,
+Tennessee and terminated-permit items are follow-ups.
 
 ## The list (re-derived 2026-11-15 15:15Z on origin/main 721d13f)
 
@@ -271,3 +273,56 @@ the map and rain checks of one refresh, and the site's outfall pages for the cor
   duplicate), others were eliminated (then the caution is a false alarm at a placeholder point). Worth one pass that
   pairs each terminated permit with its successor or a closure record before deciding; the owner's err-on-safety rule
   argues for keeping a row until a source shows the outfall closed. Counted 2026-11-15 on origin/main 721d13f.
+
+## Applied (2026-11-15)
+
+`scripts/cso_coord_corrections.py` (with `--check`) and `pipeline/tests/test_cso_coord_corrections.py`, run on data main
+after the water-batch chain ended (19:06Z; no state build running at 19:09Z, 19:10Z and 19:11Z):
+- CT0100056 145 (`data/outfalls-new-england.json`): lat/lon 41.166149273344594, -73.18194339093611, coords_from "state
+  outfall layer", coords_note and coords_source citing CT DEEP's layer; EPA's point kept in epa_lat/epa_lon and EPA's
+  reach for it (1100006000887, which ICIS assigned at EPA's wrong point) in epa_reach_id, reach_id cleared;
+  coords_problem, echo_lat/echo_lon, no_point_reason and replaced_match removed. Re-tied alone by
+  `ingest.outfall_waters.match_cso_row`: Bridgeport Harbor, "geometry+name", 0 m. It now enters the hourly rain check.
+- MAC010510, MAC010617, MAC010986 001: outfall_kind "other" with a kind_note citing EPA's inventory text and the parent
+  permits; the rows stay (no rain reading is lost: they had none).
+- MI0037621 001-003 and MI0051497 M23: no_point_reason now says the permits are terminated, the outfalls are absent from
+  EPA's active map and no source places them (the old text said they were read at the operator's plant; neither
+  permit has a plant row).
+- Open CSO rows of the 26 left without a point: 22 (Maryland 16, Michigan 4, NE 205R, TN 004).
+
+Review: Astra (gpt-6-astra, high effort), one pass of the first version (report in the site repository's
+`docs/reviews/2026-11-15-astra-cso-coords-review.md`). Its findings and what was done:
+- P1, a co-permittee listing that gained a point would have been reclassified and lost its rain reading: the script
+  now requires the row to have no point, and a failed check writes nothing at all (tests: a pointed listing; a failed
+  run writes nothing).
+- P2, changed EPA evidence overwritten (CT text and point, Michigan text, longitude and status): each entry now states
+  the row it expects; a row neither as expected nor already corrected is reported, not changed (parametrized test).
+- P2, `--check` accepted drift (wrong water, kind, EPA point, citation): it now checks every promised field (test per
+  field).
+- P2, EPA's reach put back could not be repaired: the reach is handled on its own (test).
+- P2, the Hoosac note: Astra reported that the Hoosac district's 2024 permit assigns MAC010510 to North Adams and
+  MAC030510 to Williamstown. The permit link it gave returned 404 here, so the claim is unverified; the kind_note now
+  quotes EPA's inventory label and the parent permit only, and names no town as the number's holder.
+- P2, tests checked only the corrected snapshot: they now rebuild EPA's rows and run the transformation, the re-tie, a
+  second run and the failure paths.
+- P3, the re-tie did not reproduce the regional run's shared-point count or the state build's context: it now counts
+  as `run()` does over both regional files, and a correction to a national row is refused.
+No second review pass (the fixes are contained in the new script and its tests).
+
+Suite: `make test`, count line in the status entry; the failures not from this change are `test_ca_shoreline`
+(Mac-only) and `test_every_open_combined_sewer_outfall_of_a_live_state_has_a_point_or_says_why`, which on data main
+already lists six Indiana rows of `data/outfalls-in.json` (IN0020001 102, IN0020133 002 and 005, IN0023183 005,
+IN0032191 001, IN0032468 022) with no point and no reason since Indiana went live.
+
+## Follow-ups (not approved in this round)
+
+- NE0133680 205R: NDEE's fact sheet (ecmp.nebraska.gov, unreachable from this machine) may give its coordinates.
+- TN0020656 004: the 2025 permit locates it only as Commerce Street, Cumberland River mile 125.9; TDEC or the operator
+  would have the coordinates; EPA's ICIS record holds whole degrees (+36, -87).
+- The terminated-permit review (96 open rows with points under terminated permits, above).
+- Source-tally barrier notes: Maryland's CSO permits (outfall tables) are not online; Tennessee's permit gives river
+  miles, not coordinates.
+- The reaches builder labels every non-plant row "cso", so the three kind "other" listings still enter its internal
+  index as cso with no location (Astra; internal only, nothing drawn).
+- Indiana, live since the list was made, adds nine open CSO rows without a point (31 in all now): the six above with
+  no reason, and IN0025631 033, IN0032476 026 and 028, which carry one. They need the same search as this one.
