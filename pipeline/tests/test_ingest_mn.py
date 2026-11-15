@@ -210,6 +210,8 @@ def test_adding_minnesota_leaves_other_states_records_unchanged(monkeypatch):
     with_mn = E.build(copy.deepcopy(ut), {"extract_date": "2026-11-04"})[0]
     monkeypatch.setattr(E, "STATES", E.STATES - {"MN"})
     monkeypatch.setattr(E, "STATE_ZONE_ALWAYS", E.STATE_ZONE_ALWAYS - {"MN"})
+    monkeypatch.setattr(E, "FREE_TEXT_STATES", E.FREE_TEXT_STATES - {"MN"})
+    monkeypatch.setattr(E, "STATE_PERSON_SCRUB", {k: v for k, v in E.STATE_PERSON_SCRUB.items() if k != "MN"})
     without = E.build(copy.deepcopy(ut), {"extract_date": "2026-11-04"})[0]
     strip = [{k: v for k, v in r.items() if k != "fetched_at"} for r in with_mn]
     assert strip == [{k: v for k, v in r.items() if k != "fetched_at"} for r in without] and strip
@@ -481,3 +483,134 @@ def test_p1_3_a_previously_seen_error_page_and_a_clean_run(monkeypatch, tmp_path
     assert rc == 1 and written[0][1]["ok"] is False
     rc, written = _run_main(monkeypatch, tmp_path, _fixture_pages(), previous=first.values())
     assert rc == 0 and written[0][1].get("ok", True) is True and len(written[0][0]) == 3
+
+
+
+# ---------------------------------------------------------------- re-review 2026-11-14 P1-5 and P1-6: privacy at save
+
+PRIVATE = "Overflow reported by Pat Example at 1234 Example Street"
+
+
+def _clean(blob) -> bool:
+    t = blob if isinstance(blob, str) else json.dumps(blob)
+    return "Pat Example" not in t and "1234 Example" not in t
+
+
+def test_p1_5_council_raw_save_and_records_carry_no_name_or_address(monkeypatch, tmp_path):
+    pages = _fixture_pages()
+    eagan = INDEX + "Eagan-Wastewater-Spill.aspx"
+    pages[eagan] = pages[eagan].replace("The spill was caused by infrastructure failure.",
+                                        "The spill was caused by infrastructure failure. The spill occurred at 1234 "
+                                        "Example Street, reported by Pat Example. Crews led by Pat Example "
+                                        "contained the spill.")
+    saved = []
+    monkeypatch.setattr(M, "save_raw", lambda sid, content, ext: saved.append(content))
+    idx = (FIX / "mces" / "index.html").read_text()
+    monkeypatch.setattr(M, "fetch", lambda url: idx if url == M.INDEX_URL else pages[url])
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    monkeypatch.setattr(M, "read_json", lambda path, default=None: {"records": []})
+    written = []
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **k: written.append(list(recs)) or tmp_path)
+    assert M.main([]) == 0 and len(saved) == 1
+    assert _clean(saved[0]) and "Eagan Wastewater Spill" in saved[0]
+    assert "isolated and contained" not in saved[0]                  # the narrative itself is not saved
+    assert _clean(written[0]) and len(written[0]) == 3
+
+
+def test_p1_5_wlssd_raw_payload_and_records_carry_no_name_or_address():
+    _, block = R.load_source("mn-wlssd-overflows")
+    assert block["free_text_scrub"] == "strict_names"
+    raw = json.loads((FIX / "wlssd.json").read_text())
+    raw["features"][0]["attributes"]["ReleaseAmount"] = "about 50 gallons, " + PRIVATE.lower().replace("pat example",
+                                                                                                         "Pat Example")
+    raw["features"][1]["attributes"]["FacilityType"] = PRIVATE
+    rows = R.platform("arcgis").parse(block, json.dumps(raw).encode())
+    assert _clean(R.safe_payload(rows, block, None).decode())
+    recs, _ = R.build("mn-wlssd-overflows", block, rows, FETCHED, (), None)
+    assert _clean(recs)
+    plain = R.platform("arcgis").parse(block, (FIX / "wlssd.json").read_bytes())       # real rows keep their amounts
+    assert [r["ReleaseAmount"] for r in json.loads(R.safe_payload(plain, block, None))["rows"]] == \
+        [f["attributes"]["ReleaseAmount"] for f in json.loads((FIX / "wlssd.json").read_text())["features"]]
+
+
+def test_p1_5_minnesota_erule_text_is_scrubbed_and_other_states_keep_theirs():
+    t = echo_tables()
+    t["events"][0]["sewer_overflow_bypass_description_text"] = PRIVATE
+    t["causes"][0]["sewer_overflow_bypass_cause_other_text"] = PRIVATE
+    recs, dropped, _ = E.build(t, {"extract_date": "2026-11-12"})
+    assert recs and _clean(recs) and _clean(dropped)
+
+
+def _zip(tables: dict[str, list[list[str]]]) -> bytes:
+    import io
+    import zipfile
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        for name, rows in tables.items():
+            out = io.StringIO()
+            import csv
+            csv.writer(out, lineterminator="\n").writerows(rows)
+            z.writestr(name, out.getvalue())
+    return buf.getvalue()
+
+
+EV_HEAD = ["sewer_overflow_bypass_event_key", "permit_identifier", "sewer_overflow_bypass_description_text",
+           "latitude_measure", "longitude_measure"]
+CAUSE_HEAD = ["sewer_overflow_bypass_event_key", "permit_identifier", "sewer_overflow_bypass_cause_other_text"]
+
+
+def _walk_strings(o):
+    if isinstance(o, dict):
+        for v in o.values():
+            yield from _walk_strings(v)
+    elif isinstance(o, list):
+        for v in o:
+            yield from _walk_strings(v)
+    elif isinstance(o, str):
+        yield o
+
+
+def test_p1_6_the_saved_zip_holds_minnesota_rows_rounded_and_scrubbed_and_others_byte_identical(monkeypatch):
+    import io
+    import zipfile
+    il_row = ["1", "IL0000001", "Overflow at 4321 Sample Avenue, Example Contact", "41.8765432", "-87.6543219"]
+    mn_row = ["2", "MN0000001", PRIVATE, "46.7834567", "-92.1234567"]
+    tables = {E.TABLES["events"]: [EV_HEAD, il_row, mn_row],
+              E.TABLES["causes"]: [CAUSE_HEAD, ["1", "IL0000001", "x"], ["2", "MN0000001", PRIVATE]]}
+    content = _zip(tables)
+    out = zipfile.ZipFile(io.BytesIO(E.sanitize_zip(content)))
+    src = zipfile.ZipFile(io.BytesIO(content))
+    ev_new = out.read(E.TABLES["events"]).decode().splitlines()
+    ev_old = src.read(E.TABLES["events"]).decode().splitlines()
+    assert ev_new[0] == ev_old[0] and ev_new[1] == ev_old[1]          # Illinois: its bytes as downloaded
+    assert "46.783" in ev_new[2] and "46.7834567" not in ev_new[2] and _clean(ev_new[2])
+    assert _clean(out.read(E.TABLES["causes"]).decode())
+    only_il = _zip({E.TABLES["events"]: [EV_HEAD, il_row]})
+    assert E.sanitize_zip(only_il) == only_il                         # nothing of Minnesota: saved as downloaded
+    # both fetch paths save the sanitized ZIP
+    saved = []
+    monkeypatch.setattr(E, "save_raw", lambda sid, c, ext: saved.append(c) or (E.ROOT / "data" / "raw" / "x.zip"))
+    monkeypatch.setattr(E, "read_json", lambda path, default=None: {})
+    monkeypatch.setattr(E, "_get", lambda url: (zipfile.ZipFile(io.BytesIO(content)), content, None))
+    E.fetch_current()
+    all_content = _zip({E.ALL_TABLES["event"]: [EV_HEAD, il_row, mn_row]})
+    monkeypatch.setattr(E, "_get", lambda url: (zipfile.ZipFile(io.BytesIO(all_content)), all_content, None))
+    monkeypatch.setattr(E, "current_from_all_versions", lambda raw: {"events": []})
+    E.fetch_all_versions("test")
+    assert len(saved) == 2
+    for c in saved:
+        z = zipfile.ZipFile(io.BytesIO(c))
+        for n in z.namelist():
+            text = z.read(n).decode()
+            assert _clean(text) or "MN0000001" not in text
+            for line in text.splitlines():
+                if line.startswith("2,MN"):
+                    assert _clean(line)
+                    for x in line.split(","):
+                        if re.fullmatch(r"-?\d+\.\d+", x):
+                            assert len(x.split(".")[1]) <= 3
+    recs, _, _ = E.build(echo_tables(), {"extract_date": "2026-11-12"})
+    for r in recs:
+        for x in _walk_strings(r):
+            assert not re.fullmatch(r"-?\d+\.\d{4,}", x)
+        assert round(r["lat"], 3) == r["lat"]
