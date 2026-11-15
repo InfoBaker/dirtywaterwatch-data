@@ -95,6 +95,8 @@ STATE_NAMES["AR"] = "Arkansas"
 STATE_NAMES["WI"] = "Wisconsin"
 STATE_NAMES["DE"] = "Delaware"
 STATE_NAMES["SC"] = "South Carolina"
+STATE_NAMES["WV"] = "West Virginia"
+STATE_NAMES["LA"] = "Louisiana"
 COUNT_RULE_LINE = "Verified reports where available, else notices; revisions and duplicates counted once."
 MONTHS_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -127,6 +129,7 @@ SOURCE_LABEL = {
     "ri-ridoh-beaches": "Rhode Island Department of Health beach closures",
     "vt-advisories": "Vermont advisories (cyanobacteria, Burlington beaches)",
     "in-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for Indiana",
+    "wv-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for West Virginia",
 }
 
 # Per-source caveats, by chart; {first} and {last} are the source's coverage dates, written out.

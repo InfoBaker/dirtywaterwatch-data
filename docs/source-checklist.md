@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1584 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1622 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -55,7 +55,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | de | 3 | 0 | 5 | 1 | 0 | 9 |
 | sc | 5 | 0 | 3 | 1 | 2 | 11 |
 | in | 8 | 0 | 14 | 0 | 4 | 26 |
-| **all** | **570** | **235** | **476** | **215** | **88** | **1584** |
+| wv | 8 | 0 | 12 | 1 | 1 | 22 |
+| la | 4 | 0 | 5 | 3 | 4 | 16 |
+| **all** | **582** | **235** | **493** | **219** | **93** | **1622** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1865,3 +1867,51 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `in-kendallville-cso` | Kendallville CSO page | unreachable | search_only | events | HTTP 403 to this build's client (2026-11-14). A barrier (bot wall) in the register. |
 | `in-laporte-cso-status` | LaPorte combined sewer overflow status page | unreachable | fetched | events | The host did not accept a connection from this build on 2026-11-14 (two tries, ports 443 and 80): watched daily in the register; the research of 2026-11-09 read 'NOT overflowing' and dated overflows to 2025-08-19 (1.1 million gallons), which EPA's monthly report for August 2025 matches. |
 | `in-speedway-cso` | Speedway CSO Public Notifications | unreachable | search_only | events | HTTP 403 to this build's client (2026-11-14). A barrier (bot wall) in the register. |
+
+## wv: West Virginia (22)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `wv-charleston-cso-notice` | Charleston Sanitary Board combined sewer page | used | fetched | context | Standing notice (avoid contact during an overflow and 24 hours after); watched daily in the register, no dated overflows. |
+| `wv-dep-hab-advisories` | WV DEP algae advisories map service | used | fetched | advisories | Read by the wv-dep-hab-advisories feed as a snapshot of what is in effect (poll-dated starts and ends; Date_Observed kept as the observation day); empty on 2026-11-14. |
+| `wv-dep-hab-program` | DEP Harmful Algal Blooms page | used | fetched | context | Watched daily in the register (no records): states current advisories; its reported-bloom table was last updated August 2023. |
+| `wv-dep-npdes-outlets` | WV DEP NPDES Outlets layer (CSO outlets, iut_code CSO) | used | fetched | outfalls | DEP's own outlet points, streams, counties and outlet dates for every combined sewer outlet: data/outfalls-wv.json (scripts/build_wv_outfalls.py), each paired with EPA's inventory row; 16 open-or-closed differences with EPA, DEP followed. |
+| `wv-dep-spill-intake` | DEP emergency spill reporting page | used | fetched | law | The regulator's intake (1-800-642-3074): telephone reports, no public list. |
+| `wv-echo-dmr-cso` | EPA ECHO discharge monitoring reports at West Virginia combined sewer outlets | used | fetched | events | Read by the wv-echo-dmr-cso feed: Beckley's C002, 16 months with flow reported (January 2025 to September 2026); Princeton's C002, 21 months filed no discharge. Month precision, the monthly mark; the gate on actual CSO DMR values answered: 2 of 61 permits. |
+| `wv-law-spill-rule` | WV spill and accidental discharge reporting rule (Cornell LII: W. Va. Code R. § 46-03-2) | used | fetched | law | Immediate report to the DEP emergency number (1-800-642-3074) by 'each and every person who may cause or be responsible for any spill or accidental discharge of pollutants', including sewage; no public notice. |
+| `wv-wheeling-water-pollution` | Wheeling Water Pollution Control page | used | fetched | context | Watched daily in the register (no records); no dated overflows. |
+| `wv-clarksburg-text-alerts` | City of Clarksburg text alerts (Clarksburg Sanitary Board area) | watch | fetched | advisories | General city alerts; unknown whether CSO events are sent. |
+| `wv-current-spill-rule-register` | Secretary of State register: 47CSR11 Special Rules (active) | watch | fetched | law | Active rule effective 1987; its scanned text could not be read, so the clause is cited from DEP's page and the earlier reading, not quoted. |
+| `wv-dep-application-enhancer` | DEP Application Enhancer document search | watch | fetched | permits | Login described; only the shell answered (2026-11-09). |
+| `wv-dep-applicationxtender` | WV DEP ApplicationXtender (AX) document search | watch | search_only | permits | DEP's document system (now Application Enhancer): a login is described for documents; only the shell answered (2026-11-09). Registered as a barrier. |
+| `wv-dep-erule-ess` | WV DEP Electronic Submission System (eRule Phase 2 plan) | watch | search_only | permits | No West Virginia report in EPA's sewer overflow and bypass tables (current and all-versions extracts of 2026-11-14); DEP's electronic reporting sends none there. |
+| `wv-dep-ess-public-query` | DEP Electronic Submission System public permit query | watch | search_only | permits | Timed out (2026-11-09); permits, not overflow reports. |
+| `wv-hb3217-2025` | WV HB 3217 (2025): public notification of environmental spills | watch | fetched | law | Would have made DEP give public notice within 24 hours of any reported spill 'of any hazardous substance, sewage, or other pollutants' and keep an online spill database; introduced 2025-03-07, referred to Energy and Public Works; no passage found. |
+| `wv-hb3217-2025-status` | HB 3217 (2025) status | watch | fetched | law | Pending in the House Energy and Public Works Committee since 2025-03-07. |
+| `wv-mub-cso-current` | Morgantown Utility Board combined sewer page | watch | fetched | context | Standing notice (72 hours after rain), read 2026-11-09; both page addresses answered 404 on 2026-11-14 (moved). |
+| `wv-mub-cso-public-notice-2025` | Morgantown Utility Board January 2025 CSO notice (file-sharing link) | watch | search_only | context | Only the hosting title loaded (2026-11-09). |
+| `wv-mub-overflow-summary` | Morgantown Utility Board CSO Overflow Summary (legacy page link) | watch | search_only | context | Only the hosting title loaded (2026-11-09); refers to 2018 frequencies. |
+| `wv-wvlegals-cso-notices` | West Virginia Legals (newspaper legal notices), CSO annual public notices | watch | fetched | advisories | Shows the WV practice: an annual legal ad plus signs, not event notices. Useful for each town's stated after-rain period. |
+| `wv-wayne-spill-2026` | WV DEP Wayne County spill 2026 map service | rejected | fetched | events | Single-incident response layer (controls, sampling, downstream route); shows DEP builds per-incident maps but not a spill list. |
+| `wv-orsanco-bacteria` | ORSANCO contact recreation bacteria (Wheeling, Huntington) | unreachable | search_only | monitoring | 403 to plain clients (2026-11-09): a bot wall, registered as a barrier. |
+
+## la: Louisiana (16)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `la-baton-rouge-quarterly-reports` | City of Baton Rouge and Parish of East Baton Rouge consent-decree quarterly reports (Part D) | used | fetched | events | Read by the la-baton-rouge-quarterly feed: 5 of 8 reports pass the layout check (rows per collection system equal the report's own summary): 219 discharges, October 2024 to September 2026 less the withheld quarters; Reports 91, 92 and 97 withheld. |
+| `la-lac-33-i-ch39` | LAC 33:I Chapter 39, Notification Regulations and Procedures for Unauthorized Discharges | used | search_only | law | Regulator duty only; no public-notice duty found. |
+| `la-ldeq-spoc` | LDEQ Single Point of Contact (SPOC) incident reporting | used | fetched | law | Regulator-report route; no public list. |
+| `la-ldeq-written-notification-guidance` | LDEQ written notification procedures | used | search_only | law | Nonbinding summary of the seven-day written report. |
+| `la-baton-rouge-consent-decree` | City of Baton Rouge / East Baton Rouge Parish sewer consent decree (2002, modified 2012-2013) | watch | search_only | events | EPA's settlement page: context; the City-Parish's quarterly reports are the feed (la-baton-rouge-quarterly-reports). |
+| `la-ldh-hab-advisories` | LDH algal bloom advisories (news releases) | watch | search_only | advisories | Ad hoc only. |
+| `la-pontchartrain-conservancy` | Pontchartrain Conservancy (formerly Lake Pontchartrain Basin Foundation) weekly bacteria monitoring (Swim Guide affiliate) | watch | search_only | monitoring | Swim Guide data by agreement. |
+| `la-pontchartrain-weekly-results` | Pontchartrain Conservancy weekly results page | watch | search_only | context | Spreadsheet rows and reuse terms not verified. |
+| `la-swbno-consent-decree` | Sewerage and Water Board of New Orleans consent decree (Civil Action 93-3212, E.D. La.) quarterly reports | watch | fetched | events | Index and the Q3 2026 report read 2026-11-14: 624 pages of program progress, no dated list of overflows; the index is watched daily in the register. |
+| `la-epa-sobe` | EPA SOBE (eRule) extract, Louisiana rows | rejected | fetched | events | Rechecked 2026-11-14 (current and all-versions extracts): no Louisiana report; 17 Louisiana collection-system permits are listed in EPA's permits table. |
+| `la-industrial-cso-permits` | EPA CSO inventory rows for Louisiana (industrial) | rejected | fetched | outfalls | EPA's two Louisiana 'CSO' rows are petrochemical plants' combined outfalls: kind other in data/outfalls-la.json, off the combined sewer outlets and the rain caution. |
+| `la-ldeq-uas-incidents` | LDEQ_UAS_Incident_Report_View_Layer (ArcGIS Online) | rejected | search_only | events | Not an overflow feed (by title); verify if time allows. |
+| `la-ldeq-edms` | LDEQ Electronic Document Management System (EDMS) | unreachable | fetched | events | A CAPTCHA guards the search: no document read; registered as a barrier (records request or a supported export needed). |
+| `la-ldh-beach-alternate` | LDH beach monitoring page (alternate address) | unreachable | fetched | advisories | 403 to this project's client (2026-11-14). |
+| `la-ldh-beach-monitoring` | Louisiana Department of Health Beach Monitoring Program | unreachable | search_only | advisories | Both addresses answer 403 to this project's client (2026-11-14): registered as a barrier (bot wall); a data request to LDH is the owner's item. |
+| `la-shreveport-consent-decree` | City of Shreveport consent-decree annual reports (Attachment 3 SSO table) | unreachable | search_only | events | The host made no connection with this project's client on 2026-11-14 (twice); the research's reading (131 rows, May 2025 to May 2026) is not verified here. |

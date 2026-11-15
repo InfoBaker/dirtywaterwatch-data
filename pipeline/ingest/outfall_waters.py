@@ -118,6 +118,10 @@ POINT_WRONG_M = 10_000      # a point this far from its named water in the permi
 # Paluxy River for two permits elsewhere): the same name names another water there. Other states unchanged.
 NAME_ONLY_CAP_M = {"TX": 25_000}
 NAME_ONLY_CAP_M["IN"] = 25_000          # Indiana: the same rule (state builder brief 2026-11-14, rule 7)
+NAME_ONLY_CAP_M.update({"WV": 25_000, "LA": 25_000})   # West Virginia and Louisiana (state builder rule 7)
+# states whose cap is measured from the outfall's own point even when that point is set aside as suspect
+# (coords_problem): a discarded point still says where the outfall is not (WV/LA re-review 2026-11-15 P2-6)
+CAP_FROM_SUSPECT_POINT = {"WV", "LA"}
 OUTSIDE_STATE_M = 2_000     # a point this far outside its state's (shoreline-clipped) outline is outside the state
 
 # texts that name a watershed or a basin, not a water
@@ -1089,15 +1093,21 @@ def apply(o: dict, res: dict, mt: Matcher) -> None:
     if res.get("slug"):
         s, remainder_note = main_record(res["slug"], o.get("lat"), o.get("lon"), mt)
         w = mt.waters[s]
+        st = str(o.get("state") or "").upper()
+        d_suspect = None
         if res.get("coords_problem"):
             o["echo_lat"], o["echo_lon"] = o.get("lat"), o.get("lon")
+            if st in CAP_FROM_SUSPECT_POINT and o.get("lat") is not None and o.get("lon") is not None:
+                d_suspect = mt.dist(s, o.get("lat"), o.get("lon"))
             o["lat"] = o["lon"] = None
             o["coords_problem"] = res["coords_problem"]
         d = mt.dist(s, o.get("lat"), o.get("lon"))
         text = text_of(o)
         named = bool(text) and not why_not_a_name(text) and not S.names_disagree(text, w.get("name"))
-        cap = NAME_ONLY_CAP_M.get(str(o.get("state") or "").upper())
-        if cap and d is not None and d > TIGHT_M and d > cap:
+        cap = NAME_ONLY_CAP_M.get(st)
+        d_cap = d if d is not None else d_suspect
+        if cap and d_cap is not None and d_cap > TIGHT_M and d_cap > cap:
+            d = d_cap
             res = {"reason": (f"the only record of the receiving water's name ({w.get('name')}, {s}) lies "
                               f"{d / 1000:.0f} km from the outfall's point, beyond {cap // 1000} km: another water of "
                               "that name")}
