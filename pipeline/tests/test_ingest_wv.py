@@ -228,8 +228,24 @@ def _cached(p):
 def test_a_rejection_keeps_the_months_an_earlier_answer_showed(tmp_path, monkeypatch):
     cache = {"since": "2025-01-01", "permits": {"WV0000003": _cached("WV0000003")}}
     rc, doc = _run_dmr(tmp_path, monkeypatch, {"WV0000003": (None, "not in ECHO")}, cache)
-    assert rc == 0 and doc["ok"] and doc["count"] == 1
+    # re-review P1-3: a rejected request is a degraded run (not ok, exit 1), the cached month and its fetch time kept
+    assert rc == 1 and doc["ok"] is False and "rejected" in doc["error"] and doc["count"] == 1
     assert doc["records"][0]["fetched_at"] == "2020-01-01T00:00:00Z"
+
+
+def test_a_rejection_with_no_cache_and_a_mixed_run_are_not_ok(tmp_path, monkeypatch):
+    rc, doc = _run_dmr(tmp_path, monkeypatch, {"WV0000003": (None, "not in ECHO")}, {"since": "2025-01-01", "permits": {}})
+    assert rc == 1 and doc["ok"] is False and doc["count"] == 0
+    ok_answer = {"CWPName": "EXAMPLE", "PermFeatures": [{"PermFeatureNmbr": "C002", "Parameters": [
+        {"ParameterCode": "50050", "MonitoringLocationDesc": "Effluent Gross",
+         "DischargeMonitoringReports": [_line("31-OCT-26", "2.0")]}]}]}
+    cache = {"since": "2025-01-01", "permits": {"WV0000004": _cached("WV0000004")}}
+    rc, doc = _run_dmr(tmp_path, monkeypatch, {"WV0000003": (ok_answer, "live"), "WV0000004": (None, "not in ECHO")},
+                       cache)
+    assert rc == 1 and doc["ok"] is False and "WV0000004" in doc["error"] and "WV0000003" not in doc["error"]
+    old = [r for r in doc["records"] if r["npdes_permit"] == "WV0000004"]
+    assert old and old[0]["fetched_at"] == "2020-01-01T00:00:00Z"
+    assert [r for r in doc["records"] if r["npdes_permit"] == "WV0000003"]
 
 
 def test_a_partial_failure_is_not_ok_and_keeps_every_record(tmp_path, monkeypatch):
