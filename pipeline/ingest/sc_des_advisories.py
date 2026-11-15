@@ -30,6 +30,9 @@ Records (rules only; a snapshot read as a sequence of polls)
     long-term advisory has stood since before it), and the record ends at the first poll that no longer shows it
     (ended_at, raw.ended_at_precision poll, advisory_lifted). "No Advisory" is no record: grey, "no report", never
     clean. Out of season DES does not sample: no short-term advisory is not a finding.
+  - Both layers: a read that lists an advisory more than 14 days after the last read that listed it opens a new
+    observation period (raw.listed_periods, ingest/de_sc_periods.py); the status build colours each period on its own,
+    so the unread time between is never confirmed after the fact.
   - Bloom: a delineation whose Advisory_Tier is Watch or Advisory is a record (hab_advisory, plum; raw.advisory_level
     quotes DES's tier, "Watch" or "Advisory", both DES's own recreational notices). started_at is the Date field (a
     date stored at midnight Eastern: precision day); the advisory's area is the table's Advisory Area when the table
@@ -63,6 +66,7 @@ import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
 from ingest.de_dnrec_derns import scrub
+from ingest.de_sc_periods import extend as extend_periods
 
 # the attributes read from each layer: nothing else is kept, and their text is scrubbed (re-review P1-5)
 BEACH_FIELDS = ("OBJECTID", "STAT", "HUC_12", "COUNTY", "ADVISORY")
@@ -254,6 +258,9 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
                                            "huc12": a.get("HUC_12"), "lat": lat, "lon": lon, "started_at": now,
                                            "last_seen_at": now}
         else:
+            # a read after an unread gap opens a new observation period (verify3 P1-1)
+            cur["listed_periods"] = extend_periods(cur.get("listed_periods"), now, cur["started_at"],
+                                                   cur.get("last_seen_at"))
             cur.update(last_seen_at=now, lat=lat if lat is not None else cur.get("lat"),
                        lon=lon if lon is not None else cur.get("lon"))
     for v in state.values():
@@ -272,6 +279,7 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
         raw = {"state": "SC", "time_zone": "America/New_York", "station": v["station"], "county": v.get("county"),
                "huc12": v.get("huc12"), "advisory_label": v["label"], "advisory_kind": kind,
                "_last_seen_in_source": v.get("last_seen_at"),
+               **_periods(v),
                "point_basis": "DES's beach monitoring station (the S.C. Beach Access Guide's station layer)",
                "start_basis": ("the first poll of DES's station layer that showed this advisory; the layer gives no "
                                "date" + ("; a long-term advisory stands from season to season, so it began before "
@@ -296,6 +304,17 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
             authority=BEACH_AUTHORITY, advice_text=LONG_TERM_ADVICE if kind == "long-term" else SHORT_TERM_ADVICE,
             source_url=BEACH_GUIDE, raw=raw))
     return recs, state, counts
+
+
+def _periods(v: dict) -> dict:
+    """raw.listed_periods where the advisory was listed again after an unread gap (build/status.py colours each
+    period on its own and leaves the gap unconfirmed; verify3 P1-1)."""
+    p = v.get("listed_periods") or []
+    return {"listed_periods": p, "periods_basis": PERIODS_BASIS} if len(p) > 1 else {}
+
+
+PERIODS_BASIS = ("the reads that listed this advisory, in periods: a read more than 14 days after the previous one "
+                 "that listed it opens a new period, and the unread time between is not confirmed")
 
 
 # ---------------------------------------------------------------- blooms
@@ -451,6 +470,9 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
             if o.get(k) is not None:
                 v[k] = o[k]                            # a table read keeps the layer's point and organism
         v["from"] = "layer" if (o["from"] == "layer" or v.get("from") == "layer") else "table"
+        # a read after an unread gap opens a new observation period (verify3 P1-1)
+        v["listed_periods"] = extend_periods(v.get("listed_periods"), now, v.get("first_seen_at") or now,
+                                             v.get("last_seen_at"))
         v["last_seen_at"] = now
         v.pop("ended_at", None)
         seen.add(key)
@@ -464,6 +486,7 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
         raw = {"state": "SC", "time_zone": "America/New_York", "advisory_level": v["tier"],
                "advisory_area": v.get("area"), "organism": v.get("organism"), "read_from": v.get("from"),
                "_last_seen_in_source": v.get("last_seen_at"), "first_seen_at": v.get("first_seen_at"),
+               **_periods(v),
                "_point_extent_only": True,
                "extent_basis": ("DES delineates a cove or arm of the water, not the whole water: the advisory is shown "
                                 "at the centre of DES's delineation where one is tied to it, and listed on the water's "
