@@ -657,3 +657,14 @@ def test_r3_p1_3_a_failed_run_rescrubs_the_kept_records_and_stays_not_ok(monkeyp
     assert d["records"][0]["raw"]["_revisions"][0]["headings"] and d["meta"]["cities_without_county"]
     blob = json.dumps(d)
     assert "Pat Example" not in blob and "1234 Example" not in blob
+
+
+def test_r3_p2_3_the_state_text_says_what_the_councils_notices_show_of_stops_and_signs():
+    t = (ROOT / "research" / "mn" / "state-text.md").read_text()
+    recs, _ = mces()
+    assert recs and all(r["raw"].get("spill_stopped_on") for r in recs.values())      # every saved notice: a stop day
+    signed = [r for r in recs.values() if r["raw"].get("signs")]
+    assert signed and not any(r["raw"]["signs"].get("removal_done") for r in signed)  # removal never confirmed
+    assert "no end for most spills" not in t
+    assert "each gives the day the spill was stopped" in t
+    assert "the day they came down is often not confirmed" in t
