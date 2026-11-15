@@ -48,7 +48,8 @@ PLANTS = ROOT / "data" / "outfalls-plants-us.json"
 CSO = ROOT / "data" / "outfalls-us.json"
 REMOVED = "[name removed]"
 
-BASE_LAW = ("K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage to be reported to the Kansas "
+BASE_LAW = ("K.A.R. 28-16-27 requires an emergency or accidental discharge of sewage that a valid permit does not "
+            "provide for to be reported to the Kansas "
             "Department of Health and Environment immediately, and a planned bypass to be approved at least seven days "
             "ahead; KDHE publishes no list of those reports, and no statute or rule requiring public notice of a sewage "
             "discharge was found. KDHE issues a stream advisory by news release when it judges one needed.")
