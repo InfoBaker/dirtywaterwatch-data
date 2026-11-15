@@ -650,3 +650,34 @@ def test_r3_p1_5_write_events_default_failure_path_is_unchanged(tmp_path):
     common.write_events("x", [{"event_id": "b"}], ok=False, error="down", path=p)
     f = json.loads(p.read_text())
     assert [r["event_id"] for r in f["records"]] == ["a"] and f["ok"] is False
+
+
+PRIVATE = ("Pat Example", "Sam Sample", "Lee Example", "555-0100", "pat@example.org", "1234 N", "43.123456",
+           "-87.987654")
+
+
+def test_r3_p1_6_inline_names_never_reach_a_raw_save_or_a_record(monkeypatch, tmp_path):
+    monkeypatch.setattr(M, "PAUSE_S", 0)
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    saved, written = [], []
+    monkeypatch.setattr(M, "save_raw", lambda sid, content, ext: saved.append(content))
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: written.append((recs, kw)) or tmp_path / "x")
+    title = "MMSD Storm Update June 1, 2027, Director Pat Example"
+    html = (f'<h1 class="ccm-block-page-title page-title">{title}</h1><div>06/05/27 09:00:am</div>'
+            '<p>Director Pat Example reported a combined sewer overflow into Lincoln Creek that occurred on June 1, 2027.</p>'
+            '<p>"The overflow was short," said Sam Sample. Lee Example, district engineer, called 414-555-0100 and '
+            'pat@example.org about 1234 N Example St at 43.123456, -87.987654.</p>'
+            '<p><a href="https://www.mmsd.com/download_file/view/z/1">Pat Example</a></p>'
+            '<p><a href="https://www.mmsd.com/download_file/view/z/2">DNR Letter for: Combined Sewer Overflow</a></p>'
+            '<p>Pat Example</p><p>Sincerely,</p>')
+    page = (f'<div class="ccm-block-page-list-title"><a href="https://www.mmsd.com/about-us/news/x-example" '
+            f'target="_self"><h3>{title}</h3></a></div><div class="ccm-block-page-list-date">Jun 5, 2027, 9:00 AM</div>')
+    monkeypatch.setattr(M.requests, "Session", lambda: FakeSession({1: page.encode()}, {"x-example": html.encode()}))
+    assert M.main(["--pages", "1"]) == 0
+    blob = json.dumps(saved, ensure_ascii=False) + json.dumps(written, ensure_ascii=False, default=str)
+    for p in PRIVATE:
+        assert p not in blob, p
+    recs = written[-1][0]
+    assert [r["event_type"] for r in recs] == ["cso"] and recs[0]["waterbody_text"] == "Lincoln Creek"
+    assert recs[0]["started_at"] == "2027-06-01"
+    assert any("Combined Sewer Overflow" in x["label"] for x in recs[0]["raw"]["letters"])

@@ -79,8 +79,10 @@ page); later runs read two pages (eight posts, months of news); records already 
 because a post scrolled off. A post is read again when its stamp or
 title changes.
 
-Privacy: only the candidate posts' list items (titles scrubbed) and each one's stamp, letter links and article lines are
-kept; the article is cut at MMSD's standing advice block ("Text WATERDROP ...") or at a contact line ("Questions:",
+Privacy: only the candidate posts' list items (titles scrubbed) and each one's stamp, letter links and the article's
+evidence sentences (project(): a type, a volume, a date, a water; nothing else, no signature) are kept; people named
+in the text ("Director Pat Example", "said ...") are cut (scrub_names), a link label that is not about the letter
+becomes "letter", a point in the text is rounded to three decimals; the article is cut at MMSD's standing advice block ("Text WATERDROP ...") or at a contact line ("Questions:",
 "Media contact"), so the people named there are never kept, and telephone numbers and e-mails are scrubbed (common.scrub_text), house numbers
 removed (common.strip_house_numbers). data/raw keeps that safe document only.
 
@@ -238,12 +240,53 @@ def slug_of(url: str) -> str:
 
 
 DATE_GLUE = re.compile(rf"\b({MON})\s+(?=\d)", re.I)
+# people named in a post's own words (Astra re-review 2026-11-15 P1-6): a name after a role or title ("Director Pat
+# Example", "Mr. Example"), after or before a speech verb ("said Pat Example", "Pat Example said"), or before a role
+# ("Pat Example, district engineer"); each becomes [name removed]. Names are capitalised words; roles any case.
+ROLE = (r"(?:executive\s+director|deputy\s+director|director|manager|engineer|spokes(?:person|man|woman)|commissioner|"
+        r"chief|superintendent|mayor|alder(?:man|woman|person)?|supervisor|president|chair(?:man|woman|person)?|ceo|"
+        r"officer|coordinator|specialist|dr|mr|mrs|ms|mx)\.?")
+PNAME = r"(?:[A-Z][a-z'’-]+|[A-Z]\.)(?:\s+(?:[A-Z][a-z'’-]+|[A-Z]\.)){0,3}"
+NAME_RX = [
+    (re.compile(rf"\b(?i:{ROLE})\s+{PNAME}"), "[name removed]"),
+    (re.compile(rf"\b(said|says|according to|stated by|quoted)\s+{PNAME}"), r"\1 [name removed]"),
+    (re.compile(rf"\b{PNAME}\s+(?=(?:said|says|stated|explained|noted|added|told)\b)"), "[name removed] "),
+    (re.compile(rf"\b{PNAME},\s+(?=(?:an?\s+|the\s+|MMSD'?s?\s+)?(?:[\w-]+\s+){{0,3}}(?i:{ROLE})\b)"), "[name removed], "),
+]
+# a private point in the text is cut to three decimals, as every report point is
+COORD = re.compile(r"(-?\d{1,3}\.\d{4,})(\s*,\s*)(-?\d{1,3}\.\d{4,})")
+
+
+def scrub_names(s: str) -> str:
+    for rx, rep in NAME_RX:
+        s = rx.sub(rep, s)
+    return s
 
 
 def safe_line(s: str) -> str:
-    """Phones and e-mails scrubbed, house numbers removed; a month's day ("June 18 at 35th St.") is not a house number."""
+    """Phones and e-mails scrubbed, house numbers removed, people's names cut, a point rounded to three decimals; a
+    month's day ("June 18 at 35th St.") is not a house number."""
     glued = DATE_GLUE.sub(lambda m: m.group(1) + "\u2060_", s)
-    return strip_house_numbers(scrub_text(glued)).replace("\u2060_", " ")
+    s = strip_house_numbers(scrub_text(glued)).replace("\u2060_", " ")
+    s = COORD.sub(lambda m: f"{round(float(m.group(1)), 3)}{m.group(2)}{round(float(m.group(3)), 3)}", s)
+    return scrub_names(s)
+
+
+# the minimal factual projection kept of an article (Astra re-review 2026-11-15 P1-6): only the sentences that can carry
+# a report (a type, an overflow, spill or release, a volume, a date or time, a water reached or not); signatures,
+# quotes about other things, and other prose are not kept, in raw storage or anywhere else
+EVIDENCE = re.compile(rf"overflow|spill|releas|discharg|bypass|wastewater|sewage|gallons|\bcsos?\b|\bssos?\b|"
+                      rf"\b{MON}\s+\d|\d{{1,2}}[/-]\d{{1,2}}[/-]\d{{2}}|\b\d{{1,2}}(?::\d\d)?\s*[ap]\.?\s*m\b|"
+                      rf"creek|river|lake|harbor|canal", re.I)
+LABEL_OK = re.compile(r"overflow|spill|releas|letter|report|\bdnr\b|notice|\bcsos?\b|\bssos?\b", re.I)
+
+
+def project(line: str) -> str:
+    """The sentences of a line that carry evidence, joined; '' when none does."""
+    t = re.sub(r"\b([ap])\.m\.", r"\1m", line)
+    t = re.sub(r"\b(St|Ave|No|Dr|Mt|U\.S)\.", r"\1", t)
+    keep = [x for x in re.split(r"(?<=[.!?])\s+(?=[A-Z(\"“])", t) if EVIDENCE.search(x)]
+    return " ".join(keep)
 
 
 def page_doc(content: bytes | str) -> dict | None:
@@ -267,11 +310,14 @@ def page_doc(content: bytes | str) -> dict | None:
             break                       # MMSD's standing advice block, or a contact block naming people
         for m in re.finditer(r'<a\s[^>]*href="([^"]*download_file[^"]*)"[^>]*>(.*?)</a>', block, re.S | re.I):
             label = safe_line(_words(re.sub(r"<[^>]+>", " ", m.group(2))))
+            label = label if LABEL_OK.search(label or "") else "letter"     # a label that is not about the letter
             if label and {"url": m.group(1), "label": label} not in letters:
                 letters.append({"url": m.group(1), "label": label})
         lines.append(safe_line(w))
     stamp = next((x for x in lines[:4] if STAMP.match(x)), None)
-    body = [x for x in lines if x != stamp]
+    rest = [x for x in lines if x != stamp]
+    # the title line (the page title block, first) is kept as it is (scrubbed); the article below it is projected
+    body = rest[:1] + [y for y in (project(x) for x in rest[1:]) if y]
     # a post is read only when it has its stamp and a line of text below its title: an error or holding page that
     # keeps the title container ("Temporarily unavailable") is not a revision of the post (Astra review P1-3)
     if stamp is None or len(body) < 2:
