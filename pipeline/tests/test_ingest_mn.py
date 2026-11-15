@@ -402,3 +402,46 @@ def test_p2_5_mn_text_and_register_follow_the_computed_counts_and_the_statutes_s
     law = re.search(r"\*\*What the law requires\.\*\*([^\n]*)", t).group(1)
     assert "domestic" in law
     assert "where the District gives them" in t                                        # amounts and types not always given
+
+
+# ---------------------------------------------------------------- verification pass 2026-11-15 (Astra)
+
+def _page(*updates, intro_signs=True):
+    signs = (" Signs warning the public “Do Not Enter/ Sewage Spill” will be placed." if intro_signs else "")
+    body = "".join(f"<p>{d} - Notice</p><p>{t}</p>" for d, t in updates)
+    return ("<h1>Example</h1><p>The Council responded Monday afternoon, March 2, to a wastewater spill in Example City."
+            f"{signs}</p>{body}<h3>Contact us</h3>")
+
+
+def _one(page, previous=None, fetched=FETCHED):
+    return M.build_one({"url": INDEX + "Example.aspx", "label": "Example City, March 2026"}, M.parse_page(page),
+                       fetched, previous)
+
+
+def _at(r, y, mo, d, h, mi=0):
+    from datetime import datetime, timezone
+    from build import status as S
+    now = datetime(2026, 11, 14, 18, tzinfo=timezone.utc)
+    c, ivs = S.status_at(S.event_intervals(r, "MN", now), datetime(y, mo, d, h, mi, tzinfo=timezone.utc))
+    return c, [iv["rule"] for iv in ivs]
+
+
+@pytest.mark.parametrize("words,stopped", [
+    ("Crews will stop the spill Monday evening.", None),
+    ("Crews could not stop the spill Monday evening.", None),
+    ("Crews were unable to stop the spill Monday evening.", None),
+    ("Crews attempted to stop the spill Monday evening.", None),
+    ("Crews are working to stop the spill by Monday evening.", None),
+    ("The spill was not contained Monday evening.", None),
+    ("Crews plan to stop the spill Monday evening.", None),
+    ("Crews stopped the spill Monday evening.", "2026-03-02"),
+    ("Crews were able to stop the spill Monday evening.", "2026-03-02"),
+])
+def test_v2_a_stop_needs_a_completed_affirmative_action(words, stopped):
+    r = _one(_page(("3/3/2026", words), intro_signs=False))
+    assert r["raw"].get("spill_stopped_on") == stopped
+    if stopped is None:
+        assert r["status"] == "unknown" and r["ended_at"] is None
+        assert _at(r, 2026, 3, 4, 12)[0] == "yellow"            # unknown: the no-end rules, never a stop's caution end
+    else:
+        assert r["status"] == "ended" and r["ended_at"] == stopped

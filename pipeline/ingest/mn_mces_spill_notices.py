@@ -23,7 +23,9 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
     given, so started_at stays null (raw.start_basis); the colour runs from the response day. Its stop only where the
     text gives one ("contained ... in under an hour" in the first account: the response day; "stop the spill ...
     Thursday evening" in an update: the latest Thursday on or before that update's date, not before the response):
-    raw.spill_stopped_on, precision day. Otherwise unknown; never invented.
+    raw.spill_stopped_on, precision day. Only a completed, affirmative stop counts ("stopped", "contained", "were able
+    to stop"); a planned, attempted or negated one ("will stop", "could not stop") is no stop (STOP_DONE, STOP_NOT;
+    verification pass 2026-11-15 P1-2). Otherwise unknown; never invented.
   - The signs: when the Council says it placed "Do Not Enter/ Sewage Spill" signs, that is its own advisory
     (advisory_active, red while it stands; advice_text quotes the signs only, review P1-8). "Will be removed" is a
     removal announced, not one done: the signs stood to the end of that update's day at least (raw._unlisted_since,
@@ -111,6 +113,14 @@ NO_WATER = re.compile(r"\bno\s+water\s*bod(?:y|ies)\s+(?:were|was)\s+impacted\b[
 UNAFFECTED = re.compile(rf"did not (?:impact|affect)(?: the water quality of)?\s+(?P<w>{NAME})")
 NEARBY = re.compile(rf"(?P<a>{NAME})(?:\s+and\s+(?P<b>{NAME}))?\s+(?:is|are)\s+nearby")
 STOP = re.compile(r"[^.]*\b(?:stop(?:ped)?|contained|isolated)\b[^.]*\.", re.I)
+# a stop is taken only from a completed, affirmative action ("stopped", "contained", "isolated", "were able to stop"),
+# never from a planned, attempted, hoped-for or negated one ("will stop", "could not stop", "was not contained";
+# verification pass 2026-11-15 P1-2)
+STOP_DONE = re.compile(r"\b(?:stopped|contained|isolated)\b|\b(?:was|were|been)\s+able\s+to\s+stop\b", re.I)
+STOP_NOT = re.compile(r"\b(?:not|never|no|unable|cannot|can['’]?t|couldn['’]?t|didn['’]?t|wasn['’]?t|weren['’]?t|"
+                      r"haven['’]?t|hasn['’]?t|fail(?:ed|s|ing)?|will|would|shall|should|may|might|plan(?:s|ned|ning)?|"
+                      r"expect(?:s|ed|ing)?|attempt(?:s|ed|ing)?|try|tries|tried|trying|working|work|hope(?:s|d)?|"
+                      r"aim(?:s|ed|ing)?|intend(?:s|ed)?|once|if|when)\b", re.I)
 SAME_DAY = re.compile(r"within hours|in under an hour|under an hour|within an hour|same day", re.I)
 SIGNS_UP = re.compile(r"[Ss]igns warning the public\s*[“\"](?P<q>[^”\"]+)[”\"]\s*(?:will be|have been|were)"
                       r"\s+placed")
@@ -282,6 +292,8 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
         for when, text in sections:
             for sm in STOP.finditer(text):
                 sent = sm.group(0)
+                if not STOP_DONE.search(sent) or STOP_NOT.search(sent):
+                    continue            # planned, attempted or negated: no stop (verification pass P1-2)
                 wd = re.search(r"\b(" + "|".join(WEEKDAYS) + r")\b", sent, re.I)
                 if wd:      # the weekday named: the latest one on or before the section's own date
                     back = (when.weekday() - WEEKDAYS.index(wd.group(1).lower())) % 7
