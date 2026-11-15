@@ -1248,3 +1248,76 @@ def test_a_bloom_point_kept_by_an_older_rule_or_written_as_dms_is_cut(monkeypatc
     after = json.loads(out.read_text())
     _no_fine(after)
     assert {r["event_id"] for r in after["records"]} >= {rec["event_id"]}
+
+
+# ---------------------------------------------------------------- verification 3 P2: links the former rule wrote
+
+def _status_of(tmp_path, out):
+    from datetime import UTC, datetime
+    from build import status as S
+    d = tmp_path / "events-st"
+    d.mkdir(exist_ok=True)
+    doc = json.loads(out.read_text())
+    (d / f"{H.SOURCE_ID}.json").write_text(json.dumps({**doc, "last_ok_at": "2026-11-01T12:00:00Z"}))
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    rules = json.loads((R.ROOT / "data" / "rules.json").read_text())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"AR"})
+    rules["rain_likely"] = {**rules["rain_likely"], "enabled": False}
+    now = datetime(2026, 11, 2, 12, tzinfo=UTC)
+    st, _ = S.build(now=now, write=False, events_dir=d, waters={}, outfalls=[], registry={}, reaches={},
+                    flows=({}, {}), rules=rules, placement_cache=False)
+    ivs = {r["event_id"]: S.event_intervals(r, "AR", now, None, rules) for r in doc["records"]}
+    return st, ivs
+
+
+@pytest.mark.parametrize("reviewed", [False, True])
+def test_a_link_the_former_closeness_rule_wrote_is_removed_unless_reviewed(monkeypatch, tmp_path, reviewed):
+    """Verification 3 P2: "Lake Example A" left the file when "Lake Example B" appeared and the former name-closeness
+    rule saved A as B's corrected row. At the next run with no reviewed entry the link is removed (noted in
+    raw._duplicate_link_removed) and the AR-live status build counts both advisories with their own intervals; a
+    reviewed entry keeps the link (with its reviewed basis); a repeat of the same record key keeps its own link."""
+    a = ("Lake Example A", "Sample County", "Sampletown, AR", "October 1, 2026", "")
+    b = ("Lake Example B", "Sample County", "Sampletown, AR", "October 1, 2026", "")
+    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-05T06:00:00Z")
+    _, out = habs(monkeypatch, tmp_path, _hab_doc(a))
+    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-10T06:00:00Z")
+    habs(monkeypatch, tmp_path, _hab_doc(b), prev_out=out)
+    # the state as the former rule wrote it: A linked to B by closeness; a repeated row of A's key linked to A
+    doc = json.loads(out.read_text())
+    recs = {r["waterbody_text"]: r for r in doc["records"]}
+    ra, rb = recs["Lake Example A"], recs["Lake Example B"]
+    ra["duplicate_of"] = rb["event_id"]
+    ra["raw"]["_duplicate_basis"] = f"gone from the source; {rb['event_id']} looks like its corrected row"
+    rep = json.loads(json.dumps(ra))
+    rep["event_id"], rep["source_record_id"] = ra["event_id"] + "~2", ra["source_record_id"] + "~2"
+    rep["duplicate_of"] = ra["event_id"]
+    rep["raw"]["_duplicate_basis"] = "the source repeats this record (same record key)"
+    doc["records"].append(rep)
+    out.write_text(json.dumps(doc))
+    if reviewed:
+        _reviewed(monkeypatch, [{"old": ra["source_record_id"], "new": rb["source_record_id"],
+                                 "evidence": "DEQ's archive shows the water renamed (invented)"}])
+    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-15T06:00:00Z")
+    habs(monkeypatch, tmp_path, _hab_doc(b), prev_out=out)
+    after = {r["event_id"]: r for r in json.loads(out.read_text())["records"]}
+    assert after[rep["event_id"]]["duplicate_of"] == ra["event_id"]          # a genuine repeat stays linked
+    st, ivs = _status_of(tmp_path, out)
+    if reviewed:
+        assert after[ra["event_id"]]["duplicate_of"] == rb["event_id"]
+        assert after[ra["event_id"]]["raw"]["_duplicate_basis"].endswith("(a reviewed correction)")
+        assert ra["event_id"] in st["duplicates"]
+        return
+    got = after[ra["event_id"]]
+    assert not got.get("duplicate_of") and "_duplicate_basis" not in got["raw"]
+    assert got["raw"]["_duplicate_link_removed"]["was_duplicate_of"] == rb["event_id"]
+    assert ra["event_id"] not in st["duplicates"] and rb["event_id"] not in st["duplicates"]
+    assert ivs[ra["event_id"]] and ivs[rb["event_id"]]
+    # A's period ends at the read that first missed it, B's runs on
+    assert max(i["end"] for i in ivs[ra["event_id"]] if i["end"] is not None).isoformat().startswith("2026-10-10")
+    # the run after: nothing changes again
+    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-20T06:00:00Z")
+    habs(monkeypatch, tmp_path, _hab_doc(b), prev_out=out)
+    again = {r["event_id"]: r for r in json.loads(out.read_text())["records"]}
+    assert not again[ra["event_id"]].get("duplicate_of")
+    assert again[ra["event_id"]]["raw"]["_duplicate_link_removed"] == got["raw"]["_duplicate_link_removed"]

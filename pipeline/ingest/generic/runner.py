@@ -467,6 +467,17 @@ def carry_history(records: list[dict], prev_records: list[dict], block: dict, fe
                     break
             if typo is not None:
                 succ = typo.get(eid)
+                # state an earlier rule wrote (verification 3 P2): a link to a corrected row that no reviewed entry
+                # supports (the former name-closeness rule's) is removed, so both advisories count again; a repeat of
+                # the same record key and a reviewed link are kept
+                basis = str(p["raw"].get("_duplicate_basis") or "")
+                if (p.get("duplicate_of") and basis.startswith("gone from the source")
+                        and not (succ is not None and succ["event_id"] == p["duplicate_of"]
+                                 and basis.endswith("(a reviewed correction)"))):
+                    p["raw"]["_duplicate_link_removed"] = {
+                        "was_duplicate_of": p.pop("duplicate_of"), "basis": p["raw"].pop("_duplicate_basis", None),
+                        "removed_at": fetched_at, "why": "no reviewed correction links the two records"}
+                    n["unsupported_links_removed"] += 1
             if succ is not None and h.get("supersede_max_days") is not None:
                 # history.supersede_max_days (opt-in): a corrected start lies within this many days of the old one;
                 # a later posting is a new episode, never a correction
