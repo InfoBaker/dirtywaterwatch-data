@@ -649,3 +649,19 @@ def test_a_des_bloom_never_colours_the_whole_water_whatever_its_area(monkeypatch
         assert lake["status"] == "grey", area                                 # never coloured whole
         pts = {a["event_id"]: a for a in st["advisory_points"]}
         assert pts[recs[0]["event_id"]]["status"] == "red", area              # its marker carries the colour
+
+
+def test_an_owner_is_named_from_epas_permittee_never_from_a_facility():
+    # re-review P2-5: a permit whose owner is read only from a facility's name is its own row with no owner
+    rows = {r["id"]: r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "SC"}
+    for rid in ("sc-sc0035700", "sc-sc0026735", "sc-sc0028801", "sc-sc0025194", "sc-sc0049372", "sc-sc0046892"):
+        r = rows[rid]
+        assert "owner not recorded by EPA" in r["name"] and not r.get("legal_form") and len(r["npdes_permits"]) == 1
+    for gone in ("sc-pendleton-clemson-regional", "sc-west-pelzer", "sc-st-matthews", "sc-city-of-lancaster"):
+        assert gone not in rows
+    # EPA's permittee "Chesnee City of" is the City of Chesnee's own row, never Spartanburg Water's
+    assert not any(p == "SC0025763" for p in rows["sc-spartanburg-water"]["npdes_permits"])
+    assert any("Chesnee" in r["name"] and r.get("legal_form") == "city" for r in rows.values()
+               if "SC0025763" in r["npdes_permits"])
+    # a row that names no permittee for privacy keeps the convention (docs/legal-forms.md)
+    assert rows["sc-sc0029475"]["legal_form"] == "facility (permittee not named)"
