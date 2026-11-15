@@ -167,6 +167,17 @@ def _clean(v):
     return s or None
 
 
+def _point_corrections():
+    """scripts/outfall_point_corrections.py (cited point corrections a rebuild must write again), loaded by path: this
+    script runs with python -I, which keeps the scripts folder off sys.path."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("outfall_point_corrections",
+                                                  Path(__file__).resolve().parent / "outfall_point_corrections.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
 def build(doc: dict, epa_rows: list[dict], fetched_at: str) -> dict:
     epa = {(r["npdes_permit"], _num_key(r["outfall"])): r for r in epa_rows if r.get("state") == "IN"}
     rows, unpaired, no_number, no_point = [], [], [], []
@@ -248,6 +259,9 @@ def build(doc: dict, epa_rows: list[dict], fetched_at: str) -> dict:
                      "point_note": "EPA's inventory gives only the treatment plant's point; IDEM's layer lists no point",
                      "supersedes": {"file": "data/outfalls-us.json", "npdes_permit": p, "outfall": e["outfall"],
                                     "coords_from": "facility", "note": "the same row without the plant's point"}})
+    # the outfalls IDEM lists without a point that EPA's ICIS places, and the true reason where no source does
+    # (scripts/outfall_point_corrections.py, 2026-11-15)
+    _point_corrections().for_builder(OUT.name, rows)
     rows.sort(key=lambda r: (r["npdes_permit"], r["outfall"], r["lat"] is None))
     epa_missing = [{"npdes_permit": p, "outfall": e["outfall"], "outfall_status": e.get("outfall_status"),
                     "reason": "open in EPA's CSO inventory but not in IDEM's CSO outfall layer; EPA's row is kept"}
