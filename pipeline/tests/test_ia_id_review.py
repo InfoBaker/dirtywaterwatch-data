@@ -253,3 +253,161 @@ def test_shared_status_change_leaves_other_states_intervals_identical_to_state_i
     ivs = [S.event_intervals(r, None, now, None, RULES) for r in _other_state_records()]
     got = hashlib.sha256(json.dumps(ivs, default=str, sort_keys=True).encode()).hexdigest()
     assert got == "d0f223a7f61641488bc06ade7dd1bf0fa2c229cb53e51f7faa06f31f8fc57d32"
+
+
+# ------------------------------------------------------------------ Iowa: Waterloo
+
+from ingest import ia_waterloo_sso as W  # noqa: E402
+
+PARA_A = ("October 2, 2026 at 5:52 AM, WMSD began Sanitary Sewer bypass pumping at a Sanitary Sewer Overflow located at "
+          "Example Ave and Sample St. The estimated volume of sewer discharged is 1,000 gallons; the duration of the "
+          "event was 2 hours. Bypass pumping was the result of a wet weather event.")
+PARA_B = PARA_A.replace("Example Ave and Sample St", "the Specimen Road lift station")
+PARA_N = ("October 3, 2026 at 6:03 AM, WMSD was notified of a Sanitary Sewer Overflow located at Example Ave and "
+          "Sample St. The estimated volume of sewer discharged is 5,000 gallons; the duration of the event was 4 hours "
+          "and 2 minutes. The overflow was the result of a wet weather event.")
+
+
+def test_p1_4_waterloo_notices_at_one_minute_on_separate_runs_keep_their_own_records():
+    a, _ = W.build([PARA_A], T0, [])
+    b, _ = W.build([PARA_B], T1, a)
+    ids_b = {r["source_record_id"]: r for r in b}
+    assert len(ids_b) == 2, sorted(ids_b)
+    a_id = a[0]["source_record_id"]
+    assert a_id in ids_b and ids_b[a_id]["raw"]["location"] == a[0]["raw"]["location"]   # A never overwritten
+    both, _ = W.build([PARA_A, PARA_B], T2, b)
+    assert {r["source_record_id"] for r in both} == set(ids_b)                       # same two ids, nothing new
+    again, _ = W.build([PARA_B, PARA_A], T2, both)
+    assert {r["source_record_id"] for r in again} == set(ids_b)
+    # a record saved before with the bare minute keeps it when its minute and location match
+    legacy = [dict(a[0], source_record_id="2026-10-02T0552", event_id="ia-waterloo-sso-notices:2026-10-02T0552")]
+    kept, _ = W.build([PARA_A, PARA_B], T2, legacy)
+    assert "2026-10-02T0552" in {r["source_record_id"] for r in kept} and len(kept) == 2
+
+
+def test_p2_2_a_notification_time_is_the_reported_time_and_makes_no_start_or_end():
+    recs, _ = W.build([PARA_N], T0, [])
+    r = recs[0]
+    assert r["started_at"] is None and r["reported_at"] == "2026-10-03T06:03:00-05:00"
+    assert r["ended_at"] is None and r["status"] == "unknown"
+    assert r["raw"]["duration_minutes_as_stated"] == 242 and "start is not stated" in r["raw"]["start_basis"]
+    # an explicit stop after the notification is still the end
+    stop = PARA_N.replace("the duration of the event was 4 hours and 2 minutes", "the duration is unknown") + \
+        " The overflow was stopped at 9:30AM."
+    r = W.build([stop], T0, [])[0][0]
+    assert r["ended_at"] == "2026-10-03T09:30:00-05:00" and r["raw"]["end_basis"].startswith("the time the notice")
+    # a stop time earlier than the notification, with no day: no end is made
+    early = stop.replace("9:30AM", "5:30AM")
+    r = W.build([early], T0, [])[0][0]
+    assert r["ended_at"] is None and "day is not stated" in r["raw"]["end_note"]
+    # a start the notice gives ("WMSD began") still ends at start plus duration
+    r = W.build([PARA_A], T0, [])[0][0]
+    assert r["started_at"] == "2026-10-02T05:52:00-05:00" and r["ended_at"] == "2026-10-02T07:52:00-05:00"
+
+
+def test_p2_2_a_carried_notified_record_is_corrected_on_the_next_run():
+    old = {"source_record_id": "2026-10-03T0603", "event_id": "ia-waterloo-sso-notices:2026-10-03T0603",
+           "source_id": W.SOURCE_ID, "status": "ended", "started_at": "2026-10-03T06:03:00-05:00",
+           "ended_at": "2026-10-03T10:05:00-05:00", "reported_at": None, "event_type": "sso",
+           "raw": {"notice": PARA_N, "location": "Example Ave and Sample St", "ended_at_precision": "minute",
+                   "end_basis": "the notice's start plus the duration it states",
+                   "start_basis": "the time the City was notified of the overflow: it began at or before this time"}}
+    r = W.build([], T0, [old])[0][0]
+    assert r["started_at"] is None and r["reported_at"] == "2026-10-03T06:03:00-05:00"
+    assert r["ended_at"] is None and r["status"] == "unknown" and r["raw"]["_placement"] == "own_place_only"
+
+
+# ------------------------------------------------------------------ Iowa placement in a full status build
+
+from ingest import ia_dnr_focomp as F  # noqa: E402
+from ingest import ia_dnr_news as N  # noqa: E402
+
+FAC = {"st_fac_id": "399999001", "name": "Example City Of Stp", "city": "Exampleton", "county": "Black Hawk"}
+
+
+def _ia_status(tmp_path, records):
+    from build import status as S
+    d = tmp_path / "ev"
+    d.mkdir()
+    by_src = {}
+    for r in records:
+        by_src.setdefault(r["source_id"], []).append(r)
+    for sid, rs in by_src.items():
+        (d / f"{sid}.json").write_text(json.dumps({"source_id": sid, "ok": True, "records": rs,
+                                                   "fetched_at": "2026-11-01T23:00:00Z",
+                                                   "last_ok_at": "2026-11-01T23:00:00Z"}))
+
+    def water(slug, name, kind, x, y):
+        if kind == "river":
+            g = {"type": "LineString", "coordinates": [[x, y], [x + 0.3, y + 0.01]]}
+        else:
+            g = {"type": "Polygon", "coordinates": [[[x, y], [x + 0.05, y], [x + 0.05, y + 0.05], [x, y + 0.05], [x, y]]]}
+        return slug, {"slug": slug, "name": name, "kind": kind, "state": "IA", "area_km2": 2.0 if kind == "lake" else None,
+                      "bbox": [x, y, x + 0.3, y + 0.05], "geometry": g}
+    waters = dict([water("example-river-ia", "Example River", "river", -92.4, 42.5),
+                   water("specimen-lake-ia", "Specimen Lake", "lake", -93.6, 41.6),
+                   water("sample-creek-ia", "Sample Creek", "river", -96.4, 42.4),
+                   water("fixture-river-ia", "Fixture River", "river", -96.5, 42.45)])
+    # the plant's receiving water, resolved in the registry: Waterloo's permit and the FOCOMP permit discharge there
+    outfalls = [{"npdes_permit": p, "outfall": "001", "water_slug": "example-river-ia", "water_match": "name",
+                 "lat": 42.5, "lon": -92.3, "state": "IA", "receiving_water": "Example River"}
+                for p in (W.PERMIT, "IA0099999")]
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    rules = json.loads(json.dumps(RULES))
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"IA"})
+    rules["rain_likely"] = {**rules["rain_likely"], "enabled": False}
+    st, _ = S.build(now=datetime(2026, 11, 2, 12, tzinfo=UTC), write=False, events_dir=d, waters=waters,
+                    outfalls=outfalls, registry={}, reaches={}, flows=({}, {}), rules=rules, placement_cache=False,
+                    discharger_waters={"ia-waterloo": ["example-river-ia"], "ia-exampleton": ["example-river-ia"]})
+    return st
+
+
+def test_p2_4_an_iowa_notice_with_no_water_and_no_point_never_takes_the_plants_water(tmp_path):
+    para = PARA_A.replace("October 2, 2026", "November 1, 2026")
+    wl = W.build([para], "2026-11-01T23:00:00Z", [])[0][0]
+    rep = F.parse_report((Path(__file__).resolve().parent / "fixtures" / "ia" / "focomp-report-900002.html").read_text())
+    nowhere = F.make_record({**rep, "receiving_stream": "", "lat": None, "lon": None, "incident_start": "11/01/2026",
+                             "incident_start_time": "08:00", "incident_end": "", "incident_end_time": ""},
+                            FAC, {"label": "x"}, ("IA0099999", "basis"), "2026-11-01T23:00:00Z",
+                            ops={"IA0099999": ("ia-exampleton", "City of Exampleton")})
+    on_lake = F.make_record({**rep, "report_id": "900099", "receiving_stream": "", "lat": 41.625, "lon": -93.575,
+                             "incident_start": "11/01/2026", "incident_start_time": "08:00", "incident_end": "",
+                             "incident_end_time": ""},
+                            FAC, {"label": "x"}, ("IA0099999", "basis"), "2026-11-01T23:00:00Z",
+                            ops={"IA0099999": ("ia-exampleton", "City of Exampleton")})
+    assert nowhere["waterbody_text"] is None and nowhere["lat"] is None
+    st = _ia_status(tmp_path, [wl, nowhere, on_lake])
+    pl = st["placements"]
+    for r in (wl, nowhere):
+        p = pl[r["event_id"]]
+        assert p["water_slugs"] == [] and "never on its permit" in p["unplaced_reason"], p
+    assert pl[on_lake["event_id"]]["water_slugs"] == ["specimen-lake-ia"]              # a genuine point still places
+    assert st["waters"]["example-river-ia"]["events"] == []
+
+
+def test_p2_1_a_release_naming_two_waters_places_one_report_on_both(tmp_path, monkeypatch):
+    monkeypatch.setattr(N, "_OPERATORS", {})
+    body = ("The Department of Natural Resources was notified on November 1 that wastewater from the Example lift "
+            "station of the City of Exampleton discharged into Sample Creek, which flows to the Fixture River. An "
+            "estimated 50,000 gallons was released. Downstream recreational users should avoid the area.")
+    art = {"title": "Wastewater discharge reaches Fixture River", "date": "2026-11-01", "body": body}
+    recs = N.records_for(art, "https://www.iowadnr.gov/news-release/2026-11-01/example", "2026-11-01T23:00:00Z")
+    assert len(recs) == 1
+    r = recs[0]
+    assert r["waterbody_text"] == "Sample Creek" and r["raw"]["_also_named_waters"] == ["Fixture River"]
+    st = _ia_status(tmp_path, recs)
+    p = st["placements"][r["event_id"]]
+    assert sorted(p["water_slugs"]) == ["fixture-river-ia", "sample-creek-ia"], p
+    assert st["counts"]["events"] == 1                                                 # one report, counted once
+    assert r["event_id"] in st["waters"]["fixture-river-ia"]["events"]
+    assert r["event_id"] in st["waters"]["sample-creek-ia"]["events"]
+
+
+def test_iowa_placement_values_are_written_only_by_iowa():
+    """build/status.py own_place_only and _also_named_waters change only records carrying them; no other state's
+    ingester or source writes them, so every other state's placements are unchanged."""
+    hits = [p for d in ("pipeline/ingest", "data/sources") for p in (ROOT / d).rglob("*")
+            if p.is_file() and p.suffix in (".py", ".yaml", ".json")
+            and ("own_place_only" in p.read_text(errors="ignore") or "_also_named_waters" in p.read_text(errors="ignore"))]
+    assert {p.name for p in hits} == {"ia_waterloo_sso.py", "ia_dnr_focomp.py", "ia_dnr_news.py"}, hits

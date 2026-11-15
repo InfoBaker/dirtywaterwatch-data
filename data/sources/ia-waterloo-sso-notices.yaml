@@ -5,10 +5,12 @@ homepage: "https://www.ci.waterloo.ia.us/departments/waste_management/sso_and_by
 kind: "html"
 level: "operator"
 # Read by ingest/ia_waterloo_sso.py: the list "Recent SSO and Bypass Events", one paragraph per event: start (or the
-#   time the City was notified) to the minute, the place (street or lift station; house numbers removed), gallons,
-#   duration or stop time, cause. No receiving water and no point: placed on no water, listed with Black Hawk County.
-# Real read 2026-11-14: 17 notices (2025-10-23 to 2026-10-01; 13 on 2026-10-01 in one wet-weather event); 16 with an
-#   end from the stated duration or stop time, 1 with none; 14 with gallons (1,785,390 in all).
+#   time the City was notified, kept as the reported time: the start is then not stated) to the minute, the place
+#   (street or lift station; house numbers removed), gallons, duration or stop time, cause. No receiving water and no
+#   point: placed on no water (never on the plant's), listed with Black Hawk County.
+# Real read 2026-11-14: 17 notices (2025-10-23 to 2026-10-01; 13 on 2026-10-01 in one wet-weather event); 11 give
+#   the City's start, 6 the time the City was notified; 11 with an end (10 a start plus the stated duration, 1 a stop
+#   time), 6 with none; 14 with gallons (1,785,390 in all).
 cadence: "hourly with the refresh"
 license: "none stated"
 attribution: "City of Waterloo Waste Management Services"

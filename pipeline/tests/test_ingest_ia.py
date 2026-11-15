@@ -31,31 +31,45 @@ def test_waterloo_list_read_and_nothing_outside_it():
         W.notices("<html><body>Page moved</body></html>")
 
 
+def at_minute(recs, minute):
+    """The one record of that minute (ids are minute~location since the review of 2026-11-15, P1-4)."""
+    hit = [r for k, r in recs.items() if k.split("~")[0] == minute]
+    assert len(hit) == 1, (minute, sorted(recs))
+    return hit[0]
+
+
 def test_waterloo_times_ends_and_volumes():
     recs, stats = waterloo()
     assert stats["unreadable"] == 1
-    a = recs["2026-10-01T0552"]
+    a = at_minute(recs, "2026-10-01T0552")
     assert a["event_type"] == "sso" and a["time_precision"] == "minute"
     assert a["started_at"] == "2026-10-01T05:52:00-05:00" and a["ended_at"] == "2026-10-01T15:57:00-05:00"
     assert a["raw"]["ended_at_precision"] == "minute" and "duration" in a["raw"]["end_basis"]
     assert a["volume_gal"] == 181600 and a["estimate_flag"] == "estimated" and a["status"] == "ended"
-    b = recs["2026-10-01T0700"]                               # "7:00 AM AM", unknown volume and duration
+    b = at_minute(recs, "2026-10-01T0700")                    # "7:00 AM AM", unknown volume and duration
     assert b["ended_at"] is None and b["status"] == "unknown" and b["volume_gal"] is None
     assert b["raw"]["permitted_overflow"] is True
     # two notices at the same minute: each is minute~location, never numbered in page order (lessons 7)
     assert recs["2026-10-01T0740~example-st"]["ended_at"] == "2026-10-01T19:46:00-05:00"          # 12.1 hours
     assert recs["2026-10-01T0740~sample-rd-and-example-dr"]["ended_at"] == "2026-10-01T15:25:00-05:00"  # 7.75 hours
-    c = recs["2026-07-31T1904"]                               # "7:04PM", "two hours, 30 minutes"
-    assert c["started_at"] == "2026-07-31T19:04:00-05:00" and c["ended_at"] == "2026-07-31T21:34:00-05:00"
-    d = recs["2025-10-23T1100"]                               # "at11:00AM", "stopped at 12:00PM"
+    c = at_minute(recs, "2026-07-31T1904")                    # "7:04PM", "two hours, 30 minutes"
+    if "notified" in c["raw"]["notice"]:
+        # a notification time is the reported time; its duration makes no end (Astra 2026-11-15 P2-2)
+        assert c["started_at"] is None and c["reported_at"] == "2026-07-31T19:04:00-05:00" and c["ended_at"] is None
+        assert c["raw"]["duration_minutes_as_stated"] == 150
+    else:
+        assert c["started_at"] == "2026-07-31T19:04:00-05:00" and c["ended_at"] == "2026-07-31T21:34:00-05:00"
+    d = at_minute(recs, "2025-10-23T1100")                    # "at11:00AM", "stopped at 12:00PM"
     assert d["ended_at"] == "2025-10-23T12:00:00-05:00" and "stopped" in d["raw"]["end_basis"]
 
 
 def test_waterloo_notified_is_the_earliest_time_given_not_a_begin():
     recs, _ = waterloo()
-    n = recs["2026-09-28T0846"]
-    assert "notified" in n["raw"]["start_basis"] and "at or before" in n["raw"]["start_basis"]
-    assert "began" in recs["2026-10-01T0552"]["raw"]["start_basis"]
+    n = at_minute(recs, "2026-09-28T0846")
+    # "was notified" is the reported time; the start is not stated (Astra 2026-11-15 P2-2)
+    assert "notified" in n["raw"]["start_basis"] and "start is not stated" in n["raw"]["start_basis"]
+    assert n["started_at"] is None and n["reported_at"] == "2026-09-28T08:46:00-05:00"
+    assert "began" in at_minute(recs, "2026-10-01T0552")["raw"]["start_basis"]
 
 
 def test_waterloo_placed_on_no_water_with_city_county_and_permit():
@@ -78,7 +92,8 @@ def test_waterloo_unreadable_paragraph_kept_with_parse_error_and_old_notices_kep
     recs, _ = waterloo()
     bad = [r for r in recs.values() if r["parse_error"]]
     assert len(bad) == 1 and bad[0]["event_type"] == "sso" and bad[0]["source_record_id"].startswith("unread-")
-    old = dict(recs["2025-10-23T1100"], source_record_id="2024-05-01T0800", event_id="ia-waterloo-sso-notices:x")
+    old = dict(at_minute(recs, "2025-10-23T1100"), source_record_id="2024-05-01T0800",
+               event_id="ia-waterloo-sso-notices:x")
     recs2, stats = waterloo([old])
     assert stats["kept_from_previous"] == 1 and recs2["2024-05-01T0800"]["raw"]["_unlisted_since"] == AT
 
@@ -87,7 +102,7 @@ def test_waterloo_caution_from_the_end():
     from build import status as S
     rules = S.load_rules()
     recs, _ = waterloo()
-    ivs = S.event_intervals(recs["2026-10-01T0552"], "IA", datetime.fromisoformat("2026-10-02T12:00:00+00:00"),
+    ivs = S.event_intervals(at_minute(recs, "2026-10-01T0552"), "IA", datetime.fromisoformat("2026-10-02T12:00:00+00:00"),
                             None, rules)
     assert ivs and ivs[0]["start"].isoformat().startswith("2026-10-01T10:52")
 

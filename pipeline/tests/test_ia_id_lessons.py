@@ -211,8 +211,10 @@ def test_7_waterloo_ids_do_not_depend_on_page_order_or_on_reading_together():
     first, _ = W.build([b], AT, [])                       # only one of the two on the page at first
     both, _ = W.build([a, b], AT, first)
     assert len(both) == 2 and first[0]["source_record_id"] in {r["source_record_id"] for r in both}
-    fixed, _ = W.build([b.replace("Example Ct", "Example Ct North")], AT, first)     # a corrected location
-    assert [r["source_record_id"] for r in fixed] == [first[0]["source_record_id"]]
+    # another location at the same minute on a later run is never taken for a correction (Astra 2026-11-15 P1-4):
+    # a new record, and the earlier one is kept under its own id
+    fixed, _ = W.build([b.replace("Example Ct", "Example Ct North")], AT, first)
+    assert len(fixed) == 2 and first[0]["source_record_id"] in {r["source_record_id"] for r in fixed}
 
 
 # ------------------------------------------------------------------ 9. the local calendar day and clock changes

@@ -35,7 +35,8 @@ Records
     plant the text names ("the Story City wastewater treatment plant"), else none: a town named only as a landmark
     ("northeast of the City of Kirkville") is not the operator.
   - Water: the first water the text says the discharge went into, entered or reached (WATER), as written; the others
-    in raw.other_waters. No point: placed by the name and the county only.
+    in raw.other_waters and raw._also_named_waters, on which the status build places the same record (one report on
+    each water). No point: placed by the names and the county only, never by a plant's receiving water.
   - Volume: an estimate the text gives ("An estimated 1.5 million gallons"), else unknown.
   - DNR's advice to the public ("Downstream recreational users should take caution and avoid the area") is quoted in
     advice_text as DNR's.
@@ -248,6 +249,11 @@ def record_from(text: str, art: dict, url: str, sid: str, county: str | None, st
         raw["ended_at_precision"] = ep
     if statewide:
         raw["placement"] = "the release names no community or water for these bypasses: placed on no water"
+    elif waters[1:]:
+        # each further water the release says the discharge reached is placed too, on the one record (build/status.py
+        # raw._also_named_waters; Astra 2026-11-15 P2-1)
+        raw["_also_named_waters"] = list(waters[1:])
+    raw["_placement"] = "own_place_only"        # never by a plant's receiving water (Astra 2026-11-15 P2-4)
     return event(source_id=SOURCE_ID, source_record_id=sid, event_type=et, status="ended" if stopped else "unknown",
                  discharger_name=operator, discharger_id=op[0] if op else None, waterbody_text=None if statewide else (waters[0] if waters else None),
                  started_at=start, ended_at=end, time_precision=sp or ("day" if rep else None), reported_at=rep,

@@ -1258,6 +1258,18 @@ NAMED_ONLY_NONE = ("the report names no water; its source gives no location, so 
                    "on no water (never on its permit's outfalls' water)")
 
 
+# Iowa (Astra IA/ID review 2026-11-15 P2-4): a report placed only by its own place (raw._placement "own_place_only":
+# the water it names or its own point), never by its permit's outfalls or the plant's receiving water; with neither it
+# stays unplaced and listed. Keyed on the value, which only the Iowa feeds write, so no other state changes.
+OWN_PLACE_NONE = ("the report names no water it reached and its own point lies on no mapped water: listed with its "
+                  "county and placed on no water (never on its permit's or plant's receiving water)")
+
+
+def own_place_only(ev: dict) -> bool:
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("_placement") == "own_place_only"
+
+
 def named_water_only(ev: dict) -> bool:
     """Whether the record's source places it only on the water it names (raw._placement "named_water_only")."""
     raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
@@ -2494,6 +2506,29 @@ class Resolver:
                 f"affected piece is placed by its own point"
                 + (f"; not placed on {', '.join(dropped)}, which the drawn extent does not cross" if dropped else "")))
                 if x)
+        also = (ev.get("raw") or {}).get("_also_named_waters")
+        if isinstance(also, list) and also:
+            # a release naming a second water the discharge reached (Iowa DNR's "Bacon Creek Channel ... Missouri
+            # River", raw._also_named_waters; Astra IA/ID review 2026-11-15 P2-1): the one record is placed on each named
+            # water it resolves to, so the discharge is counted once. Keyed on the field, which only Iowa's news
+            # releases write, so no other state changes
+            state = event_state(ev)
+            added = []
+            for name in also:
+                slugs, _, ambiguous = self.by_name(str(name), state, ev.get("lat"), ev.get("lon"), ev)
+                if ambiguous or not slugs:
+                    continue
+                kept, _, _ = self.guard_detail(list(slugs), ev)
+                added += [x for x in kept if x not in (out.get("water_slugs") or []) and x not in added]
+            if added:
+                if not out.get("water_slugs"):
+                    out["water_match"] = "name"
+                out["water_slugs"] = list(out.get("water_slugs") or []) + added
+                out.pop("unplaced_reason", None)
+                out["also_named_waters"] = added
+                out["note"] = "; ".join(x for x in (out.get("note"), (
+                    f"also placed on {', '.join(added)}: the release names {'it' if len(added) == 1 else 'them'} as "
+                    "reached by the same discharge (one report)")) if x)
         if text_over_flag(ev):
             # the water comes from the notice's text against its form's flag: the placement says so (TEXT_OVER_FLAG)
             raw = ev.get("raw") or {}
@@ -2628,8 +2663,9 @@ class Resolver:
         # table, which gives no point or outfall): never on its permit's outfalls' water, never by a point (final
         # audit 2026-11-07 P1-1); a report naming no water stays unplaced, listed with its county
         named_only = named_water_only(ev)
+        own_only = own_place_only(ev)
         yielded = False
-        if PLACE_STEPS["registry_first"] and not named_only:
+        if PLACE_STEPS["registry_first"] and not named_only and not own_only:
             reg = self.registry_first(ev, state, known, neg)
             if reg and reg[0]:
                 return placed(reg[0], "outfall_registry", reg[1], [note], outfalls=reg[2])
@@ -2646,7 +2682,7 @@ class Resolver:
                     known = []
             if known:
                 return placed(known, match, note, [relaxed[x] for x in known if x in relaxed])
-        o = None if (yielded or named_only) else self.by_outfall(ev.get("npdes_permit"), ev.get("outfall_id"))
+        o = None if (yielded or named_only or own_only) else self.by_outfall(ev.get("npdes_permit"), ev.get("outfall_id"))
         if o and o["water_slug"] not in neg:
             return placed([o["water_slug"]], "outfall_registry",
                           f"placed by outfall {o['outfall']} of permit {o['npdes_permit']} (outfall registry): "
@@ -2671,7 +2707,7 @@ class Resolver:
         # the outfalls the report names place it (outfall_ids)
         unmatched = not names_none and PLACE_STEPS["outfall_ids"] and not no_water_text(text)
         if PLACE_STEPS["registry"] and (names_none or unmatched) and not no_water_flag(ev) and not aside \
-                and not named_only:
+                and not named_only and not own_only:
             slugs, match, rnote, outs = self.by_registry(ev, state, names_none)
             slugs = [x for x in slugs or [] if x not in neg] or None
             if slugs:
@@ -2693,6 +2729,8 @@ class Resolver:
             return out
         if named_only and not text and not out.get("unplaced_reason"):
             out["unplaced_reason"] = NAMED_ONLY_NONE
+        if own_only and not text and not out.get("unplaced_reason"):
+            out["unplaced_reason"] = OWN_PLACE_NONE
         if ambiguous and not out.get("unplaced_reason"):
             out["unplaced_reason"] = "ambiguous name"
         if reason and not out.get("unplaced_reason"):

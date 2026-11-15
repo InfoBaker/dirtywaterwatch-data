@@ -14,17 +14,19 @@ Source
 Records (one per notice; all are sewage from the City's collection system)
   - event_type sso (a sanitary sewer overflow, or bypass pumping at one, from the collection system: lift stations,
     manholes, mains); "(permitted overflow)" and the cause sentence are kept in raw.
-  - started_at the notice's date and time in Central time (minute precision). "WMSD began ..." is the start; "WMSD was
-    notified of ..." is the time the City learned of it, the earliest time the notice gives (raw.start_basis says
-    which). ended_at: "The overflow was stopped at 12:00PM" when given, else the start plus the stated duration
-    ("10 hours and 5 minutes", "7.75 hours", "one hour", "two hours, 30 minutes"), raw.ended_at_precision minute and
-    raw.end_basis; an unknown duration leaves no end (status unknown).
+  - started_at the notice's date and time in Central time (minute precision) when the notice says "WMSD began ...".
+    "WMSD was notified of ..." is the time the City learned of it: reported_at, started_at left empty (the start is not
+    stated; raw.start_basis says so). ended_at: "The overflow was stopped at 12:00PM" when given, else, from a real
+    start only, the start plus the stated duration ("10 hours and 5 minutes", "7.75 hours", "one hour", "two hours, 30
+    minutes"), raw.ended_at_precision minute and raw.end_basis; a duration after a notification time makes no end
+    (raw.duration_minutes_as_stated, raw.end_note); an unknown duration leaves no end (status unknown).
   - Volume: "The estimated volume of sewer discharged is N gallons" (estimate_flag estimated); unknown is null.
   - Place: no water and no point: waterbody_text none, placed on no water, listed with Black Hawk County and the City;
     the notice's location (a street, an intersection, a lift station) is kept in raw.location after the house-number
     scrub. Never geocoded, never put at the plant.
-  - Identity: source_record_id the start's local date and time (to the minute), so a corrected location keeps the
-    record; notices that share a minute are minute~location (assign_ids), never numbered in page order. A notice that leaves the page
+  - Identity: source_record_id the notice's local date and time (to the minute) and its saved location
+    (minute~location, assign_ids), never numbered in page order; earlier ids are reserved, and a record saved with the
+    bare minute keeps it while its minute and location match. A notice that leaves the page
     keeps its record (raw._unlisted_since); a paragraph the reader cannot read is an "unknown" record with
     parse_error, never dropped.
   Privacy: only the list of notices is read (the page's contact block is not); every street address's house number is
@@ -143,60 +145,75 @@ def read(para: str) -> dict:
     notified = bool(re.match(r"WMSD was notified", rest, re.I))
     loc = location(rest)
     stop = re.search(r"(?:overflow|bypass(?:ing)?|event) was stopped at\s*(\d{1,2}):(\d{2})\s*([AP])\.?M", rest, re.I)
-    end, end_basis = None, None
+    end, end_basis, end_note = None, None, None
+    d = duration(rest)
     if stop:
         eh = int(stop.group(1)) % 12 + (12 if stop.group(3).upper() == "P" else 0)
         end = start.replace(hour=eh, minute=int(stop.group(2)))
         if end < start:
-            end = (end + timedelta(days=1)).replace(tzinfo=TZ)      # the next calendar day, its own offset
-        end_basis = "the time the notice says the overflow was stopped"
-    else:
-        d = duration(rest)
-        if d is not None:
-            # elapsed time (in UTC), so a duration across a clock change ends at the right local time
-            end, end_basis = end_after(start, d, "minute")[0], "the notice's start plus the duration it states"
+            if notified:
+                # a stop time before the time the City was notified, with no date: the day is not stated, so no end
+                # is made from it (Astra 2026-11-15 P2-2)
+                end, end_note = None, f"stopped at {stop.group(0).split(' at ')[-1]} (as written; its day is not stated)"
+            else:
+                end = (end + timedelta(days=1)).replace(tzinfo=TZ)      # the next calendar day, its own offset
+        if end is not None:
+            end_basis = "the time the notice says the overflow was stopped"
+    elif d is not None and not notified:
+        # elapsed time (in UTC), so a duration across a clock change ends at the right local time; only from a real
+        # start: "was notified" is not when the overflow began, so its duration makes no end (Astra 2026-11-15 P2-2)
+        end, end_basis = end_after(start, d, "minute")[0], "the notice's start plus the duration it states"
     gal, vtext = volume(rest)
     cause = re.search(r"(?:was|were) the result of ([^.]+)", rest, re.I)
     return {"start": start, "notified": notified, "location": loc, "end": end, "end_basis": end_basis,
+            "end_note": end_note, "duration_minutes": round(d.total_seconds() / 60) if d is not None else None,
             "volume_gal": gal, "volume_text": vtext, "cause": cause.group(1).strip() if cause else None,
             "permitted_overflow": bool(re.search(r"permitted overflow", rest, re.I)),
             "bypass_pumping": bool(re.search(r"bypass pumping", rest, re.I)), "text": text}
 
 
+def id_location(f: dict) -> str:
+    """The location as it is saved (a private home's dropped, text that may name a person withheld): the id never
+    carries what the record does not (lessons 6 and 7)."""
+    if home_place(f.get("text"), f.get("location")):
+        return ""
+    loc = strict_scrub(f.get("location"))
+    return "" if not loc or loc.startswith("[withheld") else slug(loc)
+
+
 def assign_ids(parsed: list[dict], previous: list[dict]) -> list[str]:
-    """Each notice's source_record_id, whatever the page's order: the start minute; when two notices share a minute,
-    the minute and the location (minute~location). A notice keeps the id of the earlier record with its minute and
-    location; a lone notice at a minute keeps the minute's id even when its location was corrected."""
+    """Each notice's source_record_id, whatever the page's order or which notices are read together: the start minute
+    and the location (minute~location). An earlier record with the same minute and location keeps its id (records
+    saved before with the bare minute included); every other earlier id is reserved, so a different notice at the same
+    minute on a later run never takes it: a correction is never inferred from the minute alone (Astra 2026-11-15 P1-4)."""
     prev = {}
     for p in previous:
         sid = p.get("source_record_id") or ""
         if sid and not sid.startswith("unread-"):
-            prev[sid] = slug((p.get("raw") or {}).get("location") or "")
+            raw = p.get("raw") or {}
+            prev[sid] = id_location({"text": raw.get("notice"), "location": raw.get("location")})
     bases = [f["start"].strftime("%Y-%m-%dT%H%M") for f in parsed]
-    count = {b: bases.count(b) for b in bases}
+    locs = [id_location(f) for f in parsed]
     ids: list[str | None] = [None] * len(parsed)
-    taken = set()
+    taken = set(prev)                                    # every earlier id is reserved
+    reused = set()
+    order = sorted(range(len(parsed)), key=lambda i: (bases[i], locs[i], parsed[i]["text"]))
     # first, an earlier record with the same minute and location keeps its id
-    for i, (f, b) in enumerate(zip(parsed, bases)):
-        loc = slug(f["location"] or "")
-        for sid, ploc in prev.items():
-            if sid.split("~")[0] == b and ploc == loc and sid not in taken:
+    for i in order:
+        for sid, ploc in sorted(prev.items()):
+            if sid.split("~")[0] == bases[i] and ploc == locs[i] and sid not in reused:
                 ids[i] = sid
-                taken.add(sid)
+                reused.add(sid)
                 break
-    order = sorted(range(len(parsed)), key=lambda i: (bases[i], slug(parsed[i]["location"] or ""), parsed[i]["text"]))
     for i in order:
         if ids[i]:
             continue
-        b, loc = bases[i], slug(parsed[i]["location"] or "")
-        if count[b] == 1 and b not in taken:
-            ids[i] = b                                  # a lone notice at its minute (a corrected location keeps it)
-        else:
-            sid, n = f"{b}~{loc or 'notice'}", 2
-            while sid in taken:
-                sid, n = f"{b}~{loc or 'notice'}-{n}", n + 1
-            ids[i] = sid
-        taken.add(ids[i])
+        b, loc = bases[i], locs[i] or "notice"
+        sid, n = f"{b}~{loc}", 2
+        while sid in taken:
+            sid, n = f"{b}~{loc}-{n}", n + 1
+        ids[i] = sid
+        taken.add(sid)
     return ids
 
 
@@ -229,19 +246,32 @@ def build(paras: list[str], at: str, previous: list[dict]) -> tuple[list[dict], 
             f = {**f, "location": None}
         raw = {"notice": strict_scrub(f["text"]), "location": strict_scrub(f["location"]), "cause": strict_scrub(f["cause"]),
                "permitted_overflow": f["permitted_overflow"], "bypass_pumping": f["bypass_pumping"],
-               "start_basis": ("the time the City was notified of the overflow: it began at or before this time"
-                               if f["notified"] else "the time the notice says the City began the bypass"),
+               "start_basis": ("the notice gives the time the City was notified of the overflow (reported_at), not "
+                               "when it began: the start is not stated" if f["notified"]
+                               else "the time the notice says the City began the bypass"),
+               "duration_minutes_as_stated": f["duration_minutes"],
                "county": "Black Hawk County", "city": "Waterloo", "state": "IA", "time_zone": TZ_NAME,
                "timezone_note": "Central time (the City's own clock)",
                "placement": ("the notice names no water and gives no point: listed with the City and Black Hawk County, "
-                             "placed on no water"), "_last_seen_in_source": at}
+                             "placed on no water"), "_last_seen_in_source": at,
+               # never placed through the permit or the plant's receiving water (build/status.py own_place_only;
+               # Astra 2026-11-15 P2-4)
+               "_placement": "own_place_only"}
         if f["end"] is not None:
             raw.update(ended_at_precision="minute", end_basis=f["end_basis"])
+        if f["end_note"]:
+            raw["end_note"] = f["end_note"]
+        if f["notified"] and f["duration_minutes"] is not None and f["end"] is None:
+            raw["end_note"] = raw.get("end_note") or ("the notice states the event's duration but not when it began, "
+                                                       "so no end is made from it")
         out[sid] = event(source_id=SOURCE_ID, source_record_id=sid, event_type="sso",
                          status="ended" if f["end"] else "unknown", discharger_name=OPERATOR,
                          discharger_id=OPERATOR_ID, npdes_permit=PERMIT,
-                         started_at=f["start"].isoformat(), ended_at=f["end"].isoformat() if f["end"] else None,
-                         time_precision="minute", reported_at=None, published_at=None, source_updated_at=None,
+                         started_at=None if f["notified"] else f["start"].isoformat(),
+                         ended_at=f["end"].isoformat() if f["end"] else None,
+                         time_precision="minute",
+                         reported_at=f["start"].isoformat() if f["notified"] else None,
+                         published_at=None, source_updated_at=None,
                          fetched_at=at, material="sewage", volume_gal=f["volume_gal"], volume_text=f["volume_text"],
                          estimate_flag="estimated" if f["volume_gal"] is not None else "unknown", authority=AUTHORITY,
                          source_url=URL, raw=raw)
@@ -258,9 +288,24 @@ def build(paras: list[str], at: str, previous: list[dict]) -> tuple[list[dict], 
                 p["raw"][k] = strict_scrub(p["raw"][k])
         if isinstance(p.get("parse_error"), str):
             p["parse_error"] = strict_scrub(p["parse_error"])
+        if not sid.startswith("unread-"):
+            p["raw"].setdefault("_placement", "own_place_only")
+        if str(p["raw"].get("start_basis") or "").startswith("the time the City was notified") and p.get("started_at"):
+            # saved before the fix: a notification time is the reported time, not a start, and an end made from it
+            # plus a duration is not the source's (Astra 2026-11-15 P2-2)
+            p["reported_at"], p["started_at"] = p["started_at"], None
+            p["raw"]["start_basis"] = ("the notice gives the time the City was notified of the overflow (reported_at), "
+                                       "not when it began: the start is not stated")
+            if p["raw"].get("end_basis") == "the notice's start plus the duration it states":
+                p["ended_at"], p["status"] = None, "unknown"
+                for k in ("end_basis", "ended_at_precision"):
+                    p["raw"].pop(k, None)
+                p["raw"]["end_note"] = ("the notice states the event's duration but not when it began, so no end is "
+                                        "made from it")
         out[sid] = p
         kept += 1
-    recs = sorted(out.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
+    recs = sorted(out.values(), key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r.get("event_id") or ""),
+                  reverse=True)
     return recs, {"on_page": len(paras), "unreadable": bad, "kept_from_previous": kept}
 
 
