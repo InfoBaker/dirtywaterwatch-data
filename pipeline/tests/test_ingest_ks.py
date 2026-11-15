@@ -628,3 +628,42 @@ def test_the_permit_exception_and_the_advisory_limits_are_stated_alike_everywher
     t = (ROOT / "research" / "ks" / "state-text.md").read_text()
     assert "a valid permit does not provide for" in t and "14 days after the last read that confirmed it" in t
     assert "its place on the map is not known" in t and "publishes no list or map layer" in t
+
+
+# ---------------------------------------------------------------- verification pass fixes (2026-11-15, last round)
+
+def test_hab_listing_again_after_an_outage_keeps_the_unread_gap_unconfirmed():
+    """Verification P1-1: listed in January, no read until June, listed again, then lifted: the January period is red
+    for 14 days, the gap is a grey note only, and the June period is red from June's read."""
+    from datetime import datetime, timezone
+    from build import status as S
+    p1 = json.loads((FIX / "hab_poll1.json").read_text())
+    jan, jun, jun8 = "2026-01-01T12:00:00Z", "2026-06-01T12:00:00Z", "2026-06-08T12:00:00Z"
+    recs, _ = H.run(p1, [], jan)
+    recs, _ = H.run(p1, recs, "2026-01-05T12:00:00Z")
+    recs, _ = H.run(p1, recs, jun)
+    recs, _ = H.run({"features": []}, recs, jun8)
+    r = next(x for x in recs if x["raw"]["waterbody_id"] == "LM9001")
+    assert r["raw"]["listed_periods"] == [{"from": jan, "to": "2026-01-05T12:00:00Z"}, {"from": jun, "to": jun}]
+    ivs = S.event_intervals(r, "KS", datetime(2026, 6, 10, tzinfo=timezone.utc))
+    red = sorted((iv["start"], iv["end"]) for iv in ivs if iv["color"] == "red")
+    d = lambda m, dd: datetime(2026, m, dd, 12, tzinfo=timezone.utc)
+    assert red == [(d(1, 1), d(1, 19)), (d(6, 1), d(6, 8))]
+    gap = [iv for iv in ivs if iv["rule"] == "not_reconfirmed" and iv["start"] == d(1, 19)]
+    assert gap and gap[0]["end"] == d(6, 1) and gap[0]["color"] != "red"
+    # reads inside the horizon keep one period; an earlier save without periods gets one from its start
+    old = json.loads(json.dumps(r))
+    old.update(status="advisory_active", ended_at=None)
+    old["raw"].pop("listed_periods")
+    old["raw"]["_last_seen_in_source"] = "2026-01-05T12:00:00Z"
+    again, _ = H.run(p1, [old], "2026-01-10T12:00:00Z")
+    lm = next(x for x in again if x["raw"]["waterbody_id"] == "LM9001")
+    assert lm["raw"]["listed_periods"] == [{"from": jan, "to": "2026-01-10T12:00:00Z"}]
+
+
+def test_mo_hab_listing_again_after_an_outage_keeps_two_periods():
+    from ingest import mo_dnr_hab as M
+    doc = json.loads((Path(__file__).resolve().parent / "fixtures" / "mo" / "hab_layer.json").read_text())
+    recs, _ = M.run(doc, [], "2026-01-01T12:00:00Z")
+    recs, _ = M.run(doc, recs, "2026-06-01T12:00:00Z")
+    assert all(len(r["raw"]["listed_periods"]) == 2 for r in recs if r["status"] == "advisory_active")

@@ -42,6 +42,7 @@ from pathlib import Path
 import requests
 
 import common
+from ingest import poll_periods
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
 
 SOURCE_ID = "mo-dnr-hab-map"
@@ -138,7 +139,7 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
                 r["raw"].update(dnr_code=x["code"], dnr_label=SHOWN[x["code"]])
                 r["advice_text"] = f"DNR's map: {SHOWN[x['code']]}."
             r["raw"]["case_status"] = x["case_status"]
-        r["raw"]["_last_seen_in_source"] = at
+        poll_periods.seen(r, at)
     for rid, r in open_by.items():
         if rid not in now:
             r.update(status="advisory_lifted", ended_at=at)
