@@ -319,6 +319,13 @@ def test_a_corrected_posting_day_is_one_advisory(monkeypatch, tmp_path):
 
 # ---------------------------------------------------------------- the Department of Health's closed swim beaches
 
+@pytest.fixture(autouse=True)
+def _invented_beach_names(monkeypatch):
+    """The fixtures' invented beaches are in the reviewed name list for these tests only (the real list is ADH's)."""
+    monkeypatch.setattr(B, "BEACH_NAMES", {**B.BEACH_NAMES, "SB901": ("Example Point West", "test"),
+                                           "SB902": ("Sample Cove", "test"), "SB904": ("Sample Point West", "test")})
+
+
 def test_closed_swim_beaches_are_a_standing_list_with_poll_dates(tmp_path):
     out = tmp_path / "adh.json"
     page = FIX / "ar_adh_swim_beaches.html"
@@ -490,7 +497,7 @@ def test_an_sb_item_carrying_a_contact_or_address_is_never_saved(tmp_path, monke
             assert bad not in w, (bad, w)
     assert json.loads(out.read_text())["ok"] is False
     # a plain name, with a short number, is still read
-    assert B.read(["SB903 - Example Beach 2"]) == {"SB903": "Example Beach 2"}
+    assert B.read(["SB903 - Example Beach 2"]) == {"SB903": None}      # not in the reviewed list: name withheld
     assert B.read(["SB904 \u2013 Sample Point West"]) == {"SB904": "Sample Point West"}
 
 
@@ -675,3 +682,33 @@ def test_a_truncated_list_after_a_valid_item_ends_nothing(tmp_path, monkeypatch,
     assert B.main(["--out", str(out), "--at", "2026-11-16T12:00:00Z"]) == 0
     st = {r["source_record_id"]: r["status"] for r in json.loads(out.read_text())["records"]}
     assert st == {"sb901": "advisory_active", "sb902": "advisory_lifted"}
+
+
+@pytest.mark.parametrize("item", [
+    "SB901 - Example Beach contact Jane Fixturename",
+    "SB901 - Example Beach 12 Sample Road",
+    "SB112 - Jefferson Ridge West contact Jane Fixturename",
+])
+def test_text_after_a_beach_name_never_reaches_a_save(tmp_path, monkeypatch, item):
+    """Only a name in the reviewed list of ADH's beach names is kept, and only that name: text the page puts after
+    it, or an SB item whose name is not in the list, never reaches raw storage, state or records; the closure is
+    still kept by its SB number (verification P1-5)."""
+    out = tmp_path / "adh.json"
+    writes = []
+    monkeypatch.setattr(B, "save_raw", lambda *a, **k: writes.append(repr(a)))
+    real = B.write_json
+    monkeypatch.setattr(B, "write_json", lambda p, d, *a, **k: (writes.append(json.dumps(d)), real(p, d, *a, **k)))
+    monkeypatch.setattr(B, "fetch", lambda: f"<main><h2>Closed Swim Beaches</h2><ul><li>{item}</li></ul><h2>Rules</h2></main>")
+    assert B.main(["--out", str(out), "--at", "2026-11-15T12:00:00Z"]) == 0
+    writes.append(out.read_text())
+    assert writes and len(writes) >= 3
+    for w in writes:
+        for bad in ("Fixturename", "contact", "Sample Road", "12 S", "Example Beach"):
+            assert bad not in w, (bad, w)
+    (r,) = json.loads(out.read_text())["records"]
+    assert r["status"] == "advisory_active"
+    if item.startswith("SB112"):
+        assert r["raw"]["beach_name"] == r["outfall_name"] == "Jefferson Ridge West"
+    else:
+        assert r["raw"]["beach_name"] is None and r["outfall_name"] == "ADH swim beach SB901"
+        assert r["raw"]["name_withheld_reason"]
