@@ -474,16 +474,20 @@ def test_pr_placement_once_its_waters_are_loaded(monkeypatch):
         S._GEOM_CACHE.clear()
 
 
-def test_a_pr_name_written_without_its_accent_needs_the_alias_the_batch_adds(monkeypatch):
-    # status.norm_name drops accented letters ("Río" -> "r o"), so PRASA's "RIO MUESTRA" finds the NHD name "Río
-    # Muestra" only through an alias without the accent: the PR water batch must add one for every accented name
+def test_a_pr_name_written_without_its_accent_finds_the_accented_record(monkeypatch):
+    # status.norm_name drops accented letters ("Río" -> "r o"); Puerto Rico's names are read with their accents folded
+    # (status.ACCENT_FOLD_STATES, 2026-11-15), so PRASA's "RIO ACENTO" finds the NHD name "Río Acento" with no alias
+    # (until then the PR water batch needed one for every accented name)
     R = _pr_resolver(monkeypatch, extra=[{"slug": "rio-acento-pr", "name": "Río Acento", "kind": "river", "state": "PR",
                                          "towns": ["Ponce"], "bbox": [-66.62, 18.0, -66.6, 18.02], "aliases": [],
                                          "source": "nhd", "launches": [], "advisories": [], "extra": True,
                                          "geometry": {"type": "LineString",
                                                       "coordinates": [[-66.62, 18.0], [-66.6, 18.02]]}}])
     try:
-        assert R.resolve(_ev("RIO ACENTO", None, None, raw={"_placement": "named_water_only"}))["water_slugs"] == []
+        assert R.resolve(_ev("RIO ACENTO", None, None, raw={"_placement": "named_water_only"}))["water_slugs"] == [
+            "rio-acento-pr"]
+        assert R.resolve(_ev("ACENTO RIVER", None, None, raw={"_placement": "named_water_only"}))["water_slugs"] == [
+            "rio-acento-pr"]
         assert R.resolve(_ev("RIO MUESTRA", None, None, raw={"_placement": "named_water_only"}))["water_slugs"] == [
             "rio-muestra-pr"]
     finally:
