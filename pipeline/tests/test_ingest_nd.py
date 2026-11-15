@@ -152,7 +152,7 @@ def test_p1_5_a_damaged_row_or_a_missing_table_fails_and_lifts_nothing(monkeypat
 def test_p1_1_each_listed_lake_with_an_nhd_outline_in_its_county_has_a_cited_point():
     recs, _ = hab()
     pts = json.loads((ROOT / "data" / "reference" / "nd-hab-lake-points.json").read_text())
-    assert len(pts["lakes"]) + len(pts["without_point"]) == 20 and len(pts["lakes"]) == 14
+    assert len(pts["lakes"]) + len(pts["without_point"]) == 20 and len(pts["lakes"]) == 15
     for r in recs.values():
         p = r["raw"].get("marker_point")
         if p is None:
@@ -161,8 +161,72 @@ def test_p1_1_each_listed_lake_with_an_nhd_outline_in_its_county_has_a_cited_poi
         assert (r["lat"], r["lon"]) == (p["lat"], p["lon"]) and p["gnis_id"] and round(r["lat"], 3) == r["lat"]
         assert p["county"].removesuffix(" County") in r["raw"]["counties"]
         assert zones.nd_point_county(r["lat"], r["lon"]) == p["county"]
-    assert recs["Clear Lake"]["lat"] is None          # no Clear Lake outline in Pierce County: no borrowed point
+    c = recs["Clear Lake"]                            # no NHD outline in Pierce County: the one GNIS lake there
+    assert c["coord_source"] == "gnis_point" and c["raw"]["marker_point"]["gnis_id"] == "01028388"
+    assert c["raw"]["marker_point"]["county"] == "Pierce County"
     assert recs["Patterson Lake"]["raw"]["marker_point"]["gnis_name"] == "Edward Arthur Patterson Lake"
+
+
+# ---------------------------------------------------------------- the point builder (review 2026-11-14 P2-2)
+
+def _square(lat, lon, d=0.01, gnis_id="09999901", name="Example Lake"):
+    ring = [[lon - d, lat - d], [lon + d, lat - d], [lon + d, lat + d], [lon - d, lat + d], [lon - d, lat - d]]
+    return {"attributes": {"GNIS_NAME": name, "GNIS_ID": gnis_id, "AREASQKM": 1, "FTYPE": 390},
+            "geometry": {"rings": [ring]}}
+
+
+def _gaz(lat, lon, county, gid=9999911, name="Example Lake", cls="Lake"):
+    return {"attributes": {"gaz_id": gid, "gaz_name": name, "gaz_featureclass": cls, "state_alpha": "ND",
+                           "county_name": county}, "geometry": {"x": lon, "y": lat}}
+
+
+def _points():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ndpts", ROOT / "scripts" / "nd_hab_lake_points.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
+LISTED = [{"lake": "Example Lake", "counties": ["Kidder"], "level": "advisory", "date": "2026-07-01"}]
+
+
+def test_p2_2_two_same_named_lakes_with_separate_gnis_ids_get_no_point_even_if_one_is_larger():
+    m = _points()
+    big = _square(46.75, -99.95, d=0.03, gnis_id="09999901")
+    small = _square(46.75, -99.48, d=0.01, gnis_id="09999902")         # about 36 km east, same county
+    doc = m.build([big, small], LISTED, "2026-11-14")
+    assert doc["lakes"] == [] and len(doc["without_point"]) == 1
+    why = doc["without_point"][0]["why"]
+    assert "2 separate NHD lakes" in why and "beyond 25 km" in why
+    near = _square(46.77, -99.93, d=0.005, gnis_id="09999903")          # a separate lake close by: still refused
+    assert m.build([big, near], LISTED, "2026-11-14")["lakes"] == []
+
+
+def test_p2_2_parts_of_one_gnis_lake_are_one_lake_and_qualified_names_are_other_waters():
+    m = _points()
+    part1 = _square(46.75, -99.95, d=0.03, gnis_id="09999901")
+    part2 = _square(46.75, -99.70, d=0.01, gnis_id="09999901")         # a second part of the same identity
+    other = _square(46.9, -99.7, d=0.05, gnis_id="09999909", name="North Example Lake")
+    doc = m.build([part1, part2, other], LISTED, "2026-11-14")
+    (row,) = doc["lakes"]
+    assert row["gnis_id"] == "09999901" and abs(row["lon"] - -99.95) < 0.04 and row["coord_source"] == "nhd_waterbody"
+    assert m.build([other], LISTED, "2026-11-14")["lakes"] == []       # "North Example Lake" is not "Example Lake"
+
+
+def test_p2_2_gnis_point_only_for_one_identified_lake_in_the_listed_county():
+    m = _points()
+    one = m.build([], LISTED, "2026-11-14", [_gaz(46.9, -99.7, "Kidder")])
+    assert one["lakes"][0]["coord_source"] == "gnis_point" and one["lakes"][0]["gnis_id"] == "09999911"
+    assert (one["lakes"][0]["lat"], one["lakes"][0]["lon"]) == (46.9, -99.7)
+    two = m.build([], LISTED, "2026-11-14", [_gaz(46.9, -99.7, "Kidder"), _gaz(46.75, -99.95, "Kidder", 9999912)])
+    assert two["lakes"] == [] and "2 GNIS lakes" in two["without_point"][0]["why"]
+    elsewhere = m.build([], LISTED, "2026-11-14", [_gaz(47.95, -100.1, "Pierce")])      # another county's namesake
+    assert elsewhere["lakes"] == []
+    wrong_county = m.build([], LISTED, "2026-11-14", [_gaz(47.95, -100.1, "Kidder")])   # gazetteer and point disagree
+    assert wrong_county["lakes"] == []
+    stream = m.build([], LISTED, "2026-11-14", [_gaz(46.9, -99.7, "Kidder", cls="Stream")])
+    assert stream["lakes"] == []
 
 
 # ---------------------------------------------------------------- the incident archive
@@ -325,3 +389,51 @@ def test_p2_3_a_plant_name_gets_no_legal_form_and_outfalls_are_rows_with_an_outf
         rows = [x for x in plants if x.get("npdes_permit") in r["npdes_permits"]]
         n = sum(1 for x in rows if x.get("outfall"))
         assert r["outfall_count"] == (n or None)
+
+
+# ---------------------------------------------------------------- every standing listing visible (re-review P1-1)
+
+def _status_build(tmp_path, recs, waters):
+    import copy
+    from datetime import UTC, datetime
+    from build import status as S
+    now = datetime(2026, 11, 14, 19, tzinfo=UTC)
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    (tmp_path / "nd-deq-hab-listings.json").write_text(json.dumps(
+        {"source_id": "nd-deq-hab-listings", "ok": True, "last_ok_at": now.isoformat(), "meta": {}, "records": recs}))
+    rules = copy.deepcopy(S.load_rules())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"ND"})
+    st, _ = S.build(now=now, write=False, events_dir=tmp_path, waters=waters, outfalls=[], registry={}, reaches={},
+                    flows=({}, {}), rules=rules, placement_cache=False)
+    return st, S
+
+
+@pytest.mark.parametrize("area", [100.0, 2.0])
+def test_p1_1_every_standing_listing_is_visible_before_and_after_its_water_is_resolved(tmp_path, area):
+    recs = list(hab()[0].values())
+    assert len(recs) == 20 and all(r["status"] == "advisory_active" for r in recs)
+    assert all(r["raw"]["advisory_extent"] == "named_water" for r in recs)
+    for r in recs:
+        r["water_slugs"] = []
+    st, S = _status_build(tmp_path, recs, {})
+    marked = {p["event_id"] for p in st["advisory_points"] if p["status"] == "red"}
+    assert len(marked) == 15
+    unplaced = set(st["unplaced_events"])
+    for r in recs:                     # a point-less listing is kept, filed under North Dakota, listed unplaced
+        assert r["event_id"] in marked or (r["event_id"] in unplaced and S.event_state(r) == "ND")
+    waters = {}
+    for i, r in enumerate(recs):       # each lake resolved to a water record of its own (a large or a small lake)
+        lat, lon = (r["lat"], r["lon"]) if r["lat"] is not None else (46.5 + i * 0.05, -99.0)
+        d = 0.05
+        slug = f"example-lake-{i}-nd"
+        ring = [[lon - d, lat - d], [lon + d, lat - d], [lon + d, lat + d], [lon - d, lat + d], [lon - d, lat - d]]
+        waters[slug] = {"slug": slug, "name": r["waterbody_text"], "kind": "lake", "state": "ND", "area_km2": area,
+                        "bbox": [lon - d, lat - d, lon + d, lat + d],
+                        "geometry": {"type": "Polygon", "coordinates": [ring]}}
+        r["water_slugs"], r["water_match"] = [slug], "name"
+    st, _ = _status_build(tmp_path, recs, waters)
+    assert all(w["status"] == "red" for w in st["waters"].values())       # every listed lake coloured, large or small
+    pts = {p["event_id"] for p in st["advisory_points"] if p["status"] == "red"}
+    if area >= 50:
+        assert pts == marked           # a large lake keeps its marker where the listing has a point
