@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1448 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1459 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -46,7 +46,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| **all** | **519** | **234** | **421** | **201** | **73** | **1448** |
+| pr | 6 | 0 | 4 | 1 | 0 | 11 |
+| **all** | **525** | **234** | **425** | **202** | **73** | **1459** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1675,3 +1676,19 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
 | `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
 | `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |
+
+## pr: Puerto Rico (11)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `pr-drna-beach-notices` | DRNA Programa de Monitoría de Playas y Notificación Pública: weekly 'Notificación Monitoria de Playas' (WordPress category 1424) | used | fetched | advisories | Read by ingest/pr_drna_beaches.py: 280 notices (2019-10-11 to 2026-11-13: 220 lists of beaches over the Beach Action Value, 56 'all fit', one list of fit beaches, 3 PDF-only); 601 advisories, one per run of consecutive notices listing a beach, from the publication of the first notice to the publication of the next that no longer lists it; sampling date kept apart; each station at its Water Quality Portal point (PR_BEACH_WQX). |
+| `pr-epa-npdes-pr0021555` | EPA Region 2 NPDES permit PR0021555, PRASA Puerto Nuevo RWWTP (2021), CSO permit conditions | used | fetched | law | Source of the CSO public-notification clause (Nine Minimum Controls #8). |
+| `pr-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, SOBE), Puerto Rico permits | used | fetched | events | Read by the national overflow module (ingest/echo_sewer_overflow_events.py, Puerto Rico permits added 2026-11-14): 940 current reports from 45 permits in the 2026-11-12 extract (SSO 863, bypass 77, none typed CSO; 2025-04-03 to 2026-11-10), every one with a point; 252 read as reaching a water (35 permits), 688 dropped (SSOs naming no water with only odour, aesthetic, land or no observable impacts); received a median 2 days after the start (90th percentile 14). Times in Atlantic Standard Time. |
+| `pr-prasa-consent-decree` | US v. PRASA consent decree (2016) and 2023 modification; EPA Region 2 public notice | used | fetched | law | States the new web-communication duty for Puerto Nuevo CSOs. |
+| `pr-prasa-cso-data` | PRASA combined sewer overflow outfalls (ArcGIS feature service CSO_Data) | used | fetched | outfalls | Read by scripts/add_pr_cso_outfalls.py on 2026-11-14: the 12 Puerto Nuevo combined sewer outfalls (PR0021555) with PRASA's points and receiving waters (data/outfalls-pr.json), each paired with EPA's inventory row; EPA gives no point for outfall 003 and a wrong longitude for 010. |
+| `pr-senate-rs310` | Senado de Puerto Rico, R. del S. 310 (2025-09-22): investigation of sewage discharges to the sea and other waters | used | fetched | law | Pending legislative investigation; its motives propose standardized weekly public reports of incidents (date, cause, duration, estimated volume). |
+| `pr-epa-beacon` | EPA BEACON 2.0, Puerto Rico beaches | watch | inferred | monitoring | Season-late; station coordinates likely the useful part. |
+| `pr-estuario-bacteria` | Programa del Estuario de la Bahía de San Juan: bacteriological monitoring (Condado lagoon, San Juan beaches) | watch | search_only | monitoring | Annual or periodic PDF reports; useful context for San Juan Bay CSO waters. |
+| `pr-prasa-cso-web` | PRASA 'Combined Sanitary Overflows (CSOs)' web pages (home, location map, precautions, efforts, 'Notify a CSO') | watch | fetched | events | The 2023 consent-decree modification adds a duty to tell the public on PRASA's web of CSO discharges and their estimated volume, but the pages fetched show only locations, precautions and a form for the public to report an overflow; no event list found. Registered as a monitored channel (pr-prasa-cso-pages), no records made from it. |
+| `pr-surfrider-bwtf` | Surfrider Foundation Blue Water Task Force, Puerto Rico chapters (Rincón, Isabela) | watch | search_only | monitoring | Volunteer bacteria results; named in R. del S. 310 for Isabela. |
+| `pr-dnr-bypass-email` | Permit spill and bypass reporting to DNER Point Sources Permits Division (bypass@jca.pr.gov) | rejected | fetched | law | A regulator-only channel; no public output found. |
