@@ -38,7 +38,7 @@ Record rules
     A file that cannot be read never ends anything.
   - Clock: raw.time_zone from the county (pipeline/zones.py north_dakota_zone, 49 CFR 71.7(a)): Mountain for the
     southwestern counties (Lake Tschida in Grant County, Bowman-Haley Dam in Bowman County, Patterson Lake in Stark
-    County, Lake Ilo in Dunn County), Central elsewhere; a county set read in Mountain time if any county is.
+    County, Lake Ilo in Dunn County, south of the Little Missouri), Central elsewhere; a county set read in Mountain time if any county is.
   - Marker: the listing gives no coordinates; the cited point of the one GNIS lake of its name in a county DEQ lists
     (data/reference/nd-hab-lake-points.json, scripts/nd_hab_lake_points.py: inside its NHD outline, coord_source
     nhd_waterbody, else the GNIS gazetteer point, coord_source gnis_point; 15 of the 20 lakes of 2026-11-14) is the
@@ -183,7 +183,7 @@ def lake_point(lake: str, counties: list[str]) -> dict | None:
 
 
 def zone_of(counties: list[str], lat=None, lon=None) -> tuple[str, str]:
-    """The lake's zone: its point's side of the line in a split county (McKenzie, Sioux), else its counties'; Mountain
+    """The lake's zone: its point's side of the line in a split county (Dunn, McKenzie, Sioux), else its counties'; Mountain
     if any county is (the later day's end)."""
     zs = [zones.north_dakota_zone(c, lat, lon) for c in counties] or [zones.north_dakota_zone(None, lat, lon)]
     mt = [z for z in zs if z[0] == zones.MOUNTAIN]

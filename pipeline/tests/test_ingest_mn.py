@@ -542,4 +542,129 @@ def test_v2_p3_a_first_seen_error_page_makes_no_record_and_fails_the_run(monkeyp
     monkeypatch.setattr(M, "write_events", lambda sid, recs, **k: calls.append((list(recs), k)) or "x")
     monkeypatch.setattr(M, "fetch", lambda u: idx if u == M.INDEX_URL else "<html><h1>Service unavailable</h1></html>")
     assert M.main([]) == 1
-    assert calls == [([], {"ok": False, "error": calls[0][1]["error"]})] and "not read" in calls[0][1]["error"]
+    assert calls == [([], {"ok": False, "partial": True, "error": calls[0][1]["error"], "meta": None})]
+    assert "not read" in calls[0][1]["error"]
+
+
+# ---------------------------------------------------------------- verification pass 2, 2026-11-15 (Astra), round 3
+
+_SIGN = "Signs warning the public “Do Not Enter/ Sewage Spill” will be placed today."
+
+
+def _runs(*pages):
+    """Successive runs: each page built with the previous run's record, as main() does."""
+    prev = None
+    for p in pages:
+        prev = _one(p, previous=prev)
+    return prev
+
+
+@pytest.mark.parametrize("words", [
+    "Crews have not removed the signs.",
+    "The signs have not been removed.",
+    "Signs have yet to be removed.",
+    "Crews haven't removed the signs.",
+    "Signs warning the public “Do Not Enter/ Sewage Spill” will not be removed.",
+    "Signs will be removed when the water tests clean.",
+    "Signs will be removed once sampling shows normal levels.",
+    "The signs could be removed if results improve.",
+])
+def test_r3_p1_1_a_negated_or_conditional_removal_never_ends_the_signs(words):
+    first = _page(("3/12/2026", _SIGN), intro_signs=False)
+    later = first.replace("<h3>Contact us", f"<p>3/20/2026 - Notice</p><p>{words}</p><h3>Contact us")
+    r = _runs(first, later)
+    assert r["status"] == "advisory_active" and r["ended_at"] is None
+    assert "_unlisted_since" not in r["raw"] and "_end_not_confirmed" not in r["raw"]
+    assert "removal_done" not in r["raw"]["signs"]
+    for d in (15, 21, 28):                                           # red while the signs stand, never grey
+        c, rules = _at(r, 2026, 3, d, 18)
+        assert c == "red" and "advisory_active" in rules
+
+
+def test_r3_p1_1_an_affirmative_removal_still_counts_with_the_signs_quoted():
+    first = _page(("3/12/2026", _SIGN), intro_signs=False)
+    done = first.replace("<h3>Contact us", "<p>3/20/2026 - Notice</p><p>Signs warning the public “Do Not Enter/ Sewage "
+                                           "Spill” have been removed.</p><h3>Contact us")
+    r = _runs(first, done)
+    assert r["raw"]["signs"]["removal_done"] is True and r["raw"]["_unlisted_since"] == "2026-03-21T05:00:00Z"
+    assert _at(r, 2026, 3, 20, 18)[0] == "red"
+
+
+def test_r3_p1_1_the_signs_date_is_the_earliest_notice_whatever_the_page_order():
+    # the Council lists its newest update first; a newer update that repeats the signs never moves their day later
+    first = ("<h1>Example</h1><p>The Council responded Monday afternoon, March 2, to a wastewater spill in Example City."
+             f"</p><p>3/12/2026 - Second Notice</p><p>{_SIGN}</p><h3>Contact us</h3>")
+    second = first.replace("<p>3/12/2026", "<p>3/20/2026 - Third Notice</p><p>Signs warning the public “Do Not Enter/ "
+                                           "Sewage Spill” have been placed around affected areas.</p><p>3/12/2026")
+    a, b = _one(first), _runs(first, second)
+    for r in (a, b):
+        assert r["raw"]["signs"]["posted_per_notice_of"] == "2026-03-12" and r["raw"]["_advisory_from"] == "2026-03-12"
+        c, rules = _at(r, 2026, 3, 15, 18)
+        assert c == "red" and "advisory_active" in rules
+        assert _at(r, 2026, 3, 11, 18)[0] != "red"
+    assert b["raw"]["updates"][0]["date"] == "2026-03-20"              # the page's own order is kept in the record
+
+
+_PERSON = "Reported by Pat Example at 1234 Example Street"
+
+
+def _main_env(monkeypatch, tmp_path, idx, page):
+    """main() against the real failure writer (common.write_events) on a file in tmp_path; returns (doc(), saved)."""
+    import common
+    saved = []
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    monkeypatch.setattr(M, "save_raw", lambda sid, content, ext: saved.append(content))
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **k: common.write_events(
+        sid, recs, path=tmp_path / f"{sid}.json", **k))
+    monkeypatch.setattr(M, "fetch", lambda u: idx if u == M.INDEX_URL else page)
+    return (lambda: json.loads((tmp_path / f"{M.SOURCE_ID}.json").read_text())), saved
+
+
+def test_r3_p1_3_a_label_scrub_reaches_the_town_and_the_meta_through_main(monkeypatch, tmp_path):
+    idx = ('<h2>Spill information</h2><ul><li><a href="/Wastewater-Water/Services/Interceptor-Services/Spills/'
+           f'Example.aspx">Example City {_PERSON}</a>, March 2026</li></ul>')
+    doc, saved = _main_env(monkeypatch, tmp_path, idx, _page(intro_signs=False))
+    assert M.main([]) == 0
+    d = doc()
+    assert d["ok"] is True and d["records"][0]["raw"]["city"].startswith("Example City")
+    assert d["meta"]["cities_without_county"]                         # the town is listed, scrubbed
+    blob = json.dumps([d, saved])
+    assert "Pat Example" not in blob and "1234 Example" not in blob
+
+
+def test_r3_p1_3_a_failed_run_rescrubs_the_kept_records_and_stays_not_ok(monkeypatch, tmp_path):
+    idx = ('<h2>Spill information</h2><ul><li><a href="/Wastewater-Water/Services/Interceptor-Services/Spills/'
+           'Example.aspx">Example City</a>, March 2026</li></ul>')
+    doc, saved = _main_env(monkeypatch, tmp_path, idx, _page(intro_signs=False))
+    assert M.main([]) == 0
+    first = doc()
+    # a file written before the scrub rules: revision headings, town, label and meta carry a person's text
+    old = copy.deepcopy(first)
+    raw = old["records"][0]["raw"]
+    raw["_revisions"] = [{"seen_at": FETCHED, "sha256": "x", "headings": [_PERSON]}]
+    raw["city"] = raw["label"] = f"Example City {_PERSON}"
+    old["meta"]["cities_without_county"] = [f"Example City {_PERSON}"]
+    (tmp_path / f"{M.SOURCE_ID}.json").write_text(json.dumps(old))
+
+    def boom(u):
+        raise M.requests.ConnectionError("down")
+    monkeypatch.setattr(M, "fetch", boom)
+    assert M.main([]) == 1
+    d = doc()
+    assert d["ok"] is False and "down" in d["error"] and d["last_ok_at"] == first["last_ok_at"]
+    assert [r["event_id"] for r in d["records"]] == [r["event_id"] for r in first["records"]]   # every record kept
+    assert d["records"][0]["raw"]["_revisions"][0]["headings"] and d["meta"]["cities_without_county"]
+    blob = json.dumps(d)
+    assert "Pat Example" not in blob and "1234 Example" not in blob
+
+
+def test_r3_p2_3_the_state_text_says_what_the_councils_notices_show_of_stops_and_signs():
+    t = (ROOT / "research" / "mn" / "state-text.md").read_text()
+    recs, _ = mces()
+    assert recs and all(r["raw"].get("spill_stopped_on") for r in recs.values())      # every saved notice: a stop day
+    signed = [r for r in recs.values() if r["raw"].get("signs")]
+    assert signed and not any(r["raw"]["signs"].get("removal_done") for r in signed)  # removal never confirmed
+    assert "no end for most spills" not in t
+    assert "each gives the day the spill was stopped" in t
+    assert "the day they came down is often not confirmed" in t
