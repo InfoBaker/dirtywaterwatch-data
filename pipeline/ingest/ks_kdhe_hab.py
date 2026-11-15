@@ -156,6 +156,8 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
                 r["raw"]["kdhe_level"] = x["level"]
                 r["advice_text"] = ADVICE[x["level"]]
             r["raw"]["status_date"] = x["status_date"]
+            if poll_periods.revise_place(r, at, name=x["name"], lat=x["lat"], lon=x["lon"]):
+                r["raw"]["time_zone"] = zones.kansas_zone(lat=x["lat"], lon=x["lon"])
         poll_periods.seen(r, at)
         if x.get("conflicting_levels"):
             r["raw"]["conflicting_levels"] = x["conflicting_levels"]
