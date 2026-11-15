@@ -41,6 +41,7 @@ fetch:
   safe_fields: [OBJECTID, OverflowDate, FacilityType, GlobalID, ReleaseAmount, StateWaters, _x, _y]
   round_coords: 3
   free_text: [FacilityType, ReleaseAmount, StateWaters]
+  free_text_scrub: strict_names     # names and every house number cut before the raw save (re-review 2026-11-14 P1-5)
   record:
     source_record_id: GlobalID
     started_at: {field: OverflowDate, parse: epoch_ms, midnight: date}

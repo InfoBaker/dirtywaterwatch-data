@@ -66,24 +66,26 @@ def test_each_spill_is_a_sewer_overflow_dated_to_the_day_the_council_responded()
     for r in recs.values():
         assert r["event_type"] == "sso" and r["time_precision"] == "day" and r["parse_error"] is None
         assert r["raw"]["time_zone"] == "America/Chicago" and r["discharger_id"] == "mn-mces"
-        assert r["npdes_permit"] is None and r["reported_at"] is None and r["published_at"] is None
-        assert "the spill began on that day or before it" in r["raw"]["start_basis"]
-        assert r["raw"]["time_of_day_words"] == "afternoon" and "T" not in r["started_at"]
-    assert recs["Excelsior"]["started_at"] == "2026-05-29" and recs["Eagan"]["started_at"] == "2026-11-03"
-    assert recs["Minneapolis and Golden Valley"]["started_at"] == "2026-07-09"
+        assert r["npdes_permit"] is None and r["published_at"] is None
+        assert r["started_at"] is None and r["reported_at"] == r["raw"]["responded_on"]   # a response day, not a start
+        assert "the spill's start is not given" in r["raw"]["start_basis"]
+        assert r["raw"]["time_of_day_words"] == "afternoon" and "T" not in r["reported_at"]
+    assert recs["Excelsior"]["reported_at"] == "2026-05-29" and recs["Eagan"]["reported_at"] == "2026-11-03"
+    assert recs["Minneapolis and Golden Valley"]["reported_at"] == "2026-07-09"
     assert recs["Eagan"]["event_id"] == "mn-mces-spill-notices:Eagan-Wastewater-Spill:2026-11-03"
     assert recs["Excelsior"]["source_updated_at"] == "2026-06-01"
 
 
 def test_the_councils_signs_are_its_window_and_their_removal_notice_ends_it():
     recs, _ = mces()
-    ex = recs["Excelsior"]                    # the spill ended its day; the Council's window to the removal notice
-    assert ex["status"] == "ended" and ex["ended_at"] == "2026-05-29" and ex["raw"]["ended_at_precision"] == "day"
-    assert ex["advice_window_hours"] == 72.0 and "until its update of 2026-06-01" in ex["advice_window_basis"]
-    assert ex["raw"]["signs"]["removal_announced_on"] == "2026-06-01" and "not given" in ex["raw"]["signs"]["removal_note"]
+    ex = recs["Excelsior"]       # "will be removed": the signs stood to the end of June 1, their removal not confirmed
+    assert ex["status"] == "advisory_active" and ex["ended_at"] is None and ex["advice_window_hours"] is None
+    assert ex["raw"]["_unlisted_since"] == "2026-06-02T05:00:00Z" and ex["raw"]["_end_not_confirmed"] is True
+    assert ex["raw"]["signs"]["removal_announced_on"] == "2026-06-01" and ex["raw"]["signs"]["removal_done"] is False
+    assert "not one done" in ex["raw"]["signs"]["removal_note"]
     assert ex["raw"]["spill_stopped_on"] == "2026-05-29" and "Do Not Enter/ Sewage Spill" in ex["advice_text"]
     mp = recs["Minneapolis and Golden Valley"]
-    assert mp["status"] == "ended" and mp["ended_at"] == "2026-07-09" and mp["advice_window_hours"] == 168.0
+    assert mp["status"] == "advisory_active" and mp["raw"]["_unlisted_since"] == "2026-07-17T05:00:00Z"
     assert mp["raw"]["signs"]["posted_per_notice_of"] == "2026-07-10" and mp["raw"]["spill_stopped_on"] == "2026-07-09"
     eg = recs["Eagan"]                        # no signs: the spill's own stop, the day it was contained
     assert eg["status"] == "ended" and eg["ended_at"] == "2026-11-03" and "signs" not in eg["raw"]
@@ -100,7 +102,7 @@ def test_signs_with_no_removal_notice_stay_standing_with_no_end():
     recs, meta = mces(index=idx, extra_pages={INDEX + "Example-Spill.aspx": page})
     r = recs["Example City"]
     assert r["status"] == "advisory_active" and r["ended_at"] is None and meta["advisory_active"] == 1
-    assert r["started_at"] == "2026-03-02" and r["waterbody_text"] == "Sample Creek"
+    assert r["reported_at"] == "2026-03-02" and r["started_at"] is None and r["waterbody_text"] == "Sample Creek"
     assert r["raw"]["county"] is None and meta["cities_without_county"] == ["Example City"]
 
 
@@ -123,6 +125,7 @@ def test_a_page_that_leaves_the_index_is_kept_and_standing_signs_become_unconfir
     prev[0] = copy.deepcopy(prev[0])
     gone = next(r for r in prev if r["raw"]["city"] == "Excelsior")
     gone["status"], gone["ended_at"] = "advisory_active", None      # as if its signs were still up at the last read
+    gone["raw"].pop("_unlisted_since", None)
     idx = (FIX / "mces" / "index.html").read_text()
     idx = re.sub(r'<li class="hdg-blue"><a href="[^"]*Excelsior[^"]*".*?</li>', "", idx, flags=re.S)
     recs, meta = mces(previous=prev, fetched="2026-11-15T18:00:00Z", index=idx)
@@ -152,7 +155,7 @@ def test_a_weekday_that_does_not_fit_the_date_is_a_parse_note():
             "<h3>Contact us</h3>")
     r = M.build_one({"url": INDEX + "Example.aspx", "label": "Example City, May 2026"}, M.parse_page(page), FETCHED,
                     None)
-    assert r["started_at"] == "2026-05-29" and "does not fall on" in r["parse_error"] and r["event_type"] == "sso"
+    assert r["reported_at"] == "2026-05-29" and "does not fall on" in r["parse_error"] and r["event_type"] == "sso"
 
 
 # ---------------------------------------------------------------- Resource Renew (WLSSD)
@@ -207,6 +210,8 @@ def test_adding_minnesota_leaves_other_states_records_unchanged(monkeypatch):
     with_mn = E.build(copy.deepcopy(ut), {"extract_date": "2026-11-04"})[0]
     monkeypatch.setattr(E, "STATES", E.STATES - {"MN"})
     monkeypatch.setattr(E, "STATE_ZONE_ALWAYS", E.STATE_ZONE_ALWAYS - {"MN"})
+    monkeypatch.setattr(E, "FREE_TEXT_STATES", E.FREE_TEXT_STATES - {"MN"})
+    monkeypatch.setattr(E, "STATE_NAME_SCRUB", {})
     without = E.build(copy.deepcopy(ut), {"extract_date": "2026-11-04"})[0]
     strip = [{k: v for k, v in r.items() if k != "fetched_at"} for r in with_mn]
     assert strip == [{k: v for k, v in r.items() if k != "fetched_at"} for r in without] and strip
@@ -230,9 +235,15 @@ def test_operators_hold_every_minnesota_plant_permit_once():
 
 
 def test_register_rows_per_operator_and_the_feeds():
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from add_mn_register_rows import OWN, duty_applies
     reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "mn.json").read_text())["channels"]}
-    for r in ops():
-        assert reg[f"{r['id']}-public-notice"]["operator_id"] == r["id"]
+    for r in ops():          # the statute's duty only where the row's legal form puts it in the statute's scope
+        if duty_applies(r) or r["id"] in OWN:
+            assert reg[f"{r['id']}-public-notice"]["operator_id"] == r["id"]
+        else:
+            assert f"{r['id']}-public-notice" not in reg
     assert reg["mn-mces-public-notice"]["feed_source_id"] == "mn-mces-spill-notices"
     assert reg["mn-wlssd-public-notice"]["feed_source_id"] == "mn-wlssd-overflows"
     assert reg["mn-bois-forte-overflow-report"]["feed_source_id"] == "echo-sewer-overflow"
@@ -256,7 +267,7 @@ def test_state_text_is_in_the_page_shape():
         assert f"**{h}.**" in t
     assert "\n{{share_line}}\n" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean|green)\b", t, re.I) and ".json" not in t and ".py" not in t
-    assert "117 releases" in t and "642" in t and "115.061" in t
+    assert "117 releases" in t and "115.061" in t          # operator counts: test_p2_5_mn_text_and_register_follow...
 
 
 def test_missing_waters_list_names_what_the_national_list_lacks():
@@ -276,24 +287,25 @@ def test_missing_waters_list_names_what_the_national_list_lacks():
 
 # ---------------------------------------------------------------- review 2026-11-14 (Astra)
 
-def test_p1_2_a_stop_named_by_weekday_a_week_later_is_not_the_start_day():
+def test_p1_2_a_stop_named_by_weekday_a_week_later_is_kept_on_its_own_day():
     page = ("<h1>Example</h1><p>The Council responded Monday afternoon, March 2, to a wastewater spill in Example City."
             "</p><p>3/9/2026 - Second Notice</p><p>Crews stopped the spill Monday evening.</p>"
             "<p>3/12/2026 - Third Notice</p><p>Signs warning the public \u201cDo Not Enter/ Sewage Spill\u201d have "
             "been placed.</p><h3>Contact us</h3>")
     r = M.build_one({"url": INDEX + "Example.aspx", "label": "Example City, March 2026"}, M.parse_page(page), FETCHED,
                     None)
-    assert r["started_at"] == "2026-03-02" and "spill_stopped_on" not in r["raw"]      # "Monday" of 3/9 is March 9
+    assert r["reported_at"] == "2026-03-02" and r["raw"]["spill_stopped_on"] == "2026-03-09"   # "Monday" of 3/9
     assert r["status"] == "advisory_active" and r["ended_at"] is None and r["advice_window_hours"] is None
 
 
-def test_p1_2_removal_announced_with_no_stop_ends_at_the_announcement_as_a_bound():
+def test_p1_2_removal_announced_with_no_stop_is_not_a_lift():
     page = ("<h1>Example</h1><p>The Council responded Monday afternoon, March 2, to a wastewater spill in Example City."
             " Signs warning the public \u201cDo Not Enter/ Sewage Spill\u201d will be placed.</p>"
             "<p>3/20/2026 - Second Notice</p><p>Signs will be removed.</p><h3>Contact us</h3>")
     r = M.build_one({"url": INDEX + "Example.aspx", "label": "Example City, March 2026"}, M.parse_page(page), FETCHED,
                     None)
-    assert r["status"] == "advisory_lifted" and r["ended_at"] == "2026-03-20" and r["raw"]["ended_at_precision"] == "bound"
+    assert r["status"] == "advisory_active" and r["ended_at"] is None and r["raw"]["_end_not_confirmed"] is True
+    assert r["raw"]["_unlisted_since"] == "2026-03-21T05:00:00Z"        # the end of March 20, Central daylight time
 
 
 def test_p1_3_the_councils_window_then_grey_and_eagans_caution_in_central_time():
@@ -307,8 +319,8 @@ def test_p1_3_the_councils_window_then_grey_and_eagans_caution_in_central_time()
         return c, [iv["rule"] for iv in ivs]
     ex = recs["Excelsior"]
     assert at(ex, 2026, 5, 29, 20)[0] == "red"                       # the spill's day
-    assert at(ex, 2026, 6, 1, 20) == ("red", ["authority_window"])   # the Council's signs, to the end of June 1 (CDT)
-    assert at(ex, 2026, 6, 2, 6)[0] == "grey"                        # 72 hours after the stop day: no further caution
+    assert at(ex, 2026, 6, 1, 20) == ("red", ["advisory_active"])    # the Council's signs, to the end of June 1 (CDT)
+    assert at(ex, 2026, 6, 2, 6)[1] == ["unresolved"]                # removal announced, not confirmed: hatched
     eg = recs["Eagan"]
     assert at(eg, 2026, 11, 6, 12)[0] == "yellow"                    # the site's caution, 72 hours after Nov 3 (CST)
     assert at(eg, 2026, 11, 7, 7)[0] == "grey"
@@ -349,8 +361,185 @@ def test_p1_6_wlssd_free_text_is_scrubbed_and_p1_7_mn_epa_points_are_rounded():
                for x in echo_tables()["events"])
 
 
-def test_p2_3_mn_facility_only_rows_count_no_outfall():
-    by = {r["name"]: r for r in ops()}
-    assert by["Arlington WWTP"]["legal_form"] is None
-    benson = next(r for r in ops() if r["id"] == "mn-benson")
+def test_p2_3_mn_plant_only_names_are_permit_only_rows_and_facility_rows_count_no_outfall():
+    by = {r["id"]: r for r in ops()}
+    for rid in ("mn-arlington-wwtp", "mn-montevideo-wwtp"):
+        r = by[rid]
+        assert r["permit_only"] is True and r["legal_form"] is None and r["name"].startswith("Permit MN")
+        assert "not established" in r["notes"]
+    assert "permit_only" not in by["mn-mces"]
+    benson = by["mn-benson"]
     assert benson["outfall_count"] is None and "0 outfalls of 1 rows" in benson["outfalls_source"]
+
+
+def test_p2_3_operator_builder_rules_on_invented_rows():
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import icis_operators as I
+    assert I.plant_only("Example WWTP") and I.plant_only("Example Water Resource Recovery Facility")
+    assert not I.plant_only("City of Example") and not I.plant_only("Example Sanitary District")
+    assert not I.plant_only("Example Wastewater Treatment Association Inc")
+    ok = {"outfall": "001", "receiving_water_echo": "Example Creek", "permittee": "EXAMPLE WWTP"}
+    assert I.outfall_eligible(ok) == (True, None)
+    assert not I.outfall_eligible({**ok, "outfall": None})[0]                       # facility-only
+    assert not I.outfall_eligible({**ok, "receiving_water_echo": "Example WWTP"})[0]  # a collection system
+    assert not I.outfall_eligible({**ok, "permittee": "Example Dewatering Project"})[0]
+    assert not I.outfall_eligible({**ok, "outfall_kind": "other"})[0]
+
+
+def test_p2_5_mn_text_and_register_follow_the_computed_counts_and_the_statutes_scope():
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from add_mn_register_rows import duty_applies
+    t = (ROOT / "research" / "mn" / "state-text.md").read_text()
+    rows = ops()
+    n_ops = sum(1 for r in rows if not r.get("permit_only"))
+    n_only = sum(1 for r in rows if r.get("permit_only"))
+    n_duty = sum(1 for r in rows if duty_applies(r))
+    assert f"name {n_ops} Minnesota sewer and treatment operators" in t and f"{n_only} more permits" in t
+    assert f"{n_duty} of the operators" in t
+    assert "publicly or privately owned domestic sewer system" in t                   # the statute's own scope
+    law = re.search(r"\*\*What the law requires\.\*\*([^\n]*)", t).group(1)
+    assert "domestic" in law
+    assert "where the District gives them" in t                                        # amounts and types not always given
+
+
+# ---------------------------------------------------------------- verification pass 2026-11-15 (Astra)
+
+def _page(*updates, intro_signs=True):
+    signs = (" Signs warning the public “Do Not Enter/ Sewage Spill” will be placed." if intro_signs else "")
+    body = "".join(f"<p>{d} - Notice</p><p>{t}</p>" for d, t in updates)
+    return ("<h1>Example</h1><p>The Council responded Monday afternoon, March 2, to a wastewater spill in Example City."
+            f"{signs}</p>{body}<h3>Contact us</h3>")
+
+
+def _one(page, previous=None, fetched=FETCHED):
+    return M.build_one({"url": INDEX + "Example.aspx", "label": "Example City, March 2026"}, M.parse_page(page),
+                       fetched, previous)
+
+
+def _at(r, y, mo, d, h, mi=0):
+    from datetime import datetime, timezone
+    from build import status as S
+    now = datetime(2026, 11, 14, 18, tzinfo=timezone.utc)
+    c, ivs = S.status_at(S.event_intervals(r, "MN", now), datetime(y, mo, d, h, mi, tzinfo=timezone.utc))
+    return c, [iv["rule"] for iv in ivs]
+
+
+@pytest.mark.parametrize("words,stopped", [
+    ("Crews will stop the spill Monday evening.", None),
+    ("Crews could not stop the spill Monday evening.", None),
+    ("Crews were unable to stop the spill Monday evening.", None),
+    ("Crews attempted to stop the spill Monday evening.", None),
+    ("Crews are working to stop the spill by Monday evening.", None),
+    ("The spill was not contained Monday evening.", None),
+    ("Crews plan to stop the spill Monday evening.", None),
+    ("Crews stopped the spill Monday evening.", "2026-03-02"),
+    ("Crews were able to stop the spill Monday evening.", "2026-03-02"),
+])
+def test_v2_a_stop_needs_a_completed_affirmative_action(words, stopped):
+    r = _one(_page(("3/3/2026", words), intro_signs=False))
+    assert r["raw"].get("spill_stopped_on") == stopped
+    if stopped is None:
+        assert r["status"] == "unknown" and r["ended_at"] is None
+        assert _at(r, 2026, 3, 4, 12)[0] == "yellow"            # unknown: the no-end rules, never a stop's caution end
+    else:
+        assert r["status"] == "ended" and r["ended_at"] == stopped
+
+
+def test_v2_b_signs_placed_after_a_stop_start_the_councils_window_on_their_own_day():
+    sign = "Signs warning the public “Do Not Enter/ Sewage Spill” will be placed today."
+    page = ("<h1>Example</h1><p>The Council responded Monday afternoon, March 2, to a wastewater spill in Example City."
+            " Crews stopped the spill within hours.</p>"
+            f"<p>3/12/2026 - Second Notice</p><p>{sign}</p><h3>Contact us</h3>")
+    r = _one(page)
+    assert r["raw"]["spill_stopped_on"] == "2026-03-02" and r["raw"]["_advisory_from"] == "2026-03-12"
+    assert r["reported_at"] == "2026-03-02" and r["started_at"] is None
+    assert _at(r, 2026, 3, 2, 20) == ("red", ["discharge"])          # the spill's own day
+    assert _at(r, 2026, 3, 5, 12)[0] == "yellow"                       # the site's caution after the stop
+    assert _at(r, 2026, 3, 6, 12)[0] == "grey"                         # never red before the signs (was red)
+    assert _at(r, 2026, 3, 12, 4)[0] == "grey"                         # before March 12 began (CDT: 05:00 UTC)
+    assert _at(r, 2026, 3, 12, 5, 30) == ("red", ["advisory_active"])
+    # a later removal done: red to the end of that day, then nothing of the advisory
+    done = page.replace("<h3>Contact us", "<p>3/20/2026 - Third Notice</p><p>Signs have been removed.</p><h3>Contact us")
+    d = _one(done)
+    assert d["raw"]["_unlisted_since"] == "2026-03-21T05:00:00Z" and not d["raw"].get("_end_not_confirmed")
+    assert d["advice_window_hours"] is None
+    assert _at(d, 2026, 3, 6, 12)[0] == "grey" and _at(d, 2026, 3, 20, 20)[0] == "red"
+    assert _at(d, 2026, 3, 21, 6)[0] == "grey"
+    # no stop given: before the signs, the no-end rules from the response day (never red); red from the signs' day
+    nostop = page.replace(" Crews stopped the spill within hours.", "")
+    n = _one(nostop)
+    assert n["raw"]["_before_advisory"]["status"] == "unknown"
+    assert _at(n, 2026, 3, 6, 12)[0] == "yellow" and _at(n, 2026, 3, 12, 6)[0] == "red"
+
+
+def test_v2_b_signs_in_the_first_account_keep_the_window_from_the_response_day():
+    recs, _ = mces()
+    assert "_advisory_from" not in recs["Excelsior"]["raw"]                     # posted per the notice of the day
+    assert recs["Minneapolis and Golden Valley"]["raw"]["_advisory_from"] == "2026-07-10"
+
+
+@pytest.mark.parametrize("month,day,label,removed,hours,red_end", [
+    ("March", 7, "March 2026", "3/9/2026", 47.0, (2026, 3, 10, 5)),        # spring forward on March 8
+    ("October", 31, "October 2026", "11/2/2026", 49.0, (2026, 11, 3, 6)),  # fall back on November 1
+])
+def test_v2_c_the_councils_window_counts_elapsed_hours_across_daylight_saving(month, day, label, removed, hours,
+                                                                              red_end):
+    from datetime import datetime, timedelta, timezone
+    from build import status as S
+    page = (f"<h1>Example</h1><p>The Council responded afternoon, {month} {day}, to a wastewater spill in Example City."
+            " Crews stopped the spill within hours. Signs warning the public “Do Not Enter/ Sewage Spill” "
+            f"will be placed.</p><p>{removed} - Second Notice</p><p>Signs have been removed.</p><h3>Contact us</h3>")
+    r = M.build_one({"url": INDEX + "Example.aspx", "label": f"Example City, {label}"}, M.parse_page(page), FETCHED,
+                    None)
+    assert r["status"] == "ended" and r["advice_window_hours"] == hours
+    ivs = S.event_intervals(r, "MN", datetime(2026, 11, 14, 18, tzinfo=timezone.utc))
+    win = [iv for iv in ivs if iv["rule"] == "authority_window"]
+    assert len(win) == 1 and win[0]["end"] == datetime(*red_end, tzinfo=timezone.utc)
+    assert S.status_at(ivs, win[0]["end"] - timedelta(minutes=30))[0] == "red"
+    assert S.status_at(ivs, win[0]["end"] + timedelta(minutes=30))[0] != "red"
+
+
+def test_v2_d_revision_headings_are_scrubbed_at_both_saves_and_carried_ones_too(monkeypatch):
+    url = INDEX + "Example.aspx"
+    idx = ('<h2>Spill information</h2><ul><li><a href="/Wastewater-Water/Services/Interceptor-Services/Spills/'
+           'Example.aspx">Example City</a>, March 2026</li></ul>')
+    first = _page(intro_signs=False)
+    second = _page(("3/4/2026", "Crews are onsite."), intro_signs=False).replace(
+        "3/4/2026 - Notice", "3/4/2026 - Reported by Pat Example at 1234 Example Street")
+    third = second.replace("Crews are onsite.", "Crews are onsite and repairing the pipe.")
+    store = {"records": []}
+    saved = []
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    monkeypatch.setattr(M, "read_json", lambda path, default=None: store)
+    monkeypatch.setattr(M, "save_raw", lambda sid, content, ext: saved.append(content))
+
+    def write(sid, recs, **k):
+        store["records"] = json.loads(json.dumps(recs))
+        return "x"
+    monkeypatch.setattr(M, "write_events", write)
+    for page in (first, second, third):
+        monkeypatch.setattr(M, "fetch", lambda u, p=page: idx if u == M.INDEX_URL else p)
+        assert M.main([]) == 0
+    revs = store["records"][0]["raw"]["_revisions"]
+    assert len(revs) == 2
+    blob = json.dumps([saved, store])
+    assert "Pat Example" not in blob and "1234 Example" not in blob
+    # a revision carried from a record written before this fix is scrubbed on the next write
+    store["records"][0]["raw"]["_revisions"][0]["headings"] = ["Reported by Pat Example at 1234 Example Street"]
+    assert M.main([]) == 0
+    assert "Pat Example" not in json.dumps(store) and "1234 Example" not in json.dumps(store)
+
+
+def test_v2_p3_a_first_seen_error_page_makes_no_record_and_fails_the_run(monkeypatch):
+    idx = ('<h2>Spill information</h2><ul><li><a href="/Wastewater-Water/Services/Interceptor-Services/Spills/'
+           'Example.aspx">Example City</a>, March 2026</li></ul>')
+    calls = []
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    monkeypatch.setattr(M, "read_json", lambda path, default=None: {"records": []})
+    monkeypatch.setattr(M, "save_raw", lambda *a: None)
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **k: calls.append((list(recs), k)) or "x")
+    monkeypatch.setattr(M, "fetch", lambda u: idx if u == M.INDEX_URL else "<html><h1>Service unavailable</h1></html>")
+    assert M.main([]) == 1
+    assert calls == [([], {"ok": False, "error": calls[0][1]["error"]})] and "not read" in calls[0][1]["error"]

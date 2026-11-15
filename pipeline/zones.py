@@ -312,10 +312,52 @@ def nd_point_county(lat, lon) -> str | None:
     return None
 
 
+@functools.lru_cache(maxsize=1)
+def _nd_split_parts():
+    """{county key: the Mountain part's geometry} of McKenzie and Sioux (data/reference/nd-split-county-zones.json:
+    USDOT/BTS NTAD time zones cut to the county outlines)."""
+    import json
+    from pathlib import Path
+
+    from shapely.geometry import shape
+    from shapely.validation import make_valid
+    p = Path(__file__).resolve().parents[1] / "data" / "reference" / "nd-split-county-zones.json"
+    doc = json.loads(p.read_text())
+    return {tn_county_key(c["county"]): make_valid(shape(c["mountain_part"])) for c in doc["counties"]}
+
+
+def north_dakota_split_side(county, lat, lon) -> str | None:
+    """MOUNTAIN or CENTRAL for a point in McKenzie or Sioux County, from the cited line (NTAD), or None (no point, not
+    a split county, or no line file)."""
+    if lat is None or lon is None or tn_county_key(county or "") not in ND_SPLIT_COUNTIES:
+        return None
+    try:
+        from shapely.geometry import Point
+        part = _nd_split_parts().get(tn_county_key(county))
+    except (OSError, ImportError, ValueError, KeyError):
+        return None
+    if part is None:
+        return None
+    return MOUNTAIN if part.covers(Point(float(lon), float(lat))) else CENTRAL
+
+
+def north_dakota_zone_uncertain(county=None, lat=None, lon=None) -> bool:
+    """True when the record's zone is assumed, not known: a McKenzie or Sioux County record whose point cannot be
+    placed on a side of the line (re-review 2026-11-14 P2-4)."""
+    if not (county and str(county).strip()):
+        try:
+            county = nd_point_county(lat, lon)
+        except (OSError, ImportError, ValueError, KeyError):
+            county = None
+    return tn_county_key(county or "") in ND_SPLIT_COUNTIES and north_dakota_split_side(county, lat, lon) is None
+
+
 def north_dakota_zone(county=None, lat=None, lon=None) -> tuple[str, str]:
-    """(zone, basis) for a North Dakota record: Mountain in ND_MOUNTAIN_COUNTIES and the two split counties (by the
-    county's name when given, else the county the point lies in), Central elsewhere and when neither is known (the
-    state's larger part)."""
+    """(zone, basis) for a North Dakota record: Mountain in ND_MOUNTAIN_COUNTIES; in the two split counties the side
+    of the line the record's point lies on (data/reference/nd-split-county-zones.json, re-review 2026-11-14 P2-4), and
+    with no point Mountain time, the later day's end, stated as assumed (north_dakota_zone_uncertain); Central
+    elsewhere and when no county is known (the state's larger part). The county is the one the source gives, else the
+    one the point lies in."""
     if not (county and str(county).strip()):
         try:
             county = nd_point_county(lat, lon)
@@ -331,6 +373,11 @@ def north_dakota_zone(county=None, lat=None, lon=None) -> tuple[str, str]:
     if key in ND_MOUNTAIN_COUNTIES:
         return MOUNTAIN, f"{name} County keeps Mountain time ({ND_ZONE_CITE}; {how})"
     if key in ND_SPLIT_COUNTIES:
-        return MOUNTAIN, (f"{name} County is split by the line ({ND_ZONE_CITE}), which is not traced here: this site "
-                          f"reads it in Mountain time, the later day's end ({how})")
+        side = north_dakota_split_side(county, lat, lon)
+        if side:
+            return side, (f"{name} County is split by the line ({ND_ZONE_CITE}); the record's point lies on its "
+                          f"{'Mountain' if side == MOUNTAIN else 'Central'} side (USDOT/BTS NTAD time zones; {how})")
+        return MOUNTAIN, (f"{name} County is split by the line ({ND_ZONE_CITE}) and the record gives no point: its zone "
+                          f"is not known; this site assumes Mountain time, the later day's end, so a date read in it "
+                          f"may be an hour later than the source's own clock ({how})")
     return CENTRAL, f"{name} County keeps Central time ({ND_ZONE_CITE}; {how})"

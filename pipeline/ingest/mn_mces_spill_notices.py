@@ -16,21 +16,29 @@ Source
 
 Record rules (one sso record per spill page; the Council's interceptor spills are sanitary sewer overflows)
   - Key: the page's name and the start day ("Eagan-Wastewater-Spill:2026-11-03"); source_url the page (no query).
-  - started_at: the day the Council says it responded ("responded Friday afternoon, May 29"), precision day; the year
-    is the index label's ("Excelsior, May 2026") when its month matches, else the earliest dated heading's. A part of
-    the day ("afternoon") is kept in raw.time_of_day_words and never turned into an hour. The spill's own start is
-    not given apart from the response; raw.start_basis says so.
-  - The spill's own end: only where the text puts the stop on the start day ("contained ... in under an hour" in the
-    first account, "stop the spill ... Thursday evening" in an update, the Thursday on or before that update's date
-    being the start day): raw.spill_stopped_on, precision day. Otherwise unknown; never invented (review 2026-11-14
-    P1-2: a weekday a week later is not the start day).
-  - Signs: when the Council says it placed "Do Not Enter/ Sewage Spill" signs, that is its own advisory. While no update
-    says they will be removed, the record is advisory_active (red while it stands). Once a dated update says they will
-    be (or have been) removed: with a stop day, status ended at the stop day and advice_window_hours carries the
-    Council's window from the end of the stop day to the end of the update's day (red.event; the site's 72-hour caution
-    counts from the stop, review P1-3); with no stop, advisory_lifted ending on the update's day, ended_at_precision
-    "bound". The removal's own day is never given (raw.signs.removal_note). Without signs: ended at the stop day, else
-    unknown with no end. advice_text quotes the signs' wording only (no assurance from the notice, review P1-8).
+  - Three clocks, kept apart (re-review 2026-11-14 P1-2). The response: the day the Council says it responded
+    ("responded Friday afternoon, May 29") is reported_at and raw.responded_on, precision day; the year is the index
+    label's ("Excelsior, May 2026") when its month matches, else the earliest dated heading's. A part of the day
+    ("afternoon") is kept in raw.time_of_day_words and never turned into an hour. The discharge: its start is not
+    given, so started_at stays null (raw.start_basis); the colour runs from the response day. Its stop only where the
+    text gives one ("contained ... in under an hour" in the first account: the response day; "stop the spill ...
+    Thursday evening" in an update: the latest Thursday on or before that update's date, not before the response):
+    raw.spill_stopped_on, precision day. Only a completed, affirmative stop counts ("stopped", "contained", "were able
+    to stop"); a planned, attempted or negated one ("will stop", "could not stop") is no stop (STOP_DONE, STOP_NOT;
+    verification pass 2026-11-15 P1-2). Otherwise unknown; never invented.
+  - The signs: when the Council says it placed "Do Not Enter/ Sewage Spill" signs, that is its own advisory
+    (advisory_active, red while it stands; advice_text quotes the signs only, review P1-8). Signs first given in an
+    update after the response day start the window on that notice's day (raw._advisory_from), never backdated; before
+    it the spill's own clock applies (raw._before_advisory: ended at the stop, else unknown; build/status.py;
+    verification pass 2026-11-15 P1-2), and a removal done after such signs ends the red at the end of that day. "Will be removed" is a
+    removal announced, not one done: the signs stood to the end of that update's day at least (raw._unlisted_since,
+    the end of that local day) and after it the end is not confirmed (raw._end_not_confirmed: hatched, then the
+    unresolved rules), never a lift at the announcement. "Have been removed" with the spill's stop given: status ended
+    at the stop day and advice_window_hours carries the Council's window from the end of the stop day to the end of
+    that update's day (red.event; the site's 72-hour caution counts from the stop, review P1-3). "Have been removed"
+    with no stop: red to the end of that day, then the end is not confirmed, as above. The removal's own day is never
+    given (raw.signs.removal_note, raw.signs.removal_done). Without signs: ended at the stop day, else unknown with
+    no end.
   - Water: "Wastewater reached nearby Mud Pond" gives waterbody_text "Mud Pond" (raw.reached_water true). "No waterbodies
     were impacted" is raw.reached_water false with the Council's words (kept, placed on no water). A water named only
     as nearby or tested and found unaffected ("Bassett Creek and Wirth Lake are nearby", "did not impact the water
@@ -40,14 +48,17 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
     and meta.cities_without_county names it. The street location sentence is kept through the house-number scrub.
   - Operator: discharger_id mn-mces (the Metropolitan Council's row); no plant permit is assigned (an interceptor spill
     is not a plant's discharge).
-  - A listed page that does not read as a notice (an error page: no response day, no dated update) keeps its previous
-    record, and a page that cannot be read fails the run (ok=False, every previous record kept; review P1-4).
+  - A listed page that does not read as a notice (an error page: no response day, no dated update), first seen or
+    not, makes no record and keeps its previous one, and it or a page that cannot be read fails the run (ok=False,
+    every previous record kept; review P1-4, re-review P1-3).
   - Revisions: each page's text hash; a changed page appends {seen_at, sha256, headings} to raw._revisions. A page that
     leaves the list (one-year retention) keeps its record with raw.gone_from_index_since; one whose signs were still up
     gets raw._unlisted_since and raw._end_not_confirmed (hatched: the lifting was never seen). A page that cannot be
     read keeps its previous record. An index that cannot be read writes ok=False and every previous record stays.
-  - Privacy: the pages carry the Council's office contact only; only the parsed text is saved (data/raw), every string
-    through common.strip_personal, scrub_text and the house-number scrub first (scrubbed(); review P1-6).
+  - Privacy: the pages carry the Council's office contact only. data/raw keeps the index and, per page, its title, its
+    dated headings and its text's hash, not the narrative (raw_save_doc); the record's quoted sentences (NARRATIVE_KEYS)
+    and advice go through common.strip_personal, scrub_text, the house-number scrub and the strict scrub with names
+    (scrubbed(); review P1-6, re-review P1-5).
 
 Run from pipeline/:  python -m ingest.mn_mces_spill_notices [--dir saved_dir]   (index.html and the pages by name)
 """
@@ -68,6 +79,7 @@ import requests
 
 import common
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from ingest.generic.fieldmap import scrub_strict_names
 
 SOURCE_ID = "mn-mces-spill-notices"
 INDEX_URL = "https://metrocouncil.org/Wastewater-Water/Services/Interceptor-Services/Spills.aspx"
@@ -104,10 +116,21 @@ NO_WATER = re.compile(r"\bno\s+water\s*bod(?:y|ies)\s+(?:were|was)\s+impacted\b[
 UNAFFECTED = re.compile(rf"did not (?:impact|affect)(?: the water quality of)?\s+(?P<w>{NAME})")
 NEARBY = re.compile(rf"(?P<a>{NAME})(?:\s+and\s+(?P<b>{NAME}))?\s+(?:is|are)\s+nearby")
 STOP = re.compile(r"[^.]*\b(?:stop(?:ped)?|contained|isolated)\b[^.]*\.", re.I)
+# a stop is taken only from a completed, affirmative action ("stopped", "contained", "isolated", "were able to stop"),
+# never from a planned, attempted, hoped-for or negated one ("will stop", "could not stop", "was not contained";
+# verification pass 2026-11-15 P1-2)
+STOP_DONE = re.compile(r"\b(?:stopped|contained|isolated)\b|\b(?:was|were|been)\s+able\s+to\s+stop\b", re.I)
+STOP_NOT = re.compile(r"\b(?:not|never|no|unable|cannot|can['’]?t|couldn['’]?t|didn['’]?t|wasn['’]?t|weren['’]?t|"
+                      r"haven['’]?t|hasn['’]?t|fail(?:ed|s|ing)?|will|would|shall|should|may|might|plan(?:s|ned|ning)?|"
+                      r"expect(?:s|ed|ing)?|attempt(?:s|ed|ing)?|try|tries|tried|trying|working|work|hope(?:s|d)?|"
+                      r"aim(?:s|ed|ing)?|intend(?:s|ed)?|once|if|when)\b", re.I)
 SAME_DAY = re.compile(r"within hours|in under an hour|under an hour|within an hour|same day", re.I)
 SIGNS_UP = re.compile(r"[Ss]igns warning the public\s*[“\"](?P<q>[^”\"]+)[”\"]\s*(?:will be|have been|were)"
                       r"\s+placed")
-SIGNS_DOWN = re.compile(r"\b(?:signs?)\b[^.]*\b(?:will be|have been|were)\s+removed|\bwill be removed\b", re.I)
+SIGNS_DOWN = re.compile(r"\b(?:signs?)\b[^.]*\b(?:will be|have been|has been|were)\s+removed|\bwill be removed\b", re.I)
+# a removal done (the signs are down by the update's day), not one announced for later ("will be removed next week")
+SIGNS_REMOVED = re.compile(r"\bsigns?\b[^.]*\b(?:have been|has been|were|are now)\s+removed\b|\bremoved the\b[^.]*\bsigns?\b",
+                           re.I)
 
 
 def slug(s: str) -> str:
@@ -168,14 +191,49 @@ def page_reads(parsed: dict) -> bool:
 
 
 def scrubbed(o):
-    """Every string with emails, phone numbers, staff names and street house numbers removed (before any save)."""
+    """Every string with emails, phone numbers, staff names, people's names found by their cues ("reported by ...")
+    and street house numbers removed (before any save; fieldmap.scrub_strict_names, re-review 2026-11-14 P1-5)."""
     if isinstance(o, dict):
         return {k: scrubbed(v) for k, v in common.strip_personal(o).items()}
     if isinstance(o, list):
         return [scrubbed(v) for v in o]
     if isinstance(o, str):
-        return common.strip_house_numbers(common.scrub_text(o))
+        return scrub_strict_names(common.strip_house_numbers(common.scrub_text(o)))
     return o
+
+
+# the record's fields that quote the notice's words: scrubbed before the record is written
+# (the revision history's headings and the index label included, carried ones too; verification pass 2026-11-15 P1-5)
+NARRATIVE_KEYS = ("title", "location_text", "spill_stopped_words", "_reached_water_words", "_no_water_reason",
+                  "updates", "signs", "time_of_day_words", "_revisions", "label", "_window_end_words", "end_basis",
+                  "advisory_from_basis")
+
+
+def scrub_narrative(rec: dict) -> dict:
+    """The record with its quoted fields (NARRATIVE_KEYS) and advice scrubbed; applied to every record build() returns,
+    a previous record carried unchanged included, so nothing written before a scrub rule existed is written again."""
+    raw = rec.get("raw") or {}
+    for k in NARRATIVE_KEYS:
+        if k in raw:
+            raw[k] = scrubbed(raw[k])
+    if rec.get("advice_text"):
+        rec["advice_text"] = scrubbed(rec["advice_text"])
+    return rec
+
+
+def raw_save_doc(index: str, pages: dict) -> dict:
+    """What data/raw keeps of a run: the index's list, and per page only its title, its dated headings and the hash of
+    its parsed text (the narrative itself is not kept; the record keeps the scrubbed sentences it uses)."""
+    out = {}
+    for u, p in pages.items():
+        if not p:
+            out[u] = None
+            continue
+        parsed = parse_page(p)
+        out[u] = {"title": parsed["title"], "updates": [{"date": x["date"], "heading": x["heading"]}
+                                                       for x in parsed["updates"]],
+                  "sha256": hashlib.sha256(json.dumps(parsed, sort_keys=True).encode()).hexdigest()}
+    return scrubbed({"index": parse_index(index), "pages": out})
 
 
 def label_city_month(label: str) -> tuple[str | None, int | None, int | None]:
@@ -199,8 +257,9 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
         yr = lab_year if lab_month == mo else (years[0] if years else lab_year)
         if yr:
             start = date(yr, mo, dy)
-            raw["start_basis"] = ("the day the Council says it responded to the spill, the only day its notice "
-                                  "gives; the spill began on that day or before it")
+            raw["responded_on"] = start.isoformat()
+            raw["start_basis"] = ("the spill's start is not given: the Council gives only the day it responded "
+                                  "(reported_at, raw.responded_on); the spill began on that day or before it")
             if m.group("wd") and WEEKDAYS[start.weekday()] != m.group("wd").lower():
                 perr.append(f"the weekday {m.group('wd')} does not fall on {start.isoformat()}")
         else:
@@ -219,7 +278,7 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
     loc = next((s for s in re.split(r"(?<=\.)\s+", intro) if re.search(r"\b(?:occurred|at the intersection|located)\b",
                                                                       s, re.I)), None)
     if loc:
-        raw["location_text"] = common.strip_house_numbers(common.scrub_text(loc))
+        raw["location_text"] = loc
     alltext = " ".join([intro] + [u["text"] for u in updates])
     # the water
     w = REACHED.search(alltext)
@@ -250,16 +309,18 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
         for when, text in sections:
             for sm in STOP.finditer(text):
                 sent = sm.group(0)
+                if not STOP_DONE.search(sent) or STOP_NOT.search(sent):
+                    continue            # planned, attempted or negated: no stop (verification pass P1-2)
                 wd = re.search(r"\b(" + "|".join(WEEKDAYS) + r")\b", sent, re.I)
-                if wd:      # the weekday named, on or before the section's own date (a later week is not the start day)
+                if wd:      # the weekday named: the latest one on or before the section's own date
                     back = (when.weekday() - WEEKDAYS.index(wd.group(1).lower())) % 7
                     on = when - timedelta(days=back)
                 elif SAME_DAY.search(sent) and when == start:
                     on = start
                 else:
                     continue
-                if on == start:
-                    stopped = start
+                if start <= on <= when:      # on the response day or a later day up to the section's own date
+                    stopped = on
                     raw["spill_stopped_words"] = sent.strip()
                     break
             if stopped:
@@ -272,29 +333,65 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
     down = next((u for u in updates if SIGNS_DOWN.search(u["text"])), None)
     status, ended, advice = ("ended" if stopped else "unknown"), (stopped.isoformat() if stopped else None), None
     window_h, window_basis = None, None
+    tz = ZoneInfo(TZ)
+
+    def day_end(d: date) -> datetime:
+        return datetime.combine(d + timedelta(days=1), datetime.min.time(), tz)
     if up:
         quote = up[1].group("q").strip()
         advice = f"The Council's signs at the affected areas: \"{quote}\" (its notice of {up[0]})."
         raw["signs"] = {"wording": quote, "posted_per_notice_of": up[0]}
-        if down:
-            raw["signs"]["removal_announced_on"] = down["date"]
-            raw["signs"]["removal_note"] = ("the update says the signs will be (or have been) removed; the removal's "
-                                            "own day is not given")
-            if stopped:
-                # the spill ended on its day; the Council's window runs on to the end of the day it announced removal
-                tz = ZoneInfo(TZ)
-                stop_end = datetime.combine(stopped + timedelta(days=1), datetime.min.time(), tz)
-                sign_end = datetime.combine(date.fromisoformat(down["date"]) + timedelta(days=1), datetime.min.time(), tz)
-                window_h = max(0.0, (sign_end - stop_end).total_seconds() / 3600)
-                window_basis = (f"the Council's \"{quote}\" signs stood from its notice of {up[0]} until its update of "
-                                f"{down['date']} said they would be removed (to the end of that day)")
-                raw["ended_at_precision"] = "day"
-                raw["end_basis"] = "the Council's account puts the stop on the day it responded"
-            else:
-                status, ended = "advisory_lifted", down["date"]
-                raw["ended_at_precision"] = "bound"
-                raw["end_basis"] = (f"no stop is given; the Council's update of {down['date']} says its signs will be "
-                                    "removed: the window ends with that day")
+        # signs first given in an update after the response day: the Council's window starts on that notice's day,
+        # never backdated to the response; before it the spill's own clock applies (raw._before_advisory, read by
+        # build/status.py; verification pass 2026-11-15 P1-2)
+        late = bool(start) and bool(up[0]) and date.fromisoformat(up[0]) > start
+        if late:
+            raw["_advisory_from"] = up[0]
+            raw["_before_advisory"] = {"status": "ended" if stopped else "unknown",
+                                       "ended_at": stopped.isoformat() if stopped else None,
+                                       "ended_at_precision": "day" if stopped else None}
+            raw["advisory_from_basis"] = (f"the Council's signs are first given in its notice of {up[0]}, after the day "
+                                          f"it responded ({start.isoformat()}): its window starts on that notice's day")
+        done = next((u for u in updates if SIGNS_REMOVED.search(u["text"])), None)
+        if down or done:
+            said = done or down
+            d = date.fromisoformat(said["date"])
+            raw["signs"]["removal_announced_on"] = said["date"]
+            raw["signs"]["removal_done"] = bool(done)
+            raw["signs"]["removal_note"] = (
+                f"the update of {said['date']} says the signs have been removed; the removal's own day is not given, "
+                "only that it was by that day" if done else
+                f"the update of {said['date']} says the signs will be removed: a removal announced, not one done; "
+                "the day they came down is not given")
+        if done and stopped and not late:
+            # the spill ended on its stop day and the signs were down by the update's day: the Council's window runs
+            # from the end of the stop day to the end of that update's day (red.event), the site's caution from the stop
+            # elapsed hours between the two local day-ends, both taken to UTC first (a 23- or 25-hour day across a
+            # daylight-saving change counts as it ran; verification pass 2026-11-15 P2-6)
+            utc = ZoneInfo("UTC")
+            window_h = max(0.0, (day_end(date.fromisoformat(done["date"])).astimezone(utc)
+                                 - day_end(stopped).astimezone(utc)).total_seconds() / 3600)
+            window_basis = (f"the Council's \"{quote}\" signs stood from its notice of {up[0]} until its update of "
+                            f"{done['date']} said they had been removed (to the end of that day)")
+            raw["ended_at_precision"] = "day"
+            raw["end_basis"] = f"the Council's account puts the stop on {stopped.isoformat()}"
+        elif down or done:
+            # the signs were standing on the update's day; after it their removal (announced, or done with the spill's
+            # own stop not given) is not confirmed: red to the end of that day, then "end not confirmed" (hatched),
+            # never a lift at the announcement (re-review 2026-11-14 P1-2)
+            said = done or down
+            status, ended = "advisory_active", None
+            raw["_unlisted_since"] = day_end(date.fromisoformat(said["date"])).astimezone(ZoneInfo("UTC")) \
+                .strftime("%Y-%m-%dT%H:%M:%SZ")
+            if not (done and stopped):
+                raw["_end_not_confirmed"] = True
+            raw["_window_end_words"] = (f"the Council's update of {said['date']} says its signs "
+                                        f"{'have been' if done else 'will be'} removed; the day they came down is "
+                                        "not given")
+            raw["end_basis"] = (f"the Council's signs stood to the end of {said['date']} at least; their removal day "
+                                "is not given" + ("" if stopped else ", nor the spill's own stop")
+                                + ("; they were down by then" if done and stopped else "")
+                                + (f"; the spill itself stopped on {stopped.isoformat()}" if stopped else ""))
         else:
             status, ended = "advisory_active", None
             raw["end_basis"] = "the Council's signs stand until an update says they are removed"
@@ -302,7 +399,7 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
                 raw["end_basis"] += f"; the spill itself stopped on {stopped.isoformat()}"
     elif stopped:
         raw["ended_at_precision"] = "day"
-        raw["end_basis"] = "the Council's account puts the stop on the day it responded"
+        raw["end_basis"] = f"the Council's account puts the stop on {stopped.isoformat()}"
     raw["updates"] = [{"date": u["date"], "heading": u["heading"]} for u in updates]
     sha = hashlib.sha256(json.dumps(parsed, sort_keys=True).encode()).hexdigest()
     raw["page_sha256"] = sha
@@ -317,10 +414,15 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
     name = urlsplit(item["url"]).path.rsplit("/", 1)[-1].removesuffix(".aspx")
     srid = f"{name}:{start.isoformat()}" if start else name
     newest = max((u["date"] for u in updates), default=None)
+    for k in NARRATIVE_KEYS:
+        if k in raw:
+            raw[k] = scrubbed(raw[k])
+    if advice:
+        advice = scrubbed(advice)
     return event(
         source_id=SOURCE_ID, source_record_id=srid, event_type="sso", status=status,
         discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER_NAME, waterbody_text=waterbody,
-        started_at=start.isoformat() if start else None, ended_at=ended, time_precision="day",
+        started_at=None, reported_at=start.isoformat() if start else None, ended_at=ended, time_precision="day",
         source_updated_at=newest, fetched_at=fetched, material="untreated sewage", authority=AUTHORITY,
         advice_text=advice, advice_window_hours=window_h, advice_window_basis=window_basis, source_url=item["url"],
         raw=raw, parse_error="; ".join(perr) or None)
@@ -342,11 +444,13 @@ def build(index_page: str, pages: dict[str, str | None], fetched: str, previous:
             continue
         parsed = parse_page(page)
         if not page_reads(parsed):
-            if it["url"] in prev_by_url:            # a page that is not the notice (an error page): keep the record
+            # a page that is not the notice (an error page), first seen or not: never a record of its own; the
+            # previous record stays and the run fails (re-review 2026-11-14 P1-3)
+            if it["url"] in prev_by_url:
                 p = prev_by_url[it["url"]]
                 out[p["event_id"]] = p
-                unread.append(it["url"])
-                continue
+            unread.append(it["url"])
+            continue
         rec = build_one(it, parsed, fetched, prev_by_url.get(it["url"]))
         if not rec["raw"].get("county"):
             no_county.append(rec["raw"].get("city"))
@@ -364,7 +468,8 @@ def build(index_page: str, pages: dict[str, str | None], fetched: str, previous:
             raw["_end_not_confirmed"] = True
         out[p["event_id"]] = p
         kept += 1
-    recs = sorted(out.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
+    recs = sorted((scrub_narrative(json.loads(json.dumps(r))) for r in out.values()), key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r["event_id"]),
+                  reverse=True)
     meta = {"registry_ids": [SOURCE_ID], "url": INDEX_URL, "on_index": len(items), "pages_unread": unread,
             "kept_from_previous": kept, "cities_without_county": sorted({c for c in no_county if c}),
             "advisory_active": sum(1 for r in recs if r["status"] == "advisory_active"),
@@ -403,9 +508,7 @@ def main(argv=None) -> int:
                     pages[it["url"]] = fetch(it["url"])
                 except requests.RequestException:
                     pages[it["url"]] = None
-            save_raw(SOURCE_ID, json.dumps(scrubbed({"index": parse_index(index),
-                                                     "pages": {u: (parse_page(p) if p else None)
-                                                               for u, p in pages.items()}}), indent=1), "json")
+            save_raw(SOURCE_ID, json.dumps(raw_save_doc(index, pages), indent=1), "json")
         recs, meta = build(index, pages, fetched, prev)
         if meta["pages_unread"]:
             raise RuntimeError(f"spill pages not read: {', '.join(meta['pages_unread'])}")
