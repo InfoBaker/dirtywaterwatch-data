@@ -882,3 +882,15 @@ def test_a_lake_located_on_a_creek_is_the_whole_lake(tmp_path, monkeypatch, area
     assert T.hab_water("Lake Catherine - Spencer Bay *") == ("Lake Catherine", "Spencer Bay")
     assert T.hab_water("Sample River near Exampleville") == ("Sample River", "near Exampleville")
     assert T.hab_parts("Lake Specimen near Exampleville") == ("Lake Specimen", None, "near Exampleville")
+
+
+def test_a_standing_advisory_with_no_cited_point_is_listed_by_the_build(tmp_path, monkeypatch):
+    """Verification P1-1: a standing bloom advisory with no cited point (as Mom's Lake) is never given one, and the
+    AR-live status build lists it among the state's unplaced events rather than dropping it."""
+    rows = [{"waterbody": "Example Pond", "county": "Sample County", "area": "Exampleville, AR",
+             "date": "September 22, 2026", "lifted": ""}]
+    st = _ar_status(tmp_path, monkeypatch, rows, None)
+    eid = "ar-deq-hab-advisories:example-pond-20260922"
+    assert eid in st["unplaced_events"] and st["counts"]["unplaced"] == 1
+    rec = json.loads((tmp_path / "events" / f"{H.SOURCE_ID}.json").read_text())["records"][0]
+    assert rec["status"] == "advisory_active" and rec.get("lat") is None
