@@ -469519,5 +469519,2965 @@
    "mt"
   ],
   "epa_issued_permits": []
+ },
+ {
+  "id": "wy-casper",
+  "name": "City of Casper",
+  "short_name": "City of Casper",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021920",
+  "npdes_permits": [
+   "WY0021920"
+  ],
+  "receiving_waters": [
+   "North Platte River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Casper"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Sam H. Hobbs Regional Ww Facility (Prev. Casper WWTF) (WY0021920).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-casper"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-cheyenne",
+  "name": "Cheyenne Board of Public Utilities",
+  "short_name": "Cheyenne Board of Public Utilities",
+  "legal_form": "authority",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0022381",
+  "npdes_permits": [
+   "WY0022381",
+   "WY0022934"
+  ],
+  "receiving_waters": [
+   "Crow Creek",
+   "Crow Creek (2C), South Platte River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cheyenne"
+  ],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: Crow Creek Water Reclamation Facility (WY0022381), Dry Creek Water Reclamation Facility (WY0022934). Second major permit WY0022934 (also Cheyenne BOPU).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-cheyenne"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-city-of-cody",
+  "name": "City of Cody",
+  "short_name": "City of Cody",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020451",
+  "npdes_permits": [
+   "WY0020451"
+  ],
+  "receiving_waters": [
+   "Shoshone River (2AB), Big Horn River basin.",
+   "Shoshone River (2AB), Big Horn River basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cody"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Cody Wastewater Lagoon (WY0020451).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-city-of-cody"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-city-of-douglas",
+  "name": "City of Douglas",
+  "short_name": "City of Douglas",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020109",
+  "npdes_permits": [
+   "WY0020109",
+   "WY0056006"
+  ],
+  "receiving_waters": [
+   "North Platte River (2AB), North Platte River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Douglas"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Douglas Wastewater Lagoon (WY0020109). EPA records this permit's permittee as \"Douglas, Town of\" (Douglas is a city) and its facility under a name that reads as a person's, which is not shown; filed with the city's row.",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-city-of-douglas"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-city-of-green-river",
+  "name": "City of Green River",
+  "short_name": "City of Green River",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020443",
+  "npdes_permits": [
+   "WY0020443"
+  ],
+  "receiving_waters": [
+   "Green River (2AB), Green River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Green River"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Green River Wastewater Treatment Plant (WY0020443).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-city-of-green-river"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-city-of-lander",
+  "name": "City of Lander",
+  "short_name": "City of Lander",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020389",
+  "npdes_permits": [
+   "WY0020389"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Lander Wastewater Lagoon (WY0020389). EPA's permit status: WY0020389 EXP (EXP expired; a permit can be administratively continued or renewed after EPA's file was written, so the row is kept).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-city-of-lander"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-city-of-newcastle",
+  "name": "City of Newcastle",
+  "short_name": "City of Newcastle",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0096610",
+  "npdes_permits": [
+   "WY0096610"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Newcastle"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: City of Newcastle Wastewater Treatment Facility (WY0096610). EPA's permit status: WY0096610 EXP (EXP expired; a permit can be administratively continued or renewed after EPA's file was written, so the row is kept).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-city-of-newcastle"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-city-of-powell",
+  "name": "City of Powell",
+  "short_name": "City of Powell",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020648",
+  "npdes_permits": [
+   "WY0020648"
+  ],
+  "receiving_waters": [
+   "Bitter Creek (2AB), Big Horn River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Powell"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Powell Wastewater Lagoon (WY0020648).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-city-of-powell"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-city-of-rawlins",
+  "name": "City of Rawlins",
+  "short_name": "City of Rawlins",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020427",
+  "npdes_permits": [
+   "WY0020427"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: City of Rawlins Wastewater Treatment Facility (WY0020427). EPA's permit status: WY0020427 EXP (EXP expired; a permit can be administratively continued or renewed after EPA's file was written, so the row is kept).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-city-of-rawlins"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-city-of-torrington",
+  "name": "City of Torrington",
+  "short_name": "City of Torrington",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020231",
+  "npdes_permits": [
+   "WY0020231"
+  ],
+  "receiving_waters": [
+   "North Platte River (2AB), North Platte River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Torrington"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Torrington Wastewater Lagoons (WY0020231).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-city-of-torrington"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-city-of-worland",
+  "name": "City of Worland",
+  "short_name": "City of Worland",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020176",
+  "npdes_permits": [
+   "WY0020176"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Worland Wastewater Lagoon (WY0020176).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-city-of-worland"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-cv-laramie-mhp-llc",
+  "name": "CV Laramie MHP, LLC",
+  "short_name": "CV Laramie MHP, LLC",
+  "legal_form": "mobile-home park",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021954",
+  "npdes_permits": [
+   "WY0021954"
+  ],
+  "receiving_waters": [
+   "Laramie River (2AB) via an unnamed drainage (3B),"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Laramie"
+  ],
+  "notes": "Privately owned. Owner: EPA ICIS-NPDES permit name. Plants: Country Meadows LLC (WY0021954). EPA records the facility as Country Meadows; the permittee is CV Laramie MHP, LLC.",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-cv-laramie-mhp-llc"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-evanston",
+  "name": "City of Evanston",
+  "short_name": "City of Evanston",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020095",
+  "npdes_permits": [
+   "WY0020095"
+  ],
+  "receiving_waters": [
+   "Bear River",
+   "Yellow Creek (2C), Bear River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Evanston"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Evanston WWTF (WY0020095).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-evanston"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-fort-bridger-sewer-district",
+  "name": "Fort Bridger Sewer District",
+  "short_name": "Fort Bridger Sewer District",
+  "legal_form": "special district",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0022071",
+  "npdes_permits": [
+   "WY0022071"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Fort Bridger Sewer District (WY0022071).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-fort-bridger-sewer-district"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-gillette",
+  "name": "City of Gillette",
+  "short_name": "City of Gillette",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020125",
+  "npdes_permits": [
+   "WY0020125"
+  ],
+  "receiving_waters": [
+   "Donkey Creek",
+   "Stonepile Creek (3B), tributary to Donkey Creek (3"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Gillette"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Gillette WWTF (WY0020125).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-gillette"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-grand-targhee-resort-gt-acquisitions-i-llc",
+  "name": "Grand Targhee Resort - GT Acquisitions I, LLC",
+  "short_name": "Grand Targhee Resort - GT Acquisitions I, LLC",
+  "legal_form": "campground or resort",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0024708",
+  "npdes_permits": [
+   "WY0024708"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Privately owned. Owner: EPA's permittee as recorded (private-utility candidates file).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-grand-targhee-resort-gt-acquisitions-i-llc"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-hoy-mobile-home-park",
+  "name": "Hoy Mobile Home Park",
+  "short_name": "Hoy Mobile Home Park",
+  "legal_form": "mobile-home park",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0048488",
+  "npdes_permits": [
+   "WY0048488"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Privately owned. Owner: EPA ICIS-NPDES facility name (the owning body is not in the file).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-hoy-mobile-home-park"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-jackson",
+  "name": "Town of Jackson",
+  "short_name": "Town of Jackson",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021458",
+  "npdes_permits": [
+   "WY0021458"
+  ],
+  "receiving_waters": [
+   "Flat Creek",
+   "Snake River",
+   "Snake River (2AB) via Barrow pond & unnamed habita"
+  ],
+  "water_slugs": [],
+  "outfall_count": 6,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 6 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Jackson"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Jackson Wastewater Lagoon (WY0021458).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-jackson"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-kemmerer-diamondville-joint-powers-board",
+  "name": "Kemmerer-Diamondville Joint Powers Board",
+  "short_name": "Kemmerer-Diamondville Joint Powers Board",
+  "legal_form": "authority",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020320",
+  "npdes_permits": [
+   "WY0020320"
+  ],
+  "receiving_waters": [
+   "Hams Fork River (2AB), Green River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: Kemmerer Wastewater Treatment (WY0020320).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-kemmerer-diamondville-joint-powers-board"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-laramie",
+  "name": "City of Laramie",
+  "short_name": "City of Laramie",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0022209",
+  "npdes_permits": [
+   "WY0022209",
+   "WYR001500"
+  ],
+  "receiving_waters": [
+   "Laramie River",
+   "unnamed ditch (3B), tributary to Laramie River (2A"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Laramie"
+  ],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: City of Laramie Wastewater Treatment Plant (WYR001500), Laramie Wastewater Treatment (WY0022209). WYR001500 is a storm-water coverage at the plant site, not a sewage outfall.",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-laramie"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-meadow-park-village-homeowners-association",
+  "name": "Meadow Park Village Homeowners Association",
+  "short_name": "Meadow Park Village Homeowners Association",
+  "legal_form": "homeowners' association",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0031348",
+  "npdes_permits": [
+   "WY0031348"
+  ],
+  "receiving_waters": [
+   "Chapman Ditch via Simms, Blight & Turner irrigatio"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Evanston"
+  ],
+  "notes": "Privately owned. Owner: EPA ICIS-NPDES permit name. Plants: Meadow Park Village WWTF (WY0031348).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-meadow-park-village-homeowners-association"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-national-park-service-yellowstone-national-park-canyon-village",
+  "name": "National Park Service, Yellowstone National Park (Canyon Village)",
+  "short_name": "National Park Service, Yellowstone National Park (Canyon Village)",
+  "legal_form": "federal facility",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0023442",
+  "npdes_permits": [
+   "WY0023442"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: Canyon Village WWTF (WY0023442). Yellowstone is land of exclusive federal jurisdiction, where EPA issues NPDES permits; this permit's number is a state one, so the issuing authority was not settled.",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-national-park-service-yellowstone-national-park-canyon-village"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-northeast-wyoming-regional-airport",
+  "name": "Northeast Wyoming Regional Airport",
+  "short_name": "Northeast Wyoming Regional Airport",
+  "legal_form": "authority",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0032522",
+  "npdes_permits": [
+   "WY0032522"
+  ],
+  "receiving_waters": [
+   "Little Rawhide Creek (3B), Little Powder River Bas"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Gillette"
+  ],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: Gillette Campbell County Airport (WY0032522).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-northeast-wyoming-regional-airport"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-pilot-company",
+  "name": "Pilot Company",
+  "short_name": "Pilot Company",
+  "legal_form": "business or industrial",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0035700",
+  "npdes_permits": [
+   "WY0035700"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Evanston"
+  ],
+  "notes": "Privately owned. Owner: EPA's permittee as recorded (private-utility candidates file).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-pilot-company"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-pilot-travel-centers-llc",
+  "name": "Pilot Travel Centers LLC",
+  "short_name": "Pilot Travel Centers LLC",
+  "legal_form": "business or industrial",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0096580",
+  "npdes_permits": [
+   "WY0096580"
+  ],
+  "receiving_waters": [
+   "Sugar Creek (3B)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Rawlins"
+  ],
+  "notes": "Privately owned. Owner: EPA ICIS-NPDES permit name. Plants: Pilot Travel Centers, LLC (Rawlins) (WY0096580).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-pilot-travel-centers-llc"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-powder-horn-ranch-llc",
+  "name": "Powder Horn Ranch, LLC",
+  "short_name": "Powder Horn Ranch, LLC",
+  "legal_form": "business or industrial",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0036251",
+  "npdes_permits": [
+   "WY0036251"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Sheridan"
+  ],
+  "notes": "Privately owned. Owner: EPA's permittee as recorded (private-utility candidates file).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-powder-horn-ranch-llc"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-regency-of-wyoming-inc",
+  "name": "Regency of Wyoming, Inc.",
+  "short_name": "Regency of Wyoming, Inc.",
+  "legal_form": "business or industrial",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0022128",
+  "npdes_permits": [
+   "WY0022128"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Privately owned. Owner: EPA's permittee as recorded (private-utility candidates file).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-regency-of-wyoming-inc"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-riverton",
+  "name": "City of Riverton",
+  "short_name": "City of Riverton",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020672",
+  "npdes_permits": [
+   "WY0020672"
+  ],
+  "receiving_waters": [
+   "Wind River",
+   "Wind River (2AB)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Riverton"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Riverton WWTF (WY0020672).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-riverton"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-rock-springs",
+  "name": "City of Rock Springs",
+  "short_name": "City of Rock Springs",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0022357",
+  "npdes_permits": [
+   "WY0022357"
+  ],
+  "receiving_waters": [
+   "Bitter Creek",
+   "Bitter Creek (2C), Green River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Rock Springs"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Rock Springs Water Reclamation Facility (WY0022357).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-rock-springs"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-sewage-plant-permit-wy0028045",
+  "name": "Sewage plant, permit WY0028045",
+  "short_name": "Sewage plant, permit WY0028045",
+  "legal_form": "campground or resort",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0028045",
+  "npdes_permits": [
+   "WY0028045"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Privately owned. Owner: EPA gives no name that can be shown.",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-sewage-plant-permit-wy0028045"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-sheridan",
+  "name": "City of Sheridan",
+  "short_name": "City of Sheridan",
+  "legal_form": "city",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020010",
+  "npdes_permits": [
+   "WY0020010",
+   "WY0035661"
+  ],
+  "receiving_waters": [
+   "Goose Creek",
+   "Goose Creek (2AB), Tongue River Basin",
+   "Big Goose Creek (2AB), Tongue River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 4 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Sheridan"
+  ],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: City's Raw Water Intake Facility (WY0035661), Sheridan Wastewater Treatment (WY0020010). WY0035661 is the city's raw water intake (EPA lists it with a sewage code); not a sewage plant.",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-sheridan"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-sheridan-county-school-district-1",
+  "name": "Sheridan County School District #1",
+  "short_name": "Sheridan County School District #1",
+  "legal_form": "special district",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0056308",
+  "npdes_permits": [
+   "WY0056308"
+  ],
+  "receiving_waters": [
+   "Jackson Creek (2AB), Tongue River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Bighorn"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Sheridan County School District #1, Bighorn School Wastewater System Drainage (WY0056308).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-sheridan-county-school-district-1"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-st-stephens-indian-mission-inc",
+  "name": "St. Stephens Indian Mission, Inc.",
+  "short_name": "St. Stephens Indian Mission, Inc.",
+  "legal_form": "institution",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WYG589103",
+  "npdes_permits": [
+   "WYG589103"
+  ],
+  "receiving_waters": [
+   "Little Wind River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "A permit EPA Region 8 issues (the Wind River Reservation, where the state program does not apply): the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its sewer overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); the extracts of 2026-11-14 hold no Wyoming report, and list the Fort Washakie lagoon's collection system. No public notice duty was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Saint Stephens"
+  ],
+  "notes": "Privately owned. Owner: the permittee's own name (EPA's spelling in the notes). Plants: St. Stephens Indian Mission, INC. (WYG589103).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-st-stephens-indian-mission-inc"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": [
+   "WYG589103"
+  ]
+ },
+ {
+  "id": "wy-ta-operating-llc-travelcenters-of-america",
+  "name": "TA Operating LLC (TravelCenters of America)",
+  "short_name": "TA Operating LLC (TravelCenters of America)",
+  "legal_form": "business or industrial",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0036153",
+  "npdes_permits": [
+   "WY0036153"
+  ],
+  "receiving_waters": [
+   "A completely contained, created wetland (4A), Gree"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fort Bridger"
+  ],
+  "notes": "Privately owned. Owner: the permittee's own name (EPA's spelling in the notes). Plants: Ft. Bridger Travel Stop #188 (WY0036153).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-ta-operating-llc-travelcenters-of-america"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-tallgrass-midstream-llc",
+  "name": "Tallgrass Midstream, LLC",
+  "short_name": "Tallgrass Midstream, LLC",
+  "legal_form": "business or industrial",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0056227",
+  "npdes_permits": [
+   "WY0056227"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Privately owned. Owner: EPA's permittee as recorded (private-utility candidates file).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-tallgrass-midstream-llc"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-the-viking-resort-llc-trailhead-lodge",
+  "name": "The Viking Resort LLC (Trailhead Lodge)",
+  "short_name": "The Viking Resort LLC (Trailhead Lodge)",
+  "legal_form": "campground or resort",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0052451",
+  "npdes_permits": [
+   "WY0052451"
+  ],
+  "receiving_waters": [
+   "Unnamed perennial stream (3B) tributary to South F"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Laramie"
+  ],
+  "notes": "Privately owned. Owner: the permittee's own name (EPA's spelling in the notes). Plants: The Viking Resort LLC Dba Trailhead Lodge (WY0052451).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-the-viking-resort-llc-trailhead-lodge"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-albin",
+  "name": "Town of Albin",
+  "short_name": "Town of Albin",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0097033",
+  "npdes_permits": [
+   "WY0097033"
+  ],
+  "receiving_waters": [
+   "Unnamed tributary, South Platte River Basin."
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Albin"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Town of Albin Lagoon (WY0097033).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-albin"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-alpine",
+  "name": "Town of Alpine",
+  "short_name": "Town of Alpine",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0035611",
+  "npdes_permits": [
+   "WY0035611"
+  ],
+  "receiving_waters": [
+   "Snake River (class 2AB) during low stream flows, o"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Town of Alpine Wastewater Facility (WY0035611).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-alpine"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-baggs",
+  "name": "Town of Baggs",
+  "short_name": "Town of Baggs",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0022888",
+  "npdes_permits": [
+   "WY0022888"
+  ],
+  "receiving_waters": [
+   "Little Snake River (2AB) via Ledford Slough (2C)",
+   "Ledford Slough (2C), Little Snake River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Baggs"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Baggs Wastewater Lagoons (WY0022888).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-baggs"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-bairoil",
+  "name": "Town of Bairoil",
+  "short_name": "Town of Bairoil",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021075",
+  "npdes_permits": [
+   "WY0021075"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Bairoil Wastewater Lagoon (WY0021075).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-bairoil"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-basin",
+  "name": "Town of Basin",
+  "short_name": "Town of Basin",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020028",
+  "npdes_permits": [
+   "WY0020028"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: Basin Wastewater Lagoon (WY0020028).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-basin"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-bear-river",
+  "name": "Town of Bear River",
+  "short_name": "Town of Bear River",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0031712",
+  "npdes_permits": [
+   "WY0031712"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Town of Bear River Wastewater Lagoons (WY0031712).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-bear-river"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-big-piney",
+  "name": "Town of Big Piney",
+  "short_name": "Town of Big Piney",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020133",
+  "npdes_permits": [
+   "WY0020133"
+  ],
+  "receiving_waters": [
+   "North Piney Creek (2AB), Green River Basin",
+   "Unnamed irrigation ditch (class 4A), tributary to"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 5 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Big Piney"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Big Piney Wastewater Lagoon (WY0020133).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-big-piney"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-buffalo",
+  "name": "Town of Buffalo",
+  "short_name": "Town of Buffalo",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021024",
+  "npdes_permits": [
+   "WY0021024"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Buffalo WWTP (WY0021024).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-buffalo"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-burlington",
+  "name": "Town of Burlington",
+  "short_name": "Town of Burlington",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0034606",
+  "npdes_permits": [
+   "WY0034606",
+   "WY0096512"
+  ],
+  "receiving_waters": [
+   "Greybull River (2AB) via Beck-Allen Canal (4A)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: Burlington Wastewater Lagoon (WY0034606), Burlington Wastewater Lagoons (WY0096512).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-burlington"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-burns",
+  "name": "Town of Burns",
+  "short_name": "Town of Burns",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021652",
+  "npdes_permits": [
+   "WY0021652"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Burns Wastewater Lagoons (WY0021652). EPA's permit status: WY0021652 EXP (EXP expired; a permit can be administratively continued or renewed after EPA's file was written, so the row is kept).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-burns"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-byron",
+  "name": "Town of Byron",
+  "short_name": "Town of Byron",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020281",
+  "npdes_permits": [
+   "WY0020281"
+  ],
+  "receiving_waters": [
+   "Shoshone River (2AB), via an intermittent channel"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Byron Wastewater Lagoon (WY0020281).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-byron"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-clearmont",
+  "name": "Town of Clearmont",
+  "short_name": "Town of Clearmont",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0022063",
+  "npdes_permits": [
+   "WY0022063"
+  ],
+  "receiving_waters": [
+   "Clear Creek (2AB), Powder River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Clearmont"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Clearmont Wastewater Lagoons (WY0022063).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-clearmont"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-cokeville",
+  "name": "Town of Cokeville",
+  "short_name": "Town of Cokeville",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021032",
+  "npdes_permits": [
+   "WY0021032"
+  ],
+  "receiving_waters": [
+   "Bear River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Cokeville"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Cokeville Wastewater Treatment Plant (WY0021032).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-cokeville"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-dayton",
+  "name": "Town of Dayton",
+  "short_name": "Town of Dayton",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020435",
+  "npdes_permits": [
+   "WY0020435"
+  ],
+  "receiving_waters": [
+   "Tongue River (2AB), Tongue River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Dayton"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Town of Dayton Wastewater Treatment Plant (WY0020435).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-dayton"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-deaver",
+  "name": "Town of Deaver",
+  "short_name": "Town of Deaver",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021580",
+  "npdes_permits": [
+   "WY0021580"
+  ],
+  "receiving_waters": [
+   "Sage Creek (2AB) via an irrigation drain (4A), Big"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Deaver Wastewater Lagoon (WY0021580).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-deaver"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-dixon",
+  "name": "Town of Dixon",
+  "short_name": "Town of Dixon",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021938",
+  "npdes_permits": [
+   "WY0021938"
+  ],
+  "receiving_waters": [
+   "Little Snake River (2AB) via an unnamed slough (3B"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Town of Dixon Wastewater Treatment Lagoon (WY0021938).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-dixon"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-dubois",
+  "name": "Town of Dubois",
+  "short_name": "Town of Dubois",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020834",
+  "npdes_permits": [
+   "WY0020834"
+  ],
+  "receiving_waters": [
+   "Wind River (2AB)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Dubois Wastewater Lagoon (WY0020834).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-dubois"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-encampment",
+  "name": "Town of Encampment",
+  "short_name": "Town of Encampment",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020591",
+  "npdes_permits": [
+   "WY0020591"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Encampment Wastewater Lagoon (WY0020591).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-encampment"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-fort-laramie",
+  "name": "Town of Fort Laramie",
+  "short_name": "Town of Fort Laramie",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020567",
+  "npdes_permits": [
+   "WY0020567"
+  ],
+  "receiving_waters": [
+   "North Platte River (2AB)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Fort Laramie"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Fort Laramie Wastewater Lagoon (WY0020567).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-fort-laramie"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-glenrock",
+  "name": "Town of Glenrock",
+  "short_name": "Town of Glenrock",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020630",
+  "npdes_permits": [
+   "WY0020630"
+  ],
+  "receiving_waters": [
+   "North Platte River (2AB)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Glenrock"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Glenrock Wastewater Lagoon (WY0020630).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-glenrock"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-greybull",
+  "name": "Town of Greybull",
+  "short_name": "Town of Greybull",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020583",
+  "npdes_permits": [
+   "WY0020583"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Greybull Wastewater Lagoon (WY0020583).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-greybull"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-guernsey",
+  "name": "Town of Guernsey",
+  "short_name": "Town of Guernsey",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021831",
+  "npdes_permits": [
+   "WY0021831"
+  ],
+  "receiving_waters": [
+   "North Platte River (2AB), North Platte River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Guernsey Wastewater Lagoon (WY0021831).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-guernsey"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-hanna",
+  "name": "Town of Hanna",
+  "short_name": "Town of Hanna",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020745",
+  "npdes_permits": [
+   "WY0020745"
+  ],
+  "receiving_waters": [
+   "Big Ditch (4A), North Platte River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Hanna"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Hanna Wastewater Lagoon System (WY0020745).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-hanna"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-hartville",
+  "name": "Town of Hartville",
+  "short_name": "Town of Hartville",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021440",
+  "npdes_permits": [
+   "WY0021440"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Hartville Wastewater Treatment (WY0021440). EPA's permit status: WY0021440 EXP (EXP expired; a permit can be administratively continued or renewed after EPA's file was written, so the row is kept).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-hartville"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-hudson",
+  "name": "Town of Hudson",
+  "short_name": "Town of Hudson",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020664",
+  "npdes_permits": [
+   "WY0020664"
+  ],
+  "receiving_waters": [
+   "Popo Agie River (2AB), Wind River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Hudson Wastewater Lagoon (WY0020664).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-hudson"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-kaycee",
+  "name": "Town of Kaycee",
+  "short_name": "Town of Kaycee",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021733",
+  "npdes_permits": [
+   "WY0021733"
+  ],
+  "receiving_waters": [
+   "Middle Fork Powder River (Class 2AB), Powder River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kaycee"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Kaycee WWTF (WY0021733).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-kaycee"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-labarge",
+  "name": "Town of LaBarge",
+  "short_name": "Town of LaBarge",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0022080",
+  "npdes_permits": [
+   "WY0022080"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Labarge Wastewater Lagoon (WY0022080).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-labarge"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-lovell",
+  "name": "Town of Lovell",
+  "short_name": "Town of Lovell",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020061",
+  "npdes_permits": [
+   "WY0020061"
+  ],
+  "receiving_waters": [
+   "Shoshone River (2AB), via unnamed ditch, Big Horn"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Lovell"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Lovell Wastewater Lagoons (WY0020061).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-lovell"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-lyman",
+  "name": "Town of Lyman",
+  "short_name": "Town of Lyman",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020117",
+  "npdes_permits": [
+   "WY0020117"
+  ],
+  "receiving_waters": [
+   "unnamed tributary (3B) of Lyman Draw (3B), tributa"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 5 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Lyman Wastewater Lagoon (WY0020117).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-lyman"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-manderson",
+  "name": "Town of Manderson",
+  "short_name": "Town of Manderson",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0052442",
+  "npdes_permits": [
+   "WY0052442"
+  ],
+  "receiving_waters": [
+   "Nowood River (2AB), Big Horn River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Manderson Sewer Project (WY0052442).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-manderson"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-marbleton",
+  "name": "Town of Marbleton",
+  "short_name": "Town of Marbleton",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021997",
+  "npdes_permits": [
+   "WY0021997"
+  ],
+  "receiving_waters": [
+   "Muddy Creek, tributary to the Green River, Green R",
+   "Potable (well) water supply for the town of Marble"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Marbleton"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Marbleton Wastewater Lagoon (WY0021997).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-marbleton"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-meeteetse",
+  "name": "Town of Meeteetse",
+  "short_name": "Town of Meeteetse",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020044",
+  "npdes_permits": [
+   "WY0020044"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Meeteetse Wastewater Lagoons (WY0020044).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-meeteetse"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-moorcroft",
+  "name": "Town of Moorcroft",
+  "short_name": "Town of Moorcroft",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021741",
+  "npdes_permits": [
+   "WY0021741"
+  ],
+  "receiving_waters": [
+   "Rush Creek (3B) tributary to Belle Fourche  (2ABWW"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 5 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Moorcroft"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Moorcroft Wastewater Lagoon (WY0021741).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-moorcroft"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-mountain-view",
+  "name": "Town of Mountain View",
+  "short_name": "Town of Mountain View",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0022896",
+  "npdes_permits": [
+   "WY0022896"
+  ],
+  "receiving_waters": [
+   "Smiths Fork River (2AB), Green River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Mountain View Wastewater Lagoon (WY0022896).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-mountain-view"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-pine-bluffs",
+  "name": "Town of Pine Bluffs",
+  "short_name": "Town of Pine Bluffs",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0032212",
+  "npdes_permits": [
+   "WY0032212"
+  ],
+  "receiving_waters": [
+   "Spring Creek (class 2AB), tributary to Lodgepole C"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Pine Bluffs Wastewater Lagoon (WY0032212).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-pine-bluffs"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-pine-haven",
+  "name": "Town of Pine Haven",
+  "short_name": "Town of Pine Haven",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0095907",
+  "npdes_permits": [
+   "WY0095907"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Pinehaven WWTP (WY0095907). EPA's permit status: WY0095907 EXP (EXP expired; a permit can be administratively continued or renewed after EPA's file was written, so the row is kept).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-pine-haven"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-pinedale",
+  "name": "Town of Pinedale",
+  "short_name": "Town of Pinedale",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020656",
+  "npdes_permits": [
+   "WY0020656"
+  ],
+  "receiving_waters": [
+   "New Fork River (2AB) via Pine Creek (2AB), Green R",
+   "Pine Creek (2AB), Green River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pinedale"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Pinedale Wastewater Lagoons (WY0020656).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-pinedale"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-ranchester",
+  "name": "Town of Ranchester",
+  "short_name": "Town of Ranchester",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0022161",
+  "npdes_permits": [
+   "WY0022161"
+  ],
+  "receiving_waters": [
+   "Tongue River (2AB)"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 5 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ranchester"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Ranchester Wastewater Lagoons (WY0022161).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-ranchester"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-riverside",
+  "name": "Town of Riverside",
+  "short_name": "Town of Riverside",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0032662",
+  "npdes_permits": [
+   "WY0032662"
+  ],
+  "receiving_waters": [
+   "Badger Creek (3B), tributary to the Encampment Riv"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Riverside Waste Water Treatment Facility (WY0032662). EPA's permit status: WY0032662 EXP (EXP expired; a permit can be administratively continued or renewed after EPA's file was written, so the row is kept).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-riverside"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-rock-river",
+  "name": "Town of Rock River",
+  "short_name": "Town of Rock River",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020184",
+  "npdes_permits": [
+   "WY0020184"
+  ],
+  "receiving_waters": [
+   "Rock Creek (2AB) via unnamed gully, North Platte R"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Rock River Wastewater Lagoon (WY0020184).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-rock-river"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-saratoga",
+  "name": "Town of Saratoga",
+  "short_name": "Town of Saratoga",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021491",
+  "npdes_permits": [
+   "WY0021491"
+  ],
+  "receiving_waters": [
+   "North Platte River (1) via an unnamed ditch (3B) a",
+   "North Platte River (class 1) via Cadwell Slough (c"
+  ],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 5 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Saratoga Wastewater Lagoons (WY0021491).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-saratoga"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-shoshoni",
+  "name": "Town of Shoshoni",
+  "short_name": "Town of Shoshoni",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0021890",
+  "npdes_permits": [
+   "WY0021890"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Shoshoni Wastewater Lagoons (WY0021890).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-shoshoni"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-sinclair",
+  "name": "Town of Sinclair",
+  "short_name": "Town of Sinclair",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020397",
+  "npdes_permits": [
+   "WY0020397"
+  ],
+  "receiving_waters": [
+   "Sugar Creek (3B), North Platte River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Sinclair"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Sinclair Wastewater Lagoon (WY0020397).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-sinclair"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-ten-sleep",
+  "name": "Town of Ten Sleep",
+  "short_name": "Town of Ten Sleep",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020168",
+  "npdes_permits": [
+   "WY0020168"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Ten Sleep Wastewater Lagoons (WY0020168). EPA's permit status: WY0020168 EXP (EXP expired; a permit can be administratively continued or renewed after EPA's file was written, so the row is kept).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-ten-sleep"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-thayne",
+  "name": "Town of Thayne",
+  "short_name": "Town of Thayne",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0025895",
+  "npdes_permits": [
+   "WY0025895"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 7,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 7 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Thayne Wastewater Lagoon (WY0025895). EPA's permit status: WY0025895 EXP (EXP expired; a permit can be administratively continued or renewed after EPA's file was written, so the row is kept).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-thayne"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-thermopolis",
+  "name": "Town of Thermopolis",
+  "short_name": "Town of Thermopolis",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020192",
+  "npdes_permits": [
+   "WY0020192"
+  ],
+  "receiving_waters": [
+   "Big Horn River (2AB), Big Horn River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Thermopolis WWTF (WY0020192).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-thermopolis"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-town-of-upton",
+  "name": "Town of Upton",
+  "short_name": "Town of Upton",
+  "legal_form": "town",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020605",
+  "npdes_permits": [
+   "WY0020605"
+  ],
+  "receiving_waters": [
+   "Unnamed ephemeral tributary to Iron Creek (both cl",
+   "Unnamed ephemeral tributary (class 3B) to Iron Cre"
+  ],
+  "water_slugs": [],
+  "outfall_count": 2,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 2 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Upton"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Upton Wastewater Lagoon (WY0020605).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-town-of-upton"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-u-s-forest-service-bighorn-national-forest-burgess-junction",
+  "name": "U.S. Forest Service, Bighorn National Forest (Burgess Junction)",
+  "short_name": "U.S. Forest Service, Bighorn National Forest (Burgess Junction)",
+  "legal_form": "federal facility",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0020931",
+  "npdes_permits": [
+   "WY0020931"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 5,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 5 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: Burgess Junction Central Sewage Treatment Facility (WY0020931). EPA's permit status: WY0020931 EXP (EXP expired; a permit can be administratively continued or renewed after EPA's file was written, so the row is kept).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-u-s-forest-service-bighorn-national-forest-burgess-junction"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-us-sfr-owner-llc",
+  "name": "US SFR Owner, LLC",
+  "short_name": "US SFR Owner, LLC",
+  "legal_form": "business or industrial",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0097036",
+  "npdes_permits": [
+   "WY0097036"
+  ],
+  "receiving_waters": [
+   "UET, North Fork, Little Muddy Creek (3B), via Big"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Kemmerer"
+  ],
+  "notes": "Privately owned. Owner: EPA ICIS-NPDES permit name. Plants: Kemmerer Training Center (KTC) (WY0097036).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-us-sfr-owner-llc"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-wade-s-mobile-manor",
+  "name": "Wade's Mobile Manor",
+  "short_name": "Wade's Mobile Manor",
+  "legal_form": "mobile-home park",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0024651",
+  "npdes_permits": [
+   "WY0024651"
+  ],
+  "receiving_waters": [
+   "Laramie River (2AB) via unnamed ephemeral tributar"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Laramie"
+  ],
+  "notes": "Privately owned. Owner: EPA ICIS-NPDES permit name. Plants: Wade's Mobile Manor WWTF (WY0024651).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-wade-s-mobile-manor"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-wind-river-reservation-lagoons",
+  "name": "Wind River Reservation lagoons (EPA lagoon general permit)",
+  "short_name": "Wind River Reservation lagoons (EPA lagoon general permit)",
+  "legal_form": "tribal",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WYG589101",
+  "npdes_permits": [
+   "WYG589101",
+   "WYG589102",
+   "WYG589104",
+   "WYG589105",
+   "WYG589106",
+   "WYG589107"
+  ],
+  "receiving_waters": [
+   "Trout Creek",
+   "LITTLE WIND RIVER"
+  ],
+  "water_slugs": [],
+  "outfall_count": 4,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 8 rows)",
+  "notification_channel": "A permit EPA Region 8 issues (the Wind River Reservation, where the state program does not apply): the permit's 24-hour and five-day noncompliance reports go to EPA (40 CFR 122.41(l)(6)), which publishes those filed electronically in its sewer overflow tables (https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary); the extracts of 2026-11-14 hold no Wyoming report, and list the Fort Washakie lagoon's collection system. No public notice duty was found.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Arapahoe",
+   "Ethete",
+   "Fort Washakie",
+   "Fremont County",
+   "Riverton"
+  ],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: Arapaho Industrial Park Lagoon (WYG589104), Beaver Creek Lagoons (WYG589107), Ethete Wastewater Lagoon (WYG589106), Fort Washakie Hotsprings Lagoon (WYG589101), Great Plains Lagoon (WYG589102), Mill Creek Lagoon (WYG589105). The coverages EPA lists under its lagoon general permit for Indian country on the Wind River Reservation (Fort Washakie, Great Plains, Arapahoe industrial park, Mill Creek, Ethete, Beaver Creek); EPA's records name the lagoons, not the tribal or community body that holds each.",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-wind-river-reservation-lagoons"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": [
+   "WYG589101",
+   "WYG589102",
+   "WYG589104",
+   "WYG589105",
+   "WYG589106",
+   "WYG589107"
+  ]
+ },
+ {
+  "id": "wy-wright-water-sewer-district",
+  "name": "Wright Water & Sewer District",
+  "short_name": "Wright Water & Sewer District",
+  "legal_form": "special district",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0025992",
+  "npdes_permits": [
+   "WY0025992"
+  ],
+  "receiving_waters": [
+   "Hay Creek (3B), Belle Fourche River Basin"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Wright"
+  ],
+  "notes": "Owner: EPA ICIS-NPDES permit name. Plants: Wright Wastewater Treatment (WY0025992).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-wright-water-sewer-district"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-wyoming-department-of-transportation-powder-river-rest-area",
+  "name": "Wyoming Department of Transportation (Powder River rest area)",
+  "short_name": "Wyoming Department of Transportation (Powder River rest area)",
+  "legal_form": "state facility",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0043745",
+  "npdes_permits": [
+   "WY0043745"
+  ],
+  "receiving_waters": [
+   "Unnamed swale",
+   "Unnamed swale (class 3B), tributary to the Powder"
+  ],
+  "water_slugs": [],
+  "outfall_count": 3,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 3 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Buffalo"
+  ],
+  "notes": "Owner: the permittee's own name (EPA's spelling in the notes). Plants: Powder River Rest Area I-90 (WY0043745).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-wyoming-department-of-transportation-powder-river-rest-area"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
+ },
+ {
+  "id": "wy-yellow-creek-estates-mobile-home-park",
+  "name": "Yellow Creek Estates Mobile Home Park",
+  "short_name": "Yellow Creek Estates Mobile Home Park",
+  "legal_form": "mobile-home park",
+  "state": "WY",
+  "kind": "plant",
+  "npdes_permit": "WY0028665",
+  "npdes_permits": [
+   "WY0028665"
+  ],
+  "receiving_waters": [
+   "an unnamed ephemeral tributary (3B), to Yellow Cre"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, 1 rows)",
+  "notification_channel": "Wyoming puts the report on the system's owner or operator and the recipient is the state: the Department of Environmental Quality's sanitary sewer overflow instructions require owners and operators of municipal, state, federal, regional, industrial and private collection or treatment systems to report an overflow verbally within 24 hours of becoming aware of it and in writing within five days. WDEQ publishes no list of the reports (its spills portal's searches are behind a staff login), and no duty to tell the public was found. The operator's own pages were not searched individually. The instructions bind a private system as they bind a public one.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [],
+  "notes": "Privately owned. Owner: EPA ICIS-NPDES permit name. Plants: Yellow Creek Estates Stp (WY0028665).",
+  "verified": "inferred",
+  "checked": "2026-11-14",
+  "aliases": [
+   "wy-yellow-creek-estates-mobile-home-park"
+  ],
+  "source_areas": [
+   "wy"
+  ],
+  "epa_issued_permits": []
  }
 ]

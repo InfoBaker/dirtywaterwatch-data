@@ -247,7 +247,8 @@ def build_rows(st: str, *, checked: str, channel, epa_channel, names: dict, form
             [t for r in rs for t in r.get("towns") or []]
             + sorted({smart_title(re.sub(r",.*", "", x["city"])) for x in rows
                       if x.get("city") and "UNKNOWN" not in x["city"].upper()})
-            + sorted({smart_title(cands[p]["city"]) for p in ps if (cands.get(p) or {}).get("city")})))
+            + sorted({smart_title(cands[p]["city"]) for p in ps if (cands.get(p) or {}).get("city")
+                      and "UNKNOWN" not in cands[p]["city"].upper()})))
         facs = sorted({f"{tidy(x.get('permittee') or '')} ({x['npdes_permit']})" for x in rows
                        if x.get("permittee") and not personish(tidy(x["permittee"]))})
         notes = f"Owner: {g['basis']}."
