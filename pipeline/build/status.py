@@ -1029,6 +1029,35 @@ RECORD_POINT_WHY = ("the report gives no point: the marker is on the water it na
                     "not where the discharge or advisory was")
 
 
+# Kansas (re-review P1-3): KDHE's stream advisories give the waters and the county, never a point. An advisory naming its
+# water (raw.advisory_extent "named_water") placed on a record of that water gets its marker at a point of the record's
+# own line inside the county the advisory names, so the advisory shows in its colour; a record that has no line there
+# gives no point and the advisory is listed only (the state text says why). Keyed on these states, every other unchanged.
+COUNTY_RECORD_POINT_STATES = {"KS"}
+COUNTY_RECORD_POINT_WHY = ("the advisory gives no point: the marker is on the water it names, at a point of that water's "
+                           "mapped line inside the county the advisory names, not where the discharge was")
+
+
+def county_record_point(slug: str, waters: dict, state: str, county) -> tuple[float, float, str] | None:
+    """(lat, lon, basis) of a point on the water record's own geometry inside the named county (0.001 degree), or None
+    when the record has no geometry, the county is not known or the record does not reach it."""
+    c = named_county(state, county) if state in COUNTY_STATES else None
+    g = water_geometry(slug, waters)
+    if c is None or g is None or g.is_empty:
+        return None
+    outline = next((geom for gid, _, geom in state_counties(state) if gid == c[0]), None)
+    part = g.intersection(outline) if outline is not None else None
+    if part is None or part.is_empty:
+        return None
+    p = part.representative_point()
+    w = waters.get(slug) or {}
+    src = "NHDPlus" if str(w.get("source") or "").startswith("nhd") else (w.get("source") or "the water record")
+    gnis = f", GNIS {w['gnis_id']}" if w.get("gnis_id") else ""
+    return (round(p.y, 3), round(p.x, 3),
+            f"a point on the mapped line of {w.get('name') or slug} ({src}{gnis}) inside {c[1]}, the county the advisory "
+            "names")
+
+
 def island_slugs(slugs: list, ev: dict, waters: dict) -> tuple[list, str | None]:
     """(the slugs on the report's island, why others were set aside). A report with no island keeps them all."""
     from ingest import hi_doh_cwb_events as HI
@@ -3866,6 +3895,11 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         pick = point_on or ([] if (is_discharge and traced) or not is_discharge else nofill)
         rp = record_point(pick[0], waters) if (pick and live and not future and ev.get("lat") is None
                                                 and event_state(ev) in ISLAND_STATES) else None
+        if (not rp and pick and live and not future and ev.get("lat") is None and names_its_water(ev)
+                and event_state(ev) in COUNTY_RECORD_POINT_STATES):
+            rp = county_record_point(pick[0], waters, event_state(ev), (ev.get("raw") or {}).get("county"))
+            if rp:
+                placements[eid]["record_point"] = {"lat": rp[0], "lon": rp[1], "basis": rp[2]}
         if rp:
             ivs = event_intervals(eff, event_state(ev), now, water={**waters[pick[0]], "slug": pick[0]}, rules=rules)
             colouring = [iv for iv in ivs if iv["color"] != "grey"]
@@ -3882,7 +3916,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                "intervals": [[iso(iv["start"]), iso(iv["end"]), iv["color"], iv["rule"]]
                                              for iv in sorted(ivs, key=lambda x: x["start"])],
                                "_ivs": ivs, "lat": rp[0], "lon": rp[1], "point_basis": rp[2],
-                               "why": RECORD_POINT_WHY})
+                               "why": (COUNTY_RECORD_POINT_WHY if event_state(ev) in COUNTY_RECORD_POINT_STATES
+                                       else RECORD_POINT_WHY)})
         # beach, rain and HAB advisories that colour no water: a marker of their own
         if ((ev.get("event_type") in POINT_ADVISORY_TYPES or point_on) and eid not in superseded and eid not in duplicates
                 and ev.get("lat") is not None and ev.get("lon") is not None

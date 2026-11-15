@@ -380,3 +380,63 @@ def test_hab_poll_flag_leaves_other_states_aging_unchanged():
           "raw": {"ended_at_precision": "poll", "_last_seen_in_source": "2026-01-01T12:00:00Z"}}
     ivs = S.event_intervals(ev, "WA", datetime(2026, 6, 2, tzinfo=timezone.utc))
     assert len(ivs) == 1 and ivs[0]["end"] == datetime(2026, 6, 1, 12, tzinfo=timezone.utc)
+
+
+def _line(slug, name, st, coords, kind="river"):
+    xs, ys = [c[0] for c in coords], [c[1] for c in coords]
+    return slug, {"slug": slug, "name": name, "kind": kind, "state": st, "source": "nhd", "gnis_id": "1",
+                  "bbox": [min(xs), min(ys), max(xs), max(ys)], "geometry": {"type": "LineString", "coordinates": coords}}
+
+
+def _mo_ks_build(tmp_path, feeds: dict, waters: dict, now="2026-11-03T12:00:00Z"):
+    """A build with Missouri and Kansas counted live (they are not yet; the rules are the same once they are)."""
+    from datetime import datetime
+    from build import status as S
+    d = tmp_path / "events"
+    d.mkdir(exist_ok=True)
+    for sid, rr in feeds.items():
+        (d / f"{sid}.json").write_text(json.dumps({"source_id": sid, "ok": True, "last_ok_at": now, "meta": {},
+                                                   "records": rr}))
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    rules["live_states"] = list(rules["live_states"]) + ["KS", "MO"]
+    rules["rain_likely"] = {**rules["rain_likely"], "enabled": False}
+    st, _ = S.build(now=datetime.fromisoformat(now.replace("Z", "+00:00")), write=False, events_dir=d, waters=waters,
+                    outfalls=[], registry={}, reaches={}, flows=({}, {}), rules=rules, placement_cache=False)
+    return st
+
+
+def test_every_named_water_is_placed_and_a_kdhe_river_advisory_gets_a_cited_point_in_its_county(tmp_path):
+    """Re-review P1-3: KC's post naming Rock Creek and the Missouri River is placed on both; KDHE's advisory for a creek
+    gets a marker on the creek's mapped line inside the county it names, never on the namesake in another county; an
+    advisory whose water has no line in its county, and one whose water has no record, stay listed."""
+    from ingest import mo_kc_water_news as K
+    feed = _feed(("Stream Advisory Issued for Example Creek in Shawnee County", "1", "Mon, 02 Nov 2026 09:00:00 -0600",
+                  "KDHE issued a stream advisory after a sewage discharge."),
+                 ("Stream Advisory Issued for Sample Creek in Shawnee County", "2", "Mon, 02 Nov 2026 10:00:00 -0600",
+                  "Sewage."),
+                 ("Stream Advisory Issued for Nowhere Creek in Shawnee County", "3", "Mon, 02 Nov 2026 11:00:00 -0600",
+                  "Sewage."))
+    ks, _ = A.run(feed, [], "2026-11-02T18:00:00Z")
+    kc, _ = K.run([(ROOT / "pipeline" / "tests" / "fixtures" / "mo" / "kc_feed.xml").read_bytes()], [],
+                  "2026-11-02T18:00:00Z")
+    waters = dict([_line("example-creek-ks", "Example Creek", "KS", [[-95.8, 39.0], [-95.7, 39.05]]),
+                   _line("example-creek-johnson-ks", "Example Creek", "KS", [[-94.9, 38.8], [-94.8, 38.85]]),
+                   ("sample-creek-ks", {"slug": "sample-creek-ks", "name": "Sample Creek", "kind": "river", "state": "KS",
+                                        "bbox": [-95.8, 39.0, -95.7, 39.05]}),            # a box, no line
+                   _line("rock-creek-mo", "Rock Creek", "MO", [[-94.45, 39.10], [-94.40, 39.12]]),
+                   _line("missouri-river-mo", "Missouri River", "MO", [[-94.6, 39.11], [-94.3, 39.15]])])
+    st = _mo_ks_build(tmp_path, {A.SOURCE_ID: ks, K.SOURCE_ID: kc}, waters)
+    pl = st["placements"]
+    assert sorted(pl[f"{K.SOURCE_ID}:9004"]["water_slugs"]) == ["missouri-river-mo", "rock-creek-mo"]
+    ex = pl[f"{A.SOURCE_ID}:1-examplecreek"]
+    assert ex["water_slugs"] == ["example-creek-ks"]
+    pts = {p["event_id"]: p for p in st["advisory_points"]}
+    p = pts[f"{A.SOURCE_ID}:1-examplecreek"]
+    assert p["status"] == "red" and (p["lat"], p["lon"]) == (39.0, -95.8)
+    assert "inside Shawnee County" in p["point_basis"] and "NHDPlus" in p["point_basis"]
+    assert f"{A.SOURCE_ID}:2-samplecreek" not in pts                          # no line: listed on its water only
+    assert pl[f"{A.SOURCE_ID}:2-samplecreek"]["water_slugs"] == ["sample-creek-ks"]
+    assert f"{A.SOURCE_ID}:3-nowherecreek" in {e["event_id"] if isinstance(e, dict) else e
+                                                for e in st["unplaced_events"]}

@@ -53,7 +53,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
-from ingest.mo_kc_water_news import TIME, clock, find_date, sentences, volume, waters
+from ingest.mo_kc_water_news import TIME, clock, find_date, migrate_water_text, sentences, volume, water_text, waters
 
 SOURCE_ID = "mo-msd-stl-project-clear"
 API = "https://msdprojectclear.org/wp-json/wp/v2/posts"
@@ -165,7 +165,7 @@ def record(p: dict, at: str) -> dict:
     return event(
         source_id=SOURCE_ID, source_record_id=str(p["id"]), event_type="plant_bypass" if plant else "sso",
         status="unknown", discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER,
-        waterbody_text=ws[0] if ws else None, started_at=start, time_precision=prec,
+        waterbody_text=water_text(ws), started_at=start, time_precision=prec,
         published_at=(datetime.fromisoformat(p["date_gmt"]).replace(tzinfo=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
                       if p.get("date_gmt") else None),
         fetched_at=at, material="wastewater", volume_gal=v, volume_text=vtext, estimate_flag=flag,
@@ -201,6 +201,8 @@ def link_follow_ups(recs: dict[str, dict]) -> int:
 
 def run(pages: list[list[dict]], prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
+    for r in recs.values():
+        migrate_water_text(r)
     stats = {"posts": 0, "own_posts": 0, "notices": 0}
     for page in pages:
         for p in page:
