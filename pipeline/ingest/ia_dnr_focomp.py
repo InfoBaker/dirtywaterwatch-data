@@ -36,9 +36,11 @@ Records (one per bypass report)
     the field office entered the incident's own point (rounded to 0.001 degree); the plant's point is never the
     report's. A report with no stream and no point is kept and listed with its county and operator, placed nowhere.
   - Volume: Estimated Gallons unless "Amount Unknown" is checked (estimate_flag estimated).
-  - Operator: the facility's name as DNR lists it (discharger_name); npdes_permit by the facility's own point against
-    EPA's plant outfalls of Iowa permits (data/outfalls-plants-us.json) within PERMIT_MATCH_M whose permit's city is the
-    facility's (raw.permit_basis); otherwise none.
+  - Operator: npdes_permit by the facility's own point against EPA's plant outfalls of Iowa permits
+    (data/outfalls-plants-us.json) within PERMIT_MATCH_M whose permit's city is the facility's (raw.permit_basis); the
+    operator (discharger_id, discharger_name) is the operator row holding that permit (data/dischargers.json), named
+    from the permittee; with no permit the operator is not established and none is named (DNR's facility name stays in
+    raw.facility).
   - Identity: source_record_id the Incoming Report ID; source_url the report's page. A report that leaves the facility
     page keeps its record (raw._unlisted_since). A report re-read later replaces its fields (raw._read_at).
   Privacy: the facility page names DNR staff and the report page the person who reported and the staff member who
@@ -62,8 +64,9 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text,
-                    strip_house_numbers, write_events, write_json)
+from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from ingest.ia_id_privacy import home_place
+from ingest.ia_id_privacy import scrub as strict_scrub
 
 SOURCE_ID = "ia-dnr-focomp-incoming-reports"
 BASE = "https://programs.iowadnr.gov/focomp"
@@ -84,6 +87,8 @@ KEEP_TYPES = re.compile(r"bypass|overflow|\bSSO\b|\bCSO\b", re.I)
 # a Receiving Stream that names no water ("Varies", "N/A", "unknown", "ground"): no waterbody_text, kept in raw
 NO_WATER = re.compile(r"(?i)n/?a|none|unknown|varies|various|multiple|tbd|-+|\.+|(?:the\s+)?ground|land|dry ditch")
 CSO_TEXT = re.compile(r"combined sewer|\bCSO\b", re.I)
+# a combined sewer denied ("not a combined sewer", "no CSO outfall", "non-CSO"): not an affirmed type
+CSO_DENIED = re.compile(r"(?i)\b(?:no|not|non|never|nor|without)\b[\s-]+(?:\w+\s+){0,3}?(?:a\s+)?(?:combined sewer|CSO)\b")
 ENTRY = re.compile(r'<tr\b[^>]*>\s*<td[^>]*>\s*(?P<d1>[\d/]*)\s*</td>\s*<td[^>]*>\s*(?P<d2>[\d/]*)\s*</td>\s*<td[^>]*>'
                    r'(?:(?!</tr>).)*?incomingReportID=(?P<rid>\d+)"[^>]*>\s*Incoming Report - (?P<label>.*?) - (?P=rid)\s*</a>', re.S)
 
@@ -111,6 +116,9 @@ def parse_facility(page: str) -> dict:
     reports = []
     for m in ENTRY.finditer(page):
         reports.append({"rid": m.group("rid"), "label": _clean(m.group("label")), "listed": _us_date(m.group("d1"))})
+    if not reports and re.search(r"incomingReportID=\d+", page):
+        # the page links reports the reader cannot read (a changed layout): a failed read, never an empty list
+        raise ValueError("the facility page links incoming reports the reader cannot read")
     lat = re.search(r'name="Latitude"[^>]*value="(-?[\d.]+)"', page)
     lon = re.search(r'name="Longitude"[^>]*value="(-?[\d.]+)"', page)
     return {"reports": reports, "lat": float(lat.group(1)) if lat else None, "lon": float(lon.group(1)) if lon else None}
@@ -144,8 +152,9 @@ def _textarea(seg: str, name: str) -> str:
 
 
 def scrub(text: str) -> str:
-    """The strict free-text scrub: emails, phones, names after titles, and every street address's house number."""
-    return strip_house_numbers(scrub_text(text or ""))
+    """The strict free-text scrub (ingest/ia_id_privacy.py): emails, phones, names, every street address's house
+    number with its suffix or fraction, coordinates rounded; text that may name a person is withheld whole."""
+    return strict_scrub(text or "") or ""
 
 
 def parse_report(page: str) -> dict:
@@ -169,7 +178,7 @@ def parse_report(page: str) -> dict:
         "incident_end": _input(seg, "IncidentEnd"), "incident_end_time": _input(seg, "IncidentEndTime"),
         "estimated_gallons": gal, "amount_unknown": _checked(seg, "AmountUnknown"),
         "location": scrub(_input(seg, "Location") or "") or None,
-        "address": strip_house_numbers(_input(seg, "Address") or "") or None,
+        "address": scrub(_input(seg, "Address") or "") or None,
         "city": _selected(seg, "CityID"), "county": _selected(seg, "CountyID"),
         "lat": round(lat, 3) if lat else None, "lon": round(lon, 3) if lon else None,
         "written_report_received": _input(seg, "WrittenDateReceived") or None,
@@ -197,7 +206,8 @@ def event_type(rep: dict) -> str:
         return "plant_bypass"
     if loc == "collection system":
         return "sso"
-    return "cso" if CSO_TEXT.search(rep.get("details") or "") else "bypass"
+    det = CSO_DENIED.sub(" ", rep.get("details") or "")
+    return "cso" if CSO_TEXT.search(det) else "bypass"
 
 
 def _dist_m(a, b, c, d) -> float:
@@ -229,9 +239,30 @@ def iowa_plants() -> list[dict]:
     return [r for r in doc.get("outfalls", []) if str(r.get("npdes_permit") or "").startswith("IA")]
 
 
-def make_record(rep: dict, fac: dict, listed: dict, permit: tuple, at: str) -> dict | None:
+_OPERATORS: dict | None = None
+
+
+def operators() -> dict[str, tuple[str, str]]:
+    """{permit: (row id, name)} of Iowa's operator rows (data/dischargers.json): a report is named from the permittee."""
+    global _OPERATORS
+    if _OPERATORS is None:
+        rows = read_json(DATA_DIR / "dischargers.json", []) or []
+        _OPERATORS = {p: (r["id"], r["name"]) for r in rows if isinstance(r, dict) and r.get("state") == "IA"
+                      for p in r.get("npdes_permits") or [] if p}
+    return _OPERATORS
+
+
+def make_record(rep: dict, fac: dict, listed: dict, permit: tuple, at: str, ops: dict | None = None) -> dict | None:
     if (rep.get("bypass_type") or "").lower() == "basement backup":
         return None
+    # the scrub again on every field carried from earlier state (a stricter scrub reaches old reads too)
+    home = home_place(rep.get("details"), rep.get("location"), rep.get("address"))      # before the text is withheld
+    rep = {**rep, **{k: (strict_scrub(rep.get(k)) or None) for k in ("details", "steps_taken", "location", "address")}}
+    home = home or home_place(rep.get("details"), rep.get("location"), rep.get("address"))
+    if home:
+        rep.update(lat=None, lon=None, address=None, location=None)
+    elif rep.get("lat") is not None and rep.get("lon") is not None:
+        rep.update(lat=round(float(rep["lat"]), 3), lon=round(float(rep["lon"]), 3))
     start, sp = local_time(rep["incident_start"], rep["incident_start_time"])
     end, ep = local_time(rep["incident_end"], rep["incident_end_time"])
     recd, _ = local_time(rep["date_received"], rep["time_received"])
@@ -255,9 +286,18 @@ def make_record(rep: dict, fac: dict, listed: dict, permit: tuple, at: str) -> d
         raw["ended_at_precision"] = ep
     if permit[0]:
         raw["permit_basis"] = permit[1]
+    if home:
+        raw["privacy_cut"] = "the report describes a private home: its point and street are not kept"
+    op = (operators() if ops is None else ops).get(permit[0]) if permit[0] else None
+    if op:
+        raw["_discharger_basis"] = f"the operator row holding permit {permit[0]}"
+    else:
+        raw["_discharger_basis"] = ("no permit matched the facility: the operator is not established (DNR's facility "
+                                    "name is in raw.facility)")
     perr = None if start else "no Incident Start the reader can read"
     return event(source_id=SOURCE_ID, source_record_id=rep["report_id"], event_type=event_type(rep),
-                 status="ended" if end else "unknown", discharger_name=fac.get("name"), npdes_permit=permit[0],
+                 status="ended" if end else "unknown", discharger_name=op[1] if op else None,
+                 discharger_id=op[0] if op else None, npdes_permit=permit[0],
                  waterbody_text=water, lat=rep["lat"], lon=rep["lon"],
                  coord_source="source" if rep["lat"] is not None else None,
                  coord_precision_m=150 if rep["lat"] is not None else None,
@@ -315,6 +355,21 @@ def fold_facility(state: dict, fac: dict, parsed: dict, at: str) -> None:
             r["unlisted_since"] = at
 
 
+def scrub_state(state: dict) -> dict:
+    """The scrub again on every report's fields kept in the state file (before it is written): free text through the
+    strict scrub, and a private home's point and street dropped."""
+    for r in (state.get("reports") or {}).values():
+        f = r.get("fields")
+        if not f:
+            continue
+        home = home_place(f.get("details"), f.get("location"), f.get("address"))
+        for k in ("details", "steps_taken", "location", "address"):
+            f[k] = strict_scrub(f.get(k)) or None
+        if home or home_place(f.get("details"), f.get("location"), f.get("address")):
+            f.update(lat=None, lon=None, address=None, location=None)
+    return state
+
+
 def records(state: dict, facs: dict, plants: list[dict]) -> list[dict]:
     out = []
     for rid, r in sorted(state.get("reports", {}).items()):
@@ -370,7 +425,11 @@ def main(argv=None) -> int:
     for fac in todo:
         try:
             page = fac_files[fac["st_fac_id"]] if offline else get(FACILITY_URL.format(fac=fac["st_fac_id"]))
-            fold_facility(state, fac, parse_facility(page), at)
+            parsed = parse_facility(page)
+            before = ((state.get("facilities") or {}).get(fac["st_fac_id"]) or {}).get("listed") or []
+            if not parsed["reports"] and before:
+                raise ValueError(f"the page lists no report where {len(before)} were listed: a failed read")
+            fold_facility(state, fac, parsed, at)
             read_f += 1
         except (requests.RequestException, ValueError) as e:
             errors.append(f"facility {fac['st_fac_id']}: {type(e).__name__}: {str(e)[:120]}")
@@ -389,7 +448,7 @@ def main(argv=None) -> int:
             errors.append(f"report {rid}: {type(e).__name__}: {str(e)[:120]}")
     if saved and not offline:
         save_raw(SOURCE_ID, json.dumps({"fetched_at": at, "reports": saved}, indent=1).encode(), "json")
-    write_json(STATE_PATH, state)
+    write_json(STATE_PATH, scrub_state(state))
     recs = records(state, facs, iowa_plants())
     dropped = sum(1 for r in state.get("reports", {}).values()
                   if (r.get("fields") or {}).get("bypass_type", "") and r["fields"]["bypass_type"].lower() == "basement backup")
@@ -402,6 +461,15 @@ def main(argv=None) -> int:
         write_events(SOURCE_ID, [], ok=False, error="; ".join(errors[:5]), meta=meta)
         print(f"{SOURCE_ID}: FAILED {errors[:3]}", file=sys.stderr)
         return 1
+    if errors:
+        # some pages unread: the readable records are written, the unread ones stay queued for the next run, and the
+        # feed's health stays false until they are read
+        meta["unread"] = errors[:50]
+        path = write_events(SOURCE_ID, recs, ok=False, partial=True, error="; ".join(errors[:5]), meta=meta,
+                            path=EVENTS_DIR / f"{SOURCE_ID}.json")
+        print(f"{SOURCE_ID}: {read_f} facility pages, {read_r} report pages read; {len(errors)} unread; {len(recs)} "
+              f"records -> {path}")
+        return 0
     path = write_events(SOURCE_ID, recs, meta=meta, path=EVENTS_DIR / f"{SOURCE_ID}.json")
     print(f"{SOURCE_ID}: {read_f} facility pages, {read_r} report pages read; {len(recs)} records -> {path}"
           + (f"; {len(errors)} errors" if errors else ""))

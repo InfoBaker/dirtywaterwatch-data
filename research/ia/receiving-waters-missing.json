@@ -16,7 +16,7 @@
    "reports": 3,
    "county": "Warren County",
    "operators": [
-    "Carlisle City Of Stp"
+    "City of Carlisle"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 3
@@ -31,7 +31,7 @@
    "reports": 2,
    "county": "Dubuque County",
    "operators": [
-    "City Of Dubuque Water Pollution Control Plant"
+    "City of Dubuque"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 2
@@ -46,7 +46,7 @@
    "reports": 2,
    "county": "Wapello County",
    "operators": [
-    "Ottumwa City Of Stp"
+    "City of Ottumwa"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 2
@@ -61,7 +61,7 @@
    "reports": 2,
    "county": "Jasper County",
    "operators": [
-    "Newton Water Pollution Control Plant"
+    "City of Newton"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 2
@@ -76,7 +76,7 @@
    "reports": 2,
    "county": "Des Moines County",
    "operators": [
-    "Burlington City Of Stp"
+    "City of Burlington"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 2
@@ -91,7 +91,7 @@
    "reports": 2,
    "county": "Chickasaw County",
    "operators": [
-    "New Hampton City Of Stp"
+    "City of New Hampton"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 2
@@ -106,7 +106,7 @@
    "reports": 2,
    "county": "Lucas County",
    "operators": [
-    "Chariton City Of Stp"
+    "City of Chariton"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 2
@@ -121,7 +121,7 @@
    "reports": 2,
    "county": "Mahaska County",
    "operators": [
-    "Oskaloosa City Of Stp (Southwest)"
+    "City of Oskaloosa"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 2
@@ -136,7 +136,7 @@
    "reports": 2,
    "county": "Muscatine County",
    "operators": [
-    "West Liberty City Of Stp"
+    "City of West Liberty"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 2
@@ -166,7 +166,7 @@
    "reports": 1,
    "county": "Dubuque County",
    "operators": [
-    "City Of Dubuque Water Pollution Control Plant"
+    "City of Dubuque"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -181,7 +181,7 @@
    "reports": 1,
    "county": "Black Hawk County",
    "operators": [
-    "Waterloo City Of Stp"
+    "City of Waterloo"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -196,7 +196,7 @@
    "reports": 1,
    "county": "Linn County",
    "operators": [
-    "Cedar Rapids Water Pollution Control"
+    "City of Cedar Rapids"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -211,7 +211,7 @@
    "reports": 1,
    "county": "Jasper County",
    "operators": [
-    "Newton Water Pollution Control Plant"
+    "City of Newton"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -226,7 +226,7 @@
    "reports": 1,
    "county": "Marion County",
    "operators": [
-    "Knoxville City Of Stp"
+    "City of Knoxville"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -241,7 +241,7 @@
    "reports": 1,
    "county": "Marion County",
    "operators": [
-    "Knoxville City Of Stp"
+    "City of Knoxville"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -256,7 +256,7 @@
    "reports": 1,
    "county": "Des Moines County",
    "operators": [
-    "Burlington City Of Stp"
+    "City of Burlington"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -271,7 +271,7 @@
    "reports": 1,
    "county": "Scott County",
    "operators": [
-    "Davenport City Of Stp"
+    "City of Davenport"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -286,7 +286,7 @@
    "reports": 1,
    "county": "Scott County",
    "operators": [
-    "Davenport City Of Stp"
+    "City of Davenport"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -300,9 +300,6 @@
    "name": "Heather Branch",
    "reports": 1,
    "county": "Henry County",
-   "operators": [
-    "Mount Pleasant City Of Stp (main)"
-   ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
    },
@@ -316,7 +313,7 @@
    "reports": 1,
    "county": "Jones County",
    "operators": [
-    "Monticello City Of Stp"
+    "City of Monticello"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -331,7 +328,7 @@
    "reports": 1,
    "county": "Lucas County",
    "operators": [
-    "Chariton City Of Stp"
+    "City of Chariton"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -346,7 +343,7 @@
    "reports": 1,
    "county": "Hamilton County",
    "operators": [
-    "Webster City, City Of Stp"
+    "City of Webster City"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -361,7 +358,7 @@
    "reports": 1,
    "county": "Union County",
    "operators": [
-    "Creston City Of Stp"
+    "City of Creston"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -376,7 +373,7 @@
    "reports": 1,
    "county": "Clinton County",
    "operators": [
-    "Clinton City Of Stp"
+    "City of Clinton"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -391,7 +388,7 @@
    "reports": 1,
    "county": "Dubuque County",
    "operators": [
-    "Dyersville City Of Stp"
+    "City of Dyersville"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -406,7 +403,7 @@
    "reports": 1,
    "county": "Polk County",
    "operators": [
-    "Des Moines Metropolitan WRF"
+    "Des Moines Metropolitan Wastewater Reclamation Authority"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -421,7 +418,7 @@
    "reports": 1,
    "county": "Union County",
    "operators": [
-    "Creston City Of Stp"
+    "City of Creston"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -436,7 +433,7 @@
    "reports": 1,
    "county": "Lucas County",
    "operators": [
-    "Chariton City Of Stp"
+    "City of Chariton"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -451,7 +448,7 @@
    "reports": 1,
    "county": "Webster County",
    "operators": [
-    "Fort Dodge City Of Stp"
+    "City of Fort Dodge"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -466,7 +463,7 @@
    "reports": 1,
    "county": "Warren County",
    "operators": [
-    "INDIANOLA WATER RESOURCE RECOVERY FACILITY"
+    "City of Indianola"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -481,7 +478,7 @@
    "reports": 1,
    "county": "Woodbury County",
    "operators": [
-    "Sioux City, City Of Stp"
+    "City of Sioux City"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -495,9 +492,6 @@
    "name": "Suanders Branch Creek",
    "reports": 1,
    "county": "Henry County",
-   "operators": [
-    "Mount Pleasant City Of Stp (main)"
-   ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
    },
@@ -511,7 +505,7 @@
    "reports": 1,
    "county": "Marion County",
    "operators": [
-    "Pella City Of Stp"
+    "City of Pella"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -526,7 +520,7 @@
    "reports": 1,
    "county": "Poweshiek County",
    "operators": [
-    "Grinnell City Of Stp"
+    "City of Grinnell"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -541,7 +535,7 @@
    "reports": 1,
    "county": "Linn County",
    "operators": [
-    "Cedar Rapids Water Pollution Control"
+    "City of Cedar Rapids"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -556,7 +550,7 @@
    "reports": 1,
    "county": "Clinton County",
    "operators": [
-    "Dewitt City Of Stp"
+    "City of Dewitt"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -571,7 +565,7 @@
    "reports": 1,
    "county": "Union County",
    "operators": [
-    "Creston City Of Stp"
+    "City of Creston"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -586,7 +580,7 @@
    "reports": 1,
    "county": "Cass County",
    "operators": [
-    "Atlantic City Of Stp"
+    "City of Atlantic"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -601,7 +595,7 @@
    "reports": 1,
    "county": "Buchanan County",
    "operators": [
-    "City Of Jesup - South Wastewater Treatment Plant"
+    "City of Jesup"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -616,7 +610,7 @@
    "reports": 1,
    "county": "Buchanan County",
    "operators": [
-    "City Of Jesup - South Wastewater Treatment Plant"
+    "City of Jesup"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -631,7 +625,7 @@
    "reports": 1,
    "county": "Crawford County",
    "operators": [
-    "Denison Municipal Utilities-stp"
+    "Denison Municipal Utilities"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -646,7 +640,7 @@
    "reports": 1,
    "county": "Jefferson County",
    "operators": [
-    "Fairfield, City Of Stp"
+    "City of Fairfield"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -661,7 +655,7 @@
    "reports": 1,
    "county": "Muscatine County",
    "operators": [
-    "West Liberty City Of Stp"
+    "City of West Liberty"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -676,7 +670,7 @@
    "reports": 1,
    "county": "Muscatine County",
    "operators": [
-    "West Liberty City Of Stp"
+    "City of West Liberty"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -691,7 +685,7 @@
    "reports": 1,
    "county": "Dickinson County",
    "operators": [
-    "Iowa Great Lakes Sanitary District Stp"
+    "Iowa Great Lakes Sanitary District"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -706,7 +700,7 @@
    "reports": 1,
    "county": "Wapello County",
    "operators": [
-    "Ottumwa City Of Stp"
+    "City of Ottumwa"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -721,7 +715,7 @@
    "reports": 1,
    "county": "Dubuque County",
    "operators": [
-    "City Of Dubuque Water Pollution Control Plant"
+    "City of Dubuque"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -736,7 +730,7 @@
    "reports": 1,
    "county": "Polk County",
    "operators": [
-    "Mitchellville City Of Stp"
+    "City of Mitchellville"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -751,7 +745,7 @@
    "reports": 1,
    "county": "Buchanan County",
    "operators": [
-    "City Of Jesup - South Wastewater Treatment Plant"
+    "City of Jesup"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1
@@ -766,7 +760,7 @@
    "reports": 1,
    "county": "Scott County",
    "operators": [
-    "Davenport City Of Stp"
+    "City of Davenport"
    ],
    "sources": {
     "ia-dnr-focomp-incoming-reports": 1

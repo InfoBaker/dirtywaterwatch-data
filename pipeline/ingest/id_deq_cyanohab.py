@@ -197,6 +197,12 @@ def update(state: dict, rows: list[dict], at: str, layer: dict | None) -> dict:
             eps[sid] = {"water_key": wk, "level": lv, "first_seen": at, "collection_dates": []}
         ep = eps[sid]
         ep.update(last_seen=at, row=r)
+        # the episode keeps the point it was first placed at: a later move of DHW's marker never rewrites an earlier
+        # record's place (lessons 3); an episode with no point yet takes the first one the layer gives
+        if not ep.get("point"):
+            pt = (state.get("points") or {}).get(key(r["water"]))
+            if pt:
+                ep["point"] = dict(pt)
         d = read_date(r["collection_date"])
         if d and d not in ep["collection_dates"]:
             ep["collection_dates"].append(d)
@@ -211,7 +217,9 @@ def records(state: dict) -> list[dict]:
         r = ep["row"]
         level, ended = ep["level"], ep.get("ended_at")
         base, part = split_water(r["water"])
-        zone = zones.idaho_zone(county=r["county"] or None)
+        pt = ep.get("point") or points.get(key(r["water"]))
+        # the county decides; in Idaho County (split by the Salmon River) the listing's own point does (lessons 9)
+        zone = zones.idaho_zone(county=r["county"] or None, lat=(pt or {}).get("lat"), lon=(pt or {}).get("lon"))
         sample = sorted(ep["collection_dates"])[-1] if ep["collection_dates"] else None
         raw = {"row": dict(r), "level_as_listed": r["level"], "waterbody_as_listed": r["water"], "part": part,
                "county": f"{r['county']} County" if r["county"] else None, "state": "ID",
@@ -222,7 +230,6 @@ def records(state: dict) -> list[dict]:
                "level_rule": LEVEL_RULE, "advisory_noun": "Algal bloom health advisory",
                "date_note": ("the Collection Date is the date of the sample or image the row rests on (DEQ's "
                              "column), not an advisory's issue date")}
-        pt = points.get(key(r["water"]))
         lat = lon = None
         if pt:
             lat, lon = pt["lat"], pt["lon"]
@@ -289,6 +296,9 @@ def main(argv=None) -> int:
     try:
         page = Path(argv[argv.index("--file") + 1]).read_text() if "--file" in argv else fetch_page()
         rows = parse_table(page)
+        if not any(LEVELS.get(clean(r["level"]).lower()) and r["water"] for r in rows):
+            # not one row the reader can read (renamed levels, shifted columns): a failed read, nothing ends
+            raise ValueError("no row of DEQ's table could be read")
     except (requests.RequestException, OSError, ValueError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
@@ -312,7 +322,14 @@ def main(argv=None) -> int:
             "last_poll": state.get("last_poll"), "points_read_at": state.get("points_read_at"),
             "layer_error": layer_error,
             "cadence": "with the refresh; DEQ edits the table a few times a week in season"}
-    path = write_events(SOURCE_ID, recs, meta=meta)
+    unread = [r for r in recs if r.get("parse_error")]
+    if unread:
+        # an unreadable row is kept (parse_error) and read again next run; the feed is not healthy until it is read
+        meta["unread"] = [r["source_record_id"] for r in unread][:20]
+        path = write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta,
+                            error=f"{len(unread)} row(s) of DEQ's table the reader cannot read")
+    else:
+        path = write_events(SOURCE_ID, recs, meta=meta)
     act = sum(1 for r in recs if r["status"] == "advisory_active")
     print(f"{SOURCE_ID}: {len(rows)} rows listed, {act} health advisories in effect; {len(recs)} records -> {path}"
           + (f"; {layer_error}" if layer_error else ""))
