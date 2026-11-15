@@ -15,9 +15,12 @@ Inputs
      collection system, so every permit row is kind "plant"; Sparks's system is "collection_system".
   5. NDEP is not a source here: its permit search and spill intake were not reachable from the collector (2026-11-14).
 Rules
-  - OWNERS gives every permit its row: the owner's name as the body calls itself (EPA's spelling in the notes),
-    legal_form from docs/legal-forms.md, never an individual's name. A federal installation is "federal facility",
-    with its contractor named in the notes where EPA records the contractor as permittee (Hawthorne Army Depot). No
+  - OWNERS gives every permit its row: the permittee of record as the body calls itself (EPA's spelling in the
+    notes), legal_form from docs/legal-forms.md, never an individual's name, never a plant's name as an operator. A
+    permit whose holder EPA does not name (only the plant: Truckee Meadows) is a permit-only row ("Permit NV0020150
+    (...)", permit_only true, legal_form null), left out of operator counts. Hawthorne Army Depot's permittee of
+    record is the company Amentum Services, Inc., and its row is named for it (the depot, a federal facility, in the
+    notes). No
     Nevada sewage permit in ICIS is on tribal land; Pyramid Lake (the Pyramid Lake Paiute Tribe's) receives the
     Truckee River below Reno and Sparks.
   - notification_channel: NDEP issues Nevada's NPDES permits; NRS 445A.467 (2025) requires a city, county, town,
@@ -55,17 +58,25 @@ PRIVATE = ("A private permittee under an NDEP permit: the permit's 24-hour and f
            "public notice is required and none is published.")
 OWN = " The operator's own pages were not searched individually."
 FED_HELD = {"AZ0025160": "az-usbr-lower-colorado"}
+# a permit whose holder is not established (EPA names only the plant): a permit-only row, legal form unknown, left out
+# of operator counts (main's rule, scripts/icis_operators.py), never named after the plant as an operator (Astra P2-9)
+PERMIT_ONLY = "permit only"
+PERMIT_ONLY_CHANNEL = ("The permit's 24-hour and five-day noncompliance reports go to NDEP (40 CFR 122.41(l)(6)), which "
+                       "publishes no list of them. Whether NRS 445A.467 also binds the permittee depends on who holds "
+                       "the permit, which is not established here. No public notice is required and none is published.")
 
 # permit -> (row id, name, short name, legal form, note)
 OWNERS = {
     "NV0020061": ("nv-city-of-fallon", "City of Fallon", "City of Fallon", "city", None),
     "NV0020133": ("nv-city-of-las-vegas", "City of Las Vegas (Water Pollution Control Facility)", "City of Las Vegas",
                   "city", None),
-    "NV0020150": ("nv-truckee-meadows-wrf", "Truckee Meadows Water Reclamation Facility (Reno and Sparks)",
-                  "Truckee Meadows Water Reclamation Facility", "city",
-                  "EPA records the facility itself as permittee. The regional plant treats the sewage of the Cities of "
-                  "Reno and Sparks (research/nv/report.md §3); the shares of ownership and operation were not read from "
-                  "the permit. The City of Sparks's collection system is its own row (nv-city-of-sparks)."),
+    "NV0020150": ("nv-truckee-meadows-wrf", "Permit NV0020150 (Truckee Meadows Water Reclamation Facility)",
+                  "Permit NV0020150 (Truckee Meadows Water Reclamation Facility)", PERMIT_ONLY,
+                  "Permit only: EPA ICIS-NPDES gives only the plant's name ('Truckee Meadows Water Reclamation "
+                  "Facility') as both owner and facility, not the body that holds the permit; the operator is not "
+                  "established here, so this row is not counted as an operator (EPA's facility type: Municipality). The "
+                  "plant is said to treat the sewage of Reno and Sparks; who holds the permit was not read. The City "
+                  "of Sparks's collection system is its own row (nv-city-of-sparks)."),
     "NV0020168": ("nv-city-of-reno", "City of Reno (Stead Water Reclamation Facility)", "City of Reno", "city",
                   "EPA records the owner as \"RENO, CITY OF\" and the permit as expired (EXP)."),
     "NV0020311": ("nv-city-of-lovelock", "City of Lovelock", "City of Lovelock", "city", None),
@@ -76,9 +87,10 @@ OWNERS = {
                   "Laughlin water resource centers)", "Clark County Water Reclamation District", "special district",
                   None),
     "NV0021563": ("nv-clark-county-water-reclamation-district", None, None, None, None),
-    "NV0021946": ("nv-hawthorne-army-depot", "U.S. Army, Hawthorne Army Depot", "Hawthorne Army Depot",
-                  "federal facility",
-                  "EPA records the contractor, Amentum Services, Inc., as permittee and the facility as federal; six "
+    "NV0021946": ("nv-amentum-services-hawthorne", "Amentum Services, Inc. (Hawthorne Army Depot)",
+                  "Amentum Services, Inc.", "business or industrial",
+                  "EPA records Amentum Services, Inc. as the owner (its permittee of record) and the facility, the Army's "
+                  "Hawthorne Army Depot, as a federal facility; the row is named for the permittee of record. Six "
                   "discharge points, the receiving water given as an evaporation pond."),
     "NV0022098": ("nv-city-of-henderson", "City of Henderson (Kurt R. Segler Water Reclamation Facility)",
                   "City of Henderson", "city", None),
@@ -122,6 +134,8 @@ def plants() -> dict[str, list[dict]]:
 
 
 def channel(lf: str | None) -> str:
+    if lf == PERMIT_ONLY:
+        return PERMIT_ONLY_CHANNEL
     if lf == "federal facility":
         return FEDERAL
     if lf in PRIVATE_FORMS:
@@ -170,7 +184,9 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
         if m["note"]:
             note += " " + m["note"]
         rids = [r["id"] for p in ps for r in research.get(p, [])]
-        new.append({"id": rid, "name": m["name"], "short_name": m["short"], "legal_form": m["lf"], "state": "NV",
+        po = m["lf"] == PERMIT_ONLY
+        new.append({"id": rid, "name": m["name"], "short_name": m["short"], "legal_form": None if po else m["lf"],
+                    **({"permit_only": True} if po else {}), "state": "NV",
                     "kind": "plant", "npdes_permit": ps[0], "npdes_permits": ps, "receiving_waters": waters,
                     "water_slugs": [], "outfall_count": len(rows) or None,
                     "outfalls_source": (f"EPA ICIS-NPDES discharge points (data/outfalls-plants-us.json, {len(rows)} rows)"
@@ -190,6 +206,8 @@ def build(dis: list[dict]) -> tuple[list[dict], dict]:
         raise SystemExit(f"duplicate ids: {dup}")
     stats = {"rows": len(new), "permits": sum(len(r["npdes_permits"]) for r in new),
              "discharge_points": sum(r["outfall_count"] or 0 for r in new), "held_elsewhere": elsewhere,
+             "permit_only_rows": sum(1 for r in new if r.get("permit_only")),
+             "operators": sum(1 for r in new if not r.get("permit_only")),
              "legal_form": dict(Counter(r["legal_form"] for r in new)), "kind": dict(Counter(r["kind"] for r in new))}
     return keep + new, stats
 

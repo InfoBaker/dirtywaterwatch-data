@@ -159,11 +159,10 @@ def test_nevada_legal_forms_and_channels():
     rows = _ops()
     assert not DS.check_legal_forms(rows)
     fed = {r["id"] for r in rows if r["legal_form"] == "federal facility"}
-    assert fed == {"nv-hawthorne-army-depot", "nv-nnsa-north-las-vegas", "nv-naval-air-station-fallon"}
+    assert fed == {"nv-nnsa-north-las-vegas", "nv-naval-air-station-fallon"}
     for r in rows:
         local = r["legal_form"] in ("city", "county", "special district")
         assert ("NRS 445A.467 (2025) requires" in r["notification_channel"]) == local, r["id"]
-        assert not re.search(r"\bAmentum\b", r["name"])                    # a contractor is not the operator's name
 
 
 def test_nevada_register_rows():
@@ -397,3 +396,17 @@ def test_p2_8_a_removal_seen_after_a_long_gap_does_not_colour_the_gap():
     red = [iv for iv in ivs if iv["rule"] != "not_reconfirmed"]
     assert red and max(iv["end"] for iv in red) <= cap
     assert all(iv["rule"] == "not_reconfirmed" for iv in ivs if iv["end"] > cap)
+
+
+def test_p2_9_operators_are_the_permittees_epa_records():
+    from nv_ok_evidence import unsupported
+    assert unsupported("NV") == []
+    rows = {r["id"]: r for r in _ops()}
+    tm = rows["nv-truckee-meadows-wrf"]
+    assert tm["permit_only"] is True and tm["legal_form"] is None and tm["name"].startswith("Permit NV0020150 (")
+    assert "not counted as an operator" in tm["notes"] and "NRS 445A.467 (2025) requires" not in tm["notification_channel"]
+    am = rows["nv-amentum-services-hawthorne"]
+    assert am["npdes_permits"] == ["NV0021946"] and am["legal_form"] == "business or industrial"
+    assert "Amentum Services" in am["name"] and "federal facility" in am["notes"]
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]}
+    assert reg["nv-truckee-meadows-wrf-ndep-report"]["basis_kind"] == "permit"
