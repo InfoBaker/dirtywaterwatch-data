@@ -31,7 +31,8 @@ Records
   The Cause is read only as one of the tables' own cause phrases (CAUSE) found on the row's lines, else null.
   Privacy: the Address cell is a street location, often a house: it is never kept (its cell runs into the Cause cell
   in the layout text, so it cannot be cut reliably, and the parish places nothing anyway); no free text of the row is
-  kept. Only the parsed rows are saved
+  kept. The Rec. Waters cell is withheld (receiving_water_withheld) when it holds an address, a phone, an e-mail or
+  a label of who reported (receiving_water). Only the parsed rows are saved
   to data/build/la-baton-rouge-state.json; the PDF itself is never written to data/raw.
 
 Cadence and lag
@@ -61,6 +62,7 @@ import requests
 
 import common
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
+from ingest import wv_la_privacy
 
 SOURCE_ID = "la-baton-rouge-quarterly"
 INDEX = "https://brprojects.com/baton-rouge-sso-program/program-overview/regulatory-information/"
@@ -118,6 +120,18 @@ def _cell(line: str, cols: dict, name: str) -> str:
     return " ".join(out).strip()
 
 
+def receiving_water(text: str) -> tuple[str | None, str | None]:
+    """(the Rec. Waters cell as written, or None; why it was withheld, or None). A cell holding an address, a phone,
+    an e-mail or a label of who reported or can be called is withheld before anything is saved: the row is kept and
+    placed on no water, and no water name is invented (ingest.wv_la_privacy)."""
+    t = " ".join((text or "").split())
+    if not t:
+        return None, None
+    if wv_la_privacy.has_address(t) or wv_la_privacy.names_a_person(t) or common.scrub_text(t) != t:
+        return None, "the receiving-water cell held an address or personal text and is withheld"
+    return t, None
+
+
 def parse_report(pages: list[str]) -> dict:
     """{issued, period, summary: {permit: {collection, plant}}, rows: [...], check: {permit: (read, summary)}}."""
     issued = period = None
@@ -166,9 +180,14 @@ def parse_report(pages: list[str]) -> dict:
             d = datetime.strptime(DATE_ROW.match(ln).group(1), "%m/%d/%Y").date().isoformat()
             block = " ".join([ln] + cont)
             cm = CAUSE.search(block)
-            rows.append({"date": d, "cause": " ".join(cm.group(0).split()) if cm else None,
-                         "receiving_water": joined("Rec. Waters") or None, "gallons": gal,
-                         "gallons_text": tail[0] if tail else None, "page": pi + 1, **district})
+            water, withheld = receiving_water(joined("Rec. Waters"))
+            row = {"date": d, "cause": " ".join(cm.group(0).split()) if cm else None,
+                   "receiving_water": water, "gallons": gal,
+                   "gallons_text": tail[0] if tail and re.fullmatch(r"[\d,.]+", tail[0]) else None,
+                   "page": pi + 1, **district}
+            if withheld:
+                row["receiving_water_withheld"] = withheld
+            rows.append(row)
     check = {}
     for p in sorted(set(summary) | set(DISTRICTS) | {r["permit"] for r in rows}):
         s = summary.get(p) or {}
@@ -223,7 +242,10 @@ def records(state: dict) -> list[dict]:
             if len(per) == 2 and not (per[0] <= r["date"] <= per[1]):
                 raw["date_note"] = (f"the date given lies outside the report's quarter ({per[0]} to {per[1]}); kept as "
                                     "the City-Parish wrote it")
-            if not named:
+            if r.get("receiving_water_withheld"):
+                raw["placement_note"] = (r["receiving_water_withheld"] + ": kept with its parish and permit, placed "
+                                         "on no water")
+            elif not named:
                 raw["placement_note"] = ("the City's table gives no receiving water ('None'): kept with its parish "
                                          "and permit, placed on no water")
             out.append(event(
@@ -252,6 +274,13 @@ def migrate(state: dict) -> dict:
     if any(str(k).startswith("http") or "/" in str(k) for k in reps):
         state["reports"] = {str(v.get("number")): {**v, "url": v.get("url") or k} for k, v in reps.items()}
     state.setdefault("reports", {})
+    for v in state["reports"].values():
+        # rows saved before the receiving-water check: the cell is checked again before the state is written
+        for r in v.get("rows") or []:
+            if r.get("receiving_water") and not r.get("receiving_water_withheld"):
+                w, why = receiving_water(r["receiving_water"])
+                if why:
+                    r["receiving_water"], r["receiving_water_withheld"] = w, why
     pend = state.setdefault("pending", {})
     for k, v in state["reports"].items():
         # a state file from before pending was kept: a report with no accepted copy is unresolved since its last read
