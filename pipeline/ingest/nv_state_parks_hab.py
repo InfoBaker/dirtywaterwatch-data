@@ -19,7 +19,10 @@ Record rules
     it, so the status build ages an advisory out 14 days after the last read that showed it when the page stops being
     read. A water the page no longer lists, on a read that found all three sections, is advisory_lifted with ended_at
     that read (raw.ended_at_precision poll, raw._unlisted_since): the first read that saw it gone, an upper bound, not
-    the agency's lift time. A water listed again later opens a new record (its key carries the first read's day).
+    the agency's lift time. A water listed again later opens a new record (its key carries the first read's time, to
+    the second, so a relisting on the same day is a second episode). The status build caps the red at 14 days after
+    the last read that listed the water however late the removal is seen (POLL_END_HORIZON_SOURCES), so a removal
+    first seen after the page went unread never colours the unread weeks red.
   - A page on which any of the three sections cannot be found, or a section that is not completely readable (a bold
     heading or an "Updated" date the reader cannot take, text before the first heading, "None at this time" beside a
     listed water), writes ok=False and the previous records stay: a template change, one changed date format or a
@@ -186,6 +189,11 @@ def saved_form(items: list[dict]) -> str:
                       ensure_ascii=False, indent=1)
 
 
+def episode_stamp(fetched: str) -> str:
+    """'2026-11-14T20:00:00Z' -> '20261114T200000Z' (UTC, the first read that listed the water)."""
+    return datetime.fromisoformat(fetched.replace("Z", "+00:00")).astimezone(ZoneInfo("UTC")).strftime("%Y%m%dT%H%M%SZ")
+
+
 def local_day(fetched: str, tz: str) -> str:
     return datetime.fromisoformat(fetched.replace("Z", "+00:00")).astimezone(ZoneInfo(tz)).date().isoformat()
 
@@ -215,7 +223,9 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
         tz = nevada_zone(*(gnis[1:3] if gnis else (None, None)))
         prev = open_prev.get(k)
         praw = (prev or {}).get("raw") or {}
-        srid = prev["source_record_id"] if prev else f"{k}:{local_day(fetched, tz)}"
+        # the episode's id: the water and the first read that listed it, to the second (Astra P2-5: a listing, a
+        # removal and a relisting on one local day are two episodes, never one overwriting the other)
+        srid = prev["source_record_id"] if prev else f"{k}:{episode_stamp(fetched)}"
         opened += prev is None
         started = prev["started_at"] if prev else fetched
         history = list(praw.get("level_history") or [])
