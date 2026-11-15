@@ -485,3 +485,82 @@ def test_dnr_concern_received_day_is_an_upper_bound():
     assert got and all(r["raw"]["start_is_upper_bound"] is True and S.start_bound(r)["started_at_kind"] == "received"
                        for r in got)
     assert all(S.start_bound(r) == {} for r in recs if r["raw"]["start_kind"] == "incident")
+
+
+def _marble(period, footer, investigated, comments, no=70010):
+    head = [(350.25, 730, period), (28.8, 20, footer), (525.8, 20, "Page 2 of 5")]
+    return _pdf(head + _block(640, "SWRO", "2/9/2026", investigated, ["City of Marble", "Hill"], "Bollinger",
+                              ["Bypass or Sewer Overflow"], no, "A lift station overflows.", comments))
+
+
+FEB = ("February 01, 2026 and February 28, 2026", "Friday, March 6, 2026")
+MAR = ("March 01, 2026 and March 31, 2026", "Monday, April 6, 2026")
+
+
+def test_a_withdrawn_concern_stays_withdrawn_when_an_older_report_is_read_again():
+    """Re-review P1-7: keep (February) -> rejection (March) -> February read again alone, in a later run: nothing
+    returns; a later revision of the March report that keeps it restores it; repeat runs change nothing."""
+    meta = {"pdf_url": "https://dnr.mo.gov/feb.pdf"}
+    keep = _marble(*FEB, "2/10/2026", "Referred to the city.")
+    reject = _marble(*MAR, "3/3/2026", "No violations were observed; no further action.")
+    r1, s1, _ = C.run([(keep, meta)], [], AT)
+    r2, s2, _ = C.run([(reject, {"pdf_url": "https://dnr.mo.gov/mar.pdf"})], r1, AT, s1["decisions"])
+    assert r2 == [] and s2["decisions"]["70010"]["kept"] is False
+    r3, s3, _ = C.run([(keep, meta)], r2, AT, s2["decisions"])                         # the older report again
+    assert r3 == [] and s3["older_decision_ignored"] == 1 and s3["decisions"] == s2["decisions"]
+    r4, s4, _ = C.run([(keep, meta)], r3, AT, s3["decisions"])                         # and again
+    assert r4 == [] and s4["decisions"] == s2["decisions"]
+    # an older revision of the February report (an earlier Last revised date) changes nothing either
+    r5, _, _ = C.run([(keep, {**meta, "last_revised": "2026-02-01"})], r4, AT, s4["decisions"])
+    assert r5 == []
+    # the March report revised (a later Last revised date) to keep it: restored
+    revised = _marble(*MAR, "3/3/2026", "Referred to the city.")
+    r6, s6, _ = C.run([(revised, {"pdf_url": "https://dnr.mo.gov/mar.pdf", "last_revised": "2026-05-01"})], r5, AT,
+                      s4["decisions"])
+    assert [r["source_record_id"] for r in r6] == ["70010"] and s6["decisions"]["70010"]["kept"] is True
+    # a private-system correction in a still later revision withdraws it again
+    private = _pdf([(350.25, 730, MAR[0]), (28.8, 20, MAR[1]), (525.8, 20, "Page 2 of 5")] + _block(
+        640, "SWRO", "2/9/2026", "3/3/2026", ["Example Neighbor"], "Bollinger",
+        ["Single Family Residence", "Bypass or Sewer Overflow"], 70010, "A septic tank overflows.", "Forwarded."))
+    r7, s7, _ = C.run([(private, {"pdf_url": "https://dnr.mo.gov/mar.pdf", "last_revised": "2026-06-01"})], r6, AT,
+                      s6["decisions"])
+    assert r7 == [] and s7["decisions"]["70010"]["decision"] == "drop_private"
+
+
+def test_the_decision_ledger_survives_through_main_and_old_saves_are_migrated(tmp_path, monkeypatch):
+    """Re-review P1-7 and P1-8: an old-format save (no ledger, no placement guard, a received-day start unflagged, a
+    removed text field) replayed through main(): migrated in memory, the ledger written and used on the next run."""
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    keep = _marble(*FEB, "2/10/2026", "Referred to the city.")
+    first, _, _ = C.run([(keep, {"pdf_url": "https://dnr.mo.gov/feb.pdf"})], [], AT)
+    old = json.loads(json.dumps(first))
+    for r in old:                                               # the state branch's earlier format
+        r["raw"].pop("_placement")
+        r["raw"].pop("start_is_upper_bound")
+        r["raw"].pop("decision_revision", None)
+        r["raw"]["info"] = "A lift station overflows near 1234 Example Lane."
+        r["waterbody_text"] = None
+    (tmp_path / f"{C.SOURCE_ID}.json").write_text(json.dumps({"source_id": C.SOURCE_ID, "ok": True, "meta": {},
+                                                               "records": old}))
+    reject = tmp_path / "mar.pdf"
+    reject.write_bytes(_marble(*MAR, "3/3/2026", "No violations were observed; no further action."))
+    feb = tmp_path / "feb.pdf"
+    feb.write_bytes(keep)
+    other = tmp_path / "other.pdf"
+    other.write_bytes(_marble(*MAR, "3/3/2026", "Referred to the city.", no=70011))
+    assert C.main(["--file", str(other), "--pdf-url", "https://dnr.mo.gov/other.pdf"]) == 0
+    doc = json.loads((tmp_path / f"{C.SOURCE_ID}.json").read_text())
+    by = {r["source_record_id"]: r for r in doc["records"]}
+    assert set(by) == {"70010", "70011"} and "1234 Example" not in json.dumps(doc)
+    m = by["70010"]["raw"]
+    assert m["_placement"] == "named_water_only" and m["start_is_upper_bound"] is True and "info" not in m
+    assert set(doc["meta"]["decisions"]) == {"70010", "70011"}
+    from build import provisional_outfalls as P
+    assert not any(not P.named_water_only(r) for r in doc["records"])                  # nothing to geocode
+    assert C.main(["--file", str(reject), "--pdf-url", "https://dnr.mo.gov/mar.pdf"]) == 0
+    assert C.main(["--file", str(feb), "--pdf-url", "https://dnr.mo.gov/feb.pdf"]) == 0
+    doc = json.loads((tmp_path / f"{C.SOURCE_ID}.json").read_text())
+    assert {r["source_record_id"] for r in doc["records"]} == {"70011"}
+    assert ["https://dnr.mo.gov/feb.pdf", None] in doc["meta"]["reports_seen"]

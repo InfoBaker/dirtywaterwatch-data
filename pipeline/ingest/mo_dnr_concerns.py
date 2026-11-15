@@ -275,18 +275,66 @@ def record(b: dict, meta: dict, keys, at: str) -> tuple[str, dict | None, dict]:
     return decision, rec, safe
 
 
-def run(reports: list[tuple[bytes, dict]], prev: list[dict], at: str) -> tuple[list[dict], dict, list[dict]]:
+# raw fields an earlier version saved that the records no longer carry (concern text, the source's words)
+FORBIDDEN_RAW = ("info", "comments", "source", "text", "concern_info", "page_text", "narrative")
+
+
+def migrate(r: dict) -> None:
+    """An earlier save brought to the current rules at the next read (re-review P1-8): placed by its named water only
+    (never queued for geocoding), a received-day start flagged as an upper bound, no free text kept."""
+    raw = r.setdefault("raw", {})
+    raw["_placement"] = "named_water_only"
+    if raw.get("start_kind") == "received":
+        raw["start_is_upper_bound"] = True
+    elif raw.get("start_kind") == "incident":
+        raw.setdefault("start_is_upper_bound", False)
+    for k in FORBIDDEN_RAW:
+        raw.pop(k, None)
+    migrate_water_text(r)
+
+
+def revision(meta: dict) -> tuple:
+    """The order of a report's decisions: its period, then its own generated date, then its page's Last revised date.
+    A later key replaces an earlier decision; an earlier one never overrides a later (re-review P1-7)."""
+    per = meta.get("period") or ["", ""]
+    return (str(per[0] or ""), str(per[-1] or ""), str(meta.get("generated") or meta.get("report_generated") or ""),
+            str(meta.get("last_revised") or meta.get("page_last_revised") or ""))
+
+
+def seed_decisions(prev: list[dict]) -> dict:
+    """The decision ledger of a save made before it existed: every kept record's report, as a keep."""
+    out = {}
+    for r in prev:
+        raw = r.get("raw") or {}
+        no = raw.get("concern_no") or r.get("source_record_id")
+        if no:
+            out[str(no)] = {"decision": "keep", "kept": True,
+                            "revision": list(revision({"period": raw.get("report_period"),
+                                                       "generated": raw.get("report_generated"),
+                                                       "last_revised": raw.get("page_last_revised")})),
+                            "pdf_url": r.get("source_url"), "seeded_from_record": True}
+    return out
+
+
+def run(reports: list[tuple[bytes, dict]], prev: list[dict], at: str,
+        decisions: dict | None = None) -> tuple[list[dict], dict, list[dict]]:
+    """decisions: the ledger saved in the events file's meta (concern number -> the latest decision, kept or not, and
+    the revision of the report it came from); None for a save made before it, seeded from the kept records. It is
+    returned in the stats as "decisions" (written to meta), so a withdrawn concern stays withdrawn when an older
+    report, or an older revision, is read again later."""
     keys = _county_keys()
     recs = {r["event_id"]: r for r in prev}
     for r in recs.values():
-        migrate_water_text(r)
-    stats, safe_rows, withdrawn = Counter(), [], []
+        migrate(r)
+    ledger = {k: dict(v) for k, v in (decisions if decisions is not None else seed_decisions(prev)).items()}
+    stats, safe_rows, withdrawn, stale = Counter(), [], [], []
     parsed = []
     for pdf, meta in reports:
         bs, m2 = blocks(pdf)
         parsed.append((bs, {**meta, **m2}))
-    for bs, meta in sorted(parsed, key=lambda x: (x[1].get("period") or [""])[0]):   # older report periods first
+    for bs, meta in sorted(parsed, key=lambda x: revision(x[1])):           # older reports and revisions first
         stats["concerns"] += len(bs)
+        rev = list(revision(meta))
         for b in bs:
             if SEWER_TYPE not in b["type"].lower():
                 continue
@@ -294,29 +342,44 @@ def run(reports: list[tuple[bytes, dict]], prev: list[dict], at: str) -> tuple[l
             decision, rec, safe = record(b, meta, keys, at)
             stats[decision] += 1
             safe_rows.append(safe)
-            if rec is None and b.get("no") and f"{SOURCE_ID}:{b['no']}" in recs:
+            no = str(b.get("no") or "")
+            known = ledger.get(no)
+            if no and known and list(known.get("revision") or []) > rev:
+                # an older report (or an older revision of it) than the one the latest decision came from: it
+                # changes nothing, a withdrawal included
+                stale.append({"concern_no": no, "decision": decision, "report_revision": rev,
+                              "latest_revision": known.get("revision")})
+                stats["older_decision_ignored"] += 1
+                continue
+            if no:
+                ledger[no] = {"decision": decision, "kept": rec is not None, "revision": rev,
+                              "pdf_url": meta.get("pdf_url"), "decided_at": at}
+            if rec is None and no and f"{SOURCE_ID}:{no}" in recs:
                 # a later report that finds the concern unsupported (or outside the sewer remit) withdraws the
-                # record an earlier report kept (Astra 2026-11-14 P1-7); a later keep restores it
-                gone = recs.pop(f"{SOURCE_ID}:{b['no']}")
-                withdrawn.append({"concern_no": b["no"], "decision": decision, "was": gone["raw"].get("dnr_finding"),
+                # record an earlier report kept (Astra 2026-11-14 P1-7); the ledger keeps the withdrawal
+                gone = recs.pop(f"{SOURCE_ID}:{no}")
+                withdrawn.append({"concern_no": no, "decision": decision, "was": gone["raw"].get("dnr_finding"),
                                   "report_period": meta.get("period")})
                 stats["withdrawn"] += 1
             if rec:
                 stats["kept_" + rec["raw"]["dnr_finding"]] += 1
                 old = recs.get(rec["event_id"])
                 rec["raw"]["first_seen_at"] = (old or {}).get("raw", {}).get("first_seen_at") or at
+                rec["raw"]["decision_revision"] = rev
                 recs[rec["event_id"]] = rec
     for r in recs.values():
         r["fetched_at"] = at
     out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
     st = dict(stats)
     st["withdrawn_concerns"] = withdrawn
+    st["older_decisions_ignored"] = stale
+    st["decisions"] = dict(sorted(ledger.items()))
     return out, st, safe_rows
 
 
-def fetch(prev: list[dict]) -> list[tuple[bytes, dict]]:
+def fetch(prev: list[dict], read: list | None = None) -> list[tuple[bytes, dict]]:
     """Every report the Commission's page links whose PDF (by URL and "Last revised") was not read before."""
-    seen = {(r["source_url"], r["raw"].get("page_last_revised")) for r in prev}
+    seen = {(r["source_url"], r["raw"].get("page_last_revised")) for r in prev} | set(map(tuple, read or []))
     idx = requests.get(INDEX, headers=HEADERS, timeout=(20, 120))
     idx.raise_for_status()
     out = []
@@ -341,7 +404,10 @@ def fetch(prev: list[dict]) -> list[tuple[bytes, dict]]:
 def main(argv=None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     path = common.EVENTS_DIR / f"{SOURCE_ID}.json"
-    prev = (read_json(path, {}) or {}).get("records") or []
+    doc = read_json(path, {}) or {}
+    prev = doc.get("records") or []
+    pmeta = doc.get("meta") or {}
+    read = [list(x) for x in pmeta.get("reports_seen") or []]
     try:
         if "--file" in argv:
             reports = [(Path(argv[argv.index("--file") + 1]).read_bytes(),
@@ -349,22 +415,27 @@ def main(argv=None) -> int:
                          "pdf_url": argv[argv.index("--pdf-url") + 1] if "--pdf-url" in argv else None,
                          "last_revised": argv[argv.index("--last-revised") + 1] if "--last-revised" in argv else None})]
         else:
-            reports = fetch(prev)
-    except (requests.RequestException, OSError, ValueError) as e:
+            reports = fetch(prev, read)
+        recs, stats, safe = run(reports, prev, now_iso(), pmeta.get("decisions"))
+    except (requests.RequestException, OSError, ValueError, KeyError, IndexError, TypeError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
         return 1
-    recs, stats, safe = run(reports, prev, now_iso())
     if safe:
         save_raw(SOURCE_ID, json.dumps(safe, ensure_ascii=False, indent=1), "json")
+    for _, m in reports:
+        k = [m.get("pdf_url"), m.get("last_revised")]
+        if k not in read:
+            read.append(k)
     out = write_events(SOURCE_ID, recs, meta={
-        "registry_ids": [SOURCE_ID], "url": INDEX, **stats, "reports_read": len(reports),
+        "registry_ids": [SOURCE_ID], "url": INDEX, **stats, "reports_read": len(reports), "reports_seen": read,
         "credit": "Missouri Department of Natural Resources, Water Pollution Control concern reports",
         "caveat": ("Concerns the Department investigated, published monthly and two to four months late. A concern is "
                    "the concerned party's report unless the Department's comments say what it found or the operator "
                    "reported the overflow itself; concerns the Department found unsupported are not shown."),
         "cadence": "daily; a report is read once (again only when its page's Last revised date changes)"})
-    print(f"{SOURCE_ID}: {len(recs)} records ({stats}) -> {out}")
+    print(f"{SOURCE_ID}: {len(recs)} records ({ {k: v for k, v in stats.items() if not isinstance(v, (list, dict))} }) "
+          f"-> {out}")
     return 0
 
 
