@@ -489,7 +489,16 @@ def test_no_sentinel_reaches_any_save_from_the_des_feeds(monkeypatch, tmp_path):
         def json(self):
             return self._js
 
+    # DES's "Swimming Advisory" layer (fix/sc-swimming-advisories): its Contact and Phone fields sent unasked, and a
+    # name carrying a person and a telephone number
+    swim = json.loads((FIX / "swimming_advisory.json").read_text())["layer"]
+    swim["features"] = swim["features"][:1]
+    swim["features"][0]["attributes"].update(Contact="Pat Example", Phone="803-555-0199",
+                                             Name="Crosby's Landing, call Pat Example at 803-555-0199")
+
     def fake_get(url, **k):
+        if "Water_Advisories" in url:
+            return Resp({"count": 1} if "returnCountOnly" in url else swim)
         if "BW_Monitoring" in url:
             return Resp({"features": beach})
         if "algal_hydro" in url:
@@ -499,7 +508,7 @@ def test_no_sentinel_reaches_any_save_from_the_des_feeds(monkeypatch, tmp_path):
     monkeypatch.setattr(A, "STATE_PATH", tmp_path / "state.json")
     assert A.main(["--at", T0]) == 0
     blob = "\n".join(saves)
-    assert len(saves) >= 4 and "Cedar Point Cove" in blob
+    assert len(saves) >= 5 and "Cedar Point Cove" in blob and "Crosby" in blob
     for x in SENTINELS:
         assert x not in blob, x
 
@@ -577,7 +586,8 @@ def test_register_rows_per_operator_and_the_state_channels():
     assert reg["sc-des-hab"]["feed_source_id"] == "sc-des-hab"
     assert reg["sc-charleston-water-news"]["monitored"] and reg["sc-charleston-water-news"]["records"] is False
     assert reg["sc-des-sso-reports"]["barrier"] == "no_web_page"
-    assert reg["sc-des-freshwater-swim-advisories"]["barrier"] == "not_verified"
+    assert reg["sc-des-freshwater-swim-advisories"]["feed_source_id"] == "sc-des-freshwater-swim-advisories"
+    assert reg["sc-des-freshwater-swim-advisories"]["barrier"] is None
     assert reg["sc-rewa-public-notice"]["barrier"] == "not_verified" and "48-1-95(E)" in reg["sc-rewa-public-notice"]["legal_basis"]
 
 
@@ -595,9 +605,7 @@ def test_state_text_is_in_the_page_shape():
               "Known problems in the data", "What this site does about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
-    # the one use of "safe" is the audit's negation: a site on DES's list is not a water found safe (P1-1)
-    bare = t.replace("a site on that list is not a water found safe", "")
-    assert not re.search(r"\b(safe|clean)\b", bare, re.I) and ".json" not in t and ".py" not in t
+    assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
     assert "48-1-95" in t and "City of Florence" in t and "21 long-term" in t and "18 on the Grand Strand" in t
 
 

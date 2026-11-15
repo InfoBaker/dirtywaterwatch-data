@@ -619,10 +619,10 @@
    "operator_id": null,
    "agency": "South Carolina Department of Environmental Services",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-15",
    "id": "sc-des-freshwater-swim-advisories",
    "name": "SC DES (freshwater swimming advisory sites)",
-   "channel_kind": "state_alert_page",
+   "channel_kind": "feed",
    "urls": [
     "https://gis.des.sc.gov/gisserver/rest/services/water/Water_Advisories/MapServer/0"
    ],
@@ -630,15 +630,15 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Voluntary page",
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "sc-des-freshwater-swim-advisories",
+   "publishes": "status",
+   "noun": "Data feed",
    "sources": [
     "sc-des-freshwater-swim-advisories"
    ],
-   "note": "A layer named 'Swimming Advisory' with 23 river and lake sites (name, station, point; a contact and telephone field not read) and no date or status; DES's pages do not say what a site on it means. Listed in the research as not checked against DES; not read until DES confirms its meaning.",
-   "barrier": "not_verified"
+   "note": "DES's map layer titled 'Swimming Advisory' (SCDES Water Advisories, layer 0): 23 river and lake sites on 2026-11-15 (name, station, point; the contact and telephone fields are not read) with no date and no status. Each site is shown at its point as DES's listing, dated from the first read that listed it.",
+   "barrier": null
   },
   {
    "state": "SC",
@@ -743,6 +743,33 @@
    ],
    "note": "Utilities report significant spills to DES by telephone within 24 hours and in writing within five days, and DES's guidance asks for reports of any overflow reaching water and of larger ones that do not; DES publishes no list. DES training material shows an 'SSO Discharge Search' among ePermitting's public services (https://epermitting.des.sc.gov/ext/ncore/), but the application returned only its shell to a plain client on 2026-11-09 and no search result was read. No web channel found.",
    "barrier": "no_web_page"
+  },
+  {
+   "state": "SC",
+   "operator_id": null,
+   "agency": "South Carolina Department of Environmental Services",
+   "permit": null,
+   "checked": "2026-11-15",
+   "id": "sc-des-swim-safety-page",
+   "name": "SC DES (swim safety pages)",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://des.sc.gov/programs/bureau-water/recreational-waters/swim-safety",
+    "https://des.sc.gov/programs/bureau-water/recreational-waters/swim-safety/natural-swimming-areas"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "bot_wall",
+   "publishes": "notices",
+   "records": false,
+   "noun": "Voluntary page",
+   "sources": [
+    "sc-des-freshwater-swim-advisories"
+   ],
+   "note": "DES's swim-safety pages, among them the natural swimming areas page, which may describe the 'Swimming Advisory' layer's sites, answered 'Access denied' to this site's requests and 403 to a browser on 2026-11-15; what a site on the layer means could not be read from DES. The layer itself is read as a feed.",
+   "barrier": "bot_wall"
   },
   {
    "state": "SC",

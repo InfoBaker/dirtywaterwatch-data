@@ -120,8 +120,9 @@ def test_adding_south_carolina_leaves_other_states_records_unchanged(monkeypatch
 
 def test_the_state_text_quotes_the_departments_layer_title():
     t = (ROOT / "research" / "sc" / "state-text.md").read_text()
-    assert 'map layer titled "Swimming Advisory" lists 23 river and lake sites' in t
-    assert "a site on that list is not a water found safe" in t
+    # the sites are now shown as DES's listing (fix/sc-swimming-advisories): the title is still DES's own
+    assert 'map layer titled "Swimming Advisory" listed 23 river and lake sites' in t
+    assert "not coloured here" not in t
     assert "freshwater swimming sites" not in t
 
 

@@ -20,6 +20,11 @@ Sources
     is empty, there are no current watches and/or advisories listed."). 897 delineations on 2026-11-14, one a Watch
     (Microcystis, J. Strom Thurmond Reservoir, dated 2026-10-16; the table: Watch, Cedar Point Cove, J. Strom Thurmond,
     10/16/2026).
+  - River and lake sites (registry sc-des-freshwater-swim-advisories): the layer titled "Swimming Advisory" of DES's
+    service "SCDES Water Advisories", https://gis.des.sc.gov/gisserver/rest/services/water/Water_Advisories/MapServer/0
+    (fields Name, Station and the point; the layer also holds Phone, Contact, PicURL and PicNAME, never requested). 23
+    sites on 2026-11-15 (Cherokee Falls Dam R2-008 to Pacolet River at Clifton Mill Beach R2-012). The layer has no
+    description, no date field and no status field; DES does not say on it what a listing means.
 
 Records (rules only; a snapshot read as a sequence of polls)
   - Beach: a station whose ADVISORY is not "No Advisory" is a record. "Long-Term": a standing advisory in DES's words
@@ -46,7 +51,20 @@ Records (rules only; a snapshot read as a sequence of polls)
     "Little" kept; WATER_ALIASES for names DES's pages show are one water). DES's revised date or water for the same
     GlobalID is taken with the earlier value kept (raw.revisions); a date after the day this site first saw the
     record is a later advisory: the earlier record ends at that poll and the new one is its own (raw.follows).
-  - Keys: beach "<STAT>-<first poll date>"; bloom "<GlobalID>-<date>" (the table-only row: "table-<water>-<date>").
+  - "Swimming Advisory" sites: shown as DES's long-term beach advisories and Kentucky's and Tennessee's undated
+    standing lists are: each listed site is a record (beach_advisory, advisory_active, DES's layer title quoted in
+    advice_text, nothing added about what the listing means), at the layer's own point rounded to three decimals
+    (raw._point_extent_only: one marker, the river or lake never coloured whole; placed on a water only by the
+    status build's ordinary point rules, waterbody_text null). started_at is the first read that listed the site
+    (time_precision poll; raw.start_basis says the listing may be older); reported_at, published_at and
+    source_updated_at stay null. Each read that lists it confirms it (raw._last_seen_in_source, raw.listed_periods
+    after an unread gap); the first complete read without it ends it (advisory_lifted, ended_at the read,
+    raw.ended_at_precision poll); a site listed again later is a new record. A read is complete only when the layer
+    answers with features, no exceededTransferLimit, the fields asked for, a station on every site and a
+    returnCountOnly count equal to the features returned; any other read is ok false, ends nothing and keeps the
+    records (common.write_events).
+  - Keys: beach "<STAT>-<first poll date>"; bloom "<GlobalID>-<date>" (the table-only row: "table-<water>-<date>");
+    "Swimming Advisory" site "<Station>-<first read>".
 
 Privacy: the layers' Creator and Editor fields (staff accounts) and the beach layer's GlobalID are never requested;
 the fields read hold no person. data/raw keeps only the fields read.
@@ -79,6 +97,12 @@ BEACH_LAYER = ("https://gis.des.sc.gov/gisserver/rest/services/water/BW_Monitori
 HAB_LAYER = ("https://services5.arcgis.com/OMDIQXm11z4wcK26/arcgis/rest/services/algal_hydro_2_view/FeatureServer/0/"
              "query?where=Advisory_Tier%3C%3E%27HAB+Not+Present%27&outFields=OBJECTID,NAME,Algal_Bloom,Date,"
              "Advisory_Tier,Recreational_Guidance,GlobalID&returnGeometry=false&returnCentroid=true&outSR=4326&f=json")
+SWIM_ID = "sc-des-freshwater-swim-advisories"
+SWIM_URL = "https://gis.des.sc.gov/gisserver/rest/services/water/Water_Advisories/MapServer/0"
+SWIM_LAYER = SWIM_URL + "/query?where=1%3D1&outFields=OBJECTID,Name,Station&returnGeometry=true&outSR=4326&f=json"
+SWIM_COUNT = SWIM_URL + "/query?where=1%3D1&returnCountOnly=true&f=json"
+SWIM_FIELDS = ("OBJECTID", "Name", "Station")
+SWIM_AUTHORITY = "South Carolina Department of Environmental Services (SCDES Water Advisories)"
 HAB_PAGE = "https://des.sc.gov/programs/bureau-water/aquatic-science/harmful-algal-blooms"
 BEACH_PAGE = "https://des.sc.gov/programs/bureau-water/aquatic-science/beach-monitoring"
 BEACH_GUIDE = "https://gis.des.sc.gov/beachaccess/"
@@ -519,6 +543,111 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
     return recs, state, counts
 
 
+# ---------------------------------------------------------------- the "Swimming Advisory" layer (rivers and lakes)
+
+def check_swim(js, count) -> list[dict]:
+    """The layer's features, or ValueError: an error, a cut-off, changed fields (check_layer), no site at all, a count
+    that does not match the features returned (a partial answer), or a site without its station. Nothing is ended
+    from such a read."""
+    feats = check_layer(js, ("Name", "Station"))
+    if not feats:
+        raise ValueError("the layer returned no sites")
+    if not isinstance(count, dict) or not isinstance(count.get("count"), int) or count["count"] != len(feats):
+        raise ValueError(f"the layer counts {(count or {}).get('count') if isinstance(count, dict) else None} sites "
+                         f"and returned {len(feats)}")
+    seen = set()
+    for f in feats:
+        a = f.get("attributes") or {}
+        stat, name = a.get("Station"), a.get("Name")
+        if not isinstance(stat, str) or not stat.strip():
+            raise ValueError("a site has no station identifier in text")
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError(f"site {stat.strip()} has no name in text")
+        norm = stat.strip().upper()
+        if norm in seen:                               # two features for one station: never one lifting the other
+            raise ValueError(f"station {stat.strip()} is listed twice")
+        seen.add(norm)
+    return feats
+
+
+def swim_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict], dict, dict]:
+    """One record per site on DES's layer titled "Swimming Advisory", keyed on DES's station identifier and the first
+    read that listed it. Only called with a complete, healthy read (check_swim): a site the read no longer lists ends
+    at that read (a poll bound, no end of DES's own); a site listed again after it ended is a new record."""
+    state = {k: dict(v) for k, v in (prev.get("swim") or {}).items()}
+    listed, counts = {}, {"sites": len(features), "without_point": 0}
+    for f in features:
+        a = f.get("attributes") or {}
+        stat = str(a.get("Station")).strip()
+        lat, lon = _pt(f.get("geometry"))
+        counts["without_point"] += lat is None
+        listed[stat] = {"name": (a.get("Name") or "").strip() or None, "lat": lat, "lon": lon}
+    for stat, o in listed.items():
+        cur = next((v for v in state.values() if v["station"] == stat and not v.get("ended_at")), None)
+        if cur is None:
+            key = base = f"{stat}-{re.sub(r'[^0-9T]', '', now)[:13]}"
+            n = 2
+            while key in state:
+                key, n = f"{base}-{n}", n + 1
+            state[key] = {"station": stat, "name": o["name"], "lat": o["lat"], "lon": o["lon"], "started_at": now,
+                          "last_seen_at": now}
+            continue
+        cur["listed_periods"] = extend_periods(cur.get("listed_periods"), now, cur["started_at"], cur.get("last_seen_at"))
+        cur["last_seen_at"] = now
+        for k in ("name", "lat", "lon"):
+            if o[k] is not None and o[k] != cur.get(k):
+                if cur.get(k) is not None:
+                    cur.setdefault("revisions", []).append({"seen_at": now, "field": k, "was": cur.get(k), "now": o[k]})
+                cur[k] = o[k]
+    for v in state.values():
+        if not v.get("ended_at") and v["station"] not in listed:
+            v["ended_at"] = now                        # a complete read that no longer lists the site
+    recs = []
+    for key, v in sorted(state.items()):
+        has_pt = v.get("lat") is not None
+        raw = {"state": "SC", "time_zone": "America/New_York", "station": v["station"], "site_name": v.get("name"),
+               "layer_title": SWIM_TITLE, "_last_seen_in_source": v.get("last_seen_at"), **_periods(v),
+               "_point_extent_only": True, "extent_basis": SWIM_EXTENT,
+               "start_basis": SWIM_START_BASIS}
+        raw["point_basis"] = ("DES's point for the site on its \"Swimming Advisory\" layer, rounded to three decimals"
+                              if has_pt else "DES's layer gives no usable point for this site: it is listed, not mapped")
+        if v.get("ended_at"):
+            raw.update(ended_at_precision="poll", end_basis=SWIM_END_BASIS)
+        if v.get("revisions"):
+            raw["revisions"] = v["revisions"]
+        recs.append(event(
+            source_id=SWIM_ID, source_record_id=key, event_type="beach_advisory",
+            status="advisory_lifted" if v.get("ended_at") else "advisory_active",
+            outfall_name=v.get("name") or f"Site {v['station']}", waterbody_text=None,
+            lat=v.get("lat"), lon=v.get("lon"), coord_source="station" if has_pt else None,
+            coord_precision_m=100 if has_pt else None,
+            started_at=v["started_at"], ended_at=v.get("ended_at"), time_precision="poll", fetched_at=now,
+            reported_at=None, published_at=None, source_updated_at=None,
+            authority=SWIM_AUTHORITY, advice_text=SWIM_TEXT, advice_window_basis=SWIM_WINDOW_BASIS,
+            source_url=SWIM_URL, raw=raw))
+    return recs, state, counts
+
+
+SWIM_TITLE = "Swimming Advisory"
+SWIM_TEXT = ("SCDES lists this site on its map layer titled \"Swimming Advisory\" (SCDES Water Advisories). The layer "
+             "gives no date and no status, and SCDES does not say on it what a listing means.")
+SWIM_START_BASIS = ("the first read of DES's \"Swimming Advisory\" layer that listed the site; the layer gives no date, "
+                    "so the listing may have begun earlier")
+SWIM_END_BASIS = ("the first complete read of DES's \"Swimming Advisory\" layer that no longer listed the site; DES "
+                  "gives no date for the change")
+SWIM_WINDOW_BASIS = "shown while DES's layer lists the site; the layer gives no dates"
+SWIM_EXTENT = ("DES gives one point for the site, not a stretch or a whole water: shown at that point, and the river "
+               "or lake is not coloured whole")
+SWIM_META = {"credit": "South Carolina Department of Environmental Services (SCDES Water Advisories, \"Swimming "
+                       "Advisory\" layer)",
+             "license": "No licence statement on the service",
+             "caveat": ("DES's layer titled \"Swimming Advisory\" lists river and lake sites with no date and no "
+                        "status; DES does not say on the layer what a listing means. A site not on the list is not a "
+                        "finding about its water."),
+             "time_basis": "Dated by the read that first listed each site (the layer gives no dates); an end is the "
+                           "first complete read that no longer lists it."}
+
+
 BEACH_META = {"credit": "South Carolina Department of Environmental Services, Beach Monitoring (S.C. Beach Access Guide)",
               "license": "No licence statement on the service",
               "caveat": ("DES's station layer shows each station's current advisory and no dates; a long-term advisory "
@@ -537,10 +666,21 @@ def run(args) -> int:
     if args.file:
         saved = json.loads(open(args.file).read())
         beach, hab, table = saved["beach"], saved["hab"], saved.get("hab_table")
+        swim = saved.get("swim")
         ok_b = ok_h = True
+        ok_s = True if swim is not None else None      # a saved file without the layer leaves it untouched
     else:
-        beach = hab = table = None
-        ok_b = ok_h = True
+        beach = hab = table = swim = None
+        ok_b = ok_h = ok_s = True
+        try:
+            r = requests.get(SWIM_LAYER, headers=HEADERS, timeout=TIMEOUT)
+            r.raise_for_status()
+            c = requests.get(SWIM_COUNT, headers=HEADERS, timeout=TIMEOUT)
+            c.raise_for_status()
+            swim = safe_features(check_swim(r.json(), c.json()), "geometry", SWIM_FIELDS)
+        except Exception as e:                         # any failure of this read is its own (Astra P1-3)
+            ok_s, swim = False, None
+            write_events(SWIM_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=SWIM_META, path=args.out_swim)
         try:
             r = requests.get(BEACH_LAYER, headers=HEADERS, timeout=TIMEOUT)
             r.raise_for_status()
@@ -564,7 +704,7 @@ def run(args) -> int:
             write_events(HAB_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=HAB_META)
         beach, hab = safe_features(beach, "geometry"), safe_features(hab, "centroid")
         save_raw("sc-des-advisories", json.dumps({"format": SAFE_FORMAT, "beach": beach, "hab": hab,
-                                                  "hab_table": table}), "json")
+                                                  "hab_table": table, "swim": swim}), "json")
     new = dict(prev)
     if ok_b:
         recs, new["beach"], n = beach_records(beach, prev, now)
@@ -574,9 +714,21 @@ def run(args) -> int:
         recs, new["hab"], n = hab_records(hab, table, prev, now)
         write_events(HAB_ID, recs, meta={**HAB_META, "counts": n}, path=args.out_hab)
         print(f"{HAB_ID}: {len(recs)} records; {n}")
+    if ok_s:
+        # isolated: a failure while building these records keeps their previous records and state (ok false) and
+        # never stops the beach and bloom records and state from being committed (Astra review P1-3)
+        try:
+            recs, swim_state, n = swim_records(swim, prev, now)
+        except Exception as e:
+            ok_s = False
+            write_events(SWIM_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=SWIM_META, path=args.out_swim)
+        else:
+            new["swim"] = swim_state
+            write_events(SWIM_ID, recs, meta={**SWIM_META, "counts": n}, path=args.out_swim)
+            print(f"{SWIM_ID}: {len(recs)} records; {n}")
     if not args.file:
         write_json(STATE_PATH, new)
-    return 0 if (ok_b and ok_h) else 1
+    return 0 if (ok_b and ok_h and ok_s is not False) else 1
 
 
 def main(argv=None) -> int:
@@ -585,6 +737,7 @@ def main(argv=None) -> int:
     ap.add_argument("--at")
     ap.add_argument("--out-beach")
     ap.add_argument("--out-hab")
+    ap.add_argument("--out-swim")
     return run(ap.parse_args(argv))
 
 
