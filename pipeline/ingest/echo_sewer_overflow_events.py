@@ -455,9 +455,9 @@ Puerto Rico (permits PR...; research/pr/profile.json; not live until data/rules.
     pr_plant_point): a bypass (a diversion at the plant; 77 on the 2026-11-12 extract), a report whose description
     names a plant ('PA <town> (WWTP)', 'planta'; 16) or whose point lies within REPEATED_POINT_PLANT_M of the permit's
     plant point (13) keeps the point only in raw.reported_point with raw.point_note; so does a point outside Puerto
-    Rico (STATE_POINT_BOX). Such a report is placed by the water it names or not at all, and every PR record carries
-    raw._placement "named_water_only", so build/provisional_outfalls.py never geolocates it from its text or stands a
-    plant point in for it. On that extract 146 of the 252 kept reports keep their own point. Points are kept to
+    Rico (STATE_POINT_BOX). Such a report is placed by the water it names or not at all: it carries raw._placement "named_water_only", so
+    build/provisional_outfalls.py never geolocates it from its text or stands a plant point in for it, and the status
+    build never places it on its permit's outfalls' water. On that extract 146 of the 252 kept reports keep their own point. Points are kept to
     0.001 degree before anything is saved (ROUND_POINT_STATES: the saved ZIP's PR rows, the record, raw, reported_point).
   - Publication (Astra PR review P2-1): the ZIP entry's date is the extract's, not a report's publication, so PR
     records leave published_at empty and carry raw.extract_date and raw.publication_note
@@ -1855,8 +1855,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             raw["reported_point"], raw["point_note"] = plant_note
             if state in PLANT_TEXT_POINT_STATES:
                 raw["reported_point"] = [round(float(x), 3) for x in plant_note[0]]
-        if state in PLANT_TEXT_POINT_STATES:
-            raw["_placement"] = "named_water_only"
+        if state in PLANT_TEXT_POINT_STATES and lat is None:
+            raw["_placement"] = "named_water_only"     # no point of its own: never geolocated, no outfall stand-in
         if state in EXTRACT_DATE_NOT_PUBLICATION_STATES:
             raw["extract_date"] = info.get("extract_date")
             raw["publication_note"] = ("EPA's file gives no date each report was published; extract_date is the date of "
