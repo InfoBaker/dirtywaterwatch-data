@@ -1962,6 +1962,41 @@ def existing_same_water(geom, towns, existing: dict, slugs) -> tuple[str | None,
 
 
 REMAINDER_OVERLAP_MAX = 0.10   # a remainder with more of its length than this within SAME_WATER_M of its river is recut
+# Hand rulings on remainders (go-live audits): an NHD remainder of the river (state, GNIS number) that lies on records
+# other than the one it was cut from (new_record cuts against the first same-named record only, and never against a
+# reservoir of another name the river runs through). recheck_remainders, which runs at every write of
+# data/waters-nhd.json, measures such a remainder against `on` as well: the parts within SAME_WATER_M of those
+# outlines, and the side channels and braids within SIDE_CHANNEL_M of the river record `to`, are those records'; a
+# rest shorter than REMAINDER_MIN_KM is dropped and the target rows naming it (slugs, reach_slugs) go to `to`, a longer
+# true remainder is cut to that rest (and takes `kind`, when given). A rerun of the state's batch therefore cannot
+# rebuild the copy. {(state, GNIS number): {"to", "on", "why", "kind"?}}
+REMAINDER_ON = {
+    ("MN", 649622): {
+        "to": "pomme-de-terre-river-mn", "on": ["pomme-de-terre-river-mn"],
+        "why": "the Pomme de Terre River's NHD copy was cut only against openboatlaunch's 1 km "
+               "pomme-de-terre-river-appleton-mn and lay 99 per cent on pomme-de-terre-river-mn, the whole river from "
+               "Appleton to Morris (MN go-live audit 2026-11-15, P2-1)"},
+    ("ND", 756398): {
+        "to": "missouri-river-nd", "on": ["missouri-river-nd", "lake-sakakawea-nd", "lake-oahe-nd"], "kind": "river",
+        "why": "the Missouri River's NHD copy was cut only against missouri-river-nd and lay 70 per cent on Lake "
+               "Sakakawea and most of the rest on Lake Oahe: the river's line through the reservoirs is the "
+               "reservoirs' records, its braids beside the river are missouri-river-nd (ND go-live audit 2026-11-15, "
+               "P2-2)"},
+}
+SIDE_CHANNEL_M = 1000          # a rest piece this close to the river record `to` is a side channel or braid of it
+
+
+def _remainder_ruling(w: dict, existing: dict | None, lat0: float):
+    """(ruling, the union of its outlines in metres buffered by SAME_WATER_M, the river `to` in metres) for a remainder
+    REMAINDER_ON names, or None when it names none or an outline it needs is not on this machine."""
+    hand = REMAINDER_ON.get((str(w.get("state") or "").upper(), gnis_num(w.get("gnis_id"))))
+    if not hand:
+        return None
+    geoms = [S.water_geometry(x, existing) for x in dict.fromkeys(list(hand["on"]) + [hand["to"]])]
+    if any(g is None for g in geoms):
+        return None
+    near = shapely.union_all([to_m_geom(g, lat0).buffer(SAME_WATER_M) for g in geoms])
+    return hand, near, to_m_geom(S.water_geometry(hand["to"], existing), lat0)
 
 
 def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: dict | None = None,
@@ -1978,41 +2013,62 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
         parent = w.get("covers_part_of")
         if not parent or not w.get("geometry"):
             continue
-        eg = S.water_geometry(parent, existing)
-        if eg is None:
-            continue
         g = shape(w["geometry"])
         lat0 = g.centroid.y
-        gm, em = to_m_geom(g, lat0), to_m_geom(eg, lat0)
-        if gm.length <= 0:
-            continue
-        near = em.buffer(SAME_WATER_M)
-        share = gm.intersection(near).length / gm.length
-        if share <= REMAINDER_OVERLAP_MAX:
-            continue
-        rest_m = gm.difference(near)
+        ruling = _remainder_ruling(w, existing, lat0)
+        hand = None
+        if ruling:
+            hand, near, river = ruling
+            gm = to_m_geom(g, lat0)
+            if gm.length <= 0:
+                continue
+            share = gm.intersection(near).length / gm.length
+            if share <= REMAINDER_OVERLAP_MAX:
+                continue
+            rest_m = gm.difference(near)
+            if not rest_m.is_empty:          # side channels and braids beside the river are the river's
+                keep_parts = [x for x in getattr(rest_m, "geoms", [rest_m]) if x.distance(river) > SIDE_CHANNEL_M]
+                rest_m = shapely.union_all(keep_parts) if keep_parts else shapely.GeometryCollection()
+            target = hand["to"]
+            why = (f"{share:.0%} of the record lay within {SAME_WATER_M} m of {', '.join(hand['on'])} (hand ruling: "
+                   f"{hand['why']})")
+        else:
+            eg = S.water_geometry(parent, existing)
+            if eg is None:
+                continue
+            gm, em = to_m_geom(g, lat0), to_m_geom(eg, lat0)
+            if gm.length <= 0:
+                continue
+            near = em.buffer(SAME_WATER_M)
+            share = gm.intersection(near).length / gm.length
+            if share <= REMAINDER_OVERLAP_MAX:
+                continue
+            rest_m = gm.difference(near)
+            target = parent
+            why = (f"{share:.0%} of the record lay within {SAME_WATER_M} m of {parent}'s outline (a remainder cut "
+                   "against an older or missing outline)")
         k = np.array([111_320.0 * math.cos(math.radians(lat0)), 110_574.0])
         rest = shapely.transform(rest_m, lambda c: c / k) if not rest_m.is_empty else None
         rest = WX.as_multiline(rest) if rest is not None else None
-        why = (f"{share:.0%} of the record lay within {SAME_WATER_M} m of {parent}'s outline (a remainder cut against "
-               "an older or missing outline)")
         if rest is None or rest.is_empty or WX.length_km(rest) < REMAINDER_MIN_KM:
             drop.add(i)
-            moved[w["slug"]] = parent
-            actions.append({"slug": w["slug"], "action": "dropped", "to": parent, "why": why})
+            moved[w["slug"]] = target
+            actions.append({"slug": w["slug"], "action": "dropped", "to": target, "why": why})
             continue
         gs = WX.as_multiline(WX.simplify(rest, SIMPLIFY_M))
         b = gs.bounds
         rows[i] = {**w, "geometry": mapping(gs), "length_km": round(WX.length_km(gs), 2),
-                   "bbox": [round(b[0], 5), round(b[1], 5), round(b[2], 5), round(b[3], 5)]}
-        actions.append({"slug": w["slug"], "action": "recut", "to": parent, "why": why})
+                   "bbox": [round(b[0], 5), round(b[1], 5), round(b[2], 5), round(b[3], 5)],
+                   **({"kind": hand["kind"]} if hand and hand.get("kind") else {})}
+        actions.append({"slug": w["slug"], "action": "recut", "to": target, "why": why})
     if drop:
         rows[:] = [w for i, w in enumerate(rows) if i not in drop]
     for t in targets or []:
-        hits = [x for x in t.get("slugs") or [] if x in moved]
+        hits = list(dict.fromkeys([x for x in t.get("slugs") or [] if x in moved]
+                                  + [x for x in (t.get("reach_slugs") or {}).values() if x in moved]))
         if not hits:
             continue
-        t["slugs"] = list(dict.fromkeys(moved.get(x, x) for x in t["slugs"]))
+        t["slugs"] = list(dict.fromkeys(moved.get(x, x) for x in t.get("slugs") or []))
         if t.get("reach_slugs"):
             t["reach_slugs"] = {kk: moved.get(v, v) for kk, v in t["reach_slugs"].items()}
         t["notes"] = list(dict.fromkeys(list(t.get("notes") or []) + [
