@@ -29,6 +29,8 @@ Rows
   Several Wisconsin government hosts (apps.dnr.wi.gov, dnrmaps.wi.gov, docs.legis.wisconsin.gov) and the City of
   Superior's site did not answer the build's client on 2026-11-14 (connection timed out; a second network was refused):
   their rows are monitored, so the refresh records whether they answer, and they make no records.
+  Every monitored Wisconsin row is metadata_only (notification_pages): no response body is saved and the snapshot keeps
+  only the text's hash, so a page carrying a name, telephone or address is never stored.
 A rerun replaces every wi- row it makes. Validated before writing.
 """
 from __future__ import annotations
@@ -313,6 +315,11 @@ def run(dry_run: bool = False) -> dict:
     research = {r["id"]: r for r in json.loads((ROOT / "research" / "wi" / "dischargers.json").read_text())}
     rows = operator_rows(dis, research)
     rows += [finish(base(**r)) for r in AGENCY]
+    for r in rows:
+        # every watched Wisconsin page is watched for availability and change only: no body and no text is kept, so a
+        # page that names staff, a telephone or an address is never saved (Astra re-review 2026-11-15 P1-7)
+        if r["monitored"]:
+            r["metadata_only"] = True
     drop = tuple(r["id"] for r in doc["channels"] if r.get("state") == "WI")
     doc = merge(doc, rows, drop)
     errs = NP.validate_register(doc, dis, ROOT)

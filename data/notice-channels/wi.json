@@ -4158,7 +4158,8 @@
    "sources": [
     "wi-hab-program"
    ],
-   "barrier": null
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -4314,7 +4315,8 @@
    "sources": [
     "wi-wdnr-sso-report-page"
    ],
-   "barrier": null
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -4679,7 +4681,8 @@
    "sources": [
     "wi-epa-sobe"
    ],
-   "barrier": null
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -6752,7 +6755,8 @@
    "sources": [
     "wi-mmsd-cso-impacted-waters"
    ],
-   "barrier": null
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -6804,7 +6808,8 @@
    "sources": [
     "wi-mmsd-cso-impacted-waters"
    ],
-   "barrier": null
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -6904,7 +6909,8 @@
    "sources": [
     "wi-mmsd-rain-facility-page"
    ],
-   "barrier": null
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -8685,7 +8691,8 @@
    "sources": [
     "wi-superior-cso"
    ],
-   "barrier": null
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -8711,7 +8718,8 @@
    "sources": [
     "wi-superior-cso"
    ],
-   "barrier": null
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
