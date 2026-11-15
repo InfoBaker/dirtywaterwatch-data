@@ -491,13 +491,14 @@ def parse_time(s: str | None) -> tuple[str | None, str | None]:
 
 
 _NUM = r"(?<![\d,.])(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)"
-_GAL = r"\s*(?:\+\s*)?(?:gal\b|gallons?\b|gals?\b)"
+_GAL = r"(\s*\+)?\s*(?:gal\b|gallons?\b|gals?\b)"
 GALLONS = re.compile(_NUM + _GAL, re.I)
 # "1,000-2,000 gallons", "1,000 to 2,000 gallons": a range, never one figure
 GALLON_RANGE = re.compile(_NUM + r"\s*(?:gal\w*\s*)?(?:-|–|—|to)\s*" + _NUM + _GAL, re.I)
 # "Less Than 1,000 gallons", "> 500 gal": a bound, never a measured figure
-BOUND_WORDS = re.compile(r"\b(?:(less|fewer)\s+than|under|below|up\s+to|<|(greater|more)\s+than|over|in\s+excess\s+of|"
-                         r"at\s+least|>)\s*$", re.I)
+# "< 1,000", "<= 1,000", "> 1,000", ">= 1,000" (and the one-character signs): symbolic bounds, verify P2-4
+BOUND_WORDS = re.compile(r"(?:\b(?:(less|fewer)\s+than|under|below|up\s+to|(greater|more)\s+than|over|in\s+excess\s+of|"
+                         r"at\s+least)|<=?|>=?|\u2264|\u2265)\s*$", re.I)
 # "50 gallons per minute": a rate, never a volume
 RATE = re.compile(_GAL + r"\s*(?:per|/|a|an)\s*(?:min|minute|hour|hr|day|second|sec)\b", re.I)
 
@@ -518,9 +519,11 @@ def volume_parts(q: str) -> tuple[float | None, dict | None]:
         return None, None
     if RATE.search(q[m.start(0):]):
         return None, {"kind": "rate", "text": q[m.start(0):].strip()[:80]}
+    if m.group(2):                       # "1,000+ gallons": at least that figure
+        return None, {"kind": "lower_bound", "min_gal": _n(m.group(1))}
     b = BOUND_WORDS.search(q[:m.start(0)])
     if b:
-        upper = bool(re.search(r"less|fewer|under|below|up\s+to|<", b.group(0), re.I))
+        upper = bool(re.search(r"less|fewer|under|below|up\s+to|<|\u2264", b.group(0), re.I))
         return None, {"kind": "upper_bound" if upper else "lower_bound",
                       ("max_gal" if upper else "min_gal"): _n(m.group(1))}
     if len(GALLONS.findall(q)) > 1:
