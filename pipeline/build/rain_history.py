@@ -25,31 +25,38 @@ Definitions (pure functions below; rules.rain_likely.history overrides the numbe
                rolling 24-hour total, never smaller than the largest calendar-day total: a storm reads at least as
                large live as in this record, so the live reading reaches a level no later than the record says.)
   report       a dated combined sewer discharge report of the operator (cso, blended, bypass, plant_bypass; never a
-               sanitary sewer overflow, a copy, a monthly or yearly figure, or a structure set apart from the rain
-               caution: those are left out and counted). It covers its start day to its end day (at most max_span_days
+               sanitary sewer overflow, a copy, a monthly or yearly figure, a system-wide risk advisory, or a
+               structure set apart from the rain caution: those are left out and counted). It covers its start day to its end day (at most max_span_days
                after the start; a report with no end covers its start day). Times with an offset are read on the rain
                record's calendar (America/Chicago); a day-precision report keeps the day it gives.
   followed     a storm is followed by a reported overflow when a report covers any day from the storm's first day to
                the day after its last day (the margin absorbs a day-precision report's missing time).
-  period       from the operator's first report (2015 at the earliest) to the end of its sources' coverage less lag_days
-               (late reports), less the stretches left out: a cited system change (rules.rain_likely.history.
-               system_changes), a reporting gap (gap_days or more with no report while gap_min_storms storms fell), and,
+  period       from the operator's first report (2015 at the earliest) to the end of its sources' coverage (never
+               after today) less lag_days (late reports), less the stretches left out: a cited system change
+               (rules.rain_likely.history.system_changes), a reporting gap (gap_days or more with no report while
+               gap_min_storms storms fell; a storm followed by a report is never left out with it), and,
                where the share of storms of the second rung up followed by a report rose sharply at a year boundary
                (change_point), the years before (under-reported; they still count toward the smallest storm ever
                followed by a report). A sharp fall is stated as a note and nothing is cut (the cautious side).
+               observed_days: the days of the period with a rain value outside the stretches left out; the year of
+               record and the three quiet years are counted in them.
   bands        storms counted by rung (0.1, 0.25, 0.5, 0.75, 1, 1.5, 2 inches and up).
-  levels       possible_in  the smallest storm ever followed by a reported overflow, rounded down to a rung;
+  levels       possible_in  the smallest storm ever followed by a reported overflow (over every storm of the record,
+                            before gaps or a change point remove any), rounded down to a rung; the report behind it
+                            is cited;
                likely_in    the lowest band at or above possible_in (thin bands, under min_storms, pooled into the band
                             below) after whose storms an overflow was reported at least likely_share (half) of the
                             time, and after at least that share of all storms of that band and larger together;
                             None when no band reaches it;
-               quiet        the storms below possible_in: "enough" only on quiet_min_storms (30) or more, over quiet_min_period_days (three years), with none
-                            followed by a report; only then does the site show no caution below possible_in.
+               quiet        the storms below possible_in: "enough" only on quiet_min_storms (30) or more, over
+                            quiet_min_period_days (three years) of observed days, with none followed by a report;
+                            only then does the site show no caution below possible_in.
 
 The safety guarantee: a history removes a caution the fallback would show only on a quiet range that is "enough";
 one reported overflow in that range moves possible_in down to it. A usable history needs min_report_storms storms
-followed by a report, min_total_storms storms and min_period_days of record; anything less leaves the operator on
-the fallback, with the reason written beside its counts.
+followed by a report, min_total_storms storms and min_period_days of observed days; anything less leaves the operator on
+the fallback, with the reason written beside its counts. An operator is computed only from a rain record that has
+every year it needs (real content in the cache); otherwise its previous entry stays.
 """
 from __future__ import annotations
 
@@ -135,10 +142,20 @@ def rain_day(s, precision: str | None) -> date | None:
     return t.astimezone(RAIN_ZONE).date() if t.tzinfo else t.date()
 
 
+def is_advisory(r: dict) -> bool:
+    """A system-wide risk advisory (common.system_wide_advisory) or an authority's advisory naming a water that keeps
+    the rain caution (raw.keeps_rain_caution): not a report that an overflow happened, as rain_likely.discharge_starts
+    reads them."""
+    from common import system_wide_advisory
+    raw = r.get("raw") if isinstance(r.get("raw"), dict) else {}
+    return bool(system_wide_advisory(r) or raw.get("keeps_rain_caution") is True)
+
+
 def report_spans(records: list[dict], permit_of, skip=frozenset(), cfg: dict | None = None) -> dict[str, list[dict]]:
-    """{permit: [{first, last, outfall, precision, source_id}]} for every dated combined sewer discharge report.
-    permit_of(record) gives the record's permit (or None); skip: (PERMIT, OUTFALL) of structures outside the rain
-    caution. Also returns, under the key None, the counts of what was left out and why. Pure."""
+    """{permit: [{first, last, outfall, precision, source_id, event_id, started_at}]} for every dated combined sewer
+    discharge report (started_at as the source gives it). permit_of(record) gives the record's permit (or None); skip:
+    (PERMIT, OUTFALL) of structures outside the rain caution. Also returns, under the key None, the counts of what was
+    left out and why (copies, monthly_or_yearly, advisories, not_rain_driven, no_start). Pure."""
     cfg = cfg or DEFAULTS
     out: dict = defaultdict(list)
     left = defaultdict(lambda: defaultdict(int))
@@ -147,6 +164,9 @@ def report_spans(records: list[dict], permit_of, skip=frozenset(), cfg: dict | N
             continue
         permit = permit_of(r)
         if not permit:
+            continue
+        if is_advisory(r):
+            left[permit]["advisories"] += 1
             continue
         if r.get("duplicate_of"):
             left[permit]["copies"] += 1
@@ -166,7 +186,8 @@ def report_spans(records: list[dict], permit_of, skip=frozenset(), cfg: dict | N
         d1 = rain_day(r.get("ended_at"), prec) or d0
         d1 = min(max(d1, d0), d0 + timedelta(days=int(cfg["max_span_days"])))
         out[permit].append({"first": d0, "last": d1, "outfall": oid or None, "precision": prec or "minute",
-                            "source_id": r.get("source_id")})
+                            "source_id": r.get("source_id"), "event_id": r.get("event_id"),
+                            "started_at": r.get("started_at")})
     out[None] = {p: dict(v) for p, v in left.items()}
     return dict(out)
 
@@ -255,8 +276,14 @@ def gaps(spans: list[dict], sts: list[dict], first: date, last: date, cfg: dict)
     return out
 
 
+def in_gap(st: dict, gap_list: list[tuple[date, date]]) -> bool:
+    return any(g0 <= st["first"] and st["last"] <= g1 for g0, g1 in gap_list)
+
+
 def drop_gaps(sts: list[dict], gap_list: list[tuple[date, date]]) -> list[dict]:
-    return [st for st in sts if not any(g0 <= st["first"] and st["last"] <= g1 for g0, g1 in gap_list)]
+    """The storms outside the reporting gaps. A storm followed by a report is never dropped (a storm on a gap's last
+    day can be followed by the next day's report: that report is evidence, not a gap). Pure."""
+    return [st for st in sts if st["followed"] or not in_gap(st, gap_list)]
 
 
 def change_point(sts: list[dict], last: date, cfg: dict) -> dict | None:
@@ -324,15 +351,25 @@ def pool_thin(bands: list[dict], min_storms: int) -> list[dict]:
     return out
 
 
-def lowest_reported(sts: list[dict], rungs: list[float]) -> dict | None:
+def lowest_reported(sts: list[dict], rungs: list[float], spans: list[dict] | None = None) -> dict | None:
     """The smallest storm followed by a reported overflow, and that size rounded down to a rung:
-    {size_in, day, rounded_in}; None when no storm was followed by a report. Pure."""
+    {size_in, day, rounded_in, report_day, report}; None when no storm was followed by a report. report cites the
+    earliest report covering the storm's window (its first day to the day after its last): {event_id, source_id,
+    started_at}; report_day is that report's first day (None, None without spans). Pure."""
     hit = [s for s in sts if s["followed"]]
     if not hit:
         return None
     s = min(hit, key=lambda x: (x["size"], x["first"]))
     rung = max((r for r in rungs if r <= s["size"] + 1e-9), default=rungs[0])
-    return {"size_in": round(s["size"], 2), "day": s["peak_day"].isoformat(), "rounded_in": rung}
+    out = {"size_in": round(s["size"], 2), "day": s["peak_day"].isoformat(), "rounded_in": rung,
+           "report_day": None, "report": None}
+    w1 = s["last"] + timedelta(days=1)
+    cover = [x for x in spans or [] if x["first"] <= w1 and x["last"] >= s["first"]]
+    if cover:
+        c = min(cover, key=lambda x: (x["first"], str(x.get("started_at") or ""), str(x.get("event_id") or "")))
+        out["report_day"] = c["first"].isoformat()
+        out["report"] = {"event_id": c.get("event_id"), "source_id": c.get("source_id"), "started_at": c.get("started_at")}
+    return out
 
 
 def likely_from(bands: list[dict], floor_in: float, cfg: dict) -> float | None:
@@ -358,8 +395,9 @@ def count_range(sts: list[dict], lo: float, hi: float | None) -> dict:
     return {"lo": lo, "hi": hi, "storms": n, "followed": k, "share": round(k / n, 3) if n else None}
 
 
-def usable(sts: list[dict], first: date | None, last: date | None, cfg: dict) -> str | None:
-    """None when the history can be used; else the reason it cannot, in plain words."""
+def usable(sts: list[dict], first: date | None, last: date | None, cfg: dict, observed: int | None = None) -> str | None:
+    """None when the history can be used; else the reason it cannot, in plain words. observed: the days of the
+    period with a rain value outside the stretches left out (observed_days); the calendar span when not given."""
     n, k = len(sts), sum(1 for s in sts if s["followed"])
     if first is None or last is None:
         return "no dated overflow report in the record"
@@ -367,9 +405,9 @@ def usable(sts: list[dict], first: date | None, last: date | None, cfg: dict) ->
         return f"{k} storm{'s' if k != 1 else ''} followed by a report; {cfg['min_report_storms']} are needed"
     if n < int(cfg["min_total_storms"]):
         return f"{n} storm{'s' if n != 1 else ''} on record; {cfg['min_total_storms']} are needed"
-    days = (last - first).days + 1
+    days = (last - first).days + 1 if observed is None else observed
     if days < int(cfg["min_period_days"]):
-        return f"{days} day{'s' if days != 1 else ''} of record; {cfg['min_period_days']} are needed"
+        return f"{days} day{'s' if days != 1 else ''} of rain record; {cfg['min_period_days']} are needed"
     return None
 
 
@@ -379,7 +417,7 @@ def analyse(daily: dict[date, float], spans: list[dict], coverage_end: date, cfg
     ([{from: date, ...}]: the record starts at the latest). Pure."""
     spans = sorted(spans, key=lambda s: (s["first"], s["last"]))
     first = max(FIRST_DAY, min(s["first"] for s in spans)) if spans else None
-    last = min(coverage_end, today - timedelta(days=int(cfg["lag_days"])))
+    last = min(coverage_end, today) - timedelta(days=int(cfg["lag_days"]))     # late reports: the newest days wait
     if first is None or first > last or max(s["first"] for s in spans) < FIRST_DAY:
         if spans and max(s["first"] for s in spans) < FIRST_DAY:
             why = "its dated overflow reports are all from before 2015, where the rain record starts"
@@ -388,23 +426,23 @@ def analyse(daily: dict[date, float], spans: list[dict], coverage_end: date, cfg
                    "not counted yet because reports can arrive late")
         else:
             why = "no dated overflow report in the record"
-        return {"usable": False, "why_not": why, "storms": 0, "followed": 0}
+        return {"usable": False, "why_not": why, "storms": 0, "followed": 0, "observed_days": 0}
     left_out, notes = [], []
     for c in sorted(cuts or [], key=lambda c: c["from"]):
         if c["from"] > last:
-            return {"usable": False, "storms": 0, "followed": 0,
+            return {"usable": False, "storms": 0, "followed": 0, "observed_days": 0,
                     "why_not": "a cited change to the system is too recent for any storm after it to be counted"}
         if c["from"] > first:
             left_out.append({"from": first.isoformat(), "to": (c["from"] - timedelta(days=1)).isoformat(),
                              "why": "system_change_cited", "what": c.get("what"), "source": c.get("source")})
             first = c["from"]
     rungs = [float(e) for e in cfg["rungs_in"]]
-    sts = mark_followed(storms(daily, first, last, rungs[0]), spans)
-    gl = gaps(spans, sts, first, last, cfg)
+    every = mark_followed(storms(daily, first, last, rungs[0]), spans)
+    gl = gaps(spans, every, first, last, cfg)
     for g0, g1 in gl:
         left_out.append({"from": g0.isoformat(), "to": g1.isoformat(), "why": "reporting_gap",
-                         "storms": sum(1 for st in sts if g0 <= st["first"] and st["last"] <= g1)})
-    sts = drop_gaps(sts, gl)
+                         "storms": sum(1 for st in every if in_gap(st, [(g0, g1)]) and not st["followed"])})
+    sts = drop_gaps(every, gl)
     share_sts, share_first = sts, first
     cp = change_point(sts, last, cfg)
     if cp and cp["z"] > 0:      # reports became more frequent: the earlier years under-report, their shares are left out
@@ -415,9 +453,13 @@ def analyse(daily: dict[date, float], spans: list[dict], coverage_end: date, cfg
     elif cp:                    # reports became less frequent: stated, never cut without a cited change (the safe side)
         notes.append({"what": "reported_less_since", "year": cp["year"], "before": cp["before"], "after": cp["after"],
                       "z": cp["z"]})
-    why = usable(share_sts, share_first, last, cfg)
+    observed = sum(1 for i in range((last - share_first).days + 1)
+                   if (d := share_first + timedelta(days=i)) in daily and daily[d] is not None
+                   and not any(g0 <= d <= g1 for g0, g1 in gl))
+    why = usable(share_sts, share_first, last, cfg, observed)
     bands = band_counts(share_sts, rungs)
-    low = lowest_reported(sts, rungs)                       # over the whole record: the least rain ever followed
+    # over every storm of the record, before gaps and the change point remove any: the least rain ever followed
+    low = lowest_reported(every, rungs, spans)
     out = {"usable": why is None, "why_not": why, "period": [share_first.isoformat(), last.isoformat()],
            "record_from": first.isoformat(),
            "storms": len(share_sts), "followed": sum(1 for s in share_sts if s["followed"]),
@@ -425,7 +467,7 @@ def analyse(daily: dict[date, float], spans: list[dict], coverage_end: date, cfg
            "day_precision_reports": sum(1 for s in spans if s["precision"] == "day" and share_first <= s["first"] <= last),
            "left_out": left_out, "notes": notes, "bands": [{**b, "share": round(b["followed"] / b["storms"], 3)
                                                              if b["storms"] else None} for b in bands],
-           "lowest_reported": low, "_storms": sts}
+           "lowest_reported": low, "observed_days": observed, "_storms": sts, "_every": every}
     covered = set()
     for st in share_sts:
         d = st["first"]
@@ -442,7 +484,7 @@ def analyse(daily: dict[date, float], spans: list[dict], coverage_end: date, cfg
         out["possible_in"] = p_in
         out["likely_in"] = l_in
         # "enough" needs the count and the years: one wet year of small storms is not a record of a quiet system
-        long_enough = (last - share_first).days + 1 >= int(cfg["quiet_min_period_days"])
+        long_enough = observed >= int(cfg["quiet_min_period_days"])
         out["quiet"] = ({**quiet, "enough": quiet["storms"] >= int(cfg["quiet_min_storms"]) and quiet["followed"] == 0
                          and long_enough} if quiet else None)
         out["possible"] = count_range(share_sts, p_in, l_in) if l_in is None or l_in > p_in else None
@@ -482,11 +524,12 @@ def rain_points(points, max_points: int = 4, min_sep_km: float = 8.0) -> list[tu
 
 # ---------------------------------------------------------------- per outfall
 
-def outfall_evidence(spans: list[dict], sts: list[dict], a: dict, cfg: dict) -> dict | None:
+def outfall_evidence(spans: list[dict], sts: list[dict], a: dict, cfg: dict, every: list[dict] | None = None) -> dict | None:
     """{outfall key: {reports, storms, followed, lowest_reported, possible, likely}} from the reports that name each
     outfall, against the operator's storms in the period its shares use; None unless the operator's reports in that
     period name an outfall at least outfall_named_share of the time. possible and likely are the outfall's own
-    followed counts inside the operator's ranges. Pure."""
+    followed counts inside the operator's ranges; lowest_reported is over every storm of the record (every, when
+    given), citing the outfall's report. Pure."""
     from build.rain_thresholds import outfall_key
     if not a.get("period"):
         return None
@@ -508,7 +551,8 @@ def outfall_evidence(spans: list[dict], sts: list[dict], a: dict, cfg: dict) -> 
         marked = mark_followed(sts, sp)
         share = [s for s in marked if s["first"] >= p0]
         row = {"reports": sum(1 for s in sp if p0 <= s["first"] <= p1), "storms": len(share),
-               "followed": sum(1 for s in share if s["followed"]), "lowest_reported": lowest_reported(marked, rungs),
+               "followed": sum(1 for s in share if s["followed"]),
+               "lowest_reported": lowest_reported(mark_followed(every, sp) if every is not None else marked, rungs, sp),
                "possible": None, "likely": None}
         for name in ("possible", "likely"):
             r = a.get(name)
@@ -537,7 +581,7 @@ def crosscheck(hist: dict | None, daily_by_permit: dict[str, dict[date, float]],
         start = datetime.fromisoformat(str((hist or {}).get("start")).replace("Z", "+00:00"))
         step = int((hist or {}).get("step_hours") or 1)
     except (TypeError, ValueError):
-        return {**empty, "note": "no live readings to compare (data/build/rainfall-history.json missing or unreadable)"}
+        return {**empty, "note": "No saved live rainfall readings are available to compare yet."}
     rows, ratios, ops, t_min, t_max = 0, [], set(), None, None
     higher = 0
     for permit, values in sorted(((hist or {}).get("permits") or {}).items()):
@@ -592,16 +636,17 @@ LIVE_HISTORY = BUILD_DIR / "rainfall-history.json"
 ENTRY_KEYS = {"usable": False, "why_not": None, "period": None, "record_from": None, "storms": 0, "followed": 0,
               "reports": 0, "reports_with_no_storm": 0, "day_precision_reports": 0, "bands": [],
               "lowest_reported": None, "possible_in": None, "likely_in": None, "quiet": None, "possible": None,
-              "likely": None, "left_out": [], "notes": [], "sources": [], "points": [], "outfalls": None}
-NOT_USED = ("copies", "monthly_or_yearly", "not_rain_driven", "no_start")
+              "likely": None, "left_out": [], "notes": [], "sources": [], "points": [], "outfalls": None,
+              "observed_days": 0}
+NOT_USED = ("copies", "monthly_or_yearly", "advisories", "not_rain_driven", "no_start")
 
 
 def source_coverage(records: list[dict], today: date) -> date | None:
-    """The end of a source's coverage: its latest dated combined sewer discharge report (any operator), capped at
-    today. Pure."""
+    """The end of a source's coverage: its latest dated combined sewer discharge report (any operator; advisories
+    are not reports), capped at today. Pure."""
     best = None
     for r in records:
-        if r.get("event_type") not in WET_TYPES or r.get("time_precision") in ("month", "year"):
+        if r.get("event_type") not in WET_TYPES or r.get("time_precision") in ("month", "year") or is_advisory(r):
             continue
         d = rain_day(r.get("started_at"), r.get("time_precision"))
         if d is not None and (best is None or d > best):
@@ -628,8 +673,24 @@ def _iem_reader(lat, lon, years, offline, budget):
 
 
 def _iem_have(lat, lon, years) -> bool:
+    """Every point-year is in the cache with real content: a readable answer holding at least one day's MRMS value
+    (an empty or unreadable file is no record)."""
     from build.rain_thresholds import IEM_DIR
-    return all((IEM_DIR / f"{lat:.2f}_{lon:.2f}_{y}.json").exists() for y in years)
+    for y in years:
+        p = IEM_DIR / f"{lat:.2f}_{lon:.2f}_{y}.json"
+        try:
+            rows = (json.loads(p.read_text()) or {}).get("data") or []
+        except (OSError, ValueError, AttributeError):
+            return False
+        if not any(isinstance(r, dict) and r.get("mrms_precip_in") is not None for r in rows):
+            return False
+    return True
+
+
+def missing_years(daily: dict[date, float], years: list[int], today: date) -> list[int]:
+    """The years needed with no day's value at any point (the current year only once a week of it has passed). Pure."""
+    have = {d.year for d, v in daily.items() if v is not None}
+    return [y for y in years if y not in have and not (y == today.year and today < date(y, 1, 8))]
 
 
 def _round(x):
@@ -770,17 +831,19 @@ def build(offline: bool = False, budget: int = DEFAULT_BUDGET, only=None, today:
                 series = [reader(lat, lon, years, True, None) for lat, lon in pts]
         elif not all(have(lat, lon, years) for lat, lon in pts):
             series = []             # a year at a point not read (a failed request): incomplete, not used
-        if not series:
+        daily = daily_max(series) if series else {}
+        if not series or missing_years(daily, years, today):
+            # never computed from a rain record missing a year it needs: the previous entry stays, else "not read"
             not_read += 1
             permits[p] = prev_permits[p] if p in prev_permits else {**base, "why_not": NOT_READ}
             continue
-        daily = daily_max(series)
         daily_by_permit[p] = daily
         a = analyse(daily, sp, cover, cfg, today, cuts.get(p))
         sts = a.pop("_storms", None)
+        every = a.pop("_every", None)
         entry = {**base, **a}
         if sts is not None:
-            entry["outfalls"] = outfall_evidence(sp, sts, a, cfg)
+            entry["outfalls"] = outfall_evidence(sp, sts, a, cfg, every)
         permits[p] = entry
 
     entries = {p: permits[p] for p in sorted(permits)}
