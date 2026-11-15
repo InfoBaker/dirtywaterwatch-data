@@ -46,9 +46,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| mo | 6 | 0 | 5 | 2 | 0 | 13 |
+| mo | 7 | 0 | 4 | 2 | 0 | 13 |
 | ks | 4 | 0 | 4 | 1 | 1 | 10 |
-| **all** | **529** | **234** | **430** | **204** | **74** | **1471** |
+| **all** | **530** | **234** | **429** | **204** | **74** | **1471** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1684,12 +1684,12 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 |---|---|---|---|---|---|
 | `mo-dnr-concern-reports` | Missouri DNR Water Pollution Control concern reports (monthly PDFs) | used | fetched | events | Read by ingest/mo_dnr_concerns.py: the sewer overflow concerns with the allegation filter; the concern text (people, homes) is never stored. |
 | `mo-dnr-cso-areas` | Missouri DNR CSO Areas | used | fetched | outfalls | Combined-sewer service areas. |
+| `mo-dnr-hab-map` | Missouri DNR Harmful Algal Bloom reports map | used | fetched | advisories | Read by ingest/mo_dnr_hab.py: the reports DNR's map shows as a bloom present or the water closed, dated to the reads that show them. |
 | `mo-dnr-npdes-outfalls` | Missouri DNR NPDES Waste Water Outfalls (CSO flag) | used | fetched | outfalls | Read by scripts/mo_outfall_layer.py into data/outfalls-mo.json: 146 CSO features on five permits (MSD Lemay 120), 26 of them EPA's rows. |
 | `mo-dnr-sso-reporting-mogem` | Missouri DNR sanitary sewer overflow and bypass reporting (MoGEM) | used | fetched | law | States the 24-hour duty to DNR and the MoGEM online reporting system; no public output and no public notice duty. |
 | `mo-kc-water-overflow-notices` | KC Water overflow press releases and Smart Sewer site | used | fetched | events | Read by ingest/mo_kc_water_news.py: KC Water's own overflow posts, a selective record; times, gallons and the named water from its text. |
 | `mo-msd-stl-project-clear` | MSD Project Clear (St. Louis) sewer overflow pages | used | fetched | events | Read by ingest/mo_msd_alerts.py: MSD's own overflow alerts and releases, a selective record (no rule requiring them was found); days, rarely times, never an end. |
 | `mo-dnr-beach-status` | Missouri DNR state park beach status (weekly E. coli) | watch | search_only | advisories | The beach status map is drawn by a script with per-beach pages; out of season on 2026-11-14, its data were not read. Registered and watched for availability. |
-| `mo-dnr-hab-map` | Missouri DNR Harmful Algal Bloom reports map | watch | search_only | advisories | An ArcGIS Experience app and a Survey123 form; the layer was not resolved in this build. Registered and watched for availability. |
 | `mo-dnr-meerts-search` | Missouri DNR MEERTS historical incident search | watch | fetched | events | Registered and watched; not read. |
 | `mo-dnr-merlin-search` | Missouri DNR MERLIN environmental emergency public search | watch | fetched | events | Registered and watched; a form, not read. |
 | `mo-swim-guide` | Swim Guide Missouri state park beaches | watch | search_only | prior_art | Lists Missouri state park beaches; most show 'No data available'. |
