@@ -634,6 +634,36 @@ def test_a_failed_or_malformed_bloom_fetch_keeps_the_records_and_saves_nothing(m
     assert doc["ok"] is False and doc["records"] == before and not saved
 
 
+@pytest.mark.parametrize("body", [
+    {"advisories": [{}]},
+    {"advisories": [{"water": "Lake Exemplar", "county": "LaSample County", "town": "Sampletown, AR",
+                     "posted": "July 30, 2026", "lifted": ""}]},                       # renamed fields
+    {"advisories": [{"waterbody": "Lake Exemplar", "county": "LaSample County", "area": "Sampletown, AR",
+                     "date": "2026-07-30T00:00:00", "lifted": ""}]},                   # a date in another form
+    {"advisories": [{"waterbody": "Lake Exemplar", "county": "LaSample County", "area": "Sampletown, AR",
+                     "date": "July 30, 2026", "lifted": "soon"}]},                     # a lift that is no date
+])
+def test_bloom_rows_without_their_fields_or_dates_are_a_failed_read(monkeypatch, tmp_path, body):
+    """Verification 2 P1-1: rows emptied or renamed are a failed read: nothing saved, ok false, the previous
+    advisories unchanged and none ended by their absence."""
+    _, out = habs(monkeypatch, tmp_path)
+    before = json.loads(out.read_text())["records"]
+    saved = []
+    monkeypatch.setattr(H, "save_raw", lambda *a, **k: saved.append(a))
+    monkeypatch.setattr(H, "STATE_PATH", tmp_path / "fetch-state.json")
+    monkeypatch.setattr(H.requests, "get", lambda *a, **k: _Resp(200, body))
+    assert H.main(["--out", str(out)]) == 1
+    doc = json.loads(out.read_text())
+    assert doc["ok"] is False and doc["records"] == before and not saved
+    assert not (tmp_path / "fetch-state.json").exists()
+    assert not any(r["raw"].get("_unlisted_since") for r in doc["records"])
+    # the same rows in a saved safe-rows file fail the same way
+    src = tmp_path / "bad.json"
+    src.write_text(json.dumps({"format": R.SAFE_ROWS_FORMAT, "rows": body["advisories"]}))
+    assert H.main(["--file", str(src), "--out", str(out)]) == 1
+    assert json.loads(out.read_text())["records"] == before
+
+
 def test_public_bloom_descriptions_match_the_placement_rules():
     """The exported caveat, placement rule and state text say what the code does (re-review P2-4): one advisory's
     coordinates, whole-lake colouring, part-of-lake and described places as markers only."""

@@ -59,6 +59,30 @@ def check_doc(doc) -> None:
         raise ValueError("the advisories file has no list of advisory rows")
 
 
+DATE_FORMAT = "%B %d, %Y"
+
+
+def check_rows(rows: list[dict]) -> None:
+    """ValueError unless every row carries DEQ's five fields as text, a water and a posting day that reads as a
+    date, and a lift day that is blank, DEQ's "N/A" or a date: a row emptied or with its fields renamed is a failed
+    read, never an advisory that left the file (verification 2 P1-1)."""
+    from datetime import datetime
+    for i, r in enumerate(rows):
+        missing = [f for f in ("waterbody", "county", "area", "date", "lifted") if not isinstance(r.get(f), str)]
+        if missing:
+            raise ValueError(f"advisory row {i + 1} lacks {', '.join(missing)}")
+        if not r["waterbody"].strip():
+            raise ValueError(f"advisory row {i + 1} names no water")
+        for f in ("date", "lifted"):
+            v = r[f].strip()
+            if f == "lifted" and (not v or T.NOT_GIVEN.match(v)):
+                continue
+            try:
+                datetime.strptime(v, DATE_FORMAT)
+            except ValueError:
+                raise ValueError(f"advisory row {i + 1}: {f} does not read as a date") from None
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--file", help="a saved advisories.json (or dww-safe-rows/1 file) to read instead of fetching")
@@ -75,6 +99,7 @@ def main(argv: list[str] | None = None) -> int:
         rows = [{**r, "waterbody": T.round_text_coords(r.get("waterbody"))} for r in rows]
         if not rows:
             raise ValueError("no advisories in the file")
+        check_rows(rows)
     except (requests.RequestException, ValueError, KeyError, TypeError, AttributeError, OSError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
