@@ -433,6 +433,9 @@ def gather(data: Data):
         et = ev.get("event_type") or "unknown"
         if is_total(ev) or system_wide_advisory(ev):
             continue            # a system-wide advisory is counted with the advisories, never as a discharge
+        if (ev.get("raw") or {}).get("_advice_not_a_discharge") is True:
+            stats["advice_not_a_discharge"] += 1
+            continue            # an operator's advice about a discharge recorded beside it (Florence): counted once
         if et not in DISCHARGE_TYPES and not (et == "unknown" and ev.get("source_id") in disch_sources):
             continue
         if eid in data.superseded:

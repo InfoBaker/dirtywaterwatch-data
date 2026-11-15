@@ -163,8 +163,32 @@ def article(page: str) -> tuple[str | None, str | None, list[str]]:
                 continue
             t = CONTACT_SENTENCE.sub("", t).strip()
             if t:
-                paras.append(scrub_text(strip_house_numbers(t)))
-    return (nid.group(1) if nid else None), (_text(title.group(1)) if title else None), paras
+                paras.append(scrub_person(scrub_text(strip_house_numbers(t))))
+    return (nid.group(1) if nid else None), (scrub_person(_text(title.group(1))) if title else None), paras
+
+
+# a person named after a verb of contact or an honorific outside the contact block ("For questions call Pat
+# Example."): the name is cut before any save (verify P1-6); common.scrub_names adds the inspector and signature forms
+_HON = r"(?:Mr|Mrs|Ms|Miss|Dr)\.?"
+NAMED_PERSON = re.compile(rf"\b((?:[Cc]all(?:ed)?|[Cc]ontact(?:ed)?|[Ss]poke\s+(?:with|to)|[Tt]alked\s+(?:with|to)|"
+                          rf"[Rr]each(?:ed)?|[Ee]-?mail(?:ed)?|[Aa]sk\s+for|[Rr]eported\s+by|[Pp]er)"
+                          rf"[:,]?\s+)(?:{_HON}\s+)?[A-Z][a-z]+(?:\s+[A-Z]\.)?(?:\s+[A-Z][a-z'-]+)?|\b{_HON}\s+[A-Z][a-z'-]+")
+NOT_A_NAME = re.compile(r"^(?:the|a|an|City|Florence|Utilities|Public|Works|SCDES|DES|DHEC|South|Carolina|County|"
+                        r"Customer|Service|Wastewater|Water|Sewer|Jeffries|Jefferies|[A-Z][a-z]+\s+(?:Creek|River|"
+                        r"Branch|Swamp))\b")
+
+
+def _cut_name(m: re.Match) -> str:
+    lead = m.group(1) or ""
+    rest = m.group(0)[len(lead):]
+    return m.group(0) if (lead and NOT_A_NAME.match(rest)) else lead + "[name removed]"
+
+
+def scrub_person(v: str | None) -> str | None:
+    if not v:
+        return v
+    from common import scrub_names
+    return scrub_names(NAMED_PERSON.sub(_cut_name, v))
 
 
 def _ymd(mon: str, d: str, y: str | None, release: date | None) -> date | None:
@@ -329,7 +353,11 @@ def advice_record(rec: dict, p: dict, v: dict) -> dict:
                                           "release_date", "notification_day", "county", "town")}
     drop = v.get("advice_dropped")
     advice = p.get("advice") or (drop or {}).get("advice")
-    raw.update(overflow_record=rec["event_id"], _ages_after_confirmation=True,
+    # the advice is the City's word about the overflow already recorded, not another discharge: never counted as one
+    # (raw._advice_not_a_discharge, build/charts.py), and with no cited point or stretch of its own it never colours
+    # the creek whole (raw._point_extent_only, build/status.py): listed on the water's page only (verify P1-2)
+    raw.update(overflow_record=rec["event_id"], _ages_after_confirmation=True, _advice_not_a_discharge=True,
+               _point_extent_only=True,
                until_further_notice=bool(p.get("until_further_notice") or (drop or {}).get("until_further_notice")),
                start_basis="the release that carries the City's advice (its date); not the overflow's start",
                _last_seen_in_source=v.get("advice_confirmed_at") or p.get("release_date"),

@@ -685,3 +685,89 @@ def test_the_state_texts_cite_their_reads_and_say_what_the_code_does():
                 "https://recwaters.dnrec.delaware.gov/"):
         assert f"]({url})" in de
     assert "calculated from the Department's list" in de
+
+
+# ---------------------------------------------------------------- last round (verify P1-2, P1-3, P1-6)
+
+def _florence_one():
+    nid, p = notice()
+    st = {"notices": {}}
+    F.update_notice(st, "/news/x", nid, p, "2025-08-16T12:00:00Z")
+    return st, nid, p
+
+
+def test_one_overflow_and_its_advice_count_as_one_discharge():
+    from build import charts as C
+    st, _, _ = _florence_one()
+
+    class D:
+        def __getattr__(self, name):              # the helpers gather calls that this test does not need
+            return lambda *a, **k: None
+    d = D()
+    d.events, d.superseded, d.duplicates, d.effective, d.dropped = F.records(st, T0), set(), {}, {}, {}
+    d.waters = {"jeffries-creek-sc": {"state": "SC", "kind": "stream", "name": "Jeffries Creek"}}
+    d.status, d.slugs = {}, (lambda ev: ["jeffries-creek-sc"])
+    d.origin, d.operator_short = (lambda ev: ("SC", None)), (lambda ev: "Florence")
+    d.water_links = lambda ev: [("jeffries-creek-sc", "local")]
+    buckets, stats, _ = C.gather(d)
+    evs = buckets[("water", "jeffries-creek-sc")].events
+    assert len(evs) == 1 and stats["advice_not_a_discharge"] == 1
+    assert not buckets[("water", "jeffries-creek-sc")].advisories       # no cited extent: listed, not coloured
+
+
+def test_the_citys_advice_never_colours_the_whole_creek(monkeypatch):
+    import tempfile
+    from datetime import datetime
+    from build import status as S
+    from tests.test_status import TEST_RULES
+    monkeypatch.setattr(S, "_RULES", TEST_RULES)
+    st, _, _ = _florence_one()
+    recs = F.records(st, T0)
+    line = {"type": "LineString", "coordinates": [[-79.80, 34.15], [-79.75, 34.18], [-79.70, 34.20]]}
+    w = {"slug": "jeffries-creek-sc", "name": "Jeffries Creek", "kind": "stream", "state": "SC",
+         "bbox": [-79.80, 34.15, -79.70, 34.20], "geometry": line}
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    d = Path(tempfile.mkdtemp())
+    (d / f"{F.SOURCE_ID}.json").write_text(json.dumps({"source_id": F.SOURCE_ID, "ok": True, "last_ok_at": T0,
+                                                       "meta": {}, "records": recs}))
+    out, _ = S.build(now=datetime.fromisoformat("2025-08-20T12:00:00+00:00"), write=False, events_dir=d,
+                     waters={"jeffries-creek-sc": w}, outfalls=[], registry={}, reaches={}, flows=({}, {}),
+                     rules=TEST_RULES, placement_cache=None)
+    creek = out["waters"]["jeffries-creek-sc"]
+    advice = next(r for r in recs if r["source_record_id"].endswith("-advice"))
+    assert advice["event_id"] in creek["events"]                         # listed on the creek's page
+    assert creek["status"] != "red"                                      # never the City's red over the whole creek
+
+
+def test_a_months_late_withdrawal_never_fills_the_unconfirmed_months_with_red():
+    from datetime import datetime, timezone
+    st, nid, p = _florence_one()
+    jan = datetime(2026, 1, 1, 12, tzinfo=timezone.utc)
+
+    def colour_on(rec, at):
+        return [i["color"] for i in _ivs(rec, at) if i["start"] <= at and (i["end"] is None or i["end"] > at)]
+    before = florence_records(st)["1929-advice"]
+    assert "red" not in colour_on(before, jan)
+    p2 = copy.deepcopy(p)
+    p2.update(advice=None, until_further_notice=False)
+    F.update_notice(st, "/news/x", nid, p2, "2026-11-01T12:00:00Z")
+    after = florence_records(st)["1929-advice"]
+    assert after["ended_at"] == "2026-11-01T12:00:00Z" and after["raw"]["ended_at_precision"] == "poll"
+    assert "red" not in colour_on(after, jan)
+    red = [i for i in _ivs(after, datetime(2026, 11, 2, tzinfo=timezone.utc)) if i["color"] == "red"]
+    assert red and red[0]["end"].date().isoformat() == "2025-08-29"        # 14 days after the release
+
+
+def test_a_contact_name_outside_the_contact_block_never_reaches_a_save(monkeypatch, tmp_path):
+    page = (FIX / "florence_notice.html").read_text()
+    page = page.replace("Staff responded immediately upon being notified",
+                        "For questions call Robin Sample. Staff responded immediately upon being notified")
+    nid, title, paras = F.article(page)
+    assert "Robin Sample" not in json.dumps(paras) and "[name removed]" in json.dumps(paras)
+    st = {"notices": {}}
+    F.update_notice(st, "/news/x", nid, F.parse_notice(title, paras), T0)
+    assert "Robin Sample" not in json.dumps(st) + json.dumps(F.records(st, T0))
+    assert F.scrub_person("Notification of Sanitary Sewer Overflow on Jeffries Creek") == \
+        "Notification of Sanitary Sewer Overflow on Jeffries Creek"
+    assert F.scrub_person("Please call the City at its office.") == "Please call the City at its office."
