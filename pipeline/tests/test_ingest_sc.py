@@ -618,3 +618,34 @@ def test_adding_the_states_leaves_the_other_states_lists_as_they_were():
     assert {"TX", "OR", "UT", "TN", "OH"} <= status.COUNTY_FIELD_STATES
     assert status.COUNTY_STATES["SC"] == "sc-counties.json" and "SC" in status.COUNTY_FIELD_STATES
     assert charts.STATE_NAMES["SC"] == "South Carolina" and charts.STATE_NAMES["OH"] == "Ohio"
+
+
+def test_a_des_bloom_never_colours_the_whole_water_whatever_its_area(monkeypatch):
+    # re-review P2-3: the cove's delineation is the extent; absent, small and large area values alike
+    import tempfile
+    from datetime import datetime
+    from build import status as S
+    from tests.test_status import TEST_RULES
+    monkeypatch.setattr(S, "_RULES", TEST_RULES)
+    ex = {"level": "Advisory", "area": "Example Cove", "water": "Lake Example", "issued": "07/04/2026"}
+    recs, _, _ = A.hab_records([_feat("gx", -81.101, 34.101)], [ex], {}, "2026-07-05T12:00:00Z")
+    assert recs[0]["raw"]["_point_extent_only"] is True and recs[0]["lat"] == 34.101
+    box = {"type": "Polygon", "coordinates": [[[-81.2, 34.0], [-81.0, 34.0], [-81.0, 34.2], [-81.2, 34.2], [-81.2, 34.0]]]}
+    for area in (None, 30, 300):
+        w = {"slug": "lake-example-sc", "name": "Lake Example", "kind": "reservoir", "state": "SC",
+             "bbox": [-81.2, 34.0, -81.0, 34.2], "geometry": box}
+        if area is not None:
+            w["area_km2"] = area
+        S._GEOM_CACHE.clear()
+        S._REACH_WATERS.clear()
+        d = Path(tempfile.mkdtemp())
+        (d / "sc-des-hab.json").write_text(json.dumps({"source_id": "sc-des-hab", "ok": True, "last_ok_at": T0,
+                                                       "meta": {}, "records": copy.deepcopy(recs)}))
+        st, _ = S.build(now=datetime.fromisoformat("2026-07-06T12:00:00+00:00"), write=False, events_dir=d,
+                        waters={"lake-example-sc": w}, outfalls=[], registry={}, reaches={}, flows=({}, {}),
+                        rules=TEST_RULES, placement_cache=None)
+        lake = st["waters"]["lake-example-sc"]
+        assert recs[0]["event_id"] in lake["events"], area                    # listed on the water's page
+        assert lake["status"] == "grey", area                                 # never coloured whole
+        pts = {a["event_id"]: a for a in st["advisory_points"]}
+        assert pts[recs[0]["event_id"]]["status"] == "red", area              # its marker carries the colour
