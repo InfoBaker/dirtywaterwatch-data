@@ -212,7 +212,7 @@ def _run_dmr(tmp_path, monkeypatch, answers, cache):
     monkeypatch.setattr(C, "EVENTS_DIR", tmp_path)
     monkeypatch.setattr(M, "CACHE_FILE", tmp_path / "cache.json")
     (tmp_path / "cache.json").write_text(json.dumps(cache))
-    outlets = {p: {"C002": {"npdes_permit": p, "outfall": "C002", "lat": 37.7, "lon": -81.2}} for p in answers}
+    outlets = {p: {"C002": {"npdes_permit": p, "outfall": "C002", "lat": 37.712345, "lon": -81.170555}} for p in answers}
     monkeypatch.setattr(M, "cso_outlets", lambda: outlets)
     monkeypatch.setattr(M, "fetch", lambda p, since: answers[p])
     monkeypatch.setattr(M.time, "sleep", lambda s: None)
@@ -341,3 +341,18 @@ def test_the_committed_wv_registry_carries_no_tie_its_text_contradicts():
         if r.get("match") == "carried from EPA's row":
             name = B._first_name(r["receiving_water_echo"])
             assert (not (r["receiving_water_echo"] or "").strip()) or (name and B._same_water(name, r["water_name"])), r
+
+
+def test_monthly_report_points_are_three_decimals_in_good_and_degraded_runs(tmp_path, monkeypatch):
+    """Re-review P1-4: the registry's six-decimal point never reaches a report record or the events file."""
+    ok_answer = {"CWPName": "EXAMPLE", "PermFeatures": [{"PermFeatureNmbr": "C002", "Parameters": [
+        {"ParameterCode": "50050", "MonitoringLocationDesc": "Effluent Gross",
+         "DischargeMonitoringReports": [_line("31-OCT-26", "2.0")]}]}]}
+    for answers in ({"WV0000003": (ok_answer, "live")}, {"WV0000003": (None, "failed (x)")}):
+        cache = {"since": "2025-01-01", "permits": {"WV0000003": _cached("WV0000003")}}
+        rc, doc = _run_dmr(tmp_path, monkeypatch, answers, cache)
+        assert doc["records"], answers
+        for r in doc["records"]:
+            assert (r["lat"], r["lon"]) == (37.712, -81.171), r
+        raw = (tmp_path / f"{M.SOURCE_ID}.json").read_text()
+        assert "37.712345" not in raw and "81.170555" not in raw
