@@ -318,7 +318,7 @@ NOT_GIVEN = re.compile(r"^\s*(n/?a|none|-+)\s*$", re.I)
 COORDS = re.compile(r"\(\s*coordinates\s+(-?\d{1,2}\.\d+)\s*,\s*(-?\d{2,3}\.\d+)\s*\)", re.I)
 # the water's point in the USGS Geographic Names Information System for that name in the advisory's county (The National
 # Map geonames, layer 7 Other Hydrographic Features, read 2026-11-14): (name, county) -> (GNIS feature id, lat, lon).
-# Waters with no GNIS feature of that name in that county (Lake Hamilton, Lake Conway, Brewer Lake in Conway County,
+# Waters with no GNIS feature of that name in that county (Lake Hamilton: NHD_POINTS below; Lake Conway, Brewer Lake in Conway County,
 # Harris Brake Lake, Lake Nimrod, Lake Fayetteville, Lake Wilson in Washington County, Huston Lake, Mom's Lake, the
 # park ponds) have no point here and are placed by name and county only.
 GNIS_POINTS = {
@@ -341,6 +341,15 @@ GNIS_POINTS = {
     ("lake sophia", "Garland"): (2787042, 34.634, -92.850),     # GNIS: Saline County, the lake's other county
     ("spring lake", "Yell"): (80411, 35.154, -93.427),
     ("victory lake", "Clay"): (75201, 36.413, -90.565),
+}
+
+
+# a lake with no GNIS place-name point of its name in its county, placed by a point inside its USGS National
+# Hydrography Dataset waterbody polygon (hydro.nationalmap.gov nhd MapServer layer 12, read 2026-11-15; the point is
+# the polygon's representative point, inside the water, rounded to 0.001 degree): (name, county) -> (NHD permanent
+# identifier, GNIS id, lat, lon). Re-review 2026-11-14 P1-1.
+NHD_POINTS = {
+    ("lake hamilton", "Garland"): ("58159519", "74878", 34.487, -93.130),   # 27.0 km², GNIS name "Lake Hamilton"
 }
 
 
@@ -439,11 +448,19 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
         # the parent lake's GNIS point is never used for a bay, an arm or a described place: that would draw the
         # marker at the wrong place (review 2026-11-14 P1-3); such a row has a point only where DEQ gives one
         pt = next((GNIS_POINTS[(name.lower(), c)] for c in counties if (name.lower(), c) in GNIS_POINTS), None)
+        nhd = None if pt else next((NHD_POINTS[(name.lower(), c)] for c in counties
+                                    if (name.lower(), c) in NHD_POINTS), None)
         if pt:
             rec["lat"], rec["lon"] = pt[1], pt[2]
             rec["coord_source"], rec["coord_precision_m"] = "gnis", 1000
             notes["_point_basis"] = (f"the USGS GNIS feature {pt[0]} of this name in this county (The National Map "
                                      "geonames, read 2026-11-14): the water, not where the bloom was sampled")
+        elif nhd:
+            rec["lat"], rec["lon"] = nhd[2], nhd[3]
+            rec["coord_source"], rec["coord_precision_m"] = "hand", 1000
+            notes["_point_basis"] = (f"a point inside the USGS National Hydrography Dataset waterbody {nhd[0]} (GNIS "
+                                     f"{nhd[1]}, named {name}) in this county (read 2026-11-15): the water, not where "
+                                     "the bloom was sampled")
     if not described and not qualifier:
         notes["advisory_extent"] = "named_water"      # DEQ names the lake itself as the advisory's water
     else:
