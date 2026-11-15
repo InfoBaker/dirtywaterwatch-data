@@ -805,6 +805,10 @@ def test_tidal_river_cache_reads_as_the_rule_off_trace_and_is_due_when_on(tmp_pa
     assert R.plan([c], {"Y-1": d}, now)[0] == []
     assert R.plan([c], {"Y-1": d}, now, tidal_river=True)[0] == [c]
     assert R.plan([c], {"Y-1": {**d, "tidal_river": True}}, now, tidal_river=True)[0] == []
+    # a retrace that failed keeps the old trace and waits a day before the next try
+    tried = {**d, "last_attempt": {"at": iso(NOW - 2 * H), "error": "ConnectionError"}}
+    assert R.plan([c], {"Y-1": tried}, now, tidal_river=True)[0] == []
+    assert R.plan([c], {"Y-1": tried}, now + 23 * H, tidal_river=True)[0] == [c]
 
 
 def test_tidal_segment_label_and_stop_text_follow_the_record(monkeypatch):
