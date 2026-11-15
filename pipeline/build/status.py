@@ -195,6 +195,9 @@ POLL_END_HORIZON_SOURCES.add("nv-state-parks-hab")   # Nevada's parks page: a li
 # Puerto Rico: a DRNA beach advisory whose end is the first notice seen without the beach (ingest/pr_drna_beaches.py,
 # raw.ended_at_precision "poll"); keyed on the source, so no other feed changes (Astra PR review P1-1)
 POLL_END_HORIZON_SOURCES |= {"pr-drna-beach-notices"}
+# Idaho: DEQ's CyanoHAB table, read by polling; an advisory or a Watch listed again after an unread gap carries
+# raw.listed_periods (ingest/id_deq_cyanohab.py), each period coloured on its own (Astra IA/ID review 2026-11-15 P2-3)
+POLL_END_HORIZON_SOURCES |= {"id-deq-cyanohab-risk-table"}
 SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}
@@ -1131,6 +1134,15 @@ COUNTY_FIELD_STATES.add("LA")
 # and its county (raw.county; scripts/nv_ok_counties.py), so a same-named water in another county is not taken
 COUNTY_STATES["NV"] = "nv-counties.json"; COUNTY_FIELD_STATES.add("NV")
 COUNTY_STATES["OK"] = "ok-counties.json"; COUNTY_FIELD_STATES.add("OK")
+COUNTY_STATES["CO"] = "co-counties.json"       # Colorado: the official notices name their county, no point
+COUNTY_FIELD_STATES.add("CO")    # (raw.county: Pueblo for the Arkansas River spill; scripts/mountain_counties.py)
+COUNTY_STATES["MT"] = "mt-counties.json"       # Montana: DEQ's HAB layer gives points and a county field
+COUNTY_FIELD_STATES.add("MT")    # (a private pond's report keeps its county only)
+COUNTY_STATES["WY"] = "wy-counties.json"       # Wyoming: WDEQ's bulletins name a water, no county; placed by name in WY
+COUNTY_STATES["IA"] = "ia-counties.json"       # Iowa: DNR field-office reports, releases and Waterloo give a county
+COUNTY_FIELD_STATES.add("IA")
+COUNTY_STATES["ID"] = "id-counties.json"       # Idaho: DEQ's bloom table gives each water's county
+COUNTY_FIELD_STATES.add("ID")
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}
@@ -1256,6 +1268,18 @@ def state_qualified_only(name: str, text: str, state: str | None) -> bool:
 
 NAMED_ONLY_NONE = ("the report names no water; its source gives no location, so it is listed with its county and placed "
                    "on no water (never on its permit's outfalls' water)")
+
+
+# Iowa (Astra IA/ID review 2026-11-15 P2-4): a report placed only by its own place (raw._placement "own_place_only":
+# the water it names or its own point), never by its permit's outfalls or the plant's receiving water; with neither it
+# stays unplaced and listed. Keyed on the value, which only the Iowa feeds write, so no other state changes.
+OWN_PLACE_NONE = ("the report names no water it reached and its own point lies on no mapped water: listed with its "
+                  "county and placed on no water (never on its permit's or plant's receiving water)")
+
+
+def own_place_only(ev: dict) -> bool:
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("_placement") == "own_place_only"
 
 
 def named_water_only(ev: dict) -> bool:
@@ -2494,6 +2518,29 @@ class Resolver:
                 f"affected piece is placed by its own point"
                 + (f"; not placed on {', '.join(dropped)}, which the drawn extent does not cross" if dropped else "")))
                 if x)
+        also = (ev.get("raw") or {}).get("_also_named_waters")
+        if isinstance(also, list) and also:
+            # a release naming a second water the discharge reached (Iowa DNR's "Bacon Creek Channel ... Missouri
+            # River", raw._also_named_waters; Astra IA/ID review 2026-11-15 P2-1): the one record is placed on each named
+            # water it resolves to, so the discharge is counted once. Keyed on the field, which only Iowa's news
+            # releases write, so no other state changes
+            state = event_state(ev)
+            added = []
+            for name in also:
+                slugs, _, ambiguous = self.by_name(str(name), state, ev.get("lat"), ev.get("lon"), ev)
+                if ambiguous or not slugs:
+                    continue
+                kept, _, _ = self.guard_detail(list(slugs), ev)
+                added += [x for x in kept if x not in (out.get("water_slugs") or []) and x not in added]
+            if added:
+                if not out.get("water_slugs"):
+                    out["water_match"] = "name"
+                out["water_slugs"] = list(out.get("water_slugs") or []) + added
+                out.pop("unplaced_reason", None)
+                out["also_named_waters"] = added
+                out["note"] = "; ".join(x for x in (out.get("note"), (
+                    f"also placed on {', '.join(added)}: the release names {'it' if len(added) == 1 else 'them'} as "
+                    "reached by the same discharge (one report)")) if x)
         if text_over_flag(ev):
             # the water comes from the notice's text against its form's flag: the placement says so (TEXT_OVER_FLAG)
             raw = ev.get("raw") or {}
@@ -2628,8 +2675,9 @@ class Resolver:
         # table, which gives no point or outfall): never on its permit's outfalls' water, never by a point (final
         # audit 2026-11-07 P1-1); a report naming no water stays unplaced, listed with its county
         named_only = named_water_only(ev)
+        own_only = own_place_only(ev)
         yielded = False
-        if PLACE_STEPS["registry_first"] and not named_only:
+        if PLACE_STEPS["registry_first"] and not named_only and not own_only:
             reg = self.registry_first(ev, state, known, neg)
             if reg and reg[0]:
                 return placed(reg[0], "outfall_registry", reg[1], [note], outfalls=reg[2])
@@ -2646,7 +2694,7 @@ class Resolver:
                     known = []
             if known:
                 return placed(known, match, note, [relaxed[x] for x in known if x in relaxed])
-        o = None if (yielded or named_only) else self.by_outfall(ev.get("npdes_permit"), ev.get("outfall_id"))
+        o = None if (yielded or named_only or own_only) else self.by_outfall(ev.get("npdes_permit"), ev.get("outfall_id"))
         if o and o["water_slug"] not in neg:
             return placed([o["water_slug"]], "outfall_registry",
                           f"placed by outfall {o['outfall']} of permit {o['npdes_permit']} (outfall registry): "
@@ -2671,7 +2719,7 @@ class Resolver:
         # the outfalls the report names place it (outfall_ids)
         unmatched = not names_none and PLACE_STEPS["outfall_ids"] and not no_water_text(text)
         if PLACE_STEPS["registry"] and (names_none or unmatched) and not no_water_flag(ev) and not aside \
-                and not named_only:
+                and not named_only and not own_only:
             slugs, match, rnote, outs = self.by_registry(ev, state, names_none)
             slugs = [x for x in slugs or [] if x not in neg] or None
             if slugs:
@@ -2693,6 +2741,8 @@ class Resolver:
             return out
         if named_only and not text and not out.get("unplaced_reason"):
             out["unplaced_reason"] = NAMED_ONLY_NONE
+        if own_only and not text and not out.get("unplaced_reason"):
+            out["unplaced_reason"] = OWN_PLACE_NONE
         if ambiguous and not out.get("unplaced_reason"):
             out["unplaced_reason"] = "ambiguous name"
         if reason and not out.get("unplaced_reason"):

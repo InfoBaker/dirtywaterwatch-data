@@ -1,0 +1,35 @@
+id: "co-cdphe-toxic-algae-sheet"
+name: "CDPHE \"Recent blooms for select water bodies\" Google Sheet (toxic algae status)"
+url: "https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv"
+homepage: "https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv"
+kind: "csv"
+level: "state"
+# Notes (research/co, status used, verified fetched, checked 2026-11-14): Read 2026-11-14 as CSV
+#   (198 rows, 129 waters; the last update dated 2026-09-09): read by the co-cdphe-toxic-algae feed
+#   as algal-bloom advisories (a run of Caution, Warning or Third party rows per water, ended by the
+#   next No bloom reported row). CDPHE's landing page answered 403 to the build's client on
+#   2026-11-14.
+# Access detail (research, quoted): Linked from cdphe.colorado.gov/toxic-algae ("Data"). CSV via
+#   https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv
+#   (no auth). 198 rows on 2026-11-03: Waterbody name, Condition Category (No bloom reported,
+#   Caution, Warning, Third party), Update Date, Other notes; latest update 2026-09-09. Rows are
+#   appended per update, so the latest row per water is its status. Also a Tableau story
+#   (cohealthviz.dphe.state.co.us, EnvironmentalEpidemiologyPublic/ToxicAlgae). Sample
+#   research/co/raw/cdphe-toxic-algae-sheet-head-2026-11-03.csv.
+# Can fill: waterbody (name only), started_at (update date), advice_text (notes)
+# Cannot fill: coordinates; ended_at; authority per row
+# Waters: about 130 lakes and reservoirs (state parks, wildlife areas, sampled lakes)
+# History: 2026 season (sheet reset in April)
+# Research notes: "No bloom reported" must not be shown as clean.
+cadence: "weekly May to September"
+license: "none stated"
+attribution: "Colorado Department of Public Health and Environment"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["CO"]
+access: ["csv"]
+access_detail: "Linked from cdphe.colorado.gov/toxic-algae (\"Data\"). CSV via https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv (no auth). 198 rows on 2026-11-03: Waterbody name, Condition Category (No bloom reported, Caution, Warning, Third party), Update Date, Other notes; latest update 2026-09-09. Rows are appended per update, so the latest row per water is its status. Also a Tableau story (cohealthviz.dphe.state.co.us, EnvironmentalEpidemiologyPublic/ToxicAlgae). Sample research/co/raw/cdphe-toxic-algae-sheet-head-2026-11-03.csv."
+machine_readable: true
+legal_basis: "CDPHE guidance; closure at 8 ug/L microcystin"
+checked: "2026-11-14"

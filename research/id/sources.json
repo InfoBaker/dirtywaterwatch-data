@@ -183,8 +183,8 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Public layer behind the 'Recreation Water Health Advisories' map (app bc5ab0ca7aa14b1c99d3e6b02415e605, web map 09b1c329b07f4e6683df1bdf08dd2bc1): fields DateIssued, DateLifted, County, Location, Waterbody, DominantTaxa, DominantToxin, Link, Notes, Type. On 2026-11-03 it held 5 empty rows (season over). Other layers (Algal_Bloom_Warning_vl, City_of_Boise_Advisory_vl) returned 'Invalid URL'.",
+  "status": "watch",
+  "status_reason": "Superseded for the build by DHW's current advisories layer (id-dhw-recreational-advisories) and DEQ's CyanoHAB Risk Data Table (id-deq-cyanohab-risk-table), which the feed reads.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "notes": "Contact fields may hold staff names; drop them."
@@ -349,5 +349,49 @@
   "verified": "search_only",
   "checked": "2026-11-03",
   "notes": ""
+ },
+ {
+  "jurisdiction": "ID",
+  "water_slugs": [],
+  "machine_readable": false,
+  "id": "id-deq-cyanohab-risk-table",
+  "name": "Idaho DEQ CyanoHAB Risk Data Table",
+  "operator": "Idaho Department of Environmental Quality",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab_advisory"
+  ],
+  "waters_covered": "the lakes, reservoirs and ponds DEQ lists, statewide",
+  "url": "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-harmful-algal-blooms/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "An HTML table: risk level (Health Advisory, Alert, Watch), waterbody, county, data type, collection date, more information.",
+  "status": "used",
+  "status_reason": "Built: ingest/id_deq_cyanohab.py; 19 rows on 2026-11-14 (13 Health Advisory, 1 Alert, 5 Watch).",
+  "verified": "fetched"
+ },
+ {
+  "jurisdiction": "ID",
+  "water_slugs": [],
+  "machine_readable": false,
+  "id": "id-dhw-recreational-advisories",
+  "name": "Idaho DHW Recreational Water Health Advisories (map layer)",
+  "operator": "Idaho Department of Health and Welfare",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab_advisory"
+  ],
+  "waters_covered": "the waters under DHW's advisories, with a map point each",
+  "url": "https://services1.arcgis.com/CNPdEkvnGl65jCX8/arcgis/rest/services/Public_Health_Advisories_for_Recreational_Waters_in_Idaho_V2_view/FeatureServer/0",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "ArcGIS feature layer; read for its location description, risk tier, display flag and point only.",
+  "status": "used",
+  "status_reason": "Read by ingest/id_deq_cyanohab.py for each listing's point (all 19 rows of 2026-11-14 matched a DHW point).",
+  "verified": "fetched"
  }
 ]

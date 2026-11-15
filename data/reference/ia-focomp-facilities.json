@@ -1,0 +1,1407 @@
+{
+ "source": {
+  "name": "Iowa DNR Field Office Compliance, site search export (wastewater program)",
+  "url": "https://programs.iowadnr.gov/focomp/Search/Sites",
+  "fetched_at": "2026-11-14T23:23:44Z",
+  "facility_types": {
+   "911": "Major Municipal",
+   "933": "Combined Sewer"
+  }
+ },
+ "kept": "site name, State Facility ID, city, county, wastewater program IDs and types (no affiliates, no addresses)",
+ "facilities": [
+  {
+   "st_fac_id": "310632794",
+   "name": "Albia City Of Stp (North)",
+   "city": "Albia",
+   "county": "Monroe",
+   "program_ids": [
+    "6803001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310647733",
+   "name": "Albia City Of Stp (West)",
+   "city": "Albia",
+   "county": "Monroe",
+   "program_ids": [
+    "6803003"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310647011",
+   "name": "Algona City Of Stp",
+   "city": "Algona",
+   "county": "Kossuth",
+   "program_ids": [
+    "5502001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "312530802",
+   "name": "Ames Water Pollution Control Facility",
+   "city": "Ames",
+   "county": "Story",
+   "program_ids": [
+    "8503001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310638307",
+   "name": "Anamosa City Of Stp",
+   "city": "Anamosa",
+   "county": "Jones",
+   "program_ids": [
+    "5307001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310649822",
+   "name": "Atlantic City Of Stp",
+   "city": "Atlantic",
+   "county": "Cass",
+   "program_ids": [
+    "1509001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310636881",
+   "name": "Boone City Of Stp",
+   "city": "Boone",
+   "county": "Boone",
+   "program_ids": [
+    "0819001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310649171",
+   "name": "Burlington City Of Stp",
+   "city": "Burlington",
+   "county": "Des Moines",
+   "program_ids": [
+    "2909001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City",
+    "Combined Sewer"
+   ],
+   "combined_sewer": true
+  },
+  {
+   "st_fac_id": "310431306",
+   "name": "CEDAR FALLS CITY OF STP",
+   "city": "Cedar Falls",
+   "county": "Black Hawk",
+   "program_ids": [
+    "0709001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310636498",
+   "name": "Carlisle City Of Stp",
+   "city": "Carlisle",
+   "county": "Warren",
+   "program_ids": [
+    "9113001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310633124",
+   "name": "Carroll, City Of Stp",
+   "city": "Carroll",
+   "county": "Carroll",
+   "program_ids": [
+    "1415001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310635519",
+   "name": "Cascade City Of Stp",
+   "city": "Cascade",
+   "county": "Jones",
+   "program_ids": [
+    "5318001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310631377",
+   "name": "Cedar Rapids Water Pollution Control",
+   "city": "Cedar Rapids",
+   "county": "Linn",
+   "program_ids": [
+    "5715001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310650305",
+   "name": "Chariton City Of Stp",
+   "city": "Chariton",
+   "county": "Lucas",
+   "program_ids": [
+    "5903001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310648732",
+   "name": "Charles City, City Of Stp",
+   "city": "Charles City",
+   "county": "Floyd",
+   "program_ids": [
+    "3405001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310633848",
+   "name": "Cherokee City Of Stp",
+   "city": "Cherokee",
+   "county": "Cherokee",
+   "program_ids": [
+    "1811002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310201531",
+   "name": "City Of Dubuque Water Pollution Control Plant",
+   "city": "Dubuque",
+   "county": "Dubuque",
+   "program_ids": [
+    "3126001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310634007",
+   "name": "City Of Eldora - WWTP",
+   "city": "Eldora",
+   "county": "Hardin",
+   "program_ids": [
+    "4236001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310651091",
+   "name": "City Of Eldridge - Wwtp",
+   "city": "Eldridge",
+   "county": "Scott",
+   "program_ids": [
+    "8230003"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310925167",
+   "name": "City Of Jesup - South Wastewater Treatment Plant",
+   "city": "Jesup",
+   "county": "Buchanan",
+   "program_ids": [
+    "1044002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310651402",
+   "name": "City of Adel",
+   "city": "Adel",
+   "county": "Dallas",
+   "program_ids": [
+    "2503001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310958759",
+   "name": "Clarinda City Of Stp",
+   "city": "Clarinda",
+   "county": "Page",
+   "program_ids": [
+    "7329001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310639226",
+   "name": "Clarion, City Of Stp",
+   "city": "Clarion",
+   "county": "Wright",
+   "program_ids": [
+    "9909001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "311176711",
+   "name": "Clear Lake Sanitary District",
+   "city": "Clear Lake",
+   "county": "Cerro Gordo",
+   "program_ids": [
+    "1716901"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310639315",
+   "name": "Clinton City Of Stp",
+   "city": "Clinton",
+   "county": "Clinton",
+   "program_ids": [
+    "2326001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City",
+    "Combined Sewer"
+   ],
+   "combined_sewer": true
+  },
+  {
+   "st_fac_id": "310650001",
+   "name": "Coralville City Of Stp",
+   "city": "Coralville",
+   "county": "Johnson",
+   "program_ids": [
+    "5208001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310639542",
+   "name": "Council Bluffs City Of Stp",
+   "city": "Council Bluffs",
+   "county": "Pottawattamie",
+   "program_ids": [
+    "7820001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310637717",
+   "name": "Cresco City Of Stp",
+   "city": "Cresco",
+   "county": "Howard",
+   "program_ids": [
+    "4515001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "312555218",
+   "name": "Creston City Of Stp",
+   "city": "Creston",
+   "county": "Union",
+   "program_ids": [
+    "8816001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310634212",
+   "name": "Dallas Center City Of Stp",
+   "city": "Dallas Center",
+   "county": "Dallas",
+   "program_ids": [
+    "2520001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310637479",
+   "name": "Davenport City Of Stp",
+   "city": "Davenport",
+   "county": "Scott",
+   "program_ids": [
+    "8222003"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310650987",
+   "name": "Decorah City Of Stp",
+   "city": "Decorah",
+   "county": "Winneshiek",
+   "program_ids": [
+    "9630001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310634583",
+   "name": "Denison Municipal Utilities-stp",
+   "city": "Denison",
+   "county": "Crawford",
+   "program_ids": [
+    "2424001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310634683",
+   "name": "Des Moines Metropolitan WRF",
+   "city": "Des Moines",
+   "county": "Polk",
+   "program_ids": [
+    "7727001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City",
+    "Combined Sewer"
+   ],
+   "combined_sewer": true
+  },
+  {
+   "st_fac_id": "310647039",
+   "name": "Dewitt City Of Stp",
+   "city": "De Witt",
+   "county": "Clinton",
+   "program_ids": [
+    "2330001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310648987",
+   "name": "Dyersville City Of Stp",
+   "city": "Dyersville",
+   "county": "Dubuque",
+   "program_ids": [
+    "3130001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310641839",
+   "name": "Eagle Grove, City Of Stp",
+   "city": "Eagle Grove",
+   "county": "Wright",
+   "program_ids": [
+    "9926001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310634427",
+   "name": "East Wastewater Treatment Plant",
+   "city": "Centerville",
+   "county": "Appanoose",
+   "program_ids": [
+    "0407003"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310637371",
+   "name": "Emmetsburg City Of Stp",
+   "city": "Emmetsburg",
+   "county": "Palo Alto",
+   "program_ids": [
+    "7428002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310888914",
+   "name": "Estherville Wastewater Treatment Plant",
+   "city": "Estherville",
+   "county": "Emmet",
+   "program_ids": [
+    "3218002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310643537",
+   "name": "Evansdale City Of Stp",
+   "city": "Evansdale",
+   "county": "Black Hawk",
+   "program_ids": [
+    "0723001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310647515",
+   "name": "Fairfield, City Of Stp",
+   "city": "Fairfield",
+   "county": "Jefferson",
+   "program_ids": [
+    "5131001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310634409",
+   "name": "Forest City City Of Stp",
+   "city": "Forest City",
+   "county": "Winnebago",
+   "program_ids": [
+    "9525001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "311260398",
+   "name": "Fort Dodge City Of Stp",
+   "city": "Fort Dodge",
+   "county": "Webster",
+   "program_ids": [
+    "9433003"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310648914",
+   "name": "Fort Madison City Of Stp",
+   "city": "Fort Madison",
+   "county": "Lee",
+   "program_ids": [
+    "5625001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City",
+    "Combined Sewer"
+   ],
+   "combined_sewer": true
+  },
+  {
+   "st_fac_id": "310949865",
+   "name": "Gmu Wastewater Treatment Facility",
+   "city": "Glenwood",
+   "county": "Mills",
+   "program_ids": [
+    "6525001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310637111",
+   "name": "Greenfield City Of Stp",
+   "city": "Greenfield",
+   "county": "Adair",
+   "program_ids": [
+    "0140001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310647164",
+   "name": "Grinnell City Of Stp",
+   "city": "Grinnell",
+   "county": "Poweshiek",
+   "program_ids": [
+    "7930001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310633231",
+   "name": "Grundy Center City Of Stp",
+   "city": "Grundy Center",
+   "county": "Grundy",
+   "program_ids": [
+    "3833001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310651313",
+   "name": "Hampton City Of Stp",
+   "city": "Hampton",
+   "county": "Franklin",
+   "program_ids": [
+    "3544001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310640749",
+   "name": "Harlan City Of Stp",
+   "city": "Harlan",
+   "county": "Shelby",
+   "program_ids": [
+    "8335002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310645291",
+   "name": "Humboldt City Of Stp",
+   "city": "Humboldt",
+   "county": "Humboldt",
+   "program_ids": [
+    "4641001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "434465986",
+   "name": "INDIANOLA WATER RESOURCE RECOVERY FACILITY",
+   "city": "Indianola",
+   "county": "Warren",
+   "program_ids": [
+    "9133004"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310379327",
+   "name": "Independence Ww Treatment Plant & Baseba",
+   "city": "Independence",
+   "county": "Buchanan",
+   "program_ids": [
+    "1037001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310650449",
+   "name": "Iowa City, City Of (south) Stp",
+   "city": "Iowa City",
+   "county": "Johnson",
+   "program_ids": [
+    "5225002"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310639404",
+   "name": "Iowa Falls City Of Stp",
+   "city": "Iowa Falls",
+   "county": "Hardin",
+   "program_ids": [
+    "4260001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310637744",
+   "name": "Iowa Great Lakes Sanitary District Stp",
+   "city": "Milford",
+   "county": "Dickinson",
+   "program_ids": [
+    "3050901"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310633428",
+   "name": "Jefferson City Of Stp",
+   "city": "Jefferson",
+   "county": "Greene",
+   "program_ids": [
+    "3742001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310636041",
+   "name": "Keokuk City Of Stp",
+   "city": "Keokuk",
+   "county": "Lee",
+   "program_ids": [
+    "5640001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City",
+    "Combined Sewer"
+   ],
+   "combined_sewer": true
+  },
+  {
+   "st_fac_id": "310646543",
+   "name": "Knoxville City Of Stp",
+   "city": "Knoxville",
+   "county": "Marion",
+   "program_ids": [
+    "6342001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310638209",
+   "name": "Le Mars City Of Stp",
+   "city": "Le Mars",
+   "county": "Plymouth",
+   "program_ids": [
+    "7540001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310648932",
+   "name": "Leclaire City Of Stp",
+   "city": "Le Claire",
+   "county": "Scott",
+   "program_ids": [
+    "8245002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310642729",
+   "name": "Maquoketa City Of Stp",
+   "city": "Maquoketa",
+   "county": "Jackson",
+   "program_ids": [
+    "4950001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310635546",
+   "name": "Mason City Water Reclamation Facility",
+   "city": "Mason City",
+   "county": "Cerro Gordo",
+   "program_ids": [
+    "1750001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310640107",
+   "name": "Mitchellville City Of Stp",
+   "city": "Mitchellville",
+   "county": "Polk",
+   "program_ids": [
+    "7751001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310636005",
+   "name": "Monticello City Of Stp",
+   "city": "Monticello",
+   "county": "Jones",
+   "program_ids": [
+    "5343001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310641302",
+   "name": "Mount Pleasant City Of Stp (main)",
+   "city": "Mount",
+   "county": "Henry",
+   "program_ids": [
+    "4453001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310647688",
+   "name": "Mount Vernon City Of Stp",
+   "city": "Mount Vernon",
+   "county": "Linn",
+   "program_ids": [
+    "5758001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "312508177",
+   "name": "Muscatine City Of Stp",
+   "city": "Muscatine",
+   "county": "Muscatine",
+   "program_ids": [
+    "7048001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City",
+    "Combined Sewer"
+   ],
+   "combined_sewer": true
+  },
+  {
+   "st_fac_id": "310641311",
+   "name": "Nevada City Of Stp",
+   "city": "Nevada",
+   "county": "Story",
+   "program_ids": [
+    "8562001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310650074",
+   "name": "New Hampton City Of Stp",
+   "city": "New Hampton",
+   "county": "Chickasaw",
+   "program_ids": [
+    "1970001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310199585",
+   "name": "Newton Water Pollution Control Plant",
+   "city": "Newton",
+   "county": "Jasper",
+   "program_ids": [
+    "5059002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310632876",
+   "name": "North Liberty City Of Stp",
+   "city": "North Liberty",
+   "county": "Johnson",
+   "program_ids": [
+    "5252001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310642276",
+   "name": "Oelwein City Of Stp",
+   "city": "Oelwein",
+   "county": "Fayette",
+   "program_ids": [
+    "3353001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310642285",
+   "name": "Ogden City Of Stp",
+   "city": "Ogden",
+   "county": "Boone",
+   "program_ids": [
+    "0858001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310645744",
+   "name": "Orange City City Of Stp",
+   "city": "Orange City",
+   "county": "Sioux",
+   "program_ids": [
+    "8474001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310651768",
+   "name": "Osage City Of Stp",
+   "city": "Osage",
+   "county": "Mitchell",
+   "program_ids": [
+    "6663001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310650083",
+   "name": "Osceola City Of Stp",
+   "city": "Osceola",
+   "county": "Clarke",
+   "program_ids": [
+    "2038002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310643382",
+   "name": "Oskaloosa City Of Stp (Northeast)",
+   "city": "Oskaloosa",
+   "county": "Mahaska",
+   "program_ids": [
+    "6273001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310571056",
+   "name": "Oskaloosa City Of Stp (Southwest)",
+   "city": "Oskaloosa",
+   "county": "Mahaska",
+   "program_ids": [
+    "6273002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310638325",
+   "name": "Ottumwa City Of Stp",
+   "city": "Ottumwa",
+   "county": "Wapello",
+   "program_ids": [
+    "9083001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City",
+    "Combined Sewer"
+   ],
+   "combined_sewer": true
+  },
+  {
+   "st_fac_id": "310649073",
+   "name": "Pella City Of Stp",
+   "city": "Pella",
+   "county": "Marion",
+   "program_ids": [
+    "6368006"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310641666",
+   "name": "Perry City Of Stp",
+   "city": "Perry",
+   "county": "Dallas",
+   "program_ids": [
+    "2561001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310644809",
+   "name": "Red Oak City Of Stp",
+   "city": "Red Oak",
+   "county": "Montgomery",
+   "program_ids": [
+    "6950001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310640232",
+   "name": "Rockwell City, City Of Stp",
+   "city": "Rockwell City",
+   "county": "Calhoun",
+   "program_ids": [
+    "1376001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "434464393",
+   "name": "STORM LAKE CITY OF STP",
+   "city": "Storm Lake",
+   "county": "Buena Vista",
+   "program_ids": [
+    "1178001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310650869",
+   "name": "Sheldon City Of Stp",
+   "city": "Sheldon",
+   "county": "Sioux",
+   "program_ids": [
+    "7170001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310639524",
+   "name": "Shenandoah City Of Stp",
+   "city": "Shenandoah",
+   "county": "Page",
+   "program_ids": [
+    "3659001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310645862",
+   "name": "Sioux Center City Of Stp",
+   "city": "Sioux Center",
+   "county": "Sioux",
+   "program_ids": [
+    "8486002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310651288",
+   "name": "Sioux City, City Of Stp",
+   "city": "Sioux City",
+   "county": "Woodbury",
+   "program_ids": [
+    "9778001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "311260049",
+   "name": "Spencer, City Of Stp",
+   "city": "Spencer",
+   "county": "Clay",
+   "program_ids": [
+    "2171004"
+   ],
+   "types": [
+    "Major Municipal",
+    "Combined Sewer"
+   ],
+   "combined_sewer": true
+  },
+  {
+   "st_fac_id": "310639057",
+   "name": "Tama City Of Stp",
+   "city": "Tama",
+   "county": "Tama",
+   "program_ids": [
+    "8670002"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310640958",
+   "name": "Tipton City Of Stp",
+   "city": "Tipton",
+   "county": "Cedar",
+   "program_ids": [
+    "1689001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310649206",
+   "name": "Toledo City Of Stp",
+   "city": "Toledo",
+   "county": "Tama",
+   "program_ids": [
+    "8676001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310649019",
+   "name": "Vinton City Of Stp",
+   "city": "Vinton",
+   "county": "Benton",
+   "program_ids": [
+    "0688001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310634974",
+   "name": "Walcott City Of Stp (north)",
+   "city": "Walcott",
+   "county": "Scott",
+   "program_ids": [
+    "7085001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310639697",
+   "name": "Wapello City Of Stp",
+   "city": "Wapello",
+   "county": "Louisa",
+   "program_ids": [
+    "5879001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Combined Sewer"
+   ],
+   "combined_sewer": true
+  },
+  {
+   "st_fac_id": "310643746",
+   "name": "Washington City Of Stp",
+   "city": "Washington",
+   "county": "Washington",
+   "program_ids": [
+    "9271001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310652027",
+   "name": "Waterloo City Of Stp",
+   "city": "Waterloo",
+   "county": "Black Hawk",
+   "program_ids": [
+    "0790001"
+   ],
+   "types": [
+    "Major Municipal",
+    "Pretreatment City"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310640447",
+   "name": "Waukon City Of Stp",
+   "city": "Waukon",
+   "county": "Allamakee",
+   "program_ids": [
+    "0398001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310648905",
+   "name": "Waverly City Of Stp",
+   "city": "Waverly",
+   "county": "Bremer",
+   "program_ids": [
+    "0990001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310636809",
+   "name": "Webster City, City Of Stp",
+   "city": "Webster City",
+   "county": "Hamilton",
+   "program_ids": [
+    "4063001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310992719",
+   "name": "West Burlington Wastewater Treatment Plant",
+   "city": "West",
+   "county": "Des Moines",
+   "program_ids": [
+    "2985001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310648869",
+   "name": "West Liberty City Of Stp",
+   "city": "West Liberty",
+   "county": "Muscatine",
+   "program_ids": [
+    "7073001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  },
+  {
+   "st_fac_id": "310640694",
+   "name": "Winterset City Of Stp",
+   "city": "Winterset",
+   "county": "Madison",
+   "program_ids": [
+    "6171001"
+   ],
+   "types": [
+    "Major Municipal"
+   ],
+   "combined_sewer": false
+  }
+ ]
+}

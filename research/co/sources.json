@@ -62,9 +62,9 @@
   "license": null,
   "legal_basis": null,
   "status": "rejected",
-  "status_reason": "Intake only; reports are not published.",
+  "status_reason": "Intake only; reports are not published. The page answered 403 to the build's client on 2026-11-14.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -73,9 +73,10 @@
   "jurisdiction": "CO",
   "operator": "CDPHE; Colorado Parks and Wildlife",
   "operator_type": "state",
-  "role": "advisories",
+  "role": "events",
   "event_types": [
-   "sso"
+   "sso",
+   "hab_advisory"
   ],
   "waters_covered": "case by case",
   "water_slugs": [],
@@ -95,10 +96,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Dated advisories exist only for the largest spills; worth a news watcher.",
-  "verified": "search_only",
-  "checked": "2026-11-03",
+  "status": "used",
+  "status_reason": "CPW's water-contact advisory of 2026-08-30 after the Pueblo spill (read 2026-11-14) is read in the co-official-notices reviewed set with NPS's Blue Mesa release and Barr Lake's park notice. CDPHE's own news pages answered 403.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -109,11 +110,11 @@
   "operator_type": "state",
   "role": "advisories",
   "event_types": [
-   "hab"
+   "hab_advisory"
   ],
   "waters_covered": "about 130 lakes and reservoirs (state parks, wildlife areas, sampled lakes)",
   "water_slugs": [],
-  "url": "https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ",
+  "url": "https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv",
   "access": [
    "csv"
   ],
@@ -147,10 +148,10 @@
   "history": "2026 season (sheet reset in April)",
   "license": "none stated",
   "legal_basis": "CDPHE guidance; closure at 8 ug/L microcystin",
-  "status": "candidate",
-  "status_reason": "Machine-readable season log of HAB status; no coordinates, names need matching to NHD waters.",
+  "status": "used",
+  "status_reason": "Read 2026-11-14 as CSV (198 rows, 129 waters; the last update dated 2026-09-09): read by the co-cdphe-toxic-algae feed as algal-bloom advisories (a run of Caution, Warning or Third party rows per water, ended by the next No bloom reported row). CDPHE's landing page answered 403 to the build's client on 2026-11-14.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": "\"No bloom reported\" must not be shown as clean."
  },
  {
@@ -183,9 +184,9 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "No public results feed; closures list is HTML.",
+  "status_reason": "No public results feed; closures list is HTML (none seen). The page answered 403 to the build's client on 2026-11-14; monitored.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -214,10 +215,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "rejected",
-  "status_reason": "No Colorado events or registered collection systems on 2026-11-03.",
+  "status": "watch",
+  "status_reason": "No Colorado report and no Colorado collection system in the current extract (5,751 events) or the all-versions extract (6,710 events) of 2026-11-14; watched.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -312,6 +313,108 @@
   "status_reason": "None found (search only).",
   "verified": "search_only",
   "checked": "2026-11-03",
+  "notes": ""
+ },
+ {
+  "id": "co-nps-curecanti-advisories",
+  "name": "National Park Service, Curecanti National Recreation Area: algae news releases (Blue Mesa Reservoir)",
+  "jurisdiction": "CO",
+  "operator": "National Park Service",
+  "operator_type": "federal",
+  "role": "advisories",
+  "event_types": [
+   "hab_advisory"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.nps.gov/cure/learn/news/toxic-algae-detected-in-blue-mesa-reservoir.htm",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "The August 13, 2026 release (toxic algae at low levels in the Iola Basin, yellow caution signs) is read in the co-official-notices reviewed set; the park's news RSS did not answer on 2026-11-14.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "notes": ""
+ },
+ {
+  "id": "co-cpw-barr-lake-notices",
+  "name": "Colorado Parks and Wildlife, Barr Lake State Park page notices (algae alert, boating closure)",
+  "jurisdiction": "CO",
+  "operator": "Colorado Parks and Wildlife",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab_advisory"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://cpw.state.co.us/state-parks/barr-lake-state-park/barr-lake-state-park-activities-trails",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "The park page's line \"the reservoir is now on red alert due to high concentrations of toxic algae\" (as of August 3, 2026, 7 p.m.) is read as a standing advisory in the co-official-notices reviewed set; the low-water boating closure on the same line is not a water-quality record.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "notes": ""
+ },
+ {
+  "id": "co-pueblo-wastewater-notices",
+  "name": "City of Pueblo news (the August 2026 sewage discharge to the Arkansas River)",
+  "jurisdiction": "CO",
+  "operator": "City of Pueblo",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.pueblo.us/m/newsflash/home/detail/5002",
+  "access": [
+   "html"
+  ],
+  "access_detail": null,
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "The host did not answer the build's client on 2026-11-14 (connection timed out, the RSS route too); the register watches it. The spill is recorded from CPW's advisory.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
   "notes": ""
  }
 ]
