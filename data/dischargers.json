@@ -560812,37 +560812,6 @@
   "legal_form": "investor-owned utility"
  },
  {
-  "id": "sc-american-house-spinning",
-  "name": "American House Spinning, Inc.",
-  "state": "SC",
-  "kind": "plant",
-  "npdes_permit": "SCG570001",
-  "npdes_permits": [
-   "SCG570001"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
-  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Central"
-  ],
-  "notes": "Privately owned. EPA ECHO ICIS-NPDES: SCG570001 AMERICAN HOUSE SPINNING INC.",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "sc-american-house-spinning"
-  ],
-  "source_areas": [
-   "sc",
-   "federal"
-  ],
-  "legal_form": "business or industrial"
- },
- {
   "id": "sc-anderson-county",
   "name": "Anderson County",
   "state": "SC",
@@ -561236,39 +561205,6 @@
   "legal_form": "city"
  },
  {
-  "id": "sc-city-of-lancaster",
-  "name": "City of Lancaster",
-  "state": "SC",
-  "kind": "plant",
-  "npdes_permit": "SC0046892",
-  "npdes_permits": [
-   "SC0046892"
-  ],
-  "receiving_waters": [
-   "Catawba River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
-  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Lancaster"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0046892 LANCASTER CATAWBA RIVER.",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "sc-city-of-lancaster"
-  ],
-  "source_areas": [
-   "sc",
-   "federal"
-  ],
-  "legal_form": "city"
- },
- {
   "id": "sc-city-of-pickens",
   "name": "City of Pickens",
   "state": "SC",
@@ -561538,25 +561474,19 @@
   "kind": "plant",
   "npdes_permit": "SC0025844",
   "npdes_permits": [
-   "SC0025844",
-   "SC0038822",
-   "SC0049361"
+   "SC0025844"
   ],
-  "receiving_waters": [
-   "Ashley River"
-  ],
+  "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 3,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 3 rows for these permits)",
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
   "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
-   "North Charleston",
-   "Ridgeville",
    "St. George"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0025844 DORCHESTER CO UPPER DORCHESTER CO WWTP; SC0038822 DORCHESTER CO LOWER DORCHESTER WWTP; SC0049361 DORCHESTER CO CENTRAL DORCHESTER WWTP.",
+  "notes": "EPA ECHO ICIS-NPDES: SC0025844 DORCHESTER CO UPPER DORCHESTER CO WWTP.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -561863,7 +561793,6 @@
    "SC0046230",
    "SC0048461",
    "SC0049362",
-   "SC0049372",
    "SCG570006"
   ],
   "receiving_waters": [
@@ -561871,8 +561800,8 @@
    "Atlantic Intracoastal Waterway"
   ],
   "water_slugs": [],
-  "outfall_count": 20,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 20 rows for these permits)",
+  "outfall_count": 19,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 19 rows for these permits)",
   "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
@@ -561972,12 +561901,10 @@
   "kind": "plant",
   "npdes_permit": "SC0046191",
   "npdes_permits": [
-   "SC0046191",
-   "SC0048526"
+   "SC0046191"
   ],
   "receiving_waters": [
-   "Land Application Field",
-   "Skull Creek"
+   "Land Application Field"
   ],
   "water_slugs": [],
   "outfall_count": 6,
@@ -561986,10 +561913,9 @@
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
-   "Beaufort",
    "Hilton Head, Sc 29925"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0046191 HILTON HEAD NO 1 PSD WWTP; SC0048526 HILTON HEAD PSD REVERSE OSMOSIS WTP.",
+  "notes": "EPA ECHO ICIS-NPDES: SC0046191 HILTON HEAD NO 1 PSD WWTP.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -562000,39 +561926,6 @@
    "federal"
   ],
   "legal_form": "special district"
- },
- {
-  "id": "sc-holly-hill",
-  "name": "Town of Holly Hill",
-  "state": "SC",
-  "kind": "plant",
-  "npdes_permit": "SC0049366",
-  "npdes_permits": [
-   "SC0049366"
-  ],
-  "receiving_waters": [
-   "Four Hole Swamp"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
-  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Holly Hill"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0049366 TOWN OF HOLLY HILL (NEW) WWTP.",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "sc-holly-hill"
-  ],
-  "source_areas": [
-   "sc",
-   "federal"
-  ],
-  "legal_form": "town"
  },
  {
   "id": "sc-isle-of-palms-wsc",
@@ -562399,24 +562292,21 @@
   "name": "Town of Lexington",
   "state": "SC",
   "kind": "plant",
-  "npdes_permit": "SC0026735",
+  "npdes_permit": "SC0027162",
   "npdes_permits": [
-   "SC0026735",
    "SC0027162"
   ],
-  "receiving_waters": [
-   "12 Mi Ck"
-  ],
+  "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "outfall_count": null,
+  "outfalls_source": null,
   "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Lexington"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0026735 LEXINGTON/COVENTRY WOODS WWTP; SC0027162 TOWN OF LEXINGTON WATER GATE WWTF. Privately owned sewage permit(s) from EPA's discharge points (research/sc/private-utilities-candidates.json); not in the plant registry.",
+  "notes": "EPA ECHO ICIS-NPDES: SC0027162 TOWN OF LEXINGTON WATER GATE WWTF. Privately owned sewage permit(s) from EPA's discharge points (research/sc/private-utilities-candidates.json); not in the plant registry.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -562564,39 +562454,6 @@
   "legal_form": "authority"
  },
  {
-  "id": "sc-newberry-county-wsa",
-  "name": "Newberry County Water and Sewer Authority",
-  "state": "SC",
-  "kind": "plant",
-  "npdes_permit": "SC0048313",
-  "npdes_permits": [
-   "SC0048313"
-  ],
-  "receiving_waters": [
-   "Cannons Creek"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
-  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Prosperity"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0048313 NCW&SA CANNONS CREEK WWTP.",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "sc-newberry-county-wsa"
-  ],
-  "source_areas": [
-   "sc",
-   "federal"
-  ],
-  "legal_form": "authority"
- },
- {
   "id": "sc-ninety-six-cpw",
   "name": "Ninety Six Commission of Public Works",
   "state": "SC",
@@ -562703,37 +562560,6 @@
   "legal_form": "city"
  },
  {
-  "id": "sc-norway",
-  "name": "Town of Norway",
-  "state": "SC",
-  "kind": "plant",
-  "npdes_permit": "SC0045993",
-  "npdes_permits": [
-   "SC0045993"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
-  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Norway"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0045993 NORWAY TOWN OF.",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "sc-norway"
-  ],
-  "source_areas": [
-   "sc",
-   "federal"
-  ],
-  "legal_form": "town"
- },
- {
   "id": "sc-ojrsa",
   "name": "Oconee Joint Regional Sewer Authority",
   "state": "SC",
@@ -562759,39 +562585,6 @@
   "checked": "2026-11-14",
   "aliases": [
    "sc-ojrsa"
-  ],
-  "source_areas": [
-   "sc",
-   "federal"
-  ],
-  "legal_form": "authority"
- },
- {
-  "id": "sc-orangeburg-county-wsa",
-  "name": "Orangeburg County Water and Sewer Authority",
-  "state": "SC",
-  "kind": "plant",
-  "npdes_permit": "SC0049363",
-  "npdes_permits": [
-   "SC0049363"
-  ],
-  "receiving_waters": [
-   "Goodbys Swamp"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
-  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Santee"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0049363 ORANGEBURG COUNTY WATER AND SEWER AUTHORITY.",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "sc-orangeburg-county-wsa"
   ],
   "source_areas": [
    "sc",
@@ -562835,24 +562628,21 @@
   "name": "Town of Pageland",
   "state": "SC",
   "kind": "plant",
-  "npdes_permit": "SC0021504",
+  "npdes_permit": "SC0021539",
   "npdes_permits": [
-   "SC0021504",
    "SC0021539"
   ],
-  "receiving_waters": [
-   "Hills Creek To Lynches River"
-  ],
+  "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 2,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
   "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Pageland"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0021504 PAGELAND NORTHWEST WWTF; SC0021539 PAGELAND SOUTHEAST WWTF.",
+  "notes": "EPA ECHO ICIS-NPDES: SC0021539 PAGELAND SOUTHEAST WWTF.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -562896,36 +562686,6 @@
    "federal"
   ],
   "legal_form": "investor-owned utility"
- },
- {
-  "id": "sc-pendleton-clemson-regional",
-  "name": "Pendleton-Clemson Regional Wastewater Treatment Facility (owner not recorded by EPA)",
-  "state": "SC",
-  "kind": "plant",
-  "npdes_permit": "SC0035700",
-  "npdes_permits": [
-   "SC0035700"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
-  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Pendleton"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0035700 PENDLETON-CLEMSON REG WWTF.",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "sc-pendleton-clemson-regional"
-  ],
-  "source_areas": [
-   "sc",
-   "federal"
-  ]
  },
  {
   "id": "sc-pickens-county-psc",
@@ -565338,29 +565098,26 @@
   "npdes_permit": "SC0020435",
   "npdes_permits": [
    "SC0020435",
-   "SC0025763",
    "SC0026875",
    "SC0044717",
    "SC0045624",
    "SC0047732",
    "SC0048143",
    "SCG570017",
-   "SCG570033",
-   "SCG570048"
+   "SCG570033"
   ],
   "receiving_waters": [
    "Lawsons Fork Creek",
    "Tyger River"
   ],
   "water_slugs": [],
-  "outfall_count": 12,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 12 rows for these permits)",
+  "outfall_count": 10,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 10 rows for these permits)",
   "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
    "Spartanburg",
-   "Chesnee",
    "Cowpens",
    "Fingerville",
    "Landrum",
@@ -565386,28 +565143,22 @@
   "name": "Town of Springfield",
   "state": "SC",
   "kind": "plant",
-  "npdes_permit": "SC0023272",
+  "npdes_permit": "SCG570039",
   "npdes_permits": [
-   "SC0023272",
-   "SC0023281",
    "SCG570039",
    "SCG570040"
   ],
-  "receiving_waters": [
-   "S Fork Edisto Rv",
-   "Goodland Crk-S.Fork Edisto Rv"
-  ],
+  "receiving_waters": [],
   "water_slugs": [],
-  "outfall_count": 4,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 4 rows for these permits)",
+  "outfall_count": 2,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 2 rows for these permits)",
   "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": false,
   "notification_signup_url": null,
   "towns": [
-   "Quinby",
    "Springfield"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0023272 SPRINGFIELD WWTP #1; SC0023281 SPRINGFIELD WWTP #2; SCG570039 SPRINGFIELD WWTP #1; SCG570040 SPRINGFIELD WWTP #2.",
+  "notes": "EPA ECHO ICIS-NPDES: SCG570039 SPRINGFIELD WWTP #1; SCG570040 SPRINGFIELD WWTP #2.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -565449,39 +565200,6 @@
    "federal"
   ],
   "legal_form": "business or industrial"
- },
- {
-  "id": "sc-st-matthews",
-  "name": "Town of St. Matthews",
-  "state": "SC",
-  "kind": "plant",
-  "npdes_permit": "SC0028801",
-  "npdes_permits": [
-   "SC0028801"
-  ],
-  "receiving_waters": [
-   "Antley Springs Ck-Lake Marion"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
-  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "St Matthews"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0028801 ST MATTHEWS SOUTH PLANT.",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "sc-st-matthews"
-  ],
-  "source_areas": [
-   "sc",
-   "federal"
-  ],
-  "legal_form": "town"
  },
  {
   "id": "sc-state-parks",
@@ -565711,39 +565429,6 @@
   "legal_form": "institution"
  },
  {
-  "id": "sc-west-pelzer",
-  "name": "Town of West Pelzer",
-  "state": "SC",
-  "kind": "plant",
-  "npdes_permit": "SC0025194",
-  "npdes_permits": [
-   "SC0025194"
-  ],
-  "receiving_waters": [
-   "Unnamed Trib-Saluda River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
-  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "West Pelzer"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: SC0025194 WEST PELZER WWTF.",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "sc-west-pelzer"
-  ],
-  "source_areas": [
-   "sc",
-   "federal"
-  ],
-  "legal_form": "town"
- },
- {
   "id": "sc-whitmire",
   "name": "Town of Whitmire",
   "state": "SC",
@@ -565839,37 +565524,6 @@
   "legal_form": "special district"
  },
  {
-  "id": "sc-yc-holdings",
-  "name": "YC Holdings, Inc.",
-  "state": "SC",
-  "kind": "plant",
-  "npdes_permit": "SCG570036",
-  "npdes_permits": [
-   "SCG570036"
-  ],
-  "receiving_waters": [],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
-  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": false,
-  "notification_signup_url": null,
-  "towns": [
-   "Orangerburg"
-  ],
-  "notes": "Privately owned. EPA ECHO ICIS-NPDES: SCG570036 YC HOLDINGS, INC..",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "sc-yc-holdings"
-  ],
-  "source_areas": [
-   "sc",
-   "federal"
-  ],
-  "legal_form": "business or industrial"
- },
- {
   "id": "de-artesian-wastewater",
   "name": "Artesian Wastewater Management, Inc.",
   "state": "DE",
@@ -565956,7 +565610,7 @@
  },
  {
   "id": "de-de0020010",
-  "name": "Town of Selbyville (Selbyville Wastewater Treatment Facility)",
+  "name": "Selbyville Wastewater Treatment Facility (permittee not recorded by EPA)",
   "state": "DE",
   "kind": "plant",
   "npdes_permit": "DE0020010",
@@ -565973,7 +565627,7 @@
   "towns": [
    "Selbyville"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: DE0020010 SELBYVILLE WASTEWATER TREATMENT FACILITY.",
+  "notes": "EPA ECHO ICIS-NPDES: DE0020010 SELBYVILLE WASTEWATER TREATMENT FACILITY. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -565983,11 +565637,11 @@
    "de",
    "federal"
   ],
-  "legal_form": "town"
+  "legal_form": null
  },
  {
   "id": "de-de0020028",
-  "name": "City of Rehoboth Beach (Rehoboth Beach Wastewater Treatment Plant)",
+  "name": "Rehoboth Beach Wastewater Treatment Plant (permittee not recorded by EPA)",
   "state": "DE",
   "kind": "plant",
   "npdes_permit": "DE0020028",
@@ -566006,7 +565660,7 @@
   "towns": [
    "Rehoboth Beach"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: DE0020028 REHOBOTH BEACH WASTEWATER TREATMENT PLANT.",
+  "notes": "EPA ECHO ICIS-NPDES: DE0020028 REHOBOTH BEACH WASTEWATER TREATMENT PLANT. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -566016,11 +565670,11 @@
    "de",
    "federal"
   ],
-  "legal_form": "city"
+  "legal_form": null
  },
  {
   "id": "de-de0020125",
-  "name": "Town of Laurel (Laurel Sewage Treatment Plant)",
+  "name": "Laurel Sewage Treatment Plant (permittee not recorded by EPA)",
   "state": "DE",
   "kind": "plant",
   "npdes_permit": "DE0020125",
@@ -566039,7 +565693,7 @@
   "towns": [
    "Laurel"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: DE0020125 LAUREL SEWAGE TREATMENT PLANT.",
+  "notes": "EPA ECHO ICIS-NPDES: DE0020125 LAUREL SEWAGE TREATMENT PLANT. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -566049,11 +565703,11 @@
    "de",
    "federal"
   ],
-  "legal_form": "town"
+  "legal_form": null
  },
  {
   "id": "de-de0020265",
-  "name": "City of Seaford (Seaford Wastewater Treatment Plant)",
+  "name": "Seaford Wastewater Treatment Plant (permittee not recorded by EPA)",
   "state": "DE",
   "kind": "plant",
   "npdes_permit": "DE0020265",
@@ -566072,7 +565726,7 @@
   "towns": [
    "Seaford"
   ],
-  "notes": "EPA ECHO ICIS-NPDES: DE0020265 SEAFORD WASTEWATER TREATMENT PLANT.",
+  "notes": "EPA ECHO ICIS-NPDES: DE0020265 SEAFORD WASTEWATER TREATMENT PLANT. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -566082,7 +565736,7 @@
    "de",
    "federal"
   ],
-  "legal_form": "city"
+  "legal_form": null
  },
  {
   "id": "de-de0020320",
@@ -566177,7 +565831,7 @@
    "Frederica",
    "Milford"
   ],
-  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03). DE0020338: The Kent County Regional Resource Recovery Facility.",
+  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03). DE0020338: The Kent County Regional Resource Recovery Facility (EPA's permittee: 'KENT COUNTY WASTEWATER TREATMENT FACILITY').",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -566225,10 +565879,8 @@
   "name": "New Castle County Department of Public Works (sewer)",
   "state": "DE",
   "kind": "sso",
-  "npdes_permit": "DE0021539",
+  "npdes_permit": "DE0050547",
   "npdes_permits": [
-   "DE0021539",
-   "DE0021555",
    "DE0050547",
    "DE0051071"
   ],
@@ -566238,19 +565890,17 @@
    "White Clay Creek"
   ],
   "water_slugs": [],
-  "outfall_count": 3,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 4 rows for these permits)",
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 2 rows for these permits)",
   "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
    "Newark",
    "New Castle",
-   "Port Penn",
-   "Delaware City",
    "Middletown"
   ],
-  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03). DE0021539: Port Penn Wastewater Treatment Plant. DE0021555: Delaware City Wastewater Treatment Plant (EPA records New Castle). DE0050547: The MOT (Middletown-Odessa-Townsend) Wastewater Treatment Plant, New Castle County's (EPA's permit name: 'MOT Wastewater Treatment Plant - NCC'). DE0051071: DE0051071 is New Castle County's and DelDOT's municipal separate storm sewer permit (MS4): a storm sewer, not sewage; its EPA row is kind other in data/outfalls-de.json.",
+  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03). DE0050547: The MOT (Middletown-Odessa-Townsend) Wastewater Treatment Plant, New Castle County's (EPA's permittee: 'MOT Wastewater Treatment Plant - NCC'). DE0051071: DE0051071 is New Castle County's and DelDOT's municipal separate storm sewer permit (MS4): a storm sewer, not sewage; its EPA row is kind other in data/outfalls-de.json.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -566266,28 +565916,25 @@
   "id": "de-sussex-county",
   "name": "Sussex County Engineering, Environmental Services (wastewater)",
   "state": "DE",
-  "kind": "plant",
-  "npdes_permit": "DE0050008",
-  "npdes_permits": [
-   "DE0050008"
-  ],
+  "kind": "sso",
+  "npdes_permit": null,
+  "npdes_permits": [],
   "receiving_waters": [
    "Inland Bays",
    "Rehoboth Bay",
    "Indian River Bay"
   ],
   "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
+  "outfall_count": null,
+  "outfalls_source": null,
   "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
   "towns": [
    "Georgetown",
-   "Lewes",
-   "Frankford"
+   "Lewes"
   ],
-  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03). DE0050008: Sussex County's South Coastal Regional Wastewater Facility.",
+  "notes": "Research row (research/de/dischargers.json, checked 2026-11-03).",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -566350,39 +565997,6 @@
   ],
   "source_areas": [
    "de"
-  ],
-  "legal_form": "town"
- },
- {
-  "id": "de-town-of-milton",
-  "name": "Town of Milton (Milton Water Reclamation Facility)",
-  "state": "DE",
-  "kind": "plant",
-  "npdes_permit": "DE0021491",
-  "npdes_permits": [
-   "DE0021491"
-  ],
-  "receiving_waters": [
-   "Broadkill River"
-  ],
-  "water_slugs": [],
-  "outfall_count": 1,
-  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
-  "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
-  "notification_feed_machine_readable": true,
-  "notification_signup_url": null,
-  "towns": [
-   "Milton"
-  ],
-  "notes": "EPA ECHO ICIS-NPDES: DE0021491 MILTON WATER RECLAMATION FACILITY. Tidewater Environmental Services operates the Milton plant under contract with the Town (not verified against the permit).",
-  "verified": "fetched",
-  "checked": "2026-11-14",
-  "aliases": [
-   "de-town-of-milton"
-  ],
-  "source_areas": [
-   "de",
-   "federal"
   ],
   "legal_form": "town"
  },
@@ -591512,6 +591126,765 @@
   ],
   "source_areas": [
    "in"
+  ]
+ },
+ {
+  "id": "de-de0021491",
+  "name": "Milton Water Reclamation Facility (permittee not recorded by EPA)",
+  "state": "DE",
+  "kind": "plant",
+  "npdes_permit": "DE0021491",
+  "npdes_permits": [
+   "DE0021491"
+  ],
+  "receiving_waters": [
+   "Broadkill River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
+  "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Milton"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: DE0021491 MILTON WATER RECLAMATION FACILITY. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "de-de0021491"
+  ],
+  "source_areas": [
+   "de",
+   "federal"
+  ],
+  "legal_form": null
+ },
+ {
+  "id": "de-de0021539",
+  "name": "Port Penn Wastewater Treatment Plant (permittee not recorded by EPA)",
+  "state": "DE",
+  "kind": "plant",
+  "npdes_permit": "DE0021539",
+  "npdes_permits": [
+   "DE0021539"
+  ],
+  "receiving_waters": [
+   "Delaware River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
+  "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Port Penn"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: DE0021539 PORT PENN WASTEWATER TREATMENT PLANT. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "de-de0021539"
+  ],
+  "source_areas": [
+   "de",
+   "federal"
+  ],
+  "legal_form": null
+ },
+ {
+  "id": "de-de0021555",
+  "name": "Delaware City Wastewater Treatment Plant (permittee not recorded by EPA)",
+  "state": "DE",
+  "kind": "plant",
+  "npdes_permit": "DE0021555",
+  "npdes_permits": [
+   "DE0021555"
+  ],
+  "receiving_waters": [
+   "Delaware River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
+  "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Delaware City"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: DE0021555 DELAWARE CITY WASTEWATER TREATMENT PLANT. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "de-de0021555"
+  ],
+  "source_areas": [
+   "de",
+   "federal"
+  ],
+  "legal_form": null
+ },
+ {
+  "id": "de-de0050008",
+  "name": "South Coastal Regional Wastewater Facility (permittee not recorded by EPA)",
+  "state": "DE",
+  "kind": "plant",
+  "npdes_permit": "DE0050008",
+  "npdes_permits": [
+   "DE0050008"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points and the national CSO inventory (data/outfalls-plants-us.json, data/outfalls-us.json: 1 rows for these permits)",
+  "notification_channel": "DNREC's Environmental Release Notification System (7 Del. C. 6028): a sewage release of 10,000 gallons or more is reported to DNREC at once and DNREC posts it on its public Recent Releases list within one business day (https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx); smaller releases appear when they are reported. DNREC also notifies the district's legislators and registered neighbours within 12 hours (6014(b)). The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": true,
+  "notification_signup_url": null,
+  "towns": [
+   "Frankford"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: DE0050008 SOUTH COASTAL REGIONAL WASTEWATER. EPA records the plant's name as the permittee; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "de-de0050008"
+  ],
+  "source_areas": [
+   "de",
+   "federal"
+  ],
+  "legal_form": null
+ },
+ {
+  "id": "sc-sc0021504",
+  "name": "Pageland Northwest WWTF (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0021504",
+  "npdes_permits": [
+   "SC0021504"
+  ],
+  "receiving_waters": [
+   "Hills Creek To Lynches River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pageland"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0021504 PAGELAND NORTHWEST WWTF. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0021504"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0023272",
+  "name": "Springfield WWTP #1 (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0023272",
+  "npdes_permits": [
+   "SC0023272"
+  ],
+  "receiving_waters": [
+   "S Fork Edisto Rv"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Springfield"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0023272 SPRINGFIELD WWTP #1. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0023272"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0023281",
+  "name": "Springfield WWTP #2 (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0023281",
+  "npdes_permits": [
+   "SC0023281"
+  ],
+  "receiving_waters": [
+   "Goodland Crk-S.Fork Edisto Rv"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Quinby"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0023281 SPRINGFIELD WWTP #2. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0023281"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0025194",
+  "name": "West Pelzer WWTF (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0025194",
+  "npdes_permits": [
+   "SC0025194"
+  ],
+  "receiving_waters": [
+   "Unnamed Trib-Saluda River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "West Pelzer"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0025194 WEST PELZER WWTF. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0025194"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0025763",
+  "name": "City of Chesnee",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0025763",
+  "npdes_permits": [
+   "SC0025763"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Chesnee"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0025763 SPARTANBURG SANITARY SEWER DISTRICT/CHESNEE WWTP.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0025763"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ],
+  "legal_form": "city"
+ },
+ {
+  "id": "sc-sc0026735",
+  "name": "Lexington/Coventry Woods WWTP (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0026735",
+  "npdes_permits": [
+   "SC0026735"
+  ],
+  "receiving_waters": [
+   "12 Mi Ck"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Lexington"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0026735 LEXINGTON/COVENTRY WOODS WWTP. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0026735"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0028801",
+  "name": "St Matthews South Plant (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0028801",
+  "npdes_permits": [
+   "SC0028801"
+  ],
+  "receiving_waters": [
+   "Antley Springs Ck-Lake Marion"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "St Matthews"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0028801 ST MATTHEWS SOUTH PLANT. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0028801"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0035700",
+  "name": "Pendleton-Clemson Reg WWTF (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0035700",
+  "npdes_permits": [
+   "SC0035700"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pendleton"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0035700 PENDLETON-CLEMSON REG WWTF. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0035700"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0038822",
+  "name": "Dorchester Co Lower Dorchester WWTP (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0038822",
+  "npdes_permits": [
+   "SC0038822"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "North Charleston"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0038822 DORCHESTER CO LOWER DORCHESTER WWTP. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0038822"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0045993",
+  "name": "Norway Town of (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0045993",
+  "npdes_permits": [
+   "SC0045993"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Norway"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0045993 NORWAY TOWN OF. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0045993"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0046892",
+  "name": "Lancaster Catawba River (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0046892",
+  "npdes_permits": [
+   "SC0046892"
+  ],
+  "receiving_waters": [
+   "Catawba River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Lancaster"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0046892 LANCASTER CATAWBA RIVER. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0046892"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0048313",
+  "name": "Ncw&Sa Cannons Creek WWTP (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0048313",
+  "npdes_permits": [
+   "SC0048313"
+  ],
+  "receiving_waters": [
+   "Cannons Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Prosperity"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0048313 NCW&SA CANNONS CREEK WWTP. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0048313"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0048526",
+  "name": "Hilton Head PSD Reverse Osmosis Wtp (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0048526",
+  "npdes_permits": [
+   "SC0048526"
+  ],
+  "receiving_waters": [
+   "Skull Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": null,
+  "outfalls_source": null,
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Beaufort"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0048526 HILTON HEAD PSD REVERSE OSMOSIS WTP. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0048526"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0049361",
+  "name": "Dorchester Co Central Dorchester WWTP (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0049361",
+  "npdes_permits": [
+   "SC0049361"
+  ],
+  "receiving_waters": [
+   "Ashley River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Ridgeville"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0049361 DORCHESTER CO CENTRAL DORCHESTER WWTP. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0049361"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0049363",
+  "name": "Orangeburg County Water and Sewer Authority (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0049363",
+  "npdes_permits": [
+   "SC0049363"
+  ],
+  "receiving_waters": [
+   "Goodbys Swamp"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Santee"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0049363 ORANGEBURG COUNTY WATER AND SEWER AUTHORITY. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0049363"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0049366",
+  "name": "Town of Holly Hill (New) WWTP (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0049366",
+  "npdes_permits": [
+   "SC0049366"
+  ],
+  "receiving_waters": [
+   "Four Hole Swamp"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Holly Hill"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0049366 TOWN OF HOLLY HILL (NEW) WWTP. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0049366"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-sc0049372",
+  "name": "Gsw&Sa Bucksport WWTP (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SC0049372",
+  "npdes_permits": [
+   "SC0049372"
+  ],
+  "receiving_waters": [
+   "Bull Creek"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Bucksport"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SC0049372 GSW&SA BUCKSPORT WWTP. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-sc0049372"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-scg570001",
+  "name": "American House Spinning Inc (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SCG570001",
+  "npdes_permits": [
+   "SCG570001"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Central"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SCG570001 AMERICAN HOUSE SPINNING INC. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-scg570001"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-scg570036",
+  "name": "Yc Holdings, Inc. (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SCG570036",
+  "npdes_permits": [
+   "SCG570036"
+  ],
+  "receiving_waters": [],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Orangerburg"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SCG570036 YC HOLDINGS, INC.. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-scg570036"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
+  ]
+ },
+ {
+  "id": "sc-scg570048",
+  "name": "Sssd Pacolet Mills WWTP (owner not recorded by EPA)",
+  "state": "SC",
+  "kind": "plant",
+  "npdes_permit": "SCG570048",
+  "npdes_permits": [
+   "SCG570048"
+  ],
+  "receiving_waters": [
+   "Pacolet River"
+  ],
+  "water_slugs": [],
+  "outfall_count": 1,
+  "outfalls_source": "EPA ECHO ICIS-NPDES discharge points (data/outfalls-plants-us.json: 1 rows for these permits)",
+  "notification_channel": "S.C. Code 48-1-95(E): the utility must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated sewage) within 24 hours of discovery, through a channel the law does not name; DES gives the notice when the utility does not. DES publishes no list of the reports it receives. The operator's own pages were not searched individually.",
+  "notification_feed_machine_readable": false,
+  "notification_signup_url": null,
+  "towns": [
+   "Pacolet"
+  ],
+  "notes": "EPA ECHO ICIS-NPDES: SCG570048 SSSD PACOLET MILLS WWTP. EPA's permittee field gives the facility, not its owner; the owner was not verified against the permit, so the row is the permit's and names no owner.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "aliases": [
+   "sc-scg570048"
+  ],
+  "source_areas": [
+   "sc",
+   "federal"
   ]
  }
 ]

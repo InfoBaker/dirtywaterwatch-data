@@ -33,9 +33,14 @@ Records (rules only)
   - Place: the station's own point (the layer's Latitude and Longitude, rounded to three decimals: a public beach),
     joined by the beach's name (raw.unit_id); a beach of the history with no station keeps its name only
     (waterbody_text, placed by name). coord_source "station".
-  - Keys: the history's advisoryid ("adv-731"); the poll records "station-<UnitID>-<first poll date>".
+  - Keys: the history's advisoryid ("adv-731"); the poll records "station-<UnitID>-<first poll minute>", "-2", "-3" for
+    a reopening within the same minute. A poll episode a history row later covers is kept with duplicate_of that row;
+    one the map still showed after the row's end date is its own record (raw.continues_after). The map's status for a
+    beach whose history row carries it is moved onto that row (raw._last_seen_in_source, kept in the state's
+    "confirmed"), so the row ages out only after the map stops showing it (verify P1-1).
 
-Privacy: the fields hold no person; DNREC's text goes through common.scrub_text. data/raw keeps the safe rows only.
+Privacy: the fields hold no person; DNREC's text goes through the Delaware scrubber (de_dnrec_derns.scrub), and advreason
+and advtype are kept only as one of DNREC's own values (REASONS, TYPES, NOT_READ). data/raw keeps the safe rows only.
 Cadence: hourly with the refresh (the history is updated as DNREC posts; the map in season). Run from pipeline/:
   python -m ingest.de_dnrec_recwater [--file saved.json] [--at 2026-11-14T18:00:00Z]
 """
@@ -50,7 +55,14 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import (BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events, write_json)
+from common import (BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json)
+# DNREC's free text through the Delaware scrubber (names after "call"/"contact", house numbers, phones, e-mails),
+# not common.scrub_text alone (re-review P1-5)
+from ingest.de_dnrec_derns import scrub as _scrub
+
+
+def scrub_text(v: str) -> str:
+    return _scrub(v) or ""
 
 SOURCE_ID = "de-dnrec-recreational-water"
 SOCRATA = ("https://data.delaware.gov/resource/ever-58ni.json?$select=advisoryid,advstartdate,advenddate,advdesc,"
@@ -78,6 +90,11 @@ NOT_READ = {"recreational water quality advisory lift": "lift (the advisory row 
             "sampling to resume in spring": "end of the sampling season",
             "fish consumption advisory": "fish consumption, not water contact",
             "fish consumption closure": "fish consumption, not water contact"}
+# DNREC's advreason values (the dataset's own list, 2026-11-14); any other value is saved as UNLISTED_REASON
+REASONS = {"bacteria", "rainfall", "algae bloom", "chemical/oil spill", "enterococcus monitor",
+           "end of sampling season", "end of sampling seas", "other"}   # the dataset cuts the field at 20 characters
+UNLISTED_REASON = "a reason not among DNREC's listed values (not kept)"
+UNLISTED_TYPE = "a notice type not among DNREC's listed values (not kept)"
 TEST_ROW = re.compile(r"\btest(?:ing|ed)?\b.*\b(?:email|change|developer)|developer\s+test|web\.config|BEING TESTED",
                       re.I)
 LIFT_TEXT = re.compile(r"^\s*the\s+(?:recreational\s+water\s+)?advisory\s+has\s+been\s+lifted", re.I)
@@ -219,12 +236,21 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
     """The current-status snapshot: records opened and closed at polls (module docstring)."""
     # a history row in effect today, of the same kind as the map's status (an advisory, or DNREC's resampling label),
     # already carries it; a row aged out for want of an end (raw.status_basis) never does
-    open_hist = {(norm(r["raw"].get("unit_name")), "label" if r["raw"].get("_agency_label_only") else "advisory")
-                 for r in history
-                 if r["status"] in ("advisory_active", "unknown") and not r["raw"].get("status_basis")
-                 and r.get("ended_at") and r["ended_at"] >= today.isoformat()
-                 and (r.get("started_at") or "") <= today.isoformat()}
+    # (re-review P2-1: a history row with no end yet, still in effect, carries it too)
+    def hkey(r):
+        return norm(r["raw"].get("unit_name")), "label" if r["raw"].get("_agency_label_only") else "advisory"
+    open_by = {}
+    for r in history:
+        if r["status"] in ("advisory_active", "unknown") and not r["raw"].get("status_basis") \
+                and (not r.get("ended_at") or r["ended_at"] >= today.isoformat()) \
+                and (r.get("started_at") or "") <= today.isoformat():
+            open_by.setdefault(hkey(r), []).append(r)
+    open_hist = set(open_by)
     state = {k: dict(v) for k, v in (prev.get("polls") or {}).items()}
+    # the map's current status is a confirmation of DNREC's history row that carries it: kept by the row's id and
+    # moved onto that row (raw._last_seen_in_source), so a history row the map still shows is never aged out to grey
+    # while a poll record is suppressed for it (verify P1-1)
+    confirmed = dict(prev.get("confirmed") or {})
     showing, explicit = {}, {}
     for s in stations:
         code = s.get("CurrentAdvisory")
@@ -232,10 +258,29 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
             explicit[str(s.get("UnitID"))] = code            # a known status read for this station
         if code in POLL_CODES and (norm(s.get("UnitName")), POLL_CODES[code][1]) not in open_hist:
             showing[str(s.get("UnitID"))] = (s, code)
+        elif code in POLL_CODES:
+            for r in open_by[(norm(s.get("UnitName")), POLL_CODES[code][1])]:
+                confirmed[r["event_id"]] = fetched_at
+    for r in history:
+        seen = confirmed.get(r["event_id"])
+        if not seen:
+            continue
+        raw = r["raw"]
+        if (raw.get("_last_seen_in_source") or "") < seen:
+            raw["_last_seen_in_source"] = seen
+        raw["confirmation_basis"] = ("DNREC's map showed this status for the beach at the last read listed "
+                                     "(raw._last_seen_in_source)")
+        if raw.get("_agency_label_only") and not r.get("ended_at"):
+            # a resampling notice with no end date that the map still lists: the caution holds the site's hours past
+            # the last read that listed it, as for a poll-only notice (re-review P2-2)
+            raw.update(_caution_to_notice_end=True, _open_notice_caution_hours=72)
     for uid, (s, code) in showing.items():
         cur = next((v for v in state.values() if v["unit_id"] == uid and not v.get("ended_at") and v["code"] == code), None)
         if cur is None:
-            key = f"station-{uid}-{re.sub(r'[^0-9T]', '', fetched_at)[:13]}"
+            key = base = f"station-{uid}-{re.sub(r'[^0-9T]', '', fetched_at)[:13]}"
+            n = 2
+            while key in state:                              # a reopening within the same minute: its own episode
+                key, n = f"{base}-{n}", n + 1
             lat, lon = point(s)
             state[key] = {"unit_id": uid, "code": code, "name": s.get("UnitName"), "started_at": fetched_at,
                           "lat": lat, "lon": lon}
@@ -253,6 +298,23 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
     recs = []
     for key, v in sorted(state.items()):
         etype, kind = POLL_CODES[v["code"]]
+        # a history row that arrived later and covers this poll episode is DNREC's own record of it: the poll record is
+        # kept (its observations stay) but marked its duplicate, so the advisory is counted once (re-review P2-1)
+        day0 = v["started_at"][:10]
+        # the episode's last observation (its observed end, else its last read): a history row covers the episode
+        # only when it covers that too; the map still showing the status after the row's end date is a continuation
+        # beyond DNREC's record and stays its own record (verify P1-1)
+        last = (v.get("ended_at") or v.get("last_seen_at") or v["started_at"])
+        last_day = datetime.fromisoformat(last.replace("Z", "+00:00")).astimezone(TZ).date().isoformat()
+        if v.get("ended_at"):
+            last_day = min(last_day, (datetime.fromisoformat(last.replace("Z", "+00:00")).astimezone(TZ)
+                                      - timedelta(seconds=1)).date().isoformat())
+        cands = [r for r in history if hkey(r) == (norm(v["name"]), kind)
+                 and r["status"] in ("advisory_active", "advisory_lifted", "unknown")
+                 and not r["raw"].get("status_basis") and r.get("started_at")
+                 and r["started_at"] <= day0 and (not r.get("ended_at") or r["ended_at"] >= day0)]
+        cover = next((r for r in cands if not r.get("ended_at") or r["ended_at"] >= last_day), None)
+        beyond = None if cover else next(iter(cands), None)
         lat, lon = point({"Latitude": v.get("lat"), "Longitude": v.get("lon")})
         raw = {"state": "DE", "time_zone": "America/New_York", "unit_id": v["unit_id"], "unit_name": v["name"],
                "current_advisory_code": v["code"], "current_advisory_label": CODES[v["code"]],
@@ -265,7 +327,13 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
             raw["_missing_from_source_since"] = v["missing_since"]
         if kind == "label":
             raw.update(_agency_label_only=True, _agency_label=CODES[v["code"]], _label_basis=LABEL_BASIS,
-                       _caution_to_notice_end=True, _notice_closed_at=v.get("ended_at") or raw["_last_seen_in_source"])
+                       _caution_to_notice_end=True)
+            if v.get("ended_at"):
+                raw["_notice_closed_at"] = v["ended_at"]
+            else:
+                # still listed: no closure observed. The caution stays current for the site's caution hours after the
+                # last read that listed it (re-review P2-2), never ending at that read
+                raw.update(_caution_to_notice_end=True, _open_notice_caution_hours=72)
             status = "unknown"
         else:
             status = "advisory_lifted" if v.get("ended_at") else "advisory_active"
@@ -273,8 +341,27 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
                           waterbody_text=beach_water(v["name"]) or v["name"], outfall_name=v["name"], lat=lat, lon=lon, coord_source="station",
                           coord_precision_m=100, started_at=v["started_at"], ended_at=v.get("ended_at"),
                           time_precision="poll", fetched_at=fetched_at, authority=AUTHORITY,
-                          source_url=BEACH_URL.format(v["unit_id"]), raw=raw))
-    return recs, {"polls": state}
+                          source_url=BEACH_URL.format(v["unit_id"]), raw=raw,
+                          duplicate_of=cover["event_id"] if cover else None))
+        if cover:
+            recs[-1]["raw"]["duplicate_basis"] = "DNREC's history lists this advisory (its own dates); counted once there"
+            if not v.get("ended_at"):
+                # the episode is still showing: its observation confirms the history row that carries it
+                confirmed[cover["event_id"]] = max(confirmed.get(cover["event_id"]) or "",
+                                                   v.get("last_seen_at") or v["started_at"])
+        elif beyond:
+            recs[-1]["raw"]["continues_after"] = beyond["event_id"]
+            recs[-1]["raw"]["continuation_basis"] = (
+                f"DNREC's history ends this notice on {beyond['ended_at']}; the map still showed it after that day")
+    for r in history:                                        # confirmations found while building the poll records
+        seen = confirmed.get(r["event_id"])
+        if seen and (r["raw"].get("_last_seen_in_source") or "") < seen:
+            r["raw"]["_last_seen_in_source"] = seen
+            r["raw"]["confirmation_basis"] = ("DNREC's map showed this status for the beach at the last read listed "
+                                              "(raw._last_seen_in_source)")
+            if r["raw"].get("_agency_label_only") and not r.get("ended_at"):
+                r["raw"].update(_caution_to_notice_end=True, _open_notice_caution_hours=72)
+    return recs, {"polls": state, "confirmed": confirmed}
 
 
 META = {"credit": "Delaware Department of Natural Resources and Environmental Control, Recreational Water Program "
@@ -297,6 +384,12 @@ def safe_rows(rows: list[dict]) -> list[dict]:
         for k in ("advdesc", "advcomment"):
             if x.get(k):
                 x[k] = scrub_text(x[k])
+        # the categorical fields are kept only as one of DNREC's own values; anything else is never saved as text
+        # (verify P1-6: a contact sentence in advreason survived the scrub)
+        if x.get("advreason") and x["advreason"].strip().lower() not in REASONS:
+            x["advreason"] = UNLISTED_REASON
+        if x.get("advtype") and x["advtype"].strip().lower() not in TYPES and x["advtype"].strip().lower() not in NOT_READ:
+            x["advtype"] = UNLISTED_TYPE
         out.append(x)
     return out
 

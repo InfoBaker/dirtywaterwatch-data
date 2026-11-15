@@ -61,8 +61,16 @@ Lifecycle
     data/build/de-dnrec-derns-state.json (safe fields only) and carried, so a release that leaves the first pages is
     never dropped. Details are read for at most DETAILS_PER_RUN releases a run, newest first, and read again while a
     release is under RECHECK_DAYS old; a changed detail is kept with its earlier version's hash (raw._revisions).
-  - A list, a search or a detail page that cannot be read is ok=False: the previous records stay and nothing is
-    dropped; a detail page that fails MAX_DETAIL_FAILURES reads is no longer asked for.
+  - A Recent Releases page that cannot be read is ok=False: the previous records stay and nothing is dropped. Every
+    requested page of the list must carry rows: an error or consent page in its place fails the run. A substance
+    search whose result page is not DERNS's search page (an error or refusal page) is a failed read, never "no
+    results": the backfill is not marked done, the terms not read are asked again on the next run, and the run is
+    ok=False while it is open (verify P2-1).
+  - A detail page that cannot be read does not hold the feed: the readable releases are kept and updated, the
+    unreadable one is listed in meta.unread with its reason and last try and asked again on the next run (after
+    MAX_DETAIL_FAILURES reads, once every RETRY_HOURS, never given up), and no record is lifted or removed because
+    of it (a release whose detail was read before keeps that detail). A run in which a detail page failed is
+    ok=False and names it, with the records still written (the pattern of Baton Rouge's quarterly reports).
   - raw._placement "named_water_only": a release is never geolocated from its street, plant or pump station
     (build/provisional_outfalls.py); only a water its notes name places it.
 
@@ -90,6 +98,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+import common
 from common import (BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, strip_house_numbers,
                     write_events, write_json)
 
@@ -105,7 +114,8 @@ PAUSE_S = 1.5
 PAGES = 3
 DETAILS_PER_RUN = 40
 RECHECK_DAYS = 14
-MAX_DETAIL_FAILURES = 3   # a detail page that failed this many reads is no longer asked for (meta counts it)
+MAX_DETAIL_FAILURES = 3   # a detail page that failed this many reads is then retried once every RETRY_HOURS
+RETRY_HOURS = 24
 P = "ctl00$ctl00$ContentPlaceHolderBody$ContentPlaceHolder1$ucReleaseSearch$"
 SEARCH_TERMS = ["SEWAGE", "SEWER", "SANITARY", "SEPTIC", "WASTEWATER", "WASTE WATER", "GREY WATER", "GRAY WATER",
                 "EFFLUENT", "MIXED LIQUOR"]
@@ -192,8 +202,8 @@ OPERATORS = [
     (r"howard\s+(?:h\.?\s+)?seymour|lewes\s+(?:waste\s*water|wwtp|treatment|board)|lewis\s+waste", "de-de0021512"),
     (r"rehoboth\s+(?:beach\s+)?(?:waste\s*water|wwtp|treatment)|city\s+of\s+rehoboth", "de-de0020028"),
     (r"selbyville", "de-de0020010"),
-    (r"south\s+coastal", "de-sussex-county"),
-    (r"town\s+of\s+milton|milton\s+(?:waste\s*water|wwtp)", "de-town-of-milton"),
+    (r"south\s+coastal", "de-de0050008"),
+    (r"town\s+of\s+milton|milton\s+(?:waste\s*water|wwtp)", "de-de0021491"),
     (r"town\s+of\s+smyrna|smyrna\s+(?:waste\s*water|public\s+works)", "de-town-of-smyrna"),
     (r"artesian", "de-artesian-wastewater"),
     (r"tidewater\s+(?:utilities|environmental)", "de-tidewater-environmental"),
@@ -227,6 +237,13 @@ def list_rows(page: str) -> list[dict]:
                     "substance": cells[4], "extremely_hazardous": cells[5], "release_time": cells[6],
                     "facility": cells[7], "status": cells[8]})
     return out
+
+
+def is_search_page(page: str) -> bool:
+    """A page that is DERNS's own release search (its form state and its release grid), so an empty grid on it is a
+    real zero-result answer; an error or refusal page lacks them."""
+    return bool(re.search(r'id="__VIEWSTATE"', page) and re.search(r"ucReleaseSearch", page)
+                and re.search(r"grvReleases", page))
 
 
 def page_count(page: str) -> int:
@@ -272,7 +289,7 @@ def parse_detail(page: str) -> dict | None:
 _HON = r"(?:Mr|Mrs|Ms|Miss|Dr)\.?"
 NAMED_PERSON = re.compile(rf"\b((?:[Cc]all(?:ed)?|[Cc]ontact(?:ed)?|[Ss]poke\s+(?:with|to)|[Tt]alked\s+(?:with|to)|"
                           rf"[Rr]eported\s+by|[Cc]aller|[Pp]er|[Ii]nspector|[Oo]fficer|[Oo]wner|[Rr]esident|[Hh]omeowner)"
-                          rf"\s+)(?:{_HON}\s+)?[A-Z][a-z]+(?:\s+[A-Z]\.)?(?:\s+[A-Z][a-z'-]+)?|\b{_HON}\s+[A-Z][a-z'-]+")
+                          rf"[:,]?\s+)(?:{_HON}\s+)?[A-Z][a-z]+(?:\s+[A-Z]\.)?(?:\s+[A-Z][a-z'-]+)?|\b{_HON}\s+[A-Z][a-z'-]+")
 NOT_A_NAME = re.compile(r"^(?:the|a|an|DNREC|New|Kent|Sussex|City|Town|County|Public|Works|Special|Delaware|Artesian|"
                         r"Tidewater|DelDOT|Dover|Newark|Wilmington)\b", re.I)
 
@@ -337,9 +354,12 @@ class Client:
         rows = list_rows(page)
         if not rows:
             raise RuntimeError("the Recent Releases list showed no rows")
-        for _ in range(1, min(pages, page_count(page))):
+        for i in range(1, min(pages, page_count(page))):
             page = self.post(self._next(page, None))
-            rows += list_rows(page)
+            got = list_rows(page)
+            if not got:          # an error or consent page in place of a requested page is never accepted
+                raise RuntimeError(f"Recent Releases page {i + 1}: no release rows on the page")
+            rows += got
         return rows
 
     def search(self, term: str) -> list[dict]:
@@ -350,6 +370,9 @@ class Client:
         page = self.post(d)
         n = page_count(page)
         rows = list_rows(page)
+        if not rows and not is_search_page(page):
+            # an error, refusal or consent page in place of the results is a failed read, never "no results"
+            raise RuntimeError(f"search {term!r}: the result page is not DERNS's search page")
         for _ in range(1, n):
             page = self.post(self._next(page, term))
             got = list_rows(page)
@@ -467,20 +490,64 @@ def parse_time(s: str | None) -> tuple[str | None, str | None]:
     return None, None
 
 
-GALLONS = re.compile(r"(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\s*(?:\+\s*)?(?:gal\b|gallons?\b|gals?\b)", re.I)
+_NUM = r"(?<![\d,.])(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)"
+_GAL = r"(\s*\+)?\s*(?:gal\b|gallons?\b|gals?\b)"
+GALLONS = re.compile(_NUM + _GAL, re.I)
+# "1,000-2,000 gallons", "1,000 to 2,000 gallons": a range, never one figure
+GALLON_RANGE = re.compile(_NUM + r"\s*(?:gal\w*\s*)?(?:-|–|—|to)\s*" + _NUM + _GAL, re.I)
+# "Less Than 1,000 gallons", "> 500 gal": a bound, never a measured figure
+# "< 1,000", "<= 1,000", "> 1,000", ">= 1,000" (and the one-character signs): symbolic bounds, verify P2-4
+BOUND_WORDS = re.compile(r"(?:\b(?:(less|fewer)\s+than|under|below|up\s+to|(greater|more)\s+than|over|in\s+excess\s+of|"
+                         r"at\s+least)|<=?|>=?|\u2264|\u2265)\s*$", re.I)
+# "50 gallons per minute": a rate, never a volume
+RATE = re.compile(_GAL + r"\s*(?:per|/|a|an)\s*(?:min|minute|hour|hr|day|second|sec)\b", re.I)
+
+
+def _n(s: str) -> float:
+    return float(s.replace(",", ""))
+
+
+def volume_parts(q: str) -> tuple[float | None, dict | None]:
+    """(gallons, bounds) of a DERNS quantity: one complete figure (commas and decimals kept whole) is gallons; a range,
+    a "less than" / "greater than" figure or a rate is no figure but structured bounds (re-review P2-4)."""
+    m = GALLON_RANGE.search(q)
+    if m:
+        lo, hi = sorted((_n(m.group(1)), _n(m.group(2))))
+        return None, {"kind": "range", "min_gal": lo, "max_gal": hi}
+    m = GALLONS.search(q)
+    if not m:
+        return None, None
+    if RATE.search(q[m.start(0):]):
+        return None, {"kind": "rate", "text": q[m.start(0):].strip()[:80]}
+    if m.group(2):                       # "1,000+ gallons": at least that figure
+        return None, {"kind": "lower_bound", "min_gal": _n(m.group(1))}
+    b = BOUND_WORDS.search(q[:m.start(0)])
+    if b:
+        upper = bool(re.search(r"less|fewer|under|below|up\s+to|<|\u2264", b.group(0), re.I))
+        return None, {"kind": "upper_bound" if upper else "lower_bound",
+                      ("max_gal" if upper else "min_gal"): _n(m.group(1))}
+    if len(GALLONS.findall(q)) > 1:
+        return None, {"kind": "several_figures"}
+    return _n(m.group(1)), None
 
 
 def volume(detail: dict | None) -> tuple[float | None, str | None, str]:
     q = (detail or {}).get("quantity") or ""
-    m = GALLONS.search(q)
-    if m:
-        return float(m.group(1).replace(",", "")), q, "estimated"
+    if GALLONS.search(q):
+        gal, _ = volume_parts(q)
+        return (gal, q, "estimated") if gal is not None else (None, q, "unknown")
     if q and q.upper() not in ("N/A", "NA", "UNKNOWN", "NONE", ""):
         return None, q, "unknown"
     m = GALLONS.search((detail or {}).get("text") or "")
     if m:
         return None, f"{m.group(0)} (in the release's text)", "unknown"
     return None, None, "unknown"
+
+
+def volume_bounds(detail: dict | None) -> dict | None:
+    """The quantity's structured bounds (raw.volume_bounds) when it is a range, a bound or a rate."""
+    q = (detail or {}).get("quantity") or ""
+    return volume_parts(q)[1] if GALLONS.search(q) else None
 
 
 # ---------------------------------------------------------------- records
@@ -539,6 +606,8 @@ def build_record(entry: dict, fetched_at: str) -> dict | None:
     elif released and "Water" in released:
         raw["reached_water"] = True
     vol, vtext, flag = volume(det)
+    if volume_bounds(det):
+        raw["volume_bounds"] = volume_bounds(det)
     precautions = d.get("precautions")
     advice = precautions if precautions and precautions.strip().lower() not in ("none", "n/a", "na", "unknown") else None
     rec = event(source_id=SOURCE_ID, source_record_id=entry["key"], event_type=etype, status="unknown",
@@ -570,6 +639,20 @@ def merge(state: dict, rows: list[dict], now: str) -> dict:
     return n
 
 
+def retry_due(e: dict, now_dt: datetime) -> bool:
+    """A detail that failed MAX_DETAIL_FAILURES reads is retried once every RETRY_HOURS, never given up."""
+    last = e.get("detail_failed_at")
+    if not last:
+        return True
+    return now_dt - datetime.fromisoformat(last.replace("Z", "+00:00")) >= timedelta(hours=RETRY_HOURS)
+
+
+def unresolved_details(state: dict) -> list[str]:
+    """Candidate releases whose detail page has failed and never been read (listed in meta.unread, retried)."""
+    return sorted(k for k, e in state.get("rows", {}).items()
+                  if e.get("detail") is None and e.get("detail_failures", 0) > 0)
+
+
 def due_for_detail(state: dict, now_dt: datetime, limit: int) -> list[str]:
     def started(e):
         t, _ = parse_time(e["list"].get("release_time"))
@@ -580,7 +663,7 @@ def due_for_detail(state: dict, now_dt: datetime, limit: int) -> list[str]:
         if kind in ("not_candidate", "industrial", "treated_effluent") and e.get("detail") is not None:
             continue
         if e.get("detail") is None:
-            if e.get("detail_failures", 0) < MAX_DETAIL_FAILURES:
+            if e.get("detail_failures", 0) < MAX_DETAIL_FAILURES or retry_due(e, now_dt):
                 out.append(e["key"])
             continue
         t, _ = parse_time(e["list"].get("release_time"))
@@ -602,12 +685,18 @@ def read_details(client: Client, state: dict, keys: list[str], now: str) -> dict
         except requests.RequestException as e:
             n["details_failed"] += 1
             state["rows"][k]["detail_failures"] = state["rows"][k].get("detail_failures", 0) + 1
+            state["rows"][k]["detail_failed_at"] = now
+            state["rows"][k]["detail_error"] = f"{type(e).__name__}: {e}"[:200]
+            n.setdefault("failed_keys", []).append(k)
             print(f"{SOURCE_ID}: detail {k}: {e}", file=sys.stderr)
             continue
         if d is None:
             n["details_failed"] += 1
             e = state["rows"][k]
             e["detail_failures"] = e.get("detail_failures", 0) + 1
+            e["detail_failed_at"] = now
+            e["detail_error"] = "the page carries no release fields (an error or refusal page)"
+            n.setdefault("failed_keys", []).append(k)
             continue
         d = safe_detail(d)
         h = hashlib.sha256(json.dumps(d, sort_keys=True).encode()).hexdigest()[:16]
@@ -616,6 +705,9 @@ def read_details(client: Client, state: dict, keys: list[str], now: str) -> dict
             e.setdefault("revisions", []).append({"seen_at": now, "previous_hash": e["detail_hash"]})
             n["details_changed"] += 1
         e.update(detail=d, detail_hash=h, detail_read_at=now)
+        e.pop("detail_failed_at", None)
+        e.pop("detail_error", None)
+        e.pop("detail_failures", None)
         n["details_read"] += 1
     return n
 
@@ -663,33 +755,67 @@ def run(args) -> int:
         return 0
     state = rescrub(read_json(STATE_PATH, None) or {"format": SAFE_FORMAT, "rows": {}})
     client = Client()
-    counts = {}
+    counts, errors = {}, []
     try:
         rows = client.recent(args.pages)
-        if args.backfill or not state.get("backfilled_at"):
-            for term in SEARCH_TERMS:
-                rows += client.search(term)
-            state["backfilled_at"] = now
-        counts.update(merge(state, rows, now))
     except (requests.RequestException, RuntimeError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=META)
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
+    if args.backfill or not state.get("backfilled_at"):
+        # each substance search is read whole or not at all; a term that failed is asked again on the next run and
+        # the backfill is marked done only when every term was read (verify P2-1)
+        done = set() if args.backfill else set(state.get("backfill_terms_done") or [])
+        for term in SEARCH_TERMS:
+            if term in done:
+                continue
+            try:
+                rows += client.search(term)
+                done.add(term)
+            except (requests.RequestException, RuntimeError) as e:
+                errors.append(f"search {term!r} not read ({type(e).__name__}: {e})")
+        if done >= set(SEARCH_TERMS):
+            state["backfilled_at"] = now
+            state.pop("backfill_terms_done", None)
+        else:
+            state["backfill_terms_done"] = sorted(done)
+    counts.update(merge(state, rows, now))
     counts.update(read_details(client, state, due_for_detail(state, now_dt, args.details), now))
+    failed_keys = counts.pop("failed_keys", [])
     state["format"], state["updated_at"] = SAFE_FORMAT, now
     write_json(STATE_PATH, state)
     save_raw(SOURCE_ID, json.dumps(state, indent=1, sort_keys=True), "json")
-    if counts.get("details_failed"):
-        # a detail page that failed (an error, or a page that is not a release's detail): the published records stay
-        # as they were (ok=False); what was read is kept in the state for the next run
-        write_events(SOURCE_ID, [], ok=False, error=f"{counts['details_failed']} release detail page(s) not read",
-                     meta=META)
-        print(f"{SOURCE_ID}: FAILED {counts}", file=sys.stderr)
-        return 1
     recs, reasons = build(state, now)
-    write_events(SOURCE_ID, recs, meta={**META, "counts": {**counts, **reasons}})
-    print(f"{SOURCE_ID}: {len(recs)} sewage records; {counts}; {reasons}")
+    meta = {**META, "counts": {**counts, **reasons}, "unread": unread(state)}
+    if state.get("backfill_terms_done") is not None:
+        meta["backfill_terms_not_read"] = [t for t in SEARCH_TERMS if t not in state["backfill_terms_done"]]
+    if failed_keys:
+        errors.append(f"{len(failed_keys)} release detail page(s) not read this run "
+                      f"({', '.join(sorted(failed_keys)[:10])}); listed in meta.unread and asked again next run")
+    if errors:
+        # the readable releases are written and updated; the run says what it could not read (ok=False). No record
+        # is lifted or removed for an unread page: the state keeps every release and every detail read before.
+        path = common.EVENTS_DIR / f"{SOURCE_ID}.json"
+        write_json(path, {"source_id": SOURCE_ID, "fetched_at": now_iso(), "ok": False, "error": "; ".join(errors),
+                          "last_ok_at": (read_json(path, {}) or {}).get("last_ok_at"), "meta": meta,
+                          "count": len(recs), "records": [common.scrub_discharger(r) for r in recs]})
+        print(f"{SOURCE_ID}: {len(recs)} sewage records, NOT OK: {'; '.join(errors)}", file=sys.stderr)
+        return 1
+    write_events(SOURCE_ID, recs, meta=meta)
+    print(f"{SOURCE_ID}: {len(recs)} sewage records; {counts}; {reasons}; unread {len(meta['unread'])}")
     return 0
+
+
+def unread(state: dict) -> dict:
+    """The candidate releases whose detail page has never been read: why, when last tried, how many tries."""
+    out = {}
+    for k in unresolved_details(state):
+        e = state["rows"][k]
+        out[k] = {"release_number": (e.get("list") or {}).get("release_number"),
+                  "last_tried": e.get("detail_failed_at"), "tries": e.get("detail_failures", 0),
+                  "reason": e.get("detail_error") or "the detail page could not be read",
+                  "retry": f"next run, then once every {RETRY_HOURS} h after {MAX_DETAIL_FAILURES} failed reads"}
+    return out
 
 
 def main(argv=None) -> int:

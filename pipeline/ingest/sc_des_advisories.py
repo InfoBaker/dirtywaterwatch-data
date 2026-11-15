@@ -39,6 +39,10 @@ Records (rules only; a snapshot read as a sequence of polls)
     name, no point). The polygon itself is not drawn: its centroid, rounded to three decimals, is the record's point
     (coord_source "des_delineation"), so the marker sits on the cove DES delineated and the whole reservoir is never
     coloured. "HAB Not Present" is no record.
+  - A table row joins a delineation only when the whole water name matches (generic words cut, qualifiers such as
+    "Little" kept; WATER_ALIASES for names DES's pages show are one water). DES's revised date or water for the same
+    GlobalID is taken with the earlier value kept (raw.revisions); a date after the day this site first saw the
+    record is a later advisory: the earlier record ends at that poll and the new one is its own (raw.follows).
   - Keys: beach "<STAT>-<first poll date>"; bloom "<GlobalID>-<date>" (the table-only row: "table-<water>-<date>").
 
 Privacy: the layers' Creator and Editor fields (staff accounts) and the beach layer's GlobalID are never requested;
@@ -58,6 +62,11 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from ingest.de_dnrec_derns import scrub
+
+# the attributes read from each layer: nothing else is kept, and their text is scrubbed (re-review P1-5)
+BEACH_FIELDS = ("OBJECTID", "STAT", "HUC_12", "COUNTY", "ADVISORY")
+HAB_FIELDS = ("OBJECTID", "NAME", "Algal_Bloom", "Date", "Advisory_Tier", "Recreational_Guidance", "GlobalID")
 
 BEACH_ID = "sc-des-beach-monitoring"
 HAB_ID = "sc-des-hab"
@@ -112,20 +121,60 @@ def _text(s: str) -> str:
 
 
 def hab_table(page: str) -> list[dict] | None:
-    """The program page's "HAB Watches & Advisories" rows, or None when the table is not on the page (a page that
-    could not be read: nothing is ended)."""
+    """The program page's "HAB Watches & Advisories" rows, or None when the table is not on the page or is not in the
+    shape DES publishes (a page that could not be read, an error row, changed columns, a cut-off table: nothing is
+    ended). An empty list only from a whole table with no rows, or DES's "no current watches" line (re-review P1-3)."""
     i = page.find("HAB Watches")
     if i < 0:
         return None
     m = re.search(r"<table.*?</table>", page[i:], re.S)
     if not m:
-        return [] if re.search(r"no current watches", page[i:i + 3000], re.I) else None
+        # DES's paragraph "If it is empty, there are no current watches and/or advisories listed" is conditional: it
+        # stands above the table whether or not the table is there, so it is never read as an empty listing; only an
+        # unconditional statement that none are current is (verify P1-4)
+        return [] if empty_declared(_text(page[i:i + 3000])) else None
+    head = [_text(c).lower() for c in re.findall(r"<th[^>]*>(.*?)</th>", m.group(0), re.S)]
+    if head and not re.search(r"level|advisory|watch", head[0]):
+        return None                                    # the columns changed: not read as DES's table
     rows = []
     for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", m.group(0), re.S):
         cells = [_text(c) for c in re.findall(r"<td[^>]*>(.*?)</td>", tr, re.S)]
-        if len(cells) >= 4 and any(cells):
-            rows.append({"level": cells[0], "area": cells[1], "water": cells[2], "issued": cells[3]})
+        if not any(cells):
+            continue                                   # a header row or an empty spacer
+        if len(cells) < 4 or cells[0].strip().lower() not in HAB_TIERS or not _date(cells[3]) or not cells[2]:
+            if len(cells) == 1 and empty_declared(cells[0]):
+                continue
+            return None                                # an error row or a row not in DES's shape
+        rows.append({"level": cells[0], "area": cells[1], "water": cells[2], "issued": cells[3]})
     return rows
+
+
+NONE_CURRENT = re.compile(r"\b(?:there\s+are\s+)?(?:currently\s+)?no\s+(?:current|active)\s+(?:recreational\s+)?"
+                          r"(?:HAB\s+)?(?:watches|advisories)", re.I)
+
+
+def empty_declared(text: str) -> bool:
+    """A sentence that says, unconditionally, that no watch or advisory is current ("There are currently no active
+    watches or advisories"); a sentence that begins with "If" or speaks of the table being empty is not one."""
+    for sent in re.split(r"(?<=[.!?])\s+", text or ""):
+        if NONE_CURRENT.search(sent) and not re.match(r"\s*(?:if|when|should)\b", sent, re.I) \
+                and not re.search(r"\bif\b[^.]*\bempty\b|\bempty\b[^.]*\bif\b|will\s+appear", sent, re.I):
+            return True
+    return False
+
+
+def check_layer(js, required: tuple[str, ...]) -> list[dict]:
+    """A layer query's features, or ValueError for an error, a cut-off (exceededTransferLimit) or changed fields: an
+    incomplete response never ends a record (re-review P1-3)."""
+    if not isinstance(js, dict) or js.get("error") or not isinstance(js.get("features"), list):
+        raise ValueError("the layer returned an error or no feature list")
+    if js.get("exceededTransferLimit"):
+        raise ValueError("the layer response was cut off (exceededTransferLimit)")
+    for f in js["features"]:
+        a = (f or {}).get("attributes")
+        if not isinstance(a, dict) or any(k not in a for k in required):
+            raise ValueError(f"a feature lacks the fields {required}")
+    return js["features"]
 
 
 def _date(s: str | None) -> str | None:
@@ -155,16 +204,28 @@ def _norm(s: str | None) -> str:
 
 # ---------------------------------------------------------------- the beach stations
 
-def safe_features(features: list[dict] | None, geom_key: str) -> list[dict] | None:
-    """Features with their point rounded to three decimals (0.001 degree) before anything is saved."""
+def safe_features(features: list[dict] | None, geom_key: str, fields: tuple[str, ...] | None = None) -> list[dict] | None:
+    """Features cut to the attributes read (fields; by default the layer's own, BEACH_FIELDS or HAB_FIELDS), their text
+    scrubbed (names after "call"/"contact", phones, e-mails, house numbers) and their point rounded to three decimals
+    (0.001 degree), before anything is saved (re-review P1-5)."""
     if features is None:
         return None
+    fields = fields or (BEACH_FIELDS if geom_key == "geometry" else HAB_FIELDS)
     out = []
     for f in features:
         lat, lon = _pt(f.get(geom_key))
         g = {"x": lon, "y": lat} if lat is not None else None
-        out.append({"attributes": dict(f.get("attributes") or {}), geom_key: g})
+        a = f.get("attributes") or {}
+        out.append({"attributes": {k: (scrub(a[k]) if isinstance(a.get(k), str) else a.get(k))
+                                   for k in fields if k in a}, geom_key: g})
     return out
+
+
+def safe_table(rows: list[dict] | None) -> list[dict] | None:
+    """The bloom table's rows with their area and water text scrubbed before anything is saved."""
+    if rows is None:
+        return None
+    return [{**r, "area": scrub(r.get("area")) or "", "water": scrub(r.get("water")) or ""} for r in rows]
 
 
 def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict], dict, dict]:
@@ -185,7 +246,11 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
                    None)
         lat, lon = _pt(geom)
         if cur is None:
-            state[f"{stat}-{re.sub(r'[^0-9T]', '', now)[:13]}"] = {"station": stat, "label": adv, "county": a.get("COUNTY"),
+            key = base = f"{stat}-{re.sub(r'[^0-9T]', '', now)[:13]}"
+            n = 2
+            while key in state:                        # a reopening within the same minute: its own episode
+                key, n = f"{base}-{n}", n + 1
+            state[key] = {"station": stat, "label": adv, "county": a.get("COUNTY"),
                                            "huc12": a.get("HUC_12"), "lat": lat, "lon": lon, "started_at": now,
                                            "last_seen_at": now}
         else:
@@ -236,46 +301,139 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
 # ---------------------------------------------------------------- blooms
 
 def match_hab(state: dict, o: dict, seen: set) -> str | None:
-    """The open record an observation continues: the same water and DES date, and the same area when both give one."""
+    """The open record an observation continues: the same layer feature (GlobalID) first; else the same water and DES
+    date, and the same area when both give one, only when exactly one open record fits (re-review P1-4)."""
+    if o.get("layer_id"):
+        for key, v in state.items():
+            if key not in seen and not v.get("ended_at") and v.get("layer_id") == o["layer_id"]:
+                return key
+    fits = []
     for key, v in state.items():
         if key in seen or v.get("ended_at"):
             continue
-        if _norm(v.get("water")) != _norm(o["water"]) or (v.get("started_at") or "") != (o["started_at"] or ""):
+        if _canon(v.get("water")) != _canon(o["water"]) or (v.get("started_at") or "") != (o["started_at"] or ""):
             continue
         if v.get("area") and o.get("area") and v["area"].lower() != o["area"].lower():
             continue
-        return key
+        if o.get("layer_id") and v.get("layer_id") and v["layer_id"] != o["layer_id"]:
+            continue                                   # another delineation's record
+        fits.append(key)
+    if len(fits) == 1:
+        return fits[0]
+    if o.get("area"):
+        same = [k for k in fits if (state[k].get("area") or "").lower() == o["area"].lower()]
+        if len(same) == 1:
+            return same[0]
     return None
 
 
+# a table name and a layer name for one water, where DES's own pages show both names for it: none needed so far (the
+# table's "J. Strom Thurmond" and the layer's "J. Strom Thurmond Reservoir" are one name once the generic word is cut)
+WATER_ALIASES: dict[str, str] = {}
+
+
+def _canon(s: str | None) -> str:
+    n = _norm(s)
+    return WATER_ALIASES.get(n, n)
+
+
+def _row_fits(t: dict, water: str | None, start: str | None) -> bool:
+    """A table row is a layer delineation's only when the whole water name is the same (generic words cut, every
+    qualifier kept: "Little Example Lake" is never "Example Lake") and DES's date is the same (verify P1-5)."""
+    return bool(_canon(t["water"])) and _canon(t["water"]) == _canon(water) and _date(t["issued"]) == (start or "")[:10]
+
+
+def revise_hab(state: dict, key: str, o: dict, now: str, seen: set) -> tuple[str, dict]:
+    """DES's own fields for one delineation (GlobalID) changed between reads (verify P2-2). A changed water is a
+    correction, kept with its earlier value (raw.revisions). A changed date is a correction when it is on or before
+    the day this site first saw the record (an advisory seen that day began by then): started_at takes DES's new date,
+    the earlier one kept. A date after that day cannot be the same advisory's start: the earlier record ends at this
+    poll (a poll bound, DES re-dated the delineation) and the new date opens a new record, never backdated."""
+    v = state[key]
+    if o.get("water") and _canon(o["water"]) != _canon(v.get("water")):
+        v.setdefault("revisions", []).append({"seen_at": now, "field": "water", "was": v.get("water"),
+                                              "now": o["water"]})
+        v["water"] = o["water"]
+    new, old = o.get("started_at"), v.get("started_at")
+    if not new or new == old:
+        return key, v
+    first_day = datetime.fromisoformat((v.get("first_seen_at") or now).replace("Z", "+00:00")).astimezone(TZ).date()
+    if new[:10] <= first_day.isoformat():
+        v.setdefault("revisions", []).append({"seen_at": now, "field": "started_at", "was": old, "now": new})
+        v["started_at"], v["precision"] = new, o.get("precision")
+        return key, v
+    v["ended_at"] = now
+    v["end_basis_redated"] = new
+    seen.add(key)
+    base = (f"hab-{_norm(o['water']) or 'water'}-{new}-"
+            f"{re.sub(r'[^a-z0-9]+', '-', (o.get('area') or v.get('area') or 'area').lower()).strip('-')}")
+    nk, n = base, 2
+    while nk in state:
+        nk, n = f"{base}-{n}", n + 1
+    state[nk] = {**o, "area": o.get("area") or v.get("area"), "first_seen_at": now, "follows": key}
+    return nk, state[nk]
+
+
 def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now: str) -> tuple[list[dict], dict, dict]:
+    """Layer delineations and table rows, reconciled. A delineation is tied to a table row (and so to its named area)
+    only by evidence: its GlobalID was tied to that area before, or it is the only delineation and the row the only
+    row for that water and DES date. Where two or more share a water and date with nothing to tell them apart, no
+    point is assigned: the rows stand as table records without a point and the delineations are counted
+    (meta.counts.ambiguous_delineations), never swapped between coves (re-review P1-4)."""
     state = {k: dict(v) for k, v in (prev.get("hab") or {}).items()}
-    counts = {"delineations_listed": len(features), "table_rows": None if table is None else len(table)}
+    counts = {"delineations_listed": len(features), "table_rows": None if table is None else len(table),
+              "ambiguous_delineations": 0}
     obs, used_rows = [], set()
+    feats = []
     for f in features:
         a = f.get("attributes") or {}
         tier = HAB_TIERS.get((a.get("Advisory_Tier") or "").strip().lower())
         if not tier:
             continue
         start, prec = _epoch_date(a.get("Date"))
-        row = None
-        for i, t in enumerate(table or []):
-            if i not in used_rows and _norm(t["water"]) and _norm(t["water"]) in _norm(a.get("NAME")) \
-                    and _date(t["issued"]) == (start or "")[:10]:
-                row = t
-                used_rows.add(i)
-                break
         lat, lon = _pt(f.get("centroid"))
-        obs.append({"tier": tier, "water": a.get("NAME"), "organism": a.get("Algal_Bloom"),
-                    "guidance": a.get("Recreational_Guidance"), "started_at": start, "precision": prec,
-                    "area": (row or {}).get("area"), "lat": lat, "lon": lon, "from": "layer"})
-    for i, t in enumerate(table or []):
+        lid = a.get("GlobalID") or (f"oid-{a['OBJECTID']}" if a.get("OBJECTID") is not None else None)
+        feats.append({"tier": tier, "water": a.get("NAME"), "organism": a.get("Algal_Bloom"),
+                      "guidance": a.get("Recreational_Guidance"), "started_at": start, "precision": prec,
+                      "area": None, "lat": lat, "lon": lon, "from": "layer", "layer_id": lid})
+    rows = list(enumerate(table or []))
+    # 1. a delineation already tied to an area keeps it: its row is the one naming that area
+    known = {v["layer_id"]: v.get("area") for v in state.values() if v.get("layer_id") and not v.get("ended_at")}
+    for o in feats:
+        area = known.get(o["layer_id"])
+        if area:
+            o["area"] = area
+            hit = next((i for i, t in rows if i not in used_rows and _row_fits(t, o["water"], o["started_at"])
+                        and (t["area"] or "").lower() == area.lower()), None)
+            if hit is not None:
+                used_rows.add(hit)
+            o["_tied"] = True
+    # 2. the rest pair only one to one within a water and date
+    for o in feats:
+        if o.get("_tied"):
+            continue
+        cand = [i for i, t in rows if i not in used_rows and _row_fits(t, o["water"], o["started_at"])]
+        others = [x for x in feats if x is not o and not x.get("_tied")
+                  and any(_row_fits(rows[i][1], x["water"], x["started_at"]) for i in cand)]
+        if len(cand) == 1 and not others:
+            used_rows.add(cand[0])
+            o["area"] = rows[cand[0]][1]["area"] or None
+            o["_tied"] = True
+        elif cand:
+            o["_ambiguous"] = True
+    for o in feats:
+        if o.pop("_ambiguous", False):
+            counts["ambiguous_delineations"] += 1
+            continue                                   # its rows stand as table records; its point is not assigned
+        o.pop("_tied", None)
+        obs.append(o)
+    for i, t in rows:
         if i in used_rows:
             continue
         start = _date(t["issued"])
         obs.append({"tier": HAB_TIERS.get(t["level"].strip().lower(), t["level"].strip()), "water": t["water"],
                     "organism": None, "guidance": None, "started_at": start, "precision": "day" if start else None,
-                    "area": t["area"] or None, "lat": None, "lon": None, "from": "table"})
+                    "area": t["area"] or None, "lat": None, "lon": None, "from": "table", "layer_id": None})
     seen = set()
     for o in obs:
         key = match_hab(state, o, seen)
@@ -287,7 +445,9 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
                 key, n = f"{base}-{n}", n + 1
             state[key] = {**o, "first_seen_at": now}
         v = state[key]
-        for k in ("tier", "area", "guidance", "organism", "lat", "lon"):
+        if o["from"] == "layer" and o.get("layer_id") and v.get("layer_id") == o["layer_id"]:
+            key, v = revise_hab(state, key, o, now, seen)
+        for k in ("tier", "area", "guidance", "organism", "lat", "lon", "layer_id"):
             if o.get(k) is not None:
                 v[k] = o[k]                            # a table read keeps the layer's point and organism
         v["from"] = "layer" if (o["from"] == "layer" or v.get("from") == "layer") else "table"
@@ -304,6 +464,10 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
         raw = {"state": "SC", "time_zone": "America/New_York", "advisory_level": v["tier"],
                "advisory_area": v.get("area"), "organism": v.get("organism"), "read_from": v.get("from"),
                "_last_seen_in_source": v.get("last_seen_at"), "first_seen_at": v.get("first_seen_at"),
+               "_point_extent_only": True,
+               "extent_basis": ("DES delineates a cove or arm of the water, not the whole water: the advisory is shown "
+                                "at the centre of DES's delineation where one is tied to it, and listed on the water's "
+                                "page; the water is not coloured whole"),
                "start_basis": ("DES's date for the watch or advisory (a date, no time of day)" if v.get("started_at")
                                else "the first poll that listed it; DES gave no date")}
         if v.get("lat") is not None:
@@ -312,6 +476,13 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
             raw.update(ended_at_precision="poll",
                        end_basis=("the first poll at which DES's table and map no longer listed it (the table lists "
                                   "only active watches and advisories); DES's lift time is not published"))
+            if v.get("end_basis_redated"):
+                raw["end_basis"] = (f"the first poll at which DES dated this delineation {v['end_basis_redated']}, "
+                                    "after this site first saw the earlier advisory: a later advisory, its own record")
+        if v.get("revisions"):
+            raw["revisions"] = v["revisions"]
+        if v.get("follows"):
+            raw["follows"] = v["follows"]
         organism = v.get("organism") or "organism not given"
         recs.append(event(
             source_id=HAB_ID, source_record_id=key, event_type="hab_advisory",
@@ -350,8 +521,7 @@ def run(args) -> int:
         try:
             r = requests.get(BEACH_LAYER, headers=HEADERS, timeout=TIMEOUT)
             r.raise_for_status()
-            js = r.json()
-            beach = js["features"]
+            beach = check_layer(r.json(), ("STAT", "ADVISORY"))
             if not beach:
                 raise RuntimeError("no stations")
         except (requests.RequestException, ValueError, KeyError, RuntimeError) as e:
@@ -360,10 +530,10 @@ def run(args) -> int:
         try:
             r = requests.get(HAB_LAYER, headers=HEADERS, timeout=TIMEOUT)
             r.raise_for_status()
-            hab = r.json()["features"]
+            hab = check_layer(r.json(), ("NAME", "Date", "Advisory_Tier"))
             p = requests.get(HAB_PAGE, headers=HEADERS, timeout=TIMEOUT)
             p.raise_for_status()
-            table = hab_table(p.text)
+            table = safe_table(hab_table(p.text))
             if table is None:
                 raise ValueError("the program page's watches and advisories table was not found")
         except (requests.RequestException, ValueError, KeyError) as e:
