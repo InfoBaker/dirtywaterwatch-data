@@ -197,14 +197,11 @@ STOP_TEXT = {
     "attributes unavailable": "The model stops here: the stream network's attributes (tidal, lake) are not available "
                               "for the next stretch, so we cannot say how the water moves beyond this point.",
 }
-# a trace that goes on along a tidal river (data/rules.json reach.tidal_river; a record traced under it carries
-# tidal_river: true): "tidal" then means tidal water that is not a river channel, and its stop says so
-STOP_TEXT_TIDAL_RIVER = {
-    **STOP_TEXT,
-    "tidal": "Below this point the tidal water is no longer a river channel. Water moves back and forth with the tide "
-             "and wind, so we do not model where the discharge goes. See the official notice and local beach or "
-             "shellfish advisories.",
-}
+# a trace that goes on along a tidal river (data/rules.json reach.tidal_river) stops where the tidal water is no
+# longer a river channel (cut_reason "tidal_water"; only such a trace has it)
+STOP_TEXT["tidal_water"] = ("Below this point the tidal water is no longer a river channel. Water moves back and forth "
+                            "with the tide and wind, so we do not model where the discharge goes. See the official "
+                            "notice and local beach or shellfish advisories.")
 # the label of a segment in tidal water (no travel time: the tide moves the water both ways)
 TIDAL_RIVER_TEXT = ("Tidal water: the tide moves water back and forth here, and the river carries it downstream "
                     "overall. No travel time is given.")
@@ -213,7 +210,7 @@ LINE_TEXT = "Modeled downstream path (estimate, not verified by sampling)."
 
 def stop_text(r: dict, cap: float) -> str:
     """The stop wording of a river trace, by its own cut reason and the rule it was traced under."""
-    return (STOP_TEXT_TIDAL_RIVER if r.get("tidal_river") else STOP_TEXT).get(r.get("cut_reason"), "").format(cap=cap)
+    return STOP_TEXT.get(r.get("cut_reason"), "").format(cap=cap)
 
 
 def tidal_path_props(r: dict) -> dict:
@@ -391,11 +388,17 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
         flow_txt = (f"at the river flow measured at {a.get('gauge_name') or a.get('gauge')} ({a['flow_cfs']:g} cfs) "
                     f"at {a.get('flow_time')}" if a.get("gauge") else
                     "at the river's average flow (NHDPlus mean annual; no current gauge reading)")
+        below_tide = False
         for sg, band in zip(r["segments"], a["segments"]):
             where_from = f"outfall {r['outfall']}" if r.get("outfall") else "the reported location"
             if sg.get("tidal_river") or band.get("tidal_river"):
+                below_tide = True
                 label = (f"Modeled downstream of {where_from}. {TIDAL_RIVER_TEXT} The river is not necessarily "
                          f"unsafe here, and it is not necessarily safe outside the line.")
+            elif below_tide and band["hours_typical"] is None:
+                label = (f"Modeled downstream of {where_from}. No travel time is given here: the water passes through "
+                         f"tidal water above this point, where the tide moves it back and forth. The river is not "
+                         f"necessarily unsafe here, and it is not necessarily safe outside the line.")
             elif band["hours_typical"] is None:
                 label = (f"Modeled downstream of {where_from}. No travel time is given here: the stream network "
                          f"attributes it needs (drainage area, mean flow) are missing for this stretch. The river is "

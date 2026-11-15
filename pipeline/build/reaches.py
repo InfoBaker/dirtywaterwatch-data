@@ -326,9 +326,13 @@ def ordered(flowlines: list[dict], attrs: dict) -> list[dict]:
     return sorted(flowlines, key=order) if all(attrs.get(f["comid"]) for f in flowlines) else list(flowlines)
 
 
-def river_area(a: dict) -> bool:
-    """The flowline runs in a river's own area (NHD StreamRiver, 460) or in no area at all."""
-    return not (a.get("wbareacomid") or 0) > 0 or a.get("wbarea_ftype") is None or a.get("wbarea_ftype") in RIVER_AREA_FTYPES
+def river_area(a: dict) -> bool | None:
+    """The flowline runs in a river's own area (NHD StreamRiver, 460) or in no area at all: True; in another area:
+    False; in an area whose type NHDPlus does not give: None (not known to be a river)."""
+    if not (a.get("wbareacomid") or 0) > 0:
+        return True
+    ft = a.get("wbarea_ftype")
+    return None if ft is None else ft in RIVER_AREA_FTYPES
 
 
 def build_segments(flowlines: list[dict], attrs: dict, cap: float,
@@ -337,7 +341,8 @@ def build_segments(flowlines: list[dict], attrs: dict, cap: float,
     Returns (segments upstream first with km_start/km_end, cut_reason).
     tidal_river (rules.json reach.tidal_river.enabled): a tidal flowline of a river below the start no longer ends
     the trace; its segment is marked tidal_river. A lake or reservoir, an estuary, the coastline, tidal water that is
-    not a river ("tidal") and the cap still cut it, and a trace that starts in tidal water is unchanged."""
+    not a river channel ("tidal_water"), tidal water in an area of unknown type ("tidal", as without the rule) and the
+    cap still cut it, and a trace that starts in tidal water is unchanged."""
     lines = ordered(flowlines, attrs)
     segs, km = [], 0.0
     for i, f in enumerate(lines):
@@ -353,8 +358,9 @@ def build_segments(flowlines: list[dict], attrs: dict, cap: float,
             return segs, "lake_at_outfall" if i == 0 else "lake_or_reservoir"
         if ((a.get("wbareacomid") or 0) > 0 and ft in ESTUARY_FTYPES) or a.get("fcode") == COASTLINE_FCODE:
             return segs, "tidal_at_outfall" if i == 0 else "estuary"
-        if tidal and not river_area(a):
-            return segs, "tidal"            # tidal water that is not a river channel (a marsh, the open sea)
+        if tidal and river_area(a) is not True:
+            # tidal water that is not a river channel (a marsh, the open sea), or of an unknown kind (as without the rule)
+            return segs, "tidal" if river_area(a) is None else "tidal_water"
         coords = f["coords"]
         length = seg_km(coords)
         if length <= 0:
@@ -377,14 +383,20 @@ def segment(comid, a, coords, k0, k1, tidal_river: bool = False) -> dict:
 
 
 def without_tidal_river(d: dict) -> dict:
-    """A cached record as the rule-off trace would be (reach.tidal_river off): its segments before the first
-    tidal_river one, cut at "tidal". A record with no tidal_river segment is returned as it is."""
-    segs = d.get("segments") or []
-    i = next((k for k, sg in enumerate(segs) if sg.get("tidal_river")), None)
-    if i is None:
+    """A cached record as the rule-off trace would be (reach.tidal_river off). A record traced under the rule
+    carries what the rule-off trace would have been (tidal_off: its segment count, a prefix of these segments, and
+    its cut); one without that, its segments before the first tidal_river one, cut at "tidal". A record not traced
+    under the rule is returned as it is."""
+    if not d.get("tidal_river"):
         return d
-    out = {k: v for k, v in d.items() if k != "tidal_river"}
-    out.update(segments=segs[:i], cut_reason="tidal", length_km=round(segs[i - 1]["km_end"], 3) if i else 0.0)
+    segs = d.get("segments") or []
+    off = d.get("tidal_off") or {}
+    i, why = off.get("segments"), off.get("cut_reason")
+    if not isinstance(i, int) or isinstance(i, bool) or not why or i > len(segs):
+        i = next((k for k, sg in enumerate(segs) if sg.get("tidal_river")), len(segs))
+        why = "tidal" if i < len(segs) else d.get("cut_reason")
+    out = {k: v for k, v in d.items() if k not in ("tidal_river", "tidal_off")}
+    out.update(segments=segs[:i], cut_reason=why, length_km=round(segs[i - 1]["km_end"], 3) if i else 0.0)
     return out
 
 
@@ -516,8 +528,10 @@ def travel(segments: list[dict], q_ratio: float) -> list[dict]:
     trace's mean slope; a flowline without usable attributes, or in tidal water (a tidal_river segment, marked so
     here too), gets no time, and no segment below it does."""
     out, t_p, t_f = [], 0.0, 0.0
-    # tidal water (reach.tidal_river): no travel time there, and its floored slope never slows the river above it
-    slope = path_slope([s for s in segments if not s.get("tidal_river")])
+    # tidal water (reach.tidal_river): no travel time there or below; the mean slope is that of the river above the
+    # head of tide, so the times above it are those of the trace without the rule
+    head = next((k for k, s in enumerate(segments) if s.get("tidal_river")), len(segments))
+    slope = path_slope(segments[:head])
     if not usable(q_ratio):
         q_ratio = None
     for s in segments:
@@ -1021,7 +1035,11 @@ def trace(o: dict, cap: float, prev: dict | None = None) -> dict:
             on = tidal_river_on()
             segs, why = build_segments(lines, attrs, cap, tidal_river=on)
             if on:
-                rec["tidal_river"] = True       # traced under reach.tidal_river (plan(): such a trace is not due again)
+                # traced under reach.tidal_river (plan(): not due again), with the rule-off trace it extends (a prefix
+                # of these segments), so load_reaches can read it as that trace when the switch is off
+                off_segs, off_why = build_segments(lines, attrs, cap)
+                rec["tidal_river"] = True
+                rec["tidal_off"] = {"segments": len(off_segs), "cut_reason": off_why}
         rec["segments"], rec["cut_reason"] = segs, why
         rec["length_km"] = round(segs[-1]["km_end"], 3) if segs else 0.0
         rec["river"] = (segs[0].get("gnis_name") if segs else (attrs.get(lines[0]["comid"]) or {}).get("gnis_name"))

@@ -535,7 +535,7 @@
    "cap_rationale": "We estimate downstream stretches along the river, through its tidal part, to an estuary or the sea, the first lake or a maximum of 40 kilometres. Tidal water carries no travel time. A ring marks where the estimate stops. Contamination can travel beyond that point.",
    "stop_at": [
     "estuary",
-    "tidal",
+    "tidal_water",
     "lake_or_reservoir",
     "cap_km"
    ]
