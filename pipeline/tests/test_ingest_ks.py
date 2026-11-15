@@ -484,3 +484,64 @@ def test_a_county_less_rescission_lifts_only_when_one_county_holds_the_water():
                 ("Stream Advisory Rescinded for Alpha Creek", "3", "Wed, 04 Nov 2026 09:00:00 -0600", "Rescinded."))
     recs, stats = A.run(one, [], AT)
     assert [r["status"] for r in recs] == ["advisory_lifted"] and stats["rescissions_ambiguous"] == 0
+
+
+def test_leavenworth_old_ids_and_addresses_migrate_to_one_record_per_page_through_main(tmp_path, monkeypatch):
+    """Re-review P1-8 and P1-9: a save with the earlier, house-numbered identifier and page address, plus the page read
+    again: one record, no house number anywhere, the year page as the citation; twice over, nothing changes."""
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    path = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2020-1234-example-court"
+    h = _page("Sanitary Sewer Overflow Reported on May 27, 2020 at 1234 Example Court",
+              "At 3:50 p.m. May 27, 2020, staff were notified of sewage in Five-Mile Creek.")
+    old = L.record(path, h, "2026-11-01T00:00:00Z", None)
+    old["source_record_id"] = "sanitary-sewer-overflow-reported-may-27-2020-1234-example-court"
+    old["event_id"] = f"{L.SOURCE_ID}:{old['source_record_id']}"
+    old["source_url"] = L.BASE + path
+    old["raw"]["page_text"] = "At 1234 Example Court, call 913-555-0199."
+    old["raw"].pop("cited_page")
+    old["raw"]["first_seen_at"] = "2026-11-01T00:00:00Z"
+    (tmp_path / f"{L.SOURCE_ID}.json").write_text(json.dumps({"source_id": L.SOURCE_ID, "ok": True, "meta": {},
+                                                               "records": [old]}))
+    d = tmp_path / "pages"
+    d.mkdir()
+    (d / f"{path.rsplit('/', 1)[-1]}.html").write_text(h)
+    for _ in range(2):
+        assert L.main(["--dir", str(d)]) == 0
+        doc = json.loads((tmp_path / f"{L.SOURCE_ID}.json").read_text())
+        assert doc["count"] == 1
+        r = doc["records"][0]
+        assert r["source_record_id"] == "sanitary-sewer-overflow-reported-may-27-2020-example-court"
+        assert r["raw"]["first_seen_at"] == "2026-11-01T00:00:00Z" and "page_text" not in r["raw"]
+        blob = json.dumps(doc) + "".join(p.read_text() for p in (tmp_path / "raw").rglob("*.json"))
+        for p in PERSONAL + ["1234"]:
+            assert p not in blob
+    assert L.record_id(L.record_id(path)) == L.record_id(path)
+    assert L.record_id("/x/sanitary-sewer-overflow-1200-block-example-reported-thursday-oct-23-2025") == \
+        "sanitary-sewer-overflow-block-example-reported-thursday-oct-23-2025"
+
+
+def test_leavenworth_cites_the_year_page_not_the_address_page():
+    h = _page("Sanitary Sewer Overflow Reported on May 27, 2020 at 1234 Example Court", "At 3:50 p.m. May 27, 2020.")
+    year = L.BASE + "/publicworks/page/2020-sanitary-sewer-overflow-transparency-report"
+    r = L.record("/publicworks/page/sanitary-sewer-overflow-reported-may-27-2020-1234-example-court", h, AT, year)
+    assert r["source_url"] == year and r["raw"]["cited_page"] == year and "1234" not in json.dumps(r)
+
+
+def _end(body, title="Sanitary Sewer Overflow Reported on May 27, 2020 at Example Court"):
+    return L.record("/publicworks/page/x", _page(title, body), AT)["ended_at"]
+
+
+def test_leavenworth_end_date_before_or_after_the_stop_verb():
+    """Re-review P2-3."""
+    start = "At 3:50 p.m. May 27, 2020, staff were notified of sewage in Five-Mile Creek. "
+    assert _end(start + "On May 29, 2020, the overflow stopped at 4:00 p.m.") == "2020-05-29T16:00:00-05:00"
+    assert _end(start + "The overflow stopped May 29 at 4:00 p.m.") == "2020-05-29T16:00:00-05:00"
+    assert _end(start + "The overflow stopped at 4:00 p.m.") == "2020-05-27T16:00:00-05:00"
+    # several dates before the verb and none after: not resolved, no end
+    assert _end(start + "Between May 28 and May 30 crews worked, and the overflow stopped at 4:00 p.m.") is None
+    # a year boundary: reported December 31, stopped January 1 (no year given)
+    t = "Sanitary Sewer Overflow Reported on December 31, 2025 at Example Court"
+    assert _end("At 11:00 p.m. December 31, 2025, staff were notified. On January 1 the overflow stopped at 2:00 a.m.",
+                t) == "2026-01-01T02:00:00-06:00"
