@@ -41,8 +41,12 @@ Records
 Revisions and history (Astra review 2026-11-14)
   Two rows for one outfall, parameter and month: the higher VersionNmbr, then the later receipt, wins (revision_key),
   never the larger value. Each run is reconciled with the previous file: a month the source no longer lists at all is
-  kept with raw._missing_from_source_since; a month the source now files as no discharge is withdrawn (counted in
-  meta.months_withdrawn_by_the_source); latest_month_by_outfall is recomputed from the evidence of every run
+  kept with raw._missing_from_source_since; a month the source now files as no discharge on complete, conflict-free
+  evidence (every parameter the outfall carries a zero or NODI C: no_discharge_confirmed) is withdrawn (counted in
+  meta.months_withdrawn_by_the_source), and one that reads no discharge only in part or in conflict is kept with
+  raw.no_discharge_unconfirmed (verification 3, 2026-11-15, P2-1). Equally ranked rows that disagree, one of them
+  filing a discharge, make a discharge month in dispute whatever order they arrive in (raw.conflicts, the figures
+  in conflict unknown, no volume counted); latest_month_by_outfall is recomputed from the evidence of every run
   (reconcile_latest), so an outfall this run did not read keeps its observation. An outfall whose registry point is
   the treatment plant's (coords_from facility) gets no point (raw.point_note); points are rounded to three decimals.
   raw.parameters gives the chart builder events and hours.
@@ -404,10 +408,64 @@ def figures(cell: dict) -> dict:
     out["volume_raw"] = None if vol is None else f"{vol:g} {unit}"
     out["any"] = any((x or 0) > 0 for x in (out["events"], out["hours"], vol))
     out["said"] = bool(vals)
+    # equally ranked rows that disagree (verification 3, 2026-11-15, P2-1): what each filed, and whether any of them
+    # files a discharge; a disputed discharge is a discharge month with that figure unknown, whatever order the rows
+    # arrived in, never a no-discharge finding
+    out["conflicts"] = {name: sorted({_filed(x) for x in row["_conflict"]}, key=_filed_order)
+                        for name, row in sorted(cell.items()) if "_conflict" in row}
+    out["disputed"] = any((num(x.get("DMRValueNmbr")) or 0) > 0
+                          for row in cell.values() if "_conflict" in row for x in row["_conflict"])
     return out
 
 
+def _filed(row: dict) -> str:
+    """What one DMR row filed, as text: its value, 'NODI C' or another NODI code, or 'nothing'."""
+    v = num(row.get("DMRValueNmbr"))
+    if v is not None:
+        return f"{v:g}"
+    code = str(row.get("NODICode") or "").upper()
+    return f"NODI {code}" if code else "nothing"
+
+
+def _filed_order(text: str) -> tuple:
+    v = num(text) if text[:1].isdigit() or text[:1] == "-" else None
+    return (0, v, "") if v is not None else (1, 0.0, text)
+
+
+def _zero(row: dict) -> bool:
+    """A row that files no discharge: a zero or NODI C."""
+    return str(row.get("NODICode") or "").upper() == "C" or num(row.get("DMRValueNmbr")) == 0
+
+
+def carried_params(cells: dict) -> dict[tuple, set]:
+    """(permit, feature) -> the parameters the outfall's DMRs carry in any month read."""
+    carried: dict[tuple, set] = defaultdict(set)
+    for (permit, feat, _), cell in cells.items():
+        carried[(permit, feat)] |= set(cell)
+    return carried
+
+
+def no_discharge_confirmed(cell: dict, names: set) -> bool:
+    """A month of no discharge on complete evidence: no figure above zero, none disputed, and every parameter the
+    outfall carries (names) present and filed as a zero or NODI C, an equally ranked pair that differs only in form
+    (0 and NODI C) included; a parameter missing, filed with another NODI code or disputed is not a finding."""
+    fg = figures(cell)
+    if fg["any"] or fg["disputed"] or not names:
+        return False
+    return all(name in cell and all(_zero(x) for x in cell[name].get("_conflict") or [cell[name]]) for name in names)
+
+
 def volume_text(fg: dict, ym: str) -> str:
+    if fg.get("disputed"):
+        # a disputed discharge month: no figure is written as "N discharge events", so the status build never reads
+        # a zero from it (build/status.py monthly_mark: a month it cannot read counts as a discharge)
+        label = {"events": "discharge event count", "hours": "hours", "volume": "volume"}
+        parts = [f"{label[n]} filed as " + " and ".join(fg["conflicts"][n]) + " in equally ranked reports"
+                 if n in fg["conflicts"] else f"{label[n]} {fg[k]:g}" + (" million gallons" if n == "volume" else "")
+                 for n, k in (("events", "events"), ("hours", "hours"), ("volume", "volume_mgal"))
+                 if n in fg["conflicts"] or fg[k] is not None]
+        return (f"monthly DMR totals for {ym} in conflict, one report filing a discharge: " + "; ".join(parts)
+                + " (the figures in conflict are unknown until a higher revision settles them)")
     parts = []
     if fg["events"] is not None:
         n = fg["events"]
@@ -418,7 +476,12 @@ def volume_text(fg: dict, ym: str) -> str:
         parts.append(f"{fg['volume_mgal']:g} million gallons")
     elif fg["volume_raw"]:
         parts.append(fg["volume_raw"])
-    return ", ".join(parts) + f" in {ym} (monthly DMR totals)"
+    text = ", ".join(parts) + f" in {ym} (monthly DMR totals)"
+    if fg.get("conflicts"):
+        label = {"events": "discharge event count", "hours": "hours", "volume": "volume"}
+        text += "; " + "; ".join(f"the {label.get(n, n)} is in conflict: equally ranked reports filed "
+                                 + " and ".join(v) for n, v in fg["conflicts"].items())
+    return text
 
 
 def latest_months(cells: dict) -> dict[str, dict]:
@@ -427,21 +490,19 @@ def latest_months(cells: dict) -> dict[str, dict]:
     out: dict[str, dict] = {}
     # the parameters each outfall's DMRs carry (any month read): a month with no discharge clears an earlier
     # monthly mark only when every one of them is a zero or NODI C, none missing, in conflict or another NODI code
-    # (verification 2026-11-15 P2-3: zero hours with events and volume missing is not a confirmed no-discharge month)
-    carried: dict[tuple, set] = defaultdict(set)
-    for (permit, feat, _), cell in cells.items():
-        carried[(permit, feat)] |= set(cell)
+    # (verification 2026-11-15 P2-3: zero hours with events and volume missing is not a confirmed no-discharge month);
+    # a month where an equally ranked row files a discharge is a discharge month (verification 3 P2-1)
+    carried = carried_params(cells)
     for (permit, feat, ym), cell in cells.items():
         fg = figures(cell)
-        if not fg["said"]:
-            continue
-        if not fg["any"] and not all(name in cell and "_conflict" not in cell[name] and _says(cell[name])
-                                     for name in carried[(permit, feat)]):
+        discharged = fg["any"] or fg["disputed"]
+        if not discharged and not no_discharge_confirmed(cell, carried[(permit, feat)]):
             continue
         k = f"{permit}|{feat}"
         cur = out.get(k)
         if cur is None or ym > cur["month"]:
-            out[k] = {"month": ym, "discharged": fg["any"], "events": fg["events"], "received_at": fg["received"]}
+            out[k] = {"month": ym, "discharged": discharged, "events": fg["events"], "received_at": fg["received"],
+                      **({"conflicting": sorted(fg["conflicts"])} if fg["conflicts"] else {})}
     return dict(sorted(out.items()))
 
 
@@ -476,7 +537,13 @@ def reconcile_latest(prev: dict, store: dict, stats: dict) -> dict:
         if pm and pm not in known[k] and (v is None or pm > v["month"]):
             out[k] = p
             continue
-        if pm and p.get("discharged") is False and (v is None or v["month"] < pm):
+        if pm and p.get("discharged") is True and (v is None or v["month"] < pm):
+            # a discharge month whose newer filing reads zero only in part: its record is kept (main()), and so is
+            # its observation, until a complete no-discharge filing or a higher revision (verification 3 P2-1)
+            out[k] = dict(p, no_discharge_unconfirmed=True)
+            continue
+        if pm and p.get("discharged") is False and (v is None or v["month"] < pm or
+                                                     (v["month"] == pm and v["discharged"])):
             stats["no_discharge_findings_withdrawn"][f"{k}:{pm}"] += 1
         if v is not None:
             out[k] = v
@@ -487,12 +554,12 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) 
     records = []
     for (permit, feat, ym), cell in sorted(cells.items()):
         fg = figures(cell)
-        if not fg["said"]:
-            stats["no_value_months"][permit] += 1
+        if not fg["any"] and not fg["disputed"]:
+            stats["no_discharge_months" if fg["said"] else "no_value_months"][permit] += 1
             continue
-        if not fg["any"]:
-            stats["no_discharge_months"][permit] += 1
-            continue
+        if fg["disputed"]:
+            stats["disputed_discharge_months"][f"{permit}:{feat}:{ym}"] += 1
+            fg = dict(fg, volume_gal=None)        # a volume of a month in dispute is not counted
         pend = next(iter(cell.values()))["_pend"]
         start, end, _ = month_bounds(pend)
         o = reg.get(common.outfall_key(permit, feat)) or {}
@@ -517,8 +584,11 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) 
                "dmr": {name: {k: row.get(k) for k in RAW_FIELDS} | {"parameter": row.get("_param")}
                        | ({"from_previous_run": True} if row.get("_from_previous_run") else {})
                        for name, row in sorted(cell.items()) if "_conflict" not in row},
-               **({"conflicting_rows": sorted(n for n, row in cell.items() if "_conflict" in row)}
-                  if any("_conflict" in row for row in cell.values()) else {}),
+               **({"conflicting_rows": sorted(fg["conflicts"]), "conflicts": fg["conflicts"],
+                   "conflict_note": ("equally ranked DMR rows for this month disagree; the figure is unknown until "
+                                     "a higher revision settles it" + ("; one of them files a discharge, so the month "
+                                     "is kept as a discharge month" if fg["disputed"] else ""))}
+                  if fg["conflicts"] else {}),
                "receiving_water_registry": o.get("receiving_water_echo"),
                "outfall_registry_file": o.get("_file"), "outfall_status": o.get("outfall_status"),
                "county": o.get("county"), "time_zone": tz, **({"volume_note": vol_note} if vol_note else {}),
@@ -625,6 +695,7 @@ def main(argv=None) -> int:
     store = merge_previous(cells, prev_doc.get("records") or [], stats, evidence_store)
     save_cache(store)
     records = build_records(cells, names, reg, dischargers(), stats)
+    carried = carried_params(store_cells(store))
     # reconcile with the previous run (review 2026-11-14 P1-2): a month the source no longer lists at all is kept,
     # marked missing from the source; a month the source now reports as no discharge is withdrawn; a month whose
     # cells now say nothing (no value, another NODI code) is kept as it was; merge_previous has already put back
@@ -636,10 +707,23 @@ def main(argv=None) -> int:
         rk = (r.get("npdes_permit"), (r.get("raw") or {}).get("permit_feature") or r.get("outfall_id"),
               (r.get("raw") or {}).get("month"))
         cell = cells.get(rk)
-        if cell is not None and figures(cell)["said"]:
+        # withdrawn only on complete, conflict-free no-discharge evidence (verification 3, 2026-11-15, P2-1): every
+        # parameter the outfall carries filed as zero or NODI C; a month that now reads in part, in conflict or with
+        # another NODI code keeps its earlier totals, marked, until a complete or higher revision settles it
+        if cell is not None and no_discharge_confirmed(cell, carried[(rk[0], rk[1])]):
             stats["months_withdrawn_by_the_source"][f"{rk[0]}:{rk[1]}:{rk[2]}"] += 1
             continue
         r = json.loads(json.dumps(r))
+        if cell is not None and (figures(cell)["said"] or figures(cell)["conflicts"]):
+            fg = figures(cell)
+            r["raw"]["no_discharge_unconfirmed"] = {
+                "since": r["raw"].get("no_discharge_unconfirmed", {}).get("since") or now_iso(),
+                "conflicting_rows": sorted(fg["conflicts"]), "conflicts": fg["conflicts"],
+                "note": ("a newer filing for this month reads no discharge only in part or in conflict: the earlier "
+                         "totals are kept until a complete, conflict-free no-discharge report or a higher revision")}
+            records.append(r)
+            stats["records_kept_on_unconfirmed_no_discharge"][f"{rk[0]}:{rk[1]}:{rk[2]}"] += 1
+            continue
         r["raw"].setdefault("_missing_from_source_since", now_iso())
         records.append(r)
         stats["records_carried_from_previous_run"]["records"] += 1

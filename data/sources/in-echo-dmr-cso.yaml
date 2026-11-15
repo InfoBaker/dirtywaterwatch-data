@@ -15,8 +15,9 @@ level: "federal"
 #   were not in ECHO on 2026-11-14.
 # Records: month precision (the monthly mark, never red or yellow; build/status.py EPA_MONTHLY_SOURCES); placed at the
 #   registry outfall (point rounded to three decimals, and water; never a plant's point). Each run is reconciled with
-#   the previous file (a dropped month kept and marked, a month refiled as no discharge withdrawn); the revised DMR
-#   row wins. One outfall-month filed as 28,482 'Mgal' in 15 hours (IN0024741 001, September
+#   the previous file (a dropped month kept and marked; a month refiled as no discharge withdrawn only when every
+#   parameter is zero or NODI C with no conflict, else kept and marked); the revised DMR row wins, and a month where
+#   equally ranked rows disagree and one files a discharge is a discharge month in dispute (raw.conflicts). One outfall-month filed as 28,482 'Mgal' in 15 hours (IN0024741 001, September
 #   2026) keeps its figure in the text only (raw.volume_note): over 100 million gallons an hour.
 # Cannot fill: the day or hour of any discharge; an end; whether a figure is measured or modelled.
 cadence: "weekly per permit and parameter (a compact cache in data/build), at most 120 requests a run; DMRs are due the 28th of the following month"
