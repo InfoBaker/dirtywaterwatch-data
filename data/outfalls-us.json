@@ -1528,7 +1528,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 5 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1557,7 +1557,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 52 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1586,7 +1586,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 45 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1615,7 +1615,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 27 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1644,7 +1644,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 42 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1673,7 +1673,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 79 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1702,7 +1702,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 13 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1731,7 +1731,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 18 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1760,7 +1760,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 68 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1789,7 +1789,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 53 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1818,7 +1818,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 46 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1847,7 +1847,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 40 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1876,7 +1876,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 141 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1905,7 +1905,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 80 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1934,7 +1934,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 40 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1963,7 +1963,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 40 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -1992,7 +1992,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 26 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2021,7 +2021,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 43 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2050,7 +2050,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 25 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2079,7 +2079,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 59 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2108,7 +2108,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 42 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2137,7 +2137,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 30 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2166,7 +2166,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 33 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2195,7 +2195,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 27 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2224,7 +2224,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 35 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2253,7 +2253,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 41 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2282,7 +2282,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 30 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2311,7 +2311,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2340,7 +2340,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 22 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2369,7 +2369,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 38 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2398,7 +2398,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 51 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2427,7 +2427,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 22 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2456,7 +2456,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 5 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2484,9 +2484,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Silverbrook Run/Little Mill Creek' in DE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Silverbrook Run/Little Mill Creek' in DE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Chestnut Run, Little Mill Creek); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Chestnut Run, Little Mill Creek); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2514,9 +2514,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Silverbrook Run/Little Mill Creek' in DE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Silverbrook Run/Little Mill Creek' in DE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Chestnut Run, Little Mill Creek); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Chestnut Run, Little Mill Creek); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2534,19 +2534,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006523770",
    "lat": 39.7404047,
    "lon": -75.5786843,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "little-mill-creek-de",
+   "water_name": "Little Mill Creek",
+   "water_kind": "canal",
+   "distance_m": 864,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Little Mill Creek' in DE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Little Mill Creek' in DE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Little Mill Creek' by name; Little Mill Creek (little-mill-creek-de, NHDPlus V2.1 record), 864 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2575,7 +2574,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 60 m from Christina River (christina-river-de), whose name shares a word with the receiving water ('Christina River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2593,19 +2592,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006523770",
    "lat": 39.7517547,
    "lon": -75.5208958,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "shellpot-creek-de",
+   "water_name": "Shellpot Creek",
+   "water_kind": "stream",
+   "distance_m": 422,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Shellpot Creek' in DE; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Shellpot Creek' in DE; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Shellpot Creek' by name; Shellpot Creek (shellpot-creek-de, NHDPlus V2.1 record), 422 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2634,7 +2632,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 325 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2663,7 +2661,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 21 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "DE0020320",
@@ -2692,7 +2690,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 33 m from Brandywine Creek (brandywine-creek-de), whose name shares a word with the receiving water ('Brandywine Creek'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "GA0036838",
