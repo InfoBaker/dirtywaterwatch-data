@@ -849,6 +849,38 @@ def test_only_an_evidenced_correction_links_two_bloom_rows(monkeypatch, tmp_path
     assert sum(1 for r in recs.values() if r.get("duplicate_of")) == 1
 
 
+def test_a_point_in_a_reports_text_is_rounded_before_every_save(tmp_path, monkeypatch):
+    """Verification 2 P1-3: a coordinate pair the filer writes in the location text is rounded to 0.001 degree before
+    the raw save, raw.row, outfall_name and the records, on a fetch and on a replay of an older saved file."""
+    from datetime import datetime as dt
+    page = (FIX / "ar_deq_incidents_page.html").read_text().replace(
+        "Lift station 3 near Unknown Creek", "Lift station 3 near Unknown Creek at 35.123456, -93.654321 (Lat "
+        "35.1234 Long -93.6543)")
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    saved = []
+    monkeypatch.setattr(M, "save_raw", lambda *a, **k: (saved.append(a[1].decode()), tmp_path / "raw.json")[1])
+    monkeypatch.setattr(M, "ROOT", tmp_path)
+    monkeypatch.setattr(M, "post", lambda sess, data: page)
+    out = tmp_path / "ev.json"
+    assert M.main(["--backfill", dt.now(M.TZ).date().isoformat(), "--out", str(out)]) == 0
+    doc = json.loads(out.read_text())
+    fine = ("123456", "654321", "35.1234 ", "-93.6543)")
+    for s in [*saved, *strings(doc)]:
+        assert not any(f in s for f in fine), s
+    rec = [r for r in doc["records"] if "Unknown Creek" in (r["raw"]["row"].get("location") or "")][0]
+    assert "35.123, -93.654" in rec["raw"]["row"]["location"] and "35.123, -93.654" in rec["outfall_name"]
+    assert saved and "35.123, -93.654" in saved[0]
+    # an older saved file that still holds the fine pair is rounded on replay
+    rows = json.loads(saved[0])["rows"]
+    for r in rows:
+        r["location"] = r["location"].replace("35.123, -93.654", "35.123456, -93.654321")
+    old = tmp_path / "old.json"
+    old.write_text(json.dumps({"format": R.SAFE_ROWS_FORMAT, "rows": rows}))
+    out2 = tmp_path / "ev2.json"
+    assert M.main(["--file", str(old), "--out", str(out2)]) == 0
+    assert not any(f in s for s in strings(json.loads(out2.read_text())) for f in fine)
+
+
 @pytest.mark.parametrize("change", ["one_blank", "label_renamed"])
 def test_a_report_without_its_confirmation_number_fails_the_read(tmp_path, monkeypatch, change):
     """A report whose Web Confirmation Number is missing (blank, or the detail row's label changed) would key every
