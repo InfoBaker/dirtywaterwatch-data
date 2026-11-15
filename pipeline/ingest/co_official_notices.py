@@ -140,6 +140,9 @@ NOTICES = [
           "quotes": ["As of August 3 at 7pm, NO hand launched vessels are allowed as the reservoir is now on red alert "
                      "due to high concentrations of toxic algae which can be harmful to humans and pets.",
                      "Visitors should avoid contact with the water and take precautions to prevent exposure."],
+          # the warning itself: while this sentence is on the page, each read confirms the advisory
+          "core_quotes": ["As of August 3 at 7pm, NO hand launched vessels are allowed as the reservoir is now on red "
+                          "alert due to high concentrations of toxic algae which can be harmful to humans and pets."],
           "raw": {"time_zone": TZ,
                   "start_basis": "the park page: \"As of August 3 at 7pm\" (2026, the season the page names)",
                   "not_a_record": "the boating closure for low reservoir levels on the same line",
