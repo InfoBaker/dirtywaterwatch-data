@@ -124,7 +124,9 @@
 #                  first two pages each run, `--backfill` for the 2016- archive), mo_msd_alerts (MSD Project Clear's own
 #                  overflow alerts and releases through its WordPress API; `--backfill` for 2013-) and mo_dnr_concerns
 #                  (DNR's monthly Water Pollution Control concern reports, the sewer overflow concerns with the allegation
-#                  filter; each PDF read once); data/outfalls-mo.json is DNR's outfall layer (scripts/mo_outfall_layer.py)
+#                  filter; each PDF read once), mo_dnr_hab (DNR's public HAB map layer: the waters it shows with a
+#                  bloom present or closed, standing advisories dated to the reads); data/outfalls-mo.json is DNR's
+#                  outfall layer (scripts/mo_outfall_layer.py)
 #                  Kansas: ks_leavenworth_sso (Leavenworth's Sanitary Sewer Overflow Transparency Reports: the index, the
 #                  last two years' pages and new overflow pages; `--backfill` for 2020-), ks_kdhe_stream_advisories (KDHE's
 #                  news flash feed: stream advisories issued and rescinded; the feed holds about a month) and ks_kdhe_hab
