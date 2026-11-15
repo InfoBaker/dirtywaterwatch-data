@@ -486,3 +486,32 @@ def test_a_failed_amendment_to_an_older_report_is_retried(monkeypatch, tmp_path)
     assert code == 0 and out["ok"] is True and out["count"] == 9
     assert len({r["source_record_id"] for r in out["records"]}) == 9
     assert {r["source_url"] for r in out["records"] if r["raw"]["report"] == 95} == {amended}
+
+
+def test_a_receiving_water_cell_with_an_address_or_a_name_is_withheld_before_the_state(monkeypatch, tmp_path):
+    """Verification P1-4: an address or a reporting name in the Rec. Waters cell never reaches the state file or a
+    record; the row is kept, placed on no water, with no water name invented."""
+    table = TABLE_N.replace(_row("9/4/2026", "200 Sample Ave", "Blockage - Collection Line", "Example", "1,130"),
+                            _row("9/4/2026", "200 Sample Ave", "Blockage - Collection Line", "123 Example Ln", "1,130"))
+    table = table.replace(_cont(addr="Unit", water="Bayou"), _cont(addr="Unit"))
+    table_s = TABLE_S.replace("Example Creek", "Reported by: Example Person")
+    url = "https://example.org/98th-Quarterly-Report.pdf"
+    _pdf_state(monkeypatch, {b"pdf": [SUMMARY, table, table_s]})
+    _live(monkeypatch, tmp_path, {98: url}, {url: b"pdf"})
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-01T00:00:00Z")
+    assert code == 0 and out["count"] == 3
+    for blob in ((tmp_path / "state.json").read_text(), json.dumps(out)):
+        for bad in ("123 Example", "Example Ln", "Example Person"):
+            assert bad not in blob, bad
+    w = {r["started_at"]: r for r in out["records"]}
+    for d in ("2026-09-04", "2026-08-12"):
+        assert w[d]["waterbody_text"] is None and w[d]["raw"]["receiving_water_as_given"] is None
+        assert "withheld" in w[d]["raw"]["placement_note"]
+
+
+def test_an_older_state_row_with_an_address_in_the_water_cell_is_cleaned_before_any_record():
+    rep = _parsed()
+    rep["rows"][1]["receiving_water"] = "123 EXAMPLE LANE"
+    state = {"reports": {"98": {**rep, "number": 98, "url": "https://example.org/r98.pdf"}}}
+    recs = Q.records(state)
+    assert "123 EXAMPLE" not in json.dumps(state) and "123 EXAMPLE" not in json.dumps(recs)
