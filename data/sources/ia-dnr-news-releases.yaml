@@ -1,0 +1,25 @@
+id: "ia-dnr-news-releases"
+name: "Iowa DNR news releases (advisory topic): municipal wastewater discharges"
+url: "https://www.iowadnr.gov/topics/203/feed"
+homepage: "https://www.iowadnr.gov/topics/advisory"
+kind: "rss"
+level: "state"
+# Read by ingest/ia_dnr_news.py: the topic's RSS each run (ten newest), the four listing pages once (--backfill); a
+#   release whose title names wastewater, sewage, a sewer or a bypass is read once and kept when its text names a
+#   municipal system. Dates from the text (start, end, the day DNR was notified); the release date is publication only.
+# Real read 2026-11-14: five wastewater releases in the topic since November 2024; four municipal (Sioux City's Floyd
+#   lift station 2024-11-06, Story City's plant 2025-04-26 to 27, Keokuk's collection system through a CSO outfall
+#   2026-08, the statewide flood notice of 2026-10-01 with the Cedar Creek biosolids runoff), five records; one
+#   company's process wastewater left out.
+cadence: "the RSS each run"
+license: "none stated"
+attribution: "Iowa Department of Natural Resources"
+enabled: true
+role: "events"
+event_types: ["plant_bypass", "sso", "cso", "bypass"]
+states: ["IA"]
+access: ["rss", "html"]
+access_detail: "RSS of the advisory topic (ten items) and the release pages; most releases of the topic are manure, fuel, fertilizer and fish kills."
+machine_readable: true
+legal_basis: "567 IAC 63.6 (DNR decides whether public notice of a bypass is needed)"
+checked: "2026-11-14"

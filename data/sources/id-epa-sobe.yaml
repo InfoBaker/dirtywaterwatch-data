@@ -1,0 +1,22 @@
+id: "id-epa-sobe"
+name: "EPA ECHO sewer overflow and bypass event reports (eRule Phase 2 SOBE), Idaho permits"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Checked 2026-11-14 (extract 2026-11-12): one Idaho event in the current and all-versions tables, Kamiah (ID0028002),
+#   2023-12-17, 5 gallons, structure type BAS (a basement backup), received 2024-11-01: no discharge to water, which the
+#   national module drops; 14 Idaho permits in the current collection-system table (28 in all versions). Idaho is not
+#   added to the national module.
+cadence: "EPA refreshes daily; one Idaho row (2023)"
+license: "EPA public data"
+attribution: "US EPA"
+enabled: false
+role: "events"
+event_types: ["sso"]
+states: ["ID"]
+access: ["csv"]
+access_detail: "Daily ZIP from ECHO (no auth); one Idaho event (a 2023 basement backup)."
+machine_readable: true
+legal_basis: "40 CFR part 127"
+checked: "2026-11-14"
