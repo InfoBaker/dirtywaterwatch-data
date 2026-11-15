@@ -1178,10 +1178,14 @@ META_FIELDS = ("water_slug", "name", "sources", "state", "outfall_kind", "file",
                "rain_caution", "advisory", "stretch", "event_ids", "rule")
 
 
-def tidal_due(d: dict | None, tidal_river: bool) -> bool:
-    """With reach.tidal_river on, a cached trace cut at the head of tide before the rule (no tidal_river mark)."""
-    return bool(tidal_river and d and d.get("cut_reason") == "tidal" and not d.get("tidal_river")
-                and d.get("kind") != ADVISORY_KIND)
+def tidal_due(d: dict | None, tidal_river: bool, now: datetime) -> bool:
+    """With reach.tidal_river on, a cached trace cut at the head of tide before the rule (no tidal_river mark); one
+    whose last attempt failed waits RETRY_FAIL_DAYS, as any failed retrace does (run_traces keeps the old trace)."""
+    if not (tidal_river and d and d.get("cut_reason") == "tidal" and not d.get("tidal_river")
+            and d.get("kind") != ADVISORY_KIND):
+        return False
+    t = _t((d.get("last_attempt") or {}).get("at"))
+    return t is None or now - t >= timedelta(days=RETRY_FAIL_DAYS)
 
 
 def plan(cands: list[dict], cached: dict[str, dict], now: datetime,
@@ -1195,7 +1199,7 @@ def plan(cands: list[dict], cached: dict[str, dict], now: datetime,
         d = cached.get(c["key"])
         kind = 1 if c.get("outfall_kind") == "plant" else 0
         if c.get("sources") == ["event-point"]:
-            if not d or not fresh_rec(d, now) or tidal_due(d, tidal_river):
+            if not d or not fresh_rec(d, now) or tidal_due(d, tidal_river, now):
                 todo.append(((0, 0, ""), c))
             continue
         if c.get("kind") == ADVISORY_KIND:        # an advisory's stretch: as an event point, again when an end moves
@@ -1211,7 +1215,7 @@ def plan(cands: list[dict], cached: dict[str, dict], now: datetime,
             tier = 2 if d.get("cut_reason") == "no_trace" else 3
             todo.append(((tier, kind, d.get("fetched_at") or ""), c))
             continue
-        if tidal_due(d, tidal_river):
+        if tidal_due(d, tidal_river, now):
             todo.append(((3, kind, ""), c))
             continue
         if any(c.get(f) != d.get(f) for f in META_FIELDS if f in c):
