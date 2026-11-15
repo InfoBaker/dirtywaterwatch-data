@@ -578,3 +578,20 @@ def test_r3_p1_3_only_a_completed_end_is_an_end():
                  "The combined sewer overflow continued until 2:00 pm on June 2, 2027."):
         r = _recs(t, [t, start, done])["cso"]
         assert r["ended_at"] == "2027-06-02T14:00:00-05:00" and r["status"] == "ended", done
+
+
+@pytest.mark.parametrize("slug", ["treatment-plant-spill-january-7-2026", "mmsd-sanitary-sewer-release-march-11-2025",
+                                  "storm-update-september-3rd-2026"])
+def test_r3_p1_4_a_holding_page_under_any_title_keeps_every_field(slug):
+    recs, _ = built()
+    d = doc()
+    item = next(i for i in d["items"] if i["slug"] == slug)
+    d["items"] = [item]
+    d["posts"] = {slug: {"stamp": d["posts"][slug]["stamp"], "letters": [],
+                         "lines": [item["title"], "Temporarily unavailable"]}}
+    again, stats = M.build(d, list(recs.values()), FETCHED)
+    after = {r["source_record_id"]: r for r in again}
+    for k, r in recs.items():
+        if k.startswith(slug + ":"):
+            assert after[k] == r                      # start, end, volume and reached_water as before
+    assert stats["posts_without_report"] == [slug]
