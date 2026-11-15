@@ -140,9 +140,10 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             channel_kind="state_alert_page", urls=[], method=None, legal_basis=LAW_TEXT, basis_kind="law",
             monitored=False, unmonitored_reason="other", publishes="none", records=False, noun="Report to the state",
             sources=["la-lac-33-i-ch39", "la-ldeq-spoc"],
-            note=(f"{name} reports an unauthorized discharge to the State Police hotline and LDEQ by telephone only, "
-                  "then in writing; LDEQ publishes no list and no public notice is required. The permit itself was not "
-                  "read."))))
+            note=(f"{name} reports an unauthorized discharge to the State Police hotline by telephone and to LDEQ by "
+                  "telephone or LDEQ's online intake form (whose tracking number goes to the filer only), then in "
+                  "writing; LDEQ publishes no list and no public notice is required. No web channel found for the "
+                  "public. The permit itself was not read."))))
     return rows
 
 

@@ -12,7 +12,7 @@ updated: 2026-11-14
 
 **What stands in the way.** A report is published once a quarter, about a month after the quarter ends, so a discharge appears here one to four months after it happened (73 days at the median). The Department of Health's beach monitoring and algal bloom pages refuse automated reading, so Louisiana's beach advisories are not shown here. Shreveport's report site did not answer this site on November 14, 2026.
 
-**Known problems in the data.** Three of Baton Rouge's eight quarterly reports since October 2024 (October to December 2024, January to March 2025 and April to June 2026) are not shown, because the rows this site reads from them do not match the reports' own counts. Most discharges (102 of 219) name no receiving water. One row is dated a year before the quarter its report covers.
+**Known problems in the data.** Three of Baton Rouge's eight quarterly reports since October 2024 (October to December 2024, January to March 2025 and April to June 2026) are not shown, because the rows this site reads from them do not match the reports' own counts. Nearly half the discharges (102 of 219) name no receiving water. One row is dated a year before the quarter its report covers.
 
 **What this site does about it.** A Baton Rouge discharge is shown with this site's caution for 72 hours from the start of the day it gives, then as "end not confirmed" until 30 days after it began, since the report gives no end and the law sets no period. A discharge that names a water is placed on that water in East Baton Rouge Parish; one that names none is listed with the City-Parish's permit and placed on no water. Grey means no report, never clean water.
 
