@@ -404,7 +404,7 @@ def test_the_storm_sewer_permit_is_kind_other():
     reg = [r for r in common.load_outfall_registry(provisional=False) if r.get("npdes_permit") == "DE0051071"]
     assert [r["outfall_kind"] for r in reg] == ["other"]
     ncc = next(r for r in ops() if r["id"] == "de-new-castle-county")
-    assert "DE0051071" in ncc["npdes_permits"] and ncc["outfall_count"] == 3
+    assert "DE0051071" in ncc["npdes_permits"] and ncc["outfall_count"] == 1          # MOT only (re-review P2-5)
 
 
 def test_register_rows_per_operator_and_the_state_channels():
@@ -587,3 +587,24 @@ def test_the_state_texts_volume_statistics_count_only_figures():
     text = (ROOT / "research" / "de" / "state-text.md").read_text()
     assert "median of 200 gallons" in text and "23 of them 10,000 gallons or more" in text
     assert "completed years 2017 to 2025" in text
+
+
+def test_an_owner_is_named_only_where_epas_permittee_names_it():
+    # re-review P2-5: a plant's town or a plant's name never makes its owner; such a permit is its own row, no owner
+    rows = {r["id"]: r for r in ops()}
+    epa = {}
+    for f in ("outfalls-plants-us.json", "outfalls-us.json"):
+        for r in json.loads((ROOT / "data" / f).read_text())["outfalls"]:
+            if str(r.get("npdes_permit") or "").startswith("DE"):
+                epa[r["npdes_permit"]] = (r.get("permittee") or "").upper()
+    owner_words = {"city": "CITY OF", "county": "COUNTY", "town": "TOWN OF"}
+    for r in rows.values():
+        for p in r["npdes_permits"]:
+            if r.get("legal_form") in owner_words and p in epa:
+                name = epa[p]
+                assert owner_words[r["legal_form"]] in name or "NCC" in name, (r["id"], p, name)
+    for p in ("DE0020010", "DE0020028", "DE0020125", "DE0020265", "DE0021491", "DE0021512", "DE0050008",
+              "DE0021539", "DE0021555"):
+        row = next(r for r in rows.values() if p in r["npdes_permits"])
+        assert row["npdes_permits"] == [p] and not row.get("legal_form"), p
+        assert "permittee not recorded by EPA" in row["name"], p

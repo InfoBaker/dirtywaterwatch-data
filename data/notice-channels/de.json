@@ -91,7 +91,7 @@
    "permit": "DE0020010",
    "checked": "2026-11-14",
    "id": "de-de0020010-dnrec-releases",
-   "name": "Town of Selbyville (Selbyville Wastewater Treatment Facility)",
+   "name": "Selbyville Wastewater Treatment Facility (permittee not recorded by EPA)",
    "channel_kind": "feed",
    "urls": [
     "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
@@ -108,7 +108,7 @@
     "de-dnrec-derns-recent-releases",
     "de-law-7-del-c-6028"
    ],
-   "note": "Town of Selbyville (Selbyville Wastewater Treatment Facility)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
+   "note": "Selbyville Wastewater Treatment Facility (permittee not recorded by EPA)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
    "barrier": null
   },
   {
@@ -118,7 +118,7 @@
    "permit": "DE0020028",
    "checked": "2026-11-14",
    "id": "de-de0020028-dnrec-releases",
-   "name": "City of Rehoboth Beach (Rehoboth Beach Wastewater Treatment Plant)",
+   "name": "Rehoboth Beach Wastewater Treatment Plant (permittee not recorded by EPA)",
    "channel_kind": "feed",
    "urls": [
     "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
@@ -135,7 +135,7 @@
     "de-dnrec-derns-recent-releases",
     "de-law-7-del-c-6028"
    ],
-   "note": "City of Rehoboth Beach (Rehoboth Beach Wastewater Treatment Plant)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
+   "note": "Rehoboth Beach Wastewater Treatment Plant (permittee not recorded by EPA)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
    "barrier": null
   },
   {
@@ -145,7 +145,7 @@
    "permit": "DE0020125",
    "checked": "2026-11-14",
    "id": "de-de0020125-dnrec-releases",
-   "name": "Town of Laurel (Laurel Sewage Treatment Plant)",
+   "name": "Laurel Sewage Treatment Plant (permittee not recorded by EPA)",
    "channel_kind": "feed",
    "urls": [
     "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
@@ -162,7 +162,7 @@
     "de-dnrec-derns-recent-releases",
     "de-law-7-del-c-6028"
    ],
-   "note": "Town of Laurel (Laurel Sewage Treatment Plant)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
+   "note": "Laurel Sewage Treatment Plant (permittee not recorded by EPA)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
    "barrier": null
   },
   {
@@ -172,7 +172,7 @@
    "permit": "DE0020265",
    "checked": "2026-11-14",
    "id": "de-de0020265-dnrec-releases",
-   "name": "City of Seaford (Seaford Wastewater Treatment Plant)",
+   "name": "Seaford Wastewater Treatment Plant (permittee not recorded by EPA)",
    "channel_kind": "feed",
    "urls": [
     "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
@@ -189,7 +189,7 @@
     "de-dnrec-derns-recent-releases",
     "de-law-7-del-c-6028"
    ],
-   "note": "City of Seaford (Seaford Wastewater Treatment Plant)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
+   "note": "Seaford Wastewater Treatment Plant (permittee not recorded by EPA)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
    "barrier": null
   },
   {
@@ -221,6 +221,33 @@
   },
   {
    "state": "DE",
+   "operator_id": "de-de0021491",
+   "agency": null,
+   "permit": "DE0021491",
+   "checked": "2026-11-14",
+   "id": "de-de0021491-dnrec-releases",
+   "name": "Milton Water Reclamation Facility (permittee not recorded by EPA)",
+   "channel_kind": "feed",
+   "urls": [
+    "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "7 Del. C. 6028(a): a person causing an environmental release (sewage of 10,000 gallons or more, 6002(20)) \"shall report such an incident to the Department as soon as the person has knowledge\"; DNREC posts it on its website \"no later than 1 business day after the release is reported\"; permitted discharges are exempt",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "de-dnrec-derns-recent-releases",
+   "publishes": "notices",
+   "noun": "Data feed",
+   "sources": [
+    "de-dnrec-derns-recent-releases",
+    "de-law-7-del-c-6028"
+   ],
+   "note": "Milton Water Reclamation Facility (permittee not recorded by EPA)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
+   "barrier": null
+  },
+  {
+   "state": "DE",
    "operator_id": "de-de0021512",
    "agency": null,
    "permit": "DE0021512",
@@ -244,6 +271,87 @@
     "de-law-7-del-c-6028"
    ],
    "note": "Howard Seymour Water Reclamation Plant, Lewes (permittee not recorded by EPA)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
+   "barrier": null
+  },
+  {
+   "state": "DE",
+   "operator_id": "de-de0021539",
+   "agency": null,
+   "permit": "DE0021539",
+   "checked": "2026-11-14",
+   "id": "de-de0021539-dnrec-releases",
+   "name": "Port Penn Wastewater Treatment Plant (permittee not recorded by EPA)",
+   "channel_kind": "feed",
+   "urls": [
+    "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "7 Del. C. 6028(a): a person causing an environmental release (sewage of 10,000 gallons or more, 6002(20)) \"shall report such an incident to the Department as soon as the person has knowledge\"; DNREC posts it on its website \"no later than 1 business day after the release is reported\"; permitted discharges are exempt",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "de-dnrec-derns-recent-releases",
+   "publishes": "notices",
+   "noun": "Data feed",
+   "sources": [
+    "de-dnrec-derns-recent-releases",
+    "de-law-7-del-c-6028"
+   ],
+   "note": "Port Penn Wastewater Treatment Plant (permittee not recorded by EPA)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
+   "barrier": null
+  },
+  {
+   "state": "DE",
+   "operator_id": "de-de0021555",
+   "agency": null,
+   "permit": "DE0021555",
+   "checked": "2026-11-14",
+   "id": "de-de0021555-dnrec-releases",
+   "name": "Delaware City Wastewater Treatment Plant (permittee not recorded by EPA)",
+   "channel_kind": "feed",
+   "urls": [
+    "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "7 Del. C. 6028(a): a person causing an environmental release (sewage of 10,000 gallons or more, 6002(20)) \"shall report such an incident to the Department as soon as the person has knowledge\"; DNREC posts it on its website \"no later than 1 business day after the release is reported\"; permitted discharges are exempt",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "de-dnrec-derns-recent-releases",
+   "publishes": "notices",
+   "noun": "Data feed",
+   "sources": [
+    "de-dnrec-derns-recent-releases",
+    "de-law-7-del-c-6028"
+   ],
+   "note": "Delaware City Wastewater Treatment Plant (permittee not recorded by EPA)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
+   "barrier": null
+  },
+  {
+   "state": "DE",
+   "operator_id": "de-de0050008",
+   "agency": null,
+   "permit": "DE0050008",
+   "checked": "2026-11-14",
+   "id": "de-de0050008-dnrec-releases",
+   "name": "South Coastal Regional Wastewater Facility (permittee not recorded by EPA)",
+   "channel_kind": "feed",
+   "urls": [
+    "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
+   ],
+   "method": "html",
+   "legal_basis": "7 Del. C. 6028(a): a person causing an environmental release (sewage of 10,000 gallons or more, 6002(20)) \"shall report such an incident to the Department as soon as the person has knowledge\"; DNREC posts it on its website \"no later than 1 business day after the release is reported\"; permitted discharges are exempt",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "de-dnrec-derns-recent-releases",
+   "publishes": "notices",
+   "noun": "Data feed",
+   "sources": [
+    "de-dnrec-derns-recent-releases",
+    "de-law-7-del-c-6028"
+   ],
+   "note": "South Coastal Regional Wastewater Facility (permittee not recorded by EPA)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
    "barrier": null
   },
   {
@@ -490,7 +598,7 @@
    "state": "DE",
    "operator_id": "de-new-castle-county",
    "agency": null,
-   "permit": "DE0021539",
+   "permit": "DE0050547",
    "checked": "2026-11-14",
    "id": "de-new-castle-county-dnrec-releases",
    "name": "New Castle County Department of Public Works (sewer)",
@@ -517,7 +625,7 @@
    "state": "DE",
    "operator_id": "de-sussex-county",
    "agency": null,
-   "permit": "DE0050008",
+   "permit": null,
    "checked": "2026-11-14",
    "id": "de-sussex-county-dnrec-releases",
    "name": "Sussex County Engineering, Environmental Services (wastewater)",
@@ -592,33 +700,6 @@
     "de-law-7-del-c-6028"
    ],
    "note": "Town of Middletown (sewer)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
-   "barrier": null
-  },
-  {
-   "state": "DE",
-   "operator_id": "de-town-of-milton",
-   "agency": null,
-   "permit": "DE0021491",
-   "checked": "2026-11-14",
-   "id": "de-town-of-milton-dnrec-releases",
-   "name": "Town of Milton (Milton Water Reclamation Facility)",
-   "channel_kind": "feed",
-   "urls": [
-    "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
-   ],
-   "method": "html",
-   "legal_basis": "7 Del. C. 6028(a): a person causing an environmental release (sewage of 10,000 gallons or more, 6002(20)) \"shall report such an incident to the Department as soon as the person has knowledge\"; DNREC posts it on its website \"no later than 1 business day after the release is reported\"; permitted discharges are exempt",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "feed_ingested",
-   "feed_source_id": "de-dnrec-derns-recent-releases",
-   "publishes": "notices",
-   "noun": "Data feed",
-   "sources": [
-    "de-dnrec-derns-recent-releases",
-    "de-law-7-del-c-6028"
-   ],
-   "note": "Town of Milton (Milton Water Reclamation Facility)'s sewage releases reach the public through DNREC's Recent Releases list when reported under 6028 (sewage from 10,000 gallons; smaller ones when reported), read by this site. The operator's own pages were not searched individually.",
    "barrier": null
   },
   {
