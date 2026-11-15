@@ -1,0 +1,512 @@
+{
+ "read": "2026-11-14",
+ "sources": {
+  "deq_issued_permits": "https://www.deq.idaho.gov/permits/issued-permits-and-water-quality-certifications/",
+  "reservations": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/AIANNHA/MapServer/2"
+ },
+ "rule": "Who issues each Idaho sewage permit of the outfall registry: Idaho DEQ (IPDES) or EPA Region 10.",
+ "counts": {
+  "IDEQ": 104,
+  "EPA": 13,
+  "unconfirmed": 4
+ },
+ "permits": {
+  "ID0000663": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020001": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020010": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020028": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020036": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020044": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020061": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020087": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020095": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020117": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020125": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020133": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020141": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020150": {
+   "authority": "EPA",
+   "reservation": "Nez Perce Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0020168": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020176": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020184": {
+   "authority": "EPA",
+   "reservation": "Nez Perce Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0020192": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020206": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020214": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020222": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020231": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020249": {
+   "authority": "unconfirmed",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits and outside a reservation: an expired or administratively continued permit DEQ has not listed; the issuer was not confirmed"
+  },
+  "ID0020265": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020281": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020290": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020303": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020311": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020338": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020354": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020362": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020389": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020397": {
+   "authority": "EPA",
+   "reservation": "Nez Perce Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0020401": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020427": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020443": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020664": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020672": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020753": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020788": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020800": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020818": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020842": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020931": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0020940": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021016": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021024": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021199": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021202": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021211": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021229": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021261": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021270": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021288": {
+   "authority": "unconfirmed",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits and outside a reservation: an expired or administratively continued permit DEQ has not listed; the issuer was not confirmed"
+  },
+  "ID0021296": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021300": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021491": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021504": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021776": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021784": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021806": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021814": {
+   "authority": "EPA",
+   "reservation": "Nez Perce Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0021822": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021831": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021849": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0021997": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0022004": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0022012": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0022047": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0022055": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0022063": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0022446": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0022501": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0022713": {
+   "authority": "EPA",
+   "reservation": "Coeur d'Alene Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Coeur d'Alene Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0022781": {
+   "authority": "EPA",
+   "reservation": "Coeur d'Alene Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Coeur d'Alene Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0022799": {
+   "authority": "EPA",
+   "reservation": "Coeur d'Alene Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Coeur d'Alene Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0022845": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0022853": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0022861": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0023027": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0023159": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0023167": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0023591": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0023604": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0023710": {
+   "authority": "unconfirmed",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits and outside a reservation: an expired or administratively continued permit DEQ has not listed; the issuer was not confirmed"
+  },
+  "ID0023728": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0023761": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0023817": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0023825": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0023981": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0024252": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0024350": {
+   "authority": "unconfirmed",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits and outside a reservation: an expired or administratively continued permit DEQ has not listed; the issuer was not confirmed"
+  },
+  "ID0024384": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0024490": {
+   "authority": "EPA",
+   "reservation": "Nez Perce Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0024503": {
+   "authority": "EPA",
+   "reservation": "Nez Perce Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0024554": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0024988": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0025071": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0025101": {
+   "authority": "EPA",
+   "reservation": "Coeur d'Alene Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Coeur d'Alene Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0025224": {
+   "authority": "EPA",
+   "reservation": "Nez Perce Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0025569": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0025585": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0025747": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0025852": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0025887": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0025941": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0026174": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0026310": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0026590": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0026913": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0027693": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0028002": {
+   "authority": "EPA",
+   "reservation": "Nez Perce Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0028029": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0028304": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0028347": {
+   "authority": "EPA",
+   "reservation": "Nez Perce Reservation",
+   "basis": "not on Idaho DEQ's list of issued IPDES permits; EPA's point for the plant lies within the Nez Perce Reservation (Census TIGERweb), where EPA Region 10 issues permits"
+  },
+  "ID0028355": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0028436": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0028487": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0030040": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0030091": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  },
+  "ID0030112": {
+   "authority": "IDEQ",
+   "basis": "on Idaho DEQ's list of issued IPDES permits"
+  }
+ }
+}

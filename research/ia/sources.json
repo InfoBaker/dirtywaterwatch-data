@@ -85,8 +85,8 @@
   "history": "Releases tagged bypass/sewage back to 2016 (search).",
   "license": "State of Iowa site policies; not quoted.",
   "legal_basis": "567 IAC 63.6(3)c",
-  "status": "candidate",
-  "status_reason": "The only statewide, dated public channel for bypasses, but discretionary and sparse; needs a list poller and a keyword filter.",
+  "status": "used",
+  "status_reason": "Built: ingest/ia_dnr_news.py reads the advisory topic's RSS (https://www.iowadnr.gov/topics/203/feed) and, once, its listing pages; four municipal releases from November 2024 to October 2026 (five records) on 2026-11-15.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "notes": ""
@@ -227,8 +227,8 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "A model municipal notice page with one row per event; HTML only.",
+  "status": "used",
+  "status_reason": "Built: ingest/ia_waterloo_sso.py; 17 notices (October 2025 to October 2026) on 2026-11-14.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "notes": "Page: \"the city is required to notify the public of a Sanitary Sewer Overflow (SSO) or Bypass event.\""
@@ -283,7 +283,7 @@
   "license": "None stated.",
   "legal_basis": null,
   "status": "candidate",
-  "status_reason": "Clean JSON/CSV with both E. coli and microcystin; thresholds 235 CFU/100 mL and 8 ug/L.",
+  "status_reason": "Registered (data/sources/ia-aquia-beaches.yaml, enabled false): the weekly results answered [] off season on 2026-11-14; build at the 2027 season when real rows can be tested.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "notes": ""
@@ -489,5 +489,29 @@
   "verified": "inferred",
   "checked": "2026-11-03",
   "notes": ""
+ },
+ {
+  "jurisdiction": "IA",
+  "water_slugs": [],
+  "machine_readable": false,
+  "id": "ia-dnr-focomp-incoming-reports",
+  "name": "Iowa DNR Field Office Compliance (FOCOMP): incoming bypass reports",
+  "operator": "Iowa Department of Natural Resources",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "bypass",
+   "sso",
+   "plant_bypass"
+  ],
+  "waters_covered": "the receiving stream the field office enters, statewide; read for the 105 major municipal facilities",
+  "url": "https://programs.iowadnr.gov/focomp/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "One page per facility listing its incoming reports, one page per report (times, receiving stream, gallons, county); no list or download.",
+  "status": "used",
+  "status_reason": "Built: ingest/ia_dnr_focomp.py; 359 reports listed from 2025 on, from 76 of the 105 major municipal facilities, in the state file of 2026-11-15.",
+  "verified": "fetched"
  }
 ]

@@ -1,0 +1,29 @@
+id: "wy-deq-hcb-bulletins"
+name: "Wyoming DEQ harmful cyanobacteria bloom bulletins: bloom and toxin advisories with the date each was issued"
+url: "https://public.govdelivery.com/topics/WYDEQ_42/feed.rss"
+homepage: "https://deq.wyoming.gov/water-quality/watershed-protection/cyanobacteria/"
+kind: "rss"
+level: "state"
+# Ingester: pipeline/ingest/wy_deq_hcb_bulletins.py (source id wy-deq-hcb-bulletins): the topic's RSS feed, read once a run.
+# Read 2026-11-15 (10.6 s): 25 bulletins from 2026-07-31 to 2026-10-28, 22 with the table "Current HCB Recreational Use
+#   Advisories" (Waterbody Name | Observation or Sampling Location(s) | Advisory Type | Date Issued), one lift (Lake
+#   DeSmet, 2026-08-21), three press releases with no table. 71 advisories at 41 waters: 66 still in the latest table
+#   (2026-10-28), 4 no longer listed by a later table (ended at that bulletin, a poll bound), 1 lifted by its bulletin.
+# Times: Date Issued is the agency's day (Mountain time); a bulletin's sent time (pubDate, converted to UTC) confirms a
+#   listed row; the first readable table that no longer lists a row ends it as a poll bound; a lift bulletin's sent time
+#   is a bound for its lift. A row in the latest readable table stands (the agencies' current list) and is confirmed
+#   at each read until a later bulletin drops or lifts it or the program's December 31 end of season passes.
+# Privacy: the bulletins name staff with e-mail and telephone; only the parsed rows are saved (data/raw/).
+cadence: "a bulletin when an advisory is issued or lifted; the feed is read every run"
+license: null
+attribution: "Wyoming Department of Health and Wyoming Department of Environmental Quality"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["WY"]
+registry_ids: ["wy-deq-hcb-bulletins"]
+access: ["rss"]
+access_detail: "GovDelivery topic WYDEQ_42 RSS (about 25 items, the full bulletin HTML in each); no key."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-15"

@@ -1,0 +1,21 @@
+---
+state: ID
+name: Idaho
+updated: 2026-11-15
+---
+
+**What the law requires.** Idaho's wastewater permits require a sewer overflow or other noncompliance that may endanger health to be reported to the Department of Environmental Quality by telephone within 24 hours and in writing within five days (IDAPA 58.01.25 and the permits issued under it); 13 permits on the Nez Perce and Coeur d'Alene reservations are issued by the U.S. Environmental Protection Agency, which receives those reports. No Idaho statute, rule or permit condition found requires the public to be told of a sewage discharge, and none sets a period after one during which the water is to be avoided. Idaho has no combined sewers.
+
+**What is published.** No Idaho sewage report is public. The Department of Environmental Quality publishes a table of the waters where it has found a cyanobacteria bloom, with the risk level, the county and the day of the latest sample, and the Department of Health and Welfare issues health advisories on the Department of Environmental Quality's toxin results and maps them. On November 14, 2026, the table listed 19 waters or parts of waters: 13 under a health advisory, 1 at the Health Alert level and 5 at the Health Watch level.
+
+**What is not published.** The overflow and bypass reports permittees file with the Department of Environmental Quality, or with the U.S. Environmental Protection Agency on the reservations, are not posted anywhere; the agency's overflow records hold one Idaho row, a 2023 basement backup, which is not a discharge to a water. No statewide program samples swimming beaches for bacteria and posts the results. So this site shows only blooms for Idaho, and grey on an Idaho water means no report, never that no sewage reached it.
+
+**What stands in the way.** The Department of Environmental Quality's permit portal, where permittees file their reports, requires a login; the reports are available only by a public records request. No permitted treatment plant in Idaho was found posting its overflows on the web. The fix is a public list of the reports or a public-notice duty.
+
+**Known problems in the data.** The bloom table gives the day of the latest sample and the risk level, not the day an advisory was issued or lifted, and some rows give no sample day. Health Watch and Health Alert are the Department's risk levels while results are pending; a row at either level can also state that the water is closed to recreational use. A large reservoir can be listed by its arm (C J Strike's Bruneau and Snake River arms) or its part (Hayden Lake's north end).
+
+**What this site does about it.** A health advisory is shown as the Department of Health and Welfare's advisory from the first reading of the table that lists it, for as long as the table lists it. It ends at the first reading that lists the water at a lower level, or at the first reading that no longer lists the water when every row of that reading could be read and the Department of Health and Welfare's map, read in full at the same time, no longer shows the water at that level; until then the advisory stays shown. Either end is marked as seen by this site's reading, not as the agency's lift time. A row that states the water is closed to recreational use is shown as the agencies' closure, quoted from the table, for as long as the table lists it. A Health Watch or Health Alert is shown with this site's own caution, quoted as the Department's risk level: for 72 hours from the day of the sample, and while the table lists it, until 72 hours after the latest reading that listed it. Where a row gives no sample day, the listing is dated from the first reading that listed it, marked as such. Each listing is marked at the Department of Health and Welfare's own point for it (kept to about 100 metres), so an arm or part is marked, not the whole water; a listing that map does not show is placed by its water's name and county. Dates are read in Mountain time, and in Pacific time north of the Salmon River (49 CFR 71.9): in the nine northern counties and in Idaho County's part north of the river.
+
+{{share_line}}
+
+Idaho publishes no sewage report: this state's coverage is the bloom table only. Of this state's reports on this site, {{dated_share}} are dated to the day or better; the newest dated report is from {{latest_dated}}. Coverage: {{grade}}.

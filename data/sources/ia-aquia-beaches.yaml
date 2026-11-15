@@ -1,0 +1,22 @@
+id: "ia-aquia-beaches"
+name: "Iowa DNR AQuIA beach monitoring (state and county beaches)"
+url: "https://programs.iowadnr.gov/aquia/api/v1/beaches/weekly_results/state?week=all"
+homepage: "https://programs.iowadnr.gov/aquia/beaches"
+kind: "json"
+level: "state"
+# Not read yet. The state and county/city JSON (and CSV downloads) give each beach's sample date, week, E. coli,
+#   five-week geometric mean, microcystin, status and comments; statuses (reference/statuses): Yellow "Swimming Not
+#   Recommended", Red "Beach Closed", Purple "Special Status". Both answered [] on 2026-11-14 (off season, Memorial Day
+#   to Labor Day): a reader is to be built and tested on the first rows of the 2027 season.
+cadence: "weekly in season (updated Fridays)"
+license: "none stated"
+attribution: "Iowa Department of Natural Resources"
+enabled: false
+role: "advisories"
+event_types: ["beach_advisory", "hab_advisory"]
+states: ["IA"]
+access: ["json", "csv"]
+access_detail: "Public JSON and CSV; empty out of season."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"
