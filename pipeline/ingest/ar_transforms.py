@@ -77,7 +77,8 @@ PRIVATE_IMPACT = re.compile(r"affected\s+private\s+property|basement\s+backup", 
 INDUSTRY = re.compile(r"\b(packaging|kraft|paper|weyerhaeuser|brick|mine|gravel|arms|armtec|steel|foods|pilgrim|"
                       r"tyson|lumber|chemical|refin\w*|plastics?)\b", re.I)
 WATER_WORD = r"(?:Creek|River|Bayou|Lake|Branch|Slough|Reservoir|Fork|Run)"
-CAP = r"(?:Mc[A-Z][a-z]+|St\.|[A-Z][a-z']+|De|La)"         # no full stop: a sentence ends the name
+# no full stop: a sentence ends the name; a hyphen joins words of one name ("Little-Sample Creek", verification P1-4)
+CAP = r"(?:(?:Mc[A-Z][a-z]+|[A-Z][a-z']+)(?:-(?:Mc[A-Z][a-z]+|[A-Z][a-z']+))*|St\.|De|La)"
 # no length cap: a long name is read whole and refused if too long to be one (MAX_NAME_WORDS), never cut short
 WATER_NAME = re.compile(rf"\b((?:{CAP}[ \t]+)+{WATER_WORD}\b|Lake(?:[ \t]+{CAP})+\b)")
 MAX_NAME_WORDS = 6
@@ -101,7 +102,7 @@ STREETY = re.compile(r"\b(street|st|road|rd|drive|dr|lane|ln|avenue|ave|blvd|cir
 
 # a chain of qualifiers written before a name ("upper little Sample Creek", "west fork of the"): all of it stays
 QUALIFIER_BEFORE = re.compile(r"(?:\b(?:little|middle|upper|lower|big|east|west|north|south)(?:\s+(?:fork|branch|prong))?"
-                              r"(?:\s+of(?:\s+the)?)?\s+)+$", re.I)
+                              r"(?:\s+of(?:\s+the)?)?[\s-]+)+$", re.I)
 # words a sentence goes on with after a lake's name ("Lake Hamilton Due to rain"): not part of it
 TRAIL_STOP = {"due", "used", "approximately", "approx", "was", "were", "from", "after", "near", "and", "the", "at",
               "on", "in", "to", "area", "about", "around", "with", "by"}
@@ -151,7 +152,8 @@ def water_names(text: str) -> tuple[list[str], list[str]]:
             continue
         q = QUALIFIER_BEFORE.search(before.rstrip() + " ")
         if q:
-            cand = re.sub(r"\bOf\b", "of", re.sub(r"\bThe\b", "the", _title(q.group(0).strip()))) + " " + cand
+            pre = re.sub(r"\bOf\b", "of", re.sub(r"\bThe\b", "the", _title(q.group(0).strip())))
+            cand = pre + ("" if pre.endswith("-") else " ") + cand          # "Upper-Little Sample Creek" stays joined
         names.append(cand)
     return list(dict.fromkeys(names)), list(dict.fromkeys(unused))
 
