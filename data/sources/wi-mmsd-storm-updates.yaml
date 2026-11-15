@@ -1,0 +1,41 @@
+id: "wi-mmsd-storm-updates"
+name: "Milwaukee Metropolitan Sewerage District Storm Update posts: the overflows MMSD reports to the DNR"
+url: "https://www.mmsd.com/about-us/news"
+homepage: "https://www.mmsd.com/about-us/news"
+kind: "html"
+level: "operator"
+# Ingester: pipeline/ingest/wi_mmsd_storm_updates.py (source id wi-mmsd-storm-updates): the news list two pages deep
+#   every refresh (eight posts; the whole list on a first run), each candidate post once, again when its title or date
+#   changes, when its read failed, and 30 days after its last read wherever it stands in the list; rules only.
+# Read 2026-11-14 (the whole list, 71 pages): 281 posts on mmsd.com since 2016, 21 of them read: 18 Storm Updates or
+#   overflow letters to the DNR and 3 spill or release notices, from 2018-06-22 to 2026-09-08, which give 29 dated
+#   reports: 13 combined sewer overflows, 14 separate sewer overflows or overflows the post does not call combined (5
+#   typed sso with the basis stated) and 2 spills at a treatment plant (plant_bypass; one says no wastewater reached
+#   a water). 18 carry MMSD's volume; 3 a stated start and end to the minute; 3 name a water (Lincoln Creek twice,
+#   the four separate sewer overflows of September 11-12, 2022).
+# Times: the post's own stamp (Milwaukee time) is the publication; the start is the date or time the post states, the
+#   storm's last day is kept apart (raw.period_end) and is never the end. Posted 1 to 10 days after the overflow began
+#   (median 5 days over the 21 posts): the September 3, 2026 overflow on September 8, the August 1 overflow on August 6.
+#   A report dated to the day with no end gets the site's 72-hour caution from that day (unresolved.day_start_caution),
+#   so by the time a post appears its caution has usually run; the record stays in the water's history.
+# Placement: a combined sewer overflow that names no water is shown on every water MMSD's permitted outfalls discharge
+#   to (placement.no_outfall_all_waters); one that names a water on that water with the permit's outfalls there. A
+#   separate sewer overflow with no water named is listed with MMSD and placed nowhere. No coordinates.
+# Not read: the five-day letters (PDFs, often scanned images), the year-to-date counter on the rain and facility page
+#   (MMSD says its figures can be corrected), the Water Drop Alert texts (pre-storm requests). The member
+#   municipalities' own overflows named in a post are kept as text on MMSD's record, not as their records.
+# Privacy: only titles, stamps, letter links and the article lines (cut at MMSD's standing advice block) are kept;
+#   telephone numbers, e-mails and house numbers are removed.
+cadence: "Posted with MMSD's five-day letter to the DNR, one to ten days (median five) after each overflow of the regional system or spill; no RSS."
+license: "none stated; site copyright MMSD"
+attribution: "Milwaukee Metropolitan Sewerage District"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "plant_bypass"]
+states: ["WI"]
+registry_ids: ["wi-mmsd-storm-updates"]
+access: ["html"]
+access_detail: "Concrete CMS page list at https://www.mmsd.com/about-us/news (four posts a page, ?ccm_paging_p_b23285=N), each post under /about-us/news/<slug> with its stamp (MM/DD/YY HH:MM:am), its text and the letter's link; no key, no RSS (/about-us/news/rss answers 404)."
+machine_readable: false
+legal_basis: "s. NR 210.21(5), Wis. Adm. Code (public notice of every overflow, promptly) and 40 CFR 122.38 (Great Lakes Basin CSO notice within four hours, which these posts do not meet); WPDES permit WI0036820"
+checked: "2026-11-14"

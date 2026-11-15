@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1517 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1538 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -51,7 +51,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | mo | 6 | 0 | 5 | 2 | 0 | 13 |
 | ks | 4 | 0 | 4 | 1 | 1 | 10 |
 | ar | 4 | 1 | 5 | 2 | 1 | 13 |
-| **all** | **546** | **235** | **447** | **211** | **78** | **1517** |
+| wi | 7 | 0 | 8 | 2 | 4 | 21 |
+| **all** | **553** | **235** | **455** | **213** | **82** | **1538** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1774,3 +1775,29 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ar-beaches` | Arkansas swimming beach monitoring | rejected | search_only | advisories | The 2026-11-03 'no beach program' finding was wrong: the Department of Health runs the Arkansas Swim Beach Program (ar-adh-swim-beach-status). |
 | `ar-epa-sobe` | EPA SOBE (eRule) extract, Arkansas rows | rejected | fetched | events | EPA's sewer overflow and bypass extracts dated 2026-11-12 (current and all versions) hold no Arkansas rows; DEQ publishes its own search instead. |
 | `ar-usace-swl-swim-beach-closures` | U.S. Army Corps of Engineers, Little Rock District: swim beach closures | unreachable | fetched | advisories | The host refuses this site's identified client (403); a barrier to record, not something to get around. |
+
+## wi: Wisconsin (21)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `wi-epa-cso-inventory` | EPA National CSO Inventory, Wisconsin rows | used | fetched | outfalls | Baseline. MMSD's plan says 115 outfalls. |
+| `wi-law-40cfr122-38` | 40 CFR 122.38 (Great Lakes Basin CSO notice) for MMSD and Superior | used | fetched | law | Both Wisconsin CSO permits discharge to the Great Lakes Basin (Lake Michigan; St. Louis Bay of Lake Superior): 4-hour electronic public notice. |
+| `wi-law-nr-210-21` | Wis. Admin. Code NR 210.21 sanitary sewer and treatment facility overflows (reporting and public notification) | used | search_only | law | Public notice duty for every SSO and TFO, "promptly", by the "most effective and efficient communications available in the community"; no web channel or deadline in hours. |
+| `wi-mmsd-cso-impacted-waters` | MMSD CSO impacted waters map (potentially impacted waterways and public access locations) | used | fetched | outfalls | The operator's own affected-area polygon under 40 CFR 122.38(c); usable as the official affected area for every MMSD CSO. |
+| `wi-mmsd-cso-notification-plan` | MMSD Combined Sewer Overflow Public Notification Plan (July 16, 2018) | used | fetched | law | Says "The combined sewer service area has 115 combined sewer overflow outfalls" discharging to seven waterways, and that the plan responds to 40 CFR 122.38. |
+| `wi-mmsd-storm-updates` | MMSD Storm Update news posts (per-event overflow volume, 5-day letter to WDNR) | used | fetched | events | Built (ingester wi_mmsd_storm_updates): the news list read whole on 2026-11-14 (71 pages, 281 posts), 21 posts read (18 Storm Updates and overflow letters, 3 spill or release notices) from 2018-06-22 to 2026-09-08 give 29 dated reports (13 combined, 14 separate or unspecified sewer overflows, 2 treatment plant spills), posted one to ten days after the overflow began (median five). |
+| `wi-wdnr-sso-form-instructions` | WDNR SSO/TFO report form 3400-184 and instructions (Switchboard) | used | fetched | law | The form records the public-notice date and method, so WDNR holds the data; it is not published. |
+| `wi-brookfield-sso-notices` | City of Brookfield SSO press releases | watch | prior_inventory_only | events | Single PDF releases with no list page to poll; registered. |
+| `wi-echo-dmr-cso` | ECHO DMR CSO parameters for MMSD and Superior | watch | inferred | events | Monthly fallback, unknown. |
+| `wi-hab-program` | Wisconsin harmful algal bloom information (WDNR and DHS) | watch | inferred | advisories | No statewide bloom advisory feed known; not traced in this round. |
+| `wi-milwaukee-health-beach-report` | City of Milwaukee Health Department beach water report | watch | inferred | advisories | Off season on 2026-11-14; registered as a watched channel. |
+| `wi-milwaukee-riverkeeper-swim-guide` | Milwaukee Riverkeeper on Swim Guide (beach and river bacteria) | watch | search_only | monitoring | Mirror of the state data; no API. |
+| `wi-mmsd-rain-facility-page` | MMSD Milwaukee Rain & Facility Information page (live year-to-date gallons overflowed) | watch | fetched | events | MMSD says its counter's figures can be corrected and are unverified; a rise is never read as an overflow or its time (expansion research 2026-11-09). Watched for availability in the register. |
+| `wi-mmsd-water-drop-alert` | MMSD Water Drop Alert (text WATERDROP to 414-296-4422) | watch | fetched | social | A pre-storm "use less water" alert, not an overflow notice; useful as a lead indicator only. |
+| `wi-municipal-sso-notices` | Municipal SSO public notices on city websites (Fremont-Orihula-Wolf River, Hortonville, Fox Crossing, Menomonie, Stoughton Utilities, Oconomowoc Utilities, Fennimore, Town of Greenville) | watch | search_only | events | Proves notices exist on the web, scattered across hundreds of municipal sites; not worth individual ingesters. |
+| `wi-epa-sobe` | EPA SOBE event tables, Wisconsin permits | rejected | fetched | events | Rechecked 2026-11-14: Wisconsin permittees report through the DNR's Switchboard; no Wisconsin report reaches EPA's event tables. Watched in the register. |
+| `wi-wdnr-sso-report-page` | WDNR Sanitary Sewer Overflow reporting page | rejected | fetched | events | Submission instructions only; Switchboard is a permittee login. No WDNR public overflow data found. |
+| `wi-superior-cso` | City of Superior Sewage Disposal System CSO notification | unreachable | prior_inventory_only | events | The City's CSO page exists (2026-11-09) but did not answer on 2026-11-14 and has shown no filled row to build a reader on; registered as a watched channel. |
+| `wi-wdnr-beach-health` | WDNR Wisconsin Beach Health: advisories map layer and Beach Advisory Reports | unreachable | fetched | advisories | Wisconsin Beach Health and its map layer (apps.dnr.wi.gov, dnrmaps.wi.gov) did not answer the build's client on 2026-11-14 (connection timed out; a second network refused); its fields and keys could not be read, so no reader was built. Registered as watched channels. |
+| `wi-wdnr-brrts-closed-spills` | WDNR BRRTS on the Web search (closed spill incidents) | unreachable | prior_inventory_only | events | Where SERTS incidents go when they close; not reachable on 2026-11-14 and no query tested. |
+| `wi-wdnr-serts-open-spills` | WDNR SERTS open spill incidents list | unreachable | prior_inventory_only | events | Statewide mixed-spill list with some sewage incidents; unreachable from the build on 2026-11-14 and its export untested, so no reader was built. Registered as a watched channel. |

@@ -1,0 +1,26 @@
+id: "wi-mmsd-cso-impacted-waters"
+name: "MMSD CSO impacted waters map (potentially impacted waterways and public access locations)"
+url: "https://www.mmsd.com/about-us/milwaukee-rain-facility-information/cso-impacted-waters"
+homepage: "https://www.mmsd.com/about-us/milwaukee-rain-facility-information/cso-impacted-waters"
+kind: "arcgis"
+level: "utility"
+# Notes (research/wi, status used, verified fetched, checked 2026-11-03): The operator's own
+#   affected-area polygon under 40 CFR 122.38(c); usable as the official affected area for every
+#   MMSD CSO.
+# Access detail (research, quoted): Web map 3754385c3db148b88ae45adf7bacc2cd; layers
+#   https://services1.arcgis.com/SuEt4jqH31FZKNYY/arcgis/rest/services/CSO_Impacted_Waterways/FeatureServer/0
+#   (polygon) and CSO_Impacted_Locations/FeatureServer/0 (points: Name, Type e.g. "Kiwanis
+#   Landing","Boat Launch"); edited 2023-03-28.
+# Can fill: geometry (official affected area)
+cadence: null
+license: "none stated"
+attribution: "Milwaukee Metropolitan Sewerage District"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["WI"]
+access: ["arcgis"]
+access_detail: "Web map 3754385c3db148b88ae45adf7bacc2cd; layers https://services1.arcgis.com/SuEt4jqH31FZKNYY/arcgis/rest/services/CSO_Impacted_Waterways/FeatureServer/0 (polygon) and CSO_Impacted_Locations/FeatureServer/0 (points: Name, Type e.g. \"Kiwanis Landing\",\"Boat Launch\"); edited 2023-03-28."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-03"

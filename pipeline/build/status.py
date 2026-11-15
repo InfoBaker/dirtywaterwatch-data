@@ -160,6 +160,7 @@ REGISTRY_YIELDS_TO_NAMED_WATER = True
 # names with the permit's open registry outfalls on that water (Resolver.named_water_outfalls), so their reaches are
 # coloured (Oregon: Portland's CSO advisories; go-live audit 2026-11-08 P1-1)
 NAMED_WATER_OUTFALL_STATES = {"OR"}
+NAMED_WATER_OUTFALL_STATES.add("WI")  # Wisconsin: MMSD's Storm Update posts name a water (Lincoln Creek), never an outfall
 # rules.placement.no_outfall_all_waters (data/rules.json, a switch): a CSO report that names no water and no outfall
 # is placed on every water its permit's registry outfalls reach (a permit the registry lacks: every receiving water
 # data/dischargers.json lists, CSO reports only since review 2026-11-03 P3-1), with this note
@@ -1071,6 +1072,8 @@ COUNTY_LIST_STATES = {"MO"}    # raw.counties, an operator's several counties (K
 COUNTY_STATES["KS"] = "ks-counties.json"       # Kansas: Leavenworth's and KDHE's reports give a county; HAB lakes a point
 COUNTY_FIELD_STATES.add("KS")
 COUNTY_STATES["AR"] = "ar-counties.json"; COUNTY_FIELD_STATES.add("AR")   # Arkansas: DEQ reports give no point; raw.county is the permit plant's
+COUNTY_STATES["WI"] = "wi-counties.json"       # Wisconsin: MMSD's posts give no point, only their county
+COUNTY_FIELD_STATES.add("WI")    # (Milwaukee): a name is placed only on a record reaching that county (Astra P2-9)
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}
