@@ -212,7 +212,7 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 92 permits, January 2025 to October 2026, a median 24 days after the month. Month precision: the monthly mark only.",
+  "status_reason": "Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 91 permits, January 2025 to October 2026, received by EPA a median 24 days after the month. Month precision: the monthly mark only.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "notes": ""
