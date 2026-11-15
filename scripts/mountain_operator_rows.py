@@ -127,10 +127,6 @@ def form(name: str, facility_type: str | None, tribal_words: re.Pattern | None =
         return "homeowners' association"
     if re.search(r"mobile home|\bmhp\b|mobile manor|manufactured home", n):
         return "mobile-home park"
-    if re.search(r"\bresort\b|\bcampground\b|\brv park\b|\blodge\b", n):
-        return "campground or resort"
-    if re.search(r"\bclub\b", n) and not re.search(r"district", n):
-        return "private club"
     if re.search(r"\bschool dist|school district|public schools|\bre-?\d|\bsd\b", n):
         return "special district"
     if re.search(r"\bauthority\b|joint powers|joint sewer|\bboard of public utilities\b|utilities commission|"
@@ -138,6 +134,13 @@ def form(name: str, facility_type: str | None, tribal_words: re.Pattern | None =
         return "authority"
     if re.search(r"\bdistrict\b|\bmetropolitan\b", n):
         return "special district"
+    if re.search(r"water and sewer|sewer and water|water-sewer|water sewer", n):
+        return "special district"
+    if re.search(r"\bresort\b|\bcampground\b|\brv park\b|\blodge\b", n) and not re.search(
+            r"\b(city|town|county) of\b|\bcounty\b", n):
+        return "campground or resort"
+    if re.search(r"\bclub\b", n):
+        return "private club"
     if re.search(r"\bcounty\b|commissioners", n):
         return "county"
     if re.search(r"^town of\b|\btown\b", n):
