@@ -377,3 +377,29 @@ def test_a_returning_closure_is_a_new_episode_and_a_cited_point_places_it(tmp_pa
     assert again["status"] == "advisory_active" and again["started_at"] == "2026-11-16T12:00:00Z"
     p = recs["sb901"]
     assert (p["lat"], p["lon"]) == (35.1, -93.1) and "_placement" not in p["raw"] and "unplaced_reason" not in p["raw"]
+
+
+@pytest.mark.parametrize("bad", [
+    "<h2>Closed Swim Beaches</h2><ul></ul><h2>Rules</h2>",                    # an empty list
+    "<h2>Closed Swim Beaches</h2><h2>Rules</h2><ul><li>SB901 - Example Point West</li></ul>",  # moved past a heading
+    "<h2>Closed Swim Beaches</h2>",                                           # truncated at the heading
+    "<h2>Closed Swim Beaches</h2><ul>",                                       # truncated inside the list
+])
+def test_an_empty_truncated_or_moved_list_ends_nothing(tmp_path, monkeypatch, bad):
+    out = tmp_path / "adh.json"
+    assert B.main(["--file", str(FIX / "ar_adh_swim_beaches.html"), "--out", str(out), "--at", "2026-11-14T12:00:00Z"]) == 0
+    saved = []
+    monkeypatch.setattr(B, "save_raw", lambda *a, **k: saved.append(a))
+    p = tmp_path / "bad.html"
+    p.write_text(f"<html><body><main>{bad}</main></body></html>")
+    assert B.main(["--file", str(p), "--out", str(out), "--at", "2026-11-15T12:00:00Z"]) == 1
+    doc = json.loads(out.read_text())
+    assert doc["ok"] is False and {r["status"] for r in doc["records"]} == {"advisory_active"} and not saved
+    with pytest.raises(ValueError):
+        B.read(B.list_lines(bad))
+    # an explicit statement ends the closures, at that read (poll precision)
+    p.write_text("<html><body><main><h2>Closed Swim Beaches</h2><ul><li>None</li></ul><h2>Rules</h2></main></body></html>")
+    assert B.main(["--file", str(p), "--out", str(out), "--at", "2026-11-16T12:00:00Z"]) == 0
+    recs = json.loads(out.read_text())["records"]
+    assert {r["status"] for r in recs} == {"advisory_lifted"}
+    assert all(r["ended_at"] == "2026-11-16T12:00:00Z" and r["raw"]["ended_at_precision"] == "poll" for r in recs)
