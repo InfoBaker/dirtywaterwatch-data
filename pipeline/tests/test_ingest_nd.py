@@ -285,6 +285,9 @@ def test_operators_hold_every_north_dakota_plant_permit_once():
 def test_register_rows_name_the_bot_wall_and_the_feeds():
     reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nd.json").read_text())["channels"]}
     for r in ops():
+        if r.get("permit_only"):
+            assert f"{r['id']}-spill-report" not in reg                    # no operator row for a permit-only row
+            continue
         row = reg[f"{r['id']}-spill-report"]
         assert row["barrier"] == "bot_wall" and row["monitored"] is False
     assert reg["nd-hazconnect-public-incidents"]["barrier"] == "bot_wall"
@@ -381,13 +384,19 @@ def test_p1_6_archive_free_text_is_scrubbed_before_saving():
     assert "701-555-0142" not in out and "1234 Example" not in out
 
 
-def test_p2_3_a_plant_name_gets_no_legal_form_and_outfalls_are_rows_with_an_outfall():
-    by = {r["name"]: r for r in ops()}
-    assert by["New Town Water Resource Recovery Facility"]["legal_form"] is None
+def test_p2_3_a_plant_name_is_a_permit_only_row_and_outfalls_are_eligible_rows():
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import icis_operators as I
+    by = {r["id"]: r for r in ops()}
+    nt = by["nd-new-town-water-resource-recovery-facility"]
+    assert nt["permit_only"] is True and nt["legal_form"] is None and nt["name"].startswith("Permit NDG")
     plants = json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
     for r in ops():
+        if r["kind"] == "cso":
+            continue
         rows = [x for x in plants if x.get("npdes_permit") in r["npdes_permits"]]
-        n = sum(1 for x in rows if x.get("outfall"))
+        n = sum(1 for x in rows if I.outfall_eligible(x)[0])
         assert r["outfall_count"] == (n or None)
 
 
@@ -544,3 +553,34 @@ def test_p2_1_a_returning_posting_keeps_its_gap_through_status(monkeypatch):
     row["date"] = "2026-08-20"                                         # reposted with a new date: a new posting
     r4 = read("2026-08-21T18:00:00Z", r3)
     assert len(r4) == 3 and any(r["started_at"] == "2026-08-20" and r["status"] == "advisory_active" for r in r4)
+
+
+# ---------------------------------------------------------------- re-review 2026-11-14 P2-4: the split counties
+
+@pytest.mark.parametrize("lat,lon,county,zone", [
+    (47.8, -103.8, "McKenzie County", zones.MOUNTAIN), (47.8, -102.8, "McKenzie County", zones.CENTRAL),
+    (46.0, -101.8, "Sioux County", zones.MOUNTAIN), (46.0, -100.9, "Sioux County", zones.CENTRAL)])
+def test_p2_4_a_point_in_a_split_county_is_read_on_its_side_of_the_line(lat, lon, county, zone):
+    assert zones.nd_point_county(lat, lon) == county
+    for given in (county, None):                       # the county given by the source, or found from the point
+        z, basis = zones.north_dakota_zone(given, lat, lon)
+        assert z == zone and "side" in basis and "NTAD" in basis
+        assert zones.north_dakota_zone_uncertain(given, lat, lon) is False
+
+
+def test_p2_4_a_county_only_record_states_that_its_zone_is_assumed():
+    z, basis = zones.north_dakota_zone("Sioux County")
+    assert z == zones.MOUNTAIN and "not known" in basis and zones.north_dakota_zone_uncertain("Sioux County")
+    assert not zones.north_dakota_zone_uncertain("Stark County") and not zones.north_dakota_zone_uncertain("Cass")
+    rows, _ = L.parse_page((FIX / "legacy-search-sample.html").read_text())
+    row = dict(next(r for r in rows if L.keep(r) and r["latitude"]))
+    east = L.record(dict(row, county="McKenzie", latitude="47.8", longitude="-102.8"), FETCHED)
+    assert east["raw"]["time_zone"] == zones.CENTRAL and "time_zone_uncertain" not in east["raw"]
+    blind = L.record(dict(row, county="McKenzie", latitude="", longitude=""), FETCHED)
+    assert blind["raw"]["time_zone"] == zones.MOUNTAIN and blind["raw"]["time_zone_uncertain"] is True
+
+
+def test_p2_4_other_states_clocks_are_unchanged():
+    for st, lat, lon in (("NE", 41.25, -96.0), ("TN", 36.16, -86.78), ("FL", 30.44, -84.28), ("OR", 45.52, -122.68)):
+        assert zones.zone_for(st, lat, lon) == {"NE": zones.CENTRAL, "TN": zones.CENTRAL, "FL": "America/New_York",
+                                                "OR": "America/Los_Angeles"}[st]

@@ -26,7 +26,10 @@ Record rules
   - started_at: Date Incident, precision day; reported_at: Date Reported, precision day; no end (the table gives none;
     "Contained" is DEQ's containment flag, kept in raw.contained, never an end); status unknown. The archive is a
     record of the past: these reports are history, coloured by nothing today.
-  - Clock: raw.time_zone from the county (pipeline/zones.py north_dakota_zone, 49 CFR 71.7(a)).
+  - Clock: raw.time_zone from the county (pipeline/zones.py north_dakota_zone, 49 CFR 71.7(a)); in McKenzie and Sioux
+    counties, which the line splits, from the side of the line the row's point lies on (USDOT/BTS NTAD, data/reference/
+    nd-split-county-zones.json); a split-county row with no point is read in Mountain time and marked
+    raw.time_zone_uncertain (re-review 2026-11-14 P2-4).
   - Volume: gallons as given; barrels (DEQ: "One barrel = 42 US gallons") converted, raw.volume_as_given keeps the
     figure; a blank volume is unknown, never zero.
   - Place: the row's point, rounded to 0.001 degree before anything is saved; a septic system's or on-site housing's
@@ -154,13 +157,19 @@ def record(row: dict, fetched: str) -> dict:
     r = safe_row(row)
     c = r["contaminant"] or ""
     et = "plant_bypass" if TREATED.search(c) else "sso"
-    tz, basis = zones.north_dakota_zone(r["county"] or None)
+    # the zone from the county and, in McKenzie or Sioux County, the side of the line the point lies on (the row's own
+    # point, rounded, used here even when it is withheld from the record; re-review 2026-11-14 P2-4)
+    plat, plon = _num(row.get("latitude")), _num(row.get("longitude"))
+    plat, plon = (round(plat, 3), round(plon, 3)) if plat is not None and plon is not None else (None, None)
+    cty = f"{r['county']} County" if r["county"] else None
+    tz, basis = zones.north_dakota_zone(cty, plat, plon)
     vol, unit = _num(r["volume"]), (r["units"] or "").strip().lower()
     gal = None
     if vol is not None and vol > 0:
         gal = vol * BARREL_GAL if unit.startswith("barrel") else vol if unit.startswith("gallon") else None
     raw = {"row": r, "state": "ND", "county": f"{r['county']} County" if r["county"] else None,
            "time_zone": tz, "time_zone_basis": basis, "contained": r["contained"] or None,
+           **({"time_zone_uncertain": True} if zones.north_dakota_zone_uncertain(cty, plat, plon) else {}),
            "contained_note": "DEQ's containment flag; not an end time and not a statement about any water",
            "_type_basis": f"the contaminant as written: {c!r}",
            "archive_note": ("DEQ's archive of incident reports from 1975 to 2020; reports since 2021 are in the state's "
