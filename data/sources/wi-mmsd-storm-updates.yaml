@@ -14,9 +14,11 @@ level: "operator"
 #   a water). 18 carry MMSD's volume; 3 a stated start and end to the minute; 3 name a water (Lincoln Creek twice,
 #   the four separate sewer overflows of September 11-12, 2022).
 # Times: the post's own stamp (Milwaukee time) is the publication; the start is the date or time the post states, the
-#   storm's last day is kept apart (raw.period_end) and is never the end. Posted 1 to 10 days after the overflow began
-#   (median 5 days over the 21 posts): the September 3, 2026 overflow on September 8, the August 1 overflow on August 6.
-#   A report dated to the day with no end gets the site's 72-hour caution from that day (unresolved.day_start_caution),
+#   storm's last day is kept apart (raw.period_end) and is never the end. 11 of the 21 posts give the overflow's own
+#   date or start: posted 1 to 6 days after it (median 4); the other 10 give only the storm's dates (raw.started_after,
+#   no start). The September 3, 2026 overflow was posted on September 8, the August 1 overflow on August 6.
+#   A report dated to the day with no end gets the site's 72-hour caution from that day (unresolved.day_start_caution);
+#   one with only the storm's dates is counted from its publication (14 days, then end not confirmed),
 #   so by the time a post appears its caution has usually run; the record stays in the water's history.
 # Placement: a combined sewer overflow that names no water is shown on every water MMSD's permitted outfalls discharge
 #   to (placement.no_outfall_all_waters); one that names a water on that water with the permit's outfalls there. A
@@ -26,7 +28,7 @@ level: "operator"
 #   municipalities' own overflows named in a post are kept as text on MMSD's record, not as their records.
 # Privacy: only titles, stamps, letter links and the article lines (cut at MMSD's standing advice block) are kept;
 #   telephone numbers, e-mails and house numbers are removed.
-cadence: "Posted with MMSD's five-day letter to the DNR, one to ten days (median five) after each overflow of the regional system or spill; no RSS."
+cadence: "Posted with MMSD's five-day letter to the DNR, one to six days (median four, over the 11 posts that date the overflow itself) after each overflow of the regional system or spill; no RSS."
 license: "none stated; site copyright MMSD"
 attribution: "Milwaukee Metropolitan Sewerage District"
 enabled: true

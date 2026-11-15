@@ -9,7 +9,7 @@ Source
   is often a scanned image and is not read here). The posts are MMSD's own words: an operator's report, not a verdict
   on the water. The duty behind them: s. NR 210.21(5), Wis. Adm. Code (public notice of every overflow "promptly") and,
   for the combined sewer outfalls, 40 CFR 122.38 (Great Lakes Basin notice within four hours, which MMSD meets by other
-  channels if at all: the post itself comes with the letter, five days or so after the overflow).
+  channels if at all: the post itself comes with the letter, one to six days after the overflow where the post dates it).
   The full list read on 2026-11-14: 71 pages, 281 posts since 2016, of which 21 are read: 18 Storm Updates or overflow
   letters and 3 spill or release notices (2018-06-22 to 2026-09-08), giving 29 records (13 cso, 14 sso, 2 plant_bypass).
   The September 3, 2026 overflow was posted September 8; the August 1, 2026 overflow August 6.
@@ -35,11 +35,13 @@ Record rules (rules only: no model, no geocoding)
     come from a combined sewer outfall) with the basis stated, never left unknown.
   - Times, America/Chicago (Milwaukee; raw.time_zone): the post's own stamp ("08/06/26 09:00:am") is published_at.
     reported_at stays null (the post gives the letter's subject, not its receipt date). started_at: a stated start
-    ("started at 5:55 pm on April 2, 2024"; "around 10:00 a.m. on 9-3-26"), precision minute; else the first day of the
-    dates the title or the opening sentence gives ("August 1st, 2026", "Aug 9-10, 2025", "April 1 thru 4, 2024",
-    "February 27 to March 1st, 2023", "8-20-18", "starting on 3/14/2019"), precision day; a date with no year takes the
-    post's year, or the year before when that would put it after the post. The last day of a stated range is kept as
-    raw.period_end (the storm's dates, never the overflow's end). ended_at only from a stated end ("ended at 8:10 pm on
+    ("started at 5:55 pm on April 2, 2024"; "around 10:00 a.m. on 9-3-26"), precision minute, when the nearest cue before
+    the time is a start and not an end ("ended at 2:00 pm on June 2" is never a start); else the day a sentence about
+    that overflow gives ("A combined sewer overflow occurred on June 1, 2027"), precision day. The dates the title or
+    the opening sentence give for the storm ("August 1st, 2026", "Aug 9-10, 2025", "8-20-18") are not the overflow's
+    start: they are kept as raw.period_start / raw.period_end and raw.started_after (a lower bound), started_at stays
+    null and the status engine counts from the post's publication (Astra re-review 2026-11-15 P1-2). A date with no
+    year takes the post's year, or the year before when that would put it after the post. ended_at only from a stated, completed end ("ended at 8:10 pm on
     April 4, 2024"; "ended on March 1st, 2023, at 8:00 am"; "began on January 6 at around 11:25 PM and continued until
     2:22 AM on January 7, 2026"): raw.ended_at_precision minute, status ended. A stated time belongs to the overflow its
     own sentence names; a sentence naming none gives it only when the post reports one type. A date with no year in a
@@ -77,13 +79,16 @@ page); later runs read two pages (eight posts, months of news); records already 
 because a post scrolled off. A post is read again when its stamp or
 title changes.
 
-Privacy: only the candidate posts' list items (titles scrubbed) and each one's stamp, letter links and article lines are
-kept; the article is cut at MMSD's standing advice block ("Text WATERDROP ...") or at a contact line ("Questions:",
+Privacy: only the candidate posts' list items (titles scrubbed) and each one's stamp, letter links and the article's
+evidence sentences (project(): a type, a volume, a date, a water; nothing else, no signature) are kept; people named
+in the text ("Director Pat Example", "said ...") are cut (scrub_names), a link label that is not about the letter
+becomes "letter", a point in the text is rounded to three decimals; the article is cut at MMSD's standing advice block ("Text WATERDROP ...") or at a contact line ("Questions:",
 "Media contact"), so the people named there are never kept, and telephone numbers and e-mails are scrubbed (common.scrub_text), house numbers
 removed (common.strip_house_numbers). data/raw keeps that safe document only.
 
 Failures: a list page that cannot be read writes ok=False and keeps the previous records; a post that cannot be read is
-read again next run.
+read again next run, its earlier records kept as they were, while the posts read well in the same run are written at
+once (ok=False, last_ok_at unchanged: common.write_events partial=True).
 
 Run from pipeline/:  python -m ingest.wi_mmsd_storm_updates [--pages 2] [--file saved.json]
 """
@@ -146,19 +151,41 @@ START_RX = [
     re.compile(rf"\bstarted\s+(?:at\s+)?(?:approximately\s+)?{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\b(?:around|approximately|at)\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
 ]
+# an end only from words saying the overflow did end ("ended at", "continued until"): "will continue until" and the
+# like are not ends (Astra re-review 2026-11-15 P1-3); NEGATED also refuses the clause
 END_RX = [
-    re.compile(rf"\buntil\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
+    re.compile(rf"\b(?:continued|lasted|ran|persisted)\s+until\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\bended\s+at\s+{CLOCK}\s+on\s+(?P<d>{ANY_DATE})", re.I),
     re.compile(rf"\bended\s+on\s+(?P<d>{ANY_DATE}),?\s+at\s+{CLOCK}", re.I),
 ]
+
+# the last cue before a time says whose time it is: "ended at 2:00 pm on June 2" is never a start (Astra re-review
+# 2026-11-15 P1-2)
+START_CUE = re.compile(r"\b(?:began|begin\w*|start\w*|occurred|occured|took place|triggered|initiated)\b", re.I)
+END_CUE = re.compile(r"\b(?:ended|ending|end|until|stopped|ceased|concluded|lasted|continued)\b", re.I)
+
+
+def _start_owned(text: str, m: re.Match) -> bool:
+    """True when the nearest cue before the time m is a start cue, not an end cue."""
+    pre = text[:m.start()] + text[m.start():m.end()].split(m.group("h"), 1)[0]
+    s = [x.end() for x in START_CUE.finditer(pre)]
+    e = [x.end() for x in END_CUE.finditer(pre)]
+    return bool(s) and (not e or max(s) > max(e))
+
 
 TYPE_WORDS = {"cso": re.compile(r"combined sewer overflows?|\bcsos?\b", re.I),
               "sso": re.compile(r"(?:separate|sanitary) sewer overflows?|\bssos?\b|(?:sanitary )?sewer release|"
                                 r"sewage release", re.I),
               "plant_bypass": re.compile(r"treatment plant (?:wastewater )?spill|wastewater spill", re.I)}
 # a statement that something did not happen, might happen or was prevented is not a report of an overflow
-NEGATED = re.compile(r"\b(?:no|not|never|without|zero|none|neither|nor|if|may|might|could|would|possible|potential|"
-                     r"potentially|forecast\w*|expected|avoid\w*|prevent\w*)\b", re.I)
+# "May 1, 2027" is a month, not a modal (Astra re-review 2026-11-15 P1-1)
+NEGATED = re.compile(r"\b(?:no|not|never|without|zero|none|neither|nor|if|unless|may(?!,?\s+\d)|might|could|would|"
+                     r"should|shall|will|possible|potential|potentially|forecast\w*|expected|scheduled|anticipated|"
+                     r"projected|avoid\w*|prevent\w*)\b", re.I)
+# a sentence is read clause by clause: "a combined sewer overflow occurred ..., but no separate sewer overflow occurred"
+# reports the first and denies the second (Astra re-review 2026-11-15 P1-1)
+CLAUSE = re.compile(r",?\s+(?:but|however,?|whereas|while)\s+|;\s*|,?\s+and\s+(?=(?:no|not|there was no|there were no)\b)",
+                    re.I)
 # the post says the sewage reached no water ("No wastewater entered Lake Michigan or nearby rivers")
 NO_WATER = re.compile(r"\bno (?:wastewater|sewage|overflow)\b[^.]{0,40}\b(?:entered|reached|went into|flowed into)\b[^.]*", re.I)
 # contact and media lines: the people named in them are not kept
@@ -171,6 +198,7 @@ LOCAL = re.compile(r"local (?:and regional )?sewer systems?|systems? that are ow
 REPORT_CUE = re.compile(r"\b(?:took place|occurred|occured|occurring|started|began|led to|spill\w*|initiated|resulted|"
                         r"reporting|reported|"
                         r"regarding|estimated|volume)\b|:\s*\d", re.I)
+SPILL_CUE = re.compile(r"\b(?:spill\w*|releas\w*|discharg\w*|overflow\w*)\b", re.I)
 GENERIC_OVERFLOW = re.compile(r"\b(?:sewer )?overflows?\b", re.I)
 VOL = r"(?P<n>\d[\d,]*(?:\.\d+)?)\s*(?P<u>million|billion)?\s*gallons"
 LABELLED = re.compile(
@@ -212,12 +240,53 @@ def slug_of(url: str) -> str:
 
 
 DATE_GLUE = re.compile(rf"\b({MON})\s+(?=\d)", re.I)
+# people named in a post's own words (Astra re-review 2026-11-15 P1-6): a name after a role or title ("Director Pat
+# Example", "Mr. Example"), after or before a speech verb ("said Pat Example", "Pat Example said"), or before a role
+# ("Pat Example, district engineer"); each becomes [name removed]. Names are capitalised words; roles any case.
+ROLE = (r"(?:executive\s+director|deputy\s+director|director|manager|engineer|spokes(?:person|man|woman)|commissioner|"
+        r"chief|superintendent|mayor|alder(?:man|woman|person)?|supervisor|president|chair(?:man|woman|person)?|ceo|"
+        r"officer|coordinator|specialist|dr|mr|mrs|ms|mx)\.?")
+PNAME = r"(?:[A-Z][a-z'’-]+|[A-Z]\.)(?:\s+(?:[A-Z][a-z'’-]+|[A-Z]\.)){0,3}"
+NAME_RX = [
+    (re.compile(rf"\b(?i:{ROLE})\s+{PNAME}"), "[name removed]"),
+    (re.compile(rf"\b(said|says|according to|stated by|quoted)\s+{PNAME}"), r"\1 [name removed]"),
+    (re.compile(rf"\b{PNAME}\s+(?=(?:said|says|stated|explained|noted|added|told)\b)"), "[name removed] "),
+    (re.compile(rf"\b{PNAME},\s+(?=(?:an?\s+|the\s+|MMSD'?s?\s+)?(?:[\w-]+\s+){{0,3}}(?i:{ROLE})\b)"), "[name removed], "),
+]
+# a private point in the text is cut to three decimals, as every report point is
+COORD = re.compile(r"(-?\d{1,3}\.\d{4,})(\s*,\s*)(-?\d{1,3}\.\d{4,})")
+
+
+def scrub_names(s: str) -> str:
+    for rx, rep in NAME_RX:
+        s = rx.sub(rep, s)
+    return s
 
 
 def safe_line(s: str) -> str:
-    """Phones and e-mails scrubbed, house numbers removed; a month's day ("June 18 at 35th St.") is not a house number."""
+    """Phones and e-mails scrubbed, house numbers removed, people's names cut, a point rounded to three decimals; a
+    month's day ("June 18 at 35th St.") is not a house number."""
     glued = DATE_GLUE.sub(lambda m: m.group(1) + "\u2060_", s)
-    return strip_house_numbers(scrub_text(glued)).replace("\u2060_", " ")
+    s = strip_house_numbers(scrub_text(glued)).replace("\u2060_", " ")
+    s = COORD.sub(lambda m: f"{round(float(m.group(1)), 3)}{m.group(2)}{round(float(m.group(3)), 3)}", s)
+    return scrub_names(s)
+
+
+# the minimal factual projection kept of an article (Astra re-review 2026-11-15 P1-6): only the sentences that can carry
+# a report (a type, an overflow, spill or release, a volume, a date or time, a water reached or not); signatures,
+# quotes about other things, and other prose are not kept, in raw storage or anywhere else
+EVIDENCE = re.compile(rf"overflow|spill|releas|discharg|bypass|wastewater|sewage|gallons|\bcsos?\b|\bssos?\b|"
+                      rf"\b{MON}\s+\d|\d{{1,2}}[/-]\d{{1,2}}[/-]\d{{2}}|\b\d{{1,2}}(?::\d\d)?\s*[ap]\.?\s*m\b|"
+                      rf"creek|river|lake|harbor|canal", re.I)
+LABEL_OK = re.compile(r"overflow|spill|releas|letter|report|\bdnr\b|notice|\bcsos?\b|\bssos?\b", re.I)
+
+
+def project(line: str) -> str:
+    """The sentences of a line that carry evidence, joined; '' when none does."""
+    t = re.sub(r"\b([ap])\.m\.", r"\1m", line)
+    t = re.sub(r"\b(St|Ave|No|Dr|Mt|U\.S)\.", r"\1", t)
+    keep = [x for x in re.split(r"(?<=[.!?])\s+(?=[A-Z(\"“])", t) if EVIDENCE.search(x)]
+    return " ".join(keep)
 
 
 def page_doc(content: bytes | str) -> dict | None:
@@ -241,11 +310,14 @@ def page_doc(content: bytes | str) -> dict | None:
             break                       # MMSD's standing advice block, or a contact block naming people
         for m in re.finditer(r'<a\s[^>]*href="([^"]*download_file[^"]*)"[^>]*>(.*?)</a>', block, re.S | re.I):
             label = safe_line(_words(re.sub(r"<[^>]+>", " ", m.group(2))))
+            label = label if LABEL_OK.search(label or "") else "letter"     # a label that is not about the letter
             if label and {"url": m.group(1), "label": label} not in letters:
                 letters.append({"url": m.group(1), "label": label})
         lines.append(safe_line(w))
     stamp = next((x for x in lines[:4] if STAMP.match(x)), None)
-    body = [x for x in lines if x != stamp]
+    rest = [x for x in lines if x != stamp]
+    # the title line (the page title block, first) is kept as it is (scrubbed); the article below it is projected
+    body = rest[:1] + [y for y in (project(x) for x in rest[1:]) if y]
     # a post is read only when it has its stamp and a line of text below its title: an error or holding page that
     # keeps the title container ("Temporarily unavailable") is not a revision of the post (Astra review P1-3)
     if stamp is None or len(body) < 2:
@@ -344,6 +416,11 @@ def sentences(text: str) -> list[str]:
     return [_words(p) for p in parts if _words(p)]
 
 
+def clauses(sentence: str) -> list[str]:
+    """A sentence's clauses: each is read on its own for occurrence, denial and times."""
+    return [c.strip() for c in CLAUSE.split(sentence) if c and c.strip()]
+
+
 def _gal(m: re.Match) -> int:
     n = float(m.group("n").replace(",", ""))
     u = (m.group("u") or "").lower()
@@ -355,9 +432,12 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     per type, and the bases."""
     pub = stamp_time(doc.get("stamp"))
     ref = pub.date() if pub else _list_date(list_date)     # never the clock of the machine reading it
-    lines = doc.get("lines") or []
+    # the title repeated as the article's first line is not evidence: a stamped holding page keeps it, and a spill
+    # title would otherwise report itself (Astra re-review 2026-11-15 P1-1, P1-4)
+    tkey = _words(title).lower()
+    lines = [x for x in doc.get("lines") or [] if _words(x).lower() != tkey]
     body = "\n".join(lines)
-    sents = sentences(body)
+    sents = [c for x in sentences(body) for c in clauses(x)]
     lede = " ".join(sents[:3])
     per = period(title, ref) or period(lede, ref)
     facts = {"published": pub, "period": per, "types": {}, "local": [], "no_water": None}
@@ -412,9 +492,12 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                 if len(figs2) == 1 and not NEGATED.search(nxt) and not any(rx.search(nxt) for rx in TYPE_WORDS.values()):
                     x["volume"], x["volume_text"] = _gal(figs2[0]), _words(figs2[0].group(0))
     # a spill or release post whose title names it ("Treatment Plant Spill January 7, 2026")
+    # only when the article itself reports a spill or release (a title alone is no evidence: "No wastewater spill
+    # occurred" or a holding page makes no record; Astra re-review 2026-11-15 P1-1, P1-4)
+    body_says = next((x for x in sents if affirmative(x) and SPILL_CUE.search(x)), None)
     for t in ("plant_bypass", "sso"):
-        if TYPE_WORDS[t].search(title) and not NEGATED.search(title) and not types:
-            add(t, f"MMSD's post is titled \"{title}\"")
+        if TYPE_WORDS[t].search(title) and not NEGATED.search(title) and not types and body_says:
+            add(t, f"MMSD's post is titled \"{title}\" and reports: \"{body_says[:240]}\"")
     # the letters' own labels ("DNR Letter for: Combined Sewer Overflow / Separate Sewer Overflows")
     reported = any(affirmative(x) and (GENERIC_OVERFLOW.search(x) or any(r.search(x) for r in TYPE_WORDS.values()))
                    for x in sents[:6])
@@ -480,6 +563,8 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                     continue
                 for rx in rxs:
                     m = rx.search(x)
+                    if m and key == "start" and not _start_owned(x, m):
+                        m = None
                     d = parse_date(m.group("d"), ref) if m else None
                     if d:
                         types[t][key] = (_at(d, m), m.group(0))
@@ -530,15 +615,17 @@ def records_for(item: dict, doc: dict, fetched_at: str) -> list[dict]:
             start, sprec = x["day"][0].isoformat(), "day"
             raw["start_basis"] = f"the date the post's sentence about this overflow gives (\"{x['day'][1]}\")"
         elif per:
-            start, sprec = per[0].isoformat(), "day"
-            raw["start_basis"] = (f"the first day of the dates the post gives for the storm (\"{per[2]}\"); the post "
-                                  "gives no date of its own for this overflow, so it began on or after this day")
+            # the storm's dates are not the overflow's start: kept as the period and a lower bound only, so the status
+            # engine counts from the post's own report time (Astra re-review 2026-11-15 P1-2)
+            raw["started_after"] = per[0].isoformat()
+            raw["start_basis"] = (f"the post gives the storm's dates (\"{per[2]}\") and no start of its own for this "
+                                  "overflow: it began on or after raw.started_after; no start is recorded")
         else:
             raw["start_basis"] = "the post states no date for the overflow"
         end = None
-        d0 = date.fromisoformat(start[:10]) if start else None
+        d0 = date.fromisoformat((start or raw.get("started_after") or "")[:10]) if (start or per) else None
         first = x["start"][0] if x["start"] else (datetime(d0.year, d0.month, d0.day, tzinfo=TZ) if d0 else None)
-        if x["end"] and first is not None and x["end"][0] >= first:
+        if x["end"] and (first is None or x["end"][0] >= first):
             end = x["end"][0].isoformat()
             raw["ended_at_precision"], raw["end_basis"] = "minute", f"MMSD's post: \"{x['end'][1]}\""
         if x["waters"]:
@@ -555,7 +642,7 @@ def records_for(item: dict, doc: dict, fetched_at: str) -> list[dict]:
             fetched_at=fetched_at, material=MATERIAL[t], volume_gal=x["volume"], volume_text=x["volume_text"],
             estimate_flag="estimated" if x["volume_text"] else "unknown", authority=AUTHORITY,
             source_url=item["url"], raw=raw,
-            parse_error=None if start else "no overflow date found in the post")
+            parse_error=None if start or per else "no overflow date found in the post")
         out.append(rec)
     return out
 
@@ -702,14 +789,17 @@ def main(argv: list[str] | None = None) -> int:
                            "raw.period_end, never the overflow's end")}
     failed = doc.get("failed") or []
     if failed or stats["posts_without_report"]:
-        # an incomplete read is not a successful one (Astra review P1-4): ok=False keeps the previous file's records
-        # and its last_ok_at; the failed posts are listed for the next run, which reads every post not yet built
+        # an incomplete read is not a successful one (Astra review P1-4): ok=False keeps the previous file's
+        # last_ok_at, and the failed posts are listed for the next run. The records written are this run's: build()
+        # carried every earlier record of a failed post unchanged, and the posts read well are kept now, so one
+        # refused old post never freezes the feed or loses a new post that scrolls off (Astra re-review P1-5)
         why = "; ".join([f"{f.get('slug')}: {f.get('reason')}" for f in failed] +
                         [f"{x}: a stamped page with no report where one stood" for x in stats["posts_without_report"]])
         retry = [{k: f.get(k) for k in ("url", "slug", "title", "list_date")} for f in failed] + \
                 [{k: it.get(k) for k in ("url", "slug", "title", "list_date")} for it in doc.get("items") or []
                  if it.get("slug") in stats["posts_without_report"]]
-        write_events(SOURCE_ID, [], ok=False, error=f"posts not read: {why}"[:800], meta={"retry": retry})
+        write_events(SOURCE_ID, recs, ok=False, error=f"posts not read: {why}"[:800], meta={**meta, "retry": retry},
+                     partial=True)
         print(f"{SOURCE_ID}: incomplete ({why})", file=sys.stderr)
         return 1
     meta["retry"] = []

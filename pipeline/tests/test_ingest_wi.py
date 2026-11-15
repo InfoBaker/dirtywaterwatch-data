@@ -78,7 +78,7 @@ def test_two_types_in_one_post_and_listed_sso_waters():
     assert cso["waterbody_text"] is None
     # the member municipalities' own overflows are kept as text, never as MMSD's records
     assert "Brookfield" in cso["raw"]["local_overflows_text"]
-    assert cso["started_at"] == "2022-09-11" and cso["raw"]["period_end"] == "2022-09-12"
+    assert cso["started_at"] is None and cso["raw"]["started_after"] == "2022-09-11" and cso["raw"]["period_end"] == "2022-09-12"
 
 
 def test_volume_for_both_types_is_not_split():
@@ -97,16 +97,16 @@ def test_volume_sentences_and_reductions():
     assert recs["storm-update-for-september-13-2019:sso"]["volume_gal"] == 41_000
     assert recs["storm-update-for-september-13-2019:cso"]["volume_gal"] == 282_000_000
     assert recs["storm-update-august-26-to-29:cso"]["volume_gal"] == 295_700_000
-    assert recs["storm-update-august-26-to-29:cso"]["started_at"] == "2018-08-26"
+    assert recs["storm-update-august-26-to-29:cso"]["raw"]["started_after"] == "2018-08-26"
 
 
 def test_letter_label_types_and_generic_overflows_never_unknown():
     recs = built()[0]
     assert {"storm-update-july-10-2020-1:cso", "storm-update-july-10-2020-1:sso"} <= set(recs)
     g = recs["letter-to-dnr-about-recent-overflows:sso"]
-    assert g["started_at"] == "2019-03-14" and "general case" in g["raw"]["_type_basis"]
+    assert g["started_at"] is None and g["raw"]["started_after"] == "2019-03-14" and "general case" in g["raw"]["_type_basis"]
     a = recs["mmsd-storm-update-april-2026:sso"]
-    assert a["started_at"] == "2026-04-14" and a["raw"]["period_end"] == "2026-04-18"
+    assert a["started_at"] is None and a["raw"]["started_after"] == "2026-04-14" and a["raw"]["period_end"] == "2026-04-18"
     assert all(r["event_type"] in ("cso", "sso", "plant_bypass") for r in recs.values())
 
 
@@ -298,9 +298,14 @@ def test_register_rows_per_operator_and_the_state_channels():
     assert reg["wi-mmsd-cso-notification-plan"]["barrier"] == "image_only"
     assert reg["wi-mmsd-rain-facility-page"]["records"] is False      # a counter, never an overflow
     assert reg["wi-superior-cso-page"]["monitored"] is True and reg["wi-superior-cso-page"]["records"] is False
-    # pages that can carry staff names are not fetched until a safe-field reader exists (Astra review P1-6)
+    # pages that can carry staff names are watched for availability only, with no text or body kept (Astra review
+    # P1-6; re-review 2026-11-15 P1-7, P2-11), and Milwaukee's beach page's bot wall is a barrier, not worked around
     for cid in ("wi-dnr-serts-open-spills", "wi-dnr-brrts-search", "wi-dnr-beach-health", "wi-dnr-beach-layer"):
-        assert reg[cid]["monitored"] is False and reg[cid]["records"] is False
+        assert reg[cid]["monitored"] is True and reg[cid]["records"] is False and reg[cid]["metadata_only"] is True
+        assert reg[cid]["availability_only"] is True
+    mb = reg["wi-milwaukee-health-beaches"]
+    assert mb["monitored"] is False and mb["unmonitored_reason"] == "bot_wall" and mb["barrier"] == "bot_wall"
+    assert "headers" not in mb
     assert not any(c["barrier"] == "print_only" for c in reg.values())
     named = {c["operator_id"] for c in reg.values() if c.get("legal_basis") and "122.38" in c["legal_basis"]}
     assert {"wi-mmsd", "wi-superior-sewage-disposal-system"} <= named   # every CSO permittee named
@@ -324,7 +329,7 @@ def test_state_text_is_in_the_page_shape_and_its_numbers_match_the_fetch():
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
     # the counts the text gives, re-derived from the fixture's posts where it holds them all (the 2026 posts)
     assert "21 such posts" in t and "29 reports" in t and "13 combined sewer overflows" in t
-    assert "2 spills at treatment plants" in t and "one to ten days" in t and "sends none" not in t
+    assert "2 spills at treatment plants" in t and "one to six days" in t and "sends none" not in t
     reg = json.loads((ROOT / "data" / "notice-channels" / "wi.json").read_text())["channels"]
     assert not [c["id"] for c in reg if "four to ten days" in (c.get("note") or "")]
     assert "331,500 gallons into Lincoln Creek on September 3, 2026, posted on September 8" in t
@@ -454,7 +459,7 @@ def test_r2_p1_2_each_overflow_keeps_its_own_day_in_one_paragraph_or_two():
         assert r["cso"]["started_at"] == "2027-06-01" and r["sso"]["started_at"] == "2027-06-02"
     storm = _recs("MMSD Storm Update June 1-2, 2027", ["MMSD Storm Update June 1-2, 2027",
                                                         "MMSD is reporting sewer overflows that resulted from rain."])
-    assert storm["sso"]["started_at"] == "2027-06-01" and "on or after this day" in storm["sso"]["raw"]["start_basis"]
+    assert storm["sso"]["started_at"] is None and "on or after raw.started_after" in storm["sso"]["raw"]["start_basis"]
     assert storm["sso"]["raw"]["period_end"] == "2027-06-02"
 
 
@@ -475,7 +480,7 @@ def test_r2_p1_4_a_stamped_holding_page_keeps_the_records_and_main_fails_an_inco
     assert "storm-update-august-1st-2026:cso" in {r["source_record_id"] for r in again}
     assert stats["posts_without_report"] == ["storm-update-august-1st-2026"]
     written = {}
-    monkeypatch.setattr(M, "write_events", lambda sid, recs, ok=True, error=None, meta=None: written.update(
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, ok=True, error=None, meta=None, partial=False: written.update(
         ok=ok, error=error, meta=meta) or tmp_path / "x.json")
     monkeypatch.setattr(M, "read_json", lambda *a, **k: {"records": list(recs.values())})
     f = tmp_path / "doc.json"
@@ -511,8 +516,322 @@ def test_r2_p2_10_a_timed_start_with_no_end_gets_14_days_from_its_report_as_the_
     told = datetime(2026, 9, 8, 16, tzinfo=timezone.utc)                  # the post's stamp, 11:00 CDT
     assert (ivs[0]["rule"], ivs[0]["color"], ivs[0]["start"], ivs[0]["end"]) == \
         ("no_end", "yellow", told, told + timedelta(days=14))
-    assert "one with a time but no end shows caution for 14 days from its report" in \
+    assert "one with a time but no end, or with only the storm's dates and none of its own, shows caution for 14 days from its report" in \
         rules["red"]["by_state"]["WI"]["basis"]
     t = (ROOT / "research" / "wi" / "state-text.md").read_text()
     assert "one with a time but no end shows caution for 14 days from its report" in t
     assert "under a Wisconsin permit" in t and "tribal land" in t
+
+
+# ---------------------------------------------------------------- Astra re-review 2026-11-15 (fix/wi-review)
+
+def test_r3_p1_1_occurrence_is_read_per_clause_and_a_month_is_not_a_modal():
+    t = "MMSD Storm Update May 1, 2027"
+    r = _recs(t, [t, "A combined sewer overflow occurred on May 1, 2027."])
+    assert set(r) == {"cso"} and r["cso"]["started_at"] == "2027-05-01"
+    r = _recs(t, [t, "A combined sewer overflow occurred on May 1, 2027, but no separate sewer overflow occurred."])
+    assert set(r) == {"cso"}
+    r = _recs(t, [t, "No combined sewer overflow occurred, but a separate sewer overflow occurred on May 1, 2027."])
+    assert set(r) == {"sso"} and r["sso"]["started_at"] == "2027-05-01"
+    assert _recs(t, [t, "A combined sewer overflow may occur on May 1, 2027."]) == {}
+    # the member municipalities' own overflows are theirs, not MMSD's
+    assert _recs(t, [t, "Separate sewer overflows were reported by local sewer systems that are owned by municipalities."]) == {}
+    # a spill title is not evidence: the body must report the spill
+    s = "Treatment Plant Spill May 1, 2027"
+    assert _recs(s, [s, "No wastewater spill occurred at the plant."]) == {}
+    assert _recs(s, [s, "Temporarily unavailable"]) == {}
+    assert set(_recs(s, [s, "Equipment failure led to an estimated 1,000 gallons of wastewater spilling onto land."])) \
+        == {"plant_bypass"}
+
+
+def test_r3_p1_2_an_end_is_never_a_start_and_a_storm_date_is_not_a_start():
+    from datetime import datetime, timezone
+    t = "MMSD Storm Update June 1-2, 2027"
+    r = _recs(t, [t, "A combined sewer overflow occurred on June 1, 2027.",
+                  "The combined sewer overflow ended at 2:00 pm on June 2, 2027."])["cso"]
+    assert r["started_at"] == "2027-06-01" and r["time_precision"] == "day"
+    assert r["ended_at"] == "2027-06-02T14:00:00-05:00" and r["status"] == "ended"
+    # an end with no start: the end is kept, no start is made from it or from the storm's dates
+    e = _recs(t, [t, "MMSD is reporting sewer overflows that resulted from rain.",
+                  "The sewer overflow ended at 2:00 pm on June 2, 2027."])["sso"]
+    assert e["started_at"] is None and e["ended_at"] == "2027-06-02T14:00:00-05:00"
+    # storm dates only: kept as the period and a lower bound, never as the overflow's start
+    s = _recs(t, [t, "MMSD is reporting sewer overflows that resulted from rain."])["sso"]
+    assert s["started_at"] is None and s["time_precision"] is None
+    assert s["raw"]["period_start"] == "2027-06-01" and s["raw"]["period_end"] == "2027-06-02"
+    assert s["raw"]["started_after"] == "2027-06-01" and s["parse_error"] is None
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    ivs = S.event_intervals(s, "WI", datetime(2027, 6, 6, tzinfo=timezone.utc), rules=rules)
+    told = datetime(2027, 6, 5, 14, tzinfo=timezone.utc)                 # the post's stamp, 09:00 CDT
+    assert ivs and min(iv["start"] for iv in ivs) == told                 # from its report, not the storm's day
+    assert all(iv["rule"] != "day_start_caution" for iv in ivs)
+
+
+def test_r3_p1_3_only_a_completed_end_is_an_end():
+    t = "MMSD Storm Update June 1, 2027"
+    start = "A combined sewer overflow started at 1:00 pm on June 1, 2027."
+    for later in ("The combined sewer overflow will continue until 2:00 pm on June 2, 2027.",
+                  "The combined sewer overflow is scheduled to end at 2:00 pm on June 2, 2027.",
+                  "If rain stops, the combined sewer overflow would end at 2:00 pm on June 2, 2027.",
+                  "The combined sewer overflow is expected to have ended at 2:00 pm on June 2, 2027.",
+                  "The combined sewer overflow has not ended at 2:00 pm on June 2, 2027.",
+                  "The combined sewer overflow should continue until 2:00 pm on June 2, 2027."):
+        r = _recs(t, [t, start, later])["cso"]
+        assert r["ended_at"] is None and r["status"] == "unknown", later
+        assert r["started_at"] == "2027-06-01T13:00:00-05:00", later
+    for done in ("The combined sewer overflow ended at 2:00 pm on June 2, 2027.",
+                 "The combined sewer overflow continued until 2:00 pm on June 2, 2027."):
+        r = _recs(t, [t, start, done])["cso"]
+        assert r["ended_at"] == "2027-06-02T14:00:00-05:00" and r["status"] == "ended", done
+
+
+@pytest.mark.parametrize("slug", ["treatment-plant-spill-january-7-2026", "mmsd-sanitary-sewer-release-march-11-2025",
+                                  "storm-update-september-3rd-2026"])
+def test_r3_p1_4_a_holding_page_under_any_title_keeps_every_field(slug):
+    recs, _ = built()
+    d = doc()
+    item = next(i for i in d["items"] if i["slug"] == slug)
+    d["items"] = [item]
+    d["posts"] = {slug: {"stamp": d["posts"][slug]["stamp"], "letters": [],
+                         "lines": [item["title"], "Temporarily unavailable"]}}
+    again, stats = M.build(d, list(recs.values()), FETCHED)
+    after = {r["source_record_id"]: r for r in again}
+    for k, r in recs.items():
+        if k.startswith(slug + ":"):
+            assert after[k] == r                      # start, end, volume and reached_water as before
+    assert stats["posts_without_report"] == [slug]
+
+
+def _post_html(title, stamp, text):
+    return (f'<h1 class="ccm-block-page-title page-title">{title}</h1><div>{stamp}</div><p>{text}</p>').encode()
+
+
+def test_r3_p1_5_a_failed_old_post_never_freezes_a_new_one(monkeypatch, tmp_path):
+    import common
+    monkeypatch.setattr(M, "PAUSE_S", 0)
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(M, "save_raw", lambda *a, **k: None)
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: common.write_events(
+        sid, recs, path=tmp_path / f"{sid}.json", **kw))
+    out = tmp_path / f"{M.SOURCE_ID}.json"
+    old = ("storm-update-example-old", "MMSD Storm Update May 1, 2027")
+    new = ("storm-update-example-new", "MMSD Storm Update June 1, 2027")
+    good_old = _post_html(old[1], "05/05/27 09:00:am", "A combined sewer overflow occurred on May 1, 2027.")
+    good_new = _post_html(new[1], "06/05/27 09:00:am", "A separate sewer overflow occurred on June 1, 2027.")
+
+    class Sess(FakeSession):
+        def get(self, url, params=None, headers=None, timeout=None):
+            if not params and self.posts.get(M.slug_of(url)) is None:
+                raise M.requests.ConnectionError("refused")
+            return super().get(url, params, headers, timeout)
+
+    def run(pages, posts):
+        monkeypatch.setattr(M.requests, "Session", lambda: Sess({1: _list_page(pages)}, posts))
+        return M.main(["--pages", "1"])
+
+    assert run([old], {old[0]: good_old}) == 0                     # the first good run
+    first_ok = json.loads(out.read_text())["last_ok_at"]
+    # 30 days on, the old post is refused while a new one is posted: the new one is written at once, health false
+    monkeypatch.setattr(M, "now_iso", lambda: "2027-07-10T00:00:00Z")
+    assert run([new, old], {new[0]: good_new}) == 1
+    f = json.loads(out.read_text())
+    ids = {r["source_record_id"] for r in f["records"]}
+    assert {f"{old[0]}:cso", f"{new[0]}:sso"} <= ids
+    assert f["ok"] is False and f["last_ok_at"] == first_ok and [x["slug"] for x in f["meta"]["retry"]] == [old[0]]
+    # the new post scrolls off before the old one recovers: still kept
+    assert run([("budget", "Budget news")], {}) == 1
+    f = json.loads(out.read_text())
+    assert f"{new[0]}:sso" in {r["source_record_id"] for r in f["records"]} and f["ok"] is False
+    # recovery: healthy again, nothing lost
+    assert run([("budget", "Budget news")], {old[0]: good_old, new[0]: good_new}) == 0
+    f = json.loads(out.read_text())
+    assert f["ok"] is True and {f"{old[0]}:cso", f"{new[0]}:sso"} <= {r["source_record_id"] for r in f["records"]}
+
+
+def test_r3_p1_5_write_events_default_failure_path_is_unchanged(tmp_path):
+    import common
+    p = tmp_path / "x.json"
+    common.write_events("x", [{"event_id": "a"}], ok=True, path=p)
+    common.write_events("x", [{"event_id": "b"}], ok=False, error="down", path=p)
+    f = json.loads(p.read_text())
+    assert [r["event_id"] for r in f["records"]] == ["a"] and f["ok"] is False
+
+
+PRIVATE = ("Pat Example", "Sam Sample", "Lee Example", "555-0100", "pat@example.org", "1234 N", "43.123456",
+           "-87.987654")
+
+
+def test_r3_p1_6_inline_names_never_reach_a_raw_save_or_a_record(monkeypatch, tmp_path):
+    monkeypatch.setattr(M, "PAUSE_S", 0)
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    saved, written = [], []
+    monkeypatch.setattr(M, "save_raw", lambda sid, content, ext: saved.append(content))
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: written.append((recs, kw)) or tmp_path / "x")
+    title = "MMSD Storm Update June 1, 2027, Director Pat Example"
+    html = (f'<h1 class="ccm-block-page-title page-title">{title}</h1><div>06/05/27 09:00:am</div>'
+            '<p>Director Pat Example reported a combined sewer overflow into Lincoln Creek that occurred on June 1, 2027.</p>'
+            '<p>"The overflow was short," said Sam Sample. Lee Example, district engineer, called 414-555-0100 and '
+            'pat@example.org about 1234 N Example St at 43.123456, -87.987654.</p>'
+            '<p><a href="https://www.mmsd.com/download_file/view/z/1">Pat Example</a></p>'
+            '<p><a href="https://www.mmsd.com/download_file/view/z/2">DNR Letter for: Combined Sewer Overflow</a></p>'
+            '<p>Pat Example</p><p>Sincerely,</p>')
+    page = (f'<div class="ccm-block-page-list-title"><a href="https://www.mmsd.com/about-us/news/x-example" '
+            f'target="_self"><h3>{title}</h3></a></div><div class="ccm-block-page-list-date">Jun 5, 2027, 9:00 AM</div>')
+    monkeypatch.setattr(M.requests, "Session", lambda: FakeSession({1: page.encode()}, {"x-example": html.encode()}))
+    assert M.main(["--pages", "1"]) == 0
+    blob = json.dumps(saved, ensure_ascii=False) + json.dumps(written, ensure_ascii=False, default=str)
+    for p in PRIVATE:
+        assert p not in blob, p
+    recs = written[-1][0]
+    assert [r["event_type"] for r in recs] == ["cso"] and recs[0]["waterbody_text"] == "Lincoln Creek"
+    assert recs[0]["started_at"] == "2027-06-01"
+    assert any("Combined Sewer Overflow" in x["label"] for x in recs[0]["raw"]["letters"])
+
+
+def _np_run(np_mod, rows, bodies, tmp_path, at):
+    from datetime import datetime, timezone
+    saved = []
+
+    def fetcher(url, browser=False):
+        b = bodies[url]
+        if isinstance(b, int):
+            return {"at": at, "ok": False, "http_status": b, "error": f"HTTP {b}",
+                    "body": b"<p>Error. Call Pat Example at 414-555-0100</p>"}
+        return {"at": at, "ok": True, "http_status": 200, "final_url": url, "content_type": "text/html", "error": None,
+                "body": b}
+    out = np_mod.run(rows, now=datetime.fromisoformat(at.replace("Z", "+00:00")).astimezone(timezone.utc),
+                     fetcher=fetcher, store=tmp_path / "store", root=tmp_path,
+                     raw_saver=lambda src, body, ext: saved.append(body) or tmp_path / "raw.bin")
+    return out, saved
+
+
+def test_r3_p1_7_watched_wisconsin_pages_keep_no_body_and_no_text(tmp_path):
+    from ingest import notification_pages as NP
+    reg = json.loads((ROOT / "data" / "notice-channels" / "wi.json").read_text())["channels"]
+    rows = [r for r in reg if r.get("monitored")]
+    assert rows and all(r.get("metadata_only") is True and r.get("records") is False for r in rows)
+    personal = ("<html><body><h1>Example page</h1><p>Contact Pat Example, 414-555-0100, pat@example.org, "
+                "1234 N Example St.</p></body></html>").encode()
+    urls = [u for r in rows for u in r["urls"]]
+    for k, bodies in enumerate(({u: personal for u in urls}, {u: 503 for u in urls},
+                                {u: personal.replace(b"Example page", b"Example page 2") for u in urls})):
+        out, saved = _np_run(NP, rows, bodies, tmp_path, ("2026-11-15T12:00:00Z", "2026-11-23T12:00:00Z",
+                                                          "2026-12-01T12:00:00Z")[k])
+        assert saved == []                                    # no response body, good or error, is saved
+        blob = json.dumps(out["snaps"], default=str) + "".join(p.read_text() for p in (tmp_path / "store").rglob("*.json"))
+        for p in PRIVATE[:5]:
+            assert p not in blob, p
+    assert out["stats"]["reachable"] == len(set(urls))         # still watched: availability recorded
+    assert any(c.get("added") for s in out["snaps"].values() for c in s.get("changes") or [])   # a change still shows
+
+
+def test_r3_p1_7_other_states_pages_are_watched_as_before(tmp_path):
+    import importlib.util
+    import subprocess
+    from ingest import notification_pages as NP
+    old_src = subprocess.run(["git", "show", "fa9fb34:pipeline/ingest/notification_pages.py"], cwd=ROOT,
+                             capture_output=True, text=True)
+    if old_src.returncode != 0:
+        pytest.skip("the state branch's commit is not in this clone")
+    f = tmp_path / "np_state_branch.py"
+    f.write_text(old_src.stdout)
+    spec = importlib.util.spec_from_file_location("np_state_branch", f)
+    OLD = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(OLD)
+    rows = [{"id": "zz-example", "state": "ZZ", "monitored": True, "urls": ["https://example.org/notices"],
+             "method": "html", "records": True, "dated_lines_are_notices": True, "channel_kind": "operator_page"}]
+    body = b"<html><body><p>Overflow notice</p><p>11/14/2026 Example overflow at Example Creek</p></body></html>"
+    outs = []
+    for mod, d in ((NP, tmp_path / "new"), (OLD, tmp_path / "old")):
+        d.mkdir()
+        out, saved = _np_run(mod, rows, {rows[0]["urls"][0]: body}, d, "2026-11-15T12:00:00Z")
+        outs.append((json.dumps({k: out[k] for k in ("records", "snaps", "stats")}, sort_keys=True, default=str)
+                     .replace(str(d), "D"), saved))
+    assert outs[0] == outs[1] and outs[0][1] == [body]
+
+
+def _wline(name, slug, coords, kind="river"):
+    xs, ys = [c[0] for c in coords], [c[1] for c in coords]
+    return {"slug": slug, "name": name, "kind": kind, "state": "WI", "bbox": [min(xs), min(ys), max(xs), max(ys)],
+            "geometry": {"type": "LineString", "coordinates": coords}}
+
+
+# synthetic waters: two in Milwaukee County, a namesake in Dane County (about 120 km west), a qualified name
+WI_WATERS = {
+    "lincoln-creek-wi": _wline("Lincoln Creek", "lincoln-creek-wi", [[-87.99, 43.10], [-87.95, 43.11]]),
+    "lincoln-creek-dane-wi": _wline("Lincoln Creek", "lincoln-creek-dane-wi", [[-89.45, 43.05], [-89.42, 43.06]]),
+    "little-lincoln-creek-wi": _wline("Little Lincoln Creek", "little-lincoln-creek-wi", [[-87.98, 43.12], [-87.97, 43.13]]),
+    "wilson-park-creek-wi": _wline("Wilson Park Creek", "wilson-park-creek-wi", [[-87.93, 42.95], [-87.90, 42.94]]),
+    "milwaukee-river-wi": _wline("Milwaukee River", "milwaukee-river-wi", [[-87.92, 43.10], [-87.91, 43.04]]),
+}
+
+
+def _wo(no, slug, lat, lon, status="CSO"):
+    return {"npdes_permit": "WI0036820", "outfall": no, "outfall_status": status, "water_slug": slug,
+            "water_matched_by": "name", "match": "name", "lat": lat, "lon": lon, "state": "WI", "_file": "test"}
+
+
+WI_OUTFALLS = [_wo("101", "lincoln-creek-wi", 43.105, -87.97), _wo("102", "milwaukee-river-wi", 43.07, -87.915),
+               _wo("103", "lincoln-creek-wi", 43.108, -87.96, status="CLS")]
+
+
+@pytest.fixture
+def wisconsin_live(monkeypatch):
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"WI"})
+    return S
+
+
+def test_r3_p2_10_a_named_water_is_placed_in_milwaukee_county_with_the_permits_outfalls(wisconsin_live):
+    t = "MMSD Storm Update June 1, 2027"
+    cso = _recs(t, [t, "A combined sewer overflow into Lincoln Creek occurred on June 1, 2027."])["cso"]
+    res = S.Resolver(WI_WATERS, WI_OUTFALLS, placement_rules={"no_outfall_all_waters": True})
+    pl = res.resolve(cso)
+    assert pl["water_slugs"] == ["lincoln-creek-wi"]                  # not Dane County's namesake, not Little Lincoln
+    assert [o["outfall"] for o in pl["outfalls"]] == ["101"]          # the open outfall on the named water
+    reach = {"key": "r1", "permit": "WI0036820", "outfall": "101", "model": "river"}
+    assert [r["key"] for r, _ in S.event_reaches(cso, pl, S.index_reaches({"r1": reach}))] == ["r1"]
+    sso = _recs(t, [t, "Separate Sewer Overflows: 1 million gallons",
+                    "– Wilson Park Creek: 125,000 gallons"])["sso"]
+    assert res.resolve(sso)["water_slugs"] == ["wilson-park-creek-wi"]
+    # a combined sewer overflow that names no water: every water the permit's open outfalls reach
+    bare = _recs(t, [t, "A combined sewer overflow occurred on June 1, 2027."])["cso"]
+    assert set(res.resolve(bare)["water_slugs"]) == {"lincoln-creek-wi", "milwaukee-river-wi"}
+    # only the Dane County namesake on record: a Milwaukee report is not placed on it
+    alone = S.Resolver({k: WI_WATERS[k] for k in ("lincoln-creek-dane-wi",)}, [], placement_rules={})
+    assert alone.resolve(cso)["water_slugs"] == []
+
+
+def test_r3_p2_10_the_wisconsin_set_additions_change_no_other_states_placement(wisconsin_live, monkeypatch):
+    from test_ingest_or import OUTFALLS, SLOUGH, WILL, bes
+    evs = list(bes()[0].values())
+    def run():
+        res = S.Resolver({"willamette-river-or": WILL, "columbia-slough-or": SLOUGH}, OUTFALLS, placement_rules={})
+        return json.dumps([res.resolve(e) for e in evs], sort_keys=True, default=str)
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"OR", "WI"})
+    with_wi = run()
+    monkeypatch.setattr(S, "NAMED_WATER_OUTFALL_STATES", S.NAMED_WATER_OUTFALL_STATES - {"WI"})
+    monkeypatch.setattr(S, "COUNTY_FIELD_STATES", S.COUNTY_FIELD_STATES - {"WI"})
+    monkeypatch.setattr(S, "COUNTY_STATES", {k: v for k, v in S.COUNTY_STATES.items() if k != "WI"})
+    assert run() == with_wi
+
+
+def test_r3_p2_11_delays_come_from_the_overflows_own_dates_and_watched_means_monitored():
+    from datetime import date
+    recs = built()[0].values()
+    first = {}
+    for r in recs:
+        if r["started_at"]:                                   # only a start the post gives for the overflow itself
+            d = (date.fromisoformat(r["published_at"][:10]) - date.fromisoformat(r["started_at"][:10])).days
+            first[r["raw"]["slug"]] = min(d, first.get(r["raw"]["slug"], d))
+    assert first and all(1 <= d <= 6 for d in first.values())  # the range the texts give (11 posts on the full list)
+    t = (ROOT / "research" / "wi" / "state-text.md").read_text()
+    y = (ROOT / "data" / "sources" / "wi-mmsd-storm-updates.yaml").read_text()
+    assert "one to six days after it began, four days at the median" in t and "one to ten" not in t
+    assert "Posted 1 to 6 days" not in y and "1 to 6 days after it (median 4)" in y.replace("\n#  ", "")
+    reg = json.loads((ROOT / "data" / "notice-channels" / "wi.json").read_text())["channels"]
+    for c in reg:
+        if re.search(r"\bwatched\b", c.get("note") or "") and "not watched" not in (c.get("note") or ""):
+            assert c["monitored"] is True, c["id"]
+    src = json.loads((ROOT / "research" / "wi" / "sources.json").read_text())
+    assert not any("reaches EPA's event tables" in (s.get("status_reason") or "") for s in src)
+    assert "City of Superior, combined sewer overflow page and 2025 annual notice" in t

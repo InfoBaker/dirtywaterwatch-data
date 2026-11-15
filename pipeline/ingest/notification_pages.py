@@ -148,6 +148,9 @@ OPTIONAL = {
     "availability_only": "true: monitor page availability without checking current status; requires records: false "
                          "(no notice records from this row) (default false)",
     "dated_lines_are_notices": "true: any added dated line is a notice (an event table)",
+    "metadata_only": "true: keep no page text and no response body: data/raw keeps nothing and the snapshot holds only "
+                     "the hash of the text, so a page that can carry a person's name, telephone or address is watched "
+                     "for availability and change without saving it; requires records: false (default false)",
     "default_event_type": "event type of a notice whose words name none (common.EVENT_TYPES)",
     "every_hours": "fetch at most this often (default: every refresh)",
     "headers": "'browser' to send a browser user agent (hosts that refuse others)",
@@ -305,9 +308,11 @@ def validate_register(doc, dischargers: list[dict] | None = None, root: Path | N
         if ent is not None and not (isinstance(ent, dict) and _compiles(ent.get("start")) and ent.get("start")
                                     and _compiles(ent.get("end")) and ent.get("end")):
             errs.append(f"{where}: entry is {{start, end}} with regular expressions")
-        for k in ("records", "dated_lines_are_notices", "availability_only"):
+        for k in ("records", "dated_lines_are_notices", "availability_only", "metadata_only"):
             if k in r and not isinstance(r[k], bool):
                 errs.append(f"{where}: {k} is true or false")
+        if r.get("metadata_only") is True and r.get("records") is not False:
+            errs.append(f"{where}: metadata_only needs records: false")
         if r.get("availability_only") is True and r.get("records") is not False:
             # review 2026-11-14 (Astra data P2-6): a page watched for availability makes no notice records
             errs.append(f"{where}: availability_only needs records: false")
@@ -1145,7 +1150,8 @@ def pages_of(channels: list[dict]) -> dict[str, dict]:
             p = pages.setdefault(u, {"url": u, "page_id": page_id(u), "method": r["method"], "rows": [], "ignore": [],
                                      "browser": False, "every_hours": None, "seeds": None, "entries": [],
                                      "cfg": {"status_patterns": [], "dated_lines_are_notices": False,
-                                             "default_event_type": None, "records": False, "shared": False}})
+                                             "default_event_type": None, "records": False, "shared": False,
+                                             "metadata_only": False}})
             p["rows"].append(r)
             p["ignore"] += [x for x in r.get("ignore_lines") or [] if x not in p["ignore"]]
             p["browser"] |= r.get("headers") == "browser"
@@ -1164,6 +1170,9 @@ def pages_of(channels: list[dict]) -> dict[str, dict]:
             # records: false with it); another row of the same URL keeps its own setting (Astra data P2-6)
             c["records"] |= r.get("records", True) is not False and r.get("availability_only") is not True
             c["shared"] |= r.get("channel_kind") == "shared_site"
+            # any row asking for it keeps the page's text and body out of storage (Wisconsin's rows, Astra re-review
+            # 2026-11-15 P1-7); a row without the flag changes nothing
+            c["metadata_only"] |= r.get("metadata_only") is True
     return pages
 
 
@@ -1227,7 +1236,7 @@ def run(channels: list[dict], now: datetime | None = None, fetcher=fetch, store:
     seeded_changes: dict[str, list] = {}
     for u, p in pages.items():
         s = read_json(pages_dir / f"{p['page_id']}.json", None)
-        if s is None and p["seeds"]:
+        if s is None and p["seeds"] and not p["cfg"].get("metadata_only"):
             s, seeded_changes[u] = seed_snapshot(p, root)
         snaps[u] = s
     todo = [u for u, p in pages.items() if fetch_pages and due(snaps.get(u), p["every_hours"], now)]
@@ -1247,6 +1256,11 @@ def run(channels: list[dict], now: datetime | None = None, fetcher=fetch, store:
         res["parse_error"] = perr
         prev = snaps.get(u)
         th = text_hash(filtered(lines, p["ignore"])) if res["ok"] else None
+        if p["cfg"].get("metadata_only"):
+            # nothing of the page is kept: one line naming the text's hash stands for the text (a change still shows),
+            # and no body is saved, error pages included
+            lines = [f"text sha256 {th}"] if res["ok"] else []
+            body = b""
         if save and body:
             key = th if res["ok"] else "err:" + res["content_hash"]
             if (prev or {}).get("raw_key") != key:
