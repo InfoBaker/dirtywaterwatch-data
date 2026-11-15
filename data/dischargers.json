@@ -655054,7 +655054,7 @@
  },
  {
   "id": "id-elk-valley-subdivision",
-  "name": "Elk Valley Subdivision wastewater plant",
+  "name": "Elk Valley Subdivision wastewater plant (permit ID0027979)",
   "state": "ID",
   "kind": "plant",
   "npdes_permit": "ID0027979",
@@ -655071,7 +655071,7 @@
   "towns": [
    "Pine"
   ],
-  "notes": "Privately owned. EPA ECHO ICIS-NPDES: ID0027979 ELK VALLEY SUBDIVISION - WWTP. Owner as EPA records it: ELK VALLEY SUBDIVISION; facility type Privately Owned Facility. Permitting authority: ID0027979 unconfirmed (not in the plant list). EPA types it privately owned; who holds the permit (a homeowners' association or the developer) was not read.",
+  "notes": "Privately owned. EPA ECHO ICIS-NPDES: ID0027979 ELK VALLEY SUBDIVISION - WWTP. Owner as EPA records it: ELK VALLEY SUBDIVISION; facility type Privately Owned Facility. Permitting authority: ID0027979 unconfirmed (not in the plant list). EPA types it privately owned; who holds the permit (a homeowners' association or the developer) is not established, so the row names the plant and its permit, not an operator.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "aliases": [
@@ -655083,7 +655083,9 @@
   ],
   "permitting_authority": [
    "unconfirmed"
-  ]
+  ],
+  "legal_form": "facility (permittee not named)",
+  "permit_only": true
  },
  {
   "id": "id-emida",
