@@ -196,7 +196,8 @@ def grade_of(st: str, f: dict, as_of: datetime, federal: bool = False, operator:
                "later" if f.get("published_in_batches") and latest and (as_of - latest).days > LAG_OK_DAYS else "")
             + f"; a quiet map in {in_name} can mean a report has not appeared yet.")
     if f["monthly_share"] >= f["annual_share"] and f["monthly_share"] > 0:
-        if federal:     # Indiana: the operators' monthly totals reach the public through EPA, not the state
+        if federal and st == "IN":     # Indiana: the operators' monthly totals reach the public through EPA, not the
+            # state; scoped to Indiana so no live state's text changes (integration 2026-11-14, review of state/in)
             if (f.get("dated_share") or 0) > 0:     # a few dated reports beside them (review 2026-11-14 P2-11)
                 return "Monthly totals only", (f"Overflow reports from sewer operators in {in_name} are published by "
                                                f"{FEDERAL_PUBLISHER} almost all as monthly totals, with few dated "

@@ -1,0 +1,1640 @@
+{
+ "_doc": "grade_of(state, figures, as_of, federal) as origin/main 76c4655 returned it, before the Indiana wording, for every state live then (33), both federal settings and six coverage figures. pipeline/tests/test_coverage_grade_scope.py holds the current grade_of to it.",
+ "as_of": "2026-11-14T00:00:00+00:00",
+ "figures": {
+  "monthly": {
+   "records_12m": 120,
+   "dated_share": 0.0,
+   "monthly_share": 1.0,
+   "annual_share": 0.0,
+   "latest_dated": null,
+   "lag_days": null
+  },
+  "mixed": {
+   "records_12m": 4485,
+   "dated_share": 0.0002,
+   "monthly_share": 0.9998,
+   "annual_share": 0.0,
+   "latest_dated": "2026-08-12T21:30:00-04:00",
+   "lag_days": 1
+  },
+  "mixed_half": {
+   "records_12m": 200,
+   "dated_share": 0.4,
+   "monthly_share": 0.6,
+   "annual_share": 0.0,
+   "latest_dated": "2026-11-10T12:00:00+00:00",
+   "lag_days": 2
+  },
+  "dated": {
+   "records_12m": 300,
+   "dated_share": 0.95,
+   "monthly_share": 0.05,
+   "annual_share": 0.0,
+   "latest_dated": "2026-11-12T08:00:00+00:00",
+   "lag_days": 1
+  },
+  "dated_delayed": {
+   "records_12m": 300,
+   "dated_share": 0.95,
+   "monthly_share": 0.05,
+   "annual_share": 0.0,
+   "latest_dated": "2026-08-01T08:00:00+00:00",
+   "lag_days": 30
+  },
+  "annual": {
+   "records_12m": 5,
+   "dated_share": 0.0,
+   "monthly_share": 0.0,
+   "annual_share": 1.0,
+   "latest_dated": null,
+   "lag_days": null
+  }
+ },
+ "texts": {
+  "CT|0|monthly": [
+   "Monthly totals only",
+   "Connecticut publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CT|0|mixed": [
+   "Monthly totals only",
+   "Connecticut publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CT|0|mixed_half": [
+   "Monthly totals only",
+   "Connecticut publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CT|0|dated": [
+   "Dated reports",
+   "Connecticut publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "CT|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Connecticut publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Connecticut can mean a report has not appeared yet."
+  ],
+  "CT|0|annual": [
+   "Annual totals only",
+   "Connecticut publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "CT|1|monthly": [
+   "Monthly totals only",
+   "Connecticut publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CT|1|mixed": [
+   "Monthly totals only",
+   "Connecticut publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CT|1|mixed_half": [
+   "Monthly totals only",
+   "Connecticut publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CT|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Connecticut are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "CT|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Connecticut are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Connecticut can mean a report has not appeared yet."
+  ],
+  "CT|1|annual": [
+   "Annual totals only",
+   "Connecticut publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "MA|0|monthly": [
+   "Monthly totals only",
+   "Massachusetts publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MA|0|mixed": [
+   "Monthly totals only",
+   "Massachusetts publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MA|0|mixed_half": [
+   "Monthly totals only",
+   "Massachusetts publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MA|0|dated": [
+   "Dated reports",
+   "Massachusetts publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "MA|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Massachusetts publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Massachusetts can mean a report has not appeared yet."
+  ],
+  "MA|0|annual": [
+   "Annual totals only",
+   "Massachusetts publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "MA|1|monthly": [
+   "Monthly totals only",
+   "Massachusetts publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MA|1|mixed": [
+   "Monthly totals only",
+   "Massachusetts publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MA|1|mixed_half": [
+   "Monthly totals only",
+   "Massachusetts publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MA|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Massachusetts are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "MA|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Massachusetts are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Massachusetts can mean a report has not appeared yet."
+  ],
+  "MA|1|annual": [
+   "Annual totals only",
+   "Massachusetts publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "ME|0|monthly": [
+   "Monthly totals only",
+   "Maine publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "ME|0|mixed": [
+   "Monthly totals only",
+   "Maine publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "ME|0|mixed_half": [
+   "Monthly totals only",
+   "Maine publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "ME|0|dated": [
+   "Dated reports",
+   "Maine publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "ME|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Maine publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Maine can mean a report has not appeared yet."
+  ],
+  "ME|0|annual": [
+   "Annual totals only",
+   "Maine publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "ME|1|monthly": [
+   "Monthly totals only",
+   "Maine publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "ME|1|mixed": [
+   "Monthly totals only",
+   "Maine publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "ME|1|mixed_half": [
+   "Monthly totals only",
+   "Maine publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "ME|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Maine are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "ME|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Maine are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Maine can mean a report has not appeared yet."
+  ],
+  "ME|1|annual": [
+   "Annual totals only",
+   "Maine publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NH|0|monthly": [
+   "Monthly totals only",
+   "New Hampshire publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NH|0|mixed": [
+   "Monthly totals only",
+   "New Hampshire publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NH|0|mixed_half": [
+   "Monthly totals only",
+   "New Hampshire publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NH|0|dated": [
+   "Dated reports",
+   "New Hampshire publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "NH|0|dated_delayed": [
+   "Dated reports, delayed",
+   "New Hampshire publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in New Hampshire can mean a report has not appeared yet."
+  ],
+  "NH|0|annual": [
+   "Annual totals only",
+   "New Hampshire publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NH|1|monthly": [
+   "Monthly totals only",
+   "New Hampshire publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NH|1|mixed": [
+   "Monthly totals only",
+   "New Hampshire publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NH|1|mixed_half": [
+   "Monthly totals only",
+   "New Hampshire publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NH|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in New Hampshire are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "NH|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in New Hampshire are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in New Hampshire can mean a report has not appeared yet."
+  ],
+  "NH|1|annual": [
+   "Annual totals only",
+   "New Hampshire publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "RI|0|monthly": [
+   "Monthly totals only",
+   "Rhode Island publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "RI|0|mixed": [
+   "Monthly totals only",
+   "Rhode Island publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "RI|0|mixed_half": [
+   "Monthly totals only",
+   "Rhode Island publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "RI|0|dated": [
+   "Dated reports",
+   "Rhode Island publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "RI|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Rhode Island publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Rhode Island can mean a report has not appeared yet."
+  ],
+  "RI|0|annual": [
+   "Annual totals only",
+   "Rhode Island publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "RI|1|monthly": [
+   "Monthly totals only",
+   "Rhode Island publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "RI|1|mixed": [
+   "Monthly totals only",
+   "Rhode Island publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "RI|1|mixed_half": [
+   "Monthly totals only",
+   "Rhode Island publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "RI|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Rhode Island are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "RI|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Rhode Island are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Rhode Island can mean a report has not appeared yet."
+  ],
+  "RI|1|annual": [
+   "Annual totals only",
+   "Rhode Island publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "VT|0|monthly": [
+   "Monthly totals only",
+   "Vermont publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VT|0|mixed": [
+   "Monthly totals only",
+   "Vermont publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VT|0|mixed_half": [
+   "Monthly totals only",
+   "Vermont publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VT|0|dated": [
+   "Dated reports",
+   "Vermont publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "VT|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Vermont publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Vermont can mean a report has not appeared yet."
+  ],
+  "VT|0|annual": [
+   "Annual totals only",
+   "Vermont publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "VT|1|monthly": [
+   "Monthly totals only",
+   "Vermont publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VT|1|mixed": [
+   "Monthly totals only",
+   "Vermont publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VT|1|mixed_half": [
+   "Monthly totals only",
+   "Vermont publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VT|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Vermont are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "VT|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Vermont are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Vermont can mean a report has not appeared yet."
+  ],
+  "VT|1|annual": [
+   "Annual totals only",
+   "Vermont publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NJ|0|monthly": [
+   "Monthly totals only",
+   "New Jersey publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NJ|0|mixed": [
+   "Monthly totals only",
+   "New Jersey publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NJ|0|mixed_half": [
+   "Monthly totals only",
+   "New Jersey publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NJ|0|dated": [
+   "Dated reports",
+   "New Jersey publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "NJ|0|dated_delayed": [
+   "Dated reports, delayed",
+   "New Jersey publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in New Jersey can mean a report has not appeared yet."
+  ],
+  "NJ|0|annual": [
+   "Annual totals only",
+   "New Jersey publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NJ|1|monthly": [
+   "Monthly totals only",
+   "New Jersey publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NJ|1|mixed": [
+   "Monthly totals only",
+   "New Jersey publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NJ|1|mixed_half": [
+   "Monthly totals only",
+   "New Jersey publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NJ|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in New Jersey are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "NJ|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in New Jersey are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in New Jersey can mean a report has not appeared yet."
+  ],
+  "NJ|1|annual": [
+   "Annual totals only",
+   "New Jersey publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NY|0|monthly": [
+   "Monthly totals only",
+   "New York publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NY|0|mixed": [
+   "Monthly totals only",
+   "New York publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NY|0|mixed_half": [
+   "Monthly totals only",
+   "New York publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NY|0|dated": [
+   "Dated reports",
+   "New York publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "NY|0|dated_delayed": [
+   "Dated reports, delayed",
+   "New York publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in New York can mean a report has not appeared yet."
+  ],
+  "NY|0|annual": [
+   "Annual totals only",
+   "New York publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NY|1|monthly": [
+   "Monthly totals only",
+   "New York publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NY|1|mixed": [
+   "Monthly totals only",
+   "New York publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NY|1|mixed_half": [
+   "Monthly totals only",
+   "New York publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NY|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in New York are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "NY|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in New York are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in New York can mean a report has not appeared yet."
+  ],
+  "NY|1|annual": [
+   "Annual totals only",
+   "New York publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "PA|0|monthly": [
+   "Monthly totals only",
+   "Pennsylvania publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "PA|0|mixed": [
+   "Monthly totals only",
+   "Pennsylvania publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "PA|0|mixed_half": [
+   "Monthly totals only",
+   "Pennsylvania publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "PA|0|dated": [
+   "Dated reports",
+   "Pennsylvania publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "PA|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Pennsylvania publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Pennsylvania can mean a report has not appeared yet."
+  ],
+  "PA|0|annual": [
+   "Annual totals only",
+   "Pennsylvania publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "PA|1|monthly": [
+   "Monthly totals only",
+   "Pennsylvania publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "PA|1|mixed": [
+   "Monthly totals only",
+   "Pennsylvania publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "PA|1|mixed_half": [
+   "Monthly totals only",
+   "Pennsylvania publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "PA|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Pennsylvania are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "PA|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Pennsylvania are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Pennsylvania can mean a report has not appeared yet."
+  ],
+  "PA|1|annual": [
+   "Annual totals only",
+   "Pennsylvania publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "MD|0|monthly": [
+   "Monthly totals only",
+   "Maryland publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MD|0|mixed": [
+   "Monthly totals only",
+   "Maryland publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MD|0|mixed_half": [
+   "Monthly totals only",
+   "Maryland publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MD|0|dated": [
+   "Dated reports",
+   "Maryland publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "MD|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Maryland publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Maryland can mean a report has not appeared yet."
+  ],
+  "MD|0|annual": [
+   "Annual totals only",
+   "Maryland publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "MD|1|monthly": [
+   "Monthly totals only",
+   "Maryland publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MD|1|mixed": [
+   "Monthly totals only",
+   "Maryland publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MD|1|mixed_half": [
+   "Monthly totals only",
+   "Maryland publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MD|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Maryland are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "MD|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Maryland are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Maryland can mean a report has not appeared yet."
+  ],
+  "MD|1|annual": [
+   "Annual totals only",
+   "Maryland publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "VA|0|monthly": [
+   "Monthly totals only",
+   "Virginia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VA|0|mixed": [
+   "Monthly totals only",
+   "Virginia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VA|0|mixed_half": [
+   "Monthly totals only",
+   "Virginia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VA|0|dated": [
+   "Dated reports",
+   "Virginia publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "VA|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Virginia publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Virginia can mean a report has not appeared yet."
+  ],
+  "VA|0|annual": [
+   "Annual totals only",
+   "Virginia publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "VA|1|monthly": [
+   "Monthly totals only",
+   "Virginia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VA|1|mixed": [
+   "Monthly totals only",
+   "Virginia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VA|1|mixed_half": [
+   "Monthly totals only",
+   "Virginia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "VA|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Virginia are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "VA|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Virginia are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Virginia can mean a report has not appeared yet."
+  ],
+  "VA|1|annual": [
+   "Annual totals only",
+   "Virginia publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "DC|0|monthly": [
+   "Monthly totals only",
+   "The District of Columbia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "DC|0|mixed": [
+   "Monthly totals only",
+   "The District of Columbia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "DC|0|mixed_half": [
+   "Monthly totals only",
+   "The District of Columbia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "DC|0|dated": [
+   "Dated reports",
+   "The District of Columbia publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "DC|0|dated_delayed": [
+   "Dated reports, delayed",
+   "The District of Columbia publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in the District of Columbia can mean a report has not appeared yet."
+  ],
+  "DC|0|annual": [
+   "Annual totals only",
+   "The District of Columbia publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "DC|1|monthly": [
+   "Monthly totals only",
+   "The District of Columbia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "DC|1|mixed": [
+   "Monthly totals only",
+   "The District of Columbia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "DC|1|mixed_half": [
+   "Monthly totals only",
+   "The District of Columbia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "DC|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in the District of Columbia are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "DC|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in the District of Columbia are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in the District of Columbia can mean a report has not appeared yet."
+  ],
+  "DC|1|annual": [
+   "Annual totals only",
+   "The District of Columbia publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NC|0|monthly": [
+   "Monthly totals only",
+   "North Carolina publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NC|0|mixed": [
+   "Monthly totals only",
+   "North Carolina publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NC|0|mixed_half": [
+   "Monthly totals only",
+   "North Carolina publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NC|0|dated": [
+   "Dated reports",
+   "North Carolina publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "NC|0|dated_delayed": [
+   "Dated reports, delayed",
+   "North Carolina publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in North Carolina can mean a report has not appeared yet."
+  ],
+  "NC|0|annual": [
+   "Annual totals only",
+   "North Carolina publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NC|1|monthly": [
+   "Monthly totals only",
+   "North Carolina publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NC|1|mixed": [
+   "Monthly totals only",
+   "North Carolina publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NC|1|mixed_half": [
+   "Monthly totals only",
+   "North Carolina publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NC|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in North Carolina are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "NC|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in North Carolina are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in North Carolina can mean a report has not appeared yet."
+  ],
+  "NC|1|annual": [
+   "Annual totals only",
+   "North Carolina publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "GA|0|monthly": [
+   "Monthly totals only",
+   "Georgia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "GA|0|mixed": [
+   "Monthly totals only",
+   "Georgia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "GA|0|mixed_half": [
+   "Monthly totals only",
+   "Georgia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "GA|0|dated": [
+   "Dated reports",
+   "Georgia publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "GA|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Georgia publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Georgia can mean a report has not appeared yet."
+  ],
+  "GA|0|annual": [
+   "Annual totals only",
+   "Georgia publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "GA|1|monthly": [
+   "Monthly totals only",
+   "Georgia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "GA|1|mixed": [
+   "Monthly totals only",
+   "Georgia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "GA|1|mixed_half": [
+   "Monthly totals only",
+   "Georgia publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "GA|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Georgia are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "GA|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Georgia are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Georgia can mean a report has not appeared yet."
+  ],
+  "GA|1|annual": [
+   "Annual totals only",
+   "Georgia publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "MI|0|monthly": [
+   "Monthly totals only",
+   "Michigan publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MI|0|mixed": [
+   "Monthly totals only",
+   "Michigan publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MI|0|mixed_half": [
+   "Monthly totals only",
+   "Michigan publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MI|0|dated": [
+   "Dated reports",
+   "Michigan publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "MI|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Michigan publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Michigan can mean a report has not appeared yet."
+  ],
+  "MI|0|annual": [
+   "Annual totals only",
+   "Michigan publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "MI|1|monthly": [
+   "Monthly totals only",
+   "Michigan publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MI|1|mixed": [
+   "Monthly totals only",
+   "Michigan publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MI|1|mixed_half": [
+   "Monthly totals only",
+   "Michigan publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MI|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Michigan are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "MI|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Michigan are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Michigan can mean a report has not appeared yet."
+  ],
+  "MI|1|annual": [
+   "Annual totals only",
+   "Michigan publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "FL|0|monthly": [
+   "Monthly totals only",
+   "Florida publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "FL|0|mixed": [
+   "Monthly totals only",
+   "Florida publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "FL|0|mixed_half": [
+   "Monthly totals only",
+   "Florida publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "FL|0|dated": [
+   "Dated reports",
+   "Florida publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "FL|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Florida publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Florida can mean a report has not appeared yet."
+  ],
+  "FL|0|annual": [
+   "Annual totals only",
+   "Florida publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "FL|1|monthly": [
+   "Monthly totals only",
+   "Florida publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "FL|1|mixed": [
+   "Monthly totals only",
+   "Florida publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "FL|1|mixed_half": [
+   "Monthly totals only",
+   "Florida publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "FL|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Florida are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "FL|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Florida are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Florida can mean a report has not appeared yet."
+  ],
+  "FL|1|annual": [
+   "Annual totals only",
+   "Florida publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "WA|0|monthly": [
+   "Monthly totals only",
+   "Washington publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "WA|0|mixed": [
+   "Monthly totals only",
+   "Washington publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "WA|0|mixed_half": [
+   "Monthly totals only",
+   "Washington publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "WA|0|dated": [
+   "Dated reports",
+   "Washington publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "WA|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Washington publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Washington can mean a report has not appeared yet."
+  ],
+  "WA|0|annual": [
+   "Annual totals only",
+   "Washington publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "WA|1|monthly": [
+   "Monthly totals only",
+   "Washington publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "WA|1|mixed": [
+   "Monthly totals only",
+   "Washington publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "WA|1|mixed_half": [
+   "Monthly totals only",
+   "Washington publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "WA|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Washington are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "WA|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Washington are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Washington can mean a report has not appeared yet."
+  ],
+  "WA|1|annual": [
+   "Annual totals only",
+   "Washington publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "IL|0|monthly": [
+   "Monthly totals only",
+   "Illinois publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "IL|0|mixed": [
+   "Monthly totals only",
+   "Illinois publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "IL|0|mixed_half": [
+   "Monthly totals only",
+   "Illinois publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "IL|0|dated": [
+   "Dated reports",
+   "Illinois publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "IL|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Illinois publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Illinois can mean a report has not appeared yet."
+  ],
+  "IL|0|annual": [
+   "Annual totals only",
+   "Illinois publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "IL|1|monthly": [
+   "Monthly totals only",
+   "Illinois publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "IL|1|mixed": [
+   "Monthly totals only",
+   "Illinois publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "IL|1|mixed_half": [
+   "Monthly totals only",
+   "Illinois publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "IL|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Illinois are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "IL|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Illinois are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Illinois can mean a report has not appeared yet."
+  ],
+  "IL|1|annual": [
+   "Annual totals only",
+   "Illinois publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "CA|0|monthly": [
+   "Monthly totals only",
+   "California publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CA|0|mixed": [
+   "Monthly totals only",
+   "California publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CA|0|mixed_half": [
+   "Monthly totals only",
+   "California publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CA|0|dated": [
+   "Dated reports",
+   "California publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "CA|0|dated_delayed": [
+   "Dated reports, delayed",
+   "California publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in California can mean a report has not appeared yet."
+  ],
+  "CA|0|annual": [
+   "Annual totals only",
+   "California publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "CA|1|monthly": [
+   "Monthly totals only",
+   "California publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CA|1|mixed": [
+   "Monthly totals only",
+   "California publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CA|1|mixed_half": [
+   "Monthly totals only",
+   "California publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "CA|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in California are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "CA|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in California are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in California can mean a report has not appeared yet."
+  ],
+  "CA|1|annual": [
+   "Annual totals only",
+   "California publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "AZ|0|monthly": [
+   "Monthly totals only",
+   "Arizona publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AZ|0|mixed": [
+   "Monthly totals only",
+   "Arizona publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AZ|0|mixed_half": [
+   "Monthly totals only",
+   "Arizona publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AZ|0|dated": [
+   "Dated reports",
+   "Arizona publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "AZ|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Arizona publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Arizona can mean a report has not appeared yet."
+  ],
+  "AZ|0|annual": [
+   "Annual totals only",
+   "Arizona publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "AZ|1|monthly": [
+   "Monthly totals only",
+   "Arizona publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AZ|1|mixed": [
+   "Monthly totals only",
+   "Arizona publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AZ|1|mixed_half": [
+   "Monthly totals only",
+   "Arizona publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AZ|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Arizona are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "AZ|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Arizona are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Arizona can mean a report has not appeared yet."
+  ],
+  "AZ|1|annual": [
+   "Annual totals only",
+   "Arizona publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "SD|0|monthly": [
+   "Monthly totals only",
+   "South Dakota publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "SD|0|mixed": [
+   "Monthly totals only",
+   "South Dakota publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "SD|0|mixed_half": [
+   "Monthly totals only",
+   "South Dakota publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "SD|0|dated": [
+   "Dated reports",
+   "South Dakota publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "SD|0|dated_delayed": [
+   "Dated reports, delayed",
+   "South Dakota publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in South Dakota can mean a report has not appeared yet."
+  ],
+  "SD|0|annual": [
+   "Annual totals only",
+   "South Dakota publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "SD|1|monthly": [
+   "Monthly totals only",
+   "South Dakota publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "SD|1|mixed": [
+   "Monthly totals only",
+   "South Dakota publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "SD|1|mixed_half": [
+   "Monthly totals only",
+   "South Dakota publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "SD|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in South Dakota are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "SD|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in South Dakota are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in South Dakota can mean a report has not appeared yet."
+  ],
+  "SD|1|annual": [
+   "Annual totals only",
+   "South Dakota publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "MS|0|monthly": [
+   "Monthly totals only",
+   "Mississippi publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MS|0|mixed": [
+   "Monthly totals only",
+   "Mississippi publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MS|0|mixed_half": [
+   "Monthly totals only",
+   "Mississippi publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MS|0|dated": [
+   "Dated reports",
+   "Mississippi publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "MS|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Mississippi publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Mississippi can mean a report has not appeared yet."
+  ],
+  "MS|0|annual": [
+   "Annual totals only",
+   "Mississippi publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "MS|1|monthly": [
+   "Monthly totals only",
+   "Mississippi publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MS|1|mixed": [
+   "Monthly totals only",
+   "Mississippi publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MS|1|mixed_half": [
+   "Monthly totals only",
+   "Mississippi publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "MS|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Mississippi are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "MS|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Mississippi are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Mississippi can mean a report has not appeared yet."
+  ],
+  "MS|1|annual": [
+   "Annual totals only",
+   "Mississippi publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NE|0|monthly": [
+   "Monthly totals only",
+   "Nebraska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NE|0|mixed": [
+   "Monthly totals only",
+   "Nebraska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NE|0|mixed_half": [
+   "Monthly totals only",
+   "Nebraska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NE|0|dated": [
+   "Dated reports",
+   "Nebraska publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "NE|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Nebraska publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Nebraska can mean a report has not appeared yet."
+  ],
+  "NE|0|annual": [
+   "Annual totals only",
+   "Nebraska publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NE|1|monthly": [
+   "Monthly totals only",
+   "Nebraska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NE|1|mixed": [
+   "Monthly totals only",
+   "Nebraska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NE|1|mixed_half": [
+   "Monthly totals only",
+   "Nebraska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NE|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Nebraska are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "NE|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Nebraska are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Nebraska can mean a report has not appeared yet."
+  ],
+  "NE|1|annual": [
+   "Annual totals only",
+   "Nebraska publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "AK|0|monthly": [
+   "Monthly totals only",
+   "Alaska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AK|0|mixed": [
+   "Monthly totals only",
+   "Alaska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AK|0|mixed_half": [
+   "Monthly totals only",
+   "Alaska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AK|0|dated": [
+   "Dated reports",
+   "Alaska publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "AK|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Alaska publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Alaska can mean a report has not appeared yet."
+  ],
+  "AK|0|annual": [
+   "Annual totals only",
+   "Alaska publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "AK|1|monthly": [
+   "Monthly totals only",
+   "Alaska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AK|1|mixed": [
+   "Monthly totals only",
+   "Alaska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AK|1|mixed_half": [
+   "Monthly totals only",
+   "Alaska publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AK|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Alaska are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "AK|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Alaska are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Alaska can mean a report has not appeared yet."
+  ],
+  "AK|1|annual": [
+   "Annual totals only",
+   "Alaska publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NM|0|monthly": [
+   "Monthly totals only",
+   "New Mexico publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NM|0|mixed": [
+   "Monthly totals only",
+   "New Mexico publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NM|0|mixed_half": [
+   "Monthly totals only",
+   "New Mexico publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NM|0|dated": [
+   "Dated reports",
+   "New Mexico publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "NM|0|dated_delayed": [
+   "Dated reports, delayed",
+   "New Mexico publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in New Mexico can mean a report has not appeared yet."
+  ],
+  "NM|0|annual": [
+   "Annual totals only",
+   "New Mexico publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "NM|1|monthly": [
+   "Monthly totals only",
+   "New Mexico publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NM|1|mixed": [
+   "Monthly totals only",
+   "New Mexico publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NM|1|mixed_half": [
+   "Monthly totals only",
+   "New Mexico publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "NM|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in New Mexico are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "NM|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in New Mexico are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in New Mexico can mean a report has not appeared yet."
+  ],
+  "NM|1|annual": [
+   "Annual totals only",
+   "New Mexico publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "HI|0|monthly": [
+   "Monthly totals only",
+   "Hawaii publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "HI|0|mixed": [
+   "Monthly totals only",
+   "Hawaii publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "HI|0|mixed_half": [
+   "Monthly totals only",
+   "Hawaii publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "HI|0|dated": [
+   "Dated reports",
+   "Hawaii publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "HI|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Hawaii publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Hawaii can mean a report has not appeared yet."
+  ],
+  "HI|0|annual": [
+   "Annual totals only",
+   "Hawaii publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "HI|1|monthly": [
+   "Monthly totals only",
+   "Hawaii publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "HI|1|mixed": [
+   "Monthly totals only",
+   "Hawaii publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "HI|1|mixed_half": [
+   "Monthly totals only",
+   "Hawaii publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "HI|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Hawaii are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "HI|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Hawaii are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Hawaii can mean a report has not appeared yet."
+  ],
+  "HI|1|annual": [
+   "Annual totals only",
+   "Hawaii publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "AL|0|monthly": [
+   "Monthly totals only",
+   "Alabama publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AL|0|mixed": [
+   "Monthly totals only",
+   "Alabama publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AL|0|mixed_half": [
+   "Monthly totals only",
+   "Alabama publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AL|0|dated": [
+   "Dated reports",
+   "Alabama publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "AL|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Alabama publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Alabama can mean a report has not appeared yet."
+  ],
+  "AL|0|annual": [
+   "Annual totals only",
+   "Alabama publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "AL|1|monthly": [
+   "Monthly totals only",
+   "Alabama publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AL|1|mixed": [
+   "Monthly totals only",
+   "Alabama publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AL|1|mixed_half": [
+   "Monthly totals only",
+   "Alabama publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "AL|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Alabama are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "AL|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Alabama are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Alabama can mean a report has not appeared yet."
+  ],
+  "AL|1|annual": [
+   "Annual totals only",
+   "Alabama publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "TX|0|monthly": [
+   "Monthly totals only",
+   "Texas publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TX|0|mixed": [
+   "Monthly totals only",
+   "Texas publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TX|0|mixed_half": [
+   "Monthly totals only",
+   "Texas publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TX|0|dated": [
+   "Dated reports",
+   "Texas publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "TX|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Texas publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Texas can mean a report has not appeared yet."
+  ],
+  "TX|0|annual": [
+   "Annual totals only",
+   "Texas publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "TX|1|monthly": [
+   "Monthly totals only",
+   "Texas publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TX|1|mixed": [
+   "Monthly totals only",
+   "Texas publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TX|1|mixed_half": [
+   "Monthly totals only",
+   "Texas publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TX|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Texas are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "TX|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Texas are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Texas can mean a report has not appeared yet."
+  ],
+  "TX|1|annual": [
+   "Annual totals only",
+   "Texas publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "UT|0|monthly": [
+   "Monthly totals only",
+   "Utah publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "UT|0|mixed": [
+   "Monthly totals only",
+   "Utah publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "UT|0|mixed_half": [
+   "Monthly totals only",
+   "Utah publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "UT|0|dated": [
+   "Dated reports",
+   "Utah publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "UT|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Utah publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Utah can mean a report has not appeared yet."
+  ],
+  "UT|0|annual": [
+   "Annual totals only",
+   "Utah publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "UT|1|monthly": [
+   "Monthly totals only",
+   "Utah publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "UT|1|mixed": [
+   "Monthly totals only",
+   "Utah publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "UT|1|mixed_half": [
+   "Monthly totals only",
+   "Utah publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "UT|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Utah are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "UT|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Utah are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Utah can mean a report has not appeared yet."
+  ],
+  "UT|1|annual": [
+   "Annual totals only",
+   "Utah publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "OR|0|monthly": [
+   "Monthly totals only",
+   "Oregon publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OR|0|mixed": [
+   "Monthly totals only",
+   "Oregon publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OR|0|mixed_half": [
+   "Monthly totals only",
+   "Oregon publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OR|0|dated": [
+   "Dated reports",
+   "Oregon publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "OR|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Oregon publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Oregon can mean a report has not appeared yet."
+  ],
+  "OR|0|annual": [
+   "Annual totals only",
+   "Oregon publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "OR|1|monthly": [
+   "Monthly totals only",
+   "Oregon publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OR|1|mixed": [
+   "Monthly totals only",
+   "Oregon publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OR|1|mixed_half": [
+   "Monthly totals only",
+   "Oregon publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OR|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Oregon are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "OR|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Oregon are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Oregon can mean a report has not appeared yet."
+  ],
+  "OR|1|annual": [
+   "Annual totals only",
+   "Oregon publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "KY|0|monthly": [
+   "Monthly totals only",
+   "Kentucky publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "KY|0|mixed": [
+   "Monthly totals only",
+   "Kentucky publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "KY|0|mixed_half": [
+   "Monthly totals only",
+   "Kentucky publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "KY|0|dated": [
+   "Dated reports",
+   "Kentucky publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "KY|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Kentucky publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Kentucky can mean a report has not appeared yet."
+  ],
+  "KY|0|annual": [
+   "Annual totals only",
+   "Kentucky publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "KY|1|monthly": [
+   "Monthly totals only",
+   "Kentucky publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "KY|1|mixed": [
+   "Monthly totals only",
+   "Kentucky publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "KY|1|mixed_half": [
+   "Monthly totals only",
+   "Kentucky publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "KY|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Kentucky are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "KY|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Kentucky are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Kentucky can mean a report has not appeared yet."
+  ],
+  "KY|1|annual": [
+   "Annual totals only",
+   "Kentucky publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "TN|0|monthly": [
+   "Monthly totals only",
+   "Tennessee publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TN|0|mixed": [
+   "Monthly totals only",
+   "Tennessee publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TN|0|mixed_half": [
+   "Monthly totals only",
+   "Tennessee publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TN|0|dated": [
+   "Dated reports",
+   "Tennessee publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "TN|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Tennessee publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Tennessee can mean a report has not appeared yet."
+  ],
+  "TN|0|annual": [
+   "Annual totals only",
+   "Tennessee publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "TN|1|monthly": [
+   "Monthly totals only",
+   "Tennessee publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TN|1|mixed": [
+   "Monthly totals only",
+   "Tennessee publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TN|1|mixed_half": [
+   "Monthly totals only",
+   "Tennessee publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "TN|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Tennessee are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "TN|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Tennessee are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Tennessee can mean a report has not appeared yet."
+  ],
+  "TN|1|annual": [
+   "Annual totals only",
+   "Tennessee publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "OH|0|monthly": [
+   "Monthly totals only",
+   "Ohio publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OH|0|mixed": [
+   "Monthly totals only",
+   "Ohio publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OH|0|mixed_half": [
+   "Monthly totals only",
+   "Ohio publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OH|0|dated": [
+   "Dated reports",
+   "Ohio publishes dated overflow reports; the newest is from Nov 12, 2026."
+  ],
+  "OH|0|dated_delayed": [
+   "Dated reports, delayed",
+   "Ohio publishes dated reports, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Ohio can mean a report has not appeared yet."
+  ],
+  "OH|0|annual": [
+   "Annual totals only",
+   "Ohio publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ],
+  "OH|1|monthly": [
+   "Monthly totals only",
+   "Ohio publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OH|1|mixed": [
+   "Monthly totals only",
+   "Ohio publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OH|1|mixed_half": [
+   "Monthly totals only",
+   "Ohio publishes monthly totals, not dated reports; the map shows no dated discharges there because none are reported by date, not because none happen."
+  ],
+  "OH|1|dated": [
+   "Dated reports",
+   "Overflow reports from sewer operators in Ohio are published by the U.S. Environmental Protection Agency; the newest is from Nov 12, 2026."
+  ],
+  "OH|1|dated_delayed": [
+   "Dated reports, delayed",
+   "Overflow reports from sewer operators in Ohio are published by the U.S. Environmental Protection Agency, but the newest is from Aug 1, 2026 and reports typically appear 30 days after a discharge; a quiet map in Ohio can mean a report has not appeared yet."
+  ],
+  "OH|1|annual": [
+   "Annual totals only",
+   "Ohio publishes yearly totals, not dated overflow reports; the map shows no discharges there because none are reported, not because none happen."
+  ]
+ }
+}
