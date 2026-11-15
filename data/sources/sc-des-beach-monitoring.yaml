@@ -1,0 +1,27 @@
+id: "sc-des-beach-monitoring"
+name: "South Carolina DES Beach Monitoring: the S.C. Beach Access Guide's station layer"
+url: "https://gis.des.sc.gov/gisserver/rest/services/water/BW_Monitoring_Stations/MapServer/0"
+homepage: "https://des.sc.gov/programs/bureau-water/aquatic-science/beach-monitoring"
+kind: "arcgis"
+level: "state"
+# Ingester: pipeline/ingest/sc_des_advisories.py (source id sc-des-beach-monitoring), a polled snapshot, rules only.
+# Read 2026-11-14: 123 stations (Horry 44, Beaufort 28, Charleston 27, Colleton 14, Georgetown 10): 102 "No Advisory",
+#   21 "Long-Term" (18 stations on the Grand Strand in Horry County, WAC-009A to WAC-035; LC-080, LC-081 and LC-082
+#   at Edisto Beach in Colleton County). 21 records: standing long-term
+#   advisories in DES's words, each at its station's point, dated from the first poll (the layer gives no date).
+# Fields read: OBJECTID, STAT, HUC_12, COUNTY, ADVISORY and the point; GlobalID not requested. "No Advisory" is no
+#   record. In season (May 1 to October 1) a short-term advisory opens at the poll that shows it and ends at the poll
+#   that no longer does; the guide's legend also names an emergency closure.
+cadence: "Updated as DES issues and lifts advisories, sampling weekly or every other week May 1 to October 1; long-term advisories year round."
+license: "none stated"
+attribution: "South Carolina Department of Environmental Services, Bureau of Water, Beach Monitoring"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure"]
+states: ["SC"]
+registry_ids: ["sc-des-beach-monitoring"]
+access: ["arcgis"]
+access_detail: "MapServer layer 0 query (where 1=1, outFields OBJECTID, STAT, HUC_12, COUNTY, ADVISORY, outSR 4326), no token."
+machine_readable: true
+legal_basis: "Voluntary: DES's Beach Monitoring program (EPA BEACH Act grant program); no South Carolina statute requires the advisories"
+checked: "2026-11-14"

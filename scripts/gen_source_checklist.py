@@ -70,6 +70,8 @@ AREA_TITLES = {
     "ks": "Kansas",
     "ar": "Arkansas",
     "wi": "Wisconsin",
+    "de": "Delaware",
+    "sc": "South Carolina",
 }
 
 HEADER = """# Source checklist

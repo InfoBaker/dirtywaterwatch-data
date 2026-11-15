@@ -61,10 +61,10 @@
     "history": "Release ids to 17,756; paging to hundreds of pages (start year not checked).",
     "license": "None stated.",
     "legal_basis": "7 Del. C. 6028(a), 6014(b), 6002(20); DERNS policy (raw link Pub/DERNSPolicy.pdf)",
-    "status": "candidate",
-    "status_reason": "Statewide list of every environmental release reported under 7 Del. C. 6028, posted within one business day, including sewage releases of 10,000 gallons or more. Event precision (release time), facility, location text, substance, status, release id. HTML (ASP.NET postback paging, about 17,756 releases); a scraper is needed. Best statewide source for SSOs; CSOs in compliance with the permit are exempt.",
+    "status": "used",
+    "status_reason": "Read by pipeline/ingest/de_dnrec_derns.py: the public list's newest pages each run and every page of ten substance searches once (SEWAGE, WASTEWATER and the rest), the sewage and sanitary-wastewater releases kept by rule, each release's detail page read for its report time, Released To boxes, quantity and DNREC's notes (contacts never read). Statewide; sewage from 10,000 gallons must be reported; permitted CSOs exempt.",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": "Two of the ten newest rows were wastewater (City of Dover sewage 2026-10-23; \"WASTEWATER\" on a Dover roadway 2026-10-18). Some locations are private residences (fuel-oil releases): never show non-sewage rows. Detail pages may include names; not fetched. A 2011 WHYY story found a 13.5-million-gallon partially treated Wilmington plant discharge missing from DERNS."
   },
   {
@@ -183,10 +183,10 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "45 CSO structures (42 Active, 3 AIP) with facility id, location description, receiving-water code (BRC Brandywine 22, CHR Christina 17, SBR 4, SHC Shellpot 1), tide gate and public water access. Better points than the EPA inventory (41). Last edited 2022-02-16.",
+    "status": "watch",
+    "status_reason": "The City's CSO structures layer (45 structures in the 2026-11-03 research); not used in this build: EPA's inventory's 41 open outfalls stand until the layer's structure ids are matched to the permit's outfall numbers (owner question).",
     "verified": "fetched",
-    "checked": "2026-11-03",
+    "checked": "2026-11-14",
     "notes": "Raw: raw/wilmington-cso-locations.json (WGS84). Do not ingest created_user/last_edited_user."
   },
   {
@@ -231,7 +231,7 @@
     "event_types": [],
     "waters_covered": null,
     "water_slugs": [],
-    "url": "https://enterprise.firstmap.delaware.gov/arcgis/rest/services/Environmental/DE_DNREC_Monitoring_Network/FeatureServer/2",
+    "url": "https://data.delaware.gov/resource/ever-58ni.json",
     "access": [
       "arcgis"
     ],
@@ -260,11 +260,11 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "51 ocean, bay and inland beach stations with CurrentAdvisory (coded; all 3 on 2026-11-03, off season) and a link to RecWaterSitePublic.aspx. Snapshot in season.",
+    "status": "used",
+    "status_reason": "Read by pipeline/ingest/de_dnrec_recwater.py: DNREC's advisory and closure history on data.delaware.gov (dataset ever-58ni, Public Domain, 474 rows since 2001 on 2026-11-14) with the FirstMap station layer's points and current status (the map service's legend decodes CurrentAdvisory: 0 Current Advisory, 1 Outside Advisory Area, 2 Resampling Enterococcus Spike, 3 Winter, 4 No Current Advisory).",
     "verified": "fetched",
-    "checked": "2026-11-03",
-    "notes": "Code list for CurrentAdvisory not read."
+    "checked": "2026-11-14",
+    "notes": "The FirstMap layer (Environmental/DE_DNREC_Monitoring_Network FeatureServer 2) has 47 stations; all were 'Winter - Not Currently Sampling' on 2026-11-14. The history's system-test rows (2015, 2017) are left out."
   },
   {
     "id": "de-dnrec-shellfish",
@@ -358,9 +358,9 @@
     "license": null,
     "legal_basis": null,
     "status": "rejected",
-    "status_reason": "No DE rows on 2026-11-03.",
-    "verified": "inferred",
-    "checked": "2026-11-03",
+    "status_reason": "No Delaware row in EPA's current or all-versions sewer overflow extract, fetched 2026-11-14 (registered as a watched channel).",
+    "verified": "fetched",
+    "checked": "2026-11-14",
     "notes": ""
   }
 ]

@@ -93,6 +93,8 @@ STATE_NAMES["MO"] = "Missouri"
 STATE_NAMES["KS"] = "Kansas"
 STATE_NAMES["AR"] = "Arkansas"
 STATE_NAMES["WI"] = "Wisconsin"
+STATE_NAMES["DE"] = "Delaware"
+STATE_NAMES["SC"] = "South Carolina"
 COUNT_RULE_LINE = "Verified reports where available, else notices; revisions and duplicates counted once."
 MONTHS_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 

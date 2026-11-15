@@ -1,0 +1,1111 @@
+{
+ "about": "Water names in DE's records that data/receiving-waters-national.json does not hold for DE, one row per name and county with the number of records, how many are open now, up to five points ([lat, lon], 0.001 degree), towns and sources, for the names pass. Records naming no water and releases DNREC's form marks to ground only are left out (by_reason). Written by scripts/de_sc_report_water_names.py.",
+ "state": "DE",
+ "waters": 68,
+ "reports": 331,
+ "by_reason": {
+  "names no water": 387,
+  "the report says it reached no water": 805
+ },
+ "rows": [
+  {
+   "name": "Atlantic Ocean",
+   "county": null,
+   "reports": 85,
+   "open": 0,
+   "points": [
+    [
+     38.717,
+     -75.075
+    ],
+    [
+     38.741,
+     -75.08
+    ],
+    [
+     38.72,
+     -75.076
+    ],
+    [
+     38.727,
+     -75.077
+    ],
+    [
+     38.539,
+     -75.053
+    ]
+   ],
+   "towns": [],
+   "sources": {
+    "de-dnrec-recreational-water": 85
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Lake Como",
+   "county": null,
+   "reports": 55,
+   "open": 0,
+   "points": [
+    [
+     39.295,
+     -75.6
+    ]
+   ],
+   "towns": [],
+   "sources": {
+    "de-dnrec-recreational-water": 55
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Delaware Bay",
+   "county": null,
+   "reports": 54,
+   "open": 0,
+   "points": [
+    [
+     38.914,
+     -75.304
+    ],
+    [
+     38.829,
+     -75.212
+    ],
+    [
+     38.783,
+     -75.131
+    ]
+   ],
+   "towns": [],
+   "sources": {
+    "de-dnrec-recreational-water": 54
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Silver Lake",
+   "county": "Kent",
+   "reports": 26,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Dover"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2,
+    "de-dnrec-recreational-water": 24
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Rehoboth Bay",
+   "county": null,
+   "reports": 18,
+   "open": 0,
+   "points": [
+    [
+     38.675,
+     -75.074
+    ]
+   ],
+   "towns": [],
+   "sources": {
+    "de-dnrec-recreational-water": 18
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "St. Jones River",
+   "county": "Kent",
+   "reports": 11,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Dover",
+    "Dover Air Force Base"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 11
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "White Clay Creek",
+   "county": "New Castle",
+   "reports": 8,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Newark",
+    "Wilmington",
+    "Kirkwood"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 8
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Indian River",
+   "county": "Sussex",
+   "reports": 4,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Millsboro"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 4
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Army Creek",
+   "county": "New Castle",
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "New Castle"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Calf Run",
+   "county": "New Castle",
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Wilmington"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Christiana River",
+   "county": "New Castle",
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Christiana",
+    "Newark"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Cypress Branch",
+   "county": null,
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Indian River Bay",
+   "county": null,
+   "reports": 2,
+   "open": 0,
+   "points": [
+    [
+     38.592,
+     -75.132
+    ],
+    [
+     38.607,
+     -75.146
+    ]
+   ],
+   "towns": [],
+   "sources": {
+    "de-dnrec-recreational-water": 2
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Lums Pond",
+   "county": "New Castle",
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Kirkwood"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1,
+    "de-dnrec-recreational-water": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Mispillion River",
+   "county": null,
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Polly Branch",
+   "county": "Sussex",
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Selbyville"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Red Lion Creek",
+   "county": "New Castle",
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Bear"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "White Clay Creek",
+   "county": null,
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Alapocus Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Wilmington"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Alapocus Run",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Wilmington"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Brandywine River",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Brandywine River",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Wilmington"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Broadkill Creek",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Milton"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Burton's Pond",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Lewes"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Bye Creek",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Chestnut Run",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Christiana Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Christiana"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Christiana Creek Branch",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Christiana"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Christiana Marsh",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "New Castle"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "City Branch Canal",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Delaware City"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Cypress Branch",
+   "county": "Kent",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Dover"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Cypress Branch Creek",
+   "county": "Kent",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Magnolia"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Doe Run Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Newark"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Dragon Run Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Bear"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "East Branch",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Newark"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Hershey Run",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Wilmington"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Hyde Run",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Wilmington"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Indian River",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Jenny'S Run",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Leatherems Run",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Christiana"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Letherems Run",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Newark"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Lewes Canal",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Lewes"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Lewes Rehoboth Canal",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Lewes"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Lums Pond",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Magazine Ditch",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "New Castle"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Mill Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Greenwood"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Naamans Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "New Castle"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Nammans Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Claymont"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "None Such Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "New Castle"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Nonesuch Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "New Castle"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Noxontown Pond",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Peachtree Run",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Red Clay Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Wilmington"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Rehoboth Bay",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Millsboro"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Rossakatum Branch",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Laurel"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Rossakatum Creek",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Laurel"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Silver Lake",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "South Branch Naaman Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Wilmington"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "St. Jones River",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Stonewater Creek",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Millsboro"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Sunset Lake",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Newark"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Tidbury Creek",
+   "county": "Kent",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Camden"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Trap Pond",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Trap Pond",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Laurel"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Trunk Ditch",
+   "county": "Kent",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Frederica"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Turkey Run",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "White Clay Creek River",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  },
+  {
+   "name": "Wood Creek",
+   "county": "New Castle",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Greenwood"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "reason": "no water of that name in DE on the national list"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Broad Creek",
+   "county": "Sussex",
+   "reports": 6,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Laurel"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 6
+   },
+   "how": "the national list holds the name",
+   "national_key": "broad creek"
+  },
+  {
+   "name": "Brandywine Creek",
+   "county": "New Castle",
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Wilmington"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "how": "the national list holds the name",
+   "national_key": "brandywine creek"
+  },
+  {
+   "name": "Broad Creek",
+   "county": null,
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "how": "the national list holds the name",
+   "national_key": "broad creek"
+  },
+  {
+   "name": "Little Mill Creek",
+   "county": "New Castle",
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Wilmington",
+    "Brookside"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "how": "the national list holds the name",
+   "national_key": "little mill creek"
+  },
+  {
+   "name": "Shellpot Creek",
+   "county": null,
+   "reports": 2,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 2
+   },
+   "how": "the national list holds the name",
+   "national_key": "shellpot creek"
+  },
+  {
+   "name": "Brandywine Creek",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "how": "the national list holds the name",
+   "national_key": "brandywine creek"
+  },
+  {
+   "name": "Broadkill River",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Milton"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "how": "the national list holds the name",
+   "national_key": "broadkill river"
+  },
+  {
+   "name": "Little Mill Creek",
+   "county": null,
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "how": "the national list holds the name",
+   "national_key": "little mill creek"
+  },
+  {
+   "name": "Nanticoke River",
+   "county": "Sussex",
+   "reports": 1,
+   "open": 0,
+   "points": [],
+   "towns": [
+    "Seaford"
+   ],
+   "sources": {
+    "de-dnrec-derns-recent-releases": 1
+   },
+   "how": "the national list holds the name",
+   "national_key": "nanticoke river"
+  }
+ ]
+}
