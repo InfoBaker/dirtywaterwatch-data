@@ -205,3 +205,34 @@ def test_nevada_missing_waters_list():
         "Lahontan Reservoir", "Rye Patch Reservoir", "Marlette Lake", "Washoe Lake"}
     for name in P.WATERS:                                    # every water the crosswalk knows is listed with its county
         assert any(r["name"] == name and r["county"] == P.WATERS[name][0] for r in d["rows"] + d.get("resolved", []))
+
+
+# ---- review fixes (Astra, 2026-11-15) --------------------------------------------------------------------------
+
+@pytest.mark.parametrize("change", [
+    ("Marlette Lake (Updated June 17, 2026)", "Marlette Lake (Updated 6/17/2026)"),          # one date format
+    ("<p><strong>Marlette Lake (Updated June 17, 2026)</strong></p>", "<p>Marlette Lake (Updated June 17, 2026)</p>"),
+    ("<p><strong>Marlette Lake (Updated June 17, 2026)</strong></p>",
+     "<p><strong>Marlette Lake - Updated June 17, 2026</strong></p>"),                        # one heading's form
+])
+def test_p1_1_a_partly_unreadable_section_lifts_nothing(tmp_path, monkeypatch, change):
+    good, meta = P.build(AUG26, T1, [])
+    page = AUG26.replace(*change)
+    assert page != AUG26
+    with pytest.raises(ValueError, match="not completely readable"):
+        P.build(page, T2, good)
+    import common
+    monkeypatch.setattr(P, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    common.write_events(P.SOURCE_ID, good, meta=meta, path=tmp_path / f"{P.SOURCE_ID}.json")
+    (tmp_path / "p.html").write_text(page)
+    assert P.main(["--file", str(tmp_path / "p.html")]) == 1
+    doc = json.loads((tmp_path / f"{P.SOURCE_ID}.json").read_text())
+    assert doc["ok"] is False and doc["count"] == 4
+    assert all(r["status"] == "advisory_active" and r["ended_at"] is None for r in doc["records"])
+
+
+def test_p1_1_none_beside_a_listed_water_is_not_read():
+    page = AUG26.replace("<p><strong>Lahontan State", "<p>None at this time.</p><p><strong>Lahontan State", 1)
+    with pytest.raises(ValueError, match="not completely readable"):
+        P.parse(page)
