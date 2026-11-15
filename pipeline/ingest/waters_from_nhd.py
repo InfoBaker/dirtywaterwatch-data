@@ -4254,7 +4254,8 @@ class Run:
             over = budget is not None and todo and (no_time or time.monotonic() - started > budget)
             if over:
                 failed = f"time budget of {budget:g} s used"
-            chunks = state_chunks([sp for _, _, sp in todo], S.folds(state))
+            specs = [sp for _, _, sp in todo]       # the accent-free form only for Puerto Rico (older callers' shape kept)
+            chunks = state_chunks(specs, True) if S.folds(state) else state_chunks(specs)
             asked, stopped = set(), None
             for names, box in ([] if over else chunks):
                 # the budget is checked before each query, not only between states: a state whose names split into
@@ -4262,7 +4263,8 @@ class Run:
                 if budget is not None and time.monotonic() - started > budget:
                     stopped = f"time budget of {budget:g} s used"
                     break
-                resp, how = state_fetch(state_query(names, box, state), mirrors, a.refresh, a.offline, deadline=deadline)
+                q = state_query(names, box, state) if S.folds(state) else state_query(names, box)
+                resp, how = state_fetch(q, mirrors, a.refresh, a.offline, deadline=deadline)
                 if resp is None:
                     failed = how
                     break
