@@ -21,13 +21,15 @@ Record rules (rules only; no model, no geocoding)
     common.scrub_text.
   - published_at: the release's own date ("For Immediate Release – October 14, 2025"), precision day. reported_at
     stays null.
-  - started_at: the day the text says the City received notice of, or responded to, the overflow ("On Friday,
-    August 15, the City of Florence received notice ...", "responded ... on Sunday, March 3"): precision day, the
-    overflow having begun on or before it (raw.start_basis says so); a date with no year takes the release's year,
-    or the year before when that would put it after the release. With no such day, the release date, the latest the
-    overflow can have begun (raw.start_basis).
-  - No end: the notices give none. When the City advises avoiding the creek "until further notice" the record is
-    status ongoing with raw.status_basis (the City's advice stands; the City publishes no lift), else unknown. A
+  - The overflow's start is never given: started_at stays null (review 2026-11-14 re-review P1-1). The day the
+    text says the City received notice of, or responded to, the overflow ("On Friday, August 15, the City of
+    Florence received notice ...") is raw.notification_day and reported_at (precision day; a date with no year takes
+    the release's year, or the year before when that would put it after the release; with no such day, the release
+    date); the site's caution counts from it under the unknown-status rule, and it is never called the start.
+  - No end and no status: the overflow record is status unknown. The City's advice to avoid the creek is its own
+    record "<node>-advice" (advice_record): advisory_active from the release that carries it, confirmed only by the
+    City's publications (the release, an edit that still carries it), aged out by the status builder 14 days after
+    the last confirmation (raw._ages_after_confirmation); an edit that drops it ends it at a poll bound. A
     reassurance about sampling ("no threat to public health") is cut from the kept text (raw.sampling_statement_cut):
     never an end, never repeated as a safety statement.
   - Volume: "an estimated 115,200 gallons" is volume_gal (estimated); "more than 5,000 gallons" is volume_text only
@@ -243,11 +245,21 @@ def update_notice(state: dict, slug: str, nid: str, parsed: dict, now: str) -> s
         vs.append({"parsed": parsed, "hash": h, "first_seen_at": now, "last_seen_at": now})
         return "new"
     cur = vs[-1]
+    prev_read = cur.get("last_seen_at")
     cur["last_seen_at"] = now
     if cur["hash"] == h:
         return "same"
     if incident_key(cur["parsed"]) == incident_key(parsed):
         cur.setdefault("revisions", []).append({"seen_at": now, "previous_hash": cur["hash"]})
+        # the City's advice: a revised page that still carries it is the City's new confirmation of it; a revised
+        # page without it ends the advice between the previous read and this one (a poll bound, never a lift date)
+        if parsed.get("advice"):
+            cur["advice_confirmed_at"] = now
+            cur.pop("advice_dropped", None)
+        elif cur["parsed"].get("advice") and not cur.get("advice_dropped"):
+            cur["advice_dropped"] = {"seen_at": now, "previous_read_at": prev_read,
+                                     "advice": cur["parsed"].get("advice"),
+                                     "until_further_notice": cur["parsed"].get("until_further_notice")}
         cur.update(parsed=parsed, hash=h)
         return "revised"
     cur["later_version_seen_at"] = now
@@ -261,12 +273,16 @@ def records(state: dict, fetched_at: str) -> list[dict]:
         for i, v in enumerate(n["versions"]):
             p = v["parsed"]
             key = n["nid"] if i == 0 else f"{n['nid']}-v{i + 1}"
-            start = p.get("incident_day") or p.get("release_date")
             raw = {"state": "SC", "time_zone": "America/New_York", "node": n["nid"], "slug": slug,
                    "_placement": "named_water_only",
                    "title": p.get("title"), "release_date": p.get("release_date"),
-                   "start_basis": p.get("start_basis") or ("the release's date, the latest the overflow can have begun"
-                                                            " (the notice gives no earlier day)"),
+                   # the day the City received notice of or responded to the overflow, and the release's date, are
+                   # kept as such: neither is the overflow's start, which the notices never give (review 2026-11-14
+                   # re-review P1-1)
+                   "notification_day": p.get("incident_day"),
+                   "notification_day_basis": p.get("start_basis"),
+                   "start_basis": "the notice gives no start for the overflow; the colour counts from the day the "
+                                  "City received notice of it (reported_at), which is not its start",
                    "end_basis": "the City's notices give no end and the City publishes no lift",
                    "cause_text": p.get("cause_text"), "sampling_statement_cut": p.get("sampling_statement_cut"),
                    "stretch_text": p.get("stretch_text"),
@@ -283,18 +299,54 @@ def records(state: dict, fetched_at: str) -> list[dict]:
                                                 "keeps the earlier text"}
             if i > 0:
                 raw["earlier_version_of_page"] = n["nid"]
-            status = "ongoing" if p.get("until_further_notice") else "unknown"
-            if status == "ongoing":
-                raw["status_basis"] = ("the City advises avoiding the creek until further notice and has published "
-                                       "no lift")
-            out.append(event(
-                source_id=SOURCE_ID, source_record_id=key, event_type="sso", status=status,
+            # the overflow: no start, no end and no status the notice gives (advice to avoid the creek is not
+            # evidence that sewage is still flowing); the site's caution counts from the notification day
+            raw["status_basis"] = "the notice gives neither the overflow's start nor its end"
+            rec = event(
+                source_id=SOURCE_ID, source_record_id=key, event_type="sso", status="unknown",
                 discharger_id=DISCHARGER_ID, waterbody_text="; ".join(p.get("waters") or []) or None,
-                started_at=start, time_precision="day" if start else None, published_at=p.get("release_date"),
+                started_at=None, time_precision=None,
+                reported_at=p.get("incident_day") or p.get("release_date"), published_at=p.get("release_date"),
                 fetched_at=v.get("last_seen_at") or fetched_at, material="sewage", volume_gal=p.get("volume_gal"),
                 volume_text=p.get("volume_text"), estimate_flag=p.get("estimate_flag") or "unknown",
-                authority=AUTHORITY, advice_text=p.get("advice"), source_url=BASE + slug, raw=raw))
+                authority=AUTHORITY, advice_text=p.get("advice"), source_url=BASE + slug, raw=raw)
+            out.append(rec)
+            if p.get("advice") or v.get("advice_dropped"):
+                out.append(advice_record(rec, p, v))
     return out
+
+
+def advice_record(rec: dict, p: dict, v: dict) -> dict:
+    """The City's advice to avoid the water, its own record beside the overflow's (review 2026-11-14 re-review P1-1).
+
+    It is in effect from the release that carries it (the release's day, precision day: the advice's issue, not the
+    overflow's start). The City confirms it only by publishing it: the release, and any later edit of the page that
+    still carries it (raw._last_seen_in_source is the latest such confirmation; a weekly reread of an unchanged page in
+    the archive is not one). The status builder holds the City's colour to CONFIRM_DAYS after the last confirmation and
+    then marks it not reconfirmed (raw._ages_after_confirmation). An edit that drops the advice ends it between the
+    read before and that edit (ended_at_precision "poll"); the City never publishes a lift, so no lift is invented."""
+    raw = {k: rec["raw"].get(k) for k in ("state", "time_zone", "node", "slug", "_placement", "title",
+                                          "release_date", "notification_day", "county", "town")}
+    drop = v.get("advice_dropped")
+    advice = p.get("advice") or (drop or {}).get("advice")
+    raw.update(overflow_record=rec["event_id"], _ages_after_confirmation=True,
+               until_further_notice=bool(p.get("until_further_notice") or (drop or {}).get("until_further_notice")),
+               start_basis="the release that carries the City's advice (its date); not the overflow's start",
+               _last_seen_in_source=v.get("advice_confirmed_at") or p.get("release_date"),
+               confirmation_basis=("the City's last edit of the notice that still carries the advice"
+                                   if v.get("advice_confirmed_at") else "the release itself"),
+               last_read_at=v.get("last_seen_at"))
+    end = None
+    if drop:
+        end = drop["seen_at"]
+        raw.update(ended_at_precision="poll", lift_observed_between=[drop.get("previous_read_at"), drop["seen_at"]],
+                   end_basis="the City's edit of the notice no longer carries the advice; the City published no lift")
+    return event(
+        source_id=SOURCE_ID, source_record_id=f"{rec['source_record_id']}-advice", event_type="sso",
+        status="advisory_active", discharger_id=DISCHARGER_ID, waterbody_text=rec["waterbody_text"],
+        started_at=p.get("release_date"), ended_at=end, time_precision="day", reported_at=None,
+        published_at=p.get("release_date"), fetched_at=rec["fetched_at"], material="sewage",
+        authority=AUTHORITY, advice_text=advice, source_url=rec["source_url"], raw=raw)
 
 
 META = {"credit": "City of Florence, South Carolina, City News",

@@ -49,18 +49,73 @@ def test_no_personal_string_reaches_a_record():
     assert "[house number removed]" in blob
 
 
-def test_the_record_is_a_dated_sewage_report_in_eastern_time_with_no_end():
+def test_the_record_is_a_sewage_report_with_no_invented_start_and_the_advice_its_own_record():
+    # re-review P1-1: the notification and release days are kept as such, never the overflow's start; the advice to
+    # avoid the creek is its own record, not evidence that sewage is still flowing
     nid, p = notice()
     st = {"notices": {}}
     F.update_notice(st, "/news/x", nid, p, T0)
-    r = florence_records(st)["1929"]
-    assert r["event_type"] == "sso" and r["status"] == "ongoing" and r["ended_at"] is None
-    assert r["started_at"] == "2025-08-15" and r["time_precision"] == "day" and r["published_at"] == "2025-08-15"
-    assert r["reported_at"] is None and r["raw"]["time_zone"] == "America/New_York"
+    recs = florence_records(st)
+    assert set(recs) == {"1929", "1929-advice"}
+    r = recs["1929"]
+    assert r["event_type"] == "sso" and r["status"] == "unknown" and r["ended_at"] is None
+    assert r["started_at"] is None and r["time_precision"] is None
+    assert r["reported_at"] == "2025-08-15" and r["published_at"] == "2025-08-15"
+    assert r["raw"]["notification_day"] == "2025-08-15" and r["raw"]["release_date"] == "2025-08-15"
+    assert r["raw"]["time_zone"] == "America/New_York"
     assert r["discharger_id"] == "sc-florence" and r["npdes_permit"] is None
     assert r["waterbody_text"] == "Jeffries Creek" and r["raw"]["county"] == "Florence"
-    assert "until further notice" in r["raw"]["status_basis"]
     assert r["lat"] is None and r["lon"] is None
+    a = recs["1929-advice"]
+    assert a["status"] == "advisory_active" and a["started_at"] == "2025-08-15" and a["ended_at"] is None
+    assert a["raw"]["until_further_notice"] and a["raw"]["_ages_after_confirmation"] is True
+    assert a["raw"]["overflow_record"] == r["event_id"] and "not the overflow's start" in a["raw"]["start_basis"]
+
+
+def _ivs(rec, now):
+    from build import status
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    return status.event_intervals(rec, "SC", now, None, rules)
+
+
+def test_the_advice_holds_while_the_city_reconfirms_it_and_an_archive_reread_is_no_confirmation():
+    from datetime import datetime, timezone
+    nid, p = notice()
+    st = {"notices": {}}
+    F.update_notice(st, "/news/x", nid, p, "2025-08-16T12:00:00Z")
+    # weekly rereads of the unchanged page in the archive: no confirmation
+    F.update_notice(st, "/news/x", nid, copy.deepcopy(p), "2025-10-01T12:00:00Z")
+    a = florence_records(st)["1929-advice"]
+    assert a["raw"]["_last_seen_in_source"] == "2025-08-15"
+    ivs = _ivs(a, datetime(2025, 10, 1, 12, tzinfo=timezone.utc))
+    red = [i for i in ivs if i["rule"] == "advisory_active"]
+    assert red and red[0]["end"].date().isoformat() == "2025-08-29"          # 14 days after the release, then not reconfirmed
+    # the City edits the notice months later and still advises avoiding the creek: confirmed again
+    p2 = copy.deepcopy(p)
+    p2["advice"] += " The advisory remains in effect."
+    assert F.update_notice(st, "/news/x", nid, p2, "2025-12-01T12:00:00Z") == "revised"
+    a = florence_records(st)["1929-advice"]
+    assert a["raw"]["_last_seen_in_source"] == "2025-12-01T12:00:00Z"
+    red = [i for i in _ivs(a, datetime(2025, 12, 5, tzinfo=timezone.utc)) if i["rule"] == "advisory_active"]
+    assert red and red[0]["end"].date().isoformat() == "2025-12-15"
+    # the overflow record still has no start, whatever the advice does, and still draws the site's caution from the
+    # notification day (never red: no window of the City's own)
+    o = florence_records(st)["1929"]
+    assert o["started_at"] is None
+    ov = _ivs(o, datetime(2025, 8, 20, tzinfo=timezone.utc))
+    assert ov and ov[0]["start"].date().isoformat() == "2025-08-15" and ov[0]["rule"] != "advisory_active"
+
+
+def test_an_edit_that_drops_the_advice_ends_it_at_a_poll_bound():
+    nid, p = notice()
+    st = {"notices": {}}
+    F.update_notice(st, "/news/x", nid, p, T0)
+    p2 = copy.deepcopy(p)
+    p2.update(advice=None, until_further_notice=False)
+    F.update_notice(st, "/news/x", nid, p2, T2)
+    a = florence_records(st)["1929-advice"]
+    assert a["ended_at"] == T2 and a["raw"]["ended_at_precision"] == "poll"
+    assert a["raw"]["lift_observed_between"] == [T0, T2]
 
 
 def test_yesterday_and_a_spelling_and_an_estimate():
@@ -85,18 +140,18 @@ def test_a_reused_page_address_never_overwrites_the_earlier_record():
     p2["advice"] = (p2["advice"] or "") + " Signs have been posted."
     assert F.update_notice(st, "/news/x", nid, p2, T1) == "revised"
     recs = florence_records(st)
-    assert set(recs) == {"1929"} and recs["1929"]["raw"]["_revisions"]
+    assert set(recs) == {"1929", "1929-advice"} and recs["1929"]["raw"]["_revisions"]
     # the page rewritten for a later overflow: a second record, the first kept as it was
     p3 = copy.deepcopy(p)
     p3.update(release_date="2025-11-03", incident_day="2025-11-02", volume_text="an unknown volume")
     first_before = florence_records(st)["1929"]
     assert F.update_notice(st, "/news/x", nid, p3, T2) == "new_version"
     recs = florence_records(st)
-    assert set(recs) == {"1929", "1929-v2"}
-    assert recs["1929"]["started_at"] == first_before["started_at"] == "2025-08-15"
+    assert set(recs) == {"1929", "1929-advice", "1929-v2", "1929-v2-advice"}
+    assert recs["1929"]["reported_at"] == first_before["reported_at"] == "2025-08-15"
     assert recs["1929"]["volume_text"] == first_before["volume_text"]
     assert recs["1929"]["raw"]["later_version"]["seen_at"] == T2
-    assert recs["1929-v2"]["started_at"] == "2025-11-02" and recs["1929-v2"]["raw"]["earlier_version_of_page"] == "1929"
+    assert recs["1929-v2"]["reported_at"] == "2025-11-02" and recs["1929-v2"]["raw"]["earlier_version_of_page"] == "1929"
 
 
 def test_a_contact_block_of_several_paragraphs_is_cut_whole():
