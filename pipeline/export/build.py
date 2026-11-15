@@ -1527,6 +1527,8 @@ def advisory_point_features(st: dict, by_event: dict) -> list[dict]:
             continue
         lon, lat = round(float(src["lon"]), 5), round(float(src["lat"]), 5)
         fid = f"{e['event_id']}~{'+'.join(ap.get('water_slugs') or [])}" if pp else e["event_id"]
+        if pp and pp.get("piece"):
+            fid += f"~{pp['piece'] + 1}"        # a further separate piece of the same water (status: part_point.piece)
         pts.append({"type": "Feature", "id": fid, "geometry": {"type": "Point", "coordinates": [lon, lat]},
                     "properties": {"event_id": e["event_id"], "lat": lat, "lon": lon, "status": ap["status"],
                                    "rule": ap.get("rule"), "type": e["event_type"], "event_status": e.get("status"),

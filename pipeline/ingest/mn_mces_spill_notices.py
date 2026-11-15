@@ -40,8 +40,14 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
     given (raw.signs.removal_note, raw.signs.removal_done). Without signs: ended at the stop day, else unknown with
     no end. Only an affirmative removal counts: a negated, planned-on-a-condition or conditional sentence ("crews have
     not removed the signs", "will be removed when the water tests clean") is neither a removal done nor one announced,
-    and the signs stand (removal_done, removal_announced). The signs' day is the earliest notice that gives them,
-    whatever order the page lists its updates in (verification pass 2 2026-11-15 P1-1).
+    and the signs stand (removal_done, removal_announced). A removal inside a conditional or time clause ("When crews
+    have removed the signs, the advisory ends", if, once, until, as soon as, "after crews have removed ...") is no
+    removal done (verification pass 3 2026-11-15 P1-1). The signs' day is the earliest notice that gives them,
+    whatever order the page lists its updates in (verification pass 2 2026-11-15 P1-1). The notices after it are read
+    in date order and the latest that speaks of the signs decides: a later notice that they stand ("remain", "have
+    not been removed", a conditional removal, placed again; raw.signs.standing_per_notice_of) cancels an earlier
+    removal, planned or done, and its cut-off; a notice silent on the signs changes nothing (verification pass 3
+    2026-11-15 P1-2).
   - Water: "Wastewater reached nearby Mud Pond" gives waterbody_text "Mud Pond" (raw.reached_water true). "No waterbodies
     were impacted" is raw.reached_water false with the Council's words (kept, placed on no water). A water named only
     as nearby or tested and found unaffected ("Bassett Creek and Wirth Lake are nearby", "did not impact the water
@@ -153,16 +159,47 @@ def _plain_sentences(text: str) -> list[str]:
     return [x for x in re.split(r"(?<=[.!?])\s+", t) if x.strip()]
 
 
+# a removal inside a conditional or time clause ("When crews have removed the signs, the advisory ends", "until the
+# signs have been removed", "as soon as", "whenever") is no removal done: the subordinator anywhere in the sentence,
+# or "after"/"before" ahead of the removal in its own clause ("After crews have removed the signs, ..."; but "the
+# signs were removed after the water tested clean" is done; verification pass 3 2026-11-15 P1-1)
+REMOVAL_IF = re.compile(r"\b(?:if|unless|until|till|once|when|whenever|as\s+soon\s+as|provided|pending|in\s+case|"
+                        r"so\s+long\s+as|as\s+long\s+as|in\s+order|by\s+the\s+time)\b", re.I)
+REMOVAL_BEFORE_VERB = re.compile(r"\b(?:after|before)\b[^,;:]*\bremov", re.I)
+# the signs stand on the update's day: a negated removal, a conditional one, "remain", "still", or the signs placed
+# again; a later such notice cancels an earlier removal, planned or done (verification pass 3 2026-11-15 P1-2)
+SIGNS_STILL = re.compile(r"\bsigns?\b[^.]*\b(?:remain(?:s|ed)?|still|stay(?:s|ed)?|kept|left)\b(?![^.]*\bremoved\b)",
+                         re.I)
+SIGNS_MENTION = re.compile(r"\bsigns?\b[^.]*\bremov|\bremov\w*\b[^.]*\bsigns?\b", re.I)
+
+
 def removal_done(text: str) -> bool:
     """An affirmative, completed removal of the signs in this text (never a negated, planned or conditional one)."""
     return any(SIGNS_REMOVED.search(x) and not REMOVAL_NEG.search(x) and not REMOVAL_MODAL.search(x)
+               and not REMOVAL_IF.search(x) and not REMOVAL_BEFORE_VERB.search(x)
                for x in _plain_sentences(text))
+
+
+def signs_standing(text: str) -> bool:
+    """This text says the signs stand on its day: "the signs remain", "are still posted", a negated removal ("crews have
+    not removed the signs"), a conditional one ("will be removed when the water tests clean", "when crews have removed
+    the signs, ..."), or the signs placed (again)."""
+    for x in _plain_sentences(text):
+        if SIGNS_UP.search(x) or re.search(r"\bsigns?\b[^.]*\b(?:have|has)\s+been\s+(?:re-?)?placed\b", x, re.I):
+            return True
+        if SIGNS_STILL.search(x):
+            return True
+        if SIGNS_MENTION.search(x) and not removal_done(x) and (REMOVAL_NEG.search(x) or REMOVAL_IF.search(x)
+                                                                or REMOVAL_BEFORE_VERB.search(x)):
+            return True
+    return False
 
 
 def removal_announced(text: str) -> bool:
     """A removal announced for later without a condition ("will be removed", "will be removed next week"); a negated
     or conditional one ("will not be removed", "will be removed when ...") is no announcement."""
     return any(SIGNS_DOWN.search(x) and not REMOVAL_NEG.search(x) and not REMOVAL_CONDITION.search(x)
+               and not REMOVAL_IF.search(x) and not REMOVAL_BEFORE_VERB.search(x)
                for x in _plain_sentences(text))
 
 
@@ -371,8 +408,28 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
            for x in [SIGNS_UP.search(u["text"])] if x]
     up = min(ups, key=lambda t: t[0] or "") if ups else None
     after_up = sorted((u for u in updates if not up or not up[0] or u["date"] >= up[0]), key=lambda u: u["date"])
-    # a removal announced: the latest such update (the signs stood to its day at least)
-    down = next((u for u in reversed(after_up) if removal_announced(u["text"])), None)
+    # the signs' state is read notice by notice in date order, whatever order the page lists them in; the latest notice
+    # that speaks of them decides (verification pass 3 2026-11-15 P1-2): a removal done (kept at the earliest day of a
+    # run of such notices: the signs were down by then), a removal announced (the latest: they stood to its day at
+    # least), or the signs standing ("remain", "have not been removed", a conditional removal, placed again), which
+    # cancels an earlier removal, planned or done. A notice silent on the signs changes nothing. One notice that says
+    # both that they stand and that they will come down is a plan; one that says both stand and are down, stands.
+    done = down = standing = None
+    by_day: dict[str, list[dict]] = {}
+    for u in after_up:
+        by_day.setdefault(u["date"], []).append(u)
+    for day in sorted(by_day):
+        txt = " ".join(u["text"] for u in by_day[day])
+        u0 = dict(by_day[day][0], text=txt)
+        is_up = bool(up) and day > (up[0] or "") and signs_standing(txt)
+        is_done, is_down = removal_done(txt), removal_announced(txt)
+        if is_up and not is_down:
+            done = down = None
+            standing = u0
+        elif is_done and not is_up:
+            done, down, standing = (done or u0), None, None
+        elif is_down:
+            done, down, standing = None, u0, None
     status, ended, advice = ("ended" if stopped else "unknown"), (stopped.isoformat() if stopped else None), None
     window_h, window_basis = None, None
     tz = ZoneInfo(TZ)
@@ -394,8 +451,8 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
                                        "ended_at_precision": "day" if stopped else None}
             raw["advisory_from_basis"] = (f"the Council's signs are first given in its notice of {up[0]}, after the day "
                                           f"it responded ({start.isoformat()}): its window starts on that notice's day")
-        # a removal done: the earliest update on or after the signs' notice that says so affirmatively
-        done = next((u for u in after_up if removal_done(u["text"])), None)
+        if standing:
+            raw["signs"]["standing_per_notice_of"] = standing["date"]
         if down or done:
             said = done or down
             d = date.fromisoformat(said["date"])

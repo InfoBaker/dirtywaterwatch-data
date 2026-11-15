@@ -35,6 +35,32 @@ PERSON_LABEL_RE = re.compile(
 WATER_WORDS = (r"(?:creek|bayou|canal|branch|lateral|river|lake|ditch|drain|drainage|coulee|slough|pond|run|stream|"
                r"tributary|trib|channel|waterway|swamp|marsh|lagoon|bay|spillway|diversion|basin|gully|brook|fork|"
                r"reservoir|sound|pass)")
+# rank, office and courtesy titles before a name (Astra verify3 P1-2): abbreviations with a period in any case
+# ('Lt. Example', 'sgt. example'), or capitalised without one ('Sgt Example'); full titles capitalised before a
+# capitalised word ('Officer Example', 'Trooper Example'). 'Chief', 'General', 'Major', 'Private' and 'Father' are left
+# out: they begin place and water names ('Chief Logan Lake').
+TITLE_ABBR = (r"(?:mr|mrs|ms|mx|miss|dr|prof|rev|fr|lt|sgt|capt|cpt|col|maj|gen|cpl|pvt|cmdr|cdr|adm|det|insp|supt|"
+              r"ofc|tpr|hon|gov|sen|rep|atty|esq|sr|jr|messrs)")
+TITLE_WORDS = (r"(?:Officer|Deputy|Trooper|Sheriff|Ranger|Captain|Lieutenant|Sergeant|Corporal|Detective|Inspector|"
+               r"Warden|Director|Commissioner|Superintendent|Mayor|Councilman|Councilwoman|Councilor|Councillor|"
+               r"Pastor|Professor|Doctor|Judge|Senator|Representative|Delegate|Governor|Colonel|Constable|Marshal|"
+               r"Technician|Biologist|Specialist|Coordinator|Manager|Supervisor)")
+TITLE_CAPS = (r"(?:Mr|Mrs|Ms|Mx|Miss|Dr|Prof|Rev|Fr|Lt|Sgt|Capt|Cpt|Col|Maj|Cpl|Pvt|Cmdr|Cdr|Adm|Det|Insp|Supt|Ofc|"
+              r"Tpr|Hon|Gov|Sen|Rep|Atty|MR|MRS|MS|DR|LT|SGT|CAPT|CPL|DET|OFC|TPR)")
+# the abbreviation with its period (any case), not part of an address or a web address ('dep.wv.gov.')
+TITLE_DOT_RE = re.compile(rf"(?<![\w./@-])(?i:{TITLE_ABBR})\.(?=[ ]*[A-Za-z])")
+TITLE_NAME_RE = re.compile(rf"{TITLE_DOT_RE.pattern}|(?<![\w./@-]){TITLE_CAPS}[ ]+[A-Z]|\b{TITLE_WORDS}[ ]+(?!(?i:{WATER_WORDS})\b)[A-Z][a-z]")
+# a name followed by what a person did ('Example Person sampled the bloom', 'E. Person sampled', 'E.P. Person
+# noticed'): two capitalised words, or initials and a capitalised word, before the verb
+NAME_ACTS_RE = re.compile(r"(?:\b[A-Z][a-z]+(?:[ ][A-Z]\.)?|\b[A-Z]\.(?:[ ]?[A-Z]\.)?)[ ]*"
+                          rf"(?!(?i:{WATER_WORDS}|reservoir|dam|park|marina|beach)\b)[A-Z][a-z'-]+[ ]+(?:reported|sampled|collected|photographed|"
+                          r"found|noticed|observed|called|submitted|sent|said|stated|noted|confirmed|spotted|saw)\b")
+
+
+def names_with_a_title(text: str) -> bool:
+    return bool(TITLE_NAME_RE.search(text or "") or NAME_ACTS_RE.search(text or ""))
+
+
 WATER_NAME_RE = re.compile(rf"(?i)^(?=(?:.*\b{WATER_WORDS}\b))[a-z][a-z'.-]*(?:[ ][a-z][a-z'.-]*){{0,5}}$")
 
 
@@ -43,7 +69,7 @@ def has_address(text: str) -> bool:
 
 
 def names_a_person(text: str) -> bool:
-    return bool(PERSON_LABEL_RE.search(text or ""))
+    return bool(PERSON_LABEL_RE.search(text or "")) or names_with_a_title(text)
 
 
 def is_water_name(text: str) -> bool:
