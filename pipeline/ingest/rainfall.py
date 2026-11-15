@@ -11,7 +11,9 @@ through common.load_outfall_registry: the ECHO CSO inventory, national; plant ou
 data/build/ma-cso-outfalls.json (MassDEP layer) and data/build/me-cso-outfalls.json (Maine DEP layer), in the
 live states (build/status.py states(): a state going live brings its outfalls with it), New Jersey's included
 except the permits on the permittees' shared site (ingest/nj_cso_likely.py), which keep the site; rounded to 0.01
-degree (about 1 km, the MRMS grid); one point serves every outfall in it.
+degree (about 1 km, the MRMS grid); one point serves every outfall in it. Each point belongs to its state's radar
+region (mrms_grid.region_of: Alaska, Hawaii, the Caribbean for Puerto Rico and the Virgin Islands, the conus for every
+other state).
 
 Observed: NOAA MRMS radar-only QPE from the ImageServer `obs/mrms_qpe`
 (https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer), product valid
@@ -28,24 +30,45 @@ path of before, the fallback: one `identify` per point (1/3/6/12/24/48/72-hour t
 FALLBACK_MAX_CALLS points (one per permittee first, wettest first). Readings are kept per clock hour
 (rainfall.json; --force rereads). Negative values are no data.
 
-Outside the lower 48: the service also publishes alaska_QPE_*, hawaii_QPE_* and carib_QPE_* (Puerto Rico and the
-Virgin Islands) grids (catalog, 2026-11-14); this module reads conus_QPE_* only, so Alaska, Hawaii and Puerto Rico
-are not read (OUTSIDE_RADAR_GRID) and their combined sewer permits stay covered false in out/coverage.json.
+Regions (since 2026-11-15, read_region): the service publishes four grids, conus_QPE_*, alaska_QPE_*, hawaii_QPE_* and
+carib_QPE_* (research/mrms/regions-2026-11-15.md: each stored in Web Mercator, updated in the same hourly cycle, its
+0.01 degree export equal to identify at Juneau and San Juan). Each region with points is read on its own, the same way:
+one catalog query serves every region, then its own tiles (at most two for Alaska, one for Puerto Rico), its own unit,
+its own check at its wettest point and its own per-point fallback (at most REGION_FALLBACK_MAX_CALLS outside the
+conus), its readings citing its own product (product_name). rainfall.json mrms.regions holds each region's points,
+freshness, product time, fallback, requests and (outside the conus) grid and unit; mrms.grid, mrms.units and
+mrms.fallback stay the conus's. A point outside its region's grid is left out and listed (mrms.outside_grid). Where
+MRMS answers no coverage (-3: no radar sees the place, as at Prudhoe Bay) at a point never read, the point is outside
+radar coverage: listed (mrms.outside_coverage), never fresh, no reading to show, never a failed tile or a fallback, and
+not counted for the exit code; at a point read before it is an outage, its reading missing and counted
+(points[].no_coverage.read_before).
+
+Outside a grid: Guam, American Samoa and the Northern Mariana Islands have none in the service (OUTSIDE_RADAR_GRID):
+their combined sewer permits would stay covered false in out/coverage.json. Hawaii has a grid but no combined sewer
+outfall (2026-11-15): nothing is read there until one is registered. Puerto Rico's are read once it is live
+(radar_states follows the live states).
 
 State and exit code: a point's reading is this hour's (fresh, is_fresh) when it was fetched in this product hour,
 has a 24-hour value, and is valid no more than FRESH_LAG_H hour before this hour's product (an answer of no data, or
 an old product, is not; an identify answer is dated by its 24-hour total, parse_identify). A reading of an older
-product never replaces a newer one stored (the answer stays in the raw file). rainfall.json `ok` is true only when at least MIN_OK_SHARE of the points in the radar grid
-have this hour's reading and the per-point fallback was not needed; a fallback, even one that read every point it
-needed, sets ok false, names itself in `error`, `mrms.fallback` and the summary line (FALLBACK), and holds
-last_ok_at. The exit code is non-zero only when readings are missing or stale (fewer than MIN_OK_SHARE fresh:
-mrms.readings_ok). The forecast's deferrals (QPF_FETCH_MAX, LOOKUP_MAX) are by design and never fail the stage.
+product never replaces a newer one stored (the answer stays in the raw file). Each region is judged on its own:
+readings_ok when at least MIN_OK_SHARE of its points (those outside radar coverage left out) have this hour's reading;
+its product's own hour is recorded (mrms.regions[].product_valid_time) and one older than FRESH_LAG_H is said loudly
+(stale_product, STALE on the summary line, in `error`). rainfall.json `ok` is true only when every region's readings
+are and no region's per-point fallback was needed; a fallback, even one that read every point it needed, sets ok
+false, names itself (and its region) in `error`, the region's fallback and the summary line (FALLBACK), and holds
+last_ok_at. The exit code is non-zero only when readings are missing or stale (in some region, fewer than
+MIN_OK_SHARE fresh: mrms.readings_ok). A permittee whose newest reading is older than the rain caution's stale window
+(permit_summary, shown_hours) shows no reading, never an old total as this hour's. The forecast's deferrals (QPF_FETCH_MAX, LOOKUP_MAX) are by design and never fail the stage.
 
 Unit (found 2026-11-07): the service describes its values as inches, but answers millimetres (identify at Bucklin
 Point, RI, valid 2026-11-07T02:00Z: 1.6, 15.8, 26.7, 40.1, 51.3, 52.4, 52.4 for 1 to 72 hours; maxValues 118.7; the
 Providence gauge 17.8 to 26.4 mm in the hour to 00:51Z), and already did on 2026-11-03 (the Calais export in
 tests/fixtures: 3.8 to 7.3 where IEM's MRMS daily is 0.22 in). So every run decides the unit from the data
-(decide_units), never from the description alone: a box maximum (the largest value in the grid blocks read, or in
+(decide_units, once per region, from that region's evidence and its own last determination; outside the conus its
+whole-region statistics, mrms_grid.statistics, and its own gauges, REGION_GAUGES, beside its few pixels; each regional
+grid answered millimetres on 2026-11-15: alaska_QPE_24H 93.3, carib_QPE_72H 292), never from the description alone:
+a box maximum (the largest value in the grid blocks read, or in
 the run's identify answers) over 50 for 24 hours (the US record, 49.69 in, Kauai, 2018) or 155 for 72 hours (the
 world record, 154.7 in, La Reunion, 1980) is millimetres; the gauge check (gauge_check: airport gauges in the box from api.weather.gov, mm, against
 identify at the wettest, at most four, where one had 2 mm or more; MRMS/gauge 0.4 to 2.5 is millimetres, the same
@@ -69,7 +92,8 @@ cell comes from /points/{lat},{lon} once (data/build/nws-gridpoints.json; at mos
 lookups a run); each grid cell is fetched at most every 3 hours (at most QPF_FETCH_MAX a run, the
 oldest first). Shown as "rain expected", never as a discharge.
 
-Requests: rainfall.json `requests` counts this run's calls by kind. Before the grid (2026-11-02, 319
+Requests: rainfall.json `requests` counts this run's calls by kind (and mrms.regions[].requests each region's; outside
+the conus one statistics request a region an hour, and its gauge's observations). Before the grid (2026-11-02, 319
 New England points) a run made 319 identify calls and, every third hour, 196 forecast calls: about
 BASELINE_REQUESTS_PER_HOUR an hour. The caps keep any run within twice that (tests/test_rain_grid.py).
 
@@ -1172,8 +1196,9 @@ def read_before(p: dict) -> bool:
 
 
 def region_statistics(session, g: dict, region: str) -> dict:
-    """Unit evidence beyond the few pixels around a region's points: its 24-hour item (the one exported) over its whole
-    extent (mrms_grid.statistics, one request); never failing the run."""
+    """Unit evidence beyond the few pixels around a region's points: its 24-hour item (the one exported; g: the grid
+    read, or {"products": {"24": {item, objectid, valid_time}}} from the catalog when the grid read failed) over its
+    whole extent (mrms_grid.statistics, one request); never failing the run."""
     p = (g.get("products") or {}).get("24") or {}
     try:
         st = grid_mod.statistics(session, p["objectid"], grid_mod.REGIONS[region])
@@ -1318,6 +1343,10 @@ def read_region(session, region: str, points: dict[str, dict], keys: list[str], 
         by_point(todo)                     # --points: the per-point path by choice, not a fallback
     if got and units is None:              # the per-point path alone: the unit from every answer of the run
         vt_got = max(m["valid_time"] for m in got.values())
+        c24 = (cat or ({}, {}))[0].get(grid_mod.item_name(24, region)) if not conus else None
+        if c24 and stats is None:          # a region's identify answers alone seldom tell: its statistics, from the
+            stats = region_statistics(session, {"products": {"24": {"item": grid_mod.item_name(24, region), **c24}}},
+                                      region)     # catalog's 24-hour item, as the grid's would have been
         if conus:
             try:
                 box = grid_mod.grid_box([(points[k]["lat"], points[k]["lon"]) for k in got])
@@ -1326,8 +1355,10 @@ def read_region(session, region: str, points: dict[str, dict], keys: list[str], 
             gauge = run_gauge_check(session, box, vt_got, now) if box else None
         else:
             gauge = run_gauge_check(session, grid_mod.REGIONS[region], vt_got, now, gauges)
-        units = decide_units(fb_maxima(), last_units, gauge)
+        units = decide_units(with_stats(fb_maxima()), last_units, gauge)
         units["gauge_check"] = gauge
+        if stats is not None:
+            units["statistics"] = stats
     if left:
         problems.append(f"{tag}per-point fallback capped at {cap} calls: {len(left)} point(s) keep their last reading")
     if asked:

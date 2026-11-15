@@ -88,7 +88,7 @@ def iso(t: datetime | None) -> str | None:
 # ---------------------------------------------------------------- the box
 
 def in_extent(lat: float, lon: float, ext: dict = CONUS_EXTENT) -> bool:
-    """Whether a point lies in the radar grid read (CONUS_EXTENT), edges included."""
+    """Whether a point lies in a radar grid (ext: a REGIONS extent; CONUS_EXTENT by default), edges included."""
     try:
         la, lo = float(lat), float(lon)
     except (TypeError, ValueError):
