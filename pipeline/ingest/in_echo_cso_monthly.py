@@ -293,24 +293,81 @@ def _evidences(entry: dict) -> list[tuple]:
     return [evidence(x) for x in entry["_conflict"]] if "_conflict" in entry else [evidence(entry)]
 
 
-def merge_previous(cells: dict, prev_records: list[dict], stats: dict) -> None:
-    """A parameter this run's answer does not give (missing, or two equally ranked rows that disagree) keeps the
-    previous run's row for that outfall-month (raw.dmr of the previous record): a partial answer never withdraws a
-    discharge; only a row that supersedes the earlier positive figure (zero or NODI C) does (review 2026-11-14 P1-1).
-    A month absent from this run's answer altogether is carried whole by main()."""
-    for r in prev_records:
+EVIDENCE_FIELDS = ("DMRValueId", "DMRValueNmbr", "DMRUnitDesc", "NODICode", "NODIDesc", "ValueReceivedDate",
+                   "VersionNmbr")
+
+
+def _ev_key(permit, feat, ym, name) -> str:
+    return f"{permit}|{feat}|{ym}|{name}"
+
+
+def _ev_row(row: dict) -> dict:
+    return {k: row.get(k) for k in EVIDENCE_FIELDS if row.get(k) not in (None, "")} | \
+        ({"parameter": row.get("_param") or row.get("parameter")} if row.get("_param") or row.get("parameter") else {})
+
+
+def _ev_entry(entry: dict) -> dict:
+    """The stored form of a cell entry: a row, or {conflict: [rows], rank} for equally ranked rows that disagree."""
+    if "_conflict" in entry:
+        return {"conflict": [_ev_row(x) for x in entry["_conflict"]], "rank": list(entry["_rank"])}
+    return _ev_row(entry)
+
+
+def _ev_rank(stored: dict) -> tuple:
+    return tuple(stored["rank"]) if "conflict" in stored else revision_key(stored)
+
+
+def _ev_evidences(stored: dict) -> list[tuple]:
+    return [evidence(x) for x in stored["conflict"]] if "conflict" in stored else [evidence(stored)]
+
+
+def merge_previous(cells: dict, prev_records: list[dict], stats: dict, store: dict | None = None) -> dict:
+    """Reconcile this run's cells with every earlier run's evidence, parameter by parameter (verification
+    2026-11-15 P1-1), and return the updated evidence store (kept in CACHE_FILE under 'evidence', read on --refresh
+    too, so neither a replaced cached answer nor a withdrawn record loses it). For each outfall, month and parameter:
+    the higher revision_key wins whichever run read it (a version-1 row read later never overrides a version-2 row
+    read earlier, a zero or NODI C correction included); equally ranked rows that disagree, in one run or across
+    runs, are a conflict (the parameter is unknown until a higher revision settles it); a parameter this run's
+    answer leaves out keeps the earlier row (re-review 2026-11-14 P1-1). The earlier rows come from the store, and
+    for a file written before the store, from the previous records' raw.dmr. A month absent from this run's answer
+    altogether is carried whole by main()."""
+    store = dict(store or {})
+    for r in prev_records:                     # files written before the store: their records' rows are evidence
         raw = r.get("raw") or {}
-        key = (r.get("npdes_permit"), raw.get("permit_feature") or r.get("outfall_id"), raw.get("month"))
-        cell = cells.get(key)
-        if cell is None:
-            continue
+        feat = raw.get("permit_feature") or r.get("outfall_id")
         for name, row in (raw.get("dmr") or {}).items():
-            cur = cell.get(name)
-            if cur is not None and "_conflict" not in cur and _says(cur):
+            store.setdefault(_ev_key(r.get("npdes_permit"), feat, raw.get("month"), name), _ev_row(row))
+    for (permit, feat, ym), cell in cells.items():
+        pend = next(iter(cell.values()))["_pend"]
+        for name in PARAMS.values():
+            k = _ev_key(permit, feat, ym, name)
+            old, cur = store.get(k), cell.get(name)
+            if old is None:
+                if cur is not None:
+                    store[k] = _ev_entry(cur)
                 continue
-            pend = datetime.strptime(r["ended_at"][:10], "%Y-%m-%d").strftime("%d-%b-%y").upper()
-            cell[name] = dict(row, _pend=pend, _param=row.get("parameter"), _from_previous_run=True)
-            stats["parameters_kept_from_previous_run"][f"{key[0]}:{key[1]}:{key[2]}:{name}"] += 1
+            back = None
+            if cur is None or ("_conflict" not in cur and not _says(cur)) or _rank(cur) < _ev_rank(old):
+                back = old             # missing, saying nothing (another NODI code), or a lower revision
+            elif _rank(cur) == _ev_rank(old):
+                evs = sorted(set(_ev_evidences(old)) | set(_evidences(cur)), key=str)
+                if len(evs) > 1:
+                    rows = {str(evidence(x)): x for x in
+                            (old["conflict"] if "conflict" in old else [old]) +
+                            [_ev_row(x) for x in (cur["_conflict"] if "_conflict" in cur else [cur])]}
+                    if "_conflict" not in cur or len(rows) > len(cur["_conflict"]):
+                        stats["conflicting_equal_revisions"][f"{permit}:{feat}:{ym}:{name}"] += 1
+                    cell[name] = {"_conflict": [rows[e] for e in sorted(rows)], "_pend": pend,
+                                  "_param": (cur.get("_param") if cur else None), "_rank": _rank(cur)}
+            if back is not None:
+                if "conflict" in back:
+                    cell[name] = {"_conflict": back["conflict"], "_pend": pend, "_param": None,
+                                  "_rank": tuple(back["rank"])}
+                else:
+                    cell[name] = dict(back, _pend=pend, _param=back.get("parameter"), _from_previous_run=True)
+                    stats["parameters_kept_from_previous_run"][f"{permit}:{feat}:{ym}:{name}"] += 1
+            store[k] = _ev_entry(cell[name])
+    return store
 
 
 def _says(row: dict) -> bool:
@@ -498,8 +555,14 @@ def main(argv=None) -> int:
             failures_in_a_row = 0
             cache[key] = {"fetched": today.isoformat(), "since": since.isoformat(), "results": compact(res)}
             results[(permit, code)] = cache[key]["results"]
-    write_json(CACHE_FILE, {"source_id": SOURCE_ID, "about": "compact ECHO answers per permit and parameter "
-                            "(ingest/in_echo_cso_monthly.py compact): the run-to-run cache", "answers": cache})
+    evidence_store = (read_json(CACHE_FILE, {}) or {}).get("evidence") or {}
+
+    def save_cache(store: dict) -> None:
+        write_json(CACHE_FILE, {"source_id": SOURCE_ID, "about": "compact ECHO answers per permit and parameter "
+                                "(ingest/in_echo_cso_monthly.py compact): the run-to-run cache; 'evidence' keeps the "
+                                "winning DMR row of every outfall, month and parameter ever read (merge_previous)",
+                                "answers": cache, "evidence": dict(sorted(store.items()))})
+    save_cache(evidence_store)
 
     if not results:
         write_events(SOURCE_ID, [], ok=False, error="all requests failed")
@@ -509,7 +572,7 @@ def main(argv=None) -> int:
     stats = defaultdict(Counter)
     cells, names = collect(results, reg, stats)
     prev_doc = read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
-    merge_previous(cells, prev_doc.get("records") or [], stats)
+    save_cache(merge_previous(cells, prev_doc.get("records") or [], stats, evidence_store))
     records = build_records(cells, names, reg, dischargers(), stats)
     # reconcile with the previous run (review 2026-11-14 P1-2): a month the source no longer lists at all is kept,
     # marked missing from the source; a month the source now reports as no discharge is withdrawn; a month whose

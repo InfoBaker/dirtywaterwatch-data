@@ -559,8 +559,10 @@ def test_a_newer_sample_with_an_unknown_level_does_not_end_an_advisory():
     assert r["status"] == "advisory_lifted" and r["raw"]["ended_at_precision"] == "poll"
 
 
-def _dmr_main(tmp_path, monkeypatch, results, registry=None, prev=None):
+def _dmr_main(tmp_path, monkeypatch, results, registry=None, prev=None, refresh=True):
     from ingest import in_echo_cso_monthly as M
+    if not refresh:
+        monkeypatch.setattr(M, "CACHE_DAYS", -1)     # every cached answer is stale: asked again, the cache replaced
     monkeypatch.setattr(M, "CACHE_FILE", tmp_path / "cache.json")
     monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
     monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: common.write_events(
@@ -569,7 +571,7 @@ def _dmr_main(tmp_path, monkeypatch, results, registry=None, prev=None):
     monkeypatch.setattr(M, "SLEEP_S", 0)
     monkeypatch.setattr(M, "fetch", lambda p, code, since: (results.get((p, code)) or
                                                             {"Message": "Success", "PermFeatures": []}, "live"))
-    assert M.main(["--since", "2025-01-01", "--refresh"]) == 0
+    assert M.main(["--since", "2025-01-01", *(["--refresh"] if refresh else [])]) == 0
     return json.loads((tmp_path / "events" / "in-echo-dmr-cso.json").read_text())
 
 
@@ -583,7 +585,8 @@ def test_a_month_the_source_drops_is_kept_and_one_it_corrects_to_no_discharge_is
     res = _results()
     for code in ("84165", "50037", "74063"):
         row = res[("IN0000004", code)]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][0]
-        row.update(DMRValueNmbr=None, NODICode="C", NODIDesc="No Discharge")
+        # a correction is a newer receipt (an equally ranked disagreement is a conflict: verification 2026-11-15)
+        row.update(DMRValueNmbr=None, NODICode="C", NODIDesc="No Discharge", ValueReceivedDate="15-OCT-25")
     fixed = _dmr_main(tmp_path, monkeypatch, res)
     assert fixed["records"] == [] and fixed["meta"]["months_withdrawn_by_the_source"]
 
@@ -674,7 +677,7 @@ def test_a_partial_dmr_answer_never_withdraws_an_earlier_discharge(tmp_path, mon
         rows = res[("IN0000004", code)]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"]
         rows[:] = [x for x in rows if x["MonitoringPeriodEndDate"] != "31-AUG-25"]
     hours = res[("IN0000004", "50037")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][0]
-    hours.update(DMRValueNmbr="0")
+    hours.update(DMRValueNmbr="0", ValueReceivedDate="15-OCT-25")    # a newer receipt: it supersedes the 4 hours
     part = _dmr_main(tmp_path, monkeypatch, res)
     assert [r["source_record_id"] for r in part["records"]] == ["IN0000004:002:2025-08"]
     r = part["records"][0]
@@ -719,13 +722,15 @@ def test_equally_ranked_conflicting_dmr_rows_resolve_the_same_whatever_their_ord
     # identical duplicates are no conflict
     c, r, s = run([three, dict(three)])
     assert not s["conflicting_equal_revisions"] and r[0]["raw"]["events"] == 3.0
-    # with a previous run, the conflicting parameter keeps the earlier authoritative row
+    # with a previous run, an earlier row of a lower rank never settles a newer conflict, and an earlier row of
+    # the same rank joins it (verification 2026-11-15 P1-1: equal ranks that disagree across runs are a conflict)
     first = _dmr_main(tmp_path, monkeypatch, _results())
     assert first["records"][0]["raw"]["events"] == 1.0
     res = _results()
     res[("IN0000004", "84165")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][:] = [three, zero]
     again = _dmr_main(tmp_path, monkeypatch, res)
-    assert again["records"][0]["raw"]["events"] == 1.0
+    assert again["records"][0]["raw"]["events"] is None and again["records"][0]["raw"]["conflicting_rows"] == ["events"]
+    assert again["records"][0]["raw"]["hours"] == 4.0
 
 
 def test_no_answer_text_reaches_any_saved_file_on_any_path(tmp_path, monkeypatch):
@@ -943,3 +948,50 @@ def test_beachalerts_research_fields_assert_no_login_restriction():
     assert "not verified" in b["access_detail"] and "not settled" in b["status_reason"]
     chans = json.loads((ROOT / "data" / "notice-channels" / "in.json").read_text())["channels"]
     assert next(c for c in chans if c["id"] == "in-idem-beachalert")["barrier"] == "not_verified"
+
+
+# ------------------------------------------------------------------------------- verification pass 2026-11-15
+
+def _versioned(version, received, values):
+    """_results() with every August row of outfall 002 replaced: values maps code -> value or 'C'."""
+    res = _results()
+    for code, v in values.items():
+        rows = res[("IN0000004", code)]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"]
+        unit = {"84165": "#/mo", "50037": "hr/mo", "74063": "Mgal"}[code]
+        aug = (_dmr("31-AUG-25", None, nodi="C", received=received) if v == "C"
+               else _dmr("31-AUG-25", v, unit=unit, received=received))
+        rows[:] = [dict(aug, VersionNmbr=str(version))] + [x for x in rows if x["MonitoringPeriodEndDate"] != "31-AUG-25"]
+    return res
+
+
+ALL = ("84165", "50037", "74063")
+
+
+def test_revision_precedence_holds_between_runs(tmp_path, monkeypatch):
+    """Astra verification 2026-11-15 P1-1: a lower revision read in a later run never overrides a higher one read
+    earlier, on --refresh and when the cached answer is replaced; equal ranks that disagree across runs are a
+    conflict; a genuinely newer correction still wins."""
+    for refresh in (True, False):
+        d = tmp_path / f"r{refresh}"
+        d.mkdir()
+        # version 2 discharge, then version 1 zeros: the discharge stays
+        run = lambda res: _dmr_main(d, monkeypatch, res, refresh=refresh)
+        assert len(run(_versioned(2, "20-OCT-25", dict.fromkeys(ALL, "5")))["records"]) == 1
+        later = run(_versioned(1, "28-SEP-25", dict.fromkeys(ALL, "0")))
+        assert [r["source_record_id"] for r in later["records"]] == ["IN0000004:002:2025-08"]
+        assert later["records"][0]["raw"]["events"] == 5.0 and later["records"][0]["raw"]["dmr"]["events"]["from_previous_run"]
+        assert "_missing_from_source_since" not in later["records"][0]["raw"]
+        # a genuinely newer correction (version 3, no discharge) withdraws it ...
+        fixed = run(_versioned(3, "01-NOV-25", dict.fromkeys(ALL, "C")))
+        assert fixed["records"] == [] and fixed["meta"]["months_withdrawn_by_the_source"]
+        # ... and the version-1 positives read again never resurrect it
+        again = run(_versioned(1, "28-SEP-25", dict.fromkeys(ALL, "4")))
+        assert again["records"] == []
+    # equal ranks that disagree across runs: the parameter is a conflict, not the later run's value
+    d = tmp_path / "equal"
+    d.mkdir()
+    _dmr_main(d, monkeypatch, _versioned(1, "28-SEP-25", {"84165": "2", "50037": "3", "74063": "1"}))
+    eq = _dmr_main(d, monkeypatch, _versioned(1, "28-SEP-25", {"84165": "0", "50037": "3", "74063": "1"}))
+    r = eq["records"][0]["raw"]
+    assert r["events"] is None and r["conflicting_rows"] == ["events"] and r["hours"] == 3.0
+    assert eq["meta"]["conflicting_equal_revisions"]
