@@ -494,7 +494,7 @@ def test_indiana_name_placement_is_county_aware(monkeypatch):
           "raw": {"state": "IN"}}
     kept, why = S.county_slugs(list(waters), ev, waters, lambda slug, lat, lon: 50_000)
     assert kept == ["mill-creek-st-joseph-in"] and "St. Joseph" in why
-    assert S.COUNTY_STATES["OH"] == "oh-counties.json" and "IN" not in S.COUNTY_FIELD_STATES
+    assert S.COUNTY_STATES["OH"] == "oh-counties.json" and "IN" in S.COUNTY_FIELD_STATES
 
 
 def test_a_name_only_tie_beyond_25_km_is_refused_in_indiana():
@@ -559,8 +559,10 @@ def test_a_newer_sample_with_an_unknown_level_does_not_end_an_advisory():
     assert r["status"] == "advisory_lifted" and r["raw"]["ended_at_precision"] == "poll"
 
 
-def _dmr_main(tmp_path, monkeypatch, results, registry=None, prev=None):
+def _dmr_main(tmp_path, monkeypatch, results, registry=None, prev=None, refresh=True):
     from ingest import in_echo_cso_monthly as M
+    if not refresh:
+        monkeypatch.setattr(M, "CACHE_DAYS", -1)     # every cached answer is stale: asked again, the cache replaced
     monkeypatch.setattr(M, "CACHE_FILE", tmp_path / "cache.json")
     monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
     monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: common.write_events(
@@ -569,7 +571,7 @@ def _dmr_main(tmp_path, monkeypatch, results, registry=None, prev=None):
     monkeypatch.setattr(M, "SLEEP_S", 0)
     monkeypatch.setattr(M, "fetch", lambda p, code, since: (results.get((p, code)) or
                                                             {"Message": "Success", "PermFeatures": []}, "live"))
-    assert M.main(["--since", "2025-01-01", "--refresh"]) == 0
+    assert M.main(["--since", "2025-01-01", *(["--refresh"] if refresh else [])]) == 0
     return json.loads((tmp_path / "events" / "in-echo-dmr-cso.json").read_text())
 
 
@@ -583,7 +585,8 @@ def test_a_month_the_source_drops_is_kept_and_one_it_corrects_to_no_discharge_is
     res = _results()
     for code in ("84165", "50037", "74063"):
         row = res[("IN0000004", code)]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][0]
-        row.update(DMRValueNmbr=None, NODICode="C", NODIDesc="No Discharge")
+        # a correction is a newer receipt (an equally ranked disagreement is a conflict: verification 2026-11-15)
+        row.update(DMRValueNmbr=None, NODICode="C", NODIDesc="No Discharge", ValueReceivedDate="15-OCT-25")
     fixed = _dmr_main(tmp_path, monkeypatch, res)
     assert fixed["records"] == [] and fixed["meta"]["months_withdrawn_by_the_source"]
 
@@ -663,3 +666,431 @@ def test_operators_are_never_named_after_a_plant_and_count_only_sewage_outlets()
     assert B.outfall_counts({"outfall": "001", "limit_set_names": ["MAIN OUTFALL"]})
     holder = next(r for r in rows if "INJ043168" in r["npdes_permits"])
     assert holder["name"] == "Holder of permit INJ043168" and holder["outfall_count"] is None
+
+
+def test_a_partial_dmr_answer_never_withdraws_an_earlier_discharge(tmp_path, monkeypatch):
+    """Astra re-review 2026-11-14 P1-1: zero hours with the events and volume rows missing keeps the discharge."""
+    first = _dmr_main(tmp_path, monkeypatch, _results())
+    assert first["records"][0]["volume_gal"] == 1_100_000
+    res = _results()
+    for code in ("84165", "74063"):                                  # events and volume rows missing for August
+        rows = res[("IN0000004", code)]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"]
+        rows[:] = [x for x in rows if x["MonitoringPeriodEndDate"] != "31-AUG-25"]
+    hours = res[("IN0000004", "50037")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][0]
+    hours.update(DMRValueNmbr="0", ValueReceivedDate="15-OCT-25")    # a newer receipt: it supersedes the 4 hours
+    part = _dmr_main(tmp_path, monkeypatch, res)
+    assert [r["source_record_id"] for r in part["records"]] == ["IN0000004:002:2025-08"]
+    r = part["records"][0]
+    assert r["volume_gal"] == 1_100_000 and r["raw"]["events"] == 1.0 and r["raw"]["hours"] == 0.0
+    assert r["raw"]["dmr"]["events"]["from_previous_run"] and "from_previous_run" not in r["raw"]["dmr"]["hours"]
+    assert not part["meta"].get("months_withdrawn_by_the_source")
+    # a wholly missing month is still carried; a full correction to no discharge still withdraws
+    gone = _dmr_main(tmp_path, monkeypatch, {})
+    assert gone["records"][0]["raw"]["_missing_from_source_since"]
+    res = _results()
+    for code in ("84165", "50037", "74063"):
+        row = res[("IN0000004", code)]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][0]
+        row.update(DMRValueNmbr=None, NODICode="C", NODIDesc="No Discharge", VersionNmbr="1")
+    fixed = _dmr_main(tmp_path, monkeypatch, res)
+    assert fixed["records"] == [] and fixed["meta"]["months_withdrawn_by_the_source"]
+    assert fixed["meta"]["latest_month_by_outfall"]["IN0000004|002"]["month"] == "2025-09"
+
+
+def test_equally_ranked_conflicting_dmr_rows_resolve_the_same_whatever_their_order(tmp_path, monkeypatch):
+    """Astra re-review 2026-11-14 P2-7."""
+    from collections import Counter, defaultdict
+
+    from ingest import in_echo_cso_monthly as M
+
+    def run(rows):
+        res = _results()
+        res[("IN0000004", "84165")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][:] = rows
+        stats = defaultdict(Counter)
+        cells, names = M.collect(res, _registry(), stats)
+        return cells, M.build_records(cells, names, _registry(), {}, stats), stats
+
+    three, zero = _dmr("31-AUG-25", "3"), _dmr("31-AUG-25", "0")
+    nodi = _dmr("31-AUG-25", None, nodi="C")
+    for a, b in ((three, zero), (three, nodi)):
+        c1, r1, s1 = run([a, b])
+        c2, r2, _ = run([b, a])
+        assert c1 == c2 and r1 == r2 and s1["conflicting_equal_revisions"]
+        assert r1[0]["raw"]["events"] is None and r1[0]["raw"]["conflicting_rows"] == ["events"]
+    # missing revision metadata on both rows is equal ranking too
+    bare = [{k: v for k, v in x.items() if k not in ("VersionNmbr", "ValueReceivedDate")} for x in (three, zero)]
+    assert run(bare)[0] == run(bare[::-1])[0]
+    # identical duplicates are no conflict
+    c, r, s = run([three, dict(three)])
+    assert not s["conflicting_equal_revisions"] and r[0]["raw"]["events"] == 3.0
+    # with a previous run, an earlier row of a lower rank never settles a newer conflict, and an earlier row of
+    # the same rank joins it (verification 2026-11-15 P1-1: equal ranks that disagree across runs are a conflict)
+    first = _dmr_main(tmp_path, monkeypatch, _results())
+    assert first["records"][0]["raw"]["events"] == 1.0
+    res = _results()
+    res[("IN0000004", "84165")]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"][:] = [three, zero]
+    again = _dmr_main(tmp_path, monkeypatch, res)
+    assert again["records"][0]["raw"]["events"] is None and again["records"][0]["raw"]["conflicting_rows"] == ["events"]
+    assert again["records"][0]["raw"]["hours"] == 4.0
+
+
+def test_no_answer_text_reaches_any_saved_file_on_any_path(tmp_path, monkeypatch):
+    """Astra re-review 2026-11-14 P1-2: successful, refused, malformed and non-success answers; raw, cache, events,
+    meta and error text are all inspected."""
+    import requests as rq
+
+    from ingest import in_echo_cso_monthly as M
+    secret = ("Jane Example", "1234 S Example St", "555-0100")
+    saved = []
+    monkeypatch.setattr(M, "save_raw", lambda sid, body, name: saved.append(body.decode()))
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    good = _results()[("IN0000004", "84165")]
+    good = dict(good, FacStreet="1234 S Example St", ContactName="Jane Example")
+
+    class R:
+        def __init__(self, js=None, bad=False, status=200):
+            self.js, self.bad, self.status_code = js, bad, status
+
+        def raise_for_status(self):
+            if self.status_code >= 400:
+                raise rq.HTTPError("500 for Jane Example at 1234 S Example St", response=self)
+
+        def json(self):
+            if self.bad:
+                raise rq.JSONDecodeError("Expecting value: <html>Jane Example 555-0100</html>", "x", 0)
+            return self.js
+    answers = {"84165": R({"Results": dict(good, Message="Success")}),
+               "50037": R({"Results": {"Message": "Failed", "Detail": "Jane Example, 1234 S Example St, 555-0100"}}),
+               "74063": R(bad=True)}
+    monkeypatch.setattr(M.requests, "get", lambda url, params, **k: answers[params["parameter_code"]])
+    monkeypatch.setattr(M, "CACHE_FILE", tmp_path / "cache.json")
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **kw: common.write_events(
+        sid, recs, path=tmp_path / "events" / f"{sid}.json", **kw))
+    monkeypatch.setattr(M, "registry_outfalls", lambda rows=None: _registry())
+    assert M.main(["--since", "2025-01-01", "--refresh"]) == 1
+    first = json.loads((tmp_path / "events" / "in-echo-dmr-cso.json").read_text())
+    assert "answer not Success" in first["error"] and "request error" in first["error"]
+    answers["84165"] = R({"Results": {"Error": {"ErrorMessage": "NPDES ID IN0000004 is invalid! Call Jane Example"}}})
+    answers["50037"] = R(status=500)
+    M.main(["--since", "2025-01-01", "--refresh"])
+    files = "".join(p.read_text() for p in tmp_path.rglob("*.json")) + "".join(saved)
+    assert saved and "Success" in saved[0]
+    for s in secret:
+        assert s not in files
+    doc = json.loads((tmp_path / "events" / "in-echo-dmr-cso.json").read_text())
+    assert doc["ok"] is False
+    assert json.loads((tmp_path / "cache.json").read_text())["answers"]["IN0000004-84165"]["invalid"] == \
+        "NPDES ID IN0000004 is invalid!"
+
+
+def test_a_cso_number_without_the_delimiter_is_scrubbed_and_an_error_answer_is_a_category():
+    """Astra re-review 2026-11-14 P1-2."""
+    B = _script("build_in_outfalls")
+    doc = {"features": [_idem(1, "IN0000008", "CSO at 1234 S Example St", "Active", 40.1, -86.6),
+                        _idem(2, "IN0000008", "003C", "Active", 40.1, -86.6)]}
+    out = json.dumps(B.sanitize(doc))
+    assert "1234" not in out and "[house number removed] S Example St" in out and '"003C"' in out
+
+
+def test_a_reopened_algae_advisory_renders_both_intervals_and_other_sources_are_unchanged():
+    """Astra re-review 2026-11-14 P2-3: Advisory 12:00, Low Risk 13:00, Advisory 14:00 renders 12:00-13:00 and an open
+    interval from 14:00, the gap kept; a record of another source with the same fields replays nothing."""
+    from datetime import datetime as dt
+
+    from build import status as S
+    a, _ = _cyano([_one_sample("Advisory")], "2026-09-09T12:00:00Z")
+    b, _ = _cyano([_one_sample("Low Risk")], "2026-09-09T13:00:00Z", a)
+    c, _ = _cyano([_one_sample("Advisory")], "2026-09-09T14:00:00Z", b)
+    d, _ = _cyano([_one_sample("Low Risk")], "2026-09-09T15:00:00Z", c)
+    e, _ = _cyano([_one_sample("Advisory")], "2026-09-09T16:00:00Z", d)
+    now = dt.fromisoformat("2026-09-09T17:00:00+00:00")
+    ivs = S.event_intervals(e[0], "IN", now)
+    starts = sorted((S.parse_time(iv["start"]).isoformat(), iv.get("end") and S.parse_time(iv["end"]).isoformat())
+                    for iv in ivs)
+    assert starts[0][0] == "2026-09-09T12:00:00+00:00" and starts[0][1] is not None
+    assert S.parse_time(starts[0][1]) <= dt.fromisoformat("2026-09-09T13:00:00+00:00")
+    assert any(s == "2026-09-09T14:00:00+00:00" for s, _ in starts)
+    assert any(s == "2026-09-09T16:00:00+00:00" for s, _ in starts)
+    assert not any(s < "2026-09-09T16:00:00" and (en is None or en > "2026-09-09T16:00:00") for s, en in starts)
+    other = dict(e[0], source_id="xx-example-source")
+    assert len(S.event_intervals(other, "IN", now)) < len(ivs)
+    assert S.EARLIER_PERIOD_SOURCES == {"ne-dwee-beachwatch", "in-idem-cyanobacteria"}
+
+
+def _in_water(slug, bbox):
+    return {"slug": slug, "name": "Sample Creek", "kind": "river", "state": "IN", "towns": [], "bbox": bbox,
+            "aliases": None}
+
+
+def _in_report(rid, county, text="Sample Creek"):
+    return {"event_id": f"in-echo-dmr-cso:{rid}", "source_id": "in-echo-dmr-cso", "source_record_id": rid,
+            "event_type": "cso", "status": "ended", "waterbody_text": text, "water_slugs": [], "water_match": "none",
+            "lat": None, "lon": None, "npdes_permit": None, "outfall_id": None,
+            "raw": {"state": "IN", "county": county}, "time_precision": "month", "started_at": "2025-08-01"}
+
+
+def test_a_county_without_a_point_constrains_indiana_placement(monkeypatch):
+    """Astra re-review 2026-11-14 P2-4: a Marion County record with no point is not put on St. Joseph County's Sample
+    Creek; with both namesakes it goes to Marion's; a qualified name is still refused; other states unchanged."""
+    import copy
+
+    from build import status as S
+    monkeypatch.setattr(S, "_STATES", set(S.states()) | {"IN"})
+    stj = _in_water("sample-creek-st-joseph-in", [-86.30, 41.60, -86.20, 41.70])
+    mar = _in_water("sample-creek-marion-in", [-86.20, 39.70, -86.10, 39.80])
+    one = S.Resolver({stj["slug"]: copy.deepcopy(stj)}, [], placement_rules={})
+    assert one.resolve(_in_report("a", "Marion"))["water_slugs"] == []
+    assert one.resolve(_in_report("b", "St. Joseph"))["water_slugs"] == [stj["slug"]]
+    both = S.Resolver({stj["slug"]: copy.deepcopy(stj), mar["slug"]: copy.deepcopy(mar)}, [], placement_rules={})
+    assert both.resolve(_in_report("c", "Marion"))["water_slugs"] == [mar["slug"]]
+    assert both.resolve(_in_report("d", "Marion", "Little Sample Creek"))["water_slugs"] == []
+    # the registry row's county reaches the resolver's stand-in record for an outfall with no point (Indiana only)
+    row = {"npdes_permit": "IN0000007", "outfall": "002", "state": "IN", "county": "Marion", "lat": None, "lon": None,
+           "receiving_water_echo": "Sample Creek"}
+    assert S.REGISTRY_COUNTY_STATES == {"IN"}
+    from ingest import outfall_waters as OW
+    assert OW.Matcher.fake(None, row, "Sample Creek")["raw"]["county"] == "Marion"
+    assert "county" not in OW.Matcher.fake(None, dict(row, state="TX", county="Harris"), "x")["raw"]
+
+
+def _totals_chart(evs, sid):
+    import types
+    from datetime import UTC, datetime
+
+    from build import charts as C
+    b = C.Bucket("discharger", "example-in")
+    b.state = "IN"
+    b.totals = [dict(e, source_id=sid) for e in evs]
+    data = types.SimpleNamespace(history={}, status={}, waters={}, by_id={}, dropped={}, effective={}, placements={},
+                                 now=datetime(2026, 11, 14, tzinfo=UTC), rules={}, events=[], dischargers={})
+    doc = C.build_entity(b, data, {}, {}, "Example")
+    return {s["key"]: s["values"] for s in doc["charts"]["reported_totals"][0]["series"]}
+
+
+def _month_rec(ym, events=None, hours=None, gal=None, outfall="002"):
+    last = {"08": "31", "09": "30", "10": "31"}[ym[5:]]
+    params = {k: {"DMRValueNmbr": v} for k, v in (("events", events), ("duration", hours)) if v is not None}
+    return {"event_id": f"x:{outfall}:{ym}", "started_at": f"{ym}-01", "ended_at": f"{ym}-{last}",
+            "time_precision": "month", "event_type": "cso", "volume_gal": gal, "discharger_name": "Example",
+            "raw": {"parameters": params}}
+
+
+def test_monthly_totals_leave_missing_months_and_measures_blank_and_other_feeds_are_unchanged():
+    """Astra re-review 2026-11-14 P2-5: August and October with September absent are [1, None, 1], never 0; a month
+    whose record lacks a measure is None for that measure; an explicit zero stays zero; another source's series
+    keep the zero they always had."""
+    evs = [_month_rec("2025-08", 1, 4, 1_100_000), _month_rec("2025-10", 1, 4, 1_100_000)]
+    s = _totals_chart(evs, "in-echo-dmr-cso")
+    assert s["events"] == [1.0, None, 1.0] and s["hours"] == [4.0, None, 4.0]
+    assert s["gallons"] == [1_100_000.0, None, 1_100_000.0]
+    part = [_month_rec("2025-08", 2, 0, None), _month_rec("2025-09", 1, None, 500_000),
+            _month_rec("2025-09", 1, 3, 200_000, outfall="003")]
+    s = _totals_chart(part, "in-echo-dmr-cso")
+    assert s["events"] == [2.0, 2.0] and s["hours"] == [0.0, None] and s["gallons"] == [None, 700_000.0]
+    other = _totals_chart(evs, "xx-example-monthly")
+    assert other["events"] == [1.0, 0.0, 1.0] and other["gallons"] == [1_100_000.0, 0.0, 1_100_000.0]
+
+
+def test_a_facility_name_never_becomes_the_operator_and_permit_only_rows_are_not_counted():
+    """Astra re-review 2026-11-14 P2-6: state, federal, institutional, school, park and business plants whose names do
+    not give their permittee are permit-only rows (the plant kept in the notes, out of the named-operator count);
+    a legal entity's own name (LLC, district) still names the row; the register follows the rows."""
+    B = _script("add_in_operators")
+    for pn, t in (("EXAMPLE CREEK I-69 SB REST AREA", "State Government"),
+                  ("EXAMPLEVILLE CORRECTIONAL FACILITY", "State Government"),
+                  ("EXAMPLE DIVISION, NAVAL SURFACE WARFARE CENTER", "Federal Facility (U.S. Government)"),
+                  ("EXAMPLE CHRISTIAN VILLAGE", "Privately Owned Facility"),
+                  ("EXAMPLE ELEMENTARY SCHOOL", "Non-Government"),
+                  ("EXAMPLE ACRES MOBILE HOME PARK", "Privately Owned Facility"),
+                  ("CAMP EXAMPLE", "Privately Owned Facility"),
+                  ("EXAMPLE TRAVEL CENTER", "Privately Owned Facility")):
+        rid, name, lf, note = B.owner_of_plant(pn, t)
+        assert (rid, name, lf) == (None, None, B.PERMIT_ONLY) and "does not establish" in note, pn
+    assert B.owner_of_plant("EXAMPLE ACRES MOBILE HOME PARK LLC", "Privately Owned Facility")[2] == "mobile-home park"
+    assert B.owner_of_plant("EXAMPLE LAKE CD WWTP", "Municipal or Water District")[1] == "Example Lake CD"
+    assert B.owner_of_plant("EXAMPLE SCHOOL CORPORATION WWTP", "Non-Government")[2] == "special district"
+    rows = _rows()
+    for permit, plant in (("IN0052043", "Pigeon Creek I-69 Sb Rest Area"),
+                          ("IN0042960", "Putnamville Correctional Facility")):
+        r = next(x for x in rows if permit in x["npdes_permits"])
+        assert r["name"] == f"Holder of permit {permit}" and r["legal_form"] == B.PERMIT_ONLY and plant in r["notes"]
+    assert not [r["id"] for r in rows if r["name"].startswith("Holder of permit") and r["legal_form"] != B.PERMIT_ONLY]
+    chans = json.loads((ROOT / "data" / "notice-channels" / "in.json").read_text())["channels"]
+    names = {c.get("operator_id"): json.dumps(c) for c in chans if c.get("operator_id") == "in-in0042960"}
+    assert names and "Putnamville" not in "".join(names.values())
+
+
+def test_the_public_claims_match_the_build():
+    """Astra re-review 2026-11-14 P2-9: the permit count is the registry's, the lag is EPA's receipt (not publication),
+    and the rain caution is qualified by location and placement wherever it is described."""
+    import re
+
+    from ingest import in_echo_cso_monthly as M
+    n = len(M.permits_to_read(M.registry_outfalls()))
+    text = (ROOT / "research" / "in" / "state-text.md").read_text()
+    m = re.search(r"from (\d+) of the (\d+) permits with an open combined sewer outfall", text)
+    assert m and int(m.group(2)) == n == 91
+    assert "appearing a median" not in text and "received a median of 24 days" in text
+    for p in ("research/in/sources.json", "scripts/add_in_register_rows.py", "data/sources/in-echo-dmr-cso.yaml"):
+        assert "92 permits" not in (ROOT / p).read_text() and "(92:" not in (ROOT / p).read_text(), p
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    assert "rain caution at every open" not in json.dumps(rules)
+    assert "with a location once the outfall is placed on its water" in json.dumps(rules)
+
+
+def test_beachalerts_research_fields_assert_no_login_restriction():
+    """Astra re-review 2026-11-14 P2-10: the portal shell's templates (no records, permissions, error) settle nothing;
+    the research fields, like the register, leave access unverified."""
+    d = json.loads((ROOT / "research" / "in" / "sources.json").read_text())
+    rows = d if isinstance(d, list) else d["sources"]
+    b = next(r for r in rows if r["id"] == "in-idem-beachalert")
+    assert "login" not in b["access"] and "without sign-in)" not in b["access_detail"]
+    assert "not verified" in b["access_detail"] and "not settled" in b["status_reason"]
+    chans = json.loads((ROOT / "data" / "notice-channels" / "in.json").read_text())["channels"]
+    assert next(c for c in chans if c["id"] == "in-idem-beachalert")["barrier"] == "not_verified"
+
+
+# ------------------------------------------------------------------------------- verification pass 2026-11-15
+
+def _versioned(version, received, values):
+    """_results() with every August row of outfall 002 replaced: values maps code -> value or 'C'."""
+    res = _results()
+    for code, v in values.items():
+        rows = res[("IN0000004", code)]["PermFeatures"][0]["Parameters"][0]["DischargeMonitoringReports"]
+        unit = {"84165": "#/mo", "50037": "hr/mo", "74063": "Mgal"}[code]
+        aug = (_dmr("31-AUG-25", None, nodi="C", received=received) if v == "C"
+               else _dmr("31-AUG-25", v, unit=unit, received=received))
+        rows[:] = [dict(aug, VersionNmbr=str(version))] + [x for x in rows if x["MonitoringPeriodEndDate"] != "31-AUG-25"]
+    return res
+
+
+ALL = ("84165", "50037", "74063")
+
+
+def test_revision_precedence_holds_between_runs(tmp_path, monkeypatch):
+    """Astra verification 2026-11-15 P1-1: a lower revision read in a later run never overrides a higher one read
+    earlier, on --refresh and when the cached answer is replaced; equal ranks that disagree across runs are a
+    conflict; a genuinely newer correction still wins."""
+    for refresh in (True, False):
+        d = tmp_path / f"r{refresh}"
+        d.mkdir()
+        # version 2 discharge, then version 1 zeros: the discharge stays
+        run = lambda res: _dmr_main(d, monkeypatch, res, refresh=refresh)
+        assert len(run(_versioned(2, "20-OCT-25", dict.fromkeys(ALL, "5")))["records"]) == 1
+        later = run(_versioned(1, "28-SEP-25", dict.fromkeys(ALL, "0")))
+        assert [r["source_record_id"] for r in later["records"]] == ["IN0000004:002:2025-08"]
+        assert later["records"][0]["raw"]["events"] == 5.0 and later["records"][0]["raw"]["dmr"]["events"]["from_previous_run"]
+        assert "_missing_from_source_since" not in later["records"][0]["raw"]
+        # a genuinely newer correction (version 3, no discharge) withdraws it ...
+        fixed = run(_versioned(3, "01-NOV-25", dict.fromkeys(ALL, "C")))
+        assert fixed["records"] == [] and fixed["meta"]["months_withdrawn_by_the_source"]
+        # ... and the version-1 positives read again never resurrect it
+        again = run(_versioned(1, "28-SEP-25", dict.fromkeys(ALL, "4")))
+        assert again["records"] == []
+    # equal ranks that disagree across runs: the parameter is a conflict, not the later run's value
+    d = tmp_path / "equal"
+    d.mkdir()
+    _dmr_main(d, monkeypatch, _versioned(1, "28-SEP-25", {"84165": "2", "50037": "3", "74063": "1"}))
+    eq = _dmr_main(d, monkeypatch, _versioned(1, "28-SEP-25", {"84165": "0", "50037": "3", "74063": "1"}))
+    r = eq["records"][0]["raw"]
+    assert r["events"] is None and r["conflicting_rows"] == ["events"] and r["hours"] == 3.0
+    assert eq["meta"]["conflicting_equal_revisions"]
+
+
+def test_the_algae_feed_saves_only_a_bounded_error_on_every_failure_path(tmp_path, monkeypatch):
+    """Astra verification 2026-11-15 P1-2: an ArcGIS error object, a malformed answer and an HTTP failure each leave
+    the previous records, ok false and an error category; no answer text reaches the events file, raw or state."""
+    import requests as rq
+
+    from ingest.generic import arcgis, runner
+    person = "Pat Example, 12 Sample Street"
+    monkeypatch.setattr(runner, "STATE_DIR", tmp_path / "state")
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw", raising=False)
+    saved = []
+    monkeypatch.setattr(runner, "save_raw", lambda *a, **k: saved.append(a))
+    out = tmp_path / "in-idem-cyanobacteria.json"
+    prev = {"event_id": "in-idem-cyanobacteria:keep", "source_id": "in-idem-cyanobacteria"}
+
+    def resp(code):
+        r = rq.Response()
+        r.status_code, r._content = code, person.encode()
+        return r
+
+    def http_fail(*a, **k):
+        raise rq.HTTPError(f"500 Server Error: {person}", response=resp(500))
+
+    def malformed(*a, **k):
+        raise ValueError(f"not JSON: {person}")
+
+    cases = {"ArcGIS error (code 400)": lambda *a, **k: {"error": {"code": 400, "message": person,
+                                                                    "details": [person]}},
+             "HTTP 500": http_fail, "malformed response": malformed,
+             "timeout": lambda *a, **k: (_ for _ in ()).throw(rq.Timeout(person))}
+    for want, fake in cases.items():
+        common.write_events("in-idem-cyanobacteria", [prev], ok=True, path=out, meta={"rows": 1})
+        monkeypatch.setattr(arcgis, "get_json", fake)
+        monkeypatch.setattr(arcgis, "get", lambda *a, **k: resp(200))
+        assert runner.run("in-idem-cyanobacteria", out=str(out)) == 1
+        doc = json.loads(out.read_text())
+        assert doc["ok"] is False and doc["records"] == [prev] and doc["error"] == want, (want, doc["error"])
+        assert "Pat" not in out.read_text() and "Sample Street" not in out.read_text()
+    assert not saved and not list((tmp_path / "state").glob("*")) if (tmp_path / "state").exists() else True
+
+
+def test_bounded_errors_are_keyed_to_the_algae_feed_only():
+    """No other source sets bounded_errors, so their error text is as before."""
+    import yaml
+    hits = sorted(p.stem for p in (common.ROOT / "data" / "sources").glob("*.yaml")
+                  if "bounded_errors" in ((yaml.safe_load(p.read_text()) or {}).get("fetch") or {}))
+    assert hits == ["in-idem-cyanobacteria"]
+    from ingest.generic import arcgis
+    err = {"code": 400, "message": "Invalid query"}
+    assert str(arcgis.ArcGISError(err)) == f"ArcGIS error: {err}"      # every other source's message as before
+
+
+def _sep(values, outfall="002"):
+    """A September cell of one outfall: values maps parameter name -> value, 'C' (NODI C), 'E' (another NODI code)
+    or ('conflict', a, b)."""
+    from ingest import in_echo_cso_monthly as M
+    cell = {}
+    for name, v in values.items():
+        if isinstance(v, tuple):
+            rows = [_dmr("30-SEP-26", x, received="28-OCT-26") for x in v[1:]]
+            cell[name] = {"_conflict": rows, "_pend": "30-SEP-26", "_param": name, "_rank": M.revision_key(rows[0])}
+        elif v in ("C", "E"):
+            cell[name] = dict(_dmr("30-SEP-26", None, nodi=v, received="28-OCT-26"), _pend="30-SEP-26")
+        else:
+            cell[name] = dict(_dmr("30-SEP-26", v, received="28-OCT-26"), _pend="30-SEP-26")
+    return cell
+
+
+def test_an_incomplete_newer_month_never_clears_an_established_monthly_mark(tmp_path):
+    """Astra verification 2026-11-15 P2-3: September with only zero hours (events and volume missing, in conflict or
+    filed with another NODI code) is no confirmed no-discharge month; a complete one clears the August mark."""
+    from build import status as S
+    from ingest import in_echo_cso_monthly as M
+    from tests.test_monthly_mark import month_rec
+    from tests.test_status import tmp_events, world
+    aug = {name: dict(_dmr("31-AUG-26", "2", received="28-SEP-26"), _pend="31-AUG-26") for name in M.PARAMS.values()}
+
+    def mark(sep):
+        latest = M.latest_months({("MA0025321", "002", "2026-08"): aug, ("MA0025321", "002", "2026-09"): sep})
+        rec = month_rec("aug", "2026-08", outfall="002")
+        d = tmp_events([rec])
+        p = d / "ma-test.json"
+        body = json.loads(p.read_text())
+        p.write_text(json.dumps({**body, "source_id": "nj-echo-monthly",
+                                 "meta": {"latest_month_by_outfall": latest}}))
+        st, _ = S.build(now=S.datetime(2026, 11, 3, 12, tzinfo=S.UTC), write=False, **world(d))
+        return latest["MA0025321|002"], len(st["monthly_outfalls"]), st["waters"]["test-river-ma"]["status"]
+
+    for sep in ({"hours": "0"}, {"hours": "0", "events": "E", "volume": "E"},
+                {"hours": "0", "events": ("conflict", "0", "2"), "volume": "0"}, {"events": "C"}):
+        obs, n, colour = mark(_sep(sep))
+        assert obs["month"] == "2026-08" and obs["discharged"] is True and n == 1 and colour == "monthly", sep
+    for sep in ({"hours": "0", "events": "0", "volume": "0"}, {"hours": "C", "events": "C", "volume": "C"}):
+        obs, n, colour = mark(_sep(sep))
+        assert obs["month"] == "2026-09" and obs["discharged"] is False and n == 0 and colour == "grey", sep
+    # a newer month with a discharge is still the latest whatever is missing
+    obs = M.latest_months({("P", "002", "2026-08"): aug, ("P", "002", "2026-09"): _sep({"hours": "3"})})["P|002"]
+    assert obs["month"] == "2026-09" and obs["discharged"] is True

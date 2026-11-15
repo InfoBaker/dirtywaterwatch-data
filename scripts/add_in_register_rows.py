@@ -75,7 +75,7 @@ AGENCY = [
      "feed_source_id": "in-echo-dmr-cso", "publishes": "results", "noun": "Data feed",
      "note": ("Each combined sewer outfall's monthly totals (number of discharges, hours, million gallons) from the "
               "operators' discharge monitoring reports, read per permit from ECHO's effluent-chart service: 4,484 "
-              "outfall-months with a discharge from 73 of 92 permits, January 2025 to October 2026 (2026-11-14). Month "
+              "outfall-months with a discharge from 73 of 91 permits, January 2025 to October 2026 (2026-11-14). Month "
               "precision, a median 24 days after the month."),
      "sources": ["in-echo-dmr-cso"]},
     {"id": "in-idem-overflow-reports", "agency": "Indiana Department of Environmental Management",

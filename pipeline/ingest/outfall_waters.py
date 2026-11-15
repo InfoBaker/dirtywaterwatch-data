@@ -263,7 +263,9 @@ class Matcher:
     def fake(self, o: dict, text: str) -> dict:
         permit = str(o.get("npdes_permit") or "")
         return {"npdes_permit": permit, "lat": o.get("lat"), "lon": o.get("lon"), "waterbody_text": text,
-                "raw": {"state": o.get("state"), "town": o.get("city") or ""}}
+                "raw": {"state": o.get("state"), "town": o.get("city") or "",
+                        **({"county": o["county"]} if o.get("state") in S.REGISTRY_COUNTY_STATES and o.get("county")
+                           else {})}}
 
     def towns_of(self, o: dict) -> set[str]:
         out = {S.norm_town(o.get("city") or "")}
