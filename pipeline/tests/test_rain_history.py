@@ -576,8 +576,8 @@ def test_a_rain_record_missing_a_needed_year_never_replaces_a_usable_entry(tmp_p
     old = {"permit": "P0", "usable": True, "computed": "2026-11-01"}
     d = run_pass(tmp_path, lambda *a: holed, prev={"method_version": R.METHOD_VERSION, "permits": {"P0": old}})
     assert d["permits"]["P0"] == old and d["permits"]["P1"]["why_not"] == R.NOT_READ
-    assert R.missing_years(holed, [2024, 2025, 2026], TODAY) == [2025]
-    assert R.missing_years({}, [2027], date(2027, 1, 3)) == []        # the first week of a year is not missing
+    assert R.short_years([holed], [2024, 2025, 2026], date(2026, 10, 31), TODAY) == [2025]
+    assert R.short_years([{}], [2027], date(2026, 12, 20), date(2027, 1, 3)) == []   # no day of 2027 is needed yet
 
 
 def test_no_text_in_the_file_names_a_file_or_a_module(tmp_path):
@@ -588,3 +588,86 @@ def test_no_text_in_the_file_names_a_file_or_a_module(tmp_path):
     text = json.dumps(d)
     for bad in ("data/", ".json", ".py", "build.", "rain_history", "rain_thresholds"):
         assert bad not in text, bad
+
+
+# ---------------------------------------------------------------- review 2026-11-15 (Astra, second pass), findings 6 and 12
+
+def test_short_years_needs_a_full_past_year_and_the_current_year_to_the_period_end():
+    full = {date(2025, 1, 1) + timedelta(days=i): 0.0 for i in range(365)}
+    assert R.short_years([full], [2025], date(2025, 12, 1), TODAY) == []
+    five_short = {d: v for d, v in full.items() if d.day != 1 or d.month > 5}       # 5 days gone: 360 left
+    assert R.short_years([five_short], [2025], date(2025, 12, 1), TODAY) == []
+    assert R.short_years([{d: v for d, v in five_short.items() if d != date(2025, 7, 4)}], [2025],
+                         date(2025, 12, 1), TODAY) == [2025]
+    this = {date(2026, 1, 1) + timedelta(days=i): 0.0 for i in range(300)}           # to October 27
+    assert R.short_years([this], [2026], date(2026, 10, 31), TODAY) == []           # 4 days short: the service's gaps
+    assert R.short_years([this], [2026], date(2026, 11, 2), TODAY) == [2026]        # 6 days short
+    # every rain point must cover it: the wettest-point series cannot hide a short point
+    assert R.short_years([full, {}], [2025], date(2025, 12, 1), TODAY) == [2025]
+
+
+@pytest.mark.parametrize("stop", ["budget", "refusal"])
+def test_a_stop_with_three_cached_dry_days_keeps_the_previous_usable_entry(tmp_path, monkeypatch, stop):
+    """Finding 6 (second pass): one cached dry day in each of 2024, 2025 and 2026 is no record of those years."""
+    from build import rain_thresholds as RT
+    from build.rain_thresholds import ServiceRefused
+    monkeypatch.setattr(RT, "IEM_DIR", tmp_path / "iem")
+    (tmp_path / "iem").mkdir()
+    for lat in (41.0, 42.0, 43.0):
+        for y in (2024, 2025, 2026):
+            (tmp_path / "iem" / f"{lat:.2f}_-80.00_{y}.json").write_text(
+                json.dumps({"data": [{"date": f"{y}-06-01", "mrms_precip_in": 0.0}]}))
+
+    def reader(lat, lon, years, offline, budget):
+        if not offline:
+            raise BudgetSpent("spent") if stop == "budget" else ServiceRefused("HTTP 503")
+        return R._iem_reader(lat, lon, years, True, None)
+    old = {"permit": "P0", "usable": True, "possible_in": 0.25, "method_version": R.METHOD_VERSION}
+    d = run_pass(tmp_path, reader, have=None, prev={"method_version": R.METHOD_VERSION, "permits": {"P0": old}})
+    assert R._iem_have(41.0, -80.0, [2024, 2025, 2026])       # real content, but not a year of it
+    assert d["permits"]["P0"] == old
+    assert d["permits"]["P1"]["why_not"] == R.NOT_READ and not d["permits"]["P1"]["usable"]
+    assert d["run"]["not_read"] == 3
+
+
+V1_ENTRY = {"permit": "P0", "usable": True, "possible_in": 0.5, "likely_in": 0.5, "method_version": 1,
+            "quiet": {"lo": 0.1, "hi": 0.5, "storms": 40, "followed": 0, "share": 0.0, "enough": True}}
+
+
+def test_a_version_one_file_is_never_loaded_kept_fresh_or_carried_forward(tmp_path, monkeypatch):
+    """Finding 12: an entry the fixed calculation would change (possible_in 0.5, quiet enough, where the fixed code
+    gives 0.1) is ignored everywhere; with no compatible previous entry the operator is not read yet."""
+    assert R.METHOD_VERSION == 2
+    v1 = {"method_version": 1, "built": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"), "permits": {"P0": V1_ENTRY}}
+    b, s = tmp_path / "build.json", tmp_path / "seed.json"
+    b.write_text(json.dumps(v1))
+    assert R.load_levels(b, s) is None
+    s.write_text(json.dumps(v1))
+    assert R.load_levels(b, s) is None
+    assert not R.fresh_enough(20, b)
+    monkeypatch.setattr(R, "LEVELS_BUILD", b)
+    ran = []
+    monkeypatch.setattr(R, "build", lambda **kw: ran.append(kw) or {
+        "counts": {"permits": 0, "usable": 0, "with_quiet_range": 0, "never_likely": 0},
+        "run": {"requests": 0, "not_read": 0, "stopped": None},
+        "crosscheck": {"comparisons": 0, "operators": 0, "live_higher": 0, "median_live_over_record": None}})
+    assert R.main(["--if-older-h", "20"]) == 0 and ran          # the young version-1 copy does not hold it back
+    monkeypatch.undo()
+
+    def spent(*a):
+        raise BudgetSpent("spent")
+    d = run_pass(tmp_path, spent, have=lambda *a: False, prev=v1)
+    assert d["permits"]["P0"]["usable"] is False and d["permits"]["P0"]["why_not"] == R.NOT_READ
+    # a version-1 entry inside a version-2 file is not carried forward either
+    mixed = {"method_version": R.METHOD_VERSION, "permits": {"P0": V1_ENTRY}}
+    d = run_pass(tmp_path, spent, have=lambda *a: False, prev=mixed)
+    assert d["permits"]["P0"]["why_not"] == R.NOT_READ and d["method_version"] == 2
+    # the fixed calculation on the reviewer's history gives 0.1, not the old 0.5
+    daily, days = series([0.6] * 150)
+    daily[days[149]] = 0.12
+    spans = [span(x) for x in days[:60]] + [span(days[149] + timedelta(days=1))]
+    more, days2 = series([0.6] * 60, start=days[-1] + timedelta(days=5))
+    daily.update(more)
+    spans += [span(x) for x in days2]
+    end = days2[-1] + timedelta(days=5 + CFG["lag_days"])
+    assert R.analyse(daily, spans, end, CFG, end)["possible_in"] == 0.1
