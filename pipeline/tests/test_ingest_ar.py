@@ -11,6 +11,7 @@ from datetime import date
 from pathlib import Path
 
 import pytest
+import yaml
 
 import zones
 from ingest import ar_adh_swim_beaches as B
@@ -614,3 +615,20 @@ def test_a_failed_or_malformed_bloom_fetch_keeps_the_records_and_saves_nothing(m
     assert H.main(["--out", str(out)]) == 1
     doc = json.loads(out.read_text())
     assert doc["ok"] is False and doc["records"] == before and not saved
+
+
+def test_public_bloom_descriptions_match_the_placement_rules():
+    """The exported caveat, placement rule and state text say what the code does (re-review P2-4): one advisory's
+    coordinates, whole-lake colouring, part-of-lake and described places as markers only."""
+    block = yaml.safe_load((R.ROOT / "data" / "sources" / "ar-deq-hab-advisories.yaml").read_text())
+    meta = (block.get("fetch") or block).get("meta") or {}
+    if not meta:
+        meta = next(v for v in block.values() if isinstance(v, dict) and "meta" in v)["meta"]
+    assert "no coordinates" not in meta["caveat"] and "coordinates for only one advisory" in meta["caveat"]
+    rule = meta["placement_rule"]
+    assert "part of a lake" in rule and "never colours a whole water" in rule and "parent lake" in rule
+    text = (R.ROOT / "research" / "ar" / "state-text.md").read_text()
+    assert "never colours the whole lake" in text and "coordinates the Division gives" in text
+    # the code paths the words describe
+    rec = {"waterbody": "Lake Specimen - Example Bay", "county": "Sample County", "date": "July 1, 2026", "lifted": ""}
+    assert T.hab_water(rec["waterbody"]) == ("Lake Specimen", "Example Bay")
