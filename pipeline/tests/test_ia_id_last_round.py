@@ -132,3 +132,58 @@ def test_last_iowa_news_a_revision_that_lost_its_body_keeps_the_saved_report_and
     out = _news_run(tmp_path, monkeypatch, NEWS_BODY.replace("Sample Creek", "Example River"),
                     "Mon, 02 Nov 2026 12:00:00 GMT", T2)
     assert len(out["recs"]) == 1 and "Example River" in json.dumps(out["recs"]) and out.get("ok", True) is not False
+
+
+# ------------------------------------------------------------------ Iowa FOCOMP: a damaged clock never replaces a good one
+
+from ingest import ia_dnr_focomp as F  # noqa: E402
+from tests.test_ia_id_review import FFIX, _focomp_run  # noqa: E402
+
+_GOOD_CLOCKS = {"IncidentStartTime": "03:25", "IncidentEndTime": "09:00", "ReceivedTime": "11:08"}
+
+
+def _good_pages():
+    good = {rid: (FFIX / f"focomp-report-{rid}.html").read_text() for rid in ("900001", "900002", "900004")}
+    good["100001"] = good["900004"].replace('value="900004"', 'value="100001"')
+    return good
+
+
+@pytest.mark.parametrize("ctl", sorted(_GOOD_CLOCKS))
+@pytest.mark.parametrize("bad", ["", "garbled", "25:00", "9"])
+def test_last_iowa_focomp_a_damaged_clock_never_replaces_a_good_one(tmp_path, monkeypatch, ctl, bad):
+    good = _good_pages()
+    rc, out, recs = _focomp_run(tmp_path, monkeypatch, good, "2026-09-26T12:00:00Z")
+    before = {k: recs["900001"][k] for k in ("started_at", "ended_at", "reported_at")}
+    assert before["ended_at"] == "2026-09-26T09:00:00-05:00"
+    st = json.loads((tmp_path / "state.json").read_text())
+    for r in st["reports"].values():
+        r["closed"] = "Open"
+    (tmp_path / "state.json").write_text(json.dumps(st))
+    damaged = good["900001"].replace(f'name="{ctl}" value="{_GOOD_CLOCKS[ctl]}"', f'name="{ctl}" value="{bad}"')
+    assert damaged != good["900001"]
+    rc, out, recs = _focomp_run(tmp_path, monkeypatch, dict(good, **{"900001": damaged}), "2026-09-28T12:00:00Z")
+    assert {k: recs["900001"][k] for k in before} == before
+    assert out["ok"] is False and any("900001" in e for e in out["meta"]["unread"])
+
+
+def test_last_iowa_focomp_a_damaged_clock_on_a_first_read_invents_no_midnight():
+    page = (FFIX / "focomp-report-900001.html").read_text().replace('name="IncidentEndTime" value="09:00"',
+                                                                     'name="IncidentEndTime" value="garbled"')
+    with pytest.raises(ValueError):
+        F.check_against(F.parse_report(page), None)
+
+
+def test_last_iowa_focomp_receiving_stream_is_scrubbed_before_every_save(tmp_path, monkeypatch):
+    page = (FFIX / "focomp-report-900002.html").read_text().replace(
+        'name="ReceivingStream" value=""', 'name="ReceivingStream" value="Ditch behind 123-A Example St, Contact Example Person"')
+    saves = []
+    _focomp_run(tmp_path, monkeypatch, {"900002": page}, "2026-09-26T12:00:00Z", saves)
+    # carried state saved before the fix
+    st = json.loads((tmp_path / "state.json").read_text())
+    st["reports"]["900002"]["fields"]["receiving_stream"] = "Creek near 45-B Sample Ave, Contact Example Person"
+    (tmp_path / "state.json").write_text(json.dumps(st))
+    _focomp_run(tmp_path, monkeypatch, {}, "2026-09-27T12:00:00Z", saves)
+    assert len(saves) >= 3
+    for s in saves:
+        for b in ("Example Person", "123-A", "45-B"):
+            assert b not in s, (b, s[:300])
