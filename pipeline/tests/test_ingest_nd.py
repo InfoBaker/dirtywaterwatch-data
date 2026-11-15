@@ -310,6 +310,9 @@ def test_rules_row_and_state_text():
     assert "\n{{share_line}}\n" in t and "{{dated_share}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean|green)\b", t, re.I) and ".json" not in t and ".py" not in t
     assert "4,452" in t and "36 sewage reports" in t and "14 advisories" in t and "6 warnings" in t
+    # go-live audit 2026-11-15 P2-1: two more lakes are placed by name and county; three remain unplaced
+    assert "Two more are shown on the lake of that name" in t and "The place of the other three is not known" in t
+    assert "other five" not in t and "(15 of the 20 lakes listed on November 15, 2026)" in t
 
 
 def test_missing_waters_list_carries_the_bloom_lakes_with_their_counties():
