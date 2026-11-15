@@ -127,6 +127,7 @@ REGIONAL_FILES = ("outfalls-new-england.json", "outfalls-mid-atlantic.json")
 # the batch cuts those lakes back to the state's waters (scripts/cut_lakes_to_state_waters.py), before the ties
 GREAT_LAKES_STATES = ("IL", "IN", "MI", "MN", "NY", "OH", "PA", "WI")
 REBUILDS_WATERS = ("waters", "osm", "names")
+REDACTED = "[name removed]"  # build.redact.REDACTED (checked by the tests), the marker the note scrub writes
 CSO_ZIP_URL = "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"
 LINE_MAX = 400               # a printed count line kept in the summary, at most this long
 LINES_PER_STEP = 40
@@ -681,7 +682,9 @@ def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh
         "branch": branch,
         "commit": [["git", "checkout", "-B", branch],
                    ["git", "add", "--", *files],
-                   ["git", *who, "commit", "-m", msg],
+                   # only the batch's files (an unrelated staged change is never committed with them, so the size
+                   # ceiling checked on these files covers the whole commit)
+                   ["git", *who, "commit", "-m", msg, "--", *files],
                    ["git", "push", "--force", "origin", f"HEAD:refs/heads/{branch}"]],
         "find": [gh, "pr", "list", "--head", branch, "--state", "open", "--json", "number", "--jq", ".[0].number"],
         "edit": lambda n: [gh, "pr", "edit", str(n), "--title", ttl, "--body-file", str(body)],
@@ -770,15 +773,18 @@ def publish(st: str, body: Path, date: str | None = None, dry_run: bool = False,
 
 # ---------------------------------------------------------------- privacy scan
 
-def strings(o, path="$"):
-    """(json path, string) for every key and string value."""
+def strings(o, path="$", hide=None):
+    """(json path, string) for every key and string value. hide(key) true: the key is named in the path by its
+    position (<key 3>), never by its text (a key can itself be a diagnostic quoting a name or a contact); it is still
+    yielded as a string, so it is still scanned."""
     if isinstance(o, dict):
-        for k, v in o.items():
-            yield f"{path}.{k}", str(k)
-            yield from strings(v, f"{path}.{k}")
+        for i, (k, v) in enumerate(o.items()):
+            seg = f"<key {i}>" if hide and hide(str(k)) else k
+            yield f"{path}.{seg}", str(k)
+            yield from strings(v, f"{path}.{seg}", hide)
     elif isinstance(o, list):
         for i, v in enumerate(o):
-            yield from strings(v, f"{path}[{i}]")
+            yield from strings(v, f"{path}[{i}]", hide)
     elif isinstance(o, str):
         yield path, o
 
@@ -800,11 +806,15 @@ STRUCTURAL_KEYS = frozenset({"name", "slug", "slugs", "aliases", "slug_aliases",
 
 def scrub_notes(o, block, in_note: bool = False):
     """(o with the blocklisted names in its note fields replaced, number of strings changed). Keys are never changed;
-    a structural key inside a note value (replaced_match is not a note, its why is) stays as it is."""
+    the value of a structural key is never entered, whatever it holds ({"records": {"reason": ...}} stays whole and
+    a name there still fails the scan); replaced_match is not a note, its why is."""
     if isinstance(o, dict):
         out, n = {}, 0
         for k, v in o.items():
-            out[k], m = scrub_notes(v, block, (k in NOTE_KEYS or in_note) and k not in STRUCTURAL_KEYS)
+            if k in STRUCTURAL_KEYS:
+                out[k] = v
+                continue
+            out[k], m = scrub_notes(v, block, k in NOTE_KEYS or in_note)
             n += m
         return out, n
     if isinstance(o, list):
@@ -833,15 +843,16 @@ def _layouts():
             ("indent=1 utf-8 newline", lambda d: json.dumps(d, indent=1, ensure_ascii=False) + "\n")]
 
 
-def dumps_like(text: str, doc_before, doc_after) -> str:
-    """doc_after in the layout that gives text back from doc_before (indent=1, UTF-8, with a newline, when none does)."""
+def dumps_like(text: str, doc_before, doc_after) -> str | None:
+    """doc_after in the layout that gives text back from doc_before byte for byte; None when no known layout does (a
+    number that does not round-trip, compact or CRLF text, another writer's layout): the file is then not rewritten."""
     for _, f in _layouts():
         try:
             if f(doc_before) == text:
                 return f(doc_after)
-        except (KeyError, TypeError, AttributeError):
+        except (KeyError, TypeError, AttributeError, ValueError):
             continue
-    return json.dumps(doc_after, indent=1, ensure_ascii=False) + "\n"
+    return None
 
 
 def scrub_files(files: list[str], texts: list[Path] = (), root: Path = ROOT) -> int:
@@ -851,31 +862,43 @@ def scrub_files(files: list[str], texts: list[Path] = (), root: Path = ROOT) -> 
     _, _, block = _patterns(root)
     if block is None:
         return 0
+    if block.found(REDACTED):
+        # a blocklist entry inside the marker itself: a scrub would nest markers on every rerun; nothing is changed
+        # and the scan refuses what it finds
+        print("::error::a blocklist entry matches the redaction marker itself: the note scrub changes nothing (the "
+              "privacy scan decides)", flush=True)
+        return 0
     total = 0
     for f in files:
         p = root / f
         try:
-            text = p.read_text()
+            text = p.read_bytes().decode("utf-8")      # as stored: no newline translation
             doc = json.loads(text)
         except (OSError, ValueError):
             continue                     # the scan reports a file it cannot read
         new, n = scrub_notes(doc, block)
-        if n:
-            tmp = p.with_suffix(p.suffix + ".tmp")
-            tmp.write_text(dumps_like(text, doc, new))
-            tmp.replace(p)
-            say(f"{f}: {n} note(s) with a blocklisted name replaced by the redaction marker")
-            total += n
+        if not n:
+            continue
+        out = dumps_like(text, doc, new)
+        if out is None:
+            print(f"::error::{f}: {n} note(s) hold a blocklisted name, but no known layout gives the file back byte for "
+                  "byte, so the note scrub leaves it as it is (the privacy scan decides)", flush=True)
+            continue
+        tmp = p.with_suffix(p.suffix + ".tmp")
+        tmp.write_bytes(out.encode("utf-8"))
+        tmp.replace(p)
+        say(f"{f}: {n} note(s) with a blocklisted name replaced by the redaction marker")
+        total += n
     for t in texts:
         p = Path(t)
         try:
-            lines = p.read_text().split("\n")
-        except OSError:
+            lines = p.read_bytes().decode("utf-8").split("\n")
+        except (OSError, ValueError):
             continue
         new_lines = [block.scrub(x) for x in lines]
         n = sum(a != b for a, b in zip(lines, new_lines))
         if n:
-            p.write_text("\n".join(new_lines))
+            p.write_bytes("\n".join(new_lines).encode("utf-8"))
             say(f"{p.name}: {n} line(s) with a blocklisted name replaced by the redaction marker")
             total += n
     return total
@@ -934,11 +957,16 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
         say("no name blocklist here: e-mail and phone shapes only")
     hits = 0
 
+    def kinds_of(s: str) -> list[str]:
+        return [k for k, bad in (("an e-mail address", email.search(s)), ("a phone number", phone.search(s)),
+                                 ("a blocklisted name", block.found(s) if block else None)) if bad]
+
+    def hide(key: str) -> bool:                      # a key that is itself a finding is named by its position
+        return bool(kinds_of(key))
+
     def check(where: str, s: str) -> None:
         nonlocal hits
-        kinds = [k for k, bad in (("an e-mail address", email.search(s)), ("a phone number", phone.search(s)),
-                                  ("a blocklisted name", block.found(s) if block else None)) if bad]
-        for k in kinds:
+        for k in kinds_of(s):
             hits += 1
             print(f"::error::{where}: {k}", flush=True)
 
@@ -956,7 +984,7 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
         except ValueError:
             old = set()
         n = 0
-        for where, s in strings(new):
+        for where, s in strings(new, hide=hide):
             if s not in old:
                 n += 1
                 check(f"{f} {where}", s)
@@ -1020,7 +1048,8 @@ def main(argv=None) -> int:
             return scan(a.state, [Path(t) for t in a.text], a.require_blocklist)
         if a.cmd == "scrub":
             n = scrub_files(changed_files(valid_state(a.state)), [Path(t) for t in a.text])
-            say(f"note scrub: {n} string(s) changed")
+            if n:
+                say(f"note scrub: {n} string(s) changed")
             return 0
         return publish(a.state, Path(a.body), a.date, a.dry_run, gh=os.environ.get("GH_BIN") or "gh",
                        require_blocklist=not a.no_blocklist_ok)

@@ -19,13 +19,51 @@ sys.modules["state_batch_sizes"] = B      # dataclasses look their module up the
 _spec.loader.exec_module(B)
 
 
+def tracked_sizes(root: Path, files: list[str]) -> dict[str, int]:
+    """{file: bytes} of every file; a tracked path that cannot be stat'ed fails (review P2: it must not pass unseen)."""
+    out = {}
+    for f in files:
+        try:
+            out[f] = (root / f).stat().st_size
+        except OSError as ex:
+            raise AssertionError(f"tracked file {f} cannot be read for its size ({type(ex).__name__})") from None
+    return out
+
+
 def test_no_tracked_data_file_is_over_the_ceiling():
     files = subprocess.run(["git", "-C", str(ROOT), "ls-files", "-z", "--", "data"], check=True,
                            stdout=subprocess.PIPE).stdout.decode().split("\0")
     files = [f for f in files if f]
-    assert files, "git ls-files found nothing under data/"
-    big = B.oversized(files, ROOT)
+    sizes = tracked_sizes(ROOT, files)
+    assert len(sizes) == len(files) > 0, "git ls-files found nothing under data/"
+    assert sizes.get("data/waters-nhd.json", 0) > 0
+    big = {f: n for f, n in sizes.items() if n > B.MAX_FILE_BYTES}
     assert not big, f"over {B.MAX_FILE_BYTES / 2**20:.0f} MiB (GitHub refuses 100 MB): {big}"
+
+
+def test_a_tracked_path_that_cannot_be_stated_fails(tmp_path):
+    (tmp_path / "a.json").write_text("{}")
+    assert tracked_sizes(tmp_path, ["a.json"]) == {"a.json": 2}
+    try:
+        tracked_sizes(tmp_path, ["a.json", "gone.json"])
+    except AssertionError as ex:
+        assert "gone.json" in str(ex)
+    else:
+        raise AssertionError("a missing tracked file passed")
+
+
+def test_rows_layout_encodes_keys_as_json_does():
+    """Review P1: a non-string top-level key is encoded (or refused) exactly as json.dumps does."""
+    for doc in ({True: "x", "waters": []}, {None: 1}, {1: [1], 2.5: "y", False: None}, {"waters": [{"a": 1}], 7: {"b": 2}}):
+        assert json.loads(dumps_rows(doc)) == json.loads(json.dumps(doc, indent=1)), doc
+    for bad in ({(1, 2): "x"}, {b"k": 1}):
+        for f in (dumps_rows, lambda d: json.dumps(d, indent=1)):
+            try:
+                f(bad)
+            except TypeError:
+                pass
+            else:
+                raise AssertionError(f"accepted {bad!r}")
 
 
 def test_the_ceiling_is_under_githubs_limit():

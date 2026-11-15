@@ -902,3 +902,95 @@ def test_publish_refuses_a_file_over_the_size_ceiling(tmp_path, capsys, monkeypa
         [("data/waters-nhd.json", size)]
     monkeypatch.undo()
     assert B.MAX_FILE_BYTES == 90 * 1024 * 1024
+
+
+# ---------------------------------------------------------------- review fixes (Astra, 2026-11-15)
+
+def test_scrub_refuses_a_file_no_known_layout_reproduces(tmp_path, capsys):
+    """Review P1: a file is rewritten only when a known layout gives back its text byte for byte (numbers that do not
+    round-trip, compact text, CRLF): otherwise it is left as it is, said with an ::error::, and the scan decides."""
+    root = repo(tmp_path)
+    write(root, "data/build/name-blocklist.json", {"names": ["Zorvath"]})
+    cases = {"big-number": '{\n "reason": "near Zorvath Run",\n "n": 9007199254740993.0\n}',
+             "compact": '{"reason":"near Zorvath Run"}',
+             "crlf": '{\r\n "reason": "near Zorvath Run"\r\n}'}
+    for name, text in cases.items():
+        p = root / "data" / f"waters-{name}.json"
+        p.write_bytes(text.encode())
+        capsys.readouterr()
+        assert B.scrub_files([f"data/waters-{name}.json"], [], root) == 0
+        assert p.read_bytes() == text.encode()
+        out = capsys.readouterr().out
+        assert f"::error::data/waters-{name}.json" in out and "Zorvath" not in out
+    # a layout that reproduces the file is rewritten with only the note changed
+    p = root / "data" / "waters-ok.json"
+    p.write_text(json.dumps({"reason": "near Zorvath Run", "n": 1.5}, indent=1))
+    assert B.scrub_files(["data/waters-ok.json"], [], root) == 1
+    assert p.read_text() == json.dumps({"reason": "near [name removed] Run", "n": 1.5}, indent=1)
+
+
+def test_a_structural_key_protects_its_whole_subtree():
+    from build.redact import BlockScan
+    block = BlockScan(["Zorvath"])
+    doc = {"records": {"reason": "Zorvath"}, "name": {"notes": ["Zorvath"]}, "reason": {"slug": "zorvath", "why": "Zorvath"}}
+    new, n = B.scrub_notes(doc, block)
+    assert new["records"] == {"reason": "Zorvath"} and new["name"] == {"notes": ["Zorvath"]}
+    assert new["reason"] == {"slug": "zorvath", "why": "[name removed]"} and n == 1
+
+
+def test_scan_never_prints_a_key_that_holds_a_name_or_contact(tmp_path, capsys):
+    root = repo(tmp_path)
+    write(root, "data/build/name-blocklist.json", {"names": ["Zorvath"]})
+    write(root, "data/waters-nhd.json", {"stats": {"failed_reasons": {"near Zorvath Run": 1, "call pat@example.org": 2,
+                                                                      "plain": {"x Zorvath": 3}}},
+                                         "waters": [], "targets": []})
+    assert B.scan("NC", root=root) == 1
+    out = capsys.readouterr().out
+    assert "Zorvath" not in out and "pat@example.org" not in out
+    assert "$.stats.failed_reasons.<key 0>: a blocklisted name" in out
+    assert "$.stats.failed_reasons.<key 1>: an e-mail address" in out
+    assert "$.stats.failed_reasons.plain.<key 0>: a blocklisted name" in out
+
+
+def test_publish_commits_only_the_batch_files(tmp_path, monkeypatch):
+    """Review P2: an unrelated staged file is never committed with the batch (git commit -- <the files>), so the size
+    ceiling, checked on those files, covers everything the commit holds."""
+    root = repo(tmp_path)
+    body = tmp_path / "body.md"
+    body.write_text("counts\n")
+    write(root, "data/build/name-blocklist.json", {"names": ["Jordan Quill"]})
+    write(root, "data/waters-nhd.json", {"waters": [{"slug": "neuse-river-nc", "state": "NC"}], "targets": []})
+    write(root, "data/huge.json", {"pad": "x" * 5000})
+    git(root, "add", "data/huge.json")
+    gh, log = fake_gh(tmp_path, "")
+    assert B.publish("NC", body, "2026-11-15", root=root, gh=str(gh)) == 0
+    files = git(tmp_path / "origin.git", "show", "--name-only", "--format=", "batch/nc-2026-11-15").split()
+    assert files == ["data/waters-nhd.json"]
+    c = B.publish_cmds("NC", "2026-11-15", Path("b.md"), ["data/waters-nhd.json"])
+    assert c["commit"][2][-2:] == ["--", "data/waters-nhd.json"]
+
+
+def test_scrub_refuses_when_a_blocklist_entry_matches_the_marker(tmp_path, capsys):
+    from build.redact import REDACTED, BlockScan
+    block = BlockScan(["removed"])
+    assert block.scrub("removed Run") == "removed Run"                 # no nested markers, no change
+    root = repo(tmp_path)
+    write(root, "data/build/name-blocklist.json", {"names": ["removed"]})
+    write(root, "data/waters-nhd.json", {"targets": [{"reason": "near removed Run"}], "waters": []})
+    before = (root / "data/waters-nhd.json").read_text()
+    assert B.scrub_files(["data/waters-nhd.json"], [], root) == 0
+    assert (root / "data/waters-nhd.json").read_text() == before
+    assert "::error::" in capsys.readouterr().out
+    assert B.scan("NC", root=root) == 1                               # the scan refuses, as it should
+    assert B.REDACTED == REDACTED == "[name removed]"
+
+
+def test_scrub_command_is_silent_without_a_blocklist_or_a_change(tmp_path, capsys, monkeypatch):
+    root = repo(tmp_path)
+    monkeypatch.setattr(B, "ROOT", root)
+    monkeypatch.setattr(B, "valid_state", lambda s, r=root: "NC")
+    monkeypatch.setattr(B, "changed_files", lambda st, r=root: ["data/waters-nhd.json"])
+    monkeypatch.setattr(B, "_patterns", lambda r: (__import__("re").compile("@x@"), __import__("re").compile("#y#"),
+                                                     None))
+    assert B.main(["scrub", "--state", "NC"]) == 0
+    assert capsys.readouterr().out == ""
