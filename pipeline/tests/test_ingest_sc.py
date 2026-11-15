@@ -445,6 +445,52 @@ def test_malformed_tables_and_incomplete_layers_fail_and_end_nothing(monkeypatch
     assert all(not v.get("ended_at") for v in st["hab"].values())
 
 
+SENTINELS = ["Pat Example", "Robin Sample", "302-555-0142", "803-555-0199", "pat@example.org", "1234 Sample Street"]
+
+
+def test_no_sentinel_reaches_any_save_from_the_des_feeds(monkeypatch, tmp_path):
+    # re-review P1-5: unexpected attributes and permitted text fields alike; every persistence call captured
+    import common
+    s = saved()
+    beach = copy.deepcopy(s["beach"])
+    beach[0]["attributes"].update(CONTACT="Pat Example", PHONE="302-555-0142", ADDR="1234 Sample Street")
+    beach[0]["attributes"]["COUNTY"] = "Horry. Call Pat Example at 1234 Sample Street."
+    hab = copy.deepcopy(s["hab"])
+    hab[0]["attributes"].update(Reporter="Robin Sample", Email="pat@example.org")
+    hab[0]["attributes"]["Recreational_Guidance"] = "Avoid contact. Contact: Robin Sample, 803-555-0199, pat@example.org"
+    page = ("<h2>HAB Watches &amp; Advisories</h2><table><tr><th>Advisory Level</th></tr><tr><td>Watch</td>"
+            "<td>Cedar Point Cove, call Pat Example at 803-555-0199</td><td>J. Strom Thurmond</td><td>10/16/2026</td>"
+            "</tr></table>")
+    saves = []
+    monkeypatch.setattr(A, "save_raw", lambda *a, **k: saves.append(json.dumps(a, default=str)))
+    monkeypatch.setattr(A, "write_json", lambda path, obj, *a, **k: saves.append(json.dumps(obj, default=str)))
+    monkeypatch.setattr(A, "write_events", lambda sid, recs, **k: saves.append(json.dumps([recs, k], default=str)))
+
+    class Resp:
+        def __init__(self, js=None, text=""):
+            self._js, self.text = js, text
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self._js
+
+    def fake_get(url, **k):
+        if "BW_Monitoring" in url:
+            return Resp({"features": beach})
+        if "algal_hydro" in url:
+            return Resp({"features": hab})
+        return Resp(text=page)
+    monkeypatch.setattr(A.requests, "get", fake_get)
+    monkeypatch.setattr(A, "STATE_PATH", tmp_path / "state.json")
+    assert A.main(["--at", T0]) == 0
+    blob = "\n".join(saves)
+    assert len(saves) >= 4 and "Cedar Point Cove" in blob
+    for x in SENTINELS:
+        assert x not in blob, x
+
+
 def test_points_are_rounded_before_anything_is_saved():
     f = [{"attributes": {"STAT": "X"}, "geometry": {"x": -79.123456, "y": 33.654321}}]
     assert A.safe_features(f, "geometry")[0]["geometry"] == {"x": -79.123, "y": 33.654}

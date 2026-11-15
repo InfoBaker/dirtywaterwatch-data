@@ -276,7 +276,7 @@ def parse_detail(page: str) -> dict | None:
 _HON = r"(?:Mr|Mrs|Ms|Miss|Dr)\.?"
 NAMED_PERSON = re.compile(rf"\b((?:[Cc]all(?:ed)?|[Cc]ontact(?:ed)?|[Ss]poke\s+(?:with|to)|[Tt]alked\s+(?:with|to)|"
                           rf"[Rr]eported\s+by|[Cc]aller|[Pp]er|[Ii]nspector|[Oo]fficer|[Oo]wner|[Rr]esident|[Hh]omeowner)"
-                          rf"\s+)(?:{_HON}\s+)?[A-Z][a-z]+(?:\s+[A-Z]\.)?(?:\s+[A-Z][a-z'-]+)?|\b{_HON}\s+[A-Z][a-z'-]+")
+                          rf"[:,]?\s+)(?:{_HON}\s+)?[A-Z][a-z]+(?:\s+[A-Z]\.)?(?:\s+[A-Z][a-z'-]+)?|\b{_HON}\s+[A-Z][a-z'-]+")
 NOT_A_NAME = re.compile(r"^(?:the|a|an|DNREC|New|Kent|Sussex|City|Town|County|Public|Works|Special|Delaware|Artesian|"
                         r"Tidewater|DelDOT|Dover|Newark|Wilmington)\b", re.I)
 

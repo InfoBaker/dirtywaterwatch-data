@@ -35,7 +35,7 @@ Records (rules only)
     (waterbody_text, placed by name). coord_source "station".
   - Keys: the history's advisoryid ("adv-731"); the poll records "station-<UnitID>-<first poll date>".
 
-Privacy: the fields hold no person; DNREC's text goes through common.scrub_text. data/raw keeps the safe rows only.
+Privacy: the fields hold no person; DNREC's text goes through the Delaware scrubber (de_dnrec_derns.scrub). data/raw keeps the safe rows only.
 Cadence: hourly with the refresh (the history is updated as DNREC posts; the map in season). Run from pipeline/:
   python -m ingest.de_dnrec_recwater [--file saved.json] [--at 2026-11-14T18:00:00Z]
 """
@@ -50,7 +50,14 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import (BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events, write_json)
+from common import (BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json)
+# DNREC's free text through the Delaware scrubber (names after "call"/"contact", house numbers, phones, e-mails),
+# not common.scrub_text alone (re-review P1-5)
+from ingest.de_dnrec_derns import scrub as _scrub
+
+
+def scrub_text(v: str) -> str:
+    return _scrub(v) or ""
 
 SOURCE_ID = "de-dnrec-recreational-water"
 SOCRATA = ("https://data.delaware.gov/resource/ever-58ni.json?$select=advisoryid,advstartdate,advenddate,advdesc,"

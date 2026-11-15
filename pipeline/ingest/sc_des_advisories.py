@@ -58,6 +58,11 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from ingest.de_dnrec_derns import scrub
+
+# the attributes read from each layer: nothing else is kept, and their text is scrubbed (re-review P1-5)
+BEACH_FIELDS = ("OBJECTID", "STAT", "HUC_12", "COUNTY", "ADVISORY")
+HAB_FIELDS = ("OBJECTID", "NAME", "Algal_Bloom", "Date", "Advisory_Tier", "Recreational_Guidance", "GlobalID")
 
 BEACH_ID = "sc-des-beach-monitoring"
 HAB_ID = "sc-des-hab"
@@ -178,16 +183,28 @@ def _norm(s: str | None) -> str:
 
 # ---------------------------------------------------------------- the beach stations
 
-def safe_features(features: list[dict] | None, geom_key: str) -> list[dict] | None:
-    """Features with their point rounded to three decimals (0.001 degree) before anything is saved."""
+def safe_features(features: list[dict] | None, geom_key: str, fields: tuple[str, ...] | None = None) -> list[dict] | None:
+    """Features cut to the attributes read (fields; by default the layer's own, BEACH_FIELDS or HAB_FIELDS), their text
+    scrubbed (names after "call"/"contact", phones, e-mails, house numbers) and their point rounded to three decimals
+    (0.001 degree), before anything is saved (re-review P1-5)."""
     if features is None:
         return None
+    fields = fields or (BEACH_FIELDS if geom_key == "geometry" else HAB_FIELDS)
     out = []
     for f in features:
         lat, lon = _pt(f.get(geom_key))
         g = {"x": lon, "y": lat} if lat is not None else None
-        out.append({"attributes": dict(f.get("attributes") or {}), geom_key: g})
+        a = f.get("attributes") or {}
+        out.append({"attributes": {k: (scrub(a[k]) if isinstance(a.get(k), str) else a.get(k))
+                                   for k in fields if k in a}, geom_key: g})
     return out
+
+
+def safe_table(rows: list[dict] | None) -> list[dict] | None:
+    """The bloom table's rows with their area and water text scrubbed before anything is saved."""
+    if rows is None:
+        return None
+    return [{**r, "area": scrub(r.get("area")) or "", "water": scrub(r.get("water")) or ""} for r in rows]
 
 
 def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict], dict, dict]:
@@ -435,7 +452,7 @@ def run(args) -> int:
             hab = check_layer(r.json(), ("NAME", "Date", "Advisory_Tier"))
             p = requests.get(HAB_PAGE, headers=HEADERS, timeout=TIMEOUT)
             p.raise_for_status()
-            table = hab_table(p.text)
+            table = safe_table(hab_table(p.text))
             if table is None:
                 raise ValueError("the program page's watches and advisories table was not found")
         except (requests.RequestException, ValueError, KeyError) as e:

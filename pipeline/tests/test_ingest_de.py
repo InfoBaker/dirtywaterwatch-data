@@ -479,3 +479,34 @@ def test_the_notification_clock_and_an_unverified_owner_are_stated_as_the_source
     assert row["npdes_permits"] == ["DE0021512"] and "permittee not recorded by EPA" in row["name"]
     assert not row.get("legal_form")
     assert "DE0021512" not in next(r for r in ops() if r["id"] == "de-sussex-county")["npdes_permits"]
+
+
+def test_no_sentinel_reaches_any_save_from_the_recreational_water_feed(monkeypatch, tmp_path):
+    # re-review P1-5: DNREC's free text through the Delaware scrubber before the raw save, the state and the records
+    s = rec()
+    rows = copy.deepcopy(s["advisories"])
+    rows[0]["advcomment"] = "Call Pat Example at 1234 Sample Street or 302-555-0142."
+    rows[0]["advdesc"] = "Contact: Pat Example, pat@example.org"
+    rows[0]["contact_name"] = "Robin Sample"
+    saves = []
+    monkeypatch.setattr(W, "save_raw", lambda *a, **k: saves.append(json.dumps(a, default=str)))
+    monkeypatch.setattr(W, "write_json", lambda path, obj, *a, **k: saves.append(json.dumps(obj, default=str)))
+    monkeypatch.setattr(W, "write_events", lambda sid, recs, **k: saves.append(json.dumps([recs, k], default=str)))
+    monkeypatch.setattr(W, "STATE_PATH", tmp_path / "state.json")
+
+    class Resp:
+        def __init__(self, js):
+            self._js = js
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self._js
+    monkeypatch.setattr(W.requests, "get", lambda url, **k: Resp(rows) if url == W.SOCRATA else
+                        Resp({"features": [{"attributes": a} for a in s["stations"]]}))
+    assert W.main(["--at", T0]) == 0
+    blob = "\n".join(saves)
+    assert len(saves) >= 3
+    for x in ("Pat Example", "Robin Sample", "1234 Sample", "302-555-0142", "pat@example.org"):
+        assert x not in blob, x
