@@ -128,6 +128,10 @@ def fetch(permit: str, since: date) -> tuple[dict | None, str]:
     return None, f"failed ({err})"
 
 
+def _r3(v):
+    return None if v is None else round(float(v), 3)
+
+
 def ddmon(s) -> date | None:
     try:
         return datetime.strptime(s, "%d-%b-%y").date() if s else None
@@ -178,7 +182,8 @@ def build(cache: dict, outlets: dict[str, dict[str, dict]]) -> tuple[list[dict],
                     outfall_id=outlet, waterbody_text=(reg or {}).get("receiving_water_echo"),
                     water_slugs=[reg["water_slug"]] if reg and reg.get("water_slug") else [],
                     water_match="outfall_registry" if reg and reg.get("water_slug") else "none",
-                    lat=(reg or {}).get("lat"), lon=(reg or {}).get("lon"),
+                    # a report's point is rounded to three decimals before any write (the registry keeps its own)
+                    lat=_r3((reg or {}).get("lat")), lon=_r3((reg or {}).get("lon")),
                     coord_source="outfall_layer" if reg and reg.get("lat") is not None else None,
                     started_at=first.isoformat(), ended_at=last.isoformat(), time_precision="month",
                     reported_at=received.isoformat() if received else None,
