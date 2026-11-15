@@ -431,8 +431,12 @@ Minnesota (permits MN...; research/mn/report.md section 2.2; not live until data
   to "Pike Bay Lake Vermilion Tower Minnesota". Keyed on MN only, so every other state's records are unchanged:
   - Time zone: STATE_TZ gives America/Chicago (Minnesota keeps one zone); MN is in STATE_ZONE_ALWAYS, so every
     Minnesota record carries raw.time_zone.
-  - No free-text or repeated-point rule: the one report has no description and its own point; the point is kept to
-    0.001 degree (ROUND_POINT_STATES), in the record and in raw.
+  - Free text: MN is in FREE_TEXT_STATES (the Illinois scrub) and STATE_NAME_SCRUB (mn_scrub_people: names by their
+    cues and every house number), though the one report has no description (re-review 2026-11-14 P1-5).
+  - Points kept to 0.001 degree (ROUND_POINT_STATES) in the record and in raw, and in the saved ZIP itself: before a
+    downloaded ZIP (current or all-versions) is saved, sanitize_zip rewrites only the Minnesota rows (points rounded,
+    free text scrubbed as above); every other row keeps its bytes, and a ZIP with nothing to change is saved as
+    downloaded (re-review 2026-11-14 P1-6).
 Indiana (permits IN...; research/in/report.md; not live until data/rules.json says so)
   IDEM takes sewer overflow and bypass reports on its own State Form 48373 and says it will move them to EPA's
   NeT-SewerOverflow system; until then almost nothing reaches this dataset. The 2026-11-12 extract (current and
@@ -505,7 +509,7 @@ PLANT_POINT_STATES = {"KY"}
 AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
 STATE_TZ_WEST = {"AK": (AK_ALEUTIAN_WEST, "America/Adak")}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM", "KY", "IN"}
+FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM", "KY", "MN", "IN"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
 # a permit's shorthand receiving-water names -> the NHD name, keyed (permit, _alias_key(text)); module docstring,
@@ -776,7 +780,16 @@ def ky_scrub_people(v: str) -> str:
     return KY_PERSON_VERB.sub(lambda m: _ky_person(m, 1), v)
 
 
+def mn_scrub_people(v: str) -> str:
+    """Minnesota's free text with names found by their cues ("reported by ...") and every house number removed
+    (fieldmap.scrub_strict_names; re-review 2026-11-14 P1-5)."""
+    from ingest.generic.fieldmap import scrub_strict_names
+    return scrub_strict_names(v)
+
+
 STATE_PERSON_SCRUB = {"KY": ky_scrub_people}
+# states whose free text also goes through the names scrub before anything is saved (Minnesota; module docstring)
+STATE_NAME_SCRUB = {"MN": mn_scrub_people}
 # Kentucky's form writes durations and computed volumes as bare numbers ('Cause/Duration of Incident: 2615', '290 MIN X
 # 50 GAL = 14500'), which the house-number scrub took for addresses: a number after 'Duration of Incident:' or '=' is
 # kept (review 2026-11-08 P3-1)
@@ -1103,11 +1116,92 @@ def _get(url: str) -> tuple[zipfile.ZipFile, bytes, str | None]:
             parsedate_to_datetime(lm).isoformat().replace("+00:00", "Z") if lm else None)
 
 
+CSV_RECORD = re.compile(r'(?:"(?:[^"]|"")*"|[^"\r\n])*(?:\r\n|\n|\r|$)')
+MN_TEXT_COLUMNS = set(FREE_TEXT_FIELDS)
+
+
+def _sanitize_csv(text: str, states: set[str]) -> tuple[str, int]:
+    """(the table's text with only the rows of `states` rewritten, rows changed): the points rounded to 0.001 degree
+    and the free text (FREE_TEXT_FIELDS and *_other_text) scrubbed as the build scrubs it. Every other record keeps its
+    exact text; a changed row keeps its quoting and line ending."""
+    recs = [m.group(0) for m in CSV_RECORD.finditer(text) if m.group(0)]
+    if not recs:
+        return text, 0
+    head = next(csv.reader([recs[0].lstrip("\ufeff")]))
+    col = {c: i for i, c in enumerate(head)}
+    if "permit_identifier" not in col:
+        return text, 0
+    pi = col["permit_identifier"]
+    texts = [i for c, i in col.items() if c in MN_TEXT_COLUMNS or c.endswith("_other_text")]
+    points = [col[c] for c in ("latitude_measure", "longitude_measure") if c in col]
+    changed = 0
+    out = [recs[0]]
+    for r in recs[1:]:
+        body = r.rstrip("\r\n")
+        if not body:
+            out.append(r)
+            continue
+        row = next(csv.reader([body]))
+        if len(row) <= pi or row[pi][:2] not in states:
+            out.append(r)
+            continue
+        new = list(row)
+        for i in points:
+            if i < len(new) and new[i].strip():
+                try:
+                    v = float(new[i])
+                except ValueError:
+                    continue
+                if round(v, 3) != v:
+                    new[i] = f"{round(v, 3):.3f}"
+        for i in texts:
+            if i < len(new) and new[i].strip():
+                st = row[pi][:2]
+                t = scrub_free_text({"t": new[i]}, ["t"])["t"]
+                fn = STATE_PERSON_SCRUB.get(st) or STATE_NAME_SCRUB.get(st)
+                new[i] = fn(t) if fn else t
+        if new == row:
+            out.append(r)
+            continue
+        buf = io.StringIO()
+        csv.writer(buf, quoting=csv.QUOTE_ALL if body.startswith('"') else csv.QUOTE_MINIMAL,
+                   lineterminator=r[len(body):]).writerow(new)
+        out.append(buf.getvalue())
+        changed += 1
+    return "".join(out), changed
+
+
+def sanitize_zip(content: bytes, states: set[str] = ROUND_POINT_STATES) -> bytes:
+    """The ZIP as it may be saved: the rows of `states` (Minnesota) rewritten by _sanitize_csv in every table; every
+    other entry and row as downloaded. Unchanged bytes when no such row needed a change (re-review 2026-11-14 P1-6)."""
+    zf = zipfile.ZipFile(io.BytesIO(content))
+    new_data: dict[str, bytes] = {}
+    for info in zf.infolist():
+        if not info.filename.lower().endswith(".csv"):
+            continue
+        data = zf.read(info)
+        bom = data.startswith(b"\xef\xbb\xbf")
+        try:
+            text = data.decode("utf-8-sig")
+        except UnicodeDecodeError:
+            continue
+        fixed, n = _sanitize_csv(text, states)
+        if n:
+            new_data[info.filename] = (b"\xef\xbb\xbf" if bom else b"") + fixed.encode("utf-8")
+    if not new_data:
+        return content
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as out:
+        for info in zf.infolist():
+            out.writestr(info, new_data.get(info.filename) or zf.read(info))
+    return buf.getvalue()
+
+
 def _save(content: bytes, last_modified: str | None) -> str | None:
     prev = (read_json(BUILD_DIR / "events" / f"{SOURCE_ID}.json", {}) or {}).get("meta", {})
     if prev.get("last_modified") and prev.get("last_modified") == last_modified:
         return None   # same extract as last run: no second copy
-    return str(save_raw(SOURCE_ID, content, "zip").relative_to(ROOT))
+    return str(save_raw(SOURCE_ID, sanitize_zip(content), "zip").relative_to(ROOT))
 
 
 def fetch_current() -> tuple[dict[str, list[dict]], dict]:
@@ -1479,8 +1573,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             for rows_ in (i_rows, causes.get(k, []), acts.get(k, [])):
                 for x in rows_:
                     scrub_free_text(x, [c for c in x if c.endswith("_other_text")])
-            if state in STATE_PERSON_SCRUB:   # module docstring, Kentucky
-                people = STATE_PERSON_SCRUB[state]
+            if state in STATE_PERSON_SCRUB or state in STATE_NAME_SCRUB:   # module docstring, Kentucky, Minnesota
+                people = STATE_PERSON_SCRUB.get(state) or STATE_NAME_SCRUB[state]
                 for f in FREE_TEXT_FIELDS:
                     if isinstance(ev.get(f), str):
                         ev[f] = people(ev[f])

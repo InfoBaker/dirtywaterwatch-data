@@ -46,7 +46,7 @@ def channel(rs: list[dict], private: bool, is_cso: bool) -> str:
     else:
         s += NOT_SEARCHED
     if private:
-        s += " The statute binds a private sewer system owner as it binds a public one."
+        s += " The statute binds a privately owned domestic sewer system owner as it binds a public one."
     return s
 
 

@@ -99,11 +99,13 @@ def test_a_row_that_leaves_the_listing_ends_at_that_read_and_can_come_back():
     assert old["status"] == "advisory_lifted" and old["ended_at"] == "2026-11-15T18:00:00Z"
     assert old["raw"]["ended_at_precision"] == "poll" and old["raw"]["_unlisted_since"] == "2026-11-15T18:00:00Z"
     assert meta["lifted_this_read"] == 1 and len(gone) == 19
-    back = dict(first["Lake Ilo"], raw=dict(first["Lake Ilo"]["raw"], _unlisted_since="2026-11-15T18:00:00Z"))
+    back = dict(first["Lake Ilo"], status="advisory_lifted", ended_at="2026-11-15T18:00:00Z",
+                raw=dict(first["Lake Ilo"]["raw"], _unlisted_since="2026-11-15T18:00:00Z", ended_at_precision="poll"))
     recs, _ = H.build(PDF, "2026-11-16T18:00:00Z", [back])
-    ilo = next(r for r in recs if r["waterbody_text"] == "Lake Ilo")
-    assert ilo["status"] == "advisory_active" and ilo["raw"]["_absences"] == [{"from": "2026-11-15T18:00:00Z",
-                                                                               "to": "2026-11-16T18:00:00Z"}]
+    ilo = sorted((r for r in recs if r["waterbody_text"] == "Lake Ilo"), key=lambda r: r["source_record_id"])
+    assert [r["status"] for r in ilo] == ["advisory_lifted", "advisory_active"]       # the gap stays a gap
+    assert ilo[1]["source_record_id"] == ilo[0]["source_record_id"] + "~2"
+    assert ilo[1]["started_at"] == "2026-11-16T18:00:00Z" and ilo[1]["time_precision"] == "poll"
 
 
 def test_p2_1_a_lake_moved_to_the_warning_table_is_a_new_posting_and_the_advisory_ends_at_the_read():
@@ -120,18 +122,12 @@ def test_p2_1_a_lake_moved_to_the_warning_table_is_a_new_posting_and_the_advisor
     assert new["status"] == "advisory_active" and new["started_at"] == "2026-08-26"     # never merged back to July
 
 
-def test_p2_1_absences_carry_and_county_order_is_one_key():
+def test_p2_1_county_order_is_one_key():
     first, _ = hab()
     d = first["Devils Lake"]
     assert d["source_record_id"].startswith("devils-lake:benson-ramsey:")
-    back = dict(d, raw=dict(d["raw"], _unlisted_since="2026-11-15T18:00:00Z",
-                            _absences=[{"from": "2026-10-01T00:00:00Z", "to": "2026-10-02T00:00:00Z"}]))
-    recs, _ = H.build(PDF, "2026-11-16T18:00:00Z", [back])
-    dv = next(r for r in recs if r["waterbody_text"] == "Devils Lake")
-    assert dv["raw"]["_absences"] == [{"from": "2026-10-01T00:00:00Z", "to": "2026-10-02T00:00:00Z"},
-                                      {"from": "2026-11-15T18:00:00Z", "to": "2026-11-16T18:00:00Z"}]
-    again, _ = H.build(PDF, "2026-11-17T18:00:00Z", [dv])
-    assert next(r for r in again if r["waterbody_text"] == "Devils Lake")["raw"]["_absences"] == dv["raw"]["_absences"]
+    again, _ = H.build(PDF, "2026-11-17T18:00:00Z", [d])
+    assert [r["event_id"] for r in again if r["waterbody_text"] == "Devils Lake"] == [d["event_id"]]
 
 
 def test_p1_5_a_damaged_row_or_a_missing_table_fails_and_lifts_nothing(monkeypatch):
@@ -146,13 +142,17 @@ def test_p1_5_a_damaged_row_or_a_missing_table_fails_and_lifts_nothing(monkeypat
         H.parse(PDF)
     empty = [i for i in items if re.sub(r"\s", "", i["text"]).lower() in ("a", "dvisories", "warning")]
     monkeypatch.setattr(H, "page_items", lambda pdf: empty)
-    assert H.parse(PDF) == []                        # DEQ's own empty listing reads as empty, not as a failure
+    with pytest.raises(ValueError, match="no statement that the table is empty"):
+        H.parse(PDF)                                 # two bare headings are no evidence of an empty listing
+    said = empty + [{"text": "None", "x": 60.0, "y": 400.0}, {"text": "None", "x": 60.0, "y": 200.0}]
+    monkeypatch.setattr(H, "page_items", lambda pdf: said)
+    assert H.parse(PDF) == []                        # each table saying it is empty reads as DEQ's empty listing
 
 
 def test_p1_1_each_listed_lake_with_an_nhd_outline_in_its_county_has_a_cited_point():
     recs, _ = hab()
     pts = json.loads((ROOT / "data" / "reference" / "nd-hab-lake-points.json").read_text())
-    assert len(pts["lakes"]) + len(pts["without_point"]) == 20 and len(pts["lakes"]) == 14
+    assert len(pts["lakes"]) + len(pts["without_point"]) == 20 and len(pts["lakes"]) == 15
     for r in recs.values():
         p = r["raw"].get("marker_point")
         if p is None:
@@ -161,8 +161,72 @@ def test_p1_1_each_listed_lake_with_an_nhd_outline_in_its_county_has_a_cited_poi
         assert (r["lat"], r["lon"]) == (p["lat"], p["lon"]) and p["gnis_id"] and round(r["lat"], 3) == r["lat"]
         assert p["county"].removesuffix(" County") in r["raw"]["counties"]
         assert zones.nd_point_county(r["lat"], r["lon"]) == p["county"]
-    assert recs["Clear Lake"]["lat"] is None          # no Clear Lake outline in Pierce County: no borrowed point
+    c = recs["Clear Lake"]                            # no NHD outline in Pierce County: the one GNIS lake there
+    assert c["coord_source"] == "gnis_point" and c["raw"]["marker_point"]["gnis_id"] == "01028388"
+    assert c["raw"]["marker_point"]["county"] == "Pierce County"
     assert recs["Patterson Lake"]["raw"]["marker_point"]["gnis_name"] == "Edward Arthur Patterson Lake"
+
+
+# ---------------------------------------------------------------- the point builder (review 2026-11-14 P2-2)
+
+def _square(lat, lon, d=0.01, gnis_id="09999901", name="Example Lake"):
+    ring = [[lon - d, lat - d], [lon + d, lat - d], [lon + d, lat + d], [lon - d, lat + d], [lon - d, lat - d]]
+    return {"attributes": {"GNIS_NAME": name, "GNIS_ID": gnis_id, "AREASQKM": 1, "FTYPE": 390},
+            "geometry": {"rings": [ring]}}
+
+
+def _gaz(lat, lon, county, gid=9999911, name="Example Lake", cls="Lake"):
+    return {"attributes": {"gaz_id": gid, "gaz_name": name, "gaz_featureclass": cls, "state_alpha": "ND",
+                           "county_name": county}, "geometry": {"x": lon, "y": lat}}
+
+
+def _points():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ndpts", ROOT / "scripts" / "nd_hab_lake_points.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
+LISTED = [{"lake": "Example Lake", "counties": ["Kidder"], "level": "advisory", "date": "2026-07-01"}]
+
+
+def test_p2_2_two_same_named_lakes_with_separate_gnis_ids_get_no_point_even_if_one_is_larger():
+    m = _points()
+    big = _square(46.75, -99.95, d=0.03, gnis_id="09999901")
+    small = _square(46.75, -99.48, d=0.01, gnis_id="09999902")         # about 36 km east, same county
+    doc = m.build([big, small], LISTED, "2026-11-14")
+    assert doc["lakes"] == [] and len(doc["without_point"]) == 1
+    why = doc["without_point"][0]["why"]
+    assert "2 separate NHD lakes" in why and "beyond 25 km" in why
+    near = _square(46.77, -99.93, d=0.005, gnis_id="09999903")          # a separate lake close by: still refused
+    assert m.build([big, near], LISTED, "2026-11-14")["lakes"] == []
+
+
+def test_p2_2_parts_of_one_gnis_lake_are_one_lake_and_qualified_names_are_other_waters():
+    m = _points()
+    part1 = _square(46.75, -99.95, d=0.03, gnis_id="09999901")
+    part2 = _square(46.75, -99.70, d=0.01, gnis_id="09999901")         # a second part of the same identity
+    other = _square(46.9, -99.7, d=0.05, gnis_id="09999909", name="North Example Lake")
+    doc = m.build([part1, part2, other], LISTED, "2026-11-14")
+    (row,) = doc["lakes"]
+    assert row["gnis_id"] == "09999901" and abs(row["lon"] - -99.95) < 0.04 and row["coord_source"] == "nhd_waterbody"
+    assert m.build([other], LISTED, "2026-11-14")["lakes"] == []       # "North Example Lake" is not "Example Lake"
+
+
+def test_p2_2_gnis_point_only_for_one_identified_lake_in_the_listed_county():
+    m = _points()
+    one = m.build([], LISTED, "2026-11-14", [_gaz(46.9, -99.7, "Kidder")])
+    assert one["lakes"][0]["coord_source"] == "gnis_point" and one["lakes"][0]["gnis_id"] == "09999911"
+    assert (one["lakes"][0]["lat"], one["lakes"][0]["lon"]) == (46.9, -99.7)
+    two = m.build([], LISTED, "2026-11-14", [_gaz(46.9, -99.7, "Kidder"), _gaz(46.75, -99.95, "Kidder", 9999912)])
+    assert two["lakes"] == [] and "2 GNIS lakes" in two["without_point"][0]["why"]
+    elsewhere = m.build([], LISTED, "2026-11-14", [_gaz(47.95, -100.1, "Pierce")])      # another county's namesake
+    assert elsewhere["lakes"] == []
+    wrong_county = m.build([], LISTED, "2026-11-14", [_gaz(47.95, -100.1, "Kidder")])   # gazetteer and point disagree
+    assert wrong_county["lakes"] == []
+    stream = m.build([], LISTED, "2026-11-14", [_gaz(46.9, -99.7, "Kidder", cls="Stream")])
+    assert stream["lakes"] == []
 
 
 # ---------------------------------------------------------------- the incident archive
@@ -221,6 +285,9 @@ def test_operators_hold_every_north_dakota_plant_permit_once():
 def test_register_rows_name_the_bot_wall_and_the_feeds():
     reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nd.json").read_text())["channels"]}
     for r in ops():
+        if r.get("permit_only"):
+            assert f"{r['id']}-spill-report" not in reg                    # no operator row for a permit-only row
+            continue
         row = reg[f"{r['id']}-spill-report"]
         assert row["barrier"] == "bot_wall" and row["monitored"] is False
     assert reg["nd-hazconnect-public-incidents"]["barrier"] == "bot_wall"
@@ -317,11 +384,237 @@ def test_p1_6_archive_free_text_is_scrubbed_before_saving():
     assert "701-555-0142" not in out and "1234 Example" not in out
 
 
-def test_p2_3_a_plant_name_gets_no_legal_form_and_outfalls_are_rows_with_an_outfall():
-    by = {r["name"]: r for r in ops()}
-    assert by["New Town Water Resource Recovery Facility"]["legal_form"] is None
+def test_p2_3_a_plant_name_is_a_permit_only_row_and_outfalls_are_eligible_rows():
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import icis_operators as I
+    by = {r["id"]: r for r in ops()}
+    nt = by["nd-new-town-water-resource-recovery-facility"]
+    assert nt["permit_only"] is True and nt["legal_form"] is None and nt["name"].startswith("Permit NDG")
     plants = json.loads((ROOT / "data" / "outfalls-plants-us.json").read_text())["outfalls"]
     for r in ops():
+        if r["kind"] == "cso":
+            continue
         rows = [x for x in plants if x.get("npdes_permit") in r["npdes_permits"]]
-        n = sum(1 for x in rows if x.get("outfall"))
+        n = sum(1 for x in rows if I.outfall_eligible(x)[0])
         assert r["outfall_count"] == (n or None)
+
+
+# ---------------------------------------------------------------- every standing listing visible (re-review P1-1)
+
+def _status_build(tmp_path, recs, waters):
+    import copy
+    from datetime import UTC, datetime
+    from build import status as S
+    now = datetime(2026, 11, 14, 19, tzinfo=UTC)
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    (tmp_path / "nd-deq-hab-listings.json").write_text(json.dumps(
+        {"source_id": "nd-deq-hab-listings", "ok": True, "last_ok_at": now.isoformat(), "meta": {}, "records": recs}))
+    rules = copy.deepcopy(S.load_rules())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"ND"})
+    st, _ = S.build(now=now, write=False, events_dir=tmp_path, waters=waters, outfalls=[], registry={}, reaches={},
+                    flows=({}, {}), rules=rules, placement_cache=False)
+    return st, S
+
+
+@pytest.mark.parametrize("area", [100.0, 2.0])
+def test_p1_1_every_standing_listing_is_visible_before_and_after_its_water_is_resolved(tmp_path, area):
+    recs = list(hab()[0].values())
+    assert len(recs) == 20 and all(r["status"] == "advisory_active" for r in recs)
+    assert all(r["raw"]["advisory_extent"] == "named_water" for r in recs)
+    for r in recs:
+        r["water_slugs"] = []
+    st, S = _status_build(tmp_path, recs, {})
+    marked = {p["event_id"] for p in st["advisory_points"] if p["status"] == "red"}
+    assert len(marked) == 15
+    unplaced = set(st["unplaced_events"])
+    for r in recs:                     # a point-less listing is kept, filed under North Dakota, listed unplaced
+        assert r["event_id"] in marked or (r["event_id"] in unplaced and S.event_state(r) == "ND")
+    waters = {}
+    for i, r in enumerate(recs):       # each lake resolved to a water record of its own (a large or a small lake)
+        lat, lon = (r["lat"], r["lon"]) if r["lat"] is not None else (46.5 + i * 0.05, -99.0)
+        d = 0.05
+        slug = f"example-lake-{i}-nd"
+        ring = [[lon - d, lat - d], [lon + d, lat - d], [lon + d, lat + d], [lon - d, lat + d], [lon - d, lat - d]]
+        waters[slug] = {"slug": slug, "name": r["waterbody_text"], "kind": "lake", "state": "ND", "area_km2": area,
+                        "bbox": [lon - d, lat - d, lon + d, lat + d],
+                        "geometry": {"type": "Polygon", "coordinates": [ring]}}
+        r["water_slugs"], r["water_match"] = [slug], "name"
+    st, _ = _status_build(tmp_path, recs, waters)
+    assert all(w["status"] == "red" for w in st["waters"].values())       # every listed lake coloured, large or small
+    pts = {p["event_id"] for p in st["advisory_points"] if p["status"] == "red"}
+    if area >= 50:
+        assert pts == marked           # a large lake keeps its marker where the listing has a point
+
+
+# ---------------------------------------------------------------- re-review 2026-11-14 P1-4: a whole read or none
+
+def test_p1_4_a_lost_county_cell_fails_the_read_and_keeps_the_advisory(monkeypatch):
+    first, _ = hab()
+    items = H.page_items(PDF)
+    clear = next(i for i in items if i["text"].strip().startswith("Clear Lake"))
+    no_county = [i for i in items if not (abs(i["y"] - clear["y"]) <= 3 and 300 <= i["x"] < 450)]
+    assert len(no_county) < len(items)
+    monkeypatch.setattr(H, "page_items", lambda pdf: no_county)
+    with pytest.raises(ValueError, match="could not be read whole"):
+        H.parse(PDF)
+    bogus = [dict(i, text="Example") if (abs(i["y"] - clear["y"]) <= 3 and 300 <= i["x"] < 450) else i for i in items]
+    monkeypatch.setattr(H, "page_items", lambda pdf: bogus)
+    with pytest.raises(ValueError, match="could not be read whole"):     # not a North Dakota county
+        H.parse(PDF)
+
+
+def _main_with(monkeypatch, pdf, previous):
+    written = []
+
+    class Resp:
+        content, headers = pdf, {}
+
+        def raise_for_status(self):
+            return None
+    monkeypatch.setattr(H.requests, "get", lambda *a, **k: Resp())
+    monkeypatch.setattr(H, "save_raw", lambda *a, **k: None)
+    monkeypatch.setattr(H, "read_json", lambda path, default=None: {"records": list(previous)})
+    monkeypatch.setattr(H, "write_events", lambda sid, recs, **k: written.append((list(recs), k)))
+    return H.main([]), written
+
+
+def test_p1_4_a_second_page_or_a_missing_stream_fails_and_lifts_nothing(monkeypatch):
+    first, _ = hab()
+    two_pages = PDF.replace(b"%%EOF", b"\n999 0 obj\n<< /Type /Page /Contents 998 0 R >>\nendobj\n%%EOF", 1)
+    with pytest.raises(ValueError, match="2 pages"):
+        H.parse(two_pages)
+    rc, written = _main_with(monkeypatch, two_pages, first.values())
+    assert rc == 1 and written[0][1]["ok"] is False and written[0][0] == []      # previous records kept by the writer
+    m = re.search(rb"/Contents\s*\[\s*(\d+)", PDF)
+    gone = PDF.replace(m.group(0), m.group(0).replace(m.group(1), b"9999"), 1)       # a stream the page names, absent
+    with pytest.raises(ValueError, match="missing or cannot be decoded"):
+        H.parse(gone)
+    rc, written = _main_with(monkeypatch, gone, first.values())
+    assert rc == 1 and written[0][1]["ok"] is False
+    rc, written = _main_with(monkeypatch, PDF, first.values())
+    assert rc == 0 and len(written[0][0]) == 20
+    assert all(r["status"] == "advisory_active" for r in written[0][0])
+
+
+# ---------------------------------------------------------------- re-review 2026-11-14 P1-5: the archive's text
+
+def test_p1_5_archive_contaminant_text_carries_no_name_or_address_at_any_save(monkeypatch):
+    rows, _ = L.parse_page((FIX / "legacy-search-sample.html").read_text())
+    row = dict(next(r for r in rows if L.keep(r) and r["latitude"]))
+    row["contaminant"] = "Raw sewage, reported by Pat Example at 1234 Example Street"
+    assert L.keep(row)
+    blob = json.dumps([L.safe_row(row), L.record(row, FETCHED)])
+    assert "Pat Example" not in blob and "1234 Example" not in blob and "Raw sewage" in blob
+    saved, written = [], []
+    monkeypatch.setattr(L, "fetch_search", lambda w, s: [row] if w == "sewage" else [])
+    monkeypatch.setattr(L.time, "sleep", lambda s: None)
+    monkeypatch.setattr(L, "read_json", lambda path, default=None: {})
+    monkeypatch.setattr(L, "save_raw", lambda sid, content, ext: saved.append(content))
+    monkeypatch.setattr(L, "write_events", lambda sid, recs, **k: written.append(list(recs)))
+    assert L.main(["--force"]) == 0
+    out = json.dumps([saved, written])
+    assert saved and written and "Pat Example" not in out and "1234 Example" not in out
+
+
+
+# ---------------------------------------------------------------- re-review 2026-11-14 P2-1: observed periods
+
+def test_p2_1_a_returning_posting_keeps_its_gap_through_status(monkeypatch):
+    from datetime import datetime, timezone
+    from build import status as S
+    row = {"level": "advisory", "lake": "Example Lake", "counties": ["Kidder"], "date": "2026-07-01"}
+    monkeypatch.setattr(H, "parse", lambda pdf: [dict(row)] if listed[0] else [])
+    listed = [True]
+
+    def read(when, prev):
+        recs, _ = H.build(b"", when, prev)
+        return recs
+    r1 = read("2026-07-02T18:00:00Z", [])
+    r1 = read("2026-07-05T18:00:00Z", r1)                             # repeated unchanged read: one record
+    assert len(r1) == 1 and r1[0]["started_at"] == "2026-07-01"
+    listed[0] = False
+    r2 = read("2026-07-10T18:00:00Z", r1)
+    assert r2[0]["status"] == "advisory_lifted" and r2[0]["ended_at"] == "2026-07-10T18:00:00Z"
+    listed[0] = True
+    r3 = read("2026-08-01T18:00:00Z", r2)
+    r3 = read("2026-08-02T18:00:00Z", r3)                             # unchanged again: the same second period
+    assert len(r3) == 2
+    now = datetime(2026, 8, 5, tzinfo=timezone.utc)
+
+    def colour(y, mo, d):
+        at = datetime(y, mo, d, 12, tzinfo=timezone.utc)
+        cs = [S.status_at(S.event_intervals(r, "ND", now), at)[0] for r in r3]
+        return "red" if "red" in cs else cs
+    assert colour(2026, 7, 5) == "red"
+    assert colour(2026, 7, 20) != "red"                               # the gap: DEQ did not list it
+    assert colour(2026, 8, 3) == "red"
+    row["date"] = "2026-08-20"                                         # reposted with a new date: a new posting
+    r4 = read("2026-08-21T18:00:00Z", r3)
+    assert len(r4) == 3 and any(r["started_at"] == "2026-08-20" and r["status"] == "advisory_active" for r in r4)
+
+
+# ---------------------------------------------------------------- re-review 2026-11-14 P2-4: the split counties
+
+@pytest.mark.parametrize("lat,lon,county,zone", [
+    (47.8, -103.8, "McKenzie County", zones.MOUNTAIN), (47.8, -102.8, "McKenzie County", zones.CENTRAL),
+    (46.0, -101.8, "Sioux County", zones.MOUNTAIN), (46.0, -100.9, "Sioux County", zones.CENTRAL)])
+def test_p2_4_a_point_in_a_split_county_is_read_on_its_side_of_the_line(lat, lon, county, zone):
+    assert zones.nd_point_county(lat, lon) == county
+    for given in (county, None):                       # the county given by the source, or found from the point
+        z, basis = zones.north_dakota_zone(given, lat, lon)
+        assert z == zone and "side" in basis and "NTAD" in basis
+        assert zones.north_dakota_zone_uncertain(given, lat, lon) is False
+
+
+def test_p2_4_a_county_only_record_states_that_its_zone_is_assumed():
+    z, basis = zones.north_dakota_zone("Sioux County")
+    assert z == zones.MOUNTAIN and "not known" in basis and zones.north_dakota_zone_uncertain("Sioux County")
+    assert not zones.north_dakota_zone_uncertain("Stark County") and not zones.north_dakota_zone_uncertain("Cass")
+    rows, _ = L.parse_page((FIX / "legacy-search-sample.html").read_text())
+    row = dict(next(r for r in rows if L.keep(r) and r["latitude"]))
+    east = L.record(dict(row, county="McKenzie", latitude="47.8", longitude="-102.8"), FETCHED)
+    assert east["raw"]["time_zone"] == zones.CENTRAL and "time_zone_uncertain" not in east["raw"]
+    blind = L.record(dict(row, county="McKenzie", latitude="", longitude=""), FETCHED)
+    assert blind["raw"]["time_zone"] == zones.MOUNTAIN and blind["raw"]["time_zone_uncertain"] is True
+
+
+def test_p2_4_other_states_clocks_are_unchanged():
+    for st, lat, lon in (("NE", 41.25, -96.0), ("TN", 36.16, -86.78), ("FL", 30.44, -84.28), ("OR", 45.52, -122.68)):
+        assert zones.zone_for(st, lat, lon) == {"NE": zones.CENTRAL, "TN": zones.CENTRAL, "FL": "America/New_York",
+                                                "OR": "America/Los_Angeles"}[st]
+
+
+# ---------------------------------------------------------------- verification pass 2026-11-15 P1-5: residences
+
+@pytest.mark.parametrize("words", [
+    "Raw sewage from a private home at 1234 Example Street", "Sewage backup at a private dwelling",
+    "Sewage from a residence", "Septic tank overflow", "Sewage from onsite housing", "Sewage from on-site housing",
+    "Sewage from a house", "Sewage at a mobile home park lot", "Sewage from a farmstead", "Sewage at 1234 Example Road",
+])
+def test_v2_residential_rows_keep_their_county_only_at_both_saves(monkeypatch, words):
+    rows, _ = L.parse_page((FIX / "legacy-search-sample.html").read_text())
+    row = dict(next(r for r in rows if L.keep(r) and r["latitude"]))
+    row["contaminant"] = words
+    assert L.keep(row)
+    saved, written = [], []
+    monkeypatch.setattr(L, "fetch_search", lambda w, s: [row] if w == "sewage" else [])
+    monkeypatch.setattr(L.time, "sleep", lambda s: None)
+    monkeypatch.setattr(L, "read_json", lambda path, default=None: {})
+    monkeypatch.setattr(L, "save_raw", lambda sid, content, ext: saved.append(json.loads(content)))
+    monkeypatch.setattr(L, "write_events", lambda sid, recs, **k: written.append(list(recs)))
+    assert L.main(["--force"]) == 0
+    s, w = saved[0][0], written[0][0]
+    assert s["latitude"] is None and s["longitude"] is None and s["twn_rng_sec"] is None
+    assert w["lat"] is None and w["lon"] is None and w["raw"]["row"]["twn_rng_sec"] is None
+    assert w["raw"]["county"] and w["raw"]["point_withheld"]
+    lat, lon = row["latitude"], row["longitude"]
+    blob = json.dumps([saved, written])
+    assert lat not in blob and lon not in blob and str(round(float(lat), 3)) not in blob
+
+
+def test_v2_ordinary_sewage_rows_keep_their_points():
+    recs, _, _ = legacy()
+    kept = [r for r in recs.values() if r["lat"] is not None]
+    assert kept and all("point_withheld" not in r["raw"] for r in kept)

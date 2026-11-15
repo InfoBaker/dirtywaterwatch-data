@@ -15,10 +15,14 @@ Inputs (per state)
 Grouping: permits whose permittee of record reads as the same body after normalising ("Little Falls city of" and
   "City of Little Falls") are one row. A name that gives only the plant ("Montevideo WWTP") stays its own row: the
   body is not guessed.
-Rules: legal_form from the name (form()); a name that gives only a plant ("Arlington WWTP", "New Town Water Resource
-  Recovery Facility") gets none, since EPA's facility type does not say who owns it; outfall_count counts the rows with
-  an outfall id (a facility-only row is a location, not an outfall); the notification channel is the state's law text, then the research row's
-  channel; idempotent (a rerun replaces the rows it wrote: source_areas [<st>]); never an individual's name.
+Rules: legal_form from the name (form()). A permittee of record that gives only a plant ("Arlington WWTP", "New Town
+  Water Resource Recovery Facility"; plant_only()) does not establish who holds the permit: the permit is a permit-only
+  row ("Permit MN0020150 (Arlington WWTP)", permit_only true, no legal form), never an operator, left out of operator
+  counts and of the operator rows of the notice register (re-review 2026-11-14 P2-3). outfall_count counts the rows
+  that are outfalls to a water (outfall_eligible: an outfall id, not marked other, not a collection system whose
+  receiving water is a plant, not a dewatering permit); the notification channel is the state's law text, then the
+  research row's channel; idempotent (a rerun replaces the rows it wrote: source_areas [<st>]); never an individual's
+  name.
 """
 from __future__ import annotations
 
@@ -79,10 +83,35 @@ def compact(s: str, state_words: tuple[str, ...] = ()) -> str:
     return re.sub(r"[^a-z0-9]", "", s)
 
 
-PLANT_ONLY = re.compile(r"\b(?:wwtp|wwtf|wrrf|wrf|stp|wpcf|lagoons?|water resource recovery|wastewater treatment|"
-                        r"treatment (?:plant|facility)|facility)\b", re.I)
+PLANT_ONLY = re.compile(r"\b(?:wwtp|wwtf|wrrf|wrf|stp|wtp|wpcf|lagoons?|water resource recovery|water reclamation|"
+                        r"wastewater treatment|treatment (?:plant|facility)|facility|plant)\b", re.I)
 BODY = re.compile(r"\b(?:city|town of|township|village|county|district|council|tribes?|tribal|band|nation|board|authority|"
-                  r"commission|state|university|department|air force|army|national|united states)\b", re.I)
+                  r"commission|state|university|department|air force|army|national|united states|nps|usaf|"
+                  r"corps|bureau|service|bia|association|inc|llc|corp|corporation|company|cooperative)\b|"
+                  r"\bu\.\s?s\.", re.I)
+# outfall eligibility (re-review 2026-11-14 P2-3): a collection system whose "receiving water" is a treatment plant, and a
+# construction dewatering permit, have no sewage outfall to a water
+TO_PLANT = re.compile(r"\b(?:wwtp|wwtf|stp|wpcp|wrrf|treatment (?:plant|facility|works)|sewage (?:plant|works))\b", re.I)
+DEWATER = re.compile(r"\bdewater", re.I)
+
+
+def plant_only(name: str) -> bool:
+    """A name that gives only a plant ("Arlington WWTP", "New Town Water Resource Recovery Facility"), not a body."""
+    return bool(PLANT_ONLY.search(name or "")) and not BODY.search(name or "")
+
+
+def outfall_eligible(x: dict) -> tuple[bool, str | None]:
+    """(an outfall to a water, why not): a row with no outfall id is a facility location; a row a state file marks
+    other, a collection system that sends to a plant, and a dewatering permit are not sewage outfalls."""
+    if not x.get("outfall"):
+        return False, "facility-only row (no outfall id)"
+    if x.get("outfall_kind") == "other":
+        return False, "marked other by a state correction"
+    if TO_PLANT.search(x.get("receiving_water_echo") or ""):
+        return False, "a collection system: its receiving water is a treatment plant"
+    if DEWATER.search(" ".join(str(x.get(k) or "") for k in ("permittee", "permit_name", "outfall_name"))):
+        return False, "a dewatering permit"
+    return True, None
 
 
 def form(name: str, facility_type: str | None, by_name: dict) -> str | None:
@@ -192,6 +221,15 @@ def build(cfg: dict, dis: list[dict]) -> tuple[list[dict], Counter]:
             continue
         disp = tidy(name, words)
         ft = pl[0].get("facility_type") if pl else None
+        if p not in rname and not res_by_permit.get(p) and disp not in by_name and plant_only(disp):
+            # EPA's permittee of record gives only the plant: the body responsible is not established, so the permit
+            # is its own permit-only row, named by the permit, out of operator counts (re-review 2026-11-14 P2-3)
+            groups[f"permit-only:{p}"] = {"name": f"Permit {p} ({disp})", "id_name": disp, "legal_form": None,
+                                          "permits": [p], "private": False, "permit_only": True,
+                                          "facility_type": ft,
+                                          "basis": f"{basis} gives only the plant's name ({disp!r}), not the body that "
+                                                   "holds the permit"}
+            continue
         lf = form(disp, ft, by_name)
         private = False
         if c and p not in public_by_name and lf not in PUBLIC_FORMS:
@@ -219,12 +257,13 @@ def build(cfg: dict, dis: list[dict]) -> tuple[list[dict], Counter]:
     for k, g in sorted(groups.items(), key=lambda kv: kv[1]["name"].lower()):
         ps = list(dict.fromkeys(g["permits"]))
         rs = g.get("research") or []
-        rid = rs[0]["id"] if rs else f"{area}-{slug(g['name'])}"
+        rid = rs[0]["id"] if rs else f"{area}-{slug(g.get('id_name') or g['name'])}"
         if rid in ids:
             rid = f"{rid}-{ps[0].lower()}"
         new.append(make_row(cfg, rid, g, ps, rs, plants, cso, cands))
         ids.add(rid)
-        counts["research rows" if rs else ("private rows" if g["private"] else "public rows")] += 1
+        counts["research rows" if rs else "permit-only rows" if g.get("permit_only") else
+               ("private rows" if g["private"] else "public rows")] += 1
     for r in no_permit_research:          # operators known only from the research (no permit of their own here)
         g = {"name": tidy(r["name"], words), "legal_form": form(tidy(r["name"], words), None, by_name),
              "private": False, "basis": "the research row (no permit of its own in EPA's files)"}
@@ -241,7 +280,7 @@ def build(cfg: dict, dis: list[dict]) -> tuple[list[dict], Counter]:
 def make_row(cfg, rid, g, ps, rs, plants, cso, cands, kind=None) -> dict:
     words = tuple(cfg.get("state_words") or ())
     rows = [x for p in ps for x in plants.get(p, [])]
-    with_outfall = [x for x in rows if x.get("outfall")]      # a facility-only row (no outfall id) is not an outfall
+    with_outfall = [x for x in rows if outfall_eligible(x)[0]]      # outfalls to a water only
     crow = [x for p in ps for x in cso.get(p, [])]
     open_cso = [x for x in crow if not str(x.get("outfall_status") or "").upper().startswith("CLS")]
     waters = list(dict.fromkeys([w for r in rs for w in r.get("receiving_waters") or []] +
@@ -252,7 +291,9 @@ def make_row(cfg, rid, g, ps, rs, plants, cso, cands, kind=None) -> dict:
                                 else [])))
     facs = sorted({f"{tidy(x.get('permittee') or '', words)} ({x['npdes_permit']})" for x in rows
                    if x.get("permittee") and (cands.get(x["npdes_permit"]) or {}).get("facility") != REMOVED})
-    notes = f"Owner: {g['basis']}."
+    notes = (f"Permit only: {g['basis']}; the operator is not established here, so this row is not counted as an "
+             f"operator (EPA's facility type: {g.get('facility_type') or 'not given'})." if g.get("permit_only")
+             else f"Owner: {g['basis']}.")
     if facs and not withheld:
         notes += " Plants: " + ", ".join(facs[:12]) + ("." if len(facs) <= 12 else f", and {len(facs) - 12} more.")
     if crow:
@@ -269,6 +310,7 @@ def make_row(cfg, rid, g, ps, rs, plants, cso, cands, kind=None) -> dict:
             "outfalls_source": ("EPA National CSO Inventory (data/outfalls-us.json)" if open_cso else
                                 f"EPA ICIS-NPDES Discharge Points (data/outfalls-plants-us.json, {len(with_outfall)} "
                                 f"outfalls of {len(rows)} rows)" if rows else None),
+            **({"permit_only": True} if g.get("permit_only") else {}),
             "notification_channel": cfg["channel"](rs, private, bool(open_cso)),
             "notification_feed_machine_readable": any(r.get("notification_feed_machine_readable") for r in rs),
             "notification_signup_url": None, "towns": towns, "notes": notes.strip(),
