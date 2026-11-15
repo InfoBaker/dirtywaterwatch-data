@@ -27,7 +27,8 @@ def series(sizes, start=D0, step=5):
 
 
 def span(d0, d1=None, outfall=None, precision="minute"):
-    return {"first": d0, "last": d1 or d0, "outfall": outfall, "precision": precision, "source_id": "x"}
+    return {"first": d0, "last": d1 or d0, "outfall": outfall, "precision": precision, "source_id": "x",
+            "event_id": f"x:{d0.isoformat()}:{outfall}", "started_at": f"{d0.isoformat()}T10:00:00-05:00"}
 
 
 def an(h, **kw):
@@ -39,8 +40,8 @@ def history(sizes, followed, start=D0, step=5, outfall=None):
     """(daily, spans, coverage_end, today) for storms of the given sizes, a report on each storm marked followed."""
     daily, days = series(sizes, start, step)
     spans = [span(d, outfall=outfall) for d, f in zip(days, followed) if f]
-    end = days[-1] + timedelta(days=step)
-    return daily, spans, end, end + timedelta(days=CFG["lag_days"])
+    end = days[-1] + timedelta(days=step + CFG["lag_days"])       # the period then ends `step` days after the last storm
+    return daily, spans, end, end
 
 
 # ---------------------------------------------------------------- storms and followed
@@ -100,12 +101,14 @@ def test_report_spans_leaves_out_and_counts_what_is_not_a_dated_wet_report():
 # ---------------------------------------------------------------- levels
 
 def test_lowest_reported_is_the_smallest_followed_storm_rounded_down_to_a_rung():
-    sts = [{"size": 0.9, "followed": True, "first": D0, "peak_day": D0},
-           {"size": 0.35, "followed": True, "first": D0 + timedelta(9), "peak_day": D0 + timedelta(10)},
-           {"size": 0.2, "followed": False, "first": D0, "peak_day": D0}]
-    assert R.lowest_reported(sts, CFG["rungs_in"]) == {"size_in": 0.35, "day": "2019-01-11", "rounded_in": 0.25}
+    sts = [{"size": 0.9, "followed": True, "first": D0, "last": D0, "peak_day": D0},
+           {"size": 0.35, "followed": True, "first": D0 + timedelta(9), "last": D0 + timedelta(10),
+            "peak_day": D0 + timedelta(10)},
+           {"size": 0.2, "followed": False, "first": D0, "last": D0, "peak_day": D0}]
+    assert R.lowest_reported(sts, CFG["rungs_in"]) == {"size_in": 0.35, "day": "2019-01-11", "rounded_in": 0.25,
+                                                       "report_day": None, "report": None}
     assert R.lowest_reported([{**s, "followed": False} for s in sts], CFG["rungs_in"]) is None
-    assert R.lowest_reported([{"size": 2.7, "followed": True, "first": D0, "peak_day": D0}],
+    assert R.lowest_reported([{"size": 2.7, "followed": True, "first": D0, "last": D0, "peak_day": D0}],
                              CFG["rungs_in"])["rounded_in"] == 2.0
 
 
@@ -186,7 +189,7 @@ def test_each_minimum_fails_with_its_reason():
     a = an(history([0.5] * 15, [True] * 15))
     assert a["why_not"] == "15 storms on record; 20 are needed"
     a = an(history([0.5] * 25, [True] * 25, step=4))
-    assert a["why_not"] == "101 days of record; 365 are needed"
+    assert a["why_not"] == "100 days of rain record; 365 are needed"
     a = an(history([0.5] * 80, [True] * 80))
     assert a["usable"] and a["why_not"] is None
 
@@ -287,14 +290,17 @@ def test_outfall_counts_use_only_the_reports_that_name_the_outfall():
     daily, days = series(sizes)
     big = days[0::2]
     spans = [span(d, outfall="SPR010") for d in big] + [span(d, outfall="SPR012") for d in big[20:30]]
-    end = days[-1] + timedelta(days=5)
-    a = R.analyse(daily, spans, end, CFG, end + timedelta(days=14))
-    sts = a.pop("_storms")
-    out = R.outfall_evidence(spans, sts, a, CFG)
+    end = days[-1] + timedelta(days=5 + CFG["lag_days"])
+    a = R.analyse(daily, spans, end, CFG, end)
+    sts, every = a.pop("_storms"), a.pop("_every")
+    out = R.outfall_evidence(spans, sts, a, CFG, every)
     assert set(out) == {"010", "012"}
     assert out["010"]["reports"] == 40 and out["010"]["followed"] == 40 and out["010"]["storms"] == 80
     assert out["012"]["followed"] == 10 and out["012"]["likely"] == {"lo": 0.5, "hi": None, "storms": 40, "followed": 10}
-    assert out["012"]["lowest_reported"]["rounded_in"] == 0.5
+    low = out["012"]["lowest_reported"]
+    assert low["rounded_in"] == 0.5 and low["report_day"] == big[20].isoformat()
+    assert low["report"] == {"event_id": f"x:{big[20].isoformat()}:SPR012", "source_id": "x",
+                             "started_at": f"{big[20].isoformat()}T10:00:00-05:00"}
     # reports that seldom name an outfall: no per-outfall record
     unnamed = [{**s, "outfall": None} for s in spans[:30]] + spans[30:]
     assert R.outfall_evidence(unnamed, sts, a, CFG) is None
@@ -315,6 +321,10 @@ def pass_inputs(n_permits=3):
     """Permits P0..P{n-1}, each with 80 storms all reported; P9 with none."""
     sizes = [0.6] * 80
     daily, days = series(sizes, start=date(2024, 1, 1), step=7)
+    d = max(daily)
+    while d < TODAY:                # dry days to today: every year the pass needs has a value
+        d += timedelta(days=1)
+        daily[d] = 0.0
     recs = []
     outfalls = [{"permit": "P9", "lat": 40.0, "lon": -80.0, "name": "No Reports", "state": "OH"}]
     for i in range(n_permits):
@@ -432,3 +442,149 @@ def test_load_levels_prefers_the_build_copy_of_this_method_version(tmp_path):
     assert R.load_levels(b, s)["permits"] == {"S": {}}
     s.unlink()
     assert R.load_levels(b, s) is None
+
+
+# ---------------------------------------------------------------- review 2026-11-14 (Astra), findings 1, 2, 4, 5, 6, 9, 10
+
+def test_a_followed_storm_on_a_gaps_last_day_is_kept_and_sets_possible():
+    """Finding 1: a 0.12 inch storm on the last day of a reporting gap, followed by the next day's report."""
+    daily, days = series([0.6] * 150)
+    small = days[149]
+    daily[small] = 0.12
+    spans = [span(d) for d in days[:60]] + [span(small + timedelta(days=1))]
+    more, days2 = series([0.6] * 60, start=days[-1] + timedelta(days=5))
+    daily.update(more)
+    spans += [span(d) for d in days2]
+    end = days2[-1] + timedelta(days=5 + CFG["lag_days"])
+    a = R.analyse(daily, spans, end, CFG, end)
+    gap = [x for x in a["left_out"] if x["why"] == "reporting_gap"]
+    assert gap and gap[0]["to"] == small.isoformat()
+    assert a["lowest_reported"]["size_in"] == 0.12 and a["possible_in"] == 0.1 and a["quiet"] is None
+    # the claim cites the report behind it: the next day's
+    assert a["lowest_reported"]["report_day"] == (small + timedelta(days=1)).isoformat()
+    assert a["lowest_reported"]["report"]["event_id"] == f"x:{(small + timedelta(days=1)).isoformat()}:None"
+    assert small in {s["first"] for s in a["_storms"]}
+
+
+def test_the_quiet_range_needs_three_years_of_observed_days_not_calendar_distance():
+    """Finding 2: one report in 2015, a gap to 2019, 35 quiet small storms in nine months of 2019."""
+    daily = {}
+    d = date(2015, 1, 1)
+    while d <= date(2020, 3, 31):
+        daily[d] = 0.0
+        d += timedelta(days=1)
+    daily[date(2015, 1, 5)] = 0.6
+    spans = [span(date(2015, 1, 5))]
+    d = date(2015, 2, 1)
+    while d < date(2018, 12, 1):               # storms with no report: the gap
+        daily[d] = 0.6
+        d += timedelta(days=20)
+    spans.append(span(date(2019, 1, 1)))      # the gap ends at a report on a dry day
+    d = date(2019, 1, 3)
+    for i in range(50):                         # 35 small quiet storms and 15 reported ones, January to September 2019
+        daily[d] = 0.15 if i % 10 < 7 else 0.6
+        if i % 10 >= 7:
+            spans.append(span(d))
+        d += timedelta(days=5)
+    d = date(2019, 10, 5)
+    while d < date(2020, 3, 20):                # reported storms to March 2020
+        daily[d] = 0.6
+        spans.append(span(d))
+        d += timedelta(days=15)
+    end = date(2020, 3, 31) + timedelta(days=CFG["lag_days"])
+    a = R.analyse(daily, spans, end, CFG, end)
+    assert a["usable"] and a["quiet"]["storms"] == 35 and a["quiet"]["followed"] == 0
+    assert 365 <= a["observed_days"] < 1095
+    assert a["quiet"]["enough"] is False
+    # the same quiet storms over three observed years are enough
+    long = history(([0.15] * 3 + [0.6]) * 60, ([False] * 3 + [True]) * 60, step=5)
+    b = an(long)
+    assert b["observed_days"] >= 1095 and b["quiet"]["enough"] is True
+
+
+def test_a_year_of_record_is_counted_in_observed_days():
+    daily, spans, end, today = history([0.5] * 80, [True] * 80)
+    for d in list(daily)[: len(daily) // 2]:
+        del daily[d]                            # half the days have no rain value
+    a = R.analyse(daily, spans, end, CFG, today)
+    assert a["observed_days"] < 365 and a["why_not"].endswith("days of rain record; 365 are needed")
+
+
+def test_the_lag_is_taken_from_the_end_of_coverage():
+    """Finding 4: coverage ends September 30, the build runs November 14: the period ends September 16."""
+    daily, days = series([0.6] * 100, start=date(2025, 3, 1), step=5)
+    spans = [span(d) for d in days]
+    a = R.analyse(daily, spans, date(2026, 9, 30), CFG, date(2026, 11, 14))
+    assert a["period"][1] == "2026-09-16"
+    late = R.analyse(daily, [span(date(2026, 9, 20))], date(2026, 9, 30), CFG, date(2026, 11, 14))
+    assert not late["usable"] and "last 14 days" in late["why_not"]
+
+
+ADVISORY = {"event_id": "ky-msd:MSD-01:2026-11-12T02:58:05Z:210", "source_id": "ky-msd", "event_type": "cso",
+            "npdes_permit": "KY1", "outfall_id": "210", "time_precision": "poll", "status": "advisory_active",
+            "started_at": "2026-11-12T02:58:05Z", "ended_at": None, "duplicate_of": None,
+            "raw": {"advisory_scope": "system-wide", "advisory_code": "MSD-01", "advisory_key": "MSD-01:x",
+                    "advisory_level": "advisory"}}
+
+
+def test_system_wide_advisories_are_not_reports_and_do_not_set_coverage():
+    """Finding 5: Louisville's system-wide advisory shape, and an advisory that keeps the rain caution."""
+    report = {"event_id": "r1", "event_type": "cso", "npdes_permit": "KY1", "outfall_id": "210",
+              "started_at": "2026-10-01T08:00:00-04:00"}
+    keeps = {**report, "event_id": "r2", "started_at": "2026-10-20T08:00:00-04:00", "raw": {"keeps_rain_caution": True}}
+    got = R.report_spans([ADVISORY, report, keeps], lambda r: r["npdes_permit"])
+    assert [s["event_id"] for s in got["KY1"]] == ["r1"]
+    assert got[None]["KY1"] == {"advisories": 2}
+    assert R.source_coverage([ADVISORY, report, keeps], date(2026, 11, 14)) == date(2026, 10, 1)
+    assert R.source_coverage([ADVISORY], date(2026, 11, 14)) is None
+
+
+def test_spans_carry_the_report_they_come_from():
+    rec = {"event_id": "e1", "source_id": "s1", "event_type": "cso", "npdes_permit": "MA1",
+           "started_at": "2024-05-02T10:00:00-04:00"}
+    s = R.report_spans([rec], lambda r: r["npdes_permit"])["MA1"][0]
+    assert (s["event_id"], s["source_id"], s["started_at"]) == ("e1", "s1", "2024-05-02T10:00:00-04:00")
+
+
+def test_a_refusal_with_an_empty_or_unreadable_cache_keeps_the_previous_usable_entry(tmp_path, monkeypatch):
+    """Finding 6."""
+    from build import rain_thresholds as RT
+    from build.rain_thresholds import ServiceRefused
+    monkeypatch.setattr(RT, "IEM_DIR", tmp_path / "iem")
+    (tmp_path / "iem").mkdir()
+    (tmp_path / "iem" / "41.00_-80.00_2024.json").write_text("{}")
+    (tmp_path / "iem" / "41.00_-80.00_2025.json").write_text("not json")
+    (tmp_path / "iem" / "41.00_-80.00_2026.json").write_text('{"data": []}')
+
+    def reader(lat, lon, years, offline, budget):
+        if not offline:
+            raise ServiceRefused("HTTP 429")
+        return R._iem_reader(lat, lon, years, True, None)
+    old = {"permit": "P0", "usable": True, "possible_in": 0.25, "computed": "2026-11-01"}
+    prev = {"method_version": R.METHOD_VERSION, "permits": {"P0": old}}
+    d = run_pass(tmp_path, reader, have=None, prev=prev)
+    assert d["permits"]["P0"] == old
+    assert d["permits"]["P1"]["why_not"] == R.NOT_READ and d["run"]["stopped"].startswith("ServiceRefused")
+    assert not R._iem_have(41.0, -80.0, [2024]) and not R._iem_have(41.0, -80.0, [2025])
+    (tmp_path / "iem" / "41.00_-80.00_2024.json").write_text('{"data": [{"date": "2024-01-01", "mrms_precip_in": 0.0}]}')
+    assert R._iem_have(41.0, -80.0, [2024])
+
+
+def test_a_rain_record_missing_a_needed_year_never_replaces_a_usable_entry(tmp_path):
+    daily, _, _ = pass_inputs()
+    holed = {d: v for d, v in daily.items() if d.year != 2025}
+    old = {"permit": "P0", "usable": True, "computed": "2026-11-01"}
+    d = run_pass(tmp_path, lambda *a: holed, prev={"method_version": R.METHOD_VERSION, "permits": {"P0": old}})
+    assert d["permits"]["P0"] == old and d["permits"]["P1"]["why_not"] == R.NOT_READ
+    assert R.missing_years(holed, [2024, 2025, 2026], TODAY) == [2025]
+    assert R.missing_years({}, [2027], date(2027, 1, 3)) == []        # the first week of a year is not missing
+
+
+def test_no_text_in_the_file_names_a_file_or_a_module(tmp_path):
+    """Finding 10."""
+    assert R.crosscheck(None, {})["note"] == "No saved live rainfall readings are available to compare yet."
+    daily, _, _ = pass_inputs()
+    d = run_pass(tmp_path, lambda *a: daily)          # no saved live readings
+    text = json.dumps(d)
+    for bad in ("data/", ".json", ".py", "build.", "rain_history", "rain_thresholds"):
+        assert bad not in text, bad
