@@ -18,8 +18,10 @@ level: "operator"
 #   date or start: posted 1 to 6 days after it (median 4); the other 10 give only the storm's dates (raw.started_after,
 #   no start). The September 3, 2026 overflow was posted on September 8, the August 1 overflow on August 6.
 #   A report dated to the day with no end gets the site's 72-hour caution from that day (unresolved.day_start_caution);
-#   one with only the storm's dates is counted from its publication (14 days, then end not confirmed),
-#   so by the time a post appears its caution has usually run; the record stays in the water's history.
+#   one with only the storm's dates is counted from its publication (14 days, then end not confirmed). Computed at
+#   each post's publication (build/status.py event_intervals), 22 of the 29 reports are in caution: 18 give no start
+#   and one a time with no end, counted from the post, and 3 were posted within their caution; 7 of them (6 dated to
+#   the day, 1 with a stated end) were past their caution when posted. Every record stays in the water's history.
 # Placement: a combined sewer overflow that names no water is shown on every water MMSD's permitted outfalls discharge
 #   to (placement.no_outfall_all_waters); one that names a water on that water with the permit's outfalls there. A
 #   separate sewer overflow with no water named is listed with MMSD and placed nowhere. No coordinates.
