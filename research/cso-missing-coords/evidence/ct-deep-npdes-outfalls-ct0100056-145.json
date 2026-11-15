@@ -1,0 +1,23 @@
+{
+ "source": "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0/query (CT DEEP 'NPDES_Outfalls, ICIS data pull 20260114')",
+ "query": "where=NPDES_ID='CT0100056'; feature 145 kept",
+ "read_at": "2026-11-15T15:17Z (approximately; OBJECTID 13 re-read 2026-11-15T15:20:53Z)",
+ "features": [
+  {
+   "attributes": {
+    "Perm_Feature_ID": "145",
+    "Perm_Feature_Type_Desc": "External Outfall",
+    "Perm_Feature_Desc": "Henry Street and Main Street",
+    "Outfall_Latitude": "41.04481",
+    "Outfall_Longitude": "-73.540018",
+    "outfall_lat": 41.04481,
+    "outfall_long": -73.540018,
+    "Longitude_in_Deg_Min_Sec__with_sign_": "- 73 32' 25\" 0"
+   },
+   "geometry": {
+    "x": -73.54001800000094,
+    "y": 41.044810000003174
+   }
+  }
+ ]
+}
