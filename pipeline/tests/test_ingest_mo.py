@@ -390,3 +390,62 @@ def test_missing_waters_list_leaves_out_the_national_lists_names():
         assert not re.search(r"(?i)presumed use|storm|outfall", r["name"])
     keys = [(r["name"], r["county"]) for r in d["rows"]]
     assert len(keys) == len(set(keys))
+
+
+# ---------------------------------------------------------------- re-review fixes (2026-11-15)
+
+from ingest import mo_dnr_hab as HAB
+
+
+def test_dnr_hab_map_standing_blooms_are_advisories_from_the_first_read_whatever_their_age():
+    """Re-review P1-5: a bloom DNR's map still shows as present, observed months before the site first read the map,
+    is represented as a standing advisory (dated to the read, the observation day kept apart) and stays red while shown."""
+    from datetime import datetime, timezone
+    doc = json.loads((FIX / "hab_layer.json").read_text())
+    recs, st = HAB.run(doc, [], AT)
+    by = {r["raw"]["report_id"]: r for r in recs}
+    assert set(by) == {"aaaa0001-0000-0000-0000-000000000001", "aaaa0001-0000-0000-0000-000000000002"}
+    a = by["aaaa0001-0000-0000-0000-000000000001"]
+    assert a["event_type"] == "hab_advisory" and a["status"] == "advisory_active" and a["started_at"] == AT
+    assert a["time_precision"] == "poll" and a["raw"]["observed_on"] == "2026-05-18" and "sampled_at" not in a
+    assert a["waterbody_text"] == "Example Lake" and (a["lat"], a["lon"]) == (38.951, -92.327)
+    assert a["advice_text"] == "DNR's map: Harmful Algal Bloom Present." and a["raw"]["case_status"] == "Closed"
+    assert st["by_code"] == {"advise": 2, "none": 1, "notice": 1} and st["open"] == 2
+    ivs = S.event_intervals(a, "MO", datetime(2026, 11, 20, tzinfo=timezone.utc))
+    assert ivs[0]["color"] == "red" and ivs[0]["start"] == datetime(2026, 11, 14, 18, tzinfo=timezone.utc)
+    later = "2026-12-20T18:00:00Z"
+    recs2, st2 = HAB.run(doc, recs, later)                     # still shown: confirmed, never aged out
+    a2 = {r["raw"]["report_id"]: r for r in recs2}["aaaa0001-0000-0000-0000-000000000001"]
+    assert a2["raw"]["_last_seen_in_source"] == later and st2["opened"] == 0
+    gone = {"features": doc["features"][1:]}
+    recs3, st3 = HAB.run(gone, recs2, "2026-12-21T18:00:00Z")
+    a3 = {r["raw"]["report_id"]: r for r in recs3}["aaaa0001-0000-0000-0000-000000000001"]
+    assert a3["status"] == "advisory_lifted" and a3["raw"]["ended_at_precision"] == "poll" and st3["lifted"] == 1
+
+
+def test_dnr_hab_map_bad_answers_fail_and_the_raw_save_is_cut_and_rounded(tmp_path, monkeypatch):
+    import common
+    doc = json.loads((FIX / "hab_layer.json").read_text())
+    recs, _ = HAB.run(doc, [], AT)
+    for bad in ({}, {"error": {}}, {"features": [], "exceededTransferLimit": True},
+                {"features": [{"attributes": {"BloomStat": "advise"}, "geometry": {"x": -92.0, "y": 38.0}}]},
+                {"features": [{"attributes": {"globalid": "x", "BloomStat": "advise"}}]},
+                {"features": [{"attributes": {"globalid": "x", "BloomStat": "maybe"}}]}):
+        monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+        common.write_events(HAB.SOURCE_ID, recs)
+        f = tmp_path / "a.json"
+        f.write_text(json.dumps(bad))
+        assert HAB.main(["--file", str(f)]) == 1
+        out = json.loads((tmp_path / f"{HAB.SOURCE_ID}.json").read_text())
+        assert out["ok"] is False and len(out["records"]) == 2
+    extra = {"features": [{**doc["features"][0], "attributes": {**doc["features"][0]["attributes"],
+                                                                "PubInfo": "Call Jane Example at 573-555-0100"}}]}
+    saved = HAB.rounded(extra)
+    assert "PubInfo" not in json.dumps(saved) and saved["features"][0]["geometry"] == {"x": -92.327, "y": 38.951}
+
+
+def test_dnr_hab_map_is_registered_as_a_read_feed():
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "mo.json").read_text())["channels"]}
+    row = reg["mo-dnr-hab-map"]
+    assert row["feed_source_id"] == "mo-dnr-hab-map" and not row.get("availability_only")
+    assert (ROOT / "data" / "sources" / "mo-dnr-hab-map.yaml").exists()
