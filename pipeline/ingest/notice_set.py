@@ -16,7 +16,11 @@ Notice kinds
     quotes confirms it (raw._last_seen_in_source); the first read that does not writes raw._unlisted_since at that read
     (a poll bound; the page gives no lift time), and the record keeps it.
   A standing notice may name an "anchor" (text always on its page): an answer without it is not the page, and is a
-  failed read. The first read that does not show a standing notice also sets ended_at there (raw.ended_at_precision
+  failed read. Only a read that shows none of a standing record's sentences, and none of the notice's "alert_words",
+  withdraws it; part of the wording gone, or the alert words without the sentences, is unresolved (the record stays as
+  it was, never ended, never confirmed; meta.unvalidated). Shown again after a withdrawal: a new record
+  ("<id>:relisted-<local day>", raw.episode_of, started at that read, time_precision poll); the ended one keeps its
+  end. A dated notice whose answer shows none of its sentences is a failed read (an error page answered with 200). The first read that does not show a standing notice also sets ended_at there (raw.ended_at_precision
   poll, raw._ages_after_confirmation), so the colour stops 14 days after the last read that showed it.
   A page that cannot be fetched changes nothing: the previous records stay and the run's meta names the page. A notice
   never read successfully makes no record: the code claims only what it read.
@@ -71,12 +75,22 @@ def fetch(url: str, timeout: int = 60) -> tuple[int | None, str | None, str | No
     return 200, page_text(r.text), None
 
 
+def _local_day(iso: str, tz: str | None) -> str:
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    t = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    return (t.astimezone(ZoneInfo(tz)) if tz else t).date().isoformat()
+
+
 def build(source_id: str, notices: list[dict], fetched: str, previous: list[dict],
           getter: Callable[[str], tuple[int | None, str | None, str | None]] = fetch,
           save: bool = True) -> tuple[list[dict], dict]:
+    """Records of every notice, and meta. meta["unvalidated"] names each notice that did not validate whole at this
+    read (not fetched, not its page, a quote gone from a dated notice, part of a standing notice's wording gone or
+    changed): the caller writes the run with health false while any is listed (Astra review 2026-11-15 P2)."""
     prev = {r["event_id"]: r for r in previous}
     out: dict[str, dict] = {}
-    pages = []
+    pages, unvalidated = [], []
     for i, n in enumerate(notices):
         if i and getter is fetch:
             time.sleep(PAUSE_S)
@@ -85,33 +99,83 @@ def build(source_id: str, notices: list[dict], fetched: str, previous: list[dict
         quotes = list(dict.fromkeys(quotes))
         found, missing = check(text, quotes) if text is not None else ([], quotes)
         anchor = n.get("anchor")
-        if text is not None and n["kind"] == "standing" and missing and anchor and norm(anchor) not in text.lower():
+        if text is not None and missing and anchor and norm(anchor) not in text.lower():
             # the page answered but is not the notice's page (an error or maintenance page, a redesign): a failed
             # read, nothing ends (lessons, item 4)
             status, text, err = status, None, f"the page's anchor text ({anchor!r}) is not on the answer"
+        if text is not None and n["kind"] == "dated" and quotes and not found:
+            # none of a dated notice's sentences on an answer: not the notice's page (an error or maintenance page
+            # answered with HTTP 200), a failed read, never counted as read
+            status, text, err = status, None, "none of the notice's sentences is on the answer"
         pages.append({"notice": n["id"], "url": n["url"], "http_status": status, "error": err,
                       "quotes_found": len(found), "quotes_missing": len(missing) if text is not None else None,
                       "text_sha256": hashlib.sha256(text.encode()).hexdigest() if text else None})
+        if text is None:
+            unvalidated.append({"notice": n["id"], "reason": err or "not read"})
         for rec in n["records"]:
             f = {k: v for k, v in rec.items() if k not in ("quotes", "raw")}
             raw = {**(rec.get("raw") or {}), "notice_id": n["id"], "notice_kind": n["kind"],
                    "quotes": rec.get("quotes") or [], "reviewed": n["reviewed"]}
-            eid = f"{source_id}:{f['source_record_id']}"
-            old = prev.get(eid)
+            base = f"{source_id}:{f['source_record_id']}"
+            # a standing notice's episodes: the record and its relistings (raw.episode_of); the latest is the current
+            eps = sorted([r for e, r in prev.items() if e == base or (r.get("raw") or {}).get("episode_of") == base],
+                         key=lambda r: ((r.get("raw") or {}).get("_first_seen_at") or "", r["event_id"]))
+            old = eps[-1] if eps else None
+            eid = old["event_id"] if old else base
             if text is None:                       # not read this run: the previous record stands, unchanged
                 if old:
                     o = dict(old)
                     o["raw"] = {**(old.get("raw") or {}), "_last_fetch_error": err}
                     out[eid] = o
                 continue
-            mine_missing = [q for q in rec.get("quotes") or [] if q in missing]
+            mine = rec.get("quotes") or []
+            mine_missing = [q for q in mine if q in missing]
             if n["kind"] == "standing":
+                alert = [w for w in n.get("alert_words") or [] if norm(w) in text.lower()]
+                if mine_missing and (len(mine_missing) < len(mine) or alert):
+                    # part of the wording gone, or all of it gone while the page still speaks of the alert: the
+                    # wording changed, not a withdrawal. Unresolved: the record stays as it was (never ended, never
+                    # confirmed) and the notice does not validate (Astra review 2026-11-15 P1)
+                    unvalidated.append({"notice": n["id"], "reason": "the notice's wording changed on its page: "
+                                        f"{len(mine_missing)} of {len(mine)} sentences not found"
+                                        + (f" while the page still says {alert}" if alert else "")})
+                    if old:
+                        o = dict(old)
+                        o["raw"] = {**(old.get("raw") or {}), "_unresolved_wording": mine_missing}
+                        out[eid] = o
+                    continue
                 if not mine_missing:
                     raw["_last_seen_in_source"] = fetched
+                    if old and (old.get("raw") or {}).get("_unlisted_since"):
+                        # listed again after a read that no longer showed it: a new episode under its own id, from
+                        # this read (a poll bound); the earlier episode keeps its end (lessons, item 3)
+                        day = _local_day(fetched, raw.get("time_zone"))
+                        f["source_record_id"] = f"{rec['source_record_id']}:relisted-{day}"
+                        f["started_at"], f["time_precision"] = fetched, "poll"
+                        raw["episode_of"] = base
+                        raw["start_basis"] = ("shown again on the page at this read after a read that no longer "
+                                              "showed it: a new period from this read (a poll bound)")
+                        raw["_first_seen_at"] = fetched
+                        eid = f"{source_id}:{f['source_record_id']}"
+                        old = None
+                    elif old and old["event_id"] != base:          # the current relisted episode, kept as it began
+                        o_raw = old.get("raw") or {}
+                        f["source_record_id"] = old["source_record_id"]
+                        f["started_at"], f["time_precision"] = old.get("started_at"), old.get("time_precision")
+                        for k in ("episode_of", "start_basis"):
+                            raw[k] = o_raw.get(k)
                 else:
                     if not old:
                         continue                   # never seen on the page: no record
                     praw = old.get("raw") or {}
+                    if praw.get("_unlisted_since"):
+                        out[eid] = old             # already ended: kept as it was
+                        continue
+                    if old["event_id"] != base:
+                        f["source_record_id"] = old["source_record_id"]
+                        f["started_at"], f["time_precision"] = old.get("started_at"), old.get("time_precision")
+                        for k in ("episode_of", "start_basis"):
+                            raw[k] = praw.get(k)
                     raw["_last_seen_in_source"] = praw.get("_last_seen_in_source")
                     raw["_unlisted_since"] = praw.get("_unlisted_since") or fetched
                     f["ended_at"] = raw["_unlisted_since"]
@@ -120,16 +184,24 @@ def build(source_id: str, notices: list[dict], fetched: str, previous: list[dict
                     raw["end_basis"] = ("the first read of the page that no longer showed the notice (a poll bound; "
                                         "the page gives no lift time)")
             elif mine_missing:
+                unvalidated.append({"notice": n["id"], "reason": f"{len(mine_missing)} of the notice's sentences "
+                                    "are not on its page"})
                 if not old:
                     continue                       # a release whose sentences are not on the page: nothing claimed
                 raw["quotes_missing"] = mine_missing
-            raw["_first_seen_at"] = ((old or {}).get("raw") or {}).get("_first_seen_at") or fetched
+            raw["_first_seen_at"] = ((old or {}).get("raw") or {}).get("_first_seen_at") or raw.get("_first_seen_at") \
+                or fetched
             out[eid] = event(source_id=source_id, fetched_at=fetched, source_url=n["url"],
                              published_at=n.get("published_at"), raw=raw, **f)
     for eid, old in prev.items():                  # records of a notice since removed from the set stay as they were
         out.setdefault(eid, old)
     if save:
         save_raw(source_id, json.dumps({"fetched_at": fetched, "pages": pages}, indent=1), "json")
+    seen_u = []
+    for u in unvalidated:
+        if u not in seen_u:
+            seen_u.append(u)
     meta = {"registry_ids": [source_id], "pages": pages, "notices": len(notices),
-            "pages_read": sum(1 for p in pages if p["http_status"] == 200)}
+            "pages_read": sum(1 for p in pages if p["http_status"] == 200 and p["error"] is None),
+            "unvalidated": seen_u}
     return sorted(out.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True), meta

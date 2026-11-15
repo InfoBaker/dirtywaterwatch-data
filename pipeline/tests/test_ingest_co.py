@@ -109,7 +109,8 @@ def page_for(url: str, drop: str | None = None) -> str:
     """A synthetic page: the notice's quoted sentences with an invented contact line, as HTML."""
     n = next(x for x in C.NOTICES if x["url"] == url)
     qs = [q for r in n["records"] for q in r.get("quotes") or []]
-    body = "".join(f"<p>{q}</p>" for q in qs if q != drop)
+    drops = (drop,) if isinstance(drop, str) or drop is None else tuple(drop)
+    body = "".join(f"<p>{q}</p>" for q in qs if q not in drops)
     return f"<html><body><h1>Notice {n.get('anchor') or ''}</h1><p>{CONTACT}</p>{body}</body></html>"
 
 
@@ -140,7 +141,7 @@ def test_standing_notice_confirmed_while_shown_and_ended_at_the_first_read_witho
     first, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter(), save=False)
     barr = next(r for r in first if r["source_record_id"].startswith("barr-lake"))
     assert barr["raw"]["_last_seen_in_source"] == T0 and barr["started_at"] == "2026-08-03T19:00:00-06:00"
-    q = C.NOTICES[2]["records"][0]["quotes"][0]
+    q = C.NOTICES[2]["records"][0]["quotes"]          # the whole notice gone (one sentence alone: unresolved)
     second, _ = NS.build(C.SOURCE_ID, C.NOTICES, T1, first, getter=getter(drop=q), save=False)
     barr2 = next(r for r in second if r["source_record_id"].startswith("barr-lake"))
     assert barr2["raw"]["_unlisted_since"] == T1 and barr2["raw"]["_last_seen_in_source"] == T0
@@ -307,3 +308,143 @@ def test_lesson_reissue_after_no_bloom_is_a_second_record():
     ponds = sorted((r["started_at"], r["ended_at"]) for r in A.build(text, T0, [])[0]
                    if r["waterbody_text"] == "Example Pond")
     assert ponds == [("2026-07-01", "2026-07-20"), ("2026-09-01", None)]
+
+
+# ---------------------------------------------------------------- Astra review 2026-11-15 (fix/co-mt-wy-review)
+
+def _run_sheet(tmp_path, monkeypatch, text, at):
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(A, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(A, "now_iso", lambda: at)
+    f = tmp_path / "sheet.csv"
+    f.write_text(text)
+    rc = A.main(["--file", str(f)])
+    return rc, json.loads((tmp_path / f"{A.SOURCE_ID}.json").read_text())
+
+
+def test_review_good_then_failed_then_truncated_is_still_refused(tmp_path, monkeypatch):
+    rc, good = _run_sheet(tmp_path, monkeypatch, sheet(), T0)
+    assert rc == 0 and good["ok"] and good["meta"]["last_ok_rows"] == good["meta"]["rows"]
+    active = {r["event_id"] for r in good["records"] if r["status"] == "advisory_active"}
+    rc, failed = _run_sheet(tmp_path, monkeypatch, "Lake,Status\nX,Y\n", T1)
+    assert rc == 1 and failed["ok"] is False
+    short = "\n".join(sheet().splitlines()[:-3]) + "\n"
+    rc, after = _run_sheet(tmp_path, monkeypatch, short, "2026-11-16T23:30:00Z")
+    assert rc == 1 and after["ok"] is False
+    recs = {r["event_id"]: r for r in after["records"]}
+    assert all(recs[e]["ended_at"] is None and "_unlisted_since" not in recs[e]["raw"] for e in active)
+
+
+def test_review_notes_with_titles_house_numbers_and_points_never_reach_a_save(tmp_path, monkeypatch):
+    note = ("Dr. Example Person reported scum at 123-A Sample Road, 39.123456, -105.987654; Contact Pat Example; "
+            "at the home of Sam Example")
+    text = sheet() + f'\nExample Pond,Caution,9/1/2026,"{note}"\n'
+    recs, _ = A.build(text, T0, [])
+    blob = json.dumps(recs) + A.scrubbed_csv(text)
+    for bad in ("Example Person", "123-A", "39.123456", "105.987654", "Pat Example", "Sam Example"):
+        assert bad not in blob, bad
+    assert "39.123" in A.scrubbed_csv(text)
+    # an extra column in the sheet is never saved
+    wide = "Waterbody name,Condition Category,Update Date,Other notes,Reporter\nExample Pond,Caution,9/1/2026,x,Pat Example\n"
+    assert "Pat Example" not in A.scrubbed_csv(wide) and "Reporter" not in A.scrubbed_csv(wide)
+    # a record carried from an earlier run, and the failure path, are scrubbed again
+    old = [r for r in recs if r["waterbody_text"] == "Example Pond"][0]
+    old["raw"]["updates"][0]["note"] = note
+    old["advice_text"] = note
+    kept, _ = A.build(sheet(), T1, [old])
+    assert "Example Person" not in json.dumps(kept)
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(A, "EVENTS_DIR", tmp_path)
+    (tmp_path / f"{A.SOURCE_ID}.json").write_text(json.dumps({"ok": True, "meta": {}, "records": [old]}))
+    bad = tmp_path / "bad.csv"
+    bad.write_text("Lake,Status\nX,Y\n")
+    assert A.main(["--file", str(bad)]) == 1
+    out = (tmp_path / f"{A.SOURCE_ID}.json").read_text()
+    assert "Example Person" not in out and "123-A" not in out and "Example Pond" in out
+
+
+def test_review_part_of_a_standing_notice_gone_keeps_the_advisory_and_fails_health():
+    first, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter(), save=False)
+    q = C.NOTICES[2]["records"][0]["quotes"][1]            # only the precaution sentence removed
+    second, meta = NS.build(C.SOURCE_ID, C.NOTICES, T1, first, getter=getter(drop=q), save=False)
+    barr = next(r for r in second if r["source_record_id"].startswith("barr-lake"))
+    assert barr["ended_at"] is None and "_unlisted_since" not in barr["raw"]
+    assert barr["raw"]["_last_seen_in_source"] == T0 and barr["raw"]["_unresolved_wording"] == [q]
+    assert any(u["notice"] == "cpw-barr-lake-red-alert" for u in meta["unvalidated"])
+
+
+def test_review_changed_wording_that_still_says_red_alert_is_not_a_withdrawal():
+    first, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter(), save=False)
+
+    def reworded(url):
+        if url == C.CPW_BARR:
+            return 200, NS.page_text("<h1>Barr Lake</h1><p>Barr Lake remains on red alert for toxic algae.</p>"), None
+        return getter()(url)
+    second, meta = NS.build(C.SOURCE_ID, C.NOTICES, T1, first, getter=reworded, save=False)
+    barr = next(r for r in second if r["source_record_id"].startswith("barr-lake"))
+    assert barr["ended_at"] is None and meta["unvalidated"]
+
+
+def test_review_main_fails_health_when_any_notice_does_not_validate(tmp_path, monkeypatch):
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(C, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(NS, "save_raw", lambda *a, **k: None)
+    calls = {"g": getter(fail=(C.NPS_BM,))}
+    real = NS.build
+    monkeypatch.setattr(C.NS, "build", lambda *a, **k: real(*a, getter=calls["g"], save=False))
+    assert C.main([]) == 1
+    out = json.loads((tmp_path / f"{C.SOURCE_ID}.json").read_text())
+    assert out["ok"] is False and out["records"]                        # the readable notices still updated
+
+    def maintenance(url):                                               # HTTP 200, not the page
+        if url == C.CPW_JM:
+            return 200, NS.page_text("<html><body>Down for maintenance</body></html>"), None
+        return getter()(url)
+    calls["g"] = maintenance
+    assert C.main([]) == 1
+    meta = json.loads((tmp_path / f"{C.SOURCE_ID}.json").read_text())["meta"]
+    assert meta["pages_read"] == 2 and any(u["notice"] == "cpw-john-martin-2026-08-30" for u in meta["unvalidated"])
+    calls["g"] = getter()
+    assert C.main([]) == 0
+
+
+def test_review_the_blue_mesa_publication_day_is_not_an_issue_date():
+    from datetime import datetime, timezone
+    from build import status as S
+    recs, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter(), save=False)
+    bm = next(r for r in recs if r["source_record_id"].startswith("blue-mesa"))
+    assert bm["time_precision"] == "bound" and bm["raw"]["start_bound"] == "on_or_before"
+    assert bm["published_at"] == "2026-08-13" and "not given" in bm["raw"]["start_basis"]
+    assert S.event_intervals(bm, "CO", datetime(2026, 8, 20, tzinfo=timezone.utc))      # still shown
+
+
+def test_review_listed_absent_relisted_is_two_records_and_the_gap_stays_uncoloured():
+    q = C.NOTICES[2]["records"][0]["quotes"]
+    first, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter(), save=False)
+    gone, _ = NS.build(C.SOURCE_ID, C.NOTICES, T1, first, getter=getter(drop=q), save=False)
+    t2 = "2027-03-01T18:00:00Z"
+    back, _ = NS.build(C.SOURCE_ID, C.NOTICES, t2, gone, getter=getter(), save=False)
+    barr = sorted((r for r in back if r["source_record_id"].startswith("barr-lake")), key=lambda r: r["event_id"])
+    assert len(barr) == 2
+    orig, again = barr
+    assert orig["ended_at"] == T1 and orig["started_at"] == "2026-08-03T19:00:00-06:00"
+    assert again["source_record_id"] == "barr-lake-red-alert-2026-08-03:relisted-2027-03-01"
+    assert again["started_at"] == t2 and again["time_precision"] == "poll" and again["ended_at"] is None
+    # a later read confirms the relisted record, not the original
+    t3 = "2027-03-02T18:00:00Z"
+    later, _ = NS.build(C.SOURCE_ID, C.NOTICES, t3, back, getter=getter(), save=False)
+    barr = {r["source_record_id"]: r for r in later if r["source_record_id"].startswith("barr-lake")}
+    assert len(barr) == 2 and barr[again["source_record_id"]]["raw"]["_last_seen_in_source"] == t3
+    assert barr[again["source_record_id"]]["started_at"] == t2 and barr[orig["source_record_id"]]["ended_at"] == T1
+
+
+def test_review_the_state_text_matches_the_retained_record_behaviour():
+    t = (ROOT / "research" / "co" / "state-text.md").read_text()
+    assert "kept only while" not in t and "kept as it was" in t and "never dropped" in t
+    first, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter(), save=False)
+    q = C.NOTICES[0]["records"][0]["quotes"]                # every sentence of the dated notice changed
+    second, _ = NS.build(C.SOURCE_ID, C.NOTICES, T1, first, getter=getter(drop=q), save=False)
+    assert {r["event_id"] for r in first} <= {r["event_id"] for r in second}

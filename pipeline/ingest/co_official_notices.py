@@ -20,13 +20,20 @@ Why a set and not a feed
      not). The notice's mention of Lake Hasty's separate algae restriction is not a
      record here (the CDPHE sheet carries Lake Hasty, co-cdphe-toxic-algae).
   2. National Park Service, Curecanti National Recreation Area, "Toxic Algae detected in Blue Mesa Reservoir",
-     2026-08-13: toxic algae at low levels in the Iola Basin, posted with yellow caution signs. A hab_advisory from the
-     release date (the signs were up by then; their posting date is not given), Blue Mesa Reservoir, the Iola Basin in
-     raw.place; never confirmed by a later read.
+     2026-08-13: toxic algae at low levels in the Iola Basin, posted with yellow caution signs. A hab_advisory whose
+     start is not given: started_at is the release day only as an upper bound (time_precision "bound",
+     raw.start_bound "on_or_before"; the signs were up by then, their posting date is not given), Blue Mesa Reservoir,
+     the Iola Basin in raw.place; never confirmed by a later read.
   3. Colorado Parks and Wildlife, Barr Lake State Park's activities page: "As of August 3 at 7pm ... the reservoir is
      now on red alert due to high concentrations of toxic algae". A standing hab_advisory from 2026-08-03 19:00 MDT,
-     confirmed at every read that shows the line and ended at the first read that does not (a poll bound). The same
+     confirmed at every read that shows the line and ended at the first read that shows neither its sentences nor the
+     words "red alert" (a poll bound); a read that shows only part of the wording, or the words without the sentences,
+     is unresolved: the record stays as it was and the run's health is false. Shown again later: a new record. The same
      line's boating closure for low water is not a water-quality record.
+
+Health: every notice must validate at every read (meta.unvalidated lists each that did not, with its reason); while
+any does not, the readable notices are still updated, the run is written with health false (write_events partial) and
+the exit is non-zero.
 
 Each record keeps raw.time_zone America/Denver; a date-only start or end is a Colorado day.
 
@@ -103,7 +110,7 @@ NOTICES = [
      "records": [
          {"source_record_id": "blue-mesa-iola-basin-2026-08-13", "event_type": "hab_advisory",
           "status": "advisory_active", "waterbody_text": "Blue Mesa Reservoir", "started_at": "2026-08-13",
-          "time_precision": "day",
+          "time_precision": "bound",
           "authority": "National Park Service, Curecanti National Recreation Area",
           "advice_text": ("Toxic algae detected at low levels in the Iola Basin, posted with yellow caution signs; avoid "
                           "areas with observed or suspected blue-green algal mats throughout the reservoir."),
@@ -111,16 +118,19 @@ NOTICES = [
                      "The Iola Basin has been posted with yellow caution signs",
                      "Park staff advise avoiding areas with observed or suspected blue-green algal mats throughout the "
                      "reservoir."],
-          "raw": {"time_zone": TZ, "place": "Iola Basin",
-                  "start_basis": ("the release date (August 13, 2026): the basin had been posted by then; the "
-                                  "posting date is not given"),
+          "raw": {"time_zone": TZ, "place": "Iola Basin", "start_bound": "on_or_before",
+                  "release_published": "2026-08-13",
+                  "start_basis": ("not given: the release of August 13, 2026 says the basin had been posted; the "
+                                  "posting date is not given, so started_at is only the latest day the advisory can "
+                                  "have begun (time_precision bound), the release's publication day, not an issue "
+                                  "date"),
                   "end_basis": "no end given and no later release found",
                   "county": "Gunnison",
                   "placement_hint": {"name": "Blue Mesa Reservoir", "county": "Gunnison", "state": "CO",
                                      "basis": "the reservoir the release names"}}},
      ]},
     {"id": "cpw-barr-lake-red-alert", "kind": "standing", "url": CPW_BARR, "reviewed": "2026-11-14",
-     "anchor": "Barr Lake",
+     "anchor": "Barr Lake", "alert_words": ["red alert"],
      "records": [
          {"source_record_id": "barr-lake-red-alert-2026-08-03", "event_type": "hab_advisory",
           "status": "advisory_active", "waterbody_text": "Barr Lake", "started_at": "2026-08-03T19:00:00-06:00",
@@ -149,9 +159,9 @@ def main(argv=None) -> int:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
-    ok = meta["pages_read"] > 0
-    path = write_events(SOURCE_ID, recs, ok=ok, meta=meta,
-                        error=None if ok else "no notice page answered")
+    ok = not meta["unvalidated"]
+    path = write_events(SOURCE_ID, recs, ok=ok, partial=not ok, meta=meta,
+                        error=None if ok else "; ".join(f"{u['notice']}: {u['reason']}" for u in meta["unvalidated"])[:300])
     print(f"{SOURCE_ID}: {meta['pages_read']}/{meta['notices']} pages read, {len(recs)} records -> {path}")
     return 0 if ok else 1
 

@@ -5,8 +5,10 @@ Source
   blooms for select water bodies"; research/co, checked 2026-11-03: the page linked it; on 2026-11-14 cdphe.colorado.gov
   answered 403 to the build's client, so the link was not re-read), read as CSV:
   https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv
-  Four columns: Waterbody name, Condition Category, Update Date, Other notes. No key, no licence stated. No personal
-  data (the notes are the agency's own words about the bloom); the whole CSV is saved to data/raw/.
+  Four columns: Waterbody name, Condition Category, Update Date, Other notes. No key, no licence stated. The notes are
+  the agency's own words about the bloom; the raw save keeps those four columns only, the notes scrubbed
+  (ingest/mountain_scrub.py), and records carried from earlier runs are scrubbed again on every save path.
+  A sheet with fewer rows than the last good read (meta.last_ok_rows, kept through failed runs) is a failed read.
   On 2026-11-14 it held 197 rows: a season baseline of 127 waters at "No bloom reported" dated 2026-04-01, then rows
   appended in date order as conditions changed (Caution 48, Warning 14, Third party 3, No bloom reported 133 in all);
   the last update was dated 2026-09-09. It is a log: a water's current condition is its last row.
@@ -42,7 +44,8 @@ from pathlib import Path
 
 import requests
 
-from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_names, scrub_text, write_events
+from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from ingest.mountain_scrub import scrub
 
 SOURCE_ID = "co-cdphe-toxic-algae"
 SHEET = "1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ"
@@ -95,7 +98,7 @@ def read_rows(text: str) -> list[dict]:
             continue
         out.append({"row": i + 2, "name": name, "condition": " ".join((r.get("Condition Category") or "").split()),
                     "date_text": (r.get("Update Date") or "").strip(), "date": parse_date(r.get("Update Date") or ""),
-                    "note": scrub_names(scrub_text(" ".join((r.get("Other notes") or "").split()))) or None})
+                    "note": scrub(r.get("Other notes")) or None})
     return out
 
 
@@ -118,19 +121,33 @@ def runs(rows: list[dict]) -> list[dict]:
 
 
 def scrubbed_csv(text: str) -> str:
-    """The sheet with its notes scrubbed (common.scrub_text, scrub_names): what the raw save keeps."""
-    rows = list(csv.reader(io.StringIO(text)))
-    if not rows:
-        return ""
-    i = rows[0].index("Other notes") if "Other notes" in rows[0] else None
+    """What the raw save keeps: the sheet's four columns only (an explicit allowlist; any other column is dropped), the
+    notes scrubbed (ingest/mountain_scrub.py: names, titles, contacts, house numbers, phones, e-mails, and coordinates
+    rounded to three decimals)."""
+    rows = list(csv.DictReader(io.StringIO(text)))
     out = io.StringIO()
     w = csv.writer(out, lineterminator="\n")
-    w.writerow(rows[0])
-    for r in rows[1:]:
-        if i is not None and i < len(r):
-            r = r[:i] + [scrub_names(scrub_text(r[i]))] + r[i + 1:]
-        w.writerow(r)
+    w.writerow(COLUMNS)
+    for r in rows:
+        w.writerow([" ".join((r.get(c) or "").split()) if c != "Other notes" else scrub(r.get(c)) for c in COLUMNS])
     return out.getvalue()
+
+
+def sanitized(r: dict) -> dict:
+    """A record carried from an earlier run, its free text scrubbed again (notes in raw.updates, the advice, the end
+    basis): every save path, retained records and the failure path included (Astra review 2026-11-15 P1)."""
+    r = dict(r)
+    raw = dict(r.get("raw") or {})
+    if isinstance(raw.get("updates"), list):
+        raw["updates"] = [{**u, "note": scrub(u.get("note")) or None} if isinstance(u, dict) else u
+                          for u in raw["updates"]]
+    for k in ("end_basis",):
+        if isinstance(raw.get(k), str):
+            raw[k] = scrub(raw[k])
+    if isinstance(r.get("advice_text"), str):
+        r["advice_text"] = scrub(r["advice_text"])
+    r["raw"] = raw
+    return r
 
 
 def build(text: str, fetched: str, previous: list[dict], previous_rows: int | None = None) -> tuple[list[dict], dict]:
@@ -197,7 +214,7 @@ def build(text: str, fetched: str, previous: list[dict], previous_rows: int | No
             if p["status"] == "advisory_active" and (p.get("raw") or {}).get("_first_seen_at"):
                 records[p["event_id"]]["raw"]["_first_seen_at"] = p["raw"]["_first_seen_at"]
             continue
-        p = dict(p)
+        p = sanitized(p)
         praw = dict(p.get("raw") or {})
         if p.get("status") == "advisory_active" and not p.get("ended_at") and not praw.get("_unlisted_since"):
             # ended at this read as a poll bound; the colour stops 14 days after the last read that listed it however
@@ -216,6 +233,7 @@ def build(text: str, fetched: str, previous: list[dict], previous_rows: int | No
     out = sorted(records.values(), key=lambda r: (r["started_at"] or "", r["event_id"]), reverse=True)
     last = max((r["date"] for r in rows if r["date"]), default=None)
     meta = {"registry_ids": [SOURCE_ID], "url": PAGE, "landing": LANDING, "kept_from_previous": kept,
+            "last_ok_rows": len(rows),
             "latest_update_date": last, **n,
             "cadence": "the sheet is read every run; CDPHE adds a row when a water's condition changes"}
     return out, meta
@@ -234,9 +252,14 @@ def main(argv=None) -> int:
             save_raw(SOURCE_ID, scrubbed_csv(text), "csv")
         last = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
         prev = last.get("records", [])
-        recs, meta = build(text, fetched, prev, (last.get("meta") or {}).get("rows") if last.get("ok") else None)
-    except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
+        # always compared with the last good read, whatever the runs since (a failed run keeps that read's meta):
+        # a truncated answer after an outage is never accepted (Astra review 2026-11-15 P1)
+        lm = last.get("meta") or {}
+        recs, meta = build(text, fetched, prev, lm.get("last_ok_rows") or lm.get("rows"))
+    except Exception as e:  # noqa: BLE001 (any failure keeps the previous records, sanitized again)
+        kept = [sanitized(r) for r in (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
+                if isinstance(r, dict)]
+        write_events(SOURCE_ID, kept, ok=False, partial=True, error=scrub(f"{type(e).__name__}: {e}")[:300])
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
