@@ -103,6 +103,8 @@ STATE_NAMES["PR"] = "Puerto Rico"
 STATE_NAMES["CO"] = "Colorado"
 STATE_NAMES["MT"] = "Montana"
 STATE_NAMES["WY"] = "Wyoming"
+STATE_NAMES["IA"] = "Iowa"
+STATE_NAMES["ID"] = "Idaho"
 COUNT_RULE_LINE = "Verified reports where available, else notices; revisions and duplicates counted once."
 MONTHS_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
