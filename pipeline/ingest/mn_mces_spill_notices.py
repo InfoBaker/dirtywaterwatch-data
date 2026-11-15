@@ -203,8 +203,22 @@ def scrubbed(o):
 
 
 # the record's fields that quote the notice's words: scrubbed before the record is written
+# (the revision history's headings and the index label included, carried ones too; verification pass 2026-11-15 P1-5)
 NARRATIVE_KEYS = ("title", "location_text", "spill_stopped_words", "_reached_water_words", "_no_water_reason",
-                  "updates", "signs", "time_of_day_words")
+                  "updates", "signs", "time_of_day_words", "_revisions", "label", "_window_end_words", "end_basis",
+                  "advisory_from_basis")
+
+
+def scrub_narrative(rec: dict) -> dict:
+    """The record with its quoted fields (NARRATIVE_KEYS) and advice scrubbed; applied to every record build() returns,
+    a previous record carried unchanged included, so nothing written before a scrub rule existed is written again."""
+    raw = rec.get("raw") or {}
+    for k in NARRATIVE_KEYS:
+        if k in raw:
+            raw[k] = scrubbed(raw[k])
+    if rec.get("advice_text"):
+        rec["advice_text"] = scrubbed(rec["advice_text"])
+    return rec
 
 
 def raw_save_doc(index: str, pages: dict) -> dict:
@@ -454,7 +468,7 @@ def build(index_page: str, pages: dict[str, str | None], fetched: str, previous:
             raw["_end_not_confirmed"] = True
         out[p["event_id"]] = p
         kept += 1
-    recs = sorted(out.values(), key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r["event_id"]),
+    recs = sorted((scrub_narrative(json.loads(json.dumps(r))) for r in out.values()), key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r["event_id"]),
                   reverse=True)
     meta = {"registry_ids": [SOURCE_ID], "url": INDEX_URL, "on_index": len(items), "pages_unread": unread,
             "kept_from_previous": kept, "cities_without_county": sorted({c for c in no_county if c}),

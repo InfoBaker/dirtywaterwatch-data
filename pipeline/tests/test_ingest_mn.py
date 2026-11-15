@@ -499,3 +499,34 @@ def test_v2_c_the_councils_window_counts_elapsed_hours_across_daylight_saving(mo
     assert len(win) == 1 and win[0]["end"] == datetime(*red_end, tzinfo=timezone.utc)
     assert S.status_at(ivs, win[0]["end"] - timedelta(minutes=30))[0] == "red"
     assert S.status_at(ivs, win[0]["end"] + timedelta(minutes=30))[0] != "red"
+
+
+def test_v2_d_revision_headings_are_scrubbed_at_both_saves_and_carried_ones_too(monkeypatch):
+    url = INDEX + "Example.aspx"
+    idx = ('<h2>Spill information</h2><ul><li><a href="/Wastewater-Water/Services/Interceptor-Services/Spills/'
+           'Example.aspx">Example City</a>, March 2026</li></ul>')
+    first = _page(intro_signs=False)
+    second = _page(("3/4/2026", "Crews are onsite."), intro_signs=False).replace(
+        "3/4/2026 - Notice", "3/4/2026 - Reported by Pat Example at 1234 Example Street")
+    third = second.replace("Crews are onsite.", "Crews are onsite and repairing the pipe.")
+    store = {"records": []}
+    saved = []
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    monkeypatch.setattr(M, "read_json", lambda path, default=None: store)
+    monkeypatch.setattr(M, "save_raw", lambda sid, content, ext: saved.append(content))
+
+    def write(sid, recs, **k):
+        store["records"] = json.loads(json.dumps(recs))
+        return "x"
+    monkeypatch.setattr(M, "write_events", write)
+    for page in (first, second, third):
+        monkeypatch.setattr(M, "fetch", lambda u, p=page: idx if u == M.INDEX_URL else p)
+        assert M.main([]) == 0
+    revs = store["records"][0]["raw"]["_revisions"]
+    assert len(revs) == 2
+    blob = json.dumps([saved, store])
+    assert "Pat Example" not in blob and "1234 Example" not in blob
+    # a revision carried from a record written before this fix is scrubbed on the next write
+    store["records"][0]["raw"]["_revisions"][0]["headings"] = ["Reported by Pat Example at 1234 Example Street"]
+    assert M.main([]) == 0
+    assert "Pat Example" not in json.dumps(store) and "1234 Example" not in json.dumps(store)
