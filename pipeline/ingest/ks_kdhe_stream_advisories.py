@@ -14,8 +14,18 @@ Source
 
 Record rules
   - A release is an issue when its title reads "Stream Advisory Issued for <waters> in <county> County" (or "KDHE
-    Issues Stream Advisory for ..."), a rescission when it reads "Stream Advisory Rescinded for ..." or "Lifted"; every
-    other release is not read.
+    Issues Stream Advisory for ...", "Stream and Lake Advisory Issued for ...", "Lake Advisory Issued for ..."), a
+    rescission when it reads "... Advisory Rescinded for ..." or "Lifted"; a "Regional Advisory" (KDHE's June 26, 2026
+    one for flooded waterways in eleven counties) is a regional issue: one record with no water, listed with the
+    counties it names and never coloured on any water (raw.advisory_extent "regional"). Every other release is not
+    read; a title with "Advisory" that is neither a boil water nor a blue-green algae release and is not read is
+    counted in meta (unread_advisory_titles), so a new wording becomes visible (go-live audit 2026-11-15 P2-1).
+  - Hand-entered releases (HAND_FILE, data/sources/ks-kdhe-stream-advisories-hand.json): an advisory issued before
+    the feed's window, whose release page answers 403, entered by hand from the release's indexed text with its
+    public address and date (go-live audit 2026-11-15 P1-1). Each row opens the same records as a feed issue, at the
+    release's day (time_precision day: no time is invented), raw.hand_entry citing the row; it is confirmed at every
+    read while no rescission is on record, so it never ages out with the feed window, and it is lifted only by a
+    rescission read in the feed or a rescission entered in the row ("rescission": {date, url, title}).
   - An issue opens one record: event_type beach_advisory (the advisory category: a water contact advisory, not a
     discharge report), status advisory_active, started_at the release's pubDate (time_precision minute: the time KDHE
     published it, the latest the advisory can have begun; raw.start_basis), published_at the same, raw.cause "sewage"
@@ -69,9 +79,17 @@ from ingest.mo_kc_water_news import safe_text
 SOURCE_ID = "ks-kdhe-stream-advisories"
 FEED = "https://www.kdhe.ks.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"
 AUTHORITY = "Kansas Department of Health and Environment (stream advisory)"
-ISSUE = re.compile(r"^(?:KDHE\s+)?(?:Issues?\s+)?(?:a\s+)?Stream Advisor(?:y|ies)\s+(?:Issued\s+)?for\s+(.+?)\s*$", re.I)
-LIFT = re.compile(r"Stream Advisor(?:y|ies)\s+(?:Rescinded|Lifted)\s+for\s+(.+?)\s*$|\b(?:Rescinds|Lifts)\s+Stream "
-                  r"Advisor(?:y|ies)\s+for\s+(.+?)\s*$", re.I)
+KINDS = r"(?:Stream\s+(?:and|&)\s+Lake|Stream|Lake)"
+ISSUE = re.compile(r"^(?:KDHE\s+)?(?:Issues?\s+)?(?:a\s+)?" + KINDS + r"\s+Advisor(?:y|ies)\s+(?:Issued\s+)?for\s+(.+?)\s*$",
+                   re.I)
+LIFT = re.compile(KINDS + r"\s+Advisor(?:y|ies)\s+(?:Rescinded|Lifted)\s+for\s+(.+?)\s*$|\b(?:Rescinds|Lifts)\s+"
+                  + KINDS + r"\s+Advisor(?:y|ies)\s+for\s+(.+?)\s*$", re.I)
+REGIONAL = re.compile(r"^(?:KDHE\s+)?(?:Issues?\s+)?(?:a\s+)?Regional\s+Advisor(?:y|ies)\b(?:\s+(?:Issued\s+)?for\s+(.+?))?\s*$",
+                      re.I)
+REGIONAL_LIFT = re.compile(r"Regional\s+Advisor(?:y|ies)\s+(?:Rescinded|Lifted)|\b(?:Rescinds|Lifts)\s+Regional\s+Advisor",
+                           re.I)
+NOT_STREAM = re.compile(r"boil\s+water|blue[- ]green|algae|algal", re.I)
+HAND_FILE = common.DATA_DIR / "sources" / "ks-kdhe-stream-advisories-hand.json"
 COUNTY = re.compile(r"\s+in\s+([A-Z][\w .]+?)\s+Count(?:y|ies)\s*$")
 OFFSET_NOTE = "KDHE's feed gives -0600 year-round; the time is kept as the feed states it"
 
@@ -99,7 +117,30 @@ def split_waters(s: str) -> tuple[list[str], str | None]:
     return [re.sub(r"^(?:the|a section of|section of|portions? of)\s+", "", p, flags=re.I) for p in parts], county
 
 
+COUNTIES = re.compile(r"\b((?:[A-Z][a-z]+\s+)?[A-Z][a-z]+(?:\s*,\s*(?:and\s+)?(?:[A-Z][a-z]+\s+)?[A-Z][a-z]+)*"
+                      r"(?:\s+and\s+(?:[A-Z][a-z]+\s+)?[A-Z][a-z]+)?)\s+Counties\b")
+
+
+def counties_of(text: str) -> list[str]:
+    """The counties a regional release lists ("... in Allen, Bourbon and Neosho Counties"), each as "X County"."""
+    out = []
+    for m in COUNTIES.finditer(text or ""):
+        for c in re.split(r"\s*,\s*(?:and\s+)?|\s+and\s+", m.group(1)):
+            c = re.sub(r"^(?:in|of|for)\s+", "", c.strip())
+            if c and f"{c} County" not in out:
+                out.append(f"{c} County")
+    m = re.search(r"\bin\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+County\b", text or "")
+    if m and not out:
+        out.append(f"{m.group(1)} County")
+    return out
+
+
 def kind(title: str) -> tuple[str | None, list[str], str | None]:
+    if REGIONAL_LIFT.search(title):
+        return "regional_lift", [], None
+    m = REGIONAL.match(title)
+    if m:
+        return "regional", [], None
     m = LIFT.search(title)
     if m:
         w, c = split_waters(m.group(1) or m.group(2))
@@ -201,7 +242,11 @@ def revise(old: dict, new: dict) -> None:
 
 
 def iso_utc(t: str) -> str:
+    """UTC of a time; a hand entry's bare day ("2026-06-25") is taken as that day's first minute in Central time, so a
+    rescission published later that day still applies to it."""
     from datetime import datetime, timezone
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", t or ""):
+        t = f"{t}T00:00:00-06:00"
     return datetime.fromisoformat(t).astimezone(timezone.utc).isoformat()
 
 
@@ -322,13 +367,82 @@ def apply_lifts(lifts: list, recs: dict, stats: dict | None, orphan: list, ambig
             orphan.append(mark)
 
 
-def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
+def regional_record(it: dict) -> dict:
+    """A regional advisory: one record with no water, listed with the counties it names, never coloured on a water."""
+    at = iso(it["date"])
+    aid = re.sub(r"\D", "", it["link"].rsplit("aid=", 1)[-1]) or key(it["title"])
+    counties = counties_of(f"{it['title']} {it['description']}")
+    cause = cause_of(f"{it['title']} {it['description']}")
+    where = ", ".join(counties) if counties else "the counties the release names"
+    return event(
+        source_id=SOURCE_ID, source_record_id=aid, event_type="beach_advisory", status="advisory_active",
+        waterbody_text=None, started_at=at, time_precision="minute", published_at=at, reported_at=at,
+        authority=AUTHORITY, source_url=it["link"],
+        advice_text=f"KDHE regional advisory for waters in {where} {CAUSE_TEXT[cause]}: avoid contact with the water "
+                    "until KDHE rescinds it.",
+        raw={"state": "KS", "time_zone": zones.kansas_zone(county=counties[0] if len(counties) == 1 else None),
+             "title": safe_text(it["title"]), "release": aid, "waters": [], "release_waters": [], "county": None,
+             "counties": counties, "cause": cause, "advisory_extent": "regional", "advisory_noun": "Regional advisory",
+             "offset_note": OFFSET_NOTE, "_placement": "named_water_only",
+             "start_basis": "the time KDHE published the advisory; it may have begun earlier the same day",
+             "time_basis": "the feed's publication time (pubDate)"})
+
+
+def hand_rows(path: Path | None = None) -> list[dict]:
+    doc = read_json(path or HAND_FILE, {}) or {}
+    return list(doc.get("releases") or [])
+
+
+def hand_records(row: dict) -> list[dict]:
+    """The records of a release entered by hand (module docstring): the same records a feed issue opens, at the
+    release's day (day precision), cited to the release's public address, marked as entered by hand."""
+    day = row["published"]
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", day):
+        raise ValueError(f"hand-entered KDHE release {row.get('release')}: published must be a day (YYYY-MM-DD)")
+    aid, county, cause = str(row["release"]), row.get("county"), row.get("cause") or "not stated"
+    hand = {k: row.get(k) for k in ("release", "url", "other_urls", "published", "entered", "entered_from", "note")}
+    out = []
+    for w in row["waters"]:
+        out.append(event(
+            source_id=SOURCE_ID, source_record_id=f"{aid}-{key(w)}", event_type="beach_advisory",
+            status="advisory_active", waterbody_text=w, started_at=day, time_precision="day", published_at=day,
+            reported_at=day, authority=AUTHORITY, advice_text=advice_of(w, county, cause), source_url=row["url"],
+            raw={"state": "KS", "time_zone": zones.kansas_zone(county=county), "title": safe_text(row.get("title")),
+                 "release": aid, "waters": [w], "release_waters": list(row["waters"]), "county": county,
+                 "cause": cause, "advisory_extent": "named_water", "advisory_noun": row.get("noun") or "Stream advisory",
+                 "_placement": "named_water_only", "hand_entry": hand,
+                 "start_basis": (f"KDHE's release, read by hand on {row['entered']}: the day KDHE published it "
+                                 "(no time of day is given; it may have begun earlier)"),
+                 "time_basis": "the release's publication day as indexed; KDHE's release page answers 403"}))
+    return out
+
+
+def apply_hand(rows: list[dict], recs: dict, at: str) -> int:
+    """Hand-entered releases: a record not on file is added; a rescission entered in the row lifts it at that day
+    (day precision); the records otherwise keep whatever a feed rescission did to them. Returns the open count."""
+    n = 0
+    for row in rows:
+        for r in hand_records(row):
+            cur = recs.setdefault(r["event_id"], r)
+            if cur is not r:
+                cur["raw"]["hand_entry"] = r["raw"]["hand_entry"]
+            lift = row.get("rescission")
+            if lift and cur["status"] == "advisory_active":
+                cur.update(status="advisory_lifted", ended_at=lift["date"])
+                cur["raw"].update(ended_at_precision="day", lifted_by={"title": lift.get("title"),
+                                  "link": lift.get("url"), "date": lift["date"], "entered_by_hand": True})
+            n += cur["status"] == "advisory_active"
+    return n
+
+
+def run(feed: bytes, prev: list[dict], at: str, hand: list[dict] | None = None) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
     for r in recs.values():
         migrate(r)
     split_reopened(recs)
     stats = {"releases": 0, "issues": 0, "rescissions": 0, "lifted": 0, "rescissions_without_issue": 0,
-             "revised_out": 0, "rescissions_ambiguous": 0}
+             "revised_out": 0, "rescissions_ambiguous": 0, "regional_issues": 0}
+    stats["hand_entered_open"] = apply_hand(hand or [], recs, at)
     its = items(feed)
     stats["releases"] = len(its)
     lifts, orphan, ambiguous = [], [], []
@@ -345,9 +459,24 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
         if k == "lift":
             stats["rescissions"] += 1
             lifts.append((it, waters + desc_waters(it["description"]), county))
+    unread = [it["title"] for it in its if not kind(it["title"])[0] and re.search(r"\badvisor", it["title"], re.I)
+              and not NOT_STREAM.search(it["title"])]
     apply_lifts(lifts, recs, None, [], [])
+    regional_lifts = [it for it in its if kind(it["title"])[0] == "regional_lift"]
     for it in sorted(its, key=lambda x: iso(x["date"]) or ""):
         k, waters, county = kind(it["title"])
+        if k == "regional":
+            stats["issues"] += 1
+            stats["regional_issues"] += 1
+            r = regional_record(it)
+            present.add(r["raw"]["release"])
+            if r["event_id"] in recs:
+                old = recs[r["event_id"]]
+                old["raw"].update(counties=r["raw"]["counties"], cause=r["raw"]["cause"])
+                old["advice_text"] = r["advice_text"]
+            else:
+                recs[r["event_id"]] = r
+            continue
         if k == "issue":
             stats["issues"] += 1
             now = issue_records(it, waters, county)
@@ -379,6 +508,19 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
                     r["raw"].update(ended_at_precision="poll", revised_out=True, end_basis=REVISED_OUT_BASIS)
                     stats["revised_out"] += 1
     apply_lifts(lifts, recs, stats, orphan, ambiguous)
+    for it in regional_lifts:
+        # a regional rescission lifts the open regional advisories issued before it (KDHE has issued one at a time)
+        stats["rescissions"] += 1
+        when = iso(it["date"])
+        hit = [r for r in recs.values() if r["raw"].get("advisory_extent") == "regional"
+               and r["status"] == "advisory_active" and when and iso_utc(r["started_at"]) <= iso_utc(when)]
+        for r in hit:
+            r.update(status="advisory_lifted", ended_at=when)
+            r["raw"].update(ended_at_precision="minute", lifted_by={"title": it["title"], "link": it["link"], "date": when})
+            r["raw"].pop("confirmed_by", None)
+            stats["lifted"] += 1
+        if not hit:
+            orphan.append({"title": it["title"], "link": it["link"], "date": when})
     stats["rescissions_without_issue"] = len(orphan)
     stats["rescissions_ambiguous"] = len(ambiguous)
     for r in recs.values():
@@ -388,11 +530,17 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
             r["raw"]["_last_seen_in_source"] = at
             r["raw"]["confirmed_by"] = (f"KDHE's news flash feed read at {at}: it still holds the issuing release and "
                                         "no rescission")
+        elif r["status"] == "advisory_active" and r["raw"].get("hand_entry"):
+            # entered by hand from KDHE's release: kept until a rescission is read, never aged out with the feed
+            r["raw"]["_last_seen_in_source"] = at
+            r["raw"]["confirmed_by"] = (f"entered by hand from KDHE's release of {r['raw']['hand_entry']['published']}; "
+                                        f"KDHE's news flash feed read at {at} holds no rescission of it")
         r["fetched_at"] = at
     out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
     stats["open"] = sum(1 for r in out if r["status"] == "advisory_active")
     stats["rescissions_seen_without_issue"] = orphan
     stats["rescissions_seen_ambiguous"] = ambiguous
+    stats["unread_advisory_titles"] = [safe_text(t) for t in unread]
     return out, stats
 
 
@@ -402,6 +550,11 @@ def safe_feed(body: bytes) -> bytes:
     for i in items(body):
         k, waters, county = kind(i["title"])
         if not k:
+            continue
+        if k.startswith("regional"):
+            keep.append({"title": safe_text(i["title"]), "link": i["link"], "date": i["date"], "kind": k,
+                         "counties": counties_of(f"{i['title']} {i['description']}"),
+                         "cause": cause_of(f"{i['title']} {i['description']}")})
             continue
         # the facts read, never the release's description (re-review P1-9)
         keep.append({"title": safe_text(i["title"]), "link": i["link"], "date": i["date"], "kind": k,
@@ -422,7 +575,7 @@ def main(argv=None) -> int:
             r.raise_for_status()
             feed = r.content
             save_raw(SOURCE_ID, safe_feed(feed), "json")
-        recs, stats = run(feed, prev, now_iso())
+        recs, stats = run(feed, prev, now_iso(), hand_rows())
     except (requests.RequestException, OSError, ET.ParseError, ValueError, KeyError, TypeError, IndexError) as e:
         write_events(SOURCE_ID, [], ok=False, error=str(e))
         print(f"{SOURCE_ID}: {e}", file=sys.stderr)
@@ -432,7 +585,8 @@ def main(argv=None) -> int:
         "credit": "Kansas Department of Health and Environment, news flash",
         "caveat": ("KDHE's stream advisories as its news feed carries them: about a month of releases, with the release "
                    "pages closed to automated reading, so an advisory issued before this site began reading the feed "
-                   "is not shown."),
+                   "is shown only where it was entered from KDHE's release by hand: on November 15, 2026, the stream "
+                   "and lake advisory KDHE issued on June 25, 2026 for Ladder Creek and Scott Lake in Scott County."),
         "cadence": "every refresh"})
     print(f"{SOURCE_ID}: {len(recs)} records ({ {k: v for k, v in stats.items() if not isinstance(v, list)} }) -> {out}")
     return 0
