@@ -304,8 +304,10 @@ def compact(ws) -> str:
     return "".join(ws if isinstance(ws, list) else words(ws))
 
 
-def slugify(s: str) -> str:
-    return WX.slugify(s)
+def slugify(s: str, state=None) -> str:
+    """openboatlaunch's slug; for a state of status.ACCENT_FOLD_STATES with the accents folded first ('Río Cibuco' ->
+    rio-cibuco, not r-o-cibuco), every other state's slugs as they were (NM's ca-ada-de-buey-nm stays)."""
+    return WX.slugify(S.fold_accents(s) if S.folds(state) else s)
 
 
 def town_key(t) -> str:
@@ -454,11 +456,24 @@ def gnis_display(name: str | None) -> str | None:
     return name
 
 
-def name_score(target_ws: list[str], gnis: str | None) -> float:
+def name_score(target_ws: list[str], gnis: str | None, state=None) -> float:
     """How well an NHD GNIS name matches a target's name: 1 equal (spaces, numbers and abbreviations
     aside), 0.9 the GNIS name inside the target (with a kind word), 0.85 the target inside the GNIS name
     (the target has no kind word: 'moodna', 'cazenovia'), 0.8 a close spelling (same first letter,
-    10+ letters), else 0."""
+    10+ letters), else 0. state: in status.ACCENT_FOLD_STATES (Puerto Rico) the best score over the Spanish and
+    English forms of both names with their accents folded (status.name_forms_in: 'CIBUCO RIVER' is 'Río Cibuco');
+    every other state as before."""
+    if not gnis or not target_ws:
+        return 0.0
+    if S.folds(state):
+        tf = S.name_forms_in(" ".join(target_ws), state)
+        gf = S.name_forms_in(gnis_display(gnis), state)
+        return max((_name_score(words(a), b) for a in tf for b in gf if a and b), default=0.0)
+    return _name_score(target_ws, gnis)
+
+
+def _name_score(target_ws: list[str], gnis: str) -> float:
+    """name_score's rules for one pair of spellings."""
     if not gnis or not target_ws:
         return 0.0
     gw = words(gnis_display(gnis))
@@ -517,7 +532,36 @@ def sql_names(t: dict) -> list[str]:
             first, _, rest = x.partition(" ")
             if rest and first.lower() in INVERTED_LEAD:
                 out.add(f"{rest}, {first}")
+    if S.folds(t.get("state")):
+        # Puerto Rico: the name's Spanish and English forms, accents folded ('CIBUCO RIVER' -> 'RIO CIBUCO'); the
+        # MapServer compares accents, so name_where asks each with its vowels and N as wildcards too
+        out = {S.fold_accents(x) for x in out}
+        out.update(S.spanish_spellings(" ".join(ws), t["state"]))
     return sorted(x.replace("'", "''") for x in out if x)
+
+
+def accent_pattern(name: str) -> str:
+    """A LIKE pattern for an accent-free upper-case GNIS spelling: every vowel and N a one-letter wildcard, so 'RIO
+    UNIBON' finds 'Río Unibón' (EPA's MapServer compares letters accent for accent; probed 2026-11-15)."""
+    return re.sub(r"[AEIOUN]", "_", name)
+
+
+def name_where(names, state=None) -> str:
+    """The MapServer where clause for GNIS names (sql_names' spellings): UPPER(gnis_name) IN (...), and in
+    status.ACCENT_FOLD_STATES each spelling's accent_pattern as a LIKE too (the features are then kept by gnis_in and
+    name_score, which fold the accents)."""
+    where = "UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in names) + ")"
+    if not S.folds(state):
+        return where
+    pats = sorted({accent_pattern(n) for n in names} - set(names))
+    return "(" + where + "".join(f" OR UPPER(gnis_name) LIKE '{p}'" for p in pats) + ")" if pats else where
+
+
+def gnis_in(gnis_name, mine: set, state=None) -> bool:
+    """Whether a feature's GNIS name is one of the spellings asked (mine, upper case); in status.ACCENT_FOLD_STATES with
+    its accents folded."""
+    g = str(gnis_name or "").upper()
+    return g in mine or (S.folds(state) and S.fold_accents(g) in mine)
 
 
 # ---------------------------------------------------------------- HTTP (cached, polite)
@@ -916,7 +960,7 @@ def collect_targets(existing: dict, events=None, verbose=True, unplaced: list | 
             continue
         if has_record(resolver, name, o["state"], lat, lon, o["permit"], o["town"]):
             continue        # the receiving water is a record (the registry may still lack the slug)
-        parts = split_names(name, False)
+        parts = split_names(S.state_split_text(name, o["state"]), False)
         if not parts:
             skipped[f"outfall: {not_water(name) or 'no water name'}"] += 1
             skipped_reason.setdefault((o["state"], name), not_water(name) or "no water name")
@@ -957,7 +1001,7 @@ def collect_targets(existing: dict, events=None, verbose=True, unplaced: list | 
         m = re.search(r"\(([^()]*)\)\s*$", text)
         if m and not re.search(r"\d", m.group(1)):
             towns.add(m.group(1))
-        parts = split_names(text, point_mode)
+        parts = split_names(S.state_split_text(text, state), point_mode)
         if not parts:
             why = not_water(text)
             if point_mode and ev.get("lat") is not None and ev.get("lon") is not None and not why:
@@ -973,7 +1017,7 @@ def collect_targets(existing: dict, events=None, verbose=True, unplaced: list | 
     for t in targets.values():
         if t["names"]:
             t["name"] = t["names"].most_common(1)[0][0]
-            t["words"] = words(t["name"])
+            t["words"] = words(S.state_text(t["name"], t["state"]))
         else:
             t["name"], t["words"] = None, []
         out.append(t)
@@ -1124,10 +1168,10 @@ def collect_state_targets(states, existing: dict, national: dict | None = None, 
                 how = "reach" if (w.get("reach_ids") or w.get("nhdplus_ids")) else "point" if w.get("points") else "name"
                 note = (f"the registry's slug {w.get('water_slug')} is no water record on file (openboatlaunch's "
                         f"extract for {st} is not here): defined by {how}")
-            parts, why = national_parts(w.get("name") or "")
+            parts, why = national_parts(S.state_split_text(w.get("name") or "", st))
             if not parts:
                 for alt in w.get("names_seen") or []:
-                    parts, _ = national_parts(alt)
+                    parts, _ = national_parts(S.state_split_text(alt, st))
                     if parts:
                         break
             if not parts:
@@ -1202,7 +1246,7 @@ def collect_state_targets(states, existing: dict, national: dict | None = None, 
     for t in targets.values():
         if t["names"]:
             t["name"] = t["names"].most_common(1)[0][0]
-            t["words"] = words(t["name"])
+            t["words"] = words(S.state_text(t["name"], t["state"]))
         else:
             t["name"], t["words"] = None, []
         out.append(t)
@@ -1244,9 +1288,9 @@ def name_unnamed_streams(doc: dict, states, when: str | None = None) -> tuple[li
             left.append(w["slug"])
             continue
         name = unnamed_name(None, towns[0])
-        new = f"{slugify(name)}-{w['state'].lower()}"
+        new = f"{slugify(name, w['state'])}-{w['state'].lower()}"
         if new in taken:
-            new = f"{slugify(name)}-{slugify(str((w.get('comids') or [w['slug']])[0]))}-{w['state'].lower()}"
+            new = f"{slugify(name, w['state'])}-{slugify(str((w.get('comids') or [w['slug']])[0]))}-{w['state'].lower()}"
         taken.add(new)
         from_ = "its town list" if w.get("towns") else "its operators' town"
         waters[i] = {**w, "name": name, "slug": new,
@@ -1363,7 +1407,7 @@ class Nhd:
                       outFields=WB_FIELDS, maxAllowableOffset="0.00005")
 
     def by_name(self, layer, state, names):
-        where = "UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in names) + ")"
+        where = name_where(names, state)
         return arcgis(self.http, f"name{layer}", layer, where=where, geometry=self.state_env(state),
                       geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
                       outFields=FL_FIELDS if layer == 2 else WB_FIELDS, maxAllowableOffset="0.001")
@@ -1388,11 +1432,11 @@ def resolve_point(nhd: Nhd, t, lon, lat) -> tuple[dict | None, str]:
     area_first = wants_area(t)
     line_choice = None
     if tw:
-        sc = name_score(tw, snapped.get("gnis_name")) if snapped and snapped.get("gnis_id") else 0
+        sc = name_score(tw, snapped.get("gnis_name"), t["state"]) if snapped and snapped.get("gnis_id") else 0
         if sc >= 0.8 or (sc >= 0.7 and h["snap_m"] <= 150):
             line_choice = (snapped, f"NLDI {h['via']} COMID {snapped['comid']} ({h['snap_m']} m)")
         else:
-            cands = [(name_score(tw, f.get("gnis_name")), -dist_m(f["_geom"], lon, lat), f) for f in fl
+            cands = [(name_score(tw, f.get("gnis_name"), t["state"]), -dist_m(f["_geom"], lon, lat), f) for f in fl
                      if f.get("gnis_id")]
             cands = [c for c in cands if c[0] >= 0.8]
             if cands:
@@ -1405,7 +1449,7 @@ def resolve_point(nhd: Nhd, t, lon, lat) -> tuple[dict | None, str]:
     if need_wb:
         wbs = [f for f in nhd.near(4, lon, lat, NEAR_M if tw else SITE_M) if f.get("ftype") in LAKE_FTYPES]
         if tw:
-            cands = [(name_score(tw, f.get("gnis_name")), -dist_m(f["_geom"], lon, lat), f) for f in wbs]
+            cands = [(name_score(tw, f.get("gnis_name"), t["state"]), -dist_m(f["_geom"], lon, lat), f) for f in wbs]
             cands = [c for c in cands if c[0] >= 0.8]
             if cands:
                 sc, nd, f = max(cands, key=lambda c: (c[0], c[1]))
@@ -1438,11 +1482,11 @@ def resolve_name_only(nhd: Nhd, t) -> tuple[dict | None, str]:
     town_geoms = nhd.towns.outlines(t["state"], list(t["towns"]))
     groups = defaultdict(list)
     for f in nhd.by_name(2, t["state"], names):
-        if f.get("gnis_id") and name_score(t["words"], f.get("gnis_name")) >= 0.8:
+        if f.get("gnis_id") and name_score(t["words"], f.get("gnis_name"), t["state"]) >= 0.8:
             groups[("line", f["gnis_id"])].append(f)
     if wants_area(t) or not groups:
         for f in nhd.by_name(4, t["state"], names):
-            if f.get("ftype") in LAKE_FTYPES and name_score(t["words"], f.get("gnis_name")) >= 0.8:
+            if f.get("ftype") in LAKE_FTYPES and name_score(t["words"], f.get("gnis_name"), t["state"]) >= 0.8:
                 groups[("wb", f.get("gnis_id") or f["comid"])].append(f)
     # inside the state, not just its box
     shape_ = nhd.states.shapes[t["state"]].buffer(0.01)
@@ -1551,21 +1595,21 @@ def resolve_reach(nhd: "Nhd", t, index: dict) -> tuple[list, str | None]:
     wbs: dict = defaultdict(lambda: {"f": None, "score": 0.0, "ids": []})
     for f in feats:
         if f.get("_wb"):
-            sc = name_score(tw, f.get("gnis_name"))
+            sc = name_score(tw, f.get("gnis_name"), t["state"])
             if sc >= 0.8:
                 g = wbs[f.get("gnis_id") or f"comid{f['comid']}"]
                 g["f"], g["score"] = g["f"] or f, max(g["score"], sc)
                 g["ids"] += epa_ids_of(f)
             continue
         if f.get("gnis_id"):
-            sc = name_score(tw, f.get("gnis_name"))
+            sc = name_score(tw, f.get("gnis_name"), t["state"])
             if sc >= 0.7:
                 g = lines[f["gnis_id"]]
                 g["f"], g["score"] = g["f"] or f, max(g["score"], sc)
                 g["ids"] += epa_ids_of(f)
         if area and f.get("wbareacomid") and f.get("wbarea_ftype") in LAKE_FTYPES:
             for w in nhd.by_comid(4, f["wbareacomid"]):
-                sc = name_score(tw, w.get("gnis_name"))
+                sc = name_score(tw, w.get("gnis_name"), t["state"])
                 if sc >= 0.8:
                     g = wbs[w.get("gnis_id") or f"comid{w['comid']}"]
                     g["f"], g["score"] = g["f"] or w, max(g["score"], sc)
@@ -1667,14 +1711,14 @@ def resolve_hr(nhd: "Nhd", t) -> tuple[dict | None, str]:
     its points (most reported first), by GNIS name; the nearest when several. The medium-resolution V2.1 network leaves
     out many small named streams and canals (Florida, 2026-11-04: Brooker Creek, Possum Creek)."""
     names = sql_names(t)
-    where = "UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in names) + ")"
+    where = name_where(names, t["state"])
     for lon, lat in cluster_points(t["points"]):
         env = f"{lon - HR_NEAR_DEG},{lat - HR_NEAR_DEG},{lon + HR_NEAR_DEG},{lat + HR_NEAR_DEG}"
         fs = arcgis(nhd.http, "nhd-hr-near", HR_FLOWLINES, service=NHD_HR, where=where, geometry=env,
                     geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
                     outFields=HR_FIELDS, maxAllowableOffset="0.0001")
         cands = [(dist_m(f["_geom"], lon, lat), f) for f in fs if f.get("gnis_id") and f["_geom"] is not None
-                 and name_score(t["words"], f.get("gnis_name")) >= 0.8]
+                 and name_score(t["words"], f.get("gnis_name"), t["state"]) >= 0.8]
         if cands:
             d, f = min(cands, key=lambda x: x[0])
             return ({"type": "hr-line", "gnis_id": str(int(f["gnis_id"])), "gnis_name": f["gnis_name"],
@@ -1834,11 +1878,14 @@ def TOWNS_FROM(state: str) -> str:
 INVERTIBLE_KIND = ("lake", "bayou")
 
 
-def name_forms(name: str) -> set[str]:
+def name_forms(name: str, state=None) -> set[str]:
     """A water's name normalised (status.norm_name), with the lake or bayou word on the other side as well: GNIS's
-    'Lawne Lake' is openboatlaunch's 'Lake Lawne' (2026-11-04 review: a report-name record duplicated it)."""
+    'Lawne Lake' is openboatlaunch's 'Lake Lawne' (2026-11-04 review: a report-name record duplicated it). state: in
+    status.ACCENT_FOLD_STATES the accent-folded Spanish and English forms too (status.name_forms_in)."""
     n = S.norm_name(name or "")
     out = {n} if n else set()
+    if S.folds(state):
+        out |= {x for x in S.name_forms_in(name or "", state) if x}
     m = re.fullmatch(rf"({'|'.join(INVERTIBLE_KIND)}) (.+)", n)
     if m:
         out.add(f"{m.group(2)} {m.group(1)}")
@@ -1851,12 +1898,15 @@ def name_forms(name: str) -> set[str]:
 def same_named_existing(existing: dict, state: str, name: str) -> list[str]:
     """The existing records of the state that carry the name (their name or an alias, spelling aside, the lake or
     bayou word on either side: name_forms); the geometry then decides whether one is the same water."""
-    forms = name_forms(name)
+    forms = name_forms(name, state)
     out = []
     for slug, w in existing.items():
         if w.get("state") != state:
             continue
-        if ({S.norm_name(w.get("name") or "")} | {S.norm_name(a) for a in w.get("aliases") or []}) & forms:
+        have = {S.norm_name(w.get("name") or "")} | {S.norm_name(a) for a in w.get("aliases") or []}
+        if S.folds(state):
+            have |= {x for n in [w.get("name") or ""] + list(w.get("aliases") or []) for x in S.name_forms_in(n, state)}
+        if have & forms:
             out.append(slug)
     return out
 
@@ -2289,12 +2339,12 @@ def resolve_existing_duplicates(doc: dict, existing: dict, states, when: str | N
                 towns += [x for x in t.get("towns") or [] if x not in towns]
             new = None
             for tw in towns:
-                c = f"{slugify(w['name'])}-{slugify(tw)}-{w['state'].lower()}"
+                c = f"{slugify(w['name'], w['state'])}-{slugify(tw, w['state'])}-{w['state'].lower()}"
                 if c not in taken:
                     new = c
                     break
             if new is None:
-                new = f"{slugify(w['name'])}-{slugify(str(w.get('gnis_id') or (w.get('comids') or ['x'])[0]))}-{w['state'].lower()}"
+                new = f"{slugify(w['name'], w['state'])}-{slugify(str(w.get('gnis_id') or (w.get('comids') or ['x'])[0]))}-{w['state'].lower()}"
             taken.add(new)
             _, why = same_water_by_box(g, existing[w["slug"]], w.get("towns") or []) \
                 if S.water_geometry(w["slug"], existing) is None else (None, "its outline lies elsewhere")
@@ -2458,7 +2508,7 @@ def assign_slugs(recs: list[dict], existing: dict, previous: dict | None = None,
             continue
         same = [r for r in recs if r["state"] == st and S.norm_name(r["name"]) == n and r.get("_geom") is not None]
         heir = next((r for r in same if id(r) not in sticky and geom_dist_m(r["_geom"], g) <= SAME_WATER_M), None)
-        if heir is not None and slug not in taken and slug.startswith(f"{slugify(heir['name'])}-"):
+        if heir is not None and slug not in taken and slug.startswith(f"{slugify(heir['name'], st)}-"):
             sticky[id(heir)] = slug
         taken.add(slug)
     taken -= set(sticky.values())
@@ -2466,7 +2516,7 @@ def assign_slugs(recs: list[dict], existing: dict, previous: dict | None = None,
         k = water_identity(r)
         s = (previous or {}).get(k) if k is not None else None
         if id(r) not in sticky and s and s not in taken and s not in sticky.values() \
-                and s.startswith(f"{slugify(r['name'])}-"):
+                and s.startswith(f"{slugify(r['name'], r.get('state'))}-"):
             sticky[id(r)] = s
     taken |= set(sticky.values())
     by_name = defaultdict(list)
@@ -2480,18 +2530,18 @@ def assign_slugs(recs: list[dict], existing: dict, previous: dict | None = None,
             if id(r) in sticky:
                 r["slug"] = sticky[id(r)]
                 continue
-            base = f"{slugify(r['name'])}-{state.lower()}"
+            base = f"{slugify(r['name'], state)}-{state.lower()}"
             slug = None
             if r is first and not exists and base not in taken:
                 slug = base
             else:
                 for tw in slug_towns(r):
-                    s = f"{slugify(r['name'])}-{slugify(tw)}-{state.lower()}"
+                    s = f"{slugify(r['name'], state)}-{slugify(tw, state)}-{state.lower()}"
                     if s not in taken:
                         slug = s
                         break
             if slug is None:
-                slug = f"{slugify(r['name'])}-{slugify(str(r.get('gnis_id') or r['comids'][0]))}-{state.lower()}"
+                slug = f"{slugify(r['name'], state)}-{slugify(str(r.get('gnis_id') or r['comids'][0]))}-{state.lower()}"
             taken.add(slug)
             r["slug"] = slug
 
@@ -3485,6 +3535,11 @@ def osm_spec(t, towns: Towns) -> dict:
             "key": f"nhd-fallback-{slugify(t['name'])}-{t['state'].lower()}"}
     names = {t["name"].strip()} | {n.strip() for n in t["names"]}
     titled = " ".join(w.capitalize() if w.islower() else w for w in t["name"].split())
+    if S.folds(t["state"]):
+        # Puerto Rico: the Spanish and English spellings, accent-free, asked with each vowel and n matching its accented
+        # forms (OpenStreetMap writes 'Bahía de San Juan' for EPA's 'BAHIA SAN JUAN' and 'San Juan Bay')
+        names |= {S.fold_accents(x) for x in names} | set(S.spanish_spellings(t["name"], t["state"]))
+        spec["accents_free"] = True
     spec["osm_names"] = sorted((names | {titled}) - {spec["name"]})
     return spec
 
@@ -3546,11 +3601,12 @@ def left_of(budget: float | None, end: float | None, now: float | None = None) -
 OSM_REGEX_MAX = 4000            # characters of name alternation per query; a longer list is split
 
 
-def state_query(names: list[str], box) -> str:
-    """Named rivers, streams and canals (ways and relations) and named water areas in the box."""
+def state_query(names: list[str], box, state=None) -> str:
+    """Named rivers, streams and canals (ways and relations) and named water areas in the box (the names accent-free
+    in status.ACCENT_FOLD_STATES: WX.name_regex)."""
     s, w, n, e = box
     bb = f"{s},{w},{n},{e}"
-    rx = WX.name_regex(names)
+    rx = WX.name_regex(names, S.folds(state))
     return f"""[out:json][timeout:{OSM_STATE_TIMEOUT}];
 (
   way["waterway"~"^(river|stream|canal)$"]["name"~"{rx}",i]({bb});
@@ -3562,7 +3618,7 @@ out tags geom;
 """
 
 
-def state_chunks(specs: list[dict]) -> list[tuple[list[str], tuple]]:
+def state_chunks(specs: list[dict], accents_free: bool = False) -> list[tuple[list[str], tuple]]:
     """[(names, box)]: the specs' names in alternations of at most OSM_REGEX_MAX characters, each with
     the box around its specs' boxes."""
     out, cur, cur_specs = [], [], []
@@ -3574,7 +3630,7 @@ def state_chunks(specs: list[dict]) -> list[tuple[list[str], tuple]]:
                                            max(x[3] for x in b))))
     for sp in specs:
         names = [sp["name"]] + list(sp.get("osm_names") or [])
-        if cur and len(WX.name_regex(sorted(set(cur + names)))) > OSM_REGEX_MAX:
+        if cur and len(WX.name_regex(sorted(set(cur + names)), accents_free)) > OSM_REGEX_MAX:
             close()
             cur, cur_specs = [], []
         cur += names
@@ -3653,12 +3709,13 @@ def element_box(el: dict):
 
 def for_spec(resp: dict, spec: dict) -> dict:
     """The part of a state answer that is this target's: its names, inside its box."""
-    names = {n.lower() for n in [spec["name"]] + list(spec.get("osm_names") or [])}
+    fold = S.fold_accents if spec.get("accents_free") else (lambda x: x)
+    names = {fold(n).lower() for n in [spec["name"]] + list(spec.get("osm_names") or [])}
     s, w, n, e = spec["box"]
     els = []
     for el in resp.get("elements") or []:
         b = element_box(el)
-        if (((el.get("tags") or {}).get("name") or "").lower() in names and b is not None
+        if (fold((el.get("tags") or {}).get("name") or "").lower() in names and b is not None
                 and not (b[2] < s or b[0] > n or b[3] < w or b[1] > e)):
             els.append(el)
     return {"elements": els, "osm3s": resp.get("osm3s"), "_fetched_at": resp.get("_fetched_at")}
@@ -4189,7 +4246,7 @@ class Run:
             over = budget is not None and todo and (no_time or time.monotonic() - started > budget)
             if over:
                 failed = f"time budget of {budget:g} s used"
-            chunks = state_chunks([sp for _, _, sp in todo])
+            chunks = state_chunks([sp for _, _, sp in todo], S.folds(state))
             asked, stopped = set(), None
             for names, box in ([] if over else chunks):
                 # the budget is checked before each query, not only between states: a state whose names split into
@@ -4197,7 +4254,7 @@ class Run:
                 if budget is not None and time.monotonic() - started > budget:
                     stopped = f"time budget of {budget:g} s used"
                     break
-                resp, how = state_fetch(state_query(names, box), mirrors, a.refresh, a.offline, deadline=deadline)
+                resp, how = state_fetch(state_query(names, box, state), mirrors, a.refresh, a.offline, deadline=deadline)
                 if resp is None:
                     failed = how
                     break
@@ -4992,9 +5049,10 @@ def has_record_at(resolver: S.Resolver, name: str, state: str, places: list[tupl
 def holds_name(rec: dict, name: str) -> bool:
     """Whether a water record carries the name itself (its name or an alias, spelling aside, or the name without its
     kind word): not only by the status resolver's qualifier rule, which gives 'West Fork Deep River' to the Deep River."""
-    ws = words(name)
+    st = rec.get("state")
+    ws = words(S.state_text(name, st))
     for n in [rec.get("name") or ""] + list(rec.get("aliases") or []):
-        sc = name_score(ws, n)
+        sc = name_score(ws, n, st)
         if sc in (1.0, 0.85) or (sc == 0.8 and abs(len(compact(ws)) - len(compact(gnis_display(n) or ""))) <= 2):
             return True
     return False
@@ -5008,7 +5066,7 @@ def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, wat
     is built, and its row notes where the resolver puts it today."""
     targets, done, skipped = {}, [], {}
     for r in rows:
-        parts, why, trib = report_name_parts(r["name"])
+        parts, why, trib = report_name_parts(S.state_split_text(r["name"], state))
         if not parts and why == OPEN_SEA and ocean_record_named(resolver, r["name"], state):
             # the open ocean has a record in this state that the shoreline rule walks (data/rules.json
             # reach.shoreline.oceans): the name is that water's, not "no water"
@@ -5055,7 +5113,7 @@ def collect_name_targets(state: str, rows: list[dict], resolver: S.Resolver, wat
     out = []
     for t in targets.values():
         t["name"] = t["names"].most_common(1)[0][0]
-        t["words"] = words(t["name"])
+        t["words"] = words(S.state_text(t["name"], t["state"]))
         places = cluster_points(t["points"], n=3, sep_m=NEAR_M)
         slugs, at = has_record_at(resolver, t["name"], state, places, top_towns(t["towns"], 3),
                                   per_place=True, island=t.get("island"), county=t.get("county"))
@@ -5088,13 +5146,13 @@ def prefetch_names(nhd: Nhd, state: str, targets: list, layer: int, attr: str) -
     def ask():
         if not batch:
             return
-        where = "UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in sorted(set(names))) + ")"
+        where = name_where(sorted(set(names)), state)
         fs = arcgis(nhd.http, f"name{layer}", layer, where=where, geometry=nhd.state_env(state),
                     geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
                     outFields=FL_FIELDS if layer == 2 else WB_FIELDS, maxAllowableOffset="0.001")
         for t in batch:
             mine = {n.replace("''", "'") for n in sql_names(t)}
-            t[attr] = [f for f in fs if str(f.get("gnis_name") or "").upper() in mine]
+            t[attr] = [f for f in fs if gnis_in(f.get("gnis_name"), mine, state)]
         batch.clear()
         names.clear()
     for t in targets:
@@ -5106,12 +5164,13 @@ def prefetch_names(nhd: Nhd, state: str, targets: list, layer: int, attr: str) -
     ask()
 
 
-def report_score(target_ws: list[str], gnis: str | None) -> float:
+def report_score(target_ws: list[str], gnis: str | None, state=None) -> float:
     """name_score for a report's spelling: 'of' and 'the' aside ('South Fork of Middle River'), and GNIS's 'Atlantic' or
-    'Gulf' in front of the Intracoastal Waterway aside."""
+    'Gulf' in front of the Intracoastal Waterway aside. state: name_score's (Puerto Rico's accents folded)."""
     tw = [w for w in target_ws if w not in ("of", "the")]
-    gw = [w for w in words(gnis_display(gnis)) if w not in ("of", "the")] if gnis else []
-    sc = name_score(tw, " ".join(gw)) if gw else 0.0
+    gw = [w for w in words(gnis_display(S.state_text(gnis, state) if gnis else gnis)) if w not in ("of", "the")] \
+        if gnis else []
+    sc = name_score(tw, " ".join(gw), state) if gw else 0.0
     if sc < 0.8 and gw and [w for w in gw if w not in ("atlantic", "gulf")] == tw and "intracoastal" in tw:
         return 0.9
     return sc
@@ -5135,11 +5194,11 @@ def report_name_choices(nhd: Nhd, t) -> tuple[list[tuple], str | None, list[dict
     st = t["state"]
     groups = defaultdict(list)
     for f in t.get("_l2") or []:
-        if f.get("gnis_id") and report_score(t["words"], f.get("gnis_name")) >= 0.8:
+        if f.get("gnis_id") and report_score(t["words"], f.get("gnis_name"), t["state"]) >= 0.8:
             groups[("line", f["gnis_id"])].append(f)
     if wants_area(t) or not groups:
         for f in t.get("_l4") or []:
-            if f.get("ftype") in LAKE_FTYPES and report_score(t["words"], f.get("gnis_name")) >= 0.8:
+            if f.get("ftype") in LAKE_FTYPES and report_score(t["words"], f.get("gnis_name"), t["state"]) >= 0.8:
                 groups[("wb", f.get("gnis_id") or f["comid"])].append(f)
     shape_ = nhd.states.shapes[st].buffer(0.01)
     groups = {k: v for k, v in groups.items() if any(f["_geom"] is not None and f["_geom"].intersects(shape_) for f in v)}
@@ -5208,7 +5267,7 @@ def resolve_hr_places(nhd: Nhd, t) -> tuple[dict | None, str]:
     if t["points"]:
         return resolve_hr(nhd, t)
     names = sql_names(t)
-    where = "UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in names) + ")"
+    where = name_where(names, t["state"])
     for tw in top_towns(t["towns"], 2):
         g = nhd.towns.outlines(t["state"], [tw])
         if not g:
@@ -5220,7 +5279,7 @@ def resolve_hr_places(nhd: Nhd, t) -> tuple[dict | None, str]:
                     geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
                     outFields=HR_FIELDS, maxAllowableOffset="0.0001")
         cands = [(geom_dist_m(f["_geom"], g) if not f["_geom"].intersects(g) else 0.0, f) for f in fs
-                 if f.get("gnis_id") and f["_geom"] is not None and name_score(t["words"], f.get("gnis_name")) >= 0.8]
+                 if f.get("gnis_id") and f["_geom"] is not None and name_score(t["words"], f.get("gnis_name"), t["state"]) >= 0.8]
         cands = [c for c in cands if c[0] <= REPORT_TOWN_M]
         if cands:
             d, f = min(cands, key=lambda x: x[0])
