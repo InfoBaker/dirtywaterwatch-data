@@ -468,8 +468,8 @@
     "tn-tdec-hab-advisory-status",
     "ok-nps-chickasaw-bacteria",
     "ar-deq-hab-advisories",
-    "de-dnrec-recreational-water",
-    "id-deq-cyanohab-risk-table"
+    "id-deq-cyanohab-risk-table",
+    "de-dnrec-recreational-water"
    ],
    "flag": "_agency_label_only",
    "hours": 72,
