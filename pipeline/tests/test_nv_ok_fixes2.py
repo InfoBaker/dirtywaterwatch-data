@@ -195,3 +195,38 @@ def test_r2_4_the_recleaner_leaves_a_clean_record_unchanged():
     assert [P.recleaned(r) for r in recs] == recs
     ok, _ = N.build(_bear(PAGE, [C.format(v) for v in ("66.3", "105.0", "260.0", "122.3", "108.4")]), T1, [])
     assert [P.recleaned(r) for r in ok] == ok
+
+
+# ---- Oklahoma: a result that is not a plain number is never dropped silently ------------------------------------
+
+@pytest.mark.parametrize("cell", ['<span style="color: #ff0000;">pending</span>', "TNTC", "too numerous to count"])
+def test_r2_5_a_red_or_uncountable_cell_is_a_caution_not_a_blank(cell):
+    recs, meta = N.build(_cell_at(PAGE, 2, cell), T1, [])
+    r = [x for x in recs if x["source_record_id"] == "bear-falls:2026-08-20"]
+    assert len(r) == 1 and r[0]["raw"]["exceedance"] == "definite" and r[0]["sampled_at"] == "2026-08-20"
+    assert meta["unread_cells"] == []
+
+
+@pytest.mark.parametrize("cell", ["260*", "see note", "2 60"])
+def test_r2_5_an_unreadable_cell_is_listed_and_the_read_is_not_healthy(tmp_path, monkeypatch, cell):
+    import common
+    first, meta = N.build(_cell_at(PAGE, 2, "260.0"), T1, [])
+    recs, meta = N.build(_cell_at(PAGE, 2, cell), T2, first)
+    assert meta["unread_cells"] == [{"place": "Bear Falls", "sampled_at": "2026-08-20"}]
+    # the earlier caution on that sample stays (not taken as a correction)
+    assert [r["source_record_id"] for r in recs] == ["bear-falls:2026-08-20"]
+    path = tmp_path / f"{N.SOURCE_ID}.json"
+    monkeypatch.setattr(N, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    common.write_events(N.SOURCE_ID, first, path=path)
+    (tmp_path / "p.html").write_text(_cell_at(PAGE, 2, cell))
+    assert N.main(["--file", str(tmp_path / "p.html")]) == 1
+    doc = json.loads(path.read_text())
+    assert doc["ok"] is False and doc["count"] == 1 and doc["meta"]["unread_cells"]
+
+
+def _cell_at(page, n, inner):
+    return re.sub(r"(Bear Falls</strong></td>\s*)((?:<td[^>]*>[^<]*</td>\s*)+)",
+                  lambda m: m.group(1) + "\n".join(
+                      (f'<td style="text-align: center;">{inner}</td>' if i == n else c)
+                      for i, c in enumerate(re.findall(r"<td[^>]*>[^<]*</td>", m.group(2)))) + "\n", page, count=1)

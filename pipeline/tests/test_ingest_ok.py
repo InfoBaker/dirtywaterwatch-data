@@ -262,7 +262,7 @@ def test_p1_4_nothing_personal_reaches_any_save(tmp_path, monkeypatch):
     monkeypatch.setattr(N, "write_events", lambda *a, **k: writes.append((a, k)) or real(
         *a, **{**k, "path": tmp_path / f"{N.SOURCE_ID}.json"}))
     monkeypatch.setattr(N.requests, "get", lambda *a, **k: _Resp(page))
-    assert N.main([]) == 0
+    assert N.main([]) == 1      # the note in a result cell is an unread cell (round 2): a partial save, still clean
     assert len(saved) == 1 and saved[0][0] == "json" and "<td" not in saved[0][1] and "style" not in saved[0][1]
     blob = saved[0][1] + json.dumps(writes, default=str) + (tmp_path / f"{N.SOURCE_ID}.json").read_text()
     for p in PRIVATE:
