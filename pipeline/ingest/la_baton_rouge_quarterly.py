@@ -15,8 +15,9 @@ Source
 Reading the PDF (pypdf, layout text)
   Only the collection-system tables are read, and only what their layout supports: a row is a line that begins with a
   date (m/d/yyyy); its cells are cut by the header line's column starts; the address, cause and receiving water may
-  wrap onto the next line or two, which are joined. A report is used only when the rows read for each collection
-  system equal the number its own summary gives (raw.layout_check); a report that fails is listed in meta.failed_checks
+  wrap onto the next line or two, which are joined. A report is used only when its summary gives the collection-system
+  count of both districts (North and South, DISTRICTS), every table is one of the two under its own district name,
+  and the rows read for each equal the number its own summary gives (raw.layout_check); a report that fails is listed in meta.failed_checks
   and makes none of its rows records, so a misread table never reaches the site.
 
 Records
@@ -83,6 +84,9 @@ CAUSE = re.compile(r"Blockage\s*-\s*(?:Collection|Service)\s+Lines?|Grease(?:\s+
                    r"(?:Collection|Service)\s+Lines?|(?:[A-Z][a-z]+\s+)?Pump\s+(?:Station\s+)?Failure|Power\s+(?:Outage|Failure)",
                    re.I)
 NO_WATER = {"none", "n/a", "na", "", "-"}
+# the two collection systems every report summarises and tabulates (Part D): a report is accepted only when its summary
+# gives the collection-system count of both and every table it holds is one of these, under its own district name
+DISTRICTS = {"LA0036439": "North", "LA0036412": "South"}
 
 
 def pdf_pages(content: bytes) -> list[str]:
@@ -116,6 +120,7 @@ def parse_report(pages: list[str]) -> dict:
     issued = period = None
     summary: dict[str, dict] = {}
     rows: list[dict] = []
+    tables: list[dict] = []
     district = None
     for pi, text in enumerate(pages):
         if issued is None and (m := ISSUED.search(text)):
@@ -131,6 +136,7 @@ def parse_report(pages: list[str]) -> dict:
         for i, ln in enumerate(lines):
             if (m := HEADING.search(ln)):
                 district = {"name": m.group(1).title(), "permit": m.group(2).upper(), "ai": m.group(3)}
+                tables.append(dict(district))
             if period is None and (m := PERIOD.search(ln)):
                 period = [datetime.strptime(x, "%m/%d/%Y").date().isoformat() for x in m.groups()]
             if cols is None and "Rec. Waters" in ln and "Address" in ln:
@@ -161,11 +167,33 @@ def parse_report(pages: list[str]) -> dict:
                          "receiving_water": joined("Rec. Waters") or None, "gallons": gal,
                          "gallons_text": tail[0] if tail else None, "page": pi + 1, **district})
     check = {}
-    for p, s in summary.items():
+    for p in sorted(set(summary) | set(DISTRICTS) | {r["permit"] for r in rows}):
+        s = summary.get(p) or {}
         read = sum(1 for r in rows if r["permit"] == p)
         check[p] = {"read": read, "summary_collection": s.get("collection"), "summary_plant": s.get("plant")}
-    ok = bool(summary) and all(c["read"] == c["summary_collection"] for c in check.values())
-    return {"issued": issued, "period": period, "summary": summary, "rows": rows, "check": check, "layout_ok": ok}
+    problems = layout_problems(summary, rows, tables)
+    ok = not problems and all(c["read"] == c["summary_collection"] for c in check.values())
+    return {"issued": issued, "period": period, "summary": summary, "rows": rows, "check": check, "layout_ok": ok,
+            "problems": problems}
+
+
+def layout_problems(summary: dict, rows: list[dict], tables: list[dict]) -> list[str]:
+    """What makes a report incomplete beyond a row count: a district the summary does not give a collection-system
+    count for, a permit the report should not hold, a table heading whose district name and permit disagree, a
+    district with discharges in its summary and no table."""
+    out = []
+    for p, name in DISTRICTS.items():
+        if (summary.get(p) or {}).get("collection") is None:
+            out.append(f"the summary gives no collection-system count for {name} ({p})")
+        elif summary[p]["collection"] > 0 and not any(t["permit"] == p for t in tables):
+            out.append(f"no {name} collection-system table ({p}) for the summary's {summary[p]['collection']}")
+    for p in sorted(set(summary) | {t["permit"] for t in tables}):
+        if p not in DISTRICTS:
+            out.append(f"a permit not one of the two collection systems: {p}")
+    for t in tables:
+        if t["permit"] in DISTRICTS and DISTRICTS[t["permit"]] != t["name"]:
+            out.append(f"a table headed {t['name']} under {t['permit']} ({DISTRICTS[t['permit']]})")
+    return out
 
 
 def records(state: dict) -> list[dict]:
@@ -251,10 +279,13 @@ def read_report(state: dict, url: str, number: int, content: bytes, at: str) -> 
 def unread_reason(rep: dict) -> str:
     """Why a report gives no rows: the permits whose table rows do not match the report's own summary count."""
     bad = {p: c for p, c in (rep.get("check") or {}).items() if c.get("read") != c.get("summary_collection")}
-    if not rep.get("summary") or not bad:
-        return "its summary table was not found"
-    return "discharge rows read against the summary's count: " + ", ".join(
-        f"{p} {c.get('read')} of {c.get('summary_collection')}" for p, c in sorted(bad.items()))
+    out = list(rep.get("problems") or [])
+    if bad:
+        out.append("discharge rows read against the summary's count: " + ", ".join(
+            f"{p} {c.get('read')} of {c.get('summary_collection')}" for p, c in sorted(bad.items())))
+    if not rep.get("summary"):
+        out.insert(0, "its summary table was not found")
+    return "; ".join(out) or "its summary table was not found"
 
 
 REREAD_DAYS = 30        # the newest two reports are read again this often, for an amended copy at the same address

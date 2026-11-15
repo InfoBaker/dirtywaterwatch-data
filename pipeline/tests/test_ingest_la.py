@@ -378,3 +378,24 @@ def test_baton_rouge_source_descriptions_follow_the_counts_and_the_reread_rule()
         recs = Q.records(json.loads(state.read_text()))
         none = [r for r in recs if (r.get("waterbody_text") or "").strip().lower() in Q.NO_WATER]
         assert len(recs) == 219 and len(none) == 102
+
+
+# --- last review round (verification pass) ---
+
+def test_an_incomplete_summary_or_a_missing_district_never_passes_or_replaces(monkeypatch):
+    """Verification P1-1: the South summary line unreadable and its table gone; a district table under a permit the
+    summary does not give; a table whose heading names the other district. None passes the layout check, and none
+    replaces an accepted copy."""
+    south_gone = "\n".join(ln for ln in SUMMARY.split("\n") if "South" not in ln)
+    assert not _parsed([south_gone, TABLE_N])["layout_ok"]
+    assert "LA0036412" in Q.unread_reason(_parsed([south_gone, TABLE_N]))
+    stray = TABLE_S.replace("LA0036412", "LA0099999")
+    assert not _parsed([SUMMARY, TABLE_N, stray])["layout_ok"]
+    swapped = TABLE_S.replace("SOUTH Sewer", "NORTH Sewer")
+    assert not _parsed([SUMMARY, TABLE_N, swapped])["layout_ok"]
+    assert _parsed()["layout_ok"]
+    _pdf_state(monkeypatch, {b"good": [SUMMARY, TABLE_N, TABLE_S], b"short": [south_gone, TABLE_N]})
+    state = {}
+    Q.read_report(state, "https://example.org/r98.pdf", 98, b"good", "2026-11-01T00:00:00Z")
+    _, err = Q.read_report(state, "https://example.org/r98-b.pdf", 98, b"short", "2026-11-14T00:00:00Z")
+    assert err and len(Q.records(state)) == 3
