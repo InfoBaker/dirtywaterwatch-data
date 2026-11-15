@@ -67,6 +67,9 @@ plant row, so `rainfall.cso_outfalls()` reads nothing for them today.
   pull 2026-01-14) lies in the Fivemile River basin 41.4 km away; the registry already set it aside (coords_problem).
 - Caveat: the layer's street text names Atlantic Street where EPA's names Main Street. Number, name code, operator and
   water agree, so it is read as the same outfall. Confidence high.
+- Check against the registry's water: the point lies inside the `bridgeport-harbor-ct` record (0 m by
+  `ingest.outfall_waters.Matcher(offline=True).dist`, measured 2026-11-15 on origin/main 721d13f), the water EPA's text
+  names; Pequonnock River and Cedar Creek are about 2.1 km away.
 
 ### MAC010510 001, MAC010617 001, MAC010986 001: not outfalls (no point exists)
 
@@ -84,8 +87,8 @@ plant row, so `rainfall.cso_outfalls()` reads nothing for them today.
   wastewater collection system" that discharges to the Fitchburg plant, and that Lunenburg is a co-permittee of
   Leominster's permit MA0100617 on the same terms.
   `https://www.epa.gov/system/files/documents/2023-12/draftma0100986permit2023.pdf`, read 2026-11-15 15:14Z. (The final
-  permit, MassDEP's `fitchburg-fitchburg-easterly-wastewater-treatment-plant-and-9-csos-final-permit`, returned an HTML
-  page to a script; search excerpts of it keep the same co-permittee parts.) Fitchburg's nine CSOs are in the registry
+  permit, MassDEP's `fitchburg-fitchburg-easterly-wastewater-treatment-plant-and-9-csos-final-permit`, answered HTTP
+  403 to a fetch; search excerpts of it keep the same co-permittee parts.) Fitchburg's nine CSOs are in the registry
   under MA0100986 with points.
 - Recommendation: no point. Make each row `outfall_kind` "other" with a `kind_note` (the precedent is
   `scripts/ky_outfall_corrections.py`, Kentucky's KYP collection-system rows), so they leave the combined sewer outfall
@@ -175,10 +178,14 @@ rounded); `coords_from` from the existing vocabulary ("state outfall layer" for 
 or fact sheet; "operator map layer" for an operator's map); `coords_note` naming the source, record and date read;
 `coords_source` {url, record, read_at}; `epa_lat`/`epa_lon` from `echo_lat`/`echo_lon` when EPA had a point; and it
 removes `coords_problem`, `echo_lat`/`echo_lon` and `no_point_reason`, so a later ties run cannot put EPA's point
-back. It never touches a row whose permit, outfall or EPA text differs from the table (it reports it instead). Then
-`python -m ingest.outfall_waters --state <ST>` re-ties each corrected row's water by its new point (distance, match,
-reach). For the Massachusetts rows, if the owner agrees, the same script (or `ky_outfall_corrections.py`'s pattern)
-sets `outfall_kind` "other" and `kind_note`.
+back. It never touches a row whose permit, outfall or EPA text differs from the table (it reports it instead).
+
+Then each corrected row's water is re-tied by its new point (distance, match, reach). `ingest.outfall_waters` with no
+option re-ties every row of the two regional files (`FILES`: new-england and mid-atlantic, so the CT row), and
+`--state XX` every row of that state in `outfalls-us.json` (the MI, NE and TN rows); both rewrite many rows, so run
+them with `--dry-run` first and keep only the corrected rows' changes, or have the script call the per-row matcher
+(`match_cso_row`) on the corrected rows alone. For the Massachusetts rows, if the owner agrees, the same script (or
+`ky_outfall_corrections.py`'s pattern) sets `outfall_kind` "other" and `kind_note`.
 
 Run it only after the water-batch chain has finished with `data/outfalls-*.json` and `data/waters-*.json`, on a
 branch from the then current main, and with the coordinator's go-ahead.
@@ -204,3 +211,14 @@ New `pipeline/tests/test_cso_coord_corrections.py`:
 
 Then the full suite (`cd pipeline && python -m pytest -q`, reading the count line, not the exit code through a pipe),
 the map and rain checks of one refresh, and the site's outfall pages for the corrected permits.
+
+## Follow-ups noticed (not part of this task)
+
+- **Terminated permits still read as open outfalls.** The open-row test is per outfall status (not CLS), not per
+  permit. In the radar states, 96 open CSO rows with points belong to permits EPA lists as terminated (TRM): Michigan
+  52 rows on 18 permits (26 of them at whole-minute placeholder points such as 42.333333, -83.333333: the 1997-2001
+  Wayne County community CSO permits MI0051501, MI0051543, MI0051551, MI0051560, MI0051802 ...), Pennsylvania 30 on 7,
+  New York 13 on 3, California 1. Some of these outfalls continue under a successor permit (then the row is a
+  duplicate), others were eliminated (then the caution is a false alarm at a placeholder point). Worth one pass that
+  pairs each terminated permit with its successor or a closure record before deciding; the owner's err-on-safety rule
+  argues for keeping a row until a source shows the outfall closed. Counted 2026-11-15 on origin/main 721d13f.

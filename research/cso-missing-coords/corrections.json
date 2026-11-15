@@ -21,7 +21,7 @@
     "source": "EPA ALL_CSO_DOWNLOADS.csv (fetched 2026-11-01) PF_LAT/PF_LON; the same in CT DEEP's NPDES_Outfalls layer (ICIS data pull 20260114), DMS longitude '- 73 32' 25\" 0'",
     "why_not": "41.4 km from Bridgeport Harbor, in the Fivemile River basin (Norwalk-Darien): not this outfall's place (registry coords_problem)"
    },
-   "corroboration": "CT DEEP's CSO reporting archive (CSO_Reporting_Archive_deepgis, layer deepgis.WPLR.CSO_ARCHIVE) holds five operator reports for regulator '145 TIC' (City of Bridgeport WPCA - West Side WPCF; 2017-10-25, 2021-07-08, 2021-07-09, 2021-09-02) whose map points lie at 41.16510 to 41.16590, -73.18037 to -73.18139, within about 150 m of the layer's point (raw/ct-deep-cso-archive-regulator-145.json)",
+   "corroboration": "CT DEEP's CSO reporting archive (CSO_Reporting_Archive_deepgis, layer deepgis.WPLR.CSO_ARCHIVE) holds five operator reports for regulator '145 TIC' (City of Bridgeport WPCA - West Side WPCF; 2017-10-25, 2021-07-08, 2021-07-09, 2021-09-02) whose map points lie at 41.16510 to 41.16590, -73.18037 to -73.18139, within about 150 m of the layer's point (research/cso-missing-coords/evidence/ct-deep-cso-archive-regulator-145.json)",
    "confidence": "high",
    "notes": "Same outfall number (145), operator and receiving water as EPA's row. The layer's street text ('Henry St & St of Atlantic St') differs from EPA's ('Henry Street and Main Street'); the number, the CSO name and the water agree, so it is read as the same outfall. The layer is the state's own list of CSO outfalls for the reporting the law requires (CGS 22a-424a). Keep source precision (registry outfalls are not rounded)."
   }
