@@ -25,7 +25,7 @@ level: "state"
 # Cannot fill: a lift time, except where a notice says the beaches are fit; coordinates (station table has none;
 #   BEACON or WQX may); volume
 # Waters: 36 to 38 coastal beaches (stations RW-1 to RW-39)
-# History: 2019-10-11 to date (278 posts)
+# History: 2019-10-11 to date (278 posts on 2026-11-04, 280 on 2026-11-14)
 # Research notes: Lists only the beaches that fail; all others are implied as passing, which the
 #   site must not show as clean. Station ids are not always consistent (2026-10-16 lists Playa
 #   Cabullón as RW-30; the station table has Cabullón as RW-34 and Guayanés as RW-30): key on name
@@ -38,7 +38,7 @@ role: "advisories"
 event_types: ["beach_advisory"]
 states: ["PR"]
 access: ["api", "html", "pdf"]
-access_detail: "GET https://www.drna.pr.gov/wp-json/wp/v2/posts?categories=1424&per_page=100&_fields=id,date,modified,title,link,content (no auth; X-WP-Total 278). content.rendered holds the sampling dates and an HTML table Estación | Nombre de la Playa | Municipio of beaches that exceed the BAV; a PDF copy and the station table PDF (https://www.drna.pr.gov/wp-content/uploads/2020/06/Tabla-playas.pdf) are linked. Sample: research/pr/raw/drna-beach-posts.json."
+access_detail: "GET https://www.drna.pr.gov/wp-json/wp/v2/posts?categories=1424&per_page=100&_fields=id,date,modified,title,link,content (no auth; X-WP-Total 278 on 2026-11-04, 280 on 2026-11-14). content.rendered holds the sampling dates and an HTML table Estación | Nombre de la Playa | Municipio of beaches that exceed the BAV; a PDF copy and the station table PDF (https://www.drna.pr.gov/wp-content/uploads/2020/06/Tabla-playas.pdf) are linked. Sample: research/pr/raw/drna-beach-posts.json."
 machine_readable: true
 legal_basis: "BEACH Act (33 USC 1346) grant program"
 checked: "2026-11-14"
