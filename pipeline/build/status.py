@@ -2845,6 +2845,11 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             # while it is open (review 2026-11-07 P2-2); keyed on the record's flag, so other feeds are unchanged
             notice_end = (parse_time(raw.get("_notice_closed_at")) or end
                           or parse_time(raw.get("_last_seen_in_source")))
+            if raw.get("_open_notice_caution_hours") and not raw.get("_notice_closed_at") and end is None \
+                    and notice_end is not None:
+                # a notice still listed at its last read (DNREC's resampling label, ingest/de_dnrec_recwater.py): no
+                # closure was observed, so the caution holds its hours past that read; keyed on the record's field
+                notice_end = notice_end + timedelta(hours=float(raw["_open_notice_caution_hours"]))
             if notice_end is not None and notice_end > until:
                 until = notice_end
         iv = _iv(ev, start, until, "sample_caution", None, yellow)
@@ -2920,6 +2925,24 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                     out.append(note)
             return earlier_periods + out
 
+        if st == "advisory_active" and end is not None and end_precision(ev) == "poll" \
+                and (ev.get("raw") or {}).get("_ages_after_confirmation") is True:
+            # an operator's advice confirmed only by its own publications whose withdrawal was seen at a poll
+            # (Florence, ingest/sc_florence_sso.py): the withdrawal is not a confirmation of the time between, so the
+            # colour stops CONFIRM_DAYS after the last confirmation however late the withdrawal is seen (verify
+            # P1-3); keyed on the record's flag, so no other feed changes
+            listed = pt((ev.get("raw") or {}).get("_last_seen_in_source"))
+            confirmed = max(start, listed) if listed else start
+            cap = confirmed + timedelta(days=CONFIRM_DAYS)
+            out = [_iv(ev, start, min(end, cap), rule, red, yellow)]
+            out[0]["confirmed"] = iso(confirmed)
+            if end > cap:
+                note = _iv(ev, cap, min(end, max(cap, start + timedelta(days=NOTE_DAYS))), "not_reconfirmed", red,
+                           yellow)
+                note["confirmed"] = iso(confirmed)
+                if note["end"] > note["start"]:
+                    out.append(note)
+            return out
         if st == "advisory_active":
             if end is not None:                       # an explicit end is the source's word
                 return [_iv(ev, start, end, rule, red, yellow)]
@@ -2963,7 +2986,10 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                         out.append(note)
                     return out
                 return [iv]
-            if et in AGING_TYPES or system_wide_advisory(ev):
+            if et in AGING_TYPES or system_wide_advisory(ev) \
+                    or (ev.get("raw") or {}).get("_ages_after_confirmation") is True:
+                # raw._ages_after_confirmation: an operator's advice confirmed only by its own publications (Florence,
+                # ingest/sc_florence_sso.py advice_record); keyed on the record's flag, so no other feed changes
                 confirmed = max(t for t in (start, pt(ev.get("source_updated_at")), listed) if t)
                 # a system-wide advisory read every hour (MSD-01) ages out SYSTEM_WIDE_CONFIRM_HOURS after the last
                 # read that showed it, so a page the feed can no longer read never keeps it red (review 2026-11-08 P3-7)
@@ -3333,6 +3359,13 @@ def advisory_on_river(ev: dict, w: dict, stretched: bool = False) -> bool:
 
 RIVER_POINT_WHY = ("the advisory is on a river or stream and names no stretch to draw: it is shown at its point, and "
                    "the river is not coloured whole")
+
+
+def point_extent_only(ev: dict) -> bool:
+    """A record whose authority delineates a part of a water (DES's bloom coves, ingest/sc_des_advisories.py): shown
+    at its point and listed on the water's page, never colouring the whole water whatever the water's area; keyed on
+    the record's raw._point_extent_only, so no other feed changes (re-review P2-3)."""
+    return (ev.get("raw") or {}).get("_point_extent_only") is True
 
 
 def colours_whole_water(w: dict) -> bool:
@@ -3913,11 +3946,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             if not live:
                 continue
             on_river = advisory_on_river(ev, waters[slug], traced)
-            if on_river or (ev.get("event_type") in POINT_ADVISORY_TYPES and not colours_whole_water(waters[slug])):
+            pt_only = point_extent_only(ev)
+            if on_river or pt_only or (ev.get("event_type") in POINT_ADVISORY_TYPES
+                                       and not colours_whole_water(waters[slug])):
                 point_on.append(slug)
                 if on_river:
                     river_point.append(slug)
-                if on_river or not names_its_water(ev):
+                if on_river or pt_only or not names_its_water(ev):
                     continue                   # a station's advisory, or any advisory on a river: its marker only
             if slug in carried:
                 continue                       # a reach carries it (below)

@@ -49,37 +49,45 @@ CSO = (" Wilmington's combined sewer overflows are permitted discharges, exempt 
 RESEARCH_ROWS = {
     "de-de0020320": ([], "cso", "city", "City of Wilmington",
                      "City of Wilmington (Wilmington Regional Wastewater Treatment Plant and combined sewer system)"),
-    "de-new-castle-county": (["DE0021539", "DE0021555", "DE0050547", "DE0051071"], "sso", "county", "New Castle County",
+    "de-new-castle-county": (["DE0050547", "DE0051071"], "sso", "county", "New Castle County",
                              "New Castle County Department of Public Works (sewer)"),
     "de-kent-county": ([], "plant", "county", "Kent County", "Kent County Levy Court, Wastewater (Kent County "
                        "Regional Resource Recovery Facility)"),
     "de-city-of-dover": ([], "sso", "city", "City of Dover", "City of Dover Public Works (collection system)"),
-    "de-sussex-county": (["DE0050008"], "plant", "county", "Sussex County",
+    "de-sussex-county": ([], "sso", "county", "Sussex County",
                          "Sussex County Engineering, Environmental Services (wastewater)"),
     "de-millsboro": ([], "sso", "town", "Town of Millsboro", "Town of Millsboro (wastewater)"),
 }
-# EPA plant permit -> (row id, name, legal_form, town, note)
+# EPA plant permit -> (row id, name, legal_form, town, note). An owner is named only where EPA's permittee field names
+# it (DE0020338 "KENT COUNTY ...", DE0050547 "... - NCC", DE0051071 "NEW CASTLE COUNTY-DELDOT MS4"); every other
+# Delaware POTW permit carries the plant's name as permittee, so its row is the permit's and names no owner, and it is
+# left out of operator counts (re-review P2-5: never an owner inferred from a plant's town)
+UNVERIFIED = ("EPA records the plant's name as the permittee; the owner was not verified against the permit, so the "
+              "row is the permit's and names no owner.")
 PLANTS = {
-    "DE0020010": ("de-de0020010", "Town of Selbyville (Selbyville Wastewater Treatment Facility)", "town", "Selbyville", None),
-    "DE0020028": ("de-de0020028", "City of Rehoboth Beach (Rehoboth Beach Wastewater Treatment Plant)", "city",
-                  "Rehoboth Beach", None),
-    "DE0020125": ("de-de0020125", "Town of Laurel (Laurel Sewage Treatment Plant)", "town", "Laurel", None),
-    "DE0020265": ("de-de0020265", "City of Seaford (Seaford Wastewater Treatment Plant)", "city", "Seaford", None),
-    "DE0021491": ("de-town-of-milton", "Town of Milton (Milton Water Reclamation Facility)", "town", "Milton",
-                  "Tidewater Environmental Services operates the Milton plant under contract with the Town "
-                  "(not verified against the permit)."),
+    "DE0020010": ("de-de0020010", "Selbyville Wastewater Treatment Facility (permittee not recorded by EPA)", None,
+                  "Selbyville", UNVERIFIED),
+    "DE0020028": ("de-de0020028", "Rehoboth Beach Wastewater Treatment Plant (permittee not recorded by EPA)", None,
+                  "Rehoboth Beach", UNVERIFIED),
+    "DE0020125": ("de-de0020125", "Laurel Sewage Treatment Plant (permittee not recorded by EPA)", None, "Laurel",
+                  UNVERIFIED),
+    "DE0020265": ("de-de0020265", "Seaford Wastewater Treatment Plant (permittee not recorded by EPA)", None, "Seaford",
+                  UNVERIFIED),
+    "DE0021491": ("de-de0021491", "Milton Water Reclamation Facility (permittee not recorded by EPA)", None, "Milton",
+                  UNVERIFIED),
     "DE0021512": ("de-de0021512", "Howard Seymour Water Reclamation Plant, Lewes (permittee not recorded by EPA)", None,
-                  "Lewes", "EPA records the plant's name as the permittee; the owner was not verified against the "
-                  "permit, so the row is the permit's and names no owner."),
-    "DE0050008": ("de-sussex-county", None, "county", "Frankford", "Sussex County's South Coastal Regional Wastewater "
-                  "Facility."),
-    "DE0020338": ("de-kent-county", None, "county", "Milford", "The Kent County Regional Resource Recovery Facility."),
-    "DE0021539": ("de-new-castle-county", None, "county", "Port Penn", "Port Penn Wastewater Treatment Plant."),
-    "DE0021555": ("de-new-castle-county", None, "county", "Delaware City", "Delaware City Wastewater Treatment Plant "
-                  "(EPA records New Castle)."),
+                  "Lewes", UNVERIFIED),
+    "DE0050008": ("de-de0050008", "South Coastal Regional Wastewater Facility (permittee not recorded by EPA)", None,
+                  "Frankford", UNVERIFIED),
+    "DE0021539": ("de-de0021539", "Port Penn Wastewater Treatment Plant (permittee not recorded by EPA)", None,
+                  "Port Penn", UNVERIFIED),
+    "DE0021555": ("de-de0021555", "Delaware City Wastewater Treatment Plant (permittee not recorded by EPA)", None,
+                  "Delaware City", UNVERIFIED),
+    "DE0020338": ("de-kent-county", None, "county", "Milford", "The Kent County Regional Resource Recovery Facility "
+                  "(EPA's permittee: 'KENT COUNTY WASTEWATER TREATMENT FACILITY')."),
     "DE0050547": ("de-new-castle-county", None, "county", "Middletown",
-                  "The MOT (Middletown-Odessa-Townsend) Wastewater Treatment Plant, New Castle County's (EPA's permit "
-                  "name: 'MOT Wastewater Treatment Plant - NCC')."),
+                  "The MOT (Middletown-Odessa-Townsend) Wastewater Treatment Plant, New Castle County's (EPA's permittee: "
+                  "'MOT Wastewater Treatment Plant - NCC')."),
     "DE0051071": ("de-new-castle-county", None, "county", "New Castle",
                   "DE0051071 is New Castle County's and DelDOT's municipal separate storm sewer permit (MS4): a storm "
                   "sewer, not sewage; its EPA row is kind other in data/outfalls-de.json."),

@@ -77,30 +77,6 @@
   },
   {
    "state": "SC",
-   "operator_id": "sc-american-house-spinning",
-   "agency": null,
-   "permit": "SCG570001",
-   "checked": "2026-11-14",
-   "id": "sc-american-house-spinning-public-notice",
-   "name": "American House Spinning, Inc.",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Public notice",
-   "sources": [
-    "sc-law-48-1-95"
-   ],
-   "note": "American House Spinning, Inc. must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
-   "barrier": "not_verified"
-  },
-  {
-   "state": "SC",
    "operator_id": "sc-anderson-county",
    "agency": null,
    "permit": "SC0040193",
@@ -416,30 +392,6 @@
     "sc-law-48-1-95"
    ],
    "note": "City of Anderson must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
-   "barrier": "not_verified"
-  },
-  {
-   "state": "SC",
-   "operator_id": "sc-city-of-lancaster",
-   "agency": null,
-   "permit": "SC0046892",
-   "checked": "2026-11-14",
-   "id": "sc-city-of-lancaster-public-notice",
-   "name": "City of Lancaster",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Public notice",
-   "sources": [
-    "sc-law-48-1-95"
-   ],
-   "note": "City of Lancaster must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   },
   {
@@ -1160,30 +1112,6 @@
   },
   {
    "state": "SC",
-   "operator_id": "sc-holly-hill",
-   "agency": null,
-   "permit": "SC0049366",
-   "checked": "2026-11-14",
-   "id": "sc-holly-hill-public-notice",
-   "name": "Town of Holly Hill",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Public notice",
-   "sources": [
-    "sc-law-48-1-95"
-   ],
-   "note": "Town of Holly Hill must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
-   "barrier": "not_verified"
-  },
-  {
-   "state": "SC",
    "operator_id": "sc-isle-of-palms-wsc",
    "agency": null,
    "permit": "SC0025283",
@@ -1450,7 +1378,7 @@
    "state": "SC",
    "operator_id": "sc-lexington",
    "agency": null,
-   "permit": "SC0026735",
+   "permit": "SC0027162",
    "checked": "2026-11-14",
    "id": "sc-lexington-public-notice",
    "name": "Town of Lexington",
@@ -1568,30 +1496,6 @@
   },
   {
    "state": "SC",
-   "operator_id": "sc-newberry-county-wsa",
-   "agency": null,
-   "permit": "SC0048313",
-   "checked": "2026-11-14",
-   "id": "sc-newberry-county-wsa-public-notice",
-   "name": "Newberry County Water and Sewer Authority",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Public notice",
-   "sources": [
-    "sc-law-48-1-95"
-   ],
-   "note": "Newberry County Water and Sewer Authority must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
-   "barrier": "not_verified"
-  },
-  {
-   "state": "SC",
    "operator_id": "sc-ninety-six-cpw",
    "agency": null,
    "permit": "SC0036048",
@@ -1664,30 +1568,6 @@
   },
   {
    "state": "SC",
-   "operator_id": "sc-norway",
-   "agency": null,
-   "permit": "SC0045993",
-   "checked": "2026-11-14",
-   "id": "sc-norway-public-notice",
-   "name": "Town of Norway",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Public notice",
-   "sources": [
-    "sc-law-48-1-95"
-   ],
-   "note": "Town of Norway must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
-   "barrier": "not_verified"
-  },
-  {
-   "state": "SC",
    "operator_id": "sc-ojrsa",
    "agency": null,
    "permit": "SC0033553",
@@ -1708,30 +1588,6 @@
     "sc-law-48-1-95"
    ],
    "note": "Oconee Joint Regional Sewer Authority must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
-   "barrier": "not_verified"
-  },
-  {
-   "state": "SC",
-   "operator_id": "sc-orangeburg-county-wsa",
-   "agency": null,
-   "permit": "SC0049363",
-   "checked": "2026-11-14",
-   "id": "sc-orangeburg-county-wsa-public-notice",
-   "name": "Orangeburg County Water and Sewer Authority",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Public notice",
-   "sources": [
-    "sc-law-48-1-95"
-   ],
-   "note": "Orangeburg County Water and Sewer Authority must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   },
   {
@@ -1762,7 +1618,7 @@
    "state": "SC",
    "operator_id": "sc-pageland",
    "agency": null,
-   "permit": "SC0021504",
+   "permit": "SC0021539",
    "checked": "2026-11-14",
    "id": "sc-pageland-public-notice",
    "name": "Town of Pageland",
@@ -1804,30 +1660,6 @@
     "sc-law-48-1-95"
    ],
    "note": "Palmetto Utilities, Inc. (South Carolina Water Utilities; Spears Creek plant) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
-   "barrier": "not_verified"
-  },
-  {
-   "state": "SC",
-   "operator_id": "sc-pendleton-clemson-regional",
-   "agency": null,
-   "permit": "SC0035700",
-   "checked": "2026-11-14",
-   "id": "sc-pendleton-clemson-regional-public-notice",
-   "name": "Pendleton-Clemson Regional Wastewater Treatment Facility (owner not recorded by EPA)",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Public notice",
-   "sources": [
-    "sc-law-48-1-95"
-   ],
-   "note": "Pendleton-Clemson Regional Wastewater Treatment Facility (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   },
   {
@@ -2264,6 +2096,30 @@
   },
   {
    "state": "SC",
+   "operator_id": "sc-sc0021504",
+   "agency": null,
+   "permit": "SC0021504",
+   "checked": "2026-11-14",
+   "id": "sc-sc0021504-public-notice",
+   "name": "Pageland Northwest WWTF (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Pageland Northwest WWTF (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
    "operator_id": "sc-sc0021580",
    "agency": null,
    "permit": "SC0021580",
@@ -2404,6 +2260,54 @@
     "sc-law-48-1-95"
    ],
    "note": "Town of Ridgeway must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-sc0023272",
+   "agency": null,
+   "permit": "SC0023272",
+   "checked": "2026-11-14",
+   "id": "sc-sc0023272-public-notice",
+   "name": "Springfield WWTP #1 (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Springfield WWTP #1 (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-sc0023281",
+   "agency": null,
+   "permit": "SC0023281",
+   "checked": "2026-11-14",
+   "id": "sc-sc0023281-public-notice",
+   "name": "Springfield WWTP #2 (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Springfield WWTP #2 (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   },
   {
@@ -2552,6 +2456,30 @@
   },
   {
    "state": "SC",
+   "operator_id": "sc-sc0025194",
+   "agency": null,
+   "permit": "SC0025194",
+   "checked": "2026-11-14",
+   "id": "sc-sc0025194-public-notice",
+   "name": "West Pelzer WWTF (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "West Pelzer WWTF (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
    "operator_id": "sc-sc0025402",
    "agency": null,
    "permit": "SC0025402",
@@ -2596,6 +2524,30 @@
     "sc-law-48-1-95"
    ],
    "note": "Town of Calhoun Falls must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-sc0025763",
+   "agency": null,
+   "permit": "SC0025763",
+   "checked": "2026-11-14",
+   "id": "sc-sc0025763-public-notice",
+   "name": "City of Chesnee",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "City of Chesnee must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   },
   {
@@ -2696,6 +2648,30 @@
   },
   {
    "state": "SC",
+   "operator_id": "sc-sc0026735",
+   "agency": null,
+   "permit": "SC0026735",
+   "checked": "2026-11-14",
+   "id": "sc-sc0026735-public-notice",
+   "name": "Lexington/Coventry Woods WWTP (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Lexington/Coventry Woods WWTP (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
    "operator_id": "sc-sc0027707",
    "agency": null,
    "permit": "SC0027707",
@@ -2716,6 +2692,30 @@
     "sc-law-48-1-95"
    ],
    "note": "City of Sumter must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-sc0028801",
+   "agency": null,
+   "permit": "SC0028801",
+   "checked": "2026-11-14",
+   "id": "sc-sc0028801-public-notice",
+   "name": "St Matthews South Plant (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "St Matthews South Plant (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   },
   {
@@ -2840,6 +2840,30 @@
   },
   {
    "state": "SC",
+   "operator_id": "sc-sc0035700",
+   "agency": null,
+   "permit": "SC0035700",
+   "checked": "2026-11-14",
+   "id": "sc-sc0035700-public-notice",
+   "name": "Pendleton-Clemson Reg WWTF (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Pendleton-Clemson Reg WWTF (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
    "operator_id": "sc-sc0038156",
    "agency": null,
    "permit": "SC0038156",
@@ -2884,6 +2908,30 @@
     "sc-law-48-1-95"
    ],
    "note": "Town of Harleyville must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-sc0038822",
+   "agency": null,
+   "permit": "SC0038822",
+   "checked": "2026-11-14",
+   "id": "sc-sc0038822-public-notice",
+   "name": "Dorchester Co Lower Dorchester WWTP (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Dorchester Co Lower Dorchester WWTP (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   },
   {
@@ -3296,6 +3344,30 @@
   },
   {
    "state": "SC",
+   "operator_id": "sc-sc0045993",
+   "agency": null,
+   "permit": "SC0045993",
+   "checked": "2026-11-14",
+   "id": "sc-sc0045993-public-notice",
+   "name": "Norway Town of (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Norway Town of (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
    "operator_id": "sc-sc0046311",
    "agency": null,
    "permit": "SC0046311",
@@ -3364,6 +3436,30 @@
     "sc-law-48-1-95"
    ],
    "note": "Town of Pinewood must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-sc0046892",
+   "agency": null,
+   "permit": "SC0046892",
+   "checked": "2026-11-14",
+   "id": "sc-sc0046892-public-notice",
+   "name": "Lancaster Catawba River (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Lancaster Catawba River (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   },
   {
@@ -3464,6 +3560,54 @@
   },
   {
    "state": "SC",
+   "operator_id": "sc-sc0048313",
+   "agency": null,
+   "permit": "SC0048313",
+   "checked": "2026-11-14",
+   "id": "sc-sc0048313-public-notice",
+   "name": "Ncw&Sa Cannons Creek WWTP (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Ncw&Sa Cannons Creek WWTP (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-sc0048526",
+   "agency": null,
+   "permit": "SC0048526",
+   "checked": "2026-11-14",
+   "id": "sc-sc0048526-public-notice",
+   "name": "Hilton Head PSD Reverse Osmosis Wtp (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Hilton Head PSD Reverse Osmosis Wtp (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
    "operator_id": "sc-sc0049158",
    "agency": null,
    "permit": "SC0049158",
@@ -3512,6 +3656,102 @@
   },
   {
    "state": "SC",
+   "operator_id": "sc-sc0049361",
+   "agency": null,
+   "permit": "SC0049361",
+   "checked": "2026-11-14",
+   "id": "sc-sc0049361-public-notice",
+   "name": "Dorchester Co Central Dorchester WWTP (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Dorchester Co Central Dorchester WWTP (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-sc0049363",
+   "agency": null,
+   "permit": "SC0049363",
+   "checked": "2026-11-14",
+   "id": "sc-sc0049363-public-notice",
+   "name": "Orangeburg County Water and Sewer Authority (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Orangeburg County Water and Sewer Authority (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-sc0049366",
+   "agency": null,
+   "permit": "SC0049366",
+   "checked": "2026-11-14",
+   "id": "sc-sc0049366-public-notice",
+   "name": "Town of Holly Hill (New) WWTP (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Town of Holly Hill (New) WWTP (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-sc0049372",
+   "agency": null,
+   "permit": "SC0049372",
+   "checked": "2026-11-14",
+   "id": "sc-sc0049372-public-notice",
+   "name": "Gsw&Sa Bucksport WWTP (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Gsw&Sa Bucksport WWTP (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
    "operator_id": "sc-sc0049374",
    "agency": null,
    "permit": "SC0049374",
@@ -3536,6 +3776,54 @@
   },
   {
    "state": "SC",
+   "operator_id": "sc-scg570001",
+   "agency": null,
+   "permit": "SCG570001",
+   "checked": "2026-11-14",
+   "id": "sc-scg570001-public-notice",
+   "name": "American House Spinning Inc (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "American House Spinning Inc (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-scg570036",
+   "agency": null,
+   "permit": "SCG570036",
+   "checked": "2026-11-14",
+   "id": "sc-scg570036-public-notice",
+   "name": "Yc Holdings, Inc. (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Yc Holdings, Inc. (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
    "operator_id": "sc-scg570037",
    "agency": null,
    "permit": "SCG570037",
@@ -3556,6 +3844,30 @@
     "sc-law-48-1-95"
    ],
    "note": "Privately owned plant at Walterboro (permittee not named) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
+   "barrier": "not_verified"
+  },
+  {
+   "state": "SC",
+   "operator_id": "sc-scg570048",
+   "agency": null,
+   "permit": "SCG570048",
+   "checked": "2026-11-14",
+   "id": "sc-scg570048-public-notice",
+   "name": "Sssd Pacolet Mills WWTP (owner not recorded by EPA)",
+   "channel_kind": "operator_page",
+   "urls": [],
+   "method": null,
+   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "other",
+   "publishes": "unknown",
+   "records": false,
+   "noun": "Public notice",
+   "sources": [
+    "sc-law-48-1-95"
+   ],
+   "note": "Sssd Pacolet Mills WWTP (owner not recorded by EPA) must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   },
   {
@@ -3634,7 +3946,7 @@
    "state": "SC",
    "operator_id": "sc-springfield",
    "agency": null,
-   "permit": "SC0023272",
+   "permit": "SCG570039",
    "checked": "2026-11-14",
    "id": "sc-springfield-public-notice",
    "name": "Town of Springfield",
@@ -3676,30 +3988,6 @@
     "sc-law-48-1-95"
    ],
    "note": "S&S Washerette must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
-   "barrier": "not_verified"
-  },
-  {
-   "state": "SC",
-   "operator_id": "sc-st-matthews",
-   "agency": null,
-   "permit": "SC0028801",
-   "checked": "2026-11-14",
-   "id": "sc-st-matthews-public-notice",
-   "name": "Town of St. Matthews",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Public notice",
-   "sources": [
-    "sc-law-48-1-95"
-   ],
-   "note": "Town of St. Matthews must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   },
   {
@@ -3872,30 +4160,6 @@
   },
   {
    "state": "SC",
-   "operator_id": "sc-west-pelzer",
-   "agency": null,
-   "permit": "SC0025194",
-   "checked": "2026-11-14",
-   "id": "sc-west-pelzer-public-notice",
-   "name": "Town of West Pelzer",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Public notice",
-   "sources": [
-    "sc-law-48-1-95"
-   ],
-   "note": "Town of West Pelzer must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
-   "barrier": "not_verified"
-  },
-  {
-   "state": "SC",
    "operator_id": "sc-whitmire",
    "agency": null,
    "permit": "SC0022390",
@@ -3964,30 +4228,6 @@
     "sc-law-48-1-95"
    ],
    "note": "Woodruff-Roebuck Water District must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
-   "barrier": "not_verified"
-  },
-  {
-   "state": "SC",
-   "operator_id": "sc-yc-holdings",
-   "agency": null,
-   "permit": "SCG570036",
-   "checked": "2026-11-14",
-   "id": "sc-yc-holdings-public-notice",
-   "name": "YC Holdings, Inc.",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": "S.C. Code 48-1-95(E): \"The department shall require that all wastewater utilities provide public notice of any significant spill of five thousand gallons or more within twenty-four hours of the discovery\"; DES gives the notice when the utility does not; no channel is named",
-   "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Public notice",
-   "sources": [
-    "sc-law-48-1-95"
-   ],
-   "note": "YC Holdings, Inc. must give public notice of a spill of 5,000 gallons or more within 24 hours of discovery (48-1-95(E)), through a channel of its choosing. Not searched individually.",
    "barrier": "not_verified"
   }
  ]
