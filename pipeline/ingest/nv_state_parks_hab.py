@@ -20,8 +20,10 @@ Record rules
     read. A water the page no longer lists, on a read that found all three sections, is advisory_lifted with ended_at
     that read (raw.ended_at_precision poll, raw._unlisted_since): the first read that saw it gone, an upper bound, not
     the agency's lift time. A water listed again later opens a new record (its key carries the first read's day).
-  - A page on which any of the three sections cannot be found writes ok=False and the previous records stay: a
-    template change or a failed request never lifts an advisory. A section reading "None at this time." lists no
+  - A page on which any of the three sections cannot be found, or a section that is not completely readable (a bold
+    heading or an "Updated" date the reader cannot take, text before the first heading, "None at this time" beside a
+    listed water), writes ok=False and the previous records stay: a template change, one changed date format or a
+    failed request never lifts an advisory. A section reading "None at this time." lists no
     water at that level; it says nothing of waters outside the state parks.
   - Water: the paragraph's own words name it ("Lahontan Reservoir, located in ..."), else the heading. WATERS gives
     each known water its county (for the county-aware name placement and raw.placement_hint) and, where the U.S.
@@ -116,6 +118,15 @@ def parse(page: str) -> tuple[list[dict], str]:
         heads = list(HEADING.finditer(body))
         if not heads and not NONE.search(text_of(body)):
             raise ValueError(f"the {lv} section lists no water and does not say 'None at this time'")
+        # a complete reading or none (Astra P1-1): every bold heading and every "Updated" date of the section must be
+        # a heading read, nothing but the level's picture may stand before the first one, and "None at this time"
+        # never stands beside a listed water; else one unreadable heading would lift its water's advisory
+        bold = len(re.findall(r"<strong\b", body, re.I))
+        dated = len(re.findall(r"\bUpdated\b", text_of(body), re.I))
+        lead = text_of(body[:heads[0].start()]) if heads else ""
+        if bold != len(heads) or dated != len(heads) or lead or (heads and NONE.search(text_of(body))):
+            raise ValueError(f"the {lv} section is not completely readable: {len(heads)} heading(s) read of "
+                             f"{max(bold, dated)} on the page")
         for i, h in enumerate(heads):
             seg = body[h.end(): heads[i + 1].start() if i + 1 < len(heads) else len(body)]
             seg = re.split(r"</div>", seg)[0]
