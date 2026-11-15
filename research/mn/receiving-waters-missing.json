@@ -1,0 +1,74 @@
+{
+ "about": "Receiving-water names in Minnesota's records (the Metropolitan Council's spill notices, read 2026-11-14; EPA's overflow tables for Minnesota permits, the extract of 2026-11-12) that data/receiving-waters-national.json does not hold for MN, by name as typed, with the county, the number of reports and the points where the reports give them. Resource Renew (WLSSD) releases name no water and are placed by their own points; notices saying no water was reached, and waters a notice names only as nearby or tested and found unaffected (Bassett Creek, Wirth Lake), are left out.",
+ "state": "MN",
+ "left_out": [
+  {
+   "name": "Bassett Creek",
+   "reports": 1,
+   "reason": "named only as nearby and tested by the Council, which found it unaffected (2026-07-16 notice); on the national list already"
+  },
+  {
+   "name": "Wirth Lake",
+   "reports": 1,
+   "reason": "named only as nearby"
+  }
+ ],
+ "waters": 2,
+ "reports": 2,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in MN": 1,
+  "the name of a town (Pike Bay), not of a water: no NHD water of that name in MN": 1
+ },
+ "build": {
+  "date": "2026-11-15",
+  "command": "python -m ingest.waters_from_nhd --names research/mn/receiving-waters-missing.json --state MN",
+  "records_built": 0,
+  "names_resolved": 0,
+  "network_requests": 0
+ },
+ "rows": [
+  {
+   "name": "Mud Pond",
+   "reports": 1,
+   "county": "Hennepin County",
+   "towns": [
+    "Excelsior"
+   ],
+   "points": [],
+   "sources": {
+    "mn-mces-spill-notices": 1
+   },
+   "as_typed": [
+    "Mud Pond"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in MN; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
+  },
+  {
+   "name": "Pike Bay",
+   "reports": 1,
+   "county": "St. Louis County",
+   "towns": [
+    "Tower"
+   ],
+   "points": [
+    [
+     47.821,
+     -92.329
+    ]
+   ],
+   "sources": {
+    "echo-sewer-overflow": 1
+   },
+   "permits": [
+    "MN0061310"
+   ],
+   "as_typed": [
+    "Pike Bay Lake Vermilion Tower Minnesota"
+   ],
+   "aliases_suggested": [
+    "Lake Vermilion"
+   ],
+   "reason": "the name of a town (Pike Bay), not of a water: no NHD water of that name in MN"
+  }
+ ]
+}

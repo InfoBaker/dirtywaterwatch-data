@@ -1,0 +1,444 @@
+{
+ "about": "Water names in Louisiana's records that data/receiving-waters-national.json does not hold for LA: Baton Rouge's consent-decree quarterly reports (the receiving water of each discharge, Reports 93 to 98 that pass the layout check, read 2026-11-14), with the number of records giving each and the parish.",
+ "state": "LA",
+ "waters": 29,
+ "reports": 84,
+ "rows": [
+  {
+   "name": "Dawson Creek",
+   "reports": 11,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Jones Creek",
+   "reports": 8,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Weiner Creek",
+   "reports": 8,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Bayou Fountain",
+   "reports": 7,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Claycut Bayou",
+   "reports": 5,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Lively Bayou",
+   "reports": 5,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Bayou Manchac",
+   "reports": 3,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Beaver Bayou",
+   "reports": 3,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036439"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Clay Cut Bayou",
+   "reports": 3,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Corporation Canal",
+   "reports": 3,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Knox Branch",
+   "reports": 3,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Bayou Duplantier",
+   "reports": 2,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Comite River",
+   "reports": 2,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412",
+    "LA0036439"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Harelson Lateral",
+   "reports": 2,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Jacks Bayou",
+   "reports": 2,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Melrose Canal",
+   "reports": 2,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Roberts Canal",
+   "reports": 2,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036439"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Selene Bayou",
+   "reports": 2,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Arlington Creek",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Beechwood Lateral",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036439"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Blackwater Bayou",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036439"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Bocage Canal",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Draughan Creek",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036439"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Honey Cut Bayou",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Jones Bayou",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036439"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Manchac Bayou",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036412"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Saunders Bayou",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036439"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "Shoe Creek",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036439"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  },
+  {
+   "name": "White Bayou",
+   "reports": 1,
+   "counties": [
+    "East Baton Rouge Parish"
+   ],
+   "points": [],
+   "permits": [
+    "LA0036439"
+   ],
+   "sources": [
+    "la-baton-rouge-quarterly"
+   ],
+   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+  }
+ ]
+}

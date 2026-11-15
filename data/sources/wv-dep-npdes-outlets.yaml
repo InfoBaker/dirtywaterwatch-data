@@ -1,0 +1,28 @@
+id: "wv-dep-npdes-outlets"
+name: "WV DEP NPDES Outlets layer (CSO outlets, iut_code CSO)"
+url: "https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24"
+homepage: "https://dep.wv.gov/Data/Pages/default.aspx"
+kind: "arcgis"
+level: "state"
+# Notes (research/wv, status used, verified fetched, checked 2026-11-14): DEP's own outlet points,
+#   streams, counties and outlet dates for every combined sewer outlet: data/outfalls-wv.json
+#   (scripts/build_wv_outfalls.py), each paired with EPA's inventory row; 16 open-or-closed
+#   differences with EPA, DEP followed.
+# Access detail (research, quoted): Queried 2026-11-14 for iut_code 'CSO' with a safe-field list
+#   (never outFields=*): 792 CSO outlets on 62 permits, 519 with no end date (iu_edate 'NA') on 61
+#   permits; all with lat/long; DEP's receiving stream on most. The layer's other outlet types
+#   include home aeration units permitted to individuals, and rp_name/rp_id name responsible
+#   parties: never requested.
+# Can fill: coordinates, waterbody
+cadence: null
+license: "none stated"
+attribution: "West Virginia Department of Environmental Protection"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["WV"]
+access: ["arcgis"]
+access_detail: "Queried 2026-11-14 for iut_code 'CSO' with a safe-field list (never outFields=*): 792 CSO outlets on 62 permits, 519 with no end date (iu_edate 'NA') on 61 permits; all with lat/long; DEP's receiving stream on most. The layer's other outlet types include home aeration units permitted to individuals, and rp_name/rp_id name responsible parties: never requested."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"

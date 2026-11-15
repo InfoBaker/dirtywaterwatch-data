@@ -120,6 +120,56 @@
 #                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
 #                  (Clyde's yearly CSO report tables), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
 #                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
+#                  Minnesota: mn_mces_spill_notices (the Metropolitan Council's spill pages: the day it responded, its signs as
+#                  its window), the generic ArcGIS block mn-wlssd-overflows (Resource Renew's overflow points; ingest/mn_transforms.py)
+#                  and echo_sewer_overflow_events (EPA's overflow tables, MN permits: the Bois Forte report)
+#                  North Dakota: nd_deq_hab_listings (DEQ's bloom advisories and warnings PDF) and nd_deq_eir_legacy (DEQ's
+#                  incident archive 1975-2020, the sewage rows, re-read every 30 days); HazConnect is a bot wall (register)
+#                  Missouri: mo_kc_water_news (KC Water's overflow news posts through the site search's RSS feed; the
+#                  first two pages each run, `--backfill` for the 2016- archive), mo_msd_alerts (MSD Project Clear's own
+#                  overflow alerts and releases through its WordPress API; `--backfill` for 2013-) and mo_dnr_concerns
+#                  (DNR's monthly Water Pollution Control concern reports, the sewer overflow concerns with the allegation
+#                  filter; each PDF read once), mo_dnr_hab (DNR's public HAB map layer: the waters it shows with a
+#                  bloom present or closed, standing advisories dated to the reads); data/outfalls-mo.json is DNR's
+#                  outfall layer (scripts/mo_outfall_layer.py)
+#                  Kansas: ks_leavenworth_sso (Leavenworth's Sanitary Sewer Overflow Transparency Reports: the index, the
+#                  last two years' pages and new overflow pages; `--backfill` for 2020-), ks_kdhe_stream_advisories (KDHE's
+#                  news flash feed: stream advisories issued and rescinded; the feed holds about a month) and ks_kdhe_hab
+#                  (KDHE's HAB status layer, lakes under a Hazard, Warning or Watch, dated to the polls); Mountain time in
+#                  Sherman, Wallace, Greeley and Hamilton counties (pipeline/zones.py kansas_zone)
+#                  Arkansas: ar_deq_overflow_incidents (DEQ's Reported Noncompliance Incident Data, an HTML form
+#                  search read by start-day window, each window's count checked: every SSO, bypass, upset and
+#                  unpermitted discharge since 2025, day precision; ingest/ar_transforms.py), the generic JSON block
+#                  ar-deq-hab-advisories (DEQ's bloom advisories with the days posted and lifted) and
+#                  ar_adh_swim_beaches (the Department of Health's closed swim beaches, a standing list)
+#                  Wisconsin: wi_mmsd_storm_updates (the Milwaukee Metropolitan Sewerage District's Storm Update posts:
+#                  the overflows it reports to the DNR, dated by the post, two list pages a run; the DNR publishes none)
+#                  Delaware: de_dnrec_derns (DNREC's DERNS Recent Releases: the sewage and sanitary-wastewater
+#                  releases by rule, a few detail pages a run; state data/build/de-dnrec-derns-state.json) and
+#                  de_dnrec_recwater (DNREC's beach advisory history on data.delaware.gov and the FirstMap stations)
+#                  South Carolina: sc_florence_sso (the City of Florence's sewer overflow notices),
+#                  sc_des_advisories (DES's beach station layer, long-term and short-term advisories, and its bloom
+#                  delineations and watch table, polled; state data/build/sc-des-advisories-state.json)
+#                  Indiana: in_echo_cso_monthly (EPA's discharge monitoring reports: each combined sewer outfall's
+#                  monthly events, hours and million gallons, month precision; a compact weekly cache in data/build,
+#                  at most 120 requests a run), echo_sewer_overflow_events (EPA's overflow tables, IN permits; Eastern or
+#                  Central time by the event's county, data/reference/in-central-time-counties.json) and the generic
+#                  ArcGIS block in-idem-cyanobacteria (IDEM's beach samples with IDEM's advisory level; ingest/
+#                  in_transforms.py); IDEM's outfall layer is data/outfalls-in.json (scripts/build_in_outfalls.py)
+#                  West Virginia: wv_echo_cso_monthly (EPA's monthly DMRs at combined sewer outlets: two permits report flow
+#                  at an outlet; month precision; a weekly cache in data/build) and wv_dep_hab_advisories (DEP's algal bloom
+#                  advisory map, three layers, poll-dated); outlets from DEP's layer (data/outfalls-wv.json, built by hand with
+#                  scripts/build_wv_outfalls.py --fetch)
+#                  Louisiana: la_baton_rouge_quarterly (Baton Rouge's consent-decree quarterly reports, Part D collection-
+#                  system tables read with pypdf; a report used only when its rows match its own summary; each report once)
+#                  Nevada: nv_state_parks_hab (the state parks' HAB Advisory page: Watch, Warning and Danger bloom
+#                  advisories at waters in state parks, from the first read that lists them; no sewage feed exists)
+#                  Oklahoma: ok_nps_chickasaw_bacteria (the National Park Service's E. coli table for Chickasaw
+#                  National Recreation Area: a result over the posted threshold is a sample caution, never an
+#                  advisory; no sewage feed exists)
+#                  Puerto Rico: echo_sewer_overflow_events (EPA's overflow tables, PR permits: PRASA's reports, the only dated record;
+#                  Atlantic Standard Time all year) and pr_drna_beaches (DRNA's weekly beach notices, WordPress JSON: the beaches over the
+#                  enterococci value, one advisory per run of notices; its state file data/build/pr-drna-beach-notices-state.json)
 #                  Colorado: co_cdphe_toxic_algae (CDPHE's toxic algae status sheet: algal-bloom advisories by water)
 #                  and co_official_notices (a reviewed set of official notices: CPW's John Martin advisory after the
 #                  Pueblo spill, NPS's Blue Mesa release, Barr Lake's red alert; the state publishes no spill list)
@@ -135,6 +185,11 @@
 #                  VA, DC)
 #                  (ingest/rainfall.py -> data/build/rainfall.json, rainfall-history.json); feeds the
 #                  "discharge likely; no report received" caution (docs/rain-likely.md)
+#   make rain-history  each combined sewer operator's rain levels ("possible", "likely") from its own dated
+#                  overflow reports against NOAA MRMS daily rain at its outfalls (build/rain_history.py ->
+#                  data/build/rain-levels.json; the seed copy is data/rain-levels.json). make build runs it with
+#                  --if-older-h 20, so the hourly refresh makes it a daily pass; at most 1500 point-service requests
+#                  a run (--budget), the rest continue from the cache on the next run
 #   make rain-thresholds  per-permittee rainfall thresholds from the MassDEP reports
 #                  (build/rain_thresholds.py -> data/build/rain-thresholds.json; run by make build)
 #   make rain-thresholds-radar  Georgia and Michigan operators' amounts from the radar on their discharge days
@@ -170,7 +225,7 @@
 # Until `make setup` has run, the openboatlaunch venv next door is used; `make test` uses it too
 # while pipeline/.venv has no pytest (`make setup` installs it).
 
-.PHONY: setup obl-sync ingest waters-nhd conditions rainfall rain-thresholds rain-thresholds-radar provisional-outfalls reaches fixtures build charts export refresh tally test
+.PHONY: setup obl-sync ingest waters-nhd conditions rainfall rain-history rain-thresholds rain-thresholds-radar provisional-outfalls reaches fixtures build charts export refresh tally test
 
 VENV_PY := $(abspath pipeline/.venv/bin/python)
 OBL_PY := $(abspath ../openboatlaunch/pipeline/.venv/bin/python)
@@ -246,6 +301,9 @@ conditions:
 rainfall:
 	$(PY) -m ingest.rainfall
 
+rain-history:
+	$(PY) -m build.rain_history
+
 rain-thresholds:
 	$(PY) -m build.rain_thresholds
 
@@ -265,6 +323,7 @@ fixtures:
 	$(PY) -m build.fixtures
 
 build: $(if $(filter 1 yes true,$(FIXTURES)),fixtures,)
+	cd pipeline && $(TIMED) rain-history $(PYTHON) -m build.rain_history --if-older-h 20 --budget 200 || echo "!! rain history failed; the previous file stays"
 	cd pipeline && $(TIMED) rain-thresholds $(PYTHON) -m build.rain_thresholds || echo "!! rain thresholds failed; the previous file stays"
 	cd pipeline && $(TIMED) status $(PYTHON) -m build.status $(FIXTURE_FLAG) --live-only
 

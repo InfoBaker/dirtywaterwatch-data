@@ -1,0 +1,27 @@
+id: "sc-des-hab"
+name: "South Carolina DES Harmful Algal Bloom Monitoring: bloom delineations and the watches and advisories table"
+url: "https://services5.arcgis.com/OMDIQXm11z4wcK26/arcgis/rest/services/algal_hydro_2_view/FeatureServer/0"
+homepage: "https://des.sc.gov/programs/bureau-water/aquatic-science/harmful-algal-blooms"
+kind: "arcgis"
+level: "state"
+# Ingester: pipeline/ingest/sc_des_advisories.py (source id sc-des-hab), a polled snapshot, rules only.
+# Read 2026-11-14: 897 delineations, 896 "HAB Not Present" and one "Watch" (J. Strom Thurmond Reservoir, Microcystis,
+#   Date 2026-10-16); the program page's table: Watch, Cedar Point Cove, J. Strom Thurmond, 10/16/2026. One record,
+#   DES's watch, dated by DES, its marker at the centre of the cove DES delineated (never the whole reservoir).
+# Found through the HAB Monitoring Map's web app (4344886507b04e32987fd8b44f8ed7ed) and web map
+#   (1795d065b91f4f659d131e31c2567b98). Fields read: OBJECTID, NAME, Algal_Bloom, Date (midnight Eastern: a date),
+#   Advisory_Tier, Recreational_Guidance, GlobalID, the polygon's centroid; Creator and Editor (staff accounts) never
+#   requested. A record ends at the first poll where neither the layer nor the table lists it.
+cadence: "Updated as DES issues and ends watches and advisories, mostly late spring to early autumn."
+license: "none stated"
+attribution: "South Carolina Department of Environmental Services, Bureau of Water, Harmful Algal Bloom Monitoring"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["SC"]
+registry_ids: ["sc-des-hab"]
+access: ["arcgis", "html"]
+access_detail: "FeatureServer layer 0 query (where Advisory_Tier <> 'HAB Not Present', returnCentroid, outSR 4326), no token; the program page's 'HAB Watches & Advisories' table."
+machine_readable: true
+legal_basis: "Voluntary: DES's harmful algal bloom monitoring; South Carolina has adopted EPA's recreational criteria for microcystin and cylindrospermopsin"
+checked: "2026-11-14"

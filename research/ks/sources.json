@@ -50,7 +50,7 @@
   "access": [
    "arcgis"
   ],
-  "access_detail": "Layer 0 queried 2026-11-03: 16 lakes (8 Warning, 8 Watch), StatusDate 2026-10-30; saved raw/kdhe-hab-status-2026-11-03.json. Polygons in layer 2. Viewer https://maps.kdhe.ks.gov/habkscounty/ ; test results service HAB/HAB_Sample_ALL_norelate.",
+  "access_detail": "Layer 0 (Lake Points Statewide) queried 2026-11-14: 16 points on 15 lakes (8 Warning, 8 Watch), StatusDate 2026-10-30 on every row; no key.",
   "machine_readable": true,
   "sample_record": {
    "STATUS": "Warning",
@@ -81,10 +81,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Clean statewide HAB advisory layer with lake polygons; Hazard/Warning/Watch/Lift classes.",
+  "status": "used",
+  "status_reason": "Read by ingest/ks_kdhe_hab.py: lakes under a Hazard, Warning or Watch, dated to the polls that list them.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -116,9 +116,9 @@
   "license": null,
   "legal_basis": null,
   "status": "unreachable",
-  "status_reason": "Bot wall; the ArcGIS service carries the same status.",
+  "status_reason": "Answers 403 to automated clients (2026-11-14); the map layer carries the same lakes.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -137,7 +137,7 @@
   "access": [
    "html"
   ],
-  "access_detail": "WebFetch read the index (years 2020 to 2026, newest first); curl gets 403 'Access Denied'. Per-event pages titled e.g. 'Sanitary Sewer Overflow in the 1200 block of Metropolitan reported Thursday Oct. 23, 2025'. Semiannual EPA reports also posted (2018 example).",
+  "access_detail": "Index, 7 yearly pages and 28 overflow pages read 2026-11-14 with the identified client (the site answered 403 to plain clients on 2026-11-03).",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -156,10 +156,10 @@
   "history": "2017 to date",
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "The only dated per-event SSO notices found in Kansas; small city, scrape needs a browser-like client.",
+  "status": "used",
+  "status_reason": "Read by ingest/ks_leavenworth_sso.py: the City's page per overflow, 2020 to 2026.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -192,10 +192,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Dated authority advisories naming the stretch to avoid; but a 2025 Oakland plant overflow got no public notice ('no threat to the public', KDHE said no advisory needed).",
+  "status": "watch",
+  "status_reason": "City news answered 403 in the research; registered, not read.",
   "verified": "search_only",
-  "checked": "2026-11-03",
+  "checked": "2026-11-14",
   "notes": ""
  },
  {
@@ -298,5 +298,81 @@
   "verified": "search_only",
   "checked": "2026-11-03",
   "notes": ""
+ },
+ {
+  "id": "ks-kdhe-stream-advisories",
+  "name": "KDHE stream advisories (news flash RSS)",
+  "jurisdiction": "KS",
+  "operator": "Kansas Department of Health and Environment",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "beach_advisory"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.kdhe.ks.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml",
+  "access": [
+   "rss"
+  ],
+  "access_detail": "The news flash feed answers the identified client (42 releases on 2026-11-14, one stream advisory rescission); the release pages and news index answer 403.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [
+   "started_at",
+   "ended_at",
+   "waterbody_text",
+   "advice_text"
+  ],
+  "cannot_fill": [
+   "coordinates",
+   "volume"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "irregular, a few a year",
+  "history": "the feed: about one month",
+  "license": null,
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Read by ingest/ks_kdhe_stream_advisories.py: issue and rescission pairs; the archive is what has been kept since the first read.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "notes": null
+ },
+ {
+  "id": "ks-kdhe-spills-dasc",
+  "name": "KDHE reported spills map layer (Spills_DASC)",
+  "jurisdiction": "KS",
+  "operator": "Kansas Department of Health and Environment",
+  "operator_type": "state",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://maps.kdhe.ks.gov/kdhe_doe/rest/services/BER/Spills_DASC/MapServer/0",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "32,455 rows on 2026-11-14; 474 name waste water or sewage, 40 sewage (septic haulers and soil spills, many points at 0,0); municipal sewer overflows absent in any number.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": "1983 on",
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "A lead: not a sewer-overflow record (few sewage rows, approximate points); registered and watched.",
+  "verified": "fetched",
+  "checked": "2026-11-14",
+  "notes": null
  }
 ]

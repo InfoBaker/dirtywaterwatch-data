@@ -44,7 +44,7 @@ SHORT_RUNS_TO_ACCEPT = 3      # a short response that persists this many runs in
 COMMON_KEYS = {"platform", "live", "time_zone", "safe_fields", "reviewed_fields", "free_text", "filter", "bounds",
                "record", "transform", "waters", "dedupe", "post", "after_history", "history", "meta", "raw_notes", "decoded_times",
                "headers", "browser_headers", "max_error_share", "min_rows_ratio", "after", "module",
-               "short_runs_to_accept", "free_text_scrub", "operator_fields", "round_coords"}
+               "short_runs_to_accept", "free_text_scrub", "operator_fields", "round_coords", "bounded_errors"}
 PLATFORM_KEYS = {
     "socrata": {"domain", "dataset", "format", "metadata", "where", "order", "page_size", "max_rows", "if_changed"},
     "arcgis": {"url", "where", "out_fields", "order_by", "cursor_field", "page_size", "max_rows", "geometry", "metadata",
@@ -364,6 +364,23 @@ def _supersede_keys(rec: dict, keys: list[str]) -> str | None:
     return None if any(p is None for p in parts) else "\x1f".join(parts)
 
 
+def _reviewed_links(records: list[dict], prev: dict, now: set, h: dict) -> dict:
+    """history.supersede_reviewed (opt-in; Arkansas's blooms, verification 2 P2-1): a list of reviewed corrections
+    {old, new, evidence}, by source_record_id. A record that left the source is the corrected row of a current record
+    only when such a link names both and gives its evidence; closeness of two names or days is never evidence, so
+    every other pair stays two independent records. {vanished event_id: successor record}."""
+    cur = {r.get("source_record_id"): r for r in records if r["event_id"] in now}
+    out = {}
+    for link in h.get("supersede_reviewed") or []:
+        old, new = link.get("old"), link.get("new")
+        if not (old and new and F.clean(link.get("evidence"))) or new not in cur:
+            continue
+        for eid, p in prev.items():
+            if eid not in now and p.get("source_record_id") == old:
+                out[eid] = cur[new]
+    return out
+
+
 def carry_history(records: list[dict], prev_records: list[dict], block: dict, fetched_at: str) -> Counter:
     """First sighting, revisions of the safe fields and tracked values across runs; records that left the source
     are kept with the missing mark (history.missing_key, raw._missing_from_source_since by default): the events
@@ -414,13 +431,27 @@ def carry_history(records: list[dict], prev_records: list[dict], block: dict, fe
     if h.get("keep_missing", True):
         now = {r["event_id"] for r in records}
         index = []
+        # history.supersede_unique (opt-in; Arkansas, re-review 2026-11-14 P2-1): a corrected row is a record new in
+        # this fetch, and a key counts only when exactly one new record and exactly one record that left the source
+        # share it; an ambiguous or pre-existing match keeps both records independently
+        unique = bool(h.get("supersede_unique"))
+        gone = [p for eid, p in prev.items() if eid not in now]
         for keys in h.get("supersede") or []:
             idx: dict[str, dict] = {}
             for r in records:
+                if unique and r["event_id"] in prev:
+                    continue
                 k = _supersede_keys(r, keys)
                 if k is not None:
-                    idx.setdefault(k, r)
+                    if unique and k in idx:
+                        idx[k] = None
+                    else:
+                        idx.setdefault(k, r)
+            if unique:
+                left = Counter(_supersede_keys(p, keys) for p in gone)
+                idx = {k: v for k, v in idx.items() if v is not None and left.get(k) == 1}
             index.append((keys, idx))
+        typo = _reviewed_links(records, prev, now, h) if "supersede_reviewed" in h else None
         for eid, p in prev.items():
             if eid in now:
                 continue
@@ -429,14 +460,39 @@ def carry_history(records: list[dict], prev_records: list[dict], block: dict, fe
             if listed:   # the first fetch that no longer found it: the status build ends the advisory there
                 p["raw"]["_unlisted_since"] = p["raw"].get("_unlisted_since") or p["raw"][mkey]
             succ = None
-            for keys, idx in index:
+            for keys, idx in ([] if typo is not None else index):
                 k = _supersede_keys(p, keys)
                 if k is not None and k in idx:
                     succ = idx[k]
                     break
+            if typo is not None:
+                succ = typo.get(eid)
+                # state an earlier rule wrote (verification 3 P2): a link to a corrected row that no reviewed entry
+                # supports (the former name-closeness rule's) is removed, so both advisories count again; a repeat of
+                # the same record key and a reviewed link are kept
+                basis = str(p["raw"].get("_duplicate_basis") or "")
+                if (p.get("duplicate_of") and basis.startswith("gone from the source")
+                        and not (succ is not None and succ["event_id"] == p["duplicate_of"]
+                                 and basis.endswith("(a reviewed correction)"))):
+                    p["raw"]["_duplicate_link_removed"] = {
+                        "was_duplicate_of": p.pop("duplicate_of"), "basis": p["raw"].pop("_duplicate_basis", None),
+                        "removed_at": fetched_at, "why": "no reviewed correction links the two records"}
+                    n["unsupported_links_removed"] += 1
+            if succ is not None and h.get("supersede_max_days") is not None:
+                # history.supersede_max_days (opt-in): a corrected start lies within this many days of the old one;
+                # a later posting is a new episode, never a correction
+                try:
+                    from datetime import datetime as _dt
+                    gap = abs((_dt.fromisoformat(succ["started_at"]) - _dt.fromisoformat(p["started_at"])).total_seconds())
+                except (KeyError, TypeError, ValueError):
+                    gap = None
+                if gap is None or gap > 86400 * float(h["supersede_max_days"]):
+                    succ = None
             if succ is not None and not p.get("duplicate_of"):
                 p["duplicate_of"] = succ["event_id"]
-                p["raw"]["_duplicate_basis"] = f"gone from the source; {succ['event_id']} looks like its corrected row"
+                p["raw"]["_duplicate_basis"] = (f"gone from the source; {succ['event_id']} is its corrected row "
+                                                "(a reviewed correction)" if typo is not None else
+                                                f"gone from the source; {succ['event_id']} looks like its corrected row")
                 n["superseded_by_corrected_row"] += 1
             else:
                 n["kept_missing"] += 1
@@ -596,6 +652,27 @@ def public_meta(block_meta: dict) -> dict:
     return {META_ALIASES.get(k, k): v for k, v in (block_meta or {}).items()}
 
 
+def error_category(e: Exception) -> str:
+    """A bounded category for a failed run, never an answer's text or the exception's own message."""
+    import requests
+    if getattr(e, "code", None) is not None and type(e).__name__ == "ArcGISError":
+        return f"ArcGIS error (code {int(e.code)})"
+    if type(e).__name__ == "ArcGISError":
+        return "ArcGIS error"
+    if isinstance(e, requests.HTTPError):
+        code = getattr(getattr(e, "response", None), "status_code", None)
+        return f"HTTP {int(code)}" if isinstance(code, int) else "HTTP error"
+    if isinstance(e, requests.Timeout):
+        return "timeout"
+    if isinstance(e, requests.ConnectionError):
+        return "connection error"
+    if isinstance(e, requests.RequestException):
+        return "request error"
+    if isinstance(e, ValueError):
+        return "malformed response"
+    return f"run error ({type(e).__name__})"
+
+
 def run(source_id: str, file: str | None = None, meta_file: str | None = None, out: str | None = None,
         sources_dir: Path = SOURCES_DIR) -> int:
     row, block = load_source(source_id, sources_dir)
@@ -631,10 +708,15 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
         if kept is not None:
             print(f"{source_id}: {kept}")
             return 0
+    def failed(e: Exception) -> str:
+        # bounded_errors (a source whose error text could quote its answer: in-idem-cyanobacteria, verification
+        # 2026-11-15 P1-2): only a category is saved and printed; every other source keeps its message as before
+        return error_category(e) if block.get("bounded_errors") else f"{type(e).__name__}: {e}"
+
     try:
         rows, pmeta, raw_path = fetch_rows(source_id, block, file, meta_file)
     except Exception as e:  # noqa: BLE001
-        return fail(f"{type(e).__name__}: {e}")
+        return fail(failed(e))
     prev_doc = read_json(path, {}) or {}
     prev = prev_doc.get("records", [])
     # a failed run keeps the last good run's meta, so meta.rows is the last good count; short_runs counts the short
@@ -670,7 +752,7 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
     try:
         records, stats = build(source_id, block, rows, fetched_at, prev, pmeta, extra)
     except Exception as e:  # noqa: BLE001 - a run that cannot finish keeps the previous records
-        return fail(f"{type(e).__name__}: {e}")
+        return fail(failed(e))
     if short is not None:
         stats["short_response_accepted"] = short
     if snapshot:

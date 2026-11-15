@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1473 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1683 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -46,9 +46,23 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
 | oh | 11 | 3 | 7 | 1 | 2 | 24 |
+| mn | 7 | 0 | 5 | 4 | 2 | 18 |
+| nd | 6 | 0 | 7 | 1 | 1 | 15 |
+| mo | 7 | 0 | 4 | 2 | 0 | 13 |
+| ks | 4 | 0 | 4 | 1 | 1 | 10 |
+| ar | 4 | 1 | 5 | 2 | 1 | 13 |
+| wi | 7 | 0 | 8 | 2 | 4 | 21 |
+| de | 3 | 0 | 5 | 1 | 0 | 9 |
+| sc | 5 | 0 | 3 | 1 | 2 | 11 |
+| in | 8 | 0 | 14 | 0 | 4 | 26 |
+| wv | 8 | 0 | 12 | 1 | 1 | 22 |
+| la | 4 | 0 | 5 | 3 | 4 | 16 |
+| nv | 3 | 1 | 8 | 3 | 0 | 15 |
+| ok | 3 | 0 | 6 | 1 | 0 | 10 |
+| pr | 6 | 0 | 4 | 1 | 0 | 11 |
 | co | 6 | 0 | 3 | 2 | 1 | 12 |
 | mt | 4 | 0 | 7 | 1 | 1 | 13 |
-| **all** | **529** | **234** | **431** | **204** | **75** | **1473** |
+| **all** | **604** | **236** | **521** | **227** | **95** | **1683** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1677,6 +1691,286 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
 | `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
 | `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |
+
+## mn: Minnesota (18)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `mn-epa-cso-inventory` | EPA National CSO Inventory, Minnesota rows | used | fetched | outfalls | Confirms no open CSOs in Minnesota. |
+| `mn-epa-sobe` | EPA SOBE event tables, Minnesota permits | used | fetched | events | EPA's 2026-11-12 tables hold one Minnesota report: the Bois Forte Band's Lake Vermilion collection system (MN0061310), a sanitary sewer overflow on 2024-06-18 to Pike Bay, Lake Vermilion; 19 Minnesota permits in the collection-system table. Read by the echo-sewer-overflow feed (MN added). Minnesota's own permittees report to the state, which does not send the reports to EPA. |
+| `mn-law-stat-115-061` | Minn. Stat. 115.061 Duty to notify; avoiding water pollution (public notice paragraph (c), 2023 c 60; amended 2026 c 79) | used | fetched | law | Public notice duty for every POTW and domestic sewer owner after any discharge; channel may be in person, phone, radio, social media or web page; signs at impacted public use areas. No hour deadline ("Promptly"). |
+| `mn-mces-spill-notices` | Metropolitan Council Environmental Services, wastewater spill notices | used | fetched | events | Read by the mn_mces_spill_notices feed: three spills listed on 2026-11-14 (Excelsior May 2026, reached Mud Pond; Minneapolis and Golden Valley July 2026; Eagan November 2026, no water reached), with the Council's signs as its own window. |
+| `mn-mpca-collection-release-guidance` | MPCA guidance for collection-system releases (October 2026) | used | fetched | law | Read for the research of 2026-11-09: any amount of wastewater released is unauthorized; immediate Duty Officer report and prompt downstream notice; release sampling reports within 30 days. Cited in the state text. |
+| `mn-mpca-public-notification-guidance` | MPCA "Public Notification of Wastewater Releases: Notice to Downstream Users and Drinking Water Intakes" (wq-wwprm1-43, October 2026) | used | fetched | law | Defines whom to notify: "Any location within 25 miles downstream of the release which the public could encounter the receiving water"; "Notification should also be given when the release has ended." |
+| `mn-wlssd-overflows` | WLSSD "2026 Releases" overflow map layer (Duluth regional sewer system) | used | fetched | events | Read through the generic ArcGIS block mn-wlssd-overflows: 117 releases, 2005 to 2026-11-04, with the day or time, the kind of structure, an amount as written and whether waters of the state were reached; no end, no receiving water's name. |
+| `mn-duluth-press-releases` | City of Duluth press releases on sanitary sewer overflows (web subscriptions) | watch | access_failed | events | Registered as an unmonitored channel (no feed): the City's press releases, one mutable page per notice (the research of 2026-11-09 read the Chester Creek notice of October 2024, which kept its earlier warnings below the updates). duluthmn.gov did not answer the project's client on 2026-11-14 (connection timed out); no list or feed of the overflow notices was found. |
+| `mn-mdh-beach-locator` | MDH beach locator (local beach programs) | watch | fetched | advisories | Links Lake Superior's program and local programs (Minneapolis Parks, Three Rivers, Ramsey County); no statewide advisory feed. Registered as a channel. |
+| `mn-mpca-dmr-downloads` | MPCA discharge monitoring report downloads | watch | search_only | monitoring | Annual ZIPs of routine monitoring since 1998 and release sampling reports attached to DMRs (research 2026-11-09, directory only). Routine measurements are not spill events; the attachments' public access was not checked. |
+| `mn-mpca-hab` | MPCA harmful algal bloom information and reporting | watch | inferred | advisories | MPCA's harmful algae page gives guidance and a reporting route; local bodies decide advisories. No statewide list of current bloom advisories was found (2026-11-09 research). |
+| `mn-mpca-information-requests` | MPCA information requests | watch | fetched | law | The route to ask for a redacted export of release reports (Duty Officer numbers, dates, receiving waters, volumes). No request sent. |
+| `mn-mces` | Metropolitan Council Environmental Services (Twin Cities interceptors and plants) | rejected | inferred | events | The Council's home page; its spill notices are read as mn-mces-spill-notices. |
+| `mn-minneapolis-cso-reports` | Minneapolis / MCES CSO annual reports (joint permit MN0046744) | rejected | search_only | permits | No open CSO outfalls; history only. |
+| `mn-mpca-2017-release-data` | MPCA 2017 Municipal Wastewater Release Data (compiled for the Legislative-Citizen Commission) | rejected | search_only | events | One-off 2017 compilation; proves MPCA can extract releases if asked. |
+| `mn-mpca-wimn` | MPCA What's in My Neighborhood (sites dataset) | rejected | search_only | permits | A site/permit inventory, not an incident list; no sewage release events found in it. |
+| `mn-duty-officer` | Minnesota Duty Officer Program (DPS/BCA): one-call reporting of all discharges | unreachable | search_only | events | Every wastewater release is reported here first, but the reports are not published; a 2017 compilation for a legislative commission ("MPCA - 2017 Municipal Wastewater Release Data") shows the data exist. |
+| `mn-mdh-lake-superior-beaches` | MDH Minnesota Lake Superior Beach Monitoring Program (mnbeaches.org) | unreachable | access_failed | advisories | mnbeaches.org timed out on 2026-11-14 (connection, 60 s) as it failed on 2026-11-09; no advisory rows, sample schema or API seen. Registered as a channel with its barrier. |
+
+## nd: North Dakota (15)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `nd-deq-eir-legacy-general` | ND DEQ General Environmental Incidents - Historical (1975-2020) | used | fetched | events | Read by the nd_deq_eir_legacy feed through the archive's own search (sewage, sewer, septic): 36 sewage reports from 2003 to 2020 of the 4,452 incidents, with dates, county, point, volume and the containment flag; frozen (reports since 2021 are in HazConnect). |
+| `nd-deq-hab-listings` | ND DEQ harmful algal bloom advisories and warnings listing (PDF) | used | fetched | advisories | Read by the nd_deq_hab_listings feed: 14 advisories and 6 warnings on 2026-11-14 (file last modified 2026-10-08). |
+| `nd-fargo-ndpdes-permit` | City of Fargo NDPDES permit ND0022870 (draft, public notice ND-2023-021) | used | fetched | law | Special conditions 'Reporting, Record Keeping, and Public Notification for Unauthorized Sanitary Sewer Overflows': oral report to DEQ within 24 hours; plan for public notice; 'shall immediately notify the public, public health agencies, and other affected entities'. Channel is left to each permittee's plan. |
+| `nd-ndac-33-1-16-02-1-11` | N.D. Admin. Code 33.1-16-02.1-11(4) (spill reporting) | used | fetched | law | A spill or discharge that causes or is likely to cause water pollution is reported to DEQ immediately; no public-notice duty. Cited in the state text. |
+| `nd-ndg420000-general-permit` | NDPDES general permit NDG420000 (domestic treatment), Part IV(F) | used | fetched | law | Effective 2023-01-01 to 2027-12-31: oral notice to DEQ within 24 hours and a written account within five days of noncompliance that may endanger health or the environment, lagoon overflows and bypasses included. Cited in the state text. |
+| `nd-spill-reporting-procedures` | North Dakota unified spill/release reporting procedures (spill.nd.gov) | used | fetched | law | Defines immediate reporting criteria (public health, waterways impacted or threatened, injuries, evacuations, wildlife). No public-notice duty for the reporter. |
+| `nd-beach-ecoli` | Beach E. coli monitoring (state parks, lakes) | watch | search_only | monitoring | No statewide public beach E. coli program or results page found (search only). Local health units or Parks and Recreation may sample individual beaches. |
+| `nd-ceris-open-records` | CERIS-ND public open records | watch | access_failed | events | DEQ's permit reporting system's public records (noncompliance submittals, final permits); not read: the interface needs a browser. Registered as a channel. |
+| `nd-deq-hab-program` | ND DEQ harmful algal bloom advisories and warnings (Story Map and press releases) | watch | fetched | advisories | DEQ's HAB program page (advisory and warning categories, 1 May to 31 December); its listing PDF is read as nd-deq-hab-listings. The Story Map gave no readable body. |
+| `nd-deq-press-releases` | ND DEQ press releases (PDF) | watch | search_only | news | HAB advisories weekly; occasional spill notices. PDF only, no feed found. |
+| `nd-echo-dmr` | ECHO DMR monthly data for ND POTWs | watch | inferred | permits | No CSO permits in ND, so no CSO event counts; SSOs are not DMR parameters. |
+| `nd-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), ND rows | watch | fetched | events | 0 North Dakota reports in EPA's 2026-11-12 current and all-versions tables (5 North Dakota permits in the collection-system table). DEQ's own reporting system is CERIS-ND. Watched: a report would be read once ND is added to the feed. |
+| `nd-permit-factsheet-sso-tables` | NDPDES permit factsheet overflow and bypass tables (Fargo, Grand Forks) | watch | fetched | events | Not ingested: Fargo's package is image-only and Grand Forks' table could not be read safely by rule; history to reconcile with an agency export. Registered as a channel with its barrier. |
+| `nd-deq-eir-legacy-oilfield` | ND DEQ Oilfield Environmental Incidents - Historical (1975-2020) | rejected | search_only | events | Oilfield releases only; no sewage. |
+| `nd-hazconnect-public-incidents` | North Dakota Unified Spill Reporting System (HazConnect) public incident list | unreachable | access_failed | events | The public list answered 403 with Cloudflare's block page to the project's identified client on 2026-11-14, as on 2026-11-03 and 2026-11-09. A barrier to register, not to get around: the fix is a supported export or allow-listing from DEQ and the Department of Emergency Services. |
+
+## mo: Missouri (13)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `mo-dnr-concern-reports` | Missouri DNR Water Pollution Control concern reports (monthly PDFs) | used | fetched | events | Read by ingest/mo_dnr_concerns.py: the sewer overflow concerns with the allegation filter; the concern text (people, homes) is never stored. |
+| `mo-dnr-cso-areas` | Missouri DNR CSO Areas | used | fetched | outfalls | Combined-sewer service areas. |
+| `mo-dnr-hab-map` | Missouri DNR Harmful Algal Bloom reports map | used | fetched | advisories | Read by ingest/mo_dnr_hab.py: the reports DNR's map shows as a bloom present or the water closed, dated to the reads that show them. |
+| `mo-dnr-npdes-outfalls` | Missouri DNR NPDES Waste Water Outfalls (CSO flag) | used | fetched | outfalls | Read by scripts/mo_outfall_layer.py into data/outfalls-mo.json: 146 CSO features on five permits (MSD Lemay 120), 26 of them EPA's rows. |
+| `mo-dnr-sso-reporting-mogem` | Missouri DNR sanitary sewer overflow and bypass reporting (MoGEM) | used | fetched | law | States the 24-hour duty to DNR and the MoGEM online reporting system; no public output and no public notice duty. |
+| `mo-kc-water-overflow-notices` | KC Water overflow press releases and Smart Sewer site | used | fetched | events | Read by ingest/mo_kc_water_news.py: KC Water's own overflow posts, a selective record; times, gallons and the named water from its text. |
+| `mo-msd-stl-project-clear` | MSD Project Clear (St. Louis) sewer overflow pages | used | fetched | events | Read by ingest/mo_msd_alerts.py: MSD's own overflow alerts and releases, a selective record (no rule requiring them was found); days, rarely times, never an end. |
+| `mo-dnr-beach-status` | Missouri DNR state park beach status (weekly E. coli) | watch | search_only | advisories | The beach status map is drawn by a script with per-beach pages; out of season on 2026-11-14, its data were not read. Registered and watched for availability. |
+| `mo-dnr-meerts-search` | Missouri DNR MEERTS historical incident search | watch | fetched | events | Registered and watched; not read. |
+| `mo-dnr-merlin-search` | Missouri DNR MERLIN environmental emergency public search | watch | fetched | events | Registered and watched; a form, not read. |
+| `mo-swim-guide` | Swim Guide Missouri state park beaches | watch | search_only | prior_art | Lists Missouri state park beaches; most show 'No data available'. |
+| `mo-dnr-environmental-concern` | Missouri DNR environmental concern / 24-hour spill line | rejected | fetched | events | Intake only (573-634-2436); no public list. |
+| `mo-msdis-npdes-outfalls` | MSDIS MO_NPDES_Outfalls (University of Missouri copy) | rejected | search_only | outfalls | Copy of the DNR layer; use the DNR source. |
+
+## ks: Kansas (10)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ks-kdhe-hab-status` | KDHE HAB Status service (Lake Points, Lake Status) | used | fetched | advisories | Read by ingest/ks_kdhe_hab.py: lakes under a Hazard, Warning or Watch, dated to the polls that list them. |
+| `ks-kdhe-stream-advisories` | KDHE stream advisories (news flash RSS) | used | fetched | advisories | Read by ingest/ks_kdhe_stream_advisories.py: issue and rescission pairs; the archive is what has been kept since the first read. |
+| `ks-law-kar-28-16-27` | K.A.R. 28-16-27: emergency or accidental discharge of sewage; report to the department | used | fetched | law | Immediate report to KDHE; planned bypass needs 7 days' notice and approval; no public notice. |
+| `ks-leavenworth-sso-transparency` | City of Leavenworth Sanitary Sewer Overflow Transparency Reports and per-event SSO pages | used | fetched | events | Read by ingest/ks_leavenworth_sso.py: the City's page per overflow, 2020 to 2026. |
+| `ks-kdhe-monitoring-sites` | KDHE Surface Water Monitoring Sites (lakes and streams) | watch | search_only | monitoring | Station locations for bacteria context; not an advisory source. |
+| `ks-kdhe-spills-dasc` | KDHE reported spills map layer (Spills_DASC) | watch | fetched | events | A lead: not a sewer-overflow record (few sewage rows, approximate points); registered and watched. |
+| `ks-topeka-stream-advisories` | City of Topeka stream advisories (Utilities, topeka.org news) | watch | search_only | advisories | City news answered 403 in the research; registered, not read. |
+| `ks-ug-kck-consent-decree` | Unified Government of Wyandotte County/Kansas City, Kansas: consent decree (2013) and overflow control plan | watch | search_only | permits | Collection System Release Response Plan under the decree; no public notice channel found. |
+| `ks-kdhe-incident-report` | KDHE incident report form and spill line | rejected | search_only | events | Intake form; no public incident list found. |
+| `ks-kdhe-hab-page` | KDHE HAB page and CivicAlerts press releases | unreachable | search_only | advisories | Answers 403 to automated clients (2026-11-14); the map layer carries the same lakes. |
+
+## ar: Arkansas (13)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ar-adh-swim-beach-status` | Arkansas Department of Health, Arkansas Swim Beach Program: closed swim beaches | used | fetched | advisories | Read by this site as a standing list: each listed beach is a closure from the first read that lists it until a read no longer does. |
+| `ar-deq-hab-advisories` | Arkansas DEQ Harmful Algal Bloom current advisories table and news releases | used | fetched | advisories | Read by this site: the file behind the current-advisories table and the archive (advisories.json: 52 advisories since 2014, 4 in effect on 2026-11-14), with DEQ's posted and lifted days. |
+| `ar-deq-overflow-forms` | Arkansas DEQ 24-hour online overflow reporting forms | used | fetched | law | Regulator-report duty, quoted. |
+| `ar-deq-overflow-incidents` | Arkansas DEQ "Reported Noncompliance Incident Data" (SSO, bypass, upset, unpermitted discharge) search | used | fetched | events | Read by this site: every report whose overflow began since 2025-01-01 (2,449 rows read 2026-11-14), polled by start day with each window's count checked; statewide, dated to the day, usually received the next day; no coordinates, county or receiving-water field. |
+| `ar-deq-sso-access-db` | Arkansas DEQ NPDES_SSO_web.zip (full Access database) | candidate | fetched | events | A bulk snapshot of the same reports for history before 2025; the ZIP's Last-Modified is still 2025-08-13 (HEAD request 2026-11-14, 5,065,954 bytes); not parsed (Microsoft Access). |
+| `ar-deq-aquaview` | Arkansas DEQ AquaView (ArcGIS Experience) | watch | search_only | monitoring | Check for outfall and station layers. |
+| `ar-deq-email-lists` | Arkansas DEQ e-mail lists (news releases, including harmful algal bloom advisories) | watch | fetched | news | A voluntary notice channel (e-mail); the advisories it announces are read from advisories.json. |
+| `ar-deq-seek-complaints` | Arkansas DEQ SEEK complaints search | watch | search_only | events | Possible corroboration of overflows missing from the incident search; the public's complaints carry names and addresses and need a safe-field review before any reading. |
+| `ar-deq-water-quality-search` | Arkansas DEQ water-quality monitoring station search | watch | search_only | monitoring | Sample results, not advisories or discharge reports: context only. |
+| `ar-lrwra-sso-plan` | Little Rock Water Reclamation Authority SSO Response Plan (Sierra Club settlement) and overflow reporting line | watch | search_only | events | No web list. |
+| `ar-beaches` | Arkansas swimming beach monitoring | rejected | search_only | advisories | The 2026-11-03 'no beach program' finding was wrong: the Department of Health runs the Arkansas Swim Beach Program (ar-adh-swim-beach-status). |
+| `ar-epa-sobe` | EPA SOBE (eRule) extract, Arkansas rows | rejected | fetched | events | EPA's sewer overflow and bypass extracts dated 2026-11-12 (current and all versions) hold no Arkansas rows; DEQ publishes its own search instead. |
+| `ar-usace-swl-swim-beach-closures` | U.S. Army Corps of Engineers, Little Rock District: swim beach closures | unreachable | fetched | advisories | The host refuses this site's identified client (403); a barrier to record, not something to get around. |
+
+## wi: Wisconsin (21)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `wi-epa-cso-inventory` | EPA National CSO Inventory, Wisconsin rows | used | fetched | outfalls | Baseline. MMSD's plan says 115 outfalls. |
+| `wi-law-40cfr122-38` | 40 CFR 122.38 (Great Lakes Basin CSO notice) for MMSD and Superior | used | fetched | law | Both Wisconsin CSO permits discharge to the Great Lakes Basin (Lake Michigan; St. Louis Bay of Lake Superior): 4-hour electronic public notice. |
+| `wi-law-nr-210-21` | Wis. Admin. Code NR 210.21 sanitary sewer and treatment facility overflows (reporting and public notification) | used | search_only | law | Public notice duty for every SSO and TFO, "promptly", by the "most effective and efficient communications available in the community"; no web channel or deadline in hours. |
+| `wi-mmsd-cso-impacted-waters` | MMSD CSO impacted waters map (potentially impacted waterways and public access locations) | used | fetched | outfalls | The operator's own affected-area polygon under 40 CFR 122.38(c); usable as the official affected area for every MMSD CSO. |
+| `wi-mmsd-cso-notification-plan` | MMSD Combined Sewer Overflow Public Notification Plan (July 16, 2018) | used | fetched | law | Says "The combined sewer service area has 115 combined sewer overflow outfalls" discharging to seven waterways, and that the plan responds to 40 CFR 122.38. |
+| `wi-mmsd-storm-updates` | MMSD Storm Update news posts (per-event overflow volume, 5-day letter to WDNR) | used | fetched | events | Built (ingester wi_mmsd_storm_updates): the news list read whole on 2026-11-14 (71 pages, 281 posts), 21 posts read (18 Storm Updates and overflow letters, 3 spill or release notices) from 2018-06-22 to 2026-09-08 give 29 dated reports (13 combined, 14 separate or unspecified sewer overflows, 2 treatment plant spills), posted one to ten days after the overflow began (median five). |
+| `wi-wdnr-sso-form-instructions` | WDNR SSO/TFO report form 3400-184 and instructions (Switchboard) | used | fetched | law | The form records the public-notice date and method, so WDNR holds the data; it is not published. |
+| `wi-brookfield-sso-notices` | City of Brookfield SSO press releases | watch | prior_inventory_only | events | Single PDF releases with no list page to poll; registered. |
+| `wi-echo-dmr-cso` | ECHO DMR CSO parameters for MMSD and Superior | watch | inferred | events | Monthly fallback, unknown. |
+| `wi-hab-program` | Wisconsin harmful algal bloom information (WDNR and DHS) | watch | inferred | advisories | No statewide bloom advisory feed known; not traced in this round. |
+| `wi-milwaukee-health-beach-report` | City of Milwaukee Health Department beach water report | watch | inferred | advisories | Off season on 2026-11-14; registered as a watched channel. |
+| `wi-milwaukee-riverkeeper-swim-guide` | Milwaukee Riverkeeper on Swim Guide (beach and river bacteria) | watch | search_only | monitoring | Mirror of the state data; no API. |
+| `wi-mmsd-rain-facility-page` | MMSD Milwaukee Rain & Facility Information page (live year-to-date gallons overflowed) | watch | fetched | events | MMSD says its counter's figures can be corrected and are unverified; a rise is never read as an overflow or its time (expansion research 2026-11-09). Watched for availability in the register. |
+| `wi-mmsd-water-drop-alert` | MMSD Water Drop Alert (text WATERDROP to 414-296-4422) | watch | fetched | social | A pre-storm "use less water" alert, not an overflow notice; useful as a lead indicator only. |
+| `wi-municipal-sso-notices` | Municipal SSO public notices on city websites (Fremont-Orihula-Wolf River, Hortonville, Fox Crossing, Menomonie, Stoughton Utilities, Oconomowoc Utilities, Fennimore, Town of Greenville) | watch | search_only | events | Proves notices exist on the web, scattered across hundreds of municipal sites; not worth individual ingesters. |
+| `wi-epa-sobe` | EPA SOBE event tables, Wisconsin permits | rejected | fetched | events | Rechecked 2026-11-14: Wisconsin permittees report through the DNR's Switchboard; EPA's event table extracts dated 2026-11-12 held no Wisconsin report. Watched in the register. |
+| `wi-wdnr-sso-report-page` | WDNR Sanitary Sewer Overflow reporting page | rejected | fetched | events | Submission instructions only; Switchboard is a permittee login. No WDNR public overflow data found. |
+| `wi-superior-cso` | City of Superior Sewage Disposal System CSO notification | unreachable | prior_inventory_only | events | The City's CSO page exists (2026-11-09) but did not answer on 2026-11-14 and has shown no filled row to build a reader on; registered as a watched channel. |
+| `wi-wdnr-beach-health` | WDNR Wisconsin Beach Health: advisories map layer and Beach Advisory Reports | unreachable | fetched | advisories | Wisconsin Beach Health and its map layer (apps.dnr.wi.gov, dnrmaps.wi.gov) did not answer the build's client on 2026-11-14 (connection timed out; a second network refused); its fields and keys could not be read, so no reader was built. Registered as channels watched for availability only (no page text kept). |
+| `wi-wdnr-brrts-closed-spills` | WDNR BRRTS on the Web search (closed spill incidents) | unreachable | prior_inventory_only | events | Where SERTS incidents go when they close; not reachable on 2026-11-14 and no query tested. |
+| `wi-wdnr-serts-open-spills` | WDNR SERTS open spill incidents list | unreachable | prior_inventory_only | events | Statewide mixed-spill list with some sewage incidents; unreachable from the build on 2026-11-14 and its export untested, so no reader was built. Registered as a channel watched for availability only (no page text kept). |
+
+## de: Delaware (9)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `de-dnrec-derns-recent-releases` | DNREC Delaware Environmental Release Notification System (DERNS): Recent Releases | used | fetched | events | Read by pipeline/ingest/de_dnrec_derns.py: the public list's newest pages each run and every page of ten substance searches once (SEWAGE, WASTEWATER and the rest), the sewage and sanitary-wastewater releases kept by rule, each release's detail page read for its report time, Released To boxes, quantity and DNREC's notes (contacts never read). Statewide; sewage from 10,000 gallons must be reported; permitted CSOs exempt. |
+| `de-dnrec-recreational-water` | DNREC Recreational Water Sampling Locations (beach advisory layer) | used | fetched | advisories | Read by pipeline/ingest/de_dnrec_recwater.py: DNREC's advisory and closure history on data.delaware.gov (dataset ever-58ni, Public Domain, 474 rows since 2001 on 2026-11-14) with the FirstMap station layer's points and current status (the map service's legend decodes CurrentAdvisory: 0 Current Advisory, 1 Outside Advisory Area, 2 Resampling Enterococcus Spike, 3 Winter, 4 No Current Advisory). |
+| `de-law-7-del-c-6028` | 7 Del. C. 6028 Report of discharge of pollutant (and 6014(b) central notification; 6002(20) environmental release) | used | fetched | law | Release reporting to DNREC "as soon as the person has knowledge", web posting by DNREC no later than 1 business day after the report; DNREC notification to legislators and registered neighbours within 12 hours for sewage of 10,000 gallons or more. Permitted discharges exempt. |
+| `de-dnrec-hab` | DNREC harmful algal bloom advisories | watch | inferred | advisories | Not searched in depth. |
+| `de-dnrec-shellfish` | DNREC shellfish closures (e.g. Indian River Bay closure after the Millsboro wastewater release) | watch | search_only | advisories | Emergency closures announced by press release and GovDelivery bulletins; DE_Shellfish_Aquaculture_Areas layer exists. |
+| `de-epa-cso-dmr` | ECHO DMR monthly CSO counts for DE0020320 | watch | inferred | events | The national monthly fallback for Wilmington; whether the permit carries CSO event parameters is unknown. |
+| `de-wilmington-cso-locations` | City of Wilmington CSO_Locations ArcGIS layer | watch | fetched | outfalls | The City's CSO structures layer (45 structures in the 2026-11-03 research); not used in this build: EPA's inventory's 41 open outfalls stand until the layer's structure ids are matched to the permit's outfall numbers (owner question). |
+| `de-wilmington-cso-site` | City of Wilmington "What is a CSO, Anyway?" site | watch | fetched | events | Describes signs at every CSO and a real-time control system; no overflow status, map, list or sign-up. |
+| `de-epa-sobe` | EPA SOBE extract, DE rows | rejected | fetched | events | No Delaware row in EPA's current or all-versions sewer overflow extract, fetched 2026-11-14 (registered as a watched channel). |
+
+## sc: South Carolina (11)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `sc-des-beach-monitoring` | SC DES Beach Monitoring: beach stations with advisory status (BW_Monitoring_Stations layer 0) and S.C. Beach Access Guide | used | fetched | advisories | Read by pipeline/ingest/sc_des_advisories.py: 123 stations on 2026-11-14, 21 Long-Term (standing advisories from the first poll), 102 No Advisory; short-term advisories in season from the poll that shows them. |
+| `sc-des-hab` | SC DES algal bloom program | used | fetched | advisories | Read by pipeline/ingest/sc_des_advisories.py: DES's bloom delineations behind the HAB Monitoring Map (897 on 2026-11-14, one Watch: J. Strom Thurmond Reservoir, Cedar Point Cove, dated 2026-10-16) with the program page's table of active watches and advisories. |
+| `sc-des-sso-reporting` | SC DES sewer system overflow reporting (Satellite Sewer System Program forms; SSO compliance and enforcement document) | used | search_only | law | Since 1998 DES requires reporting of any SSO reaching state waters, any over about 500 gallons not reaching water, and any that may cause a health or environmental concern; public notification programs required for 5,000 gallons or more since July 2008 (per DES document and City of Florence). Reports go on a mailed or faxed form; no public list found. DES is said to receive about 600 reported overflows a year. |
+| `sc-florence-sso-notices` | City of Florence "Notification of Sanitary Sewer Overflow" posts | used | fetched | events | Read by pipeline/ingest/sc_florence_sso.py: the City's news list each run and each 'Notification of Sanitary Sewer Overflow' page (five on 2026-11-14, March 2024 to October 2025, Jeffries Creek), the media contacts cut, the City's days and figures as given. |
+| `sc-law-48-1-95` | S.C. Code 48-1-95 Wastewater utilities; procedures for significant spills | used | fetched | law | Public-notice duty: utilities must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated domestic sewage) within 24 hours of discovery; DES gives notice if the utility does not. No channel named. |
+| `sc-charleston-waterkeeper` | Charleston Waterkeeper water quality monitoring (Swim Guide) | watch | search_only | monitoring | Weekly summer bacteria sampling in Charleston harbor creeks, published on Swim Guide; also SSO advocacy. |
+| `sc-des-freshwater-swim-advisories` | SC DES freshwater Swimming Advisory sites (Water_Advisories layer 0) | watch | fetched | advisories | The layer answered (23 sites: name, station, point; contact and telephone fields not read) but carries no date or status and DES does not say what a site on it means; registered as a channel, not read as advisories until DES confirms (owner question). |
+| `sc-des-shellfish` | SC DES Shellfish Harvest monitoring stations and closures | watch | fetched | advisories | Station layer exists; emergency closures after spills not checked. |
+| `sc-epa-sobe` | EPA SOBE extract, SC rows | rejected | fetched | events | No South Carolina row in EPA's current or all-versions sewer overflow extract, fetched 2026-11-14 (registered as a watched channel). |
+| `sc-charleston-water-notices` | Charleston Water System overflow notices and West Ashley alert system (2026 settlement) | unreachable | fetched | events | www.charlestonwater.com did not answer this site's client on 2026-11-14 (TCP connection timed out, three attempts); its news page is a watched channel. The 2026-11-09 research read article 270 rewritten for a second break: an article address is not one overflow. |
+| `sc-des-sso-database` | SC DES SSO report records (internal) | unreachable | inferred | events | No public table, map or download of SSO reports found (searched DES site, DES ArcGIS server folders water, Hosted, Emergency_Response, and ArcGIS Online). Records request is the only route. |
+
+## in: Indiana (26)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `in-echo-dmr-cso` | EPA ECHO monthly DMR CSO counts for Indiana CSO permits | used | inferred | events | Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 92 permits, January 2025 to October 2026, a median 24 days after the month. Month precision: the monthly mark only. |
+| `in-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Indiana | used | inferred | events | Read by the national eRule module with IN in its states (2026-11-14): one Indiana report on the 2026-11-12 extract (Shelbyville's plant bypass, 2026-08-12); IDEM's own reports are not sent here until its move to NeT-SewerOverflow. |
+| `in-epa-cso-inventory` | EPA National CSO Inventory (Indiana extract) | used | fetched | outfalls | Baseline; IDEM layer is better. |
+| `in-epa-gl-cso-indiana` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Indiana | used | fetched | outfalls | Seeds the channel column for Great Lakes basin operators. |
+| `in-idem-cso-outfall-layer` | IDEM Indiana CSO Outfall Map (ArcGIS) | used | fetched | outfalls | Registry rows (scripts/build_in_outfalls.py, 2026-11-14): 981 points on 110 permits (578 Active, 318 Inactive, 85 Active but discharge prohibited; 136 with no point); 985 rows, 966 paired with EPA's inventory, which they outrank; IDEM's status kept even where it gives no point. |
+| `in-idem-cyanobacteria` | IDEM Blue-Green Algae dashboard (cyanobacteria and toxin results at state park beaches) | used | fetched | advisories | Read through the generic ArcGIS block (2026-11-14): 1,717 samples at 29 beaches, 2010 to 2026-09-14, each with IDEM's advisory level; 909 at an advisory level kept as IDEM's statements with their sample dates, never as advisory dates. |
+| `in-law-327-iac-5-2-1` | 327 IAC 5-2.1 Combined Sewer Overflow Public Notification | used | fetched | law | Statewide CSO notification rule: notice to the affected public, to people who ask after an annual March newspaper notice, and to local health departments and downstream intakes, whenever a CSO is occurring or imminent; signs at access points. No web channel and no clock. |
+| `in-law-327-iac-5-2-2` | 327 IAC 5-2.2 Public notification requirements for CSOs to the Great Lakes Basin | used | fetched | law | Applies 40 CFR 122.38 (4-hour public notice) to Indiana CSO permittees in the Lake Michigan and Lake Erie basins (23 listed by EPA). |
+| `in-bills` | Indiana bills on CSO regulation (SB 449, 2023) | watch | search_only | law | 2023 bill to help CSO cities avoid violations; no 2025-2026 notification bill found (search only). |
+| `in-citizens-cso-warnings` | Citizens Energy Group CSO warnings (email), Indianapolis | watch | fetched | events | 2018 post: 'CSO warnings are issued via email by Citizens Energy Group when' as little as a quarter-inch of rain is forecast; mandated by the consent decree; avoid contact downstream for four days (search). Sign-up page not found; the 2026 CSO page URL returned 404. |
+| `in-dnr-advisories-closings` | Indiana DNR state parks lake advisories and closings | watch | search_only | advisories | Read 2026-11-14: park alerts by property; the blue-green algae lines are a standing general note ('Found in lakes year round. Don't drink the water. Shower after you swim.'), not a report of a bloom, so they are not records. Watched in the register. |
+| `in-evansville-ewsu-clear-path` | Evansville Water and Sewer Utility (Clear Path CSO program) | watch | fetched | events | Homepage links a Combined Sewer Overflow page; notification channel not traced. |
+| `in-goshen-cso-notice` | Goshen CSO Notice posts | watch | fetched | events | The notice page (https://goshen.in.gov/cso-notice/) holds one dated notice (2018-02-20) and the city's notification policy. Watched in the register. |
+| `in-hammond-cso-notification` | Hammond Sanitary District CSO notification program | watch | fetched | events | E-mail notification when CSOs discharge, by request sent to the district's postal address. |
+| `in-highland-sso-reports` | Highland bypass/overflow report PDFs | watch | search_only | events | Town posts its State Form 48373 SSO reports as PDFs (2025-2026). |
+| `in-idem-beachalert` | IDEM BeachAlert (Lake Michigan beach advisories and closures) | watch | fetched | advisories | A Power Apps portal: the page holds only client-side templates (a no-advisories line, a permission message and an error message side by side) and loads its records from an entity-grid service and a beach map by script; those data calls were not verified (2026-11-14). Watched in the register, access not settled. |
+| `in-idem-bypass-overflow-reporting` | IDEM Sewer Bypass/Overflow Incident Reporting (State Form 48373) | watch | fetched | law | Regulator-only reports. When IDEM moves to NeT-SewerOverflow, Indiana SSOs will appear in EPA's SOBE download (a handful already do). |
+| `in-idem-vfc` | IDEM Virtual File Cabinet (permit, compliance and incident documents) | watch | inferred | permits | Document search; bypass/overflow forms may be filed there; not an event feed. |
+| `in-mishawaka-cso` | Mishawaka Utilities CSO information | watch | search_only | events | Readable on 2026-11-14: alerts go to an X account (@CSOAlerts, sign-in to read); the 2025 annual report and outfall map are PDFs. Watched in the register. |
+| `in-south-bend-cso` | South Bend wastewater page (CSO notice sign-up by phone, annual notice, monthly reports) | watch | fetched | events | Email CSO notifications by calling 574.277.8515; 2025 CSO Annual Public Notice and 2025 Monthly Reports of Operation PDFs. HTTP 403 to curl; read with WebFetch. |
+| `in-swim-guide-indiana` | Swim Guide Indiana Lake Michigan beaches (mirror of BeachAlert) | watch | search_only | advisories | Mirrors state results; licence and lag unknown. |
+| `in-waterloo-cso-posts` | Waterloo CSO Public Notification posts | watch | fetched | events | The CSO policy page (https://waterlooin.gov/cso-policy/) links start and end notices as PDFs (three pairs, March and April 2026); the PDFs' text uses a font this build's reader cannot decode. Watched in the register. |
+| `in-fort-wayne-cso-notifications` | Fort Wayne City Utilities CSO notifications | unreachable | search_only | events | HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. A barrier (bot wall) in the register. |
+| `in-kendallville-cso` | Kendallville CSO page | unreachable | search_only | events | HTTP 403 to this build's client (2026-11-14). A barrier (bot wall) in the register. |
+| `in-laporte-cso-status` | LaPorte combined sewer overflow status page | unreachable | fetched | events | The host did not accept a connection from this build on 2026-11-14 (two tries, ports 443 and 80): watched daily in the register; the research of 2026-11-09 read 'NOT overflowing' and dated overflows to 2025-08-19 (1.1 million gallons), which EPA's monthly report for August 2025 matches. |
+| `in-speedway-cso` | Speedway CSO Public Notifications | unreachable | search_only | events | HTTP 403 to this build's client (2026-11-14). A barrier (bot wall) in the register. |
+
+## wv: West Virginia (22)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `wv-charleston-cso-notice` | Charleston Sanitary Board combined sewer page | used | fetched | context | Standing notice (avoid contact during an overflow and 24 hours after); watched daily in the register, no dated overflows. |
+| `wv-dep-hab-advisories` | WV DEP algae advisories map service | used | fetched | advisories | Read by the wv-dep-hab-advisories feed as a snapshot of what is in effect (poll-dated starts and ends; Date_Observed kept as the observation day); empty on 2026-11-14. |
+| `wv-dep-hab-program` | DEP Harmful Algal Blooms page | used | fetched | context | Watched daily in the register (no records): states current advisories; its reported-bloom table was last updated August 2023. |
+| `wv-dep-npdes-outlets` | WV DEP NPDES Outlets layer (CSO outlets, iut_code CSO) | used | fetched | outfalls | DEP's own outlet points, streams, counties and outlet dates for every combined sewer outlet: data/outfalls-wv.json (scripts/build_wv_outfalls.py), each paired with EPA's inventory row; 16 open-or-closed differences with EPA, DEP followed. |
+| `wv-dep-spill-intake` | DEP emergency spill reporting page | used | fetched | law | The regulator's intake (1-800-642-3074): telephone reports, no public list. |
+| `wv-echo-dmr-cso` | EPA ECHO discharge monitoring reports at West Virginia combined sewer outlets | used | fetched | events | Read by the wv-echo-dmr-cso feed: Beckley's C002, 16 months with flow reported (January 2025 to September 2026); Princeton's C002, 21 months filed no discharge. Month precision, the monthly mark; the gate on actual CSO DMR values answered: 2 of 61 permits. |
+| `wv-law-spill-rule` | WV spill and accidental discharge reporting rule (Cornell LII: W. Va. Code R. § 46-03-2) | used | fetched | law | Immediate report to the DEP emergency number (1-800-642-3074) by 'each and every person who may cause or be responsible for any spill or accidental discharge of pollutants', including sewage; no public notice. |
+| `wv-wheeling-water-pollution` | Wheeling Water Pollution Control page | used | fetched | context | Watched daily in the register (no records); no dated overflows. |
+| `wv-clarksburg-text-alerts` | City of Clarksburg text alerts (Clarksburg Sanitary Board area) | watch | fetched | advisories | General city alerts; unknown whether CSO events are sent. |
+| `wv-current-spill-rule-register` | Secretary of State register: 47CSR11 Special Rules (active) | watch | fetched | law | Active rule effective 1987; its scanned text could not be read, so the clause is cited from DEP's page and the earlier reading, not quoted. |
+| `wv-dep-application-enhancer` | DEP Application Enhancer document search | watch | fetched | permits | Login described; only the shell answered (2026-11-09). |
+| `wv-dep-applicationxtender` | WV DEP ApplicationXtender (AX) document search | watch | search_only | permits | DEP's document system (now Application Enhancer): a login is described for documents; only the shell answered (2026-11-09). Registered as a barrier. |
+| `wv-dep-erule-ess` | WV DEP Electronic Submission System (eRule Phase 2 plan) | watch | search_only | permits | No West Virginia report in EPA's sewer overflow and bypass tables (current and all-versions extracts of 2026-11-14); DEP's electronic reporting sends none there. |
+| `wv-dep-ess-public-query` | DEP Electronic Submission System public permit query | watch | search_only | permits | Timed out (2026-11-09); permits, not overflow reports. |
+| `wv-hb3217-2025` | WV HB 3217 (2025): public notification of environmental spills | watch | fetched | law | Would have made DEP give public notice within 24 hours of any reported spill 'of any hazardous substance, sewage, or other pollutants' and keep an online spill database; introduced 2025-03-07, referred to Energy and Public Works; no passage found. |
+| `wv-hb3217-2025-status` | HB 3217 (2025) status | watch | fetched | law | Pending in the House Energy and Public Works Committee since 2025-03-07. |
+| `wv-mub-cso-current` | Morgantown Utility Board combined sewer page | watch | fetched | context | Standing notice (72 hours after rain), read 2026-11-09; both page addresses answered 404 on 2026-11-14 (moved). |
+| `wv-mub-cso-public-notice-2025` | Morgantown Utility Board January 2025 CSO notice (file-sharing link) | watch | search_only | context | Only the hosting title loaded (2026-11-09). |
+| `wv-mub-overflow-summary` | Morgantown Utility Board CSO Overflow Summary (legacy page link) | watch | search_only | context | Only the hosting title loaded (2026-11-09); refers to 2018 frequencies. |
+| `wv-wvlegals-cso-notices` | West Virginia Legals (newspaper legal notices), CSO annual public notices | watch | fetched | advisories | Shows the WV practice: an annual legal ad plus signs, not event notices. Useful for each town's stated after-rain period. |
+| `wv-wayne-spill-2026` | WV DEP Wayne County spill 2026 map service | rejected | fetched | events | Single-incident response layer (controls, sampling, downstream route); shows DEP builds per-incident maps but not a spill list. |
+| `wv-orsanco-bacteria` | ORSANCO contact recreation bacteria (Wheeling, Huntington) | unreachable | search_only | monitoring | 403 to plain clients (2026-11-09): a bot wall, registered as a barrier. |
+
+## la: Louisiana (16)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `la-baton-rouge-quarterly-reports` | City of Baton Rouge and Parish of East Baton Rouge consent-decree quarterly reports (Part D) | used | fetched | events | Read by the la-baton-rouge-quarterly feed: 5 of 8 reports pass the layout check (rows per collection system equal the report's own summary): 219 discharges, October 2024 to September 2026 less the withheld quarters; Reports 91, 92 and 97 withheld. |
+| `la-lac-33-i-ch39` | LAC 33:I Chapter 39, Notification Regulations and Procedures for Unauthorized Discharges | used | search_only | law | Regulator duty only; no public-notice duty found. |
+| `la-ldeq-spoc` | LDEQ Single Point of Contact (SPOC) incident reporting | used | fetched | law | Regulator-report route; no public list. |
+| `la-ldeq-written-notification-guidance` | LDEQ written notification procedures | used | search_only | law | Nonbinding summary of the seven-day written report. |
+| `la-baton-rouge-consent-decree` | City of Baton Rouge / East Baton Rouge Parish sewer consent decree (2002, modified 2012-2013) | watch | search_only | events | EPA's settlement page: context; the City-Parish's quarterly reports are the feed (la-baton-rouge-quarterly-reports). |
+| `la-ldh-hab-advisories` | LDH algal bloom advisories (news releases) | watch | search_only | advisories | Ad hoc only. |
+| `la-pontchartrain-conservancy` | Pontchartrain Conservancy (formerly Lake Pontchartrain Basin Foundation) weekly bacteria monitoring (Swim Guide affiliate) | watch | search_only | monitoring | Swim Guide data by agreement. |
+| `la-pontchartrain-weekly-results` | Pontchartrain Conservancy weekly results page | watch | search_only | context | Spreadsheet rows and reuse terms not verified. |
+| `la-swbno-consent-decree` | Sewerage and Water Board of New Orleans consent decree (Civil Action 93-3212, E.D. La.) quarterly reports | watch | fetched | events | Index and the Q3 2026 report read 2026-11-14: 624 pages of program progress, no dated list of overflows; the index is watched daily in the register. |
+| `la-epa-sobe` | EPA SOBE (eRule) extract, Louisiana rows | rejected | fetched | events | Rechecked 2026-11-14 (current and all-versions extracts): no Louisiana report; 17 Louisiana collection-system permits are listed in EPA's permits table. |
+| `la-industrial-cso-permits` | EPA CSO inventory rows for Louisiana (industrial) | rejected | fetched | outfalls | EPA's two Louisiana 'CSO' rows are petrochemical plants' combined outfalls: kind other in data/outfalls-la.json, off the combined sewer outlets and the rain caution. |
+| `la-ldeq-uas-incidents` | LDEQ_UAS_Incident_Report_View_Layer (ArcGIS Online) | rejected | search_only | events | Not an overflow feed (by title); verify if time allows. |
+| `la-ldeq-edms` | LDEQ Electronic Document Management System (EDMS) | unreachable | fetched | events | A CAPTCHA guards the search: no document read; registered as a barrier (records request or a supported export needed). |
+| `la-ldh-beach-alternate` | LDH beach monitoring page (alternate address) | unreachable | fetched | advisories | 403 to this project's client (2026-11-14). |
+| `la-ldh-beach-monitoring` | Louisiana Department of Health Beach Monitoring Program | unreachable | search_only | advisories | Both addresses answer 403 to this project's client (2026-11-14): registered as a barrier (bot wall); a data request to LDH is the owner's item. |
+| `la-shreveport-consent-decree` | City of Shreveport consent-decree annual reports (Attachment 3 SSO table) | unreachable | search_only | events | The host made no connection with this project's client on 2026-11-14 (twice); the research's reading (131 rows, May 2025 to May 2026) is not verified here. |
+
+## nv: Nevada (15)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `nv-law-nac-445a-3473` | NAC 445A.345 to 445A.348 release notification (hazardous substances, spill hotline) | used | fetched | law | Fetched: release to surface water reported "as soon as practicable" by phone; land releases over 25 gallons by the first working day. |
+| `nv-law-sb276-2025` | Nevada SB 276 (2025): local governments must notify NDEP of sewage discharges; NDEP notifies affected tribes | used | fetched | law | Fetched: duty to notify NDEP electronically or by telephone, no deadline stated; tribe notice by NDEP; no public notice. Codified as NRS 445A.467 (official chapter, revision of 2026-04-15, read 2026-11-09). |
+| `nv-state-parks-hab` | Nevada State Parks HAB advisory page | used | fetched | advisories | Read by the nv-state-parks-hab ingester: one hab_advisory record per water while listed, the parks' level and words, the first read as the start. The live host refused the collector's connections on 2026-11-14 (no answer on ports 443 and 80); the parser was built and tested on the Internet Archive's copies of 2025-11-12 (Rye Patch Watch, Lahontan Warning) and 2026-08-13 (Lahontan, Rye Patch, Marlette Lake and Washoe Lake Watch). |
+| `nv-ndep-hab-dashboard` | Nevada HAB Dashboard (Office of State Epidemiology, Power BI) and weekly HAB email list | candidate | fetched | advisories | The only statewide bloom status found, a Power BI report: on 2026-11-09 the page returned only its script shell, in which no rows, no download and no data address were found (the report's own data calls were not examined). Registered as a channel with the barrier; a supported export is an owner request. |
+| `nv-ndep-hab-program` | NDEP harmful algal bloom program page | watch | fetched | advisories | Program page linking the statewide dashboard and the weekly e-mail update; watched for a data download (register row nv-ndep-hab-program). |
+| `nv-ndep-public-documents` | NDEP public document search (OnBase) | watch | fetched | context | Not all record series are online; whether sewage incident files are searchable was not verified. A records request for the NRS 445A.467 notices is the route. |
+| `nv-ndep-water-quality-data` | NDEP Water Quality Data Warehouse | watch | fetched | monitoring | Station results behind a search form; results and downloads not exercised. Samples, not notices. |
+| `nv-nps-lake-mead-habs` | NPS Lake Mead NRA HAB page | watch | fetched | advisories | Readable page of general advice; its page date is not an advisory date. Watched without records (register row nv-nps-lake-mead-habs). |
+| `nv-reno-environmental-control` | City of Reno Environmental Control (spill line) | watch | fetched | context | A telephone spill line and a record holder; no published list of overflows. |
+| `nv-snwa-watershed` | Southern Nevada Water Authority watershed monitoring | watch | fetched | monitoring | Lake Mead and Colorado River monitoring; the regional database is offered by e-mail request. Samples, not notices. |
+| `nv-tahoe-beaches` | Lake Tahoe beach bacteria monitoring | watch | fetched | monitoring | The Nevada Tahoe Conservation District's Nearshore Human Health page describes the monitoring with a 2023 report; its Lake Tahoe Info program page gave no readable results (2026-11-09). No current station results or closures found. |
+| `nv-truckee-river-news` | Reno/Sparks Truckee River sewage spill coverage (News 4, KNPR) | watch | search_only | news | The 2022 Sparks spill (estimates 214,000 to 2.5 million gallons to the Truckee) went unreported to NDEP and led to SB 276. |
+| `nv-epa-sobe` | EPA ECHO SOBE (Nevada) | rejected | fetched | events | No Nevada events and no Nevada collection systems in the current and all-versions extracts of 2026-11-12 (rechecked at the build). |
+| `nv-ndep-environmental-activities` | NDEP Nevada Environmental Activities portal (Report a Spill) | rejected | fetched | events | Intake only (an online form and account login); no public view of the notices found. The host did not answer the collector on 2026-11-14. |
+| `nv-swim-guide` | Swim Guide affiliates in Nevada | rejected | search_only | monitoring | None found (search only). |
+
+## ok: Oklahoma (10)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `ok-deq-opdes-rules` | OAC 252:606 Oklahoma Pollutant Discharge Elimination System (OPDES) Standards | used | fetched | law | Municipal OPDES Part III (March 2017) B.6: oral notice to DEQ within 24 hours of awareness of any collection-system bypass or SSO, written in five days; Chapter 606 incorporates 40 CFR 122.41 (expansion research 2026-11-09). |
+| `ok-deq-wastewater-reporting` | Oklahoma DEQ wastewater reporting requirements page and Form 605-011 | used | fetched | law | The page asks for a telephone report within 48 hours of the event and a written one in five days (also 'five business days'); Form 605-011 (revised 2025-10-01) for 24 hours and five days. Intake guidance, not public output. |
+| `ok-nps-chickasaw-bacteria` | National Park Service, Chickasaw National Recreation Area: bathing beach monitoring (E. coli table) | used | fetched | monitoring | Read by the ok-nps-chickasaw-bacteria ingester (2026-11-14): 10 places, sample dates 2026-08-06 to 2026-08-27, 40 results (8 censored '<1'), highest 162.4 (Bear Falls, 2026-08-20), highest geometric mean 113.6; none at the park's threshold (235 weekly, 126 geometric mean), so no record. No unit stated; no posting or removal dates. |
+| `ok-beaches` | Oklahoma bacteria beach monitoring | watch | fetched | advisories | Superseded by ok-nps-chickasaw-bacteria (used) for Chickasaw; Tulsa's Zink Lake dashboard, GRDA's map and OWRB's data registered with their barriers; no statewide beach program. |
+| `ok-deq-gis-waterqweb` | Oklahoma DEQ WaterQWeb MapServer | watch | fetched | outfalls | Layer 4 read 2026-11-14 (safe fields): 1,499 discharge points of 872 permits, updated 2026-06-14; for the 307 sewage permits it holds its points equal EPA's (median 0 m), so it adds no outfall; its permit status is noted on the operator rows. Watched weekly (register). |
+| `ok-deq-industrial-spill-rule` | OAC 252:616-5-3 (industrial wastewater) spill notice to DEQ | watch | search_only | law | Industrial only. |
+| `ok-okc-tulsa-utilities` | Oklahoma City Utilities and City of Tulsa Water and Sewer overflow notices | watch | search_only | events | OKC's June 15, 2026 repair notice (no wastewater believed to enter the river) and Tulsa's Water and Sewer page (an overflow phone line) read; no public overflow archive. |
+| `ok-otrd-checkmyoklake` | Oklahoma Tourism and Recreation Department "Check My OK Lake" blue-green algae status | watch | search_only | advisories | The old Check My OK Lake host failed; TravelOK's lake-conditions chooser is the successor candidate, selected-lake results not exposed (2026-11-09). Watched. |
+| `ok-usace-tulsa-hab` | US Army Corps of Engineers Tulsa District blue-green algae lake advisories | watch | search_only | advisories | Program page answers 403 to automated readers (2026-11-09); registered as a barrier. |
+| `ok-epa-sobe` | EPA SOBE (eRule) extract, Oklahoma rows | rejected | fetched | events | No Oklahoma report in the current and all-versions extracts of 2026-11-12; one collection system registered (OK0044733, Kickapoo, tribal). |
+
+## pr: Puerto Rico (11)
+
+| id | name | status | verified | role | why |
+|---|---|---|---|---|---|
+| `pr-drna-beach-notices` | DRNA Programa de Monitoría de Playas y Notificación Pública: weekly 'Notificación Monitoria de Playas' (WordPress category 1424) | used | fetched | advisories | Read by ingest/pr_drna_beaches.py: 280 notices (2019-10-11 to 2026-11-13: 220 lists of beaches over the Beach Action Value, 56 'all fit', one list of fit beaches, 3 PDF-only); 601 advisories, one per run of consecutive notices listing a beach, from the publication of the first notice to the publication of the next that no longer lists it; sampling date kept apart; each station at its Water Quality Portal point (PR_BEACH_WQX). |
+| `pr-epa-npdes-pr0021555` | EPA Region 2 NPDES permit PR0021555, PRASA Puerto Nuevo RWWTP (2021), CSO permit conditions | used | fetched | law | Source of the CSO public-notification clause (Nine Minimum Controls #8). |
+| `pr-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, SOBE), Puerto Rico permits | used | fetched | events | Read by the national overflow module (ingest/echo_sewer_overflow_events.py, Puerto Rico permits added 2026-11-14): 940 current reports from 45 permits in the 2026-11-12 extract (SSO 863, bypass 77, none typed CSO; 2025-04-03 to 2026-11-10), every one with a point; 252 read as reaching a water (35 permits), 688 dropped (SSOs naming no water with only odour, aesthetic, land or no observable impacts); received a median 2 days after the start (90th percentile 14). Times in Atlantic Standard Time. |
+| `pr-prasa-consent-decree` | US v. PRASA consent decree (2016) and 2023 modification; EPA Region 2 public notice | used | fetched | law | States the new web-communication duty for Puerto Nuevo CSOs. |
+| `pr-prasa-cso-data` | PRASA combined sewer overflow outfalls (ArcGIS feature service CSO_Data) | used | fetched | outfalls | Read by scripts/add_pr_cso_outfalls.py on 2026-11-14: the 12 Puerto Nuevo combined sewer outfalls (PR0021555) with PRASA's points and receiving waters (data/outfalls-pr.json), each paired with EPA's inventory row; EPA gives no point for outfall 003 and a wrong longitude for 010. |
+| `pr-senate-rs310` | Senado de Puerto Rico, R. del S. 310 (2025-09-22): investigation of sewage discharges to the sea and other waters | used | fetched | law | Pending legislative investigation; its motives propose standardized weekly public reports of incidents (date, cause, duration, estimated volume). |
+| `pr-epa-beacon` | EPA BEACON 2.0, Puerto Rico beaches | watch | inferred | monitoring | Season-late; station coordinates likely the useful part. |
+| `pr-estuario-bacteria` | Programa del Estuario de la Bahía de San Juan: bacteriological monitoring (Condado lagoon, San Juan beaches) | watch | search_only | monitoring | Annual or periodic PDF reports; useful context for San Juan Bay CSO waters. |
+| `pr-prasa-cso-web` | PRASA 'Combined Sanitary Overflows (CSOs)' web pages (home, location map, precautions, efforts, 'Notify a CSO') | watch | fetched | events | The 2023 consent-decree modification adds a duty to tell the public on PRASA's web of CSO discharges and their estimated volume, but the pages fetched show only locations, precautions and a form for the public to report an overflow; no event list found. Registered as a monitored channel (pr-prasa-cso-pages), no records made from it. |
+| `pr-surfrider-bwtf` | Surfrider Foundation Blue Water Task Force, Puerto Rico chapters (Rincón, Isabela) | watch | search_only | monitoring | Volunteer bacteria results; named in R. del S. 310 for Isabela. |
+| `pr-dnr-bypass-email` | Permit spill and bypass reporting to DNER Point Sources Permits Division (bypass@jca.pr.gov) | rejected | fetched | law | A regulator-only channel; no public output found. |
 
 ## co: Colorado (12)
 
