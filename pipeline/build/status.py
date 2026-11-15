@@ -192,6 +192,9 @@ CONFIRM_DAYS = 14
 # advisory, however late its end is seen (verify2 P1-1; Delaware's map and DES's beach and bloom layers)
 POLL_END_HORIZON_SOURCES = {"de-dnrec-recreational-water", "sc-des-beach-monitoring", "sc-des-hab"}
 POLL_END_HORIZON_SOURCES.add("nv-state-parks-hab")   # Nevada's parks page: a lift seen at a poll after a gap (Astra P2-8)
+# Puerto Rico: a DRNA beach advisory whose end is the first notice seen without the beach (ingest/pr_drna_beaches.py,
+# raw.ended_at_precision "poll"); keyed on the source, so no other feed changes (Astra PR review P1-1)
+POLL_END_HORIZON_SOURCES |= {"pr-drna-beach-notices"}
 SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}

@@ -1,0 +1,30 @@
+id: "pr-prasa-cso-data"
+name: "PRASA combined sewer overflow outfalls (ArcGIS feature service CSO_Data)"
+url: "https://gis.acueductospr.com/arcgis_local/rest/services/Hosted/CSO_Data/FeatureServer/0"
+homepage: "https://www.acueductos.pr.gov/en-us/combinado/mapa-de-ubicacion-csos"
+kind: "arcgis"
+level: "utility"
+# Notes (research/pr, status used, verified fetched, checked 2026-11-14): Read by
+#   scripts/add_pr_cso_outfalls.py on 2026-11-14: the 12 Puerto Nuevo combined sewer outfalls
+#   (PR0021555) with PRASA's points and receiving waters (data/outfalls-pr.json), each paired with
+#   EPA's inventory row; EPA gives no point for outfall 003 and a wrong longitude for 010.
+# Access detail (research, quoted): query?where=1%3D1&outFields=*&f=json returns 12 features (Web
+#   Mercator). Feeds the Experience Builder app 'Sistema de Alcantarillado Combinado' (item
+#   f157b11700644d1fb0286809f384f457, public, created 2026-03) embedded at
+#   acueductos.pr.gov/en-us/combinado/mapa-de-ubicacion-csos. Other service folders on the server
+#   need a token. Sample: research/pr/raw/cso-data-sample.json.
+# Can fill: coordinates (outfall), waterbody, location_text
+# Cannot fill: any event field
+# Waters: San Juan Bay, Rio Puerto Nuevo, Canal Martin Pena (Puerto Nuevo system)
+cadence: "static; item modified 2026-05"
+license: "No terms on the layer; site footer links PRASA 'Terms of use'."
+attribution: "Autoridad de Acueductos y Alcantarillados (PRASA)"
+enabled: true
+role: "outfalls"
+event_types: ["cso"]
+states: ["PR"]
+access: ["arcgis"]
+access_detail: "query?where=1%3D1&outFields=*&f=json returns 12 features (Web Mercator). Feeds the Experience Builder app 'Sistema de Alcantarillado Combinado' (item f157b11700644d1fb0286809f384f457, public, created 2026-03) embedded at acueductos.pr.gov/en-us/combinado/mapa-de-ubicacion-csos. Other service folders on the server need a token. Sample: research/pr/raw/cso-data-sample.json."
+machine_readable: true
+legal_basis: "2016 consent decree as modified 2023 (Puerto Nuevo CSO web communication)"
+checked: "2026-11-14"
