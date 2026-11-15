@@ -2762,6 +2762,45 @@ def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None
 EARLIER_PERIOD_SOURCES = frozenset({"ne-dwee-beachwatch", "in-idem-cyanobacteria"})
 
 
+def _observed_period_intervals(ev: dict, periods: list, state, now, water, rules) -> list[dict]:
+    """Delaware's map and DES's beach and bloom layers (POLL_END_HORIZON_SOURCES): an advisory listed again after an
+    unread gap keeps its observation periods (raw.listed_periods, ingest/de_sc_periods.py). Each earlier period is
+    coloured as the record was while that period's last read was the latest (the same rules, as if still listed then),
+    cut at the next period's first read, so a later read that lists it again never colours the unread gap; the last
+    period runs on from its own first read under the record's own status and end (verify3 P1-1). Keyed on these sources
+    and the field, so no other feed changes."""
+    raw = ev.get("raw") or {}
+    base = {k: v for k, v in raw.items() if k not in ("listed_periods", "periods_basis")}
+    ps = [p for p in periods if isinstance(p, dict) and parse_time(p.get("from")) and parse_time(p.get("to"))]
+    if len(ps) < 2:
+        return event_intervals({**ev, "raw": base}, state, now, water, rules)
+    out = []
+    for i, p in enumerate(ps[:-1]):
+        nxt = parse_time(ps[i + 1]["from"])
+        prior_raw = {k: v for k, v in base.items() if k not in ("_notice_closed_at", "ended_at_precision", "end_basis",
+                                                                "_missing_from_source_since")}
+        prior_raw["_last_seen_in_source"] = p["to"]
+        if prior_raw.get("_caution_to_notice_end"):
+            prior_raw["_open_notice_caution_hours"] = prior_raw.get("_open_notice_caution_hours") or 72
+        prior = {**ev, "ended_at": None, "source_updated_at": None, "raw": prior_raw,
+                 "status": "advisory_active" if ev.get("status") in ("advisory_active", "advisory_lifted")
+                 else ev.get("status")}
+        if i:
+            prior.update(started_at=p["from"], time_precision="poll")
+        for iv in event_intervals(prior, state, now, water, rules):
+            if iv["start"] >= nxt:
+                continue
+            if iv["end"] is None or iv["end"] > nxt:
+                iv["end"] = nxt
+            out.append(iv)
+    last = {**ev, "started_at": ps[-1]["from"], "time_precision": "poll", "raw": base}
+    out.extend(event_intervals(last, state, now, water, rules))
+    for iv in out:          # the record's own times, whatever period an interval belongs to
+        iv["started_at"], iv["ended_at"] = ev.get("started_at"), ev.get("ended_at")
+        iv["observed_periods"] = len(ps)
+    return out
+
+
 def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None = None,
                     rules: dict | None = None) -> list[dict]:
     """The colour intervals one event sets on a water (its state, and the water record for the
@@ -2769,8 +2808,13 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
     not used: the intervals are those of a record with no end, each with end_not_used (the published end, why, and
     the rule)."""
     rules = load_rules() if rules is None else rules
-    earlier = []
     raw = ev.get("raw") or {}
+    periods = raw.get("listed_periods")
+    if ev.get("source_id") in POLL_END_HORIZON_SOURCES and isinstance(periods, list) and len(periods) > 1 \
+            and (not ev.get("ended_at") or end_precision(ev) == "poll") \
+            and (ev.get("status") in ("advisory_active", "advisory_lifted") or raw.get("_agency_label_only") is True):
+        return _observed_period_intervals(ev, periods, state, now, water, rules)
+    earlier = []
     if ev.get("source_id") in EARLIER_PERIOD_SOURCES and ev.get("sampled_at") \
             and ev.get("time_precision") == "poll" and raw.get("_advisory_clock_version") == 1:
         # A corrected flag can reopen the same source sample. Replay its closed observation periods separately,

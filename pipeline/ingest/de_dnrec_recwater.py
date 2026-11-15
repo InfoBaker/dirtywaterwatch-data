@@ -50,7 +50,7 @@ import argparse
 import json
 import re
 import sys
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 import requests
@@ -59,6 +59,7 @@ from common import (BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, wri
 # DNREC's free text through the Delaware scrubber (names after "call"/"contact", house numbers, phones, e-mails),
 # not common.scrub_text alone (re-review P1-5)
 from ingest.de_dnrec_derns import scrub as _scrub
+from ingest.de_sc_periods import extend as extend_periods
 
 
 def scrub_text(v: str) -> str:
@@ -164,6 +165,8 @@ def beach_water(unit: str | None) -> str | None:
     return None
 
 
+PERIODS_BASIS = ("the reads of DNREC's map that listed this status, in periods: a read more than 14 days after the "
+                 "previous one that listed it opens a new period, and the unread time between is not confirmed")
 LABEL_BASIS = ("DNREC resamples after a result above the enterococcus standard and has not posted an advisory: its "
                "label is quoted and the site shows its own caution, never DNREC's advisory")
 
@@ -315,6 +318,9 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
             state[key] = {"unit_id": uid, "code": code, "name": s.get("UnitName"), "started_at": fetched_at,
                           "lat": lat, "lon": lon}
         else:
+            # a read after an unread gap opens a new observation period (verify3 P1-1)
+            cur["listed_periods"] = extend_periods(cur.get("listed_periods"), fetched_at, cur["started_at"],
+                                                   cur.get("last_seen_at"))
             cur["last_seen_at"] = fetched_at
     for key, v in state.items():
         if v.get("ended_at"):
@@ -356,11 +362,18 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
             raw.update(ended_at_precision="poll", end_basis="the first poll of DNREC's map that showed another status")
         if v.get("missing_since"):
             raw["_missing_from_source_since"] = v["missing_since"]
+        if len(v.get("listed_periods") or []) > 1:
+            raw.update(listed_periods=v["listed_periods"], periods_basis=PERIODS_BASIS)
         if kind == "label":
             raw.update(_agency_label_only=True, _agency_label=CODES[v["code"]], _label_basis=LABEL_BASIS,
                        _caution_to_notice_end=True)
             if v.get("ended_at"):
-                raw["_notice_closed_at"] = v["ended_at"]
+                # the closure seen at a poll: never later than the site's caution hours after the last read that listed
+                # the label, so a closure seen after an unread gap never turns the unread days yellow (verify3 P1-1)
+                seen = v.get("last_seen_at") or v["started_at"]
+                held = (datetime.fromisoformat(seen.replace("Z", "+00:00")) + timedelta(hours=72)).astimezone(
+                    timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+                raw["_notice_closed_at"] = min(v["ended_at"], held)
             else:
                 # still listed: no closure observed. The caution stays current for the site's caution hours after the
                 # last read that listed it (re-review P2-2), never ending at that read
@@ -384,6 +397,23 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
             recs[-1]["raw"]["continues_after"] = beyond["event_id"]
             recs[-1]["raw"]["continuation_basis"] = (
                 f"DNREC's history ends this notice on {beyond['ended_at']}; the map still showed it after that day")
+    # each history row's confirmations by the map, in periods: a confirmation after an unread gap opens a new period,
+    # so it never confirms the gap (verify3 P1-1); an explicit end of DNREC's is the row's own and takes no periods
+    periods = {k: v for k, v in (prev.get("confirmed_periods") or {}).items()}
+    before = prev.get("confirmed") or {}
+    for r in history:
+        eid, seen = r["event_id"], confirmed.get(r["event_id"])
+        if not seen or r.get("ended_at") or not r.get("started_at") or r["raw"].get("status_basis") \
+                or not (r["status"] == "advisory_active" or r["raw"].get("_agency_label_only")):
+            continue
+        if eid not in periods:
+            # DNREC's row and the map's first confirmation (or the last one saved before periods were kept) are one
+            # period from DNREC's start: the row is DNREC's own word that the advisory stood from that day
+            first = datetime.fromisoformat(r["started_at"][:10]).replace(tzinfo=TZ).isoformat()
+            periods[eid] = [{"from": first, "to": before.get(eid) or seen}]
+        periods[eid] = extend_periods(periods[eid], seen, periods[eid][0]["from"], None)
+        if len(periods[eid]) > 1:
+            r["raw"].update(listed_periods=periods[eid], periods_basis=PERIODS_BASIS)
     for r in history:                                        # confirmations found while building the poll records
         seen = confirmed.get(r["event_id"])
         if seen and (r["raw"].get("_last_seen_in_source") or "") < seen:
@@ -392,7 +422,7 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
                                               "(raw._last_seen_in_source)")
             if r["raw"].get("_agency_label_only") and not r.get("ended_at"):
                 r["raw"].update(_caution_to_notice_end=True, _open_notice_caution_hours=72)
-    return recs, {"polls": state, "confirmed": confirmed}
+    return recs, {"polls": state, "confirmed": confirmed, "confirmed_periods": periods}
 
 
 META = {"credit": "Delaware Department of Natural Resources and Environmental Control, Recreational Water Program "
