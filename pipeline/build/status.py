@@ -1070,6 +1070,7 @@ COUNTY_FIELD_STATES.add("MO")
 COUNTY_LIST_STATES = {"MO"}    # raw.counties, an operator's several counties (KC Water, MSD), read for these states only
 COUNTY_STATES["KS"] = "ks-counties.json"       # Kansas: Leavenworth's and KDHE's reports give a county; HAB lakes a point
 COUNTY_FIELD_STATES.add("KS")
+COUNTY_STATES["AR"] = "ar-counties.json"; COUNTY_FIELD_STATES.add("AR")   # Arkansas: DEQ reports give no point; raw.county is the permit plant's
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
 # (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
 REMAINDER_MERGE_STATES = {"TN"}

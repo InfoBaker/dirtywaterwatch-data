@@ -1,0 +1,28 @@
+id: "ar-deq-sso-access-db"
+name: "Arkansas DEQ NPDES_SSO_web.zip (full Access database)"
+url: "https://adeq.state.ar.us/water/enforcement/sso/NPDES_SSO_web.zip"
+homepage: "https://adeq.state.ar.us/water/enforcement/sso/NPDES_SSO_web.zip"
+kind: "csv"
+level: "state"
+# Notes (research/ar, status candidate, verified fetched, checked 2026-11-14): A bulk snapshot of
+#   the same reports for history before 2025; the ZIP's Last-Modified is still 2025-08-13 (HEAD
+#   request 2026-11-14, 5,065,954 bytes); not parsed (Microsoft Access).
+# Access detail (research, quoted): Downloaded to the scratchpad (not the repo): 5,065,954 bytes
+#   zipped, NPDES_SSO_web.mdb 28.6 MB, Last-Modified 2025-08-13. Free-text overflow types ("Manhole
+#   Overflow", "MH overflow") visible in strings; tables not parsed.
+# Can fill: history
+# Cannot fill: current events (stale since 2025-08)
+# Waters: statewide
+# History: at least 2014 to 2025-08
+cadence: "irregular (last 2025-08-13)"
+license: "None shown."
+attribution: "Arkansas Department of Energy and Environment, Division of Environmental Quality (DEQ)"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["AR"]
+access: ["csv"]
+access_detail: "Downloaded to the scratchpad (not the repo): 5,065,954 bytes zipped, NPDES_SSO_web.mdb 28.6 MB, Last-Modified 2025-08-13. Free-text overflow types (\"Manhole Overflow\", \"MH overflow\") visible in strings; tables not parsed."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"

@@ -1,0 +1,64 @@
+id: "ar-deq-hab-advisories"
+name: "Arkansas DEQ harmful algal bloom advisories (current table and archive)"
+url: "https://adeq.state.ar.us/water/planning/hab/advisories.json"
+homepage: "https://adeq.state.ar.us/water/planning/hab/"
+kind: "json"
+level: "state"
+# Fetched by ingest/ar_deq_hab_advisories.py (which rounds a coordinate pair written inside a waterbody name to 0.001
+#   degree before anything is saved or keyed) and mapped through the fetch block below (ingest/ar_transforms.py
+#   ar_hab_record; live: false, the module runs it): source id
+#   ar-deq-hab-advisories, data/build/events/ar-deq-hab-advisories.json. The Harmful Algal Blooms page's "Current
+#   Advisories" table and its archive page are both drawn by the page's script from one file, advisories.json
+#   (waterbody, county, area, date posted, date lifted); the current table shows the rows with no lift date.
+# What the file holds (read 2026-11-14; "updated": "November 9, 2026"): 52 advisories from 2014-07-29 to 2026-09-22
+#   (2026 12, 2025 6, 2024 7, 2023 4, 2022 1, 2021 1, 2020 10, 2019 7, 2018 3, 2014 1); 4 in effect (no lift date):
+#   Lake Hamilton (posted 2026-07-24), Lake June (2026-07-31), Bois d'Arc Lake (2026-08-12), Mom's Lake (2026-09-22);
+#   18 lifted "N/A" (no lift date given), 16 of them starred: "Advisory posted by partner agency or HAB confirmed, but
+#   no advisory issued" (the archive's footnote).
+# Dates only. The file has no row id: the key is the water and the day posted.
+cadence: "every run (one small file; DEQ edits it when it posts or lifts an advisory)"
+license: "No licence or terms stated on the page."
+attribution: "Arkansas Department of Energy and Environment, Division of Environmental Quality, Office of Water Quality"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["AR"]
+registry_ids: ["ar-deq-hab-advisories"]
+access: ["json", "html"]
+access_detail: "advisories.json, the file the Harmful Algal Blooms page's script (default.js) and the archive page (archive.aspx) read: {updated, advisories: [{waterbody, county, area, date, lifted}]}. No coordinates except one row whose waterbody text gives them."
+machine_readable: true
+legal_basis: "DEQ's Harmful Algal Bloom Management Plan (2019): recreational use health advisories, issued and lifted by DEQ with its partner agencies"
+checked: "2026-11-14"
+fetch:
+  platform: "json"
+  live: false
+  module: "ar_deq_hab_advisories"
+  url: "https://adeq.state.ar.us/water/planning/hab/advisories.json"
+  json: {records_path: "advisories"}
+  time_zone: "America/Chicago"
+  safe_fields: [waterbody, county, area, date, lifted]
+  free_text: [waterbody, area]
+  record:
+    source_record_id: {template: "{waterbody|slug|default:no-water}-{@started_at|compact|default:nodate}"}
+    started_at: {field: date, parse: date, formats: ["%B %d, %Y"]}
+    ended_at: {field: lifted, parse: date, formats: ["%B %d, %Y"]}
+    event_type: {const: hab_advisory}
+    authority: {const: "Arkansas Division of Environmental Quality (harmful algal bloom advisories)"}
+    source_url: {const: "https://adeq.state.ar.us/water/planning/hab/"}
+  transform: "ingest.ar_transforms.ar_hab_record"
+  dedupe: {repeats: suffix}
+  history:
+    keep_missing: true
+    revisions: true
+    confirm_while_listed: true
+    # a row DEQ corrects (a posting day or the water's spelling) is matched to its replacement by the water's key and
+    # county, or by the water and the posting day: the old one is then duplicate_of the corrected row
+    supersede:
+      - ["{waterbody|slug|default:-}", "{county|slug|default:-}", "{lifted|slug|default:-}"]
+      - ["{@started_at|day}", "{county|slug|default:-}"]
+  meta:
+    credit: "Arkansas Division of Environmental Quality, Harmful Algal Blooms: current advisories and archive"
+    license: "No licence or terms stated on the page."
+    caveat: "DEQ: “A water body with no HAB advisory is not an indication that a bloom is not present.” The file gives the day an advisory was posted and the day it was lifted, the county and the nearest town, no coordinates and no advisory level. Rows marked with a star are a partner agency's advisory or a confirmed bloom for which DEQ issued no advisory."
+    time_basis: "Dates only (the days DEQ posted and lifted the advisory), read in Central time."
+    placement_rule: "Placed on the water DEQ names, in the county DEQ gives; the marker is the USGS GNIS feature of that name in that county where one exists, else no marker."

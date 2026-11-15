@@ -135,6 +135,11 @@
 #                  news flash feed: stream advisories issued and rescinded; the feed holds about a month) and ks_kdhe_hab
 #                  (KDHE's HAB status layer, lakes under a Hazard, Warning or Watch, dated to the polls); Mountain time in
 #                  Sherman, Wallace, Greeley and Hamilton counties (pipeline/zones.py kansas_zone)
+#                  Arkansas: ar_deq_overflow_incidents (DEQ's Reported Noncompliance Incident Data, an HTML form
+#                  search read by start-day window, each window's count checked: every SSO, bypass, upset and
+#                  unpermitted discharge since 2025, day precision; ingest/ar_transforms.py), the generic JSON block
+#                  ar-deq-hab-advisories (DEQ's bloom advisories with the days posted and lifted) and
+#                  ar_adh_swim_beaches (the Department of Health's closed swim beaches, a standing list)
 #   make conditions  the nearest USGS gauge per water and its latest flow, level, temperature,
 #                  turbidity and conductance, NWS flood stages, cold/turbid/high-flow flags
 #                  (ingest/gauges.py -> data/build/conditions.json; readings refetched when older
