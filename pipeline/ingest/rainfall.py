@@ -1201,7 +1201,16 @@ def read_before(p: dict) -> bool:
     """Whether the radar has seen the point: a reading is stored for it, or one was when MRMS first answered no coverage
     there (no_coverage.read_before). MRMS's no coverage at such a point is an outage, its reading missing; at a point
     never read, the place is outside radar coverage (listed, never fresh, not counted for the exit code)."""
-    return bool(p.get("mrms")) or bool(p.get("last_mrms")) or bool((p.get("no_coverage") or {}).get("read_before"))
+    return bool(p.get("mrms")) or bool((p.get("no_coverage") or {}).get("read_before"))
+
+
+def outage_now(p: dict) -> bool:
+    """Whether the radar's newest word at a point read before is no coverage: its no_coverage mark is as new as its
+    stored reading or newer. The reading stays (the history and the citation keep it) but is never fresh and never
+    shown as the permittee's this hour (review 2026-11-15, pass 2)."""
+    nc, m = p.get("no_coverage") or {}, p.get("mrms") or {}
+    a, b = parse_t(nc.get("valid_time")), parse_t(m.get("valid_time"))
+    return a is not None and b is not None and a >= b
 
 
 def region_statistics(session, g: dict, region: str) -> dict:
@@ -1227,7 +1236,7 @@ def read_region(session, region: str, points: dict[str, dict], keys: list[str], 
     statistics (region_statistics: its own few pixels seldom tell), with its own gauges (REGION_GAUGES; the conus: the
     GAUGES in its tiles' box) and its own last determination; the check at its wettest point; and its readings stored
     in points (an older product never replaces a newer reading). Returns {g, units, check, fallback, grid_info, raw,
-    answers, got, failed, dark (key: valid time where MRMS answered no coverage), valued (the keys read with a 24-hour
+    answers, got, failed, dark (key: valid time where MRMS answered no coverage), valued (key: valid time, read with a 24-hour
     value), problems, sampled, read}."""
     conus = region == "conus"
     tag = "" if conus else f"{region}: "
@@ -1375,7 +1384,7 @@ def read_region(session, region: str, points: dict[str, dict], keys: list[str], 
                         left=len(left))
 
     # storage: a reading of an older product than the one stored never replaces it (the answers stay in the raw file)
-    older, valued, read, sampled = [], set(), None, 0
+    older, valued, read, sampled = [], {}, None, 0
 
     def newer_stored(k, vt) -> bool:
         a, b = parse_t((points[k].get("mrms") or {}).get("valid_time")), parse_t(vt)
@@ -1386,7 +1395,7 @@ def read_region(session, region: str, points: dict[str, dict], keys: list[str], 
             if v.get("h24") is None:
                 continue
             sampled += 1
-            valued.add(k)
+            valued[k] = g["valid_time"]
             if newer_stored(k, g["valid_time"]):
                 older.append(k)
                 continue
@@ -1408,7 +1417,7 @@ def read_region(session, region: str, points: dict[str, dict], keys: list[str], 
         for h in HOURS:
             m[f"h{h}"] = to_inches(m.get(f"h{h}"), units["factor"])
         m["units_read"] = units["units_read"]
-        valued.add(k)
+        valued[k] = m["valid_time"]
         if newer_stored(k, m["valid_time"]):
             older.append(k)
             continue
@@ -1438,7 +1447,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     points = group_points(outfalls)
     old_points = prev.get("points") or {}
     for k, p in points.items():                # keep the last readings until replaced
-        for f in ("mrms", "qpf", "no_coverage", "last_mrms"):
+        for f in ("mrms", "qpf", "no_coverage"):
             if (old_points.get(k) or {}).get(f):
                 p[f] = old_points[k][f]
         if p.get("mrms") and not p["mrms"].get("units_read"):
@@ -1505,25 +1514,22 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     # radar coverage: a point where MRMS answered no coverage this run is marked (no_coverage: since, the latest valid
     # time, and whether it had been read then, read_before), the mark kept until a value is read there. A marked point
     # never read is outside radar coverage: listed, never fresh, not counted for the exit code (it has no reading to
-    # show as dry). One read before is an outage: its reading missing, counted; when the outage is the newest answer,
-    # its stored reading is set aside (last_mrms: never fresh, never shown, the point read again next hour).
-    dark_now, valued = {}, set()
+    # show as dry). One read before is an outage: its reading missing, counted; while the outage is the newest answer
+    # there (outage_now), its stored reading stays (the history and the citation keep it) but is never fresh and never
+    # shown. The mark goes only with a value at least as new as it (an older product never clears it).
+    dark_now, valued = {}, {}
     for x in res.values():
         dark_now.update(x["dark"])
-        valued |= x["valued"]
+        valued.update(x["valued"])
     for k in readable:
-        if k in valued:
+        nc = points[k].get("no_coverage")
+        if k in valued and (not nc or (parse_t(valued[k]) or now) >= (parse_t(nc.get("valid_time")) or now)):
             points[k].pop("no_coverage", None)
         elif k in dark_now:
-            nc = points[k].get("no_coverage") or {"since": iso(now), "read_before": bool(points[k].get("mrms"))}
-            points[k]["no_coverage"] = {**nc, "valid_time": dark_now[k], "seen_at": iso(now)}
-            stored = parse_t((points[k].get("mrms") or {}).get("valid_time"))
-            if stored is not None and parse_t(dark_now[k]) is not None and parse_t(dark_now[k]) >= stored:
-                # the radar's newest word there is no coverage: the stored reading is no longer this hour's (never
-                # fresh, never shown) and the point is read again next hour; it is kept, as read, under last_mrms
-                points[k]["last_mrms"] = points[k].pop("mrms")
-        if k in valued:
-            points[k].pop("last_mrms", None)
+            nc = nc or {"since": iso(now), "read_before": bool(points[k].get("mrms"))}
+            newest = max((t for t in (dark_now[k], nc.get("valid_time")) if parse_t(t)), key=parse_t)
+            points[k]["no_coverage"] = {**nc, "valid_time": newest, "seen_at": iso(now)}
+    dimmed = {k for k in readable if outage_now(points[k])}
     uncovered = sorted(k for k in readable if points[k].get("no_coverage") and not read_before(points[k]))
 
     # forecast: point -> grid cell (kept), each cell at most every QPF_CACHE_H hours
@@ -1591,7 +1597,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         x, prv, conus = res[r], prev_regions.get(r) or {}, r == "conus"
         ks = keys_of[r]
         counted = [k for k in ks if k not in unc_set]
-        fr = [k for k in counted if is_fresh(points[k].get("mrms"), now)]
+        fr = [k for k in counted if is_fresh(points[k].get("mrms"), now) and k not in dimmed]
         fresh += fr
         rv = [parse_t(points[k]["mrms"].get("valid_time")) for k in ks if points[k].get("mrms")]
         rvt = max((t for t in rv if t), default=None)
@@ -1657,7 +1663,18 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     unreadable = sorted(p for p, row in rows.items() if all(k in unreadable_pts for k in row["points"]))
     for p in unreadable:
         del rows[p]
-    permits = shown_permits(rows, now)
+    # shown: the points whose radar now answers no coverage (outage_now) left out of the totals; a permittee left with
+    # none keeps its product and how it was read, and its reading under last_reading (a caution in its tail cites them)
+    view = {k: ({f: v for f, v in p.items() if f != "mrms"} if k in dimmed else p) for k, p in points.items()}
+    shown = permit_summary(view, outfalls)
+    for p, row in shown.items():
+        full = rows.get(p)
+        if full and row["h24"] is None and full["h24"] is not None:
+            row.update(product=full["product"], read=full["read"],
+                       last_reading={"valid_time": full["valid_time"], "h24": full["h24"],
+                                     "h24_point": full["h24_point"],
+                                     "why": "the radar answers no coverage at its points now: not shown as this hour's"})
+    permits = shown_permits({p: shown[p] for p in rows}, now)
     counts = session.summary()
     if units:
         units = {**units, "determined_at": iso(now), "service_states": "inches", "rule": UNIT_RULE}
