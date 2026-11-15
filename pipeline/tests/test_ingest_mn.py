@@ -436,3 +436,48 @@ def test_p1_2_the_window_words_are_keyed_on_their_field_and_other_records_keep_t
     assert ivs[0]["ended_by"].startswith("no longer on the authority's list at this fetch")
     plain = {**base, "raw": {"_unlisted_since": "2026-11-03T10:00:00Z"}}
     assert S.event_intervals(plain, "HI", now)[0]["ended_by"] == "no longer on the authority's map at this fetch"
+
+
+# ---------------------------------------------------------------- re-review 2026-11-14 P1-3: error pages
+
+def _run_main(monkeypatch, tmp_path, pages, previous=()):
+    written, saved = [], []
+    idx = (FIX / "mces" / "index.html").read_text()
+    monkeypatch.setattr(M, "fetch", lambda url: idx if url == M.INDEX_URL else pages[url])
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    monkeypatch.setattr(M, "save_raw", lambda *a, **k: saved.append(a))
+    monkeypatch.setattr(M, "read_json", lambda path, default=None: {"records": list(previous)})
+    monkeypatch.setattr(M, "write_events", lambda sid, recs, **k: written.append((list(recs), k)) or tmp_path)
+    rc = M.main([])
+    return rc, written
+
+
+def _fixture_pages():
+    return {it["url"]: (FIX / "mces" / it["url"].rsplit("/", 1)[-1]).read_text()
+            for it in M.parse_index((FIX / "mces" / "index.html").read_text())}
+
+
+ERROR_PAGE = "<html><body><h1>Service unavailable</h1></body></html>"
+
+
+def test_p1_3_a_first_seen_error_page_fails_the_run_and_makes_no_record(monkeypatch, tmp_path):
+    pages = _fixture_pages()
+    eagan = INDEX + "Eagan-Wastewater-Spill.aspx"
+    pages[eagan] = ERROR_PAGE                               # mixed: two notices read, one error page never seen before
+    rc, written = _run_main(monkeypatch, tmp_path, pages)
+    assert rc == 1 and len(written) == 1
+    recs, kw = written[0]
+    assert kw["ok"] is False and recs == [] and "Eagan" in kw["error"]      # nothing new written, the previous kept
+    recs, meta = mces(extra_pages={eagan: ERROR_PAGE})
+    assert "Eagan" not in recs and meta["pages_unread"] == [eagan]
+
+
+def test_p1_3_a_previously_seen_error_page_and_a_clean_run(monkeypatch, tmp_path):
+    first, _ = mces()
+    pages = _fixture_pages()
+    ex = INDEX + "Excelsior-Wastewater-Spill-(1).aspx"
+    pages[ex] = ERROR_PAGE
+    rc, written = _run_main(monkeypatch, tmp_path, pages, previous=first.values())
+    assert rc == 1 and written[0][1]["ok"] is False
+    rc, written = _run_main(monkeypatch, tmp_path, _fixture_pages(), previous=first.values())
+    assert rc == 0 and written[0][1].get("ok", True) is True and len(written[0][0]) == 3
