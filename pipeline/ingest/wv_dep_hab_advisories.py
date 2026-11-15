@@ -14,11 +14,14 @@ Records (a map of what is in effect, read as a snapshot)
     sewage), status advisory_active while the map shows it; advice_text is DEP's Advisory text in its words.
   - started_at is the first read of the map that showed it (time_precision poll): DEP gives the day the bloom was
     observed (raw.date_observed, a date on Eastern time), not the day an advisory was issued, so no issue date is
-    invented; reported_at, published_at and source_updated_at stay null. raw._last_seen_in_source is the latest read
+    invented; reported_at, published_at and source_updated_at stay null. A row that leaves the map and comes back is
+    a new episode; the earlier one is kept under '<key>~2'. raw._last_seen_in_source is the latest read
     that showed it, so the status build keeps it in effect while the map shows it.
   - A row no longer on a map the module could read is lifted at that read (advisory_lifted, ended_at the read,
     raw.ended_at_precision 'poll'), an upper bound, not DEP's lift time. A layer that answers with an error makes the
-    run ok=False: the records are kept and nothing is lifted.
+    run ok=False: the records are kept and nothing is lifted; so does a layer that answers only part of its rows
+    (exceededTransferLimit). The Advisory text is scrubbed (common.scrub_text: e-mails, telephone numbers, names after
+    contact words, residence house numbers) before it is saved anywhere.
   - Placement by the agency's own geometry only: a point's position, a segment's middle vertex, an area's vertex mean,
     rounded to three decimals (coord_source 'agency_layer'); raw.geometry_kind says which. No water name is invented.
 
@@ -35,6 +38,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+import common
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
 
 SOURCE_ID = "wv-dep-hab-advisories"
@@ -64,12 +68,19 @@ def place(kind: str, g: dict) -> tuple[float | None, float | None]:
         return None, None
 
 
-def observed(attrs: dict) -> str | None:
+def observed(attrs: dict) -> tuple[str | None, str | None]:
+    """(the observation as DEP stores it, an instant in UTC; the day it names). An esri date field is an instant; a
+    value at exactly midnight UTC is a date entered with no time (the usual esri convention), so its day is the UTC
+    date; any other instant is dated in Eastern time. Both are kept: the instant in raw.date_observed_utc."""
     v = attrs.get("Date_Observed", attrs.get("DateObserved"))
     try:
-        return datetime.fromtimestamp(int(v) / 1000, UTC).astimezone(ZoneInfo(TZ)).date().isoformat() if v else None
+        t = datetime.fromtimestamp(int(v) / 1000, UTC) if v not in (None, "") else None
     except (TypeError, ValueError, OverflowError):
-        return None
+        return None, None
+    if t is None:
+        return None, None
+    day = t.date() if (t.hour, t.minute, t.second) == (0, 0, 0) else t.astimezone(ZoneInfo(TZ)).date()
+    return t.strftime("%Y-%m-%dT%H:%M:%SZ"), day.isoformat()
 
 
 def rows_of(answers: dict) -> dict[str, dict]:
@@ -79,11 +90,16 @@ def rows_of(answers: dict) -> dict[str, dict]:
         doc = answers.get(str(lid))
         if not isinstance(doc, dict) or "error" in doc or "features" not in doc:
             raise ValueError(f"layer {lid} did not answer with features: {str(doc)[:200]}")
+        if doc.get("exceededTransferLimit"):
+            # a page of a longer answer is not the map: no lift is read from it
+            raise ValueError(f"layer {lid} answered only part of its rows (exceededTransferLimit)")
         for f in doc["features"]:
             a = f.get("attributes") or {}
             lat, lon = place(kind, f.get("geometry") or {})
-            out[f"{lid}-{a.get('OBJECTID')}"] = {"kind": kind, "advisory": " ".join(str(a.get("Advisory") or "").split()) or None,
-                                                 "date_observed": observed(a), "lat": lat, "lon": lon}
+            utc, day = observed(a)
+            text = " ".join(str(a.get("Advisory") or "").split())
+            out[f"{lid}-{a.get('OBJECTID')}"] = {"kind": kind, "advisory": common.scrub_text(text) if text else None,
+                                                 "date_observed": day, "date_observed_utc": utc, "lat": lat, "lon": lon}
     return out
 
 
@@ -94,7 +110,14 @@ def update(state: dict, current: dict, at: str) -> dict:
             it["left_at"] = at
     for k, row in current.items():
         it = items.get(k)
-        if it is None or it.get("left_at"):
+        if it is not None and it.get("left_at"):
+            # back on the map after leaving it: the earlier episode is kept under its own key
+            n = 2
+            while f"{k}~{n}" in items:
+                n += 1
+            items[f"{k}~{n}"] = it
+            it = None
+        if it is None:
             it = items[k] = {"first_seen": at}
         it.update(last_seen=at, **row)
     state["last_poll"] = {"at": at, "listed": sorted(current)}
@@ -105,8 +128,11 @@ def records(state: dict) -> list[dict]:
     out = []
     for k, it in sorted((state.get("items") or {}).items()):
         left = it.get("left_at")
-        raw = {"layer_row": k, "geometry_kind": it.get("kind"), "date_observed": it.get("date_observed"),
-               "date_observed_basis": "Date_Observed: the day DEP gives for the bloom's observation (a date, Eastern time)",
+        raw = {"layer_row": k.split("~")[0], "geometry_kind": it.get("kind"), "date_observed": it.get("date_observed"),
+               "date_observed_utc": it.get("date_observed_utc"),
+               "date_observed_basis": ("Date_Observed: DEP's observation of the bloom, stored as an instant "
+                                       "(date_observed_utc); a value at midnight UTC is read as that date, any other "
+                                       "instant as its Eastern date"),
                "first_seen_at": it["first_seen"], "_last_seen_in_source": it.get("last_seen"),
                "start_basis": START_BASIS, "time_zone": TZ, "advisory_noun": "Algal bloom advisory"}
         if left:
@@ -120,6 +146,7 @@ def records(state: dict) -> list[dict]:
                          published_at=None, source_updated_at=None, authority=AUTHORITY,
                          advice_text=f"West Virginia DEP algal bloom map: {adv}" if adv else "West Virginia DEP algal bloom map (no advisory text given)",
                          advice_window_hours=None, advice_window_basis=WINDOW_BASIS, source_url=PAGE, raw=raw))
+        out[-1]["fetched_at"] = it.get("last_seen") or out[-1]["fetched_at"]
     return out
 
 

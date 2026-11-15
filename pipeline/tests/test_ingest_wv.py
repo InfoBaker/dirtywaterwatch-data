@@ -241,3 +241,40 @@ def test_a_partial_failure_is_not_ok_and_keeps_every_record(tmp_path, monkeypatc
                        cache)
     assert rc == 1 and doc["ok"] is False and "1 of 2" in doc["error"]
     assert {r["npdes_permit"] for r in doc["records"]} == {"WV0000003", "WV0000004"}
+
+
+def test_bloom_map_partial_answer_lifts_nothing():
+    a = _answers([7])
+    a["1"]["exceededTransferLimit"] = True
+    try:
+        H.rows_of(a)
+    except ValueError as e:
+        assert "exceededTransferLimit" in str(e)
+        return
+    raise AssertionError("a truncated layer must not read as the map")
+
+
+def test_bloom_map_text_is_scrubbed_before_it_is_kept():
+    a = _answers([7])
+    a["1"]["features"][0]["attributes"]["Advisory"] = ("Avoid contact. Questions: contact Example Person at "
+                                                       "304-555-0100 or example.person@example.org")
+    row = H.rows_of(a)["1-7"]
+    assert "555-0100" not in row["advisory"] and "example.org" not in row["advisory"]
+    r = H.records(H.update({}, {"1-7": row}, "2026-07-01T12:00:00Z"))[0]
+    assert "555-0100" not in json.dumps(r) and "example.org" not in json.dumps(r)
+
+
+def test_bloom_map_reappearance_keeps_the_earlier_episode():
+    st = H.update({}, H.rows_of(_answers([7])), "2026-07-01T12:00:00Z")
+    st = H.update(st, H.rows_of(_answers([])), "2026-07-08T12:00:00Z")
+    st = H.update(st, H.rows_of(_answers([7])), "2026-07-20T12:00:00Z")
+    recs = {r["source_record_id"]: r for r in H.records(st)}
+    assert recs["1-7~2"]["ended_at"] == "2026-07-08T12:00:00Z" and recs["1-7~2"]["status"] == "advisory_lifted"
+    assert recs["1-7"]["started_at"] == "2026-07-20T12:00:00Z" and recs["1-7"]["status"] == "advisory_active"
+
+
+def test_observation_at_utc_midnight_is_that_date():
+    utc, day = H.observed({"Date_Observed": 1782864000000})      # 2026-07-01T00:00:00Z
+    assert (utc, day) == ("2026-07-01T00:00:00Z", "2026-07-01")
+    utc, day = H.observed({"Date_Observed": 1782876600000})      # 2026-07-01T03:30:00Z: June 30 in Eastern time
+    assert day == "2026-06-30" and utc == "2026-07-01T03:30:00Z"
