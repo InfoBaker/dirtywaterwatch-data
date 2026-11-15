@@ -127,7 +127,9 @@ PERSON_CLAUSE_RE = re.compile(
     r"|(?i:\b(?:e-?mail|courtesy of|thanks to|resident|residents|homeowner|landowner|property owner|neighbou?r)\b)"
     r"|\b(?:Mr|Mrs|Ms|Miss|Dr)\.?[ ]+[A-Z]|\[(?:name|phone|email) removed\]")
 # sentence breaks, not after a title or an initial ('Mrs. Example', 'N. Example Rd')
-SENTENCE_RE = re.compile(r"(?<=[.!?;])(?<!\bMr\.)(?<!\bMrs\.)(?<!\bMs\.)(?<!\bDr\.)(?<!\bSt\.)(?<!\b[A-Z]\.)[ ]+")
+# (a title in any case: 'dr. example person' stays one sentence, so the honorific check sees the name after it)
+SENTENCE_RE = re.compile(r"(?<=[.!?;])(?<!\b(?i:mr)\.)(?<!\b(?i:mrs)\.)(?<!\b(?i:ms)\.)(?<!\b(?i:mx)\.)(?<!\b(?i:dr)\.)"
+                         r"(?<!\b(?i:prof)\.)(?<!\b(?i:rev)\.)(?<!\bSt\.)(?<!\b[A-Z]\.)[ ]+")
 WITHHELD = "(DEP's advisory text is withheld here: it could not be cut to the advisory alone)"
 
 
