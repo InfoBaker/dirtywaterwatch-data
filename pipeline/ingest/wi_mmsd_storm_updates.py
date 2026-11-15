@@ -35,7 +35,11 @@ Record rules (rules only: no model, no geocoding)
     come from a combined sewer outfall) with the basis stated, never left unknown. A clause that names both types
     ("A combined sewer overflow and a separate sewer overflow occurred on June 1") gives both records, each with the
     words that belong to it (type_spans): its own date where each has one, the shared one where they share it, its own
-    water, and a denial only for the type it denies ("... and no separate sewer overflow").
+    water, and a denial only for the type it denies ("... and no separate sewer overflow"); each type's own figure
+    ("A combined sewer overflow of 100 gallons and a separate sewer overflow occurred"), stated minutes and end, and
+    water are read from its own words and the shared predicate, never lost to the other type's figure or denial.
+    "Combined and separate sewer overflows" names both; a denial joined by "or" or "nor" denies both; "Both overflows
+    ended at ..." gives the end to every type the post reports.
   - Times, America/Chicago (Milwaukee; raw.time_zone): the post's own stamp ("08/06/26 09:00:am") is published_at.
     reported_at stays null (the post gives the letter's subject, not its receipt date). started_at: a stated start
     ("started at 5:55 pm on April 2, 2024"; "around 10:00 a.m. on 9-3-26"), precision minute, when the nearest cue before
@@ -220,6 +224,10 @@ WATER_INTO = re.compile(r"\b(?:overflow|discharge|release)\w*\s+(?:[\w-]+\s+){0,
                         r"(?P<w>(?:[A-Z][a-z]+\s+){1,3}(?:Creek|River|Harbor|Canal)|Lake Michigan)\b")
 WATER_LISTED = re.compile(r"[–—-]\s*(?P<w>(?:[A-Z][a-z]+\s+){1,3}(?:Creek|River|Harbor|Canal)|Lake Michigan)\s*:\s*"
                           r"\d[\d,]*(?:\.\d+)?\s*(?:million\s+)?gallons")
+# a sentence about the overflows together ("Both overflows ended at 2:00 pm on June 2") speaks for every type the post
+# reports (verification 3, #1)
+BOTH = re.compile(r"\bboth\b[^.;]{0,40}\boverflows\b|\b(?:the|these|those)\s+(?:two\s+)?overflows\b|"
+                  r"\beach overflow\b", re.I)
 CUT = re.compile(r"^\s*(?:Text WATERDROP|Receive Water Drop Alert|×\s*$)", re.I)
 
 
@@ -483,12 +491,32 @@ def occurrence_day(text: str, ref: date) -> tuple[date, str] | None:
     return None
 
 
-def type_spans(s: str) -> list[tuple[str, str]]:
-    """[(type, its own words)] of a sentence naming more than one type: each mention with the words up to the next
-    one; a mention with no verb of its own ("A combined sewer overflow and a separate sewer overflow occurred on June
-    1") shares the predicate of the next mention that has one, without that mention's own article or denial ("A
-    combined sewer overflow and no separate sewer overflow occurred": the denial is the second's only; Astra
-    verification 2026-11-15, earlier #1)."""
+# two types named together ("Combined and separate sewer overflows occurred"; "separate and combined sewer
+# overflows"; "combined sewer and sanitary sewer overflows") are read as two mentions, each its own type (Astra
+# verification 3, 2026-11-15, #1)
+TWO_TYPES = re.compile(r"\b(?P<a>combined|separate|sanitary)(?:\s+sewer)?\s+(?P<j>and|&|or|nor)\s+"
+                       r"(?P<b>combined|separate|sanitary)\s+sewer\s+(?P<o>overflows?)\b", re.I)
+
+
+def expand_types(s: str) -> str:
+    return TWO_TYPES.sub(lambda m: f"{m.group('a')} sewer {m.group('o')} {m.group('j')} {m.group('b')} sewer "
+                                   f"{m.group('o')}", s)
+
+
+# where a borrowed predicate begins: the verb, a denial or a labelled figure, never the lender's own water, volume or
+# article ("A combined sewer overflow and a separate sewer overflow into Honey Creek occurred": "occurred ...")
+PRED = re.compile(REPORT_CUE.pattern + "|" + NEGATED.pattern + "|" + NOT_REPORT.pattern
+                  + r"|\b(?:did|was|were|has|have|had|is|are)\b", re.I)
+
+
+def type_spans(s: str) -> list[tuple[str, str, str]]:
+    """[(type, its own words, its own mention's words only)] of a sentence naming more than one type: each mention
+    with the words up to the next one; a mention with no verb of its own ("A combined sewer overflow and a separate
+    sewer overflow occurred on June 1") shares the predicate of the next mention that has one, from that mention's
+    verb on: never that mention's own article, denial, water or volume ("A combined sewer overflow and no separate
+    sewer overflow occurred": the denial is the second's only; Astra verification 2026-11-15, earlier #1; verification
+    3, #1). A denial joined by "or" or "nor" ("No combined sewer overflow or separate sewer overflow occurred";
+    "Neither ... nor ...") denies every type it joins."""
     ms = sorted((m.start(), m.end(), t) for t, rx in TYPE_WORDS.items() for m in rx.finditer(s))
     men: list[list] = []
     for a, b, t in ms:
@@ -505,9 +533,16 @@ def type_spans(s: str) -> list[tuple[str, str]]:
         if k == 0:
             starts.append(0)
             continue
-        q = re.search(r"\b(?:no|an?|the|any)\s+(?:[a-z]+\s+)?$", s[:a], re.I)
+        q = re.search(r"\b(?:no|an?|the|any|both)\s+(?:[a-z]+\s+)?$", s[:a], re.I)
         starts.append(q.start() if q and q.start() >= men[k - 1][1] else a)
-    segs = [s[starts[k]:(starts[k + 1] if k + 1 < len(men) else len(s))] for k in range(len(men))]
+    ends = [starts[k + 1] if k + 1 < len(men) else len(s) for k in range(len(men))]
+    segs = [s[starts[k]:ends[k]] for k in range(len(men))]
+    # a denial joined by "or" / "nor" carries to the next type
+    for k in range(1, len(men)):
+        joint = s[men[k - 1][1]:starts[k]]
+        if re.search(r"\b(?:or|nor)\b", joint, re.I) and NEGATED.search(s[starts[k - 1]:men[k - 1][1]]) \
+                and not NEGATED.search(segs[k]):
+            segs[k] = "no " + segs[k]
 
     def has_verb(k: int) -> bool:
         return bool(REPORT_CUE.search(segs[k]) or NEGATED.search(segs[k]) or NOT_REPORT.search(segs[k]))
@@ -517,8 +552,10 @@ def type_spans(s: str) -> list[tuple[str, str]]:
         if not has_verb(k):
             j = next((j for j in range(k + 1, len(men)) if has_verb(j)), None)
             if j is not None:
-                own = own + s[men[j][1]:starts[j + 1] if j + 1 < len(men) else len(s)]
-        out.append((t, own))
+                tail = s[men[j][1]:ends[j]]
+                v = PRED.search(tail)
+                own = own.rstrip() + " " + (tail[v.start():] if v else tail).lstrip()
+        out.append((t, own, segs[k]))
     return out
 
 
@@ -578,7 +615,14 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     tkey = _words(title).lower()
     lines = [x for x in doc.get("lines") or [] if _words(x).lower() != tkey]
     body = "\n".join(lines)
-    sents = [c for x in sentences(body) for c in clauses(x)]
+    quote: dict[str, str] = {}                              # a clause read with its types expanded -> MMSD's words
+    sents = []
+    for x in sentences(body):
+        ex = expand_types(x)
+        for c in clauses(ex):
+            sents.append(c)
+            if ex != x:
+                quote[c] = x
     lede = " ".join(sents[:3])
     per = period(title, ref) or period(lede, ref, skip_tied=True)
     facts = {"published": pub, "period": per, "types": {}, "local": [], "no_water": None}
@@ -589,6 +633,25 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
         return (bool(REPORT_CUE.search(x)) and not NEGATED.search(x) and not LOCAL.search(x)
                 and not any(_gal(z) == 0 for z in LABELLED.finditer(x)))
 
+    def _times(x: dict, text: str) -> None:
+        """The stated start, end and reporting day in text, for the one overflow x the text is about."""
+        if x.get("reported") is None:
+            rm = REPORTED_ON.search(text)
+            d = parse_date(rm.group("d"), ref) if rm else None
+            if d:
+                x["reported"] = (d, _words(rm.group("d")))
+        for key, rxs in (("start", START_RX), ("end", END_RX)):
+            if x[key]:
+                continue
+            for rx in rxs:
+                m = rx.search(text)
+                if m and key == "start" and not _start_owned(text, m):
+                    m = None
+                d = parse_date(m.group("d"), ref) if m else None
+                if d:
+                    x[key] = (_at(d, m), m.group(0))
+                    break
+
     def add(t: str, basis: str) -> dict:
         x = types.setdefault(t, {"basis": basis, "volume": None, "volume_text": None, "covers": None, "waters": [],
                                  "start": None, "end": None, "day": None, "reported": None})
@@ -597,8 +660,25 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     for s in sents:
         if LOCAL.search(s):
             facts["local"].append(s)
-    # labelled volumes first
-    for m in (m for x in sents if not NEGATED.search(x) and not LOCAL.search(x) for m in LABELLED.finditer(x)):
+    def units(x: str) -> list[tuple[str | None, str, str]]:
+        """[(type, its own words, its own mention's words)]: one per type a multi-type sentence names (type_spans), or
+        the sentence itself; a sentence with a figure for both types together is one unit."""
+        named = [t for t, rx in TYPE_WORDS.items() if rx.search(x)]
+        both = any(" and " in m.group("label").lower() for m in LABELLED.finditer(x))
+        sp = type_spans(x) if len(named) > 1 and not both else []
+        return sp or [(named[0] if len(named) == 1 else None, x, x)]
+
+    # labelled volumes first; a denial counts against the figure's own type only (verification 3, #1)
+    def labelled():
+        for x in sents:
+            if LOCAL.search(x):
+                continue
+            for _, own, seg in units(x):
+                if NEGATED.search(own):
+                    continue
+                yield from LABELLED.finditer(seg)
+
+    for m in labelled():
         if _gal(m) == 0:
             continue                    # "0 gallons": a stated zero is not a report
         label = m.group("label").lower()
@@ -619,17 +699,22 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
         if LOCAL.search(s) or any(_gal(z) == 0 for z in LABELLED.finditer(s)):
             continue
         named = [t for t, rx in TYPE_WORDS.items() if rx.search(s)]
-        spans = type_spans(s) if len(named) > 1 and not LABELLED.search(s) else []
-        for t, own in spans:
-            # both types in one clause: each affirmed type is its own record with its own day (earlier #1)
+        spans = [u for u in units(s) if u[0] and len(named) > 1]
+        for t, own, seg in spans:
+            # both types in one clause: each affirmed type is its own record with its own day, its own stated times
+            # and its own figure, whatever the other type carries (earlier #1; verification 3, #1)
             if affirmative(own) and not NOT_REPORT.search(own):
-                x = add(t, f"MMSD's post: \"{s[:240]}\"")
+                x = add(t, f"MMSD's post: \"{quote.get(s, s)[:240]}\"")
                 if x["day"] is None:
                     x["day"] = occurrence_day(own, ref)
+                _times(x, own)
+                figs = [f for f in FIGURE.finditer(seg) if not NOT_VOLUME.search(seg[max(0, f.start() - 60):f.end() + 20])]
+                if x["volume_text"] is None and len(figs) == 1 and not LABELLED.search(seg):
+                    x["volume"], x["volume_text"] = _gal(figs[0]), _words(figs[0].group(0))
         if spans or NOT_REPORT.search(s) and not LABELLED.search(s):
             continue
         if len(named) == 1 and affirmative(s):
-            x = add(named[0], f"MMSD's post: \"{s[:240]}\"")
+            x = add(named[0], f"MMSD's post: \"{quote.get(s, s)[:240]}\"")
             figs = [f for f in FIGURE.finditer(s) if not NOT_VOLUME.search(s[max(0, f.start() - 60):f.end() + 20])]
             if x["volume_text"] is None and len(figs) == 1:
                 x["volume"], x["volume_text"] = _gal(figs[0]), _words(figs[0].group(0))
@@ -673,10 +758,24 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
                    "sanitary sewer overflow, the general case")
     # waters (never from a denial: "No overflow into Example Creek occurred")
     for s in sents:
-        if LOCAL.search(s) or NEGATED.search(s):
+        if LOCAL.search(s):
             continue
         named = [t for t, rx in TYPE_WORDS.items() if rx.search(s)]
-        for rx in (WATER_INTO, WATER_LISTED):
+        spans = [u for u in units(s) if u[0] and len(named) > 1]
+        rxs = (WATER_INTO, WATER_LISTED)
+        if spans:
+            # each affirmed type keeps the water its own words name; a denial of the other type takes nothing from it
+            # (verification 3, #1)
+            for t, own, _ in spans:
+                if t in types and affirmative(own) and not NOT_REPORT.search(own):
+                    for m in WATER_INTO.finditer(own):
+                        w = _words(m.group("w"))
+                        if w not in types[t]["waters"]:
+                            types[t]["waters"].append(w)
+            rxs = (WATER_LISTED,)
+        if NEGATED.search(s):
+            continue
+        for rx in rxs:
             for m in rx.finditer(s):
                 w = _words(m.group("w"))
                 t = named[0] if len(named) == 1 else ("sso" if rx is WATER_LISTED and "sso" in types else
@@ -703,28 +802,16 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
     # one type gives that type its times; one naming none gives them only when the post reports a single type
     for x in sents:
         named = [t for t, rx in TYPE_WORDS.items() if rx.search(x) and t in types]
-        owners = named if len(named) == 1 else ([next(iter(types))] if not named and len(types) == 1 else [])
+        other = any(rx.search(x) for t, rx in TYPE_WORDS.items() if t not in named)  # a type not reported here
+        plural = not named and not other and len(types) > 1 and BOTH.search(x)
+        owners = ([] if other and named else named if len(named) == 1 else list(types) if plural else
+                  [next(iter(types))] if not named and len(types) == 1 else [])
         if NEGATED.search(x):
             continue                    # an expected, conditional or denied time is not a stated one (Astra P1-3)
         for t in owners:
-            if types[t].get("day") is None and len(named) == 1 and affirmative(x):
+            if types[t].get("day") is None and (len(named) == 1 or plural) and affirmative(x):
                 types[t]["day"] = occurrence_day(x, ref)   # only a day the sentence ties to the overflow (earlier #2)
-            if types[t].get("reported") is None:
-                rm = REPORTED_ON.search(x)
-                d = parse_date(rm.group("d"), ref) if rm else None
-                if d:
-                    types[t]["reported"] = (d, _words(rm.group("d")))
-            for key, rxs in (("start", START_RX), ("end", END_RX)):
-                if types[t][key]:
-                    continue
-                for rx in rxs:
-                    m = rx.search(x)
-                    if m and key == "start" and not _start_owned(x, m):
-                        m = None
-                    d = parse_date(m.group("d"), ref) if m else None
-                    if d:
-                        types[t][key] = (_at(d, m), m.group(0))
-                        break
+            _times(types[t], x)
     for x in sents:
         nw = NO_WATER.search(x)
         if nw:
