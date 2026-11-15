@@ -388,7 +388,7 @@
   "access": [
    "api"
   ],
-  "access_detail": "One request per permit (61 permits with an open CSO outlet), all parameters, January 2025 to 2026-11-14: 59 permits file no line at any combined sewer outlet; Princeton Sanitary Board (WV0023094) and the City of Beckley (WV0023183) file 50050 flow (MGD), chlorine and fecal coliform at C002. No permit reports overflow events, hours or volume.",
+  "access_detail": "One request per permit (61 permits with an open CSO outlet), all parameters, January 2025 to 2026-11-15: 59 permits file no line at any combined sewer outlet; Princeton Sanitary Board (WV0023094) and the City of Beckley (WV0023183) file 50050 flow (MGD), chlorine and fecal coliform at C002. No permit reports overflow events, hours or volume.",
   "machine_readable": true,
   "sample_record": null,
   "fields": [
