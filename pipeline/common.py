@@ -164,6 +164,19 @@ def dumps_rows(obj, row_keys=ROW_LIST_KEYS) -> str:
     return "{\n" + ",\n".join(parts) + "\n}\n"
 
 
+def dumps_plants(doc: dict) -> str:
+    """data/outfalls-plants-us.json's own layout (research/federal/build_plant_outfalls.py; ingest.outfall_waters
+    write_plants): the header keys one per line, then cso_features_not_in_inventory and outfalls one row per line."""
+    out = ["{\n"]
+    for k, v in doc.items():
+        if k not in ("outfalls", "cso_features_not_in_inventory"):
+            out.append(json.dumps(k) + ": " + json.dumps(v, ensure_ascii=False) + ",\n")
+    out.append('"cso_features_not_in_inventory": [\n' + ",\n".join(
+        json.dumps(x, ensure_ascii=False) for x in doc.get("cso_features_not_in_inventory") or []) + "\n],\n")
+    out.append('"outfalls": [\n' + ",\n".join(json.dumps(x, ensure_ascii=False) for x in doc["outfalls"]) + "\n]\n}\n")
+    return "".join(out)
+
+
 def write_rows_json(path: Path, obj, row_keys=ROW_LIST_KEYS) -> None:
     """write_json with the dumps_rows layout: every writer of data/waters-nhd.json goes through here."""
     path.parent.mkdir(parents=True, exist_ok=True)
