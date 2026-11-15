@@ -319,3 +319,12 @@ def test_review_a_retained_record_is_sanitized_again():
     recs, _ = M.build(two_rows(), T0, [old])
     kept = next(r for r in recs if r["source_record_id"] == "l-1")
     assert kept["lat"] is None and "Example Person" not in json.dumps(kept)
+
+
+def test_review_a_name_with_a_title_or_house_number_is_scrubbed():
+    doc = {"features": [row("M-1", "Dr. Example Person's pond at 12-B Sample Road", "7/9/2026", None),
+                        row("M-2", "Example Lake", "7/9/2026", None)]}
+    doc["features"][1]["attributes"]["agency"] = "Contact Pat Example"
+    blob = json.dumps(M.build(doc, T0)[0]) + json.dumps(M.safe_rows(doc))
+    for bad in ("Example Person", "12-B", "Pat Example"):
+        assert bad not in blob, bad

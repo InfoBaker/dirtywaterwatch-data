@@ -52,7 +52,8 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_names, scrub_text, write_events
+from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events
+from ingest.mountain_scrub import scrub
 
 SOURCE_ID = "mt-deq-hab-map"
 LAYER = ("https://gis.mtdeq.us/hosting/rest/services/Hosted/Harmful_Algal_Bloom_Survey_(Public_Web_Map)/FeatureServer/0")
@@ -178,8 +179,8 @@ def periods(starts: list[str], lifts: list[str]) -> list[tuple[str, str | None]]
 def safe_name(name: str, private: bool) -> str:
     """The reported water name with e-mails, phones and staff names removed and long decimals (a point typed into the
     name) cut; a private water's name with a possessive ("Example's pond") is withheld, as it may name the owner."""
-    n = scrub_names(scrub_text(" ".join(str(name or "").split())))
-    n = COORD.sub("[point removed]", n)
+    n = COORD.sub("[point removed]", " ".join(str(name or "").split()))
+    n = scrub(n)        # common's scrubbers and the forms they miss (ingest/mountain_scrub.py)
     if private and re.search(r"\w'\s?s\b", n):
         return "Private water (name withheld)"
     return n
@@ -270,7 +271,7 @@ def build(doc: dict, fetched: str, previous: list[dict] | None = None,
         raw = {"water": water, "place": place, "county": county.title() if county else None, "time_zone": TZ,
                "advisory_level_at_read": level or "No Current Advisory", "issued_dates": sorted(set(starts)),
                "lifted_dates": lifts, "words": words,
-               "agency_field": scrub_names(scrub_text(clean(a.get("agency")) or "")) or None,
+               "agency_field": scrub(clean(a.get("agency")) or "") or None,
                "sample_date": clean(a.get("sample_date")), "microcystin": clean(a.get("microcystin")),
                "anatoxin": clean(a.get("anatoxin")), "licence": LICENCE, "dashboard": DASHBOARD,
                "start_basis": "the earliest date in DEQ's advisory_issued field (its issue date)",
@@ -375,7 +376,7 @@ def safe_rows(doc: dict) -> dict:
         if "name" in a:
             a["name"] = safe_name(a.get("name") or "", private)
         if a.get("agency") not in (None, ""):
-            a["agency"] = scrub_names(scrub_text(clean(a.get("agency")) or "")) or None
+            a["agency"] = scrub(clean(a.get("agency")) or "") or None
         t = str(a.get("advisory_issued") or "")
         if t:
             neg = " no advisory" if NO_ADVISORY.search(t) else ""

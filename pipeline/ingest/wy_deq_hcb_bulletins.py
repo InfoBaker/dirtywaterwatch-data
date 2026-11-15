@@ -14,7 +14,7 @@ Source
 Privacy
   The bulletins name staff with their e-mail addresses and telephones. Nothing of a bulletin is saved but the parsed
   rows: data/raw/ gets, per bulletin, its id, link, sent time, title, the table rows and a lift's one sentence (which
-  names an agency and a water). The water and location cells are scrubbed (common.scrub_text, scrub_names); a point
+  names an agency and a water). The water and location cells are scrubbed (ingest/mountain_scrub.py); a point
   written in a water's name ("Unnamed Lake- Wind River Range (42.808, -109.327)") is rounded to three decimals before
   anything is saved.
 
@@ -66,7 +66,8 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_names, scrub_text, write_events
+from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events
+from ingest.mountain_scrub import scrub
 
 SOURCE_ID = "wy-deq-hcb-bulletins"
 URL = "https://public.govdelivery.com/topics/WYDEQ_42/feed.rss"
@@ -90,7 +91,8 @@ def slug(s: str) -> str:
 
 
 def clean(s: str) -> str:
-    return scrub_names(scrub_text(" ".join(H.unescape(s or "").replace("\xa0", " ").split())))
+    """A cell or title: common's scrubbers and the forms they miss (ingest/mountain_scrub.py)."""
+    return scrub(" ".join(H.unescape(s or "").replace("\xa0", " ").split()))
 
 
 class _Tables(HTMLParser):
