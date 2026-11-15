@@ -545,3 +545,46 @@ def test_leavenworth_end_date_before_or_after_the_stop_verb():
     t = "Sanitary Sewer Overflow Reported on December 31, 2025 at Example Court"
     assert _end("At 11:00 p.m. December 31, 2025, staff were notified. On January 1 the overflow stopped at 2:00 a.m.",
                 t) == "2026-01-01T02:00:00-06:00"
+
+
+def _ko():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ko", ROOT / "scripts" / "add_ks_operators.py")
+    ko = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(ko)
+    return ko
+
+
+def test_a_plant_label_is_a_permit_only_row_never_an_operator():
+    """Re-review P2-1: a permittee of record that names only a plant is a permit-only row (legal form "facility
+    (permittee not named)", left out of operator counts); a body with a plant word stays an operator; a city with
+    several plants stays one row."""
+    ko = _ko()
+    by = {r["name"]: r for r in ks_ops()}
+    b = by["Beattie Wastewater Plant (permit KS0047236)"]
+    assert b["legal_form"] == "facility (permittee not named)" and b["id"] == "ks-beattie-wastewater-plant"
+    assert "not established" in b["notes"]
+    assert not [r for r in ks_ops() if r["legal_form"] is None and ko.FACILITY_LABEL.search(r["name"])
+                and not ko.BODY_WORDS.search(r["name"])]
+    assert ko.BODY_WORDS.search("Lake Area Waste Water Association Inc") and ko.FACILITY_LABEL.search("Olathe Harold Street WWTF")
+    multi = [r for r in ks_ops() if r["legal_form"] == "city" and len(r["npdes_permits"]) > 1]
+    assert multi                                                    # one city, several plants: one operator row
+
+
+def test_the_not_a_discharge_rule_reads_feature_ids_and_limit_sets():
+    """Re-review P2-2, for both states' scripts."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("mo_ops", ROOT / "scripts" / "add_mo_operators.py")
+    mo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mo)
+    for m in (mo, _ko()):
+        assert m.influent_only({"outfall": "INF", "limit_set_names": ["Influent Monitoring Monthly"]})
+        assert m.influent_only({"outfall": "002", "limit_set_names": ["Influent Monitoring Quarterly"]})
+        assert m.influent_only({"outfall": "002", "limit_set_names": ["Influent to Collection System from Example"]})
+        assert m.influent_only({"outfall": "001", "limit_set_names": ["Land App/Storage Basin", "Operational Monitoring"]})
+        assert not m.influent_only({"outfall": "001", "limit_set_names": ["MONTHLY", "Influent Monitoring", "Quarterly"]})
+        assert not m.influent_only({"outfall": "001", "limit_set_names": ["Influent / Effluent"]})
+        assert not m.influent_only({"outfall": "001", "limit_set_names": []})
+    mo_ops = {r["id"]: r for r in json.loads((ROOT / "data" / "dischargers.json").read_text()) if r.get("state") == "MO"}
+    sk = next(r for r in mo_ops.values() if "MO0022969" in r["npdes_permits"])
+    assert sk["outfall_count"] == 1                                 # its INF feature is not counted
