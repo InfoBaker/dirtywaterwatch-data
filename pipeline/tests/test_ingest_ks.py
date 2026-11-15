@@ -304,3 +304,79 @@ def test_missing_waters_list_rows_are_unique_and_unlisted():
         assert k(r["name"]) not in held or r.get("resolved")
     keys = [(r["name"], r["county"]) for r in d["rows"]]
     assert len(keys) == len(set(keys))
+
+
+# ---------------------------------------------------------------- re-review fixes (2026-11-15)
+
+def _hab_main(tmp_path, monkeypatch, recs, doc):
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    common.write_events(H.SOURCE_ID, recs)
+    f = tmp_path / "answer.json"
+    f.write_text(json.dumps(doc))
+    code = H.main(["--file", str(f)])
+    return code, json.loads((tmp_path / f"{H.SOURCE_ID}.json").read_text())
+
+
+def test_hab_rows_without_identity_or_point_are_a_failed_read_through_main(tmp_path, monkeypatch):
+    """Re-review P1-1: a row the parser would drop must not lift its lake."""
+    recs, _ = H.run(json.loads((FIX / "hab_poll1.json").read_text()), [], AT)
+    good = {"attributes": {"STATUS": "Watch", "WATERBODY_ID": "LM9001", "WATERBODY_NAME": "Example Lake"},
+            "geometry": {"x": -96.985, "y": 38.321}}
+    for bad in ([{"attributes": {"STATUS": "Watch"}}],                                    # no identity
+                [good, {"attributes": {"STATUS": "Warning", "WATERBODY_ID": "LM9002"}}],   # no point
+                [good, {"attributes": {"STATUS": "Warning", "WATERBODY_ID": "LM9002"}, "geometry": {"x": "?", "y": 1}}],
+                [good, {"attributes": {"STATUS": "Warning", "WATERBODY_ID": "LM9002"},
+                        "geometry": {"x": -80.0, "y": 38.0}}],                              # outside Kansas
+                [good, "not a row"], [good, {"geometry": {"x": -96.9, "y": 38.3}}]):
+        code, out = _hab_main(tmp_path, monkeypatch, recs, {"features": bad})
+        assert code == 1 and out["ok"] is False
+        assert {r["status"] for r in out["records"]} == {"advisory_active"} and len(out["records"]) == 2
+
+
+def test_hab_conflicting_duplicate_rows_keep_the_more_severe_level():
+    doc = {"features": [
+        {"attributes": {"STATUS": "Watch", "WATERBODY_ID": "LM9001", "WATERBODY_NAME": "Example Lake"},
+         "geometry": {"x": -96.985, "y": 38.321}},
+        {"attributes": {"STATUS": "Warning", "WATERBODY_ID": "LM9001", "WATERBODY_NAME": "Example Lake"},
+         "geometry": {"x": -96.98, "y": 38.32}},
+        {"attributes": {"STATUS": "Lift", "WATERBODY_ID": "LM9001", "WATERBODY_NAME": "Example Lake"},
+         "geometry": {"x": -96.98, "y": 38.32}}]}
+    recs, s = H.run(doc, [], AT)
+    assert len(recs) == 1 and recs[0]["raw"]["kdhe_level"] == "Warning" and recs[0]["status"] == "advisory_active"
+    assert recs[0]["raw"]["conflicting_levels"] == ["Warning", "Watch"]
+
+
+def test_hab_lift_after_an_outage_does_not_colour_the_unread_gap():
+    """Re-review P1-2: opened in January, no read until June: the colour stops 14 days after the last listing read."""
+    from datetime import datetime, timezone
+    from build import status as S
+    p1 = json.loads((FIX / "hab_poll1.json").read_text())
+    jan, jun = "2026-01-01T12:00:00Z", "2026-06-01T12:00:00Z"
+    recs, _ = H.run(p1, [], jan)
+    recs, _ = H.run({"features": []}, recs, jun)
+    r = next(x for x in recs if x["raw"]["waterbody_id"] == "LM9001")
+    assert r["status"] == "advisory_lifted" and r["ended_at"] == jun and "sampled_at" not in r
+    now = datetime(2026, 6, 2, tzinfo=timezone.utc)
+    ivs = S.event_intervals(r, "KS", now)
+    red = [iv for iv in ivs if iv["rule"] == "advisory_active"]
+    assert len(red) == 1 and red[0]["end"] == datetime(2026, 1, 15, 12, tzinfo=timezone.utc)
+    assert all(iv["end"] and iv["end"] <= datetime(2026, 6, 1, 12, tzinfo=timezone.utc) for iv in ivs)
+    assert {iv["rule"] for iv in ivs} <= {"advisory_active", "not_reconfirmed"}
+    # an old saved record without the flag (the state branch's format) gets it at the next read
+    old = json.loads(json.dumps(r))
+    old["raw"].pop("_poll_confirmed")
+    again, _ = H.run({"features": []}, [old], "2026-06-01T13:00:00Z")
+    assert again[0]["raw"]["_poll_confirmed"] is True
+
+
+def test_hab_poll_flag_leaves_other_states_aging_unchanged():
+    """The aging branch is keyed on raw._poll_confirmed: a record without it (another state's poll advisory) keeps the
+    state branch's intervals."""
+    from datetime import datetime, timezone
+    from build import status as S
+    ev = {"event_id": "x", "source_id": "zz-example", "event_type": "hab_advisory", "status": "advisory_lifted",
+          "started_at": "2026-01-01T12:00:00Z", "ended_at": "2026-06-01T12:00:00Z", "time_precision": "poll",
+          "raw": {"ended_at_precision": "poll", "_last_seen_in_source": "2026-01-01T12:00:00Z"}}
+    ivs = S.event_intervals(ev, "WA", datetime(2026, 6, 2, tzinfo=timezone.utc))
+    assert len(ivs) == 1 and ivs[0]["end"] == datetime(2026, 6, 1, 12, tzinfo=timezone.utc)

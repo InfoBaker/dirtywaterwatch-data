@@ -70,23 +70,51 @@ def lakes(doc: dict) -> dict[str, dict]:
                                                    .strftime("%Y-%m-%dT%H:%M:%SZ") if sd else None),
                                    "lat": None, "lon": None, "points": 0})
         row["points"] += 1
+        if row["level"] != level:
+            # two rows for one lake under different levels: the more severe stands (err on the side of safety), and
+            # the record says the layer disagreed with itself (re-review P1-1)
+            row.setdefault("conflicting_levels", sorted({row["level"]}))
+            row["conflicting_levels"] = sorted({*row["conflicting_levels"], level})
+            if SEVERITY[level] > SEVERITY[row["level"]]:
+                row["level"] = level
         if row["lat"] is None and g.get("y") is not None:
             row["lat"], row["lon"] = round(float(g["y"]), 3), round(float(g["x"]), 3)
     return out
 
 
+# Kansas's bounding box, a little wide: a listed lake's point outside it is not a usable point
+KS_BOX = (36.9, 40.1, -102.1, -94.5)
+SEVERITY = {"Hazard": 3, "Warning": 2, "Watch": 1}
+
+
 def check(doc) -> None:
     """A layer answer good enough to say which lakes are listed: anything else is a failed read, never a lift of every
-    advisory (Astra 2026-11-14 P1-1). A valid answer has a features list (possibly empty), no error and no truncation,
-    and every row's STATUS is one of KDHE's words."""
+    advisory (Astra 2026-11-14 P1-1, re-review P1-1). A valid answer has a features list (possibly empty), no error and
+    no truncation; every row is a dict with attributes, KDHE's STATUS word and the lake's identity (WATERBODY_ID or,
+    failing that, its name); and every listed row (Hazard, Warning, Watch) has a numeric point inside Kansas. A row
+    that would be silently dropped would lift that lake, so it fails the whole read instead."""
     if not isinstance(doc, dict) or "error" in doc or not isinstance(doc.get("features"), list):
         raise ValueError("the HAB layer's answer has no features list")
     if doc.get("exceededTransferLimit"):
         raise ValueError("the HAB layer's answer is truncated")
     for f in doc["features"]:
-        st = str(((f or {}).get("attributes") or {}).get("STATUS") or "").strip().lower()
+        if not isinstance(f, dict) or not isinstance(f.get("attributes"), dict):
+            raise ValueError("a HAB layer row has no attributes")
+        a = f["attributes"]
+        st = str(a.get("STATUS") or "").strip().lower()
         if st not in (*LEVELS, "lift"):
             raise ValueError(f"unexpected HAB status {st!r}")
+        if not (str(a.get("WATERBODY_ID") or "").strip() or str(a.get("WATERBODY_NAME") or "").strip()):
+            raise ValueError("a HAB layer row has no lake identity")
+        if st == "lift":
+            continue
+        g = f.get("geometry")
+        try:
+            y, x = float(g["y"]), float(g["x"])
+        except (TypeError, KeyError, ValueError):
+            raise ValueError("a listed HAB lake has no usable point") from None
+        if not (KS_BOX[0] <= y <= KS_BOX[1] and KS_BOX[2] <= x <= KS_BOX[3]):
+            raise ValueError("a listed HAB lake's point is outside Kansas")
 
 
 def rounded(doc: dict) -> dict:
@@ -128,6 +156,8 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
                 r["advice_text"] = ADVICE[x["level"]]
             r["raw"]["status_date"] = x["status_date"]
         r["raw"]["_last_seen_in_source"] = at
+        if x.get("conflicting_levels"):
+            r["raw"]["conflicting_levels"] = x["conflicting_levels"]
     for wid, r in open_by.items():
         if wid not in now:
             r.update(status="advisory_lifted", ended_at=at)
@@ -136,6 +166,10 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
             stats["lifted"] += 1
     for r in recs.values():
         r["fetched_at"] = at
+        # the colour ages out CONFIRM_DAYS after the last poll that listed the lake, and a lift seen after a long
+        # outage never colours the unread gap (build/status.py, keyed on this flag; re-review P1-2). Set on every
+        # record, earlier saves included, so the rule applies to them at the next read
+        r["raw"]["_poll_confirmed"] = True
     out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
     stats["open"] = sum(1 for r in out if r["status"] == "advisory_active")
     return out, stats
