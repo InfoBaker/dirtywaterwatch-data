@@ -55,3 +55,51 @@ def test_r2_1_an_advisory_paragraph_after_the_sections_block_is_not_missed(tmp_p
 def test_r2_1_the_real_pages_still_read():
     from test_ingest_nv import NOV25
     assert len(P.parse(AUG26)[0]) == 4 and len(P.parse(NOV25)[0]) == 2
+
+
+# ---- Oklahoma: a row that does not fit the header never shifts a result to another date ------------------------
+
+def _bear(page, cells):
+    """Bear Falls's result cells replaced by the given <td> list (invented values)."""
+    return re.sub(r"(Bear Falls</strong></td>\s*)((?:<td[^>]*>[^<]*</td>\s*)+)",
+                  lambda m: m.group(1) + "\n".join(cells) + "\n", PAGE, count=1)
+
+
+C = '<td style="text-align: center;">{}</td>'
+
+
+@pytest.mark.parametrize("cells", [
+    [C.format(v) for v in ("105.0", "260.0", "122.3", "108.4")],                     # the 8/6 cell missing
+    [C.format(v) for v in ("66.3", "105.0", "260.0", "122.3", "108.4", "99.0")],      # an extra cell
+    ['<td colspan="2" style="text-align: center;">66.3</td>'] +
+    [C.format(v) for v in ("260.0", "122.3", "108.4")],                               # two weeks merged
+    ['<td rowspan="2" style="text-align: center;">66.3</td>'] +
+    [C.format(v) for v in ("105.0", "260.0", "122.3", "108.4")],                      # a cell spanning rows
+])
+def test_r2_2_a_row_that_does_not_fit_the_header_is_refused(tmp_path, monkeypatch, cells):
+    import common
+    page = _bear(PAGE, cells)
+    assert page != PAGE
+    with pytest.raises(ValueError, match="does not fit"):
+        N.parse(page)
+    first, meta = N.build(_bear(PAGE, [C.format(v) for v in ("66.3", "105.0", "260.0", "122.3", "108.4")]), T1, [])
+    assert [r["sampled_at"] for r in first] == ["2026-08-20"]
+    path = tmp_path / f"{N.SOURCE_ID}.json"
+    monkeypatch.setattr(N, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    common.write_events(N.SOURCE_ID, first, meta=meta, path=path)
+    (tmp_path / "p.html").write_text(page)
+    assert N.main(["--file", str(tmp_path / "p.html")]) == 1
+    doc = json.loads(path.read_text())
+    assert doc["ok"] is False and [r["sampled_at"] for r in doc["records"]] == ["2026-08-20"]
+
+
+def test_r2_2_a_row_of_results_with_no_place_and_a_header_past_the_mean_are_refused():
+    noplace = PAGE.replace("<td><strong>Bear Falls</strong></td>", "<td></td>", 1)
+    with pytest.raises(ValueError, match="no place"):
+        N.parse(noplace)
+    head = re.search(r"<tr[^>]*>(.*?)</tr>", PAGE[PAGE.find("Status of Bacterial Levels"):], re.S).group(1)
+    extra = PAGE.replace(head, head + "<td>Notes</td>", 1)
+    with pytest.raises(ValueError, match="column"):
+        N.parse(extra)
+    assert len(N.parse(PAGE)["rows"]) == 10
