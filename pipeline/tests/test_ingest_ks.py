@@ -90,7 +90,7 @@ def test_leavenworth_refused_page_is_a_failed_run(monkeypatch, tmp_path):
     common.write_events(L.SOURCE_ID, [{"event_id": "x", "raw": {}}])
     assert L.main([]) == 1
     out = json.loads((tmp_path / f"{L.SOURCE_ID}.json").read_text())
-    assert out["ok"] is False and out["records"] == [{"event_id": "x", "raw": {}}]
+    assert out["ok"] is False and [r["event_id"] for r in out["records"]] == ["x"]     # kept, scrubbed (verification 3)
 
 
 # ---------------------------------------------------------------- KDHE stream advisories
@@ -1005,3 +1005,125 @@ def test_kdhe_every_order_of_listing_rescission_and_relisting_ends_red_after_the
     k2, _ = A.run(_feed(b, lift), k1, "2026-11-03T19:00:00Z")
     k3, sk3 = A.run(_feed(a), k2, "2026-11-04T18:00:00Z")
     assert len(ex(k3)) == 1 and ex(k3)[0]["ended_at"] == "2026-11-03T09:00:00-06:00" and sk3["open"] == 0
+
+
+def test_leavenworth_every_failure_path_saves_and_prints_no_address_or_name(tmp_path, monkeypatch, capsys):
+    """Verification 3 P1-2: a connection, retry, proxy, TLS, timeout, cut-off or refused request whose message carries a
+    bare page path ("Max retries exceeded with url: /publicworks/page/...-1234-example-court-by-jane-example"), at the
+    index, a year page or an overflow page, a parse error naming the page and an unreadable saved page: the whole
+    events file and stderr keep no house number, name or path; nothing reaches the raw folder; every earlier record is
+    kept, an older save's house number and name scrubbed on the failed path too."""
+    import common
+    import requests
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    stem = "sanitary-sewer-overflow-reported-may-27-2026-1234-example-court-by-jane-example"
+    rel = "/publicworks/page/" + stem
+    msg = (f"HTTPSConnectionPool(host='www.leavenworthks.gov', port=443): Max retries exceeded with url: {rel} "
+           "(Caused by NewConnectionError('x'))")
+    resp = requests.Response()
+    resp.status_code, resp.url = 403, L.BASE + rel
+
+    class Odd(requests.ConnectionError):
+        pass
+    errors = [requests.ConnectionError(msg), requests.exceptions.SSLError(msg), requests.exceptions.ProxyError(msg),
+              requests.exceptions.ReadTimeout(msg), requests.exceptions.ConnectTimeout(msg),
+              requests.exceptions.RetryError(msg), requests.exceptions.ChunkedEncodingError(msg),
+              requests.exceptions.TooManyRedirects(msg), requests.exceptions.InvalidURL(rel),
+              requests.HTTPError(f"403 Client Error: Forbidden for url: {rel}", response=resp), Odd(msg),
+              requests.RequestException(msg)]
+    idx = '<a href="/publicworks/page/2026-sanitary-sewer-overflow-transparency-report">2026</a>'
+    yr = f'<a href="{rel}">x</a>'
+    old = {"event_id": f"{L.SOURCE_ID}:old", "source_record_id": "sanitary-sewer-overflow-reported-may-1-2020-example-st",
+           "outfall_name": "1234 Example St by Jane Example", "advice_text": "Call Jane Example at 913-555-0100.",
+           "raw": {"title": "Sanitary Sewer Overflow Reported on May 1, 2020 at 1234 Example St by Jane Example"}}
+    bad = ["1234", "Jane", "jane", "555-0100", stem, "overflow-reported-may-27", "Max retries", "HTTPSConnectionPool"]
+    for stage in ("index", "year", "page"):
+        for err in errors:
+            common.write_events(L.SOURCE_ID, [json.loads(json.dumps(old))], meta={"credit": "x"})
+
+            def get(u, _e=err, _s=stage, **k):
+                if u == L.INDEX and _s != "index":
+                    return type("R", (), {"text": idx, "raise_for_status": lambda self: None})()
+                if u.endswith("transparency-report") and _s == "page":
+                    return type("R", (), {"text": yr, "raise_for_status": lambda self: None})()
+                raise _e
+            monkeypatch.setattr(L.requests, "get", get)
+            assert L.main([]) == 1, (stage, err)
+            blob = (tmp_path / f"{L.SOURCE_ID}.json").read_text()
+            doc = json.loads(blob)
+            assert doc["ok"] is False and len(doc["records"]) == 1 and doc["meta"] == {"credit": "x"}
+            assert doc["error"].split(":")[0] in L.ERROR_TEXT, doc["error"]
+            printed = capsys.readouterr().err
+            for b in bad:
+                assert b not in blob and b not in printed, (stage, type(err).__name__, b)
+    assert "HTTP 403" in L.safe_error(errors[9]) and L.safe_error(errors[10]).startswith("ConnectionError:")
+    # a parse error that names the page, and a saved page that cannot be read
+    monkeypatch.setattr(L, "record", lambda path, *a, **k: (_ for _ in ()).throw(ValueError(f"bad page {path}")))
+    d = tmp_path / "pages"
+    d.mkdir()
+    (d / f"{stem}.html").write_text(_page("Sanitary Sewer Overflow Reported on May 27, 2026", "x"))
+    assert L.main(["--dir", str(d)]) == 1
+    (d / f"{stem}.html").unlink()
+    (d / f"{stem}.html").mkdir()
+    monkeypatch.undo()
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    assert L.main(["--dir", str(d)]) == 1
+    blob, printed = (tmp_path / f"{L.SOURCE_ID}.json").read_text(), capsys.readouterr().err
+    for b in bad:
+        assert b not in blob and b not in printed
+    assert len(json.loads(blob)["records"]) == 1 and not (tmp_path / "raw").exists()
+
+
+def test_leavenworth_same_block_pages_keep_their_own_ids_in_every_order(tmp_path, monkeypatch):
+    """Verification 3 P2-1: 1234 and 1256 Example Court on one day share the hundred block (b1200). Read together, the
+    second alone, on separate runs in either order, one disappearing, one corrected, or through main across runs: two
+    records, each page's id and times its own; a save from before the id map keeps each page on its own record."""
+    import common
+    pa = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2026-1234-example-court"
+    pb = "/publicworks/page/sanitary-sewer-overflow-reported-may-27-2026-1256-example-court"
+    ha = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 1234 Example Court",
+               "At 3:50 p.m. May 27, 2026, staff were notified.")
+    hb = _page("Sanitary Sewer Overflow Reported on May 27, 2026 at 1256 Example Court",
+               "At 7:15 p.m. May 27, 2026, staff were notified.")
+    starts = lambda rs: {r["event_id"]: r["started_at"] for r in rs}
+    ida: dict = {}
+    both, _ = L.run({pa: ha, pb: hb}, [], AT, ids=ida)
+    want = starts(both)
+    assert len(want) == 2 and sorted(want.values()) == ["2026-05-27T15:50:00-05:00", "2026-05-27T19:15:00-05:00"]
+    b_only, _ = L.run({pb: hb}, both, "2026-11-15T00:00:00Z", ids=ida)              # the second alone
+    assert starts(b_only) == want
+    a_gone, _ = L.run({pb: hb}, b_only, "2026-11-16T00:00:00Z", ids=ida)            # the first not read again
+    assert starts(a_gone) == want
+    for order in ((pa, pb), (pb, pa)):                                              # separate runs, either order
+        m: dict = {}
+        sep, _ = L.run({order[0]: {pa: ha, pb: hb}[order[0]]}, [], AT, ids=m)
+        sep, _ = L.run({order[1]: {pa: ha, pb: hb}[order[1]]}, sep, "2026-11-15T00:00:00Z", ids=m)
+        sep, _ = L.run({order[0]: {pa: ha, pb: hb}[order[0]]}, sep, "2026-11-16T00:00:00Z", ids=m)
+        assert len(sep) == 2 and sorted(starts(sep).values()) == sorted(want.values())
+        assert len({r["event_id"] for r in sep}) == 2
+    fixed = hb.replace("At 7:15 p.m.", "At 7:45 p.m.")                              # a correction to the second
+    cor, _ = L.run({pb: fixed}, both, "2026-11-17T00:00:00Z", ids=ida)
+    by = starts(cor)
+    assert set(by) == set(want) and sorted(by.values()) == ["2026-05-27T15:50:00-05:00", "2026-05-27T19:45:00-05:00"]
+    # a save from before the id map (both read together under base and -n2): each page finds its own record
+    legacy, _ = L.run({pb: hb}, json.loads(json.dumps(both)), "2026-11-18T00:00:00Z", ids={})
+    assert starts(legacy) == want
+    # through main: the id map persists between runs and holds no house number
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    for pages in ({pa: ha}, {pb: hb}, {pb: hb}, {pa: ha, pb: hb}):
+        d = tmp_path / "pages"
+        if d.exists():
+            for f in d.iterdir():
+                f.unlink()
+        d.mkdir(exist_ok=True)
+        for p, h in pages.items():
+            (d / (p.rsplit("/", 1)[-1] + ".html")).write_text(h)
+        assert L.main(["--dir", str(d)]) == 0
+    doc = json.loads((tmp_path / f"{L.SOURCE_ID}.json").read_text())
+    assert sorted(r["started_at"] for r in doc["records"]) == sorted(want.values())
+    priv = L.ids_path().read_text()
+    assert L.ids_path().parent != tmp_path and "1234-" not in priv and "1256-" not in priv
+    assert "1234" not in json.dumps(doc) and "1256" not in json.dumps(doc)
