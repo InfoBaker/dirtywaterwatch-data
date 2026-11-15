@@ -26,6 +26,11 @@ def layer():
     return H.parse_layer(json.loads((FIX / "dhw-layer.json").read_text()))
 
 
+def without(lay, name):
+    """DHW's layer without one water: the second source agrees the water is no longer listed."""
+    return {k: v for k, v in lay.items() if k != H.key(name)}
+
+
 def run(state, rows, at, lay=None):
     state = H.update(state, rows, at, lay)
     return state, {r["source_record_id"]: r for r in H.records(state)}
@@ -84,15 +89,18 @@ def test_health_advisory_is_the_authoritys_dated_by_the_poll_with_the_sample_apa
 
 def test_watch_and_alert_are_deqs_risk_levels_never_an_advisory():
     _, recs = first()
-    for prefix in ("lake-lowell:canyon:watch:", "hordemann-pond:latah:alert:", "henrys-lake:fremont:watch:"):
+    for prefix in ("lake-lowell:canyon:watch:", "henrys-lake:fremont:watch:"):
         r = find(recs, prefix)
         assert r["status"] == "unknown" and r["raw"]["_agency_label_only"] and r["raw"]["_caution_to_notice_end"]
         assert r["time_precision"] == "day" and r["started_at"] == r["sampled_at"]
         assert "Health Advisory" not in r["advice_text"]
         ivs = intervals(r, "2026-11-15T12:00:00+00:00")
         assert ivs and all(iv["rule"] == "sample_caution" for iv in ivs)
-    alert = find(recs, "hordemann-pond:latah:alert:")
-    assert "closed to recreational use" in alert["advice_text"] and "Health Alert" in alert["advice_text"]
+    # an Alert whose More Information closes the water is the authority's closure, red while listed (Astra
+    # 2026-11-15 P1-2): quoted as the table's, DEQ's level kept
+    alert = find(recs, "hordemann-pond:latah:closure:")
+    assert "closed to recreational use" in alert["advice_text"] and alert["raw"]["_closure_level"] == "Health Alert"
+    assert alert["status"] == "advisory_active" and "_agency_label_only" not in alert["raw"]
     assert "id-deq-cyanohab-risk-table" in RULES["unresolved"]["sample_caution"]["sources"]
 
 
@@ -105,7 +113,8 @@ def test_a_watch_listed_for_weeks_keeps_the_caution_while_listed_and_closes_when
     ivs = intervals(w, "2026-12-02T12:00:00+00:00")
     assert ivs and ivs[-1]["end"].isoformat() >= "2026-12-01T23:00"      # past 72 h from the sample: still listed
     gone = [r for r in rows if r["water"] != "Lake Lowell"]
-    state, recs = run(state, gone, "2026-12-03T23:00:00Z")
+    # a disappearance ends the notice only when DHW's map, read in the same run, no longer shows it (Astra P1-1)
+    state, recs = run(state, gone, "2026-12-03T23:00:00Z", without(layer(), "Lake Lowell"))
     w = find(recs, "lake-lowell:canyon:watch:")
     assert w["status"] == "ended" and w["raw"]["_notice_closed_at"] == w["ended_at"]
     assert w["raw"]["ended_at_precision"] == "poll"
@@ -123,7 +132,8 @@ def test_an_advisory_ends_at_the_read_that_shows_a_lower_level_and_the_watch_fol
     watch = find(recs, "mann-lake:nez-perce:watch:")
     assert watch["status"] == "unknown" and watch["raw"]["_agency_label_only"]
     # a water that leaves the table ends at that read; nothing else changes
-    state, recs = run(state, [r for r in down if r["water"] != "Crane Creek Reservoir"], T2)
+    state, recs = run(state, [r for r in down if r["water"] != "Crane Creek Reservoir"], T2,
+                      without(layer(), "Crane Creek Reservoir"))
     crane = find(recs, "crane-creek-reservoir:washington:advisory:")
     assert crane["status"] == "advisory_lifted" and crane["ended_at"] == T2
     assert crane["raw"]["end_basis"] == H.END_GONE

@@ -512,11 +512,12 @@ def test_a_bay_advisory_never_colours_its_lake_in_a_full_status_build(tmp_path, 
 
 def test_the_part_of_water_extent_is_written_only_by_arkansas():
     """build/status.py part_of_water changes only records carrying this value; no other state's code or data writes
-    it, so every other state's status output is unchanged."""
+    it, so every other state's status output is unchanged. Idaho's bloom table (not live) writes it for a named part
+    of a lake (Astra IA/ID review 2026-11-15 P2-5)."""
     root = R.ROOT
     hits = [p for d in ("pipeline/ingest", "data/sources") for p in (root / d).rglob("*")
             if p.is_file() and p.suffix in (".py", ".yaml", ".json") and "part_of_water" in p.read_text(errors="ignore")]
-    assert {p.name for p in hits} == {"ar_transforms.py"}, hits
+    assert {p.name for p in hits} == {"ar_transforms.py", "id_deq_cyanohab.py"}, hits
 
 
 @pytest.mark.parametrize("item", [

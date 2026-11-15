@@ -5,8 +5,10 @@ homepage: "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-h
 kind: "html"
 level: "state"
 # Read by ingest/id_deq_cyanohab.py as a snapshot: a Health Advisory (DHW's, on DEQ's toxin results) is the authority's,
-#   from the first read that lists it to the read that no longer does; a Watch or an Alert is DEQ's risk level, the
-#   site's caution only. The Collection Date is the sample's (sampled_at), never an issue date. Points from DHW's map
+#   from the first read that lists it to the read that no longer does (a disappearance counts only when every row
+#   was read and DHW's map agrees); a Watch or an Alert is DEQ's risk level, the site's caution only, held while
+#   listed; a row whose words close the water ("closed to recreational use") is the authority's closure, red while
+#   listed. The Collection Date is the sample's (sampled_at), never an issue date. Points from DHW's map
 #   layer (id-dhw-recreational-advisories).
 # Real read 2026-11-14: 19 rows: 13 Health Advisory, 1 Alert (Hordemann Pond, closed to recreational use), 5 Watch
 #   (four after a Health Alert expired); collection dates 2026-06-29 to 2026-11-10; every row matched a DHW point.
