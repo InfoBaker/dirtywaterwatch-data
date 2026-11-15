@@ -667,3 +667,25 @@ def test_mo_hab_listing_again_after_an_outage_keeps_two_periods():
     recs, _ = M.run(doc, [], "2026-01-01T12:00:00Z")
     recs, _ = M.run(doc, recs, "2026-06-01T12:00:00Z")
     assert all(len(r["raw"]["listed_periods"]) == 2 for r in recs if r["status"] == "advisory_active")
+
+
+def test_kdhe_water_named_again_after_a_revision_is_open_again_and_a_rescission_stays_lifted():
+    """Verification P1-2: Example Creek -> Sample Creek -> Example Creek in one release leaves Example Creek open (the
+    drop was a revision, not KDHE's rescission); unchanged reads keep it so; a rescinded water stays lifted."""
+    a = ("Stream Advisory Issued for Example Creek in Shawnee County", "50", "Mon, 02 Nov 2026 09:00:00 -0600", "Sewage.")
+    b = ("Stream Advisory Issued for Sample Creek in Shawnee County", "50", "Mon, 02 Nov 2026 09:00:00 -0600", "Sewage.")
+    r1, _ = A.run(_feed(a), [], "2026-11-02T18:00:00Z")
+    r2, _ = A.run(_feed(b), r1, "2026-11-02T19:00:00Z")
+    r3, _ = A.run(_feed(a), r2, "2026-11-02T20:00:00Z")
+    r4, s4 = A.run(_feed(a), r3, "2026-11-02T21:00:00Z")
+    by = {x["source_record_id"]: x for x in r4}
+    ex = by["50-examplecreek"]
+    assert ex["status"] == "advisory_active" and ex["ended_at"] is None and "revised_out" not in ex["raw"]
+    assert ex["raw"]["revised_out_reads"] == ["2026-11-02T19:00:00Z"] and ex["started_at"] == "2026-11-02T09:00:00-06:00"
+    assert ex["raw"]["_last_seen_in_source"] == "2026-11-02T21:00:00Z"
+    assert by["50-samplecreek"]["status"] == "advisory_lifted" and s4["open"] == 1
+    lift = ("Stream Advisory Rescinded for Example Creek in Shawnee County", "51", "Tue, 03 Nov 2026 09:00:00 -0600", "x")
+    r5, _ = A.run(_feed(a, lift), r4, "2026-11-03T18:00:00Z")
+    r6, _ = A.run(_feed(a, lift), r5, "2026-11-03T19:00:00Z")
+    ex6 = {x["source_record_id"]: x for x in r6}["50-examplecreek"]
+    assert ex6["status"] == "advisory_lifted" and ex6["ended_at"] == "2026-11-03T09:00:00-06:00"
