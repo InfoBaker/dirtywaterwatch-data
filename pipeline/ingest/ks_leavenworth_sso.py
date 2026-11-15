@@ -14,7 +14,10 @@ Source
 
 Record rules
   - One record per overflow page (source_record_id the page's path name with a house number turned into its hundred
-    block, "b1200", and anything from a person word on cut: record_id; the page's own identity, whatever else is read). event_type "sso" (a collection-system
+    block, "b1200", and anything from a person word on cut: record_id); a second page of the same block, street and day
+    takes "-n2" when first seen, and every page keeps its id through a private map (a digest of its path name to its
+    id, data/build/events/_private, kept with the build state and never exported), whatever else is read with it.
+    event_type "sso" (a collection-system
     overflow, a lift station's included); status unknown: the City's advice ("stay away from the creek water until
     testing is done and signs are removed") has no date and is kept as advice_text, never turned into an end.
   - Times (America/Chicago; Leavenworth County keeps Central time): the day is the title's date (the text's first date
@@ -32,12 +35,14 @@ Record rules
 
 Privacy: the pages name streets and, once, a facility's telephone number; house numbers and telephone numbers are
 dropped before anything is stored (common.strip_house_numbers, common.scrub_text), a title's tail from a person word on
-("by Jane Example") is cut (safe_title), and a failed request's message keeps no page address (safe_error). data/raw
+("by Jane Example") is cut (safe_title), and a failed run saves and prints only a fixed description of the error's
+kind, never the exception's own text (safe_error), with the earlier records kept and scrubbed again (failed). data/raw
 keeps the parsed safe fields.
 Run from pipeline/:  python -m ingest.ks_leavenworth_sso [--backfill] [--dir saved_pages/]
 """
 from __future__ import annotations
 
+import hashlib
 import html
 import json
 import re
@@ -50,7 +55,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
-from ingest.mo_kc_water_news import DATE, _month, date_positions, migrate_water_text, safe_text, sentences, water_text, waters
+from ingest.mo_kc_water_news import DATE, NEXT_DAY, _month, date_positions, migrate_water_text, safe_text, sentences, water_text, waters
 
 SOURCE_ID = "ks-leavenworth-sso-transparency"
 BASE = "https://www.leavenworthks.gov"
@@ -107,15 +112,16 @@ def migrate(prev: list[dict]) -> dict[str, dict]:
     page text kept."""
     out: dict[str, dict] = {}
     for r in sorted(prev, key=lambda x: x.get("fetched_at") or ""):
-        rid = record_id(r.get("source_record_id") or "")
-        r["source_record_id"], r["event_id"] = rid, f"{SOURCE_ID}:{rid}"
+        if r.get("source_record_id"):
+            rid = record_id(r["source_record_id"])
+            r["source_record_id"], r["event_id"] = rid, f"{SOURCE_ID}:{rid}"
         raw = r.setdefault("raw", {})
         for k in FORBIDDEN_RAW:
             raw.pop(k, None)
         url = r.get("source_url") or ""
         if url.startswith(BASE + "/publicworks/page/sanitary-sewer-overflow"):
             r["source_url"] = raw.get("cited_page") or INDEX
-        raw.setdefault("cited_page", r["source_url"])
+        raw.setdefault("cited_page", r.get("source_url") or INDEX)
         migrate_water_text(r)
         # every retained free-text field through the same scrub as a fresh read, for a record whose page is not read
         # again (verification P1-4)
@@ -171,12 +177,36 @@ def safe_title(title: str | None) -> str | None:
     return safe_text(PERSON_TAIL.sub("", title)) if title else title
 
 
+ERROR_TEXT = {
+    "ConnectionError": "the City's site could not be reached",
+    "ProxyError": "the City's site could not be reached through the proxy",
+    "SSLError": "the secure connection to the City's site failed",
+    "ConnectTimeout": "the City's site did not answer in time",
+    "ReadTimeout": "the City's site stopped answering in time",
+    "Timeout": "the City's site did not answer in time",
+    "HTTPError": "the City's site refused a page",
+    "TooManyRedirects": "the City's site redirected too many times",
+    "ChunkedEncodingError": "the City's answer was cut off",
+    "ContentDecodingError": "the City's answer could not be decoded",
+    "RetryError": "the City's site could not be reached after retries",
+    "MissingSchema": "a page address could not be used", "InvalidSchema": "a page address could not be used",
+    "InvalidURL": "a page address could not be used", "InvalidHeader": "a request could not be made",
+    "RequestException": "a request to the City's site failed",
+}
+
+
 def safe_error(e: Exception) -> str:
-    """A failed request's message as it may be saved: an overflow page's address carries a street address, so every
-    address of the City's site is replaced by the index page's (verification 2 P1-3)."""
-    msg = re.sub(r"https?://(?:www\.)?leavenworthks\.gov/\S*", lambda m: INDEX if m.group(0).rstrip(".,;)") ==
-                 INDEX else "[a page of the City's site]", str(e))
-    return f"{type(e).__name__}: {safe_text(msg)}"
+    """A failed run's saved and printed description: a fixed text by the error's kind, never the exception's own text,
+    which can carry an overflow page's address (absolute or a bare path) and with it a house number and a name
+    (verification 3 P1-2). An HTTP refusal adds its status number only."""
+    kind = next((c.__name__ for c in type(e).__mro__ if c.__name__ in ERROR_TEXT), None)
+    if kind:
+        code = getattr(getattr(e, "response", None), "status_code", None)
+        tail = f" (HTTP {int(code)})" if isinstance(code, int) else ""
+        return f"{kind}: {ERROR_TEXT[kind]}{tail}"
+    if isinstance(e, OSError):
+        return "OSError: a saved page could not be read"
+    return f"{type(e).__name__ if type(e).__name__.isidentifier() else 'Error'}: a page could not be read"
 
 
 def place_of(title: str) -> str | None:
@@ -251,10 +281,12 @@ def record(path: str, h: str, at: str, cite: str | None = None) -> dict:
             if eday is None:
                 break                                # several dates and none is the end's: no end, never a guess
             e = datetime(eday.year, eday.month, eday.day, h_, mi, tzinfo=TZ)
-            if not dm and re.search(r"next day|following day|next morning", s, re.I):
-                e += timedelta(days=1)
+            if NEXT_DAY.search(s) and not DATE.search(s[w.start():]):
+                e += timedelta(days=1)       # the day after the sentence's own date or the report day (verification 3)
             elif not dm and prec == "minute" and e < datetime.fromisoformat(start):
                 e += timedelta(days=1)
+            if prec == "minute" and e < datetime.fromisoformat(start):
+                break                        # an end before the start is no end, never a guess
             end, end_basis = e.isoformat(), "the stop time the City's page gives"
         break
     v = re.search(r"([\d,]+)\s*gallons", clean)
@@ -298,20 +330,63 @@ def record(path: str, h: str, at: str, cite: str | None = None) -> dict:
         parse_error=None if day else "no date in the page's title or text", raw=raw)
 
 
+def page_key(path: str) -> str:
+    """A page's identity in the private id map: a digest of its path name (which carries a house number), never in a
+    record."""
+    return hashlib.sha256(path.rstrip("/").rsplit("/", 1)[-1].encode()).hexdigest()
+
+
+def ids_path() -> Path:
+    """The private id map: beside the events files but never one of them (every reader takes events/*.json only), kept
+    with the build state, never exported."""
+    return common.EVENTS_DIR / "_private" / f"{SOURCE_ID}-page-ids.json"
+
+
+def assign_ids(pairs: list[tuple[str, dict]], recs: dict, ids: dict[str, str]) -> None:
+    """Each page's record id, stable whatever is read with it (verification 3 P2-1). A page seen before keeps the id
+    the private map gives it. A new page takes its hundred-block id (record_id) when no other page holds it, else the
+    next ordinal ("-n2"); a page the map does not know yet (a save from before the map) takes the saved record of its
+    hundred block that no known page holds, the one with its own start, else its own title when only one holds it. Pages are taken in
+    path order, so two new pages read together are numbered the same way in any run; a saved record matching neither
+    is another page's and is never taken. ids is updated in place."""
+    srid = {r["source_record_id"] for r in recs.values()}
+    claimed = set(ids.values())
+    pending = []
+    for path, r in pairs:
+        rid = ids.get(page_key(path))
+        if rid:
+            r["source_record_id"], r["event_id"] = rid, f"{SOURCE_ID}:{rid}"
+        else:
+            pending.append((path, r))
+    for path, r in pending:
+        base = r["source_record_id"]
+        fam = sorted((x for x in srid if x == base or re.fullmatch(re.escape(base) + r"-n\d+", x)),
+                     key=lambda x: (len(x), x))
+        free = [x for x in fam if x not in claimed]
+        old = {x: recs.get(f"{SOURCE_ID}:{x}") or {} for x in free}
+        same_title = [x for x in free if (old[x].get("raw") or {}).get("title") == r["raw"]["title"]]
+        rid = (next((x for x in free if old[x].get("started_at") == r["started_at"]), None)
+               or (same_title[0] if len(same_title) == 1 else None))
+        if not rid:
+            # a saved record of the block that is neither this page's start nor its title is another page's
+            n, rid = 1, base
+            while rid in claimed or rid in srid:
+                n += 1
+                rid = f"{base}-n{n}"
+        ids[page_key(path)] = rid
+        claimed.add(rid)
+        r["source_record_id"], r["event_id"] = rid, f"{SOURCE_ID}:{rid}"
+
+
 def run(pages: dict[str, str], prev: list[dict], at: str,
-        cites: dict[str, str] | None = None) -> tuple[list[dict], dict]:
-    """cites: page path -> the year page that lists it (the citation without a street address)."""
+        cites: dict[str, str] | None = None, ids: dict[str, str] | None = None) -> tuple[list[dict], dict]:
+    """cites: page path -> the year page that lists it (the citation without a street address). ids: the private id
+    map (page_key -> record id), updated in place."""
     recs = migrate(prev)
     stats = {"pages": 0, "undated": 0}
-    read = [record(path, h, at, (cites or {}).get(path)) for path, h in sorted(pages.items())]
-    taken: dict[str, int] = {}
-    for r in read:
-        # two pages of one read in the same hundred block of one street on one day (none among the City's pages on
-        # 2026-11-14): the later path in order gets an ordinal rather than overwrite the first
-        n = taken[r["event_id"]] = taken.get(r["event_id"], 0) + 1
-        if n > 1:
-            rid = f"{r['source_record_id']}-n{n}"
-            r["source_record_id"], r["event_id"] = rid, f"{SOURCE_ID}:{rid}"
+    pairs = [(path, record(path, h, at, (cites or {}).get(path))) for path, h in sorted(pages.items())]
+    assign_ids(pairs, recs, {} if ids is None else ids)
+    read = [r for _, r in pairs]
     legacy = [k for k, x in recs.items() if (x.get("raw") or {}).get("id_version") != ID_VERSION]
     gone: set[str] = set()
     for r in read:
@@ -366,10 +441,42 @@ def fetch(prev: list[dict], backfill: bool) -> tuple[dict[str, str], list[str]]:
     return pages, [y for y, _ in years], cites
 
 
+def load_ids() -> dict[str, str]:
+    try:
+        d = json.loads(ids_path().read_text())
+        return {str(k): str(v) for k, v in d.items()} if isinstance(d, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def save_ids(ids: dict[str, str]) -> None:
+    p = ids_path()
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(ids, indent=1, sort_keys=True))
+
+
+def failed(prev: list[dict], e: Exception) -> None:
+    """A failed run: health false with a fixed description (safe_error), and the earlier records kept, all of them,
+    brought through the same scrub as a read (migrate) so an older save's text never stays as it was (verification 3
+    P1-2); if that scrub itself fails, the earlier file is kept as it is."""
+    err = safe_error(e)
+    try:
+        kept = sorted(migrate(json.loads(json.dumps(prev))).values(), key=lambda r: (r.get("started_at") or "",
+                                                                                     r["event_id"]), reverse=True)
+    except Exception:            # noqa: BLE001 -- never lose the earlier records on the failed path
+        kept = None
+    if kept is not None:
+        write_events(SOURCE_ID, kept, ok=False, partial=True, error=err)
+    else:
+        write_events(SOURCE_ID, [], ok=False, error=err)
+    print(f"{SOURCE_ID}: {err}", file=sys.stderr)
+
+
 def main(argv=None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     path = common.EVENTS_DIR / f"{SOURCE_ID}.json"
     prev = (read_json(path, {}) or {}).get("records") or []
+    ids = load_ids()
     try:
         if "--dir" in argv:
             d = Path(argv[argv.index("--dir") + 1])
@@ -377,11 +484,11 @@ def main(argv=None) -> int:
             years, cites = [], {}
         else:
             pages, years, cites = fetch(prev, "--backfill" in argv)
-        recs, stats = run(pages, prev, now_iso(), cites)
+        recs, stats = run(pages, prev, now_iso(), cites, ids)
     except (requests.RequestException, OSError, ValueError, KeyError, IndexError, TypeError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=safe_error(e))
-        print(f"{SOURCE_ID}: {safe_error(e)}", file=sys.stderr)
+        failed(prev, e)
         return 1
+    save_ids(ids)
     save_raw(SOURCE_ID, json.dumps([{k: r.get(k) for k in ("source_url", "started_at", "ended_at", "volume_gal",
                                                            "waterbody_text", "outfall_name")} | {"title": r["raw"]["title"]}
                                     for r in recs], ensure_ascii=False, indent=1), "json")

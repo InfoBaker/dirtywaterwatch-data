@@ -22,14 +22,17 @@ Records (a map of what is in effect, read as a snapshot)
     run ok=False: the records are kept and nothing is lifted; so does a layer that answers only part of its rows
     (exceededTransferLimit). The Advisory text is cut before it is saved anywhere (scrub_advisory: common.scrub_text,
     then every street house number, then every sentence naming who reported, sampled or can be called, or still
-    holding an address in any case or a label such as 'Reporter:' (ingest.wv_la_privacy); text that cannot be cut to
-    the advice alone is withheld).
+    holding an address in any case or a label such as 'Reporter:', or a title before a name ('Lt.', 'Sgt.', 'Officer',
+    found before the text is split into sentences), or a name followed by what a person did ('... sampled the
+    bloom') (ingest.wv_la_privacy); text that cannot be cut to the advice alone is withheld).
   - Placement by the agency's own geometry only: the marker is a point's position, the point half way along a
     segment, or an interior point of an area (never a vertex mean, which can fall outside a concave area), rounded to
     three decimals (coord_source 'agency_layer'); raw.geometry_kind and raw.marker_basis say which. DEP's segment or
-    area itself is kept in raw.agency_extent (GeoJSON, three decimals); when it has several parts, the status build
-    places the advisory on the water of each part by that part's own interior point (build/status.py
-    extent_part_points), and each water's colour follows the whole-water and river rules. No water name is invented.
+    area itself is kept in raw.agency_extent (GeoJSON, three decimals); the status build places the advisory on every
+    water that extent crosses (an area cut by each water's outline, holes kept; a line within about 130 m), each
+    affected piece of a water by its own point, so one area over two lakes places both and two separate pieces of
+    one river are two markers (build/status.py extent_hits); each water's colour follows the whole-water and river
+    rules (a river is never coloured whole). No water name is invented.
 
 Run from pipeline/: python -m ingest.wv_dep_hab_advisories [--file saved.json] [--at 2026-11-14T12:00:00Z]
 Cadence: with the refresh (daily is enough; the map changes rarely).
@@ -130,6 +133,7 @@ PERSON_CLAUSE_RE = re.compile(
 # (a title in any case: 'dr. example person' stays one sentence, so the honorific check sees the name after it)
 SENTENCE_RE = re.compile(r"(?<=[.!?;])(?<!\b(?i:mr)\.)(?<!\b(?i:mrs)\.)(?<!\b(?i:ms)\.)(?<!\b(?i:mx)\.)(?<!\b(?i:dr)\.)"
                          r"(?<!\b(?i:prof)\.)(?<!\b(?i:rev)\.)(?<!\bSt\.)(?<!\b[A-Z]\.)[ ]+")
+TITLE_MARK = "\u0000"
 WITHHELD = "(DEP's advisory text is withheld here: it could not be cut to the advisory alone)"
 
 
@@ -143,7 +147,11 @@ def scrub_advisory(text: str) -> str | None:
     t = HOUSE_NUMBER_RE.sub(common.HOUSE_NUMBER_REMOVED, common.scrub_text(t))
     # then, in any case, every sentence still holding an address or a label of who reported, sampled, collected or
     # can be called ('123 example lane', 'Reporter: ...', 'Sample collector: ...'; ingest.wv_la_privacy) is cut
-    kept = [x for x in SENTENCE_RE.split(t) if x and not PERSON_CLAUSE_RE.search(x)
+    # a title before a name is found before the text is split (Astra verify3 P1-2): its period becomes a mark the
+    # splitter does not break at, so 'Lt. Example Person sampled the bloom.' stays one sentence, and a sentence holding
+    # the mark is cut whatever follows the title ('Sgt.', 'capt.', 'Lt. Col.' and the rest, wv_la_privacy.TITLE_ABBR)
+    t = wv_la_privacy.TITLE_DOT_RE.sub(lambda m: m.group(0)[:-1] + TITLE_MARK, t)
+    kept = [x for x in SENTENCE_RE.split(t) if x and TITLE_MARK not in x and not PERSON_CLAUSE_RE.search(x)
             and not wv_la_privacy.has_address(x) and not wv_la_privacy.names_a_person(x)]
     out = " ".join(kept).strip()
     if not re.search(r"[A-Za-z]{3}", out.replace(common.HOUSE_NUMBER_REMOVED, "")) or \

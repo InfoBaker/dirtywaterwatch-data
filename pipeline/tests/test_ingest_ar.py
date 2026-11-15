@@ -1100,3 +1100,243 @@ def test_a_standing_advisory_with_no_cited_point_is_listed_by_the_build(tmp_path
     assert eid in st["unplaced_events"] and st["counts"]["unplaced"] == 1
     rec = json.loads((tmp_path / "events" / f"{H.SOURCE_ID}.json").read_text())["records"][0]
     assert rec["status"] == "advisory_active" and rec.get("lat") is None
+
+
+# ---------------------------------------------------------------- verification 3 P1: every point in words, every save
+
+FINE_FORMS = ("123456", "654321", "35.1234 ", "°", "34.5\"", "12.345'", "45.678")
+
+
+@pytest.mark.parametrize("text,want", [
+    ("near 35°12'34.5\"N 93°45'12\"W", "near 35.210 -93.753"),
+    ("N 35° 12.345' W 93° 45.678'", "35.206 -93.761"),
+    ("35 12 34 N, 93 45 12 W", "35.209, -93.753"),
+    ("N35 12.345 W093 45.678", "35.206 -93.761"),
+    ("35d 12m 34s N, 93d 45m 12s W", "35.209, -93.753"),
+    ("at 35.123456, -93.654321", "at 35.123, -93.654"),
+    ("Lat 35.1234 Long -93.6543", "Lat 35.123 Long -93.654"),
+    # not coordinates: unchanged
+    ("Lift station 3, 120 gallons at 11:30", None), ("pump 4 min", None), ("12 m upstream", None),
+    ("Manhole MH-12 on 5th St", None), ("2.5 MG over 3 days", None), ("(coordinates 35.123, -93.654)", None),
+    ("Station 35 12 34 Elm", None), ("2026-11-15T12:00:00.123456Z", None),
+])
+def test_every_coordinate_form_in_words_is_cut_to_three_decimals(text, want):
+    assert T.scrub_coord_text(text) == (text if want is None else want)
+
+
+def _fine_prev(tmp_path, out, location):
+    """An events file as an older rule saved it: Unknown Creek's report with a finer point in raw.row.location, its
+    outfall name, a revision's old values and a tracked value (invented)."""
+    page = (FIX / "ar_deq_incidents_page.html").read_text().replace(
+        "Lift station 3 near Unknown Creek", f"Lift station 3 near Unknown Creek {location}")
+    rows, *_ = M.parse_page(page)
+    _, block = R.load_source("ar-deq-overflow-incidents")
+    safe = [R.F.safe_row(r, block)[0] for r in rows]
+    recs, _ = R.build("ar-deq-overflow-incidents", block, safe, FETCHED, (), None)
+    for r in recs:
+        if "Unknown Creek" in (r["raw"]["row"].get("location") or ""):
+            r["raw"]["_revisions"] = [{"replaced_at": FETCHED, "old_values": {"location": f"Pump {location}",
+                                                                              "volume_gal": "0.00125"}}]
+            r["raw"]["_seen"] = {"location": [{"value": f"at {location}", "first_seen_at": FETCHED}]}
+    out.write_text(json.dumps({"source_id": M.SOURCE_ID, "ok": True, "last_ok_at": FETCHED,
+                               "meta": {"window_start": "2026-11-01"}, "records": recs}))
+    return {r["event_id"] for r in recs}
+
+
+def _no_fine(doc_or_text):
+    for s in strings(doc_or_text) if not isinstance(doc_or_text, str) else [doc_or_text]:
+        assert not any(f in s for f in FINE_FORMS), s
+
+
+@pytest.mark.parametrize("location", ["at 35.123456, -93.654321", "35°12'34.5\"N 93°45'12\"W",
+                                      "N 35° 12.345' W 93° 45.678'"])
+@pytest.mark.parametrize("path", ["reread", "disappeared", "failed_fetch", "failed_build"])
+def test_a_point_kept_by_an_older_rule_is_cut_on_every_save_path(tmp_path, monkeypatch, location, path):
+    """Verification 3 P1: a finer point an older rule left in the events file (raw.row, outfall name, revisions'
+    old values, tracked values) is cut at the next run whether the report is read again, has left DEQ's list, the
+    fetch fails or the build fails; every record held before is still there, and a volume is never rounded."""
+    from datetime import datetime as dt
+    out = tmp_path / "ev.json"
+    before = _fine_prev(tmp_path, out, location)
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    saved = []
+    monkeypatch.setattr(M, "save_raw", lambda *a, **k: (saved.append(a[1].decode()), tmp_path / "raw.json")[1])
+    monkeypatch.setattr(M, "ROOT", tmp_path)
+    page = (FIX / "ar_deq_incidents_page.html").read_text()
+    today = dt.now(M.TZ).date().isoformat()
+    if path == "reread":
+        page = page.replace("Lift station 3 near Unknown Creek", f"Lift station 3 near Unknown Creek {location}")
+        monkeypatch.setattr(M, "post", lambda sess, data: page)
+        assert M.main(["--backfill", "2026-11-01", "--out", str(out)]) == 0
+    elif path == "disappeared":
+        rows, *_ = M.parse_page(page)
+        _, block = R.load_source("ar-deq-overflow-incidents")
+        safe = [R.F.safe_row(r, block)[0] for r in rows if "Unknown Creek" not in r["location"]]
+        f = tmp_path / "rows.json"
+        f.write_text(json.dumps({"format": R.SAFE_ROWS_FORMAT, "rows": safe,
+                                 "meta": {"ar_search": {"window_start": "2026-11-01", "window_end": today}}}))
+        assert M.main(["--file", str(f), "--out", str(out)]) == 0
+    elif path == "failed_fetch":
+        def boom(sess, data):
+            raise M.requests.ConnectionError("down")
+        monkeypatch.setattr(M, "post", boom)
+        assert M.main(["--backfill", "2026-11-01", "--out", str(out)]) == 1
+    else:
+        monkeypatch.setattr(M, "post", lambda sess, data: page)
+        def bad_build(*a, **k):
+            raise RuntimeError("hook failed")
+        monkeypatch.setattr(M.runner, "build", bad_build)
+        assert M.main(["--backfill", "2026-11-01", "--out", str(out)]) == 1
+    doc = json.loads(out.read_text())
+    _no_fine(doc)
+    for s in saved:
+        _no_fine(s)
+    assert before <= {r["event_id"] for r in doc["records"]}
+    rec = [r for r in doc["records"] if r["source_record_id"] == "aaaaaaaa-0000-4000-8000-000000000003"][0]
+    assert "-93." in json.dumps(rec) or "93." in json.dumps(rec)
+    revs = [v for rv in rec["raw"].get("_revisions") or [] for v in [rv.get("old_values") or {}]]
+    assert any(v.get("volume_gal") == "0.00125" for v in revs)        # a volume is never a coordinate
+    if path == "disappeared":
+        assert rec["raw"].get("_missing_from_source_since")
+    if path.startswith("failed"):
+        assert doc["ok"] is False and doc["last_ok_at"] == FETCHED
+
+
+def test_a_fresh_dms_point_is_cut_before_the_raw_save(tmp_path, monkeypatch):
+    """Verification 3 P1: a degree-minute-second point in a fresh report is converted and cut before the raw save
+    and every record field."""
+    page = (FIX / "ar_deq_incidents_page.html").read_text().replace(
+        "Lift station 3 near Unknown Creek", "Lift station 3 near Unknown Creek 35°12'34.5\"N 93°45'12\"W").replace(
+        "Power Failure;", "Power Failure at N35 12.345 W093 45.678;")
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    saved = []
+    monkeypatch.setattr(M, "save_raw", lambda *a, **k: (saved.append(a[1].decode()), tmp_path / "raw.json")[1])
+    monkeypatch.setattr(M, "ROOT", tmp_path)
+    monkeypatch.setattr(M, "post", lambda sess, data: page)
+    out = tmp_path / "ev.json"
+    assert M.main(["--backfill", "2026-11-01", "--out", str(out)]) == 0
+    doc = json.loads(out.read_text())
+    _no_fine(doc)
+    assert saved and "35.210 -93.753" in saved[0] and "35.206 -93.761" in saved[0]
+    _no_fine(saved[0])
+
+
+@pytest.mark.parametrize("failed", [False, True])
+def test_a_bloom_point_kept_by_an_older_rule_or_written_as_dms_is_cut(monkeypatch, tmp_path, failed):
+    """Verification 3 P1, the bloom feed's siblings: a DMS point in a waterbody name or the area text is cut before
+    the raw save and the records; a finer point an older rule left in the events file is cut at the next run, and on
+    a failed read every earlier record is kept with its point cut."""
+    doc = _hab_doc(("Stream by trail (coordinates 35°12'34.5\"N, 93°45'12\"W)", "Sample County",
+                    "Sampletown, AR 35.123456 -93.654321", "July 1, 2026", ""))
+    _, out = habs(monkeypatch, tmp_path, doc)
+    first = json.loads(out.read_text())
+    _no_fine(first)
+    rec = first["records"][0]
+    assert (rec["lat"], rec["lon"]) == (35.21, -93.753)
+    # an older rule's file with a finer point in raw.row and a revision
+    rec["raw"]["row"]["area"] = "Sampletown, AR 35.123456 -93.654321"
+    rec["raw"]["_revisions"] = [{"replaced_at": FETCHED, "old_values": {"waterbody": "Pond (coordinates 35.123456, "
+                                                                                     "-93.654321)"}}]
+    out.write_text(json.dumps(first))
+    if failed:
+        monkeypatch.setattr(T, "GNIS_POINTS", EXAMPLE_POINTS)
+        bad = tmp_path / "bad.json"
+        bad.write_text(json.dumps({"advisories": "not a list"}))
+        assert H.main(["--file", str(bad), "--out", str(out)]) == 1
+    else:
+        habs(monkeypatch, tmp_path, doc, prev_out=out)
+    after = json.loads(out.read_text())
+    _no_fine(after)
+    assert {r["event_id"] for r in after["records"]} >= {rec["event_id"]}
+
+
+# ---------------------------------------------------------------- verification 3 P2: links the former rule wrote
+
+def _status_of(tmp_path, out):
+    from datetime import UTC, datetime
+    from build import status as S
+    d = tmp_path / "events-st"
+    d.mkdir(exist_ok=True)
+    doc = json.loads(out.read_text())
+    (d / f"{H.SOURCE_ID}.json").write_text(json.dumps({**doc, "last_ok_at": "2026-11-01T12:00:00Z"}))
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    rules = json.loads((R.ROOT / "data" / "rules.json").read_text())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"AR"})
+    rules["rain_likely"] = {**rules["rain_likely"], "enabled": False}
+    now = datetime(2026, 11, 2, 12, tzinfo=UTC)
+    st, _ = S.build(now=now, write=False, events_dir=d, waters={}, outfalls=[], registry={}, reaches={},
+                    flows=({}, {}), rules=rules, placement_cache=False)
+    ivs = {r["event_id"]: S.event_intervals(r, "AR", now, None, rules) for r in doc["records"]}
+    return st, ivs
+
+
+@pytest.mark.parametrize("reviewed", [False, True])
+def test_a_link_the_former_closeness_rule_wrote_is_removed_unless_reviewed(monkeypatch, tmp_path, reviewed):
+    """Verification 3 P2: "Lake Example A" left the file when "Lake Example B" appeared and the former name-closeness
+    rule saved A as B's corrected row. At the next run with no reviewed entry the link is removed (noted in
+    raw._duplicate_link_removed) and the AR-live status build counts both advisories with their own intervals; a
+    reviewed entry keeps the link (with its reviewed basis); a repeat of the same record key keeps its own link."""
+    a = ("Lake Example A", "Sample County", "Sampletown, AR", "October 1, 2026", "")
+    b = ("Lake Example B", "Sample County", "Sampletown, AR", "October 1, 2026", "")
+    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-05T06:00:00Z")
+    _, out = habs(monkeypatch, tmp_path, _hab_doc(a))
+    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-10T06:00:00Z")
+    habs(monkeypatch, tmp_path, _hab_doc(b), prev_out=out)
+    # the state as the former rule wrote it: A linked to B by closeness; a repeated row of A's key linked to A
+    doc = json.loads(out.read_text())
+    recs = {r["waterbody_text"]: r for r in doc["records"]}
+    ra, rb = recs["Lake Example A"], recs["Lake Example B"]
+    ra["duplicate_of"] = rb["event_id"]
+    ra["raw"]["_duplicate_basis"] = f"gone from the source; {rb['event_id']} looks like its corrected row"
+    rep = json.loads(json.dumps(ra))
+    rep["event_id"], rep["source_record_id"] = ra["event_id"] + "~2", ra["source_record_id"] + "~2"
+    rep["duplicate_of"] = ra["event_id"]
+    rep["raw"]["_duplicate_basis"] = "the source repeats this record (same record key)"
+    doc["records"].append(rep)
+    out.write_text(json.dumps(doc))
+    if reviewed:
+        _reviewed(monkeypatch, [{"old": ra["source_record_id"], "new": rb["source_record_id"],
+                                 "evidence": "DEQ's archive shows the water renamed (invented)"}])
+    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-15T06:00:00Z")
+    habs(monkeypatch, tmp_path, _hab_doc(b), prev_out=out)
+    after = {r["event_id"]: r for r in json.loads(out.read_text())["records"]}
+    assert after[rep["event_id"]]["duplicate_of"] == ra["event_id"]          # a genuine repeat stays linked
+    st, ivs = _status_of(tmp_path, out)
+    if reviewed:
+        assert after[ra["event_id"]]["duplicate_of"] == rb["event_id"]
+        assert after[ra["event_id"]]["raw"]["_duplicate_basis"].endswith("(a reviewed correction)")
+        assert ra["event_id"] in st["duplicates"]
+        return
+    got = after[ra["event_id"]]
+    assert not got.get("duplicate_of") and "_duplicate_basis" not in got["raw"]
+    assert got["raw"]["_duplicate_link_removed"]["was_duplicate_of"] == rb["event_id"]
+    assert ra["event_id"] not in st["duplicates"] and rb["event_id"] not in st["duplicates"]
+    assert ivs[ra["event_id"]] and ivs[rb["event_id"]]
+    # A's period ends at the read that first missed it, B's runs on
+    assert max(i["end"] for i in ivs[ra["event_id"]] if i["end"] is not None).isoformat().startswith("2026-10-10")
+    # the run after: nothing changes again
+    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-20T06:00:00Z")
+    habs(monkeypatch, tmp_path, _hab_doc(b), prev_out=out)
+    again = {r["event_id"]: r for r in json.loads(out.read_text())["records"]}
+    assert not again[ra["event_id"]].get("duplicate_of")
+    assert again[ra["event_id"]]["raw"]["_duplicate_link_removed"] == got["raw"]["_duplicate_link_removed"]
+
+
+SNAPSHOT = R.ROOT / "data" / "raw" / "ar-deq-overflow-incidents" / "20261114T181220Z.json"
+
+
+@pytest.mark.skipif(not SNAPSHOT.exists(), reason="the 2026-11-14 safe-rows snapshot is in data/raw, not in git")
+def test_the_state_texts_report_counts_follow_the_snapshot_replay(tmp_path):
+    """Verification 3 P3: the state text's counts are the replay of the 2026-11-14 read (distinct reports, a repeat
+    of a confirmation number counted once): reports naming a water, reports with no stop day, a stop day before the
+    start."""
+    out = tmp_path / "ev.json"
+    assert M.main(["--file", str(SNAPSHOT), "--out", str(out)]) == 0
+    recs = [r for r in json.loads(out.read_text())["records"] if not r.get("duplicate_of")]
+    named = sum(1 for r in recs if r.get("waterbody_text"))
+    no_stop = sum(1 for r in recs if not (r["raw"]["row"].get("date_stopped") or "").strip())
+    before = sum(1 for r in recs if (r["raw"]["row"].get("date_stopped") or "").strip() and not r.get("ended_at"))
+    text = (R.ROOT / "research" / "ar" / "state-text.md").read_text()
+    assert (len(recs), named, no_stop, before) == (2398, 237, 81, 9)
+    assert "as 237 reports do" in text and "Eighty-one reports give no day" in text and "nine give a day before" in text

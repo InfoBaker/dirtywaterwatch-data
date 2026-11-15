@@ -35,7 +35,11 @@ Record rules
     raw.revised_out), and a water it names again opens a new observed period, its own record (source_record_id
     "<release>-<water>-p<n>", raw.period_of the first, started_at the read that saw it named again, time_precision
     poll), so the earlier period keeps its end and the time between is never coloured; a water KDHE rescinded stays
-    lifted. A rescission that names no county, for a water open in more than one county, lifts none
+    lifted. A rescission applies by its issuing release's publication time, never a period's own start: every
+    rescission a read holds is reconciled before any period is opened, so a water named again in the read that holds
+    its rescission is never reopened; a rescission read while the release no longer names the water is kept on that
+    record (raw.rescinded_by), so a later read never reopens it; a period first seen after a rescission published
+    earlier ends where it starts. A rescission that names no county, for a water open in more than one county, lifts none
     (rescissions_seen_ambiguous in meta).
   - raw.time_zone by the release's county (pipeline/zones.py kansas_zone); raw._placement "named_water_only".
   - The feed's offsets read -0600 in October as in November (KDHE's server states Central Standard Time year-round);
@@ -247,6 +251,77 @@ REVISED_OUT_BASIS = ("KDHE's release no longer names this water at this read: th
                      "this read; not KDHE's lift time")
 
 
+def rescinded(r: dict) -> bool:
+    return bool(r["raw"].get("lifted_by") or r["raw"].get("rescinded_by"))
+
+
+def issued_at(r: dict, recs: dict) -> str | None:
+    """The issuing release's publication time: a later observed period's own start is a read, never the release."""
+    base = recs.get(r["raw"].get("period_of") or "") or r
+    return base.get("started_at") if not base["raw"].get("period_of") else None
+
+
+def lift_applies(lift: tuple, r: dict, recs: dict) -> bool:
+    """A rescission applies to a record of one of the waters it names, in its county (or any county when it names
+    none), when it was published at or after the record's issuing release, whatever the record's own start."""
+    it, waters, county = lift
+    when, start = iso(it["date"]), issued_at(r, recs)
+    return bool(when and start and iso_utc(start) <= iso_utc(when)
+                and {key(w) for w in waters} & {key(w) for w in r["raw"].get("waters") or []}
+                and not (county and r["raw"].get("county") and county != r["raw"]["county"]))
+
+
+def county_clear(lift: tuple, cands: list[dict]) -> bool:
+    """A rescission that names no county lifts only where its waters are held in one county."""
+    return bool(lift[2]) or len({r["raw"].get("county") for r in cands}) <= 1
+
+
+def rescinded_now(new: dict, lifts: list, recs: dict) -> bool:
+    """A water named again in a read that also holds its rescission: never a new observed period."""
+    for lift in lifts:
+        same = [x for x in recs.values() if lift_applies(lift, x, recs)]
+        if any(base_of(x) == new["event_id"] for x in same) and county_clear(lift, same):
+            return True
+    return False
+
+
+def apply_lifts(lifts: list, recs: dict, stats: dict | None, orphan: list, ambiguous: list) -> None:
+    """Each rescission ends every open record it applies to at KDHE's time (never before the record's own start: a
+    period first seen after the rescission was published ends where it starts, so it is never coloured), and marks a
+    water the release had already stopped naming (raw.rescinded_by), so it is never reopened by a later read
+    (verification 3 P1-1). stats None: the reconciliation before the issues are read, which counts nothing."""
+    for lift in lifts:
+        it, _, county = lift
+        when = iso(it["date"])
+        cands = [r for r in recs.values() if r["status"] == "advisory_active" and lift_applies(lift, r, recs)]
+        dropped = [r for r in recs.values() if r["status"] == "advisory_lifted" and r["raw"].get("revised_out")
+                   and not rescinded(r) and lift_applies(lift, r, recs)]
+        if not county_clear(lift, cands + dropped):
+            # a rescission that names no county, for a water name held in several counties: which one it lifts is
+            # not known, so none is lifted (they age out unconfirmed) and the rescission is kept in meta
+            if stats is not None:
+                ambiguous.append({"title": it["title"], "link": it["link"], "date": when,
+                                  "counties": sorted({str(r["raw"].get("county")) for r in cands + dropped})})
+            continue
+        mark = {"title": it["title"], "link": it["link"], "date": when}
+        for r in cands:
+            late = iso_utc(when) < iso_utc(r["started_at"])
+            r["status"], r["ended_at"] = "advisory_lifted", r["started_at"] if late else when
+            r["raw"].update(ended_at_precision="minute", lifted_by=mark)
+            if late:
+                r["raw"]["end_basis"] = ("KDHE rescinded the advisory before this period was first seen: it ends where it "
+                                         "starts, never shown after the rescission")
+            r["raw"].pop("confirmed_by", None)
+            if stats is not None:
+                stats["lifted"] += 1
+        for r in dropped:
+            r["raw"]["rescinded_by"] = mark
+        if stats is not None and not cands and not dropped and not any(
+                (r["raw"].get("lifted_by") or r["raw"].get("rescinded_by") or {}).get("link") == it["link"]
+                for r in recs.values()):
+            orphan.append(mark)
+
+
 def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
     recs = {r["event_id"]: r for r in prev}
     for r in recs.values():
@@ -263,6 +338,14 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
             # an issue or rescission without a usable publication time cannot be dated: the run fails with the
             # earlier records kept, never an advisory with no start or a lift with no time (verification P2-5)
             raise ValueError(f"KDHE stream advisory release {it.get('link')} has no usable publication time")
+    for it in its:
+        # every rescission this read holds, reconciled against the saved records before any observed period is
+        # opened, so a water named again in the same read as its rescission never reopens (verification 3 P1-1)
+        k, waters, county = kind(it["title"])
+        if k == "lift":
+            stats["rescissions"] += 1
+            lifts.append((it, waters + desc_waters(it["description"]), county))
+    apply_lifts(lifts, recs, None, [], [])
     for it in sorted(its, key=lambda x: iso(x["date"]) or ""):
         k, waters, county = kind(it["title"])
         if k == "issue":
@@ -280,7 +363,7 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
                     continue
                 last = chain[-1]
                 if last["status"] == "advisory_lifted" and last["raw"].get("revised_out") \
-                        and not last["raw"].get("lifted_by"):
+                        and not rescinded(last) and not rescinded_now(r, lifts, recs):
                     # named again after a read that dropped it: a new observed period, never the old one reopened
                     nxt = reopened(last, r, at, len(chain) + 1)
                     recs[nxt["event_id"]] = nxt
@@ -295,31 +378,7 @@ def run(feed: bytes, prev: list[dict], at: str) -> tuple[list[dict], dict]:
                     r.update(status="advisory_lifted", ended_at=at)
                     r["raw"].update(ended_at_precision="poll", revised_out=True, end_basis=REVISED_OUT_BASIS)
                     stats["revised_out"] += 1
-        elif k == "lift":
-            stats["rescissions"] += 1
-            lifts.append((it, waters + desc_waters(it["description"]), county))
-    for it, waters, county in lifts:
-        when = iso(it["date"])
-        names = {key(w) for w in waters}
-        cands = [r for r in recs.values()
-                 if r["status"] == "advisory_active" and r.get("started_at") and when
-                 and iso_utc(r["started_at"]) <= iso_utc(when)
-                 and names & {key(w) for w in r["raw"].get("waters") or []}
-                 and not (county and r["raw"].get("county") and county != r["raw"]["county"])]
-        if not county and len({r["raw"].get("county") for r in cands}) > 1:
-            # a rescission that names no county, for a water name open in several counties: which one it lifts is not
-            # known, so none is lifted (they age out unconfirmed) and the rescission is kept in meta
-            ambiguous.append({"title": it["title"], "link": it["link"], "date": when,
-                              "counties": sorted(str(r["raw"].get("county")) for r in cands)})
-            continue
-        for r in cands:
-            r["status"], r["ended_at"] = "advisory_lifted", when
-            r["raw"].update(ended_at_precision="minute", lifted_by={"title": it["title"], "link": it["link"],
-                                                                     "date": when})
-            r["raw"].pop("confirmed_by", None)
-            stats["lifted"] += 1
-        if not cands and not any((r["raw"].get("lifted_by") or {}).get("link") == it["link"] for r in recs.values()):
-            orphan.append({"title": it["title"], "link": it["link"], "date": when})
+    apply_lifts(lifts, recs, stats, orphan, ambiguous)
     stats["rescissions_without_issue"] = len(orphan)
     stats["rescissions_ambiguous"] = len(ambiguous)
     for r in recs.values():
