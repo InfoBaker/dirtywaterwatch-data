@@ -564,3 +564,26 @@ def test_the_decision_ledger_survives_through_main_and_old_saves_are_migrated(tm
     doc = json.loads((tmp_path / f"{C.SOURCE_ID}.json").read_text())
     assert {r["source_record_id"] for r in doc["records"]} == {"70011"}
     assert ["https://dnr.mo.gov/feb.pdf", None] in doc["meta"]["reports_seen"]
+
+
+def test_kc_old_saves_lose_post_text_and_gain_every_water_on_repeated_runs(tmp_path, monkeypatch):
+    """Re-review P1-8: an old-format save run three times: no post text, every named water, the
+    placement guard, no duplicate."""
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(common, "RAW_DIR", tmp_path / "raw")
+    recs, _ = K.run([(FIX / "kc_feed.xml").read_bytes()], [], AT)
+    old = json.loads(json.dumps(recs))
+    for r in old:
+        r["raw"]["post_text"] = "Call Staff Example at 573-555-0100."
+        r["raw"].pop("_placement")
+        if len(r["raw"]["waters_named"]) > 1 and r["raw"]["reached_water"] is not False:
+            r["waterbody_text"] = r["raw"]["waters_named"][0]
+    (tmp_path / f"{K.SOURCE_ID}.json").write_text(json.dumps({"source_id": K.SOURCE_ID, "ok": True, "meta": {},
+                                                               "records": old}))
+    out, _ = K.run([], old, "2026-11-15T00:00:00Z")
+    for _ in range(2):
+        out, _ = K.run([], out, "2026-11-15T01:00:00Z")
+    assert len(out) == len(recs) and "555-0100" not in json.dumps(out)
+    assert {r["raw"]["_placement"] for r in out} == {"named_water_only"}
+    assert {r["event_id"]: r["waterbody_text"] for r in out} == {r["event_id"]: r["waterbody_text"] for r in recs}
