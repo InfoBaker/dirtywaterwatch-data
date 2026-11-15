@@ -39,7 +39,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0005711"
+   "supersedes": "data/outfalls-plants-us.json LA0005711",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: '0519': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (0519, Bayou Saint Clair, Coulee Mine, Local Drainage, VERMILION RIVER) cannot be told apart for this outfall",
+   "no_water_reason": "'0519': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (0519, Bayou Saint Clair, Coulee Mine, Local Drainage, VERMILION RIVER) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0005754",
@@ -67,8 +75,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-la) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state, 0.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-la) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "kind_note": "EPA's combined sewer inventory lists this industrial plant's outfall (CSO|DSW|NCW|NDP): a petrochemical plant's combined process, storm and sanitary outfall under its own permit, not a municipal sewer system's overflow point; kept off the map's combined sewer outlets and out of the outfall count and the rain caution.",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-us.json LA0005754 101"
@@ -109,7 +117,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0033243"
+   "supersedes": "data/outfalls-plants-us.json LA0033243",
+   "water_slug": "red-river-la",
+   "water_name": "Red River",
+   "water_kind": "river",
+   "distance_m": 650,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'RED RIVER' by name; Red River (red-river-la, openboatlaunch), 650 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0033294",
@@ -147,7 +162,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0033294"
+   "supersedes": "data/outfalls-plants-us.json LA0033294",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bayou Teche)",
+   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Bayou Teche)",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0066702",
@@ -189,7 +212,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA's limit sets describe this outfall's water as 'Leachate, stormwater, wash water, etc.': not a sewage outfall; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0066702 302"
+   "supersedes": "data/outfalls-plants-us.json LA0066702 302",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: 'Local Drainage': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Local Drainage) cannot be told apart for this outfall",
+   "no_water_reason": "'Local Drainage': not a water name; no water record within 150 m of the point; the permit's listed receiving waters (Local Drainage) cannot be told apart for this outfall",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0068152",
@@ -229,7 +260,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA's limit sets describe this outfall's water as 'treated landfill wastewater from OF 101 and non-contact stormwater': not a sewage outfall; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0068152 001"
+   "supersedes": "data/outfalls-plants-us.json LA0068152 001",
+   "water_slug": "mill-creek-la",
+   "water_name": "Mill Creek",
+   "water_kind": "stream",
+   "distance_m": 1171,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 15222248 (EPA), no snapping; Mill Creek (mill-creek-la, NHDPlus V2.1 record), 1171 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0078921",
@@ -271,7 +309,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA's limit sets describe this outfall's water as 'Quarterly - non-contact stormwater from Hano Road and property to the south of the landfill': not a sewage outfall; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0078921 001"
+   "supersedes": "data/outfalls-plants-us.json LA0078921 001",
+   "water_slug": "natalbany-river-la",
+   "water_name": "Natalbany River",
+   "water_kind": "river",
+   "distance_m": 22,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Natalbany River' by name; Natalbany River (natalbany-river-la, NHDPlus V2.1 record), 22 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0078921",
@@ -315,7 +360,14 @@
    "coords_note": "2 of this permit's outfalls share this one point in ICIS",
    "kind_note": "EPA's limit sets describe this outfall's water as 'Quarterly - treated landfill wastewater from Internal Outfalls 103 and 203, non-contact stormwater f': not a sewage outfall; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0078921 003"
+   "supersedes": "data/outfalls-plants-us.json LA0078921 003",
+   "water_slug": "natalbany-river-la",
+   "water_name": "Natalbany River",
+   "water_kind": "river",
+   "distance_m": 1,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Natalbany River' by name; Natalbany River (natalbany-river-la, NHDPlus V2.1 record), 1 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0078921",
@@ -356,7 +408,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA's limit sets describe this outfall's water as 'Monthly - treated landfill wastewater including treated leachate, contact stormwater, equipment wash': not a sewage outfall; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0078921 004"
+   "supersedes": "data/outfalls-plants-us.json LA0078921 004",
+   "water_slug": "natalbany-river-la",
+   "water_name": "Natalbany River",
+   "water_kind": "river",
+   "distance_m": 197,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Natalbany River' by name; Natalbany River (natalbany-river-la, NHDPlus V2.1 record), 197 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0103870",
@@ -394,7 +453,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0103870"
+   "supersedes": "data/outfalls-plants-us.json LA0103870",
+   "water_slug": "welsh-gully-la",
+   "water_name": "Welsh Gully",
+   "water_kind": "stream",
+   "distance_m": 103,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'WELCH GULLY' by name; Welsh Gully (welsh-gully-la, NHDPlus V2.1 record), 103 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0109894",
@@ -432,7 +498,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0109894"
+   "supersedes": "data/outfalls-plants-us.json LA0109894",
+   "water_slug": "mile-creek-la",
+   "water_name": "Mile Creek",
+   "water_kind": "stream",
+   "distance_m": 2022,
+   "match": "name_only",
+   "water_match": "name: its receiving water 'MILE CREEK-BAYOU DORCHEAT' by name; Mile Creek (mile-creek-la, NHDPlus V2.1 record), 2022 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0117161",
@@ -475,7 +548,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA's limit sets describe this outfall's water as 'treated wastewater from storm sewer sediment dewatering pond': not a sewage outfall; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0117161 001"
+   "supersedes": "data/outfalls-plants-us.json LA0117161 001",
+   "water_slug": "coulee-mine-la",
+   "water_name": "Coulee Mine",
+   "water_kind": "stream",
+   "distance_m": 34,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'Coulee Mine' by name; Coulee Mine (coulee-mine-la, NHDPlus V2.1 record), 34 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0125563",
@@ -513,7 +593,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0125563"
+   "supersedes": "data/outfalls-plants-us.json LA0125563",
+   "water_slug": "ward-creek-la",
+   "water_name": "Ward Creek",
+   "water_kind": "stream",
+   "distance_m": 635,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 18991110 (EPA), no snapping; Ward Creek (ward-creek-la, NHDPlus V2.1 record), 635 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0127268",
@@ -531,19 +618,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110070208769",
    "lat": 30.217861,
    "lon": -93.2975,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "maple-fork-la",
+   "water_name": "Maple Fork",
+   "water_kind": "stream",
+   "distance_m": 1911,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "other",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "auto",
-   "no_water_reason": "EPA's only text is a watershed name ('Maple Fork-Bayou D'Inde'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: EPA's only text is a watershed name ('Maple Fork-Bayou D'Inde'), not a water's; no name-only match is made from it; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "name: its receiving water 'Maple Fork-Bayou D'Inde' by name; Maple Fork (maple-fork-la, NHDPlus V2.1 record), 1911 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
    "kind_note": "EPA's combined sewer inventory lists this industrial plant's outfall (TCS): a petrochemical plant's combined process, storm and sanitary outfall under its own permit, not a municipal sewer system's overflow point; kept off the map's combined sewer outlets and out of the outfall count and the rain caution.",
    "checked": "2026-11-14",
    "supersedes": "data/outfalls-us.json LA0127268 001"
@@ -582,7 +668,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0127673"
+   "supersedes": "data/outfalls-plants-us.json LA0127673",
+   "water_slug": "bayou-sara-la",
+   "water_name": "Bayou Sara",
+   "water_kind": "stream",
+   "distance_m": 1222,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 19053302 (EPA), no snapping; Bayou Sara (bayou-sara-la, NHDPlus V2.1 record), 1222 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0127737",
@@ -620,7 +713,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0127737"
+   "supersedes": "data/outfalls-plants-us.json LA0127737",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LA0127763",
@@ -656,7 +757,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LA0127763"
+   "supersedes": "data/outfalls-plants-us.json LA0127763",
+   "water_slug": "unnamed-tributary-to-white-bayou-la",
+   "water_name": "Unnamed tributary to White Bayou",
+   "water_kind": "stream",
+   "distance_m": 628,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 18988356 (EPA), no snapping; Unnamed tributary to White Bayou (unnamed-tributary-to-white-bayou-la, NHDPlus V2.1 record), 628 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG530572",
@@ -692,7 +800,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG530572"
+   "supersedes": "data/outfalls-plants-us.json LAG530572",
+   "water_slug": "black-river-la",
+   "water_name": "Black River",
+   "water_kind": "river",
+   "distance_m": 251,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'BLACK RIVER' by name; Black River (black-river-la, openboatlaunch), 251 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG531171",
@@ -728,7 +843,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG531171"
+   "supersedes": "data/outfalls-plants-us.json LAG531171",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: mississippi-river-la, 353 m); the NHD record at the outfall (unnamed-stream-near-harvey-la) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point (nearest: mississippi-river-la, 353 m); the NHD record at the outfall (unnamed-stream-near-harvey-la) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG532168",
@@ -766,7 +889,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG532168"
+   "supersedes": "data/outfalls-plants-us.json LAG532168",
+   "water_slug": "unnamed-tributary-to-doyle-bayou-la",
+   "water_name": "Unnamed tributary to Doyle Bayou",
+   "water_kind": "stream",
+   "distance_m": 976,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 18988340 (EPA), no snapping; Unnamed tributary to Doyle Bayou (unnamed-tributary-to-doyle-bayou-la, NHDPlus V2.1 record), 976 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536633",
@@ -804,7 +934,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536633"
+   "supersedes": "data/outfalls-plants-us.json LAG536633",
+   "water_slug": "bayou-guy-la",
+   "water_name": "Bayou Guy",
+   "water_kind": "stream",
+   "distance_m": 2643,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 3710406 (EPA), no snapping; Bayou Guy (bayou-guy-la, NHDPlus V2.1 record), 2643 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536639",
@@ -842,7 +979,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536639"
+   "supersedes": "data/outfalls-plants-us.json LAG536639",
+   "water_slug": "long-point-gully-la",
+   "water_name": "Long Point Gully",
+   "water_kind": "stream",
+   "distance_m": 399,
+   "match": "geometry",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 15139835 (EPA), no snapping; Long Point Gully (long-point-gully-la, NHDPlus V2.1 record), 399 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536640",
@@ -880,7 +1024,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536640"
+   "supersedes": "data/outfalls-plants-us.json LAG536640",
+   "water_slug": "unnamed-tributary-to-bayou-mallet-la",
+   "water_name": "Unnamed tributary to Bayou Mallet",
+   "water_kind": "stream",
+   "distance_m": 472,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 15139697 (EPA), no snapping; Unnamed tributary to Bayou Mallet (unnamed-tributary-to-bayou-mallet-la, NHDPlus V2.1 record), 472 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536641",
@@ -918,7 +1069,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536641"
+   "supersedes": "data/outfalls-plants-us.json LAG536641",
+   "water_slug": "liberty-bayou-la",
+   "water_name": "Liberty Bayou",
+   "water_kind": "stream",
+   "distance_m": 110,
+   "match": "geometry",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 18931030 (EPA), no snapping; Liberty Bayou (liberty-bayou-la, NHDPlus V2.1 record), 110 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536644",
@@ -956,7 +1114,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536644"
+   "supersedes": "data/outfalls-plants-us.json LAG536644",
+   "water_slug": "unnamed-tributary-to-coulee-kenny-21898751-la",
+   "water_name": "Unnamed tributary to Coulee Kenny",
+   "water_kind": "stream",
+   "distance_m": 178,
+   "match": "geometry",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 21898751 (EPA), no snapping; Unnamed tributary to Coulee Kenny (unnamed-tributary-to-coulee-kenny-21898751-la, NHDPlus V2.1 record), 178 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536652",
@@ -994,7 +1159,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536652"
+   "supersedes": "data/outfalls-plants-us.json LAG536652",
+   "water_slug": "skulls-creek-la",
+   "water_name": "Skulls Creek",
+   "water_kind": "stream",
+   "distance_m": 821,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 18975551 (EPA), no snapping; Skulls Creek (skulls-creek-la, NHDPlus V2.1 record), 821 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536653",
@@ -1032,7 +1204,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536653"
+   "supersedes": "data/outfalls-plants-us.json LAG536653",
+   "water_slug": "unnamed-tributary-to-blind-river-la",
+   "water_name": "Unnamed tributary to Blind River",
+   "water_kind": "stream",
+   "distance_m": 974,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 15207863 (EPA), no snapping; Unnamed tributary to Blind River (unnamed-tributary-to-blind-river-la, NHDPlus V2.1 record), 974 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536666",
@@ -1070,7 +1249,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536666"
+   "supersedes": "data/outfalls-plants-us.json LAG536666",
+   "water_slug": "unnamed-tributary-to-tchefuncte-river-18932016-la",
+   "water_name": "Unnamed tributary to Tchefuncte River",
+   "water_kind": "stream",
+   "distance_m": 810,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 18932016 (EPA), no snapping; Unnamed tributary to Tchefuncte River (unnamed-tributary-to-tchefuncte-river-18932016-la, NHDPlus V2.1 record), 810 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536689",
@@ -1108,7 +1294,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536689"
+   "supersedes": "data/outfalls-plants-us.json LAG536689",
+   "water_slug": "little-bayou-d-inde-la",
+   "water_name": "Little Bayou d'Inde",
+   "water_kind": "stream",
+   "distance_m": 289,
+   "match": "geometry",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 3709786 (EPA), no snapping; Little Bayou d'Inde (little-bayou-d-inde-la, NHDPlus V2.1 record), 289 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536693",
@@ -1146,7 +1339,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536693"
+   "supersedes": "data/outfalls-plants-us.json LAG536693",
+   "water_slug": "bayou-boeuf-e-la",
+   "water_name": "Bayou Boeuf",
+   "water_kind": "river",
+   "distance_m": 3037,
+   "match": "name_only",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 15148120 (EPA), no snapping; Bayou Boeuf (bayou-boeuf-e-la, NHDPlus V2.1 record), 3037 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536697",
@@ -1184,7 +1384,15 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536697"
+   "supersedes": "data/outfalls-plants-us.json LAG536697",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no water record within 150 m of the point; the NHD record at the outfall (unnamed-stream-near-houma-11061119-la) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no water record within 150 m of the point; the NHD record at the outfall (unnamed-stream-near-houma-11061119-la) is an unnamed NHDPlus artificial path or coastline, the line through a lake, bay or sound and not a water of its own",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG536708",
@@ -1222,7 +1430,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG536708"
+   "supersedes": "data/outfalls-plants-us.json LAG536708",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG560012",
@@ -1260,7 +1476,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG560012"
+   "supersedes": "data/outfalls-plants-us.json LAG560012",
+   "water_slug": "flat-creek-la",
+   "water_name": "Flat Creek",
+   "water_kind": "stream",
+   "distance_m": 235,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'FLAT CREEK-BAYOU CASTOR-LITTLE RIVE' by name; Flat Creek (flat-creek-la, NHDPlus V2.1 record), 235 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG560195",
@@ -1298,7 +1521,15 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG560195"
+   "supersedes": "data/outfalls-plants-us.json LAG560195",
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "match": "none",
+   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; 22 NHD waters of that name in LA and no town to choose one; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; 22 NHD waters of that name in LA and no town to choose one; no NHD flowline or waterbody of that name within 2 km (no named NHD water nearby); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG560198",
@@ -1336,7 +1567,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG560198"
+   "supersedes": "data/outfalls-plants-us.json LAG560198",
+   "water_slug": "bayou-verdine-la",
+   "water_name": "Bayou Verdine",
+   "water_kind": "stream",
+   "distance_m": 149,
+   "match": "geometry",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 3709736 (EPA), no snapping; Bayou Verdine (bayou-verdine-la, NHDPlus V2.1 record), 149 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG570092",
@@ -1374,7 +1612,14 @@
    "supplement_note": "active POTW permit in ICIS_PERMITS that the ECHO discharge-points file omits",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG570092"
+   "supersedes": "data/outfalls-plants-us.json LAG570092",
+   "water_slug": "hornsby-creek-la",
+   "water_name": "Hornsby Creek",
+   "water_kind": "stream",
+   "distance_m": 137,
+   "match": "geometry+name",
+   "water_match": "name: its receiving water 'HORNSBY CREEK' by name; Hornsby Creek (hornsby-creek-la, NHDPlus V2.1 record), 137 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   },
   {
    "npdes_permit": "LAG570216",
@@ -1412,7 +1657,14 @@
    "fetched_at": "2026-11-03T21:02:45Z",
    "kind_note": "EPA lists this sewage permit with no discharge point (no outfall number): a collection system or a facility with no outfall to a water in EPA's records; kept off the map and out of the outfall count",
    "checked": "2026-11-14",
-   "supersedes": "data/outfalls-plants-us.json LAG570216"
+   "supersedes": "data/outfalls-plants-us.json LAG570216",
+   "water_slug": "unnamed-tributary-to-natalbany-river-la",
+   "water_name": "Unnamed tributary to Natalbany River",
+   "water_kind": "stream",
+   "distance_m": 49,
+   "match": "geometry",
+   "water_match": "reach: no receiving-water text; the NHD builder's record for the outfall's own NHD reach 20091576 (EPA), no snapping; Unnamed tributary to Natalbany River (unnamed-tributary-to-natalbany-river-la, NHDPlus V2.1 record), 49 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
   }
  ]
 }
