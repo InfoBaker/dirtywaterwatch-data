@@ -23,7 +23,9 @@ Notices (parse_notice): kind "exceed" (the "no son aptas" list, its stations), "
   the first day, raw.sample_dates the words. A sample date is never an advisory's start.
   Versions (merge_notice; Astra review P1-2): a post re-read with a different listing keeps every version read. A
   revision of the newest notice applies at its modified_gmt: a beach it adds starts then (raw.start_basis says so, id
-  <station>:<post>r<n>), a beach it drops ends then with poll precision; nothing first read is erased. A revision
+  <station>:<post>r<n>), a beach it drops ends then with poll precision; nothing first read is erased. A version's time
+  is its modified_gmt when first read: a later re-read with the same listing and a newer modified_gmt keeps that time
+  (the newer one is kept apart in modified_latest), so a re-read never moves a start or turns a revision late. A revision
   dated after a newer notice was published is kept and listed in meta.late_revisions, not applied.
 
 Records (the accuracy-first pattern, docs/generic-ingesters.md: sampled_at apart, no sample date as a start)
@@ -379,6 +381,9 @@ def sanitize_notice(n: dict) -> dict:
     """A notice carried from an earlier state file, cut to the same fields and forms parse_notice saves (lesson 6)."""
     keep = ("id", "published", "modified", "link", "kind", "sampled", "sample_words", "advice", "listed", "unknown")
     out = {k: n.get(k) for k in keep}
+    for k in ("modified_latest",):
+        if isinstance(n.get(k), str) and re.fullmatch(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ", n[k]):
+            out[k] = n[k]
     if not (isinstance(out["link"], str) and out["link"].startswith(LINK_PREFIX)):
         out["link"] = None
     if out["sample_words"] and not (SAMPLE.search("muestreos del " + out["sample_words"])
@@ -418,7 +423,10 @@ def merge_notice(known: dict | None, new: dict) -> dict:
     if _listing(versions[-1]) != _listing(new):
         versions.append(dict(new))
     else:
-        versions[-1] = {**versions[-1], "modified": new.get("modified") or versions[-1].get("modified")}
+        # the version's own time (its modified_gmt when first read) is kept: a later re-read with the same listing and
+        # a newer modified_gmt only records that time apart (modified_latest), never moves the version (Astra verify P1-1)
+        seen = [x for x in (new.get("modified"), versions[-1].get("modified_latest"), versions[-1].get("modified")) if x]
+        versions[-1] = {**versions[-1], "modified_latest": max(seen) if seen else None}
     return {**versions[0], "versions": versions}
 
 
@@ -456,7 +464,8 @@ def records(notices: list[dict], at: str, confirmed: dict | None = None) -> tupl
             continue
         step = {"time": t, "id": pid, "published": pub, "revision": i, "link": v.get("link") or n.get("link"),
                 "kind": kind, "sampled": v.get("sampled"), "sample_words": v.get("sample_words"),
-                "advice": v.get("advice"), "modified": v.get("modified")}
+                "advice": v.get("advice"), "modified": v.get("modified"),
+                "modified_latest": v.get("modified_latest")}
         listed = {x["station"]: x for x in v["listed"]} if kind == "exceed" else {}
         if kind == "all_fit":
             ends, how = set(open_runs), "explicit"
@@ -577,7 +586,8 @@ def _record(run: dict, at: str, newest, confirmed: dict) -> dict:
         lat=info[3] if info else None, lon=info[4] if info else None,
         coord_source="station_point" if info else None,
         started_at=first["time"], ended_at=ended_at, time_precision="minute", sampled_at=first["sampled"],
-        published_at=first["time"], source_updated_at=last.get("modified") or last["published"],
+        published_at=first["time"],
+        source_updated_at=last.get("modified_latest") or last.get("modified") or last["published"],
         material="enterococci bacteria above the Beach Action Value",
         authority=AUTHORITY,
         advice_text=f"DRNA: la(s) siguiente(s) playa(s) “{advice}”",
