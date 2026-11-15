@@ -84,8 +84,10 @@ def test_another_sources_poll_ended_beach_keeps_its_colour(monkeypatch):
     from tests.test_status import TEST_RULES
     now = datetime(2026, 11, 1, tzinfo=timezone.utc)
     with_pr = S.event_intervals(r, None, now, None, TEST_RULES)
+    # integrate/second-1: Nevada adds its own source (nv-state-parks-hab); the set is pinned whole, so any other
+    # addition still fails here
     assert S.POLL_END_HORIZON_SOURCES == {"de-dnrec-recreational-water", "sc-des-beach-monitoring", "sc-des-hab",
-                                          "pr-drna-beach-notices"}
+                                          "nv-state-parks-hab", "pr-drna-beach-notices"}
     monkeypatch.setattr(S, "POLL_END_HORIZON_SOURCES", S.POLL_END_HORIZON_SOURCES - {"pr-drna-beach-notices"})
     assert with_pr == S.event_intervals(r, None, now, None, TEST_RULES)
 
