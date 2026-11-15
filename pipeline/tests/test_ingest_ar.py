@@ -579,3 +579,38 @@ def test_the_earlier_state_shape_is_read_with_every_period_kept(tmp_path):
     state = json.loads((tmp_path / "adh.state.json").read_text())
     assert state["items"]["SB903"]["episodes"][1]["last_seen"] == "2026-11-09T12:00:00Z"
     assert all("first_seen" not in it for it in state["items"].values())
+
+
+class _Resp:
+    def __init__(self, status, body):
+        self.status_code, self._body = status, body
+
+    def raise_for_status(self):
+        import requests
+        if self.status_code >= 400:
+            raise requests.HTTPError(f"{self.status_code}")
+
+    def json(self):
+        if isinstance(self._body, str):
+            return json.loads(self._body)
+        return self._body
+
+
+@pytest.mark.parametrize("status,body", [
+    (403, json.loads((FIX / "ar_deq_hab_advisories.json").read_text())),     # an error page with advisory-shaped JSON
+    (500, json.loads((FIX / "ar_deq_hab_advisories.json").read_text())),
+    (200, "<html>not json</html>"),
+    (200, ["a", "list"]),
+    (200, {"advisories": "none"}),
+    (200, {"advisories": [1, 2]}),
+])
+def test_a_failed_or_malformed_bloom_fetch_keeps_the_records_and_saves_nothing(monkeypatch, tmp_path, status, body):
+    _, out = habs(monkeypatch, tmp_path)
+    before = json.loads(out.read_text())["records"]
+    saved = []
+    monkeypatch.setattr(H, "save_raw", lambda *a, **k: saved.append(a))
+    monkeypatch.setattr(H, "STATE_PATH", tmp_path / "fetch-state.json")
+    monkeypatch.setattr(H.requests, "get", lambda *a, **k: _Resp(status, body))
+    assert H.main(["--out", str(out)]) == 1
+    doc = json.loads(out.read_text())
+    assert doc["ok"] is False and doc["records"] == before and not saved
