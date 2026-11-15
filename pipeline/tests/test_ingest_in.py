@@ -931,3 +931,15 @@ def test_the_public_claims_match_the_build():
     rules = json.loads((ROOT / "data" / "rules.json").read_text())
     assert "rain caution at every open" not in json.dumps(rules)
     assert "with a location once the outfall is placed on its water" in json.dumps(rules)
+
+
+def test_beachalerts_research_fields_assert_no_login_restriction():
+    """Astra re-review 2026-11-14 P2-10: the portal shell's templates (no records, permissions, error) settle nothing;
+    the research fields, like the register, leave access unverified."""
+    d = json.loads((ROOT / "research" / "in" / "sources.json").read_text())
+    rows = d if isinstance(d, list) else d["sources"]
+    b = next(r for r in rows if r["id"] == "in-idem-beachalert")
+    assert "login" not in b["access"] and "without sign-in)" not in b["access_detail"]
+    assert "not verified" in b["access_detail"] and "not settled" in b["status_reason"]
+    chans = json.loads((ROOT / "data" / "notice-channels" / "in.json").read_text())["channels"]
+    assert next(c for c in chans if c["id"] == "in-idem-beachalert")["barrier"] == "not_verified"
