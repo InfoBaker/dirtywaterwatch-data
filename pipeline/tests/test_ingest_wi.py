@@ -78,7 +78,7 @@ def test_two_types_in_one_post_and_listed_sso_waters():
     assert cso["waterbody_text"] is None
     # the member municipalities' own overflows are kept as text, never as MMSD's records
     assert "Brookfield" in cso["raw"]["local_overflows_text"]
-    assert cso["started_at"] == "2022-09-11" and cso["raw"]["period_end"] == "2022-09-12"
+    assert cso["started_at"] is None and cso["raw"]["started_after"] == "2022-09-11" and cso["raw"]["period_end"] == "2022-09-12"
 
 
 def test_volume_for_both_types_is_not_split():
@@ -97,16 +97,16 @@ def test_volume_sentences_and_reductions():
     assert recs["storm-update-for-september-13-2019:sso"]["volume_gal"] == 41_000
     assert recs["storm-update-for-september-13-2019:cso"]["volume_gal"] == 282_000_000
     assert recs["storm-update-august-26-to-29:cso"]["volume_gal"] == 295_700_000
-    assert recs["storm-update-august-26-to-29:cso"]["started_at"] == "2018-08-26"
+    assert recs["storm-update-august-26-to-29:cso"]["raw"]["started_after"] == "2018-08-26"
 
 
 def test_letter_label_types_and_generic_overflows_never_unknown():
     recs = built()[0]
     assert {"storm-update-july-10-2020-1:cso", "storm-update-july-10-2020-1:sso"} <= set(recs)
     g = recs["letter-to-dnr-about-recent-overflows:sso"]
-    assert g["started_at"] == "2019-03-14" and "general case" in g["raw"]["_type_basis"]
+    assert g["started_at"] is None and g["raw"]["started_after"] == "2019-03-14" and "general case" in g["raw"]["_type_basis"]
     a = recs["mmsd-storm-update-april-2026:sso"]
-    assert a["started_at"] == "2026-04-14" and a["raw"]["period_end"] == "2026-04-18"
+    assert a["started_at"] is None and a["raw"]["started_after"] == "2026-04-14" and a["raw"]["period_end"] == "2026-04-18"
     assert all(r["event_type"] in ("cso", "sso", "plant_bypass") for r in recs.values())
 
 
@@ -454,7 +454,7 @@ def test_r2_p1_2_each_overflow_keeps_its_own_day_in_one_paragraph_or_two():
         assert r["cso"]["started_at"] == "2027-06-01" and r["sso"]["started_at"] == "2027-06-02"
     storm = _recs("MMSD Storm Update June 1-2, 2027", ["MMSD Storm Update June 1-2, 2027",
                                                         "MMSD is reporting sewer overflows that resulted from rain."])
-    assert storm["sso"]["started_at"] == "2027-06-01" and "on or after this day" in storm["sso"]["raw"]["start_basis"]
+    assert storm["sso"]["started_at"] is None and "on or after raw.started_after" in storm["sso"]["raw"]["start_basis"]
     assert storm["sso"]["raw"]["period_end"] == "2027-06-02"
 
 
@@ -511,7 +511,7 @@ def test_r2_p2_10_a_timed_start_with_no_end_gets_14_days_from_its_report_as_the_
     told = datetime(2026, 9, 8, 16, tzinfo=timezone.utc)                  # the post's stamp, 11:00 CDT
     assert (ivs[0]["rule"], ivs[0]["color"], ivs[0]["start"], ivs[0]["end"]) == \
         ("no_end", "yellow", told, told + timedelta(days=14))
-    assert "one with a time but no end shows caution for 14 days from its report" in \
+    assert "one with a time but no end, or with only the storm's dates and none of its own, shows caution for 14 days from its report" in \
         rules["red"]["by_state"]["WI"]["basis"]
     t = (ROOT / "research" / "wi" / "state-text.md").read_text()
     assert "one with a time but no end shows caution for 14 days from its report" in t
@@ -537,3 +537,44 @@ def test_r3_p1_1_occurrence_is_read_per_clause_and_a_month_is_not_a_modal():
     assert _recs(s, [s, "Temporarily unavailable"]) == {}
     assert set(_recs(s, [s, "Equipment failure led to an estimated 1,000 gallons of wastewater spilling onto land."])) \
         == {"plant_bypass"}
+
+
+def test_r3_p1_2_an_end_is_never_a_start_and_a_storm_date_is_not_a_start():
+    from datetime import datetime, timezone
+    t = "MMSD Storm Update June 1-2, 2027"
+    r = _recs(t, [t, "A combined sewer overflow occurred on June 1, 2027.",
+                  "The combined sewer overflow ended at 2:00 pm on June 2, 2027."])["cso"]
+    assert r["started_at"] == "2027-06-01" and r["time_precision"] == "day"
+    assert r["ended_at"] == "2027-06-02T14:00:00-05:00" and r["status"] == "ended"
+    # an end with no start: the end is kept, no start is made from it or from the storm's dates
+    e = _recs(t, [t, "MMSD is reporting sewer overflows that resulted from rain.",
+                  "The sewer overflow ended at 2:00 pm on June 2, 2027."])["sso"]
+    assert e["started_at"] is None and e["ended_at"] == "2027-06-02T14:00:00-05:00"
+    # storm dates only: kept as the period and a lower bound, never as the overflow's start
+    s = _recs(t, [t, "MMSD is reporting sewer overflows that resulted from rain."])["sso"]
+    assert s["started_at"] is None and s["time_precision"] is None
+    assert s["raw"]["period_start"] == "2027-06-01" and s["raw"]["period_end"] == "2027-06-02"
+    assert s["raw"]["started_after"] == "2027-06-01" and s["parse_error"] is None
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    ivs = S.event_intervals(s, "WI", datetime(2027, 6, 6, tzinfo=timezone.utc), rules=rules)
+    told = datetime(2027, 6, 5, 14, tzinfo=timezone.utc)                 # the post's stamp, 09:00 CDT
+    assert ivs and min(iv["start"] for iv in ivs) == told                 # from its report, not the storm's day
+    assert all(iv["rule"] != "day_start_caution" for iv in ivs)
+
+
+def test_r3_p1_3_only_a_completed_end_is_an_end():
+    t = "MMSD Storm Update June 1, 2027"
+    start = "A combined sewer overflow started at 1:00 pm on June 1, 2027."
+    for later in ("The combined sewer overflow will continue until 2:00 pm on June 2, 2027.",
+                  "The combined sewer overflow is scheduled to end at 2:00 pm on June 2, 2027.",
+                  "If rain stops, the combined sewer overflow would end at 2:00 pm on June 2, 2027.",
+                  "The combined sewer overflow is expected to have ended at 2:00 pm on June 2, 2027.",
+                  "The combined sewer overflow has not ended at 2:00 pm on June 2, 2027.",
+                  "The combined sewer overflow should continue until 2:00 pm on June 2, 2027."):
+        r = _recs(t, [t, start, later])["cso"]
+        assert r["ended_at"] is None and r["status"] == "unknown", later
+        assert r["started_at"] == "2027-06-01T13:00:00-05:00", later
+    for done in ("The combined sewer overflow ended at 2:00 pm on June 2, 2027.",
+                 "The combined sewer overflow continued until 2:00 pm on June 2, 2027."):
+        r = _recs(t, [t, start, done])["cso"]
+        assert r["ended_at"] == "2027-06-02T14:00:00-05:00" and r["status"] == "ended", done
