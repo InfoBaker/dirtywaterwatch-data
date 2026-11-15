@@ -47,7 +47,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
-from ingest.mo_kc_water_news import DATE, _month, migrate_water_text, sentences, water_text, waters
+from ingest.mo_kc_water_news import DATE, _month, migrate_water_text, safe_text, sentences, water_text, waters
 
 SOURCE_ID = "ks-leavenworth-sso-transparency"
 BASE = "https://www.leavenworthks.gov"
@@ -233,7 +233,7 @@ def record(path: str, h: str, at: str, cite: str | None = None) -> dict:
             pub = None
     prison = bool(re.search(r"Bureau of Prisons|\bBOP\b", clean))
     raw = {"state": "KS", "time_zone": "America/Chicago", "county": "Leavenworth County",
-           "title": common.strip_house_numbers(title), "start_kind": kind,
+           "title": safe_text(title), "start_kind": kind,
            "start_is_upper_bound": kind in ("notified", "found", "arrived", "stated", None),
            "start_basis": ("the day in the page's title; the page gives no clock time it can be read by" if prec == "day"
                            else f"the time the City's page gives ({kind}); the overflow began at or before it"),
@@ -254,7 +254,7 @@ def record(path: str, h: str, at: str, cite: str | None = None) -> dict:
         outfall_name=place_of(title), waterbody_text=water_text(ws), started_at=start,
         time_precision=prec if start else None, ended_at=end, published_at=pub, reported_at=None, fetched_at=at,
         material="sewage", volume_gal=vol, volume_text=v.group(0) if v else None, estimate_flag=flag,
-        authority=AUTHORITY, advice_text=adv.group(0).strip() if adv else None, source_url=cite or INDEX,
+        authority=AUTHORITY, advice_text=safe_text(adv.group(0).strip()) if adv else None, source_url=cite or INDEX,
         parse_error=None if day else "no date in the page's title or text", raw=raw)
 
 
