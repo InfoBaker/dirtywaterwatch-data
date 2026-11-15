@@ -1,0 +1,27 @@
+id: "in-echo-sobe"
+name: "EPA SOBE extract, Indiana rows (sewer overflow and bypass event reports)"
+url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
+kind: "csv"
+level: "federal"
+# Read by the national eRule module (echo-sewer-overflow) with Indiana in its states since 2026-11-14.
+# 2026-11-12 extract (current and all-versions): one Indiana report, Shelbyville's plant bypass (IN0032867,
+#   2026-08-12 21:30 to 2026-08-13 14:55, 5,055,000 gallons by automated monitoring, Big Blue River), filed through
+#   EPA's own system (ES1) and received the next day. IDEM takes overflow and bypass reports on State Form 48373 and
+#   says it will move them to EPA's NeT-SewerOverflow system; until then almost nothing reaches these tables. The
+#   collection-system table lists Indiana systems with their combined share (Portland 100 per cent, Madison 100,
+#   Elkhart 100, Speedway 100, Crawfordsville 92 ...).
+# Indiana's rules in the module: the zone by the event's point (Eastern, or Central in the twelve counties of 49 CFR
+#   71.5(b)); raw.time_zone on every record; the free-text scrub.
+cadence: "daily ECHO file"
+license: "EPA public data"
+attribution: "U.S. EPA ECHO"
+enabled: true
+role: "events"
+event_types: ["sso", "bypass"]
+states: ["IN"]
+access: ["csv"]
+access_detail: "Daily ZIP from ECHO (no auth): the current and all-versions extracts, read through pipeline/ingest/echo_sewer_overflow_events.py."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-14"

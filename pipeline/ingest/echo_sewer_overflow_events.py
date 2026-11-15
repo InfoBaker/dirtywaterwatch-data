@@ -433,6 +433,20 @@ Minnesota (permits MN...; research/mn/report.md section 2.2; not live until data
     Minnesota record carries raw.time_zone.
   - No free-text or repeated-point rule: the one report has no description and its own point; the point is kept to
     0.001 degree (ROUND_POINT_STATES), in the record and in raw.
+Indiana (permits IN...; research/in/report.md; not live until data/rules.json says so)
+  IDEM takes sewer overflow and bypass reports on its own State Form 48373 and says it will move them to EPA's
+  NeT-SewerOverflow system; until then almost nothing reaches this dataset. The 2026-11-12 extract (current and
+  all-versions) holds one Indiana row: a wet-weather bypass at Shelbyville's plant (IN0032867, 2026-08-12 21:30 to
+  2026-08-13 14:55, 5,055,000 gallons by automated monitoring, 'Big Blue River', filed through EPA's own system, ES1),
+  received the next day. Keyed on IN permits only, so every other state's records are unchanged:
+  - Time zone. Indiana straddles Eastern and Central time along county lines (49 CFR 71.5(b)): the event's own point
+    against the outlines of the twelve Central-time counties (data/reference/in-central-time-counties.json, written by
+    scripts/in_central_time_counties.py, which cites the rule and checks it against the U.S. DOT time-zone layer) is
+    read as America/Chicago; any other point as America/New_York (STATE_TZ); raw.timezone_note names the county that
+    decided it, and raw.time_zone carries the zone on every Indiana record (ZONE_ALWAYS_STATES).
+  - Free text: IN is in FREE_TEXT_STATES (the Illinois scrub) as a precaution; the one description names no person.
+  - No plant-point, repeated-point or type rule yet: the one report is a bypass, which keeps its point (the plant's).
+    When IDEM's reports arrive in volume, read them before adding any (research/in/expansion-research.md).
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -465,18 +479,19 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
 STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM", "UT", "KY",
-          "MN"}
+          "MN", "IN"}
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",
             "NE": "America/Chicago", "AK": "America/Anchorage", "NM": "America/Denver", "UT": "America/Denver",
             "KY": "America/New_York",
-            "MN": "America/Chicago"}
+            "MN": "America/Chicago", "IN": "America/New_York"}
 # states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
 # one of the counties of the reference file is read in that file's zone (module docstring, South Dakota and Nebraska)
 POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-time-counties.json",
-                    "KY": "ky-central-time-counties.json"}   # Kentucky: the Central-time counties (module docstring)
+                    "KY": "ky-central-time-counties.json",   # Kentucky: the Central-time counties (module docstring)
+                    "IN": "in-central-time-counties.json"}   # Indiana: the twelve Central-time counties (module docstring)
 # states whose records carry raw.time_zone whatever their times' precision (module docstring, Kentucky)
-ZONE_ALWAYS_STATES = {"KY"}
+ZONE_ALWAYS_STATES = {"KY", "IN"}
 # states of one zone whose records carry raw.time_zone (STATE_TZ) whatever their times' precision (Minnesota)
 STATE_ZONE_ALWAYS = {"MN"}
 # states whose event points are kept to 0.001 degree before anything is saved (Minnesota; wave 4 rule 4)
@@ -490,7 +505,7 @@ PLANT_POINT_STATES = {"KY"}
 AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
 STATE_TZ_WEST = {"AK": (AK_ALEUTIAN_WEST, "America/Adak")}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM", "KY"}
+FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM", "KY", "IN"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
 # a permit's shorthand receiving-water names -> the NHD name, keyed (permit, _alias_key(text)); module docstring,
@@ -1367,7 +1382,7 @@ def point_zone(state: str, lat, lon) -> tuple[str | None, str | None]:
         return STATE_TZ[state], (f"{county} is split by the boundary ({cite}) and the point lies on neither part of it "
                                  "in the U.S. DOT time-zone layer: read as Central")
     n = len(z["zone"])
-    words = {15: "fifteen", 18: "eighteen", 41: "forty-one"}.get(n, str(n))
+    words = {12: "twelve", 15: "fifteen", 18: "eighteen", 41: "forty-one"}.get(n, str(n))
     label = doc.get("zone_label", "Mountain")   # Kentucky's file lists Central-time counties
     split = " and ".join(c for c, *_ in z["split"])
     return STATE_TZ[state], (f"the event's point lies outside the {words} {label}-time counties"

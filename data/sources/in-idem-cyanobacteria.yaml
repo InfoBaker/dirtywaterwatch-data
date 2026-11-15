@@ -1,0 +1,70 @@
+id: "in-idem-cyanobacteria"
+name: "IDEM Blue-Green Algae: cyanobacteria and cyanotoxin samples at Indiana beaches (ArcGIS)"
+url: "https://utility.arcgis.com/usrsvcs/servers/7f70273baaae4bee8e5ee285d1d2406b/rest/services/Hosted/cyanobacteria/FeatureServer/0"
+homepage: "https://www.in.gov/idem/algae/"
+kind: "arcgis"
+level: "state"
+# Read through the generic ArcGIS reader (docs/generic-ingesters.md) with the hooks in ingest/in_transforms.py
+#   (in_cyano_record, in_cyano_sequence): blooms, not sewage (hab_advisory, plum). The layer behind IDEM's Blue-Green
+#   Algae dashboard holds every sample of IDEM's beach project since 2010 with IDEM's advisory level for the sample.
+# Real fetch 2026-11-14: 1,717 samples, 2010 to 2026-09-14, at 29 beach stations (state parks and reservoirs, and the
+#   dog-park lakes of Fort Harrison State Park). Levels: Advisory 844, Low Risk 732, Dog Park Low Risk 76, Dog Park
+#   Closed 35, Caution 16, Dog Park Caution 11, No Swimming 3. 2026: 115 samples, the last on 2026-09-14 (the season
+#   runs from late May to mid-September).
+# Records: the 909 samples at an advisory level (Advisory, Caution, No Swimming, Dog Park Closed, Dog Park Caution) are
+#   IDEM's statements, kept with sampled_at and no advisory dates (a sample date is not an issue or lift date: the
+#   accuracy-first rule of e5bb4ae); only a latest advisory-level sample at most 14 days old when first read opens an
+#   observed interval, dated from that poll. Low Risk samples are no record (grey, never clean). None was open on
+#   2026-11-14 (the season's last sample was 61 days old).
+# Not in the layer: when IDEM posted an advisory or lifted it; the beach's extent; samples taken by others (DNR, lake
+#   associations).
+cadence: "weekly in season (late May to mid-September); unchanged out of season"
+license: "No licence statement on the service"
+attribution: "Indiana Department of Environmental Management, Blue-Green Algae program"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["IN"]
+registry_ids: ["in-idem-cyanobacteria"]
+access: ["arcgis"]
+access_detail: "Hosted FeatureServer layer 0 'cyanobacteria' through utility.arcgis.com (no token); fields advisory_level, advisory_symbology, beach_name, waterbody, date_ (a date-only field), year_, month_, location_id, sample_id, project, microcystin, anatoxin_a, cylindrospermopsin, saxitoxin, total_count, dominant_taxa, latitude, longitude. No field names a person."
+machine_readable: true
+legal_basis: "IDEM's voluntary cyanobacteria monitoring at state-park and reservoir beaches, with DNR, the Indiana Department of Health and the Board of Animal Health; no rule sets the levels' public notice"
+checked: "2026-11-14"
+fetch:
+  platform: "arcgis"
+  live: true
+  url: "https://utility.arcgis.com/usrsvcs/servers/7f70273baaae4bee8e5ee285d1d2406b/rest/services/Hosted/cyanobacteria/FeatureServer/0"
+  order_by: "objectid"
+  metadata: true
+  geometry: true
+  time_zone: "America/New_York"
+  bounds: [-88.1, 37.7, -84.7, 41.8]
+  round_coords: 3
+  # the layer keeps every season: a short answer is a failure, not the season
+  safe_fields: [objectid, advisory_level, beach_name, waterbody, date_, year_, location_id, sample_id, project,
+                microcystin, anatoxin_a, cylindrospermopsin, saxitoxin, total_count, dominant_taxa, _x, _y]
+  reviewed_fields:
+    beach_name: "the beach's name ('Pokagon SP - Main Beach'), never a person"
+    project: "IDEM's project title for the season"
+  record:
+    source_record_id: {template: "{location_id|upper}-{date_}-{objectid}"}
+    started_at: {field: date_, parse: date}
+    event_type: {const: unknown}
+    lat: {field: _y, parse: number}
+    lon: {field: _x, parse: number}
+    outfall_name: beach_name
+    waterbody_text: waterbody
+    authority: {const: "Indiana Department of Environmental Management (Blue-Green Algae program)"}
+    source_url: {const: "https://www.in.gov/idem/algae/"}
+  transform: "ingest.in_transforms.in_cyano_record"
+  after_history: "ingest.in_transforms.in_cyano_sequence"
+  dedupe: {repeats: suffix, order: [started_at]}
+  history:
+    keep_missing: true
+    revisions: true
+  meta:
+    credit: "Indiana Department of Environmental Management, Blue-Green Algae program"
+    license: "No licence statement on the service"
+    caveat: "The layer gives each sample's date and IDEM's advisory level for it, not the dates an advisory was posted or lifted. Historical samples carry no invented advisory interval. A recent advisory-level sample is dated from the poll that first observes it; a later sample or a corrected level bounds its change at the poll that first sees it. Low Risk samples are not advisories and are not shown as clean."
+    time_basis: "sampled_at is IDEM's sample date (a date-only field). Advisory started_at and ended_at, when present, are observation bounds (poll precision), never IDEM's issue or lift times."

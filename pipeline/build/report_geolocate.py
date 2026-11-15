@@ -65,7 +65,7 @@ STATE_NAMES = {"CT": "Connecticut", "MA": "Massachusetts", "RI": "Rhode Island",
                "AL": "Alabama", "TX": "Texas",
                "UT": "Utah",
                "OR": "Oregon",
-               "KY": "Kentucky", "OH": "Ohio"}
+               "KY": "Kentucky", "OH": "Ohio", "IN": "Indiana"}
 STATE_NAMES["TN"] = "Tennessee"
 STATE_NAMES["MN"] = "Minnesota"
 STATE_NAMES["ND"] = "North Dakota"
