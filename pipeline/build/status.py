@@ -2754,6 +2754,11 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             # while it is open (review 2026-11-07 P2-2); keyed on the record's flag, so other feeds are unchanged
             notice_end = (parse_time(raw.get("_notice_closed_at")) or end
                           or parse_time(raw.get("_last_seen_in_source")))
+            if raw.get("_open_notice_caution_hours") and not raw.get("_notice_closed_at") and end is None \
+                    and notice_end is not None:
+                # a notice still listed at its last read (DNREC's resampling label, ingest/de_dnrec_recwater.py): no
+                # closure was observed, so the caution holds its hours past that read; keyed on the record's field
+                notice_end = notice_end + timedelta(hours=float(raw["_open_notice_caution_hours"]))
             if notice_end is not None and notice_end > until:
                 until = notice_end
         iv = _iv(ev, start, until, "sample_caution", None, yellow)
