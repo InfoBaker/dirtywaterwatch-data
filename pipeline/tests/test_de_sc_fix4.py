@@ -266,3 +266,84 @@ def test_other_feeds_status_output_is_identical_to_the_base():
         outs.append(json.dumps(o, sort_keys=True))
     assert '"advisory_points": []' not in outs[0]
     assert outs[0] == outs[1]
+
+
+# --------------------------------------------- P1-2: a Delaware beach name's house number never reaches a save
+
+ADDR = " at 1234 W Sample Street"
+ADDR_SENT = ("1234 W", "12-A Sample", "56 1/2 Sample", "1234")
+
+
+def _de_capture(monkeypatch, tmp_path, rows, stations_js, carried):
+    (tmp_path / "state.json").write_text(json.dumps(carried))
+    saves = []
+    monkeypatch.setattr(W, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(W, "save_raw", lambda *a, **k: saves.append(json.dumps(a, default=str)))
+    monkeypatch.setattr(W, "write_json", lambda path, obj, *a, **k: saves.append(json.dumps(obj, default=str)))
+    monkeypatch.setattr(W, "write_events", lambda sid, recs, **k: saves.append(json.dumps([recs, k], default=str)))
+
+    class Resp:
+        def __init__(self, js):
+            self._js = js
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self._js
+    monkeypatch.setattr(W.requests, "get", lambda url, **k: Resp(rows) if url == W.SOCRATA else Resp(stations_js))
+    return saves
+
+
+def test_a_delaware_beach_name_with_an_address_never_reaches_a_save(monkeypatch, tmp_path):
+    s = json.loads((Path(__file__).resolve().parent / "fixtures" / "de" / "recwater.json").read_text())
+    rows, stations = copy.deepcopy(s["advisories"]), copy.deepcopy(s["stations"])
+    stations[0]["UnitName"] = "Invented Beach" + ADDR
+    stations[0]["CurrentAdvisory"] = 0                       # shown on the map: a poll record carries the name
+    stations[1]["UnitName"] = "Invented 12-A Sample Lane Beach"
+    rows[0]["unitname"] = "Invented Beach" + ADDR
+    rows[1]["unitname"] = "Beach by 56 1/2 Sample Road"
+    carried = {"polls": {"station-1-2026": {"unit_id": "1", "code": 0, "name": "Old Beach" + ADDR,
+                                            "started_at": "2026-11-01T00:00:00Z", "lat": 38.7, "lon": -75.1,
+                                            "listed_periods": [{"from": "2026-11-01T00:00:00Z",
+                                                                "to": "2026-11-01T00:00:00Z"}]}},
+               "history": {"adv-old": {"event_id": "de-dnrec-recreational-water:adv-old", "source_record_id": "adv-old",
+                                       "outfall_name": "Old Beach" + ADDR, "waterbody_text": "Old Beach" + ADDR,
+                                       "advice_text": "Posted at 1234 W Sample Street.", "status": "advisory_lifted",
+                                       "started_at": "2020-07-01", "ended_at": "2020-07-02",
+                                       "raw": {"unit_name": "Old Beach" + ADDR,
+                                               "advisory_description": "Beach at 1234 W Sample Street"}}}}
+    saves = _de_capture(monkeypatch, tmp_path, rows, {"features": [{"attributes": a} for a in stations]}, carried)
+    assert W.main(["--at", "2026-11-14T18:00:00Z"]) == 0
+    assert len(saves) == 3                                   # the raw archive, the state and the records
+    blob = "\n".join(saves)
+    for x in ADDR_SENT:
+        assert x not in blob, x
+    assert "[house number removed]" in blob
+    # the records held before the run are all still there
+    recs = json.loads(saves[-1])[0]
+    assert "de-dnrec-recreational-water:adv-old" in {r["event_id"] for r in recs}
+
+
+def test_a_failed_station_read_quotes_no_station_text(monkeypatch, tmp_path):
+    s = json.loads((Path(__file__).resolve().parent / "fixtures" / "de" / "recwater.json").read_text())
+    bad = {"error": {"code": 400, "message": "Invented Beach" + ADDR, "details": ["Invented Beach" + ADDR]}}
+    saves = _de_capture(monkeypatch, tmp_path, s["advisories"], bad, {})
+    assert W.main(["--at", "2026-11-14T18:00:00Z"]) == 1
+    blob = "\n".join(saves)
+    assert "1234" not in blob and "error code 400" in blob
+
+
+@pytest.mark.parametrize("name,kept", [
+    ("3 R's Road Beach", "3 R's Road Beach"),
+    ("3 R’s Road Beach (Delaware Seashore State Park)", "3 R’s Road Beach (Delaware Seashore State Park)"),
+    ("Delaware Bay 3", "Delaware Bay 3"),
+    ("Rehoboth Bay 1", "Rehoboth Bay 1"),
+    ("3 R's Road Beach at 77 Sample Rd", "3 R's Road Beach at [house number removed] Sample Rd"),
+    ("Invented Beach at 1234 W Sample Street", "Invented Beach at [house number removed] W Sample Street"),
+    ("Invented 12-A Sample Lane Beach", "Invented [house number removed] Sample Lane Beach"),
+    ("Beach by 56 1/2 Sample Road", "Beach by [house number removed] Sample Road"),
+    ("Invented 33 R's Road Beach", "Invented [house number removed] R's Road Beach"),
+])
+def test_only_dnrecs_own_numbered_name_keeps_its_number(name, kept):
+    assert W.scrub_unit_name(name) == kept

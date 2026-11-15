@@ -40,7 +40,9 @@ Records (rules only)
     "confirmed"), so the row ages out only after the map stops showing it (verify P1-1).
 
 Privacy: the fields hold no person; DNREC's text goes through the Delaware scrubber (de_dnrec_derns.scrub), and advreason
-and advtype are kept only as one of DNREC's own values (REASONS, TYPES, NOT_READ). data/raw keeps the safe rows only.
+and advtype are kept only as one of DNREC's own values (REASONS, TYPES, NOT_READ). The beach names lose every street
+house number (scrub_unit_name; only DNREC's own "3 R's Road Beach" at the start of a name keeps its number) in the
+raw save, the state and the records, carried state included. data/raw keeps the safe rows only.
 Cadence: hourly with the refresh (the history is updated as DNREC posts; the map in season). Run from pipeline/:
   python -m ingest.de_dnrec_recwater [--file saved.json] [--at 2026-11-14T18:00:00Z]
 """
@@ -66,15 +68,36 @@ def scrub_text(v: str) -> str:
     return _scrub(v) or ""
 
 
+# DNREC's own beach names that begin with a number before a street word: kept whole, and only at the start of the name
+# (verify3 P1-2). Any other number before a street word is a house number and is cut.
+OWN_NUMBERED_NAMES = re.compile(r"^3\s+R[\u2019']?s\s+Road\s+Beach\b", re.I)
+# house numbers the shared rule misses: a suffix or fraction ("12-A Sample St", "12 1/2 Sample St", "12½ Sample St")
+_SUFFIX_NUMBER = None
+
+
+def _strip_addresses(v: str) -> str:
+    global _SUFFIX_NUMBER
+    from common import HOUSE_NUMBER_REMOVED, _STREET_WORD, strip_house_numbers
+    if _SUFFIX_NUMBER is None:
+        _SUFFIX_NUMBER = re.compile(
+            rf"(?<![\w.,/:-])\d{{1,6}}(?:[ ]?-[ ]?[A-Za-z0-9]{{1,3}}\b|[ ]{{1,2}}\d/\d|\u00bd|[ ]?[A-Za-z]\b)?"
+            rf"(?=[ ]{{1,2}}(?:[NSEW]{{1,2}}\.?[ ]{{1,2}})?(?:[A-Za-z][\w'.-]*[ ]{{1,2}}){{1,3}}{_STREET_WORD}\b)")
+    v = strip_house_numbers(v)
+    return _SUFFIX_NUMBER.sub(HOUSE_NUMBER_REMOVED, v)
+
+
 def scrub_unit_name(v):
-    """A beach's name from the station layer or the history (UnitName, unitname): a contact sentence, telephone or
-    e-mail in it is cut before any save (verify2 P1-3). Street house numbers are not cut here: "3 R's Road Beach" is the
-    beach's own name, not an address."""
+    """A beach's name from the station layer or the history (UnitName, unitname), before any save: a contact sentence,
+    telephone or e-mail is cut (verify2 P1-3), and every street address's house number (verify3 P1-2), suffixed and
+    fractional forms included. Only DNREC's own numbered beach name at the start ("3 R's Road Beach",
+    OWN_NUMBERED_NAMES) keeps its number."""
     if not isinstance(v, str) or not v:
         return v
     from common import scrub_text as _common_scrub
     from ingest.de_dnrec_derns import NAMED_PERSON, _cut_name
-    return NAMED_PERSON.sub(_cut_name, _common_scrub(v))
+    m = OWN_NUMBERED_NAMES.match(v)
+    head, tail = (v[:m.end()], v[m.end():]) if m else ("", v)
+    return head + NAMED_PERSON.sub(_cut_name, _common_scrub(_strip_addresses(tail)))
 
 
 def scrub_carried(prev: dict) -> dict:
@@ -500,7 +523,11 @@ def run(args) -> int:
             s.raise_for_status()
             js = s.json()
             if "features" not in js:
-                raise RuntimeError(f"station layer: {str(js)[:200]}")
+                # the layer's answer is not quoted: an error body can carry a station's text (verify3 P1-2 sibling)
+                err = js.get("error") if isinstance(js, dict) else None
+                code = err.get("code") if isinstance(err, dict) else None
+                raise RuntimeError(f"station layer: no features (error code {code})" if code is not None
+                                   else "station layer: no features")
             stations = [f["attributes"] for f in js["features"]]
             if not rows or not stations:
                 raise RuntimeError("an empty history or station list")
