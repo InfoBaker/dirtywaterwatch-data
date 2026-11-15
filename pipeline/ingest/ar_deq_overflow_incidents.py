@@ -136,19 +136,26 @@ def check_ids(rows: list[dict]) -> tuple[list[dict], int, str | None]:
     return good, bad, retry
 
 
-# a decimal degree written to more than three places ("35.123456, -93.654321", "Lat 35.1234 Long -93.6543"): a filer's
-# point in the report's own words, which can be a home; rounded to 0.001 degree before any save (verification 2 P1-3)
-FINE_DEGREE = re.compile(r"(?<![\d.])(-?\d{1,3}\.\d{4,})(?![\d.])")
-COORD_TEXT_FIELDS = ("location", "cause", "action_taken", "overflow_type", "environmental_damage", "impact")
+# a point written into the report's own words ("35.123456, -93.654321", "Lat 35.1234 Long -93.6543", "35°12'34.5\"N
+# 93°45'12\"W"): a filer's point, which can be a home; cut to 0.001 degree before any save (verification 2 P1-3), in
+# every decimal, degree-minute-second and degree-decimal-minute form (ar_transforms.scrub_coord_text; verification 3)
+COORD_TEXT_FIELDS = ("location", "cause", "action_taken", "overflow_type", "environmental_damage", "impact",
+                     "facility_name")
 
 
 def round_coords(row: dict) -> dict:
-    """The row with every decimal degree in its free text rounded to three places (the event-point rule); a number
-    beyond 180 is not a degree and stays."""
-    def r3(m):
-        v = float(m.group(1))
-        return f"{round(v, 3):.3f}" if abs(v) <= 180 else m.group(1)
-    return {**row, **{f: FINE_DEGREE.sub(r3, row[f]) for f in COORD_TEXT_FIELDS if isinstance(row.get(f), str)}}
+    """The row with every coordinate in its free text cut to three decimals (the event-point rule)."""
+    from ingest import ar_transforms as T
+    return {**row, **{f: T.scrub_coord_text(row[f]) for f in COORD_TEXT_FIELDS if isinstance(row.get(f), str)}}
+
+
+def carried_state(records: list[dict]) -> list[dict]:
+    """The records of the previous events file with every point in their words cut the same way (raw.row, the
+    revisions' old values, tracked values, the outfall name and every other place in words): a record an older rule
+    saved with a finer point is cut before it is read, rebuilt or written again, failed runs included (verification
+    3 P1)."""
+    from ingest import ar_transforms as T
+    return [T.scrub_coords_deep(r) for r in records or [] if isinstance(r, dict)]
 
 
 def text(fragment: str) -> str:
@@ -312,7 +319,7 @@ def main(argv: list[str] | None = None) -> int:
     row, block = runner.load_source(SOURCE_ID)
     path = Path(a.out) if a.out else EVENTS_DIR / f"{SOURCE_ID}.json"
     prev_doc = read_json(path, {}) or {}
-    prev = prev_doc.get("records") or []
+    prev = carried_state(prev_doc.get("records") or [])
     fetched_at = now_iso()
     today = datetime.now(TZ).date()
     try:
@@ -348,7 +355,9 @@ def main(argv: list[str] | None = None) -> int:
                 else:
                     info.pop("deep_read_at", None)
     except (requests.RequestException, SearchFailed, ValueError, OSError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
+        # the previous records, every one of them, written back with their points cut (partial: health false,
+        # last_ok_at kept, the previous meta kept)
+        write_events(SOURCE_ID, prev, ok=False, error=f"{type(e).__name__}: {e}", path=path, partial=True)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
         return 1
     raw_path = None
@@ -361,8 +370,9 @@ def main(argv: list[str] | None = None) -> int:
     rows = rows + [round_coords(r) for r in carried_rows(prev, start, {r.get("confirmation_no") for r in rows})]
     try:
         records, stats = runner.build(SOURCE_ID, block, rows, fetched_at, prev, None)
+        records = carried_state(records)
     except Exception as e:  # noqa: BLE001 - a run that cannot finish keeps the previous records
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
+        write_events(SOURCE_ID, prev, ok=False, error=f"{type(e).__name__}: {e}", path=path, partial=True)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
         return 1
     if no_id:

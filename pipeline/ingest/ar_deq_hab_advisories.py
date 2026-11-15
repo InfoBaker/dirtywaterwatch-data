@@ -38,8 +38,17 @@ def rows_of(doc: dict, block: dict) -> list[dict]:
     rows = rows_of_json(doc, block)
     out = []
     for r in rows:
-        r = {**r, "waterbody": T.round_text_coords(r.get("waterbody"))}
+        r = round_row(r)
         out.append(runner.F.safe_row(r, block)[0])
+    return out
+
+
+def round_row(r: dict) -> dict:
+    """The row with every point in its words cut to 0.001 degree: DEQ's "(coordinates ...)" in the waterbody name,
+    and any decimal, degree-minute-second or degree-decimal-minute point in the water, county or area text
+    (verification 3 P1)."""
+    out = {**r, **{f: T.scrub_coord_text(r[f]) for f in ("waterbody", "county", "area") if isinstance(r.get(f), str)}}
+    out["waterbody"] = T.round_text_coords(out.get("waterbody"))
     return out
 
 
@@ -90,18 +99,19 @@ def main(argv: list[str] | None = None) -> int:
     a = ap.parse_args(argv)
     row, block = runner.load_source(SOURCE_ID)
     path = Path(a.out) if a.out else EVENTS_DIR / f"{SOURCE_ID}.json"
-    prev = (read_json(path, {}) or {}).get("records") or []
+    # carried state is cut the same way before it is read or written again, failed runs included (verification 3 P1)
+    prev = [T.scrub_coords_deep(r) for r in (read_json(path, {}) or {}).get("records") or [] if isinstance(r, dict)]
     fetched_at = now_iso()
     try:
         doc = json.loads(Path(a.file).read_text()) if a.file else fetch()
         check_doc(doc)
         rows = doc["rows"] if doc.get("format") == runner.SAFE_ROWS_FORMAT else rows_of(doc, block)
-        rows = [{**r, "waterbody": T.round_text_coords(r.get("waterbody"))} for r in rows]
+        rows = [round_row(r) for r in rows]
         if not rows:
             raise ValueError("no advisories in the file")
         check_rows(rows)
     except (requests.RequestException, ValueError, KeyError, TypeError, AttributeError, OSError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
+        write_events(SOURCE_ID, prev, ok=False, error=f"{type(e).__name__}: {e}", path=path, partial=True)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
         return 1
     raw_path = None
@@ -116,8 +126,9 @@ def main(argv: list[str] | None = None) -> int:
             write_json(STATE_PATH, {"sha256": sha, "raw_path": raw_path, "saved_at": fetched_at})
     try:
         records, stats = runner.build(SOURCE_ID, block, rows, fetched_at, prev, None)
+        records = [T.scrub_coords_deep(r) for r in records]
     except Exception as e:  # noqa: BLE001 - a run that cannot finish keeps the previous records
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=path)
+        write_events(SOURCE_ID, prev, ok=False, error=f"{type(e).__name__}: {e}", path=path, partial=True)
         print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
         return 1
     meta = {**stats, **runner.public_meta(block.get("meta") or {}), "platform": "json", "raw_path": raw_path,
