@@ -376,3 +376,16 @@ def test_p2_12_p3_13_oklahoma_texts_and_counts_follow_the_registry():
                                                              ("OKG580038", "OK0066666", "OK0100731", "OK0032417",
                                                               "OK0032425"))]
     assert len(wet) == 5 and "five of them, at Avant, Forgan, Minco and Wetumka's two plants, under four places" in t
+
+
+def test_p1_4_a_withheld_place_keeps_an_id_that_does_not_depend_on_row_order():
+    page = PAGE.replace("40 Ft Hole</strong>", "40 Ft Hole (call Pat Example)</strong>")
+    page = re.sub(r"(40 Ft Hole \(call Pat Example\)</strong></td>\s*<td[^>]*>)[^<]*", lambda m: m.group(1) + "300", page,
+                  count=1)
+    a, _ = N.build(page, T1, [])
+    rows = re.findall(r"<tr>.*?</tr>", page, re.S)
+    moved = page.replace(rows[1], "@@").replace(rows[-1], rows[1]).replace("@@", rows[-1])
+    b, _ = N.build(moved, T1, [])
+    ids = [r["source_record_id"] for r in a]
+    assert ids == [r["source_record_id"] for r in b] and len(ids) == 1 and "pat" not in ids[0]
+    assert ids[0].startswith("place-withheld-")
