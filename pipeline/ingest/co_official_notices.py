@@ -2,7 +2,7 @@
 co-official-notices), a reviewed notice set (ingest/notice_set.py: the records are transcribed from each page by a
 reviewer, and every run confirms the page still carries the sentences they rest on).
 
-Why a set and not a feed
+Why a reviewed set of notices (Colorado publishes no spill list to read)
   Colorado publishes no list of sewage spills: operators report them to the Water Quality Control Division (C.R.S.
   25-8-601(2); the CDPS permits' 24-hour report), which publishes none of them; a large spill reaches the public only
   when an agency issues an advisory. CDPHE's own pages answered 403 to the build's client on 2026-11-14, and the City
