@@ -491,3 +491,23 @@ def test_p1_4_a_second_page_or_a_missing_stream_fails_and_lifts_nothing(monkeypa
     rc, written = _main_with(monkeypatch, PDF, first.values())
     assert rc == 0 and len(written[0][0]) == 20
     assert all(r["status"] == "advisory_active" for r in written[0][0])
+
+
+# ---------------------------------------------------------------- re-review 2026-11-14 P1-5: the archive's text
+
+def test_p1_5_archive_contaminant_text_carries_no_name_or_address_at_any_save(monkeypatch):
+    rows, _ = L.parse_page((FIX / "legacy-search-sample.html").read_text())
+    row = dict(next(r for r in rows if L.keep(r) and r["latitude"]))
+    row["contaminant"] = "Raw sewage, reported by Pat Example at 1234 Example Street"
+    assert L.keep(row)
+    blob = json.dumps([L.safe_row(row), L.record(row, FETCHED)])
+    assert "Pat Example" not in blob and "1234 Example" not in blob and "Raw sewage" in blob
+    saved, written = [], []
+    monkeypatch.setattr(L, "fetch_search", lambda w, s: [row] if w == "sewage" else [])
+    monkeypatch.setattr(L.time, "sleep", lambda s: None)
+    monkeypatch.setattr(L, "read_json", lambda path, default=None: {})
+    monkeypatch.setattr(L, "save_raw", lambda sid, content, ext: saved.append(content))
+    monkeypatch.setattr(L, "write_events", lambda sid, recs, **k: written.append(list(recs)))
+    assert L.main(["--force"]) == 0
+    out = json.dumps([saved, written])
+    assert saved and written and "Pat Example" not in out and "1234 Example" not in out

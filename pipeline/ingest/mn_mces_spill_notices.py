@@ -50,8 +50,10 @@ Record rules (one sso record per spill page; the Council's interceptor spills ar
     leaves the list (one-year retention) keeps its record with raw.gone_from_index_since; one whose signs were still up
     gets raw._unlisted_since and raw._end_not_confirmed (hatched: the lifting was never seen). A page that cannot be
     read keeps its previous record. An index that cannot be read writes ok=False and every previous record stays.
-  - Privacy: the pages carry the Council's office contact only; only the parsed text is saved (data/raw), every string
-    through common.strip_personal, scrub_text and the house-number scrub first (scrubbed(); review P1-6).
+  - Privacy: the pages carry the Council's office contact only. data/raw keeps the index and, per page, its title, its
+    dated headings and its text's hash, not the narrative (raw_save_doc); the record's quoted sentences (NARRATIVE_KEYS)
+    and advice go through common.strip_personal, scrub_text, the house-number scrub and the strict scrub with names
+    (scrubbed(); review P1-6, re-review P1-5).
 
 Run from pipeline/:  python -m ingest.mn_mces_spill_notices [--dir saved_dir]   (index.html and the pages by name)
 """
@@ -72,6 +74,7 @@ import requests
 
 import common
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from ingest.generic.fieldmap import scrub_strict_names
 
 SOURCE_ID = "mn-mces-spill-notices"
 INDEX_URL = "https://metrocouncil.org/Wastewater-Water/Services/Interceptor-Services/Spills.aspx"
@@ -175,14 +178,35 @@ def page_reads(parsed: dict) -> bool:
 
 
 def scrubbed(o):
-    """Every string with emails, phone numbers, staff names and street house numbers removed (before any save)."""
+    """Every string with emails, phone numbers, staff names, people's names found by their cues ("reported by ...")
+    and street house numbers removed (before any save; fieldmap.scrub_strict_names, re-review 2026-11-14 P1-5)."""
     if isinstance(o, dict):
         return {k: scrubbed(v) for k, v in common.strip_personal(o).items()}
     if isinstance(o, list):
         return [scrubbed(v) for v in o]
     if isinstance(o, str):
-        return common.strip_house_numbers(common.scrub_text(o))
+        return scrub_strict_names(common.strip_house_numbers(common.scrub_text(o)))
     return o
+
+
+# the record's fields that quote the notice's words: scrubbed before the record is written
+NARRATIVE_KEYS = ("title", "location_text", "spill_stopped_words", "_reached_water_words", "_no_water_reason",
+                  "updates", "signs", "time_of_day_words")
+
+
+def raw_save_doc(index: str, pages: dict) -> dict:
+    """What data/raw keeps of a run: the index's list, and per page only its title, its dated headings and the hash of
+    its parsed text (the narrative itself is not kept; the record keeps the scrubbed sentences it uses)."""
+    out = {}
+    for u, p in pages.items():
+        if not p:
+            out[u] = None
+            continue
+        parsed = parse_page(p)
+        out[u] = {"title": parsed["title"], "updates": [{"date": x["date"], "heading": x["heading"]}
+                                                       for x in parsed["updates"]],
+                  "sha256": hashlib.sha256(json.dumps(parsed, sort_keys=True).encode()).hexdigest()}
+    return scrubbed({"index": parse_index(index), "pages": out})
 
 
 def label_city_month(label: str) -> tuple[str | None, int | None, int | None]:
@@ -227,7 +251,7 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
     loc = next((s for s in re.split(r"(?<=\.)\s+", intro) if re.search(r"\b(?:occurred|at the intersection|located)\b",
                                                                       s, re.I)), None)
     if loc:
-        raw["location_text"] = common.strip_house_numbers(common.scrub_text(loc))
+        raw["location_text"] = loc
     alltext = " ".join([intro] + [u["text"] for u in updates])
     # the water
     w = REACHED.search(alltext)
@@ -344,6 +368,11 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
     name = urlsplit(item["url"]).path.rsplit("/", 1)[-1].removesuffix(".aspx")
     srid = f"{name}:{start.isoformat()}" if start else name
     newest = max((u["date"] for u in updates), default=None)
+    for k in NARRATIVE_KEYS:
+        if k in raw:
+            raw[k] = scrubbed(raw[k])
+    if advice:
+        advice = scrubbed(advice)
     return event(
         source_id=SOURCE_ID, source_record_id=srid, event_type="sso", status=status,
         discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER_NAME, waterbody_text=waterbody,
@@ -433,9 +462,7 @@ def main(argv=None) -> int:
                     pages[it["url"]] = fetch(it["url"])
                 except requests.RequestException:
                     pages[it["url"]] = None
-            save_raw(SOURCE_ID, json.dumps(scrubbed({"index": parse_index(index),
-                                                     "pages": {u: (parse_page(p) if p else None)
-                                                               for u, p in pages.items()}}), indent=1), "json")
+            save_raw(SOURCE_ID, json.dumps(raw_save_doc(index, pages), indent=1), "json")
         recs, meta = build(index, pages, fetched, prev)
         if meta["pages_unread"]:
             raise RuntimeError(f"spill pages not read: {', '.join(meta['pages_unread'])}")

@@ -35,7 +35,8 @@ Record rules
   - Duplicates: two rows with the same incident day, point, contaminant and volume are one incident filed twice; the
     later Incident ID is duplicate_of the earlier (EIR2032 of EIR2031, 2013-08-31, Dunn County).
   - No operator: the table names no party, and a point near a city's plant is not its permit.
-  - Privacy: only the columns above are read; the saved raw file holds the kept rows' safe columns only.
+  - Privacy: only the columns above are read; the saved raw file holds the kept rows' safe columns only, the
+    contaminant text through the strict scrub with names (fieldmap.scrub_strict_names) first.
 
 Run from pipeline/:  python -m ingest.nd_deq_eir_legacy [--dir saved_dir] [--force]
 """
@@ -55,6 +56,7 @@ import requests
 import common
 import zones
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from ingest.generic.fieldmap import scrub_strict_names
 
 SOURCE_ID = "nd-deq-eir-legacy-general"
 URL = "https://deq.nd.gov/FOIA/Spills/defaultarc.aspx/"
@@ -136,7 +138,8 @@ def safe_row(row: dict) -> dict:
     """The row as saved and kept in raw.row: the point rounded; a private place's point dropped."""
     out = {k: row.get(k) for k in COLUMNS}
     if out.get("contaminant"):
-        out["contaminant"] = common.strip_house_numbers(common.scrub_text(out["contaminant"]))
+        # names (by their cues), house numbers, phones and emails cut before any save (re-review 2026-11-14 P1-5)
+        out["contaminant"] = scrub_strict_names(common.strip_house_numbers(common.scrub_text(out["contaminant"])))
     lat, lon = _num(row.get("latitude")), _num(row.get("longitude"))
     private = bool(PRIVATE_PLACE.search(row.get("contaminant") or ""))
     out["latitude"] = None if private or lat is None else round(lat, 3)
