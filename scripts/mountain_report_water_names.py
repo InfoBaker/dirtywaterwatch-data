@@ -55,7 +55,7 @@ def build(st: str) -> dict:
                 row = rows.setdefault((n, county), {"name": n, "reports": 0, "open": 0, "county": county or None,
                                                     "points": [], "sources": defaultdict(int)})
                 row["reports"] += 1
-                row["open"] += int(r.get("status") in OPEN)
+                row["open"] += int(r.get("status") in OPEN and not r.get("ended_at"))
                 row["sources"][sid] += 1
                 if r.get("lat") is not None and len(row["points"]) < 5:
                     pt = [round(float(r["lat"]), 3), round(float(r["lon"]), 3)]
