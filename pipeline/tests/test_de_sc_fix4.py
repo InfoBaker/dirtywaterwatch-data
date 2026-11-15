@@ -238,11 +238,45 @@ def test_no_other_feed_takes_the_observation_period_branch(monkeypatch):
             S.event_intervals(_without_periods(r), None, now, None, rules), r["event_id"]
 
 
-def test_other_feeds_status_output_is_the_same_with_and_without_listed_periods(monkeypatch, tmp_path):
+# the status module's state a build sets or fills; the comparison below must leave every one as it found it
+STATUS_GLOBALS = ("_STATES", "_SHORE_REACHES", "_STRETCH_REACHES", "_RULES", "WITHHELD", "NOT_LIVE", "ALIAS_PROBLEMS",
+                  "_GEOM_CACHE", "_REACH_WATERS", "_COUNTIES", "_RECORD_COUNTIES")
+_SNAPSHOT: dict = {}
+
+
+def _status_globals() -> dict:
+    return {k: (id(getattr(S, k)), copy.copy(getattr(S, k))) for k in STATUS_GLOBALS}
+
+
+@pytest.fixture
+def seeded_status_globals():
+    """Known values in the module's state before the build test (as another test, or a run, may leave them); the test
+    after it checks they are still there."""
+    seeds = {"_STATES": {"NE"}, "_SHORE_REACHES": {"seed-shore"}, "_STRETCH_REACHES": {"seed-stretch"}}
+    old = {k: getattr(S, k) for k in seeds}
+    for k, v in seeds.items():
+        setattr(S, k, v)
+    _SNAPSHOT.clear()
+    _SNAPSHOT.update(_status_globals())
+    yield
+    _SNAPSHOT["after"] = _status_globals()
+    for k, v in old.items():
+        setattr(S, k, v)
+
+
+def test_other_feeds_status_output_is_the_same_with_and_without_listed_periods(seeded_status_globals, monkeypatch,
+                                                                                 tmp_path):
+    from build import rain_likely as R
     recs = _invented_other_records()
     rules = _real_rules()
     now = datetime(2026, 11, 15, tzinfo=timezone.utc)
     monkeypatch.setattr(S, "_observed_period_intervals", _never)
+    # every input given, none read from the repository or data/build: a loader called here fails the test
+    for mod, name in ((S, "load_waters"), (S, "load_outfalls"), (S, "load_registry_outfalls"), (S, "load_registry"),
+                      (S, "load_discharger_towns"), (S, "load_discharger_waters"), (S, "discharger_aliases"),
+                      (R, "load_inputs")):
+        monkeypatch.setattr(mod, name, lambda *a, _n=name, **k: pytest.fail(f"the build read {_n}"))
+    rain = {"rainfall": {}, "history": {}, "thresholds": {}, "dischargers": {}, "site_flags": {}, "levels": {}}
     outs = []
     for name, rr in (("with", recs), ("without", [_without_periods(r) for r in recs])):
         d = tmp_path / name
@@ -253,10 +287,12 @@ def test_other_feeds_status_output_is_the_same_with_and_without_listed_periods(m
         for sid, xs in by.items():
             (d / f"{sid}.json").write_text(json.dumps({"source_id": sid, "ok": True, "last_ok_at": N3, "meta": {},
                                                        "records": xs}))
-        monkeypatch.setattr(S, "_GEOM_CACHE", {})       # this build's own caches, none left for other tests
-        monkeypatch.setattr(S, "_REACH_WATERS", {})
+        for k in STATUS_GLOBALS:                         # fresh copies: whatever a build sets or fills is undone
+            v = getattr(S, k)
+            monkeypatch.setattr(S, k, copy.deepcopy(v))
         o, _ = S.build(now=now, write=False, events_dir=d, waters={}, outfalls=[], registry={}, reaches={},
-                       flows=({}, {}), rules=rules, placement_cache=None)
+                       flows=({}, {}), rules=rules, placement_cache=None, rain=copy.deepcopy(rain),
+                       discharger_towns={}, discharger_waters={}, discharger_aliases_map={})
         o = json.loads(json.dumps(o, default=str))
         for v in o.values():                           # the build's own wall-clock stamp ("built") is not output
             if isinstance(v, dict):
@@ -265,6 +301,14 @@ def test_other_feeds_status_output_is_the_same_with_and_without_listed_periods(m
         outs.append(json.dumps(o, sort_keys=True))
     assert '"advisory_points": []' not in outs[0]
     assert outs[0] == outs[1]
+
+
+def test_the_build_comparison_left_the_status_modules_state_as_it_found_it():
+    if "after" not in _SNAPSHOT:
+        pytest.skip("runs after the build comparison above")
+    before, after = {k: v for k, v in _SNAPSHOT.items() if k != "after"}, _SNAPSHOT["after"]
+    changed = sorted(k for k in STATUS_GLOBALS if after[k] != before[k])
+    assert changed == []
 
 
 # --------------------------------------------- P1-2: a Delaware beach name's house number never reaches a save
