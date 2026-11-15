@@ -445,7 +445,10 @@ Puerto Rico (permits PR...; research/pr/profile.json; not live until data/rules.
   - Water reached by impact: the impacts algal blooms (ALB) and eutrophication (EUT) can only happen in a water, so
     for PR they count as a water reached (STATE_WATER_IMPACTS; 7 reports), and an impact text naming the storm drain
     system ('STREET AND STORMWATER DRAINAGE', 'RAINWATER SYSTEM', 'RAINWATER LAGOON') or a water in Spanish or
-    English is a water, as storm drains are everywhere (pr_water_text; 4 reports).
+    English is a water, as storm drains are everywhere (pr_water_text; 4 reports). A water named only to deny it ('El
+    derrame no afectó la quebrada', 'did not reach the creek') is taken out of the text first (PR_DENIED_WATER, in
+    STATE_NOT_WATER_TEXT; Astra verify P1-3); a water affirmed beside it is still read. No report of the 2026-11-12
+    extract changes.
   - Descriptions: PRASA's description field names the structure, not what happened ('EA <place> (PUMP STATION)',
     'EBAS <place>', 'PA <town> (WWTP)': estación de bombas, planta de alcantarillado), so a water word in it is a
     place name ('EBAS RIO GRANDE PLAZA') and is not read as a water reached (DESCRIPTION_IS_PLACE_STATES).
@@ -1038,6 +1041,20 @@ def pr_water_text(texts: str) -> str | None:
 
 
 STATE_WATER_TEXT["PR"] = pr_water_text
+# Puerto Rico: a water named only to deny it is not a water reached (Astra verify P1-3): "El derrame no afectó la
+# quebrada", "no llegó al río", "No hubo impacto a la quebrada ni al río", "sin llegar al caño", "did not reach the
+# creek", "no alcanzó ningún cuerpo de agua". Only the denied phrase is taken out, so a water affirmed in the same text
+# ("no afectó la quebrada pero llegó al río") is still read. The words between the negation and the water are at most
+# three and never a conjunction ("No se pudo contener y discurrió a la quebrada" is a water reached).
+PR_DENIED_WATER = re.compile(
+    r"(?i:\b(?:no|ni|nunca|sin|jam[aá]s|not|never|did\s*n[o']?t|does\s*n[o']?t|was\s*n[o']?t)\s+"
+    r"(?:(?!(?:y|e|pero|sino|aunque|and|but)\b)[\w-]+\s+){0,3}?"
+    r"(?:(?:a|al|el|la|los|las|en|hacia|del|de|ning[uú]na?|alg[uú]na?|the|any|a|to|into|in)\s+){0,3}"
+    r"(?:quebradas?|r[ií]os?|caños?|canos?|lagunas?|bah[ií]as?|playas?|mar|oc[eé]anos?|charcas?|manglar(?:es)?|"
+    r"cuerpos?\s+de\s+aguas?|aguas?\s+(?:superficiales|de\s+P(?:uerto\s+)?R(?:ico)?)|alcantarillado\s+pluvial|"
+    r"sistema\s+pluvial|mangroves?|creeks?|rivers?|streams?|waterways?|water\s*bod(?:y|ies)|bod(?:y|ies)\s+of\s+water|"
+    r"surface\s+waters?|storm\s*water\s+drainage|bays?|ocean|beach(?:es)?|lagoons?)\b)")
+STATE_NOT_WATER_TEXT["PR"] = PR_DENIED_WATER
 # a courtesy title before a capitalised name ('Sr. <name>', 'Ing. <name>'): the name is removed (no row of the
 # 2026-11-12 extract has one; the scrub guards the free text of future reports)
 PR_PERSON = re.compile(r"\b(?:Sr|Sra|Srta|Ing|Lcdo|Lcda|Dra?|Don|Doña|Mr|Mrs|Ms)\.?\s+"
