@@ -928,3 +928,80 @@ def test_leavenworth_ids_do_not_depend_on_which_pages_are_read_together():
     assert by["2026-05-27T15:50:00-05:00"]["ended_at"] == "2026-05-27T17:00:00-05:00"
     assert by["2026-05-27T19:15:00-05:00"]["ended_at"] is None
     assert "1234" not in json.dumps(cor) and "5678" not in json.dumps(cor)
+
+
+def _kdhe_red(tmp_path, recs, now):
+    """The red KDHE advisory points and red intervals after `now` with Kansas counted live."""
+    from datetime import datetime
+    from build import status as S
+    waters = dict([_line("example-creek-ks", "Example Creek", "KS", [[-95.8, 39.0], [-95.7, 39.05]])])
+    st = _mo_ks_build(tmp_path, {A.SOURCE_ID: recs}, waters, now=now)
+    t = datetime.fromisoformat(now.replace("Z", "+00:00"))
+    pts = [p for p in st["advisory_points"] if p["event_id"].startswith(A.SOURCE_ID) and p["status"] == "red"]
+    ivs = [iv for r in recs for iv in S.event_intervals(r, "KS", t) if iv["color"] == "red"
+           and (iv["end"] is None or iv["end"] > t)]
+    return pts, ivs
+
+
+def test_kdhe_every_order_of_listing_rescission_and_relisting_ends_red_after_the_rescission(tmp_path):
+    """Verification 3 P1-1: a water named, no longer named, then named again in a read that also holds its rescission
+    never reopens; the same when the rescission was read while the water was dropped (and later leaves the feed);
+    a period first seen after a rescission published earlier ends where it starts; another county's rescission does
+    not block; repeated reads keep all of it, through the status build with Kansas live."""
+    a = ("Stream Advisory Issued for Example Creek in Shawnee County", "70", "Mon, 02 Nov 2026 09:00:00 -0600", "Sewage.")
+    b = ("Stream Advisory Issued for Sample Creek in Shawnee County", "70", "Mon, 02 Nov 2026 09:00:00 -0600", "Sewage.")
+    lift = ("Stream Advisory Rescinded for Example Creek in Shawnee County", "71", "Tue, 03 Nov 2026 09:00:00 -0600",
+            "Rescinded.")
+    other = ("Stream Advisory Rescinded for Example Creek in Douglas County", "72", "Tue, 03 Nov 2026 09:00:00 -0600",
+             "Rescinded.")
+    nolift = ("Stream Advisory Rescinded for Example Creek", "73", "Tue, 03 Nov 2026 09:00:00 -0600", "Rescinded.")
+    r1, _ = A.run(_feed(a), [], "2026-11-02T18:00:00Z")
+    r2, _ = A.run(_feed(b), r1, "2026-11-02T19:00:00Z")
+    held = json.loads(json.dumps(r2))
+    ex = lambda rs: sorted((x for x in rs if x["raw"]["waters"] == ["Example Creek"]), key=lambda x: x["event_id"])
+
+    # 1. named again in the same read as its rescission, then read again and again (with and without the rescission)
+    r3, s3 = A.run(_feed(a, lift), json.loads(json.dumps(held)), "2026-11-04T18:00:00Z")
+    r4, _ = A.run(_feed(a, lift), r3, "2026-11-04T19:00:00Z")
+    r5, s5 = A.run(_feed(a), r4, "2026-11-05T18:00:00Z")
+    assert len(ex(r5)) == 1 and ex(r5)[0]["status"] == "advisory_lifted" and s5["open"] == 0
+    assert ex(r5)[0]["ended_at"] == "2026-11-02T19:00:00Z" and ex(r5)[0]["raw"]["rescinded_by"]["link"].endswith("71")
+    assert s3["rescissions_without_issue"] == 0 and s3["lifted"] == 0
+    for rs, now in ((r3, "2026-11-04T18:30:00Z"), (r5, "2026-11-05T18:30:00Z")):
+        assert _kdhe_red(tmp_path, rs, now) == ([], [])
+
+    # 2. the rescission read while the water was dropped, then it leaves the feed, then the water is named again
+    q3, sq3 = A.run(_feed(b, lift), json.loads(json.dumps(held)), "2026-11-03T18:00:00Z")
+    assert sq3["rescissions_without_issue"] == 0
+    q4, _ = A.run(_feed(a), q3, "2026-11-20T18:00:00Z")
+    q5, sq5 = A.run(_feed(a), q4, "2026-11-21T18:00:00Z")
+    assert len(ex(q5)) == 1 and sq5["open"] == 0
+    assert _kdhe_red(tmp_path, q5, "2026-11-21T18:30:00Z") == ([], [])
+
+    # 3. a period first seen after a rescission published before that read, the rescission read only later
+    p3, _ = A.run(_feed(a), json.loads(json.dumps(held)), "2026-11-03T16:00:00Z")      # 10:00 -0600, after 09:00
+    p2 = [x for x in ex(p3) if x["raw"].get("period_of")][0]
+    assert p2["status"] == "advisory_active"
+    p4, _ = A.run(_feed(a, lift), p3, "2026-11-03T18:00:00Z")
+    p2 = [x for x in ex(p4) if x["raw"].get("period_of")][0]
+    assert p2["status"] == "advisory_lifted" and p2["ended_at"] == p2["started_at"] == "2026-11-03T16:00:00Z"
+    p5, s5 = A.run(_feed(a, lift), p4, "2026-11-03T19:00:00Z")
+    assert len(ex(p5)) == 2 and s5["open"] == 0
+    assert _kdhe_red(tmp_path, p5, "2026-11-03T19:30:00Z") == ([], [])
+
+    # 4. another county's rescission does not block the new period; a county-less one for a water held in two
+    # counties lifts none (it is kept in meta, ambiguous)
+    o3, _ = A.run(_feed(a, other), json.loads(json.dumps(held)), "2026-11-04T18:00:00Z")
+    assert [x["status"] for x in ex(o3)] == ["advisory_lifted", "advisory_active"]
+    pts, ivs = _kdhe_red(tmp_path, o3, "2026-11-04T18:30:00Z")
+    assert len(pts) == 1 and ivs
+    d = ("Stream Advisory Issued for Example Creek in Douglas County", "74", "Mon, 02 Nov 2026 10:00:00 -0600", "x")
+    n1, _ = A.run(_feed(a, d), [], "2026-11-02T18:00:00Z")
+    n2, sn2 = A.run(_feed(a, d, nolift), n1, "2026-11-03T18:00:00Z")
+    assert all(x["status"] == "advisory_active" for x in n2) and sn2["rescissions_ambiguous"] == 1
+
+    # 5. issued and rescinded, then dropped and named again: stays lifted at KDHE's time
+    k1, _ = A.run(_feed(a, lift), [], "2026-11-03T18:00:00Z")
+    k2, _ = A.run(_feed(b, lift), k1, "2026-11-03T19:00:00Z")
+    k3, sk3 = A.run(_feed(a), k2, "2026-11-04T18:00:00Z")
+    assert len(ex(k3)) == 1 and ex(k3)[0]["ended_at"] == "2026-11-03T09:00:00-06:00" and sk3["open"] == 0
