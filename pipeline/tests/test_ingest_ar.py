@@ -817,3 +817,45 @@ def test_only_an_evidenced_correction_links_two_bloom_rows(monkeypatch, tmp_path
     # control: a one-character day fix, everything else the same, is one advisory
     recs = run("f", [ex], [("Lake Exemplar", "Sample County", "Sampletown, AR", "July 31, 2026", "")])
     assert sum(1 for r in recs.values() if r.get("duplicate_of")) == 1
+
+
+@pytest.mark.parametrize("change", ["one_blank", "label_renamed"])
+def test_a_report_without_its_confirmation_number_fails_the_read(tmp_path, monkeypatch, change):
+    """A report whose Web Confirmation Number is missing (blank, or the detail row's label changed) would key every
+    such report 'no-id' and collapse them into one: the read fails before anything is saved, the previous records
+    are kept and the run is not ok (verification P2-6)."""
+    from datetime import datetime as dt
+    page = (FIX / "ar_deq_incidents_page.html").read_text()
+    monkeypatch.setattr(M.time, "sleep", lambda s: None)
+    saved = []
+    monkeypatch.setattr(M, "save_raw", lambda *a, **k: (saved.append(a), tmp_path / "raw.json")[1])
+    monkeypatch.setattr(M, "ROOT", tmp_path)
+    today = dt.now(M.TZ).date().isoformat()
+    out = tmp_path / "ev.json"
+    monkeypatch.setattr(M, "post", lambda sess, data: page)
+    assert M.main(["--backfill", today, "--out", str(out)]) == 0
+    before = {r["event_id"] for r in json.loads(out.read_text())["records"]}
+    assert len(before) > 1 and not any(e.endswith(":no-id") for e in before)
+    saved.clear()
+    if change == "one_blank":
+        bad = page.replace("aaaaaaaa-0000-4000-8000-000000000002", "", 1)
+    else:
+        bad = page.replace("Web Confirmation Number:", "Web Confirmation No.:")
+    monkeypatch.setattr(M, "post", lambda sess, data: bad)
+    if change == "label_renamed":                   # no report readable: the read fails, nothing saved or rebuilt
+        assert M.main(["--backfill", today, "--out", str(out)]) == 1
+        doc = json.loads(out.read_text())
+        assert doc["ok"] is False and not saved
+        assert {r["event_id"] for r in doc["records"]} == before
+        return
+    # one report without its number: the readable ones are kept and saved, that one is never built, saved or keyed
+    # 'no-id'; its earlier record is kept, and the events file says why; the next read asks for it again
+    assert M.main(["--backfill", today, "--out", str(out)]) == 0
+    doc = json.loads(out.read_text())
+    assert {r["event_id"] for r in doc["records"]} == before and not any(e.endswith(":no-id") for e in before)
+    assert doc["meta"]["unreadable_reports"]["count"] == 1 and "Confirmation" in doc["error"]
+    assert saved and all("no-id" not in repr(a) and '"confirmation_no": ""' not in a[1].decode() for a in saved)
+    monkeypatch.setattr(M, "post", lambda sess, data: page)
+    assert M.main(["--backfill", today, "--out", str(out)]) == 0
+    doc = json.loads(out.read_text())
+    assert doc["error"] is None and "unreadable_reports" not in doc["meta"]
