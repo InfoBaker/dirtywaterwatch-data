@@ -1415,6 +1415,11 @@ NAMED_ONLY_NONE = ("the report names no water; its source gives no location, so 
 # stays unplaced and listed. Keyed on the value, which only the Iowa feeds write, so no other state changes.
 OWN_PLACE_NONE = ("the report names no water it reached and its own point lies on no mapped water: listed with its "
                   "county and placed on no water (never on its permit's or plant's receiving water)")
+# Puerto Rico (go-live audit 2026-11-16 P2-3): a report that names the open sea in English or Spanish ('OCEANO
+# ATLANTICO', 'Caribe Ocean', 'CARIBBEAN SEA'; name_forms_in) names a water this site holds no record of; it says so
+# rather than leaving the reason empty. Keyed on ACCENT_FOLD_STATES (folds), so no other state's reason changes.
+OPEN_SEA_FORMS = frozenset({"atlantic ocean", "caribbean sea"})
+OPEN_SEA_NONE = "the report names the open sea, which has no water record here: listed with its place, colouring no water"
 
 
 def own_place_only(ev: dict) -> bool:
@@ -2954,6 +2959,9 @@ class Resolver:
             out["unplaced_reason"] = NAMED_ONLY_NONE
         if own_only and not text and not out.get("unplaced_reason"):
             out["unplaced_reason"] = OWN_PLACE_NONE
+        if text and folds(state) and not out.get("unplaced_reason") \
+                and set(name_forms_in(text, state)) & OPEN_SEA_FORMS:
+            out["unplaced_reason"] = OPEN_SEA_NONE
         if ambiguous and not out.get("unplaced_reason"):
             out["unplaced_reason"] = "ambiguous name"
         if reason and not out.get("unplaced_reason"):
