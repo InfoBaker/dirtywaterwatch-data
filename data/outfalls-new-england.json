@@ -13731,7 +13731,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 57 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "101A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -13782,7 +13788,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 51 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "103A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -13807,7 +13819,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 71 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "104A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -13832,7 +13850,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 24 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "105A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -13857,7 +13881,13 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Blackstone River (blackstone-river-ri) is the only water of the receiving water's name ('Blackstone River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "106A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -13882,7 +13912,13 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Blackstone River (blackstone-river-ri) is the only water of the receiving water's name ('Blackstone River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "107A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -13907,7 +13943,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 8 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "201A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -13932,7 +13974,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 19 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "202A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -13957,7 +14005,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 2 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "203A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -13982,7 +14036,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 22 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "204A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14007,7 +14067,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 21 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "205A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14032,7 +14098,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 36 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "206A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14057,7 +14129,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 10 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "207A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14082,7 +14160,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 29 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "208A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14107,7 +14191,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 22 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "209A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14138,7 +14228,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 22 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "210A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14169,7 +14265,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 35 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "211A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14200,7 +14302,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 5 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "212A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14231,7 +14339,13 @@
    ],
    "match": "geometry",
    "water_match": "EPA's point lies 35 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "213A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14262,7 +14376,13 @@
    ],
    "match": "geometry",
    "water_match": "EPA's point lies 33 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "214A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14287,7 +14407,13 @@
    "alternatives": [],
    "match": "geometry",
    "water_match": "EPA's point lies 13 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "215A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14312,7 +14438,13 @@
    "alternatives": [],
    "match": "geometry",
    "water_match": "EPA's point lies 67 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "216A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14337,7 +14469,13 @@
    "alternatives": [],
    "match": "geometry",
    "water_match": "EPA's point lies 58 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "217A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14362,7 +14500,13 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Seekonk River (seekonk-river-ri) is the only water of the receiving water's name ('Seekonk River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "218A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100072",
@@ -14413,7 +14557,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 127 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00024",
+     "outfall": "220A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100293",
@@ -14475,7 +14625,13 @@
    ],
    "match": "geometry",
    "water_match": "EPA's point lies 0 m from Narragansett Bay (narragansett-bay-ri), the nearest openboatlaunch water within 400 m; the receiving water ('NEWPORT HARBOR, NORTH END') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00031",
+     "outfall": "007"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100293",
@@ -14506,7 +14662,13 @@
    ],
    "match": "geometry",
    "water_match": "EPA's point lies 229 m from Narragansett Bay (narragansett-bay-ri), the nearest openboatlaunch water within 400 m; the receiving water ('NEWPORT HARBOR, NORTH END') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00031",
+     "outfall": "010"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14568,7 +14730,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 372 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "004A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14599,7 +14767,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 337 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "005A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14630,7 +14804,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 80 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "006A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14661,7 +14841,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 68 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "007A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14718,7 +14904,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 32 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "009A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14749,7 +14941,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 4 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "011A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14774,7 +14972,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 34 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "012A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14805,7 +15009,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 95 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "016A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14841,7 +15051,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 251 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "018A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14872,7 +15088,13 @@
    ],
    "match": "geometry",
    "water_match": "EPA's point lies 21 m from Narragansett Bay (narragansett-bay-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Providence River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "019A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14903,7 +15125,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 33 m from Seekonk River (seekonk-river-ri), whose name shares a word with the receiving water ('Seekonk River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "023A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14928,7 +15156,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 286 m from Seekonk River (seekonk-river-ri), whose name shares a word with the receiving water ('Seekonk River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "025A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14953,7 +15187,13 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Seekonk River (seekonk-river-ri) is the only water of the receiving water's name ('Seekonk River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "027A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -14978,7 +15218,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 53 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "030A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15003,7 +15249,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 10 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "032A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15028,7 +15280,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 10 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "033A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15053,7 +15311,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 12 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "035A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15078,7 +15342,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 50 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "036A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15103,7 +15373,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 33 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "037A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15128,7 +15404,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'West River' by name; West River (west-river-ri, OpenStreetMap record), 61 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "039A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15178,7 +15460,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "042A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15203,7 +15491,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 14 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "044A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15228,7 +15522,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 14 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "045A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15253,7 +15553,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 14 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "046A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15278,7 +15584,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 12 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "048A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15303,7 +15615,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 65 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "049A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15328,7 +15646,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 2 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "050A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15353,7 +15677,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "051A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15378,7 +15708,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "052A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15403,7 +15739,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 28 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "053A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15428,7 +15770,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 13 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "054A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15453,7 +15801,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 13 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "055A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15478,7 +15832,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'West River' by name; West River (west-river-ri, OpenStreetMap record), 24 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "056A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15503,7 +15863,13 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 12 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "058A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15534,7 +15900,13 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 261 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "061A"
+    }
+   ]
   },
   {
    "npdes_permit": "RI0100315",
@@ -15559,7 +15931,13 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Providence River (providence-river-ri) is the only water of the receiving water's name ('Providence River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "also_permits": [
+    {
+     "npdes_permit": "RISS00032",
+     "outfall": "067A"
+    }
+   ]
   },
   {
    "npdes_permit": "RISS00024",
@@ -15584,7 +15962,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 57 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "101A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15609,7 +15995,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 51 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "103A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15634,7 +16028,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 71 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "104A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15659,7 +16061,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 24 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "105A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15684,7 +16094,15 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Blackstone River (blackstone-river-ri) is the only water of the receiving water's name ('Blackstone River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "106A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15709,7 +16127,15 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Blackstone River (blackstone-river-ri) is the only water of the receiving water's name ('Blackstone River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "107A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15734,7 +16160,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 8 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "201A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15759,7 +16193,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 19 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "202A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15784,7 +16226,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 2 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "203A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15809,7 +16259,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 22 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "204A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15834,7 +16292,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 21 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "205A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15859,7 +16325,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 36 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "206A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15884,7 +16358,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 10 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "207A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15909,7 +16391,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 29 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "208A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15934,7 +16424,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 22 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "209A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15965,7 +16463,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 22 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "210A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -15996,7 +16502,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 35 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "211A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -16027,7 +16541,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 5 m from Blackstone River (blackstone-river-ri), whose name shares a word with the receiving water ('Blackstone River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "212A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -16058,7 +16580,15 @@
    ],
    "match": "geometry",
    "water_match": "EPA's point lies 35 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "213A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -16089,7 +16619,15 @@
    ],
    "match": "geometry",
    "water_match": "EPA's point lies 33 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "214A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -16114,7 +16652,15 @@
    "alternatives": [],
    "match": "geometry",
    "water_match": "EPA's point lies 13 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "215A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -16139,7 +16685,15 @@
    "alternatives": [],
    "match": "geometry",
    "water_match": "EPA's point lies 67 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "216A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -16164,7 +16718,15 @@
    "alternatives": [],
    "match": "geometry",
    "water_match": "EPA's point lies 58 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "217A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -16189,7 +16751,15 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Seekonk River (seekonk-river-ri) is the only water of the receiving water's name ('Seekonk River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "218A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00024",
@@ -16214,7 +16784,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 127 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100072",
+    "outfall": "220A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00031",
@@ -16245,7 +16823,15 @@
    ],
    "match": "geometry",
    "water_match": "EPA's point lies 0 m from Narragansett Bay (narragansett-bay-ri), the nearest openboatlaunch water within 400 m; the receiving water ('NEWPORT HARBOR, NORTH END') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100293",
+    "outfall": "007",
+    "file": "data/outfalls-new-england.json",
+    "reason": "Newport's treatment plant permit lists the outfall; RISS00031 is the city's collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00031",
@@ -16276,7 +16862,15 @@
    ],
    "match": "geometry",
    "water_match": "EPA's point lies 229 m from Narragansett Bay (narragansett-bay-ri), the nearest openboatlaunch water within 400 m; the receiving water ('NEWPORT HARBOR, NORTH END') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100293",
+    "outfall": "010",
+    "file": "data/outfalls-new-england.json",
+    "reason": "Newport's treatment plant permit lists the outfall; RISS00031 is the city's collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16307,7 +16901,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 372 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "004A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16338,7 +16940,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 337 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "005A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16369,7 +16979,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 80 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "006A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16400,7 +17018,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 68 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "007A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16431,7 +17057,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 32 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "009A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16462,7 +17096,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 4 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "011A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16487,7 +17129,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 34 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "012A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16518,7 +17168,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 95 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "016A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16554,7 +17212,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 251 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "018A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16585,7 +17251,15 @@
    ],
    "match": "geometry",
    "water_match": "EPA's point lies 21 m from Narragansett Bay (narragansett-bay-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Providence River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "019A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16616,7 +17290,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 33 m from Seekonk River (seekonk-river-ri), whose name shares a word with the receiving water ('Seekonk River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "023A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16641,7 +17323,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 286 m from Seekonk River (seekonk-river-ri), whose name shares a word with the receiving water ('Seekonk River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "025A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16666,7 +17356,15 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Seekonk River (seekonk-river-ri) is the only water of the receiving water's name ('Seekonk River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "027A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16691,7 +17389,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 53 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "030A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16716,7 +17422,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 10 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "032A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row; the kept permit also has outfall(s) 033A at this point",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16741,7 +17455,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 10 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "033A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row; the kept permit also has outfall(s) 032A at this point",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16766,7 +17488,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 12 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "035A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16791,7 +17521,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 50 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "036A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16816,7 +17554,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Moshassuck River' by name; Moshassuck River (moshassuck-river-ri, OpenStreetMap record), 33 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "037A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16841,7 +17587,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'West River' by name; West River (west-river-ri, OpenStreetMap record), 61 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "039A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16891,7 +17645,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "042A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16916,7 +17678,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 14 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "044A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16941,7 +17711,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 14 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "045A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16966,7 +17744,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 14 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "046A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -16991,7 +17777,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 12 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "048A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17016,7 +17810,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 65 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "049A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17041,7 +17843,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 2 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "050A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17066,7 +17876,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "051A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row; the kept permit also has outfall(s) 052A at this point",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17091,7 +17909,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 0 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "052A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row; the kept permit also has outfall(s) 051A at this point",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17116,7 +17942,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 28 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "053A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17141,7 +17975,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 13 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "054A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17166,7 +18008,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 13 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "055A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17191,7 +18041,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'West River' by name; West River (west-river-ri, OpenStreetMap record), 24 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "056A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17216,7 +18074,15 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Woonasquatucket River' by name; Woonasquatucket River (woonasquatucket-river-ri, OpenStreetMap record), 12 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "058A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17247,7 +18113,15 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 261 m from Providence River (providence-river-ri), whose name shares a word with the receiving water ('Providence River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "061A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "RISS00032",
@@ -17272,7 +18146,15 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Providence River (providence-river-ri) is the only water of the receiving water's name ('Providence River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "same_outfall_as": {
+    "npdes_permit": "RI0100315",
+    "outfall": "067A",
+    "file": "data/outfalls-new-england.json",
+    "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
+    "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   },
   {
    "npdes_permit": "VT0100137",
