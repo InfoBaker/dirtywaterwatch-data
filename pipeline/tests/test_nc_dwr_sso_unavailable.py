@@ -37,7 +37,12 @@ class Sess:
         self.asked.append(url)
         for key, body in self.routes.items():
             if url == key or url == f"{key}/query":
-                return Resp(body(params) if callable(body) else body)
+                body = body(params) if callable(body) else body
+                feats = body.get("features") if isinstance(body, dict) else None
+                if url == key and feats and "fields" not in body:
+                    # a layer's description lists its fields, as ArcGIS does (the rows' names here)
+                    body = {**body, "fields": [{"name": k} for k in feats[0].get("attributes") or {}]}
+                return Resp(body)
         return Resp({"error": {"code": 400, "message": "Invalid URL"}})
 
 
