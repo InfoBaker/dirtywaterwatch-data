@@ -16513,13 +16513,12 @@
    "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "ca-sd-regional-board-ibwc-spills",
    "publishes": "notices",
-   "records": false,
-   "every_hours": 24,
    "noun": "State page",
-   "note": "A table of transboundary sewage flows from Mexico in the Tijuana River valley (start, end, type, location, volume), updated about once a week. A shared water with Mexico: whether the site covers it at launch is the owner's call. Watched for changes; no records made. Voluntary. (research/ca/report.md §2.3)",
+   "note": "A table of the spill events and transboundary flows from Mexico that USIBWC reported to the Board since July 2024 in the Tijuana River valley (start, end, type, location, volume), updated about once a week; a water shared with Mexico. Read by the site's feed: each row is a report. Voluntary publication. (research/ca/report.md §2.3)",
    "sources": [
     "ca-sd-regional-board-ibwc-spills"
    ],
