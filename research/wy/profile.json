@@ -43,20 +43,22 @@
   "notes": "No Wyoming rows in SOBE."
  },
  "statewide_feed": {
-  "exists": false,
-  "source_ids": [],
-  "precision": "none",
-  "machine_readable": false,
-  "format": "none",
-  "latency": null,
-  "history": null,
-  "coordinates": "none",
-  "receiving_water": "none",
-  "start_end": "none",
-  "volume": false,
-  "stable_id": false,
+  "exists": true,
+  "source_ids": [
+   "wy-deq-spill-list"
+  ],
+  "precision": "event",
+  "machine_readable": true,
+  "format": "csv",
+  "latency": "a report appears once DEQ closes it: a median of 18 days after the incident for the 84 sewage reports on 2026-11-16",
+  "history": "sewage reports from 2010-02-12 (84 by rule of 6,066 spill reports on 2026-11-16)",
+  "coordinates": "a point on most rows; kept for public sewer works only, rounded to three decimals",
+  "receiving_water": "free text; named on 14 of the 84 sewage reports, with the list's 'reached water' answer on every row",
+  "start_end": "incident date and time only (18 of 84 a date with no time); no end",
+  "volume": true,
+  "stable_id": true,
   "license": null,
-  "notes": "No public list of reported overflows or spills that include sewage found."
+  "notes": "DEQ's public spill list (CSV) from the Spills and Complaints portal: every closed spill report of every substance; sewage rows by rule (ingest/wy_deq_spills.py). Holds the overflows also reported to DEQ's spill line, not every WYPDES overflow report."
  },
  "cso": {
   "permits": 0,

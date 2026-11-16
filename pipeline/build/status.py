@@ -1347,6 +1347,10 @@ COUNTY_FIELD_STATES.add("CO")    # (raw.county: Pueblo for the Arkansas River sp
 COUNTY_STATES["MT"] = "mt-counties.json"       # Montana: DEQ's HAB layer gives points and a county field
 COUNTY_FIELD_STATES.add("MT")    # (a private pond's report keeps its county only)
 COUNTY_STATES["WY"] = "wy-counties.json"       # Wyoming: WDEQ's bulletins name a water, no county; placed by name in WY
+# Wyoming: DEQ's public spill list (ingest/wy_deq_spills.py) gives each report's county (raw.county) and a point only for
+# public sewer works, so a named water resolves only within that county. The bloom bulletins' records carry no
+# raw.county, so their placement is unchanged (tests/test_ingest_wy_deq_spills.py)
+COUNTY_FIELD_STATES.add("WY")
 COUNTY_STATES["IA"] = "ia-counties.json"       # Iowa: DNR field-office reports, releases and Waterloo give a county
 COUNTY_FIELD_STATES.add("IA")
 COUNTY_STATES["ID"] = "id-counties.json"       # Idaho: DEQ's bloom table gives each water's county
