@@ -27,6 +27,20 @@ Source
       none can be read the run writes ok=False with a plain "source unavailable" error, meta.unavailable and
       meta.unavailable_since; the records already read are kept. (On 2026-11-06 the layer's query answered code 499
       with the same CONT_0001 message; the check is on the message code, not the number.)
+    - 2026-11-16: the web map now shows the Survey123 results layer DWR enters reports into (SURVEY_LAYER,
+      survey123_1766d0b5d5294b05a27751560c1f1f97_results, item 1920ab4b574f49c98056f9046d23521e, created 2026-11-01;
+      "Water Quality - Sanitary Sewer Overflows Since 2023"; 3,335 rows, 2023 to 2026-11-12). Other field names
+      (incident_number, permit_with_name, start_date ...) and one start, end and volume per report. A layer is now read
+      only after its description (?f=json, no rows) shows every key field of a known schema (SCHEMAS: the 2026
+      layer's, or the Survey123 layer's), and then only that schema's named fields: the Survey123 layer also holds
+      reporters' and staff names, so every field ("*") is never asked for. A layer with neither schema fails with
+      each schema's missing fields and the layer's fields that look like them. Survey123 rows are read under the 2026
+      layer's names (SURVEY_MAP); raw keeps the layer's own names.
+      Continuity: the old layer's records stay (raw._missing_from_layer_since) and, by the BIMS incident number both
+      layers carry (checked: the 76 incidents of 2026 in the history layer have the same start and facility in both),
+      are duplicate_of the new layer's record (link_incidents; the Survey123 layer's copy stands). Rows that start
+      before 2026 are the history layer's (all 2,811 were on 2026-11-16) and are left to it, unless the history events
+      file lacks the incident number. 80 reports of the old layer are not in the new one: kept as they were.
   Every reportable overflow appears: 1,000 gallons or more to the ground, or any amount reaching surface
   water (the DWR reporting rule; permit conditions). No licence; the item says the data "cannot be construed
   to be a legal document". Credit: NC DEQ Division of Water Resources.
@@ -59,6 +73,12 @@ Record rules (this year's layers)
     from a place, a facility or an owner name), or no operator on record for the permit yet.
   - Coordinates: deq_latitude / deq_longitude (DWR's point for the reported address), coord_source "source";
     a point outside North Carolina's bounding box is dropped (raw._coords_rejected).
+  - Survey123 rows: start_date, end_date and report_date are epoch ms in UTC (the layer's dateFieldsTimeReference
+    is UTC; Raleigh's 2026-05-12 start is 12:21 UTC in both layers). report_date is filled only on rows entered
+    since the move (reported_at null otherwise; CreationDate, a bulk load of 2026-11-01 for the older rows, is kept in
+    raw._decoded_times and is never a report time). -1 in volume or volume_waterbody is unfilled (no gallons).
+    Reached water: waterbody_type "Named Waterbody" / "Unnamed Waterbody" or gallons to water above 0 -> yes; "Not
+    Impacted" with none -> no (raw._reached_water_basis). The waterbody text carries the stream index as before.
   - reported_at is dwr_report_date (when DWR logged the report). No publication time: published_at null; the
     first time this module saw a row is raw._first_seen_at (our clock). The layer's last edit is in meta.
 
@@ -90,6 +110,7 @@ Run from pipeline/:  python -m ingest.nc_dwr_sso [--file layer.json] [--backfill
 from __future__ import annotations
 
 import argparse
+import difflib
 import hashlib
 import json
 import re
@@ -110,6 +131,10 @@ ORG = "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services"
 LAYER = f"{ORG}/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0"
 HIST_LAYER = f"{ORG}/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0"
 YEAR_LAYER = re.compile(r"^Sanitary_Sewer_Overflows_since_Jan_(\d{4})$")
+# 2026-11-16: the layer the Tracking Map's web map shows now ("Water Quality - Sanitary Sewer Overflows Since 2023",
+# item 1920ab4b574f49c98056f9046d23521e, the Survey123 results layer DWR enters reports into; 3,335 rows, 2023 to
+# 2026-11-12). Other field names than the 2026 layer: SURVEY_MAP below. Also found through the web map each run.
+SURVEY_LAYER = f"{ORG}/survey123_1766d0b5d5294b05a27751560c1f1f97_results/FeatureServer/0"
 PAGE_URL = "https://experience.arcgis.com/experience/4a50b5dc87844bab9930a5906522a779"
 # the Tracking Map's own web map ("North Carolina Sanitary Sewer Overflows Viewer Map"): the layer DWR shows the public
 VIEWER_MAP = "https://www.arcgis.com/sharing/rest/content/items/20b6faf89710464bb6e009b44fbc63dc/data"
@@ -135,11 +160,40 @@ HIST_FIELDS = ["OBJECTID", "report_date", "start_date", "end_date", "permit_id",
 # Narrative fields never requested: the staff's and operators' running notes name the people they called, met or
 # reported to ("Reported to <name> at EM", "the ORC <name> arrived"), which neither strip_personal nor build.redact
 # catches reliably. The record keeps the coded fields (cause, weather, conveyance) and says what was left out.
-WITHHELD = {"deq_comments", "dwr_em_43_comments", "dwr_resolution_5d", "resolution", "volume_determined"}
+WITHHELD = {"deq_comments", "dwr_em_43_comments", "dwr_resolution_5d", "resolution", "volume_determined",
+            "latest_comments"}
 WITHHELD_NOTE = ("DWR's and the operator's free-text comments and resolution notes are not reproduced here (they name "
                  "staff and residents); the source record has them.")
 DATE_FIELDS = ("dwr_report_date", "dwr_start_date", "dwr_end_date", "dwr_start_date_5d", "dwr_end_date_5d",
-               "report_date", "start_date", "end_date")
+               "report_date", "start_date", "end_date", "CreationDate", "EditDate")
+# The Survey123 results layer (SURVEY_LAYER). Its description lists 42 fields; only these are ever requested. Never
+# requested: owner (a few private systems are an individual's name), submitter_name, submitter, submitter_id,
+# reporter, reporter_id, em_43, Creator, Editor (staff and reporter names and ids), latest_comments and resolution
+# (narrative; see WITHHELD).
+SURVEY_KEY = ("globalid", "incident_number", "permit_with_name", "start_date")
+SURVEY_FIELDS = ["objectid", "globalid", "storm", "incident_number", "permit_with_name", "program", "region", "county",
+                 "address", "municipality", "latitude", "longitude", "report_date", "start_date", "ongoing", "end_date",
+                 "manhole", "volume", "waterbody_type", "waterbody", "waterbody_id", "unnamed_waterbody",
+                 "volume_waterbody", "conveyance", "fish_kill_number", "cause", "five_day", "weather", "CreationDate",
+                 "EditDate"]
+# Survey123 name -> the 2026 layer's name, by alias and values (checked 2026-11-16 against 446 records of the 2026
+# layer with the same facility and start, and the 76 incidents of 2026 in the history layer: same BIMS incident
+# number, start and facility). The layer has one start, one end and one volume (no separate 5-day report times).
+# Not mapped (kept in raw under their own names only): storm, manhole, waterbody_type (used for reached water, below),
+# waterbody_id (a BIMS id, not DWR's stream index), cause, weather, five_day, CreationDate (a bulk load of
+# 2026-11-01 for the older rows, so not a report time), EditDate. -1 in volume or volume_waterbody is an unfilled
+# value and is never read as gallons (gallons() takes no negative).
+SURVEY_MAP = {"incident_number": "dwr_incident_number", "permit_with_name": "dwr_permit_with_name",
+              "program": "deq_program", "region": "dwr_regional_office", "county": "deq_county",
+              "address": "deq_address", "municipality": "deq_municipality", "latitude": "deq_latitude",
+              "longitude": "deq_longitude", "report_date": "dwr_report_date", "start_date": "dwr_start_date",
+              "ongoing": "dwr_ongoing", "end_date": "dwr_end_date", "volume": "dwr_volume",
+              "waterbody": "dwr_waterbody", "unnamed_waterbody": "dwr_unlisted_waterbody",
+              "volume_waterbody": "dwr_volume_waterbody", "conveyance": "dwr_conveyance",
+              "fish_kill_number": "dwr_fish_kill_number"}
+# rows of the Survey123 layer that start before this are the history layer's (all 2,811 were, by incident number,
+# on 2026-11-16); one the history events file does not hold is kept
+SURVEY_FROM = datetime(2026, 1, 1, tzinfo=TZ)
 # a public body as owner: kept by name; anything else (a company, an association, a person) is never named
 PUBLIC_OWNER = re.compile(
     r"^(city|town|village|county)\s+of\b|\b(county|city|town|village)$|\bcounty\b|\bauthority\b|\bdistrict\b|"
@@ -292,7 +346,7 @@ def year_layers(sess: requests.Session) -> list[str]:
     for url in viewer_layers(sess):
         if url not in found:
             found.append(url)
-    return found or [LAYER]
+    return found or [SURVEY_LAYER]
 
 
 def viewer_layers(sess: requests.Session) -> list[str]:
@@ -349,10 +403,14 @@ def layer_fields(feats: list[dict], doc: dict) -> set[str]:
 
 
 def layer_meta(sess: requests.Session, url: str) -> dict:
+    """The layer's description (no rows): name, last data edit and field names; unavailable when ArcGIS says the item
+    does not exist or is not public."""
     try:
         r = sess.get(url, params={"f": "json"}, timeout=(15, 60))
         r.raise_for_status()
         d = r.json()
+        if isinstance(d.get("error"), dict):
+            return {"error": f"{url}: {d['error'].get('message')}", "unavailable": unavailable(d["error"])}
         e = d.get("editingInfo") or {}
         return {"name": d.get("name"), "data_last_edit": iso(local(e.get("dataLastEditDate"))),
                 "fields": [f.get("name") for f in d.get("fields") or []]}
@@ -372,9 +430,7 @@ def query_layer(sess: requests.Session, url: str, fields: list[str], oid: str) -
         if "error" in d:
             if unavailable(d["error"]):
                 raise LayerUnavailable(f"{url}: {d['error'].get('message')}")
-            # a new year's layer with other field names: ask for every field rather than fail
-            if fields != ["*"]:
-                return query_layer(sess, url, ["*"], oid)
+            # never ask for every field: the Survey123 layers hold reporters' and staff names
             raise RuntimeError(f"ArcGIS error: {d['error']}")
         pages.append(d)
         got = d.get("features") or []
@@ -385,6 +441,51 @@ def query_layer(sess: requests.Session, url: str, fields: list[str], oid: str) -
     return [f.get("attributes") or {} for f in feats], {"layer": url, "pages": pages}
 
 
+SCHEMAS = {"2026": (KEY_FIELDS, FIELDS, "objectid"), "survey123": (SURVEY_KEY, SURVEY_FIELDS, "objectid")}
+
+
+GENERIC = {"dwr", "deq", "5d", "date", "with", "name", "number", "id", "the", "of"}
+
+
+def _tokens(name: str) -> set[str]:
+    return {t for t in re.split(r"[^a-z0-9]+", name.lower()) if t and t not in GENERIC}
+
+
+def lookalikes(missing, have) -> list[str]:
+    """The layer's fields whose names resemble the missing ones: a shared word (dwr_/deq_, _5d, date, name, number
+    ignored) or a close spelling."""
+    out = []
+    for m in missing:
+        mt = _tokens(m)
+        hits = [h for h in have if mt & _tokens(h)]
+        hits += difflib.get_close_matches(m.lower(), [h.lower() for h in have], n=3, cutoff=0.75)
+        for h in hits:
+            h = next((x for x in have if x.lower() == h.lower()), h)
+            if h not in out:
+                out.append(h)
+    return out
+
+
+def layer_schema(fields: list[str] | set[str]) -> tuple[str | None, str | None]:
+    """(schema, None) when the layer's field list holds every key field of a known schema, else (None, why): each
+    known schema's missing fields and the layer's fields that look like them. Never a guessed mapping."""
+    fields = sorted(f for f in fields if f)
+    have = {f.lower() for f in fields}
+    if not have:
+        return None, "field list not read; the layer needs a field mapping before its rows are read"
+    gaps = []
+    for name, (key, _, _) in SCHEMAS.items():
+        missing = [k for k in key if k.lower() not in have]
+        if not missing:
+            return name, None
+        gaps.append((name, missing))
+    like = lookalikes([m for _, ms in gaps for m in ms], fields)
+    return None, ("; ".join(f"fields {', '.join(ms)} absent (the {n} layer's names)" for n, ms in gaps) + "; "
+                  + (f"the layer has {', '.join(like)}, which look like them; " if like else
+                     "no field of the layer looks like them; ")
+                  + "the layer needs a field mapping")
+
+
 def safe(a: dict, fields: list[str]) -> dict:
     """Only the fields this module asks for (a layer that answered every field keeps no others)."""
     want = {f.lower() for f in fields}
@@ -393,21 +494,56 @@ def safe(a: dict, fields: list[str]) -> dict:
 
 # ---------------------------------------------------------------- this year's layers
 
+def is_survey(a: dict) -> bool:
+    """A row of the Survey123 results layer (its own field names) rather than the 2026 layer's."""
+    return "dwr_start_date" not in a and "start_date" in a and "permit_with_name" in a
+
+
+def incident(r: dict) -> str:
+    """The BIMS incident number of a record (either layer's field name)."""
+    raw = r.get("raw") or {}
+    return clean(raw.get("dwr_incident_number") or raw.get("incident_number"))
+
+
+def survey_canonical(a: dict) -> tuple[dict, str]:
+    """A Survey123 row under the 2026 layer's field names (SURVEY_MAP) and how reached water was read. Reached water:
+    waterbody_type "Named Waterbody" or "Unnamed Waterbody", or gallons to water above 0, is Yes (12 rows on 2026-11-16
+    say "Not Impacted" with gallons to water: the cautious reading); "Not Impacted" with none is No; else unknown."""
+    c = {SURVEY_MAP.get(k, k): v for k, v in a.items()}
+    wt = clean(a.get("waterbody_type")).lower()
+    vw = gallons(a.get("volume_waterbody"))
+    if wt in ("named waterbody", "unnamed waterbody") or (vw or 0) > 0:
+        c["dwr_reached_water"] = "Yes"
+    elif wt == "not impacted":
+        c["dwr_reached_water"] = "No"
+    else:
+        c["dwr_reached_water"] = None
+    basis = (f"From waterbody_type ({clean(a.get('waterbody_type')) or 'blank'}) and volume_waterbody "
+             f"({'blank' if a.get('volume_waterbody') is None else a.get('volume_waterbody')}): a water named or "
+             "gallons to water above 0 is Yes.")
+    return c, basis
+
+
 def build_record(a: dict, layer: str, fetched_at: str, prev: dict | None, permits: dict[str, str]) -> dict:
     gid = clean(a.get("globalid")).strip("{}").lower()
+    survey = is_survey(a)
+    out = ",".join(SURVEY_FIELDS) if survey else "*"     # a public link never asks the Survey123 layer for names
     base = dict(source_id=SOURCE_ID, source_record_id=gid, fetched_at=fetched_at,
-                source_url=f"{layer}/query?where=globalid%3D%27{gid}%27&outFields=*&f=json")
-    raw = safe(a, FIELDS)
+                source_url=f"{layer}/query?where=globalid%3D%27{gid}%27&outFields={out}&f=json")
+    raw = safe(a, SURVEY_FIELDS if survey else FIELDS)
     raw["_layer"] = layer
     raw["_withheld"] = WITHHELD_NOTE
     try:
-        return _record(a, base, raw, prev, permits)
+        if survey:
+            a, raw["_reached_water_basis"] = survey_canonical(a)
+            raw["_field_map"] = "the Survey123 layer's fields read as the 2026 layer's (ingest/nc_dwr_sso.py SURVEY_MAP)"
+        return _record(a, base, raw, prev, permits, survey)
     except Exception as e:  # noqa: BLE001 - never drop a record
         return event(**base, event_type="unknown", status="unknown", raw=raw, authority=AUTHORITY,
                      parse_error=f"{type(e).__name__}: {e}")
 
 
-def _record(a: dict, base: dict, raw: dict, prev: dict | None, permits: dict[str, str]) -> dict:
+def _record(a: dict, base: dict, raw: dict, prev: dict | None, permits: dict[str, str], survey: bool = False) -> dict:
     problems = []
     raw["_decoded_times"] = decoded(a)
     raw["_time_basis"] = TIME_BASIS
@@ -425,18 +561,22 @@ def _record(a: dict, base: dict, raw: dict, prev: dict | None, permits: dict[str
         used.append("start from the " + ("5-day report" if start == s5 and start != s24 else "24-hour report"))
     if end is not None:
         used.append("end from the " + ("5-day report" if end == e5 and end != e24 else "24-hour report"))
-    raw["_times_basis"] = ("The earlier start and the later end of DWR's 24-hour report and the operator's 5-day "
+    raw["_times_basis"] = ("DWR's start and end (this layer keeps one of each; no separate 5-day report times)."
+                           if survey else
+                           "The earlier start and the later end of DWR's 24-hour report and the operator's 5-day "
                            "report: " + ("; ".join(used) or "neither gives a time") + ".")
     ongoing = clean(a.get("dwr_ongoing")).lower() == "yes"
     if end is not None:
         status, ended_at = "ended", iso(end)
         if ongoing:
-            raw["_ongoing_flag_with_end"] = "dwr_ongoing says Yes; the 5-day report gives an end"
+            raw["_ongoing_flag_with_end"] = ("ongoing says Yes; the record gives an end" if survey else
+                                             "dwr_ongoing says Yes; the 5-day report gives an end")
     elif ongoing:
         status, ended_at = "ongoing", None
     else:
         status, ended_at = "ended", None
-        raw["_end_basis"] = "dwr_ongoing says No, but neither report gives an end time"
+        raw["_end_basis"] = ("ongoing says No, but the record gives no end time" if survey else
+                             "dwr_ongoing says No, but neither report gives an end time")
 
     r24, r5 = yes_no(a.get("dwr_reached_water")), yes_no(a.get("dwr_reached_waterbody_5d"))
     raw["reached_water"] = True if (r24 or r5) else (False if False in (r24, r5) else None)
@@ -491,21 +631,44 @@ def _record(a: dict, base: dict, raw: dict, prev: dict | None, permits: dict[str
     )
 
 
+def history_incidents() -> set[str] | None:
+    """The incident numbers of the history events file (nc-dwr-sso-2022-2025), or None when it cannot be read."""
+    d = read_json(EVENTS_DIR / f"{HIST_ID}.json", None)
+    if not isinstance(d, dict) or not d.get("records"):
+        return None
+    return {incident(r) for r in d["records"] if incident(r)}
+
+
+def before_2026(a: dict) -> bool:
+    t = local(a.get("start_date"))
+    return t is not None and t < SURVEY_FROM
+
+
 def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict],
-          permits: dict[str, str] | None = None) -> tuple[list[dict], dict]:
-    """rows: (layer url, attributes). Returns the records (earlier records that left the layers kept) and stats."""
+          permits: dict[str, str] | None = None, hist_incidents: set[str] | None = None) -> tuple[list[dict], dict]:
+    """rows: (layer url, attributes). Returns the records (earlier records that left the layers kept) and stats.
+    A Survey123 row that starts before 2026 is the history layer's (nc-dwr-sso-2022-2025) and is left to it, unless
+    hist_incidents (the history file's incident numbers) is given and lacks its incident number."""
     permits = permit_index() if permits is None else permits
     prev = {r["event_id"]: r for r in prev_records}
-    records, seen = [], set()
+    records, seen, left_to_history, kept_early = [], set(), 0, 0
     for layer, a in rows:
         gid = clean(a.get("globalid")).strip("{}").lower()
         if not gid:
             continue
+        if is_survey(a) and before_2026(a):
+            if hist_incidents is None or clean(a.get("incident_number")) in hist_incidents:
+                left_to_history += 1
+                continue
+            kept_early += 1
         eid = f"{SOURCE_ID}:{gid}"
         if eid in seen:
             continue
         seen.add(eid)
-        records.append(build_record(a, layer, fetched_at, prev.get(eid), permits))
+        rec = build_record(a, layer, fetched_at, prev.get(eid), permits)
+        if is_survey(a) and before_2026(a):
+            rec["raw"]["_kept_basis"] = "starts before 2026, but the history layer does not hold its incident number"
+        records.append(rec)
     kept = 0
     for eid, r in prev.items():
         if eid in seen:
@@ -518,7 +681,8 @@ def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict
         kept += 1
     dups = link_incidents(records, seen)
     records.sort(key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r["event_id"]), reverse=True)
-    stats = {"layer_rows": len(seen), "kept_from_earlier_runs": kept, "duplicates": dups,
+    stats = {"layer_rows": len(seen), "left_to_history_layer": left_to_history,
+             "before_2026_not_in_history": kept_early, "kept_from_earlier_runs": kept, "duplicates": dups,
              "by_status": dict(Counter(r["status"] for r in records)),
              "by_type": dict(Counter(r["event_type"] for r in records)),
              "reached_water": dict(Counter(str((r.get("raw") or {}).get("reached_water")) for r in records)),
@@ -535,14 +699,17 @@ def link_incidents(records: list[dict], seen: set[str]) -> int:
     it. The one standing is in the layers on this run, from the latest year's layer, and seen last. Links are
     recomputed every run. Returns the number of duplicates."""
     def year(r):
-        m = re.search(r"since_Jan_(\d{4})", str((r.get("raw") or {}).get("_layer") or ""))
+        layer = str((r.get("raw") or {}).get("_layer") or "")
+        if layer == SURVEY_LAYER:
+            return 10_000                       # the layer DWR's Tracking Map shows since November 2026
+        m = re.search(r"since_Jan_(\d{4})", layer)
         return int(m.group(1)) if m else 0
     groups: dict[str, list[dict]] = {}
     for r in records:
         raw = r.setdefault("raw", {})
         if raw.pop("_duplicate_basis", None) is not None:
             r["duplicate_of"] = None
-        inc = clean(raw.get("dwr_incident_number"))
+        inc = incident(r)
         if inc:
             groups.setdefault(inc, []).append(r)
     n = 0
@@ -629,7 +796,7 @@ def build_history(rows: list[dict], fetched_at: str, current: list[dict],
     permits = permit_index() if permits is None else permits
     by_inc = {}
     for r in current:
-        inc = clean((r.get("raw") or {}).get("dwr_incident_number"))
+        inc = incident(r)
         if inc and not r.get("duplicate_of"):
             by_inc.setdefault(inc, r["event_id"])
     counts = Counter(clean(a.get("incident_number")) for a in rows)
@@ -685,21 +852,33 @@ def main(argv=None) -> int:
                 if not in_org(url):
                     layers_meta[url] = {"error": "not a layer of DWR's ArcGIS organisation; not read"}
                     continue
+                # the layer's field list first (no rows): only a known schema is read, and only its named fields
+                lm = layer_meta(sess, url)
+                if lm.get("unavailable"):
+                    gone.append(url)
+                    layers_meta[url] = {"error": lm["error"], "unavailable": True}
+                    continue
+                schema, why = layer_schema(lm.get("fields") or [])
+                if not schema:   # a republished layer with other field names: never guess the mapping
+                    layers_meta[url] = {"error": why, "fields": lm.get("fields") or [],
+                                        **({"meta_error": lm["error"]} if lm.get("error") else {})}
+                    continue
+                key, fields, oid = SCHEMAS[schema]
                 try:
-                    feats, doc = query_layer(sess, url, FIELDS, "objectid")
+                    feats, doc = query_layer(sess, url, fields, oid)
                 except LayerUnavailable as e:
                     gone.append(url)
                     layers_meta[url] = {"error": str(e), "unavailable": True}
                     continue
                 have = layer_fields(feats, doc)
-                missing = [k for k in KEY_FIELDS if k not in have]
-                if missing:   # a republished layer with other field names: never guess the mapping
-                    layers_meta[url] = {"error": f"fields {', '.join(missing)} absent; the layer needs a field mapping",
-                                        "rows": len(feats)}
+                missing = [k for k in key if k not in have]
+                if missing:   # the rows lack a key field the description listed: not read
+                    layers_meta[url] = {"error": f"fields {', '.join(missing)} absent from the rows; the layer needs "
+                                                 "a field mapping", "rows": len(feats)}
                     continue
                 rows += [(url, a) for a in feats]
                 raw_docs.append(doc)
-                layers_meta[url] = {**layer_meta(sess, url), "rows": len(feats)}
+                layers_meta[url] = {**lm, "schema": schema, "rows": len(feats)}
             if not raw_docs:
                 prev_meta = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("meta") or {}
                 since = prev_meta.get("unavailable_since") or fetched_at
@@ -728,9 +907,11 @@ def main(argv=None) -> int:
         write_json(STATE_FILE, state)
     permits = permit_index()
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
-    records, stats = build(rows, fetched_at, prev, permits)
+    records, stats = build(rows, fetched_at, prev, permits, history_incidents())
     records = redact.redact_events(records)
     newest = max((r.get("reported_at") or "" for r in records), default="") or None
+    stats["newest_start"] = max((r.get("started_at") or "" for r in records if not r.get("duplicate_of")),
+                                default="") or None
     meta = {**stats, "layers": layers_meta or {LAYER: {"rows": len(rows), "from_file": True}},
             "newest_report": newest, "raw_path": raw_path, "time_basis": TIME_BASIS, "page": PAGE_URL,
             "credit": "NC DEQ Division of Water Resources, Sanitary Sewer Overflow Tracking Map",
