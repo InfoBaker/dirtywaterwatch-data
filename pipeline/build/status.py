@@ -334,6 +334,14 @@ def precedence(category, status) -> int:
     return 5
 
 
+def _also_categories(ev) -> dict:
+    """A second category the record's source names for the same advisory (Wisconsin's Beach Health reason naming both
+    E. coli and algae, ingest/wi_dnr_beach_health.py raw._also_categories): carried on its intervals and its one
+    marker; keyed on the record's field, so every other record's output is unchanged."""
+    also = (ev.get("raw") or {}).get("_also_categories")
+    return {"also_categories": [c for c in also if c in CATEGORIES]} if isinstance(also, list) and also else {}
+
+
 def category_of(event_type) -> str:
     """sewage (cso, sso, bypass, blended, plant_bypass, unknown, annual totals, the rain-likely caution), beach
     (beach advisories and closures, shellfish closures, rainfall advisories) or bloom (algal bloom advisories)."""
@@ -2959,6 +2967,7 @@ def _iv(ev, start, end, rule, red=None, yellow=None):
     color, label = RULES[rule]
     return {"start": start, "end": end, "color": color, "rule": rule, "label": label,
             "category": category_of(ev.get("event_type")),
+            **_also_categories(ev),
             "rule_applied": red if rule in ("advisory_active", "rain_advisory", "advisory_unconfirmed",
                                             "not_reconfirmed") else None,
             "event_id": ev["event_id"], "source_id": ev.get("source_id"), "fixture": bool(ev.get("_fixture")),
@@ -4532,7 +4541,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 col, act = status_at(ivs, now)
                 top = max(act, key=lambda iv: RANK[iv["color"]]) if act else None
                 points.append({"event_id": eid, "water_slugs": list(pick), "status": col,
-                               "category": category_of(ev.get("event_type")),
+                               "category": category_of(ev.get("event_type")), **_also_categories(ev),
                                "rule": top["rule"] if top else None, "label": top["label"] if top else None,
                                "short": short_reason(top, ev) if top else None,
                                "from": iso(min(iv["start"] for iv in colouring)),
@@ -4572,7 +4581,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                                   "basis": "a further part of the authority's own drawn area or "
                                                            "line, by its own point",
                                                   **({"piece": g_k} if g_k else {})}} if g_pt else {}),
-                               "category": category_of(ev.get("event_type")),
+                               "category": category_of(ev.get("event_type")), **_also_categories(ev),
                                "rule": top["rule"] if top else None, "label": top["label"] if top else None,
                                "short": short_reason(top, ev) if top else None,
                                "from": iso(min(iv["start"] for iv in colouring)),

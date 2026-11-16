@@ -478,7 +478,7 @@
    "arcgis",
    "html"
   ],
-  "access_detail": "Public MapServer layer 1, no token: BEACH_ACTION (Advisory, Closed, End) is the report's Status, STATUS (E. coli, Algae, Closed for season) its Reason, ISSUED its Date of Advisory as text (DD-MON-YY - [DD-MON-YY]); MAP_STATUS is the map symbol by sample age (No Data Available on all 441 on 2026-11-16). The report page https://apps.dnr.wi.gov/beachhealth/ (Beach Name | Status | Reason | Date of Advisory | Nearest Town) prints the same statuses and dates for 453 beaches, 14 of them without a point on the layer. Both read by GitHub's runner, where the pipeline runs, on 2026-11-16 (runs 43788047052 and 43788371768).",
+  "access_detail": "Public MapServer layer 1, no token: BEACH_ACTION (Advisory, Closed, End) is the report's Status, STATUS (E. coli, Algae, Closed for season) its Reason, ISSUED its Date of Advisory as text (DD-MON-YY - [DD-MON-YY]); MAP_STATUS is the map symbol by sample age (No Data Available on all 441 on 2026-11-16). The report page https://apps.dnr.wi.gov/beachhealth/ (Beach Name | Status | Reason | Date of Advisory | Nearest Town) prints the same statuses and dates for 453 beaches, 12 of them (by name) without a point on the layer; an advisory at one of those is listed with its beach and nearest town, with no place on the map. A lack of recent sample data (MAP_STATUS) does not cancel an advisory or closure the Department lists. Both read by GitHub's runner, where the pipeline runs, on 2026-11-16 (runs 43788047052 and 43788371768).",
   "machine_readable": true,
   "sample_record": {
    "DNR_SWIMS_ID": "10012681",
@@ -517,7 +517,7 @@
   "license": "None stated.",
   "legal_basis": "BEACH Act; NR 102 recreational criteria",
   "status": "used",
-  "status_reason": "Read by the wi-dnr-beach-health feed: the advisories and closures the Department lists, an algae reason as a bloom, each at its beach. On 2026-11-16 GitHub's runner read 441 beaches: one algae advisory (Gile Flowage Beach, from September 17, 2026), one algae closure (Lake Kegonsa State Park Beach, from September 11) and 439 closed for the season.",
+  "status_reason": "Read by the wi-dnr-beach-health feed (the layer for points and status, the report table for the beaches the layer has no point for): the advisories and closures the Department lists, an algae reason as a bloom, each at its beach. On 2026-11-16 GitHub's runner read 441 beaches: one algae advisory (Gile Flowage Beach, from September 17, 2026), one algae closure (Lake Kegonsa State Park Beach, from September 11) and 439 closed for the season.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": ""

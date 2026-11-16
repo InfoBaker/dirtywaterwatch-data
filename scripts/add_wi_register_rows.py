@@ -211,15 +211,17 @@ AGENCY = [
     {"id": "wi-dnr-beach-health", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (Wisconsin Beach Health)", "channel_kind": "state_alert_page",
      "urls": ["https://apps.dnr.wi.gov/beachhealth/"], "method": "html", "legal_basis": None,
-     "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "publishes": "status",
-     "records": False, "availability_only": True, "every_hours": 24, "noun": "Voluntary page",
+     "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "feed_ingested",
+     "feed_source_id": "wi-dnr-beach-health", "publishes": "status", "noun": "Voluntary page", "checked": RUNNER_READ,
      "note": ("The DNR's beach report (Beach Name, Status, Reason, Date of Advisory, Nearest Town): advisories and "
               "closures with their reason (E. coli, algae) and dates, Great Lakes beaches under the BEACH Act and the "
               "inland beaches local health departments choose to report, in season (Memorial Day to Labor Day). Read "
               "by GitHub's runner on 2026-11-16: 453 beaches, one algae advisory (Gile Flowage Beach, September 17, "
               "2026) and one algae closure (Lake Kegonsa State Park Beach, September 11), the rest closed for the "
-              "season. The same statuses, reasons and dates are on the beach map layer, which the wi-dnr-beach-health "
-              "feed reads; the page adds the nearest town and 14 beaches the layer gives no point for." + NOT_WATCHED_TEXT),
+              "season. The same statuses, reasons and dates are on the beach map layer; the page adds the nearest "
+              "town and 12 beaches the layer gives no point for (by name). The wi-dnr-beach-health feed reads the layer for "
+              "points and status and this table for those 12 beaches: an advisory there is listed with its beach and "
+              "nearest town, with no place on the map."),
      "sources": ["wi-wdnr-beach-health"]},
     {"id": "wi-dnr-beach-layer", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (beach monitoring map layer)", "channel_kind": "feed",

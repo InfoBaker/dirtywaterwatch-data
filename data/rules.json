@@ -487,7 +487,8 @@
     "ok-nps-chickasaw-bacteria",
     "ar-deq-hab-advisories",
     "id-deq-cyanohab-risk-table",
-    "de-dnrec-recreational-water"
+    "de-dnrec-recreational-water",
+    "wi-dnr-beach-health"
    ],
    "flag": "_agency_label_only",
    "hours": 72,
