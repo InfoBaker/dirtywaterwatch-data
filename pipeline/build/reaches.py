@@ -53,10 +53,11 @@ traced again first; one whose water or name changed is updated without a request
 Budget (the hourly refresh runs this with no arguments): NLDI answers 3600 requests an hour and,
 within them, 1000 navigation requests an hour (X-RateLimit headers, 2026-11-03), one request a
 second here. A run traces in this order: recent discharges with a point but no reach, traces the
-tidal-river rule wants again (owner, 2026-11-16: ahead of the first traces), outfalls never traced
-(CSO, then plant), failed traces due again, outfalls traced more than 30 days ago (oldest first); it
-stops at --requests NLDI navigation requests (default 250), --seconds (default 400), or
-after 8 traces in a row fail on a service error, and leaves the rest for the next run; when NLDI's
+tidal-river rule wants again (owner, 2026-11-16: ahead of the first traces), outfalls never traced,
+failed traces due again, outfalls traced more than 30 days ago (in each group CSO, then plant; the
+last two oldest first within those); it stops at --requests NLDI navigation requests (default 250),
+--seconds (default 400), or after 8 traces in a row fail on a service error, and leaves the rest for
+the next run; when NLDI's
 allowance left this hour (shared with anything else on this machine) falls under 100 it goes on with
 the NHDPlus walk. A rate-limited request is never cached as a failure. Only one run traces at a time
 (data/build/reaches.lock); another run refreshes flows only.
@@ -1289,11 +1290,12 @@ def tidal_due(d: dict | None, tidal_river: bool, now: datetime) -> bool:
 def plan(cands: list[dict], cached: dict[str, dict], now: datetime,
          tidal_river: bool = False) -> tuple[list[dict], list[tuple[dict, dict]]]:
     """(the outfalls to trace in order, [(candidate, cached record)] whose fields changed but need no trace).
-    Order: event points, traces the tidal-river rule wants again (CSO, then plant), never traced or moved (CSO,
-    then plant), failures due again (oldest first), traces older than CACHE_DAYS (oldest first). tidal_river
-    (reach.tidal_river on): a trace cut at "tidal" before the rule is due at once, fresh or stale, ahead of the
-    first traces (owner, 2026-11-16: a river that stops at the head of tide is redone before an outfall that has
-    waited for its first trace)."""
+    Order: event points, traces the tidal-river rule wants again, never traced or moved, failures due again,
+    traces older than CACHE_DAYS; within each, CSO then plant, and failures and old traces oldest first within
+    those. tidal_river (reach.tidal_river on): a trace cut at "tidal" before the rule is due at once, fresh or
+    stale, ahead of the first traces (owner, 2026-11-16: a river that stops at the head of tide is redone before
+    an outfall that has waited for its first trace). With the rule off the order is the earlier one: a record
+    marked by an earlier version of the rule is due with the old traces."""
     todo, touch = [], []
     for c in cands:
         d = cached.get(c["key"])
@@ -1311,12 +1313,16 @@ def plan(cands: list[dict], cached: dict[str, dict], now: datetime,
         if not d or moved(c, d) or d.get("model") == SH.MODEL:     # a shoreline stretch whose water is now a river
             todo.append(((2, kind, ""), c))
             continue
-        if tidal_due(d, tidal_river, now):        # before the freshness test: a stale trace cut at tidal is one too
+        due_tidal = tidal_due(d, tidal_river, now)
+        if due_tidal and tidal_river:             # before the freshness test: a stale trace cut at tidal is one too
             todo.append(((1, kind, ""), c))
             continue
         if not fresh_rec(d, now):
             tier = 3 if d.get("cut_reason") == "no_trace" else 4
             todo.append(((tier, kind, d.get("fetched_at") or ""), c))
+            continue
+        if due_tidal:                             # rule off, a mark of an earlier version: with the stale traces
+            todo.append(((4, kind, ""), c))
             continue
         if any(c.get(f) != d.get(f) for f in META_FIELDS if f in c):
             touch.append((c, d))

@@ -160,6 +160,16 @@ def test_plan_puts_tidal_retraces_ahead_of_first_traces_when_the_rule_is_on():
     assert touch == []
     off, _ = R.plan(cs, cached, NOW)
     assert [c["key"] for c in off] == ["pt-1", "a-new", "i-tidal-moved", "f-failed", "d-tidal-stale", "e-stale"]
+    # a mark of an earlier version of the rule is due on or off: with the rule off it stays behind the first
+    # traces, with the old traces (first among them when fresh, by its age when old), as before the change
+    cs2 = [c for c in cs if c["key"] in ("a-new", "e-stale")] + [
+        {**cs[0], "key": k, "outfall": k} for k in ("j-early-mark", "k-early-mark-old")]
+    cached2 = {"e-stale": cached["e-stale"],
+               "j-early-mark": rec("j-early-mark", recent, cut="tidal", tidal_river=1, **same),
+               "k-early-mark-old": rec("k-early-mark-old", NOW - timedelta(days=35), cut="tidal", tidal_river=1, **same)}
+    assert [c["key"] for c in R.plan(cs2, cached2, NOW)[0]] == ["a-new", "j-early-mark", "k-early-mark-old", "e-stale"]
+    assert [c["key"] for c in R.plan(cs2, cached2, NOW, tidal_river=True)[0]] == [
+        "j-early-mark", "k-early-mark-old", "a-new", "e-stale"]
 
 
 def test_a_default_run_stays_far_under_the_navigation_allowance():
