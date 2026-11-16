@@ -3327,7 +3327,60 @@ HAND: list[dict] = [
              "miss Attalla. The USGS NHD high-resolution flowlines carry the whole creek under that GNIS id (38.7 km in "
              "the box around Attalla alone), from Valley Head through Fort Payne to the Coosa River at Gadsden; this "
              "record replaces the fragmentary one."),
+    # California, the Tijuana River valley (registry fix 2026-11-16; research/ca/tijuana-water-records-proposed.json):
+    # the San Diego Water Board's table of USIBWC spill and transboundary flow events names two collector canyons.
+    # Both records are the United States reach only: the flowlines below lie north of the international border, and
+    # build_hr cuts them to California. The Tijuana River is NHDPlus V2.1's GNIS 255756 cut at the border (within).
+    # Built by a --names run on research/ca/receiving-waters-tijuana.json (names_file: that run builds these three
+    # only) and by every other California run as the state's other hand records are.
+    dict(name="Tijuana River", state="CA", kind="river", source="nhd", gnis_id="255756", supersede=True,
+         names_file="research/ca/receiving-waters-tijuana.json",
+         within=(-117.14, 32.53, -117.039, 32.58),
+         within_why="NHDPlus V2.1 gives GNIS 255756 to the river in Mexico as well, and the cut to the state keeps "
+                    "water outside every state outline, so the NHD record held 28 km of the river in Mexico; the "
+                    "box keeps the United States reach, from the international border at San Ysidro (32.5417 N "
+                    "117.0392 W) to the Pacific (none of it in Mexico by the Census TIGER/Line 2023 boundary), and "
+                    "leaves out 4.3 km near Tecate where NHDPlus draws the river along the border",
+         why="the San Diego Water Board's table of USIBWC spill and transboundary flow events names the Tijuana River "
+             "for its river transboundary flow rows; the reports' names pass finds NHDPlus V2.1 GNIS 255756, the "
+             "only Tijuana River in California, and this record is its United States reach only."),
+    dict(name="Smuggler Gulch", state="CA", kind="stream", source="nhd", service="hr",
+         aliases=["Smuggler's Gulch", "Smugglers Gulch"], names_file="research/ca/receiving-waters-tijuana.json",
+         pids=["{3FC2B144-95AD-41A1-9BF0-9B164365E488}", "{DA636DF4-FD7E-418F-B0BA-26CD92C5B7DF}"],
+         box=(-117.095, 32.535, -117.08, 32.556),
+         why="the San Diego Water Board's table of USIBWC spill and transboundary flow events gives Smuggler's Gulch "
+             "as the discharge location of five rows (Spill Events and dry weather canyon collector flows from "
+             "Mexico). USGS GNIS lists Smuggler Gulch (feature 249613) as a valley, primary point 32.54432 N "
+             "117.08835 W; no NHD flowline carries the name. This record is the two unnamed NHD high-resolution "
+             "flowlines (reach codes 18070305039148 and 18070305039152) down the gulch, one of them 2 m from the GNIS "
+             "point: it begins at the international border (32.5398 N 117.0869 W) and ends at the Tijuana River's "
+             "southern channel (32.5521 N 117.0892 W), 1.4 km; the gulch's part in Mexico is not a record."),
+    dict(name="Goat Canyon", state="CA", kind="stream", source="nhd", service="hr",
+         names_file="research/ca/receiving-waters-tijuana.json",
+         pids=["{E35C89F4-B6C0-42AE-9B77-E36CA740C8C0}", "27056469", "{F1E354F8-FCF6-4D91-BE82-FA8217F4C8F6}"],
+         box=(-117.125, 32.533, -117.09, 32.545),
+         why="the San Diego Water Board's table of USIBWC spill and transboundary flow events gives Goat Canyon as the "
+             "discharge location of four rows (two at the Goat Canyon Pump Station). USGS GNIS lists Goat Canyon "
+             "(feature 242756) as a valley, points 32.54125 N 117.10703 W and 32.53697 N 117.09966 W; no NHD flowline "
+             "carries the name. This record is the unnamed NHD high-resolution reach 18070305000444 (three flowlines, "
+             "2.7 km), which passes 2 m from the second GNIS point where the canyon crosses the international border "
+             "(32.5369 N 117.0997 W) and runs west to the Tijuana River Estuary's southern arm near Border Field "
+             "(32.5371 N 117.1201 W); the canyon's part in Mexico is not a record."),
 ]
+
+
+def hand_scope(names_file) -> list[dict]:
+    """The HAND specs a --names run on names_file builds when some spec names that file (names_file, relative to the
+    repository root): those only, so a run on a file kept for one place (California's Tijuana River valley,
+    2026-11-16) does not rebuild the state's other hand records with none of their names. [] for every other file
+    and run: they build every hand record of their states, these included, as before."""
+    if not names_file:
+        return []
+    try:
+        p = Path(names_file).resolve()
+    except OSError:
+        return []
+    return [h for h in HAND if h.get("names_file") and (ROOT / h["names_file"]).resolve() == p]
 
 
 def superseded_keys() -> set[tuple]:
@@ -3934,9 +3987,12 @@ class Run:
         for t, row in targets:
             for n in [t["name"] or ""] + list(t["names"]):
                 by_key[(t["state"], compact(n))].append((t, row))
+        scoped = hand_scope(getattr(self, "names_file", None))
         for spec in HAND:
             if getattr(self, "only_states", None) and spec["state"] not in self.only_states:
                 continue                # a state build rebuilds only its own states' hand records
+            if scoped and spec not in scoped:
+                continue                # a names file some hand records name builds those only (hand_scope)
             auto = [(k, r) for k, r in self.feats.items() if not r.get("_existing") and
                     k[0] != "hand" and r["state"] == spec["state"] and S.norm_name(r["name"]) == S.norm_name(spec["name"])]
             same = same_named_existing(self.existing, spec["state"], spec["name"])
@@ -5418,6 +5474,7 @@ def names_main(args) -> int:
     nhd = Nhd(http, shapes, towns)
     run = Run(nhd, shapes, towns, existing, args, http, skipped_reason)
     run.only_states, run.rows_from = {state}, REPORT_ROWS
+    run.names_file = path                  # hand_scope: a file some hand records name builds those only
     known = nhd_identities(state)
     for t, slugs in done:
         row = run.new_row(t)
@@ -5550,6 +5607,7 @@ def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason
     nhd = Nhd(http, shapes, towns)
     run = Run(nhd, shapes, towns, existing, args, http, skipped_reason)
     run.only_states, run.rows_from = {state}, REPORT_ROWS
+    run.names_file = path                  # hand_scope: a file some hand records name builds those only
     for t, slugs in done:
         row = run.new_row(t)
         row.update({"from": REPORT_ROWS, "reports": t["events"], "slugs": slugs,
@@ -5626,7 +5684,10 @@ def names_finish(args, path, meta, state, rows, targets, done, skipped_reason, e
     try:
         info = write_output(recs, out_rows, skipped_list(skipped_reason), problems, partial=True, stats=stats_out,
                             final=True, scope_states={state}, rows_from=REPORT_ROWS,
-                            stats_key="report_names_hand_only" if hand_only else "report_names")
+                            stats_key=("report_names_hand_only" if hand_only else "report_names")
+                            # a file kept for one place (hand_scope) has its own statistics: the state's full
+                            # --names build's stay
+                            + (f"_{Path(path).stem.replace('-', '_')}" if hand_scope(path) else ""))
     except WriteRefused as ex:
         print(f"\nNOT WRITTEN: {ex}")
         return 1
