@@ -521,3 +521,20 @@ def test_audit_the_two_wrong_nhd_records_are_dropped_by_hand_rulings_and_their_r
         "granite-reservoir-wy": ("dropped", "granite-springs-reservoir-wy")}
     assert targets[0]["slugs"] == ["bighorn-lake-wy"] and targets[1]["slugs"] == ["granite-springs-reservoir-wy"]
     assert "lay on" not in " ".join(targets[0]["notes"])
+
+
+def test_registry_the_two_wrong_nhd_records_are_gone_from_the_file_and_their_names_point_to_the_agencies_waters():
+    """The tidy and the names recheck run on 2026-11-16 (registry fix, job 1): data/waters-nhd.json no longer holds
+    NHD's Bighorn Reservoir (GNIS 1598179) or Granite Reservoir (GNIS 1589039), its report-name rows name Bighorn Lake
+    and Granite Springs Reservoir, and the names file says the same."""
+    doc = json.loads((ROOT / "data" / "waters-nhd.json").read_text())
+    wy = [w for w in doc["waters"] if w.get("state") == "WY"]
+    assert not [w["slug"] for w in wy if w["slug"] in ("bighorn-reservoir-wy", "granite-reservoir-wy")
+                or str(w.get("gnis_id") or "").lstrip("0") in ("1598179", "1589039")]
+    rows = {t["name"]: t["slugs"] for t in doc["targets"] if t.get("state") == "WY" and t.get("from") == "reports"}
+    assert rows["Bighorn Reservoir"] == ["bighorn-lake-wy"]
+    assert rows["Granite Reservoir"] == ["granite-springs-reservoir-wy"]
+    names = json.loads((ROOT / "research" / "wy" / "receiving-waters-missing.json").read_text())
+    held = {r["name"]: r["slugs"] for r in names["resolved"]}
+    assert held["Bighorn Reservoir"] == ["bighorn-lake-wy"] and held["Granite Reservoir"] == ["granite-springs-reservoir-wy"]
+    assert "bighorn-reservoir-wy" not in json.dumps(names) and "granite-reservoir-wy" not in json.dumps(names)
