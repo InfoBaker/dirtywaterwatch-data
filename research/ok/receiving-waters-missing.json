@@ -1,21 +1,51 @@
 {
  "about": "Water names in Oklahoma's records that data/receiving-waters-national.json does not hold for OK: the waters of the National Park Service's sampling places at Chickasaw National Recreation Area (its table read 2026-11-14, places tied to waters by the park's own description), one row per name and county, with the GNIS points of the named places. No record is open on them today (no result reached the park's threshold); they are listed so a later result is placed. EPA's overflow tables hold no Oklahoma report, and every receiving water of Oklahoma's permits is already on the national list.",
  "state": "OK",
- "waters": 4,
  "records": 0,
- "rows": [
+ "waters": 0,
+ "reports": 0,
+ "resolved_names": 4,
+ "resolved_reports": 0,
+ "build": {
+  "date": "2026-11-16",
+  "command": "python -m ingest.waters_from_nhd --names research/ok/receiving-waters-missing.json --state OK",
+  "records_built": 1,
+  "names_resolved": 4,
+  "network_requests": 2
+ },
+ "rows": [],
+ "resolved": [
+  {
+   "name": "Lake of the Arbuckles",
+   "reports": 0,
+   "slugs": [
+    "lake-of-the-arbuckles-ok"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Murray County"
+  },
+  {
+   "name": "Rock Creek",
+   "reports": 0,
+   "slugs": [
+    "rock-creek-dougherty-ok"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     34.506,
+     -96.97
+    ]
+   ],
+   "county": "Murray County"
+  },
   {
    "name": "Travertine Creek",
-   "county": "Murray County",
-   "records": 0,
-   "sources": {
-    "ok-nps-chickasaw-bacteria": 0
-   },
-   "places": [
-    "Little Niagara",
-    "Bear Falls",
-    "Panther Falls"
+   "reports": 0,
+   "slugs": [
+    "travertine-creek-ok"
    ],
+   "how": "record built from the name",
    "points": [
     [
      34.508,
@@ -30,59 +60,22 @@
      -96.966
     ]
    ],
-   "point_basis": "USGS GNIS features named by the park (The National Map geonames, Other Hydrographic Features), read 2026-11-14"
-  },
-  {
-   "name": "Rock Creek",
-   "county": "Murray County",
-   "records": 0,
-   "sources": {
-    "ok-nps-chickasaw-bacteria": 0
-   },
-   "places": [
-    "Black Sulphur Springs",
-    "40 Ft Hole"
-   ],
-   "points": [
-    [
-     34.506,
-     -96.97
-    ]
-   ],
-   "point_basis": "USGS GNIS feature Black Sulphur Springs (1101921), read 2026-11-14",
-   "note": "the national list's Rock Creeks are other waters (Le Flore and Latimer counties, and a tributary in Craig County)"
+   "county": "Murray County"
   },
   {
    "name": "Veterans Lake",
-   "county": "Murray County",
-   "records": 0,
-   "sources": {
-    "ok-nps-chickasaw-bacteria": 0
-   },
-   "places": [
-    "Veterans Lake"
+   "reports": 0,
+   "slugs": [
+    "veterans-lake-ok"
    ],
+   "how": "a water record already holds the name",
    "points": [
     [
      34.49,
      -96.983
     ]
    ],
-   "point_basis": "USGS GNIS features named by the park (The National Map geonames, Other Hydrographic Features), read 2026-11-14"
-  },
-  {
-   "name": "Lake of the Arbuckles",
-   "county": "Murray County",
-   "records": 0,
-   "sources": {
-    "ok-nps-chickasaw-bacteria": 0
-   },
-   "places": [
-    "Buckhorn Pavilion",
-    "Buckhorn Loop D",
-    "Point Day Use",
-    "Goddard Youth Camp"
-   ]
+   "county": "Murray County"
   }
  ]
 }
