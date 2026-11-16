@@ -151,7 +151,7 @@
   "license": "No terms stated on the page.",
   "legal_basis": "NPDES permits IL0028053, IL0028088, IL0028061 CSO special conditions; 40 CFR 122.38",
   "status": "watch",
-  "status_reason": "Per-outfall open and close times for Cook County since 2016, but reached only through a form, a session and a report viewer: by the standing rule on bot walls and polling forms it is not read by an automated session; the request to MWRD is a download or feed of the same table (register row il-mwrd-cso-synopsis-report).",
+  "status_reason": "Per-outfall open and close times for Cook County since 2016, but reached only through a form, a session and a report viewer: by the standing rule on polling forms it is not read by an automated session (the form page answered the pipeline's runner on 2026-11-16); the request to MWRD is a download or feed of the same table (register row il-mwrd-cso-synopsis-report).",
   "verified": "fetched",
   "checked": "2026-11-04",
   "notes": "7/4/2026 report has 24 outfall rows. The monitored set includes City of Chicago and suburban outfalls tied to TARP drop shafts."

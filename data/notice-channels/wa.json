@@ -1600,7 +1600,7 @@
    "operator_id": "wa-spokane",
    "agency": null,
    "permit": "WA0024473",
-   "checked": "2026-11-04",
+   "checked": "2026-11-16",
    "id": "wa-spokane-cso-public-notification",
    "name": "City of Spokane (Riverside Park Water Reclamation Facility and CSO system)",
    "legal_basis": "NPDES permit WA0024473: CSO public notification, one of the nine minimum controls of the federal CSO Control Policy (59 FR 18688, 1994), with WAC 173-245 for CSO reduction and reporting; permit text not read",
@@ -1612,11 +1612,11 @@
    "urls": [],
    "method": null,
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "status",
    "noun": "CSO status page",
-   "note": "Spokane's real-time CSO monitoring page (https://sewerfinder.spokanecity.org/CSOUpdate) flashes a site while an overflow is occurring or has occurred in the last 48 hours and shows its start time (search snippet). It answers 403 (Incapsula) to the project user agent (2026-11-04); not worked around. (research/wa/report.md §2.3)",
-   "barrier": "bot_wall"
+   "note": "Spokane's real-time CSO monitoring page (https://sewerfinder.spokanecity.org/CSOUpdate): a table of the monitoring sites with each one's status and the start time of an overflow occurring or in the last 48 hours. It answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. (research/wa/report.md §2.3)",
+   "barrier": "not_verified"
   },
   {
    "state": "WA",

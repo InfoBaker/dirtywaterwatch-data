@@ -16,7 +16,7 @@
     "access": [
       "csv"
     ],
-    "access_detail": "Tab-delimited text, 95 columns, ~11 MB, no auth, no bot wall on the file (the HTML map pages sit behind Incapsula). Listing page https://www.waterboards.ca.gov/water_issues/programs/sso/docs/index.php shows all files regenerated daily at about 06:00 Pacific (Last-Modified 2026-11-03 14:00 UTC). Sibling files: annualReports.txt, Enrollee_Info.txt, neworder_monthly_counts.txt, neworder_ssmps.txt, No_spill.txt, plps_spills.txt (private lateral spills), PLSD.txt. Trimmed sample: raw/ciwqs-cat1-2-3-spills-sample.json.",
+    "access_detail": "Tab-delimited text, 95 columns, ~11 MB, no auth, no bot wall on the file (the HTML map page answered the pipeline's runner on 2026-11-16). Listing page https://www.waterboards.ca.gov/water_issues/programs/sso/docs/index.php shows all files regenerated daily at about 06:00 Pacific (Last-Modified 2026-11-03 14:00 UTC). Sibling files: annualReports.txt, Enrollee_Info.txt, neworder_monthly_counts.txt, neworder_ssmps.txt, No_spill.txt, plps_spills.txt (private lateral spills), PLSD.txt. Trimmed sample: raw/ciwqs-cat1-2-3-spills-sample.json.",
     "machine_readable": true,
     "sample_record": {
       "REGION": "4",
@@ -122,7 +122,7 @@
     "access": [
       "map_only"
     ],
-    "access_detail": "curl returned a 212-byte Incapsula bot-wall stub. The program page says the maps are 'updated nightly'. Same data as the flat file.",
+    "access_detail": "curl returned a 212-byte Incapsula bot-wall stub. The program page says the maps are 'updated nightly'. Same data as the flat file. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -135,7 +135,7 @@
     "license": null,
     "legal_basis": null,
     "status": "rejected",
-    "status_reason": "Duplicate of the flat file and bot-walled; use the flat file.",
+    "status_reason": "Duplicate of the flat file; use the flat file.",
     "verified": "fetched",
     "checked": "2026-11-03",
     "notes": ""

@@ -720,8 +720,8 @@
   "history": null,
   "license": null,
   "legal_basis": "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree",
-  "status": "unreachable",
-  "status_reason": "Connection reset on 2026-11-03.",
+  "status": "watch",
+  "status_reason": "Connection reset on 2026-11-03. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "search_only",
   "checked": "2026-11-03",
   "notes": ""
