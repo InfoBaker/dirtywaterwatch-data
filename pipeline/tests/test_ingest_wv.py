@@ -759,7 +759,7 @@ def test_the_wv_rules_row_states_the_rain_caution_the_build_applies():
     rules = json.loads((ROOT / "data" / "rules.json").read_text())
     wv = rules["red"]["by_state"]["WV"]["basis"]
     assert "rain caution at every open" not in wv
-    assert "applies its rain caution at each open combined sewer outfall with a location once the outfall is placed on its water" in wv
+    assert "apply our rain caution at each open combined sewer outfall with a location once the outfall is placed on its water" in wv
     d = json.loads((ROOT / "data" / "outfalls-wv.json").read_text())
     rows = d["outfalls"] if isinstance(d, dict) else d
     assert any(RL.cso_open(r) and r.get("lat") is not None and not r.get("water_slug") for r in rows)
