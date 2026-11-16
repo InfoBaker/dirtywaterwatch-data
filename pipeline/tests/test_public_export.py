@@ -92,7 +92,7 @@ def test_rules_prose_is_public_copy():
 
 def test_rules_prose_states_the_configured_numbers():
     rules = json.loads((DATA_DIR / "rules.json").read_text())
-    SITE_HOURS = re.compile(r"\b(?:uses?|period of|counts those) (\d+) hours")
+    SITE_HOURS = re.compile(r"\b(?:uses?|period of|counts? those) (\d+) hours")     # "We use", "We count those"
 
     def check(text, hours, where):              # a period the prose states is the one configured
         said = {int(n) for n in SITE_HOURS.findall(text)}

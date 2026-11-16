@@ -477,13 +477,13 @@ def test_coverage_names_the_grid_for_radar_states_and_leaves_new_jersey_as_it_wa
     md, pa, ma, nj, va = (cov[s] for s in ("MD", "PA", "MA", "NJ", "VA"))
     assert md["covered"] and md["methods"] == ["radar"] and md["rainfall_read"] == ["grid"] and md["threshold_in"] == 0.5
     assert md["method"] == "NOAA MRMS radar rainfall: one radar grid an hour, sampled at each outfall"
-    assert "against the published amount of 0.5 in" in md["sentence"]
+    assert "against the published amount of 0.5 inch." in md["sentence"]
     assert pa["covered"] and "1 of the 2" in pa["sentence"] and pa["sources"] == [RL.SOURCE_ID]
     assert "threshold_in" not in ma and "own threshold (or a published one)" in ma["sentence"]
     assert set(nj) == {"covered", "methods", "permits", "waters", "sources", "cso_permits", "sentence", "trigger_bases"}
     assert nj["trigger_bases"] == ["operator"] and md["trigger_bases"] == ["state"] and ma["trigger_bases"] == ["operator", "state"]
     assert nj["methods"] == ["site_flag"] and "njcsonotifications.com" in nj["sentence"]
-    assert not va["covered"] and va["sentence"].startswith('No "discharge likely" caution here')
+    assert not va["covered"] and va["sentence"] == "We show no rain caution here because we do not read rainfall at this state's combined sewer outfalls."
 
 
 # ---------------------------------------------------------------- the unit (found 2026-11-07)
