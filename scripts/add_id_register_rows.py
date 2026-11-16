@@ -6,9 +6,13 @@ Usage: pipeline/.venv/bin/python -I scripts/add_id_register_rows.py [--dry-run]
 The law: Idaho's IPDES permits (IDAPA 58.01.25; West Boise's permit, sections 2.2.7 and 2.2.8, read in the research)
 require noncompliance that may endanger health, collection-system overflows included, to be reported to DEQ by
 telephone within 24 hours and electronically within five days, and an affected MS4 operator told; an emergency plan
-names the health district and other officials to be told at once. No statute, rule or permit clause found requires
-the public to be told, and DEQ publishes no list of the reports. EPA Region 10's permits in Indian country report to
-EPA. EPA's overflow tables hold one Idaho report (2023, a basement backup).
+names the health district and other officials to be told at once. No statute or rule requires the public to be
+told, and DEQ publishes no list of the reports. EPA Region 10's permits in Indian country report to EPA. The two EPA
+permits read (West Boise's ID0023981, 2016 modification, and Kooskia's ID0021814, 2026 draft, Part III.I) require the
+permittee to notify the public immediately by its own emergency response and public notification plan, with no channel
+or deadline (go-live audit 2026-11-16 P1); the other permits' public notice terms were not read (NOTICE_READ,
+EPA_NOTICE). EPA's overflow tables hold one Idaho report (2023, a sewage backup into a building), read by the national
+module (echo-sewer-overflow) with Idaho in its states since 2026-11-16.
 
 Rows
   - Per operator: <id>-noncompliance-report (permit basis), no web channel (the reports are not public).
@@ -80,13 +84,28 @@ AGENCY = [
      "records": False, "noun": "Permit portal", "sources": ["id-ipdes-reporting-portal"],
      "note": "The reporting portal where permittees file; its submissions are behind a login."},
     {"id": "id-epa-echo-overflow-events", "agency": "U.S. Environmental Protection Agency (ECHO)",
-     "name": "EPA sewer overflow and bypass tables (Idaho)", "channel_kind": "feed", "urls": [], "method": None,
+     "name": "EPA sewer overflow and bypass tables (Idaho)", "channel_kind": "feed",
+     "urls": ["https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"], "method": "html",
      "legal_basis": "40 CFR part 127 (NPDES electronic reporting)", "basis_kind": "law", "monitored": False,
-     "unmonitored_reason": "none_found", "publishes": "none", "records": False, "noun": "EPA overflow tables",
-     "sources": ["id-epa-sobe"],
-     "note": ("No web channel found for Idaho's current reports: EPA's overflow tables (extract of 2026-11-12) hold one "
-              "Idaho report, Kamiah's 5-gallon basement backup of December 2023, which is no discharge to water.")},
+     "unmonitored_reason": "feed_ingested", "feed_source_id": "echo-sewer-overflow", "publishes": "notices",
+     "noun": "EPA overflow tables", "sources": ["id-epa-sobe"],
+     "note": ("EPA's overflow and bypass tables, read daily for Idaho permits. The file of 2026-11-13 holds one Idaho "
+              "report, Kamiah's 5-gallon sewage backup into a building in December 2023, which reached no water and "
+              "is not shown.")},
 ]
+
+
+# the operators whose permit's public notification terms were read (go-live audit 2026-11-16 P1): the clause, by row
+NOTICE_READ = {
+    "id-kooskia": ("EPA's 2026 draft permit (ID0021814, Part III.I) requires the permittee to notify the public "
+                   "immediately by its own emergency response and public notification plan; no web notice was found."),
+    "id-boise": ("West Boise's earlier EPA permit (ID0023981, 2016 modification, Part III.I) required the permittee to "
+                 "notify the public immediately by its own emergency response and public notification plan; no web "
+                 "notice was found."),
+}
+EPA_NOTICE = ("EPA Region 10's permits read carry an immediate public notification duty; this permit's text was not "
+              "read; no web notice was found.")
+NOT_READ = "and the permit's public notice terms were not read."
 
 
 def base(**kw) -> dict:
@@ -105,13 +124,16 @@ def operator_rows(dis: list[dict]) -> list[dict]:
         who = {"IDEQ": "Idaho DEQ, IPDES", "EPA": "EPA Region 10"}.get(auth[0], "issuer not confirmed") \
             if len(auth) == 1 else "issuers DEQ and not confirmed"
         to = "EPA Region 10" if auth == ["EPA"] else "DEQ"
+        tail = ("the reports are not published; " + NOTICE_READ[oid] if oid in NOTICE_READ
+                else "the reports are not published; " + EPA_NOTICE if auth == ["EPA"]
+                else "the reports are not published, " + NOT_READ)
         rows.append(finish(base(
             id=f"{oid}-noncompliance-report", operator_id=oid, name=name, permit=permit, channel_kind="state_alert_page",
             urls=[], method=None, legal_basis=Q_PERMIT.format(permit=permit, who=who), basis_kind="permit",
             monitored=False, unmonitored_reason="none_found", publishes="none", records=False,
             noun="Report to the permitting authority", sources=["id-deq-ipdes-noncompliance"],
             note=(f"No web channel found: {name} reports overflows and other noncompliance to {to} within 24 hours and "
-                  "in five days; the reports are not published, and no public notice requirement was found."))))
+                  "in five days; " + tail))))
     return rows
 
 
