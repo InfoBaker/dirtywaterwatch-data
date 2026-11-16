@@ -414,7 +414,7 @@
     "access": [
       "pdf"
     ],
-    "access_detail": "Index read 2026-11-14 (reports 1 to 98); Reports 91 to 98 (October 2024 to September 2026) fetched once each. Part D's collection-system tables: date, address, cause, action, prevention, receiving water, gallons, lab values; the plants' discharges are scanned forms.",
+    "access_detail": "Index read 2026-11-14 (reports 1 to 98); Reports 91 to 98 (October 2024 to September 2026) read; a new report fetched once, the newest two and any report with no accepted copy read again every 30 days. Part D's collection-system tables: date, address, cause, action, prevention, receiving water, gallons, lab values; the plants' discharges are scanned forms.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [
@@ -442,9 +442,9 @@
     "license": "public record, none stated",
     "legal_basis": "Consent decree (2002), Paragraph 26, Section XI",
     "status": "used",
-    "status_reason": "Read by the la-baton-rouge-quarterly feed: 5 of 8 reports pass the layout check (rows per collection system equal the report's own summary): 219 discharges, October 2024 to September 2026 less the withheld quarters; Reports 91, 92 and 97 withheld.",
+    "status_reason": "Read by the la-baton-rouge-quarterly feed: 5 of 8 reports pass the layout check (rows per collection system equal the report's own summary): 219 discharges, October 2024 to September 2026 less the withheld quarters, 124 of them naming a receiving water; Reports 91, 92 and 97 withheld.",
     "verified": "fetched",
-    "checked": "2026-11-14",
+    "checked": "2026-11-15",
     "notes": null
   },
   {
@@ -476,9 +476,9 @@
     "license": null,
     "legal_basis": null,
     "status": "unreachable",
-    "status_reason": "The host made no connection with this project's client on 2026-11-14 (twice); the research's reading (131 rows, May 2025 to May 2026) is not verified here.",
+    "status_reason": "The host made no connection with this project's client on 2026-11-14 (twice); no connection again on 2026-11-15 from the same network; not yet tried from GitHub's runners; the research's reading (131 rows, May 2025 to May 2026) is not verified here.",
     "verified": "search_only",
-    "checked": "2026-11-14",
+    "checked": "2026-11-15",
     "notes": null
   },
   {
