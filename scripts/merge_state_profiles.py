@@ -81,7 +81,9 @@ def federal_counts() -> dict:
                 continue
             c = counts[r["state"]]
             c["cso_permits"].add(r["npdes_permit"])
-            if r.get("outfall_status") != "CLS":
+            # open: not closed ("CLS", "CLS (ended ...)"); a point another permit's row already counts
+            # (same_outfall_as, scripts/outfall_point_corrections.py) is one outfall, counted once
+            if not str(r.get("outfall_status") or "").upper().startswith("CLS") and not r.get("same_outfall_as"):
                 c["cso_open_outfalls"] += 1
     p = ROOT / "data" / "outfalls-plants-us.json"
     if p.exists():

@@ -51,6 +51,9 @@ def main() -> int:
             if not cso_open(o):
                 c["cso closed"] += 1
                 continue
+            if o.get("same_outfall_as"):
+                c["cso open, same outfall as another permit's row (counted once)"] += 1
+                continue
             k = key(o.get("npdes_permit"), o.get("outfall"))
             c["cso open"] += 1
             c["with point"] += pt

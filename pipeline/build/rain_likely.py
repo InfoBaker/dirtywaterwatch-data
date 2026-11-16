@@ -227,6 +227,14 @@ def cso_open(o: dict) -> bool:
         and o.get("rain_caution") is not False
 
 
+def cso_counted(o: dict) -> bool:
+    """An open combined sewer outfall as the counts read it: cso_open, and not a row that names another permit's row
+    for the same outfall (same_outfall_as: one point listed under two permits, scripts/outfall_point_corrections.py),
+    so a shared outfall is counted once. The caution itself reads cso_open: both permits' rows still drive it, so no
+    water loses or gains a caution by the marking."""
+    return cso_open(o) and not o.get("same_outfall_as")
+
+
 def discharger_index() -> dict[str, dict]:
     """{npdes permit: {id, name}} from data/dischargers.json (the discharger pages)."""
     d = read_json(DATA_DIR / "dischargers.json") or {}
