@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 OVERCLAIMS = re.compile(r"\bno API\b|as a picture|picture with no data|no data endpoint|publishes none of these|"
-                        r"No sewage discharge report is published|posts no list|shows the public nothing", re.I)
+                        r"No sewage discharge report is published|posts no list|shows the public nothing|only statewide", re.I)
 
 
 def public_texts(st: str) -> dict:

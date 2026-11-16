@@ -23,12 +23,9 @@ level: "state"
 #   that finds the water gone is used); lat/lon
 # History: current advisories only; the Internet Archive holds monthly copies since 2025-10
 # Research notes: Waters in Nevada state parks only.
-# Status (Astra P1-3): no successful current read yet. The page answers the pipeline's runner (read 2026-11-16T01:45Z);
-#   the reads failed in the parser, which did not take the Danger section's "None" as the empty marker and ran that
-#   section into the passport block below it (fixed 2026-11-16). No archive copy seeds current status. The feed's
-#   health stays ok:false with
-#   last_ok_at null until a read succeeds; Nevada stays out of live_states until first_successful_read is set here.
-first_successful_read: null
+# Status: first successful current read 2026-11-16T04:23:49Z (refresh 43802489853: 3 on the page, Watch 2, Warning 1,
+#   Danger 0); the earlier reads failed in the parser on the Danger section's 'None' (fixed 2026-11-16).
+first_successful_read: "2026-11-16T04:23:49Z"
 cadence: "updated when a level changes; no fixed schedule"
 license: "none stated"
 attribution: "Nevada Division of State Parks"
@@ -40,4 +37,4 @@ access: ["html"]
 access_detail: "The page's three accordion sections (HAB Watch, Warning and Danger Advisories): one bold heading per water with its update date, then the parks' paragraph; 'None' or 'None at this time.' for an empty level."
 machine_readable: true
 legal_basis: null
-checked: "2026-11-14"
+checked: "2026-11-16"
