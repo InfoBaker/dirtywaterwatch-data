@@ -143031,7 +143031,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Superior Bay (superior-bay-wi), whose name shares a word with the receiving water ('Superior Bay'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0025593",
@@ -143049,19 +143049,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000579017",
    "lat": 46.664639,
    "lon": -92.085278,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "nemadji-river-wi",
+   "water_name": "Nemadji River",
+   "water_kind": "river",
+   "distance_m": 538,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Nemadji River' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Nemadji River' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Nemadji River' by name; Nemadji River (nemadji-river-wi, NHDPlus V2.1 record), 538 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0025593",
@@ -143089,8 +143088,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 389 m from Saint Louis River Estuary (saint-louis-river-estuary-wi), the nearest openboatlaunch water within 400 m; the receiving water ('St. Louis Bay of Lake Superior') does not share its name (the nearest water's name ('Saint Louis River Estuary') shares a word with the receiving water ('St. Louis Bay of Lake Superior') but not its kind of water or its compass word); scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 389 m from Saint Louis River Estuary (saint-louis-river-estuary-wi), the nearest openboatlaunch water within 400 m; the receiving water ('St. Louis Bay of Lake Superior') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143119,7 +143118,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 28 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143148,7 +143147,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 6 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143177,7 +143176,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143206,7 +143205,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 5 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143241,7 +143240,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143270,7 +143269,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143299,7 +143298,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 4 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143333,8 +143332,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 154 m from Menomonee River (menomonee-river-wi), the nearest openboatlaunch water within 400 m; the receiving water ('South Menomonee Canal') does not share its name (the nearest water's name ('Menomonee River') shares a word with the receiving water ('South Menomonee Canal') but not its kind of water or its compass word); scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 154 m from Menomonee River (menomonee-river-wi), the nearest openboatlaunch water within 400 m; the receiving water ('South Menomonee Canal') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143363,7 +143362,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143392,7 +143391,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143421,7 +143420,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 40 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143450,7 +143449,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143479,7 +143478,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143508,7 +143507,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 33 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143537,7 +143536,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 40 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143566,7 +143565,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 54 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143595,7 +143594,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 11 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143624,7 +143623,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 14 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143653,7 +143652,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143682,7 +143681,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 7 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143711,7 +143710,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 2 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143740,7 +143739,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 29 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143769,7 +143768,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 25 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143798,7 +143797,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 9 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143827,7 +143826,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 25 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143856,7 +143855,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143885,7 +143884,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143914,7 +143913,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 53 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -143944,7 +143943,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143973,7 +143972,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144002,7 +144001,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144031,7 +144030,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144060,7 +144059,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144089,7 +144088,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144118,7 +144117,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144147,7 +144146,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144176,7 +144175,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 12 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144205,7 +144204,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 14 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144234,7 +144233,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 15 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144263,7 +144262,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 4 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144292,7 +144291,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 6 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144321,7 +144320,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144350,7 +144349,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144379,7 +144378,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 7 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144408,7 +144407,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144437,7 +144436,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 21 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144466,7 +144465,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144495,7 +144494,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144524,7 +144523,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 33 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144559,7 +144558,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144594,7 +144593,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 28 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144629,7 +144628,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 14 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144664,7 +144663,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144699,7 +144698,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144734,7 +144733,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144763,7 +144762,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 35 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144798,7 +144797,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144833,7 +144832,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144868,7 +144867,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 6 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144897,7 +144896,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 54 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -144916,19 +144915,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110002051421",
    "lat": 43.0968051,
    "lon": -87.9563376,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "lincoln-creek-wi",
+   "water_name": "Lincoln Creek",
+   "water_kind": "stream",
+   "distance_m": 36,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Lincoln Creek' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Lincoln Creek' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Lincoln Creek' by name; Lincoln Creek (lincoln-creek-wi, NHDPlus V2.1 record), 36 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144957,7 +144955,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 34 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144986,7 +144984,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145021,7 +145019,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145050,7 +145048,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145079,7 +145077,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145108,7 +145106,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145137,7 +145135,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145166,7 +145164,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 22 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145195,7 +145193,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145224,7 +145222,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 13 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145253,7 +145251,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145282,7 +145280,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145311,7 +145309,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145340,7 +145338,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145369,7 +145367,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 13 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145398,7 +145396,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 4 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145427,7 +145425,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145456,7 +145454,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 9 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145485,7 +145483,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 7 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -145515,7 +145513,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 6 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145544,7 +145542,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 7 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -145574,7 +145572,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 20 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145603,7 +145601,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 37 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145632,7 +145630,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 13 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145667,7 +145665,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145696,7 +145694,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 1 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145725,7 +145723,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 22 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145754,7 +145752,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 22 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145783,7 +145781,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 20 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145812,7 +145810,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 26 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145841,7 +145839,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 24 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145870,7 +145868,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 16 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145899,7 +145897,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 29 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145928,7 +145926,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 7 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145957,7 +145955,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145986,7 +145984,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 25 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146015,7 +146013,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 33 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146044,7 +146042,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 17 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146073,7 +146071,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 8 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146102,7 +146100,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 14 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146136,8 +146134,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 309 m from Menomonee River (menomonee-river-wi), the nearest openboatlaunch water within 400 m; the receiving water ('South Menomonee Canal') does not share its name (the nearest water's name ('Menomonee River') shares a word with the receiving water ('South Menomonee Canal') but not its kind of water or its compass word); scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 309 m from Menomonee River (menomonee-river-wi), the nearest openboatlaunch water within 400 m; the receiving water ('South Menomonee Canal') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146155,19 +146153,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110002051421",
    "lat": 43.0292231,
    "lon": -87.9183335,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "south-menomonee-canal-wi",
+   "water_name": "South Menomonee Canal",
+   "water_kind": "canal",
+   "distance_m": 228,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'South Menomonee Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'South Menomonee Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'South Menomonee Canal' by name; South Menomonee Canal (south-menomonee-canal-wi, openboatlaunch), 228 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146195,9 +146192,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146225,9 +146222,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146255,9 +146252,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146285,9 +146282,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146315,9 +146312,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146346,7 +146343,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Lake Michigan (lake-michigan-wi), whose name shares a word with the receiving water ('Lake Michigan'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146375,7 +146372,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Lake Michigan (lake-michigan-wi), whose name shares a word with the receiving water ('Lake Michigan'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146393,19 +146390,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110002051421",
    "lat": 43.1050854,
    "lon": -87.9522541,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "lincoln-creek-wi",
+   "water_name": "Lincoln Creek",
+   "water_kind": "stream",
+   "distance_m": 20,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Lincoln Creek' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Lincoln Creek' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Lincoln Creek' by name; Lincoln Creek (lincoln-creek-wi, NHDPlus V2.1 record), 20 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146434,7 +146430,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 117 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146463,7 +146459,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 26 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146492,7 +146488,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 5 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WV0020028",
