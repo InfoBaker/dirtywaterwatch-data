@@ -7,7 +7,7 @@ level: "operator"
 # Ingester: pipeline/ingest/wi_mmsd_storm_updates.py (source id wi-mmsd-storm-updates): the news list two pages deep
 #   every refresh (eight posts; the whole list on a first run), each candidate post once, again when its title or date
 #   changes, when its read failed, and 30 days after its last read wherever it stands in the list; rules only.
-# Read 2026-11-14 (the whole list, 71 pages): 281 posts on mmsd.com since 2016, 21 of them read: 18 Storm Updates or
+# Read 2026-11-14 and again 2026-11-16 with the same result (the whole list, 71 pages): 281 posts on mmsd.com since 2016, 21 of them read: 18 Storm Updates or
 #   overflow letters to the DNR and 3 spill or release notices, from 2018-06-22 to 2026-09-08, which give 29 dated
 #   reports: 13 combined sewer overflows, 14 separate sewer overflows or overflows the post does not call combined (5
 #   typed sso with the basis stated) and 2 spills at a treatment plant (plant_bypass; one says no wastewater reached
@@ -42,4 +42,4 @@ access: ["html"]
 access_detail: "Concrete CMS page list at https://www.mmsd.com/about-us/news (four posts a page, ?ccm_paging_p_b23285=N), each post under /about-us/news/<slug> with its stamp (MM/DD/YY HH:MM:am), its text and the letter's link; no key, no RSS (/about-us/news/rss answers 404)."
 machine_readable: false
 legal_basis: "s. NR 210.21(5), Wis. Adm. Code (public notice of every overflow, promptly) and 40 CFR 122.38 (Great Lakes Basin CSO notice within four hours, which these posts do not meet); WPDES permit WI0036820"
-checked: "2026-11-14"
+checked: "2026-11-16"

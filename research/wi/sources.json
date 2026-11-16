@@ -53,9 +53,9 @@
   "license": "None stated; site copyright MMSD.",
   "legal_basis": "40 CFR 122.38; NR 210.21; WPDES permit WI0036820",
   "status": "used",
-  "status_reason": "Built (ingester wi_mmsd_storm_updates): the news list read whole on 2026-11-14 (71 pages, 281 posts), 21 posts read (18 Storm Updates and overflow letters, 3 spill or release notices) from 2018-06-22 to 2026-09-08 give 29 dated reports (13 combined, 14 separate or unspecified sewer overflows, 2 treatment plant spills), posted one to ten days after the overflow began (median five).",
+  "status_reason": "Built (ingester wi_mmsd_storm_updates): the news list read whole on 2026-11-14 and again on 2026-11-16 with the same result (71 pages, 281 posts), 21 posts read (18 Storm Updates and overflow letters, 3 spill or release notices) from 2018-06-22 to 2026-09-08 give 29 dated reports (13 combined, 14 separate or unspecified sewer overflows, 2 treatment plant spills), posted one to ten days after the overflow began (median five).",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-16",
   "notes": "Annual overflow volumes 1994-2026 in raw/mmsd-2026-overflow-volumes.txt (2025: 5,140 MG; 2024: 357 MG)."
  },
  {
@@ -338,7 +338,7 @@
   "access": [
    "csv"
   ],
-  "access_detail": "0 Wisconsin event rows in the current extract of 2026-11-12 (5,751 events) and the all-versions extract (6,710 events); 14 Wisconsin collection-system rows, all EPA permits on tribal land (one payload of 2025-03-04).",
+  "access_detail": "0 Wisconsin event rows in the current extract of 2026-11-13 (5,751 events) and the all-versions extract of 2026-11-13 (6,714 events); 14 Wisconsin collection-system rows, all EPA permits on tribal land (one payload of 2025-03-04).",
   "machine_readable": true,
   "sample_record": null,
   "fields": [],
@@ -351,9 +351,9 @@
   "license": null,
   "legal_basis": null,
   "status": "rejected",
-  "status_reason": "Rechecked 2026-11-14: Wisconsin permittees report through the DNR's Switchboard; EPA's event table extracts dated 2026-11-12 held no Wisconsin report. Watched in the register.",
+  "status_reason": "Rechecked 2026-11-16: Wisconsin permittees report through the DNR's Switchboard; EPA's event table extracts dated 2026-11-13 held no Wisconsin report. Watched in the register.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-16",
   "notes": ""
  },
  {
@@ -812,7 +812,110 @@
   "status": "unreachable",
   "status_reason": "A browser challenge: both of its addresses answered GitHub's runner, where the pipeline runs, with HTTP 403 on 2026-11-16 (run 43788396939), as they answered on 2026-11-15. We do not get around it; the beaches are in the DNR's beach system when the Department lists them.",
   "verified": "inferred",
-  "checked": "2026-11-14",
+  "checked": "2026-11-16",
+  "notes": ""
+ },
+ {
+  "id": "wi-madison-dane-health-beaches",
+  "name": "Public Health Madison and Dane County beach conditions",
+  "jurisdiction": "WI",
+  "operator": "Public Health Madison and Dane County",
+  "operator_type": "municipal",
+  "role": "advisories",
+  "event_types": [
+   "beach_advisory",
+   "hab"
+  ],
+  "waters_covered": "27 Dane County beach and access sites",
+  "water_slugs": [],
+  "url": "https://publichealthmdc.com/home-environment/beaches",
+  "access": [
+   "html"
+  ],
+  "access_detail": "HTML list and map of 27 beach and access sites with each one's status and the reason for a closure (bacteria, blue-green algae); a page per beach. All closed for the season when independent research read it in November 2026.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "in season",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "watch",
+  "status_reason": "Answered GitHub's runner on 2026-11-16 (HTTP 200). Watched in the register for availability; not read for records yet. The Dane County beaches the DNR lists are shown through wi-dnr-beach-health.",
+  "verified": "fetched",
+  "checked": "2026-11-16",
+  "notes": ""
+ },
+ {
+  "id": "wi-kenosha-county-beach-conditions",
+  "name": "Kenosha County beach conditions",
+  "jurisdiction": "WI",
+  "operator": "Kenosha County",
+  "operator_type": "municipal",
+  "role": "advisories",
+  "event_types": [
+   "beach_advisory"
+  ],
+  "waters_covered": "Kenosha County beaches (Lake Michigan and inland)",
+  "water_slugs": [],
+  "url": "https://www.kenoshacountywi.gov/348/Beach-Conditions",
+  "access": [
+   "html"
+  ],
+  "access_detail": "HTML table (beach, result, condition, date of sampling) of 27 sites as independent research read it in November 2026 (last sample September 2, 2026).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "in season",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Answered GitHub's runner, where the pipeline runs, with HTTP 403 on 2026-11-16 (a bot check). We do not get around it; Kenosha's beaches are in the DNR's beach system when the Department lists them.",
+  "verified": "access_failed",
+  "checked": "2026-11-16",
+  "notes": ""
+ },
+ {
+  "id": "wi-sheboygan-county-water-quality",
+  "name": "Sheboygan County public health water quality page",
+  "jurisdiction": "WI",
+  "operator": "Sheboygan County",
+  "operator_type": "municipal",
+  "role": "advisories",
+  "event_types": [
+   "beach_advisory"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.sheboygancounty.com/departments/departments-f-q/health-and-human-services/public-health/environmental-health/water-quality-drinking-water",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Not read: independent research's reader and GitHub's runner both met HTTP 403.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "unreachable",
+  "status_reason": "Answered GitHub's runner, where the pipeline runs, with HTTP 403 on 2026-11-16 (a bot check). We do not get around it; Sheboygan's beaches are in the DNR's beach system when the Department lists them.",
+  "verified": "access_failed",
+  "checked": "2026-11-16",
   "notes": ""
  }
 ]
