@@ -4,8 +4,8 @@ url: "https://www.nps.gov/chic/planyourvisit/bathing-beach-monitoring-program.ht
 homepage: "https://www.nps.gov/chic/planyourvisit/bathing-beach-monitoring-program.htm"
 kind: "html"
 level: "federal"
-# Notes (research/ok, status used, verified fetched, checked 2026-11-14): Read by the
-#   ok-nps-chickasaw-bacteria ingester (2026-11-14): 10 places, sample dates 2026-08-06 to
+# Notes (research/ok, status used, verified fetched, checked 2026-11-15): Read by the
+#   ok-nps-chickasaw-bacteria ingester (2026-11-15): 10 places, sample dates 2026-08-06 to
 #   2026-08-27, 40 results (8 censored '<1'), highest 162.4 (Bear Falls, 2026-08-20), highest
 #   geometric mean 113.6; none at the park's threshold (235 weekly, 126 geometric mean), so no
 #   record. No unit stated; no posting or removal dates.
@@ -20,4 +20,4 @@ access: ["html"]
 access_detail: null
 machine_readable: true
 legal_basis: null
-checked: "2026-11-14"
+checked: "2026-11-15"
