@@ -165,7 +165,9 @@
 #                  Louisiana: la_baton_rouge_quarterly (Baton Rouge's consent-decree quarterly reports, Part D collection-
 #                  system tables read with pypdf; a report used only when its rows match its own summary; each report once)
 #                  Nevada: nv_state_parks_hab (the state parks' HAB Advisory page: Watch, Warning and Danger bloom
-#                  advisories at waters in state parks, from the first read that lists them; no sewage feed exists)
+#                  advisories at waters in state parks, from the first read that lists them; no sewage feed exists) and
+#                  nv_ose_hab_list (the Office of State Epidemiology's statewide bloom list: each advisory from the date
+#                  the Office gives; a water with no record listed with its place; one the parks carry shown once)
 #                  Oklahoma: ok_nps_chickasaw_bacteria (the National Park Service's E. coli table for Chickasaw
 #                  National Recreation Area: a result over the posted threshold is a sample caution, never an
 #                  advisory; no sewage feed exists)

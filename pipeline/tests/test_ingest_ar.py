@@ -519,9 +519,10 @@ def test_the_part_of_water_extent_is_written_only_by_arkansas():
             if p.is_file() and p.suffix in (".py", ".yaml", ".json") and "part_of_water" in p.read_text(errors="ignore")]
     # Wyoming's bulletins write it for a row naming a part of its water ("Granite Reservoir: West Causeway"; Astra
     # review 2026-11-15 P2, fix/co-mt-wy-review), keyed to that one Wyoming source; Idaho's bloom table (fix/ia-id-review);
-    # Colorado's bloom sheet for a row naming a part of a water or a park (CO go-live audit 2026-11-16 P1-1)
+    # Colorado's bloom sheet for a row naming a part of a water or a park (CO go-live audit 2026-11-16 P1-1);
+    # Nevada's State Epidemiology list for an advisory naming coves of Lake Mohave (feat/nv-ose-hab-list)
     assert {p.name for p in hits} == {"ar_transforms.py", "wy_deq_hcb_bulletins.py", "id_deq_cyanohab.py",
-                                      "co_cdphe_toxic_algae.py"}, hits
+                                      "co_cdphe_toxic_algae.py", "nv_ose_hab_list.py"}, hits
 
 
 @pytest.mark.parametrize("item", [
@@ -1268,6 +1269,14 @@ def test_a_bloom_point_kept_by_an_older_rule_or_written_as_dms_is_cut(monkeypatc
 
 # ---------------------------------------------------------------- verification 3 P2: links the former rule wrote
 
+def _clock(monkeypatch, at):
+    """The ingester's clock and common.write_events' own (its header times, prev_ok_at and the outage marks of
+    common.mark_unread_gaps) on the same time, as in a real run."""
+    import common
+    monkeypatch.setattr(H, "now_iso", lambda: at)
+    monkeypatch.setattr(common, "now_iso", lambda: at)
+
+
 def _status_of(tmp_path, out):
     from datetime import UTC, datetime
     from build import status as S
@@ -1295,9 +1304,9 @@ def test_a_link_the_former_closeness_rule_wrote_is_removed_unless_reviewed(monke
     reviewed entry keeps the link (with its reviewed basis); a repeat of the same record key keeps its own link."""
     a = ("Lake Example A", "Sample County", "Sampletown, AR", "October 1, 2026", "")
     b = ("Lake Example B", "Sample County", "Sampletown, AR", "October 1, 2026", "")
-    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-05T06:00:00Z")
+    _clock(monkeypatch, "2026-10-05T06:00:00Z")
     _, out = habs(monkeypatch, tmp_path, _hab_doc(a))
-    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-10T06:00:00Z")
+    _clock(monkeypatch, "2026-10-10T06:00:00Z")
     habs(monkeypatch, tmp_path, _hab_doc(b), prev_out=out)
     # the state as the former rule wrote it: A linked to B by closeness; a repeated row of A's key linked to A
     doc = json.loads(out.read_text())
@@ -1314,7 +1323,7 @@ def test_a_link_the_former_closeness_rule_wrote_is_removed_unless_reviewed(monke
     if reviewed:
         _reviewed(monkeypatch, [{"old": ra["source_record_id"], "new": rb["source_record_id"],
                                  "evidence": "DEQ's archive shows the water renamed (invented)"}])
-    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-15T06:00:00Z")
+    _clock(monkeypatch, "2026-10-15T06:00:00Z")
     habs(monkeypatch, tmp_path, _hab_doc(b), prev_out=out)
     after = {r["event_id"]: r for r in json.loads(out.read_text())["records"]}
     assert after[rep["event_id"]]["duplicate_of"] == ra["event_id"]          # a genuine repeat stays linked
@@ -1332,7 +1341,7 @@ def test_a_link_the_former_closeness_rule_wrote_is_removed_unless_reviewed(monke
     # A's period ends at the read that first missed it, B's runs on
     assert max(i["end"] for i in ivs[ra["event_id"]] if i["end"] is not None).isoformat().startswith("2026-10-10")
     # the run after: nothing changes again
-    monkeypatch.setattr(H, "now_iso", lambda: "2026-10-20T06:00:00Z")
+    _clock(monkeypatch, "2026-10-20T06:00:00Z")
     habs(monkeypatch, tmp_path, _hab_doc(b), prev_out=out)
     again = {r["event_id"]: r for r in json.loads(out.read_text())["records"]}
     assert not again[ra["event_id"]].get("duplicate_of")

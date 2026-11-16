@@ -157,16 +157,26 @@
    "advisory level",
    "date in effect"
   ],
-  "fills_event_fields": [],
-  "cannot_fill": [],
+  "fills_event_fields": [
+   "waterbody_text",
+   "started_at",
+   "source_updated_at",
+   "advice_text",
+   "status"
+  ],
+  "cannot_fill": [
+   "lat",
+   "lon",
+   "ended_at"
+  ],
   "has_coordinates": false,
   "has_outfall_ids": false,
   "cadence": "updated when an advisory changes; no fixed schedule",
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Active and previous bloom advisories statewide, one heading per water with its level and the date it took effect (eleven active on 2026-11-15, under eight headings, five outside the state parks); answers the pipeline's runner (200, 2026-11-16). Not yet read; watched (register row nv-ose-hab-reports).",
+  "status": "used",
+  "status_reason": "Read by the nv-ose-hab-reports ingester (ingest.nv_ose_hab_list): one hab_advisory record per advisory the active list states, the Office's level and words, the date the Office gives as the start; a whole-water advisory colours its water, a cove's is listed on the water; a water with no record here (Virginia Lake, Mountain View Pond, South Meadows Community Pond on 2026-11-16) is listed with its place; an advisory the parks' page also carries is shown once, as this record (the Office's stated date, the stricter level, both publishers cited), the parks' record its duplicate. Built and tested on the page as the pipeline's runner read it on 2026-11-16 (eleven advisories under eight headings).",
   "verified": "fetched",
   "checked": "2026-11-16",
   "notes": "Headings on 2026-11-15: Mountain View Pond, Gardnerville (Watch, 10/14/2026), Lahontan Reservoir (Warning, 11/2/26), Lake Mohave including Placer Cove, Eagle Wash and Cottonwood Cove (Watch, 6/11, 9/9, 10/28/2026), Rye Patch Reservoir (Watch, 09/30/2026), Wild Horse Reservoir (Watch, 8/13/2026), Virginia Lake (Watch, 6/23/2026), South Meadows Community Pond (Watch, 6/23/2026), Walker Lake (Watch, lowered 5/19/26)."
