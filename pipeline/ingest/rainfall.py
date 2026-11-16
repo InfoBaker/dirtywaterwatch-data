@@ -1452,6 +1452,60 @@ def read_region(session, region: str, points: dict[str, dict], keys: list[str], 
             "sampled": sampled, "read": read}
 
 
+def read_separate(session, points: dict[str, dict], keys: list[str], todo: list[str], hist_old: dict | None,
+                  now: datetime, point_only: bool, limit: int | None, cat: tuple | None, res: dict[str, dict],
+                  last_units: dict | None, prev_regions: dict) -> dict:
+    """The separate sewer caution's points (keys: every permit an "sso:" key, build/rain_sso.py), read after the
+    combined sewer points and apart from them, so they never change a combined sewer reading: each region's own tiles
+    over these points alone (read_region), the 48 and 72-hour grids only when their own history lacks the windows,
+    the unit last decided this hour for the region's combined sewer points as the last determined one, and at most
+    what the combined sewer fallback left of its cap. The catalog answer is shared when it holds the items they need.
+    Returns {res: {region: read_region's result, with its requests}, regions: [regions read]}."""
+    out: dict[str, dict] = {}
+    for r in grid_mod.REGIONS:
+        ks = [k for k in keys if points[k]["region"] == r]
+        if not ks:
+            continue
+        td = [k for k in todo if k in set(ks)]
+        hrs = list(GRID_HOURS) + (list(BACKFILL_HOURS) if td and not point_only and backfill_needed(
+            hist_old, {p for k in ks for p in points[k]["permits"]}, now) else [])
+        names = {grid_mod.item_name(h, r) for h in hrs}
+        own_cat = cat if cat is not None and names <= set(cat[0]) else None
+        done = res.get(r) or {}
+        last = done.get("units") or (last_units if r == "conus" else (prev_regions.get(r) or {}).get("units_last_determined"))
+        cap = FALLBACK_MAX_CALLS if r == "conus" else REGION_FALLBACK_MAX_CALLS
+        cap = (cap if limit is None else min(limit, cap)) - int((done.get("fallback") or {}).get("called") or 0)
+        before = Counter(session.counts)
+        out[r] = read_region(session, r, points, ks, td, hrs, now, last, point_only, max(0, cap), own_cat)
+        out[r]["requests"] = dict(sorted((session.counts - before).items()))
+    return {"res": out, "regions": list(out)}
+
+
+def separate_summary(sep: dict, points: dict[str, dict], sso_only: set[str], outside: list[str], uncovered: list[str],
+                     dimmed: set[str], unreadable: list[str], now: datetime) -> dict | None:
+    """rainfall.json mrms.separate_sewers: the separate sewer points' own figures (read_separate), none when there
+    are none."""
+    from build.rain_sso import is_key
+    if not sso_only:
+        return None
+    unc = set(uncovered)
+    counted = [k for k in sso_only if not points[k].get("outside_grid") and k not in unc]
+    fresh = [k for k in counted if is_fresh(points[k].get("mrms"), now) and k not in dimmed]
+    regs = {}
+    for r, x in sep["res"].items():
+        gi = x["grid_info"] or {}
+        regs[r] = {"read": x["read"], "fetched": x["sampled"], "failed": x["failed"], "fallback": x["fallback"],
+                   "units": {k: v for k, v in (x["units"] or {}).items() if k in ("units_read", "basis", "factor")},
+                   "tiles": [t["tile"] for t in gi.get("tiles") or []], "tiles_failed": gi.get("tiles_failed") or {},
+                   "check": gi.get("check") or {}, "requests": x["requests"], "problems": x["problems"][:20]}
+    return {"doc": "the points of the separate sewer operators' past rain-driven reports (build/rain_sso.py), read "
+                   "after the combined sewer points in tiles of their own; none of these figures is in the ones above",
+            "points": len(sso_only), "readable": len(counted) + len(uncovered), "outside_grid": outside,
+            "outside_coverage": uncovered, "fresh": len(fresh), "counted": len(counted),
+            "readings_ok": len(fresh) >= MIN_OK_SHARE * len(counted),
+            "unreadable_permits": [p for p in unreadable if is_key(p)], "regions": regs}
+
+
 def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: datetime | None = None,
         point_only: bool = False, session=None) -> dict:
     now = now or datetime.now(UTC)
@@ -1479,6 +1533,12 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         points[k].pop("no_coverage", None)
         points[k]["outside_grid"] = True
     readable = [k for k in points if not points[k].get("outside_grid")]
+    # the separate sewer caution's points (every permit an "sso:" key, build/rain_sso.py): read in a pass of their own
+    # after the combined sewer points' (read_separate below), never in the combined sewer tiles, unit, check, fallback,
+    # forecast places or counts (review 2026-11-16, the switch-on pass); a point a combined sewer permittee also has is
+    # a combined sewer point
+    sso_only = {k for k, p in points.items() if p["permits"] and all(rain_sso.is_key(x) for x in p["permits"])}
+    cso_readable = [k for k in readable if k not in sso_only]
     prev_mrms = prev.get("mrms") or {}
     prev_regions = prev_mrms.get("regions") or {}
     last_units = prev_mrms.get("units_last_determined")
@@ -1496,11 +1556,11 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     # each region with points (mrms_grid.REGIONS, in its order): its grid hours (the 48 and 72-hour totals when one of
     # its permittees' history lacks the windows they imply), one catalog query for every region's items, then each
     # region read on its own (read_region): its tiles, its unit, its check, its fallback
-    regions = [r for r in grid_mod.REGIONS if any(points[k]["region"] == r for k in readable)]
-    keys_of = {r: [k for k in readable if points[k]["region"] == r] for r in regions}
-    todo_of = {r: [k for k in todo if points[k]["region"] == r] for r in regions}
+    regions = [r for r in grid_mod.REGIONS if any(points[k]["region"] == r for k in cso_readable)]
+    keys_of = {r: [k for k in cso_readable if points[k]["region"] == r] for r in regions}
+    todo_of = {r: [k for k in todo if points[k]["region"] == r and k not in sso_only] for r in regions}
     hours_of = {r: list(GRID_HOURS) + (list(BACKFILL_HOURS) if todo_of[r] and not point_only and backfill_needed(
-        hist_old, {p for k in keys_of[r] for p in points[k]["permits"]}, now) else []) for r in regions}
+        hist_old, {p for k in keys_of[r] for p in points[k]["permits"] if not rain_sso.is_key(p)}, now) else []) for r in regions}
     cat, problems = None, []
     names = [grid_mod.item_name(h, r) for r in regions if todo_of[r] and not point_only for h in hours_of[r]]
     if names:
@@ -1516,6 +1576,8 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         res[r] = read_region(session, r, points, keys_of[r], todo_of[r], hours_of[r], now, last, point_only,
                              cap if limit is None else min(limit, cap), cat)
         res[r]["requests"] = dict(sorted((session.counts - before).items()))
+    sep = read_separate(session, points, [k for k in readable if k in sso_only], todo, hist_old, now, point_only,
+                        limit, cat, res, last_units, prev_regions)
     c = res.get("conus") or {}
     units, grid_info = c.get("units"), c.get("grid_info") or {"used": False}
     read = next((res[r]["read"] for r in regions if res[r]["read"]), None)
@@ -1528,6 +1590,9 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     reg_raw = {r: x["raw"] for r, x in res.items() if r != "conus" and x["raw"]}
     if reg_raw:
         raw["regions"] = reg_raw
+    sep_raw = {r: x["raw"] for r, x in sep["res"].items() if x["raw"]}
+    if sep_raw:
+        raw["separate_sewers"] = sep_raw
     if raw:
         save_raw("noaa-mrms-qpe", gzip.compress(json.dumps(raw).encode()), "json.gz")
 
@@ -1538,7 +1603,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     # there (outage_now), its stored reading stays (the history and the citation keep it) but is never fresh and never
     # shown. The mark goes only with a value at least as new as it (an older product never clears it).
     dark_now, valued = {}, {}
-    for x in res.values():
+    for x in [*res.values(), *sep["res"].values()]:
         dark_now.update(x["dark"])
         valued.update(x["valued"])
     for k in readable:
@@ -1558,7 +1623,11 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     grids_cache = read_json(GRIDS, {}) or {}
     grid_data = prev.get("grids") or {}
     if qpf:
-        for k, p in points.items():
+        # a point only the separate sewer caution reads ("sso:" keys, build/rain_sso.py) comes after every combined
+        # sewer point for the lookups and its cell after every combined sewer cell for the fetches: it never takes a
+        # place under LOOKUP_MAX or QPF_FETCH_MAX that a combined sewer point needs, and never reorders them (the
+        # cells are already deferred each hour, 2026-11-15: 366 of 1,366 due)
+        for k, p in sorted(points.items(), key=lambda kp: kp[0] in sso_only):     # stable: the order otherwise kept
             g = grids_cache.get(k)
             if g and (g.get("grid") or (parse_t(g.get("failed_at")) or now) > now - timedelta(hours=GRID_RETRY_H)):
                 continue
@@ -1575,10 +1644,11 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
             time.sleep(NWS_PAUSE_S)
         write_json(GRIDS, grids_cache)
         cells = sorted({(grids_cache.get(k) or {}).get("grid") for k in points} - {None})
+        cso_cells = {(grids_cache.get(k) or {}).get("grid") for k in points if k not in sso_only}
         oldest = datetime.min.replace(tzinfo=UTC)
         due = [c for c in cells if force or (parse_t((grid_data.get(c) or {}).get("fetched_at")) or oldest)
                <= now - timedelta(hours=QPF_CACHE_H)]
-        due.sort(key=lambda c: (parse_t((grid_data.get(c) or {}).get("fetched_at")) or oldest, c))
+        due.sort(key=lambda c: (c not in cso_cells, parse_t((grid_data.get(c) or {}).get("fetched_at")) or oldest, c))
         qpf_info["cached"] = len(cells) - len(due)
         qpf_info["deferred"] = max(0, len(due) - QPF_FETCH_MAX)
         raw_q = {}
@@ -1601,7 +1671,8 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                             **qpf_next(g.get("values") or [], now)}
         grid_data = {c: g for c, g in grid_data.items() if c in cells}
 
-    vts = [parse_t((p.get("mrms") or {}).get("valid_time")) for p in points.values() if p.get("mrms")]
+    vts = [parse_t((p.get("mrms") or {}).get("valid_time")) for k, p in points.items()
+           if p.get("mrms") and k not in sso_only]
     valid_time = max(vts) if vts else None
     # per region (freshness judged against the region's own product: is_fresh, and its catalog hour): readings_ok when
     # at least MIN_OK_SHARE of its points (those outside radar coverage left out) have this hour's reading. The run's
@@ -1634,8 +1705,9 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
             # nothing to read this hour: the readings are the earlier run's, its fallback included
             fb = {**pfb, "carried_from": prev.get("fetched_at")}
         rok = len(fr) >= MIN_OK_SHARE * len(counted)
-        o = {"points": len(ks) + sum(1 for k in outside if points[k]["region"] == r), "readable": len(ks),
-             "outside_grid": [k for k in outside if points[k]["region"] == r],
+        o = {"points": len(ks) + sum(1 for k in outside if points[k]["region"] == r and k not in sso_only),
+             "readable": len(ks),
+             "outside_grid": [k for k in outside if points[k]["region"] == r and k not in sso_only],
              "outside_coverage": [k for k in ks if k in unc_set], "counted": len(counted), "fresh": len(fr),
              "valid_time": iso(rvt), "product_valid_time": pv, "stale_product": stale, "readings_ok": rok,
              "read": x["read"], "fetched": x["sampled"], "failed": len(x["failed"]), "fallback": fb,
@@ -1665,9 +1737,12 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
             problems.append(f"{'' if conus else r + ': '}the product is valid to {pv}, more than {FRESH_LAG_H} h "
                             f"before this hour's ({iso(expected)}): its readings are not this hour's")
     fallback = (regions_out.get("conus") or {}).get("fallback") or {"used": False, "reason": None}
-    readings_ok = bool(readable) and all(o["readings_ok"] for o in regions_out.values())
+    readings_ok = bool(cso_readable) and all(o["readings_ok"] for o in regions_out.values())
     ok = readings_ok and not any(o["fallback"]["used"] for o in regions_out.values())
     error = None if ok else "; ".join(reasons)[:600]
+    # the source's own figures are the combined sewer points' (the separate sewer points' are under separate_sewers)
+    sso_outside, sso_uncovered = [k for k in outside if k in sso_only], [k for k in uncovered if k in sso_only]
+    outside, uncovered = [k for k in outside if k not in sso_only], [k for k in uncovered if k not in sso_only]
     if outside:
         problems.append(f"{len(outside)} point(s) outside the radar grid, not read: "
                         + ", ".join(f"{k} ({', '.join(points[k]['outfalls'][:3])})" for k in outside[:10]))
@@ -1678,7 +1753,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     # a permittee with no point the radar can read (every point outside its grid or outside radar coverage) is not a
     # rain permittee: never listed as one the caution covers (review 2026-11-15 P1-3), named in mrms.unreadable_permits
     # (a permittee with one such point and others read keeps every outfall: the caution colours the waters below each)
-    unreadable_pts = set(outside) | set(uncovered)
+    unreadable_pts = set(outside) | set(uncovered) | set(sso_outside) | set(sso_uncovered)
     rows = permit_summary(points, outfalls)
     unreadable = sorted(p for p, row in rows.items() if all(k in unreadable_pts for k in row["points"]))
     for p in unreadable:
@@ -1699,6 +1774,8 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     if units:
         units = {**units, "determined_at": iso(now), "service_states": "inches", "rule": UNIT_RULE}
     last_determined = units if units and units["basis"] in ("physical_bound", "gauge_check") else last_units
+    cso_outfalls_read = [o for o in outfalls if not rain_sso.is_key(o["permit"])]
+    sep_out = separate_summary(sep, points, sso_only, sso_outside, sso_uncovered, dimmed, unreadable, now)
     out = {
         "source_id": SOURCE_ID, "fetched_at": now_iso(), "ok": ok, "error": error,
         "last_ok_at": now_iso() if ok else prev.get("last_ok_at"),
@@ -1711,12 +1788,15 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                  "history_units_repair": hist_repair if hist_repair.get("changed") else prev_mrms.get("history_units_repair"),
                  "credit": "NOAA National Weather Service, Multi-Radar Multi-Sensor (MRMS)",
                  "read": read, "grid": grid_info,
-                 "valid_time": iso(valid_time), "points": len(points), "outfalls": len(outfalls),
-                 "permits": len(permits), "states": sorted({o["state"] for o in outfalls}),
-                 "readable": len(readable), "outside_grid": outside, "outside_coverage": uncovered,
-                 "unreadable_permits": unreadable,
+                 "valid_time": iso(valid_time), "points": len(points) - len(sso_only),
+                 "outfalls": len(cso_outfalls_read),
+                 "permits": sum(1 for p in permits if not rain_sso.is_key(p)),
+                 "states": sorted({o["state"] for o in cso_outfalls_read}),
+                 "readable": len(cso_readable), "outside_grid": outside, "outside_coverage": uncovered,
+                 "unreadable_permits": [p for p in unreadable if not rain_sso.is_key(p)],
                  "fetched": sampled, "fresh": len(fresh), "readings_ok": readings_ok, "fallback": fallback,
-                 "failed": failed, "problems": problems[:50], "regions": regions_out},
+                 "failed": failed, "problems": problems[:50], "regions": regions_out,
+                 **({"separate_sewers": sep_out} if sep_out else {})},
         "qpf": {**qpf_info, "credit": "NOAA National Weather Service, api.weather.gov gridpoint forecast",
                 "grids": len(grid_data)},
         "requests": counts,
@@ -1802,7 +1882,12 @@ def summary_line(out: dict, seconds: float) -> str:
             f"{q['cached']} cached, {q['deferred']} deferred, {q['lookups']} lookups, {q['lookups_deferred']} lookups "
             f"deferred, {len(q['failed'])} failed); requests {r['total']} (MRMS {r['noaa_mrms']}: {r['mrms_query']} "
             f"query, {r['mrms_export']} export, {r['mrms_identify']} identify{stats}; NWS {r['noaa_nws']}); "
-            f"ok={out['ok']} readings_ok={m['readings_ok']} in {seconds:.0f} s")
+            f"ok={out['ok']} readings_ok={m['readings_ok']}"
+            + (f"; separate sewer points {ss['fresh']} fresh of {ss['counted']} ("
+               + ", ".join(f"{r} by {x['read'] or 'nothing'}, {x['requests'].get('mrms_export', 0)} exports"
+                           + (f", FALLBACK {x['fallback'].get('read', 0)} read" if x['fallback'].get('used') else "")
+                           for r, x in ss["regions"].items()) + ")" if (ss := m.get("separate_sewers")) else "")
+            + f" in {seconds:.0f} s")
 
 
 def exit_code(out: dict) -> int:
