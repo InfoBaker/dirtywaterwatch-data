@@ -35,7 +35,7 @@ def test_kentucky_is_read_with_the_point_zone_the_scrub_and_its_own_rules():
     assert E.POINT_ZONE_FILES["KY"] == "ky-central-time-counties.json"
     assert "KY" in E.FREE_TEXT_STATES and "KY" not in E.REPEATED_POINT_STATES and "KY" not in E.STATE_NO_WATER
     assert E.TYPE_FROM_TEXT_STATES == {"KY"} and set(E.STATE_PERSON_SCRUB) == {"KY"}
-    assert set(E.STATE_TEXT_DENIAL) == {"KY"} and E.ZONE_ALWAYS_STATES == {"KY", "IN"}
+    assert set(E.STATE_TEXT_DENIAL) == {"KY"} and E.ZONE_ALWAYS_STATES == {"KY", "IN", "ID"}
 
 
 def test_the_central_counties_file_cites_the_boundary_and_holds_forty_one_counties():

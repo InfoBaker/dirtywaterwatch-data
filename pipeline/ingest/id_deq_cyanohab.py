@@ -44,7 +44,9 @@ Records (a list read as a snapshot; never an invented date)
     the site's caution, from the Collection Date (time_precision day) for 72 hours or until the read that no longer
     lists the water at that level (raw._notice_closed_at), whichever is later; while listed, 72 hours past the last
     read that listed it (raw._open_notice_caution_hours), so it holds between reads; DEQ's words are quoted, never as DHW's
-    advisory. An Alert row whose More Information says the water is "closed to recreational use" keeps that sentence
+    advisory. The interval's label is raw._sample_caution_label ("Health Watch, Idaho DEQ's risk level; no health
+    advisory issued: the site's caution"; go-live audit 2026-11-16 P2), never the generic sample wording, since a Watch
+    can follow an expired alert or rest on satellite imagery. An Alert row whose More Information says the water is "closed to recreational use" keeps that sentence
     in advice_text, quoted as the table's.
   - Identity: one record per water (the table's Waterbody, case and punctuation ignored, with its County) and level
     episode: source_record_id <water slug>:<county slug>:<level>:<the first read's UTC date>. A level change closes the
@@ -452,7 +454,10 @@ def records(state: dict) -> list[dict]:
         elif level in ("alert", "watch"):
             name = LEVEL_NAMES[level]
             raw.update(_agency_label_only=True, _label_basis=f"DEQ's {name}: a risk level, not an advisory",
-                       _agency_label=f"{name} (Idaho DEQ)", _caution_to_notice_end=True,
+                       _agency_label=f"{name} (Idaho DEQ)",
+                       _sample_caution_label=(f"{name}, Idaho DEQ's risk level; no health advisory issued: "
+                                              "the site's caution"),
+                       _caution_to_notice_end=True,
                        _notice_end_basis="DEQ's table still listed the water at this level")
             if ended:
                 raw["_notice_closed_at"] = ended

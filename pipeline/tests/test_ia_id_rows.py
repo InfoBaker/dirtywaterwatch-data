@@ -137,4 +137,6 @@ def test_missing_waters_lists_keep_county_and_accept_a_resolved_name(st):
             assert round(lat, 3) == lat and round(lon, 3) == lon
     if st == "id":
         arms = {(r["name"], tuple(r.get("parts") or ())) for r in d["rows"]}
-        assert ("C J Strike Reservoir", ("Bruneau Arm",)) in arms and ("C J Strike Reservoir", ("Snake River Arm",)) in arms
+        # the water batch (2026-11-16) built C J Strike Reservoir's record, so its two arms moved to "resolved"
+        assert {a[0] for a in arms} == {"Hordemann Pond", "Weston Reservoir"}
+        assert "C J Strike Reservoir" in {r["name"] for r in d["resolved"]}

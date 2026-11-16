@@ -514,6 +514,15 @@ Kansas (permits KS...; research/ks/report.md; not live until data/rules.json say
     (data/reference/ks-mountain-time-counties.json, cut from data/reference/ks-counties.json), is read as America/Denver;
     any other point as America/Chicago (STATE_TZ); raw.timezone_note names the county that decided it.
   - Free text: KS is in FREE_TEXT_STATES (the Illinois scrub) as a precaution.
+Idaho (permits ID...; research/id/report.md; not live until data/rules.json says so)
+  The 2026-11-13 file holds one Idaho row, Kamiah's (ID0028002) 2023 sewage backup into a building, which is dropped as
+  every state's building backups are; Idaho is read so that a report filed through EPA's system shows when one arrives
+  (go-live audit 2026-11-16 P2). Keyed on ID permits only, so every other state's records are unchanged:
+  - Time zone. Idaho is Mountain time except north of the Salmon River, which is Pacific (49 CFR 71.9): the nine
+    northern counties and Idaho County's part north of the river. The event's own point is read by zones.idaho_zone
+    (data/reference/id-counties.json); a report with no point is read as America/Denver (Mountain, the state's larger
+    part). raw.time_zone is on every Idaho record (ZONE_ALWAYS_STATES) and raw.timezone_note says which side decided it.
+  - Free text: ID is in FREE_TEXT_STATES (the Illinois scrub) as a precaution.
 Lag and cadence
   'The data are refreshed daily' (extract ~07:10 ET); event-to-receipt lag in NE: median 2-3 days,
   90th percentile 6-7 days (NH, MA), 38 days (RI), so weeks of lag overall. Poll daily.
@@ -546,13 +555,13 @@ URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_colle
 ALL_URL = "https://echo.epa.gov/files/echodownloads/all_sewer_overflow_and_collection_systems_tables.zip"
 FALLBACK_DIR = ROOT / "research" / "federal" / "raw" / "sobe_current"
 STATES = {"CT", "MA", "ME", "NH", "RI", "VT", "NY", "DC", "GA", "WA", "IL", "AZ", "SD", "MS", "NE", "AK", "NM", "UT", "KY",
-          "MN", "IN", "SC", "KS"}
+          "MN", "IN", "SC", "KS", "ID"}
 STATES |= {"PR"}   # Puerto Rico (module docstring)
 # states whose times are written with their zone's offset (module docstring, Illinois); the others stay naive
 STATE_TZ = {"IL": "America/Chicago", "AZ": "America/Phoenix", "SD": "America/Chicago", "MS": "America/Chicago",
             "NE": "America/Chicago", "AK": "America/Anchorage", "NM": "America/Denver", "UT": "America/Denver",
             "KY": "America/New_York",
-            "MN": "America/Chicago", "IN": "America/New_York", "KS": "America/Chicago"}
+            "MN": "America/Chicago", "IN": "America/New_York", "KS": "America/Chicago", "ID": "America/Denver"}
 STATE_TZ["PR"] = "America/Puerto_Rico"   # Atlantic Standard Time all year, no daylight time
 # states that straddle two zones: STATE_TZ is the zone outside the listed counties, and an event whose own point lies in
 # one of the counties of the reference file is read in that file's zone (module docstring, South Dakota and Nebraska)
@@ -561,7 +570,9 @@ POINT_ZONE_FILES = {"SD": "sd-mountain-time-counties.json", "NE": "ne-mountain-t
                     "IN": "in-central-time-counties.json",   # Indiana: the twelve Central-time counties (module docstring)
                     "KS": "ks-mountain-time-counties.json"}  # Kansas: the four Mountain-time counties (module docstring)
 # states whose records carry raw.time_zone whatever their times' precision (module docstring, Kentucky)
-ZONE_ALWAYS_STATES = {"KY", "IN"}
+ZONE_ALWAYS_STATES = {"KY", "IN", "ID"}
+# states whose event zone comes from pipeline/zones.py by the event's own point (module docstring, Idaho)
+ZONES_MODULE_STATES = {"ID"}
 # states of one zone whose records carry raw.time_zone (STATE_TZ) whatever their times' precision (Minnesota)
 STATE_ZONE_ALWAYS = {"MN"}
 # states whose event points are kept to 0.001 degree before anything is saved (Minnesota; wave 4 rule 4)
@@ -605,7 +616,7 @@ def pr_plant_point(etype: str, desc: str, point: tuple[float, float], plants: li
 AK_ALEUTIAN_WEST = [(-180.0, -169.5, 51.0, 54.5), (172.0, 180.0, 51.0, 53.5)]
 STATE_TZ_WEST = {"AK": (AK_ALEUTIAN_WEST, "America/Adak")}
 # states whose free-text fields get the full scrub (owners' names, house numbers; module docstring, Illinois)
-FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM", "KY", "MN", "IN", "KS"}
+FREE_TEXT_STATES = {"IL", "AZ", "SD", "MS", "NE", "NM", "KY", "MN", "IN", "KS", "ID"}
 FREE_TEXT_FIELDS = ("sewer_overflow_bypass_description_text", "sewer_overflow_structure_type_code_other_text",
                     "anticipated_bypass_text", "anticipated_bypass_expect_limit_violation_text")
 # a permit's shorthand receiving-water names -> the NHD name, keyed (permit, _alias_key(text)); module docstring,
@@ -1664,6 +1675,13 @@ def point_zone(state: str, lat, lon) -> tuple[str | None, str | None]:
         tz = event_tz(state, lat, lon)
         return tz, ("the zone of the event's own point (the Aleutian Islands west of 169 deg 30 min W, 49 CFR 71.12)"
                     if tz != STATE_TZ.get(state) else None)
+    if state in ZONES_MODULE_STATES:   # Idaho: Pacific north of the Salmon River (module docstring, Idaho)
+        import zones
+        if lat is None or lon is None:
+            return STATE_TZ[state], "no point given: Mountain time, the zone of most of the state (49 CFR 71.9)"
+        tz = zones.idaho_zone(lat=lat, lon=lon)
+        side = "north of the Salmon River (Pacific)" if tz == zones.PACIFIC else "outside the Pacific part (Mountain)"
+        return tz, f"the zone of the event's own point, {side} (49 CFR 71.9)"
     if state not in POINT_ZONE_FILES:
         return None, None
     z = zone_shapes(state)
