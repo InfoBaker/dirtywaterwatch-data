@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1719 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1721 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -45,7 +45,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
-| oh | 13 | 2 | 8 | 1 | 1 | 25 |
+| oh | 15 | 2 | 8 | 1 | 1 | 27 |
 | mn | 7 | 0 | 6 | 4 | 1 | 18 |
 | nd | 6 | 0 | 7 | 1 | 1 | 15 |
 | mo | 7 | 0 | 4 | 2 | 0 | 13 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 2 | 0 | 5 | 2 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **622** | **234** | **551** | **230** | **82** | **1719** |
+| **all** | **624** | **234** | **551** | **230** | **82** | **1721** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1666,17 +1666,19 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `tn-harpeth-conservancy` | Harpeth Conservancy sewer overflow transparency page | watch | search_only | prior_art | Advocates real-time public reporting; notes Franklin and Brentwood post overflows with signs and web notice within days. |
 | `tn-orsanco-na` | ORSANCO (Tennessee is not on the Ohio main stem) | rejected | inferred | monitoring | TN is an ORSANCO member state but its waters are Cumberland/Tennessee; no TN sampling site. |
 
-## oh: Ohio (25)
+## oh: Ohio (27)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
 | `oh-akron-cso-notifications` | City of Akron CSO Notifications (Akron Waterways Renewed overflow status map) | used | fetched | events | Read hourly by pipeline/ingest/oh_akron_cso.py: a site at status 1 opens a cso record dated by Akron's update time, ended at the first update back at 0 (poll precision); status 0 is no report. All 28 sites at 0 on 2026-11-08, so no record yet. The per-site PDFs are linked, not parsed. |
+| `oh-avon-lake-cso-notices` | Avon Lake Regional Water CSO notices, Form B (PDF) | used | fetched | events | Read hourly by pipeline/ingest/oh_avon_lake_cso.py from 2026-11-16: 26 overflows from 46 forms (2020 to 2026-08-22) at outfall 17, Lake Erie; 20 forms give a start time without a date and make no record. |
 | `oh-bowling-green-cso-events` | Bowling Green CSO Events yearly reporting table | used | fetched | events | Read daily by pipeline/ingest/oh_bowling_green_cso.py: 37 overflows at Mercer and Poe roads, 2019 to 2026-07-21, each with begin, end and estimated volume; placed on the permit's one CSO outfall (OH0024139 002, North Branch Portage River). |
 | `oh-clyde-cso-notification` | Clyde CSO Notification System | used | fetched | events | Read daily by pipeline/ingest/oh_clyde_cso.py: 9 overflows of Clyde's one CSO (OH0024686 outfall 010, Raccoon Creek) in 2017 to 2026 (the newest 2026-04-01), each with start, end and volume; the counts match each page's own statement. |
 | `oh-columbus-sewer-overflow` | Columbus Sewer Overflow Discharge Information (SSO/CSO) and overflow map | used | fetched | events | Read daily by pipeline/ingest/oh_columbus_overflows.py: 8,542 recorded overflows (4,462 CSO, 4,080 SSO; 291 in 2026 to 2026-09-29), each dated by the day the city found it at inspection (day precision, no end), with volume in million gallons on 4,742; CSO rows carry their permit and outfall by Ohio EPA's station code (Jackson Pike OH0024732, Southerly OH0024741); the site's point (46 of 50 sites) or EPA's outfall point; the city updates the data monthly, usually after the 15th. |
 | `oh-epa-cso-inventory` | EPA National CSO Inventory (Ohio extract) | used | fetched | outfalls | Outfall points statewide. |
 | `oh-epa-gl-cso-ohio` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Ohio (operator list with websites and annual reports) | used | fetched | outfalls | Seeds the channel column for the Lake Erie basin operators. |
 | `oh-epa-spills-opendata` | Ohio EPA Spills (current year and previous years), Office of Emergency Response | used | fetched | events | Read daily by pipeline/ingest/oh_epa_spills.py as a supplementary source: the SEWAGE HUMAN, SEWAGE SLUDGE / BIOSOLIDS and WASTE WATER rows of both layers (1,121 cases, 2017 to 2026-11-05; 121 in 2026), day precision, no end, the call time in Ohio's wall clock, the waterway named on 218; WASTE WATER is kept as a possible sewage release with the product stated; AIR ODOR SEWAGE rows are not read. |
+| `oh-fremont-cso-notices` | Fremont CSO notifications (PDF) | used | fetched | events | Read hourly by pipeline/ingest/oh_fremont_cso.py from 2026-11-16: 9 overflows from 10 notices of 2026 (2026-03-11 to 2026-08-09) on the Sandusky River; one notice is a scanned image with no text. |
 | `oh-lakewood-cso-map` | Lakewood CSO Alerts & Status | used | fetched | events | Read hourly by pipeline/ingest/oh_lakewood_cso.py from 2026-11-16: each event a card shows becomes a dated record (start, end, volume, receiving water); the history grows from the first read. The first read on 2026-11-16 found no event in progress or in the past 48 hours; four sites gave only the end of their last event (the newest CSO-052, 2026-11-12 19:10). |
 | `oh-law-40cfr122-38` | 40 CFR 122.38 Great Lakes CSO public notification (Lake Erie basin permittees) | used | inferred | law | 4-hour public notice for Ohio CSO permittees in the Lake Erie basin (42 operators on EPA's Ohio list); implemented through their public notification plans. |
 | `oh-law-oac-3745-33-08` | OAC 3745-33-08 Generic NPDES permit conditions (outfall signs; notice to public water supply operators) | used | fetched | law | Ohio's only general rule touching public notice: permanent outfall signs, and notice to drinking-water intake operators near major discharges. |

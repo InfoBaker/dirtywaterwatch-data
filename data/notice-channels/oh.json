@@ -84,25 +84,28 @@
    "operator_id": "oh-avon-lake-wpcf-oh0023981",
    "agency": null,
    "permit": "OH0023981",
-   "checked": "2026-11-08",
+   "checked": "2026-11-16",
    "id": "oh-avon-lake-wpcf-oh0023981-public-notice",
    "name": "Avon Lake Regional Water",
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://avonlakewater.org/about-us/about-the-avon-lake-water-reclamation-facility/"
+   ],
+   "method": "pdf",
    "legal_basis": "40 CFR 122.38 (Great Lakes CSO public notification): \"initial notification ... as soon as possible but no later than four hours after becoming aware\" of a combined sewer overflow discharge, under the permittee's public notification plan",
    "basis_kind": "law",
    "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Notice to the public",
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "oh-avon-lake-cso-notices",
+   "publishes": "notices",
+   "noun": "CSO notices (Form B)",
    "sources": [
+    "oh-avon-lake-cso-notices",
     "oh-law-40cfr122-38",
     "oh-epa-gl-cso-ohio"
    ],
-   "note": "No URL known (not searched individually): as a combined sewer permittee in the Lake Erie basin it owes an initial public notice within four hours of becoming aware of a discharge, under its public notification plan; whether it posts the notices online was not checked.",
-   "barrier": "not_verified"
+   "note": "Avon Lake Regional Water's facility page links a supplemental notice (Form B) PDF for each overflow since 2019 (46 on 2026-11-16, the newest August 22, 2026): start, end, outfall 17 at the Center Road pump station, Lake Erie, the impacted areas and the estimated volume. Forms of 2019 to 2023 often give a start time without a date. Read hourly by the feed (new PDFs only). (oh-avon-lake-cso-notices)",
+   "barrier": null
   },
   {
    "state": "OH",
@@ -898,25 +901,28 @@
    "operator_id": "oh-fremont-water-reclamation-center-oh0025291",
    "agency": null,
    "permit": "OH0025291",
-   "checked": "2026-11-08",
+   "checked": "2026-11-16",
    "id": "oh-fremont-water-reclamation-center-oh0025291-public-notice",
    "name": "Fremont Water Reclamation Center",
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://www.fremontohio.org/departments/water-reclamation-center/"
+   ],
+   "method": "pdf",
    "legal_basis": "40 CFR 122.38 (Great Lakes CSO public notification): \"initial notification ... as soon as possible but no later than four hours after becoming aware\" of a combined sewer overflow discharge, under the permittee's public notification plan",
    "basis_kind": "law",
    "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Notice to the public",
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "oh-fremont-cso-notices",
+   "publishes": "notices",
+   "noun": "CSO notifications",
    "sources": [
+    "oh-fremont-cso-notices",
     "oh-law-40cfr122-38",
     "oh-epa-gl-cso-ohio"
    ],
-   "note": "No URL known (not searched individually): as a combined sewer permittee in the Lake Erie basin it owes an initial public notice within four hours of becoming aware of a discharge, under its public notification plan; whether it posts the notices online was not checked.",
-   "barrier": "not_verified"
+   "note": "Fremont's Water Reclamation Center page links one PDF per overflow notice (ten in 2026 on 2026-11-16, from March 11 to August 9): the start, end and approximate volume of the overflow to the Sandusky River from downtown Fremont. One (July 21, 2026) is a scanned image with no text. Read hourly by the feed (new PDFs only). (oh-fremont-cso-notices)",
+   "barrier": null
   },
   {
    "state": "OH",

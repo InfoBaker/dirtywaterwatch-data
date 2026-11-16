@@ -368,3 +368,144 @@ def test_lakewood_start_less_record_takes_the_sites_named_water(tmp_path):
     e = ids["cso-052:end:20261112T1910"]
     assert e["waterbody_text"] == "Rocky River" and "same site" in e["raw"]["water_basis"]
     assert ids["lews-1130:end:20250728T1845"]["waterbody_text"] is None       # never named for that site
+
+
+# PDF notices: Fremont and Avon Lake --------------------------------------------------------------------------------
+# Fixtures: the index pages' PDF links, and the text pypdf gives each notice (layout mode, as the feed reads it), with
+# the contact lines removed. pypdf is not needed: the feed's FileGet hands the saved text in place of the PDF.
+
+from ingest import oh_avon_lake_cso as AV
+from ingest import oh_cso_pdf_notices as PN
+from ingest import oh_fremont_cso as FR
+
+FR_INDEX = (FIX / "oh_fremont_cso_index.html").read_text()
+FR_TEXTS = json.loads((FIX / "oh_fremont_cso_texts.json").read_text())
+AV_INDEX = (FIX / "oh_avon_lake_cso_index.html").read_text()
+AV_TEXTS = json.loads((FIX / "oh_avon_lake_cso_texts.json").read_text())
+AV_REGISTRY = [
+    {"npdes_permit": "OH0023981", "outfall": "017", "outfall_status": "CSO", "outfall_kind": "cso",
+     "coords_from": "permitted_feature", "lat": 41.51111, "lon": -82.01944, "water_name": "Lake Erie"},
+    {"npdes_permit": "OH0023981", "outfall": "016", "outfall_status": "CLS", "outfall_kind": "cso",
+     "coords_from": "facility", "lat": 41.50028, "lon": -82.05723},
+]
+
+
+def _feed(mod, index, texts, tmp_path, now=NOW, to_records=None):
+    out = tmp_path / "e.json"
+    rc = PN.run_feed(mod.SOURCE_ID, mod.INDEX_URL, mod.LINK, mod.parse, to_records or mod.to_records,
+                     tmp_path / "s.json", now, get=PN.FileGet(mod.INDEX_URL, index, texts), out=out,
+                     text_of=PN.file_text, **({"extra_meta": AV.no_start_date} if mod is AV else {}))
+    return rc, json.loads(out.read_text())
+
+
+def test_fremont_links_are_the_notices_only():
+    links = PN.index_links(FR_INDEX, FR.INDEX_URL, FR.LINK)
+    assert len(links) == 10 and all("Annual" not in u and "NP-Rev" not in u and "MS4" not in u for u in links)
+    assert any(u.endswith("3-11-2026-SUPPLEMENTAL-NOTIFICATION-OF-COMBINED-SEWER-OVERFLOW-EVENT.pdf") for u in links)
+
+
+def test_fremont_records(tmp_path):
+    rc, d = _feed(FR, FR_INDEX, FR_TEXTS, tmp_path)
+    assert rc == 0 and d["ok"] is True and d["count"] == 9
+    ids = _ids(d["records"])
+    r = ids["20260809T2117"]
+    assert r["started_at"] == "2026-08-09T21:17:00-04:00" and r["ended_at"] == "2026-08-10T06:27:00-04:00"
+    assert r["status"] == "ended" and r["volume_gal"] == 949_249 and r["estimate_flag"] == "estimated"
+    assert r["volume_text"] == "0.949249 million gallons (approximate)" and r["waterbody_text"] == "Sandusky River"
+    assert r["npdes_permit"] == "OH0025291" and r["outfall_id"] is None and r["lat"] is None
+    assert r["source_url"].endswith("8-9-26-CSO-Notification.pdf") and r["published_at"] is None
+    assert ids["20260331T1904"]["ended_at"] == "2026-04-06T00:05:00-04:00"         # six days, as written
+    # 5:50PM to 10:52AM the same day: the end is before the start and is not used
+    odd = ids["20260422T1750"]
+    assert odd["ended_at"] is None and odd["status"] == "unknown" and odd["raw"]["end_as_written"] == "4/22/2026 10:52AM"
+    # the scanned notice has no text: listed, not a failure
+    assert [u.rsplit("/", 1)[1] for u in d["meta"]["image_only"]] == ["CSO-July21-2026.pdf"]
+    text = json.dumps(d)
+    assert "contact" not in text.lower() and "@" not in text
+
+
+def test_fremont_initial_and_supplemental_are_one_record(tmp_path):
+    url = next(u for u in FR_TEXTS if u.endswith("CSO-7-3-26-.pdf"))
+    initial = FR_TEXTS[url].replace("Supplemental NOTIFICATION", "Initial NOTIFICATION").replace("7/3/2026 8:35PM", "")
+    initial = re.sub(r"0\.328404", "", initial)
+    texts = {**FR_TEXTS, "https://www.fremontohio.org/wp-content/uploads/2026/07/CSO-7-3-26-initial.pdf": initial}
+    index = FR_INDEX.replace("</ul>", '<li><a href="https://www.fremontohio.org/wp-content/uploads/2026/07/'
+                                      'CSO-7-3-26-initial.pdf">initial</a></li></ul>')
+    rc, d = _feed(FR, index, texts, tmp_path)
+    same = [r for r in d["records"] if r["source_record_id"] == "20260703T1947"]
+    assert len(same) == 1 and same[0]["ended_at"] == "2026-07-03T20:35:00-04:00"
+    assert sorted(n["kind"] for n in same[0]["raw"]["notices"]) == ["initial", "supplemental"]
+
+
+def test_pdf_feed_failures(tmp_path):
+    rc, d = _feed(FR, FR_INDEX, FR_TEXTS, tmp_path)
+    n = d["count"]
+    # an index with no notice link (an error page, a new layout): failed, the records kept
+    rc, d = _feed(FR, "<html><body>Maintenance</body></html>", FR_TEXTS, tmp_path, now=LATER)
+    assert rc == 1 and d["ok"] is False and d["count"] == n and "no notice PDF link" in d["error"]
+    # a new notice whose text is not the form, and one that cannot be fetched: partial, named, the rest kept
+    texts = {**FR_TEXTS, "https://www.fremontohio.org/wp-content/uploads/2026/09/CSO-9-1-26.pdf": "Agenda for Council"}
+    index = FR_INDEX.replace("</ul>", '<li><a href="https://www.fremontohio.org/wp-content/uploads/2026/09/CSO-9-1-26.pdf">x</a></li>'
+                             '<li><a href="https://www.fremontohio.org/wp-content/uploads/2026/09/CSO-9-2-26.pdf">y</a></li></ul>')
+    rc, d = _feed(FR, index, texts, tmp_path, now=LATER)
+    assert rc == 1 and d["ok"] is False and d["count"] == n
+    assert "CSO-9-1-26.pdf" in d["error"] and "CSO-9-2-26.pdf" in d["error"]
+    # a notice taken off the index stays a past report
+    gone = re.sub(r'<li><a href="[^"]*8-9-26-CSO-Notification\.pdf">.*?</li>', "", FR_INDEX)
+    rc, d = _feed(FR, gone, FR_TEXTS, tmp_path, now=LATER)
+    assert rc == 0 and "20260809T2117" in _ids(d["records"])
+    # the two unread notices left the index too: no longer holding health false, named in meta
+    assert d["ok"] is True and [u.rsplit("/", 1)[1] for u in d["meta"]["left_unread"]] == ["CSO-9-1-26.pdf", "CSO-9-2-26.pdf"]
+
+
+def test_avon_lake_records(tmp_path):
+    rc, d = _feed(AV, AV_INDEX, AV_TEXTS, tmp_path, to_records=AV.make_to_records(AV_REGISTRY))
+    assert rc == 0 and d["ok"] is True
+    links = PN.index_links(AV_INDEX, AV.INDEX_URL, AV.LINK)
+    assert len(links) == 12 and not any("Annual" in u or "PNP" in u for u in links)
+    ids = _ids(d["records"])
+    r = ids["20260822T1800"]
+    assert r["started_at"] == "2026-08-22T18:00:00-04:00" and r["ended_at"] == "2026-08-22T19:30:00-04:00"
+    assert r["volume_gal"] == 900_000 and r["estimate_flag"] == "estimated" and r["waterbody_text"] == "Lake Erie"
+    assert r["outfall_id"] == "017" and (r["lat"], r["lon"]) == (41.51111, -82.01944)
+    assert r["outfall_name"] == "Center Road Pump Station"
+    assert r["raw"]["notices"][0]["initial_notice_sent"] == "8/22/2026" and r["published_at"] is None
+    # "500 10/21/2020": three digits are 05:00; the year's digits are never read as the time
+    assert ids["20201021T0500"]["started_at"] == "2020-10-21T05:00:00-04:00"
+    assert not any(k.endswith("T2020") for k in ids)
+    # an end time with no date is not dated from the start
+    e = ids["20250614T0715"]
+    assert e["ended_at"] is None and e["status"] == "unknown" and "has no date" in e["raw"]["end_note"]
+    # no end time at all
+    assert ids["20250521T1600"]["ended_at"] is None and "no end time" in ids["20250521T1600"]["raw"]["end_note"]
+    # an end before the start (the form's own start date may be mistyped) is not used
+    assert ids["20210102T2250"]["ended_at"] is None and "before its start" in ids["20210102T2250"]["raw"]["end_note"]
+    # "2000 on 6/29/2021"
+    assert ids["20210629T1635"]["ended_at"] == "2021-06-29T20:00:00-04:00"
+    # volume units: MG gives gallons; MGD (a rate) and a bare number do not
+    assert ids["20230823T2107"]["volume_gal"] == 3_500_000
+    assert ids["20210629T1635"]["volume_gal"] is None and "MGD" in ids["20210629T1635"]["raw"]["volume_note"]
+    assert ids["20250403T0330"]["volume_gal"] is None and ids["20250403T0330"]["volume_text"] == "1.2 (unit not stated)"
+    # no outfall number on the form: no tie
+    assert ids["20210509T1400"]["outfall_id"] is None and ids["20210509T1400"]["lat"] is None
+    # a start time with no date (2023-02-22's "1745") or none at all: no record, listed
+    nodate = [u.rsplit("/", 1)[1] for u in d["meta"]["no_start_date"]]
+    assert nodate == ["Public-notice-form-B-022223.pdf", "Public-notice-form-B-09152021.pdf"]
+    assert d["count"] == 10
+    text = json.dumps(d)
+    assert "Questions" not in text and "Inspector" not in text
+
+
+def test_avon_lake_when_and_water():
+    assert AV.when("1800 8/22/2026")[0].isoformat() == "2026-08-22T18:00:00-04:00"
+    assert AV.when("0016 7/27/2023")[0].isoformat() == "2023-07-27T00:16:00-04:00"
+    assert AV.when("1930 7/20/23")[0].isoformat() == "2023-07-20T19:30:00-04:00"
+    assert AV.when("0130 11/1/2026")[0].isoformat() == "2026-11-01T01:30:00-04:00"     # repeated hour: the first
+    assert AV.when("1745")[1].endswith("has no date") and AV.when("")[1] == "not given"
+    assert AV.when("2400 6/10/2026")[0] is None
+    assert AV.receiving_water("Date: Dec Lake Erie receives the discharge") == "Lake Erie"
+    with pytest.raises(PN.NoticeError):
+        AV.parse("Form B Supplemental\nStart time of CSO discharge: noon 8/22/2026")
+    assert AV.parse("Form B Supplemental\nStart time of CSO discharge: noon on Tuesday")["start"] is None
+    with pytest.raises(PN.NoticeError):
+        FR.parse("Minutes of the Water Committee")
