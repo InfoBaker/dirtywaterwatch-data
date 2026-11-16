@@ -104,8 +104,8 @@ def run_feed(source_id: str, index_url: str, pattern: re.Pattern, parse: Callabl
                 merge(state, url, None, now, image_only=True)
                 continue
             parsed = parse(text)
-        except (requests.RequestException, NoticeError, ValueError) as e:
-            unread[url] = f"{type(e).__name__}: {str(e)[:120]}"
+        except (requests.RequestException, NoticeError, ValueError, ImportError) as e:
+            unread[url] = f"{type(e).__name__}: {str(e)[:120]}"      # pypdf missing: unread, never "no notices"
             continue
         merge(state, url, parsed, now)
         new.append(parsed)

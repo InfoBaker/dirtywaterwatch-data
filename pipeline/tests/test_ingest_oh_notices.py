@@ -509,3 +509,14 @@ def test_avon_lake_when_and_water():
     assert AV.parse("Form B Supplemental\nStart time of CSO discharge: noon on Tuesday")["start"] is None
     with pytest.raises(PN.NoticeError):
         FR.parse("Minutes of the Water Committee")
+
+
+def test_pdf_reader_missing_is_an_unread_notice(tmp_path, monkeypatch):
+    def no_pypdf(content):
+        raise ImportError("No module named 'pypdf'")
+    monkeypatch.setattr(PN, "pdf_text", no_pypdf)
+    out = tmp_path / "e.json"
+    rc = PN.run_feed(FR.SOURCE_ID, FR.INDEX_URL, FR.LINK, FR.parse, FR.to_records, tmp_path / "s.json", NOW,
+                     get=PN.FileGet(FR.INDEX_URL, FR_INDEX, FR_TEXTS), out=out)
+    d = json.loads(out.read_text())
+    assert rc == 1 and d["ok"] is False and "ImportError" in d["error"] and d["count"] == 0
