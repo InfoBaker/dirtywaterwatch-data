@@ -112,7 +112,7 @@ def test_a_malformed_field_fails_the_read_and_the_held_closure_stays_red(monkeyp
     with pytest.raises(ValueError):
         W.check_read(bad["layer"], bad["count"])
     rc, out, saved = run_with(monkeypatch, tmp_path, bad["layer"], bad["count"], T1)
-    assert rc == 1 and out["ok"] is False and out["records"] == held and len(saved) == 1   # only the first read saved
+    assert rc == 1 and out["ok"] is False and out["records"] == held and saved == []   # nothing of the bad read saved
     k = recs_for(out["records"], KEGONSA)[0]
     assert k["status"] == "advisory_active" and colours_on(k, T1, T1) == {"red"}
 
@@ -163,8 +163,8 @@ def test_an_unknown_reason_is_kept_as_unknown_with_the_departments_action():
 def test_a_beach_returning_with_a_date_before_the_last_observed_end_starts_at_its_return():
     end, back = "2026-11-17T15:00:00Z", "2026-11-20T15:00:00Z"
     _, st, _ = W.records(feats(), {}, T0)
-    _, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "End"}}), {"beaches": st}, end)
-    recs, st, _ = W.records(feats(), {"beaches": st}, back)
+    _, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "End"}}), st, end)
+    recs, st, _ = W.records(feats(), st, back)
     rows = recs_for(recs, GILE)
     old = [r for r in rows if r["status"] == "advisory_lifted"][0]
     new = [r for r in rows if r["status"] == "advisory_active"][0]
@@ -200,10 +200,10 @@ def test_an_unknown_label_is_our_caution_while_listed_and_never_red_after_it_end
     recs, st, _ = W.records(feats(m), {}, first)
     g = recs_for(recs, GILE)[0]
     assert g["status"] == "unknown" and colours_on(g, first, first) == {"yellow"}
-    recs, st, _ = W.records(feats(m), {"beaches": st}, later)
+    recs, st, _ = W.records(feats(m), st, later)
     g = recs_for(recs, GILE)[0]
     assert colours_on(g, later, later) == {"yellow"}                   # still listed: still our caution
-    recs, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "End"}}), {"beaches": st}, end)
+    recs, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "End"}}), st, end)
     g = recs_for(recs, GILE)[0]
     assert g["ended_at"] == end
     assert all(i["color"] != "red" for i in ivs(g, end))

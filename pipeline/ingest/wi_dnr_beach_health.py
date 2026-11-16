@@ -14,27 +14,38 @@ Source (registry wi-dnr-beach-health)
   - Read by the GitHub runner on 2026-11-16 (runs 43788047052 at 01:45Z and 43788371768 at 01:48Z; this machine cannot
     open a connection to dnrmaps.wi.gov): 441 beaches, returnCountOnly 441; 439 "End" / "Closed for season", one
     "Advisory" / "Algae" (Gile Flowage Beach, ISSUED "17-SEP-26 - ") and one "Closed" / "Algae" (Lake Kegonsa State
-    Park Beach, "11-SEP-26 - "). The report table listed the same two, with the same dates, among 453 beaches: 14
+    Park Beach, "11-SEP-26 - "). The report table listed the same two, with the same dates, among 453 beaches: 12
     table beaches have no point on the layer (all "End" / "Closed for season" that day), and the table adds the
     nearest town. The service's other layer, OGW_Beach_Monitoring_Locations_Ext/MapServer/0, held 366 beaches and not
     Gile Flowage's advisory: it is not read.
+  - The report table (tblSearchResult) is read too, for the beaches the layer does not hold (by name; 12 on
+    2026-11-16): an advisory or closure there is a record with no point (raw.nearest_town, raw.read_from
+    "report_table"), listed for Wisconsin; its place on the map is not known and none is invented. A table that fails,
+    changes its columns, has a row out of shape, fewer than MIN_TABLE_ROWS rows or under 80 per cent of the last
+    complete table, keeps the table's held records, leaves the layer's alone, and fails health for that read only
+    (common.write_events partial).
 
 Records (rules only; the layer is read as a sequence of polls)
-  - One record per beach whose BEACH_ACTION is "Advisory" or "Closed" (or, should the two ever disagree, whose
-    MAP_STATUS is "Advisory" or "Closed": we show the stricter reading), as the Department's own advisory: red is the
-    Department's window, shown while the Department lists it. The type: a Reason naming algae (blue-green, cyano,
-    bloom) is a bloom (hab_advisory, the closure kept in raw.beach_action); otherwise "Closed" is beach_closure and
-    "Advisory" beach_advisory. Any other action value is kept with our caution only (status unknown, raw.
-    _agency_label_only, the label quoted), never dropped and never grey.
+  - One record per beach whose BEACH_ACTION or MAP_STATUS is "Advisory" or "Closed", the stronger kept (closure over
+    advisory), as the Department's own advisory: red is the Department's window, shown while the Department lists it.
+    A recognised signal is resolved before an unfamiliar action is considered (raw.unrecognised_action keeps it).
+    The type: a Reason naming algae only (blue-green, cyano, bloom) is a bloom (hab_advisory, the closure kept in
+    raw.bloom_action); a Reason naming bacteria and algae is one beach advisory or closure with raw._also_categories
+    ["bloom"], carried on its intervals and its one marker (build/status.py); a Reason naming neither is kept as
+    raw.reason_categories ["unknown"]. An action value we do not know, with nothing recognised, is our caution only
+    (status unknown, raw._agency_label_only: data/rules.json unresolved.sample_caution, to the later of 72 hours and
+    the last read that listed it plus 72 hours, or its end), never the Department's red, never dropped or grey.
   - Not advisories, and never shown as clean or safe: "End" (the advisory has ended), "Open", a Reason or map symbol of
-    "Closed for season" (the season's end, not a water finding), "Status Unknown" and "No Data Available" (no recent
-    sample). These make no record; the beach is grey ("no report"). A blank BEACH_ACTION says nothing: it neither
-    opens nor ends a record.
+    "Closed for season" (the season's end, not a water finding). These make no record; the beach is grey ("no
+    report"). The map symbols "Status Unknown" and "No Data Available" (no recent sample) open nothing and do not
+    cancel an advisory or closure the Department lists in BEACH_ACTION: both of today's records carry "No Data
+    Available". A blank BEACH_ACTION says nothing: it neither opens nor ends a record.
   - started_at: the Date of Advisory where ISSUED gives it unambiguously (DD-MON-YY, the Department's own form, a real
     date not after the read day: time_precision day, in Central time); otherwise the first read that listed the
     advisory (time_precision poll, raw.issued_text keeps the Department's text). No end is invented: an end date in
     ISSUED while the action still says Advisory or Closed is kept as text (raw.issued_end_text) and the record stays in
-    effect.
+    effect. A beach that returns with a Date of Advisory earlier than the end we saw of its last episode starts at the
+    return (time_precision poll, the text kept): the days between are not coloured.
   - The point is the layer's, rounded to three decimals (raw._point_extent_only): one marker; the lake or river is
     never coloured whole for one beach, and the water is the placement code's by its ordinary point rules
     (waterbody_text null). A beach without a usable point is listed, not mapped.
@@ -44,20 +55,22 @@ Records (rules only; the layer is read as a sequence of polls)
     source_end_text). A beach listed again later is a new record. Each read that lists it confirms it
     (raw._last_seen_in_source; raw.listed_periods after an unread gap of more than 14 days).
   - A read is complete only when the layer answers with a feature list, no exceededTransferLimit, every field asked
-    for on every beach, a unique integer BEACH_SEQ_NO, at least MIN_BEACHES beaches, no drop below 80 per cent of the
+    for on every beach and of its type (OBJECTID and BEACH_SEQ_NO integers, SAMPLEDATE a number or null, the texts
+    text or null, the point numbers or "NaN"), a unique BEACH_SEQ_NO, at least MIN_BEACHES beaches, no drop below 80 per cent of the
     last complete read's count, and a returnCountOnly count equal to the beaches returned. Any other read is ok false:
     it lifts, greys and drops nothing and keeps every record and the state (common.write_events), and the run exits 1.
   - Keys: "<BEACH_SEQ_NO>-<advisory|closure|label>-<issue date>" or, with no usable date, "...-p<first read>".
 
 Privacy: only the eight fields below are requested (no sampler, station or contact field exists on the layer; the
-STATIONNAME, ECOLIPRONAME, ECOLIVALUE and WATERTEMP fields are not requested); the beach name is scrubbed before
-anything is saved; data/raw keeps only the fields read, points rounded.
+STATIONNAME, ECOLIPRONAME, ECOLIVALUE and WATERTEMP fields are not requested); every text field read, and every table
+cell, is scrubbed before anything is saved, and again when a record is made from carried state; data/raw keeps only the fields read, points rounded.
 Cadence: hourly with the refresh once Wisconsin is live (daily before). Run from pipeline/:
 python -m ingest.wi_dnr_beach_health [--file saved.json] [--at ISO]
 """
 from __future__ import annotations
 
 import argparse
+import html as htmllib
 import json
 import math
 import re
@@ -87,6 +100,7 @@ TIMEOUT = (60, 300)
 BOUNDS = (-93.0, 42.4, -86.2, 47.4)          # Wisconsin with its Great Lakes shore; a point outside is not used
 MIN_BEACHES = 200                             # 441 on 2026-11-16; far fewer is a partial answer
 MIN_SHARE_OF_LAST = 0.8
+MIN_TABLE_ROWS = 200                          # 453 rows on 2026-11-16
 
 ADVISORY = re.compile(r"^\s*advisory\s*$", re.I)
 CLOSED = re.compile(r"^\s*clos(?:ed|ure)\s*$", re.I)
@@ -149,10 +163,26 @@ def _epoch(ms) -> str | None:
         return None
 
 
-# ---------------------------------------------------------------- the read
+
+
+# ---------------------------------------------------------------- the layer read
+
+TEXT_FIELDS = ("OGW_BEACH_NAME_TEXT", "STATUS", "BEACH_ACTION", "MAP_STATUS", "ISSUED")
+
+
+def _is_int(v) -> bool:
+    return isinstance(v, int) and not isinstance(v, bool)
+
+
+def _is_num(v) -> bool:
+    return isinstance(v, (int, float)) and not isinstance(v, bool)
+
 
 def check_read(js, count, last_count: int | None = None) -> list[dict]:
-    """The layer's features, or ValueError for anything but a complete answer (see the module text)."""
+    """The layer's features, or ValueError for anything but a complete answer: every field asked for present and of
+    its type on every beach (OBJECTID and BEACH_SEQ_NO integers, SAMPLEDATE an epoch number or null, the text fields
+    text or null, the point numbers, "NaN" or absent), BEACH_SEQ_NO unique, the count equal to the features, the floor
+    and the share of the last complete read met. A failed check ends, lifts and saves nothing (Astra review P1-1)."""
     if not isinstance(js, dict) or js.get("error") or not isinstance(js.get("features"), list):
         raise ValueError("the layer returned an error or no feature list")
     if js.get("exceededTransferLimit"):
@@ -160,21 +190,31 @@ def check_read(js, count, last_count: int | None = None) -> list[dict]:
     feats = js["features"]
     seen = set()
     for f in feats:
-        a = (f or {}).get("attributes")
+        if not isinstance(f, dict):
+            raise ValueError("a feature is not an object")
+        a = f.get("attributes")
         if not isinstance(a, dict) or any(k not in a for k in FIELDS):
             raise ValueError(f"a beach lacks the fields {FIELDS}")
         seq = a.get("BEACH_SEQ_NO")
-        if not isinstance(seq, int) or isinstance(seq, bool):
+        if not _is_int(seq):
             raise ValueError("a beach has no integer BEACH_SEQ_NO")
+        if not _is_int(a.get("OBJECTID")):
+            raise ValueError(f"beach {seq}: OBJECTID is not an integer")
+        if a.get("SAMPLEDATE") is not None and not _is_num(a["SAMPLEDATE"]):
+            raise ValueError(f"beach {seq}: SAMPLEDATE is not a date")
+        for k in TEXT_FIELDS:
+            if a.get(k) is not None and not isinstance(a[k], str):
+                raise ValueError(f"beach {seq}: {k} is not text")
+        g = f.get("geometry")
+        if g is not None:
+            if not isinstance(g, dict) or not all(_is_num(g.get(c)) or g.get(c) == "NaN" for c in ("x", "y")):
+                raise ValueError(f"beach {seq}: the point is malformed")
         if seq in seen:
             raise ValueError(f"beach {seq} is listed twice")
         seen.add(seq)
-        for k in ("BEACH_ACTION", "STATUS", "MAP_STATUS", "ISSUED", "OGW_BEACH_NAME_TEXT"):
-            if a.get(k) is not None and not isinstance(a[k], str):
-                raise ValueError(f"beach {seq}: {k} is not text")
     if len(feats) < MIN_BEACHES:
         raise ValueError(f"the layer returned {len(feats)} beaches, fewer than {MIN_BEACHES}")
-    if not isinstance(count, dict) or not isinstance(count.get("count"), int) or count["count"] != len(feats):
+    if not isinstance(count, dict) or not _is_int(count.get("count")) or count["count"] != len(feats):
         raise ValueError(f"the layer counts {(count or {}).get('count') if isinstance(count, dict) else None} beaches "
                          f"and returned {len(feats)}")
     if last_count and len(feats) < MIN_SHARE_OF_LAST * last_count:
@@ -183,93 +223,162 @@ def check_read(js, count, last_count: int | None = None) -> list[dict]:
 
 
 def safe_features(features: list[dict]) -> list[dict]:
-    """The fields read, the beach name scrubbed, the point rounded to three decimals, before anything is saved."""
+    """The fields read, every text scrubbed, the point rounded to three decimals, before anything is saved (P2)."""
     out = []
     for f in features:
         a = f.get("attributes") or {}
         lat, lon = _pt(f.get("geometry"))
-        attrs = {k: (scrub(a[k]) if k == "OGW_BEACH_NAME_TEXT" and isinstance(a.get(k), str) else a.get(k))
-                 for k in FIELDS if k in a}
+        attrs = {k: (scrub(a[k]) if isinstance(a.get(k), str) else a.get(k)) for k in FIELDS if k in a}
         out.append({"attributes": attrs, "geometry": {"x": lon, "y": lat} if lat is not None else None})
     return out
 
 
-# ---------------------------------------------------------------- records
+# ---------------------------------------------------------------- the report table (beaches with no point)
 
-def classify(a: dict) -> dict | None:
+TABLE_HEAD = ["beach name", "status", "reason", "date of advisory", "nearest town"]
+
+
+def _cell(c: str) -> str:
+    return re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", " ", c))).strip()
+
+
+def parse_table(page) -> list[dict]:
+    """The report page's results table as rows {name, status, reason, issued, town}, or ValueError when the table is
+    missing, its columns changed, a row is not in its shape or the page is cut off."""
+    if not isinstance(page, str):
+        raise ValueError("the report page is not text")
+    i = page.find('id="tblSearchResult"')
+    if i < 0:
+        raise ValueError("the report table was not found")
+    j = page.find("</table>", i)
+    if j < 0:
+        raise ValueError("the report table is cut off")
+    trs = re.findall(r"<tr[^>]*>(.*?)</tr>", page[i:j], re.S)
+    if not trs:
+        raise ValueError("the report table has no rows")
+    head = [_cell(c).lower() for c in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", trs[0], re.S)]
+    if head != TABLE_HEAD:
+        raise ValueError(f"the report table's columns changed: {head}")
+    rows = []
+    for tr in trs[1:]:
+        cells = [_cell(c) for c in re.findall(r"<td[^>]*>(.*?)</td>", tr, re.S)]
+        if len(cells) != 5 or not cells[0]:
+            raise ValueError("a report row is not in the table's shape")
+        rows.append({"name": scrub(cells[0]), "status": scrub(cells[1]), "reason": scrub(cells[2]),
+                     "issued": scrub(cells[3]), "town": scrub(cells[4])})
+    return rows
+
+
+def check_table(rows: list[dict], last_count: int | None = None) -> list[dict]:
+    if len(rows) < MIN_TABLE_ROWS:
+        raise ValueError(f"the report table has {len(rows)} rows, fewer than {MIN_TABLE_ROWS}")
+    if last_count and len(rows) < MIN_SHARE_OF_LAST * last_count:
+        raise ValueError(f"the report table has {len(rows)} rows, against {last_count} at the last complete read")
+    return rows
+
+
+def _norm(s) -> str:
+    return re.sub(r"\s+", " ", _s(s).lower())
+
+
+def table_only(rows: list[dict], features: list[dict]) -> list[dict]:
+    """The table's rows for beaches the layer does not hold (by name): the beaches with no map point."""
+    on_layer = {_norm((f.get("attributes") or {}).get("OGW_BEACH_NAME_TEXT")) for f in features}
+    return [r for r in rows if _norm(r["name"]) not in on_layer]
+
+
+# ---------------------------------------------------------------- what the fields say
+
+BACTERIA = re.compile(r"e\.?\s*coli|bacteri|enterococ|fecal|coliform", re.I)
+
+
+def reason_categories(reason: str) -> list[str]:
+    cats = [c for c, rx in (("bacteria", BACTERIA), ("bloom", BLOOM)) if rx.search(reason or "")]
+    return cats or ["unknown"]
+
+
+def classify(action: str, reason: str, sym: str) -> dict | None:
     """What the Department's fields say about one beach: None for no advisory in effect, {"blank": True} for a blank
-    action (says nothing), else the advisory's kind, category and labels."""
-    action, reason, sym = _s(a.get("BEACH_ACTION")), _s(a.get("STATUS")), _s(a.get("MAP_STATUS"))
+    action with nothing else recognised (it says nothing), else the advisory. A recognised advisory or closure, in the
+    action or the map symbol, is resolved first, the stronger of the two kept (closure over advisory); an unfamiliar
+    action is a label only when nothing is recognised (Astra review P1-4)."""
+    action, reason, sym = _s(action), _s(reason), _s(sym)
     if SEASON.search(reason) and not ADVISORY.match(action):
         return None                                    # the season's end: not an advisory, never a finding
-    kind, basis = None, "BEACH_ACTION"
-    if ADVISORY.match(action):
-        kind = "advisory"
-    elif CLOSED.match(action):
-        kind = "closure"
-    elif action and not NOT_IN_EFFECT.match(action):
-        kind = "label"
-    if kind is None and (ADVISORY.match(sym) or CLOSED.match(sym)):
-        kind, basis = ("advisory" if ADVISORY.match(sym) else "closure"), "MAP_STATUS"
-    if kind is None:
-        return {"blank": True} if not action else None
-    category = "bloom" if BLOOM.search(reason) else "bacteria_or_other"
-    return {"kind": kind, "category": category, "action": action or None, "reason": reason or None,
-            "map_status": sym or None, "basis": basis}
+    found = {}
+    for src, v in (("BEACH_ACTION", action), ("MAP_STATUS", sym)):
+        if ADVISORY.match(v):
+            found.setdefault("advisory", src)
+        elif CLOSED.match(v):
+            found.setdefault("closure", src)
+    unrecognised = action if action and not (ADVISORY.match(action) or CLOSED.match(action)
+                                             or NOT_IN_EFFECT.match(action)) else None
+    if found:
+        kind = "closure" if "closure" in found else "advisory"
+        basis = found[kind]
+    elif unrecognised:
+        kind, basis = "label", "BEACH_ACTION"
+    elif not action:
+        return {"blank": True}
+    else:
+        return None
+    cats = reason_categories(reason)
+    if cats == ["bloom"]:
+        etype, also = "hab_advisory", []
+    else:
+        etype = "beach_closure" if kind == "closure" else "beach_advisory"
+        also = ["bloom"] if "bloom" in cats else []
+    return {"kind": kind, "etype": etype, "also": also, "cats": cats, "action": action or None, "reason": reason or None,
+            "map_status": sym or None, "basis": basis, "unrecognised_action": unrecognised if found else None}
 
 
-def records(features: list[dict], prev: dict, now: str) -> tuple[list[dict], dict, dict]:
-    """Records from a complete read (check_read) of safe features, with the state carried between reads."""
-    state = {k: dict(v) for k, v in (prev.get("beaches") or {}).items()}
-    counts = {"beaches": len(features), "by_action": {}, "by_reason": {}, "by_map_status": {}, "in_effect": 0,
-              "without_point": 0}
-    current, blank = {}, set()
-    for f in features:
-        a = f.get("attributes") or {}
-        for key, fld in (("by_action", "BEACH_ACTION"), ("by_reason", "STATUS"), ("by_map_status", "MAP_STATUS")):
-            v = _s(a.get(fld)) or "(blank)"
-            counts[key][v] = counts[key].get(v, 0) + 1
-        seq = a["BEACH_SEQ_NO"]
-        c = classify(a)
-        if c is None:
-            continue
-        if c.get("blank"):
-            blank.add(seq)
-            continue
-        issued, end_text = parse_issued(a.get("ISSUED"), now)
-        lat, lon = _pt(f.get("geometry"))
-        counts["in_effect"] += 1
-        counts["without_point"] += lat is None
-        current[seq] = {**c, "name": _s(a.get("OGW_BEACH_NAME_TEXT")) or None, "issued": issued,
-                        "issued_text": _s(a.get("ISSUED")) or None, "issued_start": issued_start_text(a.get("ISSUED")),
-                        "issued_end_text": end_text, "lat": lat, "lon": lon, "sample_at": _epoch(a.get("SAMPLEDATE"))}
-    listed = {(f.get("attributes") or {}).get("BEACH_SEQ_NO"): f for f in features}
+# ---------------------------------------------------------------- records
+
+def _midnight_utc(day: str) -> datetime:
+    return datetime.fromisoformat(day).replace(tzinfo=TZ).astimezone(timezone.utc)
+
+
+def _iso(t: datetime) -> str:
+    return t.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def advance(state: dict, current: dict, listed: set, blank: set, now: str, key_of) -> dict:
+    """One complete read applied to the held records of one list (the layer's or the table's): each observation
+    continues the open record of the same item, kind, type and issue text, or opens a new one; an open record the read
+    no longer shows ends at this read (a blank action holds it)."""
+    state = {k: dict(v) for k, v in state.items()}
 
     def same(v, o) -> bool:
-        return (v["kind"], v["category"], v.get("issued_start") or "") == (o["kind"], o["category"],
-                                                                            o.get("issued_start") or "")
+        return (v["kind"], v["etype"], v.get("issued_start") or "") == (o["kind"], o["etype"],
+                                                                        o.get("issued_start") or "")
     matched = set()
-    for seq, o in current.items():
-        key = next((k for k, v in state.items() if v["seq"] == seq and not v.get("ended_at") and same(v, o)), None)
+    for iid, o in current.items():
+        key = next((k for k, v in state.items() if v["iid"] == iid and not v.get("ended_at") and same(v, o)), None)
         if key is None:
-            stamp = o["issued"] or "p" + re.sub(r"[^0-9T]", "", now)[:13]
-            key = base = f"{seq}-{o['kind']}-{stamp}"
+            start, prec, returned = o["issued"], "day" if o["issued"] else "poll", False
+            ends = [v["ended_at"] for v in state.values() if v["iid"] == iid and v.get("ended_at")]
+            if start and ends and _midnight_utc(start) < max(datetime.fromisoformat(e.replace("Z", "+00:00"))
+                                                             for e in ends):
+                # the Department's date is earlier than the end we saw of this beach's last episode: the days between
+                # were seen without it, so this episode starts at its return (Astra review P1-3)
+                start, prec, returned = None, "poll", True
+            stamp = start or "p" + re.sub(r"[^0-9T]", "", now)[:13]
+            key = base = key_of(iid, o["kind"], stamp)
             n = 2
-            while key in state:                        # a return with the same date: its own record
+            while key in state:
                 key, n = f"{base}-{n}", n + 1
-            state[key] = {"seq": seq, "first_seen_at": now, "last_seen_at": now,
-                          "started_at": o["issued"] or now, "precision": "day" if o["issued"] else "poll",
-                          **{k: o[k] for k in ("kind", "category", "action", "reason", "map_status", "basis", "name",
-                                               "issued", "issued_text", "issued_start", "issued_end_text", "lat",
-                                               "lon", "sample_at")}}
+            state[key] = {"iid": iid, "first_seen_at": now, "last_seen_at": now, "started_at": start or now,
+                          "precision": prec, "returned": returned, **o}
         else:
             v = state[key]
             v["listed_periods"] = extend_periods(v.get("listed_periods"), now, _period_origin(v), v.get("last_seen_at"))
             v["last_seen_at"] = now
-            for k in ("action", "reason", "map_status", "basis", "issued_text", "issued_end_text", "sample_at"):
-                v[k] = o[k]
+            for k in ("action", "reason", "cats", "also", "map_status", "basis", "unrecognised_action", "issued_text",
+                      "issued_end_text", "sample_at", "town"):
+                if k in o:
+                    v[k] = o[k]
             for k in ("name", "lat", "lon"):
-                if o[k] is not None and o[k] != v.get(k):
+                if o.get(k) is not None and o[k] != v.get(k):
                     if v.get(k) is not None:
                         v.setdefault("revisions", []).append({"seen_at": now, "field": k, "was": v.get(k),
                                                               "now": o[k]})
@@ -279,51 +388,142 @@ def records(features: list[dict], prev: dict, now: str) -> tuple[list[dict], dic
     for key, v in state.items():
         if v.get("ended_at") or key in matched:
             continue
-        if v["seq"] in blank:
+        if v["iid"] in blank:
             v["missing_since"] = v.get("missing_since") or now    # a blank action: not a lift
             continue
         v["ended_at"] = now                            # a complete read that no longer shows it
         v.pop("missing_since", None)
-        f = listed.get(v["seq"])
-        if f is not None:
-            a = f.get("attributes") or {}
-            v["end_seen"] = {"action": _s(a.get("BEACH_ACTION")) or None, "reason": _s(a.get("STATUS")) or None,
-                             "issued_text": _s(a.get("ISSUED")) or None}
-        else:
+        v["end_seen"] = listed.get(v["iid"]) if isinstance(listed, dict) else None
+        if v["end_seen"] is None:
             v["end_seen"] = {"absent": True}
-    recs = [_record(k, v, now) for k, v in sorted(state.items())]
-    return recs, state, counts
+    return state
+
+
+def _observation(action, reason, sym, issued_text, name, now, **extra) -> dict | None:
+    c = classify(action, reason, sym)
+    if c is None or c.get("blank"):
+        return c
+    issued, end_text = parse_issued(issued_text, now)
+    return {**c, "name": _s(name) or None, "issued": issued, "issued_text": _s(issued_text) or None,
+            "issued_start": issued_start_text(issued_text), "issued_end_text": end_text, **extra}
+
+
+def records(features: list[dict], prev: dict, now: str, table: list[dict] | None = None,
+            table_ok: bool = True) -> tuple[list[dict], dict, dict]:
+    """Records from a complete layer read (check_read) of safe features and, when table_ok, the report table's rows
+    (parse_table): the table only for the beaches the layer does not hold. When the table could not be read its held
+    records are carried unchanged. Returns (records, the new state, counts)."""
+    counts = {"beaches": len(features), "by_action": {}, "by_reason": {}, "by_map_status": {}, "in_effect": 0,
+              "without_point": 0}
+    current, blank, listed = {}, set(), {}
+    for f in features:
+        a = f.get("attributes") or {}
+        for key, fld in (("by_action", "BEACH_ACTION"), ("by_reason", "STATUS"), ("by_map_status", "MAP_STATUS")):
+            v = _s(a.get(fld)) or "(blank)"
+            counts[key][v] = counts[key].get(v, 0) + 1
+        seq = a["BEACH_SEQ_NO"]
+        listed[seq] = {"action": _s(a.get("BEACH_ACTION")) or None, "reason": _s(a.get("STATUS")) or None,
+                       "issued_text": _s(a.get("ISSUED")) or None}
+        lat, lon = _pt(f.get("geometry"))
+        o = _observation(a.get("BEACH_ACTION"), a.get("STATUS"), a.get("MAP_STATUS"), a.get("ISSUED"),
+                         a.get("OGW_BEACH_NAME_TEXT"), now, lat=lat, lon=lon, sample_at=_epoch(a.get("SAMPLEDATE")),
+                         source="layer")
+        if o is None:
+            continue
+        if o.get("blank"):
+            blank.add(seq)
+            continue
+        counts["in_effect"] += 1
+        counts["without_point"] += lat is None
+        current[seq] = o
+    beaches = advance(prev.get("beaches") or {}, current, listed, blank, now, lambda i, k, s: f"{i}-{k}-{s}")
+    new = {**prev, "beaches": beaches, "last_count": len(features)}
+    held_table = prev.get("table") or {}
+    if table_ok and table is not None:
+        only = table_only(table, features)
+        counts["table_rows"], counts["table_only_beaches"] = len(table), len(only)
+        tcur, tlisted, tblank = {}, {}, set()
+        for r in only:
+            iid = f"{_norm(r['name'])}|{_norm(r['town'])}"
+            tlisted[iid] = {"action": r["status"] or None, "reason": r["reason"] or None, "issued_text": r["issued"] or None}
+            o = _observation(r["status"], r["reason"], None, r["issued"], r["name"], now, lat=None, lon=None,
+                             town=r["town"] or None, source="report_table")
+            if o is None:
+                continue
+            if o.get("blank"):
+                tblank.add(iid)
+                continue
+            if iid in tcur:
+                raise ValueError(f"the report table lists {r['name']} twice")
+            tcur[iid] = o
+        counts["table_in_effect"] = len(tcur)
+        new["table"] = advance(held_table, tcur, tlisted, tblank, now, _table_key)
+        new["last_table_count"] = len(table)
+    else:
+        new["table"] = held_table
+    recs = [_record(k, v, now) for k, v in sorted(beaches.items())]
+    recs += [_record(k, v, now) for k, v in sorted(new["table"].items())]
+    return recs, new, counts
+
+
+def _table_key(iid: str, kind: str, stamp: str) -> str:
+    name, town = iid.split("|", 1)
+    slug = re.sub(r"[^a-z0-9]+", "-", f"{name} {town}").strip("-")
+    return f"t-{slug}-{kind}-{stamp}"
 
 
 def _period_origin(v: dict) -> str:
     """The first listing period starts at the Department's date (local midnight) where it gives one, else the first
     read: the Department's own window is confirmed by its date, the time before our first read is not ours."""
     if v.get("precision") == "day":
-        return datetime.fromisoformat(v["started_at"]).replace(tzinfo=TZ).astimezone(timezone.utc).strftime(
-            "%Y-%m-%dT%H:%M:%SZ")
+        return _iso(_midnight_utc(v["started_at"]))
     return v["started_at"]
 
 
+LABEL_CAUTION_HOURS = 72
+
+
 def _record(key: str, v: dict, now: str) -> dict:
-    bloom, kind = v["category"] == "bloom", v["kind"]
-    etype = "hab_advisory" if bloom else ("beach_closure" if kind == "closure" else "beach_advisory")
+    kind, etype = v["kind"], v["etype"]
+    from_table = v.get("source") == "report_table"
     has_pt = v.get("lat") is not None
-    raw = {"state": "WI", "time_zone": "America/Chicago", "beach_seq_no": v["seq"], "beach_name": v.get("name"),
-           "beach_action": v.get("action"), "reason": v.get("reason"), "map_status": v.get("map_status"),
-           "advisory_kind": kind, "read_from": v.get("basis"), "issued_text": v.get("issued_text"),
-           "last_sample_at": v.get("sample_at"), "first_seen_at": v.get("first_seen_at"),
-           "_last_seen_in_source": v.get("last_seen_at"), "_point_extent_only": True,
-           "extent_basis": ("the Department gives one point for the beach: shown at that point; the lake or river is "
-                            "not coloured whole"),
-           "point_basis": ("the beach's point on the Department's beach map layer, rounded to three decimals" if has_pt
-                           else "the Department's layer gives no usable point for this beach: listed, not mapped"),
-           "start_basis": ("the Department's Date of Advisory (ISSUED), a date with no time of day" if v.get("issued")
-                           else "the first read that listed the advisory; the Department's date could not be read "
-                                "unambiguously, and its text is kept (issued_text)")}
-    if bloom:
+    name, reason = scrub(v.get("name")), scrub(v.get("reason"))       # carried state is scrubbed again (P2)
+    raw = {"state": "WI", "time_zone": "America/Chicago", "beach_name": name,
+           "beach_action": scrub(v.get("action")), "reason": reason, "reason_categories": v.get("cats") or ["unknown"],
+           "map_status": scrub(v.get("map_status")), "advisory_kind": kind,
+           "read_from": "report_table" if from_table else v.get("basis"), "issued_text": scrub(v.get("issued_text")),
+           "first_seen_at": v.get("first_seen_at"), "_last_seen_in_source": v.get("last_seen_at"),
+           "_point_extent_only": True}
+    if from_table:
+        raw.update(nearest_town=scrub(v.get("town")),
+                   point_basis=("the Department's report lists this beach and its nearest town but gives no map point "
+                                "for it: its place on the map is not known, and none is invented"))
+    else:
+        raw.update(beach_seq_no=v["iid"], last_sample_at=v.get("sample_at"),
+                   extent_basis=("the Department gives one point for the beach: shown at that point; the lake or river "
+                                 "is not coloured whole"),
+                   point_basis=("the beach's point on the Department's beach map layer, rounded to three decimals"
+                                if has_pt else "the Department's layer gives no usable point for this beach: listed, "
+                                               "not mapped"))
+    if v.get("also"):
+        raw["_also_categories"] = list(v["also"])
+        raw["also_basis"] = ("the Department's reason names bacteria and algae: one advisory at the beach, counted as a "
+                             "beach advisory and as an algal bloom")
+    if v.get("unrecognised_action"):
+        raw["unrecognised_action"] = scrub(v["unrecognised_action"])
+    if etype == "hab_advisory":
         raw["bloom_action"] = "closure" if kind == "closure" else "advisory"
+    if v.get("returned"):
+        raw["start_basis"] = ("the read at which the beach returned to the Department's list; the Department's date "
+                              "(issued_text) is earlier than the end we saw of its last episode, so the days between "
+                              "are not shown")
+    elif v.get("precision") == "day":
+        raw["start_basis"] = "the Department's Date of Advisory, a date with no time of day"
+    else:
+        raw["start_basis"] = ("the first read that listed the advisory; the Department's date could not be read "
+                              "unambiguously, and its text is kept (issued_text)")
     if v.get("issued_end_text"):
-        raw["issued_end_text"] = v["issued_end_text"]
+        raw["issued_end_text"] = scrub(v["issued_end_text"])
         raw["issued_end_basis"] = ("the Department's text gives an end date while its action still lists the "
                                    "advisory; we keep showing it while it is listed")
     p = v.get("listed_periods") or []
@@ -338,40 +538,49 @@ def _record(key: str, v: dict, now: str) -> dict:
     if v.get("ended_at"):
         es = v.get("end_seen") or {}
         raw.update(ended_at_precision="poll",
-                   end_basis=("the first complete read of the Department's layer that no longer listed the beach"
+                   end_basis=("the first complete read of the Department's list that no longer listed the beach"
                               if es.get("absent") else
-                              "the first complete read of the Department's layer that no longer showed this advisory "
-                              f"(it then gave {es.get('action') or 'no action'}, {es.get('reason') or 'no reason'})"))
+                              "the first complete read of the Department's list that no longer showed this advisory "
+                              f"(it then gave {scrub(es.get('action')) or 'no action'}, "
+                              f"{scrub(es.get('reason')) or 'no reason'})"))
         _, end_text = parse_issued(es.get("issued_text"), v["ended_at"])
         if end_text:
-            raw["source_end_text"] = end_text
+            raw["source_end_text"] = scrub(end_text)
     if kind == "label":
-        raw.update(_agency_label_only=True, _agency_label=v.get("action"),
-                   _label_basis="a BEACH_ACTION value we do not know; kept with our caution")
+        # our caution while the Department lists a value we do not know, never its advisory, even after it ends
+        # (data/rules.json unresolved.sample_caution; Astra review P1-5)
+        raw.update(_agency_label_only=True, _agency_label=scrub(v.get("action")),
+                   _label_basis="a Beach Health action we do not know; shown with our caution while it is listed",
+                   _caution_to_notice_end=True, _open_notice_caution_hours=LABEL_CAUTION_HOURS,
+                   _notice_end_basis="the Department still listed the beach with this action")
+        if v.get("ended_at"):
+            raw["_notice_closed_at"] = v["ended_at"]
         status = "unknown"
     else:
         status = "advisory_lifted" if v.get("ended_at") else "advisory_active"
-    word = {"advisory": "an advisory", "closure": "a closure"}.get(kind, f"\"{v.get('action')}\"")
+    word = {"advisory": "an advisory", "closure": "a closure"}.get(kind, f"\"{scrub(v.get('action'))}\"")
     advice = (f"The Wisconsin DNR's Beach Health system lists {word} at this beach"
-              + (f" (reason: {v['reason']})" if v.get("reason") else "")
+              + (f" (reason: {reason})" if reason else "")
               + (f", dated {v['issued']}" if v.get("issued") else "") + ".")
     return event(
         source_id=SOURCE_ID, source_record_id=key, event_type=etype, status=status,
-        outfall_name=v.get("name") or f"Beach {v['seq']}", waterbody_text=None,
+        outfall_name=name or f"Beach {v['iid']}", waterbody_text=None,
         lat=v.get("lat"), lon=v.get("lon"), coord_source="beach" if has_pt else None,
         coord_precision_m=100 if has_pt else None,
         started_at=v["started_at"], ended_at=v.get("ended_at"), time_precision=v["precision"], fetched_at=now,
         reported_at=None, published_at=None, source_updated_at=None,
         authority=AUTHORITY, advice_text=advice,
-        advice_window_basis="shown while the Department's layer lists the advisory",
+        advice_window_basis=("our caution while the Department lists this action" if kind == "label"
+                             else "shown while the Department lists the advisory"),
         source_url=REPORT_URL, raw=raw)
 
 
-META = {"credit": "Wisconsin Department of Natural Resources, Wisconsin Beach Health (beach map layer)",
+META = {"credit": "Wisconsin Department of Natural Resources, Wisconsin Beach Health (beach map layer and report)",
         "license": "No licence statement on the service",
         "caveat": ("The Department's current advisories and closures, with its reason and date; blooms are shown as "
                    "blooms. Out of season most beaches read \"Closed for season\": that is the season's end, not a "
-                   "finding about the water."),
+                   "finding about the water. A lack of recent sample data does not cancel an advisory or closure the "
+                   "Department lists."),
         "time_basis": ("The Department's Date of Advisory (a date, no time of day); an end is the first read that no "
                        "longer lists the advisory.")}
 
@@ -380,9 +589,12 @@ def run(args) -> int:
     now = args.at or now_iso()
     prev = {} if args.file else (read_json(STATE_PATH, {}) or {})
     out = args.out
+    table, table_err = None, None
     if args.file:
         saved = json.loads(open(args.file).read())
-        feats = saved["beaches"]
+        feats, table = saved["beaches"], saved.get("table")
+        if table is None:
+            table_err = "the saved file holds no report table"
     else:
         try:
             r = requests.get(QUERY, headers=HEADERS, timeout=TIMEOUT)
@@ -390,26 +602,43 @@ def run(args) -> int:
             c = requests.get(COUNT, headers=HEADERS, timeout=TIMEOUT)
             c.raise_for_status()
             feats = safe_features(check_read(r.json(), c.json(), prev.get("last_count")))
-        except Exception as e:                         # any failure: nothing lifted, greyed or dropped
+        except Exception as e:                         # any failure: nothing lifted, greyed, dropped or saved
             write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}"[:300], meta=META, path=out)
             print(f"{SOURCE_ID}: read failed: {type(e).__name__}", file=sys.stderr)
             return 1
-        save_raw(SOURCE_ID, json.dumps({"format": SAFE_FORMAT, "beaches": feats}), "json")
+        try:
+            p = requests.get(REPORT_URL, headers=HEADERS, timeout=TIMEOUT)
+            p.raise_for_status()
+            table = check_table(parse_table(p.text), prev.get("last_table_count"))
+        except Exception as e:                         # the table alone failed: its held records stand
+            table, table_err = None, f"the report table: {type(e).__name__}: {e}"[:300]
+        save_raw(SOURCE_ID, json.dumps({"format": SAFE_FORMAT, "beaches": feats, "table": table}), "json")
     try:
-        recs, beaches, n = records(feats, prev, now)
+        recs, new, n = records(feats, prev, now, table, table_ok=table is not None)
+    except ValueError as e:
+        if table is None:
+            write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}"[:300], meta=META, path=out)
+            return 1
+        table_err = f"the report table: {type(e).__name__}: {e}"[:300]     # a table that cannot be applied
+        recs, new, n = records(feats, prev, now, None, table_ok=False)
     except Exception as e:
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}"[:300], meta=META, path=out)
         return 1
-    write_events(SOURCE_ID, recs, meta={**META, "counts": n}, path=out)
+    if table_err:
+        # the layer's read stands; the table's held records are carried, and health is false for this read
+        write_events(SOURCE_ID, recs, ok=False, error=table_err, meta={**META, "counts": n}, path=out, partial=True)
+    else:
+        write_events(SOURCE_ID, recs, meta={**META, "counts": n}, path=out)
     if not args.file:
-        write_json(STATE_PATH, {**prev, "beaches": beaches, "last_count": n["beaches"]})
-    print(f"{SOURCE_ID}: {len(recs)} records; {n['in_effect']} in effect of {n['beaches']} beaches")
-    return 0
+        write_json(STATE_PATH, new)
+    print(f"{SOURCE_ID}: {len(recs)} records; {n['in_effect']} in effect of {n['beaches']} beaches"
+          + (f"; {table_err}" if table_err else ""))
+    return 1 if table_err else 0
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--file", help="saved {beaches} JSON of safe features (no network)")
+    ap.add_argument("--file", help="saved {beaches, table} JSON of safe features and rows (no network)")
     ap.add_argument("--at")
     ap.add_argument("--out")
     return run(ap.parse_args(argv))

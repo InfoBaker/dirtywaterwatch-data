@@ -22,6 +22,7 @@ GILE, KEGONSA = 474, 309
 @pytest.fixture(autouse=True)
 def small_floor(monkeypatch):
     monkeypatch.setattr(W, "MIN_BEACHES", 5)          # the fixture is trimmed; the floor itself is tested below
+    monkeypatch.setattr(W, "MIN_TABLE_ROWS", 5)
 
 
 def layer():
@@ -127,10 +128,10 @@ def test_the_local_day_decides_a_date_at_the_read_day():
 
 def test_a_later_read_confirms_and_a_complete_read_that_shows_end_ends_it_at_that_read():
     _, st, _ = W.records(feats(), {}, T0)
-    recs, st, _ = W.records(feats(), {"beaches": st}, T1)
+    recs, st, _ = W.records(feats(), st, T1)
     assert all(r["raw"]["_last_seen_in_source"] == T1 and r["status"] == "advisory_active" for r in recs)
     recs, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "End", "STATUS": "Closed for season",
-                                          "ISSUED": "17-SEP-26 - 15-NOV-26"}}), {"beaches": st}, T2)
+                                          "ISSUED": "17-SEP-26 - 15-NOV-26"}}), st, T2)
     g = by_seq(recs)[GILE][0]
     assert g["status"] == "advisory_lifted" and g["ended_at"] == T2 and g["raw"]["ended_at_precision"] == "poll"
     assert g["raw"]["_last_seen_in_source"] == T1 and g["raw"]["source_end_text"] == "15-NOV-26"
@@ -140,7 +141,7 @@ def test_a_later_read_confirms_and_a_complete_read_that_shows_end_ends_it_at_tha
 
 def test_a_beach_gone_from_a_complete_read_ends_and_a_blank_action_holds():
     _, st, _ = W.records(feats(), {}, T0)
-    recs, st, _ = W.records(feats(drop={GILE}, mutate={KEGONSA: {"BEACH_ACTION": None}}), {"beaches": st}, T1)
+    recs, st, _ = W.records(feats(drop={GILE}, mutate={KEGONSA: {"BEACH_ACTION": None}}), st, T1)
     g, k = by_seq(recs)[GILE][0], by_seq(recs)[KEGONSA][0]
     assert g["status"] == "advisory_lifted" and g["ended_at"] == T1 and "no longer listed" in g["raw"]["end_basis"]
     assert k["status"] == "advisory_active" and k["ended_at"] is None
@@ -149,7 +150,7 @@ def test_a_beach_gone_from_a_complete_read_ends_and_a_blank_action_holds():
 
 def test_a_new_date_or_a_change_of_type_is_a_new_record_and_the_earlier_one_is_unchanged():
     _, st, _ = W.records(feats(), {}, T0)
-    recs, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "Closed"}}), {"beaches": st}, T1)
+    recs, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "Closed"}}), st, T1)
     rows = by_seq(recs)[GILE]
     assert len(rows) == 2
     old = [r for r in rows if r["source_record_id"] == "474-advisory-2026-09-17"][0]
@@ -160,9 +161,9 @@ def test_a_new_date_or_a_change_of_type_is_a_new_record_and_the_earlier_one_is_u
 
 def test_a_beach_that_returns_is_a_new_record():
     _, st, _ = W.records(feats(), {}, T0)
-    recs1, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "End"}}), {"beaches": st}, T1)
+    recs1, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "End"}}), st, T1)
     before = copy.deepcopy(by_seq(recs1)[GILE][0])
-    recs2, st, _ = W.records(feats({GILE: {"ISSUED": "02-JUN-27 - "}}), {"beaches": st},
+    recs2, st, _ = W.records(feats({GILE: {"ISSUED": "02-JUN-27 - "}}), st,
                              "2027-06-02T15:00:00Z")
     rows = by_seq(recs2)[GILE]
     assert len(rows) == 2
@@ -170,18 +171,19 @@ def test_a_beach_that_returns_is_a_new_record():
     assert {k: v for k, v in old.items() if k != "fetched_at"} == {k: v for k, v in before.items() if k != "fetched_at"}
     new = [r for r in rows if r["source_record_id"] != before["source_record_id"]][0]
     assert new["source_record_id"] == "474-advisory-2027-06-02" and new["status"] == "advisory_active"
-    # the same date listed again after an end: its own record, never the old one reopened
+    # the same date listed again after an end: its own record, never the old one reopened, starting at its return
+    # (the Department's date is before the end we saw; Astra review P1-3)
     _, st, _ = W.records(feats(), {}, T0)
-    _, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "End"}}), {"beaches": st}, T1)
-    recs3, _, _ = W.records(feats(), {"beaches": st}, T2)
+    _, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "End"}}), st, T1)
+    recs3, _, _ = W.records(feats(), st, T2)
     ids = sorted(r["source_record_id"] for r in by_seq(recs3)[GILE])
-    assert ids == ["474-advisory-2026-09-17", "474-advisory-2026-09-17-2"]
+    assert ids == ["474-advisory-2026-09-17", "474-advisory-p20261116T0348"]
 
 
 def test_a_read_after_an_unread_gap_opens_a_new_listing_period():
     _, st, _ = W.records(feats(), {}, T0)
-    _, st, _ = W.records(feats(), {"beaches": st}, T1)
-    recs, _, _ = W.records(feats(), {"beaches": st}, "2026-12-20T12:00:00Z")
+    _, st, _ = W.records(feats(), st, T1)
+    recs, _, _ = W.records(feats(), st, "2026-12-20T12:00:00Z")
     p = by_seq(recs)[GILE][0]["raw"]["listed_periods"]
     assert p == [{"from": "2026-09-17T05:00:00Z", "to": T1}, {"from": "2026-12-20T12:00:00Z",
                                                                "to": "2026-12-20T12:00:00Z"}]
@@ -247,6 +249,10 @@ def run_with(monkeypatch, tmp_path, js, cnt, at):
 
     def fake_get(url, **k):
         urls.append(url)
+        if "beachhealth" in url:
+            r = Resp()
+            r.text = (FIX.parent / "dnr_beach_report_table.html").read_text()
+            return r
         return Resp(cnt if "returnCountOnly" in url else js)
     monkeypatch.setattr(W.requests, "get", fake_get)
     rc = W.main(["--at", at])
@@ -333,7 +339,7 @@ def test_an_end_seen_weeks_later_never_colours_the_unread_weeks(monkeypatch):
     from tests.test_status import TEST_RULES
     monkeypatch.setattr(S, "_RULES", TEST_RULES)
     _, st, _ = W.records(feats(), {}, T0)
-    recs, _, _ = W.records(feats({GILE: {"BEACH_ACTION": "End"}}), {"beaches": st}, "2027-03-01T12:00:00Z")
+    recs, _, _ = W.records(feats({GILE: {"BEACH_ACTION": "End"}}), st, "2027-03-01T12:00:00Z")
     rec = [r for r in by_seq(recs)[GILE] if r["status"] == "advisory_lifted"][0]
     ivs = S.event_intervals(rec, "WI", datetime(2027, 3, 2, tzinfo=timezone.utc), None, TEST_RULES)
     red = [i for i in ivs if i["color"] == "red"]

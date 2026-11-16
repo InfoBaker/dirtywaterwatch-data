@@ -15,15 +15,21 @@ level: "state"
 #   as Status Unknown, Closed for season, No Data Available); SAMPLEDATE is the last sample's time.
 # The report page (https://apps.dnr.wi.gov/beachhealth/, Beach Name | Status | Reason | Date of Advisory | Nearest
 #   Town) listed the same two with the same dates among 453 beaches: its dates match the layer's on every beach both
-#   hold; it adds the nearest town and 14 beaches with no point on the layer (all "End" / "Closed for season" that
-#   day). It is not read. The service's other layer, OGW_Beach_Monitoring_Locations_Ext/MapServer/0, held 366 beaches
+#   hold; it adds the nearest town and 12 beaches with no point on the layer (by name) (all "End" / "Closed for season" that
+#   day). It is read for those beaches only (below). The service's other layer, OGW_Beach_Monitoring_Locations_Ext/MapServer/0, held 366 beaches
 #   and not Gile Flowage's advisory: not read.
 # Records: a beach whose action is Advisory or Closed (or whose map symbol is, the stricter reading) is the
 #   Department's own advisory, shown while the Department lists it; an algae reason is a bloom (hab_advisory), else
 #   beach_closure or beach_advisory. Started at the Date of Advisory where ISSUED gives it as DD-MON-YY (day, Central
-#   time), else at the first read with the text kept. "End", "Open", "Closed for season", "Status Unknown" and "No Data
-#   Available" make no record and are never shown as clean. Each beach is one marker at the layer's point (three
-#   decimals); a lake is never coloured whole for one beach.
+#   time), else at the first read with the text kept; a beach that returns with a date earlier than the end we saw of
+#   its last episode starts at its return. "End", "Open" and "Closed for season" make no record and are never shown as
+#   clean. The map symbol "Status Unknown" or "No Data Available" (no recent sample) does not cancel an advisory or closure the Department lists:
+#   both of today's records carry it. A reason naming bacteria and algae is one beach advisory also counted as a
+#   bloom. An action we do not know is our caution while listed, never the Department's red. Each beach is one
+#   marker at the layer's point (three decimals); a lake is never coloured whole for one beach.
+# The report table is read too, for the beaches the layer has no point for (12 on 2026-11-16): an advisory or closure
+#   there is a record with no point, listed with its beach and nearest town; a table read that fails or cannot be
+#   parsed keeps the table's held records, leaves the layer's alone and fails health for that read.
 # Fields read: OBJECTID, BEACH_SEQ_NO, OGW_BEACH_NAME_TEXT, STATUS, BEACH_ACTION, MAP_STATUS, ISSUED, SAMPLEDATE and the
 #   point (outSR 4326); STATIONNAME, ECOLIPRONAME, ECOLIVALUE and WATERTEMP are not requested. A read that is cut off,
 #   fails, errs, lacks a field, repeats a beach, returns fewer than 200 beaches or under 80 per cent of the last
@@ -38,7 +44,7 @@ event_types: ["beach_advisory", "beach_closure", "hab_advisory"]
 states: ["WI"]
 registry_ids: ["wi-wdnr-beach-health"]
 access: ["arcgis"]
-access_detail: "MapServer layer 1 query (where 1=1, the eight fields above, outSR 4326) and its returnCountOnly count, no token; maxRecordCount 2000."
+access_detail: "MapServer layer 1 query (where 1=1, the eight fields above, outSR 4326) and its returnCountOnly count, no token; maxRecordCount 2000. The report page's results table (tblSearchResult, five columns) for the beaches without a point."
 machine_readable: true
 legal_basis: "BEACH Act (33 U.S.C. 1346) for the Great Lakes beaches; NR 102 recreational criteria. The inland beaches are reported voluntarily by local health departments."
 checked: "2026-11-16"
