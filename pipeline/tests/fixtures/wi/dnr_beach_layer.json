@@ -1,0 +1,251 @@
+{
+ "_note": "Trimmed from the GitHub runner's read of WI DNR's BEACH_MONITORING_LOCATIONS/MapServer/1 query (run 43788371768, 2026-11-16T01:48Z; one request, the pipeline's user agent; the eight fields asked for): the two beaches then in effect (Gile Flowage Beach, Algae advisory; Lake Kegonsa State Park Beach, Algae closure) and nine of the 439 'End' / 'Closed for season' beaches, as returned. The layer's returnCountOnly answered 441.",
+ "layer": {
+  "displayFieldName": "OGW_BEACH_NAME_TEXT",
+  "fieldAliases": {
+   "OBJECTID": "OBJECTID",
+   "BEACH_SEQ_NO": "BEACH_SEQ_NO",
+   "OGW_BEACH_NAME_TEXT": "OGW_BEACH_NAME_TEXT",
+   "STATUS": "STATUS",
+   "BEACH_ACTION": "BEACH_ACTION",
+   "MAP_STATUS": "MAP_STATUS",
+   "ISSUED": "ISSUED",
+   "SAMPLEDATE": "SAMPLEDATE"
+  },
+  "geometryType": "esriGeometryPoint",
+  "spatialReference": {
+   "wkid": 4326,
+   "latestWkid": 4326
+  },
+  "fields": [
+   {
+    "name": "OBJECTID",
+    "type": "esriFieldTypeOID",
+    "alias": "OBJECTID"
+   },
+   {
+    "name": "BEACH_SEQ_NO",
+    "type": "esriFieldTypeInteger",
+    "alias": "BEACH_SEQ_NO"
+   },
+   {
+    "name": "OGW_BEACH_NAME_TEXT",
+    "type": "esriFieldTypeString",
+    "alias": "OGW_BEACH_NAME_TEXT",
+    "length": 300
+   },
+   {
+    "name": "STATUS",
+    "type": "esriFieldTypeString",
+    "alias": "STATUS",
+    "length": 240
+   },
+   {
+    "name": "BEACH_ACTION",
+    "type": "esriFieldTypeString",
+    "alias": "BEACH_ACTION",
+    "length": 240
+   },
+   {
+    "name": "MAP_STATUS",
+    "type": "esriFieldTypeString",
+    "alias": "MAP_STATUS",
+    "length": 17
+   },
+   {
+    "name": "ISSUED",
+    "type": "esriFieldTypeString",
+    "alias": "ISSUED",
+    "length": 39
+   },
+   {
+    "name": "SAMPLEDATE",
+    "type": "esriFieldTypeDate",
+    "alias": "SAMPLEDATE",
+    "length": 8
+   }
+  ],
+  "features": [
+   {
+    "attributes": {
+     "OBJECTID": 26060,
+     "BEACH_SEQ_NO": 474,
+     "OGW_BEACH_NAME_TEXT": "Gile Flowage Beach",
+     "STATUS": "Algae",
+     "BEACH_ACTION": "Advisory",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "17-SEP-26 - ",
+     "SAMPLEDATE": 1788281100000
+    },
+    "geometry": {
+     "x": -90.22407533398659,
+     "y": 46.42541972372513
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 12674,
+     "BEACH_SEQ_NO": 309,
+     "OGW_BEACH_NAME_TEXT": "Lake Kegonsa State Park Beach",
+     "STATUS": "Algae",
+     "BEACH_ACTION": "Closed",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "11-SEP-26 - ",
+     "SAMPLEDATE": 1788411600000
+    },
+    "geometry": {
+     "x": -89.22939869149117,
+     "y": 42.97177821837954
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 373,
+     "BEACH_SEQ_NO": 302,
+     "OGW_BEACH_NAME_TEXT": "Twin Valley Beach -- Gov Dodge Sp",
+     "STATUS": "Closed for season",
+     "BEACH_ACTION": "End",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "08-SEP-26 - 08-SEP-26",
+     "SAMPLEDATE": 1788238800000
+    },
+    "geometry": {
+     "x": -90.09139000205347,
+     "y": 43.03133000005367
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 409,
+     "BEACH_SEQ_NO": 323,
+     "OGW_BEACH_NAME_TEXT": "Kettle Moraine Sf - Northern Unit - Long Lake North Beach",
+     "STATUS": "Closed for season",
+     "BEACH_ACTION": "End",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "08-SEP-26 - 08-SEP-26",
+     "SAMPLEDATE": 1788238800000
+    },
+    "geometry": {
+     "x": -88.16883042103728,
+     "y": 43.667779098418904
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 420,
+     "BEACH_SEQ_NO": 1278,
+     "OGW_BEACH_NAME_TEXT": "Warner Beach",
+     "STATUS": "Closed for season",
+     "BEACH_ACTION": "End",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "08-SEP-26 - 08-SEP-26",
+     "SAMPLEDATE": 1788189420000
+    },
+    "geometry": {
+     "x": -89.37965151722075,
+     "y": 43.12798000654481
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 549,
+     "BEACH_SEQ_NO": 299,
+     "OGW_BEACH_NAME_TEXT": "Council Grounds State Park Beach",
+     "STATUS": "Closed for season",
+     "BEACH_ACTION": "End",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "08-SEP-26 - 08-SEP-26",
+     "SAMPLEDATE": 1788411600000
+    },
+    "geometry": {
+     "x": -89.75428000055621,
+     "y": 45.18941999937794
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 7544,
+     "BEACH_SEQ_NO": 301,
+     "OGW_BEACH_NAME_TEXT": "Devil's Lake State Park - South Shore Beach",
+     "STATUS": "Closed for season",
+     "BEACH_ACTION": "End",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "08-SEP-26 - 08-SEP-26",
+     "SAMPLEDATE": 1788411600000
+    },
+    "geometry": {
+     "x": -89.72751214052607,
+     "y": 43.4094391307921
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 19462,
+     "BEACH_SEQ_NO": 72,
+     "OGW_BEACH_NAME_TEXT": "Brule River State Forest Beach 1",
+     "STATUS": "Closed for season",
+     "BEACH_ACTION": "End",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "08-SEP-26 - 08-SEP-26",
+     "SAMPLEDATE": 1689785460000
+    },
+    "geometry": {
+     "x": -91.61076593795705,
+     "y": 46.74768118803331
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 19451,
+     "BEACH_SEQ_NO": 240,
+     "OGW_BEACH_NAME_TEXT": "Lakeview Park Beach",
+     "STATUS": "Closed for season",
+     "BEACH_ACTION": "End",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "08-SEP-26 - 08-SEP-26",
+     "SAMPLEDATE": null
+    },
+    "geometry": {
+     "x": -87.7070700004074,
+     "y": 43.720219999596175
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 19331,
+     "BEACH_SEQ_NO": 239,
+     "OGW_BEACH_NAME_TEXT": "Prairie Shores ",
+     "STATUS": "Closed for season",
+     "BEACH_ACTION": "End",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "12-AUG-26 - ",
+     "SAMPLEDATE": 1788185700000
+    },
+    "geometry": {
+     "x": -87.81124000025471,
+     "y": 42.517219998543325
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 19333,
+     "BEACH_SEQ_NO": 88,
+     "OGW_BEACH_NAME_TEXT": "Pennoyer Park Beach",
+     "STATUS": "Closed for season",
+     "BEACH_ACTION": "End",
+     "MAP_STATUS": "No Data Available",
+     "ISSUED": "29-MAY-26 - ",
+     "SAMPLEDATE": 1788357060000
+    },
+    "geometry": {
+     "x": -87.81813999908212,
+     "y": 42.60469999865527
+    }
+   }
+  ]
+ },
+ "count_real": 441,
+ "count": {
+  "count": 11
+ }
+}

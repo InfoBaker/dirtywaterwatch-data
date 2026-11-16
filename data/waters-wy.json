@@ -1,0 +1,4134 @@
+{
+ "state": "WY",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 126,
+ "waters": [
+  {
+   "slug": "alcova-reservoir-wy",
+   "name": "Alcova Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Alcova",
+    "Alcova Po"
+   ],
+   "bbox": [
+    -106.77804,
+    42.50974,
+    -106.708849,
+    42.550342
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.358,
+   "launches": [
+    "alcova-reservoir-marina-ramp-wy",
+    "black-beach-wy",
+    "alcova-reservoir-boat-launch-wy",
+    "cottonwood-wy",
+    "fremont-wy",
+    "okie-beach-wy"
+   ],
+   "water_id": "alcova-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "f97b04175284dd24f908de2bebdcc66ad2b1744126af86a7404dc09c20a50801",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "alsop-lake-wy",
+   "name": "Alsop Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Laramie"
+   ],
+   "bbox": [
+    -105.796616,
+    41.390757,
+    -105.785512,
+    41.394499
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.195,
+   "launches": [
+    "alsop-lake-public-access-area-wy"
+   ],
+   "water_id": "alsop-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "976f3ef0ed822f40be7ff2bd9aa94fa7ed8ef2573f6e5687fdf46a0adfb1e8bb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-river-wy",
+   "name": "Bear River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Evanston"
+   ],
+   "bbox": [
+    -111.162774,
+    40.995378,
+    -110.870264,
+    42.213453
+   ],
+   "wikidata": "Q813008",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bear-river-boat-launch-near-evanston-wy"
+   ],
+   "water_id": "bear-river-ut",
+   "gnis_id": "1438485",
+   "geometry_hash": "3c8778c5c24588269ebb6ab5a8716d4d0462c1adace238c1a34e81506a5e066e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beartooth-lake-wy",
+   "name": "Beartooth Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.601193,
+    44.939592,
+    -109.587149,
+    44.952022
+   ],
+   "wikidata": "Q49299221",
+   "charted": false,
+   "area_km2": 0.765,
+   "launches": [
+    "beartooth-lake-boat-launch-wy"
+   ],
+   "water_id": "beartooth-lake-wy",
+   "gnis_id": "1598037",
+   "geometry_hash": "abe07ee59e17581ef7b1e4e3826bd80d97b2a180504d0683d6fa6d7484da5100",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beck-lake-wy",
+   "name": "Beck Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Cody"
+   ],
+   "bbox": [
+    -109.056023,
+    44.508436,
+    -109.038701,
+    44.514821
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.427,
+   "launches": [
+    "beck-lake-boat-launch-wy"
+   ],
+   "water_id": "beck-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "05ae7fb206c256c1f1b2a54db221d698be90d00c8860a6422ee743109a6023c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-sandy-reservoir-wy",
+   "name": "Big Sandy Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.469491,
+    42.245771,
+    -109.409645,
+    42.291714
+   ],
+   "wikidata": "Q49700023",
+   "charted": false,
+   "area_km2": 6.988,
+   "launches": [
+    "big-sandy-recreation-area-wy"
+   ],
+   "water_id": "big-sandy-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "9755c7117f5e5d2e0179f6a970c52935b48f7864cdc9a325b7d57fba05717020",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bighorn-lake-wy",
+   "name": "Bighorn Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Kane",
+    "Lovell"
+   ],
+   "bbox": [
+    -108.266981,
+    44.855686,
+    -107.955733,
+    45.308709
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 45.641,
+   "launches": [
+    "cottonwood-creek-boat-ramp-wy",
+    "horseshoe-bend-boat-launch-wy"
+   ],
+   "water_id": "bighorn-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "dc78c2b1b28621107d59b1b096cf8811b22f98b9189aa48ccc3e7fa7e3a8afd0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bighorn-river-wy",
+   "name": "Bighorn River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Basin",
+    "Durkee",
+    "Greybull",
+    "Manderson",
+    "Thermopolis",
+    "Winchester",
+    "Worland"
+   ],
+   "bbox": [
+    -108.256356,
+    43.581105,
+    -107.911244,
+    44.954861
+   ],
+   "wikidata": "Q859686",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "8th-street-bridge-wy",
+    "basin-boat-ramp-wy",
+    "durkee-boat-launch-wy",
+    "eggert-access-wy",
+    "greybull-boat-ramp-wy",
+    "hot-springs-state-park-wy",
+    "kirby-ditch-public-access-area-wy",
+    "longwell-public-access-area-wy",
+    "manderson-boat-ramp-wy",
+    "skelton-public-access-area-wy",
+    "wakely-public-access-area-wy",
+    "wedding-of-the-waters-public-access-area-wy",
+    "worland-wy"
+   ],
+   "water_id": "bighorn-river-mt",
+   "gnis_id": "779903",
+   "geometry_hash": "e51e0cf573615d999223008cbea430a7a79dd8529407a930b01cd14e3a547cbb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bosler-reservoir-wy",
+   "name": "Bosler Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Rock River"
+   ],
+   "bbox": [
+    -106.092932,
+    41.605648,
+    -106.087772,
+    41.614504
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.238,
+   "launches": [
+    "diamond-lake-east-ramp-wy",
+    "diamond-lake-north-ramp-wy"
+   ],
+   "water_id": "bosler-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "735c07531a9816330b8d0e4c4516b68af8b1e061e799ece6fec5cf72b76e02ee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boulder-lake-wy",
+   "name": "Boulder Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Boulder",
+    "Pinedale"
+   ],
+   "bbox": [
+    -109.705244,
+    42.829119,
+    -109.61997,
+    42.8606
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.014,
+   "launches": [
+    "boulder-lake-boat-launch-wy",
+    "boulder-lake-boating-site-wy",
+    "north-boulder-lake-campground-boat-launch-wy"
+   ],
+   "water_id": "boulder-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "f574026c8da1fc80a2d55260d2951dad520e81af6a149ec96b45e24249e6f985",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boysen-reservoir-wy",
+   "name": "Boysen Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Shoshoni"
+   ],
+   "bbox": [
+    -108.259256,
+    43.189385,
+    -108.138747,
+    43.417603
+   ],
+   "wikidata": "Q896063",
+   "charted": false,
+   "area_km2": 75.405,
+   "launches": [
+    "brannon-wy",
+    "cottonwood-bay-wy",
+    "fremont-bay-wy",
+    "fremont-bay-boat-ramp-wy",
+    "lakeside-wy",
+    "tough-creek-wy"
+   ],
+   "water_id": "boysen-reservoir-wy",
+   "gnis_id": "1585867",
+   "geometry_hash": "b41d03bde97ea128e37df3b6432f7ddb4f18be2c6632445c821e30ea747032f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brooks-lake-wy",
+   "name": "Brooks Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -110.010738,
+    43.751385,
+    -109.997462,
+    43.761773
+   ],
+   "wikidata": "Q49299842",
+   "charted": false,
+   "area_km2": 0.899,
+   "launches": [
+    "brooks-lake-boat-launch-wy"
+   ],
+   "water_id": "brooks-lake-wy",
+   "gnis_id": "1598387",
+   "geometry_hash": "0a6f2357f6d5b786e65ad86007cd78a5923b09c99ef8ffcdecbb6d89d1d92735",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "buffalo-bill-reservoir-wy",
+   "name": "Buffalo Bill Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Cody"
+   ],
+   "bbox": [
+    -109.331181,
+    44.43247,
+    -109.180799,
+    44.504232
+   ],
+   "wikidata": "Q35043122",
+   "charted": false,
+   "area_km2": 33.375,
+   "launches": [
+    "buffalo-bill-reservoir-boat-launch-wy",
+    "bartlett-lane-south-fork-wy",
+    "gibbs-bridge-wy",
+    "north-shore-wy",
+    "stagecoach-boat-ramp-wy"
+   ],
+   "water_id": "buffalo-bill-reservoir-wy",
+   "gnis_id": "1604367",
+   "geometry_hash": "93cfb43217ae62903bd7d9fd031ec3a70210b4e3aa8350ab78d7d8a57d80b674",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bull-lake-wy",
+   "name": "Bull Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.185438,
+    43.169408,
+    -109.041069,
+    43.213215
+   ],
+   "wikidata": "Q49700140",
+   "charted": false,
+   "area_km2": 12.257,
+   "launches": [
+    "bull-lake-boat-launch-wy"
+   ],
+   "water_id": "bull-lake-wy",
+   "gnis_id": "1586105",
+   "geometry_hash": "b4438d21e59c25c30bbd9706198114bd128bc7a69cb82a41fedc03f53c9d2bb2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "burnt-lake-wy",
+   "name": "Burnt Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Pinedale"
+   ],
+   "bbox": [
+    -109.668817,
+    42.865451,
+    -109.635141,
+    42.893501
+   ],
+   "wikidata": "Q49300007",
+   "charted": false,
+   "area_km2": 3.36,
+   "launches": [
+    "burnt-lake-boat-launch-wy"
+   ],
+   "water_id": "burnt-lake-wy",
+   "gnis_id": "1598520",
+   "geometry_hash": "a719f1e7b9fc982b290df55b15725ba2ad5f9deac2ffe5919f574830be5793a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clarks-fork-yellowstone-river-wy",
+   "name": "Clarks Fork Yellowstone River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Clark"
+   ],
+   "bbox": [
+    -109.894274,
+    44.783685,
+    -108.817948,
+    45.570346
+   ],
+   "wikidata": "Q2975665",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beartooth-ranch-wy",
+    "eidelweiss-public-access-area-wy",
+    "morrison-jeep-trail-access-wy",
+    "river-runners-wy"
+   ],
+   "water_id": "clarks-fork-yellowstone-river-mt",
+   "gnis_id": "798974",
+   "geometry_hash": "816c900a01eafc03da600cfec8298a35d164b8901203d70e5fe0e76b1792b0fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cook-lake-wy",
+   "name": "Cook Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Hulett"
+   ],
+   "bbox": [
+    -104.409519,
+    44.587258,
+    -104.404975,
+    44.594726
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.121,
+   "launches": [
+    "cook-lake-boat-launch-near-hulett-wy"
+   ],
+   "water_id": "cook-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "65d405124bfca1870d80149160aca7c68e7b334b63a52132c7af89317fdcc613",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-lake-wy",
+   "name": "Cottonwood Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Afton"
+   ],
+   "bbox": [
+    -110.818122,
+    42.634027,
+    -110.81072,
+    42.638064
+   ],
+   "wikidata": "Q49300995",
+   "charted": false,
+   "area_km2": 0.118,
+   "launches": [
+    "cottonwood-boating-site-wy"
+   ],
+   "water_id": "cottonwood-lake-wy",
+   "gnis_id": "1604775",
+   "geometry_hash": "8dcddd34412f344ec8cff449dfdb5dbded0f95e90ab7e439766cb91a6a4667a8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-lake-reservoir-wy",
+   "name": "Crystal Lake Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Hecla"
+   ],
+   "bbox": [
+    -105.208472,
+    41.152123,
+    -105.196285,
+    41.164
+   ],
+   "wikidata": "Q49700419",
+   "charted": false,
+   "area_km2": 0.512,
+   "launches": [
+    "crystal-reservoir-ramp-curt-gowdy-state-park-wy"
+   ],
+   "water_id": "crystal-lake-reservoir-wy",
+   "gnis_id": "1587276",
+   "geometry_hash": "d0fde81b83eda15061ddafe499d19c49e0ff073f643efd33d66f74eae2d88628",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deaver-reservoir-wy",
+   "name": "Deaver Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Deaver"
+   ],
+   "bbox": [
+    -108.642663,
+    44.898742,
+    -108.632626,
+    44.903365
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.274,
+   "launches": [
+    "deaver-boat-ramp-wy"
+   ],
+   "water_id": "deaver-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "cdd9da8ae50079126a4896d299e9d2f246b8162b28db556d833a7335bcdd1c55",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dinwoody-lake-wy",
+   "name": "Dinwoody Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.368915,
+    43.361373,
+    -109.358157,
+    43.382985
+   ],
+   "wikidata": "Q49301689",
+   "charted": false,
+   "area_km2": 1.651,
+   "launches": [
+    "dinwoody-lake-boat-launch-wy"
+   ],
+   "water_id": "dinwoody-lake-wy",
+   "gnis_id": "1587631",
+   "geometry_hash": "84613ab0b2064839b557bc79cef9d7362509220f26af929f560c54c3a4fc62f2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dollar-lake-wy",
+   "name": "Dollar Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -110.008571,
+    43.340848,
+    -110.003185,
+    43.343908
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.114,
+   "launches": [
+    "dollar-lake-boat-ramp-wy"
+   ],
+   "water_id": "dollar-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "9d39df3319c94fccd4de2bd4836164d5420dde0dd6930882f427854d657286cf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-allen-lake-wy",
+   "name": "East Allen Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Medicine Bow"
+   ],
+   "bbox": [
+    -106.242584,
+    41.868126,
+    -106.208512,
+    41.882602
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.804,
+   "launches": [
+    "east-allen-lake-boat-launch-wy",
+    "east-allen-lake-public-access-area-wy"
+   ],
+   "water_id": "east-allen-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "1f121472b5c1f6ea46113b8b928f89b7f0380d000a5ea52bc2204b4911257ea0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-newton-lake-wy",
+   "name": "East Newton Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Cody"
+   ],
+   "bbox": [
+    -109.120397,
+    44.541507,
+    -109.115891,
+    44.54744
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.157,
+   "launches": [
+    "newton-lakes-public-access-area-cody-wy"
+   ],
+   "water_id": "east-newton-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "f69dbf3a48351d073477608cc8ead1ec52210e94606323d6a2c96c0259b577bd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "encampment-river-wy",
+   "name": "Encampment River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Encampment"
+   ],
+   "bbox": [
+    -106.827756,
+    40.931112,
+    -106.714728,
+    41.311704
+   ],
+   "wikidata": "Q5375293",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "baggot-rocks-wyoming-state-trust-lands-access-wy",
+    "encampment-river-campground-wy",
+    "encampment-river-boat-launch-wy"
+   ],
+   "water_id": "encampment-river-wy",
+   "gnis_id": "1596818",
+   "geometry_hash": "0f7a89881632c8fd5fa4df093c78b79c362087b713b0c42252257e1f7f3ad0e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fiddlers-lake-wy",
+   "name": "Fiddlers Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Lander"
+   ],
+   "bbox": [
+    -108.882532,
+    42.628155,
+    -108.876149,
+    42.633641
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.214,
+   "launches": [
+    "fiddlers-lake-boat-launch-wy"
+   ],
+   "water_id": "fiddlers-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "676e29959e8961ae156b9e1af0e3fe1ac0c5a2c4a713fc2fa874d5f977f8f8ed",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flaming-gorge-reservoir-wy",
+   "name": "Flaming Gorge Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Green River"
+   ],
+   "bbox": [
+    -109.687166,
+    40.881807,
+    -109.38484,
+    41.471256
+   ],
+   "wikidata": "Q176598",
+   "charted": false,
+   "area_km2": 161.984,
+   "launches": [
+    "anvil-draw-wy",
+    "buckboard-crossing-wy",
+    "firehole-wy",
+    "holmes-crossing-wy",
+    "upper-marsh-creek-wy"
+   ],
+   "water_id": "flaming-gorge-reservoir-ut",
+   "gnis_id": "1441113",
+   "geometry_hash": "fcb119c1a2e384305728bef30a288f6058eeecde2abb06ece864d8920fb520a7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fontenelle-reservoir-wy",
+   "name": "Fontenelle Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Fontenelle"
+   ],
+   "bbox": [
+    -110.185771,
+    42.026299,
+    -110.047729,
+    42.156846
+   ],
+   "wikidata": "Q5465178",
+   "charted": false,
+   "area_km2": 31.711,
+   "launches": [
+    "fontenelle-boat-ramp-near-dam-wy",
+    "fontenelle-creek-campground-wy"
+   ],
+   "water_id": "fontenelle-reservoir-wy",
+   "gnis_id": "1588609",
+   "geometry_hash": "a5d5e6f957662e0e7176fa4d9a673151f70bc0816f5e977b35aa4fd639c48b1a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fremont-lake-wy",
+   "name": "Fremont Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Pinedale",
+    "Sylvan Bay Summer Home Area"
+   ],
+   "bbox": [
+    -109.838083,
+    42.898,
+    -109.775141,
+    43.021942
+   ],
+   "wikidata": "Q49700810",
+   "charted": false,
+   "area_km2": 21.034,
+   "launches": [
+    "lower-fremont-lake-boating-site-wy",
+    "upper-fremont-lake-boating-site-wy"
+   ],
+   "water_id": "fremont-lake-wy",
+   "gnis_id": "1609181",
+   "geometry_hash": "83c3c0ea117e190efb7f22be92e8dd4873a554dc0740343500c1fccd816c7fe5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "frye-lake-wy",
+   "name": "Frye Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Lander"
+   ],
+   "bbox": [
+    -108.884994,
+    42.704324,
+    -108.87235,
+    42.7161
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.55,
+   "launches": [
+    "frye-lake-boat-launch-wy"
+   ],
+   "water_id": "frye-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "cc61e5451bc169bf37822ecdbc31c5ad70c06f473d0f5bc6204d8c28b73b15df",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gelatt-lake-wy",
+   "name": "Gelatt Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -105.840566,
+    41.235489,
+    -105.83261,
+    41.24017
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.14,
+   "launches": [
+    "gelatt-lake-public-access-area-wy"
+   ],
+   "water_id": "gelatt-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "3793a9737d2f671dbfb888d9d3e88001cd6585b4324e7060a0daefdce3685750",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "glendo-reservoir-glendo-wy",
+   "name": "Glendo Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Glendo"
+   ],
+   "bbox": [
+    -105.024908,
+    42.46924,
+    -104.928544,
+    42.559144
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 33.317,
+   "launches": [
+    "bennett-hill-wy",
+    "glendo-reservoir-marina-ramp-wy",
+    "indian-point-wy",
+    "reno-cove-wy",
+    "whiskey-gulch-wy"
+   ],
+   "water_id": "glendo-reservoir-glendo-wy",
+   "gnis_id": null,
+   "geometry_hash": "884abe702ceae657f6db6fd8b9515fcbc533b457509bc467fbd08cda6f57d835",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "glendo-reservoir-wy",
+   "name": "Glendo Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Glendo"
+   ],
+   "bbox": [
+    -105.067593,
+    42.554266,
+    -104.933802,
+    42.590436
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 17.211,
+   "launches": [
+    "elkhorn-wy"
+   ],
+   "water_id": "glendo-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "be13e09b57cc9078f2f018846c4c276967ce560d6cbd7aa32f3721085102a596",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "goshen-hole-reservoir-wy",
+   "name": "Goshen Hole Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Yoder"
+   ],
+   "bbox": [
+    -104.29161,
+    41.866756,
+    -104.267046,
+    41.894275
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.141,
+   "launches": [
+    "springer-bump-sullivan-wildlife-habitat-management-area-wy"
+   ],
+   "water_id": "goshen-hole-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "8d33f66d22810b47bc69d89c474a7c55af4797bf1a0d77e059afcfc5fa7e0d14",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "granite-springs-reservoir-wy",
+   "name": "Granite Springs Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Hecla"
+   ],
+   "bbox": [
+    -105.248332,
+    41.172877,
+    -105.221283,
+    41.181272
+   ],
+   "wikidata": "Q49700900",
+   "charted": false,
+   "area_km2": 0.66,
+   "launches": [
+    "granite-reservoir-ramp-curt-gowdy-state-park-wy"
+   ],
+   "water_id": "granite-springs-reservoir-wy",
+   "gnis_id": "1589044",
+   "geometry_hash": "9b7cdb0ddd93f0bbc7d14b1c65da3141d5c922d31139527f69fa7a61b4f3fd29",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grayrocks-reservoir-wy",
+   "name": "Grayrocks Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Guernsey"
+   ],
+   "bbox": [
+    -104.796711,
+    42.120401,
+    -104.687708,
+    42.17151
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 11.459,
+   "launches": [
+    "grayrocks-reservoir-gate-1-ramp-wy",
+    "grayrocks-reservoir-gate-7-ramp-wy",
+    "grayrocks-reservoir-public-access-area-wy"
+   ],
+   "water_id": "grayrocks-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "f76a94f7af3368cb95c660abe89c55c67a37a8abb73182eedd3c0eebbb24d146",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "green-river-wy",
+   "name": "Green River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Bronx",
+    "Daniel Junction",
+    "Fontenelle",
+    "Green River",
+    "James Town",
+    "La Barge",
+    "Marbleton",
+    "Pinedale"
+   ],
+   "bbox": [
+    -110.192798,
+    41.29679,
+    -109.385406,
+    43.368215
+   ],
+   "wikidata": "Q952429",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "6-mile-hill-boat-launch-wy",
+    "alkali-creek-public-access-area-wy",
+    "boat-launch-hayfarm-boat-launch-wy",
+    "boat-launch-upper-dodge-bottom-boat-launch-wy",
+    "below-fontenelle-dam-wy",
+    "blue-rim-road-public-access-area-wy",
+    "campfire-ring-access-wy",
+    "daniel-40-rod-public-access-area-wy",
+    "delaney-wy",
+    "expedition-island-access-wy",
+    "fmc-park-wy",
+    "fear-ferry-island-public-access-area-wy",
+    "fear-reardon-draw-public-access-area-wy",
+    "gas-wells-access-wy",
+    "green-river-access-site-6-boat-launch-wy",
+    "green-river-access-site-8-boat-launch-wy",
+    "green-river-boat-launch-wy",
+    "green-river-hwy-351-ramp-wy",
+    "huston-public-access-area-wy",
+    "hwy-28-bridge-boat-launch-wy",
+    "james-town-wy",
+    "kendall-bridge-access-wy",
+    "labarge-wy",
+    "monument-hill-public-access-area-wy",
+    "names-hill-wy",
+    "oci-bridge-public-access-area-wy",
+    "roaring-fork-access-wy",
+    "slate-creek-campground-wy",
+    "sommers-grindstone-public-access-area-wy",
+    "stratton-meyer-boat-ramp-wy",
+    "green-river-boat-launch-near-pinedale-wy",
+    "tail-race-campground-boat-launch-wy",
+    "the-bend-access-wy",
+    "warm-springs-access-wy",
+    "green-river-boat-launch-near-bronx-wy-2",
+    "green-river-boat-launch-wy-2",
+    "green-river-boat-launch-near-bronx-wy",
+    "green-river-boat-launch-wy-3",
+    "warren-bridge-blm-6-access-wy",
+    "green-river-boat-launch-near-bronx-wy-3",
+    "weeping-rock-campground-wy",
+    "whiskey-campground-wy"
+   ],
+   "water_id": "green-river-co",
+   "gnis_id": "1428399",
+   "geometry_hash": "3e7307dfb0ac5bd8a75b13222d0738e885e5a0336e6e5b9b0c656f05bc62c9af",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "zach-roberts-wy"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "greys-river-wy",
+   "name": "Greys River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Alpine"
+   ],
+   "bbox": [
+    -111.013835,
+    42.570952,
+    -110.660987,
+    43.168686
+   ],
+   "wikidata": "Q4148420",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bridge-boating-site-wy"
+   ],
+   "water_id": "greys-river-wy",
+   "gnis_id": "1605135",
+   "geometry_hash": "e2039e71e473a2904c213772dbbae5b6632bd0f7729a75ca6e3aed18d2fcadbd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "guernsey-reservoir-wy",
+   "name": "Guernsey Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Guernsey"
+   ],
+   "bbox": [
+    -104.839563,
+    42.288668,
+    -104.763065,
+    42.342462
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.677,
+   "launches": [
+    "long-canyon-west-boat-ramp-wy",
+    "main-boat-ramp-wy",
+    "sandy-beach-boat-ramp-wy"
+   ],
+   "water_id": "guernsey-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "446a5f69e5db53e2b6379dde64444e31e22155c96c5606624e55ffe44282f449",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "half-moon-lake-wy",
+   "name": "Half Moon Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Pinedale"
+   ],
+   "bbox": [
+    -109.769256,
+    42.912378,
+    -109.708926,
+    42.936454
+   ],
+   "wikidata": "Q49302797",
+   "charted": false,
+   "area_km2": 4.337,
+   "launches": [
+    "half-moon-lake-boating-site-wy"
+   ],
+   "water_id": "half-moon-lake-wy",
+   "gnis_id": "1600169",
+   "geometry_hash": "118000a9348acae73512e490d644795fb72cf38f9ca04c0c6986c073db5d2d74",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "halleck-creek-wy",
+   "name": "Halleck Creek",
+   "kind": "stream",
+   "state": "WY",
+   "towns": [
+    "Elk Mountain"
+   ],
+   "bbox": [
+    -106.449619,
+    41.706423,
+    -106.433264,
+    41.716872
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "elk-mountain-reservoir-public-access-area-wy"
+   ],
+   "water_id": "halleck-creek-wy",
+   "gnis_id": null,
+   "geometry_hash": "4d396c612f14a17dca8a5d0cef47e2ed45391366f370f66333f78305ee6ffaae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "harrington-reservoir-wy",
+   "name": "Harrington Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Burlington"
+   ],
+   "bbox": [
+    -108.330656,
+    44.353892,
+    -108.315647,
+    44.364103
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.833,
+   "launches": [
+    "harrington-reservoir-boat-launch-wy"
+   ],
+   "water_id": "harrington-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "6048389f2fc711808c1b87426c3a1c0dc58d05fb8a524e980e05dfbcf3be691f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hawk-springs-reservoir-wy",
+   "name": "Hawk Springs Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "La Grange"
+   ],
+   "bbox": [
+    -104.196794,
+    41.691117,
+    -104.168778,
+    41.723711
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.795,
+   "launches": [
+    "hawk-springs-state-recreation-area-wy"
+   ],
+   "water_id": "hawk-springs-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "a481470a8b4354cb90b76587bf27ffb38bb3d6ee0cfbde8e4c76d721e560f67f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "healy-reservoir-wy",
+   "name": "Healy Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Buffalo"
+   ],
+   "bbox": [
+    -106.616689,
+    44.402949,
+    -106.603827,
+    44.417746
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.906,
+   "launches": [
+    "healy-reservoir-public-access-area-wy"
+   ],
+   "water_id": "healy-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "f91218295a3f2961cf48f0f1fed509573e7f4097805e3a81602d8d939a7756cd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "high-savery-reservoir-wy",
+   "name": "High Savery Reservoir",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Tullis"
+   ],
+   "bbox": [
+    -107.299822,
+    41.270436,
+    -107.264307,
+    41.287423
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "high-savery-reservoir-boat-launch-wy"
+   ],
+   "water_id": "high-savery-reservoir-wy",
+   "gnis_id": "2574376",
+   "geometry_hash": "fe0db5ef73ae1608b5833f61b34f8f27b3c6afc39d213040f9a84e0bc7ba32f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hoback-river-wy",
+   "name": "Hoback River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Jackson"
+   ],
+   "bbox": [
+    -110.733245,
+    43.001608,
+    -110.364329,
+    43.320448
+   ],
+   "wikidata": "Q4498569",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "granite-creek-access-wy",
+    "highway-189-bridge-access-wy",
+    "stinking-springs-access-wy"
+   ],
+   "water_id": "hoback-river-wy",
+   "gnis_id": "1600350",
+   "geometry_hash": "ca7e8501799c74f32878823dc85155d7d2fd55d47445a1a786b8f64fd8e501a9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hog-park-reservoir-wy",
+   "name": "Hog Park Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Encampment"
+   ],
+   "bbox": [
+    -106.89224,
+    41.022252,
+    -106.860602,
+    41.043476
+   ],
+   "wikidata": "Q49701104",
+   "charted": false,
+   "area_km2": 2.199,
+   "launches": [
+    "lake-view-picnic-site-wy"
+   ],
+   "water_id": "hog-park-reservoir-wy",
+   "gnis_id": "1606241",
+   "geometry_hash": "4e830f90bb5854dc7187def1c789aec3e9de7a9b90f031f9807ee1ef6046453d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hogan-reservoir-wy",
+   "name": "Hogan Reservoir",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.266232,
+    44.78465,
+    -109.256324,
+    44.790532
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hogan-reservoir-boat-launch-wy"
+   ],
+   "water_id": "hogan-reservoir-wy",
+   "gnis_id": "1600356",
+   "geometry_hash": "29beb42cce0c833b46a8d3923d237d62a429c0c6f7d38a880879d68bc45f6994",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "island-lake-wy",
+   "name": "Island Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.546728,
+    44.943062,
+    -109.535003,
+    44.952671
+   ],
+   "wikidata": "Q49303215",
+   "charted": false,
+   "area_km2": 0.644,
+   "launches": [
+    "island-lake-boat-launch-wy"
+   ],
+   "water_id": "island-lake-wy",
+   "gnis_id": "1600548",
+   "geometry_hash": "0a1dfb0a99d551174594f1c6d710c9feac542d978ff42a7f207ba87081bcc7cc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jackson-lake-wy",
+   "name": "Jackson Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Colter Bay Village"
+   ],
+   "bbox": [
+    -110.754767,
+    43.80458,
+    -110.589752,
+    44.037249
+   ],
+   "wikidata": "Q1589175",
+   "charted": false,
+   "area_km2": 113.683,
+   "launches": [
+    "colter-bay-boat-launch-wy",
+    "leeks-marina-boat-ramp-wy",
+    "jackson-lake-boat-launch-wy",
+    "signal-mountain-lake-launch-wy",
+    "spalding-bay-boat-launch-wy"
+   ],
+   "water_id": "jackson-lake-wy",
+   "gnis_id": "1609177",
+   "geometry_hash": "461a70a17b31c461a469da6ebabc0111985a29762fecac3bdb442af8e7dc43fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jenny-lake-wy",
+   "name": "Jenny Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Moose"
+   ],
+   "bbox": [
+    -110.744622,
+    43.748781,
+    -110.716952,
+    43.778323
+   ],
+   "wikidata": "Q743054",
+   "charted": false,
+   "area_km2": 5.163,
+   "launches": [
+    "jenny-lake-boat-launch-wy",
+    "jenny-lake-boating-dock-wy"
+   ],
+   "water_id": "jenny-lake-wy",
+   "gnis_id": "1590084",
+   "geometry_hash": "33e205ba5ceef6413bab836eb1452333ad403ce8d8d8e1bd7089934a536e4e7c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jim-bridger-reservoir-wy",
+   "name": "Jim Bridger Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Superior"
+   ],
+   "bbox": [
+    -108.791696,
+    41.72344,
+    -108.780597,
+    41.730702
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.368,
+   "launches": [
+    "jim-bridger-power-plant-wy"
+   ],
+   "water_id": "jim-bridger-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "dcc9767494c85532af8d54a7ca4363ea9a8c74dcaa69674fc21e6e7efaa4c306",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-reservoir-number-1-wy",
+   "name": "Johnson Reservoir Number 1",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Petrie"
+   ],
+   "bbox": [
+    -106.71932,
+    43.013524,
+    -106.693501,
+    43.026081
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.748,
+   "launches": [
+    "johnson-reservoir-number-1-boat-launch-wy"
+   ],
+   "water_id": "johnson-reservoir-number-1-wy",
+   "gnis_id": null,
+   "geometry_hash": "6ddf0d538d33ed3d4391335cb7eface2caea4dc2f87450beb1feee1109d20cdc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-reservoir-wy",
+   "name": "Johnson Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -105.37342,
+    41.777626,
+    -105.368829,
+    41.779057
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.021,
+   "launches": [
+    "tom-thorne-beth-williams-wildlife-habitat-management-area-wy"
+   ],
+   "water_id": "johnson-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "db0270d1d81883238564daea2b53e0cec757f644c0b08cb270cbdc59c32c0907",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "keyhole-reservoir-wy",
+   "name": "Keyhole Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Pine Haven"
+   ],
+   "bbox": [
+    -104.92623,
+    44.320405,
+    -104.756358,
+    44.395716
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 37.164,
+   "launches": [
+    "coulter-bay-wy",
+    "keyhole-reservoir-marina-ramp-wy",
+    "pat-s-point-wy",
+    "tatanka-boat-ramp-wy",
+    "wind-creek-wy"
+   ],
+   "water_id": "keyhole-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "3b2f0d492a39151589c9785d497832443ff44baacc0fedbb8cb4937c66fa9c30",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kinnear-pond-wy",
+   "name": "Kinnear Pond",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Kinnear"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kinnear-pond-public-access-area-wy"
+   ],
+   "water_id": "kinnear-pond-wy",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-absarraca-wy",
+   "name": "Lake Absarraca",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Cheyenne"
+   ],
+   "bbox": [
+    -104.842556,
+    41.159976,
+    -104.835798,
+    41.162403
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.092,
+   "launches": [
+    "lake-absarraca-boat-launch-wy"
+   ],
+   "water_id": "lake-absarraca-wy",
+   "gnis_id": null,
+   "geometry_hash": "c80f073faae17e6c3d4bdd0ddde7ed7116422e463f9b84fb75fd6cf4344c0569",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cameahwait-wy",
+   "name": "Lake Cameahwait",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Shoshoni"
+   ],
+   "bbox": [
+    -108.258873,
+    43.294131,
+    -108.232309,
+    43.304751
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.706,
+   "launches": [
+    "sand-mesa-wildlife-habitat-management-area-wy"
+   ],
+   "water_id": "lake-cameahwait-wy",
+   "gnis_id": null,
+   "geometry_hash": "02e1452013003261964eb1ac738441b8cc677e5f6ccbaaa4eecf7329a84733a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-de-smet-wy",
+   "name": "Lake De Smet",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Buffalo"
+   ],
+   "bbox": [
+    -106.788759,
+    44.448693,
+    -106.717612,
+    44.516265
+   ],
+   "wikidata": "Q1267281",
+   "charted": false,
+   "area_km2": 13.997,
+   "launches": [
+    "barkey-draw-wy",
+    "boat-dock-bay-wy",
+    "monument-point-public-access-area-wy"
+   ],
+   "water_id": "lake-de-smet-wy",
+   "gnis_id": "1587390",
+   "geometry_hash": "fbd3ceca400e1dd06186f2187ed4a31b66a6e8983483809d86ab24c27f34515a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hattie-reservoir-wy",
+   "name": "Lake Hattie Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -105.96535,
+    41.23034,
+    -105.897779,
+    41.256547
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.128,
+   "launches": [
+    "lake-hattie-low-water-boat-ramp-wy",
+    "lake-hattie-public-access-area-wy"
+   ],
+   "water_id": "lake-hattie-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "933f7bfb9202074d78fe49b470326cea3a82c6a794f95b32e9c89bc0c4bf10cc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-owen-wy",
+   "name": "Lake Owen",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Albany"
+   ],
+   "bbox": [
+    -106.10905,
+    41.144939,
+    -106.100037,
+    41.151976
+   ],
+   "wikidata": "Q49303836",
+   "charted": false,
+   "area_km2": 0.427,
+   "launches": [
+    "lake-owen-boat-ramp-wy"
+   ],
+   "water_id": "lake-owen-wy",
+   "gnis_id": "1601967",
+   "geometry_hash": "713b03bbb75ea9bc78d16e3a8ea522d9edb0dbec8fd0cf059cde1261aed83f51",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "laramie-river-wy",
+   "name": "Laramie River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "New Jelm",
+    "Woods Landing"
+   ],
+   "bbox": [
+    -106.044142,
+    40.939135,
+    -104.529301,
+    42.204475
+   ],
+   "wikidata": "Q866712",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "jelm-wildlife-habitat-management-area-wy",
+    "woods-landing-public-access-area-wy"
+   ],
+   "water_id": "laramie-river-wy",
+   "gnis_id": "170459",
+   "geometry_hash": "f4ac3c9387cc74ba164b3e05e6334ea74edeb85555c60f654b16b4b166058cc2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "leigh-lake-wy",
+   "name": "Leigh Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Moose"
+   ],
+   "bbox": [
+    -110.754232,
+    43.797626,
+    -110.717899,
+    43.826868
+   ],
+   "wikidata": "Q1754014",
+   "charted": false,
+   "area_km2": 4.346,
+   "launches": [
+    "string-lake-boat-launch-wy"
+   ],
+   "water_id": "leigh-lake-wy",
+   "gnis_id": "1604412",
+   "geometry_hash": "d7950556cb33f5b05006b203ec2efaf8a76001fa41d420d45fc98b99c1d338d7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lewis-lake-wy",
+   "name": "Lewis Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -110.654651,
+    44.277128,
+    -110.602286,
+    44.322724
+   ],
+   "wikidata": "Q1616647",
+   "charted": false,
+   "area_km2": 11.818,
+   "launches": [
+    "lewis-lake-boat-launch-wy"
+   ],
+   "water_id": "lewis-lake-wy",
+   "gnis_id": "1590665",
+   "geometry_hash": "461abc893091ec91b251dd85c5617b2a9085ed0cec537a55a0eb4d27f7229aaf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lily-lake-wy",
+   "name": "Lily Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.715006,
+    44.944816,
+    -109.708792,
+    44.949402
+   ],
+   "wikidata": "Q49304093",
+   "charted": false,
+   "area_km2": 0.171,
+   "launches": [
+    "lily-lake-boat-launch-wy"
+   ],
+   "water_id": "lily-lake-wy",
+   "gnis_id": "1600914",
+   "geometry_hash": "6cc3d1f08dc0e5331d80d8c9d7704e80f31ef737920783d9a74f04daa1fd9661",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "louis-lake-wy",
+   "name": "Louis Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -108.855057,
+    42.592374,
+    -108.839497,
+    42.598813
+   ],
+   "wikidata": "Q49304905",
+   "charted": false,
+   "area_km2": 0.494,
+   "launches": [
+    "louis-lake-boat-launch-wy"
+   ],
+   "water_id": "louis-lake-wy",
+   "gnis_id": "1601155",
+   "geometry_hash": "9f72f2edadadfbe72a6037d8221a909aa5190eb0cb212b33daa9e27af499e0a4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lower-green-river-lake-wy",
+   "name": "Lower Green River Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.858112,
+    43.287372,
+    -109.834097,
+    43.314216
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.002,
+   "launches": [
+    "green-river-lake-boating-site-wy"
+   ],
+   "water_id": "lower-green-river-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "98279387d2ab8108407fee3ed38a2a1591dc96711dc2c8ca84e895a7c27b2de4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lower-slide-lake-wy",
+   "name": "Lower Slide Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Moose"
+   ],
+   "bbox": [
+    -110.544171,
+    43.626891,
+    -110.493354,
+    43.640398
+   ],
+   "wikidata": "Q6693823",
+   "charted": false,
+   "area_km2": 2.127,
+   "launches": [
+    "atherton-creek-boating-site-wy",
+    "slide-lake-boating-site-wy"
+   ],
+   "water_id": "lower-slide-lake-wy",
+   "gnis_id": "1601179",
+   "geometry_hash": "7d3e0f157e27454f3ee4331462ab5f96818764d1c8893b3e1d1d88e9c53fb35b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lower-sunshine-reservoir-wy",
+   "name": "Lower Sunshine Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Dumbell"
+   ],
+   "bbox": [
+    -109.005752,
+    44.070367,
+    -108.97282,
+    44.09937
+   ],
+   "wikidata": "Q49701819",
+   "charted": false,
+   "area_km2": 3.613,
+   "launches": [
+    "lower-sunshine-reservoir-public-access-area-wy"
+   ],
+   "water_id": "lower-sunshine-reservoir-wy",
+   "gnis_id": "1607645",
+   "geometry_hash": "31ec2642636568e8792ecbdba2b55e8c0a3a81b083972cd703d803f9d349eacc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "meadow-lake-wy",
+   "name": "Meadow Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Pinedale"
+   ],
+   "bbox": [
+    -109.693031,
+    42.882513,
+    -109.682444,
+    42.893534
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.514,
+   "launches": [
+    "meadow-lake-boating-site-wy"
+   ],
+   "water_id": "meadow-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "a83ec0428a1c1d043b5d60a73e405d1fff4efb13d9fa53bfb849402976502b22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "meadowlark-lake-wy",
+   "name": "Meadowlark Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Meadow Lark Lake"
+   ],
+   "bbox": [
+    -107.232858,
+    44.164455,
+    -107.215234,
+    44.178533
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.003,
+   "launches": [
+    "north-cove-boating-site-wy"
+   ],
+   "water_id": "meadowlark-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "a808e7766801d7dd611024bf94a3c735305d2f6b1d33782a89e8601fe3cff5ac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "meeboer-lake-wy",
+   "name": "Meeboer Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Harmony"
+   ],
+   "bbox": [
+    -105.82756,
+    41.21199,
+    -105.814472,
+    41.220332
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.515,
+   "launches": [
+    "meeboer-lake-public-access-area-wy"
+   ],
+   "water_id": "meeboer-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "47370c261946f9fc902867b5deea5f22381fc5b5c403abe521a756741267a002",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "meeks-cabin-reservoir-wy",
+   "name": "Meeks Cabin Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -110.587778,
+    40.993973,
+    -110.57632,
+    41.026058
+   ],
+   "wikidata": "Q42310527",
+   "charted": false,
+   "area_km2": 1.615,
+   "launches": [
+    "meek-cabin-boat-ramp-wy"
+   ],
+   "water_id": "meeks-cabin-reservoir-wy",
+   "gnis_id": "1604425",
+   "geometry_hash": "122a190e8108f51a1fd2c27a49be59d1ff297b5cb2ff3a467d32dc7151b5d9f1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-piney-reservoir-wy",
+   "name": "Middle Piney Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -110.582676,
+    42.594419,
+    -110.564435,
+    42.603427
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.6,
+   "launches": [
+    "middle-piney-lake-boating-site-wy"
+   ],
+   "water_id": "middle-piney-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "fe83a1e278dea4234565cbec472ff2f5bc989b537a7fb7943de76071b348c070",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-reservoir-wy",
+   "name": "Middle Reservoir",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -108.337084,
+    43.315825,
+    -108.321512,
+    43.320369
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.452,
+   "launches": [
+    "middle-depression-wy"
+   ],
+   "water_id": "middle-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "6915f9784c73f1806a41ea81112cfe8916c7fc262c86c1aa9f3ca6b6015a2549",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "muddy-guard-reservoir-1-wy",
+   "name": "Muddy Guard Reservoir # 1",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Buffalo"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "muddy-guard-reservoir-1-public-access-area-wy"
+   ],
+   "water_id": "muddy-guard-reservoir-1-wy",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "murphy-lakes-wy",
+   "name": "Murphy Lakes",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Alpine"
+   ],
+   "bbox": [
+    -110.866046,
+    43.048527,
+    -110.859688,
+    43.058727
+   ],
+   "wikidata": "Q6939004",
+   "charted": false,
+   "area_km2": 0.036,
+   "launches": [
+    "murphy-lake-boating-site-wy"
+   ],
+   "water_id": "murphy-lakes-wy",
+   "gnis_id": "1591921",
+   "geometry_hash": "3d2e5b1c731352c2e440bf36ca3865db5f2236ec167c4153c847d982ea56a1d1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "new-fork-lake-wy",
+   "name": "New Fork Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.969293,
+    43.081168,
+    -109.913244,
+    43.113377
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.287,
+   "launches": [
+    "new-fork-lake-boating-site-wy"
+   ],
+   "water_id": "new-fork-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "900102eb83f60b0b335593f742693f572b4e428e8984936b1aca1cf91fc32a2f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "new-fork-river-wy",
+   "name": "New Fork River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Boulder",
+    "Marbleton",
+    "Pinedale"
+   ],
+   "bbox": [
+    -109.975133,
+    42.548486,
+    -109.72255,
+    42.883917
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "airport-public-access-area-wy",
+    "blm-downstream-of-gage-station-access-wy",
+    "boulder-bridge-public-access-area-wy",
+    "gas-wells-access-boulder-wy",
+    "mesa-bridge-public-access-area-wy",
+    "new-fork-campground-boat-takeout-wy",
+    "new-fork-east-fork-wy",
+    "new-fork-river-gauging-station-ramp-wy",
+    "new-fork-river-hwy-351-ramp-wy",
+    "remmick-public-access-area-wy"
+   ],
+   "water_id": "new-fork-river-wy",
+   "gnis_id": null,
+   "geometry_hash": "2814bd7fe712f087c1527b5ee45523d19efc00fd36a672b14c2a6b54d573ae2b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-shoshone-river-wy",
+   "name": "North Fork Shoshone River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Pahaska Tepee"
+   ],
+   "bbox": [
+    -109.981156,
+    44.469232,
+    -109.781015,
+    44.633234
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "eagle-creek-campground-wy",
+    "sleeping-giant-picnic-area-wy",
+    "sleeping-giant-ski-area-access-wy"
+   ],
+   "water_id": "north-fork-shoshone-river-wy",
+   "gnis_id": null,
+   "geometry_hash": "2aa18ef6b00122f9ef8407fd584435aaf1abd5252f64fe34b0f59d3602578e63",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-shoshone-river-wy-2",
+   "name": "North Fork Shoshone River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.849659,
+    44.457842,
+    -109.845813,
+    44.458761
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "libby-creek-access-wy"
+   ],
+   "water_id": "north-fork-shoshone-river-wy-2",
+   "gnis_id": null,
+   "geometry_hash": "6449ccf63059e954994d90f73a09837608f1c1c289f53f46e8926a0e729b75d3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-platte-river-wy",
+   "name": "North Platte River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Alcova",
+    "Alcova Po",
+    "Bessemer Bend",
+    "Casper",
+    "Clayton",
+    "Douglas",
+    "Encampment",
+    "Evansville",
+    "Glendo",
+    "Glenrock",
+    "Mills",
+    "Old Haymaker Place"
+   ],
+   "bbox": [
+    -107.06639,
+    40.912037,
+    -103.983311,
+    42.873149
+   ],
+   "wikidata": "Q1755015",
+   "charted": false,
+   "area_km2": 1.526,
+   "launches": [
+    "alcova-afterbay-access-wy",
+    "blm-overlook-access-wy",
+    "bennett-peak-campground-wy",
+    "big-muddy-bridge-public-access-area-wy",
+    "bixby-public-access-area-wy",
+    "bryan-stock-trail-wy",
+    "chalk-bluffs-wy",
+    "dave-johnston-power-plant-public-access-area-wy",
+    "don-johnson-boat-launch-wy",
+    "douglas-access-wy",
+    "dugway-campground-wy",
+    "eagles-nest-access-wy",
+    "edness-kimball-wilkins-state-park-wy",
+    "first-street-access-wy",
+    "foote-public-access-area-saratoga-wy",
+    "foote-public-access-area-wy",
+    "fort-steele-public-access-area-wy",
+    "fred-eiserman-ramp-wy",
+    "glendo-public-access-area-wy",
+    "government-bridge-wy",
+    "government-bridge-wy-2",
+    "gray-reef-wy",
+    "hartnett-access-wy",
+    "kortes-below-seminoe-dam-access-wy",
+    "ledge-creek-boat-stopoff-wy",
+    "lusby-public-access-area-wy",
+    "mills-bridge-public-access-area-wy",
+    "miracle-mile-access-wy",
+    "morad-park-wy",
+    "orin-junction-bridge-public-access-area-wy",
+    "pacificorp-public-access-area-wy",
+    "paradise-valley-wy",
+    "pick-bridge-public-access-area-wy",
+    "pickaroon-wy",
+    "platte-river-parkway-boat-ramp-wy",
+    "prospect-wy",
+    "rabbit-hill-public-access-area-wy",
+    "reshaw-bridge-wy",
+    "riverview-park-wy",
+    "robertson-road-public-access-area-wy",
+    "sanger-public-access-area-saratoga-wy",
+    "sanger-public-access-area-wy",
+    "sechrist-public-access-area-wy",
+    "shady-rest-access-wy",
+    "sinclair-golf-course-wy",
+    "six-mile-gap-wy",
+    "south-douglas-access-wy",
+    "speck-bessemer-bend-public-access-area-wy",
+    "treasure-island-public-access-area-wy",
+    "wendover-public-access-area-wy",
+    "whitetail-wy"
+   ],
+   "water_id": "north-platte-river-co",
+   "gnis_id": "204647",
+   "geometry_hash": "9d0942be84c9c3a0523c6c891edac878c1ec72257c553ba6719a1d9ab0c267b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ocean-lake-wy",
+   "name": "Ocean Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Pavillion",
+    "Riverton"
+   ],
+   "bbox": [
+    -108.642248,
+    43.158255,
+    -108.566074,
+    43.211602
+   ],
+   "wikidata": "Q20714343",
+   "charted": false,
+   "area_km2": 25.995,
+   "launches": [
+    "dickenson-park-wy",
+    "goose-knob-wy",
+    "long-point-wy",
+    "south-cove-pavillion-wy",
+    "south-cove-wy",
+    "stultz-wy"
+   ],
+   "water_id": "ocean-lake-wy",
+   "gnis_id": "1592355",
+   "geometry_hash": "f3ec1a78d52cf5237593ed38df964b4b6e100c1dc4e28fa2c625e8b54a0dc208",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "osage-pond-wy",
+   "name": "Osage Pond",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Osage"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "osage-pond-public-access-area-wy"
+   ],
+   "water_id": "osage-pond-wy",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "packers-lake-wy",
+   "name": "Packers Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Torrington"
+   ],
+   "bbox": [
+    -104.067923,
+    41.894611,
+    -104.053179,
+    41.901236
+   ],
+   "wikidata": "Q2045666",
+   "charted": false,
+   "area_km2": 0.301,
+   "launches": [
+    "packers-lake-public-access-area-torrington-wy",
+    "packers-lake-public-access-area-wy"
+   ],
+   "water_id": "packers-lake-wy",
+   "gnis_id": "1592540",
+   "geometry_hash": "a325e4de1b608f81946d66d5767c69c9bf7a2f077057332889260cc5c1ca6f66",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "palisades-reservoir-wy",
+   "name": "Palisades Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Alpine"
+   ],
+   "bbox": [
+    -111.213257,
+    43.137301,
+    -111.017306,
+    43.332642
+   ],
+   "wikidata": "Q35044525",
+   "charted": false,
+   "area_km2": 63.34,
+   "launches": [
+    "alpine-boat-ramp-wy",
+    "palisades-boat-launch-wy"
+   ],
+   "water_id": "palisades-reservoir-id",
+   "gnis_id": "397973",
+   "geometry_hash": "00588bfe95df517984faafc3c6b2c9fc8e21ca71ea69b97699e3cdbee1994c7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pathfinder-reservoir-wy",
+   "name": "Pathfinder Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -107.06313,
+    42.235693,
+    -106.850059,
+    42.537923
+   ],
+   "wikidata": "Q7144767",
+   "charted": false,
+   "area_km2": 93.392,
+   "launches": [
+    "pathfinder-reservoir-high-water-ramp-wy",
+    "pathfinder-reservoir-low-water-ramp-wy",
+    "pathfinder-reservoir-marina-ramp-wy",
+    "weiss-campground-boat-ramp-wy"
+   ],
+   "water_id": "pathfinder-reservoir-wy",
+   "gnis_id": "1596879",
+   "geometry_hash": "175f694b6ac20209b4c6764d41c7c6143960a23436619bcf807ee0ff0cdd17a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pilot-butte-reservoir-wy",
+   "name": "Pilot Butte Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Morton"
+   ],
+   "bbox": [
+    -108.789359,
+    43.194893,
+    -108.756087,
+    43.217335
+   ],
+   "wikidata": "Q49702321",
+   "charted": false,
+   "area_km2": 2.928,
+   "launches": [
+    "pilot-butte-reservoir-boat-launch-wy"
+   ],
+   "water_id": "pilot-butte-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "2f1774b19e19f9630fa002979781d2efabd402feecb93a5eb60eac26aeb8d99f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "post-lake-wy",
+   "name": "Post Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -105.735254,
+    41.839194,
+    -105.687361,
+    41.907068
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.368,
+   "launches": [
+    "wheatland-reservoir-3-public-access-area-wy",
+    "wheatland-reservoir-3-boat-launch-wy"
+   ],
+   "water_id": "post-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "03940dcfc01eb210ae3f63dc9fdb27c91c57abe1097d9f19d320c5a79229ef1b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ray-reservoir-wy",
+   "name": "Ray Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Fort Washakie"
+   ],
+   "bbox": [
+    -108.84159,
+    42.946579,
+    -108.817681,
+    42.961577
+   ],
+   "wikidata": "Q49702425",
+   "charted": false,
+   "area_km2": 2.003,
+   "launches": [
+    "ray-reservoir-boat-launch-wy"
+   ],
+   "water_id": "ray-reservoir-wy",
+   "gnis_id": "1608227",
+   "geometry_hash": "95156255b537d633ee6cfca2607f32347ef20dccfc0853e9a750a2b87062ac67",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "renner-reservoir-wy",
+   "name": "Renner Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Ten Sleep"
+   ],
+   "bbox": [
+    -107.506379,
+    44.171397,
+    -107.493812,
+    44.177237
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.284,
+   "launches": [
+    "renner-wildlife-habitat-management-area-wy"
+   ],
+   "water_id": "renner-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "b02b1de98bd6e6b3cc7c35012d831a0c59b085b78383d1d61260849e67dd1829",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ring-lake-wy",
+   "name": "Ring Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Dubois"
+   ],
+   "bbox": [
+    -109.545512,
+    43.450241,
+    -109.537237,
+    43.458114
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.401,
+   "launches": [
+    "ring-lake-boat-ramp-wy"
+   ],
+   "water_id": "ring-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "a1c90c5918677d298cc457103af3078d336a6b8a737aed076cc14b49a6588b08",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rob-roy-reservoir-wy",
+   "name": "Rob Roy Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Albany"
+   ],
+   "bbox": [
+    -106.278006,
+    41.196473,
+    -106.237195,
+    41.222084
+   ],
+   "wikidata": "Q49702494",
+   "charted": false,
+   "area_km2": 3.313,
+   "launches": [
+    "rob-roy-boat-ramp-wy"
+   ],
+   "water_id": "rob-roy-reservoir-wy",
+   "gnis_id": "1609044",
+   "geometry_hash": "ce79cc21a1caf282531ed395f30d448f3e144c9da9cd9a873d409cdd79ae472d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rock-lake-wy",
+   "name": "Rock Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Wheatland"
+   ],
+   "bbox": [
+    -105.034552,
+    41.983879,
+    -105.025559,
+    41.987512
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.18,
+   "launches": [
+    "rock-creek-public-access-area-wy"
+   ],
+   "water_id": "rock-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "73e4a208ec29a3d1165133459c99779c5f2f2e94aaa5934583fdadd5d5ef881b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "salt-river-wy",
+   "name": "Salt River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Afton",
+    "Alpine",
+    "Auburn",
+    "Bedford",
+    "Etna",
+    "Freedom",
+    "Nordic",
+    "Thayne"
+   ],
+   "bbox": [
+    -111.063955,
+    42.508187,
+    -110.779439,
+    43.166525
+   ],
+   "wikidata": "Q4428482",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "a-g-lane-public-access-area-wy",
+    "bateman-s-public-access-area-wy",
+    "clark-s-barn-access-wy",
+    "creamery-road-public-access-area-wy",
+    "diversion-public-access-area-wy",
+    "freedom-bridge-access-wy",
+    "mccoy-creek-bridge-wy",
+    "narrows-bridge-public-access-area-wy",
+    "perkes-public-access-area-wy",
+    "upper-burton-access-wy",
+    "wakeman-s-public-access-area-wy",
+    "west-public-access-area-wy"
+   ],
+   "water_id": "salt-river-wy",
+   "gnis_id": "389871",
+   "geometry_hash": "1683020799fa0f30b35beaf176aad96a5261da542c2e1a360d85e90ba1c8c705",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "saratoga-lake-wy",
+   "name": "Saratoga Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Saratoga"
+   ],
+   "bbox": [
+    -106.791584,
+    41.456589,
+    -106.777464,
+    41.476492
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.145,
+   "launches": [
+    "saratoga-lake-public-access-area-wy"
+   ],
+   "water_id": "saratoga-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "3e878cc5dbd2ad93f041a5944dd25879671dd25a79c70a6b521ff6bee216c54f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "seminoe-reservoir-wy",
+   "name": "Seminoe Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Seminoe Dam"
+   ],
+   "bbox": [
+    -106.950778,
+    42.038298,
+    -106.805291,
+    42.156098
+   ],
+   "wikidata": "Q7449489",
+   "charted": false,
+   "area_km2": 31.559,
+   "launches": [
+    "north-red-hills-wy",
+    "south-red-hills-wy"
+   ],
+   "water_id": "seminoe-reservoir-wy",
+   "gnis_id": "1594097",
+   "geometry_hash": "0c3bf4b9c25de26e3a8598f9acaafcd7de607dc73170bdb688580c6ba664864a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "seminoe-boat-club-wy"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "seminole-reservoir-wy",
+   "name": "Seminole Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -106.847077,
+    41.993081,
+    -106.683787,
+    42.062011
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 18.823,
+   "launches": [
+    "bow-arm-public-access-area-wy"
+   ],
+   "water_id": "seminole-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "ac6cf7141c14cfb45f3dcfe577a7a8418e658b2c9e9e9b8e90bb7c0b305a2e83",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shoshone-river-north-fork-wy",
+   "name": "Shoshone River (North Fork)",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Wapiti"
+   ],
+   "bbox": [
+    -109.8869,
+    44.451049,
+    -109.18325,
+    44.501379
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-creek-public-access-area-wy",
+    "elk-fork-cliffs-access-wy",
+    "forest-boundary-wy",
+    "mummy-cave-access-wy",
+    "newton-creek-access-wy",
+    "rivers-rest-public-access-area-wy"
+   ],
+   "water_id": "shoshone-river-north-fork-wy",
+   "gnis_id": null,
+   "geometry_hash": "b0eadddaa89dcda89a614b937142c362142befb0f5024ecaf3fc1d3623ff7f3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shoshone-river-south-fork-wy",
+   "name": "Shoshone River (South Fork)",
+   "kind": "river",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.650469,
+    44.035229,
+    -109.203116,
+    44.497019
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "andy-martin-hill-public-access-area-wy",
+    "bobcat-hoolihan-access-wy",
+    "castle-rock-access-wy",
+    "hunter-creek-access-wy",
+    "mariposa-bridge-access-wy",
+    "twin-creek-access-wy"
+   ],
+   "water_id": "shoshone-river-south-fork-wy",
+   "gnis_id": null,
+   "geometry_hash": "0578ddd97ff9642c852b63e946e9477e4b15adf144c265c269892e1b6074e872",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shoshone-river-wy",
+   "name": "Shoshone River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Cody",
+    "Powell",
+    "Vocation"
+   ],
+   "bbox": [
+    -109.18325,
+    44.501379,
+    -108.179857,
+    44.871097
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.393,
+   "launches": [
+    "buck-creek-access-wy",
+    "corbett-bridge-take-out-public-access-area-wy",
+    "corbett-dam-put-in-public-access-area-wy",
+    "shoshone-riverway-public-access-area-wy",
+    "willwood-dam-public-access-area-cody-wy",
+    "willwood-dam-public-access-area-wy",
+    "willwood-public-access-area-wy"
+   ],
+   "water_id": "shoshone-river-wy",
+   "gnis_id": null,
+   "geometry_hash": "aee7cab0a85b5b8a30e01d752402a28794c2bc54015ab6d42b47c037438b36d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sibley-lake-wy",
+   "name": "Sibley Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -107.438883,
+    44.758433,
+    -107.43325,
+    44.764932
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.145,
+   "launches": [
+    "sibley-lake-boat-launch-wy"
+   ],
+   "water_id": "sibley-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "d0694d22d032d0fb91bc1cf6cccbcbc838076590e3423c077c99d6661269ab30",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sloans-lake-wy",
+   "name": "Sloans Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Cheyenne"
+   ],
+   "bbox": [
+    -104.830915,
+    41.15528,
+    -104.825618,
+    41.159073
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.12,
+   "launches": [
+    "sloans-lake-boat-launch-wy"
+   ],
+   "water_id": "sloans-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "1472133a3ba0562549c825e23e58d3d9c800c230235e891fa1af6a8d24bb51e3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "snake-river-wy",
+   "name": "Snake River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Alpine",
+    "Hoback",
+    "Jackson",
+    "Moose",
+    "Moran",
+    "Wilson"
+   ],
+   "bbox": [
+    -111.013835,
+    43.168686,
+    -110.208883,
+    44.216663
+   ],
+   "wikidata": "Q272074",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "astoria-wy",
+    "astoria-boating-site-wy",
+    "cattleman-s-bridge-landing-wy",
+    "deadmans-bar-landing-wy",
+    "east-table-boating-site-wy",
+    "elbow-boating-site-wy",
+    "flagg-ranch-boat-launch-wy",
+    "jackson-lake-dam-boat-launch-wy",
+    "moose-boat-launch-wy",
+    "moose-landing-river-launch-wy",
+    "pacific-creek-landing-river-launch-wy",
+    "pritchard-boating-site-wy",
+    "sheep-gulch-wy",
+    "sheep-gulch-boating-site-wy",
+    "south-park-wy",
+    "west-table-creek-boating-site-wy",
+    "wilson-wy",
+    "yellowstone-south-entrance-boat-launch-wy"
+   ],
+   "water_id": "snake-river-id",
+   "gnis_id": "1533479",
+   "geometry_hash": "051ed8854ec129a35571ab153ca1d7ae2089b3f402a6a987527ecf56715480b3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "vongontard-landing-wy"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "soda-lake-pinedale-wy",
+   "name": "Soda Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Pinedale"
+   ],
+   "bbox": [
+    -109.856502,
+    42.953651,
+    -109.839727,
+    42.971376
+   ],
+   "wikidata": "Q49311122",
+   "charted": false,
+   "area_km2": 1.388,
+   "launches": [
+    "soda-lake-east-boat-ramp-wy",
+    "soda-lake-west-boat-ramp-wy"
+   ],
+   "water_id": "soda-lake-pinedale-wy",
+   "gnis_id": "1603052",
+   "geometry_hash": "1637959586733335323affc8ada7da94dfe319c81097c2870ad89c12c6821c5e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "soda-lake-wy",
+   "name": "Soda Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -110.253539,
+    43.516994,
+    -110.247344,
+    43.526553
+   ],
+   "wikidata": "Q49311123",
+   "charted": false,
+   "area_km2": 0.253,
+   "launches": [
+    "soda-lake-boat-launch-wy"
+   ],
+   "water_id": "soda-lake-wy",
+   "gnis_id": "1603053",
+   "geometry_hash": "9524b0ff469d2dca48e5ec28798cba2aad011afdb5f9592f707b7148d97cc724",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-clear-creek-wy",
+   "name": "South Clear Creek",
+   "kind": "stream",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -107.061268,
+    44.252166,
+    -106.888329,
+    44.316497
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-clear-creek-boat-launch-wy"
+   ],
+   "water_id": "south-clear-creek-wy",
+   "gnis_id": null,
+   "geometry_hash": "fb70b7560c46a9163a6ef362559da7139266ab02101cc2e297eb2068eea180de",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "southern-glendo-reservoir-wy",
+   "name": "Southern Glendo Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Glendo"
+   ],
+   "bbox": [
+    -105.024908,
+    42.46924,
+    -104.928544,
+    42.559144
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 33.286,
+   "launches": [
+    "whiskey-gulch-high-boat-ramp-wy"
+   ],
+   "water_id": "southern-glendo-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "5f616508c2663ed27e5058c84c4fccacb7a13a10394b87be6c9ba44392ec1c8a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "string-lake-wy",
+   "name": "String Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Moose"
+   ],
+   "bbox": [
+    -110.735879,
+    43.782392,
+    -110.725767,
+    43.796751
+   ],
+   "wikidata": "Q7348338",
+   "charted": false,
+   "area_km2": 0.336,
+   "launches": [
+    "string-lake-canoe-launch-wy"
+   ],
+   "water_id": "string-lake-wy",
+   "gnis_id": "1609162",
+   "geometry_hash": "a5a29f80e3bba6a4b153bcd531a472387b1cb82870403a291426c78c2b1d64cc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sulphur-creek-reservoir-wy",
+   "name": "Sulphur Creek Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Hilliard"
+   ],
+   "bbox": [
+    -110.835909,
+    41.14273,
+    -110.801652,
+    41.157871
+   ],
+   "wikidata": "Q49702831",
+   "charted": false,
+   "area_km2": 2.469,
+   "launches": [
+    "sulphur-creek-reservoir-boat-launch-near-hilliard-wy",
+    "sulphur-creek-reservoir-boat-launch-near-hilliard-wy-2"
+   ],
+   "water_id": "sulphur-creek-reservoir-wy",
+   "gnis_id": "1607838",
+   "geometry_hash": "83491af0a1dcacf762766281160fc2a9194f4dd6809047571040083986edd3ca",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sunshine-reservoir-wy",
+   "name": "Sunshine Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -109.080499,
+    44.036023,
+    -109.049076,
+    44.062595
+   ],
+   "wikidata": "Q49702846",
+   "charted": false,
+   "area_km2": 4.02,
+   "launches": [
+    "upper-sunshine-reservoir-public-access-area-wy",
+    "upper-sunshine-reservoir-public-access-area-wy-2"
+   ],
+   "water_id": "sunshine-reservoir-wy",
+   "gnis_id": "1603454",
+   "geometry_hash": "b9992e7cf18b73de81219cc9d7447e5b676fc22d1feb0564029815172f8ab7e7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "teton-reservoir-wy",
+   "name": "Teton Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Rawlins"
+   ],
+   "bbox": [
+    -107.267328,
+    41.601771,
+    -107.256353,
+    41.606834
+   ],
+   "wikidata": "Q49702915",
+   "charted": false,
+   "area_km2": 0.327,
+   "launches": [
+    "teton-reservoir-boat-launch-rawlins-wy",
+    "teton-reservoir-boat-launch-wy"
+   ],
+   "water_id": "teton-reservoir-wy",
+   "gnis_id": "1608381",
+   "geometry_hash": "82a8c00f4d50b2065b18ee638ad09f4f63e9c7b98ba6372b49cfc5922f748219",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tongue-river-wy",
+   "name": "Tongue River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Dayton",
+    "Kleenburn",
+    "Sheridan"
+   ],
+   "bbox": [
+    -107.455296,
+    44.814575,
+    -106.80493,
+    45.044343
+   ],
+   "wikidata": "Q1787489",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "downstream-of-i90-access-wy",
+    "tongue-river-boat-launch-wy",
+    "upstream-of-i90-access-wy"
+   ],
+   "water_id": "tongue-river-wy",
+   "gnis_id": "792265",
+   "geometry_hash": "e0e115a2026423879961e01bcbdfd0eded2ada95f6893804925d87c0613db16c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "trail-lake-wy",
+   "name": "Trail Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Dubois"
+   ],
+   "bbox": [
+    -109.540702,
+    43.435105,
+    -109.531865,
+    43.447234
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.575,
+   "launches": [
+    "trail-lake-boat-ramp-wy"
+   ],
+   "water_id": "trail-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "ebb1f4b8a1d46b9ddc460e1e86d4616f034e0bc912c197addc529ee122acc61a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "turpin-reservoir-wy",
+   "name": "Turpin Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -106.388371,
+    41.432213,
+    -106.381976,
+    41.441752
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.331,
+   "launches": [
+    "turpin-reservoir-boat-launch-wy"
+   ],
+   "water_id": "turpin-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "40235dae78b44c2951f54047ec25d4a36060c58d524b9baeb2363e1daaeb8601",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "twin-buttes-reservoir-wy",
+   "name": "Twin Buttes Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -105.876797,
+    41.233175,
+    -105.847349,
+    41.244315
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.48,
+   "launches": [
+    "twin-buttes-public-access-area-wy",
+    "twin-buttes-reservoir-boat-launch-wy"
+   ],
+   "water_id": "twin-buttes-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "a5d61c8ae7b9d7743e94e552ae87ba19f6b088335a3dc08f85092601a6afd1bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "two-ocean-lake-wy",
+   "name": "Two Ocean Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [],
+   "bbox": [
+    -110.547213,
+    43.900846,
+    -110.501068,
+    43.917897
+   ],
+   "wikidata": "Q385888",
+   "charted": false,
+   "area_km2": 2.455,
+   "launches": [
+    "two-ocean-lake-canoe-kayak-access-wy"
+   ],
+   "water_id": "two-ocean-lake-wy",
+   "gnis_id": "1603842",
+   "geometry_hash": "450dcc2a1638b9fbc489de3414cf15389a284a0cf7ae46e63a3644e9e3086178",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "viva-naughton-wy",
+   "name": "Viva Naughton",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Kemmerer"
+   ],
+   "bbox": [
+    -110.681755,
+    41.964635,
+    -110.649404,
+    42.011186
+   ],
+   "wikidata": "Q49701609",
+   "charted": false,
+   "area_km2": 6.039,
+   "launches": [
+    "dempsey-point-wy",
+    "viva-naughton-public-access-area-wy"
+   ],
+   "water_id": "viva-naughton-wy",
+   "gnis_id": "1584686",
+   "geometry_hash": "91e609fe647caa16ed79a8ad72a4292321f4b9aeaffba4d05f702f5eb6a1e488",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wardel-reservoir-wy",
+   "name": "Wardel Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Burlington"
+   ],
+   "bbox": [
+    -108.318549,
+    44.348295,
+    -108.305712,
+    44.356878
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.628,
+   "launches": [
+    "wardel-reservoir-boat-launch-wy"
+   ],
+   "water_id": "wardel-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "409bf191ebd06aa2c59c665e492df582f22b2b74b31ae846e851cb60f1191d17",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-newton-lake-wy",
+   "name": "West Newton Lake",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Cody"
+   ],
+   "bbox": [
+    -109.126135,
+    44.542197,
+    -109.121048,
+    44.545223
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.106,
+   "launches": [
+    "newton-lakes-public-access-area-wy"
+   ],
+   "water_id": "west-newton-lake-wy",
+   "gnis_id": null,
+   "geometry_hash": "5f2451f428e46409753aee0dd4ff408e301c3a3624ac6bcf13d6caaa965dd6d8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wheatland-number-1-reservoir-wy",
+   "name": "Wheatland Number 1 Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Wheatland"
+   ],
+   "bbox": [
+    -105.048448,
+    41.99354,
+    -105.025509,
+    42.00417
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.602,
+   "launches": [
+    "wheatland-reservoir-1-north-ramp-wy",
+    "wheatland-reservoir-1-south-ramp-wy"
+   ],
+   "water_id": "wheatland-number-1-reservoir-wy",
+   "gnis_id": null,
+   "geometry_hash": "7d359f60ec2db5730ec1922bd9484b7e24bf9c09b5c983756c3459a95bb57249",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "willow-lake-wy",
+   "name": "Willow Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Pinedale"
+   ],
+   "bbox": [
+    -109.90858,
+    42.989404,
+    -109.831145,
+    43.026902
+   ],
+   "wikidata": "Q49316047",
+   "charted": false,
+   "area_km2": 7.37,
+   "launches": [
+    "willow-lake-boating-site-wy"
+   ],
+   "water_id": "willow-lake-wy",
+   "gnis_id": "1604220",
+   "geometry_hash": "1ae4f120eb5523360f044b3ae25afaa542c2020feffa58e8499ea261eec07517",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wind-river-wy",
+   "name": "Wind River",
+   "kind": "river",
+   "state": "WY",
+   "towns": [
+    "Boysen",
+    "Dubois",
+    "Thermopolis"
+   ],
+   "bbox": [
+    -110.07089,
+    43.005866,
+    -108.159122,
+    43.751404
+   ],
+   "wikidata": "Q2745932",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "below-boysen-dam-access-wy",
+    "dinwoody-creek-bridge-access-wy",
+    "dubois-city-park-wy",
+    "painted-hills-access-wy",
+    "picnic-tables-upper-wind-river-reservation-access-wy",
+    "stoney-point-access-wy",
+    "wolf-creek-wind-river-canyon-reservation-access-wy"
+   ],
+   "water_id": "wind-river-wy",
+   "gnis_id": "1604544",
+   "geometry_hash": "18f36ff0a326f5e60b42be7477ae180271aa44f63b74a4989a3145fff7f5fee9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "woodruff-narrows-reservoir-wy",
+   "name": "Woodruff Narrows Reservoir",
+   "kind": "reservoir",
+   "state": "WY",
+   "towns": [
+    "Bear River"
+   ],
+   "bbox": [
+    -111.031917,
+    41.445401,
+    -111.004289,
+    41.506679
+   ],
+   "wikidata": "Q49703236",
+   "charted": false,
+   "area_km2": 9.121,
+   "launches": [
+    "woodruff-narrows-public-access-area-bear-river-wy",
+    "woodruff-narrows-public-access-area-wy"
+   ],
+   "water_id": "woodruff-narrows-reservoir-wy",
+   "gnis_id": "1596609",
+   "geometry_hash": "80478fc52422ab76e7eee40483dcb53ab2e260fb5b3f0f93550d18bfc59ce8b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "worthen-meadow-reservoir-wy",
+   "name": "Worthen Meadow Reservoir",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Lander"
+   ],
+   "bbox": [
+    -108.93232,
+    42.697484,
+    -108.916494,
+    42.702374
+   ],
+   "wikidata": "Q54874485",
+   "charted": false,
+   "area_km2": 0.39,
+   "launches": [
+    "worthen-meadows-boating-site-wy"
+   ],
+   "water_id": "worthen-meadow-reservoir-wy",
+   "gnis_id": "1604835",
+   "geometry_hash": "10660cee854631c7af83a35019555c518bbc4087c5166373e321e14698a1b9cd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yellowstone-lake-wy",
+   "name": "Yellowstone Lake",
+   "kind": "lake",
+   "state": "WY",
+   "towns": [
+    "Bridge Bay",
+    "Grant Village"
+   ],
+   "bbox": [
+    -110.581228,
+    44.276633,
+    -110.201218,
+    44.56406
+   ],
+   "wikidata": "Q923693",
+   "charted": false,
+   "area_km2": 361.779,
+   "launches": [
+    "bridge-bay-boat-launch-ramp-wy",
+    "grant-marina-boat-launch-wy"
+   ],
+   "water_id": "yellowstone-lake-wy",
+   "gnis_id": "1609324",
+   "geometry_hash": "404c94d4ef3a4e82b56ddeb0c460b704580bf7ab80d9e1de00119c965ab1bacd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
