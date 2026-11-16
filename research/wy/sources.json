@@ -63,9 +63,9 @@
   "license": "EPA public data; no restriction stated",
   "legal_basis": "40 CFR 127 (NPDES eRule Phase 2, from 2025-12-21); 40 CFR 122.41(l)(6) five-day written report",
   "status": "watch",
-  "status_reason": "No Wyoming report in the current or the all-versions extract of 2026-11-14; the collection-system table lists one Wyoming permit, EPA's lagoon general permit coverage WYG589101 on the Wind River Reservation. Watched.",
+  "status_reason": "No Wyoming report in the current or the all-versions extract of 2026-11-13, read 2026-11-15; the collection-system table lists one Wyoming permit, EPA's lagoon general permit coverage WYG589101 on the Wind River Reservation. Watched.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -179,9 +179,9 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "The original layer could not be read; the historical layer WDEQ_ALL_Past_HCB_Advisories (layer 1, 78 rows, wide per-year columns, last data edit 2025-06-17) answered its metadata and count on 2026-11-14. Not read in this build: the current advisories come from the bulletins (wy-deq-hcb-bulletins). Watched.",
+  "status_reason": "The layer answers (88 rows on 2026-11-15, last data edit 2025-11-10): advisories of 2017 to 2025 in per-year columns, none for 2026; the historical layer WDEQ_ALL_Past_HCB_Advisories (layer 1, 78 rows, last data edit 2025-06-17) is an older copy. Not read for records: the current advisories come from the bulletins (wy-deq-hcb-bulletins). Watched.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {

@@ -350,12 +350,12 @@
    "operator_id": null,
    "agency": "Wyoming Department of Environmental Quality",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-15",
    "id": "wy-deq-hcb-page",
    "name": "Wyoming DEQ (harmful cyanobacteria blooms program page)",
    "channel_kind": "state_alert_page",
    "urls": [
-    "https://deq.wyoming.gov/water-quality/watershed-protection/cyanobacteria/"
+    "https://deq.wyoming.gov/harmful-cyanobacterial-blooms/"
    ],
    "method": "html",
    "legal_basis": null,
@@ -506,7 +506,7 @@
    "operator_id": null,
    "agency": "U.S. Environmental Protection Agency (ECHO)",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-15",
    "id": "wy-epa-echo-overflow-events",
    "name": "U.S. Environmental Protection Agency (ECHO)",
    "channel_kind": "feed",
@@ -523,7 +523,7 @@
    "availability_only": true,
    "every_hours": 168,
    "noun": "Data feed",
-   "note": "EPA's sewer overflow and bypass tables hold no Wyoming report in the current or the all-versions extract of 2026-11-14; the collection-system table lists one Wyoming permit, EPA's lagoon coverage WYG589101. Watched for Wyoming rows.",
+   "note": "EPA's sewer overflow and bypass tables hold no Wyoming report in the current or the all-versions extract of 2026-11-13, read 2026-11-15; the collection-system table lists one Wyoming permit, EPA's lagoon coverage WYG589101. Watched for Wyoming rows.",
    "sources": [
     "wy-epa-sobe"
    ],
