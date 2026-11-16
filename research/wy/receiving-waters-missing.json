@@ -12,28 +12,22 @@
  "feeds_merged": {
   "wy-deq-spill-list": "84 records, fetched 2026-11-16"
  },
- "waters": 15,
- "reports": 22,
+ "waters": 14,
+ "reports": 21,
  "by_reason": {
   "no NHD flowline or waterbody of that name in WY": 9,
+  "2 NHD waters of that name in WY and the reports give no place to choose one": 2,
   "3 NHD waters of that name in WY and the reports give no place to choose one": 2,
-  "2 NHD waters of that name in WY and the reports give no place to choose one": 1
+  "27 NHD waters of that name in WY and the reports give no place to choose one": 1
  },
- "resolved_names": 35,
- "resolved_reports": 52,
+ "resolved_names": 36,
+ "resolved_reports": 53,
  "build": {
   "date": "2026-11-16",
-  "command": "python -m ingest.waters_from_nhd --names research/wy/receiving-waters-missing.json --state WY --recheck",
-  "records_built": 0,
+  "command": "python -m ingest.waters_from_nhd --names research/wy/receiving-waters-missing.json --state WY",
+  "records_built": 1,
   "names_resolved": 1,
-  "network_requests": 0,
-  "last_build": {
-   "date": "2026-11-16",
-   "command": "python -m ingest.waters_from_nhd --names research/wy/receiving-waters-missing.json --state WY",
-   "records_built": 6,
-   "names_resolved": 27,
-   "network_requests": 15
-  }
+  "network_requests": 3
  },
  "rows": [
   {
@@ -82,7 +76,8 @@
    },
    "reports_by_source": {
     "wy-deq-spill-list": 1
-   }
+   },
+   "reason": "27 NHD waters of that name in WY and the reports give no place to choose one"
   },
   {
    "name": "Diamond Lake (Bosler Reservoir)",
@@ -108,7 +103,8 @@
    },
    "reports_by_source": {
     "wy-deq-spill-list": 1
-   }
+   },
+   "reason": "2 NHD waters of that name in WY and the reports give no place to choose one"
   },
   {
    "name": "Kemmerer City Reservoir",
@@ -164,18 +160,6 @@
     "wy-deq-hcb-bulletins": 1
    },
    "reason": "3 NHD waters of that name in WY and the reports give no place to choose one"
-  },
-  {
-   "name": "North Fork Powder River",
-   "county": "Johnson County",
-   "reports": 1,
-   "open": 0,
-   "sources": {
-    "wy-deq-spill-list": 1
-   },
-   "reports_by_source": {
-    "wy-deq-spill-list": 1
-   }
   },
   {
    "name": "South Worland Pond",
@@ -416,6 +400,15 @@
     "louis-lake-wy"
    ],
    "how": "a water record already holds the name"
+  },
+  {
+   "name": "North Fork Powder River",
+   "reports": 1,
+   "slugs": [
+    "north-fork-powder-river-wy"
+   ],
+   "how": "record built from the name",
+   "county": "Johnson County"
   },
   {
    "name": "North Platte River",
