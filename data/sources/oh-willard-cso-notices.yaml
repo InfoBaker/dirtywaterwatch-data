@@ -1,0 +1,27 @@
+id: "oh-willard-cso-notices"
+name: "Willard CSO public notifications"
+url: "https://www.willardohio.gov/cso.html"
+homepage: "https://www.willardohio.gov/cso.html"
+kind: "html"
+level: "municipal"
+# Feed row: written by pipeline/ingest/oh_willard_cso.py (data/build/events/oh-willard-cso-notices.json).
+# Built 2026-11-16: hourly; the page's initial and supplemental notices (four, of two overflows: 2025-04-05 and
+#   2026-04-01), one cso record per overflow keyed on the start both notices state; start and end to the minute in
+#   Eastern time; total volume in million gallons; rainfall, duration, treatment and areas affected in raw. Every
+#   notice read is kept in data/build/oh-willard-cso-state.json, so a notice taken off the page stays a past report.
+#   No outfall number in the notices: permit OH0028118, no outfall or point; placed by name on Holiday Lakes, which
+#   the notices name as affected (Jacob Creek and the West Branch Huron River have no water record).
+# Columns: the labelled notice lines only; reading stops at "For more information contact" (staff names, telephones,
+#   e-mail addresses: never read or saved); the page itself is never saved.
+cadence: "1 hour"
+license: "none stated"
+attribution: "City of Willard"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["html"]
+access_detail: "Notices under the 'PUBLIC NOTIFICATION' heading, each headed 'INITIAL NOTIFICATION: <date>' or 'SUPPLEMENTAL NOTIFICATION: <date>', with labelled lines (Date and Time the CSO began / ended, TOTAL DURATION, Location of discharge, Discharge stream, Treatment provided, Status at time of this notification, Areas affected, Rainfall prior to beginning, Total Rainfall this CSO event, TOTAL CSO VOLUME)."
+machine_readable: false
+legal_basis: "40 CFR 122.38 (Lake Erie basin)"
+checked: "2026-11-16"

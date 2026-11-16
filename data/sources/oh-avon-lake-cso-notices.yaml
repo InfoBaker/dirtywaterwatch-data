@@ -1,0 +1,28 @@
+id: "oh-avon-lake-cso-notices"
+name: "Avon Lake Regional Water CSO notices, Form B (PDF)"
+url: "https://avonlakewater.org/about-us/about-the-avon-lake-water-reclamation-facility/"
+homepage: "https://avonlakewater.org/about-us/about-the-avon-lake-water-reclamation-facility/"
+kind: "pdf"
+level: "utility"
+# Feed row: written by pipeline/ingest/oh_avon_lake_cso.py (data/build/events/oh-avon-lake-cso-notices.json), with
+#   pipeline/ingest/oh_cso_pdf_notices.py (index links, PDF text, state).
+# Built 2026-11-16: hourly; the page's Form B (supplemental notice) PDFs, 46 from 2019 to 2026-08-22. One cso record
+#   per overflow keyed on its start: 26 records; 20 forms give a start time with no date (or none) and make no record
+#   (meta.no_start_date). 24-hour times in Eastern time; an end time with no date, or before its start, is not used.
+#   "Million Gallons" or "MG" gives gallons (estimated); MGD (a rate) or a bare number gives none. Outfall 17 tied to
+#   registry outfall 017 of OH0023981 (Center Road, Lake Erie, its own point). Every form read is kept in
+#   data/build/oh-avon-lake-cso-state.json.
+# Columns: the form's dated fields, outfall, impacted areas, volume; the inspector's initials and the contact line are
+#   never read; the PDFs are never saved.
+cadence: "1 hour"
+license: "none stated"
+attribution: "Avon Lake Regional Water"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["pdf", "html"]
+access_detail: "One Form B PDF per overflow under wp-content/uploads, linked from the facility page; text layer read with pypdf (layout mode)."
+machine_readable: false
+legal_basis: "40 CFR 122.38 (Lake Erie basin)"
+checked: "2026-11-16"

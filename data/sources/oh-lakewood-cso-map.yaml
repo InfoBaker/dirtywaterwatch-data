@@ -1,21 +1,27 @@
 id: "oh-lakewood-cso-map"
-name: "Lakewood CSO Notification System map"
+name: "Lakewood CSO Alerts & Status"
 url: "https://cso.lakewoodoh.gov/"
 homepage: "https://cso.lakewoodoh.gov/"
-kind: "map_only"
+kind: "html"
 level: "municipal"
-# Notes (research/oh, status candidate, verified fetched, checked 2026-11-03): Leaflet map with
-#   status per site (in progress / past 48 hours / no recent / unknown meter data); data endpoint
-#   not traced; 'For a text-based list of all overflow locations, contact the City'.
-cadence: null
+# Feed row: written by pipeline/ingest/oh_lakewood_cso.py (data/build/events/oh-lakewood-cso-map.json).
+# Built 2026-11-16: hourly; the page's 24 site cards (CSO outfalls CSO-002 to CSO-059, regulator meters LEWS and
+#   RRES), rendered in the page itself (no data call behind it). Ongoing card: start, discharge location, receiving
+#   water; completed card (kept 48 hours): start, end, total volume in million gallons; then only "Last event ended".
+#   One cso record per site and start, kept in data/build/oh-lakewood-cso-state.json; a start-less record for a last
+#   end no read saw begin. Eastern time, minute. CSO-nnn tied to registry outfall nnn of OH0026018 only when exactly
+#   that number is an open CSO outfall with its own point and the card's water agrees; meters and CSO-056A/B untied.
+#   The page answers GitHub's runner (probe 43941639288, 2026-11-16); this machine cannot resolve the host.
+# Columns: the card rows only; the footer names a city office with a telephone and e-mail, never read.
+cadence: "1 hour"
 license: "none stated"
 attribution: "City of Lakewood"
 enabled: true
 role: "events"
 event_types: ["cso"]
 states: ["OH"]
-access: ["map_only"]
-access_detail: null
+access: ["html"]
+access_detail: "Server-rendered cards (div.modal id popup_<n>): h4 site name; rows Event status (Ongoing, Completed, Unknown), Event start, Event end, Total CSO event volume, Discharge Location, Receiving Water, Public access areas affected, Last event ended, Current status, Data last updated."
 machine_readable: false
 legal_basis: "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree"
-checked: "2026-11-03"
+checked: "2026-11-16"
