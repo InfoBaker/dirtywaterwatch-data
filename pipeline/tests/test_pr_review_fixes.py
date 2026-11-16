@@ -498,9 +498,13 @@ def test_a_pr_name_written_without_its_accent_finds_the_accented_record(monkeypa
         S._GEOM_CACHE.clear()
 
 
-def test_no_pr_water_is_live_until_the_switch():
+def test_pr_is_live_since_its_go_live_audit():
+    # Until 2026-11-16 this test kept Puerto Rico out of live_states (no water of it was to be live before the switch).
+    # The go-live audit of that day (site docs/checklists/2026-11-16-pr-final.md) found it ready after fixes, which
+    # were made (fix/audit-pr), so it is live; its rule row must be there for the site to state the basis.
     rules = json.loads((__import__("pathlib").Path(__file__).resolve().parents[2] / "data" / "rules.json").read_text())
-    assert "PR" not in rules["live_states"]
+    assert "PR" in rules["live_states"]
+    assert rules["red"]["by_state"]["PR"]["basis"]
 
 
 def test_other_states_match_mains_own_module(tmp_path):
