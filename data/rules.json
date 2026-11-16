@@ -710,7 +710,7 @@
     "possible": "Overflow possible: heavy rain, no report received"
    },
    "label_by_level_rationale": "The same caution and colour as for combined sewers, with the same two levels; it reads \"Overflow\" because a separate sewer overflows at manholes and pump stations rather than discharging at an outfall.",
-   "_label_by_level_note": "Owner, 2026-11-16 (about 18:50Z): \"Use 'Overflow possible' for the separate sewer label\". The combined sewer caution keeps \"Discharge\"; the site's lib/rain-words.ts SEPARATE_LABEL holds the same two strings (a site test pins them).",
+   "_label_by_level_note": "Owner, 2026-11-16 (18:38Z): \"Use 'Overflow possible' for the separate sewer label\". The combined sewer caution keeps \"Discharge\"; the site's lib/rain-words.ts SEPARATE_LABEL holds the same two strings (a site test pins them).",
    "event_types": ["sso"],
    "event_types_rationale": "Sanitary sewer overflow reports only: a combined sewer's reports have their own caution.",
    "first_day": "2023-01-01",
@@ -723,7 +723,7 @@
    "live_points_rationale": "The hourly check reads up to four of the points of the operator's past rain-driven reports and takes the wettest, as the combined sewer check takes the wettest outfall.",
    "recency_months": 12,
    "recency_months_rationale": "We stop showing this caution for an operator that has reported no rain-driven overflow in a year, counted back from its source's newest published report so that a feed that publishes late does not shorten the year, and for one whose source has published nothing in a year.",
-   "_recency_months_note": "Owner, 2026-11-16 (about 18:45Z): \"Seems like no overflows in a year would be a safe toggle off\". Replaces the flat 90-day rule and the 365-day storm rule; no storm-count or probability test.",
+   "_recency_months_note": "Owner, 2026-11-16 (18:37Z): \"Seems like no overflows in a year would be a safe toggle off\". Replaces the flat 90-day rule and the 365-day storm rule; no storm-count or probability test.",
    "source_min_dated_share": 0.8,
    "source_max_lag_days": 7,
    "source_rationale": "Only sources that would grade \"Dated reports\" count: over their last 12 months more than 80 percent of reports dated and a median delay to the report of at most 7 days, and never a source published in batches months later.",
