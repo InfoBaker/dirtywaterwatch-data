@@ -28,52 +28,38 @@
  "feeds_merged": {
   "sc-des-overflow-list": "1773 records, fetched 2026-11-16"
  },
- "waters": 174,
- "reports": 331,
+ "waters": 86,
+ "reports": 125,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in SC": 1
+  "no NHD flowline or waterbody of that name in SC": 44,
+  "1 NHD water of that name in SC, none within reach of the reports' places": 19,
+  "3 NHD waters of that name in SC and the reports give no place to choose one": 3,
+  "2 NHD waters of that name in SC and the reports give no place to choose one": 3,
+  "5 NHD waters of that name in SC and the reports give no place to choose one": 2,
+  "2 NHD waters of that name in SC, none within reach of the reports' places": 2,
+  "47 NHD waters of that name in SC and the reports give no place to choose one": 2,
+  "6 NHD waters of that name in SC and the reports give no place to choose one": 1,
+  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 1,
+  "5 NHD waters of that name in SC, none within reach of the reports' places": 1,
+  "3 NHD waters of that name in SC, none within reach of the reports' places": 1,
+  "30 NHD waters of that name in SC and the reports give no place to choose one": 1,
+  "7 NHD waters of that name in SC, none within reach of the reports' places": 1,
+  "9 NHD waters of that name in SC and the reports give no place to choose one": 1,
+  "13 NHD waters of that name in SC, none within reach of the reports' places": 1,
+  "15 NHD waters of that name in SC and the reports give no place to choose one": 1,
+  "4 NHD waters of that name in SC, none within reach of the reports' places": 1,
+  "7 NHD waters of that name in SC and the reports give no place to choose one": 1
  },
- "resolved_names": 68,
- "resolved_reports": 284,
+ "resolved_names": 156,
+ "resolved_reports": 490,
  "build": {
-  "date": "2026-11-15",
+  "date": "2026-11-16",
   "command": "python -m ingest.waters_from_nhd --names research/sc/receiving-waters-missing.json --state SC",
-  "records_built": 1,
-  "names_resolved": 1,
-  "network_requests": 4
+  "records_built": 85,
+  "names_resolved": 88,
+  "network_requests": 177
  },
  "rows": [
-  {
-   "name": "Brushy Creek",
-   "county": "Greenville County",
-   "reports": 13,
-   "open": 0,
-   "towns": [
-    "Greenville",
-    "Greer"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 13
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 13
-   }
-  },
-  {
-   "name": "Maple Creek",
-   "county": "Spartanburg County",
-   "reports": 11,
-   "open": 0,
-   "towns": [
-    "Greer"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 11
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 11
-   }
-  },
   {
    "name": "COOSAWHATCHIE CREEK",
    "county": "Allendale County",
@@ -87,111 +73,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 8
-   }
-  },
-  {
-   "name": "Martin Creek",
-   "county": "Oconee County",
-   "reports": 7,
-   "open": 0,
-   "towns": [
-    "Seneca"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 7
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 7
-   }
-  },
-  {
-   "name": "James Island Creek",
-   "county": "Charleston County",
-   "reports": 6,
-   "open": 0,
-   "towns": [
-    "Charleston",
-    "North Charleston",
-    "West Ashley"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 6
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 6
-   }
-  },
-  {
-   "name": "Swift Creek",
-   "county": "Darlington County",
-   "reports": 6,
-   "open": 0,
-   "towns": [
-    "Darlington"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 6
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 6
-   }
-  },
-  {
-   "name": "Hembree Creek",
-   "county": "Anderson County",
-   "reports": 5,
-   "open": 0,
-   "towns": [
-    "Anderson"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 5
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 5
-   }
-  },
-  {
-   "name": "REEDER POINT BRANCH",
-   "county": "Richland County",
-   "reports": 5,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 5
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 5
-   }
-  },
-  {
-   "name": "Antley Spring Branch",
-   "county": "Calhoun County",
-   "reports": 4,
-   "open": 0,
-   "sources": {
-    "sc-des-overflow-list": 4
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "CANE CREEK",
-   "county": "Oconee County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Seneca"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "COOSAWATCHIE CREEK",
@@ -206,41 +89,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "CRANE CREEK",
-   "county": "Richland County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Columbia",
-    "Irmo",
-    "Eastover"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "Dill Creek",
-   "county": "Charleston County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Charleston",
-    "North Charleston",
-    "West Ashley"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Fairmont Branch",
@@ -252,71 +102,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "Five Mile Creek",
-   "county": "Anderson County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Anderson"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "KOON BRANCH",
-   "county": "Richland County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "Lawson Fork Creek",
-   "county": "Spartanburg County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Spartanburg",
-    "Cowpens",
-    "Fingerville",
-    "Landrum"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "Middle Swamp",
-   "county": "Florence County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Florence",
-    "Timmonsville"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Mountain Creek",
@@ -328,52 +115,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "Rocky Creek",
-   "county": "Greenville County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Greer"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "Seneca Creek",
-   "county": "Oconee County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Seneca"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "Speeds Creek",
-   "county": "Oconee County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Seneca"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
+   "reason": "6 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Sunnyside Canal",
@@ -388,37 +131,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "Turkey Creek",
-   "county": "Greenwood County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Ware Shoals"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "Twentyfive Mile Creek",
-   "county": "Kershaw County",
-   "reports": 4,
-   "open": 0,
-   "towns": [
-    "Elgin"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 4
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 4
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Welcome Creek",
@@ -430,125 +144,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 4
-   }
-  },
-  {
-   "name": "Armstrong Branch",
-   "county": "Greenwood County",
-   "reports": 3,
-   "open": 0,
-   "towns": [
-    "Greenwood"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 3
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 3
-   }
-  },
-  {
-   "name": "Beaverdam Creek",
-   "county": "Florence County",
-   "reports": 3,
-   "open": 0,
-   "towns": [
-    "Florence",
-    "Timmonsville"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 3
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 3
-   }
-  },
-  {
-   "name": "Bridge Creek",
-   "county": "Kershaw County",
-   "reports": 3,
-   "open": 0,
-   "towns": [
-    "Elgin"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 3
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 3
-   }
-  },
-  {
-   "name": "KINLEY CREEK",
-   "county": "Richland County",
-   "reports": 3,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 3
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 3
-   }
-  },
-  {
-   "name": "Langston Creek",
-   "county": "Greenville County",
-   "reports": 3,
-   "open": 0,
-   "sources": {
-    "sc-des-overflow-list": 3
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 3
-   }
-  },
-  {
-   "name": "Little Dutchman Creek",
-   "county": "York County",
-   "reports": 3,
-   "open": 0,
-   "towns": [
-    "Rock Hill"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 3
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 3
-   }
-  },
-  {
-   "name": "RAWLS CREEK",
-   "county": "Richland County",
-   "reports": 3,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 3
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 3
-   }
-  },
-  {
-   "name": "Salem Creek",
-   "county": "Anderson County",
-   "reports": 3,
-   "open": 0,
-   "towns": [
-    "Anderson"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 3
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 3
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Stoops Creek",
@@ -564,22 +161,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 3
-   }
-  },
-  {
-   "name": "Tanyard Branch",
-   "county": "Chester County",
-   "reports": 3,
-   "open": 0,
-   "towns": [
-    "Chester"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 3
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 3
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Three Mile Creek",
@@ -597,37 +180,26 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 3
-   }
-  },
-  {
-   "name": "Wolf Creek",
-   "county": "Pickens County",
-   "reports": 3,
-   "open": 0,
-   "towns": [
-    "Pickens"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 3
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 3
-   }
-  },
-  {
-   "name": "Abner Creek",
-   "county": "Spartanburg County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Greer"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Cowpens",
+     "reason": "no NHD water of that name within 3 km of Cowpens (the nearest is 98.7 km away)"
+    },
+    {
+     "town": "Fingerville",
+     "reason": "no NHD water of that name within 3 km of Fingerville (the nearest is 94.6 km away)"
+    },
+    {
+     "town": "Landrum",
+     "reason": "no NHD water of that name within 3 km of Landrum (the nearest is 86.6 km away)"
+    },
+    {
+     "town": "Spartanburg",
+     "reason": "no NHD water of that name within 3 km of Spartanburg (the nearest is 80.2 km away)"
+    }
+   ]
   },
   {
    "name": "BEAVER CREEK",
@@ -639,7 +211,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
+   },
+   "reason": "5 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Baker Creek",
@@ -651,22 +224,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "Brushy Creek",
-   "county": "Anderson County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Easley"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
+   "reason": "3 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "CRANE CREEK",
@@ -678,37 +237,11 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "Chandler Bridge Creek",
-   "county": "Dorchester County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Summerville"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "GILLS CREEK",
-   "county": "Richland County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Columbia"
+   "records": [
+    "crane-creek-sc"
    ],
-   "sources": {
-    "sc-des-overflow-list": 2
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
+   "reason": "a water record holds this water but not this spelling (crane-creek-sc): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "HAMMETT CREEK",
@@ -723,23 +256,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "HIGH HILL CREEK",
-   "county": "Florence County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Florence",
-    "Timmonsville"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "HURRICANE BRANCH",
@@ -754,7 +272,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
+   },
+   "reason": "5 NHD waters of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "North Charleston",
+     "reason": "no NHD water of that name within 3 km of North Charleston (the nearest is 7.1 km away)"
+    }
+   ]
   },
   {
    "name": "Halfway Branch",
@@ -772,79 +297,26 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "Hannahs Creek",
-   "county": "Lancaster County",
-   "reports": 2,
-   "open": 0,
-   "sources": {
-    "sc-des-overflow-list": 2
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "Howard Branch",
-   "county": "Greenville County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Fountain Inn"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "Hurricane Creek",
-   "county": "Anderson County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Anderson"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "Koon Branch Creek",
-   "county": "Richland County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "LAKE KATHERINE",
-   "county": "Richland County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Cowpens",
+     "reason": "no NHD water of that name within 3 km of Cowpens (the nearest is 113.3 km away)"
+    },
+    {
+     "town": "Fingerville",
+     "reason": "no NHD water of that name within 3 km of Fingerville (the nearest is 101.6 km away)"
+    },
+    {
+     "town": "Landrum",
+     "reason": "no NHD water of that name within 3 km of Landrum (the nearest is 88.1 km away)"
+    },
+    {
+     "town": "Spartanburg",
+     "reason": "no NHD water of that name within 3 km of Spartanburg (the nearest is 94.8 km away)"
+    }
+   ]
   },
   {
    "name": "Lake Trollingwood",
@@ -856,7 +328,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Little Chinquapin Creek",
@@ -874,7 +347,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Little Generostee Creek",
@@ -889,7 +363,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Anderson",
+     "reason": "no NHD water of that name within 3 km of Anderson (the nearest is 12.5 km away)"
+    }
+   ]
   },
   {
    "name": "Little Grove Creek",
@@ -904,22 +385,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "MILL CREEK",
-   "county": "Richland County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Piedmont",
+     "reason": "no NHD water of that name within 3 km of Piedmont (the nearest is 3.7 km away)"
+    }
+   ]
   },
   {
    "name": "Middle Branch",
@@ -934,7 +407,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Easley",
+     "reason": "no NHD water of that name within 3 km of Easley (the nearest is 272.9 km away)"
+    }
+   ]
   },
   {
    "name": "PLATT BRANCH",
@@ -949,37 +429,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "Perkins Creek",
-   "county": "Oconee County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Seneca"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
-  },
-  {
-   "name": "Town Creek",
-   "county": "Anderson County",
-   "reports": 2,
-   "open": 0,
-   "towns": [
-    "Pendleton"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 2
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 2
-   }
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "North Charleston",
+     "reason": "no NHD water of that name within 3 km of North Charleston (the nearest is 10.1 km away)"
+    }
+   ]
   },
   {
    "name": "Williams Branch",
@@ -997,7 +454,26 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 2
-   }
+   },
+   "reason": "3 NHD waters of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Cowpens",
+     "reason": "no NHD water of that name within 3 km of Cowpens (the nearest is 109.9 km away)"
+    },
+    {
+     "town": "Fingerville",
+     "reason": "no NHD water of that name within 3 km of Fingerville (the nearest is 132.2 km away)"
+    },
+    {
+     "town": "Landrum",
+     "reason": "no NHD water of that name within 3 km of Landrum (the nearest is 143.3 km away)"
+    },
+    {
+     "town": "Spartanburg",
+     "reason": "no NHD water of that name within 3 km of Spartanburg (the nearest is 106.7 km away)"
+    }
+   ]
   },
   {
    "name": "12 mile river",
@@ -1012,34 +488,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "14 Mile Creek",
-   "county": "Lexington County",
-   "reports": 1,
-   "open": 0,
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "5 Mile Creek",
-   "county": "Anderson County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Anderson"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Albergotti Creek",
@@ -1054,7 +504,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Ansley Branch",
@@ -1066,7 +517,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Ansley Branch Creek",
@@ -1078,7 +530,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Antley Branch Creek",
@@ -1090,7 +543,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Antley Springs Branch",
@@ -1102,22 +556,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "BEAR CREEK",
-   "county": "Lancaster County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Lancaster"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "BEAVERDAM CREEK",
@@ -1129,23 +569,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "BOOKMAN CREEK",
-   "county": "Richland County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Irmo",
-    "Eastover"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "30 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "BROWNS CREEK",
@@ -1160,78 +585,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "BROWNS LAKE",
-   "county": "Oconee County",
-   "reports": 1,
-   "open": 0,
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Beaverdam Creek",
-   "county": "Greenville County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Greer"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Beresford Creek",
-   "county": "Charleston County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Charleston",
-    "North Charleston",
-    "West Ashley"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Big Curltail Creek",
-   "county": "Greenwood County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Greenwood"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Big Poplar Creek",
-   "county": "Orangeburg County",
-   "reports": 1,
-   "open": 0,
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "2 NHD waters of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Union",
+     "reason": "no NHD water of that name within 3 km of Union (the nearest is 8.3 km away)"
+    }
+   ]
   },
   {
    "name": "Boling Creek",
@@ -1243,34 +604,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Bridge Fork Creek",
-   "county": "Greenville County",
-   "reports": 1,
-   "open": 0,
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Brightman's Creek",
-   "county": "Greenwood County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Greenwood"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Burkhalter Creek",
@@ -1282,7 +617,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "CANE CREEK",
@@ -1297,7 +633,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "7 NHD waters of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Columbia",
+     "reason": "no NHD water of that name within 3 km of Columbia (the nearest is 48.5 km away)"
+    }
+   ]
   },
   {
    "name": "CARTER CREEK",
@@ -1312,7 +655,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Lake City",
+     "reason": "no NHD water of that name within 3 km of Lake City (the nearest is 17.6 km away)"
+    }
+   ]
   },
   {
    "name": "CAVEBREAK BRANCH",
@@ -1324,7 +674,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "CLEM'S BRANCH",
@@ -1339,7 +690,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Lynchburg",
+     "reason": "no NHD water of that name within 3 km of Lynchburg (the nearest is 127.3 km away)"
+    }
+   ]
   },
   {
    "name": "COOSWHATCHIE CREEK",
@@ -1354,58 +712,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "CUMBESS CREEK",
-   "county": "Richland County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Chinquapin Creek",
-   "county": "Spartanburg County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Spartanburg",
-    "Cowpens",
-    "Fingerville",
-    "Landrum"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Cinder Branch",
-   "county": "Spartanburg County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Spartanburg",
-    "Cowpens",
-    "Fingerville",
-    "Landrum"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Clemons Branch",
@@ -1417,7 +725,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Coburg Creek",
@@ -1434,7 +743,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Colleton Creek",
@@ -1451,19 +761,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Coopers Creek",
-   "county": "Greenville County",
-   "reports": 1,
-   "open": 0,
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Crane Creek",
@@ -1478,7 +777,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Elgin",
+     "reason": "no NHD water of that name within 3 km of Elgin (the nearest is 7.8 km away)"
+    }
+   ]
   },
   {
    "name": "Crane Creek Branch",
@@ -1493,7 +799,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "DOWNS CREEK",
@@ -1508,52 +815,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "DYE BRANCH CREEK",
-   "county": "York County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Fort Mill"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Dildine creek",
-   "county": "Spartanburg County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Woodruff"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Dry Fork",
-   "county": "Chester County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Chester"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Duck Pond Reservoir",
@@ -1568,40 +831,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Duncan Park Lake",
-   "county": "Spartanburg County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Spartanburg",
-    "Cowpens",
-    "Fingerville",
-    "Landrum"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Eagle Creek",
-   "county": "Dorchester County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "North Charleston"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "East Beards Creek",
@@ -1616,7 +847,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Anderson",
+     "reason": "no NHD water of that name within 3 km of Anderson (the nearest is 18.8 km away)"
+    }
+   ]
   },
   {
    "name": "East Prong Little Generostee Creek",
@@ -1631,7 +869,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Anderson",
+     "reason": "no NHD water of that name within 3 km of Anderson (the nearest is 16.5 km away)"
+    }
+   ]
   },
   {
    "name": "Foster Creek",
@@ -1643,7 +888,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "3 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Four Mile Branch",
@@ -1661,7 +907,26 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Cowpens",
+     "reason": "no NHD water of that name within 3 km of Cowpens (the nearest is 191.4 km away)"
+    },
+    {
+     "town": "Fingerville",
+     "reason": "no NHD water of that name within 3 km of Fingerville (the nearest is 207.7 km away)"
+    },
+    {
+     "town": "Landrum",
+     "reason": "no NHD water of that name within 3 km of Landrum (the nearest is 212.1 km away)"
+    },
+    {
+     "town": "Spartanburg",
+     "reason": "no NHD water of that name within 3 km of Spartanburg (the nearest is 181.2 km away)"
+    }
+   ]
   },
   {
    "name": "Freys Creek",
@@ -1676,22 +941,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Frohawk Creek",
-   "county": "Spartanburg County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Greer"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Greenville Branch creek",
@@ -1709,7 +960,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "HALFWAY SWAMP CREEK",
@@ -1721,7 +973,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "2 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Halfmoon Creek",
@@ -1733,37 +986,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Hidden Creek",
-   "county": "York County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Rock Hill"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Horsepen Creek",
-   "county": "Greenville County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Simpsonville"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Huger Cove",
@@ -1778,7 +1002,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Hunnicutt Creek",
@@ -1793,7 +1018,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "J. Strom Thurmond Reservoir",
@@ -1810,7 +1036,7 @@
    "sources": {
     "sc-des-hab": 1
    },
-   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "JONES POND",
@@ -1825,23 +1051,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Jefferies Creek",
-   "county": "Florence County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Florence",
-    "Timmonsville"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "2 NHD waters of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Blackville",
+     "reason": "no NHD water of that name within 3 km of Blackville (the nearest is 24.4 km away)"
+    }
+   ]
   },
   {
    "name": "Keels Lake",
@@ -1856,7 +1073,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Columbia",
+     "reason": "no NHD water of that name within 3 km of Columbia (the nearest is 7.1 km away)"
+    }
+   ]
   },
   {
    "name": "LITTLE RIVER",
@@ -1868,22 +1092,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "LITTLE TURKEY CREEK",
-   "county": "Edgefield County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Johnston"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "9 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "LONG BRANCH CANAL",
@@ -1898,7 +1108,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Lake Columbia",
@@ -1913,7 +1124,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Lakewood Lake",
@@ -1928,52 +1140,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Little Buck Creek",
-   "county": "Spartanburg County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Chesnee"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Little Thicketty Creek",
-   "county": "Spartanburg County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Cowpens"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Little curltail Creek",
-   "county": "Greenwood County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Greenwood"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Long Branch",
@@ -1985,7 +1153,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "47 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Long Branch Creek",
@@ -1997,53 +1166,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "MCCORD CREEK",
-   "county": "Abbeville County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Abbeville"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Manchester Creek",
-   "county": "York County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Rock Hill"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Mill Creek",
-   "county": "Cherokee County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Gaffney",
-    "Blacksburg"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "47 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Mulberry Creek",
@@ -2058,7 +1182,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Ware Shoals",
+     "reason": "no NHD water of that name within 3 km of Ware Shoals (the nearest is 3.9 km away)"
+    }
+   ]
   },
   {
    "name": "NEWMN SWAMP",
@@ -2073,22 +1204,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "ORPHANAGE BRANCH",
-   "county": "Richland County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Paces Creek",
@@ -2100,34 +1217,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Page Creek",
-   "county": "Spartanburg County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Landrum"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Payne Branch",
-   "county": "Greenville County",
-   "reports": 1,
-   "open": 0,
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Pebbles Creek",
@@ -2142,7 +1233,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Peges Creek",
@@ -2157,7 +1249,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Prosperity",
+     "reason": "no NHD water of that name within 3 km of Prosperity (the nearest is 24.0 km away)"
+    }
+   ]
   },
   {
    "name": "RACOON RUN",
@@ -2172,7 +1271,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "REEDER POINTE BRANCH",
@@ -2187,7 +1287,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "ROBERT BRANCH CREEK",
@@ -2202,37 +1303,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "ROBERTS BRANCH CREEK",
-   "county": "Richland County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "ROCKY BLUFF SWAMP",
-   "county": "Sumter County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Sumter"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Columbia",
+     "reason": "no NHD water of that name within 3 km of Columbia (the nearest is 11.8 km away)"
+    }
+   ]
   },
   {
    "name": "ROCKY BRANCH",
@@ -2247,7 +1325,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "13 NHD waters of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Columbia",
+     "reason": "no NHD water of that name within 3 km of Columbia (the nearest is 5.1 km away)"
+    }
+   ]
   },
   {
    "name": "ROCKY CREEK",
@@ -2259,7 +1344,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "15 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Ransom Creek",
@@ -2274,7 +1360,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Reeves Creek",
@@ -2289,7 +1376,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "Rice Creek",
@@ -2304,7 +1392,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Elgin",
+     "reason": "no NHD water of that name within 3 km of Elgin (the nearest is 4.6 km away)"
+    }
+   ]
   },
   {
    "name": "Richland Creek",
@@ -2316,7 +1411,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "5 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Rose Due Creek",
@@ -2331,7 +1427,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   },
   {
    "name": "SHEALY POND",
@@ -2343,7 +1440,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "2 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "SIMMONS CREEK",
@@ -2360,37 +1458,18 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "SMITH BRANCH",
-   "county": "Richland County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "STOOP CREEK",
-   "county": "Richland County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Columbia"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "4 NHD waters of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Charleston",
+     "reason": "no NHD water of that name within 3 km of Charleston (the nearest is 77.5 km away)"
+    },
+    {
+     "town": "North Charleston",
+     "reason": "no NHD water of that name within 3 km of North Charleston (the nearest is 91.5 km away)"
+    }
+   ]
   },
   {
    "name": "SWYGERT CREEK",
@@ -2405,7 +1484,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Columbia",
+     "reason": "no NHD water of that name within 3 km of Columbia (the nearest is 4.6 km away)"
+    }
+   ]
   },
   {
    "name": "Saluda Lake",
@@ -2420,7 +1506,14 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "1 NHD water of that name in SC, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the reports' towns",
+   "places_failed": [
+    {
+     "town": "Greenville",
+     "reason": "no NHD water of that name within 3 km of Greenville (the nearest is 4.3 km away)"
+    }
+   ]
   },
   {
    "name": "Six Mile Creek",
@@ -2432,22 +1525,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Six Mile Creek",
-   "county": "Lexington County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Cayce"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "7 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Snake Branch",
@@ -2459,7 +1538,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
+   },
+   "reason": "2 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Snows Lake",
@@ -2471,34 +1551,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Stockman Branch",
-   "county": "Greenwood County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Greenwood"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Talley Creek",
-   "county": "Greenville County",
-   "reports": 1,
-   "open": 0,
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Tom's Branch",
@@ -2510,22 +1564,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Twomile Creek",
-   "county": "Spartanburg County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Woodruff"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "3 NHD waters of that name in SC and the reports give no place to choose one"
   },
   {
    "name": "Warbranch Creek",
@@ -2540,53 +1580,8 @@
    },
    "reports_by_source": {
     "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Whitford Stage Swamp",
-   "county": "Orangeburg County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Orangeburg"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
    },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "Whitner Creek",
-   "county": "Anderson County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Anderson"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
-  },
-  {
-   "name": "big branch",
-   "county": "Florence County",
-   "reports": 1,
-   "open": 0,
-   "towns": [
-    "Florence",
-    "Timmonsville"
-   ],
-   "sources": {
-    "sc-des-overflow-list": 1
-   },
-   "reports_by_source": {
-    "sc-des-overflow-list": 1
-   }
+   "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   }
  ],
  "resolved": [
@@ -2637,6 +1632,32 @@
    "reports_by_source": {
     "sc-des-overflow-list": 15
    }
+  },
+  {
+   "name": "Brushy Creek",
+   "reports": 13,
+   "slugs": [
+    "brushy-creek-sc",
+    "brushy-creek-taylors-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greenville",
+    "Greer"
+   ],
+   "county": "Greenville County"
+  },
+  {
+   "name": "Maple Creek",
+   "reports": 11,
+   "slugs": [
+    "maple-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greer"
+   ],
+   "county": "Spartanburg County"
   },
   {
    "name": "Fairforest Creek",
@@ -2699,6 +1720,18 @@
    }
   },
   {
+   "name": "Martin Creek",
+   "reports": 7,
+   "slugs": [
+    "martin-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Seneca"
+   ],
+   "county": "Oconee County"
+  },
+  {
    "name": "Saluda River",
    "county": "Richland County",
    "reports": 7,
@@ -2735,6 +1768,26 @@
    }
   },
   {
+   "name": "James Island Creek",
+   "reports": 6,
+   "slugs": [
+    "james-island-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Charleston",
+    "North Charleston",
+    "West Ashley"
+   ],
+   "county": "Charleston County",
+   "places_failed": [
+    {
+     "town": "North Charleston",
+     "reason": "no NHD water of that name within 3 km of North Charleston (the nearest is 7.4 km away)"
+    }
+   ]
+  },
+  {
    "name": "Lake Keowee",
    "county": "Oconee County",
    "reports": 6,
@@ -2757,6 +1810,30 @@
    "reports_by_source": {
     "sc-des-overflow-list": 6
    }
+  },
+  {
+   "name": "Swift Creek",
+   "reports": 6,
+   "slugs": [
+    "swift-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Darlington"
+   ],
+   "county": "Darlington County"
+  },
+  {
+   "name": "Hembree Creek",
+   "reports": 5,
+   "slugs": [
+    "hembree-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Anderson"
+   ],
+   "county": "Anderson County"
   },
   {
    "name": "Jeffries Creek",
@@ -2783,6 +1860,18 @@
    }
   },
   {
+   "name": "REEDER POINT BRANCH",
+   "reports": 5,
+   "slugs": [
+    "reeder-point-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
+  },
+  {
    "name": "Sugar Creek",
    "county": "Lancaster County",
    "reports": 5,
@@ -2793,6 +1882,57 @@
    "reports_by_source": {
     "sc-des-overflow-list": 5
    }
+  },
+  {
+   "name": "Antley Spring Branch",
+   "reports": 4,
+   "slugs": [
+    "antley-spring-branch-sc"
+   ],
+   "how": "record built from the name",
+   "county": "Calhoun County"
+  },
+  {
+   "name": "CANE CREEK",
+   "reports": 4,
+   "slugs": [
+    "cane-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Seneca"
+   ],
+   "county": "Oconee County",
+   "places_failed": [
+    {
+     "town": "Seneca",
+     "reason": "no NHD water of that name within 3 km of Seneca (the nearest is 3.3 km away)"
+    }
+   ]
+  },
+  {
+   "name": "CRANE CREEK",
+   "reports": 4,
+   "slugs": [
+    "crane-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia",
+    "Irmo",
+    "Eastover"
+   ],
+   "county": "Richland County",
+   "places_failed": [
+    {
+     "town": "Eastover",
+     "reason": "no NHD water of that name within 3 km of Eastover (the nearest is 32.9 km away)"
+    },
+    {
+     "town": "Irmo",
+     "reason": "no NHD water of that name within 3 km of Irmo (the nearest is 7.4 km away)"
+    }
+   ]
   },
   {
    "name": "Cattail Branch",
@@ -2807,6 +1947,38 @@
    }
   },
   {
+   "name": "Dill Creek",
+   "reports": 4,
+   "slugs": [
+    "dill-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Charleston",
+    "North Charleston",
+    "West Ashley"
+   ],
+   "county": "Charleston County",
+   "places_failed": [
+    {
+     "town": "North Charleston",
+     "reason": "no NHD water of that name within 3 km of North Charleston (the nearest is 7.3 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Five Mile Creek",
+   "reports": 4,
+   "slugs": [
+    "fivemile-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Anderson"
+   ],
+   "county": "Anderson County"
+  },
+  {
    "name": "Hagins Prong",
    "county": "Marlboro County",
    "reports": 4,
@@ -2817,6 +1989,18 @@
    "reports_by_source": {
     "sc-des-overflow-list": 4
    }
+  },
+  {
+   "name": "KOON BRANCH",
+   "reports": 4,
+   "slugs": [
+    "koon-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
   },
   {
    "name": "Lake Murray",
@@ -2831,6 +2015,21 @@
    }
   },
   {
+   "name": "Lawson Fork Creek",
+   "reports": 4,
+   "slugs": [
+    "lawsons-fork-creek-sc"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "county": "Spartanburg County"
+  },
+  {
    "name": "Lawsons Fork Creek",
    "county": "Spartanburg County",
    "reports": 4,
@@ -2841,6 +2040,25 @@
    "reports_by_source": {
     "sc-des-overflow-list": 4
    }
+  },
+  {
+   "name": "Middle Swamp",
+   "reports": 4,
+   "slugs": [
+    "middle-swamp-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Florence",
+    "Timmonsville"
+   ],
+   "county": "Florence County",
+   "places_failed": [
+    {
+     "town": "Timmonsville",
+     "reason": "no NHD water of that name within 3 km of Timmonsville (the nearest is 4.2 km away)"
+    }
+   ]
   },
   {
    "name": "Pacolet River",
@@ -2855,6 +2073,78 @@
    }
   },
   {
+   "name": "Rocky Creek",
+   "reports": 4,
+   "slugs": [
+    "rocky-creek-greenville-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greer"
+   ],
+   "county": "Greenville County"
+  },
+  {
+   "name": "Seneca Creek",
+   "reports": 4,
+   "slugs": [
+    "seneca-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Seneca"
+   ],
+   "county": "Oconee County"
+  },
+  {
+   "name": "Speeds Creek",
+   "reports": 4,
+   "slugs": [
+    "speeds-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Seneca"
+   ],
+   "county": "Oconee County"
+  },
+  {
+   "name": "Turkey Creek",
+   "reports": 4,
+   "slugs": [
+    "turkey-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Ware Shoals"
+   ],
+   "county": "Greenwood County"
+  },
+  {
+   "name": "Twentyfive Mile Creek",
+   "reports": 4,
+   "slugs": [
+    "twentyfive-mile-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Elgin"
+   ],
+   "county": "Kershaw County"
+  },
+  {
+   "name": "Armstrong Branch",
+   "reports": 3,
+   "slugs": [
+    "armstrong-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greenwood"
+   ],
+   "county": "Greenwood County"
+  },
+  {
    "name": "Battery Creek",
    "county": "Beaufort County",
    "reports": 3,
@@ -2865,6 +2155,49 @@
    "reports_by_source": {
     "sc-des-overflow-list": 3
    }
+  },
+  {
+   "name": "Beaverdam Creek",
+   "reports": 3,
+   "slugs": [
+    "beaverdam-creek-florence-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Florence",
+    "Timmonsville"
+   ],
+   "county": "Florence County",
+   "places_failed": [
+    {
+     "town": "Timmonsville",
+     "reason": "no NHD water of that name within 3 km of Timmonsville (the nearest is 10.0 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Bridge Creek",
+   "reports": 3,
+   "slugs": [
+    "bridge-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Elgin"
+   ],
+   "county": "Kershaw County"
+  },
+  {
+   "name": "KINLEY CREEK",
+   "reports": 3,
+   "slugs": [
+    "kinley-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
   },
   {
    "name": "Lake Murray",
@@ -2879,6 +2212,15 @@
    }
   },
   {
+   "name": "Langston Creek",
+   "reports": 3,
+   "slugs": [
+    "langston-creek-sc"
+   ],
+   "how": "record built from the name",
+   "county": "Greenville County"
+  },
+  {
    "name": "Laurel Creek",
    "county": "Greenville County",
    "reports": 3,
@@ -2891,6 +2233,30 @@
    }
   },
   {
+   "name": "Little Dutchman Creek",
+   "reports": 3,
+   "slugs": [
+    "little-dutchman-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Rock Hill"
+   ],
+   "county": "York County"
+  },
+  {
+   "name": "RAWLS CREEK",
+   "reports": 3,
+   "slugs": [
+    "rawls-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
+  },
+  {
    "name": "Rocky River",
    "county": "Anderson County",
    "reports": 3,
@@ -2901,6 +2267,24 @@
    "reports_by_source": {
     "sc-des-overflow-list": 3
    }
+  },
+  {
+   "name": "Salem Creek",
+   "reports": 3,
+   "slugs": [
+    "salem-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Anderson"
+   ],
+   "county": "Anderson County",
+   "places_failed": [
+    {
+     "town": "Anderson",
+     "reason": "no NHD water of that name within 3 km of Anderson (the nearest is 161.1 km away)"
+    }
+   ]
   },
   {
    "name": "Saluda River",
@@ -2927,6 +2311,24 @@
    }
   },
   {
+   "name": "Tanyard Branch",
+   "reports": 3,
+   "slugs": [
+    "tanyard-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Chester"
+   ],
+   "county": "Chester County",
+   "places_failed": [
+    {
+     "town": "Chester",
+     "reason": "no NHD water of that name within 3 km of Chester (the nearest is 130.2 km away)"
+    }
+   ]
+  },
+  {
    "name": "Wappoo Creek",
    "county": "Charleston County",
    "reports": 3,
@@ -2937,6 +2339,54 @@
    "reports_by_source": {
     "sc-des-overflow-list": 3
    }
+  },
+  {
+   "name": "Wolf Creek",
+   "reports": 3,
+   "slugs": [
+    "wolf-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Pickens"
+   ],
+   "county": "Pickens County"
+  },
+  {
+   "name": "Abner Creek",
+   "reports": 2,
+   "slugs": [
+    "abner-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greer"
+   ],
+   "county": "Spartanburg County"
+  },
+  {
+   "name": "Brushy Creek",
+   "reports": 2,
+   "slugs": [
+    "brushy-creek-easley-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Easley"
+   ],
+   "county": "Anderson County"
+  },
+  {
+   "name": "Chandler Bridge Creek",
+   "reports": 2,
+   "slugs": [
+    "chandler-bridge-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Summerville"
+   ],
+   "county": "Dorchester County"
   },
   {
    "name": "Congaree Creek",
@@ -2999,6 +2449,18 @@
    }
   },
   {
+   "name": "GILLS CREEK",
+   "reports": 2,
+   "slugs": [
+    "gills-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
+  },
+  {
    "name": "Gilder Creek",
    "county": "Greenville County",
    "reports": 2,
@@ -3011,6 +2473,64 @@
    }
   },
   {
+   "name": "HIGH HILL CREEK",
+   "reports": 2,
+   "slugs": [
+    "high-hill-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Florence",
+    "Timmonsville"
+   ],
+   "county": "Florence County",
+   "places_failed": [
+    {
+     "town": "Timmonsville",
+     "reason": "no NHD water of that name within 3 km of Timmonsville (the nearest is 10.3 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Hannahs Creek",
+   "reports": 2,
+   "slugs": [
+    "hannahs-creek-sc"
+   ],
+   "how": "record built from the name",
+   "county": "Lancaster County"
+  },
+  {
+   "name": "Howard Branch",
+   "reports": 2,
+   "slugs": [
+    "howard-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Fountain Inn"
+   ],
+   "county": "Greenville County"
+  },
+  {
+   "name": "Hurricane Creek",
+   "reports": 2,
+   "slugs": [
+    "hurricane-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Anderson"
+   ],
+   "county": "Anderson County",
+   "places_failed": [
+    {
+     "town": "Anderson",
+     "reason": "no NHD water of that name within 3 km of Anderson (the nearest is 16.9 km away)"
+    }
+   ]
+  },
+  {
    "name": "Ireland Creek",
    "county": "Colleton County",
    "reports": 2,
@@ -3021,6 +2541,30 @@
    "reports_by_source": {
     "sc-des-overflow-list": 2
    }
+  },
+  {
+   "name": "Koon Branch Creek",
+   "reports": 2,
+   "slugs": [
+    "koon-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
+  },
+  {
+   "name": "LAKE KATHERINE",
+   "reports": 2,
+   "slugs": [
+    "lake-katherine-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
   },
   {
    "name": "Lake Hartwell",
@@ -3059,6 +2603,30 @@
    }
   },
   {
+   "name": "MILL CREEK",
+   "reports": 2,
+   "slugs": [
+    "mill-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
+  },
+  {
+   "name": "Perkins Creek",
+   "reports": 2,
+   "slugs": [
+    "perkins-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Seneca"
+   ],
+   "county": "Oconee County"
+  },
+  {
    "name": "Sanders Branch",
    "county": "Hampton County",
    "reports": 2,
@@ -3081,6 +2649,18 @@
    "reports_by_source": {
     "sc-des-overflow-list": 2
    }
+  },
+  {
+   "name": "Town Creek",
+   "reports": 2,
+   "slugs": [
+    "town-creek-pendleton-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Pendleton"
+   ],
+   "county": "Anderson County"
   },
   {
    "name": "Wando River",
@@ -3119,6 +2699,61 @@
    }
   },
   {
+   "name": "14 Mile Creek",
+   "reports": 1,
+   "slugs": [
+    "fourteenmile-creek-sc"
+   ],
+   "how": "record built from the name",
+   "county": "Lexington County"
+  },
+  {
+   "name": "5 Mile Creek",
+   "reports": 1,
+   "slugs": [
+    "fivemile-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Anderson"
+   ],
+   "county": "Anderson County"
+  },
+  {
+   "name": "BEAR CREEK",
+   "reports": 1,
+   "slugs": [
+    "bear-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Lancaster"
+   ],
+   "county": "Lancaster County"
+  },
+  {
+   "name": "BOOKMAN CREEK",
+   "reports": 1,
+   "slugs": [
+    "bookman-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Irmo",
+    "Eastover"
+   ],
+   "county": "Richland County"
+  },
+  {
+   "name": "BROWNS LAKE",
+   "reports": 1,
+   "slugs": [
+    "browns-lake-sc"
+   ],
+   "how": "record built from the name",
+   "county": "Oconee County"
+  },
+  {
    "name": "Beaufort River",
    "county": "Beaufort County",
    "reports": 1,
@@ -3143,6 +2778,59 @@
    }
   },
   {
+   "name": "Beaverdam Creek",
+   "reports": 1,
+   "slugs": [
+    "beaverdam-creek-greer-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greer"
+   ],
+   "county": "Greenville County"
+  },
+  {
+   "name": "Beresford Creek",
+   "reports": 1,
+   "slugs": [
+    "beresford-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Charleston",
+    "North Charleston",
+    "West Ashley"
+   ],
+   "county": "Charleston County",
+   "places_failed": [
+    {
+     "town": "Charleston",
+     "reason": "two NHD waters of that name lie equally near Charleston"
+    }
+   ]
+  },
+  {
+   "name": "Big Curltail Creek",
+   "reports": 1,
+   "slugs": [
+    "big-curltail-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greenwood"
+   ],
+   "county": "Greenwood County"
+  },
+  {
+   "name": "Big Poplar Creek",
+   "reports": 1,
+   "slugs": [
+    "big-poplar-creek-sc"
+   ],
+   "how": "record built from the name",
+   "county": "Orangeburg County"
+  },
+  {
    "name": "Black River",
    "county": "Williamsburg County",
    "reports": 1,
@@ -3153,6 +2841,27 @@
    "reports_by_source": {
     "sc-des-overflow-list": 1
    }
+  },
+  {
+   "name": "Bridge Fork Creek",
+   "reports": 1,
+   "slugs": [
+    "bridge-fork-creek-sc"
+   ],
+   "how": "record built from the name",
+   "county": "Greenville County"
+  },
+  {
+   "name": "Brightman's Creek",
+   "reports": 1,
+   "slugs": [
+    "brightmans-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greenwood"
+   ],
+   "county": "Greenwood County"
   },
   {
    "name": "Bush River",
@@ -3167,6 +2876,18 @@
    }
   },
   {
+   "name": "CUMBESS CREEK",
+   "reports": 1,
+   "slugs": [
+    "cumbess-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
+  },
+  {
    "name": "Charleston Harbor",
    "county": "Charleston County",
    "reports": 1,
@@ -3177,6 +2898,50 @@
    "reports_by_source": {
     "sc-des-overflow-list": 1
    }
+  },
+  {
+   "name": "Chinquapin Creek",
+   "reports": 1,
+   "slugs": [
+    "chinquapin-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "county": "Spartanburg County",
+   "places_failed": [
+    {
+     "town": "Cowpens",
+     "reason": "no NHD water of that name within 3 km of Cowpens (the nearest is 10.2 km away)"
+    },
+    {
+     "town": "Fingerville",
+     "reason": "no NHD water of that name within 3 km of Fingerville (the nearest is 16.5 km away)"
+    },
+    {
+     "town": "Landrum",
+     "reason": "no NHD water of that name within 3 km of Landrum (the nearest is 25.5 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Cinder Branch",
+   "reports": 1,
+   "slugs": [
+    "cinder-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "county": "Spartanburg County"
   },
   {
    "name": "Combahee River",
@@ -3191,6 +2956,51 @@
    }
   },
   {
+   "name": "Coopers Creek",
+   "reports": 1,
+   "slugs": [
+    "coopers-creek-sc"
+   ],
+   "how": "record built from the name",
+   "county": "Greenville County"
+  },
+  {
+   "name": "DYE BRANCH CREEK",
+   "reports": 1,
+   "slugs": [
+    "dye-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Fort Mill"
+   ],
+   "county": "York County"
+  },
+  {
+   "name": "Dildine creek",
+   "reports": 1,
+   "slugs": [
+    "dildine-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Woodruff"
+   ],
+   "county": "Spartanburg County"
+  },
+  {
+   "name": "Dry Fork",
+   "reports": 1,
+   "slugs": [
+    "dry-fork-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Chester"
+   ],
+   "county": "Chester County"
+  },
+  {
    "name": "Duncan Creek",
    "county": "Lexington County",
    "reports": 1,
@@ -3201,6 +3011,35 @@
    "reports_by_source": {
     "sc-des-overflow-list": 1
    }
+  },
+  {
+   "name": "Duncan Park Lake",
+   "reports": 1,
+   "slugs": [
+    "duncan-park-lake-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "county": "Spartanburg County",
+   "places_failed": [
+    {
+     "town": "Cowpens",
+     "reason": "no NHD water of that name within 3 km of Cowpens (the nearest is 12.3 km away)"
+    },
+    {
+     "town": "Fingerville",
+     "reason": "no NHD water of that name within 3 km of Fingerville (the nearest is 23.6 km away)"
+    },
+    {
+     "town": "Landrum",
+     "reason": "no NHD water of that name within 3 km of Landrum (the nearest is 33.1 km away)"
+    }
+   ]
   },
   {
    "name": "Durbin Creek",
@@ -3228,6 +3067,18 @@
    }
   },
   {
+   "name": "Eagle Creek",
+   "reports": 1,
+   "slugs": [
+    "eagle-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "North Charleston"
+   ],
+   "county": "Dorchester County"
+  },
+  {
    "name": "Eighteenmile Creek",
    "county": "Pickens County",
    "reports": 1,
@@ -3238,6 +3089,18 @@
    "reports_by_source": {
     "sc-des-overflow-list": 1
    }
+  },
+  {
+   "name": "Frohawk Creek",
+   "reports": 1,
+   "slugs": [
+    "frohawk-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greer"
+   ],
+   "county": "Spartanburg County"
   },
   {
    "name": "Georges Creek",
@@ -3276,6 +3139,103 @@
    }
   },
   {
+   "name": "Hidden Creek",
+   "reports": 1,
+   "slugs": [
+    "hidden-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Rock Hill"
+   ],
+   "county": "York County"
+  },
+  {
+   "name": "Horsepen Creek",
+   "reports": 1,
+   "slugs": [
+    "horsepen-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Simpsonville"
+   ],
+   "county": "Greenville County"
+  },
+  {
+   "name": "Jefferies Creek",
+   "reports": 1,
+   "slugs": [
+    "jeffries-creek-sc"
+   ],
+   "how": "a water record already holds the name",
+   "towns": [
+    "Florence",
+    "Timmonsville"
+   ],
+   "county": "Florence County"
+  },
+  {
+   "name": "LITTLE TURKEY CREEK",
+   "reports": 1,
+   "slugs": [
+    "little-turkey-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Johnston"
+   ],
+   "county": "Edgefield County"
+  },
+  {
+   "name": "Little Buck Creek",
+   "reports": 1,
+   "slugs": [
+    "little-buck-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Chesnee"
+   ],
+   "county": "Spartanburg County"
+  },
+  {
+   "name": "Little Thicketty Creek",
+   "reports": 1,
+   "slugs": [
+    "little-thicketty-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Cowpens"
+   ],
+   "county": "Spartanburg County"
+  },
+  {
+   "name": "Little curltail Creek",
+   "reports": 1,
+   "slugs": [
+    "little-curltail-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greenwood"
+   ],
+   "county": "Greenwood County"
+  },
+  {
+   "name": "MCCORD CREEK",
+   "reports": 1,
+   "slugs": [
+    "mccord-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Abbeville"
+   ],
+   "county": "Abbeville County"
+  },
+  {
    "name": "Main Creek",
    "county": "Horry County",
    "reports": 1,
@@ -3286,6 +3246,18 @@
    "reports_by_source": {
     "sc-des-overflow-list": 1
    }
+  },
+  {
+   "name": "Manchester Creek",
+   "reports": 1,
+   "slugs": [
+    "manchester-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Rock Hill"
+   ],
+   "county": "York County"
   },
   {
    "name": "Middle Branch Brushy Creek",
@@ -3300,6 +3272,25 @@
    }
   },
   {
+   "name": "Mill Creek",
+   "reports": 1,
+   "slugs": [
+    "mill-creek-gaffney-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Gaffney",
+    "Blacksburg"
+   ],
+   "county": "Cherokee County",
+   "places_failed": [
+    {
+     "town": "Blacksburg",
+     "reason": "no NHD water of that name within 3 km of Blacksburg (the nearest is 5.5 km away)"
+    }
+   ]
+  },
+  {
    "name": "North Tyger River",
    "county": "Spartanburg County",
    "reports": 1,
@@ -3310,6 +3301,69 @@
    "reports_by_source": {
     "sc-des-overflow-list": 1
    }
+  },
+  {
+   "name": "ORPHANAGE BRANCH",
+   "reports": 1,
+   "slugs": [
+    "orphanage-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
+  },
+  {
+   "name": "Page Creek",
+   "reports": 1,
+   "slugs": [
+    "page-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Landrum"
+   ],
+   "county": "Spartanburg County"
+  },
+  {
+   "name": "Payne Branch",
+   "reports": 1,
+   "slugs": [
+    "payne-branch-sc"
+   ],
+   "how": "record built from the name",
+   "county": "Greenville County"
+  },
+  {
+   "name": "ROBERTS BRANCH CREEK",
+   "reports": 1,
+   "slugs": [
+    "roberts-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County",
+   "places_failed": [
+    {
+     "town": "Columbia",
+     "reason": "no NHD water of that name within 3 km of Columbia (the nearest is 3.4 km away)"
+    }
+   ]
+  },
+  {
+   "name": "ROCKY BLUFF SWAMP",
+   "reports": 1,
+   "slugs": [
+    "rocky-bluff-swamp-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Sumter"
+   ],
+   "county": "Sumter County"
   },
   {
    "name": "Rocky Creek",
@@ -3334,6 +3388,30 @@
    "reports_by_source": {
     "sc-des-overflow-list": 1
    }
+  },
+  {
+   "name": "SMITH BRANCH",
+   "reports": 1,
+   "slugs": [
+    "smith-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
+  },
+  {
+   "name": "STOOP CREEK",
+   "reports": 1,
+   "slugs": [
+    "stoop-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Columbia"
+   ],
+   "county": "Richland County"
   },
   {
    "name": "Saluda River",
@@ -3372,6 +3450,39 @@
    }
   },
   {
+   "name": "Six Mile Creek",
+   "reports": 1,
+   "slugs": [
+    "sixmile-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Cayce"
+   ],
+   "county": "Lexington County"
+  },
+  {
+   "name": "Stockman Branch",
+   "reports": 1,
+   "slugs": [
+    "stockman-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Greenwood"
+   ],
+   "county": "Greenwood County"
+  },
+  {
+   "name": "Talley Creek",
+   "reports": 1,
+   "slugs": [
+    "talley-creek-sc"
+   ],
+   "how": "record built from the name",
+   "county": "Greenville County"
+  },
+  {
    "name": "Twelvemile Creek",
    "county": "Lexington County",
    "reports": 1,
@@ -3382,6 +3493,18 @@
    "reports_by_source": {
     "sc-des-overflow-list": 1
    }
+  },
+  {
+   "name": "Twomile Creek",
+   "reports": 1,
+   "slugs": [
+    "twomile-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Woodruff"
+   ],
+   "county": "Spartanburg County"
   },
   {
    "name": "Unnamed tributary to Catawba River",
@@ -3406,6 +3529,49 @@
    "reports_by_source": {
     "sc-des-overflow-list": 1
    }
+  },
+  {
+   "name": "Whitford Stage Swamp",
+   "reports": 1,
+   "slugs": [
+    "whitford-stage-swamp-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Orangeburg"
+   ],
+   "county": "Orangeburg County"
+  },
+  {
+   "name": "Whitner Creek",
+   "reports": 1,
+   "slugs": [
+    "whitner-creek-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Anderson"
+   ],
+   "county": "Anderson County"
+  },
+  {
+   "name": "big branch",
+   "reports": 1,
+   "slugs": [
+    "big-branch-sc"
+   ],
+   "how": "record built from the name",
+   "towns": [
+    "Florence",
+    "Timmonsville"
+   ],
+   "county": "Florence County",
+   "places_failed": [
+    {
+     "town": "Timmonsville",
+     "reason": "no NHD water of that name within 3 km of Timmonsville (the nearest is 11.8 km away)"
+    }
+   ]
   }
  ]
 }
