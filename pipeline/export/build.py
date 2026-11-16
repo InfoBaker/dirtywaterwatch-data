@@ -1847,7 +1847,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     cov = coverage_mod.coverage(
         csv_events, tracked, feeds, reg_rows, dis, status_mod.load_rules(), st.get("now"),
         rain_states=rain_caution_states(rain_block), notification_pages=coverage_mod.load_notification_pages(),
-        register=coverage_mod.load_register(),
+        register=coverage_mod.load_register(), live=status_mod.states(),
         # the level of each feed's registry rows, read from the whole registry (not only the live rows)
         source_levels={sid: sorted({str((registry.get(rid) or {}).get("level") or "") for rid in h.get("registry_ids") or []}
                                    - {""}) for sid, h in health.items()})
