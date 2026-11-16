@@ -71,7 +71,27 @@ from ingest.mountain_scrub import scrub
 
 SOURCE_ID = "wy-deq-hcb-bulletins"
 URL = "https://public.govdelivery.com/topics/WYDEQ_42/feed.rss"
-LANDING = "https://deq.wyoming.gov/water-quality/watershed-protection/cyanobacteria/"
+LANDING = "https://deq.wyoming.gov/harmful-cyanobacterial-blooms/"   # the old watershed-protection address is a 404
+RIVER_NAME = re.compile(r"\b(river|creek|fork|stream|canal|ditch)\b", re.I)
+# The water records a bulletin's name is placed on when the name alone cannot choose them (go-live audit 2026-11-16,
+# P1-2 and P1-3): {bulletin name: ([slugs], basis)}. A name that NHD also gives to another, smaller water elsewhere in
+# the state is tied here to the water the agencies mean, so the namesake can never take the advisory.
+WATER_SLUGS = {
+    "Bighorn Reservoir": (["bighorn-lake-wy"],
+                          "the bulletin's location is Horseshoe Bend Beach, on Bighorn Lake in Bighorn Canyon (the "
+                          "National Park Service's Horseshoe Bend, Lovell district; openboatlaunch's Horseshoe Bend "
+                          "launch is on this record), not NHD's Bighorn Reservoir in the Bighorn Mountains"),
+    "Granite Reservoir": (["granite-springs-reservoir-wy"],
+                          "Curt Gowdy State Park's reservoir: the park's own page posts the advisory of 9/30/2026 at "
+                          "\"Granite Springs Reservoir: West Causeway\", the bulletin's date and place; not NHD's "
+                          "Granite Reservoir in the Wind River Range"),
+    "Glendo Reservoir": (["glendo-reservoir-wy", "glendo-reservoir-glendo-wy", "southern-glendo-reservoir-wy"],
+                         "one reservoir held in three records (its north and south parts): the whole reservoir is "
+                         "placed, so no part of it is left grey under the other's colour"),
+    "Wind River": (["wind-river-wy"],
+                   "the river's record; the bulletin names a campground or the dam, no stretch, so the advisory is "
+                   "listed with the river, which is not coloured"),
+}
 AUTHORITY = "Wyoming Department of Health and Wyoming Department of Environmental Quality (HCB bulletins)"
 TZ = "America/Denver"
 ZONE = ZoneInfo(TZ)
@@ -370,6 +390,15 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                     raw["placement_note"] = (f"the advisory is for {inf['place']}, a part of {inf['water']}; the "
                                              "bulletin gives no point for it, so it is listed with the water and its "
                                              "place on the map is not known")
+            elif inf["advisory_type"] == "Bloom" and not RIVER_NAME.search(inf["water"]):
+                # the agencies issue a bloom advisory for the lake or reservoir ("BLOOM ADVISORY has been issued for
+                # FLAMING GORGE RESERVOIR"), the table's location being where it was observed: the whole water, of
+                # any size (build/status.py names_its_water). A toxin advisory names a location and a river's bloom
+                # advisory a stretch ("WIND RIVER: BELOW DAM"): neither is for a whole water (go-live audit
+                # 2026-11-16, P1-1)
+                raw["advisory_extent"] = "named_water"
+            if WATER_SLUGS.get(inf["water"]):
+                raw["water_slugs_basis"] = WATER_SLUGS[inf["water"]][1]
             if i:
                 raw["start_basis"] = ("listed again in the bulletin of this time after a readable bulletin had not "
                                       "listed it: a new period, its start the first bulletin that showed it again")
@@ -426,6 +455,8 @@ def build(text: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                         time_precision="day" if i == 0 else "poll", ended_at=end,
                         published_at=per["from"], fetched_at=fetched, authority=AUTHORITY, advice_text=advice,
                         source_url=seen[k][last], raw=raw)
+            if WATER_SLUGS.get(inf["water"]):
+                rec["water_slugs"], rec["water_match"] = list(WATER_SLUGS[inf["water"]][0]), "name"
             records.append(rec)
             n["advisories"] += 1
     out = sorted(records, key=lambda r: (str(r["started_at"]), r["event_id"]), reverse=True)
