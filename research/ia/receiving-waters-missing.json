@@ -1,61 +1,35 @@
 {
  "about": "Water names in Iowa's records that data/receiving-waters-national.json does not hold for IA: the receiving streams the Department of Natural Resources' field offices entered on the incoming reports read for the major municipal facilities, and the waters the Department's news releases name; Waterloo's notices name no water. One row per name and county (the county the record gives), with the number of reports, how many are open now, and the operators; the reports give no point. Records naming no water are left out (by_reason). Written by scripts/ia_id_report_water_names.py.",
  "state": "IA",
- "waters": 51,
- "reports": 61,
  "reports_on_listed_waters": 73,
+ "waters": 36,
+ "reports": 41,
  "by_reason": {
-  "Waterloo's notices name a street, not a water": 17,
-  "no water named": 226,
-  "the report names no one water (\"multiple, see report\")": 1,
-  "the report's receiving stream is not a water (None, Varies, unknown)": 4
+  "no NHD flowline or waterbody of that name in IA": 14,
+  "an unnamed or unknown stream: the report names no water": 3,
+  "3 NHD waters of that name in IA and the reports give no place to choose one": 3,
+  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 3,
+  "20 NHD waters of that name in IA and the reports give no place to choose one": 3,
+  "the name of a town (Cedar), not of a water: no NHD water of that name in IA": 2,
+  "10 NHD waters of that name in IA and the reports give no place to choose one": 1,
+  "8 NHD waters of that name in IA and the reports give no place to choose one": 1,
+  "4 NHD waters of that name in IA and the reports give no place to choose one": 1,
+  "2 NHD waters of that name in IA and the reports give no place to choose one": 1,
+  "a storm-sewer system, not a named water": 1,
+  "18 NHD waters of that name in IA and the reports give no place to choose one": 1,
+  "15 NHD waters of that name in IA and the reports give no place to choose one": 1,
+  "7 NHD waters of that name in IA and the reports give no place to choose one": 1
+ },
+ "resolved_names": 15,
+ "resolved_reports": 20,
+ "build": {
+  "date": "2026-11-16",
+  "command": "python -m ingest.waters_from_nhd --names research/ia/receiving-waters-missing.json --state IA",
+  "records_built": 10,
+  "names_resolved": 15,
+  "network_requests": 0
  },
  "rows": [
-  {
-   "name": "North River",
-   "reports": 3,
-   "county": "Warren County",
-   "operators": [
-    "City of Carlisle"
-   ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 3
-   },
-   "open": 0,
-   "as_typed": [
-    "North River"
-   ]
-  },
-  {
-   "name": "Catfish Creek",
-   "reports": 2,
-   "county": "Dubuque County",
-   "operators": [
-    "City of Dubuque"
-   ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 2
-   },
-   "open": 0,
-   "as_typed": [
-    "Catfish Creek"
-   ]
-  },
-  {
-   "name": "Creek tributary to Des Moines River",
-   "reports": 2,
-   "county": "Wapello County",
-   "operators": [
-    "City of Ottumwa"
-   ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 2
-   },
-   "open": 0,
-   "as_typed": [
-    "Creek tributary to Des Moines River"
-   ]
-  },
   {
    "name": "Elk Creek/Cardinal Creek",
    "reports": 2,
@@ -69,21 +43,10 @@
    "open": 0,
    "as_typed": [
     "Elk Creek/Cardinal Creek"
-   ]
-  },
-  {
-   "name": "Mississippi",
-   "reports": 2,
-   "county": "Des Moines County",
-   "operators": [
-    "City of Burlington"
    ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 2
-   },
-   "open": 0,
-   "as_typed": [
-    "Mississippi"
+   "reason": "10 NHD waters of that name in IA and the reports give no place to choose one",
+   "parts": [
+    "Elk Creek"
    ]
   },
   {
@@ -99,7 +62,8 @@
    "open": 0,
    "as_typed": [
     "Spring Branch Creek"
-   ]
+   ],
+   "reason": "8 NHD waters of that name in IA and the reports give no place to choose one"
   },
   {
    "name": "Unnamed Creek",
@@ -114,7 +78,8 @@
    "open": 0,
    "as_typed": [
     "Unnamed Creek"
-   ]
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
   },
   {
    "name": "Unnamed Creek",
@@ -129,7 +94,8 @@
    "open": 0,
    "as_typed": [
     "Unnamed Creek"
-   ]
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
   },
   {
    "name": "Wapsipinicon Creek",
@@ -144,7 +110,8 @@
    "open": 0,
    "as_typed": [
     "Wapsipinicon Creek"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Bacon Creek Channel",
@@ -159,22 +126,8 @@
    "open": 0,
    "as_typed": [
     "Bacon Creek Channel"
-   ]
-  },
-  {
-   "name": "Catfish creek",
-   "reports": 1,
-   "county": "Dubuque County",
-   "operators": [
-    "City of Dubuque"
    ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "Catfish creek"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Cedar",
@@ -189,7 +142,8 @@
    "open": 0,
    "as_typed": [
     "Cedar"
-   ]
+   ],
+   "reason": "the name of a town (Cedar), not of a water: no NHD water of that name in IA"
   },
   {
    "name": "Cedar",
@@ -204,7 +158,8 @@
    "open": 0,
    "as_typed": [
     "Cedar"
-   ]
+   ],
+   "reason": "the name of a town (Cedar), not of a water: no NHD water of that name in IA"
   },
   {
    "name": "Cherry Creek, Elk Creek, Cardinal Creek",
@@ -219,6 +174,12 @@
    "open": 0,
    "as_typed": [
     "Cherry Creek, Elk Creek, Cardinal Creek"
+   ],
+   "reason": "Cherry Creek: 3 NHD waters of that name in IA and the reports give no place to choose one; Elk Creek: 10 NHD waters of that name in IA and the reports give no place to choose one; Cardinal Creek: no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "Cherry Creek",
+    "Elk Creek",
+    "Cardinal Creek"
    ]
   },
   {
@@ -234,7 +195,11 @@
    "open": 0,
    "as_typed": [
     "Competine Creek"
-   ]
+   ],
+   "records": [
+    "competine-creek-ia"
+   ],
+   "reason": "a water record holds this water but not this spelling (competine-creek-ia): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Competine creek",
@@ -249,7 +214,11 @@
    "open": 0,
    "as_typed": [
     "Competine creek"
-   ]
+   ],
+   "records": [
+    "competine-creek-ia"
+   ],
+   "reason": "a water record holds this water but not this spelling (competine-creek-ia): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Creek to Miss River",
@@ -264,6 +233,10 @@
    "open": 0,
    "as_typed": [
     "Creek to Miss River"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "Miss River"
    ]
   },
   {
@@ -279,7 +252,8 @@
    "open": 0,
    "as_typed": [
     "Duck Creek"
-   ]
+   ],
+   "reason": "3 NHD waters of that name in IA and the reports give no place to choose one"
   },
   {
    "name": "Goose Creek",
@@ -294,19 +268,8 @@
    "open": 0,
    "as_typed": [
     "Goose Creek"
-   ]
-  },
-  {
-   "name": "Heather Branch",
-   "reports": 1,
-   "county": "Henry County",
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "Heather Branch"
-   ]
+   ],
+   "reason": "4 NHD waters of that name in IA and the reports give no place to choose one"
   },
   {
    "name": "Kitty Creek, but cannot verify it entered stream",
@@ -321,6 +284,11 @@
    "open": 0,
    "as_typed": [
     "Kitty Creek, but cannot verify it entered stream"
+   ],
+   "reason": "but cannot verify it entered stream: no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "Kitty Creek",
+    "but cannot verify it entered stream"
    ]
   },
   {
@@ -336,52 +304,8 @@
    "open": 0,
    "as_typed": [
     "Little Whitebreast Creek"
-   ]
-  },
-  {
-   "name": "Lyons Creek to Boone River",
-   "reports": 1,
-   "county": "Hamilton County",
-   "operators": [
-    "City of Webster City"
    ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "Lyons Creek to Boone River"
-   ]
-  },
-  {
-   "name": "Middle Platte River",
-   "reports": 1,
-   "county": "Union County",
-   "operators": [
-    "City of Creston"
-   ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "Middle Platte River"
-   ]
-  },
-  {
-   "name": "Mississippi",
-   "reports": 1,
-   "county": "Clinton County",
-   "operators": [
-    "City of Clinton"
-   ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "Mississippi"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "North Fork Maquoketa",
@@ -396,22 +320,8 @@
    "open": 0,
    "as_typed": [
     "North Fork Maquoketa"
-   ]
-  },
-  {
-   "name": "North River",
-   "reports": 1,
-   "county": "Polk County",
-   "operators": [
-    "Des Moines Metropolitan Wastewater Reclamation Authority"
    ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "North River"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Platt River",
@@ -426,7 +336,8 @@
    "open": 0,
    "as_typed": [
     "Platt River"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Shelton Marsh",
@@ -441,7 +352,8 @@
    "open": 0,
    "as_typed": [
     "Shelton Marsh"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Soldier Creek",
@@ -456,22 +368,8 @@
    "open": 0,
    "as_typed": [
     "Soldier Creek"
-   ]
-  },
-  {
-   "name": "South River",
-   "reports": 1,
-   "county": "Warren County",
-   "operators": [
-    "City of Indianola"
    ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "South River"
-   ]
+   "reason": "2 NHD waters of that name in IA and the reports give no place to choose one"
   },
   {
    "name": "Storm Sewer - Floyd River",
@@ -486,7 +384,8 @@
    "open": 0,
    "as_typed": [
     "Storm Sewer - Floyd River"
-   ]
+   ],
+   "reason": "a storm-sewer system, not a named water"
   },
   {
    "name": "Suanders Branch Creek",
@@ -498,22 +397,8 @@
    "open": 0,
    "as_typed": [
     "Suanders Branch Creek"
-   ]
-  },
-  {
-   "name": "Thunder Creek",
-   "reports": 1,
-   "county": "Marion County",
-   "operators": [
-    "City of Pella"
    ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "Thunder Creek"
-   ]
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Unnamed Creek",
@@ -528,7 +413,8 @@
    "open": 0,
    "as_typed": [
     "Unnamed Creek"
-   ]
+   ],
+   "reason": "an unnamed or unknown stream: the report names no water"
   },
   {
    "name": "Unnamed Creek to Prairie Creek",
@@ -543,6 +429,10 @@
    "open": 0,
    "as_typed": [
     "Unnamed Creek to Prairie Creek"
+   ],
+   "reason": "20 NHD waters of that name in IA and the reports give no place to choose one",
+   "parts": [
+    "Prairie Creek"
    ]
   },
   {
@@ -558,6 +448,10 @@
    "open": 0,
    "as_typed": [
     "Unnamed Creek to Silver Creek"
+   ],
+   "reason": "18 NHD waters of that name in IA and the reports give no place to choose one",
+   "parts": [
+    "Silver Creek"
    ]
   },
   {
@@ -573,6 +467,10 @@
    "open": 0,
    "as_typed": [
     "Unnamed Tributary to the Platte River"
+   ],
+   "reason": "3 NHD waters of that name in IA and the reports give no place to choose one",
+   "parts": [
+    "Platte River"
    ]
   },
   {
@@ -588,7 +486,11 @@
    "open": 0,
    "as_typed": [
     "Unnamed creek to Nishnabotna River"
-   ]
+   ],
+   "records": [
+    "nishnabotna-river-ia"
+   ],
+   "reason": "a water record holds this water but not this spelling (nishnabotna-river-ia): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Unnamed to Spring",
@@ -603,7 +505,8 @@
    "open": 0,
    "as_typed": [
     "Unnamed to Spring"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Unnamed to Spring Creek",
@@ -618,36 +521,10 @@
    "open": 0,
    "as_typed": [
     "Unnamed to Spring Creek"
-   ]
-  },
-  {
-   "name": "Unnamed tributary to East Boyer River",
-   "reports": 1,
-   "county": "Crawford County",
-   "operators": [
-    "Denison Municipal Utilities"
    ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "Unnamed tributary to East Boyer River"
-   ]
-  },
-  {
-   "name": "Walton Lake",
-   "reports": 1,
-   "county": "Jefferson County",
-   "operators": [
-    "City of Fairfield"
-   ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "Walton Lake"
+   "reason": "20 NHD waters of that name in IA and the reports give no place to choose one",
+   "parts": [
+    "Spring Creek"
    ]
   },
   {
@@ -663,7 +540,8 @@
    "open": 0,
    "as_typed": [
     "Wapsi Creek"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Wapsipinonoc",
@@ -678,7 +556,8 @@
    "open": 0,
    "as_typed": [
     "Wapsipinonoc"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "West Lake Okoboji",
@@ -693,7 +572,8 @@
    "open": 0,
    "as_typed": [
     "West Lake Okoboji"
-   ]
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "ditch to Sugar Creek",
@@ -708,21 +588,10 @@
    "open": 0,
    "as_typed": [
     "ditch to Sugar Creek"
-   ]
-  },
-  {
-   "name": "south fork Catfish Creek",
-   "reports": 1,
-   "county": "Dubuque County",
-   "operators": [
-    "City of Dubuque"
    ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "south fork Catfish Creek"
+   "reason": "15 NHD waters of that name in IA and the reports give no place to choose one",
+   "parts": [
+    "Sugar Creek"
    ]
   },
   {
@@ -738,6 +607,10 @@
    "open": 0,
    "as_typed": [
     "unnamed creek to camp creek"
+   ],
+   "reason": "7 NHD waters of that name in IA and the reports give no place to choose one",
+   "parts": [
+    "camp creek"
    ]
   },
   {
@@ -753,6 +626,10 @@
    "open": 0,
    "as_typed": [
     "unnamed stream to Spring Creek"
+   ],
+   "reason": "20 NHD waters of that name in IA and the reports give no place to choose one",
+   "parts": [
+    "Spring Creek"
    ]
   },
   {
@@ -768,7 +645,148 @@
    "open": 0,
    "as_typed": [
     "unnamed tributary of Pheasant Creek"
+   ],
+   "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "Pheasant Creek"
    ]
+  }
+ ],
+ "resolved": [
+  {
+   "name": "North River",
+   "reports": 3,
+   "slugs": [
+    "north-river-ia"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Warren County"
+  },
+  {
+   "name": "Catfish Creek",
+   "reports": 2,
+   "slugs": [
+    "catfish-creek-ia"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Dubuque County"
+  },
+  {
+   "name": "Creek tributary to Des Moines River",
+   "reports": 2,
+   "slugs": [
+    "des-moines-river-ia"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Wapello County"
+  },
+  {
+   "name": "Mississippi",
+   "reports": 2,
+   "slugs": [
+    "mississippi-river-ia"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Des Moines County"
+  },
+  {
+   "name": "Catfish creek",
+   "reports": 1,
+   "slugs": [
+    "catfish-creek-ia"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Dubuque County"
+  },
+  {
+   "name": "Heather Branch",
+   "reports": 1,
+   "slugs": [
+    "heather-branch-ia"
+   ],
+   "how": "record built from the name",
+   "county": "Henry County"
+  },
+  {
+   "name": "Lyons Creek to Boone River",
+   "reports": 1,
+   "slugs": [
+    "lyons-creek-ia"
+   ],
+   "how": "record built from the name",
+   "county": "Hamilton County"
+  },
+  {
+   "name": "Middle Platte River",
+   "reports": 1,
+   "slugs": [
+    "middle-platte-river-ia"
+   ],
+   "how": "record built from the name",
+   "county": "Union County"
+  },
+  {
+   "name": "Mississippi",
+   "reports": 1,
+   "slugs": [
+    "mississippi-river-ia"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Clinton County"
+  },
+  {
+   "name": "North River",
+   "reports": 1,
+   "slugs": [
+    "north-river-ia"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Polk County"
+  },
+  {
+   "name": "South River",
+   "reports": 1,
+   "slugs": [
+    "south-river-ia"
+   ],
+   "how": "record built from the name",
+   "county": "Warren County"
+  },
+  {
+   "name": "Thunder Creek",
+   "reports": 1,
+   "slugs": [
+    "thunder-creek-ia"
+   ],
+   "how": "record built from the name",
+   "county": "Marion County"
+  },
+  {
+   "name": "Unnamed tributary to East Boyer River",
+   "reports": 1,
+   "slugs": [
+    "east-boyer-river-ia"
+   ],
+   "how": "record built from the name",
+   "county": "Crawford County"
+  },
+  {
+   "name": "Walton Lake",
+   "reports": 1,
+   "slugs": [
+    "walton-lake-ia"
+   ],
+   "how": "record built from the name",
+   "county": "Jefferson County"
+  },
+  {
+   "name": "south fork Catfish Creek",
+   "reports": 1,
+   "slugs": [
+    "south-fork-catfish-creek-ia"
+   ],
+   "how": "record built from the name",
+   "county": "Dubuque County"
   }
  ]
 }
