@@ -20,8 +20,12 @@ the pull request that carries the changed registry files to a person for review.
     python scripts/state_batch.py scrub   --state NC [--text FILE ...]
                                           with the blocklist here: a blocklisted name in the steps' diagnostic notes of
                                           those files (NOTE_KEYS: target and skipped reasons, water_match,
-                                          no_water_reason, ...) and in the texts becomes "[name removed]"; a record's
-                                          own fields (name, slug, aliases, permittee, ...) are never changed
+                                          no_water_reason, ...) and in the texts becomes "[name removed]"; a water
+                                          record's launch (its launches list) that holds an entry of two or more
+                                          words is withheld from the list (a one-word entry is allowed there)
+                                          ("N launch(es) withheld from <file> (private-name list)", also in the pull
+                                          request's body); a record's own fields (name, slug, aliases, permittee,
+                                          launches_unpublished, ...) are never changed
     python scripts/state_batch.py publish --state NC --body FILE [--date YYYY-MM-DD] [--dry-run]
                                           the scrub above, the size ceiling (MAX_FILE_BYTES, 90 MiB: GitHub refuses a
                                           file over 100 MB) and the scan above (the blocklist required), then commit
@@ -711,9 +715,12 @@ def publish(st: str, body: Path, date: str | None = None, dry_run: bool = False,
     if not files:
         say("the steps changed none of the registry files: no branch, no pull request")
         return 0
-    # the steps' diagnostic notes lose a blocklisted name (scrub_files; a record's own fields are never changed), then
+    # the steps' diagnostic notes lose a blocklisted name and a water's launch holding a full name is withheld (scrub_files; a
+    # record's other fields are never changed; the body says how many launches per file), then
     # the files are listed again: a file the scrub brought back to the commit's text is not part of the pull request
-    if scrub_files(files, [body], root):
+    withheld: dict = {}
+    if scrub_files(files, [body], root, withheld):
+        note_withheld(body, withheld)
         files = changed_files(st, root)
         if not files:
             say("after the note scrub the registry files are as committed: no branch, no pull request")
@@ -830,6 +837,61 @@ def scrub_notes(o, block, in_note: bool = False):
     return o, 0
 
 
+# A water record's launches (openboatlaunch's launch slugs, data/waters-<st>.json $.waters[i].launches) name a public
+# boat access, and an access can be named after a family whose surname is a single-word entry of the blocklist (Iowa,
+# 2026-11-15: a public access on the South Raccoon River). The owner's decision (2026-11-16, about 03:27Z, on public
+# place names that meet single-word entries of the private-name list): "Allow the names on the single-word entries".
+# So, in a launches item only (list items of the key `launches` of a record in the top-level `waters` list):
+#   - a blocklist entry of one word (by the scan's own word rule, build.redact._SCAN_WORDS, on the entry) is not a hit:
+#     the item stays, and the scan does not report it there;
+#   - an entry of two or more words (a person's full name) is: the pass withholds the item from the list (every string
+#     and key it holds, by BlockScan.found) and says how many per file.
+# The water record stays. Every other field (name, towns, aliases, permittee, launches_unpublished, ...) still fails the
+# scan for any entry, single-word or not, and the note fields are scrubbed as before. The files carry no launch count
+# (the top-level count is of waters), so no other field changes with a withheld item.
+LAUNCH_KEY = "launches"
+LAUNCH_PATH = re.compile(r"^\$\.waters\[\d+\]\." + LAUNCH_KEY + r"\[\d+\]")
+
+
+def launch_block(block):
+    """The BlockScan a launches item is held to: the blocklist's entries of two or more words only."""
+    from build.redact import BlockScan, _SCAN_WORDS  # noqa: E402  (_patterns put pipeline/ on the path)
+    return BlockScan([n for n, _, _ in block.phrases if len(_SCAN_WORDS.findall(n.lower())) > 1])
+
+
+def withhold_launches(doc, block):
+    """(doc with the launches that hold a blocklist entry of two or more words taken out of its water records' launch
+    lists, number withheld)."""
+    if not isinstance(doc, dict) or not isinstance(doc.get("waters"), list):
+        return doc, 0
+    multi = launch_block(block)
+    waters, n = [], 0
+    for w in doc["waters"]:
+        if isinstance(w, dict) and isinstance(w.get(LAUNCH_KEY), list):
+            keep = [x for x in w[LAUNCH_KEY] if not any(multi.found(s) for _, s in strings(x))]
+            if len(keep) != len(w[LAUNCH_KEY]):
+                n += len(w[LAUNCH_KEY]) - len(keep)
+                w = {**w, LAUNCH_KEY: keep}
+        waters.append(w)
+    return ({**doc, "waters": waters} if n else doc), n
+
+
+def withheld_line(f: str, n: int) -> str:
+    return f"{n} launch(es) withheld from {f} (private-name list)"
+
+
+def note_withheld(body: Path, withheld: dict) -> None:
+    """Add a line per file with launches withheld to the pull request's body (once: a line already there is kept)."""
+    lines = [withheld_line(f, n) for f, n in sorted(withheld.items()) if n]
+    try:
+        text = Path(body).read_text()
+    except OSError:
+        return
+    new = [x for x in lines if x not in text.splitlines()]
+    if new:
+        Path(body).write_text(text + ("" if not text or text.endswith("\n") else "\n") + "\n".join(new) + "\n")
+
+
 def _layouts():
     """[(name, dumps)] the registry files are written in (each file keeps its own: the first that gives back the file's
     text exactly is used to write it again)."""
@@ -855,10 +917,11 @@ def dumps_like(text: str, doc_before, doc_after) -> str | None:
     return None
 
 
-def scrub_files(files: list[str], texts: list[Path] = (), root: Path = ROOT) -> int:
+def scrub_files(files: list[str], texts: list[Path] = (), root: Path = ROOT, withheld: dict | None = None) -> int:
     """Replace the blocklisted names in the note fields of the files (and in the texts, line by line) with the
-    redactor's marker; nothing without a blocklist. Prints the file and the count, never a name. Returns the number of
-    strings changed."""
+    redactor's marker, and withhold a water record's launch that holds one (withhold_launches); nothing without a
+    blocklist. Prints the file and the count, never a name; withheld, when given, gets {file: launches withheld}.
+    Returns the number of strings changed and launches withheld."""
     _, _, block = _patterns(root)
     if block is None:
         return 0
@@ -877,18 +940,25 @@ def scrub_files(files: list[str], texts: list[Path] = (), root: Path = ROOT) -> 
         except (OSError, ValueError):
             continue                     # the scan reports a file it cannot read
         new, n = scrub_notes(doc, block)
-        if not n:
+        new, w = withhold_launches(new, block)
+        if not n and not w:
             continue
         out = dumps_like(text, doc, new)
         if out is None:
-            print(f"::error::{f}: {n} note(s) hold a blocklisted name, but no known layout gives the file back byte for "
-                  "byte, so the note scrub leaves it as it is (the privacy scan decides)", flush=True)
+            what = " and ".join(x for x in (f"{n} note(s)" if n else "", f"{w} launch(es)" if w else "") if x)
+            print(f"::error::{f}: {what} hold a blocklisted name, but no known layout gives the file back byte for "
+                  "byte, so the scrub leaves it as it is (the privacy scan decides)", flush=True)
             continue
         tmp = p.with_suffix(p.suffix + ".tmp")
         tmp.write_bytes(out.encode("utf-8"))
         tmp.replace(p)
-        say(f"{f}: {n} note(s) with a blocklisted name replaced by the redaction marker")
-        total += n
+        if n:
+            say(f"{f}: {n} note(s) with a blocklisted name replaced by the redaction marker")
+        if w:
+            say(withheld_line(f, w))
+            if withheld is not None:
+                withheld[f] = withheld.get(f, 0) + w
+        total += n + w
     for t in texts:
         p = Path(t)
         try:
@@ -956,17 +1026,18 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
             return 1
         say("no name blocklist here: e-mail and phone shapes only")
     hits = 0
+    multi = launch_block(block) if block else None   # a launches item: entries of two or more words only (LAUNCH_KEY)
 
-    def kinds_of(s: str) -> list[str]:
+    def kinds_of(s: str, names=block) -> list[str]:
         return [k for k, bad in (("an e-mail address", email.search(s)), ("a phone number", phone.search(s)),
-                                 ("a blocklisted name", block.found(s) if block else None)) if bad]
+                                 ("a blocklisted name", names.found(s) if names else None)) if bad]
 
     def hide(key: str) -> bool:                      # a key that is itself a finding is named by its position
         return bool(kinds_of(key))
 
-    def check(where: str, s: str) -> None:
+    def check(where: str, s: str, path: str = "") -> None:
         nonlocal hits
-        for k in kinds_of(s):
+        for k in kinds_of(s, multi if LAUNCH_PATH.match(path) else block):
             hits += 1
             print(f"::error::{where}: {k}", flush=True)
 
@@ -987,7 +1058,7 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
         for where, s in strings(new, hide=hide):
             if s not in old:
                 n += 1
-                check(f"{f} {where}", s)
+                check(f"{f} {where}", s, where)
         say(f"{f}: {n} new string(s) scanned")
     for t in texts:
         for i, line in enumerate(Path(t).read_text().splitlines(), 1):
@@ -1049,7 +1120,7 @@ def main(argv=None) -> int:
         if a.cmd == "scrub":
             n = scrub_files(changed_files(valid_state(a.state)), [Path(t) for t in a.text])
             if n:
-                say(f"note scrub: {n} string(s) changed")
+                say(f"scrub: {n} note(s) or launch(es) changed")
             return 0
         return publish(a.state, Path(a.body), a.date, a.dry_run, gh=os.environ.get("GH_BIN") or "gh",
                        require_blocklist=not a.no_blocklist_ok)
