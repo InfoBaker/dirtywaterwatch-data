@@ -62,10 +62,10 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | pr | 6 | 0 | 4 | 1 | 0 | 11 |
 | co | 6 | 0 | 3 | 2 | 1 | 12 |
 | mt | 4 | 0 | 7 | 1 | 1 | 13 |
-| wy | 2 | 0 | 5 | 2 | 1 | 10 |
+| wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **621** | **235** | **551** | **230** | **81** | **1718** |
+| **all** | **622** | **235** | **551** | **229** | **81** | **1718** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -2016,14 +2016,14 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
 | `wy-deq-hcb-bulletins` | Wyoming DEQ HCB bulletins (GovDelivery topic WYDEQ_42, RSS) | used | fetched | advisories | Read 2026-11-15: 25 bulletins (2026-07-31 to 2026-10-28), 22 with the table of current advisories (water, location, Bloom or Toxin, Date Issued) and one lift (three press releases have no table); read by the wy-deq-hcb-bulletins feed as 71 advisories (66 still listed in the latest table, 4 no longer listed, 1 lifted). The bulletins name staff: only the parsed rows are saved. |
+| `wy-deq-spills-portal` | WDEQ Spills and Complaints portal (deqspills.wyo.gov): public spill list (CSV) | used | fetched | events | Read by pipeline/ingest/wy_deq_spills.py (feed wy-deq-spill-list) since 2026-11-16: the sewage rows by rule (84 of 6,066), with the incident date, county, town, substance, quantity, the list's 'reached water' answer, the water as filed and, for public sewer works, the point rounded to three decimals. The responsible party, addresses, description and survey columns hold private people and homes and are never kept. Found by the 2026-11-16 research; the 2026-11-14 check had found only the login screens. |
 | `wy-deq-sso-page` | WDEQ WYPDES Sanitary Sewer Overflows page | used | fetched | law | 'Reporting of the SSO should occur verbally within 24 hours of becoming aware of the event'; written notification to WDEQ within five days. The reporting duty cited in the register and the rules row; WDEQ publishes no list of the reports. |
 | `wy-beach-ecoli` | Beach E. coli monitoring | watch | search_only | monitoring | No statewide beach bacteria program found (search only). |
-| `wy-deq-hcb-advisories-layer` | WDEQ All HCB Advisories feature service (2017-2025) | watch | fetched | advisories | The original layer could not be read; the historical layer WDEQ_ALL_Past_HCB_Advisories (layer 1, 78 rows, wide per-year columns, last data edit 2025-06-17) answered its metadata and count on 2026-11-14. Not read in this build: the current advisories come from the bulletins (wy-deq-hcb-bulletins). Watched. |
+| `wy-deq-hcb-advisories-layer` | WDEQ All HCB Advisories feature service (2017-2025) | watch | fetched | advisories | The layer answers (88 rows on 2026-11-15, last data edit 2025-11-10): advisories of 2017 to 2025 in per-year columns, none for 2026; the historical layer WDEQ_ALL_Past_HCB_Advisories (layer 1, 78 rows, last data edit 2025-06-17) is an older copy. Not read for records: the current advisories come from the bulletins (wy-deq-hcb-bulletins). Watched. |
 | `wy-deq-hcb-current` | WDEQ current HCB advisories (Story Map and GovDelivery bulletins) | watch | fetched | advisories | The StoryMap (a script page) shows the current lists; its rows are the same as the bulletins' table, which is read (wy-deq-hcb-bulletins). Watched. |
-| `wy-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), WY rows | watch | fetched | events | No Wyoming report in the current or the all-versions extract of 2026-11-14; the collection-system table lists one Wyoming permit, EPA's lagoon general permit coverage WYG589101 on the Wind River Reservation. Watched. |
+| `wy-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, NeT-SewerOverflow), WY rows | watch | fetched | events | No Wyoming report in the current or the all-versions extract of 2026-11-13, read 2026-11-15; the collection-system table lists one Wyoming permit, EPA's lagoon general permit coverage WYG589101 on the Wind River Reservation. Watched. |
 | `wy-wdh-hcb` | Wyoming Department of Health HCB notices | watch | search_only | advisories | The Department of Health issues the advisories with WDEQ; its posts duplicate the bulletins. Watched. |
 | `wy-deq-chapter4` | Wyoming Water Quality Rules Chapter 4 (oil and hazardous substance releases), revised 2026-01-12 | rejected | search_only | law | Oil and hazardous substances; sewage not named. |
-| `wy-deq-spills-portal` | WDEQ Spills and Complaints portal (deqspills.wyo.gov) | rejected | fetched | events | The public side is a report form; the app's incident search needs a login (a script shell to the build's client, 2026-11-14). Recorded as a login barrier in the register. |
 | `wy-deq-hudson-2024` | Wyoming DEQ news: Hudson wastewater release updates (June 2024) | unreachable | search_only | events | The two June 2024 updates answered HTTP 500 to the build's client on 2026-11-14; no record is made until they can be read. Watched. |
 
 ## ia: Iowa (13)
