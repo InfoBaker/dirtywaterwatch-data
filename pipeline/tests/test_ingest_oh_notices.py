@@ -293,7 +293,8 @@ def test_lakewood_first_read_of_the_live_page(tmp_path):
                            "lews-1130:end:20250728T1845"]
     for r in recs:
         assert r["started_at"] is None and r["status"] == "ended" and r["volume_gal"] is None
-    assert ids["cso-052:end:20261112T1910"]["outfall_id"] == "052"
+    # no receiving water seen for the site yet: no tie (the water must be known to check the number against)
+    assert ids["cso-052:end:20261112T1910"]["outfall_id"] is None
     # a second read confirms the same ends and adds nothing
     recs2, meta2 = _poll(LIVE, LATER, tmp_path / "s.json")
     assert sorted(_ids(recs2)) == sorted(ids) and meta2["poll"]["end_only"] == 0
@@ -406,7 +407,8 @@ def test_fremont_links_are_the_notices_only():
 
 def test_fremont_records(tmp_path):
     rc, d = _feed(FR, FR_INDEX, FR_TEXTS, tmp_path)
-    assert rc == 0 and d["ok"] is True and d["count"] == 9
+    # the scanned notice (no text) is unread: health false, the nine readable records published
+    assert rc == 1 and d["ok"] is False and d["count"] == 9
     ids = _ids(d["records"])
     r = ids["20260809T2117"]
     assert r["started_at"] == "2026-08-09T21:17:00-04:00" and r["ended_at"] == "2026-08-10T06:27:00-04:00"
@@ -418,8 +420,7 @@ def test_fremont_records(tmp_path):
     # 5:50PM to 10:52AM the same day: the end is before the start and is not used
     odd = ids["20260422T1750"]
     assert odd["ended_at"] is None and odd["status"] == "unknown" and odd["raw"]["end_as_written"] == "4/22/2026 10:52AM"
-    # the scanned notice has no text: listed, not a failure
-    assert [u.rsplit("/", 1)[1] for u in d["meta"]["image_only"]] == ["CSO-July21-2026.pdf"]
+    assert list(d["meta"]["unread"]) == [u for u in FR_TEXTS if u.endswith("CSO-July21-2026.pdf")]
     text = json.dumps(d)
     assert "contact" not in text.lower() and "@" not in text
 
@@ -437,22 +438,27 @@ def test_fremont_initial_and_supplemental_are_one_record(tmp_path):
     assert sorted(n["kind"] for n in same[0]["raw"]["notices"]) == ["initial", "supplemental"]
 
 
+FR_TEXT_ONLY = {u: t for u, t in FR_TEXTS.items() if t.strip()}
+FR_INDEX_TEXT_ONLY = re.sub(r'<li><a href="[^"]*CSO-July21-2026\.pdf">.*?</li>', "", FR_INDEX)
+
+
 def test_pdf_feed_failures(tmp_path):
-    rc, d = _feed(FR, FR_INDEX, FR_TEXTS, tmp_path)
+    rc, d = _feed(FR, FR_INDEX_TEXT_ONLY, FR_TEXT_ONLY, tmp_path)
+    assert rc == 0 and d["ok"] is True
     n = d["count"]
     # an index with no notice link (an error page, a new layout): failed, the records kept
-    rc, d = _feed(FR, "<html><body>Maintenance</body></html>", FR_TEXTS, tmp_path, now=LATER)
+    rc, d = _feed(FR, "<html><body>Maintenance</body></html>", FR_TEXT_ONLY, tmp_path, now=LATER)
     assert rc == 1 and d["ok"] is False and d["count"] == n and "no notice PDF link" in d["error"]
     # a new notice whose text is not the form, and one that cannot be fetched: partial, named, the rest kept
-    texts = {**FR_TEXTS, "https://www.fremontohio.org/wp-content/uploads/2026/09/CSO-9-1-26.pdf": "Agenda for Council"}
-    index = FR_INDEX.replace("</ul>", '<li><a href="https://www.fremontohio.org/wp-content/uploads/2026/09/CSO-9-1-26.pdf">x</a></li>'
+    texts = {**FR_TEXT_ONLY, "https://www.fremontohio.org/wp-content/uploads/2026/09/CSO-9-1-26.pdf": "Agenda for Council"}
+    index = FR_INDEX_TEXT_ONLY.replace("</ul>", '<li><a href="https://www.fremontohio.org/wp-content/uploads/2026/09/CSO-9-1-26.pdf">x</a></li>'
                              '<li><a href="https://www.fremontohio.org/wp-content/uploads/2026/09/CSO-9-2-26.pdf">y</a></li></ul>')
     rc, d = _feed(FR, index, texts, tmp_path, now=LATER)
     assert rc == 1 and d["ok"] is False and d["count"] == n
     assert "CSO-9-1-26.pdf" in d["error"] and "CSO-9-2-26.pdf" in d["error"]
     # a notice taken off the index stays a past report
-    gone = re.sub(r'<li><a href="[^"]*8-9-26-CSO-Notification\.pdf">.*?</li>', "", FR_INDEX)
-    rc, d = _feed(FR, gone, FR_TEXTS, tmp_path, now=LATER)
+    gone = re.sub(r'<li><a href="[^"]*8-9-26-CSO-Notification\.pdf">.*?</li>', "", FR_INDEX_TEXT_ONLY)
+    rc, d = _feed(FR, gone, FR_TEXT_ONLY, tmp_path, now=LATER)
     assert rc == 0 and "20260809T2117" in _ids(d["records"])
     # the two unread notices left the index too: no longer holding health false, named in meta
     assert d["ok"] is True and [u.rsplit("/", 1)[1] for u in d["meta"]["left_unread"]] == ["CSO-9-1-26.pdf", "CSO-9-2-26.pdf"]
@@ -520,3 +526,80 @@ def test_pdf_reader_missing_is_an_unread_notice(tmp_path, monkeypatch):
                      get=PN.FileGet(FR.INDEX_URL, FR_INDEX, FR_TEXTS), out=out)
     d = json.loads(out.read_text())
     assert rc == 1 and d["ok"] is False and "ImportError" in d["error"] and d["count"] == 0
+
+
+# Review 2026-11-16 (Astra): one test per finding ------------------------------------------------------------------
+
+def test_review_fremont_unreadable_end_is_not_a_volume():
+    url = next(u for u in FR_TEXTS if u.endswith("8-9-26-CSO-Notification.pdf"))
+    with pytest.raises(PN.NoticeError):
+        FR.parse(FR_TEXTS[url].replace("8/10/2026 6:27AM", "8/10/2026 TBD"))
+    with pytest.raises(PN.NoticeError):
+        FR.parse(FR_TEXTS[url].replace("8/9/2026 9:17PM", "8/9/2026 night"))
+
+
+def test_review_willard_contact_never_joins_a_field(tmp_path):
+    page = WPAGE.replace("For more information contact", "Contact: Jane Doe, jane@example.org, 216-555-0123<br />More")
+    recs, _ = WL.run(WL.parse(page)[0], NOW, tmp_path / "s.json")
+    text = json.dumps(recs) + (tmp_path / "s.json").read_text()
+    assert "Jane" not in text and "example.org" not in text and "555-0123" not in text
+    assert _ids(recs)["20260401T1445"]["volume_text"] == "7.78 million gallons"
+
+
+def test_review_willard_renamed_headings_fail():
+    page = WPAGE.replace("INITIAL NOTIFICATION", "INITIAL NOTICE").replace("SUPPLEMENTAL NOTIFICATION",
+                                                                           "SUPPLEMENTAL NOTICE")
+    notices, unread = WL.parse(page)                 # read as unknown headings: a failed read, never "none"
+    assert notices == [] and len(unread) == 4
+    stripped = re.sub(r"(INITIAL|SUPPLEMENTAL) NOTICE:", "", page)     # no heading at all, notice lines remain
+    with pytest.raises(WL.LayoutError):
+        WL.parse(stripped)
+
+
+def test_review_fremont_image_only_notice_is_unread(tmp_path):
+    rc, d = _feed(FR, FR_INDEX, FR_TEXTS, tmp_path)
+    assert rc == 1 and d["ok"] is False and "CSO-July21-2026.pdf" in d["error"] and d["count"] == 9
+
+
+def test_review_lakewood_truncated_page_fails(tmp_path):
+    a, _ = _card(ONGOING, "LEWS 1040")
+    f, out = tmp_path / "p.html", tmp_path / "e.json"
+    f.write_text(ONGOING)
+    assert LW.main(["--file", str(f), "--out", str(out)]) == 0
+    f.write_text(ONGOING[:a])                                  # one card left
+    assert LW.main(["--file", str(f), "--out", str(out)]) == 1
+    assert json.loads(out.read_text())["ok"] is False
+
+
+def test_review_avon_outfall_suffix_is_not_the_outfall(tmp_path):
+    url = next(u for u in AV_TEXTS if u.endswith("08222026.pdf"))
+    n = AV.parse(AV_TEXTS[url].replace("Outfall Number:             17", "Outfall Number:             17A"))
+    assert n["outfall_number"] == "17A"
+    n.update(url=url, first_seen_at=NOW, last_seen_at=NOW)
+    r = AV.to_record("k", [n], AV.outfall_rows(AV_REGISTRY))
+    assert r["outfall_id"] is None and r["lat"] is None
+
+
+def test_review_avon_value_wrapped_to_the_next_line():
+    url = next(u for u in AV_TEXTS if u.endswith("08222026.pdf"))
+    t = re.sub(r"(Start time of CSO discharge:)\s+(1800 8/22/2026)", r"\1\n                 \2", AV_TEXTS[url])
+    assert AV.parse(t)["start"] == "2026-08-22T18:00:00-04:00"
+
+
+def test_review_invalid_and_nonexistent_times_are_not_read():
+    assert LW.local("6/15/2026 25:20 PM") is None and LW.local("3/8/2026 2:30 AM") is None
+    assert WL.local("03/08/2026 2:30 am") is None and WL.local("04/1/2026 13:05 pm") is None
+    assert FR.local("3/8/2026", "2:30", "A") is None and FR.local("3/8/2026", "13:30", "P") is None
+    assert AV.when("0230 3/8/2026")[0] is None
+
+
+def test_review_lakewood_no_water_no_tie(tmp_path):
+    recs, _ = _poll(LIVE, NOW, tmp_path / "s.json")
+    r = _ids(recs)["cso-052:end:20261112T1910"]
+    assert r["waterbody_text"] is None and r["outfall_id"] is None and r["lat"] is None
+
+
+def test_review_avon_colonless_yes_no_rows():
+    url = next(u for u in AV_TEXTS if u.endswith("04032025.pdf"))
+    yn = AV.parse(AV_TEXTS[url])["impacted_yes_no"]
+    assert yn.get("Veteran's Memorial Park") == "Yes" and yn.get("Miller Road Park") == "No"

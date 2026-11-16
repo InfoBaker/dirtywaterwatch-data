@@ -10,7 +10,9 @@ Source (registry oh-fremont-cso-notices; 40 CFR 122.38, the Great Lakes CSO publ
   then one row: Date and Time CSO Started, Date and Time CSO Ended, Approximate Volume of CSO (MG). The index's other
   PDFs (annual reports, the notification plan, the storm-water permit) are not notices and are not read; a notice
   link is a PDF whose name says CSO, or NOTIFICATION with COMBINED SEWER, and not annual, report or plan.
-  One notice (CSO-July21-2026.pdf) is a scanned image with no text: it is listed in meta.image_only.
+  One notice (CSO-July21-2026.pdf) is a scanned image with no text: it stays unread, and health false, while listed.
+  The row's cells are read one by one (start; end and volume when given); a cell that is not what its column holds
+  fails the notice.
 
 Records
   - One cso record per overflow: source_record_id the start, local YYYYMMDDTHHMM. An initial notice of the same
@@ -68,9 +70,30 @@ def local(d: str, hm: str, ap: str) -> datetime | None:
     try:
         mo, dd, y = (int(x) for x in d.split("/"))
         h, mi = (int(x) for x in hm.split(":"))
-        return datetime(y, mo, dd, h % 12 + (12 if ap.upper() == "P" else 0), mi, tzinfo=TZ)
+        if not 1 <= h <= 12:
+            return None
+        return PN.existing(datetime(y, mo, dd, h % 12 + (12 if ap.upper() == "P" else 0), mi, tzinfo=TZ))
     except ValueError:
         return None
+
+
+CELL_DT = re.compile(DT + r"$", re.I)
+CELL_VOL = re.compile(r"\d*\.?\d+$")
+
+
+def row_cells(text: str) -> list[str]:
+    """The cells of the notice's one data row: the first line after the column headings that holds anything, split
+    on runs of two or more spaces (pypdf's layout text)."""
+    raw = text.splitlines()
+    i = next((k for k, ln in enumerate(raw) if re.search(r"of CSO \(MG\)", ln, re.I)), None)
+    if i is None:
+        raise PN.NoticeError("the notice's column headings were not found")
+    for ln in raw[i + 1:]:
+        if ln.strip():
+            if re.match(r"\s*Comments\s*:", ln, re.I):
+                break
+            return [c.strip() for c in re.split(r"\s{2,}", ln.strip()) if c.strip()]
+    raise PN.NoticeError("the notice's row is empty")
 
 
 def field(ls: list[str], label: str) -> str | None:
@@ -90,15 +113,27 @@ def parse(text: str) -> dict:
         raise PN.NoticeError("not Fremont's CSO notification form")
     kind = "supplemental" if re.match(r"\s*Supplemental\b", joined, re.I) else \
         "initial" if re.match(r"\s*Initial\b", joined, re.I) else "notice"
-    head = re.search(r"Approximate Volume.*?of CSO \(MG\)", joined, re.I)
-    m = ROW.search(joined, head.end() if head else 0)
-    if not m:
-        raise PN.NoticeError("no start date and time in the notice's row")
-    g = m.groups()
+    # each cell is read on its own: start, then end and volume when given; a cell that is not what its column
+    # holds fails the notice (an unreadable end never becomes a volume; review 2026-11-16 P1)
+    cells = row_cells(text)
+    if not 1 <= len(cells) <= 3:
+        raise PN.NoticeError(f"the row has {len(cells)} cells")
+    ms = CELL_DT.match(cells[0])
+    if not ms:
+        raise PN.NoticeError(f"start cell '{cells[0][:30]}' not read")
+    me = CELL_DT.match(cells[1]) if len(cells) >= 2 and not CELL_VOL.match(cells[1]) else None
+    rest = cells[1:]
+    if me:
+        rest = cells[2:]
+    if len(rest) > 1 or (rest and not CELL_VOL.match(rest[0])) or (len(cells) == 3 and not me):
+        raise PN.NoticeError(f"row cells {cells!r} not read")
+    g = ms.groups() + (me.groups() if me else (None, None, None)) + ((rest[0],) if rest else (None,))
     st = local(g[0], g[1], g[2])
     if st is None:
-        raise PN.NoticeError(f"start '{m.group(0)[:30]}' not read")
+        raise PN.NoticeError(f"start '{cells[0][:30]}' not read")
     end = local(g[3], g[4], g[5]) if g[3] else None
+    if g[3] and end is None:
+        raise PN.NoticeError(f"end '{cells[1][:30]}' not read")
     return {"kind": kind, "start": st.isoformat(), "start_as_written": f"{g[0]} {g[1]}{g[2]}M",
             "end": end.isoformat() if end else None,
             "end_as_written": f"{g[3]} {g[4]}{g[5]}M" if g[3] else None,

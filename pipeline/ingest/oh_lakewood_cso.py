@@ -47,14 +47,15 @@ Records (a status snapshot turned into dated records, as oh_neorsd_cso does; the
     outfall with its own permitted-feature point (002, 052, 053, 055, 056, 057, 058, 059 on 2026-11-16): outfall_id
     and the registry's point (coord_source outfall_layer). "CSO-056A" and "CSO-056B" are not 056, and the LEWS and
     RRES meters are not registry outfalls: no outfall, no point (the page's own marker points are not used).
-    A tie is also refused when the card's "Receiving Water" is not the registry row's water (raw.place_basis says
+    A tie needs the receiving water known (the card's, or the page's other cards for the site) and refuses one that is
+    not the registry row's water (raw.place_basis says
     which). waterbody_text is the card's "Receiving Water" as named; a start-less record (below) whose card gives
     none takes the water the page names for the same site on its other events (raw.water_basis); raw.discharge_location the card's street description
     (a house number in it is removed); raw.public_access_areas_affected as written ("Unknown").
   - advice_text null: the cards give no advice.
 
 State: data/build/oh-lakewood-cso-state.json (every event seen; the archive). Do not delete it.
-Failures: a failed request, a page with no cards, or a card whose labels or status the reader does not know is a
+Failures: a failed request, a page with fewer than 10 cards or more than 3 fewer than the last read (truncated), or a card whose labels or status the reader does not know is a
   failed read for that card or page: a page with no readable card writes ok=False and keeps the previous records; one
   unknown card is named in the error, the rest are read, and health stays false (partial) until it reads.
 History: the page shows only the latest event per site (48 hours for a completed one); it has no archive, so there is
@@ -76,6 +77,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+from ingest.oh_cso_pdf_notices import existing
 from common import (BUILD_DIR, HEADERS, event, load_outfall_registry, now_iso, outfall_number, read_json, save_raw,
                     strip_house_numbers, write_events, write_json)
 
@@ -112,8 +114,11 @@ def local(v: str | None) -> datetime | None:
     if not m:
         return None
     mo, d, y, h, mi, ap = m.groups()
+    if not 1 <= int(h) <= 12:
+        return None
     try:
-        return datetime(int(y), int(mo), int(d), int(h) % 12 + (12 if ap.upper() == "P" else 0), int(mi), tzinfo=TZ)
+        return existing(datetime(int(y), int(mo), int(d), int(h) % 12 + (12 if ap.upper() == "P" else 0), int(mi),
+                                 tzinfo=TZ))
     except ValueError:
         return None
 
@@ -164,6 +169,21 @@ def parse(page: str) -> tuple[list[dict], list[str]]:
     if not cards:
         raise LayoutError("no card could be read: " + "; ".join(unread[:5]))
     return cards, unread
+
+
+MIN_CARDS = 10      # 24 sites on 2026-11-16
+DROP_ALLOWED = 3
+
+
+def complete(parsed: list[tuple[list[dict], list[str]]], state_path: Path) -> None:
+    """A page with far fewer cards than the last read (a truncated or partial page) is a failed read, never a
+    smaller set of sites with nothing to report (review 2026-11-16 P1)."""
+    prev = ((read_json(state_path, {}) or {}).get("last_poll") or {}).get("cards") or 0
+    for cards, unread in parsed:
+        n = len(cards) + len(unread)
+        if n < MIN_CARDS or n < prev - DROP_ALLOWED:
+            raise LayoutError(f"{n} site cards on the page (the last read had {prev}): the page looks truncated")
+        prev = n
 
 
 def iso(t: datetime | None) -> str | None:
@@ -263,7 +283,9 @@ def tie(site: str, points: dict[str, dict], water: str | None) -> dict | None:
     registry row's water: then neither is trusted over the other and nothing is tied (raw.place_basis says so)."""
     m = re.fullmatch(r"CSO-(\d{3})", site.strip(), re.I)
     o = points.get(outfall_number(m.group(1))) if m else None
-    if o and water and o.get("water_name") and water.strip().lower() != str(o["water_name"]).strip().lower():
+    # the water must be known (the card, or the page's other cards for the site) and the registry row's (review
+    # 2026-11-16 P2)
+    if o and (not water or not o.get("water_name") or water.strip().lower() != str(o["water_name"]).strip().lower()):
         return None
     return o
 
@@ -271,6 +293,9 @@ def tie(site: str, points: dict[str, dict], water: str | None) -> dict | None:
 def _conflict(site: str, points: dict[str, dict], water: str | None) -> str | None:
     m = re.fullmatch(r"CSO-(\d{3})", site.strip(), re.I)
     o = points.get(outfall_number(m.group(1))) if m else None
+    if o and not water:
+        return (f"card {site} is outfall {o['outfall']} by number, but the page names no receiving water for the "
+                "site to check it against: no outfall or point tied")
     if o and tie(site, points, water) is None:
         return (f"card {site} names {water} as its receiving water; the registry's outfall {o['outfall']} of {PERMIT} "
                 f"is on {o['water_name']}: no outfall or point tied")
@@ -367,6 +392,7 @@ def main(argv=None) -> int:
             r.raise_for_status()
             pages = [r.text]
         parsed = [parse(p) for p in pages]
+        complete(parsed, state_path)
     except (requests.RequestException, LayoutError, OSError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"page: {type(e).__name__}: {e}", path=out)
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
