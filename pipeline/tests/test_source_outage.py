@@ -38,7 +38,8 @@ def standing(**over) -> dict:
 
 def polled(**over) -> dict:
     """A polled layer with no dates (Kansas KDHE's HAB layer: raw._poll_confirmed, time precision poll)."""
-    return standing(event_type="hab_advisory", time_precision="poll", raw={"_poll_confirmed": True}, **over)
+    return standing(event_type="hab_advisory", time_precision="poll",
+                    raw={"_poll_confirmed": True, **over.pop("raw", {})}, **over)
 
 
 def outage() -> dict:
@@ -220,3 +221,69 @@ def test_record_carried_by_two_feeds_takes_each_files_health(tmp_path, monkeypat
 
 def test_record_hash_ignores_feed_health():
     assert S.record_hash(standing()) == S.record_hash(standing(_feed_health=outage()))
+
+
+# ---- review fixes (Astra, 2026-11-16)
+
+def test_partial_listing_then_successful_read_not_listing_is_not_an_outage(tmp_path, monkeypatch):
+    """P1-1: a partial read lists it at L; a later successful read does not: today's grey, not held."""
+    _write(tmp_path, monkeypatch, L - 1 * D, [standing(raw={"_last_seen_in_source": z(L - 1 * D)})])
+    _write(tmp_path, monkeypatch, L + 2 * M, [standing()], ok=False, partial=True, error="half the pages")
+    _write(tmp_path, monkeypatch, L + 20 * D, [standing()])
+    ev = _load(tmp_path)["x-feed:1"]
+    assert common.no_ok_read_since(ev["_feed_health"], z(L)) is False
+    assert seen(ev, L + 21 * D)[0] == "grey"
+
+
+def test_partial_read_that_lists_it_again_keeps_the_gap(tmp_path, monkeypatch):
+    """P1-2: the read that lists it after the outage is a partial one: the gap is kept, never red after the fact."""
+    _write(tmp_path, monkeypatch, L + 2 * M, [standing()])
+    _write(tmp_path, monkeypatch, L + 20 * D, [], ok=False, error="unreachable")
+    back = L + 40 * D
+    _write(tmp_path, monkeypatch, back + 2 * M, [standing(raw={"_last_seen_in_source": z(back)})], ok=False,
+           partial=True, error="half the pages")
+    ev = _load(tmp_path)["x-feed:1"]
+    assert ev["raw"]["_unread_gaps"] == [{"from": z(L), "to": z(back), "listed_again": True}]
+    ivs = S.event_intervals(ev, "KY", back + 1 * D, None, RULES)
+    assert S.status_at(ivs, L + 20 * D)[0] == "unresolved" and S.status_at(ivs, back + 1 * H)[0] == "red"
+
+
+H = timedelta(hours=1)
+
+
+def test_long_lived_record_gap_hatched_past_the_note_limit():
+    """P1-3: an advisory listed 100 days, unread 40, read again without it: the unread time stays hatched."""
+    start, last = L - 100 * D, L
+    back = L + 40 * D
+    ev = standing(started_at=z(start), raw={"_unread_gaps": [{"from": z(last), "to": z(back), "listed_again": False}]},
+                  _feed_health={"ok": True, "last_ok_at": z(back), "prev_ok_at": z(L + 2 * M), "fetched_at": z(back)})
+    ivs = S.event_intervals(ev, "KY", back + 5 * D, None, RULES)
+    assert S.status_at(ivs, L + 20 * D)[0] == "unresolved"
+    assert S.status_at(ivs, L + 5 * D)[0] == "red" and S.status_at(ivs, back + 1 * D)[0] == "grey"
+    # a polled layer with listing periods (Kansas, Missouri): the same
+    pol = polled(started_at=z(start), raw={"_unread_gaps": [{"from": z(last), "to": z(back), "listed_again": True}],
+                                           "listed_periods": [{"from": z(start), "to": z(last)},
+                                                              {"from": z(back), "to": z(back)}],
+                                           "_last_seen_in_source": z(back)})
+    ivs = S.event_intervals(pol, "KS", back + 1 * D, None, RULES)
+    assert S.status_at(ivs, L + 20 * D)[0] == "unresolved" and S.status_at(ivs, back + 1 * H)[0] == "red"
+
+
+def test_gap_after_a_confirmed_end_adds_nothing():
+    ev = standing(ended_at=z(L - 1 * D), status="advisory_lifted",
+                  raw={"_unread_gaps": [{"from": z(L), "to": z(L + 40 * D), "listed_again": False}]})
+    assert S.event_intervals(ev, "KY", L + 50 * D, None, RULES) == \
+        S.event_intervals(standing(ended_at=z(L - 1 * D), status="advisory_lifted"), "KY", L + 50 * D, None, RULES)
+
+
+def test_system_wide_unchanged_through_recovery(tmp_path, monkeypatch):
+    """P1-4: a system-wide advisory read again after an outage keeps its 48-hour rule."""
+    sw = {"advisory_scope": "system-wide"}
+    _write(tmp_path, monkeypatch, L + 2 * M, [standing(raw=sw)])
+    _write(tmp_path, monkeypatch, L + 20 * D, [], ok=False, error="unreachable")
+    back = L + 40 * D
+    _write(tmp_path, monkeypatch, back + 2 * M, [standing(raw={**sw, "_last_seen_in_source": z(back)})])
+    ev = _load(tmp_path)["x-feed:1"]
+    plain = standing(raw={**sw, "_last_seen_in_source": z(back)})
+    assert S.event_intervals(ev, "KY", back + 1 * D, None, RULES) == \
+        S.event_intervals(plain, "KY", back + 1 * D, None, RULES)
