@@ -90,17 +90,23 @@ def rows() -> list[dict]:
                   "discovery (48-1-95(E)), through a channel of its choosing. Not searched individually."),
             barrier="not_verified"))
     out += [
-        base(agency=DES, id="sc-des-sso-reports", name="SC DES (sewer overflow reports under 48-1-95(B))",
-             channel_kind="state_alert_page", urls=[], method=None, legal_basis=LAW_B, basis_kind="law", monitored=False,
-             unmonitored_reason="other", publishes="none", records=False, noun="Report to the state",
-             sources=["sc-des-sso-database", "sc-des-sso-reporting"],
-             note=("Utilities report significant spills to DES by telephone within 24 hours and in writing within five "
-                   "days, and DES's guidance asks for reports of any overflow reaching water and of larger ones that do "
-                   "not; DES publishes no list. DES training material shows an 'SSO Discharge Search' among "
-                   "ePermitting's public services (https://epermitting.des.sc.gov/ext/ncore/), but the application "
-                   "returned only its shell to a plain client on 2026-11-09 and no search result was read. No web "
-                   "channel found."),
-             barrier="no_web_page"),
+        # 2026-11-16: DES's ePermitting list is public and read by ingest/sc_des_overflows.py (the row in
+        # data/notice-channels/sc.json was edited by hand that day; checked "2026-11-16")
+        base(agency=DES, id="sc-des-sso-reports", name="SC DES (sewer overflow reports under 48-1-95(B))", checked="2026-11-16",
+             channel_kind="state_alert_page",
+             urls=["https://epermitting.des.sc.gov/ext/ncore/external/overflow/list",
+                   "https://epermitting.des.sc.gov/ext/ncore/ss/ssolist"],
+             method="json", legal_basis=LAW_B, basis_kind="law", monitored=False,
+             unmonitored_reason="feed_ingested", feed_source_id="sc-des-overflow-list", publishes="notices",
+             noun="State page", sources=["sc-des-sso-database", "sc-des-sso-reporting"],
+             note=("Utilities report overflows to DES (significant spills by telephone within 24 hours and in writing "
+                   "within five days), electronically through ePermitting, and DES publishes the completed reports in "
+                   "its ePermitting list 'View Wastewater Overflows', linked from its overflow page: start, end, "
+                   "receipt, permit, site, manhole or pump station, receiving water, volume and cause, 1,773 reports "
+                   "from September 2022 on 2026-11-16. Every report on the list was marked completed; DES received a "
+                   "report a median of 4.9 days after the overflow began. The list gives no coordinates. Read hourly by the feed "
+                   "sc-des-overflow-list."),
+             barrier=None),
         base(agency=DES, id="sc-des-beach-monitoring", name="SC DES (beach monitoring stations)", channel_kind="feed",
              urls=["https://gis.des.sc.gov/gisserver/rest/services/water/BW_Monitoring_Stations/MapServer/0"],
              method="json", legal_basis=None, basis_kind="voluntary", monitored=False,
