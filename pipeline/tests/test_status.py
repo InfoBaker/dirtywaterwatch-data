@@ -794,7 +794,8 @@ def test_tidal_river_cache_reads_as_the_rule_off_trace_and_is_due_when_on(tmp_pa
     off, why_off = R.build_segments(lines, w, 40)
     rec = {"key": "X-1", "segments": on, "cut_reason": why_on, "length_km": on[-1]["km_end"], "tidal_river": True}
     back = R.without_tidal_river(rec)
-    assert back["segments"] == off and back["cut_reason"] == why_off == "tidal" and "tidal_river" not in back
+    # (an earlier rule's mark, no tidal_off: the best reading, mark kept so that plan() traces it again)
+    assert back["segments"] == off and back["cut_reason"] == why_off == "tidal" and back["tidal_river"] is True
     assert back["length_km"] == off[-1]["km_end"]
     plain = {"key": "Y-1", "segments": off, "cut_reason": "tidal", "length_km": off[-1]["km_end"]}
     assert R.without_tidal_river(plain) is plain
@@ -923,6 +924,21 @@ def test_a_record_of_an_earlier_tidal_rule_is_traced_again_on_or_off():
     # the current mark is not due again
     now_mark = {**early, "tidal_river": R.TIDAL_RULE, "tidal_off": {"segments": 1, "cut_reason": "tidal", "river": None}}
     assert R.plan([c], {"Y-1": now_mark}, NOW, tidal_river=True)[0] == []
+
+
+
+def test_an_earlier_tidal_rule_record_is_due_through_load_reaches(tmp_path, monkeypatch):
+    """Third review P1: plan() reads the cache through load_reaches; with the switch off the earlier mark must survive
+    the read, so the record is traced again."""
+    segs, _ = R.build_segments([fl(1, -72.0, -71.9)], {1: attrs(1, 20)}, 40)
+    c = {"key": "Y-1", "lat": 42.0, "lon": -72.0, "sources": ["registry"]}
+    d = {**c, "fetched_at": iso(NOW - H), "segments": segs, "length_km": segs[-1]["km_end"], "river": "Test River",
+         "cut_reason": "lake_or_reservoir", "tidal_river": True}
+    monkeypatch.setattr(R, "REACH_DIR", tmp_path)
+    (tmp_path / "Y-1.json").write_text(json.dumps(d))
+    for on in (False, True):
+        monkeypatch.setattr(R, "tidal_river_on", lambda rules=None, on=on: on)
+        assert R.plan([c], R.load_reaches(), NOW, tidal_river=on)[0] == [c]
 
 
 def test_the_rule_off_trace_keeps_its_river_name():

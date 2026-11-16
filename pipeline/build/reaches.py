@@ -451,7 +451,9 @@ def without_tidal_river(d: dict) -> dict:
         if "river" in off:
             out["river"] = off["river"]
         return out
-    # an earlier version of the rule: the best reading here (plan() has it traced again)
+    # an earlier version of the rule: the best reading here, and its mark is kept so that plan() (which reads the
+    # records through load_reaches) has it traced again
+    out["tidal_river"] = d["tidal_river"]
     i = tide_head(segs)
     out.update(segments=segs[:i], cut_reason="tidal" if i < len(segs) else d.get("cut_reason"),
                length_km=round(segs[i - 1]["km_end"], 3) if i else 0.0)
