@@ -61,8 +61,12 @@ def test_a_live_state_with_nothing_at_all_gets_a_row_and_a_state_not_live_gets_n
     monkeypatch.setattr(S, "_STATES", LIVE)
     cov = build(LIVE, feeds=FEEDS, registry=REGISTRY)       # Oklahoma with no feed registered at all
     assert cov["states"]["OK"]["grade"] == "No public reports"
-    assert "KS" not in cov["states"]                       # a report there, but not live
-    assert set(cov["states"]) == LIVE
+    assert "WY" not in cov["states"]                       # not live, no report: no row is made for it
+    # the export publishes the live states only (build.py's filter, unchanged): Kansas's report gives it no row there
+    published = {k: v for k, v in cov["states"].items() if k in S.states()}
+    assert set(published) == LIVE and "KS" not in published
+    src = (Path(__file__).resolve().parent.parent / "export" / "build.py").read_text()
+    assert 'cov["states"] = {k: v for k, v in (cov.get("states") or {}).items() if k in status_mod.states()}' in src
 
 
 def test_every_other_states_row_is_unchanged(monkeypatch):

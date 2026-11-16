@@ -382,7 +382,7 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
     fed-echo-sewer-overflow-bypass-events, level federal, states ["US"]); live: the live states (status.states()),
     when given: every one of them has a row, with "No public reports" where it has neither a sewage report nor a
     sewage feed (Oklahoma, 2026-11-16: its one feed is a beach table that made no record, and its state page had no
-    "Data and its limits" section), and no other state has one."""
+    "Data and its limits" section)."""
     from export import csv as csv_mod
     now = status_mod.parse_time(as_of) or datetime.now(UTC)
     start = now - timedelta(days=365)
@@ -423,9 +423,9 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
         by_state[st].append(e)
         kept[e["event_id"]] = e
     codes = set(by_state) | {s for sid in sewage_feeds for s in feed_states.get(sid, [])}
-    if live is not None:
-        live = {str(x).upper() for x in live}
-        codes = (codes | live) & live
+    # every live state has a row; which rows are published stays the export's filter (build.py, live only), so the
+    # rows and water grades computed before this are unchanged
+    codes |= {str(x).upper() for x in live or ()}
     states = {}
     for st in sorted(c for c in codes if c in STATE_NAMES):        # postal codes only (a feed's "US" is no state)
         evs = by_state.get(st, [])
