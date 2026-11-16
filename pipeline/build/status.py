@@ -1009,12 +1009,16 @@ ENGLISH_KIND = {v: k for k, v in SPANISH_KIND.items()}
 # a state's names whose two spellings the kind-word rule does not join (normalised, accents folded): (as filed, the
 # water's name), read both ways. Each pair has its evidence in docs (the PR accent review, 2026-11-15): the open waters
 # are the only Atlantic Ocean and Caribbean Sea ("Caribe Ocean" is a PRASA report's), and each river pair is EPA's own
-# reach index for the outfall (RIO LOISA, RIO GUARDIANA) or the only river of that name in GNIS (Jayuya, Manatí). No pair
-# without evidence; tests pin the table whole.
+# reach index for the same outfalls naming the GNIS water (RIO LOISA, RIO GUARDIANA, RIO LA PLATA and LA PLATA RIVER,
+# BARRANQUITAS RIVER, PR0021555's Caño Martín Peña / Martin Pena Channel outfalls) or the only river of that name in
+# GNIS (Jayuya, Manatí). No pair without evidence; tests pin the table whole.
 STATE_NAME_PAIRS = {"PR": (
     ("oceano atlantico", "atlantic ocean"), ("mar caribe", "caribbean sea"), ("caribe ocean", "caribbean sea"),
     ("jayuya river", "rio grande de jayuya"), ("manati river", "rio grande de manati"),
     ("rio grande manati", "rio grande de manati"), ("rio loisa", "rio grande de loiza"), ("rio guardiana", "rio guadiana"),
+    ("rio la plata", "rio de la plata"), ("la plata river", "rio de la plata"),
+    ("barranquitas river", "rio de barranquitas"),
+    ("cano martin pena", "cano de martin pena"), ("martin pena channel", "cano de martin pena"),
 )}
 # words that never name a water on their own in Puerto Rico ('Grande', 'Río'): a form or stem made only of these (and
 # kind words) is not indexed, so a bare 'Grande' or 'Río' resolves to nothing
