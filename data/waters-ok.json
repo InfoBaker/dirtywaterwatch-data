@@ -1,0 +1,3774 @@
+{
+ "state": "OK",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 105,
+ "waters": [
+  {
+   "slug": "a-gunta-vau-washita-river-ok",
+   "name": "Á:gùntà:vàu; Washita River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Bee"
+   ],
+   "bbox": [
+    -99.179227,
+    34.035859,
+    -96.540556,
+    35.557936
+   ],
+   "wikidata": "Q2993598",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "a-gunta-vau-washita-river-boat-launch-ok"
+   ],
+   "water_id": "a-gunta-vau-washita-river-ok",
+   "gnis_id": "1101723",
+   "geometry_hash": "55def61c1d3a9809212a4a9f6180b60bc2b01616a860f0c8da813d3f66f71fce",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "american-horse-lake-ok",
+   "name": "American Horse Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Hydro"
+   ],
+   "bbox": [
+    -98.507046,
+    35.627916,
+    -98.495534,
+    35.643327
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.332,
+   "launches": [
+    "american-horse-lake-boat-launch-ok"
+   ],
+   "water_id": "american-horse-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "c7dcd0356806ce2a327f452547a816dd2c4c0f74c37476d67e3cf1933e6cb5b3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "arkansas-river-ok",
+   "name": "Arkansas River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Braggs",
+    "Cleveland",
+    "Fort Coffee",
+    "Gore",
+    "Jenks",
+    "McFadden Cove",
+    "Muskogee",
+    "Newkirk",
+    "Osage",
+    "Sallisaw",
+    "Sand Springs"
+   ],
+   "bbox": [
+    -97.06517,
+    35.291661,
+    -94.409941,
+    37.049867
+   ],
+   "wikidata": "Q8319",
+   "charted": true,
+   "area_km2": 10.569,
+   "launches": [
+    "arkansas-river-boat-launch-near-cleveland-ok",
+    "gore-boat-launch-ok-2",
+    "arkansas-river-boat-launch-near-sand-springs-ok",
+    "arkansas-river-boat-launch-near-fort-coffee-ok",
+    "damsite-boat-ramp-ok",
+    "muskogee-boat-launch-ok",
+    "arkansas-river-boat-launch-near-osage-ok-2",
+    "braggs-boat-launch-ok-2",
+    "hopewell-park-boat-ramp-ok",
+    "leflore-landing-boat-ramp-ok",
+    "arkansas-river-boat-launch-near-mcfadden-cove-ok",
+    "summers-park-boat-ramp-ok",
+    "arkansas-river-boat-launch-near-muskogee-ok-2",
+    "traders-bend-boat-ramp-ok",
+    "wilson-rock-boat-ramp-ok"
+   ],
+   "water_id": "arkansas-river-ar",
+   "gnis_id": "78956",
+   "geometry_hash": "d32af9b8a949860f234ae5aceec117baf77a9476db2ee8189640610031f4492e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-creek-ok",
+   "name": "Big Creek",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Nowata"
+   ],
+   "bbox": [
+    -95.548506,
+    36.729968,
+    -95.392209,
+    36.907659
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-creek-boat-ramp-ok"
+   ],
+   "water_id": "big-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "e9ff3333f5799bad9db78404d5e7e0cad85b38df7efc9f527acef3378e390a4d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "birch-reservoir-ok",
+   "name": "Birch Reservoir",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Barnsdall"
+   ],
+   "bbox": [
+    -96.218765,
+    36.510302,
+    -96.158395,
+    36.543467
+   ],
+   "wikidata": "Q4915674",
+   "charted": false,
+   "area_km2": 3.871,
+   "launches": [
+    "birch-cove-boat-ramp-ok",
+    "twin-cove-point-boat-ramp-ok"
+   ],
+   "water_id": "birch-reservoir-ok",
+   "gnis_id": "1754453",
+   "geometry_hash": "b1f8bd212c7dbb5385cff2825b8d204ecdf317a89d9988915a8ecb23eb22da11",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bixhoma-lake-ok",
+   "name": "Bixhoma Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Bixby"
+   ],
+   "bbox": [
+    -95.802738,
+    35.887645,
+    -95.790317,
+    35.896625
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.392,
+   "launches": [
+    "bixhoma-lake-boat-launch-ok"
+   ],
+   "water_id": "bixhoma-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "98a3fc34f99ad15077c27da155719ff2a7e3b97542de2f160f261957c55da8f7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bluestem-lake-ok",
+   "name": "Bluestem Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Flora"
+   ],
+   "bbox": [
+    -96.028286,
+    34.517318,
+    -96.022276,
+    34.528631
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.303,
+   "launches": [
+    "bluestem-boat-ramp-a-ok",
+    "bluestem-boat-ramp-b-ok"
+   ],
+   "water_id": "bluestem-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "3fc227670ee5c8f0350ec283fcaf72da6e398a62219b3e58dcffc951df9064d2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boomer-lake-ok",
+   "name": "Boomer Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Stillwater"
+   ],
+   "bbox": [
+    -97.069,
+    36.143653,
+    -97.058531,
+    36.159585
+   ],
+   "wikidata": "Q4943472",
+   "charted": false,
+   "area_km2": 0.74,
+   "launches": [
+    "boomer-lake-boat-launch-near-stillwater-ok"
+   ],
+   "water_id": "boomer-lake-ok",
+   "gnis_id": "1090402",
+   "geometry_hash": "1a609416b5a101cb5acf83736f8a414a476619c8ea54a742f6d2dadaa90ffc3b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "broken-bow-reservoir-ok",
+   "name": "Broken Bow Reservoir",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Broken Bow",
+    "Stephens Gap"
+   ],
+   "bbox": [
+    -94.746551,
+    34.144188,
+    -94.612602,
+    34.368986
+   ],
+   "wikidata": "Q4973329",
+   "charted": false,
+   "area_km2": 52.152,
+   "launches": [
+    "broken-bow-reservoir-boat-launch-near-broken-bow-ok-2",
+    "broken-bow-reservoir-boat-launch-near-broken-bow-ok-3",
+    "carson-creek-hawk-dr-boat-ramp-ok",
+    "holly-creek-boat-ramp-ok",
+    "mccurtain-co-wilderness-area-boat-ramp-ok",
+    "panther-creek-boat-ramp-ok",
+    "stevens-gap-northeastern-boat-ramp-ok",
+    "broken-bow-reservoir-boat-launch-near-broken-bow-ok"
+   ],
+   "water_id": "broken-bow-reservoir-ok",
+   "gnis_id": "1101902",
+   "geometry_hash": "28645124b170cf14807934a13e33138f037da47e6cd7db39ebf41533f8dd1e77",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "beavers-bend-marina-boat-ramp-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "canadian-river-ok",
+   "name": "Canadian River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Porum"
+   ],
+   "bbox": [
+    -100.625993,
+    34.855551,
+    -95.024402,
+    36.05744
+   ],
+   "wikidata": "Q597753",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dam-site-south-boat-ramp-ok"
+   ],
+   "water_id": "canadian-river-ok",
+   "gnis_id": "1101881",
+   "geometry_hash": "457cdb50cd5cd4ed5d0541807997ef33e998a8798ea84cf3bdda821dacbd2374",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "caney-river-ok",
+   "name": "Caney River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Whippoorwill"
+   ],
+   "bbox": [
+    -96.499851,
+    36.337853,
+    -95.699304,
+    37.365403
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "caney-river-boat-launch-ok"
+   ],
+   "water_id": "caney-river-ok",
+   "gnis_id": null,
+   "geometry_hash": "fdf64c37a1a9259d51f2f850ab66277eaf390df65f5e6bf2b1cef093f1815b41",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "canton-lake-ok",
+   "name": "Canton Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Canton",
+    "Longdale"
+   ],
+   "bbox": [
+    -98.688022,
+    36.078612,
+    -98.570113,
+    36.15648
+   ],
+   "wikidata": "Q5033900",
+   "charted": false,
+   "area_km2": 29.994,
+   "launches": [
+    "canton-lake-boat-launch-near-longdale-ok-6",
+    "canton-lake-boat-launch-near-longdale-ok-9",
+    "canton-lake-boat-launch-near-longdale-ok-7",
+    "canadian-boat-ramp-ok",
+    "canton-lake-boat-launch-near-canton-ok-3",
+    "canton-lake-boat-launch-near-canton-ok-4",
+    "elm-tree-boat-ramp-ok",
+    "longdale-northern-boat-ramp-ok",
+    "longdale-south-boat-ramp-ok",
+    "waterfowl-refuge-ramp-ok"
+   ],
+   "water_id": "canton-lake-ok",
+   "gnis_id": "1751417",
+   "geometry_hash": "65ac5b39c0d296b064e57ae29dac215e4c0b53d6e41850e4cf9111f942ee71a7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ccc-lake-ok",
+   "name": "CCC Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Perry"
+   ],
+   "bbox": [
+    -97.27892,
+    36.263961,
+    -97.272839,
+    36.269722
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.104,
+   "launches": [
+    "ccc-lake-boat-launch-ok"
+   ],
+   "water_id": "ccc-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "390e03c01b0cd533ec88dea708ea7663c0bde1090890072190de02dad88dc452",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-ok",
+   "name": "Cedar Creek",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Cleveland"
+   ],
+   "bbox": [
+    -96.483703,
+    36.296199,
+    -96.461037,
+    36.303705
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cedar-creek-northern-boat-ramp-ok"
+   ],
+   "water_id": "cedar-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "746f96e39b57600d23cadacc1f40647b6aee44a44f3c3dbac821935a798ed586",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-lake-ok",
+   "name": "Cedar Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Heavener"
+   ],
+   "bbox": [
+    -94.701721,
+    34.777027,
+    -94.693447,
+    34.784359
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.248,
+   "launches": [
+    "cedar-lake-boat-launch-ok"
+   ],
+   "water_id": "cedar-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "7a02aeb3ed77b7719d43b44ef47e7d7db2a80435ae1c63562d0aef9f3dc85b69",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coal-creek-ok",
+   "name": "Coal Creek",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Wagoner"
+   ],
+   "bbox": [
+    -95.409848,
+    35.89058,
+    -95.396678,
+    35.96689
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "coal-creek-boat-ramp-ok"
+   ],
+   "water_id": "coal-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "fcaa8330cb3f49566327cdf5c6789c6bb46aac27e83adc4a732646aa9c55be75",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "copan-lake-ok",
+   "name": "Copan Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Copan"
+   ],
+   "bbox": [
+    -95.977016,
+    36.884402,
+    -95.919756,
+    36.968667
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 16.924,
+   "launches": [
+    "copan-point-boat-ramp-ok",
+    "osage-plains-boat-ramp-ok",
+    "copan-lake-boat-launch-ok"
+   ],
+   "water_id": "copan-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "7d871589c80b77b6595a9ac74dbbd18fb364bfdff8d264fbf2ef4a362047363c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crooked-branch-lake-ok",
+   "name": "Crooked Branch Lake",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Heavener"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "crooked-branch-lake-boat-launch-ok"
+   ],
+   "water_id": "crooked-branch-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cumberland-pool-ok",
+   "name": "Cumberland Pool",
+   "kind": "pond",
+   "state": "OK",
+   "towns": [
+    "Tishomingo"
+   ],
+   "bbox": [
+    -96.656751,
+    34.163321,
+    -96.58787,
+    34.197821
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 12.485,
+   "launches": [
+    "headquarters-boat-ramp-ok",
+    "murray-23-boat-ramp-ok"
+   ],
+   "water_id": "cumberland-pool-ok",
+   "gnis_id": null,
+   "geometry_hash": "14fe419c323a83f647e010001bae7a401652fe7ec4fad4143afa295813a0c254",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dahlgren-lake-ok",
+   "name": "Dahlgren Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Purcell"
+   ],
+   "bbox": [
+    -97.203163,
+    35.057001,
+    -97.198002,
+    35.060274
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.083,
+   "launches": [
+    "lake-dahlgren-boat-launch-ok"
+   ],
+   "water_id": "dahlgren-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "6a25f4e258ab8671a9e162b592d7a514393a6ec6d6996a551225fd48b11f6f65",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dead-warrior-lake-ok",
+   "name": "Dead Warrior Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Roll"
+   ],
+   "bbox": [
+    -99.723388,
+    35.744793,
+    -99.715088,
+    35.755454
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.272,
+   "launches": [
+    "black-kettle-boating-site-ok",
+    "dead-warrior-lake-boat-launch-ok"
+   ],
+   "water_id": "dead-warrior-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "01613fe34ab147f5714c8a674d5cfddeba00158ab2ac86f8a0e5a0be9dabd88a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deep-fork-ok",
+   "name": "Deep Fork",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Brush Hill",
+    "Checotah",
+    "Onapa"
+   ],
+   "bbox": [
+    -97.608996,
+    35.364926,
+    -95.578142,
+    35.706846
+   ],
+   "wikidata": "Q5250186",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "enchanted-oaks-boat-ramp-ok",
+    "sunset-height-boat-ramp-ok"
+   ],
+   "water_id": "deep-fork-ok",
+   "gnis_id": "1091996",
+   "geometry_hash": "d318b56229abd2828ac9fcc1d393195e69da9649cdf7058f1469a22d3920af23",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "deep-fork-marina-boat-ramp-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "dirty-creek-ok",
+   "name": "Dirty Creek",
+   "kind": "stream",
+   "state": "OK",
+   "towns": [
+    "Vian;ᏓᏄᎪᎢ"
+   ],
+   "bbox": [
+    -95.188979,
+    35.446645,
+    -95.085799,
+    35.487876
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "dirty-creek-boat-ramp-ok"
+   ],
+   "water_id": "dirty-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "98ec72207b643dc0d3976c584b4d6884436034903e73f9891c61719367d42af1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eufaula-reservoir-ok",
+   "name": "Eufaula Reservoir",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Brush Hill",
+    "Checotah",
+    "Council Hill",
+    "Eufaula",
+    "Onapa",
+    "Richardsville"
+   ],
+   "bbox": [
+    -95.702134,
+    35.044007,
+    -95.343561,
+    35.426763
+   ],
+   "wikidata": "Q539259",
+   "charted": false,
+   "area_km2": 75.492,
+   "launches": [
+    "atlee-cove-ramp-ok",
+    "belle-starr-boat-ramp-ok",
+    "brush-hill-boat-ramp-ok",
+    "carr-creek-boat-ramp-ok",
+    "eufaula-cove-boat-ramp-ok",
+    "fountain-bleu-ramp-boat-ramp-ok",
+    "gentry-creek-east-boat-ramp-ok",
+    "gentry-creek-west-boat-ramp-ok",
+    "holiday-cove-boat-ramp-ok",
+    "indian-springs-boat-ramp-ok",
+    "jack-frisbee-ramp-no-name-creek-ok",
+    "leisure-land-ramp-boat-ramp-ok",
+    "oakwood-harbor-ramp-east-boat-ramp-ok",
+    "paradise-point-boat-ramp-ok",
+    "peters-point-boat-ramp-ok",
+    "push-hill-boat-ramp-ok",
+    "rolling-oaks-boat-ramp-ok",
+    "sandy-bass-bay-ramp-ok",
+    "sherwood-forest-ramp-boat-ramp-ok",
+    "terra-starr-ramp-ok"
+   ],
+   "water_id": "eufaula-reservoir-ok",
+   "gnis_id": "1100123",
+   "geometry_hash": "a02fc1a3d3b2dbb25e7dfa51c8a31faad496ea6cbdcdf46e135e4fa268540c97",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "belle-starr-marina-boat-ramp-ok",
+    "eufaula-cove-marina-boat-ramp-ok",
+    "sheppard-estates-boat-ramp-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fort-cobb-reservoir-ok",
+   "name": "Fort Cobb Reservoir",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Fort Cobb",
+    "Nowhere",
+    "Swan Lake"
+   ],
+   "bbox": [
+    -98.527722,
+    35.155677,
+    -98.44285,
+    35.242542
+   ],
+   "wikidata": "Q5470942",
+   "charted": false,
+   "area_km2": 14.363,
+   "launches": [
+    "blackjack-cove-boat-ramp-ok",
+    "colson-s-landing-ok",
+    "crows-roost-east-ok",
+    "crows-roost-west-ok",
+    "eagles-nest-boat-ramp-ok",
+    "fort-cobb-reservoir-boat-launch-near-fort-cobb-ok",
+    "fort-cobb-reservoir-boat-launch-near-swan-lake-ok",
+    "fort-cobb-reservoir-boat-launch-near-swan-lake-ok-2",
+    "fort-cobb-reservoir-boat-launch-near-fort-cobb-ok-2",
+    "fort-cobb-reservoir-boat-launch-near-nowhere-ok"
+   ],
+   "water_id": "fort-cobb-reservoir-ok",
+   "gnis_id": "1092954",
+   "geometry_hash": "835663e48e7c08093b8239a19ea5b57567c9f087bbb584541aa70b782b3a15f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fort-gibson-lake-ok",
+   "name": "Fort Gibson Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Cedar Crest",
+    "Hulbert",
+    "Mallard Bay",
+    "Muskogee",
+    "Okay",
+    "Paradise View",
+    "Rocky Point",
+    "Taylor Ferry",
+    "Toppers",
+    "Wagoner",
+    "Yonkers"
+   ],
+   "bbox": [
+    -95.357313,
+    35.863349,
+    -95.18809,
+    36.102282
+   ],
+   "wikidata": "Q5471224",
+   "charted": false,
+   "area_km2": 66.731,
+   "launches": [
+    "big-hollow-boat-ramp-ok",
+    "blue-bill-point-boat-ramp-ok",
+    "blue-bill-point-boat-ramp-rocky-point-ok",
+    "fort-gibson-lake-boat-launch-near-muskogee-ok",
+    "earbob-boat-ramp-ok",
+    "flat-rock-creek-south-boat-ramp-ok",
+    "fort-gibson-lake-boat-launch-near-wagoner-ok-2",
+    "long-bay-landing-boat-ramps-ok",
+    "mallard-bay-boat-ramp-ok",
+    "mazie-landing-boat-ramp-ok",
+    "mazie-landing-boat-ramp-paradise-view-ok",
+    "rocky-point-boat-ramp-ok",
+    "rocky-point-boat-ramp-ok-2",
+    "rocky-point-boat-ramp-ok-3",
+    "fort-gibson-lake-boat-launch-near-okay-ok-2",
+    "fort-gibson-lake-boat-launch-near-okay-ok-8",
+    "sequoyah-state-park-boat-ramp-ok",
+    "fort-gibson-lake-boat-launch-near-wagoner-ok-7",
+    "fort-gibson-lake-boat-launch-near-wagoner-ok-6",
+    "fort-gibson-lake-boat-launch-near-wagoner-ok-5",
+    "sequoyah-state-park-south-west-boat-ramp-ok",
+    "spring-creek-boat-ramp-ok",
+    "taylor-ferry-north-boat-ramp-ok",
+    "taylor-ferry-north-boat-ramp-ok-2",
+    "taylor-ferry-south-boat-ramp-ok",
+    "fort-gibson-lake-boat-launch-near-toppers-ok",
+    "fort-gibson-lake-boat-launch-near-okay-ok-5",
+    "fort-gibson-lake-boat-launch-near-okay-ok",
+    "whitehorn-cove-boat-ramp-ok",
+    "fort-gibson-lake-boat-launch-near-hulbert-ok"
+   ],
+   "water_id": "fort-gibson-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "1e2e302157c8796a05833d03b1bb550242497c9d5c11390d7dd8fde4051bc4b1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "flat-rock-creek-north-boat-ramp-ok",
+    "fort-gibson-lake-boat-launch-near-wagoner-ok-11",
+    "jackson-bay-marina-boat-ramp-access-ok",
+    "fort-gibson-lake-boat-launch-near-wagoner-ok",
+    "fort-gibson-lake-boat-launch-near-toppers-ok-2",
+    "muskogee-boat-club-boat-ramp-ok",
+    "pelican-point-marina-boat-ramp-ok",
+    "sequoyah-state-park-paradise-come-marina-boat-ramp-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fort-supply-lake-ok",
+   "name": "Fort Supply Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Fort Supply"
+   ],
+   "bbox": [
+    -99.581941,
+    36.501097,
+    -99.554834,
+    36.553277
+   ],
+   "wikidata": "Q14708419",
+   "charted": false,
+   "area_km2": 6.474,
+   "launches": [
+    "fort-supply-lake-boat-launch-ok",
+    "beaver-point-ramp-2-ok",
+    "beaver-point-ramp-3-ok",
+    "supply-park-boat-ramp-fort-supply-ok",
+    "supply-park-boat-ramp-ok",
+    "supply-park-day-use-area-ramp-1-ok",
+    "supply-park-south-central-boat-ramp-ok",
+    "supply-park-southeastern-boat-ramp-ok"
+   ],
+   "water_id": "fort-supply-lake-ok",
+   "gnis_id": "1092968",
+   "geometry_hash": "47d172b25c9a61f52b3e2e32f736022528f59b8b9d60c770dfe1944c14cc5b3b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "foss-reservoir-ok",
+   "name": "Foss Reservoir",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Butler",
+    "Foss"
+   ],
+   "bbox": [
+    -99.300123,
+    35.532751,
+    -99.181836,
+    35.647202
+   ],
+   "wikidata": "Q14708421",
+   "charted": false,
+   "area_km2": 24.238,
+   "launches": [
+    "foss-reservoir-boat-launch-near-butler-ok-3",
+    "foss-reservoir-boat-launch-near-butler-ok",
+    "foss-state-park-boat-ramp-ok",
+    "foss-reservoir-boat-launch-near-butler-ok-2",
+    "riverside-recreation-area-boat-ramp-ok",
+    "sandy-beach-boat-ramp-ok",
+    "turkey-flats-boat-launch-ok"
+   ],
+   "water_id": "foss-reservoir-ok",
+   "gnis_id": "1089491",
+   "geometry_hash": "20ebc728b8cb382b7efb42a6771c48c9fb985b5b48e22e271c6bba6c82468297",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "foss-reservoir-boat-launch-near-foss-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "fourche-maline-creek-ok",
+   "name": "Fourche Maline Creek",
+   "kind": "stream",
+   "state": "OK",
+   "towns": [
+    "Summerfield"
+   ],
+   "bbox": [
+    -95.363629,
+    34.902687,
+    -94.763945,
+    35.017158
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mk-derrick-ok"
+   ],
+   "water_id": "fourche-maline-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "a8765e35c3f5e13e6d9ad1932b1a39133798611d3ed84a038b017c95f4dd81c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "frazier-creek-ok",
+   "name": "Frazier Creek",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Apple"
+   ],
+   "bbox": [
+    -95.434035,
+    34.137117,
+    -95.259426,
+    34.267289
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "frazier-creek-boat-launch-near-apple-ok"
+   ],
+   "water_id": "frazier-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "a19c326ceae1473512eeb8a538af7da5b4b81f9b1461290249041adc30fc6105",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grand-river-ok",
+   "name": "Grand River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Chouteau",
+    "Fort Gibson",
+    "Muskogee",
+    "Pin Oaks Acres"
+   ],
+   "bbox": [
+    -95.313349,
+    35.789298,
+    -94.729867,
+    36.793672
+   ],
+   "wikidata": "Q516393",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "chouteau-bend-north-boat-ramp-ok",
+    "chouteau-bend-south-boat-ramp-ok",
+    "grand-river-boat-launch-near-muskogee-ok",
+    "grand-river-boat-launch-near-fort-gibson-ok",
+    "mission-bend-boat-ramp-ok",
+    "spring-creek-boat-ramp-pin-oaks-acres-ok",
+    "spring-creek-east-boat-ramp-ok"
+   ],
+   "water_id": "grand-river-ok",
+   "gnis_id": "1095788",
+   "geometry_hash": "1e2612ab9be98d51ab78c5f79e7feb1c338e4668dec62f66418a55a88b066467",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grave-creek-ok",
+   "name": "Grave Creek",
+   "kind": "stream",
+   "state": "OK",
+   "towns": [
+    "Hitchita"
+   ],
+   "bbox": [
+    -95.79334,
+    35.491457,
+    -95.759709,
+    35.621178
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "grave-creek-boat-ramp-ok"
+   ],
+   "water_id": "grave-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "d441dc866920ee463263c2c5f2376054b75b8e42204323f102b5e2decfb18341",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "great-salt-lake-ok",
+   "name": "Great Salt Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Nescatunga"
+   ],
+   "bbox": [
+    -98.237511,
+    36.700427,
+    -98.135549,
+    36.765565
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 31.721,
+   "launches": [
+    "great-salt-plains-lake-ok",
+    "great-salt-lake-boat-launch-near-nescatunga-ok",
+    "great-salt-lake-boat-launch-near-nescatunga-ok-3",
+    "great-salt-lake-boat-launch-near-nescatunga-ok-2"
+   ],
+   "water_id": "great-salt-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "8be46e88bc6ead61d5773111d1869f7efec79edeea5e95ab6cb1f3317898e929",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hominy-municipal-lake-ok",
+   "name": "Hominy Municipal Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Hominy;𐒹𐓘́͘𐓨𐓘͘𐓵𐓣͘"
+   ],
+   "bbox": [
+    -96.435982,
+    36.39689,
+    -96.411273,
+    36.410024
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.641,
+   "launches": [
+    "hominy-municipal-lake-boat-launch-ok"
+   ],
+   "water_id": "hominy-municipal-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "9ade102cffb3659cec6d5ed9f59655c7b2de6acaa9b285e7a9062916d6d6aa61",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hugo-lake-ok",
+   "name": "Hugo Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Hugo",
+    "Sawyer"
+   ],
+   "bbox": [
+    -95.471673,
+    34.005498,
+    -95.370709,
+    34.138127
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 45.704,
+   "launches": [
+    "hugo-lake-boat-launch-near-hugo-ok",
+    "hugo-lake-boat-launch-near-sawyer-ok-2",
+    "hugo-lake-boat-launch-near-hugo-ok-3",
+    "sawyer-bluff-boat-ramp-ok",
+    "the-point-hugo-ok",
+    "twin-oaks-ok",
+    "hugo-lake-boat-launch-near-sawyer-ok-3",
+    "hugo-lake-boat-launch-near-sawyer-ok-4"
+   ],
+   "water_id": "hugo-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "a45abdb82967742884444d94c58bba07a40530104f2fd86ffebf7445d75cb340",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hugo-lake-boat-launch-near-sawyer-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hulah-lake-ok",
+   "name": "Hulah Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Bartlesville",
+    "Hickory Hill",
+    "Whippoorwill"
+   ],
+   "bbox": [
+    -96.15758,
+    36.911098,
+    -96.075683,
+    36.97225
+   ],
+   "wikidata": "Q14708456",
+   "charted": false,
+   "area_km2": 10.481,
+   "launches": [
+    "hulah-lake-boat-launch-near-hickory-hill-ok",
+    "quarry-cove-central-boat-ramp-ok",
+    "quarry-cove-northern-boat-ramp-ok",
+    "quarry-cove-southern-boat-ramp-ok",
+    "rocky-ford-boat-ramp-ok",
+    "hulah-lake-boat-launch-near-hickory-hill-ok-2",
+    "hulah-lake-boat-launch-near-whippoorwill-ok-3"
+   ],
+   "water_id": "hulah-lake-ok",
+   "gnis_id": "1094007",
+   "geometry_hash": "d6c93bb6b2fe632ae7b88fa08809caec78e84eb3de46dd7e7ed276f5eb5f703c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "illinois-river-ok",
+   "name": "Illinois River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Gore Landing",
+    "Tahlequah"
+   ],
+   "bbox": [
+    -95.105583,
+    35.490942,
+    -94.36236,
+    36.177862
+   ],
+   "wikidata": "Q5999623",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "gore-landing-boat-ramp-ok",
+    "horseshoe-bend-boat-ramp-ok"
+   ],
+   "water_id": "illinois-river-ar",
+   "gnis_id": "1094043",
+   "geometry_hash": "dcb77794698068387b9380ef86df514e53ceec7bdb77c0e2cb2ac51abb3dd190",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "joe-creek-ok",
+   "name": "Joe Creek",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Jenks"
+   ],
+   "bbox": [
+    -95.97279,
+    36.046923,
+    -95.945774,
+    36.086077
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.235,
+   "launches": [],
+   "water_id": "joe-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "e1b79ca91a44c4dcadb9797094f6f6141b08d5b3aa100667f4bd9d571f6d06c6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "joe-creek-boat-launch-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "kaw-lake-ok",
+   "name": "Kaw Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Kaw City",
+    "McFadden Cove",
+    "Soldani",
+    "Uncas",
+    "Washunga"
+   ],
+   "bbox": [
+    -96.939008,
+    36.698649,
+    -96.792544,
+    36.861414
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 59.463,
+   "launches": [
+    "bear-creek-cove-boat-ramp-ok",
+    "burbank-landing-northern-boat-ramp-ok",
+    "burbank-landing-southern-boat-ramp-ok",
+    "coon-creek-boat-ramp-ok",
+    "kaw-lake-boat-launch-near-uncas-ok",
+    "mcfadden-cove-campground-boat-ramp-ok",
+    "noc-cove-boat-ramp-ok",
+    "osage-cove-southern-boat-ramp-ok",
+    "osage-cove-western-boat-ramp-ok",
+    "pioneer-park-northern-boat-ramp-ok",
+    "kaw-lake-boat-launch-near-kaw-city-ok",
+    "kaw-lake-boat-launch-near-soldani-ok",
+    "kaw-lake-boat-launch-near-washunga-ok"
+   ],
+   "water_id": "kaw-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "be5df0241e716796e0762b463635a93e440ad4ff17e14b158e31fe604c85bb1a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "keystone-lake-leroy-ok",
+   "name": "Keystone Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Leroy",
+    "Sand Springs"
+   ],
+   "bbox": [
+    -96.284158,
+    36.133162,
+    -96.225043,
+    36.220485
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.101,
+   "launches": [
+    "keystone-lake-boat-launch-near-sand-springs-ok-5",
+    "keystone-lake-boat-launch-near-sand-springs-ok-4",
+    "keystone-lake-boat-launch-near-sand-springs-ok-3",
+    "pier-51-maintenance-boat-ramp-ok",
+    "keystone-lake-boat-launch-near-leroy-ok"
+   ],
+   "water_id": "keystone-lake-leroy-ok",
+   "gnis_id": null,
+   "geometry_hash": "2ae6e62417c501aa9fac2734c465a4ad3653e2433ebcb4a178d29f5d20caa3e7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "keystone-lake-boat-launch-near-sand-springs-ok-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "keystone-lake-new-prue-ok",
+   "name": "Keystone Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "New Prue",
+    "Sand Springs",
+    "Westport"
+   ],
+   "bbox": [
+    -96.285681,
+    36.215285,
+    -96.223519,
+    36.25578
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.693,
+   "launches": [
+    "keystone-lake-boat-launch-near-new-prue-ok-2",
+    "keystone-lake-boat-launch-near-new-prue-ok",
+    "keystone-lake-boat-launch-near-westport-ok-2"
+   ],
+   "water_id": "keystone-lake-new-prue-ok",
+   "gnis_id": null,
+   "geometry_hash": "9738705311a8ed21bfc1758ed44cf36e9ee81331c5c7937d74d898ac9d355cf2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "keystone-lake-ok",
+   "name": "Keystone Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Cleveland",
+    "Westport"
+   ],
+   "bbox": [
+    -96.402453,
+    36.222603,
+    -96.326101,
+    36.26639
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.865,
+   "launches": [
+    "cowskin-bay-north-boat-ramp-ok",
+    "keystone-lake-boat-launch-near-westport-ok-3",
+    "cowskin-bay-south-eastern-boat-ramp-ok",
+    "cowskin-bay-south-western-boat-ramp-ok"
+   ],
+   "water_id": "keystone-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "7a7f6b4dfdea5eb68dc80c92edc24dc43637d7ee50496a9307281e11c6b374d3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "keystone-lake-sand-creek-ok",
+   "name": "Keystone Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Sand Creek"
+   ],
+   "bbox": [
+    -96.340088,
+    36.219938,
+    -96.283793,
+    36.251084
+   ],
+   "wikidata": "Q6398477",
+   "charted": false,
+   "area_km2": 6.716,
+   "launches": [
+    "walnut-creek-park-off-road-area-boat-ramp-ok"
+   ],
+   "water_id": "keystone-lake-sand-creek-ok",
+   "gnis_id": "1101491",
+   "geometry_hash": "5b4591638a021fa5378383fc5efdbbf1a8de4618386804cedcb3c514b92f0c18",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kiamichi-river-ok",
+   "name": "Kiamichi River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Antlers",
+    "Sawyer"
+   ],
+   "bbox": [
+    -95.646468,
+    33.945986,
+    -94.456968,
+    34.690249
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.852,
+   "launches": [
+    "kiamichi-river-boat-launch-near-sawyer-ok",
+    "kiamichi-river-boat-launch-near-antlers-ok"
+   ],
+   "water_id": "kiamichi-river-ok",
+   "gnis_id": null,
+   "geometry_hash": "31ef91c9b86a9d62381909e0217b495f674792572d0a506adbf226a3b3095589",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lagoon-creek-ok",
+   "name": "Lagoon Creek",
+   "kind": "stream",
+   "state": "OK",
+   "towns": [
+    "Jennings"
+   ],
+   "bbox": [
+    -96.748767,
+    36.125162,
+    -96.503911,
+    36.230513
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lagoon-creek-boat-launch-ok"
+   ],
+   "water_id": "lagoon-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "bdb22ca63542130d87bc36466300ef769ccce93d8d4c2bb2db4e1c76b6a1c874",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-altus-ok",
+   "name": "Lake Altus",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Granite",
+    "Lugert"
+   ],
+   "bbox": [
+    -99.342714,
+    34.878205,
+    -99.280098,
+    34.961109
+   ],
+   "wikidata": "Q6474755",
+   "charted": false,
+   "area_km2": 14.415,
+   "launches": [
+    "beach-haven-boat-ramp-ok",
+    "hicks-mountain-boat-ramp-boat-ramp-ok",
+    "lake-altus-boat-launch-ok"
+   ],
+   "water_id": "lake-altus-ok",
+   "gnis_id": "1089602",
+   "geometry_hash": "cbe151a3370a12abd054a6d0c143b90c67381987b8a7612a33495ded6320e94e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-arcadia-ok",
+   "name": "Lake Arcadia",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Edmond"
+   ],
+   "bbox": [
+    -97.411651,
+    35.603406,
+    -97.359468,
+    35.650937
+   ],
+   "wikidata": "Q4785154",
+   "charted": false,
+   "area_km2": 6.595,
+   "launches": [
+    "lake-arcadia-boat-launch-near-edmond-ok-2",
+    "lake-arcadia-boat-launch-near-edmond-ok",
+    "spring-creek-park-boat-ramp-ok"
+   ],
+   "water_id": "lake-arcadia-ok",
+   "gnis_id": "1966828",
+   "geometry_hash": "1e02d018c4e01a18aae1e27ef056e4326003bd02f663625eae0b04edbd363914",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-carl-etling-ok",
+   "name": "Lake Carl Etling",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [],
+   "bbox": [
+    -102.881877,
+    36.845843,
+    -102.867174,
+    36.852007
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.44,
+   "launches": [
+    "lake-carl-etling-boat-launch-ok",
+    "lake-carl-etling-boat-launch-ok-2"
+   ],
+   "water_id": "lake-carl-etling-ok",
+   "gnis_id": null,
+   "geometry_hash": "fcbc2f127cb4d78e28a514cb77bb80be5c98445f80056a008ef257c73f801299",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-carlton-ok",
+   "name": "Lake Carlton",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Wilburton"
+   ],
+   "bbox": [
+    -95.364337,
+    34.975545,
+    -95.359867,
+    34.98292
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.148,
+   "launches": [],
+   "water_id": "lake-carlton-ok",
+   "gnis_id": null,
+   "geometry_hash": "de51ec1b7e08d622c184ca143eff9a05ea5eeb14cdd7107987db214fc351ac93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "carlton-campground-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-claremore-ok",
+   "name": "Lake Claremore",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Claremore"
+   ],
+   "bbox": [
+    -95.590044,
+    36.32364,
+    -95.543269,
+    36.359253
+   ],
+   "wikidata": "Q5126350",
+   "charted": false,
+   "area_km2": 2.219,
+   "launches": [
+    "lake-claremore-boat-launch-near-claremore-ok-2"
+   ],
+   "water_id": "lake-claremore-ok",
+   "gnis_id": "1751001",
+   "geometry_hash": "f66a971863943b1313f8041f9c8f3499cb73bce77609ae45e01a1806c52f7a3e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-elmer-ok",
+   "name": "Lake Elmer",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Kingfisher"
+   ],
+   "bbox": [
+    -97.994119,
+    35.878279,
+    -97.987262,
+    35.887138
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.151,
+   "launches": [
+    "lake-elmer-boat-launch-ok"
+   ],
+   "water_id": "lake-elmer-ok",
+   "gnis_id": null,
+   "geometry_hash": "ba511b03eb7ef0211ab4f0828c7975dfbc29cfd2764bdc7be71f843d4efbfc6a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-elmer-thomas-ok",
+   "name": "Lake Elmer Thomas",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Medicine Park"
+   ],
+   "bbox": [
+    -98.535591,
+    34.718657,
+    -98.512946,
+    34.734922
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.182,
+   "launches": [
+    "lake-elmer-thomas-boat-ramp-and-dock-ok"
+   ],
+   "water_id": "lake-elmer-thomas-ok",
+   "gnis_id": null,
+   "geometry_hash": "7ac6354ed8f53f8d5208dc52ec2582b2b60977b0d529a063da5a5fbc773dd9a6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-eufaula-ok",
+   "name": "Lake Eufaula",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Bristow Point",
+    "Bug Tussle",
+    "Canadian",
+    "Canadian Fork",
+    "Crowder",
+    "Duchess Landing",
+    "Enterprise",
+    "Eufaula",
+    "Highway 9 Landing",
+    "Longtown",
+    "McAlester",
+    "Porum"
+   ],
+   "bbox": [
+    -95.803167,
+    34.888266,
+    -95.353856,
+    35.391607
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 224.642,
+   "launches": [
+    "alta-vista-boat-ramp-ok",
+    "lake-eufaula-boat-launch-near-bristow-point-ok",
+    "brooken-cove-boat-ramp-ok",
+    "bucks-of-gains-creek-boat-ramp-ok",
+    "buds-point-boat-ramp-ok",
+    "lake-eufaula-boat-launch-near-bug-tussle-ok",
+    "cardinal-point-boat-ramp-ok",
+    "crazy-woman-boat-ramp-ok",
+    "crowder-park-main-boat-ramp-ok",
+    "lake-eufaula-boat-launch-near-crowder-ok-4",
+    "lake-eufaula-boat-launch-near-crowder-ok",
+    "duchess-creek-acres-ramp-boat-ramp-ok",
+    "lake-eufaula-boat-launch-near-duchess-landing-ok",
+    "duchess-creek-ramp-ok",
+    "elm-point-boat-ramp-ok",
+    "eufaula-lake-arrowhead-state-park-boat-ramp-ok",
+    "gaines-creek-boat-ramp-ok",
+    "greer-heights-boat-ramp-ok",
+    "hickory-hills-ramp-boat-ramp-ok",
+    "hickory-point-boat-ramp-ok",
+    "lake-eufaula-boat-launch-near-mcalester-ok-2",
+    "lake-eufaula-boat-launch-near-highway-9-landing-ok",
+    "highway-9-landing-north-boat-ramp-ok",
+    "lake-eufaula-boat-launch-near-highway-9-landing-ok-2",
+    "juniper-point-fisherman-s-cove-boat-ramp-ok",
+    "ladybird-landing-west-boat-ramp-ok",
+    "ladybird-launch-area-ok",
+    "mason-oaks-boat-ramp-ok",
+    "mill-creek-boat-ramp-ok",
+    "oak-ridge-boat-ramp-ok",
+    "piney-creek-boat-ramp-ok",
+    "pollard-addition-boat-ramp-ok",
+    "porum-landing-east-boat-ramp-ok",
+    "porum-landing-west-boat-ramp-ok",
+    "lake-eufaula-boat-launch-near-crowder-ok-2",
+    "lake-eufaula-boat-launch-near-crowder-ok-3",
+    "sams-point-ramp-ok",
+    "snug-harbor-boat-ramp-ok",
+    "sooner-haven-boat-ramp-ok",
+    "southport-ramp-boat-ramp-ok"
+   ],
+   "water_id": "lake-eufaula-ok",
+   "gnis_id": null,
+   "geometry_hash": "e06b33283c7d4aa6476b8439dd615b5e109bdc68035bb39749a43194c774e22a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-eufaula-boat-launch-near-canadian-ok",
+    "evergreen-marina-boat-ramp-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-halt-oklahoma-state-fish-and-wildlife-reservoir-ok",
+   "name": "Lake Halt Oklahoma State Fish and Wildlife Reservoir",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Hollis"
+   ],
+   "bbox": [
+    -99.929485,
+    34.828568,
+    -99.923456,
+    34.83408
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.132,
+   "launches": [
+    "lake-hall-ok"
+   ],
+   "water_id": "lake-halt-oklahoma-state-fish-and-wildlife-reservoir-ok",
+   "gnis_id": null,
+   "geometry_hash": "359b74f1cee37624a72e2aca7b902077e6ebe53183556b5a42a4236968760c5f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-heyburn-ok",
+   "name": "Lake Heyburn",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Bristow",
+    "Kellyville"
+   ],
+   "bbox": [
+    -96.323986,
+    35.946505,
+    -96.291811,
+    35.979084
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.451,
+   "launches": [
+    "lake-heyburn-boat-launch-near-bristow-ok-3",
+    "lake-heyburn-boat-launch-near-bristow-ok",
+    "lake-heyburn-boat-launch-near-bristow-ok-2",
+    "sunset-bay-boat-ramp-ok"
+   ],
+   "water_id": "lake-heyburn-ok",
+   "gnis_id": null,
+   "geometry_hash": "3445cd0466a7354a4f1ed04d9aa3a4b7cf4906975f6f8a474fdd2f18d9c160d4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-jed-johnson-ok",
+   "name": "Lake Jed Johnson",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "The Holy City"
+   ],
+   "bbox": [
+    -98.605958,
+    34.726894,
+    -98.59538,
+    34.733888
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.211,
+   "launches": [
+    "jed-johnson-dam-boat-ramp-ok"
+   ],
+   "water_id": "lake-jed-johnson-ok",
+   "gnis_id": null,
+   "geometry_hash": "20a1d3d894479a48386560762faf0c4f6dc516e086d30b03becd255eacc08f5f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lloyd-vincent-ok",
+   "name": "Lake Lloyd Vincent",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Arnett"
+   ],
+   "bbox": [
+    -99.929382,
+    36.053655,
+    -99.915106,
+    36.068005
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.515,
+   "launches": [
+    "lake-lloyd-vincent-boat-launch-ok"
+   ],
+   "water_id": "lake-lloyd-vincent-ok",
+   "gnis_id": null,
+   "geometry_hash": "912aad0b26a0d507582092994ccf20c6c6a6994de39a1907d73e0c9ffd04a421",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-louis-burtschi-ok",
+   "name": "Lake Louis Burtschi",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Cement",
+    "Chickasha"
+   ],
+   "bbox": [
+    -98.082246,
+    34.961836,
+    -98.06205,
+    34.970794
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.626,
+   "launches": [
+    "lake-louis-burtschi-boat-launch-near-cement-ok",
+    "lake-louis-burtschi-boat-launch-near-chickasha-ok"
+   ],
+   "water_id": "lake-louis-burtschi-ok",
+   "gnis_id": null,
+   "geometry_hash": "6f115add4a9ee27f7fc1964df67cd2c1c05ff62e068aac5dbc31c155971281ca",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mcmurtry-ok",
+   "name": "Lake McMurtry",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Stillwater"
+   ],
+   "bbox": [
+    -97.211601,
+    36.162013,
+    -97.169799,
+    36.209816
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.098,
+   "launches": [
+    "lake-mcmurty-park-boat-dock-ok",
+    "west-side-boat-dock-ok"
+   ],
+   "water_id": "lake-mcmurtry-ok",
+   "gnis_id": null,
+   "geometry_hash": "9329ac6a395b0b9a39c4c5a60c1193b6bd81e29bc308db4666afcf0ed18d0a2f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-murray-ok",
+   "name": "Lake Murray",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Ardmore",
+    "Hoxbar"
+   ],
+   "bbox": [
+    -97.113943,
+    34.026411,
+    -97.037398,
+    34.132591
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 20.561,
+   "launches": [
+    "lake-murray-boat-launch-near-ardmore-ok-3"
+   ],
+   "water_id": "lake-murray-ok",
+   "gnis_id": null,
+   "geometry_hash": "30b8080367bc6d3eda3fcc65afbd75efbc1d763f4c7712cde2706cfe236d06c8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-murray-boat-launch-near-ardmore-ok-10",
+    "lake-murray-boat-launch-near-ardmore-ok-9"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-nanih-waiya-ok",
+   "name": "Lake Nanih Waiya",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Clayton"
+   ],
+   "bbox": [
+    -95.304911,
+    34.630479,
+    -95.296313,
+    34.637364
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.386,
+   "launches": [
+    "lake-nanih-waiya-boat-launch-near-clayton-ok",
+    "lake-nanih-waiya-boat-launch-near-clayton-ok-2"
+   ],
+   "water_id": "lake-nanih-waiya-ok",
+   "gnis_id": null,
+   "geometry_hash": "ce9dece24af1b517c9a93b361335cf0063b0f41f5e2f433ff6d19f80c44cdbb5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-of-the-arbuckles-ok",
+   "name": "Lake of the Arbuckles",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Davis",
+    "Sulphur"
+   ],
+   "bbox": [
+    -97.053766,
+    34.41617,
+    -96.972976,
+    34.490344
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.804,
+   "launches": [
+    "buckhorn-ok",
+    "eagle-bay-ok",
+    "guy-sandy-ok",
+    "the-point-ok"
+   ],
+   "water_id": "lake-of-the-arbuckles-ok",
+   "gnis_id": null,
+   "geometry_hash": "fe71bd16269569db8eccb018f252b3a01bae19372407024c65c10451effd9901",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-ozzie-cobb-ok",
+   "name": "Lake Ozzie Cobb",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Rattan"
+   ],
+   "bbox": [
+    -95.390382,
+    34.242904,
+    -95.382287,
+    34.2519
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.214,
+   "launches": [
+    "lake-ozzie-cobb-boat-launch-ok"
+   ],
+   "water_id": "lake-ozzie-cobb-ok",
+   "gnis_id": null,
+   "geometry_hash": "f0467afe7ad8383117d9b9df688a772d7890b14d423d0f70746dfd479fd83b02",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-rush-ok",
+   "name": "Lake Rush",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "The Holy City"
+   ],
+   "bbox": [
+    -98.619402,
+    34.738968,
+    -98.60582,
+    34.743262
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.189,
+   "launches": [
+    "rush-lake-boat-launch-ok"
+   ],
+   "water_id": "lake-rush-ok",
+   "gnis_id": null,
+   "geometry_hash": "7d7527858df3aec3c621f405cb0cb9981e1a0ba4a0f42594f8d5eb6b32d73f22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-texoma-ok",
+   "name": "Lake Texoma",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Aylesworth",
+    "Cartwright",
+    "Cumberland",
+    "Durant",
+    "Enville",
+    "Fobb",
+    "Fort Washita",
+    "Kingston",
+    "Lakeside",
+    "Lark",
+    "Lebanon",
+    "Linn"
+   ],
+   "bbox": [
+    -97.068894,
+    33.712282,
+    -96.51384,
+    34.163913
+   ],
+   "wikidata": "Q3215230",
+   "charted": false,
+   "area_km2": 290.333,
+   "launches": [
+    "buncombee-creek-b-area-boat-ramp-ok",
+    "buncombee-creek-c-area-boat-ramp-ok",
+    "lake-texoma-boat-launch-near-cartwright-ok-2",
+    "lake-texoma-boat-launch-near-cartwright-ok-3",
+    "lake-texoma-boat-launch-near-cartwright-ok",
+    "caney-creek-boat-ramp-ok",
+    "cardinal-cove-central-boat-ramp-ok",
+    "hickory-creek-boat-ramp-ok",
+    "lake-texoma-boat-launch-near-durant-ok",
+    "lake-texoma-boat-launch-near-lakeside-ok",
+    "lake-texoma-boat-launch-near-lakeside-ok-2",
+    "lost-acres-boat-ramp-ok",
+    "lake-texoma-boat-launch-near-platter-ok",
+    "powell-access-point-boat-ramp-ok",
+    "lake-texoma-boat-launch-near-mcbride-ok",
+    "rock-creek-boat-ramp-ok",
+    "texoma-state-park-ben-s-campground-boat-ramp-ok",
+    "texoma-state-park-north-boat-ramp-ok",
+    "lake-texoma-boat-launch-near-kingston-ok-2",
+    "lake-texoma-boat-launch-near-madill-ok",
+    "lake-texoma-boat-launch-near-kingston-ok",
+    "texoma-state-park-south-bridge-boat-ramp-ok",
+    "washita-point-access-point-boat-ramp-ok",
+    "wilson-creek-point-boat-ramp-ok"
+   ],
+   "water_id": "lake-texoma-ok",
+   "gnis_id": "1102966",
+   "geometry_hash": "c933d139be8b74034fa89c85f6119c1594acdbf0c9e820a589da1db22623e1d1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "alberta-creek-resort-boat-ramp-ok",
+    "bridgeview-resort-and-marina-boat-ramp-ok",
+    "buncombe-creek-resort-boat-ramp-ok",
+    "caney-creek-road-association-boat-ramp-ok",
+    "cardinal-cove-western-marina-boat-ramp-ok",
+    "lake-texoma-boat-launch-near-cartwright-ok-4",
+    "colbert-northern-boat-club-boat-ramp-ok",
+    "island-view-hoa-boat-ramp-ok",
+    "lebanon-resort-boat-ramp-ok",
+    "little-glasses-marina-boat-ramp-ok",
+    "lake-texoma-boat-launch-near-cartwright-ok-5",
+    "newberry-creek-resort-marina-boat-ramp-ok",
+    "oakview-property-owners-association-boat-ramp-ok",
+    "sandy-beach-hoa-boat-ramp-ok",
+    "soldier-creek-marina-boat-ramp-ok",
+    "lake-texoma-boat-launch-near-cumberland-ok",
+    "lake-texoma-boat-launch-near-sand-point-ok-2",
+    "lake-texoma-boat-launch-near-sand-point-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-thunderbird-ok",
+   "name": "Lake Thunderbird",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Denver",
+    "Little Axe",
+    "Norman"
+   ],
+   "bbox": [
+    -97.319022,
+    35.189841,
+    -97.211329,
+    35.301683
+   ],
+   "wikidata": "Q6478032",
+   "charted": false,
+   "area_km2": 20.464,
+   "launches": [
+    "lake-thunderbird-boat-launch-near-denver-ok",
+    "lake-thunderbird-boat-launch-near-little-axe-ok-6",
+    "lake-thunderbird-boat-launch-near-little-axe-ok-3",
+    "lake-thunderbird-sailing-association-boat-ramp-ok",
+    "lake-thunderbird-boat-launch-near-little-axe-ok",
+    "lake-thunderbird-boat-launch-near-norman-ok",
+    "lake-thunderbird-boat-launch-near-little-axe-ok-4",
+    "lake-thunderbird-boat-launch-near-little-axe-ok-2",
+    "south-dam-boat-ramp-ok",
+    "lake-thunderbird-boat-launch-near-little-axe-ok-5"
+   ],
+   "water_id": "lake-thunderbird-ok",
+   "gnis_id": "1100127",
+   "geometry_hash": "75ccd681b69980945dc82d654fce3bd14c65e134b49133b92c969b2074654bb1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-vanderwork-oak-creek-site-5-reservoir-ok",
+   "name": "Lake Vanderwork Oak Creek Site 5 Reservoir",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Mountain View"
+   ],
+   "bbox": [
+    -98.838784,
+    35.161914,
+    -98.818287,
+    35.179434
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.478,
+   "launches": [
+    "lake-vanderwork-oak-creek-site-5-reservoir-boat-launch-ok"
+   ],
+   "water_id": "lake-vanderwork-oak-creek-site-5-reservoir-ok",
+   "gnis_id": null,
+   "geometry_hash": "3051a2d988bb7d9ed8073db936db109e41a48ddd5bc4d5e5a42b46496184225a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-wayne-wallace-ok",
+   "name": "Lake Wayne Wallace",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Wilburton"
+   ],
+   "bbox": [
+    -95.364652,
+    34.991401,
+    -95.35237,
+    35.003194
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.345,
+   "launches": [
+    "lake-wayne-wallace-boat-launch-near-wilburton-ok"
+   ],
+   "water_id": "lake-wayne-wallace-ok",
+   "gnis_id": null,
+   "geometry_hash": "90233307a733f2fe4ee2697dba95330ade1c520a45a2ad689ad7069d166d0854",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-river-ok",
+   "name": "Little River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Broken Bow",
+    "Cerrogordo"
+   ],
+   "bbox": [
+    -95.199591,
+    33.929065,
+    -94.447414,
+    34.599921
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ashalintubbi-boat-ramp-ok",
+    "deadman-boat-launch-ok"
+   ],
+   "water_id": "little-river-ar",
+   "gnis_id": null,
+   "geometry_hash": "07998540e275bed22e82bb2b039e29ce99797353ff38e0d0bd913724ac9284ca",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mannford-water-supply-lake-ok",
+   "name": "Mannford Water Supply Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Jennings",
+    "Mannford",
+    "Shady Grove",
+    "Westport"
+   ],
+   "bbox": [
+    -96.495448,
+    36.071148,
+    -96.274131,
+    36.208072
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 37.65,
+   "launches": [
+    "akdar-shrine-boat-ramp-ok",
+    "mannford-water-supply-lake-boat-launch-near-shady-grove-ok",
+    "mannford-water-supply-lake-boat-launch-near-mannford-ok-3",
+    "mannford-water-supply-lake-boat-launch-near-mannford-ok-4",
+    "mannford-water-supply-lake-boat-launch-near-mannford-ok-2",
+    "mannford-water-supply-lake-boat-launch-near-westport-ok",
+    "mannford-water-supply-lake-boat-launch-near-jennings-ok",
+    "new-mannford-ramp-central-ramp-ok",
+    "mannford-water-supply-lake-boat-launch-near-mannford-ok-5",
+    "mannford-water-supply-lake-boat-launch-near-mannford-ok",
+    "pawnee-cove-north-wma-boat-ramp-ok",
+    "salt-creek-boat-ramp-ok"
+   ],
+   "water_id": "mannford-water-supply-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "f07a1d008baaaf2300656d7d6f79665f4a1da49daac8ca733afa6ddcc60e8b80",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "old-mannford-ramp-wma-boat-ramp-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mcadams-pond-ok",
+   "name": "McAdams Pond",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Tishomingo"
+   ],
+   "bbox": [
+    -96.700309,
+    34.19557,
+    -96.694646,
+    34.199832
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.037,
+   "launches": [
+    "mcadams-pond-boat-launch-ok"
+   ],
+   "water_id": "mcadams-pond-ok",
+   "gnis_id": null,
+   "geometry_hash": "b6bdc3a368b2f2c83efdec319816c8ed4f691559938b269dd5d728e0bf2c0007",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mcgee-lake-ok",
+   "name": "McGee Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Negro Bend",
+    "Payton Crossing"
+   ],
+   "bbox": [
+    -95.922602,
+    34.310103,
+    -95.84047,
+    34.40848
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.953,
+   "launches": [
+    "mcgee-lake-boat-launch-near-payton-crossing-ok",
+    "mcgee-lake-boat-launch-ok",
+    "mcgee-lake-boat-launch-near-negro-bend-ok"
+   ],
+   "water_id": "mcgee-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "e3df6ce2f2881af66ae4fdfb8ac6cce2748cc5242fab6a35d8b57d33e50b5f41",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mountain-fork-river-ok",
+   "name": "Mountain Fork River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Broken Bow",
+    "Tiner"
+   ],
+   "bbox": [
+    -94.708523,
+    34.024735,
+    -94.366983,
+    34.646276
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mountain-fork-park-boat-ramp-ok"
+   ],
+   "water_id": "mountain-fork-river-ok",
+   "gnis_id": null,
+   "geometry_hash": "0a4c6de7f5a2b4d3ef7255d493521d6b51ae1cddd805e388bff8e723ace9cdc3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mountain-lake-ok",
+   "name": "Mountain Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Woodford"
+   ],
+   "bbox": [
+    -97.292191,
+    34.363064,
+    -97.271978,
+    34.376253
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.787,
+   "launches": [
+    "mountain-lake-boat-launch-ok"
+   ],
+   "water_id": "mountain-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "62642b7093fe6a3d9f92831aacbe9beb7ad76fd02da8b79709c48460fd462e16",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "neosho-river-ok",
+   "name": "Neosho River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Miami",
+    "Wyandotte"
+   ],
+   "bbox": [
+    -95.083553,
+    36.792277,
+    -94.752574,
+    37.178595
+   ],
+   "wikidata": "Q516393",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "neosho-river-boat-launch-near-wyandotte-ok"
+   ],
+   "water_id": "neosho-river-ks",
+   "gnis_id": "1095788",
+   "geometry_hash": "3bcabcb897c5f9a3c2acd0c6f53cf2c276ce9192f0746ff35c98a32086c42901",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "oklahoma-river-ok",
+   "name": "Oklahoma River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Oklahoma City"
+   ],
+   "bbox": [
+    -97.621417,
+    35.447573,
+    -97.440685,
+    35.481412
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.761,
+   "launches": [
+    "oklahoma-river-boat-launch-near-oklahoma-city-ok",
+    "oklahoma-river-boat-launch-near-oklahoma-city-ok-2"
+   ],
+   "water_id": "oklahoma-river-ok",
+   "gnis_id": null,
+   "geometry_hash": "6eb55ec888fa50db3e5725032652693163336a86c7f9df7569305664145770ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "old-channel-verdigris-river-coweta-ok",
+   "name": "old channel, Verdigris River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Coweta"
+   ],
+   "bbox": [
+    -95.580005,
+    36.065709,
+    -95.547903,
+    36.084597
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "old-channel-verdigris-river-boat-launch-near-coweta-ok"
+   ],
+   "water_id": "old-channel-verdigris-river-coweta-ok",
+   "gnis_id": null,
+   "geometry_hash": "7397c23e8e0f33a1fc345cca9d8b506e1cfeb2bd2e4c0d1d97864093a6aca4de",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "old-channel-verdigris-river-ok",
+   "name": "old channel, Verdigris River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Wagoner"
+   ],
+   "bbox": [
+    -95.449026,
+    35.89045,
+    -95.439673,
+    35.895838
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "old-channel-verdigris-river-boat-launch-near-wagoner-ok"
+   ],
+   "water_id": "old-channel-verdigris-river-ok",
+   "gnis_id": null,
+   "geometry_hash": "8c93c54316628ab924e689df94b9eb6de53b6a07ef48a522776fc8d10e753155",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "old-channel-verdigris-river-wagoner-ok",
+   "name": "old channel, Verdigris River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Wagoner"
+   ],
+   "bbox": [
+    -95.490845,
+    35.944347,
+    -95.477125,
+    35.94796
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "old-channel-verdigris-river-boat-launch-near-wagoner-ok-2"
+   ],
+   "water_id": "old-channel-verdigris-river-wagoner-ok",
+   "gnis_id": null,
+   "geometry_hash": "8fc37c49da7b4ee77995af9bb802169f45ec4c56a8c16f9ca7231917e81b03e7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "onapa-lake-ok",
+   "name": "Onapa Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Onapa"
+   ],
+   "bbox": [
+    -95.571528,
+    35.395587,
+    -95.562289,
+    35.405431
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.253,
+   "launches": [
+    "onapa-cove-ramp-boat-ramp-ok"
+   ],
+   "water_id": "onapa-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "bd219c1d3e4d9e1f8e28b77b3bed7a0109f5c245ec5ad55a810dbc80e53b35d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "oologah-lake-ok",
+   "name": "Oologah Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Bushyhead",
+    "Edgewater Acres",
+    "Foyil",
+    "Jamestown",
+    "Nowata",
+    "Oologah",
+    "Talala",
+    "Winganon"
+   ],
+   "bbox": [
+    -95.680476,
+    36.415229,
+    -95.512512,
+    36.68132
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 111.836,
+   "launches": [
+    "oologah-lake-boat-launch-near-foyil-ok",
+    "oologah-lake-boat-launch-near-edgewater-acres-ok",
+    "double-creek-boatramp-ok",
+    "east-side-boat-ramp-ok",
+    "oologah-lake-boat-launch-near-oologah-ok-2",
+    "oologah-lake-boat-launch-near-oologah-ok",
+    "oologah-lake-boat-launch-near-bushyhead-ok-3",
+    "oologah-lake-boat-launch-near-talala-ok-2",
+    "oologah-lake-boat-launch-near-talala-ok",
+    "winganon-south-ok"
+   ],
+   "water_id": "oologah-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "30d48fa3c1ced3b0bc9cac2e7261f625ee6692c33a5dc5512a84c7c9ad58d6c2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "oologah-lake-boat-launch-near-bushyhead-ok-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pine-creek-lake-ok",
+   "name": "Pine Creek Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Alikchi",
+    "Burwell",
+    "Plainview",
+    "Ringold",
+    "Wright City"
+   ],
+   "bbox": [
+    -95.139781,
+    34.092297,
+    -95.062112,
+    34.228811
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.508,
+   "launches": [
+    "little-river-park-c-boat-ramp-ok",
+    "little-river-park-e-boat-ramp-ok",
+    "pine-creek-lake-boat-launch-ok",
+    "pine-creek-cove-east-boat-ramp-ok",
+    "pine-creek-cove-l-area-boat-ramp-ok",
+    "turkey-creek-boat-ramp-ok"
+   ],
+   "water_id": "pine-creek-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "c16b28a151ef776d2bf2af1886ee7cf9a6881573a30fe6b95fb4993512ec41ee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "poteau-river-ok",
+   "name": "Poteau River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Arkoma",
+    "Independence",
+    "Wister"
+   ],
+   "bbox": [
+    -94.764542,
+    34.845966,
+    -93.963588,
+    35.389763
+   ],
+   "wikidata": "Q7234787",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "poteau-river-boat-launch-near-arkoma-ok",
+    "poteau-river-boat-launch-near-independence-ok",
+    "poteau-river-boat-launch-near-wister-ok",
+    "potts-mountain-boat-ramp-ok"
+   ],
+   "water_id": "poteau-river-ok",
+   "gnis_id": "78085",
+   "geometry_hash": "a728d69753b9fbef09015b8c0245fc0ead0aafd0506e37c2dfd7a1a243f4b400",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "red-river-ok",
+   "name": "Red River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Carpenters Bluff",
+    "Shawnee",
+    "Thackerville"
+   ],
+   "bbox": [
+    -99.970097,
+    33.547047,
+    -94.205104,
+    34.585498
+   ],
+   "wikidata": "Q156032",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "addington-bend-primitive-boat-ramp-ok"
+   ],
+   "water_id": "red-river-ar",
+   "gnis_id": "558728",
+   "geometry_hash": "73b262d62a688dc6f32d26a3e3ebdebba4733ea0c3e2b8dc23349b86da546ecd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "reeves-ravine-reservoir-ok",
+   "name": "Reeves Ravine Reservoir",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Tishomingo"
+   ],
+   "bbox": [
+    -96.699709,
+    34.180165,
+    -96.694035,
+    34.188282
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.13,
+   "launches": [
+    "reeves-ravine-reservoir-boat-launch-ok"
+   ],
+   "water_id": "reeves-ravine-reservoir-ok",
+   "gnis_id": null,
+   "geometry_hash": "5224c9f8e6a0600fdc53f8953b60dcd995fd3da4ebce833d35781131b3ee354c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "robert-s-kerr-reservoir-ok",
+   "name": "Robert S Kerr Reservoir",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Cowlington",
+    "Keota",
+    "Red Hill",
+    "Sallisaw",
+    "Tamaha",
+    "Vian;ᏓᏄᎪᎢ",
+    "Webbers Falls"
+   ],
+   "bbox": [
+    -95.023053,
+    35.239863,
+    -94.774998,
+    35.459396
+   ],
+   "wikidata": "Q7348418",
+   "charted": true,
+   "area_km2": 129.761,
+   "launches": [
+    "applegate-cove-boat-ramp-ok",
+    "robert-s-kerr-reservoir-boat-launch-near-sallisaw-ok",
+    "cowlington-point-east-boat-ramp-ok",
+    "cowlington-point-main-campground-boat-ramp-ok",
+    "haskell-co-boat-ramp-ok",
+    "keota-landing-boat-ramp-ok",
+    "little-sandbois-boat-ramp-ok",
+    "moody-boat-ramp-ok",
+    "reeve-s-slough-boat-ramp-ok",
+    "robert-s-kerr-reservoir-boat-launch-near-cowlington-ok",
+    "stoney-point-boat-ramp-ok",
+    "tamaha-park-boat-west-boat-ramp-ok",
+    "tamaha-park-east-boat-ramp-ok",
+    "tuff-boat-ramp-ok",
+    "vian-boat-ramp-ok",
+    "webbers-falls-city-park-boat-ramp-ok"
+   ],
+   "water_id": "robert-s-kerr-reservoir-ok",
+   "gnis_id": "1097254",
+   "geometry_hash": "cd97f3e1e547e7ca5c43e6c1b163f166e81fee0bd0dbf52fe6c4cc949a716371",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "roland-city-lake-ok",
+   "name": "Roland City Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Roland"
+   ],
+   "bbox": [
+    -94.521901,
+    35.443657,
+    -94.514736,
+    35.452216
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "roland-city-lake-boat-launch-near-roland-ok-2"
+   ],
+   "water_id": "roland-city-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "78c763c533495e74c8954d74fe176b6cf1f281807b656b0aac25bfd37fa68409",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sally-jones-lake-ok",
+   "name": "Sally Jones Lake",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Vian;ᏓᏄᎪᎢ"
+   ],
+   "bbox": [
+    -95.013928,
+    35.437528,
+    -94.978725,
+    35.461693
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.71,
+   "launches": [
+    "ruby-sloan-road-small-boat-launch-ok"
+   ],
+   "water_id": "sally-jones-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "98baebf0856f83223b1cf3fecac20c91ba44794602a84c14fd03577e24b7885b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sardis-lake-ok",
+   "name": "Sardis Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Clayton"
+   ],
+   "bbox": [
+    -95.500581,
+    34.626421,
+    -95.303943,
+    34.707306
+   ],
+   "wikidata": "Q7348439",
+   "charted": false,
+   "area_km2": 49.863,
+   "launches": [
+    "sardis-lake-boat-launch-near-clayton-ok",
+    "sardis-cove-boat-ramp-ok",
+    "the-narrows-boat-ramp-ok"
+   ],
+   "water_id": "sardis-lake-ok",
+   "gnis_id": "1763657",
+   "geometry_hash": "59eae25cc0b9f1c26564c63871db199ff80caaae5cc5b9e2c36fdb3c6574acd6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "skiatook-lake-hominy-ok",
+   "name": "Skiatook Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Hominy;𐒹𐓘́͘𐓨𐓘͘𐓵𐓣͘",
+    "Morgans Corner"
+   ],
+   "bbox": [
+    -96.235819,
+    36.372527,
+    -96.174206,
+    36.42086
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.899,
+   "launches": [
+    "skiatook-lake-boat-launch-near-morgans-corner-ok",
+    "skiatook-lake-boat-launch-near-morgans-corner-ok-2",
+    "skiatook-lake-boat-launch-near-hominy-ok",
+    "skiatook-lake-boat-launch-near-morgans-corner-ok-3"
+   ],
+   "water_id": "skiatook-lake-hominy-ok",
+   "gnis_id": null,
+   "geometry_hash": "540842c05cfaacb262c80219181bd3832801d747d9f88b73b873af4a9e10c87c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "skiatook-lake-hominy-ok-2",
+   "name": "Skiatook Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Hominy;𐒹𐓘́͘𐓨𐓘͘𐓵𐓣͘"
+   ],
+   "bbox": [
+    -96.278722,
+    36.370666,
+    -96.229647,
+    36.401359
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.552,
+   "launches": [
+    "hominy-landing-boat-ramp-ok"
+   ],
+   "water_id": "skiatook-lake-hominy-ok-2",
+   "gnis_id": null,
+   "geometry_hash": "d584be258371959f16c5dea875db6779f0d273b1996c63f16b93f6e20b080dac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "skiatook-lake-ok",
+   "name": "Skiatook Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Skiatook"
+   ],
+   "bbox": [
+    -96.183906,
+    36.301606,
+    -96.086792,
+    36.383647
+   ],
+   "wikidata": "Q7332880",
+   "charted": false,
+   "area_km2": 18.034,
+   "launches": [
+    "skiatook-lake-boat-launch-near-skiatook-ok-2",
+    "skiatook-lake-boat-launch-near-skiatook-ok-4",
+    "skiatook-lake-boat-launch-near-skiatook-ok"
+   ],
+   "water_id": "skiatook-lake-ok",
+   "gnis_id": "1100124",
+   "geometry_hash": "bf72d75eed7ecdccf1c5ef72b30195837335fdc98b67f09edd5e4eada4b2a2d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "skiatook-lake-boat-launch-near-skiatook-ok-5",
+    "skiatook-lake-boat-launch-near-skiatook-ok-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "skipout-lake-ok",
+   "name": "Skipout Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Reydon"
+   ],
+   "bbox": [
+    -99.888344,
+    35.631022,
+    -99.880362,
+    35.638347
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.159,
+   "launches": [
+    "skipout-boating-ok"
+   ],
+   "water_id": "skipout-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "b744691558269bc7193b877d31714e36babb76c27d53eadf5c5a62674380f4c3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spainard-creek-muskogee-ok",
+   "name": "Spainard Creek",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Muskogee"
+   ],
+   "bbox": [
+    -95.273127,
+    35.599421,
+    -95.266807,
+    35.605762
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.13,
+   "launches": [
+    "spainard-creek-boat-launch-near-muskogee-ok-2"
+   ],
+   "water_id": "spainard-creek-muskogee-ok",
+   "gnis_id": null,
+   "geometry_hash": "0ecb35851c661ec976bb8303ebff81706a2efe434f42cb482b222c85e80cd2a5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spainard-creek-ok",
+   "name": "Spainard Creek",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Muskogee"
+   ],
+   "bbox": [
+    -95.266807,
+    35.597388,
+    -95.26386,
+    35.600689
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.034,
+   "launches": [
+    "spainard-creek-boat-launch-near-muskogee-ok"
+   ],
+   "water_id": "spainard-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "3e25765b0b50e0bbaf615a982a83ab7bce6f0fc51df23e8a0c74cfcb3a89347a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spring-creek-lake-ok",
+   "name": "Spring Creek Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Reydon"
+   ],
+   "bbox": [
+    -99.838769,
+    35.771246,
+    -99.83399,
+    35.778305
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.145,
+   "launches": [
+    "spring-creek-lake-boat-launch-ok"
+   ],
+   "water_id": "spring-creek-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "a467472669155bae518e386f3093858ca60646daf8b1985e9e53d516d48b331f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spunky-creek-ok",
+   "name": "Spunky Creek",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Catoosa"
+   ],
+   "bbox": [
+    -95.759894,
+    36.128834,
+    -95.715392,
+    36.210609
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "spunky-creek-boat-launch-ok"
+   ],
+   "water_id": "spunky-creek-ok",
+   "gnis_id": null,
+   "geometry_hash": "1082cd6b5d3f471e246ef0f20719b9538c7ee7e93c4cf74c933eacbff8f820d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stanley-draper-lake-ok",
+   "name": "Stanley Draper Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Midwest City",
+    "Moore"
+   ],
+   "bbox": [
+    -97.38394,
+    35.324565,
+    -97.333389,
+    35.386367
+   ],
+   "wikidata": "Q6477830",
+   "charted": false,
+   "area_km2": 9.312,
+   "launches": [
+    "stanley-draper-lake-boat-launch-near-midwest-city-ok-3"
+   ],
+   "water_id": "stanley-draper-lake-ok",
+   "gnis_id": "1751147",
+   "geometry_hash": "4e9abbfbe5749b848b6c6a3d1548949afcae0cdedd58024a22b01c022086f3f3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tenkiller-ferry-lake-ok",
+   "name": "Tenkiller Ferry Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Caney Ridge",
+    "Carters Landing",
+    "Cookson",
+    "Paradise Hill",
+    "Pettit Bay",
+    "Tahlequah",
+    "Vian;ᏓᏄᎪᎢ",
+    "Wildcat Point"
+   ],
+   "bbox": [
+    -95.073966,
+    35.591347,
+    -94.864418,
+    35.825243
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 44.823,
+   "launches": [
+    "barnacle-bill-s-boat-ramp-ok",
+    "barnacle-bill-s-boat-ramp-paradise-hill-ok",
+    "blackgum-landing-boat-ramp-ok",
+    "burnt-cabin-boat-ramp-ok",
+    "caney-ridge-boat-ramp-ok",
+    "caney-ridge-boat-ramp-ok-2",
+    "carlisle-cove-boat-ramp-ok",
+    "carters-landing-boat-ramp-ok",
+    "cato-creek-landing-ok",
+    "cherokee-landing-boat-ramp-ok",
+    "chicken-creek-boat-ramp-ok",
+    "chicken-creek-south-boat-ramp-ok",
+    "cookson-bend-boat-ramp-ok",
+    "cookson-bend-w-boat-ramp-ok",
+    "elk-creek-landing-s-boat-ramp-ok",
+    "etta-bend-boat-ramp-ok",
+    "pettit-bay-area-i-east-boat-ramp-ok",
+    "pettit-bay-area-i-west-boat-ramp-ok",
+    "pettit-bay-ii-boat-ramp-ok",
+    "sixshooter-boat-ramp-ok",
+    "sizemore-landing-boat-launch-ok",
+    "sizemore-landing-boat-ramp-2-ok",
+    "snake-creek-boat-ramp-ok",
+    "snake-creek-boat-ramp-1-ok",
+    "snake-creek-boat-ramp-2-ok",
+    "standing-rock-boat-ramp-ok",
+    "strayhorn-landing-boat-ramp-ok",
+    "tenkiller-ferry-lake-boat-launch-ok",
+    "tenkiller-harbor-boat-ramp-ok",
+    "tenkiller-state-park-cabana-boat-ramp-ok",
+    "tenkiller-state-park-hickory-flats-boat-ramp-ok"
+   ],
+   "water_id": "tenkiller-ferry-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "f8c9aead5540a5639b8d8938dfc263143baea2188097b6055fba61d9c290c897",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "ang-club-boat-ramp-ok",
+    "cookson-bend-marina-boat-ramp-ok",
+    "elk-creek-marina-boat-ramp-ok",
+    "pettit-bay-marina-boat-ramp-ok",
+    "snake-creek-marina-boat-ramp-ok",
+    "snake-creek-marina-canoe-launch-ok",
+    "strayhorn-landing-marina-boat-ramp-ok",
+    "tenkiller-state-park-pine-cove-marina-private-boat-ramp-ok"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "tom-steed-reservoir-ok",
+   "name": "Tom Steed Reservoir",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Mountain Park",
+    "Roosevelt"
+   ],
+   "bbox": [
+    -99.045439,
+    34.733726,
+    -98.958235,
+    34.798088
+   ],
+   "wikidata": "Q7331395",
+   "charted": false,
+   "area_km2": 22.2,
+   "launches": [
+    "tom-steed-reservoir-boat-launch-near-roosevelt-ok",
+    "tom-steed-reservoir-boat-launch-near-mountain-park-ok"
+   ],
+   "water_id": "tom-steed-reservoir-ok",
+   "gnis_id": "1101912",
+   "geometry_hash": "226138a9b8c75d984a9f225eeedde6668fbad64633e040f88b36feeb3f043ad9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "verdigris-river-ok",
+   "name": "Verdigris River",
+   "kind": "river",
+   "state": "OK",
+   "towns": [
+    "Claremore",
+    "Oologah"
+   ],
+   "bbox": [
+    -95.744065,
+    35.799063,
+    -95.305289,
+    37.062862
+   ],
+   "wikidata": "Q943521",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "verdigris-river-boat-launch-ok",
+    "verdigris-river-park-boat-ramp-ok"
+   ],
+   "water_id": "verdigris-river-ks",
+   "gnis_id": "1099243",
+   "geometry_hash": "c3c52f60cac0f378d290362dddc4d2c432119844f1e91e00c7a60c335504eecc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "veterans-lake-ok",
+   "name": "Veterans Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Sulphur"
+   ],
+   "bbox": [
+    -96.987272,
+    34.485209,
+    -96.975802,
+    34.492437
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.204,
+   "launches": [
+    "veterans-lake-boat-launch-ok"
+   ],
+   "water_id": "veterans-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "49503cbdfea6b4083fba1e95406b6761b65fe909cbdaa775a1d73563726957c6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "waurika-lake-ok",
+   "name": "Waurika Lake",
+   "kind": "reservoir",
+   "state": "OK",
+   "towns": [
+    "Addington",
+    "Hastings",
+    "Temple"
+   ],
+   "bbox": [
+    -98.155892,
+    34.229509,
+    -98.021251,
+    34.342813
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 36.054,
+   "launches": [
+    "beaver-creek-boat-ramp-ok",
+    "waurika-lake-boat-launch-near-addington-ok",
+    "kiowa-park-i-north-boat-ramp-ok",
+    "kiowa-park-i-southern-boat-ramp-ok",
+    "kiowa-park-ii-boat-ramp-ok",
+    "waurika-lake-boat-launch-near-hastings-ok",
+    "waurika-lake-boat-launch-near-hastings-ok-2",
+    "waurika-lake-boat-launch-near-hastings-ok-3",
+    "waurika-lake-boat-launch-near-hastings-ok-4",
+    "waurika-lake-boat-launch-near-hastings-ok-5",
+    "waurika-lake-boat-launch-near-temple-ok",
+    "wichita-ridge-boat-ramp-ok"
+   ],
+   "water_id": "waurika-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "ae03891b878792b4092ca956fcf3fe29c6a684dee7158b8632c87c4ad80291a4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wister-lake-ok",
+   "name": "Wister Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Wister"
+   ],
+   "bbox": [
+    -94.839557,
+    34.90481,
+    -94.711265,
+    34.949248
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 21.17,
+   "launches": [
+    "quarry-isle-boat-ramp-ok",
+    "refuge-ok",
+    "victor-landing-boat-ramp-ok",
+    "wards-landing-boat-ramp-ok"
+   ],
+   "water_id": "wister-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "4d12887c2fed84da8f2944dfd2284977feeb33e6c0f627194261e7634bca806d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "zink-lake-ok",
+   "name": "Zink Lake",
+   "kind": "lake",
+   "state": "OK",
+   "towns": [
+    "Tulsa"
+   ],
+   "bbox": [
+    -96.008928,
+    36.120261,
+    -95.986342,
+    36.145695
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.047,
+   "launches": [
+    "zink-lake-boat-launch-near-tulsa-ok"
+   ],
+   "water_id": "zink-lake-ok",
+   "gnis_id": null,
+   "geometry_hash": "8fc4fc0cc1d1b302083520eede98ccd9db06cb91420b19d4dc247d375e162a0d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
