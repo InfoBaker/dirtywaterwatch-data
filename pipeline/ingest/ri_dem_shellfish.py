@@ -20,7 +20,9 @@ Record rules
     (raw.scheduled_reopen: the text, and the time it names when it names one) and never an end: an area still listed
     CLOSED after its scheduled time stays red (raw.scheduled_reopen_passed says so). Rain totals are kept as DEM wrote
     them (raw.rain_totals_text). DEM gives no cause per area (raw.reason None, raw.reason_basis).
-  - End: a closure that a complete healthy read no longer lists CLOSED (its row gone or OPEN) ends at that read
+  - End: a closure that a complete healthy read no longer lists CLOSED (its row listed OPEN, or gone from a table
+    DEM republished with a new Updated date; a row gone from a table with the same Updated date is an incomplete
+    read, Astra review P1-1) ends at that read
     (advisory_lifted, raw.ended_at_precision poll, an upper bound; raw.end_seen_as). A closure listed again later is
     a new record (its key carries the first read's time, to the second). raw._last_seen_in_source is kept with
     raw._poll_confirmed (the status build's rule for a polled list): the colour runs to 14 days after the last read
@@ -68,6 +70,7 @@ RAIN = re.compile(r"<p\b[^>]*>\s*(?P<text>Closure\s+rain\s+totals:[^<]*)</p>", r
 TABLE = re.compile(r"<table\b[^>]*>(?P<body>.*?)</table>", re.S | re.I)
 EXPECTED_HEAD = ["Location", "Status", "Scheduled to Reopen"]
 CODES = re.compile(r"\(\s*Areas?\s+(?P<codes>[^)]+)\)", re.I)
+CODE = re.compile(r"^\d{1,2}[A-Z]{0,2}(?:-[A-Z]{1,2})?$")
 CLOSED = re.compile(r"^CLOSED(?:\s*[-:–(].*)?$", re.I)
 OPEN = re.compile(r"^OPEN$", re.I)
 REOPEN = re.compile(r"^(?:(?P<when>Noon)\s+)?(?P<m>\d{1,2})/(?P<d>\d{1,2})(?:/(?P<y>\d{2,4}))?$", re.I)
@@ -207,12 +210,17 @@ def parse(page: str, fetched: str | None = None) -> dict:
         if not loc:
             unread.append({"row": n, "reason": "a row with no location"})
             continue
+        if CODES.search(loc) and not all(CODE.match(c) for c in area_codes(loc)):
+            # only DEM's code form is read ("1A", "10PJ-N"): other text in the brackets is never kept (Astra P1-3)
+            unread.append({"row": n, "location": P.clean_field(loc, "place"), "reason": "area codes the reader cannot take"})
+            continue
         if CLOSED.match(status):
             kind = "closed"
         elif OPEN.match(status):
             kind = "open"
         else:
-            unread.append({"row": n, "location": P.clean_field(loc, "place"),
+            unread.append({"row": n, "location": P.clean_field(loc, "place"), "area_key": key_of(
+                {"codes": area_codes(loc), "location": P.clean_field(loc, "place")}),
                            "reason": "a status the reader does not take (not CLOSED or OPEN)"})
             continue
         rows.append({"row": n, "location": P.clean_field(loc, "place"), "footnote_mark": mark,
@@ -228,7 +236,7 @@ def key_of(row: dict) -> str:
 
 def saved_form(parsed: dict) -> str:
     """What the raw save keeps: the parsed table as JSON; never the page's markup."""
-    return json.dumps({"url": URL, **parsed}, ensure_ascii=False, indent=1)
+    return json.dumps(P.deep_clean({"url": URL, **parsed}), ensure_ascii=False, indent=1)
 
 
 def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], dict]:
@@ -299,6 +307,16 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
             advice_text=(f"Shellfish harvest closure (Rhode Island DEM): {row['location']}, {row['status_text']}."
                          f"{reopen} DEM's table updated {parsed['updated']}."))
     listed_open = {key_of(r) for r in parsed["rows"] if r["kind"] == "open"}
+    listed_closed = {key_of(r) for r in parsed["rows"] if r["kind"] == "closed"}
+    for p in previous:
+        raw = p.get("raw") or {}
+        if p.get("status") == "advisory_active" and raw.get("area_key") not in listed_closed | listed_open \
+                and raw.get("area_key") not in {u.get("area_key") for u in unread} \
+                and raw.get("table_updated") == parsed["updated"]:
+            # an area gone from a table DEM has not republished is not a reopening: the read is not complete (Astra
+            # P1-1); a table with a new Updated date that no longer lists it, or a row listed OPEN, ends it
+            unread.append({"row": None, "location": raw.get("location"),
+                           "reason": "a closed area is missing from a table with the same Updated date"})
     lifted = held = kept = 0
     for p in previous:
         sid = p.get("source_record_id")
