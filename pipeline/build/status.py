@@ -838,12 +838,60 @@ def apply_water_aliases(waters: dict[str, dict], path: Path, moved: dict[str, st
     return problems
 
 
+# One water two states share, which openboatlaunch gives each state whole (one outline, a copy per state: Flaming
+# Gorge Reservoir in Wyoming and Utah), is cut at the state line by scripts/cut_lakes_to_state_waters.py --shared into
+# data/water-state-parts.json ({slug: {geometry, bbox, area_km2, whole_area_km2, other_parts, note, cut,
+# cut_from_geometry_hash}}): the record then has its own state's part as its inline outline (water_geometry), box and
+# area, and names the other states' records of the water in other_parts, so a state's advisory for the water colours
+# that state's part only (2026-11-16, owner). A hand file beside the extract, so a new extract never undoes it; keyed
+# by slug, so no other record changes.
+WATER_STATE_PARTS_FILE = "water-state-parts.json"
+
+
+def apply_state_parts(waters: dict[str, dict], path: Path) -> list[str]:
+    """Give each record data/water-state-parts.json names its own state's part (in place: the record is replaced by a
+    copy with that geometry, bbox and area_km2, other_parts, and the cut's note and whole area under state_part).
+    Returns the problems, as text: an unreadable file, a slug that is no record, a part without a geometry, or a part
+    cut from an outline openboatlaunch has since changed (the record's geometry_hash differs: it is still applied,
+    and the cut is to be run again). Never raises."""
+    name = f"data/{path.name}"
+    try:
+        d = read_json(path)
+    except Exception as e:                  # a half-written file must not stop the build
+        return [f"{name}: unreadable ({type(e).__name__}: {e})"[:300]]
+    if not d:
+        return []
+    if not isinstance(d, dict):
+        return [f"{name}: not an object of {{water slug: part}}"]
+    problems = []
+    for slug, p in sorted(d.items()):
+        w = waters.get(slug)
+        if w is None:
+            problems.append(f"{name}: {slug} is not a water record (its part is not applied)")
+            continue
+        if not isinstance(p, dict) or not isinstance(p.get("geometry"), dict) or not p.get("bbox"):
+            problems.append(f"{name}: {slug}: the part has no geometry or bbox (not applied)")
+            continue
+        if w.get("geometry_hash") and p.get("cut_from_geometry_hash") and \
+                w["geometry_hash"] != p["cut_from_geometry_hash"]:
+            problems.append(f"{name}: {slug}: openboatlaunch's outline changed since the cut (geometry_hash "
+                            f"{w['geometry_hash'][:12]}, cut from {str(p['cut_from_geometry_hash'])[:12]}): run "
+                            "scripts/cut_lakes_to_state_waters.py --shared again")
+        waters[slug] = {**w, "geometry": p["geometry"], "bbox": list(p["bbox"]),
+                        **({"area_km2": p["area_km2"]} if p.get("area_km2") is not None else {}),
+                        "other_parts": [x for x in p.get("other_parts") or [] if isinstance(x, str)],
+                        "state_part": {k: p[k] for k in ("note", "whole_area_km2", "cut_from_geometry_hash", "cut")
+                                       if k in p}}
+    return problems
+
+
 def load_waters(include_nhd: bool = True) -> dict[str, dict]:
     """openboatlaunch's water records (data/waters-ne.json, then any other data/waters-*.json),
     data/waters-extra.json (receiving waters with no openboatlaunch record, from OSM, same shape,
     geometry inline), data/waters-dc.json (DC's waters from NHD) and data/waters-nhd.json (receiving
     waters from NHDPlus, ingest/waters_from_nhd.py; include_nhd=False leaves it out). Records of these
-    carry `extra: true`; a slug already known keeps its first record. The hand aliases of
+    carry `extra: true`; a slug already known keeps its first record. A record data/water-state-parts.json names
+    takes its state's part of a water two states share (apply_state_parts). The hand aliases of
     data/water-aliases.json are merged into the records' aliases last (apply_water_aliases); the problems
     of that merge (a slug with no record) are left in ALIAS_PROBLEMS for build(), except for include_nhd=False,
     where the NHD records they may name are not loaded."""
@@ -889,7 +937,8 @@ def load_waters(include_nhd: bool = True) -> dict[str, dict]:
     moved = slug_aliases(waters)
     SLUG_ALIASES.clear()
     SLUG_ALIASES.update(moved)
-    problems = apply_water_aliases(waters, DATA_DIR / WATER_ALIASES_FILE, moved)
+    problems = apply_state_parts(waters, DATA_DIR / WATER_STATE_PARTS_FILE)
+    problems += apply_water_aliases(waters, DATA_DIR / WATER_ALIASES_FILE, moved)
     ALIAS_PROBLEMS[:] = problems if include_nhd else []
     return waters
 
