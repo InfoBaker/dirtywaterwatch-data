@@ -4,9 +4,12 @@ url: "https://dem.ri.gov/shellfish"
 homepage: "https://dem.ri.gov/shellfish"
 kind: "html"
 level: "state"
-# Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Official
-#   affected-area advisories that include sewage-triggered emergency closures; not collected
-#   yet.
+# Notes (research/ri, status used, verified fetched, checked 2026-11-16): Read by ingest.ri_dem_shellfish since
+#   2026-11-16 (register row ri-ridem-shellfish-closures, a feed): one shellfish_closure record per area DEM's table
+#   lists CLOSED, from the first read that lists it; the Updated date is the publication, the scheduled reopening
+#   is DEM's plan and never an end; each area placed by a point inside DEM's own Conditional Closure polygon
+#   (Shellfish Harvest Restrictions layer, June 2026), never colouring a whole water. Six areas closed on the
+#   runner's read of 2026-11-16 (table updated 11/7/2026, scheduled to reopen noon 11/14).
 # Access detail (research, quoted): HTML table Location / Status / Scheduled to Reopen with
 #   'Updated' date and rain totals (TF Green, Taunton, Westerly). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.
 # Can fill: source_status, valid_until (Scheduled to Reopen), source_updated_at, authority, official
@@ -17,15 +20,15 @@ level: "state"
 # History: none on page
 # Research notes: Rain triggers (DEM 2025-05-15): Lower Providence River and Greenwich Bay close 6
 #   days after 0.5-1.2 in. in 24 h, 7 days above 1.2 in.
-cadence: "Updated after each closure/reopening (last update 10/19/2026)."
+cadence: "Updated after each closure and reopening (table updated 11/7/2026 on 2026-11-16); read every run."
 license: "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\""
 attribution: "RIDEM Office of Water Resources"
 enabled: true
 role: "advisories"
-event_types: ["shellfish_closure (rain, CSO, SSO, HAB)"]
+event_types: ["shellfish_closure"]
 states: ["RI"]
 access: ["html", "phone", "email"]
 access_detail: "HTML table Location / Status / Scheduled to Reopen with 'Updated' date and rain totals (TF Green, Taunton, Westerly). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine."
 machine_readable: false
 legal_basis: "R.I. Gen. Laws § 20-8.1-3"
-checked: "2026-11-01"
+checked: "2026-11-16"
