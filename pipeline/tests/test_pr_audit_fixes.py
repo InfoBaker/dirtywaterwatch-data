@@ -82,3 +82,38 @@ def test_a_named_water_and_a_point_on_a_water_still_place(resolver):
     assert out["water_slugs"] == ["rio-coamo-pr"] and out["water_match"] == "name"
     out = resolver.resolve(r["PR0025976:57:1"])                             # no name; its own point is on Río Gurabo
     assert out["water_slugs"] == ["rio-gurabo-pr"] and out["water_match"] == "geometry"
+
+
+# ----------------------------------------------------------------- P1-1: the beach text says what the colour does
+
+def _red_until(rec, now):
+    from tests.test_status import TEST_RULES
+    ivs = S.event_intervals(rec, None, now, None, TEST_RULES)
+    return max(i["end"] for i in ivs if i["color"] == "red")
+
+
+def test_the_beach_text_says_what_the_colour_does():
+    from datetime import datetime, timedelta, timezone
+    from tests.test_pr_review_fixes import SANTA, TROP, post, recs_of
+    utc = timezone.utc
+    # the Sardinera case: listed on Nov. 6, left off on Nov. 13 -> shown until the Nov. 13 notice, not until Nov. 20
+    recs = recs_of([post(1, "2026-11-06T12:00:00", [TROP, SANTA]), post(2, "2026-11-13T12:00:00", [TROP])])[0]
+    assert _red_until(recs["RW-10:1"], datetime(2026, 11, 16, tzinfo=utc)) == datetime(2026, 11, 13, 12, tzinfo=utc)
+    # left off only 30 days later: no more than 14 days after the last notice that listed it
+    recs = recs_of([post(1, "2026-06-01T12:00:00", [TROP, SANTA]), post(2, "2026-07-01T12:00:00", [TROP])])[0]
+    assert _red_until(recs["RW-10:1"], datetime(2026, 11, 16, tzinfo=utc)) == \
+        datetime(2026, 6, 1, 12, tzinfo=utc) + timedelta(days=14)
+    # a beach DRNA's newest notice still lists is DRNA's current advisory: each read reconfirms it, however old the
+    # notice (so the text's 14-day limit is worded for a beach a later notice left off, not for every advisory)
+    recs = recs_of([post(1, "2026-10-27T12:00:00", [TROP])], at="2026-11-16T12:00:00Z")[0]
+    assert recs["RW-31:1"]["status"] == "advisory_active"
+    assert _red_until(recs["RW-31:1"], datetime(2026, 11, 16, 12, tzinfo=utc)) == datetime(2026, 11, 30, 12, tzinfo=utc)
+    # and the public text says exactly that, never the 14 days after the last listing it once promised
+    text = (ROOT / "research" / "pr" / "state-text.md").read_text()
+    basis = json.loads((ROOT / "data" / "rules.json").read_text())["red"]["by_state"]["PR"]["basis"]
+    assert ("the advisory is shown until that notice, for no more than 14 days after the last notice that listed it, "
+            "and its end is marked as first seen there, not as lifted") in text
+    assert ("the advisory is shown until that notice, its end marked as first seen there, and for no more than 14 days "
+            "after the last notice that listed it") in basis
+    for said in (text, basis):
+        assert "shown for 14 days after the last notice" not in said
