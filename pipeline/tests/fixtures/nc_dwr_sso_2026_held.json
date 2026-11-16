@@ -1,0 +1,59 @@
+[
+ {
+  "event_id": "nc-dwr-sso-2026:ce745040-f63b-43a3-a206-b0a9889a1442",
+  "source_id": "nc-dwr-sso-2026",
+  "source_record_id": "ce745040-f63b-43a3-a206-b0a9889a1442",
+  "event_type": "sso",
+  "status": "ended",
+  "started_at": "2026-02-14T04:00:00-05:00",
+  "ended_at": "2026-02-14T14:30:00-05:00",
+  "volume_gal": 50,
+  "discharger_name": "Lexington Collection System",
+  "reported_at": "2026-02-15T09:04:39-05:00",
+  "fetched_at": "2026-11-05T01:08:23Z",
+  "duplicate_of": null,
+  "raw": {
+   "dwr_incident_number": "202600200",
+   "_layer": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0",
+   "_first_seen_at": "2026-11-05T01:08:23Z"
+  }
+ },
+ {
+  "event_id": "nc-dwr-sso-2026:429ded96-86ec-4026-830a-c31c75a17d65",
+  "source_id": "nc-dwr-sso-2026",
+  "source_record_id": "429ded96-86ec-4026-830a-c31c75a17d65",
+  "event_type": "sso",
+  "status": "ended",
+  "started_at": "2026-02-13T11:17:00-05:00",
+  "ended_at": "2026-02-13T13:18:00-05:00",
+  "volume_gal": 6000,
+  "discharger_name": "Greensboro Collection System",
+  "reported_at": "2026-02-14T12:14:08-05:00",
+  "fetched_at": "2026-11-05T01:08:23Z",
+  "duplicate_of": null,
+  "raw": {
+   "dwr_incident_number": "202600196",
+   "_layer": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0",
+   "_first_seen_at": "2026-11-05T01:08:23Z"
+  }
+ },
+ {
+  "event_id": "nc-dwr-sso-2026:90833c07-486b-4991-b75e-d0609a862fcd",
+  "source_id": "nc-dwr-sso-2026",
+  "source_record_id": "90833c07-486b-4991-b75e-d0609a862fcd",
+  "event_type": "sso",
+  "status": "ongoing",
+  "started_at": "2026-10-23T16:30:00-04:00",
+  "ended_at": null,
+  "volume_gal": 50000,
+  "discharger_name": "Rockingham County Collection System",
+  "reported_at": "2026-10-23T17:58:00-04:00",
+  "fetched_at": "2026-11-05T01:08:23Z",
+  "duplicate_of": null,
+  "raw": {
+   "dwr_incident_number": "202699999",
+   "_layer": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0",
+   "_first_seen_at": "2026-11-05T01:08:23Z"
+  }
+ }
+]
