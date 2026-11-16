@@ -1443,7 +1443,11 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         point_only: bool = False, session=None) -> dict:
     now = now or datetime.now(UTC)
     prev = read_json(OUT, {}) or {}
-    outfalls = cso_outfalls()
+    from build import rain_sso
+    # the separate sewer operators of rules.rain_likely.separate_sewers, read at the points of their past rain-driven
+    # reports under "sso:<operator>" (build/rain_sso.py); none with its switch off
+    outfalls = cso_outfalls() + [o for o in rain_sso.live_points()
+                                 if o["state"] in radar_states() and o["state"] not in OUTSIDE_RADAR_GRID]
     points = group_points(outfalls)
     old_points = prev.get("points") or {}
     for k, p in points.items():                # keep the last readings until replaced

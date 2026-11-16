@@ -4901,6 +4901,27 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             by_water, by_reach = {}, {}
             rain_block = {**rain_block, "enabled": True, "error": f"{type(e).__name__}: {e}"[:300]}
             problems.append(f"rain_likely: not computed ({type(e).__name__}: {e})"[:300])
+        # the same caution for the separate sewer operators of rules.rain_likely.separate_sewers (build/rain_sso.py);
+        # with its switch off nothing here runs and the block is what it was
+        from build import rain_sso
+        if rain_sso.enabled(rules):
+            try:
+                s_water, s_reach, s_block = rain_sso.compute(rain, rules, events, now, h_start, waters, reaches,
+                                                             reach_waters, placements, rain.get("levels_sso"),
+                                                             rain.get("grades_sso"))
+                s_eps = s_block.pop("_episodes", {})
+                rain_block = {**rain_block, "separate_sewers": s_block,
+                              "episodes": {**(rain_block.get("episodes") or {}), **s_eps}}
+                by_water, by_reach = dict(by_water), dict(by_reach)
+                for slug, ivs in s_water.items():
+                    by_water[slug] = list(by_water.get(slug) or []) + ivs
+                for key, ivs in s_reach.items():
+                    by_reach[key] = list(by_reach.get(key) or []) + ivs
+                for slug in s_block.get("waters") or {}:
+                    if slug in waters:
+                        covered[slug].add(rain_mod.SOURCE_ID)
+            except Exception as e:  # noqa: BLE001
+                problems.append(f"rain_likely.separate_sewers: not computed ({type(e).__name__}: {e})"[:300])
         # the rainfall watch covers every CSO permittee's waters: the radar's, or New Jersey's shared site's
         for slug, w in (rain_block.get("waters") or {}).items():
             if slug in waters:
