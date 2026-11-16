@@ -528,5 +528,56 @@
     "verified": "search_only",
     "checked": "2026-11-03",
     "notes": ""
+    },
+  {
+    "id": "tx-dshs-shellfish-harvest-status",
+    "name": "Texas DSHS Status of Shellfish Harvesting Areas (status table)",
+    "jurisdiction": "TX",
+    "operator": "Texas Department of State Health Services, Seafood and Aquatic Life Group",
+    "operator_type": "state",
+    "role": "advisories",
+    "event_types": [
+      "shellfish_closure"
+    ],
+    "waters_covered": "Texas Gulf coast shellfish harvest areas TX 1 to TX 34 (by DSHS's code)",
+    "water_slugs": [],
+    "url": "https://www.dshs.texas.gov/seafood-aquatic-life-group/information-on-consumption-advisories-possession-bans-rescinded-orders-seafood-aquatic-life/shellfish-harvest-map",
+    "access": [
+      "html",
+      "pdf"
+    ],
+    "access_detail": "HTML table Harvest Area / Public Harvest Area Status / Private Oyster Area Status / Reason for Status under a dated heading; a dated PDF copy",
+    "machine_readable": false,
+    "sample_record": "TX 14 | Closed | Closed | TPWD Action, Rainfall (table dated 11.16.2026)",
+    "fields": [
+      "Harvest Area",
+      "Public Harvest Area Status",
+      "Private Oyster Area Status",
+      "Reason for Status"
+    ],
+    "fills_event_fields": [
+      "waterbody_text (DSHS's area code)",
+      "status",
+      "published_at (the table's date)",
+      "advice_text (DSHS's reason)"
+    ],
+    "cannot_fill": [
+      "closure start (the table gives none: the first read is used)",
+      "reopening date",
+      "the area's outline (DSHS's layer does not carry the table's codes)",
+      "volume",
+      "outfall"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "dated each time it changes",
+    "history": "none on the page (a dated PDF of each table)",
+    "license": "none stated",
+    "legal_basis": null,
+    "status": "used",
+    "status_reason": "Read by the tx-dshs-shellfish-harvest-status ingester (ingest.tx_dshs_shellfish): one shellfish_closure record per area listed Closed with rainfall, runoff, flooding, a spill, wastewater or sewage among DSHS's reasons, from the first read that lists it; closures for TPWD action alone (seasons, resource management) are left out, and an unknown reason is unread. Every closure is listed with DSHS's code and placed on no water. Table dated 11.16.2026: 28 areas, 4 closed with rainfall among the reasons (TX 14, TX 19, TX 20, TX 21), 16 closed for TPWD action only, 8 open.",
+    "verified": "fetched",
+    "checked": "2026-11-16",
+    "notes": "DSHS's harvest-area layer (Texas Shellfish Harvest Area Viewer, 2026-27) names its 287 polygons by bay and class; tying the table's TX codes to them needs DSHS's legal descriptions (PDF)."
   }
 ]
