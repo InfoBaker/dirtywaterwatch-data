@@ -1,0 +1,877 @@
+{
+ "state": "NV",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 28,
+ "waters": [
+  {
+   "slug": "adams-mcgill-reservoir-nv",
+   "name": "Adams-McGill Reservoir",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [],
+   "bbox": [
+    -115.121332,
+    38.363128,
+    -115.087774,
+    38.406382
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.807,
+   "launches": [
+    "adams-mcgill-reservoir-boat-launch-nv",
+    "adams-mcgill-reservoir-boat-launch-nv-2"
+   ],
+   "water_id": "adams-mcgill-reservoir-nv",
+   "gnis_id": null,
+   "geometry_hash": "dfb76c5780a8141ed0bc8ec6e484b25b313692c07f81ac152efe82f95c3d6943",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bass-pond-nv",
+   "name": "Bass Pond",
+   "kind": "lake",
+   "state": "NV",
+   "towns": [
+    "Yerington"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bass-pond-boat-launch-nv"
+   ],
+   "water_id": "bass-pond-nv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boulder-harbor-nv",
+   "name": "Boulder Harbor",
+   "kind": "bay",
+   "state": "NV",
+   "towns": [
+    "Boulder City"
+   ],
+   "bbox": null,
+   "wikidata": "Q49374080",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "boulder-harbor-boat-launch-nv"
+   ],
+   "water_id": "boulder-harbor-nv",
+   "gnis_id": "854375",
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "carson-lake-nv",
+   "name": "Carson Lake",
+   "kind": "lake",
+   "state": "NV",
+   "towns": [
+    "Fallon"
+   ],
+   "bbox": [
+    -118.7532,
+    39.290273,
+    -118.656555,
+    39.356802
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 31.139,
+   "launches": [
+    "carson-lake-boat-launch-near-fallon-nv",
+    "carson-lake-boat-launch-near-fallon-nv-2"
+   ],
+   "water_id": "carson-lake-nv",
+   "gnis_id": null,
+   "geometry_hash": "1c5721a66a92f4506d24a66df2e30a73d24aa18767f40fb8e5b5e460d895149e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cold-springs-reservoir-nv",
+   "name": "Cold Springs Reservoir",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [],
+   "bbox": [
+    -115.154577,
+    38.341227,
+    -115.135834,
+    38.352077
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.863,
+   "launches": [
+    "cold-springs-reservoir-boat-launch-nv"
+   ],
+   "water_id": "cold-springs-reservoir-nv",
+   "gnis_id": null,
+   "geometry_hash": "02928ec432d5da036bf38c4bfe6f75a4455f7d8465503cc588614d64cf02fce2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "comins-lake-nv",
+   "name": "Comins Lake",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [
+    "Ely"
+   ],
+   "bbox": [
+    -114.816146,
+    39.141914,
+    -114.799152,
+    39.166137
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.201,
+   "launches": [
+    "comins-lake-boat-launch-near-ely-nv",
+    "comins-lake-boat-launch-near-ely-nv-2"
+   ],
+   "water_id": "comins-lake-nv",
+   "gnis_id": null,
+   "geometry_hash": "7309c2f9a4130d10b821a5c7f8435bd6fafca615faf288019bbe3c41c616ce8e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-reservoir-nv",
+   "name": "Crystal Reservoir",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [],
+   "bbox": [
+    -116.329713,
+    36.403297,
+    -116.319298,
+    36.412666
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.38,
+   "launches": [
+    "crystal-reservoir-boat-launch-nv"
+   ],
+   "water_id": "crystal-reservoir-nv",
+   "gnis_id": null,
+   "geometry_hash": "e3a51099609c76036d39b67b22a5b8f42d51ecef8f3202429cfdd377812f17b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dacey-reservoir-nv",
+   "name": "Dacey Reservoir",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [],
+   "bbox": [
+    -115.1226,
+    38.388785,
+    -115.113223,
+    38.411546
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.766,
+   "launches": [
+    "dacey-reservoir-boat-launch-nv"
+   ],
+   "water_id": "dacey-reservoir-nv",
+   "gnis_id": null,
+   "geometry_hash": "6b77d1bdbb56923bd6f40f22b3923df10f4d1d65030872f49472df7191f6d964",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dufurrena-pond-no-20-nv",
+   "name": "Dufurrena Pond No. 20",
+   "kind": "pond",
+   "state": "NV",
+   "towns": [],
+   "bbox": [
+    -119.023618,
+    41.866912,
+    -119.017438,
+    41.871047
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.13,
+   "launches": [
+    "pond-20-boat-ramp-nv"
+   ],
+   "water_id": "dufurrena-pond-no-20-nv",
+   "gnis_id": null,
+   "geometry_hash": "ce8b3ebc2b5b99a16fc0de0a94e48ef8f894c56c16f1b4c9bd7ca08b1f2067e1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-fork-carson-river-nv",
+   "name": "East Fork Carson River",
+   "kind": "river",
+   "state": "NV",
+   "towns": [
+    "Ruhenstroth"
+   ],
+   "bbox": [
+    -119.823883,
+    38.757656,
+    -119.689196,
+    38.996811
+   ],
+   "wikidata": "Q27986808",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "carson-river-takeout-nv"
+   ],
+   "water_id": "east-fork-carson-river-nv",
+   "gnis_id": "259721",
+   "geometry_hash": "6dd65a689c378403c729b86a3a33f4b80db8dbe73854fa884882c0fdfea0407c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "echo-wash-nv",
+   "name": "Echo Wash",
+   "kind": "stream",
+   "state": "NV",
+   "towns": [
+    "Echo Bay"
+   ],
+   "bbox": [
+    -114.580288,
+    36.281855,
+    -114.389092,
+    36.309449
+   ],
+   "wikidata": "Q49901143",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "echo-bay-boat-launch-nv"
+   ],
+   "water_id": "echo-wash-nv",
+   "gnis_id": "847321",
+   "geometry_hash": "db17d2162f31e35cdbb94b20caf542031368d956a398696f76cb10b57dd8f11b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "government-wash-nv",
+   "name": "Government Wash",
+   "kind": "stream",
+   "state": "NV",
+   "towns": [
+    "Henderson"
+   ],
+   "bbox": [
+    -114.8553,
+    36.115552,
+    -114.790752,
+    36.247242
+   ],
+   "wikidata": "Q49919519",
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "government-wash-nv",
+   "gnis_id": "840735",
+   "geometry_hash": "66724f9a70d29e9297fada3a44c61b0d2e2e6dae040c033883a14f6349960f7b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "government-wash-boat-launch-nv"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "haymeadow-reservoir-nv",
+   "name": "Haymeadow Reservoir",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [],
+   "bbox": [
+    -115.170702,
+    38.325157,
+    -115.157377,
+    38.334587
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.49,
+   "launches": [
+    "haymeadow-reservoir-boat-launch-nv"
+   ],
+   "water_id": "haymeadow-reservoir-nv",
+   "gnis_id": null,
+   "geometry_hash": "01aebe8331852131806c11f4efa24c65e0a2de25753cdf93c21f1c1d46483291",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hinkson-slough-nv",
+   "name": "Hinkson Slough",
+   "kind": "river",
+   "state": "NV",
+   "towns": [
+    "Yerington"
+   ],
+   "bbox": [
+    -119.115305,
+    39.076305,
+    -119.114136,
+    39.077112
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hinkson-slough-boat-launch-nv"
+   ],
+   "water_id": "hinkson-slough-nv",
+   "gnis_id": "841011",
+   "geometry_hash": "b2ac7a2022c2846d8ceaa965d277408d190d699e0584c6f8857c29cd01d5ac04",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lahontan-reservoir-nv",
+   "name": "Lahontan Reservoir",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [
+    "Fernley",
+    "Silver Springs"
+   ],
+   "bbox": [
+    -119.207498,
+    39.330179,
+    -119.045135,
+    39.46328
+   ],
+   "wikidata": "Q613253",
+   "charted": false,
+   "area_km2": 35.754,
+   "launches": [
+    "churchill-beach-boat-launch-nv",
+    "lahontan-reservoir-boat-launch-nv"
+   ],
+   "water_id": "lahontan-reservoir-nv",
+   "gnis_id": "858052",
+   "geometry_hash": "b0323077af4c387292a52777e97897126f0728df769cf5746c539c910468d2fb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "marina-boat-ramp-nv"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mead-nv",
+   "name": "Lake Mead",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [
+    "Boulder City",
+    "Callville Bay",
+    "Echo Bay"
+   ],
+   "bbox": [
+    -114.839482,
+    36.000973,
+    -114.098814,
+    36.42515
+   ],
+   "wikidata": "Q654515",
+   "charted": false,
+   "area_km2": 309.936,
+   "launches": [
+    "callville-bay-boat-launch-nv",
+    "hemenway-harbor-boat-launch-nv"
+   ],
+   "water_id": "lake-mead-az",
+   "gnis_id": "7862",
+   "geometry_hash": "a16dd3be792bb13f949b027ddc9f367e481eda8ce01b1b087bf90abc840eae29",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mohave-nv",
+   "name": "Lake Mohave",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [
+    "Boulder City",
+    "Cottonwood Cove"
+   ],
+   "bbox": [
+    -114.744546,
+    35.195723,
+    -114.560313,
+    36.015387
+   ],
+   "wikidata": "Q1801012",
+   "charted": false,
+   "area_km2": 104.857,
+   "launches": [
+    "cottonwood-cove-boat-launch-nv",
+    "hoover-dam-lower-portal-road-hand-launch-nv",
+    "nelson-s-landing-nv"
+   ],
+   "water_id": "lake-mohave-az",
+   "gnis_id": null,
+   "geometry_hash": "34ea04acd875fb966e31a08df884bd3bed88f59b46b0b6c3199e4ae1d016c3f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-tahoe-nv",
+   "name": "Lake Tahoe",
+   "kind": "lake",
+   "state": "NV",
+   "towns": [
+    "Incline Village",
+    "Stateline",
+    "Zephyr Cove"
+   ],
+   "bbox": [
+    -120.163938,
+    38.928173,
+    -119.926058,
+    39.249013
+   ],
+   "wikidata": "Q169962",
+   "charted": true,
+   "area_km2": 481.992,
+   "launches": [
+    "cave-rock-boat-launch-nv",
+    "dreyfus-beach-nv",
+    "lake-tahoe-boat-launch-near-incline-village-nv-4",
+    "nevada-beach-day-use-campground-nv",
+    "round-hill-pines-beach-marina-nv",
+    "lake-tahoe-boat-launch-near-incline-village-nv",
+    "zephyr-cove-resort-nv"
+   ],
+   "water_id": "lake-tahoe-ca",
+   "gnis_id": "1654975",
+   "geometry_hash": "dfcee6f5e8d3f2bb9f9cd22053520003d6b234665107c132e5e924577955d82c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-tahoe-boat-launch-near-incline-village-nv-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "las-vegas-wash-nv",
+   "name": "Las Vegas Wash",
+   "kind": "stream",
+   "state": "NV",
+   "towns": [
+    "Henderson"
+   ],
+   "bbox": [
+    -115.274401,
+    36.080692,
+    -114.756576,
+    36.280236
+   ],
+   "wikidata": "Q6492667",
+   "charted": false,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "las-vegas-wash-nv",
+   "gnis_id": "845313",
+   "geometry_hash": "0e3697a8e57660164fe73580667ba76896473f045e874ddc28d7fec5e6deaf68",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "las-vegas-wash-boat-launch-near-henderson-nv"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "nesbitt-lake-nv",
+   "name": "Nesbitt Lake",
+   "kind": "lake",
+   "state": "NV",
+   "towns": [
+    "Crystal Springs"
+   ],
+   "bbox": [
+    -115.230985,
+    37.563371,
+    -115.218449,
+    37.583522
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.929,
+   "launches": [
+    "nesbitt-lake-boat-launch-near-crystal-springs-nv",
+    "nesbitt-lake-boat-launch-near-crystal-springs-nv-2"
+   ],
+   "water_id": "nesbitt-lake-nv",
+   "gnis_id": null,
+   "geometry_hash": "3c2148c47d50a1d5431cabbd6cb8b1fea196f78f80e63046fa9af351777fd733",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-pond-nv",
+   "name": "North Pond",
+   "kind": "lake",
+   "state": "NV",
+   "towns": [
+    "Yerington"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-pond-boat-launch-nv"
+   ],
+   "water_id": "north-pond-nv",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ruby-lake-nv",
+   "name": "Ruby Lake",
+   "kind": "lake",
+   "state": "NV",
+   "towns": [
+    "Shanty Town"
+   ],
+   "bbox": [
+    -115.517238,
+    40.082573,
+    -115.4868,
+    40.138641
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.013,
+   "launches": [
+    "narciss-boat-landing-nv",
+    "ruby-lake-main-boat-ramp-nv"
+   ],
+   "water_id": "ruby-lake-nv",
+   "gnis_id": null,
+   "geometry_hash": "7269f30165a801ea7a29ba03911a17ebff4fa1bc0972fb868d547fde4658cea2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rye-patch-reservoir-nv",
+   "name": "Rye Patch Reservoir",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [
+    "Humboldt River Ranch",
+    "Imlay"
+   ],
+   "bbox": [
+    -118.354602,
+    40.469114,
+    -118.21759,
+    40.710089
+   ],
+   "wikidata": "Q7384983",
+   "charted": false,
+   "area_km2": 48.748,
+   "launches": [
+    "rye-patch-reservoir-boat-launch-near-humboldt-river-ranch-nv"
+   ],
+   "water_id": "rye-patch-reservoir-nv",
+   "gnis_id": "858164",
+   "geometry_hash": "6f54f918a7212ea2a54eb4f46d52af0696287c61a87c5616e84200092d5990e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-humboldt-river-nv",
+   "name": "South Fork Humboldt River",
+   "kind": "river",
+   "state": "NV",
+   "towns": [
+    "Elko"
+   ],
+   "bbox": [
+    -115.889241,
+    40.68312,
+    -115.785088,
+    40.772621
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-fork-reservoir-elko-nv",
+    "south-fork-reservoir-nv",
+    "south-fork-reservoir-nv-2"
+   ],
+   "water_id": "south-fork-humboldt-river-nv",
+   "gnis_id": null,
+   "geometry_hash": "5bf73a10d5ea2348129fc55c80764dc1a1ca4cd1036d0b1033275692dde527d3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-reservoir-nv",
+   "name": "South Fork Reservoir",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [
+    "Elko",
+    "South Fork"
+   ],
+   "bbox": [
+    -115.785177,
+    40.651678,
+    -115.737543,
+    40.687061
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.216,
+   "launches": [
+    "hamilton-boat-launch-nv"
+   ],
+   "water_id": "south-fork-reservoir-nv",
+   "gnis_id": null,
+   "geometry_hash": "f2121bc5b49c7dcd44990de2b76d2dddb0c32c02c012995568709169b176c926",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "walker-lake-nv",
+   "name": "Walker Lake",
+   "kind": "lake",
+   "state": "NV",
+   "towns": [
+    "Walker Lake"
+   ],
+   "bbox": [
+    -118.771752,
+    38.613404,
+    -118.670512,
+    38.777925
+   ],
+   "wikidata": "Q175554",
+   "charted": false,
+   "area_km2": 113.908,
+   "launches": [
+    "sportsmans-beach-campground-nv"
+   ],
+   "water_id": "walker-lake-nv",
+   "gnis_id": "844615",
+   "geometry_hash": "cf65a1cefd411c17dfb9e631ed0ff0eaa30afc56708be19a48caed489acb4aa3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "washoe-lake-nv",
+   "name": "Washoe Lake",
+   "kind": "lake",
+   "state": "NV",
+   "towns": [
+    "Carson City",
+    "New Washoe City"
+   ],
+   "bbox": [
+    -119.820432,
+    39.231089,
+    -119.769189,
+    39.320753
+   ],
+   "wikidata": "Q2654727",
+   "charted": false,
+   "area_km2": 21.245,
+   "launches": [
+    "south-beach-boat-launch-nv",
+    "washoe-lake-boat-launch-nv"
+   ],
+   "water_id": "washoe-lake-nv",
+   "gnis_id": "862678",
+   "geometry_hash": "7e13790d85d800a56f3467cc6c56dde35827511cfeb8e215cd8f2168a692d6fa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wilson-reservoir-nv",
+   "name": "Wilson Reservoir",
+   "kind": "reservoir",
+   "state": "NV",
+   "towns": [],
+   "bbox": [
+    -116.348155,
+    41.662104,
+    -116.310943,
+    41.686969
+   ],
+   "wikidata": "Q21197345",
+   "charted": false,
+   "area_km2": 3.776,
+   "launches": [
+    "wilson-reservoir-boat-launch-nv"
+   ],
+   "water_id": "wilson-reservoir-nv",
+   "gnis_id": "858251",
+   "geometry_hash": "0eadb05fe4454291bc97089ccc05e8d694c4463516250c1cf4f38d29b9766cea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}

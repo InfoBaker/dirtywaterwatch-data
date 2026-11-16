@@ -132,7 +132,8 @@ def test_notices_build_the_reviewed_records_when_every_quote_is_on_the_page():
     assert spill["discharger_id"] == "co-co0026646" and spill["raw"]["county"] == "Pueblo"
     adv = ids["john-martin-water-contact-advisory-2026-08-31"]
     assert adv["status"] == "advisory_active" and adv["ended_at"] is None
-    assert adv["parent_event_id"] == spill["event_id"] and "_last_seen_in_source" not in adv["raw"]
+    assert adv["raw"]["related_event_id"] == spill["event_id"] and not adv.get("parent_event_id") \
+        and "_last_seen_in_source" not in adv["raw"]
     assert ids["blue-mesa-iola-basin-2026-08-13"]["event_type"] == "hab_advisory"
     assert meta["pages_read"] == 3
 
@@ -515,3 +516,122 @@ def test_verify_an_unreadable_row_is_not_a_withdrawal(tmp_path, monkeypatch):
     rc, again = _run_sheet(tmp_path, monkeypatch, sheet(), "2026-11-16T23:30:00Z")
     em3 = next(r for r in again["records"] if r["source_record_id"] == "eleven-mile-reservoir:2026-08-03")
     assert rc == 0 and em3["ended_at"] is None and em3["raw"]["_last_seen_in_source"] == "2026-11-16T23:30:00Z"
+
+
+# ---------------------------------------------------------------- go-live audit 2026-11-16 (fixes 1 to 4)
+
+NOW_AUDIT = "2026-11-16T03:00:00Z"
+AUDIT_ROWS = ("Navajo Lake,No bloom reported,4/1/2026,\n"
+              "Navajo Lake,Caution,9/9/2026,\"bloom present, not producing toxins at this time\"\n")
+
+
+def _co_waters():
+    """Colorado's own water records (data/waters-*.json with data/water-aliases.json merged), as the status build
+    reads them."""
+    from build import status as S
+    return {k: w for k, w in S.load_waters().items() if w.get("state") == "CO"}
+
+
+def _visitor_status(tmp_path, recs, waters):
+    """The status build with CO live over these records only: what the map shows."""
+    import copy
+    from datetime import datetime
+    from build import status as S
+    ev_dir = tmp_path / "events"
+    ev_dir.mkdir(exist_ok=True)
+    by_src = {}
+    for r in recs:
+        by_src.setdefault(r["source_id"], []).append(r)
+    for sid, rs in by_src.items():
+        (ev_dir / f"{sid}.json").write_text(json.dumps(
+            {"source_id": sid, "ok": True, "last_ok_at": NOW_AUDIT, "meta": {}, "records": rs}))
+    rules = copy.deepcopy(S.load_rules())
+    rules["live_states"] = sorted(set(rules["live_states"]) | {"CO"})
+    now = datetime.fromisoformat(NOW_AUDIT.replace("Z", "+00:00"))
+    st, _ = S.build(now=now, write=False, events_dir=ev_dir, waters=waters, outfalls=[], registry={}, reaches={},
+                    flows=({}, {}), rules=rules, placement_cache=False)
+    return st
+
+
+@pytest.mark.parametrize("name,ext", [
+    ("Navajo Lake", "named_water"), ("Eleven Mile Reservoir", "named_water"), ("Harvey Gap", "named_water"),
+    ("North Delaney Butte Lake", "named_water"), ("Upper Brown Lake", "named_water"),
+    ("Blue Lake/Adobe Creek Reservoir", "named_water"),
+    ("Blue Heron Lake, St. Vrain State Park", "named_water"), ("Turtle Pond, Chatfield State Park", "named_water"),
+    ("Jumbo Reservoir (Julesburg)", "named_water"),
+    # a part of a water or a place beside one never colours a whole water
+    ("Midwestern Pond, East", "part_of_water"), ("Chatfield Dog Park Pond - East", "part_of_water"),
+    ("Chatfield Dog Park", "part_of_water"), ("Ken Mitchell Park", "part_of_water"),
+    ("Navajo Lake, Sims Mesa swim beach", "part_of_water"), ("Example Reservoir (north arm)", "part_of_water"),
+    ("Example Reservoir, Example Cove", "part_of_water"), ("Example Lake, somewhere unknown", "part_of_water")])
+def test_audit_a_sheet_row_names_its_whole_water_or_a_part_of_one(name, ext):
+    assert A.extent(name) == ext
+
+
+def test_audit_every_sheet_advisory_carries_its_extent():
+    recs, _ = A.build(sheet() + AUDIT_ROWS, T0, [])
+    assert recs and all(r["raw"]["advisory_extent"] in ("named_water", "part_of_water") for r in recs)
+    assert by_water(recs)["Navajo Lake"]["raw"]["advisory_extent"] == "named_water"
+
+
+def test_audit_navajo_lakes_caution_colours_the_large_lake_a_visitor_sees(tmp_path):
+    from build import status as S
+    waters = _co_waters()
+    assert waters["navajo-lake-co"]["area_km2"] > S.SMALL_WATER_KM2      # over the size limit for a whole water
+    recs, _ = A.build(sheet() + AUDIT_ROWS, NOW_AUDIT, [])
+    nav = [r for r in recs if r["waterbody_text"] == "Navajo Lake"]
+    st = _visitor_status(tmp_path, nav, waters)
+    assert st["waters"]["navajo-lake-co"]["status"] == "red"
+    assert nav[0]["event_id"] in st["placements"] and st["placements"][nav[0]["event_id"]]["water_slugs"] == \
+        ["navajo-lake-co"]
+
+
+def test_audit_a_row_for_part_of_a_large_lake_never_colours_it(tmp_path):
+    waters = _co_waters()
+    rows = ("\"Navajo Lake, Sims Mesa swim beach\",No bloom reported,4/1/2026,\n"
+            "\"Navajo Lake, Sims Mesa swim beach\",Caution,9/9/2026,bloom present\n")
+    recs, _ = A.build(sheet() + rows, NOW_AUDIT, [])
+    part = [r for r in recs if r["raw"]["sheet_name"].startswith("Navajo Lake,")]
+    assert part and part[0]["raw"]["advisory_extent"] == "part_of_water"
+    st = _visitor_status(tmp_path, part, waters)
+    assert st["waters"].get("navajo-lake-co", {}).get("status", "grey") != "red"
+
+
+def test_audit_eleven_mile_reservoir_places_on_its_water_and_shows(tmp_path):
+    waters = _co_waters()
+    assert "Eleven Mile Reservoir" in (waters["elevenmile-canyon-reservoir-co"].get("aliases") or [])
+    assert "Blue Heron Lake" in (waters["blue-heron-reservoir-co"].get("aliases") or [])
+    recs, _ = A.build(sheet(), NOW_AUDIT, [])
+    w = by_water(recs)
+    em, bh = w["Eleven Mile Reservoir"], w["Blue Heron Lake"]
+    st = _visitor_status(tmp_path, [em, bh], waters)
+    assert st["placements"][em["event_id"]]["water_slugs"] == ["elevenmile-canyon-reservoir-co"]
+    assert st["waters"]["elevenmile-canyon-reservoir-co"]["status"] == "red"
+    assert st["placements"][bh["event_id"]]["water_slugs"] == ["blue-heron-reservoir-co"]
+    assert st["waters"]["blue-heron-reservoir-co"]["status"] == "grey"            # lifted June 25: history only
+    doc = json.loads((ROOT / "research" / "co" / "receiving-waters-missing.json").read_text())
+    assert {r["name"] for r in doc["rows"]} == {"Jackson Reservoir", "Windsor Lake"}
+
+
+def test_audit_the_pueblo_spill_and_the_john_martin_advisory_each_colour_from_their_own_source(tmp_path):
+    from datetime import datetime, timedelta, timezone
+    from build import status as S
+    recs, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter(), save=False)
+    ids = {r["source_record_id"]: r for r in recs}
+    spill, adv = ids["pueblo-arkansas-river-2026-08-26"], ids["john-martin-water-contact-advisory-2026-08-31"]
+    assert adv["raw"]["related_event_id"] == spill["event_id"] and not adv.get("parent_event_id")
+    waters = _co_waters()
+    st = _visitor_status(tmp_path, [spill, adv], waters)
+    assert "superseded" not in st["placements"][spill["event_id"]]
+    # the spill: red for its own days (Mountain time), then our caution, nothing invented; nothing today
+    ivs = S.event_intervals(spill, "CO", datetime(2026, 11, 16, tzinfo=timezone.utc))
+    red = [iv for iv in ivs if iv["color"] == "red"]
+    yel = [iv for iv in ivs if iv["color"] == "yellow"]
+    assert red and min(iv["start"] for iv in red) == datetime(2026, 8, 26, 6, tzinfo=timezone.utc)
+    assert max(iv["end"] for iv in red) == datetime(2026, 8, 28, 6, tzinfo=timezone.utc)
+    assert yel and max(iv["end"] for iv in yel) <= datetime(2026, 8, 28, 6, tzinfo=timezone.utc) + timedelta(hours=96)
+    slugs = st["placements"][spill["event_id"]]["water_slugs"]
+    assert slugs and all(st["waters"][s]["status"] == "grey" for s in slugs)          # past: history, not today
+    # the advisory: its own start, aged 14 days, and no note claiming a 30-day assumed end
+    pa = st["placements"][adv["event_id"]]
+    assert "end_assumed_at" not in pa and "30 days" not in (pa.get("note") or "")
