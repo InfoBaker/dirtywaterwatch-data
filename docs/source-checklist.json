@@ -59397,6 +59397,78 @@
   "area": "oh"
  },
  {
+  "id": "oh-fremont-cso-notices",
+  "name": "Fremont CSO notifications (PDF)",
+  "jurisdiction": "OH",
+  "operator": "City of Fremont",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.fremontohio.org/departments/water-reclamation-center/",
+  "access": [
+   "pdf",
+   "html"
+  ],
+  "access_detail": "One PDF per overflow notice linked from the Water Reclamation Center page: receiving water, location, start, end and approximate volume.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "40 CFR 122.38 (Lake Erie basin)",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/oh_fremont_cso.py from 2026-11-16: 9 overflows from 10 notices of 2026 (2026-03-11 to 2026-08-09) on the Sandusky River; one notice is a scanned image with no text.",
+  "verified": "fetched",
+  "checked": "2026-11-16",
+  "notes": "Staff contacts on the notices are not read.",
+  "area": "oh"
+ },
+ {
+  "id": "oh-avon-lake-cso-notices",
+  "name": "Avon Lake Regional Water CSO notices, Form B (PDF)",
+  "jurisdiction": "OH",
+  "operator": "Avon Lake Regional Water",
+  "operator_type": "utility",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://avonlakewater.org/about-us/about-the-avon-lake-water-reclamation-facility/",
+  "access": [
+   "pdf",
+   "html"
+  ],
+  "access_detail": "One Form B (supplemental notice) PDF per overflow since 2019: start, end, outfall, impacted areas and estimated volume.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "40 CFR 122.38 (Lake Erie basin)",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/oh_avon_lake_cso.py from 2026-11-16: 26 overflows from 46 forms (2020 to 2026-08-22) at outfall 17, Lake Erie; 20 forms give a start time without a date and make no record.",
+  "verified": "fetched",
+  "checked": "2026-11-16",
+  "notes": "Staff contacts on the notices are not read.",
+  "area": "oh"
+ },
+ {
   "id": "oh-clyde-cso-notification",
   "name": "Clyde CSO Notification System",
   "jurisdiction": "OH",

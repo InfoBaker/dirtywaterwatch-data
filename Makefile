@@ -120,7 +120,8 @@
 #                  since 2002, day precision), oh_bowling_green_cso (Bowling Green's CSO events table), oh_clyde_cso
 #                  (Clyde's yearly CSO report tables), oh_lakewood_cso (Lakewood's CSO alerts cards, snapshotted hourly
 #                  into dated records; no backfill), oh_willard_cso (Willard's initial and supplemental CSO notices, one
-#                  record per overflow; no backfill), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
+#                  record per overflow; no backfill), oh_fremont_cso and oh_avon_lake_cso (Fremont's and Avon Lake's
+#                  notice PDFs through oh_cso_pdf_notices: new PDFs only; no backfill), oh_epa_spills (Ohio EPA's spills layer, the human sewage, sewage
 #                  sludge and waste water rows: supplementary, day precision, no end) and oh_odh_beachguard (ODH BeachGuard's current bacteria and algal-bloom advisories)
 #                  Minnesota: mn_mces_spill_notices (the Metropolitan Council's spill pages: the day it responded, its signs as
 #                  its window), the generic ArcGIS block mn-wlssd-overflows (Resource Renew's overflow points; ingest/mn_transforms.py)

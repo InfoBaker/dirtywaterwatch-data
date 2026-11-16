@@ -1,0 +1,27 @@
+id: "oh-fremont-cso-notices"
+name: "Fremont CSO notifications (PDF)"
+url: "https://www.fremontohio.org/departments/water-reclamation-center/"
+homepage: "https://www.fremontohio.org/departments/water-reclamation-center/"
+kind: "pdf"
+level: "municipal"
+# Feed row: written by pipeline/ingest/oh_fremont_cso.py (data/build/events/oh-fremont-cso-notices.json), with
+#   pipeline/ingest/oh_cso_pdf_notices.py (index links, PDF text, state).
+# Built 2026-11-16: hourly; the index's notice PDFs (ten in 2026, all supplemental notices, 2026-03-11 to 2026-08-09;
+#   one, July 21, a scanned image with no text). One cso record per overflow keyed on its start; start and end to the
+#   minute in Eastern time; approximate volume in million gallons; Sandusky River as named; permit OH0025291, no
+#   outfall or point (the notices name none). An end before its start (2026-04-22) is not used. Only new PDFs are
+#   fetched; every notice read is kept in data/build/oh-fremont-cso-state.json.
+# Columns: receiving water, location, start, end, volume; the point-of-contact line (staff e-mail and telephones) and
+#   the comments are never read; the PDFs are never saved.
+cadence: "1 hour"
+license: "none stated"
+attribution: "City of Fremont"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["pdf", "html"]
+access_detail: "One PDF per notice under wp-content/uploads, linked from the Water Reclamation Center page; text layer read with pypdf (layout mode)."
+machine_readable: false
+legal_basis: "40 CFR 122.38 (Lake Erie basin)"
+checked: "2026-11-16"
