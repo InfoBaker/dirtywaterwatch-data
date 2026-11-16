@@ -604,6 +604,14 @@ else:
         out["states"] = sorted(NE)
         out["live_states_left_out"] = sorted(REGIONAL_STATES)
         out["waters_read"] = dict(sorted(waters_in.items()))
+if NATIONAL and os.path.basename(out_path) == "outfalls-us.json":
+    # cited corrections to EPA's rows (a sign-flipped longitude): written again on every rebuild, before the ties step
+    import importlib.util
+    _spec = importlib.util.spec_from_file_location(
+        "outfall_point_corrections", os.path.join(os.path.dirname(os.path.abspath(__file__)), "outfall_point_corrections.py"))
+    _opc = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_opc)
+    _opc.for_builder("outfalls-us.json", out["outfalls"])
 tmp = out_path + ".tmp"
 with open(tmp, "w") as fh:
     json.dump(out, fh, indent=1)

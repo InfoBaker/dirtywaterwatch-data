@@ -2142,8 +2142,8 @@
    "reach_gnis_name": null,
    "nhdplus_id": null,
    "lat": 38.644,
-   "lon": 83.834,
-   "coords_from": null,
+   "lon": -83.834,
+   "coords_from": "permitted_feature",
    "has_limits": true,
    "limit_set_names": [
     "TRANSFER POINT",
@@ -2164,7 +2164,6 @@
    "country": "US",
    "source": "fed-echo-npdes-discharge-points",
    "fetched_at": "2026-11-03T21:02:45Z",
-   "echo_coords_from": "permitted_feature",
    "kind_note": "A KPDES permit for a sewer collection system (KYP...; EPA permit type SIN): the system sends its sewage to another operator's treatment plant, which EPA gives as the receiving water ('Downing Drive'); no outfall to a water, so the row is kept off the map and out of the outfall count. Its reports, if any, are the collection system's.",
    "checked": "2026-11-08",
    "supersedes": "data/outfalls-plants-us.json KYP000081 001",
@@ -2175,7 +2174,16 @@
    "match": "none",
    "water_match": "none: NHD builder: no NHD flowline or waterbody of that name in the state",
    "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name in the state",
-   "water_matched_by": "ingest.outfall_waters (2026-11-08)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-08)",
+   "epa_lat": 38.644,
+   "epa_lon": 83.834,
+   "coords_note": "EPA gives this feature's longitude as +83.834, a point in Asia; the Western Mason County Sanitation District is in Mason County, Kentucky, and ECHO places the permit's facility at 38.64569, -83.76106. The point used is EPA's with the longitude's sign reversed, 6.3 km west of that facility point, in western Mason County; EPA's value is kept in epa_lat/epa_lon",
+   "coords_source": {
+    "name": "EPA ECHO ICIS-NPDES discharge points (NPDES_PERM_FEATURE_COORDS, read 2026-11-03), permit KYP000081 feature 001: 38.644, 83.834; ECHO detailed facility report service, facility 38.64569, -83.76106 (not in ECHO's NPDES outfall layer (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/oeca__echo__npdes_facilities_outfalls/FeatureServer/0): a state-issued permit)",
+    "url": "https://echo.epa.gov/detailed-facility-report?fid=110040608955",
+    "read_at": "2026-11-15",
+    "by": "scripts/outfall_point_corrections.py (2026-11-15)"
+   }
   },
   {
    "npdes_permit": "KYP000082",
