@@ -711,7 +711,7 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], permits: 
 # ---------------------------------------------------------------- fetching
 
 def query(sess: requests.Session, flt: dict, top: int = TOP, read_timeout: float = 300, *, url: str = LIST_URL,
-          fields: list[str] = FIELDS) -> list[dict]:
+          fields: list[str] = FIELDS, strict: bool = False) -> list[dict]:
     """One nCORE list request. url and fields: another state's nCORE list (South Carolina's, ingest/sc_des_overflows.py)
     with its own safe fields; Michigan's defaults are unchanged."""
     params = {"queryParams": json.dumps({"filter": [flt], "top": top}, separators=(",", ":")),
@@ -725,6 +725,9 @@ def query(sess: requests.Session, flt: dict, top: int = TOP, read_timeout: float
     # with hasResultsRemaining false on 2026-11-04, so a full answer is read as cut short too
     if d.get("hasResultsRemaining") or len(d["queryResults"]) >= top:
         raise OverflowError(f"{top} rows or more for {flt}")
+    if strict and not all(isinstance(x, dict) for x in d["queryResults"]):
+        # South Carolina's feed (strict): a row that is not a record makes the answer not the list's
+        raise RuntimeError("unexpected answer: a row that is not a record")
     return [{k: x.get(k) for k in fields if k in x} for x in d["queryResults"] if isinstance(x, dict)]
 
 

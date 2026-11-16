@@ -24,10 +24,12 @@ What is requested (privacy)
   Only FIELDS are requested (responseFields) and kept. Never requested (WITHHELD): responsiblePartyName (often the
   person who filed: about 100 of 312 distinct values name no body), locationDescription (street addresses),
   actionTaken, actionToBeTaken, deqActions, agencyComments, socRequirements, and `id` (renumbered on every answer).
-  siteName passes mi_egle_mienviro.party_name (a person's name becomes "[name removed]"); the place (featureNumber,
+  siteName passes mi_egle_mienviro.party_name (a person's name becomes "[name removed]") and loses house numbers; the place (featureNumber,
   featureDescription), the receiving water, the land reached, the type and the cause (dischargeDescription, the
   operator's words) pass mi_egle_mienviro.free_text (e-mails, telephones, owners' and residents' names and house
-  numbers cut: "across from <number> <street>" keeps the street without the number); common.event strips personal
+  numbers cut: "across from <number> <street>" keeps the street without the number; "Mr. <name>" and "<given> <surname>
+  reported" cut; a value that is only a person's name becomes "[name removed]"); a time field that is not a time is
+  kept as "[not a time]", never as its text, and no error repeats a field's value; common.event strips personal
   keys and build.redact runs over the records last. The raw page saved is the scrubbed rows.
 
 Record rules
@@ -43,7 +45,8 @@ Record rules
     read (2029-08-17 for an event that ended 2026-08-17), when it repeats the receipt time to the minute (7 rows on
     2026-11-16, each with an end before it: the form's receipt time, not the event's), or when it is after the receipt
     (6 rows: a discharge is reported after it starts).
-  - Ends: an end before the start, or after the read (an end the operator expected, not one that has happened), is
+  - Ends: an end that repeats the start to the minute (judged on the start as published, used or not) is not
+    confirmed; an end before the start, or after the read (an end the operator expected, not one that has happened), is
     not used (raw._end_not_used). A completed
     report whose end repeats its start to the minute (110 rows on 2026-11-16, 97 of them with a volume) has its end
     not confirmed, as on Michigan's list from the same form: status ended with no end (the status build then gives the
@@ -71,13 +74,17 @@ Record rules
   - Volume: dischargeVolumeNumeric in gallons (volume_gal; a negative value is not used); volume_text the list's own
     words, spaces collapsed; estimate_flag unknown.
   - Cause: dischargeDescription as given (scrubbed), raw.dischargeDescription.
-  - Copies: two submissions with the same permit, place, receiving water, start, end and volume are one report filed
-    twice (seen 2025-05-12: SSS000716, two pairs a minute apart); the one DES received last stands and the others are
-    duplicate_of it (raw._duplicate_basis), recomputed every run. Nothing less than all of these links two reports.
+  - Copies: two submissions with the same permit, place, receiving water, county, start, end and volume are one report
+    filed twice (seen 2025-05-12: SSS000716, two pairs a minute apart); the one DES received last stands and the others
+    are duplicate_of it (raw._duplicate_basis), recomputed every run. Nothing less than all of these links two reports,
+    and blanks are no evidence: a copy must give a start, an end, a volume, a county and a place or a water, none of
+    them removed text. Three pairs on the 2026-11-16 list share all but the end (refiled minutes apart with another
+    end); they are kept apart.
   - EPA's copy: EPA's overflow tables (ingest/echo_sewer_overflow_events.py, run before this module) held no South
     Carolina row on 2026-11-16. Should one appear, an EPA record of an SC permit whose start (EPA's local time, naive) is
     the same minute as exactly one record here of the same permit, and the only EPA record of that permit and minute,
-    becomes duplicate_of this list's record (written back into EPA's events file), as Georgia's EPD list does with
+    and that names no other water and no other state (raw._sc_des_not_paired says why otherwise), becomes
+    duplicate_of this list's record (written back into EPA's events file), as Georgia's EPD list does with
     EPA's Georgia rows (ingest/ga_epd_spills.py); no end or other field is taken from it. Anything less stays apart.
   - The City of Florence's notices (ingest/sc_florence_sso.py) give no start, so they are not linked to these reports.
 
@@ -85,8 +92,10 @@ Reading and failure
   Each run reads the whole list in one request (about 1.3 MB uncompressed, 5 to 10 s on 2026-11-16); an answer of TOP
   rows is cut short and the list is then read a year of starts at a time (with the starts typed before 2022 and after
   next year), halved by query_window while a year holds TOP or more. A failed request, an answer that is not the list's
-  JSON, a row without the list's key fields, no rows at all, or fewer rows than MIN_SHARE of the last complete read
-  (meta.completeness) is a failed read: ok false, nothing saved, every record kept as it was, exit 1. A report missing
+  JSON, a row that is not a record or lacks any requested field, a report answered twice, no rows at all, or more than
+  MAX_DROP rows (or MAX_DROP_SHARE) fewer than the last complete read (meta.completeness) is a failed read: ok false,
+  nothing saved, every record kept as it was, exit 1. A row whose start, end or receipt is not a time keeps its earlier
+  record as it was; the others are updated, the run's health is false (meta.unread) and exit 1 until it reads. A report missing
   from a complete healthy read keeps its record (reports are records, not standing listings), with
   raw._missing_from_list_since. Records kept from earlier runs are rebuilt from their raw fields under the current
   rules.
@@ -116,7 +125,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, NAME_REMOVED, ROOT, event, now_iso, path_notes_to_meta,
-                    read_json, save_raw, scrub_text, write_events, write_json)
+                    read_json, save_raw, scrub_text, strip_house_numbers, write_events, write_json)
 from ingest import mi_egle_mienviro as mi
 
 SOURCE_ID = "sc-des-overflow-list"
@@ -141,7 +150,8 @@ WITHHELD_NOTE = ("The list's responsible party (often the person who filed), its
 REQUIRED = ("submissionId", "sectionNumber", "eventStartDate", "eventEndDate", "submissionReceivedDate",
             "permitNumber", "reportStatusId")
 TOP = 5000
-MIN_SHARE = 0.9                 # a read holding fewer rows than this share of the last complete read is cut short
+MAX_DROP = 5                    # a read holding more than this many rows (or MAX_DROP_SHARE) fewer than the last
+MAX_DROP_SHARE = 0.01           # complete read is cut short; a report DES removes is kept here as a past report
 LIST_FIRST_YEAR = 2022          # the list's first start on 2026-11-16: 2022-09-26
 EASTERN = ZoneInfo("America/New_York")
 TZ_NOTE = ("Times as DES's list gives them, with their UTC offsets: Eastern time (each offset is the one "
@@ -199,11 +209,18 @@ def scrubbed_row(r: dict) -> dict:
     """The fields as the record and the raw save keep them (module docstring, privacy)."""
     out = safe_row(r)
     if out.get("siteName") is not None:
-        out["siteName"] = mi.party_name(out["siteName"])
+        site = mi.party_name(out["siteName"])
+        out["siteName"] = mi.cut_address_numbers(strip_house_numbers(site)) if site else site
     for k in ("featureNumber", "featureDescription", "receivingWater", "landImpacted", "dischargeType",
               "dischargeDescription"):
         if isinstance(out.get(k), str):
-            out[k] = cut_person_cues(mi.free_text(out[k])) or None
+            v = cut_person_cues(mi.free_text(out[k])) or None
+            # a value that is only a person's name (a filer who typed a name in the water or place field)
+            out[k] = NAME_REMOVED if v and v != NAME_REMOVED and mi._person(v) else v
+    for k in TIME_FIELDS:
+        # a time field holds a time or nothing: any other text is not kept (it could hold a name or an address)
+        if out.get(k) is not None and parse_ts(out[k]) is None:
+            out[k] = UNREADABLE
     for k in ("permitNumber", "countyDescription", "dischargeVolume", "dischargeQuality"):
         if isinstance(out.get(k), str):
             out[k] = scrub_text(clean(out[k])) or None
@@ -211,6 +228,8 @@ def scrubbed_row(r: dict) -> dict:
 
 
 row_key = mi.row_key
+UNREADABLE = "[not a time]"
+TIME_FIELDS = ("eventStartDate", "eventEndDate", "submissionReceivedDate")
 
 
 def permit_index(rows: list[dict] | None = None) -> dict[str, str]:
@@ -286,9 +305,11 @@ def _record(a, base, raw, fetched_at, permits, water, named) -> dict:
     start, end = parse_ts(a.get("eventStartDate")), parse_ts(a.get("eventEndDate"))
     received = parse_ts(a.get("submissionReceivedDate"))
     if a.get("eventStartDate") and start is None:
-        problems.append(f"start not read: {a.get('eventStartDate')!r}")
+        problems.append("the start the list gives could not be read as a time")
     if a.get("eventEndDate") and end is None:
-        problems.append(f"end not read: {a.get('eventEndDate')!r}")
+        problems.append("the end the list gives could not be read as a time")
+    same_minute = (start is not None and end is not None
+                   and start.replace(second=0, microsecond=0) == end.replace(second=0, microsecond=0))
     if start is not None and start > fetched + timedelta(days=1):
         raw["_start_not_used"] = (f"the start as published ({iso(start)}) lies after the list was read, most likely "
                                   "a typing error in the year; the report is kept with no start")
@@ -310,13 +331,16 @@ def _record(a, base, raw, fetched_at, permits, water, named) -> dict:
         raw["_end_not_used"] = f"the end as published ({iso(end)}) is before the start"
         end = None
     complete = clean(a.get("reportStatusId")).upper() == "COMPLETE"
+    if same_minute:
+        # the form repeats the start as the end (to the minute, judged on the start as published, used or not)
+        raw["_end_equals_start"] = True
+        raw["_end_not_used"] = (f"the report gives the same minute for the start and the end of the discharge "
+                                f"({iso(end)}), the time the form fills in until the report is completed; the end is "
+                                "not confirmed")
+        end = None
     if complete:
-        if end is not None and start is not None and end == start:
+        if same_minute:
             status, ended_at = "ended", None
-            raw["_end_equals_start"] = True
-            raw["_end_not_used"] = (f"the completed report gives the same time for the start and the end of the "
-                                    f"discharge ({iso(end)}), the time the form fills in until the report is "
-                                    "completed; the end is not confirmed")
             raw["_end_basis"] = "the completed report gives no end distinct from its start"
         elif end is not None:
             status, ended_at = "ended", iso(end)
@@ -379,13 +403,14 @@ def link_copies(records: list[dict]) -> int:
         raw = r.setdefault("raw", {})
         if raw.pop("_duplicate_basis", None) is not None:
             r["duplicate_of"] = None
-        if not r.get("started_at"):
+        if not r.get("started_at") or not clean(raw.get("eventEndDate")) or r.get("volume_gal") is None:
             continue
         who = r.get("npdes_permit") or raw.get("_state_permit")
-        if not who:
+        place = [clean(raw.get(f)).lower() for f in ("featureNumber", "featureDescription", "receivingWater")]
+        # shared blanks or removed text are no evidence: a copy names a place or a water, in the same county
+        if not who or not any(place) or any("removed]" in x for x in place) or not clean(raw.get("county")):
             continue
-        k = (who, clean(raw.get("featureNumber")).lower(), clean(raw.get("featureDescription")).lower(),
-             clean(raw.get("receivingWater")).lower(), r["started_at"], r.get("ended_at"),
+        k = (who, *place, clean(raw.get("county")).lower(), r["started_at"], r.get("ended_at"),
              clean(raw.get("eventEndDate"))[:16], r.get("volume_gal"))
         groups[k].append(r)
     n = 0
@@ -404,9 +429,12 @@ def link_copies(records: list[dict]) -> int:
 
 
 def build(rows: list[dict], fetched_at: str, prev_records: list[dict], permits: dict | None = None,
-          complete_read: bool = True, left_state: dict | None = None) -> tuple[list[dict], dict]:
+          complete_read: bool = True, left_state: dict | None = None,
+          unread: set | None = None) -> tuple[list[dict], dict]:
     """rows: the list's rows read this run. Earlier records not read again are rebuilt from their raw fields and kept
-    (raw._missing_from_list_since when this was a complete read)."""
+    (raw._missing_from_list_since when this was a complete read). unread: keys of rows read with a time that could
+    not be read: an earlier record of such a report is kept as it was (lessons from reviews, 5)."""
+    unread = unread or set()
     permits = permit_index() if permits is None else permits
     left_state = left_state if left_state is not None else {}
     prev = {r["event_id"]: r for r in prev_records if isinstance(r, dict) and r.get("event_id")}
@@ -419,6 +447,9 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], permits: 
         if eid in seen:
             continue
         seen.add(eid)
+        if key in unread and eid in prev:
+            records.append(prev[eid])
+            continue
         rec = build_record(row, fetched_at, prev.get(eid), permits)
         if isinstance(rec, tuple):
             left_state[key] = rec[1]
@@ -470,6 +501,22 @@ def _naive_minute(v) -> str | None:
     return s[:16] if re.match(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", s) else None
 
 
+def _water_key(v) -> str:
+    return re.sub(r"[^a-z0-9 ]+", " ", clean(v).lower()).strip()
+
+
+def epa_conflict(r: dict, e: dict) -> str | None:
+    """Why EPA's record e cannot be this list's r: another state, or another named water."""
+    raw = e.get("raw") if isinstance(e.get("raw"), dict) else {}
+    st = clean(raw.get("state")).upper()[:2]
+    if st and st != "SC":
+        return f"EPA's record counts in {st}, not South Carolina"
+    mine, theirs = _water_key(r.get("waterbody_text")), _water_key(e.get("waterbody_text"))
+    if mine and theirs and mine not in theirs and theirs not in mine:
+        return f"EPA's record names another water ({e.get('waterbody_text')!r})"
+    return None
+
+
 def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
     """An EPA record of an SC permit whose start minute (EPA's local time) is that of exactly one record here of the
     same permit, and is the only such EPA record, becomes duplicate_of it. Marks of earlier runs are cleared first."""
@@ -478,6 +525,8 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
         if ((e.get("raw") or {}).get("_duplicate_basis") or "").startswith(EPA_BASIS):
             e["duplicate_of"] = None
             e["raw"].pop("_duplicate_basis", None)
+            n["cleared"] += 1
+        if (e.get("raw") or {}).pop("_sc_des_not_paired", None) is not None:
             n["cleared"] += 1
     mine = defaultdict(list)
     for r in records:
@@ -493,7 +542,10 @@ def mark_epa_duplicates(records: list[dict], epa: list[dict]) -> Counter:
         theirs[(p, m)].append(e)
     for k, es in theirs.items():
         rs = mine.get(k) or []
-        if len(es) == 1 and len(rs) == 1:
+        if len(es) == 1 and len(rs) == 1 and (why := epa_conflict(rs[0], es[0])):
+            es[0].setdefault("raw", {})["_sc_des_not_paired"] = why
+            n["contradicts"] += 1
+        elif len(es) == 1 and len(rs) == 1:
             es[0]["duplicate_of"] = rs[0]["event_id"]
             es[0].setdefault("raw", {})["_duplicate_basis"] = (f"{EPA_BASIS} {rs[0]['event_id']} (the same permit "
                                                                "and start minute)")
@@ -518,7 +570,7 @@ def year_spans(today: date) -> list[tuple[str, date | None, date | None]]:
 def fetch_all(sess, today: date) -> tuple[list[dict], str]:
     """Every row of the list: one request, or a year of starts at a time when one answer is cut short. Returns
     (rows, how)."""
-    kw = {"url": LIST_URL, "fields": FIELDS}
+    kw = {"url": LIST_URL, "fields": FIELDS, "strict": True}
     try:
         return mi.query(sess, {}, top=TOP, **kw), "one request"
     except OverflowError:
@@ -537,13 +589,17 @@ def check_read(rows: list[dict], last_complete: int | None) -> None:
     """A read that is not the whole list raises BadRead (module docstring, Reading and failure)."""
     if not rows:
         raise BadRead("the list answered no rows at all: read as an outage")
-    bad = [i for i, r in enumerate(rows) if any(k not in r for k in REQUIRED) or not row_key(r)]
+    bad = [i for i, r in enumerate(rows) if not isinstance(r, dict) or any(k not in r for k in FIELDS)
+           or not row_key(r)]
     if bad:
-        raise BadRead(f"{len(bad)} of {len(rows)} rows lack the list's key fields ({', '.join(REQUIRED)}): the "
-                      "answer's shape changed")
-    if last_complete and len(rows) < MIN_SHARE * last_complete:
-        raise BadRead(f"the list answered {len(rows)} rows, fewer than {int(MIN_SHARE * 100)} percent of the "
-                      f"{last_complete} of the last complete read: read as cut short")
+        raise BadRead(f"{len(bad)} of {len(rows)} rows lack some of the list's fields: the answer's shape changed")
+    keys = Counter(row_key(r) for r in rows)
+    twice = [k for k, n in keys.items() if n > 1]
+    if twice:
+        raise BadRead(f"{len(twice)} reports answered twice in one read: the answer is not the list")
+    if last_complete and len(rows) < last_complete - max(MAX_DROP, MAX_DROP_SHARE * last_complete):
+        raise BadRead(f"the list answered {len(rows)} rows against {last_complete} in the last complete read: read "
+                      "as cut short")
 
 
 def session() -> requests.Session:
@@ -601,8 +657,9 @@ def main(argv=None) -> int:
             raw_path = str(save_raw(SOURCE_ID, json.dumps(doc, ensure_ascii=False), "json").relative_to(ROOT))
             state.update(sha256=sha, raw_path=raw_path, saved_at=fetched_at)
     left_state = state.setdefault("left_out", {})
+    unread = {row_key(r) for r in scrubbed if any(r.get(k) == UNREADABLE for k in TIME_FIELDS)}
     records, stats = build(scrubbed, fetched_at, prev, permit_index(), complete_read=not args.file,
-                           left_state=left_state)
+                           left_state=left_state, unread=unread)
     records = redact.redact_events(records)
     epa_doc = read_json(EPA_EVENTS, {}) or {}
     epa = epa_doc.get("records") or []
@@ -623,17 +680,20 @@ def main(argv=None) -> int:
             "left_out": dict(Counter(left_state.values())),
             "left_out_note": ("Reports on the list that are not sewage records (spills of biosolids or sludge onto "
                               "land) or that DES marks withdrawn are counted here, not shown."),
-            "completeness": {"rows_this_read": len(rows), "min_share_of_last_complete_read": MIN_SHARE},
+            "completeness": {"rows_this_read": len(rows), "max_drop": [MAX_DROP, MAX_DROP_SHARE]},
             "epa_pairing": dict(pairing), "backfill": state.get("backfill")}
     path_notes_to_meta(records, meta)
-    path = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta)
+    unread_error = (f"{len(unread)} report(s) on the list give a start, end or receipt that is not a time; an earlier "
+                    "record of each is kept as it was and read again next run" if unread else None)
+    meta["unread"] = sorted(unread) or None
+    path = write_events(SOURCE_ID, records, ok=not unread, error=unread_error, meta=meta, partial=bool(unread))
     if sum(pairing.values()):       # EPA's file is written back only when it holds a South Carolina record
         epa_doc["meta"] = {**(epa_doc.get("meta") or {}), "sc_des_pairing": {"at": fetched_at, **dict(pairing)}}
         write_json(EPA_EVENTS, epa_doc)
     print(f"{SOURCE_ID}: {stats['rows_read']} rows read ({how}, {took} s), {stats['kept_from_earlier_runs']} kept; "
           f"status {stats['by_status']}; operator row {stats['with_operator_row']}; copies {stats['copies']}; "
           f"EPA {dict(pairing)} -> {path}")
-    return 0
+    return 1 if unread else 0
 
 
 if __name__ == "__main__":
