@@ -33,10 +33,11 @@ Record rules
     raw.county; the status build's county-aware name placement). Any other water (Virginia Lake, Mountain View Pond,
     South Meadows Community Pond on 2026-11-16) is listed with the place the Office gives (raw.place) and placed on no
     water (raw._placement "listed_only"): a name is never guessed onto another county's or state's namesake.
-  - One water, one listing: a whole-water advisory that the state parks' feed (nv-state-parks-hab) also carries for
-    the same water, active and read within PARKS_FRESH_H, at the same or a higher level, is that record's duplicate
-    (duplicate_of its event id): the map shows and cites the parks' record. Where this list's level is higher, or the
-    parks no longer list the water, this record shows itself. Part-of-water records are never linked.
+  - One water, one listing (coordinator, 2026-11-16): where the state parks' feed (nv-state-parks-hab) carries the
+    same whole water, active and read within PARKS_FRESH_H, this record (the Office's stated date) is the one shown:
+    raw._shown_over names the parks' record, which the status build marks as this one's duplicate while both are
+    active (status.shown_over_links); raw.also_cited and the authority name both publishers; the level shown is the
+    stricter of the two (raw.level_basis, raw.office_level). Part-of-water records are never linked.
   - A bad read changes nothing: a failed request, a page missing either heading or its closing tag (truncated), a
     block count that does not match, or an active section with no water block and no explicit empty marker ("There
     are currently no active HABs") writes ok=False and keeps the earlier records. One water block that cannot be read
@@ -334,21 +335,37 @@ def build(page: str, fetched: str, previous: list[dict], parks: list[dict] | Non
             raw["placement_note"] = LISTED_ONLY_NOTE
         if it.get("sentences_withheld"):
             raw["sentences_withheld"] = it["sentences_withheld"]
-        dup = None
+        # both feeds on one water (coordinator, 2026-11-16): this record, which carries the Office's stated date, is
+        # the one shown; the parks' record becomes its duplicate in the status build (status.shown_over_links), and
+        # both publishers are cited. The level shown is the stricter of the two, never the weaker.
+        authority, level_shown = AUTHORITY, it["level"]
         pk = in_parks.get(P.slug(it["water"])) if not part else None
-        if pk and rank((pk.get("raw") or {}).get("level")) >= rank(it["level"]):
-            dup = pk["event_id"]
-            raw["duplicate_basis"] = ("the state parks' feed lists the same water at the same or a higher level: the "
-                                      "map shows and cites the parks' record")
+        if pk:
+            plevel = (pk.get("raw") or {}).get("level")
+            raw["_shown_over"] = pk["event_id"]
+            raw["also_cited"] = {"source_id": PARKS_SOURCE, "authority": pk.get("authority"),
+                                 "source_url": pk.get("source_url"), "event_id": pk["event_id"], "level": plevel,
+                                 "started_at": pk.get("started_at"), "time_precision": pk.get("time_precision")}
+            authority = f"{AUTHORITY}; also listed by {pk.get('authority') or P.AUTHORITY}"
+            if rank(plevel) > rank(it["level"]):
+                level_shown = plevel
+                raw["office_level"] = it["level"]
+                raw["level"] = plevel
+                raw["level_basis"] = (f"the stricter of the two: the parks' page lists HAB {plevel}, the Office's list "
+                                      f"HAB {it['level']}")
+                raw.pop("code_undecoded", None)
+                raw.pop("_caution_label", None)
+            else:
+                raw["office_level"] = it["level"]
             duplicates += 1
         where = f" ({part}, {it['water']})" if part else ""
         records[srid] = event(
             source_id=SOURCE_ID, source_record_id=srid, event_type="hab_advisory", status="advisory_active",
             waterbody_text=it["water"], lat=None, lon=None, coord_source=None, coord_precision_m=None,
             started_at=prev["started_at"] if prev else it["start"], time_precision="day",
-            source_updated_at=it["level_date"], fetched_at=fetched, authority=AUTHORITY,
-            advice_text=f"HAB {it['level']} advisory (Nevada Office of State Epidemiology){where}: {it['text']}",
-            source_url=URL, raw=raw, duplicate_of=dup)
+            source_updated_at=it["level_date"], fetched_at=fetched, authority=authority,
+            advice_text=f"HAB {level_shown} advisory (Nevada Office of State Epidemiology){where}: {it['text']}",
+            source_url=URL, raw=raw)
     lifted = held = kept = 0
     for p in previous:
         sid = p.get("source_record_id")
@@ -382,7 +399,7 @@ def build(page: str, fetched: str, previous: list[dict], parks: list[dict] | Non
             "other_levels": sorted({it["level"] for it in items if it["level"] not in LEVELS}),
             "listed_only": sorted({it["water"] for it in items if it["water"] not in KNOWN}),
             "unread": unread, "opened": opened, "lifted_this_read": lifted, "held_unread": held,
-            "duplicates_of_parks": duplicates, "kept_from_previous": kept - lifted - held,
+            "shown_over_parks": duplicates, "kept_from_previous": kept - lifted - held,
             "advisory_active": sum(1 for r in out if r["status"] == "advisory_active"),
             "cadence": "page read every run; the Office updates it when an advisory changes, with no fixed schedule",
             "coverage": "Nevada statewide: every advisory the Office's active list states"}
@@ -415,8 +432,8 @@ def main(argv=None) -> int:
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {meta['on_page']} waters on the list, {meta['advisories_read']} advisories {meta['by_level']}, "
-          f"{len(recs)} records, {meta['advisory_active']} active, {meta['duplicates_of_parks']} shown by the parks' "
-          f"feed -> {path}")
+          f"{len(recs)} records, {meta['advisory_active']} active, {meta['shown_over_parks']} shown over the parks' "
+          f"records -> {path}")
     return 0
 
 

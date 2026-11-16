@@ -134,53 +134,83 @@ def test_the_listed_only_rule_is_keyed_on_its_value(nv_live):
 
 # ---- one water, one listing --------------------------------------------------------------------------------------
 
-def test_an_advisory_both_feeds_carry_is_shown_once_by_the_parks_record():
-    parks, _ = P.build(PARKS_PAGE, "2026-11-16T12:40:00Z", [])
-    recs, meta = O.build(PAGE, T1, [], parks)
-    by = recs_by(recs)
-    pk = {r["raw"]["water_key"]: r["event_id"] for r in parks}
-    for w in ("Lahontan Reservoir", "Rye Patch Reservoir", "Wild Horse Reservoir"):
-        assert by[(w, None)]["duplicate_of"] == pk[P.slug(w)], w
-        assert "the map shows and cites the parks' record" in by[(w, None)]["raw"]["duplicate_basis"]
-    assert meta["duplicates_of_parks"] == 3
-    assert all(r["duplicate_of"] is None for (w, part), r in by.items()
-               if w not in ("Lahontan Reservoir", "Rye Patch Reservoir", "Wild Horse Reservoir"))
-
-
-def test_a_higher_level_here_or_a_stale_parks_read_shows_this_record():
-    parks, _ = P.build(PARKS_PAGE, "2026-11-16T12:40:00Z", [])
-    lah_parks = next(r for r in parks if r["raw"]["water_key"] == "lahontan-reservoir")
-    lower = [dict(lah_parks, raw={**lah_parks["raw"], "level": "Watch"})]
-    assert recs_by(O.build(PAGE, T1, [], lower)[0])[("Lahontan Reservoir", None)]["duplicate_of"] is None
-    stale = [dict(lah_parks, raw={**lah_parks["raw"], "_last_seen_in_source": "2026-11-13T12:00:00Z"})]
-    assert recs_by(O.build(PAGE, T1, [], stale)[0])[("Lahontan Reservoir", None)]["duplicate_of"] is None
-    lifted = [dict(lah_parks, status="advisory_lifted")]
-    assert recs_by(O.build(PAGE, T1, [], lifted)[0])[("Lahontan Reservoir", None)]["duplicate_of"] is None
-
-
-def test_the_status_build_colours_whole_waters_never_for_a_part_and_drops_the_copy(nv_live, tmp_path):
+def _status(S, tmp_path, recs, parks, waters, name="b"):
     from datetime import UTC, datetime
+    d = tmp_path / name
+    d.mkdir()
+    (d / f"{O.SOURCE_ID}.json").write_text(json.dumps({"source_id": O.SOURCE_ID, "ok": True, "records": recs}))
+    (d / f"{P.SOURCE_ID}.json").write_text(json.dumps({"source_id": P.SOURCE_ID, "ok": True, "records": parks}))
+    st, _ = S.build(now=datetime(2026, 11, 16, 13, 0, tzinfo=UTC), events_dir=d, write=False, waters=waters,
+                    outfalls=[], placement_cache=False, reaches={}, flows=({}, {}), discharger_towns={},
+                    discharger_waters={})
+    return st
+
+
+WATERS = {"lake-mohave-nv": {**_lake("Lake Mohave", "lake-mohave-nv", -114.65, 35.45, 0.05), "kind": "reservoir"},
+          "walker-lake-nv": _lake("Walker Lake", "walker-lake-nv", -118.71, 38.7, 0.1),
+          "rye-patch-reservoir-nv": {**_lake("Rye Patch Reservoir", "rye-patch-reservoir-nv", -118.316, 40.59, 0.05),
+                                     "kind": "reservoir"}}
+
+
+def test_coordinator_2_both_feeds_show_once_with_the_offices_stated_date_and_both_publishers(nv_live, tmp_path):
+    """Coordinator decision 2026-11-16: where the Office and the parks both carry a water, the record with the stated
+    date (the Office's) is shown, the parks' record is its duplicate, and both publishers are cited."""
     S = nv_live
     parks, _ = P.build(PARKS_PAGE, "2026-11-16T12:40:00Z", [])
-    recs, _ = O.build(PAGE, T1, [], parks)
-    parts_only = [r for r in recs if r["raw"]["part"]]
-    waters = {"lake-mohave-nv": {**_lake("Lake Mohave", "lake-mohave-nv", -114.65, 35.45, 0.05), "kind": "reservoir"},
-              "walker-lake-nv": _lake("Walker Lake", "walker-lake-nv", -118.71, 38.7, 0.1)}
-    for name, rs in (("parts", parts_only), ("all", recs)):
-        d = tmp_path / name
-        d.mkdir()
-        (d / f"{O.SOURCE_ID}.json").write_text(json.dumps({"source_id": O.SOURCE_ID, "ok": True, "records": rs}))
-        (d / f"{P.SOURCE_ID}.json").write_text(json.dumps({"source_id": P.SOURCE_ID, "ok": True, "records": parks}))
-        st, _ = S.build(now=datetime(2026, 11, 16, 13, 0, tzinfo=UTC), events_dir=d, write=False, waters=waters,
-                        outfalls=[], placement_cache=False, reaches={}, flows=({}, {}), discharger_towns={},
-                        discharger_waters={})
-        mohave = st["waters"]["lake-mohave-nv"]
-        if name == "parts":
-            assert mohave["status"] != "red"           # a cove's advisory never colours the whole lake
-        else:
-            assert mohave["status"] == "red" and st["waters"]["walker-lake-nv"]["status"] == "red"
-            dups = st.get("duplicates") or {}
-            assert {k for k in dups if k.startswith(O.SOURCE_ID)} == {r["event_id"] for r in recs if r["duplicate_of"]}
+    recs, meta = O.build(PAGE, T1, [], parks)
+    rye = recs_by(recs)[("Rye Patch Reservoir", None)]
+    prye = next(r for r in parks if r["raw"]["water_key"] == "rye-patch-reservoir")
+    assert rye["duplicate_of"] is None and rye["raw"]["_shown_over"] == prye["event_id"]
+    assert rye["started_at"] == "2026-09-30" and rye["time_precision"] == "day"
+    assert "Nevada Office of State Epidemiology" in rye["authority"] and "Nevada Division of State Parks" in rye["authority"]
+    assert rye["raw"]["also_cited"]["source_url"] == P.URL and rye["raw"]["also_cited"]["source_id"] == P.SOURCE_ID
+    assert meta["shown_over_parks"] == 3
+    st = _status(S, tmp_path, recs, parks, WATERS)
+    dups = st.get("duplicates") or {}
+    assert dups.get(prye["event_id"]) == rye["event_id"] and rye["event_id"] not in dups      # shown once: the Office's
+    assert st["waters"]["rye-patch-reservoir-nv"]["status"] == "red"
+    # the parks' record lifted: the Office's record shows on its own, the parks' record is no one's duplicate
+    lifted = [dict(p, status="advisory_lifted") for p in parks]
+    dups = _status(S, tmp_path, recs, lifted, WATERS, "c").get("duplicates") or {}
+    assert prye["event_id"] not in dups and rye["event_id"] not in dups
+
+
+def test_coordinator_2_the_stricter_level_is_shown_never_the_weaker():
+    parks, _ = P.build(PARKS_PAGE, "2026-11-16T12:40:00Z", [])
+    stricter = [dict(p, raw={**p["raw"], "level": "Danger"}) if p["raw"]["water_key"] == "rye-patch-reservoir" else p
+                for p in parks]                                                   # invented: the parks say Danger
+    rye = recs_by(O.build(PAGE, T1, [], stricter)[0])[("Rye Patch Reservoir", None)]
+    assert rye["raw"]["level"] == "Danger" and rye["raw"]["office_level"] == "Watch"
+    assert rye["advice_text"].startswith("HAB Danger advisory") and "parks' page lists HAB Danger" in rye["raw"]["level_basis"]
+    lah = recs_by(O.build(PAGE, T1, [], parks)[0])[("Lahontan Reservoir", None)]     # both Warning
+    assert lah["raw"]["level"] == "Warning" and "level_basis" not in lah["raw"]
+    weaker = [dict(p, raw={**p["raw"], "level": "Watch"}) if p["raw"]["water_key"] == "lahontan-reservoir" else p
+              for p in parks]
+    lah = recs_by(O.build(PAGE, T1, [], weaker)[0])[("Lahontan Reservoir", None)]
+    assert lah["raw"]["level"] == "Warning"                                           # never the weaker
+    stale = [dict(p, raw={**p["raw"], "_last_seen_in_source": "2026-11-13T12:00:00Z"}) for p in parks]
+    assert "_shown_over" not in recs_by(O.build(PAGE, T1, [], stale)[0])[("Rye Patch Reservoir", None)]["raw"]
+
+
+def test_coordinator_1_a_record_of_this_feed_is_held_as_end_not_confirmed_in_an_outage(nv_live):
+    from datetime import timedelta
+    S = nv_live
+    recs, _ = O.build(PAGE, T1, [])
+    wl = recs_by(recs)[("Walker Lake", None)]
+    health = {"fetched_at": "2026-12-20T12:00:00Z", "ok": False, "last_ok_at": "2026-11-16T12:43:00Z",
+              "prev_ok_at": "2026-11-16T11:43:00Z"}
+    t = S.parse_time(T1) + timedelta(days=30)
+    c, ivs = S.status_at(S.event_intervals({**wl, "_feed_health": health}, "NV", t, None, S.load_rules()), t)
+    assert c == "unresolved" and ivs[0]["rule"] == "outage_unconfirmed"
+
+
+def test_the_status_build_colours_whole_waters_never_for_a_part(nv_live, tmp_path):
+    S = nv_live
+    recs, _ = O.build(PAGE, T1, [])
+    st = _status(S, tmp_path, [r for r in recs if r["raw"]["part"]], [], WATERS, "parts")
+    assert st["waters"]["lake-mohave-nv"]["status"] != "red"           # a cove's advisory never colours the whole lake
+    st = _status(S, tmp_path, recs, [], WATERS, "all")
+    assert st["waters"]["lake-mohave-nv"]["status"] == "red" and st["waters"]["walker-lake-nv"]["status"] == "red"
 
 
 # ---- a bad read changes nothing ----------------------------------------------------------------------------------
@@ -411,17 +441,9 @@ def test_review_p1_4_a_place_that_contradicts_the_known_water_is_never_tied():
     assert recs_by(O.build(ok, T1, [])[0])[("Rye Patch Reservoir", None)]["raw"]["_placement"] == "named_water_only"
 
 
-def test_review_p1_5_a_link_to_a_parks_record_no_longer_active_is_not_a_duplicate():
+def test_coordinator_2_the_shown_over_rule_is_keyed_on_this_source():
     from build import status as S
-    parks, _ = P.build(PARKS_PAGE, "2026-11-16T12:40:00Z", [])
-    recs, _ = O.build(PAGE, T1, [], parks)
-    dup = {r["event_id"]: r["duplicate_of"] for r in recs if r["duplicate_of"]}
-    assert len(dup) == 3
-    assert S.stale_links(recs + parks, dict(dup)) == dup                        # the parks records are active
-    lifted = [dict(p, status="advisory_lifted") if p["raw"]["water_key"] == "rye-patch-reservoir" else p for p in parks]
-    kept = S.stale_links(recs + lifted, dict(dup))
-    assert len(kept) == 2 and not any("rye-patch" in k for k in kept)
-    gone = [p for p in parks if p["raw"]["water_key"] != "lahontan-reservoir"]
-    assert len(S.stale_links(recs + gone, dict(dup))) == 2
-    other = {"x:1": "y:2"}                                                      # any other source's link is untouched
-    assert S.stale_links([{"event_id": "x:1", "source_id": "x"}], dict(other)) == other
+    a = {"event_id": "x:1", "source_id": "x", "status": "advisory_active", "time_precision": "day",
+         "raw": {"_shown_over": "y:1"}}
+    b = {"event_id": "y:1", "source_id": "y", "status": "advisory_active", "time_precision": "poll", "raw": {}}
+    assert S.shown_over_links([a, b], {"q:1": "r:1"}) == {"q:1": "r:1"}

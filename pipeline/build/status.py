@@ -1445,22 +1445,25 @@ def listed_only(ev: dict) -> bool:
     return raw.get("_placement") == "listed_only"
 
 
-# Nevada (Astra review 2026-11-16 P1-5): the Office of State Epidemiology's list marks an advisory the parks' feed also
-# carries as that record's duplicate when it reads the parks' file, an hour behind at most. The link holds only while
-# the parks' record is in this build and still advisory_active; otherwise the Office's record shows itself, so a
-# parks lift never greys an advisory the Office still lists. Keyed on the source; every other link is untouched.
-REVALIDATED_LINK_SOURCES = {"nv-ose-hab-reports"}
+# Nevada (coordinator, 2026-11-16; Astra review P1-5): where the Office of State Epidemiology's list and the state
+# parks' page carry one water, the Office's record (raw._shown_over names the parks' record) is shown, since it carries
+# the authority's stated date (time precision day) against the parks' first read (poll): the parks' record is marked
+# its duplicate, only while both are in this build and advisory_active; otherwise each shows on its own. The existing
+# duplicate rule chooses by an ingester's own link; this keyed rule chooses by which record carries a stated date.
+SHOWN_OVER_SOURCES = {"nv-ose-hab-reports"}
 
 
-def stale_links(events: list[dict], duplicates: dict) -> dict:
-    """duplicates without the links of REVALIDATED_LINK_SOURCES whose target is absent or no longer active."""
+def shown_over_links(events: list[dict], duplicates: dict) -> dict:
+    """duplicates plus {the other record: the shown one} for each live raw._shown_over link of SHOWN_OVER_SOURCES."""
     by_id = {e.get("event_id"): e for e in events}
-    out = {}
-    for eid, target in duplicates.items():
-        src = (by_id.get(eid) or {}).get("source_id")
-        if src in REVALIDATED_LINK_SOURCES and (by_id.get(target) or {}).get("status") != "advisory_active":
-            continue
-        out[eid] = target
+    out = dict(duplicates)
+    for ev in events:
+        raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+        other = by_id.get(raw.get("_shown_over"))
+        if (ev.get("source_id") in SHOWN_OVER_SOURCES and other is not None and ev.get("status") == "advisory_active"
+                and other.get("status") == "advisory_active" and ev.get("time_precision") == "day"
+                and other.get("time_precision") == "poll" and ev["event_id"] not in out):
+            out[other["event_id"]] = ev["event_id"]
     return out
 
 
@@ -4528,7 +4531,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     for ev in events:               # an ingester's own duplicate_of (CT annual sheet -> dashboard) wins
         if ev.get("duplicate_of") and ev["duplicate_of"] != ev["event_id"]:
             duplicates[ev["event_id"]] = ev["duplicate_of"]
-    duplicates = stale_links(events, duplicates)
+    duplicates = shown_over_links(events, duplicates)
     h_start = now - timedelta(days=HISTORY_DAYS)
     points = []
     latest_month = {}       # outfall -> (event, water slugs, monthly mark) of its latest month report
