@@ -2057,15 +2057,15 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "notices",
-   "note": "MDE newsroom (WordPress JSON). Voluntary; the few big events. https://news.maryland.gov/mde/ answered 403 to the project user agent on 2026-11-03. (research/md/report.md §2.5)",
-   "checked": "2026-11-03",
+   "note": "MDE newsroom (WordPress JSON). Voluntary; the few big events. https://news.maryland.gov/mde/ answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. (research/md/report.md §2.5)",
+   "checked": "2026-11-16",
    "noun": "News page",
    "sources": [
     "md-mde-press-releases"
    ],
-   "barrier": "bot_wall"
+   "barrier": "not_verified"
   },
   {
    "id": "md-mde-reported-sewer-overflows",

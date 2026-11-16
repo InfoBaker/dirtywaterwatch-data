@@ -1534,8 +1534,8 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "No response; no known data feed.",
+  "status": "watch",
+  "status_reason": "No response; no known data feed. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "fetched",
   "checked": "2026-11-02",
   "notes": ""

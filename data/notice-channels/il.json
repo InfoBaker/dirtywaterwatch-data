@@ -2730,7 +2730,7 @@
    "operator_id": null,
    "agency": "Lake County Health Department",
    "permit": null,
-   "checked": "2026-11-04",
+   "checked": "2026-11-16",
    "id": "il-lake-county-beaches",
    "name": "Lake County Health Department",
    "channel_kind": "local_health_page",
@@ -2739,13 +2739,13 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "status",
-   "note": "Lake County's beach monitoring and advisories page (https://www.lakecountyil.gov/2385/Beach-Monitoring-and-Advisories) answers 403 to the project user agent (2026-11-04); its advisories also reach IDPH's BeachGuard, which the feed reads. Voluntary. (research/il/report.md §2.5)",
+   "note": "Lake County's beach monitoring and advisories page (https://www.lakecountyil.gov/2385/Beach-Monitoring-and-Advisories); its advisories also reach IDPH's BeachGuard, which the feed reads. Voluntary. It answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. (research/il/report.md §2.5)",
    "sources": [
     "il-lake-county-beaches"
    ],
-   "barrier": "bot_wall"
+   "barrier": "not_verified"
   },
   {
    "state": "IL",
@@ -3842,7 +3842,7 @@
    "operator_id": null,
    "agency": "Metropolitan Water Reclamation District of Greater Chicago",
    "permit": null,
-   "checked": "2026-11-04",
+   "checked": "2026-11-16",
    "id": "il-mwrd-cso-synopsis-report",
    "name": "Metropolitan Water Reclamation District of Greater Chicago",
    "channel_kind": "shared_site",
@@ -3851,13 +3851,13 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "notices",
-   "note": "MWRD's CSO Event Synopsis Report (https://apps.mwrd.org/csoreports/): per-outfall tide-gate open and close times for every event day since April 2016, the only per-outfall record of Cook County's overflows. It is reached only through a form, a session and a report viewer; it is not read by an automated session. The request to MWRD: publish the same table as a download or a feed (a CSV per event day, or an API), with the posting time of each day. Voluntary posting. (research/il/report.md §2.3)",
+   "note": "MWRD's CSO Event Synopsis Report (https://apps.mwrd.org/csoreports/): per-outfall tide-gate open and close times for every event day since April 2016, the only per-outfall record of Cook County's overflows. It is reached only through a form, a session and a report viewer; the form answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. The request to MWRD: publish the same table as a download or a feed (a CSV per event day, or an API), with the posting time of each day. Voluntary posting. (research/il/report.md §2.3)",
    "sources": [
     "il-mwrd-cso-event-synopsis"
    ],
-   "barrier": "bot_wall"
+   "barrier": "not_verified"
   },
   {
    "state": "IL",

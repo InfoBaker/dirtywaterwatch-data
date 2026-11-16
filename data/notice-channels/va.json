@@ -275,14 +275,14 @@
    "legal_basis": "2023 settlement (CBF/JRA/EIP v. Henrico; modified DEQ consent order): 'a web-based map that is updated daily'",
    "basis_kind": "permit",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "documents",
-   "note": "Henrico sanitary sewer overflow map (no dates). 273 points without dates; door hangers and bill inserts. https://henrico.gov/utility/public-data/sanitary-sewer-event-overflow-map-sso/ answered 403 to the project user agent on 2026-11-03. (research/va/report.md §2)",
-   "checked": "2026-11-03",
+   "note": "Henrico sanitary sewer overflow map (no dates). 273 points without dates; door hangers and bill inserts. https://henrico.gov/utility/public-data/sanitary-sewer-event-overflow-map-sso/ answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. (research/va/report.md §2)",
+   "checked": "2026-11-16",
    "sources": [
     "va-henrico-sso-map"
    ],
-   "barrier": "bot_wall"
+   "barrier": "not_verified"
   },
   {
    "id": "va-hrsd-newsroom",

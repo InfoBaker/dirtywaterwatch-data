@@ -5,11 +5,10 @@ homepage: "https://dem.ri.gov/shellfish"
 kind: "html"
 level: "state"
 # Notes (research/ri, status candidate, verified fetched, checked 2026-11-01): Official
-#   affected-area advisories that include sewage-triggered emergency closures; scraping is blocked
-#   by Cloudflare, so the email list is the practical feed.
+#   affected-area advisories that include sewage-triggered emergency closures; not collected
+#   yet.
 # Access detail (research, quoted): HTML table Location / Status / Scheduled to Reopen with
-#   'Updated' date and rain totals (TF Green, Taunton, Westerly). Cloudflare challenge blocks
-#   curl/WebFetch (403); readable in a real browser.
+#   'Updated' date and rain totals (TF Green, Taunton, Westerly). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.
 # Can fill: source_status, valid_until (Scheduled to Reopen), source_updated_at, authority, official
 #   affected area (by area code)
 # Cannot fill: cause per closure (only in press releases/emails); volume; outfall
@@ -26,7 +25,7 @@ role: "advisories"
 event_types: ["shellfish_closure (rain, CSO, SSO, HAB)"]
 states: ["RI"]
 access: ["html", "phone", "email"]
-access_detail: "HTML table Location / Status / Scheduled to Reopen with 'Updated' date and rain totals (TF Green, Taunton, Westerly). Cloudflare challenge blocks curl/WebFetch (403); readable in a real browser."
+access_detail: "HTML table Location / Status / Scheduled to Reopen with 'Updated' date and rain totals (TF Green, Taunton, Westerly). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine."
 machine_readable: false
 legal_basis: "R.I. Gen. Laws § 20-8.1-3"
 checked: "2026-11-01"
