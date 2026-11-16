@@ -15969,6 +15969,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16002,6 +16010,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16035,6 +16051,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16068,6 +16092,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16101,6 +16133,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16134,6 +16174,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16167,6 +16215,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16200,6 +16256,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16233,6 +16297,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16266,6 +16338,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16299,6 +16379,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16332,6 +16420,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16365,6 +16461,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16398,6 +16502,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16431,6 +16543,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16470,6 +16590,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16509,6 +16637,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16548,6 +16684,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16587,6 +16731,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16626,6 +16778,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16659,6 +16819,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16692,6 +16860,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16725,6 +16901,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16758,6 +16942,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16791,6 +16983,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Bucklin Point permit lists the outfall; RISS00024 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16830,6 +17030,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "Newport's treatment plant permit lists the outfall; RISS00031 is the city's collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16869,6 +17077,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "Newport's treatment plant permit lists the outfall; RISS00031 is the city's collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16908,6 +17124,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16947,6 +17171,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -16986,6 +17218,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17025,6 +17265,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17064,6 +17312,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17103,6 +17359,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17136,6 +17400,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17175,6 +17447,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17219,6 +17499,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17258,6 +17546,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17297,6 +17593,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17330,6 +17634,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17363,6 +17675,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17396,6 +17716,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17429,6 +17757,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row; the kept permit also has outfall(s) 033A at this point",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17462,6 +17798,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row; the kept permit also has outfall(s) 032A at this point",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17495,6 +17839,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17528,6 +17880,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17561,6 +17921,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17594,6 +17962,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17652,6 +18028,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17685,6 +18069,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17718,6 +18110,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17751,6 +18151,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17784,6 +18192,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17817,6 +18233,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17850,6 +18274,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17883,6 +18315,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row; the kept permit also has outfall(s) 052A at this point",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17916,6 +18356,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row; the kept permit also has outfall(s) 051A at this point",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17949,6 +18397,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -17982,6 +18438,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -18015,6 +18479,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -18048,6 +18520,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -18081,6 +18561,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -18120,6 +18608,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },
@@ -18153,6 +18649,14 @@
     "file": "data/outfalls-new-england.json",
     "reason": "the Narragansett Bay Commission's Field's Point permit lists the outfall; RISS00032 is the collection-system co-permit for the same outfalls",
     "note": "the same point (to four decimals) under two permits: one outfall, counted once under the kept row",
+    "source": [
+     {
+      "name": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, the registry's copy dated 2026-10-31): the same outfall point, to four decimals, under both permits; compared row by row 2026-11-16",
+      "url": "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip",
+      "read_at": "2026-11-16",
+      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+     }
+    ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
   },

@@ -754,6 +754,8 @@ def water_blocks(inp: Inputs, scrub: Scrubber) -> dict[str, dict]:
             b["plant_outfalls"] += 1
             b["plant_no_record"] += int(not s or s not in waters)
             continue
+        if o.get("same_outfall_as"):                 # one outfall under two permits: the kept row counts it
+            continue
         b["outfalls"] += 1                           # combined sewer outfalls (official and provisional)
         if not s or s not in waters:
             b["outfalls_no_record"] += 1

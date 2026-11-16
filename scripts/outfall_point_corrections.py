@@ -264,7 +264,7 @@ def _same(v) -> dict:
             "note": ("the same point (to four decimals) under two permits: one outfall, counted once under the kept row"
                      + (f"; the kept permit also has outfall(s) {', '.join(v['others_at_point'])} at this point"
                         if v.get("others_at_point") else "")),
-            "by": FIXES_BY}
+            "source": _src(v), "by": FIXES_BY}
 
 
 def write(table: str, o: dict, v) -> bool:
@@ -394,6 +394,12 @@ def apply_rows(name: str, rows: list[dict], strict: bool = False,
                 bad.append(f"{key[0]} {key[1]}: {len(got)} rows in data/{name}, expected 1")
             continue
         st = state(table, got[0], v)
+        if table == "shared" and st in ("original", "corrected") and v["same_as"]["file"] == name:
+            # the kept row is in this build: it must be there, open, at the same point, or nothing is marked
+            keep = idx.get((v["same_as"]["npdes_permit"], v["same_as"]["outfall"])) or []
+            if len(keep) != 1 or not _open_cso(keep[0]) or _at(keep[0]) != tuple(v["point"]):
+                st = (f"{key[0]} {key[1]}: the kept row {v['same_as']['npdes_permit']} {v['same_as']['outfall']} is "
+                      f"not one open row at {tuple(v['point'])} in this build: not marked")
         if st in ("original", "corrected"):
             todo.append((table, got[0], v))
         else:
@@ -403,9 +409,10 @@ def apply_rows(name: str, rows: list[dict], strict: bool = False,
     for table, o, v in todo:
         if write(table, o, v):
             moved.append(o)
-    for r in new_rows:                          # after the permit's last row (or at the end), the file's order kept
-        last = max((i for i, o in enumerate(rows) if o.get("npdes_permit") == r["npdes_permit"]), default=len(rows) - 1)
-        rows.insert(last + 1, r)
+    for r in new_rows:      # among the permit's rows by outfall number (the national file's sort), else at the end
+        mine = [i for i, o in enumerate(rows) if o.get("npdes_permit") == r["npdes_permit"]]
+        after = [i for i in mine if str(rows[i].get("outfall") or "") > r["outfall"]]
+        rows.insert(after[0] if after else (mine[-1] + 1 if mine else len(rows)), r)
     return moved, bad
 
 

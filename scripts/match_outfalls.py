@@ -631,8 +631,25 @@ if "--append" in ARGS and os.path.exists(out_path):
     prev = json.load(open(out_path))
 
     def rewritten(r):
-        return r["state"] in NE and (not PERMITS or str(r["npdes_permit"]).upper() in PERMITS)
+        # with DWW_PERMITS the permits named, whatever states EPA's file still lists them in (a permit EPA dropped
+        # whole keeps its rows, marked below)
+        if PERMITS:
+            return str(r["npdes_permit"]).upper() in PERMITS
+        return r["state"] in NE
     if PERMITS:
+        # a row EPA's file now gives another status or point keeps the earlier values (and their file) beside it
+        prev_by = {(r["npdes_permit"], r["outfall"]): r for r in prev["outfalls"] if rewritten(r)}
+        for r in rows:
+            old = prev_by.get((r["npdes_permit"], r["outfall"]))
+            if old is None:
+                continue
+            was = {f: old.get(f) for f in ("outfall_status", "lat", "lon", "coords_from", "receiving_water_echo")
+                   if old.get(f) != r.get(f)}
+            if was:
+                r["replaces_inventory_row"] = {**was, "from": old.get("inventory_file") or (
+                    "EPA ECHO national CSO inventory, the registry's earlier copy (ALL_CSO_DOWNLOADS.csv dated "
+                    "2026-10-31)"), **({"earlier": old["replaces_inventory_row"]}
+                                       if old.get("replaces_inventory_row") else {})}
         # a row of these permits that EPA's file no longer lists is kept, marked (never deleted); its place in the file
         # is kept too, and the new rows of a permit go where its old rows were (else at the end)
         have = {(r["npdes_permit"], r["outfall"]) for r in rows}
@@ -681,6 +698,7 @@ if os.path.basename(out_path) in ("outfalls-us.json", "outfalls-mid-atlantic.jso
     _opc = importlib.util.module_from_spec(_spec)
     _spec.loader.exec_module(_opc)
     _opc.for_builder(os.path.basename(out_path), out["outfalls"])
+    out["count"] = len(out["outfalls"])          # an added row (the corrections' ADD table) is counted too
 tmp = out_path + ".tmp"
 with open(tmp, "w") as fh:
     json.dump(out, fh, indent=1)
