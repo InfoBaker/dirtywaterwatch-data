@@ -703,9 +703,10 @@
    "source": "The operators' own dated sanitary sewer overflow reports, as the operators and state agencies publish them in the sources we read; NOAA MRMS daily rainfall totals from the Iowa Environmental Mesonet reanalysis point service; the live NOAA MRMS radar 24-hour total at the points of the operator's past rain-driven reports.",
    "_assessment": "Site repository docs/analysis/2026-11-16-sources-where-reports-lack.md section 6 (the test, the placement, the wording, the risks and their guards, the recommendation).",
    "label_by_level": {
-    "likely": "Overflow likely: heavy rain, no report received",
-    "possible": "Overflow possible: heavy rain, no report received"
+    "likely": "Discharge likely: heavy rain, no report received",
+    "possible": "Discharge possible: heavy rain, no report received"
    },
+   "label_by_level_rationale": "The same caution as for combined sewers, with the same two labels; the sentences under the label name its basis, a separate sewer's own reports, and say where it is shown.",
    "event_types": ["sso"],
    "event_types_rationale": "Sanitary sewer overflow reports only: a combined sewer's reports have their own caution.",
    "first_day": "2023-01-01",

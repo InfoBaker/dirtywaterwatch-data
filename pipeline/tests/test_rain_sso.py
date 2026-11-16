@@ -293,7 +293,7 @@ def test_heavy_rain_sets_the_caution_on_the_stretch_with_its_evidence(levels):
     by_water, by_reach, blk = run(levels, storm(range(0, 6), 1.2))
     row = blk["operators"]["al-wet"]
     assert row["status"] == "likely" and row["level"] == "possible"         # no "likely" amount in this record
-    assert row["label"] == "Overflow possible: heavy rain, no report received"
+    assert row["label"] == "Discharge possible: heavy rain, no report received" == RULES["rain_likely"]["history"]["label_by_level"]["possible"]
     iv = by_reach["pt-1"][0]
     assert iv["rule"] == "rain_likely" and iv["color"] == "yellow" and iv["placement"] == "reach"
     assert set(by_water) == {"town-creek-al", "mobile-bay-al"}               # the stretch's water and the bay reached
@@ -307,7 +307,7 @@ def test_heavy_rain_sets_the_caution_on_the_stretch_with_its_evidence(levels):
     assert r["peak_24h_in"] == 1.2 and r["peak_at"] and r["valid_time"] and r["until"] is None
     assert r["until_rule"].startswith("48 hours after the 24-hour total falls below")
     assert set(blk["_episodes"]) == {iv["event_id"]} and iv["event_id"].startswith("rain_likely:sso:al-wet:")
-    assert "Overflow possible" in RL.short(iv) and "separate sewer" in RL.short(iv)
+    assert RL.short(iv).startswith("Discharge possible") and "separate sewer" in RL.short(iv)
 
 
 def test_rain_below_the_operators_amount_sets_nothing(levels):
@@ -319,7 +319,7 @@ def test_the_likely_level_only_where_the_record_meets_it(levels):
     lv = copy.deepcopy(levels)
     lv["operators"]["al-wet"]["likely_in"] = 1.0
     _, by_reach, blk = run(lv, storm(range(0, 6), 1.2))
-    assert by_reach["pt-1"][0]["level"] == "likely" and blk["operators"]["al-wet"]["label"].startswith("Overflow likely")
+    assert by_reach["pt-1"][0]["level"] == "likely" and blk["operators"]["al-wet"]["label"].startswith("Discharge likely")
     lv["operators"]["al-wet"]["likely_in"] = 1.5
     _, by_reach, blk = run(lv, storm(range(0, 6), 1.2))       # above the possible amount, below the likely one
     assert by_reach["pt-1"][0]["level"] == "possible"
