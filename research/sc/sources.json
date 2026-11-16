@@ -83,7 +83,7 @@
     "cannot_fill": ["lat", "lon", "published_at", "source_updated_at", "advice_text"],
     "has_coordinates": false,
     "has_outfall_ids": false,
-    "cadence": "a report appears once its form is completed: a median of 4.9 days from the start (2026-11-16)",
+    "cadence": "every report listed is marked completed; DES received a report a median of 4.9 days after its start (2026-11-16)",
     "history": "from 2022-09-26 (1,773 reports on 2026-11-16)",
     "license": null,
     "legal_basis": "S.C. Code 48-1-95(B); DES asks every regulated system to report overflows electronically through ePermitting",

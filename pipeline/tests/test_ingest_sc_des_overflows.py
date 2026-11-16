@@ -362,15 +362,19 @@ def test_an_answer_cut_at_top_is_read_a_year_at_a_time(monkeypatch):
     assert {"eventStartDateMax": "2022-01-01"} in asked
 
 
+def distinct(n):
+    return [dict(ROWS["newest"], submissionId=f"-9{i:018d}") for i in range(n)]
+
+
 @pytest.mark.parametrize("rows,last,why", [
     ([], None, "no rows"),
-    ([{k: v for k, v in ROWS["newest"].items() if k != "eventStartDate"}], None, "key fields"),
-    ([ROWS["newest"]] * 8, 10, "fewer than 90 percent"),
+    ([{k: v for k, v in ROWS["newest"].items() if k != "eventStartDate"}], None, "fields"),
+    (distinct(94), 100, "cut short"),
 ])
 def test_a_read_that_is_not_the_whole_list_fails(rows, last, why):
     with pytest.raises(SC.BadRead, match=why):
         SC.check_read(rows, last)
-    SC.check_read([ROWS["newest"]] * 9, 10)          # 90 percent: read
+    SC.check_read(distinct(95), 100)          # five fewer: read (a report DES removed stays here as a past report)
 
 
 # ---------------------------------------------------------------- the run
@@ -484,3 +488,103 @@ def test_the_status_build_counts_every_record_in_south_carolina():
     recs, _ = SC.build(all_rows(), READ, [], PERMITS)
     assert {S.event_state(r) for r in recs} == {"SC"}
     assert all(datetime.fromisoformat(r["reported_at"]) for r in recs)
+
+
+# ---------------------------------------------------------------- review 2026-11-16 (Astra) fixes
+
+def test_r1_a_site_name_loses_house_numbers_and_a_person_as_water_is_removed():
+    row = dict(ROWS["sss_permit"], siteName="Town Sewer at 8642 Example Lane", receivingWater="Jane Smith",
+               eventEndDate="Jane Smith 8642 Example Lane")
+    saved = SC.scrubbed_row(row)
+    r = SC.build_record(row, READ, None, PERMITS)
+    text = json.dumps(saved) + json.dumps(r)
+    assert "8642" not in text and "Jane Smith" not in text
+    assert "Example Lane" in r["discharger_name"]
+
+
+def test_r2_a_row_missing_a_field_null_rows_and_repeated_keys_are_a_bad_read():
+    with pytest.raises(SC.BadRead, match="fields"):
+        SC.check_read([{k: v for k, v in ROWS["newest"].items() if k != "receivingWater"}], None)
+    with pytest.raises(SC.BadRead, match="twice"):
+        SC.check_read([ROWS["newest"], ROWS["newest"]], None)
+    svc = Service([])
+    svc.get = lambda url, params=None, timeout=None: Resp([ROWS["newest"], None])
+    with pytest.raises(RuntimeError):
+        SC.fetch_all(svc, date(2026, 11, 16))
+    # Michigan's client still drops a non-dictionary row silently (unchanged)
+    assert MI.query(svc, {}) == [MI.safe_row(ROWS["newest"])]
+
+
+def test_r2_a_drop_of_more_than_five_rows_is_cut_short():
+    with pytest.raises(SC.BadRead, match="cut short"):
+        SC.check_read(distinct(94), 100)
+    SC.check_read(distinct(95), 100)
+
+
+def test_r2_a_row_with_an_unreadable_time_keeps_its_earlier_record_and_health_fails(env, monkeypatch):
+    monkeypatch.setattr(SC, "session", lambda: Service(all_rows()))
+    assert SC.main([]) == 0
+    before = {r["event_id"]: r for r in events(env)["records"]}
+    rows = all_rows()
+    bad = next(r for r in rows if r["submissionId"] == ROWS["lake_wylie"]["submissionId"])
+    bad["eventEndDate"] = "not a date"
+    monkeypatch.setattr(SC, "session", lambda: Service(rows))
+    assert SC.main([]) == 1
+    d = events(env)
+    assert d["ok"] is False and "1 report" in d["error"]
+    after = {r["event_id"]: r for r in d["records"]}
+    eid = f"sc-des-overflow-list:{ROWS['lake_wylie']['submissionId']}-2"
+    assert after[eid]["ended_at"] == before[eid]["ended_at"] and after[eid]["waterbody_text"] == "Lake Wylie"
+    assert len(after) == len(before)
+
+
+def test_r3_an_end_repeating_the_start_minute_is_not_confirmed_even_when_the_start_is_not_used():
+    r = SC.build_record(dict(ROWS["newest"], eventStartDate="2026-11-10T19:30:00.0000000-05:00",
+                             eventEndDate="2026-11-10T19:30:30.0000000-05:00"), READ, None, PERMITS)
+    assert r["ended_at"] is None and r["raw"]["_end_equals_start"]
+    rcv = ROWS["newest"]["submissionReceivedDate"]
+    r = SC.build_record(dict(ROWS["newest"], eventStartDate=rcv[:17] + "00.0000000-05:00",
+                             eventEndDate=rcv[:17] + "00.0000000-05:00"), READ, None, PERMITS)
+    assert r["started_at"] is None and r["ended_at"] is None and r["raw"]["_end_equals_start"]
+
+
+def test_r4_blanks_and_other_counties_are_not_evidence_of_a_copy():
+    a = dict(ROWS["no_water"], featureNumber=None, featureDescription=None, receivingWater=None)
+    b = dict(a, submissionId="-1000000000000000002", countyDescription="Aiken")
+    _, stats = SC.build([a, b], READ, [], PERMITS)
+    assert stats["copies"] == 0
+    c = dict(ROWS["copy_b"], countyDescription="Aiken")
+    _, stats = SC.build([ROWS["copy_a"], c], READ, [], PERMITS)
+    assert stats["copies"] == 0
+
+
+def test_r5_epa_pairing_refuses_another_state_or_another_water():
+    recs, _ = SC.build([ROWS["lake_wylie"]], READ, [], PERMITS)
+    ga = epa_record("g", "SC0026751", "2026-11-08T11:00:00")
+    ga["raw"]["state"] = "GA"
+    other = epa_record("o", "SC0026751", "2026-11-08T11:00:00")
+    other["waterbody_text"] = "Savannah River"
+    for e in (ga, other):
+        SC.mark_epa_duplicates(recs, [e])
+        assert e["duplicate_of"] is None
+    same = epa_record("s", "SC0026751", "2026-11-08T11:00:00")
+    same["waterbody_text"] = "LAKE WYLIE"
+    SC.mark_epa_duplicates(recs, [same])
+    assert same["duplicate_of"] == recs[0]["event_id"]
+
+
+def test_r6_public_text_says_received_not_published():
+    text = (Path(__file__).resolve().parents[2] / "research" / "sc" / "state-text.md").read_text()
+    assert "received" in text and "report appeared a median" not in text
+    reg = json.loads((Path(__file__).resolve().parents[2] / "data" / "notice-channels" / "sc.json").read_text())
+    note = next(c for c in reg["channels"] if c["id"] == "sc-des-sso-reports")["note"]
+    assert "appears once its form is completed, a median" not in note
+
+
+def test_r7_the_status_build_counts_the_feeds_records_once(monkeypatch):
+    from tests.test_status import TEST_RULES
+    monkeypatch.setattr(S, "_RULES", TEST_RULES)
+    recs, _ = SC.build(all_rows(), READ, [], PERMITS)
+    out = _status(recs, {}, "2026-11-16T19:00:00+00:00")
+    assert set(out["placements"]) == {r["event_id"] for r in recs} and len(recs) == len(ROWS)
+    assert out["counts"]["events"] == len(ROWS) and out["counts"]["duplicates"] == 1

@@ -5918,7 +5918,7 @@
     "precision": "event",
     "machine_readable": true,
     "format": "json",
-    "latency": "posted when the report is completed; start to receipt median 4.9 days on 2026-11-16",
+    "latency": "every listed report is marked completed; start to DES receipt median 4.9 days on 2026-11-16",
     "history": "from 2022-09-26 (1,773 reports on 2026-11-16)",
     "coordinates": "none (the manhole, pump station or pipe by name, and the county)",
     "receiving_water": "free text; empty on 490 of 1,773",

@@ -103,8 +103,8 @@ def rows() -> list[dict]:
                    "within five days), electronically through ePermitting, and DES publishes the completed reports in "
                    "its ePermitting list 'View Wastewater Overflows', linked from its overflow page: start, end, "
                    "receipt, permit, site, manhole or pump station, receiving water, volume and cause, 1,773 reports "
-                   "from September 2022 on 2026-11-16. A report appears once its form is completed, a median of 4.9 "
-                   "days after the overflow began. The list gives no coordinates. Read hourly by the feed "
+                   "from September 2022 on 2026-11-16. Every report on the list was marked completed; DES received a "
+                   "report a median of 4.9 days after the overflow began. The list gives no coordinates. Read hourly by the feed "
                    "sc-des-overflow-list."),
              barrier=None),
         base(agency=DES, id="sc-des-beach-monitoring", name="SC DES (beach monitoring stations)", channel_kind="feed",
