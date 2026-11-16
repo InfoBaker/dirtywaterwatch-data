@@ -1,13 +1,40 @@
 {
  "about": "Water names in SC's records that data/receiving-waters-national.json does not hold for SC, one row per name and county with the number of records, how many are open now, up to five points ([lat, lon], 0.001 degree), towns and sources, for the names pass. Records naming no water and releases DNREC's form marks to ground only are left out (by_reason). Written by scripts/de_sc_report_water_names.py.",
  "state": "SC",
- "waters": 1,
- "reports": 1,
+ "left_out": {
+  "sc-des-overflow-list": {
+   "names no water": 484,
+   "names no receiving water: the report names no water, only a storm drain, ditch or the like": 249,
+   "a tributary, ditch or drain leading to a named water (not the water it joins)": 73,
+   "names no receiving water: the report gives no receiving water": 65,
+   "several water records hold the name and the report's county or point does not choose one": 64,
+   "a description of a place (a small stream, a pond next to a site, an address), not a water's name": 64,
+   "a tributary named by a place, not by the water it joins": 34,
+   "a place or other words with no kind of water (not a water's name)": 29,
+   "an unnamed or unknown stream: the report names no water": 27,
+   "part of a sewer, drainage or treatment works, not a public water": 17,
+   "a copy of another report (duplicate_of): counted once": 15,
+   "a storm-sewer system, not a named water": 13,
+   "a kind of water with no name": 11,
+   "no water name": 8,
+   "not a water name": 7,
+   "private property, not a public water": 4,
+   "a street name, not a water": 2,
+   "a road in the report, not a water": 2,
+   "the open sea (no NHD record)": 2,
+   "a basin (a river basin, or a stormwater, treatment or marina basin), not a water's name": 1
+  }
+ },
+ "feeds_merged": {
+  "sc-des-overflow-list": "1773 records, fetched 2026-11-16"
+ },
+ "waters": 174,
+ "reports": 331,
  "by_reason": {
   "no NHD flowline or waterbody of that name in SC": 1
  },
- "resolved_names": 1,
- "resolved_reports": 5,
+ "resolved_names": 68,
+ "resolved_reports": 284,
  "build": {
   "date": "2026-11-15",
   "command": "python -m ingest.waters_from_nhd --names research/sc/receiving-waters-missing.json --state SC",
@@ -16,6 +43,1758 @@
   "network_requests": 4
  },
  "rows": [
+  {
+   "name": "Brushy Creek",
+   "county": "Greenville County",
+   "reports": 13,
+   "open": 0,
+   "towns": [
+    "Greenville",
+    "Greer"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 13
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 13
+   }
+  },
+  {
+   "name": "Maple Creek",
+   "county": "Spartanburg County",
+   "reports": 11,
+   "open": 0,
+   "towns": [
+    "Greer"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 11
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 11
+   }
+  },
+  {
+   "name": "COOSAWHATCHIE CREEK",
+   "county": "Allendale County",
+   "reports": 8,
+   "open": 0,
+   "towns": [
+    "Allendale"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 8
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 8
+   }
+  },
+  {
+   "name": "Martin Creek",
+   "county": "Oconee County",
+   "reports": 7,
+   "open": 0,
+   "towns": [
+    "Seneca"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 7
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 7
+   }
+  },
+  {
+   "name": "James Island Creek",
+   "county": "Charleston County",
+   "reports": 6,
+   "open": 0,
+   "towns": [
+    "Charleston",
+    "North Charleston",
+    "West Ashley"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 6
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 6
+   }
+  },
+  {
+   "name": "Swift Creek",
+   "county": "Darlington County",
+   "reports": 6,
+   "open": 0,
+   "towns": [
+    "Darlington"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 6
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 6
+   }
+  },
+  {
+   "name": "Hembree Creek",
+   "county": "Anderson County",
+   "reports": 5,
+   "open": 0,
+   "towns": [
+    "Anderson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 5
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 5
+   }
+  },
+  {
+   "name": "REEDER POINT BRANCH",
+   "county": "Richland County",
+   "reports": 5,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 5
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 5
+   }
+  },
+  {
+   "name": "Antley Spring Branch",
+   "county": "Calhoun County",
+   "reports": 4,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "CANE CREEK",
+   "county": "Oconee County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Seneca"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "COOSAWATCHIE CREEK",
+   "county": "Allendale County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Allendale"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "CRANE CREEK",
+   "county": "Richland County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Columbia",
+    "Irmo",
+    "Eastover"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Dill Creek",
+   "county": "Charleston County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Charleston",
+    "North Charleston",
+    "West Ashley"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Fairmont Branch",
+   "county": "Greenville County",
+   "reports": 4,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Five Mile Creek",
+   "county": "Anderson County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Anderson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "KOON BRANCH",
+   "county": "Richland County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Lawson Fork Creek",
+   "county": "Spartanburg County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Middle Swamp",
+   "county": "Florence County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Florence",
+    "Timmonsville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Mountain Creek",
+   "county": "Greenville County",
+   "reports": 4,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Rocky Creek",
+   "county": "Greenville County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Greer"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Seneca Creek",
+   "county": "Oconee County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Seneca"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Speeds Creek",
+   "county": "Oconee County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Seneca"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Sunnyside Canal",
+   "county": "Orangeburg County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Orangeburg"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Turkey Creek",
+   "county": "Greenwood County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Ware Shoals"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Twentyfive Mile Creek",
+   "county": "Kershaw County",
+   "reports": 4,
+   "open": 0,
+   "towns": [
+    "Elgin"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Welcome Creek",
+   "county": "Greenville County",
+   "reports": 4,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 4
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Armstrong Branch",
+   "county": "Greenwood County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Greenwood"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Beaverdam Creek",
+   "county": "Florence County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Florence",
+    "Timmonsville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Bridge Creek",
+   "county": "Kershaw County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Elgin"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "KINLEY CREEK",
+   "county": "Richland County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Langston Creek",
+   "county": "Greenville County",
+   "reports": 3,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Little Dutchman Creek",
+   "county": "York County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Rock Hill"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "RAWLS CREEK",
+   "county": "Richland County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Salem Creek",
+   "county": "Anderson County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Anderson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Stoops Creek",
+   "county": "Lexington County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Columbia",
+    "Irmo"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Tanyard Branch",
+   "county": "Chester County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Chester"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Three Mile Creek",
+   "county": "Spartanburg County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Wolf Creek",
+   "county": "Pickens County",
+   "reports": 3,
+   "open": 0,
+   "towns": [
+    "Pickens"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 3
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Abner Creek",
+   "county": "Spartanburg County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Greer"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "BEAVER CREEK",
+   "county": "Anderson County",
+   "reports": 2,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Baker Creek",
+   "county": "McCormick County",
+   "reports": 2,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Brushy Creek",
+   "county": "Anderson County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Easley"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "CRANE CREEK",
+   "county": "Oconee County",
+   "reports": 2,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Chandler Bridge Creek",
+   "county": "Dorchester County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Summerville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "GILLS CREEK",
+   "county": "Richland County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "HAMMETT CREEK",
+   "county": "Anderson County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Anderson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "HIGH HILL CREEK",
+   "county": "Florence County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Florence",
+    "Timmonsville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "HURRICANE BRANCH",
+   "county": "Dorchester County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "North Charleston"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Halfway Branch",
+   "county": "Spartanburg County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Hannahs Creek",
+   "county": "Lancaster County",
+   "reports": 2,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Howard Branch",
+   "county": "Greenville County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Fountain Inn"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Hurricane Creek",
+   "county": "Anderson County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Anderson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Koon Branch Creek",
+   "county": "Richland County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "LAKE KATHERINE",
+   "county": "Richland County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Lake Trollingwood",
+   "county": "Greenville County",
+   "reports": 2,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Little Chinquapin Creek",
+   "county": "Spartanburg County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Little Generostee Creek",
+   "county": "Anderson County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Anderson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Little Grove Creek",
+   "county": "Greenville County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Piedmont"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "MILL CREEK",
+   "county": "Richland County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Middle Branch",
+   "county": "Anderson County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Easley"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "PLATT BRANCH",
+   "county": "Dorchester County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "North Charleston"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Perkins Creek",
+   "county": "Oconee County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Seneca"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Town Creek",
+   "county": "Anderson County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Pendleton"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Williams Branch",
+   "county": "Spartanburg County",
+   "reports": 2,
+   "open": 0,
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 2
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "12 mile river",
+   "county": "Pickens County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Pickens"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "14 Mile Creek",
+   "county": "Lexington County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "5 Mile Creek",
+   "county": "Anderson County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Anderson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Albergotti Creek",
+   "county": "Beaufort County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Beaufort, South Carolina"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Ansley Branch",
+   "county": "Calhoun County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Ansley Branch Creek",
+   "county": "Calhoun County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Antley Branch Creek",
+   "county": "Calhoun County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Antley Springs Branch",
+   "county": "Calhoun County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "BEAR CREEK",
+   "county": "Lancaster County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Lancaster"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "BEAVERDAM CREEK",
+   "county": "York County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "BOOKMAN CREEK",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Irmo",
+    "Eastover"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "BROWNS CREEK",
+   "county": "Union County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Union"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "BROWNS LAKE",
+   "county": "Oconee County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Beaverdam Creek",
+   "county": "Greenville County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Greer"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Beresford Creek",
+   "county": "Charleston County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Charleston",
+    "North Charleston",
+    "West Ashley"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Big Curltail Creek",
+   "county": "Greenwood County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Greenwood"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Big Poplar Creek",
+   "county": "Orangeburg County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Boling Creek",
+   "county": "Greenville County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Bridge Fork Creek",
+   "county": "Greenville County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Brightman's Creek",
+   "county": "Greenwood County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Greenwood"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Burkhalter Creek",
+   "county": "Edgefield County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "CANE CREEK",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "CARTER CREEK",
+   "county": "Florence County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Lake City"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "CAVEBREAK BRANCH",
+   "county": "Saluda County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "CLEM'S BRANCH",
+   "county": "Lee County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Lynchburg"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "COOSWHATCHIE CREEK",
+   "county": "Allendale County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Allendale"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "CUMBESS CREEK",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Chinquapin Creek",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Cinder Branch",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Clemons Branch",
+   "county": "Lexington County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Coburg Creek",
+   "county": "Charleston County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Charleston",
+    "North Charleston",
+    "West Ashley"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Colleton Creek",
+   "county": "Charleston County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Charleston",
+    "North Charleston",
+    "West Ashley"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Coopers Creek",
+   "county": "Greenville County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Crane Creek",
+   "county": "Kershaw County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Elgin"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Crane Creek Branch",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "DOWNS CREEK",
+   "county": "Charleston County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Sullivan'S Island"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "DYE BRANCH CREEK",
+   "county": "York County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Fort Mill"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Dildine creek",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Woodruff"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Dry Fork",
+   "county": "Chester County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Chester"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Duck Pond Reservoir",
+   "county": "Oconee County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Seneca"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Duncan Park Lake",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Eagle Creek",
+   "county": "Dorchester County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "North Charleston"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "East Beards Creek",
+   "county": "Anderson County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Anderson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "East Prong Little Generostee Creek",
+   "county": "Anderson County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Anderson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Foster Creek",
+   "county": "Berkeley County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Four Mile Branch",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Freys Creek",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Roebuck"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Frohawk Creek",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Greer"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Greenville Branch creek",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Spartanburg",
+    "Cowpens",
+    "Fingerville",
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "HALFWAY SWAMP CREEK",
+   "county": "Calhoun County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Halfmoon Creek",
+   "county": "Bamberg County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Hidden Creek",
+   "county": "York County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Rock Hill"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Horsepen Creek",
+   "county": "Greenville County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Simpsonville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Huger Cove",
+   "county": "Beaufort County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Beaufort, South Carolina"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Hunnicutt Creek",
+   "county": "Oconee County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Clemson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
   {
    "name": "J. Strom Thurmond Reservoir",
    "county": null,
@@ -32,9 +1811,953 @@
     "sc-des-hab": 1
    },
    "reason": "no NHD flowline or waterbody of that name in SC; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-15"
+  },
+  {
+   "name": "JONES POND",
+   "county": "Barnwell County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Blackville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Jefferies Creek",
+   "county": "Florence County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Florence",
+    "Timmonsville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Keels Lake",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "LITTLE RIVER",
+   "county": "Oconee County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "LITTLE TURKEY CREEK",
+   "county": "Edgefield County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Johnston"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "LONG BRANCH CANAL",
+   "county": "Florence County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Lake City"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Lake Columbia",
+   "county": "Kershaw County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Elgin"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Lakewood Lake",
+   "county": "Pickens County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Pickens"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Little Buck Creek",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Chesnee"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Little Thicketty Creek",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Cowpens"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Little curltail Creek",
+   "county": "Greenwood County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Greenwood"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Long Branch",
+   "county": "Lancaster County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Long Branch Creek",
+   "county": "Greenville County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "MCCORD CREEK",
+   "county": "Abbeville County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Abbeville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Manchester Creek",
+   "county": "York County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Rock Hill"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Mill Creek",
+   "county": "Cherokee County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Gaffney",
+    "Blacksburg"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Mulberry Creek",
+   "county": "Greenwood County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Ware Shoals"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "NEWMN SWAMP",
+   "county": "Darlington County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Lamar"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "ORPHANAGE BRANCH",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Paces Creek",
+   "county": "Edgefield County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Page Creek",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Landrum"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Payne Branch",
+   "county": "Greenville County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Pebbles Creek",
+   "county": "Cherokee County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Gaffney"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Peges Creek",
+   "county": "Newberry County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Prosperity"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "RACOON RUN",
+   "county": "Horry County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Bucksport"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "REEDER POINTE BRANCH",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "ROBERT BRANCH CREEK",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "ROBERTS BRANCH CREEK",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "ROCKY BLUFF SWAMP",
+   "county": "Sumter County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Sumter"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "ROCKY BRANCH",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "ROCKY CREEK",
+   "county": "Lexington County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Ransom Creek",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Roebuck"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Reeves Creek",
+   "county": "Barnwell County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Blackville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Rice Creek",
+   "county": "Kershaw County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Elgin"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Richland Creek",
+   "county": "Saluda County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Rose Due Creek",
+   "county": "Jasper County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Ridgeland"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "SHEALY POND",
+   "county": "Lexington County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "SIMMONS CREEK",
+   "county": "Charleston County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Charleston",
+    "North Charleston",
+    "West Ashley"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "SMITH BRANCH",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "STOOP CREEK",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "SWYGERT CREEK",
+   "county": "Richland County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Columbia"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Saluda Lake",
+   "county": "Greenville County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Greenville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Six Mile Creek",
+   "county": "Lancaster County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Six Mile Creek",
+   "county": "Lexington County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Cayce"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Snake Branch",
+   "county": "Darlington County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Snows Lake",
+   "county": "Greenville County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Stockman Branch",
+   "county": "Greenwood County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Greenwood"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Talley Creek",
+   "county": "Greenville County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Tom's Branch",
+   "county": "Lexington County",
+   "reports": 1,
+   "open": 0,
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Twomile Creek",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Woodruff"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Warbranch Creek",
+   "county": "Pickens County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Clemson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Whitford Stage Swamp",
+   "county": "Orangeburg County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Orangeburg"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Whitner Creek",
+   "county": "Anderson County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Anderson"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "big branch",
+   "county": "Florence County",
+   "reports": 1,
+   "open": 0,
+   "towns": [
+    "Florence",
+    "Timmonsville"
+   ],
+   "sources": {
+    "sc-des-overflow-list": 1
+   },
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
   }
  ],
  "resolved": [
+  {
+   "name": "Jeffries Creek",
+   "county": "Florence County",
+   "reports": 31,
+   "slugs": [
+    "jeffries-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 31
+   }
+  },
+  {
+   "name": "Lake Murray",
+   "county": "Lexington County",
+   "reports": 29,
+   "slugs": [
+    "lake-murray-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 29
+   }
+  },
+  {
+   "name": "North Fork Edisto River",
+   "county": "Orangeburg County",
+   "reports": 25,
+   "slugs": [
+    "north-fork-edisto-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 25
+   }
+  },
+  {
+   "name": "Enoree River",
+   "county": "Greenville County",
+   "reports": 15,
+   "slugs": [
+    "enoree-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 15
+   }
+  },
+  {
+   "name": "Fairforest Creek",
+   "county": "Spartanburg County",
+   "reports": 10,
+   "slugs": [
+    "fairforest-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 10
+   }
+  },
+  {
+   "name": "Hills Creek",
+   "county": "Chesterfield County",
+   "reports": 9,
+   "slugs": [
+    "hills-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 9
+   }
+  },
+  {
+   "name": "Black Creek",
+   "county": "Chesterfield County",
+   "reports": 8,
+   "slugs": [
+    "black-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 8
+   }
+  },
+  {
+   "name": "Coneross Creek",
+   "county": "Oconee County",
+   "reports": 8,
+   "slugs": [
+    "coneross-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 8
+   }
+  },
+  {
+   "name": "Stono River",
+   "county": "Charleston County",
+   "reports": 8,
+   "slugs": [
+    "stono-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 8
+   }
+  },
+  {
+   "name": "Saluda River",
+   "county": "Richland County",
+   "reports": 7,
+   "slugs": [
+    "saluda-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 7
+   }
+  },
+  {
+   "name": "Black Creek",
+   "county": "Darlington County",
+   "reports": 6,
+   "slugs": [
+    "black-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 6
+   }
+  },
+  {
+   "name": "Broad River",
+   "county": "Richland County",
+   "reports": 6,
+   "slugs": [
+    "broad-river-alston-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 6
+   }
+  },
+  {
+   "name": "Lake Keowee",
+   "county": "Oconee County",
+   "reports": 6,
+   "slugs": [
+    "lake-keowee-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 6
+   }
+  },
+  {
+   "name": "Middle Pen Swamp",
+   "county": "Orangeburg County",
+   "reports": 6,
+   "slugs": [
+    "middle-pen-swamp-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 6
+   }
+  },
   {
    "name": "Jeffries Creek",
    "reports": 5,
@@ -46,6 +2769,643 @@
     "Florence"
    ],
    "county": "Florence"
+  },
+  {
+   "name": "Lake Wylie",
+   "county": "York County",
+   "reports": 5,
+   "slugs": [
+    "lake-wylie-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 5
+   }
+  },
+  {
+   "name": "Sugar Creek",
+   "county": "Lancaster County",
+   "reports": 5,
+   "slugs": [
+    "sugar-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 5
+   }
+  },
+  {
+   "name": "Cattail Branch",
+   "county": "Chesterfield County",
+   "reports": 4,
+   "slugs": [
+    "cattail-branch-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Hagins Prong",
+   "county": "Marlboro County",
+   "reports": 4,
+   "slugs": [
+    "hagins-prong-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Lake Murray",
+   "county": "Richland County",
+   "reports": 4,
+   "slugs": [
+    "lake-murray-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Lawsons Fork Creek",
+   "county": "Spartanburg County",
+   "reports": 4,
+   "slugs": [
+    "lawsons-fork-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Pacolet River",
+   "county": "Spartanburg County",
+   "reports": 4,
+   "slugs": [
+    "pacolet-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 4
+   }
+  },
+  {
+   "name": "Battery Creek",
+   "county": "Beaufort County",
+   "reports": 3,
+   "slugs": [
+    "battery-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Lake Murray",
+   "county": "Newberry County",
+   "reports": 3,
+   "slugs": [
+    "lake-murray-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Laurel Creek",
+   "county": "Greenville County",
+   "reports": 3,
+   "slugs": [
+    "laurel-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Rocky River",
+   "county": "Anderson County",
+   "reports": 3,
+   "slugs": [
+    "rocky-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Saluda River",
+   "county": "Greenwood County",
+   "reports": 3,
+   "slugs": [
+    "saluda-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Sawmill Branch",
+   "county": "Dorchester County",
+   "reports": 3,
+   "slugs": [
+    "sawmill-branch-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Wappoo Creek",
+   "county": "Charleston County",
+   "reports": 3,
+   "slugs": [
+    "wappoo-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 3
+   }
+  },
+  {
+   "name": "Congaree Creek",
+   "county": "Lexington County",
+   "reports": 2,
+   "slugs": [
+    "congaree-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Congaree River",
+   "county": "Lexington County",
+   "reports": 2,
+   "slugs": [
+    "congaree-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Coosaw Creek",
+   "county": "Dorchester County",
+   "reports": 2,
+   "slugs": [
+    "coosaw-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Enoree River",
+   "county": "Spartanburg County",
+   "reports": 2,
+   "slugs": [
+    "enoree-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Fishing Creek",
+   "county": "York County",
+   "reports": 2,
+   "slugs": [
+    "fishing-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Gilder Creek",
+   "county": "Greenville County",
+   "reports": 2,
+   "slugs": [
+    "gilder-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Ireland Creek",
+   "county": "Colleton County",
+   "reports": 2,
+   "slugs": [
+    "ireland-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Lake Hartwell",
+   "county": "Oconee County",
+   "reports": 2,
+   "slugs": [
+    "lake-hartwell-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Lake Hartwell",
+   "county": "Pickens County",
+   "reports": 2,
+   "slugs": [
+    "lake-hartwell-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Little Saluda River",
+   "county": "Saluda County",
+   "reports": 2,
+   "slugs": [
+    "little-saluda-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Sanders Branch",
+   "county": "Hampton County",
+   "reports": 2,
+   "slugs": [
+    "sanders-branch-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Town Creek",
+   "county": "Pickens County",
+   "reports": 2,
+   "slugs": [
+    "town-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Wando River",
+   "county": "Charleston County",
+   "reports": 2,
+   "slugs": [
+    "wando-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Wards Creek",
+   "county": "Spartanburg County",
+   "reports": 2,
+   "slugs": [
+    "wards-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Wilson Creek",
+   "county": "Greenwood County",
+   "reports": 2,
+   "slugs": [
+    "wilson-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 2
+   }
+  },
+  {
+   "name": "Beaufort River",
+   "county": "Beaufort County",
+   "reports": 1,
+   "slugs": [
+    "beaufort-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Beaverdam Creek",
+   "county": "Edgefield County",
+   "reports": 1,
+   "slugs": [
+    "beaverdam-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Black River",
+   "county": "Williamsburg County",
+   "reports": 1,
+   "slugs": [
+    "black-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Bush River",
+   "county": "Laurens County",
+   "reports": 1,
+   "slugs": [
+    "bush-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Charleston Harbor",
+   "county": "Charleston County",
+   "reports": 1,
+   "slugs": [
+    "charleston-harbor-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Combahee River",
+   "county": "Beaufort County",
+   "reports": 1,
+   "slugs": [
+    "combahee-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Duncan Creek",
+   "county": "Lexington County",
+   "reports": 1,
+   "slugs": [
+    "duncan-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Durbin Creek",
+   "county": "Greenville County",
+   "reports": 1,
+   "slugs": [
+    "durbin-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Durbin Creek; Enoree River",
+   "county": "Greenville County",
+   "reports": 1,
+   "slugs": [
+    "durbin-creek-sc",
+    "enoree-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Eighteenmile Creek",
+   "county": "Pickens County",
+   "reports": 1,
+   "slugs": [
+    "eighteenmile-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Georges Creek",
+   "county": "Pickens County",
+   "reports": 1,
+   "slugs": [
+    "georges-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Golden Creek",
+   "county": "Pickens County",
+   "reports": 1,
+   "slugs": [
+    "golden-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Hard Labor Creek",
+   "county": "Greenwood County",
+   "reports": 1,
+   "slugs": [
+    "hard-labor-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Main Creek",
+   "county": "Horry County",
+   "reports": 1,
+   "slugs": [
+    "main-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Middle Branch Brushy Creek",
+   "county": "Anderson County",
+   "reports": 1,
+   "slugs": [
+    "middle-branch-brushy-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "North Tyger River",
+   "county": "Spartanburg County",
+   "reports": 1,
+   "slugs": [
+    "north-tyger-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Rocky Creek",
+   "county": "McCormick County",
+   "reports": 1,
+   "slugs": [
+    "rocky-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Rocky Creek",
+   "county": "Greenwood County",
+   "reports": 1,
+   "slugs": [
+    "rocky-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Saluda River",
+   "county": "Greenville County",
+   "reports": 1,
+   "slugs": [
+    "saluda-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Sampit River",
+   "county": "Georgetown County",
+   "reports": 1,
+   "slugs": [
+    "sampit-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Shem Creek",
+   "county": "Charleston County",
+   "reports": 1,
+   "slugs": [
+    "shem-creek-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Twelvemile Creek",
+   "county": "Lexington County",
+   "reports": 1,
+   "slugs": [
+    "twelvemile-creek-lexington-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Unnamed tributary to Catawba River",
+   "county": "Lancaster County",
+   "reports": 1,
+   "slugs": [
+    "unnamed-tributary-to-catawba-river-lancaster-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
+  },
+  {
+   "name": "Wateree River",
+   "county": "Lancaster County",
+   "reports": 1,
+   "slugs": [
+    "wateree-river-sc"
+   ],
+   "how": "a water record holds the name (status build)",
+   "reports_by_source": {
+    "sc-des-overflow-list": 1
+   }
   }
  ]
 }

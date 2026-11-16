@@ -10,6 +10,13 @@ Green's overflow sites, Ohio EPA's spills that name a waterway, BeachGuard's bea
 Names are compared with the national list's names, keys and names seen, case, spaces and punctuation aside. Each row:
 name, reports, permits, sources, the counties the reports give (Ohio EPA's spills) and up to five of the reports' own
 points ([lat, lon]).
+
+    pipeline/.venv/bin/python -I scripts/oh_report_water_names.py --merge-notices [--events-dir DIR]
+merges the city overflow-notice feeds (NOTICE_FEEDS: Willard, Lakewood, Fremont, Avon Lake) into the existing file
+with scripts/report_names_merge.py, every other row and resolved name kept with every field: each record judged as the
+status build judges it, each water a notice names judged on its own (Willard: the discharge stream, then each area the
+city names as affected; a town among them is no row), one row per name and county. Willard's notices give no county:
+its records are counted in Huron County, the city's (NOTICE_COUNTY). The notices give no point.
 """
 from __future__ import annotations
 
@@ -37,6 +44,35 @@ FORCED = {"Little Cuyahoga River": "the national list maps it to the Cuyahoga Ri
 # outfalls (reach_id empty on all 133 of OH0043991's rows), so the points are the only place given.
 NEORSD_CREEKS = ("Mill Creek", "Big Creek")
 NEORSD_SOURCE = "oh-neorsd-cso-notification-map"
+NOTICE_FEEDS = ["oh-willard-cso-notices", "oh-lakewood-cso-map", "oh-fremont-cso-notices", "oh-avon-lake-cso-notices"]
+NOTICE_COUNTY = {"oh-willard-cso-notices": "Huron County", "oh-fremont-cso-notices": "Sandusky County",
+                 "oh-avon-lake-cso-notices": "Lorain County", "oh-lakewood-cso-map": "Cuyahoga County"}
+
+
+def notice_names(r: dict) -> list[str]:
+    """The waters one notice record names, each on its own: Willard's discharge stream and the areas it names as
+    affected (raw.discharge_stream, raw.areas_affected), else the record's waterbody_text."""
+    raw = r.get("raw") or {}
+    if raw.get("discharge_stream") or raw.get("areas_affected"):
+        return [x for x in [raw.get("discharge_stream"), *(raw.get("areas_affected") or [])] if x]
+    return [r.get("waterbody_text") or ""]
+
+
+def merge_notices(events: Path) -> int:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import report_names_merge as M
+    judged, read, resolver = {}, {}, None
+    for sid in NOTICE_FEEDS:
+        recs, read[sid] = M.read_feed(events, sid)
+        if recs is None:
+            continue
+        resolver = resolver or M.make_resolver("OH")
+        judged[sid] = M.judge(recs, "OH", resolver, names_of=notice_names, county=NOTICE_COUNTY.get(sid))
+    if not judged:
+        print("no notice feed built; nothing merged")
+        return 1
+    print(f"{OUT.relative_to(ROOT)}: merged {', '.join(judged)}: {M.merge(OUT, 'OH', judged, read)}")
+    return 0
 
 
 def neorsd_rows(events: Path) -> list[dict]:
@@ -81,6 +117,8 @@ def main(argv) -> int:
     events = Path(argv[argv.index("--events-dir") + 1]) if "--events-dir" in argv else EVENTS
     if "--add-to" in argv:
         return add_to(Path(argv[argv.index("--add-to") + 1]), events)
+    if "--merge-notices" in argv:
+        return merge_notices(events)
     nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())["states"]["OH"]["waters"]
     have = {compact(n) for w in nat for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or [])] if n}
     reports, permits, points, typed, sources, counties = (Counter(), defaultdict(set), defaultdict(list),
