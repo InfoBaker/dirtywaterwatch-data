@@ -406,9 +406,12 @@ def test_public_text_keeps_the_legal_exception_and_calls_unverified_channels_unv
     t = (root / "research" / "pr" / "state-text.md").read_text()
     reg = {r["id"]: r for r in json.loads((root / "data" / "notice-channels" / "pr.json").read_text())["channels"]}
     assert "With no duty to tell the public" not in t and "Puerto Nuevo permit's duty to notify the public" in t
-    for rid in ("pr-estuario-bacteria", "pr-surfrider-bwtf"):
+    for rid in ("pr-surfrider-bwtf",):
         assert "search only" in reg[rid]["note"] and "not verified" in reg[rid]["note"]
-    assert "not a current list" not in t and "was not verified" in t
+    # the estuary's weekly results were read by the go-live audit (2026-11-16, edit 3): monitored, and said so
+    assert reg["pr-estuario-bacteria"]["monitored"] is True and "Weekly enterococci results" in \
+        reg["pr-estuario-bacteria"]["note"]
+    assert "not a current list" not in t and "posts the results each Friday" in t
     assert "shows grey" not in t and "no beach advisory record" in t
     assert "does not say when each report was published" in t and "reaches that file" not in t
     assert "plant its description names" not in t and "no place is guessed from the text" in t
