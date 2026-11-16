@@ -74,6 +74,18 @@ def test_rio_de_apeadero_is_not_put_on_rio_chico(resolver):
 def test_the_caribbean_sea_is_not_put_on_the_stream_near_culebra(resolver):
     out = resolver.resolve(_records()["PR0026549:1:1"])
     assert "unnamed-stream-near-culebra-pr" not in out["water_slugs"] and out["water_slugs"] == []
+    assert out["unplaced_reason"] == S.OPEN_SEA_NONE                       # the audit's P2-3: the reason is given
+
+
+def test_the_open_sea_reason_reads_spanish_and_english_and_only_in_puerto_rico(resolver):
+    from tests.test_pr_review_fixes import _ev
+    for text in ("OCEANO ATLANTICO", "Oceano Atlantico", "Caribe Ocean", "CARIBBEAN SEA", "ATLANTIC OCEAN", "Mar Caribe"):
+        out = resolver.resolve(_ev(text, None, None, raw={"_placement": "named_water_only"}))
+        assert out["water_slugs"] == [] and out["unplaced_reason"] == S.OPEN_SEA_NONE, text
+    for text in ("QUEBRADA  Y EL RIO APEADERO", "Charca los corazones"):                # not the sea: no such reason
+        out = resolver.resolve(_ev(text, None, None, raw={"_placement": "named_water_only"}))
+        assert out.get("unplaced_reason") != S.OPEN_SEA_NONE, text
+    assert not S.folds("NY") and S.ACCENT_FOLD_STATES == frozenset({"PR"})              # keyed on Puerto Rico only
 
 
 def test_a_named_water_and_a_point_on_a_water_still_place(resolver):
