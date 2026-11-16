@@ -185,29 +185,13 @@ def test_other_states_records_with_listed_periods_are_unchanged(monkeypatch):
     assert ivs == S.event_intervals(a, None, now, None, _rules())
 
 
-# --------------------------------------------- portable invariance: other feeds' status output equals c123f36's
-
-BASE = "c123f36"
-
-
-def _base_status():
-    import importlib.util
-    import subprocess
-    import sys
-    import tempfile
-    root = Path(__file__).resolve().parents[2]
-    try:
-        src = subprocess.run(["git", "-C", str(root), "show", f"{BASE}:pipeline/build/status.py"], capture_output=True,
-                             text=True, check=True).stdout
-    except (OSError, subprocess.CalledProcessError):
-        pytest.skip(f"commit {BASE} is not in this checkout")
-    f = Path(tempfile.mkdtemp()) / "status_base.py"
-    f.write_text(src)
-    spec = importlib.util.spec_from_file_location("build._status_base_c123f36", f)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = mod
-    spec.loader.exec_module(mod)
-    return mod
+# --------------------------------------------- invariance: the observation periods reach no other feed's output
+# (The check against c123f36's status module, loaded from git history, was retired on 2026-11-15: that module read the
+# repository's current rules, waters and states, so its answer moved with the data and the state other tests left,
+# and failed in the whole suite once Missouri's waters existed; and a frozen base breaks on every later change to
+# status.py. The change it guarded, 6b7e576, is the keyed branch into _observed_period_intervals and nothing else in
+# build/status.py, so the same records are checked here on their own: no other feed ever takes that branch, and its
+# listed_periods change nothing in the intervals or in the serialised build.)
 
 
 def _invented_other_records():
@@ -235,40 +219,96 @@ def _invented_other_records():
     return out
 
 
-def test_other_feeds_status_output_is_identical_to_the_base():
-    base = _base_status()
+def _without_periods(r: dict) -> dict:
+    return {**r, "raw": {k: v for k, v in r["raw"].items() if k != "listed_periods"}}
+
+
+def _never(*a, **k):
+    raise AssertionError("another feed's record took the observation-period branch")
+
+
+def test_no_other_feed_takes_the_observation_period_branch(monkeypatch):
+    recs = _invented_other_records()
+    assert sum(1 for r in recs if "listed_periods" in r["raw"]) >= 200
+    rules = _real_rules()
+    now = datetime(2026, 11, 15, tzinfo=timezone.utc)
+    monkeypatch.setattr(S, "_observed_period_intervals", _never)
+    for r in recs:
+        assert S.event_intervals(r, None, now, None, rules) == \
+            S.event_intervals(_without_periods(r), None, now, None, rules), r["event_id"]
+
+
+# the status module's state a build sets or fills; the comparison below must leave every one as it found it
+STATUS_GLOBALS = ("_STATES", "_SHORE_REACHES", "_STRETCH_REACHES", "_RULES", "WITHHELD", "NOT_LIVE", "ALIAS_PROBLEMS",
+                  "_GEOM_CACHE", "_REACH_WATERS", "_COUNTIES", "_RECORD_COUNTIES")
+_SNAPSHOT: dict = {}
+
+
+def _status_globals() -> dict:
+    return {k: (id(getattr(S, k)), copy.copy(getattr(S, k))) for k in STATUS_GLOBALS}
+
+
+@pytest.fixture
+def seeded_status_globals():
+    """Known values in the module's state before the build test (as another test, or a run, may leave them); the test
+    after it checks they are still there."""
+    seeds = {"_STATES": {"NE"}, "_SHORE_REACHES": {"seed-shore"}, "_STRETCH_REACHES": {"seed-stretch"}}
+    old = {k: getattr(S, k) for k in seeds}
+    for k, v in seeds.items():
+        setattr(S, k, v)
+    _SNAPSHOT.clear()
+    _SNAPSHOT.update(_status_globals())
+    yield
+    _SNAPSHOT["after"] = _status_globals()
+    for k, v in old.items():
+        setattr(S, k, v)
+
+
+def test_other_feeds_status_output_is_the_same_with_and_without_listed_periods(seeded_status_globals, monkeypatch,
+                                                                                 tmp_path):
+    from build import rain_likely as R
     recs = _invented_other_records()
     rules = _real_rules()
     now = datetime(2026, 11, 15, tzinfo=timezone.utc)
-    for r in recs:
-        assert S.event_intervals(r, None, now, None, rules) == base.event_intervals(r, None, now, None, rules), \
-            r["event_id"]
-    # the serialised build of the same records, placements and statuses included
-    import tempfile
-    d = Path(tempfile.mkdtemp())
-    by = {}
-    for r in recs:
-        by.setdefault(r["source_id"], []).append(r)
-    for sid, rr in by.items():
-        (d / f"{sid}.json").write_text(json.dumps({"source_id": sid, "ok": True, "last_ok_at": N3, "meta": {},
-                                                   "records": rr}))
+    monkeypatch.setattr(S, "_observed_period_intervals", _never)
+    # every input given, none read from the repository or data/build: a loader called here fails the test
+    for mod, name in ((S, "load_waters"), (S, "load_outfalls"), (S, "load_registry_outfalls"), (S, "load_registry"),
+                      (S, "load_discharger_towns"), (S, "load_discharger_waters"), (S, "discharger_aliases"),
+                      (R, "load_inputs")):
+        monkeypatch.setattr(mod, name, lambda *a, _n=name, **k: pytest.fail(f"the build read {_n}"))
+    rain = {"rainfall": {}, "history": {}, "thresholds": {}, "dischargers": {}, "site_flags": {}, "levels": {}}
     outs = []
-    for mod in (S, base):
-        mod._GEOM_CACHE.clear()
-        mod._REACH_WATERS.clear()
-        o, _ = mod.build(now=now, write=False, events_dir=d, waters={}, outfalls=[], registry={}, reaches={},
-                         flows=({}, {}), rules=rules, placement_cache=None)
+    for name, rr in (("with", recs), ("without", [_without_periods(r) for r in recs])):
+        d = tmp_path / name
+        d.mkdir()
+        by = {}
+        for r in rr:
+            by.setdefault(r["source_id"], []).append(r)
+        for sid, xs in by.items():
+            (d / f"{sid}.json").write_text(json.dumps({"source_id": sid, "ok": True, "last_ok_at": N3, "meta": {},
+                                                       "records": xs}))
+        for k in STATUS_GLOBALS:                         # fresh copies: whatever a build sets or fills is undone
+            v = getattr(S, k)
+            monkeypatch.setattr(S, k, copy.deepcopy(v))
+        o, _ = S.build(now=now, write=False, events_dir=d, waters={}, outfalls=[], registry={}, reaches={},
+                       flows=({}, {}), rules=rules, placement_cache=None, rain=copy.deepcopy(rain),
+                       discharger_towns={}, discharger_waters={}, discharger_aliases_map={})
         o = json.loads(json.dumps(o, default=str))
-        for v in o.values():                       # the build's own wall-clock stamp ("built") is not output
+        for v in o.values():                           # the build's own wall-clock stamp ("built") is not output
             if isinstance(v, dict):
                 v.pop("built", None)
         o.pop("built", None)
-        # the rain-levels feature (merged after the base) adds one key to the rules block; statuses, placements and
-        # every other key must still match the base's
-        (o.get("rules", {}).get("rain_likely") or {}).pop("label_by_level", None)
         outs.append(json.dumps(o, sort_keys=True))
     assert '"advisory_points": []' not in outs[0]
     assert outs[0] == outs[1]
+
+
+def test_the_build_comparison_left_the_status_modules_state_as_it_found_it():
+    if "after" not in _SNAPSHOT:
+        pytest.skip("runs after the build comparison above")
+    before, after = {k: v for k, v in _SNAPSHOT.items() if k != "after"}, _SNAPSHOT["after"]
+    changed = sorted(k for k in STATUS_GLOBALS if after[k] != before[k])
+    assert changed == []
 
 
 # --------------------------------------------- P1-2: a Delaware beach name's house number never reaches a save

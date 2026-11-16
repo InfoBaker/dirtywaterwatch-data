@@ -1,260 +1,27 @@
 {
  "about": "Water names in Montana's records that data/receiving-waters-national.json does not hold for MT: the waters the state's advisory and notice records name, one row per name and county, with the number of records, how many are open, the county and up to five points where the source gives them. Records naming no water are counted in by_reason. EPA's outfall registry gives every plant outfall its receiving water separately. Written by scripts/mountain_report_water_names.py.",
  "state": "MT",
- "waters": 131,
- "reports": 279,
- "by_reason": {},
- "resolved_names": 2,
- "resolved_reports": 2,
+ "waters": 72,
+ "reports": 100,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in MT": 56,
+  "1 NHD water of that name in MT, none within reach of the reports' places": 6,
+  "2 NHD waters of that name in MT, none within reach of the reports' places": 4,
+  "private property, not a public water": 3,
+  "a water record holds the name, but the reports' points lie too far from it to be placed there": 1,
+  "no water name": 1,
+  "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 1
+ },
+ "resolved_names": 59,
+ "resolved_reports": 179,
+ "build": {
+  "date": "2026-11-16",
+  "command": "python -m ingest.waters_from_nhd --names research/mt/receiving-waters-missing.json --state MT",
+  "records_built": 16,
+  "names_resolved": 59,
+  "network_requests": 110
+ },
  "rows": [
-  {
-   "name": "Lake Helena",
-   "reports": 16,
-   "open": 1,
-   "county": "Lewis & Clark County",
-   "points": [
-    [
-     46.706,
-     -111.915
-    ],
-    [
-     46.697,
-     -111.904
-    ],
-    [
-     46.702,
-     -111.957
-    ],
-    [
-     46.704,
-     -111.904
-    ],
-    [
-     46.706,
-     -111.917
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 16
-   }
-  },
-  {
-   "name": "Ennis Lake",
-   "reports": 15,
-   "open": 0,
-   "county": "Madison County",
-   "points": [
-    [
-     45.448,
-     -111.674
-    ],
-    [
-     45.448,
-     -111.675
-    ],
-    [
-     45.433,
-     -111.708
-    ],
-    [
-     45.443,
-     -111.706
-    ],
-    [
-     45.451,
-     -111.661
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 15
-   }
-  },
-  {
-   "name": "Hebgen Lake",
-   "reports": 15,
-   "open": 1,
-   "county": "Gallatin County",
-   "points": [
-    [
-     44.78,
-     -111.177
-    ],
-    [
-     44.802,
-     -111.215
-    ],
-    [
-     44.791,
-     -111.176
-    ],
-    [
-     44.784,
-     -111.178
-    ],
-    [
-     44.8,
-     -111.174
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 15
-   }
-  },
-  {
-   "name": "Hauser Lake",
-   "reports": 14,
-   "open": 0,
-   "county": "Lewis & Clark County",
-   "points": [
-    [
-     46.749,
-     -111.887
-    ],
-    [
-     46.739,
-     -111.889
-    ],
-    [
-     46.748,
-     -111.886
-    ],
-    [
-     46.743,
-     -111.886
-    ],
-    [
-     46.711,
-     -111.81
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 14
-   }
-  },
-  {
-   "name": "Canyon Ferry",
-   "reports": 11,
-   "open": 1,
-   "county": "Broadwater County",
-   "points": [
-    [
-     46.467,
-     -111.513
-    ],
-    [
-     46.461,
-     -111.514
-    ],
-    [
-     46.488,
-     -111.522
-    ],
-    [
-     46.465,
-     -111.513
-    ],
-    [
-     46.465,
-     -111.514
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 11
-   }
-  },
-  {
-   "name": "Cooney Reservoir",
-   "reports": 11,
-   "open": 1,
-   "county": "Carbon County",
-   "points": [
-    [
-     45.436,
-     -109.226
-    ],
-    [
-     45.449,
-     -109.213
-    ],
-    [
-     45.443,
-     -109.206
-    ],
-    [
-     45.44,
-     -109.228
-    ],
-    [
-     45.443,
-     -109.22
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 11
-   }
-  },
-  {
-   "name": "Hyalite Reservoir",
-   "reports": 9,
-   "open": 0,
-   "county": "Gallatin County",
-   "points": [
-    [
-     45.485,
-     -110.979
-    ],
-    [
-     45.481,
-     -110.964
-    ],
-    [
-     45.484,
-     -110.978
-    ],
-    [
-     45.487,
-     -110.978
-    ],
-    [
-     45.471,
-     -110.957
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 9
-   }
-  },
-  {
-   "name": "Holter Lake",
-   "reports": 7,
-   "open": 0,
-   "county": "Lewis & Clark County",
-   "points": [
-    [
-     46.938,
-     -111.951
-    ],
-    [
-     46.961,
-     -111.944
-    ],
-    [
-     46.87,
-     -111.902
-    ],
-    [
-     46.956,
-     -111.941
-    ],
-    [
-     46.911,
-     -111.934
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 7
-   }
-  },
   {
    "name": "Beaver Creek Reservoir",
    "reports": 6,
@@ -280,96 +47,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 6
-   }
-  },
-  {
-   "name": "Clark Canyon Reservoir",
-   "reports": 6,
-   "open": 1,
-   "county": "Beaverhead County",
-   "points": [
-    [
-     44.985,
-     -112.899
-    ],
-    [
-     44.969,
-     -112.872
-    ],
-    [
-     44.982,
-     -112.866
-    ],
-    [
-     44.99,
-     -112.855
-    ],
-    [
-     44.996,
-     -112.868
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 6
-   }
-  },
-  {
-   "name": "Canyon Ferry Lake",
-   "reports": 5,
-   "open": 0,
-   "county": "Broadwater County",
-   "points": [
-    [
-     46.489,
-     -111.525
-    ],
-    [
-     46.46,
-     -111.51
-    ],
-    [
-     46.409,
-     -111.571
-    ],
-    [
-     46.463,
-     -111.514
-    ],
-    [
-     46.521,
-     -111.592
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 5
-   }
-  },
-  {
-   "name": "Lake Elmo",
-   "reports": 5,
-   "open": 4,
-   "county": "Yellowstone County",
-   "points": [
-    [
-     45.843,
-     -108.483
-    ],
-    [
-     45.843,
-     -108.48
-    ],
-    [
-     45.841,
-     -108.48
-    ],
-    [
-     45.845,
-     -108.481
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 5
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Nevada Creek Reservoir",
@@ -396,7 +75,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 5
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Canyon Ferry Reservoir",
@@ -423,7 +103,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 4
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Baker Lake",
@@ -446,53 +127,15 @@
    ],
    "sources": {
     "mt-deq-hab-map": 3
-   }
-  },
-  {
-   "name": "Bearpaw Lake",
-   "reports": 3,
-   "open": 0,
-   "county": "Hill County",
-   "points": [
-    [
-     48.327,
-     -109.656
-    ],
-    [
-     48.327,
-     -109.658
-    ],
-    [
-     48.319,
-     -109.658
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 3
-   }
-  },
-  {
-   "name": "Canyon Ferry",
-   "reports": 3,
-   "open": 0,
-   "county": "Lewis & Clark County",
-   "points": [
-    [
-     46.463,
-     -111.514
-    ],
-    [
-     46.462,
-     -111.515
-    ],
-    [
-     46.643,
-     -111.715
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 3
-   }
+   },
+   "reason": "2 NHD waters of that name in MT, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "places_failed": [
+    {
+     "lon": -104.271,
+     "lat": 46.364,
+     "reason": "no NHD water of that name within 2 km of the reports' point (46.36400, -104.27100) (the nearest is 772.6 km away)"
+    }
+   ]
   },
   {
    "name": "Elk Grove Park Pond",
@@ -507,7 +150,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 3
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Harrison Lake",
@@ -530,72 +174,15 @@
    ],
    "sources": {
     "mt-deq-hab-map": 3
-   }
-  },
-  {
-   "name": "Hauser",
-   "reports": 3,
-   "open": 0,
-   "county": "Lewis & Clark County",
-   "points": [
-    [
-     46.739,
-     -111.888
-    ],
-    [
-     46.709,
-     -111.898
-    ],
-    [
-     46.703,
-     -111.902
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 3
-   }
-  },
-  {
-   "name": "Homestake Lake",
-   "reports": 3,
-   "open": 0,
-   "county": "Jefferson County",
-   "points": [
-    [
-     45.92,
-     -112.407
-    ],
-    [
-     45.92,
-     -112.406
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 3
-   }
-  },
-  {
-   "name": "Lake Mary Ronan",
-   "reports": 3,
-   "open": 0,
-   "county": "Lake County",
-   "points": [
-    [
-     47.917,
-     -114.383
-    ],
-    [
-     47.941,
-     -114.394
-    ],
-    [
-     47.944,
-     -114.396
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 3
-   }
+   },
+   "reason": "2 NHD waters of that name in MT, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "places_failed": [
+    {
+     "lon": -111.7,
+     "lat": 45.702,
+     "reason": "no NHD water of that name within 2 km of the reports' point (45.70200, -111.70000) (the nearest is 127.8 km away)"
+    }
+   ]
   },
   {
    "name": "Petrolia Reservoir",
@@ -618,7 +205,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 3
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Canyon Ferry Reservoir",
@@ -633,7 +221,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 2
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Causeway Arm",
@@ -652,26 +241,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 2
-   }
-  },
-  {
-   "name": "Clark Canyon",
-   "reports": 2,
-   "open": 0,
-   "county": "Beaverhead County",
-   "points": [
-    [
-     44.996,
-     -112.867
-    ],
-    [
-     44.971,
-     -112.879
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 2
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Elk Grove Pond",
@@ -690,7 +261,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 2
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Harrison Reservoir/Willow Creek Reservoir",
@@ -709,7 +281,11 @@
    ],
    "sources": {
     "mt-deq-hab-map": 2
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "parts": [
+    "Harrison Reservoir"
+   ]
   },
   {
    "name": "Hauser Reservoir",
@@ -728,45 +304,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 2
-   }
-  },
-  {
-   "name": "Holter",
-   "reports": 2,
-   "open": 0,
-   "county": "Lewis & Clark County",
-   "points": [
-    [
-     46.961,
-     -111.946
-    ],
-    [
-     46.872,
-     -111.904
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 2
-   }
-  },
-  {
-   "name": "Homestake lake",
-   "reports": 2,
-   "open": 0,
-   "county": "Silver Bow County",
-   "points": [
-    [
-     45.92,
-     -112.408
-    ],
-    [
-     45.92,
-     -112.407
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 2
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Homestead Subdivision Pond",
@@ -781,45 +320,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 2
-   }
-  },
-  {
-   "name": "Martinsdale Reservoir",
-   "reports": 2,
-   "open": 0,
-   "county": "Meagher County",
-   "points": [
-    [
-     46.444,
-     -110.264
-    ],
-    [
-     46.441,
-     -110.261
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 2
-   }
-  },
-  {
-   "name": "Nelson Reservoir",
-   "reports": 2,
-   "open": 0,
-   "county": "Phillips County",
-   "points": [
-    [
-     48.499,
-     -107.554
-    ],
-    [
-     48.518,
-     -107.532
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 2
-   }
+   },
+   "reason": "private property, not a public water"
   },
   {
    "name": "Noxon Reservoir",
@@ -838,26 +340,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 2
-   }
-  },
-  {
-   "name": "Placid Lake",
-   "reports": 2,
-   "open": 0,
-   "county": "Missoula County",
-   "points": [
-    [
-     47.112,
-     -113.54
-    ],
-    [
-     47.117,
-     -113.503
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 2
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Rogers Lake",
@@ -876,41 +360,15 @@
    ],
    "sources": {
     "mt-deq-hab-map": 2
-   }
-  },
-  {
-   "name": "Tongue River Reservoir",
-   "reports": 2,
-   "open": 0,
-   "county": "Big Horn County",
-   "points": [
-    [
-     45.117,
-     -106.773
-    ],
-    [
-     45.129,
-     -106.764
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 2
-   }
-  },
-  {
-   "name": "Ackley Lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Judith Basin County",
-   "points": [
-    [
-     46.953,
-     -109.939
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "1 NHD water of that name in MT, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "places_failed": [
+    {
+     "lon": -114.601,
+     "lat": 48.072,
+     "reason": "no NHD water of that name within 2 km of the reports' point (48.07200, -114.60100) (the nearest is 80.8 km away)"
+    }
+   ]
   },
   {
    "name": "Anita Reservoir",
@@ -925,22 +383,15 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Arapooish Pond",
-   "reports": 1,
-   "open": 0,
-   "county": "Big Horn County",
-   "points": [
-    [
-     45.756,
-     -107.57
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "1 NHD water of that name in MT, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "places_failed": [
+    {
+     "lon": -109.281,
+     "lat": 48.928,
+     "reason": "no NHD water of that name within 2 km of the reports' point (48.92800, -109.28100) (the nearest is 344.5 km away)"
+    }
+   ]
   },
   {
    "name": "Bailey Lake",
@@ -955,7 +406,15 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "1 NHD water of that name in MT, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "places_failed": [
+    {
+     "lon": -110.077,
+     "lat": 48.467,
+     "reason": "no NHD water of that name within 2 km of the reports' point (48.46700, -110.07700) (the nearest is 299.1 km away)"
+    }
+   ]
   },
   {
    "name": "Bailey Reservoir",
@@ -970,37 +429,18 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Bailey reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Hill County",
-   "points": [
-    [
-     48.475,
-     -110.116
-    ]
+   },
+   "records": [
+    "bailey-reservoir-mt"
    ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Bair Reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Meagher County",
-   "points": [
-    [
-     46.579,
-     -110.559
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   "reason": "a water record holds the name (bailey-reservoir-mt), but the reports' points lie too far from it to be placed there",
+   "places_failed": [
+    {
+     "lon": -110.077,
+     "lat": 48.466,
+     "reason": "no NHD water of that name within 2 km of the reports' point (48.46600, -110.07700) (the nearest is 2.7 km away)"
+    }
+   ]
   },
   {
    "name": "Bancroft Ponds",
@@ -1015,7 +455,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Beaver Creek Resevoir",
@@ -1030,7 +471,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Big Casino Creek Reservoir",
@@ -1045,7 +487,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Bighorn Canyon Reservoir",
@@ -1060,7 +503,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Bonneau Reservoir",
@@ -1075,7 +519,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Canyon Ferry Lake-west side",
@@ -1090,7 +535,11 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "parts": [
+    "Canyon Ferry Lake-west"
+   ]
   },
   {
    "name": "Canyon Ferry Resorvoir",
@@ -1105,22 +554,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Canyon ferry",
-   "reports": 1,
-   "open": 0,
-   "county": "Broadwater County",
-   "points": [
-    [
-     46.409,
-     -111.571
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Canyon ferry Location Duck Creek",
@@ -1135,52 +570,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Carters Pond (Lower Carter Pond)",
-   "reports": 1,
-   "open": 0,
-   "county": "Fergus County",
-   "points": [
-    [
-     47.142,
-     -109.429
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Chain of Lakes",
-   "reports": 1,
-   "open": 0,
-   "county": "Hill County",
-   "points": [
-    [
-     48.653,
-     -110.058
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Cooney Reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Meagher County",
-   "points": [
-    [
-     45.444,
-     -109.205
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Cooney Reservoir State Park",
@@ -1195,7 +586,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Cooney dam",
@@ -1210,22 +602,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Cooney reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Carbon County",
-   "points": [
-    [
-     45.434,
-     -109.227
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Cow Creek Reservoir",
@@ -1240,37 +618,15 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Delmoe Lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Silver Bow County",
-   "points": [
-    [
-     45.991,
-     -112.351
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Delmoe lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Jefferson County",
-   "points": [
-    [
-     45.985,
-     -112.342
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "1 NHD water of that name in MT, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "places_failed": [
+    {
+     "lon": -109.29,
+     "lat": 48.087,
+     "reason": "no NHD water of that name within 2 km of the reports' point (48.08700, -109.29000) (the nearest is 385.0 km away)"
+    }
+   ]
   },
   {
    "name": "Dry Fork Reservoir",
@@ -1285,67 +641,15 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Ennis lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Madison County",
-   "points": [
-    [
-     45.443,
-     -111.702
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Faber Reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Blaine County",
-   "points": [
-    [
-     48.263,
-     -109.135
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Fort Peck",
-   "reports": 1,
-   "open": 0,
-   "county": "Valley County",
-   "points": [
-    [
-     47.985,
-     -106.548
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Frenchman reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Phillips County",
-   "points": [
-    [
-     48.694,
-     -107.237
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "2 NHD waters of that name in MT, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "places_failed": [
+    {
+     "lon": -109.235,
+     "lat": 48.658,
+     "reason": "no NHD water of that name within 2 km of the reports' point (48.65800, -109.23500) (the nearest is 62.9 km away)"
+    }
+   ]
   },
   {
    "name": "Gates of the mountains",
@@ -1360,7 +664,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Grayling Atm of Hebgen Lake. Savage Point",
@@ -1375,7 +680,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no water name"
   },
   {
    "name": "Harper Lake",
@@ -1390,7 +696,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Harrison lake",
@@ -1405,7 +712,15 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "2 NHD waters of that name in MT, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "places_failed": [
+    {
+     "lon": -111.7,
+     "lat": 45.702,
+     "reason": "no NHD water of that name within 2 km of the reports' point (45.70200, -111.70000) (the nearest is 127.8 km away)"
+    }
+   ]
   },
   {
    "name": "Hauser Reservoir Causeway",
@@ -1420,7 +735,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Hauser Reservoir Causeway Arm",
@@ -1435,7 +751,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Hauser Reservoir Causeway.",
@@ -1450,7 +767,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Hauser Reservoir at White Sandy",
@@ -1465,7 +783,11 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "parts": [
+    "Hauser Reservoir"
+   ]
   },
   {
    "name": "Hauser/Holter",
@@ -1480,52 +802,11 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Heather lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Gallatin County",
-   "points": [
-    [
-     45.41,
-     -110.936
-    ]
+   },
+   "records": [
+    "hauser-lake-mt"
    ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Hebgen",
-   "reports": 1,
-   "open": 0,
-   "county": "Gallatin County",
-   "points": [
-    [
-     44.78,
-     -111.168
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Hebgen Lake (Rainbow Point Campground day use area)",
-   "reports": 1,
-   "open": 0,
-   "county": "Gallatin County",
-   "points": [
-    [
-     44.78,
-     -111.175
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   "reason": "a water record holds this water but not this spelling (hauser-lake-mt): a report of it is not placed there until the spelling is an alias (data/water-aliases.json)"
   },
   {
    "name": "Hebgen Reservoir",
@@ -1540,7 +821,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Hebgon Lake",
@@ -1555,7 +837,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Helena Regulating Reservoir",
@@ -1570,22 +853,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Holter Lake/Missouri R",
-   "reports": 1,
-   "open": 1,
-   "county": "Lewis & Clark County",
-   "points": [
-    [
-     46.872,
-     -111.905
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Holter Reservoir",
@@ -1600,52 +869,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Holter lake",
-   "reports": 1,
-   "open": 1,
-   "county": "Lewis & Clark County",
-   "points": [
-    [
-     46.878,
-     -111.913
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Homestake lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Jefferson County",
-   "points": [
-    [
-     45.92,
-     -112.408
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Hubbart Reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Flathead County",
-   "points": [
-    [
-     47.939,
-     -114.738
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Hyalite Lake",
@@ -1660,7 +885,15 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "1 NHD water of that name in MT, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "places_failed": [
+    {
+     "lon": -110.978,
+     "lat": 45.487,
+     "reason": "no NHD water of that name within 2 km of the reports' point (45.48700, -110.97800) (the nearest is 10.8 km away)"
+    }
+   ]
   },
   {
    "name": "Hyalite Resevoir",
@@ -1675,22 +908,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Hyalite reservoir",
-   "reports": 1,
-   "open": 1,
-   "county": "Gallatin County",
-   "points": [
-    [
-     45.485,
-     -110.979
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Lake Helena Causeway",
@@ -1705,7 +924,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Lake Helena Causeway fishing access",
@@ -1720,7 +940,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Lake Petrolia",
@@ -1735,7 +956,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Lakeside main lake",
@@ -1750,22 +972,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "McGregor Lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Flathead County",
-   "points": [
-    [
-     48.033,
-     -114.901
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Meadow lane pond",
@@ -1775,22 +983,8 @@
    "points": [],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Missouri",
-   "reports": 1,
-   "open": 1,
-   "county": "Cascade County",
-   "points": [
-    [
-     47.5,
-     -111.308
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Mystic Heights Subdivision Pond",
@@ -1805,22 +999,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Nevada Lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Lincoln County",
-   "points": [
-    [
-     46.798,
-     -112.801
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "private property, not a public water"
   },
   {
    "name": "Nevada Reservoir",
@@ -1835,7 +1015,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Nevada reservoir",
@@ -1850,7 +1031,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Noxon Reservoir on the lower Clark Fork River",
@@ -1865,7 +1047,11 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "parts": [
+    "Noxon Reservoir"
+   ]
   },
   {
    "name": "Pow Wow Pond",
@@ -1875,7 +1061,8 @@
    "points": [],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Pow Wow Pond (Malmstrom Air Force Base)",
@@ -1885,7 +1072,11 @@
    "points": [],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "Pow Wow Pond"
+   ]
   },
   {
    "name": "Rainbow Point at Hebgen Lake",
@@ -1900,7 +1091,11 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "parts": [
+    "Rainbow Point"
+   ]
   },
   {
    "name": "Romsett Beach Recreation Area at Hebgen Lake",
@@ -1915,7 +1110,11 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "parts": [
+    "Romsett Beach Recreation Area"
+   ]
   },
   {
    "name": "Ruby Reservoir",
@@ -1930,52 +1129,15 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Ruby River Reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Madison County",
-   "points": [
-    [
-     45.225,
-     -112.123
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Salmon Lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Missoula County",
-   "points": [
-    [
-     47.088,
-     -113.396
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Salmon Lake (south end",
-   "reports": 1,
-   "open": 0,
-   "county": "Missoula County",
-   "points": [
-    [
-     47.069,
-     -113.388
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "1 NHD water of that name in MT, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "places_failed": [
+    {
+     "lon": -112.122,
+     "lat": 45.224,
+     "reason": "no NHD water of that name within 2 km of the reports' point (45.22400, -112.12200) (the nearest is 509.8 km away)"
+    }
+   ]
   },
   {
    "name": "Sawmill Gulch pond in Beaver Creek Park",
@@ -1990,22 +1152,11 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Seeley Lake",
-   "reports": 1,
-   "open": 1,
-   "county": "Missoula County",
-   "points": [
-    [
-     47.193,
-     -113.506
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "parts": [
+    "Sawmill Gulch pond"
+   ]
   },
   {
    "name": "Sutherlin Resevior",
@@ -2020,7 +1171,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Tongue River Reservoir State Park",
@@ -2035,7 +1187,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Unknown stockwater pond",
@@ -2050,7 +1203,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Upper Holter",
@@ -2065,37 +1219,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Upper Holter Lake",
-   "reports": 1,
-   "open": 1,
-   "county": "Lewis & Clark County",
-   "points": [
-    [
-     46.825,
-     -111.954
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Upper Thompson Lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Lincoln County",
-   "points": [
-    [
-     48.064,
-     -115.136
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Valley Grove Subdivision Pond (Gallatin County)",
@@ -2110,7 +1235,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "private property, not a public water"
   },
   {
    "name": "Valley Grove and Rustler Trail Pond",
@@ -2125,7 +1251,12 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "Valley Grove: no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16; Rustler Trail Pond: no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16",
+   "parts": [
+    "Valley Grove",
+    "Rustler Trail Pond"
+   ]
   },
   {
    "name": "Valley West Pond",
@@ -2140,22 +1271,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Van Houten Lake",
-   "reports": 1,
-   "open": 0,
-   "county": "Beaverhead County",
-   "points": [
-    [
-     45.245,
-     -113.478
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Wadsworth Pond",
@@ -2170,7 +1287,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Willow Creek Dam",
@@ -2185,52 +1303,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Willow Creek Reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Madison County",
-   "points": [
-    [
-     45.714,
-     -111.7
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Willow Creek/Harrison Reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Gallatin County",
-   "points": [
-    [
-     45.706,
-     -111.705
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
-  },
-  {
-   "name": "Yellow Water Reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": "Petroleum County",
-   "points": [
-    [
-     46.905,
-     -108.471
-    ]
-   ],
-   "sources": {
-    "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "Yellowtail Lake",
@@ -2245,7 +1319,8 @@
    ],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-16"
   },
   {
    "name": "livestock pond (Petroleum County)",
@@ -2255,7 +1330,11 @@
    "points": [],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; the reports give no place to look for it in the NHD high-resolution flowlines",
+   "parts": [
+    "livestock pond"
+   ]
   },
   {
    "name": "unnamed pond near Jones Lake",
@@ -2265,7 +1344,1138 @@
    "points": [],
    "sources": {
     "mt-deq-hab-map": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in MT; the reports give no place to look for it in the NHD high-resolution flowlines"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Lake Helena",
+   "reports": 16,
+   "slugs": [
+    "lake-helena-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.706,
+     -111.915
+    ],
+    [
+     46.697,
+     -111.904
+    ],
+    [
+     46.702,
+     -111.957
+    ],
+    [
+     46.704,
+     -111.904
+    ],
+    [
+     46.706,
+     -111.917
+    ]
+   ],
+   "county": "Lewis & Clark County"
+  },
+  {
+   "name": "Ennis Lake",
+   "reports": 15,
+   "slugs": [
+    "ennis-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.448,
+     -111.674
+    ],
+    [
+     45.448,
+     -111.675
+    ],
+    [
+     45.433,
+     -111.708
+    ],
+    [
+     45.443,
+     -111.706
+    ],
+    [
+     45.451,
+     -111.661
+    ]
+   ],
+   "county": "Madison County"
+  },
+  {
+   "name": "Hebgen Lake",
+   "reports": 15,
+   "slugs": [
+    "hebgen-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     44.78,
+     -111.177
+    ],
+    [
+     44.802,
+     -111.215
+    ],
+    [
+     44.791,
+     -111.176
+    ],
+    [
+     44.784,
+     -111.178
+    ],
+    [
+     44.8,
+     -111.174
+    ]
+   ],
+   "county": "Gallatin County"
+  },
+  {
+   "name": "Hauser Lake",
+   "reports": 14,
+   "slugs": [
+    "hauser-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.749,
+     -111.887
+    ],
+    [
+     46.739,
+     -111.889
+    ],
+    [
+     46.748,
+     -111.886
+    ],
+    [
+     46.743,
+     -111.886
+    ],
+    [
+     46.711,
+     -111.81
+    ]
+   ],
+   "county": "Lewis & Clark County"
+  },
+  {
+   "name": "Canyon Ferry",
+   "reports": 11,
+   "slugs": [
+    "canyon-ferry-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.467,
+     -111.513
+    ],
+    [
+     46.461,
+     -111.514
+    ],
+    [
+     46.488,
+     -111.522
+    ],
+    [
+     46.465,
+     -111.513
+    ],
+    [
+     46.465,
+     -111.514
+    ]
+   ],
+   "county": "Broadwater County"
+  },
+  {
+   "name": "Cooney Reservoir",
+   "reports": 11,
+   "slugs": [
+    "cooney-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.436,
+     -109.226
+    ],
+    [
+     45.449,
+     -109.213
+    ],
+    [
+     45.443,
+     -109.206
+    ],
+    [
+     45.44,
+     -109.228
+    ],
+    [
+     45.443,
+     -109.22
+    ]
+   ],
+   "county": "Carbon County"
+  },
+  {
+   "name": "Hyalite Reservoir",
+   "reports": 9,
+   "slugs": [
+    "hyalite-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.485,
+     -110.979
+    ],
+    [
+     45.481,
+     -110.964
+    ],
+    [
+     45.484,
+     -110.978
+    ],
+    [
+     45.487,
+     -110.978
+    ],
+    [
+     45.471,
+     -110.957
+    ]
+   ],
+   "county": "Gallatin County"
+  },
+  {
+   "name": "Holter Lake",
+   "reports": 7,
+   "slugs": [
+    "holter-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.938,
+     -111.951
+    ],
+    [
+     46.961,
+     -111.944
+    ],
+    [
+     46.87,
+     -111.902
+    ],
+    [
+     46.956,
+     -111.941
+    ],
+    [
+     46.911,
+     -111.934
+    ]
+   ],
+   "county": "Lewis & Clark County"
+  },
+  {
+   "name": "Clark Canyon Reservoir",
+   "reports": 6,
+   "slugs": [
+    "clark-canyon-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     44.985,
+     -112.899
+    ],
+    [
+     44.969,
+     -112.872
+    ],
+    [
+     44.982,
+     -112.866
+    ],
+    [
+     44.99,
+     -112.855
+    ],
+    [
+     44.996,
+     -112.868
+    ]
+   ],
+   "county": "Beaverhead County"
+  },
+  {
+   "name": "Canyon Ferry Lake",
+   "reports": 5,
+   "slugs": [
+    "canyon-ferry-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.489,
+     -111.525
+    ],
+    [
+     46.46,
+     -111.51
+    ],
+    [
+     46.409,
+     -111.571
+    ],
+    [
+     46.463,
+     -111.514
+    ],
+    [
+     46.521,
+     -111.592
+    ]
+   ],
+   "county": "Broadwater County"
+  },
+  {
+   "name": "Lake Elmo",
+   "reports": 5,
+   "slugs": [
+    "lake-elmo-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.843,
+     -108.483
+    ],
+    [
+     45.843,
+     -108.48
+    ],
+    [
+     45.841,
+     -108.48
+    ],
+    [
+     45.845,
+     -108.481
+    ]
+   ],
+   "county": "Yellowstone County"
+  },
+  {
+   "name": "Bearpaw Lake",
+   "reports": 3,
+   "slugs": [
+    "bearpaw-lake-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     48.327,
+     -109.656
+    ],
+    [
+     48.327,
+     -109.658
+    ],
+    [
+     48.319,
+     -109.658
+    ]
+   ],
+   "county": "Hill County"
+  },
+  {
+   "name": "Canyon Ferry",
+   "reports": 3,
+   "slugs": [
+    "canyon-ferry-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.463,
+     -111.514
+    ],
+    [
+     46.462,
+     -111.515
+    ],
+    [
+     46.643,
+     -111.715
+    ]
+   ],
+   "county": "Lewis & Clark County"
+  },
+  {
+   "name": "Hauser",
+   "reports": 3,
+   "slugs": [
+    "hauser-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.739,
+     -111.888
+    ],
+    [
+     46.709,
+     -111.898
+    ],
+    [
+     46.703,
+     -111.902
+    ]
+   ],
+   "county": "Lewis & Clark County"
+  },
+  {
+   "name": "Homestake Lake",
+   "reports": 3,
+   "slugs": [
+    "homestake-lake-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     45.92,
+     -112.407
+    ],
+    [
+     45.92,
+     -112.406
+    ]
+   ],
+   "county": "Jefferson County"
+  },
+  {
+   "name": "Lake Mary Ronan",
+   "reports": 3,
+   "slugs": [
+    "lake-mary-ronan-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     47.917,
+     -114.383
+    ],
+    [
+     47.941,
+     -114.394
+    ],
+    [
+     47.944,
+     -114.396
+    ]
+   ],
+   "county": "Lake County"
+  },
+  {
+   "name": "Clark Canyon",
+   "reports": 2,
+   "slugs": [
+    "clark-canyon-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     44.996,
+     -112.867
+    ],
+    [
+     44.971,
+     -112.879
+    ]
+   ],
+   "county": "Beaverhead County"
+  },
+  {
+   "name": "Holter",
+   "reports": 2,
+   "slugs": [
+    "holter-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.961,
+     -111.946
+    ],
+    [
+     46.872,
+     -111.904
+    ]
+   ],
+   "county": "Lewis & Clark County"
+  },
+  {
+   "name": "Homestake lake",
+   "reports": 2,
+   "slugs": [
+    "homestake-lake-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     45.92,
+     -112.408
+    ],
+    [
+     45.92,
+     -112.407
+    ]
+   ],
+   "county": "Silver Bow County"
+  },
+  {
+   "name": "Martinsdale Reservoir",
+   "reports": 2,
+   "slugs": [
+    "martinsdale-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.444,
+     -110.264
+    ],
+    [
+     46.441,
+     -110.261
+    ]
+   ],
+   "county": "Meagher County"
+  },
+  {
+   "name": "Nelson Reservoir",
+   "reports": 2,
+   "slugs": [
+    "nelson-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     48.499,
+     -107.554
+    ],
+    [
+     48.518,
+     -107.532
+    ]
+   ],
+   "county": "Phillips County"
+  },
+  {
+   "name": "Placid Lake",
+   "reports": 2,
+   "slugs": [
+    "placid-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     47.112,
+     -113.54
+    ],
+    [
+     47.117,
+     -113.503
+    ]
+   ],
+   "county": "Missoula County"
+  },
+  {
+   "name": "Tongue River Reservoir",
+   "reports": 2,
+   "slugs": [
+    "tongue-river-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.117,
+     -106.773
+    ],
+    [
+     45.129,
+     -106.764
+    ]
+   ],
+   "county": "Big Horn County"
+  },
+  {
+   "name": "Ackley Lake",
+   "reports": 1,
+   "slugs": [
+    "ackley-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.953,
+     -109.939
+    ]
+   ],
+   "county": "Judith Basin County"
+  },
+  {
+   "name": "Arapooish Pond",
+   "reports": 1,
+   "slugs": [
+    "arapooish-pond-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.756,
+     -107.57
+    ]
+   ],
+   "county": "Big Horn County"
+  },
+  {
+   "name": "Bailey reservoir",
+   "reports": 1,
+   "slugs": [
+    "bailey-reservoir-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     48.475,
+     -110.116
+    ]
+   ],
+   "county": "Hill County",
+   "places_failed": [
+    {
+     "lon": -110.077,
+     "lat": 48.466,
+     "reason": "no NHD water of that name within 2 km of the reports' point (48.46600, -110.07700) (the nearest is 2.7 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Bair Reservoir",
+   "reports": 1,
+   "slugs": [
+    "bair-reservoir-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     46.579,
+     -110.559
+    ]
+   ],
+   "county": "Meagher County"
+  },
+  {
+   "name": "Canyon ferry",
+   "reports": 1,
+   "slugs": [
+    "canyon-ferry-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.409,
+     -111.571
+    ]
+   ],
+   "county": "Broadwater County"
+  },
+  {
+   "name": "Carters Pond (Lower Carter Pond)",
+   "reports": 1,
+   "slugs": [
+    "carters-pond-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     47.142,
+     -109.429
+    ]
+   ],
+   "county": "Fergus County"
+  },
+  {
+   "name": "Chain of Lakes",
+   "reports": 1,
+   "slugs": [
+    "chain-of-lakes-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     48.653,
+     -110.058
+    ]
+   ],
+   "county": "Hill County"
+  },
+  {
+   "name": "Cooney Reservoir",
+   "reports": 1,
+   "slugs": [
+    "cooney-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.444,
+     -109.205
+    ]
+   ],
+   "county": "Meagher County"
+  },
+  {
+   "name": "Cooney reservoir",
+   "reports": 1,
+   "slugs": [
+    "cooney-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.434,
+     -109.227
+    ]
+   ],
+   "county": "Carbon County"
+  },
+  {
+   "name": "Delmoe Lake",
+   "reports": 1,
+   "slugs": [
+    "delmoe-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.991,
+     -112.351
+    ]
+   ],
+   "county": "Silver Bow County"
+  },
+  {
+   "name": "Delmoe lake",
+   "reports": 1,
+   "slugs": [
+    "delmoe-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.985,
+     -112.342
+    ]
+   ],
+   "county": "Jefferson County"
+  },
+  {
+   "name": "Ennis lake",
+   "reports": 1,
+   "slugs": [
+    "ennis-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.443,
+     -111.702
+    ]
+   ],
+   "county": "Madison County"
+  },
+  {
+   "name": "Faber Reservoir",
+   "reports": 1,
+   "slugs": [
+    "faber-reservoir-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     48.263,
+     -109.135
+    ]
+   ],
+   "county": "Blaine County"
+  },
+  {
+   "name": "Fort Peck",
+   "reports": 1,
+   "slugs": [
+    "fort-peck-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     47.985,
+     -106.548
+    ]
+   ],
+   "county": "Valley County"
+  },
+  {
+   "name": "Frenchman reservoir",
+   "reports": 1,
+   "slugs": [
+    "frenchman-reservoir-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     48.694,
+     -107.237
+    ]
+   ],
+   "county": "Phillips County"
+  },
+  {
+   "name": "Heather lake",
+   "reports": 1,
+   "slugs": [
+    "heather-lake-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     45.41,
+     -110.936
+    ]
+   ],
+   "county": "Gallatin County"
+  },
+  {
+   "name": "Hebgen",
+   "reports": 1,
+   "slugs": [
+    "hebgen-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     44.78,
+     -111.168
+    ]
+   ],
+   "county": "Gallatin County"
+  },
+  {
+   "name": "Hebgen Lake (Rainbow Point Campground day use area)",
+   "reports": 1,
+   "slugs": [
+    "hebgen-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     44.78,
+     -111.175
+    ]
+   ],
+   "county": "Gallatin County"
+  },
+  {
+   "name": "Holter Lake/Missouri R",
+   "reports": 1,
+   "slugs": [
+    "holter-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.872,
+     -111.905
+    ]
+   ],
+   "county": "Lewis & Clark County"
+  },
+  {
+   "name": "Holter lake",
+   "reports": 1,
+   "slugs": [
+    "holter-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     46.878,
+     -111.913
+    ]
+   ],
+   "county": "Lewis & Clark County"
+  },
+  {
+   "name": "Homestake lake",
+   "reports": 1,
+   "slugs": [
+    "homestake-lake-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     45.92,
+     -112.408
+    ]
+   ],
+   "county": "Jefferson County"
+  },
+  {
+   "name": "Hubbart Reservoir",
+   "reports": 1,
+   "slugs": [
+    "hubbart-reservoir-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     47.939,
+     -114.738
+    ]
+   ],
+   "county": "Flathead County"
+  },
+  {
+   "name": "Hyalite reservoir",
+   "reports": 1,
+   "slugs": [
+    "hyalite-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.485,
+     -110.979
+    ]
+   ],
+   "county": "Gallatin County"
+  },
+  {
+   "name": "McGregor Lake",
+   "reports": 1,
+   "slugs": [
+    "mcgregor-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     48.033,
+     -114.901
+    ]
+   ],
+   "county": "Flathead County"
+  },
+  {
+   "name": "Missouri",
+   "reports": 1,
+   "slugs": [
+    "missouri-river-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     47.5,
+     -111.308
+    ]
+   ],
+   "county": "Cascade County"
+  },
+  {
+   "name": "Nevada Lake",
+   "reports": 1,
+   "slugs": [
+    "nevada-lake-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     46.798,
+     -112.801
+    ]
+   ],
+   "county": "Lincoln County"
+  },
+  {
+   "name": "Ruby River Reservoir",
+   "reports": 1,
+   "slugs": [
+    "ruby-river-reservoir-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     45.225,
+     -112.123
+    ]
+   ],
+   "county": "Madison County"
+  },
+  {
+   "name": "Salmon Lake",
+   "reports": 1,
+   "slugs": [
+    "salmon-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     47.088,
+     -113.396
+    ]
+   ],
+   "county": "Missoula County"
+  },
+  {
+   "name": "Salmon Lake (south end",
+   "reports": 1,
+   "slugs": [
+    "salmon-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     47.069,
+     -113.388
+    ]
+   ],
+   "county": "Missoula County"
+  },
+  {
+   "name": "Seeley Lake",
+   "reports": 1,
+   "slugs": [
+    "seeley-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     47.193,
+     -113.506
+    ]
+   ],
+   "county": "Missoula County"
+  },
+  {
+   "name": "Upper Holter Lake",
+   "reports": 1,
+   "slugs": [
+    "upper-holter-lake-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     46.825,
+     -111.954
+    ]
+   ],
+   "county": "Lewis & Clark County"
+  },
+  {
+   "name": "Upper Thompson Lake",
+   "reports": 1,
+   "slugs": [
+    "upper-thompson-lake-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     48.064,
+     -115.136
+    ]
+   ],
+   "county": "Lincoln County"
+  },
+  {
+   "name": "Van Houten Lake",
+   "reports": 1,
+   "slugs": [
+    "van-houten-lake-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     45.245,
+     -113.478
+    ]
+   ],
+   "county": "Beaverhead County"
+  },
+  {
+   "name": "Willow Creek Reservoir",
+   "reports": 1,
+   "slugs": [
+    "willow-creek-reservoir-mt"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     45.714,
+     -111.7
+    ]
+   ],
+   "county": "Madison County"
+  },
+  {
+   "name": "Willow Creek/Harrison Reservoir",
+   "reports": 1,
+   "slugs": [
+    "willow-creek-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     45.706,
+     -111.705
+    ]
+   ],
+   "county": "Gallatin County"
+  },
+  {
+   "name": "Yellow Water Reservoir",
+   "reports": 1,
+   "slugs": [
+    "yellow-water-reservoir-mt"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     46.905,
+     -108.471
+    ]
+   ],
+   "county": "Petroleum County"
   }
  ]
 }

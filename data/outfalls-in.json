@@ -1257,7 +1257,8 @@
    "distance_m": null,
    "match": "name_only",
    "water_match": "name: its receiving water 'MISSISSINEWA RIVER' by name; Mississinewa River (mississinewa-river-in, openboatlaunch), no point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
+   "no_point_reason": "EPA's national CSO inventory gives only the treatment plant's point for this outfall, and no source found places it (read 2026-11-15): IDEM's CSO outfall layer (https://services5.arcgis.com/w1CjlfkUGYWS5MJd/arcgis/rest/services/CSO_Locations_Map_WFL1/FeatureServer/0) lists five Ridgeville points (002, 003, 004 twice, 101), none 102; EPA's map of active combined sewer outfalls (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Combined_Sewer_Overflows/FeatureServer/0) lists 004 and 101 for this permit; ECHO's NPDES outfall layer (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/oeca__echo__npdes_facilities_outfalls/FeatureServer/0) lists features 001 to 004 and 101. No point is used."
   },
   {
    "npdes_permit": "IN0020044",
@@ -2966,7 +2967,8 @@
    "distance_m": null,
    "match": "name_only",
    "water_match": "NHD builder: the NHD builder's water for 'E FK WHITE R' in IN (as found for the permits that name it: EPA's NHD reach/NHDPlus id 05120206000050, 18454687, 18454689, 18454695: GNIS 'East Fork White River' (450879); no snapping; the same water as existing record east-fork-white-river-in); East Fork White River (east-fork-white-river-in, openboatlaunch), no point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
+   "no_point_reason": "EPA's national CSO inventory gives only the treatment plant's point for this outfall, and no source found places it (read 2026-11-15): IDEM's CSO outfall layer (https://services5.arcgis.com/w1CjlfkUGYWS5MJd/arcgis/rest/services/CSO_Locations_Map_WFL1/FeatureServer/0) lists one Greensburg point (006, inactive); EPA's map of active combined sewer outfalls (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Combined_Sewer_Overflows/FeatureServer/0) lists 007 for this permit; ECHO's NPDES outfall layer (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/oeca__echo__npdes_facilities_outfalls/FeatureServer/0) lists features 001, 006 and 007. No point is used."
   },
   {
    "npdes_permit": "IN0020133",
@@ -2999,7 +3001,8 @@
    "distance_m": null,
    "match": "name_only",
    "water_match": "NHD builder: the NHD builder's water for 'E FK WHITE R' in IN (as found for the permits that name it: EPA's NHD reach/NHDPlus id 05120206000050, 18454687, 18454689, 18454695: GNIS 'East Fork White River' (450879); no snapping; the same water as existing record east-fork-white-river-in); East Fork White River (east-fork-white-river-in, openboatlaunch), no point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
+   "no_point_reason": "EPA's national CSO inventory gives only the treatment plant's point for this outfall, and no source found places it (read 2026-11-15): IDEM's CSO outfall layer (https://services5.arcgis.com/w1CjlfkUGYWS5MJd/arcgis/rest/services/CSO_Locations_Map_WFL1/FeatureServer/0) lists one Greensburg point (006, inactive); EPA's map of active combined sewer outfalls (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Combined_Sewer_Overflows/FeatureServer/0) lists 007 for this permit; ECHO's NPDES outfall layer (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/oeca__echo__npdes_facilities_outfalls/FeatureServer/0) lists features 001, 006 and 007. No point is used."
   },
   {
    "npdes_permit": "IN0020133",
@@ -17243,9 +17246,9 @@
    "sub_basin": "Upper White",
    "watershed": "Pleasant Run-White River",
    "wastewater_type": "Treated CSO",
-   "lat": null,
-   "lon": null,
-   "coords_from": null,
+   "lat": 39.726,
+   "lon": -86.19,
+   "coords_from": "EPA permitted feature (IDEM's layer gives no point)",
    "outfall_kind": "cso",
    "country": "US",
    "source": "in-idem-cso-outfall-layer",
@@ -17254,14 +17257,20 @@
    "source_record_id": 383,
    "idem_agency_interest_id": 10868,
    "fetched_at": "2026-11-14T18:05:00Z",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory; the permit's listed receiving waters (Little Buck Creek, White River, Eagle Creek, Bean Creek, Pleasant Run) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory; the permit's listed receiving waters (Little Buck Creek, White River, Eagle Creek, Bean Creek, Pleasant Run) cannot be told apart for this outfall",
-   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
+   "water_slug": "white-river-in",
+   "water_name": "White River",
+   "water_kind": "river",
+   "distance_m": 35,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (35 m; snapped within 150 m); White River (white-river-in, openboatlaunch), 35 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
+   "coords_note": "IDEM's layer lists outfall 005 ('CSO', Active, Treated CSO) without a point, and EPA's CSO inventory does not list it; EPA's ICIS gives the permit's feature 005 its own point (EPA's discharge-point file, the Belmont plant's outfall to the West Fork White River), used here at three decimals, as every point of this file is",
+   "coords_source": {
+    "name": "IDEM's CSO outfall layer (https://services5.arcgis.com/w1CjlfkUGYWS5MJd/arcgis/rest/services/CSO_Locations_Map_WFL1/FeatureServer/0), OBJECTID 383; EPA ECHO ICIS-NPDES discharge points (npdes_outfalls_layer.zip, NPDES_OUTFALLS_LAYER.csv, file dated 2026-11-01; the row of data/outfalls-plants-us.json for the same permit and feature): 39.726167, -86.190389",
+    "url": "https://echo.epa.gov/detailed-facility-report?fid=110011829129",
+    "read_at": "2026-11-15",
+    "by": "scripts/outfall_point_corrections.py (2026-11-15)"
+   }
   },
   {
    "npdes_permit": "IN0023183",
@@ -38307,9 +38316,9 @@
    "sub_basin": "St Marys",
    "watershed": null,
    "wastewater_type": "Untreated CSO",
-   "lat": null,
-   "lon": null,
-   "coords_from": null,
+   "lat": 41.078,
+   "lon": -85.098,
+   "coords_from": "EPA permitted feature (IDEM's layer gives no point)",
    "outfall_kind": "cso",
    "country": "US",
    "source": "in-idem-cso-outfall-layer",
@@ -38318,14 +38327,20 @@
    "source_record_id": 238,
    "idem_agency_interest_id": 15335,
    "fetched_at": "2026-11-14T18:05:00Z",
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no receiving-water text in EPA's inventory; no point in EPA's inventory; the permit's listed receiving waters (Maumee River, Unnamed Tributary, Saint Marys River, Spy Run Creek, Saint Joseph River) cannot be told apart for this outfall",
-   "no_water_reason": "no receiving-water text in EPA's inventory; no point in EPA's inventory; the permit's listed receiving waters (Maumee River, Unnamed Tributary, Saint Marys River, Spy Run Creek, Saint Joseph River) cannot be told apart for this outfall",
-   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
+   "water_slug": "maumee-river-in",
+   "water_name": "Maumee River",
+   "water_kind": "river",
+   "distance_m": 146,
+   "match": "geometry",
+   "water_match": "point: no receiving-water text; the water record at the outfall's point (146 m; snapped within 150 m); Maumee River (maumee-river-in, openboatlaunch), 146 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
+   "coords_note": "IDEM's layer lists outfall 001 ('CSO - EPA requested 5/2005', Active, Untreated CSO) without a point, and EPA's CSO inventory does not list it; EPA's ICIS gives the permit's feature 001 its own point, and that feature carries the limit set 'CSO - EPA requested 05/2005' beside the plant's main outfall (EPA's discharge-point file; ECHO's NPDES outfall layer (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/oeca__echo__npdes_facilities_outfalls/FeatureServer/0): the same point), used here at three decimals, as every point of this file is",
+   "coords_source": {
+    "name": "IDEM's CSO outfall layer (https://services5.arcgis.com/w1CjlfkUGYWS5MJd/arcgis/rest/services/CSO_Locations_Map_WFL1/FeatureServer/0), OBJECTID 238; EPA ECHO ICIS-NPDES discharge points (npdes_outfalls_layer.zip, NPDES_OUTFALLS_LAYER.csv, file dated 2026-11-01; the row of data/outfalls-plants-us.json for the same permit and feature): 41.0775, -85.097778; ECHO's NPDES outfall layer (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/oeca__echo__npdes_facilities_outfalls/FeatureServer/0)",
+    "url": "https://echo.epa.gov/detailed-facility-report?fid=110009390756",
+    "read_at": "2026-11-15",
+    "by": "scripts/outfall_point_corrections.py (2026-11-15)"
+   }
   },
   {
    "npdes_permit": "IN0032191",
@@ -41929,7 +41944,8 @@
    "distance_m": null,
    "match": "name_only",
    "water_match": "NHD builder: no receiving-water text; no receiving-water name; the NHD builder's water for this outfall (NLDI position COMID 10204849 (80 m): an unnamed NHDPlus flowline with no named water within 50 km downstream); Unnamed stream near Fairfield (unnamed-stream-near-fairfield-in, NHDPlus V2.1 record), no point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-15)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-15)",
+   "no_point_reason": "EPA's national CSO inventory gives only the treatment plant's point for this outfall, and no source found places it (read 2026-11-15): IDEM's CSO outfall layer (https://services5.arcgis.com/w1CjlfkUGYWS5MJd/arcgis/rest/services/CSO_Locations_Map_WFL1/FeatureServer/0) lists thirteen Lafayette points, none 022; EPA's map of active combined sewer outfalls (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Combined_Sewer_Overflows/FeatureServer/0) lists ten outfalls for this permit, not 022; ECHO's NPDES outfall layer (https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/oeca__echo__npdes_facilities_outfalls/FeatureServer/0) lists seventeen features, not 022 (ECHO's effluent service lists feature 022's monitoring, without a location). No point is used."
   },
   {
    "npdes_permit": "IN0032476",

@@ -14,7 +14,7 @@ level: "local"
 #   discharges (1 to 8 a quarter) are scanned forms with no text: counted from the summary, not itemised.
 # Records: one per row, sso, status unknown (no end given), day precision in Central time (the site's caution for 72
 #   hours from the start of the day: data/rules.json unresolved.day_start_caution), published_at the report's issue
-#   date, the gallons given, the receiving water as written; 'None' or no water (102 of the 219 rows) kept with the parish and permit and
+#   date, the gallons given, the receiving water as written; 'None' or no water (95 of the 219 rows) kept with the parish and permit and
 #   placed on no water. No address is kept. Delay: the rows are one to four months old when the report appears.
 # Cannot fill: a time of day; an end; a point; the plants' discharges.
 cadence: "the index with the refresh; a new report fetched once, the newest two reports and any report with no accepted copy are read again every 30 days (quarterly, about a month after the quarter)"
@@ -29,4 +29,4 @@ access: ["pdf"]
 access_detail: "The regulatory information page links each report as a PDF (about 2.5 MB, 76 pages); Part D's collection-system tables are text, the plant forms are images."
 machine_readable: false
 legal_basis: "Consent decree (2002), Paragraph 26, Section XI"
-checked: "2026-11-14"
+checked: "2026-11-15"

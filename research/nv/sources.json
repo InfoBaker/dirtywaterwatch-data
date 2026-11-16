@@ -93,7 +93,7 @@
   "license": null,
   "legal_basis": null,
   "status": "rejected",
-  "status_reason": "Intake only (an online form and account login); no public view of the notices found. The host did not answer the collector on 2026-11-14.",
+  "status_reason": "Intake only (an online form and account login); no public view of the notices found.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": ""
@@ -149,7 +149,7 @@
   "access": [
    "html"
   ],
-  "access_detail": "The page's three accordion sections (HAB Watch, Warning and Danger Advisories): one bold heading per water with its update date, then the parks' paragraph; 'None at this time.' for an empty level.",
+  "access_detail": "The page's three accordion sections (HAB Watch, Warning and Danger Advisories): one bold heading per water with its update date, then the parks' paragraph; 'None' or 'None at this time.' for an empty level.",
   "machine_readable": true,
   "sample_record": null,
   "fields": [
@@ -176,7 +176,7 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Read by the nv-state-parks-hab ingester: one hab_advisory record per water while listed, the parks' level and words, the first read as the start. The live host refused the collector's connections on 2026-11-14 (no answer on ports 443 and 80); the parser was built and tested on the Internet Archive's copies of 2025-11-12 (Rye Patch Watch, Lahontan Warning) and 2026-08-13 (Lahontan, Rye Patch, Marlette Lake and Washoe Lake Watch).",
+  "status_reason": "Read by the nv-state-parks-hab ingester: one hab_advisory record per water while listed, the parks' level and words, the first read as the start. The parser was built and tested on the Internet Archive's copies of 2025-11-12 (Rye Patch Watch, Lahontan Warning) and 2026-08-13 (Lahontan, Rye Patch, Marlette Lake and Washoe Lake Watch), and on the page as the pipeline read it on 2026-11-16 (Rye Patch and Wild Horse Watch, Lahontan Warning, no Danger).",
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": "Waters in Nevada state parks only."

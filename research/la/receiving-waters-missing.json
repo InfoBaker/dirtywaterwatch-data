@@ -1,24 +1,24 @@
 {
  "about": "Water names in Louisiana's records that data/receiving-waters-national.json does not hold for LA: Baton Rouge's consent-decree quarterly reports (the receiving water of each discharge, Reports 93 to 98 that pass the layout check, read 2026-11-14), with the number of records giving each and the parish.",
  "state": "LA",
- "waters": 29,
- "reports": 84,
+ "waters": 17,
+ "reports": 41,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in LA": 14,
+  "5 NHD waters of that name in LA and the reports give no place to choose one": 1,
+  "4 NHD waters of that name in LA and the reports give no place to choose one": 1,
+  "2 NHD waters of that name in LA and the reports give no place to choose one": 1
+ },
+ "resolved_names": 12,
+ "resolved_reports": 43,
+ "build": {
+  "date": "2026-11-15",
+  "command": "python -m ingest.waters_from_nhd --names research/la/receiving-waters-missing.json --state LA",
+  "records_built": 12,
+  "names_resolved": 12,
+  "network_requests": 0
+ },
  "rows": [
-  {
-   "name": "Dawson Creek",
-   "reports": 11,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036412"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
   {
    "name": "Jones Creek",
    "reports": 8,
@@ -32,37 +32,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Weiner Creek",
-   "reports": 8,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036412"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Bayou Fountain",
-   "reports": 7,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036412"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "5 NHD waters of that name in LA and the reports give no place to choose one"
   },
   {
    "name": "Claycut Bayou",
@@ -77,7 +47,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Lively Bayou",
@@ -92,37 +62,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Bayou Manchac",
-   "reports": 3,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036412"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Beaver Bayou",
-   "reports": 3,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036439"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Clay Cut Bayou",
@@ -137,7 +77,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Corporation Canal",
@@ -152,22 +92,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Knox Branch",
-   "reports": 3,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036412"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Bayou Duplantier",
@@ -182,23 +107,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Comite River",
-   "reports": 2,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036412",
-    "LA0036439"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Harelson Lateral",
@@ -213,22 +122,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Jacks Bayou",
-   "reports": 2,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036412"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Melrose Canal",
@@ -243,7 +137,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Roberts Canal",
@@ -258,7 +152,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Selene Bayou",
@@ -273,7 +167,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Arlington Creek",
@@ -288,7 +182,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Beechwood Lateral",
@@ -303,22 +197,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Blackwater Bayou",
-   "reports": 1,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036439"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Bocage Canal",
@@ -333,37 +212,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Draughan Creek",
-   "reports": 1,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036439"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Honey Cut Bayou",
-   "reports": 1,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036412"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Jones Bayou",
@@ -378,7 +227,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "4 NHD waters of that name in LA and the reports give no place to choose one"
   },
   {
    "name": "Manchac Bayou",
@@ -393,22 +242,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
-  },
-  {
-   "name": "Saunders Bayou",
-   "reports": 1,
-   "counties": [
-    "East Baton Rouge Parish"
-   ],
-   "points": [],
-   "permits": [
-    "LA0036439"
-   ],
-   "sources": [
-    "la-baton-rouge-quarterly"
-   ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Shoe Creek",
@@ -423,7 +257,7 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "no NHD flowline or waterbody of that name in LA; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "White Bayou",
@@ -438,7 +272,105 @@
    "sources": [
     "la-baton-rouge-quarterly"
    ],
-   "reason": "not in data/receiving-waters-national.json for LA; the reports give no point: place in the parish"
+   "reason": "2 NHD waters of that name in LA and the reports give no place to choose one"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Dawson Creek",
+   "reports": 11,
+   "slugs": [
+    "dawson-creek-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Weiner Creek",
+   "reports": 8,
+   "slugs": [
+    "weiner-creek-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Bayou Fountain",
+   "reports": 7,
+   "slugs": [
+    "bayou-fountain-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Bayou Manchac",
+   "reports": 3,
+   "slugs": [
+    "bayou-manchac-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Beaver Bayou",
+   "reports": 3,
+   "slugs": [
+    "beaver-bayou-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Knox Branch",
+   "reports": 3,
+   "slugs": [
+    "knox-branch-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Comite River",
+   "reports": 2,
+   "slugs": [
+    "comite-river-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Jacks Bayou",
+   "reports": 2,
+   "slugs": [
+    "jacks-bayou-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Blackwater Bayou",
+   "reports": 1,
+   "slugs": [
+    "blackwater-bayou-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Draughan Creek",
+   "reports": 1,
+   "slugs": [
+    "draughan-creek-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Honey Cut Bayou",
+   "reports": 1,
+   "slugs": [
+    "honey-cut-bayou-la"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Saunders Bayou",
+   "reports": 1,
+   "slugs": [
+    "saunders-bayou-la"
+   ],
+   "how": "record built from the name"
   }
  ]
 }

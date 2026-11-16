@@ -1,0 +1,59 @@
+name: Runner probe
+# One ordinary GET per address from GitHub's runner, with the pipeline's own user agent (pipeline/common.py), to tell
+# whether a source that does not answer a developer's machine answers the pipeline. 2026-11-16: the Mac could not open
+# a connection to several state hosts (parks.nv.gov, dnrmaps.wi.gov, apps.dnr.wi.gov, www.superiorwi.gov) that the
+# runner reads, and Wisconsin and Nevada had been recorded as having no readable source. A barrier (a 403, a bot wall,
+# a timeout) is recorded in the register only when the runner meets it too.
+#
+# It prints, per address: the HTTP status, the size, the time, the content type and the final address. Nothing of the
+# body goes to the log. With save, the bodies are kept for three days as an artifact, for building test fixtures:
+# never save a page that can hold personal data (a name, a phone number, an e-mail address), because this
+# repository is public. This workflow reads only; it takes no secret, commits nothing and is in no concurrency group,
+# so it never waits for a refresh or a water batch and never holds one up. It makes one request per address: never
+# use it to work around a refusal.
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: addresses, separated by spaces or new lines (at most 40)
+        required: true
+      save:
+        description: keep the bodies as an artifact for three days (pages without personal data only)
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: pipeline/common.py
+          sparse-checkout-cone-mode: false
+      - name: One ordinary request per address
+        env:
+          URLS: ${{ inputs.urls }}
+        run: |
+          set -u
+          UA=$(grep -m1 -o '"User-Agent": "[^"]*"' pipeline/common.py | cut -d'"' -f4)
+          [ -n "$UA" ] || { echo "::error::the pipeline's user agent was not found in pipeline/common.py"; exit 1; }
+          mkdir -p probe
+          i=0
+          for u in $URLS; do
+            i=$((i+1))
+            [ "$i" -le 40 ] || { echo "more than 40 addresses: the rest are not requested"; break; }
+            case "$u" in https://*|http://*) ;; *) echo "$i (not an http address, skipped)"; continue;; esac
+            out=$(curl -sS -L --max-redirs 5 --connect-timeout 20 -m 60 -A "$UA" -o "probe/$i.body" \
+                  -w "%{http_code} %{size_download}B %{time_total}s %{content_type} -> %{url_effective}" "$u" 2>"probe/$i.err") \
+              || out="no answer ($(head -c 160 "probe/$i.err" | tr '\n' ' '))"
+            echo "$i $u : $out"
+          done | tee probe/summary.txt
+      - name: Keep the bodies (pages without personal data only)
+        if: ${{ inputs.save }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: runner-probe-${{ github.run_id }}
+          path: probe
+          retention-days: 3

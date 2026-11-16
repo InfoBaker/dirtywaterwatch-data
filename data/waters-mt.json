@@ -1,0 +1,5346 @@
+{
+ "state": "MT",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 159,
+ "waters": [
+  {
+   "slug": "ackley-lake-mt",
+   "name": "Ackley Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Hobson"
+   ],
+   "bbox": [
+    -109.945894,
+    46.94806,
+    -109.931876,
+    46.958922
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.959,
+   "launches": [
+    "ackley-lake-state-park-east-side-boat-ramp-mt",
+    "ackley-lake-state-park-west-side-boat-ramp-mt"
+   ],
+   "water_id": "ackley-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "ad6f355772305621dc822ebaae82c76b29de95e67c0f79ac4706f15e994584a4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "alexander-creek-mt",
+   "name": "Alexander Creek",
+   "kind": "stream",
+   "state": "MT",
+   "towns": [
+    "Jennings"
+   ],
+   "bbox": [
+    -115.36883,
+    48.391904,
+    -115.327395,
+    48.443525
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "downstream-area-gravel-boat-ramp-mt"
+   ],
+   "water_id": "alexander-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "44346e59e8fe072130617fbc3d508ab1cd39e9e31d1b06f75747c2c73913417b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "alvord-lake-mt",
+   "name": "Alvord Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Troy"
+   ],
+   "bbox": [
+    -115.887611,
+    48.487759,
+    -115.879292,
+    48.500567
+   ],
+   "wikidata": "Q4738341",
+   "charted": false,
+   "area_km2": 0.314,
+   "launches": [
+    "alvord-lake-boat-launch-mt"
+   ],
+   "water_id": "alvord-lake-mt",
+   "gnis_id": "1782346",
+   "geometry_hash": "d351cf350ec0880f562d9db11794f85f6f5c234b252bb59139a118923531513e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "arapooish-pond-mt",
+   "name": "Arapooish Pond",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Hardin"
+   ],
+   "bbox": [
+    -107.570306,
+    45.752818,
+    -107.564866,
+    45.756418
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.116,
+   "launches": [
+    "arapooish-fishing-access-site-mt"
+   ],
+   "water_id": "arapooish-pond-mt",
+   "gnis_id": null,
+   "geometry_hash": "81bd500ba929933cdf4e88f89988e30826f71139aa7fb4e21d1bc014f6ec2f30",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "arod-lakes-mt",
+   "name": "Arod Lakes",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Conrad"
+   ],
+   "bbox": [
+    -112.039737,
+    47.989982,
+    -112.011862,
+    47.999656
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.762,
+   "launches": [
+    "arod-lake-fishing-access-site-mt"
+   ],
+   "water_id": "arod-lakes-mt",
+   "gnis_id": null,
+   "geometry_hash": "ee5a9b67184ee57ef4e6c3d607cdc9f90dead08364c4acee2c7b31a81a197fdb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ashley-lake-mt",
+   "name": "Ashley Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -114.6505,
+    48.17811,
+    -114.55,
+    48.223686
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.171,
+   "launches": [
+    "ashley-lake-boat-mt"
+   ],
+   "water_id": "ashley-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "061fdbf32d4ba44d7f72ca3ab5310031ee771e4c3ceff2b06863287e83ac3739",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-lake-mt",
+   "name": "Beaver Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Whitefish"
+   ],
+   "bbox": [
+    -114.431012,
+    48.430149,
+    -114.41285,
+    48.440993
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.701,
+   "launches": [
+    "beaver-lake-fishing-access-site-mt"
+   ],
+   "water_id": "beaver-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "3d4450f2e3c43fed8f1f2e20d81ea5bbe54aed89a6eb2d8f3ab1c562fc30747a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beaverhead-river-mt",
+   "name": "Beaverhead River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Barretts",
+    "Dalys",
+    "Dillon"
+   ],
+   "bbox": [
+    -112.861913,
+    45.001013,
+    -112.332208,
+    45.562117
+   ],
+   "wikidata": "Q4878247",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "barretts-diversion-dam-boat-ramp-mt",
+    "beaverhead-river-boat-launch-mt-2",
+    "grasshopper-fishing-access-site-mt",
+    "henneberry-fishing-access-site-mt",
+    "high-bridge-fishing-access-site-mt",
+    "pipe-organ-fishing-access-site-mt"
+   ],
+   "water_id": "beaverhead-river-mt",
+   "gnis_id": "779637",
+   "geometry_hash": "83daeaceab931c24f70bbbf8da7688aba4ad2424a0c14eaa1753458803c1250a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beavertail-pond-mt",
+   "name": "Beavertail Pond",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Clinton"
+   ],
+   "bbox": [
+    -113.581561,
+    46.726584,
+    -113.576602,
+    46.728774
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.062,
+   "launches": [
+    "beavertail-pond-fishing-access-site-mt"
+   ],
+   "water_id": "beavertail-pond-mt",
+   "gnis_id": null,
+   "geometry_hash": "baba9981882c384368ca729bf15c5d9acaf0b3ec9a6436ebd02a5eb6e3570be6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-hole-river-mt",
+   "name": "Big Hole River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Dewey",
+    "Glen",
+    "Patterson Corner",
+    "Sodak Mill",
+    "Wisdom"
+   ],
+   "bbox": [
+    -113.51726,
+    45.175105,
+    -112.337637,
+    45.885256
+   ],
+   "wikidata": "Q858903",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "brownes-bridge-fishing-access-site-mt",
+    "dickie-bridge-boat-ramp-mt",
+    "big-hole-river-boat-launch-mt",
+    "divide-bridge-boat-ramp-mt",
+    "east-bank-boat-ramp-mt",
+    "fishtrap-creek-fishing-access-site-mt",
+    "george-grant-memorial-fishing-access-site-mt",
+    "glen-fishing-access-site-mt",
+    "big-hole-river-boat-launch-near-patterson-corner-mt",
+    "maiden-rock-boat-ramp-mt",
+    "maidenrock-fishing-access-site-mt",
+    "pintler-creek-boat-ramp-mt",
+    "powerhouse-fishing-access-site-mt",
+    "salmon-fly-fishing-access-site-mt",
+    "sawlog-creek-mt",
+    "tony-schoonen-fishing-access-site-mt"
+   ],
+   "water_id": "big-hole-river-mt",
+   "gnis_id": "779824",
+   "geometry_hash": "c6fc2d31d94bd87f33bb34ca7ae5d259159ad136c3db65a355f5ac7003207eb6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-therriault-lake-mt",
+   "name": "Big Therriault Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Eureka"
+   ],
+   "bbox": [
+    -114.880397,
+    48.92974,
+    -114.873223,
+    48.936025
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.258,
+   "launches": [
+    "big-therriault-lake-boating-ramp-mt"
+   ],
+   "water_id": "big-therriault-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "b6ab037f6860d99e0790be025751cb259d79b150be15ae6e9d9e538d0d0f414a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bighorn-lake-mt",
+   "name": "Bighorn Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Fort Smith",
+    "Hillsboro"
+   ],
+   "bbox": [
+    -108.266981,
+    44.855686,
+    -107.955733,
+    45.308709
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 45.641,
+   "launches": [
+    "barry-s-landing-boat-launch-mt",
+    "medicine-campground-boat-winch-mt"
+   ],
+   "water_id": "bighorn-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "dc78c2b1b28621107d59b1b096cf8811b22f98b9189aa48ccc3e7fa7e3a8afd0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bighorn-river-mt",
+   "name": "Bighorn River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Bighorn",
+    "Fort Smith",
+    "Foster",
+    "Hardin"
+   ],
+   "bbox": [
+    -107.958637,
+    45.306435,
+    -107.461957,
+    46.155626
+   ],
+   "wikidata": "Q859686",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "3-mile-river-boat-ramp-mt",
+    "afterbay-dam-boat-ramp-mt",
+    "general-custer-fishing-access-site-mt",
+    "grant-marsh-fishing-access-site-mt",
+    "mallard-s-landing-fishing-access-site-mt",
+    "manuel-lisa-fishing-access-site-mt",
+    "two-leggins-fishing-access-site-mt"
+   ],
+   "water_id": "bighorn-river-mt",
+   "gnis_id": "779903",
+   "geometry_hash": "cdf2a8586c1eb4671e1f0f79a690e0fb4d33094e11383f25e31df0e5bb42d86c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bitterroot-river-mt",
+   "name": "Bitterroot River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Bell Crossing",
+    "Como",
+    "Darby",
+    "Florence",
+    "Hamilton",
+    "Lolo",
+    "Peaks and Pines Park",
+    "Stevensville",
+    "Tucker",
+    "Woodside Crossing"
+   ],
+   "bbox": [
+    -114.187133,
+    45.955199,
+    -114.038958,
+    46.857878
+   ],
+   "wikidata": "Q334812",
+   "charted": false,
+   "area_km2": 0.407,
+   "launches": [
+    "angler-s-roost-fishing-access-site-mt",
+    "bell-crossing-fishing-access-site-mt",
+    "chief-looking-glass-fishing-access-site-mt",
+    "darby-bridge-fishing-access-site-mt",
+    "florence-bridge-fishing-access-site-mt",
+    "hannon-memorial-fishing-access-site-mt",
+    "poker-joe-fishing-access-site-mt",
+    "tucker-crossing-fishing-access-site-mt",
+    "wally-crawford-fishing-access-site-mt",
+    "woodside-bridge-fishing-access-site-mt"
+   ],
+   "water_id": "bitterroot-river-mt",
+   "gnis_id": "779961",
+   "geometry_hash": "3dc41136383a17afaa6874c5bb7ad5684f0a6dd134532c2675cbbd39f238eb83",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blackfoot-river-mt",
+   "name": "Blackfoot River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Barite",
+    "Bonner",
+    "East Missoula",
+    "McNamara",
+    "Miller",
+    "Ovando",
+    "Seeley Lake",
+    "Sunset"
+   ],
+   "bbox": [
+    -113.889518,
+    46.871018,
+    -112.35827,
+    47.044546
+   ],
+   "wikidata": "Q6114866",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "angevine-fishing-access-site-mt",
+    "cedar-meadow-fishing-access-site-mt",
+    "corrick-s-river-bend-fishing-access-site-mt",
+    "darrell-sall-memorial-boat-ramp-mt",
+    "johnsrud-park-fishing-access-site-mt",
+    "marco-flats-fishing-access-site-mt",
+    "river-junction-fishing-access-site-mt",
+    "roundup-fishing-access-site-mt",
+    "russell-gates-memorial-fishing-access-site-mt",
+    "scotty-brown-bridge-fishing-access-site-mt",
+    "three-stall-fishing-access-site-mt",
+    "weigh-station-fishing-access-site-mt",
+    "whitaker-bridge-fishing-access-site-mt"
+   ],
+   "water_id": "blackfoot-river-mt",
+   "gnis_id": "800475",
+   "geometry_hash": "fbf9b1340a7fe65a6aa6def849ae67869958afc1ebe62a8661b84d284da23f79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blanchard-lake-mt",
+   "name": "Blanchard Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Whitefish"
+   ],
+   "bbox": [
+    -114.370251,
+    48.372736,
+    -114.360992,
+    48.394811
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.62,
+   "launches": [
+    "blanchard-lake-fishing-access-site-mt"
+   ],
+   "water_id": "blanchard-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "42b54522c682a94efe17643b35f8e63e0db510295febd0588efbda6916a99f25",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bootjack-lake-mt",
+   "name": "Bootjack Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Whitefish"
+   ],
+   "bbox": [
+    -114.498245,
+    48.41744,
+    -114.490343,
+    48.426571
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "bootjack-lake-fishing-access-site-mt"
+   ],
+   "water_id": "bootjack-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "66dae0dd408b2afeb5f8fb935dbdf5c43d448f5266b41e511662c4cbd2428ece",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boulder-river-mt",
+   "name": "Boulder River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Big Timber"
+   ],
+   "bbox": [
+    -110.262925,
+    45.168627,
+    -109.92007,
+    45.853317
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.542,
+   "launches": [
+    "big-rock-fishing-access-site-mt"
+   ],
+   "water_id": "boulder-river-mt",
+   "gnis_id": null,
+   "geometry_hash": "618698517b69d9ecd82219f0f917be09821dd2501b022af63c948c7048359352",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "broadview-pond-mt",
+   "name": "Broadview Pond",
+   "kind": "pond",
+   "state": "MT",
+   "towns": [
+    "Broadview"
+   ],
+   "bbox": [
+    -108.887236,
+    46.104198,
+    -108.880863,
+    46.110996
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.236,
+   "launches": [
+    "broadview-pond-fishing-access-site-mt"
+   ],
+   "water_id": "broadview-pond-mt",
+   "gnis_id": null,
+   "geometry_hash": "d9c9e20f5acaac08f562feb1db3d7c73ea2d649d927d1c0e4b2ec97d70d309f2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brownes-lake-mt",
+   "name": "Brownes Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -112.827307,
+    45.523983,
+    -112.81749,
+    45.528782
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.159,
+   "launches": [
+    "brownes-lake-boat-launch-mt"
+   ],
+   "water_id": "brownes-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "1ea862b6de27b8b5cb24f3764562bd61e3e4a1459bd44134061d7b9bd222119a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "browns-lake-mt",
+   "name": "Browns Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Coughlin"
+   ],
+   "bbox": [
+    -113.02057,
+    46.945815,
+    -113.000376,
+    46.967809
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.335,
+   "launches": [
+    "brown-s-lake-fishing-access-site-mt"
+   ],
+   "water_id": "browns-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "a8e0652eeb63b6ea9bad6a8ef4b64fd853172edf8a13464f6aedcbdc535a5a5f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brush-lake-mt",
+   "name": "Brush Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -104.115264,
+    48.592534,
+    -104.102427,
+    48.605909
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.244,
+   "launches": [
+    "brush-lake-boat-launch-mt"
+   ],
+   "water_id": "brush-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "47afa8afbe9eca7bf63025c0153f685817b5ec64ca4e303005ccbe029668982f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bull-lake-mt",
+   "name": "Bull Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -115.867491,
+    48.214938,
+    -115.83905,
+    48.290157
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.477,
+   "launches": [
+    "bad-medicine-boating-mt",
+    "dorr-skeels-boating-site-mt"
+   ],
+   "water_id": "bull-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "e6d06068238e58938f9d1c6ec280ea2910ca43aeda482fe482e011d3a8a58130",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bull-river-mt",
+   "name": "Bull River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Noxon"
+   ],
+   "bbox": [
+    -115.871406,
+    48.0234,
+    -115.766152,
+    48.195821
+   ],
+   "wikidata": "Q22607272",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rd-2278-site-4-mt"
+   ],
+   "water_id": "bull-river-mt",
+   "gnis_id": "780580",
+   "geometry_hash": "5e50de66265be1565fca839b7d469e17ce395725a2416228d82f36db3d83316a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bynum-reservoir-mt",
+   "name": "Bynum Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -112.47245,
+    47.926997,
+    -112.397309,
+    47.964936
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.869,
+   "launches": [
+    "bynum-reservoir-fishing-access-site-mt"
+   ],
+   "water_id": "bynum-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "81559b975977c58c13d559f91f2f43cec4f271870c04a05bf851d02fbb577a5f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cabinet-gorge-reservoir-mt",
+   "name": "Cabinet Gorge Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Noxon"
+   ],
+   "bbox": [
+    -116.058184,
+    47.979534,
+    -115.746146,
+    48.091042
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.052,
+   "launches": [
+    "big-eddy-boat-ramp-day-use-mt",
+    "bull-river-boat-ramp-mt"
+   ],
+   "water_id": "cabinet-gorge-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "9bc33647e4068e25bbabcbaf1d4dfaee8487ecbaf8bf8eb6775e489f08e5e24f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "canyon-ferry-lake-mt",
+   "name": "Canyon Ferry Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Barker",
+    "Canyon Ferry",
+    "Cavetown",
+    "Townsend"
+   ],
+   "bbox": [
+    -111.729358,
+    46.362194,
+    -111.481942,
+    46.657987
+   ],
+   "wikidata": "Q5034204",
+   "charted": false,
+   "area_km2": 145.038,
+   "launches": [
+    "canyon-ferry-pond-4-boat-ramp-mt",
+    "chinamen-s-campground-boat-ramp-mt",
+    "cottonwood-campground-boat-ramp-mt",
+    "duck-creek-dispersed-camping-boat-ramp-mt",
+    "hellgate-campground-boat-ramp-1-mt",
+    "hellgate-campground-boat-ramp-2-mt",
+    "canyon-ferry-lake-boat-launch-near-cavetown-mt",
+    "canyon-ferry-lake-boat-launch-near-canyon-ferry-mt",
+    "canyon-ferry-lake-boat-launch-near-townsend-mt-3",
+    "canyon-ferry-lake-boat-launch-near-townsend-mt",
+    "canyon-ferry-lake-boat-launch-near-townsend-mt-5",
+    "canyon-ferry-lake-boat-launch-near-townsend-mt-6",
+    "canyon-ferry-lake-boat-launch-near-townsend-mt-7",
+    "canyon-ferry-lake-boat-launch-mt"
+   ],
+   "water_id": "canyon-ferry-lake-mt",
+   "gnis_id": "800551",
+   "geometry_hash": "e682fe643a8ae028eb6dfdeb422ddbf5168b2e226f4fc6f1e5fcef26c4fc533e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "canyon-ferry-lake-boat-launch-near-barker-mt",
+    "kims-marina-boat-ramp-mt",
+    "canyon-ferry-lake-boat-launch-near-canyon-ferry-mt-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "capeneys-lake-mt",
+   "name": "Capeneys Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Medicine Lake"
+   ],
+   "bbox": [
+    -104.339776,
+    48.463245,
+    -104.300211,
+    48.486605
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.852,
+   "launches": [
+    "gaffney-concrete-boat-launch-mt",
+    "lake-10-boat-launch-mt"
+   ],
+   "water_id": "capeneys-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "813e19e812811641598fa1314a0ffea40d126eaa63dd881f03fb851aba29ebb1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clark-canyon-reservoir-mt",
+   "name": "Clark Canyon Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -112.918648,
+    44.940393,
+    -112.843057,
+    45.001272
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 21.222,
+   "launches": [
+    "clark-canyon-reservoir-boat-launch-mt-4",
+    "clark-canyon-reservoir-boat-launch-mt-2",
+    "clark-canyon-reservoir-boat-launch-mt",
+    "clark-canyon-reservoir-boat-launch-mt-3"
+   ],
+   "water_id": "clark-canyon-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "2da41ba1f743622973d672746c191901c41dffc23f935a6a0e9ca9887be8a518",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clark-fork-mt",
+   "name": "Clark Fork",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Alberton",
+    "Clinton",
+    "Cyr",
+    "Deer Lodge",
+    "Drummond",
+    "East Missoula",
+    "Eddy",
+    "Frenchtown",
+    "Goldcreek",
+    "Lothrop",
+    "Missoula",
+    "Paradise"
+   ],
+   "bbox": [
+    -115.765197,
+    46.184507,
+    -112.723036,
+    47.996139
+   ],
+   "wikidata": "Q664874",
+   "charted": false,
+   "area_km2": 1.798,
+   "launches": [
+    "beavertail-hill-state-park-hand-launch-mt",
+    "big-eddy-fishing-access-site-mt",
+    "cascade-landing-mt",
+    "clark-fork-boat-launch-near-saint-regis-mt",
+    "cyr-bridge-fishing-access-site-mt",
+    "deep-creek-fishing-access-site-mt",
+    "dry-creek-fishing-access-site-mt",
+    "ferry-landing-boating-picnic-trailhead-mt",
+    "flatiron-ridge-fishing-access-site-mt",
+    "forest-grove-fishing-access-site-mt",
+    "gold-creek-fishing-access-site-mt",
+    "harper-s-bridge-fishing-access-site-mt",
+    "kelly-island-fishing-access-site-mt",
+    "kohrs-bend-fishing-access-site-mt",
+    "clark-fork-boat-launch-near-missoula-mt",
+    "mckay-landing-fishing-access-site-mt",
+    "paradise-crossing-fishing-access-site-mt",
+    "petty-creek-fishing-access-site-mt",
+    "ralph-s-takeout-mt",
+    "schwartz-creek-fishing-access-site-mt",
+    "sha-ron-fishing-access-site-mt",
+    "st-john-s-fishing-access-site-mt",
+    "st-regis-fishing-access-site-mt",
+    "tarkio-fishing-access-site-mt",
+    "clark-fork-boat-launch-near-thompson-falls-mt",
+    "turah-fishing-access-site-mt"
+   ],
+   "water_id": "clark-fork-mt",
+   "gnis_id": "798973",
+   "geometry_hash": "b071f168ad56b14c493db81ff15a887b8f6a72807ffea0d9378c4b3e18f10387",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "ems-boat-ramp-emergency-only-mt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "clarks-fork-yellowstone-river-mt",
+   "name": "Clarks Fork Yellowstone River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Bridger"
+   ],
+   "bbox": [
+    -109.894274,
+    44.783685,
+    -108.713968,
+    45.650957
+   ],
+   "wikidata": "Q2975665",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bridger-fishing-access-site-mt"
+   ],
+   "water_id": "clarks-fork-yellowstone-river-mt",
+   "gnis_id": "798974",
+   "geometry_hash": "c10d4af7f31dabe9f1da26dd960d3f8ffbca27f184d321377f5982020b8a0af4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clearwater-river-mt",
+   "name": "Clearwater River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Clearwater",
+    "Seeley Lake"
+   ],
+   "bbox": [
+    -113.59831,
+    46.964464,
+    -113.378726,
+    47.395607
+   ],
+   "wikidata": "Q49880927",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clearwater-crossing-fishing-access-site-mt",
+    "clearwater-river-boat-launch-near-seeley-lake-mt"
+   ],
+   "water_id": "clearwater-river-mt",
+   "gnis_id": "781367",
+   "geometry_hash": "dabf02d9bff457d937f1fc3a4e700b845bba0eace5c8ec44474fd2473612f41f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cliff-lake-mt",
+   "name": "Cliff Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -111.565428,
+    44.746447,
+    -111.52825,
+    44.793698
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.617,
+   "launches": [
+    "horn-creek-boat-launch-mt"
+   ],
+   "water_id": "cliff-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "6e9a21917e3143d46484cab90899099e226d9f3e952e3193aa57297494528bc6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cochrane-reservoir-mt",
+   "name": "Cochrane Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Great Falls"
+   ],
+   "bbox": [
+    -111.196622,
+    47.534349,
+    -111.148689,
+    47.553997
+   ],
+   "wikidata": "Q139672176",
+   "charted": false,
+   "area_km2": 0.997,
+   "launches": [],
+   "water_id": "cochrane-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "8ede99279d9958064a65d4eefd7b463aaf36ab7549ee15fca9aac59de38369bc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cochrane-reservoir-boat-launch-mt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cold-spring-creek-mt",
+   "name": "Cold Spring Creek",
+   "kind": "stream",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -111.631835,
+    45.606807,
+    -111.574682,
+    45.642715
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "canaday-boat-launch-mt"
+   ],
+   "water_id": "cold-spring-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "4b83833b67e48c8334f0754e7f93b699f351cdccf8ed3dddbbda80b55b819fb2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cole-ponds-mt",
+   "name": "Cole Ponds",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Cree Crossing"
+   ],
+   "bbox": [
+    -107.471152,
+    48.537499,
+    -107.462891,
+    48.544986
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.127,
+   "launches": [
+    "cole-ponds-fishing-access-site-mt"
+   ],
+   "water_id": "cole-ponds-mt",
+   "gnis_id": null,
+   "geometry_hash": "741259590ab151c2113a4e79384c251c48db24c60ccdacbcbf462af34dcccd0d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cooney-reservoir-mt",
+   "name": "Cooney Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Columbus"
+   ],
+   "bbox": [
+    -109.248564,
+    45.430619,
+    -109.200122,
+    45.453595
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.412,
+   "launches": [
+    "cooney-reservoir-boat-launch-near-columbus-mt",
+    "cooney-reservoir-boat-launch-near-columbus-mt-2",
+    "cooney-state-park-boat-ramp-mt"
+   ],
+   "water_id": "cooney-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "5bfb203da4ef6c7efb8bbfed88de3d9ab2de618556c8249ca16aea46b70cd8e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-lake-happys-inn-mt",
+   "name": "Crystal Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Happys Inn"
+   ],
+   "bbox": [
+    -115.150643,
+    48.068379,
+    -115.135283,
+    48.079509
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.853,
+   "launches": [
+    "crystal-lake-boat-launch-happys-inn-mt"
+   ],
+   "water_id": "crystal-lake-happys-inn-mt",
+   "gnis_id": null,
+   "geometry_hash": "e8694a532f9f605230fa358d0b32dac6b14dc550e3c88972da70b93a6d6f5860",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crystal-lake-mt",
+   "name": "Crystal Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -109.517201,
+    46.795587,
+    -109.511236,
+    46.805935
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.229,
+   "launches": [
+    "crystal-lake-boat-launch-mt"
+   ],
+   "water_id": "crystal-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "71c1cb691bba41a506d7f23f886b44f129120cd3ae15db52246f810fa0ae9c92",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dailey-lake-mt",
+   "name": "Dailey Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -110.823347,
+    45.256993,
+    -110.80908,
+    45.268079
+   ],
+   "wikidata": "Q49301324",
+   "charted": false,
+   "area_km2": 0.891,
+   "launches": [
+    "dailey-lake-fishing-access-site-mt"
+   ],
+   "water_id": "dailey-lake-mt",
+   "gnis_id": "782041",
+   "geometry_hash": "f0153a502772cfb28b2027147d79ba497165c278c92320248478b85a0419c345",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deadmans-basin-reservoir-mt",
+   "name": "Deadmans Basin Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Ryegate"
+   ],
+   "bbox": [
+    -109.4537,
+    46.327843,
+    -109.401741,
+    46.359736
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.987,
+   "launches": [
+    "deadman-s-basin-fishing-access-site-mt"
+   ],
+   "water_id": "deadmans-basin-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "b3b228ce82b9dfae74c38f1eca7eae9c7371673ac481311ad37ec277fed0a31b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dearborn-river-mt",
+   "name": "Dearborn River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -112.819443,
+    47.127709,
+    -111.911514,
+    47.331182
+   ],
+   "wikidata": "Q1168071",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "falls-creek-boat-launch-mt"
+   ],
+   "water_id": "dearborn-river-mt",
+   "gnis_id": "800688",
+   "geometry_hash": "53851cfb32c01777251cfab05ac2cf9e6441ea18442389371660a8122d9ea1ea",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deerlick-creek-mt",
+   "name": "Deerlick Creek",
+   "kind": "stream",
+   "state": "MT",
+   "towns": [
+    "West Glacier"
+   ],
+   "bbox": [
+    -113.881808,
+    48.426597,
+    -113.821596,
+    48.485374
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "moccasin-creek-river-access-boating-site-mt"
+   ],
+   "water_id": "deerlick-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "b77218470f9fbee9eb12ef3dfd2863dc753b66cd350d57cbbd43f72543acf2dd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "delmoe-lake-mt",
+   "name": "Delmoe Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Butte"
+   ],
+   "bbox": [
+    -112.37327,
+    45.983805,
+    -112.33756,
+    45.996671
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.283,
+   "launches": [
+    "delmoe-lake-boat-launch-mt"
+   ],
+   "water_id": "delmoe-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "6e7d6f2338d22e3b7d5609b4e5e96a72297b0da59da6f42a6d7c69ab513b2f95",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dickey-lake-mt",
+   "name": "Dickey Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Trego"
+   ],
+   "bbox": [
+    -114.8338,
+    48.701897,
+    -114.796057,
+    48.719918
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.784,
+   "launches": [
+    "north-dickey-boat-ramp-mt"
+   ],
+   "water_id": "dickey-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "6448d1ba2bf293b7a23c193772cd688f30cf97306fcbb81202563213a289c10e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "diversion-lake-mt",
+   "name": "Diversion Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -112.734749,
+    47.615529,
+    -112.706581,
+    47.621378
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.303,
+   "launches": [
+    "home-gulch-boat-launch-mt"
+   ],
+   "water_id": "diversion-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "2a772f4ee46d769c8c78b6f7dee62007339df746529211dc2496204194ccb948",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "drumbo-unit-mt",
+   "name": "Drumbo Unit",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Strater"
+   ],
+   "bbox": [
+    -107.682119,
+    48.367735,
+    -107.660605,
+    48.379881
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.109,
+   "launches": [
+    "boat-launch-boat-ramp-on-drumbo-unit-mt"
+   ],
+   "water_id": "drumbo-unit-mt",
+   "gnis_id": null,
+   "geometry_hash": "bd4f3e507f521380f5edb06ba55aa5eba2426feead7afa1d4d8592e5988cc7c7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "earthquake-lake-mt",
+   "name": "Earthquake Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Clark Springs"
+   ],
+   "bbox": [
+    -111.424973,
+    44.828735,
+    -111.353807,
+    44.855041
+   ],
+   "wikidata": "Q3107167",
+   "charted": false,
+   "area_km2": 2.539,
+   "launches": [
+    "earthquake-lake-boat-launch-mt"
+   ],
+   "water_id": "earthquake-lake-mt",
+   "gnis_id": "793664",
+   "geometry_hash": "e085cb03d680ba3db60609fc848044326ec07e6fe6535dbfece77de455f1085e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-rosebud-creek-mt",
+   "name": "East Rosebud Creek",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Alpine"
+   ],
+   "bbox": [
+    -109.642402,
+    45.201652,
+    -109.448755,
+    45.485996
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "east-rosebud-lake-access-mt"
+   ],
+   "water_id": "east-rosebud-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "7a48ee5bdea77e2bb6b5172f235fe4e10e8d24642143f939a8b1c035fcd0b584",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "echo-lake-mt",
+   "name": "Echo Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Bigfork"
+   ],
+   "bbox": [
+    -114.06679,
+    48.11299,
+    -114.02626,
+    48.138147
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.918,
+   "launches": [
+    "echo-lake-fishing-access-site-mt"
+   ],
+   "water_id": "echo-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "03cc0b9c9d6a40259bec68218f5f6d0e529bc9eb9d4eb44f5f9ca574535d9c2b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ennis-lake-mt",
+   "name": "Ennis Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Ennis",
+    "Watkins"
+   ],
+   "bbox": [
+    -111.714093,
+    45.408197,
+    -111.638048,
+    45.470106
+   ],
+   "wikidata": "Q49302257",
+   "charted": false,
+   "area_km2": 16.734,
+   "launches": [
+    "ennis-lake-boat-launch-near-ennis-mt",
+    "ennis-lake-boat-launch-near-watkins-mt",
+    "trail-creek-day-use-mt"
+   ],
+   "water_id": "ennis-lake-mt",
+   "gnis_id": "771231",
+   "geometry_hash": "ae54a7d7d25db662d35ea5e314afef116c1ec007af0af4d07ae21efb7e65f639",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eureka-reservoir-mt",
+   "name": "Eureka Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Choteau"
+   ],
+   "bbox": [
+    -112.32836,
+    47.877638,
+    -112.286094,
+    47.888668
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.887,
+   "launches": [
+    "eureka-reservoir-fishing-access-site-mt"
+   ],
+   "water_id": "eureka-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "175471a4bf40e32fc28724c87e5113c972a2156dca2ae9ca8bdcea23a0d49ea5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flathead-lake-mt",
+   "name": "Flathead Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Bigfork",
+    "Dayton",
+    "Elmo",
+    "Lakeside",
+    "Orchard Hills Mobile Home Park",
+    "Peaceful Haven Mobile Home Park",
+    "Polson",
+    "Somers"
+   ],
+   "bbox": [
+    -114.349506,
+    47.667026,
+    -114.015155,
+    48.088681
+   ],
+   "wikidata": "Q1427364",
+   "charted": false,
+   "area_km2": 557.479,
+   "launches": [
+    "flathead-lake-boat-launch-near-elmo-mt",
+    "bigfork-fishing-access-site-mt",
+    "ducharme-fishing-access-site-mt",
+    "flathead-lake-boat-launch-near-polson-mt-4",
+    "somers-fishing-access-site-mt",
+    "walstad-fishing-access-site-mt",
+    "flathead-lake-boat-launch-near-bigfork-mt",
+    "west-shore-state-park-boat-ramp-mt",
+    "woods-bay-fishing-access-site-mt",
+    "yellow-bay-state-park-boat-ramp-mt"
+   ],
+   "water_id": "flathead-lake-mt",
+   "gnis_id": "783514",
+   "geometry_hash": "5d01431af80edfc3a36034992f208d543606079a6f31d0f38cbb5a3edd8832ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flathead-river-moose-city-mt",
+   "name": "Flathead River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Moose City"
+   ],
+   "bbox": [
+    -114.517831,
+    49.001081,
+    -114.474671,
+    49.124986
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.759,
+   "launches": [
+    "canadian-border-river-access-boat-site-mt"
+   ],
+   "water_id": "flathead-river-moose-city-mt",
+   "gnis_id": null,
+   "geometry_hash": "6c262bf681d7636f827c9fe71f0ba9d60aad709d5ca6b8f3676cc8ed93f80e42",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flathead-river-mt",
+   "name": "Flathead River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Bigfork",
+    "Columbia Falls",
+    "Evergreen",
+    "West Glacier"
+   ],
+   "bbox": [
+    -114.777244,
+    47.344837,
+    -114.045243,
+    48.46601
+   ],
+   "wikidata": "Q268532",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "flathead-river-boat-launch-near-evergreen-mt",
+    "pressentine-fishing-access-site-mt",
+    "sportsmans-bridge-fishing-access-site-mt",
+    "teakettle-fishing-access-site-mt"
+   ],
+   "water_id": "flathead-river-mt",
+   "gnis_id": "783518",
+   "geometry_hash": "260c646965ffa1c6af77ee2eb26d7b63811430ff22a8409513da0fa19ba2f390",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fort-peck-lake-mt",
+   "name": "Fort Peck Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Nashua",
+    "Park Grove",
+    "Wheeler"
+   ],
+   "bbox": [
+    -108.012809,
+    47.396136,
+    -106.18283,
+    48.021752
+   ],
+   "wikidata": "Q4492006",
+   "charted": false,
+   "area_km2": 930.327,
+   "launches": [
+    "bonetrail-mt",
+    "devil-s-creek-recreation-area-boat-launch-mt",
+    "duck-creek-fishing-access-site-mt",
+    "flat-lake-recreation-area-boat-launch-mt",
+    "park-grove-boat-launch-mt",
+    "park-grove-boat-launch-mt-2",
+    "fourchette-bay-recreation-area-boat-launch-mt",
+    "fort-peck-lake-boat-launch-mt-2",
+    "hell-creek-state-park-boat-ramp-mt",
+    "hell-creek-state-park-boat-ramp-mt-2",
+    "nelson-creek-boat-launch-mt",
+    "pines-boat-launch-mt",
+    "rock-creek-fishing-access-site-mt"
+   ],
+   "water_id": "fort-peck-lake-mt",
+   "gnis_id": "771516",
+   "geometry_hash": "154f19a9583ed887fdf4b7a82aa610c198567b2ae925bcbd85cf79507617a7fc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fort-peck-lake-park-grove-mt",
+   "name": "Fort Peck Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Nashua",
+    "Park Grove"
+   ],
+   "bbox": [
+    -106.446,
+    48.05125,
+    -106.43825,
+    48.058
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.227,
+   "launches": [
+    "fort-peck-dredge-cut-pond-fishing-access-site-mt",
+    "nelson-dredge-boat-ramp-mt",
+    "round-house-point-boat-ramp-mt"
+   ],
+   "water_id": "fort-peck-lake-park-grove-mt",
+   "gnis_id": null,
+   "geometry_hash": "33be12c8bc377866e0929d78e93ad154c7e7efd493a6476e605de3b8ddb0d3e4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "frank-lake-mt",
+   "name": "Frank Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Eureka"
+   ],
+   "bbox": [
+    -115.015977,
+    48.792843,
+    -114.995762,
+    48.811726
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.629,
+   "launches": [
+    "frank-lake-1-mt"
+   ],
+   "water_id": "frank-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "89e4ba8958dde0c146744f36ac8ba3a35e34a5e1ae5d21b4a26b11b4cf894509",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fresno-reservoir-mt",
+   "name": "Fresno Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Beaver Creek",
+    "Fresno"
+   ],
+   "bbox": [
+    -110.097328,
+    48.594819,
+    -109.933823,
+    48.726684
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 21.279,
+   "launches": [
+    "fresno-beach-boat-ramp-mt",
+    "fresno-reservoir-boat-launch-mt",
+    "jaycees-beach-boat-ramp-mt",
+    "kremlin-bay-boat-ramp-mt"
+   ],
+   "water_id": "fresno-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "da42231a6aab3f9ba8c49cd4bd2202dec9fe2c59cbb2df57ba3dc87b88fc686b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gallatin-river-mt",
+   "name": "Gallatin River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Big Sky",
+    "Gallatin Gateway",
+    "Logan",
+    "Manhattan"
+   ],
+   "bbox": [
+    -111.498631,
+    44.921934,
+    -111.038714,
+    45.93873
+   ],
+   "wikidata": "Q1325962",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "axtell-bridge-fishing-access-site-mt",
+    "bud-lilly-fishing-access-site-mt",
+    "fr653-02-mt",
+    "gallatin-forks-fishing-access-site-mt",
+    "gallatin-river-boat-launch-near-manhattan-mt",
+    "hwy-191-storm-castle-boater-takeout-mt",
+    "hwy191-105-mm44-3-mt",
+    "hwy191-23-mt",
+    "hwy191-41-mt",
+    "hwy191-49-mm58-1-greek-ck-pullout-mt",
+    "hwy191-50-lava-mt",
+    "hwy191-77-mm53-6-mt",
+    "gallatin-river-boat-launch-near-big-sky-mt"
+   ],
+   "water_id": "gallatin-river-mt",
+   "gnis_id": "771688",
+   "geometry_hash": "a2334267d9952527f5de82922eaa7939f55e682678bd50470573813440bcc2b6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gartside-reservoir-mt",
+   "name": "Gartside Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Crane"
+   ],
+   "bbox": [
+    -104.280442,
+    47.58302,
+    -104.271242,
+    47.586654
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.149,
+   "launches": [
+    "gartside-reservoir-fishing-access-site-mt"
+   ],
+   "water_id": "gartside-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "a790ef5382bc0d49b3b418ca43bc72e0c8df85675cab16a30be0b5639176ada0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "georgetown-lake-mt",
+   "name": "Georgetown Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Philipsburg"
+   ],
+   "bbox": [
+    -113.329033,
+    46.166503,
+    -113.262305,
+    46.215041
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 12.593,
+   "launches": [
+    "grassy-point-mt",
+    "philipsburg-bay-boat-launch-mt",
+    "piney-boat-launch-mt",
+    "red-bridge-fishing-access-mt",
+    "stuart-mill-bay-fishing-access-site-mt"
+   ],
+   "water_id": "georgetown-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "7a9a063272f9d167f8478b1568642f84e6c9325505cd902163da43819163cdd3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gibson-reservoir-mt",
+   "name": "Gibson Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -112.840887,
+    47.592193,
+    -112.760711,
+    47.623574
+   ],
+   "wikidata": "Q5559387",
+   "charted": false,
+   "area_km2": 5.369,
+   "launches": [
+    "gibson-boat-launch-mt"
+   ],
+   "water_id": "gibson-reservoir-mt",
+   "gnis_id": "795612",
+   "geometry_hash": "dda6d3a83d0d2c5dab52411fd5707bf8c14802c0fb8b86c386b540006e1b787f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gipsy-lake-mt",
+   "name": "Gipsy Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Manger"
+   ],
+   "bbox": [
+    -111.212938,
+    46.501906,
+    -111.21053,
+    46.503243
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.017,
+   "launches": [
+    "gipsy-day-use-mt"
+   ],
+   "water_id": "gipsy-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "3e21658f39556d27c30cf642b5fb5de27cf6efd8a4c7eae8a0e6074b98896e6c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "glen-lake-mt",
+   "name": "Glen Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Eureka"
+   ],
+   "bbox": [
+    -114.958881,
+    48.856645,
+    -114.94109,
+    48.87529
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.426,
+   "launches": [
+    "glen-lake-fishing-access-site-mt"
+   ],
+   "water_id": "glen-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "91d9dd64465cd40d8d67da4bdb9d15822691b2048af79bb01731d67a6e320f1b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "harpers-lake-mt",
+   "name": "Harpers Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Clearwater"
+   ],
+   "bbox": [
+    -113.383482,
+    47.021499,
+    -113.378322,
+    47.024601
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.083,
+   "launches": [
+    "harpers-lake-fishing-access-site-mt"
+   ],
+   "water_id": "harpers-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "b8ed1548a069b029968cef185927c6f298ac2668b04b6883444b55e817dc5615",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hauser-lake-mt",
+   "name": "Hauser Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Canyon Ferry",
+    "East Helena",
+    "Helena"
+   ],
+   "bbox": [
+    -111.904304,
+    46.648385,
+    -111.728033,
+    46.765842
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.987,
+   "launches": [
+    "hauser-lake-boat-launch-near-helena-mt-2",
+    "hauser-lake-boat-launch-near-east-helena-mt-2",
+    "hauser-lake-boat-launch-near-east-helena-mt",
+    "hauser-lake-boat-launch-near-canyon-ferry-mt",
+    "hauser-lake-boat-launch-near-helena-mt",
+    "york-bridge-fishing-access-site-mt"
+   ],
+   "water_id": "hauser-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "b03d5ef5e878f3b0a301324a01b544c90784405b8200cbe8514647fa7e477bab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hebgen-lake-mt",
+   "name": "Hebgen Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Grayling",
+    "Kirkwood",
+    "Lonesome Hurst Summer Home Area",
+    "West Yellowstone"
+   ],
+   "bbox": [
+    -111.336701,
+    44.722674,
+    -111.122446,
+    44.864217
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 53.651,
+   "launches": [
+    "lonesomehurst-boating-site-mt",
+    "rainbow-point-boat-launch-mt"
+   ],
+   "water_id": "hebgen-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "b01d63775fc9ef7cb34b1c438e20e333448ceaeba073afe315c30909aa4fcb3b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "helena-valley-regulating-reservoir-mt",
+   "name": "Helena Valley Regulating Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "East Helena"
+   ],
+   "bbox": [
+    -111.883712,
+    46.628213,
+    -111.858146,
+    46.649314
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.009,
+   "launches": [
+    "helena-valley-reservoir-fishing-access-site-mt"
+   ],
+   "water_id": "helena-valley-regulating-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "4ecec745069d59720331636b2163ebc9139d1868a4ae4edf171e0a9f52042748",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "holland-lake-mt",
+   "name": "Holland Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -113.616258,
+    47.442165,
+    -113.578472,
+    47.453599
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.826,
+   "launches": [
+    "holland-lake-boating-site-mt"
+   ],
+   "water_id": "holland-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "49800ed5b9b312430a59428f62e40d1044d672233d752d007aaf3dc814307440",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "holter-lake-mt",
+   "name": "Holter Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Wolf Creek"
+   ],
+   "bbox": [
+    -112.013732,
+    46.878195,
+    -111.913943,
+    46.993653
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 16.383,
+   "launches": [
+    "holter-lake-boat-launch-near-wolf-creek-mt",
+    "holter-lake-boat-launch-near-wolf-creek-mt-2"
+   ],
+   "water_id": "holter-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "4e8a67f25f8736d57abfa4db75956e916966cba9046e0d67a5756b0c8eba9bf6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-lake-mt",
+   "name": "Horseshoe Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Bigfork"
+   ],
+   "bbox": [
+    -113.997181,
+    48.015874,
+    -113.987005,
+    48.021198
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.187,
+   "launches": [
+    "horseshoe-lake-ferndale-fishing-access-site-mt"
+   ],
+   "water_id": "horseshoe-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "5ad53c4ea20f9a3e488b1d4ac4105992579b3e6f98e96f20e9a90362e79439b5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hungry-horse-reservoir-mt",
+   "name": "Hungry Horse Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Canyon Creek Boat Landing",
+    "Heinrude",
+    "Hungry Horse",
+    "West Glacier"
+   ],
+   "bbox": [
+    -114.015562,
+    48.005572,
+    -113.584359,
+    48.356321
+   ],
+   "wikidata": "Q35040299",
+   "charted": false,
+   "area_km2": 105.597,
+   "launches": [
+    "abbot-bay-mt",
+    "canyon-creek-boating-site-mt",
+    "crossover-boat-ramp-mt",
+    "doris-point-boat-mt",
+    "emery-bay-boat-mt",
+    "hungry-horse-reservoir-boat-launch-near-heinrude-mt",
+    "lost-johnny-boat-mt",
+    "murray-bay-boat-launch-mt",
+    "riverside-mt"
+   ],
+   "water_id": "hungry-horse-reservoir-mt",
+   "gnis_id": "785165",
+   "geometry_hash": "26e25cb490ca49a978659c6b6722c9f5f01aad8d7d37d4e282c410c8b7c80e44",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hyalite-reservoir-mt",
+   "name": "Hyalite Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Bozeman"
+   ],
+   "bbox": [
+    -110.979509,
+    45.473379,
+    -110.958192,
+    45.488308
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.878,
+   "launches": [
+    "hood-creek-boating-site-mt",
+    "hyalite-reservoir-boat-launch-mt"
+   ],
+   "water_id": "hyalite-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "baf08202ee3acf89df8bb7f9cd9097586c5d49d6f1717a2875ef6031e26adaf1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jefferson-river-mt",
+   "name": "Jefferson River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Cardwell",
+    "Renova",
+    "Sappington",
+    "Silver Star",
+    "Three Forks",
+    "Twin Bridges",
+    "Whitehall"
+   ],
+   "bbox": [
+    -112.34119,
+    45.562117,
+    -111.504375,
+    45.928013
+   ],
+   "wikidata": "Q284790",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cardwell-bridge-fishing-access-site-mt",
+    "drouillard-fishing-access-site-mt",
+    "hell-s-canyon-fishing-access-site-mt",
+    "kountz-bridge-fishing-access-site-mt",
+    "mayflower-bridge-fishing-access-site-mt",
+    "point-of-rocks-boat-ramp-mt",
+    "sappington-bridge-fishing-access-site-mt",
+    "silver-star-fishing-access-site-mt",
+    "williams-bridge-fishing-access-site-mt"
+   ],
+   "water_id": "jefferson-river-mt",
+   "gnis_id": "785443",
+   "geometry_hash": "0e9c821151fb48d5368c06fb463bbd6d7a8674533bbe677b4b21424eff9b2e61",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kilbrennan-lake-mt",
+   "name": "Kilbrennan Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Troy"
+   ],
+   "bbox": [
+    -115.891858,
+    48.586353,
+    -115.886304,
+    48.596342
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.273,
+   "launches": [
+    "kilbrennan-lake-boating-site-mt"
+   ],
+   "water_id": "kilbrennan-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "8b296f513db3ce0f031d5c6b91a8a0b04d6eb49b0b33c695dda22932147c756a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kootenai-river-mt",
+   "name": "Kootenai River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Jennings",
+    "Libby",
+    "Troy",
+    "Yakt"
+   ],
+   "bbox": [
+    -116.540609,
+    48.360962,
+    -115.313801,
+    48.999875
+   ],
+   "wikidata": "Q2262",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-horn-boat-ramp-mt",
+    "blackwell-flats-boat-ramp-mt",
+    "dunn-creek-boat-ramp-mt",
+    "kootenai-river-boat-launch-mt",
+    "kootenai-river-boat-ramp-mt",
+    "osprey-landing-boat-ramp-mt",
+    "yaak-kootenai-river-launch-mt"
+   ],
+   "water_id": "kootenai-river-mt",
+   "gnis_id": "384301",
+   "geometry_hash": "6aaa73abf2b48c12eef9969bd5b9aacefa4a65cebaea90b06c26697971beaeb4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-alva-mt",
+   "name": "Lake Alva",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Seeley Lake"
+   ],
+   "bbox": [
+    -113.589483,
+    47.301534,
+    -113.575602,
+    47.324373
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.381,
+   "launches": [
+    "lake-alva-boat-launch-near-seeley-lake-mt"
+   ],
+   "water_id": "lake-alva-mt",
+   "gnis_id": null,
+   "geometry_hash": "7b502475ca876750d7f97bb10fd483e9514cc2b14e988612278f932f3dbd3f32",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-bowdoin-mt",
+   "name": "Lake Bowdoin",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Malta"
+   ],
+   "bbox": [
+    -107.727163,
+    48.380496,
+    -107.642818,
+    48.42822
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 15.284,
+   "launches": [
+    "boat-launch-north-lake-bowdoin-mt",
+    "lake-bowdoin-boat-launch-mt"
+   ],
+   "water_id": "lake-bowdoin-mt",
+   "gnis_id": null,
+   "geometry_hash": "5e190b01a1c11db9c3320fc887d086150f5461b6002ace10902b3010ef918ea3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-como-mt",
+   "name": "Lake Como",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Darby"
+   ],
+   "bbox": [
+    -114.296606,
+    46.044524,
+    -114.233367,
+    46.06813
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.022,
+   "launches": [
+    "south-lake-como-boating-site-mt"
+   ],
+   "water_id": "lake-como-mt",
+   "gnis_id": null,
+   "geometry_hash": "8f015bee4044a113ebea163982814fa9dfad76b482af0c215b67cdcd332b339b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-elmo-mt",
+   "name": "Lake Elmo",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Billings"
+   ],
+   "bbox": [
+    -108.483201,
+    45.837788,
+    -108.475441,
+    45.844188
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.275,
+   "launches": [
+    "lake-elmo-boat-launch-near-billings-mt"
+   ],
+   "water_id": "lake-elmo-mt",
+   "gnis_id": null,
+   "geometry_hash": "85e1e43336419a1245a4add8594cb633f852bfcd27ddac198e891534bd19ab3f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-elwell-mt",
+   "name": "Lake Elwell",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Tiber Dam Camp"
+   ],
+   "bbox": [
+    -111.664784,
+    48.297082,
+    -111.087435,
+    48.445786
+   ],
+   "wikidata": "Q6475743",
+   "charted": false,
+   "area_km2": 103.843,
+   "launches": [
+    "north-bootlegger-boat-launch-mt",
+    "north-bootlegger-high-boat-ramp-mt",
+    "north-bootlegger-low-boat-ramp-mt",
+    "south-bootlegger-boat-ramp-mt",
+    "lake-elwell-boat-launch-near-tiber-dam-camp-mt-2",
+    "lake-elwell-boat-launch-near-tiber-dam-camp-mt",
+    "willow-creek-boat-launch-mt",
+    "willow-creek-boat-ramp-mt"
+   ],
+   "water_id": "lake-elwell-mt",
+   "gnis_id": "777636",
+   "geometry_hash": "f09b79095166806dfcfc11d9500ff990b89b5e5831a884db12c0c84f713237d6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "tiber-marina-boat-ramp-mt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-helena-mt",
+   "name": "Lake Helena",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Helena"
+   ],
+   "bbox": [
+    -111.971284,
+    46.682867,
+    -111.900706,
+    46.707321
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.123,
+   "launches": [
+    "lake-helena-boat-launch-near-helena-mt"
+   ],
+   "water_id": "lake-helena-mt",
+   "gnis_id": null,
+   "geometry_hash": "e443f0beab8e239be4ebdcc044b8cf88e88f189033a051b02ebc308d510ef193",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-koocanusa-mt",
+   "name": "Lake Koocanusa",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Eureka",
+    "Jennings",
+    "Rexford"
+   ],
+   "bbox": [
+    -115.425987,
+    48.408732,
+    -115.128756,
+    49.435077
+   ],
+   "wikidata": "Q6476491",
+   "charted": false,
+   "area_km2": 205.632,
+   "launches": [
+    "abayance-bay-mt",
+    "barron-creek-boating-site-mt",
+    "cripple-horse-creek-mt",
+    "koocanusa-marina-mt",
+    "mcgillivray-bs-mt",
+    "peck-gulch-boat-ramp-mt",
+    "poverty-creek-west-kootenai-mt",
+    "rexford-bench-boat-ramp-mt",
+    "rocky-gorge-boat-ramp-mt",
+    "lake-koocanusa-boat-launch-near-jennings-mt",
+    "tobacco-plains-boat-ramp-mt",
+    "young-creek-boating-mt"
+   ],
+   "water_id": "lake-koocanusa-mt",
+   "gnis_id": "806845",
+   "geometry_hash": "6e5d3e3eb490c576de1eadedbf7b8e81722caaa685627a3fd17f77273122fb54",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mary-ronan-mt",
+   "name": "Lake Mary Ronan",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Sipes"
+   ],
+   "bbox": [
+    -114.423764,
+    47.910934,
+    -114.382432,
+    47.943015
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.868,
+   "launches": [
+    "lake-mary-ronan-boat-launch-near-sipes-mt"
+   ],
+   "water_id": "lake-mary-ronan-mt",
+   "gnis_id": null,
+   "geometry_hash": "540b58250f5656ccc0f25587ed66fa1cfd2ba559ba5bfdc6015b3d44e49c19ac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-mcdonald-mt",
+   "name": "Lake McDonald",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Apgar",
+    "West Glacier"
+   ],
+   "bbox": [
+    -113.996257,
+    48.527499,
+    -113.86895,
+    48.64048
+   ],
+   "wikidata": "Q3178685",
+   "charted": false,
+   "area_km2": 31.515,
+   "launches": [
+    "apgar-concession-boat-launch-mt",
+    "apgar-public-boat-launch-mt",
+    "lake-mcdonald-lodge-mt"
+   ],
+   "water_id": "lake-mcdonald-mt",
+   "gnis_id": "787038",
+   "geometry_hash": "1da86471741cf1ca4cad89d188853b1f78d73650f2008dd5edd13ff674d767bb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lindbergh-lake-mt",
+   "name": "Lindbergh Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -113.743493,
+    47.347474,
+    -113.717243,
+    47.404825
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.651,
+   "launches": [
+    "lindbergh-lake-boat-ramp-mt"
+   ],
+   "water_id": "lindbergh-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "004d735bd075a1f094389034d295a8f93bb1ad3658d6b51f5a5d1e2a7b40b908",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-prickly-pear-creek-mt",
+   "name": "Little Prickly Pear Creek",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Wolf Creek"
+   ],
+   "bbox": [
+    -112.127127,
+    46.900673,
+    -112.015108,
+    47.023542
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lichen-cliff-fishing-access-site-mt"
+   ],
+   "water_id": "little-prickly-pear-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "27e7bb7fd51fef62a9116a4baab126dbbc9131aa428159f751f7e1145a06478a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "loon-lake-mt",
+   "name": "Loon Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Bigfork"
+   ],
+   "bbox": [
+    -113.994807,
+    48.020237,
+    -113.986502,
+    48.025736
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.233,
+   "launches": [
+    "loon-lake-ferndale-fishing-access-site-mt"
+   ],
+   "water_id": "loon-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "13153deddc99c4ae05e7ed0f8972cdf6c435b5207ffb9f954f54d27fd0531386",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "loon-lake-mt-2",
+   "name": "Loon Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -115.684723,
+    48.596859,
+    -115.67104,
+    48.604268
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.138,
+   "launches": [
+    "loon-lake-boat-ramp-mt"
+   ],
+   "water_id": "loon-lake-mt-2",
+   "gnis_id": null,
+   "geometry_hash": "0247463482097abdbaac4a1b4620b03b5ce0c76da15db2719eccffb0f7c9ad43",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lost-lake-mt",
+   "name": "Lost Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Eureka"
+   ],
+   "bbox": [
+    -115.021183,
+    48.819586,
+    -115.010623,
+    48.825807
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.129,
+   "launches": [
+    "lost-lake-site-2-mt"
+   ],
+   "water_id": "lost-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "af9462edae91a191d9588dc62704172c97ae2ecb13fe63c9043c0833a76671b5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lower-red-rock-lake-mt",
+   "name": "Lower Red Rock Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Lakeview"
+   ],
+   "bbox": [
+    -111.896194,
+    44.617505,
+    -111.821157,
+    44.654677
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.959,
+   "launches": [
+    "idlewild-trailhead-boat-ramp-mt",
+    "middle-lower-lake-boat-ramp-mt",
+    "river-marsh-campground-boat-ramp-mt"
+   ],
+   "water_id": "lower-red-rock-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "34c6c84bd9a4b8e6e056fd99420fa9f78e7d29fa9cfdba98847571277db29143",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "madison-river-mt",
+   "name": "Madison River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Cliff Lake",
+    "Cowboys Heaven",
+    "Ennis",
+    "Grahams Place",
+    "Red Bluff",
+    "Schusters Place",
+    "Three Forks",
+    "Varney"
+   ],
+   "bbox": [
+    -111.756788,
+    44.636826,
+    -110.86721,
+    45.926224
+   ],
+   "wikidata": "Q947477",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "black-s-ford-fishing-access-site-mt",
+    "burnt-tree-hole-fishing-access-site-mt",
+    "california-corner-boat-ramp-mt",
+    "damselfly-fishing-access-site-mt",
+    "eight-mile-ford-fishing-access-site-mt",
+    "ennis-fishing-access-site-mt",
+    "fall-creek-boat-ramp-mt",
+    "greycliff-fishing-access-site-mt",
+    "madison-river-boat-launch-near-three-forks-mt",
+    "lyons-bridge-fishing-access-site-mt",
+    "mcatee-bridge-fishing-access-site-mt",
+    "milwaukee-fishing-access-site-mt",
+    "palisades-day-use-mt",
+    "power-house-boat-launch-mt",
+    "raynolds-pass-fishing-access-site-mt",
+    "ruby-creek-boat-launch-mt",
+    "madison-river-boat-launch-mt",
+    "valley-garden-fishing-access-site-mt",
+    "varney-bridge-fishing-access-site-mt",
+    "madison-river-boat-launch-near-red-bluff-mt",
+    "windy-point-boat-launch-mt"
+   ],
+   "water_id": "madison-river-mt",
+   "gnis_id": "801119",
+   "geometry_hash": "2a879848da5e7f076ff7cb8f5cb660d5825f52517927f3ab5fea58d1c29b6f5e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "marias-river-mt",
+   "name": "Marias River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Cut Bank",
+    "Loma",
+    "Tiber Dam Camp"
+   ],
+   "bbox": [
+    -112.227921,
+    47.92763,
+    -110.488968,
+    48.486584
+   ],
+   "wikidata": "Q595366",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "loma-bridge-fishing-access-site-mt",
+    "marias-river-boat-launch-near-tiber-dam-camp-mt-2",
+    "sullivan-bridge-boat-ramp-mt"
+   ],
+   "water_id": "marias-river-mt",
+   "gnis_id": "799001",
+   "geometry_hash": "00a8fd1c194b3f287cf0db6f5a19cc90f660e7e31973942bb41680d606c59ff4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "martinsdale-reservoir-mt",
+   "name": "Martinsdale Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Martinsdale"
+   ],
+   "bbox": [
+    -110.308727,
+    46.43174,
+    -110.259225,
+    46.452573
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.693,
+   "launches": [
+    "martinsdale-reservoir-fishing-access-site-mt"
+   ],
+   "water_id": "martinsdale-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "3e41b5475f6299ce0d92e004f4331ab0ad8afee18613cfa437c72da279d8d8ba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mcgregor-lake-mt",
+   "name": "McGregor Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -114.901581,
+    48.016801,
+    -114.810469,
+    48.043603
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.949,
+   "launches": [
+    "mc-gregor-lake-boating-site-mt"
+   ],
+   "water_id": "mcgregor-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "9519430a1ecb2997f0304bb348e6e7322d967dfc3779b6aba06f24118f167db7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "medicine-lake-mt",
+   "name": "Medicine Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Medicine Lake"
+   ],
+   "bbox": [
+    -104.511066,
+    48.430834,
+    -104.326212,
+    48.493178
+   ],
+   "wikidata": "Q49701951",
+   "charted": false,
+   "area_km2": 41.303,
+   "launches": [
+    "rec-area-unimproved-designated-boat-launch-mt"
+   ],
+   "water_id": "medicine-lake-mt",
+   "gnis_id": "774078",
+   "geometry_hash": "592cd3cc3610b320f037b6c23b1c5f37ad9e31d6dd93ee4fb1df215023c4b50b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-fork-flathead-river-mt",
+   "name": "Middle Fork Flathead River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Essex",
+    "Nimrod",
+    "Nyack",
+    "Pinnacle",
+    "West Glacier"
+   ],
+   "bbox": [
+    -114.071595,
+    47.996046,
+    -113.058295,
+    48.507885
+   ],
+   "wikidata": "Q334781",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cascadilla-flat-river-access-mt",
+    "essex-river-access-mt",
+    "middle-fork-flathead-river-boat-launch-mt",
+    "middle-fork-river-access-mt",
+    "paola-river-access-boating-site-mt",
+    "west-glacier-river-access-boating-site-mt"
+   ],
+   "water_id": "middle-fork-flathead-river-mt",
+   "gnis_id": "787275",
+   "geometry_hash": "10513c188288b682456a9db6407958d366b4bd424446b06ac4e25f0cc842cf6a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-thompson-lake-mt",
+   "name": "Middle Thompson Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -115.094958,
+    48.022833,
+    -115.049008,
+    48.044797
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.644,
+   "launches": [
+    "middle-thompson-lake-boat-launch-mt-2"
+   ],
+   "water_id": "middle-thompson-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "c7b20718a5452098cb9bf5430377b78afa2fa2b39d684b5e8e5d0b6fed7e6f1f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "milk-river-mt",
+   "name": "Milk River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Beaver Creek"
+   ],
+   "bbox": [
+    -113.01906,
+    48.108315,
+    -106.333324,
+    49.160042
+   ],
+   "wikidata": "Q217739",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fresno-tailwater-fishing-access-site-mt"
+   ],
+   "water_id": "milk-river-mt",
+   "gnis_id": "774213",
+   "geometry_hash": "ea8c06329c018db789c87ea3814c406ec2fbcd76a671f798f153343534a5fb46",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "missouri-river-mt",
+   "name": "Missouri River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Big Sandy",
+    "Brewer",
+    "Carter",
+    "Cascade",
+    "Craig",
+    "Culbertson",
+    "Fort Benton",
+    "Great Falls",
+    "Hardy",
+    "Judith Landing",
+    "Mid Canon",
+    "Nashua"
+   ],
+   "bbox": [
+    -112.015337,
+    45.926224,
+    -104.04414,
+    48.149705
+   ],
+   "wikidata": "Q5419",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-bend-fishing-access-site-mt",
+    "bull-pasture-fishing-access-site-mt",
+    "carter-ferry-fishing-access-site-mt",
+    "coal-banks-landing-boat-ramp-mt",
+    "cow-island-mt",
+    "craig-fishing-access-site-mt",
+    "culbertson-bridge-fishing-access-site-mt",
+    "dearborn-fishing-access-site-mt",
+    "devils-kitchen-fishing-access-site-mt",
+    "dunes-fishing-access-site-mt",
+    "eagle-creek-rec-site-mt",
+    "fort-benton-blm-boat-launch-mt",
+    "fort-benton-blm-boat-launch-mt-2",
+    "gist-bottom-recreation-area-mt",
+    "greasewood-bottom-mt",
+    "hardy-bridge-fishing-access-site-mt",
+    "hideaway-recreation-area-mt",
+    "hole-in-the-wall-rec-site-mt",
+    "missouri-river-boat-launch-near-wolf-creek-mt",
+    "judith-landing-blm-boat-launch-mt-2",
+    "lewis-and-clark-fishing-access-site-mt",
+    "little-sandy-coulee-rec-site-mt",
+    "lone-tree-coulee-mt",
+    "missouri-river-boat-launch-near-brewer-mt-2",
+    "mcgarry-bar-mt",
+    "mid-canon-fishing-access-site-mt",
+    "missouri-river-boat-launch-near-three-forks-mt",
+    "missouri-river-boat-launch-near-fort-benton-mt",
+    "missouri-river-boat-launch-near-great-falls-mt",
+    "monroe-island-mt",
+    "mountain-palace-fishing-access-site-mt",
+    "pablo-rapids-lower-site-mt",
+    "pelican-point-fishing-access-site-mt",
+    "rock-creek-boat-ramp-mt",
+    "school-trust-fishing-access-site-mt",
+    "seineurs-reach-mt",
+    "slaughter-river-mt",
+    "spite-hill-fishing-access-site-mt",
+    "stafford-ferry-mt",
+    "stickney-creek-fishing-access-site-mt",
+    "the-wall-mt",
+    "toston-fishing-access-site-mt",
+    "ulm-bridge-fishing-access-site-mt",
+    "missouri-river-boat-launch-near-brewer-mt",
+    "widow-coulee-fishing-access-site-mt",
+    "wolf-creek-bridge-fishing-access-site-mt",
+    "woodhawk-lower-mt",
+    "woodhawk-middle-mt",
+    "woodhawk-upper-mt",
+    "missouri-river-boat-launch-near-fort-benton-mt-2",
+    "york-s-islands-fishing-access-site-mt"
+   ],
+   "water_id": "missouri-river-ia",
+   "gnis_id": "756398",
+   "geometry_hash": "7715d7e5bf71fa85b58c50f148400dce1f8ef60774cca0b8e29be1dddfcc434d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [
+    "pelican-point-1-mt"
+   ],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "missouri-river-boat-launch-mt-2"
+   ],
+   "slug_aliases": [
+    "pelican-point-1-mt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "monture-creek-mt",
+   "name": "Monture Creek",
+   "kind": "river",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -113.237041,
+    47.019931,
+    -113.14652,
+    47.133339
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "monture-creek-fishing-access-site-mt"
+   ],
+   "water_id": "monture-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "da849390b3c629125ad8323aaaea100e0c662f3c9c7a7d04f27c62be5dcd6b04",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "moose-lake-mt",
+   "name": "Moose Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -113.532917,
+    46.049118,
+    -113.529272,
+    46.053773
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.095,
+   "launches": [
+    "moose-lake-boat-launch-mt"
+   ],
+   "water_id": "moose-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "46f05627a905abee48750eff490c16a096b27dd239bda52198cb9cc156276a9f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "murphy-lake-mt",
+   "name": "Murphy Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Trego"
+   ],
+   "bbox": [
+    -114.866221,
+    48.73003,
+    -114.851809,
+    48.739679
+   ],
+   "wikidata": "Q6938973",
+   "charted": false,
+   "area_km2": 0.672,
+   "launches": [
+    "murphy-lake-boat-ramp-mt"
+   ],
+   "water_id": "murphy-lake-mt",
+   "gnis_id": "787864",
+   "geometry_hash": "2b24f48f9ca26e94725e5c2a75e18e862dbcb421c76904b7ec1e35b90af66c53",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "musselshell-river-mt",
+   "name": "Musselshell River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Martinsdale Hutterite Colony"
+   ],
+   "bbox": [
+    -110.272581,
+    46.27258,
+    -107.79243,
+    47.423856
+   ],
+   "wikidata": "Q1955484",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "selkirk-fishing-access-site-mt"
+   ],
+   "water_id": "musselshell-river-mt",
+   "gnis_id": "774527",
+   "geometry_hash": "6ec378ff7c9268d1c00b0927c078bdf86746ad74a21d20ddaf580edb0d56c04a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "nelson-reservoir-mt",
+   "name": "Nelson Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Cree Crossing",
+    "Sleeping Buffalo"
+   ],
+   "bbox": [
+    -107.664881,
+    48.472513,
+    -107.514021,
+    48.53356
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 18.987,
+   "launches": [
+    "nelson-campground-boat-ramp-mt",
+    "nelson-north-boat-ramp-mt"
+   ],
+   "water_id": "nelson-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "a14e06f13d3b8b2b5b5943848635a1ff2436aed4fda9326e6319149a5f03b22f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "newlan-creek-reservoir-mt",
+   "name": "Newlan Creek Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "White Sulphur Springs"
+   ],
+   "bbox": [
+    -110.938776,
+    46.635599,
+    -110.903748,
+    46.654737
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.375,
+   "launches": [
+    "newlan-creek-reservoir-fishing-access-site-mt"
+   ],
+   "water_id": "newlan-creek-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "0050196f063ee3eb0467873d79414c72595dbb7252690c143c791801922156b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "nilan-reservoir-mt",
+   "name": "Nilan Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -112.56046,
+    47.472368,
+    -112.51682,
+    47.488012
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.318,
+   "launches": [
+    "nilan-reservoir-fishing-access-site-mt"
+   ],
+   "water_id": "nilan-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "ed263d8f2779d0da52c716630b627a872683370a2d7e2e6ae9bed9b42d1edb1a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-blackfoot-river-mt",
+   "name": "North Fork Blackfoot River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Ovando"
+   ],
+   "bbox": [
+    -113.12959,
+    46.978972,
+    -112.741536,
+    47.27635
+   ],
+   "wikidata": "Q123028800",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "harry-morgan-fishing-access-site-mt"
+   ],
+   "water_id": "north-fork-blackfoot-river-mt",
+   "gnis_id": "801227",
+   "geometry_hash": "9c84f367f95a1e7f814d02419101a33f4d9af8344211149c33ee20f504e41851",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-flathead-river-mt",
+   "name": "North Fork Flathead River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Ford",
+    "Polebridge",
+    "West Glacier"
+   ],
+   "bbox": [
+    -114.5,
+    48.46601,
+    -114.071595,
+    49.025676
+   ],
+   "wikidata": "Q267169",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ford-river-access-mt",
+    "glacier-rim-river-access-mt",
+    "great-northern-flats-river-access-site-mt",
+    "north-fork-flathead-river-boat-launch-near-west-glacier-mt",
+    "polebridge-river-access-site-mt"
+   ],
+   "water_id": "north-fork-flathead-river-mt",
+   "gnis_id": "788164",
+   "geometry_hash": "7cd3e356ed3ade5b55628301a10192c7e91f301a1f93f4a1a65250527386ea55",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "noxon-rapids-reservoir-mt",
+   "name": "Noxon Rapids Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Larchwood",
+    "Noxon",
+    "Trout Creek"
+   ],
+   "bbox": [
+    -115.756147,
+    47.794954,
+    -115.50189,
+    47.962718
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 28.31,
+   "launches": [
+    "marten-creek-boat-ramp-mt",
+    "north-shore-boat-ramp-day-use-mt",
+    "vermillion-boat-launch-mt"
+   ],
+   "water_id": "noxon-rapids-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "e9160419b2cfc7b863b8f8ca287c57e2bb59eefde25a096021ad99e6c0bfcc00",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "painted-rocks-lake-mt",
+   "name": "Painted Rocks Lake",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -114.314756,
+    45.679183,
+    -114.276799,
+    45.718565
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.507,
+   "launches": [
+    "little-boulder-bay-boating-site-mt",
+    "painted-rocks-state-park-boat-ramp-mt",
+    "slate-creek-bay-boating-site-mt"
+   ],
+   "water_id": "painted-rocks-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "808c910e9c6ce871636bab3fd15d41c314482ed8aa53d575cc6bbb05ef5bcf84",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pishkun-reservoir-mt",
+   "name": "Pishkun Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -112.498434,
+    47.676022,
+    -112.488981,
+    47.683361
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.26,
+   "launches": [
+    "pishkun-boat-ramp-mt"
+   ],
+   "water_id": "pishkun-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "9ac303dee569eb389519600808f5449fcd112d1fe03191f5f73167f2c8307bdd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "placid-lake-mt",
+   "name": "Placid Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Seeley Lake"
+   ],
+   "bbox": [
+    -113.544266,
+    47.107452,
+    -113.502254,
+    47.135318
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.527,
+   "launches": [
+    "placid-lake-boat-launch-near-seeley-lake-mt-2"
+   ],
+   "water_id": "placid-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "d018d204e884e735ee9a94ca651e536a8a7c0ff826dd359ce8c28d2933eff40b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "prewett-creek-mt",
+   "name": "Prewett Creek",
+   "kind": "stream",
+   "state": "MT",
+   "towns": [
+    "Hardy"
+   ],
+   "bbox": [
+    -111.846796,
+    47.171043,
+    -111.826787,
+    47.185615
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "prewett-creek-fishing-access-site-mt"
+   ],
+   "water_id": "prewett-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "af664bb48bf9b1ae5cf1b8a582b274f7aef5df6ff87c09b4716b8254ed678a79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rainbow-reservoir-mt",
+   "name": "Rainbow Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Great Falls"
+   ],
+   "bbox": [
+    -111.251137,
+    47.522396,
+    -111.202453,
+    47.53879
+   ],
+   "wikidata": "Q139672185",
+   "charted": false,
+   "area_km2": 1.11,
+   "launches": [
+    "rainbow-reservoir-boat-launch-mt"
+   ],
+   "water_id": "rainbow-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "e98ee4ff0071cb044c5c571454f5d8867778904946500b6bafe065a6ec6eda9d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "red-rock-river-mt",
+   "name": "Red Rock River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -112.855437,
+    44.622792,
+    -111.890476,
+    44.956882
+   ],
+   "wikidata": "Q7304926",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lyons-bridge-fishing-access-site-mt-2"
+   ],
+   "water_id": "red-rock-river-mt",
+   "gnis_id": "789486",
+   "geometry_hash": "0bee892f0ea5d5488f12311511dfe8cdee731efc4903d4686b522529582ac5b3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rock-creek-fox-mt",
+   "name": "Rock Creek",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Fox",
+    "Red Lodge"
+   ],
+   "bbox": [
+    -109.532681,
+    44.994647,
+    -108.821722,
+    45.527088
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beaver-lodge-fishing-access-site-mt",
+    "water-birch-fishing-access-site-mt"
+   ],
+   "water_id": "rock-creek-fox-mt",
+   "gnis_id": null,
+   "geometry_hash": "b888375077276fc264515cf73f83f6c3ecea311a1a36b15c9e33ffa1640464ac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rock-creek-mt",
+   "name": "Rock Creek",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Quigley"
+   ],
+   "bbox": [
+    -113.779944,
+    46.223881,
+    -113.507435,
+    46.725636
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "gillies-bridge-fishing-access-site-mt"
+   ],
+   "water_id": "rock-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "15bd1f35684462389df33c59251a8da4fdf120408da75b4a7d06b8a078a15475",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ryan-reservoir-mt",
+   "name": "Ryan Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Great Falls"
+   ],
+   "bbox": [
+    -111.149112,
+    47.552212,
+    -111.123281,
+    47.570702
+   ],
+   "wikidata": "Q139672117",
+   "charted": false,
+   "area_km2": 0.71,
+   "launches": [],
+   "water_id": "ryan-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "800611dc709178e20f690ab37acdfa2ac328b152eeb6b81425eb32e5dc01b9aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "ryan-reservoir-boat-launch-mt"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "saint-mary-lake-mt",
+   "name": "Saint Mary Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Rising Sun"
+   ],
+   "bbox": [
+    -113.60712,
+    48.665424,
+    -113.442944,
+    48.748847
+   ],
+   "wikidata": "Q778037",
+   "charted": false,
+   "area_km2": 18.137,
+   "launches": [
+    "golden-stairs-boat-ramp-mt",
+    "rising-sun-mt"
+   ],
+   "water_id": "saint-mary-lake-mt",
+   "gnis_id": "776122",
+   "geometry_hash": "e8d7aafc42f6c0da555172593be38a6c8139a1bd42272d5acf099791dc3cd0b5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "salmon-lake-mt",
+   "name": "Salmon Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Seeley Lake"
+   ],
+   "bbox": [
+    -113.431954,
+    47.064459,
+    -113.384357,
+    47.110147
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.893,
+   "launches": [
+    "salmon-lake-boat-launch-near-seeley-lake-mt-3"
+   ],
+   "water_id": "salmon-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "79c51bc1933705c216ad2185461e7784f043e366f0793f428910cf8b4baf3c65",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "seeley-lake-mt",
+   "name": "Seeley Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Seeley Lake"
+   ],
+   "bbox": [
+    -113.53055,
+    47.172326,
+    -113.480374,
+    47.214348
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.669,
+   "launches": [
+    "seeley-lake-boat-launch-near-seeley-lake-mt-3",
+    "seeley-lake-boat-landing-mt"
+   ],
+   "water_id": "seeley-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "9bc613ac90722374ef3f8dfd28f91be7568b1abb98741aab53a3aa48a31807f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "seventeenmile-creek-mt",
+   "name": "Seventeenmile Creek",
+   "kind": "stream",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -115.85354,
+    48.546788,
+    -115.693958,
+    48.679833
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hemlock-th-campsite-mt"
+   ],
+   "water_id": "seventeenmile-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "9807e220c615c7bdfdf0b17b4b345bfdae8a37f22eaeba580752551a51a7f7e2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "skyles-lake-mt",
+   "name": "Skyles Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Whitefish"
+   ],
+   "bbox": [
+    -114.407038,
+    48.40446,
+    -114.398644,
+    48.408993
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.203,
+   "launches": [
+    "skyles-lake-fishing-access-site-mt"
+   ],
+   "water_id": "skyles-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "7342edc58d83a20f3ec94cee169117a4711a49c5e2b01bd6251007d53ca51d0f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "smith-lake-mt",
+   "name": "Smith Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Kalispell"
+   ],
+   "bbox": [
+    -114.453918,
+    48.106615,
+    -114.437798,
+    48.127466
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.848,
+   "launches": [
+    "smith-lake-fishing-access-site-mt"
+   ],
+   "water_id": "smith-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "c1b3f884b06108a738d226ecdfdf7bd881ccfbe2f931dbf1e57cb25b0e3dda31",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "smith-river-mt",
+   "name": "Smith River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -111.480117,
+    46.528325,
+    -110.977908,
+    47.413743
+   ],
+   "wikidata": "Q7545297",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "camp-baker-access-mt",
+    "camp-baker-access-mt-2",
+    "eden-bridge-access-mt"
+   ],
+   "water_id": "smith-river-mt",
+   "gnis_id": "790736",
+   "geometry_hash": "f4e9d9d3d7eba4a04fe30dd882699ad8868229fdacb8b91da8d7ad5237d2fa41",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sophie-lake-mt",
+   "name": "Sophie Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Eureka"
+   ],
+   "bbox": [
+    -115.129038,
+    48.955054,
+    -115.104444,
+    48.977379
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.156,
+   "launches": [
+    "sophie-lake-fishing-access-site-mt"
+   ],
+   "water_id": "sophie-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "2b2a23d3a9aa84d0d44b98be4f99bcd1d45e27824ae20e57244d85dc81b04252",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-flathead-river-mt",
+   "name": "South Fork Flathead River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -114.09365,
+    47.445375,
+    -113.183589,
+    48.389026
+   ],
+   "wikidata": "Q334544",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "south-fork-bridge-access-mt",
+    "south-fork-river-access-mt"
+   ],
+   "water_id": "south-fork-flathead-river-mt",
+   "gnis_id": "790966",
+   "geometry_hash": "77c3e57600e0deac5122b10ca3d99cac11282ac501acb52024e3bf13d5a2d8ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spar-lake-mt",
+   "name": "Spar Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -115.954772,
+    48.252513,
+    -115.932053,
+    48.270972
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.682,
+   "launches": [
+    "spar-lake-boating-site-mt"
+   ],
+   "water_id": "spar-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "3413acd8d8ab91bc8b2caea2714dbb9ffa0872e16782c35d3cd5cfff528c130d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stillwater-river-kalispell-mt",
+   "name": "Stillwater River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Kalispell"
+   ],
+   "bbox": [
+    -114.551794,
+    48.163552,
+    -114.257383,
+    48.516124
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "stillwater-river-boat-launch-near-kalispell-mt"
+   ],
+   "water_id": "stillwater-river-kalispell-mt",
+   "gnis_id": null,
+   "geometry_hash": "915ebc11a20243575bf17be0b2cc68afc1948718212b1c7be4993b29478edcd3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stillwater-river-mt",
+   "name": "Stillwater River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Absarokee",
+    "Beehive",
+    "Columbus",
+    "Nye"
+   ],
+   "bbox": [
+    -110.01322,
+    45.052309,
+    -109.281916,
+    45.639555
+   ],
+   "wikidata": "Q7617313",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "absaroka-fishing-access-site-mt",
+    "buffalo-jump-fishing-access-site-mt",
+    "castle-rock-fishing-access-site-mt",
+    "cliff-swallow-fishing-access-site-mt",
+    "fireman-s-point-fishing-access-site-mt",
+    "moraine-fishing-access-site-mt",
+    "swinging-bridge-fishing-access-site-mt",
+    "whitebird-fishing-access-site-mt"
+   ],
+   "water_id": "stillwater-river-mt",
+   "gnis_id": "791524",
+   "geometry_hash": "9521f8890e7b0199f37f2ce453da33a6fb7d6109b72572ebf7a6054465741460",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sun-river-mt",
+   "name": "Sun River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Fort Shaw",
+    "Gilman",
+    "Lowry",
+    "Sun River"
+   ],
+   "bbox": [
+    -112.857209,
+    47.491702,
+    -111.311486,
+    47.652285
+   ],
+   "wikidata": "Q3503758",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fort-shaw-fishing-access-site-mt",
+    "sun-river-boat-launch-mt",
+    "medicine-river-fishing-access-site-mt",
+    "north-fork-sun-river-rec-site-mt"
+   ],
+   "water_id": "sun-river-mt",
+   "gnis_id": "802208",
+   "geometry_hash": "f4d59aad623b3fb421a1a86a7bd6d07bc7b82b9b79727153386161afdd7ead7e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "swan-lake-mt",
+   "name": "Swan Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Swan Lake"
+   ],
+   "bbox": [
+    -113.980152,
+    47.911607,
+    -113.843604,
+    48.0195
+   ],
+   "wikidata": "Q7332589",
+   "charted": false,
+   "area_km2": 15.104,
+   "launches": [
+    "swan-lake-boat-mt"
+   ],
+   "water_id": "swan-lake-mt",
+   "gnis_id": "791785",
+   "geometry_hash": "23dd9b5fdf851dc2237d072ddeca45e7c735d31e166dcb6acfc181af49eefd84",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "swan-river-mt",
+   "name": "Swan River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Bigfork",
+    "Salmon Prairie"
+   ],
+   "bbox": [
+    -114.080837,
+    47.279433,
+    -113.663726,
+    48.085641
+   ],
+   "wikidata": "Q7653499",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "966-1-piper-boatramp-mt",
+    "kearney-rapids-boat-launch-mt"
+   ],
+   "water_id": "swan-river-mt",
+   "gnis_id": "791789",
+   "geometry_hash": "d1ff77a33b97600389c8b21df3aa73deff7a7b31d4fe282d77da07b3a72795e8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "swiftcurrent-lake-mt",
+   "name": "Swiftcurrent Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -113.666703,
+    48.788408,
+    -113.656711,
+    48.800317
+   ],
+   "wikidata": "Q3215218",
+   "charted": false,
+   "area_km2": 0.494,
+   "launches": [
+    "swiftcurrent-boat-ramp-mt",
+    "swiftcurrent-lake-hotel-mt"
+   ],
+   "water_id": "swiftcurrent-lake-mt",
+   "gnis_id": "777378",
+   "geometry_hash": "f60d7166af2948dbb6fd3d75f4ec08fee3dec3cf3b2271ab1460b5cb442744f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sylvia-lake-mt",
+   "name": "Sylvia Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -114.822635,
+    48.340869,
+    -114.815565,
+    48.345353
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.109,
+   "launches": [
+    "sylvia-lake-boat-launch-mt"
+   ],
+   "water_id": "sylvia-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "3a243c9af5473ae9b22546ff9d8177d949b9f97e44f8193dc7235376a9538080",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tally-lake-mt",
+   "name": "Tally Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Olney"
+   ],
+   "bbox": [
+    -114.582866,
+    48.378358,
+    -114.536106,
+    48.421906
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.603,
+   "launches": [
+    "tally-lake-boat-mt"
+   ],
+   "water_id": "tally-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "3863c79e1e9e70395a074af674b790d2f4ddcf3d900c7a7468a75832a9cb2d1c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tepee-lake-mt",
+   "name": "Tepee Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Trailcreek"
+   ],
+   "bbox": [
+    -114.424592,
+    48.901614,
+    -114.417661,
+    48.907826
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.207,
+   "launches": [
+    "teppe-lake-public-access-mt"
+   ],
+   "water_id": "tepee-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "8ba8a5af4444ea2c3706b4ee6e5acf6611cc17a9dd29b122417f2c8c53a340a1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tetrault-lake-mt",
+   "name": "Tetrault Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Eureka"
+   ],
+   "bbox": [
+    -115.1244,
+    48.942047,
+    -115.107163,
+    48.94847
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.439,
+   "launches": [
+    "tetrault-lake-fishing-access-site-mt"
+   ],
+   "water_id": "tetrault-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "26ae3deb66e13877e49d36a415adf1caae531cd9720f8bccdac5c1fff35184f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tongue-river-reservoir-mt",
+   "name": "Tongue River Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -106.815876,
+    45.042728,
+    -106.763481,
+    45.139597
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 12.694,
+   "launches": [
+    "tongue-river-reservoir-state-park-campers-point-north-boat-ramp-mt",
+    "tongue-river-reservoir-state-park-peewee-point-north-boat-ramp-mt"
+   ],
+   "water_id": "tongue-river-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "35459a590a0d26af7c8b2c245c790c294aebbb60eae56e39a11d5571d158e7f1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "two-medicine-lake-mt",
+   "name": "Two Medicine Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "East Glacier Park Village"
+   ],
+   "bbox": [
+    -113.409126,
+    48.470734,
+    -113.367824,
+    48.488965
+   ],
+   "wikidata": "Q7371739",
+   "charted": false,
+   "area_km2": 1.941,
+   "launches": [
+    "two-medicine-foot-mt"
+   ],
+   "water_id": "two-medicine-lake-mt",
+   "gnis_id": "792557",
+   "geometry_hash": "211c15f0d5b4847fd76d09a1d78a35064a814c88f8dfc758b4ab2ff0296ee010",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-carters-pond-mt",
+   "name": "Upper Carters Pond",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Lewistown"
+   ],
+   "bbox": [
+    -109.428893,
+    47.151408,
+    -109.421442,
+    47.156527
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.087,
+   "launches": [
+    "upper-carter-pond-fishing-access-site-mt"
+   ],
+   "water_id": "upper-carters-pond-mt",
+   "gnis_id": null,
+   "geometry_hash": "f92e5e0218916999b1cf476e391fd0a056e476b7eaf3559763a0034f69a11cc8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-red-rock-lake-mt",
+   "name": "Upper Red Rock Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -111.762403,
+    44.593118,
+    -111.689975,
+    44.639047
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 12.75,
+   "launches": [
+    "upper-lake-campground-boat-ramp-mt"
+   ],
+   "water_id": "upper-red-rock-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "11343af88d7240f59ebb640e943a00ef8388924f5952091fb695e7b6c1be6b25",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-stillwater-lake-mt",
+   "name": "Upper Stillwater Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Radnor"
+   ],
+   "bbox": [
+    -114.656517,
+    48.573814,
+    -114.617476,
+    48.604032
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.583,
+   "launches": [
+    "upper-stillwater-lake-boat-launch-mt"
+   ],
+   "water_id": "upper-stillwater-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "b036488fc41f3fb8cf516998d445ad805c42ed5759da834002ea590a429e6333",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-thompson-lake-mt",
+   "name": "Upper Thompson Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Happys Inn"
+   ],
+   "bbox": [
+    -115.137822,
+    48.042527,
+    -115.096981,
+    48.066024
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.318,
+   "launches": [
+    "upper-thompson-lake-boat-launch-mt"
+   ],
+   "water_id": "upper-thompson-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "4bc4e876641b685901b7a2fe83f0cd159c11ad56d5c0faf546965fedaddd9f85",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-waterton-lake-mt",
+   "name": "Upper Waterton Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -113.915499,
+    48.958138,
+    -113.886013,
+    49.057202
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 11.209,
+   "launches": [
+    "goat-haunt-dock-mt"
+   ],
+   "water_id": "upper-waterton-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "750a2e3da5010b7d44732fbd2652d43811ccf8330de601c244b48f9f3c54d116",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upsata-lake-mt",
+   "name": "Upsata Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -113.227867,
+    47.073883,
+    -113.217208,
+    47.081907
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.224,
+   "launches": [
+    "upsata-lake-fishing-access-site-mt"
+   ],
+   "water_id": "upsata-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "315cc76e5aab3e9e219f8ad25b8ee5b6c48c023c6a3fde39732621e8e59bc696",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "van-lake-mt",
+   "name": "Van Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -113.772973,
+    47.697796,
+    -113.765455,
+    47.70396
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.258,
+   "launches": [
+    "van-lake-boat-launch-mt-2"
+   ],
+   "water_id": "van-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "4248ddb799f0976bd387fb8b6493ca6f6535f7af4092e59306b80c2f4dc45357",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-boulder-river-mt",
+   "name": "West Boulder River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "McLeod"
+   ],
+   "bbox": [
+    -110.420318,
+    45.409156,
+    -110.101193,
+    45.663488
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "boulder-forks-fishing-access-site-mt"
+   ],
+   "water_id": "west-boulder-river-mt",
+   "gnis_id": null,
+   "geometry_hash": "224cd0913d58f0cf1e63c5a42fe778b2eae6ca042ab34ab293e636570f677bd6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-fork-bitterroot-river-mt",
+   "name": "West Fork Bitterroot River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Conner",
+    "Darby"
+   ],
+   "bbox": [
+    -114.323682,
+    45.527145,
+    -114.130624,
+    45.955199
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "applebury-boating-site-mt",
+    "haley-chute-boat-launch-mt",
+    "west-fork-boat-launch-mt"
+   ],
+   "water_id": "west-fork-bitterroot-river-mt",
+   "gnis_id": null,
+   "geometry_hash": "231cb5cf0ad44497c09cb6af8d7658abb36773940178c6607528983c9b61c221",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-fork-fish-creek-mt",
+   "name": "West Fork Fish Creek",
+   "kind": "stream",
+   "state": "MT",
+   "towns": [],
+   "bbox": [
+    -114.81659,
+    46.869466,
+    -114.696823,
+    46.932478
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "forks-fishing-access-site-mt"
+   ],
+   "water_id": "west-fork-fish-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "62e00773cac9b1c0ad3345cadb7b98aef85e4b34b4285d16976806e621a2c696",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-rosebud-creek-mt",
+   "name": "West Rosebud Creek",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Fishtail"
+   ],
+   "bbox": [
+    -109.690166,
+    45.25721,
+    -109.456192,
+    45.484983
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rosebud-isle-fishing-access-site-mt"
+   ],
+   "water_id": "west-rosebud-creek-mt",
+   "gnis_id": null,
+   "geometry_hash": "75b367c12613c96786162c6725f47ee98604386bb57bac6a96128a013e9d3832",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "whitefish-lake-mt",
+   "name": "Whitefish Lake",
+   "kind": "lake",
+   "state": "MT",
+   "towns": [
+    "Whitefish"
+   ],
+   "bbox": [
+    -114.433012,
+    48.415206,
+    -114.342551,
+    48.486463
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 15.187,
+   "launches": [
+    "whitefish-lake-boat-launch-near-whitefish-mt",
+    "whitefish-lake-boat-launch-near-whitefish-mt-2"
+   ],
+   "water_id": "whitefish-lake-mt",
+   "gnis_id": null,
+   "geometry_hash": "3bda952c66805d5526672d254409f5529f03292eff70b60321a35323e299907d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "whitetail-reservoir-mt",
+   "name": "Whitetail Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Whitetail"
+   ],
+   "bbox": [
+    -105.163247,
+    48.888431,
+    -105.155507,
+    48.892122
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.129,
+   "launches": [
+    "whitetail-reservoir-fishing-access-site-mt"
+   ],
+   "water_id": "whitetail-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "f889f62e82a0919eb9acf02bcfb7a82be246eb79901295816ab4396f51fe89f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "willow-creek-reservoir-mt",
+   "name": "Willow Creek Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Harrison"
+   ],
+   "bbox": [
+    -111.735436,
+    45.68106,
+    -111.68995,
+    45.721905
+   ],
+   "wikidata": "Q49703209",
+   "charted": false,
+   "area_km2": 2.978,
+   "launches": [
+    "harrison-lake-fishing-access-site-mt"
+   ],
+   "water_id": "willow-creek-reservoir-mt",
+   "gnis_id": "778551",
+   "geometry_hash": "28feedc3e55ee8f9d79078382ed23e833ff321fbeb52f1e754a476c7bd2198b5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "willow-creek-reservoir-mt-mt",
+   "name": "Willow Creek Reservoir MT",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Split Rock Junction"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "willow-creek-reservoir-fishing-access-site-mt"
+   ],
+   "water_id": "willow-creek-reservoir-mt-mt",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yellowstone-river-mt",
+   "name": "Yellowstone River",
+   "kind": "river",
+   "state": "MT",
+   "towns": [
+    "Big Timber",
+    "Billings",
+    "Carbella",
+    "Chicory",
+    "Columbus",
+    "Corwin Springs",
+    "Elton",
+    "Emigrant",
+    "Fallon",
+    "Forsyth",
+    "Gardiner",
+    "Glendive"
+   ],
+   "bbox": [
+    -110.902948,
+    44.959353,
+    -104.033809,
+    47.806218
+   ],
+   "wikidata": "Q374772",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "amelia-island-fishing-access-site-mt",
+    "black-bridge-fishing-access-site-mt",
+    "bonfield-fishing-access-site-mt",
+    "bratten-fishing-access-site-mt",
+    "brogan-s-landing-fishing-access-site-mt",
+    "buffalo-mirage-fishing-access-site-mt",
+    "captain-clark-fishing-access-site-mt",
+    "carbella-mt",
+    "carter-s-bridge-fishing-access-site-mt",
+    "cinnabar-mt",
+    "crystal-cross-fishing-access-site-mt",
+    "diamond-willow-fishing-access-site-mt",
+    "duck-creek-bridge-fishing-access-site-mt",
+    "east-bridge-fishing-access-site-mt",
+    "elk-island-fishing-access-site-mt",
+    "emigrant-fishing-access-site-mt",
+    "fallon-bridge-fishing-access-site-mt",
+    "far-west-fishing-access-site-mt",
+    "grey-bear-fishing-access-site-mt",
+    "grey-owl-fishing-access-site-mt",
+    "highway-89-bridge-fishing-access-site-mt",
+    "holmgren-ranch-fishing-access-site-mt",
+    "indian-fort-fishing-access-site-mt",
+    "intake-dam-fishing-access-site-mt",
+    "kinsey-bridge-fishing-access-site-mt",
+    "loch-leven-fishing-access-site-mt",
+    "mallard-s-rest-fishing-access-site-mt",
+    "mayor-s-landing-fishing-access-site-mt",
+    "mcconnell-mt",
+    "myers-bridge-fishing-access-site-mt",
+    "otter-creek-fishing-access-site-mt",
+    "pine-creek-fishing-access-site-mt",
+    "point-of-rocks-fishing-access-site-mt",
+    "roche-jaune-fishing-access-site-mt",
+    "rosebud-east-fishing-access-site-mt",
+    "rosebud-west-fishing-access-site-mt",
+    "seven-sisters-fishing-access-site-mt",
+    "sidney-bridge-fishing-access-site-mt",
+    "springdale-bridge-fishing-access-site-mt",
+    "stipek-fishing-access-site-mt",
+    "yankee-jim-mt"
+   ],
+   "water_id": "yellowstone-river-mt",
+   "gnis_id": "1035255",
+   "geometry_hash": "53c6d07e29b17cc9e4ded56abfab17ccb90248999e6541a2ec9ab180babb671a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yellowtail-afterbay-reservoir-mt",
+   "name": "Yellowtail Afterbay Reservoir",
+   "kind": "reservoir",
+   "state": "MT",
+   "towns": [
+    "Fort Smith"
+   ],
+   "bbox": [
+    -107.958715,
+    45.307334,
+    -107.920016,
+    45.317771
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.639,
+   "launches": [
+    "yellowtail-afterbay-reservoir-boat-launch-mt"
+   ],
+   "water_id": "yellowtail-afterbay-reservoir-mt",
+   "gnis_id": null,
+   "geometry_hash": "3530a432694b001c8bfd2db50be5e95a3b9d1229ff3e745e07d03938fc092656",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
