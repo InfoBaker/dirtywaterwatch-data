@@ -193,7 +193,7 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "City news answered 403 in the research; registered, not read.",
+  "status_reason": "City news answered 403 in the research from a development machine; on 2026-11-16 the old news address led the pipeline's runner to the city's home page. Registered, not read.",
   "verified": "search_only",
   "checked": "2026-11-14",
   "notes": ""

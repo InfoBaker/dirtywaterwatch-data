@@ -406,9 +406,12 @@ def test_public_text_keeps_the_legal_exception_and_calls_unverified_channels_unv
     t = (root / "research" / "pr" / "state-text.md").read_text()
     reg = {r["id"]: r for r in json.loads((root / "data" / "notice-channels" / "pr.json").read_text())["channels"]}
     assert "With no duty to tell the public" not in t and "Puerto Nuevo permit's duty to notify the public" in t
-    for rid in ("pr-estuario-bacteria", "pr-surfrider-bwtf"):
+    for rid in ("pr-surfrider-bwtf",):
         assert "search only" in reg[rid]["note"] and "not verified" in reg[rid]["note"]
-    assert "not a current list" not in t and "was not verified" in t
+    # the estuary's weekly results were read by the go-live audit (2026-11-16, edit 3): monitored, and said so
+    assert reg["pr-estuario-bacteria"]["monitored"] is True and "Weekly enterococci results" in \
+        reg["pr-estuario-bacteria"]["note"]
+    assert "not a current list" not in t and "posts the results each Friday" in t
     assert "shows grey" not in t and "no beach advisory record" in t
     assert "does not say when each report was published" in t and "reaches that file" not in t
     assert "plant its description names" not in t and "no place is guessed from the text" in t
@@ -495,9 +498,13 @@ def test_a_pr_name_written_without_its_accent_finds_the_accented_record(monkeypa
         S._GEOM_CACHE.clear()
 
 
-def test_no_pr_water_is_live_until_the_switch():
+def test_pr_is_live_since_its_go_live_audit():
+    # Until 2026-11-16 this test kept Puerto Rico out of live_states (no water of it was to be live before the switch).
+    # The go-live audit of that day (site docs/checklists/2026-11-16-pr-final.md) found it ready after fixes, which
+    # were made (fix/audit-pr), so it is live; its rule row must be there for the site to state the basis.
     rules = json.loads((__import__("pathlib").Path(__file__).resolve().parents[2] / "data" / "rules.json").read_text())
-    assert "PR" not in rules["live_states"]
+    assert "PR" in rules["live_states"]
+    assert rules["red"]["by_state"]["PR"]["basis"]
 
 
 def test_other_states_match_mains_own_module(tmp_path):

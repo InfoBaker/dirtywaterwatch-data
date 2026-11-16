@@ -412,7 +412,12 @@ def test_iowa_placement_values_are_written_only_by_iowa():
     hits = [p for d in ("pipeline/ingest", "data/sources") for p in (ROOT / d).rglob("*")
             if p.is_file() and p.suffix in (".py", ".yaml", ".json")
             and ("own_place_only" in p.read_text(errors="ignore") or "_also_named_waters" in p.read_text(errors="ignore"))]
-    assert {p.name for p in hits} == {"ia_waterloo_sso.py", "ia_dnr_focomp.py", "ia_dnr_news.py"}, hits
+    # Puerto Rico's go-live audit (2026-11-16 P1-2): EPA's overflow module writes own_place_only for PR records only
+    # (OWN_PLACE_MODE_STATES, pinned to {"PR"} in tests/test_pr_audit_fixes.py)
+    assert {p.name for p in hits} == {"ia_waterloo_sso.py", "ia_dnr_focomp.py", "ia_dnr_news.py",
+                                      "echo_sewer_overflow_events.py"}, hits
+    from ingest import echo_sewer_overflow_events as E
+    assert E.OWN_PLACE_MODE_STATES == {"PR"}
 
 
 # ------------------------------------------------------------------ P1-3 a partial FOCOMP detail read keeps good fields

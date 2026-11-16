@@ -694,7 +694,7 @@
   "access": [
    "csv"
   ],
-  "access_detail": "files.dep.state.pa.us timed out (curl) and refused (WebFetch) on 2026-11-02. Retrieved the Wayback copy of 2025-09-10 (web.archive.org/web/20250910170404id_/...), saved as raw/dep-CSO_Status_Spreadsheet-wayback-20250910.xlsx and parsed to JSON.",
+  "access_detail": "files.dep.state.pa.us timed out (curl) and refused (WebFetch) on 2026-11-02. Retrieved the Wayback copy of 2025-09-10 (web.archive.org/web/20250910170404id_/...), saved as raw/dep-CSO_Status_Spreadsheet-wayback-20250910.xlsx and parsed to JSON. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": true,
   "sample_record": null,
   "fields": [
@@ -930,7 +930,7 @@
   "access": [
    "pdf"
   ],
-  "access_detail": "Live host unreachable; read the Wayback copy (2017-05-02). A 2025-08-04 draft renewal exists (PA0026492_NPDES_PERMIT_20250804_DRAFT_V3.pdf) but is not archived.",
+  "access_detail": "Live host unreachable; read the Wayback copy (2017-05-02). A 2025-08-04 draft renewal exists (PA0026492_NPDES_PERMIT_20250804_DRAFT_V3.pdf) but is not archived. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -974,8 +974,8 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "Could not read current permits for ALCOSAN, PWD, CRW, Lancaster, Erie etc. Retry from another network.",
+  "status": "watch",
+  "status_reason": "Could not read current permits for ALCOSAN, PWD, CRW, Lancaster, Erie etc. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "search_only",
   "checked": "2026-11-02",
   "notes": ""
@@ -998,7 +998,7 @@
   "access": [
    "html"
   ],
-  "access_detail": "palegis.us refused connections (ECONNREFUSED / timeout). Status from a search snippet and legiplex: referred to committee 2025-03-11, no later action seen.",
+  "access_detail": "palegis.us refused connections (ECONNREFUSED / timeout). Status from a search snippet and legiplex: referred to committee 2025-03-11, no later action seen. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -1034,7 +1034,7 @@
    "html",
    "pdf"
   ],
-  "access_detail": "Proposed by EQB 2024-11-12; published 55 Pa.B. 2589 (April 5, 2025), comments to 2025-06-04 (IRRC #3432). IRRC withdrawal letter dated 2026-04-08 (file name). irrc.state.pa.us unreachable; facts from search snippets and Clean Water Action (2026-04-28).",
+  "access_detail": "Proposed by EQB 2024-11-12; published 55 Pa.B. 2589 (April 5, 2025), comments to 2025-06-04 (IRRC #3432). IRRC withdrawal letter dated 2026-04-08 (file name). irrc.state.pa.us unreachable; facts from search snippets and Clean Water Action (2026-04-28). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -1222,7 +1222,7 @@
   "access": [
    "html"
   ],
-  "access_detail": "curl got 403; WebFetch read it. 'An alert is usually canceled 24 to 36 hours after sewer overflows end.' Daily river report season 'May 1st through October 31st'. Recreation not prohibited: 'people are urged to minimize water contact'.",
+  "access_detail": "curl got 403; WebFetch read it. 'An alert is usually canceled 24 to 36 hours after sewer overflows end.' Daily river report season 'May 1st through October 31st'. Recreation not prohibited: 'people are urged to minimize water contact'. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -2167,8 +2167,8 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "Network-level block from this machine; retry from another network before building against DEP layers or permits.",
+  "status": "watch",
+  "status_reason": "A network-level block met from a development machine on 2026-11-02, not by the pipeline. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "fetched",
   "checked": "2026-11-02",
   "notes": ""

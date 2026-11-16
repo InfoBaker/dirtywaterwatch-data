@@ -278,25 +278,27 @@
    "operator_id": null,
    "agency": "San Juan Bay Estuary Program (Programa del Estuario de la Bahía de San Juan)",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "pr-estuario-bacteria",
    "name": "San Juan Bay Estuary Program, bacteriological monitoring",
    "channel_kind": "group_results",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://estuario.org/enterococos/",
+    "https://estuario.org/calidad-de-agua/"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "other",
+   "monitored": true,
+   "unmonitored_reason": null,
    "publishes": "results",
    "records": false,
    "noun": "Sampling results",
    "sources": [
     "pr-estuario-bacteria"
    ],
-   "note": "Periodic PDF reports of bacteria in the Condado lagoon and San Juan's beaches; whether a current list is published was not verified (research: search only).",
-   "barrier": null,
-   "barrier_review": "the register does not say what keeps it off the web: periodic pdf reports of bacteria in the condado lagoon and san juan's beaches; whether a current list is published was n"
+   "note": "Weekly enterococci results at beaches and the Condado lagoon, sampled Thursdays and posted Fridays, with a CSV of every sample (read 2026-11-16).",
+   "barrier": null
   },
   {
    "state": "PR",

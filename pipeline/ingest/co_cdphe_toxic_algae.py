@@ -30,6 +30,15 @@ Record rules
   - No coordinates: the record is placed by the water's name (raw.placement_hint, state CO); a qualifier the sheet
     adds ("Blue Heron Lake, St. Vrain State Park", "Jumbo Reservoir (Julesburg)") is kept in raw.place.
   - A "No bloom reported" row is never a record and never reads as clean water: grey.
+  - Extent (go-live audit 2026-11-16 P1-1): the sheet lists a condition per water, by the water's name, so a row that
+    names a water is the Department's condition for that whole water: raw.advisory_extent "named_water" (the status
+    build colours the water it is placed on whatever its size, as for North Dakota's listed lakes). A row that names a
+    part of a water or a place beside one is raw.advisory_extent "part_of_water" (a marker at a cited point only, never
+    the whole water's colour; the sheet gives no point, so it is listed): a qualifier naming a part (north, east, upper,
+    arm, cove, bay, beach, marina, ...), a " - " suffix ("Chatfield Dog Park Pond - East"), a qualifier that is not a
+    park or a town in parentheses, or a name that is a park ("Chatfield Dog Park"). A park or town qualifier
+    ("Blue Heron Lake, St. Vrain State Park", "Jumbo Reservoir (Julesburg)") locates the whole water: named_water.
+    A note's words ("bloom present in the marina") do not narrow the row: the condition is listed for the water.
 
 Run from pipeline/:  python -m ingest.co_cdphe_toxic_algae [--file saved.csv]
 """
@@ -85,6 +94,27 @@ def water_name(name: str) -> tuple[str, str | None]:
         a, b = n.split(",", 1)
         return a.strip(), b.strip()
     return n, None
+
+
+PART_WORDS = re.compile(r"\b(north|south|east|west|northeast|northwest|southeast|southwest|upper|lower|arm|arms|cove|"
+                        r"bay|beach|beaches|swim|marina|inlet|basin|area|side|end|shore|dam|ramp|channel|"
+                        r"point|island|outlet|spillway)\b", re.I)
+
+
+def extent(sheet_name: str) -> str:
+    """'named_water' when the sheet's name is a water (with at most a park or town locating it), else 'part_of_water'
+    (a part of a water, a place beside one, or a qualifier this reader does not know): see Record rules, Extent."""
+    n = " ".join((sheet_name or "").split())
+    water, place = water_name(n)
+    if " - " in n or re.search(r"\bpark$", water, re.I):
+        return "part_of_water"             # a part named by a suffix, or a park rather than a water
+    # a direction or "Upper" that begins a water's own name ("North Delaney Butte Lake") is that water's name
+    if place is None:
+        return "named_water"
+    if PART_WORDS.search(place):
+        return "part_of_water"
+    in_parens = bool(re.match(r"^.+?\s*\([^)]+\)\s*$", n))
+    return "named_water" if re.search(r"\bpark\b", place, re.I) or in_parens else "part_of_water"
 
 
 def read_rows(text: str) -> list[dict]:
@@ -184,7 +214,7 @@ def build(text: str, fetched: str, previous: list[dict], previous_rows: int | No
                              "whether it is the sampling or the posting day"),
                "placement_hint": {"name": water, "state": "CO",
                                   "basis": "the water the sheet names; the sheet gives no point"},
-               "sheet_url": PAGE}
+               "sheet_url": PAGE, "advisory_extent": extent(first["name"])}
         if any(r["condition"].lower() == "third party" for r in run["rows"]):
             raw["_agency_label"] = "Third party"
             raw["third_party_note"] = ("the sheet's own category: another body reports the condition of this water; "

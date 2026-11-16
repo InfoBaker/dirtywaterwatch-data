@@ -63,9 +63,9 @@
   "license": "EPA public data; no restriction stated",
   "legal_basis": "40 CFR 127 (NPDES eRule Phase 2, from 2025-12-21); 40 CFR 122.41(l)(6) five-day written report",
   "status": "watch",
-  "status_reason": "No Montana report in the current extract (5,751 events) or the all-versions extract (6,710 events) of 2026-11-14; the collection-system table lists three Montana permits, EPA's on tribal land (Polson, Ronan, Poplar). Watched.",
+  "status_reason": "No Montana report in the current or the all-versions extract (files of 2026-11-13, read 2026-11-15); the collection-system table lists three Montana permits, EPA's on tribal land (Polson, Ronan, Poplar). Watched.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -207,9 +207,9 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "The layer behind DEQ's HAB dashboard traced and read 2026-11-14 (445 rows, 2019-2026; DEQ's advisory level, issue and lift dates): read by the mt-deq-hab-map feed as 278 bloom advisories, safe fields only. HAB.mt.gov and dphhs.mt.gov did not resolve on 2026-11-14.",
+  "status_reason": "The layer behind DEQ's HAB dashboard traced and read 2026-11-15 (445 rows, 2019-2026; DEQ's advisory level, issue and lift dates): read by the mt-deq-hab-map feed as 314 bloom advisories, safe fields only. HAB.mt.gov redirects to DPHHS's HAB page, which answered on 2026-11-15.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -271,9 +271,9 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "DEQ's July 21, 2023 Warm Springs Creek notice (expansion research) could not be read on 2026-11-14 (deq.mt.gov did not resolve); the register watches it. No record is made from it.",
+  "status_reason": "DEQ's July 21, 2023 Warm Springs Creek notice (expansion research) was read on 2026-11-15 (mt-deq-warm-springs-2023): it gives no start or end of the release; the register watches it. No record is made from it.",
   "verified": "search_only",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -398,10 +398,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "deq.mt.gov did not resolve for the build's client on 2026-11-14; the notice (over three million gallons of partially treated wastewater, DEQ notified June 23, 2023) is not recorded until it can be read. Watched.",
-  "verified": "search_only",
-  "checked": "2026-11-14",
+  "status": "watch",
+  "status_reason": "Read 2026-11-15: more than three million gallons of partially treated wastewater to Warm Springs Creek during construction at the Montana State Hospital; DEQ notified June 23, 2023, stop-work order July 18, 2023; no start or end of the release given. Watched.",
+  "verified": "fetched",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {

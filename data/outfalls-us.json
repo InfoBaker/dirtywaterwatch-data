@@ -3506,7 +3506,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 53 m from Little Sioux River (little-sioux-river-ia), whose name shares a word with the receiving water ('LITTLE SIOUX RIVER'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0021059",
@@ -3535,7 +3535,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 149 m from Little Sioux River (little-sioux-river-ia), whose name shares a word with the receiving water ('LITTLE SIOUX RIVER'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0021059",
@@ -3564,7 +3564,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 27 m from Little Sioux River (little-sioux-river-ia), whose name shares a word with the receiving water ('LITTLE SIOUX RIVER'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0023434",
@@ -3592,8 +3592,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 299 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER FROM THE WAPSIPINICON TO THE IOW'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 299 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0023434",
@@ -3621,8 +3621,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 387 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER FROM THE WAPSIPINICON TO THE IOW'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 387 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0023434",
@@ -3650,8 +3650,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 241 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER FROM THE WAPSIPINICON TO THE IOW'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 241 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0023434",
@@ -3679,8 +3679,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER FROM THE WAPSIPINICON TO THE IOW') in the state, 1.3 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0027219",
@@ -3708,8 +3708,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.7 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0027219",
@@ -3737,8 +3737,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 188 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR FORT MADISON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 188 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0027219",
@@ -3766,8 +3766,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 230 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR FORT MADISON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 230 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0027219",
@@ -3795,8 +3795,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 279 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR FORT MADISON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 279 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0027219",
@@ -3824,8 +3824,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 346 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR FORT MADISON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 346 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0027219",
@@ -3853,8 +3853,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.4 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0027219",
@@ -3882,8 +3882,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.5 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0027219",
@@ -3911,8 +3911,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.5 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0027219",
@@ -3940,8 +3940,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.6 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0027219",
@@ -3969,8 +3969,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.6 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -3998,8 +3998,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR CLINTON') in the state, 2.5 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4027,8 +4027,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR CLINTON') in the state, 1.8 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4056,8 +4056,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR CLINTON') in the state, 1.0 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4085,8 +4085,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR CLINTON') in the state, 0.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4114,8 +4114,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 280 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR CLINTON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 280 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4143,8 +4143,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR CLINTON') in the state, 0.8 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4172,8 +4172,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR CLINTON') in the state, 0.8 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4201,8 +4201,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR CLINTON') in the state, 0.4 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4230,8 +4230,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 320 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR CLINTON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 320 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4259,8 +4259,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 268 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR CLINTON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 268 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4288,8 +4288,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 161 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR CLINTON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 161 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4317,8 +4317,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 206 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR CLINTON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 206 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0035947",
@@ -4346,8 +4346,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR CLINTON') in the state, 0.6 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 3
   },
   {
@@ -4376,8 +4376,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR CLINTON') in the state, 0.6 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 3
   },
   {
@@ -4406,8 +4406,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR CLINTON') in the state, 0.6 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 3
   },
   {
@@ -4436,8 +4436,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 385 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR FORT MADISON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 385 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0042609",
@@ -4465,8 +4465,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.9 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0042609",
@@ -4494,8 +4494,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.7 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0042609",
@@ -4523,8 +4523,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 389 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER NEAR FORT MADISON'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 389 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('MISSISSIPPI RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0042609",
@@ -4552,8 +4552,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 1.1 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0042609",
@@ -4581,8 +4581,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.5 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0042609",
@@ -4610,8 +4610,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.5 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0042609",
@@ -4639,8 +4639,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.5 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0042609",
@@ -4668,8 +4668,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER NEAR FORT MADISON') in the state, 0.4 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('MISSISSIPPI RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0043079",
@@ -4697,8 +4697,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('Mississippi River') in the state, 0.5 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Mississippi River (mississippi-river-ia) is the only water of the receiving water's name ('Mississippi River') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0043079",
@@ -4727,7 +4727,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 269 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('Mississippi River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0043079",
@@ -4756,7 +4756,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 277 m from Mississippi River (mississippi-river-ia), the nearest openboatlaunch water within 400 m; the receiving water ('FLINT RIVER') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0043079",
@@ -4785,7 +4785,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 228 m from Mississippi River (mississippi-river-ia), the nearest openboatlaunch water within 400 m; the receiving water ('FLINT RIVER') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0043079",
@@ -4814,7 +4814,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 250 m from Mississippi River (mississippi-river-ia), whose name shares a word with the receiving water ('Mississippi River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0043079",
@@ -4843,7 +4843,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 268 m from Mississippi River (mississippi-river-ia), the nearest openboatlaunch water within 400 m; the receiving water ('FLINT RIVER') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0044130",
@@ -4871,8 +4871,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 272 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 272 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0044130",
@@ -4906,8 +4906,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 162 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE EAST FORK DES MOINES'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 162 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 6
   },
   {
@@ -4936,8 +4936,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 79 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 79 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0044130",
@@ -4971,8 +4971,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 159 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE EAST FORK DES MOINES'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 159 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 6
   },
   {
@@ -5007,8 +5007,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 3 m from Raccoon River (raccoon-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 3 m from Raccoon River (raccoon-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 6
   },
   {
@@ -5043,8 +5043,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 3 m from Raccoon River (raccoon-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 3 m from Raccoon River (raccoon-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 6
   },
   {
@@ -5079,8 +5079,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 2 m from Raccoon River (raccoon-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 2 m from Raccoon River (raccoon-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 6
   },
   {
@@ -5115,8 +5115,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 74 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE EAST FORK DES MOINES'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 74 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 4
   },
   {
@@ -5151,8 +5151,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 74 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 74 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 4
   },
   {
@@ -5187,8 +5187,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 74 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE EAST FORK DES MOINES'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 74 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 4
   },
   {
@@ -5223,8 +5223,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 74 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 74 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 4
   },
   {
@@ -5253,8 +5253,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 139 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE EAST FORK DES MOINES'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 139 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0044130",
@@ -5282,8 +5282,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE EAST FORK DES MOINES'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 4
   },
   {
@@ -5312,8 +5312,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 4
   },
   {
@@ -5342,8 +5342,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 4
   },
   {
@@ -5372,8 +5372,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 4
   },
   {
@@ -5403,7 +5403,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 41 m from Raccoon River (raccoon-river-ia), whose name shares a word with the receiving water ('NORTH RACCOON RIVER'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0044130",
@@ -5437,8 +5437,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 161 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE EAST FORK DES MOINES'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 161 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 6
   },
   {
@@ -5467,8 +5467,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE EAST FORK DES MOINES'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 3
   },
   {
@@ -5498,7 +5498,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), the nearest openboatlaunch water within 400 m; the receiving water ('NORTH RACCOON RIVER') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 3
   },
   {
@@ -5528,7 +5528,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 59 m from Des Moines River (des-moines-river-ia), the nearest openboatlaunch water within 400 m; the receiving water ('NORTH RACCOON RIVER') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 3
   },
   {
@@ -5557,8 +5557,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 74 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW THE EAST FORK DES MOINES'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 74 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0044130",
@@ -5586,8 +5586,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Des Moines River (des-moines-river-ia) is the only water of the receiving water's name ('DES MOINES RIVER BELOW THE RACCOON TO WHITEBREAST') in the state, 0.6 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Des Moines River (des-moines-river-ia) is the only water of the receiving water's name ('DES MOINES RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0047961",
@@ -5615,8 +5615,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 90 m from Iowa River (iowa-river-ia), whose name shares a word with the receiving water ('IOWA RIVER BELOW NORTH LIBERTY'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 90 m from Iowa River (iowa-river-ia), whose name shares a word with the receiving water ('IOWA RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -5645,8 +5645,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 90 m from Iowa River (iowa-river-ia), whose name shares a word with the receiving water ('IOWA RIVER BELOW NORTH LIBERTY'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_match": "EPA's point lies 90 m from Iowa River (iowa-river-ia), whose name shares a word with the receiving water ('IOWA RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -5675,8 +5675,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 75 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW WHITEBREAST CREEK'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 75 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5704,8 +5704,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 78 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW WHITEBREAST CREEK'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 78 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5733,8 +5733,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 29 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW WHITEBREAST CREEK'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 29 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5762,8 +5762,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 120 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW WHITEBREAST CREEK'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 120 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5791,8 +5791,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 106 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW WHITEBREAST CREEK'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 106 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5820,8 +5820,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Des Moines River (des-moines-river-ia) is the only water of the receiving water's name ('DES MOINES RIVER BELOW WHITEBREAST CREEK') in the state, 0.6 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Des Moines River (des-moines-river-ia) is the only water of the receiving water's name ('DES MOINES RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5849,8 +5849,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Des Moines River (des-moines-river-ia) is the only water of the receiving water's name ('DES MOINES RIVER BELOW WHITEBREAST CREEK') in the state, 1.2 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Des Moines River (des-moines-river-ia) is the only water of the receiving water's name ('DES MOINES RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5878,8 +5878,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Des Moines River (des-moines-river-ia) is the only water of the receiving water's name ('DES MOINES RIVER BELOW WHITEBREAST CREEK') in the state, 0.8 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "no openboatlaunch water within 400 m of EPA's point; Des Moines River (des-moines-river-ia) is the only water of the receiving water's name ('DES MOINES RIVER') in the state; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5897,18 +5897,26 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110001362034",
    "lat": 41.04836,
    "lon": -92.3975,
-   "water_slug": "des-moines-river-ia",
-   "water_name": "Des Moines River",
-   "water_kind": "river",
-   "distance_m": 3563,
+   "water_slug": null,
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
    "alternatives": [],
-   "match": "name_only",
+   "match": "none",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "no openboatlaunch water within 400 m of EPA's point; Des Moines River (des-moines-river-ia) is the only water of the receiving water's name ('DES MOINES RIVER BELOW WHITEBREAST CREEK') in the state, 3.6 km from the point; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "none: the record of that name was set aside by the placement guard: des-moines-river-ia, name match too far (4.0 km) and the report's town (ottumwa) is not among the water's towns (Argyle, Bentonsport, Bonaparte, Boone); replaces scripts/match_outfalls.py's match by name alone to Des Moines River (des-moines-river-ia): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (4.0 km) and the report's town (ottumwa) is not among the water's towns (Argyle, Bentonsport, Bonaparte, Boone))",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)",
+   "replaced_match": {
+    "water_slug": "des-moines-river-ia",
+    "water_name": "Des Moines River",
+    "match": "name_only",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (4.0 km) and the report's town (ottumwa) is not among the water's towns (Argyle, Bentonsport, Bonaparte, Boone))"
+   },
+   "no_water_reason": "the record of that name was set aside by the placement guard: des-moines-river-ia, name match too far (4.0 km) and the report's town (ottumwa) is not among the water's towns (Argyle, Bentonsport, Bonaparte, Boone); replaces scripts/match_outfalls.py's match by name alone to Des Moines River (des-moines-river-ia): a name-only match to a same-named water the placement guard rejects at EPA's point (name match too far (4.0 km) and the report's town (ottumwa) is not among the water's towns (Argyle, Bentonsport, Bonaparte, Boone))"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5936,8 +5944,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 332 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW WHITEBREAST CREEK'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 332 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5965,8 +5973,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 292 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW WHITEBREAST CREEK'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 292 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IA0058611",
@@ -5994,8 +6002,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 251 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER BELOW WHITEBREAST CREEK'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 251 m from Des Moines River (des-moines-river-ia), whose name shares a word with the receiving water ('DES MOINES RIVER'); openboatlaunch record, scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "IL0020184",
@@ -135419,19 +135427,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006622823",
    "lat": 18.434889,
    "lon": -66.060056,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "cano-de-martin-pena-pr",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 156,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Martin Pena Channel' by name; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 156 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135447,25 +135454,21 @@
    "in_icis": "YES",
    "permit_status": "EFF",
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006622823",
-   "lat": null,
-   "lon": null,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "lat": 18.751833,
+   "lon": -66.134028,
+   "water_slug": "cano-de-martin-pena-pr",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 35371,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": null,
    "receiving_water_source": "state",
-   "echo_lat": 18.751833,
-   "echo_lon": -66.134028,
    "echo_coords_from": "permitted_feature",
-   "coords_problem": "EPA's permitted-feature point (18.751833, -66.134028) is 31.1 km outside PR's outline; it cannot be this outfall's (a mistyped coordinate or another place's point)",
-   "no_water_reason": "no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no usable point (the point EPA gave lies outside the state)",
-   "water_match": "none: no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no usable point (the point EPA gave lies outside the state)",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "NHD builder for the permit: its receiving water 'Martin Pena Channel': the NHD builder's record for it for this permit (EPA's NHD reach/NHDPlus id 21010005004848, 21010005004990, 21010005005077, 800036118: GNIS 'Ca\u00f1o de Mart\u00edn Pe\u00f1a' (01613013); no snapping); EPA's point is 35.4 km from it, and it reaches the permittee's town; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 35371 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135493,9 +135496,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'San Juan Bay' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'San Juan Bay' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Ca\u00f1o de Mart\u00edn Pe\u00f1a); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Ca\u00f1o de Mart\u00edn Pe\u00f1a); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135523,9 +135526,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'San Juan Bay' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'San Juan Bay' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Ca\u00f1o de Mart\u00edn Pe\u00f1a); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Ca\u00f1o de Mart\u00edn Pe\u00f1a); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135553,9 +135556,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'San Juan Bay' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'San Juan Bay' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Ca\u00f1o de Mart\u00edn Pe\u00f1a); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Ca\u00f1o de Mart\u00edn Pe\u00f1a); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135573,19 +135576,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006622823",
    "lat": 18.43975,
    "lon": -66.081694,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "puerto-nuevo-river-pr",
+   "water_name": "Puerto Nuevo River",
+   "water_kind": "river",
+   "distance_m": 1702,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Puerto Nuevo River' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Puerto Nuevo River' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Puerto Nuevo River' by name; Puerto Nuevo River (puerto-nuevo-river-pr, OpenStreetMap record), 1702 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135603,19 +135605,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006622823",
    "lat": 18.4425,
    "lon": -66.078611,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "puerto-nuevo-river-pr",
+   "water_name": "Puerto Nuevo River",
+   "water_kind": "river",
+   "distance_m": 2020,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Puerto Nuevo River' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Puerto Nuevo River' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Puerto Nuevo River' by name; Puerto Nuevo River (puerto-nuevo-river-pr, OpenStreetMap record), 2020 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135633,19 +135634,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006622823",
    "lat": 18.442139,
    "lon": -66.070333,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "cano-de-martin-pena-pr",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 572,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Martin Pena Channel' by name; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 572 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135663,19 +135663,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006622823",
    "lat": 18.44075,
    "lon": -66.44075,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "cano-de-martin-pena-pr",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 40033,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "NHD builder for the permit: its receiving water 'Martin Pena Channel': the NHD builder's record for it for this permit (EPA's NHD reach/NHDPlus id 21010005004848, 21010005004990, 21010005005077, 800036118: GNIS 'Ca\u00f1o de Mart\u00edn Pe\u00f1a' (01613013); no snapping); EPA's point is 40.0 km from it, and it reaches the permittee's town; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 40033 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135693,19 +135692,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006622823",
    "lat": 18.440472,
    "lon": -66.068583,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "cano-de-martin-pena-pr",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 491,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Martin Pena Channel' by name; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 491 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135733,9 +135731,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'San Juan Bay' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'San Juan Bay' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Ca\u00f1o de Mart\u00edn Pe\u00f1a); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: EPA's reaches for it are unnamed in NHDPlus V2.1; no NHD flowline or waterbody of that name in the state; no NHD flowline or waterbody of that name within 2 km (nearby: Ca\u00f1o de Mart\u00edn Pe\u00f1a); no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -135753,19 +135751,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110006622823",
    "lat": 18.435722,
    "lon": -66.066611,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "cano-de-martin-pena-pr",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 73,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Martin Pena Channel' in PR (openboatlaunch has no waters for this state or territory); no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Martin Pena Channel' by name; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 73 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "SD0020796",
@@ -143031,7 +143028,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Superior Bay (superior-bay-wi), whose name shares a word with the receiving water ('Superior Bay'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0025593",
@@ -143049,19 +143046,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000579017",
    "lat": 46.664639,
    "lon": -92.085278,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "nemadji-river-wi",
+   "water_name": "Nemadji River",
+   "water_kind": "river",
+   "distance_m": 538,
    "alternatives": [],
-   "match": "none",
+   "match": "name_only",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Nemadji River' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Nemadji River' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Nemadji River' by name; Nemadji River (nemadji-river-wi, NHDPlus V2.1 record), 538 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0025593",
@@ -143089,8 +143085,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 389 m from Saint Louis River Estuary (saint-louis-river-estuary-wi), the nearest openboatlaunch water within 400 m; the receiving water ('St. Louis Bay of Lake Superior') does not share its name (the nearest water's name ('Saint Louis River Estuary') shares a word with the receiving water ('St. Louis Bay of Lake Superior') but not its kind of water or its compass word); scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 389 m from Saint Louis River Estuary (saint-louis-river-estuary-wi), the nearest openboatlaunch water within 400 m; the receiving water ('St. Louis Bay of Lake Superior') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143119,7 +143115,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 28 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143148,7 +143144,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 6 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143177,7 +143173,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143206,7 +143202,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 5 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143241,7 +143237,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143270,7 +143266,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143299,7 +143295,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 4 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143333,8 +143329,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 154 m from Menomonee River (menomonee-river-wi), the nearest openboatlaunch water within 400 m; the receiving water ('South Menomonee Canal') does not share its name (the nearest water's name ('Menomonee River') shares a word with the receiving water ('South Menomonee Canal') but not its kind of water or its compass word); scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 154 m from Menomonee River (menomonee-river-wi), the nearest openboatlaunch water within 400 m; the receiving water ('South Menomonee Canal') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143363,7 +143359,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143392,7 +143388,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143421,7 +143417,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 40 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143450,7 +143446,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143479,7 +143475,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143508,7 +143504,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 33 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143537,7 +143533,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 40 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143566,7 +143562,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 54 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143595,7 +143591,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 11 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143624,7 +143620,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 14 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143653,7 +143649,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143682,7 +143678,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 7 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143711,7 +143707,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 2 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143740,7 +143736,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 29 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143769,7 +143765,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 25 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143798,7 +143794,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 9 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143827,7 +143823,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 25 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143856,7 +143852,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143885,7 +143881,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143914,7 +143910,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 53 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -143944,7 +143940,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -143973,7 +143969,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144002,7 +143998,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144031,7 +144027,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144060,7 +144056,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144089,7 +144085,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144118,7 +144114,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144147,7 +144143,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144176,7 +144172,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 12 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144205,7 +144201,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 14 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144234,7 +144230,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 15 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144263,7 +144259,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 4 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144292,7 +144288,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 6 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144321,7 +144317,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144350,7 +144346,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144379,7 +144375,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 7 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144408,7 +144404,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144437,7 +144433,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 21 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144466,7 +144462,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144495,7 +144491,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144524,7 +144520,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 33 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144559,7 +144555,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144594,7 +144590,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 28 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144629,7 +144625,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 14 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144664,7 +144660,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144699,7 +144695,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144734,7 +144730,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144763,7 +144759,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 35 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144798,7 +144794,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144833,7 +144829,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144868,7 +144864,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 6 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144897,7 +144893,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 54 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -144916,19 +144912,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110002051421",
    "lat": 43.0968051,
    "lon": -87.9563376,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "lincoln-creek-wi",
+   "water_name": "Lincoln Creek",
+   "water_kind": "stream",
+   "distance_m": 36,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Lincoln Creek' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Lincoln Creek' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Lincoln Creek' by name; Lincoln Creek (lincoln-creek-wi, NHDPlus V2.1 record), 36 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144957,7 +144952,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 34 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -144986,7 +144981,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145021,7 +145016,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145050,7 +145045,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145079,7 +145074,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145108,7 +145103,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145137,7 +145132,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145166,7 +145161,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 22 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145195,7 +145190,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145224,7 +145219,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 13 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145253,7 +145248,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145282,7 +145277,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145311,7 +145306,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145340,7 +145335,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145369,7 +145364,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 13 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145398,7 +145393,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 4 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145427,7 +145422,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145456,7 +145451,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 9 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145485,7 +145480,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 7 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -145515,7 +145510,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 6 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145544,7 +145539,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 7 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
    "point_shared_by": 2
   },
   {
@@ -145574,7 +145569,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 20 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145603,7 +145598,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 37 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145632,7 +145627,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 13 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145667,7 +145662,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145696,7 +145691,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 1 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145725,7 +145720,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 22 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145754,7 +145749,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 22 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145783,7 +145778,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 20 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145812,7 +145807,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 26 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145841,7 +145836,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 24 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145870,7 +145865,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 16 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145899,7 +145894,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 29 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145928,7 +145923,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 7 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145957,7 +145952,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 3 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -145986,7 +145981,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 25 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146015,7 +146010,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 33 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146044,7 +146039,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 17 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146073,7 +146068,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 8 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146102,7 +146097,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 14 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146136,8 +146131,8 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "water_match": "EPA's point lies 309 m from Menomonee River (menomonee-river-wi), the nearest openboatlaunch water within 400 m; the receiving water ('South Menomonee Canal') does not share its name (the nearest water's name ('Menomonee River') shares a word with the receiving water ('South Menomonee Canal') but not its kind of water or its compass word); scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "EPA's point lies 309 m from Menomonee River (menomonee-river-wi), the nearest openboatlaunch water within 400 m; the receiving water ('South Menomonee Canal') does not share its name; scripts/match_outfalls.py",
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146155,19 +146150,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110002051421",
    "lat": 43.0292231,
    "lon": -87.9183335,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "south-menomonee-canal-wi",
+   "water_name": "South Menomonee Canal",
+   "water_kind": "canal",
+   "distance_m": 228,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'South Menomonee Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'South Menomonee Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'South Menomonee Canal' by name; South Menomonee Canal (south-menomonee-canal-wi, openboatlaunch), 228 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146195,9 +146189,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146225,9 +146219,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146255,9 +146249,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146285,9 +146279,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146315,9 +146309,9 @@
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Burnham's Canal' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "no_water_reason": "NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_match": "none: NHD builder: no NHD flowline or waterbody of that name within 2 km (nearby: Kinnickinnic River, Menomonee River, Milwaukee River); no NHD flowline or waterbody of that name in the state; no NHD high-resolution flowline of that name within 3 km of the points; no NHD feature and no OSM feature of that name near the points",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146346,7 +146340,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Lake Michigan (lake-michigan-wi), whose name shares a word with the receiving water ('Lake Michigan'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146375,7 +146369,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 0 m from Lake Michigan (lake-michigan-wi), whose name shares a word with the receiving water ('Lake Michigan'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146393,19 +146387,18 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110002051421",
    "lat": 43.1050854,
    "lon": -87.9522541,
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
+   "water_slug": "lincoln-creek-wi",
+   "water_name": "Lincoln Creek",
+   "water_kind": "stream",
+   "distance_m": 20,
    "alternatives": [],
-   "match": "none",
+   "match": "geometry+name",
    "outfall_kind": "cso",
    "country": "US",
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
-   "no_water_reason": "no openboatlaunch water named 'Lincoln Creek' in WI; no openboatlaunch water within 400 m of the point",
-   "water_match": "none: no openboatlaunch water named 'Lincoln Creek' in WI; no openboatlaunch water within 400 m of the point",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_match": "name: its receiving water 'Lincoln Creek' by name; Lincoln Creek (lincoln-creek-wi, NHDPlus V2.1 record), 20 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146434,7 +146427,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 117 m from Milwaukee River (milwaukee-river-wi), whose name shares a word with the receiving water ('Milwaukee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146463,7 +146456,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 26 m from Kinnickinnic River (kinnickinnic-river-wi), whose name shares a word with the receiving water ('Kinnickinnic River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WI0036820",
@@ -146492,7 +146485,7 @@
    "coords_from": "permitted_feature",
    "receiving_water_source": "state",
    "water_match": "EPA's point lies 5 m from Menomonee River (menomonee-river-wi), whose name shares a word with the receiving water ('Menomonee River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-03)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
   },
   {
    "npdes_permit": "WV0020028",

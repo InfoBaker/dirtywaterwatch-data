@@ -14,14 +14,14 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | federal | 25 | 17 | 24 | 14 | 1 | 81 |
 | ma | 19 | 34 | 21 | 6 | 3 | 83 |
 | ct | 19 | 17 | 14 | 16 | 2 | 68 |
-| ri | 25 | 14 | 9 | 14 | 5 | 67 |
+| ri | 25 | 14 | 11 | 14 | 3 | 67 |
 | nh-vt | 44 | 24 | 28 | 13 | 11 | 120 |
 | me | 16 | 10 | 20 | 25 | 4 | 75 |
 | community | 0 | 8 | 70 | 4 | 2 | 84 |
 | hydrography | 17 | 21 | 10 | 6 | 1 | 55 |
 | ny | 15 | 6 | 18 | 2 | 1 | 42 |
-| nj | 14 | 6 | 10 | 7 | 5 | 42 |
-| pa | 16 | 3 | 18 | 14 | 5 | 56 |
+| nj | 14 | 6 | 11 | 7 | 4 | 42 |
+| pa | 16 | 3 | 20 | 14 | 3 | 56 |
 | md | 11 | 8 | 15 | 11 | 4 | 49 |
 | va | 22 | 11 | 28 | 7 | 1 | 69 |
 | dc | 22 | 8 | 26 | 12 | 5 | 73 |
@@ -45,8 +45,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
 | tn | 4 | 2 | 3 | 1 | 0 | 10 |
-| oh | 11 | 3 | 7 | 1 | 2 | 24 |
-| mn | 7 | 0 | 5 | 4 | 2 | 18 |
+| oh | 11 | 3 | 8 | 1 | 1 | 24 |
+| mn | 7 | 0 | 6 | 4 | 1 | 18 |
 | nd | 6 | 0 | 7 | 1 | 1 | 15 |
 | mo | 7 | 0 | 4 | 2 | 0 | 13 |
 | ks | 4 | 0 | 4 | 1 | 1 | 10 |
@@ -54,7 +54,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wi | 8 | 0 | 10 | 2 | 1 | 21 |
 | de | 3 | 0 | 5 | 1 | 0 | 9 |
 | sc | 6 | 0 | 2 | 1 | 2 | 11 |
-| in | 8 | 0 | 14 | 0 | 4 | 26 |
+| in | 8 | 0 | 16 | 0 | 2 | 26 |
 | wv | 8 | 0 | 12 | 1 | 1 | 22 |
 | la | 4 | 0 | 7 | 3 | 2 | 16 |
 | nv | 3 | 1 | 8 | 3 | 0 | 15 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 2 | 0 | 5 | 2 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **617** | **237** | **542** | **230** | **91** | **1717** |
+| **all** | **617** | **237** | **551** | **230** | **82** | **1717** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -555,13 +555,13 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ri-nbc-cso-api-geopins` | NBC service-area polygon (GeoJSON) | candidate | fetched | outfalls | Context layer for the map; 'count' 217 meaning unknown. |
 | `ri-ridem-cyano-email-alerts` | RIDEM cyanobacteria email alerts (Constant Contact) | candidate | fetched | advisories | Owner may subscribe; layer already gives the same data. |
 | `ri-ridem-cyano-field` | RIDEM cyanobacteria field inspections and sample results (Survey123 layer) | candidate | fetched | monitoring | Supporting observations behind advisories. |
-| `ri-ridem-press-releases` | RIDEM press releases (and RSS) | candidate | fetched | advisories | Carries the big SSO notices (East Providence 2026, Warwick 2022) and no-contact advisories (Seekonk 2018, Blackstone 2023); feed access blocked by Cloudflare for servers. |
-| `ri-ridem-shellfish-closure-page` | RIDEM Pollution-Related Conditional Area and Emergency Shellfish Closures (status table) | candidate | fetched | advisories | Official affected-area advisories that include sewage-triggered emergency closures; scraping is blocked by Cloudflare, so the email list is the practical feed. |
+| `ri-ridem-press-releases` | RIDEM press releases (and RSS) | candidate | fetched | advisories | Carries the big SSO notices (East Providence 2026, Warwick 2022) and no-contact advisories (Seekonk 2018, Blackstone 2023); not collected yet. |
+| `ri-ridem-shellfish-closure-page` | RIDEM Pollution-Related Conditional Area and Emergency Shellfish Closures (status table) | candidate | fetched | advisories | Official affected-area advisories that include sewage-triggered emergency closures; not collected yet. |
 | `ri-ridem-shellfish-email-alerts` | RIDEM shellfish closure email alerts (Constant Contact) | candidate | fetched | advisories | Owner should subscribe; the only push channel that names sewage-release closures (e.g., Bristol April 2026, not press-released). |
 | `ri-ridem-shellfish-restrictions-risegis` | RIDEM Shellfish Harvest Restrictions feature service (June 2026) | candidate | fetched | advisories | Polygons for conditional areas let a closure notice be drawn; status itself is not in the layer. |
-| `ri-ridoh-beach-advisory-feed` | RIDOH Beach Advisories feed page (ridoh-feed-beaches) | candidate | fetched | advisories | Gives publication times the sheet lacks; blocked for servers. |
+| `ri-ridoh-beach-advisory-feed` | RIDOH Beach Advisories feed page (ridoh-feed-beaches) | candidate | fetched | advisories | Gives publication times the sheet lacks; not collected yet. |
 | `ri-ridoh-beaches-view` | RIDOHGIS_Beaches_View feature service (Beach Viewer 2026) | candidate | fetched | advisories | Use for beach locations and IDs; Status semantics conflict (renderer: 3 = 'Closed for Swimming'; Beach Viewer filter: 3 = 'Not Monitored') and DateMod stops in 2017. |
-| `ri-ridoh-press-releases-rss` | RIDOH press releases RSS | candidate | fetched | advisories | Joint RIDOH/DEM cyano and some beach releases; Cloudflare. |
+| `ri-ridoh-press-releases-rss` | RIDOH press releases RSS | candidate | fetched | advisories | Joint RIDOH/DEM cyano and some beach releases; not collected yet. |
 | `ri-ridoh-volunteer-beach-risks` | RIDOH 'Beach Risks Observed by Volunteer Groups' (Google Sheet) | candidate | fetched | monitoring | Only public signal for urban Upper Bay spots near CSOs (Gaspee Point, Stillhouse Cove, Bold Point, Sabin Point). |
 | `ri-rigis-ripdes-sanitary-wwtf` | RIGIS ENV_RIPDES_Sanitary_Waste_Sites_2024 (RIPDES sanitary WWTFs) | candidate | fetched | permits | Plant locations; RISE layer 24 has 27 and is newer. |
 | `ri-save-the-bay` | Save The Bay (Baykeeper statements; weekly Upper Bay bacteria sampling reported to RIDOH) | candidate | fetched | monitoring | Its bacteria data reach the public through the RIDOH volunteer sheet; site has statements (e.g., 2026-05-05 on the East Providence spill), no data feed or alert list. |
@@ -570,11 +570,13 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ri-nbc-environmental-monitoring` | NBC Environmental Monitoring (urban river and bay bacteria) and annual data reports | watch | fetched | monitoring | Useful science/context; no feed, and latest report is 2022. |
 | `ri-nbep-gis-hub` | Narragansett Bay Estuary Program GIS data hub | watch | fetched | science | Context and history, no events. |
 | `ri-newport-cso-program` | Newport Utilities CSO Control Program page | watch | fetched | permits | Annual trend charts and CSO Program Reassessment Report No. 2 (2025); 'Permitted overflows still occur during heavy rain events and are reported as required under the City's RIPDES permit.' No event feed. |
+| `ri-newport-harbor-wqdatalive` | Newport Harbor live monitoring (NexSens WQData LIVE 2461) | watch | fetched | monitoring | Connection refused on 2026-11-01. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `ri-news-other` | Rhode Island Current, turnto10, whatsupnewp, GoLocalProv, Newport Buzz (event coverage) | watch | search_only | news | Event corroboration; RI Current returned 403 to WebFetch. |
 | `ri-restoredwatersri` | RestoredWaters RI (NBC Phase III project site) | watch | fetched | news | Construction updates only; no CSO notifications (blasting notices by email to notifications@cb3a.com). |
 | `ri-rigis-sewered-areas` | RIGIS UTILITY_Sewered_Areas_spf / RISE Waste Water Treatment Catchment layer | watch | fetched | outfalls | Service-area context; not probed beyond service metadata. |
 | `ri-salt-ponds-coalition` | Salt Ponds Coalition bacteria data sheet | watch | fetched | monitoring | Annual PDF of salt pond bacteria (2026 posted Oct 2026); no feed. |
 | `ri-uri-watershed-watch` | URI Watershed Watch data hub and ArcGIS services | watch | fetched | monitoring | Lab for most RI volunteer programs (WPWA, WRWC, Salt Ponds, Surfrider BWTF); bacteria not in the open tables. |
+| `ri-wrwc` | Woonasquatucket River Watershed Council | watch | search_only | monitoring | Connection refused on 2026-11-01; search shows volunteer monitoring May-Oct including bacteria via URI Watershed Watch; no advisory/flag program found. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `ri-blackstone-river-coalition` | Blackstone River Coalition / Watershed Council volunteer monitoring | rejected | fetched | monitoring | Monthly Apr-Nov nutrients/DO/turbidity at 75 sites (17 in RI); bacteria listed only for 1999-2017. zaptheblackstone.org does not resolve. |
 | `ri-data-ri-gov` | data.ri.gov (former state open data portal) | rejected | fetched | monitoring | Redirects to the Municipal Transparency Portal (municipalfinance.ri.gov); no 'Beach Monitoring' dataset exists there now. |
 | `ri-nbc-fixed-site-buoys` | NBC fixed-site buoy data export (Snapshot of the Bay) | rejected | fetched | monitoring | Near-real-time sonde data (no bacteria); not a discharge or advisory source. |
@@ -590,10 +592,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ri-swim-guide` | Swim Guide Rhode Island beach pages | rejected | fetched | prior_art | Easton's Beach page: 'Swim Guide does not actively update Rhode Island beaches'; RIDOH 'does not share weekly test results'; status 'No data available'. |
 | `ri-wpwa` | Wood-Pawcatuck Watershed Association water quality data | rejected | fetched | monitoring | Google My Maps of sites with per-site PDFs (URI WW lab), 2020/2021 reports; no feed, no advisories. |
 | `ri-clean-ocean-access` | Clean Ocean Access water quality program (Aquidneck Island) | unreachable | search_only | monitoring | HTTP 522 (Cloudflare origin down) on 2026-11-01. Appears in RIDOH volunteer sheet in 2021; weekly Aquidneck sampling 2008-2016 per news. |
-| `ri-newport-harbor-wqdatalive` | Newport Harbor live monitoring (NexSens WQData LIVE 2461) | unreachable | fetched | monitoring | Connection refused on 2026-11-01. |
 | `ri-news-wpri` | WPRI local news (sewage spills) | unreachable | search_only | news | Bot protection ('Access to this page has been denied'); content known from search snippets only. |
 | `ri-ridoh-welltesting-arcgis` | RIDOH legacy ArcGIS server welltesting.health.ri.gov (SWIM/RIBeaches MapServer) | unreachable | fetched | advisories | DNS NXDOMAIN on 2026-11-01; referenced by the 2017/2018 web maps. |
-| `ri-wrwc` | Woonasquatucket River Watershed Council | unreachable | search_only | monitoring | Connection refused on 2026-11-01; search shows volunteer monitoring May-Oct including bacteria via URI Watershed Watch; no advisory/flag program found. |
 
 ## nh-vt: New Hampshire and Vermont (120)
 
@@ -1028,6 +1028,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nj-njdep-sewer-service-areas` | NJDEP Sewer Service Areas (Utilities MapServer layer 8) | watch | fetched | hydrography | Could map which treatment plant serves an SSO location; not needed first. |
 | `nj-nynj-baykeeper` | NY/NJ Baykeeper (incl. Raritan Riverkeeper program) - water quality postings on Swim Guide | watch | search_only | monitoring | Any current data flows through Swim Guide; no own feed. |
 | `nj-other-permittee-websites` | Other CSO permittees' own notification channels (Jersey City MUA, Bayonne, Newark, Paterson, Kearny, Harrison, East Newark, North Bergen MUA, Guttenberg, Hackensack, Ridgefield Park, Fort Lee, BCUA, Perth Amboy, MCUA, JMEUC, Camden City, Gloucester City) | watch | search_only | events | No independent channel found; each permittee's 'clearinghouse' page should still be visited once by the owner or a later crawl. |
+| `nj-passaic-river-coalition` | Passaic River Coalition | watch | fetched | monitoring | No response; no known data feed. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `nj-swim-guide-nj` | Swim Guide (theswimguide.org) New Jersey listings | watch | search_only | prior_art | Re-publishes NJDEP and Baykeeper results; no NJ-specific data of its own. |
 | `nj-trenton-cso-advisory` | Trenton Sewer Utility 'CSO Advisory System' (outfall 002A, Delaware River) | watch | fetched | events | Rare discharges (<1/yr per the utility; 20 MG detention basin); check the PDF after big storms. |
 | `nj-clean-ocean-action` | Clean Ocean Action | rejected | fetched | news | Advocacy and beach sweeps; no monitoring feed. |
@@ -1040,7 +1041,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nj-nhsa-waterbody-advisory-system` | North Hudson Sewerage Authority Waterbody Advisory System (sensor map of 10 Hudson River outfalls) | unreachable | fetched | events | Map link 404s; no feed. Owner should ask NHSA whether the map moved. |
 | `nj-njdep-cso-program-pages` | NJDEP Division of Water Quality CSO program pages (dep.nj.gov/dwq/combined-sewer-overflow/ and sub-pages) | unreachable | fetched | permits | Imperva CAPTCHA blocks automated access; content readable only through the Internet Archive (which also rate-limited us with HTTP 429 at times). |
 | `nj-njdep-dataminer-njems` | NJDEP DataMiner (njems.nj.gov) - DMR data by NJPDES number and designator, complaints, incidents | unreachable | fetched | permits | Bot wall (Imperva). Same DMR values are available from EPA ECHO. |
-| `nj-passaic-river-coalition` | Passaic River Coalition | unreachable | fetched | monitoring | No response; no known data feed. |
 | `nj-raritan-riverkeeper` | Raritan Riverkeeper | unreachable | fetched | monitoring | No site; see nj-nynj-baykeeper and nj-lrwp-raritan-pathogens. |
 
 ## pa: Pennsylvania (56)
@@ -1073,6 +1073,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `pa-bill-hb871-2025` | PA House Bill 871 (2025-2026): Clean Streams Law amendment, 'notice of discharge endangering public health or environment' | watch | search_only | law | Text not read. Earlier versions (HB 1842 of 2021, SB 545 of 2022) concerned notice of spills, mainly to DEP/water suppliers; whether it covers public notice of sewage overflows is unknown. |
 | `pa-crw-public-notification-plan` | Capital Region Water CSO Public Notification Plan (consent decree filing, 2023-09-22) | watch | search_only | law | Defines CRW's notice duties (signage, templates); not read in full. |
 | `pa-delaware-riverkeeper` | Delaware Riverkeeper Network | watch | search_only | prior_art | No public bacteria dataset or overflow notices found in search; advocacy partner only. |
+| `pa-dep-elibrary-permits` | DEP eLibrary / eDMRPortalFiles permit PDFs (major, minor, PAG-06 folders) | watch | search_only | permits | Could not read current permits for ALCOSAN, PWD, CRW, Lancaster, Erie etc. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
+| `pa-dep-hosts-unreachable` | PA state-hosted DEP and legislature systems (files.dep.state.pa.us, crawler.dep.state.pa.us, gis.dep.pa.gov, depgis.state.pa.us, greenport/eLibrary, eFACTS, palegis.us, irrc.state.pa.us) | watch | fetched | permits | A network-level block met from a development machine on 2026-11-02, not by the pipeline. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `pa-drbc-bacteria` | DRBC bacteria monitoring and recreation-use program (Boat Run, near-shore studies, 2024-2026 partner sampling) | watch | fetched | monitoring | Context and history for the Delaware River page; no event or advisory feed. Watch the criteria/primary-contact rulemaking. |
 | `pa-erie-annual-cso-notice` | City of Erie annual CSO notice (ecode360 documents) | watch | search_only | events | Annual summary required by 40 CFR 122.38(b); history only. |
 | `pa-law-25pacode-94-12` | 25 Pa. Code § 94.12 Chapter 94 annual wasteload management report | watch | fetched | law | Annual reports go to DEP regional offices; not published online as a dataset (file review). Context only. |
@@ -1099,8 +1101,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `pa-surfrider-bwtf-pa` | Surfrider Blue Water Task Force: Pennsylvania | rejected | fetched | monitoring | No PA data. |
 | `pa-wmwa-news` | Williamsport (WMWA/WSA) news page | rejected | search_only | events | No CSO notices. |
 | `pa-altoona-cso` | Altoona Water Authority CSO discharge points page | unreachable | search_only | outfalls | Blocked; no event channel known. |
-| `pa-dep-elibrary-permits` | DEP eLibrary / eDMRPortalFiles permit PDFs (major, minor, PAG-06 folders) | unreachable | search_only | permits | Could not read current permits for ALCOSAN, PWD, CRW, Lancaster, Erie etc. Retry from another network. |
-| `pa-dep-hosts-unreachable` | PA state-hosted DEP and legislature systems (files.dep.state.pa.us, crawler.dep.state.pa.us, gis.dep.pa.gov, depgis.state.pa.us, greenport/eLibrary, eFACTS, palegis.us, irrc.state.pa.us) | unreachable | fetched | permits | Network-level block from this machine; retry from another network before building against DEP layers or permits. |
 | `pa-dep-sewage-discharge-points-layer` | DEP eMapPA 'Water Pollution Control Facilities - Sewage Discharge Point Locations' (layer 293) via DEP open data hub | unreachable | fetched | outfalls | Would give DEP's own coordinates for sewage discharge points; retry the hub download or the MapServer from another network. |
 | `pa-wvsa-notices` | Wyoming Valley Sanitary Authority notices page | unreachable | search_only | events | Blocked; 51 CSO outfalls with no known public notice channel. |
 
@@ -1397,7 +1397,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `wa-beach-program` | Washington BEACH program (Ecology and DOH) swimming beach advisories and status map | candidate | search_only | advisories | Advisories are issued by local health departments; a status map exists; no service URL found in the time box. |
 | `wa-doh-shellfish-closures` | Washington DOH Shellfish Safety Map and commercial growing area closures (incl. sewage-spill emergency closures) | candidate | search_only | advisories | DOH closes shellfish beaches after sewage spills (Ecology's page points here); health line 800-525-0127. Service not examined. |
 | `wa-ecology-freshwater-algae` | Washington State Toxic Algae (Ecology freshwater algae program, nwtoxicalgae.org) | candidate | search_only | advisories | Bloom reports and toxin results by lake; not fetched. |
-| `wa-spokane-cso-update` | City of Spokane Real Time Combined Sewer Overflow Monitoring (CSOUpdate) | candidate | fetched | events | Dated CSO starts for Spokane, but bot-walled to scripts; owner should ask the City for a feed or allow-listing. |
+| `wa-spokane-cso-update` | City of Spokane Real Time Combined Sewer Overflow Monitoring (CSOUpdate) | candidate | fetched | events | Dated CSO starts for Spokane; not collected yet. |
 | `wa-ecology-paris` | Ecology PARIS water quality permit database | watch | search_only | permits | Permits, DMRs and documents per facility; context for CSO annual reports. Not queried. |
 | `wa-kc-cso-outfall-locations` | King County GIS Open Data: Combined Sewer Outfall Locations | watch | search_only | outfalls | Outfall points and categories; the status CSV already carries coordinates. |
 | `wa-kc-swimming-beach-bacteria` | King County swimming beach bacteria monitoring | watch | search_only | monitoring | Lake beaches; not fetched. |
@@ -1430,7 +1430,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ca-swrcb-sso-monthly-counts` | neworder_monthly_counts.txt and annualReports.txt (SSS WDR) | watch | fetched | monitoring | Context only (monthly/annual totals per enrollee). |
 | `ca-epa-sobe` | EPA eRule SOBE extract (California permittees) | rejected | inferred | events | 0 California events on 2026-11-03: California reports SSOs to CIWQS, not NeT-SewerOverflow. |
 | `ca-swrcb-ciwqs-interactive-sso-report` | CIWQS Interactive Sanitary Sewer System Spill Report | rejected | search_only | events | Form-driven HTML; the flat file has the same records. |
-| `ca-swrcb-sso-incident-map` | Sanitary Sewer Systems Spills Incident Map (public and private-lateral maps) | rejected | fetched | events | Duplicate of the flat file and bot-walled; use the flat file. |
+| `ca-swrcb-sso-incident-map` | Sanitary Sewer Systems Spills Incident Map (public and private-lateral maps) | rejected | fetched | events | Duplicate of the flat file; use the flat file. |
 
 ## il: Illinois (28)
 
@@ -1454,7 +1454,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `il-friends-chicago-river-overflow-action` | Friends of the Chicago River: Overflow Action Days and CSO blog | watch | fetched | social | Context and advocacy; not a source of dated discharge records. |
 | `il-lake-county-beaches` | Lake County Health Department beach monitoring map | watch | search_only | advisories | Feeds BeachGuard; use BeachGuard. |
 | `il-mwrd-cso-alerts` | MWRD CSO notification alerts (email and SMS, via Smart911) | watch | fetched | events | The legally required public channel, but email/SMS behind a Smart911 account; owner sign-up only. WTTW (2025): alerts say only that an overflow occurred somewhere in the MWRD network. |
-| `il-mwrd-cso-event-synopsis` | MWRD CSO Event Synopsis Report (per-outfall tide-gate open and close times by event day) | watch | fetched | events | Per-outfall open and close times for Cook County since 2016, but reached only through a form, a session and a report viewer: by the standing rule on bot walls and polling forms it is not read by an automated session; the request to MWRD is a download or feed of the same table (register row il-mwrd-cso-synopsis-report). |
+| `il-mwrd-cso-event-synopsis` | MWRD CSO Event Synopsis Report (per-outfall tide-gate open and close times by event day) | watch | fetched | events | Per-outfall open and close times for Cook County since 2016, but reached only through a form, a session and a report viewer: by the standing rule on polling forms it is not read by an automated session (the form page answered the pipeline's runner on 2026-11-16); the request to MWRD is a download or feed of the same table (register row il-mwrd-cso-synopsis-report). |
 | `il-mwrd-iepa-quarterly-reports` | MWRD IEPA quarterly CSO reports and CSO representative monitoring plans | watch | search_only | permits | Quarterly permit reports; useful to reconcile event counts. |
 | `il-mwrd-pump-station-activity` | MWRD pump station activity spreadsheet | watch | search_only | events | Pumping-station discharges to the waterways are a CSO pathway; content not checked. |
 | `il-suburban-cso-notification-pages` | Suburban CSO public notification plan pages (Mount Prospect, Arlington Heights, Lincolnwood, Calumet City) | watch | search_only | law | No independent event feed found from the 37 ILM580 general-permit communities. |
@@ -1685,6 +1685,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-lima-cso-activity` | Lima Combined Sewer Overflow Activity Report | candidate | fetched | events | Page lists 2026 '4 hour Overflows' and '7 Day Supplemental Notifications' as dated PDFs (e.g. 9_12_26). PDF polling. |
 | `oh-toledo-cso` | Toledo Combined Sewer Overflows page | candidate | fetched | events | Status line ('Last updated: 11/03/2026 There are no combined sewer overflows at this time. The public will be notified within four hours of a documented CSO event.') and dated daily CSO report PDFs (latest 09 05 26). |
 | `oh-bills-136ga` | Ohio 136th General Assembly bills on sewage notice | watch | search_only | law | No sewage-overflow notification bill found by search; HB 92 surfaced but its subject was not confirmed. |
+| `oh-defiance-cso` | Defiance Combined Sewer Overflows page | watch | search_only | events | Connection reset on 2026-11-03. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `oh-elyria-cso` | Elyria Combined Sewer Overflow page | watch | fetched | events | Annual CSO reports and notification plan; links Lorain County Emergency Alerting System; Ordinance 521.11 prohibits swimming in the Black River within city limits. |
 | `oh-epa-noncompliance-sso-notification` | Ohio EPA NPDES non-compliance and SSO notification (24-hour report to Ohio EPA; SSO 5-day follow-up form) | watch | search_only | law | Regulator-only reports; no public output found. |
 | `oh-euclid-cso-notification` | Euclid Combined Sewer Overflow Public Notification | watch | fetched | events | Describes 17 CSO structures and the notification plan; no event list seen in the fetched page. |
@@ -1692,7 +1693,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-sso-annual-reports` | Municipal SSO annual reports (Dayton, Elyria, Willoughby, Wooster, Middlefield, Montgomery County) | watch | search_only | events | Annual PDFs required by permits; annual precision only. |
 | `oh-upper-sandusky-cso-reports` | Upper Sandusky CSO public notification reports by year | watch | search_only | events | Yearly CSO report pages (2023-2025) per search. |
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
-| `oh-defiance-cso` | Defiance Combined Sewer Overflows page | unreachable | search_only | events | Connection reset on 2026-11-03. |
 | `oh-epa-hab-program` | Ohio EPA harmful algal bloom program and public water advisories (ohioalgaeinfo) | unreachable | fetched | advisories | ohioalgaeinfo.com redirected to a 404 on epa.ohio.gov on 2026-11-03; recreational HAB advisories are carried in BeachGuard. |
 
 ## mn: Minnesota (18)
@@ -1706,8 +1706,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `mn-mpca-collection-release-guidance` | MPCA guidance for collection-system releases (October 2026) | used | fetched | law | Read for the research of 2026-11-09: any amount of wastewater released is unauthorized; immediate Duty Officer report and prompt downstream notice; release sampling reports within 30 days. Cited in the state text. |
 | `mn-mpca-public-notification-guidance` | MPCA "Public Notification of Wastewater Releases: Notice to Downstream Users and Drinking Water Intakes" (wq-wwprm1-43, October 2026) | used | fetched | law | Defines whom to notify: "Any location within 25 miles downstream of the release which the public could encounter the receiving water"; "Notification should also be given when the release has ended." |
 | `mn-wlssd-overflows` | WLSSD "2026 Releases" overflow map layer (Duluth regional sewer system) | used | fetched | events | Read through the generic ArcGIS block mn-wlssd-overflows: 117 releases, 2005 to 2026-11-04, with the day or time, the kind of structure, an amount as written and whether waters of the state were reached; no end, no receiving water's name. |
-| `mn-duluth-press-releases` | City of Duluth press releases on sanitary sewer overflows (web subscriptions) | watch | access_failed | events | Registered as an unmonitored channel (no feed): the City's press releases, one mutable page per notice (the research of 2026-11-09 read the Chester Creek notice of October 2024, which kept its earlier warnings below the updates). duluthmn.gov did not answer the project's client on 2026-11-14 (connection timed out); no list or feed of the overflow notices was found. |
+| `mn-duluth-press-releases` | City of Duluth press releases on sanitary sewer overflows (web subscriptions) | watch | access_failed | events | Registered as an unmonitored channel (no feed): the City's press releases, one mutable page per notice (the research of 2026-11-09 read the Chester Creek notice of October 2024, which kept its earlier warnings below the updates). duluthmn.gov did not answer the project's client on 2026-11-14 (connection timed out); no list or feed of the overflow notices was found. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `mn-mdh-beach-locator` | MDH beach locator (local beach programs) | watch | fetched | advisories | Links Lake Superior's program and local programs (Minneapolis Parks, Three Rivers, Ramsey County); no statewide advisory feed. Registered as a channel. |
+| `mn-mdh-lake-superior-beaches` | MDH Minnesota Lake Superior Beach Monitoring Program (mnbeaches.org) | watch | access_failed | advisories | mnbeaches.org timed out on 2026-11-14 (connection, 60 s) as it failed on 2026-11-09; no advisory rows, sample schema or API seen. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `mn-mpca-dmr-downloads` | MPCA discharge monitoring report downloads | watch | search_only | monitoring | Annual ZIPs of routine monitoring since 1998 and release sampling reports attached to DMRs (research 2026-11-09, directory only). Routine measurements are not spill events; the attachments' public access was not checked. |
 | `mn-mpca-hab` | MPCA harmful algal bloom information and reporting | watch | inferred | advisories | MPCA's harmful algae page gives guidance and a reporting route; local bodies decide advisories. No statewide list of current bloom advisories was found (2026-11-09 research). |
 | `mn-mpca-information-requests` | MPCA information requests | watch | fetched | law | The route to ask for a redacted export of release reports (Duty Officer numbers, dates, receiving waters, volumes). No request sent. |
@@ -1716,7 +1717,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `mn-mpca-2017-release-data` | MPCA 2017 Municipal Wastewater Release Data (compiled for the Legislative-Citizen Commission) | rejected | search_only | events | One-off 2017 compilation; proves MPCA can extract releases if asked. |
 | `mn-mpca-wimn` | MPCA What's in My Neighborhood (sites dataset) | rejected | search_only | permits | A site/permit inventory, not an incident list; no sewage release events found in it. |
 | `mn-duty-officer` | Minnesota Duty Officer Program (DPS/BCA): one-call reporting of all discharges | unreachable | search_only | events | Every wastewater release is reported here first, but the reports are not published; a 2017 compilation for a legislative commission ("MPCA - 2017 Municipal Wastewater Release Data") shows the data exist. |
-| `mn-mdh-lake-superior-beaches` | MDH Minnesota Lake Superior Beach Monitoring Program (mnbeaches.org) | unreachable | access_failed | advisories | mnbeaches.org timed out on 2026-11-14 (connection, 60 s) as it failed on 2026-11-09; no advisory rows, sample schema or API seen. Registered as a channel with its barrier. |
 
 ## nd: North Dakota (15)
 
@@ -1766,7 +1766,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ks-leavenworth-sso-transparency` | City of Leavenworth Sanitary Sewer Overflow Transparency Reports and per-event SSO pages | used | fetched | events | Read by ingest/ks_leavenworth_sso.py: the City's page per overflow, 2020 to 2026. |
 | `ks-kdhe-monitoring-sites` | KDHE Surface Water Monitoring Sites (lakes and streams) | watch | search_only | monitoring | Station locations for bacteria context; not an advisory source. |
 | `ks-kdhe-spills-dasc` | KDHE reported spills map layer (Spills_DASC) | watch | fetched | events | A lead: not a sewer-overflow record (few sewage rows, approximate points); registered and watched. |
-| `ks-topeka-stream-advisories` | City of Topeka stream advisories (Utilities, topeka.org news) | watch | search_only | advisories | City news answered 403 in the research; registered, not read. |
+| `ks-topeka-stream-advisories` | City of Topeka stream advisories (Utilities, topeka.org news) | watch | search_only | advisories | City news answered 403 in the research from a development machine; on 2026-11-16 the old news address led the pipeline's runner to the city's home page. Registered, not read. |
 | `ks-ug-kck-consent-decree` | Unified Government of Wyandotte County/Kansas City, Kansas: consent decree (2013) and overflow control plan | watch | search_only | permits | Collection System Release Response Plan under the decree; no public notice channel found. |
 | `ks-kdhe-incident-report` | KDHE incident report form and spill line | rejected | search_only | events | Intake form; no public incident list found. |
 | `ks-kdhe-hab-page` | KDHE HAB page and CivicAlerts press releases | unreachable | search_only | advisories | Answers 403 to automated clients (2026-11-14); the map layer carries the same lakes. |
@@ -1849,7 +1849,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
-| `in-echo-dmr-cso` | EPA ECHO monthly DMR CSO counts for Indiana CSO permits | used | inferred | events | Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 92 permits, January 2025 to October 2026, a median 24 days after the month. Month precision: the monthly mark only. |
+| `in-echo-dmr-cso` | EPA ECHO monthly DMR CSO counts for Indiana CSO permits | used | inferred | events | Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 91 permits, January 2025 to October 2026, received by EPA a median 24 days after the month. Month precision: the monthly mark only. |
 | `in-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Indiana | used | inferred | events | Read by the national eRule module with IN in its states (2026-11-14): one Indiana report on the 2026-11-12 extract (Shelbyville's plant bypass, 2026-08-12); IDEM's own reports are not sent here until its move to NeT-SewerOverflow. |
 | `in-epa-cso-inventory` | EPA National CSO Inventory (Indiana extract) | used | fetched | outfalls | Baseline; IDEM layer is better. |
 | `in-epa-gl-cso-indiana` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Indiana | used | fetched | outfalls | Seeds the channel column for Great Lakes basin operators. |
@@ -1861,19 +1861,19 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `in-citizens-cso-warnings` | Citizens Energy Group CSO warnings (email), Indianapolis | watch | fetched | events | 2018 post: 'CSO warnings are issued via email by Citizens Energy Group when' as little as a quarter-inch of rain is forecast; mandated by the consent decree; avoid contact downstream for four days (search). Sign-up page not found; the 2026 CSO page URL returned 404. |
 | `in-dnr-advisories-closings` | Indiana DNR state parks lake advisories and closings | watch | search_only | advisories | Read 2026-11-14: park alerts by property; the blue-green algae lines are a standing general note ('Found in lakes year round. Don't drink the water. Shower after you swim.'), not a report of a bloom, so they are not records. Watched in the register. |
 | `in-evansville-ewsu-clear-path` | Evansville Water and Sewer Utility (Clear Path CSO program) | watch | fetched | events | Homepage links a Combined Sewer Overflow page; notification channel not traced. |
+| `in-fort-wayne-cso-notifications` | Fort Wayne City Utilities CSO notifications | watch | search_only | events | HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `in-goshen-cso-notice` | Goshen CSO Notice posts | watch | fetched | events | The notice page (https://goshen.in.gov/cso-notice/) holds one dated notice (2018-02-20) and the city's notification policy. Watched in the register. |
 | `in-hammond-cso-notification` | Hammond Sanitary District CSO notification program | watch | fetched | events | E-mail notification when CSOs discharge, by request sent to the district's postal address. |
 | `in-highland-sso-reports` | Highland bypass/overflow report PDFs | watch | search_only | events | Town posts its State Form 48373 SSO reports as PDFs (2025-2026). |
 | `in-idem-beachalert` | IDEM BeachAlert (Lake Michigan beach advisories and closures) | watch | fetched | advisories | A Power Apps portal: the page holds only client-side templates (a no-advisories line, a permission message and an error message side by side) and loads its records from an entity-grid service and a beach map by script; those data calls were not verified (2026-11-14). Watched in the register, access not settled. |
 | `in-idem-bypass-overflow-reporting` | IDEM Sewer Bypass/Overflow Incident Reporting (State Form 48373) | watch | fetched | law | Regulator-only reports. When IDEM moves to NeT-SewerOverflow, Indiana SSOs will appear in EPA's SOBE download (a handful already do). |
 | `in-idem-vfc` | IDEM Virtual File Cabinet (permit, compliance and incident documents) | watch | inferred | permits | Document search; bypass/overflow forms may be filed there; not an event feed. |
+| `in-laporte-cso-status` | LaPorte combined sewer overflow status page | watch | fetched | events | The host did not accept a connection from this build on 2026-11-14 (two tries, ports 443 and 80): watched daily in the register; the research of 2026-11-09 read 'NOT overflowing' and dated overflows to 2025-08-19 (1.1 million gallons), which EPA's monthly report for August 2025 matches. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `in-mishawaka-cso` | Mishawaka Utilities CSO information | watch | search_only | events | Readable on 2026-11-14: alerts go to an X account (@CSOAlerts, sign-in to read); the 2025 annual report and outfall map are PDFs. Watched in the register. |
-| `in-south-bend-cso` | South Bend wastewater page (CSO notice sign-up by phone, annual notice, monthly reports) | watch | fetched | events | Email CSO notifications by calling 574.277.8515; 2025 CSO Annual Public Notice and 2025 Monthly Reports of Operation PDFs. HTTP 403 to curl; read with WebFetch. |
+| `in-south-bend-cso` | South Bend wastewater page (CSO notice sign-up by phone, annual notice, monthly reports) | watch | fetched | events | Email CSO notifications by calling 574.277.8515; 2025 CSO Annual Public Notice and 2025 Monthly Reports of Operation PDFs. HTTP 403 to curl; read with WebFetch. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `in-swim-guide-indiana` | Swim Guide Indiana Lake Michigan beaches (mirror of BeachAlert) | watch | search_only | advisories | Mirrors state results; licence and lag unknown. |
 | `in-waterloo-cso-posts` | Waterloo CSO Public Notification posts | watch | fetched | events | The CSO policy page (https://waterlooin.gov/cso-policy/) links start and end notices as PDFs (three pairs, March and April 2026); the PDFs' text uses a font this build's reader cannot decode. Watched in the register. |
-| `in-fort-wayne-cso-notifications` | Fort Wayne City Utilities CSO notifications | unreachable | search_only | events | HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. A barrier (bot wall) in the register. |
 | `in-kendallville-cso` | Kendallville CSO page | unreachable | search_only | events | HTTP 403 to this build's client (2026-11-14). A barrier (bot wall) in the register. |
-| `in-laporte-cso-status` | LaPorte combined sewer overflow status page | unreachable | fetched | events | The host did not accept a connection from this build on 2026-11-14 (two tries, ports 443 and 80): watched daily in the register; the research of 2026-11-09 read 'NOT overflowing' and dated overflows to 2025-08-19 (1.1 million gallons), which EPA's monthly report for August 2025 matches. |
 | `in-speedway-cso` | Speedway CSO Public Notifications | unreachable | search_only | events | HTTP 403 to this build's client (2026-11-14). A barrier (bot wall) in the register. |
 
 ## wv: West Virginia (22)
@@ -1965,12 +1965,12 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 |---|---|---|---|---|---|
 | `pr-drna-beach-notices` | DRNA Programa de Monitoría de Playas y Notificación Pública: weekly 'Notificación Monitoria de Playas' (WordPress category 1424) | used | fetched | advisories | Read by ingest/pr_drna_beaches.py: 280 notices (2019-10-11 to 2026-11-13: 220 lists of beaches over the Beach Action Value, 56 'all fit', one list of fit beaches, 3 PDF-only); 601 advisories, one per run of consecutive notices listing a beach, from the publication of the first notice to the publication of the next that no longer lists it; sampling date kept apart; each station at its Water Quality Portal point (PR_BEACH_WQX). |
 | `pr-epa-npdes-pr0021555` | EPA Region 2 NPDES permit PR0021555, PRASA Puerto Nuevo RWWTP (2021), CSO permit conditions | used | fetched | law | Source of the CSO public-notification clause (Nine Minimum Controls #8). |
-| `pr-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, SOBE), Puerto Rico permits | used | fetched | events | Read by the national overflow module (ingest/echo_sewer_overflow_events.py, Puerto Rico permits added 2026-11-14): 940 current reports from 45 permits in the 2026-11-12 extract (SSO 863, bypass 77, none typed CSO; 2025-04-03 to 2026-11-10), every one with a point; 252 read as reaching a water (35 permits), 688 dropped (SSOs naming no water with only odour, aesthetic, land or no observable impacts); received a median 2 days after the start (90th percentile 14). Times in Atlantic Standard Time. |
+| `pr-epa-sobe` | EPA ECHO sewer overflow and bypass event reports (eRule Phase 2, SOBE), Puerto Rico permits | used | fetched | events | Read by the national overflow module (ingest/echo_sewer_overflow_events.py, Puerto Rico permits added 2026-11-14): 940 current reports from 45 permits in the 2026-11-13 extract (SSO 863, bypass 77, none typed CSO; 2025-04-03 to 2026-11-10), every one with a point; 252 read as reaching a water (35 permits), 688 dropped (SSOs naming no water with only odour, aesthetic, land or no observable impacts); received a median 2 days after the start (90th percentile 14). Times in Atlantic Standard Time. |
 | `pr-prasa-consent-decree` | US v. PRASA consent decree (2016) and 2023 modification; EPA Region 2 public notice | used | fetched | law | States the new web-communication duty for Puerto Nuevo CSOs. |
 | `pr-prasa-cso-data` | PRASA combined sewer overflow outfalls (ArcGIS feature service CSO_Data) | used | fetched | outfalls | Read by scripts/add_pr_cso_outfalls.py on 2026-11-14: the 12 Puerto Nuevo combined sewer outfalls (PR0021555) with PRASA's points and receiving waters (data/outfalls-pr.json), each paired with EPA's inventory row; EPA gives no point for outfall 003 and a wrong longitude for 010. |
 | `pr-senate-rs310` | Senado de Puerto Rico, R. del S. 310 (2025-09-22): investigation of sewage discharges to the sea and other waters | used | fetched | law | Pending legislative investigation; its motives propose standardized weekly public reports of incidents (date, cause, duration, estimated volume). |
 | `pr-epa-beacon` | EPA BEACON 2.0, Puerto Rico beaches | watch | inferred | monitoring | Season-late; station coordinates likely the useful part. |
-| `pr-estuario-bacteria` | Programa del Estuario de la Bahía de San Juan: bacteriological monitoring (Condado lagoon, San Juan beaches) | watch | search_only | monitoring | Annual or periodic PDF reports; useful context for San Juan Bay CSO waters. |
+| `pr-estuario-bacteria` | Programa del Estuario de la Bahía de San Juan: bacteriological monitoring (Condado lagoon, San Juan beaches) | watch | fetched | monitoring | Weekly enterococci results at San Juan's beaches and the Condado lagoon, posted each Friday with a CSV of every sample; a voluntary channel, monitored in the register; whether to ingest it is open. |
 | `pr-prasa-cso-web` | PRASA 'Combined Sanitary Overflows (CSOs)' web pages (home, location map, precautions, efforts, 'Notify a CSO') | watch | fetched | events | The 2023 consent-decree modification adds a duty to tell the public on PRASA's web of CSO discharges and their estimated volume, but the pages fetched show only locations, precautions and a form for the public to report an overflow; no event list found. Registered as a monitored channel (pr-prasa-cso-pages), no records made from it. |
 | `pr-surfrider-bwtf` | Surfrider Foundation Blue Water Task Force, Puerto Rico chapters (Rincón, Isabela) | watch | search_only | monitoring | Volunteer bacteria results; named in R. del S. 310 for Isabela. |
 | `pr-dnr-bypass-email` | Permit spill and bypass reporting to DNER Point Sources Permits Division (bypass@jca.pr.gov) | rejected | fetched | law | A regulator-only channel; no public output found. |
@@ -2047,7 +2047,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
-| `id-boise-west-permit` | West Boise permit ID0023981 (EPA Region 10, 2016 modification): overflow public notification | used | fetched | law | Part II.P requires an overflow emergency response and public notification plan; Part III.I: 'The permittee must immediately notify the public, health agencies and other affected entities...'. Channel left to the plan. IPDES reissuances are assumed to carry the same language (a city's IPDES rule comments say municipal permits carry standard SSO language). |
+| `id-boise-west-permit` | West Boise permit ID0023981 (EPA Region 10, 2016 modification): overflow public notification | used | fetched | law | Part II.P requires an overflow emergency response and public notification plan; Part III.I: 'The permittee must immediately notify the public, health agencies and other affected entities...'. Channel left to the plan. IPDES reissuances are assumed to carry the same language (a city's IPDES rule comments say municipal permits carry standard SSO language). EPA's 2026 draft permit for Kooskia (ID0021814) carries the same Part III.I. |
 | `id-deq-cyanohab-risk-table` | Idaho DEQ CyanoHAB Risk Data Table | used | fetched | advisories | Built: ingest/id_deq_cyanohab.py; 19 rows on 2026-11-14 (13 Health Advisory, 1 Alert, 5 Watch). |
 | `id-dhw-recreational-advisories` | Idaho DHW Recreational Water Health Advisories (map layer) | used | fetched | advisories | Read by ingest/id_deq_cyanohab.py for each listing's point (all 19 rows of 2026-11-14 matched a DHW point). |
 | `id-boise-sso-news` | City of Boise SSO statement (news, 2025-11-03) | watch | fetched | news | West Boise power surge overflow into the Thurman Drain area (2025-11-01); city statement via media, no web notice found. |

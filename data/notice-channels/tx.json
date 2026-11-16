@@ -10791,7 +10791,7 @@
    "operator_id": "tx-city-of-fort-worth",
    "agency": null,
    "permit": null,
-   "checked": "2026-11-07",
+   "checked": "2026-11-16",
    "id": "tx-city-of-fort-worth-water-website",
    "name": "City of Fort Worth",
    "channel_kind": "operator_page",
@@ -10802,10 +10802,10 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "unknown",
-   "note": "The water department's site answers 403 to the project user agent (2026-11-07); a search found no public overflow notice page, only the utility's reporting procedure.",
-   "barrier": "bot_wall"
+   "note": "The water department's site: a search found no public overflow notice page, only the utility's reporting procedure. It answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research.",
+   "barrier": "not_verified"
   },
   {
    "state": "TX",

@@ -228,7 +228,7 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Built: ingest/ia_waterloo_sso.py; 17 notices (October 2025 to October 2026) on 2026-11-14.",
+  "status_reason": "Built: ingest/ia_waterloo_sso.py; 17 notices (October 2025 to October 2026) on 2026-11-15.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "notes": "Page: \"the city is required to notify the public of a Sanitary Sewer Overflow (SSO) or Bypass event.\""
@@ -383,7 +383,7 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "Inventory likely stale for Des Moines; confirm before showing open outfalls.",
+  "status_reason": "Inventory likely stale for Des Moines; confirm before showing open outfalls; the Authority's own site answers GitHub's runner (2026-11-16): read its notice there.",
   "verified": "search_only",
   "checked": "2026-11-03",
   "notes": ""

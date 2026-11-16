@@ -4,10 +4,10 @@ url: "https://gis.mtdeq.us/hosting/rest/services/Hosted/Harmful_Algal_Bloom_Surv
 homepage: "https://gis.mtdeq.us/hosting/rest/services/Hosted/Harmful_Algal_Bloom_Survey_(Public_Web_Map)/FeatureServer/0"
 kind: "arcgis"
 level: "state"
-# Notes (research/mt, status used, verified fetched, checked 2026-11-14): The layer behind DEQ's HAB
-#   dashboard traced and read 2026-11-14 (445 rows, 2019-2026; DEQ's advisory level, issue and lift
-#   dates): read by the mt-deq-hab-map feed as 278 bloom advisories, safe fields only. HAB.mt.gov
-#   and dphhs.mt.gov did not resolve on 2026-11-14.
+# Notes (research/mt, status used, verified fetched, checked 2026-11-15): The layer behind DEQ's HAB
+#   dashboard traced and read 2026-11-15 (445 rows, 2019-2026; DEQ's advisory level, issue and lift
+#   dates): read by the mt-deq-hab-map feed as 314 bloom advisories, safe fields only. HAB.mt.gov
+#   redirects to DPHHS's HAB page (answered 2026-11-15).
 cadence: null
 license: "none stated"
 attribution: "Montana DPHHS and DEQ"
@@ -19,4 +19,4 @@ access: ["arcgis"]
 access_detail: null
 machine_readable: true
 legal_basis: null
-checked: "2026-11-14"
+checked: "2026-11-15"

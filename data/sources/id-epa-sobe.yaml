@@ -4,14 +4,17 @@ url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collec
 homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 kind: "csv"
 level: "federal"
-# Checked 2026-11-14 (extract 2026-11-12): one Idaho event in the current and all-versions tables, Kamiah (ID0028002),
-#   2023-12-17, 5 gallons, structure type BAS (a basement backup), received 2024-11-01: no discharge to water, which the
-#   national module drops; 14 Idaho permits in the current collection-system table (28 in all versions). Idaho is not
-#   added to the national module.
+# Read by the national module pipeline/ingest/echo_sewer_overflow_events.py (source id echo-sewer-overflow), Idaho
+#   permits added 2026-11-16 (go-live audit P2): Mountain time, or Pacific north of the Salmon River by the event's own
+#   point (pipeline/zones.py, idaho_zone); raw.time_zone on every record; the free-text scrub.
+# Checked 2026-11-14 (file of 2026-11-13): one Idaho event in the current and all-versions tables, Kamiah (ID0028002),
+#   2023-12-17, 5 gallons, structure type BAS (impact "Sewage Backup in Building"), received 2024-11-01: no discharge to
+#   water, which the national module drops; 14 Idaho permits in the current collection-system table (28 in all
+#   versions).
 cadence: "EPA refreshes daily; one Idaho row (2023)"
 license: "EPA public data"
 attribution: "US EPA"
-enabled: false
+enabled: true
 role: "events"
 event_types: ["sso"]
 states: ["ID"]

@@ -11720,7 +11720,7 @@
    "operator_id": "mn-duluth",
    "agency": null,
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "mn-duluth-public-notice",
    "name": "City of Duluth (sanitary collection system)",
    "legal_basis": "Minn. Stat. 115.061(c): promptly after reporting a discharge to the agency, a publicly owned treatment works or a publicly or privately owned domestic sewer system owner must notify potentially impacted downstream users, including the public, Tribal governments and drinking water facilities, by the most efficient communications system available (in person, telephone, radio, social media, web page or another expedited form), and post signs at impacted public use areas or notify the entity with jurisdiction over them",
@@ -11737,7 +11737,7 @@
     "mn-duluth-press-releases"
    ],
    "signup_url": null,
-   "note": "The City posts overflow notices as press releases with an e-mail subscription (the Chester Creek notice of October 2024 kept its earlier warnings below its updates). No list or feed of the overflow notices was found, and duluthmn.gov did not answer the project's client on 2026-11-14 (connection timed out), as it did not on 2026-11-09 for the research: the channel is not verified in the research and not read.",
+   "note": "The City posts overflow notices as press releases with an e-mail subscription (the Chester Creek notice of October 2024 kept its earlier warnings below its updates). No list or feed of the overflow notices was found, and duluthmn.gov, which a development machine could not reach on 2026-11-09 and 2026-11-14, answered the pipeline's runner on 2026-11-16: the channel is not verified in the research and not read.",
    "barrier": "not_verified"
   },
   {
@@ -12762,7 +12762,7 @@
    "operator_id": null,
    "agency": "Minnesota Department of Health (Lake Superior beach program)",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "mn-mdh-lake-superior-beaches",
    "name": "Minnesota Department of Health (Lake Superior beaches)",
    "channel_kind": "state_alert_page",
@@ -12775,7 +12775,7 @@
    "publishes": "unknown",
    "records": false,
    "noun": "Beach advisories",
-   "note": "The Lake Superior beach program's site, mnbeaches.org, did not answer the project's client on 2026-11-14 (connection timed out) nor the research on 2026-11-09: its advisories, sample results and format were not seen, so the channel is not verified in the research. MDH notes advisories may follow sewage pipe breaks.",
+   "note": "The Lake Superior beach program's site, mnbeaches.org, could not be reached from a development machine on 2026-11-09 and 2026-11-14 but answered the pipeline's runner on 2026-11-16 (a beach portal with a current-advisories list); its sample results and format were not examined, so the channel is not verified in the research. MDH notes advisories may follow sewage pipe breaks.",
    "sources": [
     "mn-mdh-lake-superior-beaches"
    ],

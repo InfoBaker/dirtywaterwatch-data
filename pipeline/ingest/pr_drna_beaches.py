@@ -41,8 +41,10 @@ Records (the accuracy-first pattern, docs/generic-ingesters.md: sampled_at apart
   - an explicit statement (an "all_fit" notice, or a "fit_list" naming the beach): ended_at its publication,
     raw.ended_at_precision "minute", DRNA's own lift;
   - a later list without the beach (an omission): ended_at that notice's publication with raw.ended_at_precision
-    "poll" and raw._last_seen_in_source the last notice that listed it; DRNA states no lift, so the status build stops
-    the colour 14 days after that notice (status.POLL_END_HORIZON_SOURCES) however long DRNA waits between notices;
+    "poll" and raw._last_seen_in_source the last notice that listed it; DRNA states no lift, so the status build
+    colours it until that later notice and never more than 14 days after the last notice that listed it
+    (status.POLL_END_HORIZON_SOURCES), however long DRNA waits between notices (the state text says so; go-live
+    audit 2026-11-16 P1-1, tests/test_pr_audit_fixes.py);
   - a list with a row no station is matched to, a row with fewer than three cells, or a table or row opened and not
     closed ends nothing (the unread part may be the beach) and reconfirms nothing; when it is the newest notice the feed
     is written with ok false (partial, meta.incomplete_blocking) until a complete notice is read (Astra verify P1-2).

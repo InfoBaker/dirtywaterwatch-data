@@ -128,10 +128,48 @@
   "license": null,
   "legal_basis": null,
   "status": "candidate",
-  "status_reason": "The only statewide bloom status found, a Power BI report: on 2026-11-09 the page returned only its script shell, in which no rows, no download and no data address were found (the report's own data calls were not examined). Registered as a channel with the barrier; a supported export is an owner request.",
+  "status_reason": "A statewide bloom map, a Power BI report: on 2026-11-09 the page returned only its script shell, in which no rows, no download and no data address were found (the report's own data calls were not examined). Registered as a channel with the barrier; a supported export is an owner request.",
   "verified": "fetched",
   "checked": "2026-11-14",
-  "notes": "Watch/Warning advisories at Lahontan Reservoir and Washoe Lake in 2026 (news)."
+  "notes": "Watch/Warning advisories at Lahontan Reservoir and Washoe Lake in 2026 (news). The Office of State Epidemiology's list (nv-ose-hab-reports) gives the advisories as readable text, with one more that it says the dashboard does not show (South Meadows Community Pond, on private land with public access)."
+ },
+ {
+  "id": "nv-ose-hab-reports",
+  "name": "Nevada Office of State Epidemiology, Harmful Algal Bloom reports",
+  "jurisdiction": "NV",
+  "operator": "Nevada Office of State Epidemiology",
+  "operator_type": "state",
+  "role": "advisories",
+  "event_types": [
+   "hab"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://nvose.org/hot-topic-harmful-algal-blooms/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "One web page: a count of the year's active advisories, then one heading per water with its advisory level and the date each level took effect, active and previous advisories.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [
+   "water (heading)",
+   "advisory level",
+   "date in effect"
+  ],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "updated when an advisory changes; no fixed schedule",
+  "history": null,
+  "license": null,
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Active and previous bloom advisories statewide, one heading per water with its level and the date it took effect (eleven active on 2026-11-15, under eight headings, five outside the state parks); answers the pipeline's runner (200, 2026-11-16). Not yet read; watched (register row nv-ose-hab-reports).",
+  "verified": "fetched",
+  "checked": "2026-11-16",
+  "notes": "Headings on 2026-11-15: Mountain View Pond, Gardnerville (Watch, 10/14/2026), Lahontan Reservoir (Warning, 11/2/26), Lake Mohave including Placer Cove, Eagle Wash and Cottonwood Cove (Watch, 6/11, 9/9, 10/28/2026), Rye Patch Reservoir (Watch, 09/30/2026), Wild Horse Reservoir (Watch, 8/13/2026), Virginia Lake (Watch, 6/23/2026), South Meadows Community Pond (Watch, 6/23/2026), Walker Lake (Watch, lowered 5/19/26)."
  },
  {
   "id": "nv-state-parks-hab",

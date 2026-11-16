@@ -1,0 +1,8042 @@
+{
+ "state": "IA",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 225,
+ "waters": [
+  {
+   "slug": "ada-hayden-lake-ia",
+   "name": "Ada Hayden Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Ames"
+   ],
+   "bbox": [
+    -93.633668,
+    42.062325,
+    -93.623261,
+    42.072445
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.527,
+   "launches": [
+    "ada-hayden-lake-boat-launch-near-ames-ia-3"
+   ],
+   "water_id": "ada-hayden-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "7ca71ffd67cb2c713a86ee538b4a63ac338bdb648bef125e5b1482207773b63e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "airport-lake-ia",
+   "name": "Airport Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "New Hampton"
+   ],
+   "bbox": [
+    -92.347294,
+    43.085564,
+    -92.345545,
+    43.088459
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.032,
+   "launches": [
+    "airport-lake-boat-launch-ia"
+   ],
+   "water_id": "airport-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "5a65a730acdf1fe228efbb76cfe7ca8684c54bd6f731d837dc581f9c44aa31b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "alice-wyth-lake-ia",
+   "name": "Alice Wyth Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Cedar Falls"
+   ],
+   "bbox": [
+    -92.431462,
+    42.527599,
+    -92.416577,
+    42.531421
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.205,
+   "launches": [
+    "alice-wyth-boat-ramp-ia"
+   ],
+   "water_id": "alice-wyth-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "08ac55cc196ac61b8957a0026a3d9fb3b0c99652cb96895b15a04334df8dd6ce",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "arrowhead-lake-ia",
+   "name": "Arrowhead Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Lake View"
+   ],
+   "bbox": [
+    -95.052044,
+    42.286087,
+    -95.04995,
+    42.302302
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.139,
+   "launches": [
+    "arrowhead-lake-boat-launch-ia"
+   ],
+   "water_id": "arrowhead-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "3496fff6b176162bac93e8493f1df164b1e37be2fce6707247f875467b35af8e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "arrowhead-pond-ia",
+   "name": "Arrowhead Pond",
+   "kind": "pond",
+   "state": "IA",
+   "towns": [
+    "Neola"
+   ],
+   "bbox": [
+    -95.59369,
+    41.432793,
+    -95.589605,
+    41.43802
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.049,
+   "launches": [
+    "arrowhead-park-access-ia"
+   ],
+   "water_id": "arrowhead-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "761d0c99f4a1df1ef935043c53109581ecf843bc3113d7b5d3985aab4fbca4dc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "backbone-lake-ia",
+   "name": "Backbone Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Forestville"
+   ],
+   "bbox": [
+    -91.560286,
+    42.599818,
+    -91.533608,
+    42.616194
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.385,
+   "launches": [
+    "backbone-dam-access-ia"
+   ],
+   "water_id": "backbone-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "6e629062f76f317f22db128325fc539d6209c9d12bd90f0ae1351b1b43b29610",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "badger-creek-ia",
+   "name": "Badger Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "West Des Moines"
+   ],
+   "bbox": [
+    -94.032882,
+    41.435592,
+    -93.749307,
+    41.48396
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "badger-creek-state-recreation-area-ia",
+    "badger-creek-boat-launch-ia"
+   ],
+   "water_id": "badger-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "39fdc51a2675b3aeb0520bc1feb52807db42908ed6d06af686d4caec31bbd32d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "badger-lake-ia",
+   "name": "Badger Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Fort Dodge"
+   ],
+   "bbox": [
+    -94.194421,
+    42.583548,
+    -94.180815,
+    42.590035
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.18,
+   "launches": [
+    "kennedy-park-main-access-ia"
+   ],
+   "water_id": "badger-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "df2a15fd180e34ce714162039d34abeaed3736f4ac4539d7f30a28e9b04cdc38",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-creek-ia",
+   "name": "Beaver Creek",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Johnston"
+   ],
+   "bbox": [
+    -94.155889,
+    41.651728,
+    -93.667247,
+    42.209872
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beaver-creek-access-ia",
+    "lew-clarkson-access-ia"
+   ],
+   "water_id": "beaver-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "53c6251bd3445a1787956e0e2c36fb57a5927233c98f4b59deea73d72266ff0e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beeds-lake-ia",
+   "name": "Beeds Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Hampton"
+   ],
+   "bbox": [
+    -93.252869,
+    42.767257,
+    -93.235175,
+    42.772836
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.386,
+   "launches": [
+    "beeds-lake-boat-launch-ia"
+   ],
+   "water_id": "beeds-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "16c78cdadc575c43d5bb2935a219caa1d05e490a9a68635161d3f1a7b184e85a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-blue-pond-ia",
+   "name": "Big Blue Pond",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Mason City"
+   ],
+   "bbox": [
+    -93.221558,
+    43.13901,
+    -93.218479,
+    43.141736
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.059,
+   "launches": [
+    "big-blue-pond-boat-launch-ia"
+   ],
+   "water_id": "big-blue-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "9052d1c18d9a5aa54e82932ee43fd3bd544527731ce199ddf22131b3e7513d8c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-creek-lake-ia",
+   "name": "Big Creek Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Madrid",
+    "Polk City"
+   ],
+   "bbox": [
+    -93.772439,
+    41.781432,
+    -93.729487,
+    41.843248
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.428,
+   "launches": [
+    "big-creek-lake-boat-launch-near-polk-city-ia-3",
+    "big-creek-lake-boat-launch-near-polk-city-ia-4",
+    "big-creek-west-boat-ramp-ia",
+    "big-creek-lake-boat-launch-near-polk-city-ia-2"
+   ],
+   "water_id": "big-creek-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "22ec27e7c7cad8a4a642664988dc33bb72e5b61d21dc68db02965b31b96a3e00",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "big-creek-lake-boat-launch-near-polk-city-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "big-hollow-lake-ia",
+   "name": "Big Hollow Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Burlington"
+   ],
+   "bbox": [
+    -91.240104,
+    40.941186,
+    -91.211318,
+    40.954318
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.652,
+   "launches": [
+    "big-hollow-lake-boat-launch-ia"
+   ],
+   "water_id": "big-hollow-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "f0b4c6a4f433e9907d3616eafd3bc4c7d3b3b67d5a4781b400389d7917120f11",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-sioux-river-ia",
+   "name": "Big Sioux River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Akron",
+    "Granite",
+    "Hawarden",
+    "Sioux City",
+    "Westfield"
+   ],
+   "bbox": [
+    -96.639716,
+    42.489525,
+    -96.43634,
+    43.524094
+   ],
+   "wikidata": "Q859274",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "akron-boat-ramp-ia",
+    "big-sioux-boat-ramp-ia",
+    "big-sioux-park-access-ia",
+    "carr-s-landing-ia",
+    "gitchie-manitou-ia",
+    "millsite-access-ia",
+    "oak-grove-state-park-ia",
+    "riverside-park-sioux-city-access-ia",
+    "rock-sioux-access-ia",
+    "ron-wilmot-access-ia",
+    "stone-state-park-ia"
+   ],
+   "water_id": "big-sioux-river-ia",
+   "gnis_id": "1253923",
+   "geometry_hash": "75c2a5c7c6cb04c223c4f8f98ee4f2fc102877bb214a549aaeaea9ae58c7bd97",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-woods-lake-ia",
+   "name": "Big Woods Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Cedar Falls"
+   ],
+   "bbox": [
+    -92.438326,
+    42.549062,
+    -92.430673,
+    42.5553
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.261,
+   "launches": [
+    "big-woods-lake-recreation-area-north-access-ia",
+    "big-woods-lake-boat-launch-ia"
+   ],
+   "water_id": "big-woods-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "b688c372d76ba9820160d80ff69bf441c0669720406f1149628bd1097a63ca92",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "black-hawk-creek-ia",
+   "name": "Black Hawk Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "Grundy Center",
+    "Hudson",
+    "Morrison",
+    "Reinbeck",
+    "Waterloo"
+   ],
+   "bbox": [
+    -92.826416,
+    42.329527,
+    -92.35712,
+    42.506893
+   ],
+   "wikidata": "Q32842894",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "black-hawk-creek-wildlife-area-ia",
+    "franck-park-access-ia",
+    "grundy-center-access-kiwanis-park-ia",
+    "hope-martin-park-ia",
+    "ranchero-rd-access-ia",
+    "strobehn-park-too-far-from-parking-lot-ia"
+   ],
+   "water_id": "black-hawk-creek-ia",
+   "gnis_id": "454654",
+   "geometry_hash": "6e149f15839f1aabb34b6b2c4a73ae052496f61657d5f59a998564214ab58d40",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "black-hawk-lake-ia",
+   "name": "Black Hawk Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Lake View"
+   ],
+   "bbox": [
+    -95.046683,
+    42.29166,
+    -95.00471,
+    42.307573
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.087,
+   "launches": [
+    "black-hawk-lake-boat-launch-near-lake-view-ia-2",
+    "black-hawk-lake-boat-launch-near-lake-view-ia",
+    "black-hawk-lake-boat-launch-near-lake-view-ia-4",
+    "black-hawk-lake-boat-launch-near-lake-view-ia-3",
+    "town-bay-boat-ramp-ia"
+   ],
+   "water_id": "black-hawk-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "c3b5959cbf9c6934d564f95d485c8ae13ce7b2f2d23089527cfcd8a6361f8109",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "marina-boat-ramp-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "blue-heron-lake-ia",
+   "name": "Blue Heron Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "West Des Moines"
+   ],
+   "bbox": [
+    -93.736493,
+    41.542889,
+    -93.718577,
+    41.554054
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.997,
+   "launches": [
+    "blue-heron-lake-boat-launch-west-des-moines-ia"
+   ],
+   "water_id": "blue-heron-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "8ad9c1c625a6601d9f5e61bdee711f9b0fc401572af7d67b2660b30556527ba0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blue-lake-ia",
+   "name": "Blue Lake",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Onawa"
+   ],
+   "bbox": [
+    -96.176462,
+    42.008041,
+    -96.137636,
+    42.05143
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.15,
+   "launches": [
+    "blue-lake-boat-launch-near-onawa-ia",
+    "blue-lake-boat-launch-near-onawa-ia-3"
+   ],
+   "water_id": "blue-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "53bf17bc1784cdadb18b6f4fdb42380cd15a480ab3886b2e58b627d315b8ad2a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boone-river-ia",
+   "name": "Boone River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Eagle Grove",
+    "Goldfield",
+    "Renwick",
+    "Stratford",
+    "Webster City"
+   ],
+   "bbox": [
+    -93.964949,
+    42.309581,
+    -93.786642,
+    42.985412
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "7-b-ranch-ia",
+    "albright-bridge-access-ia",
+    "bells-mill-ia",
+    "boone-forks-ia",
+    "briggs-woods-ia",
+    "helmke-area-ia",
+    "nokomis-ia",
+    "oakdale-recreation-area-ia",
+    "river-park-a-ia",
+    "river-park-b-ia",
+    "riverside-park-webster-city-ia",
+    "sportsman-wildlife-area-ia",
+    "troy-roadside-park-ia",
+    "tunnel-mill-ia"
+   ],
+   "water_id": "boone-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "27e1324e4eb51abe1b35e6f4584887067f999ce67e6b9217c1bb773a75c0bd1b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boyer-river-ia",
+   "name": "Boyer River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Arion",
+    "Boyer",
+    "Deloit",
+    "Denison"
+   ],
+   "bbox": [
+    -95.919882,
+    41.451805,
+    -95.120101,
+    42.598785
+   ],
+   "wikidata": "Q2712738",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "adams-landing-ia",
+    "arion-access-ia",
+    "bliesman-landing-ia",
+    "fairgrounds-access-ia"
+   ],
+   "water_id": "boyer-river-ia",
+   "gnis_id": "454793",
+   "geometry_hash": "433f94ed090d1965afc98ec7ea73b93935dc3aeb59e4eab34a099b85a32e7b6f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "briggs-woods-lake-ia",
+   "name": "Briggs Woods Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Webster City"
+   ],
+   "bbox": [
+    -93.799265,
+    42.430674,
+    -93.785866,
+    42.439645
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.261,
+   "launches": [
+    "briggs-woods-lake-boat-launch-near-webster-city-ia-2"
+   ],
+   "water_id": "briggs-woods-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "1d655f5cdf7c5758f6a72f6510fe3a473e97cee242152637808d75801e814e7e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brinker-lake-ia",
+   "name": "Brinker Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Cedar Falls"
+   ],
+   "bbox": [
+    -92.393481,
+    42.520667,
+    -92.373523,
+    42.527441
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.602,
+   "launches": [
+    "brinker-lake-access-ia",
+    "gwsp-portage-take-out-7-ia"
+   ],
+   "water_id": "brinker-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "d373aeb816e33dd51a3f97fcfb82fd8c9fab25cf3e83acdec43a17a42ebc3fa3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "browns-lake-ia",
+   "name": "Browns Lake",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Salix"
+   ],
+   "bbox": [
+    -96.345645,
+    42.305392,
+    -96.31914,
+    42.325444
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.707,
+   "launches": [
+    "browns-lake-boat-launch-ia"
+   ],
+   "water_id": "browns-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "dd650c1da39c4dcf7d6cf7df30aea9968561ba9da389b3214e7ea10cea4fa6cb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brushy-creek-ia",
+   "name": "Brushy Creek",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Duncombe",
+    "Lehigh"
+   ],
+   "bbox": [
+    -94.008662,
+    42.386482,
+    -93.966901,
+    42.424412
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.794,
+   "launches": [
+    "brushy-creek-boat-launch-near-duncombe-ia-2",
+    "brushy-creek-boat-launch-near-lehigh-ia",
+    "brushy-creek-boat-launch-near-lehigh-ia-4",
+    "brushy-creek-boat-launch-near-lehigh-ia-6"
+   ],
+   "water_id": "brushy-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "9c52b8427036c6500dfde2cbb3ba8e1c6f2bd8d7a98542eec7ab8e779633f4db",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "buffalo-creek-burt-ia",
+   "name": "Buffalo Creek",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Burt"
+   ],
+   "bbox": [
+    -94.168035,
+    43.202988,
+    -94.162096,
+    43.212832
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "buffalo-creek-boat-launch-ia"
+   ],
+   "water_id": "buffalo-creek-burt-ia",
+   "gnis_id": null,
+   "geometry_hash": "c34be9474dcbd693885a2df49351d39eb17c0ebd9912e7f17cf6cd2d8eb43876",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "buffalo-creek-ia",
+   "name": "Buffalo Creek",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Coggon"
+   ],
+   "bbox": [
+    -91.757877,
+    42.102471,
+    -91.297902,
+    42.560236
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "buffalo-creek-park-ia"
+   ],
+   "water_id": "buffalo-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "2b198b5bdc57242afef23373707e577f2cefa2dda58de9ab8ddf491d09e2cdb1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "carter-lake-ia",
+   "name": "Carter Lake",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Carter Lake"
+   ],
+   "bbox": [
+    -95.931306,
+    41.287389,
+    -95.901711,
+    41.304108
+   ],
+   "wikidata": "Q5047186",
+   "charted": true,
+   "area_km2": 1.352,
+   "launches": [
+    "carter-lake-boat-launch-ia"
+   ],
+   "water_id": "carter-lake-ia",
+   "gnis_id": "827953",
+   "geometry_hash": "4033fd978a45ee4434150cd64df20e06d584c8c42b25c60693348c838b4d2810",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "casey-lake-ia",
+   "name": "Casey Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "La Porte City"
+   ],
+   "bbox": [
+    -92.319502,
+    42.26361,
+    -92.3102,
+    42.267943
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.15,
+   "launches": [
+    "casey-lake-boat-launch-ia"
+   ],
+   "water_id": "casey-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "9946b8c037437e9fd909e7d315f88e94e23e1d4876e13ea5691635bc3788e31c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "catfish-creek-ia",
+   "name": "Catfish Creek",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Dubuque"
+   ],
+   "bbox": [
+    -90.781233,
+    42.440885,
+    -90.641779,
+    42.469568
+   ],
+   "wikidata": "Q5051977",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "mines-of-spain-ia"
+   ],
+   "water_id": "catfish-creek-ia",
+   "gnis_id": "455212",
+   "geometry_hash": "269f20796361f679cbd19d4eb25c2f0134868b6caaeccdfe46ad7e9585e216be",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-fairfield-ia",
+   "name": "Cedar Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "Fairfield",
+    "Mount Pleasant",
+    "Salem",
+    "Stockport"
+   ],
+   "bbox": [
+    -92.47132,
+    40.863944,
+    -91.667243,
+    41.177155
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "agency-rd-access-ia",
+    "gibson-recreation-area-access-ia",
+    "kale-blvd-access-drop-in-from-roadside-ia",
+    "round-prairie-park-access-ia",
+    "turkey-run-access-fairfield-ia"
+   ],
+   "water_id": "cedar-creek-fairfield-ia",
+   "gnis_id": null,
+   "geometry_hash": "c9737ec3d50be547c0bba3a31de4c51c6945297694adc16687143310d83d16d8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-ia",
+   "name": "Cedar Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "Bussey"
+   ],
+   "bbox": [
+    -93.206169,
+    40.961232,
+    -92.817003,
+    41.263758
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cedar-creek-access-ia"
+   ],
+   "water_id": "cedar-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "510e267b346da0f22614d2bf8cd0ddf73ae4aafd184febc79d3288363efcbc6d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-lake-ia",
+   "name": "Cedar Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Winterset"
+   ],
+   "bbox": [
+    -94.007855,
+    41.36486,
+    -93.993491,
+    41.374136
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.34,
+   "launches": [
+    "cedar-lake-ramp-ia"
+   ],
+   "water_id": "cedar-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "22321a1ecc7fcb08599ceb1ef3ec55e81fd9f83f59ad05a395f5748924d4ca9a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-river-ia",
+   "name": "Cedar River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Brandon",
+    "Carpenter",
+    "Cedar Bluff",
+    "Cedar Falls",
+    "Cedar Rapids",
+    "Cedar Valley",
+    "Center Point",
+    "Charles City",
+    "Conesville",
+    "Ely",
+    "Evansdale",
+    "Floyd"
+   ],
+   "bbox": [
+    -93.014077,
+    41.283203,
+    -91.087236,
+    43.572012
+   ],
+   "wikidata": "Q1052530",
+   "charted": false,
+   "area_km2": 1.087,
+   "launches": [
+    "acorn-park-ia",
+    "bennett-access-ia",
+    "benton-city-fry-ia",
+    "black-hawk-park-ia",
+    "brantingham-park-ia",
+    "brookwood-park-1-ia",
+    "brookwood-park-2-ia",
+    "cedar-bend-ia",
+    "cedar-bend-waterloo-ia",
+    "cedar-bluff-ia",
+    "cedar-bridge-park-ia",
+    "cedar-river-access-ia",
+    "cedar-river-boat-launch-near-mount-vernon-ia",
+    "cedar-river-nra-or-more-commonly-miller-creek-ia",
+    "cedar-valley-park-ia",
+    "chain-lakes-ia",
+    "deerwood-park-ia",
+    "dorts-landing-ia",
+    "dudgeon-ia",
+    "evansdale-access-ia",
+    "gateway-park-ia",
+    "george-wyth-state-park-ia",
+    "gilbertville-ia",
+    "halvorson-park-ia",
+    "hoefle-dulin-ia",
+    "howard-woods-ia",
+    "interstate-park-upper-dam-ia",
+    "island-park-ia",
+    "jack-shugar-memorial-park-ia",
+    "janesville-ia",
+    "kohlmann-park-ia",
+    "lou-s-area-access-ia",
+    "manhattan-robbins-lake-ia",
+    "mcfarlane-ia",
+    "mckeown-access-ia",
+    "midway-river-access-ia",
+    "minne-estema-ia",
+    "mohawk-park-ia",
+    "nashua-access-ia",
+    "north-cedar-natural-area-ia",
+    "north-cedar-park-ia",
+    "otis-road-access-ia",
+    "otranto-access-ia",
+    "otranto-impoundment-ia",
+    "palisades-kepler-st-park-ia",
+    "river-road-ia",
+    "riverside-city-park-ia",
+    "riverview-recreation-area-ia",
+    "rochester-park-ia",
+    "rotary-access-ia",
+    "sac-and-fox-ia",
+    "saulsbury-bridge-access-ia",
+    "seminole-valley-ia",
+    "seter-s-landing-ia",
+    "sherwood-park-ia",
+    "south-cedar-ia",
+    "south-riverside-park-ia",
+    "spring-park-ia",
+    "state-line-access-ia",
+    "sutliff-access-ia",
+    "t38-access-ia",
+    "three-rivers-park-ia",
+    "tourist-park-ia",
+    "upper-palisades-access-ia",
+    "washington-park-ia",
+    "washington-union-ia",
+    "waterloo-boat-house-ia",
+    "waverly-impoundment-fishing-access-ia",
+    "west-idlewild-access-ia",
+    "wildcat-bluff-ia",
+    "winegar-access-ia"
+   ],
+   "water_id": "cedar-river-ia",
+   "gnis_id": "465058",
+   "geometry_hash": "aebf4e7c160ba4af7c734effb3d43c930b0c998c8fb8b074a60089fef8582c5b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "central-park-lake-ia",
+   "name": "Central Park Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Center Junction"
+   ],
+   "bbox": [
+    -91.143792,
+    42.109813,
+    -91.135778,
+    42.113035
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.092,
+   "launches": [
+    "central-park-lake-ia"
+   ],
+   "water_id": "central-park-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "fdef3f5b076a562fa922ef350eee3deaa6589ab5748c9eb900f6e4eb23078ce4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chariton-river-ia",
+   "name": "Chariton River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Centerville",
+    "Darbyville"
+   ],
+   "bbox": [
+    -93.55779,
+    40.523761,
+    -92.682793,
+    41.006926
+   ],
+   "wikidata": "Q3695896",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "outlet-park-ia",
+    "sharon-bluffs-state-park-ia"
+   ],
+   "water_id": "chariton-river-ia",
+   "gnis_id": "455352",
+   "geometry_hash": "b4ed00ac46b5f7fd9dbca7532b7bb30e79dc6b9ba1c8238e426b89ce0f87f86a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clear-creek-ia",
+   "name": "Clear Creek",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Coralville"
+   ],
+   "bbox": [
+    -91.891213,
+    41.668686,
+    -91.562171,
+    41.718632
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "clear-creek-boat-launch-near-coralville-ia"
+   ],
+   "water_id": "clear-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "d397db7b8eebf541937b7643b164723727f05aea5fa0c1c666bd4815ecf381fe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clear-lake-ia",
+   "name": "Clear Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Clear Lake",
+    "Ventura"
+   ],
+   "bbox": [
+    -93.477567,
+    43.10919,
+    -93.38207,
+    43.140889
+   ],
+   "wikidata": "Q5130735",
+   "charted": false,
+   "area_km2": 15.127,
+   "launches": [
+    "clear-lake-boat-launch-near-ventura-ia",
+    "clear-lake-boat-launch-near-clear-lake-ia-4",
+    "clear-lake-boat-launch-near-clear-lake-ia-2",
+    "clear-lake-boat-launch-near-clear-lake-ia"
+   ],
+   "water_id": "clear-lake-ia",
+   "gnis_id": "455462",
+   "geometry_hash": "7eac46d63d1341ed786618c2d0f7f789bee550ce95610e40b429b1dc97965ad0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cold-springs-lake-ia",
+   "name": "Cold Springs Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Lewis"
+   ],
+   "bbox": [
+    -95.088639,
+    41.290523,
+    -95.084644,
+    41.293035
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.063,
+   "launches": [
+    "cold-springs-lake-boat-launch-ia"
+   ],
+   "water_id": "cold-springs-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "353011ae377dac3a73227d70f2b7284c7f512df646b04abc11028188b9a89172",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coralville-lake-ia",
+   "name": "Coralville Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Ely",
+    "Iowa City",
+    "North Liberty"
+   ],
+   "bbox": [
+    -91.611482,
+    41.725001,
+    -91.515023,
+    41.82448
+   ],
+   "wikidata": "Q5169623",
+   "charted": false,
+   "area_km2": 10.763,
+   "launches": [
+    "lake-macbride-state-park-ia",
+    "mehaffey-bridge-boat-ramp-ia",
+    "sandy-beach-ia",
+    "sugar-bottom-boat-ramp-unavailable-ia",
+    "west-overlook-ia",
+    "west-overlook-boat-ramp-ia"
+   ],
+   "water_id": "coralville-lake-ia",
+   "gnis_id": "465646",
+   "geometry_hash": "40c1cf82ae17b0badd40477d338839fa3e7ed821df5afe313bedadd3a54c404f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "coralville-lake-marina-boat-ramp-ia",
+    "scales-pointe-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "corydon-lake-ia",
+   "name": "Corydon Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Corydon"
+   ],
+   "bbox": [
+    -93.340628,
+    40.749964,
+    -93.330581,
+    40.75678
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.21,
+   "launches": [
+    "corydon-lake-boat-launch-ia"
+   ],
+   "water_id": "corydon-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "30bb1da0d11a375f74e2d11f1ae3135de1e72a84c0077ed4eab4375752df42be",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crawford-pond-ia",
+   "name": "Crawford Pond",
+   "kind": "pond",
+   "state": "IA",
+   "towns": [
+    "Haskins"
+   ],
+   "bbox": [
+    -91.54676,
+    41.332297,
+    -91.542983,
+    41.336845
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.063,
+   "launches": [
+    "crawford-pond-boat-launch-ia"
+   ],
+   "water_id": "crawford-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "4c63c3f6705e4b87de24297fee37a4f97ed12fc7af0b77c1a48c9e0451958034",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crescent-pond-ia",
+   "name": "Crescent Pond",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Tiffin"
+   ],
+   "bbox": [
+    -91.728024,
+    41.779411,
+    -91.715029,
+    41.788036
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.318,
+   "launches": [
+    "crescent-pond-boat-ramp-ia"
+   ],
+   "water_id": "crescent-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "e61143e9400fecc2f8436c28fc4723e6816b22696468284b09c4fc6dc6f4ea1c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cylinder-creek-ia",
+   "name": "Cylinder Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "Emmetsburg"
+   ],
+   "bbox": [
+    -94.560661,
+    43.077272,
+    -94.487713,
+    43.248203
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sportsman-recreation-area-ia"
+   ],
+   "water_id": "cylinder-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "de096280f9a218f7bce1a90776404afa7154f01c3c5f6033a496dacf545e9336",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dakins-lake-ia",
+   "name": "Dakins Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Zearing"
+   ],
+   "bbox": [
+    -93.295827,
+    42.170105,
+    -93.293112,
+    42.172688
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.02,
+   "launches": [
+    "dakins-lake-ramp-ia"
+   ],
+   "water_id": "dakins-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "bc41d92075cd77a9cbb9758803f206af60ff9b10c48d10bf356d3347e9167ba8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "des-moines-river-ia",
+   "name": "Des Moines River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Argyle",
+    "Bentonsport",
+    "Bonaparte",
+    "Boone",
+    "Bradgate",
+    "Bridgeport",
+    "Carlisle",
+    "Coalville",
+    "Des Moines",
+    "Douds",
+    "Eddyville",
+    "Eldon"
+   ],
+   "bbox": [
+    -94.904338,
+    40.378014,
+    -91.42041,
+    43.504756
+   ],
+   "wikidata": "Q492787",
+   "charted": true,
+   "area_km2": 14.792,
+   "launches": [
+    "4th-street-bridge-access-ia",
+    "austin-park-ia",
+    "basswood-recreation-area-ia",
+    "becker-access-ia",
+    "bennington-ia",
+    "bentonsport-park-ia",
+    "birdland-park-ia",
+    "black-hawk-river-access-a-ia",
+    "black-hawk-river-access-b-ia",
+    "black-hawk-road-access-ia",
+    "bonaparte-ramp-ia",
+    "boone-waterworks-lower-ia",
+    "boone-waterworks-upper-ia",
+    "box-cars-ia",
+    "breens-access-ia",
+    "cliffland-access-ia",
+    "coliseum-access-ia",
+    "cottonwood-access-ia",
+    "deception-hollow-ia",
+    "deer-creek-area-ia",
+    "des-moines-river-access-ia",
+    "des-moines-river-boat-launch-near-ottumwa-ia",
+    "des-moines-river-dam-ia",
+    "dolliver-state-park-ia",
+    "douds-access-ia",
+    "e-57-or-dogwood-ramp-ia",
+    "eddyville-access-ia",
+    "eldon-ramp-ia",
+    "eveland-access-ia",
+    "farmington-access-ia",
+    "fort-dodge-access-298-ia",
+    "hams-bridge-access-ia",
+    "hardfish-access-ia",
+    "harriet-street-access-ia",
+    "hartford-access-ia",
+    "henderson-landing-ia",
+    "highway-210-access-ia",
+    "highway-30-access-ia",
+    "howell-station-landing-ia",
+    "hydro-electric-park-ia",
+    "joe-sheldon-park-ia",
+    "keokuk-municipal-ramp-ia",
+    "keosauqua-ramp-ia",
+    "lake-nokomis-boat-ramp-ia",
+    "lammer-s-landing-ia",
+    "ledges-access-ia",
+    "lehigh-north-ia",
+    "lehigh-south-ia",
+    "mulroney-recreation-area-ia",
+    "north-fraser-access-ia",
+    "north-trailhead-ia",
+    "norton-s-ford-river-access-ia",
+    "oxbow-access-no-longer-available-ia",
+    "peterson-access-ia",
+    "pleasant-hill-boat-ramp-ia",
+    "prospect-park-ia",
+    "river-runner-access-ia",
+    "riverview-access-ia",
+    "rutland-utility-dam-ia",
+    "school-creek-access-ia",
+    "shidepoke-access-ia",
+    "skillet-creek-access-ia",
+    "south-fraser-access-ia",
+    "south-river-district-access-ia",
+    "sportsman-ramp-ia",
+    "sub-1-ramp-ia",
+    "summer-bridge-access-ia",
+    "sycamore-access-ia",
+    "tourist-park-access-washed-out-ia",
+    "turkey-run-access-ia",
+    "watson-heritage-access-ia",
+    "willows-access-ia",
+    "yellow-banks-access-ia"
+   ],
+   "water_id": "des-moines-river-ia",
+   "gnis_id": "465582",
+   "geometry_hash": "41afacce074576cc8720ed1f5b04a4f75e9e24c76b7a3e07412439a7016d52a2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "desoto-lake-ia",
+   "name": "DeSoto Lake",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Missouri Valley"
+   ],
+   "bbox": [
+    -96.04276,
+    41.491209,
+    -95.990653,
+    41.547412
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 3.646,
+   "launches": [
+    "south-gate-recreation-area-boat-ramp-ia"
+   ],
+   "water_id": "desoto-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "e92d04491aa436e4d326508eb8d58cc229b64a038de0a42fd99b2ca77d3a3ec4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "diamond-lake-ia",
+   "name": "Diamond Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Montezuma"
+   ],
+   "bbox": [
+    -92.557858,
+    41.582327,
+    -92.544662,
+    41.592462
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.34,
+   "launches": [
+    "diamond-lake-boat-launch-ia"
+   ],
+   "water_id": "diamond-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "6c22377e8cfa0499456bff5128d40f298aa78345c42a570a72f1db253d5f2327",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "don-williams-lake-ia",
+   "name": "Don Williams Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Fraser",
+    "Ogden"
+   ],
+   "bbox": [
+    -94.026631,
+    42.111048,
+    -94.014099,
+    42.129086
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.58,
+   "launches": [
+    "don-williams-lake-boat-launch-near-ogden-ia",
+    "don-williams-lake-boat-launch-near-fraser-ia"
+   ],
+   "water_id": "don-williams-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "4496a3d2ac84ab5dbc73b6abacba94571aedb44b6c9ab6d49a8fbaff365db15a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-branche-west-nishnabotna-river-ia",
+   "name": "East Branche West Nishnabotna River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Avoca"
+   ],
+   "bbox": [
+    -95.357095,
+    41.444388,
+    -94.983317,
+    41.809141
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "avoca-access-ia"
+   ],
+   "water_id": "east-branche-west-nishnabotna-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "2bfd4add23c495868c769d33500022e0ef3187638eb4e96306384804bb4776c8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-fork-des-moines-river-ia",
+   "name": "East Fork Des Moines River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Algona",
+    "Burt",
+    "Dakota City",
+    "Humboldt",
+    "Livermore"
+   ],
+   "bbox": [
+    -94.582391,
+    42.676569,
+    -94.125722,
+    43.489376
+   ],
+   "wikidata": "Q34736866",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dakota-city-access-ia",
+    "dakota-city-park-ia",
+    "dakota-city-park-b-ia",
+    "devine-wildlife-area-ia",
+    "east-fork-des-moines-river-access-ia",
+    "foster-bridge-access-ia",
+    "frank-a-gotch-park-ia",
+    "livermore-east-fork-access-ia",
+    "patterson-recreation-and-wildlife-area-ia",
+    "plum-creek-dam-ia",
+    "veterans-park-a-ia",
+    "veterans-park-b-ia"
+   ],
+   "water_id": "east-fork-des-moines-river-ia",
+   "gnis_id": "456143",
+   "geometry_hash": "f113a0be44aa89b94c89f898f0ecaff72c1dadbadd6fd5fb99f713bdcd5bdf05",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-fork-iowa-river-ia",
+   "name": "East Fork Iowa River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Belmond"
+   ],
+   "bbox": [
+    -93.64518,
+    42.860548,
+    -93.56947,
+    43.120918
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sullivan-wildlife-area-ia"
+   ],
+   "water_id": "east-fork-iowa-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "84d3a800003f3b9163aa65e1deffc454e9ecc51c24f5f2741b553683a1a6780f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-lake-ia",
+   "name": "East Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Osceola"
+   ],
+   "bbox": [
+    -93.744601,
+    41.032227,
+    -93.741411,
+    41.035831
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.054,
+   "launches": [
+    "east-lake-boat-launch-ia"
+   ],
+   "water_id": "east-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "4b077b3c397e5ab63d0eb3dd5ea103f2e7bb444d22e5c855fff71c33ead856ee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-lake-lenox-ia",
+   "name": "East Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Lenox"
+   ],
+   "bbox": [
+    -94.553369,
+    40.896375,
+    -94.547172,
+    40.902765
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.141,
+   "launches": [
+    "east-lake-lenox-ramp-ia"
+   ],
+   "water_id": "east-lake-lenox-ia",
+   "gnis_id": null,
+   "geometry_hash": "5f827e40f4552bfa18ebea1214b54da57ffb120e53326e6eb50ecf7ab89bbcf5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-nishnabotna-river-ia",
+   "name": "East Nishnabotna River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Atlantic",
+    "Elliott",
+    "Essex",
+    "Lewis",
+    "Red Oak",
+    "Riverton",
+    "Shenandoah"
+   ],
+   "bbox": [
+    -95.624007,
+    40.651834,
+    -94.844571,
+    41.791559
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "atlantic-treatment-plant-ia",
+    "coolbaugh-st-access-ia",
+    "elliot-boat-ramp-ia",
+    "essex-access-ia",
+    "hitchcock-recreation-area-ia",
+    "rapp-park-access-ia",
+    "riverton-boat-ramp-ia",
+    "turkey-creek-wildlife-area-ia"
+   ],
+   "water_id": "east-nishnabotna-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "d167d84020f3308ab8751e8b12c98958d720bdda06ac0df1d56131265602886f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-okoboji-lake-ia",
+   "name": "East Okoboji Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Arnolds Park",
+    "Orleans",
+    "Spirit Lake"
+   ],
+   "bbox": [
+    -95.127977,
+    43.370407,
+    -95.070814,
+    43.443856
+   ],
+   "wikidata": "Q5329071",
+   "charted": false,
+   "area_km2": 7.662,
+   "launches": [
+    "east-okoboji-lake-boat-launch-near-spirit-lake-ia",
+    "hattie-elston-boat-ramp-ia",
+    "east-okoboji-lake-boat-launch-near-spirit-lake-ia-6",
+    "isthmus-park-boat-ramp-ia"
+   ],
+   "water_id": "east-okoboji-lake-ia",
+   "gnis_id": "456182",
+   "geometry_hash": "396d439b57fd2f73785cfe56b6d7d8606f3b5c577f079e0202cc26d3e6de5b22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "east-okoboji-lake-boat-launch-near-spirit-lake-ia-2",
+    "east-okoboji-lake-boat-launch-near-spirit-lake-ia-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "easter-lake-ia",
+   "name": "Easter Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Des Moines"
+   ],
+   "bbox": [
+    -93.583227,
+    41.531979,
+    -93.549273,
+    41.546927
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.689,
+   "launches": [
+    "easter-lake-boat-launch-near-des-moines-ia"
+   ],
+   "water_id": "easter-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "0a60ac0932739bededddf3de2cf63a8e939f6d1236e4c00b67ebaed2ebfa186d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eldred-sherwood-park-lake-ia",
+   "name": "Eldred Sherwood Park Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Goodell"
+   ],
+   "bbox": [
+    -93.565805,
+    42.938604,
+    -93.560029,
+    42.94329
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.086,
+   "launches": [
+    "eldred-sherwood-park-lake-boat-launch-ia"
+   ],
+   "water_id": "eldred-sherwood-park-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "8103e2d528abf88b6a778292ae15d22cff6412342aad00811625794f5202b6d4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "english-river-ia",
+   "name": "English River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Riverside",
+    "Wellman"
+   ],
+   "bbox": [
+    -91.932729,
+    41.465454,
+    -91.502192,
+    41.507629
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "english-river-wildlife-area-ia",
+    "riverside-access-ia"
+   ],
+   "water_id": "english-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "f7f8baaaecf461dfc26a345cc3ed86636eaed0c6dd712891befa29daa5ba838b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fish-lake-ia",
+   "name": "Fish Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Bellevue"
+   ],
+   "bbox": [
+    -90.305487,
+    42.164533,
+    -90.297234,
+    42.177617
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.199,
+   "launches": [
+    "fish-lake-boat-launch-ia"
+   ],
+   "water_id": "fish-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "c0e9382133964cf1c52f87aea87596cf23f7719dc0aaf457f4aa0edfe2f14298",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fisher-lake-ia",
+   "name": "Fisher Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Cedar Falls"
+   ],
+   "bbox": [
+    -92.421419,
+    42.533837,
+    -92.402338,
+    42.536387
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.164,
+   "launches": [
+    "fisher-lake-boat-launch-ia"
+   ],
+   "water_id": "fisher-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "2c2deea06f3a7a526c9effe5eafc7be61578569ce27d0e9c5bf5e8de1ad4e824",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flint-river-ia",
+   "name": "Flint River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Burlington"
+   ],
+   "bbox": [
+    -91.331093,
+    40.817752,
+    -91.093423,
+    40.938531
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [],
+   "water_id": "flint-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "cbd05838b74a5ff86cbbdab8f4b1388d55d90a415bffbf3e078744f63c7fd999",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "bluff-harbor-marina-ramp-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "george-wyth-lake-ia",
+   "name": "George Wyth Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Cedar Falls"
+   ],
+   "bbox": [
+    -92.404634,
+    42.529492,
+    -92.389356,
+    42.537492
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.438,
+   "launches": [
+    "george-wyth-state-park-george-wyth-lake-access-ia"
+   ],
+   "water_id": "george-wyth-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "fcae97500464a7bdfb08d03e0d61cd87058dd39e353ba1e68c0bb88247dc0875",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grade-lake-ia",
+   "name": "Grade Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Osceola"
+   ],
+   "bbox": [
+    -93.773947,
+    41.019638,
+    -93.76873,
+    41.026175
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.101,
+   "launches": [
+    "grade-lake-ramp-ia"
+   ],
+   "water_id": "grade-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "f473fec71bff4dd76b6ebddca0c0233c98192403c4e507e280881a3e46bfb034",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grand-river-ia",
+   "name": "Grand River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Davis City",
+    "Decatur",
+    "Grand River",
+    "Murray"
+   ],
+   "bbox": [
+    -94.150393,
+    40.552042,
+    -93.785992,
+    41.140106
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "davis-city-park-ia",
+    "j-34-bridge-ia",
+    "quarry-bridge-ia",
+    "shewmaker-park-ia",
+    "westerville-ia",
+    "willow-ave-access-ia"
+   ],
+   "water_id": "grand-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "5b439efd04765d3d15e2cc6f7d17e77bc606f752403bb033fae8b58f14c7eeed",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gray-s-lake-ia",
+   "name": "Gray's Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Des Moines"
+   ],
+   "bbox": [
+    -93.644395,
+    41.567647,
+    -93.630585,
+    41.572545
+   ],
+   "wikidata": "Q31810541",
+   "charted": false,
+   "area_km2": 0.409,
+   "launches": [
+    "gray-s-lake-boat-launch-ia"
+   ],
+   "water_id": "gray-s-lake-ia",
+   "gnis_id": "457091",
+   "geometry_hash": "610ed8ac9b915ea0205d5b8b4d6a6028443c97c041a8dc8e97096e779be30821",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "green-castle-lake-ia",
+   "name": "Green Castle Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Ferguson"
+   ],
+   "bbox": [
+    -92.863224,
+    41.926141,
+    -92.858986,
+    41.930923
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.07,
+   "launches": [
+    "green-castle-lake-boat-launch-near-ferguson-ia"
+   ],
+   "water_id": "green-castle-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "9af3ee114d0918e0fd07c2f58901ff235fbb112b7f312fbfa09049f6d176a3c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "green-valley-lake-ia",
+   "name": "Green Valley Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Creston"
+   ],
+   "bbox": [
+    -94.400897,
+    41.096542,
+    -94.376216,
+    41.119481
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.367,
+   "launches": [
+    "green-valley-lake-boat-launch-near-creston-ia",
+    "green-valley-lake-boat-launch-near-creston-ia-2",
+    "green-valley-lake-boat-launch-near-creston-ia-3",
+    "green-valley-lake-boat-launch-near-creston-ia-4",
+    "green-valley-lake-boat-launch-near-creston-ia-5"
+   ],
+   "water_id": "green-valley-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "fc2c44d6d1385d11c58ee591ba026258ca84bfadab779b37a6d3e7dea9eee474",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "greenfield-lake-ia",
+   "name": "Greenfield Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Greenfield"
+   ],
+   "bbox": [
+    -94.483483,
+    41.292274,
+    -94.472143,
+    41.299
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.224,
+   "launches": [
+    "greenfield-lake-boat-launch-ia"
+   ],
+   "water_id": "greenfield-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "53b62ab1f56d89c5fa47e9436a4a8257c875a717f9687d04015cff13465d8204",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grundy-county-lake-ia",
+   "name": "Grundy County Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Dike"
+   ],
+   "bbox": [
+    -92.642221,
+    42.458089,
+    -92.632982,
+    42.46179
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.168,
+   "launches": [
+    "grundy-county-lake-boat-launch-ia"
+   ],
+   "water_id": "grundy-county-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "2f0b9f9e3f1028737781efb39253a5c1c7f1bbaf65cf407605212044ab979a53",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hagenson-pond-ia",
+   "name": "Hagenson Pond",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Folletts"
+   ],
+   "bbox": [
+    -90.359137,
+    41.742998,
+    -90.355677,
+    41.744152
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.025,
+   "launches": [
+    "ben-martinson-wildlife-area-restricted-ia"
+   ],
+   "water_id": "hagenson-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "bc0f2e3fa08ea7cd3ee3e7f0a3f8917a3317d58f0ad71d13c14854cac8028237",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hannen-lake-ia",
+   "name": "Hannen Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Marengo"
+   ],
+   "bbox": [
+    -92.117208,
+    41.863199,
+    -92.110727,
+    41.872071
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.158,
+   "launches": [
+    "hannen-lake-boat-launch-ia"
+   ],
+   "water_id": "hannen-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "0b338747a9be5d8b184bdc169866c6a119363497a61be348f5a7a69fc698144b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "harold-getty-lake-ia",
+   "name": "Harold Getty lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Evansdale"
+   ],
+   "bbox": [
+    -92.316459,
+    42.474445,
+    -92.30562,
+    42.478797
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.201,
+   "launches": [
+    "harold-getty-lake-boat-launch-ia"
+   ],
+   "water_id": "harold-getty-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "4f5c4353803a527da5c57ac8ad8c6339e6e82da52c144786af1bb4c7c4dff1f1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "harpers-slough-ia",
+   "name": "Harpers Slough",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Harpers Ferry"
+   ],
+   "bbox": [
+    -91.177361,
+    43.132184,
+    -91.086488,
+    43.29851
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "harper-s-ferry-lower-landing-ia",
+    "harper-s-ferry-upper-landing-ia",
+    "harpers-ferry-ia",
+    "nobels-island-ia"
+   ],
+   "water_id": "harpers-slough-ia",
+   "gnis_id": null,
+   "geometry_hash": "782d9c33c95b78480155f69006961ebdf229cdfda2dc7c66b98648c75f6e050d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hendrickson-marsh-lake-ia",
+   "name": "Hendrickson Marsh Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Rhodes"
+   ],
+   "bbox": [
+    -93.246391,
+    41.933139,
+    -93.231612,
+    41.940197
+   ],
+   "wikidata": "Q31810569",
+   "charted": false,
+   "area_km2": 0.54,
+   "launches": [
+    "hendrickson-marsh-lake-boat-launch-ia"
+   ],
+   "water_id": "hendrickson-marsh-lake-ia",
+   "gnis_id": "457397",
+   "geometry_hash": "a1cb92327e2b94f980031ff1b4fa5af724197486bda36e6d790bf2e789f14bda",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hickory-grove-lake-ia",
+   "name": "Hickory Grove Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Nevada"
+   ],
+   "bbox": [
+    -93.365189,
+    41.983858,
+    -93.347796,
+    41.992226
+   ],
+   "wikidata": "Q31810570",
+   "charted": false,
+   "area_km2": 0.326,
+   "launches": [
+    "hickory-grove-lake-boat-launch-near-nevada-ia",
+    "hickory-grove-lake-boat-launch-near-nevada-ia-2"
+   ],
+   "water_id": "hickory-grove-lake-ia",
+   "gnis_id": "457440",
+   "geometry_hash": "d35901455c430a6015ded6afefa1f2d457a98bd3397f05cb2a7bac01081a483f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "high-lake-ia",
+   "name": "High Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Estherville",
+    "Wallingford"
+   ],
+   "bbox": [
+    -94.730617,
+    43.29694,
+    -94.700345,
+    43.31561
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.316,
+   "launches": [
+    "high-lake-boat-ramp-ia"
+   ],
+   "water_id": "high-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "1c789dde7a0500bf2ee2bd9e1f3bfd6409bda8139059e12ff31e24518f0382ee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "humeston-reservoir-ia",
+   "name": "Humeston Reservoir",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Humeston"
+   ],
+   "bbox": [
+    -93.510567,
+    40.873637,
+    -93.503417,
+    40.883038
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.17,
+   "launches": [
+    "humeston-reservoir-boat-launch-ia"
+   ],
+   "water_id": "humeston-reservoir-ia",
+   "gnis_id": null,
+   "geometry_hash": "704ca5b206784fbf17550fb5789437f9de46e80e0b200597dac0de426a75aea1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "indian-lake-ia",
+   "name": "Indian Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Farmington"
+   ],
+   "bbox": [
+    -91.75836,
+    40.626055,
+    -91.747775,
+    40.631593
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.196,
+   "launches": [
+    "indian-lake-boat-launch-ia"
+   ],
+   "water_id": "indian-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "5ec81c5c792f089f92e7ff649232015277155c4dd21deab79b316dbf885e2166",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "iowa-lake-ia",
+   "name": "Iowa Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Harris"
+   ],
+   "bbox": [
+    -95.465343,
+    43.492103,
+    -95.450203,
+    43.511844
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.895,
+   "launches": [
+    "iowa-lake-park-ia"
+   ],
+   "water_id": "iowa-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "bcb538cc61a310bcf7b6e512114f8bae13c2d1715602dab7ebc47625138748ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "iowa-river-ia",
+   "name": "Iowa River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Alden",
+    "Belle Plaine",
+    "Belmond",
+    "Chelsea",
+    "Dows",
+    "Eldora",
+    "Fredonia",
+    "Hills",
+    "Iowa City",
+    "Iowa Falls",
+    "Koszta",
+    "Marengo"
+   ],
+   "bbox": [
+    -93.650689,
+    41.094247,
+    -91.021872,
+    42.860548
+   ],
+   "wikidata": "Q1672169",
+   "charted": true,
+   "area_km2": 0.377,
+   "launches": [
+    "alden-dam-portage-ia",
+    "alden-river-access-ia",
+    "babcock-s-landing-boat-ramp-ia",
+    "belle-plane-access-ia",
+    "bigelow-park-ia",
+    "butler-bridge-canoe-access-ia",
+    "cambier-river-bend-ia",
+    "cappy-russell-access-ia",
+    "chelsea-boat-ramp-ia",
+    "cross-ford-river-access-ia",
+    "curtis-bridge-ia",
+    "daisy-long-memorial-park-ia",
+    "david-bates-memorial-park-ia",
+    "dougans-landing-ia",
+    "duffus-landing-ia",
+    "eagle-city-access-ia",
+    "eldora-dam-access-ia",
+    "ferry-landing-access-ia",
+    "fred-t-schwob-access-ia",
+    "furrow-access-ia",
+    "gateway-park-and-preserve-ia",
+    "hawkeye-wildlife-area-ia",
+    "hawkeye-wildlife-area-tiffin-ia",
+    "hills-access-ia",
+    "hwy-61-access-ia",
+    "iowa-city-park-ia",
+    "iowa-falls-river-access-ia",
+    "kemp-sports-park-ia",
+    "koszta-access-ia",
+    "long-point-landing-ia",
+    "manatts-landing-ia",
+    "mccoy-access-ia",
+    "pikes-timber-ia",
+    "pine-lake-state-park-ia",
+    "pineridge-recreation-area-ia",
+    "popejoy-conservation-park-ia",
+    "randolph-area-ia",
+    "river-forks-access-ia",
+    "river-junction-boat-ramp-ia",
+    "riverview-park-marshalltown-ia",
+    "steamboat-rock-tower-rock-ia",
+    "steamboat-rock-river-access-ia",
+    "sturgis-ferry-park-ia",
+    "tailwater-east-ia",
+    "three-bridges-park-ia",
+    "timmons-grove-park-ia",
+    "vanderlip-access-ia",
+    "weaver-s-cove-inaccessible-due-to-road-construction-ia"
+   ],
+   "water_id": "iowa-river-ia",
+   "gnis_id": "457834",
+   "geometry_hash": "1b774ddf2ab129e40bb828ad4951418249c00952f95096d0509ad87bbf9c1804",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "island-city-harbor-ia",
+   "name": "Island City Harbor",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Sabula"
+   ],
+   "bbox": [
+    -90.171984,
+    42.057977,
+    -90.169687,
+    42.062398
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.041,
+   "launches": [],
+   "water_id": "island-city-harbor-ia",
+   "gnis_id": null,
+   "geometry_hash": "2ace8c6fc5215bf2509c50209639a37d8f60eb467a8a4f09ee2172dfe4eb98e1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "island-city-harbor-boat-launch-near-sabula-ia",
+    "island-city-harbor-boat-launch-near-sabula-ia-2",
+    "island-city-harbor-boat-launch-near-sabula-ia-3"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-slough-ia",
+   "name": "Johnson Slough",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Garnavillo"
+   ],
+   "bbox": [
+    -91.166042,
+    42.935375,
+    -91.159937,
+    42.975241
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sny-magill-access-ia"
+   ],
+   "water_id": "johnson-slough-ia",
+   "gnis_id": null,
+   "geometry_hash": "d5d070495d7271d902df4c9eff9670b6360a802113b2c23802ec1c5599edbbee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jones-creek-pond-ia",
+   "name": "Jones Creek Pond",
+   "kind": "pond",
+   "state": "IA",
+   "towns": [
+    "Pisgah"
+   ],
+   "bbox": [
+    -95.928662,
+    41.869546,
+    -95.924317,
+    41.874331
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.065,
+   "launches": [
+    "jones-creek-pond-main-access-ia"
+   ],
+   "water_id": "jones-creek-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "bcb12fd2a3f930fa103b4b6000ebfc4ff8f7a58f29a6f670842fc307ffddae59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "keg-creek-lake-ia",
+   "name": "Keg Creek Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Glenwood"
+   ],
+   "bbox": [
+    -95.806233,
+    40.981419,
+    -95.801335,
+    40.990068
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.259,
+   "launches": [
+    "keg-creek-lake-access-ia"
+   ],
+   "water_id": "keg-creek-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "5d0dd802f4ac630df04629c40d7f059a849f381c303450a722e3ac1f2787c269",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ken-wolfe-lake-ia",
+   "name": "Ken Wolfe Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Newton"
+   ],
+   "bbox": [
+    -92.965735,
+    41.776453,
+    -92.961453,
+    41.780757
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.073,
+   "launches": [
+    "ken-wolfe-lake-boat-launch-ia"
+   ],
+   "water_id": "ken-wolfe-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "b2eed099a6c1501acb4999023e5da7b7a172cfd21679ea3915ea47ee575e74b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kent-park-lake-ia",
+   "name": "Kent Park Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Tiffin"
+   ],
+   "bbox": [
+    -91.732631,
+    41.722532,
+    -91.728471,
+    41.731052
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.107,
+   "launches": [
+    "kent-park-boat-ramp-ia"
+   ],
+   "water_id": "kent-park-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "fead9368381fe449508ad77141f50fe9a1f7fc0295d87d50e9b482cc93afff7f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "koutny-pond-ia",
+   "name": "Koutny Pond",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Brandon"
+   ],
+   "bbox": [
+    -91.966821,
+    42.301698,
+    -91.963161,
+    42.30451
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.064,
+   "launches": [
+    "koutny-pond-boat-launch-ia"
+   ],
+   "water_id": "koutny-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "8f0540c42ed1cf6b4b758a89c46e41334064fc1590a9bc70d068fb717e36bd2a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-afton-ia",
+   "name": "Lake Afton",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Afton"
+   ],
+   "bbox": [
+    -94.212066,
+    41.034179,
+    -94.20648,
+    41.038912
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.081,
+   "launches": [
+    "lake-afton-boat-launch-ia"
+   ],
+   "water_id": "lake-afton-ia",
+   "gnis_id": null,
+   "geometry_hash": "7110dc5f01caa2c7e250162edcc8eb540f714eb13395209e959046db89acb8a4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-ahquabi-ia",
+   "name": "Lake Ahquabi",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Indianola"
+   ],
+   "bbox": [
+    -93.597634,
+    41.279719,
+    -93.583616,
+    41.295703
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.472,
+   "launches": [
+    "lake-ahquabi-boat-launch-near-indianola-ia-2",
+    "lake-ahquabi-boat-launch-near-indianola-ia"
+   ],
+   "water_id": "lake-ahquabi-ia",
+   "gnis_id": null,
+   "geometry_hash": "2858a487c0333e8fe23b6a7f6d1ebd1897b0c104a3e80bd2c9110c0ea4427a6e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-anita-ia",
+   "name": "Lake Anita",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Anita"
+   ],
+   "bbox": [
+    -94.784552,
+    41.418308,
+    -94.765375,
+    41.431183
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.65,
+   "launches": [
+    "lake-anita-boat-launch-near-anita-ia",
+    "lake-anita-boat-launch-near-anita-ia-2"
+   ],
+   "water_id": "lake-anita-ia",
+   "gnis_id": null,
+   "geometry_hash": "a55c8f5b23fa3860ebeaa40636f0b4b13e9725cc6b58b448083639a2b6a8ef63",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-binder-ia",
+   "name": "Lake Binder",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Corning"
+   ],
+   "bbox": [
+    -94.71462,
+    41.002952,
+    -94.705504,
+    41.015346
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.349,
+   "launches": [
+    "bimder-lake-ramp-ia"
+   ],
+   "water_id": "lake-binder-ia",
+   "gnis_id": null,
+   "geometry_hash": "2c58b1581e878be2da25cfe563c85ff29a0875dbee46d8072332ebe107472a81",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-calliope-ia",
+   "name": "Lake Calliope",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Hawarden"
+   ],
+   "bbox": [
+    -96.506898,
+    42.989539,
+    -96.496029,
+    42.995433
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.257,
+   "launches": [
+    "lake-calliope-boat-launch-ia"
+   ],
+   "water_id": "lake-calliope-ia",
+   "gnis_id": null,
+   "geometry_hash": "e68d056ae14340c7ba9e68cea722a921d7f0ebfbd6f3dbcfb9dea2ecd86cbf07",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cornelia-ia",
+   "name": "Lake Cornelia",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Cornelia"
+   ],
+   "bbox": [
+    -93.694772,
+    42.780832,
+    -93.68359,
+    42.792572
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.02,
+   "launches": [
+    "lake-cornelia-boat-launch-ia"
+   ],
+   "water_id": "lake-cornelia-ia",
+   "gnis_id": null,
+   "geometry_hash": "efb9a403b0f1a084e72291266ec021a60396b4758e686cdf7302d2fd2be658af",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-darling-ia",
+   "name": "Lake Darling",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Brighton"
+   ],
+   "bbox": [
+    -91.90807,
+    41.182912,
+    -91.880019,
+    41.204001
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.188,
+   "launches": [
+    "lake-darling-boat-launch-near-brighton-ia",
+    "lake-darling-boat-launch-near-brighton-ia-2"
+   ],
+   "water_id": "lake-darling-ia",
+   "gnis_id": null,
+   "geometry_hash": "09341ae9c8187bac0d9c1f15ebb718505882366b0f1ceb05a6d71f3323410e5f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-ellis-ia",
+   "name": "Lake Ellis",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Chariton"
+   ],
+   "bbox": [
+    -93.270966,
+    41.003108,
+    -93.257144,
+    41.012658
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.309,
+   "launches": [
+    "lake-ellis-boat-launch-ia"
+   ],
+   "water_id": "lake-ellis-ia",
+   "gnis_id": null,
+   "geometry_hash": "a2bcd9b9b88b2f6c7cf0ecfbdc59569678b03e6ba940e97c95f93f590821c3b5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-fisher-ia",
+   "name": "Lake Fisher",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Bloomfield"
+   ],
+   "bbox": [
+    -92.446684,
+    40.751353,
+    -92.438198,
+    40.760829
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.299,
+   "launches": [
+    "lake-fisher-boat-launch-ia"
+   ],
+   "water_id": "lake-fisher-ia",
+   "gnis_id": null,
+   "geometry_hash": "8ccb3134408e7cb08c8ebfee30fb57f44fc4b66e89ff1f4d6a33979c7c6af24c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-geode-ia",
+   "name": "Lake Geode",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Danville"
+   ],
+   "bbox": [
+    -91.395267,
+    40.810143,
+    -91.380083,
+    40.829954
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.738,
+   "launches": [
+    "lake-geode-boat-launch-near-danville-ia-2",
+    "lake-geode-boat-launch-near-danville-ia-3"
+   ],
+   "water_id": "lake-geode-ia",
+   "gnis_id": null,
+   "geometry_hash": "6e196c5d34485828608092268da321728bca077e0abe1eed8c835d89e05f885d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-hendricks-ia",
+   "name": "Lake Hendricks",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Riceville"
+   ],
+   "bbox": [
+    -92.550246,
+    43.369749,
+    -92.539547,
+    43.376212
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.198,
+   "launches": [
+    "lake-hendricks-boat-launch-ia"
+   ],
+   "water_id": "lake-hendricks-ia",
+   "gnis_id": null,
+   "geometry_hash": "14256438e4c197f1f00835604e32a12a8ff34576ac817823b098f013936670a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-iowa-ia",
+   "name": "Lake Iowa",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Williamsburg"
+   ],
+   "bbox": [
+    -92.178837,
+    41.633194,
+    -92.168302,
+    41.644435
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.335,
+   "launches": [
+    "lake-iowa-boat-launch-ia"
+   ],
+   "water_id": "lake-iowa-ia",
+   "gnis_id": null,
+   "geometry_hash": "d02cab5a1cb61f11d100d10102c4beff08f1540e38d555691a6918082a349288",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-keomah-ia",
+   "name": "Lake Keomah",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Keomah Village"
+   ],
+   "bbox": [
+    -92.548052,
+    41.283891,
+    -92.535961,
+    41.296149
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.365,
+   "launches": [
+    "lake-keomah-boat-launch-ia",
+    "lake-keomah-boat-launch-near-keomah-village-ia"
+   ],
+   "water_id": "lake-keomah-ia",
+   "gnis_id": null,
+   "geometry_hash": "264dc3801769660b536ce5d6ca2b512ae3da6aff7cdbaca1b6d290e4d8bb8ccb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-macbride-ia",
+   "name": "Lake Macbride",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Solon"
+   ],
+   "bbox": [
+    -91.575153,
+    41.785956,
+    -91.514556,
+    41.811352
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.509,
+   "launches": [
+    "angler-s-point-boat-ramp-ia",
+    "cottage-reserve-tim-s-boat-ramp-ia",
+    "lake-macbride-main-boat-ramp-ia",
+    "north-shore-opie-ramp-ia",
+    "sailboat-ramp-ia"
+   ],
+   "water_id": "lake-macbride-ia",
+   "gnis_id": null,
+   "geometry_hash": "4dbc497fcbb90ee56449fa945f4ca2d4cb61434b90dc46017d5a846b66685108",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "primitive-south-campground-boat-ramp-ia",
+    "university-of-iowa-sailing-club-boat-ramp-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-manawa-ia",
+   "name": "Lake Manawa",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Council Bluffs"
+   ],
+   "bbox": [
+    -95.871352,
+    41.195267,
+    -95.840118,
+    41.217446
+   ],
+   "wikidata": "Q16899873",
+   "charted": true,
+   "area_km2": 2.989,
+   "launches": [
+    "lake-manawa-boat-launch-near-council-bluffs-ia-5",
+    "lake-manawa-boat-launch-near-council-bluffs-ia",
+    "lake-manawa-park-access-ia",
+    "lake-manawa-boat-launch-near-council-bluffs-ia-10",
+    "lake-manawa-boat-launch-near-council-bluffs-ia-4"
+   ],
+   "water_id": "lake-manawa-ia",
+   "gnis_id": "458751",
+   "geometry_hash": "199f9e31204f20192db7419204acb655f6a2a19aa4de7bcf8cbdca715ca62b58",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-meyer-ia",
+   "name": "Lake Meyer",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Calmar"
+   ],
+   "bbox": [
+    -91.91453,
+    43.172755,
+    -91.903968,
+    43.176499
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.135,
+   "launches": [
+    "lake-meyer-boat-launch-ia"
+   ],
+   "water_id": "lake-meyer-ia",
+   "gnis_id": null,
+   "geometry_hash": "332128217ecbadac79eeeb8e797866ae1f658a0d3062a602bc004a013277d4d0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-morris-ia",
+   "name": "Lake Morris",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Chariton"
+   ],
+   "bbox": [
+    -93.255555,
+    41.000688,
+    -93.241589,
+    41.015621
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.466,
+   "launches": [
+    "lake-morris-boat-launch-ia"
+   ],
+   "water_id": "lake-morris-ia",
+   "gnis_id": null,
+   "geometry_hash": "327aed438af872d34fb8e7c8b9d7e1d73f16f39852dd27da8287a47b63b9c94c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-nashua-ia",
+   "name": "Lake Nashua",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Nashua"
+   ],
+   "bbox": [
+    -92.553077,
+    42.95475,
+    -92.534473,
+    42.970991
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.186,
+   "launches": [
+    "cedar-view-park-ia",
+    "lakeshore-park-ia"
+   ],
+   "water_id": "lake-nashua-ia",
+   "gnis_id": null,
+   "geometry_hash": "f30a746ba50933f215128a672e7be8ab0003cfa88c0353c5903508b29b5b7e03",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-odessa-ia",
+   "name": "Lake Odessa",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Wapello"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "odessa-wildlife-area-usacoe-ia",
+    "schafer-access-ia",
+    "snively-access-ia"
+   ],
+   "water_id": "lake-odessa-ia",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-of-the-hills-ia",
+   "name": "Lake of the Hills",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Davenport"
+   ],
+   "bbox": [
+    -90.68261,
+    41.516407,
+    -90.674599,
+    41.52521
+   ],
+   "wikidata": "Q34891333",
+   "charted": false,
+   "area_km2": 0.218,
+   "launches": [
+    "lake-of-the-hills-boat-launch-ia"
+   ],
+   "water_id": "lake-of-the-hills-ia",
+   "gnis_id": "463443",
+   "geometry_hash": "b90a7e4540390c756a820f251ddb673504b51fc6e18af6d1ae020c9bcf484140",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-of-the-three-fires-ia",
+   "name": "Lake of the Three Fires",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Bedford"
+   ],
+   "bbox": [
+    -94.69738,
+    40.70847,
+    -94.686454,
+    40.720669
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.4,
+   "launches": [
+    "lake-of-the-three-fires-boat-launch-ia",
+    "lake-of-the-three-fires-boat-launch-near-bedford-ia"
+   ],
+   "water_id": "lake-of-the-three-fires-ia",
+   "gnis_id": null,
+   "geometry_hash": "b03b2d223c7a912f09f3e5ece8c4ce2cf31335e9fe2dd4307f73eedbe09f12e7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-orient-ia",
+   "name": "Lake Orient",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Orient"
+   ],
+   "bbox": [
+    -94.439106,
+    41.195946,
+    -94.434478,
+    41.199913
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.101,
+   "launches": [
+    "lake-orient-access-ia"
+   ],
+   "water_id": "lake-orient-ia",
+   "gnis_id": null,
+   "geometry_hash": "91bc720ae8ba8f256119ab99f2ae9bacfa98fd9e738e165772971e1a7ec07be7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-pahoja-ia",
+   "name": "Lake Pahoja",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Larchwood"
+   ],
+   "bbox": [
+    -96.473064,
+    43.380008,
+    -96.454328,
+    43.384808
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.275,
+   "launches": [
+    "lake-pahoja-boat-launch-ia"
+   ],
+   "water_id": "lake-pahoja-ia",
+   "gnis_id": null,
+   "geometry_hash": "f0fdf9a25db31447d98843544f505e6a3ac511294073f5e0f85d183e86ab803e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-red-rock-ia",
+   "name": "Lake Red Rock",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Knoxville",
+    "Pella"
+   ],
+   "bbox": [
+    -93.327069,
+    41.322126,
+    -92.972527,
+    41.488773
+   ],
+   "wikidata": "Q6477499",
+   "charted": false,
+   "area_km2": 102.11,
+   "launches": [
+    "cordova-ia",
+    "dunreath-ia",
+    "elk-rock-east-ia",
+    "elk-rock-west-ia",
+    "south-overlook-ia",
+    "wallashuck-boat-ramp-ia",
+    "whitebreast-access-ia"
+   ],
+   "water_id": "lake-red-rock-ia",
+   "gnis_id": "460560",
+   "geometry_hash": "64322f8fcae1b2950d0ce40cd0bb1ed1de4704c83c498c75cd1854448fad1761",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "marina-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-red-rock-pella-ia",
+   "name": "Lake Red Rock",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Pella"
+   ],
+   "bbox": [
+    -93.071228,
+    41.420636,
+    -93.040346,
+    41.445648
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.442,
+   "launches": [
+    "lake-red-rock-boat-launch-near-pella-ia",
+    "roberts-north-1-ia",
+    "roberts-south-2-ia"
+   ],
+   "water_id": "lake-red-rock-pella-ia",
+   "gnis_id": null,
+   "geometry_hash": "7fb4f45ff05a16dcdbf8ff0f80ddbb3edc67503de71b4881d92a6bd047b9ab0c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-sugema-ia",
+   "name": "Lake Sugema",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Keosauqua"
+   ],
+   "bbox": [
+    -92.041247,
+    40.681126,
+    -91.982861,
+    40.711943
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.484,
+   "launches": [
+    "lake-sugema-boat-launch-near-keosauqua-ia-2",
+    "lake-sugema-boat-launch-near-keosauqua-ia-3",
+    "lake-sugema-boat-launch-near-keosauqua-ia"
+   ],
+   "water_id": "lake-sugema-ia",
+   "gnis_id": null,
+   "geometry_hash": "99a643ca7f64b339829c151297cbf108e02c3f1c4e0796cc7f7049e9fbf31acf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-virginia-ia",
+   "name": "Lake Virginia",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Sidney"
+   ],
+   "bbox": [
+    -95.687297,
+    40.660884,
+    -95.679092,
+    40.667163
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.035,
+   "launches": [
+    "lake-virginia-boat-launch-ia"
+   ],
+   "water_id": "lake-virginia-ia",
+   "gnis_id": null,
+   "geometry_hash": "99deb1cec1e937ab84055dec00b691205a850f2a5bb5f360c54991269d6b7a9b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-wapello-ia",
+   "name": "Lake Wapello",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Blackhawk"
+   ],
+   "bbox": [
+    -92.597117,
+    40.808244,
+    -92.569516,
+    40.821713
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.068,
+   "launches": [
+    "lake-wapello-boat-launch-near-blackhawk-ia",
+    "lake-wapello-boat-launch-near-blackhawk-ia-2",
+    "lake-wapello-state-park-ia"
+   ],
+   "water_id": "lake-wapello-ia",
+   "gnis_id": null,
+   "geometry_hash": "231897cb6792f188f89773660575bc189793bc83a084007b4ac8f4cb79086a5d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-winneshiek-ia",
+   "name": "Lake Winneshiek",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Harpers Ferry"
+   ],
+   "bbox": [
+    -91.196352,
+    43.211779,
+    -91.048026,
+    43.380473
+   ],
+   "wikidata": "Q6478518",
+   "charted": true,
+   "area_km2": 69.635,
+   "launches": [
+    "heytman-s-landing-ia"
+   ],
+   "water_id": "lake-winneshiek-ia",
+   "gnis_id": "1576884",
+   "geometry_hash": "abce21b10334b9d9cf1848c6f9b320d3d40d0f736ebe57e4f1304f938ee1a337",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-yenruogis-ia",
+   "name": "Lake Yenruogis",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Sigourney"
+   ],
+   "bbox": [
+    -92.201681,
+    41.377052,
+    -92.199138,
+    41.380216
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.037,
+   "launches": [
+    "lake-yenruogis-boat-launch-near-sigourney-ia"
+   ],
+   "water_id": "lake-yenruogis-ia",
+   "gnis_id": null,
+   "geometry_hash": "3597a5a98d945a268fd934fd049b3e828605ea7e32607a17dfb460cab4f7fbae",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "le-claire-canal-ia",
+   "name": "Le Claire Canal",
+   "kind": "canal",
+   "state": "IA",
+   "towns": [
+    "Le Claire"
+   ],
+   "bbox": [
+    -90.408098,
+    41.568152,
+    -90.343353,
+    41.590302
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.839,
+   "launches": [],
+   "water_id": "le-claire-canal-ia",
+   "gnis_id": null,
+   "geometry_hash": "6b44f71c00302c4b6736fb3dcf0e7cf109b5b620d2cba2bf36d4afcb3b8f38d8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "green-gables-marina-ia",
+    "le-claire-canal-boat-launch-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "little-cedar-river-ia",
+   "name": "Little Cedar River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Stacyville"
+   ],
+   "bbox": [
+    -92.779304,
+    42.948438,
+    -92.498612,
+    43.549293
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "riverside-park-ia"
+   ],
+   "water_id": "little-cedar-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "cea0e8c8b58d68d949ce18431643e1c7624a0369c8bfd4fb6a2b090733d52804",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-maquoketa-river-ia",
+   "name": "Little Maquoketa River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Durango"
+   ],
+   "bbox": [
+    -90.995767,
+    42.469443,
+    -90.675808,
+    42.579017
+   ],
+   "wikidata": "Q6650832",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "durango-ia"
+   ],
+   "water_id": "little-maquoketa-river-ia",
+   "gnis_id": "458481",
+   "geometry_hash": "420a7a5e2f0dec0acf2a7edf36bff8d8980dc48546b0611d123206975e477bf8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-river-lake-ia",
+   "name": "Little River Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Leon"
+   ],
+   "bbox": [
+    -93.789779,
+    40.748273,
+    -93.764378,
+    40.804899
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.137,
+   "launches": [
+    "little-river-lake-boat-launch-ia"
+   ],
+   "water_id": "little-river-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "c0c20232e0ef6881bc8e2dda18958065981c7812a2a12021bf6ae5348735d61b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-sioux-river-ia",
+   "name": "Little Sioux River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Anthon",
+    "Cherokee",
+    "Cornell",
+    "Correctionville",
+    "Larrabee",
+    "Linn Grove",
+    "Milford",
+    "Peterson",
+    "Quimby",
+    "Sioux Rapids",
+    "Smithland",
+    "Spencer"
+   ],
+   "bbox": [
+    -96.067622,
+    41.801912,
+    -95.042884,
+    43.544434
+   ],
+   "wikidata": "Q1646498",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "barnes-access-ia",
+    "bluebird-access-ia",
+    "burned-out-bridge-ia",
+    "copeland-park-ia",
+    "copeland-park-city-access-ia",
+    "dixon-ia",
+    "horseshoe-bend-ia",
+    "inkpaduta-access-ia",
+    "judd-canoe-access-ia",
+    "kindlespire-park-ia",
+    "linn-grove-dam-park-ia",
+    "little-sioux-park-access-ia",
+    "little-sioux-wildlife-area-ia",
+    "martin-access-ia",
+    "meyer-access-ia",
+    "nelson-access-ia",
+    "nielsen-river-access-ia",
+    "pearse-area-ia",
+    "prarie-heritage-center-access-ia",
+    "redtail-ridge-area-ia",
+    "reiter-wildlife-area-ia",
+    "riverside-access-peterson-ia",
+    "silver-sioux-recreation-area-ia",
+    "sioux-rapids-city-park-ia",
+    "spencer-ia",
+    "spooky-hollow-canoe-access-ia",
+    "stahl-park-ia",
+    "stieneke-access-ia",
+    "stolley-park-ia",
+    "twin-forks-canoe-access-ia",
+    "walling-access-ia",
+    "wanata-park-ia",
+    "washta-access-ia",
+    "wescott-park-ia",
+    "west-leach-park-ia"
+   ],
+   "water_id": "little-sioux-river-ia",
+   "gnis_id": "657126",
+   "geometry_hash": "93904d95662de758a3a57d7ceebe99e30489494f122bc713276386cdda262291",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-turkey-river-ia",
+   "name": "Little Turkey River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Douglass",
+    "West Union"
+   ],
+   "bbox": [
+    -92.20833,
+    43.003637,
+    -91.842908,
+    43.275959
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "auburn-canoe-access-ia",
+    "gouldsburg-park-access-ia"
+   ],
+   "water_id": "little-turkey-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "53d2f47414f154193cc517597f1ca715136c5d0636d8085c3a95b446c34471f6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-volga-river-ia",
+   "name": "Little Volga River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Maynard"
+   ],
+   "bbox": [
+    -91.887878,
+    42.74079,
+    -91.794787,
+    42.817932
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "maynard-park-ia"
+   ],
+   "water_id": "little-volga-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "4ec5c85ba7e80147fb17a408eedf6cd7bdc220f609a1125659ab0e5b787d435b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-wall-lake-ia",
+   "name": "Little Wall Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Jewell",
+    "Randall"
+   ],
+   "bbox": [
+    -93.643124,
+    42.262031,
+    -93.629699,
+    42.276181
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.048,
+   "launches": [
+    "little-wall-lake-boat-launch-near-jewell-ia",
+    "little-wall-lake-boat-launch-near-randall-ia"
+   ],
+   "water_id": "little-wall-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "3ec4efe6094d0b740461efc793bc0cf0dcc3a5d70eea6d864b0c534d9658806b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "littlefield-lake-ia",
+   "name": "Littlefield Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Exira"
+   ],
+   "bbox": [
+    -94.789441,
+    41.555128,
+    -94.777325,
+    41.560774
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.221,
+   "launches": [
+    "littlefield-lake-access-ia"
+   ],
+   "water_id": "littlefield-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "5f4e6be586f6ca2c591648b8108e116ede73fe3108241ca018d9b7fed8da730b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lizard-creek-ia",
+   "name": "Lizard Creek",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Barnum",
+    "Fort Dodge"
+   ],
+   "bbox": [
+    -94.234822,
+    42.507014,
+    -94.203842,
+    42.517005
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cunningham-access-ia",
+    "lentsch-access-ia",
+    "phinney-park-ia",
+    "rasch-access-ia"
+   ],
+   "water_id": "lizard-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "2e217735be9d00770355e5a3dc3dd497fe3054d6faf92b379cec6b3b2e4fa1c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "loch-ayr-ia",
+   "name": "Loch Ayr",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Mount Ayr"
+   ],
+   "bbox": [
+    -94.243018,
+    40.740853,
+    -94.234149,
+    40.754077
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.355,
+   "launches": [
+    "loch-ayr-boat-launch-ia"
+   ],
+   "water_id": "loch-ayr-ia",
+   "gnis_id": null,
+   "geometry_hash": "08782150dde23a1057d58fbd2656784ba4cd567d6ee125e95cf03c028ff6c530",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lost-grove-lake-ia",
+   "name": "Lost Grove Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Eldridge",
+    "Le Claire"
+   ],
+   "bbox": [
+    -90.482009,
+    41.666683,
+    -90.433982,
+    41.683922
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.437,
+   "launches": [
+    "lost-grove-lake-boat-launch-near-eldridge-ia",
+    "lost-grove-lake-boat-launch-near-eldridge-ia-3",
+    "lost-grove-lake-boat-launch-near-le-claire-ia"
+   ],
+   "water_id": "lost-grove-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "8ecac705b8056d9e1992c414d3b9d43ca9babb62f40cd5b03342ef8bbfba2250",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lost-island-lake-ia",
+   "name": "Lost Island Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Ruthven"
+   ],
+   "bbox": [
+    -94.925542,
+    43.15911,
+    -94.891164,
+    43.182904
+   ],
+   "wikidata": "Q6684069",
+   "charted": false,
+   "area_km2": 4.846,
+   "launches": [
+    "lost-island-huston-park-ia",
+    "lost-island-park-ia"
+   ],
+   "water_id": "lost-island-lake-ia",
+   "gnis_id": "458630",
+   "geometry_hash": "07ff8b254437fc5e7d8647adb9d7540cb8bdbd20ecc97780aaa164aa589cefc0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lower-city-reservoir-ia",
+   "name": "Lower City Reservoir",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Centerville"
+   ],
+   "bbox": [
+    -92.885937,
+    40.71117,
+    -92.881273,
+    40.717956
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.134,
+   "launches": [
+    "lower-city-reservoir-boat-launch-ia"
+   ],
+   "water_id": "lower-city-reservoir-ia",
+   "gnis_id": null,
+   "geometry_hash": "720cd984ba7228722ee9bd6033cbc28d0813ad1e108dad3c6e17a81080637800",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lylah-s-marsh-ia",
+   "name": "Lylah's Marsh",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Elma"
+   ],
+   "bbox": [
+    -92.473621,
+    43.284276,
+    -92.467402,
+    43.291485
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.185,
+   "launches": [
+    "lylah-s-marsh-boat-launch-ia"
+   ],
+   "water_id": "lylah-s-marsh-ia",
+   "gnis_id": null,
+   "geometry_hash": "607b19db62f745a49e66b3a7102344391e764c0c6de61cb4d83ea44b0c4de448",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "maquoketa-river-ia",
+   "name": "Maquoketa River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Baldwin",
+    "Canton",
+    "Cascade",
+    "Dales Ford",
+    "Delhi",
+    "Dundee",
+    "Ebys Mill",
+    "Green Island",
+    "Hopkinton",
+    "Manchester",
+    "Maquoketa",
+    "Monmouth"
+   ],
+   "bbox": [
+    -91.710335,
+    42.068669,
+    -90.305667,
+    42.739353
+   ],
+   "wikidata": "Q1523402",
+   "charted": true,
+   "area_km2": 8.527,
+   "launches": [
+    "backbone-state-park-ia",
+    "bailey-s-ford-park-ia",
+    "bridgeport-bridge-access-ia",
+    "canton-bridge-access-ia",
+    "chennelworth-bridge-access-ia",
+    "damon-bridge-access-ia",
+    "delhi-dam-north-ia",
+    "delhi-dam-south-ia",
+    "delhi-lake-ia",
+    "dundee-access-ia",
+    "dunlap-park-ia",
+    "eby-s-mill-access-ia",
+    "hardscrabble-ia",
+    "highway-136-ia",
+    "highway-52-access-ia",
+    "indian-bluffs-ia",
+    "iron-bridge-access-maquoketa-ia",
+    "joinerville-park-access-ia",
+    "lindsey-bridge-access-ia",
+    "lower-mon-maq-ia",
+    "maquoketa-city-access-ia",
+    "millertown-bridge-access-ia",
+    "morehead-bridge-access-ia",
+    "pictured-rocks-ia",
+    "pin-oak-access-ia",
+    "pioneer-road-river-access-ia",
+    "quaker-mill-access-ia",
+    "retz-wildlife-access-ia",
+    "royertown-bridge-access-ia",
+    "schram-park-access-ia",
+    "spragueville-access-ia",
+    "supples-bridge-access-ia",
+    "tirrill-park-ia",
+    "turtle-creek-east-ia",
+    "turtle-creek-west-ia",
+    "upper-mon-maq-ia",
+    "whitewater-park-access-a-ia",
+    "whitewater-park-access-b-ia"
+   ],
+   "water_id": "maquoketa-river-ia",
+   "gnis_id": "458791",
+   "geometry_hash": "0b5252863fa85a6042e979d7799cc23dc33a72adc8f7dc12d02edd3413f4056d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "marion-county-park-lake-ia",
+   "name": "Marion County Park Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Knoxville"
+   ],
+   "bbox": [
+    -93.128125,
+    41.312685,
+    -93.124587,
+    41.316129
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.027,
+   "launches": [
+    "marion-county-ccb-pond-ramp-ia"
+   ],
+   "water_id": "marion-county-park-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "39aad360a1ac763d036a2fd056dbaaacc9ba67792c1dcc07c88bc18d974d11b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "martens-lake-ia",
+   "name": "Martens Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Tripoli"
+   ],
+   "bbox": [
+    -92.236566,
+    42.819811,
+    -92.219229,
+    42.830367
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.707,
+   "launches": [
+    "martens-lake-boat-launch-near-tripoli-ia"
+   ],
+   "water_id": "martens-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "31761303174e9f8ef344a532fae4ff3ed9e51fa7e020e05d4bc30f36711b38c8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "meyers-lake-ia",
+   "name": "Meyers Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Evansdale"
+   ],
+   "bbox": [
+    -92.29484,
+    42.460406,
+    -92.286033,
+    42.463636
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.115,
+   "launches": [
+    "exchange-park-access-ia"
+   ],
+   "water_id": "meyers-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "777b3130388e277c39ba811a1ddbe47a6495f5d12d7d49db36e837d0f920406d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "michaels-creek-ia",
+   "name": "Michaels Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "Wapello"
+   ],
+   "bbox": [
+    -91.179762,
+    41.233156,
+    -91.111054,
+    41.294144
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "louisa-fishing-pier-canoe-kayak-launch-ia"
+   ],
+   "water_id": "michaels-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "8b1ff91cf4327df13b206c93bd8b29cfc57aa5cb3693521bdd7915dacd3feeaf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-raccoon-river-ia",
+   "name": "Middle Raccoon River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Coon Rapids",
+    "Guthrie Center",
+    "Linden",
+    "Panora",
+    "Redfield"
+   ],
+   "bbox": [
+    -95.061182,
+    41.571723,
+    -94.192622,
+    42.165947
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.204,
+   "launches": [
+    "cowles-access-ia",
+    "highway-141-river-access-ia",
+    "lenon-mills-access-ia",
+    "middle-raccoon-river-access-ia",
+    "middle-raccoon-river-access-linden-ia",
+    "p-28-access-ia",
+    "redfield-dam-ia",
+    "riverside-park-coon-rapids-ia",
+    "shearer-access-ia",
+    "springbrook-state-park-ia"
+   ],
+   "water_id": "middle-raccoon-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "138829a283cba8c3800f33d256c1485b3e1669cd8345ce159baf1936288673a9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "whiterock-conservancy-campground-access-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "middle-river-ia",
+   "name": "Middle River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Greenfield",
+    "Webster",
+    "Winterset"
+   ],
+   "bbox": [
+    -94.692813,
+    41.281844,
+    -93.39632,
+    41.609749
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "holliwell-covered-bridge-access-ia",
+    "middle-river-forest-park-ia",
+    "middle-river-park-ia",
+    "pammel-park-east-ia",
+    "pammel-park-ford-ia",
+    "roseman-covered-bridge-access-ia",
+    "schildberg-access-ia"
+   ],
+   "water_id": "middle-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "b6bfb174e81a84be4850d9129f0e467a5e89e951ffb51c5ee1a2f536a160ee29",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-sabula-lake-ia",
+   "name": "Middle Sabula Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Sabula"
+   ],
+   "bbox": [
+    -90.189726,
+    42.059948,
+    -90.172641,
+    42.070445
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 1.091,
+   "launches": [
+    "middle-sabula-lake-boat-launch-ia"
+   ],
+   "water_id": "middle-sabula-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "1663fd3c4f07de976a669ad7fee5a8f53172739c056a875b1cbf755281ea0110",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mile-hill-lake-ia",
+   "name": "Mile Hill Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Glenwood"
+   ],
+   "bbox": [
+    -95.785514,
+    41.043243,
+    -95.779565,
+    41.04696
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.053,
+   "launches": [
+    "mile-hill-lake-boat-launch-ia"
+   ],
+   "water_id": "mile-hill-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "670dd284ae67ac087bdcaf1d0c321a4a75ba3e5ea41227243017bc533f7a0bfc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mill-creek-ia",
+   "name": "Mill Creek",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Cherokee",
+    "Larrabee"
+   ],
+   "bbox": [
+    -95.721703,
+    42.775178,
+    -95.526205,
+    43.164066
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "450th-st-access-ia",
+    "470th-st-access-ia",
+    "mill-creek-bridge-access-ia"
+   ],
+   "water_id": "mill-creek-ia",
+   "gnis_id": "459085",
+   "geometry_hash": "176a151e2bf482d69acd0348fd85367080d4769812aee2ec894f7c1c80fc1d64",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mill-creek-lake-ia",
+   "name": "Mill Creek Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Paullina"
+   ],
+   "bbox": [
+    -95.672056,
+    42.984111,
+    -95.665102,
+    42.987823
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.104,
+   "launches": [
+    "mill-creek-state-park-ia"
+   ],
+   "water_id": "mill-creek-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "db7e6dd81ed97f4d9785f03c1b6ea765fac37e2e755e12b4814a24bf3399db9a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mill-slough-ia",
+   "name": "Mill Slough",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Adel"
+   ],
+   "bbox": [
+    -94.038823,
+    41.615787,
+    -94.011864,
+    41.645074
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kinnick-feller-riverside-park-ia"
+   ],
+   "water_id": "mill-slough-ia",
+   "gnis_id": null,
+   "geometry_hash": "9961ee4792199cc6c210c6331580e28bd12b270e0c3621b8c6ed61cc06fec112",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "minnesota-slough-ia",
+   "name": "Minnesota Slough",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "New Albin"
+   ],
+   "bbox": [
+    -91.274872,
+    43.479198,
+    -91.230323,
+    43.52847
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "new-albin-area-army-rd-ia",
+    "new-albin-landing-south-ramp-ia"
+   ],
+   "water_id": "minnesota-slough-ia",
+   "gnis_id": null,
+   "geometry_hash": "092d26f1630e0954e1270e31658c2d2cc1b8a5331f6a27a30ac105fbaa7049f9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "minnewashta-lake-ia",
+   "name": "Minnewashta Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Arnolds Park"
+   ],
+   "bbox": [
+    -95.132284,
+    43.357232,
+    -95.119695,
+    43.364985
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.508,
+   "launches": [
+    "minnewashta-lake-boat-launch-near-arnolds-park-ia",
+    "minnewashta-lake-boat-launch-ia"
+   ],
+   "water_id": "minnewashta-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "4390a6cec6b37291783e2908a961bf1ebbc9325ea3e167149ecf12750b601502",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mississippi-river-ia",
+   "name": "Mississippi River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Bellevue",
+    "Bettendorf",
+    "Buffalo",
+    "Bulgers Hollow",
+    "Burlington",
+    "Camanche",
+    "Clayton",
+    "Clinton",
+    "Davenport",
+    "Dubuque",
+    "Eckards",
+    "Fairport"
+   ],
+   "bbox": [
+    -91.421973,
+    40.375876,
+    -90.138702,
+    43.561781
+   ],
+   "wikidata": "Q1497",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "15th-avenue-ramp-ia",
+    "25th-avenue-ramp-ia",
+    "30th-avenue-ramp-ia",
+    "4th-pumping-plant-recreation-area-ia",
+    "5th-avenue-ramp-ia",
+    "6th-avenue-ramp-ia",
+    "8th-avenue-ramp-ia",
+    "9th-avenue-ramp-ia",
+    "a-y-mcdonald-park-boat-ramp-ia",
+    "bellevue-boat-ramp-ia",
+    "bellevue-state-park-ia",
+    "bellevue-state-park-2-ia",
+    "big-timber-access-ia",
+    "buffalo-beach-ia",
+    "buffalo-shores-access-ia",
+    "bulger-s-hollow-ia",
+    "bussey-lake-boat-ramp-ia",
+    "camanche-municipal-ramp-ia",
+    "casey-barrow-landing-ia",
+    "centennial-park-boat-ramp-ia",
+    "clark-s-ferry-recreation-area-ia",
+    "clarks-ferry-boat-ramp-ia",
+    "clayton-municipal-ramp-ia",
+    "credit-island-boat-ramp-ia",
+    "dodge-access-ia",
+    "duck-creek-public-use-area-ia",
+    "eagle-s-landing-boat-ramp-ia",
+    "fairport-public-access-area-ia",
+    "ferry-landing-canoe-takeout-ia",
+    "finley-s-landing-ia",
+    "fisher-s-landing-ia",
+    "flaming-prairie-park-ia",
+    "french-town-landing-ia",
+    "green-bay-access-ia",
+    "guttenberg-city-access-ia",
+    "hawkeye-dolbee-access-ia",
+    "iowa-dnr-ramp-ia",
+    "john-deere-marsh-ia",
+    "kilpeck-landing-pub-area-ia",
+    "leclaire-base-ramp-ia",
+    "leclaire-boat-ramp-ia",
+    "leach-park-boat-ramp-ia",
+    "marquette-boat-ramp-ia",
+    "mcgregor-boat-ramp-ia",
+    "mississippi-river-boat-launch-near-guttenberg-ia",
+    "mississippi-river-carry-in-access-ia",
+    "mud-lake-park-ia",
+    "municipal-boat-ramp-fort-madison-ia",
+    "municipal-boat-ramp-ia",
+    "municipal-public-ramps-2-ia",
+    "pirates-pit-stop-boat-launch-ia",
+    "pleasant-creek-ia",
+    "port-louisa-public-acc-area-ia",
+    "princeton-wildlife-area-ia",
+    "princeton-wildlife-area-ia-2",
+    "princeton-wildlife-area-ia-3",
+    "princeton-wildlife-area-ia-4",
+    "princeton-wildlife-area-ia-5",
+    "river-street-ramp-ia",
+    "rivers-edge-plaza-ia",
+    "riverview-park-ia",
+    "schmitt-island-boat-ramp-ia",
+    "shady-creek-boat-ramp-ia",
+    "shady-creek-public-access-ia",
+    "smith-s-island-boat-ramp-ia",
+    "south-sabula-access-ia",
+    "spruce-creek-park-ia",
+    "tama-beach-boat-access-ia",
+    "toolesboro-ia",
+    "village-creek-access-ia",
+    "walter-beuse-memorial-ramp-ia",
+    "waupeton-landing-ia",
+    "willies-landing-ia",
+    "willow-patch-access-ia",
+    "yellow-river-access-marquette-ia"
+   ],
+   "water_id": "mississippi-river-ar",
+   "gnis_id": "1629903",
+   "geometry_hash": "0e70a3954479073f131ff98464e1ec2abded0d7e25d64f3f1c44c177a5d09889",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "fairport-landing-marina-boat-ramp-ia",
+    "izaak-walton-league-ramp-ia",
+    "mississippi-river-boat-launch-near-muscatine-ia",
+    "sabula-boat-landing-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "missouri-river-ia",
+   "name": "Missouri River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Bartlett",
+    "Blencoe",
+    "Council Bluffs",
+    "Eureka",
+    "Glenwood",
+    "Hamburg",
+    "Little Sioux",
+    "Missouri Valley",
+    "Modale",
+    "Mondamin",
+    "Onawa",
+    "Sergeant Bluff"
+   ],
+   "bbox": [
+    -96.462565,
+    40.313387,
+    -95.622695,
+    42.490109
+   ],
+   "wikidata": "Q5419",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bartlett-access-ia",
+    "copeland-bend-wildlife-area-ia",
+    "deer-island-access-ia",
+    "hamburg-access-ia",
+    "huff-access-ia",
+    "little-sioux-delta-ia",
+    "louisville-bend-wildlife-area-ia",
+    "manawa-ia",
+    "middle-decatur-bend-access-ia",
+    "missouri-river-boat-ramp-ia",
+    "narrow-s-ia",
+    "rand-access-ia",
+    "remington-access-ia",
+    "sioux-city-municipal-boat-dock-ia",
+    "sunset-island-ia",
+    "tyson-access-ia",
+    "waubonsie-access-ia",
+    "weedland-access-ia",
+    "wilson-island-access-ia",
+    "winnebago-bend-access-ia"
+   ],
+   "water_id": "missouri-river-ia",
+   "gnis_id": "756398",
+   "geometry_hash": "2b1e43de08a23a0d91e5533ea34968e078291a5f087cefa0a4aba8182dd69d85",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "whiting-lighthouse-private-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "mormon-trail-lake-ia",
+   "name": "Mormon Trail Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Bridgewater"
+   ],
+   "bbox": [
+    -94.637272,
+    41.239803,
+    -94.629118,
+    41.243837
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.134,
+   "launches": [
+    "mormon-trail-lake-access-ia"
+   ],
+   "water_id": "mormon-trail-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "d02bd887077e2f416e2eecc49a8dbdb8d53355ff2655a9275fea9516ad2da12a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "morris-lake-ia",
+   "name": "Morris Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Belmond"
+   ],
+   "bbox": [
+    -93.701278,
+    42.8356,
+    -93.688274,
+    42.842241
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.45,
+   "launches": [
+    "morris-lake-boat-launch-ia"
+   ],
+   "water_id": "morris-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "f245482dd37db1f83c78dcfd71e0826e0617557de05fb5bbf860916fd4e2f67e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "nine-eagles-lake-ia",
+   "name": "Nine Eagles Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Davis City"
+   ],
+   "bbox": [
+    -93.774124,
+    40.595151,
+    -93.763798,
+    40.603
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.243,
+   "launches": [
+    "nine-eagles-lake-boat-launch-ia"
+   ],
+   "water_id": "nine-eagles-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "bcc75ac59fb49996e771ae2e7edad5dc2a550a653d35d6b3f31daa96e06e2004",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "nishnabotna-river-ia",
+   "name": "Nishnabotna River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Hamburg"
+   ],
+   "bbox": [
+    -95.655785,
+    40.51318,
+    -95.624007,
+    40.651834
+   ],
+   "wikidata": "Q14704466",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "golden-rod-access-ia"
+   ],
+   "water_id": "nishnabotna-river-ia",
+   "gnis_id": "723379",
+   "geometry_hash": "4c4c412dcd69b6b492dcdb3d25c1b5a24ccdf7434c40d5baa3dcb1b8654d17e1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "nodaway-lake-ia",
+   "name": "Nodaway Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Greenfield"
+   ],
+   "bbox": [
+    -94.498118,
+    41.285925,
+    -94.490521,
+    41.290633
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.113,
+   "launches": [
+    "nodaway-lake-access-ia"
+   ],
+   "water_id": "nodaway-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "724d512f6404aa86ea12b15edcf8d411c015bede2eb04fc1649c825718c93d57",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-maquoketa-river-ia",
+   "name": "North Fork Maquoketa River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Cascade",
+    "Crab Town",
+    "Maquoketa",
+    "Ozark"
+   ],
+   "bbox": [
+    -91.147227,
+    42.086554,
+    -90.646544,
+    42.646651
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cascade-ia",
+    "davison-bridge-access-ia",
+    "ozark-bridge-ia"
+   ],
+   "water_id": "north-fork-maquoketa-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "4c2774b425e80c18b8230ca2a4908f52a262b557b01510990e687365fd24d553",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-raccoon-river-ia",
+   "name": "North Raccoon River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Adel",
+    "Auburn",
+    "Black Corners",
+    "Churdan",
+    "Dawson",
+    "Glidden",
+    "Grant City",
+    "Jefferson",
+    "Lake City",
+    "Lanesboro",
+    "Minburn",
+    "Newell"
+   ],
+   "bbox": [
+    -95.120321,
+    41.543695,
+    -93.951048,
+    42.903516
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "230th-street-canoe-access-ia",
+    "adel-island-park-ia",
+    "adel-island-park-ia-2",
+    "adkins-bridge-access-ia",
+    "brown-bridge-access-ia",
+    "city-park-ia",
+    "dawson-boat-ramp-ia",
+    "eureka-bridge-access-ia",
+    "grant-park-ia",
+    "hagge-park-ia",
+    "henderson-park-ia",
+    "highway-30-access-jefferson-ia",
+    "highway-44-access-ia",
+    "hobbs-access-ia",
+    "hyde-park-ia",
+    "jackson-access-ia",
+    "mcmahon-access-ia",
+    "merritt-access-ia",
+    "north-raccoon-river-access-ia",
+    "perry-north-raccoon-river-access-ia",
+    "puckerbrush-access-ia",
+    "rainbow-bend-ia",
+    "richey-access-ia",
+    "riverside-park-sac-city-ia",
+    "snyder-access-ia",
+    "spring-valley-access-ia",
+    "squirrel-hollow-park-ia",
+    "sturchler-ia",
+    "three-waters-wildlife-area-ia",
+    "vogel-access-ia",
+    "white-horse-access-ia",
+    "wright-access-ia"
+   ],
+   "water_id": "north-raccoon-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "7478196c184dce968cc59767ef4844e6dd34785c73c7362b2554efdb5599a3ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-river-ia",
+   "name": "North River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Winterset"
+   ],
+   "bbox": [
+    -94.478801,
+    41.376793,
+    -93.444506,
+    41.534054
+   ],
+   "wikidata": "Q7056507",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "elmwood-ave-access-ia",
+    "guye-woods-county-park-ia",
+    "hogback-covered-bridge-ia",
+    "pitzer-road-bridge-ia"
+   ],
+   "water_id": "north-river-ia",
+   "gnis_id": "459621",
+   "geometry_hash": "1b9d2b45f321858026d41952c0d8c35448467dfb5ab0d3e82039862d7b3b5321",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-skunk-river-ia",
+   "name": "North Skunk River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Kellogg",
+    "Lynnville",
+    "New Sharon",
+    "Sigourney",
+    "Union Mills"
+   ],
+   "bbox": [
+    -93.155772,
+    41.248969,
+    -92.026074,
+    41.92797
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "checauqua-river-access-ia",
+    "holmdahl-city-park-access-ia",
+    "robertson-access-ia",
+    "union-mill-access-ia",
+    "wagaman-mill-access-ia"
+   ],
+   "water_id": "north-skunk-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "5b2ccf9df8e28355d2feffea968f4e0c8a71fafe9280118e907cf84c6a8b2066",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "okamanpeedan-lake-ia",
+   "name": "Okamanpeedan Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Dolliver"
+   ],
+   "bbox": [
+    -94.619453,
+    43.489076,
+    -94.552485,
+    43.533212
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.089,
+   "launches": [
+    "tuttle-lake-county-park-ia"
+   ],
+   "water_id": "okamanpeedan-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "c982f67697d71bbe25a7a24980c0acd42d4d5a8a0290b4eda0e4895e3dc9893d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "old-reservoir-ia",
+   "name": "Old Reservoir",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Mount Ayr"
+   ],
+   "bbox": [
+    -94.22747,
+    40.725336,
+    -94.225381,
+    40.728815
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.05,
+   "launches": [
+    "mt-ayr-old-reservoir-ramp-ia"
+   ],
+   "water_id": "old-reservoir-ia",
+   "gnis_id": null,
+   "geometry_hash": "a2b03b2cd25dcc14324e93e44dfe2305e6e674d9bd1bf5d7f73cb632ba1985b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "otter-creek-ia",
+   "name": "Otter Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "Hull"
+   ],
+   "bbox": [
+    -96.026612,
+    43.246016,
+    -95.997738,
+    43.267874
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "otter-creek-vreeman-tract-ia"
+   ],
+   "water_id": "otter-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "6f767be2585f8a59a93213fe2459307f1238948f023df5be44ce282c2e1ef702",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "otter-creek-lake-ia",
+   "name": "Otter Creek Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Toledo"
+   ],
+   "bbox": [
+    -92.523798,
+    42.04198,
+    -92.515721,
+    42.053431
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.26,
+   "launches": [
+    "otter-creek-lake-boat-launch-ia"
+   ],
+   "water_id": "otter-creek-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "4dbdf6a29110d72c3ab5c625d5109fcc5b58f1a0fe70b43e95678597103d7e0e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "peterson-lake-ia",
+   "name": "Peterson Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Ames"
+   ],
+   "bbox": [
+    -93.597271,
+    42.08189,
+    -93.594326,
+    42.086894
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.081,
+   "launches": [
+    "peterson-lake-boat-launch-near-ames-ia-2"
+   ],
+   "water_id": "peterson-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "0313650056c96158b0a6ae51819c26c7dbfd801a803ff29449e2decc04e29f5b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pierce-pond-ia",
+   "name": "Pierce Pond",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Mason City"
+   ],
+   "bbox": [
+    -93.226258,
+    43.139266,
+    -93.221772,
+    43.141541
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.075,
+   "launches": [
+    "pierce-pond-boat-launch-ia"
+   ],
+   "water_id": "pierce-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "89650a778899416a2c62059cfa4f7248504f8ad8dba5dbc54474614cdafdb85c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pine-lake-ia",
+   "name": "Pine Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Eldora"
+   ],
+   "bbox": [
+    -93.078844,
+    42.366068,
+    -93.065723,
+    42.370706
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.258,
+   "launches": [
+    "pine-lake-boat-launch-ia"
+   ],
+   "water_id": "pine-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "d91955e8b92585058d7690764401dd6646cf84d14af3b4d993b681605cabc17e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pleasant-creek-lake-ia",
+   "name": "Pleasant Creek Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Center Point",
+    "Shellsburg"
+   ],
+   "bbox": [
+    -91.843692,
+    42.113998,
+    -91.807337,
+    42.129947
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.643,
+   "launches": [
+    "pleasant-creek-lake-boat-launch-near-center-point-ia",
+    "pleasant-creek-lake-boat-launch-near-center-point-ia-2",
+    "pleasant-creek-lake-boat-launch-near-center-point-ia-4",
+    "pleasant-creek-lake-boat-launch-near-shellsburg-ia"
+   ],
+   "water_id": "pleasant-creek-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "ecf468e0a96cab684b3e686dd4a640cf353392cf45b4617e38ec67274750cdbe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pleasant-view-park-ia",
+   "name": "Pleasant View Park",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Dunlap"
+   ],
+   "bbox": [
+    -95.590278,
+    41.850671,
+    -95.586251,
+    41.85325
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.041,
+   "launches": [
+    "pleasant-view-park-boat-launch-ia"
+   ],
+   "water_id": "pleasant-view-park-ia",
+   "gnis_id": null,
+   "geometry_hash": "9bee299d5e8af0270fd9c002d12a581b9e709418f78fabaf261d6ae33480eb7f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "prairie-lake-ia",
+   "name": "Prairie Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Cedar Falls"
+   ],
+   "bbox": [
+    -92.463201,
+    42.475538,
+    -92.459188,
+    42.480388
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.103,
+   "launches": [
+    "prairie-lakes-park-south-access-ia"
+   ],
+   "water_id": "prairie-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "80a632dc183fdff02ea9e88a30827bae73bf036bf495043eb8a40508a3d93073",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "prairie-park-fishery-ia",
+   "name": "Prairie Park Fishery",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Cedar Rapids"
+   ],
+   "bbox": [
+    -91.636158,
+    41.946821,
+    -91.624689,
+    41.95243
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.272,
+   "launches": [
+    "prairie-park-fishery-boat-launch-near-cedar-rapids-ia-2",
+    "prairie-park-fishery-boat-launch-near-cedar-rapids-ia"
+   ],
+   "water_id": "prairie-park-fishery-ia",
+   "gnis_id": null,
+   "geometry_hash": "cf5471593cf5a2be4838da42833f883016852921639802052e3eab2d40a0da71",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "prairie-rose-lake-ia",
+   "name": "Prairie Rose Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Harlan"
+   ],
+   "bbox": [
+    -95.229563,
+    41.596775,
+    -95.203425,
+    41.61128
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.801,
+   "launches": [
+    "prairie-rose-lake-boat-launch-near-harlan-ia",
+    "prairie-rose-lake-boat-launch-near-harlan-ia-2"
+   ],
+   "water_id": "prairie-rose-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "f034394b371f36d547d1764d38576a767d8b466e2f8699b23a1e108a9ca28c44",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "q-pond-ia",
+   "name": "Q Pond",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Osceola"
+   ],
+   "bbox": [
+    -93.782962,
+    41.039822,
+    -93.777236,
+    41.044573
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.091,
+   "launches": [
+    "q-pond-ramp-ramp-ia"
+   ],
+   "water_id": "q-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "b6f24f5d1339bdcd214f9d2c7eebc8ef2d0517e4f1e6b328ba8ded9a98099cd7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "raccoon-river-ia",
+   "name": "Raccoon River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Booneville",
+    "Des Moines",
+    "Van Meter",
+    "West Des Moines"
+   ],
+   "bbox": [
+    -93.966762,
+    41.514975,
+    -93.611587,
+    41.58255
+   ],
+   "wikidata": "Q3415981",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "booneville-access-ia",
+    "des-moines-water-works-park-ia",
+    "emergency-dam-access-only-ia",
+    "van-meter-access-ia",
+    "walnut-woods-state-park-ia"
+   ],
+   "water_id": "raccoon-river-ia",
+   "gnis_id": "460494",
+   "geometry_hash": "04f0a8e32b5d7513f2014a556dabf1c72e07a1099a6c727a472d66bfe15fa39d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "railroad-lake-ia",
+   "name": "Railroad Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Davenport"
+   ],
+   "bbox": [
+    -90.687769,
+    41.524217,
+    -90.68088,
+    41.527373
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.094,
+   "launches": [
+    "railroad-lake-boat-launch-ia"
+   ],
+   "water_id": "railroad-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "979568670ab02c8be7369fa27eecb345b3e20741316c8882f8ad0e872eaf85a6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rathbun-lake-ia",
+   "name": "Rathbun Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Centerville",
+    "Maine",
+    "Melrose"
+   ],
+   "bbox": [
+    -93.124852,
+    40.82253,
+    -92.86975,
+    40.915248
+   ],
+   "wikidata": "Q7295608",
+   "charted": false,
+   "area_km2": 45.373,
+   "launches": [
+    "bridgeview-slipway-ia",
+    "bridgeview-high-water-boat-ramp-ia",
+    "buck-creek-marina-north-ia",
+    "honey-creek-ia",
+    "honey-creek-high-water-ramp-ia",
+    "honey-creek-resort-ia",
+    "rathbun-lake-boat-launch-near-centerville-ia-2",
+    "island-view-ia",
+    "island-view-park-ia",
+    "island-view-west-ia",
+    "island-view-campground-slipway-ia",
+    "rathbun-lake-boat-launch-near-centerville-ia",
+    "rathbun-lake-small-boat-access-centerville-ia",
+    "rathbun-lake-small-boat-access-ia",
+    "rathbun-lake-small-boat-access-ia-2",
+    "rathbun-lake-small-boat-access-ia-3",
+    "rathbun-lake-small-boat-access-melrose-ia",
+    "rolling-cove-park-ia",
+    "south-fork-park-ia",
+    "wilderness-trail-ia"
+   ],
+   "water_id": "rathbun-lake-ia",
+   "gnis_id": "460534",
+   "geometry_hash": "42ae41e4850f51bac4e15ff369b7da718cf4dba5dd0ba339e792242bbacd2ab0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "buck-creek-marina-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "red-haw-lake-ia",
+   "name": "Red Haw Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Chariton"
+   ],
+   "bbox": [
+    -93.280471,
+    40.991046,
+    -93.267946,
+    41.001702
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.319,
+   "launches": [
+    "red-haw-lake-boat-launch-near-chariton-ia",
+    "red-haw-lake-boat-launch-near-chariton-ia-2"
+   ],
+   "water_id": "red-haw-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "0e0a5e7c092cea74a0894ba7764874bbebe5861f64fe7d2b3a6a6c63e7bb70da",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rice-lake-ia",
+   "name": "Rice Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Lake Mills"
+   ],
+   "bbox": [
+    -93.522171,
+    43.379548,
+    -93.469267,
+    43.402372
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.998,
+   "launches": [
+    "rice-lake-boat-launch-near-lake-mills-ia",
+    "rice-lake-boat-launch-near-lake-mills-ia-2"
+   ],
+   "water_id": "rice-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "647b67cc7f73e531ca4be92c60215ad06317b864112a2f4abf9e596d15364fd7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rock-creek-lake-ia",
+   "name": "Rock Creek Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Oakland Acres"
+   ],
+   "bbox": [
+    -92.867176,
+    41.736929,
+    -92.830935,
+    41.766245
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.928,
+   "launches": [
+    "rock-creek-lake-boat-launch-near-oakland-acres-ia",
+    "rock-creek-lake-boat-launch-near-oakland-acres-ia-2",
+    "rock-creek-lake-boat-launch-near-oakland-acres-ia-3",
+    "rock-creek-lake-boat-launch-near-oakland-acres-ia-4",
+    "rock-creek-lake-boat-launch-near-oakland-acres-ia-5",
+    "rock-creek-lake-boat-launch-near-oakland-acres-ia-6"
+   ],
+   "water_id": "rock-creek-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "4eb5a9c907ef55a83a4850940185b36c1db0fa1d6cedb86829331f8abbf93a36",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "rock-creek-marina-ramp-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "rock-river-ia",
+   "name": "Rock River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Rock Valley"
+   ],
+   "bbox": [
+    -96.454618,
+    43.081217,
+    -96.139958,
+    43.586841
+   ],
+   "wikidata": "Q6305729",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "hudson-wildlife-area-ia",
+    "rock-valley-boat-ramp-ia"
+   ],
+   "water_id": "rock-river-ia",
+   "gnis_id": "460744",
+   "geometry_hash": "eb0bce1a608befc12c3682a11b734997708a8da99e514d03267dd4c1354e2a51",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ross-park-lake-ia",
+   "name": "Ross Park Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Braddyville"
+   ],
+   "bbox": [
+    -94.963565,
+    40.6084,
+    -94.960649,
+    40.6104
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.038,
+   "launches": [
+    "ross-area-east-pit-ramp-ia"
+   ],
+   "water_id": "ross-park-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "6d2ab4b304c51fd9920985bf749f9ce0cccd26aaf0e8860dbaf2ba035f583618",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sand-lake-ia",
+   "name": "Sand Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Iowa City"
+   ],
+   "bbox": [
+    -91.533131,
+    41.619918,
+    -91.524297,
+    41.627025
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.326,
+   "launches": [
+    "sand-lake-boat-launch-near-iowa-city-ia"
+   ],
+   "water_id": "sand-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "3c53ee3d505288e2d33bb6074152d66ae1be165273f5f3175283108579358c79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "saylorville-lake-ia",
+   "name": "Saylorville Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Ankeny",
+    "Johnston",
+    "Polk City"
+   ],
+   "bbox": [
+    -93.85017,
+    41.703409,
+    -93.669005,
+    41.851978
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 22.201,
+   "launches": [
+    "bob-shetler-ia",
+    "cherry-glen-day-use-ia",
+    "cherry-glen-high-water-ia",
+    "lakeview-high-water-ia",
+    "lakeview-main-a-ia",
+    "lakeview-main-b-ia",
+    "lewis-a-jester-park-ia",
+    "lincoln-access-ia",
+    "sandpiper-ia"
+   ],
+   "water_id": "saylorville-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "1c0f2d9134c11c9436868db826409f39de6c24ac239ff0d7723dfb384c3efd7f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "saylorville-marina-access-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "shagbark-lake-ia",
+   "name": "Shagbark Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Farmington"
+   ],
+   "bbox": [
+    -91.667946,
+    40.644808,
+    -91.663901,
+    40.646436
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.029,
+   "launches": [
+    "shagbark-lake-boat-ramp-ia"
+   ],
+   "water_id": "shagbark-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "5666d10df3d7b7457564939b7bf077e7c9ae2255aeca6a45a6defbb446412989",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shawon-dasse-slough-ia",
+   "name": "Shawon Dasse Slough",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Massey"
+   ],
+   "bbox": [
+    -90.592411,
+    42.418164,
+    -90.562537,
+    42.443743
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "massey-marina-ia"
+   ],
+   "water_id": "shawon-dasse-slough-ia",
+   "gnis_id": null,
+   "geometry_hash": "7f03940359182ef02a5711ea05de5b6899c288b8cbfda69554938a19ae21af89",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shell-rock-river-ia",
+   "name": "Shell Rock River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Clarksville",
+    "Greene",
+    "Janesville",
+    "Marble Rock",
+    "Nora Springs",
+    "Northwood",
+    "Plymouth",
+    "Rock Falls",
+    "Rockford",
+    "Shell Rock"
+   ],
+   "bbox": [
+    -93.30565,
+    42.613172,
+    -92.492756,
+    43.61842
+   ],
+   "wikidata": "Q7493697",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "butler-county-hq-ia",
+    "camp-comfort-ia",
+    "gates-bridge-ia",
+    "greene-recreational-park-ia",
+    "heery-woods-state-park-ia",
+    "marble-rock-access-ia",
+    "nora-springs-ia",
+    "nora-springs-mill-dam-park-ia",
+    "ochee-yahola-park-ia",
+    "perrin-park-ia",
+    "rockford-park-ia",
+    "shell-rock-access-ia",
+    "shell-rock-city-park-ia",
+    "shell-rock-park-ia",
+    "shell-rock-river-greenbelt-and-preserve-ia",
+    "strand-park-ia",
+    "swensrud-park-ia",
+    "sydney-swensrud-wma-ia",
+    "tosanak-access-ia",
+    "wilkinson-pioneer-park-ia",
+    "wyatt-park-ia"
+   ],
+   "water_id": "shell-rock-river-ia",
+   "gnis_id": "461563",
+   "geometry_hash": "3270c149d0c878ec39641dcce0eb2ccb1c3a9f6ddb93fcdcddc258a3ef880171",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "silver-lake-ayrshire-ia",
+   "name": "Silver Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Ayrshire"
+   ],
+   "bbox": [
+    -94.907882,
+    43.023678,
+    -94.871625,
+    43.041371
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.667,
+   "launches": [
+    "salton-park-ia"
+   ],
+   "water_id": "silver-lake-ayrshire-ia",
+   "gnis_id": null,
+   "geometry_hash": "c37fa646c91d4aa0a31e055233d84ebebe7065028d4b2b3aaa10d1fb3ebcc720",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "silver-lake-ia",
+   "name": "Silver Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Lake Park"
+   ],
+   "bbox": [
+    -95.368021,
+    43.432053,
+    -95.326355,
+    43.453741
+   ],
+   "wikidata": "Q34923691",
+   "charted": false,
+   "area_km2": 4.267,
+   "launches": [
+    "silver-lake-east-boat-ramp-ia"
+   ],
+   "water_id": "silver-lake-ia",
+   "gnis_id": "461634",
+   "geometry_hash": "74a82cc28f0d873a4d43c806a6ab1d1ae281e536737b67f7172ba3f373b03544",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "skunk-river-ia",
+   "name": "Skunk River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Augusta",
+    "Brighton",
+    "Coppock",
+    "Fort Madison",
+    "Lockridge",
+    "Lowell",
+    "Mount Pleasant",
+    "Oakland Mills",
+    "Richland",
+    "Skunk River",
+    "South Augusta"
+   ],
+   "bbox": [
+    -92.026813,
+    40.69558,
+    -91.11219,
+    41.264621
+   ],
+   "wikidata": "Q7537031",
+   "charted": true,
+   "area_km2": 1.88,
+   "launches": [
+    "augusta-fishing-access-ia",
+    "brighton-access-ia",
+    "faulkner-s-access-ia",
+    "gray-s-landing-ia",
+    "indian-path-park-ia",
+    "lower-skunk-river-access-ia",
+    "maccoon-access-ia",
+    "mckain-access-ia",
+    "oakland-mills-access-ia",
+    "skunk-river-wildlife-area-ia",
+    "stephenson-park-ia",
+    "upper-skunk-river-access-ia",
+    "waterworks-access-ia",
+    "welter-recreation-area-ia"
+   ],
+   "water_id": "skunk-river-ia",
+   "gnis_id": "461664",
+   "geometry_hash": "9b1cd31c78831313868d45463900a9b2521d14389ce98f15d9709008f6cdc93b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "slip-bluff-lake-ia",
+   "name": "Slip Bluff Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Davis City"
+   ],
+   "bbox": [
+    -93.853999,
+    40.650376,
+    -93.848328,
+    40.654756
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.071,
+   "launches": [
+    "slip-bluff-lake-boat-launch-ia"
+   ],
+   "water_id": "slip-bluff-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "6bbadf85d32ecc20d0cdc6ee32794882defcfa4de72b6a01f69e6540fa1880d3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "smith-creek-ia",
+   "name": "Smith Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "Twin Springs"
+   ],
+   "bbox": [
+    -90.29097,
+    42.106802,
+    -90.264935,
+    42.161693
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "blake-s-lake-boat-launch-ia"
+   ],
+   "water_id": "smith-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "723644080a4416f9bf8218cc07a91ec2ae212432350471614d51a8db53576667",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sodus-creek-ia",
+   "name": "Sodus Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "Shaffton"
+   ],
+   "bbox": [
+    -90.359687,
+    41.749117,
+    -90.330308,
+    41.775164
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "rock-creek-park-ia"
+   ],
+   "water_id": "sodus-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "64418bb7b10739bf4d7b5402a24375c8abd6f18ed19a99ebdde5ad515b4fec0e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-iowa-river-ia",
+   "name": "South Fork Iowa River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Iowa Falls"
+   ],
+   "bbox": [
+    -93.459669,
+    42.285486,
+    -93.077599,
+    42.481698
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "flowing-well-ia"
+   ],
+   "water_id": "south-fork-iowa-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "f0df34487f5a79512fc3b44144649313d5e910c92f41284b434ba94b136d4ecf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-raccoon-river-ia",
+   "name": "South Raccoon River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Adel",
+    "Dale",
+    "Redfield"
+   ],
+   "bbox": [
+    -94.789289,
+    41.537538,
+    -93.966762,
+    41.830878
+   ],
+   "wikidata": "Q35323715",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "courtney-mccammond-access-ia",
+    "earlham-bridge-access-south-raccoon-ia",
+    "nation-s-bridge-park-ia",
+    "pleasant-valley-wildlife-area-south-raccoon-river-ia",
+    "south-raccoon-river-carry-in-access-ia"
+   ],
+   "water_id": "south-raccoon-river-ia",
+   "gnis_id": "461799",
+   "geometry_hash": "578b101f04d87fd9a3f82658efa6955d0aa6c6343c153c052fd27bd6f06eb464",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-skunk-river-ia",
+   "name": "South Skunk River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Ames",
+    "Cambridge",
+    "Colfax",
+    "Delta",
+    "Huxley",
+    "Ollie",
+    "Oskaloosa",
+    "Reasnor",
+    "Rose Hill",
+    "Sigourney",
+    "Story City"
+   ],
+   "bbox": [
+    -93.622597,
+    41.229675,
+    -92.02658,
+    42.424427
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.816,
+   "launches": [
+    "180th-street-access-ia",
+    "265th-st-access-ia",
+    "anderson-access-ia",
+    "askew-bridge-access-ia",
+    "beyer-s-bridge-ia",
+    "c-j-shreck-access-ia",
+    "city-water-works-ia",
+    "f-48-bridge-ia",
+    "glendale-access-ia",
+    "hwy-21-bridge-access-ia",
+    "lekwa-access-ia",
+    "manhattan-bridge-ia",
+    "oswalt-bridge-ia",
+    "river-valley-park-ia",
+    "river-valley-park-2-ia",
+    "rose-hill-access-ia",
+    "s-e-16th-street-access-ia",
+    "sleepy-hollow-ia",
+    "sopers-mill-a-ia",
+    "sopers-mill-b-ia",
+    "south-skunk-river-access-ia",
+    "story-city-park-ia"
+   ],
+   "water_id": "south-skunk-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "20e63547b47a786dda30a2b1a1dc45e0d11ebca5914aef955447683557cffc41",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spirit-lake-ia",
+   "name": "Spirit Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Orleans",
+    "Spirit Lake"
+   ],
+   "bbox": [
+    -95.126245,
+    43.445424,
+    -95.054543,
+    43.500715
+   ],
+   "wikidata": "Q7330197",
+   "charted": false,
+   "area_km2": 22.46,
+   "launches": [
+    "spirit-lake-boat-launch-near-spirit-lake-ia",
+    "spirit-lake-boat-launch-near-spirit-lake-ia-2",
+    "spirit-lake-boat-launch-near-orleans-ia",
+    "templar-park-boat-ramp-ia"
+   ],
+   "water_id": "spirit-lake-ia",
+   "gnis_id": "461850",
+   "geometry_hash": "8fb344547d41cd2ad271d274005bf4c49ac49b198a4292191b8cbbbe192cc040",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "split-rock-lake-ia",
+   "name": "Split Rock Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Frederika"
+   ],
+   "bbox": [
+    -92.238459,
+    42.909732,
+    -92.236292,
+    42.911861
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.026,
+   "launches": [
+    "split-rock-lake-boat-launch-ia"
+   ],
+   "water_id": "split-rock-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "2be81d7dd57ae7e8d002f408b73ffd08427e5b5ab3ae000482b0071cb22f2d38",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spring-lake-ia",
+   "name": "Spring Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Jefferson"
+   ],
+   "bbox": [
+    -94.290958,
+    42.057349,
+    -94.286766,
+    42.069872
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.204,
+   "launches": [
+    "spring-lake-boat-launch-ia",
+    "spring-lake-park-access-ia"
+   ],
+   "water_id": "spring-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "ba4eded67c541851600f5c8657f3c7d257fe5fe22c5d3d83b1d2551891e479ab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "springbrook-creek-ia",
+   "name": "Springbrook Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "Guthrie Center"
+   ],
+   "bbox": [
+    -94.468608,
+    41.769343,
+    -94.431009,
+    41.799165
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "springbrook-lake-access-ia"
+   ],
+   "water_id": "springbrook-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "67fa4aa26ef4ff7d0744da3540e1c647c80b1c5db2964986b3e43edb2aaf1645",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spruce-harbor-ia",
+   "name": "Spruce Harbor",
+   "kind": "bay",
+   "state": "IA",
+   "towns": [
+    "Bellevue"
+   ],
+   "bbox": [
+    -90.435893,
+    42.301138,
+    -90.432869,
+    42.302365
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.011,
+   "launches": [
+    "spruce-creek-county-park-launch-ia"
+   ],
+   "water_id": "spruce-harbor-ia",
+   "gnis_id": null,
+   "geometry_hash": "5b43b1bf99c59e83db9d4236d244315a72b077d39de26dc109d9c7c67ade8fb2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "summit-lake-ia",
+   "name": "Summit Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Creston"
+   ],
+   "bbox": [
+    -94.402269,
+    41.059193,
+    -94.382603,
+    41.085051
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.928,
+   "launches": [
+    "summit-lake-boat-launch-ia"
+   ],
+   "water_id": "summit-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "bdb17a19b85d5c008ccc17db5c2b5dbdd1a45609fb2d2de4dba4073ddaaef551",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "summit-lake-country-club-private-ramp-ia"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "swan-lake-ia",
+   "name": "Swan Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Carroll"
+   ],
+   "bbox": [
+    -94.853802,
+    42.033644,
+    -94.837912,
+    42.041815
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.489,
+   "launches": [
+    "swan-lake-boat-launch-ia"
+   ],
+   "water_id": "swan-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "ef49b953dcb898cf0b98d210b67fb516eecf651bc3e9d51bc04ec536ecb932a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "thayer-lake-ia",
+   "name": "Thayer Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Thayer"
+   ],
+   "bbox": [
+    -94.069232,
+    41.020419,
+    -94.064217,
+    41.02234
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.046,
+   "launches": [
+    "thayer-lake-ramp-ia"
+   ],
+   "water_id": "thayer-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "9a3e17a76b630f0450c9db8940fbc98a47270e230152c413577cbcbd41f6f27e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "trumbull-lake-ia",
+   "name": "Trumbull Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Spencer"
+   ],
+   "bbox": [
+    -94.964795,
+    43.175469,
+    -94.938988,
+    43.210218
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.506,
+   "launches": [
+    "trumbull-lake-boat-launch-ia"
+   ],
+   "water_id": "trumbull-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "19da61e63cba349da880c3ac8c6b0f41d9010acbf1d87e5a83ba1220f8433695",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "turkey-river-ia",
+   "name": "Turkey River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Clermont",
+    "Cresco",
+    "Dover Mills",
+    "Eldorado",
+    "Elgin",
+    "Elkader",
+    "Fort Atkinson",
+    "Garber",
+    "Millville",
+    "Motor",
+    "Osterdock",
+    "Vernon Springs"
+   ],
+   "bbox": [
+    -92.315586,
+    42.706896,
+    -91.017758,
+    43.352803
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "big-spring-trout-hatchery-access-ia",
+    "clermont-canoe-access-ia",
+    "eldorado-bridge-canoe-access-ia",
+    "elkader-access-ia",
+    "fort-atkinson-access-ia",
+    "frieden-park-access-ia",
+    "garber-access-ia",
+    "gilbertson-park-access-ia",
+    "gilbertson-park-narrows-ia",
+    "huntzinger-bridge-access-ia",
+    "kings-bridge-ia",
+    "millville-access-ia",
+    "motor-mill-access-ia",
+    "tessmer-canoe-access-ia",
+    "turkey-river-canoe-access-ia",
+    "turkey-river-park-access-ia",
+    "valley-bridge-access-ia",
+    "vernon-springs-park-ia"
+   ],
+   "water_id": "turkey-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "3b7991d80585c05c7107644f0951fe612e4ed7e33843ba048da8d703b005bb41",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "twelve-mile-lake-ia",
+   "name": "Twelve Mile Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Creston"
+   ],
+   "bbox": [
+    -94.290777,
+    41.052008,
+    -94.249662,
+    41.094053
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.574,
+   "launches": [
+    "twelve-mile-lake-boat-launch-ia"
+   ],
+   "water_id": "twelve-mile-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "7d22df6ee02318ef9f58bbd03b8ac1a6a7b2f9ba78bb6696738fc17a0e5de77e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "union-grove-lake-ia",
+   "name": "Union Grove Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Garwin"
+   ],
+   "bbox": [
+    -92.731159,
+    42.123704,
+    -92.717545,
+    42.136445
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.448,
+   "launches": [
+    "union-grove-lake-boat-launch-near-garwin-ia",
+    "union-grove-lake-boat-launch-near-garwin-ia-2"
+   ],
+   "water_id": "union-grove-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "c98718c5192eccff85bcda0702badead8df7670122d8af708ecd8e7eff684d70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-city-reservoir-ia",
+   "name": "Upper City Reservoir",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Centerville"
+   ],
+   "bbox": [
+    -92.900009,
+    40.702434,
+    -92.886368,
+    40.714762
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.396,
+   "launches": [
+    "upper-city-reservoir-boat-launch-ia"
+   ],
+   "water_id": "upper-city-reservoir-ia",
+   "gnis_id": null,
+   "geometry_hash": "4fd04c1f82b3513db8a0dbc16fa240bf8f5dec49b8fd71376908b31d77331350",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-gar-lake-ia",
+   "name": "Upper Gar Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Arnolds Park"
+   ],
+   "bbox": [
+    -95.125376,
+    43.363811,
+    -95.118877,
+    43.370665
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.15,
+   "launches": [
+    "upper-gar-lake-boat-launch-ia"
+   ],
+   "water_id": "upper-gar-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "f1db3d9909cfaf57d84c5c1f1e098dc2f80924a82ec9d8c443abba33c35c2a75",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-iowa-river-ia",
+   "name": "Upper Iowa River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Bluffton",
+    "Burr Oak",
+    "Canoe",
+    "Chester",
+    "Cresco",
+    "Decorah",
+    "Kendallville",
+    "Lidtke Mill",
+    "New Albin",
+    "Waukon"
+   ],
+   "bbox": [
+    -92.520375,
+    43.291068,
+    -91.229503,
+    43.527331
+   ],
+   "wikidata": "Q7898704",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "244th-ave-bridge-access-ia",
+    "black-hawk-point-ia",
+    "bluffton-access-ia",
+    "canoe-creek-access-ia",
+    "chattahoochie-access-ia",
+    "chester-access-ia",
+    "chimney-rock-park-ia",
+    "iverson-bottoms-ia",
+    "iverson-bridge-access-ia",
+    "kendallville-park-ia",
+    "lidtke-park-ia",
+    "lowell-s-bridge-ia",
+    "lower-dam-lower-access-ia",
+    "lower-dam-upper-access-ia",
+    "lundy-bridge-access-ia",
+    "malanaphy-springs-ia",
+    "old-bluffton-bridge-ia",
+    "plymouth-rock-ia",
+    "red-bud-canoe-access-ia",
+    "seegmiller-ia",
+    "trout-run-access-ia",
+    "upper-dam-lower-access-ia",
+    "upper-dam-upper-access-ia",
+    "upper-iowa-access-ia",
+    "wild-landing-ia",
+    "will-baker-park-ia"
+   ],
+   "water_id": "upper-iowa-river-ia",
+   "gnis_id": "462496",
+   "geometry_hash": "5cdd3de8a0bd3290e2a172b5d70b29e61d607a8905503e49eefe689900494e85",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-pine-lake-ia",
+   "name": "Upper Pine Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Eldora"
+   ],
+   "bbox": [
+    -93.067445,
+    42.372492,
+    -93.054389,
+    42.383313
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.286,
+   "launches": [
+    "upper-pine-lake-boat-launch-ia"
+   ],
+   "water_id": "upper-pine-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "803a973d57b00d696abcd541012d8704ebef752ada27b9f7a60d9084a428605d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-sabula-lake-ia",
+   "name": "Upper Sabula Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Sabula"
+   ],
+   "bbox": [
+    -90.189945,
+    42.070456,
+    -90.176152,
+    42.075767
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": 0.51,
+   "launches": [
+    "north-sabula-access-boat-launch-ia"
+   ],
+   "water_id": "upper-sabula-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "51b7756221ab5c2ad4db6f528b63b931eb0732c9aa49e406109262b2dbf53551",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "vernon-springs-mill-pond-ia",
+   "name": "Vernon Springs Mill Pond",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Vernon Springs"
+   ],
+   "bbox": [
+    -92.152002,
+    43.341946,
+    -92.13791,
+    43.349018
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.189,
+   "launches": [
+    "vernon-springs-mill-pond-boat-launch-ia"
+   ],
+   "water_id": "vernon-springs-mill-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "bdd2c61345cb4b3784f64790ed2ad9bf75483ab8ec5b78cb86fba8c13d54694d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "viking-lake-ia",
+   "name": "Viking Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "Stanton"
+   ],
+   "bbox": [
+    -95.046243,
+    40.961845,
+    -95.027578,
+    40.98037
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.564,
+   "launches": [
+    "viking-lake-boat-launch-near-stanton-ia-3",
+    "viking-lake-boat-launch-near-stanton-ia-4",
+    "viking-lake-campground-access-ia",
+    "viking-lake-boat-launch-near-stanton-ia",
+    "viking-lake-boat-launch-near-stanton-ia-2"
+   ],
+   "water_id": "viking-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "02d8295dbff52b38362f9560e28643608db4178b13e09e31e8666fc16eab5752",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "volga-lake-ia",
+   "name": "Volga Lake",
+   "kind": "reservoir",
+   "state": "IA",
+   "towns": [
+    "West Union"
+   ],
+   "bbox": [
+    -91.781663,
+    42.895379,
+    -91.767485,
+    42.904357
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.545,
+   "launches": [
+    "volga-lake-boat-launch-ia"
+   ],
+   "water_id": "volga-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "c66cdfd4dfd01b0f23802822c97cfef66d4be8c451b19805988b04dc00532550",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "volga-river-ia",
+   "name": "Volga River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Albany",
+    "Fayette",
+    "Lima",
+    "Littleport",
+    "Maynard",
+    "Mederville",
+    "Osborne",
+    "Volga"
+   ],
+   "bbox": [
+    -92.005765,
+    42.737258,
+    -91.270088,
+    42.90697
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "albany-canoe-access-ia",
+    "big-rock-ia",
+    "klocks-island-ia",
+    "littleport-access-ia",
+    "mederville-access-ia",
+    "osborne-access-ia",
+    "twin-bridge-park-ia",
+    "volga-city-park-ia",
+    "volga-river-access-ia",
+    "volga-river-canoe-access-ia"
+   ],
+   "water_id": "volga-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "5aa0b53f38a773930d735dbd4ebc95184d97a6244572a19ad4a9ac39487d921d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wapsipinicon-river-ia",
+   "name": "Wapsipinicon River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Anamosa",
+    "Center Point",
+    "Central City",
+    "De Witt",
+    "Dixon",
+    "Donahue",
+    "Dunkerton",
+    "Eldridge",
+    "Frederika",
+    "Hale",
+    "Independence",
+    "Jesup"
+   ],
+   "bbox": [
+    -92.674027,
+    41.727536,
+    -90.316364,
+    43.50394
+   ],
+   "wikidata": "Q2548910",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "alcock-park-boat-ramp-ia",
+    "aldo-leopold-access-ia",
+    "allen-s-grove-ia",
+    "wapsipinicon-river-boat-launch-near-eldridge-ia",
+    "anamosa-boat-ramp-ia",
+    "bathing-beach-park-ia",
+    "bruce-childs-access-ia",
+    "bruggeman-park-access-ia",
+    "cutshall-access-ia",
+    "gambril-access-ia",
+    "iron-bridge-access-ia",
+    "jungletown-river-access-ia",
+    "knott-s-landing-ia",
+    "lower-troy-mills-access-ia",
+    "massillon-area-ia",
+    "matsell-bridge-ia",
+    "mccausland-access-ia",
+    "newport-mills-ia",
+    "old-highway-63-ia",
+    "olin-access-ia",
+    "otterville-bridge-ia",
+    "oxford-mills-ia",
+    "paris-wapsi-access-ia",
+    "pinicon-ridge-park-ia",
+    "quasqueton-city-access-ia",
+    "riverside-rapids-4-ia",
+    "robert-chic-mcglaughlin-access-ia",
+    "seven-bridges-access-ia",
+    "sherman-park-ia",
+    "siggelkow-park-access-ia",
+    "smoketown-access-ia",
+    "snyder-access-tripoli-ia",
+    "stone-city-ia",
+    "sweet-marsh-access-ia",
+    "syracuse-wildlife-area-ia",
+    "three-elms-access-ia",
+    "troy-mills-wapsipinicon-access-ia",
+    "upper-troy-mills-access-ia",
+    "veteran-s-memorial-park-ia",
+    "veterans-white-water-ia",
+    "wakpicada-ia",
+    "walnut-grove-park-ia",
+    "wapsi-access-ia",
+    "wapsi-bluff-access-ia",
+    "wapsi-river-environmental-center-ia",
+    "wapsie-county-access-ia",
+    "wapsipinicon-state-park-boat-ramp-ia",
+    "zell-access-ia"
+   ],
+   "water_id": "wapsipinicon-river-ia",
+   "gnis_id": "462671",
+   "geometry_hash": "94e93bf1c5753a781a3bdd11aa4736ba6591e82a06750616fd309d4c9376d3d3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-fork-cedar-river-ia",
+   "name": "West Fork Cedar River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Allison",
+    "Finchford",
+    "Parkersburg"
+   ],
+   "bbox": [
+    -93.208248,
+    42.615462,
+    -92.499822,
+    42.938976
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-marsh-wma-ia",
+    "considine-park-ia",
+    "thunderwoman-park-ia",
+    "west-fork-forest-access-ia"
+   ],
+   "water_id": "west-fork-cedar-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "59da31d0682b333a62e9f9898d833333416263b83a6dcfc4bfb2cd774fde203d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-fork-medicine-creek-ia",
+   "name": "West Fork Medicine Creek",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Clinton Center"
+   ],
+   "bbox": [
+    -93.429883,
+    40.525476,
+    -93.304897,
+    40.668119
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "west-fork-medicine-creek-boat-launch-near-clinton-center-ia-2"
+   ],
+   "water_id": "west-fork-medicine-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "4ee7281b80e9c3a0878e3a1a3501ece0dfb52da658ae66da820e39ff582ecec3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-lake-ia",
+   "name": "West Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Osceola"
+   ],
+   "bbox": [
+    -93.833615,
+    41.028767,
+    -93.79711,
+    41.043187
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.161,
+   "launches": [
+    "west-lake-osceola-east-main-ramp-ia",
+    "west-lake-osceola-south-ramp-ia",
+    "west-lake-osceola-west-main-ramp-ia"
+   ],
+   "water_id": "west-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "f94ee479e1170b2a2a4bd70c0572d45ca0c25e08fb84f6c9ffa7aa828f86df2d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-nishnabotna-river-ia",
+   "name": "West Nishnabotna River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Avoca",
+    "Carson",
+    "Corley",
+    "Hancock",
+    "Harlan",
+    "Hastings",
+    "Macedonia",
+    "Manning",
+    "Oakland"
+   ],
+   "bbox": [
+    -95.624007,
+    40.651834,
+    -95.014926,
+    42.035492
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "carson-access-ia",
+    "g18-access-ia",
+    "hancock-access-ia",
+    "lambert-ia",
+    "macedonia-ia",
+    "manning-access-ia",
+    "nishna-bend-access-ia",
+    "oakland-access-ia",
+    "reinig-access-ia",
+    "washburn-landing-ia"
+   ],
+   "water_id": "west-nishnabotna-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "99ddb5e772af08101f798652b87326e3959e2f35b6199515eb7e3cbe7a1db155",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-okoboji-lake-ia",
+   "name": "West Okoboji Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Triboji Beach",
+    "West Okoboji"
+   ],
+   "bbox": [
+    -95.183354,
+    43.349498,
+    -95.126334,
+    43.427919
+   ],
+   "wikidata": "Q14689351",
+   "charted": false,
+   "area_km2": 16.242,
+   "launches": [
+    "west-okoboji-lake-boat-launch-near-west-okoboji-ia",
+    "triboji-boat-ramp-ia"
+   ],
+   "water_id": "west-okoboji-lake-ia",
+   "gnis_id": "462893",
+   "geometry_hash": "a9061bdb8fc0165396408a1f18761f55c20dcfbe66d4287f2ce81f0354045be7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "whiskey-run-creek-ia",
+   "name": "Whiskey Run Creek",
+   "kind": "stream",
+   "state": "IA",
+   "towns": [
+    "Princeton"
+   ],
+   "bbox": [
+    -90.354458,
+    41.672123,
+    -90.339594,
+    41.676673
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "princeton-boat-launch-ia"
+   ],
+   "water_id": "whiskey-run-creek-ia",
+   "gnis_id": null,
+   "geometry_hash": "bf43cecbc0f7a228a094ae018f6c55b55e4851fa3b7cc88c22a9f8a3a0bf1630",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "winnebago-river-ia",
+   "name": "Winnebago River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Creamery",
+    "Fertile",
+    "Forest City",
+    "Lake Mills",
+    "Leland",
+    "Mason City",
+    "Rockford"
+   ],
+   "bbox": [
+    -93.65689,
+    43.0402,
+    -92.940902,
+    43.514018
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ambroson-recreation-area-access-ia",
+    "averydale-access-ia",
+    "clay-banks-forest-access-ia",
+    "dahle-park-access-ia",
+    "east-park-access-ia",
+    "fertile-mill-park-ia",
+    "goranson-access-ia",
+    "kingfisher-hollow-ia",
+    "lande-river-conservation-area-access-ia",
+    "pammel-park-access-ia",
+    "rockford-fossil-prairie-park-access-ia",
+    "winnebago-river-canoe-access-ia"
+   ],
+   "water_id": "winnebago-river-ia",
+   "gnis_id": null,
+   "geometry_hash": "0d09350f23e2dd313dc521a80bb6ee15724b7f1d4f0dcb7c269398ee5add4d49",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "winterfeld-pond-ia",
+   "name": "Winterfeld Pond",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Rock Valley"
+   ],
+   "bbox": [
+    -96.292979,
+    43.210999,
+    -96.29026,
+    43.21369
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.056,
+   "launches": [
+    "winterfeld-pond-boat-launch-ia"
+   ],
+   "water_id": "winterfeld-pond-ia",
+   "gnis_id": null,
+   "geometry_hash": "af761c12dcd1f2071d819b589c637d1eb26ceb9e9313fbfca78143f12d740833",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yellow-river-ia",
+   "name": "Yellow River",
+   "kind": "river",
+   "state": "IA",
+   "towns": [
+    "Ion",
+    "Marquette",
+    "Sixteen",
+    "Volney"
+   ],
+   "bbox": [
+    -91.755323,
+    43.084518,
+    -91.177127,
+    43.16758
+   ],
+   "wikidata": "Q8051804",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "ion-bridge-access-ia",
+    "sixteen-access-ia",
+    "volney-access-ia",
+    "yellow-river-access-ia",
+    "yellow-mississippi-river-access-ia"
+   ],
+   "water_id": "yellow-river-ia",
+   "gnis_id": "463241",
+   "geometry_hash": "ac4ffb5ba09c7a34b1566e467ee14ea64c3e48c20ae55f2f6bab27dc7a9ab049",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yellow-smoke-lake-ia",
+   "name": "Yellow Smoke Lake",
+   "kind": "lake",
+   "state": "IA",
+   "towns": [
+    "Denison"
+   ],
+   "bbox": [
+    -95.326899,
+    42.022272,
+    -95.315849,
+    42.029613
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.16,
+   "launches": [
+    "yellow-smoke-lake-boat-launch-ia"
+   ],
+   "water_id": "yellow-smoke-lake-ia",
+   "gnis_id": null,
+   "geometry_hash": "8794071b06fd6406259ef3ea4836b791ceb82c99734a179e6f9d5d4c22d46dcd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
