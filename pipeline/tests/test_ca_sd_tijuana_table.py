@@ -221,7 +221,9 @@ def test_no_name_or_address_and_no_internal_note_reaches_a_record():
         assert word not in blob
 
 
-def test_the_feed_writes_only_its_own_file_and_its_records_count_under_california(tmp_path):
+def test_the_feed_writes_only_its_own_file_and_its_records_count_under_california(tmp_path, monkeypatch):
+    # the known states are read from data/rules.json and cached; another test may leave a scratch set behind
+    monkeypatch.setattr(S, "states", lambda: {"CA", "AZ", "OR"})
     out, state = tmp_path / "e.json", tmp_path / "s.json"
     assert M.main(["--file", str(FIX), "--out", str(out), "--state", str(state)]) == 0
     assert sorted(p.name for p in tmp_path.iterdir()) == ["e.json", "s.json"]
