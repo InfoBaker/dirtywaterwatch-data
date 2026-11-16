@@ -9,8 +9,9 @@ Source
   DEQ's notes), sample_date, microcystin and anatoxin results, date_observed, the county and a point. The item's terms,
   quoted in raw.licence: "Data intended for reference and planning purposes only ... Data collected and/or created by
   members of the public as a public source dataset. DEQ cannot verify accuracy or contents of publicly editable data."
-  On 2026-11-14: 445 rows (2019 to 2026, 77 in 2026); 322 carry an issued advisory date; no row was at Caution or
-  Closure (the season's advisories had all been lifted or lapsed).
+  On 2026-11-16 (03:19Z): 445 rows (2019 to 2026, 77 in 2026); 316 carry an issued advisory date (DEQ's 2023 year-first
+  dates read), giving 314 advisories, 294 with DEQ's lift date; no row was at Caution or Closure (the season's
+  advisories had all been lifted or lapsed).
 
 Safe fields (requested by name; nothing else is read or saved): globalid, name, county, agency, sample_date,
   advisory_lvl, advisory_issued, advisory_lifted, date_observed, microcystin, anatoxin, public_accessible and the point
@@ -68,6 +69,22 @@ LICENCE = ("Data intended for reference and planning purposes only. DEQ takes no
            "outside suggested use parameters. Data collected and/or created by members of the public as a public source "
            "dataset. DEQ cannot verify accuracy or contents of publicly editable data.")
 DATE = re.compile(r"(?<![\d/.])(\d{1,2})[/.](\d{1,2})(?:[/.](\d{4}|\d{2}))?(?![\d/])")
+# DEQ wrote its 2023 notes year first ("2023/07/06", "2023-07-05") and once month-day-year with dashes ("09-06-2023"):
+# only these forms, with a four-digit year that fixes the order, are rewritten M/D/YYYY before DATE reads them; any
+# other form ("20203/07/17") is left unread, never guessed (go-live audit 2026-11-16, fix 1a)
+YEAR_FIRST = re.compile(r"(?<![\d/.-])(\d{4})[/-](\d{1,2})[/-](\d{1,2})(?![\d/.-])")
+DASHED = re.compile(r"(?<![\d/.-])(\d{1,2})-(\d{1,2})-(\d{4})(?![\d/.-])")
+# a date at the opening of the lift note labelled at once as a sampling or test ("7/28 sampled", "8/10 test results
+# pending") is that step's date, never the lift
+STEP_LABEL = re.compile(r"[\s:,.-]*(?:sampl|test|result|collect)", re.I)
+
+
+def normal_dates(text: str | None) -> str:
+    """DEQ's year-first and dashed dates rewritten in its usual M/D/YYYY form; everything else unchanged."""
+    t = YEAR_FIRST.sub(lambda m: f"{int(m.group(2))}/{int(m.group(3))}/{m.group(1)}", str(text or ""))
+    return DASHED.sub(lambda m: f"{int(m.group(1))}/{int(m.group(2))}/{m.group(3)}", t)
+
+
 NO_ADVISORY = re.compile(r"\bno advisory\b|\bnot issued\b", re.I)
 WORDS = ("caution", "closure", "toxin")
 # a lift note that is not a completed lift ("lift pending 8/3", "will lift 8/3 if no new info", "not lifted 8/3",
@@ -103,7 +120,7 @@ def observed_year(ms) -> int | None:
 
 def dates_in(text: str | None, year: int | None) -> list[str]:
     out = []
-    for m in DATE.finditer(text or ""):
+    for m in DATE.finditer(normal_dates(text)):
         mo, dy = int(m.group(1)), int(m.group(2))
         yr = m.group(3)
         y = (int(yr) + 2000 if len(yr) == 2 else int(yr)) if yr else year
@@ -121,9 +138,11 @@ def lift_dates(text: str | None, year: int | None) -> list[str]:
     none. The note is read clause by clause: when it says "lifted" anywhere, only the dates in a clause that says so
     count (each date belongs to the label written before it, or with none before it to the label after it, so in
     "sampled 7/28 then lifted 8/3" only 8/3 is the lift); a planned, scheduled or expected lift is none; otherwise a clause
-    of bare dates, or one that names no other dated step, is the lift date (the field is DEQ's lift field). A date
-    labelled as a sampling, a test or a report is never the lift date."""
-    t = str(text or "")
+    of bare dates, or one that names no other dated step, is the lift date (the field is DEQ's lift field), and a date
+    that opens the note is DEQ's lift date whatever reason follows it ("9/14 based on ... test results", "2023/08/17 no
+    new observations"; go-live audit 2026-11-16, fix 1b), unless the word right after it labels it a sampling or test
+    ("7/28 sampled"). Any later date labelled as a sampling, a test or a report is never the lift date."""
+    t = normal_dates(text)
     if not t or NOT_A_LIFT_MARK in t or NOT_A_LIFT.search(t):
         return []
     clauses = [c for c in re.split(r"[;,\n]|\.\s", t) if c.strip()]
@@ -151,7 +170,12 @@ def lift_dates(text: str | None, year: int | None) -> list[str]:
                 if (before[-1] if before else after[0] if after else None) == "lift":
                     out += dates_in(d.group(0), year)
         return out
-    return [d for c in clauses if not OTHER_DATE_WORD.search(c) for d in dates_in(c, year)]
+    out = []
+    first = DATE.match(t, len(t) - len(t.lstrip()))
+    if first and not STEP_LABEL.match(t, first.end()):
+        out += dates_in(first.group(0), year)
+    out += [d for c in clauses if not OTHER_DATE_WORD.search(c) for d in dates_in(c, year)]
+    return list(dict.fromkeys(out))
 
 
 def water_name(name: str) -> tuple[str, str | None]:
