@@ -621,7 +621,9 @@ def test_missing_waters_list_leaves_out_the_national_lists_names():
             for n in [w.get("name"), w.get("key"), *(w.get("names_seen") or []), *(w.get("gnis_names") or [])] if n}
     assert d["state"] == "SC" and d["waters"] == len(d["rows"])
     unresolved = [r for r in d["rows"] if not r.get("resolved")]
-    assert not [r["name"] for r in unresolved if k(r["name"]) in held]
+    # a row with its county may share a name the list holds elsewhere in the state (SC is a county-field state: the
+    # status build places a report only on a record reaching its county, so Spartanburg's Maple Creek is its own water)
+    assert not [r["name"] for r in unresolved if k(r["name"]) in held and not r.get("county")]
 
 
 def test_adding_the_states_leaves_the_other_states_lists_as_they_were():

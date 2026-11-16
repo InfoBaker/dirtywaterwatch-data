@@ -5,12 +5,17 @@ for the state: research/<st>/receiving-waters-missing.json, one row per name and
 Inputs: the events files this build writes (data/build/events/): Delaware's de-dnrec-derns-recent-releases (the waters a
 release's text names; a release DNREC's form marks to ground only, with no water in its text, is left out) and
 de-dnrec-recreational-water (the water each beach lies on); South Carolina's sc-florence-sso-notices and sc-des-hab.
+South Carolina's DES overflow list (sc-des-overflow-list, MERGE) is then merged into the file by
+scripts/report_names_merge.py: each report judged as the status build judges it, one row per name and county (the list's
+county; the list gives no point) with the towns of the operator its permit names (the names pass chooses among the
+state's waters of a name by them), the file's other rows and resolved names kept with every field. When Florence's
+notices or the HAB layer are not built here, their rows in the file are kept as they are and only the list is merged.
 Each row: the name as the records give it, the county (the record's own, else none), the number of records and how
 many are open, up to five points ([lat, lon], 0.001 degree), towns, sources. A name the national list holds for the
 state (its name, key, names seen or GNIS names) is listed under "resolved" with "a water record already holds the
 name" when one is listed there.
 
-Run from the repository root: pipeline/.venv/bin/python -I scripts/de_sc_report_water_names.py DE|SC
+Run from the repository root: pipeline/.venv/bin/python -I scripts/de_sc_report_water_names.py DE|SC [--events DIR]
 """
 from __future__ import annotations
 
@@ -25,6 +30,7 @@ EVENTS = ROOT / "data" / "build" / "events"
 SOURCES = {"DE": ["de-dnrec-derns-recent-releases", "de-dnrec-recreational-water"],
            "SC": ["sc-florence-sso-notices", "sc-des-hab"]}
 OPEN = {"ongoing", "advisory_active"}
+MERGE = {"SC": ["sc-des-overflow-list"]}
 
 
 def k(n: str | None) -> str:
@@ -32,7 +38,44 @@ def k(n: str | None) -> str:
 
 
 def main(argv) -> int:
+    global EVENTS
     st = argv[0].upper()
+    if "--events" in argv:
+        EVENTS = Path(argv[argv.index("--events") + 1])
+    if all((EVENTS / f"{sid}.json").exists() for sid in SOURCES[st]):
+        legacy(st)
+    elif st not in MERGE:
+        print(f"{st}: the events files of {', '.join(SOURCES[st])} are not all built; nothing written")
+        return 1
+    else:
+        print(f"{st}: {', '.join(SOURCES[st])} not all built; their rows in the file are kept as they are")
+    if st in MERGE:
+        return merge_lists(st)
+    return 0
+
+
+def merge_lists(st: str) -> int:
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import report_names_merge as M
+    path = ROOT / "research" / st.lower() / "receiving-waters-missing.json"
+    resolver = None
+    judged, read = {}, {}
+    for sid in MERGE[st]:
+        recs, line = M.read_feed(EVENTS, sid)
+        read[sid] = line
+        if recs is None:
+            continue
+        resolver = resolver or M.make_resolver(st)
+        judged[sid] = M.judge(recs, st, resolver, towns_of=M.operator_towns(st))
+    if not judged:
+        print(f"{st}: {', '.join(MERGE[st])} not built; nothing merged")
+        return 1
+    counts = M.merge(path, st, judged, read)
+    print(f"{path.relative_to(ROOT)}: merged {', '.join(judged)}: {counts}")
+    return 0
+
+
+def legacy(st: str) -> int:
     nat = json.loads((ROOT / "data" / "receiving-waters-national.json").read_text())
     held = {}
     for w in (nat["states"].get(st) or {}).get("waters", []):
