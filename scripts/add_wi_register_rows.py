@@ -8,8 +8,8 @@ The law (research/wi/report.md section 2.1 in the site repository; research/wi/p
   - s. NR 210.21(5), Wis. Adm. Code: every sanitary sewer overflow and treatment facility overflow is publicly noticed
     "promptly", by the communications the operator's emergency response plan names (NR 210.23(4)(f)). The DNR's form
     3400-184 instructions: "At a minimum, if an overflow is to a surface water, a daily newspaper of general circulation
-    shall be notified." No web posting and no hour deadline. The official code page did not answer the build's client
-    (docs.legis.wisconsin.gov, 2026-11-03 and 2026-11-14), so the wording rests on the DNR's instructions.
+    shall be notified." No web posting and no hour deadline. The wording rests on the DNR's instructions; the code
+    page itself (docs.legis.wisconsin.gov) answered GitHub's runner on 2026-11-16 (run 43789054085).
   - The overflow is reported to the DNR within 24 hours and on form 3400-184 within five business days through
     Switchboard (permittees only); the DNR publishes none of it.
   - 40 CFR 122.38: the two Great Lakes Basin combined sewer permittees (MMSD WI0036820, Superior WI0025593) give
@@ -23,12 +23,15 @@ Rows
     counter (watched, never an event), the CSO impacted-waters page, the 2018 CSO public notification plan (image-only
     notice sections), the four-hour notice (no web channel found), the Water Drop Alert texts (pre-storm requests).
   - Superior: its CSO notification page and the annual notice.
+  - MMSD's overflows page (each year's overflows with their volumes and the post-storm reports): watched, not read.
   - Statewide: the DNR's Switchboard reports (login), its SSO reporting page, the SERTS open-spill list and the BRRTS
-    search, Wisconsin Beach Health (report pages and map layer), the DHS algae page, the City of Milwaukee Health
-    Department's beach report, EPA's overflow tables (no Wisconsin report), Brookfield's press releases, Swim Guide.
-  Several Wisconsin government hosts (apps.dnr.wi.gov, dnrmaps.wi.gov, docs.legis.wisconsin.gov) and the City of
-  Superior's site did not answer the build's client on 2026-11-14 (connection timed out; a second network was refused):
-  their rows are monitored, so the refresh records whether they answer, and they make no records.
+    search, Wisconsin Beach Health (the map layer, read by the wi-dnr-beach-health feed, and the report page), the DHS
+    algae page, the City of Milwaukee Health Department's beach report, EPA's overflow tables (no Wisconsin report),
+    Brookfield's press releases, Swim Guide.
+  The Wisconsin state hosts (apps.dnr.wi.gov, dnrmaps.wi.gov, docs.legis.wisconsin.gov) and the City of Superior's site
+  answer GitHub's runner, where the pipeline runs (runs 43788047052, 43788371768, 43788396939 and 43789054085,
+  2026-11-16); the developer's machine could not open a connection to them, which is not a barrier of the source. The
+  City of Milwaukee's beach pages answered the runner 403 (a browser challenge): that is the source's barrier.
   Every monitored Wisconsin row is metadata_only (notification_pages): no response body is saved and the snapshot keeps
   only the text's hash, so a page carrying a name, telephone or address is never stored.
 A rerun replaces every wi- row it makes. Validated before writing.
@@ -50,18 +53,16 @@ from ingest import notification_pages as NP  # noqa: E402
 REGISTER = ROOT / "data" / "notice-channels"
 DIS = ROOT / "data" / "dischargers.json"
 CHECKED = "2026-11-14"
+RUNNER_READ = "2026-11-16"
 FEED = "wi-mmsd-storm-updates"
 LAW = "wi-law-nr-210-21"
 INSTR = "https://dnr.wisconsin.gov/sites/default/files/topic/Wastewater/WW_SSOFormInstructions.pdf"
 ECHO = "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 # rows that would carry people's names (SERTS's coordinator, a health department's contact) are not fetched until a reader
 # keeps only safe fields: the register's page monitor saves the page it reads (Astra review 2026-11-14 P1-6)
-UNREACHED_NOT_WATCHED = (" On 2026-11-14 and 2026-11-15 the host did not answer the build's client (connection timed "
-                         "out), nor a second network on 2026-11-14 (refused). Watched for availability only: its pages can "
-                         "carry staff names, so no page text or body is kept (metadata_only) and no record is made until a "
-                         "reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).")
-UNREACHED = (" On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second network "
-             "(connection refused); the row is watched so the refresh records when it answers.")
+NOT_WATCHED_TEXT = (" Watched for availability only: its pages can carry staff names, so no page text or body is kept "
+                    "(metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra "
+                    "re-review 2026-11-15 P1-7, P2-11).")
 Q_NR210 = ('s. NR 210.21(5), Wis. Adm. Code, as the DNR\'s form 3400-184 instructions give it: "All overflows (SSOs & '
            'TFOs) are required to be public noticed according to s. NR 210.21(5), Wis. Adm. Code. Notification shall '
            'occur according to a facility\'s emergency response plan in their CMOM and occur promptly after any overflow '
@@ -108,6 +109,19 @@ AGENCY = [
               "the City of Milwaukee Health Department's beach report and the notification plan. A standing list, not "
               "an event notice."),
      "sources": ["wi-mmsd-cso-impacted-waters"]},
+    {"id": "wi-mmsd-overflows-page", "operator_id": MMSD, "name": "Milwaukee Metropolitan Sewerage District",
+     "permit": "WI0036820", "channel_kind": "operator_page",
+     "urls": ["https://www.mmsd.com/what-we-do/wastewater-treatment/overflows"], "method": "html",
+     "legal_basis": Q_122_38, "basis_kind": "law", "monitored": True, "unmonitored_reason": None,
+     "publishes": "notices", "records": False, "availability_only": True, "every_hours": 24,
+     "noun": "Operator page", "checked": RUNNER_READ,
+     "note": ("MMSD's overflows page: each 2026 overflow by its dates with the volumes by kind and a link to the "
+              "post-storm report to the DNR (April 14 to 19: combined 2,703,000,000 gallons, separate 11,590,728, "
+              "treatment facility 15,300; August 1: combined 96,000,000; September 3: combined 331,500, as GitHub's "
+              "runner read it on 2026-11-16), the 2025 annual CSO notification report and the year's totals. The same "
+              "overflows reach us through the Storm Update posts (wi-mmsd-storm-updates); the page and its reports "
+              "are not read yet."),
+     "sources": [FEED]},
     {"id": "wi-mmsd-cso-notification-plan", "operator_id": MMSD, "name": "Milwaukee Metropolitan Sewerage District",
      "permit": "WI0036820", "channel_kind": "operator_page",
      "urls": ["https://www.mmsd.com/application/files/1116/4553/8883/MMSD_CSO_Public_Notification_Plan_web.pdf"],
@@ -138,17 +152,20 @@ AGENCY = [
      "method": "html", "legal_basis": Q_122_38, "basis_kind": "law", "monitored": True, "unmonitored_reason": None,
      "publishes": "notices", "records": False, "every_hours": 24,
      "note": ("Superior's combined sewer overflow page: a 2026 table with columns for the location, receiving water, "
-              "affected access areas, start, end and estimated volume, read empty on 2026-11-09, with the annual "
-              "notices linked (2025: no combined sewer overflow; outfalls CSO 2 to Superior Bay, CSO 5 to the Nemadji "
-              "River and CSO 6 to the St. Louis River). Not ingested: no filled row has been seen to test a reader on."
-              + UNREACHED),
+              "affected access areas, start, end and estimated volume, with two blank rows and no filled row when "
+              "GitHub's runner read it on 2026-11-16 (\"Last Updated 07/14/2022\"), and the annual notices linked "
+              "(2025: no combined sewer overflow; outfalls CSO 2 to Superior Bay, CSO 5 to the Nemadji River and CSO 6 "
+              "to the St. Louis River). The page says the City also announces overflows by press release to the "
+              "Superior Telegram. Not ingested yet: no filled row has been seen to test a reader on, and blank rows "
+              "are not a finding of no overflow."),
      "sources": ["wi-superior-cso"]},
     {"id": "wi-superior-annual-notice", "operator_id": SUPERIOR, "name": "City of Superior", "permit": "WI0025593",
      "channel_kind": "operator_page", "urls": ["https://www.superiorwi.gov/DocumentCenter/View/16616"],
      "method": "pdf", "legal_basis": Q_122_38, "basis_kind": "law", "monitored": True, "unmonitored_reason": None,
      "publishes": "documents", "records": False, "every_hours": 168,
      "note": ("Superior's 2025 annual CSO notice (revised July 2026), which its page links as the public notification "
-              "plan: zero combined sewer overflows in 2025; it also covers the Parkland satellite system." + UNREACHED),
+              "plan: zero combined sewer overflows in 2025; it also covers the Parkland satellite system. It answered "
+              "GitHub's runner on 2026-11-16 (a PDF)."),
      "sources": ["wi-superior-cso"]},
     {"id": "wi-dnr-switchboard-sso-reports", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (Switchboard SSO and TFO reports)",
@@ -178,8 +195,9 @@ AGENCY = [
      "note": ("The DNR's list of open spill incidents of every substance, with CSV and Excel buttons: 271 open on "
               "2026-11-09, among them a sewage spill at Ashland (incident date, county, municipality, substance, "
               "cause, the coordinator's name). Closed incidents move to the BRRTS search, so a row that leaves the list "
-              "has not ended. Not ingested: its export, paging and the share of sewage overflows it holds were not "
-              "tested." + UNREACHED_NOT_WATCHED),
+              "has not ended. It answered GitHub's runner on 2026-11-16. Not ingested yet: its export, paging and the "
+              "share of sewage overflows it holds were not tested, and the coordinator's name must be dropped before "
+              "anything is saved." + NOT_WATCHED_TEXT),
      "sources": ["wi-wdnr-serts-open-spills"]},
     {"id": "wi-dnr-brrts-search", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (BRRTS on the Web search)",
@@ -188,26 +206,32 @@ AGENCY = [
      "publishes": "notices", "records": False, "availability_only": True, "every_hours": 24,
      "noun": "Voluntary page",
      "note": ("The search form for closed spill and cleanup cases, where SERTS incidents go when they close; no "
-              "closed sewage query was tested." + UNREACHED_NOT_WATCHED),
+              "closed sewage query was tested. It answered GitHub's runner on 2026-11-16." + NOT_WATCHED_TEXT),
      "sources": ["wi-wdnr-brrts-closed-spills"]},
     {"id": "wi-dnr-beach-health", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (Wisconsin Beach Health)", "channel_kind": "state_alert_page",
      "urls": ["https://apps.dnr.wi.gov/beachhealth/"], "method": "html", "legal_basis": None,
      "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None, "publishes": "status",
      "records": False, "availability_only": True, "every_hours": 24, "noun": "Voluntary page",
-     "note": ("The DNR's beach report: advisories and closures with their reason (E. coli, algae) and dates, Great "
-              "Lakes beaches under the BEACH Act and the inland beaches local health departments choose to report, in "
-              "season (Memorial Day to Labor Day). Not ingested: its export and the map layer's keys were not read."
-              + UNREACHED_NOT_WATCHED),
+     "note": ("The DNR's beach report (Beach Name, Status, Reason, Date of Advisory, Nearest Town): advisories and "
+              "closures with their reason (E. coli, algae) and dates, Great Lakes beaches under the BEACH Act and the "
+              "inland beaches local health departments choose to report, in season (Memorial Day to Labor Day). Read "
+              "by GitHub's runner on 2026-11-16: 453 beaches, one algae advisory (Gile Flowage Beach, September 17, "
+              "2026) and one algae closure (Lake Kegonsa State Park Beach, September 11), the rest closed for the "
+              "season. The same statuses, reasons and dates are on the beach map layer, which the wi-dnr-beach-health "
+              "feed reads; the page adds the nearest town and 14 beaches the layer gives no point for." + NOT_WATCHED_TEXT),
      "sources": ["wi-wdnr-beach-health"]},
     {"id": "wi-dnr-beach-layer", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (beach monitoring map layer)", "channel_kind": "feed",
      "urls": ["https://dnrmaps.wi.gov/arcgis2/rest/services/OGW_Beach_Monitoring/BEACH_MONITORING_LOCATIONS/MapServer/1"],
-     "method": "json", "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
-     "publishes": "status", "records": False, "availability_only": True, "every_hours": 24,
-     "noun": "Data feed",
-     "note": ("The ArcGIS layer behind the beach map: 441 beaches with STATUS, BEACH_ACTION, ISSUED, SAMPLEDATE and "
-              "ECOLIVALUE (2026-11-03), \"No Data Available\" off season." + UNREACHED_NOT_WATCHED),
+     "method": "json", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
+     "unmonitored_reason": "feed_ingested", "feed_source_id": "wi-dnr-beach-health", "publishes": "status",
+     "noun": "Data feed", "checked": RUNNER_READ,
+     "note": ("The ArcGIS layer behind the beach map: 441 beaches when GitHub's runner read it on 2026-11-16, each "
+              "with the Department's action (Advisory, Closed, End), reason, Date of Advisory and point; one algae "
+              "advisory and one algae closure in effect, the rest closed for the season. Read by the "
+              "wi-dnr-beach-health feed: each advisory or closure is shown at its beach while the Department lists it, "
+              "an algae reason as a bloom."),
      "sources": ["wi-wdnr-beach-health"]},
     {"id": "wi-dhs-algae", "agency": "Wisconsin Department of Health Services",
      "name": "Wisconsin Department of Health Services (harmful algal blooms)", "channel_kind": "state_alert_page",
@@ -219,13 +243,16 @@ AGENCY = [
      "sources": ["wi-hab-program"]},
     {"id": "wi-milwaukee-health-beaches", "agency": "City of Milwaukee Health Department",
      "name": "City of Milwaukee Health Department (beach water report)", "channel_kind": "local_health_page",
-     "urls": ["https://city.milwaukee.gov/Health/Services-and-Programs/disease-Control-and-Environment/recreational-Water/Beaches"],
+     "urls": ["https://city.milwaukee.gov/Health/Services-and-Programs/disease-Control-and-Environment/recreational-Water/Beaches",
+              "https://city.milwaukee.gov/health/information/environmental-health/beaches"],
      "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "bot_wall",
+     "checked": RUNNER_READ,
      "publishes": "status", "records": False, "noun": "Voluntary page",
      "note": ("The Health Department samples Bradford, McKinley and South Shore beaches, near the combined sewer area, "
-              "daily from Memorial Day to Labor Day and posts a water report (MMSD's impacted-waters page links it). "
-              "On 2026-11-15 the page answered the site's client with a browser challenge (HTTP 403, \"Just a moment\"), "
-              "which this site does not get around: not read, and its advisories are not shown."),
+              "in season (Monday, Wednesday and Friday, as independent research read its page on 2026-11-15) and posts a water report (MMSD's impacted-waters page links it). "
+              "On 2026-11-16 both of its addresses answered GitHub's runner, where the pipeline runs, with HTTP 403 (a "
+              "browser challenge, as on 2026-11-15), which we do not get around: not read, and its advisories are not "
+              "shown. The same beaches are in the DNR's beach system when the Department lists them."),
      "sources": ["wi-mmsd-cso-impacted-waters"]},
     {"id": "wi-newspaper-notices", "agency": "Wisconsin sewer system owners",
      "name": "Wisconsin sewer system owners (newspaper notices under NR 210.21(5))", "channel_kind": "news_page",

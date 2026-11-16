@@ -300,12 +300,18 @@ def test_register_rows_per_operator_and_the_state_channels():
     assert reg["wi-superior-cso-page"]["monitored"] is True and reg["wi-superior-cso-page"]["records"] is False
     # pages that can carry staff names are watched for availability only, with no text or body kept (Astra review
     # P1-6; re-review 2026-11-15 P1-7, P2-11), and Milwaukee's beach page's bot wall is a barrier, not worked around
-    for cid in ("wi-dnr-serts-open-spills", "wi-dnr-brrts-search", "wi-dnr-beach-health", "wi-dnr-beach-layer"):
+    for cid in ("wi-dnr-serts-open-spills", "wi-dnr-brrts-search", "wi-dnr-beach-health", "wi-mmsd-overflows-page"):
         assert reg[cid]["monitored"] is True and reg[cid]["records"] is False and reg[cid]["metadata_only"] is True
         assert reg[cid]["availability_only"] is True
+    # the beach layer answers GitHub's runner and is read by the wi-dnr-beach-health feed (2026-11-16)
+    layer = reg["wi-dnr-beach-layer"]
+    assert layer["feed_source_id"] == "wi-dnr-beach-health" and layer["unmonitored_reason"] == "feed_ingested"
+    # a host the developer's machine could not reach is never recorded as the source's barrier
+    for c in reg.values():
+        assert not re.search(r"timed out|refused|did not answer|could not be reached", c.get("note") or "", re.I), c["id"]
     mb = reg["wi-milwaukee-health-beaches"]
     assert mb["monitored"] is False and mb["unmonitored_reason"] == "bot_wall" and mb["barrier"] == "bot_wall"
-    assert "headers" not in mb
+    assert "headers" not in mb and "GitHub's runner" in mb["note"] and "403" in mb["note"]
     assert not any(c["barrier"] == "print_only" for c in reg.values())
     named = {c["operator_id"] for c in reg.values() if c.get("legal_basis") and "122.38" in c["legal_basis"]}
     assert {"wi-mmsd", "wi-superior-sewage-disposal-system"} <= named   # every CSO permittee named

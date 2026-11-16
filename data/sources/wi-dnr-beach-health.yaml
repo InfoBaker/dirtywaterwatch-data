@@ -1,0 +1,44 @@
+id: "wi-dnr-beach-health"
+name: "Wisconsin DNR Beach Health: the beach advisories and closures in effect (beach map layer)"
+url: "https://dnrmaps.wi.gov/arcgis2/rest/services/OGW_Beach_Monitoring/BEACH_MONITORING_LOCATIONS/MapServer/1"
+homepage: "https://apps.dnr.wi.gov/beachhealth/"
+kind: "arcgis"
+level: "state"
+# Ingester: pipeline/ingest/wi_dnr_beach_health.py (source id wi-dnr-beach-health), a polled snapshot, rules only.
+# Read by GitHub's runner on 2026-11-16 (runs 43788047052 at 01:45Z and 43788371768 at 01:48Z, one request each with
+#   the pipeline's user agent): 441 beaches (returnCountOnly 441), 439 with BEACH_ACTION "End" and STATUS "Closed for
+#   season", one "Advisory" / "Algae" (Gile Flowage Beach, ISSUED "17-SEP-26 - ") and one "Closed" / "Algae" (Lake
+#   Kegonsa State Park Beach, "11-SEP-26 - "); MAP_STATUS "No Data Available" on all 441. Two records, both blooms.
+# Fields: BEACH_ACTION is the report table's Status (Advisory, Closed, End), STATUS its Reason (E. coli, Algae, Closed
+#   for season), ISSUED its Date of Advisory as text ("DD-MON-YY - " in effect, "DD-MON-YY - DD-MON-YY" ended);
+#   MAP_STATUS is the map symbol, which follows the age of the last sample (Open, Advisory, Closed, Other Status drawn
+#   as Status Unknown, Closed for season, No Data Available); SAMPLEDATE is the last sample's time.
+# The report page (https://apps.dnr.wi.gov/beachhealth/, Beach Name | Status | Reason | Date of Advisory | Nearest
+#   Town) listed the same two with the same dates among 453 beaches: its dates match the layer's on every beach both
+#   hold; it adds the nearest town and 14 beaches with no point on the layer (all "End" / "Closed for season" that
+#   day). It is not read. The service's other layer, OGW_Beach_Monitoring_Locations_Ext/MapServer/0, held 366 beaches
+#   and not Gile Flowage's advisory: not read.
+# Records: a beach whose action is Advisory or Closed (or whose map symbol is, the stricter reading) is the
+#   Department's own advisory, shown while the Department lists it; an algae reason is a bloom (hab_advisory), else
+#   beach_closure or beach_advisory. Started at the Date of Advisory where ISSUED gives it as DD-MON-YY (day, Central
+#   time), else at the first read with the text kept. "End", "Open", "Closed for season", "Status Unknown" and "No Data
+#   Available" make no record and are never shown as clean. Each beach is one marker at the layer's point (three
+#   decimals); a lake is never coloured whole for one beach.
+# Fields read: OBJECTID, BEACH_SEQ_NO, OGW_BEACH_NAME_TEXT, STATUS, BEACH_ACTION, MAP_STATUS, ISSUED, SAMPLEDATE and the
+#   point (outSR 4326); STATIONNAME, ECOLIPRONAME, ECOLIVALUE and WATERTEMP are not requested. A read that is cut off,
+#   fails, errs, lacks a field, repeats a beach, returns fewer than 200 beaches or under 80 per cent of the last
+#   complete read, or returns fewer beaches than the layer counts ends nothing; the first complete read that no longer
+#   shows an advisory ends it at that read.
+cadence: "In season the Department posts advisories as local health departments and its own samplers report them (Memorial Day to Labor Day); out of season the layer keeps the last status. Read hourly with the refresh once Wisconsin is live."
+license: "none stated"
+attribution: "Wisconsin Department of Natural Resources, Office of Great Waters (Wisconsin Beach Health)"
+enabled: true
+role: "advisories"
+event_types: ["beach_advisory", "beach_closure", "hab_advisory"]
+states: ["WI"]
+registry_ids: ["wi-wdnr-beach-health"]
+access: ["arcgis"]
+access_detail: "MapServer layer 1 query (where 1=1, the eight fields above, outSR 4326) and its returnCountOnly count, no token; maxRecordCount 2000."
+machine_readable: true
+legal_basis: "BEACH Act (33 U.S.C. 1346) for the Great Lakes beaches; NR 102 recreational criteria. The inland beaches are reported voluntarily by local health departments."
+checked: "2026-11-16"

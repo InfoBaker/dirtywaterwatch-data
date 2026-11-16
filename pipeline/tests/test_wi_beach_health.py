@@ -350,3 +350,19 @@ def test_the_feed_is_in_the_ingest_list_and_its_source_file_and_register_row_nam
     assert row["feed_source_id"] == "wi-dnr-beach-health" and row["unmonitored_reason"] == "feed_ingested"
     assert row["barrier"] is None
     assert "wi_dnr_beach_health" in (ROOT / "Makefile").read_text()
+
+
+def test_the_record_no_longer_calls_a_runner_readable_wisconsin_source_unreachable():
+    bad = re.compile(r"timed out|refused|did not answer|could not be reached|reset the connection", re.I)
+    t = (ROOT / "research" / "wi" / "state-text.md").read_text()
+    assert not bad.search(t) and "not shown yet" not in t
+    assert "one algae advisory, at Gile Flowage Beach from September 17" in t and "shown as an algal bloom" in t
+    assert not re.search(r"\b(safe|clean)\b", t, re.I)
+    for s in json.loads((ROOT / "research" / "wi" / "sources.json").read_text()):
+        assert not bad.search(json.dumps(s)), s["id"]
+        if s["status"] == "unreachable":
+            assert "GitHub's runner" in s["status_reason"] and "403" in s["status_reason"], s["id"]
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())["red"]["by_state"]["WI"]
+    assert "Wisconsin Beach Health" in rules["source"] and "algal bloom" in rules["basis"]
+    for p in (ROOT / "data" / "sources").glob("wi-*.yaml"):
+        assert not bad.search(p.read_text()), p.name
