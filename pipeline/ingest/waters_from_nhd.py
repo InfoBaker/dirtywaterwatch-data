@@ -2138,6 +2138,17 @@ REMAINDER_ON = {
         "why": "NHD's South Fork Spring River lay 81 per cent on openboatlaunch's south-spring-river-ar, "
                "OpenStreetMap's name for the same river; a record of another name, so the NHD build never cut it "
                "(AR go-live audit 2026-11-15, P2-3)"},
+    # Wyoming (WY go-live audit 2026-11-16, P1-2): "drop": True is a ruling that the NHD record is another water of the
+    # name, built for a report of the water `to`: it is dropped at every write whatever its outline, and the target
+    # rows naming it go to `to` (the report name is an alias of `to` in data/water-aliases.json, so a rebuild maps it)
+    ("WY", 1598179): {
+        "to": "bighorn-lake-wy", "on": [], "drop": True,
+        "why": "NHD's Bighorn Reservoir (0.63 km2, Bighorn Mountains) is not the agencies' 'Bighorn Reservoir', whose "
+               "advisory is at Horseshoe Bend on Bighorn Lake, 70 km away (WY go-live audit 2026-11-16, P1-2)"},
+    ("WY", 1589039): {
+        "to": "granite-springs-reservoir-wy", "on": [], "drop": True,
+        "why": "NHD's Granite Reservoir (0.014 km2, Wind River Range) is not the agencies' 'Granite Reservoir', Curt "
+               "Gowdy State Park's Granite Springs Reservoir (WY go-live audit 2026-11-16, P1-2)"},
 }
 SIDE_CHANNEL_M = 1000          # a rest piece this close to the river record `to` is a side channel or braid of it
 
@@ -2172,11 +2183,21 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
     shorter than REMAINDER_MIN_KM is dropped, and the target rows naming it go to the river. A row whose river has no
     outline here is left as it is. Changes rows and targets in place; returns the actions."""
     when = when or now_iso()[:10]
-    actions, moved, drop = [], {}, set()
+    actions, moved, drop, other_water = [], {}, set(), set()
     for i, w in enumerate(rows):
         parent = w.get("covers_part_of")
         if not w.get("geometry") or not (parent or _ruled(w)):
             continue                   # a record that is no remainder is measured only when a hand ruling names it
+        st = str(w.get("state") or "").upper()
+        gone = (REMAINDER_ON.get((st, gnis_num(w.get("gnis_id")))) if w.get("gnis_id") else None) \
+            or REMAINDER_ON.get((st, w.get("slug")))
+        if gone and gone.get("drop"):  # another water of the name, built for a report of `to`: no outline is measured
+            drop.add(i)
+            moved[w["slug"]] = gone["to"]
+            other_water.add(w["slug"])
+            actions.append({"slug": w["slug"], "action": "dropped", "to": gone["to"],
+                            "why": f"hand ruling: {gone['why']}"})
+            continue
         g = shape(w["geometry"])
         lat0 = g.centroid.y
         ruling = _remainder_ruling(w, existing, lat0)
@@ -2242,7 +2263,9 @@ def recheck_remainders(rows: list[dict], targets: list[dict] | None, existing: d
         if t.get("reach_slugs"):
             t["reach_slugs"] = {kk: moved.get(v, v) for kk, v in t["reach_slugs"].items()}
         t["notes"] = list(dict.fromkeys(list(t.get("notes") or []) + [
-            f"{when}: the NHD record {x} was dropped: it lay on {moved[x]}, the record of this river" for x in hits]))
+            (f"{when}: the NHD record {x} was dropped: it is another water of the name; this name is {moved[x]}"
+             if x in other_water else
+             f"{when}: the NHD record {x} was dropped: it lay on {moved[x]}, the record of this river") for x in hits]))
     return actions
 
 
