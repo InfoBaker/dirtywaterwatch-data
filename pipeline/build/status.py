@@ -848,13 +848,15 @@ def apply_water_aliases(waters: dict[str, dict], path: Path, moved: dict[str, st
 WATER_STATE_PARTS_FILE = "water-state-parts.json"
 
 
-def apply_state_parts(waters: dict[str, dict], path: Path) -> list[str]:
+def apply_state_parts(waters: dict[str, dict], path: Path, moved: dict[str, str] | None = None) -> list[str]:
     """Give each record data/water-state-parts.json names its own state's part (in place: the record is replaced by a
     copy with that geometry, bbox and area_km2, other_parts, and the cut's note and whole area under state_part).
     Returns the problems, as text: an unreadable file, a slug that is no record, a part without a geometry, or a part
     cut from an outline openboatlaunch has since changed (the record's geometry_hash differs: it is still applied,
-    and the cut is to be run again). Never raises."""
+    and the cut is to be run again). A slug openboatlaunch renamed (moved: slug_aliases) is applied to its successor
+    of the same state, and other_parts follow their renames too (review 2026-11-16 P2). Never raises."""
     name = f"data/{path.name}"
+    moved = moved or {}
     try:
         d = read_json(path)
     except Exception as e:                  # a half-written file must not stop the build
@@ -866,6 +868,11 @@ def apply_state_parts(waters: dict[str, dict], path: Path) -> list[str]:
     problems = []
     for slug, p in sorted(d.items()):
         w = waters.get(slug)
+        if w is None and moved.get(slug) in waters and isinstance(p, dict):
+            succ = waters[moved[slug]]       # renamed: the successor of the same state takes the part
+            if not p.get("state") or str(succ.get("state") or "").upper() == str(p["state"]).upper() or \
+                    str(succ.get("state") or "").lower() == slug.rsplit("-", 1)[-1]:
+                slug, w = moved[slug], succ
         if w is None:
             problems.append(f"{name}: {slug} is not a water record (its part is not applied)")
             continue
@@ -879,7 +886,8 @@ def apply_state_parts(waters: dict[str, dict], path: Path) -> list[str]:
                             "scripts/cut_lakes_to_state_waters.py --shared again")
         waters[slug] = {**w, "geometry": p["geometry"], "bbox": list(p["bbox"]),
                         **({"area_km2": p["area_km2"]} if p.get("area_km2") is not None else {}),
-                        "other_parts": [x for x in p.get("other_parts") or [] if isinstance(x, str)],
+                        "other_parts": [x if x in waters else moved.get(x, x) for x in p.get("other_parts") or []
+                                        if isinstance(x, str)],
                         "state_part": {k: p[k] for k in ("note", "whole_area_km2", "cut_from_geometry_hash", "cut")
                                        if k in p}}
     return problems
@@ -937,7 +945,7 @@ def load_waters(include_nhd: bool = True) -> dict[str, dict]:
     moved = slug_aliases(waters)
     SLUG_ALIASES.clear()
     SLUG_ALIASES.update(moved)
-    problems = apply_state_parts(waters, DATA_DIR / WATER_STATE_PARTS_FILE)
+    problems = apply_state_parts(waters, DATA_DIR / WATER_STATE_PARTS_FILE, moved)
     problems += apply_water_aliases(waters, DATA_DIR / WATER_ALIASES_FILE, moved)
     ALIAS_PROBLEMS[:] = problems if include_nhd else []
     return waters

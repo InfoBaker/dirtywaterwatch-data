@@ -169,7 +169,8 @@ def shared_part(slug: str, spec: dict, rec: dict, outline, state_shape, when: st
         return None, f"less than {MIN_OUTSIDE_KM2} km2 of the outline lies outside the state: nothing to cut"
     cut = WX.as_areas(WX.simplify(cut, N.SIMPLIFY_M))
     b = cut.bounds
-    return {"geometry": mapping(cut), "bbox": [round(b[0], 5), round(b[1], 5), round(b[2], 5), round(b[3], 5)],
+    # as the file holds it (lists, not tuples), so an unchanged cut compares equal on a rerun (review 2026-11-16 P3)
+    return {"geometry": json.loads(json.dumps(mapping(cut))), "bbox": [round(b[0], 5), round(b[1], 5), round(b[2], 5), round(b[3], 5)],
             "area_km2": round(WX.area_km2(cut), 3), "whole_area_km2": round(whole, 3),
             "other_parts": list(spec["other_parts"]), "cut_from_geometry_hash": rec.get("geometry_hash"),
             "cut": when, "note": SHARED_NOTE, "why": spec["why"]}, ""
