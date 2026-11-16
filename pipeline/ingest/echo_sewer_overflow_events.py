@@ -460,7 +460,13 @@ Puerto Rico (permits PR...; research/pr/profile.json; not live until data/rules.
     plant point (13) keeps the point only in raw.reported_point with raw.point_note; so does a point outside Puerto
     Rico (STATE_POINT_BOX). Such a report is placed by the water it names or not at all: it carries raw._placement "named_water_only", so
     build/provisional_outfalls.py never geolocates it from its text or stands a plant point in for it, and the status
-    build never places it on its permit's outfalls' water. On that extract 146 of the 252 kept reports keep their own point. Points are kept to
+    build never places it on its permit's outfalls' water. On that extract 146 of the 252 kept reports keep their own point.
+    Every other PR report is placed by its own place too (OWN_PLACE_MODE_STATES; go-live audit 2026-11-16 P1-2): one
+    that names a water carries raw._placement "named_water_only", so a name with no record never falls through to
+    its point and onto another water ('QUEBRADA  Y EL RIO APEADERO' is not put on Río Chico, 'CARIBBEAN SEA' not on
+    the stream near Culebra); one that names none carries "own_place_only" (the Iowa mechanism, status.own_place_only),
+    so it is placed at its own point when that lies on a water and is otherwise listed, never put on its permit's
+    plant river (28 pump-station reports of the 2026-11-13 extract had been tied that way). Points are kept to
     0.001 degree before anything is saved (ROUND_POINT_STATES: the saved ZIP's PR rows, the record, raw, reported_point).
   - Publication (Astra PR review P2-1): the ZIP entry's date is the extract's, not a report's publication, so PR
     records leave published_at empty and carry raw.extract_date and raw.publication_note
@@ -592,6 +598,11 @@ PLANT_TEXT_POINT_STATES = {"PR"}
 # states whose records carry no per-record publication time (Astra PR review P2-1): the ZIP entry's date is the
 # extract's, not a report's publication, so it stays in raw.extract_date and the run's meta; the other states keep theirs
 EXTRACT_DATE_NOT_PUBLICATION_STATES = {"PR"}
+# states whose every report is placed only by its own place (go-live audit 2026-11-16 P1-2): one that names a water
+# goes on that water or nowhere (raw._placement "named_water_only": not by its point onto another water); one that
+# names none goes at its own point or nowhere (raw._placement "own_place_only", the Iowa mechanism): never on the
+# permit's plant river by the outfall registry or the operator's listed water
+OWN_PLACE_MODE_STATES = {"PR"}
 STATE_POINT_BOX = {"PR": (17.8, 18.6, -67.95, -65.2)}     # lat min, lat max, lon min, lon max (Mona to Culebra)
 PR_PLANT_TEXT = re.compile(r"\b(?:WWTP|WWTF|STP|WTP|PTAS|PRASA\s+plant|treatment\s+plant|planta(?:\s+de\s+"
                            r"(?:tratamiento|alcantarillado))?|(?-i:PA\s+[A-Z]+)|PRETRATAMIENTO|PRE-?TREATMENT)\b", re.I)
@@ -1962,6 +1973,8 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
                 raw["reported_point"] = [round(float(x), 3) for x in plant_note[0]]
         if state in PLANT_TEXT_POINT_STATES and lat is None:
             raw["_placement"] = "named_water_only"     # no point of its own: never geolocated, no outfall stand-in
+        if state in OWN_PLACE_MODE_STATES:   # module docstring, Puerto Rico (go-live audit 2026-11-16 P1-2)
+            raw.setdefault("_placement", "named_water_only" if real_w else "own_place_only")
         if state in EXTRACT_DATE_NOT_PUBLICATION_STATES:
             raw["extract_date"] = info.get("extract_date")
             raw["publication_note"] = ("EPA's file gives no date each report was published; extract_date is the date of "
