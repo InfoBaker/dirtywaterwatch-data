@@ -4325,7 +4325,7 @@
    "erule": {
     "system": "state",
     "sobe_events_2026_11_03": null,
-    "public_output_url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_since_Jan_2026/FeatureServer/0",
+    "public_output_url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/survey123_1766d0b5d5294b05a27751560c1f1f97_results/FeatureServer/0",
     "notes": "NC uses its own Survey123-based intake (Report_an_SSO_Public_View) and BIMS; EPA's SOBE extract has only a handful of NC rows (count not separately taken)."
    },
    "statewide_feed": {
