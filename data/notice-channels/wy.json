@@ -432,23 +432,27 @@
    "operator_id": null,
    "agency": "Wyoming Department of Environmental Quality",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "wy-deq-spills",
    "name": "Wyoming DEQ (spill reporting system)",
-   "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
+   "channel_kind": "feed",
+   "urls": [
+    "https://deqspills.wyo.gov/",
+    "https://deqspills-api.wyo.gov/PublicReport/GetIncidentPublicReport"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "login",
-   "publishes": "none",
-   "records": false,
-   "note": "deqspills.wyo.gov: the public side is a report form; its incident search needs a login (a script shell to the build's client, 2026-11-14).",
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "wy-deq-spill-list",
+   "publishes": "notices",
+   "noun": "Data feed",
+   "note": "DEQ's spill system publishes a CSV of every spill report it has closed, through the portal's 'Download Report' button: incident date and time, county, town, substance, quantity, whether the spill reached water, the water and a point; 6,066 reports of every substance on 2026-11-16, 84 of them sewage by the feed's rule (the newest 2026-09-23). The portal's incident search still needs a login. Read by the feed wy-deq-spill-list.",
    "sources": [
     "wy-deq-spills-portal"
    ],
-   "barrier": "login_required"
+   "barrier": null
   },
   {
    "state": "WY",
@@ -482,7 +486,7 @@
    "operator_id": null,
    "agency": "Wyoming Department of Environmental Quality",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "wy-deq-sso-reports",
    "name": "Wyoming DEQ (sanitary sewer overflow reports)",
    "channel_kind": "state_alert_page",
@@ -495,7 +499,7 @@
    "publishes": "none",
    "records": false,
    "noun": "Report to the state",
-   "note": "No web channel found: operators report an overflow to WDEQ by telephone within 24 hours and in writing within five days; WDEQ publishes none of them. A redacted export is a records request to WDEQ; none has been sent.",
+   "note": "No web channel found: operators report an overflow to WDEQ by telephone within 24 hours and in writing within five days; WDEQ publishes none of them. An overflow also reported to DEQ's spill line appears on DEQ's public spill list (wy-deq-spills, read by the feed wy-deq-spill-list): 84 sewage reports from February 2010 on 2026-11-16, 18 of them in 2025 and 12 in 2026. A redacted export of the overflow reports is a records request to WDEQ; none has been sent.",
    "sources": [
     "wy-deq-sso-page"
    ],

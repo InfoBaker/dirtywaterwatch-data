@@ -6,7 +6,9 @@ Usage: pipeline/.venv/bin/python -I scripts/add_wy_register_rows.py [--dry-run]
 The law (research/wy/sources.json wy-deq-sso-page; research/wy/expansion-research.md):
   - WDEQ's Sanitary Sewer Overflows page (WYPDES program, read 2026-11-14): the owner or operator of a collection
     system or treatment works reports an SSO to WDEQ verbally within 24 hours of becoming aware of it and in writing
-    within five days. No public notification duty found; WDEQ publishes no list; its spill system's search needs a login.
+    within five days. No public notification duty found; WDEQ publishes no list of them; its spill system's search
+    needs a login, and its public spill list (CSV, read by ingest/wy_deq_spills.py since 2026-11-16) holds the
+    overflows also reported to the spill line.
   - EPA Region 8 issues the permits on the Wind River Reservation (WYG589 lagoon general permit): their reports go to EPA.
 Rows
   - Per operator: <id>-deq-report (the report to WDEQ, not published: no web page), or <id>-epa-report.
@@ -89,9 +91,12 @@ AGENCY = [
      "name": "Wyoming DEQ (sanitary sewer overflow reports)", "channel_kind": "state_alert_page",
      "urls": [], "method": None, "legal_basis": Q_LAW, "basis_kind": "permit", "monitored": False,
      "unmonitored_reason": "other", "publishes": "none", "records": False, "noun": "Report to the state",
+     "checked": "2026-11-16",
      "note": ("No web channel found: operators report an overflow to WDEQ by telephone within 24 hours and in writing "
-              "within five days; WDEQ publishes none of them. A redacted export is a records request to WDEQ; none "
-              "has been sent."),
+              "within five days; WDEQ publishes none of them. An overflow also reported to DEQ's spill line appears "
+              "on DEQ's public spill list (wy-deq-spills, read by the feed wy-deq-spill-list): 84 sewage reports from "
+              "February 2010 on 2026-11-16, 18 of them in 2025 and 12 in 2026. A redacted export of the overflow reports is a records request "
+              "to WDEQ; none has been sent."),
      "sources": ["wy-deq-sso-page"]},
     {"id": "wy-deq-sso-page", "agency": "Wyoming Department of Environmental Quality",
      "name": "Wyoming DEQ (Sanitary Sewer Overflows, WYPDES)", "channel_kind": "state_alert_page",
@@ -100,12 +105,18 @@ AGENCY = [
      "publishes": "documents", "records": False, "availability_only": True, "every_hours": 168,
      "note": "The page that sets the 24-hour verbal and five-day written report; watched for a change.",
      "sources": ["wy-deq-sso-page"]},
+    # 2026-11-16: DEQ's public spill list (CSV) is read by ingest/wy_deq_spills.py
     {"id": "wy-deq-spills", "agency": "Wyoming Department of Environmental Quality",
-     "name": "Wyoming DEQ (spill reporting system)", "channel_kind": "state_alert_page",
-     "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
-     "unmonitored_reason": "login", "publishes": "none", "records": False,
-     "note": ("deqspills.wyo.gov: the public side is a report form; its incident search needs a login (a script shell "
-              "to the build's client, 2026-11-14)."),
+     "name": "Wyoming DEQ (spill reporting system)", "channel_kind": "feed", "checked": "2026-11-16",
+     "urls": ["https://deqspills.wyo.gov/", "https://deqspills-api.wyo.gov/PublicReport/GetIncidentPublicReport"],
+     "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
+     "unmonitored_reason": "feed_ingested", "feed_source_id": "wy-deq-spill-list", "publishes": "notices",
+     "noun": "Data feed",
+     "note": ("DEQ's spill system publishes a CSV of every spill report it has closed, through the portal's 'Download "
+              "Report' button: incident date and time, county, town, substance, quantity, whether the spill reached "
+              "water, the water and a point; 6,066 reports of every substance on 2026-11-16, 84 of them sewage by the "
+              "feed's rule (the newest 2026-09-23). The portal's incident search still needs a login. Read by the feed "
+              "wy-deq-spill-list."),
      "sources": ["wy-deq-spills-portal"]},
     {"id": "wy-deq-hudson-2024", "agency": "Wyoming Department of Environmental Quality",
      "name": "Wyoming DEQ (news: Hudson wastewater release, June 2024)", "channel_kind": "news_page",

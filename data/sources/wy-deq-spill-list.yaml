@@ -1,0 +1,30 @@
+id: "wy-deq-spill-list"
+name: "Wyoming DEQ public spill list (Spills and Complaints system): the sewage spill reports"
+url: "https://deqspills-api.wyo.gov/PublicReport/GetIncidentPublicReport"
+homepage: "https://deqspills.wyo.gov/"
+kind: "csv"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/wy_deq_spills.py (data/build/events/wy-deq-spill-list.json); the
+#   research row is wy-deq-spills-portal (research/wy/sources.json).
+# Built 2026-11-16: one ordinary request reads the whole list (3.6 MB CSV, 46 s from a Mac); the module reads it at most
+#   once in 20 hours (`--force` reads now); `--backfill` (refresh.yml's backfill input "wy_deq_spills") reads now and
+#   records meta.backfill.
+# Read 2026-11-16: 6,066 rows of every substance, incidents to 2026-11-03; the sewage rule takes 84 rows (the newest
+#   2026-09-23), 31 of them answered "reached water" Yes; 81 bloom reports are counted, not read. Every spill row is
+#   "Complete" (DEQ closed a sewage report a median of 18 days after the incident). IncidentDate only: no report time, no
+#   end. SpillCouldReachWater and SpillReachedWater repeat one answer on every row.
+# Privacy: the company, address, description, cause text and survey columns are never kept; a point only for public
+#   sewer works in its county, rounded to three decimals; the water and substance texts are scrubbed.
+cadence: "a report appears once DEQ closes it; the list is read at most once in 20 hours"
+license: "No licence or terms statement found on the portal."
+attribution: "Wyoming Department of Environmental Quality"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["WY"]
+registry_ids: ["wy-deq-spills-portal"]
+access: ["csv"]
+access_detail: "GET https://deqspills-api.wyo.gov/PublicReport/GetIncidentPublicReport (text/csv, 33 columns, no key; the portal's 'Download Report' button). Key: IncidentCode and county. Latitude and Longitude on most rows."
+machine_readable: true
+legal_basis: "WDEQ, Sanitary Sewer Overflows (WYPDES program page): a sewer owner or operator reports an overflow verbally within 24 hours and in writing within five days; DEQ's spill line takes reports of spills of every kind"
+checked: "2026-11-16"

@@ -182,7 +182,9 @@
 #                  Montana: mt_deq_hab_map (DEQ's harmful algal bloom map layer: bloom advisories with DEQ's issue
 #                  and lift dates; the state publishes no overflow list)
 #                  Wyoming: wy_deq_hcb_bulletins (WDEQ's HCB bulletin topic, RSS: bloom and toxin advisories with the
-#                  date issued, ended by a lift bulletin or by a later table that no longer lists them)
+#                  date issued, ended by a lift bulletin or by a later table that no longer lists them) and
+#                  wy_deq_spills (DEQ's public spill list, CSV: the sewage rows by rule, the whole list read at most
+#                  once in 20 hours; state data/build/wy-deq-spill-list-state.json)
 #                  Iowa: ia_dnr_focomp (DNR's Field Office Compliance incoming bypass reports of the 105 major municipal
 #                  facilities, one page per report, 20 facility and 60 report pages a run; state data/build/ia-dnr-focomp-
 #                  state.json), ia_waterloo_sso (the City of Waterloo's SSO and bypass notices) and ia_dnr_news (DNR's
