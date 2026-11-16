@@ -177,15 +177,14 @@ def test_pr_forms(text, form):
 
 
 @pytest.mark.parametrize("text,not_form", [
-    ("RIO LA PLATA", "rio de la plata"), ("Río de la Plata", "rio la plata"), ("Río de la Plata", "la plata river"),
     ("Bahía de San Juan", "bahia san juan"), ("Bahía de San Juan", "san juan bay"),
-    ("Caño de Martín Peña", "cano martin pena"), ("Caño de Martín Peña", "martin pena channel"),
     ("Río de Apeadero", "rio apeadero"), ("Río Grande de Arecibo", "rio grande arecibo"),
+    ("Río de Aibonito", "aibonito river"), ("AIBONITO RIVER", "rio de aibonito"), ("Río de Bayamón", "rio bayamon"),
 ])
 def test_pr_de_is_part_of_the_name(text, not_form):
-    """'Río La Plata' and 'Río de la Plata' are different names: only the kind word is translated."""
+    """A 'de' is part of the name: only the kind word is translated, and only an evidenced pair joins two spellings."""
     assert not_form not in S.name_forms_in(text, "PR")
-    assert not any(" DE " in x for x in S.spanish_spellings("RIO LA PLATA", "PR"))
+    assert not any(" DE " in x for x in S.spanish_spellings("RIO BAYAMON", "PR"))
 
 
 # the whole approved table (review 2026-11-15, item 6): (as filed, the water's name) and the evidence in the report
@@ -193,6 +192,8 @@ APPROVED_PAIRS = {
     ("oceano atlantico", "atlantic ocean"), ("mar caribe", "caribbean sea"), ("caribe ocean", "caribbean sea"),
     ("jayuya river", "rio grande de jayuya"), ("manati river", "rio grande de manati"),
     ("rio grande manati", "rio grande de manati"), ("rio loisa", "rio grande de loiza"), ("rio guardiana", "rio guadiana"),
+    ("rio la plata", "rio de la plata"), ("la plata river", "rio de la plata"), ("barranquitas river", "rio de barranquitas"),
+    ("cano martin pena", "cano de martin pena"), ("martin pena channel", "cano de martin pena"),
 }
 
 
@@ -233,6 +234,9 @@ PR_GNIS = [
     ("Manatí River", "Río Grande de Manati"), ("RIO GRANDE MANATI", "Río Grande de Manati"),
     ("RIO GUAMANI", "Río Guamaní"), ("Cidra River", "Río Cidra"), ("ARENAS RIVER", "Río Arenas"),
     ("Caño de Martín Peña", "Caño de Martín Peña"), ("Río Coamo", "Río Coamo"), ("RIO CHICO", "Río Chico"),
+    ("RIO LA PLATA", "Río de la Plata"), ("LA PLATA RIVER", "Río de la Plata"),
+    ("BARRANQUITAS RIVER", "Río de Barranquitas"), ("Caño Martín Peña", "Caño de Martín Peña"),
+    ("Martin Pena Channel", "Caño de Martín Peña"),
 ]
 
 
@@ -247,8 +251,8 @@ def test_pr_builder_name_score(text, gnis):
     ("RIO CIBUCO", "Río Unibón"), ("CIBUCO RIVER", "Río Coamo"), ("RIO GRANDE", "Río Grande De Loiza"),
     ("RIO GUAJATACA", "Río de Barranquitas"), ("RIO LOS NEGROS", "Río Corozal"), ("TURABO PARK", "Río Turabo"),
     ("RIO CIBUCO", "Río Cibaco"), ("RIO CIBUCO", "Río Cibucos"),          # no fuzzy spelling in Puerto Rico
-    ("RIO LA PLATA", "Río de la Plata"), ("LA PLATA RIVER", "Río de la Plata"), ("RIO APEADERO", "Río de Apeadero"),
-    ("Martin Pena Channel", "Caño de Martín Peña"), ("RIO GRANDE DE LOIZA", "Río Grande"),
+    ("RIO APEADERO", "Río de Apeadero"), ("AIBONITO RIVER", "Río de Aibonito"), ("RIO BAYAMON", "Río de Bayamón"),
+    ("RIO GRANDE DE LOIZA", "Río Grande"),
 ])
 def test_pr_builder_other_waters_still_differ(text, gnis):
     ws = N.words(S.state_text(text, "PR"))
@@ -334,6 +338,8 @@ def _pr_waters(names=None):
     ("OCEANO ATLANTICO", "Atlantic Ocean"), ("Oceano Atlantico", "Atlantic Ocean"),
     ("RIO GRANDE MANATI", "Río Grande de Manati"), ("Manatí River", "Río Grande de Manati"),
     ("Jayuya River", "Río Grande de Jayuya"), ("QUEBRADA Y RIO CHICO", "Río Chico"), ("RIO GRANDE", "Río Grande"),
+    ("LA PLATA RIVER", "Río de la Plata"), ("RIO LA PLATA", "Río de la Plata"),
+    ("Martin Pena Channel", "Caño de Martín Peña"), ("Caño Martín Peña", "Caño de Martín Peña"),
 ])
 def test_pr_resolver_places_each_spelling(text, name):
     r = S.Resolver(_pr_waters(), [], placement_rules={})
@@ -341,8 +347,8 @@ def test_pr_resolver_places_each_spelling(text, name):
     assert [r.waters[s]["name"] for s in slugs] == [name]
 
 
-@pytest.mark.parametrize("text", ["LA PLATA RIVER", "RIO LA PLATA", "Martin Pena Channel", "Caño Martín Peña",
-                                  "San Juan Bay", "BAHIA SAN JUAN", "RIO APEADERO", "discharge to the Rio Cibuco",
+@pytest.mark.parametrize("text", ["San Juan Bay", "BAHIA SAN JUAN", "RIO APEADERO", "QUEBRADA Y EL RIO APEADERO",
+                                  "discharge to the Rio Cibuco",
                                   "Rio Cibuco at Vega Baja"])
 def test_pr_resolver_no_partial_or_conflated_name(text):
     r = S.Resolver(_pr_waters(), [], placement_rules={})
@@ -386,15 +392,17 @@ def test_pr_ties_same_water():
     assert O.same_water({"state": "PR", "receiving_water_echo": "CIBUCO RIVER"}, w)
     assert O.same_water({"state": "PR", "receiving_water_echo": "", "reach_gnis_name": "Río Cibuco"}, w)
     assert not O.same_water({"state": "NM", "receiving_water_echo": "CIBUCO RIVER"}, {**w, "state": "NM"})
+    ap = {"name": "Río de Apeadero", "aliases": [], "state": "PR"}
+    assert not O.same_water({"state": "PR", "receiving_water_echo": "RIO APEADERO"}, ap)
     lp = {"name": "Río de la Plata", "aliases": [], "state": "PR"}
-    assert not O.same_water({"state": "PR", "receiving_water_echo": "RIO LA PLATA"}, lp)
+    assert O.same_water({"state": "PR", "receiving_water_echo": "LA PLATA RIVER"}, lp)       # the evidenced pair
 
 
 def test_pr_holds_name_and_existing_forms():
     rec = {"name": "Río Cibuco", "aliases": [], "state": "PR"}
     assert N.holds_name(rec, "CIBUCO RIVER")
     assert N.holds_name(rec, "RIO CIBUCO")
-    assert not N.holds_name({**rec, "name": "Río de la Plata"}, "RIO LA PLATA")
+    assert not N.holds_name({**rec, "name": "Río de Apeadero"}, "RIO APEADERO")
     existing = {"rio-cibuco-pr": {**rec, "slug": "rio-cibuco-pr"}}
     assert N.same_named_existing(existing, "PR", "Cibuco River") == ["rio-cibuco-pr"]
 
