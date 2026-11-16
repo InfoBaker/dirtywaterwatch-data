@@ -64,7 +64,7 @@ AGENCY = [
      "noun": "Report to the state", "sources": ["ok-deq-opdes-rules", "ok-deq-wastewater-reporting"],
      "note": ("Operators report bypasses and overflows to DEQ by telephone on its around-the-clock line, then in "
               f"writing on Form 605-011 (e-mail preferred). {NOTE_CONFLICT} No list of the reports was found on "
-              f"DEQ's website (read in November 2026); they can be sought through an Open Records Act request. ({PART3}; "
+              f"DEQ's website (read in November 2026); no web channel found; they can be sought through an Open Records Act request. ({PART3}; "
               f"{REPORTING}; {FORM})")},
     {"id": "ok-deq-wastewater-reporting-page", "agency": "Oklahoma Department of Environmental Quality",
      "name": "Oklahoma Department of Environmental Quality (wastewater reporting requirements page)",
