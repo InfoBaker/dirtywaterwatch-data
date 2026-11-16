@@ -5038,7 +5038,7 @@
    "operator_id": "in-city-of-fort-wayne",
    "agency": null,
    "permit": "IN0032191",
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "in-fort-wayne-cso-notifications",
    "name": "City of Fort Wayne (City Utilities)",
    "channel_kind": "operator_page",
@@ -5049,13 +5049,13 @@
    "legal_basis": "327 IAC 5-2.2-1: \"The requirements of this rule and 40 CFR 122.38 apply to a permittee authorized to discharge a combined sewer overflow to the Great Lakes Basin\": a public notice within four hours of becoming aware of a discharge, a supplemental notice within seven days, and an annual notice",
    "basis_kind": "law",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "documents",
-   "note": "A summary of the past seven days' overflows (location, start, end, estimated volume) each Wednesday as a PDF, and a yearly report; the host answers 403 behind a Cloudflare check to this client (2026-11-14).",
+   "note": "A summary of the past seven days' overflows (location, start, end, estimated volume) each Wednesday, and a yearly report. The page answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research.",
    "sources": [
     "in-fort-wayne-cso-notifications"
    ],
-   "barrier": "bot_wall"
+   "barrier": "not_verified"
   },
   {
    "state": "IN",
