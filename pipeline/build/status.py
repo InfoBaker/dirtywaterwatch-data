@@ -52,7 +52,7 @@ from zoneinfo import ZoneInfo
 
 import zones
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharger_alias_map, load_outfall_registry,
-                    system_wide_advisory,
+                    system_wide_advisory, no_ok_read_since,
                     now_iso, read_json, rules_live_states, write_json)
 from build import shoreline as SH
 from build.redact import REDACTED, person_shaped
@@ -205,6 +205,9 @@ POLL_END_HORIZON_SOURCES |= {"sc-des-freshwater-swim-advisories"}
 # Wisconsin DNR's beach layer (ingest/wi_dnr_beach_health.py): an advisory's end is the first read that no longer
 # lists it; the same limit as DES's layers; keyed on the source, so no other feed changes
 POLL_END_HORIZON_SOURCES |= {"wi-dnr-beach-health"}
+# Nevada: the Office of State Epidemiology's list (ingest/nv_ose_hab_list.py): an end seen only at a read, the same
+# limit as the parks' page; keyed on the source, so no other feed changes
+POLL_END_HORIZON_SOURCES |= {"nv-ose-hab-reports"}
 SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}
@@ -365,6 +368,9 @@ RULES = {
                                "caution, not an advisory"),
     "end_never_reported": ("grey", "Unresolved: no end reported (off the map after 30 days)"),
     "not_reconfirmed": ("grey", "Advisory not re-confirmed by the source for 14 days (sets no colour)"),
+    # data/rules.json unresolved.source_outage: a listed advisory whose source could not be read since (outage_hold)
+    "outage_unconfirmed": ("unresolved", "Advisory listed by the authority; the source has not been readable since: "
+                                         "end not confirmed"),
     "rain_advisory": ("yellow", "Precautionary rainfall advisory"),
     "advisory_unconfirmed": ("yellow", "Advisory with no reported status, issued less than 7 days ago"),
     # data/rules.json unresolved.sample_caution: a sample result the agency labels a risk but issues no advisory for
@@ -695,6 +701,7 @@ def canonical_dischargers(events: list[dict], aliases: dict[str, str]) -> list[d
     return out
 
 
+OUTAGE_HELD: set = set()     # (source id, event id) held through a source outage by the last build (outage_hold)
 NOT_LIVE: list[str] = []      # (source id, state) of the records left out by the last load_events with `live` given
 _US_CODES = frozenset("AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM "
                       "NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY PR VI GU AS MP".split())
@@ -765,6 +772,10 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
             r = dict(r)
             r["_fixture"] = fixture
             r["_file"] = p.name
+            # the health of the feed that carries the record (the file's own header), for the outage hold
+            # (outage_hold, common.no_ok_read_since); not part of the record (record_hash leaves it out)
+            r["_feed_health"] = {k: d[k] for k in ("fetched_at", "ok", "last_ok_at", "prev_ok_at",
+                                                       "partial_before_ok_at") if k in d}
             r.setdefault("source_id", sid)
             if live_up is not None:
                 st = own_state(r, sid)      # never the state of a live water it names (own_state)
@@ -1420,6 +1431,40 @@ OWN_PLACE_NONE = ("the report names no water it reached and its own point lies o
 # rather than leaving the reason empty. Keyed on ACCENT_FOLD_STATES (folds), so no other state's reason changes.
 OPEN_SEA_FORMS = frozenset({"atlantic ocean", "caribbean sea"})
 OPEN_SEA_NONE = "the report names the open sea, which has no water record here: listed with its place, colouring no water"
+
+
+# Nevada (ingest/nv_ose_hab_list.py): an advisory for a water this site holds no record of (raw._placement "listed_only")
+# is listed with the place its source gives and placed on no water, so its name never lands on a namesake in another
+# county or state (a wrong tie is worse than none). Keyed on the value, which only that feed writes.
+LISTED_ONLY_WHY = ("the advisory names a water this site holds no record of: listed with the place the source gives, "
+                   "colouring no water")
+
+
+def listed_only(ev: dict) -> bool:
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("_placement") == "listed_only"
+
+
+# Nevada (coordinator, 2026-11-16; Astra review P1-5): where the Office of State Epidemiology's list and the state
+# parks' page carry one water, the Office's record (raw._shown_over names the parks' record) is shown, since it carries
+# the authority's stated date (time precision day) against the parks' first read (poll): the parks' record is marked
+# its duplicate, only while both are in this build and advisory_active; otherwise each shows on its own. The existing
+# duplicate rule chooses by an ingester's own link; this keyed rule chooses by which record carries a stated date.
+SHOWN_OVER_SOURCES = {"nv-ose-hab-reports"}
+
+
+def shown_over_links(events: list[dict], duplicates: dict) -> dict:
+    """duplicates plus {the other record: the shown one} for each live raw._shown_over link of SHOWN_OVER_SOURCES."""
+    by_id = {e.get("event_id"): e for e in events}
+    out = dict(duplicates)
+    for ev in events:
+        raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+        other = by_id.get(raw.get("_shown_over"))
+        if (ev.get("source_id") in SHOWN_OVER_SOURCES and other is not None and ev.get("status") == "advisory_active"
+                and other.get("status") == "advisory_active" and ev.get("time_precision") == "day"
+                and other.get("time_precision") == "poll" and ev["event_id"] not in out):
+            out[other["event_id"]] = ev["event_id"]
+    return out
 
 
 def own_place_only(ev: dict) -> bool:
@@ -2797,6 +2842,9 @@ class Resolver:
             if nr:                  # kept, with its page; colours nothing, no reach (counted with no_receiving_water)
                 return {"water_slugs": [], "water_match": "none", "note": None, "unknown_slugs": unknown,
                         "no_receiving_water": nr, "no_release": True}
+        if listed_only(ev):
+            return {"water_slugs": [], "water_match": "none", "note": None, "unknown_slugs": unknown,
+                    "unplaced_reason": LISTED_ONLY_WHY}
         elsewhere = self.place_elsewhere(ev)
         if elsewhere:
             # the record says its place lies in a state the site does not show: never placed on a water of the state
@@ -3048,6 +3096,92 @@ def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None
 EARLIER_PERIOD_SOURCES = frozenset({"ne-dwee-beachwatch", "in-idem-cyanobacteria"})
 
 
+def _outage_cfg(rules) -> dict | None:
+    cfg = ((rules or {}).get("unresolved") or {}).get("source_outage") or {}
+    return cfg if cfg.get("enabled") is True else None
+
+
+def _read_time(dt: datetime, ev: dict, state) -> str:
+    """A read's time for a public label, in the record's own zone ("Nov 1, 2026, 09:00 EST")."""
+    loc = dt.astimezone(event_zone(ev, state))
+    return f"{loc.strftime('%b %-d, %Y, %H:%M')} {loc.tzname()}"
+
+
+def outage_hold(ev: dict, listed: datetime | None, cap: datetime, now: datetime, state, red, yellow,
+                rules) -> dict | None:
+    """data/rules.json unresolved.source_outage (owner, 2026-11-16): a standing advisory past CONFIRM_DAYS after the
+    last read that listed it, whose feed has had no successful read since (common.no_ok_read_since on the header of
+    the file that carries the record, load_events), is shown from the cap as end not confirmed (hatched) while the
+    outage lasts, never grey and never red for the unread time. None (today's grey note) otherwise: a successful read
+    since that did not list it, no health on file, the switch off, or still within CONFIRM_DAYS of that read."""
+    cfg = _outage_cfg(rules)
+    if cfg is None or listed is None or now < cap or system_wide_advisory(ev):
+        return None
+    health = ev.get("_feed_health")
+    if no_ok_read_since(health, (ev.get("raw") or {}).get("_last_seen_in_source")) is not True:
+        return None
+    iv = _iv(ev, cap, None, "outage_unconfirmed", red, yellow)
+    iv["label"] = (f"Advisory listed by the authority at the last read that showed it, {_read_time(listed, ev, state)}; "
+                   "the source has not been readable since: end not confirmed")
+    iv["confirmed"] = iso(listed)
+    iv["rule_applied"] = {"rule": "unresolved.source_outage", "days": CONFIRM_DAYS, "last_listed_at": iso(listed),
+                          "last_successful_read_at": health.get("last_ok_at"),
+                          "last_attempt_at": health.get("fetched_at"), "rationale": cfg.get("rationale"),
+                          "source": "data/rules.json"}
+    return iv
+
+
+CARVED_RULES = ("advisory_active", "rain_advisory", "not_reconfirmed")
+
+
+def carve_unread_gaps(ivs: list[dict], ev: dict, state, rules) -> list[dict]:
+    """raw._unread_gaps (common.mark_unread_gaps: the source could not be read from the read that last listed the
+    advisory to the read that listed it again, or that no longer listed it): from CONFIRM_DAYS after that listing to
+    the next read the record is end not confirmed (hatched), as it was shown while the source was unread, and its
+    advisory and age-out intervals are cut out of that time, so a later listing never paints it red after the fact
+    (owner, 2026-11-16). The hatch is drawn whole, whether or not an age-out note reached that far (Astra review
+    2026-11-16 P1-3); none after a confirmed end, none for a system-wide advisory. Keyed on the field and the switch."""
+    gaps = (ev.get("raw") or {}).get("_unread_gaps")
+    cfg = _outage_cfg(rules) if gaps else None
+    if not cfg or not isinstance(gaps, list) or not ivs or system_wide_advisory(ev):
+        return ivs
+    end = parse_time(ev.get("ended_at")) if ev.get("ended_at") and not end_not_credible(ev, None, rules) else None
+    for g in gaps:
+        g_from = parse_time(g.get("from")) if isinstance(g, dict) else None
+        g_to = parse_time(g.get("to")) if isinstance(g, dict) else None
+        if g_from is None or g_to is None:
+            continue
+        a = g_from + timedelta(days=CONFIRM_DAYS)
+        if end is not None:
+            g_to = min(g_to, end)
+        if g_to <= a:
+            continue
+        out, template = [], None
+        for iv in ivs:
+            s0, e = iv["start"], iv["end"]
+            if iv["rule"] not in CARVED_RULES or s0 >= g_to or (e is not None and e <= a):
+                out.append(iv)
+                continue
+            template = template or iv
+            if s0 < a:
+                out.append({**iv, "end": a})
+            if e is None or e > g_to:
+                out.append({**iv, "start": max(s0, g_to)})
+        red = (template or {}).get("red_rule") or next((iv.get("red_rule") for iv in ivs if iv.get("red_rule")), None)
+        mid = _iv(ev, a, g_to, "outage_unconfirmed", red, (template or {}).get("yellow_rule"))
+        mid.update(confirmed=iso(g_from), label=(
+            f"Advisory listed by the authority at the read of {_read_time(g_from, ev, state)}; the source could not "
+            f"be read again until {_read_time(g_to, ev, state)}: end not confirmed for that time"),
+            rule_applied={"rule": "unresolved.source_outage", "days": CONFIRM_DAYS, "last_listed_at": iso(g_from),
+                          "next_read_at": iso(g_to), "listed_again": g.get("listed_again"),
+                          "rationale": cfg.get("rationale"), "source": "data/rules.json"})
+        for k in ("placement", "observed_periods"):
+            if k in (template or {}):
+                mid[k] = template[k]
+        ivs = out + [mid]
+    return ivs
+
+
 def _observed_period_intervals(ev: dict, periods: list, state, now, water, rules) -> list[dict]:
     """Delaware's map and DES's beach and bloom layers (POLL_END_HORIZON_SOURCES): an advisory listed again after an
     unread gap keeps its observation periods (raw.listed_periods, ingest/de_sc_periods.py). Each earlier period is
@@ -3184,7 +3318,7 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
         for iv in out:
             if iv["rule"] == "sample_caution":
                 iv["label"] = slab
-    return earlier + out
+    return carve_unread_gaps(earlier + out, ev, state, rules)
 
 
 def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None, rules: dict) -> list[dict]:
@@ -3302,6 +3436,9 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                                     "unread period or establish a lift date")
             out = [_iv(ev, start, until, rule, red, yellow)]
             out[0]["confirmed"] = iso(confirmed)
+            hold = outage_hold(ev, listed, cap, now, state, red, yellow, rules) if end is None else None
+            if hold is not None:
+                return earlier_periods + out + [hold]     # the source unread since: end not confirmed, never grey
             if end is None or end > cap:
                 note_until = max(cap, start + timedelta(days=NOTE_DAYS))
                 if end is not None:
@@ -3387,6 +3524,11 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                 until = confirmed + (timedelta(hours=SYSTEM_WIDE_CONFIRM_HOURS) if system_wide_advisory(ev)
                                      else timedelta(days=CONFIRM_DAYS))
                 out = [_iv(ev, start, until, rule, red, yellow)]
+                hold = None if system_wide_advisory(ev) else outage_hold(ev, listed, until, now, state, red, yellow,
+                                                                         rules)
+                if hold is not None:     # the source unread since the read that listed it: end not confirmed
+                    out[0]["confirmed"] = iso(confirmed)
+                    return out + [hold]
                 note = _iv(ev, until, max(until, start + timedelta(days=NOTE_DAYS)), "not_reconfirmed", red, yellow)
                 note["confirmed"] = iso(confirmed)
                 out[0]["confirmed"] = iso(confirmed)
@@ -4279,6 +4421,7 @@ def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules
 
 def record_hash(ev: dict) -> str:
     import hashlib
+    ev = {k: v for k, v in ev.items() if k != "_feed_health"}      # feed health is not the record (load_events)
     return hashlib.blake2b(json.dumps(ev, sort_keys=True, default=str).encode(), digest_size=16).hexdigest()
 
 
@@ -4388,6 +4531,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     for ev in events:               # an ingester's own duplicate_of (CT annual sheet -> dashboard) wins
         if ev.get("duplicate_of") and ev["duplicate_of"] != ev["event_id"]:
             duplicates[ev["event_id"]] = ev["duplicate_of"]
+    duplicates = shown_over_links(events, duplicates)
     h_start = now - timedelta(days=HISTORY_DAYS)
     points = []
     latest_month = {}       # outfall -> (event, water slugs, monthly mark) of its latest month report
@@ -4959,6 +5103,11 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     for sid, h in health.items():
         if sid in by_source:
             h["placement"] = dict(by_source[sid])
+    # records held as end not confirmed through a source outage now (outage_hold), for the refresh log (main)
+    OUTAGE_HELD.clear()
+    OUTAGE_HELD.update((iv["source_id"], iv["event_id"]) for ivs in list(intervals.values()) + list(reach_ivs.values())
+                       for iv in ivs if iv.get("rule") == "outage_unconfirmed" and iv["start"] <= now
+                       and (iv["end"] is None or iv["end"] > now))
     status = {
         "built": now_iso(), "now": iso(now), "fixtures_included": include_fixtures,
         "restricted_included": include_restricted, "withheld_sources": withheld,
@@ -5042,6 +5191,9 @@ def main() -> None:
     cov = status.get("outlines") or {}
     print("status: water records with an outline here, by state: "
           + ", ".join(f"{st} {c['with_outline']}/{c['records']}" for st, c in cov.items()))
+    held = Counter(sid for sid, _ in OUTAGE_HELD)
+    print(f"status: {len(OUTAGE_HELD)} advisories held as end not confirmed through a source outage "
+          f"(rules.json unresolved.source_outage){': ' + str(dict(sorted(held.items()))) if held else ''}")
     for p in status["problems"][:20]:
         print("  problem:", p)
 
