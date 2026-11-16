@@ -1,21 +1,28 @@
 {
  "about": "Water names in Wyoming's records that data/receiving-waters-national.json does not hold for WY: the waters the state's advisory and notice records name, one row per name and county, with the number of records, how many are open, the county and up to five points where the source gives them. Records naming no water are counted in by_reason. EPA's outfall registry gives every plant outfall its receiving water separately. Written by scripts/mountain_report_water_names.py.",
  "state": "WY",
- "waters": 13,
- "reports": 21,
+ "waters": 12,
+ "reports": 19,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in WY": 10,
+  "no NHD flowline or waterbody of that name in WY": 9,
   "3 NHD waters of that name in WY and the reports give no place to choose one": 2,
   "2 NHD waters of that name in WY and the reports give no place to choose one": 1
  },
- "resolved_names": 27,
- "resolved_reports": 43,
+ "resolved_names": 28,
+ "resolved_reports": 45,
  "build": {
   "date": "2026-11-16",
-  "command": "python -m ingest.waters_from_nhd --names research/wy/receiving-waters-missing.json --state WY",
-  "records_built": 6,
-  "names_resolved": 27,
-  "network_requests": 15
+  "command": "python -m ingest.waters_from_nhd --names research/wy/receiving-waters-missing.json --state WY --recheck",
+  "records_built": 0,
+  "names_resolved": 1,
+  "network_requests": 0,
+  "last_build": {
+   "date": "2026-11-16",
+   "command": "python -m ingest.waters_from_nhd --names research/wy/receiving-waters-missing.json --state WY",
+   "records_built": 6,
+   "names_resolved": 27,
+   "network_requests": 15
+  }
  },
  "rows": [
   {
@@ -37,17 +44,6 @@
    "points": [],
    "sources": {
     "wy-deq-hcb-bulletins": 4
-   },
-   "reason": "no NHD flowline or waterbody of that name in WY; the reports give no place to look for it in the NHD high-resolution flowlines"
-  },
-  {
-   "name": "Wheatland Reservoir #1",
-   "reports": 2,
-   "open": 2,
-   "county": null,
-   "points": [],
-   "sources": {
-    "wy-deq-hcb-bulletins": 2
    },
    "reason": "no NHD flowline or waterbody of that name in WY; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
@@ -231,6 +227,14 @@
    "how": "a water record already holds the name"
   },
   {
+   "name": "Wheatland Reservoir #1",
+   "reports": 2,
+   "slugs": [
+    "wheatland-number-1-reservoir-wy"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
    "name": "Beck Lake",
    "reports": 1,
    "slugs": [
@@ -250,7 +254,7 @@
    "name": "Bighorn Reservoir",
    "reports": 1,
    "slugs": [
-    "bighorn-reservoir-wy"
+    "bighorn-lake-wy"
    ],
    "how": "record built from the name"
   },
@@ -298,7 +302,7 @@
    "name": "Granite Reservoir",
    "reports": 1,
    "slugs": [
-    "granite-reservoir-wy"
+    "granite-springs-reservoir-wy"
    ],
    "how": "record built from the name"
   },
