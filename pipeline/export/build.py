@@ -215,7 +215,7 @@ def stop_text(r: dict, cap: float) -> str:
 
 def tidal_path_props(r: dict) -> dict:
     """A path's tidal stretch (reach.tidal_river): where it starts and its label; none for a trace without one."""
-    k = next((sg["km_start"] for sg in r.get("segments") or [] if sg.get("tidal_river")), None)
+    k = next((sg["km_start"] for sg in r.get("segments") or [] if sg.get("tidal_river") or sg.get("below_tide")), None)
     return {} if k is None else {"tidal_from_km": k, "tidal_label": TIDAL_RIVER_TEXT}
 # shoreline stretches on the Great Lakes (build/shoreline.py; data/rules.json reach.shoreline): their own wording
 SHORE_STOP_TEXT = {
@@ -395,7 +395,7 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
                 below_tide = True
                 label = (f"Modeled downstream of {where_from}. {TIDAL_RIVER_TEXT} The river is not necessarily "
                          f"unsafe here, and it is not necessarily safe outside the line.")
-            elif below_tide and band["hours_typical"] is None:
+            elif (below_tide or sg.get("below_tide")) and band["hours_typical"] is None:
                 label = (f"Modeled downstream of {where_from}. No travel time is given here: the water passes through "
                          f"tidal water above this point, where the tide moves it back and forth. The river is not "
                          f"necessarily unsafe here, and it is not necessarily safe outside the line.")
@@ -1030,15 +1030,18 @@ def live_dischargers(rows: list[dict], live: set[str]) -> list[dict]:
 
 
 def tidal_river_rules(rules: dict) -> dict:
-    """out/rules.json's reach rule as it stands (data/rules.json reach.tidal_river): off, the switch's record is left
-    out and the file reads as before it; on, its cap_rationale and stop_at replace the reach rule's own."""
+    """out/rules.json's reach rule as it stands (data/rules.json reach.tidal_river): absent (off, as shipped), the
+    file is as before; present but not enabled, the record is left out; on, the rule's record (build/reaches.py
+    TIDAL_RIVER_DEFAULTS under the file's own keys) is written, and its cap_rationale and stop_at replace the reach
+    rule's own."""
+    from build import reaches as reaches_mod
     reach = rules.get("reach")
     if not isinstance(reach, dict) or "tidal_river" not in reach:
         return rules
-    tr = reach.get("tidal_river") or {}
     reach = dict(reach)
-    if tr.get("enabled") is True:
-        reach.update({k: tr[k] for k in ("cap_rationale", "stop_at") if k in tr})
+    if reaches_mod.tidal_river_on(rules):
+        tr = reaches_mod.tidal_river_rule(rules)
+        reach.update({"tidal_river": tr, **{k: tr[k] for k in ("cap_rationale", "stop_at") if k in tr}})
     else:
         reach.pop("tidal_river")
     return {**rules, "reach": reach}

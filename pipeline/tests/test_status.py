@@ -722,7 +722,7 @@ def test_tidal_river_switch_off_changes_nothing():
     import json as _json
     from common import DATA_DIR
     rules = _json.loads((DATA_DIR / "rules.json").read_text())
-    assert R.tidal_river_on(rules) is False and R.tidal_river_on({}) is False
+    assert R.tidal_river_on(rules) is False and R.tidal_river_on({}) is False and R.tidal_river_rule(rules) == {}
     assert R.tidal_river_on({"reach": {"tidal_river": {"enabled": "yes"}}}) is False      # only a real true turns it on
     lines = [fl(1, -72.0, -71.9), fl(2, -71.9, -71.8), fl(3, -71.8, -71.7)]
     worlds = [{1: attrs(1, 30), 2: attrs(2, 20, tidal=1), 3: attrs(3, 10)},
@@ -799,13 +799,8 @@ def test_tidal_river_cache_reads_as_the_rule_off_trace_and_is_due_when_on(tmp_pa
     plain = {"key": "Y-1", "segments": off, "cut_reason": "tidal", "length_km": off[-1]["km_end"]}
     assert R.without_tidal_river(plain) is plain
 
-    def as_traced(ls, at, cap=40):            # the record trace() writes with the switch on
-        segs, why = R.build_segments(ls, at, cap, tidal_river=True)
-        o_segs, o_why = R.build_segments(ls, at, cap)
-        return ({"key": "Z-1", "segments": segs, "cut_reason": why, "length_km": segs[-1]["km_end"] if segs else 0.0,
-                 "tidal_river": True, "tidal_off": {"segments": len(o_segs), "cut_reason": o_why}},
-                {"key": "Z-1", "segments": o_segs, "cut_reason": o_why,
-                 "length_km": round(o_segs[-1]["km_end"], 3) if o_segs else 0.0})
+    def as_traced(ls, at, cap=40):            # the record trace() writes with the switch on, and with it off
+        return ({"key": "Z-1", **R.river_trace(ls, at, cap, True)}, {"key": "Z-1", **R.river_trace(ls, at, cap)})
     # a tidal lake, estuary or coastline right below the head of tide: no tidal segment is kept, the cut still reverts
     for bad in (attrs(2, 20, tidal=1, wb=9, ftype=390), attrs(2, 20, tidal=1, wb=9, ftype=493),
                 {**attrs(2, 20, tidal=1), "fcode": 56600}):
@@ -830,7 +825,9 @@ def test_tidal_river_cache_reads_as_the_rule_off_trace_and_is_due_when_on(tmp_pa
     c = {"key": "Y-1", "lat": 42.0, "lon": -72.0, "sources": ["registry"]}
     assert R.plan([c], {"Y-1": d}, now)[0] == []
     assert R.plan([c], {"Y-1": d}, now, tidal_river=True)[0] == [c]
-    assert R.plan([c], {"Y-1": {**d, "tidal_river": True}}, now, tidal_river=True)[0] == []
+    marked = {**d, "tidal_river": R.TIDAL_RULE, "tidal_off": {"segments": 1, "cut_reason": "tidal", "river": None}}
+    assert R.plan([c], {"Y-1": marked}, now, tidal_river=True)[0] == []
+    assert R.plan([c], {"Y-1": marked}, now)[0] == []
     # a retrace that failed keeps the old trace and waits a day before the next try
     tried = {**d, "last_attempt": {"at": iso(NOW - 2 * H), "error": "ConnectionError"}}
     assert R.plan([c], {"Y-1": tried}, now, tidal_river=True)[0] == []
@@ -841,14 +838,13 @@ def test_tidal_segment_label_and_stop_text_follow_the_record(monkeypatch):
     import json as _json
     from common import DATA_DIR
     from export import build as X
-    rules = _json.loads((DATA_DIR / "rules.json").read_text())
-    assert X.TIDAL_RIVER_TEXT == rules["reach"]["tidal_river"]["label"]
+    assert X.TIDAL_RIVER_TEXT == R.TIDAL_RIVER_DEFAULTS["label"]
     lines = [fl(1, -72.0, -71.9), fl(2, -71.9, -71.8), fl(3, -71.8, -71.7)]
     lines = lines + [fl(4, -71.7, -71.6)]
     w = {1: attrs(1, 40), 2: attrs(2, 30, tidal=1), 3: attrs(3, 20), 4: attrs(4, 10, tidal=1, wb=9, ftype=445)}
     segs, why = R.build_segments(lines, w, 40, tidal_river=True)
     assert why == "tidal_water" and [bool(x.get("tidal_river")) for x in segs] == [False, True, False]
-    r = {**_reach(), "segments": segs, "cut_reason": why, "length_km": segs[-1]["km_end"], "tidal_river": True}
+    r = {**_reach(), "segments": segs, "cut_reason": why, "length_km": segs[-1]["km_end"], "tidal_river": R.TIDAL_RULE}
     monkeypatch.setattr(R, "load_reaches", lambda: {r["key"]: r})
     monkeypatch.setattr(R, "cap_km", lambda rules=None: 40.0)
     band = R.travel(segs, 0.5)
@@ -884,16 +880,73 @@ def test_out_rules_read_as_the_tidal_switch_stands():
     from common import DATA_DIR
     from export import build as X
     rules = _json.loads((DATA_DIR / "rules.json").read_text())
-    tr = rules["reach"]["tidal_river"]
-    assert tr["enabled"] is False and tr["rationale"] and "40 kilometres" in tr["cap_rationale"]
-    out = X.tidal_river_rules(rules)
-    before = {**rules, "reach": {k: v for k, v in rules["reach"].items() if k != "tidal_river"}}
-    assert _json.dumps(out, indent=1, ensure_ascii=False) == _json.dumps(before, indent=1, ensure_ascii=False)
-    assert "tidal water" in out["reach"]["cap_rationale"] and out["reach"]["stop_at"][0] == "tidal"
-    assert "tidal_water" in tr["stop_at"] and "tidal_water" in X.STOP_TEXT
-    on = X.tidal_river_rules({**rules, "reach": {**rules["reach"], "tidal_river": {**tr, "enabled": True}}})
+    # shipped off: the rules file has no record of the switch, so nothing that reads or hashes it (the status build's
+    # constants and placement stamp, the export) sees the rule
+    assert "tidal_river" not in rules["reach"] and X.tidal_river_rules(rules) is rules
+    tr = R.TIDAL_RIVER_DEFAULTS
+    assert tr["rationale"] and "40 kilometres" in tr["cap_rationale"] and "tidal_water" in tr["stop_at"]
+    assert "tidal_water" in X.STOP_TEXT
+    # a record written but not enabled is left out of out/rules.json
+    off = X.tidal_river_rules({**rules, "reach": {**rules["reach"], "tidal_river": {"enabled": False}}})
+    assert _json.dumps(off, indent=1, ensure_ascii=False) == _json.dumps(rules, indent=1, ensure_ascii=False)
+    # on: the rule's record, under the file's own keys, and its words for the reach rule
+    on = X.tidal_river_rules({**rules, "reach": {**rules["reach"], "tidal_river": {"enabled": True}}})
     assert on["reach"]["cap_rationale"] == tr["cap_rationale"] and on["reach"]["stop_at"] == tr["stop_at"]
-    assert on["reach"]["tidal_river"]["label"] == tr["label"] and "tidal_river" in on["reach"]
+    assert on["reach"]["tidal_river"] == {**tr, "enabled": True}
+
+
+def test_tidal_river_off_leaves_the_status_build_and_its_placement_stamp_alone():
+    """Second review P1: the shipped rules carry no tidal-river record, so the status build's constants and its
+    placement stamp (which hashes the whole rules file) are what they were before the rule."""
+    import json as _json
+    from common import DATA_DIR
+    rules = _json.loads((DATA_DIR / "rules.json").read_text())
+    st, _ = S.build(now=NOW, write=False, rules=rules, **world(tmp_events([])))
+    assert "tidal_river" not in json.dumps(st["constants"]["reach"])
+    bare = {**rules, "reach": {k: v for k, v in rules["reach"].items() if k != "tidal_river"}}
+    stamp = lambda r: S.placement_stamp({}, [], {}, {}, r, {"MA"})      # noqa: E731
+    assert stamp(rules) == stamp(bare)
+
+
+def test_a_record_of_an_earlier_tidal_rule_is_traced_again_on_or_off():
+    """Second review P1: a record marked by an earlier version of the rule (tidal_river: true, no tidal_off) cannot be
+    read back exactly, so it is due again whichever way the switch stands."""
+    off_segs, _ = R.build_segments([fl(1, -72.0, -71.9)], {1: attrs(1, 30)}, 40)
+    early = {"key": "Y-1", "segments": off_segs, "cut_reason": "lake_or_reservoir", "length_km": off_segs[-1]["km_end"],
+             "tidal_river": True, "lat": 42.0, "lon": -72.0, "fetched_at": iso(NOW - H)}
+    c = {"key": "Y-1", "lat": 42.0, "lon": -72.0, "sources": ["registry"]}
+    assert R.plan([c], {"Y-1": early}, NOW)[0] == [c]
+    assert R.plan([c], {"Y-1": early}, NOW, tidal_river=True)[0] == [c]
+    # one that ran through an area of unknown type under the earlier rule: due again with the switch on
+    through = {**early, "cut_reason": "end_of_trace", "tidal_off": {"segments": 1}}
+    assert R.plan([c], {"Y-1": through}, NOW, tidal_river=True)[0] == [c]
+    # the current mark is not due again
+    now_mark = {**early, "tidal_river": R.TIDAL_RULE, "tidal_off": {"segments": 1, "cut_reason": "tidal", "river": None}}
+    assert R.plan([c], {"Y-1": now_mark}, NOW, tidal_river=True)[0] == []
+
+
+def test_the_rule_off_trace_keeps_its_river_name():
+    """Second review P1: a zero-length tributary flowline then a tidal mainstem: off, no segments and the river is the
+    tributary's; read back from the on record, the same."""
+    lines = [{"comid": 1, "coords": [[-72.0, 42.0], [-72.0, 42.0]]}, {"comid": 2, "coords": [[-72.0, 42.0], [-71.9, 42.0]]}]
+    at = {1: {**attrs(1, 20), "gnis_name": "Tributary"}, 2: {**attrs(2, 10, tidal=1), "gnis_name": "Mainstem"}}
+    on, off = R.river_trace(lines, at, 40, True), R.river_trace(lines, at, 40)
+    assert on["river"] == "Mainstem" and off == {"segments": [], "cut_reason": "tidal", "length_km": 0.0,
+                                                  "river": "Tributary"}
+    assert R.without_tidal_river(on) == off
+
+
+def test_a_zero_length_tidal_flowline_still_ends_the_travel_time():
+    """Second review P2: the tidal flowline has no length (no segment of its own); the river above keeps its time and
+    nothing below it gets one."""
+    lines = [fl(1, -72.0, -71.9), fl(2, -71.9, -71.9), fl(3, -71.9, -71.8)]
+    at = {1: attrs(1, 30), 2: attrs(2, 20, tidal=1), 3: {**attrs(3, 10), "slope": 0.01}}
+    on, off = R.river_trace(lines, at, 40, True), R.river_trace(lines, at, 40)
+    assert [x["comid"] for x in on["segments"]] == [1, 3] and on["segments"][1].get("below_tide") is True
+    b_on, b_off = R.travel(on["segments"], 0.6), R.travel(off["segments"], 0.6)
+    assert b_on[0] == b_off[0] and b_on[0]["hours_typical"] > 0
+    assert b_on[1]["hours_typical"] is None and b_on[1]["hours_fast"] is None and b_on[1]["below_tide"] is True
+    assert R.without_tidal_river(on) == off
 
 
 def test_jobson_matches_the_springfield_worked_example():
