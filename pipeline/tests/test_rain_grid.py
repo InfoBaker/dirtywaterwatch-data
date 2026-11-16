@@ -17,6 +17,9 @@ from urllib.parse import parse_qs, urlparse
 
 import pytest
 
+# its own world of outfalls: never the separate sewer points the committed rules switch on (conftest.py)
+pytestmark = pytest.mark.usefixtures("no_separate_sewer_points")
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from build import rain_likely as RL  # noqa: E402
