@@ -1105,6 +1105,441 @@
      "read_at": "2026-11-16"
     }
    ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0253901",
+   "outfall": "001",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0253901",
+   "outfall": "002",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0253901",
+   "outfall": "003",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0253901",
+   "outfall": "005",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0253901",
+   "outfall": "006",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0253901",
+   "outfall": "010",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0253901",
+   "outfall": "011",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0253901",
+   "outfall": "012",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0037818",
+   "outfall": "002",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 19, 2015.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0037818",
+   "outfall": "003",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 19, 2015.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0037818",
+   "outfall": "004",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 19, 2015.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0037818",
+   "outfall": "005",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 19, 2015.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0037818",
+   "outfall": "006",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 19, 2015.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0254690",
+   "outfall": "001",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Port Vue Borough's CSO responsibilities have been incorporated into the NPDES Permit for McKeesport WPCP (PA0026913) as of January 24, 2018.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0254690",
+   "outfall": "002",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Port Vue Borough's CSO responsibilities have been incorporated into the NPDES Permit for McKeesport WPCP (PA0026913) as of January 24, 2018.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0254690",
+   "outfall": "004",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Port Vue Borough's CSO responsibilities have been incorporated into the NPDES Permit for McKeesport WPCP (PA0026913) as of January 24, 2018.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0254690",
+   "outfall": "005",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Port Vue Borough's CSO responsibilities have been incorporated into the NPDES Permit for McKeesport WPCP (PA0026913) as of January 24, 2018.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0037711",
+   "outfall": "002",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list in September 2011.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0037711",
+   "outfall": "003",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list in September 2011.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PA0252751",
+   "outfall": "001",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Separated and closed CSO Outfall. Permit rescinded 6/12/18.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "PAG066132",
+   "outfall": "001",
+   "expect_status": "CSO",
+   "status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Permit Terminated 8/13/2020.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "DC0021199",
+   "outfall": "006",
+   "expect_status": "CSO",
+   "status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "DC0021199",
+   "outfall": "025",
+   "expect_status": "CSO",
+   "status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "DC0021199",
+   "outfall": "026",
+   "expect_status": "CSO",
+   "status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "DC0021199",
+   "outfall": "031",
+   "expect_status": "CSO",
+   "status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "DC0021199",
+   "outfall": "037",
+   "expect_status": "CSO",
+   "status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "DC0021199",
+   "outfall": "053",
+   "expect_status": "CSO",
+   "status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "DC0021199",
+   "outfall": "057",
+   "expect_status": "CSO",
+   "status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16"
+    }
+   ]
+  },
+  {
+   "file": "outfalls-mid-atlantic.json",
+   "npdes_permit": "DC0021199",
+   "outfall": "058",
+   "expect_status": "CSO",
+   "status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16"
+    }
+   ]
   }
  ],
  "add": [
