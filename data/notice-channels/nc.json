@@ -5840,6 +5840,32 @@
    "barrier": null
   },
   {
+   "id": "nc-dmf-polluted-area-proclamations",
+   "state": "NC",
+   "operator_id": null,
+   "agency": "NC DEQ Division of Marine Fisheries",
+   "name": "NC DEQ Division of Marine Fisheries (Shellfish Sanitation)",
+   "permit": null,
+   "channel_kind": "feed",
+   "urls": [
+    "https://www.deq.nc.gov/about/divisions/marine-fisheries/rules-proclamations-and-size-and-bag-limits/polluted-area-proclamations"
+   ],
+   "method": "html",
+   "legal_basis": "G.S. 113-221.1 and 15A NCAC 03H .0103: shellfish harvest areas are closed and reopened by proclamation",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "Polluted area proclamations: DMF's dated orders closing shellfish areas for bacteriological water quality and returning them to normal boundaries, with a 24-hour recorded message and an e-mail list. Read by the pipeline since November 16, 2026 (ingest.nc_dmf_shellfish): one shellfish_closure record per area a temporary-closure proclamation names, from its effective time to the effective day of the proclamation that reopens it; permanent-closure proclamations are left out. On the read of 2026-11-16 the newest proclamation was PA-67-2026 (issued 10/16/2026, a reopening).",
+   "checked": "2026-11-16",
+   "noun": "Data feed",
+   "sources": [
+    "nc-dmf-polluted-area-proclamations"
+   ],
+   "barrier": null,
+   "feed_source_id": "nc-dmf-polluted-area-proclamations"
+  },
+  {
    "id": "nc-dmf-spill-signs",
    "state": "NC",
    "operator_id": null,
