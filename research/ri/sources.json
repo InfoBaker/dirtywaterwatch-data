@@ -843,7 +843,7 @@
     "operator_type": "state",
     "role": "advisories",
     "event_types": [
-      "shellfish_closure (rain, CSO, SSO, HAB)"
+      "shellfish_closure"
     ],
     "waters_covered": "Conditional areas 1A, 16E, 8A/8C, 17, 5, 10PJ-N/E and emergency closures anywhere",
     "water_slugs": [
@@ -873,14 +873,16 @@
       "Closure rain totals"
     ],
     "fills_event_fields": [
-      "source_status",
-      "valid_until (Scheduled to Reopen)",
+      "waterbody_text",
+      "status",
+      "published_at",
       "source_updated_at",
-      "authority",
-      "official affected area (by area code)"
+      "advice_text",
+      "official affected area (by area code, DEM's polygon)"
     ],
     "cannot_fill": [
-      "cause per closure (only in press releases/emails)",
+      "closure start (the table gives none: the first read is used)",
+      "cause per closure",
       "volume",
       "outfall"
     ],
@@ -890,10 +892,10 @@
     "history": "none on page",
     "license": "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\"",
     "legal_basis": "R.I. Gen. Laws \u00a7 20-8.1-3",
-    "status": "candidate",
-    "status_reason": "Official affected-area advisories that include sewage-triggered emergency closures; not collected yet.",
+    "status": "used",
+    "status_reason": "Read by the ri-ridem-shellfish-closure-page ingester (ingest.ri_dem_shellfish): one shellfish_closure record per area DEM's table lists CLOSED, in DEM's words, from the first read that lists it; the Updated date is kept as the table's publication and the scheduled reopening as DEM's plan, never as an end; each area is placed by a point inside DEM's own Conditional Closure polygon and never colours a whole water; an area with no polygon is listed only. Built and tested on the page as the pipeline's runner read it on 2026-11-16: six areas closed (1A, 16E, 8A and 8C, 17, 5, 10PJ-N and 10PJ-E), table updated 11/7/2026, each scheduled to reopen at noon on 11/14.",
     "verified": "fetched",
-    "checked": "2026-11-01",
+    "checked": "2026-11-16",
     "notes": "Rain triggers (DEM 2025-05-15): Lower Providence River and Greenwich Bay close 6 days after 0.5-1.2 in. in 24 h, 7 days above 1.2 in."
   },
   {
@@ -1630,7 +1632,8 @@
     "operator_type": "state",
     "role": "advisories",
     "event_types": [
-      "beach_closure"
+      "beach_closure",
+      "hab_advisory"
     ],
     "waters_covered": null,
     "water_slugs": [],
@@ -1651,12 +1654,14 @@
       "body"
     ],
     "fills_event_fields": [
-      "published_at (to the minute)",
+      "started_at (to the minute)",
+      "ended_at (to the minute)",
+      "published_at",
       "advice_text",
-      "waterbody"
+      "waterbody_text"
     ],
     "cannot_fill": [
-      "coordinates",
+      "coordinates (joined to RIDOH's beach layer)",
       "bacteria values"
     ],
     "has_coordinates": false,
@@ -1665,10 +1670,10 @@
     "history": "season items",
     "license": "RI.gov policies",
     "legal_basis": null,
-    "status": "candidate",
-    "status_reason": "Gives publication times the sheet lacks; not collected yet.",
+    "status": "used",
+    "status_reason": "Read by the ri-ridoh-beach-advisory-feed ingester (ingest.ri_ridoh_beach_feed): one record per beach per closing item, from the minute RIDOH published the recommendation to close to the minute it published the re-opening, with RIDOH's reason. The same closures as the Google Sheet (ri-ridoh-beach-closures-sheet): every 2026 closure in the feed is a sheet row of the same day, so each is shown once, as the sheet's record. Not complete: no camp or cyanobacteria closures, and King Park Beach's re-opening (8/18 in the sheet) was never posted. 2026 season: 9 closing and 13 re-opening items, 21 closures; none in effect on 2026-11-16.",
     "verified": "fetched",
-    "checked": "2026-11-01",
+    "checked": "2026-11-16",
     "notes": ""
   },
   {

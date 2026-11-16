@@ -252,16 +252,19 @@
    "method": "rss",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "other",
+   "monitored": true,
+   "unmonitored_reason": null,
    "publishes": "notices",
-   "note": "RIDEM press releases (RSS). Voluntary; big SSOs appear only here, usually with a shellfish closure. It answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. (research/ri/report.md §2.2)",
+   "note": "RIDEM press releases (RSS). Voluntary; big SSOs appear here, usually with a shellfish closure. It answers the pipeline's runner (2026-11-16). Watched for change without records and without keeping its text (items can name people); the closures it announces are collected from DEM's shellfish table. (research/ri/report.md §2.2)",
    "checked": "2026-11-16",
    "noun": "News page",
    "sources": [
     "ri-ridem-press-releases"
    ],
-   "barrier": "not_verified"
+   "barrier": null,
+   "records": false,
+   "metadata_only": true,
+   "every_hours": 24
   },
   {
    "id": "ri-ridem-shellfish-closures",
@@ -270,7 +273,7 @@
    "agency": "Rhode Island DEM",
    "name": "Rhode Island DEM",
    "permit": null,
-   "channel_kind": "state_alert_page",
+   "channel_kind": "feed",
    "urls": [
     "https://dem.ri.gov/shellfish"
    ],
@@ -278,15 +281,16 @@
    "legal_basis": "R.I. Gen. Laws § 20-8.1-3: annual newspaper notice of polluted areas; licensees must call a dedicated telephone line before taking shellfish from conditionally approved waters",
    "basis_kind": "law",
    "monitored": false,
-   "unmonitored_reason": "other",
+   "unmonitored_reason": "feed_ingested",
    "publishes": "status",
-   "note": "RIDEM shellfish closures: 24-hour hotline 401-222-2900 and status page. The only legal public channel that reaches sewage releases in RI (closures after spills). Covers every operator in the state. The status page (dem.ri.gov/shellfish) answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. (research/ri/report.md §2.1-2.2)",
+   "note": "RIDEM shellfish closures: 24-hour hotline 401-222-2900 and the status page. The only legal public channel that reaches sewage releases in RI (closures after rain or spills); covers every operator in the state. The status page (dem.ri.gov/shellfish) is read by the pipeline since November 16, 2026 (ingest.ri_dem_shellfish): one shellfish_closure record per area DEM's table lists CLOSED, each placed by a point inside DEM's own polygon for the area; six areas closed on the runner's read of 2026-11-16 (table updated 11/7/2026). The hotline itself stays phone only. (research/ri/report.md §2.1-2.2)",
    "checked": "2026-11-16",
-   "noun": "State page",
+   "noun": "Data feed",
    "sources": [
     "ri-ridem-shellfish-closure-page"
    ],
-   "barrier": "not_verified"
+   "barrier": null,
+   "feed_source_id": "ri-ridem-shellfish-closure-page"
   },
   {
    "id": "ri-ridem-shellfish-email",
@@ -347,7 +351,7 @@
    "agency": "Rhode Island Department of Health",
    "name": "Rhode Island Department of Health",
    "permit": null,
-   "channel_kind": "state_alert_page",
+   "channel_kind": "feed",
    "urls": [
     "https://health.ri.gov/ridoh-feed-beaches"
    ],
@@ -355,16 +359,17 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "other",
+   "unmonitored_reason": "feed_ingested",
    "publishes": "status",
-   "note": "RIDOH beach advisory feed and beach pages. Voluntary publication of the closures in the sheet, timed to the minute. It answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. (research/ri/report.md §2.5)",
+   "note": "RIDOH beach advisory feed: RIDOH's recommendations to close and re-open beaches, each timed to the minute with its reason. Read by the pipeline since November 16, 2026 (ingest.ri_ridoh_beach_feed). The same closures as the sheet behind health.ri.gov/beaches (every 2026 closure in the feed is a sheet row of the same day), so each is shown once, as the sheet's record; the feed carries no camp or cyanobacteria closures. Voluntary. (research/ri/report.md §2.5)",
    "checked": "2026-11-16",
-   "noun": "State page",
+   "noun": "Data feed",
    "sources": [
     "ri-ridoh-beach-advisory-feed",
     "ri-ridoh-beach-pages"
    ],
-   "barrier": "not_verified"
+   "barrier": null,
+   "feed_source_id": "ri-ridoh-beach-advisory-feed"
   },
   {
    "id": "ri-ridoh-press-releases",
@@ -380,16 +385,19 @@
    "method": "rss",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "other",
+   "monitored": true,
+   "unmonitored_reason": null,
    "publishes": "notices",
-   "note": "RIDOH press releases (RSS), contact advisories after spills. Voluntary; RIDOH 'leads on notifying the public through health advisories' (DEM, ecoRI 2026-06-18). It answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. (research/ri/report.md §2.2, §2.5)",
+   "note": "RIDOH press releases (RSS), contact advisories after spills. Voluntary; RIDOH 'leads on notifying the public through health advisories' (DEM, ecoRI 2026-06-18). It answers the pipeline's runner (2026-11-16). Watched for change without records and without keeping its text (items can name people). (research/ri/report.md §2.2, §2.5)",
    "checked": "2026-11-16",
    "noun": "News page",
    "sources": [
     "ri-ridoh-press-releases-rss"
    ],
-   "barrier": "not_verified"
+   "barrier": null,
+   "records": false,
+   "metadata_only": true,
+   "every_hours": 24
   },
   {
    "id": "ri-ridoh-volunteer-beach-risks",
