@@ -628,7 +628,7 @@ METHOD_TEXT = ("Each operator's storms since 2015 (runs of days with at least 0.
                "smallest step at which it reported an overflow after at least half of the storms of that size and of "
                "all larger storms together. Below the possible amount no caution is shown only when at least 30 storms "
                "that small are on record and none was followed by a report.")
-NO_REPORT = "no dated overflow report from this operator in a source this site reads"
+NO_REPORT = "no dated overflow report from this operator in a source we read"
 NOT_READ = "the rain record for this operator has not been read yet"
 FRESH_S = 7 * 86400            # the current year at a point is asked again at most weekly
 DEFAULT_BUDGET = 1500
