@@ -503,7 +503,7 @@ def test_a_name_only_tie_beyond_25_km_is_refused_in_indiana():
     # no live state other than Texas has the cap (West Virginia and Louisiana, not live, add their own)
     live = json.loads((ROOT / "data" / "rules.json").read_text())["live_states"]
     # Indiana went live on 2026-11-15: Texas and Indiana are the live states with the cap
-    assert {k for k in OW.NAME_ONLY_CAP_M if k in live} == {"TX", "IN", "WV"}   # West Virginia live, 2026-11-15
+    assert {k for k in OW.NAME_ONLY_CAP_M if k in live} == {"TX", "IN", "WV", "LA"}   # West Virginia live 2026-11-15, Louisiana 2026-11-16
 
     class MT:
         waters = {"sample-creek-in": {"name": "Sample Creek", "kind": "river"}}
