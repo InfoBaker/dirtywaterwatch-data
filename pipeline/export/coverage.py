@@ -374,12 +374,15 @@ def load_notification_pages(path=None) -> dict | None:
 def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict], dischargers: list[dict], rules: dict,
              as_of, rain_states: dict | None = None, source_names: dict | None = None,
              notification_pages: dict | None = None, register: dict | None = None,
-             source_levels: dict | None = None) -> dict:
+             source_levels: dict | None = None, live=None) -> dict:
     """out/coverage.json: {built_from, as_of, definitions, states: {ST: {...}}, waters: {slug: {...}},
     rain_caution_states}. events: the public records (with `state`, `superseded`, `duplicate_of`); waters: the tracked
     water rows (slug, state, events); feeds and registry: out/sources.json's; rain_states: rain_caution_states;
     source_levels: {source_id: [the levels of its registry rows]} over the whole registry (EPA's eRule tables:
-    fed-echo-sewer-overflow-bypass-events, level federal, states ["US"])."""
+    fed-echo-sewer-overflow-bypass-events, level federal, states ["US"]); live: the live states (status.states()),
+    when given: every one of them has a row, with "No public reports" where it has neither a sewage report nor a
+    sewage feed (Oklahoma, 2026-11-16: its one feed is a beach table that made no record, and its state page had no
+    "Data and its limits" section)."""
     from export import csv as csv_mod
     now = status_mod.parse_time(as_of) or datetime.now(UTC)
     start = now - timedelta(days=365)
@@ -420,6 +423,9 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
         by_state[st].append(e)
         kept[e["event_id"]] = e
     codes = set(by_state) | {s for sid in sewage_feeds for s in feed_states.get(sid, [])}
+    # every live state has a row; which rows are published stays the export's filter (build.py, live only), so the
+    # rows and water grades computed before this are unchanged
+    codes |= {str(x).upper() for x in live or ()}
     states = {}
     for st in sorted(c for c in codes if c in STATE_NAMES):        # postal codes only (a feed's "US" is no state)
         evs = by_state.get(st, [])
