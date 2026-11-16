@@ -4482,22 +4482,7 @@ def record_hash(ev: dict) -> str:
     return hashlib.blake2b(json.dumps(ev, sort_keys=True, default=str).encode(), digest_size=16).hexdigest()
 
 
-def build(*args, **kw):
-    """The status build (_build below). The live states it derives from the rules it is given are its own: a build run
-    with rules other than data/rules.json (the tests' worlds) leaves the module's cached states as it found them, so a
-    later reader of states() in the same process sees data/rules.json, not that build's world (a test of the rain grid
-    after one of the rain caution read only the caution's world: 2026-11-16)."""
-    if kw.get("rules") is None:
-        return _build(*args, **kw)
-    global _STATES
-    saved = _STATES
-    try:
-        return _build(*args, **kw)
-    finally:
-        _STATES = saved
-
-
-def _build(include_fixtures: bool = False, now: datetime | None = None, events_dir: Path = EVENTS_DIR,
+def build(include_fixtures: bool = False, now: datetime | None = None, events_dir: Path = EVENTS_DIR,
           write: bool = True, waters: dict | None = None, outfalls: list | None = None,
           registry: dict | None = None, include_restricted: bool = False, rules: dict | None = None,
           reaches: dict | None = None, flows: tuple | None = None, discharger_towns: dict | None = None,
