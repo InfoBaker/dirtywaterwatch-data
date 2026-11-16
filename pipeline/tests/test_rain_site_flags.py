@@ -120,8 +120,9 @@ def test_coverage_says_per_state_whether_and_how_the_caution_is_computed():
     nj, pa = cov["NJ"], cov["PA"]
     assert nj["covered"] and nj["methods"] == ["site_flag"] and nj["permits"] == 1 and nj["cso_permits"] == 2
     assert nj["sources"] == ["nj-cso-likely"] and "njcsonotifications.com" in nj["sentence"]
-    assert "1 of the 2 combined sewer operators" in nj["sentence"] and "For the other 1" in nj["sentence"]
-    assert not pa["covered"] and pa["permits"] == 0 and pa["sentence"].startswith('No "discharge likely" caution here')
+    assert "1 of the 2 combined sewer operators" in nj["sentence"] and nj["sentence"].endswith("For the other 1, we show no rain caution.")
+    assert not pa["covered"] and pa["permits"] == 0 and pa["sentence"] == (
+        "We show no rain caution here because we do not read rainfall at this state's combined sewer outfalls.")
     off = RL.caution_coverage({"enabled": False, "permits": {}}, ["ME"])
     assert off["ME"]["covered"] is False
     src = Path(X.__file__).read_text()
@@ -175,6 +176,7 @@ def test_the_rain_rule_names_the_default_as_ours_and_says_what_the_caution_is_on
     for t in texts(rl):
         low = t.lower()
         assert "this site's default" not in low and "the site's default" not in low, t
+        assert "this site" not in low, t        # we and our (docs/editors-guide.md in the site repository)
         assert "this site applies its" not in low and "stricter default" not in low, t
         assert "estimate, not a report" not in low and "never replaces" not in low and "does not mean" not in low, t
         assert not {"safe", "clean"} & set(low.replace(".", " ").replace(",", " ").split()), t
@@ -192,3 +194,32 @@ def test_the_rain_rule_names_the_default_as_ours_and_says_what_the_caution_is_on
         assert e["trigger_basis"] == "default" and e["basis"].endswith(
             "so we apply our default of 0.1 inch in 24 hours at combined sewer outfalls")
     assert RL.RULE_WORDS["site_default"] == "our default"
+    # the reason no history is used, and the sentence of a state with no rain caution, in the same voice
+    from build import rain_history as RH
+    assert RL.NO_ENTRY == RH.NO_REPORT == "no dated overflow report from this operator in a source we read"
+    assert rl["label_by_basis_rationale"].startswith("The label reflects the basis for our caution.")
+
+
+def test_the_rules_file_speaks_as_we_in_every_public_string():
+    """Public wording (owner, 2026-11-15; docs/editors-guide.md in the site repository): the rules file's public
+    strings say "we" and "our"; "this site" stays only as a place ("not shown on this site")."""
+    import re
+    rules = json.loads((Path(X.__file__).resolve().parents[2] / "data" / "rules.json").read_text())
+
+    def texts(o, path=""):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                if not str(k).startswith("_"):
+                    yield from texts(v, f"{path}.{k}")
+        elif isinstance(o, list):
+            for i, v in enumerate(o):
+                yield from texts(v, f"{path}[{i}]")
+        elif isinstance(o, str):
+            yield path, o
+    actor = re.compile(r"(?i)(?<!on )\bthis site\b|\bthe site (?:shows|uses|marks|applies|reads|follows|counts|treats)\b"
+                       r"|\bapplies its own caution\b|\bsite interpretation\b")
+    hits = [(path, m.group(0)) for path, t in texts(rules) for m in actor.finditer(t)]
+    assert hits == []
+    # the sentences the build writes for a state's rain coverage: the unit spelled out, and no "shows nothing"
+    src = Path(RL.__file__).read_text()
+    assert "shows nothing" not in src and "of {e['threshold_in']:g} in\"" not in src
