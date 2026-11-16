@@ -5,9 +5,9 @@ homepage: "https://sewerfinder.spokanecity.org/CSOUpdate"
 kind: "html"
 level: "municipal"
 # Notes (research/wa, status candidate, verified fetched, checked 2026-11-03): Dated CSO starts for
-#   Spokane, but bot-walled to scripts; owner should ask the City for a feed or allow-listing.
-# Access detail (research, quoted): curl got HTTP 403 Incapsula; WebFetch got an empty page. Search
-#   snippet: 'If a site is flashing, that represents that a CSO overflow event is occurring or has
+#   Spokane; not collected yet.
+# Access detail (research, quoted): The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. The page holds a table of the monitoring sites
+#   with each one's status and overflow start time. Search snippet: 'If a site is flashing, that represents that a CSO overflow event is occurring or has
 #   occurred in the last 48 hours. The date and time listed is the start time of the overflow event
 #   and will automatically shut off after 48 hours.' 20 (or 25) monitoring sites.
 # Can fill: started_at, source_status, location_text
@@ -21,7 +21,7 @@ role: "events"
 event_types: ["cso"]
 states: ["WA"]
 access: ["html"]
-access_detail: "curl got HTTP 403 Incapsula; WebFetch got an empty page. Search snippet: 'If a site is flashing, that represents that a CSO overflow event is occurring or has occurred in the last 48 hours. The date and time listed is the start time of the overflow event and will automatically shut off after 48 hours.' 20 (or 25) monitoring sites."
+access_detail: "The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. The page holds a table of the monitoring sites with each one's status and overflow start time. Search snippet: 'If a site is flashing, that represents that a CSO overflow event is occurring or has occurred in the last 48 hours. The date and time listed is the start time of the overflow event and will automatically shut off after 48 hours.' 20 (or 25) monitoring sites."
 machine_readable: false
 legal_basis: null
 checked: "2026-11-03"
