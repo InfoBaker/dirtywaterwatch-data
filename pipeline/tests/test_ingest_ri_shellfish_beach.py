@@ -87,7 +87,7 @@ def test_a_scheduled_reopening_is_never_an_end():
 
 def test_a_closure_that_leaves_a_complete_read_ends_there_and_a_return_is_a_new_record():
     prev, _ = D.build(PAGE, T1, [])
-    gone = drop_row(PAGE, "Mount Hope Bay (Area 17)")
+    gone = edit(drop_row(PAGE, "Mount Hope Bay (Area 17)"), "Updated 11/7/2026", "Updated 11/16/2026")
     opened = gone.replace('<h5 class="text-align-center">CLOSED</h5>\n</td>\n<td>\n<h5 class="text-align-center">Noon 11/14</h5>',
                           '<h5 class="text-align-center">OPEN</h5>\n</td>\n<td>\n<h5 class="text-align-center"></h5>', 1)
     recs, meta = D.build(opened, T2, prev)
@@ -189,7 +189,9 @@ def test_one_unreadable_row_holds_every_earlier_closure(run_dem):
     page = drop_row(PAGE, "Mount Hope Bay (Area 17)").replace(
         '<h5 class="text-align-center">CLOSED</h5>', '<h5 class="text-align-center">PENDING</h5>', 1)   # invented
     code, doc = run_dem(page, T2)
-    assert code == 1 and doc["ok"] is False and len(doc["meta"]["unread"]) == 1
+    assert code == 1 and doc["ok"] is False and [u["reason"] for u in doc["meta"]["unread"]] == [
+        "a status the reader does not take (not CLOSED or OPEN)",
+        "a closed area is missing from a table with the same Updated date"]
     by = by_codes(doc["records"])
     assert by[("17",)]["status"] == "advisory_active" and by[("17",)]["raw"]["_held_unread"]       # absent, held
     assert by[("1A",)]["status"] == "advisory_active" and by[("1A",)]["raw"]["_held_unread"]       # unread, held
@@ -270,7 +272,8 @@ def test_an_end_seen_late_never_colours_the_unread_time(ri_waters_real):
     recs, _ = D.build(PAGE, T1, [])
     r = by_codes(recs)[("17",)]
     late = "2027-01-05T15:00:00Z"                                    # unread for weeks, then no longer listed
-    lifted, _ = D.build(drop_row(PAGE, "Mount Hope Bay (Area 17)"), late, recs)
+    lifted, _ = D.build(edit(drop_row(PAGE, "Mount Hope Bay (Area 17)"), "Updated 11/7/2026", "Updated 1/5/2027"),
+                        late, recs)
     r = by_codes(lifted)[("17",)]
     assert r["ended_at"] == late and r["raw"]["_last_seen_in_source"] == T1
     now = S.parse_time(late) + timedelta(days=1)
@@ -516,3 +519,51 @@ def test_the_register_rows_and_sources_say_what_is_collected():
     research = {r["id"]: r for r in json.loads((ROOT / "research" / "ri" / "sources.json").read_text())}
     assert research[D.SOURCE_ID]["status"] == "used" and research[F.SOURCE_ID]["status"] == "used"
     assert "not collected yet" not in research[D.SOURCE_ID]["status_reason"]
+
+
+# ================================================================ Astra review 2026-11-16 (reviews/astra-ri-feeds-review.md)
+
+def test_review_p1_1_a_row_missing_from_an_unchanged_table_ends_nothing():
+    prev, _ = D.build(PAGE, T1, [])
+    recs, meta = D.build(drop_row(PAGE, "Mount Hope Bay (Area 17)"), T2, prev)        # same Updated date
+    assert meta["lifted_this_read"] == 0 and meta["unread"]
+    assert meta["unread"][0]["reason"] == "a closed area is missing from a table with the same Updated date"
+    assert all(r["status"] == "advisory_active" for r in recs) and len(recs) == 6
+    # DEM republished the table (a new Updated date) without the area: that read ends it
+    moved = edit(drop_row(PAGE, "Mount Hope Bay (Area 17)"), "Updated 11/7/2026", "Updated 11/16/2026")
+    recs, meta = D.build(moved, T2, prev)
+    assert meta["unread"] == [] and by_codes(recs)[("17",)]["status"] == "advisory_lifted"
+
+
+def test_review_p1_3_area_codes_take_a_strict_form_and_nothing_personal_is_saved():
+    page = edit(PAGE, "(Area 5)", "(Area 5; contact Pat Example at 401-555-0100 or pat@example.org)")   # invented
+    parsed = D.parse(page, T1)
+    blob = D.saved_form(parsed)
+    for p in ("Pat Example", "401-555-0100", "pat@example.org"):
+        assert p not in blob, p
+    assert [u["reason"] for u in parsed["unread"]] == ["area codes the reader cannot take"]
+
+
+def test_review_p1_2_a_partial_feed_read_ends_nothing(beaches):
+    neg = FEED.replace("recommends re-opening", "does not recommend re-opening")       # invented: no reopenings
+    prev, _ = F.build(neg, T1, [], [], beaches)
+    assert all(r["status"] == "advisory_active" for r in prev)
+    page = edit(FEED, "King Park Beach in Newport due to high bacteria counts", "King Park Beach in Newport")
+    recs, meta = F.build(page, T2, prev, [], beaches)
+    assert meta["unread"] and meta["ended_this_read"] == 0
+    assert all(r["status"] == "advisory_active" and r["ended_at"] is None for r in recs)
+
+
+def test_review_p2_4_a_bacteria_reopening_does_not_lift_a_bloom_advisory(beaches):
+    page = FEED.replace("due to high bacteria counts", "due to a cyanobacteria bloom")                 # invented
+    assert page != FEED
+    bt = next(r for r in F.build(page, T1, [], [], beaches)[0] if r["raw"]["node"] == "49426")
+    assert bt["event_type"] == "hab_advisory" and bt["status"] == "advisory_active" and bt["ended_at"] is None
+
+
+def test_review_p2_5_a_carried_record_gains_its_sheet_link(beaches):
+    first, _ = F.build(FEED, T1, [], [], beaches)
+    m = re.search(r'<article\b(?:(?!</article>).)*?/node/49446".*?</article>', FEED, re.S)
+    recs, _ = F.build(FEED.replace(m.group(0), ""), T2, first, _sheet(beaches), beaches)
+    kp = next(r for r in recs if r["raw"]["beach"] == "King Park Beach")
+    assert kp["duplicate_of"] == "ri-ridoh-beaches:king-park-beach:newport:2026-08-13"

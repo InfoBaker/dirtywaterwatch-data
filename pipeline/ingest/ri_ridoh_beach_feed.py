@@ -25,7 +25,8 @@ Record rules
     end (advisory_lifted). started_at and published_at are the closing item's publication time and ended_at the
     re-opening item's (time_precision minute, raw.ended_at_precision minute): RIDOH's recommendation is the advisory
     and runs from its publication. A closing item for a beach already closed is a new record; a re-opening ends every
-    earlier open record of that beach. The season's end, an item that scrolls off the page, or a re-opening for a beach
+    earlier open record of that beach and category (a bacteria re-opening never lifts a bloom advisory); a read with
+    an unreadable item ends nothing. The season's end, an item that scrolls off the page, or a re-opening for a beach
     with no open record ends or invents nothing (meta.unmatched_reopenings).
   - Text: the beach as RIDOH names it (a shared "beach" in "Oakland and Conimicut beach" completed for each name, said
     so in raw.name_basis), the town RIDOH gives, the reason in RIDOH's words (raw.reason). The re-opening item's
@@ -176,7 +177,9 @@ def read_item(body: str) -> tuple[dict | None, dict | None, bool]:
     if not beaches:
         return None, {**base, "reason": "a recommendation naming no beach the reader can take"}, False
     reason = P.clean_text(tail.group("reason").strip())[0] if verb == "close" else None
-    return {**base, "title": P.clean_field(title, "place"), "kind": verb, "reason": reason,
+    # the category a re-opening speaks for, from its reason (never kept as text): bloom or bacteria (Astra P2-4)
+    scope = ("hab_advisory" if R.HAB_RE.search(tail.group("reason")) else "beach_closure") if verb == "reopen" else None
+    return {**base, "title": P.clean_field(title, "place"), "kind": verb, "reason": reason, "scope": scope,
             "beaches": [{k: (P.clean_field(v, "place") if isinstance(v, str) and k in ("name", "town") else v)
                          for k, v in b.items()} for b in beaches]}, None, False
 
@@ -208,7 +211,7 @@ def parse(page: str) -> dict:
 
 def saved_form(parsed: dict) -> str:
     """What the raw save keeps: the parsed items as JSON; never the page's markup."""
-    return json.dumps({"url": URL, **parsed}, ensure_ascii=False, indent=1)
+    return json.dumps(P.deep_clean({"url": URL, **parsed}), ensure_ascii=False, indent=1)
 
 
 def local_day(t: str) -> str:
@@ -240,6 +243,19 @@ def sheet_index(sheet: list[dict]) -> list[tuple]:
         if ids and s.get("started_at") and s.get("lat") is not None:
             out.append((ids, str(s["started_at"])[:10], s.get("event_type"), s["event_id"]))
     return out
+
+
+def relink(r: dict, sheet_ix: list[tuple]) -> None:
+    """duplicate_of for a record with no link yet: the one sheet record of the same RIDOH beach, type and local day."""
+    raw = r.get("raw") or {}
+    if r.get("duplicate_of") or not raw.get("coord_join"):
+        return
+    ids = {str(m.get("beach_id")) for m in raw["coord_join"].get("matched") or [] if m.get("beach_id") is not None}
+    day = local_day(r["started_at"])
+    same = [e for i, d, t, e in sheet_ix if i & ids and d == day and t == r.get("event_type")]
+    if len(same) == 1:
+        r["duplicate_of"] = same[0]
+        raw["same_as_sheet"] = {"event_id": same[0], "basis": SAME_AS_SHEET}
 
 
 def record_for(it: dict, b: dict, beaches: list[dict], fetched: str, sheet_ix: list[tuple]) -> dict:
@@ -310,14 +326,17 @@ def build(page: str, fetched: str, previous: list[dict], sheet: list[dict] | Non
             else:
                 opened += 1
             records[rec["source_record_id"]] = rec
+    for r in records.values():          # a carried record gains its sheet link too (Astra P2-5)
+        relink(r, sheet_ix)
     unmatched, ended = [], 0
     for it in sorted(parsed["items"], key=lambda x: (x["published_at"], x["node"])):
-        if it["kind"] != "reopen":
-            continue
+        if it["kind"] != "reopen" or parsed["unread"]:
+            continue                    # a partial read ends nothing (Astra P1-2)
         for b in it["beaches"]:
             me = tuple(ident(b["name"], b.get("town"), beaches))
             hits = [r for r in records.values()
                     if r.get("status") == "advisory_active" and str(r.get("started_at") or "") < it["published_at"]
+                    and r.get("event_type") == it.get("scope")
                     and same_beach(tuple((r.get("raw") or {}).get("ident") or ()), me)]
             done = [r for r in records.values() if ((r.get("raw") or {}).get("reopened_by") or {}).get("node")
                     == it["node"] and same_beach(tuple((r.get("raw") or {}).get("ident") or ()), me)]
