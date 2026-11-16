@@ -1,14 +1,13 @@
 {
  "about": "Water names in Colorado's records that data/receiving-waters-national.json does not hold for CO: the waters the state's advisory and notice records name, one row per name and county, with the number of records, how many are open, the county and up to five points where the source gives them. Records naming no water are counted in by_reason. EPA's outfall registry gives every plant outfall its receiving water separately. Written by scripts/mountain_report_water_names.py.",
  "state": "CO",
- "waters": 4,
- "reports": 4,
+ "waters": 2,
+ "reports": 2,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in CO": 2,
   "2 NHD waters of that name in CO and the reports give no place to choose one": 2
  },
- "resolved_names": 17,
- "resolved_reports": 20,
+ "resolved_names": 19,
+ "resolved_reports": 22,
  "build": {
   "date": "2026-11-16",
   "command": "python -m ingest.waters_from_nhd --names research/co/receiving-waters-missing.json --state CO",
@@ -17,28 +16,6 @@
   "network_requests": 4
  },
  "rows": [
-  {
-   "name": "Blue Heron Lake",
-   "reports": 1,
-   "open": 0,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   },
-   "reason": "no NHD flowline or waterbody of that name in CO; the reports give no place to look for it in the NHD high-resolution flowlines"
-  },
-  {
-   "name": "Eleven Mile Reservoir",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   },
-   "reason": "no NHD flowline or waterbody of that name in CO; the reports give no place to look for it in the NHD high-resolution flowlines"
-  },
   {
    "name": "Jackson Reservoir",
    "reports": 1,
@@ -201,6 +178,22 @@
     "willow-creek-reservoir-co"
    ],
    "how": "a water record already holds the name"
+  },
+  {
+   "name": "Blue Heron Lake",
+   "reports": 1,
+   "slugs": [
+    "blue-heron-reservoir-co"
+   ],
+   "how": "an alias in data/water-aliases.json (2026-11-16): the sheet's \"Blue Heron Lake, St. Vrain State Park\" is the park's Blue Heron Reservoir (Colorado Parks and Wildlife's St. Vrain State Park page)"
+  },
+  {
+   "name": "Eleven Mile Reservoir",
+   "reports": 1,
+   "slugs": [
+    "elevenmile-canyon-reservoir-co"
+   ],
+   "how": "an alias in data/water-aliases.json (2026-11-16): Eleven Mile Reservoir is Elevenmile Canyon Reservoir, Eleven Mile State Park (Colorado Parks and Wildlife's Eleven Mile State Park page)"
   }
  ]
 }

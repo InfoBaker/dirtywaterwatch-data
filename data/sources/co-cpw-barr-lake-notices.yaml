@@ -4,10 +4,11 @@ url: "https://cpw.state.co.us/state-parks/barr-lake-state-park/barr-lake-state-p
 homepage: "https://cpw.state.co.us/state-parks/barr-lake-state-park/barr-lake-state-park-activities-trails"
 kind: "html"
 level: "state"
-# Notes (research/co, status used, verified fetched, checked 2026-11-14): The park page's line "the
+# Notes (research/co, status used, verified fetched, checked 2026-11-15): The park page's line "the
 #   reservoir is now on red alert due to high concentrations of toxic algae" (as of August 3, 2026,
 #   7 p.m.) is read as a standing advisory in the co-official-notices reviewed set; the low-water
-#   boating closure on the same line is not a water-quality record.
+#   boating closure on the same line is not a water-quality record. On 2026-11-15 the page carries
+#   the reviewed sentence in its Boat Ramp section and a reworded alert in its banner.
 cadence: null
 license: "none stated"
 attribution: "Colorado Parks and Wildlife"
@@ -19,4 +20,4 @@ access: ["html"]
 access_detail: null
 machine_readable: false
 legal_basis: null
-checked: "2026-11-14"
+checked: "2026-11-15"
