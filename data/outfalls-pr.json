@@ -14,9 +14,9 @@
    "outfall": "002",
    "outfall_name": "Mercantil Plaza CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Caño Martín Peña",
+   "receiving_water_echo": "Ca\u00f1o Mart\u00edn Pe\u00f1a",
    "receiving_water_source": "operator",
-   "designated_uses": "Transporte y navegación, recreación, control de inundaciones, hábitat natural, cultural y social.",
+   "designated_uses": "Transporte y navegaci\u00f3n, recreaci\u00f3n, control de inundaciones, h\u00e1bitat natural, cultural y social.",
    "lat": 18.431103,
    "lon": -66.058863,
    "coords_from": "pr-prasa-cso-data",
@@ -37,8 +37,13 @@
     "paired_by": "the same permit and outfall number"
    },
    "supersedes": "data/outfalls-us.json PR0021555 002",
-   "water_slug": null,
-   "match": "none"
+   "water_slug": "cano-de-martin-pena-pr",
+   "match": "geometry+name",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 248,
+   "water_match": "name: its receiving water 'Ca\u00f1o Mart\u00edn Pe\u00f1a' by name; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 248 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -48,9 +53,9 @@
    "outfall": "003",
    "outfall_name": "San Ramon CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Caño Martín Peña",
+   "receiving_water_echo": "Ca\u00f1o Mart\u00edn Pe\u00f1a",
    "receiving_water_source": "operator",
-   "designated_uses": "Transporte y navegación, recreación, control de inundaciones, hábitat natural, cultural y social.",
+   "designated_uses": "Transporte y navegaci\u00f3n, recreaci\u00f3n, control de inundaciones, h\u00e1bitat natural, cultural y social.",
    "lat": 18.450808,
    "lon": -66.076047,
    "coords_from": "pr-prasa-cso-data",
@@ -71,8 +76,13 @@
     "paired_by": "the same permit and outfall number"
    },
    "supersedes": "data/outfalls-us.json PR0021555 003",
-   "water_slug": null,
-   "match": "none"
+   "water_slug": "cano-de-martin-pena-pr",
+   "match": "name_only",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 1377,
+   "water_match": "name: its receiving water 'Ca\u00f1o Mart\u00edn Pe\u00f1a' by name; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 1377 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -82,9 +92,9 @@
    "outfall": "004",
    "outfall_name": "Puerta de San Juan CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Bahía de San Juan",
+   "receiving_water_echo": "Bah\u00eda de San Juan",
    "receiving_water_source": "operator",
-   "designated_uses": "Transporte y comercio marítimo, recreación, turismo, pesca, hábitat natural, cultural e histórico.",
+   "designated_uses": "Transporte y comercio mar\u00edtimo, recreaci\u00f3n, turismo, pesca, h\u00e1bitat natural, cultural e hist\u00f3rico.",
    "lat": 18.465164,
    "lon": -66.119483,
    "coords_from": "pr-prasa-cso-data",
@@ -106,7 +116,13 @@
    },
    "supersedes": "data/outfalls-us.json PR0021555 004",
    "water_slug": null,
-   "match": "none"
+   "match": "none",
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "water_match": "none: no record named 'Bah\u00eda de San Juan' in PR",
+   "no_water_reason": "no record named 'Bah\u00eda de San Juan' in PR",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -116,9 +132,9 @@
    "outfall": "005",
    "outfall_name": "Paseo La Princesa CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Bahía de San Juan",
+   "receiving_water_echo": "Bah\u00eda de San Juan",
    "receiving_water_source": "operator",
-   "designated_uses": "Transporte y comercio marítimo, recreación, turismo, pesca, hábitat natural, cultural e histórico",
+   "designated_uses": "Transporte y comercio mar\u00edtimo, recreaci\u00f3n, turismo, pesca, h\u00e1bitat natural, cultural e hist\u00f3rico",
    "lat": 18.464834,
    "lon": -66.119571,
    "coords_from": "pr-prasa-cso-data",
@@ -140,7 +156,13 @@
    },
    "supersedes": "data/outfalls-us.json PR0021555 005",
    "water_slug": null,
-   "match": "none"
+   "match": "none",
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "water_match": "none: no record named 'Bah\u00eda de San Juan' in PR",
+   "no_water_reason": "no record named 'Bah\u00eda de San Juan' in PR",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -150,9 +172,9 @@
    "outfall": "006",
    "outfall_name": "Miramar CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Bahía de San Juan",
+   "receiving_water_echo": "Bah\u00eda de San Juan",
    "receiving_water_source": "operator",
-   "designated_uses": "Transporte y Comercio Marítimo, Recreación, Turismo, Pesca, Hábitat Natural, Cultural e Histórico.",
+   "designated_uses": "Transporte y Comercio Mar\u00edtimo, Recreaci\u00f3n, Turismo, Pesca, H\u00e1bitat Natural, Cultural e Hist\u00f3rico.",
    "lat": 18.447242,
    "lon": -66.085429,
    "coords_from": "pr-prasa-cso-data",
@@ -174,7 +196,13 @@
    },
    "supersedes": "data/outfalls-us.json PR0021555 006",
    "water_slug": null,
-   "match": "none"
+   "match": "none",
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "water_match": "none: no record named 'Bah\u00eda de San Juan' in PR",
+   "no_water_reason": "no record named 'Bah\u00eda de San Juan' in PR",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -184,9 +212,9 @@
    "outfall": "007",
    "outfall_name": "Plaza Las Americas CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Río de Puerto Nuevo",
+   "receiving_water_echo": "R\u00edo de Puerto Nuevo",
    "receiving_water_source": "operator",
-   "designated_uses": "Recreación, Control de inundaciones, hábitat natural, Educación y Concientización Ambiental.",
+   "designated_uses": "Recreaci\u00f3n, Control de inundaciones, h\u00e1bitat natural, Educaci\u00f3n y Concientizaci\u00f3n Ambiental.",
    "lat": 18.425902,
    "lon": -66.078678,
    "coords_from": "pr-prasa-cso-data",
@@ -208,7 +236,13 @@
    },
    "supersedes": "data/outfalls-us.json PR0021555 007",
    "water_slug": null,
-   "match": "none"
+   "match": "none",
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "water_match": "none: no record named 'R\u00edo de Puerto Nuevo' in PR",
+   "no_water_reason": "no record named 'R\u00edo de Puerto Nuevo' in PR",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -218,9 +252,9 @@
    "outfall": "008",
    "outfall_name": "Puente Constitucion CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Río de Puerto Nuevo",
+   "receiving_water_echo": "R\u00edo de Puerto Nuevo",
    "receiving_water_source": "operator",
-   "designated_uses": "Recreación, Control de inundaciones, hábitat natural, Educación y Concientización Ambiental.",
+   "designated_uses": "Recreaci\u00f3n, Control de inundaciones, h\u00e1bitat natural, Educaci\u00f3n y Concientizaci\u00f3n Ambiental.",
    "lat": 18.439772,
    "lon": -66.081712,
    "coords_from": "pr-prasa-cso-data",
@@ -242,7 +276,13 @@
    },
    "supersedes": "data/outfalls-us.json PR0021555 008",
    "water_slug": null,
-   "match": "none"
+   "match": "none",
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "water_match": "none: no record named 'R\u00edo de Puerto Nuevo' in PR",
+   "no_water_reason": "no record named 'R\u00edo de Puerto Nuevo' in PR",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -252,9 +292,9 @@
    "outfall": "009",
    "outfall_name": "Pavia CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Caño Martín Peña",
+   "receiving_water_echo": "Ca\u00f1o Mart\u00edn Pe\u00f1a",
    "receiving_water_source": "operator",
-   "designated_uses": "Transporte y navegación, Recreación, control de inundaciones, hábitat natural, cultural y social.",
+   "designated_uses": "Transporte y navegaci\u00f3n, Recreaci\u00f3n, control de inundaciones, h\u00e1bitat natural, cultural y social.",
    "lat": 18.442148,
    "lon": -66.070323,
    "coords_from": "pr-prasa-cso-data",
@@ -275,8 +315,13 @@
     "paired_by": "the same permit and outfall number"
    },
    "supersedes": "data/outfalls-us.json PR0021555 009",
-   "water_slug": null,
-   "match": "none"
+   "water_slug": "cano-de-martin-pena-pr",
+   "match": "name_only",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 572,
+   "water_match": "name: its receiving water 'Ca\u00f1o Mart\u00edn Pe\u00f1a' by name; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 572 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -286,9 +331,9 @@
    "outfall": "010",
    "outfall_name": "Del Parque CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Caño Martín Peña",
+   "receiving_water_echo": "Ca\u00f1o Mart\u00edn Pe\u00f1a",
    "receiving_water_source": "operator",
-   "designated_uses": "Transporte y navegación, recreación, control de inundaciones, hábitat natural, cultural y social.",
+   "designated_uses": "Transporte y navegaci\u00f3n, recreaci\u00f3n, control de inundaciones, h\u00e1bitat natural, cultural y social.",
    "lat": 18.440767,
    "lon": -66.068582,
    "coords_from": "pr-prasa-cso-data",
@@ -309,8 +354,13 @@
     "paired_by": "the same permit and outfall number"
    },
    "supersedes": "data/outfalls-us.json PR0021555 010",
-   "water_slug": null,
-   "match": "none"
+   "water_slug": "cano-de-martin-pena-pr",
+   "match": "name_only",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 522,
+   "water_match": "name: its receiving water 'Ca\u00f1o Mart\u00edn Pe\u00f1a' by name; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 522 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -320,9 +370,9 @@
    "outfall": "011",
    "outfall_name": "Bolivar CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Caño Martín Peña",
+   "receiving_water_echo": "Ca\u00f1o Mart\u00edn Pe\u00f1a",
    "receiving_water_source": "operator",
-   "designated_uses": "Transporte y navegación, recreación, control de inundaciones, hábitat natural, cultural y social.",
+   "designated_uses": "Transporte y navegaci\u00f3n, recreaci\u00f3n, control de inundaciones, h\u00e1bitat natural, cultural y social.",
    "lat": 18.440506,
    "lon": -66.067059,
    "coords_from": "pr-prasa-cso-data",
@@ -343,8 +393,13 @@
     "paired_by": "the same permit and outfall number"
    },
    "supersedes": "data/outfalls-us.json PR0021555 011",
-   "water_slug": null,
-   "match": "none"
+   "water_slug": "cano-de-martin-pena-pr",
+   "match": "name_only",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 545,
+   "water_match": "name: its receiving water 'Ca\u00f1o Mart\u00edn Pe\u00f1a' by name; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 545 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -354,9 +409,9 @@
    "outfall": "012",
    "outfall_name": "La Puntilla CSO",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Bahía de San Juan",
+   "receiving_water_echo": "Bah\u00eda de San Juan",
    "receiving_water_source": "operator",
-   "designated_uses": "Transporte y comercio marítimo, recreación, turismo, pesca, hábitat natural, cultural e histórico.",
+   "designated_uses": "Transporte y comercio mar\u00edtimo, recreaci\u00f3n, turismo, pesca, h\u00e1bitat natural, cultural e hist\u00f3rico.",
    "lat": 18.463038,
    "lon": -66.118799,
    "coords_from": "pr-prasa-cso-data",
@@ -378,7 +433,13 @@
    },
    "supersedes": "data/outfalls-us.json PR0021555 012",
    "water_slug": null,
-   "match": "none"
+   "match": "none",
+   "water_name": null,
+   "water_kind": null,
+   "distance_m": null,
+   "water_match": "none: no record named 'Bah\u00eda de San Juan' in PR",
+   "no_water_reason": "no record named 'Bah\u00eda de San Juan' in PR",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   },
   {
    "npdes_permit": "PR0021555",
@@ -388,9 +449,9 @@
    "outfall": "013",
    "outfall_name": "Los Angeles - Punto de Desborde",
    "outfall_status": "CSO",
-   "receiving_water_echo": "Caño Martín Peña",
+   "receiving_water_echo": "Ca\u00f1o Mart\u00edn Pe\u00f1a",
    "receiving_water_source": "operator",
-   "designated_uses": "Transporte y navegación, recreación, control de inundaciones, hábitat natural, cultural y social.",
+   "designated_uses": "Transporte y navegaci\u00f3n, recreaci\u00f3n, control de inundaciones, h\u00e1bitat natural, cultural y social.",
    "lat": 18.438061,
    "lon": -66.066434,
    "coords_from": "pr-prasa-cso-data",
@@ -411,8 +472,13 @@
     "paired_by": "the same permit and outfall number"
    },
    "supersedes": "data/outfalls-us.json PR0021555 013",
-   "water_slug": null,
-   "match": "none"
+   "water_slug": "cano-de-martin-pena-pr",
+   "match": "geometry+name",
+   "water_name": "Ca\u00f1o de Mart\u00edn Pe\u00f1a",
+   "water_kind": "stream",
+   "distance_m": 308,
+   "water_match": "name: its receiving water 'Ca\u00f1o Mart\u00edn Pe\u00f1a' by name; Ca\u00f1o de Mart\u00edn Pe\u00f1a (cano-de-martin-pena-pr, NHDPlus V2.1 record), 308 m from the point",
+   "water_matched_by": "ingest.outfall_waters (2026-11-16)"
   }
  ]
 }
