@@ -30,6 +30,13 @@ def rules_on(**over) -> dict:
     return r
 
 
+def rules_off() -> dict:
+    """The committed rules with the separate sewer switch off (the committed switch is on since 2026-11-16)."""
+    r = copy.deepcopy({"rain_likely": RULES["rain_likely"]})
+    r["rain_likely"]["separate_sewers"]["enabled"] = False
+    return r
+
+
 # ---------------------------------------------------------------- a synthetic record
 
 def rain_days() -> dict[date, float]:
@@ -118,9 +125,10 @@ def levels():
 
 # ---------------------------------------------------------------- the switch and the pinned test
 
-def test_rules_pin_the_assessments_test_with_the_switch_off_and_the_owners_words():
+def test_rules_pin_the_assessments_test_with_the_switch_on_and_the_owners_words():
     ss = RULES["rain_likely"]["separate_sewers"]
-    assert ss["enabled"] is False and "live_states" not in ss
+    assert ss["enabled"] is True and "live_states" not in ss      # switched on 2026-11-16, the day it was merged off
+    assert "switched on the same day" in ss["_enabled_rationale"] and "checked before its export is published" in ss["_enabled_rationale"]
     assert "Yes, build the rain caution for those 28 operators" in ss["_enabled_rationale"] and "28" in ss["_approved_note"]
     assert "2026-11-16" in ss["_enabled_rationale"] and "2026-11-16" in ss["_approved_note"]
     cfg = SS.settings(RULES)
@@ -134,7 +142,7 @@ def test_rules_pin_the_assessments_test_with_the_switch_off_and_the_owners_words
     for k in SS.DEFAULTS:
         if k not in ("enabled", "approved"):
             assert ss[k] == SS.DEFAULTS[k], k       # the code's defaults are the pinned values
-    assert not SS.enabled(RULES)
+    assert SS.enabled(RULES) and not SS.enabled(rules_off())
     public = json.dumps({k: v for k, v in ss.items() if not k.startswith("_")}).lower()
     assert "no risk" not in public and "safe" not in public
 
@@ -292,7 +300,8 @@ def test_trace_points_ask_for_a_stretch_from_each_river_report_point():
                    {"event_id": "e2", "point": [33.8402, -87.28], "water_slugs": ["town-creek-al"]},
                    {"event_id": "e3", "point": [30.6, -88.0], "water_slugs": ["mobile-bay-al"]},
                    {"event_id": "e4", "point": None, "water_slugs": ["town-creek-al"]}]}}}}
-    assert SS.trace_points(WATERS, {"rain_likely": RULES["rain_likely"]}, lv) == []          # switch off
+    assert SS.trace_points(WATERS, rules_off(), lv) == []          # switch off
+    assert SS.trace_points(WATERS, {"rain_likely": RULES["rain_likely"]}, lv) == []          # on, al-wet not approved
     pts = SS.trace_points(WATERS, rules_on(), lv)
     assert len(pts) == 1 and pts[0]["key"] == SS.trace_key("e1") and pts[0]["event_ids"] == ["e1", "e2"]
     assert pts[0]["water_slug"] == "town-creek-al"
@@ -303,7 +312,8 @@ def test_trace_points_ask_for_a_stretch_from_each_river_report_point():
 
 
 def test_live_points_only_with_the_switch_on(levels):
-    assert SS.live_points({"rain_likely": RULES["rain_likely"]}, levels) == []
+    assert SS.live_points(rules_off(), levels) == []
+    assert SS.live_points({"rain_likely": RULES["rain_likely"]}, levels) == []      # on, none of these approved
     pts = SS.live_points(rules_on(), levels)
     assert pts and {p["permit"] for p in pts} == {"sso:al-wet", "sso:al-stale", "sso:al-11", "sso:al-late"} and all(p["source"] == SS.POINT_SOURCE for p in pts)
 
@@ -593,13 +603,16 @@ def test_review_p2_6_the_batch_rule_reads_the_events_files(tmp_path, monkeypatch
 
 def test_review_p2_8_the_rules_export_carries_the_block_only_when_on():
     from export import build as X
-    off = X.live_rules(X.public_rules(RULES), {"AL"})
+    off_rules = {**copy.deepcopy(RULES), **rules_off()}
+    off = X.live_rules(X.public_rules(off_rules), {"AL"})
     assert "separate_sewers" not in off["rain_likely"]
     base = copy.deepcopy(RULES)
     del base["rain_likely"]["separate_sewers"]
     assert off == X.live_rules(X.public_rules(base), {"AL"})
     on = X.live_rules(X.public_rules(rules_on()), {"AL"})
     assert on["rain_likely"]["separate_sewers"]["enabled"] is True
+    committed = X.live_rules(X.public_rules(RULES), {"AL"})            # the committed rules: on since 2026-11-16
+    assert committed["rain_likely"]["separate_sewers"]["enabled"] is True
     assert not any(k.startswith("_") for k in on["rain_likely"]["separate_sewers"])
 
 

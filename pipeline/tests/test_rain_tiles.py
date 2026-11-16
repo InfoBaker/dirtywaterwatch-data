@@ -15,6 +15,9 @@ from pathlib import Path
 
 import pytest
 
+# its own world of outfalls: never the separate sewer points the committed rules switch on (conftest.py)
+pytestmark = pytest.mark.usefixtures("no_separate_sewer_points")
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -581,3 +584,151 @@ def test_a_partial_fallback_then_a_discarded_grid_asks_each_point_once_within_on
         if (lat, lon) != (40.01, -100.01):
             assert out["points"][k]["mrms"]["h24"] == round(round(rain_at(lat, lon) * 25.4 + 0.5, 2) / 25.4, 2)
     assert not m["readings_ok"] and RF.exit_code(out) == 1 and out["ok"] is False
+
+
+# ---------------------------------------------------------------- separate sewer points in the reader (switched on 2026-11-16)
+
+# the separate sewer caution's points (build/rain_sso.py live_points, "sso:<operator>"): Alabama and Florida in the
+# -100,20 tile beside the cluster's combined sewer points, Connecticut in the -80,40 tile, and one on a combined sewer
+# point's own key (New England's first)
+SSO_AT = [("sso:al-a", "AL", 33.84, -87.28), ("sso:al-a", "AL", 30.69, -88.04), ("sso:fl-t", "FL", 27.95, -82.46),
+          ("sso:ct-w", "CT", 41.55, -72.68), ("sso:ct-w", "CT", 42.00, -75.00)]
+
+
+def sso_rows():
+    return [{"permit": p, "outfall": None, "state": st, "name": "s", "lat": la, "lon": lo, "water_slug": None,
+             "water_match": None, "distance_m": None, "source": "sso-report-points"} for p, st, la, lo in SSO_AT]
+
+
+def no_fetch_times(x):
+    if isinstance(x, dict):
+        return {k: no_fetch_times(v) for k, v in x.items() if k != "fetched_at"}
+    if isinstance(x, list):
+        return [no_fetch_times(v) for v in x]
+    return x
+
+
+class Recorder(FakeNOAA):
+    """FakeNOAA keeping each forecast lookup's point and each forecast cell fetched, in order."""
+
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.urls: list[str] = []
+
+    def get(self, url, params=None, headers=None, timeout=None):
+        if RF.request_kind(url) in ("nws_points", "nws_gridpoints"):
+            self.urls.append(url)
+        return super().get(url, params=params, headers=headers, timeout=timeout)
+
+
+def with_and_without_sso(world, monkeypatch, make, sso_history=True, **kw):
+    """The same hour run twice from the same files: without the separate sewer points, then with them (their history
+    complete unless sso_history is False, as an hour after their first). Returns (out, fake) of each."""
+    from build import rain_sso
+    files = {p: p.read_bytes() for p in world["tmp"].rglob("*") if p.is_file()}
+    fa = make()
+    a = RF.run(now=NOW, session=fa, **kw)
+    for p in [p for p in world["tmp"].rglob("*") if p.is_file()]:
+        p.unlink()
+    for p, b in files.items():
+        p.write_bytes(b)
+    if sso_history:
+        h = json.loads(RF.HISTORY.read_text())
+        for p in {r["permit"] for r in sso_rows()}:
+            h["permits"][p] = [0.0] * (RF.HISTORY_DAYS * 24)
+        RF.HISTORY.write_text(json.dumps(h))
+    monkeypatch.setattr(rain_sso, "live_points", lambda *a, **k: sso_rows())
+    fb = make()
+    b = RF.run(now=NOW, session=fb, **kw)
+    return a, fa, b, fb
+
+
+def assert_cso_unchanged(a, b):
+    for k, p in a["points"].items():
+        assert no_fetch_times(b["points"][k].get("mrms")) == no_fetch_times(p.get("mrms")), k
+    for p, row in a["permits"].items():
+        assert no_fetch_times(b["permits"][p]) == no_fetch_times(row), p
+
+
+def test_separate_sewer_points_never_change_the_combined_sewer_grid_reading_check_or_forecast(nation, monkeypatch):
+    # the separate sewer point at Mobile the wettest anywhere: it is read in tiles of its own after the combined sewer
+    # points, which keep their tiles, values, check, counts and forecast exactly
+    a, fa, b, fb = with_and_without_sso(nation, monkeypatch, lambda: Recorder(wet={(30.69, -88.04): 9.0}))
+    assert_cso_unchanged(a, b)
+    ma, mb = a["mrms"], b["mrms"]
+    assert mb["grid"] == ma["grid"] or no_fetch_times(mb["grid"]) == no_fetch_times(ma["grid"])
+    assert [t["points"] for t in mb["grid"]["tiles"]] == [4, 4, 4, 4, 1227]     # the shared point is theirs already
+    for f in ("points", "outfalls", "permits", "states", "readable", "fresh", "fetched", "readings_ok", "valid_time",
+              "outside_grid", "outside_coverage", "unreadable_permits", "failed", "fallback", "units"):
+        assert no_fetch_times(mb[f]) == no_fetch_times(ma[f]), f
+    assert b["ok"] is a["ok"] is True and RF.exit_code(b) == RF.exit_code(a) == 0
+    ss = mb["separate_sewers"]
+    assert ss["points"] == 4 and ss["fresh"] == ss["counted"] == 4 and ss["readings_ok"]
+    assert ss["regions"]["conus"]["tiles"] == ["-100,20", "-80,40"] and ss["regions"]["conus"]["read"] == "grid"
+    assert ss["regions"]["conus"]["check"]["point"] == "30.69,-88.04"                  # their own check
+    assert b["requests"]["mrms_export"] == 10 + 2 * 2 and b["requests"]["mrms_identify"] == 1 + 1
+    for p, st, la, lo in SSO_AT:                           # read this hour, the shared point from the combined sewer grid
+        assert b["points"][f"{la:.2f},{lo:.2f}"]["mrms"]["read"] == "grid" and b["permits"][p]["h24"] is not None
+    assert b["permits"]["sso:al-a"]["h24"] == 9.0
+    # the forecast: the same combined sewer cells fetched in the same order; the new points' lookups after theirs and
+    # their cells (never fetched, so the oldest) only with what QPF_FETCH_MAX leaves, here nothing
+    cells_a = [u for u in fa.urls if "/gridpoints/" in u]
+    cells_b = [u for u in fb.urls if "/gridpoints/" in u]
+    assert len(cells_a) == RF.QPF_FETCH_MAX and cells_b == cells_a
+    assert [u for u in fb.urls if "/points/" in u] == [f"{RF.NWS}/points/{la:.4f},{lo:.4f}" for _, _, la, lo in SSO_AT[:4]]
+    assert b["qpf"]["deferred"] == a["qpf"]["deferred"] + 4
+    assert "separate sewer points 4 fresh of 4 (conus by grid, 4 exports)" in RF.summary_line(b, 1.0)
+
+
+def test_separate_sewer_points_without_history_read_their_own_48_and_72_hour_grids(nation, monkeypatch):
+    # their history empty (the first hours after the switch): the 48 and 72-hour grids for their own two tiles only;
+    # the combined sewer points read their 1 and 24-hour grids alone, as before
+    a, _, b, _ = with_and_without_sso(nation, monkeypatch, FakeNOAA, sso_history=False)
+    assert_cso_unchanged(a, b)
+    assert a["requests"]["mrms_export"] == 10 and b["requests"]["mrms_export"] == 10 + 2 * 4
+    assert set(a["mrms"]["grid"]["products"]) == set(b["mrms"]["grid"]["products"]) == {"1", "24"}
+    h = json.loads(RF.HISTORY.read_text())
+    assert all(h["permits"]["sso:al-a"][i] is not None for i in (-1, -25, -49))       # the windows they imply
+
+
+def test_a_failed_combined_sewer_tile_is_failed_and_read_by_point_as_before_beside_separate_sewer_points(nation,
+                                                                                                         monkeypatch):
+    # the radar answers nothing west of 95 W: the cluster's four tiles fail and their points are read by identify, as
+    # without the separate sewer points, whose own tiles (east of 95 W) are read
+    class WestDark(FakeNOAA):
+        def get(self, url, params=None, headers=None, timeout=None):
+            if RF.request_kind(url) != "mrms_export":
+                return super().get(url, params=params, headers=headers, timeout=timeout)
+            self.calls.append("mrms_export")
+            h = {i: h for h, i in self.IDS.items()}[json.loads(params["mosaicRule"])["lockRasterIds"][0]]
+            xmin, ymin, xmax, ymax = (float(v) for v in params["bbox"].split(","))
+            w, hh = (int(v) for v in params["size"].split(","))
+            return Resp(content=make_tiff(w, hh, xmin, ymax, lambda la, lo: G.NODATA if lo < -95 else self.raw(la, lo, h),
+                                          tile=64, lzw=False), ctype="image/tiff")
+
+    a, _, b, _ = with_and_without_sso(nation, monkeypatch, WestDark)
+    fa, fb = a["mrms"]["grid"]["tiles_failed"], b["mrms"]["grid"]["tiles_failed"]
+    assert len(fa) == 4 and "-100,20" in fa and sorted(fb) == sorted(fa)
+    assert_cso_unchanged(a, b)
+    cluster = [k for k, p in a["points"].items() if p["lon"] < -95]
+    assert len(cluster) == 16 and all(b["points"][k]["mrms"]["read"] == "point" for k in cluster)
+    assert all(b["points"][f"{la:.2f},{lo:.2f}"]["mrms"]["read"] == "grid" for _, st, la, lo in SSO_AT if st != "CT")
+
+
+def test_separate_sewer_points_never_take_a_fallback_call_or_lift_the_combined_sewer_freshness(nation, monkeypatch):
+    # every combined sewer tile fails (each box centred west of 74 W): the whole grid fails, and its fallback reads 20
+    # points at its cap of 20, too few: not ok, exit 1. The separate sewer points: Connecticut's tile (east of 74 W) is
+    # read and fresh, the Alabama and Florida tile fails, and its fallback has nothing left of the cap. The combined
+    # sewer figures and exit code are those of the run without them: their fresh reading is never pooled in.
+    monkeypatch.setattr(RF, "FALLBACK_MAX_CALLS", 20)
+    a, fa, b, fb = with_and_without_sso(nation, monkeypatch, lambda: TileFails(west_of=-74.0))
+    assert a["mrms"]["read"] == "point" and a["mrms"]["fallback"]["called"] == 20
+    assert_cso_unchanged(a, b)
+    for f in ("fresh", "readable", "readings_ok", "fallback", "failed"):
+        assert no_fetch_times(b["mrms"][f]) == no_fetch_times(a["mrms"][f]), f
+    assert not b["mrms"]["readings_ok"] and b["ok"] is a["ok"] is False and RF.exit_code(b) == RF.exit_code(a) == 1
+    ss = b["mrms"]["separate_sewers"]
+    sc = ss["regions"]["conus"]
+    assert sc["tiles_failed"] and list(sc["tiles_failed"]) == ["-100,20"] and sc["fallback"]["used"]
+    assert sc["fallback"]["called"] == 0 and sc["fallback"]["left"] == 3 and ss["fresh"] == 1
+    assert fb.calls.count("mrms_identify") - fa.calls.count("mrms_identify") == 1      # their own grid check only
