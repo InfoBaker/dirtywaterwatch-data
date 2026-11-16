@@ -524,10 +524,12 @@ def survey_canonical(a: dict) -> tuple[dict, str]:
     return c, basis
 
 
-def build_record(a: dict, layer: str, fetched_at: str, prev: dict | None, permits: dict[str, str]) -> dict:
+def build_record(a: dict, layer: str, fetched_at: str, prev: dict | None, permits: dict[str, str],
+                 survey: bool | None = None) -> dict:
+    """survey: the layer's schema is the Survey123 layer's (from its description); None decides by the row's keys."""
     gid = clean(a.get("globalid")).strip("{}").lower()
-    survey = is_survey(a)
-    out = ",".join(SURVEY_FIELDS) if survey else "*"     # a public link never asks the Survey123 layer for names
+    survey = is_survey(a) if survey is None else survey
+    out = ",".join(SURVEY_FIELDS if survey else FIELDS)  # a public link never asks for every field
     base = dict(source_id=SOURCE_ID, source_record_id=gid, fetched_at=fetched_at,
                 source_url=f"{layer}/query?where=globalid%3D%27{gid}%27&outFields={out}&f=json")
     raw = safe(a, SURVEY_FIELDS if survey else FIELDS)
@@ -632,9 +634,10 @@ def _record(a: dict, base: dict, raw: dict, prev: dict | None, permits: dict[str
 
 
 def history_incidents() -> set[str] | None:
-    """The incident numbers of the history events file (nc-dwr-sso-2022-2025), or None when it cannot be read."""
+    """The incident numbers of the history events file (nc-dwr-sso-2022-2025): an empty set for a file with no
+    records, None when it cannot be read."""
     d = read_json(EVENTS_DIR / f"{HIST_ID}.json", None)
-    if not isinstance(d, dict) or not d.get("records"):
+    if not isinstance(d, dict) or not isinstance(d.get("records"), list):
         return None
     return {incident(r) for r in d["records"] if incident(r)}
 
@@ -645,10 +648,13 @@ def before_2026(a: dict) -> bool:
 
 
 def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict],
-          permits: dict[str, str] | None = None, hist_incidents: set[str] | None = None) -> tuple[list[dict], dict]:
-    """rows: (layer url, attributes). Returns the records (earlier records that left the layers kept) and stats.
-    A Survey123 row that starts before 2026 is the history layer's (nc-dwr-sso-2022-2025) and is left to it, unless
-    hist_incidents (the history file's incident numbers) is given and lacks its incident number."""
+          permits: dict[str, str] | None = None, hist_incidents: set[str] | None = None,
+          schemas: dict[str, str] | None = None) -> tuple[list[dict], dict]:
+    """rows: (layer url, attributes); schemas: layer url -> the schema its description showed (else decided by the
+    row's keys). Returns the records (earlier records that left the layers kept) and stats. A Survey123 row that starts
+    before 2026 is left to the history layer (nc-dwr-sso-2022-2025) only when the history file (hist_incidents) holds
+    its incident number; when the file holds nothing or cannot be read, the row is kept."""
+    schemas = schemas or {}
     permits = permit_index() if permits is None else permits
     prev = {r["event_id"]: r for r in prev_records}
     records, seen, left_to_history, kept_early = [], set(), 0, 0
@@ -656,8 +662,10 @@ def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict
         gid = clean(a.get("globalid")).strip("{}").lower()
         if not gid:
             continue
-        if is_survey(a) and before_2026(a):
-            if hist_incidents is None or clean(a.get("incident_number")) in hist_incidents:
+        survey = schemas[layer] == "survey123" if layer in schemas else is_survey(a)
+        early = survey and before_2026(a)
+        if early:
+            if hist_incidents and clean(a.get("incident_number")) in hist_incidents:
                 left_to_history += 1
                 continue
             kept_early += 1
@@ -665,9 +673,10 @@ def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict
         if eid in seen:
             continue
         seen.add(eid)
-        rec = build_record(a, layer, fetched_at, prev.get(eid), permits)
-        if is_survey(a) and before_2026(a):
-            rec["raw"]["_kept_basis"] = "starts before 2026, but the history layer does not hold its incident number"
+        rec = build_record(a, layer, fetched_at, prev.get(eid), permits, survey)
+        if early:
+            rec["raw"]["_kept_basis"] = ("starts before 2026, but the history events file does not hold its incident "
+                                         "number" + ("" if hist_incidents else " (the file holds none or was not read)"))
         records.append(rec)
     kept = 0
     for eid, r in prev.items():
@@ -845,9 +854,9 @@ def main(argv=None) -> int:
     try:
         if args.file:
             rows = _load_file(args.file)
-            raw_docs = None
+            raw_docs, schemas = None, {}
         else:
-            rows, raw_docs, gone = [], [], []
+            rows, raw_docs, gone, schemas = [], [], [], {}
             for url in year_layers(sess):
                 if not in_org(url):
                     layers_meta[url] = {"error": "not a layer of DWR's ArcGIS organisation; not read"}
@@ -871,11 +880,14 @@ def main(argv=None) -> int:
                     layers_meta[url] = {"error": str(e), "unavailable": True}
                     continue
                 have = layer_fields(feats, doc)
-                missing = [k for k in key if k not in have]
-                if missing:   # the rows lack a key field the description listed: not read
-                    layers_meta[url] = {"error": f"fields {', '.join(missing)} absent from the rows; the layer needs "
-                                                 "a field mapping", "rows": len(feats)}
+                lacking = Counter(k for a in feats for k in key if k not in {c.lower() for c in a})
+                missing = [k for k in key if k not in have or lacking[k]]
+                if missing:   # a row lacks a key field the description listed: the layer is not read
+                    layers_meta[url] = {"error": f"{url}: fields " + ", ".join(
+                        f"{k} absent from {lacking[k] or len(feats) or 'the'} row{'s' if lacking[k] != 1 else ''}"
+                        for k in missing) + "; the layer needs a field mapping", "rows": len(feats)}
                     continue
+                schemas[url] = schema
                 rows += [(url, a) for a in feats]
                 raw_docs.append(doc)
                 layers_meta[url] = {**lm, "schema": schema, "rows": len(feats)}
@@ -907,7 +919,7 @@ def main(argv=None) -> int:
         write_json(STATE_FILE, state)
     permits = permit_index()
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
-    records, stats = build(rows, fetched_at, prev, permits, history_incidents())
+    records, stats = build(rows, fetched_at, prev, permits, history_incidents(), schemas)
     records = redact.redact_events(records)
     newest = max((r.get("reported_at") or "" for r in records), default="") or None
     stats["newest_start"] = max((r.get("started_at") or "" for r in records if not r.get("duplicate_of")),

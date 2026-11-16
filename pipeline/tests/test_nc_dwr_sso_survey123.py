@@ -99,13 +99,75 @@ def test_unfilled_volume_and_the_cautious_reading_of_reached_water():
     assert r["status"] == "ended" and r["raw"]["_end_basis"]
 
 
-def test_rows_before_2026_are_left_to_the_history_layer_unless_it_lacks_them():
-    recs, stats = records()
+def test_rows_before_2026_are_left_to_the_history_layer_only_when_it_holds_them():
+    recs, stats = records(hist={"202500025"})
     assert "c58469d9" not in recs and stats["left_to_history_layer"] == 1     # 2025-01-01, incident 202500025
     recs, stats = records(hist={"202500024"})
     assert recs["c58469d9"]["raw"]["_kept_basis"] and stats["before_2026_not_in_history"] == 1
-    recs, stats = records(hist={"202500025"})
-    assert "c58469d9" not in recs
+    # review 2026-11-16 P2: an empty or unreadable history file proves nothing, so the row is kept
+    for hist in (set(), None):
+        recs, stats = records(hist=hist)
+        assert "c58469d9" in recs and stats["left_to_history_layer"] == 0, hist
+
+
+def test_history_incidents_tells_an_empty_file_from_a_missing_one(monkeypatch, tmp_path):
+    monkeypatch.setattr(S, "EVENTS_DIR", tmp_path)
+    assert S.history_incidents() is None
+    (tmp_path / f"{S.HIST_ID}.json").write_text(json.dumps({"records": []}))
+    assert S.history_incidents() == set()
+
+
+def test_the_layers_schema_decides_how_a_row_is_read_and_links_never_ask_for_every_field():
+    # review 2026-11-16 P1: a Survey123 row lacking a key is still read as a Survey123 row, not as the 2026 layer's
+    a = dict(rows()[0][1])
+    del a["permit_with_name"]
+    recs, _ = S.build([(S.SURVEY_LAYER, a)], FETCHED, [], PERMITS, None, {S.SURVEY_LAYER: "survey123"})
+    r = recs[0]
+    assert r["started_at"] == "2026-11-12T12:15:00-05:00" and r["status"] == "ongoing" and r["lat"] == 36.095555
+    assert "outFields=*" not in r["source_url"]
+    old_rows = S._load_file(str(FIX / "nc_dwr_sso_2026.json"))
+    old, _ = S.build(old_rows, FETCHED, [], PERMITS)
+    assert all("outFields=*" not in o["source_url"] for o in old)
+
+
+def test_a_layer_whose_later_row_lacks_a_key_field_is_not_read_and_held_records_stay(monkeypatch, tmp_path):
+    feats = json.loads((FIX / "nc_dwr_sso_survey123.json").read_text())["pages"][0]["features"]
+    feats = [dict(f, attributes=dict(f["attributes"])) for f in feats]
+    del feats[3]["attributes"]["start_date"]
+
+    class Resp:
+        def __init__(self, body):
+            self.body = body
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self.body
+
+    class Sess:
+        headers = {}
+
+        def get(self, url, params=None, timeout=None):
+            if url == S.VIEWER_MAP:
+                return Resp({"operationalLayers": [{"title": "Sanitary Sewer Overflows", "url": S.SURVEY_LAYER}]})
+            if url == S.SURVEY_LAYER:
+                return Resp({"fields": [{"name": f} for f in S.SURVEY_FIELDS]})
+            if url == f"{S.SURVEY_LAYER}/query":
+                return Resp({"features": feats})
+            return Resp({"services": []})
+
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(S, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(S.requests, "Session", lambda: Sess())
+    ev = tmp_path / "events" / "nc-dwr-sso-2026.json"
+    ev.parent.mkdir(parents=True)
+    old = held()
+    ev.write_text(json.dumps({"source_id": S.SOURCE_ID, "ok": True, "meta": {"registry_ids": [S.SOURCE_ID]},
+                              "count": len(old), "records": old}))
+    assert S.main([]) == 1
+    out = json.loads(ev.read_text())
+    assert out["ok"] is False and out["records"] == old and "start_date absent from 1 row" in out["error"]
 
 
 def test_no_duplicate_and_no_loss_across_the_layer_switch():
@@ -191,7 +253,7 @@ def test_the_layer_is_read_by_its_description_and_named_fields_only(monkeypatch,
     monkeypatch.setattr(S.requests, "Session", lambda: Sess())
     assert S.main([]) == 0
     out = json.loads((tmp_path / "events" / "nc-dwr-sso-2026.json").read_text())
-    assert out["ok"] and out["count"] == 17 and out["meta"]["layers"][S.SURVEY_LAYER]["schema"] == "survey123"
+    assert out["ok"] and out["count"] == 18 and out["meta"]["layers"][S.SURVEY_LAYER]["schema"] == "survey123"
     assert out["meta"]["newest_start"] == "2026-11-12T12:15:00-05:00"
     queries = [p for u, p in asked if u.endswith("/query")]
     assert queries and all(p["outFields"] == ",".join(S.SURVEY_FIELDS) for p in queries)
