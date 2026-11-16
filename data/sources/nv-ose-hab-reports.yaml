@@ -7,7 +7,9 @@ level: "state"
 # Notes (research/nv, status candidate, verified fetched, checked 2026-11-16): Active and previous
 #   bloom advisories statewide, one heading per water with its level and the date it took effect
 #   (eleven active on 2026-11-15, under eight headings, five outside the state parks); answers the
-#   pipeline's runner (200, 2026-11-16). Not yet read; watched (register row nv-ose-hab-reports).
+#   pipeline's runner (200, 2026-11-16). Read by ingest.nv_ose_hab_list since 2026-11-16 (register row
+#   nv-ose-hab-reports, a feed): one hab_advisory record per advisory on the active list; waters with no record here
+#   are listed with their place, never placed by name.
 # Access detail (research, quoted): One web page: a count of the year's active advisories, then one
 #   heading per water with its advisory level and the date each level took effect, active and
 #   previous advisories.

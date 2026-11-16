@@ -340,8 +340,9 @@ def test_p1_4_watched_nevada_pages_keep_no_body_and_no_text(tmp_path):
     from test_ingest_wi import _np_run
     rows = [r for r in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]
             if r.get("monitored")]
-    # audit 2026-11-16: the State Epidemiology list and the NPS conditions page join the two watched pages
-    assert len(rows) == 4 and all(r["metadata_only"] is True and r["records"] is False for r in rows)
+    # audit 2026-11-16: the State Epidemiology list and the NPS conditions page join the two watched pages; the list
+    # became a feed the same day (ingest.nv_ose_hab_list), so three stay watched
+    assert len(rows) == 3 and all(r["metadata_only"] is True and r["records"] is False for r in rows)
     personal = b"<html><body><p>Contact Pat Example, 775-555-0100, pat@example.org, 1234-A Example St.</p></body></html>"
     out, saved = _np_run(NP, rows, {u: personal for r in rows for u in r["urls"]}, tmp_path, "2026-11-15T12:00:00Z")
     assert saved == []
@@ -361,7 +362,7 @@ def test_p1_3_nevada_goes_live_only_after_a_successful_current_read():
         assert src["first_successful_read"] == "2026-11-16T04:23:49Z"
     t = (ROOT / "research" / "nv" / "state-text.md").read_text()
     assert "not yet made a current reading" not in t and "last good reading is kept" not in t
-    assert "We read that page" in t or "This site reads that page" in t
+    assert "We read that page" in t or "This site reads that page" in t or "This site reads both" in t
     reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]}
     assert "first successful read 2026-11-16T04:23:49Z" in reg["nv-state-parks-hab"]["note"]
     assert "no successful current read" not in reg["nv-state-parks-hab"]["note"]
@@ -369,21 +370,24 @@ def test_p1_3_nevada_goes_live_only_after_a_successful_current_read():
     assert "archive.org" not in (Path(P.__file__)).read_text()
 
 
-def test_audit_2026_11_16_the_state_list_is_watched_and_no_text_calls_the_dashboard_the_only_view():
+def test_audit_2026_11_16_the_state_list_is_read_and_no_text_calls_the_dashboard_the_only_view():
     from nv_ok_text_checks import OVERCLAIMS, public_texts
     reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]}
     ose = reg["nv-ose-hab-reports"]
-    assert ose["monitored"] is True and ose["metadata_only"] is True and ose["records"] is False
+    # the list is a feed since 2026-11-16 (ingest.nv_ose_hab_list; tests/test_ingest_nv_ose.py)
+    assert ose["monitored"] is False and ose["unmonitored_reason"] == "feed_ingested"
+    assert ose["feed_source_id"] == "nv-ose-hab-reports"
     assert ose["urls"] == ["https://nvose.org/hot-topic-harmful-algal-blooms/"] and ose["barrier"] is None
     assert OVERCLAIMS.search("the only statewide view of bloom advisories")
     texts = public_texts("NV")
     texts["research-sources"] = (ROOT / "research" / "nv" / "sources.json").read_text()
     assert [k for k, t in texts.items() if re.search(r"only statewide", t, re.I)] == []
     t = texts["state-text"]
-    # the waters the list names outside the parks are named, and said not to be shown, never said to be clear
+    # the waters the list names outside the parks are named; those with no water record are said to be listed, not
+    # drawn, never said to be clear
     for w in ("Lake Mohave", "Walker Lake", "Virginia Lake", "Mountain View Pond", "South Meadows Community Pond"):
         assert w in t, w
-    assert "not shown on its map" in t
+    assert "not shown on its map" not in t and "are not drawn on the map" in t
 
 
 def test_p2_5_a_same_day_reopening_keeps_both_episodes():
@@ -477,7 +481,8 @@ def test_p3_14_the_generators_and_shared_rules_leave_other_states_identical(monk
     # Astra IA/ID review 2026-11-15 P2-3: Idaho adds its own source (id-deq-cyanohab-risk-table)
     assert S.POLL_END_HORIZON_SOURCES == {"de-dnrec-recreational-water", "sc-des-beach-monitoring", "sc-des-hab",
                                           "nv-state-parks-hab", "pr-drna-beach-notices", "id-deq-cyanohab-risk-table",
-                                          "sc-des-freshwater-swim-advisories", "wi-dnr-beach-health"}
+                                          "sc-des-freshwater-swim-advisories", "wi-dnr-beach-health",
+                                          "nv-ose-hab-reports"}     # Nevada's State Epidemiology list (2026-11-16)
 
 
 def test_p1_4_records_carried_from_earlier_reads_are_cleaned_again():
