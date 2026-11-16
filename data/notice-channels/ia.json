@@ -705,7 +705,7 @@
    "operator_id": "ia-des-moines-metropolitan-wra",
    "agency": null,
    "permit": "IA0044130",
-   "checked": "2026-11-14",
+   "checked": "2026-11-15",
    "id": "ia-des-moines-metropolitan-wra-cso-public-notification",
    "name": "Des Moines Metropolitan Wastewater Reclamation Authority",
    "channel_kind": "operator_page",
@@ -721,7 +721,7 @@
    "sources": [
     "ia-epa-cso-inventory"
    ],
-   "note": "No web channel found: Des Moines Metropolitan Wastewater Reclamation Authority's public notification of combined sewer overflows under its permit; no web notice was found (search only) and the permit was not read. Its bypass reports to DNR are read from FOCOMP. The Authority's site (www.dmmwra.org) did not answer the project's ordinary requests on 2026-11-14 (connect time-out, twice), so its notice on eliminating its combined sewer overflows could not be read.",
+   "note": "No web channel found: Des Moines Metropolitan Wastewater Reclamation Authority's public notification of combined sewer overflows under its permit; no web notice was found (search only) and the permit was not read. Its bypass reports to DNR are read from FOCOMP. The Authority's site (www.dmmwra.org) answers GitHub's runner (200, 2026-11-16); its notice on eliminating its combined sewer overflows has not been read yet.",
    "barrier": "no_web_page"
   },
   {
@@ -950,7 +950,7 @@
    "operator_id": null,
    "agency": "U.S. Environmental Protection Agency (ECHO)",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-15",
    "id": "ia-epa-echo-overflow-events",
    "name": "EPA sewer overflow and bypass tables (Iowa)",
    "channel_kind": "feed",
@@ -966,7 +966,7 @@
    "sources": [
     "ia-epa-sobe"
    ],
-   "note": "No web channel found for Iowa: EPA's current and all-versions overflow tables (extract of 2026-11-12) hold no Iowa event, and two Iowa collection-system rows; Iowa reports go to DNR, not EPA's system.",
+   "note": "No web channel found for Iowa: EPA's current and all-versions overflow tables (tables of 2026-11-13, read 2026-11-15) hold no Iowa event, and two Iowa collection-system rows; Iowa reports go to DNR, not EPA's system.",
    "barrier": "no_web_page"
   },
   {
