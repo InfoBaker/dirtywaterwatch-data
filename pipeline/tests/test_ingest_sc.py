@@ -585,7 +585,9 @@ def test_register_rows_per_operator_and_the_state_channels():
     assert reg["sc-des-beach-monitoring"]["feed_source_id"] == "sc-des-beach-monitoring"
     assert reg["sc-des-hab"]["feed_source_id"] == "sc-des-hab"
     assert reg["sc-charleston-water-news"]["monitored"] and reg["sc-charleston-water-news"]["records"] is False
-    assert reg["sc-des-sso-reports"]["barrier"] == "no_web_page"
+    # DES's ePermitting overflow list is public (2026-11-16) and read by ingest/sc_des_overflows.py
+    assert reg["sc-des-sso-reports"]["barrier"] is None
+    assert reg["sc-des-sso-reports"]["feed_source_id"] == "sc-des-overflow-list"
     assert reg["sc-des-freshwater-swim-advisories"]["feed_source_id"] == "sc-des-freshwater-swim-advisories"
     assert reg["sc-des-freshwater-swim-advisories"]["barrier"] is None
     assert reg["sc-rewa-public-notice"]["barrier"] == "not_verified" and "48-1-95(E)" in reg["sc-rewa-public-notice"]["legal_basis"]
