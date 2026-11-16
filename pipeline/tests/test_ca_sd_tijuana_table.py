@@ -407,3 +407,97 @@ def test_a_value_the_final_redaction_changed_is_no_revision_when_the_source_is_u
     assert "_revisions" not in by_id(recs)[rid]["raw"]
     assert M.same_text("Flows [name removed] here", "Flows Jane Doe here")
     assert not M.same_text("Flows [name removed] here", "Flows Jane Doe there")
+
+
+# ---------------------------------------------------------------- registry fix 2026-11-16: the valley's water records
+
+ROOT = Path(__file__).resolve().parents[2]
+VALLEY = ("tijuana-river-ca", "smuggler-gulch-ca", "goat-canyon-ca")
+
+
+def _border_lat(lon: float) -> float:
+    """The international boundary west of the Colorado River is a straight line from the Pacific (monument 258,
+    32.5343 N 117.1243 W) to the Colorado (32.7183 N 114.7196 W): its latitude at lon."""
+    return 32.5343 + (lon + 117.1243) / (117.1243 - 114.7196) * (32.7183 - 32.5343)
+
+
+def _coords(g):
+    if g["type"] == "LineString":
+        return g["coordinates"]
+    return [c for part in g["coordinates"] for c in part]
+
+
+def test_registry_the_valley_records_are_the_united_states_reach_only():
+    w = {x["slug"]: x for x in json.loads((ROOT / "data" / "waters-nhd.json").read_text())["waters"]
+         if x["slug"] in VALLEY}
+    assert set(w) == set(VALLEY)
+    for slug, rec in w.items():
+        assert rec["state"] == "CA" and rec.get("hand") is True, slug
+        cs = _coords(rec["geometry"])
+        assert all(lat >= _border_lat(lon) - 0.001 for lon, lat in cs), slug         # nothing in Mexico
+        assert rec["bbox"][1] >= _border_lat(rec["bbox"][0]) - 0.002, slug
+    river = w["tijuana-river-ca"]
+    assert river["gnis_id"] == "255756" and river["kind"] == "river" and 9 < river["length_km"] < 12
+    assert river["bbox"][0] < -117.125 and -117.045 < river["bbox"][2] <= -117.039     # the Pacific to the border
+    assert "only the part within" in river["note"]
+    assert w["smuggler-gulch-ca"]["aliases"][:2] == ["Smuggler's Gulch", "Smugglers Gulch"]
+    assert w["smuggler-gulch-ca"]["reachcodes"] == ["18070305039148", "18070305039152"]
+    assert w["goat-canyon-ca"]["reachcodes"] == ["18070305000444"]
+    for slug in ("smuggler-gulch-ca", "goat-canyon-ca"):
+        assert w[slug]["gnis_id"] is None and "GNIS" in w[slug]["note"]     # the name's evidence, no invented id
+
+
+def test_registry_ten_of_the_sixteen_rows_are_placed_on_the_waters_the_table_names():
+    waters = S.load_waters()
+    placed = M.valley_waters(waters)
+    assert {k: v["slugs"] for k, v in placed.items()} == {"Tijuana River": ["tijuana-river-ca"],
+                                                            "Smuggler's Gulch": ["smuggler-gulch-ca"],
+                                                            "Goat Canyon": ["goat-canyon-ca"]}
+    assert all(v["elsewhere"] == [] for v in placed.values())
+    recs, stats = build(placed=placed)
+    on = {}
+    for r in recs:
+        on.setdefault(tuple(r["water_slugs"]), []).append(r)
+    assert {k: len(v) for k, v in on.items()} == {("smuggler-gulch-ca",): 5, ("goat-canyon-ca",): 4,
+                                                  ("tijuana-river-ca",): 1, (): 6}
+    assert stats["placed"] == 10 and stats["unplaced_by_water"] == {"Stewart's Drain": 2, "Canyon del Sol": 1,
+                                                                    "Silva Drain": 1, "(names no water)": 2}
+    # a flow from Mexico with no United States operator is on the water the table names, never on an operator
+    mexico = [r for r in recs if r["discharger_id"] is None]
+    assert mexico and all(r["water_slugs"] and r["npdes_permit"] is None for r in mexico
+                          if r["raw"]["named_water"] in placed)
+    # the status build's own resolver agrees and never takes the Pacific Ocean record
+    res = S.make_resolver(waters)
+    for r in recs:
+        assert res.resolve(r)["water_slugs"] == r["water_slugs"], r["event_id"]
+
+
+def test_registry_the_valley_waters_are_grey_today_and_the_ongoing_row_sets_no_colour(tmp_path):
+    waters = S.load_waters()
+    recs, _ = build(placed=M.valley_waters(waters))
+    d = tmp_path / "events"
+    d.mkdir()
+    (d / f"{M.SOURCE_ID}.json").write_text(json.dumps({"source_id": M.SOURCE_ID, "ok": True, "fetched_at": AT,
+                                                       "last_ok_at": AT, "meta": {}, "count": len(recs),
+                                                       "records": recs}))
+    rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    rules["rain_likely"] = {**rules["rain_likely"], "enabled": False}
+    S._GEOM_CACHE.clear()
+    S._REACH_WATERS.clear()
+    st, _ = S.build(now=datetime(2026, 11, 16, 14, tzinfo=UTC), write=False, events_dir=d, waters=waters,
+                    outfalls=[], registry={}, reaches={}, flows=({}, {}), rules=rules, placement_cache=False)
+    with_events = {k: v["status"] for k, v in st["waters"].items() if v.get("events")}
+    assert with_events == {s: "grey" for s in VALLEY}
+
+
+def test_registry_the_valley_names_file_builds_only_its_own_hand_records():
+    from ingest import waters_from_nhd as N
+    mine = N.hand_scope(ROOT / "research" / "ca" / "receiving-waters-tijuana.json")
+    assert sorted(h["name"] for h in mine) == ["Goat Canyon", "Smuggler Gulch", "Tijuana River"]
+    assert N.hand_scope(ROOT / "research" / "ca" / "receiving-waters-missing.json") == []
+    assert N.hand_scope(None) == []
+    names = json.loads((ROOT / "research" / "ca" / "receiving-waters-tijuana.json").read_text())
+    assert {r["name"]: r["slugs"] for r in names["resolved"]} == {"Tijuana River": ["tijuana-river-ca"],
+                                                                  "Smuggler's Gulch": ["smuggler-gulch-ca"],
+                                                                  "Goat Canyon": ["goat-canyon-ca"]}
+    assert sorted(r["name"] for r in names["rows"]) == ["Canyon del Sol", "Silva Drain", "Stewart's Drain"]
