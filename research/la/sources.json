@@ -34,10 +34,10 @@
     "history": "decades (per facility)",
     "license": "unknown",
     "legal_basis": "LAC 33:I Chapter 39; LPDES permit conditions",
-    "status": "unreachable",
-    "status_reason": "A CAPTCHA guards the search: no document read; registered as a barrier (records request or a supported export needed).",
+    "status": "watch",
+    "status_reason": "The site is readable: GitHub's runner was answered (200) on 2026-11-16. A CAPTCHA guards the search: no document read; registered as a barrier (records request or a supported export needed).",
     "verified": "fetched",
-    "checked": "2026-11-14",
+    "checked": "2026-11-16",
     "notes": "Page shell fetched; a document search was not run."
   },
   {
@@ -178,9 +178,9 @@
     "license": "unknown",
     "legal_basis": "BEACH Act",
     "status": "unreachable",
-    "status_reason": "Both addresses answer 403 to this project's client (2026-11-14): registered as a barrier (bot wall); a data request to LDH is the owner's item.",
+    "status_reason": "Both addresses answer 403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16): registered as a barrier (bot wall); a data request to LDH is the owner's item.",
     "verified": "search_only",
-    "checked": "2026-11-14",
+    "checked": "2026-11-16",
     "notes": ""
   },
   {
@@ -475,10 +475,10 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "unreachable",
-    "status_reason": "The host made no connection with this project's client on 2026-11-14 (twice); no connection again on 2026-11-15 from the same network; not yet tried from GitHub's runners; the research's reading (131 rows, May 2025 to May 2026) is not verified here.",
+    "status": "watch",
+    "status_reason": "Readable, not yet collected: GitHub's runner was answered (200) on 2026-11-16; the earlier reads (2026-11-14 and 2026-11-15) failed from the development machine. The repository has not been read; the research's reading (131 rows, May 2025 to May 2026) is not verified here.",
     "verified": "search_only",
-    "checked": "2026-11-15",
+    "checked": "2026-11-16",
     "notes": null
   },
   {
@@ -572,9 +572,9 @@
     "license": null,
     "legal_basis": null,
     "status": "unreachable",
-    "status_reason": "403 to this project's client (2026-11-14).",
+    "status_reason": "403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16).",
     "verified": "fetched",
-    "checked": "2026-11-14",
+    "checked": "2026-11-16",
     "notes": null
   }
 ]

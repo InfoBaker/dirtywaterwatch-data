@@ -56,7 +56,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | sc | 6 | 0 | 2 | 1 | 2 | 11 |
 | in | 8 | 0 | 14 | 0 | 4 | 26 |
 | wv | 8 | 0 | 12 | 1 | 1 | 22 |
-| la | 4 | 0 | 5 | 3 | 4 | 16 |
+| la | 4 | 0 | 7 | 3 | 2 | 16 |
 | nv | 3 | 1 | 8 | 3 | 0 | 15 |
 | ok | 3 | 0 | 6 | 1 | 0 | 10 |
 | pr | 6 | 0 | 4 | 1 | 0 | 11 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 2 | 0 | 5 | 2 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **616** | **237** | **538** | **230** | **96** | **1717** |
+| **all** | **616** | **237** | **540** | **230** | **94** | **1717** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1907,22 +1907,22 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
-| `la-baton-rouge-quarterly-reports` | City of Baton Rouge and Parish of East Baton Rouge consent-decree quarterly reports (Part D) | used | fetched | events | Read by the la-baton-rouge-quarterly feed: 5 of 8 reports pass the layout check (rows per collection system equal the report's own summary): 219 discharges, October 2024 to September 2026 less the withheld quarters; Reports 91, 92 and 97 withheld. |
+| `la-baton-rouge-quarterly-reports` | City of Baton Rouge and Parish of East Baton Rouge consent-decree quarterly reports (Part D) | used | fetched | events | Read by the la-baton-rouge-quarterly feed: 5 of 8 reports pass the layout check (rows per collection system equal the report's own summary): 219 discharges, October 2024 to September 2026 less the withheld quarters, 124 of them naming a receiving water; Reports 91, 92 and 97 withheld. |
 | `la-lac-33-i-ch39` | LAC 33:I Chapter 39, Notification Regulations and Procedures for Unauthorized Discharges | used | search_only | law | Regulator duty only; no public-notice duty found. |
 | `la-ldeq-spoc` | LDEQ Single Point of Contact (SPOC) incident reporting | used | fetched | law | Regulator-report route; no public list. |
 | `la-ldeq-written-notification-guidance` | LDEQ written notification procedures | used | search_only | law | Nonbinding summary of the seven-day written report. |
 | `la-baton-rouge-consent-decree` | City of Baton Rouge / East Baton Rouge Parish sewer consent decree (2002, modified 2012-2013) | watch | search_only | events | EPA's settlement page: context; the City-Parish's quarterly reports are the feed (la-baton-rouge-quarterly-reports). |
+| `la-ldeq-edms` | LDEQ Electronic Document Management System (EDMS) | watch | fetched | events | The site is readable: GitHub's runner was answered (200) on 2026-11-16. A CAPTCHA guards the search: no document read; registered as a barrier (records request or a supported export needed). |
 | `la-ldh-hab-advisories` | LDH algal bloom advisories (news releases) | watch | search_only | advisories | Ad hoc only. |
 | `la-pontchartrain-conservancy` | Pontchartrain Conservancy (formerly Lake Pontchartrain Basin Foundation) weekly bacteria monitoring (Swim Guide affiliate) | watch | search_only | monitoring | Swim Guide data by agreement. |
 | `la-pontchartrain-weekly-results` | Pontchartrain Conservancy weekly results page | watch | search_only | context | Spreadsheet rows and reuse terms not verified. |
+| `la-shreveport-consent-decree` | City of Shreveport consent-decree annual reports (Attachment 3 SSO table) | watch | search_only | events | Readable, not yet collected: GitHub's runner was answered (200) on 2026-11-16; the earlier reads (2026-11-14 and 2026-11-15) failed from the development machine. The repository has not been read; the research's reading (131 rows, May 2025 to May 2026) is not verified here. |
 | `la-swbno-consent-decree` | Sewerage and Water Board of New Orleans consent decree (Civil Action 93-3212, E.D. La.) quarterly reports | watch | fetched | events | Index and the Q3 2026 report read 2026-11-14: 624 pages of program progress, no dated list of overflows; the index is watched daily in the register. |
 | `la-epa-sobe` | EPA SOBE (eRule) extract, Louisiana rows | rejected | fetched | events | Rechecked 2026-11-14 (current and all-versions extracts): no Louisiana report; 17 Louisiana collection-system permits are listed in EPA's permits table. |
 | `la-industrial-cso-permits` | EPA CSO inventory rows for Louisiana (industrial) | rejected | fetched | outfalls | EPA's two Louisiana 'CSO' rows are petrochemical plants' combined outfalls: kind other in data/outfalls-la.json, off the combined sewer outlets and the rain caution. |
 | `la-ldeq-uas-incidents` | LDEQ_UAS_Incident_Report_View_Layer (ArcGIS Online) | rejected | search_only | events | Not an overflow feed (by title); verify if time allows. |
-| `la-ldeq-edms` | LDEQ Electronic Document Management System (EDMS) | unreachable | fetched | events | A CAPTCHA guards the search: no document read; registered as a barrier (records request or a supported export needed). |
-| `la-ldh-beach-alternate` | LDH beach monitoring page (alternate address) | unreachable | fetched | advisories | 403 to this project's client (2026-11-14). |
-| `la-ldh-beach-monitoring` | Louisiana Department of Health Beach Monitoring Program | unreachable | search_only | advisories | Both addresses answer 403 to this project's client (2026-11-14): registered as a barrier (bot wall); a data request to LDH is the owner's item. |
-| `la-shreveport-consent-decree` | City of Shreveport consent-decree annual reports (Attachment 3 SSO table) | unreachable | search_only | events | The host made no connection with this project's client on 2026-11-14 (twice); the research's reading (131 rows, May 2025 to May 2026) is not verified here. |
+| `la-ldh-beach-alternate` | LDH beach monitoring page (alternate address) | unreachable | fetched | advisories | 403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16). |
+| `la-ldh-beach-monitoring` | Louisiana Department of Health Beach Monitoring Program | unreachable | search_only | advisories | Both addresses answer 403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16): registered as a barrier (bot wall); a data request to LDH is the owner's item. |
 
 ## nv: Nevada (15)
 
