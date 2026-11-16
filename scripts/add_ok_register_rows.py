@@ -63,8 +63,8 @@ AGENCY = [
      "basis_kind": "permit", "monitored": False, "unmonitored_reason": "other", "publishes": "none", "records": False,
      "noun": "Report to the state", "sources": ["ok-deq-opdes-rules", "ok-deq-wastewater-reporting"],
      "note": ("Operators report bypasses and overflows to DEQ by telephone on its around-the-clock line, then in "
-              f"writing on Form 605-011 (e-mail preferred). {NOTE_CONFLICT} DEQ publishes no list of the reports: no "
-              f"web channel found; they reach the public only through an Open Records Act request. ({PART3}; "
+              f"writing on Form 605-011 (e-mail preferred). {NOTE_CONFLICT} No list of the reports was found on "
+              f"DEQ's website (read in November 2026); no web channel found; they can be sought through an Open Records Act request. ({PART3}; "
               f"{REPORTING}; {FORM})")},
     {"id": "ok-deq-wastewater-reporting-page", "agency": "Oklahoma Department of Environmental Quality",
      "name": "Oklahoma Department of Environmental Quality (wastewater reporting requirements page)",
@@ -79,7 +79,7 @@ AGENCY = [
      "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "none_found",
      "publishes": "none", "records": False, "sources": ["ok-epa-sobe"],
      "note": ("EPA's sewer overflow and bypass tables hold no Oklahoma report; their collection-system table lists one "
-              f"Oklahoma system, the Kickapoo plant's (OK0044733, tribal), with no report (extracts of 2026-11-12, "
+              f"Oklahoma system, the Kickapoo plant's (OK0044733, tribal), with no report (extracts of 2026-11-13, read 2026-11-15, "
               f"{ECHO}). The state is not read from these tables.")},
     {"id": "ok-deq-npdes-dischargers-layer", "agency": "Oklahoma Department of Environmental Quality",
      "name": "Oklahoma Department of Environmental Quality (NPDES Dischargers map layer)", "channel_kind": "shared_site",
@@ -96,7 +96,7 @@ AGENCY = [
      "monitored": False, "unmonitored_reason": "feed_ingested", "feed_source_id": "ok-nps-chickasaw-bacteria",
      "publishes": "results", "noun": "Data feed", "sources": ["ok-beaches"],
      "note": ("The park's weekly E. coli results at ten swimming places in summer, with its threshold (235 weekly, 126 "
-              "geometric mean) and its posting rule; 40 results of August 6 to 27, 2026 on 2026-11-14, none at the "
+              "geometric mean) and its posting rule; 40 results of August 6 to 27, 2026 on 2026-11-15, none at the "
               "threshold. The park posts signs at the water; the page gives no posting or removal date. Samples, not "
               "sewage reports. Voluntary.")},
     {"id": "ok-travelok-lake-conditions", "agency": "Oklahoma Tourism and Recreation Department",
@@ -197,7 +197,7 @@ def operator_rows(dis: list[dict]) -> list[dict]:
             noun="Report to the state", sources=["ok-deq-opdes-rules"],
             note=(f"{name} reports a bypass or overflow under its permit to "
                   + ("the issuing agency (DEQ or EPA Region 6; not read)" if tribal else "DEQ")
-                  + "; no list is published and no public notice duty was found: no web channel found. The permit "
+                  + "; no published list and no public notice duty were found: no web channel found. The permit "
                   "itself was not read: "
                   + ("DEQ's municipal standard condition is assumed for a municipal POTW permit; for any other, the "
                      "federal condition, unverified." if set(scopes.values()) - {"tribal"} else
