@@ -52,9 +52,10 @@ traced again first; one whose water or name changed is updated without a request
 
 Budget (the hourly refresh runs this with no arguments): NLDI answers 3600 requests an hour and,
 within them, 1000 navigation requests an hour (X-RateLimit headers, 2026-11-03), one request a
-second here. A run traces in this order: recent discharges with a point but no reach, outfalls never
-traced (CSO, then plant), failed traces due again, outfalls traced more than 30 days ago (oldest
-first); it stops at --requests NLDI navigation requests (default 100), --seconds (default 150), or
+second here. A run traces in this order: recent discharges with a point but no reach, traces the
+tidal-river rule wants again (owner, 2026-11-16: ahead of the first traces), outfalls never traced
+(CSO, then plant), failed traces due again, outfalls traced more than 30 days ago (oldest first); it
+stops at --requests NLDI navigation requests (default 250), --seconds (default 400), or
 after 8 traces in a row fail on a service error, and leaves the rest for the next run; when NLDI's
 allowance left this hour (shared with anything else on this machine) falls under 100 it goes on with
 the NHDPlus walk. A rate-limited request is never cached as a failure. Only one run traces at a time
@@ -112,8 +113,10 @@ GAUGES_LATEST = BUILD_DIR / "gauges-latest.json"
 CACHE_DAYS = 30
 RETRY_FAIL_DAYS = 1                           # first retry of a failed trace; doubles per failure, to CACHE_DAYS
 NLDI_PAUSE_S = 1.0
-DEFAULT_NAV_BUDGET = 100                      # NLDI navigation requests a default (hourly refresh) run may spend
-DEFAULT_SECONDS = 150                         # and seconds of tracing
+# 250 and 400 since 2026-11-16 (100 and 150 before): a backlog (the tidal re-traces, a new state's first traces)
+# clears in a few refreshes, and a run stays far under NLDI's 1000 navigation requests an hour
+DEFAULT_NAV_BUDGET = 250                      # NLDI navigation requests a default (hourly refresh) run may spend
+DEFAULT_SECONDS = 400                         # and seconds of tracing
 NAV_RESERVE = 100                             # stop tracing below this many navigation requests left this hour
 MOVED_DEG = 0.0005                            # an outfall moved this far (~50 m) since its trace: trace again
 RUNS_KEPT = 48
@@ -1286,9 +1289,11 @@ def tidal_due(d: dict | None, tidal_river: bool, now: datetime) -> bool:
 def plan(cands: list[dict], cached: dict[str, dict], now: datetime,
          tidal_river: bool = False) -> tuple[list[dict], list[tuple[dict, dict]]]:
     """(the outfalls to trace in order, [(candidate, cached record)] whose fields changed but need no trace).
-    Order: event points, never traced or moved (CSO, then plant), failures due again (oldest first),
-    traces older than CACHE_DAYS (oldest first). tidal_river (reach.tidal_river on): a trace cut at "tidal"
-    before the rule is due at once, with the stale traces (first among them)."""
+    Order: event points, traces the tidal-river rule wants again (CSO, then plant), never traced or moved (CSO,
+    then plant), failures due again (oldest first), traces older than CACHE_DAYS (oldest first). tidal_river
+    (reach.tidal_river on): a trace cut at "tidal" before the rule is due at once, fresh or stale, ahead of the
+    first traces (owner, 2026-11-16: a river that stops at the head of tide is redone before an outfall that has
+    waited for its first trace)."""
     todo, touch = [], []
     for c in cands:
         d = cached.get(c["key"])
@@ -1304,14 +1309,14 @@ def plan(cands: list[dict], cached: dict[str, dict], now: datetime,
                 touch.append((c, d))
             continue
         if not d or moved(c, d) or d.get("model") == SH.MODEL:     # a shoreline stretch whose water is now a river
+            todo.append(((2, kind, ""), c))
+            continue
+        if tidal_due(d, tidal_river, now):        # before the freshness test: a stale trace cut at tidal is one too
             todo.append(((1, kind, ""), c))
             continue
         if not fresh_rec(d, now):
-            tier = 2 if d.get("cut_reason") == "no_trace" else 3
+            tier = 3 if d.get("cut_reason") == "no_trace" else 4
             todo.append(((tier, kind, d.get("fetched_at") or ""), c))
-            continue
-        if tidal_due(d, tidal_river, now):
-            todo.append(((3, kind, ""), c))
             continue
         if any(c.get(f) != d.get(f) for f in META_FIELDS if f in c):
             touch.append((c, d))
