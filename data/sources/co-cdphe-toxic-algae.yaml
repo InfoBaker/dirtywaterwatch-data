@@ -5,7 +5,7 @@ homepage: "https://cdphe.colorado.gov/toxic-algae"
 kind: "csv"
 level: "state"
 # Ingester: pipeline/ingest/co_cdphe_toxic_algae.py (source id co-cdphe-toxic-algae): the sheet's CSV export every run.
-# Read 2026-11-14: 198 rows for 129 waters (a season baseline of 127 waters at "No bloom reported" dated 2026-04-01, then
+# Read 2026-11-15: 198 rows for 129 waters (a season baseline of 127 waters at "No bloom reported" dated 2026-04-01, then
 #   a row appended per change; Caution 48, Warning 14, Third party 3, No bloom reported 133), the last update dated
 #   2026-09-09. Records: 21 advisories (a run of Caution, Warning or Third party rows per water), 4 ended by the water's
 #   next "No bloom reported" row (Cherry Creek Reservoir, Blue Heron Lake, Windsor Lake, North Sterling Reservoir) and
@@ -15,7 +15,7 @@ level: "state"
 #   kept as written (raw.date_anomalies). A current advisory is confirmed at every read that still shows it as the
 #   water's last row and ends at the first read that does not (a poll bound); the sheet gives no lift time otherwise.
 # Placement: by the water's name (no coordinates, no county); "No bloom reported" is never a record and never clean.
-# Access: CDPHE's landing page answered 403 to the build's client on 2026-11-14; the sheet's owner and its link from the
+# Access: CDPHE's landing page answered 403 to the build's client on 2026-11-14, and to GitHub's runner on 2026-11-16 UTC; the sheet's owner and its link from the
 #   page rest on the research of 2026-11-03.
 cadence: "a row added when a water's condition changes, in season (April to September in 2026); read every run"
 license: "none stated"
@@ -29,4 +29,4 @@ access: ["csv"]
 access_detail: "Google Sheets CSV export: https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv (columns Waterbody name, Condition Category, Update Date, Other notes); no key."
 machine_readable: true
 legal_basis: null
-checked: "2026-11-14"
+checked: "2026-11-15"

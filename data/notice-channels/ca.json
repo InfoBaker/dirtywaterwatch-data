@@ -16513,13 +16513,12 @@
    "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "ca-sd-regional-board-ibwc-spills",
    "publishes": "notices",
-   "records": false,
-   "every_hours": 24,
    "noun": "State page",
-   "note": "A table of transboundary sewage flows from Mexico in the Tijuana River valley (start, end, type, location, volume), updated about once a week. A shared water with Mexico: whether the site covers it at launch is the owner's call. Watched for changes; no records made. Voluntary. (research/ca/report.md §2.3)",
+   "note": "A table of the spill events and transboundary flows from Mexico that USIBWC reported to the Board since July 2024 in the Tijuana River valley (start, end, type, location, volume), updated about once a week; a water shared with Mexico. Read by the site's feed: each row is a report. Voluntary publication. (research/ca/report.md §2.3)",
    "sources": [
     "ca-sd-regional-board-ibwc-spills"
    ],
@@ -18196,7 +18195,7 @@
    "operator_id": null,
    "agency": "California State Water Resources Control Board",
    "permit": null,
-   "checked": "2026-11-04",
+   "checked": "2026-11-16",
    "id": "ca-swrcb-sso-incident-map",
    "name": "California State Water Board (sanitary sewer spill maps)",
    "channel_kind": "state_alert_page",
@@ -18205,13 +18204,13 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "notices",
-   "note": "Interactive maps of the same spill reports (https://www.waterboards.ca.gov/water_issues/programs/sso/sso_map/sso_pub.html); the map pages answer scripts with an Incapsula stub. The nightly file carries the same reports. Voluntary. (research/ca/report.md §2.2)",
+   "note": "Interactive maps of the same spill reports (https://www.waterboards.ca.gov/water_issues/programs/sso/sso_map/sso_pub.html). The nightly file carries the same reports. Voluntary. The map page answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. (research/ca/report.md §2.2)",
    "sources": [
     "ca-swrcb-sso-incident-map"
    ],
-   "barrier": "bot_wall"
+   "barrier": "not_verified"
   },
   {
    "state": "CA",

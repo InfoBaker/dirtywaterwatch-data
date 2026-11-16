@@ -1,0 +1,5558 @@
+{
+ "state": "ID",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 170,
+ "waters": [
+  {
+   "slug": "alturas-lake-id",
+   "name": "Alturas Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Sawtooth City"
+   ],
+   "bbox": [
+    -114.878954,
+    43.902679,
+    -114.844408,
+    43.925303
+   ],
+   "wikidata": "Q4737037",
+   "charted": false,
+   "area_km2": 3.587,
+   "launches": [
+    "smokey-bear-boat-ramp-id"
+   ],
+   "water_id": "alturas-lake-id",
+   "gnis_id": "376583",
+   "geometry_hash": "210b66fc829c69e4dcac106b5a04a1e83797f1a162cae5ae6893cbb6ec2aadf5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "american-falls-reservoir-id",
+   "name": "American Falls Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "American Falls"
+   ],
+   "bbox": [
+    -112.893903,
+    42.77857,
+    -112.597072,
+    43.060662
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 192.396,
+   "launches": [
+    "american-falls-reservoir-west-ramp-id"
+   ],
+   "water_id": "american-falls-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "f80edb32de1525cfbeba435ee055d09697dac7f5c4ce6e2e3901240802069fc8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "american-falls-reservoir-boat-launch-near-american-falls-id",
+    "american-falls-reservoir-boat-launch-near-american-falls-id-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "anderson-ranch-reservoir-id",
+   "name": "Anderson Ranch Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Pine"
+   ],
+   "bbox": [
+    -115.449674,
+    43.35462,
+    -115.278698,
+    43.484346
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 18.639,
+   "launches": [
+    "concrete-boat-ramp-low-water-id",
+    "curlew-creek-id",
+    "deer-creek-boat-ramp-id",
+    "elk-creek-boat-ramp-id",
+    "fall-creek-id",
+    "pine-airport-boat-ramp-id"
+   ],
+   "water_id": "anderson-ranch-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "b8f783f96e0538a35febc14a3a3cbd14201c3b54a9cd6c7ce45a5ff77792a872",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "arrowrock-reservoir-id",
+   "name": "Arrowrock Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Robie Creek"
+   ],
+   "bbox": [
+    -115.923458,
+    43.548723,
+    -115.733896,
+    43.650809
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 11.887,
+   "launches": [
+    "arrowrock-boating-site-id"
+   ],
+   "water_id": "arrowrock-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "4c389cda2444850630b23ffd80032da25efb6fe3b803743b29987eb27851fb46",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ashton-reservoir-id",
+   "name": "Ashton Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Ashton"
+   ],
+   "bbox": [
+    -111.504152,
+    44.078072,
+    -111.448552,
+    44.112282
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.188,
+   "launches": [
+    "ashton-reservoir-boat-launch-id"
+   ],
+   "water_id": "ashton-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "5d53b346d0dad62e2a29b59d93dd9dd2e5a3073a7b823de31c742fa0eba0cb79",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bald-mountain-creek-id",
+   "name": "Bald Mountain Creek",
+   "kind": "stream",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -115.264027,
+    46.383452,
+    -115.232177,
+    46.445989
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bald-mountain-river-access-id"
+   ],
+   "water_id": "bald-mountain-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "c89c9fa4034f4bd712a2511a21f1425274224ac8f44504a2c4d4a3282d1e44d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bayhorse-lake-id",
+   "name": "Bayhorse Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Challis"
+   ],
+   "bbox": [
+    -114.405646,
+    44.410819,
+    -114.401802,
+    44.413578
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.076,
+   "launches": [
+    "bayhorse-lake-boat-launch-id"
+   ],
+   "water_id": "bayhorse-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "db12ddc7d8ee202914acc8c30c76137862399751b1cfa7449cd4643b56766883",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-id",
+   "name": "Bear Creek",
+   "kind": "stream",
+   "state": "ID",
+   "towns": [
+    "Irwin"
+   ],
+   "bbox": [
+    -111.454303,
+    43.236262,
+    -111.204416,
+    43.295256
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "tissue-point-boat-ramp-id"
+   ],
+   "water_id": "bear-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "39bf400dfd9f964bbaaf2c15fc4aa47125b94d1bad090a8c945aa5e7c1f14b42",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-lake-id",
+   "name": "Bear Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Bear Lake Sands"
+   ],
+   "bbox": [
+    -111.410421,
+    41.84589,
+    -111.255527,
+    42.122685
+   ],
+   "wikidata": "Q812997",
+   "charted": false,
+   "area_km2": 273.564,
+   "launches": [
+    "bear-lake-boat-launch-id"
+   ],
+   "water_id": "bear-lake-id",
+   "gnis_id": "1438482",
+   "geometry_hash": "fb33f3fc1079497f0dcace91402ae81003f642dce9c69fd9ab961d9e27d0a34a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-lake-outlet-canal-id",
+   "name": "Bear Lake Outlet Canal",
+   "kind": "canal",
+   "state": "ID",
+   "towns": [
+    "Montpelier"
+   ],
+   "bbox": [
+    -111.360436,
+    42.122504,
+    -111.314724,
+    42.322018
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bear-lake-outlet-canal-carry-in-access-id",
+    "paris-dike-boat-launch-id",
+    "west-rainbow-boat-launch-id"
+   ],
+   "water_id": "bear-lake-outlet-canal-id",
+   "gnis_id": null,
+   "geometry_hash": "5cab2ee7c49a30bf692a400469264c4ada4db2f8907ba6f6c10c30cea3a1a225",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beauty-bay-id",
+   "name": "Beauty Bay",
+   "kind": "bay",
+   "state": "ID",
+   "towns": [
+    "Coeur d'Alene"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mineral-ridge-scenic-area-boat-ramp-id"
+   ],
+   "water_id": "beauty-bay-id",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-hole-id",
+   "name": "Big Hole",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Aberdeen"
+   ],
+   "bbox": [
+    -112.77673,
+    42.946128,
+    -112.761721,
+    42.962325
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.654,
+   "launches": [
+    "sportsman-park-id"
+   ],
+   "water_id": "big-hole-id",
+   "gnis_id": null,
+   "geometry_hash": "fc66ea1cdbca9112146092c64012896aa5f1433e10c89d220e8196bd6dee5672",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-lost-river-id",
+   "name": "Big Lost River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Leslie"
+   ],
+   "bbox": [
+    -114.111688,
+    43.514637,
+    -112.836948,
+    44.060104
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rothwell-recreation-site-id"
+   ],
+   "water_id": "big-lost-river-id",
+   "gnis_id": null,
+   "geometry_hash": "22d14d45787276f814c8039ff3bbc5a3bd73d8e5d93341357b0003387f5574f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "billingsley-creek-id",
+   "name": "Billingsley Creek",
+   "kind": "stream",
+   "state": "ID",
+   "towns": [
+    "Hagerman"
+   ],
+   "bbox": [
+    -114.893509,
+    42.824023,
+    -114.876314,
+    42.836529
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "billingsley-creek-north-id",
+    "billingsley-creek-south-id"
+   ],
+   "water_id": "billingsley-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "76cbdfd984c0c2b45b99e2b6c51fc36435c985d91174dedff799436f30aa3373",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "black-bay-id",
+   "name": "Black Bay",
+   "kind": "bay",
+   "state": "ID",
+   "towns": [
+    "Post Falls"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "black-bay-boat-launch-near-post-falls-id",
+    "black-bay-boat-launch-near-post-falls-id-2"
+   ],
+   "water_id": "black-bay-id",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "black-canyon-reservoir-id",
+   "name": "Black Canyon Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Emmett"
+   ],
+   "bbox": [
+    -116.437615,
+    43.917646,
+    -116.357188,
+    43.93943
+   ],
+   "wikidata": "Q4920483",
+   "charted": false,
+   "area_km2": 2.569,
+   "launches": [
+    "black-canyon-main-park-boat-ramp-id",
+    "black-canyon-west-boat-ramp-id",
+    "long-hollow-boat-ramp-id",
+    "triangle-park-boat-ramp-id"
+   ],
+   "water_id": "black-canyon-reservoir-id",
+   "gnis_id": "397443",
+   "geometry_hash": "1f04df0f244ee8902e52c16129f0b2e1ff9d07a2499bb5991a0a7fab5f148339",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blackfoot-reservoir-id",
+   "name": "Blackfoot Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Soda Springs"
+   ],
+   "bbox": [
+    -111.717044,
+    42.832927,
+    -111.521257,
+    43.025267
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 68.244,
+   "launches": [
+    "dike-lake-blackfoot-reservoir-id",
+    "hopkins-landing-id",
+    "pebble-beach-id",
+    "poison-creek-id"
+   ],
+   "water_id": "blackfoot-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "115bbe802b18983a78552a136967f5dbc9a57016f7b6265389adee148abdaaaf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blackfoot-river-id",
+   "name": "Blackfoot River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Morgan"
+   ],
+   "bbox": [
+    -112.508637,
+    42.804485,
+    -111.537608,
+    43.266884
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cutthroat-trout-campground-boat-ramp-id",
+    "graves-creek-campground-boat-ramp-id",
+    "morgan-bridge-campground-boat-ramp-id",
+    "trail-creek-bridge-campground-boat-ramp-id"
+   ],
+   "water_id": "blackfoot-river-id",
+   "gnis_id": null,
+   "geometry_hash": "3f8ab459a34be96560b8b74605e7974867dfbcbda366c30d55c1a350d4cf6dcf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boise-river-id",
+   "name": "Boise River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Garden City",
+    "Middleton"
+   ],
+   "bbox": [
+    -117.021719,
+    43.524266,
+    -115.635231,
+    43.81764
+   ],
+   "wikidata": "Q891080",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lansing-lane-id"
+   ],
+   "water_id": "boise-river-id",
+   "gnis_id": "378007",
+   "geometry_hash": "36d9c7472357c72127dd14973f04f4bbed0eea01be8c82b1957d30c89dd61f4c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bonner-lake-id",
+   "name": "Bonner Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Moyie Springs"
+   ],
+   "bbox": [
+    -116.112317,
+    48.722882,
+    -116.104704,
+    48.72793
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.111,
+   "launches": [
+    "bonner-lake-boat-launch-id"
+   ],
+   "water_id": "bonner-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "05820adb13e431c5ed4cfd339ec1acf8ae7e8fef7cab9f6633c1305223c29f58",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "box-canyon-reservoir-id",
+   "name": "Box Canyon Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Oldtown"
+   ],
+   "bbox": [
+    -117.41771,
+    48.176548,
+    -116.998388,
+    48.780986
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 43.223,
+   "launches": [
+    "box-canyon-reservoir-boat-launch-near-oldtown-id-2",
+    "box-canyon-reservoir-boat-launch-near-oldtown-id-3"
+   ],
+   "water_id": "box-canyon-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "e898f9495c5a877600ec6e92fb4ec3cae6bceeb4a34eae88192becdfa5661dbe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brownlee-reservoir-id",
+   "name": "Brownlee Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Washington County"
+   ],
+   "bbox": [
+    -117.244995,
+    44.325196,
+    -116.897949,
+    44.838278
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 52.812,
+   "launches": [
+    "steck-park-id"
+   ],
+   "water_id": "brownlee-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "fcfa301ff178ea3851de97519bc60b833ea396c3514c9ca594790c7ffcb7dfe1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brush-lake-id",
+   "name": "Brush Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Bonners Ferry"
+   ],
+   "bbox": [
+    -116.330656,
+    48.886639,
+    -116.324669,
+    48.894568
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.181,
+   "launches": [
+    "brush-lake-boat-launch-id"
+   ],
+   "water_id": "brush-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "41bca108494172ddfb5039d16f5d48480d21518fcbce43979aa949498eb27402",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bull-run-lake-id",
+   "name": "Bull Run Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Rose Lake"
+   ],
+   "bbox": [
+    -116.480634,
+    47.521839,
+    -116.471128,
+    47.533969
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.53,
+   "launches": [
+    "bull-run-lake-carry-in-access-id"
+   ],
+   "water_id": "bull-run-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "e842b8b686fd102699fde8b3c0b6dac4f328ba002a797f3c2da1df1c7e97487b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bull-trout-lake-id",
+   "name": "Bull Trout Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -115.257257,
+    44.29621,
+    -115.250702,
+    44.303512
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.302,
+   "launches": [
+    "martin-lake-id"
+   ],
+   "water_id": "bull-trout-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "4169798ed129ad1363671d94a47c6d2f065500e5ed1b5efc9ff873a77d60804c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "c-j-strike-reservoir-id",
+   "name": "C. J. Strike Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Bruneau",
+    "Grand View",
+    "Mountain Home"
+   ],
+   "bbox": [
+    -115.977311,
+    42.897599,
+    -115.787093,
+    43.00354
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 23.062,
+   "launches": [
+    "bruneau-arm-narrows-id",
+    "cove-arm-id",
+    "crane-falls-id"
+   ],
+   "water_id": "c-j-strike-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "7687d8692560602088b01f6b244280e627042906d836ea230c1ec12978f44381",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "campbell-pond-id",
+   "name": "Campbell Pond",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Pierce"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "campbell-pond-boat-launch-id"
+   ],
+   "water_id": "campbell-pond-id",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-creek-reservoir-id",
+   "name": "Cedar Creek Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -114.914407,
+    42.190746,
+    -114.866567,
+    42.22383
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.361,
+   "launches": [
+    "cedar-creek-reservoir-boat-launch-id-2"
+   ],
+   "water_id": "cedar-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "d72a22e5a11c92945b591c000b4b81434d2224f3108b6eaae15e0a5efb2830c5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cedar-draw-id",
+   "name": "Cedar Draw",
+   "kind": "stream",
+   "state": "ID",
+   "towns": [
+    "Buhl"
+   ],
+   "bbox": [
+    -114.670447,
+    42.548984,
+    -114.617951,
+    42.660643
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cedar-draw-boat-launch-id"
+   ],
+   "water_id": "cedar-draw-id",
+   "gnis_id": null,
+   "geometry_hash": "6141dcbb04b4f716bf61b500a0ac00b95f99170005631b6998a6046d111a3599",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chase-lake-id",
+   "name": "Chase Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Coolin"
+   ],
+   "bbox": [
+    -116.830509,
+    48.453053,
+    -116.818399,
+    48.464016
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.741,
+   "launches": [
+    "chase-lake-boat-launch-id"
+   ],
+   "water_id": "chase-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "8586a6c302c1bf7c4d9d5c82ae5d750e3b8ebedd4a6b81457c5636f6224a009a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chatcolet-lake-id",
+   "name": "Chatcolet Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Chatcolet",
+    "Rocky Point"
+   ],
+   "bbox": [
+    -116.77782,
+    47.352607,
+    -116.728296,
+    47.378197
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.856,
+   "launches": [
+    "rocky-point-boat-launch-id"
+   ],
+   "water_id": "chatcolet-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "bbed15f2cb749858946dc12446d42ed2fac1c11a04682a2a939a603c3330ab74",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chesterfield-reservoir-id",
+   "name": "Chesterfield Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Caribou County"
+   ],
+   "bbox": [
+    -111.984334,
+    42.876963,
+    -111.941618,
+    42.91552
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.702,
+   "launches": [
+    "chesterfield-reservoir-boat-launch-id"
+   ],
+   "water_id": "chesterfield-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "52798278d44a5d25bee0155443a9acd30b455ac826943ad69f7b95e44fdef988",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clearwater-river-id",
+   "name": "Clearwater River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Lewiston"
+   ],
+   "bbox": [
+    -117.037802,
+    46.418816,
+    -116.910097,
+    46.434017
+   ],
+   "wikidata": "Q1099574",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "steelhead-park-boat-ramp-id"
+   ],
+   "water_id": "clearwater-river-id",
+   "gnis_id": "379406",
+   "geometry_hash": "52e947e58b75decc2ee2ed7cb27a658336da441a61419f7826333f85ab249500",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clearwater-river-kamiah-qemyexp-id",
+   "name": "Clearwater River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Kamiah / qemyexp"
+   ],
+   "bbox": [
+    -116.078758,
+    46.219048,
+    -116.008832,
+    46.260599
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.132,
+   "launches": [
+    "kamiah-city-park-boat-ramp-id"
+   ],
+   "water_id": "clearwater-river-kamiah-qemyexp-id",
+   "gnis_id": null,
+   "geometry_hash": "6eccc65b1dd231dd8bfc103c9a79a1208f4114c0ab58fa40a3af37decf7f8f90",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clearwater-river-kuumkxtoyn-id",
+   "name": "Clearwater River / kuumkxtoyn",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Arrow / yaxtooyn",
+    "Juliaetta",
+    "Kamiah / qemyexp",
+    "Kooskia / leewikees",
+    "Lewiston",
+    "Orofino",
+    "Peck"
+   ],
+   "bbox": [
+    -116.910097,
+    46.145606,
+    -115.981881,
+    46.526528
+   ],
+   "wikidata": "Q1099574",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "ahsahka-id",
+    "beardy-gulch-id",
+    "button-beach-id",
+    "cherry-lane-id",
+    "five-mile-creek-id",
+    "gibbs-eddy-id",
+    "greer-id",
+    "harpers-bend-access-id",
+    "lenore-id",
+    "longcamp-id",
+    "pink-house-id",
+    "upper-hog-island-id",
+    "zans-id"
+   ],
+   "water_id": "clearwater-river-kuumkxtoyn-id",
+   "gnis_id": "379406",
+   "geometry_hash": "048108933e05eb7383c342c2adba06f9df11c14ac026f6e82d469090d224afec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "coeur-d-alene-river-id",
+   "name": "Coeur d'Alene River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Cataldo",
+    "Harrison",
+    "Medimont",
+    "Rose Lake"
+   ],
+   "bbox": [
+    -116.797855,
+    47.458302,
+    -116.257747,
+    47.570641
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "anderson-lake-outlet-id",
+    "cda-river-east-of-rose-lake-id",
+    "medimont-id",
+    "old-mission-id",
+    "thompson-lake-outlet-id"
+   ],
+   "water_id": "coeur-d-alene-river-id",
+   "gnis_id": null,
+   "geometry_hash": "c383b25be316a8ffc84d08bf44c5d5108953a5d31d5f12e8c80d4d0e429542c5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "condie-reservoir-id",
+   "name": "Condie Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Preston"
+   ],
+   "bbox": [
+    -111.873524,
+    42.205063,
+    -111.85889,
+    42.215274
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.37,
+   "launches": [
+    "condie-reservoir-boat-launch-id"
+   ],
+   "water_id": "condie-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "4311082314af17de76f0c0e2553a6a9e0bbd12be8b13368e0c3e18ddfe95be08",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "daniels-reservoir-id",
+   "name": "Daniels Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Malad"
+   ],
+   "bbox": [
+    -112.448592,
+    42.345475,
+    -112.440668,
+    42.358099
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.42,
+   "launches": [
+    "daniels-reservoir-boat-launch-id"
+   ],
+   "water_id": "daniels-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "351d5e0f06ef370e31f92d60ef37d772daedbaff7652aae43a4a0a6f82526f26",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dawson-lake-id",
+   "name": "Dawson Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Bonners Ferry"
+   ],
+   "bbox": [
+    -116.242013,
+    48.773067,
+    -116.238243,
+    48.784783
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dawson-lake-boat-launch-id"
+   ],
+   "water_id": "dawson-lake-id",
+   "gnis_id": "380287",
+   "geometry_hash": "0b7ffc0de28976c63f9c0c8d70301414e42a1b9e47d08165048edd82e255c8e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deep-creek-id",
+   "name": "Deep Creek",
+   "kind": "river",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -116.70814,
+    42.264712,
+    -116.599819,
+    42.581976
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "deep-creek-boat-launch-id"
+   ],
+   "water_id": "deep-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "4ba1d482757816035741f09c2412de3a02c3d05375263a9c8372c758a289b5d7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deep-creek-reservoir-id",
+   "name": "Deep Creek Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Malad"
+   ],
+   "bbox": [
+    -112.173643,
+    42.20311,
+    -112.163644,
+    42.213438
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.462,
+   "launches": [
+    "deep-creek-reservoir-boat-launch-id"
+   ],
+   "water_id": "deep-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "cc14643b186fa32c3391ad5cfb7e9e1747d5339433e95260980f3ac97e58e77d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deer-creek-reservoir-id",
+   "name": "Deer Creek Reservoir",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Pierce"
+   ],
+   "bbox": [
+    -115.779466,
+    46.623626,
+    -115.770234,
+    46.637029
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.279,
+   "launches": [
+    "deer-creek-reservoir-boat-launch-id"
+   ],
+   "water_id": "deer-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "ddbab9b1a2d867f4e6853088fd8558fdfc643b65cd6ea1ca10a7bae0ebfea5b9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deer-flat-high-line-canal-id",
+   "name": "Deer Flat High Line Canal",
+   "kind": "canal",
+   "state": "ID",
+   "towns": [
+    "Nampa"
+   ],
+   "bbox": [
+    -116.889789,
+    43.498841,
+    -116.576853,
+    43.641878
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "parking-area-1-boat-launch-id"
+   ],
+   "water_id": "deer-flat-high-line-canal-id",
+   "gnis_id": null,
+   "geometry_hash": "22548d2e52eac94ee83055a728c7f74f7bb0da8a0ca5d9ed195f699586569f2e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "devil-creek-reservoir-id",
+   "name": "Devil Creek Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Malad"
+   ],
+   "bbox": [
+    -112.207854,
+    42.294794,
+    -112.20146,
+    42.304043
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.301,
+   "launches": [
+    "devil-creek-reservoir-boat-launch-id"
+   ],
+   "water_id": "devil-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "7201406edd40e54f9a849cc4f44d76b3a059c56b89c00419f446bdb17d7d7de0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deyo-reservoir-id",
+   "name": "Deyo Reservoir",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Weippe"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "deyo-reservoir-boat-launch-id"
+   ],
+   "water_id": "deyo-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dick-knox-pond-id",
+   "name": "Dick Knox Pond",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Emmett"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "dick-knox-pond-boat-launch-id"
+   ],
+   "water_id": "dick-knox-pond-id",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dog-creek-reservoir-id",
+   "name": "Dog Creek Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Gooding"
+   ],
+   "bbox": [
+    -114.747348,
+    43.024477,
+    -114.73626,
+    43.033337
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.238,
+   "launches": [
+    "dog-creek-reservoir-boat-launch-id"
+   ],
+   "water_id": "dog-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "70f7179896b869c864726a54b678627dca07ddad6ff7b8f8cc98b4e6057654b0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "duff-pond-id",
+   "name": "Duff Pond",
+   "kind": "pond",
+   "state": "ID",
+   "towns": [
+    "Middleton"
+   ],
+   "bbox": [
+    -116.592721,
+    43.69773,
+    -116.588248,
+    43.698331
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.023,
+   "launches": [
+    "duff-lane-id"
+   ],
+   "water_id": "duff-pond-id",
+   "gnis_id": null,
+   "geometry_hash": "90a78eca5b5aad983cfb9a13cd2a35304d2f271a0b02d729e0e13d6888452c8a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dworshak-reservoir-id",
+   "name": "Dworshak Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Orofino"
+   ],
+   "bbox": [
+    -116.310339,
+    46.507797,
+    -115.586803,
+    46.916315
+   ],
+   "wikidata": "Q35040031",
+   "charted": false,
+   "area_km2": 71.581,
+   "launches": [
+    "dworshak-reservoir-boat-launch-near-orofino-id-2",
+    "dworshak-reservoir-boat-launch-near-orofino-id-3",
+    "dworshak-reservoir-boat-launch-near-orofino-id",
+    "canyon-creek-boat-ramp-id",
+    "dent-acres-boat-ramp-id",
+    "freeman-creek-boat-ramp-id",
+    "grandad-boat-ramp-id"
+   ],
+   "water_id": "dworshak-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "d7129b4a8abad406b345596fc93261ba246cd1dcbf6442abf28500a96665d6af",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "elk-creek-reservoir-id",
+   "name": "Elk Creek Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Elk River"
+   ],
+   "bbox": [
+    -116.175184,
+    46.768514,
+    -116.166026,
+    46.781603
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.397,
+   "launches": [
+    "elk-creek-reservoir-boat-launch-id"
+   ],
+   "water_id": "elk-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "e4b35f5671a2386b6b83a18a7806250bd076f0405c158c08b45c3fec0fb155a2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fernan-lake-id",
+   "name": "Fernan Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Coeur d'Alene",
+    "Fernan Lake Village"
+   ],
+   "bbox": [
+    -116.750086,
+    47.669263,
+    -116.70501,
+    47.680819
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.832,
+   "launches": [
+    "fernan-east-boat-launch-id",
+    "fernan-park-public-boat-launch-id"
+   ],
+   "water_id": "fernan-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "9959726102f8ca111bcb86a2e911c1eb55e593b321a17c6ac1f7ff868074ee9c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fighting-creek-id",
+   "name": "Fighting Creek",
+   "kind": "stream",
+   "state": "ID",
+   "towns": [
+    "Rockford Bay"
+   ],
+   "bbox": [
+    -116.977285,
+    47.491556,
+    -116.85955,
+    47.5637
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "rockford-bay-id"
+   ],
+   "water_id": "fighting-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "c0bec915ba9eb419ce8b78b2f607a529e5517faa55bddb585dbd089bdded4048",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "fish-creek-reservoir-id",
+   "name": "Fish Creek Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Carey"
+   ],
+   "bbox": [
+    -113.834071,
+    43.422506,
+    -113.815092,
+    43.437063
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.751,
+   "launches": [
+    "fish-creek-reservoir-boat-launch-id"
+   ],
+   "water_id": "fish-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "f8fac3241b407b299b0462f8d05c351212cef38615979743904d7466067ec041",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "foster-reservoir-id",
+   "name": "Foster Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Preston"
+   ],
+   "bbox": [
+    -111.843121,
+    42.122633,
+    -111.829731,
+    42.133537
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.424,
+   "launches": [
+    "foster-reservoir-boat-launch-id"
+   ],
+   "water_id": "foster-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "f20284fb68c82781da221d398e8dd9f40943973edcedc5e240dcf184b0d3dcce",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "freeman-lake-id",
+   "name": "Freeman Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Oldtown"
+   ],
+   "bbox": [
+    -117.033245,
+    48.220691,
+    -117.025831,
+    48.22705
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.275,
+   "launches": [
+    "freeman-lake-boat-launch-id"
+   ],
+   "water_id": "freeman-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "2349e67e3a41af0061fd7224b17fe083ae7e5699c9958fea9677b924bf5df9d8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "glendale-reservoir-id",
+   "name": "Glendale Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Preston"
+   ],
+   "bbox": [
+    -111.813887,
+    42.128216,
+    -111.782069,
+    42.140398
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.811,
+   "launches": [
+    "glendale-reservoir-boat-launch-id"
+   ],
+   "water_id": "glendale-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "579b259ff18c2f4ace029c801361c2c4e8d3983f2c8dcff8eaa8dae5f4075385",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gooding-canal-id",
+   "name": "Gooding Canal",
+   "kind": "canal",
+   "state": "ID",
+   "towns": [
+    "Shoshone"
+   ],
+   "bbox": [
+    -114.427352,
+    42.923175,
+    -114.370083,
+    42.985476
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "little-drops-recreation-site-id"
+   ],
+   "water_id": "gooding-canal-id",
+   "gnis_id": null,
+   "geometry_hash": "2bcac25c84be0881fd7c28d17591d7774ba9104b94086cf2c9a6a128318fec59",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "goose-lake-id",
+   "name": "Goose Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "McCall"
+   ],
+   "bbox": [
+    -116.175781,
+    45.064227,
+    -116.163722,
+    45.096666
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.556,
+   "launches": [
+    "goose-lake-boat-launch-id"
+   ],
+   "water_id": "goose-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "7f1002bc2106fa5b5d2cbab823473a0f325df7d52ab4c09c906fe455a1797501",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "granite-lake-id",
+   "name": "Granite Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Granite"
+   ],
+   "bbox": [
+    -116.690749,
+    48.002084,
+    -116.684568,
+    48.006223
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.101,
+   "launches": [
+    "granite-lake-boat-launch-id"
+   ],
+   "water_id": "granite-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "2f9b885c9d7f3a328f3cd598ef56ce1f1acee8dd599734b55466ec5a1e90fb6a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hauser-lake-id",
+   "name": "Hauser Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Hauser"
+   ],
+   "bbox": [
+    -117.032843,
+    47.770318,
+    -117.008047,
+    47.788259
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.646,
+   "launches": [
+    "hauser-lake-boat-launch-id"
+   ],
+   "water_id": "hauser-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "94ff1b2d1ee6d72d53d031dc8a196f39b291d2fa6ca8238b10c38b1042ba4ed4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hawkins-reservoir-id",
+   "name": "Hawkins Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Arimo"
+   ],
+   "bbox": [
+    -112.338366,
+    42.50956,
+    -112.332109,
+    42.512885
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.108,
+   "launches": [
+    "hawkins-reservoir-boat-launch-id"
+   ],
+   "water_id": "hawkins-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "7efa63def86da273b22d4bd7c19421d23a8c227365d45121cb472ef7e4cbee83",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "hayden-lake-id",
+   "name": "Hayden Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Hayden",
+    "Hayden Lake"
+   ],
+   "bbox": [
+    -116.758998,
+    47.746275,
+    -116.666798,
+    47.816358
+   ],
+   "wikidata": "Q49303687",
+   "charted": false,
+   "area_km2": 17.525,
+   "launches": [
+    "hayden-lake-sportsman-park-id",
+    "honeysuckle-beach-boat-ramp-id"
+   ],
+   "water_id": "hayden-lake-id",
+   "gnis_id": "397780",
+   "geometry_hash": "eec457435b2485da6d2284c6da53487a3a479b91eca685df5f273fa097d6b3c2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "hayden-lake-marina-id",
+    "hayden-lake-marina-id-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "hells-canyon-reservoir-id",
+   "name": "Hells Canyon Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -116.859375,
+    44.978139,
+    -116.700201,
+    45.243585
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.496,
+   "launches": [
+    "hells-canyon-reservoir-boat-launch-id"
+   ],
+   "water_id": "hells-canyon-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "c09a721b4ea6643a433fd63fe36afe3c43b442c3e374334d473124341b70c2e4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "henrys-fork-snake-river-id",
+   "name": "Henrys Fork Snake River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Ashton",
+    "Box Canyon",
+    "Hinckley",
+    "Island Park",
+    "Parker",
+    "Rexburg",
+    "St. Anthony",
+    "Warm River"
+   ],
+   "bbox": [
+    -111.954863,
+    43.762742,
+    -111.282051,
+    44.597189
+   ],
+   "wikidata": "Q4497256",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "beaver-dick-id",
+    "big-springs-boat-takeout-id",
+    "box-canyon-id",
+    "chester-dam-id",
+    "east-hatchery-ford-boat-ramp-id",
+    "fun-farm-bridge-id",
+    "last-chance-id",
+    "ora-bridge-id",
+    "red-road-bridge-id",
+    "riverside-id",
+    "stone-bridge-id",
+    "trestle-bridge-id",
+    "vernon-bridge-id",
+    "warm-slough-id"
+   ],
+   "water_id": "henrys-fork-snake-river-id",
+   "gnis_id": "383107",
+   "geometry_hash": "d9458bb687be4fbef3ad265b5bc595c4312176920100f9d86a4e35f02c1406d9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "henrys-lake-id",
+   "name": "Henrys Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Lake",
+    "Staley Springs"
+   ],
+   "bbox": [
+    -111.437244,
+    44.596832,
+    -111.353142,
+    44.669507
+   ],
+   "wikidata": "Q7330579",
+   "charted": false,
+   "area_km2": 26.257,
+   "launches": [
+    "henrys-lake-frome-park-id",
+    "henrys-lake-south-shore-id"
+   ],
+   "water_id": "henrys-lake-id",
+   "gnis_id": "397786",
+   "geometry_hash": "2c395bf85a53310d6f16de9dd0a3ac0d5777cac13a689a6f892987d89d10caa5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "herrick-reservoir-id",
+   "name": "Herrick Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Valley County"
+   ],
+   "bbox": [
+    -115.988786,
+    44.368327,
+    -115.979986,
+    44.376924
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.149,
+   "launches": [
+    "herrick-reservoir-boat-launch-id"
+   ],
+   "water_id": "herrick-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "68fbb3c3e8e4dc35d89de2193d16e7d39c943b95495132f03b70c78e95600d45",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-bend-mill-pond-id",
+   "name": "Horseshoe Bend Mill Pond",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Horseshoe Bend"
+   ],
+   "bbox": [
+    -116.187339,
+    43.933683,
+    -116.181206,
+    43.935708
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.052,
+   "launches": [
+    "horseshoe-bend-mill-pond-boat-launch-id"
+   ],
+   "water_id": "horseshoe-bend-mill-pond-id",
+   "gnis_id": null,
+   "geometry_hash": "2b56bbd55869256d9b00287fdde0353533184a0caaed395f99f7f502a0024b30",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "horsethief-reservoir-id",
+   "name": "Horsethief Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Valley County"
+   ],
+   "bbox": [
+    -115.922102,
+    44.501369,
+    -115.907666,
+    44.522338
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.973,
+   "launches": [
+    "horsethief-reservoir-boat-launch-id"
+   ],
+   "water_id": "horsethief-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "228d28082bcdbe71d936fe396da8b11f5fef220507a0d1e9e0b72b097783f765",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "indian-creek-id",
+   "name": "Indian Creek",
+   "kind": "stream",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -111.100611,
+    43.249285,
+    -111.063844,
+    43.259763
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "indian-creek-boat-ramp-id"
+   ],
+   "water_id": "indian-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "79f0f951b640777c268e336f2ac6a0b08c594ab6b0d687932dbe0c2cadb441b9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "indian-creek-reservoir-id",
+   "name": "Indian Creek Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Regina"
+   ],
+   "bbox": [
+    -116.017356,
+    43.386713,
+    -116.007506,
+    43.392894
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.35,
+   "launches": [
+    "indian-creek-reservoir-boat-launch-id"
+   ],
+   "water_id": "indian-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "67845165f1e9355d2c7fea042ef0bfc9000bc10465795cf7c6743fb5f4abfde0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "island-park-reservoir-id",
+   "name": "Island Park Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Island Park"
+   ],
+   "bbox": [
+    -111.593263,
+    44.377207,
+    -111.373693,
+    44.470409
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 30.592,
+   "launches": [
+    "buttermilk-id",
+    "island-park-id-2",
+    "island-park-boat-ramp-id",
+    "mccrea-id",
+    "mill-creek-id",
+    "west-end-id"
+   ],
+   "water_id": "island-park-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "4f9fd52ac9debf63e98a9014d4e1fdb6aa566a64aca2eebe3bacfb83167113c9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jarbidge-river-id",
+   "name": "Jarbidge River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Murphy Hot Springs"
+   ],
+   "bbox": [
+    -115.652547,
+    41.902888,
+    -115.39069,
+    42.329567
+   ],
+   "wikidata": "Q14394115",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "jarbidge-river-launch-site-id"
+   ],
+   "water_id": "jarbidge-river-id",
+   "gnis_id": "397355",
+   "geometry_hash": "3cc6d759ac33f3181559f7d20fda0ad9117c8dd76e712b7e895d5d7ae8cb0b4e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jensens-grove-lake-id",
+   "name": "Jensens Grove Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Blackfoot"
+   ],
+   "bbox": [
+    -112.359337,
+    43.20219,
+    -112.348849,
+    43.214009
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.262,
+   "launches": [
+    "jensen-grove-boat-ramp-id"
+   ],
+   "water_id": "jensens-grove-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "59627574de76dc908eb39f9f43d97aa05c801bd2a23e5da3f4398137bf6cb933",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jewel-lake-id",
+   "name": "Jewel Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Sandpoint"
+   ],
+   "bbox": [
+    -116.723026,
+    48.138578,
+    -116.715274,
+    48.143118
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "jewell-lake-id"
+   ],
+   "water_id": "jewel-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "e23c830c37e427e884d7b868bae874c92f12da5be96b29c5e617b5a28a4f742e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jim-moore-pond-id",
+   "name": "Jim Moore Pond",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Roberts"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "jim-moore-pond-carry-in-access-id"
+   ],
+   "water_id": "jim-moore-pond-id",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "johnson-reservoir-id",
+   "name": "Johnson Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Preston"
+   ],
+   "bbox": [
+    -111.811389,
+    42.105919,
+    -111.805595,
+    42.112414
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.165,
+   "launches": [
+    "johnson-reservoir-boat-launch-id"
+   ],
+   "water_id": "johnson-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "36c128f0129e3c46b63b15969bd6c169aa9aa51cac6fd4104df698ce5f22fbd8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kelso-lake-id",
+   "name": "Kelso Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Kelso"
+   ],
+   "bbox": [
+    -116.715177,
+    48.00779,
+    -116.700447,
+    48.011487
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.257,
+   "launches": [
+    "kelso-lake-boat-launch-id"
+   ],
+   "water_id": "kelso-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "d6ad89d3dba81b886ab1eabe6017e2749d9e811595184ae0932c194b7fb4ac2a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "killarney-lake-id",
+   "name": "Killarney Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Lane"
+   ],
+   "bbox": [
+    -116.580977,
+    47.507175,
+    -116.552383,
+    47.534639
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.874,
+   "launches": [
+    "killarney-lake-boat-launch-id"
+   ],
+   "water_id": "killarney-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "57597786c8a1ca164fdddf0358b685d377fff1d6bd4b94660af47847bd6d6d43",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cascade-id",
+   "name": "Lake Cascade",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Cascade",
+    "Donnelly"
+   ],
+   "bbox": [
+    -116.15059,
+    44.477294,
+    -116.049911,
+    44.751717
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 105.61,
+   "launches": [
+    "blue-heron-boat-ramp-id",
+    "buttercup-id",
+    "campbell-creek-boat-ramp-id",
+    "lake-cascade-boat-launch-near-donnelly-id",
+    "french-creek-boat-docks-id",
+    "rainbow-point-boating-id",
+    "siscra-boat-ramp-id",
+    "lake-cascade-boat-launch-id",
+    "lake-cascade-boat-launch-near-cascade-id"
+   ],
+   "water_id": "lake-cascade-id",
+   "gnis_id": null,
+   "geometry_hash": "c0b383846e847dfc63e07b43bd2773dd58cb9a79870e2fd65c110c5fb0e66f23",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "poison-creek-campground-id"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-cocolalla-id",
+   "name": "Lake Cocolalla",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Westmond"
+   ],
+   "bbox": [
+    -116.627655,
+    48.108405,
+    -116.600287,
+    48.141797
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.728,
+   "launches": [
+    "cocolalla-lake-boat-launch-id"
+   ],
+   "water_id": "lake-cocolalla-id",
+   "gnis_id": null,
+   "geometry_hash": "d83f429ff7d70ed3a35c1bbbffef40f946b4130018c24a7a5398dc9a8cbe3b39",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-lowell-id",
+   "name": "Lake Lowell",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Caldwell",
+    "Nampa"
+   ],
+   "bbox": [
+    -116.746287,
+    43.523084,
+    -116.602122,
+    43.595474
+   ],
+   "wikidata": "Q49701503",
+   "charted": false,
+   "area_km2": 28.993,
+   "launches": [
+    "lower-dam-recreation-area-boat-launch-id",
+    "parking-area-7-boat-launch-id",
+    "upper-dam-east-boat-launch-id",
+    "upper-dam-west-boat-launch-id"
+   ],
+   "water_id": "lake-lowell-id",
+   "gnis_id": "397878",
+   "geometry_hash": "4235083d79b1169e5f2ae00f3fbfc9985b9c2861b5985a49e47dca1de64e8844",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-pend-oreille-id",
+   "name": "Lake Pend Oreille",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Bayview",
+    "Clark Fork",
+    "Dover",
+    "East Hope",
+    "Garfield",
+    "Sandpoint",
+    "Sunnyside"
+   ],
+   "bbox": [
+    -116.620464,
+    47.948532,
+    -116.193224,
+    48.319774
+   ],
+   "wikidata": "Q1632195",
+   "charted": true,
+   "area_km2": 393.166,
+   "launches": [
+    "bayview-public-boat-launch-id",
+    "lake-pend-oreille-boat-launch-near-sandpoint-id-2",
+    "clark-fork-driftyard-id",
+    "denton-slough-id",
+    "garfield-bay-id",
+    "hawkins-point-pack-river-id",
+    "johnson-creek-id",
+    "pringle-park-east-hope-id",
+    "sam-owen-boat-dock-id",
+    "springy-point-boat-ramp-id",
+    "sunnyside-park-id",
+    "lake-pend-oreille-boat-launch-near-east-hope-id-2",
+    "whiskey-rock-bay-boat-launch-id"
+   ],
+   "water_id": "lake-pend-oreille-id",
+   "gnis_id": "398523",
+   "geometry_hash": "99ccb039cc8f2df8c763ab6e11b8851fd349d808841acff03259a2a93b8d416e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "farragut-boat-launch-east-ramp-id",
+    "farragut-boat-launch-west-ramp-id"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-walcott-id",
+   "name": "Lake Walcott",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Minidoka",
+    "Rockland"
+   ],
+   "bbox": [
+    -113.487701,
+    42.602157,
+    -112.981299,
+    42.694547
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 48.097,
+   "launches": [
+    "gifford-springs-id",
+    "lake-walcott-state-park-boat-ramp-id"
+   ],
+   "water_id": "lake-walcott-id",
+   "gnis_id": null,
+   "geometry_hash": "7de4d61e0b7d510f6196e2e1aa24ddcc58475a93ab92d9e72f394a81d3937bf5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lamont-reservoir-id",
+   "name": "Lamont Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Preston"
+   ],
+   "bbox": [
+    -111.819637,
+    42.104658,
+    -111.812144,
+    42.114821
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.322,
+   "launches": [
+    "lamont-reservoir-boat-launch-id"
+   ],
+   "water_id": "lamont-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "4ef4084aee9a6e7c30834ab5c660b5bc74dc5011ec35716a9af97c27db81e703",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-bayhorse-lake-id",
+   "name": "Little Bayhorse Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Challis"
+   ],
+   "bbox": [
+    -114.391382,
+    44.410376,
+    -114.387053,
+    44.413762
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.069,
+   "launches": [
+    "little-bayhorse-lake-boat-launch-id"
+   ],
+   "water_id": "little-bayhorse-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "b5f035b6f878479ce0e68f03b28914a51a4ecf946f800ad555766f8d79fc5172",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-camas-reservoir-id",
+   "name": "Little Camas Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Elmore County"
+   ],
+   "bbox": [
+    -115.391936,
+    43.315284,
+    -115.358666,
+    43.352834
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.824,
+   "launches": [
+    "little-camas-boat-ramp-id",
+    "little-camas-reservoir-boat-launch-id"
+   ],
+   "water_id": "little-camas-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "7817425ef970d2f8d38f88fe6d12b81668a8200c8f2080f61c328a8f2849c409",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-payette-lake-id",
+   "name": "Little Payette Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "McCall"
+   ],
+   "bbox": [
+    -116.053759,
+    44.903059,
+    -116.013075,
+    44.930361
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.415,
+   "launches": [
+    "little-payette-lake-boat-launch-id"
+   ],
+   "water_id": "little-payette-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "a9509ea478384ec1070ca9659a35787ae23f39e5b149e4369a9ba53776db003b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-smith-creek-id",
+   "name": "Little Smith Creek",
+   "kind": "stream",
+   "state": "ID",
+   "towns": [
+    "Syringa"
+   ],
+   "bbox": [
+    -115.763884,
+    46.148367,
+    -115.731075,
+    46.179875
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "us12mp89-9sschwartzbridge-id"
+   ],
+   "water_id": "little-smith-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "428652bf81af71fd4630876e768f77962eeeaa366898071d9cf231fab222af73",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "little-wood-river-reservoir-id",
+   "name": "Little Wood River Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Carey"
+   ],
+   "bbox": [
+    -114.046704,
+    43.424213,
+    -114.026834,
+    43.463349
+   ],
+   "wikidata": "Q6652579",
+   "charted": false,
+   "area_km2": 2.201,
+   "launches": [
+    "little-wood-reservoir-boat-ramp-id"
+   ],
+   "water_id": "little-wood-river-reservoir-id",
+   "gnis_id": "398647",
+   "geometry_hash": "b1a4b41f3c3d80de7050c93c56cec03566c431bc613a001da934a3b6939b0fb7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lochsa-river-id",
+   "name": "Lochsa River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -115.599747,
+    46.14048,
+    -114.682396,
+    46.516967
+   ],
+   "wikidata": "Q6665167",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fish-creek-river-access-id",
+    "knife-edge-campground-id",
+    "nine-mile-river-access-id",
+    "split-creek-river-access-id"
+   ],
+   "water_id": "lochsa-river-id",
+   "gnis_id": "385022",
+   "geometry_hash": "94cbb6ac12036ca7d00ac97774b36b333a44e2d589ed4c507fa4274994218981",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "loffs-bay-id",
+   "name": "Loffs Bay",
+   "kind": "bay",
+   "state": "ID",
+   "towns": [
+    "Coeur d'Alene"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "loffs-bay-boat-launch-id"
+   ],
+   "water_id": "loffs-bay-id",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lost-valley-reservoir-id",
+   "name": "Lost Valley Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "New Meadows"
+   ],
+   "bbox": [
+    -116.477467,
+    44.953789,
+    -116.447126,
+    44.979992
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.99,
+   "launches": [
+    "lost-valley-reservoir-boat-ramp-id"
+   ],
+   "water_id": "lost-valley-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "5da381cf06cddaacf0c4f1dad06105e3af3b5a7fb0bdb49decbc364677832a2d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lower-priest-river-id",
+   "name": "Lower Priest River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Outlet Bay",
+    "Priest River"
+   ],
+   "bbox": [
+    -116.928229,
+    48.173518,
+    -116.846949,
+    48.490527
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "lower-priest-river-boat-launch-id",
+    "priest-river-raft-slide-id"
+   ],
+   "water_id": "lower-priest-river-id",
+   "gnis_id": null,
+   "geometry_hash": "6d9aa744a8837654a6d72a0f8da957dd244b83eca6a5a7d6584c170bb065da84",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lucky-peak-reservoir-id",
+   "name": "Lucky Peak Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Boise",
+    "Robie Creek"
+   ],
+   "bbox": [
+    -116.056356,
+    43.516534,
+    -115.922999,
+    43.629957
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 11.388,
+   "launches": [
+    "lucky-peak-reservoir-boat-launch-near-boise-id-4",
+    "lucky-peak-reservoir-boat-launch-near-robie-creek-id-4",
+    "lucky-peak-reservoir-boat-launch-near-robie-creek-id-3",
+    "lucky-peak-reservoir-boat-launch-near-boise-id-2"
+   ],
+   "water_id": "lucky-peak-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "33d9bce49d01b33a7846954dffb93edce67488788cc05d97d2b7dffc6fb13da1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mackay-reservoir-id",
+   "name": "Mackay Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Mackay"
+   ],
+   "bbox": [
+    -113.733687,
+    43.946801,
+    -113.672303,
+    43.971809
+   ],
+   "wikidata": "Q6724296",
+   "charted": false,
+   "area_km2": 5.291,
+   "launches": [
+    "mackay-reservoir-boat-launch-id",
+    "mackay-reservoir-lower-id",
+    "mackay-reservoir-upper-id"
+   ],
+   "water_id": "mackay-reservoir-id",
+   "gnis_id": "386337",
+   "geometry_hash": "8ef90b323a5d6f1b51f78f52db73072e74ea9d467cb684ca7609b22224bdad63",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "magic-reservoir-id",
+   "name": "Magic Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Hailey",
+    "Magic Resort"
+   ],
+   "bbox": [
+    -114.479103,
+    43.250674,
+    -114.350892,
+    43.336655
+   ],
+   "wikidata": "Q6730817",
+   "charted": false,
+   "area_km2": 13.606,
+   "launches": [
+    "hot-springs-landing-rock-creek-id",
+    "lava-point-id",
+    "magic-reservoir-boat-launch-id",
+    "moonstone-id"
+   ],
+   "water_id": "magic-reservoir-id",
+   "gnis_id": "397888",
+   "geometry_hash": "d457e7a702551094056cfa20d9ee7e1214d778f536871e18a85f32b9437c6910",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mann-creek-reservoir-id",
+   "name": "Mann Creek Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Weiser"
+   ],
+   "bbox": [
+    -116.910826,
+    44.386695,
+    -116.895346,
+    44.411597
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.159,
+   "launches": [
+    "mann-creek-reservoir-boat-launch-near-weiser-id-2",
+    "mann-creek-west-boat-ramp-id"
+   ],
+   "water_id": "mann-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "090b1e30da4d3b94ba844affc9076031ba87646b30af1a47916b8d225b5b2066",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mann-lake-id",
+   "name": "Mann Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Lewiston"
+   ],
+   "bbox": [
+    -116.858506,
+    46.368383,
+    -116.848052,
+    46.377192
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.472,
+   "launches": [
+    "mann-lake-boat-launch-id"
+   ],
+   "water_id": "mann-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "455cc0310499aa92ebb1885f9e367da99161b603fbafc746bebc3d5c13fa67ad",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mcarthur-lake-id",
+   "name": "McArthur Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Naples"
+   ],
+   "bbox": [
+    -116.459801,
+    48.503484,
+    -116.442341,
+    48.521497
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.341,
+   "launches": [
+    "mcarthur-lake-wma-id"
+   ],
+   "water_id": "mcarthur-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "a4b836cd629314bd07707ebcf0b31c39ebbcfb641e834a33edda82123cc655d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mctucker-creek-id",
+   "name": "McTucker Creek",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Chubbuck",
+    "Pocatello"
+   ],
+   "bbox": [
+    -112.668202,
+    43.018536,
+    -112.624219,
+    43.036244
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mctucker-pond-id",
+    "mctucker-ponds-boat-ramp-id"
+   ],
+   "water_id": "mctucker-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "be0d8bf9a95fe0cd70bb3a8d65e91faa0c67de6bfe987518077af975f74fa93e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "medicine-lake-id",
+   "name": "Medicine Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Medimont"
+   ],
+   "bbox": [
+    -116.592677,
+    47.46068,
+    -116.577423,
+    47.475985
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.99,
+   "launches": [
+    "rainy-hill-boat-launch-id"
+   ],
+   "water_id": "medicine-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "1b16d661398d3201f32c4e4e9f74e6370374748516c6d27e0d36359e08572c96",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mica-creek-id",
+   "name": "Mica Creek",
+   "kind": "stream",
+   "state": "ID",
+   "towns": [
+    "Lyndale Landing"
+   ],
+   "bbox": [
+    -116.886685,
+    47.598205,
+    -116.861752,
+    47.600637
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mica-bay-id"
+   ],
+   "water_id": "mica-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "ad3546ffa0172cbd3379b6dc8a58fb93b52dd0a28f613e67062e57f48060c2da",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "middle-fork-clearwater-river-id",
+   "name": "Middle Fork Clearwater River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Kooskia / leewikees"
+   ],
+   "bbox": [
+    -115.981881,
+    46.119493,
+    -115.599747,
+    46.152669
+   ],
+   "wikidata": "Q25238192",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "kooskia-bridge-boat-ramp-id",
+    "us12mp75-7s-id",
+    "us12mp79-1s-id",
+    "us12mp85-9s07dumpstersitea-id",
+    "us12mp86-0s-id"
+   ],
+   "water_id": "middle-fork-clearwater-river-id",
+   "gnis_id": "386806",
+   "geometry_hash": "2b2bd7db84b49fcd00fe30773eaa4d1cd6bee51be9967e56fd99ce3dfc2a5dc1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "milner-lake-id",
+   "name": "Milner Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Burley",
+    "Declo",
+    "Hazelton",
+    "Rupert"
+   ],
+   "bbox": [
+    -114.037391,
+    42.517161,
+    -113.490017,
+    42.674535
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 19.897,
+   "launches": [
+    "bureau-of-reclamation-boat-ramp-id",
+    "milner-lake-boat-launch-near-hazelton-id-2",
+    "milner-lake-boat-launch-near-burley-id",
+    "trout-point-camping-area-id"
+   ],
+   "water_id": "milner-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "54a5494a9fc8eb4114f1f2ff5377c49f7d1297ae63c8decaf6ce23e9cd292b07",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "milner-lake-boat-launch-near-burley-id-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "moose-creek-reservoir-id",
+   "name": "Moose Creek Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Bovill"
+   ],
+   "bbox": [
+    -116.436061,
+    46.870477,
+    -116.419657,
+    46.876773
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.164,
+   "launches": [
+    "moose-creek-reservoir-carry-in-access-id"
+   ],
+   "water_id": "moose-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "cb53dccfa04a9929d34ce3c60b7c85cdd13ca933255abdc1ed6a26b786e54c92",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mormon-reservoir-id",
+   "name": "Mormon Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Fairfield"
+   ],
+   "bbox": [
+    -114.836211,
+    43.25561,
+    -114.791311,
+    43.280804
+   ],
+   "wikidata": "Q6912653",
+   "charted": false,
+   "area_km2": 2.138,
+   "launches": [
+    "mormon-reservoir-boat-launch-id"
+   ],
+   "water_id": "mormon-reservoir-id",
+   "gnis_id": "397930",
+   "geometry_hash": "0614c4f934a53c9852f6f1d669264b9379a1d3b751a687bdeafcbc31a667f2da",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mosquito-flat-reservoir-id",
+   "name": "Mosquito Flat Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Custer County"
+   ],
+   "bbox": [
+    -114.437127,
+    44.515772,
+    -114.4338,
+    44.522073
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.121,
+   "launches": [
+    "mosquito-flat-reservoir-boat-launch-id"
+   ],
+   "water_id": "mosquito-flat-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "1da23782a49025009f339458d2ba0e909d7f95fa0b776abab0de2bffe657089f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mud-lake-id",
+   "name": "Mud Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Terreton"
+   ],
+   "bbox": [
+    -112.464916,
+    43.870654,
+    -112.357545,
+    43.905955
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 14.335,
+   "launches": [
+    "mud-lake-wma-north-ramp-id",
+    "mud-lake-wma-south-ramp-id"
+   ],
+   "water_id": "mud-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "b293437f93404e1673a1178ceb49e5a656d771e0fe206ecd72ab61e43fabee49",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "murtaugh-lake-id",
+   "name": "Murtaugh Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Kimberly"
+   ],
+   "bbox": [
+    -114.174707,
+    42.457181,
+    -114.127755,
+    42.469241
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.263,
+   "launches": [
+    "murtaugh-lake-boat-launch-id"
+   ],
+   "water_id": "murtaugh-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "1e0c53d83af7276df2d27ad5e47ded881a2c7a73bbf8619078bbfd9948257902",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-clearwater-river-id",
+   "name": "North Fork Clearwater River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Orofino"
+   ],
+   "bbox": [
+    -116.336388,
+    46.50289,
+    -115.075441,
+    47.004603
+   ],
+   "wikidata": "Q7055386",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "north-fork-clearwater-river-boat-launch-id"
+   ],
+   "water_id": "north-fork-clearwater-river-id",
+   "gnis_id": "387675",
+   "geometry_hash": "0ead5134d1b075e25a8c0b8d7d54bc83f1ecc21a32e36a6adc2b36b57c993055",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-coeur-d-alene-river-id",
+   "name": "North Fork Coeur d'Alene River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Kellogg",
+    "Pinehurst",
+    "Prichard"
+   ],
+   "bbox": [
+    -116.263967,
+    47.557039,
+    -115.925479,
+    47.9886
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "freeman-s-eddy-north-fork-cda-river-id",
+    "prichard-bridge-id"
+   ],
+   "water_id": "north-fork-coeur-d-alene-river-id",
+   "gnis_id": null,
+   "geometry_hash": "a0877d61852c7998710eacd83c08566da912532dd683d674d7ddb464729423e4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-payette-river-id",
+   "name": "North Fork Payette River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Cascade",
+    "Smiths Ferry"
+   ],
+   "bbox": [
+    -116.161844,
+    44.084305,
+    -115.992955,
+    45.180434
+   ],
+   "wikidata": "Q7055419",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cabarton-bridge-access-id"
+   ],
+   "water_id": "north-fork-payette-river-id",
+   "gnis_id": "387749",
+   "geometry_hash": "8a5cb82abf06313f4368963b904200aa3b7469c651a34336820c1211ffad139d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "oneida-narrows-reservoir-id",
+   "name": "Oneida Narrows Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Preston"
+   ],
+   "bbox": [
+    -111.749988,
+    42.272934,
+    -111.708103,
+    42.309638
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.457,
+   "launches": [
+    "oneida-narrows-reservoir-boat-launch-preston-id",
+    "oneida-narrows-reservoir-boat-launch-id"
+   ],
+   "water_id": "oneida-narrows-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "853298d505af8941c11b74d2e677fb5e7e69be38571d8c897b31d78a07f7814f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "owyhee-river-id",
+   "name": "Owyhee River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -117.618623,
+    41.906526,
+    -116.059441,
+    43.812782
+   ],
+   "wikidata": "Q2042749",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "crutcher-crossing-id",
+    "garat-crossing-id",
+    "rickert-crossing-id"
+   ],
+   "water_id": "owyhee-river-id",
+   "gnis_id": "1147319",
+   "geometry_hash": "bbcdbdc7802f1526649992233cdd666ebf9b260344f8919afc75f79071b73b61",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "paddock-valley-reservoir-id",
+   "name": "Paddock Valley Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Washington County"
+   ],
+   "bbox": [
+    -116.614839,
+    44.197736,
+    -116.59236,
+    44.255747
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.637,
+   "launches": [
+    "paddock-valley-reservoir-boat-launch-id"
+   ],
+   "water_id": "paddock-valley-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "eaca4cd553dc11d5158586011b698a6eacbf8573bb51e68956afdb744ac67e2e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "palisades-reservoir-id",
+   "name": "Palisades Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Irwin",
+    "Palisades"
+   ],
+   "bbox": [
+    -111.213257,
+    43.137301,
+    -111.017306,
+    43.332642
+   ],
+   "wikidata": "Q35044525",
+   "charted": false,
+   "area_km2": 63.34,
+   "launches": [
+    "big-elk-creek-boat-ramp-id",
+    "blowout-boat-ramp-id",
+    "calamity-boat-ramp-id",
+    "little-elk-creek-boat-ramp-id",
+    "mccoy-creek-boat-ramp-id"
+   ],
+   "water_id": "palisades-reservoir-id",
+   "gnis_id": "397973",
+   "geometry_hash": "00588bfe95df517984faafc3c6b2c9fc8e21ca71ea69b97699e3cdbee1994c7d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "paradise-creek-id",
+   "name": "Paradise Creek",
+   "kind": "stream",
+   "state": "ID",
+   "towns": [
+    "Victor"
+   ],
+   "bbox": [
+    -111.195082,
+    43.647299,
+    -111.173746,
+    43.656606
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "fox-creek-west-id"
+   ],
+   "water_id": "paradise-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "c31406dc3386b81a872a61b70c1fd48c4473def7b1b96a1bbaf8aa7b47b28ad8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "payette-lake-id",
+   "name": "Payette Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "McCall"
+   ],
+   "bbox": [
+    -116.125736,
+    44.910991,
+    -116.051321,
+    44.994705
+   ],
+   "wikidata": "Q60739870",
+   "charted": false,
+   "area_km2": 21.776,
+   "launches": [
+    "payette-lake-boat-launch-near-mccall-id-2"
+   ],
+   "water_id": "payette-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "3db747944f7d95ca942e18df6a99c4a607cd1d23863149975b391b9e839589b7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "payette-river-id",
+   "name": "Payette River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Banks",
+    "Crouch",
+    "Emmett",
+    "Horseshoe Bend",
+    "Letha",
+    "Montour",
+    "New Plymouth",
+    "Payette"
+   ],
+   "bbox": [
+    -116.957959,
+    43.869573,
+    -116.000951,
+    44.103661
+   ],
+   "wikidata": "Q3373254",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "banks-river-access-id",
+    "beehive-bend-river-access-id",
+    "blacks-bridge-id",
+    "confluence-id",
+    "deer-creek-boat-launch-id",
+    "falk-bridge-id",
+    "fifty-two-bridge-id",
+    "gem-island-ramp-id",
+    "parnell-recreation-site-id",
+    "sevenmile-slough-id",
+    "sheep-camp-landing-id"
+   ],
+   "water_id": "payette-river-id",
+   "gnis_id": "388284",
+   "geometry_hash": "5cf5a20d1a8428c4c292938e3c40ccf7375c7f4942c9f9329c243cbf9542e727",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pend-oreille-river-id",
+   "name": "Pend Oreille River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Laclede",
+    "Oldtown",
+    "Priest River",
+    "Sandpoint",
+    "Wrencoe"
+   ],
+   "bbox": [
+    -117.124004,
+    48.142604,
+    -116.611367,
+    48.258102
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 19.245,
+   "launches": [
+    "pend-oreille-river-boat-launch-near-oldtown-id-2",
+    "hoodoo-creek-id",
+    "morton-slough-id",
+    "pend-oreille-river-boat-launch-near-laclede-id"
+   ],
+   "water_id": "pend-oreille-river-id",
+   "gnis_id": null,
+   "geometry_hash": "420b331fc1d1eee73b4b882ae3353c07b2cceb18be93167c0b88f467abed2f48",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "pend-oreille-river-boat-launch-near-laclede-id-4"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "pettit-lake-id",
+   "name": "Pettit Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -114.893856,
+    43.97525,
+    -114.863099,
+    43.984923
+   ],
+   "wikidata": "Q7179360",
+   "charted": false,
+   "area_km2": 1.742,
+   "launches": [
+    "pettit-lake-boat-launch-id"
+   ],
+   "water_id": "pettit-lake-id",
+   "gnis_id": "388386",
+   "geometry_hash": "7436a88a44aa18f3d26e025e5f8c6d8fbd76535054dc25cc6d2020d18aa3ef70",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "priest-lake-id",
+   "name": "Priest Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Nordman",
+    "Outlet Bay",
+    "Vans Corner"
+   ],
+   "bbox": [
+    -116.929492,
+    48.473887,
+    -116.821983,
+    48.745207
+   ],
+   "wikidata": "Q1110527",
+   "charted": false,
+   "area_km2": 107.501,
+   "launches": [
+    "kalispell-bay-boat-launch-id",
+    "priest-lake-boat-launch-id"
+   ],
+   "water_id": "priest-lake-id",
+   "gnis_id": "398012",
+   "geometry_hash": "fea23403940f27dfcc2ab64a7ac8ee5c6b2cf7c32d7a6b142a2d67dc293fa853",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "queen-s-river-id",
+   "name": "Queen's River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -115.20846,
+    43.821108,
+    -115.17423,
+    43.851392
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "queens-river-trailhead-id"
+   ],
+   "water_id": "queen-s-river-id",
+   "gnis_id": null,
+   "geometry_hash": "127b1fb9e99d37eaca4d703c26ed241aaa8661763d4587230b898f319a351a06",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "red-top-pond-id",
+   "name": "Red Top Pond",
+   "kind": "pond",
+   "state": "ID",
+   "towns": [
+    "Caldwell"
+   ],
+   "bbox": [
+    -116.777642,
+    43.691519,
+    -116.773375,
+    43.694693
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.114,
+   "launches": [
+    "redtop-pond-boat-launch-id"
+   ],
+   "water_id": "red-top-pond-id",
+   "gnis_id": null,
+   "geometry_hash": "ff93a44088ace0b7d10de3f57770dc4b7e15a87ae5512b23edd1ef12b3410092",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "redfish-lake-id",
+   "name": "Redfish Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Stanley"
+   ],
+   "bbox": [
+    -114.955873,
+    44.093235,
+    -114.911816,
+    44.144361
+   ],
+   "wikidata": "Q7305853",
+   "charted": false,
+   "area_km2": 6.401,
+   "launches": [
+    "sandy-beach-boat-ramp-id"
+   ],
+   "water_id": "redfish-lake-id",
+   "gnis_id": "389253",
+   "geometry_hash": "7a0eb91c5cb00b23343641bd42097b7cb683d0ea115ae6fec380de43a05d5634",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ririe-reservoir-id",
+   "name": "Ririe Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Rigby",
+    "Ririe"
+   ],
+   "bbox": [
+    -111.765889,
+    43.455389,
+    -111.709414,
+    43.583796
+   ],
+   "wikidata": "Q7335788",
+   "charted": false,
+   "area_km2": 5.754,
+   "launches": [
+    "ririe-reservoir-boat-launch-near-rigby-id-2",
+    "ririe-reservoir-boat-launch-near-rigby-id-3",
+    "ririe-reservoir-boat-launch-near-ririe-id"
+   ],
+   "water_id": "ririe-reservoir-id",
+   "gnis_id": "400186",
+   "geometry_hash": "b413b62770014c526b4271415c5623028493aa0a2d4ad1370b6aa400cd1c5df3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "robinson-lake-id",
+   "name": "Robinson Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Eastport"
+   ],
+   "bbox": [
+    -116.220245,
+    48.967276,
+    -116.205837,
+    48.972633
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.262,
+   "launches": [
+    "robinson-lake-boat-launch-id"
+   ],
+   "water_id": "robinson-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "43683b401daed221c98ed5165ac245c1995eb1a6eb75afab4b9ecfc51b13efba",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rose-lake-id",
+   "name": "Rose Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Rose Lake"
+   ],
+   "bbox": [
+    -116.477351,
+    47.54492,
+    -116.458713,
+    47.559724
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.483,
+   "launches": [
+    "rose-lake-sportsman-park-id",
+    "rose-lake-watson-road-id"
+   ],
+   "water_id": "rose-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "010b1b5397fbe988046c69b1803667cfc2f932d9ec92b047b3a56c7afd8b4ee3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "round-lake-id",
+   "name": "Round Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Chatcolet"
+   ],
+   "bbox": [
+    -116.755139,
+    47.355813,
+    -116.689505,
+    47.392596
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.097,
+   "launches": [
+    "round-lake-o-gara-bay-road-id"
+   ],
+   "water_id": "round-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "b7ba2bf1cd8bc4a851d05c5e2603e2e7dbea9fa347641f115f45d192abf36f38",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sage-hen-reservoir-id",
+   "name": "Sage Hen Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -116.195117,
+    44.323276,
+    -116.174448,
+    44.3346
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.981,
+   "launches": [
+    "antelope-boat-ramp-id",
+    "sage-hen-creek-boat-ramp-id"
+   ],
+   "water_id": "sage-hen-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "7ce3886779f40c7a35176bb51d64fc1ecf7fa35e48575b80f6e5243149e0611d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "saint-joe-river-id",
+   "name": "Saint Joe River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Calder",
+    "Herrick",
+    "Saint Maries"
+   ],
+   "bbox": [
+    -116.75629,
+    46.982958,
+    -115.082531,
+    47.392598
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "huckleberry-campground-boat-ramp-id",
+    "shadowy-st-joe-boating-site-id"
+   ],
+   "water_id": "saint-joe-river-id",
+   "gnis_id": null,
+   "geometry_hash": "5bf124f90d93479ce86fea057e5bc26bdfdd8b315e7d8c80ecb9dc96b36253eb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "saint-maries-river-id",
+   "name": "Saint Maries River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Saint Maries"
+   ],
+   "bbox": [
+    -116.629758,
+    47.201112,
+    -116.537012,
+    47.317268
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "st-maries-river-spicer-pond-id"
+   ],
+   "water_id": "saint-maries-river-id",
+   "gnis_id": null,
+   "geometry_hash": "b5b3bf1c6845672f2f11e7934f04549d549b6b37e91fd0a112ad871a3ca72264",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "salmon-falls-creek-id",
+   "name": "Salmon Falls Creek",
+   "kind": "river",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -114.951542,
+    41.943462,
+    -114.68669,
+    42.715448
+   ],
+   "wikidata": "Q3470025",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "salmon-falls-creek-boat-launch-id",
+    "upper-salmon-falls-creek-boat-launch-id"
+   ],
+   "water_id": "salmon-falls-creek-id",
+   "gnis_id": "395878",
+   "geometry_hash": "ab4d919c316831cfd327b74770b26c4de99e1dd6bbc1b1aa7cb701069ef3e118",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "salmon-falls-creek-reservoir-id",
+   "name": "Salmon Falls Creek Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -114.771579,
+    42.057876,
+    -114.726727,
+    42.212502
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.597,
+   "launches": [
+    "salmon-falls-creek-reservoir-boat-launch-id"
+   ],
+   "water_id": "salmon-falls-creek-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "a96bcc0fb48c11093f68b5aa7f850b3822ce565340f1b197cdf195cc7ade301b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "salmon-river-area-id",
+   "name": "Salmon River Area",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Challis"
+   ],
+   "bbox": [
+    -114.052213,
+    44.690414,
+    -113.989722,
+    44.782099
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.932,
+   "launches": [
+    "colston-creek-id",
+    "cronks-canyon-id",
+    "deer-gulch-id"
+   ],
+   "water_id": "salmon-river-area-id",
+   "gnis_id": null,
+   "geometry_hash": "d2b510b6d83194dd48147b144c67a385a49c91f4266893e504723ec1d95fed25",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "salmon-river-area-boat-launch-id"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "salmon-river-id",
+   "name": "Salmon River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Challis",
+    "Clayton",
+    "Copperville",
+    "Cottonwood",
+    "Lucile",
+    "North Fork",
+    "Riggins",
+    "Salmon",
+    "Slate Creek",
+    "Stanley",
+    "Tunnel Rock"
+   ],
+   "bbox": [
+    -116.794679,
+    43.796763,
+    -113.879886,
+    46.037723
+   ],
+   "wikidata": "Q601853",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bayhorse-recreation-site-id",
+    "bobcat-gulch-id",
+    "cache-bar-boat-ramp-id",
+    "campbell-flat-id",
+    "carey-creek-id",
+    "carmen-bridge-id",
+    "challis-bridge-recreation-site-id",
+    "corn-creek-boat-ramp-id",
+    "cottonwood-recreation-site-id",
+    "cove-creek-boating-site-id",
+    "dead-water-boat-ramp-id",
+    "deadman-hole-boat-ramp-id",
+    "salmon-river-boat-launch-near-tunnel-rock-id",
+    "dugway-river-access-id",
+    "elevenmile-boat-ramp-id",
+    "elk-bend-id",
+    "elk-creek-river-access-id",
+    "four-aces-river-access-site-id",
+    "fourth-of-july-id",
+    "hammer-creek-boat-ramp-id",
+    "island-bar-boat-launch-id",
+    "island-park-id",
+    "jackass-flat-boat-launch-id",
+    "kilpatrick-boat-ramp-id",
+    "lightning-creek-id",
+    "lucile-boat-ramp-id",
+    "maynard-hole-id",
+    "morgan-bar-boat-ramp-id",
+    "morgan-bar-boat-ramp-salmon-id",
+    "mormon-bend-river-access-id",
+    "north-fork-id",
+    "old-lucile-boat-ramp-id",
+    "pealy-loop-boat-ramp-id",
+    "pennal-gulch-id",
+    "pine-bar-boat-ramp-id",
+    "red-rock-id",
+    "riggins-city-park-boat-ramp-id",
+    "salmon-river-boat-launch-id-3",
+    "salmon-river-bridge-access-id",
+    "shorts-bar-boat-ramp-id",
+    "shoup-bridge-boat-ramp-id",
+    "slate-creek-boat-ramp-id",
+    "snyder-springs-boat-ramp-id",
+    "south-butte-id",
+    "spring-bar-id",
+    "spring-creek-boat-ramp-id-2",
+    "tappan-id",
+    "torreys-hole-boat-ramp-id",
+    "tower-rock-recreation-site-id",
+    "twin-bridges-id",
+    "upper-mckim-creek-id",
+    "vinegar-creek-id",
+    "waddington-creek-id",
+    "watts-bridge-id",
+    "white-bird-gravel-pit-boat-ramp-id",
+    "whitewater-river-access-id",
+    "yankee-fork-river-access-id"
+   ],
+   "water_id": "salmon-river-id",
+   "gnis_id": "400069",
+   "geometry_hash": "315a76114cf282f23900256b4c5b6f59dd494ac93c7d7bd904dca81ac4d76a9b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sand-creek-id",
+   "name": "Sand Creek",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Sandpoint"
+   ],
+   "bbox": [
+    -116.553424,
+    48.272076,
+    -116.541402,
+    48.395389
+   ],
+   "wikidata": null,
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "sandpoint-landing-id"
+   ],
+   "water_id": "sand-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "6837a1ab7ab0780adeb3d834d89466c36a5b1590f83678c09a3a50a4e845fcaa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sand-creek-ponds-id",
+   "name": "Sand Creek Ponds",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Fremont County"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "sand-creek-ponds-carry-in-access-id"
+   ],
+   "water_id": "sand-creek-ponds-id",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sawyers-pond-id",
+   "name": "Sawyers Pond",
+   "kind": "pond",
+   "state": "ID",
+   "towns": [
+    "Emmett"
+   ],
+   "bbox": [
+    -116.522468,
+    43.851326,
+    -116.518138,
+    43.853786
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.092,
+   "launches": [
+    "sawyer-ponds-id"
+   ],
+   "water_id": "sawyers-pond-id",
+   "gnis_id": null,
+   "geometry_hash": "92c53f084e6ee9ef2a204d05de0eca1cbcb5f9f9c9484a6510775f78ed326078",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "secesh-river-id",
+   "name": "Secesh River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -115.896937,
+    45.0249,
+    -115.707261,
+    45.268729
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "confluence-boating-id"
+   ],
+   "water_id": "secesh-river-id",
+   "gnis_id": null,
+   "geometry_hash": "8c2a9bfa1a32ff80e8bc05640377c05fe986935bc7e91494a87e2493e3cfa2a0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "selway-river-id",
+   "name": "Selway River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -115.599747,
+    45.497217,
+    -114.701273,
+    46.140802
+   ],
+   "wikidata": "Q7448888",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "o-hara-bridge-river-access-id",
+    "race-track-id"
+   ],
+   "water_id": "selway-river-id",
+   "gnis_id": "390102",
+   "geometry_hash": "4c599a54b1d096c3b3bf0e9e43ef314df1d7df04887b21c5f7678495ca2474a6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shepherd-lake-id",
+   "name": "Shepherd Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Sagle"
+   ],
+   "bbox": [
+    -116.533441,
+    48.179309,
+    -116.523879,
+    48.19043
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.475,
+   "launches": [
+    "shepherd-lake-boat-launch-id"
+   ],
+   "water_id": "shepherd-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "72bfe4f03413aa04936027a3d3500c9a0a73edee06339a41734cd31d5fc62041",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sinclair-lake-id",
+   "name": "Sinclair Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -116.179929,
+    48.925608,
+    -116.176948,
+    48.926876
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.023,
+   "launches": [
+    "sinclair-lake-boat-launch-id"
+   ],
+   "water_id": "sinclair-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "a1cd9e6559b2252bf46150d2d849aea0f8a13c50e89fbb6e4fb6963fdd9cf240",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "smith-lake-id",
+   "name": "Smith Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Bonners Ferry"
+   ],
+   "bbox": [
+    -116.263037,
+    48.773642,
+    -116.259826,
+    48.780534
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.15,
+   "launches": [
+    "smith-lake-boat-launch-id"
+   ],
+   "water_id": "smith-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "ac91fb3d890ea3e26f1503bef7a4009fe796d759b943adbe9c3ec57eb13a9245",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "snake-river-id",
+   "name": "Snake River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "American Falls",
+    "Blackfoot",
+    "Bliss",
+    "Buhl",
+    "Firth",
+    "Fruitland",
+    "Givens Hot Springs",
+    "Grand View",
+    "Hagerman",
+    "Hammett",
+    "Heise",
+    "Idaho Falls"
+   ],
+   "bbox": [
+    -117.243027,
+    42.495137,
+    -111.205407,
+    46.462347
+   ],
+   "wikidata": "Q272074",
+   "charted": true,
+   "area_km2": null,
+   "launches": [
+    "bell-rapids-id",
+    "bernards-landing-id",
+    "byington-id",
+    "cherry-plant-id",
+    "conant-valley-id",
+    "eagle-rock-monument1-id",
+    "ferry-butte-id",
+    "firth-bridge-id",
+    "firth-city-park-id",
+    "fullmer-boat-landing-id",
+    "hammett-boating-access-id",
+    "heise-bridge-boat-access-id",
+    "hells-canyon-creek-boat-launch-id",
+    "idaho-power-boat-dock-id",
+    "king-hill-id",
+    "lorenzo-boat-access-id",
+    "map-rock-id",
+    "marsing-id",
+    "martin-landing-id",
+    "menan-buttes-id",
+    "mike-walker-id",
+    "murtaugh-boat-launch-id",
+    "old-ferry-road-id",
+    "old-fort-boise-id",
+    "oregon-trail-crossing-id",
+    "palisades-creek-id",
+    "pipeline-id",
+    "pittsburg-landing-boat-launch-id",
+    "porterville-bridge-id",
+    "riverton-id",
+    "roberts-id",
+    "shelley-park-id",
+    "snake-river-boat-launch-near-grand-view-id-2",
+    "snake-river-boat-launch-near-palisades-id",
+    "snake-river-boat-launch-near-shelley-id",
+    "snake-river-boat-launch-near-twin-falls-id-3",
+    "snake-river-vista-id",
+    "snake-river-boat-launch-near-idaho-falls-id-2",
+    "spring-creek-boat-ramp-id",
+    "trappers-flat-id",
+    "twin-bridges-blackfoot-id",
+    "walters-ferry-id",
+    "west-river-road-id",
+    "wolf-flats-recreation-area-id"
+   ],
+   "water_id": "snake-river-id",
+   "gnis_id": "1533479",
+   "geometry_hash": "7b645ae45794bc1ac6170b6535b1db4086a7dfb1b4000d6901ad90fb50782c22",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "snake-river-boat-launch-near-buhl-id",
+    "snake-river-boat-launch-near-grand-view-id-3",
+    "snake-river-boat-launch-near-twin-falls-id-2"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "soldiers-meadow-reservoir-id",
+   "name": "Soldiers Meadow Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Nez Perce County"
+   ],
+   "bbox": [
+    -116.740525,
+    46.152257,
+    -116.730869,
+    46.167569
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.436,
+   "launches": [
+    "soldiers-meadow-reservoir-boat-launch-id"
+   ],
+   "water_id": "soldiers-meadow-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "b0e3882900b200f9cb26ad48dc90b87392dc222fe66ec6bad2a1194e42d68416",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "solomon-lake-id",
+   "name": "Solomon Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Moyie Springs"
+   ],
+   "bbox": [
+    -116.109116,
+    48.79659,
+    -116.102262,
+    48.801711
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.059,
+   "launches": [
+    "solomon-lake-boat-launch-id"
+   ],
+   "water_id": "solomon-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "20b15078988073ff464b50eee2b92d741277cbda9f6f42ed24218ddb2d72d5be",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-boise-river-id",
+   "name": "South Fork Boise River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Featherville"
+   ],
+   "bbox": [
+    -115.769175,
+    43.328254,
+    -114.892858,
+    43.798105
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cow-creek-floatboat-access-id",
+    "danskin-floatboat-access-id",
+    "tailwaters-id",
+    "village-id"
+   ],
+   "water_id": "south-fork-boise-river-id",
+   "gnis_id": null,
+   "geometry_hash": "8b7400aff63fbe5ce85df03aa58906de19bfafe1cbdc0c4d9c1569a6d6f237f5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-fork-payette-river-id",
+   "name": "South Fork Payette River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Garden Valley",
+    "Lowman"
+   ],
+   "bbox": [
+    -116.000951,
+    43.961957,
+    -114.990804,
+    44.172147
+   ],
+   "wikidata": "Q41444918",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "alder-creek-id",
+    "danskin-rest-area-boating-site-id",
+    "deadwood-river-access-site-id"
+   ],
+   "water_id": "south-fork-payette-river-id",
+   "gnis_id": "390989",
+   "geometry_hash": "85e13ec919aefd60beb4e0fd8bb59d6fa4a491b4059133c8f16d1bf136caa01b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spirit-lake-id",
+   "name": "Spirit Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Silver Beach",
+    "Spirit Lake"
+   ],
+   "bbox": [
+    -116.939077,
+    47.930132,
+    -116.862009,
+    47.966488
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.103,
+   "launches": [
+    "spirit-lake-boat-launch-id"
+   ],
+   "water_id": "spirit-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "d0fe6cde14a1709ffede73b1a6f3c2a949cddbc233a86fd44929c5b99d9e8b01",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spokane-river-id",
+   "name": "Spokane River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Coeur d'Alene",
+    "Post Falls"
+   ],
+   "bbox": [
+    -117.111453,
+    47.675663,
+    -116.798321,
+    47.709834
+   ],
+   "wikidata": "Q1275618",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "blackwell-island-boat-launch-id",
+    "spokane-river-boat-launch-near-post-falls-id"
+   ],
+   "water_id": "spokane-river-id",
+   "gnis_id": "1508606",
+   "geometry_hash": "114969ab814a70cc7224784a126c1200ecfd560bb6bcb66ce1d00da6881609fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spokane-river-south-channel-id",
+   "name": "Spokane River South Channel",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Post Falls"
+   ],
+   "bbox": [
+    -116.962525,
+    47.703827,
+    -116.950549,
+    47.70919
+   ],
+   "wikidata": "Q1275618",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "spokane-river-south-channel-boat-launch-near-post-falls-id"
+   ],
+   "water_id": "spokane-river-south-channel-id",
+   "gnis_id": "1508606",
+   "geometry_hash": "4058769e79bd5f80850788624fc809baad57eeced62607e349ed99d2717c95d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spring-valley-reservoir-id",
+   "name": "Spring Valley Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Troy"
+   ],
+   "bbox": [
+    -116.762592,
+    46.783025,
+    -116.752418,
+    46.788486
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.216,
+   "launches": [
+    "spring-valley-reservoir-boat-launch-id"
+   ],
+   "water_id": "spring-valley-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "390488fe26c46fa2c48476bfe2e7dd66e24c13ac1dbaee57a9b15bf703e5802d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "springfield-lake-id",
+   "name": "Springfield Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Springfield"
+   ],
+   "bbox": null,
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "springfield-lake-boat-launch-id"
+   ],
+   "water_id": "springfield-lake-id",
+   "gnis_id": null,
+   "geometry_hash": null,
+   "geometry_tolerance_m": null,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stanley-lake-id",
+   "name": "Stanley Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Stanley"
+   ],
+   "bbox": [
+    -115.064914,
+    44.238918,
+    -115.048147,
+    44.248256
+   ],
+   "wikidata": "Q7353333",
+   "charted": false,
+   "area_km2": 0.793,
+   "launches": [
+    "stanley-lake-boat-ramp-id"
+   ],
+   "water_id": "stanley-lake-id",
+   "gnis_id": "391343",
+   "geometry_hash": "904a018294907119b7bbe7e6749dd3e0228fd3cb4e8e6866c7ce4c0e9f0ddac2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "strongarm-reservoir-number-one-treasureton-reservoir-id",
+   "name": "Strongarm Reservoir Number One;Treasureton Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Banida"
+   ],
+   "bbox": [
+    -111.861526,
+    42.231864,
+    -111.847299,
+    42.244608
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.537,
+   "launches": [
+    "treasureton-reservoir-id"
+   ],
+   "water_id": "strongarm-reservoir-number-one-treasureton-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "84005a07d26793ada38dab4f845f4dd273a3721e8bdf40cb1dd7fb4abfbdf555",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sublett-reservoir-id",
+   "name": "Sublett Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Cassia County"
+   ],
+   "bbox": [
+    -113.046516,
+    42.322868,
+    -113.033573,
+    42.329735
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.303,
+   "launches": [
+    "sublett-reservoir-carry-in-access-id"
+   ],
+   "water_id": "sublett-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "bdbbb5067dacc93daf4299b2d4cfe134c4dbe2732c30635bdbc30c6eaea4b937",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "teton-river-id",
+   "name": "Teton River",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Ashton",
+    "Driggs",
+    "St. Anthony",
+    "Tetonia"
+   ],
+   "bbox": [
+    -111.83632,
+    43.609114,
+    -111.156329,
+    43.948248
+   ],
+   "wikidata": "Q4458337",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bates-bridge-id",
+    "cache-bridge-id",
+    "harrops-bridge-id",
+    "rainey-bridge-id",
+    "spring-hollow-id",
+    "teton-creek-id",
+    "teton-dam-id"
+   ],
+   "water_id": "teton-river-id",
+   "gnis_id": "391950",
+   "geometry_hash": "b8a0100082f4eae307f062c914ec79e69d2a71d6f015ebbb8de3de6745b23e08",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "thorn-creek-reservoir-id",
+   "name": "Thorn Creek Reservoir",
+   "kind": "river",
+   "state": "ID",
+   "towns": [
+    "Gooding County"
+   ],
+   "bbox": [
+    -114.605752,
+    43.189808,
+    -114.590303,
+    43.20503
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "thorn-creek-reservoir-carry-in-access-id"
+   ],
+   "water_id": "thorn-creek-reservoir-id",
+   "gnis_id": "398239",
+   "geometry_hash": "a6cc4473947c45aebf1a6cd1ae2a4c0b079e13e273e1de21efce05b040952d2e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T06:35:50+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tolo-lake-id",
+   "name": "Tolo Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Grangeville"
+   ],
+   "bbox": [
+    -116.238972,
+    45.913343,
+    -116.232664,
+    45.917193
+   ],
+   "wikidata": "Q19427771",
+   "charted": false,
+   "area_km2": 0.162,
+   "launches": [
+    "tolo-lake-boat-launch-id"
+   ],
+   "water_id": "tolo-lake-id",
+   "gnis_id": "392215",
+   "geometry_hash": "f453a168b6aa40f0dfc3de051bfba1e517aa71e3250ca0394a5628616b66673d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "twin-lakes-id",
+   "name": "Twin Lakes",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Fir Grove",
+    "Silver Sands Beach"
+   ],
+   "bbox": [
+    -116.932425,
+    47.856262,
+    -116.856796,
+    47.893941
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.434,
+   "launches": [
+    "twin-lakes-boat-launch-id"
+   ],
+   "water_id": "twin-lakes-id",
+   "gnis_id": null,
+   "geometry_hash": "424098942ea739436537a62aa22833b17c46298330d1f2da57a6be5e007989f6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "twin-lakes-reservoir-id",
+   "name": "Twin Lakes Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Clifton"
+   ],
+   "bbox": [
+    -111.982885,
+    42.18199,
+    -111.958421,
+    42.20311
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.922,
+   "launches": [
+    "twin-lakes-reservoir-boat-launch-id"
+   ],
+   "water_id": "twin-lakes-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "1283cf85f7914c687c6e5140b0e9409123deb0f13d84f898f93cbd10aa412f3f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-payette-lake-id",
+   "name": "Upper Payette Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -116.028937,
+    45.110994,
+    -116.012886,
+    45.139284
+   ],
+   "wikidata": "Q49703029",
+   "charted": false,
+   "area_km2": 1.259,
+   "launches": [
+    "upper-payette-lake-boat-ramp-id"
+   ],
+   "water_id": "upper-payette-lake-id",
+   "gnis_id": "398297",
+   "geometry_hash": "5679b4895f5655ef138e321446bbc9fdfe3f2c02445f11a7bd594f53b3a8cd2e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-pleasantview-reservoir-id",
+   "name": "Upper Pleasantview Reservoir",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Malad"
+   ],
+   "bbox": [
+    -112.368314,
+    42.206286,
+    -112.361468,
+    42.213225
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.073,
+   "launches": [
+    "pleasantview-reservoir-id"
+   ],
+   "water_id": "upper-pleasantview-reservoir-id",
+   "gnis_id": null,
+   "geometry_hash": "4430891a5a24f44188823f1f935005afa8a2b83e7a815bc20826ea698863e99a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "waha-lake-id",
+   "name": "Waha Lake",
+   "kind": "reservoir",
+   "state": "ID",
+   "towns": [
+    "Waha"
+   ],
+   "bbox": [
+    -116.841241,
+    46.201033,
+    -116.832057,
+    46.21223
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.324,
+   "launches": [
+    "waha-lake-boat-launch-id"
+   ],
+   "water_id": "waha-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "72de7da4287cd3812925e3600d41f3a8ac8c1182f4a487fdce9a223e990d7f48",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "warm-lake-id",
+   "name": "Warm Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Warm Lake"
+   ],
+   "bbox": [
+    -115.678635,
+    44.63296,
+    -115.662774,
+    44.655313
+   ],
+   "wikidata": "Q7330681",
+   "charted": false,
+   "area_km2": 1.818,
+   "launches": [
+    "shoreline-boating-id"
+   ],
+   "water_id": "warm-lake-id",
+   "gnis_id": "392852",
+   "geometry_hash": "1e56b7c2489294dfd4cb020bcf62e069d7e030a788ea79cee7b25a067409337d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "whitecap-creek-id",
+   "name": "Whitecap Creek",
+   "kind": "river",
+   "state": "ID",
+   "towns": [],
+   "bbox": [
+    -114.744297,
+    45.860182,
+    -114.437507,
+    45.973972
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "paradise-boating-site-id"
+   ],
+   "water_id": "whitecap-creek-id",
+   "gnis_id": null,
+   "geometry_hash": "11fd85ac79ebf6aaed70812b633f009680b56c70dfa552aa11f653207cd8577a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "williams-lake-id",
+   "name": "Williams Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Salmon"
+   ],
+   "bbox": [
+    -113.987537,
+    45.011916,
+    -113.966879,
+    45.020837
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.762,
+   "launches": [
+    "williams-lake-boat-ramp-id"
+   ],
+   "water_id": "williams-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "82e78d84137673c40294d20c8e4eca5dc61a978f726c25ac8accea8d381a20b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "winchester-lake-id",
+   "name": "Winchester Lake",
+   "kind": "lake",
+   "state": "ID",
+   "towns": [
+    "Winchester"
+   ],
+   "bbox": [
+    -116.62951,
+    46.229087,
+    -116.608986,
+    46.238005
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.423,
+   "launches": [
+    "winchester-lake-boat-ramp-id"
+   ],
+   "water_id": "winchester-lake-id",
+   "gnis_id": null,
+   "geometry_hash": "05da083dd0b2455a723ef70619e2e538c5d78cb9f1ba4fbdf5fc0c9cdde96f6b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wolf-lodge-bay-id",
+   "name": "Wolf Lodge Bay",
+   "kind": "bay",
+   "state": "ID",
+   "towns": [
+    "Coeur d'Alene"
+   ],
+   "bbox": [
+    -116.724052,
+    47.610038,
+    -116.641509,
+    47.637108
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.726,
+   "launches": [
+    "higgens-point-boat-launch-id",
+    "mineral-ridge-public-boat-ramp-id"
+   ],
+   "water_id": "wolf-lodge-bay-id",
+   "gnis_id": null,
+   "geometry_hash": "24049917a9fac3dcfefe9dbeaf8dc913c689db39ffec49f62febba0e9a4d9617",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}

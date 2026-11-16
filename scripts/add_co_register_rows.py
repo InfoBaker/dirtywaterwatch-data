@@ -13,9 +13,10 @@ The law (research/co/report.md section 2.1 in the site repository; research/co/e
 Rows
   - Per operator (every Colorado row of data/dischargers.json): <id>-division-report (the report to the Division, not
     published: no web page), or <id>-epa-report when all its permits are EPA's.
-  - The City of Pueblo: its news page (the August 2026 spill notice), which did not answer on 2026-11-14.
+  - The City of Pueblo: its news page (the August 2026 spill notice); the host does not connect from the audit machine
+    and answered GitHub's runner on 2026-11-16 UTC (go-live audit).
   - Statewide: the Division's reports (no web page), CDPHE's incident-reporting page, toxic-algae page, swim-beach page
-    (all three 403 to the build's client on 2026-11-14), the toxic-algae sheet (read: co-cdphe-toxic-algae), CPW's news
+    (all three 403 to the build's client on 2026-11-14 and to GitHub's runner on 2026-11-16 UTC), the toxic-algae sheet (read: co-cdphe-toxic-algae), CPW's news
     and Barr Lake's page and NPS's Curecanti release (read: co-official-notices), Douglas County's guidance page, EPA's
     overflow tables (no Colorado report), Swim Guide.
 A rerun replaces every co- row it makes. Validated before writing.
@@ -36,6 +37,7 @@ from ingest import notification_pages as NP  # noqa: E402
 REGISTER = ROOT / "data" / "notice-channels"
 DIS = ROOT / "data" / "dischargers.json"
 CHECKED = "2026-11-14"
+REREAD = "2026-11-15"          # the rows the go-live audit of 2026-11-16 (UTC) re-read and changed
 ST = "CO"
 ECHO = "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 Q_LAW = ("C.R.S. 25-8-601(2): \"Any person engaged in any operation or activity which results in a spill or discharge of "
@@ -45,7 +47,8 @@ Q_LAW = ("C.R.S. 25-8-601(2): \"Any person engaged in any operation or activity 
          "(noncompliance that may endanger health or the environment), in writing within five days, to the Division")
 Q_EPA = ("NPDES permit {permit} (EPA Region 8: tribal land or a federal facility in Colorado): the 24-hour and five-day "
          "noncompliance reports of 40 CFR 122.41(l)(6), to EPA")
-UNREACHED_403 = " On 2026-11-14 the host answered 403 to the build's client; the row is watched so the refresh records when it answers."
+UNREACHED_403 = (" On 2026-11-14 the host answered 403 to the build's client, and to GitHub's runner on 2026-11-16 UTC; "
+                 "the row is watched so the refresh records when it answers.")
 PUEBLO = "co-co0026646"
 
 AGENCY = [
@@ -70,9 +73,9 @@ AGENCY = [
      "unmonitored_reason": "feed_ingested", "feed_source_id": "co-cdphe-toxic-algae", "publishes": "status",
      "noun": "Data feed",
      "note": ("The public sheet of algal bloom conditions for selected waters (Caution, Warning, Third party, No bloom "
-              "reported), a row added per change: 198 rows on 2026-11-14 for 129 waters, the last update dated "
+              "reported), a row added per change: 198 rows on 2026-11-15 for 129 waters, the last update dated "
               "2026-09-09. Read by the co-cdphe-toxic-algae feed."),
-     "sources": ["co-cdphe-toxic-algae-sheet"]},
+     "sources": ["co-cdphe-toxic-algae-sheet"], "checked": REREAD},
     {"id": "co-cdphe-toxic-algae-page", "agency": "Colorado Department of Public Health and Environment",
      "name": "Colorado Department of Public Health and Environment (toxic algae page)",
      "channel_kind": "state_alert_page", "urls": ["https://cdphe.colorado.gov/toxic-algae"], "method": "html",
@@ -80,7 +83,7 @@ AGENCY = [
      "publishes": "link_only", "link_text": "the toxic algae status sheet", "records": False,
      "availability_only": True, "every_hours": 168,
      "note": "CDPHE's toxic algae page, which links the status sheet (research, 2026-11-03)." + UNREACHED_403,
-     "sources": ["co-cdphe-toxic-algae-sheet"]},
+     "sources": ["co-cdphe-toxic-algae-sheet"], "checked": REREAD},
     {"id": "co-cdphe-swim-beaches", "agency": "Colorado Department of Public Health and Environment",
      "name": "Colorado Department of Public Health and Environment (swim beach monitoring)",
      "channel_kind": "state_alert_page", "urls": ["https://cdphe.colorado.gov/swim-beach-monitoring"], "method": "html",
@@ -89,7 +92,7 @@ AGENCY = [
      "availability_only": True, "every_hours": 24,
      "note": ("CDPHE's swim beach page lists closures in HTML (\"None at this time\" on 2026-11-03, research); not "
               "ingested: no closure has been seen to test a reader on." + UNREACHED_403),
-     "sources": ["co-cdphe-swim-beaches"]},
+     "sources": ["co-cdphe-swim-beaches"], "checked": REREAD},
     {"id": "co-cdphe-incident-reporting", "agency": "Colorado Department of Public Health and Environment",
      "name": "Colorado Department of Public Health and Environment (incident reporting)",
      "channel_kind": "state_alert_page", "urls": ["https://cdphe.colorado.gov/report-a-public-health-or-environmental-concern"],
@@ -98,7 +101,7 @@ AGENCY = [
      "noun": "Notification page",
      "note": ("Intake only: a hotline and an online form for spills and releases; no public list of reports."
               + UNREACHED_403),
-     "sources": ["co-cdphe-incident-reporting"]},
+     "sources": ["co-cdphe-incident-reporting"], "checked": REREAD},
     {"id": "co-wqcd-spill-reports", "agency": "Colorado Department of Public Health and Environment",
      "name": "Colorado Water Quality Control Division (spill and noncompliance reports)",
      "channel_kind": "state_alert_page", "urls": [], "method": None, "legal_basis": Q_LAW, "basis_kind": "law",
@@ -123,9 +126,9 @@ AGENCY = [
      "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
      "publishes": "none", "records": False, "availability_only": True, "every_hours": 168, "noun": "Data feed",
      "note": ("EPA's sewer overflow and bypass tables hold no Colorado report and no Colorado collection system: none in "
-              "the current extract of 2026-11-14 (5,751 events) nor in the all-versions extract (6,710 events). Watched "
-              "for Colorado rows."),
-     "sources": ["co-epa-sobe"]},
+              "the current extract (files of 2026-11-13, 5,751 events, read 2026-11-15) nor in the all-versions extract "
+              "(6,710 events, read 2026-11-14). Watched for Colorado rows."),
+     "sources": ["co-epa-sobe"], "checked": REREAD},
     {"id": "co-swim-guide", "agency": "Swim Drink Fish", "name": "Swim Drink Fish (Swim Guide)",
      "channel_kind": "swim_guide", "urls": [], "method": None, "legal_basis": None, "basis_kind": "voluntary",
      "monitored": False, "unmonitored_reason": "none_found", "publishes": "none", "records": False,
@@ -135,10 +138,11 @@ AGENCY = [
      "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
      "publishes": "notices", "records": False, "every_hours": 24,
      "note": ("The city's news item of September 14, 2026 on the August spill to the Arkansas River (research); its news "
-              "category and alert center are the same site. On 2026-11-14 the host did not answer the build's client "
-              "(connection timed out); the row is watched so the refresh records when it answers. Not ingested: its "
-              "text has not been read in this build."),
-     "sources": ["co-pueblo-wastewater-notices"]},
+              "category and alert center are the same site. The host does not connect from the audit machine; GitHub's "
+              "runner read the item and the news RSS (200) on 2026-11-16 UTC. Not ingested: the item (the discharge "
+              "found August 27, stopped within two hours, the plant's flow 3 million gallons short for August 26) "
+              "agrees with CPW's dates; the row watches for new notices."),
+     "sources": ["co-pueblo-wastewater-notices"], "checked": REREAD},
 ]
 
 
