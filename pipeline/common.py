@@ -635,18 +635,27 @@ def write_events(source_id: str, records: list[dict], ok: bool = True, error: st
         if isinstance(r, dict):
             scrub_discharger(r)
     at = now_iso()
-    if ok:
-        mark_unread_gaps(prev, records, at)
+    if ok or partial:
+        mark_unread_gaps(prev, records, at, listed_only=not ok)
     out = {"source_id": source_id, "fetched_at": at, "ok": ok, "error": error,
            "last_ok_at": at if ok else prev.get("last_ok_at"), "meta": meta or {},
            "count": len(records), "records": records}
     # prev_ok_at: the successful read before last_ok_at, so the status build can tell whether a successful read came
     # after the one that last listed an advisory (no_ok_read_since; owner, 2026-11-16). Written only where it is
     # known: a file from before this field keeps none until its next successful read.
+    # partial_at: the latest partial read since the last successful one; partial_before_ok_at: that of the reads
+    # between prev_ok_at and last_ok_at, so a listing by a partial read is not taken for the successful read's (Astra
+    # review 2026-11-16 P1-1)
     if ok:
         out["prev_ok_at"] = prev.get("last_ok_at")
-    elif "prev_ok_at" in prev:
-        out["prev_ok_at"] = prev["prev_ok_at"]
+        if prev.get("partial_at"):
+            out["partial_before_ok_at"] = prev["partial_at"]
+    else:
+        for k in ("prev_ok_at", "partial_before_ok_at", "partial_at"):
+            if k in prev:
+                out[k] = prev[k]
+        if partial:
+            out["partial_at"] = at
     write_json(path, out)
     return path
 
@@ -682,16 +691,22 @@ def no_ok_read_since(header: dict | None, listed) -> bool | None:
         return True             # listed by a read that was not a successful one (a partial read), none since
     if "prev_ok_at" in header:
         prev_ok = _iso_time(header.get("prev_ok_at"))
-        return prev_ok is None or prev_ok < seen
+        if prev_ok is not None and prev_ok >= seen:
+            return False
+        # one successful write at or after the listing: it is the listing run's own unless a partial read listed it
+        # first (partial_before_ok_at: the latest partial read before that write)
+        partial = _iso_time(header.get("partial_before_ok_at"))
+        return not (partial is not None and partial >= seen)
     return last_ok <= seen + timedelta(minutes=SAME_READ_MINUTES)
 
 
-def mark_unread_gaps(prev: dict, records: list, at: str) -> None:
+def mark_unread_gaps(prev: dict, records: list, at: str, listed_only: bool = False) -> None:
     """At a successful read (write_events ok=True), raw._unread_gaps on each carried advisory whose source could not be
     read for more than UNREAD_GAP_DAYS after the read that last listed it: {"from": that read, "to": the read that lists
     it again, or this read when it no longer lists it}. The status build shows that time as end not confirmed, never as
     the authority's window after the fact (owner, 2026-11-16). Earlier gaps are carried from the previous file. A record
-    with no gap is not touched."""
+    with no gap is not touched; nor is a system-wide advisory (its own 48-hour rule). listed_only (a partial read):
+    only a record the read lists again, since a partial read that does not show it is no evidence."""
     olds = {r.get("event_id"): r for r in (prev.get("records") or []) if isinstance(r, dict) and r.get("event_id")}
     if not olds:
         return
@@ -699,7 +714,7 @@ def mark_unread_gaps(prev: dict, records: list, at: str) -> None:
     for r in records:
         raw = r.get("raw") if isinstance(r, dict) else None
         p = olds.get(r.get("event_id")) if isinstance(raw, dict) else None
-        if p is None:
+        if p is None or system_wide_advisory(r):
             continue
         praw = p.get("raw") if isinstance(p.get("raw"), dict) else {}
         gaps = [g for g in (praw.get("_unread_gaps") or []) if isinstance(g, dict)]
@@ -710,6 +725,8 @@ def mark_unread_gaps(prev: dict, records: list, at: str) -> None:
         t_old, t_new = _iso_time(old), _iso_time(new)
         if t_old is not None and no_ok_read_since(prev, old) is True:
             to = new if t_new is not None and t_new > t_old else at       # listed again, or not listed at this read
+            if listed_only and to != new:
+                to = None
             t_to = _iso_time(to)
             if t_to is not None and now is not None and t_to - t_old > timedelta(days=UNREAD_GAP_DAYS) \
                     and not any(g.get("from") == old for g in gaps):

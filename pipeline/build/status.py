@@ -771,7 +771,8 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
             r["_file"] = p.name
             # the health of the feed that carries the record (the file's own header), for the outage hold
             # (outage_hold, common.no_ok_read_since); not part of the record (record_hash leaves it out)
-            r["_feed_health"] = {k: d[k] for k in ("fetched_at", "ok", "last_ok_at", "prev_ok_at") if k in d}
+            r["_feed_health"] = {k: d[k] for k in ("fetched_at", "ok", "last_ok_at", "prev_ok_at",
+                                                       "partial_before_ok_at") if k in d}
             r.setdefault("source_id", sid)
             if live_up is not None:
                 st = own_state(r, sid)      # never the state of a live water it names (own_state)
@@ -3074,7 +3075,7 @@ def outage_hold(ev: dict, listed: datetime | None, cap: datetime, now: datetime,
     outage lasts, never grey and never red for the unread time. None (today's grey note) otherwise: a successful read
     since that did not list it, no health on file, the switch off, or still within CONFIRM_DAYS of that read."""
     cfg = _outage_cfg(rules)
-    if cfg is None or listed is None or now < cap:
+    if cfg is None or listed is None or now < cap or system_wide_advisory(ev):
         return None
     health = ev.get("_feed_health")
     if no_ok_read_since(health, (ev.get("raw") or {}).get("_last_seen_in_source")) is not True:
@@ -3096,42 +3097,48 @@ CARVED_RULES = ("advisory_active", "rain_advisory", "not_reconfirmed")
 def carve_unread_gaps(ivs: list[dict], ev: dict, state, rules) -> list[dict]:
     """raw._unread_gaps (common.mark_unread_gaps: the source could not be read from the read that last listed the
     advisory to the read that listed it again, or that no longer listed it): from CONFIRM_DAYS after that listing to
-    the next read, the record's advisory and age-out intervals are end not confirmed (hatched), as they were shown
-    while the source was unread; a later listing never paints that time red after the fact (owner, 2026-11-16). Keyed
-    on the field and the switch, so no other record changes."""
+    the next read the record is end not confirmed (hatched), as it was shown while the source was unread, and its
+    advisory and age-out intervals are cut out of that time, so a later listing never paints it red after the fact
+    (owner, 2026-11-16). The hatch is drawn whole, whether or not an age-out note reached that far (Astra review
+    2026-11-16 P1-3); none after a confirmed end, none for a system-wide advisory. Keyed on the field and the switch."""
     gaps = (ev.get("raw") or {}).get("_unread_gaps")
     cfg = _outage_cfg(rules) if gaps else None
-    if not cfg or not isinstance(gaps, list):
+    if not cfg or not isinstance(gaps, list) or not ivs or system_wide_advisory(ev):
         return ivs
+    end = parse_time(ev.get("ended_at")) if ev.get("ended_at") and not end_not_credible(ev, None, rules) else None
     for g in gaps:
         g_from = parse_time(g.get("from")) if isinstance(g, dict) else None
         g_to = parse_time(g.get("to")) if isinstance(g, dict) else None
         if g_from is None or g_to is None:
             continue
         a = g_from + timedelta(days=CONFIRM_DAYS)
+        if end is not None:
+            g_to = min(g_to, end)
         if g_to <= a:
             continue
-        out = []
+        out, template = [], None
         for iv in ivs:
-            s, e = iv["start"], iv["end"]
-            if iv["rule"] not in CARVED_RULES or s >= g_to or (e is not None and e <= a):
+            s0, e = iv["start"], iv["end"]
+            if iv["rule"] not in CARVED_RULES or s0 >= g_to or (e is not None and e <= a):
                 out.append(iv)
                 continue
-            if s < a:
+            template = template or iv
+            if s0 < a:
                 out.append({**iv, "end": a})
-            mid = {**iv, "start": max(s, a), "end": g_to if e is None else min(e, g_to), "rule": "outage_unconfirmed",
-                   "color": RULES["outage_unconfirmed"][0], "confirmed": iso(g_from),
-                   "label": (f"Advisory listed by the authority at the read of {_read_time(g_from, ev, state)}; the "
-                             f"source could not be read again until {_read_time(g_to, ev, state)}: end not confirmed "
-                             "for that time"),
-                   "rule_applied": {"rule": "unresolved.source_outage", "days": CONFIRM_DAYS,
-                                    "last_listed_at": iso(g_from), "next_read_at": iso(g_to),
-                                    "listed_again": g.get("listed_again"), "rationale": cfg.get("rationale"),
-                                    "source": "data/rules.json"}}
-            out.append(mid)
             if e is None or e > g_to:
-                out.append({**iv, "start": g_to})
-        ivs = out
+                out.append({**iv, "start": max(s0, g_to)})
+        red = (template or {}).get("red_rule") or next((iv.get("red_rule") for iv in ivs if iv.get("red_rule")), None)
+        mid = _iv(ev, a, g_to, "outage_unconfirmed", red, (template or {}).get("yellow_rule"))
+        mid.update(confirmed=iso(g_from), label=(
+            f"Advisory listed by the authority at the read of {_read_time(g_from, ev, state)}; the source could not "
+            f"be read again until {_read_time(g_to, ev, state)}: end not confirmed for that time"),
+            rule_applied={"rule": "unresolved.source_outage", "days": CONFIRM_DAYS, "last_listed_at": iso(g_from),
+                          "next_read_at": iso(g_to), "listed_again": g.get("listed_again"),
+                          "rationale": cfg.get("rationale"), "source": "data/rules.json"})
+        for k in ("placement", "observed_periods"):
+            if k in (template or {}):
+                mid[k] = template[k]
+        ivs = out + [mid]
     return ivs
 
 
