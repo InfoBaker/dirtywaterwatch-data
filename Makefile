@@ -149,7 +149,9 @@
 #                  Delaware: de_dnrec_derns (DNREC's DERNS Recent Releases: the sewage and sanitary-wastewater
 #                  releases by rule, a few detail pages a run; state data/build/de-dnrec-derns-state.json) and
 #                  de_dnrec_recwater (DNREC's beach advisory history on data.delaware.gov and the FirstMap stations)
-#                  South Carolina: sc_florence_sso (the City of Florence's sewer overflow notices),
+#                  South Carolina: sc_des_overflows (DES's ePermitting overflow list: every completed report since
+#                  2022, the whole list in one request a run; state data/build/sc-des-overflow-list-state.json),
+#                  sc_florence_sso (the City of Florence's sewer overflow notices),
 #                  sc_des_advisories (DES's beach station layer, long-term and short-term advisories, and its bloom
 #                  delineations and watch table, polled; state data/build/sc-des-advisories-state.json)
 #                  Indiana: in_echo_cso_monthly (EPA's discharge monitoring reports: each combined sewer outfall's

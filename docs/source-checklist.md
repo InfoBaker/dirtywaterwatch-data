@@ -53,7 +53,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ar | 4 | 1 | 5 | 2 | 1 | 13 |
 | wi | 8 | 0 | 10 | 2 | 1 | 21 |
 | de | 3 | 0 | 5 | 1 | 0 | 9 |
-| sc | 6 | 0 | 2 | 1 | 2 | 11 |
+| sc | 7 | 0 | 2 | 1 | 1 | 11 |
 | in | 8 | 0 | 16 | 0 | 2 | 26 |
 | wv | 8 | 0 | 12 | 1 | 1 | 22 |
 | la | 4 | 0 | 7 | 3 | 2 | 16 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 2 | 0 | 5 | 2 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **620** | **235** | **551** | **230** | **82** | **1718** |
+| **all** | **621** | **235** | **551** | **230** | **81** | **1718** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1836,6 +1836,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `sc-des-beach-monitoring` | SC DES Beach Monitoring: beach stations with advisory status (BW_Monitoring_Stations layer 0) and S.C. Beach Access Guide | used | fetched | advisories | Read by pipeline/ingest/sc_des_advisories.py: 123 stations on 2026-11-14, 21 Long-Term (standing advisories from the first poll), 102 No Advisory; short-term advisories in season from the poll that shows them. |
 | `sc-des-freshwater-swim-advisories` | SC DES freshwater Swimming Advisory sites (Water_Advisories layer 0) | used | fetched | advisories | Read by pipeline/ingest/sc_des_advisories.py: 23 sites on 2026-11-15 (OBJECTID, Name, Station, point), each a record of DES's undated listing at its own point, from the first read that listed it; the first complete read without a site ends it at that read. |
 | `sc-des-hab` | SC DES algal bloom program | used | fetched | advisories | Read by pipeline/ingest/sc_des_advisories.py: DES's bloom delineations behind the HAB Monitoring Map (897 on 2026-11-14, one Watch: J. Strom Thurmond Reservoir, Cedar Point Cove, dated 2026-10-16) with the program page's table of active watches and advisories. |
+| `sc-des-sso-database` | SC DES ePermitting wastewater overflow list (View Wastewater Overflows) | used | fetched | events | Read by pipeline/ingest/sc_des_overflows.py (feed sc-des-overflow-list): the whole list hourly, 1,773 completed reports from 2022-09-26 to 2026-11-10 on 2026-11-16, with start, end, receipt, permit, site, manhole or pump station, receiving water, volume and cause; the responsible party (often the filer's own name), the location description and the action fields are never requested. Found by the 2026-11-16 research; the 2026-11-03 search had found no public list. |
 | `sc-des-sso-reporting` | SC DES sewer system overflow reporting (Satellite Sewer System Program forms; SSO compliance and enforcement document) | used | search_only | law | Since 1998 DES requires reporting of any SSO reaching state waters, any over about 500 gallons not reaching water, and any that may cause a health or environmental concern; public notification programs required for 5,000 gallons or more since July 2008 (per DES document and City of Florence). Reports go on a mailed or faxed form; no public list found. DES is said to receive about 600 reported overflows a year. |
 | `sc-florence-sso-notices` | City of Florence "Notification of Sanitary Sewer Overflow" posts | used | fetched | events | Read by pipeline/ingest/sc_florence_sso.py: the City's news list each run and each 'Notification of Sanitary Sewer Overflow' page (five on 2026-11-14, March 2024 to October 2025, Jeffries Creek), the media contacts cut, the City's days and figures as given. |
 | `sc-law-48-1-95` | S.C. Code 48-1-95 Wastewater utilities; procedures for significant spills | used | fetched | law | Public-notice duty: utilities must give public notice of a significant spill (5,000 gallons or more of untreated or partially treated domestic sewage) within 24 hours of discovery; DES gives notice if the utility does not. No channel named. |
@@ -1843,7 +1844,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `sc-des-shellfish` | SC DES Shellfish Harvest monitoring stations and closures | watch | fetched | advisories | Station layer exists; emergency closures after spills not checked. |
 | `sc-epa-sobe` | EPA SOBE extract, SC rows | rejected | fetched | events | No South Carolina row in EPA's current or all-versions sewer overflow extract, fetched 2026-11-14 (registered as a watched channel). |
 | `sc-charleston-water-notices` | Charleston Water System overflow notices and West Ashley alert system (2026 settlement) | unreachable | fetched | events | www.charlestonwater.com did not answer this site's client on 2026-11-14 (TCP connection timed out, three attempts); its news page is a watched channel. The 2026-11-09 research read article 270 rewritten for a second break: an article address is not one overflow. |
-| `sc-des-sso-database` | SC DES SSO report records (internal) | unreachable | inferred | events | No public table, map or download of SSO reports found (searched DES site, DES ArcGIS server folders water, Hosted, Emergency_Response, and ArcGIS Online). Records request is the only route. |
 
 ## in: Indiana (26)
 
