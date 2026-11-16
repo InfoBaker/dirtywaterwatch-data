@@ -480,11 +480,11 @@ def test_coverage_says_possible_where_only_the_default_applies():
         "RI0100315": {**row, "state": "RI", "threshold_in": 0.5, "threshold_kind": "state", "trigger_basis": "state",
                       "waters": ["e-ri"]}}})
     assert cov["MI"]["sentence"].startswith('The "discharge possible" caution covers 1 combined sewer operator')
-    assert "our default amount of 0.1 in" in cov["MI"]["sentence"] and cov["MI"]["trigger_bases"] == ["default"]
+    assert "our default amount of 0.1 inch." in cov["MI"]["sentence"] and cov["MI"]["trigger_bases"] == ["default"]
     assert cov["MD"]["sentence"].startswith('The "discharge possible" caution') and cov["MD"]["threshold_kind"] == "site_default"
     assert cov["MA"]["sentence"].startswith('The "discharge likely" or "discharge possible" caution covers 2')
     assert cov["MA"]["trigger_bases"] == ["operator", "default"]
-    assert cov["RI"]["sentence"].startswith('The "discharge likely" caution') and "published amount of 0.5 in" in cov["RI"]["sentence"]
+    assert cov["RI"]["sentence"].startswith('The "discharge likely" caution') and "published amount of 0.5 inch." in cov["RI"]["sentence"]
 
 
 def test_rules_json_labels_by_basis_and_states_the_defaults_cost_with_its_sources():

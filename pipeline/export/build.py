@@ -197,7 +197,26 @@ STOP_TEXT = {
     "attributes unavailable": "The model stops here: the stream network's attributes (tidal, lake) are not available "
                               "for the next stretch, so we cannot say how the water moves beyond this point.",
 }
+# a trace that goes on along a tidal river (data/rules.json reach.tidal_river) stops where the tidal water is no
+# longer a river channel (cut_reason "tidal_water"; only such a trace has it)
+STOP_TEXT["tidal_water"] = ("Below this point the tidal water is no longer a river channel. Water moves back and forth "
+                            "with the tide and wind, so we do not model where the discharge goes. See the official "
+                            "notice and local beach or shellfish advisories.")
+# the label of a segment in tidal water (no travel time: the tide moves the water both ways)
+TIDAL_RIVER_TEXT = ("Tidal water: the tide moves water back and forth here, and the river carries it downstream "
+                    "overall. No travel time is given.")
 LINE_TEXT = "Modeled downstream path (estimate, not verified by sampling)."
+
+
+def stop_text(r: dict, cap: float) -> str:
+    """The stop wording of a river trace, by its own cut reason and the rule it was traced under."""
+    return STOP_TEXT.get(r.get("cut_reason"), "").format(cap=cap)
+
+
+def tidal_path_props(r: dict) -> dict:
+    """A path's tidal stretch (reach.tidal_river): where it starts and its label; none for a trace without one."""
+    k = next((sg["km_start"] for sg in r.get("segments") or [] if sg.get("tidal_river") or sg.get("below_tide")), None)
+    return {} if k is None else {"tidal_from_km": k, "tidal_label": TIDAL_RIVER_TEXT}
 # shoreline stretches on the Great Lakes (build/shoreline.py; data/rules.json reach.shoreline): their own wording
 SHORE_STOP_TEXT = {
     "shoreline_limit": "The modeled shoreline stretch stops here ({each:g} km along the shore from the outfall): the "
@@ -369,9 +388,18 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
         flow_txt = (f"at the river flow measured at {a.get('gauge_name') or a.get('gauge')} ({a['flow_cfs']:g} cfs) "
                     f"at {a.get('flow_time')}" if a.get("gauge") else
                     "at the river's average flow (NHDPlus mean annual; no current gauge reading)")
+        below_tide = False
         for sg, band in zip(r["segments"], a["segments"]):
             where_from = f"outfall {r['outfall']}" if r.get("outfall") else "the reported location"
-            if band["hours_typical"] is None:
+            if sg.get("tidal_river") or band.get("tidal_river"):
+                below_tide = True
+                label = (f"Modeled downstream of {where_from}. {TIDAL_RIVER_TEXT} The river is not necessarily "
+                         f"unsafe here, and it is not necessarily safe outside the line.")
+            elif (below_tide or sg.get("below_tide")) and band["hours_typical"] is None:
+                label = (f"Modeled downstream of {where_from}. No travel time is given here: the water passes through "
+                         f"tidal water above this point, where the tide moves it back and forth. The river is not "
+                         f"necessarily unsafe here, and it is not necessarily safe outside the line.")
+            elif band["hours_typical"] is None:
                 label = (f"Modeled downstream of {where_from}. No travel time is given here: the stream network "
                          f"attributes it needs (drainage area, mean flow) are missing for this stretch. The river is "
                          f"not necessarily unsafe here, and it is not necessarily safe outside the line.")
@@ -394,13 +422,14 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
                               "hours_since_start": a["hours_since_start"], "gauge": a.get("gauge"),
                               "flow_cfs": a.get("flow_cfs"), "flow_time": a.get("flow_time"),
                               "flow_basis": a.get("flow_basis"), "cut_reason": r.get("cut_reason"),
-                              "line_text": LINE_TEXT, "label": label, "fixture": bool(e.get("fixture"))}})
+                              "line_text": LINE_TEXT, "label": label, "fixture": bool(e.get("fixture")),
+                              **({"tidal_river": True} if sg.get("tidal_river") else {})}})
         last = r["segments"][-1]["coords"][-1]
         feats.append({"type": "Feature", "geometry": {"type": "Point", "coordinates": last},
                       "properties": {"category": "sewage", "feature": "stop", "event_id": a["event_id"], "reach": a["reach"],
                                      "status": a["status"], "cut_reason": r.get("cut_reason"),
                                      "km_from_outfall": r.get("length_km"),
-                                     "label": STOP_TEXT.get(r.get("cut_reason"), "").format(cap=cap)}})
+                                     "label": stop_text(r, cap)}})
     status_by_reach = st.get("reaches") or {}
     paths = []
     for key, r in sorted(cached.items()):
@@ -425,8 +454,8 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
                                      "rain_likely": bool((status_by_reach.get(key) or {}).get("rain_likely"))
                                      and not (status_by_reach.get(key) or {}).get("active"),
                                      "segments_km": [[sg["km_start"], sg["km_end"]] for sg in r["segments"]],
-                                     "stop_label": STOP_TEXT.get(r.get("cut_reason"), "").format(cap=cap),
-                                     "line_text": LINE_TEXT, **shore_path_props(r)}})
+                                     "stop_label": stop_text(r, cap),
+                                     "line_text": LINE_TEXT, **tidal_path_props(r), **shore_path_props(r)}})
     return feats, paths
 
 
@@ -1000,10 +1029,29 @@ def live_dischargers(rows: list[dict], live: set[str]) -> list[dict]:
     return [d for d in rows if not d.get("state") or str(d["state"]).upper() in live]
 
 
+def tidal_river_rules(rules: dict) -> dict:
+    """out/rules.json's reach rule as it stands (data/rules.json reach.tidal_river): absent (off, as shipped), the
+    file is as before; present but not enabled, the record is left out; on, the rule's record (build/reaches.py
+    TIDAL_RIVER_DEFAULTS under the file's own keys) is written, and its cap_rationale and stop_at replace the reach
+    rule's own."""
+    from build import reaches as reaches_mod
+    reach = rules.get("reach")
+    if not isinstance(reach, dict) or "tidal_river" not in reach:
+        return rules
+    reach = dict(reach)
+    if reaches_mod.tidal_river_on(rules):
+        tr = reaches_mod.tidal_river_rule(rules)
+        reach.update({"tidal_river": tr, **{k: tr[k] for k in ("cap_rationale", "stop_at") if k in tr}})
+    else:
+        reach.pop("tidal_river")
+    return {**rules, "reach": reach}
+
+
 def live_rules(rules: dict, live: set[str]) -> dict:
     """out/rules.json keeps the per-state and per-operator windows of the live states only; the shared rules and
-    their rationale stay whole (the site shows a rule only when one of its sources covers a live water)."""
-    out = dict(rules)
+    their rationale stay whole (the site shows a rule only when one of its sources covers a live water). The reach
+    rule reads as the tidal-river switch stands (tidal_river_rules)."""
+    out = tidal_river_rules(dict(rules))
     red = dict(out.get("red") or {})
     if isinstance(red.get("by_state"), dict):
         red["by_state"] = {k: v for k, v in red["by_state"].items() if str(k).upper() in live}

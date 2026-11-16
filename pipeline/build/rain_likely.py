@@ -75,7 +75,7 @@ LEVELS = ("likely", "possible")
 LEVEL_OF_BASIS = {"operator": "likely", "state": "likely", "default": "possible"}
 EVIDENCE_BASIS = {"operator_history": "operator_history", "operator_rule": "operator_rule", "state": "state_rule",
                   "site_default": "site_default", "shared_site": "shared_site"}
-NO_ENTRY = "no dated overflow report from this operator in a source this site reads"
+NO_ENTRY = "no dated overflow report from this operator in a source we read"
 HISTORY_FIELDS = ("usable", "why_not", "period", "record_from", "storms", "followed", "reports", "reports_with_no_storm",
                   "day_precision_reports", "bands", "lowest_reported", "possible_in", "likely_in", "quiet", "possible",
                   "likely", "left_out", "notes", "sources")
@@ -1107,7 +1107,7 @@ def caution_coverage(block: dict, cso_states=()) -> dict[str, dict]:
             if e.get("threshold_in") is not None:
                 whose = ("our default amount" if e.get("threshold_kind") == "site_default"
                          else "the published amount")
-                parts["radar"] = f"NOAA radar rainfall at their outfalls, against {whose} of {e['threshold_in']:g} in"
+                parts["radar"] = f"NOAA radar rainfall at their outfalls, against {whose} of {inch(e['threshold_in'])}"
             if e.get("history_permits"):
                 parts["radar"] = ("NOAA radar rainfall at their outfalls, against amounts from each operator's own "
                                   "overflow reports where it has enough of them, else a published amount or our "
@@ -1125,11 +1125,11 @@ def caution_coverage(block: dict, cso_states=()) -> dict[str, dict]:
                                   f"locations are not published." if n > 1 else " For one of them, rainfall is read "
                                   "at the treatment plant; the outfalls' own locations are not published.")
             if missing:
-                e["sentence"] += (f" For the other {missing}, heavy rain with no report shows nothing.")
+                e["sentence"] += (f" For the other {missing}, we show no rain caution.")
         else:
             e["covered"] = False
-            e["sentence"] = ("No \"discharge likely\" caution here yet: the site does not read rainfall at this "
-                             "state's combined sewer outfalls, so heavy rain with no report shows nothing.")
+            e["sentence"] = ("We show no rain caution here because we do not read rainfall at this state's "
+                             "combined sewer outfalls.")
     return dict(sorted(out.items()))
 
 
