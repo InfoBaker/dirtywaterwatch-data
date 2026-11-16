@@ -205,6 +205,9 @@ POLL_END_HORIZON_SOURCES |= {"sc-des-freshwater-swim-advisories"}
 # Wisconsin DNR's beach layer (ingest/wi_dnr_beach_health.py): an advisory's end is the first read that no longer
 # lists it; the same limit as DES's layers; keyed on the source, so no other feed changes
 POLL_END_HORIZON_SOURCES |= {"wi-dnr-beach-health"}
+# Nevada: the Office of State Epidemiology's list (ingest/nv_ose_hab_list.py): an end seen only at a read, the same
+# limit as the parks' page; keyed on the source, so no other feed changes
+POLL_END_HORIZON_SOURCES |= {"nv-ose-hab-reports"}
 SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}
@@ -1428,6 +1431,40 @@ OWN_PLACE_NONE = ("the report names no water it reached and its own point lies o
 # rather than leaving the reason empty. Keyed on ACCENT_FOLD_STATES (folds), so no other state's reason changes.
 OPEN_SEA_FORMS = frozenset({"atlantic ocean", "caribbean sea"})
 OPEN_SEA_NONE = "the report names the open sea, which has no water record here: listed with its place, colouring no water"
+
+
+# Nevada (ingest/nv_ose_hab_list.py): an advisory for a water this site holds no record of (raw._placement "listed_only")
+# is listed with the place its source gives and placed on no water, so its name never lands on a namesake in another
+# county or state (a wrong tie is worse than none). Keyed on the value, which only that feed writes.
+LISTED_ONLY_WHY = ("the advisory names a water this site holds no record of: listed with the place the source gives, "
+                   "colouring no water")
+
+
+def listed_only(ev: dict) -> bool:
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    return raw.get("_placement") == "listed_only"
+
+
+# Nevada (coordinator, 2026-11-16; Astra review P1-5): where the Office of State Epidemiology's list and the state
+# parks' page carry one water, the Office's record (raw._shown_over names the parks' record) is shown, since it carries
+# the authority's stated date (time precision day) against the parks' first read (poll): the parks' record is marked
+# its duplicate, only while both are in this build and advisory_active; otherwise each shows on its own. The existing
+# duplicate rule chooses by an ingester's own link; this keyed rule chooses by which record carries a stated date.
+SHOWN_OVER_SOURCES = {"nv-ose-hab-reports"}
+
+
+def shown_over_links(events: list[dict], duplicates: dict) -> dict:
+    """duplicates plus {the other record: the shown one} for each live raw._shown_over link of SHOWN_OVER_SOURCES."""
+    by_id = {e.get("event_id"): e for e in events}
+    out = dict(duplicates)
+    for ev in events:
+        raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+        other = by_id.get(raw.get("_shown_over"))
+        if (ev.get("source_id") in SHOWN_OVER_SOURCES and other is not None and ev.get("status") == "advisory_active"
+                and other.get("status") == "advisory_active" and ev.get("time_precision") == "day"
+                and other.get("time_precision") == "poll" and ev["event_id"] not in out):
+            out[other["event_id"]] = ev["event_id"]
+    return out
 
 
 def own_place_only(ev: dict) -> bool:
@@ -2805,6 +2842,9 @@ class Resolver:
             if nr:                  # kept, with its page; colours nothing, no reach (counted with no_receiving_water)
                 return {"water_slugs": [], "water_match": "none", "note": None, "unknown_slugs": unknown,
                         "no_receiving_water": nr, "no_release": True}
+        if listed_only(ev):
+            return {"water_slugs": [], "water_match": "none", "note": None, "unknown_slugs": unknown,
+                    "unplaced_reason": LISTED_ONLY_WHY}
         elsewhere = self.place_elsewhere(ev)
         if elsewhere:
             # the record says its place lies in a state the site does not show: never placed on a water of the state
@@ -4491,6 +4531,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     for ev in events:               # an ingester's own duplicate_of (CT annual sheet -> dashboard) wins
         if ev.get("duplicate_of") and ev["duplicate_of"] != ev["event_id"]:
             duplicates[ev["event_id"]] = ev["duplicate_of"]
+    duplicates = shown_over_links(events, duplicates)
     h_start = now - timedelta(days=HISTORY_DAYS)
     points = []
     latest_month = {}       # outfall -> (event, water slugs, monthly mark) of its latest month report
