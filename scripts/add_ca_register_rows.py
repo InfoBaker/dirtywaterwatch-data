@@ -51,6 +51,7 @@ FEED = "ca-swrcb-ciwqs-spills-flatfile"
 SFPUC_FEED = "ca-sfpuc-beach-map"
 FHAB_FEED = "ca-swrcb-fhab"
 BEACHWATCH_FEED = "ca-beachwatch-advisories"
+TIJUANA_FEED = "ca-sd-regional-board-ibwc-spills"
 Q_5411 = ('Health and Safety Code 5411.5(a): any person who causes or permits a discharge of sewage in or on waters of '
           'the State "shall, as soon as that person has knowledge of the discharge, immediately notify the local health '
           'officer or the director of environmental health of the discharge"')
@@ -153,13 +154,13 @@ AGENCY = [
      "name": "San Diego Water Board: Tijuana River transboundary flows", "channel_kind": "state_alert_page",
      "urls": ["https://www.waterboards.ca.gov/sandiego/water_issues/programs/tijuana_river_valley_strategy/"
               "sewage_issue.html"], "method": "html", "legal_basis": None, "basis_kind": "voluntary",
-     "monitored": True, "unmonitored_reason": None, "publishes": "notices", "records": False, "every_hours": 24,
-     "noun": "State page",
-     "note": ("A table of transboundary sewage flows from Mexico in the Tijuana River valley (start, end, type, "
-              "location, volume), updated about once a week. A shared water with Mexico: whether the site covers it "
-              "at launch is the owner's call. Watched for changes; no records made. Voluntary. "
-              "(research/ca/report.md §2.3)"),
-     "sources": ["ca-sd-regional-board-ibwc-spills"]},
+     "monitored": False, "unmonitored_reason": "feed_ingested", "feed_source_id": TIJUANA_FEED,
+     "publishes": "notices", "noun": "State page",
+     "note": ("A table of the spill events and transboundary flows from Mexico that USIBWC reported to the Board "
+              "since July 2024 in the Tijuana River valley (start, end, type, location, volume), updated about once "
+              "a week; a water shared with Mexico. Read by the site's feed: each row is a report. Voluntary "
+              "publication. (research/ca/report.md §2.3)"),
+     "sources": [TIJUANA_FEED]},
     {"id": "ca-sdcounty-beach-info", "agency": "County of San Diego Department of Environmental Health and Quality",
      "name": "San Diego County beach and bay water quality", "channel_kind": "local_health_page",
      "urls": ["https://cosdapps.sandiegocounty.gov/sdbeachinfo/"], "method": "html", "legal_basis": None,
