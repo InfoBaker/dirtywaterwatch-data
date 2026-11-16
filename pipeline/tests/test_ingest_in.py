@@ -439,7 +439,7 @@ def test_the_register_names_every_operator_and_validates():
     assert {r["id"] for r in rows if r["kind"] == "cso"} <= {r["operator_id"] for r in chans
                                                               if r["id"].endswith("-cso-notice")}
     by = {r["id"]: r for r in chans}
-    assert by["in-fort-wayne-cso-notifications"]["barrier"] == "bot_wall"
+    assert by["in-fort-wayne-cso-notifications"]["barrier"] == "not_verified"  # the runner was answered, 2026-11-16
     assert by["in-idem-beachalert"]["barrier"] == "not_verified"            # review 2026-11-14 P2-10: templates only
     assert by["in-mishawaka-cso-alerts-x"]["barrier"] == "login_required"
     assert by["in-epa-echo-cso-dmr"]["feed_source_id"] == "in-echo-dmr-cso"

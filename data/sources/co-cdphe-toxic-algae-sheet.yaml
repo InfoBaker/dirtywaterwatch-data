@@ -4,11 +4,11 @@ url: "https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mit
 homepage: "https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv"
 kind: "csv"
 level: "state"
-# Notes (research/co, status used, verified fetched, checked 2026-11-14): Read 2026-11-14 as CSV
+# Notes (research/co, status used, verified fetched, checked 2026-11-15): Read 2026-11-15 as CSV
 #   (198 rows, 129 waters; the last update dated 2026-09-09): read by the co-cdphe-toxic-algae feed
 #   as algal-bloom advisories (a run of Caution, Warning or Third party rows per water, ended by the
 #   next No bloom reported row). CDPHE's landing page answered 403 to the build's client on
-#   2026-11-14.
+#   2026-11-14, and to GitHub's runner on 2026-11-16 UTC.
 # Access detail (research, quoted): Linked from cdphe.colorado.gov/toxic-algae ("Data"). CSV via
 #   https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv
 #   (no auth). 198 rows on 2026-11-03: Waterbody name, Condition Category (No bloom reported,
@@ -32,4 +32,4 @@ access: ["csv"]
 access_detail: "Linked from cdphe.colorado.gov/toxic-algae (\"Data\"). CSV via https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv (no auth). 198 rows on 2026-11-03: Waterbody name, Condition Category (No bloom reported, Caution, Warning, Third party), Update Date, Other notes; latest update 2026-09-09. Rows are appended per update, so the latest row per water is its status. Also a Tableau story (cohealthviz.dphe.state.co.us, EnvironmentalEpidemiologyPublic/ToxicAlgae). Sample research/co/raw/cdphe-toxic-algae-sheet-head-2026-11-03.csv."
 machine_readable: true
 legal_basis: "CDPHE guidance; closure at 8 ug/L microcystin"
-checked: "2026-11-14"
+checked: "2026-11-15"

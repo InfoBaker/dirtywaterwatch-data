@@ -10979,7 +10979,7 @@
    "operator_id": null,
    "agency": "City of Topeka",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "ks-topeka-stream-advisories",
    "name": "City of Topeka (stream advisories)",
    "channel_kind": "news_page",
@@ -10988,14 +10988,14 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "notices",
    "records": false,
-   "note": "Topeka has posted stream advisories as city news after some overflows (2020, 2023, 2024); its news site answered 403 to automated clients in the research (2026-11-09).",
+   "note": "Topeka has posted stream advisories as city news after some overflows (2020, 2023, 2024). The old news address now leads to the city's home page, which answered the pipeline's runner on 2026-11-16 (the earlier 403 was met from a development machine); where the city posts advisories now was not verified in the research.",
    "sources": [
     "ks-topeka-stream-advisories"
    ],
-   "barrier": "bot_wall"
+   "barrier": "not_verified"
   },
   {
    "state": "KS",

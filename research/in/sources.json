@@ -382,8 +382,8 @@
   "history": null,
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
-  "status": "unreachable",
-  "status_reason": "The host did not accept a connection from this build on 2026-11-14 (two tries, ports 443 and 80): watched daily in the register; the research of 2026-11-09 read 'NOT overflowing' and dated overflows to 2025-08-19 (1.1 million gallons), which EPA's monthly report for August 2025 matches.",
+  "status": "watch",
+  "status_reason": "The host did not accept a connection from this build on 2026-11-14 (two tries, ports 443 and 80): watched daily in the register; the research of 2026-11-09 read 'NOT overflowing' and dated overflows to 2025-08-19 (1.1 million gallons), which EPA's monthly report for August 2025 matches. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": ""
@@ -521,7 +521,7 @@
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
   "status": "watch",
-  "status_reason": "Email CSO notifications by calling 574.277.8515; 2025 CSO Annual Public Notice and 2025 Monthly Reports of Operation PDFs. HTTP 403 to curl; read with WebFetch.",
+  "status_reason": "Email CSO notifications by calling 574.277.8515; 2025 CSO Annual Public Notice and 2025 Monthly Reports of Operation PDFs. HTTP 403 to curl; read with WebFetch. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "notes": ""
@@ -554,8 +554,8 @@
   "history": null,
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
-  "status": "unreachable",
-  "status_reason": "HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. A barrier (bot wall) in the register.",
+  "status": "watch",
+  "status_reason": "HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "search_only",
   "checked": "2026-11-14",
   "notes": ""

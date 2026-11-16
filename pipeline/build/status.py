@@ -4406,7 +4406,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if future:
             placements[eid]["future_start"] = True
             future_starts[ev["source_id"]] += 1
-        assumed = end_assumed(ev, now, rules)
+        # an advice that ages 14 days after its last confirmation (raw._ages_after_confirmation) is never assumed to
+        # have ended 30 days on: its intervals end at the aging, and the note said otherwise (CO audit 2026-11-16 P2)
+        assumed = (None if (ev.get("raw") or {}).get("_ages_after_confirmation") is True
+                   else end_assumed(ev, now, rules))
         if assumed:             # no end reported, 30 days on: the site assumes it ended (owner, 2026-11-03)
             placements[eid]["end_assumed_at"] = iso(assumed)
             when = f"{assumed.astimezone(LOCAL):%b} {assumed.astimezone(LOCAL).day}, {assumed.astimezone(LOCAL).year}"

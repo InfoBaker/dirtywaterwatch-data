@@ -2108,7 +2108,7 @@
       "html",
       "csv"
     ],
-    "access_detail": "Site refused connections (ECONNREFUSED/timeouts) on 2026-11-01; read via Wayback snapshot 2026-07-23. Repo https://github.com/CBEP-SoCB-Details/Casco_Bay_CSOs (Original_Data includes Portland per-event CSO workbooks 2015-2019 obtained from PWD and DEP CSO GIS downloaded 2019).",
+    "access_detail": "Site refused connections (ECONNREFUSED/timeouts) on 2026-11-01; read via Wayback snapshot 2026-07-23. Repo https://github.com/CBEP-SoCB-Details/Casco_Bay_CSOs (Original_Data includes Portland per-event CSO workbooks 2015-2019 obtained from PWD and DEP CSO GIS downloaded 2019). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
