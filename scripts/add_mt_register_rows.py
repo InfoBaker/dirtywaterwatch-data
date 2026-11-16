@@ -7,7 +7,7 @@ The law (research/mt/report.md section 2.1 in the site repository; research/mt/e
   - MPDES permit standard conditions (Lolo's MT0020168, Part II.I, read 2026-11-03 and in the expansion pass): serious
     noncompliance reported to DEQ's Water Protection Bureau or Disaster and Emergency Services as soon as possible and
     within 24 hours, in writing within five days (DEQ's SSO form, April 2020). No public notification clause; DEQ
-    publishes no list. deq.mt.gov and dphhs.mt.gov did not resolve for the build's client on 2026-11-14.
+    publishes no list. deq.mt.gov and dphhs.mt.gov answered on 2026-11-15 (this build and GitHub's runner).
   - EPA Region 8 issues the permits on tribal land: their reports go to EPA.
 Rows
   - Per operator: <id>-deq-report (the report to DEQ, not published: no web page), or <id>-epa-report.
@@ -40,8 +40,7 @@ Q_LAW = ("MPDES permit standard conditions (MT0020168, Part II.I): noncompliance
          "in writing within five days")
 Q_EPA = ("NPDES permit {permit} (EPA Region 8, tribal land): the 24-hour and five-day noncompliance reports of 40 CFR "
          "122.41(l)(6), to EPA")
-DNS = (" On 2026-11-14 the host did not resolve for the build's client (DNS timed out); the row is watched so the "
-       "refresh records when it answers.")
+DNS = " Answered on 2026-11-15 (this build and GitHub's runner)."
 
 AGENCY = [
     {"id": "mt-deq-hab-map", "agency": "Montana Department of Environmental Quality",
@@ -100,7 +99,7 @@ AGENCY = [
      "records": False, "every_hours": 168,
      "note": ("DEQ's notice of July 21, 2023 (expansion research, 2026-11-09): more than three million gallons of "
               "partially treated wastewater to Warm Springs Creek during construction at the Montana State Hospital, "
-              "DEQ notified June 23. Not ingested: the page could not be read in this build." + DNS),
+              "DEQ notified June 23. Not ingested: it gives no start or end of the release." + DNS),
      "sources": ["mt-news-spills", "mt-deq-warm-springs-2023"]},
     {"id": "mt-deq-records-archive", "agency": "Montana Department of Environmental Quality",
      "name": "Montana DEQ (released public records archive)", "channel_kind": "state_alert_page",
