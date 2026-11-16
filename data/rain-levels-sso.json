@@ -1,12 +1,12 @@
 {
- "built": "2026-11-16T17:41:17Z",
+ "built": "2026-11-16T18:39:59Z",
  "counts": {
   "operators": 28,
   "outside_the_set": 2873,
-  "qualify": 21,
+  "qualify": 28,
   "qualify_by_state": {
-   "AL": 17,
-   "CT": 3,
+   "AL": 23,
+   "CT": 4,
    "FL": 1
   },
   "read": 28
@@ -420,11 +420,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 3,
-    "from": "2025-10-31",
-    "storms": 49,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 4,
+    "newest_rain_report": "2026-06-18",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-04",
    "reports": 30,
@@ -1777,11 +1780,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 9,
-    "from": "2025-10-31",
-    "storms": 49,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 5,
+    "newest_rain_report": "2026-06-08",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-04",
    "reports": 118,
@@ -2554,11 +2560,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 2,
-    "from": "2025-10-31",
-    "storms": 53,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 5,
+    "newest_rain_report": "2026-06-07",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-06",
    "reports": 67,
@@ -3099,11 +3108,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 10,
-    "from": "2025-10-31",
-    "storms": 44,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 0,
+    "newest_rain_report": "2026-11-05",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-03-02",
    "reports": 51,
@@ -3761,7 +3773,7 @@
     "storms": 149
    },
    "possible_in": 0.25,
-   "qualifies": false,
+   "qualifies": true,
    "quiet": {
     "enough": true,
     "followed": 0,
@@ -3771,11 +3783,14 @@
     "storms": 30
    },
    "read": true,
-   "recent": {
-    "followed": 2,
-    "from": "2025-10-31",
-    "storms": 44,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 4,
+    "newest_rain_report": "2026-06-18",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-04-02",
    "reports": 65,
@@ -3788,9 +3803,7 @@
    "storms": 179,
    "usable": true,
    "usable_sources": 1,
-   "why_not": [
-    "newest dated report (2026-06-18) older than 90 days"
-   ]
+   "why_not": []
   },
   "al-city-of-robertsdale": {
    "bands": [
@@ -4187,11 +4200,14 @@
     "storms": 24
    },
    "read": true,
-   "recent": {
-    "followed": 7,
-    "from": "2025-10-31",
-    "storms": 44,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 0,
+    "newest_rain_report": "2026-11-04",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-06-16",
    "reports": 29,
@@ -4802,11 +4818,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 6,
-    "from": "2025-10-31",
-    "storms": 44,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 4,
+    "newest_rain_report": "2026-07-07",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-17",
    "reports": 51,
@@ -5392,7 +5411,7 @@
     "storms": 133
    },
    "possible_in": 0.25,
-   "qualifies": false,
+   "qualifies": true,
    "quiet": {
     "enough": true,
     "followed": 0,
@@ -5402,11 +5421,14 @@
     "storms": 48
    },
    "read": true,
-   "recent": {
-    "followed": 2,
-    "from": "2025-10-31",
-    "storms": 51,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 2,
+    "newest_rain_report": "2026-08-14",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-30",
    "reports": 52,
@@ -5419,9 +5441,7 @@
    "storms": 194,
    "usable": true,
    "usable_sources": 1,
-   "why_not": [
-    "newest dated report (2026-08-14) older than 90 days"
-   ]
+   "why_not": []
   },
   "al-guntersville-water-and-sewer-board": {
    "bands": [
@@ -5940,11 +5960,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 5,
-    "from": "2025-10-31",
-    "storms": 51,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 2,
+    "newest_rain_report": "2026-08-21",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-19",
    "reports": 60,
@@ -6264,11 +6287,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 3,
-    "from": "2025-10-31",
-    "storms": 46,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 10,
+    "newest_rain_report": "2026-01-10",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-03-25",
    "reports": 29,
@@ -7237,11 +7263,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 10,
-    "from": "2025-10-31",
-    "storms": 50,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 0,
+    "newest_rain_report": "2026-11-01",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-02-12",
    "reports": 75,
@@ -8179,11 +8208,14 @@
     "storms": 38
    },
    "read": true,
-   "recent": {
-    "followed": 6,
-    "from": "2025-10-31",
-    "storms": 45,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 0,
+    "newest_rain_report": "2026-11-04",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-02-02",
    "reports": 87,
@@ -10025,14 +10057,17 @@
     "storms": 179
    },
    "possible_in": 0.1,
-   "qualifies": false,
+   "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 5,
-    "from": "2025-10-31",
-    "storms": 49,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 3,
+    "newest_rain_report": "2026-08-08",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-07",
    "reports": 153,
@@ -10045,9 +10080,7 @@
    "storms": 208,
    "usable": true,
    "usable_sources": 1,
-   "why_not": [
-    "newest dated report (2026-08-08) older than 90 days"
-   ]
+   "why_not": []
   },
   "al-mawss": {
    "bands": [
@@ -12175,11 +12208,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 7,
-    "from": "2025-10-31",
-    "storms": 47,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 2,
+    "newest_rain_report": "2026-09-12",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-05",
    "reports": 228,
@@ -12975,11 +13011,14 @@
     "storms": 34
    },
    "read": true,
-   "recent": {
-    "followed": 10,
-    "from": "2025-10-31",
-    "storms": 47,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 1,
+    "newest_rain_report": "2026-10-05",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-22",
    "reports": 63,
@@ -17113,14 +17152,17 @@
     "storms": 136
    },
    "possible_in": 0.1,
-   "qualifies": false,
+   "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 12,
-    "from": "2025-10-31",
-    "storms": 48,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 4,
+    "newest_rain_report": "2026-06-29",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-04",
    "reports": 363,
@@ -17133,9 +17175,7 @@
    "storms": 200,
    "usable": true,
    "usable_sources": 1,
-   "why_not": [
-    "newest dated report (2026-06-29) older than 90 days"
-   ]
+   "why_not": []
   },
   "al-scottsboro-water-sewer-and-gas-board": {
    "bands": [
@@ -17632,11 +17672,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 3,
-    "from": "2025-10-31",
-    "storms": 52,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 2,
+    "newest_rain_report": "2026-08-21",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-25",
    "reports": 31,
@@ -18197,11 +18240,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 4,
-    "from": "2025-10-31",
-    "storms": 42,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 1,
+    "newest_rain_report": "2026-10-09",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-04",
    "reports": 62,
@@ -18634,11 +18680,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 4,
-    "from": "2025-10-31",
-    "storms": 49,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 0,
+    "newest_rain_report": "2026-10-17",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-03-09",
    "reports": 40,
@@ -19027,11 +19076,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 3,
-    "from": "2025-10-31",
-    "storms": 54,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 1,
+    "newest_rain_report": "2026-10-04",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-18",
    "reports": 29,
@@ -19871,7 +19923,7 @@
     "storms": 141
    },
    "possible_in": 0.25,
-   "qualifies": false,
+   "qualifies": true,
    "quiet": {
     "enough": true,
     "followed": 0,
@@ -19881,11 +19933,14 @@
     "storms": 42
    },
    "read": true,
-   "recent": {
-    "followed": 2,
-    "from": "2025-10-31",
-    "storms": 55,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 3,
+    "newest_rain_report": "2026-07-24",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-04",
    "reports": 57,
@@ -19898,9 +19953,7 @@
    "storms": 206,
    "usable": true,
    "usable_sources": 1,
-   "why_not": [
-    "newest dated report (2026-07-24) older than 90 days"
-   ]
+   "why_not": []
   },
   "al-water-works-sewer-board-of-the-city-of-gadsden": {
    "bands": [
@@ -20790,11 +20843,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 8,
-    "from": "2025-10-31",
-    "storms": 51,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 3,
+    "newest_rain_report": "2026-08-07",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-04",
    "reports": 85,
@@ -21074,14 +21130,17 @@
     "storms": 197
    },
    "possible_in": 0.1,
-   "qualifies": false,
+   "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 5,
-    "from": "2025-10-31",
-    "storms": 50,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 5,
+    "newest_rain_report": "2026-06-08",
+    "silent": false,
+    "source": "al-adem-sso-history",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-30",
    "reports": 18,
@@ -21094,9 +21153,7 @@
    "storms": 197,
    "usable": true,
    "usable_sources": 1,
-   "why_not": [
-    "newest dated report (2026-07-07) older than 90 days"
-   ]
+   "why_not": []
   },
   "ct-mdc-hartford": {
    "bands": [
@@ -23962,11 +24019,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 14,
-    "from": "2025-10-31",
-    "storms": 63,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 1,
+    "newest_rain_report": "2026-10-11",
+    "silent": false,
+    "source": "ct-deep",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-04",
    "reports": 401,
@@ -24193,14 +24253,17 @@
     "storms": 218
    },
    "possible_in": 0.1,
-   "qualifies": false,
+   "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 3,
-    "from": "2025-10-31",
-    "storms": 61,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 4,
+    "newest_rain_report": "2026-07-07",
+    "silent": false,
+    "source": "ct-deep",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-02-08",
    "reports": 19,
@@ -24214,9 +24277,7 @@
    "storms": 218,
    "usable": true,
    "usable_sources": 2,
-   "why_not": [
-    "newest dated report (2026-07-07) older than 90 days"
-   ]
+   "why_not": []
   },
   "ct-waterbury-wpca": {
    "bands": [
@@ -25079,11 +25140,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 28,
-    "from": "2025-10-31",
-    "storms": 65,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 0,
+    "newest_rain_report": "2026-10-17",
+    "silent": false,
+    "source": "ct-deep",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-05",
    "reports": 154,
@@ -25525,11 +25589,14 @@
     "storms": 53
    },
    "read": true,
-   "recent": {
-    "followed": 7,
-    "from": "2025-10-31",
-    "storms": 60,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 2,
+    "newest_rain_report": "2026-09-13",
+    "silent": false,
+    "source": "ct-deep",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-19",
    "reports": 47,
@@ -26268,11 +26335,14 @@
    "qualifies": true,
    "quiet": null,
    "read": true,
-   "recent": {
-    "followed": 1,
-    "from": "2025-10-31",
-    "storms": 41,
-    "to": "2026-10-30"
+   "recency": {
+    "in": true,
+    "months_between": 0,
+    "newest_rain_report": "2026-11-02",
+    "silent": false,
+    "source": "fl-dep-pnp",
+    "source_newest": "2026-11-13",
+    "why": null
    },
    "record_from": "2023-01-15",
    "reports": 88,
@@ -26339,10 +26409,8 @@
   "first_day": "2023-01-01",
   "history_points": 1,
   "live_points": 4,
-  "max_report_age_days": 90,
   "min_lift": 1.5,
-  "recent_days": 365,
-  "recent_min_followed": 1,
+  "recency_months": 12,
   "source_max_lag_days": 7,
   "source_min_dated_share": 0.8
  },
@@ -26352,294 +26420,521 @@
    "excluded": null,
    "lag_days": 0.75,
    "latest": "2026-11-13",
-   "records": 1122
+   "newest_published": "2026-11-13",
+   "newest_published_by_state": {
+    "AL": "2026-11-13"
+   },
+   "records": 1122,
+   "silent": false
   },
   "ar-deq-overflow-incidents": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 1.0,
    "latest": "2026-11-10",
-   "records": 932
+   "newest_published": "2026-11-10",
+   "newest_published_by_state": {
+    "AR": "2026-11-10"
+   },
+   "records": 932,
+   "silent": false
   },
   "ca-sd-regional-board-ibwc-spills": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": null,
    "latest": "2026-03-14",
-   "records": 4
+   "newest_published": "2026-03-14",
+   "newest_published_by_state": {
+    "CA": "2026-03-14"
+   },
+   "records": 4,
+   "silent": false
   },
   "ca-swrcb-ciwqs-spills-flatfile": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 4.44,
    "latest": "2026-11-09",
-   "records": 189
+   "newest_published": "2026-11-09",
+   "newest_published_by_state": {
+    "CA": "2026-11-09"
+   },
+   "records": 189,
+   "silent": false
   },
   "co-official-notices": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 4.55,
    "latest": "2026-08-31",
-   "records": 2
+   "newest_published": "2026-08-31",
+   "newest_published_by_state": {
+    "CO": "2026-08-31"
+   },
+   "records": 2,
+   "silent": false
   },
   "ct-deep": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": null,
    "latest": "2026-11-13",
-   "records": 1157
+   "newest_published": "2026-11-13",
+   "newest_published_by_state": {
+    "CT": "2026-11-13"
+   },
+   "records": 1157,
+   "silent": false
   },
   "ct-deep-annual": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 85.67,
    "latest": "2026-09-07",
-   "records": 6
+   "newest_published": "2026-09-07",
+   "newest_published_by_state": {
+    "CT": "2026-09-07"
+   },
+   "records": 6,
+   "silent": false
   },
   "ct-deep-archive": {
    "dated_share": null,
    "excluded": null,
    "lag_days": null,
    "latest": null,
-   "records": 0
+   "newest_published": "2021-11-30",
+   "newest_published_by_state": {
+    "CT": "2021-11-30"
+   },
+   "records": 0,
+   "silent": true
   },
   "dc-water-news": {
    "dated_share": null,
    "excluded": null,
    "lag_days": null,
    "latest": null,
-   "records": 0
+   "newest_published": "2026-02-09",
+   "newest_published_by_state": {
+    "DC": "2025-08-16",
+    "MD": "2026-02-09"
+   },
+   "records": 0,
+   "silent": false
   },
   "de-dnrec-derns-recent-releases": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 0.04,
    "latest": "2026-10-18",
-   "records": 17
+   "newest_published": "2026-10-18",
+   "newest_published_by_state": {
+    "DE": "2026-10-18"
+   },
+   "records": 17,
+   "silent": false
   },
   "echo-sewer-overflow": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 3.0,
    "latest": "2026-11-10",
-   "records": 1096
+   "newest_published": "2026-11-10",
+   "newest_published_by_state": {
+    "AK": "2026-10-26",
+    "AZ": "2026-10-20",
+    "DC": "2026-09-23",
+    "GA": "2026-11-07",
+    "IL": "2026-11-06",
+    "IN": "2026-08-12",
+    "KY": "2026-01-05",
+    "MA": "2026-11-07",
+    "MD": "2026-02-09",
+    "MN": "2024-06-18",
+    "MS": "2026-11-05",
+    "NE": "2026-10-01",
+    "NH": "2026-09-24",
+    "NM": "2026-10-23",
+    "PR": "2026-11-10",
+    "RI": "2026-11-07",
+    "SD": "2026-11-02",
+    "UT": "2026-08-17",
+    "WA": "2023-11-03"
+   },
+   "records": 1096,
+   "silent": false
   },
   "fl-dep-pnp": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 1.42,
    "latest": "2026-11-13",
-   "records": 1308
+   "newest_published": "2026-11-13",
+   "newest_published_by_state": {
+    "FL": "2026-11-13"
+   },
+   "records": 1308,
+   "silent": false
   },
   "ga-epd-spills": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 3.0,
    "latest": "2026-11-12",
-   "records": 1076
+   "newest_published": "2026-11-12",
+   "newest_published_by_state": {
+    "GA": "2026-11-12"
+   },
+   "records": 1076,
+   "silent": false
   },
   "hi-doh-cwb-events-api": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 0.0,
    "latest": "2026-10-30",
-   "records": 22
+   "newest_published": "2026-11-13",
+   "newest_published_by_state": {
+    "HI": "2026-11-13"
+   },
+   "records": 22,
+   "silent": false
   },
   "ia-dnr-focomp-incoming-reports": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 0.24,
    "latest": "2026-11-04",
-   "records": 96
+   "newest_published": "2026-11-04",
+   "newest_published_by_state": {
+    "IA": "2026-11-04"
+   },
+   "records": 96,
+   "silent": false
   },
   "ia-dnr-news-releases": {
    "dated_share": null,
    "excluded": null,
    "lag_days": null,
    "latest": null,
-   "records": 0
+   "newest_published": "2025-04-26",
+   "newest_published_by_state": {
+    "IA": "2025-04-26"
+   },
+   "records": 0,
+   "silent": true
   },
   "ia-waterloo-sso-notices": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": null,
    "latest": "2026-10-01",
-   "records": 11
+   "newest_published": "2026-10-01",
+   "newest_published_by_state": {
+    "IA": "2026-10-01"
+   },
+   "records": 11,
+   "silent": false
   },
   "ks-leavenworth-sso-transparency": {
    "dated_share": 0.0,
    "excluded": null,
    "lag_days": null,
    "latest": null,
-   "records": 2
+   "newest_published": "2026-04-27",
+   "newest_published_by_state": {
+    "KS": "2026-04-27"
+   },
+   "records": 2,
+   "silent": false
   },
   "la-baton-rouge-quarterly": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 63.96,
    "latest": "2026-09-28",
-   "records": 119
+   "newest_published": "2026-09-28",
+   "newest_published_by_state": {
+    "LA": "2026-09-28"
+   },
+   "records": 119,
+   "silent": false
   },
   "ma-massdep": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 2.92,
    "latest": "2026-11-13",
-   "records": 2545
+   "newest_published": "2026-11-13",
+   "newest_published_by_state": {
+    "MA": "2026-11-13"
+   },
+   "records": 2545,
+   "silent": false
   },
   "md-baltimore-sso": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": null,
    "latest": "2026-11-15",
-   "records": 153
+   "newest_published": "2026-11-15",
+   "newest_published_by_state": {
+    "MD": "2026-11-15"
+   },
+   "records": 153,
+   "silent": false
   },
   "md-mde-overflows": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": null,
    "latest": "2026-11-13",
-   "records": 867
+   "newest_published": "2026-11-13",
+   "newest_published_by_state": {
+    "MD": "2026-11-13"
+   },
+   "records": 867,
+   "silent": false
   },
   "mi-egle-mienviro-cso-sso-list": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 0.74,
    "latest": "2026-11-14",
-   "records": 1837
+   "newest_published": "2026-11-14",
+   "newest_published_by_state": {
+    "MI": "2026-11-14"
+   },
+   "records": 1837,
+   "silent": false
   },
   "mn-mces-spill-notices": {
    "dated_share": null,
    "excluded": null,
    "lag_days": null,
    "latest": null,
-   "records": 0
+   "newest_published": null,
+   "newest_published_by_state": {},
+   "records": 0,
+   "silent": true
   },
   "mn-wlssd-overflows": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": null,
    "latest": "2026-11-04",
-   "records": 9
+   "newest_published": "2026-11-04",
+   "newest_published_by_state": {
+    "MN": "2026-11-04"
+   },
+   "records": 9,
+   "silent": false
   },
   "mo-kc-water-overflow-notices": {
    "dated_share": null,
    "excluded": null,
    "lag_days": null,
    "latest": null,
-   "records": 0
+   "newest_published": "2025-08-04",
+   "newest_published_by_state": {
+    "MO": "2025-08-04"
+   },
+   "records": 0,
+   "silent": true
   },
   "mo-msd-stl-project-clear": {
    "dated_share": 0.0,
    "excluded": null,
    "lag_days": null,
    "latest": null,
-   "records": 1
+   "newest_published": "2025-12-31",
+   "newest_published_by_state": {
+    "MO": "2025-12-31"
+   },
+   "records": 1,
+   "silent": false
   },
   "nc-dwr-sso-2022-2025": {
    "dated_share": null,
    "excluded": null,
    "lag_days": null,
    "latest": null,
-   "records": 0
+   "newest_published": "2025-11-01",
+   "newest_published_by_state": {
+    "NC": "2025-11-01"
+   },
+   "records": 0,
+   "silent": true
   },
   "nc-dwr-sso-2026": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 0.67,
    "latest": "2026-10-29",
-   "records": 571
+   "newest_published": "2026-10-29",
+   "newest_published_by_state": {
+    "NC": "2026-10-29"
+   },
+   "records": 571,
+   "silent": false
   },
   "nh-permittees": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": null,
    "latest": "2026-09-17",
-   "records": 22
+   "newest_published": "2026-09-17",
+   "newest_published_by_state": {
+    "NH": "2026-09-17"
+   },
+   "records": 22,
+   "silent": false
   },
   "ny-dec-sprtk": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 0.24,
    "latest": "2026-08-31",
-   "records": 5360
+   "newest_published": "2026-08-31",
+   "newest_published_by_state": {
+    "NY": "2026-08-31"
+   },
+   "records": 5360,
+   "silent": false
   },
   "ny-dec-sprtk-web": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 0.08,
    "latest": "2026-11-14",
-   "records": 92
+   "newest_published": "2026-11-14",
+   "newest_published_by_state": {
+    "NY": "2026-11-14"
+   },
+   "records": 92,
+   "silent": false
   },
   "oh-columbus-sewer-overflow": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": null,
    "latest": "2026-10-31",
-   "records": 312
+   "newest_published": "2026-10-31",
+   "newest_published_by_state": {
+    "OH": "2026-10-31"
+   },
+   "records": 312,
+   "silent": false
   },
   "or-bes-news-rss": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 0.44,
    "latest": "2026-10-21",
-   "records": 13
+   "newest_published": "2026-10-21",
+   "newest_published_by_state": {
+    "OR": "2026-10-21"
+   },
+   "records": 13,
+   "silent": false
   },
   "ri-echo-dfr": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 189.0,
    "latest": "2026-11-05",
-   "records": 13
+   "newest_published": "2026-11-05",
+   "newest_published_by_state": {
+    "RI": "2026-11-05"
+   },
+   "records": 13,
+   "silent": false
   },
   "sc-florence-sso-notices": {
    "dated_share": null,
    "excluded": null,
    "lag_days": null,
    "latest": null,
-   "records": 0
+   "newest_published": "2025-10-14",
+   "newest_published_by_state": {
+    "SC": "2025-10-14"
+   },
+   "records": 0,
+   "silent": true
   },
   "tx-tceq-sso-opendata": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 3.0,
    "latest": "2026-08-29",
-   "records": 3657
+   "newest_published": "2026-08-29",
+   "newest_published_by_state": {
+    "TX": "2026-08-29"
+   },
+   "records": 3657,
+   "silent": false
   },
   "va-deq-prep": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 0.5,
    "latest": "2026-11-12",
-   "records": 897
+   "newest_published": "2026-11-12",
+   "newest_published_by_state": {
+    "VA": "2026-11-12"
+   },
+   "records": 897,
+   "silent": false
   },
   "va-vdh-advisories": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 0.0,
    "latest": "2026-08-05",
-   "records": 4
+   "newest_published": "2026-08-26",
+   "newest_published_by_state": {
+    "VA": "2026-08-26"
+   },
+   "records": 4,
+   "silent": false
   },
   "vt-dec": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": null,
    "latest": "2026-11-05",
-   "records": 176
+   "newest_published": "2026-11-05",
+   "newest_published_by_state": {
+    "VT": "2026-11-05"
+   },
+   "records": 176,
+   "silent": false
   },
   "wa-ecology-sewage-spills": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": null,
    "latest": "2026-11-07",
-   "records": 77
+   "newest_published": "2026-11-07",
+   "newest_published_by_state": {
+    "WA": "2026-11-07"
+   },
+   "records": 77,
+   "silent": false
   },
   "wi-mmsd-storm-updates": {
    "dated_share": 1.0,
    "excluded": null,
    "lag_days": 5.23,
    "latest": "2026-09-03",
-   "records": 4
+   "newest_published": "2026-09-03",
+   "newest_published_by_state": {
+    "WI": "2026-09-03"
+   },
+   "records": 4,
+   "silent": false
   }
  },
  "state_grades": {

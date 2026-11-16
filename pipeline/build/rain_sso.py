@@ -22,10 +22,11 @@ The test (rain_history's own method, applied to an operator's sanitary sewer ove
                (1.5). An operator whose overflows are mostly dry-weather blockages and breaks has a lift near 1 and gets
                nothing.
 Guards (each is a reason in the file when it fails):
-  recency      at least recent_min_followed storms in the last recent_days of the period followed by a report (a
-               repaired system drops out)
-  freshness    the operator's newest dated report is at most max_report_age_days old (a source that stopped or reports
-               late does not carry a caution)
+  recency      (owner, 2026-11-16: "Seems like no overflows in a year would be a safe toggle off") out when no
+               rain-driven overflow was reported in the recency_months (12) before its source's newest published report
+               (the newest start among that source's records for the state; so a feed that runs late does not shorten
+               the year); out when that source has published nothing in the last recency_months (silent). Nothing
+               else turns it off sooner.
   sources      a source counts only when, over its last 12 months, more than source_min_dated_share of its sewage
                reports are dated, its median delay to a report is at most source_max_lag_days, and it is not published
                in batches (the coverage grade "Dated reports", per source)
@@ -69,15 +70,13 @@ DEFAULTS = {
     "min_lift": 1.5,
     "history_points": 1,
     "live_points": 4,
-    "recent_days": 365,
-    "recent_min_followed": 1,
-    "max_report_age_days": 90,
+    "recency_months": 12,
     "source_min_dated_share": 0.8,
     "source_max_lag_days": 7,
     "approved": [],
 }
-LABELS = {"likely": "Discharge likely: heavy rain, no report received",       # the combined sewer caution's labels
-          "possible": "Discharge possible: heavy rain, no report received"}
+LABELS = {"likely": "Overflow likely: heavy rain, no report received",       # owner, 2026-11-16: "Use 'Overflow
+          "possible": "Overflow possible: heavy rain, no report received"}    # possible' for the separate sewer label"
 
 
 def settings(rules: dict | None) -> dict:
@@ -258,16 +257,45 @@ def signal(daily: dict[date, float], spans: list[dict], a: dict) -> dict:
             "lift": round(share / base, 2) if share is not None and base else None}
 
 
-def recent(a: dict, cfg: dict) -> dict:
-    """Storms in the last recent_days of the period and how many were followed by a report. Pure."""
-    per = a.get("period")
-    if not per:
-        return {"from": None, "storms": 0, "followed": 0}
-    p1 = date.fromisoformat(per[1])
-    since = p1 - timedelta(days=int(cfg["recent_days"]) - 1)
-    sts = [s for s in a.get("_storms") or [] if s["first"] >= since]
-    return {"from": since.isoformat(), "to": p1.isoformat(), "storms": len(sts),
-            "followed": sum(1 for s in sts if s["followed"])}
+def months_back(d: date, n: int) -> date:
+    """The same day n months before d (the month's last day where it has fewer days). Pure."""
+    y, m = divmod(d.year * 12 + d.month - 1 - n, 12)
+    m += 1
+    last = (date(y + (m == 12), m % 12 + 1, 1) - timedelta(days=1)).day
+    return date(y, m, min(d.day, last))
+
+
+def months_between(a: date, b: date) -> int:
+    """Whole months from a to b. Pure."""
+    return (b.year - a.year) * 12 + b.month - a.month - (1 if b.day < a.day else 0)
+
+
+def recency(daily: dict[date, float], spans: list[dict], newest_by_source: dict[str, date], cfg: dict, today: date,
+            rung: float = 0.1) -> dict:
+    """The 12-month rule (owner, 2026-11-16): the operator's newest rain-driven report (a report covering a day from a
+    storm's first day to the day after its last, the feature's own rain test), the source it came from, that source's
+    newest published report for the state, the months between, silent or not, in or out. Pure."""
+    n = int(cfg["recency_months"])
+    sts = rh.storms(daily, min(daily), max(daily), rung) if daily else []
+    win = window_days(sts)
+    rain = [s for s in spans if follows_rain(s, win)]
+    if not rain:
+        return {"in": False, "newest_rain_report": None, "source": None, "source_newest": None,
+                "months_between": None, "silent": False, "why": "no rain-driven overflow report on record"}
+    top = max(rain, key=lambda s: (s["first"], str(s.get("source_id"))))
+    sid = top.get("source_id")
+    anchor = newest_by_source.get(sid)
+    out = {"newest_rain_report": top["first"].isoformat(), "source": sid,
+           "source_newest": anchor.isoformat() if anchor else None,
+           "months_between": months_between(top["first"], anchor) if anchor else None,
+           "silent": anchor is None or anchor < months_back(today, n)}
+    if out["silent"]:
+        return {**out, "in": False, "why": f"its source {sid} has published no report in the last {n} months"
+                + (f" (newest {anchor.isoformat()})" if anchor else "")}
+    if top["first"] < months_back(anchor, n):
+        return {**out, "in": False, "why": f"no rain-driven overflow reported in the {n} months to {anchor.isoformat()}, "
+                f"its source's newest report (newest rain-driven report {top['first'].isoformat()})"}
+    return {**out, "in": True, "why": None}
 
 
 def verdict(entry: dict, cfg: dict, today: date, grades: dict | None = None) -> list[str]:
@@ -284,12 +312,9 @@ def verdict(entry: dict, cfg: dict, today: date, grades: dict | None = None) -> 
     if lift is None or lift < float(cfg["min_lift"]) - 1e-9:
         why.append(f"no strong rain signal (lift {lift if lift is not None else 'not computed'}; "
                    f"{cfg['min_lift']} needed)")
-    rc = entry.get("recent") or {}
-    if (rc.get("followed") or 0) < int(cfg["recent_min_followed"]):
-        why.append(f"no storm in the last {cfg['recent_days']} days of its record followed by a report")
-    newest = entry.get("newest_report")
-    if not newest or (today - date.fromisoformat(newest)).days > int(cfg["max_report_age_days"]):
-        why.append(f"newest dated report ({newest or 'none'}) older than {cfg['max_report_age_days']} days")
+    rc = entry.get("recency")
+    if rc is not None and rc.get("in") is not True:
+        why.append(rc.get("why") or "no rain-driven overflow reported in the last year")
     return why
 
 
@@ -317,11 +342,10 @@ def analyse_operator(op: str, daily: dict[date, float], spans: list[dict], cover
     the verdict. Pure."""
     a = rh.analyse(daily, spans, coverage_end, hist_cfg, today)
     sig = signal(daily, spans, a)
-    rc = recent(a, cfg)
     pl = places(spans, a)
     a.pop("_storms", None)
     a.pop("_every", None)
-    entry = {"op": op, **a, **sig, "recent": rc, "places": pl,
+    entry = {"op": op, **a, **sig, "places": pl,
              "newest_report": max(s["first"] for s in spans).isoformat() if spans else None}
     return entry
 
@@ -423,11 +447,19 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
     names = dict(names or {})
     state_of: dict[str, str] = {}
     all_points: dict[str, list] = defaultdict(list)
+    newest_pub: dict[tuple, date] = {}
     for sid, recs in sources:
         for r in recs:
             if not r.get("source_id"):
                 r["source_id"] = sid
         fig = source_figures(recs, today)
+        for r in recs:      # each source's newest published report, by state (the 12-month rule's anchor)
+            d0 = rh.rain_day(r.get("started_at"), r.get("time_precision") if r.get("time_precision") in DATED else "day")
+            st = str(r.get("state") or "").upper()
+            if d0 is not None and d0 <= today and r.get("time_precision") not in ("month", "year"):
+                k = (sid, st)
+                if k not in newest_pub or d0 > newest_pub[k]:
+                    newest_pub[k] = d0
         why = source_ok(fig, cfg, bool((batches or {}).get(sid)))
         got, lo = sso_spans(recs, operator_of, cfg, placements)
         for r in recs:      # the rain point: the median of every dated report point of the operator, any year
@@ -503,6 +535,8 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
                  "live_points": [list(p) for p in report_points(
                      [ev["point"] for ev in e["places"]["events"] if ev["point"]], int(cfg["live_points"]))]}
         entry["history_why_not"] = entry.pop("why_not", None)
+        entry["recency"] = recency(daily, sp, {k[0]: v for k, v in newest_pub.items() if k[1] == entry["state"]},
+                                   cfg, today, float(hist_cfg["rungs_in"][0]))
         why = verdict(entry, cfg, today, grades)
         entry["qualifies"] = not why
         entry["why_not"] = why
@@ -512,7 +546,13 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
            "today": today.isoformat(), "rain_record": rh.RAIN_RECORD,
            "settings": {k: v for k, v in cfg.items() if k not in ("doc", "source", "labels")},
            "history_settings": hist_cfg,
-           "sources": {sid: {**src_figs[sid], "excluded": src_why[sid]} for sid in sorted(src_figs)},
+           "sources": {sid: {**src_figs[sid], "excluded": src_why[sid],
+                             "newest_published": max((v.isoformat() for k, v in newest_pub.items() if k[0] == sid), default=None),
+                             "newest_published_by_state": {k[1]: v.isoformat() for k, v in sorted(newest_pub.items())
+                                                           if k[0] == sid},
+                             "silent": max((v for k, v in newest_pub.items() if k[0] == sid), default=date.min)
+                             < months_back(today, int(cfg["recency_months"]))}
+                       for sid in sorted(src_figs)},
            "state_grades": {st: (grades or {}).get(st) for st in sorted({o["state"] for o in ops.values()
                                                                           if o["op"] in approved})},
            "counts": {"operators": len(ops), "outside_the_set": outside, "read": sum(1 for o in ops.values() if o.get("read")),
@@ -530,17 +570,19 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
 # ---------------------------------------------------------------- what the other stages read
 
 def too_old(entry: dict, cfg: dict, today: date | None) -> str | None:
-    """The freshness rule read against today, not the day the file was built (a file kept by failed passes or the
-    seed never carries a caution past it: review 2026-11-16 P1-2). Pure."""
+    """The silence rule read against today, not the day the file was built: a source with no published report in the
+    last recency_months drops the operator even when the file was kept by failed passes or is the seed. Pure."""
     if today is None:
         return None
-    newest = entry.get("newest_report")
+    rc = entry.get("recency") or {}
+    n = int(cfg["recency_months"])
     try:
-        age = (today - date.fromisoformat(str(newest)[:10])).days
+        anchor = date.fromisoformat(str(rc.get("source_newest"))[:10])
     except ValueError:
-        return f"newest dated report ({newest or 'none'}) older than {cfg['max_report_age_days']} days"
-    return (f"newest dated report ({newest}) older than {cfg['max_report_age_days']} days"
-            if age > int(cfg["max_report_age_days"]) else None)
+        return f"its source has published no report in the last {n} months"
+    if anchor < months_back(today, n):
+        return f"its source {rc.get('source')} has published no report in the last {n} months (newest {anchor.isoformat()})"
+    return None
 
 
 def qualifying(levels: dict | None, rules: dict | None, grades: dict | None | bool = False,
@@ -789,7 +831,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
                "suppressed_by": [], "level": "possible", "label": cfg["labels"]["possible"],
                "waters": sorted(tags), "reaches": keys, "named_waters": named,
                "history": {k: e.get(k) for k in ("period", "storms", "followed", "reports", "lift", "share_follow",
-                                                  "baseline", "possible_in", "likely_in", "recent", "newest_report",
+                                                  "baseline", "possible_in", "likely_in", "recency", "newest_report",
                                                   "bands", "lowest_reported", "possible", "likely", "notes")},
                "evidence": evidence(e, "possible", None, named, levels or {})}
         for ep in eps:
