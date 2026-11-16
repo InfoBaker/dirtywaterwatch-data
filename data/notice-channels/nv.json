@@ -620,24 +620,22 @@
    "checked": "2026-11-16",
    "id": "nv-ose-hab-reports",
    "name": "Nevada Office of State Epidemiology (Harmful Algal Bloom reports)",
-   "channel_kind": "state_alert_page",
+   "channel_kind": "feed",
    "urls": [
     "https://nvose.org/hot-topic-harmful-algal-blooms/"
    ],
    "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": true,
-   "unmonitored_reason": null,
-   "metadata_only": true,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "nv-ose-hab-reports",
    "publishes": "status",
-   "records": false,
-   "every_hours": 24,
-   "noun": "Voluntary page",
+   "noun": "Data feed",
    "sources": [
     "nv-ose-hab-reports"
    ],
-   "note": "The state's list of active bloom advisories, with the level and the date each took effect, including waters outside the state parks (Lake Mohave, Walker Lake, Virginia Lake and two ponds on 2026-11-15). Watched without records until a feed is built. Blooms, not sewage.",
+   "note": "The state's list of active bloom advisories, with the level and the date each took effect, including waters outside the state parks. Read by the pipeline since November 16, 2026 (ingest.nv_ose_hab_list): eleven advisories under eight headings on the runner's read of 2026-11-16; Virginia Lake, Mountain View Pond and South Meadows Community Pond have no water record and are listed with their place. Blooms, not sewage. Voluntary.",
    "barrier": null
   },
   {
