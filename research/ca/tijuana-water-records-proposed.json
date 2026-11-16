@@ -1,0 +1,187 @@
+{
+ "about": "Water records the San Diego Water Board's table of USIBWC spill and transboundary flow events (source ca-sd-regional-board-ibwc-spills, read 2026-11-15, 16 rows) would place its reports on, none of which is on file: no California record in data/waters-*.json is named Tijuana River, Tijuana River Estuary, Smuggler's Gulch, Goat Canyon, Stewart's Drain, Silva Drain or Canyon del Sol. Proposed only; nothing here is a water record. The feed (pipeline/ingest/ca_sd_tijuana_table.py) places a report on a California record of the name it gives (record name or alias) whose box meets the Tijuana River valley (-117.16, 32.50, -116.95, 32.62), so a record built under any slug with that name is picked up on the next run. The Pacific Ocean record (pacific-ocean-ca) exists; no row names it. The table gives no coordinates: the reference points are the USGS names service's, for building the records, never a report's point. Names and identifiers were looked up on 2026-11-15 in the National Map's NHD and geographic names services and the Census TIGERweb hydrography.",
+ "state": "CA",
+ "source": "ca-sd-regional-board-ibwc-spills",
+ "reports": 16,
+ "reports_naming_a_water": 14,
+ "reports_naming_no_water": 2,
+ "rows": [
+  {
+   "name": "Tijuana River",
+   "proposed_slug": "tijuana-river-ca",
+   "kind": "river",
+   "state": "CA",
+   "reports": 1,
+   "sources": [
+    "ca-sd-regional-board-ibwc-spills"
+   ],
+   "towns": [
+    "San Diego",
+    "Imperial Beach"
+   ],
+   "gnis_id": "255756",
+   "nhd": "NHD high resolution flowlines of GNIS 255756 'Tijuana River' (34 flowlines meet the valley box, 20.6 km, part in Mexico; reach codes 18070305...), cut to California as the other NHD records are",
+   "reference_points": [
+    [
+     32.55534,
+     -117.12921
+    ],
+    [
+     32.54173,
+     -117.04837
+    ]
+   ],
+   "reference_points_from": "USGS GNIS 255756, Streams (Mouth) layer of the National Map's geographic names service (mouth and source points as listed)",
+   "build": "python -m ingest.waters_from_nhd --names research/ca/tijuana-water-records-proposed.json --state CA (one NHD water of this name in CA)",
+   "basis": "the table's row of Tijuana River Transboundary Flow Events names the river as its discharge location; the canyons below drain to it or to its estuary"
+  },
+  {
+   "name": "Tijuana River Estuary",
+   "proposed_slug": "tijuana-river-estuary-ca",
+   "kind": "bay",
+   "state": "CA",
+   "reports": 0,
+   "sources": [
+    "ca-sd-regional-board-ibwc-spills"
+   ],
+   "towns": [
+    "San Diego",
+    "Imperial Beach"
+   ],
+   "gnis_id": null,
+   "nhd": "no named NHD estuary or waterbody: NHD gives only unnamed marsh (FType 466) and pond polygons around the mouth, the river's own flowlines and Oneonta Slough (GNIS 246917, the estuary's northern arm, 32.56534, -117.13115)",
+   "reference_points": [
+    [
+     32.56534,
+     -117.13115
+    ]
+   ],
+   "reference_points_from": "USGS GNIS 246917 'Oneonta Slough' (Other Hydrographic Features layer)",
+   "build": "a hand record: an outline from the Tijuana River National Estuarine Research Reserve boundary (NOAA) or the NHD marsh polygons at the mouth, with alias 'Oneonta Slough'; not buildable by the NHD name pass",
+   "basis": "no table row names the estuary; it is needed for a modeled path from the river and the canyons to the sea"
+  },
+  {
+   "name": "Smuggler's Gulch",
+   "proposed_slug": "smuggler-gulch-ca",
+   "kind": "stream",
+   "state": "CA",
+   "reports": 5,
+   "sources": [
+    "ca-sd-regional-board-ibwc-spills"
+   ],
+   "towns": [
+    "San Diego"
+   ],
+   "gnis_id": "249613",
+   "aliases": [
+    "Smuggler's Gulch",
+    "Smugglers Gulch"
+   ],
+   "nhd": "GNIS 249613 'Smuggler Gulch' is a Valley (landform) feature; no NHD flowline carries the name in the valley",
+   "reference_points": [
+    [
+     32.54432,
+     -117.08835
+    ],
+    [
+     32.53934,
+     -117.08654
+    ]
+   ],
+   "reference_points_from": "USGS GNIS 249613, Landforms layer of the National Map's geographic names service",
+   "build": "a hand record: the unnamed NHD flowline down the gulch from the border to the Tijuana River, named from GNIS 249613",
+   "basis": "the table's discharge location for five rows (Spill Events and dry weather Canyon Collector Transboundary Flow Events)"
+  },
+  {
+   "name": "Goat Canyon",
+   "proposed_slug": "goat-canyon-ca",
+   "kind": "stream",
+   "state": "CA",
+   "reports": 4,
+   "sources": [
+    "ca-sd-regional-board-ibwc-spills"
+   ],
+   "towns": [
+    "San Diego"
+   ],
+   "gnis_id": "242756",
+   "nhd": "GNIS 242756 'Goat Canyon' is a Valley (landform) feature; no NHD flowline carries the name in the valley",
+   "reference_points": [
+    [
+     32.54125,
+     -117.10703
+    ],
+    [
+     32.53697,
+     -117.09966
+    ]
+   ],
+   "reference_points_from": "USGS GNIS 242756, Landforms layer of the National Map's geographic names service",
+   "build": "a hand record: the unnamed NHD flowline down the canyon from the border to the estuary, named from GNIS 242756",
+   "basis": "the table's discharge location for four rows (two at the Goat Canyon Pump Station)"
+  },
+  {
+   "name": "Stewart's Drain",
+   "proposed_slug": "stewarts-drain-ca",
+   "kind": "canal",
+   "state": "CA",
+   "reports": 2,
+   "sources": [
+    "ca-sd-regional-board-ibwc-spills"
+   ],
+   "towns": [
+    "San Diego"
+   ],
+   "gnis_id": null,
+   "aliases": [
+    "Stewarts Drain"
+   ],
+   "nhd": "no GNIS or NHD feature of this name in the valley box (queried 2026-11-15)",
+   "reference_points": [],
+   "reference_points_from": null,
+   "build": "a hand record from a public map of USIBWC's canyon collectors (none read yet); no coordinates guessed",
+   "basis": "the table's discharge location for two rows (dry weather Canyon Collector Transboundary Flow Events, 2026)"
+  },
+  {
+   "name": "Silva Drain",
+   "proposed_slug": "silva-drain-ca",
+   "kind": "canal",
+   "state": "CA",
+   "reports": 1,
+   "sources": [
+    "ca-sd-regional-board-ibwc-spills"
+   ],
+   "towns": [
+    "San Diego"
+   ],
+   "gnis_id": null,
+   "nhd": "no GNIS or NHD feature of this name in the valley box (queried 2026-11-15)",
+   "reference_points": [],
+   "reference_points_from": null,
+   "build": "a hand record from a public map of USIBWC's canyon collectors (none read yet); no coordinates guessed",
+   "basis": "the table's discharge location for one row (2025-03-21 to 2025-05-21)"
+  },
+  {
+   "name": "Canyon del Sol",
+   "proposed_slug": "canyon-del-sol-ca",
+   "kind": "stream",
+   "state": "CA",
+   "reports": 1,
+   "sources": [
+    "ca-sd-regional-board-ibwc-spills"
+   ],
+   "towns": [
+    "San Diego"
+   ],
+   "gnis_id": null,
+   "aliases": [
+    "Del Sol Canyon"
+   ],
+   "nhd": "no GNIS or NHD feature of this name in the valley box (queried 2026-11-15)",
+   "reference_points": [],
+   "reference_points_from": null,
+   "build": "a hand record from a public map of USIBWC's canyon collectors (none read yet); no coordinates guessed",
+   "basis": "the table's discharge location 'Del Sol Canyon Collector' for one row (2025-06-15 to 2025-11-19)"
+  }
+ ]
+}

@@ -4,9 +4,10 @@ url: "https://www.nps.gov/cure/learn/news/toxic-algae-detected-in-blue-mesa-rese
 homepage: "https://www.nps.gov/cure/learn/news/toxic-algae-detected-in-blue-mesa-reservoir.htm"
 kind: "html"
 level: "federal"
-# Notes (research/co, status used, verified fetched, checked 2026-11-14): The August 13, 2026
+# Notes (research/co, status used, verified fetched, checked 2026-11-15): The August 13, 2026
 #   release (toxic algae at low levels in the Iola Basin, yellow caution signs) is read in the
-#   co-official-notices reviewed set; the park's news RSS did not answer on 2026-11-14.
+#   co-official-notices reviewed set; the park's news feed, read 2026-11-15, holds no later algae
+#   release (newest item 2026-09-18).
 cadence: null
 license: "none stated"
 attribution: "National Park Service"
@@ -18,4 +19,4 @@ access: ["html"]
 access_detail: null
 machine_readable: false
 legal_basis: null
-checked: "2026-11-14"
+checked: "2026-11-15"
