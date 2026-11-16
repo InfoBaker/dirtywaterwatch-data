@@ -76,8 +76,8 @@ DEFAULTS = {
     "source_max_lag_days": 7,
     "approved": [],
 }
-LABELS = {"likely": "Overflow likely: heavy rain, no report received",
-          "possible": "Overflow possible: heavy rain, no report received"}
+LABELS = {"likely": "Discharge likely: heavy rain, no report received",       # the combined sewer caution's labels
+          "possible": "Discharge possible: heavy rain, no report received"}
 
 
 def settings(rules: dict | None) -> dict:
