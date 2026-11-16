@@ -455,7 +455,7 @@ def test_p3_14_the_generators_and_shared_rules_leave_other_states_identical(monk
     # Astra IA/ID review 2026-11-15 P2-3: Idaho adds its own source (id-deq-cyanohab-risk-table)
     assert S.POLL_END_HORIZON_SOURCES == {"de-dnrec-recreational-water", "sc-des-beach-monitoring", "sc-des-hab",
                                           "nv-state-parks-hab", "pr-drna-beach-notices", "id-deq-cyanohab-risk-table",
-                                          "sc-des-freshwater-swim-advisories"}
+                                          "sc-des-freshwater-swim-advisories", "wi-dnr-beach-health"}
 
 
 def test_p1_4_records_carried_from_earlier_reads_are_cleaned_again():

@@ -573,7 +573,9 @@ def test_the_shared_rule_texts_other_states_cite_are_unchanged():
     rules = json.loads((ROOT / "data" / "rules.json").read_text())["unresolved"]
     for k in ("sample_caution", "day_start_caution"):
         assert not re.search(r"Delaware|Florence|DNREC", rules[k]["rationale"] + rules[k].get("source", ""))
-    assert rules["sample_caution"]["sources"][-1] == "de-dnrec-recreational-water"
+    # Delaware joined the list; Wisconsin's beach feed (its unknown action labels, review 2026-11-16) is appended after it
+    sc = rules["sample_caution"]["sources"]
+    assert sc[sc.index("de-dnrec-recreational-water") + 1:] == ["wi-dnr-beach-health"]
     # Delaware joined the list (Louisiana's Baton Rouge feed, integrated later, is appended after it)
     assert "de-dnrec-derns-recent-releases" in rules["day_start_caution"]["sources"]
     assert "sc-florence-sso-notices" not in rules["day_start_caution"]["sources"]    # no start: re-review P1-1
