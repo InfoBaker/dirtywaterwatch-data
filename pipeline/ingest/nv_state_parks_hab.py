@@ -24,11 +24,14 @@ Record rules
     the last read that listed the water however late the removal is seen (POLL_END_HORIZON_SOURCES), so a removal
     first seen after the page went unread never colours the unread weeks red.
   - A page on which any of the three sections cannot be found, or a section that is not completely readable (a bold
-    heading or an "Updated" date the reader cannot take, text before the first heading, "None at this time" beside a
-    listed water, an advisory paragraph
-    with no heading read before it, a heading in any other form), writes ok=False and the previous records stay: a template change, one changed date format or a
-    failed request never lifts an advisory. A section reading "None at this time." lists no
-    water at that level; it says nothing of waters outside the state parks.
+    heading or an "Updated" date the reader cannot take, text before the first heading, the empty marker beside a
+    listed water, an advisory paragraph with no heading read before it, a heading in any other form, a blank section,
+    or text that is neither a water nor the marker), writes ok=False and the previous records stay: a template change,
+    one changed date format or a failed request never lifts an advisory. A section whose whole text is the explicit
+    empty marker ("None", "None.", "None at this time.", any case; the page used "None" for Danger on 2026-11-16)
+    lists no water at that level; it says nothing of waters outside the state parks. A section ends at the next
+    level's label, the page's next <section> or its footer (the page's passport block follows the Danger section).
+  - A known water written in another case in the paragraph ("WIld Horse Reservoir", 2026-11-16) is that water.
   - Water: the paragraph's own words name it ("Lahontan Reservoir, located in ..."), else the heading. WATERS gives
     each known water its county (raw.county and raw.placement_hint: the status build's county-aware name placement,
     COUNTY_FIELD_STATES, takes a name only on a water record reaching that county) and a cited point: the USGS GNIS
@@ -68,10 +71,18 @@ URL = "https://parks.nv.gov/about/hab-advisory"
 AUTHORITY = "Nevada Division of State Parks (HAB advisories)"
 LEVELS = ("Watch", "Warning", "Danger")
 SECTION = re.compile(r'<label[^>]*>\s*HAB\s+(Watch|Warning|Danger)\s+Advisories\s*</label>(.*?)'
-                     r'(?=<label[^>]*>\s*HAB\s+(?:Watch|Warning|Danger)\s+Advisories|</section>|<footer|$)', re.S | re.I)
+                     r'(?=<label[^>]*>\s*HAB\s+(?:Watch|Warning|Danger)\s+Advisories|</?section\b|<footer|$)', re.S | re.I)
 HEADING = re.compile(r"<p>\s*<strong>\s*(?P<name>[^<(]+?)\s*\(\s*Updated:?\s*(?P<date>[A-Z][a-z]+\.?\s+\d{1,2},\s*\d{4})"
                      r"\s*\)\s*</strong>\s*</p>", re.I)
-NONE = re.compile(r"None at this time", re.I)
+# the explicit empty marker, the whole text of its block: "None", "None.", "None at this time." (any case); "None" inside
+# other words is not the marker, and a section holding anything else unread fails the read
+NONE = re.compile(r"\s*None(?:\s+at\s+this\s+time)?\s*\.?\s*", re.I)
+
+
+def none_marker(fragment: str) -> bool:
+    """True when some block (a paragraph, list item, division, line break) of the fragment is the empty marker alone."""
+    blocks = re.split(r"</?(?:p|li|div|br|h[1-6]|tr|td|section|article)\b[^>]*>", fragment, flags=re.I)
+    return any(NONE.fullmatch(text_of(b)) for b in blocks if text_of(b))
 GNIS = "https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/{}"
 NHD = ("https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/12/query?where=permanent_identifier%3D%27{}%27"
        "&outFields=gnis_name,gnis_id,permanent_identifier&f=json")
@@ -232,8 +243,9 @@ def parse_date(s: str) -> str:
 def water_of(heading: str, text: str) -> str:
     """The water the paragraph names ("Lahontan Reservoir, located in ..."), else the heading."""
     m = re.match(r"\s*([A-Z][A-Za-z' .&-]+?),\s+located in\b", text)
-    name = (m.group(1) if m else heading).strip()
-    return re.sub(r"\s+", " ", name)
+    name = re.sub(r"\s+", " ", (m.group(1) if m else heading).strip())
+    # a known water written in another case ("WIld Horse Reservoir") is that water, by its own name
+    return next((k for k in WATERS if k.casefold() == name.casefold()), name)
 
 
 def parse(page: str) -> tuple[list[dict], str]:
@@ -249,15 +261,17 @@ def parse(page: str) -> tuple[list[dict], str]:
     for lv in LEVELS:
         body = found[lv]
         heads = list(HEADING.finditer(body))
-        if not heads and not NONE.search(text_of(body)):
-            raise ValueError(f"the {lv} section lists no water and does not say 'None at this time'")
+        # a section with no water read is empty only when its whole text is the explicit marker ("None", "None at
+        # this time."): a blank section, or one holding text that is neither a heading read nor the marker, fails
+        if not heads and not NONE.fullmatch(text_of(body)):
+            raise ValueError(f"the {lv} section lists no water and does not say 'None' or 'None at this time'")
         # a complete reading or none (Astra P1-1): every bold heading and every "Updated" date of the section must be
         # a heading read, nothing but the level's picture may stand before the first one, and "None at this time"
         # never stands beside a listed water; else one unreadable heading would lift its water's advisory
         bold = len(re.findall(r"<strong\b", body, re.I))
         dated = len(re.findall(r"\bUpdated\b", text_of(body), re.I))
         lead = text_of(body[:heads[0].start()]) if heads else ""
-        if bold != len(heads) or dated != len(heads) or lead or (heads and NONE.search(text_of(body))):
+        if bold != len(heads) or dated != len(heads) or lead or (heads and none_marker(body)):
             raise ValueError(f"the {lv} section is not completely readable: {len(heads)} heading(s) read of "
                              f"{max(bold, dated)} on the page")
         # every advisory paragraph of the section belongs to a heading read (verification pass P1-1): a heading in

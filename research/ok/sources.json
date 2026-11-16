@@ -97,9 +97,9 @@
   "license": "public domain",
   "legal_basis": "40 CFR 127",
   "status": "rejected",
-  "status_reason": "No Oklahoma report in the current and all-versions extracts of 2026-11-12; one collection system registered (OK0044733, Kickapoo, tribal).",
+  "status_reason": "No Oklahoma report in the current and all-versions extracts of 2026-11-13 (read 2026-11-15); one collection system registered (OK0044733, Kickapoo, tribal).",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -135,7 +135,7 @@
   "license": "None shown.",
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "Layer 4 read 2026-11-14 (safe fields): 1,499 discharge points of 872 permits, updated 2026-06-14; for the 307 sewage permits it holds its points equal EPA's (median 0 m), so it adds no outfall; its permit status is noted on the operator rows. Watched weekly (register).",
+  "status_reason": "Layer 4 read 2026-11-15 (safe fields): 1,499 discharge points of 872 permits, updated 2026-06-14; for the 307 sewage permits it holds its points equal EPA's (median 0 m), so it adds no outfall; its permit status is noted on the operator rows. Watched weekly (register).",
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": ""
@@ -174,7 +174,7 @@
   "license": "unknown",
   "legal_basis": "74 O.S. 2301 (not read)",
   "status": "watch",
-  "status_reason": "The old Check My OK Lake host failed; TravelOK's lake-conditions chooser is the successor candidate, selected-lake results not exposed (2026-11-09). Watched.",
+  "status_reason": "The old Check My OK Lake host failed; TravelOK's lake-conditions chooser is the successor candidate, selected-lake results not exposed (2026-11-09); the runner could not verify the host's certificate (2026-11-15). Watched.",
   "verified": "search_only",
   "checked": "2026-11-14",
   "notes": ""
@@ -208,7 +208,7 @@
   "license": "US government",
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "Program page answers 403 to automated readers (2026-11-09); registered as a barrier.",
+  "status_reason": "Program page answers 403 to automated readers (2026-11-09); registered as a barrier; GitHub's runner also met 403 (2026-11-15).",
   "verified": "search_only",
   "checked": "2026-11-14",
   "notes": ""
@@ -309,9 +309,9 @@
   "license": "U.S. government work",
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Read by the ok-nps-chickasaw-bacteria ingester (2026-11-14): 10 places, sample dates 2026-08-06 to 2026-08-27, 40 results (8 censored '<1'), highest 162.4 (Bear Falls, 2026-08-20), highest geometric mean 113.6; none at the park's threshold (235 weekly, 126 geometric mean), so no record. No unit stated; no posting or removal dates.",
+  "status_reason": "Read by the ok-nps-chickasaw-bacteria ingester (2026-11-15): 10 places, sample dates 2026-08-06 to 2026-08-27, 40 results (8 censored '<1'), highest 162.4 (Bear Falls, 2026-08-20), highest geometric mean 113.6; none at the park's threshold (235 weekly, 126 geometric mean), so no record. No unit stated; no posting or removal dates.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {

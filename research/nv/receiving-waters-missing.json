@@ -1,5 +1,5 @@
 {
- "about": "Water names in Nevada's records that data/receiving-waters-national.json does not hold for NV: the waters the Nevada Division of State Parks' HAB Advisory page names (the Internet Archive's copies of 2025-11-12 and 2026-08-13, read 2026-11-14, the live page refusing the collector's connections; and Wild Horse Reservoir, which the expansion research read on the page on 2026-11-09), one row per name and county, with the USGS GNIS point where GNIS holds the lake in that county. EPA's overflow tables hold no Nevada report; every receiving water of Nevada's permits is already on the national list.",
+ "about": "Water names in Nevada's records that data/receiving-waters-national.json does not hold for NV: the waters the Nevada Division of State Parks' HAB Advisory page names (the Internet Archive's copies of 2025-11-12 and 2026-08-13, read 2026-11-14; and Wild Horse Reservoir, which the expansion research read on the page on 2026-11-09), one row per name and county, with the USGS GNIS point where GNIS holds the lake in that county. EPA's overflow tables hold no Nevada report; every receiving water of Nevada's permits is already on the national list.",
  "state": "NV",
  "waters": 5,
  "records": 4,

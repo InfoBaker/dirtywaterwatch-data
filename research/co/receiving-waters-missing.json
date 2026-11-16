@@ -1,45 +1,22 @@
 {
  "about": "Water names in Colorado's records that data/receiving-waters-national.json does not hold for CO: the waters the state's advisory and notice records name, one row per name and county, with the number of records, how many are open, the county and up to five points where the source gives them. Records naming no water are counted in by_reason. EPA's outfall registry gives every plant outfall its receiving water separately. Written by scripts/mountain_report_water_names.py.",
  "state": "CO",
- "waters": 21,
- "reports": 24,
- "by_reason": {},
- "resolved_names": 1,
- "resolved_reports": 1,
+ "waters": 4,
+ "reports": 4,
+ "by_reason": {
+  "no NHD flowline or waterbody of that name in CO": 2,
+  "2 NHD waters of that name in CO and the reports give no place to choose one": 2
+ },
+ "resolved_names": 17,
+ "resolved_reports": 20,
+ "build": {
+  "date": "2026-11-16",
+  "command": "python -m ingest.waters_from_nhd --names research/co/receiving-waters-missing.json --state CO",
+  "records_built": 1,
+  "names_resolved": 17,
+  "network_requests": 4
+ },
  "rows": [
-  {
-   "name": "Barr Lake",
-   "reports": 2,
-   "open": 2,
-   "county": "Adams County",
-   "points": [],
-   "sources": {
-    "co-official-notices": 1,
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Blue Mesa Reservoir",
-   "reports": 2,
-   "open": 2,
-   "county": "Gunnison County",
-   "points": [],
-   "sources": {
-    "co-official-notices": 1,
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "John Martin Reservoir",
-   "reports": 2,
-   "open": 2,
-   "county": "Bent County",
-   "points": [],
-   "sources": {
-    "co-official-notices": 1,
-    "co-cdphe-toxic-algae": 1
-   }
-  },
   {
    "name": "Blue Heron Lake",
    "reports": 1,
@@ -48,47 +25,8 @@
    "points": [],
    "sources": {
     "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Cherry Creek Reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Cowdrey Reservoir",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Crawford Reservoir",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Deweese Reservoir",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in CO; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Eleven Mile Reservoir",
@@ -98,7 +36,8 @@
    "points": [],
    "sources": {
     "co-cdphe-toxic-algae": 1
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in CO; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Jackson Reservoir",
@@ -108,107 +47,8 @@
    "points": [],
    "sources": {
     "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Lake Hasty",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Lake John",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Martin Lake",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Navajo Lake",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Neenoshe Reservoir",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "North Sterling Reservoir",
-   "reports": 1,
-   "open": 0,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Prewitt Reservoir",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Spinney Mountain Reservoir",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Vega Reservoir",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
-  },
-  {
-   "name": "Willow Creek Reservoir",
-   "reports": 1,
-   "open": 1,
-   "county": null,
-   "points": [],
-   "sources": {
-    "co-cdphe-toxic-algae": 1
-   }
+   },
+   "reason": "2 NHD waters of that name in CO and the reports give no place to choose one"
   },
   {
    "name": "Windsor Lake",
@@ -218,7 +58,149 @@
    "points": [],
    "sources": {
     "co-cdphe-toxic-algae": 1
-   }
+   },
+   "reason": "2 NHD waters of that name in CO and the reports give no place to choose one"
+  }
+ ],
+ "resolved": [
+  {
+   "name": "Barr Lake",
+   "reports": 2,
+   "slugs": [
+    "barr-lake-co"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Adams County"
+  },
+  {
+   "name": "Blue Mesa Reservoir",
+   "reports": 2,
+   "slugs": [
+    "blue-mesa-reservoir-co"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Gunnison County"
+  },
+  {
+   "name": "John Martin Reservoir",
+   "reports": 2,
+   "slugs": [
+    "john-martin-reservoir-co"
+   ],
+   "how": "a water record already holds the name",
+   "county": "Bent County"
+  },
+  {
+   "name": "Cherry Creek Reservoir",
+   "reports": 1,
+   "slugs": [
+    "cherry-creek-reservoir-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Cowdrey Reservoir",
+   "reports": 1,
+   "slugs": [
+    "cowdrey-reservoir-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Crawford Reservoir",
+   "reports": 1,
+   "slugs": [
+    "crawford-reservoir-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Deweese Reservoir",
+   "reports": 1,
+   "slugs": [
+    "deweese-reservoir-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Lake Hasty",
+   "reports": 1,
+   "slugs": [
+    "lake-hasty-co"
+   ],
+   "how": "record built from the name"
+  },
+  {
+   "name": "Lake John",
+   "reports": 1,
+   "slugs": [
+    "lake-john-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Martin Lake",
+   "reports": 1,
+   "slugs": [
+    "martin-lake-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Navajo Lake",
+   "reports": 1,
+   "slugs": [
+    "navajo-lake-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Neenoshe Reservoir",
+   "reports": 1,
+   "slugs": [
+    "neenoshe-reservoir-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "North Sterling Reservoir",
+   "reports": 1,
+   "slugs": [
+    "north-sterling-reservoir-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Prewitt Reservoir",
+   "reports": 1,
+   "slugs": [
+    "prewitt-reservoir-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Spinney Mountain Reservoir",
+   "reports": 1,
+   "slugs": [
+    "spinney-mountain-reservoir-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Vega Reservoir",
+   "reports": 1,
+   "slugs": [
+    "vega-reservoir-co"
+   ],
+   "how": "a water record already holds the name"
+  },
+  {
+   "name": "Willow Creek Reservoir",
+   "reports": 1,
+   "slugs": [
+    "willow-creek-reservoir-co"
+   ],
+   "how": "a water record already holds the name"
   }
  ]
 }

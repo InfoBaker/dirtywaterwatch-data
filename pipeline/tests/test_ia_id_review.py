@@ -247,12 +247,14 @@ def _other_state_records():
 
 def test_shared_status_change_leaves_other_states_intervals_identical_to_state_ia_id():
     """The intervals of invented records of every other poll-period source, hashed at state/ia-id (6110a7f) before
-    Idaho joined POLL_END_HORIZON_SOURCES: byte for byte the same."""
+    Idaho joined POLL_END_HORIZON_SOURCES: byte for byte the same. Pinned again on 2026-11-15 when the rules file's
+    prose took the "we" voice: against the earlier hash (d0f223a7...) only four `rationale` strings differ, the
+    sample caution's ("the site shows its own caution" is now "we show our own caution"); no time, status or rule."""
     from build import status as S
     now = datetime(2026, 8, 10, tzinfo=UTC)
     ivs = [S.event_intervals(r, None, now, None, RULES) for r in _other_state_records()]
     got = hashlib.sha256(json.dumps(ivs, default=str, sort_keys=True).encode()).hexdigest()
-    assert got == "d0f223a7f61641488bc06ade7dd1bf0fa2c229cb53e51f7faa06f31f8fc57d32"
+    assert got == "5ef92850eaf4ace0473c8db38de7952879ec56cb78df6ffea5e74a5a01b0483b"
 
 
 # ------------------------------------------------------------------ Iowa: Waterloo
