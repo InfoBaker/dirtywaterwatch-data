@@ -201,6 +201,9 @@ POLL_END_HORIZON_SOURCES |= {"id-deq-cyanohab-risk-table"}
 # DES's "Swimming Advisory" layer (river and lake sites, ingest/sc_des_advisories.py): an end seen only at a read, the
 # same limit as DES's beach layer; keyed on the source, so no other feed changes
 POLL_END_HORIZON_SOURCES |= {"sc-des-freshwater-swim-advisories"}
+# Wisconsin DNR's beach layer (ingest/wi_dnr_beach_health.py): an advisory's end is the first read that no longer
+# lists it; the same limit as DES's layers; keyed on the source, so no other feed changes
+POLL_END_HORIZON_SOURCES |= {"wi-dnr-beach-health"}
 SYSTEM_WIDE_CONFIRM_HOURS = 48     # common.system_wide_advisory: ages out this long after the last read that showed it
 ADVISORY_TYPES = {"beach_advisory", "beach_closure", "hab_advisory", "shellfish_closure", "rain_advisory"}
 RANK = {None: -1, "grey": 0, "monthly": 1, "unresolved": 2, "yellow": 3, "red": 4}
