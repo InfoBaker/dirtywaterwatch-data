@@ -1,0 +1,30 @@
+id: "in-fort-wayne-cso-notifications"
+name: "Fort Wayne City Utilities CSO Past Seven Days Summary"
+url: "https://utilities.cityoffortwayne.org/sewer-system/cso-notifications"
+homepage: "https://utilities.cityoffortwayne.org/sewer-system/cso-notifications"
+kind: "pdf"
+level: "municipal"
+# Feed row: written by pipeline/ingest/in_fort_wayne_cso.py (data/build/events/in-fort-wayne-cso-notifications.json).
+# Built 2026-11-16: hourly; the page links the latest weekly "CSO Past Seven Days Summary" PDF (updated on
+#   Wednesdays): 39 outfall columns, one row per day, start, end and estimated discharge in million gallons; "no
+#   overflows" banner on a quiet week. Each text piece is placed by its own position (pypdf). One cso record per
+#   overflow, rows split at midnight joined; a revised week replaces its days. Kept in
+#   data/build/in-fort-wayne-cso-state.json. Eastern time, minute. Outfall tied to the registry row of IN0032191 only
+#   when open, with its own point, and on the water the permit names. Earlier weeks stay at their addresses:
+#   --backfill reads them (35 weekly PDFs read 2026-11-16, covering 2026-02-25 to 2026-11-11; the weeks
+#   posted about 2026-10-21 and 2026-11-04 not found at their usual addresses).
+#   The page answers GitHub's runner (barrier recheck 2026-11-16); this machine meets a Cloudflare check on the page
+#   (the PDFs answer).
+# Columns: outfall, date, start, end, million gallons; no receiving water (taken from the permit); no person's details.
+cadence: "1 hour"
+license: "none stated"
+attribution: "Fort Wayne City Utilities"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["IN"]
+access: ["pdf"]
+access_detail: "HTML page linking one PDF per week (/wp-content/uploads/<YYYY>/<MM>/CSO-7-Day-Summary-v2-<YYYY>-<Mon>-<DD>.pdf), made by the city's eRIS report builder: five blocks of up to nine outfall columns, each with Start of CSO Event, End of CSO Event and Event Discharge (MG), one row per day of the week."
+machine_readable: false
+legal_basis: "327 IAC 5-2.2 and 40 CFR 122.38 (Great Lakes CSO public notification); 327 IAC 5-2.1"
+checked: "2026-11-16"

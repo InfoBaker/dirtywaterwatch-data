@@ -50655,7 +50655,7 @@
   "access": [
    "html"
   ],
-  "access_detail": "The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. The page holds a table of the monitoring sites with each one's status and overflow start time. Search snippet: 'If a site is flashing, that represents that a CSO overflow event is occurring or has occurred in the last 48 hours. The date and time listed is the start time of the overflow event and will automatically shut off after 48 hours.' 20 (or 25) monitoring sites.",
+  "access_detail": "One server-rendered table (MainContent_CSOGridView): 20 sites (CSO2 to CSO42, six with a part number such as CSO23-1, and the treatment plant bypass), each with a location, a status (IS, OS, N/A) and the start of an overflow in the past 48 hours or none. No end, no volume, no receiving water. Answers the pipeline's runner (2026-11-16).",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -50674,10 +50674,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "candidate",
-  "status_reason": "Dated CSO starts for Spokane; not collected yet.",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/wa_spokane_cso.py from 2026-11-16: each start the table shows becomes a dated record, end not confirmed; the history grows from the first read. Every site read none on 2026-11-16.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-16",
   "notes": "",
   "area": "wa"
  },
@@ -64927,9 +64927,10 @@
   "water_slugs": [],
   "url": "https://utilities.cityoffortwayne.org/sewer-system/cso-notifications",
   "access": [
-   "html"
+   "html",
+   "pdf"
   ],
-  "access_detail": null,
+  "access_detail": "The page links the latest weekly CSO Past Seven Days Summary PDF (updated on Wednesdays); earlier weeks stay at their addresses (wp-content/uploads/<YYYY>/<MM>/CSO-7-Day-Summary-v2-<YYYY>-<Mon>-<DD>.pdf, read back to January 2025). Each PDF: 39 outfall columns with the start, end and estimated million gallons per day, or a no-overflows banner. No receiving water and no person's details.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -64937,14 +64938,14 @@
   "cannot_fill": [],
   "has_coordinates": false,
   "has_outfall_ids": false,
-  "cadence": null,
+  "cadence": "weekly (posted Wednesdays)",
   "history": null,
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
-  "status": "watch",
-  "status_reason": "HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
-  "verified": "search_only",
-  "checked": "2026-11-14",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/in_fort_wayne_cso.py from 2026-11-16, with --backfill for the earlier weeks: one dated record per overflow (start, end, estimated volume), a quiet week none. The 35 weekly PDFs read on 2026-11-16 (weeks of 2026-02-25 to 2026-11-11, two weeks not at their usual addresses) held 139 overflows, the newest on 2026-09-20; the week of 2026-11-05 to 11-11 reported no overflows.",
+  "verified": "fetched",
+  "checked": "2026-11-16",
   "notes": "",
   "area": "in"
  },
