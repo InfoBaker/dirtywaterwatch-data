@@ -460,15 +460,17 @@ def name_score(target_ws: list[str], gnis: str | None, state=None) -> float:
     """How well an NHD GNIS name matches a target's name: 1 equal (spaces, numbers and abbreviations
     aside), 0.9 the GNIS name inside the target (with a kind word), 0.85 the target inside the GNIS name
     (the target has no kind word: 'moodna', 'cazenovia'), 0.8 a close spelling (same first letter,
-    10+ letters), else 0. state: in status.ACCENT_FOLD_STATES (Puerto Rico) the best score over the Spanish and
-    English forms of both names with their accents folded (status.name_forms_in: 'CIBUCO RIVER' is 'Río Cibuco');
-    every other state as before."""
+    10+ letters), else 0. state: in status.ACCENT_FOLD_STATES (Puerto Rico) 1 when a form of one name is a form of
+    the other, accents folded (status.name_forms_in: 'CIBUCO RIVER' is 'Río Cibuco'), else 0; every other state as
+    before."""
     if not gnis or not target_ws:
         return 0.0
     if S.folds(state):
-        tf = S.name_forms_in(" ".join(target_ws), state)
-        gf = S.name_forms_in(gnis_display(gnis), state)
-        return max((_name_score(words(a), b) for a in tf for b in gf if a and b), default=0.0)
+        # exact form membership only: no fuzzy spelling, qualifier or containment rule ('RIO CIBUCO' is never 'Río
+        # Cibaco', 'RIO LA PLATA' never 'Río de la Plata'; review 2026-11-15)
+        tf = {" ".join(words(a)) for a in S.name_forms_in(" ".join(target_ws), state) if a}
+        gf = {" ".join(words(b)) for b in S.name_forms_in(gnis_display(gnis), state) if b}
+        return 1.0 if tf & gf else 0.0
     return _name_score(target_ws, gnis)
 
 
@@ -533,28 +535,55 @@ def sql_names(t: dict) -> list[str]:
             if rest and first.lower() in INVERTED_LEAD:
                 out.add(f"{rest}, {first}")
     if S.folds(t.get("state")):
-        # Puerto Rico: the name's Spanish and English forms, accents folded ('CIBUCO RIVER' -> 'RIO CIBUCO'); the
-        # MapServer compares accents, so name_where asks each with its vowels and N as wildcards too
+        # Puerto Rico: the name's forms, accents folded ('CIBUCO RIVER' -> 'RIO CIBUCO'); the MapServer compares
+        # accents, so name_queries asks each spelling's exact accented variants (accent_variants)
         out = {S.fold_accents(x) for x in out}
         out.update(S.spanish_spellings(" ".join(ws), t["state"]))
     return sorted(x.replace("'", "''") for x in out if x)
 
 
-def accent_pattern(name: str) -> str:
-    """A LIKE pattern for an accent-free upper-case GNIS spelling: every vowel and N a one-letter wildcard, so 'RIO
-    UNIBON' finds 'Río Unibón' (EPA's MapServer compares letters accent for accent; probed 2026-11-15)."""
-    return re.sub(r"[AEIOUN]", "_", name)
+ACCENTED = {"A": "Á", "E": "É", "I": "Í", "O": "Ó", "U": "ÚÜ", "N": "Ñ"}
+VARIANT_MAX = 256           # accented spellings of one name asked at most (fewest accented words first)
+VARIANT_BATCH = 120         # spellings in one MapServer query
 
 
-def name_where(names, state=None) -> str:
-    """The MapServer where clause for GNIS names (sql_names' spellings): UPPER(gnis_name) IN (...), and in
-    status.ACCENT_FOLD_STATES each spelling's accent_pattern as a LIKE too (the features are then kept by gnis_in and
-    name_score, which fold the accents)."""
-    where = "UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in names) + ")"
+def accent_variants(name: str) -> list[str]:
+    """The exact spellings an accent-free upper-case name may have in GNIS: each word as it is or with one letter
+    accented (Á É Í Ó Ú Ü Ñ; words of one or two letters as they are), every combination, those with fewer accented
+    words first, at most VARIANT_MAX. 'RIO UNIBON' -> 'RIO UNIBON', 'RÍO UNIBON', ..., 'RÍO UNIBÓN'. No wildcard: a
+    '%' or '_' in the name is a literal letter in an IN list (EPA's MapServer compares accents; probed 2026-11-15)."""
+    import itertools
+    opts = []
+    for w in name.split(" "):
+        o = [w]
+        if len(w) > 2:
+            for i, c in enumerate(w):
+                o += [w[:i] + a + w[i + 1:] for a in ACCENTED.get(c, "")]
+        opts.append(o)
+    combos = sorted(itertools.product(*[range(len(o)) for o in opts]), key=lambda ix: (sum(1 for x in ix if x), ix))
+    return [" ".join(o[x] for o, x in zip(opts, ix)) for ix in combos[:VARIANT_MAX]]
+
+
+def name_queries(names, state=None) -> list[str]:
+    """The MapServer where clauses for GNIS names (sql_names' spellings, quotes doubled): one UPPER(gnis_name) IN (...),
+    as before, outside status.ACCENT_FOLD_STATES; there every spelling's accent_variants, VARIANT_BATCH to a clause."""
     if not S.folds(state):
-        return where
-    pats = sorted({accent_pattern(n) for n in names} - set(names))
-    return "(" + where + "".join(f" OR UPPER(gnis_name) LIKE '{p}'" for p in pats) + ")" if pats else where
+        return ["UPPER(gnis_name) IN (" + ",".join(f"'{n}'" for n in names) + ")"]
+    vals = list(dict.fromkeys(v.replace("'", "''") for n in names for v in accent_variants(n.replace("''", "'"))))
+    return ["UPPER(gnis_name) IN (" + ",".join(f"'{v}'" for v in vals[i:i + VARIANT_BATCH]) + ")"
+            for i in range(0, len(vals), VARIANT_BATCH)]
+
+
+def arcgis_names(http, kind: str, layer: int, names, state=None, **params) -> list[dict]:
+    """arcgis() for GNIS names: every clause of name_queries; in status.ACCENT_FOLD_STATES only the features whose
+    accent-folded name is one of the spellings asked (gnis_in), so nothing reaches name_score by similarity alone."""
+    out = []
+    for w in name_queries(names, state):
+        out += arcgis(http, kind, layer, where=w, **params)
+    if S.folds(state):
+        mine = {n.replace("''", "'") for n in names}
+        out = [f for f in out if gnis_in(f.get("gnis_name"), mine, state)]
+    return out
 
 
 def gnis_in(gnis_name, mine: set, state=None) -> bool:
@@ -1415,8 +1444,7 @@ class Nhd:
                       outFields=WB_FIELDS, maxAllowableOffset="0.00005")
 
     def by_name(self, layer, state, names):
-        where = name_where(names, state)
-        return arcgis(self.http, f"name{layer}", layer, where=where, geometry=self.state_env(state),
+        return arcgis_names(self.http, f"name{layer}", layer, names, state, geometry=self.state_env(state),
                       geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
                       outFields=FL_FIELDS if layer == 2 else WB_FIELDS, maxAllowableOffset="0.001")
 
@@ -1719,10 +1747,9 @@ def resolve_hr(nhd: "Nhd", t) -> tuple[dict | None, str]:
     its points (most reported first), by GNIS name; the nearest when several. The medium-resolution V2.1 network leaves
     out many small named streams and canals (Florida, 2026-11-04: Brooker Creek, Possum Creek)."""
     names = sql_names(t)
-    where = name_where(names, t["state"])
     for lon, lat in cluster_points(t["points"]):
         env = f"{lon - HR_NEAR_DEG},{lat - HR_NEAR_DEG},{lon + HR_NEAR_DEG},{lat + HR_NEAR_DEG}"
-        fs = arcgis(nhd.http, "nhd-hr-near", HR_FLOWLINES, service=NHD_HR, where=where, geometry=env,
+        fs = arcgis_names(nhd.http, "nhd-hr-near", HR_FLOWLINES, names, t["state"], service=NHD_HR, geometry=env,
                     geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
                     outFields=HR_FIELDS, maxAllowableOffset="0.0001")
         cands = [(dist_m(f["_geom"], lon, lat), f) for f in fs if f.get("gnis_id") and f["_geom"] is not None
@@ -4807,14 +4834,21 @@ CREEK_BASIN = re.compile(r"^(?P<creek>(?:[\w'’.-]+\s+){1,4}?(?:creek|branch|br
 REPORT_TOWN_M = 3000        # a water of the name within 3 km of a town the reports give (the name pass's rule)
 
 
+# Puerto Rico's open waters by any of their names (status.name_forms_in: 'OCEANO ATLANTICO', 'MAR CARIBE')
+PR_OPEN_SEA = {"atlantic ocean", "caribbean sea"}
+
+
 def report_name_parts(text: str, state=None) -> tuple[list[str], str | None, bool]:
     """(water names, reason, tributary) for one receiving-water name as a report gives it. A tributary of a named water
     ('Tributary to Proctor Creek', 'UT Eno River', 'Ditch feeding Rocky Creek', 'Bull creek tributary') gives the named
     water (the tributary has no name of its own and its water reaches that one), tributary True; so does a sewershed
     named for its creek ('Lindsey Creek Basin': CREEK_BASIN), never a river's basin. reason: why the text
     names no public water (storm-sewer systems, catch basins and treatment works, private property, the open sea, street
-    names, an unnamed or unknown stream, a kind of water with no name, a river basin), never a record."""
+    names, an unnamed or unknown stream, a kind of water with no name, a river basin), never a record. state: in
+    Puerto Rico the open sea in Spanish too (PR_OPEN_SEA: 'OCEANO ATLANTICO', 'MAR CARIBE', 'CARIBBEAN SEA')"""
     t = re.sub(r"\s+", " ", str(text or "")).strip()
+    if S.folds(state) and set(S.name_forms_in(t, state)) & PR_OPEN_SEA:
+        return [], OPEN_SEA, False
     for rx, rep in REPORT_FIX:
         t = rx.sub(rep, t)
     fixed = t
@@ -5156,10 +5190,9 @@ def prefetch_names(nhd: Nhd, state: str, targets: list, layer: int, attr: str) -
     def ask():
         if not batch:
             return
-        where = name_where(sorted(set(names)), state)
-        fs = arcgis(nhd.http, f"name{layer}", layer, where=where, geometry=nhd.state_env(state),
-                    geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
-                    outFields=FL_FIELDS if layer == 2 else WB_FIELDS, maxAllowableOffset="0.001")
+        fs = arcgis_names(nhd.http, f"name{layer}", layer, sorted(set(names)), state, geometry=nhd.state_env(state),
+                          geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
+                          outFields=FL_FIELDS if layer == 2 else WB_FIELDS, maxAllowableOffset="0.001")
         for t in batch:
             mine = {n.replace("''", "'") for n in sql_names(t)}
             t[attr] = [f for f in fs if gnis_in(f.get("gnis_name"), mine, state)]
@@ -5277,7 +5310,6 @@ def resolve_hr_places(nhd: Nhd, t) -> tuple[dict | None, str]:
     if t["points"]:
         return resolve_hr(nhd, t)
     names = sql_names(t)
-    where = name_where(names, t["state"])
     for tw in top_towns(t["towns"], 2):
         g = nhd.towns.outlines(t["state"], [tw])
         if not g:
@@ -5285,9 +5317,9 @@ def resolve_hr_places(nhd: Nhd, t) -> tuple[dict | None, str]:
         g = unary_union(g)
         b = g.bounds
         env = f"{b[0] - HR_NEAR_DEG},{b[1] - HR_NEAR_DEG},{b[2] + HR_NEAR_DEG},{b[3] + HR_NEAR_DEG}"
-        fs = arcgis(nhd.http, "nhd-hr-near", HR_FLOWLINES, service=NHD_HR, where=where, geometry=env,
-                    geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
-                    outFields=HR_FIELDS, maxAllowableOffset="0.0001")
+        fs = arcgis_names(nhd.http, "nhd-hr-near", HR_FLOWLINES, names, t["state"], service=NHD_HR, geometry=env,
+                          geometryType="esriGeometryEnvelope", inSR="4326", spatialRel="esriSpatialRelIntersects",
+                          outFields=HR_FIELDS, maxAllowableOffset="0.0001")
         cands = [(geom_dist_m(f["_geom"], g) if not f["_geom"].intersects(g) else 0.0, f) for f in fs
                  if f.get("gnis_id") and f["_geom"] is not None and name_score(t["words"], f.get("gnis_name"), t["state"]) >= 0.8]
         cands = [c for c in cands if c[0] <= REPORT_TOWN_M]

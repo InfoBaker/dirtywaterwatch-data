@@ -1006,21 +1006,20 @@ ACCENT_FOLD_STATES = frozenset({"PR"})
 SPANISH_KIND = {"rio": "river", "quebrada": "creek", "bahia": "bay", "cano": "channel", "laguna": "lagoon",
                 "lago": "lake", "embalse": "reservoir"}
 ENGLISH_KIND = {v: k for k, v in SPANISH_KIND.items()}
-# a state's names whose two spellings the rules above do not join (normalised, accents folded): (as filed, the NHD or
-# English name). Puerto Rico: the open waters' Spanish and English names; the short or misspelled names EPA and PRASA
-# file for a river NHDPlus names in full, each where EPA's own reach index puts the outfall on that river (RIO LOISA,
-# RIO GUARDIANA; data/receiving-waters-national.json gnis_names) or the river is the only one of the name (Jayuya,
-# Manatí). Read both ways: the record of the second gets the first as a form, and the text of the first finds it.
+# a state's names whose two spellings the kind-word rule does not join (normalised, accents folded): (as filed, the
+# water's name), read both ways. Each pair has its evidence in docs (the PR accent review, 2026-11-15): the open waters
+# are the only Atlantic Ocean and Caribbean Sea ("Caribe Ocean" is a PRASA report's), and each river pair is EPA's own
+# reach index for the outfall (RIO LOISA, RIO GUARDIANA) or the only river of that name in GNIS (Jayuya, Manatí). No pair
+# without evidence; tests pin the table whole.
 STATE_NAME_PAIRS = {"PR": (
     ("oceano atlantico", "atlantic ocean"), ("mar caribe", "caribbean sea"), ("caribe ocean", "caribbean sea"),
-    ("oceano caribe", "caribbean sea"), ("pasaje de mona", "mona passage"),
-    ("canal de la mona", "mona passage"),
-    ("jayuya river", "rio grande de jayuya"), ("rio jayuya", "rio grande de jayuya"),
-    ("manati river", "rio grande de manati"), ("rio manati", "rio grande de manati"),
-    ("rio grande manati", "rio grande de manati"),
-    ("rio loisa", "rio grande de loiza"), ("loiza river", "rio grande de loiza"), ("rio loiza", "rio grande de loiza"),
-    ("rio guardiana", "rio guadiana"),
+    ("jayuya river", "rio grande de jayuya"), ("manati river", "rio grande de manati"),
+    ("rio grande manati", "rio grande de manati"), ("rio loisa", "rio grande de loiza"), ("rio guardiana", "rio guadiana"),
 )}
+# words that never name a water on their own in Puerto Rico ('Grande', 'Río'): a form or stem made only of these (and
+# kind words) is not indexed, so a bare 'Grande' or 'Río' resolves to nothing
+GENERIC_ES = {"rio", "quebrada", "bahia", "cano", "laguna", "lago", "embalse", "de", "del", "la", "las", "los", "el",
+              "grande", "chico", "chiquito", "the", "of", "and"}
 _ES_JOIN = re.compile(r"(?i)(?<=\w)\s+y\s+(?=\w)")                           # "Quebrada y Río Chico"
 _ES_ARTICLE = re.compile(r"(?i)\b(?:el|los)\s+(?=(?:r[ií]o|quebrada|bah[ií]a|ca[ñn]o|laguna|lago)\b)")
 _ES_QB = re.compile(r"(?i)\bq(?:b|da)\b\.?")
@@ -1072,9 +1071,10 @@ def norm_name_in(s, state) -> str:
 
 
 def spanish_forms(n: str, state=None) -> list[str]:
-    """The other forms of a normalised, accent-folded name (Spanish water word first <-> English kind word last):
-    'rio de la plata' -> 'la plata river', 'rio la plata'; 'cibuco river' -> 'rio cibuco'; 'rio grande de loiza river'
-    (EPA's doubled form) -> 'rio grande de loiza'; 'rio grande de manati' -> 'rio grande manati'."""
+    """The other forms of a normalised, accent-folded name: only the kind word is translated (a Spanish water word first
+    <-> the English kind word last), every name word kept, 'de' included: 'rio cibuco' -> 'cibuco river', 'rio de la
+    plata' -> 'de la plata river' (never 'la plata river': Río La Plata is another name); EPA's doubled 'rio grande de
+    loiza river' -> 'rio grande de loiza'; and the state's STATE_NAME_PAIRS."""
     ws = n.split()
     out = []
     if "and" in ws:             # two waters ('quebrada and rio chico'): each is read on its own
@@ -1083,15 +1083,9 @@ def spanish_forms(n: str, state=None) -> list[str]:
         ws = ws[:-1]                                                  # 'rio X river'
         out.append(" ".join(ws))
     if len(ws) >= 2 and ws[0] in SPANISH_KIND:
-        rest = ws[1:]
-        if rest[0] in ("de", "del") and len(rest) >= 2:
-            rest = rest[1:]
-        out.append(" ".join(rest + [SPANISH_KIND[ws[0]]]))
+        out.append(" ".join(ws[1:] + [SPANISH_KIND[ws[0]]]))
     if len(ws) >= 2 and ws[-1] in ENGLISH_KIND and ws[0] not in SPANISH_KIND:
         out.append(" ".join([ENGLISH_KIND[ws[-1]]] + ws[:-1]))
-    no_de = [w for w in ws if w not in ("de", "del")]
-    if len(no_de) >= 2 and no_de != ws:
-        out.append(" ".join(no_de))
     for full in dict.fromkeys([n, " ".join(ws)]):
         for a, b in STATE_NAME_PAIRS.get(str(state or "").upper(), ()):
             if full == a:
@@ -1099,6 +1093,11 @@ def spanish_forms(n: str, state=None) -> list[str]:
             elif full == b:
                 out.append(a)
     return [x for x in dict.fromkeys(out) if x and x != n]
+
+
+def generic_only(n: str) -> bool:
+    """Whether a normalised name holds no word that names a water by itself (GENERIC_ES and kind words only)."""
+    return all(w in GENERIC_ES or w in KIND_WORDS or w in ENGLISH_KIND for w in n.split())
 
 
 def name_forms_in(s, state) -> list[str]:
@@ -1109,16 +1108,10 @@ def name_forms_in(s, state) -> list[str]:
 
 def spanish_spellings(s, state) -> list[str]:
     """The upper-case, accent-folded spellings a name of an ACCENT_FOLD_STATES state may go by at a map service: its
-    forms (name_forms_in) and each Spanish one with the 'de' GNIS and OpenStreetMap write after the water word ('RIO LA
-    PLATA' -> 'RIO DE LA PLATA', 'CANO MARTIN PENA' -> 'CANO DE MARTIN PENA'). [] in every other state."""
+    forms (name_forms_in), nothing inserted or dropped. [] in every other state."""
     if not folds(state):
         return []
-    out = [f.upper() for f in name_forms_in(s, state) if f]
-    for x in list(out):
-        first, _, rest = x.partition(" ")
-        if rest and first.lower() in SPANISH_KIND and rest.split()[0] not in ("DE", "DEL", "GRANDE"):
-            out.append(f"{first} DE {rest}")
-    return list(dict.fromkeys(out))
+    return list(dict.fromkeys(f.upper() for f in name_forms_in(s, state) if f))
 
 
 def norm_oid(s) -> str:
@@ -2018,18 +2011,22 @@ class Resolver:
     def _index_folded(self, slug: str, w: dict) -> None:
         """__init__'s index for a record of an ACCENT_FOLD_STATES state: the name's forms (name_forms_in: accents
         folded, Spanish and English) are names like the name itself, its English form's stem a stem ('Cibuco' for the
-        Río Cibuco); the aliases' forms as __init__ takes aliases. The texts are read the same way (by_name)."""
+        Río Cibuco); the aliases' forms as __init__ takes aliases. A form or stem of generic words only ('grande river',
+        'grande') is not indexed: the name itself is ('rio grande'). by_name reads PR texts by whole phrase only."""
         st = w.get("state")
-        for n in name_forms_in(w.get("name") or "", st):
+        for i, n in enumerate(name_forms_in(w.get("name") or "", st)):
+            if i and generic_only(n):
+                continue
             if n and (" " in n or len(n) >= 8) and slug not in self.names[(st, n)]:
                 self.names[(st, n)].append(slug)
             words = n.split()
-            if len(words) >= 2 and words[-1] in KIND_WORDS and len(" ".join(words[:-1])) >= 6 \
-                    and slug not in self.stems[(st, " ".join(words[:-1]))]:
-                self.stems[(st, " ".join(words[:-1]))].append(slug)
+            stem = " ".join(words[:-1])
+            if len(words) >= 2 and words[-1] in KIND_WORDS and len(stem) >= 6 and not generic_only(stem) \
+                    and slug not in self.stems[(st, stem)]:
+                self.stems[(st, stem)].append(slug)
         for a in w.get("aliases") or []:
             for an in name_forms_in(a, st):
-                if not an:
+                if not an or generic_only(an):
                     continue
                 if len(an.split()) >= 3:
                     if slug not in self.names[(st, an)]:
@@ -2181,13 +2178,16 @@ class Resolver:
         nt = norm_name(re.sub(r"\(.*?\)", " ", str(text))) or norm_name(text)
         t = f" {norm_name(text)} "
         found = {}
-        for (st, n), slugs in self.names.items():
-            if st == state and f" {n} " in t:
-                found[n] = slugs
-        for key in ((state, norm_name(text)), (state, nt)):
+        if folds(state):
+            found = self.folded_phrases(text, state)
+        else:
+            for (st, n), slugs in self.names.items():
+                if st == state and f" {n} " in t:
+                    found[n] = slugs
+        for key in (() if folds(state) else ((state, norm_name(text)), (state, nt))):
             if key in self.exact:                                     # a short alias, the whole text
                 found[key[1]] = list(dict.fromkeys(found.get(key[1], []) + self.exact[key]))
-        if not found and (state, norm_name(text)) in self.stems:   # "Winooski" for the Winooski River
+        if not found and not folds(state) and (state, norm_name(text)) in self.stems:   # "Winooski" for the Winooski River
             found[norm_name(text)] = self.stems[(state, norm_name(text))]
         # drop names inside longer matched names ("mill river" in "north branch mill river")
         names = [n for n in found if not any(n != m and f" {n} " in f" {m} " for m in found)]
@@ -2237,6 +2237,26 @@ class Resolver:
         if folds(state):            # two forms of one name in the text ('RIO GRANDE DE LOIZA RIVER'): the record once
             out = list(dict.fromkeys(out))
         return out, "; ".join(notes) or None, ambiguous
+
+    def folded_phrases(self, text: str, state) -> dict:
+        """{name: slugs} for a text of an ACCENT_FOLD_STATES state (accents already folded): each of its parts (split at
+        '/', '&', ';', '+', ',' and 'and', brackets dropped) and the whole text, compared whole with the records' names,
+        forms, aliases and non-generic stems. Never a name inside a longer phrase: 'RIO GRANDE DE LOIZA' is not the Río
+        Grande, 'Rio Cibuco at Vega Baja' names no record (a wrong tie is worse than none)."""
+        t = re.sub(r"\(.*?\)", " ", str(text))
+        phrases = [norm_name(t)] + [norm_name(p) for p in re.split(r"\s*(?:/|&|;|\+|,|\band\b)\s*", t, flags=re.I)]
+        for p in list(phrases):             # EPA's doubled kind word: 'RIO GRANDE DE LOIZA RIVER'
+            ws = p.split()
+            if len(ws) >= 3 and ws[0] in SPANISH_KIND and ws[-1] == SPANISH_KIND[ws[0]]:
+                phrases.append(" ".join(ws[:-1]))
+        found = {}
+        for n in dict.fromkeys(p for p in phrases if p):
+            slugs = list(dict.fromkeys(self.names.get((state, n), []) + self.exact.get((state, n), [])))
+            if not slugs and not generic_only(n):
+                slugs = list(self.stems.get((state, n), []))
+            if slugs:
+                found[n] = slugs
+        return found
 
     def merge_remainders(self, slugs: list, lat, lon) -> list:
         """A river's remainder record (covers_part_of: the NHD record of the part the main record lacks) and its
@@ -2380,7 +2400,13 @@ class Resolver:
         registry_first): its water_slug, or no water when the pass found none (no_water_reason). Otherwise its
         water_slug, else its receiving water's name in its state (checked against the outfall's own point by the
         guard), else the water at its point."""
-        key = (row.get("_file"), row.get("npdes_permit"), row.get("outfall"), row.get("lat"), row.get("lon"))
+        permit_ = str(row.get("npdes_permit") or "")
+        eff_state = (row.get("state") or (permit_[:2] if re.match(r"[A-Z]{2}\d", permit_) else "") or "").upper()
+        text_ = (row.get("receiving_water") or row.get("receiving_water_echo") or row.get("water_name") or "").strip()
+        # the effective state and the text are part of the key: a Puerto Rico row's answer never reaches the same row
+        # read as another state's (review 2026-11-15 P1), nor rows with no identifiers but another text
+        key = (row.get("_file"), row.get("npdes_permit"), row.get("outfall"), row.get("lat"), row.get("lon"),
+               eff_state, text_, row.get("water_slug"))
         if key in self._row_water:
             return self._row_water[key]
         if PLACE_STEPS["registry_first"] and row.get("water_matched_by"):
@@ -2411,7 +2437,8 @@ class Resolver:
             wns = name_forms_in(self.waters[slug].get("name") or "", state) or [""]
             rn = norm_name_in(name, state)
             ok = row.get("match") not in ("name_only", "none", None) or not rn \
-                or any(f" {wn} " in f" {rn} " or f" {rn} " in f" {wn} " for wn in wns)
+                or (rn in wns if folds(state) else
+                    any(f" {wn} " in f" {rn} " or f" {rn} " in f" {wn} " for wn in wns))
             if ok and self.guard_detail([slug], fake)[0]:
                 dist = row.get("distance_m")
                 out = (slug, f"its water slug, {row.get('match') or 'registry'} match"
