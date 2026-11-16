@@ -4190,7 +4190,7 @@
    "operator_id": null,
    "agency": "Wisconsin Department of Natural Resources",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "wi-dnr-beach-health",
    "name": "Wisconsin Department of Natural Resources (Wisconsin Beach Health)",
    "channel_kind": "state_alert_page",
@@ -4200,26 +4200,23 @@
    "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "wi-dnr-beach-health",
    "publishes": "status",
-   "records": false,
-   "availability_only": true,
-   "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "The DNR's beach report: advisories and closures with their reason (E. coli, algae) and dates, Great Lakes beaches under the BEACH Act and the inland beaches local health departments choose to report, in season (Memorial Day to Labor Day). Not ingested: its export and the map layer's keys were not read. On 2026-11-14 and 2026-11-15 the host did not answer the build's client (connection timed out), nor a second network on 2026-11-14 (refused). Watched for availability only: its pages can carry staff names, so no page text or body is kept (metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).",
+   "note": "The DNR's beach report (Beach Name, Status, Reason, Date of Advisory, Nearest Town): advisories and closures with their reason (E. coli, algae) and dates, Great Lakes beaches under the BEACH Act and the inland beaches local health departments choose to report, in season (Memorial Day to Labor Day). Read by GitHub's runner on 2026-11-16: 453 beaches, one algae advisory (Gile Flowage Beach, September 17, 2026) and one algae closure (Lake Kegonsa State Park Beach, September 11), the rest closed for the season. The same statuses, reasons and dates are on the beach map layer; the page adds the nearest town and 12 beaches the layer gives no point for (by name). The wi-dnr-beach-health feed reads the layer for points and status and this table for those 12 beaches: an advisory there is listed with its beach and nearest town, with no place on the map.",
    "sources": [
     "wi-wdnr-beach-health"
    ],
-   "barrier": null,
-   "metadata_only": true
+   "barrier": null
   },
   {
    "state": "WI",
    "operator_id": null,
    "agency": "Wisconsin Department of Natural Resources",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "wi-dnr-beach-layer",
    "name": "Wisconsin Department of Natural Resources (beach monitoring map layer)",
    "channel_kind": "feed",
@@ -4229,19 +4226,16 @@
    "method": "json",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "wi-dnr-beach-health",
    "publishes": "status",
-   "records": false,
-   "availability_only": true,
-   "every_hours": 24,
    "noun": "Data feed",
-   "note": "The ArcGIS layer behind the beach map: 441 beaches with STATUS, BEACH_ACTION, ISSUED, SAMPLEDATE and ECOLIVALUE (2026-11-03), \"No Data Available\" off season. On 2026-11-14 and 2026-11-15 the host did not answer the build's client (connection timed out), nor a second network on 2026-11-14 (refused). Watched for availability only: its pages can carry staff names, so no page text or body is kept (metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).",
+   "note": "The ArcGIS layer behind the beach map: 441 beaches when GitHub's runner read it on 2026-11-16, each with the Department's action (Advisory, Closed, End), reason, Date of Advisory and point; one algae advisory and one algae closure in effect, the rest closed for the season. Read by the wi-dnr-beach-health feed: each advisory or closure is shown at its beach while the Department lists it, an algae reason as a bloom.",
    "sources": [
     "wi-wdnr-beach-health"
    ],
-   "barrier": null,
-   "metadata_only": true
+   "barrier": null
   },
   {
    "state": "WI",
@@ -4265,7 +4259,7 @@
    "availability_only": true,
    "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "The search form for closed spill and cleanup cases, where SERTS incidents go when they close; no closed sewage query was tested. On 2026-11-14 and 2026-11-15 the host did not answer the build's client (connection timed out), nor a second network on 2026-11-14 (refused). Watched for availability only: its pages can carry staff names, so no page text or body is kept (metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).",
+   "note": "The search form for closed spill and cleanup cases, where SERTS incidents go when they close; no closed sewage query was tested. It answered GitHub's runner on 2026-11-16. Watched for availability only: its pages can carry staff names, so no page text or body is kept (metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).",
    "sources": [
     "wi-wdnr-brrts-closed-spills"
    ],
@@ -4294,7 +4288,7 @@
    "availability_only": true,
    "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "The DNR's list of open spill incidents of every substance, with CSV and Excel buttons: 271 open on 2026-11-09, among them a sewage spill at Ashland (incident date, county, municipality, substance, cause, the coordinator's name). Closed incidents move to the BRRTS search, so a row that leaves the list has not ended. Not ingested: its export, paging and the share of sewage overflows it holds were not tested. On 2026-11-14 and 2026-11-15 the host did not answer the build's client (connection timed out), nor a second network on 2026-11-14 (refused). Watched for availability only: its pages can carry staff names, so no page text or body is kept (metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).",
+   "note": "The DNR's list of open spill incidents of every substance, with CSV and Excel buttons: 271 open on 2026-11-09, among them a sewage spill at Ashland (incident date, county, municipality, substance, cause, the coordinator's name). Closed incidents move to the BRRTS search, so a row that leaves the list has not ended. It answered GitHub's runner on 2026-11-16. Not ingested yet: its export, paging and the share of sewage overflows it holds were not tested, and the coordinator's name must be dropped before anything is saved. Watched for availability only: its pages can carry staff names, so no page text or body is kept (metadata_only) and no record is made until a reader that keeps only safe fields exists (Astra re-review 2026-11-15 P1-7, P2-11).",
    "sources": [
     "wi-wdnr-serts-open-spills"
    ],
@@ -6747,12 +6741,13 @@
    "operator_id": null,
    "agency": "City of Milwaukee Health Department",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "wi-milwaukee-health-beaches",
    "name": "City of Milwaukee Health Department (beach water report)",
    "channel_kind": "local_health_page",
    "urls": [
-    "https://city.milwaukee.gov/Health/Services-and-Programs/disease-Control-and-Environment/recreational-Water/Beaches"
+    "https://city.milwaukee.gov/Health/Services-and-Programs/disease-Control-and-Environment/recreational-Water/Beaches",
+    "https://city.milwaukee.gov/health/information/environmental-health/beaches"
    ],
    "method": "html",
    "legal_basis": null,
@@ -6762,7 +6757,7 @@
    "publishes": "status",
    "records": false,
    "noun": "Voluntary page",
-   "note": "The Health Department samples Bradford, McKinley and South Shore beaches, near the combined sewer area, daily from Memorial Day to Labor Day and posts a water report (MMSD's impacted-waters page links it). On 2026-11-15 the page answered the site's client with a browser challenge (HTTP 403, \"Just a moment\"), which this site does not get around: not read, and its advisories are not shown.",
+   "note": "The Health Department samples Bradford, McKinley and South Shore beaches, near the combined sewer area, in season (Monday, Wednesday and Friday, as independent research read its page on 2026-11-15) and posts a water report (MMSD's impacted-waters page links it). On 2026-11-16 both of its addresses answered GitHub's runner, where the pipeline runs, with HTTP 403 (a browser challenge, as on 2026-11-15), which we do not get around: not read, and its advisories are not shown. The same beaches are in the DNR's beach system when the Department lists them.",
    "sources": [
     "wi-mmsd-cso-impacted-waters"
    ],
@@ -6892,6 +6887,35 @@
    ],
    "note": "Milwaukee Metropolitan Sewerage District gives notice of an overflow by its emergency response plan; the DNR's minimum is a notice to a daily newspaper, which does not by itself say whether the notice reaches the web, and its report to the DNR is not published (wi-dnr-switchboard-sso-reports). Its own web channel was not searched individually.",
    "barrier": "not_verified"
+  },
+  {
+   "state": "WI",
+   "operator_id": "wi-mmsd",
+   "agency": null,
+   "permit": "WI0036820",
+   "checked": "2026-11-16",
+   "id": "wi-mmsd-overflows-page",
+   "name": "Milwaukee Metropolitan Sewerage District",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.mmsd.com/what-we-do/wastewater-treatment/overflows"
+   ],
+   "method": "html",
+   "legal_basis": "40 CFR 122.38(a): \"As soon as possible, but no later than four (4) hours after becoming aware by monitoring, modeling or other means that a CSO discharge has occurred, the Great Lakes Basin CSO permittee shall provide public notification of CSO discharges\"",
+   "basis_kind": "law",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "notices",
+   "records": false,
+   "availability_only": true,
+   "every_hours": 24,
+   "noun": "Operator page",
+   "note": "MMSD's overflows page: each 2026 overflow by its dates with the volumes by kind and a link to the post-storm report to the DNR (April 14 to 19: combined 2,703,000,000 gallons, separate 11,590,728, treatment facility 15,300; August 1: combined 96,000,000; September 3: combined 331,500, as GitHub's runner read it on 2026-11-16), the 2025 annual CSO notification report and the year's totals. The same overflows reach us through the Storm Update posts (wi-mmsd-storm-updates); the page and its reports are not read yet.",
+   "sources": [
+    "wi-mmsd-storm-updates"
+   ],
+   "barrier": null,
+   "metadata_only": true
   },
   {
    "state": "WI",
@@ -8697,7 +8721,7 @@
    "publishes": "documents",
    "records": false,
    "every_hours": 168,
-   "note": "Superior's 2025 annual CSO notice (revised July 2026), which its page links as the public notification plan: zero combined sewer overflows in 2025; it also covers the Parkland satellite system. On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second network (connection refused); the row is watched so the refresh records when it answers.",
+   "note": "Superior's 2025 annual CSO notice (revised July 2026), which its page links as the public notification plan: zero combined sewer overflows in 2025; it also covers the Parkland satellite system. It answered GitHub's runner on 2026-11-16 (a PDF).",
    "sources": [
     "wi-superior-cso"
    ],
@@ -8724,7 +8748,7 @@
    "publishes": "notices",
    "records": false,
    "every_hours": 24,
-   "note": "Superior's combined sewer overflow page: a 2026 table with columns for the location, receiving water, affected access areas, start, end and estimated volume, read empty on 2026-11-09, with the annual notices linked (2025: no combined sewer overflow; outfalls CSO 2 to Superior Bay, CSO 5 to the Nemadji River and CSO 6 to the St. Louis River). Not ingested: no filled row has been seen to test a reader on. On 2026-11-14 the host did not answer the build's client (connection timed out) nor a second network (connection refused); the row is watched so the refresh records when it answers.",
+   "note": "Superior's combined sewer overflow page: a 2026 table with columns for the location, receiving water, affected access areas, start, end and estimated volume, with two blank rows and no filled row when GitHub's runner read it on 2026-11-16 (\"Last Updated 07/14/2022\"), and the annual notices linked (2025: no combined sewer overflow; outfalls CSO 2 to Superior Bay, CSO 5 to the Nemadji River and CSO 6 to the St. Louis River). The page says the City also announces overflows by press release to the Superior Telegram. Not ingested yet: no filled row has been seen to test a reader on, and blank rows are not a finding of no overflow.",
    "sources": [
     "wi-superior-cso"
    ],

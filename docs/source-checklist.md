@@ -51,7 +51,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | mo | 7 | 0 | 4 | 2 | 0 | 13 |
 | ks | 4 | 0 | 4 | 1 | 1 | 10 |
 | ar | 4 | 1 | 5 | 2 | 1 | 13 |
-| wi | 7 | 0 | 8 | 2 | 4 | 21 |
+| wi | 8 | 0 | 10 | 2 | 1 | 21 |
 | de | 3 | 0 | 5 | 1 | 0 | 9 |
 | sc | 6 | 0 | 2 | 1 | 2 | 11 |
 | in | 8 | 0 | 14 | 0 | 4 | 26 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 2 | 0 | 5 | 2 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **616** | **237** | **540** | **230** | **94** | **1717** |
+| **all** | **617** | **237** | **542** | **230** | **91** | **1717** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1799,21 +1799,21 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `wi-mmsd-cso-impacted-waters` | MMSD CSO impacted waters map (potentially impacted waterways and public access locations) | used | fetched | outfalls | The operator's own affected-area polygon under 40 CFR 122.38(c); usable as the official affected area for every MMSD CSO. |
 | `wi-mmsd-cso-notification-plan` | MMSD Combined Sewer Overflow Public Notification Plan (July 16, 2018) | used | fetched | law | Says "The combined sewer service area has 115 combined sewer overflow outfalls" discharging to seven waterways, and that the plan responds to 40 CFR 122.38. |
 | `wi-mmsd-storm-updates` | MMSD Storm Update news posts (per-event overflow volume, 5-day letter to WDNR) | used | fetched | events | Built (ingester wi_mmsd_storm_updates): the news list read whole on 2026-11-14 (71 pages, 281 posts), 21 posts read (18 Storm Updates and overflow letters, 3 spill or release notices) from 2018-06-22 to 2026-09-08 give 29 dated reports (13 combined, 14 separate or unspecified sewer overflows, 2 treatment plant spills), posted one to ten days after the overflow began (median five). |
+| `wi-wdnr-beach-health` | WDNR Wisconsin Beach Health: advisories map layer and Beach Advisory Reports | used | fetched | advisories | Read by the wi-dnr-beach-health feed (the layer for points and status, the report table for the beaches the layer has no point for): the advisories and closures the Department lists, an algae reason as a bloom, each at its beach. On 2026-11-16 GitHub's runner read 441 beaches: one algae advisory (Gile Flowage Beach, from September 17, 2026), one algae closure (Lake Kegonsa State Park Beach, from September 11) and 439 closed for the season. |
 | `wi-wdnr-sso-form-instructions` | WDNR SSO/TFO report form 3400-184 and instructions (Switchboard) | used | fetched | law | The form records the public-notice date and method, so WDNR holds the data; it is not published. |
 | `wi-brookfield-sso-notices` | City of Brookfield SSO press releases | watch | prior_inventory_only | events | Single PDF releases with no list page to poll; registered. |
 | `wi-echo-dmr-cso` | ECHO DMR CSO parameters for MMSD and Superior | watch | inferred | events | Monthly fallback, unknown. |
 | `wi-hab-program` | Wisconsin harmful algal bloom information (WDNR and DHS) | watch | inferred | advisories | No statewide bloom advisory feed known; not traced in this round. |
-| `wi-milwaukee-health-beach-report` | City of Milwaukee Health Department beach water report | watch | inferred | advisories | Off season on 2026-11-14; registered as a watched channel. |
 | `wi-milwaukee-riverkeeper-swim-guide` | Milwaukee Riverkeeper on Swim Guide (beach and river bacteria) | watch | search_only | monitoring | Mirror of the state data; no API. |
 | `wi-mmsd-rain-facility-page` | MMSD Milwaukee Rain & Facility Information page (live year-to-date gallons overflowed) | watch | fetched | events | MMSD says its counter's figures can be corrected and are unverified; a rise is never read as an overflow or its time (expansion research 2026-11-09). Watched for availability in the register. |
 | `wi-mmsd-water-drop-alert` | MMSD Water Drop Alert (text WATERDROP to 414-296-4422) | watch | fetched | social | A pre-storm "use less water" alert, not an overflow notice; useful as a lead indicator only. |
 | `wi-municipal-sso-notices` | Municipal SSO public notices on city websites (Fremont-Orihula-Wolf River, Hortonville, Fox Crossing, Menomonie, Stoughton Utilities, Oconomowoc Utilities, Fennimore, Town of Greenville) | watch | search_only | events | Proves notices exist on the web, scattered across hundreds of municipal sites; not worth individual ingesters. |
+| `wi-superior-cso` | City of Superior Sewage Disposal System CSO notification | watch | prior_inventory_only | events | The City's CSO page holds a table for each overflow's location, water, access areas, start, end and volume; it had two blank rows and no filled row when read by GitHub's runner, where the pipeline runs, on 2026-11-16, so there is nothing to test a reader on yet; watched. Blank rows are not a finding of no overflow. |
+| `wi-wdnr-brrts-closed-spills` | WDNR BRRTS on the Web search (closed spill incidents) | watch | prior_inventory_only | events | Where SERTS incidents go when they close; it answered GitHub's runner on 2026-11-16, and no closed sewage query has been tested. |
+| `wi-wdnr-serts-open-spills` | WDNR SERTS open spill incidents list | watch | prior_inventory_only | events | Statewide list of open spill incidents of every substance, some of them sewage; it answered GitHub's runner on 2026-11-16. Not collected yet: its export and paging are untested and each row names the DNR's spill coordinator, which must be dropped before anything is saved. Watched for availability only. |
 | `wi-epa-sobe` | EPA SOBE event tables, Wisconsin permits | rejected | fetched | events | Rechecked 2026-11-14: Wisconsin permittees report through the DNR's Switchboard; EPA's event table extracts dated 2026-11-12 held no Wisconsin report. Watched in the register. |
 | `wi-wdnr-sso-report-page` | WDNR Sanitary Sewer Overflow reporting page | rejected | fetched | events | Submission instructions only; Switchboard is a permittee login. No WDNR public overflow data found. |
-| `wi-superior-cso` | City of Superior Sewage Disposal System CSO notification | unreachable | prior_inventory_only | events | The City's CSO page exists (2026-11-09) but did not answer on 2026-11-14 and has shown no filled row to build a reader on; registered as a watched channel. |
-| `wi-wdnr-beach-health` | WDNR Wisconsin Beach Health: advisories map layer and Beach Advisory Reports | unreachable | fetched | advisories | Wisconsin Beach Health and its map layer (apps.dnr.wi.gov, dnrmaps.wi.gov) did not answer the build's client on 2026-11-14 (connection timed out; a second network refused); its fields and keys could not be read, so no reader was built. Registered as channels watched for availability only (no page text kept). |
-| `wi-wdnr-brrts-closed-spills` | WDNR BRRTS on the Web search (closed spill incidents) | unreachable | prior_inventory_only | events | Where SERTS incidents go when they close; not reachable on 2026-11-14 and no query tested. |
-| `wi-wdnr-serts-open-spills` | WDNR SERTS open spill incidents list | unreachable | prior_inventory_only | events | Statewide mixed-spill list with some sewage incidents; unreachable from the build on 2026-11-14 and its export untested, so no reader was built. Registered as a channel watched for availability only (no page text kept). |
+| `wi-milwaukee-health-beach-report` | City of Milwaukee Health Department beach water report | unreachable | inferred | advisories | A browser challenge: both of its addresses answered GitHub's runner, where the pipeline runs, with HTTP 403 on 2026-11-16 (run 43788396939), as they answered on 2026-11-15. We do not get around it; the beaches are in the DNR's beach system when the Department lists them. |
 
 ## de: Delaware (9)
 
@@ -1930,7 +1930,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 |---|---|---|---|---|---|
 | `nv-law-nac-445a-3473` | NAC 445A.345 to 445A.348 release notification (hazardous substances, spill hotline) | used | fetched | law | Fetched: release to surface water reported "as soon as practicable" by phone; land releases over 25 gallons by the first working day. |
 | `nv-law-sb276-2025` | Nevada SB 276 (2025): local governments must notify NDEP of sewage discharges; NDEP notifies affected tribes | used | fetched | law | Fetched: duty to notify NDEP electronically or by telephone, no deadline stated; tribe notice by NDEP; no public notice. Codified as NRS 445A.467 (official chapter, revision of 2026-04-15, read 2026-11-09). |
-| `nv-state-parks-hab` | Nevada State Parks HAB advisory page | used | fetched | advisories | Read by the nv-state-parks-hab ingester: one hab_advisory record per water while listed, the parks' level and words, the first read as the start. The parser was built and tested on the Internet Archive's copies of 2025-11-12 (Rye Patch Watch, Lahontan Warning) and 2026-08-13 (Lahontan, Rye Patch, Marlette Lake and Washoe Lake Watch), and on the page as the pipeline read it on 2026-11-16 (Rye Patch and Wild Horse Watch, Lahontan Warning, no Danger). |
+| `nv-state-parks-hab` | Nevada State Parks HAB advisory page | used | fetched | advisories | Read by the nv-state-parks-hab ingester: one hab_advisory record per water while listed, the parks' level and words, the first read as the start. The live host refused the collector's connections on 2026-11-14 (no answer on ports 443 and 80); the parser was built and tested on the Internet Archive's copies of 2025-11-12 (Rye Patch Watch, Lahontan Warning) and 2026-08-13 (Lahontan, Rye Patch, Marlette Lake and Washoe Lake Watch). |
 | `nv-ndep-hab-dashboard` | Nevada HAB Dashboard (Office of State Epidemiology, Power BI) and weekly HAB email list | candidate | fetched | advisories | The only statewide bloom status found, a Power BI report: on 2026-11-09 the page returned only its script shell, in which no rows, no download and no data address were found (the report's own data calls were not examined). Registered as a channel with the barrier; a supported export is an owner request. |
 | `nv-ndep-hab-program` | NDEP harmful algal bloom program page | watch | fetched | advisories | Program page linking the statewide dashboard and the weekly e-mail update; watched for a data download (register row nv-ndep-hab-program). |
 | `nv-ndep-public-documents` | NDEP public document search (OnBase) | watch | fetched | context | Not all record series are online; whether sewage incident files are searchable was not verified. A records request for the NRS 445A.467 notices is the route. |
@@ -1941,7 +1941,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nv-tahoe-beaches` | Lake Tahoe beach bacteria monitoring | watch | fetched | monitoring | The Nevada Tahoe Conservation District's Nearshore Human Health page describes the monitoring with a 2023 report; its Lake Tahoe Info program page gave no readable results (2026-11-09). No current station results or closures found. |
 | `nv-truckee-river-news` | Reno/Sparks Truckee River sewage spill coverage (News 4, KNPR) | watch | search_only | news | The 2022 Sparks spill (estimates 214,000 to 2.5 million gallons to the Truckee) went unreported to NDEP and led to SB 276. |
 | `nv-epa-sobe` | EPA ECHO SOBE (Nevada) | rejected | fetched | events | No Nevada events and no Nevada collection systems in the current and all-versions extracts of 2026-11-12 (rechecked at the build). |
-| `nv-ndep-environmental-activities` | NDEP Nevada Environmental Activities portal (Report a Spill) | rejected | fetched | events | Intake only (an online form and account login); no public view of the notices found. |
+| `nv-ndep-environmental-activities` | NDEP Nevada Environmental Activities portal (Report a Spill) | rejected | fetched | events | Intake only (an online form and account login); no public view of the notices found. The host did not answer the collector on 2026-11-14. |
 | `nv-swim-guide` | Swim Guide affiliates in Nevada | rejected | search_only | monitoring | None found (search only). |
 
 ## ok: Oklahoma (10)
