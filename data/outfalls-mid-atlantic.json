@@ -70492,7 +70492,7 @@
    "city": "MC DONALD",
    "outfall": "A01",
    "outfall_name": "Meadow Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70508,7 +70508,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 16 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70517,7 +70527,7 @@
    "city": "MC DONALD",
    "outfall": "A02",
    "outfall_name": "O'Hara Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70533,7 +70543,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 197 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70542,7 +70562,7 @@
    "city": "MC DONALD",
    "outfall": "A03",
    "outfall_name": "S. McDonald Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70558,7 +70578,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 254 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70567,7 +70597,7 @@
    "city": "MC DONALD",
    "outfall": "A04",
    "outfall_name": "Third Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70583,7 +70613,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 241 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70592,7 +70632,7 @@
    "city": "MC DONALD",
    "outfall": "B011",
    "outfall_name": "E. Lincoln Avenue",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robbs Run",
    "reach_id": null,
@@ -70608,7 +70648,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robbs Run' by name; Robb Run (robb-run-pa, hand record, NHD high resolution), 88 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70617,7 +70667,7 @@
    "city": "MC DONALD",
    "outfall": "B012",
    "outfall_name": "E. Lincoln Avenue",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robbs Run",
    "reach_id": null,
@@ -70633,7 +70683,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robbs Run' by name; Robb Run (robb-run-pa, hand record, NHD high resolution), 109 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70642,7 +70702,7 @@
    "city": "MC DONALD",
    "outfall": "B013",
    "outfall_name": "Arabella Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robbs Run",
    "reach_id": null,
@@ -70658,7 +70718,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robbs Run' by name; Robb Run (robb-run-pa, hand record, NHD high resolution), 71 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70667,7 +70737,7 @@
    "city": "MC DONALD",
    "outfall": "B014",
    "outfall_name": "School Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robbs Run",
    "reach_id": null,
@@ -70683,7 +70753,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robbs Run' by name; Robb Run (robb-run-pa, hand record, NHD high resolution), 65 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70692,7 +70772,7 @@
    "city": "MC DONALD",
    "outfall": "B015",
    "outfall_name": "N. McDonald Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robbs Run",
    "reach_id": null,
@@ -70708,7 +70788,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robbs Run' by name; Robb Run (robb-run-pa, hand record, NHD high resolution), 134 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70717,7 +70807,7 @@
    "city": "MC DONALD",
    "outfall": "B016",
    "outfall_name": "Washington Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robbs Run",
    "reach_id": null,
@@ -70733,7 +70823,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robbs Run' by name; Robb Run (robb-run-pa, hand record, NHD high resolution), 160 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70742,7 +70842,7 @@
    "city": "MC DONALD",
    "outfall": "B017",
    "outfall_name": "N. McDonald Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robbs Run",
    "reach_id": null,
@@ -70758,7 +70858,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robbs Run' by name; Robb Run (robb-run-pa, hand record, NHD high resolution), 60 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70767,7 +70877,7 @@
    "city": "MC DONALD",
    "outfall": "B018",
    "outfall_name": "N. McDonald Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robbs Run",
    "reach_id": null,
@@ -70783,7 +70893,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robbs Run' by name; Robb Run (robb-run-pa, hand record, NHD high resolution), 103 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70792,7 +70912,7 @@
    "city": "MC DONALD",
    "outfall": "B02",
    "outfall_name": "Miller Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70808,7 +70928,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 153 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70817,7 +70947,7 @@
    "city": "MC DONALD",
    "outfall": "B03",
    "outfall_name": "O'Hara Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70833,7 +70963,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 150 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70842,7 +70982,7 @@
    "city": "MC DONALD",
    "outfall": "B04",
    "outfall_name": "O'Hara Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70858,7 +70998,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 146 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70867,7 +71017,7 @@
    "city": "MC DONALD",
    "outfall": "B05",
    "outfall_name": "O'Hara Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70883,7 +71033,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 161 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70892,7 +71052,7 @@
    "city": "MC DONALD",
    "outfall": "B06",
    "outfall_name": "King Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70908,7 +71068,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 295 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70917,7 +71087,7 @@
    "city": "MC DONALD",
    "outfall": "B07",
    "outfall_name": "S. McDonald Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70933,7 +71103,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 281 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70942,7 +71122,7 @@
    "city": "MC DONALD",
    "outfall": "B08",
    "outfall_name": "Third Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70958,7 +71138,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 241 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066109",
@@ -70967,7 +71157,7 @@
    "city": "MC DONALD",
    "outfall": "B09",
    "outfall_name": "Third Street",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Robinson Run",
    "reach_id": null,
@@ -70983,7 +71173,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Robinson Run' by name; Robinson Run (robinson-run-pa, NHDPlus V2.1 record), 227 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists McDonald Borough's permit with 20 CSO outfalls (long-term control plan complete; separation under permit review); EPA's inventory lists its 20 rows closed. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066141",
@@ -70992,7 +71192,7 @@
    "city": "MUNHALL",
    "outfall": "004",
    "outfall_name": "946 Ravine St",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Monongahela River",
    "reach_id": null,
@@ -71008,7 +71208,17 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Monongahela River (monongahela-river-pa) is the only water of the receiving water's name ('Monongahela River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists Munhall Borough's permit with 4 CSO outfalls; EPA's inventory has two rows, both closed (the other two have no row). Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066141",
@@ -71017,7 +71227,7 @@
    "city": "MUNHALL",
    "outfall": "012",
    "outfall_name": "1110 Ravine St",
-   "outfall_status": "CLS",
+   "outfall_status": "CSO (open: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Monongahela River",
    "reach_id": null,
@@ -71033,7 +71243,17 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Monongahela River (monongahela-river-pa) is the only water of the receiving water's name ('Monongahela River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CLS",
+   "status_note": "DEP's spreadsheet ('Existing CSOs') lists Munhall Borough's permit with 4 CSO outfalls; EPA's inventory has two rows, both closed (the other two have no row). Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "NY0025747",

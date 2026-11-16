@@ -28,6 +28,16 @@ outfalls are not rounded; the Indiana file's own three-decimal rule aside, 2 bel
    permitted_feature; otherwise a builder stops and --check fails (review 2026-11-15).
 3. NO_POINT: an Indiana outfall no source places: no point, and no_point_reason says what was searched.
 
+4. STATUS, ADD and SHARED (2026-11-16, research/cso-registry-2026-11-16/corrections.json, from the authorities' own
+   lists): STATUS sets an outfall open or closed as the authority lists it (Ecology's and Spokane's tables, Pennsylvania
+   DEP's CSO spreadsheet, DC Water's quarterly reports), keeping EPA's own status in epa_outfall_status, with
+   status_note and status_source; where EPA and the state disagree the state permitting authority is followed (the
+   registry's rule, scripts/build_wv_outfalls.py). ADD writes an outfall an authority lists that no registry file has
+   (GLWA's untreated outfalls), with no point unless the source gives one (no_point_reason). SHARED marks a point two
+   permits both list as one outfall: the other permit's row keeps its place, open, with same_outfall_as naming the row
+   kept (counted once: build.rain_likely.cso_counted, export.outfalls alias_of; the rain caution still reads both rows),
+   and the kept row lists the other permits in also_permits. A row is never deleted.
+
 Every entry states the row it expects. A row that is neither as expected nor already corrected is reported and left as
 it is (changed EPA evidence must be looked at, not overwritten); the script writes nothing then.
 """
@@ -129,6 +139,29 @@ NO_POINT = {
 
 GONE = ("coords_problem", "echo_lat", "echo_lon", "echo_coords_from", "no_point_reason", "point_note")
 
+# 4. the authorities' lists of 2026-11-16 (module docstring): status, add, shared
+REGISTRY_FIXES = ROOT / "research" / "cso-registry-2026-11-16" / "corrections.json"
+FIXES_BY = "scripts/outfall_point_corrections.py (2026-11-16)"
+
+
+def load_fixes(path: Path | None = None) -> dict:
+    """The STATUS, ADD and SHARED tables: {(file, permit, outfall): entry} each, and ALSO {(file, permit, outfall):
+    [{npdes_permit, outfall}]} for the kept rows of SHARED."""
+    doc = json.loads((path or REGISTRY_FIXES).read_text())
+    status = {(e["file"], e["npdes_permit"], e["outfall"]): e for e in doc.get("status") or []}
+    add = {(e["file"], e["row"]["npdes_permit"], e["row"]["outfall"]): e for e in doc.get("add") or []}
+    shared = {(e["file"], e["npdes_permit"], e["outfall"]): e for e in doc.get("shared") or []}
+    also: dict[tuple, list] = {}
+    for e in shared.values():
+        k = (e["same_as"]["file"], e["same_as"]["npdes_permit"], e["same_as"]["outfall"])
+        also.setdefault(k, []).append({"npdes_permit": e["npdes_permit"], "outfall": e["outfall"]})
+    for v in also.values():
+        v.sort(key=lambda x: (x["npdes_permit"], x["outfall"]))
+    return {"status": status, "add": add, "shared": shared, "also": also}
+
+
+FIXES = load_fixes()
+
 
 def _key(o: dict) -> tuple[str, str]:
     return str(o.get("npdes_permit") or ""), str(o.get("outfall") or "")
@@ -142,21 +175,65 @@ def _pt(o: dict, a: str = "lat", b: str = "lon") -> tuple:
     return o.get(a), o.get(b)
 
 
+def _tables():
+    return (("sign", SIGN), ("feature", FEATURE), ("nopoint", NO_POINT), ("status", FIXES["status"]),
+            ("add", FIXES["add"]), ("shared", FIXES["shared"]), ("also", FIXES["also"]))
+
+
 def entries(name: str):
     """Every table entry for registry file `name`: (table, (permit, outfall), value)."""
-    for table, t in (("sign", SIGN), ("feature", FEATURE), ("nopoint", NO_POINT)):
+    for table, t in _tables():
         for (f, p, n), v in t.items():
             if f == name:
                 yield table, (p, n), v
 
 
 def files() -> list[str]:
-    return sorted({k[0] for t in (SIGN, FEATURE, NO_POINT) for k in t})
+    return sorted({k[0] for _, t in _tables() for k in t})
+
+
+def _src(v) -> list[dict]:
+    return [{**x, "by": FIXES_BY} for x in v["source"]]
+
+
+def _at(o: dict) -> tuple | None:
+    return None if o.get("lat") is None or o.get("lon") is None else (round(o["lat"], 4), round(o["lon"], 4))
+
+
+def _open_cso(o: dict) -> bool:
+    return (o.get("outfall_kind") or "cso") == "cso" and not str(o.get("outfall_status") or "").upper().startswith("CLS")
 
 
 def state(table: str, o: dict, v) -> str:
     """'original' (the row as EPA's or the state's data gives it), 'corrected', or why neither."""
     k = f"{o.get('npdes_permit')} {o.get('outfall')}"
+    if table == "status":
+        if o.get("outfall_status") == v["status"] and o.get("epa_outfall_status") == v["expect_status"]:
+            return "corrected"
+        if o.get("outfall_status") == v["expect_status"] and "epa_outfall_status" not in o:
+            return "original"
+        return (f"{k}: status {o.get('outfall_status')!r} (EPA's kept: {o.get('epa_outfall_status')!r}), neither EPA's "
+                f"{v['expect_status']!r} as expected nor the table's {v['status']!r}: look at it; not changed")
+    if table == "add":
+        # the table's own fields (the ties step may add a water or rewrite its reason, as on any row)
+        r = v["row"]
+        if (o.get("added_from") == r["added_from"] and o.get("added_source") == _src(v)
+                and o.get("outfall_status") == r["outfall_status"] and _pt(o) == _pt(r)):
+            return "corrected"
+        return (f"{k}: a registry row now exists for this outfall (EPA's or a state's list has it): look at it before "
+                f"the table's row is used; not changed")
+    if table in ("shared", "also"):
+        pt = tuple(v["point"]) if table == "shared" else None
+        if not _open_cso(o):
+            return f"{k}: not an open combined sewer outfall now ({o.get('outfall_status')!r}): look at it; not changed"
+        if table == "shared" and _at(o) != pt:
+            return f"{k}: the point is now {_at(o)}, not the shared point {pt}: look at it; not changed"
+        if table == "shared":
+            same = o.get("same_outfall_as")
+            return "corrected" if same == _same(v) else "original" if same is None else \
+                f"{k}: same_outfall_as is {same!r}, not the table's: not changed"
+        return "corrected" if o.get("also_permits") == v else "original" if o.get("also_permits") is None else \
+            f"{k}: also_permits is {o.get('also_permits')!r}, not the table's: not changed"
     if table == "sign":
         epa, fix = v[0], v[1]
         if _pt(o) == fix and _pt(o, "epa_lat", "epa_lon") == epa:
@@ -181,8 +258,29 @@ def state(table: str, o: dict, v) -> str:
     return "corrected" if o.get("no_point_reason") == v[1] else "original"
 
 
+def _same(v) -> dict:
+    return {"npdes_permit": v["same_as"]["npdes_permit"], "outfall": v["same_as"]["outfall"],
+            "file": "data/" + v["same_as"]["file"], "reason": v["reason"],
+            "note": ("the same point (to four decimals) under two permits: one outfall, counted once under the kept row"
+                     + (f"; the kept permit also has outfall(s) {', '.join(v['others_at_point'])} at this point"
+                        if v.get("others_at_point") else "")),
+            "by": FIXES_BY}
+
+
 def write(table: str, o: dict, v) -> bool:
     """Write an entry into a row state() accepted (in place). True when the row's point moved."""
+    if table == "status":
+        o["epa_outfall_status"] = v["expect_status"]
+        o["outfall_status"], o["status_note"], o["status_source"] = v["status"], v["status_note"], _src(v)
+        return False
+    if table == "add":
+        return False                     # written by apply_rows (a new row)
+    if table == "shared":
+        o["same_outfall_as"] = _same(v)
+        return False
+    if table == "also":
+        o["also_permits"] = [dict(x) for x in v]
+        return False
     if table == "nopoint":
         o["no_point_reason"] = v[1]
         return False
@@ -210,7 +308,10 @@ def problems(table: str, o: dict, v) -> list[str]:
     st = state(table, o, v)
     if st != "corrected":
         return [st if st != "original" else f"{k}: not corrected"]
-    if table == "nopoint":
+    if table == "status":
+        want = {"status_note": v["status_note"], "status_source": _src(v)}
+        return [f"{k}: {f} is not the table's" for f, w in want.items() if o.get(f) != w]
+    if table in ("nopoint", "add", "shared", "also"):
         return []
     want = dict(zip(("lat", "lon"), v[1] if table == "sign" else v[0]))
     if table == "sign":
@@ -273,10 +374,21 @@ def apply_rows(name: str, rows: list[dict], strict: bool = False,
         idx.setdefault(_key(o), []).append(o)
     moved, todo = [], []
     bad = evidence_problems(name, evidence) if strict or _has_feature_rows(name, rows) else []
+    new_rows = []
+    permits_here = {str(o.get("npdes_permit") or "") for o in rows}
     for table, key, v in entries(name):
         if table == "feature" and bad:          # bad holds only the evidence problems here: no FEATURE point is used
             continue
         got = idx.get(key) or []
+        if table == "add" and not got:
+            # only into a build that holds the permit (its listed rows): a build of other permits or states is left
+            # alone, and a permit EPA no longer lists at all leaves the row missing, which --check reports
+            if key[0] not in permits_here:
+                if strict:
+                    bad.append(f"{key[0]} {key[1]}: the permit has no row in data/{name} to add the outfall beside")
+                continue
+            new_rows.append({**copy.deepcopy(v["row"]), "added_source": _src(v)})
+            continue
         if len(got) != 1:
             if got or strict:
                 bad.append(f"{key[0]} {key[1]}: {len(got)} rows in data/{name}, expected 1")
@@ -291,6 +403,9 @@ def apply_rows(name: str, rows: list[dict], strict: bool = False,
     for table, o, v in todo:
         if write(table, o, v):
             moved.append(o)
+    for r in new_rows:                          # after the permit's last row (or at the end), the file's order kept
+        last = max((i for i, o in enumerate(rows) if o.get("npdes_permit") == r["npdes_permit"]), default=len(rows) - 1)
+        rows.insert(last + 1, r)
     return moved, bad
 
 
@@ -322,6 +437,21 @@ def check(docs: dict[str, dict], evidence: list[dict] | None = None) -> list[str
             got = idx.get(key) or []
             bad += ([f"{key[0]} {key[1]}: {len(got)} rows in data/{name}, expected 1"] if len(got) != 1
                     else problems(table, got[0], v))
+    bad += shared_problems(docs)
+    return bad
+
+
+def shared_problems(docs: dict[str, dict]) -> list[str]:
+    """Each SHARED pair across files: the kept row is open, at the same point (four decimals) as the row marked."""
+    bad = []
+    idx = {(n, *_key(o)): o for n, d in docs.items() for o in d["outfalls"]}
+    for (f, p, n), v in FIXES["shared"].items():
+        k = (v["same_as"]["file"], v["same_as"]["npdes_permit"], v["same_as"]["outfall"])
+        keep = idx.get(k)
+        if keep is None:
+            bad.append(f"{p} {n}: the kept row {k[1]} {k[2]} is not in data/{k[0]}")
+        elif not _open_cso(keep) or _at(keep) != tuple(v["point"]):
+            bad.append(f"{p} {n}: the kept row {k[1]} {k[2]} is no longer open at {tuple(v['point'])}")
     return bad
 
 
