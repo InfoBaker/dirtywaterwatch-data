@@ -24,7 +24,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | pa | 16 | 3 | 20 | 14 | 3 | 56 |
 | md | 11 | 8 | 15 | 11 | 4 | 49 |
 | va | 22 | 11 | 28 | 7 | 1 | 69 |
-| dc | 22 | 8 | 26 | 12 | 5 | 73 |
+| dc | 24 | 7 | 25 | 12 | 5 | 73 |
 | nc | 9 | 1 | 6 | 1 | 0 | 17 |
 | ga | 7 | 0 | 4 | 1 | 0 | 12 |
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **626** | **234** | **551** | **229** | **81** | **1721** |
+| **all** | **628** | **233** | **550** | **229** | **81** | **1721** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1245,9 +1245,11 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `dc-dcmr-21-1108-swimming` | 21 DCMR § 1108 Rivers (swimming prohibition and special swimming events) | used | fetched | law | The swimming ban, in force; special events need E. coli <= 410 single sample and the Director must refuse if there 'may be a health risk from a known pollution source, including: (1) Combined sewer overflow; (2) Failing sewer infrastructure'. |
 | `dc-dcwater-cleanrivers` | DC Water Clean Rivers Project page and documents | used | fetched | permits | Law and context documents downloaded from here. |
 | `dc-dcwater-cso-outfalls-agol` | DC Water CSOSheds interactive map: Combined Sewer Outfalls layer | used | fetched | outfalls | Owner-published outfall points with photos; matches ECHO inventory IDs. |
+| `dc-dcwater-cso-quarterly-reports` | DC Water CSO Facilities Quarterly Reports (monthly CSS operations + modeled/metered CSO results per outfall) | used | fetched | events | The legally required public CSO record. Read by the dc-water-cso-quarterly feed (pipeline/ingest/dc_water_cso_quarterly.py): each month's Table 2-7 gives dated overflows with estimated durations at the inflatable dam structures, tied to outfalls through DC Water's Table 2-1; 189 dated overflows from the first quarter of 2020 to the third quarter of 2026. The quarter totals per outfall are not itemised. Some pages have no text layer (July and August 2026 unread). |
 | `dc-dcwater-css-page` | DC Water Combined Sewer System page (CSO information website required by permit) | used | fetched | advisories | Source of the advice text and of the 24 h / up to 3 days wording for the DC rule row; no live status. |
 | `dc-dcwater-news-notices` | DC Water news releases and public notices (sewer overflow notices) | used | fetched | events | The only place DC Water announces large SSOs to the public, but prose HTML with no feed; scrape the list page daily and parse titles containing overflow/SSO/sewage. |
 | `dc-dcwater-pi-collapse-hub` | DC Water Potomac Interceptor Collapse hub page | used | fetched | events | Primary record of the 2026 collapse; source for events. |
+| `dc-dcwater-sso-csv` | DC Water Sanitary Sewer Dashboard (open data CSV) | used | fetched | events | Read by the dc-water-sso feed (pipeline/ingest/dc_water_sso.py): one record per row with the report time, the gallons and the street names only; the premise id, the description and house numbers are dropped before saving. Far less complete than the EPA rows over the same span, and it still shows the Potomac Interceptor collapse at its first estimate (833,333 gal). |
 | `dc-doee-daily-ecoli-release` | DOEE release 'DC To Begin Daily E. coli Testing on the Potomac and Anacostia' (2026-02-27) | used | fetched | monitoring | Defines DOEE's six routine sites incl. the Washington Channel. |
 | `dc-doee-pi-faq` | DOEE 'Potomac Interceptor Update and FAQs' | used | fetched | advisories | Agency roles and thresholds; DOEE weekly then daily sampling. |
 | `dc-echo-cso-inventory-dc` | EPA ECHO national CSO inventory, DC rows (ALL_CSO_DOWNLOADS.csv) | used | fetched | outfalls | Outfall IDs, coordinates, receiving waters (Rock Creek 29 incl. separated, Anacostia 15, Potomac 11, plus 019 mis-tagged 'Potomac River'). |
@@ -1261,7 +1263,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `dc-cmc-data-explorer` | Chesapeake Monitoring Cooperative (CMC) Data Explorer API (Anacostia Riverkeeper, Potomac Riverkeeper E. coli) | candidate | fetched | monitoring | Best machine-readable bacteria source for DC waters (the groups' Swim Guide entries mirror it). |
 | `dc-dcgis-css-layers` | DC GIS Combined Sewer System Area (layer 31) and Combined Sewer Sewershed (layer 19) | candidate | fetched | outfalls | Sewershed polygons for 'what drains here' context; outfall points come from DC Water's AGOL layer. |
 | `dc-dcgis-pi-ecoli-samples` | Potomac Interceptor E. coli Sample Results (DCGIS ArcGIS feature service, all agencies) | candidate | fetched | monitoring | Machine-readable incident monitoring across five agencies; good for the 2026 collapse event page; static now. |
-| `dc-dcwater-cso-quarterly-reports` | DC Water CSO Facilities Quarterly Reports (monthly CSS operations + modeled/metered CSO results per outfall) | candidate | fetched | events | The legally required public CSO record. Quarter-precision totals per outfall: use as annual/quarterly totals (no event pages). Needs PDF parsing, OCR for some quarters. |
 | `dc-doee-wq-routine` | DOEE routine ambient E. coli monitoring (6 sites: 3 Potomac, 2 Anacostia, 1 Washington Channel) | candidate | inferred | monitoring | Use via the PI feature service while it lasts; otherwise via the Water Quality Portal (federal agent). |
 | `dc-prkn-community-science` | Potomac Riverkeeper Network community science E. coli monitoring and Swim Guide listings | candidate | fetched | monitoring | Use through CMC. |
 | `dc-reservoir-wq-dashboard` | Reservoir Center / Xylem 'Water Quality' dashboard and API (Anacostia, Potomac, Shenandoah sondes + CMC E. coli) | candidate | fetched | monitoring | Machine-readable, but an undocumented API of a partner site; ask permission before polling (owner decision). E. coli is not real time. |
@@ -1277,7 +1278,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `dc-dcwater-everbridge-alerts` | DC Water Alert Notification Signups (Everbridge: Workzone Alerts, Emergency Alerts, News releases) | watch | fetched | events | Owner to subscribe to News releases to get overflow notices by email (the news page has no RSS). |
 | `dc-dcwater-ltcp-cd-quarterly` | DC Water Long Term Control Plan Consent Decree quarterly status reports | watch | fetched | permits | Construction schedule context (Potomac River Tunnel, Piney Branch Tunnel), not events. |
 | `dc-dcwater-social` | DC Water social accounts (X @dcwater, Facebook DCWaterSewerAuth, Instagram dc.water, LinkedIn, YouTube mydcwater) | watch | search_only | social | Not read; likely reposts of news releases. No API access without accounts. |
-| `dc-dcwater-sso-csv` | DC Water Sanitary Sewer Dashboard (open data CSV) | watch | fetched | events | Far less complete than the EPA SOBE rows (140 current DC rows over the same span) and still shows the PI collapse at its first estimate (833,333 gal). Keep as a cross-check only. |
 | `dc-dcwater-wq-monitoring` | DC Water Potomac River water quality monitoring page (PI response) and 'Past Sample results' PDFs | watch | fetched | monitoring | Incident monitoring, now ended; the same results are in the DCGIS feature service (dc-dcgis-pi-ecoli-samples), which is machine-readable. |
 | `dc-doee-river-monitoring` | DOEE Anacostia and Potomac River Monitoring page (continuous sondes; swimming rules; E. coli charts) | watch | fetched | monitoring | Real-time display offline; routine E. coli results not published as data here. DOEE's 2026 daily results were posted through the PI hub service. |
 | `dc-doee-swim-event-approval` | DOEE 'How to Obtain Approval for a Swim Event in the Potomac and Anacostia Rivers' | watch | search_only | advisories | Permit-only swims (e.g. Anacostia swim events, triathlons) are the only legal swimming; event-day water tests are not a public feed. |
