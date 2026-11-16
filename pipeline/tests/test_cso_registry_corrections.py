@@ -250,3 +250,67 @@ def test_the_refetch_rewrites_only_the_permits_named_and_keeps_a_row_epa_dropped
     assert "2026-11-14" in got[("PA9999991", "001")]["inventory_file"]
     assert "no longer lists" in got[("PA9999991", "009")]["not_in_inventory"]
     assert out["appended"][-1]["permits"] == ["PA9999991"]
+
+
+# ------------------------------------------------ review 2026-11-16 (Astra)
+
+def test_an_annotated_closed_status_is_closed_for_the_reaches():
+    from build import reaches
+    for s in ("CLS", "CLS|DSW", "CLS (separated: DC Water's quarterly CSO reports, 2026)",
+              "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)", "CLS (ended 2011-11-18 in DEP's layer)"):
+        assert reaches.is_closed({"outfall_status": s}), s
+    for s in ("CSO", "CSO|DSW", "CSO (open: Ecology's CSO table)", "TCS"):
+        assert not reaches.is_closed({"outfall_status": s}), s
+
+
+def test_every_shared_mark_cites_its_dated_source(registry):
+    for o in (o for o in registry if o.get("same_outfall_as")):
+        src = o["same_outfall_as"]["source"]
+        assert src and all(s["url"].startswith("https://") and s["read_at"] == "2026-11-16" for s in src)
+        assert "ALL_CSO_DOWNLOADS.csv" in src[0]["name"]
+
+
+def test_a_shared_row_is_not_marked_when_its_kept_row_moved_in_the_same_build(mod, docs):
+    e = next(e for e in FIXES["shared"] if e["same_as"]["file"] == e["file"])
+    rows = [_as_epa_gives_it(o) for o in docs[e["file"]]["outfalls"]]
+    keep = next(o for o in rows if (o["npdes_permit"], o["outfall"]) == (e["same_as"]["npdes_permit"], e["same_as"]["outfall"]))
+    keep["lat"] += 0.01
+    _, bad = mod.apply_rows(e["file"], rows)
+    other = next(o for o in rows if (o["npdes_permit"], o["outfall"]) == (e["npdes_permit"], e["outfall"]))
+    assert "same_outfall_as" not in other and any("kept row" in b for b in bad)
+
+
+def test_the_refetch_keeps_the_values_epa_changed(docs):
+    o = one(docs, "outfalls-us.json", "OH0052922", "005")
+    assert o["outfall_status"] == "CLS" and o["replaces_inventory_row"]["outfall_status"] == "CSO"
+    assert "2026-10-31" in o["replaces_inventory_row"]["from"]
+
+
+def test_the_national_files_count_their_rows(docs):
+    for n in ("outfalls-us.json",):
+        assert docs[n]["count"] == len(docs[n]["outfalls"])
+
+
+def test_a_named_permit_epa_dropped_whole_keeps_its_rows_marked(tmp_path):
+    head = ["NPDES_ID", "STATE_CODE", "FACILITY_NAME", "FACILITY_CITY", "PERM_FEATURE_NMBR", "PERM_FEATURE_TEXT",
+            "PF_CHARACTER", "PERM_FEATURE_TYPE_CODE", "PF_STATE_WATERBODY_NAME", "PF_STATE_AUTO_NAME", "PF_REACH_ID",
+            "IN_ICIS", "PERMIT_STATUS_CODE", "ECHO_DFR_LINK", "PF_LAT", "PF_LON", "FACILITY_LAT", "FACILITY_LON"]
+    with open(tmp_path / "ALL_CSO_DOWNLOADS.csv", "w", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(head)
+        w.writerow(["PA9999991", "PA", "TEST A", "X", "001", "", "CLS", "EXO", "Test Creek", "", "", "YES", "EFF", "",
+                    "40.1", "-77.1", "", ""])
+    gone = {"npdes_permit": "PA9999993", "state": "PA", "outfall": "001", "outfall_status": "CSO", "match": "none"}
+    was = {"npdes_permit": "PA9999991", "state": "PA", "outfall": "001", "outfall_status": "CSO", "match": "none",
+           "lat": 40.1, "lon": -77.1}
+    (tmp_path / "out.json").write_text(json.dumps({"source": "x", "outfalls": [was, gone]}))
+    (tmp_path / "water").mkdir()
+    env = {**os.environ, "DWW_STATES": "PA", "DWW_PERMITS": "PA9999991,PA9999993", "DWW_CSO_FILE_DATE": "2026-11-14"}
+    r = subprocess.run([sys.executable, "-I", str(ROOT / "scripts" / "match_outfalls.py"),
+                        str(tmp_path / "ALL_CSO_DOWNLOADS.csv"), str(tmp_path / "water"), str(tmp_path / "out.json"),
+                        "--append"], env=env, capture_output=True, text=True)
+    assert r.returncode == 0, r.stderr[-800:]
+    got = {(o["npdes_permit"], o["outfall"]): o for o in json.loads((tmp_path / "out.json").read_text())["outfalls"]}
+    assert "no longer lists" in got[("PA9999993", "001")]["not_in_inventory"]
+    assert got[("PA9999991", "001")]["outfall_status"] == "CLS"
+    assert got[("PA9999991", "001")]["replaces_inventory_row"]["outfall_status"] == "CSO"

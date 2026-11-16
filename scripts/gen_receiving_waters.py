@@ -141,7 +141,8 @@ def build() -> dict:
                 w["reach_ids"].add(str(r["reach_id"]))
             if r.get("nhdplus_id"):
                 w["nhdplus_ids"].add(str(r["nhdplus_id"]))
-            w["outfalls"]["closed" if closed else kind] += 1
+            if not r.get("same_outfall_as"):    # one outfall under two permits counts once; both operators named
+                w["outfalls"]["closed" if closed else kind] += 1
             if r.get("npdes_permit"):
                 w["operators"][r["npdes_permit"]] = safe_permittee(r.get("permittee") or r.get("permit_name"))
             if r.get("lat") and r.get("lon") and len(w["points"]) < 3:
