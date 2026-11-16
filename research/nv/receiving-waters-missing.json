@@ -1,88 +1,94 @@
 {
  "about": "Water names in Nevada's records that data/receiving-waters-national.json does not hold for NV: the waters the Nevada Division of State Parks' HAB Advisory page names (the Internet Archive's copies of 2025-11-12 and 2026-08-13, read 2026-11-14; and Wild Horse Reservoir, which the expansion research read on the page on 2026-11-09), one row per name and county, with the USGS GNIS point where GNIS holds the lake in that county. EPA's overflow tables hold no Nevada report; every receiving water of Nevada's permits is already on the national list.",
  "state": "NV",
- "waters": 5,
  "records": 4,
- "rows": [
+ "waters": 0,
+ "reports": 0,
+ "resolved_names": 5,
+ "resolved_reports": 0,
+ "build": {
+  "date": "2026-11-16",
+  "command": "python -m ingest.waters_from_nhd --names research/nv/receiving-waters-missing.json --state NV",
+  "records_built": 2,
+  "names_resolved": 5,
+  "network_requests": 6
+ },
+ "rows": [],
+ "resolved": [
   {
    "name": "Lahontan Reservoir",
-   "county": "Churchill County",
-   "records": 1,
-   "sources": {
-    "nv-state-parks-hab": 1
-   },
-   "seen_in": "the parks' page, Internet Archive copies of 2025-11-12 and 2026-08-13",
+   "reports": 0,
+   "slugs": [
+    "lahontan-reservoir-nv"
+   ],
+   "how": "a water record already holds the name",
    "points": [
     [
      39.395,
      -119.186
     ]
    ],
-   "point_basis": "USGS National Hydrography Dataset waterbody 136854961 (GNIS 00858052): a point inside the lake's polygon, read 2026-11-15"
-  },
-  {
-   "name": "Rye Patch Reservoir",
-   "county": "Pershing County",
-   "records": 1,
-   "sources": {
-    "nv-state-parks-hab": 1
-   },
-   "seen_in": "the parks' page, Internet Archive copies of 2025-11-12 and 2026-08-13",
-   "points": [
-    [
-     40.59,
-     -118.316
-    ]
-   ],
-   "point_basis": "USGS National Hydrography Dataset waterbody 145843564 (GNIS 00858164): a point inside the lake's polygon, read 2026-11-15"
+   "county": "Churchill County"
   },
   {
    "name": "Marlette Lake",
-   "county": "Carson City",
-   "records": 1,
-   "sources": {
-    "nv-state-parks-hab": 1
-   },
-   "seen_in": "the parks' page, Internet Archive copies of 2026-08-13",
+   "reports": 0,
+   "slugs": [
+    "marlette-lake-nv"
+   ],
+   "how": "record built from the name",
    "points": [
     [
      39.174,
      -119.902
     ]
    ],
-   "point_basis": "USGS GNIS (The National Map geonames, Other Hydrographic Features), read 2026-11-14"
+   "county": "Carson City"
+  },
+  {
+   "name": "Rye Patch Reservoir",
+   "reports": 0,
+   "slugs": [
+    "rye-patch-reservoir-nv"
+   ],
+   "how": "a water record already holds the name",
+   "points": [
+    [
+     40.59,
+     -118.316
+    ]
+   ],
+   "county": "Pershing County"
   },
   {
    "name": "Washoe Lake",
-   "county": "Washoe County",
-   "records": 1,
-   "sources": {
-    "nv-state-parks-hab": 1
-   },
-   "seen_in": "the parks' page, Internet Archive copies of 2026-08-13",
+   "reports": 0,
+   "slugs": [
+    "washoe-lake-nv"
+   ],
+   "how": "a water record already holds the name",
    "points": [
     [
      39.281,
      -119.81
     ]
    ],
-   "point_basis": "USGS National Hydrography Dataset waterbody 65204631 (GNIS 00861907): a point inside the lake's polygon, read 2026-11-15"
+   "county": "Washoe County"
   },
   {
    "name": "Wild Horse Reservoir",
-   "county": "Elko County",
-   "records": 0,
-   "sources": {
-    "nv-state-parks-hab": 0
-   },
-   "seen_in": "the parks' page as read by the expansion research on 2026-11-09 (Watch, October 5, 2026)",
+   "reports": 0,
+   "slugs": [
+    "wild-horse-reservoir-nv"
+   ],
+   "how": "record built from the name",
    "points": [
     [
      41.671,
      -115.809
     ]
    ],
-   "point_basis": "USGS GNIS (The National Map geonames, Other Hydrographic Features), read 2026-11-14"
+   "county": "Elko County"
   }
  ]
 }
