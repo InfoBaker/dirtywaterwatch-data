@@ -89,7 +89,7 @@ def test_another_sources_poll_ended_beach_keeps_its_colour(monkeypatch):
     # Astra IA/ID review 2026-11-15 P2-3: Idaho adds its own source (id-deq-cyanohab-risk-table)
     assert S.POLL_END_HORIZON_SOURCES == {"de-dnrec-recreational-water", "sc-des-beach-monitoring", "sc-des-hab",
                                           "nv-state-parks-hab", "pr-drna-beach-notices", "id-deq-cyanohab-risk-table",
-                                          "sc-des-freshwater-swim-advisories"}
+                                          "sc-des-freshwater-swim-advisories", "wi-dnr-beach-health"}
     monkeypatch.setattr(S, "POLL_END_HORIZON_SOURCES", S.POLL_END_HORIZON_SOURCES - {"pr-drna-beach-notices"})
     assert with_pr == S.event_intervals(r, None, now, None, TEST_RULES)
 
