@@ -36,6 +36,12 @@ carries also_permits ([{npdes_permit, outfall_id, discharger_id}], the other sys
 other permit's row carries alias_of ("<kept permit>:<outfall>") and same_outfall true, so the map draws it once and a
 count of rows without alias_of counts it once. Its rain field is its own permit's, as before.
 
+An official combined sewer outfall the registry lists with neither a point nor a water record (Detroit's GLWA
+untreated outfalls, 2026-11-16: numbers from its notification plan, no location published) is not a row: it goes in
+the file's own key "unplaced" (same fields, lat and lon null, water_slugs [], rain null), so the state counts and the
+state page's list of combined sewer systems include it while the maps, the Worker's live layer, the operator pages'
+point lists and the rain caution, which read "outfalls" only, never treat it as a place.
+
 Then the MassDEP layer's ids (data/build/ma-cso-outfalls.json, e.g. SPR010) as rows of their own, source_id
 "ma-massdep", so the live layer can place a MassDEP report by the id it carries; such a row has `alias_of`
 ("<permit>:<outfall>") when the registry holds the same outfall, and the map draws the registry row instead.
@@ -113,12 +119,15 @@ def rain_of(permit_row: dict | None, levels: dict | None = None, permit: str | N
 
 def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | None = None, canon=None,
                  dischargers: list[dict] | None = None, rain_permits: dict | None = None, ma_layer=None,
-                 marks: list[dict] | None = None, levels: dict | None = None) -> list[dict]:
+                 marks: list[dict] | None = None, levels: dict | None = None,
+                 unplaced: list | None = None) -> list[dict]:
     """The rows of out/outfalls.json (module docstring). registry: common.load_outfall_registry() rows; live: the
     live states; waters: the slugs of the water records (a slug that is no record is left out); canon: an older
     slug -> its record (status.SLUG_ALIASES); rain_permits: the rain block's "permits"; ma_layer: the MassDEP
     layer's outfalls ({dep_id: row} or a list); marks: out/monthly-outfalls.json "outfalls"; levels: the operator
-    levels file (build/rain_history.load_levels(), out/rain-levels.json), for each outfall's own counts."""
+    levels file (build/rain_history.load_levels(), out/rain-levels.json), for each outfall's own counts. unplaced: a
+    list that receives the official combined sewer outfalls left out for having neither a point nor a water record
+    (the file's "unplaced", module docstring): counted and listed by state and operator, never drawn."""
     canon = canon or (lambda s: s)
     dischargers = dischargers or []
     by_permit = permit_index(dischargers)
@@ -144,9 +153,10 @@ def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | Non
         slug = canon(o["water_slug"]) if o.get("water_slug") else None
         slugs = [slug] if slug and (waters is None or slug in waters) else []
         lat, lon = coord(o.get("lat")), coord(o.get("lon"))
-        if (lat is None or lon is None) and not slugs:
-            continue                    # nothing to draw and nothing to place by
         kind = o.get("outfall_kind") or "cso"
+        nowhere = (lat is None or lon is None) and not slugs
+        if nowhere and (unplaced is None or prov or kind != "cso"):
+            continue                    # nothing to draw and nothing to place by
         did = o.get("discharger_id")
         row = {"source_id": o.get("source_id") or SOURCE_BY_KIND.get(kind, "echo"), "npdes_permit": permit or None,
                "outfall_id": str(o.get("outfall") if o.get("outfall") is not None else ""), "outfall_kind": kind,
@@ -155,7 +165,7 @@ def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | Non
                "permittee": o.get("permittee"), "state": st, "lat": lat, "lon": lon,
                "receiving_water": receiving_water(o), "water_slugs": slugs, "water_match": o.get("match"),
                "rain": rain_of(rain_permits.get(permit), levels, permit, str(o.get("outfall") or ""))
-               if kind == "cso" and permit and not closed(o)
+               if kind == "cso" and permit and not closed(o) and not nowhere
                and o.get("rain_caution") is not False else None}     # a lake reversal gate: not rain-driven
         if prov:                        # a place from the overflow reports: provisional, drawn apart on the map
             row.update({k: o.get(k) for k in PROVISIONAL_FIELDS})
@@ -175,6 +185,9 @@ def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | Non
                                    for x in o["also_permits"] if isinstance(x, dict)]
         if o.get("country") and o["country"] != "US":
             row["country"] = o["country"]
+        if nowhere:                     # official, with neither a point nor a water record: counted, never a place
+            unplaced.append(row)
+            continue
         rows.append(row)
         if permit and row["outfall_id"]:       # a shared outfall's alias row too: a monthly mark for its number lands on it
             by_key.setdefault(outfall_key(permit, row["outfall_id"]), row)
@@ -227,13 +240,16 @@ def summary(rows: list[dict]) -> str:
             + ", ".join(f"{s} {k} {n}" for (s, k), n in sorted(by.items())))
 
 
-def write(rows: list[dict], out_dir: Path = OUT_DIR, built: str | None = None) -> Path:
-    """out/outfalls.json, compact."""
+def write(rows: list[dict], out_dir: Path = OUT_DIR, built: str | None = None, unplaced: list[dict] | None = None) -> Path:
+    """out/outfalls.json, compact; `unplaced` (outfall_rows' list) as its own key, apart from the rows every map and
+    the Worker read."""
     p = Path(out_dir) / "outfalls.json"
     p.parent.mkdir(parents=True, exist_ok=True)
     doc = {"built": built, "generated_from": "the outfall registry (EPA's combined sewer outfall inventory and state "
            "layers) in the states this site covers, with the monthly marks and the rain caution", "count": len(rows),
            "outfalls": rows}
+    if unplaced is not None:
+        doc["unplaced"] = unplaced
     tmp = p.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(doc, separators=(",", ":"), ensure_ascii=False))
     tmp.replace(p)
@@ -260,11 +276,12 @@ def main(out_dir: Path = OUT_DIR, data_dir: Path = DATA_DIR, build_dir: Path = B
     except (OSError, ValueError, AttributeError):
         marks = []
     dis, _ = load_dischargers()
+    unplaced: list[dict] = []
     rows = outfall_rows(load_outfall_registry(data_dir), status_mod.states(), waters=set(waters),
                         canon=lambda s: status_mod.SLUG_ALIASES.get(s, s), dischargers=dis,
                         rain_permits=rain.get("permits") or {}, ma_layer=ma_layer_rows(build_dir), marks=marks,
-                        levels=levels if isinstance(levels, dict) else None)
-    write(rows, out_dir, now_iso())
+                        levels=levels if isinstance(levels, dict) else None, unplaced=unplaced)
+    write(rows, out_dir, now_iso(), unplaced)
     print(summary(rows))
     return rows
 

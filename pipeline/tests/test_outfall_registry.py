@@ -442,3 +442,28 @@ def test_an_operator_with_no_outfall_point_is_read_at_its_treatment_plant(tmp_pa
     assert ("For one of them, rainfall is read at the treatment plant; the outfalls' own locations are not "
             "published.") in cov["sentence"]
     assert RL.READ_TEXT["plant_point"] == "rainfall read at the treatment plant; the outfalls' own locations are not published"
+
+
+def test_official_combined_sewer_outfalls_with_no_point_and_no_water_go_in_unplaced_never_in_the_rows(tmp_path):
+    """Detroit's GLWA outfalls (2026-11-16): the registry lists them with no point and no water. They are counted and
+    listed on the state page from the file's own "unplaced" key; the rows every map and the Worker read stay places
+    only, and an unplaced outfall never carries the rain caution."""
+    rows = registry(tmp_path)
+    rows.append({**row("PA0023736", "005", lat=None, lon=None), "outfall_kind": "plant"})     # a plant: never unplaced
+    rows.append({**row("PA0023736", "006", lat=None, lon=None), "outfall_status": "CLS"})     # closed: unplaced, counted closed
+    rain = {"PA0023736": {"status": "likely", "rain_24h_in": 1.3, "threshold_in": 0.1, "threshold_kind": "site_default"}}
+    unplaced: list = []
+    out = XO.outfall_rows(rows, LIVE, waters={"ne-river-ma", "susquehanna-river-pa"}, dischargers=DIS,
+                          rain_permits=rain, unplaced=unplaced)
+    assert [(r["npdes_permit"], r["outfall_id"], r["outfall_status"]) for r in unplaced] == [
+        ("PA0023736", "004", "CSO"), ("PA0023736", "006", "CLS")]
+    u = unplaced[0]
+    assert u["lat"] is None and u["lon"] is None and u["water_slugs"] == [] and u["rain"] is None
+    assert u["discharger_id"] == "pa-pa0023736" and u["outfall_kind"] == "cso" and u["state"] == "PA"
+    assert all(r["lat"] is not None or r["water_slugs"] for r in out), "a row with no point and no water is never a place"
+    assert ("PA0023736", "004") not in {(r["npdes_permit"], r["outfall_id"]) for r in out}
+    # without the list (an older caller) the rows are the same and nothing else is written
+    assert XO.outfall_rows(rows, LIVE, waters={"ne-river-ma", "susquehanna-river-pa"}, dischargers=DIS, rain_permits=rain) == out
+    doc = json.loads(XO.write(out, tmp_path / "out", "2026-11-16T12:00:00Z", unplaced).read_text())
+    assert doc["unplaced"] == unplaced and doc["count"] == len(out) and doc["outfalls"] == out
+    assert "unplaced" not in json.loads(XO.write(out, tmp_path / "out2", "2026-11-16T12:00:00Z").read_text())

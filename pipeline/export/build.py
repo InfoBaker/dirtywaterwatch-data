@@ -1855,13 +1855,16 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     write_compact(OUT_DIR / "dischargers.json", {"built": now_iso(), "from": dis_from, "count": len(dis),
                                                  "permits_with_events_not_listed": unknown_permits, "dischargers": dis})
     # the map's outfall points and the live layer's lookups (export/outfalls.py): the same registry rows, the operator
-    # by permit, the rain caution by permit and the monthly marks
+    # by permit, the rain caution and the monthly marks; official combined sewer outfalls with no point and no water apart ("unplaced":
+    # counted and listed on the state page, never drawn)
+    outfall_unplaced: list[dict] = []
     outfall_points = outfalls_mod.outfall_rows(
         outfalls, status_mod.states(), waters=set(waters), canon=lambda s: status_mod.SLUG_ALIASES.get(s, s),
         dischargers=dis, rain_permits=rain_block.get("permits") or {}, ma_layer=outfalls_mod.ma_layer_rows(),
-        marks=publicize(st.get("monthly_outfalls") or []), levels=rain_levels)
-    outfalls_mod.write(outfall_points, OUT_DIR, now_iso())
-    print(f"export: {outfalls_mod.summary(outfall_points)}")
+        marks=publicize(st.get("monthly_outfalls") or []), levels=rain_levels, unplaced=outfall_unplaced)
+    outfalls_mod.write(outfall_points, OUT_DIR, now_iso(), outfall_unplaced)
+    print(f"export: {outfalls_mod.summary(outfall_points)}; {len(outfall_unplaced)} official combined sewer outfalls "
+          "with no point and no water (unplaced)")
 
     # sources
     feed_of = {}
