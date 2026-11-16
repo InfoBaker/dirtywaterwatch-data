@@ -10,6 +10,11 @@ or its GNIS names, compared without case or punctuation) is resolved, any other 
 naming it, how many are open now, the county the record gives (raw.county), up to five of its points ([lat, lon], 0.001
 degree) and its sources. A row per name and county, so the names pass builds each name where the records are. Records
 naming no water are counted in by_reason. Rows sorted by records, then name.
+
+Wyoming's DEQ spill list (wy-deq-spill-list, MERGE) is then merged into the file by scripts/report_names_merge.py: each
+sewage report judged as the status build judges it (a report the list marks as not reaching water names none), one row
+per name and county, a point only where the record keeps one (public sewer works), the file's other rows and resolved
+names kept with every field. When the bulletins are not built here, their rows in the file are kept as they are.
 """
 from __future__ import annotations
 
@@ -26,6 +31,8 @@ SOURCES = {"CO": ("co-cdphe-toxic-algae", "co-official-notices"),
            "WY": ("wy-deq-hcb-bulletins",)}
 NAMES = {"CO": "Colorado", "MT": "Montana", "WY": "Wyoming"}
 OPEN = {"advisory_active", "ongoing"}
+MERGE = {"WY": ("wy-deq-spill-list",)}
+EVENTS = ROOT / "data" / "build" / "events"
 
 
 def k(name: str) -> str:
@@ -88,11 +95,25 @@ def build(st: str) -> dict:
 
 def main(argv) -> int:
     st = argv[0].upper()
-    doc = build(st)
-    print(json.dumps({k_: v for k_, v in doc.items() if k_ not in ("rows", "about")}), [x["name"] for x in doc["rows"]])
-    if "--dry-run" not in argv:
-        (ROOT / "research" / st.lower() / "receiving-waters-missing.json").write_text(
-            json.dumps(doc, indent=1, ensure_ascii=False) + "\n")
+    path = ROOT / "research" / st.lower() / "receiving-waters-missing.json"
+    if all((EVENTS / f"{sid}.json").exists() for sid in SOURCES[st]) or st not in MERGE:
+        doc = build(st)
+        print(json.dumps({k_: v for k_, v in doc.items() if k_ not in ("rows", "about")}), [x["name"] for x in doc["rows"]])
+        if "--dry-run" not in argv:
+            path.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n")
+    else:
+        print(f"{st}: {', '.join(SOURCES[st])} not built; their rows in the file are kept as they are")
+    if st in MERGE and "--dry-run" not in argv:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import report_names_merge as M
+        judged, read, resolver = {}, {}, None
+        for sid in MERGE[st]:
+            recs, read[sid] = M.read_feed(EVENTS, sid)
+            if recs is not None:
+                resolver = resolver or M.make_resolver(st)
+                judged[sid] = M.judge(recs, st, resolver)
+        if judged:
+            print(f"{path.relative_to(ROOT)}: merged {', '.join(judged)}: {M.merge(path, st, judged, read)}")
     return 0
 
 
