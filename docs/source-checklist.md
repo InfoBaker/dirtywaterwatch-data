@@ -14,7 +14,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | federal | 25 | 17 | 24 | 14 | 1 | 81 |
 | ma | 19 | 34 | 21 | 6 | 3 | 83 |
 | ct | 19 | 17 | 14 | 16 | 2 | 68 |
-| ri | 25 | 14 | 11 | 14 | 3 | 67 |
+| ri | 27 | 12 | 11 | 14 | 3 | 67 |
 | nh-vt | 44 | 24 | 28 | 13 | 11 | 120 |
 | me | 16 | 10 | 20 | 25 | 4 | 75 |
 | community | 0 | 8 | 70 | 4 | 2 | 84 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 2 | 0 | 5 | 2 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **618** | **237** | **551** | **230** | **82** | **1718** |
+| **all** | **620** | **235** | **551** | **230** | **82** | **1718** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -547,7 +547,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ri-ridem-cyano-advisories` | RIDEM/RIDOH cyanobacteria advisories layer (dashboard) | used | fetched | advisories | Clean, current, machine-readable advisory feed. |
 | `ri-ridem-cyano-page` | RIDEM Cyanobacteria (Blue-Green Algae) page, reports and historic advisories | used | fetched | advisories | Monitoring schedule (2026: weeks of May 18 to Oct 19), routinely monitored list, annual reports 2011-2025, historic XLSX and Airtable list. |
 | `ri-ridem-regulated-facilities` | RIDEM RISE GIS Regulated Facilities: WWTF Discharge (24), RIPDES Permits May2026 (27), Stormwater Outfall (6) | used | fetched | permits | Authoritative RI permit list used to build dischargers.json. |
+| `ri-ridem-shellfish-closure-page` | RIDEM Pollution-Related Conditional Area and Emergency Shellfish Closures (status table) | used | fetched | advisories | Read by the ri-ridem-shellfish-closure-page ingester (ingest.ri_dem_shellfish): one shellfish_closure record per area DEM's table lists CLOSED, in DEM's words, from the first read that lists it; the Updated date is kept as the table's publication and the scheduled reopening as DEM's plan, never as an end; each area is placed by a point inside DEM's own Conditional Closure polygon and never colours a whole water; an area with no polygon is listed only. Built and tested on the page as the pipeline's runner read it on 2026-11-16: six areas closed (1A, 16E, 8A and 8C, 17, 5, 10PJ-N and 10PJ-E), table updated 11/7/2026, each scheduled to reopen at noon on 11/14. |
 | `ri-ridem-wwtf-om-overflow-reporting` | RIDEM 'Report a Wastewater Emergency or Overflow' (O&M Section) | used | fetched | law | Defines what operators must report and when; reports go to DEM, not the public. |
+| `ri-ridoh-beach-advisory-feed` | RIDOH Beach Advisories feed page (ridoh-feed-beaches) | used | fetched | advisories | Read by the ri-ridoh-beach-advisory-feed ingester (ingest.ri_ridoh_beach_feed): one record per beach per closing item, from the minute RIDOH published the recommendation to close to the minute it published the re-opening, with RIDOH's reason. The same closures as the Google Sheet (ri-ridoh-beach-closures-sheet): every 2026 closure in the feed is a sheet row of the same day, so each is shown once, as the sheet's record. Not complete: no camp or cyanobacteria closures, and King Park Beach's re-opening (8/18 in the sheet) was never posted. 2026 season: 9 closing and 13 re-opening items, 21 closures; none in effect on 2026-11-16. |
 | `ri-ridoh-beach-closures-sheet` | RIDOH 2026 beach advisories (closures) - Google Sheet behind health.ri.gov/beaches | used | fetched | advisories | The actual source of RIDOH's closure list, reachable without Cloudflare; best beach feed. |
 | `ri-ridoh-beach-pages` | RIDOH Beaches, Beach Monitoring Program and Beach Closure Data pages | used | fetched | advisories | Program facts: sampling Memorial Day to Labor Day, risk-based schedule; 'closures remain in effect until the next sampling event'; closures 'based on exceedances of more than 60 cfu/100 ml in saltwater and in freshwater'; sample data 'from 2000 to present'; season reports 2017-2021 only. |
 | `ri-rigis-nbc-sewer-overflows` | RIGIS UTILITY_NBC_Sewer_Overflows_spf (NBC CSO and discharge points) | used | fetched | outfalls | Second, independent outfall location set to cross-check the NBC API. |
@@ -556,10 +558,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ri-ridem-cyano-email-alerts` | RIDEM cyanobacteria email alerts (Constant Contact) | candidate | fetched | advisories | Owner may subscribe; layer already gives the same data. |
 | `ri-ridem-cyano-field` | RIDEM cyanobacteria field inspections and sample results (Survey123 layer) | candidate | fetched | monitoring | Supporting observations behind advisories. |
 | `ri-ridem-press-releases` | RIDEM press releases (and RSS) | candidate | fetched | advisories | Carries the big SSO notices (East Providence 2026, Warwick 2022) and no-contact advisories (Seekonk 2018, Blackstone 2023); not collected yet. |
-| `ri-ridem-shellfish-closure-page` | RIDEM Pollution-Related Conditional Area and Emergency Shellfish Closures (status table) | candidate | fetched | advisories | Official affected-area advisories that include sewage-triggered emergency closures; not collected yet. |
 | `ri-ridem-shellfish-email-alerts` | RIDEM shellfish closure email alerts (Constant Contact) | candidate | fetched | advisories | Owner should subscribe; the only push channel that names sewage-release closures (e.g., Bristol April 2026, not press-released). |
 | `ri-ridem-shellfish-restrictions-risegis` | RIDEM Shellfish Harvest Restrictions feature service (June 2026) | candidate | fetched | advisories | Polygons for conditional areas let a closure notice be drawn; status itself is not in the layer. |
-| `ri-ridoh-beach-advisory-feed` | RIDOH Beach Advisories feed page (ridoh-feed-beaches) | candidate | fetched | advisories | Gives publication times the sheet lacks; not collected yet. |
 | `ri-ridoh-beaches-view` | RIDOHGIS_Beaches_View feature service (Beach Viewer 2026) | candidate | fetched | advisories | Use for beach locations and IDs; Status semantics conflict (renderer: 3 = 'Closed for Swimming'; Beach Viewer filter: 3 = 'Not Monitored') and DateMod stops in 2017. |
 | `ri-ridoh-press-releases-rss` | RIDOH press releases RSS | candidate | fetched | advisories | Joint RIDOH/DEM cyano and some beach releases; not collected yet. |
 | `ri-ridoh-volunteer-beach-risks` | RIDOH 'Beach Risks Observed by Volunteer Groups' (Google Sheet) | candidate | fetched | monitoring | Only public signal for urban Upper Bay spots near CSOs (Gaspee Point, Stillhouse Cove, Bold Point, Sabin Point). |
