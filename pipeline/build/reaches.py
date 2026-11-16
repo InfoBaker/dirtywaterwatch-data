@@ -716,13 +716,13 @@ def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None =
     listed as plant_deferred. An outfall on a shoreline lake (shore: data/rules.json reach.shoreline) is a
     candidate with model "shoreline" (a stretch built from its point, plants included); without a point it is
     no_location."""
-    from build.status import Resolver, load_waters, oid_key
-    waters = waters if waters is not None else load_waters()
+    from build.status import Resolver, load_waters, oid_key, with_outline_areas
+    shore = shore_rule() if shore is None else shore
+    waters = waters if waters is not None else with_outline_areas(load_waters(), shore)
     registry = registry if registry is not None else registry_outfalls()
     live = {str(s).upper() for s in (live if live is not None else live_states())}
     reported = reported if reported is not None else reported_outfalls()
     plants = TRACE_PLANTS if plants is None else plants
-    shore = shore_rule() if shore is None else shore
     skip: dict[str, dict] = {}
     by_po: dict[tuple, dict] = {}
     for o in registry:
@@ -2192,8 +2192,8 @@ def main() -> int:
                 live = live_states()
                 skipped: dict[str, dict] = {}
                 shore = shore_rule()
-                from build.status import load_waters
-                waters = load_waters()
+                from build.status import load_waters, with_outline_areas
+                waters = with_outline_areas(load_waters(), shore)    # the size rule's areas (rule on only)
                 cands = candidate_outfalls(waters=waters, live=live, skipped=skipped, plants=a.plants or None,
                                            shore=shore)
                 log = lambda m: print(m, flush=True)       # noqa: E731
