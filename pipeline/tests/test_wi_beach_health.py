@@ -372,3 +372,74 @@ def test_the_record_no_longer_calls_a_runner_readable_wisconsin_source_unreachab
     assert "Wisconsin Beach Health" in rules["source"] and "algal bloom" in rules["basis"]
     for p in (ROOT / "data" / "sources").glob("wi-*.yaml"):
         assert not bad.search(p.read_text()), p.name
+
+
+def flaky_run(monkeypatch, tmp_path, at, fail, exc=None):
+    """run_with's transport, with the first `fail` attempts of each request raising `exc` (a ConnectTimeout by
+    default); returns rc, the events file, the attempts per address and the pauses taken."""
+    import common
+    import requests
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(W, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(W, "save_raw", lambda name, body, ext: None)
+    pauses, tries = [], {}
+    monkeypatch.setattr(W, "_pause", pauses.append)
+    d = layer()
+
+    def fake_get(url, **k):
+        assert k["timeout"] == (20, 300)
+        tries[url] = tries.get(url, 0) + 1
+        if tries[url] <= fail:
+            raise (exc or requests.exceptions.ConnectTimeout)(f"connect timeout to {url[:30]}")
+        if "beachhealth" in url:
+            r = Resp()
+            r.text = (FIX.parent / "dnr_beach_report_table.html").read_text()
+            return r
+        return Resp(d["count"] if "returnCountOnly" in url else d["layer"])
+    monkeypatch.setattr(W.requests, "get", fake_get)
+    rc = W.main(["--at", at])
+    return rc, json.loads((tmp_path / "wi-dnr-beach-health.json").read_text()), tries, pauses
+
+
+def test_a_connection_made_on_the_second_try_gives_a_normal_read(monkeypatch, tmp_path):
+    rc, out, tries, pauses = flaky_run(monkeypatch, tmp_path, T0, fail=1)
+    assert rc == 0 and out["ok"] is True and out["count"] == 2
+    assert tries == {W.QUERY: 2, W.COUNT: 2, W.REPORT_URL: 2}          # each request retried on its own
+    assert pauses == [30, 30, 30]
+    import requests
+    rc, out, tries, pauses = flaky_run(monkeypatch, tmp_path, T1, fail=2, exc=requests.exceptions.ConnectionError)
+    assert rc == 0 and out["ok"] is True and tries[W.QUERY] == 3
+
+
+def test_three_failed_connections_fail_the_read_and_keep_what_is_held(monkeypatch, tmp_path):
+    rc, out, _, _ = flaky_run(monkeypatch, tmp_path, T0, fail=0)
+    held, state = out["records"], (tmp_path / "state.json").read_text()
+    assert rc == 0 and len(held) == 2
+    rc, out, tries, pauses = flaky_run(monkeypatch, tmp_path, T1, fail=3)
+    assert rc == 1 and out["ok"] is False and out["error"].startswith("ConnectTimeout")
+    assert tries == {W.QUERY: 3} and pauses == [30, 30]                 # three tries, then the run stops
+    assert out["records"] == held and (tmp_path / "state.json").read_text() == state
+
+
+def test_an_http_error_or_a_read_timeout_is_not_retried(monkeypatch, tmp_path):
+    import common
+    import requests
+    import urllib3
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(W, "STATE_PATH", tmp_path / "state.json")
+    pauses, calls = [], []
+    monkeypatch.setattr(W, "_pause", pauses.append)
+
+    class Forbidden(Resp):
+        status_code = 403
+
+        def raise_for_status(self):
+            raise requests.exceptions.HTTPError("403 Client Error: Forbidden")
+    for answer in (lambda: Forbidden(), lambda: (_ for _ in ()).throw(requests.exceptions.ReadTimeout("read")),
+                   lambda: (_ for _ in ()).throw(requests.exceptions.ConnectionError(
+                       urllib3.exceptions.ReadTimeoutError(None, "/", "read timed out")))):
+        calls.clear()
+        monkeypatch.setattr(W.requests, "get", lambda url, **k: (calls.append(url), answer())[1])
+        rc = W.main(["--at", T0])
+        out = json.loads((tmp_path / "wi-dnr-beach-health.json").read_text())
+        assert rc == 1 and out["ok"] is False and calls == [W.QUERY] and pauses == []
