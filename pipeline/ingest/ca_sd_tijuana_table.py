@@ -133,7 +133,9 @@ VALLEY_BOX = (-117.16, 32.50, -116.95, 32.62)
 DATE = re.compile(r"^\s*(\d{1,2})/(\d{1,2})/(\d{2}|\d{4})\s*$")
 # an end cell that says the event goes on: it starts with "Ongoing" ("Ongoing intermittent flows"); "No longer
 # ongoing" or any other wording is not read as ongoing (review 2026-11-15 P1-6)
-ONGOING = re.compile(r"^\s*ongoing\b(?!.*\b(?:ended|stopped|ceased|no longer)\b)", re.I)
+# ("Ongoing (has not stopped)" is ongoing: a stop word after "not" or "never" does not count; second review P1)
+ONGOING = re.compile(r"^\s*ongoing\b(?!.*\bno\s+longer\b)(?!.*(?<!not )(?<!never )\b(?:ended|stopped|ceased)\b)",
+                     re.I)
 NONE_TEXT = re.compile(r"^\s*(none|n/?a|-+|0|unknown|tbd)?\s*\.?\s*$", re.I)
 NONE_WORD = re.compile(r"^\s*(none|0)\s*\.?\s*(gallons?)?\s*$", re.I)
 # the whole cell must be one plain amount ("302,000 gallons", "1.61 million gallons", ".5 million gallons"); a range,
@@ -302,6 +304,21 @@ def valley_waters(waters: dict | None = None) -> dict[str, dict[str, list[str]]]
     return {k: v for k, v in out.items() if v["slugs"] or v["elsewhere"]}
 
 
+REMOVED_MARK = re.compile(r"\\\[(?:[a-z]+\\ )+removed\\\]")
+
+
+def same_text(stored, current: str) -> bool:
+    """Whether a stored value (after the export's final redaction, which may have replaced a name with "[name
+    removed]") is the current one: each removal mark in the stored value stands for any text (second review P2)."""
+    stored = clean(stored)
+    if stored == current:
+        return True
+    if "removed]" not in stored:
+        return False
+    pat = REMOVED_MARK.sub(".+?", re.escape(stored))
+    return re.fullmatch(pat, current, re.S) is not None
+
+
 def record_ids(rows: list[dict]) -> list[str]:
     """The row's start date, the water its location names (a fixed name, or "site"), and six hex digits of a hash of
     the location as published: no free text of the table reaches an identifier (review 2026-11-15 P1-2). A second row
@@ -310,9 +327,11 @@ def record_ids(rows: list[dict]) -> list[str]:
     out = []
     for r in rows:
         d = parse_date(r.get("start"))
-        loc = clean(r.get("location")).lower()
+        # the hash is of the location as scrubbed (a house number or name is never recoverable from the key: second
+        # review P1), ten hex digits (40 bits)
+        loc = strip_house_numbers(scrub_text(clean(r.get("location")))).lower()
         base = (f"{d.isoformat() if d else 'no-start'}-{slugify(water_name(loc) or 'site')}-"
-                f"{hashlib.sha256(loc.encode()).hexdigest()[:6]}")
+                f"{hashlib.sha256(loc.encode()).hexdigest()[:10]}")
         seen[base] += 1
         out.append(base if seen[base] == 1 else f"{base}-n{seen[base]}")
     return out
@@ -331,7 +350,7 @@ def build_record(row: dict, rid: str, fetched_at: str, prev: dict | None, placed
     raw["_first_seen_at"] = p_raw.get("_first_seen_at") or fetched_at
     revs = list(p_raw.get("_revisions") or [])
     p_row = p_raw.get("row") or {}
-    if p_row and any(clean(p_row.get(k)) != a.get(k, "") for k in TRACKED):
+    if p_row and any(not same_text(p_row.get(k), a.get(k, "")) for k in TRACKED):
         revs.append({"seen_until": (prev or {}).get("fetched_at"), **{k: p_row.get(k) for k in TRACKED}})
     if revs:
         raw["_revisions"] = revs[-10:]
@@ -451,6 +470,8 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, placed: dict) -> di
         parts.append("none recovered" if said_none else f"{rtext} recovered")
     if a.get("volume") and vol is None and not NONE_TEXT.match(a["volume"]):
         problems.append(f"volume not read: {a.get('volume')!r}")
+    if rtext and rec is None and not said_none and not NONE_TEXT.match(rtext):
+        problems.append(f"volume recovered not read: {rtext!r}")
     material = "; ".join(MATERIAL[k] for k in kinds) or None
     return event(
         **base, event_type=etype, status=status,

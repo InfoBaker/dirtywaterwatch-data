@@ -369,3 +369,41 @@ def test_a_failed_request_is_not_repeated_within_six_hours(tmp_path, monkeypatch
     doc = json.loads(out.read_text())
     assert doc["ok"] is False and len(doc["records"]) == 16
     assert M.main(["--out", str(out), "--state", str(state)]) == 1 and len(calls) == 2      # seven hours later
+
+
+# ---------------------------------------------------------------- second review (fixes) 2026-11-15
+
+
+def test_the_key_hashes_the_scrubbed_location_so_a_removed_house_number_cannot_be_recovered():
+    a = M.record_ids([{"start": "06/17/2024", "location": "Goat Canyon near the home at 123 Main Street"}])[0]
+    b = M.record_ids([{"start": "06/17/2024", "location": "Goat Canyon near the home at 4567 Main Street"}])[0]
+    assert a == b and len(a.rsplit("-", 1)[1]) == 10
+
+
+def test_ongoing_that_says_it_has_not_stopped_is_ongoing():
+    rs = rows()
+    rs[1].update(start="11/14/2026", end="Ongoing (has not stopped)")
+    r = by_id(build(rs)[0])[M.record_ids(rs)[1]]
+    assert r["status"] == "ongoing" and r["ended_at"] is None and r["parse_error"] is None
+
+
+def test_an_unread_volume_recovered_gets_a_parse_note():
+    rs = rows()
+    rs[1]["recovered"] = "<1,000 gallons"
+    r = by_id(build(rs)[0])[M.record_ids(rs)[1]]
+    assert r["raw"]["volume_recovered_gal"] is None and "<1,000 gallons recovered" in r["volume_text"]
+    assert r["parse_error"] == "volume recovered not read: '<1,000 gallons'"
+
+
+def test_a_value_the_final_redaction_changed_is_no_revision_when_the_source_is_unchanged():
+    from build import redact
+    rs = rows()
+    rs[1]["notes"] = "A resident, Jane Doe, reported the spill."
+    recs = redact.redact_events(build(rs)[0])
+    rid = M.record_ids(rs)[1]
+    assert "Jane" not in json.dumps(by_id(recs)[rid])
+    for day in ("2026-11-16T22:00:00Z", "2026-11-17T22:00:00Z"):
+        recs = redact.redact_events(M.build(rs, day, recs, NONE_PLACED)[0])
+    assert "_revisions" not in by_id(recs)[rid]["raw"]
+    assert M.same_text("Flows [name removed] here", "Flows Jane Doe here")
+    assert not M.same_text("Flows [name removed] here", "Flows Jane Doe there")
