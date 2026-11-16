@@ -560,7 +560,7 @@
    "operator_id": "hi-kauai-county",
    "agency": null,
    "permit": "HI0020257",
-   "checked": "2026-11-07",
+   "checked": "2026-11-16",
    "id": "hi-kauai-county-press-release",
    "name": "County of Kauai, Wastewater Management Division (Wailua, Waimea and Lihue plants and the collection system)",
    "channel_kind": "news_page",
@@ -575,9 +575,9 @@
    "urls": [],
    "method": null,
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
-   "note": "The operator's site (https://www.kauai.gov/Government/Departments-Agencies/Public-Works/Wastewater-Management) answers 403 to the project's reader (2026-11-07), so whether it posts its spill releases there is not known. The rule sends the release to the news media and the Department.",
-   "barrier": "bot_wall"
+   "unmonitored_reason": "other",
+   "note": "The operator's site answered the pipeline's runner on 2026-11-16 (the earlier 403 was met from a development machine), but the wastewater page (https://www.kauai.gov/Government/Departments-Agencies/Public-Works/Wastewater-Management) now gives 'page not found'; where it posts its spill releases was not verified in the research. The rule sends the release to the news media and the Department.",
+   "barrier": "not_verified"
   },
   {
    "state": "HI",

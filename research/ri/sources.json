@@ -529,7 +529,7 @@
       "html",
       "phone"
     ],
-    "access_detail": "Operators call O&M hotline 401-563-8202 (business hours) or DEM emergency 401-222-3070; then file in NeT-SewerOverflow within 5 calendar days. Site behind Cloudflare challenge: curl/WebFetch get 403; read with the in-app browser.",
+    "access_detail": "Operators call O&M hotline 401-563-8202 (business hours) or DEM emergency 401-222-3070; then file in NeT-SewerOverflow within 5 calendar days. Read with the in-app browser; the pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -857,7 +857,7 @@
       "phone",
       "email"
     ],
-    "access_detail": "HTML table Location / Status / Scheduled to Reopen with 'Updated' date and rain totals (TF Green, Taunton, Westerly). Cloudflare challenge blocks curl/WebFetch (403); readable in a real browser.",
+    "access_detail": "HTML table Location / Status / Scheduled to Reopen with 'Updated' date and rain totals (TF Green, Taunton, Westerly). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
     "machine_readable": false,
     "sample_record": {
       "Updated": "10/19/2026",
@@ -891,7 +891,7 @@
     "license": "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\"",
     "legal_basis": "R.I. Gen. Laws \u00a7 20-8.1-3",
     "status": "candidate",
-    "status_reason": "Official affected-area advisories that include sewage-triggered emergency closures; scraping is blocked by Cloudflare, so the email list is the practical feed.",
+    "status_reason": "Official affected-area advisories that include sewage-triggered emergency closures; not collected yet.",
     "verified": "fetched",
     "checked": "2026-11-01",
     "notes": "Rain triggers (DEM 2025-05-15): Lower Providence River and Greenwich Bay close 6 days after 0.5-1.2 in. in 24 h, 7 days above 1.2 in."
@@ -1094,7 +1094,7 @@
       "html",
       "rss"
     ],
-    "access_detail": "RSS https://dem.ri.gov/press-releases.xml (10 latest items, RSS 2.0 with created time). Cloudflare challenge blocks non-browser clients.",
+    "access_detail": "RSS https://dem.ri.gov/press-releases.xml (10 latest items, RSS 2.0 with created time). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
     "machine_readable": true,
     "sample_record": null,
     "fields": [],
@@ -1115,7 +1115,7 @@
     "license": "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\"",
     "legal_basis": null,
     "status": "candidate",
-    "status_reason": "Carries the big SSO notices (East Providence 2026, Warwick 2022) and no-contact advisories (Seekonk 2018, Blackstone 2023); feed access blocked by Cloudflare for servers.",
+    "status_reason": "Carries the big SSO notices (East Providence 2026, Warwick 2022) and no-contact advisories (Seekonk 2018, Blackstone 2023); not collected yet.",
     "verified": "fetched",
     "checked": "2026-11-01",
     "notes": ""
@@ -1638,7 +1638,7 @@
     "access": [
       "html"
     ],
-    "access_detail": "Drupal list of dated advisory items (25 per page). No RSS of its own (/ridoh-feed-beaches.xml 404). Cloudflare challenge blocks curl/WebFetch; readable in browser.",
+    "access_detail": "Drupal list of dated advisory items (25 per page). No RSS of its own (/ridoh-feed-beaches.xml 404). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
     "machine_readable": false,
     "sample_record": {
       "title": "RIDOH Recommends a Swimming Advisory at King Park Beach",
@@ -1666,7 +1666,7 @@
     "license": "RI.gov policies",
     "legal_basis": null,
     "status": "candidate",
-    "status_reason": "Gives publication times the sheet lacks; blocked for servers.",
+    "status_reason": "Gives publication times the sheet lacks; not collected yet.",
     "verified": "fetched",
     "checked": "2026-11-01",
     "notes": ""
@@ -1685,7 +1685,7 @@
     "access": [
       "rss"
     ],
-    "access_detail": "RSS 2.0, 10 items; also https://health.ri.gov/rss.xml. Cloudflare-protected. Old https://www.ri.gov/rss/8/pressrelease.rss is a stub pointing to health.ri.gov.",
+    "access_detail": "RSS 2.0, 10 items; also https://health.ri.gov/rss.xml. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. Old https://www.ri.gov/rss/8/pressrelease.rss is a stub pointing to health.ri.gov.",
     "machine_readable": true,
     "sample_record": null,
     "fields": [],
@@ -1698,7 +1698,7 @@
     "license": "RI.gov policies",
     "legal_basis": null,
     "status": "candidate",
-    "status_reason": "Joint RIDOH/DEM cyano and some beach releases; Cloudflare.",
+    "status_reason": "Joint RIDOH/DEM cyano and some beach releases; not collected yet.",
     "verified": "fetched",
     "checked": "2026-11-01",
     "notes": ""
@@ -2173,8 +2173,8 @@
     "history": null,
     "license": "none stated",
     "legal_basis": null,
-    "status": "unreachable",
-    "status_reason": "Connection refused on 2026-11-01.",
+    "status": "watch",
+    "status_reason": "Connection refused on 2026-11-01. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
     "verified": "fetched",
     "checked": "2026-11-01",
     "notes": ""
@@ -2355,8 +2355,8 @@
     "history": null,
     "license": "none stated",
     "legal_basis": null,
-    "status": "unreachable",
-    "status_reason": "Connection refused on 2026-11-01; search shows volunteer monitoring May-Oct including bacteria via URI Watershed Watch; no advisory/flag program found.",
+    "status": "watch",
+    "status_reason": "Connection refused on 2026-11-01; search shows volunteer monitoring May-Oct including bacteria via URI Watershed Watch; no advisory/flag program found. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
     "verified": "search_only",
     "checked": "2026-11-01",
     "notes": ""

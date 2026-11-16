@@ -345,7 +345,7 @@ def test_every_washington_operator_has_its_permit_duty_row_and_every_cso_operato
             assert rows[f"{op['id']}-cso-public-notification"]["basis_kind"] == "permit"
     assert rows["wa-ecology-sewage-spills"]["feed_source_id"] == "wa-ecology-sewage-spills"
     assert rows["wa-seattle-spu-cso-public-notification"]["feed_source_id"] == "wa-kc-cso-status-csv"
-    assert rows["wa-spokane-cso-public-notification"]["barrier"] == "bot_wall"
+    assert rows["wa-spokane-cso-public-notification"]["barrier"] == "not_verified"  # the runner was answered, 2026-11-16
     assert rows["wa-ecology-spill-email-alerts"]["barrier"] == "no_web_page"
     assert not any("@ecy.wa.gov" in json.dumps(r).lower() for r in rows.values())
 

@@ -3954,15 +3954,15 @@
    "legal_basis": "G.S. 143-215.1C(b)(1): press release to all print and electronic news media covering the county within 24 hours after the owner or operator determines that 1,000 gallons or more of untreated wastewater reached surface waters",
    "basis_kind": "law",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "notices",
-   "note": "Charlotte Water's overflow notices (\"Notice of Wastewater Overflow\") reach the public through local media; the 2025 South End spill was also sent by text and Nextdoor. charlottenc.gov answered 403 to the project's user agent on 2026-11-04. The DWR map carries the same events. (research/nc/report.md §2.3)",
-   "checked": "2026-11-04",
+   "note": "Charlotte Water's overflow notices (\"Notice of Wastewater Overflow\") reach the public through local media; the 2025 South End spill was also sent by text and Nextdoor. charlottenc.gov/water answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. The DWR map carries the same events. (research/nc/report.md §2.3)",
+   "checked": "2026-11-16",
    "noun": "News page",
    "sources": [
     "nc-charlotte-water"
    ],
-   "barrier": "bot_wall"
+   "barrier": "not_verified"
   },
   {
    "id": "nc-charlotte-water-newspaper-notice",

@@ -1623,7 +1623,7 @@
       "email",
       "phone"
     ],
-    "access_detail": "curl got 403 from themdc.org; WebFetch read the pages. Everbridge sign-up https://member.everbridge.net/453003085612528/new (not subscribed).",
+    "access_detail": "curl got 403 from themdc.org; WebFetch read the pages. Everbridge sign-up https://member.everbridge.net/453003085612528/new (not subscribed). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
     "machine_readable": false,
     "sample_record": null,
     "fields": [],
@@ -1947,7 +1947,7 @@
     "status_reason": "No public post-CSO guidance found in search; boathouse/rowing users at the MDC CSO reach. Needs direct check or contact.",
     "verified": "search_only",
     "checked": "2026-11-01",
-    "notes": "riverfront.org returned HTTP 403 to curl on 2026-11-01; not read."
+    "notes": "riverfront.org returned HTTP 403 to curl on 2026-11-01; not read. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine."
   },
   {
     "id": "ct-save-the-sound-beach-report",
@@ -2616,6 +2616,6 @@
     "status_reason": "Annual indicators (beach closures, hypoxia); no event data. Federal agent likely covers.",
     "verified": "inferred",
     "checked": "2026-11-01",
-    "notes": "longislandsoundstudy.net returned HTTP 403 to curl."
+    "notes": "longislandsoundstudy.net returned HTTP 403 to curl. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine."
   }
 ]

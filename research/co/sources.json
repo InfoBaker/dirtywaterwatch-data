@@ -62,9 +62,9 @@
   "license": null,
   "legal_basis": null,
   "status": "rejected",
-  "status_reason": "Intake only; reports are not published. The page answered 403 to the build's client on 2026-11-14.",
+  "status_reason": "Intake only; reports are not published. The page answered 403 to the build's client on 2026-11-14, and to GitHub's runner on 2026-11-16 UTC.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -97,9 +97,9 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "CPW's water-contact advisory of 2026-08-30 after the Pueblo spill (read 2026-11-14) is read in the co-official-notices reviewed set with NPS's Blue Mesa release and Barr Lake's park notice. CDPHE's own news pages answered 403.",
+  "status_reason": "CPW's water-contact advisory of 2026-08-30 after the Pueblo spill (read 2026-11-14) is read in the co-official-notices reviewed set with NPS's Blue Mesa release and Barr Lake's park notice. CDPHE's own news pages answered 403 to the build's client on 2026-11-14, and to GitHub's runner on 2026-11-16 UTC.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -149,9 +149,9 @@
   "license": "none stated",
   "legal_basis": "CDPHE guidance; closure at 8 ug/L microcystin",
   "status": "used",
-  "status_reason": "Read 2026-11-14 as CSV (198 rows, 129 waters; the last update dated 2026-09-09): read by the co-cdphe-toxic-algae feed as algal-bloom advisories (a run of Caution, Warning or Third party rows per water, ended by the next No bloom reported row). CDPHE's landing page answered 403 to the build's client on 2026-11-14.",
+  "status_reason": "Read 2026-11-15 as CSV (198 rows, 129 waters; the last update dated 2026-09-09): read by the co-cdphe-toxic-algae feed as algal-bloom advisories (a run of Caution, Warning or Third party rows per water, ended by the next No bloom reported row). CDPHE's landing page answered 403 to the build's client on 2026-11-14, and to GitHub's runner on 2026-11-16 UTC.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": "\"No bloom reported\" must not be shown as clean."
  },
  {
@@ -184,9 +184,9 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "No public results feed; closures list is HTML (none seen). The page answered 403 to the build's client on 2026-11-14; monitored.",
+  "status_reason": "No public results feed; closures list is HTML (none seen). The page answered 403 to the build's client on 2026-11-14, and to GitHub's runner on 2026-11-16 UTC; monitored.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -216,9 +216,9 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "No Colorado report and no Colorado collection system in the current extract (5,751 events) or the all-versions extract (6,710 events) of 2026-11-14; watched.",
+  "status_reason": "No Colorado report and no Colorado collection system in the current extract (files of 2026-11-13, 5,751 events, read 2026-11-15) or the all-versions extract (6,710 events, read 2026-11-14); watched.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -344,9 +344,9 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "The August 13, 2026 release (toxic algae at low levels in the Iola Basin, yellow caution signs) is read in the co-official-notices reviewed set; the park's news RSS did not answer on 2026-11-14.",
+  "status_reason": "The August 13, 2026 release (toxic algae at low levels in the Iola Basin, yellow caution signs) is read in the co-official-notices reviewed set; the park's news feed, read 2026-11-15, holds no later algae release (newest item 2026-09-18).",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  },
  {
@@ -411,10 +411,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "The host did not answer the build's client on 2026-11-14 (connection timed out, the RSS route too); the register watches it. The spill is recorded from CPW's advisory.",
+  "status": "watch",
+  "status_reason": "The city's news item of 2026-09-14 (the discharge found 2026-08-27 when the plant's flow for 2026-08-26 was 3 million gallons short; stopped within two hours) and its news RSS answered GitHub's runner on 2026-11-16 UTC (the host does not connect from the audit machine); the register watches it daily; not ingested. The spill is recorded from CPW's advisory.",
   "verified": "fetched",
-  "checked": "2026-11-14",
+  "checked": "2026-11-15",
   "notes": ""
  }
 ]

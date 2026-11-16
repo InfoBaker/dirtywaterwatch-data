@@ -301,7 +301,7 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "Registered as an unmonitored channel (no feed): the City's press releases, one mutable page per notice (the research of 2026-11-09 read the Chester Creek notice of October 2024, which kept its earlier warnings below the updates). duluthmn.gov did not answer the project's client on 2026-11-14 (connection timed out); no list or feed of the overflow notices was found.",
+  "status_reason": "Registered as an unmonitored channel (no feed): the City's press releases, one mutable page per notice (the research of 2026-11-09 read the Chester Creek notice of October 2024, which kept its earlier warnings below the updates). duluthmn.gov did not answer the project's client on 2026-11-14 (connection timed out); no list or feed of the overflow notices was found. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "access_failed",
   "checked": "2026-11-14",
   "notes": ""
@@ -403,8 +403,8 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "mnbeaches.org timed out on 2026-11-14 (connection, 60 s) as it failed on 2026-11-09; no advisory rows, sample schema or API seen. Registered as a channel with its barrier.",
+  "status": "watch",
+  "status_reason": "mnbeaches.org timed out on 2026-11-14 (connection, 60 s) as it failed on 2026-11-09; no advisory rows, sample schema or API seen. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "access_failed",
   "checked": "2026-11-14",
   "notes": "Inland beach monitoring is not required by state law; some local health departments and cities run programs (MDH Beach Locator)."
