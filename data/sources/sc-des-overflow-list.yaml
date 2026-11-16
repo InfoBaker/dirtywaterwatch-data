@@ -1,0 +1,33 @@
+id: "sc-des-overflow-list"
+name: "SC DES ePermitting wastewater overflow list (sanitary sewer overflow reports)"
+url: "https://epermitting.des.sc.gov/ext/ncore/external/overflow/list"
+homepage: "https://des.sc.gov/programs/bureau-water/wastewater/wastewater-sewer-overflows"
+kind: "api"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/sc_des_overflows.py
+#   (data/build/events/sc-des-overflow-list.json); the research row is sc-des-sso-database (research/sc/sources.json).
+# Built 2026-11-16: each hourly run reads the whole list in one request (1,773 reports on 2026-11-16, about 1.3 MB,
+#   5 to 12 s), falling back to a year of starts at a time when an answer reaches the request's cap. `--backfill`
+#   (refresh.yml's backfill input "sc_des_overflows") does the same read and records meta.backfill.
+# Read 2026-11-16: every row "Completed" (an in-process query answers none: a report appears once DES's form is
+#   completed); events from 2022-09-26 to 2026-11-10 (plus starts typed in 2026-12 and 2029); start to DES's receipt
+#   median 4.9 days. Times carry Eastern offsets. Permits: 1,407 rows SC0 or SCG (1,372 joined to an operator row),
+#   311 SSS satellite sewer systems and 55 ND no-discharge permits (state permits, kept apart from npdes_permit).
+#   Receiving water named on 1,283 rows (490 blank, and "STORM DRAIN", "Not Applicable" and the like on others).
+# Privacy: responsiblePartyName (often the filer's own name), locationDescription and the action and comment fields
+#   are never requested; the place, water and cause texts lose house numbers and personal names.
+# EPA's overflow tables held no South Carolina row on 2026-11-16; an EPA record of an SC permit with the same start
+#   minute as exactly one report here becomes its duplicate.
+cadence: "1 hour"
+license: "No licence or terms statement found on the list page."
+attribution: "South Carolina Department of Environmental Services, Bureau of Water"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["SC"]
+registry_ids: ["sc-des-sso-database"]
+access: ["api"]
+access_detail: "GET https://epermitting.des.sc.gov/ext/ncore/ss/ssolist?queryParams={\"filter\":[{}],\"top\":5000}&includeMetadataInResponse=false&responseFields=<the module's safe fields> (no key; the nCORE list service Michigan's MiEnviro list also uses). Filters: eventStartDateMin and eventStartDateMax (dates, the maximum exclusive), submissionId, reportStatusId. No total count is given and hasResultsRemaining stays false at the cap. Key: submissionId and sectionNumber. No coordinates."
+machine_readable: true
+legal_basis: "S.C. Code 48-1-95(B): utilities report significant spills (5,000 gallons or more) to DES within 24 hours and in writing within five days; DES asks every regulated system to report overflows electronically through ePermitting"
+checked: "2026-11-16"

@@ -710,10 +710,13 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], permits: 
 
 # ---------------------------------------------------------------- fetching
 
-def query(sess: requests.Session, flt: dict, top: int = TOP, read_timeout: float = 300) -> list[dict]:
+def query(sess: requests.Session, flt: dict, top: int = TOP, read_timeout: float = 300, *, url: str = LIST_URL,
+          fields: list[str] = FIELDS) -> list[dict]:
+    """One nCORE list request. url and fields: another state's nCORE list (South Carolina's, ingest/sc_des_overflows.py)
+    with its own safe fields; Michigan's defaults are unchanged."""
     params = {"queryParams": json.dumps({"filter": [flt], "top": top}, separators=(",", ":")),
-              "includeMetadataInResponse": "false", "responseFields": ",".join(FIELDS)}
-    r = sess.get(LIST_URL, params=params, timeout=(20, read_timeout))
+              "includeMetadataInResponse": "false", "responseFields": ",".join(fields)}
+    r = sess.get(url, params=params, timeout=(20, read_timeout))
     r.raise_for_status()
     d = r.json()
     if not isinstance(d, dict) or not isinstance(d.get("queryResults"), list):
@@ -722,30 +725,34 @@ def query(sess: requests.Session, flt: dict, top: int = TOP, read_timeout: float
     # with hasResultsRemaining false on 2026-11-04, so a full answer is read as cut short too
     if d.get("hasResultsRemaining") or len(d["queryResults"]) >= top:
         raise OverflowError(f"{top} rows or more for {flt}")
-    return [safe_row(x) for x in d["queryResults"] if isinstance(x, dict)]
+    return [{k: x.get(k) for k in fields if k in x} for x in d["queryResults"] if isinstance(x, dict)]
 
 
 class BudgetSpent(Exception):
     """The backfill's time ran out between the requests of a halved span (BACKFILL_BUDGET_S)."""
 
 
-def query_window(sess, status: str, start: date, stop: date, deadline: float | None = None) -> list[dict]:
+def query_window(sess, status: str | None, start: date, stop: date, deadline: float | None = None,
+                 **kw) -> list[dict]:
     """COMPLETE (or IN_PROCESS) reports with a start in [start, stop): halved while a window holds more than TOP.
     deadline (a clock() time): no further half is asked for after it (BudgetSpent), so a span halved at the end of
-    the backfill's budget does not run on past it."""
-    flt = {"reportStatusId": status, "eventStartDateMin": start.isoformat(), "eventStartDateMax": stop.isoformat()}
+    the backfill's budget does not run on past it. status None: every status (South Carolina's list); kw: query()'s
+    url and fields."""
+    flt = {"eventStartDateMin": start.isoformat(), "eventStartDateMax": stop.isoformat()}
+    if status is not None:
+        flt = {"reportStatusId": status, **flt}
     try:
-        return query(sess, flt)
+        return query(sess, flt, **kw)
     except OverflowError:
         mid = start + (stop - start) / 2
         if mid <= start:
             raise
         if deadline is not None and clock() > deadline:
             raise BudgetSpent(f"{start.isoformat()} to {stop.isoformat()} needs halving after the budget") from None
-        first = query_window(sess, status, start, mid, deadline)
+        first = query_window(sess, status, start, mid, deadline, **kw)
         if deadline is not None and clock() > deadline:
             raise BudgetSpent(f"{mid.isoformat()} to {stop.isoformat()} not asked for within the budget")
-        return first + query_window(sess, status, mid, stop, deadline)
+        return first + query_window(sess, status, mid, stop, deadline, **kw)
 
 
 def fetch_current(sess, today: date) -> list[dict]:
