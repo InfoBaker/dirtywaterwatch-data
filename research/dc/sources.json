@@ -195,11 +195,11 @@
   "access_detail": "CSV at https://www.dcwater.com/resources/open-data-portal/sanitary-sewer-dashboard/data (no key, 3.4 KB, 36 rows). Saved raw/dcwater-sso-data.csv.",
   "machine_readable": true,
   "sample_record": {
-   "PremiseNo": "3135548",
+   "PremiseNo": "[dropped: a customer premise id]",
    "Date Reported": "2026-01-20 00:44:24.6070000",
    "SpillVolInGal": "833333",
    "Location": "@CLARA BARTON PKY @MARYLAND LINE NW",
-   "Description": "(SSO @ 8251 Clara Barton PKY )There is a sewer main break at site 17 near a DC Water construction site 8251 Clara Barton Pkwy"
+   "Description": "[dropped: the description repeats the address]"
   },
   "fields": [
    "PremiseNo",
@@ -226,10 +226,10 @@
   "history": "2023-05 onward (36 rows).",
   "license": "Quote: 'The data shall be used for the sole purpose of providing the public with information regarding this program and not for any commercial, legal or other use.' DC Water 'does not guarantee the accuracy of this data'.",
   "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Far less complete than the EPA SOBE rows (140 current DC rows over the same span) and still shows the PI collapse at its first estimate (833,333 gal). Keep as a cross-check only.",
+  "status": "used",
+  "status_reason": "Read by the dc-water-sso feed (pipeline/ingest/dc_water_sso.py): one record per row with the report time, the gallons and the street names only; the premise id, the description and house numbers are dropped before saving. Far less complete than the EPA rows over the same span, and it still shows the Potomac Interceptor collapse at its first estimate (833,333 gal).",
   "verified": "fetched",
-  "checked": "2026-11-02",
+  "checked": "2026-11-16",
   "notes": "Map on the page is a Drupal map; the CSV is the only machine-readable piece."
  },
  {
@@ -356,10 +356,10 @@
   "history": "2020 Q3 onward on the publications page.",
   "license": "Public permit report; no terms stated.",
   "legal_basis": "Permit DC0021199 Part III.B.1.h.ii(d) website record of CSO events by outfall for the prior quarter; Part III Section E quarterly reports.",
-  "status": "candidate",
-  "status_reason": "The legally required public CSO record. Quarter-precision totals per outfall: use as annual/quarterly totals (no event pages). Needs PDF parsing, OCR for some quarters.",
+  "status": "used",
+  "status_reason": "The legally required public CSO record. Read by the dc-water-cso-quarterly feed (pipeline/ingest/dc_water_cso_quarterly.py): each month's Table 2-7 gives dated overflows with estimated durations at the inflatable dam structures, tied to outfalls through DC Water's Table 2-1; 189 dated overflows from the first quarter of 2020 to the third quarter of 2026. The quarter totals per outfall are not itemised. Some pages have no text layer (July and August 2026 unread).",
   "verified": "fetched",
-  "checked": "2026-11-02",
+  "checked": "2026-11-16",
   "notes": "Q3 2026 shows a metered 5.54 MG pumped overflow at CSO 010 (O Street PS) into the Anacostia: the first Anacostia CSO volume in the 2026 tables seen. Each monthly section says 'There was no dry weather combined sewer overflow reported during <month>' even for months where EPA SOBE has a DWO row."
  },
  {
