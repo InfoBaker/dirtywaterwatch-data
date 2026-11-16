@@ -15827,7 +15827,7 @@
    "email",
    "phone"
   ],
-  "access_detail": "curl got 403 from themdc.org; WebFetch read the pages. Everbridge sign-up https://member.everbridge.net/453003085612528/new (not subscribed).",
+  "access_detail": "curl got 403 from themdc.org; WebFetch read the pages. Everbridge sign-up https://member.everbridge.net/453003085612528/new (not subscribed). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -16160,7 +16160,7 @@
   "status_reason": "No public post-CSO guidance found in search; boathouse/rowing users at the MDC CSO reach. Needs direct check or contact.",
   "verified": "search_only",
   "checked": "2026-11-01",
-  "notes": "riverfront.org returned HTTP 403 to curl on 2026-11-01; not read.",
+  "notes": "riverfront.org returned HTTP 403 to curl on 2026-11-01; not read. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "area": "ct"
  },
  {
@@ -16849,7 +16849,7 @@
   "status_reason": "Annual indicators (beach closures, hypoxia); no event data. Federal agent likely covers.",
   "verified": "inferred",
   "checked": "2026-11-01",
-  "notes": "longislandsoundstudy.net returned HTTP 403 to curl.",
+  "notes": "longislandsoundstudy.net returned HTTP 403 to curl. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "area": "ct"
  },
  {
@@ -17393,7 +17393,7 @@
    "html",
    "phone"
   ],
-  "access_detail": "Operators call O&M hotline 401-563-8202 (business hours) or DEM emergency 401-222-3070; then file in NeT-SewerOverflow within 5 calendar days. Site behind Cloudflare challenge: curl/WebFetch get 403; read with the in-app browser.",
+  "access_detail": "Operators call O&M hotline 401-563-8202 (business hours) or DEM emergency 401-222-3070; then file in NeT-SewerOverflow within 5 calendar days. Read with the in-app browser; the pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -17731,7 +17731,7 @@
    "phone",
    "email"
   ],
-  "access_detail": "HTML table Location / Status / Scheduled to Reopen with 'Updated' date and rain totals (TF Green, Taunton, Westerly). Cloudflare challenge blocks curl/WebFetch (403); readable in a real browser.",
+  "access_detail": "HTML table Location / Status / Scheduled to Reopen with 'Updated' date and rain totals (TF Green, Taunton, Westerly). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": {
    "Updated": "10/19/2026",
@@ -17765,7 +17765,7 @@
   "license": "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\"",
   "legal_basis": "R.I. Gen. Laws § 20-8.1-3",
   "status": "candidate",
-  "status_reason": "Official affected-area advisories that include sewage-triggered emergency closures; scraping is blocked by Cloudflare, so the email list is the practical feed.",
+  "status_reason": "Official affected-area advisories that include sewage-triggered emergency closures; not collected yet.",
   "verified": "fetched",
   "checked": "2026-11-01",
   "notes": "Rain triggers (DEM 2025-05-15): Lower Providence River and Greenwich Bay close 6 days after 0.5-1.2 in. in 24 h, 7 days above 1.2 in.",
@@ -17973,7 +17973,7 @@
    "html",
    "rss"
   ],
-  "access_detail": "RSS https://dem.ri.gov/press-releases.xml (10 latest items, RSS 2.0 with created time). Cloudflare challenge blocks non-browser clients.",
+  "access_detail": "RSS https://dem.ri.gov/press-releases.xml (10 latest items, RSS 2.0 with created time). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": true,
   "sample_record": null,
   "fields": [],
@@ -17994,7 +17994,7 @@
   "license": "DEM site disclaimer (https://dem.ri.gov/disclaimer): \"The compiled information presented on this WWW site is considered public information and may be distributed or copied. However, use of appropriate byline/photo/image credits is requested.\"",
   "legal_basis": null,
   "status": "candidate",
-  "status_reason": "Carries the big SSO notices (East Providence 2026, Warwick 2022) and no-contact advisories (Seekonk 2018, Blackstone 2023); feed access blocked by Cloudflare for servers.",
+  "status_reason": "Carries the big SSO notices (East Providence 2026, Warwick 2022) and no-contact advisories (Seekonk 2018, Blackstone 2023); not collected yet.",
   "verified": "fetched",
   "checked": "2026-11-01",
   "notes": "",
@@ -18529,7 +18529,7 @@
   "access": [
    "html"
   ],
-  "access_detail": "Drupal list of dated advisory items (25 per page). No RSS of its own (/ridoh-feed-beaches.xml 404). Cloudflare challenge blocks curl/WebFetch; readable in browser.",
+  "access_detail": "Drupal list of dated advisory items (25 per page). No RSS of its own (/ridoh-feed-beaches.xml 404). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": {
    "title": "RIDOH Recommends a Swimming Advisory at King Park Beach",
@@ -18557,7 +18557,7 @@
   "license": "RI.gov policies",
   "legal_basis": null,
   "status": "candidate",
-  "status_reason": "Gives publication times the sheet lacks; blocked for servers.",
+  "status_reason": "Gives publication times the sheet lacks; not collected yet.",
   "verified": "fetched",
   "checked": "2026-11-01",
   "notes": "",
@@ -18577,7 +18577,7 @@
   "access": [
    "rss"
   ],
-  "access_detail": "RSS 2.0, 10 items; also https://health.ri.gov/rss.xml. Cloudflare-protected. Old https://www.ri.gov/rss/8/pressrelease.rss is a stub pointing to health.ri.gov.",
+  "access_detail": "RSS 2.0, 10 items; also https://health.ri.gov/rss.xml. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. Old https://www.ri.gov/rss/8/pressrelease.rss is a stub pointing to health.ri.gov.",
   "machine_readable": true,
   "sample_record": null,
   "fields": [],
@@ -18590,7 +18590,7 @@
   "license": "RI.gov policies",
   "legal_basis": null,
   "status": "candidate",
-  "status_reason": "Joint RIDOH/DEM cyano and some beach releases; Cloudflare.",
+  "status_reason": "Joint RIDOH/DEM cyano and some beach releases; not collected yet.",
   "verified": "fetched",
   "checked": "2026-11-01",
   "notes": "",
@@ -19077,8 +19077,8 @@
   "history": null,
   "license": "none stated",
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "Connection refused on 2026-11-01.",
+  "status": "watch",
+  "status_reason": "Connection refused on 2026-11-01. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "fetched",
   "checked": "2026-11-01",
   "notes": "",
@@ -19264,8 +19264,8 @@
   "history": null,
   "license": "none stated",
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "Connection refused on 2026-11-01; search shows volunteer monitoring May-Oct including bacteria via URI Watershed Watch; no advisory/flag program found.",
+  "status": "watch",
+  "status_reason": "Connection refused on 2026-11-01; search shows volunteer monitoring May-Oct including bacteria via URI Watershed Watch; no advisory/flag program found. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "search_only",
   "checked": "2026-11-01",
   "notes": "",
@@ -27404,7 +27404,7 @@
    "html",
    "csv"
   ],
-  "access_detail": "Site refused connections (ECONNREFUSED/timeouts) on 2026-11-01; read via Wayback snapshot 2026-07-23. Repo https://github.com/CBEP-SoCB-Details/Casco_Bay_CSOs (Original_Data includes Portland per-event CSO workbooks 2015-2019 obtained from PWD and DEP CSO GIS downloaded 2019).",
+  "access_detail": "Site refused connections (ECONNREFUSED/timeouts) on 2026-11-01; read via Wayback snapshot 2026-07-23. Repo https://github.com/CBEP-SoCB-Details/Casco_Bay_CSOs (Original_Data includes Portland per-event CSO workbooks 2015-2019 obtained from PWD and DEP CSO GIS downloaded 2019). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -37497,8 +37497,8 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "No response; no known data feed.",
+  "status": "watch",
+  "status_reason": "No response; no known data feed. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "fetched",
   "checked": "2026-11-02",
   "notes": "",
@@ -38533,7 +38533,7 @@
   "access": [
    "csv"
   ],
-  "access_detail": "files.dep.state.pa.us timed out (curl) and refused (WebFetch) on 2026-11-02. Retrieved the Wayback copy of 2025-09-10 (web.archive.org/web/20250910170404id_/...), saved as raw/dep-CSO_Status_Spreadsheet-wayback-20250910.xlsx and parsed to JSON.",
+  "access_detail": "files.dep.state.pa.us timed out (curl) and refused (WebFetch) on 2026-11-02. Retrieved the Wayback copy of 2025-09-10 (web.archive.org/web/20250910170404id_/...), saved as raw/dep-CSO_Status_Spreadsheet-wayback-20250910.xlsx and parsed to JSON. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": true,
   "sample_record": null,
   "fields": [
@@ -38775,7 +38775,7 @@
   "access": [
    "pdf"
   ],
-  "access_detail": "Live host unreachable; read the Wayback copy (2017-05-02). A 2025-08-04 draft renewal exists (PA0026492_NPDES_PERMIT_20250804_DRAFT_V3.pdf) but is not archived.",
+  "access_detail": "Live host unreachable; read the Wayback copy (2017-05-02). A 2025-08-04 draft renewal exists (PA0026492_NPDES_PERMIT_20250804_DRAFT_V3.pdf) but is not archived. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -38820,8 +38820,8 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "Could not read current permits for ALCOSAN, PWD, CRW, Lancaster, Erie etc. Retry from another network.",
+  "status": "watch",
+  "status_reason": "Could not read current permits for ALCOSAN, PWD, CRW, Lancaster, Erie etc. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "search_only",
   "checked": "2026-11-02",
   "notes": "",
@@ -38845,7 +38845,7 @@
   "access": [
    "html"
   ],
-  "access_detail": "palegis.us refused connections (ECONNREFUSED / timeout). Status from a search snippet and legiplex: referred to committee 2025-03-11, no later action seen.",
+  "access_detail": "palegis.us refused connections (ECONNREFUSED / timeout). Status from a search snippet and legiplex: referred to committee 2025-03-11, no later action seen. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -38882,7 +38882,7 @@
    "html",
    "pdf"
   ],
-  "access_detail": "Proposed by EQB 2024-11-12; published 55 Pa.B. 2589 (April 5, 2025), comments to 2025-06-04 (IRRC #3432). IRRC withdrawal letter dated 2026-04-08 (file name). irrc.state.pa.us unreachable; facts from search snippets and Clean Water Action (2026-04-28).",
+  "access_detail": "Proposed by EQB 2024-11-12; published 55 Pa.B. 2589 (April 5, 2025), comments to 2025-06-04 (IRRC #3432). IRRC withdrawal letter dated 2026-04-08 (file name). irrc.state.pa.us unreachable; facts from search snippets and Clean Water Action (2026-04-28). The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -39075,7 +39075,7 @@
   "access": [
    "html"
   ],
-  "access_detail": "curl got 403; WebFetch read it. 'An alert is usually canceled 24 to 36 hours after sewer overflows end.' Daily river report season 'May 1st through October 31st'. Recreation not prohibited: 'people are urged to minimize water contact'.",
+  "access_detail": "curl got 403; WebFetch read it. 'An alert is usually canceled 24 to 36 hours after sewer overflows end.' Daily river report season 'May 1st through October 31st'. Recreation not prohibited: 'people are urged to minimize water contact'. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -40045,8 +40045,8 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "Network-level block from this machine; retry from another network before building against DEP layers or permits.",
+  "status": "watch",
+  "status_reason": "A network-level block met from a development machine on 2026-11-02, not by the pipeline. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "fetched",
   "checked": "2026-11-02",
   "notes": "",
@@ -50650,7 +50650,7 @@
   "access": [
    "html"
   ],
-  "access_detail": "curl got HTTP 403 Incapsula; WebFetch got an empty page. Search snippet: 'If a site is flashing, that represents that a CSO overflow event is occurring or has occurred in the last 48 hours. The date and time listed is the start time of the overflow event and will automatically shut off after 48 hours.' 20 (or 25) monitoring sites.",
+  "access_detail": "The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. The page holds a table of the monitoring sites with each one's status and overflow start time. Search snippet: 'If a site is flashing, that represents that a CSO overflow event is occurring or has occurred in the last 48 hours. The date and time listed is the start time of the overflow event and will automatically shut off after 48 hours.' 20 (or 25) monitoring sites.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -50670,7 +50670,7 @@
   "license": null,
   "legal_basis": null,
   "status": "candidate",
-  "status_reason": "Dated CSO starts for Spokane, but bot-walled to scripts; owner should ask the City for a feed or allow-listing.",
+  "status_reason": "Dated CSO starts for Spokane; not collected yet.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "notes": "",
@@ -51006,7 +51006,7 @@
   "access": [
    "csv"
   ],
-  "access_detail": "Tab-delimited text, 95 columns, ~11 MB, no auth, no bot wall on the file (the HTML map pages sit behind Incapsula). Listing page https://www.waterboards.ca.gov/water_issues/programs/sso/docs/index.php shows all files regenerated daily at about 06:00 Pacific (Last-Modified 2026-11-03 14:00 UTC). Sibling files: annualReports.txt, Enrollee_Info.txt, neworder_monthly_counts.txt, neworder_ssmps.txt, No_spill.txt, plps_spills.txt (private lateral spills), PLSD.txt. Trimmed sample: raw/ciwqs-cat1-2-3-spills-sample.json.",
+  "access_detail": "Tab-delimited text, 95 columns, ~11 MB, no auth, no bot wall on the file (the HTML map page answered the pipeline's runner on 2026-11-16). Listing page https://www.waterboards.ca.gov/water_issues/programs/sso/docs/index.php shows all files regenerated daily at about 06:00 Pacific (Last-Modified 2026-11-03 14:00 UTC). Sibling files: annualReports.txt, Enrollee_Info.txt, neworder_monthly_counts.txt, neworder_ssmps.txt, No_spill.txt, plps_spills.txt (private lateral spills), PLSD.txt. Trimmed sample: raw/ciwqs-cat1-2-3-spills-sample.json.",
   "machine_readable": true,
   "sample_record": {
    "REGION": "4",
@@ -51113,7 +51113,7 @@
   "access": [
    "map_only"
   ],
-  "access_detail": "curl returned a 212-byte Incapsula bot-wall stub. The program page says the maps are 'updated nightly'. Same data as the flat file.",
+  "access_detail": "curl returned a 212-byte Incapsula bot-wall stub. The program page says the maps are 'updated nightly'. Same data as the flat file. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -51126,7 +51126,7 @@
   "license": null,
   "legal_basis": null,
   "status": "rejected",
-  "status_reason": "Duplicate of the flat file and bot-walled; use the flat file.",
+  "status_reason": "Duplicate of the flat file; use the flat file.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "notes": "",
@@ -52106,7 +52106,7 @@
   "license": "No terms stated on the page.",
   "legal_basis": "NPDES permits IL0028053, IL0028088, IL0028061 CSO special conditions; 40 CFR 122.38",
   "status": "watch",
-  "status_reason": "Per-outfall open and close times for Cook County since 2016, but reached only through a form, a session and a report viewer: by the standing rule on bot walls and polling forms it is not read by an automated session; the request to MWRD is a download or feed of the same table (register row il-mwrd-cso-synopsis-report).",
+  "status_reason": "Per-outfall open and close times for Cook County since 2016, but reached only through a form, a session and a report viewer: by the standing rule on polling forms it is not read by an automated session (the form page answered the pipeline's runner on 2026-11-16); the request to MWRD is a download or feed of the same table (register row il-mwrd-cso-synopsis-report).",
   "verified": "fetched",
   "checked": "2026-11-04",
   "notes": "7/4/2026 report has 24 outfall rows. The monitored set includes City of Chicago and suburban outfalls tied to TARP drop shafts.",
@@ -59669,8 +59669,8 @@
   "history": null,
   "license": null,
   "legal_basis": "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree",
-  "status": "unreachable",
-  "status_reason": "Connection reset on 2026-11-03.",
+  "status": "watch",
+  "status_reason": "Connection reset on 2026-11-03. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "search_only",
   "checked": "2026-11-03",
   "notes": "",
@@ -60327,7 +60327,7 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "Registered as an unmonitored channel (no feed): the City's press releases, one mutable page per notice (the research of 2026-11-09 read the Chester Creek notice of October 2024, which kept its earlier warnings below the updates). duluthmn.gov did not answer the project's client on 2026-11-14 (connection timed out); no list or feed of the overflow notices was found.",
+  "status_reason": "Registered as an unmonitored channel (no feed): the City's press releases, one mutable page per notice (the research of 2026-11-09 read the Chester Creek notice of October 2024, which kept its earlier warnings below the updates). duluthmn.gov did not answer the project's client on 2026-11-14 (connection timed out); no list or feed of the overflow notices was found. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "access_failed",
   "checked": "2026-11-14",
   "notes": "",
@@ -60432,8 +60432,8 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "mnbeaches.org timed out on 2026-11-14 (connection, 60 s) as it failed on 2026-11-09; no advisory rows, sample schema or API seen. Registered as a channel with its barrier.",
+  "status": "watch",
+  "status_reason": "mnbeaches.org timed out on 2026-11-14 (connection, 60 s) as it failed on 2026-11-09; no advisory rows, sample schema or API seen. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "access_failed",
   "checked": "2026-11-14",
   "notes": "Inland beach monitoring is not required by state law; some local health departments and cities run programs (MDH Beach Locator).",
@@ -61961,7 +61961,7 @@
   "license": null,
   "legal_basis": null,
   "status": "watch",
-  "status_reason": "City news answered 403 in the research; registered, not read.",
+  "status_reason": "City news answered 403 in the research from a development machine; on 2026-11-16 the old news address led the pipeline's runner to the city's home page. Registered, not read.",
   "verified": "search_only",
   "checked": "2026-11-14",
   "notes": "",
@@ -64438,7 +64438,7 @@
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 92 permits, January 2025 to October 2026, a median 24 days after the month. Month precision: the monthly mark only.",
+  "status_reason": "Read by in_echo_cso_monthly (2026-11-14): IDEM's CSO permits file three monthly totals per outfall (84165 events, 50037 hours, 74063 million gallons); 4,484 outfall-months with a discharge from 73 of 91 permits, January 2025 to October 2026, received by EPA a median 24 days after the month. Month precision: the monthly mark only.",
   "verified": "inferred",
   "checked": "2026-11-14",
   "notes": "",
@@ -64613,8 +64613,8 @@
   "history": null,
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
-  "status": "unreachable",
-  "status_reason": "The host did not accept a connection from this build on 2026-11-14 (two tries, ports 443 and 80): watched daily in the register; the research of 2026-11-09 read 'NOT overflowing' and dated overflows to 2025-08-19 (1.1 million gallons), which EPA's monthly report for August 2025 matches.",
+  "status": "watch",
+  "status_reason": "The host did not accept a connection from this build on 2026-11-14 (two tries, ports 443 and 80): watched daily in the register; the research of 2026-11-09 read 'NOT overflowing' and dated overflows to 2025-08-19 (1.1 million gallons), which EPA's monthly report for August 2025 matches. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": "",
@@ -64756,7 +64756,7 @@
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
   "status": "watch",
-  "status_reason": "Email CSO notifications by calling 574.277.8515; 2025 CSO Annual Public Notice and 2025 Monthly Reports of Operation PDFs. HTTP 403 to curl; read with WebFetch.",
+  "status_reason": "Email CSO notifications by calling 574.277.8515; 2025 CSO Annual Public Notice and 2025 Monthly Reports of Operation PDFs. HTTP 403 to curl; read with WebFetch. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "fetched",
   "checked": "2026-11-03",
   "notes": "",
@@ -64790,8 +64790,8 @@
   "history": null,
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
-  "status": "unreachable",
-  "status_reason": "HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. A barrier (bot wall) in the register.",
+  "status": "watch",
+  "status_reason": "HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine.",
   "verified": "search_only",
   "checked": "2026-11-14",
   "notes": "",
@@ -64989,10 +64989,9 @@
   "url": "https://portal.idem.in.gov/BeachAlert/",
   "access": [
    "map_only",
-   "email",
-   "login"
+   "email"
   ],
-  "access_detail": "Microsoft Power Apps portal (replaced BeachGuard in 2021). Beach Map (ArcGIS JS 4.17), Beach List (entity grid idem_beach: 'There are no records to display. You don't have permissions to view these records.' without sign-in), Alerts. Email or text alerts with an Access Indiana account.",
+  "access_detail": "Microsoft Power Apps portal (replaced BeachGuard in 2021). Beach Map (ArcGIS JS 4.17), Beach List (entity grid idem_beach; the page's client-side templates include a no-records line, a permissions line and an error line side by side, so the shell alone shows none of them to be the answer; whether the grid's data call answers without sign-in was not verified, 2026-11-14), Alerts. Email or text alerts with an Access Indiana account.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
