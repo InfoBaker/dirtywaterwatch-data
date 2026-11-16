@@ -1437,6 +1437,25 @@ def listed_only(ev: dict) -> bool:
     return raw.get("_placement") == "listed_only"
 
 
+# Nevada (Astra review 2026-11-16 P1-5): the Office of State Epidemiology's list marks an advisory the parks' feed also
+# carries as that record's duplicate when it reads the parks' file, an hour behind at most. The link holds only while
+# the parks' record is in this build and still advisory_active; otherwise the Office's record shows itself, so a
+# parks lift never greys an advisory the Office still lists. Keyed on the source; every other link is untouched.
+REVALIDATED_LINK_SOURCES = {"nv-ose-hab-reports"}
+
+
+def stale_links(events: list[dict], duplicates: dict) -> dict:
+    """duplicates without the links of REVALIDATED_LINK_SOURCES whose target is absent or no longer active."""
+    by_id = {e.get("event_id"): e for e in events}
+    out = {}
+    for eid, target in duplicates.items():
+        src = (by_id.get(eid) or {}).get("source_id")
+        if src in REVALIDATED_LINK_SOURCES and (by_id.get(target) or {}).get("status") != "advisory_active":
+            continue
+        out[eid] = target
+    return out
+
+
 def own_place_only(ev: dict) -> bool:
     raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
     return raw.get("_placement") == "own_place_only"
@@ -4406,6 +4425,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     for ev in events:               # an ingester's own duplicate_of (CT annual sheet -> dashboard) wins
         if ev.get("duplicate_of") and ev["duplicate_of"] != ev["event_id"]:
             duplicates[ev["event_id"]] = ev["duplicate_of"]
+    duplicates = stale_links(events, duplicates)
     h_start = now - timedelta(days=HISTORY_DAYS)
     points = []
     latest_month = {}       # outfall -> (event, water slugs, monthly mark) of its latest month report

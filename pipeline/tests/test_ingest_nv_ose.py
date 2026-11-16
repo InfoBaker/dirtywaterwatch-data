@@ -260,7 +260,8 @@ def test_one_unreadable_block_is_held_the_rest_update_and_health_stays_false(run
     by = recs_by(doc["records"])
     assert by[("Walker Lake", None)]["status"] == "advisory_active" and by[("Walker Lake", None)]["ended_at"] is None
     assert by[("Walker Lake", None)]["raw"]["_held_unread"]
-    assert by[("Virginia Lake", None)]["status"] == "advisory_lifted"                 # a readable absence still ends
+    # a partial read ends nothing (Astra review P1-3): Virginia Lake's absence is not taken as its end
+    assert by[("Virginia Lake", None)]["status"] == "advisory_active" and by[("Virginia Lake", None)]["ended_at"] is None
     assert by[("Lake Mohave", None)]["raw"]["_last_seen_in_source"] == T2
 
 
@@ -372,3 +373,55 @@ def test_the_source_file_and_register_row_say_the_list_is_ingested():
     assert row.get("feed_source_id") == O.SOURCE_ID
     text = (ROOT / "research" / "nv" / "state-text.md").read_text()
     assert "does not yet read" not in text and "Virginia Lake" in text
+
+
+# ---- Astra review 2026-11-16 (scratchpad reviews/astra-nv-ose-review.md) -------------------------------------------
+
+def test_review_p1_1_an_unread_blocks_key_carries_nothing_personal():
+    page = PAGE.replace("Wild Horse Reservoir            </summary>",
+                        "Wild Horse Reservoir reported by Pat Example at 775-555-0100</summary>").replace(
+        "as of 8/13/2026", "as of 13/45/2026")                                                     # invented
+    _, meta = O.build(page, T1, [])
+    assert meta["unread"] and "Pat" not in json.dumps(meta) and "775" not in json.dumps(meta)
+    assert "pat" not in meta["unread"][0]["block_key"] and "775" not in meta["unread"][0]["block_key"]
+
+
+def test_review_p1_2_advisory_text_outside_a_read_block_fails_the_read():
+    m = re.search(r"<details\b[^>]*>\s*<summary\b[^>]*>\s*(Walker Lake)\s*</summary>(.*?)</details>", PAGE, re.S)
+    page = PAGE.replace(m.group(0), f"<div><h3>{m.group(1)}</h3>{m.group(2)}</div>")
+    with pytest.raises(ValueError, match="outside"):
+        O.parse(page, T1)
+
+
+def test_review_p1_3_a_partial_read_ends_nothing():
+    prev, _ = O.build(PAGE, T1, [])
+    page = drop_block(PAGE, "Walker Lake").replace("as of 8/13/2026", "as of 13/45/2026")
+    recs, meta = O.build(page, T2, prev)
+    assert meta["unread"] and meta["lifted_this_read"] == 0
+    assert all(r["status"] == "advisory_active" for r in recs) and len(recs) == 11
+
+
+def test_review_p1_4_a_place_that_contradicts_the_known_water_is_never_tied():
+    page = PAGE.replace("Rye Patch Reservoir has been downgraded",
+                        "Rye Patch Reservoir in Lincoln County, NV has been downgraded")             # invented
+    rye = recs_by(O.build(page, T1, [])[0])[("Rye Patch Reservoir", None)]
+    assert rye["raw"]["_placement"] == "listed_only" and rye["raw"]["place"] == "Lincoln County, NV"
+    ok = PAGE.replace("Rye Patch Reservoir has been downgraded",
+                      "Rye Patch Reservoir in Pershing County has been downgraded")
+    assert recs_by(O.build(ok, T1, [])[0])[("Rye Patch Reservoir", None)]["raw"]["_placement"] == "named_water_only"
+
+
+def test_review_p1_5_a_link_to_a_parks_record_no_longer_active_is_not_a_duplicate():
+    from build import status as S
+    parks, _ = P.build(PARKS_PAGE, "2026-11-16T12:40:00Z", [])
+    recs, _ = O.build(PAGE, T1, [], parks)
+    dup = {r["event_id"]: r["duplicate_of"] for r in recs if r["duplicate_of"]}
+    assert len(dup) == 3
+    assert S.stale_links(recs + parks, dict(dup)) == dup                        # the parks records are active
+    lifted = [dict(p, status="advisory_lifted") if p["raw"]["water_key"] == "rye-patch-reservoir" else p for p in parks]
+    kept = S.stale_links(recs + lifted, dict(dup))
+    assert len(kept) == 2 and not any("rye-patch" in k for k in kept)
+    gone = [p for p in parks if p["raw"]["water_key"] != "lahontan-reservoir"]
+    assert len(S.stale_links(recs + gone, dict(dup))) == 2
+    other = {"x:1": "y:2"}                                                      # any other source's link is untouched
+    assert S.stale_links([{"event_id": "x:1", "source_id": "x"}], dict(other)) == other

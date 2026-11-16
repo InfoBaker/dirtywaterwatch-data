@@ -41,8 +41,12 @@ Record rules
     block count that does not match, or an active section with no water block and no explicit empty marker ("There
     are currently no active HABs") writes ok=False and keeps the earlier records. One water block that cannot be read
     (a paragraph about an advisory in another form, a date the reader cannot take or after the read, a subject that is
-    neither the water nor a listed part) is listed in meta.unread with its reason; the readable blocks update, the
-    unread block's earlier records are held as they were (never lifted), and health stays false until it is read.
+    neither the water nor a listed part) is listed in meta.unread with its reason; the readable blocks update, no
+    earlier advisory is ended on that read (all are held, raw._held_unread), and health stays false until it is read.
+    Advisory text or a heading outside the blocks fails the read (Astra review P1-2, P1-3).
+  - A place the Office gives for a known water that does not name the county of its record ("Rye Patch Reservoir in
+    Lincoln County") leaves the advisory listed only (Astra review P1-4). A duplicate link holds only while the parks'
+    record is in the status build and active (build/status.py stale_links, P1-5).
   - Privacy: only the block headings and the advisory paragraphs are read (the help-line block is never read). Each
     paragraph is cleaned sentence by sentence before any save (the parks' rules: a sentence that can carry a person is
     withheld whole; "contact with water" is advice, not a contact); headings and names go through clean_field; the raw
@@ -222,7 +226,12 @@ def parse(page: str, fetched: str | None = None) -> dict:
     fetched_day = (datetime.fromisoformat(fetched.replace("Z", "+00:00")).astimezone(ZONE).date()
                    if fetched else date.today())
     waters = [m for m in blocks if P.text_of(m.group("summary")).casefold() not in NOT_WATERS]
-    outside = P.text_of(DETAILS.sub(" ", active))
+    rest = DETAILS.sub(" ", active)
+    outside = P.text_of(rest)
+    # anything about an advisory, or a heading, outside a block read fails the read (Astra P1-2): a water written in
+    # another wrapper would otherwise be lifted as absent
+    if ADVISORY_WORDS.search(EMPTY.sub(" ", outside)) or re.search(r"<(?:h[1-6]|summary|strong|b)\b", rest, re.I):
+        raise ValueError("advisory text or a heading stands outside the active section's blocks")
     if not waters and not EMPTY.search(outside):
         raise ValueError("the active section lists no water and does not say there are no active HABs")
     if waters and EMPTY.search(outside):
@@ -233,8 +242,9 @@ def parse(page: str, fetched: str | None = None) -> dict:
         water = heading_parts(summary)[0] if summary else ""
         got, bad = read_block(summary, m.group("body"), fetched_day) if summary else ([], {"reason": "a blank heading"})
         if bad:
-            unread.append({"heading": P.clean_field(summary) if summary else "", "block_key": P.slug(known_name(water)
-                           or water), **bad})
+            # the key is made from the cleaned name, never the raw heading (Astra P1-1)
+            unread.append({"heading": P.clean_field(summary) if summary else "",
+                           "block_key": P.slug(P.clean_field(known_name(water) or water)), **bad})
         items += got
     prev_text = P.text_of(page[b[0].end():])
     lifts = []
@@ -303,6 +313,8 @@ def build(page: str, fetched: str, previous: list[dict], parks: list[dict] | Non
             history.append({"level": it["level"], "date": it["level_date"], "seen_at": fetched})
         part = it.get("part")
         county = KNOWN.get(it["water"])
+        if county and it.get("place") and county.split()[0].casefold() not in it["place"].casefold():
+            county = None       # a place the Office gives that does not name the record's county (Astra P1-4)
         raw = {"water_key": k, "block_key": P.slug(it["water"]), "water": it["water"], "part": part,
                "place": it.get("place"), "level": it["level"], "level_date": it["level_date"],
                "level_history": P.deep_clean(history), "advisory_extent": "part_of_water" if part else "named_water",
@@ -345,8 +357,9 @@ def build(page: str, fetched: str, previous: list[dict], parks: list[dict] | Non
         p = recleaned(p)
         raw = dict(p.get("raw") or {})
         if p.get("status") == "advisory_active":
-            if raw.get("block_key") in held_blocks:
-                raw["_held_unread"] = "its block could not be read on this run: held as it was"
+            if unread:          # a partial read ends nothing (Astra P1-3): every earlier advisory is held
+                raw["_held_unread"] = ("the read was partial (" + ", ".join(sorted(held_blocks)) + " unread): held "
+                                       "as it was")
                 held += 1
             else:
                 subj = (raw.get("part") or raw.get("water") or "").casefold()
