@@ -171,7 +171,7 @@ def text_of(o: dict) -> str:
     stays as it is."""
     raw = str((o.get("receiving_water_override") or {}).get("water") or o.get("receiving_water_echo") or "").strip()
     if STATE_TEXT and raw and not (o.get("receiving_water_override") or {}).get("water"):
-        parts, _ = N.national_parts(raw)
+        parts, _ = N.national_parts(raw, o.get("state"))
         if parts:
             return " and ".join(parts)
     return raw
@@ -421,10 +421,11 @@ class Matcher:
             return False, f"its bounding box is {lb / 1000:.1f} km from the point ({lim})"
         ub = self.box_far(slug, lat, lon)
         g = gnis_of(o)
-        names = {S.norm_name(w.get("name") or "")} | {S.norm_name(a) for a in w.get("aliases") or []}
+        wst = w.get("state")
+        names = {S.norm_name_in(w.get("name") or "", wst)} | {S.norm_name_in(a, wst) for a in w.get("aliases") or []}
         if ub is not None and ub <= limit:
             why = f"its bounding box puts the whole water within {ub / 1000:.1f} km of the point ({lim})"
-        elif g and S.norm_name(g) in names and lb is not None:
+        elif g and S.norm_name_in(g, wst) in names and lb is not None:
             why = f"EPA's NHDPlus reach at the point is named '{g}', and its bounding box is within the limit ({lim})"
         elif not w.get("bbox"):
             return False, f"it has neither an outline here nor a bounding box: {HELD}"
@@ -567,11 +568,11 @@ class Matcher:
                 self._several = [x for x in kept]
                 return None, None
             if len(kept) > 1:
-                nv = f" {S.norm_name(v)} "
+                nv = f" {S.norm_name_in(v, st)} "
 
                 def matched_len(s):
-                    n = S.norm_name(self.waters[s].get("name") or "")
-                    names = [n] + [S.norm_name(a) for a in self.waters[s].get("aliases") or []]
+                    names = S.name_forms_in(self.waters[s].get("name") or "", st) + \
+                        [x for a in self.waters[s].get("aliases") or [] for x in S.name_forms_in(a, st)]
                     return max((len(x) for x in names if x and f" {x} " in nv), default=0)
                 kept.sort(key=lambda s: (-matched_len(s), far(self.dist(s, lat, lon))))
                 s = kept[0]
@@ -616,7 +617,7 @@ class Matcher:
             s = self.canon(s) if s else None
             if not s or s not in self.waters or self.waters[s].get("state") != o.get("state"):
                 continue
-            if text and not why_not_a_name(text) and S.names_disagree(text, self.waters[s].get("name")):
+            if text and not why_not_a_name(text) and S.names_disagree(text, self.waters[s].get("name"), o.get("state")):
                 continue
             if self.no_outline(s):
                 self.evidence_of()[s] = f"EPA's own NHD reach for the outfall ({x}) is on the NHD feature taken for this water"
@@ -637,7 +638,7 @@ class Matcher:
         st, permit = o.get("state"), o.get("npdes_permit")
         lat, lon = o.get("lat"), o.get("lon")
         self._builder_far = None
-        keys = [N.compact(text)] + [N.compact(p) for p in N.national_parts(text)[0]]
+        keys = [N.compact(text)] + [N.compact(p) for p in N.national_parts(text, st)[0]]
         for k in keys:
             t = self.targets.get((st, k))
             if not t or not t.get("define_by") or permit not in (t.get("permits") or []) or not t.get("slugs"):
@@ -746,7 +747,7 @@ class Matcher:
             return None, None
         d, s = near
         s = self.canon(s)
-        if text and not why_not_a_name(text) and S.names_disagree(text, self.waters[s].get("name")):
+        if text and not why_not_a_name(text) and S.names_disagree(text, self.waters[s].get("name"), o["state"]):
             return None, None
         return s, f"the water record at the outfall's point ({m(d)} m; snapped within {POINT_M} m)"
 
@@ -756,22 +757,22 @@ class Matcher:
         towns = self.towns_of(o)
         if not towns:
             return None, None
-        ws = N.words(text)
-        listed = {S.norm_name(x) for x in (self.dis_waters.get(o.get("npdes_permit")) or {}).get("names") or []}
+        ws = N.words(S.state_text(text, st))
+        listed = {S.norm_name_in(x, st) for x in (self.dis_waters.get(o.get("npdes_permit")) or {}).get("names") or []}
         cands = []
         for s, w in self.waters.items():
             if w.get("state") != st or not w.get("name"):
                 continue
-            sc = max([N.name_score(ws, w["name"])] + [N.name_score(ws, a) for a in w.get("aliases") or []])
+            sc = max([N.name_score(ws, w["name"], st)] + [N.name_score(ws, a, st) for a in w.get("aliases") or []])
             # 0.7: the name without its qualifier ('Potomac River' for the North Branch Potomac River at
             # Cumberland), only when the research lists that water for the permit
-            if (sc >= 0.8 or (sc >= 0.7 and S.norm_name(w["name"]) in listed)) and self.reaches_town(s, o):
+            if (sc >= 0.8 or (sc >= 0.7 and S.norm_name_in(w["name"], st) in listed)) and self.reaches_town(s, o):
                 cands.append((sc, s))
         best = [s for sc, s in cands if sc == max((c[0] for c in cands), default=0)]
         if len(best) != 1:
             return None, None
         s = best[0]
-        if S.norm_name(text) != S.norm_name(self.waters[s]["name"]) and \
+        if S.norm_name_in(text, st) != S.norm_name_in(self.waters[s]["name"], st) and \
                 any(HELD in why for _, why in (self._aside or [])):
             # the text's own water has a record, held for want of its outline: not a near-named one instead
             # ('Northeast Cape Fear River' is not the Cape Fear River at Wilmington)
@@ -780,9 +781,9 @@ class Matcher:
             self.evidence_of()[s] = f"its town list names the permittee's town ({', '.join(sorted(towns))})"
         tw = sorted(towns)
         listed_note = (f"; the research lists {self.waters[s]['name']} for the permit (data/dischargers.json)"
-                       if S.norm_name(self.waters[s]["name"]) in listed else "")
+                       if S.norm_name_in(self.waters[s]["name"], st) in listed else "")
         return s, (f"its receiving water '{text}' by name and the permittee's town ({', '.join(tw)}): the only record "
-                   f"of that name there" + ("" if S.norm_name(text) == S.norm_name(self.waters[s]["name"]) else
+                   f"of that name there" + ("" if S.norm_name_in(text, st) == S.norm_name_in(self.waters[s]["name"], st) else
                                             f" (the text reads '{text}', the record '{self.waters[s]['name']}')")
                    + listed_note)
 
@@ -851,7 +852,7 @@ class Matcher:
             d = self.dist(s, lat, lon) if s else None
             near = self.resolver.by_point(lat, lon, o["state"]) if lat is not None else None
             if near and near[0] <= POINT_M and not self.line_only(self.canon(near[1])) \
-                    and S.names_disagree(text, self.waters[self.canon(near[1])].get("name")) \
+                    and S.names_disagree(text, self.waters[self.canon(near[1])].get("name"), o["state"]) \
                     and not (d is not None and d > POINT_WRONG_M):
                 # the point lies on another named water and is not a far-off mistake: the name and the point disagree
                 self._conflict = (f"EPA's point lies on {self.waters[self.canon(near[1])]['name']} ({m(near[0])} m), "
@@ -958,7 +959,8 @@ def match_plant(mt: "Matcher", o: dict, flags: dict | None = None) -> dict:
     lat = o.get("lat")
     not_name = why_not_a_name(text)
     named = bool(text) and not not_name
-    gnis_ok = bool(gnis) and not why_not_a_name(gnis) and not (named and S.names_disagree(text, gnis))
+    pst = o.get("state")
+    gnis_ok = bool(gnis) and not why_not_a_name(gnis) and not (named and S.names_disagree(text, gnis, pst))
     if named:
         several = len(N.split_names(text, False)) > 1
         for step, fn in (("name", mt.by_name), ("NHD builder", mt.by_nhd_target)):
@@ -977,7 +979,7 @@ def match_plant(mt: "Matcher", o: dict, flags: dict | None = None) -> dict:
         s, how = mt.by_outfall_ref(o)
         if s:
             return {"slug": s, "how": f"{not_name}; {how}" if not_name else how, "step": "NHD builder"}
-    if gnis_ok and not (named and S.norm_name(gnis) == S.norm_name(text)):
+    if gnis_ok and not (named and S.norm_name_in(gnis, pst) == S.norm_name_in(text, pst)):
         reach = o.get("reach_id") or "?"
         for fn in (mt.by_name, mt.by_nhd_target):
             s, how = fn(o, gnis)
@@ -992,7 +994,7 @@ def match_plant(mt: "Matcher", o: dict, flags: dict | None = None) -> dict:
         # the snap to the record at the point only for a text with no water in it (none, a HUC-12 or basin label): a
         # text that says groundwater, a ditch or another water the point is near is not turned into the nearest record
         s, how = mt.by_point(o, text)
-        if s and gnis_ok and S.names_disagree(gnis, mt.waters[s].get("name")):
+        if s and gnis_ok and S.names_disagree(gnis, mt.waters[s].get("name"), pst):
             s = None                    # the record at the point is not the water the reach is named for
         if s:
             return {"slug": s, "how": f"{not_name}; {how}" if not_name else how, "step": "point"}
@@ -1002,10 +1004,11 @@ def match_plant(mt: "Matcher", o: dict, flags: dict | None = None) -> dict:
         if res.get("slug") and res.get("step") == "name and town":
             wn = mt.waters[res["slug"]].get("name")
             d = mt.dist(res["slug"], lat, o.get("lon"))
-            if gnis_ok and S.names_disagree(gnis, wn):
+            if gnis_ok and S.names_disagree(gnis, wn, pst):
                 return {"slug": None, "reason": mt.reason(o, text, not_name) + f"; the town's only '{text}' record, {wn}, is not "
                         f"the water the NHDPlus reach {o.get('reach_id') or '?'} is named for ('{gnis}')"}
-            if d is not None and d > TIGHT_M and S.norm_name(wn) not in (S.norm_name(text), S.norm_name(gnis)):
+            if d is not None and d > TIGHT_M and S.norm_name_in(wn, pst) not in (S.norm_name_in(text, pst),
+                                                                                 S.norm_name_in(gnis, pst)):
                 return {"slug": None, "reason": mt.reason(o, text, not_name) + f"; the town's record {wn} is {d / 1000:.1f} km "
                         f"from the point and its name is not the receiving water's ('{text}'): not matched"}
             if res.get("coords_problem"):
@@ -1013,7 +1016,7 @@ def match_plant(mt: "Matcher", o: dict, flags: dict | None = None) -> dict:
                     "it cannot be this outfall's", "it is left as EPA gave it and the row is not matched to that water")}
             return res
     reason = mt.reason(o, text, not_name)
-    if gnis and not (named and S.norm_name(gnis) == S.norm_name(text)):
+    if gnis and not (named and S.norm_name_in(gnis, pst) == S.norm_name_in(text, pst)):
         reason += (f"; the NHDPlus reach {o.get('reach_id') or '?'} is named '{gnis}'"
                    + ("" if gnis_ok else " (not read: it names another water than the permit's text)")
                    + " and no record of that name is at the point")
@@ -1030,9 +1033,10 @@ def same_water(o: dict, w: dict) -> bool:
     alias equals the text once abbreviations are spelled out and 'Unnamed Trib To', 'UT', '(Zone 4)' and 'Estuary' are
     dropped ('Mattaponi River, UT' and 'Hudson R UNTR' are the Mattaponi and the Hudson; 'Little Neshaminy Creek' is not
     the Neshaminy Creek, 'White Lake Brook' is not White Lake)."""
-    names = {S.norm_name(n) for n in [w.get("name") or ""] + list(w.get("aliases") or []) if n}
+    st = o.get("state")
+    names = {x for n in [w.get("name") or ""] + list(w.get("aliases") or []) if n for x in S.name_forms_in(n, st)}
     for t in (text_of(o), gnis_of(o)):
-        if t and S.norm_name(UNNAMED.sub(" ", t)) in names:
+        if t and S.norm_name_in(UNNAMED.sub(" ", t), st) in names:
             return True
     return False
 
@@ -1096,7 +1100,7 @@ def apply(o: dict, res: dict, mt: Matcher) -> None:
             o["coords_problem"] = res["coords_problem"]
         d = mt.dist(s, o.get("lat"), o.get("lon"))
         text = text_of(o)
-        named = bool(text) and not why_not_a_name(text) and not S.names_disagree(text, w.get("name"))
+        named = bool(text) and not why_not_a_name(text) and not S.names_disagree(text, w.get("name"), st)
         cap = NAME_ONLY_CAP_M.get(st)
         d_cap = d if d is not None else d_suspect
         if cap and d_cap is not None and d_cap > TIGHT_M and d_cap > cap:
@@ -1161,11 +1165,12 @@ def names_another_water(o: dict, waters: dict) -> bool:
     (Resolver.row_water): the record's name, or an alias, inside the receiving water's text or the text inside it."""
     if o.get("match") != "name_only":
         return False
-    rn = S.norm_name(text_of(o))
+    st = o.get("state")
+    rn = S.norm_name_in(text_of(o), st)
     w = waters.get(o.get("water_slug")) or {}
     if not rn or not w:
         return False
-    names = [S.norm_name(n) for n in [w.get("name") or ""] + list(w.get("aliases") or []) if n]
+    names = [x for n in [w.get("name") or ""] + list(w.get("aliases") or []) if n for x in S.name_forms_in(n, st)]
     return not any(f" {n} " in f" {rn} " or f" {rn} " in f" {n} " for n in names if n)
 
 
@@ -1328,7 +1333,7 @@ def run_plants(dry_run: bool = False, offline: bool = False) -> dict:
             continue                # 'groundwater', a street ditch: no water to make a record for
         # the permit's own name when it names a water the reach is not named for (Pequabuck River on the Farmington's
         # reach), else the reach's name, else the text
-        name = text if text_names and (not gnis or S.names_disagree(text, gnis)) else (gnis or text or "(no name)")
+        name = text if text_names and (not gnis or S.names_disagree(text, gnis, d.get("state"))) else (gnis or text or "(no name)")
         u = unrec[(d["state"], name)]
         u["outfalls"] += 1
         u["permits"].add(d["permit"])

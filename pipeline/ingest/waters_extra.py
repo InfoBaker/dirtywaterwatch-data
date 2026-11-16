@@ -399,14 +399,24 @@ def as_areas(geom):
 
 # ---------------------------------------------------------------- Overpass
 
-def name_regex(names: list[str]) -> str:
-    return "^(" + "|".join(re.sub(r"([.^$|()\[\]{}*+?\\])", r"\\\1", n).replace('"', '\\"') for n in names) + ")$"
+# a letter and its accented forms, for a name asked with accents_free (Puerto Rico's: OpenStreetMap writes 'Bahía de San
+# Juan', EPA 'BAHIA SAN JUAN')
+ACCENT_CLASS = {"a": "[aáAÁ]", "e": "[eéEÉ]", "i": "[iíIÍ]", "o": "[oóOÓ]", "u": "[uúüUÚÜ]", "n": "[nñNÑ]"}
+
+
+def name_regex(names: list[str], accents_free: bool = False) -> str:
+    """The Overpass alternation of the names (whole names). accents_free: each vowel and n also matches its accented
+    forms (ACCENT_CLASS); the regex of every other spec is as it was."""
+    alts = [re.sub(r"([.^$|()\[\]{}*+?\\])", r"\\\1", n).replace('"', '\\"') for n in names]
+    if accents_free:
+        alts = ["".join(ACCENT_CLASS.get(c.lower(), c) for c in a) for a in alts]
+    return "^(" + "|".join(alts) + ")$"
 
 
 def build_query(spec: dict) -> str:
     s, w, n, e = spec["box"]
     bb = f"{s},{w},{n},{e}"
-    rx = name_regex([spec["name"]] + list(spec.get("osm_names") or []))
+    rx = name_regex([spec["name"]] + list(spec.get("osm_names") or []), bool(spec.get("accents_free")))
     tail = []
     if spec.get("coast"):   # a bay OSM has only as a label: its coastline and the bridges that close it
         tail += ['make section name="coast";\nout;', f'way["natural"="coastline"]({bb});\nout geom;']
