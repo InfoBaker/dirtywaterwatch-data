@@ -207,6 +207,9 @@ def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | Non
                          "water_slugs": list((hit or {}).get("water_slugs") or []),
                          "water_match": (hit or {}).get("water_match"), "rain": (hit or {}).get("rain"),
                          "alias_of": f"{permit}:{hit['outfall_id']}" if hit else None})
+    # an unplaced outfall a monthly mark names: the mark makes its row as it did before the unplaced list (one row,
+    # never in both lists)
+    unplaced_at = {outfall_key(u["npdes_permit"], u["outfall_id"]): u for u in (unplaced or []) if u.get("npdes_permit")}
     for m in marks or []:
         if not isinstance(m, dict) or not m.get("npdes_permit") or not m.get("outfall_id"):
             continue
@@ -214,6 +217,8 @@ def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | Non
         if permit[:2] not in live:
             continue
         key = outfall_key(permit, m["outfall_id"])
+        if key in unplaced_at:
+            unplaced.remove(unplaced_at.pop(key))
         row = by_key.get(key)
         if row is None:                 # a monthly report for an outfall the registry lacks (CSO monthly reports)
             did = m.get("discharger_id")
