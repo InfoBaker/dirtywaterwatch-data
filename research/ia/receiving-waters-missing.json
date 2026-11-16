@@ -2,15 +2,14 @@
  "about": "Water names in Iowa's records that data/receiving-waters-national.json does not hold for IA: the receiving streams the Department of Natural Resources' field offices entered on the incoming reports read for the major municipal facilities, and the waters the Department's news releases name; Waterloo's notices name no water. One row per name and county (the county the record gives), with the number of reports, how many are open now, and the operators; the reports give no point. Records naming no water are left out (by_reason). Written by scripts/ia_id_report_water_names.py.",
  "state": "IA",
  "reports_on_listed_waters": 73,
- "waters": 36,
- "reports": 41,
+ "waters": 34,
+ "reports": 39,
  "by_reason": {
   "no NHD flowline or waterbody of that name in IA": 14,
   "an unnamed or unknown stream: the report names no water": 3,
   "3 NHD waters of that name in IA and the reports give no place to choose one": 3,
   "a water record holds this water but not this spelling: a report of it is not placed there until the spelling is an alias": 3,
   "20 NHD waters of that name in IA and the reports give no place to choose one": 3,
-  "the name of a town (Cedar), not of a water: no NHD water of that name in IA": 2,
   "10 NHD waters of that name in IA and the reports give no place to choose one": 1,
   "8 NHD waters of that name in IA and the reports give no place to choose one": 1,
   "4 NHD waters of that name in IA and the reports give no place to choose one": 1,
@@ -20,8 +19,8 @@
   "15 NHD waters of that name in IA and the reports give no place to choose one": 1,
   "7 NHD waters of that name in IA and the reports give no place to choose one": 1
  },
- "resolved_names": 15,
- "resolved_reports": 20,
+ "resolved_names": 17,
+ "resolved_reports": 22,
  "build": {
   "date": "2026-11-16",
   "command": "python -m ingest.waters_from_nhd --names research/ia/receiving-waters-missing.json --state IA",
@@ -128,38 +127,6 @@
     "Bacon Creek Channel"
    ],
    "reason": "no NHD flowline or waterbody of that name in IA; the reports give no place to look for it in the NHD high-resolution flowlines"
-  },
-  {
-   "name": "Cedar",
-   "reports": 1,
-   "county": "Black Hawk County",
-   "operators": [
-    "City of Waterloo"
-   ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "Cedar"
-   ],
-   "reason": "the name of a town (Cedar), not of a water: no NHD water of that name in IA"
-  },
-  {
-   "name": "Cedar",
-   "reports": 1,
-   "county": "Linn County",
-   "operators": [
-    "City of Cedar Rapids"
-   ],
-   "sources": {
-    "ia-dnr-focomp-incoming-reports": 1
-   },
-   "open": 0,
-   "as_typed": [
-    "Cedar"
-   ],
-   "reason": "the name of a town (Cedar), not of a water: no NHD water of that name in IA"
   },
   {
    "name": "Cherry Creek, Elk Creek, Cardinal Creek",
@@ -787,6 +754,24 @@
    ],
    "how": "record built from the name",
    "county": "Dubuque County"
+  },
+  {
+   "name": "Cedar",
+   "reports": 1,
+   "slugs": [
+    "cedar-river-ia"
+   ],
+   "how": "a hand alias of the record (data/water-aliases.json, 2026-11-16): the whole text \"Cedar\" in Iowa, within the report's county",
+   "county": "Black Hawk County"
+  },
+  {
+   "name": "Cedar",
+   "reports": 1,
+   "slugs": [
+    "cedar-river-ia"
+   ],
+   "how": "a hand alias of the record (data/water-aliases.json, 2026-11-16): the whole text \"Cedar\" in Iowa, within the report's county",
+   "county": "Linn County"
   }
  ]
 }

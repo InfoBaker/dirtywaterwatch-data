@@ -4,7 +4,7 @@ url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collec
 homepage: "https://echo.epa.gov/tools/data-downloads/sewer-overflow-download-summary"
 kind: "csv"
 level: "federal"
-# Checked 2026-11-14 (current and all-versions ZIPs, extract 2026-11-12): no Iowa event in either; two Iowa permits
+# Checked 2026-11-15 (current and all-versions ZIPs, tables of 2026-11-13, read 2026-11-15): no Iowa event in either; two Iowa permits
 #   in the current collection-system table (four in all versions). Iowa is not added to the national module; DNR's
 #   field-office records carry Iowa's reports.
 cadence: "EPA refreshes daily; no Iowa rows"
@@ -18,4 +18,4 @@ access: ["csv"]
 access_detail: "Daily ZIP from ECHO (no auth); 0 Iowa events on 2026-11-14."
 machine_readable: true
 legal_basis: "40 CFR part 127"
-checked: "2026-11-14"
+checked: "2026-11-15"
