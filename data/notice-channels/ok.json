@@ -2857,9 +2857,8 @@
     "ok-deq-opdes-rules",
     "ok-deq-wastewater-reporting"
    ],
-   "note": "Operators report bypasses and overflows to DEQ by telephone on its around-the-clock line, then in writing on Form 605-011 (e-mail preferred). DEQ's three instructions differ: the permit's standard conditions say 24 hours from awareness, DEQ's reporting page 48 hours from the event, its bypass form 24 hours; they are quoted as they are. No list of the reports was found on DEQ's website (read in November 2026); they can be sought through an Open Records Act request. (https://oklahoma.gov/content/dam/ok/en/deq/documents/water-division/MunyPart3modified_3-17-17.pdf; https://oklahoma.gov/deq/divisions/water-quality/wastewater-stormwater/wastewater-reporting.html; https://oklahoma.gov/content/dam/ok/en/deq/documents/water-division/form_605-011_wastewater_bypass_reporting-1.pdf)",
-   "barrier": null,
-   "barrier_review": "the register does not say what keeps it off the web: operators report bypasses and overflows to deq by telephone on its around-the-clock line, then in writing on form 605-01"
+   "note": "Operators report bypasses and overflows to DEQ by telephone on its around-the-clock line, then in writing on Form 605-011 (e-mail preferred). DEQ's three instructions differ: the permit's standard conditions say 24 hours from awareness, DEQ's reporting page 48 hours from the event, its bypass form 24 hours; they are quoted as they are. No list of the reports was found on DEQ's website (read in November 2026); no web channel found; they can be sought through an Open Records Act request. (https://oklahoma.gov/content/dam/ok/en/deq/documents/water-division/MunyPart3modified_3-17-17.pdf; https://oklahoma.gov/deq/divisions/water-quality/wastewater-stormwater/wastewater-reporting.html; https://oklahoma.gov/content/dam/ok/en/deq/documents/water-division/form_605-011_wastewater_bypass_reporting-1.pdf)",
+   "barrier": "no_web_page"
   },
   {
    "state": "OK",
