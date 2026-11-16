@@ -3483,7 +3483,7 @@
    "operator_id": null,
    "agency": "Louisiana Department of Environmental Quality",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "la-ldeq-edms",
    "name": "LDEQ (Electronic Document Management System)",
    "channel_kind": "state_alert_page",
@@ -3497,7 +3497,7 @@
    "unmonitored_reason": "bot_wall",
    "publishes": "documents",
    "records": false,
-   "note": "LDEQ's official record of permits, discharge reports and correspondence, searched one document at a time in a JavaScript application whose search is guarded by a reCAPTCHA (2026-11-14); this project does not pass a CAPTCHA, so the pilot read no document. A bulk export exists for staff and records requests.",
+   "note": "LDEQ's official record of permits, discharge reports and correspondence, searched one document at a time in a JavaScript application whose search is guarded by a reCAPTCHA (2026-11-14); this project does not pass a CAPTCHA, so the pilot read no document. A bulk export exists for staff and records requests. The site answered GitHub's runner on 2026-11-16 (200); the CAPTCHA on its search stands.",
    "sources": [
     "la-ldeq-edms"
    ],
@@ -3534,7 +3534,7 @@
    "operator_id": null,
    "agency": "Louisiana Department of Health",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "la-ldh-beach-monitoring",
    "name": "Louisiana Department of Health (Beach Monitoring Program)",
    "channel_kind": "local_health_page",
@@ -3547,7 +3547,7 @@
    "monitored": false,
    "unmonitored_reason": "bot_wall",
    "publishes": "status",
-   "note": "Weekly advisories for about two dozen coastal beach sites, May to October, with sample dates; the Department's site answers 403 to this project's client (2026-11-14, both addresses).",
+   "note": "Weekly advisories for about two dozen coastal beach sites, May to October, with sample dates; the Department's site answers 403 to this project's client (2026-11-14, both addresses) and to GitHub's runner (2026-11-16).",
    "sources": [
     "la-ldh-beach-monitoring",
     "la-ldh-beach-alternate"
@@ -4456,18 +4456,20 @@
    "operator_id": "la-city-of-shreveport",
    "agency": null,
    "permit": "LA0041394",
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "la-shreveport-consent-decree",
    "name": "City of Shreveport",
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://cleanwatershreveport.com/consent-decree-public-repository/"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
    "unmonitored_reason": "other",
    "publishes": "documents",
-   "note": "The City's consent-decree repository (cleanwatershreveport.com) posts annual reports whose Attachment 3 lists the year's sanitary sewer overflows (131 rows for May 2025 to May 2026 in the research); the host did not answer this project's client on 2026-11-14 (no connection, twice), so the table was not verified in the research.",
+   "note": "The City's consent-decree public repository (cleanwatershreveport.com) answered GitHub's runner on 2026-11-16 (200); the reads of 2026-11-14 and 2026-11-15 failed from the development machine only. Readable, not yet collected: what it publishes was not verified in the research.",
    "sources": [
     "la-shreveport-consent-decree"
    ],
