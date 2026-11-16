@@ -10,7 +10,10 @@ and those states. The status build colours the stretch and lists the report on t
 draws the lake as an outline (display "outline", stretch_model "shoreline") and the stretch in reaches.geojson.
 
 Which lakes: shoreline_entry(): a lake or reservoir whose wikidata or gnis_id the rule lists, or whose name it lists at
-name_min_area_km2 or more, or (min_area_km2 set) any lake or reservoir that large. An entry with `kinds` also applies to
+name_min_area_km2 or more, or (min_area_km2 set: the size rule, size_entry) any record of min_area_kinds (default lake
+and reservoir; bay and sound by the rules file) that large, by its area_km2 or else its outline's measured area, except
+a bay or sound in a state an ocean entry covers. Under the size rule a lake or reservoir whose report can start no
+stretch keeps its whole-water colour (build/status.py SHORE_WHOLE). An entry with `kinds` also applies to
 records of those kinds, and one with `states` only in those states: Puget Sound (kind "sound", WA; Washington's go-live
 gates, 2026-11-06), whose stretch is walked on its own outline like a lake's and worded for a sound ("sound": True on
 the entry returned, reach records and the export). San Francisco Bay (kind "bay", CA; California's go-live gates,
@@ -56,9 +59,18 @@ KINDS = {"lake", "reservoir"}
 # ocean record is kept as a bay or sound by openboatlaunch ("Atlantic Ocean", kind bay), so these kinds qualify too,
 # but only for a record the rule's ocean entries name (by wikidata or by one of the entry's names, exactly)
 OCEAN_KINDS = {"bay", "sound", "sea", "ocean", "lake", "reservoir"}
+# The size rule (owner, 2026-11-16, docs/analysis/2026-11-15-shoreline-threshold-review.md in the site repository):
+# with min_area_km2 set, a record of one of min_area_kinds at least that large is a shoreline water too. min_area_kinds
+# defaults to lake and reservoir (the reading before the kinds list existed); the rules file adds "bay" and "sound" to
+# bring those under the rule, with no code change. Neither key is in data/rules.json while the rule is off
+# (min_area_km2 null), so the file, and everything that hashes it, reads as before. The record's area is its own
+# area_km2, else the area measured from its outline (outline_area_km2, put on the record by build/status.py
+# outline_areas only while the rule is on), with where the figure came from.
+SIZE_KINDS = ("lake", "reservoir")
 DEFAULTS = {"each_way_km": 20.0, "shore_m": 500.0, "gap_km": 3.0, "snap_km": 5.0, "name_min_area_km2": 100.0,
-            "min_area_km2": None, "lakes": [], "oceans": [], "ocean_open_m": 1000.0,
-            "ocean_tie_offshore_km": None}
+            "min_area_km2": None, "min_area_kinds": list(SIZE_KINDS), "lakes": [], "oceans": [],
+            "ocean_open_m": 1000.0, "ocean_tie_offshore_km": None}
+OUTLINE_AREA = "outline_area_km2"      # the record key status.outline_areas fills for a record with no area_km2
 STATE_NEAR_M = 2_000          # a stretch point this close to a state's land touches that state
 MODEL = "shoreline"
 STOP_LIMIT = "shoreline_limit"     # the walk reached each_way_km
@@ -111,11 +123,112 @@ def shoreline_entry(w: dict | None, r: dict) -> dict | None:
         floor = r.get("name_min_area_km2")
         if _norm(w.get("name")) == _norm(e.get("name")) and area is not None and (floor is None or area >= floor):
             return hit
-    if kind not in KINDS:
+    return size_entry(w, r)
+
+
+def size_on(r: dict) -> bool:
+    """Whether the size rule is in force (min_area_km2 set)."""
+    return r.get("min_area_km2") is not None
+
+
+def size_kinds(r: dict) -> set[str]:
+    """The record kinds the size rule applies to (min_area_kinds; default lake and reservoir). Only lake, reservoir,
+    pond, bay and sound can be named: a river is never a shoreline water."""
+    k = r.get("min_area_kinds")
+    return ({str(x) for x in k} & SIZE_RULE_KINDS) if isinstance(k, (list, tuple)) else set(SIZE_KINDS)
+
+
+SIZE_RULE_KINDS = {"lake", "reservoir", "pond", "bay", "sound"}
+
+
+def _area_words(km2: float) -> str:
+    mi2 = km2 / 2.589988
+    return f"{mi2:,.0f} square miles ({km2:,.0f} square kilometres)"
+
+
+def _miles(km: float) -> str:
+    return f"{km * 0.621371:,.0f}"
+
+
+def _kind_list(kinds: set[str]) -> str:
+    order = [k for k in ("lake", "reservoir", "pond", "bay", "sound") if k in kinds]
+    words = [f"{k}s" for k in order]
+    return words[0] if len(words) == 1 else f"{', '.join(words[:-1])} and {words[-1]}"
+
+
+def size_texts(r: dict) -> dict:
+    """The public words of the size rule while it is on, for out/rules.json (export/build.py shoreline_rules): "doc"
+    and "rationale" sentences that follow the rule's own doc and rationale. {} while it is off. The 20 km distance is
+    the Great Lakes' and the ocean's (the rule's source and ocean_source); a large lake gets it as the same cautious
+    distance, not as a measurement there."""
+    if not size_on(r):
+        return {}
+    kinds = size_kinds(r)
+    area = _area_words(float(r["min_area_km2"]))
+    each = float(r.get("each_way_km") or 20)
+    filled = sorted(kinds & {"lake", "reservoir", "pond"})
+    tidal = sorted(kinds & {"bay", "sound"})
+    doc = f"Other {_kind_list(kinds)} of {area} or more are drawn the same way."
+    if filled:
+        doc += (f" A report on such a {' or '.join(filled)} that cannot be placed on the shore colours the whole water, "
+                f"as on a smaller one.")
+    rationale = (f"We draw other {_kind_list(kinds)} of {area} or more the same way. The {_miles(each)}-mile "
+                 f"({each:g}-kilometre) distance comes from studies on the Great Lakes and on ocean shores; on these "
+                 f"smaller waters we apply it as a cautious distance, not a measurement. Where a water's whole "
+                 f"shoreline is shorter than {_miles(2 * each)} miles ({2 * each:g} kilometres), the stretch covers all "
+                 f"of it.")
+    if filled:
+        rationale += (f" A report on such a {' or '.join(filled)} that we cannot place on the shore colours the "
+                      f"whole water, as on a smaller {filled[0]}.")
+    if tidal:
+        rationale += (f" On a {' or '.join(tidal)}, such a report is listed on the water's page, and its outlets "
+                      f"are marked on the map.")
+    return {"doc": doc, "rationale": rationale}
+
+
+def ocean_states(r: dict) -> set[str]:
+    """The states an ocean entry is applied in (reach.shoreline.oceans[].states)."""
+    return {str(s).upper() for e in r.get("oceans") or [] for s in e.get("states") or []}
+
+
+def record_area(w: dict) -> tuple[float | None, str | None]:
+    """(area in km2, where it came from: "record" or "outline"): the record's own area_km2, else the area measured
+    from its outline (OUTLINE_AREA, filled by build/status.py outline_areas while the size rule is on), else none."""
+    a = w.get("area_km2")
+    if isinstance(a, (int, float)) and not isinstance(a, bool):
+        return float(a), "record"
+    a = w.get(OUTLINE_AREA)
+    if isinstance(a, (int, float)) and not isinstance(a, bool):
+        return float(a), "outline"
+    return None, None
+
+
+def size_entry(w: dict, r: dict) -> dict | None:
+    """The synthetic entry of a record the size rule makes a shoreline water, or None. A bay or sound in a state where
+    an ocean entry is applied (Florida and California today) is left out: there the ocean walk already follows the
+    shore of every bay or sound that opens more than about 2 km to the sea (build/reaches.py ocean_outline and
+    ocean_waters_along), and a second model on the same shore would draw it twice."""
+    if not size_on(r):
         return None
-    if r.get("min_area_km2") is not None and area is not None and area >= float(r["min_area_km2"]):
-        return {"name": w.get("name")}
-    return None
+    kind = w.get("kind")
+    if kind not in size_kinds(r):
+        return None
+    if kind in ("bay", "sound") and str(w.get("state") or "").upper() in ocean_states(r):
+        return None
+    area, basis = record_area(w)
+    if area is None or area < float(r["min_area_km2"]):
+        return None
+    hit = {"name": w.get("name"), "size_rule": True, "area_km2": round(area, 1), "area_basis": basis}
+    if kind == "bay":
+        hit["bay"] = True
+    elif kind == "sound":
+        hit["sound"] = True
+    return hit
+
+
+def is_size_rule(w: dict | None, r: dict) -> bool:
+    """Whether the record is a shoreline water by the size rule alone (not listed by id or name, not an ocean)."""
+    return bool((shoreline_entry(w, r) or {}).get("size_rule"))
 
 
 def is_shoreline(w: dict | None, r: dict) -> bool:
@@ -140,8 +253,18 @@ def lake_waters(slug: str, states: list[str], waters: dict, r: dict) -> list[str
     name = _norm(e.get("name"))
     want = {str(s).upper() for s in states}
     rest = sorted(s for s, w in waters.items() if s != slug and str(w.get("state") or "").upper() in want
-                  and shoreline_entry(w, r) is not None and _norm(shoreline_entry(w, r).get("name")) == name)
+                  and shoreline_entry(w, r) is not None and _norm(shoreline_entry(w, r).get("name")) == name
+                  # a water under the size rule has no entry of its own: a record of the same name is the same water
+                  # only where their boxes meet (Lake Champlain's Vermont and New York records; not two Clear Lakes)
+                  and (not e.get("size_rule") or _boxes_meet(waters[slug].get("bbox"), w.get("bbox"))))
     return [slug, *rest]
+
+
+def _boxes_meet(a, b) -> bool:
+    try:
+        return not (a[2] < b[0] or b[2] < a[0] or a[3] < b[1] or b[3] < a[1])
+    except (TypeError, IndexError):
+        return False
 
 
 # ---------------------------------------------------------------- geometry

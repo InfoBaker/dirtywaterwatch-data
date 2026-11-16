@@ -1029,6 +1029,16 @@ def live_dischargers(rows: list[dict], live: set[str]) -> list[dict]:
     return [d for d in rows if not d.get("state") or str(d["state"]).upper() in live]
 
 
+def part_fill_props(w: dict) -> dict:
+    """The overlay properties of a lake under the shoreline size rule (build/status.py whole_fill): the status, category
+    and status by category of its whole-water fill, from the reports that have no shoreline stretch; part_fill marks
+    them, so the map reads the colour here and not the water's own status, which takes in the stretches too."""
+    st = w["fill_status"]
+    return {"status": st if w.get("fill") or st == "monthly" else "grey", "part_fill": True,
+            "category": w.get("fill_category") or "sewage", "status_by_category": w.get("fill_status_by_category"),
+            "headline_status": (w.get("fill_status_by_category") or {}).get(w.get("fill_category") or "sewage", st)}
+
+
 def tidal_river_rules(rules: dict) -> dict:
     """out/rules.json's reach rule as it stands (data/rules.json reach.tidal_river): absent (off, as shipped), the
     file is as before; present but not enabled, the record is left out; on, the rule's record (build/reaches.py
@@ -1047,11 +1057,32 @@ def tidal_river_rules(rules: dict) -> dict:
     return {**rules, "reach": reach}
 
 
+def shoreline_rules(rules: dict) -> dict:
+    """out/rules.json's shoreline rule as the size rule stands (data/rules.json reach.shoreline.min_area_km2): off
+    (null, as shipped) the file is as before; on, the rule's doc and rationale go on with the size rule's sentences
+    (build/shoreline.py size_texts), and its threshold and kinds are written out (min_area_kinds, default lake and
+    reservoir), so the site's words follow the switch."""
+    from build import shoreline as SH
+    reach = rules.get("reach")
+    sh = reach.get("shoreline") if isinstance(reach, dict) else None
+    if not isinstance(sh, dict):
+        return rules
+    r = SH.rule(rules)
+    words = SH.size_texts(r)
+    if not words:
+        return rules
+    sh = dict(sh)
+    for k in ("doc", "rationale"):
+        sh[k] = " ".join(x for x in (str(sh.get(k) or "").strip(), words[k]) if x)
+    sh["min_area_kinds"] = sorted(SH.size_kinds(r))
+    return {**rules, "reach": {**reach, "shoreline": sh}}
+
+
 def live_rules(rules: dict, live: set[str]) -> dict:
     """out/rules.json keeps the per-state and per-operator windows of the live states only; the shared rules and
     their rationale stay whole (the site shows a rule only when one of its sources covers a live water). The reach
     rule reads as the tidal-river switch stands (tidal_river_rules)."""
-    out = tidal_river_rules(dict(rules))
+    out = shoreline_rules(tidal_river_rules(dict(rules)))
     # the separate sewer caution's block is published only with its switch on (with it off out/rules.json is what it
     # was: review 2026-11-16 P2-8)
     rl = out.get("rain_likely")
@@ -1742,6 +1773,11 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                # "shoreline" on the Great Lakes (data/rules.json reach.shoreline): the lake is drawn as an outline and
                # its reports colour the shoreline stretches in reaches.geojson (model "shoreline"), never the lake
                **({"stretch_model": w["stretch_model"]} if w.get("stretch_model") else {}),
+               # a lake under the shoreline size rule (data/rules.json reach.shoreline.min_area_km2; rule on only): the
+               # threshold and the water's area with its basis, and its whole-water colour from the reports that have
+               # no shoreline stretch (build/status.py whole_fill)
+               **({"shore_size_rule": w["shore_size_rule"]} if w.get("shore_size_rule") else {}),
+               **({"fill_status": w["fill_status"]} if "fill_status" in w else {}),
                "slug_aliases": rec.get("slug_aliases") or [],      # older slugs of this record (waters_from_nhd)
                "summary": w.get("summary"), "unresolved_events": w.get("unresolved_events") or [],
                # docs/plan.md §2.z: each category's status now and the headline (sewage first)
@@ -1791,6 +1827,9 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
             "headline_status": (w.get("headline") or {}).get("status"),
             "display": "fill" if w.get("fill", True) else "outline", "summary": w.get("summary"),
             **({"stretch_model": w["stretch_model"]} if w.get("stretch_model") else {}),
+            # a lake under the shoreline size rule: its fill is the colour of the reports with no shoreline stretch
+            # only (part_fill), and its stretches are drawn in reaches.geojson (build/status.py whole_fill)
+            **(part_fill_props(w) if "fill_status" in w else {}),
             "since": w["since"], "reason_short": w["reason_short"], "event_count": len(w["events"]),
             "stale": w["stale"], "stale_since": min((s["last_ok_at"] for s in w["stale_sources"] if s.get("last_ok_at")), default=None),
             "fixture_only": w.get("fixture_only", False), "extra": bool(rec.get("extra")),
