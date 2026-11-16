@@ -468,17 +468,19 @@ def test_clyde_yearly_report_rows(tmp_path):
 
 
 def test_register_monitors_the_operator_pages_and_clyde_has_its_real_permit():
-    """Review P2-7: Lakewood's, Clyde's, MSD Cincinnati's and Upper Sandusky's pages are monitored (health, no
-    records); Clyde's rows sit on OH0024686 and its yearly tables are read by a feed; no row names OH0024868."""
+    """Review P2-7: Clyde's, MSD Cincinnati's and Upper Sandusky's pages are monitored (health, no records); Clyde's
+    rows sit on OH0024686 and its yearly tables are read by a feed; no row names OH0024868. Lakewood's page has been
+    read by its own feed since 2026-11-16 (oh_lakewood_cso): its row is the feed's."""
     import common
     rows = json.loads((common.DATA_DIR / "notice-channels" / "oh.json").read_text())["channels"]
     dis = {d["id"]: d for d in json.loads((common.DATA_DIR / "dischargers.json").read_text())}
     by_permit = {}
     for r in rows:
         by_permit.setdefault(r.get("permit"), []).append(r)
-    for permit in ("OH0026018", "OH0024686", "OH0105457", "OH0020001"):
+    for permit in ("OH0024686", "OH0105457", "OH0020001"):
         mon = [r for r in by_permit[permit] if r["monitored"]]
         assert mon and all(r.get("records") is False and r["urls"] for r in mon), permit
+    assert [r.get("feed_source_id") for r in by_permit["OH0026018"]] == ["oh-lakewood-cso-map"]
     clyde = by_permit["OH0024686"]
     assert any(r.get("feed_source_id") == "oh-clyde-cso-notification" for r in clyde)
     assert all("OH0024686" in dis[r["operator_id"]]["npdes_permits"] for r in clyde)

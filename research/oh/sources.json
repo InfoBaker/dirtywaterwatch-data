@@ -383,7 +383,7 @@
  },
  {
   "id": "oh-lakewood-cso-map",
-  "name": "Lakewood CSO Notification System map",
+  "name": "Lakewood CSO Alerts & Status",
   "jurisdiction": "OH",
   "operator": "City of Lakewood",
   "operator_type": "municipal",
@@ -395,9 +395,43 @@
   "water_slugs": [],
   "url": "https://cso.lakewoodoh.gov/",
   "access": [
-   "map_only"
+   "html"
   ],
-  "access_detail": null,
+  "access_detail": "Server-rendered site cards (24 on 2026-11-16): an ongoing event's start, discharge location and receiving water; a completed event's start, end and total volume for 48 hours; then the last end only. No data call behind the page.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": null,
+  "history": null,
+  "license": null,
+  "legal_basis": "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/oh_lakewood_cso.py from 2026-11-16: each event a card shows becomes a dated record (start, end, volume, receiving water); the history grows from the first read. The first read on 2026-11-16 found no event in progress or in the past 48 hours; four sites gave only the end of their last event (the newest CSO-052, 2026-11-12 19:10).",
+  "verified": "fetched",
+  "checked": "2026-11-16",
+  "notes": "The host does not resolve from a developer's machine; GitHub's runner reads it (probe 43941639288). The ongoing and completed card layouts were checked on Internet Archive captures of 2026-05-11 and 2026-06-16."
+ },
+ {
+  "id": "oh-willard-cso-notices",
+  "name": "Willard CSO public notifications",
+  "jurisdiction": "OH",
+  "operator": "City of Willard",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://www.willardohio.gov/cso.html",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Initial and supplemental notices as page text: start, end, duration, the holding lagoon, Jacob Creek, the areas affected, rainfall and total volume. Staff contacts on the page are not read.",
   "machine_readable": false,
   "sample_record": null,
   "fields": [],
@@ -408,11 +442,11 @@
   "cadence": null,
   "history": null,
   "license": null,
-  "legal_basis": "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree",
-  "status": "candidate",
-  "status_reason": "Leaflet map with status per site (in progress / past 48 hours / no recent / unknown meter data); data endpoint not traced; 'For a text-based list of all overflow locations, contact the City'.",
+  "legal_basis": "40 CFR 122.38 (Lake Erie basin)",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/oh_willard_cso.py from 2026-11-16: 2 overflows from 4 notices (2025-04-05, 11.24 million gallons; 2026-04-01, 7.78 million gallons), each initial and supplemental notice pair one record.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-16",
   "notes": ""
  },
  {

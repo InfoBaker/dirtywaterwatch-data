@@ -185,25 +185,27 @@
    "operator_id": "oh-bucyrus-wwtp-oh0052922",
    "agency": null,
    "permit": "OH0052922",
-   "checked": "2026-11-08",
+   "checked": "2026-11-16",
    "id": "oh-bucyrus-wwtp-oh0052922-public-notice",
    "name": "City of Bucyrus",
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://www.cityofbucyrusoh.us/special-alert"
+   ],
+   "method": "html",
    "legal_basis": "40 CFR 122.38 (Great Lakes CSO public notification): \"initial notification ... as soon as possible but no later than four hours after becoming aware\" of a combined sewer overflow discharge, under the permittee's public notification plan",
    "basis_kind": "law",
    "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
+   "unmonitored_reason": "bot_wall",
+   "publishes": "notices",
    "records": false,
    "noun": "Notice to the public",
    "sources": [
     "oh-law-40cfr122-38",
     "oh-epa-gl-cso-ohio"
    ],
-   "note": "No URL known (not searched individually): as a combined sewer permittee in the Lake Erie basin it owes an initial public notice within four hours of becoming aware of a discharge, under its public notification plan; whether it posts the notices online was not checked.",
-   "barrier": "not_verified"
+   "note": "Bucyrus posts its initial and seven-day CSO notices on its special-alert page (a researcher's browser read one of 2026-11-12 on the Sandusky River). The page answers 403 to the project's reader, from GitHub's runner (runner probe 43886270609, 2026-11-16 14:29Z, 5,590 bytes) and from a developer's machine (2026-11-16): the notices are posted but closed to automated reading.",
+   "barrier": "bot_wall"
   },
   {
    "state": "OH",
@@ -1072,7 +1074,7 @@
    "operator_id": "oh-lakewood-wwtp-oh0026018",
    "agency": null,
    "permit": "OH0026018",
-   "checked": "2026-11-08",
+   "checked": "2026-11-16",
    "id": "oh-lakewood-wwtp-oh0026018-cso-map",
    "name": "City of Lakewood",
    "legal_basis": "40 CFR 122.38 (Great Lakes CSO public notification): \"initial notification ... as soon as possible but no later than four hours after becoming aware\" of a combined sewer overflow discharge, under the permittee's public notification plan",
@@ -1082,16 +1084,15 @@
     "https://cso.lakewoodoh.gov/"
    ],
    "method": "html",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "oh-lakewood-cso-map",
    "publishes": "status",
-   "every_hours": 24,
-   "records": false,
-   "noun": "CSO notification map",
+   "noun": "CSO alerts and status",
    "sources": [
     "oh-lakewood-cso-map"
    ],
-   "note": "Lakewood's CSO notification map (a script map: status per site, in progress, past 48 hours, no recent, unknown meter data); its data endpoint was not traced; the page says to contact the city for a text list of overflow locations. Watched for health and changes; no records are made from it. (oh-lakewood-cso-map)",
+   "note": "Lakewood's CSO Alerts & Status page: a card per monitored site (24: CSO outfalls and regulator meters) with the current or last event's start, end, volume, discharge location and receiving water, kept 48 hours after an event ends, then only the last end. The cards are in the page itself (no data call behind it). Read hourly by the feed, which keeps every event it sees. (oh-lakewood-cso-map)",
    "barrier": null
   },
   {
@@ -2402,25 +2403,28 @@
    "operator_id": "oh-willard-wpcp-oh0028118",
    "agency": null,
    "permit": "OH0028118",
-   "checked": "2026-11-08",
+   "checked": "2026-11-16",
    "id": "oh-willard-wpcp-oh0028118-public-notice",
    "name": "City of Willard",
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://www.willardohio.gov/cso.html"
+   ],
+   "method": "html",
    "legal_basis": "40 CFR 122.38 (Great Lakes CSO public notification): \"initial notification ... as soon as possible but no later than four hours after becoming aware\" of a combined sewer overflow discharge, under the permittee's public notification plan",
    "basis_kind": "law",
    "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Notice to the public",
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "oh-willard-cso-notices",
+   "publishes": "notices",
+   "noun": "CSO public notification",
    "sources": [
+    "oh-willard-cso-notices",
     "oh-law-40cfr122-38",
     "oh-epa-gl-cso-ohio"
    ],
-   "note": "No URL known (not searched individually): as a combined sewer permittee in the Lake Erie basin it owes an initial public notice within four hours of becoming aware of a discharge, under its public notification plan; whether it posts the notices online was not checked.",
-   "barrier": "not_verified"
+   "note": "Willard's CSO page posts each overflow's initial and supplemental notices as text: start, end, duration, the holding lagoon, Jacob Creek, the areas affected, rainfall and total volume (four notices of two overflows on 2026-11-16, the latest 2026-04-01). Read hourly by the feed; the e-mail list is offered by a form on the page. (oh-willard-cso-notices)",
+   "barrier": null
   },
   {
    "state": "OH",
