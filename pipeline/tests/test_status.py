@@ -718,11 +718,14 @@ def test_reach_cuts_at_tidal_lake_estuary_and_the_cap():
 
 
 def test_tidal_river_switch_off_changes_nothing():
-    """reach.tidal_river off (the default, and the rules file as committed): every cut as before the switch."""
+    """reach.tidal_river off (no record in the rules file, or any record but enabled: true): every cut as before the
+    switch. The file as committed reads as its own record stands."""
     import json as _json
     from common import DATA_DIR
-    rules = _json.loads((DATA_DIR / "rules.json").read_text())
+    shipped = _json.loads((DATA_DIR / "rules.json").read_text())
+    rules = {**shipped, "reach": {k: v for k, v in shipped["reach"].items() if k != "tidal_river"}}
     assert R.tidal_river_on(rules) is False and R.tidal_river_on({}) is False and R.tidal_river_rule(rules) == {}
+    assert R.tidal_river_on(shipped) is ((shipped["reach"].get("tidal_river") or {}).get("enabled") is True)
     assert R.tidal_river_on({"reach": {"tidal_river": {"enabled": "yes"}}}) is False      # only a real true turns it on
     lines = [fl(1, -72.0, -71.9), fl(2, -71.9, -71.8), fl(3, -71.8, -71.7)]
     worlds = [{1: attrs(1, 30), 2: attrs(2, 20, tidal=1), 3: attrs(3, 10)},
@@ -880,10 +883,11 @@ def test_out_rules_read_as_the_tidal_switch_stands():
     import json as _json
     from common import DATA_DIR
     from export import build as X
-    rules = _json.loads((DATA_DIR / "rules.json").read_text())
-    # shipped off: the rules file has no record of the switch, so nothing that reads or hashes it (the status build's
+    shipped = _json.loads((DATA_DIR / "rules.json").read_text())
+    rules = {**shipped, "reach": {k: v for k, v in shipped["reach"].items() if k != "tidal_river"}}
+    # off: a rules file with no record of the switch, so nothing that reads or hashes it (the status build's
     # constants and placement stamp, the export) sees the rule
-    assert "tidal_river" not in rules["reach"] and X.tidal_river_rules(rules) is rules
+    assert X.tidal_river_rules(rules) is rules
     tr = R.TIDAL_RIVER_DEFAULTS
     assert tr["rationale"] and "40 kilometres" in tr["cap_rationale"] and "tidal_water" in tr["stop_at"]
     assert "tidal_water" in X.STOP_TEXT
@@ -894,19 +898,30 @@ def test_out_rules_read_as_the_tidal_switch_stands():
     on = X.tidal_river_rules({**rules, "reach": {**rules["reach"], "tidal_river": {"enabled": True}}})
     assert on["reach"]["cap_rationale"] == tr["cap_rationale"] and on["reach"]["stop_at"] == tr["stop_at"]
     assert on["reach"]["tidal_river"] == {**tr, "enabled": True}
+    # the file as committed reads as its own record stands
+    pub = X.tidal_river_rules(shipped)
+    if R.tidal_river_on(shipped):
+        assert pub["reach"]["tidal_river"] == {**tr, "enabled": True} and pub["reach"]["cap_rationale"] == tr["cap_rationale"]
+    else:
+        assert "tidal_river" not in pub["reach"]
 
 
 def test_tidal_river_off_leaves_the_status_build_and_its_placement_stamp_alone():
-    """Second review P1: the shipped rules carry no tidal-river record, so the status build's constants and its
-    placement stamp (which hashes the whole rules file) are what they were before the rule."""
+    """Second review P1: rules with no tidal-river record leave the status build's constants and its placement stamp
+    (which hashes the whole rules file) as they were before the rule; a record that is not enabled is never written
+    to the file for that reason. Turning the rule on is a change of rules: the constants show the record as the file
+    holds it, and placements are worked out again once."""
     import json as _json
     from common import DATA_DIR
-    rules = _json.loads((DATA_DIR / "rules.json").read_text())
-    st, _ = S.build(now=NOW, write=False, rules=rules, **world(tmp_events([])))
+    shipped = _json.loads((DATA_DIR / "rules.json").read_text())
+    bare = {**shipped, "reach": {k: v for k, v in shipped["reach"].items() if k != "tidal_river"}}
+    st, _ = S.build(now=NOW, write=False, rules=bare, **world(tmp_events([])))
     assert "tidal_river" not in json.dumps(st["constants"]["reach"])
-    bare = {**rules, "reach": {k: v for k, v in rules["reach"].items() if k != "tidal_river"}}
+    on = {**bare, "reach": {**bare["reach"], "tidal_river": {"enabled": True}}}
+    st_on, _ = S.build(now=NOW, write=False, rules=on, **world(tmp_events([])))
+    assert st_on["constants"]["reach"].get("tidal_river") == {"enabled": True}
     stamp = lambda r: S.placement_stamp({}, [], {}, {}, r, {"MA"})      # noqa: E731
-    assert stamp(rules) == stamp(bare)
+    assert stamp(on) != stamp(bare)
 
 
 def test_a_record_of_an_earlier_tidal_rule_is_traced_again_on_or_off():
