@@ -66,7 +66,7 @@ def test_iowa_register_names_each_cso_permittee_and_the_feeds():
             assert row["name"] == r["name"] and row["permit"] == r["npdes_permits"][0]
             assert row["barrier"] == "no_web_page" and row["legal_basis"]
     dm = next(c for c in reg.values() if c.get("permit") == "IA0044130" and c["id"].endswith("-cso-public-notification"))
-    assert "connect time-out" in dm["note"]                      # a time-out is a barrier recorded, never got around
+    assert "answers GitHub's runner" in dm["note"]                 # the site answers the runner: no barrier of the source
     assert reg["ia-dnr-news-releases"]["feed_source_id"] == "ia-dnr-news-releases"
     assert "four municipal wastewater releases" in reg["ia-dnr-news-releases"]["note"]
     assert reg["ia-waterloo-sso-bypass-page"]["feed_source_id"] == "ia-waterloo-sso-notices"
@@ -140,3 +140,59 @@ def test_missing_waters_lists_keep_county_and_accept_a_resolved_name(st):
         # the water batch (2026-11-16) built C J Strike Reservoir's record, so its two arms moved to "resolved"
         assert {a[0] for a in arms} == {"Hordemann Pond", "Weston Reservoir"}
         assert "C J Strike Reservoir" in {r["name"] for r in d["resolved"]}
+
+
+# ---------------------------------------------- the two water spellings (IA final audit 2026-11-16, fixes 2 and 3)
+
+@pytest.fixture(scope="module")
+def ia_resolvers():
+    """Resolvers on the committed water records (hand aliases merged), with and without the two Iowa aliases."""
+    from build import status as S
+    waters = S.load_waters()
+    waters = waters[0] if isinstance(waters, tuple) else waters
+    bare = dict(waters)
+    for slug, alias in (("cedar-river-ia", "Cedar"), ("black-hawk-creek-ia", "Blackhawk Creek")):
+        bare[slug] = {**waters[slug], "aliases": [a for a in waters[slug].get("aliases") or [] if a != alias]}
+    return S, S.Resolver(waters, []), S.Resolver(bare, [])
+
+
+def _focomp(text, county):
+    return {"event_id": "ia-dnr-focomp-incoming-reports:x", "source_id": "ia-dnr-focomp-incoming-reports",
+            "event_type": "sso", "waterbody_text": text, "lat": None, "lon": None,
+            "raw": {"state": "IA", "county": county}}
+
+
+def _placed(S, R, monkeypatch, text, county):
+    live = S.states() | {"IA"}
+    monkeypatch.setattr(S, "states", lambda: live)
+    return R.resolve(_focomp(text, county)).get("water_slugs") or []
+
+
+def test_the_two_spellings_are_hand_aliases_of_their_iowa_records():
+    al = json.loads((ROOT / "data" / "water-aliases.json").read_text())
+    assert al["cedar-river-ia"] == ["Cedar"] and al["black-hawk-creek-ia"] == ["Blackhawk Creek"]
+
+
+def test_the_two_reports_the_audit_names_are_placed_on_their_waters(ia_resolvers, monkeypatch):
+    S, R, _ = ia_resolvers
+    # 558223 (Cedar Rapids, stream "Cedar") and the Waterloo report of the same text in Black Hawk County
+    assert _placed(S, R, monkeypatch, "Cedar", "Linn County") == ["cedar-river-ia"]
+    assert _placed(S, R, monkeypatch, "Cedar", "Black Hawk County") == ["cedar-river-ia"]
+    # 558725 (Grundy Center, stream "Blackhawk Creek")
+    assert _placed(S, R, monkeypatch, "Blackhawk Creek", "Grundy County") == ["black-hawk-creek-ia"]
+    # the county check still applies: "Cedar" in a county the river does not reach is not placed
+    assert _placed(S, R, monkeypatch, "Cedar", "Story County") == []
+    # the bare word is indexed for Iowa only, and only as a whole text
+    assert R.exact[("IA", "cedar")] == ["cedar-river-ia"]
+    assert ("IA", "cedar") not in R.names and ("IA", "cedar") not in R.stems
+
+
+@pytest.mark.parametrize("text", ["Cedar Creek", "Cedar creek", "Little Cedar River", "West Fork Cedar River",
+                                  "Cedar Lake", "Cedar Rapids", "Cedar Falls", "Cedar Valley", "Red Cedar"])
+@pytest.mark.parametrize("county", ["Linn County", "Black Hawk County", "Wapello County", "Mitchell County",
+                                    "Butler County", "Jefferson County"])
+def test_a_longer_name_holding_cedar_is_not_moved_to_the_cedar_river(ia_resolvers, monkeypatch, text, county):
+    S, R, bare = ia_resolvers
+    got = _placed(S, R, monkeypatch, text, county)
+    assert "cedar-river-ia" not in got
+    assert got == _placed(S, bare, monkeypatch, text, county)       # the alias changes nothing for this text

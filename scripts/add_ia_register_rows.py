@@ -100,8 +100,9 @@ AGENCY = [
      "name": "EPA sewer overflow and bypass tables (Iowa)", "channel_kind": "feed", "urls": [], "method": None,
      "legal_basis": "40 CFR part 127 (NPDES electronic reporting)", "basis_kind": "law", "monitored": False,
      "unmonitored_reason": "none_found", "publishes": "none", "records": False, "noun": "EPA overflow tables",
-     "sources": ["ia-epa-sobe"],
-     "note": ("No web channel found for Iowa: EPA's current and all-versions overflow tables (extract of 2026-11-12) "
+     "sources": ["ia-epa-sobe"], "checked": "2026-11-15",
+     "note": ("No web channel found for Iowa: EPA's current and all-versions overflow tables (tables of 2026-11-13, "
+              "read 2026-11-15) "
               "hold no Iowa event, and two Iowa collection-system rows; Iowa reports go to DNR, not EPA's system.")},
 ]
 
@@ -129,12 +130,13 @@ def operator_rows(dis: list[dict]) -> list[dict]:
         if op.get("kind") == "cso":
             rows.append(finish(base(
                 id=f"{oid}-cso-public-notification", operator_id=oid, name=name, permit=permit,
+                checked=CHECKED_ON.get(permit, CHECKED),
                 channel_kind="operator_page", urls=[], method=None, legal_basis=Q_CSO.format(permit=permit),
                 basis_kind="permit", monitored=False, unmonitored_reason="none_found", publishes="none",
                 records=False, noun="CSO public notification", sources=["ia-epa-cso-inventory"],
                 note=(f"No web channel found: {name}'s public notification of combined sewer overflows under its "
                       "permit; no web notice was found (search only) and the permit was not read. Its bypass reports "
-                      "to DNR are read from FOCOMP." + DMWRA_TIMEOUT.get(permit, "")))))
+                      "to DNR are read from FOCOMP." + DMWRA_SITE.get(permit, "")))))
         if "IA0042650" in (op.get("npdes_permits") or []):
             rows.append(finish(base(
                 id=f"{oid}-sso-bypass-page", operator_id=oid, name=name, permit="IA0042650",
@@ -147,11 +149,12 @@ def operator_rows(dis: list[dict]) -> list[dict]:
     return rows
 
 
-# the Authority's own site did not answer the project's ordinary requests (connect time-out, twice, 2026-11-14): its
-# 2025 notice on eliminating combined sewer overflows could not be read, so its three open outfalls keep the caution
-DMWRA_TIMEOUT = {"IA0044130": (" The Authority's site (www.dmmwra.org) did not answer the project's ordinary requests "
-                               "on 2026-11-14 (connect time-out, twice), so its notice on eliminating its combined sewer "
-                               "overflows could not be read.")}
+# the Authority's own site answers GitHub's runner (200, 2026-11-16; it timed out only from the audit machine, which is
+# no barrier of the source): its 2025 notice on eliminating combined sewer overflows is not read yet, so its three open
+# outfalls keep the caution (owner question 1, IA final audit 2026-11-16)
+DMWRA_SITE = {"IA0044130": (" The Authority's site (www.dmmwra.org) answers GitHub's runner (200, 2026-11-16); its notice "
+                            "on eliminating its combined sewer overflows has not been read yet.")}
+CHECKED_ON = {"IA0044130": "2026-11-15"}        # the row's note was checked again (IA final audit 2026-11-16, edit 5)
 
 
 def run(dry_run: bool = False) -> dict:
