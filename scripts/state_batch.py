@@ -28,7 +28,9 @@ the pull request that carries the changed registry files to a person for review.
                                           launches_unpublished, ...) are never changed
     python scripts/state_batch.py publish --state NC --body FILE [--date YYYY-MM-DD] [--dry-run]
                                           the scrub above, the size ceiling (MAX_FILE_BYTES, 90 MiB: GitHub refuses a
-                                          file over 100 MB) and the scan above (the blocklist required), then commit
+                                          file over 100 MB, refuses) and the scan above (warnings only: owner, 2026-11-16;
+                                          its findings, file, place and kind, are listed in the body and in
+                                          privacy-findings.json beside it for the next round), then commit
                                           those files on a branch batch/<st>-<date> from the checked-out commit,
                                           push it (replacing a branch of that name: the files are rebuilt from main and
                                           the caches each time) and open the pull request, or update the open one
@@ -633,8 +635,9 @@ def pr_body(s: dict) -> str:
             "- The records and ties are machine-built from NHDPlus, OpenStreetMap and EPA's identifiers; check the "
             "reasons above and a sample of the new records before merging.",
             f"- Nothing reaches the site until {st} is in `data/rules.json` `live_states`.",
-            "- The privacy scan found no e-mail address, phone number or blocklisted name in the new strings of these "
-            "files or in this text (`scripts/state_batch.py scan`).",
+            "- The privacy scan checks the new strings of these files and this text for an e-mail address, phone "
+            "number or blocklisted name (`scripts/state_batch.py scan`); what it finds is listed below, to correct on "
+            "the next round.",
             "- `reaches` is not part of the batch: `build/reaches.py` has no state scope yet."]
     return "\n".join(out).rstrip() + "\n"
 
@@ -704,7 +707,8 @@ def publish_cmds(st: str, date: str, body: Path, files: list[str], gh: str = "gh
 def publish(st: str, body: Path, date: str | None = None, dry_run: bool = False, root: Path = ROOT,
             gh: str = "gh", require_blocklist: bool = True, pause_s: float = 10.0) -> int:
     """Commit the changed registry files on batch/<st>-<date>, push, open or update the pull request. The privacy
-    scan runs first, over the files and the body; any finding stops it before anything is committed."""
+    scan runs first, over the files and the body; its findings are warnings, listed in the body and in FINDINGS_FILE
+    (owner, 2026-11-16), and the commit goes ahead. The size ceiling still refuses."""
     st = valid_state(st, root)
     date = date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
@@ -727,9 +731,14 @@ def publish(st: str, body: Path, date: str | None = None, dry_run: bool = False,
             return 0
     if size_check(files, root) != 0:
         return 1
-    if scan(st, [body], require_blocklist, root) != 0:
-        print("::error::the privacy scan found something (above): nothing is committed or pushed", flush=True)
-        return 1
+    # The owner (2026-11-16, about 03:40Z): "Privacy scans are a nice to have and should not delay publishing they can
+    # be corrected on the next round -- all this data is already public information." So the scan warns here: its
+    # findings (file, place, kind) go in the log, the pull request's body and FINDINGS_FILE, and the commit goes ahead.
+    # A missing blocklist is a warning too. The size ceiling above still refuses (it is not a privacy check).
+    findings: list = []
+    scan(st, [body], require_blocklist, root, findings=findings, warn=PRIVACY_SCAN_WARNS)
+    blocklist_checked = _patterns(root)[2] is not None
+    note_findings(body, findings, blocklist_checked)
     c = publish_cmds(st, date, body, files, gh)
     if dry_run:
         for cmd in c["commit"]:
@@ -1015,16 +1024,23 @@ def _patterns(root: Path):
 
 
 def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root: Path = ROOT,
-         files: list[str] | None = None) -> int:
+         files: list[str] | None = None, findings: list | None = None, warn: bool = False) -> int:
     """Exit 1 when a string new in the changed files (or a line of the texts) has an e-mail address or phone number
-    shape or a blocklisted name; prints the file and the place, never the string."""
+    shape or a blocklisted name; prints the file and the place, never the string. findings, when given, gets
+    {file, place, kind} for each. warn (publish's mode, PRIVACY_SCAN_WARNS): the findings and a missing blocklist are
+    ::warning:: lines, and the exit is 0."""
+    level = "::warning::" if warn else "::error::"
     email, phone, block = _patterns(root)
     if block is None:
-        if require_blocklist:
+        if require_blocklist and not warn:
             print("::error::the private name blocklist (data/build/name-blocklist.json) is not here: it comes with the "
                   "restored build state; without it names cannot be checked, so nothing is published", flush=True)
             return 1
-        say("no name blocklist here: e-mail and phone shapes only")
+        if require_blocklist:
+            print("::warning::the private name blocklist (data/build/name-blocklist.json) is not here: names cannot be "
+                  "checked this round (e-mail and phone shapes only)", flush=True)
+        else:
+            say("no name blocklist here: e-mail and phone shapes only")
     hits = 0
     multi = launch_block(block) if block else None   # a launches item: entries of two or more words only (LAUNCH_KEY)
 
@@ -1035,19 +1051,23 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
     def hide(key: str) -> bool:                      # a key that is itself a finding is named by its position
         return bool(kinds_of(key))
 
-    def check(where: str, s: str, path: str = "") -> None:
+    def report(file: str, place: str, kind: str) -> None:
         nonlocal hits
+        hits += 1
+        print(f"{level}{file} {place}: {kind}" if place else f"{level}{file}: {kind}", flush=True)
+        if findings is not None:
+            findings.append({"file": file, "place": place, "kind": kind})
+
+    def check(file: str, place: str, s: str, path: str = "") -> None:
         for k in kinds_of(s, multi if LAUNCH_PATH.match(path) else block):
-            hits += 1
-            print(f"::error::{where}: {k}", flush=True)
+            report(file, place, k)
 
     files = changed_files(valid_state(st, root), root) if files is None else files
     for f in files:
         try:
             new = json.loads((root / f).read_text())
         except (OSError, ValueError) as ex:
-            print(f"::error::{f}: not readable as JSON ({type(ex).__name__}); not scanned, so not published")
-            hits += 1
+            report(f, "", f"not readable as JSON ({type(ex).__name__}); not scanned")
             continue
         old_text = git(root, "show", f"HEAD:{f}", check=False).stdout
         try:
@@ -1058,13 +1078,43 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
         for where, s in strings(new, hide=hide):
             if s not in old:
                 n += 1
-                check(f"{f} {where}", s, where)
+                check(f, where, s, where)
         say(f"{f}: {n} new string(s) scanned")
     for t in texts:
         for i, line in enumerate(Path(t).read_text().splitlines(), 1):
-            check(f"{Path(t).name} line {i}", line)
-    say(f"privacy scan: {hits} finding(s) in {len(files)} file(s) and {len(texts)} text(s)")
-    return 1 if hits else 0
+            check(Path(t).name, f"line {i}", line)
+    say(f"privacy scan: {hits} finding(s) in {len(files)} file(s) and {len(texts)} text(s)"
+        + (" (warnings: to correct on the next round)" if warn and hits else ""))
+    return 1 if hits and not warn else 0
+
+
+PRIVACY_SCAN_WARNS = True                     # publish's scan: warnings, never a refusal (owner, 2026-11-16)
+FINDINGS_FILE = "privacy-findings.json"       # beside the pull request's body, in the batch's output folder (OUT)
+FINDINGS_HEADING = "## Privacy scan: to correct on the next round"
+
+
+def note_findings(body: Path, findings: list, blocklist_checked: bool) -> Path:
+    """The scan's findings (file, place, kind; never the string) listed under FINDINGS_HEADING in the pull request's
+    body and written to FINDINGS_FILE beside it, for the next round to correct. Returns the JSON file's path."""
+    body = Path(body)
+    out = body.parent / FINDINGS_FILE
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps({"blocklist_checked": blocklist_checked, "count": len(findings),
+                               "findings": findings}, indent=1) + "\n")
+    if not findings and blocklist_checked:
+        return out
+    try:
+        text = body.read_text()
+    except OSError:
+        text = ""
+    if FINDINGS_HEADING in text:                     # a rerun on the same body: the earlier list is replaced
+        text = text[:text.index(FINDINGS_HEADING)].rstrip("\n") + "\n"
+    lines = ["", FINDINGS_HEADING, ""]
+    if not blocklist_checked:
+        lines.append("- the private-name list was not here: names were not checked this round")
+    lines += [f"- {x['file']} {x['place']}: {x['kind']}".replace("  ", " ") for x in findings]
+    body.write_text(text + ("" if not text or text.endswith("\n") else "\n") + "\n".join(lines) + "\n")
+    return out
 
 
 # ---------------------------------------------------------------- command line
