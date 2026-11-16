@@ -2209,6 +2209,10 @@ def main() -> int:
                         print(f"reaches: {len(gone)} advisory stretches no longer in effect moved to {RETIRED_DIR.name}/",
                               flush=True)
                     pts += stretches
+                    # the separate sewer rain caution's report points (build/rain_sso.py; none with its switch off)
+                    from build import rain_sso
+                    have = {c["key"] for c in pts}
+                    pts += [c for c in rain_sso.trace_points(waters) if c["key"] not in have]
                     lake = [c for c in cands + pts if c.get("model") == SH.MODEL]
                     shore_run = run_shorelines(lake, waters, shore, log=log)
                     run, cached = run_traces([c for c in cands + pts if c.get("model") != SH.MODEL], cap,

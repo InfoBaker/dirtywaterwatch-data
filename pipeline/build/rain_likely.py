@@ -707,6 +707,8 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
     for permit in sorted(set(series) | set(latest)):
         if permit in site_permits:
             continue                    # its caution comes from the shared site (_site_flags), never twice
+        if permit.startswith("sso:"):
+            continue                    # a separate sewer operator's readings (build/rain_sso.py), never a permit here
         info = latest.get(permit) or {}
         state = info.get("state") or permit[:2]
         entry = lv_permits.get(permit) if levels is not None else None
@@ -1138,7 +1140,30 @@ def caution_coverage(block: dict, cso_states=()) -> dict[str, dict]:
             e["covered"] = False
             e["sentence"] = ("We show no rain caution here because we do not read rainfall at this state's "
                              "combined sewer outfalls.")
+    separate_sewer_coverage(block, out)
     return dict(sorted(out.items()))
+
+
+def separate_sewer_coverage(block: dict | None, out: dict[str, dict]) -> None:
+    """The separate sewer operators the caution covers, per state (build/rain_sso.py), added to caution_coverage's
+    rows only where the block carries them (the switch on)."""
+    ss = (block or {}).get("separate_sewers") or {}
+    per: dict[str, int] = defaultdict(int)
+    for r in (ss.get("operators") or {}).values():
+        per[str(r.get("state") or "").upper()] += 1
+    for st, n in sorted(per.items()):
+        e = out.setdefault(st, {"covered": False, "methods": [], "permits": 0, "waters": 0, "sources": [],
+                                "sentence": None})
+        who = "one separate sewer operator" if n == 1 else f"{n} separate sewer operators"
+        line = (f"It also covers {who} whose own overflow reports show a strong link to rainfall, shown only where "
+                "their past rain-driven reports were made.")
+        e["separate_sewers"] = {"operators": n, "sentence": line}
+        if e.get("covered") and e.get("permits"):
+            e["sentence"] = f"{e['sentence']} {line}"
+        else:
+            e["sentence"] = (f"Our rain caution here covers only {who} whose own overflow reports show a strong link "
+                             "to rainfall, shown where their past rain-driven reports were made; we read no rainfall "
+                             "at combined sewer outfalls here.")
 
 
 def site_health_file(rain: dict) -> dict | None:
@@ -1212,6 +1237,17 @@ def history_facts(ev: dict) -> str:
     return out
 
 
+def separate_facts(ev: dict) -> str:
+    """The reason line's facts for a separate sewer caution (build/rain_sso.py): its own record and where it shows."""
+    period = ev.get("period") or [None, None]
+    a, b = month_year(period[0]), month_year(period[1])
+    when = f", {a} to {b}" if a and b else ""
+    out = ""
+    if ev.get("storms") is not None and ev.get("followed") is not None:
+        out = f" · its own reports{when}: an overflow after {ev['followed']} of {ev['storms']} storms"
+    return out + " · a separate sewer: shown where its past rain-driven reports were made"
+
+
 def short(iv: dict, where: str = "") -> str:
     r = iv.get("rain") or {}
     label = r.get("label") or iv.get("label") or label_for(r.get("trigger_basis") or iv.get("trigger_basis"))
@@ -1222,6 +1258,12 @@ def short(iv: dict, where: str = "") -> str:
     peak = r.get("peak_24h_in")
     thr = r.get("threshold_in")
     ev = r.get("evidence") or {}
+    if ev.get("basis") == "separate_sewer_history":
+        at = r.get("peak_at")
+        amt = (f" · radar peak {peak:.2f} inch{'es' if peak > 1 else ''} in the 24 hours to "
+               f"{str(at)[:16].replace('T', ' ')} UTC" if at else f" · radar peak {peak:.2f} inch{'es' if peak > 1 else ''} in 24 hours") \
+            if peak is not None else ""
+        return f"{label}{who}{amt}{separate_facts(ev)}{where}"
     if ev.get("basis") == "operator_history" and ev.get("why_no_history") is None:
         amt = f" · {peak:.2f} inch{'es' if peak > 1 else ''} in 24 hours (radar)" if peak is not None else ""
         return f"{label}{who}{amt}{history_facts(ev)}{where}"
