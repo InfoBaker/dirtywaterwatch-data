@@ -37,7 +37,7 @@ Q_LAW = ("WDEQ, Sanitary Sewer Overflows (WYPDES program page): \"Reporting of t
          "hours of becoming aware of the event\"; written notification to WDEQ within five days after the event")
 Q_EPA = ("NPDES permit {permit} (EPA Region 8, Wind River Reservation): the 24-hour and five-day noncompliance reports of "
          "40 CFR 122.41(l)(6), to EPA")
-HCB = "https://deq.wyoming.gov/water-quality/watershed-protection/cyanobacteria/"
+HCB = "https://deq.wyoming.gov/harmful-cyanobacterial-blooms/"   # the old watershed-protection address is a 404
 
 AGENCY = [
     {"id": "wy-deq-hcb-bulletins", "agency": "Wyoming Department of Environmental Quality",
@@ -53,6 +53,7 @@ AGENCY = [
     {"id": "wy-deq-hcb-page", "agency": "Wyoming Department of Environmental Quality",
      "name": "Wyoming DEQ (harmful cyanobacteria blooms program page)", "channel_kind": "state_alert_page",
      "urls": [HCB], "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": True,
+     "checked": "2026-11-15",
      "unmonitored_reason": None, "publishes": "link_only", "link_text": "the current advisories StoryMap",
      "records": False, "availability_only": True, "every_hours": 168,
      "note": ("The program page and its FAQ: an advisory holds until the bloom has dissipated or toxins are below the "
@@ -118,8 +119,9 @@ AGENCY = [
      "name": "U.S. Environmental Protection Agency (ECHO)", "channel_kind": "feed", "urls": [ECHO], "method": "html",
      "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
      "publishes": "none", "records": False, "availability_only": True, "every_hours": 168, "noun": "Data feed",
+     "checked": "2026-11-15",
      "note": ("EPA's sewer overflow and bypass tables hold no Wyoming report in the current or the all-versions extract "
-              "of 2026-11-14; the collection-system table lists one Wyoming permit, EPA's lagoon coverage WYG589101. "
+              "of 2026-11-13, read 2026-11-15; the collection-system table lists one Wyoming permit, EPA's lagoon coverage WYG589101. "
               "Watched for Wyoming rows."),
      "sources": ["wy-epa-sobe"]},
     {"id": "wy-swim-guide", "agency": "Swim Drink Fish", "name": "Swim Drink Fish (Swim Guide)",
