@@ -527,19 +527,6 @@
    "cap_km"
   ],
   "source": "U.S. Geological Survey, Network-Linked Data Index (NLDI) and the NHDPlus Version 2 river network; Jobson (1996), U.S. Geological Survey Water-Resources Investigations Report 96-4013",
-  "tidal_river": {
-   "enabled": false,
-   "rationale": "A river that becomes tidal still carries its water downstream. The national river network (NHDPlus) marks long stretches of large rivers as tidal: the Connecticut River from Windsor to Long Island Sound, the Hudson below Troy, the Delaware below Trenton, and the lower Potomac and James. The tide raises and lowers the water there, by about half a metre at Hartford in NOAA's predictions, but the river's flow moves it downstream overall (NHDPlus gives the Connecticut at Hartford a mean flow of about 20,000 cubic feet per second). An estimate that stopped where the river becomes tidal left those stretches with no estimate at all, which understates the risk below an overflow upstream. So the estimate goes on along the tidal river to the 40 kilometre limit, and still stops at an estuary or the sea, a lake or reservoir, or tidal water that is not a river channel. No travel time is given in tidal water: the tide moves the water both ways there, and the travel-time method (Jobson 1996) is for rivers that flow one way. An outlet that discharges directly into tidal water gets no stretch, as before.",
-   "source": "U.S. Geological Survey, NHDPlus Version 2 (tidal flag, water body type and mean annual flow); NOAA Tides and Currents, tide predictions",
-   "label": "Tidal water: the tide moves water back and forth here, and the river carries it downstream overall. No travel time is given.",
-   "cap_rationale": "We estimate downstream stretches along the river, through its tidal part, to an estuary or the sea, the first lake or a maximum of 40 kilometres. Tidal water carries no travel time. A ring marks where the estimate stops. Contamination can travel beyond that point.",
-   "stop_at": [
-    "estuary",
-    "tidal_water",
-    "lake_or_reservoir",
-    "cap_km"
-   ]
-  },
   "shoreline": {
    "doc": "The Great Lakes and Lake St. Clair are shown like rivers, not coloured whole: a report from an outfall on one of these lakes colours a modeled stretch of shoreline at the outfall, and the lake's outline stays grey. The report still counts on the lake's page. Puget Sound is drawn the same way.",
    "lakes": [
