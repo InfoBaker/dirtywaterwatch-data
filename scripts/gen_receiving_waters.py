@@ -120,7 +120,7 @@ def build() -> dict:
             seen.add(dedupe)
             st = (r.get("state") or "").upper()
             kind = r.get("outfall_kind") or "cso"
-            closed = r.get("outfall_status") == "CLS"
+            closed = str(r.get("outfall_status") or "").upper().startswith("CLS")   # "CLS (ended ...)" too
             name = norm_name(r.get("receiving_water_echo")) or norm_name(r.get("reach_gnis_name"))
             if not name:
                 unnamed[st].append({"permit": r.get("npdes_permit"), "outfall": r.get("outfall"), "kind": kind,
@@ -141,7 +141,8 @@ def build() -> dict:
                 w["reach_ids"].add(str(r["reach_id"]))
             if r.get("nhdplus_id"):
                 w["nhdplus_ids"].add(str(r["nhdplus_id"]))
-            w["outfalls"]["closed" if closed else kind] += 1
+            if not r.get("same_outfall_as"):    # one outfall under two permits counts once; both operators named
+                w["outfalls"]["closed" if closed else kind] += 1
             if r.get("npdes_permit"):
                 w["operators"][r["npdes_permit"]] = safe_permittee(r.get("permittee") or r.get("permit_name"))
             if r.get("lat") and r.get("lon") and len(w["points"]) < 3:

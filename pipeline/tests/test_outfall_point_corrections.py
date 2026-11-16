@@ -240,8 +240,11 @@ def test_the_indiana_builder_writes_the_corrections_again(committed):
 
 def test_the_national_build_calls_the_corrections_before_it_writes():
     src = (ROOT / "scripts" / "match_outfalls.py").read_text()
-    hook = src.index('_opc.for_builder("outfalls-us.json", out["outfalls"])')
-    assert hook < src.index('tmp = out_path + ".tmp"\nwith open(tmp, "w") as fh:\n    json.dump(out, fh, indent=1)')
+    hook = src.index('_opc.for_builder(os.path.basename(out_path), out["outfalls"])')
+    # the national file and the two regional files (the 2026-11-16 status, add and shared tables live in them too)
+    files = src.index('if os.path.basename(out_path) in ("outfalls-us.json", "outfalls-mid-atlantic.json", '
+                      '"outfalls-new-england.json"):')
+    assert files < hook < src.index('tmp = out_path + ".tmp"\nwith open(tmp, "w") as fh:\n    json.dump(out, fh, indent=1)')
 
 
 # ------------------------------------------------ review 2026-11-15 (Astra): the evidence each correction rests on

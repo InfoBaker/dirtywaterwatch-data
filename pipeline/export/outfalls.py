@@ -30,6 +30,12 @@ file. A place whose reports all say the sewage reached no water (on_map false) i
 lists it). discharger_id is null when the row's operator has no page. A plant row placed at the facility's point
 because EPA lists no outfall coordinates carries coords_from "facility" (its outfall_id is "").
 
+One outfall listed under two permits (the same point; scripts/outfall_point_corrections.py SHARED, 2026-11-16: ALCOSAN
+and Pittsburgh, the Narragansett Bay Commission and its collection-system co-permits, ...): the row of the permit kept
+carries also_permits ([{npdes_permit, outfall_id, discharger_id}], the other systems that discharge through it); the
+other permit's row carries alias_of ("<kept permit>:<outfall>") and same_outfall true, so the map draws it once and a
+count of rows without alias_of counts it once. Its rain field is its own permit's, as before.
+
 Then the MassDEP layer's ids (data/build/ma-cso-outfalls.json, e.g. SPR010) as rows of their own, source_id
 "ma-massdep", so the live layer can place a MassDEP report by the id it carries; such a row has `alias_of`
 ("<permit>:<outfall>") when the registry holds the same outfall, and the map draws the registry row instead.
@@ -155,10 +161,22 @@ def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | Non
             row.update({k: o.get(k) for k in PROVISIONAL_FIELDS})
         if o.get("coords_from") == "facility":
             row["coords_from"] = "facility"     # the plant's own point stands in: no outfall coordinates on file
+        same = o.get("same_outfall_as")
+        if isinstance(same, dict) and same.get("npdes_permit") and permit:
+            # one outfall listed under two permits (scripts/outfall_point_corrections.py SHARED): drawn and counted
+            # once, as the kept row; this row names it (the site leaves out an alias_of row whose row it has)
+            row["alias_of"] = f"{str(same['npdes_permit']).strip().upper()}:{same.get('outfall')}"
+            row["same_outfall"] = True
+        if o.get("also_permits"):
+            # the kept row of a shared outfall: the other permits that list it (each system's list shows it)
+            row["also_permits"] = [{"npdes_permit": str(x.get("npdes_permit") or "").upper(),
+                                    "outfall_id": str(x.get("outfall") or ""),
+                                    "discharger_id": operator(str(x.get("npdes_permit") or "").upper(), None)}
+                                   for x in o["also_permits"] if isinstance(x, dict)]
         if o.get("country") and o["country"] != "US":
             row["country"] = o["country"]
         rows.append(row)
-        if permit and row["outfall_id"]:
+        if permit and row["outfall_id"]:       # a shared outfall's alias row too: a monthly mark for its number lands on it
             by_key.setdefault(outfall_key(permit, row["outfall_id"]), row)
     if "MA" in live:
         layer = (ma_layer.values() if isinstance(ma_layer, dict) else ma_layer) or []

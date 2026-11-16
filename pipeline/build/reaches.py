@@ -661,7 +661,8 @@ def registry_outfalls() -> list[dict]:
 
 
 def is_closed(o: dict) -> bool:
-    return "CLS" in [t.strip() for t in str(o.get("outfall_status") or "").upper().split("|")]
+    """Closed: a CLS token, bare or annotated ("CLS (ended 2011-11-18 in DEP's layer)", "CLS (separated: ...)")."""
+    return any(t.strip().startswith("CLS") for t in str(o.get("outfall_status") or "").upper().split("|"))
 
 
 def outfall_kind(o: dict) -> str:
