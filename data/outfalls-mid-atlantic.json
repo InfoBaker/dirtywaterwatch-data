@@ -56824,7 +56824,7 @@
    "city": "EVERETT",
    "outfall": "002",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Raystown Branch Juniata River",
    "reach_id": null,
@@ -56840,7 +56840,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 32 m from Raystown Branch Juniata River (raystown-branch-juniata-river-pa), whose name shares a word with the receiving water ('Raystown Branch Juniata River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list in September 2011.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0037711",
@@ -56849,7 +56859,7 @@
    "city": "EVERETT",
    "outfall": "003",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Bloody Run",
    "reach_id": null,
@@ -56865,7 +56875,17 @@
    "alternatives": [],
    "match": "geometry",
    "water_match": "EPA's point lies 182 m from Raystown Branch Juniata River (raystown-branch-juniata-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Bloody Run') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list in September 2011.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0037818",
@@ -56874,7 +56894,7 @@
    "city": "SALTSBURG",
    "outfall": "002",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Conemaugh River",
    "reach_id": "5010007000001",
@@ -56896,7 +56916,17 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 53 m from Conemaugh River (conemaugh-river-pa), whose name shares a word with the receiving water ('Conemaugh River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 19, 2015.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0037818",
@@ -56905,7 +56935,7 @@
    "city": "SALTSBURG",
    "outfall": "003",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Conemaugh River",
    "reach_id": "5010007000001",
@@ -56927,7 +56957,17 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 40 m from Conemaugh River (conemaugh-river-pa), whose name shares a word with the receiving water ('Conemaugh River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 19, 2015.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0037818",
@@ -56936,7 +56976,7 @@
    "city": "SALTSBURG",
    "outfall": "004",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Conemaugh River",
    "reach_id": "5010007000001",
@@ -56963,7 +57003,17 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 6 m from Conemaugh River (conemaugh-river-pa), whose name shares a word with the receiving water ('Conemaugh River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 19, 2015.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0037818",
@@ -56972,7 +57022,7 @@
    "city": "SALTSBURG",
    "outfall": "005",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Kiskiminetas River",
    "reach_id": "5010008000113",
@@ -56999,7 +57049,17 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 88 m from Kiskiminetas River (kiskiminetas-river-pa), whose name shares a word with the receiving water ('Kiskiminetas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 19, 2015.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0037818",
@@ -57008,7 +57068,7 @@
    "city": "SALTSBURG",
    "outfall": "006",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Kiskiminetas River",
    "reach_id": "5010008000113",
@@ -57035,7 +57095,17 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 54 m from Kiskiminetas River (kiskiminetas-river-pa), whose name shares a word with the receiving water ('Kiskiminetas River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 19, 2015.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0043273",
@@ -63271,7 +63341,7 @@
    "city": "LEET TWP",
    "outfall": "001",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Big Sewickley Creek",
    "reach_id": "5030101000514",
@@ -63287,7 +63357,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Big Sewickley Creek' by name; Big Sewickley Creek (big-sewickley-creek-pa, NHDPlus V2.1 record), 44 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Separated and closed CSO Outfall. Permit rescinded 6/12/18.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0253332",
@@ -63652,7 +63732,7 @@
    "city": "JOHNSTOWN",
    "outfall": "001",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Stonycreek River",
    "reach_id": "5010007000024",
@@ -63668,7 +63748,17 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Stonycreek River (stonycreek-river-pa) is the only water of the receiving water's name ('Stonycreek River') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0253901",
@@ -63677,7 +63767,7 @@
    "city": "JOHNSTOWN",
    "outfall": "002",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Solomon Run",
    "reach_id": "5010007000361",
@@ -63693,7 +63783,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Solomon Run' by name; Solomon Run (solomon-run-pa, NHDPlus V2.1 record), 5 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0253901",
@@ -63702,7 +63802,7 @@
    "city": "JOHNSTOWN",
    "outfall": "003",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Solomon Run",
    "reach_id": "5010007000361",
@@ -63718,7 +63818,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Solomon Run' by name; Solomon Run (solomon-run-pa, NHDPlus V2.1 record), 17 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0253901",
@@ -63727,7 +63837,7 @@
    "city": "JOHNSTOWN",
    "outfall": "005",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Solomon Run",
    "reach_id": "5010007000361",
@@ -63743,7 +63853,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Solomon Run' by name; Solomon Run (solomon-run-pa, NHDPlus V2.1 record), 21 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0253901",
@@ -63752,7 +63872,7 @@
    "city": "JOHNSTOWN",
    "outfall": "006",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Solomon Run",
    "reach_id": "5010007000361",
@@ -63768,7 +63888,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Solomon Run' by name; Solomon Run (solomon-run-pa, NHDPlus V2.1 record), 7 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0253901",
@@ -63777,7 +63907,7 @@
    "city": "JOHNSTOWN",
    "outfall": "010",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Solomon Run",
    "reach_id": "5010007000361",
@@ -63793,7 +63923,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Solomon Run' by name; Solomon Run (solomon-run-pa, NHDPlus V2.1 record), 24 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0253901",
@@ -63802,7 +63942,7 @@
    "city": "JOHNSTOWN",
    "outfall": "011",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Solomon Run",
    "reach_id": "5010007000361",
@@ -63818,7 +63958,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Solomon Run' by name; Solomon Run (solomon-run-pa, NHDPlus V2.1 record), 7 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0253901",
@@ -63827,7 +63977,7 @@
    "city": "JOHNSTOWN",
    "outfall": "012",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Solomon Run",
    "reach_id": "5010007000361",
@@ -63843,7 +63993,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Solomon Run' by name; Solomon Run (solomon-run-pa, NHDPlus V2.1 record), 6 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Removed from CSO list on November 21, 2016.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0254606",
@@ -64027,7 +64187,7 @@
    "city": "PORT VUE, BOROUGH OF",
    "outfall": "001",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Youghiogheny River",
    "reach_id": "5020006000001",
@@ -64043,7 +64203,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 161 m from Youghiogheny River (youghiogheny-river-pa), whose name shares a word with the receiving water ('Youghiogheny River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Port Vue Borough's CSO responsibilities have been incorporated into the NPDES Permit for McKeesport WPCP (PA0026913) as of January 24, 2018.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0254690",
@@ -64052,7 +64222,7 @@
    "city": "PORT VUE, BOROUGH OF",
    "outfall": "002",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Youghiogheny River",
    "reach_id": "5020006000001",
@@ -64068,7 +64238,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 230 m from Youghiogheny River (youghiogheny-river-pa), whose name shares a word with the receiving water ('Youghiogheny River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Port Vue Borough's CSO responsibilities have been incorporated into the NPDES Permit for McKeesport WPCP (PA0026913) as of January 24, 2018.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0254690",
@@ -64077,7 +64257,7 @@
    "city": "PORT VUE, BOROUGH OF",
    "outfall": "004",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Youghiogheny River",
    "reach_id": "5020006000001",
@@ -64093,7 +64273,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 355 m from Youghiogheny River (youghiogheny-river-pa), whose name shares a word with the receiving water ('Youghiogheny River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Port Vue Borough's CSO responsibilities have been incorporated into the NPDES Permit for McKeesport WPCP (PA0026913) as of January 24, 2018.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PA0254690",
@@ -64102,7 +64292,7 @@
    "city": "PORT VUE, BOROUGH OF",
    "outfall": "005",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Unnamed Trib To Youghiogheny River",
    "reach_id": "5020006000001",
@@ -64118,7 +64308,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 62 m from Youghiogheny River (youghiogheny-river-pa), whose name shares a word with the receiving water ('Unnamed Trib To Youghiogheny River'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Port Vue Borough's CSO responsibilities have been incorporated into the NPDES Permit for McKeesport WPCP (PA0026913) as of January 24, 2018.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG062201",
@@ -66540,7 +66740,7 @@
    "city": "EAST ROCHESTER",
    "outfall": "001",
    "outfall_name": "",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (former CSO: Pennsylvania DEP's CSO status spreadsheet)",
    "feature_type": "EXO",
    "receiving_water_echo": "Lacock Run",
    "reach_id": "5030101001219",
@@ -66556,7 +66756,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "name: its receiving water 'Lacock Run' by name; Lacock Run (lacock-run-pa, NHDPlus V2.1 record), 219 m from the point",
-   "water_matched_by": "ingest.outfall_waters (2026-11-03)"
+   "water_matched_by": "ingest.outfall_waters (2026-11-03)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DEP's spreadsheet lists the permit on its 'Former CSOs' sheet: \"Former CSO facility. Permit Terminated 8/13/2020.\" EPA's inventory still lists the outfall open. Where EPA's inventory and the state's own list disagree on open or closed, the state permitting authority's list is followed (the registry's rule, scripts/build_wv_outfalls.py); EPA's status is kept in epa_outfall_status.",
+   "status_source": [
+    {
+     "name": "Pennsylvania DEP, CSO status spreadsheet (CSO_Status_Spreadsheet.xlsx), copy of 2025-09-10 (web.archive.org); the current file answers GitHub's runner (run 43886270609)",
+     "url": "https://files.dep.state.pa.us/Water/BPNPSM/WastewaterManagement/CSOs/CSO_Status_Spreadsheet.xlsx",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "PAG066133",
@@ -74353,7 +74563,7 @@
    "city": "WASHINGTON",
    "outfall": "006",
    "outfall_name": "Good Hope Road, West of Nichols Ave, SE (SEPARATED)",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
    "feature_type": "EXO",
    "receiving_water_echo": "Anacostia River, East Side",
    "reach_id": "2070010001222",
@@ -74369,7 +74579,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 15 m from Anacostia River (anacostia-river-dc), whose name shares a word with the receiving water ('Anacostia River, East Side'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "status_source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "DC0021199",
@@ -74847,7 +75067,7 @@
    "city": "WASHINGTON",
    "outfall": "025",
    "outfall_name": "31st and K Street, NW",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
    "feature_type": "EXO",
    "receiving_water_echo": "Potomac River, East Side",
    "reach_id": "2070010001253",
@@ -74869,7 +75089,17 @@
    ],
    "match": "geometry+name",
    "water_match": "EPA's point lies 27 m from Potomac River (potomac-river-dc), whose name shares a word with the receiving water ('Potomac River, East Side'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "status_source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "DC0021199",
@@ -74878,7 +75108,7 @@
    "city": "WASHINGTON",
    "outfall": "026",
    "outfall_name": "Wisconsin Avenue and K Street, NW",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
    "feature_type": "EXO",
    "receiving_water_echo": "Potomac River, East Side",
    "reach_id": "2070010001253",
@@ -74894,7 +75124,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 88 m from Potomac River (potomac-river-dc), whose name shares a word with the receiving water ('Potomac River, East Side'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "status_source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "DC0021199",
@@ -74978,7 +75218,7 @@
    "city": "WASHINGTON",
    "outfall": "031",
    "outfall_name": "Penn. Avenue, East Rock Creek, NW (SEPARATED)",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
    "feature_type": "EXO",
    "receiving_water_echo": "Rock Creek East Side",
    "reach_id": "2070010000087",
@@ -74994,7 +75234,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 105 m from Rock Creek (rock-creek-dc), whose name shares a word with the receiving water ('Rock Creek East Side'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "status_source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "DC0021199",
@@ -75128,7 +75378,7 @@
    "city": "WASHINGTON",
    "outfall": "037",
    "outfall_name": "NW of Belmont Road and Rock Creek and Potomac Pkwy (SEPARATED)",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
    "feature_type": "EXO",
    "receiving_water_echo": "Rock Creek East Side",
    "reach_id": "2070010000087",
@@ -75144,7 +75394,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 279 m from Rock Creek (rock-creek-dc), whose name shares a word with the receiving water ('Rock Creek East Side'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "status_source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "DC0021199",
@@ -75540,7 +75800,7 @@
    "city": "WASHINGTON",
    "outfall": "053",
    "outfall_name": "O Street West of Rock Creek Parkway, NW (SEPARATED)",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
    "feature_type": "EXO",
    "receiving_water_echo": "Rock Creek West Side",
    "reach_id": "2070010000087",
@@ -75556,7 +75816,17 @@
    "alternatives": [],
    "match": "name_only",
    "water_match": "no openboatlaunch water within 400 m of EPA's point; Rock Creek (rock-creek-dc) is the only water of the receiving water's name ('Rock Creek West Side') in the state; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "status_source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "DC0021199",
@@ -75615,7 +75885,7 @@
    "city": "WASHINGTON",
    "outfall": "057",
    "outfall_name": "28th Street extended west of Rock Creek, NW (SEPARATED)",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
    "feature_type": "EXO",
    "receiving_water_echo": "Rock Creek West Side",
    "reach_id": "2070010000087",
@@ -75631,7 +75901,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 192 m from Rock Creek (rock-creek-dc), whose name shares a word with the receiving water ('Rock Creek West Side'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "status_source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "DC0021199",
@@ -75640,7 +75920,7 @@
    "city": "WASHINGTON",
    "outfall": "058",
    "outfall_name": "Connecticut Avenue and Rock Creek Parkway, NW (SEPARATED)",
-   "outfall_status": "CSO",
+   "outfall_status": "CLS (separated: DC Water's quarterly CSO reports, 2026)",
    "feature_type": "EXO",
    "receiving_water_echo": "Rock Creek West Side",
    "reach_id": "2070010000087",
@@ -75656,7 +75936,17 @@
    "alternatives": [],
    "match": "geometry+name",
    "water_match": "EPA's point lies 1 m from Rock Creek (rock-creek-dc), whose name shares a word with the receiving water ('Rock Creek West Side'); openboatlaunch record, scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "epa_outfall_status": "CSO",
+   "status_note": "DC Water, the permittee, marks this outfall 'separated' in the outfall table of its quarterly combined sewer reports to EPA under the permit (second and third quarters of 2026): it no longer carries combined sewage. EPA's inventory still lists it open (kept in epa_outfall_status). EPA itself is the permitting authority for the District, so this follows the permittee's own report of the structure over EPA's list; listed for review with the registry's other disagreements.",
+   "status_source": [
+    {
+     "name": "DC Water, combined sewer system quarterly report, second quarter 2026, table 'Combined Sewer System Metered and Model Results' (outfalls 006, 025, 026, 031, 037, 053, 057 and 058 marked 'separated'); the third-quarter 2026 report marks eight outfalls separated again",
+     "url": "https://www.dcwater.com/sites/default/files/document/2026-10/documents/CSO%20Third%20Quarter%202026%20Report%20SIGNED.pdf",
+     "read_at": "2026-11-16",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ]
   },
   {
    "npdes_permit": "DC0021199",

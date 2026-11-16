@@ -120,7 +120,7 @@ def build() -> dict:
             seen.add(dedupe)
             st = (r.get("state") or "").upper()
             kind = r.get("outfall_kind") or "cso"
-            closed = r.get("outfall_status") == "CLS"
+            closed = str(r.get("outfall_status") or "").upper().startswith("CLS")   # "CLS (ended ...)" too
             name = norm_name(r.get("receiving_water_echo")) or norm_name(r.get("reach_gnis_name"))
             if not name:
                 unnamed[st].append({"permit": r.get("npdes_permit"), "outfall": r.get("outfall"), "kind": kind,
