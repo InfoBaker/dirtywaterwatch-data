@@ -4,10 +4,15 @@
  "waters": 1,
  "reports": 1,
  "by_reason": {
-  "no water named": 26
+  "no NHD flowline or waterbody of that name in WI": 1
  },
- "resolved_names": 4,
- "resolved_reports": 5,
+ "build": {
+  "date": "2026-11-16",
+  "command": "python -m ingest.waters_from_nhd --names research/wi/receiving-waters-missing.json --state WI",
+  "records_built": 0,
+  "names_resolved": 0,
+  "network_requests": 3
+ },
  "rows": [
   {
    "name": "Wilson Park Creek",
@@ -21,7 +26,8 @@
     "wi-mmsd-storm-updates": 1
    },
    "open": 0,
-   "places_from": []
+   "places_from": [],
+   "reason": "no NHD flowline or waterbody of that name in WI; no NHD high-resolution flowline of that name within 3 km of the reports' towns"
   }
  ]
 }

@@ -26,7 +26,10 @@ name: State water batch
 # next dispatch resume where this one stopped); the build state is never saved from here. The workflow commits nothing
 # to main: the changed registry files go on a branch batch/<st>-<date> with a pull request listing the counts, for a
 # person to review (the same branch and pull request are updated by a second run that day). The privacy scan runs
-# over those files and the text first. The repository must allow GitHub Actions to create pull requests (Settings,
+# over those files and the text first and only warns (owner, 2026-11-16: "Privacy scans are a nice to have and should
+# not delay publishing they can be corrected on the next round -- all this data is already public information."): its
+# findings (file, place, kind) are listed in the pull request's body and in $OUT/privacy-findings.json, kept as an
+# artifact after the publish step. The repository must allow GitHub Actions to create pull requests (Settings,
 # Actions, General, Workflow permissions); otherwise the branch is pushed and the run says so.
 on:
   workflow_dispatch:
@@ -173,3 +176,11 @@ jobs:
         run: |
           pipeline/.venv/bin/python scripts/state_batch.py publish --state "$STATE" --body "$OUT/pr-body.md" \
             --date "$BATCH_DATE"
+      - name: Keep the privacy scan's findings (file, place and kind only; for the next round to correct)
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: state-batch-privacy-${{ github.run_id }}
+          path: data/build/batch/out/privacy-findings.json
+          retention-days: 14
+          if-no-files-found: ignore

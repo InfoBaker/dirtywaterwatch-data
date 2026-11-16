@@ -158,7 +158,7 @@ def test_register_rows_cover_every_cso_permittee_with_its_duties():
     pekin = next(o for o in ops if o["npdes_permit"] == "IL0034495")["id"]
     assert by[f"{pekin}-cso-public-notification"]["barrier"] == "not_verified" and f"{pekin}-cso-signs" not in by
     syn = by["il-mwrd-cso-synopsis-report"]
-    assert syn["barrier"] == "bot_wall" and "request to MWRD" in syn["note"] and syn["urls"] == []
+    assert syn["barrier"] == "not_verified" and "request to MWRD" in syn["note"] and syn["urls"] == []
     assert by["il-mwrd-possible-cso-events-map"]["feed_source_id"] == "il-mwrd-possible-cso-events-layer"
     assert by["il-iepa-sso-report"]["barrier"] == "no_web_page" and "public or private" in by["il-iepa-sso-report"]["note"]
     assert [r["id"] for r in rows] == sorted(r["id"] for r in rows)

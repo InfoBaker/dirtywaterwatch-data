@@ -247,7 +247,7 @@
    "operator_id": "nv-clark-county-water-reclamation-district",
    "agency": null,
    "permit": "NV0021261",
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "nv-clark-county-water-reclamation-district-ndep-report",
    "name": "Clark County Water Reclamation District (Flamingo and Laughlin water resource centers)",
    "channel_kind": "state_alert_page",
@@ -263,7 +263,7 @@
    "sources": [
     "nv-law-sb276-2025"
    ],
-   "note": "Clark County Water Reclamation District (Flamingo and Laughlin water resource centers) reports a sewage discharge to NDEP: its notice to NDEP under NRS 445A.467 (online or by telephone) and its permit's noncompliance reports. NDEP publishes no list of them; no public notice is required: no web channel found. The permit itself was not read: the federal standard condition is assumed.",
+   "note": "Clark County Water Reclamation District (Flamingo and Laughlin water resource centers) reports a sewage discharge to NDEP: its notice to NDEP under NRS 445A.467 (online or by telephone) and its permit's noncompliance reports. NDEP publishes no list of them; no public notice is required: no web channel found. The permit itself was not read: the federal standard condition is assumed. The district's contact page refused the pipeline's runner (403, 2026-11-16).",
    "barrier": "no_web_page"
   },
   {
@@ -366,7 +366,7 @@
    "operator_id": null,
    "agency": "Nevada Division of Environmental Protection",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "nv-ndep-hab-dashboard",
    "name": "Nevada harmful algal bloom dashboard (Power BI)",
    "channel_kind": "state_alert_page",
@@ -383,7 +383,7 @@
    "sources": [
     "nv-ndep-hab-dashboard"
    ],
-   "note": "The only statewide bloom status found, shown in a Power BI report: the page returned only its script shell on 2026-11-09, in which no rows, no download and no data address were found (the report's own data calls were not examined). Not read; a supported export is an owner request. Blooms, not sewage.",
+   "note": "A statewide bloom map in a Power BI report: the page returned only its script shell on 2026-11-09, in which no rows, no download and no data address were found (the report's own data calls were not examined). Not read; a supported export is an owner request. Blooms, not sewage.",
    "barrier": "image_only"
   },
   {
@@ -538,6 +538,34 @@
    "operator_id": null,
    "agency": "National Park Service, Lake Mead National Recreation Area",
    "permit": null,
+   "checked": "2026-11-16",
+   "id": "nv-nps-lake-mead-conditions",
+   "name": "National Park Service, Lake Mead (current conditions page)",
+   "channel_kind": "shared_site",
+   "urls": [
+    "https://www.nps.gov/lake/planyourvisit/conditions.htm"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "metadata_only": true,
+   "publishes": "notices",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Voluntary page",
+   "sources": [
+    "nv-nps-lake-mead-habs"
+   ],
+   "note": "The park's current conditions page, where a dated alert for Lake Mead or Lake Mohave would appear; it held no bloom alert in the pipeline runner's copy of 2026-11-16. Watched without records. Lake Mead and Lake Mohave are shared with Arizona. Blooms and park alerts, not sewage.",
+   "barrier": null
+  },
+  {
+   "state": "NV",
+   "operator_id": null,
+   "agency": "National Park Service, Lake Mead National Recreation Area",
+   "permit": null,
    "checked": "2026-11-14",
    "id": "nv-nps-lake-mead-habs",
    "name": "National Park Service, Lake Mead (harmful algal blooms page)",
@@ -587,6 +615,34 @@
   {
    "state": "NV",
    "operator_id": null,
+   "agency": "Nevada Office of State Epidemiology",
+   "permit": null,
+   "checked": "2026-11-16",
+   "id": "nv-ose-hab-reports",
+   "name": "Nevada Office of State Epidemiology (Harmful Algal Bloom reports)",
+   "channel_kind": "state_alert_page",
+   "urls": [
+    "https://nvose.org/hot-topic-harmful-algal-blooms/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "metadata_only": true,
+   "publishes": "status",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Voluntary page",
+   "sources": [
+    "nv-ose-hab-reports"
+   ],
+   "note": "The state's list of active bloom advisories, with the level and the date each took effect, including waters outside the state parks (Lake Mohave, Walker Lake, Virginia Lake and two ponds on 2026-11-15). Watched without records until a feed is built. Blooms, not sewage.",
+   "barrier": null
+  },
+  {
+   "state": "NV",
+   "operator_id": null,
    "agency": "Southern Nevada Water Authority",
    "permit": null,
    "checked": "2026-11-14",
@@ -612,7 +668,7 @@
    "operator_id": null,
    "agency": "Nevada Division of State Parks",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-16",
    "id": "nv-state-parks-hab",
    "name": "Nevada Division of State Parks (HAB advisories)",
    "channel_kind": "feed",
@@ -630,7 +686,7 @@
    "sources": [
     "nv-state-parks-hab"
    ],
-   "note": "The parks' HAB Advisory page: the waters in state parks under a HAB Watch, Warning or Danger advisory, each with its update date (four Watch advisories in the Internet Archive's copy of 2026-08-13; the expansion research read Lahontan's November 2 downgrade to Warning and October 5 Watch notices for Rye Patch and Wild Horse). Blooms, not sewage. Voluntary. The feed is built but has no successful current read yet, and its health stays not ok until one succeeds.",
+   "note": "The parks' HAB Advisory page: the waters in state parks under a HAB Watch, Warning or Danger advisory, each with its update date (four Watch advisories in the Internet Archive's copy of 2026-08-13; the expansion research read Lahontan's November 2 downgrade to Warning and October 5 Watch notices for Rye Patch and Wild Horse). Blooms, not sewage. Voluntary. Read by the pipeline since November 16, 2026 (first successful read 2026-11-16T04:23:49Z: Rye Patch and Wild Horse Watch, Lahontan Warning, no Danger).",
    "barrier": null
   },
   {

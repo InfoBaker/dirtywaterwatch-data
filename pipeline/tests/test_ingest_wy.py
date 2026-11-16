@@ -401,3 +401,123 @@ def test_verify_a_later_omission_keeps_the_confirmed_interval():
     reds = [iv for iv in S.event_intervals(r, "WY", datetime(2026, 11, 17, tzinfo=timezone.utc))
             if iv["color"] == "red"]
     assert reds and max(iv["end"] for iv in reds) >= datetime(2026, 11, 15, 12, tzinfo=timezone.utc)
+
+
+# ---------------------------------------------------------------- go-live audit 2026-11-16 (fixes 1 to 3)
+
+NOW_AUDIT = datetime(2026, 11, 16, 3, 0, tzinfo=timezone.utc)
+S_OCT = "Wed, 28 Oct 2026 17:22:52 -0500"
+
+
+def _audit_build(rows):
+    recs, *_ = W.build(feed(new("b-oct", S_OCT, rows)), "2026-11-16T03:00:00Z", [])
+    return recs
+
+
+def _wy_waters():
+    """Wyoming's own water records (data/waters-*.json with data/water-aliases.json merged), as the status build
+    reads them."""
+    from build import status as S
+    return {k: w for k, w in S.load_waters().items() if w.get("state") == "WY"}
+
+
+def _big(slug, name, x, y, km2=80.0, kind="reservoir"):
+    ring = [[x, y], [x + 0.1, y], [x + 0.1, y + 0.1], [x, y + 0.1], [x, y]]
+    return slug, {"slug": slug, "name": name, "kind": kind, "state": "WY", "area_km2": km2,
+                  "bbox": [x, y, x + 0.1, y + 0.1], "geometry": {"type": "Polygon", "coordinates": [ring]}}
+
+
+def test_audit_a_bloom_advisory_colours_its_large_reservoir_a_toxin_or_part_advisory_does_not(tmp_path):
+    from build import status as S
+    waters = dict([_big("big-reservoir-wy", "Big Reservoir", -107.0, 43.0),
+                   _big("toxin-reservoir-wy", "Toxin Reservoir", -106.0, 43.0),
+                   _big("part-reservoir-wy", "Part Reservoir", -105.0, 43.0)])
+    assert all(w["area_km2"] > S.SMALL_WATER_KM2 for w in waters.values())
+    rows = [("Big Reservoir", "Tamarask Campground", "Bloom", "7/13/2026"),
+            ("Big Reservoir", "Brannon Campground", "Toxin", "10/16/2026"),
+            ("Toxin Reservoir", "Diabase Marina", "Toxin", "10/14/2026"),
+            ("Part Reservoir: West Causeway", "West Causeway", "Bloom", "9/30/2026")]
+    recs = _audit_build(rows)
+    ext = {(r["waterbody_text"], r["raw"]["advisory_type"]): r["raw"].get("advisory_extent") for r in recs}
+    assert ext[("Big Reservoir", "Bloom")] == "named_water"
+    assert ext[("Big Reservoir", "Toxin")] is None and ext[("Toxin Reservoir", "Toxin")] is None
+    assert ext[("Part Reservoir", "Bloom")] == "part_of_water"
+    st = _status(tmp_path, recs, NOW_AUDIT, waters)
+    assert st["waters"]["big-reservoir-wy"]["status"] == "red"
+    assert st["waters"]["toxin-reservoir-wy"]["status"] == "grey"
+    assert st["waters"]["part-reservoir-wy"]["status"] == "grey"
+
+
+def test_audit_a_bloom_advisory_on_a_river_is_never_for_the_whole_water():
+    recs = _audit_build([("Wind River", "Lower Campground", "Bloom", "10/14/2026"),
+                         ("Example Creek", "Shore", "Bloom", "8/1/2026")])
+    assert all(r["raw"].get("advisory_extent") is None for r in recs)
+
+
+def _real(tmp_path, rows):
+    recs = _audit_build(rows)
+    st = _status(tmp_path, recs, NOW_AUDIT, _wy_waters())
+    return recs, st
+
+
+def test_audit_boysen_pathfinder_and_flaming_gorge_show_red_under_their_bloom_advisories(tmp_path):
+    rows = [("Boysen Reservoir", "Tamarask Campground", "Bloom", "7/13/2026"),
+            ("Boysen Reservoir", "Brannon Campground", "Toxin", "10/16/2026"),
+            ("Pathfinder Reservoir", "Bishops Point", "Bloom", "7/16/2026"),
+            ("Flaming Gorge Reservoir", "Firehole Ramp", "Bloom", "9/4/2026")]
+    recs, st = _real(tmp_path, rows)
+    for slug in ("boysen-reservoir-wy", "pathfinder-reservoir-wy", "flaming-gorge-reservoir-wy"):
+        assert st["waters"][slug]["status"] == "red", slug
+    tox = [r for r in recs if r["raw"]["advisory_type"] == "Toxin"][0]
+    assert st["placements"][tox["event_id"]]["water_slugs"] == ["boysen-reservoir-wy"]
+
+
+def test_audit_bighorn_and_granite_go_to_their_own_waters_never_the_nhd_namesakes(tmp_path):
+    rows = [("Bighorn Reservoir", "Horseshoe Bend Beach", "Bloom", "7/9/2026"),
+            ("Granite Reservoir: West Causeway", "West Causeway", "Bloom", "9/30/2026")]
+    recs, st = _real(tmp_path, rows)
+    by = {r["waterbody_text"]: r for r in recs}
+    assert st["placements"][by["Bighorn Reservoir"]["event_id"]]["water_slugs"] == ["bighorn-lake-wy"]
+    assert st["waters"]["bighorn-lake-wy"]["status"] == "red"
+    assert st["waters"].get("bighorn-reservoir-wy", {}).get("status", "grey") == "grey"
+    assert st["placements"][by["Granite Reservoir"]["event_id"]]["water_slugs"] == ["granite-springs-reservoir-wy"]
+    assert st["waters"]["granite-springs-reservoir-wy"]["status"] == "grey"       # a part, with no point: listed
+    assert by["Granite Reservoir"]["event_id"] not in (st["waters"].get("granite-reservoir-wy") or {}).get(
+        "event_ids", [])
+
+
+def test_audit_glendo_wheatland_one_and_the_wind_river_are_placed(tmp_path):
+    rows = [("Glendo Reservoir", "Custer Cove Campground", "Bloom", "7/16/2026"),
+            ("Wheatland Reservoir #1", "Southwest Ramp", "Bloom", "7/16/2026"),
+            ("Wind River", "Below Dam", "Toxin", "9/4/2026")]
+    recs, st = _real(tmp_path, rows)
+    by = {r["waterbody_text"]: r for r in recs}
+    glendo = ["glendo-reservoir-wy", "glendo-reservoir-glendo-wy", "southern-glendo-reservoir-wy"]
+    assert sorted(st["placements"][by["Glendo Reservoir"]["event_id"]]["water_slugs"]) == sorted(glendo)
+    assert all(st["waters"][s]["status"] == "red" for s in glendo)
+    assert st["placements"][by["Wheatland Reservoir #1"]["event_id"]]["water_slugs"] == \
+        ["wheatland-number-1-reservoir-wy"]
+    assert st["waters"]["wheatland-number-1-reservoir-wy"]["status"] == "red"
+    assert st["placements"][by["Wind River"]["event_id"]]["water_slugs"] == ["wind-river-wy"]
+    assert st["waters"]["wind-river-wy"]["status"] == "grey"             # reaches, not whole rivers: listed
+
+
+def test_audit_the_two_wrong_nhd_records_are_dropped_by_hand_rulings_and_their_rows_follow():
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    from ingest import waters_from_nhd as N
+    ring = [[-107.21, 44.52], [-107.20, 44.52], [-107.20, 44.53], [-107.21, 44.52]]
+    rows = [{"slug": "bighorn-reservoir-wy", "name": "Bighorn Reservoir", "state": "WY", "gnis_id": "1598179",
+             "kind": "reservoir", "geometry": {"type": "Polygon", "coordinates": [ring]}},
+            {"slug": "granite-reservoir-wy", "name": "Granite Reservoir", "state": "WY", "gnis_id": "01589039",
+             "kind": "reservoir", "geometry": {"type": "Polygon", "coordinates": [ring]}},
+            {"slug": "other-reservoir-wy", "name": "Other Reservoir", "state": "WY", "gnis_id": "1",
+             "kind": "reservoir", "geometry": {"type": "Polygon", "coordinates": [ring]}}]
+    targets = [{"state": "WY", "name": "Bighorn Reservoir", "slugs": ["bighorn-reservoir-wy"]},
+               {"state": "WY", "name": "Granite Reservoir", "slugs": ["granite-reservoir-wy"]}]
+    acts = N.recheck_remainders(rows, targets, {}, "2026-11-16")
+    assert [r["slug"] for r in rows] == ["other-reservoir-wy"]
+    assert {a["slug"]: (a["action"], a["to"]) for a in acts} == {
+        "bighorn-reservoir-wy": ("dropped", "bighorn-lake-wy"),
+        "granite-reservoir-wy": ("dropped", "granite-springs-reservoir-wy")}
+    assert targets[0]["slugs"] == ["bighorn-lake-wy"] and targets[1]["slugs"] == ["granite-springs-reservoir-wy"]
+    assert "lay on" not in " ".join(targets[0]["notes"])

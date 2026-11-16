@@ -1415,6 +1415,11 @@ NAMED_ONLY_NONE = ("the report names no water; its source gives no location, so 
 # stays unplaced and listed. Keyed on the value, which only the Iowa feeds write, so no other state changes.
 OWN_PLACE_NONE = ("the report names no water it reached and its own point lies on no mapped water: listed with its "
                   "county and placed on no water (never on its permit's or plant's receiving water)")
+# Puerto Rico (go-live audit 2026-11-16 P2-3): a report that names the open sea in English or Spanish ('OCEANO
+# ATLANTICO', 'Caribe Ocean', 'CARIBBEAN SEA'; name_forms_in) names a water this site holds no record of; it says so
+# rather than leaving the reason empty. Keyed on ACCENT_FOLD_STATES (folds), so no other state's reason changes.
+OPEN_SEA_FORMS = frozenset({"atlantic ocean", "caribbean sea"})
+OPEN_SEA_NONE = "the report names the open sea, which has no water record here: listed with its place, colouring no water"
 
 
 def own_place_only(ev: dict) -> bool:
@@ -2954,6 +2959,9 @@ class Resolver:
             out["unplaced_reason"] = NAMED_ONLY_NONE
         if own_only and not text and not out.get("unplaced_reason"):
             out["unplaced_reason"] = OWN_PLACE_NONE
+        if text and folds(state) and not out.get("unplaced_reason") \
+                and set(name_forms_in(text, state)) & OPEN_SEA_FORMS:
+            out["unplaced_reason"] = OPEN_SEA_NONE
         if ambiguous and not out.get("unplaced_reason"):
             out["unplaced_reason"] = "ambiguous name"
         if reason and not out.get("unplaced_reason"):
@@ -3167,6 +3175,15 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
         for iv in out:
             if iv["rule"] == "advisory_active":
                 iv["label"] = lab
+    # raw._sample_caution_label: the agency's own name for a risk level shown with the site's caution (Idaho DEQ's
+    # Health Watch and Health Alert, ingest/id_deq_cyanohab.py), in place of the generic "Elevated result in the
+    # agency's sample", which misdescribes a level set after an alert expires or from satellite imagery (Idaho go-live
+    # audit 2026-11-16 P2); keyed on the field, so no other feed changes
+    slab = (ev.get("raw") or {}).get("_sample_caution_label") if out else None
+    if isinstance(slab, str) and slab.strip():
+        for iv in out:
+            if iv["rule"] == "sample_caution":
+                iv["label"] = slab
     return earlier + out
 
 
@@ -4406,7 +4423,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if future:
             placements[eid]["future_start"] = True
             future_starts[ev["source_id"]] += 1
-        assumed = end_assumed(ev, now, rules)
+        # an advice that ages 14 days after its last confirmation (raw._ages_after_confirmation) is never assumed to
+        # have ended 30 days on: its intervals end at the aging, and the note said otherwise (CO audit 2026-11-16 P2)
+        assumed = (None if (ev.get("raw") or {}).get("_ages_after_confirmation") is True
+                   else end_assumed(ev, now, rules))
         if assumed:             # no end reported, 30 days on: the site assumes it ended (owner, 2026-11-03)
             placements[eid]["end_assumed_at"] = iso(assumed)
             when = f"{assumed.astimezone(LOCAL):%b} {assumed.astimezone(LOCAL).day}, {assumed.astimezone(LOCAL).year}"

@@ -5,9 +5,10 @@ reviewer, and every run confirms the page still carries the sentences they rest 
 Why a reviewed set of notices (Colorado publishes no spill list to read)
   Colorado publishes no list of sewage spills: operators report them to the Water Quality Control Division (C.R.S.
   25-8-601(2); the CDPS permits' 24-hour report), which publishes none of them; a large spill reaches the public only
-  when an agency issues an advisory. CDPHE's own pages answered 403 to the build's client on 2026-11-14, and the City
-  of Pueblo's news page did not answer (connection timed out), so its own account of the August 2026 spill could not be
-  read. The pages read here, on 2026-11-14:
+  when an agency issues an advisory. CDPHE's own pages answered 403 to the build's client on 2026-11-14 and to GitHub's
+  runner on 2026-11-16 UTC. The City of Pueblo's news item of 2026-09-14 (read through the runner on 2026-11-16 UTC;
+  the host does not connect from the audit machine) agrees with CPW's dates and is watched in the register, not
+  ingested. The pages read here, on 2026-11-14 (re-read 2026-11-15, every quoted sentence found):
 
   1. Colorado Parks and Wildlife, "Water contact advisory at John Martin as Pueblo sewage spill moves downstream",
      published 2026-08-30 11:05 MDT: about 4.2 million gallons of untreated sewage entered the Arkansas River in Pueblo
@@ -17,7 +18,8 @@ Why a reviewed set of notices (Colorado publishes no spill list to read)
      2026-08-26, ended 2026-08-27, both to the day as the notice gives them; the volume as stated) and CPW's advisory
      (status advisory_active from 2026-08-31, no end: CPW said it would update the advisory and no update was found, so
      raw._ages_after_confirmation makes the status build's 14-day rule age it, as the type sso alone would
-     not). The notice's mention of Lake Hasty's separate algae restriction is not a
+     not). The advisory names the spill in raw.related_event_id, never parent_event_id: it is a second record from the
+     same release, not a revision of the spill, so each is coloured from its own dates. The notice's mention of Lake Hasty's separate algae restriction is not a
      record here (the CDPHE sheet carries Lake Hasty, co-cdphe-toxic-algae).
   2. National Park Service, Curecanti National Recreation Area, "Toxic Algae detected in Blue Mesa Reservoir",
      2026-08-13: toxic algae at low levels in the Iola Basin, posted with yellow caution signs. A hab_advisory whose
@@ -77,14 +79,14 @@ NOTICES = [
                   "end_basis": ("the notice: the sewage entered the river on August 26-27; the last day it gives, "
                                 "not a stated end of the discharge time"),
                   "operator_basis": ("the notice places the spill in Pueblo; the City of Pueblo's own follow-up (its "
-                                     "news page, not readable on 2026-11-14) is the operator's account the research "
+                                     "news item of 2026-09-14) is the operator's account the research "
                                      "found; permit CO0026646 is the city's plant permit"),
                   "county": "Pueblo",
                   "placement_hint": {"name": "Arkansas River", "county": "Pueblo", "state": "CO",
                                      "basis": "the notice: the sewage entered the Arkansas River in Pueblo"},
                   "volume_basis": "the figure the notice gives; how it was estimated is not stated"}},
          {"source_record_id": "john-martin-water-contact-advisory-2026-08-31", "event_type": "sso",
-          "status": "advisory_active", "parent_event_id": f"{SOURCE_ID}:pueblo-arkansas-river-2026-08-26",
+          "status": "advisory_active",
           "discharger_id": "co-co0026646", "discharger_name": "City of Pueblo", "npdes_permit": "CO0026646",
           "waterbody_text": "John Martin Reservoir", "started_at": "2026-08-31", "time_precision": "day",
           "authority": CPW,
@@ -96,6 +98,9 @@ NOTICES = [
                      "CDPHE will collect water-quality samples at the park, and CPW will update the advisory as "
                      "sampling results become available."],
           "raw": {"time_zone": TZ, "advisory_extent": "named_water", "_ages_after_confirmation": True,
+                  # related, not a revision: a parent_event_id made the status build take the advisory for a
+                  # revision of the spill, so the spill coloured nothing (go-live audit 2026-11-16 P2)
+                  "related_event_id": f"{SOURCE_ID}:pueblo-arkansas-river-2026-08-26",
                   "also_named": "the Arkansas River at John Martin Reservoir State Park",
                   "start_basis": "the notice: the advisory begins Monday, August 31, 2026",
                   "end_basis": ("no end given: CPW said it would update the advisory as sampling results became "

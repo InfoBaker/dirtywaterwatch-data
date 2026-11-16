@@ -26,12 +26,16 @@ Rows
   - MMSD's overflows page (each year's overflows with their volumes and the post-storm reports): watched, not read.
   - Statewide: the DNR's Switchboard reports (login), its SSO reporting page, the SERTS open-spill list and the BRRTS
     search, Wisconsin Beach Health (the map layer, read by the wi-dnr-beach-health feed, and the report page), the DHS
-    algae page, the City of Milwaukee Health Department's beach report, EPA's overflow tables (no Wisconsin report),
-    Brookfield's press releases, Swim Guide.
+    algae page, the DNR's blue-green algae page, the City of Milwaukee Health Department's beach report, Public Health
+    Madison and Dane County's beach page, Kenosha County's and Sheboygan County's beach pages, EPA's overflow tables (no
+    Wisconsin report), Brookfield's press release and the City of Madison's and the Village of Allouez's overflow
+    notices (independent research, read by GitHub's runner 2026-11-16), Swim Guide.
   The Wisconsin state hosts (apps.dnr.wi.gov, dnrmaps.wi.gov, docs.legis.wisconsin.gov) and the City of Superior's site
   answer GitHub's runner, where the pipeline runs (runs 43788047052, 43788371768, 43788396939 and 43789054085,
   2026-11-16); the developer's machine could not open a connection to them, which is not a barrier of the source. The
-  City of Milwaukee's beach pages answered the runner 403 (a browser challenge): that is the source's barrier.
+  City of Milwaukee's beach pages, Kenosha County's and Sheboygan County's answered the runner 403 (a browser
+  challenge or bot check): that is the source's barrier. Fox Crossing's, Greenville's and Oconomowoc's notice addresses
+  answered the runner 404 on 2026-11-16 (GONE_404).
   Every monitored Wisconsin row is metadata_only (notification_pages): no response body is saved and the snapshot keeps
   only the text's hash, so a page carrying a name, telephone or address is never stored.
 A rerun replaces every wi- row it makes. Validated before writing.
@@ -76,15 +80,17 @@ Q_122_38 = ('40 CFR 122.38(a): "As soon as possible, but no later than four (4) 
 Q_TRIBAL = ("NPDES permit {permit} (EPA Region 5, tribal land): the 24-hour and five-day noncompliance reports of 40 CFR "
             "122.41(l)(6), to EPA")
 MMSD, SUPERIOR = "wi-mmsd", "wi-superior-sewage-disposal-system"
+# operators whose one web notice found by search answered 404 to GitHub's runner on 2026-11-16 (audit of that day)
+GONE_404 = {"wi-fox-crossing-sso", "wi-greenville-sso", "wi-oconomowoc-sso"}
 
 AGENCY = [
     {"id": "wi-mmsd-storm-updates", "operator_id": MMSD, "name": "Milwaukee Metropolitan Sewerage District",
      "permit": "WI0036820", "channel_kind": "feed", "urls": ["https://www.mmsd.com/about-us/news"], "method": "html",
      "legal_basis": None, "basis_kind": "voluntary", "monitored": False, "unmonitored_reason": "feed_ingested",
-     "feed_source_id": FEED, "publishes": "notices", "noun": "Data feed",
+     "feed_source_id": FEED, "publishes": "notices", "noun": "Data feed", "checked": RUNNER_READ,
      "note": ("MMSD's Storm Update posts: what MMSD reported to the DNR after each overflow of its regional system, with "
               "the dates, the volume and the letter, and its spill and release notices; 21 posts from 2018-06-22 to 2026-09-08 among 281 news posts "
-              "(2026-11-14), posted one to six days after the overflow began where the post dates it (11 posts; the other 10 give "
+              "(2026-11-14 and 2026-11-16), posted one to six days after the overflow began where the post dates it (11 posts; the other 10 give "
               "only the storm's dates; the September 3, 2026 overflow on September 8). Read by the wi-mmsd-storm-updates feed. (research/wi/report.md §2.3)"),
      "sources": [FEED]},
     {"id": "wi-mmsd-rain-facility-page", "operator_id": MMSD, "name": "Milwaukee Metropolitan Sewerage District",
@@ -92,7 +98,7 @@ AGENCY = [
      "urls": ["https://www.mmsd.com/about-us/milwaukee-rain-facility-information"], "method": "html",
      "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
      "publishes": "status", "records": False, "availability_only": True, "every_hours": 24,
-     "noun": "Voluntary page",
+     "noun": "Voluntary page", "checked": RUNNER_READ,
      "note": ("MMSD's rain and facility page: rain gauges, the deep tunnels' storage, the plants' flows and the "
               "year-to-date \"Gallons Overflowed\" counter (2,810,937,528 gallons in 2026 on 2026-11-14). MMSD says its "
               "figures can be corrected, so a rise is never read as an overflow; watched for availability only."),
@@ -102,7 +108,7 @@ AGENCY = [
      "urls": ["https://www.mmsd.com/about-us/milwaukee-rain-facility-information/cso-impacted-waters"],
      "method": "html", "legal_basis": Q_122_38, "basis_kind": "law", "monitored": True, "unmonitored_reason": None,
      "publishes": "link_only", "link_text": "the City Beaches Water Report and MMSD's CSO public notification plan",
-     "records": False, "availability_only": True, "every_hours": 24,
+     "records": False, "availability_only": True, "every_hours": 24, "checked": RUNNER_READ,
      "note": ("The waters a combined sewer overflow may affect, as MMSD lists them: the Milwaukee River (Kiwanis "
               "Landing and Riverfront launches, Riverside parks, marinas), the Menomonee River (Emmber Lane and Valley "
               "Passage launches), Lake Michigan (McKinley and South Shore launches) and the nearshore harbor; it links "
@@ -126,7 +132,7 @@ AGENCY = [
      "permit": "WI0036820", "channel_kind": "operator_page",
      "urls": ["https://www.mmsd.com/application/files/1116/4553/8883/MMSD_CSO_Public_Notification_Plan_web.pdf"],
      "method": "pdf", "legal_basis": Q_122_38, "basis_kind": "law", "monitored": False,
-     "unmonitored_reason": "image_only", "publishes": "documents", "records": False,
+     "unmonitored_reason": "image_only", "publishes": "documents", "records": False, "checked": RUNNER_READ,
      "note": ("MMSD's CSO Public Notification Plan of July 16, 2018, written for 40 CFR 122.38: its text layer covers "
               "the introduction (115 combined sewer outfalls on seven waterways); the sections on how the public is "
               "told are scanned images and were not read. (research/wi/report.md §2.1)"),
@@ -175,7 +181,7 @@ AGENCY = [
      "note": ("Every sanitary sewer and treatment facility overflow, public or private system, is reported to the DNR "
               "within 24 hours and on form 3400-184 (date, location, duration, volume, receiving water, coordinates "
               "and how the public was told) within five business days, through Switchboard, which only permittees "
-              "can open. The DNR publishes none of it, and EPA's tables held no Wisconsin report on 2026-11-12. (research/wi/report.md §1)"),
+              "can open. The DNR publishes none of it, and EPA's tables held no Wisconsin report in their files of 2026-11-13. (research/wi/report.md §1)"),
      "sources": ["wi-wdnr-sso-report-page", "wi-wdnr-sso-form-instructions"]},
     {"id": "wi-dnr-sso-report-page", "agency": "Wisconsin Department of Natural Resources",
      "name": "Wisconsin Department of Natural Resources (sanitary sewer overflow reporting page)",
@@ -243,6 +249,45 @@ AGENCY = [
      "note": ("The DHS algae program's pages: health information and illness reporting; no statewide bloom advisory "
               "list. Blooms at beaches appear in the DNR's beach report."),
      "sources": ["wi-hab-program"]},
+    {"id": "wi-madison-dane-health-beaches", "agency": "Public Health Madison and Dane County",
+     "name": "Public Health Madison and Dane County (beach conditions)", "channel_kind": "local_health_page",
+     "urls": ["https://publichealthmdc.com/home-environment/beaches"], "method": "html", "legal_basis": None, "basis_kind": "voluntary",
+     "monitored": True, "unmonitored_reason": None, "publishes": "status", "records": False,
+     "availability_only": True, "every_hours": 24, "noun": "Voluntary page", "checked": RUNNER_READ,
+     "note": ("Public Health Madison and Dane County's beach page: the status of 27 Dane County beach and access sites, "
+              "with the reason for a closure (bacteria, blue-green algae), all closed for the season when independent "
+              "research read it in November 2026. It answered GitHub's runner on 2026-11-16. Watched for availability; "
+              "not read for records yet. The Dane County beaches the Department lists are shown through the "
+              "wi-dnr-beach-health feed."),
+     "sources": ["wi-madison-dane-health-beaches"]},
+    {"id": "wi-kenosha-county-beach-conditions", "agency": "Kenosha County",
+     "name": "Kenosha County (beach conditions)", "channel_kind": "local_health_page",
+     "urls": ["https://www.kenoshacountywi.gov/348/Beach-Conditions"], "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
+     "unmonitored_reason": "bot_wall", "publishes": "status", "records": False, "noun": "Voluntary page",
+     "checked": RUNNER_READ,
+     "note": ("Kenosha County's beach conditions table (beach, result, condition, sampling date). It answered GitHub's "
+              "runner, where the pipeline runs, with HTTP 403 on 2026-11-16 (a bot check), which we do not get around: "
+              "not read. Kenosha's beaches are in the DNR's beach system when the Department lists them."),
+     "sources": ["wi-kenosha-county-beach-conditions"]},
+    {"id": "wi-sheboygan-county-water-quality", "agency": "Sheboygan County",
+     "name": "Sheboygan County (public health water quality page)", "channel_kind": "local_health_page",
+     "urls": ["https://www.sheboygancounty.com/departments/departments-f-q/health-and-human-services/public-health/environmental-health/water-quality-drinking-water"], "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": False,
+     "unmonitored_reason": "bot_wall", "publishes": "unknown", "records": False, "noun": "Voluntary page",
+     "checked": RUNNER_READ,
+     "note": ("Sheboygan County's water quality page. It answered GitHub's runner, where the pipeline runs, with HTTP "
+              "403 on 2026-11-16 (a bot check), which we do not get around: not read. Sheboygan's beaches are in the "
+              "DNR's beach system when the Department lists them."),
+     "sources": ["wi-sheboygan-county-water-quality"]},
+    {"id": "wi-dnr-bluegreenalgae", "agency": "Wisconsin Department of Natural Resources",
+     "name": "Wisconsin Department of Natural Resources (blue-green algae)", "channel_kind": "state_alert_page",
+     "urls": ["https://dnr.wisconsin.gov/topic/lakes/bluegreenalgae"], "method": "html", "legal_basis": None, "basis_kind": "voluntary", "monitored": True,
+     "unmonitored_reason": None, "publishes": "none", "records": False, "availability_only": True,
+     "every_hours": 168, "noun": "Voluntary page", "checked": RUNNER_READ,
+     "note": ("The DNR's blue-green algae page: guidance, a form to report a bloom and referrals to beach and local "
+              "health pages; it says there is no routine statewide algae or toxin monitoring, and it holds no list of "
+              "current blooms. It answered GitHub's runner on 2026-11-16. Blooms at beaches appear in the DNR's beach "
+              "report."),
+     "sources": ["wi-hab-program"]},
     {"id": "wi-milwaukee-health-beaches", "agency": "City of Milwaukee Health Department",
      "name": "City of Milwaukee Health Department (beach water report)", "channel_kind": "local_health_page",
      "urls": ["https://city.milwaukee.gov/Health/Services-and-Programs/disease-Control-and-Environment/recreational-Water/Beaches",
@@ -263,7 +308,8 @@ AGENCY = [
      "note": ("The DNR's minimum for an overflow that reaches surface water is a notice to a daily newspaper; whether "
               "a paper puts it on the web varies by town and paper (town pages not surveyed). Some operators post notices on their own sites "
               "(Brookfield, Hortonville, Fox Crossing, Menomonie, Stoughton, Oconomowoc, Fennimore, Greenville were "
-              "found by search); there is no list of them."),
+              "found by search, Madison and Allouez by independent research in November 2026); there is no list of "
+              "them."),
      "sources": [LAW, "wi-municipal-sso-notices"]},
     {"id": "wi-brookfield-sso-notices", "operator_id": "wi-city-of-brookfield", "name": "City of Brookfield",
      "permit": None, "channel_kind": "operator_page",
@@ -274,12 +320,29 @@ AGENCY = [
               "by Underwood Creek, the Menomonee River, with the quantities) in the city's document center; no list "
               "page of such releases was found (channel not researched beyond that release)."),
      "sources": ["wi-brookfield-sso-notices"]},
+    {"id": "wi-madison-sso-web-notice", "agency": "City of Madison", "name": "City of Madison",
+     "channel_kind": "operator_page", "urls": ["https://www.cityofmadison.com/news/2026-09-11/roots-cause-sanitary-sewer-overflow-city-teamwork-leads-to-fast-cleanup"], "method": "html", "legal_basis": Q_NR210,
+     "basis_kind": "law", "monitored": False, "unmonitored_reason": "other", "publishes": "notices",
+     "records": False, "checked": RUNNER_READ,
+     "note": ("The City of Madison's news item of September 11, 2026 on a sanitary sewer overflow of about 500 gallons "
+              "on September 10 (a root blockage; it entered a storm sewer). It answered GitHub's runner on 2026-11-16. "
+              "The address is that one notice; no list page of the City's overflow notices was found (channel not "
+              "researched beyond it)."),
+     "sources": ["wi-municipal-sso-notices"]},
+    {"id": "wi-allouez-sso-web-notice", "agency": "Village of Allouez", "name": "Village of Allouez",
+     "channel_kind": "operator_page", "urls": ["https://www.villageofallouezwi.gov/announcements/notice-of-sanitary-sewer-overflow/"], "method": "html", "legal_basis": Q_NR210,
+     "basis_kind": "law", "monitored": False, "unmonitored_reason": "other", "publishes": "notices",
+     "records": False, "checked": RUNNER_READ,
+     "note": ("The Village of Allouez's notice of April 21, 2026 on a sanitary sewer overflow of April 14 to 16 near the "
+              "East River (no volume given). It answered GitHub's runner on 2026-11-16. The address is that one notice; "
+              "no list page of the Village's overflow notices was found (channel not researched beyond it)."),
+     "sources": ["wi-municipal-sso-notices"]},
     {"id": "wi-epa-echo-overflow-events", "agency": "U.S. Environmental Protection Agency (ECHO)",
      "name": "U.S. Environmental Protection Agency (ECHO)", "channel_kind": "feed", "urls": [ECHO], "method": "html",
      "legal_basis": None, "basis_kind": "voluntary", "monitored": True, "unmonitored_reason": None,
      "publishes": "none", "records": False, "availability_only": True, "every_hours": 168, "noun": "Data feed",
      "note": ("EPA's sewer overflow and bypass tables hold no Wisconsin report: none in the current extract of "
-              "2026-11-12 (5,751 events) nor in the all-versions extract (6,710 events); the collection-system table "
+              "2026-11-13 (5,751 events) nor in the all-versions extract (6,714 events); the collection-system table "
               "lists 14 Wisconsin permits, all EPA's on tribal land (one payload of 2025-03-04). The DNR keeps its "
               "reports in its own system. Watched for Wisconsin rows."),
      "sources": ["wi-epa-sobe"]},
@@ -313,7 +376,7 @@ def operator_rows(dis: list[dict], research: dict[str, dict]) -> list[dict]:
                 sources=["wi-epa-sobe"],
                 note=(f"No web channel found: {name}'s permit is EPA's on tribal land, so its overflow reports go to EPA "
                       "Region 5, which publishes those filed electronically in its overflow tables (none for "
-                      "Wisconsin in the extract of 2026-11-12). Wisconsin's rule does not apply on tribal land."))))
+                      "Wisconsin in the extract of 2026-11-13). Wisconsin's rule does not apply on tribal land."))))
             continue
         private = (" The rule binds the system's owner, public or private."
                    if op.get("legal_form") not in (None, "city", "town", "county", "authority", "special district",
@@ -336,7 +399,9 @@ def operator_rows(dis: list[dict], research: dict[str, dict]) -> list[dict]:
                 sources=["wi-municipal-sso-notices"],
                 note=(f"{name} posted an overflow notice on its own site citing NR 210.21(5) (found by search, "
                       "2026-11-03); the address is that one notice, and no list page of its notices was found (the "
-                      "channel not researched beyond it)."))))
+                      "channel not researched beyond it)."
+                      + (" The address answered 404 to GitHub's runner on 2026-11-16." if oid in GONE_404 else "")),
+                checked=RUNNER_READ if oid in GONE_404 else CHECKED)))
     return rows
 
 

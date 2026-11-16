@@ -6,11 +6,13 @@ kind: "csv"
 level: "federal"
 # Notes (research/pr, status used, verified fetched, checked 2026-11-14): Read by the national
 #   overflow module (ingest/echo_sewer_overflow_events.py, Puerto Rico permits added 2026-11-14):
-#   940 current reports from 45 permits in the 2026-11-12 extract (SSO 863, bypass 77, none typed
+#   940 current reports from 45 permits in the 2026-11-13 extract (SSO 863, bypass 77, none typed
 #   CSO; 2025-04-03 to 2026-11-10), every one with a point; 252 read as reaching a water (35
 #   permits), 688 dropped (SSOs naming no water with only odour, aesthetic, land or no observable
 #   impacts); received a median 2 days after the start (90th percentile 14). Times in Atlantic
-#   Standard Time.
+#   Standard Time. A report is placed only on the water it names, or at its own point when it names
+#   none and that point lies on a mapped water; never on its permit's plant river (go-live audit
+#   2026-11-16): 96 of the 252 placed, 156 listed with their place.
 # Access detail (research, quoted): Daily ZIP from ECHO; join
 #   sewer_overflow_bypass_report_events.csv to _types.csv and _receiving_waters.csv on
 #   sewer_overflow_bypass_event_key. Filter permit_identifier LIKE 'PR%'. Extracted 2026-11-04 from
