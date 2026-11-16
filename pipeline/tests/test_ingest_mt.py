@@ -393,3 +393,43 @@ def test_verify_the_state_text_and_source_note_say_what_the_code_does():
     later, _ = M.build({"features": [row("S-1", "Example Lake", "7/9/2026", None),
                                      row("S-2", "Example Pond", "7/9/2026", None)]}, "2026-11-20T23:00:00Z", first)
     assert {r["source_record_id"]: r for r in later}["s-1"]["raw"]["_last_seen_in_source"] == T0
+
+
+# ---------------------------------------------------------------- go-live audit 2026-11-16, fix 1 (DEQ's real note forms)
+
+@pytest.mark.parametrize("issued,lifted,start,end", [
+    ("2023/07/06", "2023/07/17", "2023-07-06", "2023-07-17"),
+    ("2023-07-05", "2023/07/20 no new info", "2023-07-05", "2023-07-20"),
+    ("09-06-2023", "09-21-2023 no new info", "2023-09-06", "2023-09-21"),
+    ("07/27/2023", "2023/08/17 no new observations", "2023-07-27", "2023-08-17"),
+    ("2023/08/09; 2023/07/13", "2023/08/31 no  new info", "2023-07-13", "2023-08-31"),
+    ("2023/06/29 based on photos", "2023/07/14 based on toxin testing and algae id", "2023-06-29", "2023-07-14"),
+])
+def test_audit_deqs_2023_year_first_dates_are_read(issued, lifted, start, end):
+    doc = {"features": [row("Y-1", "Example Lake", issued, lifted, obs=ms(2023, 7, 1))]}
+    for d in (doc, M.safe_rows(doc)):                   # the record, and the raw save rebuilt
+        recs, meta = M.build(d, T0)
+        assert meta["no_issue_date"] == 0 and len(recs) == 1
+        assert (recs[0]["started_at"], recs[0]["ended_at"]) == (start, end)
+
+
+@pytest.mark.parametrize("issued,lifted,end", [
+    ("7/20/2026", "9/14 based on test results", "2026-09-14"),                         # Hebgen Lake, 2026
+    ("8/19/2025", "9/3 two weeks from bloom (county reported bloom had dissipated 8/25)", "2025-09-03"),  # Upper Thompson
+    ("8/12/2024", "8/20 visual report that bloom has dissipated", "2024-08-20"),        # Hebgen Lake, 2024
+    ("7/9/2026", "sampled 7/28 then lifted 8/3", "2026-08-03"),                         # the earlier round's cases
+    ("7/9/2026", "lift planned for 8/3", None),
+    ("7/9/2026", "7/28/2026 sampled", None),                                            # a sampling date, never the lift
+    ("7/9/2026", "7/28 sample results below threshold", None),
+    ("7/9/2026", "8/10/2026 test results pending", None),
+])
+def test_audit_a_date_that_opens_deqs_lift_note_is_the_lift(issued, lifted, end):
+    y = int(issued[-4:])
+    doc = {"features": [row("Z-1", "Example Lake", issued, lifted, obs=ms(y, 7, 1))]}
+    assert M.build(doc, T0)[0][0]["ended_at"] == end
+    assert M.build(M.safe_rows(doc), T0)[0][0]["ended_at"] == end
+
+
+@pytest.mark.parametrize("text", ["20203/07/17", "2023/13/07", "2023/02/30", "13-06-2023"])
+def test_audit_a_malformed_or_impossible_date_is_never_guessed(text):
+    assert M.dates_in(text, 2023) == [] and M.lift_dates(text, 2023) == []

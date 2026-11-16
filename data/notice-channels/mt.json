@@ -1715,7 +1715,7 @@
    "records": false,
    "availability_only": true,
    "every_hours": 168,
-   "note": "The form operators file (April 2020); its fields are the export a records request would ask for. On 2026-11-14 the host did not resolve for the build's client (DNS timed out); the row is watched so the refresh records when it answers.",
+   "note": "The form operators file (April 2020); its fields are the export a records request would ask for. Answered on 2026-11-15 (this build and GitHub's runner).",
    "sources": [
     "mt-deq-sso-form"
    ],
@@ -1766,7 +1766,7 @@
    "publishes": "notices",
    "records": false,
    "every_hours": 168,
-   "note": "DEQ's notice of July 21, 2023 (expansion research, 2026-11-09): more than three million gallons of partially treated wastewater to Warm Springs Creek during construction at the Montana State Hospital, DEQ notified June 23. Not ingested: the page could not be read in this build. On 2026-11-14 the host did not resolve for the build's client (DNS timed out); the row is watched so the refresh records when it answers.",
+   "note": "DEQ's notice of July 21, 2023 (expansion research, 2026-11-09): more than three million gallons of partially treated wastewater to Warm Springs Creek during construction at the Montana State Hospital, DEQ notified June 23. Not ingested: it gives no start or end of the release. Answered on 2026-11-15 (this build and GitHub's runner).",
    "sources": [
     "mt-news-spills",
     "mt-deq-warm-springs-2023"
@@ -1795,7 +1795,7 @@
    "records": false,
    "availability_only": true,
    "every_hours": 168,
-   "note": "DPHHS's HAB program page (HAB.mt.gov redirects there), which links the map. On 2026-11-14 the host did not resolve for the build's client (DNS timed out); the row is watched so the refresh records when it answers.",
+   "note": "DPHHS's HAB program page (HAB.mt.gov redirects there), which links the map. Answered on 2026-11-15 (this build and GitHub's runner).",
    "sources": [
     "mt-hab-map"
    ],
