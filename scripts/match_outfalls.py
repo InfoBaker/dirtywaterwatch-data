@@ -25,6 +25,13 @@ basis and is what the match uses. NOTES keeps a conflict that is not an override
 `--append` replaces the rows of the selected states in an existing <out json> and keeps the others
 (how DC was added to data/outfalls-mid-atlantic.json without rerunning NJ, NY, PA, MD and VA).
 
+DWW_PERMITS (comma-separated permits, with --append; 2026-11-16): only those permits' rows of the selected states are
+rewritten from EPA's file and every other row of <out json> is kept as it is, ties included, so a refetched inventory
+reaches the permits it changed without dropping the water ties of the rest. A row of those permits that EPA's file no
+longer lists is kept (a registry row is never deleted) and marked not_in_inventory with the file's date. The file's
+own date (the ZIP's member date when ALL_CSO_downloads.zip sits beside the CSV, else DWW_CSO_FILE_DATE) is written on
+each row this run writes (inventory_file) and in the `appended` entry.
+
 After this script, run `cd pipeline && python -m ingest.outfall_waters` (2026-11-03): it gives the outfalls this
 script leaves without a water the record of their receiving water (NHD, OSM, hand records), redoes the name-only
 matches here that name another water (words() drops kind words, so 'Onondaga Creek' matched Onondaga Lake), and adds
@@ -106,6 +113,10 @@ REGIONAL_STATES = {str(r.get("state") or r["npdes_permit"][:2]).upper()
                    for n in ("outfalls-new-england.json", "outfalls-mid-atlantic.json")
                    for r in json.load(open(os.path.join(ROOT, "data", n)))["outfalls"]}
 NE = set((os.environ.get("DWW_STATES") or "MA,CT,RI,NH,VT,ME").split(","))
+# DWW_PERMITS: rewrite only these permits' rows (with --append); the rest of the file is kept as it is
+PERMITS = {x.strip().upper() for x in (os.environ.get("DWW_PERMITS") or "").split(",") if x.strip()}
+if PERMITS and ("--append" not in ARGS or PLANTS):
+    sys.exit("DWW_PERMITS needs --append (and is not for --plants): it rewrites some permits' rows of an existing file")
 if PLANTS:
     NE = set(os.environ["DWW_STATES"].split(",")) if os.environ.get("DWW_STATES") else set(LIVE_STATES)
 STOP = {"river", "lake", "pond", "brook", "bay", "harbor", "harbour", "cove", "creek", "stream",
@@ -264,6 +275,30 @@ if PLANTS:
 else:
     with open(csv_path, newline="", encoding="utf-8-sig") as fh:
         csv_rows = list(csv.DictReader(fh))
+    if PERMITS:
+        csv_rows = [r for r in csv_rows if r["NPDES_ID"].strip().upper() in PERMITS]
+
+
+def inventory_file_date(path) -> str | None:
+    """The inventory file's own date: the CSV's member date in ALL_CSO_downloads.zip beside it, else
+    DWW_CSO_FILE_DATE (YYYY-MM-DD), else None (nothing is written then: a date is never guessed)."""
+    z = os.path.join(os.path.dirname(os.path.abspath(path)), "ALL_CSO_downloads.zip")
+    if os.path.exists(z):
+        try:
+            with zipfile.ZipFile(z) as zf:
+                for i in zf.infolist():
+                    if i.filename.upper() == os.path.basename(path).upper():
+                        y, m, d = i.date_time[:3]
+                        return f"{y:04d}-{m:02d}-{d:02d}"
+        except zipfile.BadZipFile:
+            pass
+    v = os.environ.get("DWW_CSO_FILE_DATE") or ""
+    return v if re.fullmatch(r"\d{4}-\d{2}-\d{2}", v) else None
+
+
+INVENTORY_DATE = None if PLANTS else inventory_file_date(csv_path)
+INVENTORY_TEXT = (f"EPA ECHO national CSO inventory, ALL_CSO_DOWNLOADS.csv dated {INVENTORY_DATE} "
+                  "(https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip)") if INVENTORY_DATE else None
 
 if PLANTS:
     STATE_SHAPES, STATE_PREP = {}, {}      # the file's own build screened the points against the state outlines
@@ -375,6 +410,8 @@ for r, n_src in sel:
         "water_slug": None, "water_name": None, "water_kind": None, "distance_m": None,
         "alternatives": [], "match": "none",
     }
+    if INVENTORY_TEXT:
+        row["inventory_file"] = INVENTORY_TEXT
     if NATIONAL:
         row.update(outfall_kind="cso", country="US", coords_from=coords_from,
                    receiving_water_source="state" if r["PF_STATE_WATERBODY_NAME"] else
@@ -592,26 +629,58 @@ if NATIONAL:
             "matched by name only")
 if "--append" in ARGS and os.path.exists(out_path):
     prev = json.load(open(out_path))
-    rows = [r for r in prev["outfalls"] if r["state"] not in NE] + rows
+
+    def rewritten(r):
+        return r["state"] in NE and (not PERMITS or str(r["npdes_permit"]).upper() in PERMITS)
+    if PERMITS:
+        # a row of these permits that EPA's file no longer lists is kept, marked (never deleted); its place in the file
+        # is kept too, and the new rows of a permit go where its old rows were (else at the end)
+        have = {(r["npdes_permit"], r["outfall"]) for r in rows}
+        for r in prev["outfalls"]:
+            if rewritten(r) and (r["npdes_permit"], r["outfall"]) not in have:
+                r["not_in_inventory"] = (f"EPA's inventory file dated {INVENTORY_DATE or 'unknown'} no longer lists this "
+                                         "outfall; the row is kept as the earlier file gave it")
+                rows.append(r)
+                STATS["kept, no longer in EPA's file"] += 1
+        merged, placed = [], set()
+        by_permit = defaultdict(list)
+        for r in rows:
+            by_permit[r["npdes_permit"]].append(r)
+        for r in prev["outfalls"]:
+            if not rewritten(r):
+                merged.append(r)
+            elif r["npdes_permit"] not in placed:
+                placed.add(r["npdes_permit"])
+                merged += by_permit[r["npdes_permit"]]
+        merged += [r for p, rs in by_permit.items() if p not in placed for r in rs]
+        rows = merged
+    else:
+        rows = [r for r in prev["outfalls"] if not rewritten(r)] + rows
     if NATIONAL:
         rows.sort(key=lambda r: (r["state"], r["npdes_permit"], r["outfall"]))
     out = {**prev, "count": len(rows), "outfalls": rows}
-    out.setdefault("appended", []).append({"states": sorted(NE), "from": "ALL_CSO_DOWNLOADS.csv (federal research copy)",
-                                           "waters": "data/waters-dc.json" if "DC" in NE else "openboatlaunch out/water"})
+    entry = {"states": sorted(NE), "from": "ALL_CSO_DOWNLOADS.csv (federal research copy)",
+             "waters": "data/waters-dc.json" if "DC" in NE else "openboatlaunch out/water"}
+    if PERMITS:
+        entry["permits"] = sorted(PERMITS)
+    if INVENTORY_TEXT:
+        entry["from"] = INVENTORY_TEXT
+    out.setdefault("appended", []).append(entry)
 else:
     out = {"source": SOURCE, "rule": RULE, "count": len(rows), "outfalls": rows}
     if NATIONAL:
         out["states"] = sorted(NE)
         out["live_states_left_out"] = sorted(REGIONAL_STATES)
         out["waters_read"] = dict(sorted(waters_in.items()))
-if NATIONAL and os.path.basename(out_path) == "outfalls-us.json":
-    # cited corrections to EPA's rows (a sign-flipped longitude): written again on every rebuild, before the ties step
+if os.path.basename(out_path) in ("outfalls-us.json", "outfalls-mid-atlantic.json", "outfalls-new-england.json"):
+    # cited corrections to EPA's rows (a sign-flipped longitude, an authority's own list of open, closed and shared
+    # outfalls): written again on every rebuild, before the ties step
     import importlib.util
     _spec = importlib.util.spec_from_file_location(
         "outfall_point_corrections", os.path.join(os.path.dirname(os.path.abspath(__file__)), "outfall_point_corrections.py"))
     _opc = importlib.util.module_from_spec(_spec)
     _spec.loader.exec_module(_opc)
-    _opc.for_builder("outfalls-us.json", out["outfalls"])
+    _opc.for_builder(os.path.basename(out_path), out["outfalls"])
 tmp = out_path + ".tmp"
 with open(tmp, "w") as fh:
     json.dump(out, fh, indent=1)
