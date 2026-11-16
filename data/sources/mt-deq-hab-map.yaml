@@ -5,16 +5,18 @@ homepage: "https://gis.mtdeq.us/portal/apps/dashboards/10c34f5c7da24c4188b9ddc22
 kind: "arcgis"
 level: "state"
 # Ingester: pipeline/ingest/mt_deq_hab_map.py (source id mt-deq-hab-map): one query of the safe fields every run.
-# Read 2026-11-14: 445 rows (2019 to 2026; 77 in 2026), none at Caution or Closure at the read. 278 advisories: 255 with
-#   DEQ's lift date, 23 with no lift date (aged by the site's 14-day rule), none current; 2020: 32, 2021: 29, 2022: 41,
-#   2023: 19, 2024: 41, 2025: 58, 2026: 58
-#   (two rows hold a reissue after a lift: a second record each). Not records: 126 rows with no issued date (public reports DEQ did not turn
-#   into an advisory), 5 whose note says no advisory was issued, 38 DEQ marked Green Algae/Other. 6 rows at waters the
+# Read 2026-11-15: 445 rows (2019 to 2026; 77 in 2026), none at Caution or Closure at the read. 314 advisories: 294 with
+#   DEQ's lift date, 20 with no lift date (aged by the site's 14-day rule), none current; 2020: 32, 2021: 29, 2022: 41,
+#   2023: 55, 2024: 41, 2025: 58, 2026: 58
+#   (two rows hold a reissue after a lift: a second record each). Not records: 90 rows with no issued date (public reports DEQ did not turn
+#   into an advisory), 5 whose note says no advisory was issued, 38 DEQ marked Green Algae/Other. 8 rows at waters the
 #   report calls not publicly accessible keep their county only.
 # Times: DEQ's advisory_issued and advisory_lifted fields are free text holding dates ("7/21: based on photos", "8/3/2026
 #   no new info"); the earliest date of the issue note is the issue date, and the lift date is the date the lift note
-#   gives for the lift itself (a sampling or test date is not the lift; a pending, planned or conditional lift is none),
-#   day precision, Mountain time; a date with no year takes the year of the observation. Most lifts come 14 days after
+#   gives for the lift itself (a date that opens the lift note is the lift; a sampling or test date is not the lift; a
+#   pending, planned or conditional lift is none), day precision, Mountain time; a date with no year takes the year of
+#   the observation. DEQ wrote its 2023 dates year first (2023/07/06, 2023-07-05) and once month-day-year with dashes
+#   (09-06-2023); all are read, and a malformed one (20203/07/17) is left unread, never guessed. Most lifts come 14 days after
 #   the issue with "no new info". With no lift date: confirmed at each read while the map shows Caution or Closure, then
 #   aged by the 14-day rule from the last read that showed it (from the issue date if none did).
 # Privacy: the reporter's description, photo link and illness answers are never requested; the advisory notes can name
@@ -33,4 +35,4 @@ access: ["arcgis"]
 access_detail: "ArcGIS FeatureServer layer 0, outFields globalid,name,county,agency,sample_date,advisory_lvl,advisory_issued,advisory_lifted,date_observed,microcystin,anatoxin,public_accessible; outSR 4326, geometryPrecision 3."
 machine_readable: true
 legal_basis: null
-checked: "2026-11-14"
+checked: "2026-11-15"
