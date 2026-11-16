@@ -1126,7 +1126,7 @@ def public_rain(block: dict) -> dict:
     out["thresholds_built"] = (block.get("thresholds") or {}).get("built")
     # the operator levels (build/rain_history.py): the label by level and the levels file's header, when loaded; the
     # permits' and episodes' level, evidence and history rows pass through with them
-    out.update({k: block[k] for k in ("label_by_level", "levels") if block.get(k) is not None})
+    out.update({k: block[k] for k in ("label_by_level", "levels", "separate_sewers") if block.get(k) is not None})
     out["rules_ref"] = "rain_likely"
     return out
 
@@ -1695,6 +1695,10 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         write_compact(OUT_DIR / "rain-levels.json", publicize(rain_levels))
     else:
         (OUT_DIR / "rain-levels.json").unlink(missing_ok=True)
+    # the separate sewer rain caution's file (build/rain_sso.py), only with its switch on
+    from build import rain_sso
+    if rain_sso.enabled(status_mod.load_rules()) and (sso_levels := rain_sso.load_levels()) is not None:
+        write_compact(OUT_DIR / "rain-levels-sso.json", publicize(sso_levels))
     write_compact(OUT_DIR / "events.json", {"built": now_iso(), "fixtures_included": include_fixtures,
                                             "count": len(out_events), "events": out_events})
 
@@ -1901,6 +1905,9 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                                    - {""}) for sid, h in health.items()})
     cov["states"] = {k: v for k, v in (cov.get("states") or {}).items() if k in status_mod.states()}   # live only
     write_compact(OUT_DIR / "coverage.json", {"built": now_iso(), "status_now": st.get("now"), **cov})
+    if rain_sso.enabled(status_mod.load_rules()):
+        # each state's grade for the separate sewer caution's timeliness rule (build/rain_sso.py), pipeline state only
+        write_compact(rain_sso.GRADES_FILE, {"built": now_iso(), "states": rain_sso.grades_of(cov)})
 
     # CSV downloads of the reports per water, operator and state, and all of them (export/csv.py,
     # docs/data-downloads.md). The same public records as above; a failure is logged and the export goes on.
