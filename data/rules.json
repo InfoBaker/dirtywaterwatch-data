@@ -519,6 +519,9 @@
   }
  },
  "reach": {
+  "tidal_river": {
+   "enabled": true
+  },
   "cap_km": 40,
   "cap_rationale": "We estimate downstream stretches to tidal water, the first lake or a maximum of 40 kilometres. A ring marks where the estimate stops. Contamination can travel beyond that point.",
   "stop_at": [
