@@ -3167,6 +3167,15 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
         for iv in out:
             if iv["rule"] == "advisory_active":
                 iv["label"] = lab
+    # raw._sample_caution_label: the agency's own name for a risk level shown with the site's caution (Idaho DEQ's
+    # Health Watch and Health Alert, ingest/id_deq_cyanohab.py), in place of the generic "Elevated result in the
+    # agency's sample", which misdescribes a level set after an alert expires or from satellite imagery (Idaho go-live
+    # audit 2026-11-16 P2); keyed on the field, so no other feed changes
+    slab = (ev.get("raw") or {}).get("_sample_caution_label") if out else None
+    if isinstance(slab, str) and slab.strip():
+        for iv in out:
+            if iv["rule"] == "sample_caution":
+                iv["label"] = slab
     return earlier + out
 
 
