@@ -25,7 +25,8 @@ GRADES = {"AL": "Dated reports", "TX": "Dated reports, delayed"}
 def rules_on(**over) -> dict:
     r = copy.deepcopy({"rain_likely": RULES["rain_likely"]})
     ss = r["rain_likely"]["separate_sewers"]
-    ss.update(enabled=True, approved=["al-wet", "al-dry", "tx-wet", "al-gone", "al-stale"], **over)
+    ss.update(enabled=True, approved=["al-wet", "al-dry", "tx-wet", "al-gone", "al-stale", "al-11", "al-13",
+                                      "al-late", "al-quiet-src"], **over)
     return r
 
 
@@ -76,10 +77,36 @@ def records(until=TODAY - timedelta(days=20)) -> list[dict]:
     return out
 
 
+def last_storm_before(d: date) -> date:
+    return max(x for x in STORM_DAYS if x <= d)
+
+
+ANCHOR = max(date.fromisoformat(r["started_at"]) for r in records())   # al-adem's newest published report
+
+
+def recency_records():
+    """Operators for the 12-month rule, each with rain-driven reports from 2023 up to a last one: 11 and 13 months
+    before its source's newest published report; one on a feed that publishes 75 days late; one whose source has
+    published nothing for 13 months."""
+    al = [rec(f"e{i}", "al-11", d, water="e-creek-al") for i, d in enumerate(STORM_DAYS[::2])
+          if d <= last_storm_before(ANCHOR - timedelta(days=345))]
+    al += [rec(f"h{i}", "al-13", d, water="h-creek-al") for i, d in enumerate(STORM_DAYS[::2])
+           if d <= last_storm_before(ANCHOR - timedelta(days=400))]
+    late_end = TODAY - timedelta(days=75)
+    late = [rec(f"l{i}", "al-late", d, water="l-creek-al", source_id="al-late-feed") for i, d in enumerate(STORM_DAYS[::2])
+            if d <= last_storm_before(late_end - timedelta(days=300))]
+    late.append(rec("l-newest", "al-someone-else", late_end, water="l-creek-al", source_id="al-late-feed"))
+    quiet = [rec(f"q{i}", "al-quiet-src", d, water="q-creek-al", source_id="al-quiet-feed") for i, d in
+             enumerate(STORM_DAYS[::2]) if d <= last_storm_before(TODAY - timedelta(days=400))]
+    return al, late, quiet
+
+
 def built(rules=None, grades=GRADES, recs=None):
     recs = records() if recs is None else recs
+    al, late, quiet = recency_records()
     reader = lambda lat, lon, years, offline, budget: dict(DAILY)          # noqa: E731
-    return SS.build(offline=True, today=TODAY, now=NOW, sources=[("al-adem", recs)], rules=rules or rules_on(),
+    return SS.build(offline=True, today=TODAY, now=NOW, sources=[("al-adem", recs + al), ("al-late-feed", late),
+                                                                 ("al-quiet-feed", quiet)], rules=rules or rules_on(),
                     operator_of=lambda r: r.get("discharger_id"), placements={}, reader=reader,
                     have=lambda *a: True, grades=grades, write=False)
 
@@ -98,7 +125,9 @@ def test_rules_pin_the_assessments_test_with_the_switch_off_and_the_owners_words
     assert "2026-11-16" in ss["_enabled_rationale"] and "2026-11-16" in ss["_approved_note"]
     cfg = SS.settings(RULES)
     assert cfg["min_lift"] == 1.5 and cfg["first_day"] == "2023-01-01" and cfg["event_types"] == ["sso"]
-    assert cfg["recent_days"] == 365 and cfg["recent_min_followed"] == 1 and cfg["max_report_age_days"] == 90
+    assert cfg["recency_months"] == 12 and "recent_days" not in cfg and "max_report_age_days" not in cfg
+    assert "no overflows in a year would be a safe toggle off" in ss["_recency_months_note"]
+    assert "2026-11-16" in ss["_recency_months_note"] and ss["recency_months_rationale"]
     assert cfg["history_points"] == 1
     st = [op[:2] for op in ss["approved"]]
     assert len(ss["approved"]) == 28 and st.count("al") == 23 and st.count("ct") == 4 and st.count("fl") == 1
@@ -106,7 +135,8 @@ def test_rules_pin_the_assessments_test_with_the_switch_off_and_the_owners_words
         if k not in ("enabled", "approved"):
             assert ss[k] == SS.DEFAULTS[k], k       # the code's defaults are the pinned values
     assert not SS.enabled(RULES)
-    assert "no risk" not in json.dumps(ss).lower() and "safe" not in json.dumps(ss).lower()
+    public = json.dumps({k: v for k, v in ss.items() if not k.startswith("_")}).lower()
+    assert "no risk" not in public and "safe" not in public
 
 
 def test_the_seed_file_reproduces_the_assessments_28_from_the_records():
@@ -120,8 +150,10 @@ def test_the_seed_file_reproduces_the_assessments_28_from_the_records():
     for op, e in ops.items():
         assert e["read"] and e["usable"] and e["lift"] >= 1.5, op
         assert e["qualifies"] == (not e["why_not"]), op
-    assert all(set(e["why_not"]) <= {f"newest dated report ({e['newest_report']}) older than 90 days"}
-               for e in ops.values())
+    for e in ops.values():          # the 12-month rule is the only guard that can drop one of them
+        r = e["recency"]
+        assert r["months_between"] is not None and r["source_newest"] and r["newest_rain_report"]
+        assert e["qualifies"] == (r["in"] is True), e["op"]
     assert d["counts"]["qualify"] == sum(1 for e in ops.values() if e["qualifies"])
     assert "outside_the_set" in d["counts"] and len(ops) == 28       # no operator outside the set is named
 
@@ -142,11 +174,11 @@ def test_a_rain_driven_operator_qualifies_with_its_counts(levels):
     e = levels["operators"]["al-wet"]
     assert e["qualifies"] is True and e["why_not"] == [] and e["usable"] is True
     assert e["lift"] >= 1.5 and e["followed"] >= 10 and e["storms"] >= 20
-    assert e["possible_in"] == 1.0 and e["recent"]["followed"] >= 1
+    assert e["possible_in"] == 1.0 and e["recency"]["in"] is True
     assert e["places"]["reports"] == e["reports"]        # every report followed rain
     assert {w["water_slug"] for w in e["places"]["waters"]} == {"town-creek-al", "mobile-bay-al"}
     assert e["not_used"] == {"copies": 1, "not_dated_to_the_day": 1}
-    assert levels["counts"]["qualify"] == 1 and levels["counts"]["qualify_by_state"] == {"AL": 1}
+    assert levels["counts"]["qualify"] == 4 and levels["counts"]["qualify_by_state"] == {"AL": 4}
 
 
 def test_an_operator_whose_overflows_are_dry_weather_gets_nothing(levels):
@@ -169,18 +201,39 @@ def test_with_no_grades_on_file_nothing_qualifies():
 
 def test_recency_a_repaired_system_drops_out(levels):
     e = levels["operators"]["al-gone"]
-    assert e["lift"] >= 1.5 and e["recent"]["followed"] == 0 and e["qualifies"] is False
-    assert any("last 365 days" in w for w in e["why_not"])
+    assert e["lift"] >= 1.5 and e["qualifies"] is False and e["recency"]["in"] is False
+    assert e["why_not"] == [f"no rain-driven overflow reported in the 12 months to {e['recency']['source_newest']}, "
+                            f"its source's newest report (newest rain-driven report {e['recency']['newest_rain_report']})"]
 
 
-def test_freshness_an_operator_with_no_report_for_90_days_drops_out(levels):
-    e = levels["operators"]["al-stale"]
-    assert e["qualifies"] is False and e["recent"]["followed"] >= 1
-    assert e["why_not"] == [f"newest dated report ({e['newest_report']}) older than 90 days"]
+def test_recency_a_current_feed_with_a_dry_spell_stays_in(levels):
+    e = levels["operators"]["al-stale"]           # its last rain-driven report about four months ago
+    assert e["qualifies"] is True and e["recency"]["months_between"] >= 3
+
+
+def test_recency_in_at_11_months_out_at_13(levels):
+    e11, e13 = levels["operators"]["al-11"], levels["operators"]["al-13"]
+    assert e11["recency"]["months_between"] == 11 and e11["qualifies"] is True
+    assert e13["recency"]["months_between"] == 13 and e13["qualifies"] is False
+    assert e11["recency"]["source_newest"] == e13["recency"]["source_newest"] == ANCHOR.isoformat()
+
+
+def test_recency_a_late_feeds_delay_does_not_drop_an_operator(levels):
+    e = levels["operators"]["al-late"]            # 375 days before today, 300 days before its feed's newest report
+    assert e["recency"]["source_newest"] == (TODAY - timedelta(days=75)).isoformat()
+    assert e["recency"]["source"] == "al-late-feed" and e["qualifies"] is True
+    assert levels["sources"]["al-late-feed"]["newest_published"] == (TODAY - timedelta(days=75)).isoformat()
+
+
+def test_recency_a_silent_source_drops_the_operator(levels):
+    e = levels["operators"]["al-quiet-src"]
+    assert e["qualifies"] is False and e["recency"]["silent"] is True
+    assert any("published no report in the last 12 months" in w for w in e["why_not"])
+    assert levels["sources"]["al-quiet-feed"]["silent"] is True
 
 
 def test_an_operator_outside_the_approved_set_is_never_named(levels):
-    assert "al-other-person" not in levels["operators"] and levels["counts"]["outside_the_set"] == 1
+    assert "al-other-person" not in levels["operators"] and levels["counts"]["outside_the_set"] == 2
     assert "al-other-person" not in json.dumps(levels)
 
 
@@ -252,7 +305,7 @@ def test_trace_points_ask_for_a_stretch_from_each_river_report_point():
 def test_live_points_only_with_the_switch_on(levels):
     assert SS.live_points({"rain_likely": RULES["rain_likely"]}, levels) == []
     pts = SS.live_points(rules_on(), levels)
-    assert pts and {p["permit"] for p in pts} == {"sso:al-wet"} and all(p["source"] == SS.POINT_SOURCE for p in pts)
+    assert pts and {p["permit"] for p in pts} == {"sso:al-wet", "sso:al-stale", "sso:al-11", "sso:al-late"} and all(p["source"] == SS.POINT_SOURCE for p in pts)
 
 
 # ---------------------------------------------------------------- the caution in time
@@ -293,9 +346,10 @@ def test_heavy_rain_sets_the_caution_on_the_stretch_with_its_evidence(levels):
     by_water, by_reach, blk = run(levels, storm(range(0, 6), 1.2))
     row = blk["operators"]["al-wet"]
     assert row["status"] == "likely" and row["level"] == "possible"         # no "likely" amount in this record
-    assert row["label"] == "Discharge possible: heavy rain, no report received" == RULES["rain_likely"]["history"]["label_by_level"]["possible"]
+    assert row["label"] == "Overflow possible: heavy rain, no report received" == RULES["rain_likely"]["separate_sewers"]["label_by_level"]["possible"]
     iv = by_reach["pt-1"][0]
     assert iv["rule"] == "rain_likely" and iv["color"] == "yellow" and iv["placement"] == "reach"
+    assert iv["label"] == row["label"] and iv["rain"]["label"] == row["label"]
     assert set(by_water) == {"town-creek-al", "mobile-bay-al"}               # the stretch's water and the bay reached
     assert by_water["mobile-bay-al"][0]["placement"] == "tidal"
     assert "dry-creek-al" not in by_water                                   # another operator's water: nothing
@@ -307,7 +361,7 @@ def test_heavy_rain_sets_the_caution_on_the_stretch_with_its_evidence(levels):
     assert r["peak_24h_in"] == 1.2 and r["peak_at"] and r["valid_time"] and r["until"] is None
     assert r["until_rule"].startswith("48 hours after the 24-hour total falls below")
     assert set(blk["_episodes"]) == {iv["event_id"]} and iv["event_id"].startswith("rain_likely:sso:al-wet:")
-    assert RL.short(iv).startswith("Discharge possible") and "separate sewer" in RL.short(iv)
+    assert RL.short(iv).startswith("Overflow possible: heavy rain") and "separate sewer" in RL.short(iv)
     assert "radar peak 1.20 inches in the 24 hours to " + r["peak_at"][:16].replace("T", " ") + " UTC" in RL.short(iv)
 
 
@@ -320,7 +374,7 @@ def test_the_likely_level_only_where_the_record_meets_it(levels):
     lv = copy.deepcopy(levels)
     lv["operators"]["al-wet"]["likely_in"] = 1.0
     _, by_reach, blk = run(lv, storm(range(0, 6), 1.2))
-    assert by_reach["pt-1"][0]["level"] == "likely" and blk["operators"]["al-wet"]["label"].startswith("Discharge likely")
+    assert by_reach["pt-1"][0]["level"] == "likely" and blk["operators"]["al-wet"]["label"] == "Overflow likely: heavy rain, no report received" == RULES["rain_likely"]["separate_sewers"]["label_by_level"]["likely"]
     lv["operators"]["al-wet"]["likely_in"] = 1.5
     _, by_reach, blk = run(lv, storm(range(0, 6), 1.2))       # above the possible amount, below the likely one
     assert by_reach["pt-1"][0]["level"] == "possible"
@@ -339,8 +393,8 @@ def test_a_report_from_the_operator_holds_the_caution_back(levels):
 
 def test_operators_that_fail_a_guard_get_nothing_and_say_why(levels):
     by_water, _, blk = run(levels, storm(range(0, 6), 1.2))
-    assert set(blk["operators"]) == {"al-wet"}
-    assert set(blk["not_covered"]) == {"al-dry", "tx-wet", "al-gone", "al-stale"}
+    assert set(blk["operators"]) == {"al-wet", "al-stale", "al-11", "al-late"}
+    assert set(blk["not_covered"]) == {"al-dry", "tx-wet", "al-gone", "al-13", "al-quiet-src"}
     assert all(blk["not_covered"][op]["why_not"] for op in blk["not_covered"])
     # a grade that has dropped since the daily pass: the hourly check leaves it out too
     by_water2, _, blk2 = run(levels, storm(range(0, 6), 1.2), grades={"AL": "Dated reports, delayed"})
@@ -360,8 +414,8 @@ def test_with_the_switch_off_nothing_is_computed(levels):
 def test_coverage_names_the_separate_sewer_operators_per_state(levels):
     _, _, blk = run(levels, storm(range(0, 6), 1.2))
     cov = RL.caution_coverage({"enabled": True, "permits": {}, "separate_sewers": blk})
-    assert cov["AL"]["separate_sewers"]["operators"] == 1
-    assert cov["AL"]["sentence"].startswith("Our rain caution here covers only one separate sewer operator")
+    assert cov["AL"]["separate_sewers"]["operators"] == 4
+    assert cov["AL"]["sentence"].startswith("Our rain caution here covers only 4 separate sewer operators")
     assert "no risk" not in cov["AL"]["sentence"] and "safe" not in cov["AL"]["sentence"]
     assert RL.caution_coverage({"enabled": True, "permits": {}}) == {}       # off: nothing added
 
@@ -418,7 +472,9 @@ def test_status_build_is_byte_identical_with_the_switch_off(monkeypatch, levels)
 
 SSO_LEVELS = {"method_version": 1, "today": "2026-08-10", "operators": {"al-wet": {
     "op": "al-wet", "name": "Wet Utilities", "state": "MA", "qualifies": True, "why_not": [], "possible_in": 0.3,
-    "likely_in": None, "newest_report": "2026-08-01", "period": ["2023-01-05", "2026-07-20"], "storms": 190,
+    "likely_in": None, "newest_report": "2026-08-01",
+    "recency": {"in": True, "source": "x", "source_newest": "2026-08-05", "newest_rain_report": "2026-07-20",
+                "months_between": 0, "silent": False}, "period": ["2023-01-05", "2026-07-20"], "storms": 190,
     "followed": 40, "reports": 60, "lift": 2.0, "sources": ["x"], "permits": [], "live_points": [[42.0, -72.0]],
     "places": {"reports": 1, "waters": [{"water_slug": "test-river-ma", "reports": 1}],
                "events": [{"event_id": "sso-e1", "day": "2026-07-01", "point": [42.0, -72.0],
@@ -482,16 +538,16 @@ def test_review_p1_1_the_lift_leaves_reporting_gaps_out_of_both_sides():
     assert 0.7 <= sig["lift"] <= 1.3, sig
 
 
-def test_review_p1_2_the_hourly_check_reads_the_report_age_against_today(levels):
+def test_review_p1_2_the_hourly_check_reads_the_source_silence_against_today(levels):
     assert "al-wet" in SS.qualifying(levels, rules_on(), GRADES, TODAY)
-    later = TODAY + timedelta(days=100)
+    later = TODAY + timedelta(days=400)
     assert SS.qualifying(levels, rules_on(), GRADES, later) == {}
     lv = copy.deepcopy(levels)
     reaches = {}
-    by_water, _, blk = SS.compute(rain_for(storm(range(0, 6), 1.2), now=NOW + timedelta(days=100)), rules_on(), [],
-                                  NOW + timedelta(days=100), NOW, WATERS, reaches, lambda r, w: [], {}, lv, GRADES)
+    by_water, _, blk = SS.compute(rain_for(storm(range(0, 6), 1.2), now=NOW + timedelta(days=400)), rules_on(), [],
+                                  NOW + timedelta(days=400), NOW, WATERS, reaches, lambda r, w: [], {}, lv, GRADES)
     assert by_water == {} and "al-wet" in blk["not_covered"]
-    assert any("older than 90 days" in w for w in blk["not_covered"]["al-wet"]["why_not"])
+    assert any("published no report in the last 12 months" in w for w in blk["not_covered"]["al-wet"]["why_not"])
 
 
 def test_review_p1_3_never_a_registry_outfalls_reach_or_a_report_with_no_point():
@@ -545,3 +601,19 @@ def test_review_p2_8_the_rules_export_carries_the_block_only_when_on():
     on = X.live_rules(X.public_rules(rules_on()), {"AL"})
     assert on["rain_likely"]["separate_sewers"]["enabled"] is True
     assert not any(k.startswith("_") for k in on["rain_likely"]["separate_sewers"])
+
+
+def test_labels_never_cross_on_a_water_with_both(monkeypatch):
+    """Owner, 2026-11-16: "Use 'Overflow possible' for the separate sewer label"; the combined sewer rows keep
+    "Discharge"."""
+    from tests.test_rain_likely import RAIN_RULES
+    monkeypatch.setattr(S, "_RULES", RAIN_RULES)
+    on = copy.deepcopy(RAIN_RULES)
+    on["rain_likely"]["separate_sewers"] = {**rules_on()["rain_likely"]["separate_sewers"]}
+    st, _ = _status(on, SSO_LEVELS, {"MA": "Dated reports"}, sso=True)
+    rs = [x for x in st["waters"]["test-river-ma"]["reasons"] if x["rule"] == "rain_likely"]
+    sep = [x for x in rs if (x.get("rain") or {}).get("permit") == "sso:al-wet"]
+    cso = [x for x in rs if x not in sep]
+    assert sep and cso
+    assert all(x["label"].startswith("Overflow ") and x["short"].startswith("Overflow ") for x in sep)
+    assert all(x["label"].startswith("Discharge ") and x["short"].startswith("Discharge ") for x in cso)
