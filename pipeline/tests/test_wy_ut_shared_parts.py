@@ -164,3 +164,34 @@ def test_wyomings_advisory_colours_wyomings_part_and_never_utahs():
     assert st["waters"].get(UT_SLUG, {}).get("status", "grey") == "grey"
     # the colour is drawn on the record's outline: Wyoming's part, which ends at the line
     assert S.water_geometry(WY_SLUG, waters).bounds[1] > LINE - 0.005
+
+
+# ---------------------------------------------------------------- review 2026-11-16 (Astra) findings
+
+def test_review_a_part_follows_its_record_when_openboatlaunch_renames_it(tmp_path):
+    """P2: an hourly rename (the old slug in the successor's slug_aliases) must not bring the whole outline back."""
+    from build import status as S
+    g = json.loads(json.dumps(mapping(box(0, 1, 1, 2))))
+    p = tmp_path / "water-state-parts.json"
+    p.write_text(json.dumps({"old-lake-nn": {"geometry": g, "bbox": [0, 1, 1, 2], "area_km2": 5.0,
+                                             "other_parts": ["old-lake-ss"]}}))
+    waters = {"new-lake-nn": {"slug": "new-lake-nn", "state": "NN", "bbox": [0, 0, 1, 2], "area_km2": 9.0,
+                              "slug_aliases": ["old-lake-nn"]},
+              "new-lake-ss": {"slug": "new-lake-ss", "state": "SS", "slug_aliases": ["old-lake-ss"]}}
+    probs = S.apply_state_parts(waters, p, S.slug_aliases(waters))
+    assert waters["new-lake-nn"]["bbox"] == [0, 1, 1, 2] and waters["new-lake-nn"]["geometry"] == g
+    assert waters["new-lake-nn"]["other_parts"] == ["new-lake-ss"]
+    assert not [x for x in probs if "not a water record" in x]
+
+
+def test_review_an_unchanged_cut_rerun_on_another_day_changes_nothing(tmp_path):
+    """P3: the part read back from the file (lists) equals the same cut made again (tuples)."""
+    C = _script()
+    shared = {"x-lake-nn": {"state": "NN", "other_parts": [], "why": "test"}}
+    kw = dict(shared=shared, shapes={"NN": box(0, 1, 1, 2)}, records=lambda *a: {"slug": "x-lake-nn",
+              "kind": "lake", "geometry_hash": "h"}, outlines=lambda slug: box(0.4, 0.6, 0.6, 1.4),
+              path=tmp_path / "p.json")
+    first = C.run_shared(when="2026-11-16", **kw)
+    again = C.run_shared(when="2026-11-17", **kw)
+    assert first["changed"] and again["changed"] == []
+    assert json.loads((tmp_path / "p.json").read_text())["x-lake-nn"]["cut"] == "2026-11-16"
