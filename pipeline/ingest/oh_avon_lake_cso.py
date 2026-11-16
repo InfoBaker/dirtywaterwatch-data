@@ -66,7 +66,7 @@ STATE_PATH = BUILD_DIR / "oh-avon-lake-cso-state.json"
 CREDIT = "Avon Lake Regional Water, CSO notice (Form B)"
 MATERIAL = "combined sewage and stormwater"
 DATE = r"(\d{1,2})[/-](\d{1,2})[/-](\d{2}|\d{4})\b"
-YESNO = ("Veteran's Memorial Park", "Avon Lake Boat Club", "Lake Erie", "Miller Roa")
+YESNO = ("Veteran's Memorial Park", "Avon Lake Boat Club", "Lake Erie", "Miller Road Park", "Miller Roa")
 
 
 def local(hm: tuple[str, str], d: tuple[str, str, str]) -> datetime | None:
@@ -78,11 +78,19 @@ def local(hm: tuple[str, str], d: tuple[str, str, str]) -> datetime | None:
         return None
 
 
-def value(ls: list[str], label: str) -> str | None:
-    for ln in ls:
-        m = re.match(r"\s*" + label + r"\s*:\s*(.*)$", ln, re.I)
+LABEL_LINE = re.compile(r"^[A-Z][A-Za-z #'/]{1,40}:")
+
+
+def value(ls: list[str], label: str, colon: bool = True) -> str | None:
+    """The value after a label; an empty value continues on the next line when that line is not another label
+    (the layout can wrap it; review 2026-11-16 P1)."""
+    for k, ln in enumerate(ls):
+        m = re.match(r"\s*" + label + (r"\s*:\s*(.*)$" if colon else r"\s*:?\s+(\S.*)$"), ln, re.I)
         if m:
-            return m.group(1).strip()
+            v = m.group(1).strip()
+            if not v and k + 1 < len(ls) and not LABEL_LINE.match(ls[k + 1]):
+                v = ls[k + 1].strip()
+            return v
     return None
 
 
@@ -102,7 +110,7 @@ def when(v: str | None) -> tuple[datetime | None, str | None]:
     h, mi = int(hhmm[:2]), int(hhmm[2:])
     if h > 23 or mi > 59:
         return None, f"'{v[:30]}' has no 24-hour time"
-    dt = local((str(h), str(mi)), d.groups())
+    dt = PN.existing(local((str(h), str(mi)), d.groups()))
     return (dt, None) if dt else (None, f"'{v[:30]}' not a date and time")
 
 
@@ -137,7 +145,11 @@ def parse(text: str) -> dict:
     dl = next((x for x in ls if x.startswith("Date:")), None)
     form_date = " ".join(re.sub(r"[A-Z][A-Za-z .'-]{2,40}? receives the discharge", " ", dl[5:]).split()) if dl else None
     vol = value(ls, r"Estimated Volume of discharge")
-    areas = {k: v for k in YESNO if (v := value(ls, re.escape(k)))}
+    areas = {}
+    for k in YESNO:
+        v = value(ls, re.escape(k) + (r"(?!d)" if k == "Miller Roa" else ""), colon=False)
+        if v and re.fullmatch(r"(?i)yes|no", v) and not (k == "Miller Roa" and "Miller Road Park" in areas):
+            areas[k] = v
     sent = value(ls, r"Initial Notification sent")
     return {"kind": "supplemental" if re.search(r"\bSupplemental\b", joined) else "notice",
             "start": st.isoformat() if st else None, "start_as_written": start_raw, "start_problem": st_problem,
@@ -145,7 +157,8 @@ def parse(text: str) -> dict:
             "end_problem": end_problem if end_raw else None,
             "form_date": form_date or None,
             "initial_notice_sent": sent, "outfall_info": value(ls, r"CSO Outfall Information"),
-            "outfall_number": (re.match(r"\d+", value(ls, r"Outfall Number") or "") or [None])[0],
+            "outfall_number": (value(ls, r"Outfall Number") or "").split()[0] if (value(ls, r"Outfall Number") or "").split()
+            else None,
             "water": receiving_water(joined), "impacted_areas": value(ls, r"Impacted areas"),
             "impacted_yes_no": areas, "volume_as_written": vol}
 
@@ -223,7 +236,9 @@ def to_record(key: str, notices: list[dict], points: dict[str, dict]) -> dict:
         raw["ended_at_precision"] = "minute"
     elif not latest.get("end_as_written"):
         raw["end_note"] = "the form gives no end time: the end is not confirmed"
-    o = points.get(outfall_number(latest["outfall_number"])) if latest.get("outfall_number") else None
+    num = latest.get("outfall_number")
+    # the whole identifier, digits only: "17A" is not outfall 017 (review 2026-11-16 P1)
+    o = points.get(outfall_number(num)) if num and re.fullmatch(r"\d{1,3}", num) else None
     raw["place_basis"] = (f"the form's outfall {latest['outfall_number']} is registry outfall {o['outfall']} of {PERMIT}"
                           if o else f"the form's outfall ({latest.get('outfall_number') or 'none given'}) is not an "
                           f"open CSO outfall of {PERMIT} with its own point in the registry: no outfall or point tied")

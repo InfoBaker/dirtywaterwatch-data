@@ -47,7 +47,10 @@ State: data/build/oh-willard-cso-state.json keeps every notice read (its parsed 
   the page stays a past report. Do not delete it.
 Failures: a failed request, a page without its CSO section, a notification heading whose notice cannot be read (no
   start), or a section with no notice heading and without the city's "none at this time" sentence is a failed read:
-  ok=False, the previous records kept, the state unchanged. One unreadable notice among readable ones: the readable
+  ok=False, the previous records kept, the state unchanged. The "none at this time" sentence stands beside real
+  notices, so an empty read is accepted only when the section holds no labelled notice line. Only the location and
+  the areas affected run on over several lines; any line with a contact, an e-mail address or a telephone number
+  ends the notice's reading. One unreadable notice among readable ones: the readable
   ones are saved and published, the unread one is named in the error and health stays false (partial) until it reads.
 History: the page itself is the only archive (no older pages); there is no --backfill.
 Run from pipeline/: python -m ingest.oh_willard_cso [--file saved.html --out events.json]
@@ -67,6 +70,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from ingest.oh_cso_pdf_notices import existing
 
 SOURCE_ID = "oh-willard-cso-notices"
 URL = "https://www.willardohio.gov/cso.html"
@@ -93,9 +97,10 @@ LABELS = [
     ("rain_total", re.compile(r"^Total Rainfall this CSO event\s*:?\s*", re.I)),
     ("volume", re.compile(r"^TOTAL CSO VOLUME\s*:?\s*", re.I)),
 ]
-STOP = re.compile(r"^For more information", re.I)          # the staff contacts follow: never read
+STOP = re.compile(r"^For more information|\bcontact|@|\d{3}\W{0,2}\d{3}[ .-]\d{4}", re.I)   # contacts: never read
+MULTILINE = {"location", "areas"}          # the only fields whose value runs on over several lines
 KIND = re.compile(r"^(INITIAL|SUPPLEMENTAL)\s+NOTIFICATION\s*:?\s*(.*)$", re.I)
-OTHER_HEADING = re.compile(r"^(?!PUBLIC\b)[A-Z][A-Z -]*\bNOTIFICATION\b\s*:")
+OTHER_HEADING = re.compile(r"^(?!PUBLIC\b)[A-Z][A-Z -]*\b(?:NOTIFICATION|NOTICE)\b\s*:")
 INLINE = re.compile(r"</?(?:span|u|strong|em|font|b|i|a|sup|sub)\b[^>]*>", re.I)
 BREAK = re.compile(r"<br\s*/?>|</?(?:div|p|h\d|li|tr|td|table|tbody)\b[^>]*>", re.I)
 
@@ -139,8 +144,10 @@ def read_fields(lines: list[str]) -> dict:
                     f[name].append(rest)
                 break
         else:
-            if cur:
+            if cur in MULTILINE or (cur and not f[cur]):
                 f[cur].append(ln)
+            else:
+                cur = None                       # an unlabelled line ends a one-line field; it is not read
     return {k: v for k, v in f.items()}
 
 
@@ -154,9 +161,11 @@ def local(v: str | None) -> datetime | None:
     if not m:
         return None
     mo, d, y, h, mi, ap = m.groups()
+    if not 1 <= int(h) <= 12:
+        return None
     h = int(h) % 12 + (12 if ap.lower() == "p" else 0)
     try:
-        return datetime(int(y), int(mo), int(d), h, int(mi), tzinfo=TZ)     # fold 0: the first of a repeated hour
+        return existing(datetime(int(y), int(mo), int(d), h, int(mi), tzinfo=TZ))   # fold 0: a repeated hour's first
     except ValueError:
         return None
 
@@ -221,8 +230,11 @@ def parse(page: str) -> tuple[list[dict], list[str]]:
             "rain_before": joined(f.get("rain_before")), "rain_total": joined(f.get("rain_total")),
             "volume_text": joined(f.get("volume")),
         })
-    if not blocks and not NONE_SENTENCE.search(" ".join(lines)):
-        raise LayoutError("no notification heading and no 'none at this time' sentence in the section")
+    if not blocks and (not NONE_SENTENCE.search(" ".join(lines)) or any(rx.match(ln) for ln in lines
+                                                                      for _, rx in LABELS)):
+        # the city's "none at this time" sentence stands beside real notices, so an empty read is accepted only when
+        # the section holds no notice line at all (review 2026-11-16 P1)
+        raise LayoutError("no notification heading read, and the section is not empty of notices")
     return notices, unread
 
 

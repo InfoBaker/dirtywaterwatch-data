@@ -12,9 +12,10 @@ How a run goes (run_feed)
     failed is tried again on the next run.
   - A PDF whose text is not the city's form (the parser raises NoticeError), or that cannot be fetched, is unread:
     the readable notices are saved and published, the unread ones are named in the error, and health stays false
-    (partial) until they read. A PDF with no text layer at all (a scanned image) is listed in meta.image_only with
-    its address: it is read (there is no text to read) and does not hold health false; the register's barrier for
-    such a notice is image_only.
+    (partial) until they read. A PDF with no text layer at all (a scanned image) is unread the same way ("no text
+    layer") and is tried again each run: a notice we cannot read holds health false (review 2026-11-16).
+  - Every wall-clock time the city modules read must exist in America/New_York (existing): a time in the
+    spring-forward gap is not read.
   - A notice that leaves the index stays in the state: a past report. One that leaves it before it could be read is
     moved from the unread list to state.left_unread (it can no longer be read, so it no longer holds health false).
 """
@@ -40,6 +41,16 @@ class NoticeError(ValueError):
 
 class LayoutError(ValueError):
     """The index page lists no notice: a failed read, never "no overflows"."""
+
+
+def existing(dt):
+    """dt when its wall-clock time exists in its zone, else None: a time in the spring-forward gap (02:30 on the
+    second Sunday of March) is no instant, so it is never published as one (review 2026-11-16)."""
+    from datetime import UTC
+    if dt is None:
+        return None
+    back = dt.astimezone(UTC).astimezone(dt.tzinfo)
+    return dt if back.replace(tzinfo=None) == dt.replace(tzinfo=None) else None
 
 
 def pdf_text(content: bytes) -> str:
@@ -101,7 +112,9 @@ def run_feed(source_id: str, index_url: str, pattern: re.Pattern, parse: Callabl
             resp.raise_for_status()
             text = text_of(resp) if text_of else pdf_text(resp.content)
             if not lines(text):
-                merge(state, url, None, now, image_only=True)
+                # a scanned notice: there is a notice we cannot read, so it stays unread (health false) and is
+                # tried again each run (review 2026-11-16 P1)
+                unread[url] = "no text layer (a scanned image)"
                 continue
             parsed = parse(text)
         except (requests.RequestException, NoticeError, ValueError, ImportError) as e:
