@@ -1251,7 +1251,10 @@ def short(iv: dict, where: str = "") -> str:
     thr = r.get("threshold_in")
     ev = r.get("evidence") or {}
     if ev.get("basis") == "separate_sewer_history":
-        amt = f" · {peak:.2f} inch{'es' if peak > 1 else ''} in 24 hours (radar)" if peak is not None else ""
+        at = r.get("peak_at")
+        amt = (f" · radar peak {peak:.2f} inch{'es' if peak > 1 else ''} in the 24 hours to "
+               f"{str(at)[:16].replace('T', ' ')} UTC" if at else f" · radar peak {peak:.2f} inch{'es' if peak > 1 else ''} in 24 hours") \
+            if peak is not None else ""
         return f"{label}{who}{amt}{separate_facts(ev)}{where}"
     if ev.get("basis") == "operator_history" and ev.get("why_no_history") is None:
         amt = f" · {peak:.2f} inch{'es' if peak > 1 else ''} in 24 hours (radar)" if peak is not None else ""

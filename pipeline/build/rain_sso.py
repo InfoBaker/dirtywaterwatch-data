@@ -243,10 +243,15 @@ def signal(daily: dict[date, float], spans: list[dict], a: dict) -> dict:
     if not per:
         return {"share_follow": None, "baseline": None, "lift": None}
     p0, p1 = date.fromisoformat(per[0]), date.fromisoformat(per[1])
+    # the stretches analyse left out (reporting gaps) are out of the days and of the reports alike: one mask for both
+    # sides of the ratio (review 2026-11-16 P1-1)
+    gaps = [(date.fromisoformat(x["from"]), date.fromisoformat(x["to"])) for x in a.get("left_out") or []
+            if x.get("why") == "reporting_gap"]
+    out = lambda d: any(g0 <= d <= g1 for g0, g1 in gaps)       # noqa: E731
     win = window_days(sts)
-    obs = [d for d in daily if p0 <= d <= p1 and daily[d] is not None]
+    obs = [d for d in daily if p0 <= d <= p1 and daily[d] is not None and not out(d)]
     base = len([d for d in obs if d in win]) / len(obs) if obs else None
-    inside = [s for s in spans if p0 <= s["first"] <= p1]
+    inside = [s for s in spans if p0 <= s["first"] <= p1 and not out(s["first"])]
     share = sum(1 for s in inside if follows_rain(s, win)) / len(inside) if inside else None
     return {"share_follow": round(share, 3) if share is not None else None,
             "baseline": round(base, 3) if base is not None else None,
@@ -321,11 +326,47 @@ def analyse_operator(op: str, daily: dict[date, float], spans: list[dict], cover
     return entry
 
 
-def history_point(spans: list[dict], n: int = 1) -> list[tuple[float, float]]:
-    return rh.rain_points([s["point"] for s in spans if s["point"]], max_points=n)
+def report_points(points, n: int = 4, min_sep_km: float = 8.0) -> list[tuple[float, float]]:
+    """Up to n of the given report points themselves (never a point no report gave, review 2026-11-16 P2-5): the one
+    nearest the median first, then the farthest from those chosen while more than min_sep_km away. Pure."""
+    pts = sorted({(round(float(a), 3), round(float(b), 3)) for a, b in points or [] if a is not None and b is not None})
+    if not pts:
+        return []
+    mid = (statistics.median(p[0] for p in pts), statistics.median(p[1] for p in pts))
+    chosen = [min(pts, key=lambda p: (rh._km(p, mid), p))]
+    while len(chosen) < n:
+        far, dist = None, -1.0
+        for p in pts:
+            d = min(rh._km(p, c) for c in chosen)
+            if d > dist:
+                far, dist = p, d
+        if far is None or dist <= min_sep_km:
+            break
+        chosen.append(far)
+    return chosen
 
 
 # ---------------------------------------------------------------- the daily pass
+
+def events_sources(events_dir=None) -> tuple[list, dict[str, bool]]:
+    """([(source id, records)], {source id: published in batches}) from the events files (rain_history's reader, with
+    each file's meta.published_in_batches: review 2026-11-16 P2-6)."""
+    from common import EVENTS_DIR
+    out, batches = [], {}
+    for f in sorted((EVENTS_DIR if events_dir is None else events_dir).glob("*.json")):
+        if f.name.startswith("fixture"):
+            continue
+        try:
+            d = read_json(f, {}) or {}
+        except ValueError:
+            continue
+        if not isinstance(d, dict):
+            continue
+        out.append((f.stem, d.get("records") or []))
+        if (d.get("meta") or {}).get("published_in_batches"):
+            batches[f.stem] = True
+    return out, batches
+
 
 def operator_resolver(rows: list[dict] | None = None, aliases: dict | None = None):
     """The operator id of a record as the export's CSV gives it (export/csv.py operators_of): its discharger_id (an
@@ -366,7 +407,8 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
     cfg = settings(rules)
     hist_cfg = rh.settings(rules)
     if sources is None:
-        sources = list(rh._events_sources())
+        sources, file_batches = events_sources()
+        batches = {**file_batches, **(batches or {})}
     if placements is None:
         placements = (read_json(BUILD_DIR / "status.json", {}) or {}).get("placements") or {}
     operator_of = operator_of or operator_resolver()
@@ -458,8 +500,8 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
         daily = rh.daily_max(series)
         e = analyse_operator(op, daily, sp, cover, cfg, hist_cfg, today)
         entry = {**base, **e, "points": [list(p) for p in pts], "read": True,
-                 "live_points": [list(p) for p in rh.rain_points(
-                     [ev["point"] for ev in e["places"]["events"] if ev["point"]], max_points=int(cfg["live_points"]))]}
+                 "live_points": [list(p) for p in report_points(
+                     [ev["point"] for ev in e["places"]["events"] if ev["point"]], int(cfg["live_points"]))]}
         entry["history_why_not"] = entry.pop("why_not", None)
         why = verdict(entry, cfg, today, grades)
         entry["qualifies"] = not why
@@ -487,15 +529,33 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
 
 # ---------------------------------------------------------------- what the other stages read
 
-def qualifying(levels: dict | None, rules: dict | None, grades: dict | None | bool = False) -> dict[str, dict]:
-    """{operator: entry} for the operators the caution covers now: qualifies in the file, still approved, and (grades
-    given, the status build's check each hour) its state still grades "Dated reports"."""
+def too_old(entry: dict, cfg: dict, today: date | None) -> str | None:
+    """The freshness rule read against today, not the day the file was built (a file kept by failed passes or the
+    seed never carries a caution past it: review 2026-11-16 P1-2). Pure."""
+    if today is None:
+        return None
+    newest = entry.get("newest_report")
+    try:
+        age = (today - date.fromisoformat(str(newest)[:10])).days
+    except ValueError:
+        return f"newest dated report ({newest or 'none'}) older than {cfg['max_report_age_days']} days"
+    return (f"newest dated report ({newest}) older than {cfg['max_report_age_days']} days"
+            if age > int(cfg["max_report_age_days"]) else None)
+
+
+def qualifying(levels: dict | None, rules: dict | None, grades: dict | None | bool = False,
+               today: date | None = None) -> dict[str, dict]:
+    """{operator: entry} for the operators the caution covers now: qualifies in the file, still approved, and (the
+    status build's check each hour) its state still grades "Dated reports" (grades given) and its newest report is
+    still within the age limit on today (today given)."""
     if not levels or not enabled(rules):
         return {}
-    approved = set(settings(rules)["approved"])
+    cfg = settings(rules)
+    approved = set(cfg["approved"])
     return {op: e for op, e in sorted((levels.get("operators") or {}).items())
             if e.get("qualifies") is True and op in approved and e.get("possible_in") is not None
-            and (grades is False or state_grade_ok(e.get("state"), grades) is None)}
+            and (grades is False or state_grade_ok(e.get("state"), grades) is None)
+            and too_old(e, cfg, today) is None}
 
 
 def live_points(rules: dict | None = None, levels: dict | None = None) -> list[dict]:
@@ -577,12 +637,17 @@ def placement(entry: dict, waters: dict, reaches: dict, reach_waters_fn, placeme
     for ev in events:
         eid = ev.get("event_id")
         pl = pl_all.get(eid) or {}
+        if not ev.get("point"):
+            continue                # no point given: no stretch can be traced from it
         ks = list(dict.fromkeys([*(ev.get("reaches") or []), *[k for k in [pl.get("reach"), *(pl.get("reaches") or [])] if k],
                                  *by_event.get(eid, [])]))
         for k in ks:
             r = (reaches or {}).get(k)
             if not r or not r.get("segments") or r.get("cut_reason") == "no_trace":
                 continue
+            if eid not in (r.get("event_ids") or []) or r.get("outfall") not in (None, ""):
+                continue            # a registry outfall's reach, or one traced for other reports: never this caution's
+                #                     place (review 2026-11-16 P1-3)
             if k not in keys:
                 keys.append(k)
             reach_hits[k] += 1
@@ -683,7 +748,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
     start = rl.parse_t(hist.get("start"))
     valid = rl.parse_t((rf.get("mrms") or {}).get("valid_time"))
     stale = valid is None or now - valid > timedelta(hours=stale_h + 1)
-    ops = qualifying(levels, rules, grades)
+    ops = qualifying(levels, rules, grades, now.date())
     starts = report_starts(events, ops)
     by_event = reach_index(reaches)
     by_water, by_reach = defaultdict(list), defaultdict(list)
@@ -701,6 +766,9 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
             g = state_grade_ok(e.get("state"), grades if grades is not False else None)
             if e.get("qualifies") and g:
                 why.append(g)
+            old = too_old(e, cfg, now.date())
+            if e.get("qualifies") and old:
+                why.append(old)
             block["not_covered"][op] = {"name": e.get("name"), "state": e.get("state"), "why_not": why,
                                         "reports": e.get("reports"), "storms": e.get("storms"),
                                         "followed": e.get("followed"), "lift": e.get("lift"), "period": e.get("period")}

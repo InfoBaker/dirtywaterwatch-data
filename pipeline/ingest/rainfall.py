@@ -657,7 +657,20 @@ def is_fresh(m: dict | None, now: datetime) -> bool:
 
 def fallback_order(points: dict[str, dict], todo: list[str], cap: int) -> list[str]:
     """The points the per-point fallback reads, at most cap: first one point per permittee (its wettest at
-    the last reading), then the others, wettest first."""
+    the last reading), then the others, wettest first. Points read only for the separate sewer caution ("sso:"
+    keys, build/rain_sso.py) come after every combined sewer point, and its keys never change the combined sewer
+    points' order (review 2026-11-16 P1-4)."""
+    def sso(p) -> bool:
+        return str(p).startswith("sso:")
+    if not any(sso(p) for k in todo for p in points[k]["permits"]):
+        return _fallback_order(points, todo, cap)
+    only = [k for k in todo if points[k]["permits"] and all(sso(p) for p in points[k]["permits"])]
+    rest = [k for k in todo if k not in set(only)]
+    stripped = {k: {**points[k], "permits": [p for p in points[k]["permits"] if not sso(p)]} for k in rest}
+    return (_fallback_order(stripped, rest, cap) + _fallback_order(points, only, cap))[:max(0, cap)]
+
+
+def _fallback_order(points: dict[str, dict], todo: list[str], cap: int) -> list[str]:
     def wet(k):
         v = ((points[k].get("mrms") or {}).get("h24"))
         return -1.0 if v is None else float(v)
@@ -1446,8 +1459,9 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
     from build import rain_sso
     # the separate sewer operators of rules.rain_likely.separate_sewers, read at the points of their past rain-driven
     # reports under "sso:<operator>" (build/rain_sso.py); none with its switch off
-    outfalls = cso_outfalls() + [o for o in rain_sso.live_points()
-                                 if o["state"] in radar_states() and o["state"] not in OUTSIDE_RADAR_GRID]
+    sso_points = rain_sso.live_points()
+    radar = radar_states() if sso_points else set()
+    outfalls = cso_outfalls() + [o for o in sso_points if o["state"] in radar]
     points = group_points(outfalls)
     old_points = prev.get("points") or {}
     for k, p in points.items():                # keep the last readings until replaced
