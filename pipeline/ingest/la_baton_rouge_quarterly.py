@@ -14,11 +14,14 @@ Source
 
 Reading the PDF (pypdf, layout text)
   Only the collection-system tables are read, and only what their layout supports: a row is a line that begins with a
-  date (m/d/yyyy); its cells are cut by the header line's column starts; the address, cause and receiving water may
-  wrap onto the next line or two, which are joined. A report is used only when its summary gives the collection-system
-  count of both districts (North and South, DISTRICTS), every table is one of the two under its own district name,
-  and the rows read for each equal the number its own summary gives (raw.layout_check); a report that fails is listed in meta.failed_checks
-  and makes none of its rows records, so a misread table never reaches the site.
+  date (m/d/yyyy); its cells are cut by the header line's column starts. The reports use two layouts (read_rows): the
+  water and the gallons centred on the date line (Reports 94 on), or the laboratory values on the date line and the
+  water and the gallons a few lines below it (Report 93); each row must have exactly one cell under the Amt. Gals
+  header and every Rec. Waters cell must belong to one row. A report is used only when its summary gives the
+  collection-system count of both districts (North and South, DISTRICTS), its own Total is the sum of its four counts,
+  every table is one of the two under its own district name, every row's cells are read with confidence, and the
+  rows read for each district equal the number its own summary gives (raw.layout_check); a report that fails is
+  listed in meta.failed_checks and makes none of its rows records, so a misread table never reaches the site.
 
 Records
   One per table row: event_type sso (a discharge from the collection system), status unknown (the table gives no end:
@@ -38,7 +41,10 @@ Records
 Cadence and lag
   The index is read with the refresh (daily is enough); reports are kept by number in the state file with their URL,
   SHA-256 and every read (attempts). A report is fetched when its number is new or its address changed, and the
-  newest two again every REREAD_DAYS (an amended copy at the same address); --refresh reads all again. A copy that
+  newest two again every REREAD_DAYS (an amended copy at the same address); --refresh reads all again. Each read
+  keeps PARSER_VERSION: a report no read of which was made by the current parser is fetched and read again on the
+  next ordinary run (parsed_by_older), and its rows replace the earlier ones under the same ids (the ids are built
+  from the report, permit, date and order, which a corrected read of the same table does not change). A copy that
   fails the layout check never replaces an accepted one: the accepted copy stays and the run is ok=False, naming it.
   Every failed read (a fetch error, a failed check, a failed amendment) stays in state 'pending' (meta.pending) until a
   read of that report succeeds: each run is ok=False while anything is pending (last_ok_at does not advance), and a
@@ -84,6 +90,16 @@ SUMMARY = re.compile(r"(North|South)\s+Plant\s*-\s*(LA\d{7})\s*AI\s*#\s*(\d+)\s+
 ISSUED = re.compile(r"Issued:\s*([A-Z][a-z]+ \d{1,2}, \d{4})")
 PERIOD = re.compile(r"(\d{2}/\d{2}/\d{4})\s+To\s+(\d{2}/\d{2}/\d{4})")
 COLUMNS = ("Date", "Address", "Cause", "Action", "Prevention", "Rec. Waters", "Amt. Gals", "PS")
+# the summary's own Total line (the four counts added); checked against their sum
+SUMMARY_TOTAL = re.compile(r"^\s*Total\s+(\d+)\s*$", re.M)
+# a line that ends a row's block: the table's legend, the page footer
+BLOCK_END = re.compile(r"^\s*(?:BOD|TSS|PS|ARD|pH)\s*=|Issued:|Page\s*\|")
+GALLONS = re.compile(r"\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?")
+UNKNOWN_GALLONS = re.compile(r"Unknown|Unk\.?|N/?A|TBD", re.I)      # the City's word for no figure
+# the parser's version, kept with each report it reads: a report read by an older version is read again on the next
+# run (due), and its rows replace the earlier ones under the same ids. 2: the gallons and the receiving water read
+# over the whole row block (Report 93's layout), one figure in the Amt. Gals column required, the summary's Total.
+PARSER_VERSION = 2
 # the Cause column's words, as the tables write them; a cause is read only when one of these is found on the row's
 # lines (the Address and Cause cells run together in the layout text, so the cell is not cut by position)
 CAUSE = re.compile(r"Blockage\s*-\s*(?:Collection|Service)\s+Lines?|Grease(?:\s+and\s+Debris)?|Debris\s+and\s+Rags"
@@ -138,23 +154,120 @@ def receiving_water(text: str) -> tuple[str | None, str | None]:
     return t, None
 
 
+def _runs(cells: dict[int, str]) -> list[tuple[int, int, str]]:
+    """Consecutive lines with text in one column: (first line, last line, the text joined)."""
+    out: list[list] = []
+    for i in sorted(cells):
+        if not cells[i]:
+            continue
+        if out and out[-1][1] == i - 1:
+            out[-1][1], out[-1][2] = i, out[-1][2] + " " + cells[i]
+        else:
+            out.append([i, i, cells[i]])
+    return [tuple(r) for r in out]
+
+
+def read_rows(lines: list[str], cols: dict, head: int, anchors: list[int], district: dict,
+              page: int) -> tuple[list[dict], list[str]]:
+    """The rows of one table page, and what could not be read with confidence.
+
+    The reports print a row's cells in one of two layouts: the receiving water and the gallons centred on the date
+    line, a wrapped water name running above and below it (Reports 94 on), or the laboratory values on the date line
+    and the water and the gallons a few lines below it (Report 93). Each row's gallons are the one cell under the
+    Amt. Gals header (_cell, between the header midpoints) on the lines from its date line to the next row's; the
+    layout is told by whether that cell sits on the date line. A run of Rec. Waters lines belongs to the row whose
+    date line it crosses, or, in the second layout, to the row above it (where a name wrapped over a blank line is
+    joined in order). Anything else (no gallons cell or two, a
+    figure that is not a number, a water cell with no row or two, a page mixing the layouts) is named, and the report
+    then fails its layout check: no figure is taken from a neighbouring column and none is guessed."""
+    last = len(lines)
+    for i in range(head + 1, len(lines)):
+        x = lines[i]
+        if BLOCK_END.search(x) or HEADING.search(x) or ("Rec. Waters" in x and "Address" in x):
+            last = i
+            break
+    anchors = [a for a in anchors if a < last]
+    gal = {i: _cell(lines[i], cols, "Amt. Gals") for i in range(head + 1, last)}
+    wat = {i: _cell(lines[i], cols, "Rec. Waters") for i in range(head + 1, last)}
+    out, problems, layouts = [], [], set()
+    dates = {a: datetime.strptime(DATE_ROW.match(lines[a]).group(1), "%m/%d/%Y").date().isoformat() for a in anchors}
+    below: dict[int, bool] = {}
+    gallons: dict[int, tuple] = {}
+    for n, a in enumerate(anchors):
+        stop = anchors[n + 1] if n + 1 < len(anchors) else last
+        cells = [(i, gal[i]) for i in range(a, stop) if gal.get(i)]
+        label = f"{district['name']} {dates[a]} (page {page})"
+        if len(cells) != 1:
+            problems.append(f"{label}: {len(cells)} cells in the Amt. Gals column")
+            gallons[a] = (None, None)
+            continue
+        i, text = cells[0]
+        below[a] = i != a
+        layouts.add(below[a])
+        if GALLONS.fullmatch(text):
+            gallons[a] = (int(float(text.replace(",", ""))), text)
+        elif UNKNOWN_GALLONS.fullmatch(text):
+            gallons[a] = (None, text)                   # the City's own word: no figure, none supplied
+        else:
+            problems.append(f"{label}: the Amt. Gals cell is not a figure")
+            gallons[a] = (None, None)
+    if len(layouts) > 1:
+        problems.append(f"page {page}: rows with the gallons on the date line and rows with them below it")
+    water: dict[int, list[str]] = {a: [] for a in anchors}
+    for s, e, text in _runs(wat):
+        crossed = [a for a in anchors if s <= a <= e]
+        above = [a for a in anchors if a < s]
+        if len(crossed) > 1:
+            problems.append(f"page {page}: a Rec. Waters cell spans two rows")
+        elif crossed:
+            water[crossed[0]].append(text)
+        elif above and below.get(above[-1]):
+            water[above[-1]].append(text)
+        else:
+            problems.append(f"page {page}: a Rec. Waters cell on lines {s + 1} to {e + 1} belongs to no row")
+    for n, a in enumerate(anchors):
+        if len(water[a]) > 1 and not below.get(a):
+            # a name wrapped over a blank line is joined only where the cells sit below the date line (Report 93's
+            # 'Corporation' on the date line, 'Canal' two lines below), never across rows centred on their date line
+            problems.append(f"{district['name']} {dates[a]} (page {page}): {len(water[a])} Rec. Waters cells")
+        stop = anchors[n + 1] if n + 1 < len(anchors) else last
+        ln = lines[a]
+        cont = [x for x in lines[a + 1:min(stop, a + 3)] if x.strip()]
+        cm = CAUSE.search(" ".join([ln] + cont))
+        w, withheld = receiving_water(" ".join(water[a]))
+        g, gt = gallons[a]
+        row = {"date": dates[a], "cause": " ".join(cm.group(0).split()) if cm else None,
+               "receiving_water": w, "gallons": g, "gallons_text": gt, "page": page, **district}
+        if withheld:
+            row["receiving_water_withheld"] = withheld
+        out.append(row)
+    return out, problems
+
+
 def parse_report(pages: list[str]) -> dict:
     """{issued, period, summary: {permit: {collection, plant}}, rows: [...], check: {permit: (read, summary)}}."""
     issued = period = None
     summary: dict[str, dict] = {}
     rows: list[dict] = []
     tables: list[dict] = []
+    unreadable: list[str] = []
+    totals: list[int] = []
     district = None
     for pi, text in enumerate(pages):
         if issued is None and (m := ISSUED.search(text)):
             issued = datetime.strptime(m.group(1), "%B %d, %Y").date().isoformat()
+        found = False
         for m in SUMMARY.finditer(text):
+            found = True
             kind = "collection" if m.group(4).lower().startswith("collection") else "plant"
             summary.setdefault(m.group(2).upper(), {"ai": m.group(3)})[kind] = int(m.group(5))
+        if found:
+            totals += [int(x) for x in SUMMARY_TOTAL.findall(text)]
         if "Rec. Waters" not in text:
             continue
         lines = text.split("\n")
         cols = None
+        head = None
         anchors: list[int] = []
         for i, ln in enumerate(lines):
             if (m := HEADING.search(ln)):
@@ -163,53 +276,38 @@ def parse_report(pages: list[str]) -> dict:
             if period is None and (m := PERIOD.search(ln)):
                 period = [datetime.strptime(x, "%m/%d/%Y").date().isoformat() for x in m.groups()]
             if cols is None and "Rec. Waters" in ln and "Address" in ln:
-                cols = _columns(ln)
+                cols, head = _columns(ln), i
             elif cols and DATE_ROW.match(ln):
                 anchors.append(i)
         if not cols or not district:
             continue
-        for n, ai in enumerate(anchors):
-            stop = anchors[n + 1] if n + 1 < len(anchors) else len(lines)
-            ln = lines[ai]
-            cont = [x for x in lines[ai + 1:min(stop, ai + 3)]
-                    if x.strip() and not re.match(r"\s*(BOD|TSS)\s*=|\s*Issued:", x)]
-            def joined(name: str) -> str:
-                parts = [_cell(ln, cols, name)] + [_cell(x, cols, name) for x in cont]
-                return " ".join(p for p in parts if p).strip()
-            tail = re.findall(r"\S+", ln[cols["Amt. Gals"] - 8:])
-            gal = None
-            if tail:
-                try:
-                    gal = int(float(tail[0].replace(",", "")))
-                except ValueError:
-                    gal = None
-            d = datetime.strptime(DATE_ROW.match(ln).group(1), "%m/%d/%Y").date().isoformat()
-            block = " ".join([ln] + cont)
-            cm = CAUSE.search(block)
-            water, withheld = receiving_water(joined("Rec. Waters"))
-            row = {"date": d, "cause": " ".join(cm.group(0).split()) if cm else None,
-                   "receiving_water": water, "gallons": gal,
-                   "gallons_text": tail[0] if tail and re.fullmatch(r"[\d,.]+", tail[0]) else None,
-                   "page": pi + 1, **district}
-            if withheld:
-                row["receiving_water_withheld"] = withheld
-            rows.append(row)
+        rows_here, problems_here = read_rows(lines, cols, head, anchors, district, pi + 1)
+        rows += rows_here
+        unreadable += problems_here
     check = {}
     for p in sorted(set(summary) | set(DISTRICTS) | {r["permit"] for r in rows}):
         s = summary.get(p) or {}
         read = sum(1 for r in rows if r["permit"] == p)
         check[p] = {"read": read, "summary_collection": s.get("collection"), "summary_plant": s.get("plant")}
-    problems = layout_problems(summary, rows, tables)
+    problems = layout_problems(summary, rows, tables, totals)
+    if unreadable:
+        problems.append(f"{len(unreadable)} table cells not read with confidence ("
+                        + "; ".join(unreadable[:5]) + ("; ..." if len(unreadable) > 5 else "") + ")")
     ok = not problems and all(c["read"] == c["summary_collection"] for c in check.values())
     return {"issued": issued, "period": period, "summary": summary, "rows": rows, "check": check, "layout_ok": ok,
-            "problems": problems}
+            "problems": problems, "parser_version": PARSER_VERSION}
 
 
-def layout_problems(summary: dict, rows: list[dict], tables: list[dict]) -> list[str]:
+def layout_problems(summary: dict, rows: list[dict], tables: list[dict], totals: list[int] | None = None) -> list[str]:
     """What makes a report incomplete beyond a row count: a district the summary does not give a collection-system
     count for, a permit the report should not hold, a table heading whose district name and permit disagree, a
-    district with discharges in its summary and no table."""
+    district with discharges in its summary and no table, and a summary whose own Total is not the sum of its four
+    counts (the collection system and the treatment plant of each district)."""
     out = []
+    parts = [(summary.get(p) or {}).get(k) for p in DISTRICTS for k in ("collection", "plant")]
+    if totals and None not in parts and any(t != sum(parts) for t in totals):
+        out.append(f"the summary's Total ({', '.join(map(str, sorted(set(totals))))}) is not the sum of its counts "
+                   f"({sum(parts)})")
     for p, name in DISTRICTS.items():
         if (summary.get(p) or {}).get("collection") is None:
             out.append(f"the summary gives no collection-system count for {name} ({p})")
@@ -241,6 +339,7 @@ def records(state: dict) -> list[dict]:
                    "county": COUNTY, "cause": r.get("cause"),
                    "receiving_water_as_given": water, "gallons_as_given": r.get("gallons_text"),
                    "time_zone": TZ, "layout_check": rep.get("check"), "report_sha256": rep.get("sha256"),
+                   "parser_version": rep.get("parser_version") or 1,
                    # placed only on the water the row names, never at the plant or an outfall of the permit
                    "_placement": "named_water_only",
                    "date_basis": "the table's Date column (a date; the City gives no time and no end)"}
@@ -261,7 +360,7 @@ def records(state: dict) -> list[dict]:
                 started_at=r["date"], ended_at=None, time_precision="day", reported_at=None,
                 published_at=rep.get("issued"), source_updated_at=None,
                 material="untreated sewage", volume_gal=r.get("gallons"),
-                volume_text=f"{r.get('gallons_text')} gallons" if r.get("gallons_text") else None,
+                volume_text=f"{r.get('gallons_text')} gallons" if r.get("gallons") is not None else None,
                 estimate_flag="unknown", authority=AUTHORITY, source_url=url, raw=raw))
             out[-1]["fetched_at"] = rep.get("read_at") or out[-1]["fetched_at"]   # when the report was read
     return out
@@ -342,7 +441,7 @@ def read_report(state: dict, url: str, number: int, content: bytes, at: str) -> 
     rep.update(number=number, url=url, sha256=hashlib.sha256(content).hexdigest(), read_at=at)
     key = str(number)
     prev = state["reports"].get(key)
-    attempt = {k: rep.get(k) for k in ("url", "sha256", "read_at", "layout_ok", "check")}
+    attempt = {k: rep.get(k) for k in ("url", "sha256", "read_at", "layout_ok", "check", "parser_version")}
     if prev and prev.get("layout_ok") and not rep.get("layout_ok"):
         prev.setdefault("attempts", []).append(attempt)
         return prev, (f"report {number}: a new copy ({url}) failed the layout check; the accepted copy of "
@@ -372,9 +471,18 @@ def unread_reason(rep: dict) -> str:
 REREAD_DAYS = 30        # the newest two reports are read again this often, for an amended copy at the same address
 
 
+def parsed_by_older(rep: dict) -> bool:
+    """True when no read of this report (the copy kept or any attempt) was made by the current parser: the report is
+    fetched again on the next run and its rows replace the earlier ones under the same ids. The PDF is not kept, so
+    this is one more request per report, once per parser version; a read that fails is recorded as an attempt by
+    this version, so it is not fetched again every run (it stays pending and is retried every REREAD_DAYS)."""
+    seen = [rep.get("parser_version") or 1] + [a.get("parser_version") or 1 for a in rep.get("attempts") or []]
+    return max(seen) < PARSER_VERSION
+
+
 def due(state: dict, links: dict[int, str], now: str, refresh: bool = False) -> list[tuple[int, str]]:
-    """The reports to fetch: new numbers, a number whose address changed, and the newest two when their last read is
-    older than REREAD_DAYS."""
+    """The reports to fetch: new numbers, a number whose address changed, every report no read of which was made by
+    the current parser (parsed_by_older), and the newest two when their last read is older than REREAD_DAYS."""
     from datetime import datetime as _dt
     migrate(state)
     out = []
@@ -385,7 +493,7 @@ def due(state: dict, links: dict[int, str], now: str, refresh: bool = False) -> 
         rep = state["reports"].get(str(n))
         pend = (state.get("pending") or {}).get(str(n))
         tried = {a.get("url") for a in (rep or {}).get("attempts", [])} | {(rep or {}).get("url")}
-        if refresh or rep is None or url not in tried:
+        if refresh or rep is None or url not in tried or parsed_by_older(rep):
             out.append((n, url))
             continue
         # a report with no accepted copy, or whose last read failed (an amended copy that could not be read, with
