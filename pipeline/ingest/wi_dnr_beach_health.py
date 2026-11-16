@@ -59,6 +59,10 @@ Records (rules only; the layer is read as a sequence of polls)
     text or null, the point numbers or "NaN"), a unique BEACH_SEQ_NO, at least MIN_BEACHES beaches, no drop below 80 per cent of the
     last complete read's count, and a returnCountOnly count equal to the beaches returned. Any other read is ok false:
     it lifts, greys and drops nothing and keeps every record and the state (common.write_events), and the run exits 1.
+  - A connection that is not made (a connect timeout or a refused or dropped connection; the map server has not always
+    accepted one from a runner) is tried up to CONNECT_TRIES times per request, CONNECT_PAUSE_S apart, with a 20 s
+    connect timeout; an HTTP error (a 403 among them), a read timeout or a malformed answer is not retried. After the
+    last try the read fails as above. Worst case per request: 3 x 20 s + 2 x 30 s = 120 s.
   - Keys: "<BEACH_SEQ_NO>-<advisory|closure|label>-<issue date>" or, with no usable date, "...-p<first read>".
 
 Privacy: only the eight fields below are requested (no sampler, station or contact field exists on the layer; the
@@ -75,10 +79,12 @@ import json
 import math
 import re
 import sys
+import time
 from datetime import date, datetime, timezone
 from zoneinfo import ZoneInfo
 
 import requests
+from urllib3.exceptions import ReadTimeoutError
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
 from ingest.de_dnrec_derns import scrub
@@ -96,7 +102,10 @@ AUTHORITY = "Wisconsin Department of Natural Resources, Wisconsin Beach Health"
 TZ = ZoneInfo("America/Chicago")
 STATE_PATH = BUILD_DIR / "wi-dnr-beach-health-state.json"
 SAFE_FORMAT = "dww-wi-dnr-beach-health-safe/1"
-TIMEOUT = (60, 300)
+TIMEOUT = (20, 300)                           # connect, read; the runner's probes connect in under 0.4 s
+CONNECT_TRIES = 3                             # per request; only a connection not made is tried again
+CONNECT_PAUSE_S = 30
+_pause = time.sleep
 BOUNDS = (-93.0, 42.4, -86.2, 47.4)          # Wisconsin with its Great Lakes shore; a point outside is not used
 MIN_BEACHES = 200                             # 441 on 2026-11-16; far fewer is a partial answer
 MIN_SHARE_OF_LAST = 0.8
@@ -585,6 +594,24 @@ META = {"credit": "Wisconsin Department of Natural Resources, Wisconsin Beach He
                        "longer lists the advisory.")}
 
 
+def _get(url: str) -> requests.Response:
+    """GET with the feed's headers and timeout; a connection not made is tried again (CONNECT_TRIES, CONNECT_PAUSE_S
+    apart). Anything else (an HTTP status, a read timeout, a TLS error, a malformed answer) is raised at once; the
+    caller's failure path is unchanged."""
+    for n in range(1, CONNECT_TRIES + 1):
+        try:
+            return requests.get(url, headers=HEADERS, timeout=TIMEOUT)
+        except requests.exceptions.SSLError:
+            raise
+        except (requests.exceptions.ConnectTimeout, requests.exceptions.ConnectionError) as e:
+            # requests reports a read timeout in the body as a ConnectionError wrapping urllib3's ReadTimeoutError
+            if n == CONNECT_TRIES or isinstance(e.args[0] if e.args else None, ReadTimeoutError):
+                raise
+            print(f"{SOURCE_ID}: connection not made ({type(e).__name__}), try {n + 1} of {CONNECT_TRIES} "
+                  f"in {CONNECT_PAUSE_S} s", file=sys.stderr)
+            _pause(CONNECT_PAUSE_S)
+
+
 def run(args) -> int:
     now = args.at or now_iso()
     prev = {} if args.file else (read_json(STATE_PATH, {}) or {})
@@ -597,9 +624,9 @@ def run(args) -> int:
             table_err = "the saved file holds no report table"
     else:
         try:
-            r = requests.get(QUERY, headers=HEADERS, timeout=TIMEOUT)
+            r = _get(QUERY)
             r.raise_for_status()
-            c = requests.get(COUNT, headers=HEADERS, timeout=TIMEOUT)
+            c = _get(COUNT)
             c.raise_for_status()
             feats = safe_features(check_read(r.json(), c.json(), prev.get("last_count")))
         except Exception as e:                         # any failure: nothing lifted, greyed, dropped or saved
@@ -607,7 +634,7 @@ def run(args) -> int:
             print(f"{SOURCE_ID}: read failed: {type(e).__name__}", file=sys.stderr)
             return 1
         try:
-            p = requests.get(REPORT_URL, headers=HEADERS, timeout=TIMEOUT)
+            p = _get(REPORT_URL)
             p.raise_for_status()
             table = check_table(parse_table(p.text), prev.get("last_table_count"))
         except Exception as e:                         # the table alone failed: its held records stand
