@@ -41,7 +41,12 @@ def by_code(code, county=None):
 
 def built(rs=None, prev=None, **kw):
     recs, stats, unread = W.build(rs if rs is not None else rows(), READ, prev or [], OPS, **kw)
-    return {r["event_id"].split(":", 1)[1]: r for r in recs}, stats, unread
+    return {short(r["event_id"]): r for r in recs}, stats, unread
+
+
+def short(eid: str) -> str:
+    """'<source>:<code>-<county>-<hash>' -> '<code>-<county>' (the hash is tested apart)."""
+    return eid.split(":", 1)[1].rsplit("-", 1)[0]
 
 
 def csv_of(rs) -> bytes:
@@ -131,8 +136,8 @@ def test_a_date_that_cannot_be_read_keeps_the_earlier_record_and_fails_health():
         if r["IncidentCode"] == "260316-2242":
             r["IncidentDate"] = "16/03/2026"
     recs, _, unread = W.build(rs, READ, list(first.values()), OPS)
-    assert unread == ["260316-2242-natrona"]
-    kept = next(r for r in recs if r["event_id"].endswith("260316-2242-natrona"))
+    assert [k.rsplit("-", 1)[0] for k in unread] == ["260316-2242-natrona"]
+    kept = next(r for r in recs if short(r["event_id"]) == "260316-2242-natrona")
     assert kept == first["260316-2242-natrona"]
 
 
@@ -184,7 +189,7 @@ def test_the_operator_is_named_only_by_an_exact_public_name_on_its_own_works():
     assert W.tie({"CompanyName": "City of Casperton"}, OPS, True, False)[0] is None
 
 
-def test_one_code_in_two_counties_is_two_records_and_a_shared_key_adds_the_closure():
+def test_one_code_in_two_counties_is_two_records_and_the_key_carries_the_closure():
     recs, _, _ = built()
     assert {"100713-0900-teton", "100713-0900-park"} <= set(recs)
     a, b = by_code("100713-0900", "Teton"), by_code("100713-0900", "Teton")
@@ -197,13 +202,14 @@ def test_record_ids_do_not_depend_on_row_order_or_on_other_rows():
     one = set(built()[0])
     rs = rows()[::-1]
     assert set(built(rs)[0]) == one
+    full = {r["event_id"] for r in W.build(rows(), READ, [], OPS)[0]}
     only = [r for r in rows() if r["IncidentCode"] == "251121-1100"]
-    assert set(built(only)[0]) == {"251121-1100-natrona"}
+    assert {r["event_id"] for r in W.build(only, READ, [], OPS)[0]} <= full
 
 
 def test_a_report_filed_twice_is_one_and_similar_reports_are_not():
     recs, stats, _ = built()
-    assert recs["120926-100142-teton"]["duplicate_of"] == f"{W.SOURCE_ID}:120926-100141-teton"
+    assert short(recs["120926-100142-teton"]["duplicate_of"]) == "120926-100141-teton"
     assert recs["120926-100141-teton"]["duplicate_of"] is None and stats["copies"] == 1
     rs = rows()
     for r in rs:
@@ -226,7 +232,7 @@ def test_a_report_gone_from_a_complete_read_stays_as_a_past_report():
     first, _, _ = built()
     rs = [r for r in rows() if r["IncidentCode"] != "251121-1100"]
     recs, _, _ = W.build(rs, "2026-11-17T19:00:00Z", list(first.values()), OPS)
-    gone = next(r for r in recs if r["event_id"].endswith("251121-1100-natrona"))
+    gone = next(r for r in recs if short(r["event_id"]) == "251121-1100-natrona")
     assert gone["raw"]["_missing_from_list_since"] == "2026-11-17T19:00:00Z"
     assert {k: v for k, v in gone.items() if k != "raw"} == {k: v for k, v in first["251121-1100-natrona"].items()
                                                             if k != "raw"}
@@ -273,12 +279,12 @@ def test_a_bad_file_is_a_failed_read(mutate, why):
 
 def test_a_read_that_falls_by_more_than_five_rows_or_one_percent_is_cut_short():
     rs = rows()
-    W.check_count(rs, len(rs) + 5)
+    W.check_count(rs, len(rs) + 1)                  # a short list: one per cent, at least one row
     with pytest.raises(W.BadRead, match="cut short"):
-        W.check_count(rs, len(rs) + 6)
-    W.check_count(list(range(990)), 1000)
+        W.check_count(rs, len(rs) + 2)
+    W.check_count(list(range(995)), 1000)           # a long list: five rows
     with pytest.raises(W.BadRead):
-        W.check_count(list(range(989)), 1000)
+        W.check_count(list(range(994)), 1000)
 
 
 class Resp:
@@ -346,8 +352,9 @@ def test_a_failed_read_keeps_every_record_and_fails_health(env, monkeypatch, ans
     after = events(env)
     assert after["ok"] is False and after["error"] and after["records"] == before["records"]
     assert after["last_ok_at"] == before["last_ok_at"]
+    err = capsys.readouterr().err
     for s in PRIVATE:
-        assert s not in after["error"] and s not in capsys.readouterr().err
+        assert s not in after["error"] and s not in err
 
 
 def test_a_truncated_list_keeps_every_record(env):
@@ -366,7 +373,7 @@ def test_a_complete_read_after_a_removal_keeps_the_past_report(env):
     env.answer = Resp(body=csv_of(rs))
     assert W.main(["--force"]) == 0
     d = events(env)
-    gone = next(r for r in d["records"] if r["event_id"].endswith("251121-1100-natrona"))
+    gone = next(r for r in d["records"] if short(r["event_id"]) == "251121-1100-natrona")
     assert gone["raw"]["_missing_from_list_since"] and d["ok"] is True
 
 
@@ -436,8 +443,8 @@ def test_the_status_build_places_by_the_named_water_in_its_county_or_its_own_poi
     monkeypatch.setattr(S, "_RULES", TEST_RULES)
     recs = list(built()[0].values())
     for r in recs:      # move the reports into the test's window
-        if r["event_id"].endswith(("251121-1100-natrona", "260625-1025-fremont", "101108-1051-goshen",
-                                   "100713-0900-teton")):
+        if short(r["event_id"]) in ("251121-1100-natrona", "260625-1025-fremont", "101108-1051-goshen",
+                                    "100713-0900-teton"):
             r["started_at"] = "2026-11-15T10:00:00-07:00"
     waters = {
         # the North Platte through Casper (Natrona County) and a namesake creek far off in Goshen County
@@ -446,7 +453,7 @@ def test_the_status_build_places_by_the_named_water_in_its_county_or_its_own_poi
         "wind-river-wy": _river("wind-river-wy", "Wind River", -109.70, 43.5361, -109.60, 43.5361),
     }
     out = _status(recs, waters, "2026-11-16T12:00:00+00:00")
-    pl = {k.split(":", 1)[1]: v for k, v in out["placements"].items() if k.startswith(W.SOURCE_ID)}
+    pl = {short(k): v for k, v in out["placements"].items() if k.startswith(W.SOURCE_ID)}
     assert pl["251121-1100-natrona"]["water_slugs"] == ["north-platte-river-wy"]
     assert pl["260625-1025-fremont"]["water_slugs"] == ["wind-river-wy"]              # its own point
     assert pl["260625-1025-fremont"]["water_match"] == "geometry"
@@ -469,3 +476,85 @@ def test_wyoming_bloom_records_without_a_county_keep_every_slug():
 def test_every_record_counts_in_wyoming():
     for r in built()[0].values():
         assert S.event_state(r) == "WY"
+
+
+# ---------------------------------------------------------------- Astra review 2026-11-16 (one fix pass)
+
+def test_r1_a_person_named_in_the_substance_or_water_text_is_never_kept():
+    for k, v in (("SubstanceOther", "sewage; Pat Example was present"),
+                 ("WaterAffected", "Deer Creek near Pat Example"),
+                 ("SubstanceOther", "Raw sewage, Jordan Sample says")):
+        r = {**by_code("101108-1051"), k: v}
+        rec = W.build_record(r, "k", "x", READ, None, OPS)
+        text = json.dumps(rec)
+        assert "Pat Example" not in text and "Jordan Sample" not in text, (k, v)
+    rec = W.build_record({**by_code("101108-1051"), "SubstanceOther": "sewage; Pat Example was present"},
+                         "k", "x", READ, None, OPS)
+    assert rec["material"] and "sewage" in rec["material"].lower()
+
+
+def test_r2_record_ids_do_not_change_when_a_row_with_the_same_code_appears():
+    a = by_code("260316-2242")
+    b = {**a, "ClosureDate": "2026-03-19 08:00:00", "SubstanceQuantity": "30.00"}
+    (k1,) = W.row_keys([a])
+    k2, k3 = W.row_keys([a, b])
+    assert k1 == k2 and k3 != k2
+
+
+def test_r2_rows_sharing_the_whole_key_are_unread_never_collapsed():
+    first, _, _ = built()
+    a = by_code("260316-2242")
+    b = {**a, "WaterAffected": "Garden Creek", "SpillReachedWater": "Yes"}
+    rs = [r for r in rows() if r["IncidentCode"] != "260316-2242"] + [a, b]
+    recs, _, unread = W.build(rs, READ, list(first.values()), OPS)
+    rec = first["260316-2242-natrona"]
+    key = rec["event_id"].split(":", 1)[1]
+    assert unread == [key]
+    assert [r for r in recs if r["event_id"] == rec["event_id"]] == [rec]
+    recs2, _, unread2 = W.build(rs[::-1], READ, list(first.values()), OPS)
+    assert unread2 == unread and len(recs2) == len(recs)
+
+
+@pytest.mark.parametrize("other", ["Untreated refinery wastewater", "Diesel in sanitary sewer",
+                                   "Domestic wastewater with crude oil", "Raw wastewater from the oil refinery"])
+def test_r3_an_industrial_or_fuel_substance_is_not_taken_by_untreated_or_sanitary(other):
+    r = {**by_code("260316-2242"), "SubstanceOther": other}
+    assert W.classify(r) == ("left out", "industrial, oily or chemical wastewater")
+
+
+def test_r4_only_an_odour_complaint_is_left_out_as_odour():
+    r = {**by_code("260316-2242"), "SubstanceOther": "Sewage with strong odor",
+         "AdditionalInfo": "Raw sewage reached the North Platte River."}
+    assert W.classify(r)[0] == "sewage"
+    assert W.classify({**r, "SubstanceOther": "unodors from sewage", "AdditionalInfo": ""}) == ("left out",
+                                                                                                "odour report")
+
+
+def test_r5_a_populated_row_without_an_incident_code_is_a_failed_read():
+    rs = rows()
+    rs[0]["IncidentCode"] = ""
+    with pytest.raises(W.BadRead, match="no incident code"):
+        W.parse_csv(csv_of(rs))
+
+
+def test_r6_a_drop_of_more_than_five_rows_fails_whatever_the_size_of_the_list():
+    with pytest.raises(W.BadRead, match="cut short"):
+        W.check_count([{}] * 6010, 6066)
+    W.check_count([{}] * 6061, 6066)
+
+
+def test_r7_a_point_needs_the_reports_county():
+    r = {**by_code("251121-1100"), "County": ""}
+    lat, lon, why = W.point_of(r, True, False)
+    assert lat is None and "no county" in why
+
+
+def test_r8_the_left_out_note_describes_scope_and_evidence_without_sludge():
+    note = W.LEFT_OUT_NOTE
+    assert "sludge" not in note and "not shown" in note and "do not tie" in note
+
+
+def test_r9_stderr_is_read_once_before_the_privacy_check(env, capsys):
+    import inspect
+    src = inspect.getsource(test_a_failed_read_keeps_every_record_and_fails_health)
+    assert "err = capsys.readouterr().err" in src

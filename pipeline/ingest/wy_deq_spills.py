@@ -37,12 +37,13 @@ Which rows are sewage (rules only, no model; WHICH_ROWS in the docstring order)
      Condensate, Radioactive Material, Vapor) -> not read.
   3. Substance "Other" or "Hazardous Substance" with SubstanceOther naming sewage (SEWAGE_WORDS: sewage, sewer,
      sanitary, septage, septic, black water, gray water, human waste, a portable toilet, wastewater) is sewage, except:
-     - an industrial, oily or chemical word with no word only sewage has (STRONG: sewage, sanitary, septic, septage,
-       black water, human waste, toilet) -> left out "industrial, oily or chemical wastewater" ("Oily Water sewer",
+     - an industrial, oily, fuel or chemical word with no word that names sewage itself (SEWAGE_ITSELF: sewage,
+       septic, septage, black water, human waste, a toilet; "untreated", "domestic" and "sanitary" are not enough:
+       "Untreated refinery wastewater", "Diesel in sanitary sewer") -> left out "industrial, oily or chemical wastewater" ("Oily Water sewer",
        "Refinery Waste Water", "Brewery wastewater", "Chemical car wash waste water", "F037 sewer sludge");
      - treated wastewater or effluent, with no strong word -> left out "treated wastewater" (owner's scope rule of
        2026-11-04: treated effluent is counted, not shown);
-     - a report of odour only -> left out "odour report";
+     - a report of an odour (the substance begins with odour, smell or stench) -> left out "odour report";
      - "wastewater" or "effluent" alone (no other sewage word) is sewage only when the cause or the description names a
        sewer works (SEWER_CUES: manhole, sewer main or line, lift or pump station, lagoon, treatment plant, sanitary
        sewer, septic) and no industrial word; otherwise left out "wastewater not shown to be sewage".
@@ -53,9 +54,12 @@ Which rows are sewage (rules only, no model; WHICH_ROWS in the docstring order)
   Yellowstone River) is a record. raw._sewage_basis says which test took the row.
 
 Record rules
-  - Key: IncidentCode and the county ("<code>-<county>"; "-nocounty" when none): two incidents of one code in two
-    counties are two records. Two rows still sharing that key in one read each add a hash of their ClosureDate (seen
-    on no sewage row 2026-11-16). source_url is the list's address (the list has no page per incident).
+  - Key: IncidentCode, the county ("-nocounty" when none) and a six-character hash of ClosureDate, DEQ's closing
+    stamp to the second ("<code>-<county>-<hash>"), the same whichever rows are read with it: two incidents of one code in two counties
+    are two records. Two rows sharing a whole key in one read (none on 2026-11-16) are not told apart: the earlier
+    record is kept as it was and the read is unhealthy (meta.unread) until DEQ's list tells them apart.
+    SubstanceOther is kept word for word only when every word is a substance word (SUBSTANCE_WORDS), else as a label
+    of its sewage words; WaterAffected only when each run of capitalised words is a water's name. source_url is the list's address (the list has no page per incident).
   - Times: IncidentDate (YYYY-MM-DD HH:MM:SS, no zone) is the incident's date and time as filed with DEQ, read in
     Mountain time (America/Denver; all of Wyoming keeps it). 00:00:00 is the list's form of a date entered without a
     time (914 of 6,065 rows): the start is that day (time_precision day). The list gives no report or receipt time and
@@ -87,9 +91,10 @@ Record rules
 Reading and failure
   Every run reads the whole file in one ordinary request (TIMEOUT; no retry loop). A failed request, an answer that is
   not CSV, a header that differs from HEADER, a row with another number of fields, a file that does not end with a line
-  break or ends inside a quoted field, more than MAX_BLANK blank rows, or a read MAX_DROP rows (or MAX_DROP_SHARE)
-  shorter than the last complete read is a failed read: ok false, nothing saved, every record kept as it was, exit 1.
-  A sewage row whose IncidentDate cannot be read keeps its earlier record as it was; health false (meta.unread) and
+  break or ends inside a quoted field, more than MAX_BLANK blank rows, a row with fields but no
+  IncidentCode, or a read more than MAX_DROP rows (or, for a list under 500 rows, MAX_DROP_SHARE of it) shorter than
+  the last complete read is a failed read: ok false, nothing saved, every record kept as it was, exit 1.
+  A sewage row whose IncidentDate cannot be read, or that shares its whole key with another row, keeps its earlier record as it was; health false (meta.unread) and
   exit 1 until it reads. A record missing from a complete read stays as a past report (raw._missing_from_list_since).
 
 Cadence and history
@@ -130,8 +135,8 @@ CREDIT = "Wyoming Department of Environmental Quality, public spill list"
 MOUNTAIN = ZoneInfo("America/Denver")
 TIMEOUT = (30, 300)
 EVERY_HOURS = 20
-MAX_DROP = 5                    # a read more than this many rows (or MAX_DROP_SHARE) shorter than the last complete
-MAX_DROP_SHARE = 0.01           # read is cut short
+MAX_DROP = 5                    # a read more than this many rows shorter than the last complete read is cut short, or
+MAX_DROP_SHARE = 0.01           # more than this share of it (at least one row) when that is fewer
 MAX_BLANK = 5                   # blank rows: one on 2026-11-16
 HEADER = ["IncidentCode", "CompanyName", "StreetAddress1", "City", "IncidentAddress", "IncidentCity", "IncidentDate",
           "SpillSource", "CauseDescription", "CauseOther", "Substance", "SubstanceOther", "SubstanceQuantity",
@@ -156,6 +161,10 @@ SEWAGE_WORDS = re.compile(r"sewage|sewer|sanitary|septage|septic|black ?water|gr
                           r"port[a-]?(?:a[- ]?)?(?:potty|john)|portable toilet|waste ?w[a-z]{3,5}\b|effluent", re.I)
 STRONG = re.compile(r"sewage|sanitary|septage|septic|black ?water|human waste|port[a-]?(?:a[- ]?)?(?:potty|john)|"
                     r"portable toilet|raw waste ?water|untreated|domestic", re.I)
+# the words that name sewage itself; only these stand against an industrial, oily or fuel word in the same text
+# ("Untreated refinery wastewater" and "Diesel in sanitary sewer" are not sewage: Astra review 2026-11-16 P1-4)
+SEWAGE_ITSELF = re.compile(r"sewage|septage|septic|black ?water|human waste|port[a-]?(?:a[- ]?)?(?:potty|john)|"
+                           r"portable toilet", re.I)
 GENERIC_ONLY = re.compile(r"waste ?w[a-z]{3,5}\b|effluent", re.I)
 INDUSTRIAL = re.compile(r"\boil|refiner|benzene|brewery|car ?wash|metal|cooling|process|plant waste|pipeline|"
                         r"condensate|nitrate|\bf0?37\b|\bfo37\b|sludge tank|de-? ?icer|chemical|hydrocarbon|"
@@ -166,7 +175,7 @@ INDUSTRIAL_DESC = re.compile(r"\boil(?:y|field)?\b|refiner|hydrocarbon|benzene|p
                              r"cooling tower|power plant|\bmine\b|mining|frac(?:k|king)? (?:water|fluid)|amalgam|"
                              r"pesticide|glycol|naphtha|acid\b", re.I)
 TREATED = re.compile(r"(?<!un)(?<!partially )(?<!partly )\btreated (?:waste ?water|effluent)", re.I)
-ODOUR = re.compile(r"\b(?:un)?odou?rs?\b", re.I)
+ODOUR = re.compile(r"^\W*(?:un)?(?:odou?rs?|smells?|stench)\b", re.I)     # the report is of an odour (Astra P1-5)
 SEWER_CUES = re.compile(r"manhole|man hole|sewer (?:main|line|backup|system|service|lateral|pipe|division)|city sewer|main line|mainline|lift station|"
                         r"pump station|lagoon|treatment (?:plant|facility|works)|wwtp|wwtf|headworks|"
                         r"sanitary sewer|force main|septic|sewage|collection system", re.I)
@@ -193,6 +202,48 @@ UTILITY_SUFFIX = re.compile(r"(?:\s+(?:wastewater|waste water|wasterwater|sewer|
 
 
 # ---------------------------------------------------------------- helpers
+
+# SubstanceOther is kept word for word only when every word is one of these (the words of the sewage substances on the
+# list, 2026-11-16); any other wording is kept as a label of its sewage words, so a name typed there is never kept
+# (Astra review 2026-11-16 P1-1)
+SUBSTANCE_WORDS = {
+    "a", "airplane", "and", "appears", "at", "be", "black", "blackwater", "de", "discharge", "domestic", "effluent",
+    "from", "gray", "grey", "hauled", "human", "icer", "if", "investigating", "is", "it", "leak", "not", "only", "or",
+    "other", "overflow", "partially", "port", "possibly", "potty", "present", "raw", "sanitary", "septage", "septic",
+    "sewage", "sewer", "sewerage", "sewere", "sludge", "sure", "tank", "the", "time", "to", "treated", "unsure",
+    "untreated", "waste", "wastewater", "wastewtaer", "water", "with", "strong", "odor", "odour", "spill", "line",
+    "main", "lift", "station", "manhole", "backup", "unknown", "possible", "portable", "toilet", "johns", "john"}
+WATER_WORDS = re.compile(r"\b(?:river|creek|lake|reservoir|pond|ponds|slough|draw|ditch|narrows|spring|springs|fork|"
+                         r"stream|tributary|drainage|canal|wash|gulch|run|branch|wetlands?|marsh|lagoon|basin|bay|"
+                         r"inlet|outlet|channel|brook)\b", re.I)
+CAP_RUN = re.compile(r"\b[A-Z][\w'.-]*(?:\s+[A-Z][\w'.-]*)+")
+
+
+def substance_label(v) -> str | None:
+    """The substance as filed when every word is a substance word, else its sewage words as a label."""
+    s = clean(v)
+    if not s:
+        return None
+    words = re.findall(r"[a-z]+", s.lower())
+    if words and all(w in SUBSTANCE_WORDS for w in words) and not re.search(r"\d{3}|@", s):
+        return s
+    found = []
+    for m in SEWAGE_WORDS.finditer(s):
+        t = m.group(0).lower()
+        if t not in found:
+            found.append(t)
+    return (", ".join(found) + " (the filer's wording is not reproduced)") if found else None
+
+
+def names_only_waters(s: str) -> bool:
+    """Every run of two or more capitalised words is a water's name: it holds a water word, or one follows it
+    ("North Platte river"). A run that is not ("near Pat Example") may be a person."""
+    for m in CAP_RUN.finditer(s):
+        after = s[m.end():m.end() + 20]
+        if not WATER_WORDS.search(m.group(0)) and not re.match(r"\s+(?:\w+\s+)?(?:river|creek|lake|reservoir)\b",
+                                                                  after, re.I):
+            return False
+    return True
 
 clean = mi.clean
 HONORIFIC = re.compile(r"\b(?:Mr|Mrs|Ms|Miss|Dr)\.?[ ]{1,2}[A-Z][A-Za-z'-]+(?:[ ]{1,2}[A-Z][A-Za-z'-]+)?")
@@ -255,12 +306,13 @@ def key_base(r: dict) -> str | None:
 
 
 def row_keys(rows: list[dict]) -> list[str | None]:
-    """Each row's key: IncidentCode and county; two rows of one read sharing that add their ClosureDate's hash."""
-    bases = [key_base(r) for r in rows]
-    n = Counter(b for b in bases if b)
+    """Each row's key: IncidentCode, county and a hash of ClosureDate (DEQ's closing stamp, to the second; a corrected
+    incident date keeps the key), whichever rows are read with it (Astra review 2026-11-16 P1-2: a suffix added only on a collision changed
+    an id when a second row appeared). Rows that still share a key are found by build() and left unread."""
     out = []
-    for r, b in zip(rows, bases):
-        if b and n[b] > 1:
+    for r in rows:
+        b = key_base(r)
+        if b:
             b = f"{b}-{hashlib.sha256(clean(r.get('ClosureDate')).encode()).hexdigest()[:6]}"
         out.append(b)
     return out
@@ -292,7 +344,7 @@ def classify(row: dict) -> tuple[str, str]:
         return "other", ""
     if text and not PLACEHOLDER_SUBSTANCE.match(text) and SEWAGE_WORDS.search(text):
         strong = STRONG.search(text)
-        if INDUSTRIAL.search(text) and not strong:
+        if INDUSTRIAL.search(text) and not SEWAGE_ITSELF.search(text):
             return "left out", "industrial, oily or chemical wastewater"
         if TREATED.search(text) and not strong:
             return "left out", "treated wastewater"
@@ -338,6 +390,8 @@ def water_text(row: dict, flag: str) -> tuple[str | None, str | None, bool]:
         return None, "the water text is an account, not a water's name, and is not reproduced", yes
     if HOME_WORDS.search(s):
         return None, "the water text describes private property and is not reproduced", yes
+    if not names_only_waters(s):
+        return None, "the water text holds words that may name a person and is not reproduced", yes
     return s, None, yes
 
 
@@ -360,11 +414,12 @@ def point_of(row: dict, public: bool, home: bool) -> tuple[float | None, float |
     if not public:
         return None, None, "the report does not name public sewer works: no point is kept"
     county = clean(row.get("County"))
-    if county:
-        from build import status as S
-        here = S.point_county("WY", lat, lon)
-        if here is None or not re.sub(r"\s+county$", "", here[1], flags=re.I).lower() == county.lower():
-            return None, None, f"the list's point lies outside {county} County, the county the list gives"
+    if not county:
+        return None, None, "the report gives no county to check the point against: no point is kept"
+    from build import status as S
+    here = S.point_county("WY", lat, lon)
+    if here is None or not re.sub(r"\s+county$", "", here[1], flags=re.I).lower() == county.lower():
+        return None, None, f"the list's point lies outside {county} County, the county the list gives"
     return round(lat, POINT_DECIMALS), round(lon, POINT_DECIMALS), None
 
 
@@ -419,7 +474,7 @@ def build_record(row: dict, key: str, basis: str, fetched_at: str, prev: dict | 
     lat, lon, why_no_point = point_of(row, public or bool(tied), home)
     a["Latitude"], a["Longitude"] = (str(lat) if lat is not None else None), (str(lon) if lon is not None else None)
     a["WaterAffected"] = water
-    a["SubstanceOther"] = scrub_free(row.get("SubstanceOther"))
+    a["SubstanceOther"] = substance_label(scrub_free(row.get("SubstanceOther")))
     a["UnitOther"] = scrub_free(row.get("UnitOther")) if clean(row.get("UnitOther")) else None
     a["IncidentCity"] = clean(row.get("IncidentCity")).title() or None
     p_raw = (prev or {}).get("raw") or {}
@@ -524,6 +579,7 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], operators
     kinds, left_now, blooms = Counter(), Counter(), []
     keys = row_keys(rows)
     copies = copy_links(rows, keys)
+    shared = {k for k, n in Counter(k for k in keys if k).items() if n > 1}
     for row, key in zip(rows, keys):
         if not key:
             continue
@@ -543,7 +599,8 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], operators
             continue
         seen.add(eid)
         left_state.pop(key, None)
-        if parse_time(row.get("IncidentDate"))[0] is None:
+        if key in shared or parse_time(row.get("IncidentDate"))[0] is None:
+            # two rows with one key (Astra P1-3), or a date that cannot be read: the earlier record is kept as it was
             unread.append(key)
             if eid in prev:
                 records.append(prev[eid])
@@ -580,6 +637,12 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], operators
 
 # ---------------------------------------------------------------- reading
 
+LEFT_OUT_NOTE = ("The list holds spills of every substance; we show its sewage reports. These counts are of the reports "
+                 "that use a sewage or wastewater word and are not shown: industrial, oily or chemical wastewater, "
+                 "treated wastewater (outside our scope), odour complaints, and wastewater reports whose words do not "
+                 "tie the release to a sewer. The list's bloom reports are counted, not shown here.")
+
+
 class BadRead(Exception):
     """An answer that is not a complete reading of the list."""
 
@@ -608,14 +671,20 @@ def parse_csv(content: bytes) -> list[dict]:
     rows = [dict(zip(HEADER, r)) for r in table[1:]]
     if not rows:
         raise BadRead("the list answered a header and no rows: read as an outage")
-    blank = sum(1 for r in rows if not clean(r["IncidentCode"]) and not clean(r["IncidentDate"]))
+    # an empty report: no code, no date, no substance (one on 2026-11-16, with only a quantity, media, divisions, status
+    # and closure); a row with no code but a date or a substance cannot be keyed: the read fails (Astra P2-6)
+    blank = sum(1 for r in rows if not any(clean(r[k]) for k in ("IncidentCode", "IncidentDate", "Substance",
+                                                                 "SubstanceOther")))
+    codeless = sum(1 for r in rows if not clean(r["IncidentCode"])) - blank
+    if codeless:
+        raise BadRead(f"{codeless} rows with other fields have no incident code (Astra review 2026-11-16 P2-6)")
     if blank > MAX_BLANK:
         raise BadRead(f"{blank} of {len(rows)} rows are blank")
     return rows
 
 
 def check_count(rows: list[dict], last_complete: int | None) -> None:
-    if last_complete and len(rows) < last_complete - max(MAX_DROP, MAX_DROP_SHARE * last_complete):
+    if last_complete and len(rows) < last_complete - min(MAX_DROP, max(1, MAX_DROP_SHARE * last_complete)):
         raise BadRead(f"the list answered {len(rows)} rows against {last_complete} in the last complete read: read as "
                       "cut short")
 
@@ -700,11 +769,7 @@ def main(argv=None) -> int:
             "time_basis": "Incident dates as the list gives them, read in Mountain time (America/Denver).",
             "credit": CREDIT, "registry_ids": REGISTRY_IDS, "cadence": f"read at most once in {EVERY_HOURS} hours",
             "left_out": dict(Counter(left_state.values())),
-            "left_out_note": ("The list holds spills of every substance. Oil, fuel, produced water, chemicals, "
-                              "industrial and treated wastewater, sludge that reached no water and odour reports are "
-                              "not sewage reports and are not shown; the counts here are of the rows that name "
-                              "wastewater or sewage words but are not shown. The list's bloom reports are counted, "
-                              "not shown here."),
+            "left_out_note": LEFT_OUT_NOTE,
             "completeness": {"rows_this_read": n_rows, "max_drop": [MAX_DROP, MAX_DROP_SHARE]},
             "backfill": state.get("backfill"), "seconds": took}
     path_notes_to_meta(records, meta)
