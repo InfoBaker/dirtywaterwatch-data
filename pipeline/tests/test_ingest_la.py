@@ -216,7 +216,8 @@ def test_a_failed_copy_never_replaces_an_accepted_report(monkeypatch):
 
 def test_reports_are_kept_by_number_and_due_rules():
     state = {"reports": {"https://example.org/r95.pdf": {"number": 95, "layout_ok": True, "rows": [],
-                                                        "read_at": "2026-11-14T00:00:00Z"}}}
+                                                        "read_at": "2026-11-14T00:00:00Z",
+                                                        "parser_version": Q.PARSER_VERSION}}}
     Q.migrate(state)
     assert list(state["reports"]) == ["95"] and state["reports"]["95"]["url"] == "https://example.org/r95.pdf"
     links = {95: "https://example.org/r95.pdf", 96: "https://example.org/r96.pdf", 90: "https://example.org/r90.pdf"}
@@ -289,10 +290,12 @@ def test_every_failed_layout_check_is_an_error_and_named_unread(monkeypatch, tmp
 
 def test_a_report_with_no_accepted_copy_is_tried_again_on_the_reread_cadence():
     state = {"reports": {"91": {"number": 91, "url": "https://example.org/r91.pdf", "layout_ok": False, "rows": [],
-                                "read_at": "2026-11-01T00:00:00Z", "check": {}, "summary": {}}}}
+                                "read_at": "2026-11-01T00:00:00Z", "check": {}, "summary": {},
+                                "parser_version": Q.PARSER_VERSION}}}
     links = {91: "https://example.org/r91.pdf", 95: "https://example.org/r95.pdf", 96: "https://example.org/r96.pdf"}
-    state["reports"]["95"] = {"number": 95, "url": links[95], "layout_ok": True, "rows": [], "read_at": "2026-11-01T00:00:00Z"}
-    state["reports"]["96"] = {"number": 96, "url": links[96], "layout_ok": True, "rows": [], "read_at": "2026-11-01T00:00:00Z"}
+    for n in (95, 96):
+        state["reports"][str(n)] = {"number": n, "url": links[n], "layout_ok": True, "rows": [],
+                                    "read_at": "2026-11-01T00:00:00Z", "parser_version": Q.PARSER_VERSION}
     assert Q.due(state, links, "2026-11-10T00:00:00Z") == []
     assert (91, links[91]) in Q.due(state, links, "2026-12-05T00:00:00Z")
 
@@ -369,7 +372,7 @@ def test_baton_rouge_source_descriptions_follow_the_counts_and_the_reread_rule()
     reports = (ROOT / "data" / "sources" / "la-baton-rouge-quarterly-reports.yaml").read_text()
     pairs = re.search(r"\((\d+) discharges: ([\d+, ]+)\)", feed)
     assert int(pairs.group(1)) == sum(int(x) for x in re.findall(r"\d+", pairs.group(2))) == 219
-    assert "102 of the 219 rows" in feed and "(most rows)" not in feed
+    assert "95 of the 219 rows" in feed and "(most rows)" not in feed
     for text in (feed, reports):
         assert "fetched once each" not in text and "each report fetched once" not in text
         assert f"every {Q.REREAD_DAYS} days" in text
@@ -377,7 +380,7 @@ def test_baton_rouge_source_descriptions_follow_the_counts_and_the_reread_rule()
     if state.is_file():                       # the fetched reports, where this clone holds them
         recs = Q.records(json.loads(state.read_text()))
         none = [r for r in recs if (r.get("waterbody_text") or "").strip().lower() in Q.NO_WATER]
-        assert len(recs) == 219 and len(none) == 102
+        assert len(recs) == 219 and len(none) == 95
 
 
 # --- last review round (verification pass) ---
@@ -494,7 +497,8 @@ def test_a_receiving_water_cell_with_an_address_or_a_name_is_withheld_before_the
     table = TABLE_N.replace(_row("9/4/2026", "200 Sample Ave", "Blockage - Collection Line", "Example", "1,130"),
                             _row("9/4/2026", "200 Sample Ave", "Blockage - Collection Line", "123 Example Ln", "1,130"))
     table = table.replace(_cont(addr="Unit", water="Bayou"), _cont(addr="Unit"))
-    table_s = TABLE_S.replace("Example Creek", "Reported by: Example Person")
+    # the gallons kept under their header (a longer cell would push them into the PS column, which now fails the row)
+    table_s = TABLE_S.replace("Example Creek" + " " * 13 + "9,000", "Reported by: Example Person  9,000")
     url = "https://example.org/98th-Quarterly-Report.pdf"
     _pdf_state(monkeypatch, {b"pdf": [SUMMARY, table, table_s]})
     _live(monkeypatch, tmp_path, {98: url}, {url: b"pdf"})
@@ -639,3 +643,143 @@ def test_title_forms_in_the_water_cell_are_withheld_and_water_names_after_a_titl
         assert Q.receiving_water(cell)[0] is None, cell
     for ok in ("Ranger Creek", "Judge Bayou", "Ward Creek", "Bayou Manchac"):
         assert Q.receiving_water(ok) == (ok, None), ok
+
+
+# --- go-live audit 2026-11-15, P1-1: Report 93's layout (the water and the gallons below the date line) ---
+
+EXCERPTS = json.loads((Path(__file__).parent / "fixtures" / "la_baton_rouge_report_excerpts.json").read_text())
+SOUTH_HEAD = "SOUTH Sewer District Collection System LPDES LA0036412 AI#4841\n04/01/2025 To 06/30/2025\n"
+NORTH_HEAD_96 = "NORTH Sewer District Collection System LPDES LA0036439AI# 4843\n01/01/2026 To 03/31/2026\n"
+
+
+def _summary(north, south, total=None):
+    total = north + south if total is None else total
+    return f"""Part D.           Reporting of Unauthorized Discharges
+                 Summary of Unauthorized Discharges                                            Number
+ North Plant-LA0036439 AI# 4843 Collection System                                                  {north}
+ North Plant-LA0036439 AI# 4843 Treatment Plant                                                    0
+ South Plant-LA0036412 AI# 4841 Collection System                                                  {south}
+ South Plant-LA0036412 AI# 4841 Treatment Plant                                                     0
+                                                                             Total                 {total}
+Issued: July 31, 2025                                                                                  Page | D-1
+"""
+
+
+def _r93(p55=None):
+    return [_summary(0, 6), SOUTH_HEAD + EXCERPTS["r93_south_p54"], p55 or EXCERPTS["r93_south_p55"]]
+
+
+def test_report_93_reads_the_gallons_and_the_water_below_the_date_line():
+    """Report 93's real layout: the laboratory values (PS, BOD, TSS, pH, ARD) on the date line, the water and the
+    gallons below it. Jones Creek, May 2, 2025: 18,470 gallons (the PS value 13 was read before); the water the City
+    named (Weiner Creek) is kept; 'Corporation' and 'Canal' wrapped over a blank line are one name; 'Unknown' gives
+    no figure."""
+    rep = Q.parse_report(_r93())
+    assert rep["layout_ok"], rep["problems"]
+    got = [(r["date"], r["receiving_water"], r["gallons"], r["gallons_text"]) for r in rep["rows"]]
+    assert got == [("2025-04-24", "Corporation Canal", 275, "275"), ("2025-04-24", "Weiner Creek", 100, "100"),
+                   ("2025-05-01", "None", None, "Unknown"), ("2025-05-02", "Jones Creek", 18470, "18,470"),
+                   ("2025-05-09", "Jones Creek", None, "Unknown"), ("2025-05-09", "None", 112, "112")]
+    recs = {r["source_record_id"]: r for r in Q.records({"reports": {"93": {**rep, "number": 93, "url": "u"}}})}
+    jc = recs["r93-LA0036412-2025-05-02-1"]
+    assert jc["volume_gal"] == 18470 and jc["volume_text"] == "18,470 gallons" and jc["waterbody_text"] == "Jones Creek"
+    unk = recs["r93-LA0036412-2025-05-01-1"]
+    assert unk["volume_gal"] is None and unk["volume_text"] is None and unk["raw"]["gallons_as_given"] == "Unknown"
+    assert jc["raw"]["parser_version"] == Q.PARSER_VERSION
+
+
+def test_reports_96_and_98_in_the_other_layout_read_as_before():
+    """Regression: the water and the gallons centred on the date line (Reports 94 on). Report 98 North, September 4
+    to 21, 2026, and Report 96 North, February 14 and 28, 2026, where a water name wraps above the date line
+    ('Beechwood' over 'Lateral', read before as 'Lateral' alone)."""
+    rep = Q.parse_report([_summary(3, 0).replace("July 31, 2025", "October 30, 2026"), EXCERPTS["r98_north_p51"]])
+    assert rep["layout_ok"], rep["problems"]
+    assert [(r["date"], r["receiving_water"], r["gallons"]) for r in rep["rows"]] == [
+        ("2026-09-04", "Blackwater Bayou", 25), ("2026-09-14", "Amite River", 650), ("2026-09-21", "Roberts Canal", 1040)]
+    rep = Q.parse_report([_summary(2, 0), NORTH_HEAD_96 + EXCERPTS["r96_north_p52"]])
+    assert rep["layout_ok"], rep["problems"]
+    assert [(r["date"], r["receiving_water"], r["gallons"]) for r in rep["rows"]] == [
+        ("2026-02-14", "Cypress Bayou", 16), ("2026-02-28", "Beechwood Lateral", 15)]
+
+
+def test_a_row_that_cannot_be_read_with_confidence_fails_the_report():
+    """No gallons cell, two gallons cells, a figure that is not a number, a water cell that belongs to no row in the
+    date-line layout, and a summary whose Total is not the sum of its counts: each fails the report, so no record is
+    made from it and no figure is taken from the PS column."""
+    p55 = EXCERPTS["r93_south_p55"]
+    cases = {
+        "no gallons": p55.replace("18,470", "      "),
+        "two gallons": p55.replace("   112", "   112\n" + " " * next(
+            ln for ln in p55.split("\n") if "Amt. Gals" in ln).index("Amt. Gals") + "  44"),
+        "not a figure": p55.replace("18,470", "18-470"),
+    }
+    for name, page in cases.items():
+        rep = Q.parse_report(_r93(page))
+        assert not rep["layout_ok"], name
+        assert any("Amt. Gals" in p for p in rep["problems"]), (name, rep["problems"])
+        assert Q.records({"reports": {"93": {**rep, "number": 93, "url": "u"}}}) == [], name
+        assert not [r for r in rep["rows"] if r["gallons"] in (13, 59, 162, 135)], name
+    p51 = EXCERPTS["r98_north_p51"].split("\n")
+    at = next(i for i, ln in enumerate(p51) if "Amite River" in ln) + 3
+    col = p51[2].index("Rec. Waters")
+    p51[at] = " " * col + "Ward Creek"                    # a water cell touching no date line, between two rows
+    rep = Q.parse_report([_summary(3, 0), "\n".join(p51)])
+    assert not rep["layout_ok"] and any("belongs to no row" in p for p in rep["problems"])
+    rep = Q.parse_report([_summary(0, 6, total=7)] + _r93()[1:])
+    assert not rep["layout_ok"] and any("Total" in p for p in rep["problems"])
+
+
+def _r93_v1_state(rep, read_at):
+    """A state written by the first parser: no parser_version, Report 93's gallons read from the PS column and the
+    waters below the date line dropped (as the audit found them)."""
+    import copy
+    old = copy.deepcopy({**rep, "number": 93, "url": "https://example.org/93rdQuarterlyRptFinal.pdf",
+                         "sha256": "x", "read_at": read_at})
+    old.pop("parser_version")
+    for r, ps in zip(old["rows"], ("59", "154", "59", "13", "162", "135")):
+        r["gallons"], r["gallons_text"] = int(ps), ps
+    old["rows"][1]["receiving_water"] = None                           # Weiner Creek dropped
+    old["attempts"] = [{"url": old["url"], "sha256": "x", "read_at": read_at, "layout_ok": True, "check": rep["check"]}]
+    return {"reports": {"93": old}}
+
+
+def test_a_report_read_by_an_older_parser_is_read_again_and_replaced_under_the_same_ids(monkeypatch, tmp_path):
+    """P1-1 re-read: the saved state holds Report 93 as the first parser read it; the next ordinary run (no flag,
+    well inside the 30-day cadence) fetches it once, reads it with the current parser and replaces the rows: the
+    same ids, the corrected figures and waters, no duplicate; the run after that fetches nothing."""
+    rep = Q.parse_report(_r93())
+    url = "https://example.org/93rdQuarterlyRptFinal.pdf"
+    state = _r93_v1_state(rep, "2026-11-14T00:00:00Z")
+    before = {r["source_record_id"]: r for r in Q.records(json.loads(json.dumps(state)))}
+    assert before["r93-LA0036412-2025-05-02-1"]["volume_gal"] == 13
+    _live(monkeypatch, tmp_path, {93: url}, {url: b"r93"})
+    (tmp_path / "state.json").write_text(json.dumps(state))
+    fetched = []
+    get = Q.requests.get
+    monkeypatch.setattr(Q.requests, "get", lambda u, **kw: (fetched.append(u), get(u, **kw))[1])
+    _pdf_state(monkeypatch, {b"r93": _r93()})
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-16T00:00:00Z")
+    assert code == 0 and out["ok"] is True and fetched.count(url) == 1
+    after = {r["source_record_id"]: r for r in out["records"]}
+    assert len(out["records"]) == len(after) == 6 and set(after) == set(before)
+    assert after["r93-LA0036412-2025-05-02-1"]["volume_gal"] == 18470
+    assert after["r93-LA0036412-2025-04-24-2"]["waterbody_text"] == "Weiner Creek"
+    assert {r["raw"]["parser_version"] for r in out["records"]} == {Q.PARSER_VERSION}
+    fetched.clear()
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-16T01:00:00Z")
+    assert code == 0 and fetched == [Q.INDEX] and out["count"] == 6
+
+
+def test_a_failed_reread_by_the_new_parser_keeps_the_report_pending_and_is_not_fetched_every_hour(monkeypatch,
+                                                                                                    tmp_path):
+    rep = Q.parse_report(_r93())
+    url = "https://example.org/93rdQuarterlyRptFinal.pdf"
+    _live(monkeypatch, tmp_path, {93: url}, {url: b"bad"})
+    (tmp_path / "state.json").write_text(json.dumps(_r93_v1_state(rep, "2026-11-14T00:00:00Z")))
+    _pdf_state(monkeypatch, {b"bad": _r93(EXCERPTS["r93_south_p55"].replace("18,470", "      "))})
+    code, out = _run_at(monkeypatch, tmp_path, "2026-11-16T00:00:00Z")
+    assert code == 1 and out["ok"] is False and "93" in out["meta"]["pending"] and out["count"] == 6
+    state = json.loads((tmp_path / "state.json").read_text())
+    assert not Q.parsed_by_older(state["reports"]["93"])
+    assert Q.due(state, {93: url}, "2026-11-16T01:00:00Z") == []
+    assert Q.due(state, {93: url}, "2026-12-17T00:00:00Z") == [(93, url)]

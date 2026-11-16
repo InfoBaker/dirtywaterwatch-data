@@ -1,0 +1,5813 @@
+{
+ "state": "CO",
+ "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "count": 180,
+ "waters": [
+  {
+   "slug": "a-m-puett-reservoir-co",
+   "name": "A M Puett Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Cortez"
+   ],
+   "bbox": [
+    -108.411359,
+    37.410708,
+    -108.398431,
+    37.422027
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.542,
+   "launches": [
+    "puett-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "a-m-puett-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "e245732a70e3280cfa2c236143db50480ebee1f68216d492ea6836f4b5bc4093",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "alberta-park-reservoir-co",
+   "name": "Alberta Park Reservoir",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -106.772186,
+    37.466397,
+    -106.764531,
+    37.470231
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.139,
+   "launches": [
+    "alberta-park-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "alberta-park-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "8273902adf52826a1971238ea0c3397fd9f107293cc349c7cf98b74c3eaaf45c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "alexander-lake-co",
+   "name": "Alexander Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Grand Mesa"
+   ],
+   "bbox": [
+    -107.97346,
+    39.037576,
+    -107.962713,
+    39.041529
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.122,
+   "launches": [
+    "alexander-lake-boat-launch-co"
+   ],
+   "water_id": "alexander-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "aa9c83870041721aac7ab33e3751f6da62e61f35cc1d7cc473c2782a910f7ba6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "antero-reservoir-co",
+   "name": "Antero Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Hartsel"
+   ],
+   "bbox": [
+    -105.93704,
+    38.968397,
+    -105.894428,
+    39.006144
+   ],
+   "wikidata": "Q4771423",
+   "charted": false,
+   "area_km2": 8.93,
+   "launches": [
+    "antero-reservoir-boat-launch-co"
+   ],
+   "water_id": "antero-reservoir-co",
+   "gnis_id": "198823",
+   "geometry_hash": "7de6a99eee41ff25dedff1482e19c785e2d7fad6da23ba8a128b418401052023",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "arkansas-river-co",
+   "name": "Arkansas River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Buena Vista",
+    "Cañon City",
+    "Cotopaxi",
+    "Echo",
+    "Fink",
+    "Florence",
+    "Howard",
+    "Kobe",
+    "Nathrop",
+    "Pueblo",
+    "Riverside",
+    "Salida"
+   ],
+   "bbox": [
+    -106.357026,
+    37.989168,
+    -101.849329,
+    39.25837
+   ],
+   "wikidata": "Q8319",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-bend-recreation-site-boat-launch-co",
+    "buena-vista-swa-boat-ramp-co",
+    "arkansas-river-boat-launch-near-canon-city-co",
+    "fern-leaf-river-access-co",
+    "fisherman-s-bridge-boat-ramp-co",
+    "fisherman-s-bridge-boat-ramp-nathrop-co",
+    "florence-river-park-boat-ramp-co",
+    "hecla-junction-co",
+    "kobe-bridge-boat-ramp-co",
+    "lone-pine-boat-ramp-co",
+    "lone-pine-recreation-site-boat-launch-co",
+    "maytag-boat-ramp-co",
+    "number-4-recreation-site-co",
+    "numbers-boat-ramp-co",
+    "parkdale-boat-ramp-co",
+    "pathfinder-regional-park-boat-ramp-co",
+    "pinnacle-rock-boat-ramp-co",
+    "pinnacle-rock-boat-ramp-echo-co",
+    "railroad-bridge-boat-ramp-co",
+    "rincon-boat-ramp-co",
+    "riverside-boat-ramp-co",
+    "ruby-mountain-boat-ramp-co",
+    "salida-boat-ramp-co",
+    "salida-east-boat-ramp-co",
+    "salt-lick-boat-ramp-co",
+    "spikebuck-boat-ramp-co",
+    "stone-bridge-boat-ramp-co",
+    "texas-creek-river-access-co",
+    "trading-post-boat-ramp-co",
+    "vallie-bridge-boat-ramp-co"
+   ],
+   "water_id": "arkansas-river-ar",
+   "gnis_id": "78956",
+   "geometry_hash": "03028d7f6f854b33d4ba0c0fea5d59a97da28899546b3fec2d8b043cec494a89",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T11:44:49+00:00",
+   "launches_unpublished": [
+    "journey-quest-river-access-co"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "aurora-reservoir-co",
+   "name": "Aurora Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Parker"
+   ],
+   "bbox": [
+    -104.680291,
+    39.595448,
+    -104.651449,
+    39.620026
+   ],
+   "wikidata": "Q4822600",
+   "charted": false,
+   "area_km2": 3.027,
+   "launches": [
+    "aurora-reservoir-boat-launch-co"
+   ],
+   "water_id": "aurora-reservoir-co",
+   "gnis_id": "1947706",
+   "geometry_hash": "ad2a45c10925e8a34bee42c48653dbe9da1d680c398d22c787a3b0176814796d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "barr-lake-co",
+   "name": "Barr Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Brighton"
+   ],
+   "bbox": [
+    -104.785947,
+    39.927298,
+    -104.741337,
+    39.960657
+   ],
+   "wikidata": "Q808761",
+   "charted": false,
+   "area_km2": 6.842,
+   "launches": [
+    "barr-lake-state-park-boat-ramp-co"
+   ],
+   "water_id": "barr-lake-co",
+   "gnis_id": "203031",
+   "geometry_hash": "fb607ec83ee1f6302495d1a170881006610946f86cb5956ea4d76e4f0dfa1d37",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "bear-creek-lake-co",
+   "name": "Bear Creek Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Lakewood"
+   ],
+   "bbox": [
+    -105.149288,
+    39.647276,
+    -105.137903,
+    39.653827
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.384,
+   "launches": [
+    "bear-creek-lake-boat-launch-co"
+   ],
+   "water_id": "bear-creek-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "9b898296a917b343f9866c38815ccf83776b2ddb9dc762b321da24bd82df5841",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-creek-reservoir-co",
+   "name": "Beaver Creek Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "South Fork"
+   ],
+   "bbox": [
+    -106.668265,
+    37.581137,
+    -106.65205,
+    37.596191
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.374,
+   "launches": [
+    "beaver-creek-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "beaver-creek-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "e07cfa6e7d37630da15ce4f70c44dcd367fbc2475d52e2f83a0c69ca9404b339",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "beaver-reservoir-co",
+   "name": "Beaver Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Ward"
+   ],
+   "bbox": [
+    -105.5276,
+    40.112054,
+    -105.516596,
+    40.121097
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.44,
+   "launches": [],
+   "water_id": "beaver-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "a95ce7823149e7aa6cbd8e88e9f779bd6bc13ccc02982e3f6a6c1d362b50ef4f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "beaver-reservoir-boat-launch-near-ward-co"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "benchmark-lake-reservoir-co",
+   "name": "Benchmark Lake Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Avon"
+   ],
+   "bbox": [
+    -106.532022,
+    39.636121,
+    -106.528461,
+    39.638607
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.059,
+   "launches": [
+    "benchmark-lake-reservoir-boat-launch-co"
+   ],
+   "water_id": "benchmark-lake-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "4ad0a18b73c5fe50e133d4d4d52ca4dcc2972ee65bef627f78bdeac7b93fb3ee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-creek-lakes-co",
+   "name": "Big Creek Lakes",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -106.623666,
+    40.909478,
+    -106.605121,
+    40.936531
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.915,
+   "launches": [
+    "big-creek-lakes-boat-launch-co"
+   ],
+   "water_id": "big-creek-lakes-co",
+   "gnis_id": null,
+   "geometry_hash": "83fb3dda015b282d90d771d0e10037edb400a9e4736b44a1716e7d27ca85a58e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-creek-reservoir-number-1-co",
+   "name": "Big Creek Reservoir Number 1",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.888301,
+    39.077255,
+    -107.876933,
+    39.082886
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.249,
+   "launches": [
+    "big-creek-reservoir-boat-ramp-co"
+   ],
+   "water_id": "big-creek-reservoir-number-1-co",
+   "gnis_id": null,
+   "geometry_hash": "e7c9a68874848906c22ef9af971c0ac270cd52296b97f235c3d1a0cc1b301a19",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-meadows-reservoir-co",
+   "name": "Big Meadows Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -106.809372,
+    37.532872,
+    -106.799184,
+    37.541551
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.432,
+   "launches": [
+    "big-meadows-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "big-meadows-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "0c032cee1285546319c234ebecdb839816c604e8bd99e66e8e19abf6015ec3f1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "big-soda-lake-co",
+   "name": "Big Soda Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Morrison"
+   ],
+   "bbox": [
+    -105.175403,
+    39.639553,
+    -105.166073,
+    39.646433
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.318,
+   "launches": [
+    "big-soda-lake-boat-launch-co"
+   ],
+   "water_id": "big-soda-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "3272598148fa623fb3953244f8c313b504552cbd04e8b29e2b5f5aad6fb1837d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blue-heron-reservoir-co",
+   "name": "Blue Heron Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Del Camino"
+   ],
+   "bbox": [
+    -104.997785,
+    40.162436,
+    -104.990404,
+    40.167573
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.276,
+   "launches": [
+    "saint-vrain-state-park-boat-ramp-co"
+   ],
+   "water_id": "blue-heron-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "00c4f2856b522d79037cea6438d876bcff79fd42dee837f7e53208c41783f1e6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blue-lake-reservoir-co",
+   "name": "Blue Lake Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Las Animas"
+   ],
+   "bbox": [
+    -103.280325,
+    38.230368,
+    -103.211059,
+    38.288692
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 17.439,
+   "launches": [
+    "blue-lake-reservoir-boat-launch-near-las-animas-co",
+    "blue-lake-reservoir-boat-launch-near-las-animas-co-2",
+    "blue-lake-reservoir-boat-launch-near-las-animas-co-3",
+    "blue-lake-reservoir-boat-launch-near-las-animas-co-4"
+   ],
+   "water_id": "blue-lake-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "e549b3e89330bae720f4704a1b4a3a569a5f9913d7478b0c35562d41d9dd1d0a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blue-mesa-reservoir-co",
+   "name": "Blue Mesa Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Gunnison",
+    "Sapinero"
+   ],
+   "bbox": [
+    -107.334662,
+    38.39137,
+    -107.024095,
+    38.526609
+   ],
+   "wikidata": "Q885767",
+   "charted": false,
+   "area_km2": 34.647,
+   "launches": [
+    "bay-of-chickens-co",
+    "dillon-pinnacles-co",
+    "elk-creek-co",
+    "iola-beach-co",
+    "iola-boat-launch-co",
+    "lake-fork-boat-launch-co",
+    "north-willow-co",
+    "ponderosa-boat-launch-co",
+    "sapinero-beach-co",
+    "stevens-creek-boat-launch-co"
+   ],
+   "water_id": "blue-mesa-reservoir-co",
+   "gnis_id": "186973",
+   "geometry_hash": "de6878ba4356bc131d0e2cacf10c6e01bfb2b555ebd7c647817200c3c58d5bd1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blue-river-co",
+   "name": "Blue River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Kremmling",
+    "Silverthorne"
+   ],
+   "bbox": [
+    -106.398559,
+    39.386843,
+    -106.030306,
+    40.042565
+   ],
+   "wikidata": "Q885861",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "columbine-landing-boating-site-co",
+    "confluence-recreation-area-blue-river-takeout-co",
+    "confluence-recreation-area-boat-ramp-co"
+   ],
+   "water_id": "blue-river-co",
+   "gnis_id": "173194",
+   "geometry_hash": "db8012e9436cbe3c309e839598e0dfb684c61c422accceae6c6a4433bc41866d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "blunn-reservoir-co",
+   "name": "Blunn Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Golden"
+   ],
+   "bbox": [
+    -105.221391,
+    39.817095,
+    -105.202774,
+    39.828176
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.758,
+   "launches": [
+    "blunn-reservoir-boat-launch-co"
+   ],
+   "water_id": "blunn-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "399b87e644ac0ded81ac3089a760853e475ef10e021cac1a6cb1cf3f222720a9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boedecker-lake-co",
+   "name": "Boedecker Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Loveland"
+   ],
+   "bbox": [
+    -105.152346,
+    40.380507,
+    -105.130781,
+    40.392624
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.561,
+   "launches": [
+    "boedecker-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "boedecker-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "c8e7e31caa4b19aa606b48d3f77fecd849638b527fbe1a91ad7f6c56a4adac81",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boulder-reservoir-co",
+   "name": "Boulder Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Gunbarrel"
+   ],
+   "bbox": [
+    -105.235626,
+    40.070447,
+    -105.210656,
+    40.085882
+   ],
+   "wikidata": "Q28209852",
+   "charted": false,
+   "area_km2": 2.277,
+   "launches": [
+    "boulder-reservoir-boat-launch-near-gunbarrel-co-2"
+   ],
+   "water_id": "boulder-reservoir-co",
+   "gnis_id": "178708",
+   "geometry_hash": "650ca90bec5cb345f860741571d61d10d26817a01d9b362a776771a83134fd13",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "boyd-lake-co",
+   "name": "Boyd Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Loveland"
+   ],
+   "bbox": [
+    -105.045197,
+    40.411915,
+    -105.022879,
+    40.46346
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.012,
+   "launches": [
+    "boyd-lake-boat-launch-near-loveland-co-2",
+    "boyd-lake-boat-launch-near-loveland-co"
+   ],
+   "water_id": "boyd-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "bdcb8e32111d6226b710b1be3196cd5a9c478496c3fc87acd3c7956bcb1812ef",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "brush-hollow-reservoir-co",
+   "name": "Brush Hollow Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Penrose"
+   ],
+   "bbox": [
+    -105.054877,
+    38.457456,
+    -105.047642,
+    38.47381
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.548,
+   "launches": [
+    "brush-hollow-swa-boat-ramp-co"
+   ],
+   "water_id": "brush-hollow-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "0f0f2de4c419e381cb6b96d2a102a682bfadb49dabdf18e6b68ec35b8eb2a93a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cache-la-poudre-river-co",
+   "name": "Cache la Poudre River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Fort Collins",
+    "Indian Meadows",
+    "Mishawaka",
+    "Poudre Park"
+   ],
+   "bbox": [
+    -105.813149,
+    40.417819,
+    -104.599881,
+    40.713889
+   ],
+   "wikidata": "Q1025026",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bridges-river-access-point-put-in-co",
+    "bridges-river-take-out-co",
+    "bridges-river-take-out-2-co",
+    "filter-plant-river-put-in-co",
+    "mishawaka-river-access-put-in-co",
+    "pineview-river-put-in-take-out-co",
+    "rustic-river-access-co"
+   ],
+   "water_id": "cache-la-poudre-river-co",
+   "gnis_id": "205018",
+   "geometry_hash": "bfc36517264ebd2bc36a1af5879a662331a3b71e7f1d97fb122eaa3f67c5bd6a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "carter-lake-reservoir-co",
+   "name": "Carter Lake Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Loveland"
+   ],
+   "bbox": [
+    -105.226574,
+    40.313595,
+    -105.205379,
+    40.354773
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.523,
+   "launches": [
+    "north-pines-boat-ramp-co",
+    "south-boat-ramp-co"
+   ],
+   "water_id": "carter-lake-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "41b982620409e8113276be8edbf59e5f9832a7b42cae0401bc9e3e8d5d8a68b3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "carter-lake-reservoir-boat-launch-near-loveland-co"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "chambers-lake-co",
+   "name": "Chambers Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -105.859595,
+    40.59388,
+    -105.842944,
+    40.616335
+   ],
+   "wikidata": "Q39074815",
+   "charted": false,
+   "area_km2": 1.1,
+   "launches": [
+    "chambers-lake-boating-site-co"
+   ],
+   "water_id": "chambers-lake-co",
+   "gnis_id": "198413",
+   "geometry_hash": "7ec4f95c5cb9910062605db43901da37673b1357f8a97aa91f2fe5fe59251896",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "chatfield-reservoir-co",
+   "name": "Chatfield Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Highlands Ranch",
+    "Littleton"
+   ],
+   "bbox": [
+    -105.087667,
+    39.520134,
+    -105.043203,
+    39.559217
+   ],
+   "wikidata": "Q1068167",
+   "charted": false,
+   "area_km2": 6.239,
+   "launches": [
+    "chatfield-state-park-north-boat-ramp-co",
+    "chatfield-state-park-north-boat-ramp-littleton-co",
+    "chatfield-state-park-south-boat-ramp-co"
+   ],
+   "water_id": "chatfield-reservoir-co",
+   "gnis_id": "202884",
+   "geometry_hash": "564dc089bfca609dad49a5ccaee01db9bc7e718869774886f031826a55d66442",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cherry-creek-reservoir-co",
+   "name": "Cherry Creek Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Centennial"
+   ],
+   "bbox": [
+    -104.871438,
+    39.629998,
+    -104.840934,
+    39.651114
+   ],
+   "wikidata": "Q1070344",
+   "charted": false,
+   "area_km2": 3.456,
+   "launches": [
+    "cherry-creek-state-park-east-boat-ramp-co",
+    "cherry-creek-state-park-west-boat-ramp-co"
+   ],
+   "water_id": "cherry-creek-reservoir-co",
+   "gnis_id": "203038",
+   "geometry_hash": "f43184e95cb065065035a4d5d74dbb5e8fe6ec7d3a53c0fca3cb922e28f817c8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "cherry-creek-reservoir-boat-launch-near-centennial-co",
+    "cherry-creek-reservoir-boat-launch-near-centennial-co-2",
+    "west-boat-ramp-centennial-co",
+    "west-boat-ramp-co"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "cimarron-river-co",
+   "name": "Cimarron River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.565195,
+    38.204047,
+    -107.518708,
+    38.453659
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "cimarron-river-boat-launch-co"
+   ],
+   "water_id": "cimarron-river-co",
+   "gnis_id": null,
+   "geometry_hash": "3477f9e54cd08b5042d4b7f44747bbd98bc5dac0a30a231851efc6bae016530d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "clear-creek-reservoir-co",
+   "name": "Clear Creek Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Granite"
+   ],
+   "bbox": [
+    -106.274148,
+    39.01548,
+    -106.242733,
+    39.024705
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.526,
+   "launches": [
+    "clear-creek-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "clear-creek-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "3266008015d61e1e02364128d77754aab7c0641e5e3ade7844d277186e54f8e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "colorado-river-co",
+   "name": "Colorado River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Bond",
+    "De Beque",
+    "Dell",
+    "Dotsero",
+    "Fruita",
+    "Funston",
+    "Glenwood Springs",
+    "Grand Junction",
+    "Gypsum",
+    "Kremmling",
+    "Loma",
+    "McCoy"
+   ],
+   "bbox": [
+    -109.06325,
+    39.047051,
+    -105.822314,
+    40.476649
+   ],
+   "wikidata": "Q1265",
+   "charted": false,
+   "area_km2": 0.317,
+   "launches": [
+    "beaver-island-boat-ramp-co",
+    "benches-1-boat-ramp-co",
+    "benches-2-boat-ramp-co",
+    "benches-3-boat-ramp-co",
+    "blacktail-boat-ramp-co",
+    "blue-heron-junior-service-league-boat-ramp-co",
+    "cabin-boat-ramp-co",
+    "cable-rapids-cabins-boat-ramp-co",
+    "colorado-river-boat-launch-near-dell-co",
+    "cedar-boat-ramp-co",
+    "cliffview-boat-ramp-co",
+    "colorado-river-boat-launch-near-new-castle-co",
+    "colorado-river-boat-launch-near-parachute-co-2",
+    "connected-lakes-boat-ramp-co",
+    "cottonwood-2-boat-ramp-co",
+    "cottonwood-3-boat-ramp-co",
+    "cottonwood-island-river-access-co",
+    "colorado-river-boat-launch-near-dotsero-co",
+    "grizzly-creek-launch-co",
+    "hot-springs-boat-ramp-co",
+    "island-boat-ramp-co",
+    "colorado-river-boat-launch-near-silt-co",
+    "james-m-robb-colorado-river-state-park-boat-ramp-co",
+    "colorado-river-boat-launch-near-grand-junction-co-2",
+    "last-chance-boat-ramp-co",
+    "lester-s-ledge-boat-ramp-co",
+    "lions-park-boat-ramp-co",
+    "loma-boat-launch-swa-co",
+    "lone-tree-boat-ramp-co",
+    "lyons-gulch-river-access-co",
+    "many-trees-boat-ramp-co",
+    "mary-s-wall-boat-ramp-co",
+    "pinball-access-boat-launch-co",
+    "pinball-access-boat-ramp-co",
+    "ponderosa-boat-ramp-co",
+    "pumphouse-boat-launch-co",
+    "pumphouse-boat-ramp-co",
+    "pyrite-boat-ramp-co",
+    "radium-rec-site-boat-ramp-co",
+    "radium-rec-site-boat-ramp-co-2",
+    "red-rock-boat-ramp-co",
+    "river-bend-park-boat-ramp-co",
+    "scotty-s-bench-boat-ramp-co",
+    "colorado-river-boat-launch-near-glenwood-springs-co",
+    "state-bridge-boat-ramp-co",
+    "toadflax-island-boat-ramp-co",
+    "two-bridges-boat-ramp-co",
+    "colorado-river-boat-launch-near-glenwood-springs-co-3",
+    "willow-boat-ramp-co",
+    "windy-point-river-access-co",
+    "yarmony-bridge-boat-ramp-co"
+   ],
+   "water_id": "colorado-river-az",
+   "gnis_id": "45730",
+   "geometry_hash": "32fdabd9374b9f1c9c14f50497118eff690bde4fd8ef8d321e02a34235d56a91",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "continental-reservoir-co",
+   "name": "Continental Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Lake City"
+   ],
+   "bbox": [
+    -107.241322,
+    37.866642,
+    -107.204309,
+    37.886392
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.441,
+   "launches": [
+    "continental-reservoir-boat-launch-co"
+   ],
+   "water_id": "continental-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "c705685dcaef9dbeae87e91499e169e839d649371439e3655c6ec7f91b570c5e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "corn-lake-co",
+   "name": "Corn Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Clifton"
+   ],
+   "bbox": [
+    -108.465998,
+    39.055274,
+    -108.459836,
+    39.056978
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.08,
+   "launches": [
+    "corn-lake-boat-ramp-co"
+   ],
+   "water_id": "corn-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "17c8d5ca20d6fc3efa0385b41f8521021199a09b39c287cdb82b1893c9b604f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-lake-co",
+   "name": "Cottonwood Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Buena Vista"
+   ],
+   "bbox": [
+    -106.284993,
+    38.779991,
+    -106.277886,
+    38.783727
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.153,
+   "launches": [
+    "cottonwood-lake-boating-site-co"
+   ],
+   "water_id": "cottonwood-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "e33305a40a738763033e0bf985a7c5104095f6e205df625a9ebba10efcf40387",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cottonwood-lake-number-1-co",
+   "name": "Cottonwood Lake Number 1",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Grand Mesa"
+   ],
+   "bbox": [
+    -107.979359,
+    39.071198,
+    -107.964782,
+    39.075609
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.369,
+   "launches": [
+    "cottonwood-1-boat-ramp-co"
+   ],
+   "water_id": "cottonwood-lake-number-1-co",
+   "gnis_id": null,
+   "geometry_hash": "c01188adcd21f9d32f82784b8e56049bd655c7bf87fa7bd260d8cab65901763e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "cowdrey-reservoir-co",
+   "name": "Cowdrey Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Cowdrey"
+   ],
+   "bbox": [
+    -106.317132,
+    40.830177,
+    -106.308453,
+    40.843164
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.377,
+   "launches": [
+    "cowdrey-lake-swa-boat-ramp-co"
+   ],
+   "water_id": "cowdrey-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "78f49d482c6a6afa55f0177d5877a9bd732ada95daa350026d27d8f88a7fbd52",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "crawford-reservoir-co",
+   "name": "Crawford Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Crawford"
+   ],
+   "bbox": [
+    -107.608138,
+    38.668946,
+    -107.593614,
+    38.693271
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.469,
+   "launches": [
+    "crawford-state-park-peninsula-boat-ramp-co",
+    "iron-creek-boat-ramp-co"
+   ],
+   "water_id": "crawford-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "5100c797284ea6c2711a255b7785d01eb9b4909428bccec7cebb37146e87e56e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deep-lake-co",
+   "name": "Deep Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Carbonate"
+   ],
+   "bbox": [
+    -107.302558,
+    39.771558,
+    -107.296271,
+    39.775
+   ],
+   "wikidata": "Q5250232",
+   "charted": false,
+   "area_km2": 0.143,
+   "launches": [
+    "deep-lake-boat-launch-co"
+   ],
+   "water_id": "deep-lake-co",
+   "gnis_id": "173833",
+   "geometry_hash": "3a3bd7ddd5c7591681b6e63e144121f13410ae67a0e86b93c46913f77b44e01a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "deweese-reservoir-co",
+   "name": "DeWeese Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Silver Cliff"
+   ],
+   "bbox": [
+    -105.478661,
+    38.191179,
+    -105.448482,
+    38.212343
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.233,
+   "launches": [
+    "de-weese-reservoir-boat-ramp-co",
+    "deweese-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "deweese-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "59607a597548acf223906d6781523ff6d50b86d84e96af667b89ff7bc9e1d14e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dillon-reservoir-co",
+   "name": "Dillon Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Frisco"
+   ],
+   "bbox": [
+    -106.091819,
+    39.569963,
+    -106.010283,
+    39.630106
+   ],
+   "wikidata": "Q5276944",
+   "charted": false,
+   "area_km2": 12.712,
+   "launches": [
+    "dillon-reservoir-boat-launch-near-frisco-co"
+   ],
+   "water_id": "dillon-reservoir-co",
+   "gnis_id": "202344",
+   "geometry_hash": "615d3b56ac01a230a6b90232680ff41162fed22b3214dbbfc2cebcae725d9a6a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dolores-river-co",
+   "name": "Dolores River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Bedrock",
+    "Cahone"
+   ],
+   "bbox": [
+    -109.281314,
+    37.468606,
+    -107.878369,
+    38.826152
+   ],
+   "wikidata": "Q1236386",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "bedrock-boat-ramp-co",
+    "bradfield-boat-ramp-cahone-co",
+    "bradfield-boat-ramp-co",
+    "dolores-river-boat-launch-co",
+    "gypsum-valley-boat-ramp-co"
+   ],
+   "water_id": "dolores-river-co",
+   "gnis_id": "1440517",
+   "geometry_hash": "28ea7a4103a701fccf05be4a7c61e8ed9750c1783e99c51569ed287af7da314f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dolores-river-dolores-canyon-co",
+   "name": "Dolores River - Dolores Canyon",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Dove Creek"
+   ],
+   "bbox": [
+    -108.849853,
+    37.681455,
+    -108.721502,
+    37.98634
+   ],
+   "wikidata": "Q1236386",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "mountain-sheep-point-boat-ramp-co",
+    "snaggletooth-boat-ramp-co"
+   ],
+   "water_id": "dolores-river-dolores-canyon-co",
+   "gnis_id": "1440517",
+   "geometry_hash": "d2cb564677e6a56b78c58d4369b6f3a86c72258598e62a211a9e0fc049953414",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "douglas-reservoir-co",
+   "name": "Douglas Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Fort Collins"
+   ],
+   "bbox": [
+    -105.091887,
+    40.68812,
+    -105.075238,
+    40.717838
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.13,
+   "launches": [
+    "douglas-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "douglas-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "22b3ad97c24e16bf2a833d45337b465ef4ab4731e8109fd452cef223b04bc491",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "dowdy-lake-co",
+   "name": "Dowdy Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Red Feather Lakes"
+   ],
+   "bbox": [
+    -105.563932,
+    40.792171,
+    -105.553508,
+    40.800691
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.464,
+   "launches": [
+    "dowdy-lake-picnic-site-co"
+   ],
+   "water_id": "dowdy-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "a4404f81b4740d8989589d87e82e223494188c8cfab21ff1d292a8b945af424d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eagle-river-co",
+   "name": "Eagle River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Edwards",
+    "Gypsum"
+   ],
+   "bbox": [
+    -107.058098,
+    39.42172,
+    -106.313725,
+    39.713422
+   ],
+   "wikidata": "Q5325229",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "community-boat-ramp-co",
+    "wolcott-boat-ramp-co"
+   ],
+   "water_id": "eagle-river-co",
+   "gnis_id": "174007",
+   "geometry_hash": "ba2f2717e5e5dfc17532f181b00e64112f7f083bc6bfae89c327a6713fc000c4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "east-delaney-lake-co",
+   "name": "East Delaney Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Walden"
+   ],
+   "bbox": [
+    -106.456157,
+    40.70312,
+    -106.449882,
+    40.712203
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.277,
+   "launches": [
+    "east-delaney-lake-boat-launch-co"
+   ],
+   "water_id": "east-delaney-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "b854e95e94991eafc1d825a62175f7dc5d6bf4bc56d12fb549a6edd4213c0aa3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "echo-canyon-reservoir-co",
+   "name": "Echo Canyon Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Pagosa Springs"
+   ],
+   "bbox": [
+    -107.001142,
+    37.206654,
+    -106.985726,
+    37.218505
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.418,
+   "launches": [
+    "echo-canyon-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "echo-canyon-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "7975c056bcf50a1bcdbe72fc752d4e872fb59488c9aba7daf10af9ab87a5969b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "eggleston-lake-co",
+   "name": "Eggleston Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Grand Mesa"
+   ],
+   "bbox": [
+    -107.949105,
+    39.039505,
+    -107.928196,
+    39.048586
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.547,
+   "launches": [
+    "eggleston-boating-site-co"
+   ],
+   "water_id": "eggleston-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "a6d96d1b071896663f626a404a63a39277859d7f48a7ac1549622be2adbb573b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "elevenmile-canyon-reservoir-co",
+   "name": "Elevenmile Canyon Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -105.570816,
+    38.894173,
+    -105.47514,
+    38.959035
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 13.113,
+   "launches": [
+    "elevenmile-canyon-reservoir-boat-launch-co-3",
+    "elevenmile-canyon-reservoir-boat-launch-co-2",
+    "elevenmile-canyon-reservoir-boat-launch-co"
+   ],
+   "water_id": "elevenmile-canyon-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "8aa9dadd66b43f4ea5b6d2309d9cf981ebd307ccf0b66b3ef322d7ce146d3bd1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "elk-head-reservoir-co",
+   "name": "Elk Head Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Craig"
+   ],
+   "bbox": [
+    -107.387959,
+    40.55663,
+    -107.332397,
+    40.597763
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.817,
+   "launches": [
+    "elkhead-reservoir-state-park-west-boat-ramp-co"
+   ],
+   "water_id": "elk-head-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "7fdd7ba6c1ec01a32bb07b19b1fd68fa5e47005d513b1043179b0fc1c4df9aa8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "flagler-reservoir-co",
+   "name": "Flagler Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Flagler"
+   ],
+   "bbox": [
+    -102.989697,
+    39.282642,
+    -102.98363,
+    39.293649
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.261,
+   "launches": [
+    "flagler-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "flagler-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "d97a03da4d39d547e1e5fc3a0de4104a69e893309e8ae4bd97f67edcfa4e70e2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "graham-creek-co",
+   "name": "Graham Creek",
+   "kind": "stream",
+   "state": "CO",
+   "towns": [
+    "Vallecito"
+   ],
+   "bbox": [
+    -107.54982,
+    37.370652,
+    -107.516961,
+    37.393652
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "graham-creek-boat-ramp-co"
+   ],
+   "water_id": "graham-creek-co",
+   "gnis_id": null,
+   "geometry_hash": "3062d9aac2324670430f8d36f408e34942120397df2b75a3236ea0a4c4ce8bcd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grand-lake-co",
+   "name": "Grand Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Grand Lake"
+   ],
+   "bbox": [
+    -105.826245,
+    40.235324,
+    -105.801996,
+    40.250854
+   ],
+   "wikidata": "Q3775069",
+   "charted": false,
+   "area_km2": 1.942,
+   "launches": [
+    "grand-lake-boat-launch-near-grand-lake-co-2"
+   ],
+   "water_id": "grand-lake-co",
+   "gnis_id": "204950",
+   "geometry_hash": "a70b4ba8a2e300fccd0b1b419c8a142be2a02a41cbcba684719bf558f8d5e141",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grape-creek-co",
+   "name": "Grape Creek",
+   "kind": "stream",
+   "state": "CO",
+   "towns": [
+    "Cañon City"
+   ],
+   "bbox": [
+    -105.496367,
+    37.908824,
+    -105.26562,
+    38.43183
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "maytag-boat-ramp-canon-city-co"
+   ],
+   "water_id": "grape-creek-co",
+   "gnis_id": null,
+   "geometry_hash": "8affb6a0cfdf5035ad432d384c3d112008791dec003d99eab3a1fdc990e36242",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "grass-valley-reservoir-co",
+   "name": "Grass Valley Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Silt"
+   ],
+   "bbox": [
+    -107.664373,
+    39.606488,
+    -107.654528,
+    39.622982
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.783,
+   "launches": [
+    "harvey-gap-state-park-boat-ramp-co"
+   ],
+   "water_id": "grass-valley-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "6951016dac3748842a4f16ef554eab3bfc99e390f44d27b663fb5e1633e118c5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "green-mountain-reservoir-co",
+   "name": "Green Mountain Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Heeney"
+   ],
+   "bbox": [
+    -106.33157,
+    39.831528,
+    -106.22428,
+    39.893631
+   ],
+   "wikidata": "Q5602905",
+   "charted": false,
+   "area_km2": 8.132,
+   "launches": [
+    "big-green-co",
+    "heeney-marina-boating-site-co",
+    "mcdonald-flats-boating-site-co"
+   ],
+   "water_id": "green-mountain-reservoir-co",
+   "gnis_id": "196488",
+   "geometry_hash": "9d7b32df547f6b47ddc6428d0098323037be2a73ae7277ba271f1bbb5b503afe",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "green-mountain-marina-co"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "green-river-co",
+   "name": "Green River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Craig Place"
+   ],
+   "bbox": [
+    -109.171899,
+    40.508904,
+    -108.881567,
+    40.902171
+   ],
+   "wikidata": "Q952429",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "crook-campground-boat-launch-co",
+    "lodore-boat-launch-co",
+    "swinging-bridge-boat-launch-co"
+   ],
+   "water_id": "green-river-co",
+   "gnis_id": "1428399",
+   "geometry_hash": "3cb05fe177042866d05e323a024d7eb07c4e71dc2a31d92873c097bd75bdfdac",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "groundhog-reservoir-co",
+   "name": "Groundhog Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -108.309828,
+    37.78513,
+    -108.286704,
+    37.810293
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.095,
+   "launches": [
+    "groundhog-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "groundhog-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "93f373ecad71918f2d6b1f128c501eaf9bc3bca2d567930be01f4daa9b3b2723",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "gunnison-river-co",
+   "name": "Gunnison River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Delta",
+    "Grand Junction",
+    "Hotchkiss",
+    "Huff",
+    "Montrose",
+    "Olathe",
+    "Saxton"
+   ],
+   "bbox": [
+    -108.577734,
+    38.442551,
+    -106.847135,
+    39.055477
+   ],
+   "wikidata": "Q558645",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "chukar-trail-rafting-put-in-co",
+    "gunnison-river-boat-launch-near-olathe-co",
+    "escalante-bridge-co",
+    "gunnison-river-boat-launch-near-hotchkiss-co",
+    "orchard-boat-ramp-co",
+    "redlands-dam-river-access-co",
+    "whitewater-boat-launch-co"
+   ],
+   "water_id": "gunnison-river-co",
+   "gnis_id": "201748",
+   "geometry_hash": "1dda553b0f0b5dc70c0cf8d9ee0a957cb5f5d91ca3195fc56b4cdc2a89b9af94",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "haviland-lake-co",
+   "name": "Haviland Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Tacoma"
+   ],
+   "bbox": [
+    -107.814063,
+    37.531336,
+    -107.807405,
+    37.538821
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.243,
+   "launches": [
+    "haviland-lake-swa-boat-ramp-co"
+   ],
+   "water_id": "haviland-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "b716fc55415e2d144de3943a1ab4ccb79a16153071bc25c50b79d09302b3aef4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "highline-lake-co",
+   "name": "Highline Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Mack"
+   ],
+   "bbox": [
+    -108.845234,
+    39.268621,
+    -108.833179,
+    39.281565
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.631,
+   "launches": [
+    "highline-lake-state-park-east-boat-ramp-co",
+    "highline-lake-state-park-west-boat-ramp-co"
+   ],
+   "water_id": "highline-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "3f014e90150ee4970c63628349f8ffaec8d588018679a9bd082447157503c3f6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "holbrook-reservoir-co",
+   "name": "Holbrook Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "La Junta"
+   ],
+   "bbox": [
+    -103.618414,
+    38.05578,
+    -103.60043,
+    38.069989
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.638,
+   "launches": [
+    "holbrook-reservoir-swa-high-water-ramp-co",
+    "holbrook-reservoir-swa-low-water-ramp-co"
+   ],
+   "water_id": "holbrook-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "0e9b3a452b09cc8c2773ea6409b47ccff73a88299097e7f46035fc51d2828ca6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "horse-creek-reservoir-co",
+   "name": "Horse Creek Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Las Animas"
+   ],
+   "bbox": [
+    -103.41915,
+    38.155116,
+    -103.380744,
+    38.200564
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 8.921,
+   "launches": [
+    "horse-creek-reservoir-swa-high-water-ramp-co",
+    "horse-creek-reservoir-swa-low-water-ramp-co"
+   ],
+   "water_id": "horse-creek-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "e3a3f07b06bf387e43c6889b044fd2bba6863c1e2ec3f72bc2b2543fce4393bc",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "horseshoe-lake-co",
+   "name": "Horseshoe Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Walsenburg"
+   ],
+   "bbox": [
+    -104.85014,
+    37.60263,
+    -104.842363,
+    37.614546
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.597,
+   "launches": [
+    "horseshoe-lake-boat-launch-near-walsenburg-co",
+    "horseshoe-lake-boat-launch-near-walsenburg-co-2"
+   ],
+   "water_id": "horseshoe-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "b3064d2112b053754674fa7ac8ba29fa685b298919445e2a75141afef17db742",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "horsetooth-reservoir-co",
+   "name": "Horsetooth Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Fort Collins",
+    "Stout"
+   ],
+   "bbox": [
+    -105.179794,
+    40.506276,
+    -105.141108,
+    40.599805
+   ],
+   "wikidata": "Q5906116",
+   "charted": false,
+   "area_km2": 6.78,
+   "launches": [
+    "horsetooth-reservoir-boat-launch-near-fort-collins-co-2",
+    "horsetooth-reservoir-boat-launch-near-fort-collins-co-3",
+    "south-bay-horsetooth-low-level-boat-ramp-co",
+    "horsetooth-reservoir-boat-launch-near-stout-co-2",
+    "horsetooth-reservoir-boat-launch-near-stout-co"
+   ],
+   "water_id": "horsetooth-reservoir-co",
+   "gnis_id": "177416",
+   "geometry_hash": "68f046d1093479a31d6c64df9e5a9768546ff87a6b35989e1523d2e8dbd8e607",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "island-lake-co",
+   "name": "Island Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Grand Mesa"
+   ],
+   "bbox": [
+    -108.008955,
+    39.032137,
+    -107.986985,
+    39.043237
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.644,
+   "launches": [
+    "island-lake-boating-site-co"
+   ],
+   "water_id": "island-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "50395bef1ad3f595cf0304dddab228ea4ba5edd1464ea113c02deb19bd6b69c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jackson-gulch-reservoir-co",
+   "name": "Jackson Gulch Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Mancos"
+   ],
+   "bbox": [
+    -108.278246,
+    37.398754,
+    -108.262324,
+    37.409957
+   ],
+   "wikidata": "Q49701215",
+   "charted": false,
+   "area_km2": 0.786,
+   "launches": [
+    "mancos-state-park-boat-ramp-co"
+   ],
+   "water_id": "jackson-gulch-reservoir-co",
+   "gnis_id": "178856",
+   "geometry_hash": "6d71cda421e8a8d0e99582a1e3f012000271a7c93fd90bf84cf611d5eca2c63a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jackson-lake-co",
+   "name": "Jackson Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Goodrich"
+   ],
+   "bbox": [
+    -104.093293,
+    40.370384,
+    -104.047803,
+    40.409425
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.655,
+   "launches": [
+    "jackson-lake-state-park-boat-ramp-co"
+   ],
+   "water_id": "jackson-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "9c23f87db0e3dae10d1b74b3dfd102c50ead33dc4fd3c4249c35910ecd9c2727",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "jefferson-lake-co",
+   "name": "Jefferson Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Breckenridge"
+   ],
+   "bbox": [
+    -105.865021,
+    39.45077,
+    -105.856842,
+    39.462116
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.428,
+   "launches": [
+    "jefferson-lake-boating-site-co"
+   ],
+   "water_id": "jefferson-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "0443169eee07c3c11ea5a4b24898d744269c41f49759b868f16edd49296e09bf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "joe-moore-reservoir-co",
+   "name": "Joe Moore Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Millwood"
+   ],
+   "bbox": [
+    -108.319048,
+    37.420421,
+    -108.313876,
+    37.424716
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.136,
+   "launches": [
+    "joe-moore-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "joe-moore-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "6045b238817c85d949ecd47904dc6f6b30a157132b63550c53ad1b08db565e05",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "john-martin-reservoir-co",
+   "name": "John Martin Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Caddoa",
+    "Las Animas"
+   ],
+   "bbox": [
+    -103.027778,
+    38.055169,
+    -102.936291,
+    38.079015
+   ],
+   "wikidata": "Q19881006",
+   "charted": false,
+   "area_km2": 11.337,
+   "launches": [
+    "john-martin-reservoir-state-park-east-boat-ramp-co",
+    "john-martin-reservoir-state-park-west-boat-ramp-co",
+    "john-martin-swa-county-road-19-ramp-co"
+   ],
+   "water_id": "john-martin-reservoir-co",
+   "gnis_id": "203834",
+   "geometry_hash": "7f4ae1c53e58b0ae486f487c5158bc2eab99e4889a2b5173183887b4420646a5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "julesburg-reservoir-co",
+   "name": "Julesburg Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Sedgwick"
+   ],
+   "bbox": [
+    -102.672548,
+    40.919885,
+    -102.629899,
+    40.945646
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.693,
+   "launches": [
+    "julesburg-reservoir-boat-launch-near-sedgwick-co",
+    "julesburg-reservoir-boat-launch-near-sedgwick-co-2",
+    "julesburg-reservoir-boat-launch-near-sedgwick-co-3",
+    "julesburg-reservoir-boat-launch-near-sedgwick-co-4"
+   ],
+   "water_id": "julesburg-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "3a2383e2e3d8dcec7256bf983fc0c3700cd4bf7403f14b484d5fa68af578e4fd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "karval-reservoir-co",
+   "name": "Karval Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Karval"
+   ],
+   "bbox": [
+    -103.511097,
+    38.71549,
+    -103.505255,
+    38.718629
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.058,
+   "launches": [
+    "karval-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "karval-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "3c3f0ec9d3ff839aa11027881bf55e22185ecf5e79675f5f8f899115729f673b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "kenny-reservior-co",
+   "name": "Kenny Reservior",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Rangely"
+   ],
+   "bbox": [
+    -108.717673,
+    40.107293,
+    -108.706273,
+    40.13457
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.332,
+   "launches": [
+    "kenny-reservior-boat-launch-near-rangely-co"
+   ],
+   "water_id": "kenny-reservior-co",
+   "gnis_id": null,
+   "geometry_hash": "f8e871f910bf624f76a7d72f5cd0bfdd515320a03224b8608727d288f3fc5183",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "la-jara-reservoir-co",
+   "name": "La Jara Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -106.364864,
+    37.244445,
+    -106.339081,
+    37.286788
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.753,
+   "launches": [
+    "la-jara-reservoir-stl-boat-ramp-co"
+   ],
+   "water_id": "la-jara-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "eec657a3e96b1dd80a3213dbf2d40108b80159939bc86db8187a2c66ac5ffa4b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lagerman-reservior-co",
+   "name": "Lagerman Reservior",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Niwot"
+   ],
+   "bbox": [
+    -105.194007,
+    40.131003,
+    -105.184042,
+    40.136859
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.387,
+   "launches": [
+    "lagerman-reservior-boat-launch-co"
+   ],
+   "water_id": "lagerman-reservior-co",
+   "gnis_id": null,
+   "geometry_hash": "b0a0cd76c0026b02ca9ab0f2e67e0ab628dcf5da22ff5cf24d9e82d43c2391aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-avery-co",
+   "name": "Lake Avery",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Buford"
+   ],
+   "bbox": [
+    -107.655439,
+    39.969996,
+    -107.643217,
+    39.985532
+   ],
+   "wikidata": "Q49700004",
+   "charted": false,
+   "area_km2": 0.894,
+   "launches": [
+    "lake-avery-boat-launch-near-buford-co",
+    "lake-avery-boat-launch-near-buford-co-2"
+   ],
+   "water_id": "lake-avery-co",
+   "gnis_id": "173590",
+   "geometry_hash": "cebfc3a76514be74e65181b9760fe2eb92836d8373f203b6c1b4423fb01a47d5",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-fork-gunnison-river-co",
+   "name": "Lake Fork Gunnison River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Lake City"
+   ],
+   "bbox": [
+    -107.518523,
+    37.899491,
+    -107.223326,
+    38.43669
+   ],
+   "wikidata": "Q14684879",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "devil-s-creek-bridge-boat-ramp-co",
+    "the-gate-boat-ramp-co"
+   ],
+   "water_id": "lake-fork-gunnison-river-co",
+   "gnis_id": "188198",
+   "geometry_hash": "1bf018f90127b3d215d8ef0d9855300edb08a43bf2365ada6a805d8fb72c5b68",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "lake-fork-gunnison-river-boat-launch-co"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "lake-granby-co",
+   "name": "Lake Granby",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Granby"
+   ],
+   "bbox": [
+    -105.900098,
+    40.114737,
+    -105.756842,
+    40.19421
+   ],
+   "wikidata": "Q6476029",
+   "charted": false,
+   "area_km2": 28.011,
+   "launches": [
+    "roaring-fork-boat-ramp-co",
+    "stillwater-boating-site-co",
+    "sunset-point-boating-site-co"
+   ],
+   "water_id": "lake-granby-co",
+   "gnis_id": "202532",
+   "geometry_hash": "6fb1d56e1dd8995525737b699cc471c8faf218069373570d64476af1d1488de2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-isabel-co",
+   "name": "Lake Isabel",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Beulah"
+   ],
+   "bbox": [
+    -105.056109,
+    37.982385,
+    -105.049022,
+    37.986927
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.137,
+   "launches": [
+    "lake-isabel-boating-site-co"
+   ],
+   "water_id": "lake-isabel-co",
+   "gnis_id": null,
+   "geometry_hash": "902748a840f1fd019223aa50b0d0c6117410bd198fad7cf461e095d95996feff",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-john-co",
+   "name": "Lake John",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Fort Boettcher",
+    "Walden"
+   ],
+   "bbox": [
+    -106.482806,
+    40.765371,
+    -106.457605,
+    40.793278
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.176,
+   "launches": [
+    "lake-john-boat-launch-near-fort-boettcher-co",
+    "lake-john-boat-launch-near-walden-co"
+   ],
+   "water_id": "lake-john-co",
+   "gnis_id": null,
+   "geometry_hash": "20b76f3d12d3b0a5996ae2c4a854a0543c545f7cc6b8c8a0045194210671089b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lake-nighthorse-co",
+   "name": "Lake Nighthorse",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Durango"
+   ],
+   "bbox": [
+    -107.95102,
+    37.215082,
+    -107.894194,
+    37.239133
+   ],
+   "wikidata": "Q6477108",
+   "charted": false,
+   "area_km2": 5.692,
+   "launches": [
+    "lake-nighthorse-boat-launch-co"
+   ],
+   "water_id": "lake-nighthorse-co",
+   "gnis_id": null,
+   "geometry_hash": "3aec3a3d1a3a43f4db87346a03c3b908a05df6d6cc5b3be8ec64be67409f3e6c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lemon-reservoir-co",
+   "name": "Lemon Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.671499,
+    37.381495,
+    -107.657237,
+    37.419135
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.77,
+   "launches": [
+    "miller-creek-boating-site-co"
+   ],
+   "water_id": "lemon-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "567c5f30c59e540781daae693a65192e73fb16d69ca807001aa65b61fc1742b8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lon-hagler-reservoir-co",
+   "name": "Lon Hagler Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Loveland"
+   ],
+   "bbox": [
+    -105.157709,
+    40.361736,
+    -105.143315,
+    40.369297
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.755,
+   "launches": [
+    "lon-hagler-reservoir-boat-launch-near-loveland-co",
+    "lon-hagler-reservoir-boat-launch-near-loveland-co-2"
+   ],
+   "water_id": "lon-hagler-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "f0684f28e1b46e8c85f1dd57434e91d34d898bd37dc60556a0a36138f1f8dfd8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "lonetree-reservoir-co",
+   "name": "Lonetree Reservoir",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Berthoud"
+   ],
+   "bbox": [
+    -105.136425,
+    40.326375,
+    -105.116186,
+    40.347462
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.806,
+   "launches": [
+    "lonetree-reservoir-boat-launch-near-berthoud-co",
+    "lonetree-reservoir-boat-launch-near-berthoud-co-2"
+   ],
+   "water_id": "lonetree-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "b158ada5b3caa9630cadb0b6d94f897cd33707ef81af76ce8af953a2bccefe6f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mack-mesa-lake-co",
+   "name": "Mack Mesa Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Mack"
+   ],
+   "bbox": [
+    -108.84577,
+    39.280842,
+    -108.841333,
+    39.284231
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.079,
+   "launches": [
+    "highline-lake-state-park-hand-launch-co",
+    "mack-mesa-lake-carry-in-access-co"
+   ],
+   "water_id": "mack-mesa-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "3c1ead7db87de55e219a674ee319a05949ad46d90f9c800e207476a961fffcd6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "martin-lake-co",
+   "name": "Martin Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Walsenburg"
+   ],
+   "bbox": [
+    -104.841274,
+    37.605069,
+    -104.829134,
+    37.614219
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.649,
+   "launches": [
+    "martin-lake-boat-launch-co"
+   ],
+   "water_id": "martin-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "a8a045512f49e89757ab0e19834e28f5997f0b22e2988f06a6f3f63b062089f4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mccall-reservoir-co",
+   "name": "McCall Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Longmont"
+   ],
+   "bbox": [
+    -105.207782,
+    40.202063,
+    -105.199944,
+    40.206541
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.2,
+   "launches": [
+    "mccall-reservoir-boat-launch-co"
+   ],
+   "water_id": "mccall-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "ee31f6613fdd1e1c6cdd2ede42c2224ff730de0cb1ecd64d4045e2a4bc40a3e2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mcphee-reservoir-co",
+   "name": "McPhee Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Dolores"
+   ],
+   "bbox": [
+    -108.588274,
+    37.467185,
+    -108.477012,
+    37.600609
+   ],
+   "wikidata": "Q1915342",
+   "charted": false,
+   "area_km2": 16.614,
+   "launches": [
+    "house-creek-boating-site-co",
+    "mcphee-boating-site-co"
+   ],
+   "water_id": "mcphee-reservoir-co",
+   "gnis_id": "196483",
+   "geometry_hash": "7b64c794ec9455ed2f145b531ab56b616ca3a56727e3f2b5c9eed29df0bee62c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "meadow-creek-lake-co",
+   "name": "Meadow Creek Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.545575,
+    39.806788,
+    -107.539078,
+    39.814559
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.233,
+   "launches": [
+    "meadow-lake-co"
+   ],
+   "water_id": "meadow-creek-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "1d6e90fd6a77876ade904582f108f55573486e1a806426eab140227c51f47dcd",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "miramonte-reservoir-co",
+   "name": "Miramonte Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Norwood"
+   ],
+   "bbox": [
+    -108.347479,
+    37.959224,
+    -108.33197,
+    37.980756
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.601,
+   "launches": [
+    "miramonte-reservoir-boat-launch-co",
+    "miramonte-reservoir-boat-launch-near-norwood-co"
+   ],
+   "water_id": "miramonte-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "d34b4da25e9aad3eb2528e650082932aabfe0633a2b4950217085a8fe73cfd3b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mirror-lake-co",
+   "name": "Mirror Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Tincup"
+   ],
+   "bbox": [
+    -106.434462,
+    38.740035,
+    -106.430099,
+    38.746407
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.159,
+   "launches": [
+    "mirror-lake-boat-launch-co"
+   ],
+   "water_id": "mirror-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "c0f69625b18c996728b00815eaaa9b013698feeecfe7f13e762d6aa5bc6381aa",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "morrow-point-reservoir-co",
+   "name": "Morrow Point Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Sapinero"
+   ],
+   "bbox": [
+    -107.538403,
+    38.44128,
+    -107.337635,
+    38.454942
+   ],
+   "wikidata": "Q6914209",
+   "charted": false,
+   "area_km2": 2.971,
+   "launches": [
+    "pine-creek-boat-launch-co"
+   ],
+   "water_id": "morrow-point-reservoir-co",
+   "gnis_id": "200707",
+   "geometry_hash": "863a3eac89572eedb7f8f96705b7deb9adedbf579ac2cb4cfc6abf6adfc5e29e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "mountain-home-reservoir-co",
+   "name": "Mountain Home Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Fort Garland"
+   ],
+   "bbox": [
+    -105.393453,
+    37.389866,
+    -105.380612,
+    37.398091
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.501,
+   "launches": [
+    "mountain-home-reservoir-swa-high-water-ramp-co",
+    "mountain-home-reservoir-swa-low-water-ramp-co"
+   ],
+   "water_id": "mountain-home-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "a58981cbd4e194795c62fa680560ca16d7815e03af297dce11686fb86dac4a9b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "narraguinnep-reservoir-co",
+   "name": "Narraguinnep Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Cortez"
+   ],
+   "bbox": [
+    -108.634237,
+    37.482265,
+    -108.610024,
+    37.500721
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.128,
+   "launches": [
+    "narraguinnep-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "narraguinnep-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "11a539aab85a740a7f17cf970583dcf06ce1abd8983b9b1ed0f350c1bcebd379",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "navajo-lake-co",
+   "name": "Navajo Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Arboles"
+   ],
+   "bbox": [
+    -107.620068,
+    36.796288,
+    -107.353989,
+    37.046544
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 52.709,
+   "launches": [
+    "navajo-state-park-boat-ramp-co"
+   ],
+   "water_id": "navajo-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "7f91ec6012e75f55a332f25d295b9e4045e89f9183c7cf69b929e0b1d254de08",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "neegronda-reservoir-co",
+   "name": "Neegronda Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Wiley"
+   ],
+   "bbox": [
+    -102.770532,
+    38.283383,
+    -102.735196,
+    38.316355
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.663,
+   "launches": [
+    "neegronda-reservoir-boat-launch-co"
+   ],
+   "water_id": "neegronda-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "e8b781822767392c37f906054506918d5bb9a7e19a6a4d8c626645a0bf029b67",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "neenoshe-reservoir-co",
+   "name": "Neenoshe Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Eads"
+   ],
+   "bbox": [
+    -102.706073,
+    38.335624,
+    -102.685759,
+    38.348491
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.822,
+   "launches": [
+    "neenoshe-reservoir-boat-launch-co"
+   ],
+   "water_id": "neenoshe-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "190d62b80ecb83a77f4a822bcd9688a1d3f627ebf9e5ff0e4c1d4a4bbce10c90",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "neeskah-reservoir-co",
+   "name": "Neeskah Reservoir",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Lamar",
+    "Wiley"
+   ],
+   "bbox": [
+    -102.663423,
+    38.282857,
+    -102.638219,
+    38.307781
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.56,
+   "launches": [
+    "neeskah-reservoir-boat-launch-near-lamar-co",
+    "neeskah-reservoir-boat-launch-near-wiley-co"
+   ],
+   "water_id": "neeskah-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "5d18a5c721de91dc0f4a12ff5369f049d0358eedb48799ce94a41f255ba21114",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-delaney-butte-reservoir-co",
+   "name": "North Delaney Butte Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Walden"
+   ],
+   "bbox": [
+    -106.470241,
+    40.712192,
+    -106.456896,
+    40.723567
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.958,
+   "launches": [
+    "north-delaney-butte-reservoir-boat-launch-co"
+   ],
+   "water_id": "north-delaney-butte-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "6f560cc0f26a524dfb4ac6bd186ba83fcabe1490d645ddcc8e58ffa75fdb14ec",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-gunnison-river-co",
+   "name": "North Fork Gunnison River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Hotchkiss",
+    "Paonia"
+   ],
+   "bbox": [
+    -107.836919,
+    38.768,
+    -107.354563,
+    38.941789
+   ],
+   "wikidata": "Q14685030",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "gunnison-forks-co",
+    "small-boat-launch-co"
+   ],
+   "water_id": "north-fork-gunnison-river-co",
+   "gnis_id": "186323",
+   "geometry_hash": "d3291c3ce6be9104ab028572a9455e6bc659bc075a1210b9289da44c85fc420d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-fork-michigan-river-co",
+   "name": "North Fork Michigan River",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Stelbars Lindland"
+   ],
+   "bbox": [
+    -106.008873,
+    40.552673,
+    -105.989532,
+    40.55553
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.259,
+   "launches": [
+    "state-forest-state-park-boat-ramp-co",
+    "state-forest-state-park-north-michigan-boat-ramp-co"
+   ],
+   "water_id": "north-fork-michigan-river-co",
+   "gnis_id": null,
+   "geometry_hash": "9fbce32b58e551511803c236a5b652eca80563b616740a2aabc6e35f462a08b2",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-lake-co",
+   "name": "North Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Monument Park"
+   ],
+   "bbox": [
+    -105.045672,
+    37.239396,
+    -105.035676,
+    37.248874
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.402,
+   "launches": [
+    "north-lake-swa-boat-ramp-co"
+   ],
+   "water_id": "north-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "73cd23c014e3a77fb827d9d7df0f68adcabe636a924c653f9aa6b58dc85c637e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-platte-river-co",
+   "name": "North Platte River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -106.533576,
+    40.639929,
+    -106.324929,
+    41.182614
+   ],
+   "wikidata": "Q1755015",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "routt-access-parking-lot-co",
+    "routt-access-trailhead-co"
+   ],
+   "water_id": "north-platte-river-co",
+   "gnis_id": "204647",
+   "geometry_hash": "cfb53a3fe73caf495722324d5e6c415158bfb906cb82340687df9d8c751ee5b0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "north-sterling-reservoir-co",
+   "name": "North Sterling Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Sterling"
+   ],
+   "bbox": [
+    -103.337929,
+    40.753796,
+    -103.265277,
+    40.815638
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 11.507,
+   "launches": [
+    "north-sterling-state-park-elks-ramp-co",
+    "north-sterling-state-park-south-boat-ramp-co"
+   ],
+   "water_id": "north-sterling-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "8a52e02cc32c11c2cd23d2342580431d7e0abaf7d6b10ecc6fe312ab0897c944",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "paonia-reservoir-co",
+   "name": "Paonia Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Marble"
+   ],
+   "bbox": [
+    -107.352696,
+    38.940819,
+    -107.333718,
+    38.985183
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.304,
+   "launches": [
+    "paonia-state-park-boat-ramp-co"
+   ],
+   "water_id": "paonia-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "5ac664e309fea5733f873ff9a4107e4ad9d0f53a1b6fa3766dd34bfdb6457a52",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "park-reservoir-co",
+   "name": "Park Reservoir",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Cedaredge"
+   ],
+   "bbox": [
+    -107.880318,
+    39.044808,
+    -107.870817,
+    39.056716
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.466,
+   "launches": [
+    "trickel-park-reservoir-boat-ramp-co"
+   ],
+   "water_id": "park-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "10f15d51b9ee582054f04c6f781ee068ad48768f41d385a3d9318509680f5296",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pastorius-reservoir-co",
+   "name": "Pastorius Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Durango"
+   ],
+   "bbox": [
+    -107.814423,
+    37.197151,
+    -107.809245,
+    37.202914
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.174,
+   "launches": [
+    "pastorius-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "pastorius-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "69d09a7fd325fe6978d59687dcea18392d054f9cca85ec6c96bfa33bb6bf085b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pearl-lake-co",
+   "name": "Pearl Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -106.89223,
+    40.778159,
+    -106.882941,
+    40.794155
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.722,
+   "launches": [
+    "pearl-lake-boat-ramp-co"
+   ],
+   "water_id": "pearl-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "085696532b5777fee1c9c5fc29026b53b3d65194f6bdb430728710f9eeb37782",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "platoro-reservoir-co",
+   "name": "Platoro Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Platoro"
+   ],
+   "bbox": [
+    -106.597957,
+    37.308577,
+    -106.545037,
+    37.352022
+   ],
+   "wikidata": "Q7202455",
+   "charted": false,
+   "area_km2": 3.496,
+   "launches": [
+    "platoro-reservoir-boating-site-co"
+   ],
+   "water_id": "platoro-reservoir-co",
+   "gnis_id": "200690",
+   "geometry_hash": "d88d849816de3cddb9251f34d9fdaea17302e8d68aea04933dc6c203c586f15f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pool-creek-co",
+   "name": "Pool Creek",
+   "kind": "stream",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -108.995888,
+    40.517676,
+    -108.990095,
+    40.521182
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "echo-park-boat-launch-co"
+   ],
+   "water_id": "pool-creek-co",
+   "gnis_id": null,
+   "geometry_hash": "6edba8113d71306495084ce53e5e5f105760ba55e1d69cf690b70fc8e41f611c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "prewitt-reservoir-co",
+   "name": "Prewitt Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Merino"
+   ],
+   "bbox": [
+    -103.391015,
+    40.399454,
+    -103.331574,
+    40.438619
+   ],
+   "wikidata": "Q7242446",
+   "charted": false,
+   "area_km2": 8.972,
+   "launches": [
+    "prewitt-reservoir-swa-high-water-ramp-co"
+   ],
+   "water_id": "prewitt-reservoir-co",
+   "gnis_id": "202915",
+   "geometry_hash": "e7cdd356ba738ac2b62dc9362b070ca1137a160d54df70c6646337a10cb31ad4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pueblo-reservoir-co",
+   "name": "Pueblo Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Pueblo West"
+   ],
+   "bbox": [
+    -104.760201,
+    38.236396,
+    -104.725158,
+    38.280931
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.893,
+   "launches": [
+    "lake-pueblo-state-park-southshore-boat-ramp-co"
+   ],
+   "water_id": "pueblo-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "86fceaf61e76b44a212bab05af528b08b63b613b8992c4d624fe20ac7e329387",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "pueblo-reservoir-pueblo-west-co",
+   "name": "Pueblo Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Pueblo West"
+   ],
+   "bbox": [
+    -104.784667,
+    38.233133,
+    -104.758611,
+    38.284492
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.593,
+   "launches": [
+    "lake-pueblo-state-park-northshore-boat-ramp-co"
+   ],
+   "water_id": "pueblo-reservoir-pueblo-west-co",
+   "gnis_id": null,
+   "geometry_hash": "5eb124de9eeae5b18d49ddff8cc9e39c8a228693b04e32a5722d49c8cae20024",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "queen-reservoir-co",
+   "name": "Queen Reservoir",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Lamar"
+   ],
+   "bbox": [
+    -102.638094,
+    38.271263,
+    -102.620818,
+    38.284288
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.517,
+   "launches": [
+    "queen-reservoir-boat-launch-co"
+   ],
+   "water_id": "queen-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "b9a9524e0f1e697be928545d35ea436ae9422793f270c1b4c7b50dd06ce8f4e0",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "quincy-reservoir-co",
+   "name": "Quincy Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Centennial"
+   ],
+   "bbox": [
+    -104.784103,
+    39.630454,
+    -104.766393,
+    39.637747
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.513,
+   "launches": [
+    "quincy-reservoir-boat-launch-co"
+   ],
+   "water_id": "quincy-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "09158cc3a133813794f3431ca96e08daac9a8111d2fb2ca158313b764711a903",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "r-r-rutherford-reservoir-co",
+   "name": "R R Rutherford Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Walsh"
+   ],
+   "bbox": [
+    -102.3851,
+    37.483676,
+    -102.377255,
+    37.48951
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.121,
+   "launches": [
+    "turks-pond-swa-boat-ramp-co"
+   ],
+   "water_id": "r-r-rutherford-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "5dd05febe8b86978acb37d9e15811d60bb2dc8fe4833d4feea21b72ac52da115",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ramah-reservoir-co",
+   "name": "Ramah Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Ramah"
+   ],
+   "bbox": [
+    -104.21357,
+    39.092718,
+    -104.206368,
+    39.099836
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.203,
+   "launches": [
+    "ramah-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "ramah-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "c6eb0ade01a1f67dd5b59c87168726ec97ab1474c28293971503273fd8b452b1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rampart-reservoir-co",
+   "name": "Rampart Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Woodland Park"
+   ],
+   "bbox": [
+    -104.986505,
+    38.972391,
+    -104.959187,
+    38.993709
+   ],
+   "wikidata": "Q7290021",
+   "charted": false,
+   "area_km2": 1.707,
+   "launches": [
+    "dikeside-boating-site-co",
+    "rampart-reservoir-boat-launch-co"
+   ],
+   "water_id": "rampart-reservoir-co",
+   "gnis_id": "196534",
+   "geometry_hash": "81d56b1b56cb48ac91a217cc24a0a1f3532a3f63833ae8e65623ba5ea6bb03e9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ridgway-reservoir-co",
+   "name": "Ridgway Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Ridgway"
+   ],
+   "bbox": [
+    -107.762955,
+    38.191572,
+    -107.728566,
+    38.237511
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.981,
+   "launches": [
+    "dutch-charlie-boat-ramp-co"
+   ],
+   "water_id": "ridgway-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "edc3a5ea50658ddc73f37cd9b8fc673bbaccb92b02f9565782f6633f5febd962",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rifle-gap-reservoir-co",
+   "name": "Rifle Gap Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Rifle"
+   ],
+   "bbox": [
+    -107.772735,
+    39.627378,
+    -107.742985,
+    39.636314
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.956,
+   "launches": [
+    "rifle-gap-state-park-boat-ramp-co"
+   ],
+   "water_id": "rifle-gap-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "e8843746414862df796db81c0762d116852524101b6998e101021814be7eec09",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rio-blanco-lake-co",
+   "name": "Rio Blanco Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "White River City"
+   ],
+   "bbox": [
+    -108.214336,
+    40.082262,
+    -108.202903,
+    40.092352
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.495,
+   "launches": [
+    "rio-blanco-lake-swa-boat-ramp-co"
+   ],
+   "water_id": "rio-blanco-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "6b80f781fc07b2f0207066bd66ce73acb45e6481e74eaba5a2fb1e85b2b35f3c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rio-grande-co",
+   "name": "Rio Grande",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Alamosa",
+    "Creede",
+    "Hanna",
+    "South Fork",
+    "Wagon Wheel Gap"
+   ],
+   "bbox": [
+    -107.543174,
+    36.787506,
+    -105.685257,
+    37.824489
+   ],
+   "wikidata": "Q160636",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "coller-swa-raft-access-co",
+    "creede-swa-boat-ramp-co",
+    "deer-park-fishing-access-boat-ramp-co",
+    "rio-grande-boat-launch-near-south-fork-co",
+    "lobatos-bridge-boat-ramp-co",
+    "rio-grande-boat-launch-near-wagon-wheel-gap-co",
+    "rio-grande-boat-takeout-co",
+    "rio-grande-river-swa-boat-ramp-co"
+   ],
+   "water_id": "rio-grande-co",
+   "gnis_id": "1385432",
+   "geometry_hash": "96f4a301b89223b40360c306856ee1ed0b117b9a1c2d39506e937b0ecc7f8193",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rio-grande-reservoir-co",
+   "name": "Rio Grande Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.342839,
+    37.717103,
+    -107.267076,
+    37.758368
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.078,
+   "launches": [
+    "rio-grande-reservoir-boating-site-co"
+   ],
+   "water_id": "rio-grande-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "3329c96bfd2acc56cafaa2b86cb568d5a4ac34c81d777e8eb82856a1088dc0ee",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "rito-hondo-reservoir-co",
+   "name": "Rito Hondo Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Lake City"
+   ],
+   "bbox": [
+    -107.179125,
+    37.891508,
+    -107.17463,
+    37.898344
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.153,
+   "launches": [
+    "rito-hondo-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "rito-hondo-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "332a74be15f06b2feb5d3fdeae431ac7f80d5267760c39f9ee6327400729348b",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "road-canyon-reservoir-number-1-co",
+   "name": "Road Canyon Reservoir Number 1",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.190361,
+    37.757063,
+    -107.17505,
+    37.776966
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.587,
+   "launches": [
+    "road-canyon-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "road-canyon-reservoir-number-1-co",
+   "gnis_id": null,
+   "geometry_hash": "56a079d6f693f5a6691185858bab38f959b0c1f8351d430fbaab2acc68e09ffb",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "roaring-fork-river-co",
+   "name": "Roaring Fork River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Carbondale",
+    "Glenwood Springs",
+    "Wingo"
+   ],
+   "bbox": [
+    -107.331399,
+    39.105407,
+    -106.565908,
+    39.549626
+   ],
+   "wikidata": "Q985244",
+   "charted": false,
+   "area_km2": 0.649,
+   "launches": [
+    "bob-terrell-swa-put-in-co",
+    "sam-caudill-swa-put-in-co",
+    "wingo-boat-ramp-co"
+   ],
+   "water_id": "roaring-fork-river-co",
+   "gnis_id": "174812",
+   "geometry_hash": "1fdc6b999bd3f0c76ec1cf861f30bfb1092f4f4aca7eb259ad606cb6df79856a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ruedi-reservoir-co",
+   "name": "Ruedi Reservoir",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Aspen"
+   ],
+   "bbox": [
+    -106.818511,
+    39.355732,
+    -106.737717,
+    39.374755
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.04,
+   "launches": [
+    "ruedi-marina-boating-site-co"
+   ],
+   "water_id": "ruedi-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "6294cf3fa8149f65f5c9668abd01f8d6fda354765189e85ad34fcefe101dfa11",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "ruedi-reservoir-boat-launch-co"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "ryan-gulch-reservoir-co",
+   "name": "Ryan Gulch Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Loveland"
+   ],
+   "bbox": [
+    -105.109633,
+    40.368408,
+    -105.098565,
+    40.374959
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.294,
+   "launches": [],
+   "water_id": "ryan-gulch-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "20788edcbd83421989f79b7891192c43af1ee5981f55bc9e973a27eabb827632",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [
+    "ryan-gulch-reservoir-boat-launch-co"
+   ],
+   "advisories": []
+  },
+  {
+   "slug": "san-luis-lake-co",
+   "name": "San Luis Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Alamosa"
+   ],
+   "bbox": [
+    -105.736544,
+    37.666285,
+    -105.712939,
+    37.686113
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.904,
+   "launches": [
+    "san-luis-state-park-boat-ramp-co"
+   ],
+   "water_id": "san-luis-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "8aa05f41a489ae42278931a2f0495fcb7e0c3b43857edcccf382ec8166c839c3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "san-miguel-river-co",
+   "name": "San Miguel River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Lime",
+    "Norwood",
+    "Nucla",
+    "Placerville"
+   ],
+   "bbox": [
+    -108.803871,
+    37.926985,
+    -107.775941,
+    38.387694
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "san-miguel-river-boat-launch-near-placerville-co",
+    "cottonwood-ledges-boat-ramp-co",
+    "deep-creek-co",
+    "ledges-rockhouse-boat-ramp-co",
+    "san-miguel-river-boat-launch-near-norwood-co",
+    "placerville-river-access-co",
+    "specie-creek-boat-ramp-co"
+   ],
+   "water_id": "san-miguel-river-co",
+   "gnis_id": null,
+   "geometry_hash": "36fb291433839edcfe7f59421859776fa9b7d708d7e6770f0a6b619fc2c61205",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sanchez-reservoir-co",
+   "name": "Sanchez Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "San Luis"
+   ],
+   "bbox": [
+    -105.422489,
+    37.07386,
+    -105.406252,
+    37.113671
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.908,
+   "launches": [
+    "sanchez-reservoir-swa-high-water-ramp-co"
+   ],
+   "water_id": "sanchez-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "0d5fa658f40220d6051add17adeaaa11a9db889657ac6b9a0e1d425757813a12",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "seymour-lake-co",
+   "name": "Seymour Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -106.393812,
+    40.475803,
+    -106.380637,
+    40.480626
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.264,
+   "launches": [
+    "seymour-lake-swa-boat-ramp-co"
+   ],
+   "water_id": "seymour-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "ff928e4b34dd997363677a68ba7d27eaba47199bf1f86765d861af8cde150b8f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shadow-mountain-lake-co",
+   "name": "Shadow Mountain Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Grand Lake"
+   ],
+   "bbox": [
+    -105.856076,
+    40.206708,
+    -105.827546,
+    40.250601
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.102,
+   "launches": [
+    "green-ridge-boating-site-co",
+    "hilltop-boating-site-co"
+   ],
+   "water_id": "shadow-mountain-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "708f692348757c0c8aeaa2a6f550f07b8ed02b1905b1cedf51e53da70c4f1738",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "shaw-lake-co",
+   "name": "Shaw Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Lucky Seven Summer Homes"
+   ],
+   "bbox": [
+    -106.798073,
+    37.558596,
+    -106.793129,
+    37.566417
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.178,
+   "launches": [
+    "shaw-lake-boating-site-co"
+   ],
+   "water_id": "shaw-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "128f6521423152a24ded1b0bc3dc329aca316518bca8ac1eebc3a1d383dad6af",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sherman-lake-co",
+   "name": "Sherman Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Homelake"
+   ],
+   "bbox": [
+    -106.095663,
+    37.570944,
+    -106.087918,
+    37.575421
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.232,
+   "launches": [
+    "sherman-lake-boat-launch-co"
+   ],
+   "water_id": "sherman-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "8e3b2072495b0b3304f41a0d3f0c870a5f147b88e3ad2b43062ab62bf22d6242",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "silver-jack-reservoir-co",
+   "name": "Silver Jack Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.545099,
+    38.212836,
+    -107.528523,
+    38.232315
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.107,
+   "launches": [
+    "silver-jack-fishing-access-co"
+   ],
+   "water_id": "silver-jack-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "3cb2c76d9570960980610a14086fe4ada679713522b5a7932aeda317a5c7977d",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "skagway-reservoir-co",
+   "name": "Skagway Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Cripple Creek"
+   ],
+   "bbox": [
+    -105.053493,
+    38.687698,
+    -105.047031,
+    38.701327
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.352,
+   "launches": [
+    "skaguay-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "skagway-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "edabc2b69cf37b80055fbe2190b2ed0712465a19f86db3c6b9026711653f7314",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "smith-reservoir-co",
+   "name": "Smith Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Blanca"
+   ],
+   "bbox": [
+    -105.542087,
+    37.383841,
+    -105.516028,
+    37.404662
+   ],
+   "wikidata": "Q49702686",
+   "charted": false,
+   "area_km2": 2.52,
+   "launches": [
+    "smith-reservoir-swa-high-water-ramp-co",
+    "smith-reservoir-swa-low-water-ramp-co"
+   ],
+   "water_id": "smith-reservoir-co",
+   "gnis_id": "199611",
+   "geometry_hash": "2b1dc3dfa2315e8f9c6ec03e40d883b1a4d21fccdd7ea0ff36b8c2179b5f6ff3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "south-delaney-butte-reservoir-co",
+   "name": "South Delaney Butte Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Walden"
+   ],
+   "bbox": [
+    -106.466798,
+    40.696056,
+    -106.456347,
+    40.708543
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.639,
+   "launches": [
+    "south-delaney-butte-reservoir-boat-launch-co"
+   ],
+   "water_id": "south-delaney-butte-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "22356ac48e32c8025fcc7d12c5f8e27700464fab5ae18cedb1653619f828aac9",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spinney-mountain-reservoir-co",
+   "name": "Spinney Mountain Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Hartsel"
+   ],
+   "bbox": [
+    -105.665259,
+    38.962001,
+    -105.618911,
+    39.004081
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.905,
+   "launches": [
+    "spinney-mountain-reservoir-boat-launch-near-hartsel-co",
+    "spinney-mountain-reservoir-boat-launch-near-hartsel-co-2"
+   ],
+   "water_id": "spinney-mountain-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "40214b1266fe437fba396d84969b1cdba7299658a00a2f0cc2e4cecff450d92f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "spring-creek-reservoir-co",
+   "name": "Spring Creek Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Crested Butte South"
+   ],
+   "bbox": [
+    -106.71441,
+    38.860817,
+    -106.705126,
+    38.868609
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.294,
+   "launches": [
+    "spring-creek-reservoir-boating-site-co"
+   ],
+   "water_id": "spring-creek-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "0243c06121d817b421adfef4adbad0d19d552a0083b5379138219d60b4a7ae17",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stagecoach-reservoir-co",
+   "name": "Stagecoach Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Oak Creek"
+   ],
+   "bbox": [
+    -106.880971,
+    40.268883,
+    -106.831963,
+    40.287799
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 3.114,
+   "launches": [
+    "stagecoach-state-park-boat-ramp-co",
+    "stagecoach-state-park-morrison-boat-ramp-co"
+   ],
+   "water_id": "stagecoach-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "6da788323b4a03f982512a5f7824bbd1628c1612e6a6e761a06d4a0fb4950209",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "stalker-lake-co",
+   "name": "Stalker Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Wray"
+   ],
+   "bbox": [
+    -102.279963,
+    40.084117,
+    -102.273821,
+    40.087126
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.081,
+   "launches": [
+    "stalker-lake-swa-boat-ramp-co"
+   ],
+   "water_id": "stalker-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "20998f01cd24197b12ebf22f71838c3191d6cf147c7e95e528b592557c5e1d74",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "standley-lake-co",
+   "name": "Standley Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Arvada"
+   ],
+   "bbox": [
+    -105.145287,
+    39.853578,
+    -105.107189,
+    39.87556
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.741,
+   "launches": [
+    "standley-lake-boat-launch-near-arvada-co-2"
+   ],
+   "water_id": "standley-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "bf86ed91ccfb61e19a40ec220f069312296d0decac02ea42e24669cc2b30de9e",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "steamboat-lake-co",
+   "name": "Steamboat Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Columbine"
+   ],
+   "bbox": [
+    -106.985433,
+    40.787073,
+    -106.94587,
+    40.81085
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 4.214,
+   "launches": [
+    "placer-cove-boat-ramp-co",
+    "sage-flats-boat-ramp-co",
+    "steamboat-lake-state-park-marina-boat-ramp-co"
+   ],
+   "water_id": "steamboat-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "5445fb6a7de5e1b32f66ba5dc6516139831208b764dbb544f0e0fba8df927174",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "summit-reservoir-co",
+   "name": "Summit Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Cortez"
+   ],
+   "bbox": [
+    -108.38996,
+    37.406024,
+    -108.374988,
+    37.424818
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.222,
+   "launches": [
+    "summit-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "summit-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "c5b3791dc0cd9bb15bda74a49d1511caf8a2fe89b7addd414ab44f22eff587c1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sunset-lake-co",
+   "name": "Sunset Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Mesa Lakes"
+   ],
+   "bbox": [
+    -108.096725,
+    39.049077,
+    -108.091667,
+    39.052226
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.079,
+   "launches": [
+    "sunset-boating-site-co"
+   ],
+   "water_id": "sunset-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "e1eb49d1bb2b49b9bdcdf32a8ffe1f377de88aa17697512ea56933224177be52",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sweitzer-lake-co",
+   "name": "Sweitzer Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Delta"
+   ],
+   "bbox": [
+    -108.040127,
+    38.708766,
+    -108.023669,
+    38.715372
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.519,
+   "launches": [
+    "sweitzer-lake-state-park-boat-ramp-co"
+   ],
+   "water_id": "sweitzer-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "3b3ca3817f79d37789365947378fe9501379386ff5f601572dd27aa2920e9ae6",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "sylvan-lake-co",
+   "name": "Sylvan Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Eagle"
+   ],
+   "bbox": [
+    -106.735211,
+    39.473771,
+    -106.72958,
+    39.479679
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.169,
+   "launches": [
+    "sylvan-lake-state-park-boat-ramp-co"
+   ],
+   "water_id": "sylvan-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "5698c043a671e3d2c8481a91e2f5161634840c5350fecd08b69fb34c6fb26a3f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "tarryall-reservoir-co",
+   "name": "Tarryall Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Bailey"
+   ],
+   "bbox": [
+    -105.617352,
+    39.221634,
+    -105.605319,
+    39.234084
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.603,
+   "launches": [
+    "tarryall-reservoir-boat-launch-co",
+    "tarryall-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "tarryall-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "14e47e01fa5bc05ba6230c64713a91ae55f97f5e278e4dce64ec390c69694dab",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "taylor-park-reservoir-co",
+   "name": "Taylor Park Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Tincup"
+   ],
+   "bbox": [
+    -106.605888,
+    38.817554,
+    -106.559691,
+    38.86005
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 7.608,
+   "launches": [
+    "taylor-park-reservoir-boat-launch-co",
+    "taylor-reservoir-boat-ramp-co"
+   ],
+   "water_id": "taylor-park-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "011fbff2dfd92e937c4edb6684ab46ba667afd42cde02675dc15ba963d1b97cf",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "taylor-river-co",
+   "name": "Taylor River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Almont",
+    "Crested Butte South",
+    "Gunnison",
+    "Tincup"
+   ],
+   "bbox": [
+    -106.847135,
+    38.663682,
+    -106.562011,
+    38.99752
+   ],
+   "wikidata": "Q4453762",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "five-mile-access-co",
+    "south-bank-access-boating-site-co",
+    "taylor-river-boat-launch-near-crested-butte-south-co",
+    "the-slot-boating-site-co"
+   ],
+   "water_id": "taylor-river-co",
+   "gnis_id": "188791",
+   "geometry_hash": "e525256483e906c51899b55ed165e454b0bc27551cc119ace9d5bc3490ef6187",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "teal-lake-co",
+   "name": "Teal Lake",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -106.610463,
+    40.58229,
+    -106.604799,
+    40.584441
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.065,
+   "launches": [
+    "teal-lake-boat-launch-co"
+   ],
+   "water_id": "teal-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "e7ec906c954c40dadcd0053dc63d0c10eca7e56e69b292e73218c3c98d47354f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "thurston-reservoir-co",
+   "name": "Thurston Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Lamar"
+   ],
+   "bbox": [
+    -102.643291,
+    38.219093,
+    -102.628399,
+    38.228186
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.741,
+   "launches": [
+    "thurston-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "thurston-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "d34fd2c336b6fbd8a9f9dfcd099ddf8aed68472e5817a25a7c0fd986ef403756",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "totten-lake-co",
+   "name": "Totten Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Cortez"
+   ],
+   "bbox": [
+    -108.53636,
+    37.36065,
+    -108.523776,
+    37.370993
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.779,
+   "launches": [
+    "totten-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "totten-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "b36c51f6d525bd24408b8850c62fc9ce98a39161ccd0fe2b7ae5105b79b39b93",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "trinidad-lake-co",
+   "name": "Trinidad Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Trinidad"
+   ],
+   "bbox": [
+    -104.596714,
+    37.130177,
+    -104.549879,
+    37.146955
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.478,
+   "launches": [
+    "carpios-ridge-boat-ramp-co"
+   ],
+   "water_id": "trinidad-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "18f8e3792e6b8061aeb12154560ea833d905b35582e6b16a19e5b7acc9a24673",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "troutvale-reservoir-number-1-co",
+   "name": "Troutvale Reservoir Number 1",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Lake City"
+   ],
+   "bbox": [
+    -107.187693,
+    37.82439,
+    -107.179474,
+    37.831343
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.237,
+   "launches": [
+    "troutvale-reservoir-number-1-boat-launch-co"
+   ],
+   "water_id": "troutvale-reservoir-number-1-co",
+   "gnis_id": null,
+   "geometry_hash": "cc88ed0f1da3c512c306f2ca621c7e61200164e53f8c1ae3e9403d30cef57ed1",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "troutvale-reservoir-number-2-co",
+   "name": "Troutvale Reservoir Number 2",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.202168,
+    37.816761,
+    -107.187049,
+    37.825851
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.374,
+   "launches": [
+    "troutvale-reservoir-number-2-boat-launch-co"
+   ],
+   "water_id": "troutvale-reservoir-number-2-co",
+   "gnis_id": null,
+   "geometry_hash": "b585b244ec356316114c2630c330cc7d5eca30e4524fa344324726a185d1b227",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "trujillo-meadows-reservoir-co",
+   "name": "Trujillo Meadows Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Cumbres"
+   ],
+   "bbox": [
+    -106.45883,
+    37.048137,
+    -106.446901,
+    37.053998
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.274,
+   "launches": [
+    "trujillo-meadows-swa-boat-ramp-co"
+   ],
+   "water_id": "trujillo-meadows-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "c11c52051c15bf8d1731bae01308a3741b6fd5ebe33c55814e3a7d3aaa14809c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "turquoise-lake-co",
+   "name": "Turquoise Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Leadville"
+   ],
+   "bbox": [
+    -106.433866,
+    39.252143,
+    -106.353186,
+    39.27807
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 6.864,
+   "launches": [
+    "matchless-boating-site-co",
+    "tabor-boating-site-co"
+   ],
+   "water_id": "turquoise-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "b78553cfecd5ce04cda75c4658f5436238e9a91c4553212803db15398bfb99f8",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "twin-lakes-co",
+   "name": "Twin Lakes",
+   "kind": "lake",
+   "state": "CO",
+   "towns": [
+    "Leadville",
+    "Twin Lakes"
+   ],
+   "bbox": [
+    -106.384345,
+    39.070866,
+    -106.303782,
+    39.095122
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.31,
+   "launches": [
+    "dexter-point-boating-site-co",
+    "twin-lakes-boat-launch-co"
+   ],
+   "water_id": "twin-lakes-co",
+   "gnis_id": null,
+   "geometry_hash": "efe875937d60e37e1da58cb58a65ae88f13b5e33ad2e62856459a10c15a75d80",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "two-buttes-reservoir-co",
+   "name": "Two Buttes Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -102.572122,
+    37.624541,
+    -102.538399,
+    37.639277
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.162,
+   "launches": [
+    "two-buttes-reservoir-swa-boat-ramp-co",
+    "two-buttes-reservoir-swa-north-boat-ramp-co",
+    "two-buttes-reservoir-swa-north-boat-ramp-co-2"
+   ],
+   "water_id": "two-buttes-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "d6488977a1980d54165a36962f914cb6acc8aeab3dbab3a3923aab01db9dab84",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "union-reservoir-co",
+   "name": "Union Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Longmont"
+   ],
+   "bbox": [
+    -105.049311,
+    40.171143,
+    -105.027237,
+    40.192524
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.751,
+   "launches": [
+    "union-reservoir-boat-launch-near-longmont-co"
+   ],
+   "water_id": "union-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "c3f0d5448e63cf40695c98358a57f2753011ec6113747e78a27d3f111e3131b4",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "upper-dome-reservoir-co",
+   "name": "Upper Dome Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -106.735678,
+    38.187171,
+    -106.726995,
+    38.202205
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.307,
+   "launches": [
+    "dome-lakes-swa-boat-ramp-co"
+   ],
+   "water_id": "upper-dome-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "b74c6f8fd081917e9b14049face54dafbba795db355e2c938ca2bd53c3d3544a",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "vallecito-reservoir-co",
+   "name": "Vallecito Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Vallecito"
+   ],
+   "bbox": [
+    -107.576668,
+    37.373971,
+    -107.531715,
+    37.432576
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 9.715,
+   "launches": [
+    "old-timers-boating-site-co",
+    "vallecito-reservoir-boat-launch-co"
+   ],
+   "water_id": "vallecito-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "c84bf1666439e115c537786ccb603eef98fdd2d13d02db59c6d8c4d5e0f1ff39",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "vega-reservoir-co",
+   "name": "Vega Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Collbran",
+    "Heiberger"
+   ],
+   "bbox": [
+    -107.811068,
+    39.213989,
+    -107.773649,
+    39.232592
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 2.662,
+   "launches": [
+    "vega-reservoir-boat-launch-near-collbran-co",
+    "vega-reservoir-boat-launch-near-heiberger-co",
+    "vega-state-park-island-boat-ramp-co"
+   ],
+   "water_id": "vega-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "9ba273ab1ff4c1b1ec509b8ed2ddb59e64bad0dbca7a5bbad5346741e8e61d26",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "vela-reservoir-co",
+   "name": "Vela Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.871866,
+    39.062055,
+    -107.86652,
+    39.064501
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.076,
+   "launches": [
+    "vela-reservoir-boating-site-co"
+   ],
+   "water_id": "vela-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "fe4f0df6df490810adda6ba573eee3a02ef0b1d6e1c196363d12dfb5ee9c552c",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "ward-creek-reservoir-co",
+   "name": "Ward Creek Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Grand Mesa"
+   ],
+   "bbox": [
+    -107.998765,
+    39.015039,
+    -107.995342,
+    39.019788
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.088,
+   "launches": [
+    "ward-creek-reservoir-boat-launch-co"
+   ],
+   "water_id": "ward-creek-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "b6145b0628233f0ef374756c30f9e039d2654d6185c237fb1b7860274801a297",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "weir-and-johnson-reservoir-co",
+   "name": "Weir and Johnson Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.831406,
+    39.063353,
+    -107.82079,
+    39.068338
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.162,
+   "launches": [
+    "weir-and-johnson-reservoir-boat-launch-co"
+   ],
+   "water_id": "weir-and-johnson-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "f430b552866dff1838759e54c39d2425a36adaf4eab98b28007cc9ec4bea3473",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "west-lake-co",
+   "name": "West Lake",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Red Feather Lakes"
+   ],
+   "bbox": [
+    -105.57288,
+    40.790568,
+    -105.565297,
+    40.792619
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.092,
+   "launches": [
+    "west-lake-boat-launch-co"
+   ],
+   "water_id": "west-lake-co",
+   "gnis_id": null,
+   "geometry_hash": "a476a8f082cb971336b4ce69b1ae1c666f9a5e2b2fbb1618e2d034139d7a0a9f",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "white-river-co",
+   "name": "White River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Rangely"
+   ],
+   "bbox": [
+    -109.177583,
+    39.939133,
+    -107.638344,
+    40.200424
+   ],
+   "wikidata": "Q4468443",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "big-trujillo-wash-boat-ramp-co"
+   ],
+   "water_id": "white-river-co",
+   "gnis_id": "204653",
+   "geometry_hash": "5da9fa363aa5aabc96e12102335aad21316e5e332c22784b9d697f550c06f654",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "williams-creek-reservoir-co",
+   "name": "Williams Creek Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [],
+   "bbox": [
+    -107.227093,
+    37.503104,
+    -107.213339,
+    37.520646
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.248,
+   "launches": [
+    "williams-creek-reservoir-swa-boat-ramp-co"
+   ],
+   "water_id": "williams-creek-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "a6c5c0bcf342bd4e0d05c7d95c2c1f5dc57a4f3d1cd29f465194a8e1e1ed2033",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "williams-fork-reservoir-co",
+   "name": "Williams Fork Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Kremmling"
+   ],
+   "bbox": [
+    -106.232944,
+    40.000071,
+    -106.182709,
+    40.03561
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.814,
+   "launches": [
+    "williams-fork-reservoir-boat-launch-co"
+   ],
+   "water_id": "williams-fork-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "c6df5df8e5c1da61bd20a2742863b0704e82e1018eb556f3a4b3cbf63a9aaed3",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "willow-creek-reservoir-co",
+   "name": "Willow Creek Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Granby"
+   ],
+   "bbox": [
+    -105.978137,
+    40.142736,
+    -105.940986,
+    40.157135
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 1.163,
+   "launches": [
+    "willow-creek-boating-site-co",
+    "willow-creek-reservoir-boat-launch-co"
+   ],
+   "water_id": "willow-creek-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "9802e6f74e39c1cb861cb13e8c18511ec1fbc4c4be7f42a27e4cb35ae3473675",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "wolford-mountain-reservoir-co",
+   "name": "Wolford Mountain Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Kremmling"
+   ],
+   "bbox": [
+    -106.426247,
+    40.11221,
+    -106.396517,
+    40.187692
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 5.411,
+   "launches": [
+    "wolford-mountain-reservoir-boat-launch-co"
+   ],
+   "water_id": "wolford-mountain-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "129698a4cb3b947787ccc53d1b0bec703d83c92bec4c5020280501f01a32b196",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yamcolo-reservoir-co",
+   "name": "Yamcolo Reservoir",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Yampa"
+   ],
+   "bbox": [
+    -107.065163,
+    40.045127,
+    -107.044188,
+    40.058389
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.782,
+   "launches": [
+    "yamcolo-reservoir-boat-ramp-co"
+   ],
+   "water_id": "yamcolo-reservoir-co",
+   "gnis_id": null,
+   "geometry_hash": "8d8b26f41bce0971861d0d6ff88f65a4136cc967a585af2be0888221dfae4d82",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "yampa-river-co",
+   "name": "Yampa River",
+   "kind": "river",
+   "state": "CO",
+   "towns": [
+    "Craig",
+    "Hayden",
+    "Juniper Hot Springs",
+    "Maybell",
+    "Mount Harris",
+    "Sunbeam"
+   ],
+   "bbox": [
+    -108.985001,
+    40.159418,
+    -106.799969,
+    40.560073
+   ],
+   "wikidata": "Q2599279",
+   "charted": false,
+   "area_km2": null,
+   "launches": [
+    "deerlodge-boat-launch-co",
+    "double-bridges-co",
+    "duffey-boat-ramp-co",
+    "east-cross-boat-ramp-co",
+    "juniper-boat-ramp-co",
+    "loudy-simpson-park-co",
+    "maybell-bridge-boat-ramp-co",
+    "sunbeam-boat-ramp-co",
+    "west-cross-mountain-boat-ramp-co",
+    "yampa-river-swa-boat-ramp-co",
+    "yampa-river-state-park-golf-course-boat-ramp-co",
+    "yampa-river-state-park-headquarters-boat-ramp-co",
+    "yampa-river-state-park-pump-station-boat-ramp-co",
+    "yampa-river-state-park-south-beach-boat-ramp-co"
+   ],
+   "water_id": "yampa-river-co",
+   "gnis_id": "169566",
+   "geometry_hash": "e8d8d530e007571697571ce1796803459e8752953701fc8c26ec4e55e90ea880",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  },
+  {
+   "slug": "youngs-creek-reservoir-number-3-co",
+   "name": "Youngs Creek Reservoir Number 3",
+   "kind": "reservoir",
+   "state": "CO",
+   "towns": [
+    "Grand Mesa"
+   ],
+   "bbox": [
+    -107.919087,
+    39.041778,
+    -107.915782,
+    39.046684
+   ],
+   "wikidata": null,
+   "charted": false,
+   "area_km2": 0.089,
+   "launches": [
+    "youngs-creek-reservoir-3-boating-site-co"
+   ],
+   "water_id": "youngs-creek-reservoir-number-3-co",
+   "gnis_id": null,
+   "geometry_hash": "ce1099fcc02a79c20155f46355ab04f2650c930f9320e68565c2ccd307ff1af7",
+   "geometry_tolerance_m": 17,
+   "status": "active",
+   "successor_slug": null,
+   "previous_slugs": [],
+   "updated_at": "2026-11-07T02:52:45+00:00",
+   "launches_unpublished": [],
+   "advisories": []
+  }
+ ]
+}
