@@ -25,7 +25,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | md | 11 | 8 | 15 | 11 | 4 | 49 |
 | va | 22 | 11 | 28 | 7 | 1 | 69 |
 | dc | 22 | 8 | 26 | 12 | 5 | 73 |
-| nc | 9 | 1 | 6 | 1 | 0 | 17 |
+| nc | 10 | 1 | 5 | 1 | 0 | 17 |
 | ga | 7 | 0 | 4 | 1 | 0 | 12 |
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **626** | **234** | **551** | **229** | **81** | **1721** |
+| **all** | **627** | **234** | **550** | **229** | **81** | **1721** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1323,12 +1323,12 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nc-law-gs-143-215-1c` | N.C. Gen. Stat. 143-215.1C(b) Publication of Notice of Discharge of Untreated Wastewater | used | fetched | law | The public-notice duty: press release within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more. |
 | `nc-law-gs-143-215-1c-a` | N.C. Gen. Stat. 143-215.1C(a) Report to Wastewater System Customers | used | fetched | law | A law-named public channel: municipal or domestic collection and treatment works with an average annual flow over 200,000 gallons a day give their users or customers and the Department a yearly performance report, within 60 days after the calendar or fiscal year. Register rows per operator (ids ending -annual-report, made by scripts/add_register_rows.py); no web posting is required. |
 | `nc-rwq-advisories` | NC DEQ Recreational Water Quality program: swimming advisory status layer (RWQ_Advisory_EXTERNAL) | used | fetched | advisories | Coastal (ocean and sound) monitoring stations with current Status (No Alert / Pending Swimming Advisory / Advisory / Precautionary). Built: pipeline/ingest/nc_rwq_advisories.py (snapshot spells; 225 stations on 2026-11-04). |
+| `nc-shellfish-closures` | NC DMF polluted area proclamations (shellfish temporary closures and reopenings) | used | fetched | advisories | Read by the nc-dmf-polluted-area-proclamations ingester (ingest.nc_dmf_shellfish): one shellfish_closure record per area a temporary-closure proclamation names, from its effective time; a later proclamation that returns the area to normal boundaries ends it on its effective day, and a reopening proclaimed for a later day is DMF's plan until then. Permanent-closure proclamations (Sanitary Survey boundary changes) are left out. An area named whole that has one of DMF's Conditionally Approved-Open polygons and a water record here is marked at a point inside the polygon; the others are listed only. On 2026-11-16 the list held 162 proclamations from February 2025 (56 temporary closures, 103 reopenings, 3 permanent-closure proclamations); the newest, PA-67-2026 (issued 10/16/2026), reopened the last areas closed on October 4 and 11 except Shallotte Inlet and the whole of Bay River, which no later summary names. |
 | `nc-wnc-rec-monitoring` | NC DEQ Western NC Recreational Water Quality Monitoring Program (E. coli results) | candidate | fetched | monitoring | Inland river E. coli results (2,298 rows; fields Station_ID, SampleDate, Ecoli, Lat, Long). Also published to Swim Guide. |
 | `nc-bims-public-portal` | NC DEQ BIMS Public Incident Portal | watch | search_only | events | Incident lookup by permit or incident number; the ArcGIS layers are easier. Not fetched. |
 | `nc-charlotte-water` | Charlotte Water wastewater overflow notices (press releases) | watch | search_only | news | Notices reach the public through local media (WCCB, WFAE carry "Notice of Wastewater Overflow" text). The 2025 South End spill was also sent by text and Nextdoor. No feed found; the state layer covers the same events. |
 | `nc-dwr-report-sso-survey` | NC DWR "Report an SSO" public view (Survey123 intake) | watch | fetched | events | Public view of the permittee intake form (fields rep_Date, BIMSincNUM, DWR_SSOstart, DWR_IncVolume, reachSurfaceWater, volSurfaceWater, incCause, incDesc ...). 3,208 rows, lastEditDate 2026-05-17; seems to be the 2022-2025 store. Shows that NC uses its own e-reporting, not EPA NeT. |
 | `nc-raleigh-water` | Raleigh Water sanitary sewer overflow page and news | watch | search_only | news | City SSO page and news posts (e.g. May 2026 Airport Boulevard 1,143,800 gallons). No feed. |
-| `nc-shellfish-closures` | NC DMF Shellfish Sanitation closures (Permanent_Shellfish_Closures; temporary closure proclamations) | watch | search_only | advisories | Permanent closure polygons are in the same ArcGIS org; temporary (spill or rain) closures are by proclamation, not checked. |
 | `nc-wwals-and-swim-guide` | Swim Guide affiliates in NC (riverkeepers; WNC program) | watch | search_only | prior_art | NC beaches and WNC river stations appear on Swim Guide; not checked one by one. |
 | `nc-epa-sobe` | EPA SOBE extract, NC rows | rejected | inferred | events | Only a handful of NC rows; NC uses its own reporting. The DWR layer is complete and faster. |
 

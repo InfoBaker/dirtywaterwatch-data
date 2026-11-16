@@ -1,0 +1,37 @@
+id: "nc-dmf-polluted-area-proclamations"
+name: "NC DEQ Division of Marine Fisheries polluted area proclamations (shellfish temporary closures and reopenings)"
+url: "https://www.deq.nc.gov/about/divisions/marine-fisheries/rules-proclamations-and-size-and-bag-limits/polluted-area-proclamations"
+homepage: "https://www.deq.nc.gov/about/divisions/marine-fisheries/rules-proclamations-and-size-and-bag-limits/polluted-area-proclamations"
+kind: "html"
+level: "state"
+# Notes (research/nc, status used, verified fetched, checked 2026-11-16): Read by ingest.nc_dmf_shellfish since
+#   2026-11-16 (register row nc-dmf-polluted-area-proclamations, a feed): one shellfish_closure record per area a
+#   temporary-closure proclamation names, from its effective time (to the minute, Eastern); a later proclamation that
+#   returns the area to normal boundaries ends it on its effective day ("at sunrise"); a reopening proclaimed for a
+#   later day is DMF's plan until that day. Permanent-closure (Sanitary Survey) proclamations are left out. An area
+#   named whole with one of DMF's own Conditionally Approved-Open polygons is a marker at a point inside it, never
+#   colouring a whole water; the others are listed only. The list holds 162 proclamations back to February 2025
+#   (17 pages on 2026-11-16, newest PA-67-2026 issued 10/16/2026, a reopening): 56 temporary closures, 103
+#   reopenings, 3 permanent-closure proclamations.
+# Access detail: HTML list, ten proclamations a page (?page=N), each with its order (PDF), a one-sentence summary,
+#   the effective date, the issued date and the counties. The page answers the pipeline's runner (runner probe
+#   43885170112, 2026-11-16) and this project's machines. The contact paragraph above the list is not read.
+# Can fill: started_at (effective, minute), ended_at (reopening effective day), published_at (issued),
+#   waterbody_text (DMF's area names), counties
+# Cannot fill: cause per proclamation (in the PDF order only; DMF: closures "as a result of bacteriological water
+#   quality"); volume; outfall; the outline of an area closed in part
+# Placement: DMF's Conditionally Approved-Open polygons, Shellfish Growing Area Classifications layer
+#   (services2.arcgis.com/kCu40SDxsCGcuUWO/.../ShellfishGrowingArea/FeatureServer/0, data edited 2026-09-01)
+# History: from PA-1-2025 (March 2025)
+cadence: "DMF issues a proclamation for each temporary closure and reopening (67 in 2026 to October 16); the first three pages are read every run."
+license: "none stated (North Carolina state government publication)"
+attribution: "NC DEQ Division of Marine Fisheries, Shellfish Sanitation and Recreational Water Quality Section"
+enabled: true
+role: "advisories"
+event_types: ["shellfish_closure"]
+states: ["NC"]
+access: ["html", "pdf", "phone", "email"]
+access_detail: "HTML list of proclamations (number, PDF order, summary, effective date, issued date, counties), ten a page; 24-hour recorded message and an e-mail subscription list."
+machine_readable: false
+legal_basis: "G.S. 113-221.1; 15A NCAC 03H .0103 (cited in the orders)"
+checked: "2026-11-16"
