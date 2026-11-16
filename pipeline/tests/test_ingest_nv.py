@@ -340,7 +340,8 @@ def test_p1_4_watched_nevada_pages_keep_no_body_and_no_text(tmp_path):
     from test_ingest_wi import _np_run
     rows = [r for r in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]
             if r.get("monitored")]
-    assert len(rows) == 2 and all(r["metadata_only"] is True and r["records"] is False for r in rows)
+    # audit 2026-11-16: the State Epidemiology list and the NPS conditions page join the two watched pages
+    assert len(rows) == 4 and all(r["metadata_only"] is True and r["records"] is False for r in rows)
     personal = b"<html><body><p>Contact Pat Example, 775-555-0100, pat@example.org, 1234-A Example St.</p></body></html>"
     out, saved = _np_run(NP, rows, {u: personal for r in rows for u in r["urls"]}, tmp_path, "2026-11-15T12:00:00Z")
     assert saved == []
@@ -348,7 +349,7 @@ def test_p1_4_watched_nevada_pages_keep_no_body_and_no_text(tmp_path):
     assert not any(p in blob for p in PRIVATE)
 
 
-def test_p1_3_nevada_cannot_go_live_without_a_successful_current_read():
+def test_p1_3_nevada_goes_live_only_after_a_successful_current_read():
     import yaml
     src = yaml.safe_load((ROOT / "data" / "sources" / "nv-state-parks-hab.yaml").read_text())
     live = json.loads((ROOT / "data" / "rules.json").read_text())["live_states"]
@@ -356,12 +357,33 @@ def test_p1_3_nevada_cannot_go_live_without_a_successful_current_read():
         assert "NV" not in live, "Nevada's only advisory feed has no successful current read"
     else:
         assert re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", src["first_successful_read"])
+        # audit 2026-11-16: the pipeline's own read in refresh 43802489853
+        assert src["first_successful_read"] == "2026-11-16T04:23:49Z"
     t = (ROOT / "research" / "nv" / "state-text.md").read_text()
-    assert "not yet made a current reading" in t and "last good reading is kept" not in t
+    assert "not yet made a current reading" not in t and "last good reading is kept" not in t
+    assert "We read that page" in t or "This site reads that page" in t
     reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]}
-    assert "no successful current read" in reg["nv-state-parks-hab"]["note"]
+    assert "first successful read 2026-11-16T04:23:49Z" in reg["nv-state-parks-hab"]["note"]
+    assert "no successful current read" not in reg["nv-state-parks-hab"]["note"]
     # the archived copies are fixtures only: the ingester has no archive fallback
     assert "archive.org" not in (Path(P.__file__)).read_text()
+
+
+def test_audit_2026_11_16_the_state_list_is_watched_and_no_text_calls_the_dashboard_the_only_view():
+    from nv_ok_text_checks import OVERCLAIMS, public_texts
+    reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]}
+    ose = reg["nv-ose-hab-reports"]
+    assert ose["monitored"] is True and ose["metadata_only"] is True and ose["records"] is False
+    assert ose["urls"] == ["https://nvose.org/hot-topic-harmful-algal-blooms/"] and ose["barrier"] is None
+    assert OVERCLAIMS.search("the only statewide view of bloom advisories")
+    texts = public_texts("NV")
+    texts["research-sources"] = (ROOT / "research" / "nv" / "sources.json").read_text()
+    assert [k for k, t in texts.items() if re.search(r"only statewide", t, re.I)] == []
+    t = texts["state-text"]
+    # the waters the list names outside the parks are named, and said not to be shown, never said to be clear
+    for w in ("Lake Mohave", "Walker Lake", "Virginia Lake", "Mountain View Pond", "South Meadows Community Pond"):
+        assert w in t, w
+    assert "not shown on its map" in t
 
 
 def test_p2_5_a_same_day_reopening_keeps_both_episodes():

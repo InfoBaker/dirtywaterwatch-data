@@ -1,0 +1,30 @@
+id: "nv-ose-hab-reports"
+name: "Nevada Office of State Epidemiology, Harmful Algal Bloom reports"
+url: "https://nvose.org/hot-topic-harmful-algal-blooms/"
+homepage: "https://nvose.org/hot-topic-harmful-algal-blooms/"
+kind: "html"
+level: "state"
+# Notes (research/nv, status candidate, verified fetched, checked 2026-11-16): Active and previous
+#   bloom advisories statewide, one heading per water with its level and the date it took effect
+#   (eleven active on 2026-11-15, under eight headings, five outside the state parks); answers the
+#   pipeline's runner (200, 2026-11-16). Not yet read; watched (register row nv-ose-hab-reports).
+# Access detail (research, quoted): One web page: a count of the year's active advisories, then one
+#   heading per water with its advisory level and the date each level took effect, active and
+#   previous advisories.
+# Research notes: Headings on 2026-11-15: Mountain View Pond, Gardnerville (Watch, 10/14/2026),
+#   Lahontan Reservoir (Warning, 11/2/26), Lake Mohave including Placer Cove, Eagle Wash and
+#   Cottonwood Cove (Watch, 6/11, 9/9, 10/28/2026), Rye Patch Reservoir (Watch, 09/30/2026), Wild
+#   Horse Reservoir (Watch, 8/13/2026), Virginia Lake (Watch, 6/23/2026), South Meadows Community
+#   Pond (Watch, 6/23/2026), Walker Lake (Watch, lowered 5/19/26).
+cadence: "updated when an advisory changes; no fixed schedule"
+license: "none stated"
+attribution: "Nevada Office of State Epidemiology"
+enabled: true
+role: "advisories"
+event_types: ["hab_advisory"]
+states: ["NV"]
+access: ["html"]
+access_detail: "One web page: a count of the year's active advisories, then one heading per water with its advisory level and the date each level took effect, active and previous advisories."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-16"
