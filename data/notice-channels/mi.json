@@ -14971,7 +14971,7 @@
    "operator_id": null,
    "agency": "Huron River Watershed Council",
    "permit": null,
-   "checked": "2026-11-04",
+   "checked": "2026-11-16",
    "id": "mi-huron-river-watershed-council",
    "name": "Huron River Watershed Council",
    "channel_kind": "group_results",
@@ -14980,13 +14980,13 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "results",
-   "note": "Volunteer river monitoring on the Huron River (https://www.hrwc.org/our-work/programs/river-monitoring/). Answered 403 to the project user agent on 2026-11-04; not tried with a browser agent. Voluntary. (research/mi/report.md §2.5)",
+   "note": "Volunteer river monitoring on the Huron River. The site answered the pipeline's runner on 2026-11-16 (the earlier 403 was met from a development machine), but the program page (https://www.hrwc.org/our-work/programs/river-monitoring/) now gives 'page not found'; where the results are posted was not verified in the research. Voluntary. (research/mi/report.md §2.5)",
    "sources": [
     "mi-watershed-groups"
    ],
-   "barrier": "bot_wall"
+   "barrier": "not_verified"
   },
   {
    "state": "MI",
