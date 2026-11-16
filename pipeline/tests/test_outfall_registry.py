@@ -467,3 +467,16 @@ def test_official_combined_sewer_outfalls_with_no_point_and_no_water_go_in_unpla
     doc = json.loads(XO.write(out, tmp_path / "out", "2026-11-16T12:00:00Z", unplaced).read_text())
     assert doc["unplaced"] == unplaced and doc["count"] == len(out) and doc["outfalls"] == out
     assert "unplaced" not in json.loads(XO.write(out, tmp_path / "out2", "2026-11-16T12:00:00Z").read_text())
+
+
+def test_an_unplaced_outfall_a_monthly_mark_names_is_one_row_as_before(tmp_path):
+    """Review 2026-11-16 (P1): a monthly mark for an unplaced outfall made a row of its own while the outfall stayed in
+    "unplaced", so the state counted it twice. The mark's row is what the export wrote before the unplaced list."""
+    rows = registry(tmp_path)
+    marks = [{"npdes_permit": "PA0023736", "outfall_id": "4", "status": "monthly", "days": 2, "month": "2026-10",
+              "label": "2 days", "event_id": "m4"}]
+    unplaced: list = []
+    out = XO.outfall_rows(rows, LIVE, dischargers=DIS, marks=marks, unplaced=unplaced)
+    assert unplaced == []
+    assert out == XO.outfall_rows(rows, LIVE, dischargers=DIS, marks=marks), "the rows are what they were before"
+    assert [r["outfall_id"] for r in out if r["npdes_permit"] == "PA0023736" and r.get("status") == "monthly"] == ["4"]
