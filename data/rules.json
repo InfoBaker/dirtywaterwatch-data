@@ -474,6 +474,13 @@
   "unknown_status_yellow_days": 14,
   "unknown_status_rationale": "A discharge record with unclear status shows caution for 14 days after its report time. It then follows the rule for unconfirmed records.",
   "end_assumed_rationale": "A report with no end is shown as unresolved for 30 days after it began; after that we assume the discharge ended and the record says the end was never reported.",
+  "source_outage": {
+   "enabled": true,
+   "days": 14,
+   "_days_basis": "build/status.py CONFIRM_DAYS (the existing 14-day age-out of a standing listing; common.UNREAD_GAP_DAYS and ingest/poll_periods.py GAP_DAYS match it); this value documents it and is not read",
+   "rationale": "An advisory the authority lists is shown as the authority's own for 14 days after the last read of the source that showed it. When a later read succeeds and no longer shows it, the advisory leaves the map after those 14 days. When the source could not be read at all since then, its end is not confirmed: the advisory stays on the map as end not confirmed, with the time of the last read that showed it, until the source can be read again. If that read lists it, it is shown as the authority's again from that read, and the unread time stays marked end not confirmed.",
+   "_decided": "Owner, 2026-11-16: \"disclosure is public safety\", approving the recommendation that a standing advisory an authority listed must not turn grey just because the source could not be read (build/status.py outage_hold and carve_unread_gaps; common.no_ok_read_since and mark_unread_gaps)."
+  },
   "implausible_end": {
    "days_after_fetch": 31,
    "rationale": "An end time more than 31 days after we read a discharge report, or one before the discharge began, is most likely a typing error in the source. We do not draw a window from such an end: the report keeps the end as published, and the map treats the discharge as having no confirmed end. A planned window of some weeks keeps the end the authority gives, and so does an advisory."
