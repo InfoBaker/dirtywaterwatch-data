@@ -132,6 +132,55 @@ def test_plan_orders_event_points_new_cso_new_plant_failures_then_stale():
     assert [c["key"] for c, _ in touch] == ["h-renamed"]
 
 
+def test_plan_puts_tidal_retraces_ahead_of_first_traces_when_the_rule_is_on():
+    """Owner, 2026-11-16: with reach.tidal_river on, a trace cut at the head of tide (fresh or stale) is redone
+    before the outfalls that have no trace yet; one whose retrace failed today waits, one already redone is not
+    due, a moved outfall stays with the first traces. With the rule off the order is the earlier one."""
+    cs = [{"key": k, "permit": "PA1", "outfall": k, "lat": 40.0, "lon": -75.0, "sources": ["echo"],
+           "outfall_kind": kind, "water_slug": "w"} for k, kind in
+          (("a-new", "cso"), ("b-tidal", "cso"), ("c-tidal-plant", "plant"), ("d-tidal-stale", "cso"),
+           ("e-stale", "cso"), ("f-failed", "cso"), ("g-tidal-done", "cso"), ("h-tidal-tried", "cso"),
+           ("i-tidal-moved", "cso"))]
+    cs.append({"key": "pt-1", "permit": None, "outfall": None, "lat": 40, "lon": -75, "sources": ["event-point"]})
+    same = {"water_slug": "w", "sources": ["echo"], "outfall_kind": "cso"}
+    recent = NOW - timedelta(days=2)
+    cached = {"b-tidal": rec("b-tidal", recent, cut="tidal", **same),
+              "c-tidal-plant": rec("c-tidal-plant", recent, cut="tidal", **{**same, "outfall_kind": "plant"}),
+              "d-tidal-stale": rec("d-tidal-stale", NOW - timedelta(days=40), cut="tidal", **same),
+              "e-stale": rec("e-stale", NOW - timedelta(days=31), **same),
+              "f-failed": rec("f-failed", recent, cut="no_trace", segs=False, failures=1, **same),
+              "g-tidal-done": rec("g-tidal-done", recent, tidal_river=R.TIDAL_RULE,
+                                  tidal_off={"segments": 1, "cut_reason": "tidal", "river": None}, **same),
+              "h-tidal-tried": rec("h-tidal-tried", recent, cut="tidal", **same,
+                                   last_attempt={"at": (NOW - timedelta(hours=2)).isoformat(), "error": "ConnectionError"}),
+              "i-tidal-moved": rec("i-tidal-moved", recent, cut="tidal", lat=40.01, **same)}
+    on, touch = R.plan(cs, cached, NOW, tidal_river=True)
+    assert [c["key"] for c in on] == ["pt-1", "b-tidal", "d-tidal-stale", "c-tidal-plant", "a-new", "i-tidal-moved",
+                                      "f-failed", "e-stale"]
+    assert touch == []
+    off, _ = R.plan(cs, cached, NOW)
+    assert [c["key"] for c in off] == ["pt-1", "a-new", "i-tidal-moved", "f-failed", "d-tidal-stale", "e-stale"]
+    # a mark of an earlier version of the rule is due on or off: with the rule off it stays behind the first
+    # traces, with the old traces (first among them when fresh, by its age when old), as before the change
+    cs2 = [c for c in cs if c["key"] in ("a-new", "e-stale")] + [
+        {**cs[0], "key": k, "outfall": k} for k in ("j-early-mark", "k-early-mark-old")]
+    cached2 = {"e-stale": cached["e-stale"],
+               "j-early-mark": rec("j-early-mark", recent, cut="tidal", tidal_river=1, **same),
+               "k-early-mark-old": rec("k-early-mark-old", NOW - timedelta(days=35), cut="tidal", tidal_river=1, **same)}
+    assert [c["key"] for c in R.plan(cs2, cached2, NOW)[0]] == ["a-new", "j-early-mark", "k-early-mark-old", "e-stale"]
+    assert [c["key"] for c in R.plan(cs2, cached2, NOW, tidal_river=True)[0]] == [
+        "j-early-mark", "k-early-mark-old", "a-new", "e-stale"]
+
+
+def test_a_default_run_stays_far_under_the_navigation_allowance():
+    """The hourly refresh runs the step with no arguments: its budget and the reserve it keeps must leave most of
+    NLDI's 1000 navigation requests an hour to the other steps that share the address."""
+    b = R.Budget()
+    assert (b.nav, b.seconds, b.reserve) == (R.DEFAULT_NAV_BUDGET, R.DEFAULT_SECONDS, R.NAV_RESERVE)
+    assert 0 < R.DEFAULT_NAV_BUDGET + R.NAV_RESERVE <= 500
+    assert R.DEFAULT_NAV_BUDGET * R.NLDI_PAUSE_S < R.DEFAULT_SECONDS <= 600
+
+
 def test_failed_traces_back_off_one_two_four_days_to_the_cache_age():
     assert R.retry_days({"cut_reason": "cap_km"}) == R.CACHE_DAYS
     assert [R.retry_days({"cut_reason": "no_trace", "failures": n}) for n in (None, 1, 2, 3, 6)] == [1, 1, 2, 4, 30]
