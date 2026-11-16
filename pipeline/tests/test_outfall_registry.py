@@ -374,7 +374,7 @@ def test_new_jersey_permits_off_the_shared_site_get_the_radar_caution_and_covera
         {"NJ": {"NJ0108812", "NJ0108880"}})["NJ"]
     assert sorted(both["methods"]) == ["radar", "site_flag"] and both["covered"]
     assert "radar" in both["sentence"] and "njcsonotifications.com" in both["sentence"] and "other" not in both["sentence"]
-    assert both["threshold_kind"] == "site_default" and "this site's default amount of 0.1 in" in both["sentence"]
+    assert both["threshold_kind"] == "site_default" and "our default amount of 0.1 in" in both["sentence"]
     assert "published" not in both["sentence"]
 
 

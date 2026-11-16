@@ -1,0 +1,90 @@
+{
+ "note": "Rows of the 2026-11-15 read of DES's Water_Advisories layer 0 ('Swimming Advisory'; outFields OBJECTID,Name,Station, outSR 4326): five of its 23 sites, as returned, with the read's count trimmed to match.",
+ "layer": {
+  "displayFieldName": "Name",
+  "geometryType": "esriGeometryPoint",
+  "spatialReference": {
+   "wkid": 4326,
+   "latestWkid": 4326
+  },
+  "fields": [
+   {
+    "name": "OBJECTID",
+    "type": "esriFieldTypeOID",
+    "alias": "OBJECTID"
+   },
+   {
+    "name": "Name",
+    "type": "esriFieldTypeString",
+    "alias": "Name",
+    "length": 50
+   },
+   {
+    "name": "Station",
+    "type": "esriFieldTypeString",
+    "alias": "Station",
+    "length": 13
+   }
+  ],
+  "features": [
+   {
+    "attributes": {
+     "OBJECTID": 125,
+     "Name": "Crosby's Landing",
+     "Station": "R8-031"
+    },
+    "geometry": {
+     "x": -80.55741303321912,
+     "y": 32.74386634701157
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 126,
+     "Name": "Joe's Fish Camp",
+     "Station": "R8-032"
+    },
+    "geometry": {
+     "x": -80.5574030338561,
+     "y": 32.74386634688372
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 176,
+     "Name": "Cayce Riverwalk",
+     "Station": "R3-048"
+    },
+    "geometry": {
+     "x": -81.05316227831787,
+     "y": 33.99490464484727
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 177,
+     "Name": "Granby Park",
+     "Station": "R3-049"
+    },
+    "geometry": {
+     "x": -81.04505701678006,
+     "y": 33.97812528958851
+    }
+   },
+   {
+    "attributes": {
+     "OBJECTID": 178,
+     "Name": "Granby Park",
+     "Station": "R3-050"
+    },
+    "geometry": {
+     "x": -81.04530504870256,
+     "y": 33.983828524029704
+    }
+   }
+  ]
+ },
+ "count": {
+  "count": 5
+ }
+}
