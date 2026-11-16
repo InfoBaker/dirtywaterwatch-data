@@ -11,21 +11,22 @@ level: "state"
 #   USGS GNIS point where GNIS holds the lake in that county (Marlette Lake, Wild Horse Reservoir).
 # Notes (research/nv, status used, verified fetched, checked 2026-11-14): Read by the
 #   nv-state-parks-hab ingester: one hab_advisory record per water while listed, the parks' level
-#   and words, the first read as the start. The live host refused the collector's connections on
-#   2026-11-14 (no answer on ports 443 and 80); the parser was built and tested on the Internet
-#   Archive's copies of 2025-11-12 (Rye Patch Watch, Lahontan Warning) and 2026-08-13 (Lahontan, Rye
-#   Patch, Marlette Lake and Washoe Lake Watch).
+#   and words, the first read as the start. The parser was built and tested on the Internet Archive's
+#   copies of 2025-11-12 (Rye Patch Watch, Lahontan Warning) and 2026-08-13 (Lahontan, Rye Patch,
+#   Marlette Lake and Washoe Lake Watch), and on the page as the pipeline read it on 2026-11-16 (Rye
+#   Patch and Wild Horse Watch, Lahontan Warning, no Danger).
 # Access detail (research, quoted): The page's three accordion sections (HAB Watch, Warning and
 #   Danger Advisories): one bold heading per water with its update date, then the parks' paragraph;
-#   'None at this time.' for an empty level.
+#   'None' or 'None at this time.' for an empty level.
 # Can fill: waterbody_text, source_updated_at, advice_text, status
 # Cannot fill: started_at (no issue date: the first read is used); ended_at (no lift date: the read
 #   that finds the water gone is used); lat/lon
 # History: current advisories only; the Internet Archive holds monthly copies since 2025-10
 # Research notes: Waters in Nevada state parks only.
-# Barrier (Astra P1-3): no successful current read. An ordinary request (the project's user agent, curl) timed out on
-#   2026-11-14 (ports 443 and 80, twice, and the ingester's live run) and on 2026-11-15T10:25Z (connect timeout after 40
-#   s); the user agent is not changed and no archive copy seeds current status. The feed's health stays ok:false with
+# Status (Astra P1-3): no successful current read yet. The page answers the pipeline's runner (read 2026-11-16T01:45Z);
+#   the reads failed in the parser, which did not take the Danger section's "None" as the empty marker and ran that
+#   section into the passport block below it (fixed 2026-11-16). No archive copy seeds current status. The feed's
+#   health stays ok:false with
 #   last_ok_at null until a read succeeds; Nevada stays out of live_states until first_successful_read is set here.
 first_successful_read: null
 cadence: "updated when a level changes; no fixed schedule"
@@ -36,7 +37,7 @@ role: "advisories"
 event_types: ["hab_advisory"]
 states: ["NV"]
 access: ["html"]
-access_detail: "The page's three accordion sections (HAB Watch, Warning and Danger Advisories): one bold heading per water with its update date, then the parks' paragraph; 'None at this time.' for an empty level."
+access_detail: "The page's three accordion sections (HAB Watch, Warning and Danger Advisories): one bold heading per water with its update date, then the parks' paragraph; 'None' or 'None at this time.' for an empty level."
 machine_readable: true
 legal_basis: null
 checked: "2026-11-14"
