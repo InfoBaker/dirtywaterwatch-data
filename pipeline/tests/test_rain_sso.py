@@ -308,6 +308,7 @@ def test_heavy_rain_sets_the_caution_on_the_stretch_with_its_evidence(levels):
     assert r["until_rule"].startswith("48 hours after the 24-hour total falls below")
     assert set(blk["_episodes"]) == {iv["event_id"]} and iv["event_id"].startswith("rain_likely:sso:al-wet:")
     assert RL.short(iv).startswith("Discharge possible") and "separate sewer" in RL.short(iv)
+    assert "radar peak 1.20 inches in the 24 hours to " + r["peak_at"][:16].replace("T", " ") + " UTC" in RL.short(iv)
 
 
 def test_rain_below_the_operators_amount_sets_nothing(levels):
@@ -386,10 +387,17 @@ def test_combined_sewer_compute_is_unchanged_with_the_switch_on_and_sso_readings
         assert got == want
 
 
-def _status(rules, levels=None, grades=None):
-    from tests.test_rain_likely import rain_world, wet
+def _status(rules, levels=None, grades=None, sso=False):
+    from tests.test_rain_likely import rain_input, rain_world, wet
+    from tests.test_status import _reach
     w = rain_world(values=wet(range(0, 6)))
     w["rules"] = rules
+    if sso:     # an active separate sewer caution beside the combined sewer one, on a stretch from its report point
+        r = rain_input(wet(range(0, 4), v=0.9), permit="sso:al-wet")
+        w["rain"]["rainfall"]["permits"]["sso:al-wet"] = r["rainfall"]["permits"]["sso:al-wet"]
+        w["rain"]["history"]["permits"]["sso:al-wet"] = r["history"]["permits"]["sso:al-wet"]
+        w["reaches"] = {**w["reaches"], "pt-sso1": {**_reach(key="pt-sso1"), "permit": None, "outfall": None,
+                                                    "event_ids": ["sso-e1"]}}
     if levels is not None:
         w["rain"] = {**w["rain"], "levels_sso": levels, "grades_sso": grades}
     st, hist = S.build(now=datetime(2026, 8, 10, 12, 0, tzinfo=UTC), write=False, **w)
@@ -408,17 +416,132 @@ def test_status_build_is_byte_identical_with_the_switch_off(monkeypatch, levels)
     assert before == after
 
 
-def test_status_build_keeps_every_combined_sewer_field_with_the_switch_on(monkeypatch, levels):
+SSO_LEVELS = {"method_version": 1, "today": "2026-08-10", "operators": {"al-wet": {
+    "op": "al-wet", "name": "Wet Utilities", "state": "MA", "qualifies": True, "why_not": [], "possible_in": 0.3,
+    "likely_in": None, "newest_report": "2026-08-01", "period": ["2023-01-05", "2026-07-20"], "storms": 190,
+    "followed": 40, "reports": 60, "lift": 2.0, "sources": ["x"], "permits": [], "live_points": [[42.0, -72.0]],
+    "places": {"reports": 1, "waters": [{"water_slug": "test-river-ma", "reports": 1}],
+               "events": [{"event_id": "sso-e1", "day": "2026-07-01", "point": [42.0, -72.0],
+                           "water_slugs": ["test-river-ma"], "reaches": []}]}}}}
+
+
+def test_status_build_keeps_every_combined_sewer_field_with_an_active_separate_sewer_caution(monkeypatch):
+    """Review 2026-11-16 P2-10: with a separate sewer caution in effect on the same river, every combined sewer row,
+    interval, status and word is what it was without the switch."""
     from tests.test_rain_likely import PERMIT, RAIN_RULES
     monkeypatch.setattr(S, "_RULES", RAIN_RULES)
-    before, _ = _status(RAIN_RULES)
+    before, hb = _status(RAIN_RULES)
     on = copy.deepcopy(RAIN_RULES)
     on["rain_likely"]["separate_sewers"] = {**rules_on()["rain_likely"]["separate_sewers"]}
-    after, _ = _status(on, levels, GRADES)
+    after, ha = _status(on, SSO_LEVELS, {"MA": "Dated reports"}, sso=True)
     blk_b, blk_a = before["rain_likely"], after["rain_likely"]
-    assert "separate_sewers" in blk_a and "separate_sewers" not in blk_b
+    ss = blk_a["separate_sewers"]
+    assert ss["operators"]["al-wet"]["status"] == "likely" and ss["operators"]["al-wet"]["reaches"] == ["pt-sso1"]
+    assert "separate_sewers" not in blk_b
     assert blk_a["permits"] == blk_b["permits"] and blk_a["counts"] == blk_b["counts"]
     assert {k: v for k, v in blk_a["episodes"].items() if PERMIT in k} == blk_b["episodes"]
-    for slug in ("test-river-ma", "other-pond-ma"):
-        assert after["waters"][slug]["reasons"] == before["waters"][slug]["reasons"]
-        assert after["waters"][slug]["status"] == before["waters"][slug]["status"]
+    assert any(k.startswith("rain_likely:sso:al-wet:") for k in blk_a["episodes"])
+    river_a = after["waters"]["test-river-ma"]["reasons"]
+    sso_reasons = [x for x in river_a if (x.get("rain") or {}).get("permit") == "sso:al-wet"]
+    assert sso_reasons and all(x["rule"] == "rain_likely" for x in sso_reasons)
+    assert [x for x in river_a if x not in sso_reasons] == before["waters"]["test-river-ma"]["reasons"]
+    assert after["waters"]["other-pond-ma"] == before["waters"]["other-pond-ma"]
+    assert after["waters"]["test-river-ma"]["status"] == before["waters"]["test-river-ma"]["status"]
+    assert after["reaches"]["MA0101613-13"] == before["reaches"]["MA0101613-13"]
+    assert after["reaches"]["pt-sso1"]["status"] == "yellow"
+
+
+def test_active_json_never_gives_the_operator_key_as_a_permit():
+    from export import build as X
+    ep = {"permit": "sso:al-wet", "discharger_id": "al-wet", "discharger_name": "Wet Utilities", "state": "AL",
+          "label": "Discharge possible: heavy rain, no report received", "start": "2026-11-16T10:00:00Z", "end": None,
+          "reaches": [], "rain": {"point": [33.84, -87.28]}}
+    cso = {**ep, "permit": "MA0101613", "discharger_id": "ma-x"}
+    rows = X.active_entries({"rain_likely:sso:al-wet:20261116T10Z": [{"status": "yellow", "water": "town-creek-al"}],
+                             "rain_likely:MA0101613:20261116T10Z": [{"status": "yellow", "water": "w"}]}, {},
+                            {"episodes": {"rain_likely:sso:al-wet:20261116T10Z": ep, "rain_likely:MA0101613:20261116T10Z": cso}})
+    by = {r["event_id"]: r for r in rows}
+    assert by["rain_likely:sso:al-wet:20261116T10Z"]["npdes_permit"] is None
+    assert by["rain_likely:sso:al-wet:20261116T10Z"]["discharger_id"] == "al-wet"
+    assert by["rain_likely:MA0101613:20261116T10Z"]["npdes_permit"] == "MA0101613"
+
+
+# ---------------------------------------------------------------- review 2026-11-16 (Astra), data side
+
+def test_review_p1_1_the_lift_leaves_reporting_gaps_out_of_both_sides():
+    """Reports on every fourth day whatever the weather, in 2023 and in 2026 only: a two-year reporting gap must not
+    inflate the ratio (it read 2.09 when the gap's days stayed in the denominator)."""
+    cfg = SS.settings(rules_on())
+    days = [d for d in DAILY if (d.year == 2023 or d >= date(2026, 1, 1)) and d.toordinal() % 4 == 0 and d <= TODAY - timedelta(days=20)]
+    recs = [rec(f"r{i}", "al-wet", d) for i, d in enumerate(days)]
+    spans, _ = SS.sso_spans(recs, lambda r: r["discharger_id"], cfg)
+    from build import rain_history as RH
+    a = RH.analyse(DAILY, spans["al-wet"], TODAY - timedelta(days=20), RH.settings(rules_on()), TODAY)
+    assert any(x["why"] == "reporting_gap" for x in a["left_out"])
+    sig = SS.signal(DAILY, spans["al-wet"], a)
+    assert 0.7 <= sig["lift"] <= 1.3, sig
+
+
+def test_review_p1_2_the_hourly_check_reads_the_report_age_against_today(levels):
+    assert "al-wet" in SS.qualifying(levels, rules_on(), GRADES, TODAY)
+    later = TODAY + timedelta(days=100)
+    assert SS.qualifying(levels, rules_on(), GRADES, later) == {}
+    lv = copy.deepcopy(levels)
+    reaches = {}
+    by_water, _, blk = SS.compute(rain_for(storm(range(0, 6), 1.2), now=NOW + timedelta(days=100)), rules_on(), [],
+                                  NOW + timedelta(days=100), NOW, WATERS, reaches, lambda r, w: [], {}, lv, GRADES)
+    assert by_water == {} and "al-wet" in blk["not_covered"]
+    assert any("older than 90 days" in w for w in blk["not_covered"]["al-wet"]["why_not"])
+
+
+def test_review_p1_3_never_a_registry_outfalls_reach_or_a_report_with_no_point():
+    evs = [{"event_id": "e1", "point": [33.84, -87.28], "water_slugs": ["town-creek-al"], "reaches": ["AL0001-1"]},
+           {"event_id": "e2", "point": None, "water_slugs": ["town-creek-al"], "reaches": []}]
+    reaches = {"AL0001-1": {"key": "AL0001-1", "permit": "AL0001", "outfall": "001", "segments": [{"x": 1}],
+                            "water_slug": "town-creek-al"},
+               "pt-e2": {"key": "pt-e2", "segments": [{"x": 1}], "water_slug": "town-creek-al", "event_ids": ["e2"]},
+               "pt-other": {"key": "pt-other", "segments": [{"x": 1}], "water_slug": "town-creek-al", "event_ids": ["zz"]}}
+    keys, tags, _, _ = SS.placement(entry_with(evs), WATERS, reaches, lambda r, w: ["town-creek-al"],
+                                    {"e1": {"reach": "pt-other", "reaches": ["AL0001-1"]}})
+    assert keys == [] and tags == {}
+
+
+def test_review_p1_4_separate_sewer_points_never_change_the_combined_sewer_fallback():
+    from ingest import rainfall as RF
+    pts = {"a": {"permits": ["MA1"], "mrms": {"h24": 0.2}}, "b": {"permits": ["MA1"], "mrms": {"h24": 0.5}},
+           "c": {"permits": ["MA2"], "mrms": {"h24": 0.1}}}
+    base = RF.fallback_order(pts, ["a", "b", "c"], 2)
+    more = {**pts, "s": {"permits": ["sso:al-wet"], "mrms": {"h24": 3.0}},
+            "b": {"permits": ["MA1", "sso:al-x"], "mrms": {"h24": 0.5}}}
+    assert RF.fallback_order(more, ["a", "b", "c", "s"], 2) == base
+    assert RF.fallback_order(more, ["a", "b", "c", "s"], 4) == base + [x for x in RF.fallback_order(pts, ["a", "b", "c"], 4) if x not in base] + ["s"]
+
+
+def test_review_p2_5_live_points_are_report_points(levels):
+    e = levels["operators"]["al-wet"]
+    given = {tuple(ev["point"]) for ev in e["places"]["events"] if ev["point"]}
+    assert e["live_points"] and all(tuple(p) in given for p in e["live_points"])
+    assert SS.report_points([(1.0, 1.0), (1.0, 2.0), (3.0, 1.0)], 1)[0] in {(1.0, 1.0), (1.0, 2.0), (3.0, 1.0)}
+
+
+def test_review_p2_6_the_batch_rule_reads_the_events_files(tmp_path, monkeypatch):
+    import common
+    (tmp_path / "tx-batches.json").write_text(json.dumps({"meta": {"published_in_batches": True}, "records": records()}))
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    srcs, batches = SS.events_sources()
+    assert batches == {"tx-batches": True} and srcs[0][0] == "tx-batches"
+    d = SS.build(offline=True, today=TODAY, now=NOW, rules=rules_on(), operator_of=lambda r: r.get("discharger_id"),
+                 placements={}, reader=lambda *a: dict(DAILY), have=lambda *a: True, grades=GRADES, write=False)
+    assert d["counts"]["qualify"] == 0 and d["sources"]["tx-batches"]["excluded"]
+
+
+def test_review_p2_8_the_rules_export_carries_the_block_only_when_on():
+    from export import build as X
+    off = X.live_rules(X.public_rules(RULES), {"AL"})
+    assert "separate_sewers" not in off["rain_likely"]
+    base = copy.deepcopy(RULES)
+    del base["rain_likely"]["separate_sewers"]
+    assert off == X.live_rules(X.public_rules(base), {"AL"})
+    on = X.live_rules(X.public_rules(rules_on()), {"AL"})
+    assert on["rain_likely"]["separate_sewers"]["enabled"] is True
+    assert not any(k.startswith("_") for k in on["rain_likely"]["separate_sewers"])
