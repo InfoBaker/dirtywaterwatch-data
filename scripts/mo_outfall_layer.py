@@ -26,8 +26,9 @@ Rules
   - Show Me Ethanol (MO0134198) is an ethanol plant, not a sewer system: its single outfall EPA flags as a CSO is kind
     "other" here (kept off the map, out of the outfall count and the rain caution) until the permit shows a combined
     sewer; EPA's row is named in supersedes.
-  - MSD's Bissell Point plant (MO0025178, DNR's issued-permit listing, effective 2026-09-01) is in neither inventory:
-    its outfalls are unknown here and the state text says so.
+  - MSD's Bissell Point plant (MO0025178, DNR's issued-permit listing, effective 2026-09-01) is not on DNR's layer.
+    EPA's inventory file of 2026-11-14 lists its combined sewer outfalls (52), which the registry takes from EPA
+    (research/cso-registry-2026-11-16/corrections.json); before that file it was in neither inventory.
 """
 from __future__ import annotations
 
