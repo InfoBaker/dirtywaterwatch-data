@@ -14,7 +14,7 @@ level: "municipal"
 #   reports not yet read; --backfill reads every report from 2023 (14 reports, 652 rows read on 2026-11-17, 31 rows
 #   in layouts not read: two events in one row, an address printed on the row above; named in meta).
 # Times: Memphis (Central time), to the minute; a time with no AM or PM in a report that writes AM and PM, and a
-#   24-hour "0:00", are dated to the day. The end is the start plus the row's estimated duration (the City's figure).
+#   24-hour "0:00", are dated to the day. The end is the last day the row's estimated duration allows (day precision; the TDEC rows' rule).
 # Publication: the date written on the certification page, when filled in (blank on Q2 2026); fetch time kept apart.
 # Place: the receiving stream as written, placed only by the matcher on the water it names; a row with no stream
 #   names no water and is placed on none; the footnote's words are kept. No point is taken from the street.

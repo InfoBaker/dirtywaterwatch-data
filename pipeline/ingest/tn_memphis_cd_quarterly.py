@@ -23,8 +23,10 @@ Reading (pypdf, plain text; the table pages are rotated landscape pages, read ro
 Records (one sso record per row)
   - started_at: the row's date and time in Memphis (America/Chicago), time_precision minute. The reports from 2025 on
     write times with AM or PM; a time written without AM or PM in such a report is ambiguous and the record is dated to
-    the day (raw.time_note). Reports written in 24-hour time are read as such.
-  - ended_at: the start plus the row's estimated duration in hours (common.end_after; the report's own figure), status
+    the day (raw.time_note), as is a clock time the change to or from daylight time skips or repeats. Reports
+    written in 24-hour time are read as such.
+  - ended_at: the last day the row's estimated duration allows (common.end_after at day precision, the rule of TDEC's
+    rows; no clock time, the report gives no end; review 2026-11-17 P1-4), status
     ended; no duration, no end (status unknown). The duration is the City's estimate (raw.duration_hours_as_written).
   - published_at: the date on the report's certification page (page 1), when it is filled in; the Q2 2026 report leaves
     it blank, and then none is given (raw.report_posted_folder is the upload folder's year and month, for reference
@@ -38,8 +40,9 @@ Records (one sso record per row)
   - Source column: kept as written (raw.overflow_source: "M/L" manhole, "BASEMENT" a backup into a building, ...).
   - Place: the Location - Address cell with house numbers removed (al_jefferson_county_soa.street_only), as the
     outfall_name and raw.location; Shelby County.
-  - source_record_id "<YYYY>Q<n>:<date>T<HHMM|day>:<street key>", "~<k>" for a second row of the same date, time and
-    street in one report.
+  - source_record_id "<date>T<HHMM AM|PM|day>:<street key>", "~<k>" for a second row of the same date, time and
+    street in one report; no quarter in it, so a row repeated in a later report is one record (the newer copy).
+    A record dated to the day has started_at the date alone (no clock time).
   - One event, one record: Memphis's overflows are absent from TDEC's Events Report (the research, 2026-11-03), whose
     host has refused automated reading since 2026-11-07; a record of the same local day and street as a TDEC record of
     a Memphis permit is still marked its duplicate (link_tdec, the Knoxville reader's rule), and the count is in meta.
