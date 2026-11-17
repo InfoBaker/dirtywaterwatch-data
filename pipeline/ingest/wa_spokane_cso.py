@@ -53,7 +53,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import (BUILD_DIR, HEADERS, event, load_outfall_registry, now_iso, outfall_number, read_json, save_raw,
-                    write_events, write_json)
+                    scrub_text, strip_house_numbers, write_events, write_json)
 from ingest.oh_cso_pdf_notices import existing
 
 SOURCE_ID = "wa-spokane-cso-update"
@@ -81,7 +81,9 @@ class LayoutError(ValueError):
 
 
 def clean(v: str) -> str:
-    return " ".join(html.unescape(re.sub(r"<[^>]+>", " ", v or "")).replace("\xa0", " ").split())
+    """Cell text, scrubbed of e-mail addresses, telephones and names after contact words before anything keeps it
+    (review 2026-11-16)."""
+    return scrub_text(" ".join(html.unescape(re.sub(r"<[^>]+>", " ", v or "")).replace("\xa0", " ").split()))
 
 
 def local(v: str | None) -> datetime | None:
@@ -134,7 +136,7 @@ def parse(page: str) -> tuple[list[dict], list[str]]:
         if bad:
             unread.append(f"{site or 'row ' + str(n)}: " + ", ".join(bad))
             continue
-        rows.append({"site": site, "location": re.sub(r"\s*Map$", "", loc).strip(), "status": status,
+        rows.append({"site": site, "location": strip_house_numbers(re.sub(r"\s*Map$", "", loc).strip()), "status": status,
                      "start": start.isoformat() if start else None, "start_text": None if start is None else when,
                      "image": img.group(1).rsplit("/", 1)[-1] if img else None, "not_storm_related": star})
     if not rows and not unread:
@@ -143,9 +145,19 @@ def parse(page: str) -> tuple[list[dict], list[str]]:
 
 
 def complete(n: int, state_path: Path) -> None:
-    prev = ((read_json(state_path, {}) or {}).get("last_poll") or {}).get("rows") or 0
+    """The baseline is the last complete read's row count (a partial read never lowers it; review 2026-11-16)."""
+    st = read_json(state_path, {}) or {}
+    prev = st.get("baseline_rows") or (st.get("last_poll") or {}).get("rows") or 0
     if n < MIN_ROWS or n < prev - DROP_ALLOWED:
-        raise LayoutError(f"{n} site rows on the page (the last read had {prev}): the page looks truncated")
+        raise LayoutError(f"{n} site rows on the page (the last complete read had {prev}): the page looks truncated")
+
+
+def missing_sites(rows: list[dict], unread: list[str], state_path: Path) -> list[str]:
+    """Sites a complete read showed that this read neither read nor named as unread: each is an unread item, so a
+    site that turns unreadable and then vanishes never clears health (review 2026-11-16)."""
+    known = set((read_json(state_path, {}) or {}).get("known_sites") or [])
+    seen = {r["site"] for r in rows} | {u.split(":", 1)[0] for u in unread}
+    return [f"{s}: missing from the page" for s in sorted(known - seen)]
 
 
 def poll(state: dict, rows: list[dict], now: str) -> dict:
@@ -264,6 +276,7 @@ def main(argv=None) -> int:
         parsed = [parse(p) for p in pages]
         for rows, unread in parsed:
             complete(len(rows) + len(unread), state_path)
+            unread += missing_sites(rows, unread, state_path)
     except (requests.RequestException, LayoutError, OSError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"page: {type(e).__name__}: {e}", path=out)
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
@@ -273,6 +286,11 @@ def main(argv=None) -> int:
         if not a.file:
             save_raw(SOURCE_ID, json.dumps(rows), "json")        # the parsed rows only
         recs, meta = run(rows, now_iso(), state_path)
+        st = read_json(state_path, {}) or {}
+        if not unread:                          # a complete read sets the baseline and the sites expected
+            st["baseline_rows"] = len(rows)
+            st["known_sites"] = sorted({r["site"] for r in rows})
+        write_json(state_path, st)
     if unread:
         meta["unread"] = unread
         write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta, path=out, error="rows not read: " + "; ".join(unread))

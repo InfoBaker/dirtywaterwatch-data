@@ -88,7 +88,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import (BUILD_DIR, HEADERS, event, load_outfall_registry, now_iso, outfall_number, read_json, save_raw,
-                    write_events, write_json)
+                    scrub_text, write_events, write_json)
 from ingest.oh_cso_pdf_notices import existing
 
 SOURCE_ID = "in-fort-wayne-cso-notifications"
@@ -111,6 +111,8 @@ MG = re.compile(r"\d+(?:\.\d+)?")
 DAY = re.compile(r"(\d{1,2})/(\d{1,2})/(\d{4})")
 LABEL = re.compile(r"\d{1,3}[A-Z]?")
 BACKFILL_FROM = "2025-01-01"
+MIN_OUTFALLS = 35        # 39 outfall columns (38 on the week of 2026-11-05); fewer is a cut-off document
+DROP_ALLOWED = 2         # fewer columns than the most any document held, by more than this, is a cut-off document
 
 # The receiving water of each outfall as permit IN0032191 names it (discharge authorization table, printed in the
 # city's "Great Lakes CSO Public Notification Annual Report 2024", pages 51-54, read 2026-11-16), by outfall number.
@@ -276,7 +278,7 @@ def parse(doc: dict) -> dict:
         ds = sorted(days.values())
         if not ds:
             raise SummaryError(f"block {bi + 1}: no dated row")
-        if any(date.fromisoformat(b) - date.fromisoformat(a) != timedelta(days=1) for a, b in zip(ds, ds[1:])):
+        if len(ds) != 7 or any(date.fromisoformat(b) - date.fromisoformat(a) != timedelta(days=1) for a, b in zip(ds, ds[1:])):
             raise SummaryError(f"block {bi + 1}: its days are not consecutive: {ds}")
         if all_days is None:
             all_days = ds
@@ -527,9 +529,14 @@ def read_doc(state: dict, url: str, content: bytes, now: str, via: str, pieces_o
     try:
         doc = doc if doc is not None else pieces_of(content)
         parsed = parse(doc)
-    except (SummaryError, ValueError, ImportError, AttributeError, TypeError, KeyError) as e:
-        state.setdefault("unread", {})[url] = f"{type(e).__name__}: {str(e)[:160]}"
+        most = state.get("most_outfalls") or 0
+        n = len(parsed["outfalls"])
+        if n < MIN_OUTFALLS or n < most - DROP_ALLOWED:
+            raise SummaryError(f"{n} outfall columns (the most read is {most}): the document looks cut off")
+    except Exception as e:      # any failure of pypdf or the reader: unread, never "no overflows" (review 2026-11-16)
+        state.setdefault("unread", {})[url] = scrub_text(f"{type(e).__name__}: {e}")[:200]
         return "unread"
+    state["most_outfalls"] = max(state.get("most_outfalls") or 0, len(parsed["outfalls"]))
     return take(state, url, doc, parsed, sha, now, via)
 
 
@@ -563,7 +570,7 @@ def run(now: str, state_path: Path, out: Path | None = None, get=_get, backfill:
                 sleep(90)
                 resp = get(url)
         except requests.RequestException as e:
-            unread[url] = f"{type(e).__name__}: {str(e)[:160]}"
+            unread[url] = scrub_text(f"{type(e).__name__}: {e}")[:200]
             counts["unread"] += 1
             return None
         if resp.status_code != 200:
@@ -575,12 +582,9 @@ def run(now: str, state_path: Path, out: Path | None = None, get=_get, backfill:
     for u in links + [u for u in list(unread) if u not in links]:
         code = fetch(u, "page" if u in links else (state.get("docs", {}).get(u) or {}).get("via") or "retry")
         if code not in (200, None):
-            if code == 404 and u not in links:
-                state.setdefault("left_unread", {})[u] = {"why": unread.pop(u, ""), "seen_gone_at": now}
-                counts["gone"] += 1
-            else:
-                unread[u] = f"HTTP {code}"
-                counts["unread"] += 1
+            # a 404 does not tell what the document held: it stays unread, retried, health false (review 2026-11-16)
+            unread[u] = f"HTTP {code}" + (f" (earlier: {unread[u]})" if u in unread and not unread[u].startswith("HTTP") else "")
+            counts["unread"] += 1
     if backfill:
         missing = []
         for tries in backfill_urls(since, today or datetime.now(TZ).date()):
