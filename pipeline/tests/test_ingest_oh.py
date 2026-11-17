@@ -574,10 +574,17 @@ def test_the_missing_list_carries_akrons_and_neorsds_waters():
                 if b:                  # the record is in this checkout: it holds the sites' points (about 1 km)
                     assert all(b[0] - 0.01 <= lon <= b[2] + 0.01 and b[1] - 0.01 <= lat <= b[3] + 0.01
                                for lat, lon in r["points"]), f"{name} resolved away from Akron's sites"
-    for name, n in (("Mill Creek", 19), ("Big Creek", 14)):
+    # NEORSD's two creeks: a row with the outfalls' points, or (once a names pass has built the record at Cleveland
+    # and taken the row off the list, as Ohio's batch of 2026-11-17 did) resolved to that record with the same points
+    for name, n, slug in (("Mill Creek", 19, "mill-creek-cleveland-oh"), ("Big Creek", 14, "big-creek-cleveland-oh")):
         r = next((x for x in missing["rows"] if x["name"] == name and "OH0043991" in (x.get("permits") or [])), None)
-        assert r, f"NEORSD's {name} is not on the missing list"
-        assert len(r["points"]) == n and r["counties"] == ["Cuyahoga County"]
+        if r is None:
+            r = next((x for x in missing.get("resolved") or []
+                      if x["name"] == name and slug in (x.get("slugs") or [])), None)
+            assert r, f"NEORSD's {name} is neither a missing row nor resolved to {slug}"
+        else:
+            assert r["counties"] == ["Cuyahoga County"]
+        assert len(r["points"]) == n
         assert all(41.3 < lat < 41.6 and -81.9 < lon < -81.5 for lat, lon in r["points"])     # Cleveland
 
 
