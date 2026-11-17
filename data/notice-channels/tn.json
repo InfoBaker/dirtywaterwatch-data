@@ -9084,6 +9084,33 @@
    "operator_id": "tn-memphis",
    "agency": null,
    "permit": "TN0020711",
+   "checked": "2026-11-17",
+   "id": "tn-memphis-consent-decree-reports",
+   "name": "City of Memphis",
+   "channel_kind": "feed",
+   "urls": [
+    "https://sarp10.com/reports/"
+   ],
+   "method": "pdf",
+   "legal_basis": "Consent decree, United States and State of Tennessee v. City of Memphis (W.D. Tenn., entered September 20, 2012), Section VIII.24: the quarterly report, which in the City's words \"summarizes all SSO events\" of the quarter with the date, time, location, source, estimated duration, estimated volume, receiving water (if any) and cause",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "tn-memphis-cd-quarterly",
+   "publishes": "documents",
+   "records": true,
+   "noun": "Data feed",
+   "note": "The City posts each consent-decree quarterly report on its program site (2023 Q1 to 2026 Q2 on 2026-11-17; Q2 2026 posted in July 2026, Q3 2026 not yet posted): one table row per sanitary sewer overflow with its date and time, street location, cause, estimated gallons, source, estimated duration and the receiving stream where one is named. Read by the tn-memphis-cd-quarterly feed, with a backfill to January 2023.",
+   "sources": [
+    "tn-memphis-cd-quarterly"
+   ],
+   "barrier": null
+  },
+  {
+   "state": "TN",
+   "operator_id": "tn-memphis",
+   "agency": null,
+   "permit": "TN0020711",
    "checked": "2026-11-07",
    "id": "tn-memphis-overflow-report",
    "name": "City of Memphis",
