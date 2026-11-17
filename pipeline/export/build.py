@@ -123,7 +123,17 @@ INDEX_FIELDS = ["event_id", "event_type", "status", "state", "started_at", "ende
                 "discharger_name", "npdes_permit", "outfall_id", "volume_gal", "lat", "lon", "fixture", "sampled_at",
                 "time_precision", "ended_at_precision"]
 WATER_EVENT_EXTRA = ["source_id", "waterbody_text", "outfall_name", "volume_text", "water_match", "superseded",
-                     "duplicate_of", "file", "estimate_flag", "detail", "later_volume"]
+                     "duplicate_of", "file", "estimate_flag", "detail", "later_volume", "linked_notices"]
+# the report tables' part of an operator's e-mail notice linked to a record (build.status.linked_notices); the event's
+# own file carries the notice whole (its advice and how the volume was estimated)
+LINKED_NOTICE_CELL = ("event_id", "source_id", "published_at", "ended_at", "volume_gal", "volume_text", "estimate_flag")
+
+
+def linked_notices_cell(v):
+    if not isinstance(v, list):
+        return None
+    out = [{k: n.get(k) for k in LINKED_NOTICE_CELL if n.get(k) is not None} for n in v if isinstance(n, dict)]
+    return out or None
 SLIM_KEEP = {"event_id", "source_id", "event_type", "status", "water_slugs", "started_at", "ended_at", "sampled_at", "fixture", "file"}
 
 
@@ -156,6 +166,10 @@ def slim_event(rec: dict) -> dict:
             out["detail"] = cell
         else:
             del out["detail"]
+    if "linked_notices" in out:
+        out["linked_notices"] = linked_notices_cell(out["linked_notices"])
+        if not out["linked_notices"]:
+            del out["linked_notices"]
     own = (rec.get("raw") or {}).get("ended_at_precision") if isinstance(rec.get("raw"), dict) else None
     if rec.get("ended_at") and own and own != rec.get("time_precision"):
         out["ended_at_precision"] = own
@@ -730,6 +744,7 @@ def note_wording(rec: dict) -> list[str]:
 # the placement texts a public record carries (from status.json placements); each can quote the record's
 # receiving-water, outfall or volume text, so each goes through the record's redaction (public_record)
 PLACEMENT_TEXT_KEYS = ("note", "unplaced_reason", "no_receiving_water")
+LINKED_TEXT_KEYS = ("advice_text", "volume_text", "volume_method")     # build.status.linked_notices
 
 
 def public_placement(pl: dict, r: Redactor, swaps=()) -> dict:
@@ -744,6 +759,9 @@ def public_placement(pl: dict, r: Redactor, swaps=()) -> dict:
     if out.get("set_aside"):
         out["set_aside"] = [{**a, "reason": public_note(r.note(a.get("reason"), swaps))} if isinstance(a, dict) else a
                             for a in out["set_aside"]]
+    if out.get("linked_notices"):           # an e-mail notice's own texts, through the same redaction
+        out["linked_notices"] = [{**n, **{k: r.note(n[k], swaps) for k in LINKED_TEXT_KEYS if isinstance(n.get(k), str)}}
+                                 for n in out["linked_notices"] if isinstance(n, dict)]
     return out
 
 
@@ -768,6 +786,8 @@ def public_record(e: dict, pl: dict, r: Redactor, swaps=()) -> dict:
     rec["set_aside"] = pl.get("set_aside")
     rec["superseded"] = pl.get("superseded")
     rec["duplicate_of"] = pl.get("duplicate_of")
+    if pl.get("linked_notices"):            # an operator's e-mail notice of this event (build.status.linked_notices)
+        rec["linked_notices"] = pl["linked_notices"]
     rec["reach"] = pl.get("reach")
     if pl.get("future_start"):              # a start in the future as published: page and archive row, no status
         rec["future_start"] = True

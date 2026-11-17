@@ -19,7 +19,7 @@ role: "events"
 event_types: ["cso"]
 states: ["MA"]
 access: ["email", "phone"]
-access_detail: "Sign-up https://member.everbridge.net/453003085611624/new (not subscribed). Page: 'To receive critical alerts and updates, including CSO notifications'"
+access_detail: "Everbridge member profile (sign-up https://member.everbridge.net/453003085611624/new), made by the owner 2026-11-17 with holyoke@dirtywaterwatch.org. Read by pipeline/ingest/operator_mail.py (parser ingest/mail/holyoke.py); a notice is linked as the duplicate of the MassDEP portal record of the same overflow. Page: 'To receive critical alerts and updates, including CSO notifications'"
 machine_readable: false
 legal_basis: "314 CMR 16.00"
-checked: "2026-11-01"
+checked: "2026-11-17"

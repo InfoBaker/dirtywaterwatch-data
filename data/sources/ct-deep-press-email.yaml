@@ -1,0 +1,22 @@
+id: "ct-deep-press-email"
+name: "Connecticut DEEP press releases by e-mail"
+url: "https://portal.ct.gov/deep/news-releases"
+homepage: "https://portal.ct.gov/deep/news-releases"
+kind: "email"
+level: "state"
+# Feed row: written by pipeline/ingest/operator_mail.py (parser ingest/mail/ct_deep_press.py; data/mail-lists.json
+#   "ct-deep-press", address ct-deep-press@dirtywaterwatch.org). Every DEEP release arrives; one that speaks of sewage is
+#   kept as "needs a rule" and counted (meta.results), the rest are not notices. No record is made from free text yet.
+#   At least weekly (the Weekly Wrap-up), so the list counts as quiet after 10 days without a message.
+cadence: "weekly"
+license: "none stated"
+attribution: "Connecticut Department of Energy and Environmental Protection"
+enabled: true
+role: "monitoring"
+event_types: ["sso", "cso"]
+states: ["CT"]
+access: ["email"]
+access_detail: "The 'receive DEEP Press Releases via email' link on any DEEP release page (Campaign Monitor)."
+machine_readable: false
+legal_basis: "none (voluntary releases)"
+checked: "2026-11-17"
