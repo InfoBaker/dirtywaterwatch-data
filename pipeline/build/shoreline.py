@@ -463,11 +463,16 @@ def stretch(lon: float, lat: float, lake_geom, land=None, each_way_km: float = 2
         ll = [[round(float(x), 6), round(float(y), 6)] for x, y in (np.asarray(pts) / k)]
         dedup = [ll[0]] + [pt for prev, pt in zip(ll, ll[1:]) if pt != prev]
         sides.append({"coords": dedup if len(dedup) > 1 else [], "km": round(m / 1000, 3), "stop": why})
+    if islets and not any(s["coords"] for s in sides):
+        # the longer ring gives no walk at its start: the nearest ring is walked as before, never an islet alone
+        # (Astra review 2026-11-17, finding 2)
+        return stretch(lon, lat, lake_geom, land, each_way_km, shore_m, gap_km, snap_km, land_states, None)
     states = []
     if land_states:
         from shapely.geometry import MultiPoint
-        # a side with no length (the walk starts where the shore ends) has no coordinates
-        pts = MultiPoint([pt for s in sides if s["coords"] for pt in (np.asarray(s["coords"]) * k).tolist()]
+        # a side with no length (the walk starts where the shore ends) has no coordinates; an islet marked whole
+        # touches the states its own ring is near (Astra review 2026-11-17, finding 1)
+        pts = MultiPoint([pt for s in sides + islets if s["coords"] for pt in (np.asarray(s["coords"]) * k).tolist()]
                          or [p.tolist()])
         for st, g in sorted(land_states.items()):
             gm = shapely.transform(g, lambda xy: xy * k)

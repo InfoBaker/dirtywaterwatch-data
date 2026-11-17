@@ -2075,6 +2075,8 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
         lake_recs += [x for x in ocean_waters_along(segs, waters, slug, shore, states) if x not in lake_recs]
     if segs and river_km:
         for sg in segs:
+            if sg.get("islet"):
+                continue            # an islet is its whole shore, at no distance (Astra review 2026-11-17, finding 3)
             sg["km_start"], sg["km_end"] = round(sg["km_start"] + river_km, 3), round(sg["km_end"] + river_km, 3)
         for e in stops:
             e["km_from_outfall"] = round(e["km_from_outfall"] + river_km, 3)

@@ -562,6 +562,61 @@ def test_an_islet_marked_whole_takes_the_stretchs_status_with_no_distance_and_no
     assert homeless == [] and len(by_state["VT"]) == len(feats) + 1
 
 
+def _far_islet_lake():
+    """A lake about 8 km square with a 70 m islet 2.5 km off its south shore, and the point 13 m from the islet."""
+    from shapely.geometry import Polygon
+    return (Polygon(_ring(-73.40, 44.50, 0.1, 0.072)[:-1], [_ring(-73.3505, 44.5228, 0.0008, 0.0006)[:-1]]),
+            -73.3501, 44.52268)
+
+
+def test_an_islet_marked_whole_keeps_the_state_its_ring_lies_in():
+    """Astra review 2026-11-17, finding 1: the walk on the islet named the islet's state; with the floor the stretch
+    starts on the long shore, and the islet's state must still be named (its state file, its records)."""
+    from shapely.geometry import Polygon, box
+    lake, lon, lat = _far_islet_lake()
+    states = {"VT": box(-73.5, 44.3, -73.2, 44.4999), "NY": Polygon(_ring(-73.3505, 44.5228, 0.0008, 0.0006))}
+    before = SH.stretch(lon, lat, lake, None, 20, snap_km=5, land_states=states)
+    fixed = SH.stretch(lon, lat, lake, None, 20, snap_km=5, land_states=states, min_ring_km=5)
+    assert "NY" in before["states"] and len(fixed["islets"]) == 1 and fixed["length_km"] > 15
+    assert fixed["states"] == ["NY", "VT"]
+
+
+def test_a_long_ring_with_no_walk_at_its_start_falls_back_to_the_walk_as_before(monkeypatch):
+    """Astra review 2026-11-17, finding 2: when the longer ring gives no walk at its start, the stretch is never the
+    islet alone; the nearest ring is walked as it was before the floor."""
+    lake, lon, lat = _far_islet_lake()
+    walk = SH._walk
+
+    def no_walk_on_long_rings(c, i, p, step, limit_m, gap_m, shore):
+        if float(np.hypot(*np.diff(c, axis=0).T).sum()) > 5000:
+            return [p], 0.0, SH.STOP_END
+        return walk(c, i, p, step, limit_m, gap_m, shore)
+    import numpy as np
+    monkeypatch.setattr(SH, "_walk", no_walk_on_long_rings)
+    before = SH.stretch(lon, lat, lake, None, 20, snap_km=5)
+    fixed = SH.stretch(lon, lat, lake, None, 20, snap_km=5, min_ring_km=5)
+    assert 0 < before["length_km"] < 1 and fixed == before and "islets" not in fixed
+
+
+def test_a_river_path_to_the_lake_gives_an_islet_no_distance():
+    """Astra review 2026-11-17, finding 3: the river path's length is added to the walked segments only."""
+    ring5 = rules_on()
+    ring5["reach"]["shoreline"]["min_ring_km"] = 5
+    lake, lon, lat = _far_islet_lake()
+    waters = {**WATERS, "big-lake-vt": {**WATERS["big-lake-vt"], "geometry": {
+        "type": "Polygon", "coordinates": [list(map(list, lake.exterior.coords)), list(map(list, lake.interiors[0].coords))]}}}
+    c = {"key": f"{PERMIT}-009", "permit": PERMIT, "outfall": "009", "water_slug": "big-lake-vt", "lat": 44.45,
+         "lon": -73.35, "state": "VT", "model": "shoreline",
+         "lake_entry": {"lat": lat, "lon": lon, "path": [[-73.35, 44.45], [-73.35, 44.50]], "path_km": 1.0}}
+    S._GEOM_CACHE.clear()
+    rec = R.shoreline_record(c, waters, SH.rule(ring5), None)
+    islet = [sg for sg in rec["segments"] if sg.get("islet")]
+    walked = [sg for sg in rec["segments"] if not sg.get("islet") and sg.get("path") != "river_to_lake"]
+    assert rec["segments"][0]["path"] == "river_to_lake" and len(islet) == 1 and len(walked) == 2
+    assert [islet[0]["km_start"], islet[0]["km_end"]] == [0.0, 0.0]
+    assert all(sg["km_start"] == 1.0 for sg in walked) and len(rec["stops"]) == 2
+
+
 def test_a_narrow_reservoir_keeps_the_whole_fill_under_the_width_floor():
     long_narrow = {"type": "Polygon", "coordinates": [_ring(-72.0, 44.0, 0.9, 0.009)]}     # about 71 km by 1 km
     waters = dict([w("narrow-res-vt", "Narrow Reservoir", "reservoir", long_narrow, area_km2=71.0), *WATERS.items()])
