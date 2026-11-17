@@ -217,3 +217,26 @@ def test_review_p1_3_a_table_missing_known_areas_holds_every_closure():
     recs, meta = X.build(only, T2, first)
     assert all(r["status"] == "advisory_active" for r in recs) and len(recs) == 4
     assert any(u["reason"] == "an area of DSHS's table is missing" for u in meta["unread"])
+
+
+RUNNER_PAGE = (Path(__file__).parent / "fixtures" / "tx_dshs_shellfish_runner_2026-11-17.html").read_text()
+
+
+def test_runner_page_with_the_title_twice_reads():
+    # GitHub's runner received the page with two h1 headings, a hidden one for screen readers and the visible one,
+    # both the page's title (runner probe 44016859738, 2026-11-17); the reader failed on it ("the page's title is not
+    # Shellfish Harvest Area Status and Maps")
+    parsed = X.parse(RUNNER_PAGE, T1)
+    assert parsed["updated"] == "2026-11-16" and not parsed["unread"]
+    assert sorted(r["area"] for r in parsed["rows"] if r["kind"] == "closed") == ["TX 14", "TX 19", "TX 20", "TX 21"]
+
+
+@pytest.mark.parametrize("bad", [
+    RUNNER_PAGE.replace("Shellfish Harvest Area Status and Maps</span>", "Beach Watch</span>", 1),   # one h1 is another page's
+    RUNNER_PAGE.replace("Shellfish Harvest Area Status and Maps</span>", "Beach Watch</span>"),      # neither is the title
+    RUNNER_PAGE.replace("</h1>", "</h1>\n<h1>Page not found</h1>", 1),                              # a third, other h1
+    re.sub(r"<h1\b.*?</h1>", "", RUNNER_PAGE, flags=re.S),                                          # no h1
+])
+def test_every_h1_must_be_the_title(bad):
+    with pytest.raises(ValueError):
+        X.parse(bad, T1)

@@ -66,6 +66,9 @@ Failures: a failed request or a page with no summary link is a failed read (ok=F
 History: the page links only the latest week; earlier weeks stay at their addresses. --backfill asks each week's
   address from BACKFILL_FROM (the Wednesday, then the Thursday and the Tuesday), slowly, and reads what answers; a
   week that answers 404 on all three days is listed in meta.backfill_missing (not read, never "no overflows").
+Exit code: 1 for a failed read, and on the hourly run while a document is unread (health false). --backfill exits 0
+  when the page was read and at least one document is held, the unread documents named in meta.unread, the error and
+  the output line (health stays false); 1 when the page was not read or no document was read at all.
 Run from pipeline/: python -m ingest.in_fort_wayne_cso [--backfill [--from 2025-01-01]]
   [--pieces saved.json ... --out events.json] (saved piece files from pdf_pieces, read as documents of this run)
 Cadence: hourly with the refresh (Indiana is live); the city posts weekly.
@@ -266,15 +269,31 @@ def parse(doc: dict) -> dict:
     # rows: each block's dates lie below its header and above the next block's
     for bi, (pg, hy, groups) in enumerate(blocks):
         below = blocks[bi + 1][1] + 24 if bi + 1 < len(blocks) and blocks[bi + 1][0] == pg else -1e9
-        days = {}
+        # the date column: from the block's "Date" heading to its first cell. A date may be drawn a few characters at
+        # a time ("12", "/", "31/2025": the weeks of 2025-12-17, 2026-01-07 and 2026-02-25), as hand-edited cells are:
+        # the pieces on one line of the column are joined left to right (draw order where they share a position)
+        # and must make one date; pieces that do not are left for the checks below to refuse
+        first_cell = min(g["cells"][0][0] for g in groups)
+        heading = [p[1] for p in pieces if p[0] == pg and p[3] == "Date" and abs(p[2] - hy) <= 9]
+        left_edge = min(heading) - 12 if heading else -1e9
+        lines: dict[float, list] = {}
         for i, p in enumerate(pieces):
-            if p[0] == pg and below < p[2] < hy - 3 and DAY.fullmatch(p[3]):
-                mo, dd, y = map(int, DAY.fullmatch(p[3]).groups())
-                try:
-                    days[p[2]] = date(y, mo, dd).isoformat()
-                except ValueError:
-                    raise SummaryError(f"date '{p[3]}' is not a day") from None
-                used.add(i)
+            if i in used or p[0] != pg or not below < p[2] < hy - 3 or not left_edge <= p[1] < first_cell:
+                continue
+            y = next((k for k in lines if abs(k - p[2]) <= 0.5), p[2])
+            lines.setdefault(y, []).append((p[1], i, p[3]))
+        days = {}
+        for y, parts in lines.items():
+            v = "".join(t for _, _, t in sorted(parts)).replace(" ", "")
+            m = DAY.fullmatch(v)
+            if not m:
+                continue
+            mo, dd, yr = map(int, m.groups())
+            try:
+                days[y] = date(yr, mo, dd).isoformat()
+            except ValueError:
+                raise SummaryError(f"date '{v}' is not a day") from None
+            used.update(i for _, i, _ in parts)
         ds = sorted(days.values())
         if not ds:
             raise SummaryError(f"block {bi + 1}: no dated row")
@@ -616,6 +635,13 @@ def run(now: str, state_path: Path, out: Path | None = None, get=_get, backfill:
         write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta, path=out,
                      error="documents not read: " + "; ".join(f"{u.rsplit('/', 1)[-1]}: {w}" for u, w in unread.items()))
         print(f"{SOURCE_ID}: PARTIAL {len(recs)} records; {len(unread)} documents not read", file=sys.stderr)
+        if backfill and state.get("docs"):
+            # the one-time backfill saved what it read: it exits 0 so the refresh goes on and saves the history; the
+            # documents not read are named here and in meta.unread, and health stays false until they read. A
+            # backfill that read no document at all (a changed layout) still fails, as a failed page does above.
+            print(f"{SOURCE_ID}: backfill saved; not read: " + ", ".join(u.rsplit("/", 1)[-1] for u in unread),
+                  file=sys.stderr)
+            return 0
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta, path=out)
     print(f"{SOURCE_ID}: {len(recs)} records from {len(state.get('docs') or {})} weekly summaries -> {path}")

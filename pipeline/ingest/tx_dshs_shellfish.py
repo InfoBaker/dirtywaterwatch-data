@@ -8,7 +8,9 @@ Source
   DSHS: it may change an area's status because of "High rainfall and runoff", flooding, hurricanes, major spills,
   harmful algal blooms or the failure or poor operation of wastewater treatment facilities, and may close areas for
   shellfish resource or enforcement concerns; the Texas Parks and Wildlife Department (TPWD) sets oyster seasons. The
-  page answers the pipeline's runner (runner probe 43885170112, 2026-11-16) and this project's machines.
+  page answers the pipeline's runner (runner probe 43885170112, 2026-11-16) and this project's machines with the
+  pipeline's own user agent. The whole page carries its title in two h1 headings (a hidden one for screen readers and
+  the visible one; runner probe 44016859738, 2026-11-17): every h1 must be the title.
 
 Which closures make records (the site's rule)
   - A row Closed (public or private) whose reason names rainfall, runoff, flooding, a spill, wastewater or sewage
@@ -99,7 +101,10 @@ def parse(page: str, fetched: str | None = None) -> dict:
     """{updated, rows, unread}; ValueError for a page that is not a complete reading."""
     if not re.search(r"</html\s*>", page or "", re.I):
         raise ValueError("the page is not complete (no closing html tag)")
-    if len(TITLE.findall(page)) != 1:
+    # the page carries its title in two h1 headings, a hidden one for screen readers and the visible one (what GitHub's
+    # runner received, probe 44016859738, 2026-11-17): every h1 must be the title, and there must be one
+    h1s = re.findall(r"<h1\b.*?</h1\s*>", page, re.S | re.I)
+    if not h1s or len(TITLE.findall(page)) != len(h1s) or not all(TITLE.fullmatch(h) for h in h1s):
         raise ValueError("the page's title is not Shellfish Harvest Area Status and Maps")
     hs = list(HEADING.finditer(page))
     if len(hs) != 1:

@@ -30,6 +30,11 @@ Records (a status page read hourly; records build up from the reads, as oh_lakew
     point or water. The page's map links are never used for a point.
   - A site whose status is OS or N/A has no working monitor: its "none" is no evidence (meta.sites_not_in_service).
 State: data/build/wa-spokane-cso-state.json (every start seen; the archive). Do not delete it.
+Barrier: the host sits behind Imperva Incapsula. A page that is Incapsula's bot check (an iframe on its own resource,
+  "Incapsula incident ID") in place of the table is a barrier (BarrierError): a failed read that says so, with the
+  answer's status, size and title, never solved or worked around and never "no overflows". The runner received the
+  whole page with the pipeline's own user agent (runner probe 44016859738, 2026-11-17); the hourly read of
+  2026-11-17 02:41Z did not (no table): what it received was not recorded then, and is named now.
 Failures: a failed request, a page without the table or with another header, fewer than MIN_ROWS rows or more than
   DROP_ALLOWED fewer than the last read (truncated): a failed read (ok=False, the previous records kept, the state
   unchanged). A row whose status or date the reader does not know is unread: the other rows are read and health stays
@@ -80,6 +85,23 @@ class LayoutError(ValueError):
     """The page has no table this reader knows: a failed read, never "no overflows"."""
 
 
+class BarrierError(LayoutError):
+    """The host's bot check (Imperva Incapsula) answered in place of the page: a barrier, named plainly and never
+    solved or worked around; a failed read like any other."""
+
+
+# Incapsula's answer to a client it refuses: an iframe on its own resource and "Incapsula incident ID" (the real page
+# also loads an Incapsula script, after the table: that alone is not the check)
+CHALLENGE = re.compile(r"Incapsula incident ID|<iframe\b[^>]*src=\"/_Incapsula_Resource", re.I)
+
+
+def what_came(page: str) -> str:
+    """Size and title of a page that was not read (no body text is kept)."""
+    t = re.search(r"<title[^>]*>(.*?)</title>", page or "", re.S | re.I)
+    title = " ".join(html.unescape(t.group(1)).split())[:80] if t else ""
+    return f"{len((page or '').encode())} bytes, title '{title}'"
+
+
 def clean(v: str) -> str:
     """Cell text, scrubbed of e-mail addresses, telephones and names after contact words before anything keeps it
     (review 2026-11-16)."""
@@ -104,8 +126,11 @@ def slug(site: str) -> str:
 def parse(page: str) -> tuple[list[dict], list[str]]:
     """(rows read, rows not read with the reason). Raises LayoutError when the table is missing or changed."""
     m = TABLE.search(page or "")
+    if not m and CHALLENGE.search(page or ""):
+        raise BarrierError(f"the host's bot check (Imperva Incapsula) answered in place of the page ({what_came(page)}): "
+                           "a barrier, not read")
     if not m:
-        raise LayoutError("no CSO table (MainContent_CSOGridView) on the page")
+        raise LayoutError(f"no CSO table (MainContent_CSOGridView) on the page ({what_came(page)})")
     trs = ROW.findall(m.group(1))
     if not trs:
         raise LayoutError("the CSO table has no rows")
@@ -271,6 +296,9 @@ def main(argv=None) -> int:
             pages = [Path(f).read_text(errors="replace") for f in a.file]
         else:
             r = requests.get(URL, headers=HEADERS, timeout=(20, 90))
+            if r.status_code != 200 and CHALLENGE.search(r.text or ""):
+                raise BarrierError(f"the host's bot check (Imperva Incapsula) answered HTTP {r.status_code} in place "
+                                   f"of the page ({what_came(r.text)}): a barrier, not read")
             r.raise_for_status()
             pages = [r.text]
         parsed = [parse(p) for p in pages]
