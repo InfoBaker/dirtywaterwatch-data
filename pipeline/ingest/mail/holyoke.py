@@ -27,10 +27,8 @@ import re
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from common import scrub_text
-
 from .ma_common import ma_record
-from .message import Mail, Result, outfall_number
+from .message import PLACE_SHAPE, Mail, Result, clean_text, outfall_number
 
 NAME = "holyoke"
 VERSION = 1
@@ -39,7 +37,7 @@ TIME_RE = re.compile(r"(\d{1,2})/(\d{1,2})/(\d{4}|\d{2})(?!\d)\s+(\d{1,2}):(\d{2
 
 
 def _line(block: str, label: str) -> str | None:
-    m = re.search(rf"(?im)^\s*{label}\s*:\s*(.*?)\s*$", block)
+    m = re.search(rf"(?im)^[ \t]*{label}[ \t]*:[ \t]*(.*?)[ \t]*$", block)     # one line only
     return m.group(1).strip() if m and m.group(1).strip() else None
 
 
@@ -95,9 +93,9 @@ def block_record(b: str, n: int, mail: Mail, spec: dict, ctx: dict) -> tuple[dic
     if spec.get("npdes_permit") and permit != spec["npdes_permit"]:
         return None, f"permit {permit} is not the list's operator ({spec['npdes_permit']})"
     location = _line(b, r"Location")
+    if not re.fullmatch(r"(?i)CSO[ ]?\d{1,3}[A-Z]?(?:_\d)?(?:[ ]+Partly Treated)?", (location or "").strip()):
+        return None, "the Location line is not a CSO number"
     num, suffix = outfall_number(location)
-    if num is None:
-        return None, "no CSO number on the Location line"
     time_line = _line(b, r"Time of discharge")
     t, _ = read_time(time_line)
     if t is None:
@@ -114,7 +112,7 @@ def block_record(b: str, n: int, mail: Mail, spec: dict, ctx: dict) -> tuple[dic
     elif low.startswith("active"):
         state = "active"
     else:
-        return None, f"status line not known: {said[:60]!r}"
+        return None, "status line not known"          # never the line's own text (it may hold anything)
     activated_word = bool(re.search(r"(?i)\bACTIVATED at\b", time_line or ""))
     start = end = None
     if state in ("active", "update") or activated_word:
@@ -124,20 +122,21 @@ def block_record(b: str, n: int, mail: Mail, spec: dict, ctx: dict) -> tuple[dic
     method = re.search(r"(?i)(The estimated volume is calculated by [^.]+\.)", b)
     towns = _line(b, r"Affected communities")
     location = re.sub(r"(?i)\s*partly treated\s*", " ", location or "").strip()
-    extra = {"_status_line": scrub_text(f"This Discharge is {said} at this time."),
-             "_time_line": scrub_text(time_line or ""),
+    extra = {"_status_line": f"This Discharge is {said} at this time." if clean_text(said, shape=r"[A-Za-z0-9 ]+") else None,
+             "_time_line": clean_text(time_line, shape=r"[A-Za-z0-9 :/.\[\]]+"),
              "_tz_assumed": "America/New_York: the notice prints EST all year; read as the local clock"}
     if state == "ceased" and not activated_word:
         extra["_ended_at_basis"] = "the time on a 'Ceased' notice is the time the discharge ceased"
     if activated_word:
         extra["_time_note"] = "the time line reads 'ACTIVATED at' on a Ceased notice: read as the start; no end given"
     if method:
-        extra["volume_method"] = scrub_text(method.group(1))
+        extra["volume_method"] = method.group(1)
     if towns:
-        extra["affected_communities"] = scrub_text(towns)
+        extra["affected_communities"] = towns
     if re.search(r"(?i)partly treated|partially treated", _line(b, r"Location") or ""):
         extra["partly_treated"] = True
-    org = re.sub(r"\s*Permit\s*#?\s*MA\d{7}.*$", "", permittee or "").strip() or None
+    org = clean_text(re.sub(r"\s*Permit\s*#?\s*MA\d{7}.*$", "", permittee or ""), shape=PLACE_SHAPE, maxlen=80) \
+        or "City of Holyoke"
     rec = ma_record(mail, spec, ctx, n, permit=permit, org=org, location=location, num=num, suffix=suffix,
                     state=state, start=start, end=end, vol_text=_line(b, r"Estimated Volume \(gallons\)"),
                     water=_line(b, r"Affected Water Bodies"), block=b, extra_raw=extra)

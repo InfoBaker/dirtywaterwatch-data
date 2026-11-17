@@ -19,8 +19,6 @@ import re
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from common import scrub_text
-
 from .ma_common import ma_record
 from .message import Mail, Result, outfall_number
 
@@ -85,16 +83,17 @@ def read_dt(s: str | None) -> tuple[datetime | None, bool]:
         return None, False
 
 
-def labelled(block: str, label: str) -> str | None:
-    """The value after "Label:" on its line, or on the next line when the label stands alone (table cells)."""
-    m = re.search(rf"(?im)^\s*{label}\s*:?\s*(?::\s*)?(.*?)\s*$", block)
+def labelled(block: str, label: str, next_line: bool = False) -> str | None:
+    """The value after "Label:" on its own line; with next_line, the next line when the label stands alone (table
+    cells), unless that line is another label. The caller validates the value (clean_text) before keeping it."""
+    m = re.search(rf"(?im)^[ \t]*{label}[ \t]*:?[ \t]*(?::[ \t]*)?(.*?)[ \t]*$", block)
     if not m:
         return None
     v = m.group(1).strip(" :")
-    if v:
-        return v
+    if v or not next_line:
+        return v or None
     rest = block[m.end():].lstrip("\n").split("\n", 1)[0].strip()
-    return rest or None
+    return rest if rest and not re.match(r"[^:]{1,40}:", rest) else None
 
 
 def english(text: str) -> str:
@@ -109,15 +108,35 @@ def outfall_blocks(text: str) -> list[str]:
     return [text[a:b] for a, b in zip(starts, starts[1:] + [len(text)])]
 
 
+ONGOING = r"(?:ongoing|active|occurring|continuing|in progress)"
+CEASED = r"(?:ceased|ended|stopped|has ceased|has ended|has stopped)"
+
+
 def state_of(block: str) -> str | None:
-    st = labelled(block, L_STATUS) or ""
-    said = st + " " + " ".join(re.findall(r"(?i)(?:discharge|overflow)\s+(?:is|has|was)\s+(?:been\s+)?(\w+)", block))
-    low = said.lower()
-    if re.search(r"\b(ceased|ended|stopped|over|inactive)\b", low):
-        return "ceased"
-    if re.search(r"\b(ongoing|active|continuing|occurring|in progress)\b", low):
-        return "active"
-    return None
+    """"active" or "ceased" from an explicit status: the Status label's whole value ("Ongoing", "Ceased", "Discharge
+    ongoing") or a sentence "the discharge is ongoing" / "the discharge has ceased". A negation, both at once, or any
+    other wording is "conflict", which the caller treats as a failure (Astra mail review 2026-11-17 P1-6); no status
+    words at all is None."""
+    found = set()
+    v = (labelled(block, L_STATUS) or "").lower().strip(" .")
+    if v:
+        if re.search(r"\bnot\b|n't\b", v):
+            return "conflict"
+        if re.fullmatch(rf"(?:(?:the )?(?:discharge|overflow) (?:is )?)?{ONGOING}", v):
+            found.add("active")
+        elif re.fullmatch(rf"(?:(?:the )?(?:discharge|overflow) )?{CEASED}", v):
+            found.add("ceased")
+        else:
+            return "conflict"
+    for m in re.finditer(r"(?i)\b(?:discharge|overflow) (?:is|remains) (not )?(ongoing|active|occurring|continuing)\b", block):
+        found.add("negated" if m.group(1) else "active")
+    for m in re.finditer(r"(?i)\b(?:discharge|overflow) (?:has|had) (not )?(?:now )?(ceased|ended|stopped)\b", block):
+        found.add("negated" if m.group(1) else "ceased")
+    if not found:
+        return None
+    if "negated" in found or len(found) != 1:
+        return "conflict"
+    return found.pop()
 
 
 def parse(mail: Mail, spec: dict, ctx: dict) -> Result:
@@ -145,9 +164,14 @@ def parse(mail: Mail, spec: dict, ctx: dict) -> Result:
             continue
         num, suffix = next(iter(ids))
         both = b + "\n" + head          # a start or a water given once above the outfalls is read for each
-        start, start_clock = read_dt(labelled(b, L_START) or labelled(head, L_START))
-        end, end_clock = read_dt(labelled(b, L_END) or labelled(head, L_END))
-        state = state_of(b) or state_of(head)
+        start, start_clock = read_dt(labelled(b, L_START, True) or labelled(head, L_START, True))
+        end, end_clock = read_dt(labelled(b, L_END, True) or labelled(head, L_END, True))
+        state = state_of(b)
+        if state is None:
+            state = state_of(head)
+        if state == "conflict":
+            problems.append(f"block {n}: status wording not known, negated or conflicting")
+            continue
         if state is None and end is not None:
             state = "ceased"
         if state is None:
@@ -160,17 +184,17 @@ def parse(mail: Mail, spec: dict, ctx: dict) -> Result:
             end = None
         etype = "blended" if re.search(r"(?i)blend", mail.subject + " " + both) else (
             "sso" if re.search(r"(?i)\bSSO\b|sanitary sewer overflow", mail.subject + " " + both) else "cso")
-        vol = labelled(b, L_VOLUME) or labelled(head, L_VOLUME)
+        vol = labelled(b, L_VOLUME, True) or labelled(head, L_VOLUME, True)
         extra = {"_subject_kind": etype}
         towns = labelled(b, L_TOWNS) or labelled(head, L_TOWNS)
         if towns:
-            extra["affected_communities"] = scrub_text(towns)
+            extra["affected_communities"] = towns
         if end is not None:
             extra["_ended_at_basis"] = "the notice's cessation time"
         records.append(ma_record(mail, spec, ctx, n, permit=permit, org="Springfield Water and Sewer Commission",
                                  location=f"SPR{num:03d}{suffix}", num=num, suffix=suffix, state=state,
                                  start=start, end=end, vol_text=vol,
-                                 water=labelled(b, L_WATER) or labelled(head, L_WATER), block=both,
+                                 water=labelled(b, L_WATER, True) or labelled(head, L_WATER, True), block=both,
                                  event_type=etype, extra_raw=extra))
     if problems:
         return Result("failed", note="; ".join(problems))

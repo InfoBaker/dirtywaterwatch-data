@@ -3645,6 +3645,11 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         if bound is not None:
             end = bound
             start = min(start, bound)        # a report time after the bound is not the discharge's start
+    if end is not None and start > end and not ev.get("started_at"):
+        # a notice that gives only the time the discharge ceased (a Holyoke "Ceased" e-mail with no earlier notice in
+        # hand, ingest/operator_mail.py): its report or receipt time comes after that end and is not a start, so the
+        # windows count from the end, never from a reversed interval (Astra mail review 2026-11-17 P1-12)
+        start = end
 
     red = red_rule_for(ev, state, rules)
     yellow = yellow_rule_for(ev, water, rules)

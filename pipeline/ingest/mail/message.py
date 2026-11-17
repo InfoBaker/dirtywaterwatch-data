@@ -31,6 +31,8 @@ class Mail:
     dmarc_pass_from: str | None = None  # header.from of a DMARC pass in Cloudflare's result
     dkim_pass: set = field(default_factory=set)   # signing domains with dkim=pass in Cloudflare's result
     auth_found: bool = False
+    marks: str = ""                     # the headers a platform binding may name (List-Id, List-Unsubscribe, Sender,
+                                        # Return-Path, X-* ids), for verification only; never saved
 
 
 @dataclass
@@ -100,6 +102,12 @@ def parse_mail(raw: bytes, inbound_id: str, received_at: str, list_id: str | Non
     except Exception:  # noqa: BLE001
         mail.from_domain = None
     auth = m.get_all("authentication-results") or []
+    try:
+        mail.marks = "\n".join(f"{k}: {v}" for k, v in m.items()
+                               if k.lower() in ("list-id", "list-unsubscribe", "sender", "return-path")
+                               or k.lower().startswith("x-"))
+    except Exception:  # noqa: BLE001
+        mail.marks = ""
     if auth:
         mail.auth_found, mail.dmarc_pass_from, mail.dkim_pass = read_auth(str(auth[0]))
     plain, htm = None, None
@@ -125,18 +133,61 @@ def _matches(dom: str | None, allowed) -> bool:
     return bool(dom) and any(dom == a or dom.endswith("." + a) for a in allowed)
 
 
-def verified(mail: Mail, spec: dict) -> tuple[bool, str]:
-    """Whether the message comes from the list's sender, by Cloudflare's own check: the From domain is one of the
-    list's senders, and DMARC passed for that From domain or DKIM passed for one of the list's signing domains."""
+def verified(mail: Mail, spec: dict) -> tuple[str | None, str]:
+    """(trust, how) by Cloudflare's own check. "operator": the From domain is one of the operator's own domains
+    (spec.senders) and DMARC passed for it, or DKIM passed for that same domain. "platform": the message was sent
+    through a shared platform the list uses (spec.platform.domains: Everbridge, Constant Contact), DKIM or DMARC
+    passed for that platform, the From domain is the operator's or the platform's, and every mark the binding names
+    (spec.platform.body_marks in the text, header_marks in the List-Id, List-Unsubscribe, Sender, Return-Path or
+    X- headers) is present; a platform's customers can all send from its domain, so such a message proves less, and
+    operator_mail lets it only add to another source's record of the same discharge. None: neither."""
     if not mail.auth_found:
-        return False, "no Authentication-Results from the receiving host"
-    if not _matches(mail.from_domain, spec.get("senders") or []):
-        return False, "From domain is not one of the list's senders"
-    if mail.dmarc_pass_from and mail.dmarc_pass_from == mail.from_domain:
-        return True, "DMARC pass for the From domain"
-    if any(_matches(d, spec.get("dkim") or []) for d in mail.dkim_pass):
-        return True, "DKIM pass for the list's signing domain"
-    return False, "neither DMARC for the From domain nor DKIM for the list's signing domain passed"
+        return None, "no Authentication-Results from the receiving host"
+    own = spec.get("senders") or []
+    if _matches(mail.from_domain, own):
+        if mail.dmarc_pass_from and mail.dmarc_pass_from == mail.from_domain:
+            return "operator", "DMARC pass for the operator's From domain"
+        if any(d == mail.from_domain or _matches(d, own) for d in mail.dkim_pass):
+            return "operator", "DKIM pass for the operator's domain"
+    plat = spec.get("platform") or {}
+    pdoms = plat.get("domains") or []
+    from_ok = _matches(mail.from_domain, own) or (plat.get("allow_platform_from") and _matches(mail.from_domain, pdoms))
+    if pdoms and from_ok:
+        passed = any(_matches(d, pdoms) for d in mail.dkim_pass) or \
+            (mail.dmarc_pass_from and _matches(mail.dmarc_pass_from, pdoms))
+        if passed:
+            missing = [m for m in plat.get("body_marks") or [] if m not in mail.text]
+            missing += [m for m in plat.get("header_marks") or [] if m not in mail.marks]
+            if not missing:
+                return "platform", "DKIM or DMARC pass for the list's platform, with the binding's marks"
+            return None, "the list's platform passed, but a mark of the operator's binding is missing"
+    if not _matches(mail.from_domain, own + list(pdoms)):
+        return None, "From domain is not one of the list's senders"
+    return None, "neither DMARC nor DKIM passed for the operator's domain or the list's platform"
+
+
+WATER_WORDS = re.compile(r"(?i)\b(river|brook|canal|creek|stream|pond|lake|bay|harbou?r|reservoir|basin|channel|cove|"
+                         r"sound|inlet|estuary|run|kill|fork|branch|ocean|beach)\b")
+VOLUME_SHAPE = (r"(?:about |approximately |approx\.? |est\.? |estimated )?\d[\d,]*(?:\.\d+)?"
+                r"(?:\s*(?:gallons?|gal\.?|million gallons|MG|MGal))?")
+PLACE_SHAPE = r"[A-Za-z][A-Za-z .,'&()/-]*"
+
+
+def clean_text(v, shape: str | None = None, maxlen: int = 120, water: bool = False) -> str | None:
+    """A labelled value fit to save: one line, at most maxlen, no '@', unchanged by the pipeline's scrub of phones,
+    addresses and staff names, matching `shape` when one is given, and naming a water when `water`; else None (the
+    caller notes which field was set aside, never its text)."""
+    from common import scrub_text
+    if v is None:
+        return None
+    v = re.sub(r"\s+", " ", str(v)).strip(" :;")
+    if not v or len(v) > maxlen or "@" in v or scrub_text(v) != v:
+        return None
+    if shape and not re.fullmatch(shape, v, re.I):
+        return None
+    if water and not WATER_WORDS.search(v):
+        return None
+    return v
 
 
 def outfall_number(text: str | None) -> tuple[int | None, str]:

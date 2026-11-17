@@ -23,6 +23,7 @@ VERSION = 1
 WATERS = ["merrimack-river-nh", "piscataquog-river-nh"]
 MATERIAL = "combined sewage and stormwater (CSO)"
 ACTIVATION = re.compile(r"(?i)has experienced CSO activations\b")
+RESEND_MINUTES = 10
 ALL_CLEAR = re.compile(r"(?i)has experienced no CSO activations during the past (\d+) hours")
 
 
@@ -39,19 +40,27 @@ def parse(mail: Mail, spec: dict, ctx: dict) -> Result:
         return Result("not_notice", note="not a CSO notice (newsletter or welcome message)")
     sentence = (clear or ACTIVATION.search(text)).group(0)
     hours = int(clear.group(1)) if clear else None
+    # the city's own time for the notice: its Date header when that is no later than the receipt and at most 7 days
+    # before it (the header is signed with the message; a delayed delivery keeps the city's time); otherwise the receipt, said so (Astra mail review
+    # 2026-11-17 P1-11). It orders the notices and bounds an all-clear; it is never a start.
+    sent, got = parse_iso(mail.sent_at), parse_iso(mail.received_at)
+    if sent and got and timedelta(minutes=-5) <= got - sent <= timedelta(days=7):
+        when, basis = mail.sent_at, "the city's sending time (the e-mail's Date header); the notice gives no start"
+    else:
+        when, basis = mail.received_at, "the time the e-mail reached the project (its Date header missing, after the receipt or over 7 days before it)"
     rec = event(
         source_id=spec["source_id"], source_record_id=mail.inbound_id,
         event_type="cso", status="ongoing" if kind == "activation" else "ended",
         discharger_id=spec.get("operator"), discharger_name="City of Manchester DPW Environmental Protection Division",
         npdes_permit=spec.get("npdes_permit"), waterbody_text=None, water_slugs=list(WATERS), water_match="inferred",
         started_at=None, ended_at=None, time_precision="minute",
-        reported_at=mail.received_at, published_at=mail.received_at, material=MATERIAL,
+        reported_at=when, published_at=mail.received_at, material=MATERIAL,
         authority="City of Manchester EPD (CSO Discharge Notification e-mail)",
         source_url=spec.get("source_url"),
         raw={"_channel": "email", "_list": mail.list_id, "_inbound_id": mail.inbound_id,
              "_received_at": mail.received_at, "_sent_at": mail.sent_at, "kind": kind,
              "_notice_sentence": f"the City of Manchester {sentence}", "_all_clear_hours": hours,
-             "_time_basis": "no start in the notice: the time the e-mail reached the project"},
+             "_time_basis": basis},
     )
     return Result("notice", records=[rec])
 
@@ -83,26 +92,44 @@ def pair(records: list[dict]) -> None:
 
 
 def link_page(records: list[dict], page_records: list[dict], minutes: int = 45) -> int:
-    """Each e-mail notice that repeats a post on the city's page (same kind, published within `minutes` of the
-    e-mail's sending time, else its receipt) becomes that post's duplicate: one notice, two channels."""
+    """Each e-mail notice that repeats a post on the city's page becomes that post's duplicate: one notice, two
+    channels. Same kind, the post's time within `minutes` of the e-mail's (the city's time, reported_at); the closest
+    pairs first, one post to one notice. An e-mail sent twice (same kind, RESEND_MINUTES apart) shares its twin's post
+    (Astra mail review 2026-11-17 P1-10)."""
     posts = [p for p in page_records if str(p.get("source_record_id") or "").startswith("manchester:")
              and p.get("reported_at") and (p.get("raw") or {}).get("kind") in ("activation", "all_clear")]
-    used, n = set(), 0
-    for r in sorted(records, key=lambda r: r.get("reported_at") or ""):
-        t = parse_iso(r["raw"].get("_sent_at")) or parse_iso(r.get("reported_at"))
-        if t is None:
-            continue
-        best = None
+    pairs = []
+    for r in records:
+        t = parse_iso(r.get("reported_at"))
         for p in posts:
-            if p["raw"].get("kind") != r["raw"].get("kind") or p["event_id"] in used:
+            if t is None or p["raw"].get("kind") != r["raw"].get("kind"):
                 continue
             gap = abs((parse_iso(p["reported_at"]) - t).total_seconds()) / 60
-            if gap <= minutes and (best is None or gap < best[0]):
-                best = (gap, p)
-        if best:
-            used.add(best[1]["event_id"])
-            r["duplicate_of"] = best[1]["event_id"]
-            r["raw"]["_link_basis"] = (f"the same {r['raw'].get('kind').replace('_', '-')} notice on the city's CSO "
-                                       f"Discharge Notification page, published {round(best[0])} min apart")
+            if gap <= minutes:
+                pairs.append((gap, r["event_id"], p["event_id"], r, p))
+    pairs.sort(key=lambda x: (x[0], x[1], x[2]))
+    used_r, used_p, n = set(), set(), 0
+
+    def link(r, p, gap, why=""):
+        r["duplicate_of"] = p["event_id"]
+        r["raw"]["_link_basis"] = (f"the same {r['raw'].get('kind').replace('_', '-')} notice on the city's CSO "
+                                   f"Discharge Notification page, published {round(gap)} min apart{why}")
+    for gap, rid, pid, r, p in pairs:
+        if rid in used_r or pid in used_p:
+            continue
+        used_r.add(rid)
+        used_p.add(pid)
+        link(r, p, gap)
+        n += 1
+    linked = [r for r in records if r.get("duplicate_of")]
+    for r in records:
+        if r.get("duplicate_of"):
+            continue
+        t = parse_iso(r.get("reported_at"))
+        twin = next((x for x in linked if x["raw"].get("kind") == r["raw"].get("kind") and t
+                     and abs((parse_iso(x["reported_at"]) - t).total_seconds()) <= RESEND_MINUTES * 60), None)
+        if twin:
+            post = next(p for p in posts if p["event_id"] == twin["duplicate_of"])
+            link(r, post, abs((parse_iso(post["reported_at"]) - t).total_seconds()) / 60, " (the e-mail was sent twice)")
             n += 1
     return n
