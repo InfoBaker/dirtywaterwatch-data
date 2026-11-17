@@ -23,7 +23,7 @@ HEADER = ("event_id,water,water_slug,state,operator,operator_id,outlet_id,outlet
           "reported_at,source_updated_at,retrieved_at,report_url,notice_url,site_url,duplicate_of,superseded_by,sampled_at,time_precision,ended_at_precision,"
           "report_kind,cause,weather,rainfall_in,rainfall_label,duration_text,volume_qualifier,volume_method,volume_to_water_gal,"
           "overflow_point,town_named,later_volume_gal,later_volume_text,later_volume_qualifier,later_record_kind,"
-          "later_record_published_at,later_record_id,linked_record_ids").split(",")
+          "later_record_published_at,later_record_id,linked_record_ids,notice_volume_gal,notice_record_id").split(",")
 AS_OF = "2026-11-02T12:00:00Z"
 
 
@@ -375,3 +375,14 @@ def test_observed_sample_advisory_end_is_not_exported_as_agency_reported_end(tmp
     row = read(out / "all-reports-2026.csv")[0]
     assert row["ended_at"] == "2026-06-19T16:00:00Z" and row["end_reported"] == "false"
     assert row["time_precision"] == row["ended_at_precision"] == "poll"
+
+
+def test_an_operators_notice_volume_fills_its_own_columns(tmp_path):
+    linked = [{"event_id": "ma-holyoke-everbridge:m1:1", "volume_gal": 225192, "published_at": "2026-10-20T15:05:00Z"}]
+    a, b = ev("1", volume_gal=None, volume_text=None), ev("2")
+    a["linked_notices"] = b["linked_notices"] = linked          # the public record's field (export.build.public_record)
+    out, _ = write(tmp_path, [a, b])
+    rows = {r["record_id"]: r for r in read(out / "all-reports-2026.csv")}
+    assert (rows["1"]["volume_gal"], rows["1"]["notice_volume_gal"], rows["1"]["notice_record_id"]) == \
+        ("", "225192", "ma-holyoke-everbridge:m1:1")
+    assert rows["2"]["notice_volume_gal"] == "" and rows["2"]["volume_gal"] == "35500000"   # its own volume first

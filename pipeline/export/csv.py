@@ -55,7 +55,9 @@ COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id"
            "report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
            "volume_method", "volume_to_water_gal", "overflow_point", "town_named",
            "later_volume_gal", "later_volume_text", "later_volume_qualifier", "later_record_kind", "later_record_published_at",
-           "later_record_id", "linked_record_ids"]
+           "later_record_id", "linked_record_ids",
+           # an operator's e-mail notice of the same event linked to this record (build.status.linked_notices)
+           "notice_volume_gal", "notice_record_id"]
 DETAIL_COLUMNS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
                   "volume_method", "volume_to_water_gal", "overflow_point", "town")
 LIST_SEP = ";"
@@ -405,6 +407,7 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     eid = e["event_id"]
     ended_precision = status_mod.end_precision(e) if e.get("ended_at") else None
     end_reported = bool(e.get("ended_at")) and not (e.get("sampled_at") and ended_precision == "poll")
+    notice = linked_notice(e)
     row = [
         _text(eid), _text(water), _text(LIST_SEP.join(slugs)), _text(state), _text(operator), _text(operator_id),
         _text(e.get("outfall_id")), _text(e.get("outfall_name")), _text(e.get("event_type")),
@@ -428,7 +431,18 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     links = e.get("linked_records") if isinstance(e.get("linked_records"), list) else []
     row.append(_text(LIST_SEP.join(f"{r['relation']}:{r['event_id']}" for r in links
                                    if isinstance(r, dict) and isinstance(r.get("event_id"), str) and r.get("relation"))))
+    row += [_number((notice or {}).get("volume_gal")), _text((notice or {}).get("event_id"))]
     return row, ops
+
+
+def linked_notice(e: dict) -> dict | None:
+    """The operator's e-mail notice linked to this record (build.status.linked_notices) that gives a volume, newest
+    last, when the record gives none of its own: its gallons and its record id fill notice_volume_gal and
+    notice_record_id."""
+    if e.get("volume_gal") is not None:
+        return None
+    ns = [n for n in (e.get("linked_notices") or []) if isinstance(n, dict) and isinstance(n.get("volume_gal"), (int, float))]
+    return ns[-1] if ns else None
 
 
 def start_precision_text(e: dict) -> str | None:

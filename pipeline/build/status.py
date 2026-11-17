@@ -1628,6 +1628,29 @@ def shown_over_links(events: list[dict], duplicates: dict) -> dict:
     return out
 
 
+# the facts of an operator's e-mail notice shown on the record it repeats (ingest/operator_mail.py: a Massachusetts
+# notice and the MassDEP portal's record of the same overflow are one event; the portal leaves the volume blank)
+LINKED_NOTICE_FIELDS = ("event_id", "source_id", "published_at", "started_at", "ended_at", "status", "volume_gal",
+                        "volume_text", "estimate_flag", "advice_text", "advice_window_hours")
+
+
+def linked_notices(events: list[dict], duplicates: dict) -> dict:
+    """{kept event_id: [the e-mail notices linked to it as duplicates, oldest first]}: each with its own source, times
+    and estimated volume, so a page can show the operator's figure next to the record it repeats, cited to the
+    notice. Only records an ingester marks as e-mail notices (raw._channel "email") are carried."""
+    by_id = {e.get("event_id"): e for e in events}
+    out = defaultdict(list)
+    for eid, keep in duplicates.items():
+        ev = by_id.get(eid)
+        raw = ev.get("raw") if ev and isinstance(ev.get("raw"), dict) else {}
+        if not ev or raw.get("_channel") != "email" or keep not in by_id:
+            continue
+        item = {k: ev.get(k) for k in LINKED_NOTICE_FIELDS}
+        item["volume_method"] = raw.get("volume_method")
+        out[keep].append(item)
+    return {k: sorted(v, key=lambda x: (x.get("published_at") or "", x["event_id"])) for k, v in out.items()}
+
+
 def own_place_only(ev: dict) -> bool:
     raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
     return raw.get("_placement") == "own_place_only"
@@ -3622,6 +3645,11 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         if bound is not None:
             end = bound
             start = min(start, bound)        # a report time after the bound is not the discharge's start
+    if end is not None and start > end and not ev.get("started_at"):
+        # a notice that gives only the time the discharge ceased (a Holyoke "Ceased" e-mail with no earlier notice in
+        # hand, ingest/operator_mail.py): its report or receipt time comes after that end and is not a start, so the
+        # windows count from the end, never from a reversed interval (Astra mail review 2026-11-17 P1-12)
+        start = end
 
     red = red_rule_for(ev, state, rules)
     yellow = yellow_rule_for(ev, water, rules)
@@ -4690,6 +4718,11 @@ def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
             reasons.append("never fetched successfully")
         elif cad is not None and now - last_ok > timedelta(hours=cad):
             reasons.append(f"last good fetch {iso(last_ok)} is older than the expected cadence ({cad:g} h)")
+        quiet = (f.get("meta") or {}).get("quiet")
+        if isinstance(quiet, dict) and quiet.get("reason"):
+            # an e-mail notice list that has gone quiet (ingest/operator_mail.py quiet_check): read well, yet nothing
+            # arrives while another source shows the operator's notices
+            reasons.append(f"list quiet: {quiet['reason']}")
     return {"source_id": sid, "ok": f.get("ok"), "error": f.get("error"), "fetched_at": f.get("fetched_at"),
             "last_ok_at": f.get("last_ok_at"), "count": f.get("records"), "fixture": f.get("fixture"),
             "expected_cadence_hours": cad,
@@ -4877,6 +4910,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if ev.get("duplicate_of") and ev["duplicate_of"] != ev["event_id"]:
             duplicates[ev["event_id"]] = ev["duplicate_of"]
     duplicates = shown_over_links(events, duplicates)
+    linked = linked_notices(events, duplicates)
     h_start = now - timedelta(days=HISTORY_DAYS)
     points = []
     latest_month = {}       # outfall -> (event, water slugs, monthly mark) of its latest month report
@@ -4903,6 +4937,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             placements[eid]["superseded"] = superseded[eid]
         if eid in duplicates:
             placements[eid]["duplicate_of"] = duplicates[eid]
+        if eid in linked:
+            placements[eid]["linked_notices"] = linked[eid]
         tp = time_problem(ev, now, rules)
         future = bool(future_start(ev, now))   # kept and listed; no status, reach or colour (FUTURE_START_H)
         if tp:
