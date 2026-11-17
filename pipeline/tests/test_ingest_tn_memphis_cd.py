@@ -224,3 +224,13 @@ def test_layout_variants_read_or_counted():
     assert by["HEALEY RD"]["water"] == "BLACK BAYOU" and by["HEALEY RD"]["volume"] == "1,572"
     assert by["SCOTT ST"]["time"] == "1:00" and by["SCOTT ST"]["ampm"] == "PM"
     assert "WESLEY" not in json.dumps(rep)
+
+
+def test_certification_date_before_quarter_end_is_not_the_publication_date():
+    rep = M.parse_report(PAGES["q1_2023"])
+    rep.update(url="u", period=["2023-01-01", "2023-03-31"])
+    assert M.to_records("2023Q1", rep)[0]["published_at"] == "2023-04-28"
+    rep["signed"] = "2023-03-29"
+    r = M.to_records("2023Q1", rep)[0]
+    assert r["published_at"] is None and r["raw"]["report_signed_on"] == "2023-03-29"
+    assert "before the quarter ended" in r["raw"]["published_note"]
