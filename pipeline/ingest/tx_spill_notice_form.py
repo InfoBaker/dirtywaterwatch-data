@@ -190,6 +190,8 @@ def water_of(area: str | None) -> str | None:
     a = _clean(area)
     if not a:
         return None
+    # a water the notice says the spill did not reach is not the affected area
+    a = re.sub(r"\b(?:prior\s+to|before)\s+reaching\b.*$|\bdid\s+not\s+(?:reach|enter)\b.*$", "", a, flags=re.I)
     m = WATER_NAME.search(a)
     if not m:
         return None

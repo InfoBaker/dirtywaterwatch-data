@@ -153,3 +153,12 @@ def test_feed_with_no_notice_is_healthy(tmp_path, monkeypatch):
     assert X.main([]) == 0
     d = common.read_json(tmp_path / f"{X.SOURCE_ID}.json")
     assert d["ok"] is True and d["count"] == 0
+
+
+def test_water_contained_before_reaching_is_not_placed():
+    # SAWS notice of October 14, 2022: "Contained in Unnamed Creek prior to reaching Medio Creek"
+    assert F.water_of("Contained in Unnamed Creek prior to reaching Medio Creek") is None
+    assert F.water_of("Medio Creek, contained before reaching Leon Creek") == "Medio Creek"
+    assert F.water_of("Natural Dry Pond") is None
+    assert F.water_of("Contained prior to reaching Salado Creek") is None
+    assert F.water_of("Storm drain; did not reach Leon Creek") is None
