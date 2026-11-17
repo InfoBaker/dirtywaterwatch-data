@@ -1,19 +1,17 @@
 """ingest/me_cbep_portland_cso.py: Portland's storm-by-storm overflow filings, 2015 to 2019.
 
-Run from pipeline/:  python -m pytest ingest/me_cbep_portland_cso_test.py -q
+Run from pipeline/:  python -m pytest tests/test_me_cbep_portland_cso.py -q
 """
 from __future__ import annotations
 
+import hashlib
 import io
 import json
-import sys
 import zipfile
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
-import common  # noqa: E402
-from ingest import me_cbep_portland_cso as m  # noqa: E402
+import common
+from build import charts
+from ingest import me_cbep_portland_cso as m
 
 
 def run(tmp_path, monkeypatch) -> dict:
@@ -128,3 +126,51 @@ def test_the_extract_reads_the_filing_layout_and_reads_a_mistyped_year_in_the_re
     assert (last["first_day"], last["last_day"], last["first_as_filed"], last["last_as_filed"]) == (
         "2019-12-13", "2019-12-15", "2020-12-13", "2020-12-15")
     assert "Person" not in json.dumps(rows)
+
+
+def keep_previous(tmp_path, monkeypatch) -> None:
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
+    (tmp_path / "events").mkdir(exist_ok=True)
+    prev = {"source_id": m.SOURCE_ID, "ok": True, "last_ok_at": "2026-11-17T00:00:00Z", "records": [{"event_id": "x"}]}
+    (tmp_path / "events" / f"{m.SOURCE_ID}.json").write_text(json.dumps(prev))
+
+
+def result(tmp_path) -> dict:
+    return json.loads((tmp_path / "events" / f"{m.SOURCE_ID}.json").read_text())
+
+
+def test_a_changed_or_truncated_2019_extract_is_not_ok_and_keeps_the_records(tmp_path, monkeypatch):
+    keep_previous(tmp_path, monkeypatch)
+    text = m.FILING_REF.read_text()
+    for name, body in (("changed.csv", text.replace(",448000", ",448001", 1)),
+                       ("header-only.csv", "\n".join(text.splitlines()[:2]) + "\n")):
+        f = tmp_path / name
+        f.write_text(body)
+        monkeypatch.setattr(m, "FILING_REF", f)
+        assert m.main([]) == 1, name
+        out = result(tmp_path)
+        assert out["ok"] is False and "differs from the pinned extract" in out["error"], name
+        assert out["records"] == [{"event_id": "x"}], name
+
+
+def test_an_extract_that_cannot_be_read_is_not_ok_and_keeps_the_records(tmp_path, monkeypatch):
+    keep_previous(tmp_path, monkeypatch)
+    f = tmp_path / "malformed.csv"
+    f.write_text(m.FILING_REF.read_text().replace("\n1,12,", "\n1,twelve,", 1))
+    monkeypatch.setattr(m, "FILING_REF", f)
+    monkeypatch.setattr(m, "FILING_SHA256", hashlib.sha256(f.read_bytes()).hexdigest())
+    assert m.main([]) == 1
+    out = result(tmp_path)
+    assert out["ok"] is False and "could not be read" in out["error"] and out["records"] == [{"event_id": "x"}]
+
+
+def test_the_tracked_files_match_their_pins():
+    assert hashlib.sha256(m.MERGED_REF.read_bytes()).hexdigest() == m.MERGED_SHA256
+    assert hashlib.sha256(m.FILING_REF.read_bytes()).hexdigest() == m.FILING_SHA256
+
+
+def test_the_charts_name_the_source_and_carry_its_limits_on_both_charts():
+    assert m.SOURCE_ID in charts.SOURCE_LABEL and "Casco Bay Estuary Partnership" in charts.SOURCE_LABEL[m.SOURCE_ID]
+    notes = charts.SOURCE_NOTES[m.SOURCE_ID]
+    assert "not metered in 2015" in notes["events"] and "no measured volume" in notes["volume"]
+    assert m.SOURCE_ID in charts.VOLUME_NOTE_ALWAYS
