@@ -641,6 +641,7 @@
    "min_area_km2": 50,
    "min_mean_width_km": 1.5,
    "narrow_min_length_km": 40,
+   "min_ring_km": 5,
    "each_way_km": 20,
    "shore_m": 500,
    "gap_km": 3,
