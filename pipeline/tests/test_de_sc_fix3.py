@@ -137,6 +137,7 @@ def test_another_states_poll_ended_advisory_keeps_its_colour(monkeypatch):
     assert _day_colours(a, now)["2026-09-01"] == "red"          # unchanged: other feeds keep their own reading
 
 
+# the site repository's saved events beside this clone, where a machine has them
 MAIN_EVENTS = Path(os.environ.get("DWW_OTHER_EVENTS", str(ROOT.parent / "dirtywaterwatch" / "data" / "build" / "events")))
 
 
