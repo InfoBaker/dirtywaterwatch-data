@@ -5049,13 +5049,15 @@
    "legal_basis": "327 IAC 5-2.2-1: \"The requirements of this rule and 40 CFR 122.38 apply to a permittee authorized to discharge a combined sewer overflow to the Great Lakes Basin\": a public notice within four hours of becoming aware of a discharge, a supplemental notice within seven days, and an annual notice",
    "basis_kind": "law",
    "monitored": false,
-   "unmonitored_reason": "other",
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "in-fort-wayne-cso-notifications",
    "publishes": "documents",
-   "note": "A summary of the past seven days' overflows (location, start, end, estimated volume) each Wednesday, and a yearly report. The page answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research.",
+   "noun": "Weekly overflow summary",
+   "note": "Fort Wayne City Utilities posts each Wednesday a summary of the past seven days' combined sewer overflows: for each of 39 outfalls, the start, end and estimated million gallons per day, or \"no overflows\". Read hourly by the feed, one record per overflow; earlier weeks stay at their addresses and are read once with a backfill. The weekly summary names no receiving water; the permit's are used. (in-fort-wayne-cso-notifications)",
    "sources": [
     "in-fort-wayne-cso-notifications"
    ],
-   "barrier": "not_verified"
+   "barrier": null
   },
   {
    "state": "IN",
