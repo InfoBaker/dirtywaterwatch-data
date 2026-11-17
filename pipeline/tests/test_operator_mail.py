@@ -494,7 +494,7 @@ def test_the_lists_file_is_consistent():
     from common import SOURCES_DIR
     lists = O.load_lists()
     for lid, spec in lists.items():
-        assert spec.get("kind") in ("notices", "context", "correspondence"), lid
+        assert spec.get("kind") in ("notices", "context", "correspondence", "pending"), lid
         if spec["kind"] == "notices":
             assert spec.get("parser") in PARSERS, lid
             assert (SOURCES_DIR / f"{spec['source_id']}.yaml").exists(), spec["source_id"]
@@ -717,3 +717,14 @@ def test_p1_12_a_ceased_only_notice_never_makes_a_reversed_window():
     ivs = S.event_intervals(c, "MA", datetime(2026, 1, 11, 6, 0, tzinfo=UTC), None)
     assert ivs and all(iv["start"] <= (iv["end"] or iv["start"]) for iv in ivs)
     assert min(iv["start"] for iv in ivs) == datetime(2026, 1, 11, 3, 40, tzinfo=UTC)
+
+
+def test_a_pending_list_keeps_its_messages_and_makes_no_record():
+    spec = {"kind": "pending", "address": "revere@dirtywaterwatch.org"}
+    row = {"id": "r1", "received_at": "2026-11-17T06:00:00Z", "list_id": "revere"}
+    e = O.read_message(eml("Revere <alerts@publicinput.com>", "revere@x", "Please confirm your subscription", "Click.",
+                           auth=cf("publicinput.com")), row, spec, {})
+    assert e["result"] == "account" and e["records"] == []
+    e = O.read_message(eml("Revere <alerts@publicinput.com>", "revere@x", "SSO Notice", "An overflow at ...",
+                           auth=cf("publicinput.com")), row, spec, {})
+    assert e["result"] == "needs_rule" and e["records"] == []
