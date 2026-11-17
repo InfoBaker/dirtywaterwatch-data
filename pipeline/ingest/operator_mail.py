@@ -53,6 +53,7 @@ import copy
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 from collections import Counter, defaultdict
@@ -184,6 +185,11 @@ def read_message(raw: bytes, row: dict, spec: dict | None, ctx: dict) -> dict:
         return {**entry, "result": "correspondence", "note": "an address for letters, never parsed", "records": []}
     if spec.get("kind") == "context":
         return {**entry, "result": "not_notice", "note": "a context list (news), never a record", "records": []}
+    if spec.get("kind") == "pending":
+        # a list signed up to before its parser exists: kept and counted under its list, never a record
+        acct = re.search(r"(?i)confirm|verif|welcome|thank(?:s| you) for|subscri", mail.subject or "")
+        return {**entry, "result": "account" if acct else "needs_rule",
+                "note": "a sign-up or confirmation message" if acct else "a list without a parser yet", "records": []}
     trust, how = verified(mail, spec)
     entry["trust"], entry["verified"] = trust, how
     if not trust:
