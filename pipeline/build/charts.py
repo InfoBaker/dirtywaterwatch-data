@@ -131,6 +131,7 @@ SOURCE_LABEL = {
     "echo-sewer-overflow": "U.S. Environmental Protection Agency sewer overflow records",
     "echo-cso-dmr-monthly": "U.S. Environmental Protection Agency discharge monitoring reports",
     "me-dep-cso-annual": "Maine Department of Environmental Protection combined sewer overflow reports",
+    "me-cbep-portland-cso": "City of Portland and Portland Water District overflow filings, 2015 to 2019, published by the Casco Bay Estuary Partnership",
     "me-healthy-beaches": "Maine Healthy Beaches",
     "nh-des-swimming": "New Hampshire Department of Environmental Services Healthy Swimming",
     "ri-dem-cyano": "Rhode Island Department of Environmental Management cyanobacteria advisories",
@@ -152,6 +153,7 @@ SOURCE_NOTES = {
     "echo-sewer-overflow": {"events": "The U.S. Environmental Protection Agency's sewer overflow records are limited: they hold only what operators file with the agency."},
     "ri-echo-dfr": {"events": "The U.S. Environmental Protection Agency's facility reports for Rhode Island are limited: they hold only what operators file with the agency."},
     "ri-nbc": {"events": "The Narragansett Bay Commission feed shows current overflows only; our record begins {first}."},
+    "me-cbep-portland-cso": {"events": "Portland's filings cover {first} to {last}, storm by storm, with the gallons at each outlet; each record is dated to the storm's first and last day. Some outlets were not metered in 2015."},
 }
 TOTAL_NOTES = {
     "me-dep-cso-annual": "Maine's Department of Environmental Protection reports one total per community and year, for all of its combined sewer outlets; the total is shown in full on each water the community's outlets reach. Event-days: calendar days with any combined sewer discharge in the community.",
