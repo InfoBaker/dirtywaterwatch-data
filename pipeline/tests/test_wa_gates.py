@@ -240,7 +240,15 @@ def test_puget_sound_is_a_shoreline_water_in_washington_and_no_other_sound_is():
     waters = S.load_waters()
     e = SH.shoreline_entry(waters["puget-sound-wa"], shore)
     assert e["name"] == "Puget Sound" and e["sound"] is True and not e.get("ocean")
-    assert {s for s, w in waters.items() if SH.is_shoreline(w, shore) and w.get("state") == "WA"} == {"puget-sound-wa"}
+    wa = {s for s, w in waters.items() if SH.is_shoreline(w, shore) and w.get("state") == "WA"}
+    # with the size rule off, Puget Sound alone; on (the committed file: lakes and reservoirs of 50 km2 or more), the
+    # large lakes and reservoirs join it, and still no other sound or bay
+    off = {**shore, "min_area_km2": None}
+    assert {s for s, w in waters.items() if SH.is_shoreline(w, off) and w.get("state") == "WA"} == {"puget-sound-wa"}
+    assert {s for s in wa if waters[s]["kind"] in ("sound", "bay")} == {"puget-sound-wa"}
+    assert all(SH.is_size_rule(waters[s], shore) and waters[s]["kind"] in ("lake", "reservoir")
+               for s in wa - {"puget-sound-wa"})
+    assert "lake-washington-wa" in wa
     assert SH.shoreline_entry({**waters["puget-sound-wa"], "state": "OR"}, shore) is None
     assert SH.shoreline_entry({"kind": "sound", "name": "Lake Erie", "wikidata": "Q5492", "state": "PA"}, shore) is None
     assert SH.shoreline_entry({"kind": "lake", "name": "Lake Erie", "wikidata": "Q5492", "state": "PA"}, shore)["name"] \
