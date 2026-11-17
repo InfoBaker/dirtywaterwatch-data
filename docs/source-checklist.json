@@ -56400,6 +56400,42 @@
   "area": "al"
  },
  {
+  "id": "al-jefferson-county-soa",
+  "name": "Jefferson County Environmental Services Department, Sanitary Sewer Overflow Advisories",
+  "jurisdiction": "AL",
+  "operator": "Jefferson County Commission, Environmental Services Department",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Jefferson County sewer service area (Birmingham area): the creek named in each advisory (Valley, Village, Shades, Five Mile, Turkey creeks, the Cahaba and Little Cahaba rivers and their feeders)",
+  "water_slugs": [],
+  "url": "https://soa.jccal.org/",
+  "access": [
+   "html",
+   "csv"
+  ],
+  "access_detail": "ASP.NET table, ten rows a page, filtered and paged by form posts; its 'Download as CSV file' button posts the form and returns OverflowAdvisories.csv: Date, Time, Location (street address), City, Zip, Affected Waterway (name and GNIS id, or NONE), Downstream Of, Reason, Status, Date Resolved, MapLink (latitude, longitude). 3,057 rows from 2012-06 to 2026-11-16 on 2026-11-17. No volume, no permit, no person's name.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "within a day or two of the overflow (rows posted as advisories)",
+  "history": "2012 on",
+  "license": "none stated",
+  "legal_basis": "none named on the page (r. 335-6-6-.12(l)6.(v) names the public)",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/al_jefferson_county_soa.py from 2026-11-17 (the current year's export; --backfill for 2012 on): one dated record per advisory with its time, street, named water and point; records ADEM also carries are duplicate_of ADEM's report. The page does not say what 'Date Resolved' means, so it is kept as the advisory's resolved date, never the end of the overflow.",
+  "verified": "fetched",
+  "checked": "2026-11-17",
+  "notes": "",
+  "area": "al"
+ },
+ {
   "id": "al-epa-sobe",
   "name": "EPA SOBE (eRule) extract, Alabama rows",
   "jurisdiction": "AL",
