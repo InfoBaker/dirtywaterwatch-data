@@ -70,8 +70,10 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+import common
 from common import BUILD_DIR, EVENTS_DIR, HEADERS, end_after, event, now_iso, read_json, write_events, write_json
 from ingest.al_jefferson_county_soa import street_key, street_only
+from ingest.la_baton_rouge_quarterly import receiving_water
 from ingest.tn_kub_sso_log import _tdec_street
 
 SOURCE_ID = "tn-memphis-cd-quarterly"
@@ -87,7 +89,7 @@ AUTHORITY = "City of Memphis, consent-decree quarterly report (Section VIII.24),
 COUNTY = "Shelby"
 BACKFILL_FROM = "2023-01-01"
 NEWEST = 2
-PARSER_VERSION = 1
+PARSER_VERSION = 2       # 2: review 2026-11-17 (the water cell checked; day-bound ends; date-only starts)
 MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
 LINK = re.compile(r"""<a\s[^>]*href=["']([^"']+\.pdf)["'][^>]*>(.*?)</a>""", re.I | re.S)
 TITLE = re.compile(rf"City of Memphis Quarterly Report\W*({MONTHS})\s+(\d{{1,2}}),?\s*(\d{{4}})?.*?({MONTHS})\s+"
@@ -110,6 +112,9 @@ TAIL_WATER = re.compile(rf"^(?P<water>[^?*†\d][^\d]*?)\s+(?P<flags>{FLAGS})(?:
 MARK_LINE = re.compile(r"^\s*(\*\*|\*|\?|†)\s+(\S.*)$")
 SIGNED = re.compile(r"(?<![\d/])(\d{1,2}/\d{1,2}/\d{4})(?![\d/])")
 SUITE = re.compile(r"\b(?:STE|SUITE|APT|UNIT|BLDG)\.?\s*#?\s*[\w-]+", re.I)
+# a receiving-water cell ending in a street word is an address, never a water (review 2026-11-17 P1-1)
+STREET_END = re.compile(r"\b(?:ROAD|RD|STREET|ST|AVENUE|AVE|DRIVE|DR|LANE|LN|COVE|CV|BOULEVARD|BLVD|PARKWAY|PKWY|"
+                        r"WAY|PLACE|PL|CIRCLE|CIR|TRAIL|TRL|COURT|CT|HWY|HIGHWAY|TERRACE|TER|PIKE)\.?$", re.I)
 UPLOAD = re.compile(r"/uploads/(\d{4})/(\d{2})/")
 
 
@@ -171,6 +176,18 @@ def signed_date(pages: list[str]) -> str | None:
         return None
 
 
+def water_cell(text: str) -> tuple[str | None, str | None]:
+    """(the receiving stream as written, or None; why it was withheld). The Baton Rouge reader's check (an address, a
+    phone, an e-mail, a person's name, or a cell that is not a water's name is withheld) and a cell ending in a street
+    word ('Wolf River Road'): the row is kept and placed on no water (review 2026-11-17 P1-1, P1-2)."""
+    t = _clean(text)
+    if not t:
+        return None, None
+    if STREET_END.search(t):
+        return None, "the receiving-water cell ends in a street word and is withheld"
+    return receiving_water(t)
+
+
 def table_lines(pages: list[str]) -> tuple[list[str], dict[str, str]]:
     """(the table's row lines, {mark: footnote}) from the first page with the table header to the footnotes."""
     lines: list[str] = []
@@ -192,11 +209,11 @@ def table_lines(pages: list[str]) -> tuple[list[str], dict[str, str]]:
             m = MARK_LINE.match(c)
             if m and not DATE_IN_LINE.search(c):
                 last_mark = m.group(1)
-                notes[last_mark] = _clean(m.group(2))
+                notes[last_mark] = common.scrub_text(_clean(m.group(2)))
                 continue
             if last_mark is not None:
                 if not DATE_IN_LINE.search(c):
-                    notes[last_mark] = _clean(notes[last_mark] + " " + c)     # a footnote's next line
+                    notes[last_mark] = common.scrub_text(_clean(notes[last_mark] + " " + c))   # its next line
                     continue
                 last_mark = None
             lines.append(c)
@@ -242,14 +259,17 @@ def parse_report(pages: list[str]) -> dict:
             bad += 1
             continue
         g = t_m.groupdict() if t_m else {}
+        water, withheld = water_cell(g.get("water") or "")
         t = (m.group("time") or "").replace(" ", "")
         row = {"date": d.isoformat(), "time": t or None,
                "ampm": (m.group("ampm") or "").replace(".", "").upper() or None,
                "location": location(m.group("loc")) if m.group("loc").strip() else None,
                "cause": _clean(m.group("cause")).upper(), "volume": m.group("vol"), "source": _clean(m.group("src")),
                "duration": m.group("dur"), "mark": g.get("mark"),
-               "water": _clean(g.get("water") or "") or None,
+               "water": water,
                "flags": (g.get("flags") or g.get("flags_only") or "").upper().split() or None}
+        if withheld:
+            row["water_withheld"] = withheld
         rows.append(row)
     if not rows:
         raise ReadError(f"the SSO table's {len(raw_rows)} lines read as no row")
@@ -260,7 +280,30 @@ def parse_report(pages: list[str]) -> dict:
 
 # ---------------------------------------------------------------- records
 
+def _local(d: date, h: int, mi: int) -> datetime | None:
+    """The instant of a wall-clock time in Memphis, or None when the clock time does not exist (the spring gap) or
+    happens twice (the autumn overlap): such a row is dated to the day (review 2026-11-17 P2-12)."""
+    a = datetime(d.year, d.month, d.day, h, mi, tzinfo=TZ, fold=0)
+    b = a.replace(fold=1)
+    if a.utcoffset() != b.utcoffset():
+        return None
+    back = a.astimezone(common.UTC if hasattr(common, "UTC") else ZoneInfo("UTC")).astimezone(TZ)
+    return a if (back.hour, back.minute) == (h, mi) else None
+
+
 def _start(r: dict, ampm_report: bool) -> tuple[datetime, str, str | None]:
+    out = _start_raw(r, ampm_report)
+    if out[1] == "minute":
+        st = _local(out[0].date(), out[0].hour, out[0].minute)
+        if st is None:
+            d = out[0].date()
+            return (datetime(d.year, d.month, d.day, tzinfo=TZ), "day",
+                    f"the time {r.get('time')} {r.get('ampm') or ''} falls in the hour the change to or from daylight "
+                    "time skips or repeats: the record is dated to the day")
+    return out
+
+
+def _start_raw(r: dict, ampm_report: bool) -> tuple[datetime, str, str | None]:
     d = date.fromisoformat(r["date"])
     t = r.get("time")
     if t:
@@ -278,12 +321,15 @@ def _start(r: dict, ampm_report: bool) -> tuple[datetime, str, str | None]:
     return datetime(d.year, d.month, d.day, tzinfo=TZ), "day", "the row gives no time: the record is dated to the day"
 
 
-def row_ids(rows: list[dict], quarter: str) -> list[str]:
+def row_ids(rows: list[dict], quarter: str | None = None) -> list[str]:
+    """'<date>T<HHMM><AM|PM>|day:<street key>', '~<k>' for a later row of the same date, time and street in one report.
+    The quarter is not part of the id, so a row repeated in a later report is the same record (review 2026-11-17
+    P1-7); build() keeps the newest report's copy."""
     seen: Counter = Counter()
     out = []
     for r in rows:
         hm = (r.get("time") or "").replace(":", "").zfill(4) + (r.get("ampm") or "") if r.get("time") else "day"
-        base = f"{quarter}:{r['date']}T{hm}:{street_key(r.get('location'))}"
+        base = f"{r['date']}T{hm}:{street_key(r.get('location'))}"
         seen[base] += 1
         out.append(base if seen[base] == 1 else f"{base}~{seen[base]}")
     return out
@@ -322,6 +368,8 @@ def to_records(quarter: str, rep: dict) -> list[dict]:
             raw["report_posted_folder"] = f"{folder.group(1)}-{folder.group(2)}"
         if tnote:
             raw["time_note"] = tnote
+        if r.get("water_withheld"):
+            raw["receiving_water_withheld"] = r["water_withheld"]
         if r.get("water"):
             raw["receiving_water_as_written"] = r["water"]
             raw["flags_as_written"] = r.get("flags")      # Unpermitted Discharge, Appendix G Area, the third column
@@ -345,10 +393,13 @@ def to_records(quarter: str, rep: dict) -> list[dict]:
         except ValueError:
             hours = 0.0
         if hours > 0:
-            # a fractional hour is rounded up to the whole minute, so the end is never earlier than the report allows
-            e, basis = end_after(st, timedelta(minutes=-(-hours * 60 // 1)), prec)
-            end, status = e.isoformat(), "ended"
-            raw["ended_at_basis"] = f"{basis} (the report's estimated duration, {dur} hours)"
+            # the City's estimated duration bounds the end: the latest day it allows, at day precision, never a clock
+            # time (the TDEC rows' rule, tn_transforms; review 2026-11-17 P1-4)
+            e, basis = end_after(st, timedelta(minutes=-(-hours * 60 // 1)), "day")
+            end, status = e.date().isoformat(), "ended"
+            raw["ended_at_precision"] = "day"
+            raw["ended_at_basis"] = (f"{basis} (the report's estimated duration, {dur} hours; the report gives no "
+                                     "end time)")
         vol = (r.get("volume") or "").replace(",", "")
         try:
             gal = round(float(vol)) if vol else None
@@ -358,7 +409,7 @@ def to_records(quarter: str, rep: dict) -> list[dict]:
             source_id=SOURCE_ID, source_record_id=rid, event_type="sso", status=status,
             discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, npdes_permit=None,
             outfall_name=r.get("location"), waterbody_text=r.get("water"), water_slugs=[], water_match="none",
-            started_at=st.isoformat(), ended_at=end, time_precision=prec,
+            started_at=st.isoformat() if prec == "minute" else r["date"], ended_at=end, time_precision=prec,
             reported_at=None, published_at=published, source_updated_at=None,
             fetched_at=rep.get("read_at") or now_iso(),
             material="untreated sewage", volume_gal=gal,
@@ -394,6 +445,10 @@ def link_tdec(records: list[dict], tdec: list[dict]) -> Counter:
         if len(cand) > 1 or ours[key] > 1:
             counts["not linked: several reports of one day and street"] += 1
             continue
+        from build.status import waters_differ
+        if waters_differ(r, cand[0]):
+            counts["not linked: the two name different waters"] += 1      # review 2026-11-17 P1-8
+            continue
         r["duplicate_of"] = cand[0]["event_id"]
         r["raw"]["_duplicate_basis"] = (f"TDEC's Events Report record of {DISCHARGER} (permit "
                                         f"{cand[0].get('npdes_permit')}) began the same day at the same street")
@@ -402,9 +457,11 @@ def link_tdec(records: list[dict], tdec: list[dict]) -> Counter:
 
 
 def build(state: dict, tdec: list[dict] | None = None) -> tuple[list[dict], Counter]:
-    recs = []
+    by_id: dict[str, dict] = {}
     for q, rep in sorted((state.get("reports") or {}).items()):
-        recs += to_records(q, rep)
+        for r in to_records(q, rep):
+            by_id[r["event_id"]] = r          # a row repeated in a later report: the newer copy (review P1-7)
+    recs = list(by_id.values())
     links = link_tdec(recs, tdec if tdec is not None else (read_json(TDEC_EVENTS, {}) or {}).get("records") or [])
     recs.sort(key=lambda r: (r["started_at"], r["event_id"]), reverse=True)
     return recs, links
@@ -415,8 +472,31 @@ def build(state: dict, tdec: list[dict] | None = None) -> tuple[list[dict], Coun
 def read_report(state: dict, quarter: str, info: dict, content: bytes, at: str) -> None:
     rep = parse_report(pdf_pages(content))
     rep.update(url=info["url"], period=info.get("period"), sha256=hashlib.sha256(content).hexdigest(), read_at=at)
-    state.setdefault("reports", {})[quarter] = rep
+    prev = state.setdefault("reports", {}).get(quarter)
+    attempt = {"url": rep["url"], "sha256": rep["sha256"], "read_at": at, "rows": len(rep["rows"]),
+               "rows_not_read": rep["not_read"], "parser_version": PARSER_VERSION}
+    if prev and prev.get("parser_version") == PARSER_VERSION and rep["not_read"] > prev.get("not_read", 0):
+        # a new copy that reads less completely than the accepted one never replaces it (review 2026-11-17 P1-5)
+        prev.setdefault("attempts", []).append(attempt)
+        return
+    rep["attempts"] = ((prev or {}).get("attempts") or []) + [attempt]
+    state["reports"][quarter] = rep
     state.setdefault("pending", {}).pop(quarter, None)
+
+
+def retained(prev: dict, state: dict, recs: list[dict]) -> list[dict]:
+    """The previous events file's records of reports with no copy in the state (no state file, an emptied one, a
+    report whose read failed): kept, so a failed read never drops an earlier record (review 2026-11-17 P1-6)."""
+    have = set(state.get("reports") or {})
+    ids = {r["event_id"] for r in recs}
+    out = []
+    for r in prev.get("records") or []:
+        if not isinstance(r, dict) or r.get("event_id") in ids or (r.get("raw") or {}).get("quarter") in have:
+            continue
+        r = {**r, "raw": {**(r.get("raw") or {}),
+                          "retained_from": "the previous events file (no copy of this report in the state)"}}
+        out.append(r)
+    return out
 
 
 def due(state: dict, links: dict[str, dict], backfill: bool) -> list[str]:
@@ -427,8 +507,11 @@ def due(state: dict, links: dict[str, dict], backfill: bool) -> list[str]:
     out = []
     for q in listed:
         rep = (state.get("reports") or {}).get(q)
-        fresh = rep is None or rep.get("url") != links[q]["url"] or (rep.get("parser_version") or 0) < PARSER_VERSION
-        if (fresh and (backfill or q in newest)) or q in (state.get("pending") or {}):
+        changed = rep is not None and (rep.get("url") != links[q]["url"]
+                                       or (rep.get("parser_version") or 0) < PARSER_VERSION)
+        # a report never read: on a backfill, or hourly when among the newest; one read before at another address
+        # or by an older parser: whatever its age (review 2026-11-17 P2-11)
+        if (rep is None and (backfill or q in newest)) or changed or q in (state.get("pending") or {}):
             out.append(q)
     return out
 
@@ -447,7 +530,8 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
         if not links:
             raise ReadError("the index lists no quarterly report")
     except (requests.RequestException, ValueError) as e:
-        err = f"index not read: {type(e).__name__}: {e}"[:300]
+        code = getattr(getattr(e, "response", None), "status_code", None)
+        err = f"index not read ({type(e).__name__}{f', HTTP {code}' if code else ''})"     # never the message
         write_events(SOURCE_ID, [], ok=False, error=err, meta={"index": INDEX}, path=out)
         print(f"{SOURCE_ID}: FAILED {err}", file=sys.stderr)
         return 1
@@ -461,11 +545,16 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
             read_report(state, q, links[q], resp.content, now)
         except Exception as e:   # one report's failure never stops the rest
             prev = pend.get(q) or {}
-            pend[q] = {"url": links[q]["url"], "reason": f"{type(e).__name__}: {e}"[:200],
+            code = getattr(getattr(e, "response", None), "status_code", None)
+            why = (f"the report could not be fetched (HTTP {code})" if code else
+                   f"the report could not be read ({type(e).__name__})")       # never the message (review P1-3)
+            pend[q] = {"url": links[q]["url"], "reason": why,
                        "since": prev.get("since") or now, "last_tried": now}
     write_json(state_path, state)
     recs, tlinks = build(state, tdec)
     reps = state.get("reports") or {}
+    held = retained(read_json(out if out else EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}, state, recs)
+    recs += held
     listed = sorted(q for q, v in links.items() if v["period"][0] >= BACKFILL_FROM)
     meta = {"registry_ids": [SOURCE_ID], "index": INDEX, "credit": AUTHORITY, "time_zone": TZ_NAME,
             "covers_operator": DISCHARGER_ID, "carried_from": BACKFILL_FROM,
@@ -475,7 +564,8 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
             "listed_not_read": [q for q in listed if q not in reps and q not in pend],
             "rows_not_read": {q: v["not_read"] for q, v in sorted(reps.items()) if v.get("not_read")},
             "pending": dict(sorted(pend.items())), "tdec_links": dict(tlinks),
-            "newest_listed": listed[-1] if listed else None}
+            "newest_listed": listed[-1] if listed else None,
+            "retained_from_previous_events": sorted({(r.get("raw") or {}).get("quarter") or "" for r in held})}
     # the index was read: the feed is healthy; a report not read (tried again each run) and rows of a report not
     # read are named in meta (the backfill rule)
     problems = [f"report {q} not read ({v['reason']})" for q, v in sorted(pend.items())]
