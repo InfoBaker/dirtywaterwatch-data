@@ -425,3 +425,9 @@ def test_detail_fields_and_both_records_reach_each_other():
     assert links["tx-houston-sso-monthly:68784"]["linked_records"][0] == {
         "event_id": "tx-tceq-sso-opendata:1", "relation": "other_source", "source_id": "tx-tceq-sso-opendata"}
     assert links["tx-tceq-sso-opendata:1"]["linked_records"][0]["event_id"] == "tx-houston-sso-monthly:68784"
+
+
+def test_corrective_actions_split_by_pypdf_are_written_as_the_city_writes_them():
+    assert H.actions("Cleaned and D isinfected; Cleared M ain Line; Throttled down a lift station") == (
+        "Cleaned and Disinfected; Cleared Main Line; Throttled down a lift station")
+    assert H.actions("") is None

@@ -125,7 +125,7 @@ DECREE = ("Consent decree, United States and State of Texas v. City of Houston, 
           "(S.D. Tex.), Paragraph 61")
 BACKFILL_FROM = "2024-01"
 NEWEST = 3
-PARSER_VERSION = 1
+PARSER_VERSION = 1       # a change re-reads every month held (due)
 LINK_BASIS = "the City of Houston's monthly SSO report row"      # the start of raw._duplicate_basis on TCEQ's record
 MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october",
           "november", "december"]
@@ -158,6 +158,12 @@ FLOWS = ["Contained On Site, not within 5 ft. of Bayou/Surface Water/Drainage Di
 STRUCTURES = ["Private Sample Well", "Private Grease Trap", "Private Cleanout", "Private Manhole", "City Cleanout",
               "Service Lateral", "Building Backup", "Gravity Main", "Lift Station", "Force Main", "Manhole"]
 # the City's words under every table (its "Additional Comments"), kept as written on each row it reports as "0"
+# the City's corrective actions (every one read in 2024-2026 that recurs): pypdf splits their words ("Cleaned and
+# D isinfected"); a part that matches one with any spacing is written as the City writes it, any other as read
+ACTIONS = ["Cleaned and Disinfected", "Cleared Main Line", "Cleared City Clean Out", "Set Bypass Pump",
+           "Cleared Service Lateral", "Post Warning Signs", "Contain All or Portion of Spill", "Cleared Private Line",
+           "Returned Spill to Sanitary System", "Issue Public/Media Notification", "Monitor Receiving Waterbody",
+           "Spill Response Completion Date"]
 ZERO_NOTE = ("Where estimated volume and average flow are reported as \"0\", evidence of an SSO was observed but no active "
              "overflow was occurring. Consequently, flow rate and total volume loss could not be calculated.")
 VOID = re.compile(r"SSO\s+ID\s*#?\s*(\d{4,6})\s+was\s+erroneously\s+reported\s+in\s+the\s+([A-Za-z]+\s+\d{4})\s+monthly"
@@ -239,6 +245,16 @@ ROW_NO_FLAG = re.compile(rf"^(?P<id>\d{{5,6}})\s+(?:(?P<permit>{PERMIT})\s*)?(?P
                          rf"(?:{'|'.join(_loose(f).pattern for f in FLOWS)}))\s+{ROW_TAIL}", re.I)
 DATES = re.compile(DATE)
 STRUCTURE_RES = [(s, re.compile(rf"^{_loose(s).pattern}(?=\s|$)", re.I)) for s in STRUCTURES]
+ACTION_RES = [(a, re.compile(rf"^{_loose(a).pattern}$", re.I)) for a in ACTIONS]
+
+
+def actions(text: str | None) -> str | None:
+    """The corrective-action cell: each part ("; ") as the City writes it where it is one of ACTIONS."""
+    parts = []
+    for part in re.split(r"\s*;\s*", " ".join((text or "").split())):
+        if part:
+            parts.append(next((a for a, rx in ACTION_RES if rx.match(part)), part))
+    return common.scrub_text("; ".join(parts)) or None
 
 
 def street_of(cell: str | None) -> str | None:
@@ -443,7 +459,7 @@ def parse_row(s: str) -> dict | None:
            "start_as_written": f"{re.sub(chr(32), '', m.group('sd'))} {' '.join(m.group('st').split())}",
            "end_as_written": f"{re.sub(chr(32), '', m.group('ed'))} {' '.join(m.group('et').split())}",
            "average_flow_gpm": m.group("gpm"),
-           "corrective_action": common.scrub_text(" ".join((m.group("act") or "").split())) or None}
+           "corrective_action": actions(m.group("act"))}
     if structure is None:
         row["structure_and_cause_as_written"] = common.scrub_text(sc)
     if how != "list":
