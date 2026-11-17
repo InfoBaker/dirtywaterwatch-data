@@ -5417,7 +5417,7 @@
    "unmonitored_reason": "feed_ingested",
    "publishes": "notices",
    "noun": "Spill news release",
-   "note": "Austin Water's news list carries a release on each large spill (five from December 2024 to September 2026 on November 17, 2026): the day, often the time it was discovered and stopped, the estimated volume, where it went and the public advice. Read hourly by the feed (tx-austin-water-spill-news).",
+   "note": "Austin Water's news list carries releases on large spills (five from December 2024 to September 2026 on November 17, 2026): the day, often the time it was discovered and stopped, the estimated volume, where it went and the public advice. Read hourly by the feed (tx-austin-water-spill-news).",
    "barrier": null,
    "feed_source_id": "tx-austin-water-spill-news",
    "sources": [

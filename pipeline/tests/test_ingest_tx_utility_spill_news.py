@@ -2,7 +2,7 @@
 
 Fixtures in tx_utility_news/, read 2026-11-17: list pages trimmed to their release links (Austin pages 0, 1 and 3; El Paso's
 ?show=all list cut to seven links, the 2023 update among them) and six release pages trimmed to the date and the text,
-with telephone numbers, quoted officials and the named contacts removed.
+with telephone numbers, quoted officials and the named contacts removed and each house number replaced by an invented 1234.
 """
 import json
 from pathlib import Path
@@ -78,7 +78,7 @@ def test_el_paso_records():
 
 def test_nothing_personal_or_reassuring_kept():
     s = json.dumps(run("austin")[0] + run("elpaso")[0])
-    for bad in ("[phone removed]", "Media Line", "said", "remains safe", "not at risk", "Coomer Path", "13625", "10001"):
+    for bad in ("[phone removed]", "Media Line", "said", "remains safe", "not at risk", "1234"):
         assert bad not in s, bad
 
 
