@@ -40,7 +40,8 @@ def by_slug(recs):
 def test_austin_records():
     recs, stats = run("austin")
     d = by_slug(recs)
-    assert stats["notices"] == 3 and stats["unread"] == []           # list pages 0 and 3 of the six
+    assert stats["notices"] == 3 and [u.rsplit("/", 1)[-1][:40] for u in stats["unread"]] == [
+        "austin-water-responds-wastewater-sludge-"]                      # the one release not in the fixtures
     cb = d["austin-water-reports-sanitary-sewer-overflow-near-5000-block-creek-bend-drive"]
     assert cb["started_at"] == "2024-12-10T11:53:00-06:00" and cb["raw"]["start_is_upper_bound"] is True
     assert cb["ended_at"] == "2024-12-10T13:47:00-06:00" and cb["status"] == "ended"
