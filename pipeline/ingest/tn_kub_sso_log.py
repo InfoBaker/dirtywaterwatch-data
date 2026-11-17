@@ -18,13 +18,16 @@ Reading (the named client; nothing kept between runs but the state file)
     added on the first of a month for the last day of the one before is read.
   - --backfill: one request per month from BACKFILL_FROM (2023-01-01, the reach the repository keeps for comparable
     statewide lists, as Texas's TCEQ table), PAUSE_S seconds apart, oldest first.
-  - Health: a request that fails, an answer that is not this JSON (no customerSsoLog list), or a row with no date is a
-    failed read (ok false, the records kept). An answer with no row (a month with no overflow) is a read with nothing
-    new.
+  - Health: a request that fails, an answer that is not this JSON (no customerSsoLog list), or one whose meta
+    (start, count, total) says rows are missing is a failed read (ok false, the records kept, no row marked missing;
+    review 2026-11-17 P2-9). A row with no readable date is not read: the others are kept and the read is partial
+    (health false), the row counted, never quoted (P2-8). An answer with no row (a month with no overflow) is a read
+    with nothing new. The answers are not saved; rows are kept with the house number already removed (P1-1).
 
 Records (one sso record per row)
   - source_record_id "<date>T<HHMM or 'day'>:<street key>": the log's date and time and its street after the
-    house-number scrub, squeezed to letters and digits; repeats are "~2", "~3" in the order given.
+    house-number scrub (street_key: street words in one form, "ROAD" and "RD" alike). Rows sharing that key get
+    "~<6 hex>" from their gallons, matched to the rows held before (al_jefferson_county_soa.assign_ids; P2-5).
   - Every row read is kept in data/build/tn-kub-sso-log-state.json (the archive); records are rebuilt from it each run.
     A row the log no longer lists when its month is read again keeps its record with raw._missing_from_source_since.
   - Times: the API gives "date" as local midnight in UTC ("2026-03-10T04:00:00.000+00:00": March 10 in Knoxville) and
@@ -47,7 +50,9 @@ Records (one sso record per row)
   - One event, one record: KUB's overflows also go to TDEC's Events Report (tn-tdec-events-report, read before this
     module; its host has refused automated reading since 2026-11-07, so it holds no new rows). A KUB record is
     duplicate_of the TDEC record of a KUB permit that began the same local day at the same street (link_tdec), so
-    it is counted once; raw._duplicate_basis says so.
+    it is counted once; raw._duplicate_basis says so. Where two reports of one day and street stand on either side,
+    none is linked (which is which is not known; P2-6). The Makefile runs this module before the generic TDEC block,
+    so a TDEC row read in the same run is linked at the next hourly run.
   - Privacy: the location is a street address, often a home: the house number is removed (common.strip_house_numbers
     and the Alabama reader's leftover-number rule, ingest/al_jefferson_county_soa.street_only); the log carries no
     name, phone or e-mail. The page's contact line is not kept.
@@ -72,8 +77,8 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import BUILD_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
-from ingest.al_jefferson_county_soa import street_key, street_only
+from common import BUILD_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
+from ingest.al_jefferson_county_soa import assign_ids, street_key, street_only
 
 SOURCE_ID = "tn-kub-sso-log"
 PAGE = "https://www.kub.org/forms/sso-logs"
@@ -138,16 +143,27 @@ def local_clock(v) -> tuple[int, int] | None:
     return t.hour, t.minute
 
 
-def parse(doc) -> list[dict]:
-    """The rows of one answer; ReadError when it is not the log."""
+def parse(doc) -> tuple[list[dict], int]:
+    """(the rows of one answer as they are kept, the number of rows not read); ReadError when the answer is not the
+    log or is short of the total it states (review 2026-11-17 P2-9). A row with no readable date is not read and is
+    counted, never quoted (it may hold an address: review 2026-11-17 P1-1)."""
     if not isinstance(doc, dict) or not isinstance(doc.get("customerSsoLog"), list):
         raise ReadError("the answer has no customerSsoLog list")
-    rows = []
-    for r in doc["customerSsoLog"]:
+    items, meta = doc["customerSsoLog"], doc.get("meta")
+    if not isinstance(meta, dict) or meta.get("start") not in (0, None) or meta.get("total") != len(items) \
+            or meta.get("count") not in (None, len(items)):
+        raise ReadError(f"the answer holds {len(items)} rows, its meta says {str(meta)[:80]}: not the whole month")
+    rows, bad = [], 0
+    for r in items:
         if not isinstance(r, dict) or local_day(r.get("date")) is None:
-            raise ReadError(f"a row with no readable date: {str(r)[:20]!r}")
-        rows.append({k: r.get(k) for k in ("date", "time", "location", "volume", "status", "completionDate")})
-    return rows
+            bad += 1
+            continue
+        row = {k: r.get(k) for k in ("date", "time", "volume", "status", "completionDate")}
+        row["location"] = street_only(r.get("location")) or ""
+        rows.append(row)
+    if bad and not rows:
+        raise ReadError(f"none of the {bad} rows has a readable date")
+    return rows, bad
 
 
 # ---------------------------------------------------------------- state and records
@@ -159,13 +175,13 @@ def row_key(r: dict) -> str:
     return f"{d.isoformat()}T{hm}:{street_key(street_only(r.get('location')))}"
 
 
-def keyed(rows: list[dict]) -> list[tuple[str, dict]]:
-    out, seen = [], Counter()
-    for r in rows:
-        base = row_key(r)
-        seen[base] += 1
-        out.append((base if seen[base] == 1 else f"{base}~{seen[base]}", r))
-    return out
+def ident(r: dict) -> str:
+    return hashlib.sha256(str(r.get("volume") or "").encode()).hexdigest()[:6]
+
+
+def keyed(rows: list[dict], held: dict | None = None) -> list[tuple[str, dict]]:
+    """Stable ids (al_jefferson_county_soa.assign_ids: rows of one day, time and street told apart by their gallons)."""
+    return assign_ids(rows, held or {}, base_of=row_key, ident_of=ident)
 
 
 def row_hash(r: dict) -> str:
@@ -174,17 +190,17 @@ def row_hash(r: dict) -> str:
 
 def take(state: dict, first: date, last: date, rows: list[dict], now: str) -> Counter:
     held = state.setdefault("rows", {})
-    got = dict(keyed(rows))
+    got = dict(keyed(rows, held))
     counts = Counter()
     for rid, r in got.items():
         prev = held.get(rid)
         h = row_hash(r)
         if prev is None:
-            held[rid] = {"row": r, "hash": h, "first_seen_at": now, "last_seen_at": now}
+            held[rid] = {"row": r, "hash": h, "ident": ident(r), "first_seen_at": now, "last_seen_at": now}
             counts["new"] += 1
             continue
         if prev.get("hash") != h:
-            prev.update(row=r, hash=h, revised_at=now)
+            prev.update(row=r, hash=h, ident=ident(r), revised_at=now)
             counts["revised"] += 1
         else:
             counts["same"] += 1
@@ -243,6 +259,7 @@ def _tdec_street(rec: dict) -> str | None:
 def link_tdec(records: list[dict], tdec: list[dict]) -> Counter:
     """Mark each KUB record duplicate_of TDEC's record of the same overflow (module docstring)."""
     idx: dict[tuple, list[dict]] = {}
+    ours: Counter = Counter((local_day(r["started_at"]), street_key(r["raw"].get("location"))) for r in records)
     for t in tdec:
         if t.get("npdes_permit") not in PERMITS and t.get("discharger_id") != DISCHARGER_ID:
             continue
@@ -251,14 +268,18 @@ def link_tdec(records: list[dict], tdec: list[dict]) -> Counter:
         d, s = local_day(t.get("started_at")), _tdec_street(t)
         if d and s:
             idx.setdefault((d, s), []).append(t)
-    used, counts = set(), Counter()
+    counts = Counter()
     for r in records:
         key = (local_day(r["started_at"]), street_key(r["raw"].get("location")))
-        cand = [t for t in idx.get(key, []) if t["event_id"] not in used]
+        cand = idx.get(key, [])
         if not cand:
             continue
+        if len(cand) > 1 or ours[key] > 1:
+            # two reports of one day and street on either side: which is which is not known, so none is linked
+            # (review 2026-11-17 P2-6)
+            counts["not linked: several reports of one day and street"] += 1
+            continue
         t = cand[0]
-        used.add(t["event_id"])
         r["duplicate_of"] = t["event_id"]
         r["raw"]["_duplicate_basis"] = (f"TDEC's Events Report record of {DISCHARGER} (permit {t.get('npdes_permit')}) "
                                         "began the same day at the same street")
@@ -292,14 +313,16 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
         try:
             resp = get(api_url(first, last))
             resp.raise_for_status()
-            rows = parse(resp.json())
+            rows, bad = parse(resp.json())
         except (requests.RequestException, ValueError) as e:
             not_read[f"{first:%Y-%m}" if backfill else f"{first:%Y-%m}..{last:%Y-%m}"] = f"{type(e).__name__}: {e}"[:200]
             continue
         read_any = True
         counts.update(take(state, first, last, rows, now))
-        if save and rows:
-            save_raw(SOURCE_ID, resp.content, "json")
+        if bad:
+            # the month's other rows are kept; the read is partial (health false), the rows counted, never quoted
+            not_read[f"{first:%Y-%m}" if backfill else f"{first:%Y-%m}..{last:%Y-%m}"] = \
+                f"{bad} rows with no readable date"
     state["last_read"] = {"at": now, "spans": [f"{a}..{b}" for a, b in spans], **counts}
     if read_any:
         write_json(state_path, state)
@@ -334,7 +357,7 @@ def main(argv=None) -> int:
     out = Path(a.out) if a.out else None
     state_path = out.with_suffix(".state.json") if out else STATE_PATH
     if a.file:
-        rows = [r for r in parse(json.loads(Path(a.file).read_text())) if str(local_day(r["date"])) >= a.since]
+        rows = [r for r in parse(json.loads(Path(a.file).read_text()))[0] if str(local_day(r["date"])) >= a.since]
         state = read_json(state_path, {}) or {}
         days = sorted(str(local_day(r["date"])) for r in rows)
         if days:

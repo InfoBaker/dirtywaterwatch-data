@@ -19,7 +19,9 @@ level: "municipal"
 #   county's statement that no waterway was affected: not placed on a water). The status build places a record by the
 #   name near the row's point. The point is the county's map link, rounded to three decimals (about 100 m).
 # One event, one record: most rows are also filed with ADEM (al-adem-sso-history). A county record is duplicate_of
-#   ADEM's report of a Jefferson County permit that began the same day with its point within 1 km.
+#   ADEM's report of a Jefferson County permit that began the same day with its point within 1 km, unless the two
+#   name different waters or ADEM's report says no water was reached while the county names one.
+# Placement: by the named water only (raw._placement named_water_only); never by the water nearest the point.
 # Privacy: no person's name, phone or e-mail in the export; the location is a street address, often a home: every
 #   house number is removed and the point is rounded.
 cadence: "1 hour"

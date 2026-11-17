@@ -19,7 +19,8 @@ level: "municipal"
 # Place: no water, no point, no permit: each record is listed with its street and KUB's service area (Knox County)
 #   and placed on no water (never geolocated from the street).
 # One event, one record: KUB's overflows also reach TDEC's Events Report (tn-tdec-events-report, refused to automated
-#   reading since 2026-11-07); a KUB record of the same day and street as a TDEC record of a KUB permit is its duplicate.
+#   reading since 2026-11-07); a KUB record of the same day and street as a TDEC record of a KUB permit is its duplicate
+#   (none linked where either side has two reports of that day and street).
 # Privacy: the location is a street address, often a home: the house number is removed. No name, phone or e-mail.
 cadence: "1 hour"
 license: "none stated"

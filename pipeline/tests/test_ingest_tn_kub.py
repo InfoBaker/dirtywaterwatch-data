@@ -31,7 +31,7 @@ class R:
 
 def answer(first: date, last: date, rows=None):
     rows = DOC["customerSsoLog"] if rows is None else rows
-    got = [r for r in rows if first <= K.local_day(r["date"]) <= last]
+    got = [r for r in rows if K.local_day(r["date"]) is None or first <= K.local_day(r["date"]) <= last]
     return {"meta": {"start": 0, "count": len(got), "total": len(got)}, "customerSsoLog": got}
 
 
@@ -96,7 +96,7 @@ def test_records_from_the_log(tmp_path):
     assert r["raw"]["_placement"] == "named_water_only" and r["raw"]["county"] == "Knox"
     assert r["raw"]["location"] == f"{HOUSE_NUMBER_REMOVED} PINE GROVE ROAD"
     assert r["source_url"] == K.api_url(date(2026, 10, 1), date(2026, 10, 31))
-    assert r["event_id"] == "tn-kub-sso-log:2026-10-18T1542:PINEGROVEROAD"
+    assert r["event_id"] == "tn-kub-sso-log:2026-10-18T1542:PINEGROVERD"
     # an evening time stored on 1970-01-02, in daylight time
     assert recs["2026-10-19T20:34:00-04:00"]["raw"]["cleanup_status"] == "New"
     assert recs["2026-10-19T20:34:00-04:00"]["volume_gal"] is None
@@ -190,3 +190,40 @@ def test_main_reads_a_saved_answer(tmp_path):
     out = tmp_path / "o.json"
     assert K.main(["--file", str(FIX / "tn_kub_sso_log.json"), "--out", str(out)]) == 0
     assert json.loads(out.read_text())["count"] == 14
+
+
+# ---------------------------------------------------------------- review 2026-11-17 (Astra) fixes
+
+def test_review_p1_1_no_house_number_in_the_state_or_errors(tmp_path):
+    run(tmp_path, Web(), backfill=True)
+    state = (tmp_path / "state.json").read_text()
+    assert "1100 PINE" not in state and "/150" not in state
+    code, doc = run(tmp_path, Web(body={"customerSsoLog": [{"date": None, "location": "4321 SECRET LANE"}],
+                                        "meta": {"start": 0, "count": 1, "total": 1}}))
+    assert "4321" not in json.dumps(doc)
+
+
+def test_review_p2_6_street_suffixes_match_and_ambiguous_pairs_are_left(tmp_path):
+    t = {"event_id": "tn-tdec-events-report:a", "npdes_permit": "TN0021822", "discharger_id": "tn-kub",
+         "started_at": "2026-10-07T00:00:00-04:00", "outfall_name": f"{HOUSE_NUMBER_REMOVED} PINE GROVE ROAD, KNOXVILLE",
+         "raw": {"_outfall_name_basis": "Event Address"}, "duplicate_of": None}
+    _, doc = run(tmp_path, tdec=[t])
+    assert by_start(doc)["2026-10-07T13:45:00-04:00"]["duplicate_of"] == "tn-tdec-events-report:a"   # RD = ROAD
+    t2 = {**t, "event_id": "tn-tdec-events-report:b"}
+    (tmp_path / "y").mkdir()
+    _, doc = run(tmp_path / "y", tdec=[t, t2])
+    assert by_start(doc)["2026-10-07T13:45:00-04:00"]["duplicate_of"] is None
+
+
+def test_review_p2_8_a_bad_row_does_not_lose_the_month(tmp_path):
+    rows = DOC["customerSsoLog"] + [{"date": None, "time": None, "location": "x", "volume": "1", "status": "Complete",
+                                     "completionDate": None}]
+    code, doc = run(tmp_path, Web(rows=rows), backfill=True)
+    assert code == 0 and not doc["ok"] and len(doc["records"]) == 14
+
+
+def test_review_p2_9_an_answer_short_of_its_total_is_not_read(tmp_path):
+    run(tmp_path)
+    code, doc = run(tmp_path, Web(body={"meta": {"start": 0, "count": 0, "total": 12}, "customerSsoLog": []}))
+    assert code == 1 and not doc["ok"] and len(doc["records"]) == 4
+    assert not any(r["raw"].get("_missing_from_source_since") for r in doc["records"])
