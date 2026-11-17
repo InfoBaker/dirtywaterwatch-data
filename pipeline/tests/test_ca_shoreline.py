@@ -118,7 +118,12 @@ def test_the_lake_entries_still_match_lakes_only_unless_they_name_a_kind():
     assert hit["name"] == "Lake Erie" and "bay" not in hit and "sound" not in hit
     assert not SH.is_shoreline({**erie, "kind": "bay"}, SHORE)       # a bay record carrying a Great Lake's id is not
     assert SH.shoreline_entry({"name": "Lake St. Clair", "kind": "lake", "wikidata": "Q736707"}, SHORE)["name"] == "Lake St. Clair"
-    assert not SH.is_shoreline({**WATERS["san-francisco-bay-ca"], "kind": "lake", "state": "MI"}, SHORE)
+    # San Francisco Bay's entry (kinds ["bay"], states ["CA"]) never takes a lake record elsewhere; with the size rule
+    # on (the committed file), a 606 km2 lake record is a shoreline water by its size, worded as a lake
+    as_lake = {**WATERS["san-francisco-bay-ca"], "kind": "lake", "state": "MI"}
+    assert not SH.is_shoreline(as_lake, {**SHORE, "min_area_km2": None})
+    e = SH.shoreline_entry(as_lake, SHORE)
+    assert e.get("size_rule") is True and "bay" not in e and "wikidata" not in e
 
 
 def test_the_ocean_text_names_the_open_ocean_not_only_floridas_waters():
