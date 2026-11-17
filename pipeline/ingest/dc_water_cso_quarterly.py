@@ -743,6 +743,8 @@ def main(argv=None) -> int:
                                   "structure_table": "own" if v.get("structures") is not None else "reference"}
                               for k, v in sorted(reps.items())},
             "unread": unread,
+            "pending": {k: {"reason": v.get("reason"), "since": v.get("since")}
+                        for k, v in sorted((state.get("pending") or {}).items())},
             "set_apart": [{**a, "quarter": k} for k, v in sorted(reps.items())
                           for mv in (v.get("months") or {}).values() for a in mv.get("set_apart") or []],
             "dry_weather_statements": [mv["dwo"] for v in reps.values() for mv in (v.get("months") or {}).values()
@@ -759,20 +761,26 @@ def main(argv=None) -> int:
                         partial=bool(errors))
     print(f"{SOURCE_ID}: {len(recs)} dated overflows from {len(reps)} quarters ({len(unread)} months unread, "
           f"{dups} linked to EPA rows) -> {path}")
-    return backfill_exit(errors, backfill, list_failed, reps, unread)
+    return backfill_exit(errors, backfill, list_failed, reps, unread, state.get("pending") or {})
 
 
-def backfill_exit(errors: list[str], backfill: bool, list_failed: bool, reps: dict, unread: dict) -> int:
+def backfill_exit(errors: list[str], backfill: bool, list_failed: bool, reps: dict, unread: dict,
+                  pending: dict | None = None) -> int:
     """The exit code. The hourly run: 1 while anything is unread (health false). --backfill: 0 when the list was read
     and the history saved holds at least one month read, the unread months named in the events file (ok false,
     meta.unread) and on this line, so the refresh's one-time backfill loads what can be read; 1 when the read itself
-    failed (the list not read, or no month read at all: a changed layout)."""
+    failed (the list not read, or no month read at all: a changed layout, or a list with no report from
+    FIRST_QUARTER on). A quarter whose fetch or read failed after an earlier read is named from meta.pending."""
+    read_any = any(mv.get("status") == "read" for v in reps.values() for mv in (v.get("months") or {}).values())
+    if backfill and (list_failed or not read_any):
+        if not errors:
+            print(f"{SOURCE_ID}: backfill read no month", file=sys.stderr)
+        return 1
     if not errors:
         return 0
-    read_any = any(mv.get("status") == "read" for v in reps.values() for mv in (v.get("months") or {}).values())
-    if backfill and not list_failed and read_any:
-        print(f"{SOURCE_ID}: backfill saved; not read (named in meta.unread, health false until read): "
-              + ", ".join(sorted(unread)), file=sys.stderr)
+    if backfill:
+        print(f"{SOURCE_ID}: backfill saved; not read (named in meta.unread and meta.pending, health false until "
+              "read): " + ", ".join(sorted(unread) + sorted(pending or {})), file=sys.stderr)
         return 0
     return 1
 
