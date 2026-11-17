@@ -272,6 +272,8 @@ def volume_consistent(rec: dict, row: dict) -> bool:
 def same_operator(rec: dict, row: dict) -> bool:
     if rec.get("discharger_id") and rec["discharger_id"] == row.get("discharger_id"):
         return True
+    if row.get("discharger_id") and row["discharger_id"] in ((rec.get("raw") or {}).get("operator_ids") or []):
+        return True
     mine = (rec.get("raw") or {}).get("state_permit_prefix")
     theirs = (row.get("raw") or {}).get("state_permits") or []
     return bool(mine) and any(str(p).startswith(mine) for p in theirs)
