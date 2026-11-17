@@ -2890,11 +2890,16 @@
    "method": "html",
    "legal_basis": "M.G.L. c. 21, § 43A(e); 314 CMR 16.04(4); 314 CMR 16.05(1) (CSO permittee website: outfall map, plan, sign-up, monthly data within 15 days); advisory within 2 hours of discovery, updates every 8 hours, cessation notice within 2 hours",
    "basis_kind": "law",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "ma-somerville-cso-table",
    "publishes": "notices",
-   "note": "City of Somerville DPW: public advisory website. (research/ma/report.md §2.1, §2.6-2.7, §3)",
-   "checked": "2026-11-03",
+   "sources": [
+    "ma-somerville-cso-table",
+    "ma-somerville-cso-email"
+   ],
+   "note": "City of Somerville DPW: public advisory website. Its CSO discharge tables (start, stop, duration, volume in million gallons, event rainfall; 32 rows on 2026-11-17, 2021-07-02 to 2026-07-22) are read hourly by the feed, each row linked to MassDEP's portal record of the same overflow. (research/ma/report.md §2.1, §2.6-2.7, §3; ma-somerville-cso-table)",
+   "checked": "2026-11-17",
    "records": false,
    "barrier": null
   },

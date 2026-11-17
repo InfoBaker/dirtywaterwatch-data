@@ -1,0 +1,31 @@
+id: "ma-somerville-cso-table"
+name: "City of Somerville CSO discharge table"
+url: "https://www.somervillema.gov/cso"
+homepage: "https://www.somervillema.gov/cso"
+kind: "html"
+level: "municipal"
+# Feed row: written by pipeline/ingest/ma_somerville_cso.py (data/build/events/ma-somerville-cso-table.json).
+# Built 2026-11-17: hourly; the city's two discharge tables ("CSO Discharge Table", 2024 on, and "Past CSO
+#   Activations", 2021 to 2023): 32 rows on 2026-11-17, 2021-07-02 to 2026-07-22, all at SOM-001A on the Alewife Brook.
+#   One cso record per row: start and stop to the minute in Eastern time, volume in million gallons (the page: "their
+#   estimated discharge duration and volume. Data for CSOs is preliminary and subject to change."), event rainfall in
+#   raw. Every row read is kept in data/build/ma-somerville-cso-table-state.json, so a row taken off the page stays a
+#   past report.
+# One event, not two: a row and MassDEP's portal record of the same overflow (permit MA0101982, same outfall number,
+#   starts within 3 hours) are linked with duplicate_of to the portal's shown record (operator_mail.link_portal's rule).
+#   2026-11-17 against the portal file of 2026-11-15: 23 rows linked, 9 alone (eight from 2021, before the portal's
+#   first day, and 9/6/2025, which the portal dates 9/7/2025 with 0.388 million gallons against the table's 0.338).
+# Columns: the table cells and three sentences of the page only; the contacts table (staff names, telephones, e-mail
+#   addresses) is never read or saved; the page itself is never saved.
+cadence: "1 hour"
+license: "none stated"
+attribution: "City of Somerville"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["MA"]
+access: ["html"]
+access_detail: "Two tables on the city's CSO page, header row in plain cells: CSO Number, Waterbody affected, Potentially Affected Area, Start Time, Stop Time, Duration, Volume (million gallons), Event Rainfall (inches). Dates as 7/22/2026 or 10/8/25, clocks as 4:25pm, 7:10 PM or 8:15 A.M., line breaks inside cells."
+machine_readable: false
+legal_basis: "M.G.L. c. 21 s. 43A; 314 CMR 16.05(1) (the CSO permittee's website)"
+checked: "2026-11-17"
