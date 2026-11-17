@@ -115,7 +115,9 @@
 #                  every overflow, release and bypass since 2020: dates only, county, city and street, no water; the
 #                  session step opens the page first; ingest/tn_transforms.py) and the generic ArcGIS block
 #                  tn-tdec-hab-advisory-status (TDEC's HAB advisories, advisory fields only), and
-#                  tn_tdec_posted_streams (TDEC's posted-streams PDF: standing water-contact advisories, read daily)
+#                  tn_tdec_posted_streams (TDEC's posted-streams PDF: standing water-contact advisories, read daily) and
+#                  tn_kub_sso_log (Knoxville Utilities Board's overflow log by month: date, time, street, gallons; no
+#                  water, listed in Knox County; TDEC's copy of the same overflow is kept)
 #                  Ohio: oh_neorsd_cso (NEORSD's CSO alerts layers: each outfall's last wet- and dry-weather overflow,
 #                  snapshotted hourly into dated records, metered or modelled), oh_akron_cso (Akron's overflow status
 #                  layer: status 1 opens, 0 ends at the poll), oh_columbus_overflows (Columbus's overflow events table

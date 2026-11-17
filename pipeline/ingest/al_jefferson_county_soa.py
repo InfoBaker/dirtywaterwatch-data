@@ -115,8 +115,9 @@ IDN = re.compile(r"^(.*?)\s*-\s*IDN:\s*0*(\d+)\s*$", re.I)
 NUM = r"-?\d{1,3}\.\d+"
 POINT = re.compile(rf"^\s*(?:lat\s*)?({NUM})\s*[,;/ ]\s*(?:long?\s*)?({NUM})\.?\s*$", re.I)
 # a number left in a street after the scrub: a house number unless a route word stands before it (I-65, Hwy 150)
-LEFT_NUMBER = re.compile(r"(?<![\w\-/.\[])\d+[A-Za-z]?(?:\s*[-/]\s*\d+[A-Za-z]?)*(?![\w])")
+LEFT_NUMBER = re.compile(r"(?<![\w\-.\[])\d+[A-Za-z]?(?:\s*[-/]\s*\d+[A-Za-z]?)*(?![\w])")
 GLUED_NUMBER = re.compile(r"\b([NSEW])(\d{3,6})\b")      # "33RD COURT N3444 33RD COURT N": a number run into a direction
+GLUED_BEFORE = re.compile(r"\b\d{3,6}(?=[A-Za-z]{3,})")   # "5711Governor John Sevier": a number run into its street
 ROUTE_BEFORE = re.compile(r"(?i)\b(?:highway|hwy|interstate|i|us|u\.s\.|sr|cr|route|rte|rt|county\s+road|co\.?\s*rd|"
                           r"state\s+road|exit|mile|lift\s+station|ls|pump\s+station)\s*[-#]?\s*$")
 
@@ -138,6 +139,7 @@ def street_only(v: str | None) -> str | None:
     def repl(m):
         return m.group(0) if ROUTE_BEFORE.search(s[:m.start()]) else HOUSE_NUMBER_REMOVED
     s = GLUED_NUMBER.sub(lambda m: f"{m.group(1)} {HOUSE_NUMBER_REMOVED}", s)
+    s = GLUED_BEFORE.sub(HOUSE_NUMBER_REMOVED + " ", s)
     s = LEFT_NUMBER.sub(repl, s)
     s = re.sub(rf"(?:{re.escape(HOUSE_NUMBER_REMOVED)}\s*[-/&,]?\s*){{2,}}", HOUSE_NUMBER_REMOVED + " ", s)
     return " ".join(s.split()) or None

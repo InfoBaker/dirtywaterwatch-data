@@ -8223,24 +8223,28 @@
    "operator_id": "tn-kub",
    "agency": null,
    "permit": "TN0021822",
-   "checked": "2026-11-07",
+   "checked": "2026-11-17",
    "id": "tn-kub-public-notice",
    "name": "Knoxville Utilities Board",
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://www.kub.org/forms/sso-logs"
+   ],
+   "method": "json",
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "other",
-   "publishes": "unknown",
-   "records": false,
-   "noun": "Notice to the public",
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "records": true,
+   "noun": "Overflow log",
    "sources": [
+    "tn-kub-sso-log",
     "tn-law-0400-40-05-07"
    ],
-   "note": "No URL known (not searched individually): no Tennessee rule requires a permittee to tell the public of an overflow, and this operator's own pages were not searched, so whether it posts notices online is not known.",
-   "barrier": "not_verified"
+   "note": "Knoxville Utilities Board posts a log of its sanitary sewer overflows on its SSO Logs page, by month since 2005: the date and time, the street, the gallons and the status of the cleanup, added within 24 hours of the report (the page's words). No water is named. Read hourly by the feed, with a backfill to January 2023. (tn-kub-sso-log)",
+   "barrier": null,
+   "feed_source_id": "tn-kub-sso-log"
   },
   {
    "state": "TN",
