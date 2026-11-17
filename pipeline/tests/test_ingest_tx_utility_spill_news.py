@@ -1,6 +1,6 @@
 """Texas: Austin Water's and El Paso Water's spill news releases (ingest/tx_utility_spill_news.py).
 
-Fixtures in tx_utility_news/, read 2026-11-17: list pages trimmed to their release links (Austin pages 0 and 3; El Paso's
+Fixtures in tx_utility_news/, read 2026-11-17: list pages trimmed to their release links (Austin pages 0, 1 and 3; El Paso's
 ?show=all list cut to seven links, the 2023 update among them) and six release pages trimmed to the date and the text,
 with telephone numbers, quoted officials and the named contacts removed.
 """
@@ -40,7 +40,7 @@ def by_slug(recs):
 def test_austin_records():
     recs, stats = run("austin")
     d = by_slug(recs)
-    assert stats["notices"] == 3 and [u.rsplit("/", 1)[-1][:40] for u in stats["unread"]] == [
+    assert stats["notices"] == 4 and [u.rsplit("/", 1)[-1][:40] for u in stats["unread"]] == [
         "austin-water-responds-wastewater-sludge-"]                      # the one release not in the fixtures
     cb = d["austin-water-reports-sanitary-sewer-overflow-near-5000-block-creek-bend-drive"]
     assert cb["started_at"] == "2024-12-10T11:53:00-06:00" and cb["raw"]["start_is_upper_bound"] is True
