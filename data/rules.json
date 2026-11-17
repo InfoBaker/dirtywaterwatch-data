@@ -417,8 +417,8 @@
    },
    "shellfish_closure": {
     "hours": null,
-    "rationale": "We use shellfish closure notices from the Rhode Island Department of Environmental Management (DEM) and the Maine Department of Marine Resources (DMR). These restrict shellfish harvesting; they are not automatically swimming advisories.",
-    "source": "Rhode Island DEM; Maine DMR"
+    "rationale": "We use shellfish closure notices from the Rhode Island Department of Environmental Management (DEM), the Maine Department of Marine Resources (DMR), the North Carolina Division of Marine Fisheries (DMF) and the Texas Department of State Health Services (DSHS). These restrict shellfish harvesting; they are not automatically swimming advisories.",
+    "source": "Rhode Island DEM; Maine DMR; North Carolina DMF; Texas DSHS"
    },
    "annual_total": {
     "hours": null,
