@@ -20,7 +20,7 @@ role: "events"
 event_types: ["cso"]
 states: ["NH"]
 access: ["email"]
-access_detail: "DNN opt-in form; checkbox 'CSO Discharge Notification'. Not subscribed."
+access_detail: "DNN opt-in form; checkbox 'CSO Discharge Notification'. Subscribed 2026-11-02 as manchester@dirtywaterwatch.org; read by pipeline/ingest/operator_mail.py (parser ingest/mail/manchester.py), each e-mail linked as the duplicate of the same post on the city's CSO Discharge Notification page (nh-permittees)."
 machine_readable: false
 legal_basis: "Consent Decree paragraph 19"
-checked: "2026-11-01"
+checked: "2026-11-17"

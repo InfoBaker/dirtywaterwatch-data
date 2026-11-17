@@ -1,0 +1,24 @@
+id: "ma-swsc-cso-email"
+name: "Springfield Water and Sewer Commission public advisories by e-mail (list CSO Notification - Public)"
+url: "https://springfieldalerts.com/Suez/"
+homepage: "https://springfieldalerts.com/Suez/"
+kind: "email"
+level: "utility"
+# Feed row: written by pipeline/ingest/operator_mail.py (parser ingest/mail/springfield.py), one events file per list
+#   (data/mail-lists.json "springfield"), read from the project's mail intake (address springfield@dirtywaterwatch.org).
+# Built 2026-11-17. The advisory 314 CMR 16.04 requires within two hours of discovery: outfall, start, estimated volume,
+#   waters, towns, cessation. Signed up 2026-11-02 and again 2026-11-17; no message had arrived by 2026-11-17 although the
+#   portal shows Springfield notices from 2026-11-06, so the list is checked against ma-massdep (meta.quiet). The parser
+#   is written from the rule and the portal's records and fails loudly until checked against a real notice.
+cadence: "per event"
+license: "none stated"
+attribution: "Springfield Water and Sewer Commission"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "blended"]
+states: ["MA"]
+access: ["email"]
+access_detail: "Constant Contact list 'CSO Notification - Public', sign-up form on springfieldalerts.com (a script check before the page)."
+machine_readable: false
+legal_basis: "M.G.L. c. 21 s. 43A; 314 CMR 16.04"
+checked: "2026-11-17"
