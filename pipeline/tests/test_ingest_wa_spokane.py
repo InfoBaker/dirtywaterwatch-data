@@ -160,3 +160,27 @@ def test_no_contact_in_the_fixture_or_records(tmp_path):
     recs, _ = SP.run(SP.parse(overflow(PAGE, 0, "11/16/2026 3:45 PM"))[0], NOW, tmp_path / "s.json", REG)
     text = PAGE + json.dumps(recs)
     assert not re.search(r"\(\d{3}\)\s*\d{3}|@[a-z]+\.(?:org|com|gov)", text)
+
+
+# review 2026-11-16 (Astra) ------------------------------------------------------------------------------------------
+
+def test_a_site_unread_then_missing_keeps_health_false(tmp_path):
+    out = tmp_path / "events.json"
+    p = tmp_path / "p.html"
+    p.write_text(PAGE)
+    assert SP.main(["--file", str(p), "--out", str(out)]) == 0
+    p.write_text(overflow(PAGE, 0, "garbled"))
+    assert SP.main(["--file", str(p), "--out", str(out)]) == 1
+    trs = list(re.finditer(r"<tr>.*?</tr>", PAGE, re.S))
+    p.write_text(PAGE[:trs[0].start()] + PAGE[trs[0].end():])          # CSO2's row gone
+    assert SP.main(["--file", str(p), "--out", str(out)]) == 1
+    f = json.loads(out.read_text())
+    assert f["ok"] is False and "CSO2" in json.dumps(f["meta"].get("unread"))
+
+
+def test_contact_text_in_a_location_is_scrubbed(tmp_path):
+    page = PAGE.replace("0.6 miles downstream of RPWRF", "0.6 miles downstream of RPWRF, call Jane 509-555-0123")
+    rows, _ = SP.parse(page)
+    st = tmp_path / "s.json"
+    SP.run(rows, NOW, st, REG)
+    assert "555-0123" not in json.dumps(rows) + st.read_text()

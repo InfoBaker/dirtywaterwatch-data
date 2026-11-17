@@ -344,3 +344,42 @@ def test_main_accepts_backfill():
 def test_pdf_date():
     assert FW.pdf_date("D:20261112122354-05'00'") == "2026-11-12T12:23:54-05:00"
     assert FW.pdf_date(None) is None and FW.pdf_date("yesterday") is None
+
+
+# review 2026-11-16 (Astra) ------------------------------------------------------------------------------------------
+
+def test_a_revision_missing_a_block_is_unread_and_keeps_the_records(tmp_path):
+    run(tmp_path, site({U_APR: APR}))
+    d = copy.deepcopy(APR)
+    d["pieces"] = [p for p in d["pieces"] if p[2] > 200]          # the last block (27, 33, 36) cut off
+    d["layout_text"] = None
+    rc, f = run(tmp_path, site({U_APR: d}))
+    assert rc == 1 and f["ok"] is False and len(f["records"]) == 14 and U_APR in f["meta"]["unread"]
+
+
+def test_a_broken_pdf_is_unread_and_fails_health(tmp_path):
+    run(tmp_path, site({U_APR: APR}))
+
+    def bad(content):
+        raise RuntimeError("PdfStreamError: truncated")             # any pypdf failure
+    out = tmp_path / "events.json"
+    rc = FW.run("2026-11-17T20:00:00Z", tmp_path / "state.json", out, get=site({U_APR: APR, U_NOV: NOV},
+                page_links=[U_NOV]), pieces_of=bad, registry=REG, save=False, sleep=lambda s: None)
+    f = json.loads(out.read_text())
+    assert rc == 1 and f["ok"] is False and len(f["records"]) == 14 and U_NOV in f["meta"]["unread"]
+
+
+def test_a_404_does_not_clear_an_unread_document(tmp_path):
+    broken = _edit(NOV, "Start of CSO", "Start of Event")
+    run(tmp_path, site({U_NOV: broken}))
+    rc, f = run(tmp_path, site({U_APR: APR}, page_links=[U_APR]))       # U_NOV now answers 404
+    assert rc == 1 and U_NOV in f["meta"]["unread"]
+
+
+def test_error_text_is_scrubbed(tmp_path):
+    d = copy.deepcopy(NOV)
+    d["pieces"].append([0, 600.0, 30.0, "Contact jane.doe@example.org 260-555-0123"])
+    d["layout_text"] = None
+    rc, f = run(tmp_path, site({U_NOV: d}))
+    st = (tmp_path / "state.json").read_text()
+    assert rc == 1 and "jane.doe@" not in json.dumps(f) + st and "555-0123" not in json.dumps(f) + st
