@@ -1040,9 +1040,10 @@ def outline_area_km2(g) -> float | None:
     return (outline_shape(g) or (None, None))[0]
 
 
-def outline_shape(g) -> tuple[float, float] | None:
-    """(area in km2, mean width in km: twice the area over the length of every ring, islands included) of an outline's
-    polygons on a local equirectangular projection, or None when it has no area."""
+def outline_shape(g) -> tuple[float, float, float] | None:
+    """(area in km2, mean width in km: twice the area over the length of every ring, islands included, length in km:
+    the long side of the smallest rotated rectangle) of an outline's polygons on a local equirectangular projection,
+    or None when it has no area."""
     import math
     import shapely
     from shapely.ops import unary_union
@@ -1068,7 +1069,10 @@ def outline_shape(g) -> tuple[float, float] | None:
         return None
     per = sum(p.exterior.length + sum(i.length for i in p.interiors)
               for p in getattr(um, "geoms", [um]) if p.geom_type == "Polygon")
-    return a / 1e6, (2 * a / per / 1000 if per else float("inf"))
+    import numpy as np
+    xs = np.asarray(um.minimum_rotated_rectangle.exterior.coords)
+    long_km = max(float(np.hypot(*(xs[i + 1] - xs[i]))) for i in range(2)) / 1000 if len(xs) >= 3 else 0.0
+    return a / 1e6, (2 * a / per / 1000 if per else float("inf")), long_km
 
 
 def with_outline_areas(waters: dict, shore: dict) -> dict:
@@ -1101,6 +1105,7 @@ def with_outline_areas(waters: dict, shore: dict) -> dict:
                     add[SH.OUTLINE_AREA] = shp[0]
                 if floor is not None and kind in SH.FILL_KINDS and (area if area is not None else shp[0]) >= least:
                     add[SH.OUTLINE_WIDTH] = shp[1]
+                    add[SH.OUTLINE_LENGTH] = shp[2]
         if not add:
             continue
         if out is None:
