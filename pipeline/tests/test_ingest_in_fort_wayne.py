@@ -390,9 +390,10 @@ def test_error_text_is_scrubbed(tmp_path):
 # "31/2025"), as hand-edited cells are drawn
 JAN07 = json.loads((FIX / "in_fort_wayne_cso_jan07_2026.json").read_text())
 FEB25 = json.loads((FIX / "in_fort_wayne_cso_feb25_2026.json").read_text())
+DEC17 = json.loads((FIX / "in_fort_wayne_cso_dec17_2025.json").read_text())
 
 
-@pytest.mark.parametrize("doc,first", [(JAN07, "2025-12-31"), (FEB25, "2026-02-18")])
+@pytest.mark.parametrize("doc,first", [(JAN07, "2025-12-31"), (FEB25, "2026-02-18"), (DEC17, "2025-12-10")])
 def test_dates_drawn_a_few_characters_at_a_time_are_read(doc, first):
     p = FW.parse(doc)
     assert p["no_overflows"] is True and p["rows"] == []

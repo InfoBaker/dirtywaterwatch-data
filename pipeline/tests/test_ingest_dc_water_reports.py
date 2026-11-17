@@ -641,3 +641,32 @@ def test_review_backfill_follows_pages_to_the_end(monkeypatch):
     monkeypatch.setattr(Q, "fetch", lambda u, timeout=120: asked.append(u) or pages[u])
     listed, odd = Q.read_index(True)
     assert f"{Q.INDEX}&page=11" in asked
+
+
+def test_review_backfill_with_only_older_reports_listed_fails(tmp_path, monkeypatch):
+    # a list with no report from FIRST_QUARTER on reads no month: not a loaded history (Astra review 2026-11-17 P1)
+    _backfill_env(tmp_path, monkeypatch, lambda c: [SEP_2026])
+    old = INDEX_HTML.replace("2026 3RD QUARTER", "2019 3RD QUARTER").replace("2026 2ND QUARTER", "2019 2ND QUARTER")
+    monkeypatch.setattr(Q, "read_index", lambda backfill: Q.parse_index(old))
+    assert Q.main(["--backfill"]) == 1
+    assert Q.main([]) == 0                         # the hourly run is unchanged: nothing due, nothing unread
+
+
+def test_review_backfill_names_a_quarter_whose_fetch_failed(tmp_path, monkeypatch, capsys):
+    # a quarter read before whose new fetch fails is pending, not an unread month: still named (Astra review P1)
+    out = _backfill_env(tmp_path, monkeypatch, lambda c: [SEP_2026])
+    Q.main(["--backfill"])
+    capsys.readouterr()
+
+    def failing(url, timeout=300):
+        if url == Q.INDEX:
+            return INDEX_HTML.encode()
+        if "&page=" in url:
+            return b"<table></table>"
+        raise Q.requests.ConnectionError("reset")
+    monkeypatch.setattr(Q, "fetch", failing)
+    assert Q.main(["--backfill", "--refresh"]) == 0
+    f = out()
+    assert f["ok"] is False and f["meta"]["pending"] and set(f["meta"]["pending"]) <= set(f["meta"]["quarters_read"])
+    err = capsys.readouterr().err
+    assert all(k in err for k in f["meta"]["pending"])
