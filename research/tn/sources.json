@@ -444,5 +444,39 @@
   "verified": "fetched",
   "checked": "2026-11-17",
   "notes": ""
+ },
+ {
+  "id": "tn-memphis-cd-quarterly",
+  "name": "City of Memphis, consent-decree quarterly SSO reports",
+  "jurisdiction": "TN",
+  "operator": "City of Memphis",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Memphis's sewer service area (Shelby County): the streams the rows name (Nonconnah, Cypress, Fletcher, Days, Johns, Cane and Tenmile creeks, Black, Cherry and Workhouse bayous, the Wolf and Loosahatchie rivers and their tributaries)",
+  "water_slugs": [],
+  "url": "https://sarp10.com/reports/",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "One PDF per quarter linked from the index (titles 'City of Memphis Quarterly Report- <first day> - <last day>'). The SSO table: Location - Address, Date and Time, Cause, Estimated Volume (gallons), Source, Duration (Hours), Receiving stream (if any), Unpermitted Discharge, Appendix G Area, and Priority Area or CD 11b & 11c; footnote marks ?, *, ** and † where no stream is named. The certification page carries an official's name and signature.",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "quarterly, posted about a month after the quarter ends",
+  "history": "2012 on (2023 on read)",
+  "license": "none stated",
+  "legal_basis": "2012 consent decree, Section VIII.24",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/tn_memphis_cd_quarterly.py from 2026-11-17 (the index and the newest two reports; --backfill from 2023 Q1): one record per row with its date and time, street, gallons and estimated duration; placed only on the stream the row names, otherwise on no water, with the City's footnote on whether a water was reached. 652 rows from 14 reports on 2026-11-17; 31 rows in layouts not read are named in meta.",
+  "verified": "fetched",
+  "checked": "2026-11-17",
+  "notes": ""
  }
 ]
