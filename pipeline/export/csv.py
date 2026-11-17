@@ -21,7 +21,8 @@ line ends, a quote inside a value doubled), one report per row, newest first. Co
 
 The rows come from the public event objects the export writes (build.py: personal fields stripped
 under the current rules, staff and private names redacted, no keys starting with "_"), and only from
-the fixed top-level fields named here plus two link and municipality values read from their `raw`
+the fixed top-level fields named here, the named fields of `detail` and `later_volume` (export/detail.py: each
+read from a source key named there, scrubbed) plus two link and municipality values read from their `raw`
 (RAW_NOTICE_KEYS, status.TOWN_KEYS). Nothing else of `raw` is copied, so a field the sources add later
 cannot reach a download by accident. Text that begins with = + - or @ gets a leading apostrophe so a
 spreadsheet does not read it as a formula; numbers are never touched.
@@ -49,7 +50,14 @@ COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id"
            "event_type", "category", "status", "started_at", "ended_at", "end_reported", "volume_gal", "volume_text", "lat", "lon",
            "towns", "source_id", "source_name", "record_id", "published_at", "reported_at", "source_updated_at",
            "retrieved_at", "report_url", "notice_url", "site_url", "duplicate_of", "superseded_by",
-           "sampled_at", "time_precision", "ended_at_precision"]
+           "sampled_at", "time_precision", "ended_at_precision",
+           # the source's detail (export/detail.py FIELDS, the same names) and the later record of the same event
+           "report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
+           "volume_method", "volume_to_water_gal", "overflow_point", "town_named",
+           "later_volume_gal", "later_volume_text", "later_volume_qualifier", "later_record_kind", "later_record_published_at",
+           "later_record_id", "linked_record_ids"]
+DETAIL_COLUMNS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
+                  "volume_method", "volume_to_water_gal", "overflow_point", "town")
 LIST_SEP = ";"
 # children of out_dir this module owns (and replaces on every run); everything else in out_dir is left alone
 MANAGED_DIRS = ("water", "operator", "state")
@@ -412,6 +420,14 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
         _text(e.get("duplicate_of")), _text(superseded_by(e, ctx.ids)),
         _text(e.get("sampled_at")), _text(start_precision_text(e)), _text(ended_precision),
     ]
+    d = e.get("detail") if isinstance(e.get("detail"), dict) else {}
+    row += [_number(d.get(k)) if k.endswith("_gal") else _text(d.get(k)) for k in DETAIL_COLUMNS]
+    lv = e.get("later_volume") if isinstance(e.get("later_volume"), dict) else {}
+    row += [_number(lv.get("volume_gal")), _text(lv.get("volume_text")), _text(lv.get("volume_qualifier")),
+            _text(lv.get("report_kind")), _text(lv.get("published_at")), _text(lv.get("event_id"))]
+    links = e.get("linked_records") if isinstance(e.get("linked_records"), list) else []
+    row.append(_text(LIST_SEP.join(f"{r['relation']}:{r['event_id']}" for r in links
+                                   if isinstance(r, dict) and isinstance(r.get("event_id"), str) and r.get("relation"))))
     return row, ops
 
 

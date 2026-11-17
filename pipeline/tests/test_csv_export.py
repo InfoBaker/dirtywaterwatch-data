@@ -20,7 +20,10 @@ from export import csv as csv_export  # noqa: E402
 
 HEADER = ("event_id,water,water_slug,state,operator,operator_id,outlet_id,outlet_name,event_type,category,status,started_at,"
           "ended_at,end_reported,volume_gal,volume_text,lat,lon,towns,source_id,source_name,record_id,published_at,"
-          "reported_at,source_updated_at,retrieved_at,report_url,notice_url,site_url,duplicate_of,superseded_by,sampled_at,time_precision,ended_at_precision").split(",")
+          "reported_at,source_updated_at,retrieved_at,report_url,notice_url,site_url,duplicate_of,superseded_by,sampled_at,time_precision,ended_at_precision,"
+          "report_kind,cause,weather,rainfall_in,rainfall_label,duration_text,volume_qualifier,volume_method,volume_to_water_gal,"
+          "overflow_point,town_named,later_volume_gal,later_volume_text,later_volume_qualifier,later_record_kind,"
+          "later_record_published_at,later_record_id,linked_record_ids").split(",")
 AS_OF = "2026-11-02T12:00:00Z"
 
 
@@ -93,7 +96,9 @@ def test_files_and_columns(tmp_path):
         "record_id": "1", "published_at": "2026-10-20T15:00:00-04:00", "reported_at": "", "source_updated_at": "",
         "retrieved_at": "2026-11-02T10:45:00Z", "report_url": "https://eeaonline.eea.state.ma.us/portal/x", "notice_url": "",
         # no page of its own (page_ids is empty here): its row on the state-year archive page
-        "site_url": "https://dirtywaterwatch.org/discharges/ma/2026/#ma-massdep~3A1", "duplicate_of": "", "superseded_by": "", "sampled_at": "", "time_precision": "", "ended_at_precision": ""}
+        "site_url": "https://dirtywaterwatch.org/discharges/ma/2026/#ma-massdep~3A1", "duplicate_of": "", "superseded_by": "", "sampled_at": "", "time_precision": "", "ended_at_precision": "",
+            # no detail or later record on this record (tests/test_event_detail.py fills them)
+            **{k: "" for k in HEADER[HEADER.index("report_kind"):]}}
 
 
 def test_text_is_utf8_crlf_and_a_comma_and_quote_are_quoted(tmp_path):
