@@ -1142,6 +1142,27 @@ def event_points() -> list[dict]:
     return out
 
 
+def tidal_due_points(cached: dict[str, dict], have: set[str], now: datetime) -> list[dict]:
+    """Event points whose own trace was cut at the head of tide before reach.tidal_river, as candidates again, once.
+    The status build lists an event for tracing only while it has no trace (needs_reach), so a traced event point
+    never came back to plan() and its stretch kept stopping where the river becomes tidal (found 2026-11-17: 227
+    paths, active cautions on the Merrimack, Cobbs Creek and Frankford Creek among them). With the rule on, each
+    cached event-point record that tidal_due() names is traced again from its own point; the new record carries
+    the rule's mark, so it is not named twice. Rule off: none."""
+    if not tidal_river_on():
+        return []
+    out = []
+    for key, d in sorted(cached.items()):
+        if key in have or d.get("sources") != ["event-point"] or d.get("lat") is None or d.get("lon") is None:
+            continue
+        if not tidal_due(d, True, now):
+            continue
+        out.append({"key": key, "permit": d.get("permit"), "outfall": None, "water_slug": d.get("water_slug"),
+                    "lat": d["lat"], "lon": d["lon"], "name": None, "sources": ["event-point"],
+                    "event_ids": list(d.get("event_ids") or [])})
+    return out
+
+
 def stretch_of(ev: dict) -> dict | None:
     """A record's `stretch` when both ends carry a numeric point (docs/plan.md §3), else None."""
     st = ev.get("stretch") if isinstance(ev, dict) else None
@@ -2275,6 +2296,8 @@ def main() -> int:
                     from build import rain_sso
                     have = {c["key"] for c in pts}
                     pts += [c for c in rain_sso.trace_points(waters) if c["key"] not in have]
+                    # event points traced before the tidal-river rule and cut at the head of tide (tidal_due_points)
+                    pts += tidal_due_points(load_reaches(), {c["key"] for c in pts}, datetime.now(UTC))
                     lake = [c for c in cands + pts if c.get("model") == SH.MODEL]
                     shore_run = run_shorelines(lake, waters, shore, log=log)
                     run, cached = run_traces([c for c in cands + pts if c.get("model") != SH.MODEL], cap,
