@@ -154,7 +154,11 @@ jobs:
         env:
           BACKFILL: ${{ github.event.inputs.backfill }}
         run: |
-          # each module reads its full history once (--backfill); the refresh that follows dedupes and the state save keeps it
+          # each module reads its full history once (--backfill); the refresh that follows dedupes and the state save keeps it.
+          # The rule for a backfill's exit code (2026-11-17, after refresh 43995607963): a module exits 0 when it read its
+          # list and saved what it could read, naming the documents it could not read in its meta and its output line
+          # (the feed stays unhealthy until they read); it exits non-zero only when the read itself failed (no list, nothing
+          # read, a changed layout), and that fails this step. A module must accept --backfill (an unknown flag fails here).
           rc=0
           for m in $BACKFILL; do
             case "$m" in *[!a-z0-9_]*) echo "::error::bad module name: $m"; exit 1 ;; esac
