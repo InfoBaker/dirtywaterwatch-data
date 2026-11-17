@@ -11,9 +11,10 @@ level: "utility"
 #   read). Each report holds three monthly sections; each month's Table 2-7 gives the overflow dates and estimated
 #   durations at seven inflatable dam structures and three outfall-sewer structures. Read with pypdf from the first
 #   quarter of 2020 to the third quarter of 2026: 189 dated overflows in 27 quarters (2026-09-11 the newest, structure 35,
-#   47 minutes); 30 dates the table's own notes call "not an overflow to the river" set apart; 7 months unread (July and
+#   47 minutes); 30 dates the table's own notes call "not an overflow to the river" set apart; 8 months unread (July and
 #   August 2026: pages without a text layer; April to June 2023: an encrypted file; August 2024: a date written
-#   "8/3/20024"; January 2020: a note that cannot be tied to one of two dates).
+#   "8/3/20024"; February 2024: the section runs onto attached pages with no text; January 2020: a note that cannot be
+#   tied to one of two dates).
 # Records: one per date at a structure, cso, status ended with no end time (DC Water gives a duration, raw.duration_*),
 #   day precision (data/rules.json unresolved.day_start_caution), published_at the report's document date. Structures
 #   are tied to registry outfalls only through DC Water's Table 2-1 "Associated NPDES Outfall": 14 to 011A, 15 and 15A

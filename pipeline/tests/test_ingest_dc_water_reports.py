@@ -7,6 +7,7 @@ Run from pipeline/: python -m pytest tests -q
 from __future__ import annotations
 
 import json
+import re
 from datetime import UTC, datetime
 
 import pytest
@@ -42,6 +43,7 @@ Outfall Structure 1A None This structure has been bulk headed. Overflows are no 
 Outfall Structure 2 None N/A
 Outfall Sewer Control Gates Operational Status Position
 Outfall Sewer Control Gate No.1 Operational Open
+4. SOLIDS AND FLOATABLES CONTROL
 """
 
 SEP_2020 = """
@@ -83,6 +85,7 @@ the upstream levels were significantly lower than the low-level threshold.
 overflow to the river as the upstream levels were significantly lower than the low-level threshold.
 6. On 9/10/20, the structure deflated during a storm and the overflow reached the river.
 7. On 9/30/20, Structure 35 deflated due to a blower failure. This was not an overflow to the river.
+4. SOLIDS AND FLOATABLES CONTROL
 """
 
 
@@ -413,7 +416,8 @@ def test_sso_rows_keep_only_the_safe_fields():
     # two rows reported in the same second keep distinct ids that do not hold a house number
     same = [r["source_record_id"] for r in recs if r["reported_at"] == "2024-01-12T09:24"]
     assert len(set(same)) == 2 and all(not any(c in x for c in ("7 ", "8 ")) for x in same)
-    assert {r["source_record_id"] for r in recs if r["reported_at"] == "2026-01-20T00:44"} == {"2026-01-20T00:44:24.607"}
+    [pi] = [r["source_record_id"] for r in recs if r["reported_at"] == "2026-01-20T00:44"]
+    assert re.fullmatch(r"2026-01-20T00:44:24\.607-[0-9a-f]{8}", pi)
 
 
 def test_sso_changed_columns_or_an_empty_file_fail():
@@ -464,4 +468,110 @@ def test_safe_location_forms():
     assert S.safe_location("1234-B FIRST ST NW") == ("[house number removed] FIRST ST NW", None)
     assert S.safe_location("@41ST ST @AMES ST NE") == ("41ST ST and AMES ST NE", None)
     assert S.safe_location("")[0] is None
-    assert S.streets("41ST ST and AMES ST NE") == {"41ST STREET", "AMES STREET"}
+    assert S.streets("41ST ST and AMES ST NE") == {"41ST STREET NE", "AMES STREET NE"}
+
+
+# ---------------------------------------------------------------- review fixes (Astra, 2026-11-16)
+
+def test_review_sso_location_and_volume_keep_only_validated_text():
+    assert S.safe_location("12 ELM ST NW PAT EXAMPLE")[0] is None              # words after the street: withheld
+    assert S.safe_location("@CLARA BARTON PKY @MARYLAND LINE NW")[0] == "CLARA BARTON PKY and MARYLAND LINE NW"
+    rows, _ = S.parse(SSO_CSV.replace(",40,12 EXAMPLE AVE NE", ",near 12 Example Ave,12 EXAMPLE AVE NE"))
+    r = next(x for x in S.to_records(rows, "t") if x["reported_at"] == "2025-10-20T09:08")
+    assert r["raw"]["volume_as_given"] is None and r["volume_gal"] is None and "Example" not in json.dumps(r)
+
+
+def test_review_sso_ids_do_not_depend_on_other_rows():
+    rows, _ = S.parse(SSO_CSV)
+    full = {r["reported_at"] + r["raw"]["location_streets"]: r["source_record_id"]
+            for r in S.to_records(rows, "t") if r["reported_at"] == "2024-01-12T09:24"}
+    one = [r for r in rows if not (r["reported_at"] == "2024-01-12T09:24" and "FERN" in (r["location"] or ""))]
+    alone = {r["reported_at"] + r["raw"]["location_streets"]: r["source_record_id"]
+             for r in S.to_records(one, "t") if r["reported_at"] == "2024-01-12T09:24"}
+    k = next(iter(alone))
+    assert alone[k] == full[k]
+    prev = {"records": S.to_records(rows, "t")}
+    now = S.to_records(one, "t2")
+    assert len(now) + len(S.carry_forward(prev, now, "t2")) == len(rows)
+    # an exact repeat of the kept fields is one report
+    rows2, _ = S.parse(SSO_CSV + "9999998,2024-01-12 09:24:00.0000000,700,8 FERN ST SE,again\r\n")
+    assert len({r["source_record_id"] for r in S.to_records(rows2, "t")}) == len(rows)
+
+
+def test_review_sso_quadrants_must_agree():
+    rows, _ = S.parse(SSO_CSV.replace("7 KENT ST NW", "7 K ST NW"))
+    recs = S.to_records(rows, "t")
+    epa = [{"event_id": "echo:se", "started_at": "2024-01-12T08:00", "ended_at": None, "location_text": "SSO AT K ST SE"}]
+    assert S.link_duplicates(recs, epa) == 0
+    epa[0]["location_text"] = "SSO AT K ST NW"
+    assert S.link_duplicates(recs, epa) == 1
+
+
+def test_review_retention_by_month_when_only_some_months_are_read():
+    oct_ = SEP_2026.replace("September 2026", "October 2026").replace("9/4/26", "10/4/26").replace("9/11/26", "10/11/26")
+    st_all, _ = _state_with([[SEP_2026]])
+    prev = {"records": Q.records(st_all, REGISTRY) + [
+        {**r, "source_record_id": r["source_record_id"].replace("09", "08"), "event_id": r["event_id"] + "x",
+         "raw": {**r["raw"], "month_table": "2026-08"}} for r in Q.records(st_all, REGISTRY)]}
+    st_part, _ = _state_with([[GLYPH_PAGE, SEP_2026]])
+    kept = Q.retained(prev, st_part)
+    assert {r["raw"]["month_table"] for r in kept} == {"2026-08"} and len(kept) == 2
+    del oct_
+
+
+def test_review_an_unreadable_continuation_page_leaves_the_month_unread():
+    head, notes = SEP_2020.split("Notes:")
+    m = Q.parse_report([head.replace("Report for September 2020", "Report for September 2020"), GLYPH_PAGE], 2020, 3)
+    assert m["months"]["2020-09"]["status"] == "unread"
+    # a footnote mark with no note in the section is unresolved
+    marked = month_text("152 2/14/20 0 hrs. 1 mins\n" + QUIET)
+    assert Q.parse_month(marked, "2020-02")["status"] == "unread"
+    assert Q.parse_month(month_text("15 None N/A\n" + QUIET.replace("35 None N/A", "351 None N/A")), "2020-02")[
+        "status"] == "read"
+
+
+def test_review_an_unknown_structure_row_fails_the_month():
+    t = month_text("15 None N/A\n" + QUIET + "36 9/12/26 5mins Deflated\n")
+    assert "unknown structure" in Q.parse_month(t, "2020-02")["reason"]
+    t = month_text("15 None N/A\n" + QUIET + "36 None N/A\n")
+    assert "unknown structure" in Q.parse_month(t, "2020-02")["reason"]
+
+
+def test_review_a_revision_that_denies_a_date_removes_its_record():
+    denied = SEP_2026.replace("Notes:\n", "Notes:\n1. On 9/11/26, Structure 35 deflated. This was not an overflow to the "
+                                          "river.\n").replace("35 9/11/26 47mins", "351 9/11/26 47mins")
+    state, _ = _state_with([[SEP_2026], [denied]])
+    ids = {r["source_record_id"] for r in Q.records(state, REGISTRY)}
+    assert ids == {"s15-2026-09-04-1"}
+
+
+def test_review_a_readable_table_2_1_without_the_structure_ties_nothing():
+    st = Q.structure_table([TABLE_2_1.replace("35 Northeast of Roosevelt Bridge, NW 021 04/09/2026  *\n", "")])
+    of, basis = Q.tie({"structures": st}, "35")
+    assert of is None and "text layer" not in basis
+
+
+def test_review_a_failed_reread_keeps_health_false(tmp_path, monkeypatch):
+    state, _ = _state_with([[SEP_2026]])
+    Q.read_quarter(state, {"quarter": "2026Q3", "year": 2026, "q": 3, "url": "u2", "published": None}, None,
+                   "2026-12-20T00:00:00Z", "report not fetched: ConnectionError")
+    assert "2026Q3" in state["pending"]
+    orig = Q.pdf_pages
+    Q.pdf_pages = lambda c: [SEP_2026]
+    try:
+        Q.read_quarter(state, {"quarter": "2026Q3", "year": 2026, "q": 3, "url": "u2", "published": None}, b"x",
+                       "2026-12-21T00:00:00Z")
+    finally:
+        Q.pdf_pages = orig
+    assert "2026Q3" not in state["pending"]
+
+
+def test_review_backfill_follows_pages_to_the_end(monkeypatch):
+    nav = lambda n: "".join(f'<a href="?term_node_tid_depth=50&amp;page={k}">{k}</a>' for k in range(n + 2))
+    pages = {Q.INDEX: (INDEX_HTML.split("<a href=\"?")[0] + nav(0)).encode()}
+    for n in range(1, 12):
+        pages[f"{Q.INDEX}&page={n}"] = ("<table></table>" + (nav(n) if n < 11 else nav(9))).encode()
+    asked = []
+    monkeypatch.setattr(Q, "fetch", lambda u, timeout=120: asked.append(u) or pages[u])
+    listed, odd = Q.read_index(True)
+    assert f"{Q.INDEX}&page=11" in asked

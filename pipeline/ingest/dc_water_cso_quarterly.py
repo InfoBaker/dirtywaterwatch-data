@@ -105,7 +105,8 @@ FIRST_QUARTER = (2020, 1)
 PARSER_VERSION = 1
 REREAD_DAYS = 30
 INDEX_EVERY_H = 24
-MAX_INDEX_PAGES = 8
+MAX_INDEX_PAGES = 40
+SECTION_PAGES = 4         # Table 2-7's page, its notes, section 3 and section 4's heading
 MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
                "November", "December"]
 
@@ -137,9 +138,13 @@ DATE = re.compile(r"(?<![\d/])(\d{1,2})/(\d{1,2})/(\d{2,5})(?![\d/])")
 DURATION = re.compile(r"(?<![\w/])(?:(\d+)\s*(?:hrs?|hours?)\.?,?\s*(?:(\d+)\s*(?:mins?|minutes?)\.?)?|(\d+)\s*(?:mins?|minutes?)\.?)"
                       r"(?:,?\s*(\d+)\s*(?:secs?|seconds?|s)\b\.?)?", re.I)
 FOOTNOTES = r"(?:\s*\d{1,2}(?:\s*,\s*\d{1,2})*)?"
+# a row that starts like a structure's (a number or 'Outfall Structure <x>', then a date or 'None') but is none of the
+# known labels: the table changed, and its dates must never fall to the row above
+UNKNOWN_ROW = re.compile(r"^\s*(?:Outfall\s+Structure\s+\w+|\d{1,3}\s*[A-Za-z]?(?:\s*\([^)]*\))?(?:\d{1,2}(?:\s*,\s*\d{1,2})*)?)"
+                         r"\s+(?:\d{1,2}/\d{1,2}/\d{2}|None\b)", re.I)
 GLYPHS = re.compile(r"(?:^|(?<=\s))/i?\d+(?=\s|/|$)", re.M)
 REPORT_FOR = re.compile(r"Report\s+for\s+(" + "|".join(MONTH_NAMES) + r")\s+(\d{4})", re.I)
-NOTE = re.compile(r"(?m)^\s*(\d{1,2})\.\s+(?=On\b|Structure|The\b|This\b|During\b|A\b|Due\b)")
+NOTE = re.compile(r"(?m)^\s*(\d{1,2})\.\s+(?=[A-Z][a-z]|A\b)")     # a numbered note; never "3. DRY WEATHER"
 DENIAL = re.compile(r"\b(?:was|were|is)\s+not\s+(?:an?\s+)?overflows?\s+(?:to|into)\s+the\s+(?:river|receiving\s+water)|"
                     r"\bnot\s+discharged\s+to\s+the\s+river|\bno\s+overflow\s+(?:to|into|occurred\s+to)\s+the\s+river", re.I)
 NOTE_STRUCTURES = re.compile(r"Structures?\s+((?:(?:\d{1,2}\s*A?)(?:\s*\(\s*E\s*&\s*W\s*\))?(?:\s*(?:,|and|&)\s*)?)+)", re.I)
@@ -185,7 +190,7 @@ def parse_index(html: str, base: str = INDEX) -> tuple[list[dict], list[dict]]:
 def index_pages(html: str) -> int:
     """The number of list pages the first page links to (page=0 .. page=N)."""
     ns = [int(x) for x in re.findall(r"[?&](?:amp;)?page=(\d+)", html)]
-    return min(max(ns, default=0) + 1, MAX_INDEX_PAGES)
+    return max(ns, default=0) + 1
 
 
 # ---------------------------------------------------------------- reading a report
@@ -220,7 +225,9 @@ def _page_month(page: str) -> str | None:
 
 def month_sections(pages: list[str]) -> dict[str, tuple[int, str]]:
     """{YYYY-MM: (first page number, the text of Table 2-7 to the end of section 3)}: from the page that holds
-    Table 2-7's header to the heading of section 4 (at most the next page)."""
+    Table 2-7's header to the heading of section 4 (at most SECTION_PAGES pages of the same month). A section whose
+    end is not found on text (a page on the way has no text layer, or no page holds the heading) is returned with the text None: its notes
+    may be on the page that cannot be read, so the month is unread (Astra review 2026-11-16 P1)."""
     out = {}
     for i, p in enumerate(pages):
         if no_text_layer(p) or not HEADER.search(p):
@@ -228,15 +235,17 @@ def month_sections(pages: list[str]) -> dict[str, tuple[int, str]]:
         month = _page_month(p)
         if month is None or month in out:
             continue
-        text = p
-        if not SECTION_END.search(p) and i + 1 < len(pages) and not no_text_layer(pages[i + 1]) \
-                and not HEADER.search(pages[i + 1]):
-            nxt = pages[i + 1]
-            cut = SECTION_END.search(nxt)
-            text = p + "\n" + (nxt[:cut.start()] if cut else nxt)
-        else:
-            cut = SECTION_END.search(p)
-            text = p[:cut.start()] if cut else p
+        # the section runs over the following pages of the same month (notes, section 3) to section 4's heading
+        parts, text = [], None
+        for j in range(i, min(i + SECTION_PAGES, len(pages))):
+            pj = pages[j]
+            if j > i and (no_text_layer(pj) or HEADER.search(pj) or _page_month(pj) not in (None, month)):
+                break
+            cut = SECTION_END.search(pj)
+            if cut:
+                text = "\n".join(parts + [pj[:cut.start()]])
+                break
+            parts.append(pj)
         out[month] = (i + 1, text)
     return out
 
@@ -281,6 +290,10 @@ def _rows(block: str, labels, month: str, problems: list[str]) -> dict[str, dict
         if not line.strip():
             continue
         hit = _label_line(line, labels)
+        if not hit and UNKNOWN_ROW.match(line):
+            problems.append(f"{month}: an unknown structure row in Table 2-7 (a changed table)")
+            cur = None
+            continue
         if hit:
             cur, marks, rest = hit
             if cur in rows:
@@ -356,6 +369,13 @@ def parse_month(text: str, month: str) -> dict:
             dwo = {"month": month, "stated": m.group(1).lower(),
                    "outfalls": sorted({x.zfill(3) for x in re.findall(r"(?:CSO|Outfall)\s*#?\s*(\d{3}[A-Za-z]?)",
                                                                        m.group(4) or "")})}
+    notes_here = {int(x.group(1)) for x in NOTE.finditer(text)}
+    for k, r in list(dams.items()) + list(sewers.items()):
+        # a mark on a row with dates must have its note (it may deny one); a 'None' row has no date to deny
+        lost = [x for x in r.get("marks", []) if x not in notes_here] if r["dates"] else []
+        if lost:
+            problems.append(f"{month}: structure {k} carries note mark(s) {', '.join(map(str, lost))} with no such "
+                            "note in the section")
     for n in denials:
         if n["dates"]:
             continue
@@ -421,7 +441,11 @@ def parse_report(pages: list[str], year: int, q: int) -> dict:
     blank = sum(1 for p in pages if no_text_layer(p))
     months = {}
     for month in quarter_months(year, q):
-        if month in sections:
+        if month in sections and sections[month][1] is None:
+            months[month] = {"status": "unread", "page": sections[month][0],
+                             "reason": (f"{month}: Table 2-7's section runs onto a page that cannot be read, or its "
+                                        "end (section 4) was not found")}
+        elif month in sections:
             page, text = sections[month]
             months[month] = {**parse_month(text, month), "page": page}
         else:
@@ -453,12 +477,16 @@ def read_quarter(state: dict, entry: dict, content: bytes | None, at: str, error
            "attempts": (prev.get("attempts") or [])[-9:] + [attempt]}
     months = dict(prev.get("months") or {})
     problems = []
+    pend = state.setdefault("pending", {})
     if error is not None:
         problems.append(f"{key}: {error}")
+        # a failed fetch or an unreadable copy stays named until a copy of this quarter is read (Astra review P2)
+        pend[key] = {"reason": error, "since": (pend.get(key) or {}).get("since") or at, "last_tried": at}
         for m in quarter_months(entry["year"], entry["q"]):
             if (months.get(m) or {}).get("status") != "read":
                 months[m] = {"status": "unread", "reason": f"{m}: {error}", "page": None}
     else:
+        pend.pop(key, None)
         rep.update(sha256=sha, read_at=at, parser_version=PARSER_VERSION, pages=parsed["pages"],
                    pages_without_text=parsed["pages_without_text"], structures=parsed["structures"])
         for m, new in parsed["months"].items():
@@ -471,8 +499,10 @@ def read_quarter(state: dict, entry: dict, content: bytes | None, at: str, error
                     months[m] = new
                 continue
             ids = {_rid(r) for r in new["rows"]}
+            denied = {(a["structure"], a["date"]) for a in new.get("set_apart") or []}
+            # a row the new copy no longer lists stays (marked); one the new copy's notes deny does not
             gone = [{**r, "not_in_revision": {"sha256": sha, "read_at": at}} for r in old.get("rows") or []
-                    if old.get("status") == "read" and _rid(r) not in ids]
+                    if old.get("status") == "read" and _rid(r) not in ids and (r["structure"], r["date"]) not in denied]
             months[m] = {**new, "rows": new["rows"] + gone, "read_at": at, "sha256": sha}
     rep["months"] = months
     reps[key] = rep
@@ -508,7 +538,9 @@ def tie(rep: dict, structure: str) -> tuple[str | None, str]:
     own = rep.get("structures")
     if structure not in STRUCTURE_OUTFALL:
         return None, "an outfall-sewer structure: Table 2-1 lists no outfall for it, so it is tied to none"
-    if own is not None and structure in own:
+    if own is not None:
+        if structure not in own:
+            return None, "the report's own Table 2-1 does not list this structure, so it is tied to no outfall"
         if own[structure] is None:
             return None, "the report's own Table 2-1 gives this structure more than one outfall, or none: tied to none"
         return own[structure], "the report's own Table 2-1 ('Associated NPDES Outfall')"
@@ -589,15 +621,15 @@ def link_duplicates(recs: list[dict], rows: list[dict]) -> int:
 
 
 def retained(prev: dict, state: dict) -> list[dict]:
-    """The previous events file's records of quarters the state holds no read month for: never lost to a missing or
-    emptied state file."""
-    held = {k for k, v in (state.get("reports") or {}).items()
-            if any(m.get("status") == "read" for m in (v.get("months") or {}).values())}
+    """The previous events file's records of months the state holds no read of (a missing or emptied state file, a
+    month a later copy could not read): never lost, judged month by month (Astra review 2026-11-16 P1)."""
+    held = {(k, m) for k, v in (state.get("reports") or {}).items()
+            for m, mv in (v.get("months") or {}).items() if mv.get("status") == "read"}
     out = []
     for r in prev.get("records") or []:
-        if isinstance(r, dict) and r.get("source_record_id") and (r.get("raw") or {}).get("quarter") not in held:
-            out.append({**r, "raw": {**(r.get("raw") or {}),
-                                     "retained_from": "the previous events file (no read of this quarter in the state)"}})
+        raw = (r or {}).get("raw") or {} if isinstance(r, dict) else {}
+        if isinstance(r, dict) and r.get("source_record_id") and (raw.get("quarter"), raw.get("month_table")) not in held:
+            out.append({**r, "raw": {**raw, "retained_from": "the previous events file (no read of this month in the state)"}})
     return out
 
 
@@ -621,7 +653,8 @@ def due(state: dict, listed: list[dict], now: str, refresh: bool = False) -> lis
         if refresh or rep is None or rep.get("url") != e["url"] or (rep.get("parser_version") or 0) < PARSER_VERSION:
             out.append(e)
             continue
-        unread = any(m.get("status") != "read" or m.get("reread_failed") for m in (rep.get("months") or {}).values())
+        unread = any(m.get("status") != "read" or m.get("reread_failed") for m in (rep.get("months") or {}).values()) \
+            or e["quarter"] in (state.get("pending") or {})
         last = max([a.get("read_at") or "" for a in rep.get("attempts") or []] or [""])
         if (e["quarter"] in newest or unread) and _age_days(now, last) >= REREAD_DAYS:
             out.append(e)
@@ -640,10 +673,17 @@ def read_index(backfill: bool) -> tuple[list[dict], list[dict]]:
     if not listed:
         raise RuntimeError("the publications list gave no quarterly report (a changed page)")
     if backfill:
-        for n in range(1, index_pages(first)):
-            more, o = parse_index(fetch(f"{INDEX}&page={n}", 120).decode("utf-8", "replace"))
+        # every page the pages themselves link to, until none links further; a cap reached is a failed read
+        last, n = index_pages(first) - 1, 1
+        while n <= last:
+            if n >= MAX_INDEX_PAGES:
+                raise RuntimeError(f"the list has more than {MAX_INDEX_PAGES} pages; not all were read")
+            page = fetch(f"{INDEX}&page={n}", 120).decode("utf-8", "replace")
+            more, o = parse_index(page)
             listed += more
             odd += o
+            last = max(last, index_pages(page) - 1)
+            n += 1
     return listed, odd
 
 
@@ -683,6 +723,7 @@ def main(argv=None) -> int:
     dups = link_duplicates(recs, echo_rows())
     unread = unread_months(state)
     errors += [f"{m}: {why}" for m, why in sorted(unread.items())]
+    errors += [f"{k}: {v.get('reason')} (since {v.get('since')})" for k, v in sorted((state.get("pending") or {}).items())]
     reps = state.get("reports") or {}
     meta = {"registry_ids": [REGISTRY_ID], "index": INDEX, "first_quarter": quarter_key(*FIRST_QUARTER),
             "quarters_read": {k: {"published": v.get("published"),

@@ -74,33 +74,57 @@ SUFFIX = {"ST": "STREET", "STREET": "STREET", "AVE": "AVENUE", "AV": "AVENUE", "
 QUADRANTS = {"NW", "NE", "SE", "SW"}
 
 
+STREET_PART = re.compile(r"^(?:[A-Z][A-Z'.-]*|\d{1,3}(?:ST|ND|RD|TH))(?: (?:[A-Z][A-Z'.-]*|\d{1,3}(?:ST|ND|RD|TH)))* "
+                         r"(?:ST|STREET|AVE?|AVENUE|RD|ROAD|PKY|PKWY|PARKWAY|PL|PLACE|DR|DRIVE|CIR|CIRCLE|BLVD|BOULEVARD|"
+                         r"TER|TERRACE|CT|COURT|LN|LANE|WAY|LINE)(?: (?:NW|NE|SE|SW))?$", re.I)
+
+
 def safe_location(loc: str) -> tuple[str | None, str | None]:
-    """(the Location's street names with no house number, why it was withheld or None)."""
+    """(the Location's street names with no house number, why it was withheld or None). Every part must be a street
+    name (words or an ordinal ending in a street word, a quadrant after it); anything else withholds the location."""
     t = " ".join((loc or "").replace("\\", " ").split())
     if not t:
         return None, "the file gives no location"
     if t.startswith("@") or " @" in t:
         parts = [p.strip() for p in t.split("@") if p.strip()]
-        out = " and ".join(parts)
+        out, check = " and ".join(parts), parts
     else:
         # a house number (with a suffix or a range) or a block number ahead of the street
-        out = re.sub(r"^\d{1,6}(?:-?[A-Za-z]\b|-\d{1,6}[A-Za-z]?|\s*1/2)?\s+(?:BLOCK\s+OF\s+|BLK\s+)?", HOUSE_NUMBER_REMOVED + " ", t,
-                     flags=re.I)
-    rest = out.replace(HOUSE_NUMBER_REMOVED, " ")
-    if any(re.search(r"\d", w) and not ORDINAL.match(w) for w in rest.split()):
-        return None, "the location holds a figure other than a street name's and is withheld"
+        out = re.sub(r"^\d{1,6}(?:-?[A-Za-z]\b|-\d{1,6}[A-Za-z]?|\s*1/2)?\s+(?:BLOCK\s+OF\s+|BLK\s+)?",
+                     HOUSE_NUMBER_REMOVED + " ", t, flags=re.I)
+        check = [out.replace(HOUSE_NUMBER_REMOVED, "").strip()]
+    if not all(STREET_PART.match(p) for p in check):
+        return None, "the location is not only street names and is withheld"
     return out, None
 
 
 def streets(loc: str | None) -> set[str]:
-    """The normalised street names of a safe location ('HAWAII AVENUE', '2ND STREET')."""
+    """The normalised street names of a location, each with its quadrant when the location gives one
+    ('HAWAII AVENUE NE', '2ND STREET'): K Street NW and K Street SE are different streets."""
+    text = (loc or "").replace(HOUSE_NUMBER_REMOVED, " ").upper()
+    quad = re.findall(r"\b(NW|NE|SE|SW)\b", text)
+    q = quad[-1] if len(set(quad)) == 1 else None
     out = set()
-    for part in re.split(r"\band\b|&|@|,|\(|\)", (loc or "").replace(HOUSE_NUMBER_REMOVED, " "), flags=re.I):
-        words = [w.upper().strip(".") for w in part.split() if w.upper().strip(".") not in QUADRANTS]
-        words = [w for w in words if not re.fullmatch(r"\d+", w)]
-        if len(words) >= 2 and words[-1] in SUFFIX:
-            out.add(" ".join(words[:-1] + [SUFFIX[words[-1]]]))
+    for part in re.split(r"\band\b|&|@|,|\(|\)|\bAT\b|\bNEAR\b|\bALONG\b", text, flags=re.I):
+        words = [w.strip(".") for w in part.split()]
+        words = [w for w in words if w not in QUADRANTS and not re.fullmatch(r"\d+", w)]
+        for i, w in enumerate(words):
+            if w in SUFFIX and i >= 1:
+                name = " ".join(words[max(0, i - 3):i] + [SUFFIX[w]])
+                out.add(name + (f" {q}" if q else ""))
+                break
     return out
+
+
+def same_street(mine: set[str], theirs: set[str]) -> bool:
+    """A shared street name whose quadrants do not differ (one side may give none)."""
+    for a in mine:
+        for b in theirs:
+            an, aq = (a[:-3], a[-2:]) if a[-3:-2] == " " and a[-2:] in QUADRANTS else (a, None)
+            bn, bq = (b[:-3], b[-2:]) if b[-3:-2] == " " and b[-2:] in QUADRANTS else (b, None)
+            if (an == bn or an.endswith(" " + bn) or bn.endswith(" " + an)) and (aq is None or bq is None or aq == bq):
+                return True
+    return False
 
 
 def reported(v: str) -> tuple[str | None, str | None]:
@@ -148,21 +172,26 @@ def parse(text: str) -> tuple[list[dict], int]:
             continue
         loc, why = safe_location(r["Location"])
         rows.append({"reported_at": at, "id": rid, "volume_gal": volume(r["SpillVolInGal"]),
-                     "volume_as_given": r["SpillVolInGal"].strip() or None, "location": loc, "location_withheld": why})
+                     "volume_as_given": r["SpillVolInGal"].strip() if volume(r["SpillVolInGal"]) is not None else None, "location": loc, "location_withheld": why})
     if not rows and not bad:
         raise ValueError("the file has no rows")
     return rows, bad
 
 
+def row_id(r: dict) -> str:
+    """The Date Reported to the second, with a digest of the row's own kept street names and gallons: never the premise
+    id, the row order, another row or a house number."""
+    key = f"{r['location'] or ''}|{r['volume_as_given'] or ''}"
+    return f"{r['id']}-{hashlib.sha1(key.encode()).hexdigest()[:8]}"
+
+
 def to_records(rows: list[dict], fetched_at: str) -> list[dict]:
-    ids: dict[str, int] = {}
+    out, seen = [], set()
     for r in rows:
-        ids[r["id"]] = ids.get(r["id"], 0) + 1
-    out = []
-    for r in rows:
-        rid = r["id"]
-        if ids[rid] > 1:
-            rid += "-" + hashlib.sha1((r["location"] or "").encode()).hexdigest()[:8]
+        rid = row_id(r)
+        if rid in seen:
+            continue                    # the same kept fields twice: one report
+        seen.add(rid)
         raw = {"date_reported": r["reported_at"], "volume_as_given": r["volume_as_given"],
                "location_streets": r["location"], "fields_kept": KEPT, "fields_dropped": DROPPED,
                "date_basis": "the file's Date Reported; it gives no start or end of the spill",
@@ -223,9 +252,7 @@ def link_duplicates(recs: list[dict], rows: list[dict]) -> int:
                 continue
             text = " ".join(str(row.get(k) or "") for k in ("location_text", "outfall_name")) + " " + \
                 str((row.get("raw") or {}).get("location_text") or (row.get("raw") or {}).get("location") or "")
-            theirs = streets(re.sub(r"\b(?:at|near|by)\b", ",", text, flags=re.I)) | {
-                s2 for s2 in mine if s2 in " ".join(text.upper().split()).replace("PKWY", "PARKWAY")}
-            if mine & theirs:
+            if same_street(mine, streets(text.replace("PKWY", "PARKWAY"))):
                 cands.append(row["event_id"])
         if len(cands) == 1:
             rec["duplicate_of"] = cands[0]
