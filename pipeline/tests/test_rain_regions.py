@@ -16,6 +16,9 @@ from pathlib import Path
 
 import pytest
 
+# its own world of outfalls: never the separate sewer points the committed rules switch on (conftest.py)
+pytestmark = pytest.mark.usefixtures("no_separate_sewer_points")
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
