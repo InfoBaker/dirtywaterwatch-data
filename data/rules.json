@@ -638,7 +638,9 @@
     }
    ],
    "name_min_area_km2": 100,
-   "min_area_km2": null,
+   "min_area_km2": 50,
+   "min_mean_width_km": 1.5,
+   "narrow_min_length_km": 40,
    "each_way_km": 20,
    "shore_m": 500,
    "gap_km": 3,

@@ -35,18 +35,31 @@ NOW = datetime(2026, 8, 10, 12, 0, tzinfo=UTC)
 H = timedelta(hours=1)
 PERMIT = "VT0100001"
 RULES_FILE = json.loads((ROOT / "data" / "rules.json").read_text())
+SIZE_KEYS = ("min_area_km2", "min_area_kinds", "min_mean_width_km", "narrow_min_length_km", "min_ring_km")
+
+
+def rules_off() -> dict:
+    """The rules file with the size rule off: every size-rule key absent, whatever the committed file says (the lake
+    switch set three of them on 2026-11-16). Tests of the rule-off behaviour read this, never the committed state."""
+    r = copy.deepcopy(RULES_FILE)
+    for k in SIZE_KEYS:
+        r["reach"]["shoreline"].pop(k, None)
+    return r
+
+
+RULES_OFF = rules_off()
 
 
 def rules_on(min_area=50, kinds=None) -> dict:
-    """The rules file with the size rule switched on (a scratch copy; the committed file stays off)."""
-    r = copy.deepcopy(RULES_FILE)
+    """The size rule on at min_area with no other size key (a scratch copy built from rules_off)."""
+    r = copy.deepcopy(RULES_OFF)
     r["reach"]["shoreline"]["min_area_km2"] = min_area
     if kinds is not None:
         r["reach"]["shoreline"]["min_area_kinds"] = kinds
     return r
 
 
-OFF = SH.rule(RULES_FILE)
+OFF = SH.rule(RULES_OFF)
 ON = SH.rule(rules_on())
 
 
@@ -79,10 +92,16 @@ BAYS = dict([
 
 # ---------------------------------------------------------------- which waters (build/shoreline.py)
 
-def test_the_committed_rules_file_ships_the_size_rule_off_and_does_not_name_its_new_keys():
+def test_the_committed_rules_file_has_the_lake_switch_on_with_the_narrow_floor_and_nothing_else():
+    """The lake switch (owner, 2026-11-16, decisions 26 and 28): lakes and reservoirs of 50 km2 or more, the long,
+    narrow ones (under 1.5 km wide on average and 40 km or more long) kept whole; bays and sounds and the islet floor
+    are later switches, so their keys are absent."""
     sh = RULES_FILE["reach"]["shoreline"]
-    assert sh["min_area_km2"] is None and "min_area_kinds" not in sh
-    assert OFF["min_area_kinds"] == ["lake", "reservoir"]
+    assert sh["min_area_km2"] == 50 and sh["min_mean_width_km"] == 1.5 and sh["narrow_min_length_km"] == 40
+    assert "min_area_kinds" not in sh and "min_ring_km" not in sh
+    committed = SH.rule(RULES_FILE)
+    assert SH.size_on(committed) and SH.size_kinds(committed) == {"lake", "reservoir"}
+    assert OFF["min_area_kinds"] == ["lake", "reservoir"] and OFF["min_area_km2"] is None
     assert not SH.size_on(OFF) and SH.size_on(ON)
 
 
@@ -250,7 +269,7 @@ def _build(records, reaches, rules=None, waters=None, registry=None, rain=None):
                                                   "meta": {}, "records": records}))
     S._GEOM_CACHE.clear()
     S._REACH_WATERS.clear()
-    rules = rules or RULES_FILE
+    rules = rules or RULES_OFF
     if rain is None:            # no rainfall in these builds unless a test gives its own caution
         rules = {**rules, "rain_likely": {**rules["rain_likely"], "enabled": False}}
     return S.build(now=NOW, write=False, events_dir=tmp, waters=copy.deepcopy(waters or WATERS),
@@ -275,14 +294,21 @@ def test_rule_off_the_big_lake_is_filled_whole_as_today_with_no_new_fields():
 
 def test_rule_off_the_build_is_the_same_with_the_keys_absent_or_null():
     a, ha = _build([WITH_POINT, NO_POINT], {})
-    nulls = copy.deepcopy(RULES_FILE)
-    nulls["reach"]["shoreline"]["min_area_km2"] = None
+    nulls = copy.deepcopy(RULES_OFF)            # every key present and null, against every key absent
+    nulls["reach"]["shoreline"].update(min_area_km2=None, min_mean_width_km=None, narrow_min_length_km=None,
+                                       min_ring_km=None)
     b, hb = _build([WITH_POINT, NO_POINT], {}, rules=nulls)
     drop = ("built",)
-    assert json.dumps({k: v for k, v in a.items() if k not in drop}, sort_keys=True, default=str) == \
-        json.dumps({k: v for k, v in b.items() if k not in drop}, sort_keys=True, default=str)
-    assert json.dumps({k: v for k, v in ha.items() if k not in drop}, sort_keys=True, default=str) == \
-        json.dumps({k: v for k, v in hb.items() if k not in drop}, sort_keys=True, default=str)
+
+    def bare(o):
+        """The build without its stamps and without the echo of the rule's own null keys (the rule as written)."""
+        if isinstance(o, dict):
+            return {k: bare(v) for k, v in o.items() if k not in drop and not (k in SIZE_KEYS and v is None)}
+        if isinstance(o, list):
+            return [bare(v) for v in o]
+        return o
+    assert json.dumps(bare(a), sort_keys=True, default=str) == json.dumps(bare(b), sort_keys=True, default=str)
+    assert json.dumps(bare(ha), sort_keys=True, default=str) == json.dumps(bare(hb), sort_keys=True, default=str)
 
 
 def test_on_a_report_that_starts_a_stretch_colours_the_stretch_and_the_outline_stays_grey():
@@ -356,7 +382,7 @@ def test_on_no_report_shows_less_than_with_the_rule_off():
 
 def test_on_a_rain_caution_with_no_stretch_keeps_the_whole_lake_colour(monkeypatch):
     base = S.event_intervals(ev("9", outfall_id="002"), "VT", NOW, water={**WATERS["big-lake-vt"], "slug": "big-lake-vt"},
-                             rules=RULES_FILE)[0]
+                             rules=RULES_OFF)[0]
     iv = {**base, "event_id": f"rain_likely:{PERMIT}:x", "rule": "rain_likely", "color": "yellow", "placement": None,
           "reach": None, "source_id": RL.SOURCE_ID}
     block = {"enabled": True, "rule": "rain_likely", "label": "x", "waters": {}, "problems": []}
@@ -374,7 +400,7 @@ def test_rain_caution_keeps_the_whole_lake_for_an_outfall_of_the_permit_with_no_
     rec = shore_rec()
     outs = [_row("001", "big-lake-vt", kind="cso"), _row("002", "big-lake-vt", None, None, kind="cso")]
     whole = RL.size_rule_whole(WATERS, rules_on())
-    assert whole == {"big-lake-vt", "big-res-vt"} and RL.size_rule_whole(WATERS, RULES_FILE) == set()
+    assert whole == {"big-lake-vt", "big-res-vt"} and RL.size_rule_whole(WATERS, RULES_OFF) == set()
     keys, tags, reach_of, _ = RL.targets(PERMIT, WATERS, outs, [], {rec["key"]: rec}, S.reach_waters, whole)
     assert keys == [rec["key"]] and tags == {"big-lake-vt": None} and reach_of == {"big-lake-vt": [rec["key"]]}
     # every outfall here has its stretch: the stretch alone
@@ -455,9 +481,9 @@ def test_the_overlay_of_a_part_filled_lake_carries_the_fill_colour_only():
 
 
 def test_out_rules_is_unchanged_with_the_rule_off_and_says_the_size_rule_with_it_on():
-    assert X.shoreline_rules(RULES_FILE) is RULES_FILE
+    assert X.shoreline_rules(RULES_OFF) is RULES_OFF
     on = X.shoreline_rules(rules_on())
-    sh, sh0 = on["reach"]["shoreline"], RULES_FILE["reach"]["shoreline"]
+    sh, sh0 = on["reach"]["shoreline"], RULES_OFF["reach"]["shoreline"]
     assert sh["min_area_kinds"] == ["lake", "reservoir"] and sh["min_area_km2"] == 50
     assert sh["doc"].startswith(sh0["doc"]) and sh["rationale"].startswith(sh0["rationale"])
     words = SH.size_texts(SH.rule(rules_on()))
@@ -587,3 +613,24 @@ def test_the_input_signature_index_gives_the_same_hash_as_the_record_by_record_w
     finally:
         R._SIG_INDEX.clear()
     assert rec["input_sig"] == alone
+
+
+def test_the_committed_file_publishes_the_lake_sentences_with_the_narrow_floor_and_no_bay_or_sound_words():
+    out = X.shoreline_rules(X.public_rules(RULES_FILE))["reach"]["shoreline"]
+    sh0 = RULES_FILE["reach"]["shoreline"]
+    added_doc = out["doc"][len(sh0["doc"]):].strip()
+    added = out["rationale"][len(sh0["rationale"]):].strip()
+    assert out["doc"].startswith(sh0["doc"]) and out["rationale"].startswith(sh0["rationale"])
+    assert added_doc == ("Other lakes and reservoirs of 19 square miles (50 square kilometres) or more are drawn the "
+                         "same way. A report on such a lake or reservoir that cannot be placed on the shore colours "
+                         "the whole water, as on a smaller one.")
+    assert added == ("We draw other lakes and reservoirs of 19 square miles (50 square kilometres) or more the same "
+                     "way. The 12-mile (20-kilometre) distance comes from studies on the Great Lakes and on ocean "
+                     "shores; on these smaller waters we apply it as a cautious distance, not a measurement. Where a "
+                     "water's whole shoreline is shorter than 25 miles (40 kilometres), the stretch covers all of it. "
+                     "A report on such a lake or reservoir that we cannot place on the shore colours the whole water, "
+                     "as on a smaller lake. Lakes and reservoirs narrower than 0.9 mile (1.5 kilometres) on average "
+                     "and longer than 25 miles (40 kilometres), such as reservoirs that fill a river valley, are still "
+                     "coloured as a whole: a stretch along one bank would leave the nearby opposite bank grey.")
+    assert not any(w in added + added_doc for w in (" bay", " sound", "Bay", "Sound"))
+    assert out["min_area_kinds"] == ["lake", "reservoir"] and not X.internal_wording(out)
