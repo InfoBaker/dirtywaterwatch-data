@@ -153,8 +153,11 @@ SOURCE_NOTES = {
     "echo-sewer-overflow": {"events": "The U.S. Environmental Protection Agency's sewer overflow records are limited: they hold only what operators file with the agency."},
     "ri-echo-dfr": {"events": "The U.S. Environmental Protection Agency's facility reports for Rhode Island are limited: they hold only what operators file with the agency."},
     "ri-nbc": {"events": "The Narragansett Bay Commission feed shows current overflows only; our record begins {first}."},
-    "me-cbep-portland-cso": {"events": "Portland's filings cover {first} to {last}, storm by storm, with the gallons at each outlet; each record is dated to the storm's first and last day. Some outlets were not metered in 2015."},
+    "me-cbep-portland-cso": {"events": "Portland's filings cover {first} to {last}, storm by storm, with the gallons at each outlet; each report is dated to the storm's first and last day. Only measured discharges are listed: several outlets were not metered in 2015, and a discharge with no measured volume is missing.",
+                             "volume": "Portland's sums leave out outlets that were not metered (several in 2015) and discharges with no measured volume."},
 }
+# Sources whose volume note is shown on the volume chart whenever they are in it (not only when they give ranges).
+VOLUME_NOTE_ALWAYS = {"me-cbep-portland-cso"}
 TOTAL_NOTES = {
     "me-dep-cso-annual": "Maine's Department of Environmental Protection reports one total per community and year, for all of its combined sewer outlets; the total is shown in full on each water the community's outlets reach. Event-days: calendar days with any combined sewer discharge in the community.",
     "echo-cso-dmr-monthly": "Monthly totals each operator files with the U.S. Environmental Protection Agency for each outlet (discharge monitoring reports). They describe the same discharges the state notices report, so they are shown here and never added to the discharge counts. A month with no row counts as zero inside the date range.",
@@ -858,7 +861,7 @@ def build_entity(bucket: Bucket, data: Data, spans: dict, per: dict, name: str |
         if n_without:
             cav.append(f"{n_without:,} of {n_with + n_without:,} discharge reports gave no volume as a number"
                        + (f" ({sum(ranged.values()):,} gave a range)" if ranged else "") + "; only numbers are summed.")
-        cav += [note(s, "volume") for s in sorted(ranged)]
+        cav += [note(s, "volume") for s in sorted(set(ranged) | (VOLUME_NOTE_ALWAYS & {ev.get("source_id") for ev in bucket.events}))]
         if implausible:
             cav.append(f"{len(implausible):,} {'report gives' if len(implausible) == 1 else 'reports give'} more than "
                        f"{MAX_EVENT_GALLONS / 1e9:g} billion gallons for a single discharge, which looks like an entry error; "

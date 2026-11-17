@@ -16,9 +16,10 @@ Source
     million gallons; radar rain at Portland 2.54 inches on 2019-12-14), and shows 0 in six cells the filing fills.
     A filed date outside the reporting year is read in the reporting year, and the record says so (date_as_filed).
     With it the filing totals 185.1 million gallons, against 184.5 in DEP's 2019 status report.
-  Both are static. The ingester reads tracked copies in data/reference/: CBEP's file as published (SHA256 checked) and
-  a numbers-only extract of the 2019 workbook (the workbook names a city contact; the extract keeps storm, dates,
-  outfall and cell). `python -m ingest.me_cbep_portland_cso --extract` rebuilds the extract from the pinned workbook.
+  Both are static. The ingester reads tracked copies in data/reference/: CBEP's file as published and a numbers-only
+  extract of the 2019 workbook, each checked against its SHA256 (the workbook names a city contact; the extract keeps
+  storm, dates, outfall and cell). `python -m ingest.me_cbep_portland_cso --extract` rebuilds the extract from the
+  pinned workbook.
   Terms: CBEP's archive is MIT-licensed for its code; its notice says the data belong to their providers and CBEP may
   post them "for study and non-commercial use". Records credit the City of Portland and PWD as filers and CBEP as
   publisher.
@@ -37,7 +38,8 @@ Records
   workbook (its row in raw).
 
 Failures
-  A missing or changed reference file writes ok=False with the reason (the previous records stay).
+  A missing or changed reference file, or one that cannot be read, writes ok=False with the reason (the previous
+  records stay).
 
 Run from pipeline/:  python -m ingest.me_cbep_portland_cso [--extract]
 """
@@ -70,6 +72,7 @@ MERGED_REF = DATA_DIR / "reference" / "cbep-portland-cso-2015-2019.csv"
 FILING_REF = DATA_DIR / "reference" / "portland-cso-2019-filing.csv"
 MERGED_SHA256 = "7d074e50c97cb68f6c6c1c53459cae20faf900c4ef08856f2336334f8fcfa7f0"
 FILING_XLSX_SHA256 = "3c1382d5e324eedd2d6eb4e1e83862bd28f7e9eb25a21672f0f44e68d912f209"   # the pinned workbook
+FILING_SHA256 = "08056506120738b9fa11b91e927cf9b188f53eb2a576e7f6f60801a9791447c4"   # the tracked extract (--extract prints it)
 FILING_YEAR = 2019
 PUBLISHED_AT = "2021-12-03"          # the commit that holds both files (CBEP's last change to the archive)
 PERMITS = ("ME0101435", "ME0102075")  # City of Portland CSOs; Portland Water District, East End
@@ -174,7 +177,8 @@ def write_filing_extract() -> int:
     w.writeheader()
     w.writerows(rows)
     FILING_REF.write_text(f"# extracted from {FILING_URL} (sha256 {digest})\n" + buf.getvalue())
-    print(f"{FILING_REF}: {len(rows)} cells; workbook sha256 {digest}")
+    print(f"{FILING_REF}: {len(rows)} cells; workbook sha256 {digest}; extract sha256 "
+          f"{hashlib.sha256(FILING_REF.read_bytes()).hexdigest()} (set FILING_SHA256 to it)")
     return 0
 
 
@@ -308,6 +312,8 @@ def main(argv=None) -> int:
         problems.append(f"{MERGED_REF.name} differs from the pinned file")
     if not FILING_REF.exists():
         problems.append(f"missing {FILING_REF.name}")
+    elif hashlib.sha256(FILING_REF.read_bytes()).hexdigest() != FILING_SHA256:
+        problems.append(f"{FILING_REF.name} differs from the pinned extract")
     if problems:
         write_events(SOURCE_ID, [], ok=False, error="; ".join(problems), meta=meta)
         print(f"{SOURCE_ID}: " + "; ".join(problems), file=sys.stderr)
@@ -315,8 +321,13 @@ def main(argv=None) -> int:
     counts = {"storms": 0, "outfall_columns": 0, "zero": 0, "blank_na_or_note": 0, "no_date": 0,
               "not_in_registry": []}
     place = Placer(registry_index(), me_waters_by_name(), dischargers())
-    records = merged_records(MERGED_REF.read_text(), place, counts)
-    records += filing_records(FILING_REF.read_text(), place, counts)
+    try:
+        records = merged_records(MERGED_REF.read_text(), place, counts)
+        records += filing_records(FILING_REF.read_text(), place, counts)
+    except (KeyError, ValueError, TypeError, csv.Error) as e:      # a file that matches its pin cannot do this
+        write_events(SOURCE_ID, [], ok=False, error=f"reference files could not be read: {e!r}", meta=meta)
+        print(f"{SOURCE_ID}: reference files could not be read: {e!r}", file=sys.stderr)
+        return 1
     records.sort(key=lambda e: (e["started_at"], e["event_id"]), reverse=True)
     meta["counts"] = counts
     path = write_events(SOURCE_ID, records, meta=meta)
