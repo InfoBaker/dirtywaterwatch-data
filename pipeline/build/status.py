@@ -371,6 +371,8 @@ RULES = {
     # data/rules.json unresolved.source_outage: a listed advisory whose source could not be read since (outage_hold)
     "outage_unconfirmed": ("unresolved", "Advisory listed by the authority; the source has not been readable since: "
                                          "end not confirmed"),
+    # data/rules.json unresolved.listed_ongoing: a row the source's list still shows as ongoing (listed_ongoing_intervals)
+    "listed_ongoing": ("unresolved", "Listed as ongoing by the source: end not confirmed"),
     "rain_advisory": ("yellow", "Precautionary rainfall advisory"),
     "advisory_unconfirmed": ("yellow", "Advisory with no reported status, issued less than 7 days ago"),
     # data/rules.json unresolved.sample_caution: a sample result the agency labels a risk but issues no advisory for
@@ -776,6 +778,12 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
             # (outage_hold, common.no_ok_read_since); not part of the record (record_hash leaves it out)
             r["_feed_health"] = {k: d[k] for k in ("fetched_at", "ok", "last_ok_at", "prev_ok_at",
                                                        "partial_before_ok_at") if k in d}
+            # the page's own "last updated" date at the file's last successful read (source time; the San Diego Water
+            # Board's table, meta.page_last_updated), for the listed-ongoing rule (listed_ongoing_intervals); only where
+            # the file's meta carries it, so every other feed's health is as before
+            page_date = (d.get("meta") or {}).get("page_last_updated")
+            if isinstance(page_date, str) and page_date.strip():
+                r["_feed_health"]["page_last_updated"] = page_date.strip()
             r.setdefault("source_id", sid)
             if live_up is not None:
                 st = own_state(r, sid)      # never the state of a live water it names (own_state)
@@ -3192,6 +3200,118 @@ def outage_hold(ev: dict, listed: datetime | None, cap: datetime, now: datetime,
     return iv
 
 
+def _listed_ongoing_cfg(ev: dict, rules) -> dict | None:
+    """data/rules.json unresolved.listed_ongoing when it is switched on and lists the record's source, else None."""
+    cfg = ((rules or {}).get("unresolved") or {}).get("listed_ongoing") or {}
+    if cfg.get("enabled") is not True or ev.get("source_id") not in (cfg.get("sources") or []):
+        return None
+    return cfg
+
+
+def _day_words(dt: datetime, ev: dict, state) -> str:
+    """A date for a public label, in the record's own zone ("Nov 16, 2026")."""
+    return dt.astimezone(event_zone(ev, state)).strftime("%b %-d, %Y")
+
+
+def _page_day_words(v) -> str | None:
+    """The page's own date as published (a bare ISO date, source time) for a public label, or None."""
+    try:
+        return datetime.strptime(str(v).strip()[:10], "%Y-%m-%d").strftime("%b %-d, %Y") if v else None
+    except ValueError:
+        return None
+
+
+def listed_ongoing_intervals(ev: dict, start: datetime, now: datetime, state, red, yellow, rules) -> list[dict] | None:
+    """data/rules.json unresolved.listed_ongoing (owner, 2026-11-16): a record of a listed source whose status is ongoing
+    with no end. The last read that listed the row is the record's fetched_at: the ingester rebuilds every row the table
+    shows at each successful read and keeps a row that left it unchanged, with raw._missing_from_table_since (ingest/
+    ca_sd_tijuana_table.py), and a failed read keeps the records as they were (common.write_events).
+      - Still listed at the last successful read: red for ongoing_red_days from the start, as today, then end not
+        confirmed (rule listed_ongoing, hatched) with no end, past unresolved_yellow_days, while the table lists it; a
+        table that cannot be read leaves that read standing, and the label says so with its date.
+      - Left the table with no end: red and listed_ongoing as above up to the last read that listed it, then the
+        ordinary end not confirmed (rule unresolved) to unresolved_yellow_days after that read (never before the
+        ordinary day 30 from the start), then the ordinary end-never-reported note to NOTE_DAYS after that read.
+      - Still in the table, but its end cell no longer reads ongoing and gives no end (status unknown, no end;
+        raw._ongoing_listing, set once by the ingester at the change; coordinator, 2026-11-16): the same fallback as a
+        row that left the table, counted from the last read that listed it as ongoing (last_listed_at there).
+    rule_applied keeps the page's own date (page_last_updated, source time, from the file's meta at its last
+    successful read) apart from the time of our last read that listed the row (last_listed_at, fetch time). None: the
+    rule does not apply (switched off, another source, no read time after the start): today's intervals."""
+    cfg = _listed_ongoing_cfg(ev, rules)
+    if cfg is None:
+        return None
+    raw = ev.get("raw") or {}
+    unmarked = None
+    if ev.get("status") == "ongoing":
+        listed = parse_time(ev.get("fetched_at"))
+    else:
+        ol = raw.get("_ongoing_listing")
+        if ev.get("status") != "unknown" or ev.get("ended_at") or not isinstance(ol, dict):
+            return None
+        listed, unmarked = parse_time(ol.get("last_listed_at")), ol.get("unmarked_since")
+    if listed is None or listed < start:      # a read at the start itself lists it (Astra review 2026-11-16 P1-2)
+        return None
+    u = (rules.get("unresolved") or {})
+    red_days = float(u.get("ongoing_red_days") or 7)
+    unres_days = float(u.get("unresolved_yellow_days") or 30)
+    health = ev.get("_feed_health") if isinstance(ev.get("_feed_health"), dict) else {}
+    missing = raw.get("_missing_from_table_since")
+    who = (cfg.get("listed_by") or {}).get(ev.get("source_id")) or ev.get("authority") or "the source"
+    red_until = start + timedelta(days=red_days)
+    base = {"rule": "unresolved.listed_ongoing", "listed_by": who, "last_listed_at": iso(listed),
+            "rationale": cfg.get("rationale"), "source": "data/rules.json"}
+    out = []
+    first = _iv(ev, start, red_until, "ongoing", red, yellow)
+    first["rule_applied"] = {"rule": "unresolved.ongoing_red_days", "days": red_days,
+                             "rationale": u.get("ongoing_red_rationale"), "source": "data/rules.json"}
+    if not missing and not unmarked:
+        # the table could not be read at the feed's latest attempt (an events file written with ok false keeps the
+        # records of the last successful read; a run that skips the read inside MIN_HOURS writes ok true)
+        unread = health.get("ok") is False
+        page = health.get("page_last_updated")
+        out.append(first)
+        iv = _iv(ev, red_until, None, "listed_ongoing", red, yellow)
+        iv["rule_applied"] = {**base, "page_last_updated": page, "source_unread_since": unread,
+                              **({"last_attempt_at": health.get("fetched_at")} if unread else {})}
+        when = [f"page last updated {_page_day_words(page)}"] if _page_day_words(page) else []
+        when.append(f"last read {_day_words(listed, ev, state)}" + (", not readable since" if unread else ""))
+        iv["label"] = f"Listed as ongoing by {who} ({'; '.join(when)}): end not confirmed"
+        iv["confirmed"] = iso(listed)
+        return out + [iv]
+    # the row left the table, or no longer reads ongoing, with no end: the ordinary 30 days and note, counted from the
+    # last read that listed it as ongoing; the label says what the source shows now
+    day = _day_words(listed, ev, state)
+    now_words = (f"Listed as ongoing by {who} at our read of {day}; the list no longer marks it ongoing and gives no end"
+                 if unmarked else
+                 f"Listed as ongoing by {who} at our read of {day}; the row has since left the list with no end")
+    gone = {"unmarked_since": unmarked} if unmarked else {"missing_from_list_since": missing}
+    hatch_until = max(start + timedelta(days=unres_days), listed + timedelta(days=unres_days))
+    first["end"] = min(red_until, hatch_until)
+    out.append(first)
+    if listed > red_until:
+        iv = _iv(ev, red_until, listed, "listed_ongoing", red, yellow)
+        iv["rule_applied"] = {**base, **gone}
+        iv["label"] = now_words
+        iv["confirmed"] = iso(listed)
+        out.append(iv)
+    after = {**base, "days": unres_days, **gone}
+    from_ = max(red_until, listed)
+    if hatch_until > from_:
+        iv = _iv(ev, from_, hatch_until, "unresolved", red, yellow)
+        iv["rule_applied"] = after
+        iv["label"] = now_words
+        out.append(iv)
+    note_until = max(hatch_until, listed + timedelta(days=NOTE_DAYS))
+    note = _iv(ev, hatch_until, note_until, "end_never_reported", red, yellow)
+    if note["end"] > note["start"]:
+        # no "assumed ended" text: the note counts from the last read that listed the row, and the rule's own
+        # rationale (rules_ref in the export) says what it means (Astra review 2026-11-16 P1-1)
+        note["rule_applied"] = after
+        out.append(note)
+    return out
+
+
 CARVED_RULES = ("advisory_active", "rain_advisory", "not_reconfirmed")
 
 
@@ -3653,6 +3773,11 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         return out
 
     if st == "ongoing" and end is None:
+        # a row the source's list still shows as ongoing (data/rules.json unresolved.listed_ongoing): None when the rule
+        # is off or does not cover the record's source, so every other record is as before
+        listed = listed_ongoing_intervals(ev, start, now, state, red, yellow, rules)
+        if listed is not None:
+            return listed
         return no_end(start, start + timedelta(days=red_days), "ongoing")
     if end is not None:
         out = [_iv(ev, start, end, "discharge", red, yellow)]
@@ -3674,6 +3799,12 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             for iv in out:
                 iv["ended_by"] = iso(bound)
         return out
+    if st == "unknown" and end is None and (ev.get("raw") or {}).get("_ongoing_listing"):
+        # a row its source's list showed as ongoing that no longer reads ongoing and gives no end (data/rules.json
+        # unresolved.listed_ongoing): None when the rule is off or does not cover the source
+        listed = listed_ongoing_intervals(ev, start, now, state, red, yellow, rules)
+        if listed is not None:
+            return listed
     # from the source's own report time: reported_at, else published_at, else the start; never a retrieval or
     # extract date that is later than the report (owner, 2026-11-03), and never before the start
     ds = u.get("day_start_caution") or {}
@@ -4325,6 +4456,13 @@ def _short_reason(iv: dict, ev: dict | None) -> str:
         return f"{et} of {start_txt(iv, ev)}: unresolved, no end reported{who}{at}"
     if rule == "end_never_reported":
         return f"{et} of {start_txt(iv, ev)}: unresolved, no end reported (off the map){who}"
+    if rule == "listed_ongoing":
+        # data/rules.json unresolved.listed_ongoing: the start with its year (such a row can be listed for years)
+        v = str(iv.get("started_at") or "").strip()
+        d = parse_time(v, event_zone(ev or {}, None)) if v else None
+        day = (_page_day_words(v) if re.fullmatch(r"\d{4}-\d{2}-\d{2}", v) else
+               d.astimezone(event_zone(ev or {}, None)).strftime("%b %-d, %Y") if d else start_txt(iv, ev))
+        return f"{et} of {day}: listed as ongoing by its source, end not confirmed{who}{at}"
     if rule == "not_reconfirmed":
         c = parse_time(iv.get("confirmed"))
         return f"{et}: last confirmed {c.astimezone(LOCAL).strftime('%b %-d') if c else 'unknown'}; not re-confirmed{who}"
@@ -5063,7 +5201,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             if on_reach_now else STRETCH_SUMMARY if on_stretch_now else None,
             **({"stretch_model": SH.MODEL} if slug in shore_slugs else {}),
             "reaches": sorted(reaches_on_water.get(slug, [])),
-            "unresolved_events": sorted({r["event_id"] for r in reasons if r["rule"] in ("unresolved", "end_never_reported")}),
+            "unresolved_events": sorted({r["event_id"] for r in reasons
+                                         if r["rule"] in ("unresolved", "end_never_reported", "listed_ongoing")}),
             "reasons": reasons, "events": ev_ids, "covered_by": sorted(covered[slug]),
             **({"rain": rain_mod.water_context(rain_block, slug)} if rain_block.get("waters", {}).get(slug) else {}),
             **water_rules(reasons, w, slug, rules),
@@ -5198,7 +5337,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                       **({"label_by_basis": rain_mod.labels(rules)} if k == "rain_likely" else {}),
                       **({"label_by_level": rain_block["label_by_level"]}
                          if k == "rain_likely" and rain_block.get("label_by_level") else {})}
-                  for k, v in RULES.items()},
+                  # the listed-ongoing rule's entry only while it is switched on, so with it off or absent the
+                  # catalog is as before (Astra review 2026-11-16 P2-4)
+                  for k, v in RULES.items()
+                  if k != "listed_ongoing" or ((rules.get("unresolved") or {}).get("listed_ongoing") or {}).get("enabled") is True},
         "advisory_windows": {"file": "data/rules.json", "version": rules.get("version")},
         "constants": {"advisory_no_end_days": ADVISORY_NO_END_DAYS, "confirm_days": CONFIRM_DAYS,
                       "history_days": HISTORY_DAYS, "unresolved": rules.get("unresolved"),
