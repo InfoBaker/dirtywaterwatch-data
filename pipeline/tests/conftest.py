@@ -21,14 +21,3 @@ def _fresh_status_states():
     S._STATES = None
     yield
     S._STATES = None
-
-
-@pytest.fixture
-def no_separate_sewer_points(monkeypatch):
-    """A rainfall reader test world of its own outfalls only: the hourly reader (ingest/rainfall.py run) also reads the
-    separate sewer operators' points (build/rain_sso.py live_points) from the committed rules and data/rain-levels-sso.json
-    seed whenever rules.rain_likely.separate_sewers is on (2026-11-16), which would add the real Alabama, Connecticut
-    and Florida points to every synthetic world. The reader tests that pin their own points, tiles and request counts use
-    this; the tests of the separate sewer points in the reader set their own (test_rain_tiles.py)."""
-    from build import rain_sso
-    monkeypatch.setattr(rain_sso, "live_points", lambda *a, **k: [])
