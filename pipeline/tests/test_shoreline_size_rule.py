@@ -207,7 +207,8 @@ def test_a_bay_under_the_size_rule_gets_the_bay_wording_on_its_stretch():
 def test_a_lake_with_no_outline_gets_a_no_trace_record_not_a_stretch(monkeypatch):
     """Production: a crossing lake whose openboatlaunch outline is missing this run, and no Census water."""
     waters = {"big-lake-vt": {k: v for k, v in WATERS["big-lake-vt"].items() if k != "geometry"}}
-    monkeypatch.setattr(R, "census_lake_outline", lambda slug, waters, land: None)
+    # never the Census water (shaped for the Great Lakes and the coasts; a sliver or the sea beside an inland lake)
+    monkeypatch.setattr(R, "census_lake_outline", lambda *a, **k: pytest.fail("a size-rule lake took a Census outline"))
     S._GEOM_CACHE.clear()
     rec = R.shoreline_record({"key": f"{PERMIT}-001", "permit": PERMIT, "outfall": "001", "water_slug": "big-lake-vt",
                               "lat": 44.5, "lon": -73.35, "state": "VT", "model": "shoreline"}, waters, ON, {})
@@ -445,6 +446,12 @@ def test_the_overlay_of_a_part_filled_lake_carries_the_fill_colour_only():
                  "status_by_category": {"sewage": "yellow", "beach": "grey", "bloom": "grey"}, "headline_status": "yellow"}
     assert X.part_fill_props({**w_, "fill": False, "fill_status": "grey"})["status"] == "grey"
     assert X.part_fill_props({**w_, "fill": False, "fill_status": "monthly"})["status"] == "monthly"
+    # a yellow sewage fallback beside a red bloom on the named water: the headline is the sewage yellow, and the
+    # bloom stays in the categories (the map shows it when sewage is hidden); never red sewage (Astra finding 3)
+    mixed = {"fill": True, "fill_status": "red", "fill_category": "sewage",
+             "fill_status_by_category": {"sewage": "yellow", "beach": "grey", "bloom": "red"}}
+    p = X.part_fill_props(mixed)
+    assert p["status"] == p["headline_status"] == "yellow" and p["status_by_category"]["bloom"] == "red"
 
 
 def test_out_rules_is_unchanged_with_the_rule_off_and_says_the_size_rule_with_it_on():
@@ -464,5 +471,112 @@ def test_out_rules_is_unchanged_with_the_rule_off_and_says_the_size_rule_with_it
         assert not any(x in t.lower() for x in ("safe", "clean", "green"))
     bays = SH.size_texts(SH.rule(rules_on(kinds=["lake", "reservoir", "bay", "sound"])))
     assert bays["doc"].startswith("Other lakes, reservoirs, bays and sounds of 19 square miles")
-    assert bays["rationale"].endswith("On a bay or sound, such a report is listed on the water's page, and its outlets are marked on the map.")
+    assert "On a bay or sound, such a report is listed on the water's page, and its outlets are marked on the map." in bays["rationale"]
     assert SH.size_texts(OFF) == {}
+
+
+# ---------------------------------------------------------------- the geometry pilot's points and the review's fixes
+
+def _ring(lon0, lat0, dlon, dlat):
+    return [[lon0, lat0], [lon0 + dlon, lat0], [lon0 + dlon, lat0 + dlat], [lon0, lat0 + dlat], [lon0, lat0]]
+
+
+def test_min_ring_km_null_walks_the_islet_as_today_and_set_starts_on_the_shore_and_marks_the_islet():
+    """Lake Washington WA0031682-018: an 80 m islet 38 m nearer than the mainland took the whole stretch."""
+    from shapely.geometry import Polygon
+    lake = Polygon(_ring(-73.40, 44.50, 0.1, 0.072)[:-1], [_ring(-73.3505, 44.5004, 0.0008, 0.0006)[:-1]])
+    lon, lat = -73.3501, 44.50028          # 31 m from the south shore (lat 44.50), 13 m from the islet (lat 44.5004)
+    today = SH.stretch(lon, lat, lake, None, 20, snap_km=5)
+    assert today["length_km"] < 1 and "islets" not in today            # the islet ring, as before
+    assert SH.stretch(lon, lat, lake, None, 20, snap_km=5, min_ring_km=None) == today
+    fixed = SH.stretch(lon, lat, lake, None, 20, snap_km=5, min_ring_km=5)
+    assert fixed["length_km"] == pytest.approx(SH.stretch(lon, 44.4999, lake, None, 20)["length_km"], abs=0.5)
+    assert fixed["length_km"] > 15 and len(fixed["islets"]) == 1 and fixed["islets"][0]["km"] < 0.5
+    # no long ring within reach: the nearest ring as before
+    alone = Polygon(_ring(-73.3505, 44.5004, 0.0008, 0.0006)[:-1])
+    assert SH.stretch(lon, lat, alone, None, 20, snap_km=5, min_ring_km=5)["length_km"] < 1
+
+
+def test_the_ring_floor_enters_the_stretch_signature_only_when_set():
+    assert R.shore_sig(OFF) == "|".join(str(OFF[k]) for k in ("each_way_km", "shore_m", "gap_km", "snap_km", "ocean_open_m"))
+    assert "ring" not in R.shore_sig(OFF) and R.shore_sig({**OFF, "min_ring_km": 5}).endswith("|ring5")
+
+
+def test_a_narrow_reservoir_keeps_the_whole_fill_under_the_width_floor():
+    long_narrow = {"type": "Polygon", "coordinates": [_ring(-72.0, 44.0, 0.9, 0.009)]}     # about 71 km by 1 km
+    waters = dict([w("narrow-res-vt", "Narrow Reservoir", "reservoir", long_narrow, area_km2=71.0), *WATERS.items()])
+    on = SH.rule(rules_on())
+    floor = SH.rule({**rules_on(), "reach": {**rules_on()["reach"], "shoreline": {
+        **rules_on()["reach"]["shoreline"], "min_mean_width_km": 1.5}}})
+    S._GEOM_CACHE.clear()
+    plain = S.with_outline_areas(waters, on)
+    assert SH.is_shoreline(plain["narrow-res-vt"], on) and "outline_mean_width_km" not in plain["narrow-res-vt"]
+    S._GEOM_CACHE.clear()
+    measured = S.with_outline_areas(waters, floor)
+    assert measured["narrow-res-vt"]["outline_mean_width_km"] == pytest.approx(1.0, abs=0.05)
+    assert not SH.is_shoreline(measured["narrow-res-vt"], floor)          # kept filled whole
+    assert SH.is_shoreline(measured["big-lake-vt"], floor)                  # 8 km wide: moves
+    assert "narrower than 0.9 mile (1.5 kilometres) on average" in SH.size_texts(floor)["rationale"]
+    assert "narrower" not in SH.size_texts(on)["rationale"]
+
+
+def test_ocean_and_sea_records_and_bays_with_no_outline_stay_off_the_bay_rule():
+    both = SH.rule(rules_on(kinds=["lake", "reservoir", "bay", "sound"]))
+    sea = {"kind": "sound", "name": "North Atlantic Ocean", "state": "ME", "area_km2": 9000.0}
+    bering = {"kind": "bay", "name": "Bering Sea", "state": "AK", "area_km2": 9000.0}
+    assert not SH.is_shoreline(sea, both) and not SH.is_shoreline(bering, both)
+    bare = {"slug": "back-bay-x", "name": "Back Test Bay", "kind": "bay", "state": "ME", "area_km2": 120.0}
+    S._GEOM_CACHE.clear()
+    out = S.with_outline_areas({"back-bay-x": bare, **BAYS}, both)
+    assert out["back-bay-x"]["no_outline_here"] is True and not SH.is_shoreline(out["back-bay-x"], both)
+    assert SH.is_shoreline(out["casco-test-bay-me"], both)
+
+
+def test_the_measured_area_is_not_rounded_across_the_threshold():
+    rec = {"kind": "lake", "name": "Edge Lake", "state": "VT", SH.OUTLINE_AREA: 49.96}
+    assert not SH.is_shoreline(rec, ON)
+
+
+def test_an_empty_or_rejected_kinds_list_is_the_rule_off_not_an_error():
+    for kinds in ([], ["river"]):
+        r = SH.rule(rules_on(kinds=kinds))
+        assert not SH.size_on(r) and SH.size_texts(r) == {} and not SH.is_shoreline(WATERS["big-lake-vt"], r)
+        assert X.shoreline_rules(rules_on(kinds=kinds))["reach"]["shoreline"] == rules_on(kinds=kinds)["reach"]["shoreline"]
+
+
+def test_a_point_beyond_snap_km_falls_back_to_the_whole_lake():
+    """Lake Maurepas: both outfalls 8.6 to 9.1 km from the outline get no stretch, so their reports fill the lake."""
+    far = shore_rec(lat=44.536, lon=-73.35)                 # mid-lake, about 4 km from every edge... within 5 km
+    assert far["segments"]
+    S._GEOM_CACHE.clear()
+    rec = R.shoreline_record({"key": f"{PERMIT}-001", "permit": PERMIT, "outfall": "001", "water_slug": "big-lake-vt",
+                              "lat": 44.536, "lon": -73.35, "state": "VT", "model": "shoreline"}, WATERS,
+                             {**ON, "snap_km": 1.0}, None)
+    assert rec["cut_reason"] == "no_trace" and "no shore" in rec["error"]
+    st, _ = _build([WITH_POINT], {rec["key"]: rec}, rules=rules_on())
+    lake = st["waters"]["big-lake-vt"]
+    assert lake["fill"] is True and lake["fill_status"] == "red" and [r["placement"] for r in lake["reasons"]] == [S.SHORE_WHOLE]
+
+
+def test_a_stretch_that_cannot_be_drawn_or_whose_water_left_the_rule_never_hides_the_report():
+    rec = shore_rec()
+    flat = {**rec, "segments": [{**sg, "coords": [sg["coords"][0]] * 3} for sg in rec["segments"]]}
+    assert SH.drawable(rec) and not SH.drawable(flat)
+    st, _ = _build([WITH_POINT], {flat["key"]: flat}, rules=rules_on())
+    assert st["waters"]["big-lake-vt"]["fill_status"] == "red"
+    stale = {**rec, "water_slug": "mid-lake-vt"}            # a water that is not (or no longer) under the rule
+    st, _ = _build([WITH_POINT], {stale["key"]: stale}, rules=rules_on())
+    assert st["waters"]["big-lake-vt"]["fill_status"] == "red" and stale["key"] not in st["reaches"]
+
+
+def test_the_input_signature_index_gives_the_same_hash_as_the_record_by_record_walk():
+    rec = shore_rec()
+    alone = R.shore_input_sig("big-lake-vt", rec["segments"], WATERS, ON)
+    R._SIG_INDEX.clear()
+    R._SIG_INDEX["active"] = True
+    try:
+        assert R.shore_input_sig("big-lake-vt", rec["segments"], WATERS, ON) == alone
+        assert R.shore_input_sig("big-lake-vt", rec["segments"], WATERS, ON) == alone      # from the memo
+    finally:
+        R._SIG_INDEX.clear()
+    assert rec["input_sig"] == alone

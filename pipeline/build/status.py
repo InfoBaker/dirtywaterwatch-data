@@ -1037,6 +1037,14 @@ def water_geometry(slug: str, waters: dict | None = None):
 def outline_area_km2(g) -> float | None:
     """The area of an outline's polygons in km2 (a local equirectangular projection; line pieces count nothing), or
     None when it has no area."""
+    return (outline_shape(g) or (None, None))[0]
+
+
+def outline_shape(g) -> tuple[float, float] | None:
+    """(area in km2, mean width in km: twice the area over the length of every ring, islands included) of an outline's
+    polygons on a local equirectangular projection, or None when it has no area."""
+    import math
+    import shapely
     from shapely.ops import unary_union
     polys = []
 
@@ -1051,9 +1059,16 @@ def outline_area_km2(g) -> float | None:
     walk(g)
     if not polys:
         return None
-    from ingest import waters_extra as WX
-    a = WX.area_km2(unary_union(polys))
-    return a if a > 0 else None
+    u = unary_union(polys)
+    lat = (u.bounds[1] + u.bounds[3]) / 2
+    k = (111_320.0 * math.cos(math.radians(lat)), 110_574.0)
+    um = shapely.transform(u, lambda xy: xy * k)
+    a = um.area
+    if a <= 0:
+        return None
+    per = sum(p.exterior.length + sum(i.length for i in p.interiors)
+              for p in getattr(um, "geoms", [um]) if p.geom_type == "Polygon")
+    return a / 1e6, (2 * a / per / 1000 if per else float("inf"))
 
 
 def with_outline_areas(waters: dict, shore: dict) -> dict:
@@ -1064,16 +1079,33 @@ def with_outline_areas(waters: dict, shore: dict) -> dict:
     if not SH.size_on(shore):
         return waters
     kinds = SH.size_kinds(shore)
+    floor = shore.get("min_mean_width_km")
+    least = float(shore["min_area_km2"])
     out = None
     for slug, w in waters.items():
-        if w.get("kind") not in kinds or SH.record_area(w)[0] is not None:
+        kind = w.get("kind")
+        if kind not in kinds:
             continue
-        a = outline_area_km2(water_geometry(slug, waters))
-        if a is None:
+        add = {}
+        area = SH.record_area(w)[0]
+        tidal = kind in ("bay", "sound")
+        # a record is measured when it has no area, when the width floor is set and it may cross, or (a bay or sound)
+        # to know whether it has an outline here at all
+        if area is None or (floor is not None and kind in SH.FILL_KINDS and area >= least) or tidal:
+            shp = outline_shape(water_geometry(slug, waters))
+            if shp is None:
+                if tidal:
+                    add[SH.NO_OUTLINE] = True
+            else:
+                if area is None:            # full precision: the threshold reads it (round only for display)
+                    add[SH.OUTLINE_AREA] = shp[0]
+                if floor is not None and kind in SH.FILL_KINDS and (area if area is not None else shp[0]) >= least:
+                    add[SH.OUTLINE_WIDTH] = shp[1]
+        if not add:
             continue
         if out is None:
             out = dict(waters)
-        out[slug] = {**w, SH.OUTLINE_AREA: round(a, 1)}
+        out[slug] = {**w, **add}
     return waters if out is None else out
 
 
@@ -4170,7 +4202,9 @@ def size_record(w: dict, shore: dict) -> dict:
     """What put a water under the size rule: the threshold, the kinds, the water's area and where it came from."""
     e = SH.shoreline_entry(w, shore) or {}
     return {"min_area_km2": shore.get("min_area_km2"), "kinds": sorted(SH.size_kinds(shore)),
-            "area_km2": e.get("area_km2"), "area_basis": e.get("area_basis")}
+            "area_km2": round(e["area_km2"], 1) if e.get("area_km2") is not None else None,
+            "area_basis": e.get("area_basis"),
+            **({"mean_width_km": round(w[SH.OUTLINE_WIDTH], 2)} if w.get(SH.OUTLINE_WIDTH) is not None else {})}
 
 
 def colours_whole_water(w: dict) -> bool:
@@ -4630,6 +4664,14 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     # report or rain caution that can start no stretch keeps the whole-water colour (SHORE_WHOLE)
     size_slugs = {x for x in shore_slugs if SH.is_size_rule(waters[x], shore)}
     whole_slugs = {x for x in size_slugs if waters[x].get("kind") not in NO_FILL_KINDS}
+    if size_slugs or SH.size_on(shore):
+        # a cached shoreline stretch is read only while its water is a shoreline water and it can be drawn: a water
+        # that left the size rule (its outline gone this run, its state now under an ocean entry) or a stretch with no
+        # drawable segment keeps its reports on the whole water (Astra review 2026-11-16, findings 5 and 7). With the
+        # rule off nothing is filtered here, so the reaches are read exactly as before
+        reaches = {k: r for k, r in (reaches or {}).items()
+                   if r.get("model") != SH.MODEL or (r.get("water_slug") in shore_slugs and
+                                                     (not r.get("segments") or SH.drawable(r)))}
     _SHORE_REACHES.clear()
     _SHORE_REACHES.update(k for k, r in (reaches or {}).items() if r.get("model") == SH.MODEL)
     _STRETCH_REACHES.clear()

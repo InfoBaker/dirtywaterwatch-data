@@ -1030,13 +1030,17 @@ def live_dischargers(rows: list[dict], live: set[str]) -> list[dict]:
 
 
 def part_fill_props(w: dict) -> dict:
-    """The overlay properties of a lake under the shoreline size rule (build/status.py whole_fill): the status, category
-    and status by category of its whole-water fill, from the reports that have no shoreline stretch; part_fill marks
-    them, so the map reads the colour here and not the water's own status, which takes in the stretches too."""
+    """The overlay properties of a lake under the shoreline size rule (build/status.py whole_fill): the headline status,
+    its category and each category's status of its whole-water fill, from the reports that have no shoreline stretch;
+    part_fill marks them, so the map reads the colour here and not the water's own status, which takes in the
+    stretches too. The status is the headline's (sewage first), as a filled water's is on the map (Astra review
+    2026-11-16, finding 3)."""
     st = w["fill_status"]
-    return {"status": st if w.get("fill") or st == "monthly" else "grey", "part_fill": True,
-            "category": w.get("fill_category") or "sewage", "status_by_category": w.get("fill_status_by_category"),
-            "headline_status": (w.get("fill_status_by_category") or {}).get(w.get("fill_category") or "sewage", st)}
+    by = w.get("fill_status_by_category") or {}
+    cat = w.get("fill_category") or "sewage"
+    head = by.get(cat, st)
+    shown = head if w.get("fill") else "monthly" if st == "monthly" else "grey"
+    return {"status": shown, "part_fill": True, "category": cat, "status_by_category": by, "headline_status": head}
 
 
 def tidal_river_rules(rules: dict) -> dict:
