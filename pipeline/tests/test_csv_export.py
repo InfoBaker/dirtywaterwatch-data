@@ -22,8 +22,8 @@ HEADER = ("event_id,water,water_slug,state,operator,operator_id,outlet_id,outlet
           "ended_at,end_reported,volume_gal,volume_text,lat,lon,towns,source_id,source_name,record_id,published_at,"
           "reported_at,source_updated_at,retrieved_at,report_url,notice_url,site_url,duplicate_of,superseded_by,sampled_at,time_precision,ended_at_precision,"
           "report_kind,cause,weather,rainfall_in,rainfall_label,duration_text,volume_qualifier,volume_method,volume_to_water_gal,"
-          "volume_recovered_gal,overflow_point,later_volume_gal,later_volume_text,later_volume_qualifier,later_record_published_at,"
-          "later_record_id").split(",")
+          "overflow_point,town_named,later_volume_gal,later_volume_text,later_volume_qualifier,later_record_kind,"
+          "later_record_published_at,later_record_id,linked_record_ids").split(",")
 AS_OF = "2026-11-02T12:00:00Z"
 
 

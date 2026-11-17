@@ -158,7 +158,7 @@ def test_another_sources_record_of_the_same_event_is_linked_both_ways():
            "raw": {"causes": [{"code": "BPA", "desc": "Broken Pipe"}], "discharge_quantification_method_desc": "Best Professional Judgement"}}
     D.enrich([ga, epa])
     assert ga["linked_records"] == [{"event_id": epa["event_id"], "relation": "other_source", "source_id": "echo-sewer-overflow",
-                                     "published_at": "2026-08-24", "volume_gal": 120000}]
+                                     "published_at": "2026-08-24"}]         # no bare figure without its qualifier
     assert epa["linked_records"][0]["event_id"] == ga["event_id"]
     assert "later_volume" not in ga                                 # another source's figure is linked, not carried
     assert epa["detail"] == {"cause": "Broken Pipe", "volume_method": "Best Professional Judgement"}
@@ -189,7 +189,8 @@ def test_csv_rows_carry_the_detail_and_the_later_record(tmp_path, covered):
         e = event(**{k: v for k, v in r.items() if k in {"event_id", "source_id", "source_record_id", "event_type", "status",
                                                           "started_at", "ended_at", "outfall_id", "discharger_name",
                                                           "published_at", "volume_gal", "volume_text", "parent_event_id"}})
-        e.update(fixture=False, water_slugs=[], detail=r.get("detail"), later_volume=r.get("later_volume"), raw={})
+        e.update(fixture=False, water_slugs=[], detail=r.get("detail"), later_volume=r.get("later_volume"),
+                 linked_records=r.get("linked_records"), raw={})
         rows.append(e)
     out = tmp_path / "csv"
     csv_export.write_csvs(rows, [], [], out, page_ids=set())
@@ -198,6 +199,67 @@ def test_csv_rows_carry_the_detail_and_the_later_record(tmp_path, covered):
         got = {r["event_id"]: r for r in _csv.DictReader(f)}
     n, v = got["ma-massdep:n1"], got["ma-massdep:v1"]
     assert (n["later_volume_gal"], n["later_volume_qualifier"], n["later_record_id"]) == ("1017806", "verified by the operator", "ma-massdep:v1")
+    assert n["later_record_kind"] == "Verified Data Report" and n["town_named"] == "SPRINGFIELD"
+    assert n["linked_record_ids"] == "later:ma-massdep:c1;later:ma-massdep:v1"
     assert n["volume_gal"] == "" and n["report_kind"] == "Public Notification Report, Initial-Ongoing"
     assert (v["rainfall_in"], v["duration_text"], v["volume_qualifier"]) == ("1.27", "6 hours, 35 minutes", "verified by the operator")
     assert v["later_volume_gal"] == ""
+
+
+def test_a_nested_container_never_becomes_text():
+    rec = {"source_id": "md-mde-overflows", "raw": {"row": {"overflow_cause": {"desc": {"secret_new_field": "unmapped value"}}}}}
+    assert D.detail_of(rec) == {}
+    rec = {"source_id": "echo-sewer-overflow", "raw": {"causes": [{"code": "X", "desc": ["nested"]}, {"code": "B", "desc": "Blockage"}]}}
+    assert D.detail_of(rec) == {"cause": "Blockage"}
+
+
+def test_later_means_a_later_instant_across_offsets():
+    """01:10 EST is after 01:50 EDT on the night the clocks go back: string order would swap them."""
+    a = {"event_id": "ny-dec-sprtk:a", "source_id": "ny-dec-sprtk", "event_type": "cso", "parent_event_id": None,
+         "volume_gal": 100, "published_at": "2026-11-01T01:50:00-04:00", "raw": {}}
+    b = {"event_id": "ny-dec-sprtk:b", "source_id": "ny-dec-sprtk", "event_type": "cso", "parent_event_id": "ny-dec-sprtk:a",
+         "volume_gal": 900, "published_at": "2026-11-01T01:10:00-05:00", "raw": {}}
+    D.enrich([a, b])
+    assert a["later_volume"]["volume_gal"] == 900 and "later_volume" not in b
+
+
+def test_a_duplicate_from_the_status_build_neither_gives_nor_takes_a_later_volume():
+    notice, ceased, vdr = springfield()
+    D.enrich([notice, ceased, vdr], duplicates={vdr["event_id"]})
+    assert "later_volume" not in notice
+    notice, ceased, vdr = springfield()
+    D.enrich([notice, ceased, vdr], duplicates={notice["event_id"]})
+    assert "later_volume" not in notice and "linked_records" in notice      # still linked, just no figure carried
+
+
+def test_ny_web_notices_join_their_workbook_chain_and_are_read_from_the_page():
+    wb = {"event_id": "ny-dec-sprtk:1", "source_id": "ny-dec-sprtk", "event_type": "cso", "parent_event_id": None,
+          "volume_gal": None, "volume_text": "65 Gallons per Minute Estimated", "published_at": "2026-11-12T20:00:00-05:00",
+          "raw": {"row": {"notificationStatus": "New"}}}
+    web = {"event_id": "ny-dec-sprtk-web:9", "source_id": "ny-dec-sprtk-web", "event_type": "cso", "parent_event_id": "ny-dec-sprtk:1",
+           "volume_gal": 60000, "volume_text": "60,000 Gallons Estimated", "published_at": "2026-11-12T21:42:00-05:00",
+           "raw": {"parsed": {"word": "UPDATE", "reason": "System Capacity", "duration": "unknown Hours",
+                              "volume": "60,000 Gallons Estimated", "discharge_location": "50 State School Rd"}}}
+    D.enrich([wb, web])
+    assert web["detail"] == {"report_kind": "UPDATE", "cause": "System Capacity", "duration_text": "unknown Hours",
+                             "volume_qualifier": "estimated"}
+    assert wb["later_volume"]["event_id"] == web["event_id"] and wb["later_volume"]["volume_qualifier"] == "estimated"
+    other = {**web, "event_id": "fl-dep-pnp:1", "source_id": "fl-dep-pnp"}         # an unrelated feed is never joined
+    wb2 = {**wb}
+    D.enrich([wb2, other])
+    assert "later_volume" not in wb2 and "linked_records" not in wb2
+
+
+def test_georgias_several_epa_reports_are_each_linked():
+    ga = {"event_id": "ga-epd-spills:9", "source_id": "ga-epd-spills", "event_type": "sso", "parent_event_id": None,
+          "raw": {"_epa_record": ["echo-sewer-overflow:a", "echo-sewer-overflow:b"]}}
+    a = {"event_id": "echo-sewer-overflow:a", "source_id": "echo-sewer-overflow", "event_type": "sso", "parent_event_id": None, "raw": {}}
+    b = {**a, "event_id": "echo-sewer-overflow:b"}
+    D.enrich([ga, a, b])
+    assert [r["event_id"] for r in ga["linked_records"]] == ["echo-sewer-overflow:a", "echo-sewer-overflow:b"]
+    assert b["linked_records"][0]["event_id"] == ga["event_id"]
+
+
+def test_ma_duration_reads_one_hour_in_the_singular():
+    r = ma("v7", "Verified Data Report", "2026-09-27T05:15:00-04:00", volume="5", hours="1", minutes="1")
+    assert D.detail_of(r)["duration_text"] == "1 hour, 1 minute"

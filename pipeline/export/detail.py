@@ -25,7 +25,6 @@ FIELDS (every value is the source's own, never converted; a field the source doe
   volume_method         how the volume was determined, in the source's words ("Best Professional Judgement",
                         "flow meter")
   volume_to_water_gal   gallons the source says reached a water (a number, as the source gives it)
-  volume_recovered_gal  gallons the source says were recovered (a number)
   overflow_point        where the sewage came out, in the source's words ("Manhole", "Gravity Mainline")
   town                  the city or town the source names for the report
 
@@ -51,8 +50,8 @@ if __package__ in (None, ""):
 from common import NAME_KEYS, PERSONAL_KEYS, scrub_names, scrub_residence_numbers, scrub_text  # noqa: E402
 
 FIELDS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
-          "volume_method", "volume_to_water_gal", "volume_recovered_gal", "overflow_point", "town")
-NUMBER_FIELDS = {"volume_to_water_gal", "volume_recovered_gal"}
+          "volume_method", "volume_to_water_gal", "overflow_point", "town")
+NUMBER_FIELDS = {"volume_to_water_gal"}
 QUALIFIERS = ("estimated", "measured", "modeled", "verified by the operator")
 # the fields the report tables carry (slim rows): the cell's cause and duration, and the qualifier of its volume
 CELL_FIELDS = ("cause", "duration_text", "volume_qualifier")
@@ -90,10 +89,10 @@ def text(*paths: str, join: str = "; "):
         for p in paths:
             vals = []
             for v in _get(raw, p):
-                if isinstance(v, dict):
-                    v = v.get("desc") or v.get("description")
-                if isinstance(v, bool) or v is None:
-                    continue
+                if isinstance(v, dict):         # a coded list's entry ({"code", "desc"}): its description, a string only
+                    v = v.get("desc") if isinstance(v.get("desc"), str) else v.get("description")
+                if isinstance(v, bool) or not isinstance(v, (str, int, float)):
+                    continue                    # a nested container never becomes text (review P1: unnamed fields)
                 s = " ".join(str(v).split())
                 if s and not EMPTY.match(s) and s not in vals:
                     vals.append(s)
@@ -143,7 +142,8 @@ def _ma_duration(raw: dict):
         return None
     if not all(x is None or re.fullmatch(r"\d+", x) for x in (h, m)):
         return None
-    return f"{h or 0} hours, {m or 0} minutes"
+    h, m = h or "0", m or "0"
+    return f"{h} hour{'' if h == '1' else 's'}, {m} minute{'' if m == '1' else 's'}"
 
 
 def _ma_kind(raw: dict):
@@ -203,6 +203,11 @@ NY = {
     "report_kind": text("row.notificationStatus"), "cause": text("row.dischargeReason"),
     "duration_text": text("row.dischargeDuration"), "volume_qualifier": _ny_qualifier, "town": text("row.city"),
 }
+# the NY-Alert web page as ny_sprtk_web reads it (raw.parsed)
+NY_WEB = {
+    "report_kind": text("parsed.word"), "cause": text("parsed.reason"), "duration_text": text("parsed.duration"),
+    "volume_qualifier": lambda raw: _ny_qualifier({"row": {"quantity": text("parsed.volume")(raw)}}),
+}
 
 # source id -> {field: reader of the record's raw}. A source not listed gets no detail (its raw stays on the page as
 # the source data); add a source here with the source key named.
@@ -220,13 +225,15 @@ SOURCES: dict[str, dict] = {
     # the notice's own form fields as the ingester reads them from its text (fl_dep_pnp.template_fields: "Cause:")
     "fl-dep-pnp": {"cause": text("_template.cause"), "town": text("FACILITY_CITY")},
     "ct-deep": CT, "ct-deep-annual": CT, "ct-deep-archive": CT,
-    "ny-dec-sprtk": NY, "ny-dec-sprtk-web": NY,
+    "ny-dec-sprtk": NY, "ny-dec-sprtk-web": NY_WEB,
     "md-mde-overflows": {"cause": text("row.overflow_cause"), "duration_text": _md_duration},
     "nc-dwr-sso-2022-2025": {"cause": text("incident_cause"), "volume_to_water_gal": number("volume_reach_water"),
                              "town": text("city")},
-    "nc-dwr-sso-2026": {"cause": text("dwr_cause_5d"), "weather": text("dwr_weather_5d"), "duration_text": _nc_duration,
-                        "volume_to_water_gal": number("dwr_volume_waterbody_5d", "dwr_volume_waterbody"),
-                        "town": text("deq_municipality")},
+    # the five-day report's fields first, then the 24-hour report's (nc_dwr_sso keeps either naming)
+    "nc-dwr-sso-2026": {"cause": text("dwr_cause_5d", "dwr_cause", "cause"), "weather": text("dwr_weather_5d", "dwr_weather", "weather"),
+                        "duration_text": _nc_duration,
+                        "volume_to_water_gal": number("dwr_volume_waterbody_5d", "dwr_volume_waterbody", "volume_waterbody"),
+                        "town": text("deq_municipality", "municipality")},
     "echo-sewer-overflow": {
         "report_kind": text("program_report_npdes_data_group_desc"), "cause": text("causes[]"),
         "duration_text": with_unit("sewer_overflow_bypass_duration_hours", "hours"),
@@ -249,8 +256,7 @@ SOURCES: dict[str, dict] = {
                         "duration_text": with_unit("overflow_duration_hours", "hours")},
     "nh-permittees": {"duration_text": with_unit("duration_min", "minutes")},
     "ca-swrcb-ciwqs-spills-flatfile": {"report_kind": text("spill_type"), "cause": text("causes"),
-                                       "overflow_point": text("appearance_points"),
-                                       "volume_recovered_gal": number("volume_recovered_gal")},
+                                       "overflow_point": text("appearance_points")},
     "or-deq-oers-spills-2013-2025": {"cause": text("cause")},
     "ca-beachwatch-advisories": {"cause": text("cause")},
     # feeds built after the 2026-11-14 export (fields as their ingesters keep them)
@@ -310,8 +316,24 @@ def cell_detail(d: dict | None) -> dict:
     return {k: d[k] for k in CELL_FIELDS if isinstance(d, dict) and d.get(k) not in (None, "")}
 
 
-def _t(e: dict) -> str:
-    return str(e.get("published_at") or e.get("reported_at") or "")
+# feeds whose records the pipeline links across the two (ny_sprtk_web gives a newer web notice the workbook chain's
+# latest record as its parent): one NY-Alert notice chain
+LINKED_FEEDS = ({"ny-dec-sprtk", "ny-dec-sprtk-web"},)
+
+
+def same_feed(a: dict, b: dict) -> bool:
+    sa, sb = a.get("source_id"), b.get("source_id")
+    return sa == sb or any({sa, sb} == pair for pair in LINKED_FEEDS)
+
+
+def _t(e: dict) -> float | None:
+    """The record's publication (else report) time as an instant, for ordering; None when it has none."""
+    from build import status as status_mod        # here: build.status reads the rules at import
+    for k in ("published_at", "reported_at"):
+        t = status_mod.parse_time(e.get(k)) if e.get(k) else None
+        if t:
+            return t.timestamp()
+    return None
 
 
 def _kind(e: dict) -> str | None:
@@ -325,13 +347,17 @@ def _qualifier(e: dict) -> str | None:
     return {"estimated": "estimated", "measured": "measured"}.get(e.get("estimate_flag") or "")
 
 
-def links_of(events: list[dict]) -> dict[str, dict]:
-    """{event_id: {"later_volume": ..., "linked_records": [...]}} for every record with a link (see the docstring)."""
+def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset()) -> dict[str, dict]:
+    """{event_id: {"later_volume": ..., "linked_records": [...]}} for every record with a link (see the docstring).
+    duplicates: records the status build marks duplicate_of (its placements), which neither give nor take a later
+    volume, besides the records' own duplicate_of."""
     by_id = {e["event_id"]: e for e in events if e.get("event_id")}
+    dup = lambda x: bool(x.get("duplicate_of")) or x["event_id"] in duplicates   # noqa: E731
+    times = {eid: _t(e) for eid, e in by_id.items()}
     children = defaultdict(list)
     for e in by_id.values():
         p = e.get("parent_event_id")
-        if p and p != e["event_id"] and p in by_id and by_id[p].get("source_id") == e.get("source_id"):
+        if p and p != e["event_id"] and p in by_id and same_feed(by_id[p], e):
             children[p].append(e)
     # families: the records joined by parent links within one source (union-find)
     root = {}
@@ -354,24 +380,25 @@ def links_of(events: list[dict]) -> dict[str, dict]:
     other = defaultdict(set)
     for e in by_id.values():
         x = (e.get("raw") or {}).get("_epa_record") if isinstance(e.get("raw"), dict) else None
-        if isinstance(x, str) and x in by_id and x != e["event_id"]:
-            other[e["event_id"]].add(x)
-            other[x].add(e["event_id"])
+        for y in ([x] if isinstance(x, str) else x if isinstance(x, list) else []):   # one EPA report, or several
+            if isinstance(y, str) and y in by_id and y != e["event_id"]:
+                other[e["event_id"]].add(y)
+                other[y].add(e["event_id"])
 
     def ref(x: dict, relation: str) -> dict:
+        # no figure here: a figure without its words and qualifier would read as unqualified (review P1); the
+        # later figure of the same event is later_volume, with its qualifier
         r = {"event_id": x["event_id"], "relation": relation, "source_id": x.get("source_id"),
              "report_kind": _kind(x), "published_at": x.get("published_at")}
-        if isinstance(x.get("volume_gal"), (int, float)):
-            r["volume_gal"] = x["volume_gal"]
         return {k: v for k, v in r.items() if v is not None}
 
     out: dict[str, dict] = {}
     for eid, e in by_id.items():
         linked = []
         p = e.get("parent_event_id")
-        if p in by_id and by_id[p].get("source_id") == e.get("source_id") and p != eid:
+        if p in by_id and same_feed(by_id[p], e) and p != eid:
             linked.append(ref(by_id[p], "earlier"))
-        for c in sorted(children.get(eid, []), key=_t):
+        for c in sorted(children.get(eid, []), key=lambda c: (times[c["event_id"]] is None, times[c["event_id"]] or 0)):
             linked.append(ref(c, "later"))
         for o in sorted(other.get(eid, ())):
             linked.append(ref(by_id[o], "other_source"))
@@ -379,12 +406,12 @@ def links_of(events: list[dict]) -> dict[str, dict]:
         if linked:
             add["linked_records"] = linked[:MAX_LINKED]
         fam = family.get(find(eid)) if (eid in root or eid in children) else None
-        if fam and e.get("event_type") in DISCHARGE_TYPES and not e.get("duplicate_of"):
-            mine = _t(e)
-            later = [x for x in fam if x is not e and isinstance(x.get("volume_gal"), (int, float))
-                     and not x.get("duplicate_of") and mine and _t(x) > mine]
+        if fam and e.get("event_type") in DISCHARGE_TYPES and not dup(e):
+            mine = times[eid]
+            later = [x for x in fam if x is not e and isinstance(x.get("volume_gal"), (int, float)) and not dup(x)
+                     and mine is not None and times[x["event_id"]] is not None and times[x["event_id"]] > mine]
             if later:
-                x = max(later, key=_t)
+                x = max(later, key=lambda x: times[x["event_id"]])
                 q = _qualifier(x)
                 if not (x["volume_gal"] == e.get("volume_gal") and q == _qualifier(e)):
                     add["later_volume"] = {k: v for k, v in {
@@ -396,16 +423,16 @@ def links_of(events: list[dict]) -> dict[str, dict]:
     return out
 
 
-def enrich(events: list[dict]) -> None:
+def enrich(events: list[dict], duplicates: set[str] | frozenset = frozenset()) -> None:
     """Writes `detail` (only when the source gives a mapped field), `later_volume` and `linked_records` onto each
-    record in place."""
+    record in place. duplicates: as links_of."""
     for e in events:
         d = detail_of(e)
         if d:
             e["detail"] = d
         else:
             e.pop("detail", None)
-    links = links_of(events)
+    links = links_of(events, duplicates)
     for e in events:
         e.pop("later_volume", None)
         e.pop("linked_records", None)

@@ -1684,7 +1684,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     events = redacted
     # what each source says beyond the common fields, as named fields, and the later records of the same event
     # (export/detail.py): read from the redacted records, so a removed name stays removed
-    detail_mod.enrich(events)
+    detail_mod.enrich(events, duplicates={i for i, pl in placements.items() if (pl or {}).get("duplicate_of")})
     n_status = redact_status_texts(st, redactor, swaps_of)
     if n_status:
         print(f"export: {n_status} status lines quoted a removed name or contact; written redacted")
