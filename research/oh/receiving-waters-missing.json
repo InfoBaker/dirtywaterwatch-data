@@ -25,10 +25,10 @@
   "oh-fremont-cso-notices": "0 records, fetched 2026-11-16",
   "oh-avon-lake-cso-notices": "0 records, fetched 2026-11-16"
  },
- "waters": 22,
- "reports": 354,
+ "waters": 19,
+ "reports": 311,
  "by_reason": {
-  "no NHD flowline or waterbody of that name in OH": 10,
+  "no NHD flowline or waterbody of that name in OH": 11,
   "1 NHD water of that name in OH, none within reach of the reports' places": 2,
   "2 NHD waters of that name in OH, none within reach of the reports' places": 2,
   "6 NHD waters of that name in OH, none within reach of the reports' places": 1,
@@ -36,14 +36,14 @@
   "3 NHD waters of that name in OH, none within reach of the reports' places": 1,
   "10 NHD waters of that name in OH, none within reach of the reports' places": 1
  },
- "resolved_names": 38,
- "resolved_reports": 282,
+ "resolved_names": 39,
+ "resolved_reports": 284,
  "build": {
-  "date": "2026-11-08",
+  "date": "2026-11-17",
   "command": "python -m ingest.waters_from_nhd --names research/oh/receiving-waters-missing.json --state OH",
-  "records_built": 34,
-  "names_resolved": 34,
-  "network_requests": 0
+  "records_built": 1,
+  "names_resolved": 3,
+  "network_requests": 3
  },
  "rows": [
   {
@@ -59,7 +59,7 @@
      -83.059178
     ]
    ],
-   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17"
   },
   {
    "name": "Walhalla Ravine",
@@ -74,175 +74,7 @@
      -83.002503
     ]
    ],
-   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
-  },
-  {
-   "name": "Mill Creek",
-   "reports": 21,
-   "permits": [
-    "OH0043991"
-   ],
-   "sources": [
-    "oh-neorsd-cso-notification-map"
-   ],
-   "outfalls": 19,
-   "points": [
-    [
-     41.434976,
-     -81.635315
-    ],
-    [
-     41.440078,
-     -81.632953
-    ],
-    [
-     41.440466,
-     -81.633038
-    ],
-    [
-     41.441948,
-     -81.633328
-    ],
-    [
-     41.444314,
-     -81.624939
-    ],
-    [
-     41.4434,
-     -81.623737
-    ],
-    [
-     41.441715,
-     -81.619764
-    ],
-    [
-     41.440026,
-     -81.596701
-    ],
-    [
-     41.440558,
-     -81.592292
-    ],
-    [
-     41.436279,
-     -81.579366
-    ],
-    [
-     41.426045,
-     -81.559444
-    ],
-    [
-     41.420623,
-     -81.624052
-    ],
-    [
-     41.425603,
-     -81.630413
-    ],
-    [
-     41.432864,
-     -81.606192
-    ],
-    [
-     41.44448,
-     -81.632872
-    ],
-    [
-     41.431056,
-     -81.633747
-    ],
-    [
-     41.437907,
-     -81.61295
-    ],
-    [
-     41.440107,
-     -81.596114
-    ],
-    [
-     41.435858,
-     -81.63658
-    ]
-   ],
-   "counties": [
-    "Cuyahoga County"
-   ],
-   "reach_ids": [],
-   "note": "NEORSD's Mill Creek in Cleveland: the national list's Mill Creek holds other places' reaches; EPA gives no reach code for NEORSD's outfalls, so the outfalls' own points (NEORSD's CSO alerts map) place it"
-  },
-  {
-   "name": "Big Creek",
-   "reports": 20,
-   "permits": [
-    "OH0043991"
-   ],
-   "sources": [
-    "oh-neorsd-cso-notification-map"
-   ],
-   "outfalls": 14,
-   "points": [
-    [
-     41.446149,
-     -81.686923
-    ],
-    [
-     41.445343,
-     -81.703939
-    ],
-    [
-     41.447346,
-     -81.71002
-    ],
-    [
-     41.447186,
-     -81.712158
-    ],
-    [
-     41.450498,
-     -81.723487
-    ],
-    [
-     41.447768,
-     -81.734699
-    ],
-    [
-     41.448733,
-     -81.763891
-    ],
-    [
-     41.448692,
-     -81.763785
-    ],
-    [
-     41.44519,
-     -81.764593
-    ],
-    [
-     41.453227,
-     -81.766556
-    ],
-    [
-     41.451062,
-     -81.728003
-    ],
-    [
-     41.423864,
-     -81.801559
-    ],
-    [
-     41.448623,
-     -81.754696
-    ],
-    [
-     41.448758,
-     -81.763955
-    ]
-   ],
-   "counties": [
-    "Cuyahoga County"
-   ],
-   "reach_ids": [],
-   "note": "NEORSD's Big Creek in Cleveland: the national list's Big Creek holds other places' reaches; EPA gives no reach code for NEORSD's outfalls, so the outfalls' own points (NEORSD's CSO alerts map) place it"
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17"
   },
   {
    "name": "Dugway Brook",
@@ -263,7 +95,7 @@
      -81.607458
     ]
    ],
-   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17"
   },
   {
    "name": "Grand Lake",
@@ -294,7 +126,7 @@
     ]
    ],
    "note": "Grand Lake St. Marys (Auglaize and Mercer counties), the reservoir BeachGuard's beaches are on; not another Grand Lake",
-   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17"
   },
   {
    "name": "Spring Creek",
@@ -315,7 +147,7 @@
      -81.681896
     ]
    ],
-   "reason": "6 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "reason": "6 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17",
    "places_failed": [
     {
      "lon": -81.68207,
@@ -334,7 +166,8 @@
    },
    "reports_by_source": {
     "oh-willard-cso-notices": 2
-   }
+   },
+   "reason": "no NHD flowline or waterbody of that name in OH; the reports give no place to look for it in the NHD high-resolution flowlines"
   },
   {
    "name": "Shaw Brook",
@@ -351,19 +184,7 @@
      -81.599685
     ]
    ],
-   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
-  },
-  {
-   "name": "West Branch of Huron River",
-   "county": "Huron County",
-   "reports": 2,
-   "open": 0,
-   "sources": {
-    "oh-willard-cso-notices": 2
-   },
-   "reports_by_source": {
-    "oh-willard-cso-notices": 2
-   }
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17"
   },
   {
    "name": "Big Run",
@@ -381,7 +202,7 @@
      -83.0725
     ]
    ],
-   "reason": "31 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "reason": "31 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17",
    "places_failed": [
     {
      "lon": -83.0725,
@@ -406,7 +227,7 @@
      -83.164866
     ]
    ],
-   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17"
   },
   {
    "name": "Fitzgerald Ditch",
@@ -424,7 +245,7 @@
      -83.264331
     ]
    ],
-   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17"
   },
   {
    "name": "Green Creek",
@@ -441,7 +262,7 @@
      -81.543681
     ]
    ],
-   "reason": "1 NHD water of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "reason": "1 NHD water of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17",
    "places_failed": [
     {
      "lon": -81.54368,
@@ -466,7 +287,7 @@
      -81.100794
     ]
    ],
-   "reason": "2 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "reason": "2 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17",
    "places_failed": [
     {
      "lon": -81.10079,
@@ -491,7 +312,7 @@
      -83.85152
     ]
    ],
-   "reason": "1 NHD water of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "reason": "1 NHD water of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17",
    "places_failed": [
     {
      "lon": -83.85152,
@@ -516,7 +337,7 @@
      -81.439941
     ]
    ],
-   "reason": "2 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "reason": "2 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17",
    "places_failed": [
     {
      "lon": -81.43994,
@@ -541,7 +362,7 @@
     ]
    ],
    "note": "NEORSD's wording for the Ohio Canal where it reaches the Cuyahoga River",
-   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17",
    "parts": [
     "Ohio Canal"
    ]
@@ -562,7 +383,7 @@
      -83.888349
     ]
    ],
-   "reason": "3 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "reason": "3 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17",
    "places_failed": [
     {
      "lon": -83.88835,
@@ -587,7 +408,7 @@
      -82.944444
     ]
    ],
-   "reason": "10 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08",
+   "reason": "10 NHD waters of that name in OH, none within reach of the reports' places; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17",
    "places_failed": [
     {
      "lon": -82.94444,
@@ -616,7 +437,7 @@
     "Summit County"
    ],
    "note": "named by Akron's overflow sites; no record",
-   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17"
   },
   {
    "name": "Ohio Canal",
@@ -654,7 +475,7 @@
     "Summit County"
    ],
    "note": "named by Akron's overflow sites; no record",
-   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-08"
+   "reason": "no NHD flowline or waterbody of that name in OH; no NHD high-resolution flowline of that name within 3 km of the points; the map service (OpenStreetMap) could not be reached on 2026-11-17"
   }
  ],
  "resolved": [
@@ -689,7 +510,7 @@
    "slugs": [
     "mill-creek-cleveland-oh"
    ],
-   "how": "record built from the name",
+   "how": "a water record already holds the name",
    "points": [
     [
      41.434976,
@@ -775,7 +596,7 @@
    "slugs": [
     "big-creek-cleveland-oh"
    ],
-   "how": "record built from the name",
+   "how": "a water record already holds the name",
    "points": [
     [
      41.446149,
@@ -833,13 +654,6 @@
      41.448758,
      -81.763955
     ]
-   ],
-   "places_failed": [
-    {
-     "lon": -81.80156,
-     "lat": 41.42386,
-     "reason": "no NHD water of that name within 2 km of the reports' point (41.42386, -81.80156) (the nearest is 3.4 km away)"
-    }
    ]
   },
   {
@@ -1017,6 +831,15 @@
      -81.690272
     ]
    ]
+  },
+  {
+   "name": "West Branch of Huron River",
+   "reports": 2,
+   "slugs": [
+    "west-branch-huron-river-oh"
+   ],
+   "how": "record built from the name",
+   "county": "Huron County"
   },
   {
    "name": "West Creek",
