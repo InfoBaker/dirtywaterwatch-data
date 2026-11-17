@@ -100,7 +100,7 @@ jobs:
           pipeline/.venv/bin/python scripts/state_batch.py plan --state "$STATE" --steps "$STEPS" \
             --budget-s "$BUDGET_S" --max-requests "$MAX_REQUESTS" --osm-budget "$OSM_BUDGET"
           echo "BATCH_DATE=$(date -u +%F)" >> "$GITHUB_ENV"
-      - run: npm install -g wrangler@4
+      - run: npm install -g wrangler@4 && sh scripts/wrangler-guard.sh   # every later wrangler call is filtered (no account name in the log)
       - name: Restore pipeline state from R2 (read only here)
         run: |
           # the name blocklist the publish needs comes with it; an object that is there but cannot be read stops the batch.
