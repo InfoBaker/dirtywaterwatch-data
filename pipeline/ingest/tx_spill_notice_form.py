@@ -269,7 +269,10 @@ def _day(ts) -> date | None:
 def _water_key(t) -> str:
     """A water's name for comparison: lower case, letters only, without a TCEQ prefix ("SPILLED INTO")."""
     t = re.sub(r"(?i)\bspilled\s+(?:in)?to\b|\briver/creek\b", " ", str(t or ""))
-    return re.sub(r"[^a-z]", "", t.lower())
+    m = WATER_NAME.search(re.sub(r"\b([A-Z])([A-Z]+)\b", lambda x: x.group(1) + x.group(2).lower(), t))
+    if not m or NOT_A_WATER.search(m.group(0)):
+        return ""                    # names no water ("NO WATER BODY PROVIDED", "the ground"): no water to compare
+    return re.sub(r"[^a-z]", "", m.group(0).lower())
 
 
 def _bound(rec: dict) -> int | None:

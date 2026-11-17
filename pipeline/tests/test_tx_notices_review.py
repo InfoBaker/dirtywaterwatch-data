@@ -91,3 +91,11 @@ def test_p2_unread_release_is_retried_after_it_leaves_the_list(tmp_path):
     recs2, stats2 = U.run_site("austin", ["<a href=\"/water/news/other\" hreflang=\"und\">Prescribed burn</a>"], [], "T2",
                                lambda u: page, retry=stats["unread_items"])
     assert len(recs2) == 1 and stats2["unread"] == []
+
+
+def test_p1_link_ignores_a_tceq_text_that_names_no_water():
+    rec = {"started_at": "2026-04-27T14:40:00-05:00", "volume_gal": None, "volume_text": "Spill estimated >100,000 gallons",
+           "discharger_id": "tx-san-antonio-water-system", "waterbody_text": "Rosillo Creek", "raw": {}}
+    for text in ("NO WATER BODY PROVIDED", "spilled into the ground", "SPILLED INTO RIVER/CREEK, UNKNOWN"):
+        r = dict(rec, raw={})
+        assert F.link_tceq([r], [_row(9, "2026-04-27", 4133897, text)]) == 1, text
