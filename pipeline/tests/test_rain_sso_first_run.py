@@ -55,7 +55,7 @@ def fl_template() -> dict:
     feats = [f["attributes"] for f in json.loads((FIX / "fl_dep_pnp_layer.json").read_text())["features"]]
     recs, _ = FL.build(feats, "2026-11-04T00:00:00Z", [], permits={"FL0031771": ("fl-test", "Test")})
     return next(r for r in recs if r["event_type"] == "sso" and r["time_precision"] == "day"
-                and r["raw"].get("_pnp_kind") == "untreated")
+                and r["raw"].get("_pnp_kind") == "untreated" and not r.get("parent_event_id"))      # a first notice
 
 
 CT_ROW = {"Reporting Utility": "WATERBURY WPCA", "Status": "Closed", "Incident Type": "Sewage Bypass",
@@ -180,7 +180,8 @@ def test_a_source_that_dates_few_reports_or_reports_late_is_left_out_in_true_wor
         "publishes its reports a median 9.5 days after the discharge (at most 7 days needed)")
     assert SS.source_timely({"records": 10, "dated_share": 1.0, "lag_days": None}, cfg) is None  # as the grade
     assert SS.source_timely({"records": 10, "dated_share": 1.0, "lag_days": 7}, cfg) is None
-    assert SS.source_timely({"records": 0, "dated_share": None, "lag_days": None}, cfg) is None  # the silence rule's
+    assert SS.source_timely({"records": 0, "dated_share": None, "lag_days": None}, cfg) == (
+        "has published no sewage report in the last 12 months")     # never prompt (review 2026-11-16 P1-1)
     ev = common.EVENTS_DIR
     doc = json.loads((ev / "fl-dep-pnp.json").read_text())
     for r in doc["records"]:
@@ -246,9 +247,9 @@ def test_a_refusal_part_way_keeps_the_unread_operators_previous_entries(world):
         assert {k: v for k, v in e.items() if k != "carried"} == full["operators"][op]
     assert d["counts"]["carried"] == 2 and d["counts"]["qualify"] == 3 and d["counts"]["read"] == 1
     # with no previous entry it says so, and never qualifies
-    calls.append("again")
-    d2 = run(reader=reader, have=lambda *a: False, prev={}, offline=False)
-    assert d2["operators"]["fl-wet"]["why_not"] == ["the rain record for this operator has not been read yet"]
+    calls.append("again")      # refused from the first, with nothing to keep: a missing input (review P2-4)
+    with pytest.raises(SS.MissingInput, match="not read and no previous entry"):
+        run(reader=reader, have=lambda *a: False, prev={}, offline=False)
 
 
 def test_a_pass_that_stopped_runs_again_the_next_hour(world, monkeypatch, capsys):
@@ -256,8 +257,9 @@ def test_a_pass_that_stopped_runs_again_the_next_hour(world, monkeypatch, capsys
     monkeypatch.setattr(SS, "read_json", lambda p, d=None: rules if p.name == "rules.json" else common.read_json(p, d))
     path = world / "rain-levels-sso.json"
     built = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
-    path.write_text(json.dumps({"method_version": SS.METHOD_VERSION, "built": built, "operators": {},
-                                "run": {"stopped": "ServiceRefused at ct-wet: 429"}, "counts": {"carried": 2}}))
+    path.write_text(json.dumps({"method_version": SS.METHOD_VERSION, "revision": SS.FILE_REVISION, "built": built,
+                                "operators": {}, "run": {"stopped": "ServiceRefused at ct-wet: 429"},
+                                "counts": {"carried": 2}}))      # this revision: only the stop makes it run again
     calls = []
     monkeypatch.setattr(SS, "build", lambda **kw: calls.append(kw) or {
         "counts": {"operators": 3, "read": 3, "qualify": 3, "qualify_by_state": {}, "carried": 0},
@@ -322,3 +324,79 @@ def test_an_entry_with_no_source_date_is_not_said_to_have_a_silent_source():
     assert SS.too_old(e, cfg, TODAY) == "the date of its source's newest report is not on file"
     assert SS.too_old({"recency": {"source": "ct-deep", "source_newest": "2025-10-01"}}, cfg, TODAY).startswith(
         "its source ct-deep has published no report in the last 12 months (newest 2025-10-01)")
+
+
+# ---------------------------------------------------------------- the reviewer's findings (Astra, 2026-11-16)
+
+def annual_records(op, days, delay_days=90):
+    from collections import Counter
+    from ingest import ct_deep_annual as CA
+    ann = CA.make_record("sso", dict(CT_ROW), dict(CT_ROW), 2, "2026-sso-bypass.xlsx", "SSO", 2025,
+                         "2026-02-25T21:08:59Z", "2026-11-16T08:00:00Z", NOW, set(), Counter())
+    recs = clones(ann, op, days, 41.55, -73.04)
+    for r in recs:
+        r["reported_at"] = None
+        r["published_at"] = (datetime.fromisoformat(r["started_at"]) + timedelta(days=delay_days)).isoformat()
+    return recs
+
+
+def test_review_p1_1_a_silent_prompt_source_does_not_carry_a_late_one(world):
+    """The dashboard has published nothing in a year; the annual workbook (90 days late) has. No prompt source of
+    the operator's reports publishes now, so no caution, and the reasons say so."""
+    ev = common.EVENTS_DIR
+    days = rain_days_until(UNTIL - timedelta(days=10))
+    old = [d for d in days if d < TODAY - timedelta(days=400)]
+    recs = clones(ct_template(), "ct-wet", old, 41.55, -73.04)
+    common.write_events("ct-deep", recs, ok=True, path=ev / "ct-deep.json")
+    common.write_events("ct-deep-annual", annual_records("ct-wet", [d for d in days if d >= old[-1]]), ok=True,
+                        path=ev / "ct-deep-annual.json")
+    d = run()
+    e = d["operators"]["ct-wet"]
+    assert e["qualifies"] is False
+    assert "its source ct-deep has published no sewage report in the last 12 months" in e["why_not"]
+    assert any(w.startswith("its source ct-deep-annual publishes its reports a median ") for w in e["why_not"])
+
+
+def test_review_p1_2_the_delay_is_read_from_first_reports_only_as_the_grade(world):
+    """Florida's updates of a notice (parent_event_id) come days later; the grade's delay is over first reports."""
+    ev = common.EVENTS_DIR
+    doc = json.loads((ev / "fl-dep-pnp.json").read_text())
+    kids = []
+    for r in doc["records"]:
+        k = copy.deepcopy(r)
+        k.update(event_id=r["event_id"] + "-u", source_record_id=r["source_record_id"] + "-u",
+                 parent_event_id=r["event_id"],
+                 reported_at=(datetime.fromisoformat(r["started_at"]) + timedelta(days=20)).isoformat())
+        kids.append(k)
+    doc["records"] += kids
+    (ev / "fl-dep-pnp.json").write_text(json.dumps(doc))
+    fig = SS.source_figures(doc["records"], TODAY)
+    assert fig["lag_days"] is not None and fig["lag_days"] <= 1.5
+    assert run()["operators"]["fl-wet"]["late_sources"] == {}
+
+
+def test_review_p1_3_a_source_file_missing_stops_the_stage(world):
+    """Connecticut's events file is gone while Alabama's is there: the stage stops rather than tell the public that
+    Connecticut's operator has no report."""
+    prev = run()
+    (common.EVENTS_DIR / "ct-deep.json").unlink()
+    with pytest.raises(SS.MissingInput, match="ct-deep"):
+        run(prev=prev)
+
+
+def test_review_p2_4_rain_not_read_with_nothing_to_keep(world, monkeypatch):
+    """No rain record read and no previous entry: the stage stops rather than write a file where nobody qualifies;
+    when some are read, those not read are named and the pass runs again the next hour."""
+    with pytest.raises(SS.MissingInput, match="rain record"):
+        run(reader=lambda *a: {}, have=lambda *a: False, offline=False)
+    d = run(reader=lambda lat, lon, *a: dict(DAILY) if lat > 30 else {}, have=lambda *a: False, offline=False)
+    assert d["run"]["unread"] == ["fl-wet"] and d["operators"]["al-wet"]["qualifies"] is True
+    rules = rules_on()
+    monkeypatch.setattr(SS, "read_json", lambda p, dflt=None: rules if p.name == "rules.json" else common.read_json(p, dflt))
+    built = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    (world / "rain-levels-sso.json").write_text(json.dumps({**d, "built": built}, default=str))
+    calls = []
+    monkeypatch.setattr(SS, "build", lambda **kw: calls.append(kw) or {
+        "counts": {"operators": 3, "read": 3, "qualify": 3, "qualify_by_state": {}, "carried": 0},
+        "run": {"requests": 0, "stopped": None}, "state_grades_on_file": True})
+    assert SS.main(["--if-older-h", "20"]) == 0 and len(calls) == 1

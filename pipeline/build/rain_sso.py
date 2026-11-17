@@ -215,8 +215,8 @@ def source_figures(records: list[dict], today: date) -> dict:
         if is_dated(r):
             k += 1
             latest = d if latest is None or d > latest else latest
-            lag = lag_of(r)
-            if lag is not None:
+            lag = lag_of(r) if not r.get("parent_event_id") else None   # first reports only, as the grade
+            if lag is not None:                                          # (an update of a notice comes later)
                 lags.append(lag)
     return {"records": n, "dated_share": round(k / n, 3) if n else None,
             "lag_days": round(statistics.median(lags), 2) if lags else None,
@@ -234,11 +234,11 @@ def source_ok(fig: dict, cfg: dict, batches: bool = False) -> str | None:
 def source_timely(fig: dict, cfg: dict) -> str | None:
     """None when a source publishes dated reports promptly; else why not, as words that follow "its source <id>": over
     its last 12 months it dates source_min_dated_share or less of its sewage reports, or its median delay from a
-    discharge to its report is over source_max_lag_days (export/coverage.py's grade figures, per source; a delay that
-    cannot be read passes, as in the grade). A source with no sewage report in 12 months is left to the silence rule
-    (recency), whose reason says so. Pure."""
+    discharge to its report is over source_max_lag_days (export/coverage.py's grade figures, per source, the delay over
+    first reports; a delay that cannot be read passes, as in the grade); nor one with no sewage report in 12 months
+    (a silent prompt source never carries a late one: review 2026-11-16 P1-1). Pure."""
     if not (fig or {}).get("records"):
-        return None
+        return "has published no sewage report in the last 12 months"
     share, lag = fig.get("dated_share"), fig.get("lag_days")
     need = float(cfg["source_min_dated_share"])
     if share is None or share <= need + 1e-9:
@@ -498,6 +498,12 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
     prev_ops = (prev or {}).get("operators") or {} if (prev or {}).get("method_version") == METHOD_VERSION else {}
     if not any(recs for _, recs in sources or []):
         raise MissingInput("no events file with records")
+    # every source the previous file drew an approved operator's history from must be there (review 2026-11-16 P1-3):
+    # an events file that did not arrive is a missing input, never "no report"
+    need = {s for op in approved for s in (prev_ops.get(op) or {}).get("sources") or []}
+    gone = sorted(need - {sid for sid, recs in sources or [] if recs})
+    if gone:
+        raise MissingInput(f"no records from {', '.join(gone)}, a source of the approved operators' reports")
 
     spans: dict[str, list[dict]] = defaultdict(list)
     left: dict[str, dict] = defaultdict(dict)
@@ -562,6 +568,7 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
 
     bud = RequestBudget(budget)
     stopped = None
+    unread: list[str] = []      # approved operators with reports whose rain record was not read and nothing was kept
     ops: dict[str, dict] = {}
     outside = 0
     for op in sorted(set(spans) | approved):
@@ -615,6 +622,7 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
                 continue
             ops[op] = {**base, "qualifies": False, "read": False, "points": [list(p) for p in pts],
                        "why_not": ["the rain record for this operator has not been read yet"]}
+            unread.append(op)
             continue
         daily = rh.daily_max(series)
         e = analyse_operator(op, daily, sp, cover, cfg, hist_cfg, today)
@@ -629,6 +637,10 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
         entry["why_not"] = why
         ops[op] = entry
 
+    if unread and not any(o.get("read") or o.get("carried") for o in ops.values()):
+        # review 2026-11-16 P2-4: no rain record read and none kept is a missing input, not "nobody qualifies"
+        raise MissingInput(f"the rain record of {len(unread)} approved operators was not read and no previous entry "
+                           "is on file" + (f" ({stopped})" if stopped else ""))
     out = {"method_version": METHOD_VERSION, "revision": FILE_REVISION, "built": now.astimezone(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
            "today": today.isoformat(), "rain_record": rh.RAIN_RECORD,
            "settings": {k: v for k, v in cfg.items() if k not in ("doc", "source", "labels")},
@@ -648,7 +660,8 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
                       "qualify": sum(1 for o in ops.values() if o.get("qualifies")),
                       "qualify_by_state": dict(sorted(Counter(o["state"] for o in ops.values()
                                                               if o.get("qualifies")).items()))},
-           "run": {"requests": bud.used, "budget": budget, "stopped": stopped, "offline": offline},
+           "run": {"requests": bud.used, "budget": budget, "stopped": stopped, "offline": offline,
+                   "unread": unread},
            "operators": {k: ops[k] for k in sorted(ops)}}
     out = rh._round(out)
     if write:
@@ -1005,7 +1018,8 @@ def main(argv=None) -> int:
             built = datetime.fromisoformat(str((d or {}).get("built")).replace("Z", "+00:00"))
             # a pass that stopped part-way (the service refused, the budget ran out) runs again the next hour, and so
             # does a file of an earlier revision (the first run's, in which nobody qualified)
-            done = not ((d or {}).get("run") or {}).get("stopped") and (d or {}).get("revision") == FILE_REVISION
+            run = (d or {}).get("run") or {}
+            done = not run.get("stopped") and not run.get("unread") and (d or {}).get("revision") == FILE_REVISION
             if (d or {}).get("method_version") == METHOD_VERSION and done \
                     and datetime.now(UTC) - built < timedelta(hours=a.if_older_h):
                 print(f"rain_sso: {LEVELS_BUILD.name} is younger than {a.if_older_h:g} hours; nothing to do")
@@ -1022,6 +1036,7 @@ def main(argv=None) -> int:
           f"{c['qualify_by_state']}; {d['run']['requests']} requests"
           + (f"; {c['carried']} carried from the previous file" if c.get("carried") else "")
           + ("" if d.get("state_grades_on_file") else "; state grades not on file, the source rule alone applied")
+          + (f"; not read: {', '.join(d['run']['unread'])}" if d['run'].get('unread') else "")
           + (f"; stopped: {d['run']['stopped']}" if d['run']['stopped'] else ""))
     return 0
 
