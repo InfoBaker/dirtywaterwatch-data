@@ -93,7 +93,9 @@
 #                  Alabama: al_adem_sso (ADEM's SSO report layers: every report filed through AEPACS since 2012, posted
 #                  within minutes, with the live map's received time and cause; the last 60 days each hour, the whole
 #                  layer every 20 hours) and al_adem_beaches (ADEM and ADPH's coastal beach monitoring layer: an
-#                  advisory code other than 11 opens a beach advisory)
+#                  advisory code other than 11 opens a beach advisory) and al_jefferson_county_soa (Jefferson County
+#                  Environmental Services' overflow advisories page: the current year's CSV export hourly, each
+#                  advisory with its time, street, named creek and point; ADEM's copy of the same overflow is kept)
 #                  Texas: the generic Socrata block tx-tceq-sso-opendata (TCEQ's Sanitary Sewer Overflows table since
 #                  2010: dates only, no locations, published in batches months late; read only when its rowsUpdatedAt
 #                  moves, if_changed; ingest/tx_transforms.py; operators by data/reference/tx-tceq-permits.json, rebuilt

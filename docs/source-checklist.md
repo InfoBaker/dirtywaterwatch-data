@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1722 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1723 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -39,7 +39,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ak | 3 | 0 | 2 | 0 | 3 | 8 |
 | nm | 3 | 0 | 3 | 2 | 1 | 9 |
 | hi | 3 | 0 | 6 | 1 | 0 | 10 |
-| al | 5 | 0 | 6 | 2 | 0 | 13 |
+| al | 6 | 0 | 6 | 2 | 0 | 14 |
 | tx | 5 | 0 | 7 | 1 | 0 | 13 |
 | ut | 4 | 0 | 3 | 2 | 1 | 10 |
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **632** | **232** | **548** | **229** | **81** | **1722** |
+| **all** | **633** | **232** | **548** | **229** | **81** | **1723** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1565,7 +1565,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `hi-swim-guide-surfrider` | Surfrider Blue Water Task Force (Hawaii chapters) and Swim Guide | watch | search_only | prior_art | Volunteer bacteria sampling; prior art. |
 | `hi-epa-sobe` | EPA eRule SOBE extract (Hawaii) | rejected | fetched | events | 0 Hawaii events in the local extract on 2026-11-03. |
 
-## al: Alabama (13)
+## al: Alabama (14)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1573,6 +1573,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `al-adem-rule-335-6-6-12` | ADEM Admin. Code r. 335-6-6-.12(l)6.(v) Immediate notification | used | fetched | law | Legal basis for the public duty and the 24-hour/5-day clock. |
 | `al-adem-sso-history` | ADEM SSO reports, all dates (SSOs_ALL_OB_ID MapServer layer 0) | used | fetched | events | Read hourly by pipeline/ingest/al_adem_sso.py (the last 60 days and ongoing reports; the whole layer every 20 hours): 14,758 reports on 2026-11-07 (2012-05-11 to 2026-11-06; 1,106 to 2,293 a year since 2017; 1,008 in 2026 to date), 319 permits, 9 marked ongoing; every report has a point; the receiving-water words name a water on 9,627, say none was reached on 4,113 and name only a storm drain or ditch or nothing on 1,018. |
 | `al-adem-sso-map-live` | ADEM Sanitary Sewer Overflow Map (SSO_Service MapServer layer 0, current SSOs) | used | fetched | events | Read with the history layer by pipeline/ingest/al_adem_sso.py: 31 reports on 2026-11-07; gives ADEM's received time, the report type, the cause and the volume range in full (the history layer cuts it at 15 characters). |
+| `al-jefferson-county-soa` | Jefferson County Environmental Services Department, Sanitary Sewer Overflow Advisories | used | fetched | events | Read hourly by pipeline/ingest/al_jefferson_county_soa.py from 2026-11-17 (the current year's export; --backfill for 2012 on): one dated record per advisory with its time, street, named water and point; records ADEM also carries are duplicate_of ADEM's report. The page does not say what 'Date Resolved' means, so it is kept as the advisory's resolved date, never the end of the overflow. |
 | `al-petition-2017-notice` | Petition to amend r. 335-6-6-.12 (Alabama Rivers Alliance and eight riverkeepers, March 2017) | used | fetched | law | Context for barriers. |
 | `al-adem-efile-sso` | ADEM eFile SSO report PDFs (per permit) | watch | fetched | events | Citation target for each event (the signed form); not needed for ingest. |
 | `al-adem-outfall-map` | ADEM Outfall_Map_Data and MunicipalOutfalls MapServers | watch | fetched | outfalls | Possibly better outfall points than ICIS; compare later. |
