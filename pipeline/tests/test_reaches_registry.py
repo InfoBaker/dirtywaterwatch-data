@@ -172,6 +172,49 @@ def test_plan_puts_tidal_retraces_ahead_of_first_traces_when_the_rule_is_on():
         "j-early-mark", "k-early-mark-old", "a-new", "e-stale"]
 
 
+def test_event_points_cut_at_tidal_before_the_rule_come_back_as_candidates_once(monkeypatch):
+    """The status build names an event for tracing only while it has no trace, so a traced event point never
+    reached plan() again and stayed cut at the head of tide. With the rule on, its cached record makes it a
+    candidate again, from its own point, until it is redone; with the rule off, never."""
+    recent = NOW - timedelta(days=2)
+    mark = {"tidal_river": R.TIDAL_RULE, "tidal_off": {"segments": 1, "cut_reason": "tidal", "river": None}}
+    pt = {"key": "pt-aaaaaaaaaaaa", "permit": "PA1", "outfall": None, "water_slug": "w", "lat": 40.0, "lon": -75.0,
+          "name": None, "sources": ["event-point"], "event_ids": ["x:1"], "fetched_at": recent.isoformat(),
+          "cut_reason": "tidal", "segments": [{"km_start": 0, "km_end": 1}]}
+    cached = {d["key"]: d for d in (
+        pt,
+        {**pt, "key": "pt-bbbbbbbbbbbb", "cut_reason": "cap_km", **mark},             # redone under the rule
+        {**pt, "key": "pt-cccccccccccc", "cut_reason": "cap_km"},                     # never cut at tidal
+        {**pt, "key": "pt-dddddddddddd",                                              # its retrace failed today
+         "last_attempt": {"at": (NOW - timedelta(hours=2)).isoformat(), "error": "ConnectionError"}},
+        {**pt, "key": "pt-eeeeeeeeeeee", "lat": None},                                # no point on the record
+        rec("PA1-001", recent, cut="tidal", sources=["echo"]))}                       # an outfall: plan()'s own
+    monkeypatch.setattr(R, "tidal_river_on", lambda rules=None: False)
+    assert R.tidal_due_points(cached, set(), NOW) == []
+    monkeypatch.setattr(R, "tidal_river_on", lambda rules=None: True)
+    got = R.tidal_due_points(cached, set(), NOW)
+    assert got == [{"key": "pt-aaaaaaaaaaaa", "permit": "PA1", "outfall": None, "water_slug": "w", "lat": 40.0,
+                    "lon": -75.0, "name": None, "sources": ["event-point"], "event_ids": ["x:1"]}]
+    new = {"key": "n-new", "permit": "PA1", "outfall": "n", "lat": 40.0, "lon": -75.0, "sources": ["echo"],
+           "outfall_kind": "cso"}
+    todo, _ = R.plan([new] + got, cached, NOW, tidal_river=True)
+    assert [c["key"] for c in todo] == ["pt-aaaaaaaaaaaa", "n-new"]                   # with the event points: first
+    assert R.tidal_due_points(cached, {"pt-aaaaaaaaaaaa"}, NOW) == []                 # already named: not twice
+    cached["pt-aaaaaaaaaaaa"] = {**pt, "cut_reason": "cap_km", **mark}
+    assert R.tidal_due_points(cached, set(), NOW) == []                               # redone: not again
+    # the catch-up never takes the hour from a new report: a new event point goes first whatever its key, and
+    # a run names at most `limit` points, the most recently traced first
+    cached["pt-aaaaaaaaaaaa"] = pt
+    fresh_pt = {**got[0], "key": "pt-zzzzzzzzzzzz", "event_ids": ["x:9"]}
+    todo, _ = R.plan(got + [fresh_pt, new], cached, NOW, tidal_river=True)
+    assert [c["key"] for c in todo] == ["pt-zzzzzzzzzzzz", "pt-aaaaaaaaaaaa", "n-new"]
+    many = {f"pt-{i:012d}": {**pt, "key": f"pt-{i:012d}",
+                             "fetched_at": (NOW - timedelta(days=1, hours=i)).isoformat()} for i in range(5)}
+    assert [c["key"] for c in R.tidal_due_points(many, set(), NOW, limit=2)] == ["pt-000000000000", "pt-000000000001"]
+    assert len(R.tidal_due_points(many, set(), NOW)) == 5 and R.TIDAL_BACKFILL >= 5
+    assert R.tidal_due_points(many, set(), NOW, limit=0) == []
+
+
 def test_a_default_run_stays_far_under_the_navigation_allowance():
     """The hourly refresh runs the step with no arguments: its budget and the reserve it keeps must leave most of
     NLDI's 1000 navigation requests an hour to the other steps that share the address."""
