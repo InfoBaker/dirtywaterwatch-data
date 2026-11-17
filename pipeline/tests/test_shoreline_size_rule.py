@@ -516,7 +516,14 @@ def test_a_narrow_reservoir_keeps_the_whole_fill_under_the_width_floor():
     assert measured["narrow-res-vt"]["outline_mean_width_km"] == pytest.approx(1.0, abs=0.05)
     assert not SH.is_shoreline(measured["narrow-res-vt"], floor)          # kept filled whole
     assert SH.is_shoreline(measured["big-lake-vt"], floor)                  # 8 km wide: moves
-    assert "narrower than 0.9 mile (1.5 kilometres) on average" in SH.size_texts(floor)["rationale"]
+    assert "narrower than 0.9 mile (1.5 kilometres) on average, such as" in SH.size_texts(floor)["rationale"]
+    assert measured["narrow-res-vt"]["outline_length_km"] == pytest.approx(71.5, abs=1.5)
+    # with the pilot's length condition too: kept at 40 km, moved at 100 km
+    for ln, moves in ((40, False), (100, True)):
+        r2 = {**floor, "narrow_min_length_km": ln}
+        assert SH.is_shoreline(measured["narrow-res-vt"], r2) is moves
+    assert "on average and longer than 25 miles (40 kilometres), such as" in \
+        SH.size_texts({**floor, "narrow_min_length_km": 40})["rationale"]
     assert "narrower" not in SH.size_texts(on)["rationale"]
 
 

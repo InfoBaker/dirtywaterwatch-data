@@ -68,13 +68,15 @@ OCEAN_KINDS = {"bay", "sound", "sea", "ocean", "lake", "reservoir"}
 # outline_areas only while the rule is on), with where the figure came from.
 SIZE_KINDS = ("lake", "reservoir")
 DEFAULTS = {"each_way_km": 20.0, "shore_m": 500.0, "gap_km": 3.0, "snap_km": 5.0, "name_min_area_km2": 100.0,
-            "min_area_km2": None, "min_area_kinds": list(SIZE_KINDS), "min_mean_width_km": None, "min_ring_km": None,
+            "min_area_km2": None, "min_area_kinds": list(SIZE_KINDS), "min_mean_width_km": None, "narrow_min_length_km": None,
+            "min_ring_km": None,
             "lakes": [], "oceans": [], "ocean_open_m": 1000.0, "ocean_tie_offshore_km": None}
 OUTLINE_AREA = "outline_area_km2"      # the record key status.with_outline_areas fills for a record with no area_km2
 # the outline's mean width (twice the area over the length of every shore ring, islands included), which
 # status.with_outline_areas puts on a crossing lake or reservoir only while min_mean_width_km is set; and the mark it
 # puts on a bay or sound with no outline here while the size rule takes those kinds
 OUTLINE_WIDTH = "outline_mean_width_km"
+OUTLINE_LENGTH = "outline_length_km"      # the long side of the outline's smallest rotated rectangle (with the width)
 NO_OUTLINE = "no_outline_here"
 FILL_KINDS = {"lake", "reservoir", "pond"}
 STATE_NEAR_M = 2_000          # a stretch point this close to a state's land touches that state
@@ -197,9 +199,11 @@ def size_texts(r: dict) -> dict:
     floor = r.get("min_mean_width_km")
     if filled and floor is not None:
         fl = float(floor)
+        ln = r.get("narrow_min_length_km")
+        longer = (f" and longer than {_miles(float(ln))} miles ({float(ln):g} kilometres)" if ln is not None else "")
         rationale += (f" {_kind_list(set(filled)).capitalize()} narrower than {fl * 0.621371:.1f} mile ({fl:g} "
-                      f"kilometres) on average, such as reservoirs that fill a river valley, are still coloured as a "
-                      f"whole: a stretch along one bank would leave the nearby opposite bank grey.")
+                      f"kilometres) on average{longer}, such as reservoirs that fill a river valley, are still "
+                      f"coloured as a whole: a stretch along one bank would leave the nearby opposite bank grey.")
     if tidal:
         rationale += (f" On a {' or '.join(tidal)}, such a report is listed on the water's page, and its outlets "
                       f"are marked on the map. Where we draw the ocean shore, a {' or '.join(tidal)} open to the sea is "
@@ -252,8 +256,11 @@ def size_entry(w: dict, r: dict) -> dict | None:
         return None
     floor = r.get("min_mean_width_km")
     width = w.get(OUTLINE_WIDTH)
+    long_km = r.get("narrow_min_length_km")
+    length = w.get(OUTLINE_LENGTH)
     if (kind in FILL_KINDS and floor is not None and isinstance(width, (int, float)) and not isinstance(width, bool)
-            and width < float(floor)):
+            and width < float(floor)
+            and (long_km is None or (isinstance(length, (int, float)) and length >= float(long_km)))):
         return None             # long and narrow (a reservoir in a drowned river valley): filled whole, as before
     hit = {"name": w.get("name"), "size_rule": True, "area_km2": round(area, 3), "area_basis": basis}
     if kind == "bay":
