@@ -53,10 +53,11 @@ COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id"
            "sampled_at", "time_precision", "ended_at_precision",
            # the source's detail (export/detail.py FIELDS, the same names) and the later record of the same event
            "report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
-           "volume_method", "volume_to_water_gal", "volume_recovered_gal", "overflow_point",
-           "later_volume_gal", "later_volume_text", "later_volume_qualifier", "later_record_published_at", "later_record_id"]
+           "volume_method", "volume_to_water_gal", "overflow_point", "town_named",
+           "later_volume_gal", "later_volume_text", "later_volume_qualifier", "later_record_kind", "later_record_published_at",
+           "later_record_id", "linked_record_ids"]
 DETAIL_COLUMNS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
-                  "volume_method", "volume_to_water_gal", "volume_recovered_gal", "overflow_point")
+                  "volume_method", "volume_to_water_gal", "overflow_point", "town")
 LIST_SEP = ";"
 # children of out_dir this module owns (and replaces on every run); everything else in out_dir is left alone
 MANAGED_DIRS = ("water", "operator", "state")
@@ -423,7 +424,10 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     row += [_number(d.get(k)) if k.endswith("_gal") else _text(d.get(k)) for k in DETAIL_COLUMNS]
     lv = e.get("later_volume") if isinstance(e.get("later_volume"), dict) else {}
     row += [_number(lv.get("volume_gal")), _text(lv.get("volume_text")), _text(lv.get("volume_qualifier")),
-            _text(lv.get("published_at")), _text(lv.get("event_id"))]
+            _text(lv.get("report_kind")), _text(lv.get("published_at")), _text(lv.get("event_id"))]
+    links = e.get("linked_records") if isinstance(e.get("linked_records"), list) else []
+    row.append(_text(LIST_SEP.join(f"{r['relation']}:{r['event_id']}" for r in links
+                                   if isinstance(r, dict) and isinstance(r.get("event_id"), str) and r.get("relation"))))
     return row, ops
 
 
