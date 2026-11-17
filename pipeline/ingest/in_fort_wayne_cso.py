@@ -266,15 +266,31 @@ def parse(doc: dict) -> dict:
     # rows: each block's dates lie below its header and above the next block's
     for bi, (pg, hy, groups) in enumerate(blocks):
         below = blocks[bi + 1][1] + 24 if bi + 1 < len(blocks) and blocks[bi + 1][0] == pg else -1e9
-        days = {}
+        # the date column: from the block's "Date" heading to its first cell. A date may be drawn a few characters at
+        # a time ("12", "/", "31/2025": the weeks of 2025-12-17, 2026-01-07 and 2026-02-25), as hand-edited cells are:
+        # the pieces on one line of the column are joined left to right (draw order where they share a position)
+        # and must make one date; pieces that do not are left for the checks below to refuse
+        first_cell = min(g["cells"][0][0] for g in groups)
+        heading = [p[1] for p in pieces if p[0] == pg and p[3] == "Date" and abs(p[2] - hy) <= 9]
+        left_edge = min(heading) - 12 if heading else -1e9
+        lines: dict[float, list] = {}
         for i, p in enumerate(pieces):
-            if p[0] == pg and below < p[2] < hy - 3 and DAY.fullmatch(p[3]):
-                mo, dd, y = map(int, DAY.fullmatch(p[3]).groups())
-                try:
-                    days[p[2]] = date(y, mo, dd).isoformat()
-                except ValueError:
-                    raise SummaryError(f"date '{p[3]}' is not a day") from None
-                used.add(i)
+            if i in used or p[0] != pg or not below < p[2] < hy - 3 or not left_edge <= p[1] < first_cell:
+                continue
+            y = next((k for k in lines if abs(k - p[2]) <= 0.5), p[2])
+            lines.setdefault(y, []).append((p[1], i, p[3]))
+        days = {}
+        for y, parts in lines.items():
+            v = "".join(t for _, _, t in sorted(parts)).replace(" ", "")
+            m = DAY.fullmatch(v)
+            if not m:
+                continue
+            mo, dd, yr = map(int, m.groups())
+            try:
+                days[y] = date(yr, mo, dd).isoformat()
+            except ValueError:
+                raise SummaryError(f"date '{v}' is not a day") from None
+            used.update(i for _, i, _ in parts)
         ds = sorted(days.values())
         if not ds:
             raise SummaryError(f"block {bi + 1}: no dated row")
