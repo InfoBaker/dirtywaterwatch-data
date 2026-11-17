@@ -100,7 +100,10 @@
 #                  2010: dates only, no locations, published in batches months late; read only when its rowsUpdatedAt
 #                  moves, if_changed; ingest/tx_transforms.py; operators by data/reference/tx-tceq-permits.json, rebuilt
 #                  by scripts/tx_permit_crosswalk.py) and the generic ArcGIS block tx-glo-beach-watch (Texas Beach
-#                  Watch's coastal stations: High is the program's advisory, Medium its label)
+#                  Watch's coastal stations: High is the program's advisory, Medium its label) and
+#                  tx_houston_sso_monthly (Houston's consent-decree monthly SSO tables: start and end to the minute,
+#                  street, gallons, the reached-water flag; no water, so placed only by TCEQ's record of the same
+#                  overflow, which it marks as the row's duplicate in TCEQ's events file; --backfill from 2024)
 #                  Utah: the generic ArcGIS blocks ut-deq-environmental-incidents (DEQ's spill hotline log since 1991:
 #                  the sewage rows by a title rule, dated to the day of discovery, the public's reports marked;
 #                  ingest/ut_transforms.py) and ut-dwq-recreational-advisories (DWQ's map of bloom and E. coli

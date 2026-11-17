@@ -1,0 +1,51 @@
+id: "tx-houston-sso-monthly"
+name: "City of Houston, Houston Public Works, monthly SSO reports (wastewater consent decree)"
+url: "https://www.houstonpublicworks.org/wastewater-cd"
+homepage: "https://www.houstonpublicworks.org/wastewater-cd"
+kind: "pdf"
+level: "municipal"
+# Feed row: written by pipeline/ingest/tx_houston_sso_monthly.py (data/build/events/tx-houston-sso-monthly.json).
+# Built 2026-11-17: hourly. Houston Public Works' consent decree page lists "Monthly SSO Report - <Month YYYY>" PDFs
+#   (April 2021 on; September 2026, posted October 16, 2026, the newest on 2026-11-17) at irregular file names: the month
+#   is read from the link's title. The reports are filed under the City's wastewater consent decree (United States and
+#   State of Texas v. City of Houston, Civil Action No. 4:18-cv-03368, S.D. Tex.); each report's cover letter to EPA
+#   Region 6 cites Paragraph 61. One table row per sanitary sewer overflow: SSO ID, TPDES permit, address, flow
+#   location, "Reached Waters of the US" (Yes/No), estimated gallons, structure type, cause, start and end date and
+#   time, average flow (GPM) and corrective action; then the month's total, fish kills, notifications to the public,
+#   whether a Texas Water Code § 7.251 report is attached, and the City's notes (a voided SSO, one public notice for
+#   two SSOs). The hourly run reads the index, the newest three months not yet read, and asks the newest three again
+#   with a conditional request (re-read only when the file changed); --backfill reads every month from January 2024.
+# Real read 2026-11-17: 33 reports, January 2024 to September 2026, 4,407 rows, each month's count equal to its stated
+#   total; 1,409 rows marked as reaching waters of the US; one SSO voided by the City (67077, March 2026).
+# Times: Central time (America/Chicago), to the minute, start and end as written ("9/1/2026 8:30:00 AM"; 2024 and early
+#   2025 in 24-hour time). A time without AM or PM is read on the 24-hour clock only where the report writes such a
+#   time after 12:59; otherwise, and in the hour daylight time skips or repeats, the record is dated to the day.
+# Volume: the City's estimate in gallons. A "0" is, in the City's words under every table, a row where "evidence of an
+#   SSO was observed but no active overflow was occurring. Consequently, flow rate and total volume loss could not be
+#   calculated": such a row has no volume figure and keeps the City's sentence.
+# Publication: the PDF's Last-Modified date on the City's server; the PDF's creation time and our fetch time kept apart.
+# Place: the table names no water. A row is placed only on the water TCEQ's record of the same overflow names; never by
+#   its street (no geocoding) and never by its TPDES permit (the treatment plant's permit; an overflow in the
+#   collection system is not at the plant's outfall). A row marked "No" for reaching waters of the US is kept, with the
+#   City's flow location, and colours no water.
+# One event, one record: TCEQ's open data (tx-tceq-sso-opendata) carries many of the same overflows months later, with
+#   dates only and, since mid-2024, no end. A row and a TCEQ record of the same sewer system, start day (within a day),
+#   street and consistent volume are one overflow: the City's row is shown and TCEQ's record is marked its duplicate in
+#   TCEQ's events file; each record links the other. Measured 2026-11-17 on TCEQ's rows of Harris County from 2023:
+#   2,707 of the 4,406 rows met a TCEQ record (37 of them took the water TCEQ's record names); 83 were kept apart
+#   because the City says the overflow reached no water and TCEQ's record names one; 34 had two equally good candidates.
+# Privacy: the address is a street address, often a home: its house number is removed (the leading number, and any
+#   number no route word precedes). The cover letter (officials' names and e-mail addresses) and the map page are never
+#   read into a record; the PDFs are not saved.
+cadence: "1 hour"
+license: "none stated"
+attribution: "City of Houston, Houston Public Works"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["TX"]
+access: ["pdf"]
+access_detail: "HTML page https://www.houstonpublicworks.org/wastewater-cd (200 to this build's named client, 2026-11-17) linking one PDF per month under /sites/g/files/nwywnm456/files/doc/ (Last-Modified given; a conditional request answers 304 when unchanged); the table pages read as plain text with pypdf."
+machine_readable: false
+legal_basis: "Consent decree, United States and State of Texas v. City of Houston, Civil Action No. 4:18-cv-03368 (S.D. Tex.), Paragraph 61 (the monthly SSO report filed under the decree)"
+checked: "2026-11-17"
