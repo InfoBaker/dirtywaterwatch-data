@@ -5,9 +5,9 @@ from __future__ import annotations
 import re
 from datetime import datetime
 
-from common import event, parse_volume_gal, scrub_text
+from common import event, parse_volume_gal
 
-from .message import Mail, iso_utc
+from .message import PLACE_SHAPE, VOLUME_SHAPE, Mail, clean_text, iso_utc
 
 ADVICE_RE = re.compile(r"(?i)(Avoid (?:all )?contact with (?:these|the affected|affected) water ?bod(?:y|ies)[^.]*?"
                        r"(?:for|at least) (\d+) hours[^.]*\.)")
@@ -36,20 +36,37 @@ def ma_record(mail: Mail, spec: dict, ctx: dict, n: int, *, permit: str, org: st
               num: int, suffix: str, state: str, start: datetime | None, end: datetime | None,
               vol_text: str | None, water: str | None, block: str, event_type: str = "cso",
               extra_raw: dict | None = None) -> dict:
-    """state: active | update | ceased. start and end are what the notice states (never the receipt time)."""
+    """state: active | update | ceased. start and end are what the notice states (never the receipt time). Every
+    text taken from the notice passes clean_text; one that does not (a contact line under an empty label, an address,
+    a phone) is set aside and only its field's name is noted (raw._fields_set_aside)."""
+    aside = []
+
+    def keep(name, v, **kw):
+        out = clean_text(v, **kw)
+        if v is not None and str(v).strip() and out is None:
+            aside.append(name)
+        return out
+    vol_text = keep("volume", vol_text, shape=VOLUME_SHAPE, maxlen=40)
+    water = keep("water", water, shape=PLACE_SHAPE, maxlen=80, water=True)
     volume_gal, _ = parse_volume_gal(vol_text) if vol_text else (None, "unknown")
-    advice = ADVICE_RE.search(block)
-    material = MATERIAL_RE.search(block)
+    am, mm = ADVICE_RE.search(block), MATERIAL_RE.search(block)
+    advice = keep("advice", am.group(1), maxlen=400) if am else None
+    material = keep("material", mm.group(1), shape=r"[A-Za-z ,;'()/-]+", maxlen=120) if mm else None
+    for k in ("volume_method", "affected_communities"):
+        if k in (extra_raw or {}):
+            extra_raw[k] = keep(k, extra_raw[k], maxlen=300, shape=None if k == "volume_method" else PLACE_SHAPE)
     lay, echo, slugs, wmatch, wnote = place(ctx, spec, permit, num, suffix, water)
     raw = {
         "_channel": "email", "_list": mail.list_id, "_inbound_id": mail.inbound_id,
         "_received_at": mail.received_at, "_sent_at": mail.sent_at, "_notice_state": state,
-        "_outfall_key": num, "_outfall_suffix": suffix, "location": scrub_text(location),
+        "_outfall_key": num, "_outfall_suffix": suffix, "location": location,
         "_tz_assumed": "America/New_York (the notice's local clock)",
         **(extra_raw or {}),
     }
     if wnote:
         raw["_water"] = wnote
+    if aside:
+        raw["_fields_set_aside"] = sorted(set(aside))
     lat = lon = coord_source = None
     if lay and lay.get("lat") is not None:
         lat, lon, coord_source = round(lay["lat"], 6), round(lay["lon"], 6), "outfall_layer"
@@ -67,11 +84,11 @@ def ma_record(mail: Mail, spec: dict, ctx: dict, n: int, *, permit: str, org: st
         lat=lat, lon=lon, coord_source=coord_source,
         started_at=iso_utc(start), ended_at=iso_utc(end), time_precision="minute",
         reported_at=None, published_at=mail.received_at,
-        material=scrub_text(material.group(1)) if material else None,
+        material=material,
         volume_gal=volume_gal, volume_text=vol_text, estimate_flag="estimated" if vol_text else "unknown",
         authority=f"{name or 'the operator'} (e-mail notice)",
-        advice_text=scrub_text(advice.group(1)) if advice else None,
-        advice_window_hours=int(advice.group(2)) if advice else None,
+        advice_text=advice,
+        advice_window_hours=int(am.group(2)) if advice else None,
         advice_window_basis="the notice (314 CMR 16.04(10)(g))" if advice else None,
         source_url=spec.get("source_url"), raw=raw,
     )

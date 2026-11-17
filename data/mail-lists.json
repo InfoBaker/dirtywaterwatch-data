@@ -1,5 +1,5 @@
 {
-  "_about": "The notice lists the project's addresses at dirtywaterwatch.org are signed up to, one address per list (the mail Worker files each message under the address's local part as its list_id). Read by pipeline/ingest/operator_mail.py. kind: notices (a parser makes records), context (a list kept for its news; never a record), correspondence (an address used for letters to an agency; never parsed). senders: the From domains the list sends from; dkim: the signing domains accepted for them (a message counts only when Cloudflare's own Authentication-Results says DMARC passed for its From domain, or DKIM passed for one of these). quiet: how a list that has gone quiet is noticed (cross_check: another source's notice from the same operator after `since` with nothing from the list since that notice's start; max_quiet_days: no message for that long). since: when the address was signed up to the list (UTC).",
+  "_about": "The notice lists the project's addresses at dirtywaterwatch.org are signed up to, one address per list (the mail Worker files each message under the address's local part as its list_id). Read by pipeline/ingest/operator_mail.py. kind: notices (a parser makes records), context (a list kept for its news; never a record), correspondence (an address used for letters to an agency; never parsed). senders: the operator's own domains (a message is the operator's when Cloudflare's own Authentication-Results says DMARC passed for its From domain, or DKIM passed for that domain); platform: a shared sending platform the list uses (Everbridge, Constant Contact), whose customers can all send from it, with the marks that must appear in the text (body_marks) or headers (header_marks) and whether its own From address is allowed (allow_platform_from); a message proven only by the platform may add detail to another source's record of the same discharge and never stands as a record of its own. quiet: how a list that has gone quiet is noticed (cross_check: another source's notice from the same operator after `since` with nothing from the list since that notice's start; max_quiet_days: no message for that long). since: when the address was signed up to the list (UTC).",
   "lists": {
     "holyoke": {
       "kind": "notices",
@@ -11,13 +11,19 @@
       "outfall_prefix": "HOL",
       "town": "HOLYOKE",
       "senders": [
-        "everbridge.net",
         "holyoke.org"
       ],
-      "dkim": [
-        "everbridge.net",
-        "holyoke.org"
-      ],
+      "platform": {
+        "domains": [
+          "everbridge.net"
+        ],
+        "allow_platform_from": true,
+        "body_marks": [
+          "MA0101630",
+          "453003085611624"
+        ],
+        "header_marks": []
+      },
       "since": "2026-11-17T01:00:00Z",
       "quiet": {
         "cross_check": {
@@ -37,21 +43,19 @@
       "outfall_prefix": "SPR",
       "town": "SPRINGFIELD",
       "senders": [
-        "springfieldalerts.com",
         "waterandsewer.org",
-        "veolia.com",
-        "constantcontact.com",
-        "ccsend.com",
-        "ccsend2.com"
+        "springfieldalerts.com"
       ],
-      "dkim": [
-        "springfieldalerts.com",
-        "waterandsewer.org",
-        "veolia.com",
-        "constantcontact.com",
-        "ccsend.com",
-        "ccsend2.com"
-      ],
+      "platform": {
+        "domains": [
+          "ccsend.com",
+          "ccsend2.com",
+          "constantcontact.com"
+        ],
+        "allow_platform_from": false,
+        "body_marks": [],
+        "header_marks": []
+      },
       "since": "2026-11-02T21:00:00Z",
       "quiet": {
         "cross_check": {
@@ -69,9 +73,6 @@
       "operator": "nh-manchester-epd",
       "npdes_permit": "NH0100447",
       "senders": [
-        "manchesternh.gov"
-      ],
-      "dkim": [
         "manchesternh.gov"
       ],
       "since": "2026-11-02T21:30:00Z",
@@ -94,15 +95,17 @@
       "outfall_prefix": "SOM",
       "town": "SOMERVILLE",
       "senders": [
-        "somervillema.gov",
-        "formresponse.com",
-        "jotform.com"
+        "somervillema.gov"
       ],
-      "dkim": [
-        "somervillema.gov",
-        "formresponse.com",
-        "jotform.com"
-      ],
+      "platform": {
+        "domains": [
+          "formresponse.com",
+          "jotform.com"
+        ],
+        "allow_platform_from": true,
+        "body_marks": [],
+        "header_marks": []
+      },
       "since": "2026-11-02T21:40:00Z",
       "quiet": {
         "cross_check": {
@@ -120,9 +123,6 @@
       "operator": null,
       "npdes_permit": null,
       "senders": [
-        "ct.gov"
-      ],
-      "dkim": [
         "ct.gov"
       ],
       "since": "2026-11-02T21:00:00Z",

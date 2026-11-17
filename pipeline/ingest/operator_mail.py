@@ -55,7 +55,6 @@ import json
 import os
 import subprocess
 import sys
-import tempfile
 from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
@@ -137,12 +136,11 @@ class WranglerTransport:
         return (json.loads(p.stdout.decode()) or [{}])[0].get("results") or []
 
     def raw(self, key: str) -> bytes:
-        with tempfile.TemporaryDirectory() as d:
-            f = Path(d) / "m.eml"
-            p = self._run(["r2", "object", "get", f"{RAW_BUCKET}/{key}", "--remote", "--file", str(f)])
-            if p.returncode != 0 or not f.exists():
-                raise RuntimeError(f"wrangler r2 object get exited {p.returncode}")
-            return f.read_bytes()
+        # to stdout (--pipe): the raw message is never written to a file (Astra mail review 2026-11-17 P1-4)
+        p = self._run(["r2", "object", "get", f"{RAW_BUCKET}/{key}", "--remote", "--pipe"])
+        if p.returncode != 0 or not p.stdout:
+            raise RuntimeError(f"wrangler r2 object get exited {p.returncode}")
+        return p.stdout
 
 
 def transport_from_env():
@@ -186,9 +184,9 @@ def read_message(raw: bytes, row: dict, spec: dict | None, ctx: dict) -> dict:
         return {**entry, "result": "correspondence", "note": "an address for letters, never parsed", "records": []}
     if spec.get("kind") == "context":
         return {**entry, "result": "not_notice", "note": "a context list (news), never a record", "records": []}
-    ok, how = verified(mail, spec)
-    entry["verified"] = how
-    if not ok:
+    trust, how = verified(mail, spec)
+    entry["trust"], entry["verified"] = trust, how
+    if not trust:
         return {**entry, "result": "unverified", "note": how, "records": []}
     parser = PARSERS.get(spec.get("parser") or "")
     if parser is None:
@@ -196,8 +194,12 @@ def read_message(raw: bytes, row: dict, spec: dict | None, ctx: dict) -> dict:
     try:
         res = parser.parse(mail, spec, ctx)
     except Exception as e:  # noqa: BLE001 - a parser error is a failure of that message, kept with its reason
-        return {**entry, "result": "failed", "note": f"parser error: {type(e).__name__}: {str(e)[:160]}", "records": []}
-    return {**entry, "result": res.kind, "note": res.note, "records": res.records if res.kind == "notice" else []}
+        # the exception's type only: its message can quote the notice (Astra mail review 2026-11-17 P1-2)
+        return {**entry, "result": "failed", "note": f"parser error ({type(e).__name__})", "records": []}
+    recs = res.records if res.kind == "notice" else []
+    for r in recs:
+        r["raw"]["_trust"] = trust
+    return {**entry, "result": res.kind, "note": res.note, "records": recs}
 
 
 def ma_context(lists: dict) -> dict:
@@ -217,10 +219,18 @@ def ma_context(lists: dict) -> dict:
     return ctx
 
 
-def update_index(index: dict, rows: list[dict], tr, lists: dict, ctx: dict, max_fetch: int = MAX_FETCH) -> Counter:
+RETRY_MAX = 12                  # fetch attempts before a message is left as fetch_failed for good (counted)
+
+
+def update_index(index: dict, rows: list[dict], tr, lists: dict, ctx: dict, max_fetch: int = MAX_FETCH,
+                 now: datetime | None = None) -> Counter:
+    """Read the messages that need it, in this order: never read (newest first), read under an older rule, then
+    fetch failures whose wait is over (1, 2, 4 ... 24 hours apart, RETRY_MAX tries). A row left for a later run is
+    entered as "pending" at once, so it is counted (Astra mail review 2026-11-17 P1-5)."""
+    now = now or datetime.now(UTC)
     msgs = index.setdefault("messages", {})
     stats = Counter()
-    fetched = 0
+    new, reread, retry = [], [], []
     for row in rows:
         mid = str(row.get("id") or "")
         if not mid or not row.get("raw_key"):
@@ -228,18 +238,34 @@ def update_index(index: dict, rows: list[dict], tr, lists: dict, ctx: dict, max_
             continue
         spec = lists.get(row.get("list_id") or "")
         old = msgs.get(mid)
-        if old is not None and old.get("rule") == rule_of(spec) and old.get("result") not in RETRY:
-            continue
+        if old is None or old.get("result") == "pending":
+            new.append(row)
+        elif old.get("rule") != rule_of(spec):
+            reread.append(row)
+        elif old.get("result") == "fetch_failed" and (old.get("tries") or 0) < RETRY_MAX \
+                and (parse_iso(old.get("next_try_at")) or now) <= now:
+            retry.append(row)
+    new.sort(key=lambda r: str(r.get("received_at") or ""), reverse=True)
+    fetched = 0
+    for row in new + reread + retry:
+        mid = str(row["id"])
+        spec = lists.get(row.get("list_id") or "")
+        old = msgs.get(mid)
+        base = {"list_id": row.get("list_id"), "received_at": row.get("received_at"), "raw_key": row.get("raw_key"),
+                "size": row.get("size"), "rule": rule_of(spec)}
         if fetched >= max_fetch:
+            if old is None:
+                msgs[mid] = {**base, "result": "pending", "note": "not read yet (the run's reading limit)", "records": []}
             stats["left_for_next_run"] += 1
             continue
         fetched += 1
         try:
             raw = tr.raw(row["raw_key"])
-        except Exception as e:  # noqa: BLE001 - kept, tried again next run
-            msgs[mid] = {**(old or {}), "list_id": row.get("list_id"), "received_at": row.get("received_at"),
-                         "raw_key": row.get("raw_key"), "size": row.get("size"), "rule": rule_of(spec),
-                         "result": "fetch_failed", "note": str(e)[:200], "records": (old or {}).get("records") or []}
+        except Exception as e:  # noqa: BLE001 - kept, tried again later
+            tries = ((old or {}).get("tries") or 0) + 1 if (old or {}).get("result") == "fetch_failed" else 1
+            msgs[mid] = {**(old or {}), **base, "result": "fetch_failed", "note": str(e)[:200], "tries": tries,
+                         "next_try_at": (now + timedelta(hours=min(2 ** (tries - 1), 24))).isoformat(),
+                         "records": (old or {}).get("records") or []}
             stats["fetch_failed"] += 1
             continue
         msgs[mid] = read_message(raw, row, spec, ctx)
@@ -258,10 +284,22 @@ def _t(r: dict, *keys) -> datetime | None:
     return None
 
 
+RESEND_MINUTES = 10             # two notices of one outfall this close in their stated time are one notice sent twice
+
+
+def _activity(r: dict) -> datetime | None:
+    """The latest moment a record shows the overflow still going: its stated start or, for an update, its receipt."""
+    ts = [t for t in (_t(r, "started_at"), parse_iso((r.get("raw") or {}).get("_received_at"))) if t]
+    return max(ts) if ts else None
+
+
 def link_chains(records: list[dict]) -> None:
     """Within one list: the notices of one outfall's overflow form a chain (Active, its 8-hour updates and re-sends,
-    then Ceased), each the child of the one before, so the newest is the record shown. A Ceased notice takes the
-    chain's start from the earlier notice (the operator's own start). raw._chain names the chain's first record."""
+    then Ceased and any re-send of the Ceased), each the child of the one before, so the newest is the record shown.
+    A Ceased notice takes the chain's start from the earlier notice (the operator's own start). A Ceased notice closes
+    the open chain when its end is no earlier than the chain's start and within CHAIN_HOURS of the chain's latest
+    notice; a second Ceased notice with the same end (RESEND_MINUTES) joins the closed chain. raw._chain names the
+    chain's first record. (Astra mail review 2026-11-17 P1-9.)"""
     groups = defaultdict(list)
     for r in records:
         groups[(r.get("npdes_permit"), (r.get("raw") or {}).get("_outfall_key"))].append(r)
@@ -273,77 +311,110 @@ def link_chains(records: list[dict]) -> None:
         rs.sort(key=lambda r: (_t(r, "started_at", "ended_at") or datetime.max.replace(tzinfo=UTC),
                                r["raw"].get("_received_at") or "", r["event_id"]))
         head = None                  # the newest record of the open chain
+        closed = None                # the newest record of the chain a Ceased notice closed last
         for r in rs:
             st = r["raw"].get("_notice_state")
             s, e = _t(r, "started_at"), _t(r, "ended_at")
             open_ = head is not None and head["status"] == "ongoing"
             hs = _t(head, "started_at") if head else None
+            act = _activity(head) if head else None
+
+            def join(parent, why):
+                r["parent_event_id"] = parent["event_id"]
+                r["raw"]["_chain"] = parent["raw"]["_chain"]
+                r["raw"]["_link_basis"] = why
+                if not r.get("started_at") and parent.get("started_at"):
+                    r["started_at"] = parent["started_at"]
+                    r["raw"]["_started_at_basis"] = f"the start of the earlier notice {parent['event_id']}"
             if st in ("active", "update") and s is not None:
-                if open_ and hs and abs((s - hs).total_seconds()) <= 600:
-                    r["parent_event_id"] = head["event_id"]
-                    r["raw"]["_chain"] = head["raw"]["_chain"]
-                    r["raw"]["_link_basis"] = "the same outfall and start as the earlier notice (an update or a re-send)"
+                if open_ and hs and abs((s - hs).total_seconds()) <= RESEND_MINUTES * 60:
+                    join(head, "the same outfall and start as the earlier notice (an update or a re-send)")
                 else:
                     r["raw"]["_chain"] = r["event_id"]
                 head = r
-            elif st == "ceased" and e is not None and open_ and hs and hs <= e <= hs + timedelta(hours=CHAIN_HOURS):
-                r["parent_event_id"] = head["event_id"]
-                r["raw"]["_chain"] = head["raw"]["_chain"]
-                r["raw"]["_link_basis"] = "a Ceased notice for the outfall's open notice"
-                if not r.get("started_at"):
-                    r["started_at"] = head["started_at"]
-                    r["raw"]["_started_at_basis"] = f"the start of the earlier notice {head['event_id']}"
-                head = r
+            elif st == "ceased" and e is not None and open_ and hs and hs <= e \
+                    and act and e <= act + timedelta(hours=CHAIN_HOURS):
+                join(head, "a Ceased notice for the outfall's open notice")
+                head, closed = r, r
+            elif st == "ceased" and e is not None and closed is not None and _t(closed, "ended_at") \
+                    and abs((e - _t(closed, "ended_at")).total_seconds()) <= RESEND_MINUTES * 60:
+                join(closed, "the same cessation as the earlier Ceased notice (a re-send)")
+                closed = r
+                if head is not None and head["raw"].get("_chain") == r["raw"]["_chain"]:
+                    head = r
             else:
                 r["raw"]["_chain"] = r["event_id"]
                 head = r if st != "ceased" else None
+                if st == "ceased":
+                    closed = r
 
 
-def portal_shown(portal: list[dict]) -> set:
-    """Portal records no later portal record replaces (build.status.resolve_revisions's rule)."""
-    by_id = {p["event_id"]: p for p in portal}
+def portal_families(portal: list[dict], permit: str) -> list[dict]:
+    """MassDEP's records of one permit grouped by overflow: a notice, its Ceased updates and its Verified Data Report
+    (linked by parent_event_id in ingest.ma_massdep), each family with its outfall number, its start (the root's own,
+    else inherited through the chain, as build.status.resolve_revisions does) and the record it shows (the member no
+    later member replaces; the newest published if several)."""
+    by_id = {p["event_id"]: p for p in portal if p.get("npdes_permit") == permit}
     replaced = set()
-    for p in portal:
+    for p in by_id.values():
         par = p.get("parent_event_id")
         if par in by_id and par != p["event_id"] and (p.get("started_at") or p.get("status", "unknown") != "unknown"):
             replaced.add(par)
-    return {p["event_id"] for p in portal} - replaced
+
+    def root(eid, depth=0):
+        par = by_id[eid].get("parent_event_id")
+        return root(par, depth + 1) if par in by_id and par != eid and depth < 50 else eid
+    fams = defaultdict(list)
+    for eid in by_id:
+        fams[root(eid)].append(by_id[eid])
+    out = []
+    for rid, members in fams.items():
+        start = next((_t(m, "started_at") for m in [by_id[rid]] + members if m.get("started_at")), None)
+        num, _ = outfall_number(by_id[rid].get("outfall_id"))
+        if start is None or num is None or any(m.get("duplicate_of") for m in members):
+            continue
+        shown = [m for m in members if m["event_id"] not in replaced] or members
+        target = max(shown, key=lambda m: ((_t(m, "published_at") or datetime.min.replace(tzinfo=UTC)), m["event_id"]))
+        out.append({"root": rid, "start": start, "num": num, "target": target})
+    return out
 
 
 def link_portal(records: list[dict], portal: list[dict], permit: str | None) -> int:
-    """Each chain to the portal's record of the same overflow: same permit, same outfall number, starts within
-    PORTAL_LINK_HOURS; the portal record shown (not replaced) is preferred, then the nearest start, then the newest."""
+    """Each e-mail chain to MassDEP's record of the same overflow, one to one: same permit and outfall number,
+    starts within PORTAL_LINK_HOURS; the closest pairs are taken first and a portal overflow is given to one chain only,
+    so a second overflow of the same outfall is never folded into the first (Astra mail review 2026-11-17 P1-7, P1-8).
+    Every record of a linked chain becomes duplicate_of the family's shown record."""
     if not permit:
         return 0
-    shown = portal_shown(portal)
-    cands = defaultdict(list)
-    for p in portal:
-        if p.get("npdes_permit") != permit or p.get("duplicate_of") or not p.get("started_at"):
-            continue
-        num, _ = outfall_number(p.get("outfall_id"))
-        if num is not None:
-            cands[num].append(p)
+    fams = portal_families(portal, permit)
     chains = defaultdict(list)
     for r in records:
         chains[r["raw"].get("_chain") or r["event_id"]].append(r)
-    n = 0
-    for root_id, rs in chains.items():
-        root = next((r for r in rs if r["event_id"] == root_id), rs[0])
+    pairs = []
+    for cid, rs in chains.items():
+        root = next((r for r in rs if r["event_id"] == cid), rs[0])
         s = _t(root, "started_at") or next((_t(r, "started_at") for r in rs if r.get("started_at")), None)
         key = root["raw"].get("_outfall_key")
         if s is None or key is None:
             continue
-        near = [p for p in cands.get(key, []) if abs((_t(p, "started_at") - s).total_seconds()) <= PORTAL_LINK_HOURS * 3600]
-        if not near:
+        for f in fams:
+            if f["num"] == key:
+                gap = abs((f["start"] - s).total_seconds())
+                if gap <= PORTAL_LINK_HOURS * 3600:
+                    pairs.append((gap, cid, f["root"], f))
+    pairs.sort(key=lambda x: (x[0], x[1], x[2]))
+    used_c, used_f, n = set(), set(), 0
+    for gap, cid, frid, f in pairs:
+        if cid in used_c or frid in used_f:
             continue
-        best = min(near, key=lambda p: (p["event_id"] not in shown, abs((_t(p, "started_at") - s).total_seconds()),
-                                        -(_t(p, "published_at") or datetime.min.replace(tzinfo=UTC)).timestamp()))
-        gap = round(abs((_t(best, "started_at") - s).total_seconds()) / 60)
-        for r in rs:
+        used_c.add(cid)
+        used_f.add(frid)
+        best = f["target"]
+        for r in chains[cid]:
             r["duplicate_of"] = best["event_id"]
             r["raw"]["_link_basis"] = "; ".join(x for x in (r["raw"].get("_link_basis"), (
                 f"the same overflow as the MassDEP portal record {best.get('source_record_id')}: same permit and "
-                f"outfall number, starts {gap} min apart")) if x)
+                f"outfall number, starts {round(gap / 60)} min apart")) if x)
             n += 1
     return n
 
@@ -353,8 +424,8 @@ def link_portal(records: list[dict], portal: list[dict], permit: str | None) -> 
 def quiet_check(spec: dict, entries: list[dict], others: dict, now: datetime) -> dict | None:
     q = spec.get("quiet") or {}
     since = parse_iso(spec.get("since"))
-    heard = [parse_iso(e.get("received_at")) for e in entries
-             if e.get("result") not in ("unverified", "unknown_list", "correspondence")]
+    heard = [parse_iso(e.get("received_at")) for e in entries        # only a message the check proved came from
+             if e.get("trust") in ("operator", "platform")]             # the list (Astra mail review 2026-11-17 P2-13)
     heard = [t for t in heard if t]
     last = max(heard) if heard else None
     cc = q.get("cross_check")
@@ -413,6 +484,13 @@ def build_list(lid: str, spec: dict, entries: list[dict], others: dict, now: dat
     elif spec.get("outfall_prefix"):
         link_chains(recs)
         stats["linked_to_portal"] = link_portal(recs, others.get("ma-massdep") or [], spec.get("npdes_permit"))
+    # a message proven only by a shared platform (raw._trust "platform") may add to another source's record of the same
+    # discharge, never stand alone: a chain of such records not linked as a duplicate is held back, counted, unpublished
+    held_chains = {r["raw"].get("_chain") or r["event_id"] for r in recs
+                   if r["raw"].get("_trust") == "platform" and not r.get("duplicate_of")}
+    held = [r for r in recs if (r["raw"].get("_chain") or r["event_id"]) in held_chains]
+    recs = [r for r in recs if (r["raw"].get("_chain") or r["event_id"]) not in held_chains]
+    stats["held_platform_only"] = len(held)
     res = Counter(e.get("result") for e in entries)
     received = [e.get("received_at") for e in entries if e.get("received_at")]
     meta = {
@@ -453,7 +531,7 @@ def run(tr, lists: dict, index_path: Path = INDEX_FILE, events_dir: Path = EVENT
         print(f"operator_mail: {error}; every list keeps its previous records", file=sys.stderr)
         return 1
     ctx = ma_context(notice_lists)
-    stats = update_index(index, rows, tr, lists, ctx, max_fetch)
+    stats = update_index(index, rows, tr, lists, ctx, max_fetch, now)
     index["read_at"] = now.isoformat()
     index["index_rows"] = len(rows)
     write_json(index_path, index)
