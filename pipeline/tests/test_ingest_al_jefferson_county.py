@@ -117,6 +117,9 @@ def test_points_are_rounded_and_odd_ones_withheld():
     ("3444 33RD COURT N3444 33RD COURT N", f"{HOUSE_NUMBER_REMOVED} 33RD COURT N {HOUSE_NUMBER_REMOVED} 33RD COURT N"),
     ("1234 HIGHWAY 150", f"{HOUSE_NUMBER_REMOVED} HIGHWAY 150"),
     ("I 22 E & HILLCREST ROAD", "I 22 E & HILLCREST ROAD"),
+    ("1801 S SEVENTEENTH ST/1804 WHITE AVE", f"{HOUSE_NUMBER_REMOVED} S SEVENTEENTH ST/{HOUSE_NUMBER_REMOVED} WHITE AVE"),
+    ("as 5711Governor John Sevier", f"as {HOUSE_NUMBER_REMOVED} Governor John Sevier"),
+    ("I459", "I459"),
 ])
 def test_street_only_drops_every_house_number(text, want):
     assert JC.street_only(text) == want

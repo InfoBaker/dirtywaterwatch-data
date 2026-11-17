@@ -410,5 +410,39 @@
   "verified": "inferred",
   "checked": "2026-11-03",
   "notes": ""
+ },
+ {
+  "id": "tn-kub-sso-log",
+  "name": "Knoxville Utilities Board, SSO Logs",
+  "jurisdiction": "TN",
+  "operator": "Knoxville Utilities Board",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "KUB's wastewater service area, Knoxville and Knox County (no water named per row)",
+  "water_slugs": [],
+  "url": "https://www.kub.org/forms/sso-logs",
+  "access": [
+   "json"
+  ],
+  "access_detail": "The page loads its rows by month from https://www.kub.org/api/ams/v1/customer-sso-logs?date[]=<first>:greaterThanOrEquals&date[]=<last>:lessThanOrEquals&sort=date: date, time, location (street address), volume (gallons), status and completion date of the cleanup. 2,080 rows from January 2005 on 2026-11-17. No water, point, permit or person's name.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "within 24 hours of the report (the page's words)",
+  "history": "2005 on",
+  "license": "none stated",
+  "legal_basis": "voluntary (the report to TDEC: 0400-40-05-.07(2)(o))",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/tn_kub_sso_log.py from 2026-11-17 (the previous and current month; --backfill to 2023-01-01): one dated record per row with its time, street and gallons, listed in Knox County and placed on no water. Status and Completion are the cleanup's, never the end of the overflow. A record of the same day and street as a TDEC Events Report record of a KUB permit is its duplicate.",
+  "verified": "fetched",
+  "checked": "2026-11-17",
+  "notes": ""
  }
 ]
