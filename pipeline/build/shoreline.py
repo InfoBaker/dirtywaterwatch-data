@@ -68,9 +68,15 @@ OCEAN_KINDS = {"bay", "sound", "sea", "ocean", "lake", "reservoir"}
 # outline_areas only while the rule is on), with where the figure came from.
 SIZE_KINDS = ("lake", "reservoir")
 DEFAULTS = {"each_way_km": 20.0, "shore_m": 500.0, "gap_km": 3.0, "snap_km": 5.0, "name_min_area_km2": 100.0,
-            "min_area_km2": None, "min_area_kinds": list(SIZE_KINDS), "lakes": [], "oceans": [],
-            "ocean_open_m": 1000.0, "ocean_tie_offshore_km": None}
-OUTLINE_AREA = "outline_area_km2"      # the record key status.outline_areas fills for a record with no area_km2
+            "min_area_km2": None, "min_area_kinds": list(SIZE_KINDS), "min_mean_width_km": None, "min_ring_km": None,
+            "lakes": [], "oceans": [], "ocean_open_m": 1000.0, "ocean_tie_offshore_km": None}
+OUTLINE_AREA = "outline_area_km2"      # the record key status.with_outline_areas fills for a record with no area_km2
+# the outline's mean width (twice the area over the length of every shore ring, islands included), which
+# status.with_outline_areas puts on a crossing lake or reservoir only while min_mean_width_km is set; and the mark it
+# puts on a bay or sound with no outline here while the size rule takes those kinds
+OUTLINE_WIDTH = "outline_mean_width_km"
+NO_OUTLINE = "no_outline_here"
+FILL_KINDS = {"lake", "reservoir", "pond"}
 STATE_NEAR_M = 2_000          # a stretch point this close to a state's land touches that state
 MODEL = "shoreline"
 STOP_LIMIT = "shoreline_limit"     # the walk reached each_way_km
@@ -127,8 +133,16 @@ def shoreline_entry(w: dict | None, r: dict) -> dict | None:
 
 
 def size_on(r: dict) -> bool:
-    """Whether the size rule is in force (min_area_km2 set)."""
-    return r.get("min_area_km2") is not None
+    """Whether the size rule is in force: min_area_km2 set and at least one kind it may apply to (an empty or
+    all-rejected min_area_kinds is the rule off, never an error)."""
+    return r.get("min_area_km2") is not None and bool(size_kinds(r))
+
+
+def drawable(rec: dict | None) -> bool:
+    """Whether a cached stretch record can be drawn: a segment with two distinct points or more. A record that cannot
+    is no stretch, and the report keeps the whole-water colour (Astra review 2026-11-16, finding 5)."""
+    return any(len({(round(float(x), 6), round(float(y), 6)) for x, y in (sg.get("coords") or [])}) >= 2
+               for sg in (rec or {}).get("segments") or [])
 
 
 def size_kinds(r: dict) -> set[str]:
@@ -180,15 +194,31 @@ def size_texts(r: dict) -> dict:
     if filled:
         rationale += (f" A report on such a {' or '.join(filled)} that we cannot place on the shore colours the "
                       f"whole water, as on a smaller {filled[0]}.")
+    floor = r.get("min_mean_width_km")
+    if filled and floor is not None:
+        fl = float(floor)
+        rationale += (f" {_kind_list(set(filled)).capitalize()} narrower than {fl * 0.621371:.1f} mile ({fl:g} "
+                      f"kilometres) on average, such as reservoirs that fill a river valley, are still coloured as a "
+                      f"whole: a stretch along one bank would leave the nearby opposite bank grey.")
     if tidal:
         rationale += (f" On a {' or '.join(tidal)}, such a report is listed on the water's page, and its outlets "
-                      f"are marked on the map.")
+                      f"are marked on the map. Where we draw the ocean shore, a {' or '.join(tidal)} open to the sea is "
+                      f"followed by that stretch instead.")
     return {"doc": doc, "rationale": rationale}
 
 
 def ocean_states(r: dict) -> set[str]:
     """The states an ocean entry is applied in (reach.shoreline.oceans[].states)."""
     return {str(s).upper() for e in r.get("oceans") or [] for s in e.get("states") or []}
+
+
+def is_sea_record(w: dict, r: dict) -> bool:
+    """A bay or sound record that is an ocean or a sea (openboatlaunch holds them as bays or sounds: "North Atlantic
+    Ocean", "Bering Sea"): named as an ocean entry names one, in any state, or named "... Ocean" or "... Sea". The
+    size rule leaves them to the ocean rule."""
+    n = _norm(w.get("name"))
+    names = {_norm(x) for e in r.get("oceans") or [] for x in [e.get("name"), *(e.get("names") or [])] if x}
+    return n in names or n.endswith(" ocean") or n.endswith(" sea") or n in ("ocean", "sea")
 
 
 def record_area(w: dict) -> tuple[float | None, str | None]:
@@ -215,10 +245,17 @@ def size_entry(w: dict, r: dict) -> dict | None:
         return None
     if kind in ("bay", "sound") and str(w.get("state") or "").upper() in ocean_states(r):
         return None
+    if kind in ("bay", "sound") and (w.get(NO_OUTLINE) or is_sea_record(w, r)):
+        return None             # no outline here: markers, as before; an ocean or sea record is the ocean rule's
     area, basis = record_area(w)
     if area is None or area < float(r["min_area_km2"]):
         return None
-    hit = {"name": w.get("name"), "size_rule": True, "area_km2": round(area, 1), "area_basis": basis}
+    floor = r.get("min_mean_width_km")
+    width = w.get(OUTLINE_WIDTH)
+    if (kind in FILL_KINDS and floor is not None and isinstance(width, (int, float)) and not isinstance(width, bool)
+            and width < float(floor)):
+        return None             # long and narrow (a reservoir in a drowned river valley): filled whole, as before
+    hit = {"name": w.get("name"), "size_rule": True, "area_km2": round(area, 3), "area_basis": basis}
     if kind == "bay":
         hit["bay"] = True
     elif kind == "sound":
@@ -355,11 +392,18 @@ def _walk(c: np.ndarray, i: int, p: np.ndarray, step: int, limit_m: float, gap_m
 
 
 def stretch(lon: float, lat: float, lake_geom, land=None, each_way_km: float = 20.0, shore_m: float = 500.0,
-            gap_km: float = 3.0, snap_km: float = 5.0, land_states: dict | None = None) -> dict:
+            gap_km: float = 3.0, snap_km: float = 5.0, land_states: dict | None = None,
+            min_ring_km: float | None = None) -> dict:
     """The shoreline stretch at (lon, lat) on lake_geom (a shapely (multi)polygon, lon/lat). land: the land near
     the lake (a shapely geometry, lon/lat) or None (every edge is shore). land_states: {state: land geometry}
     for the states the stretch touches (else none are named). Returns {"sides": [{"coords", "km", "stop"} x2],
-    "snap_m", "length_km", "states"}. NoShore when no shore edge lies within snap_km of the point."""
+    "snap_m", "length_km", "states"}, and "islets" ([{"coords", "km"}], only with min_ring_km). NoShore when no shore
+    edge lies within snap_km of the point.
+
+    min_ring_km (reach.shoreline.min_ring_km; None: the walk as before, on the nearest ring whatever its size): a ring
+    shorter than this (an islet beside the outfall) is not walked alone. The stretch starts on the nearest ring at
+    least that long within snap_km, and every shorter ring nearer the point than that start is marked whole as well
+    ("islets"). When no ring that long lies within snap_km, the nearest ring is walked as before."""
     import shapely
     from shapely.geometry import box
     from shapely.ops import unary_union
@@ -374,6 +418,7 @@ def stretch(lon: float, lat: float, lake_geom, land=None, each_way_km: float = 2
         land_m = shapely.transform(land, lambda xy: xy * k)
         land_m = land_m.intersection(near_box.buffer(shore_m * 2))
     best = None
+    found = []              # (distance, ring in metres, edge, point on it, shore flags, ring length) of each ring
     for c in _rings(lake_geom):
         cm = c * k
         a, b = cm[:-1], cm[1:]
@@ -384,11 +429,22 @@ def stretch(lon: float, lat: float, lake_geom, land=None, each_way_km: float = 2
         shore = _Shore(cm, land_m, shore_m)
         for i in close[np.argsort(d[close])]:
             if shore(int(i)):
+                hit = (float(d[i]), cm, int(i), a[i] + (b[i] - a[i]) * t[i], shore)
                 if best is None or d[i] < best[0]:
-                    best = (float(d[i]), cm, int(i), a[i] + (b[i] - a[i]) * t[i], shore)
+                    best = hit
+                if min_ring_km is not None:
+                    found.append((*hit, float(np.hypot(*np.diff(cm, axis=0).T).sum())))
                 break
     if best is None:
         raise NoShore(f"no shore of the water within {snap_km:g} km of the point")
+    islets = []
+    if min_ring_km is not None:
+        big = [f for f in found if f[5] >= float(min_ring_km) * 1000]
+        if big:
+            start = min(big, key=lambda f: f[0])
+            best = start[:5]
+            islets = [{"coords": [[round(float(x), 6), round(float(y), 6)] for x, y in f[1] / k], "km": round(f[5] / 1000, 3)}
+                      for f in sorted(found, key=lambda f: f[0]) if f[5] < float(min_ring_km) * 1000 and f[0] < start[0]]
     snap_m, cm, i, q, shore = best
     ring_m = float(np.hypot(*np.diff(cm, axis=0).T).sum())
     limit = min(each_way_km * 1000, ring_m / 2)
@@ -411,7 +467,7 @@ def stretch(lon: float, lat: float, lake_geom, land=None, each_way_km: float = 2
             if gm.distance(pts) <= STATE_NEAR_M:
                 states.append(st)
     return {"sides": sides, "snap_m": round(snap_m), "length_km": round(sum(s["km"] for s in sides), 3),
-            "states": states}
+            "states": states, **({"islets": islets} if islets else {})}
 
 
 ONWARD_M = 300          # a stretch that ends this close to another shoreline lake record's outline goes on along it
