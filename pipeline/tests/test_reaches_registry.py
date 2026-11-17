@@ -202,6 +202,17 @@ def test_event_points_cut_at_tidal_before_the_rule_come_back_as_candidates_once(
     assert R.tidal_due_points(cached, {"pt-aaaaaaaaaaaa"}, NOW) == []                 # already named: not twice
     cached["pt-aaaaaaaaaaaa"] = {**pt, "cut_reason": "cap_km", **mark}
     assert R.tidal_due_points(cached, set(), NOW) == []                               # redone: not again
+    # the catch-up never takes the hour from a new report: a new event point goes first whatever its key, and
+    # a run names at most `limit` points, the most recently traced first
+    cached["pt-aaaaaaaaaaaa"] = pt
+    fresh_pt = {**got[0], "key": "pt-zzzzzzzzzzzz", "event_ids": ["x:9"]}
+    todo, _ = R.plan(got + [fresh_pt, new], cached, NOW, tidal_river=True)
+    assert [c["key"] for c in todo] == ["pt-zzzzzzzzzzzz", "pt-aaaaaaaaaaaa", "n-new"]
+    many = {f"pt-{i:012d}": {**pt, "key": f"pt-{i:012d}",
+                             "fetched_at": (NOW - timedelta(days=1, hours=i)).isoformat()} for i in range(5)}
+    assert [c["key"] for c in R.tidal_due_points(many, set(), NOW, limit=2)] == ["pt-000000000000", "pt-000000000001"]
+    assert len(R.tidal_due_points(many, set(), NOW)) == 5 and R.TIDAL_BACKFILL >= 5
+    assert R.tidal_due_points(many, set(), NOW, limit=0) == []
 
 
 def test_a_default_run_stays_far_under_the_navigation_allowance():
