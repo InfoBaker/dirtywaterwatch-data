@@ -107,6 +107,7 @@ from common import scrub_residence_numbers
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, OUT_DIR, OUTFALL_REGISTRY_GLOB, OUTFALL_REGISTRY_SKIPPED,
                     PROVISIONAL_FIELDS, REPORTED_OUTFALLS, ROOT, STATE_CODE, discharger_alias_map, is_provisional, now_iso, read_json,
                     scrub_names, split_path_notes, strip_personal, write_json)
+from export import detail as detail_mod
 from export import outfalls as outfalls_mod
 
 SIMPLIFY_DEG = 20 / 111_320          # ~20 m
@@ -117,12 +118,12 @@ REGISTRY_KEYS = ["id", "name", "url", "homepage", "kind", "level", "cadence", "l
                  "enabled", "role", "event_types", "states", "access"]
 SAFE = re.compile(r"[A-Za-z0-9._-]")
 SLIM_DROP = {"raw", "advice_text", "advice_window_basis", "fetched_at", "coord_source", "coord_precision_m",
-             "placement_note"}
+             "placement_note", "linked_records"}
 INDEX_FIELDS = ["event_id", "event_type", "status", "state", "started_at", "ended_at", "water_slugs",
                 "discharger_name", "npdes_permit", "outfall_id", "volume_gal", "lat", "lon", "fixture", "sampled_at",
                 "time_precision", "ended_at_precision"]
 WATER_EVENT_EXTRA = ["source_id", "waterbody_text", "outfall_name", "volume_text", "water_match", "superseded",
-                     "duplicate_of", "file"]
+                     "duplicate_of", "file", "estimate_flag", "detail", "later_volume"]
 SLIM_KEEP = {"event_id", "source_id", "event_type", "status", "water_slugs", "started_at", "ended_at", "sampled_at", "fixture", "file"}
 
 
@@ -148,6 +149,13 @@ def slim_event(rec: dict) -> dict:
     """events.json's slim copy of a public record: no raw, advice or fetch time; the end's own precision is written as
     `ended_at_precision` only where it differs from the start's (other records' rows are as before)."""
     out = {k: v for k, v in rec.items() if k not in SLIM_DROP and (k in SLIM_KEEP or v not in (None, [], {}, ""))}
+    # the report tables' part of the source's detail (export/detail.py CELL_FIELDS); the event's own file has it all
+    if "detail" in out:
+        cell = detail_mod.cell_detail(out["detail"])
+        if cell:
+            out["detail"] = cell
+        else:
+            del out["detail"]
     own = (rec.get("raw") or {}).get("ended_at_precision") if isinstance(rec.get("raw"), dict) else None
     if rec.get("ended_at") and own and own != rec.get("time_precision"):
         out["ended_at_precision"] = own
@@ -1674,6 +1682,9 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     swaps_of = {r["event_id"]: s for e, r in zip(events, redacted)
                 if (s := quote_swaps(as_read.get(r["event_id"], e), r))}
     events = redacted
+    # what each source says beyond the common fields, as named fields, and the later records of the same event
+    # (export/detail.py): read from the redacted records, so a removed name stays removed
+    detail_mod.enrich(events, duplicates={i for i, pl in placements.items() if (pl or {}).get("duplicate_of")})
     n_status = redact_status_texts(st, redactor, swaps_of)
     if n_status:
         print(f"export: {n_status} status lines quoted a removed name or contact; written redacted")
