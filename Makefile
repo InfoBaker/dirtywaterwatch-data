@@ -103,7 +103,8 @@
 #                  Watch's coastal stations: High is the program's advisory, Medium its label) and
 #                  tx_houston_sso_monthly (Houston's consent-decree monthly SSO tables: start and end to the minute,
 #                  street, gallons, the reached-water flag; no water, so placed only by TCEQ's record of the same
-#                  overflow, which it marks as the row's duplicate in TCEQ's events file; --backfill from 2024)
+#                  overflow, which it marks as the row's duplicate in TCEQ's events file; --backfill from 2024;
+#                  tx_houston_tceq_link links again after the generic readers, in INGEST_SNAPSHOTS)
 #                  Utah: the generic ArcGIS blocks ut-deq-environmental-incidents (DEQ's spill hotline log since 1991:
 #                  the sewage rows by a title rule, dated to the day of discovery, the public's reports marked;
 #                  ingest/ut_transforms.py) and ut-dwq-recreational-advisories (DWQ's map of bloom and E. coli
@@ -272,7 +273,7 @@ FIXTURES ?= 0
 FIXTURE_FLAG = $(if $(filter 1 yes true,$(FIXTURES)),--fixtures,) $(if $(filter 1 yes true,$(NHDES)),--include-nhdes,)
 INGEST_SKIP ?= outfalls waters_extra waters_from_nhd   # waters_from_nhd runs as waters-nhd (INGEST_EXTRA), with a budget
 INGEST_PRE = nj_outfalls             # registries the feeds join (not feeds), run before them
-INGEST_SNAPSHOTS = nj_cso_likely     # snapshots read by build/ (not feeds), run after them
+INGEST_SNAPSHOTS = nj_cso_likely tx_houston_tceq_link   # snapshots read by build/ and links across feeds (not feeds), run after them
 INGEST_EXTRA = waters-nhd conditions rainfall   # not feeds (no events file), run after them
 # the NHD receiving-water build in the hourly run: new targets from this hour's reports, within a time budget (it stops
 # before a request, writes what it built merged into data/waters-nhd.json, and the next run resumes from data/raw's

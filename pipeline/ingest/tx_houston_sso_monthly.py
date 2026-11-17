@@ -108,7 +108,6 @@ import requests
 
 import common
 from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
-from ingest.al_jefferson_county_soa import street_key
 
 SOURCE_ID = "tx-houston-sso-monthly"
 INDEX = "https://www.houstonpublicworks.org/wastewater-cd"
@@ -141,7 +140,8 @@ BARE_VALUE = re.compile(r"^(?:\d+\*?|Yes|No)$")
 PERMIT = r"WQ\s?\d{10}|\d{5}\s?-\s?\d{2,3}\b|NON-COH\s*\(\s*\d{5}\s*-\s*\d{3}\s*\)?|#N/A"
 # a row starts with its SSO ID and its permit, or (a blank permit cell, February 2025) its ID and the address's house
 # number ("62541 1234 PANNELL ST"); a line that is an address alone ("12345 MAIN ST", an address cell wrapped) is not one
-ROW_START = re.compile(rf"^\d{{5,6}}\s+(?:{PERMIT}|\d+[A-Z]?\s+[A-Z])")
+# an ID before a permit broken over lines ("68785 NON-COH (14418-") starts one too (review 2026-11-17 P1-4)
+ROW_START = re.compile(rf"^\d{{5,6}}\s+(?:{PERMIT}|NON-COH\b|#N/A|\d+[A-Z]?\s+[A-Z])")
 ID_ONLY = re.compile(r"^\d{5,6}$")
 PERMIT_LINE = re.compile(rf"^(?:{PERMIT}|NON-COH\b)")
 DATE = r"\d{1,2}\s?/\s?\d{1,2}\s?/\s?\d{4}"
@@ -175,7 +175,11 @@ AOG_HEAD = re.compile(r"Act\s+of\s+God\s+Defense", re.I)
 # a number after one of these words is a route's, not a house's ("HIGHWAY 6", "FM 1960", "BELTWAY 8")
 ROUTE_WORD = re.compile(r"(?i)\b(?:HIGHWAY|HWY|FM|RM|SH|IH|I|US|LOOP|SPUR|BELTWAY|BW|INTERSTATE|ROUTE|RTE|CR|COUNTY\s+ROAD|"
                         r"STATE\s+HIGHWAY|PARK\s+ROAD|PR|EXIT)\s*[-#]?\s*$")
-NUMBER = re.compile(r"(?<![\w\-./])\d+[A-Za-z]?(?:\s*[-/]\s*\d+[A-Za-z]?)*(?![\w])")
+# a token that keeps its number: an ordinal ("18TH") or a route written as one ("I-45", "FM1960")
+ORDINAL = re.compile(r"(?i)^\d+(?:ST|ND|RD|TH)[,.]?$")
+ROUTE_TOKEN = re.compile(r"(?i)^(?:I|IH|US|SH|FM|RM|HWY|SPUR|LOOP|BW)-?\d+[A-Z]?[,.]?$")
+# a unit, suite or apartment designator and its number ("UNIT 5B", "APT 3", "STE 100", "# 12")
+UNIT = re.compile(r"(?i)(?:\b(?:UNIT|APT|APARTMENT|STE|SUITE|BLDG|BUILDING|LOT|RM|ROOM)\b|#)\s*#?\s*[\w-]*\d[\w-]*")
 
 
 class ReadError(ValueError):
@@ -258,14 +262,20 @@ def actions(text: str | None) -> str | None:
 
 
 def street_of(cell: str | None) -> str | None:
-    """The Address cell with its house number removed: the leading number (with a letter, a unit or a half), then
-    any other number no route word precedes ("& 1234 ELM ST"); routes ("HIGHWAY 6", "FM 1960") and ordinals ("34TH")
-    stay. common.scrub_text last."""
-    s = _norm(cell or "")
+    """The Address cell with every house number removed, strictly (review 2026-11-17 P1-3): unit designators and
+    their numbers go, then every word holding a digit ("1234", "1234AB", "REAR-1234", "1/2") except an ordinal
+    ("18TH"), a route written as one word ("I-45") and a number a route word precedes ("FM 1960", "HIGHWAY 6",
+    "BELTWAY 8"). common.scrub_text last."""
+    s = UNIT.sub(" ", _norm(cell or ""))
     if not s:
         return None
-    s = re.sub(r"^\d+[A-Za-z]?(?:\s*-\s*\d*[A-Za-z]?)?(?:\s+1/2)?\s+(?=\S)", "", s)
-    s = NUMBER.sub(lambda m: m.group(0) if ROUTE_WORD.search(s[:m.start()]) else "", s)
+    kept: list[str] = []
+    for tok in s.split():
+        if re.search(r"\d", tok) and not ORDINAL.match(tok) and not ROUTE_TOKEN.match(tok) \
+                and not (kept and ROUTE_WORD.search(" ".join(kept))):
+            continue
+        kept.append(tok)
+    s = " ".join(kept)
     s = re.sub(r"\s*([&/])\s*", r" \1 ", re.sub(r"\s+,", ",", " ".join(s.split())))
     s = " ".join(s.split()).strip(" ,&/-")
     s = common.scrub_text(" ".join(s.split()))
@@ -448,6 +458,10 @@ def parse_row(s: str) -> dict | None:
         return None
     sc = " ".join(m.group("sc").split())
     structure, cause = split_structure(sc)
+    # no cause, structure or action the City writes holds a digit: one that does holds another row's text (an address,
+    # an SSO id) joined to this row; the row is not read, never kept with it (review 2026-11-17 P1-4)
+    if re.search(r"\d", f"{sc} {m.group('act') or ''}") or (how != "list" and re.search(r"\d", flow or "")):
+        return None
     flag = re.sub(r"\s", "", m.groupdict().get("flag") or "") or None
     row = {"sso_id": m.group("id"), "tpdes_permit": permit,
            "tpdes_as_written": " ".join((m.group("permit") or "").split()) or None,
@@ -681,7 +695,11 @@ def retained(prev: dict, state: dict, recs: list[dict], voided: dict) -> list[di
 
 # ---------------------------------------------------------------- one event, one record
 
-AFTER_NUMBER = re.compile(r"(?<!#)(?<!ID)\s*" + re.escape(common.HOUSE_NUMBER_REMOVED) + r"\s*([^(/,;:]+)")
+# the words after a house number TCEQ's scrub removed; never after "SSO ID#" (the City's id, scrubbed as a number)
+AFTER_NUMBER = re.compile(r"(?<!#)(?<!# )(?<!ID )" + re.escape(common.HOUSE_NUMBER_REMOVED) + r"\s*([^(/,;:]*)")
+# a street ends where a sentence goes on ("TARTAN was caused by", "Sage Park Ln had a discharge")
+SENTENCE_WORDS = {"was", "were", "is", "had", "has", "caused", "discharged", "discharge", "overflowed", "on", "in", "at",
+                  "due", "from", "near", "and", "the", "of", "to", "by", "for", "with", "which", "that", "an", "a"}
 NOT_A_STREET = re.compile(r"(?i)^(?:manhole|cleanout|city|private|service|gravity|force|lift|non-observed|storm|contained|"
                           r"sso\b|gallons?)\b")
 MATCH_PAD_DAYS = 1
@@ -691,30 +709,31 @@ SEGMENT_TEXT = re.compile(r"(?i)^\W*(?:no\.?\s*)?(?:segment\s*(?:no\.?|number|#)
                           r"(?:the\s+)?[a-z\s-]+basin\W*$")
 
 
-def tceq_street(t: dict) -> str | None:
-    """The street TCEQ's record gives, as a comparison key: the words after the house number its scrub removed, in
-    its source ("Manhole at [house number removed] Kenwood Ln", "[house number removed] LEELAND STREET, HOUSTON, TX
-    ...", "[house number removed] SAM HOUSTON 77... (...)/Manhole"), else in its description; up to a ZIP code, a
-    parenthesis, a slash or a comma. None when it gives none ("City Cleanout", or a number that was an SSO ID)."""
+def tceq_street(t: dict) -> tuple[tuple | None, bool]:
+    """(the street TCEQ's record gives as street_key_of's key, whether it gives an address at all): the words after the
+    house number its scrub removed, in its source ("Manhole at [house number removed] Kenwood Ln", "[house number
+    removed] LEELAND STREET, HOUSTON, TX ...", "[house number removed] SAM HOUSTON 77... (...)/Manhole"), else in its
+    description; up to a ZIP code, a parenthesis, a slash, a comma or a sentence word, in any case (review 2026-11-17
+    P1-2: "alpine st"). An address whose street cannot be read gives (None, True): never the weaker match."""
     raw = t.get("raw") or {}
+    had = False
     for text in (str(t.get("outfall_name") or ""), str((raw.get("row") or {}).get("incident_description") or "")):
         for m in AFTER_NUMBER.finditer(text):
+            had = True
             c = re.split(r"\s\d{5}(?:-\d{4})?\b", m.group(1))[0]
             c = re.sub(r"(?i)\bHOUSTON\s*,?\s*TX\b.*$", " ", c)
             words = []
-            for w in c.split():                 # the street ends where a sentence goes on ("TARTAN was caused by")
-                if re.fullmatch(r"[a-z]+\.?", w) or len(words) == 6:
+            for w in c.split():
+                if w.lower().strip(".") in SENTENCE_WORDS or len(words) == 6:
                     break
                 words.append(w)
             c = " ".join(words)
             if not c or NOT_A_STREET.match(c):
                 continue
-            s = street_of(c)
-            if s and re.search(r"[A-Za-z]{3,}", s):
-                k = street_key(s)
-                if k != "NOLOCATION":
-                    return k
-    return None
+            k = street_key_of(street_of(c))
+            if k:
+                return k, True
+    return None, had
 
 
 def _tceq_day(t: dict) -> date | None:
@@ -740,12 +759,34 @@ def _volume_ok(r: dict, t: dict) -> tuple[bool, int]:
     return mine / 2 <= theirs <= mine * 2, 1
 
 
-def _same_street(a: str | None, b: str | None) -> bool | None:
-    """True or False when both give a street (one key holding the other counts: "SHADOWVIEW", "SHADOWVIEWLN"); None
-    when either gives none."""
-    if not a or not b or "NOLOCATION" in (a, b):
+STREET_TYPES = {"ST", "STREET", "DR", "DRIVE", "LN", "LANE", "RD", "ROAD", "AVE", "AV", "AVENUE", "BLVD", "BOULEVARD",
+                "CT", "COURT", "PKWY", "PARKWAY", "WAY", "CIR", "CIRCLE", "PL", "PLACE", "TRL", "TRAIL", "FWY", "FREEWAY",
+                "TER", "TERRACE", "CV", "COVE", "XING", "CROSSING", "SQ", "EXPY", "BND", "BEND", "PT", "POINT"}
+DIRECTIONS = {"N", "S", "E", "W", "NE", "NW", "SE", "SW", "NORTH", "SOUTH", "EAST", "WEST"}
+
+
+def street_key_of(street: str | None) -> tuple[str, frozenset] | None:
+    """(the street's name, its direction words) for comparison: letters and digits, without its type at the end
+    ("SAM HOUSTON PKWY", "SAM HOUSTON" -> "SAMHOUSTON") and its direction at either end ("N WAYSIDE DR" -> "WAYSIDE",
+    {"N"}). None when no name is left."""
+    toks = re.findall(r"[A-Z0-9]+", str(street or "").upper().replace(common.HOUSE_NUMBER_REMOVED.upper(), " "))
+    dirs = set()
+    while toks and toks[-1] in STREET_TYPES | DIRECTIONS and len(toks) > 1:
+        if toks[-1] in DIRECTIONS:
+            dirs.add(toks[-1][0])
+        toks.pop()
+    while toks and toks[0] in DIRECTIONS and len(toks) > 1:
+        dirs.add(toks.pop(0)[0])
+    name = "".join(toks)
+    return (name, frozenset(dirs)) if name and re.search(r"[A-Z]{3}", name) else None
+
+
+def _same_street(a: tuple | None, b: tuple | None) -> bool | None:
+    """True or False when both give a street: the same name (review 2026-11-17 P1-1: PINE is not ALPINE), and the same
+    direction where both give one; None when either gives none."""
+    if not a or not b:
         return None
-    return a == b or (min(len(a), len(b)) >= 6 and (a in b or b in a))
+    return a[0] == b[0] and (not a[1] or not b[1] or a[1] == b[1])
 
 
 def _same_system(r: dict, t: dict) -> tuple[bool, bool]:
@@ -833,7 +874,7 @@ def link_tceq(records: list[dict], tceq: list[dict]) -> Counter:
         if not r.get("started_at"):
             continue
         d0 = date.fromisoformat(r["started_at"][:10])
-        mine = street_key(r["raw"]["location"]) if r["raw"].get("location") else None
+        mine = street_key_of(r["raw"].get("location"))
         for k in range(-MATCH_PAD_DAYS, MATCH_PAD_DAYS + 1):
             for t in by_day.get(date.fromordinal(d0.toordinal() + k), []):
                 system, permit = _same_system(r, t)
@@ -844,7 +885,10 @@ def link_tceq(records: list[dict], tceq: list[dict]) -> Counter:
                     continue
                 if t["event_id"] not in keys:
                     keys[t["event_id"]] = tceq_street(t)
-                same = _same_street(mine, keys[t["event_id"]])
+                theirs, had = keys[t["event_id"]]
+                if theirs is None and had:
+                    continue            # an address that could not be read: never the weaker match (review P1-2)
+                same = _same_street(mine, theirs)
                 if same is False:
                     continue
                 if same is None and not (permit and k == 0 and vrank == 0 and (r.get("volume_gal") or 0) > 1):
@@ -921,8 +965,9 @@ def read_report(state: dict, month: str, info: dict, content: bytes, at: str, la
     prev = reps.get(month)
     if prev and prev.get("sha256") == sha and prev.get("parser_version") == PARSER_VERSION:
         prev["last_seen_at"] = at
-        if last_modified:
-            prev["last_modified"] = last_modified
+        if last_modified and not prev.get("last_modified"):
+            prev["last_modified"] = last_modified       # the first date known stays the publication date
+        state.setdefault("pending", {}).pop(month, None)  # the copy held answers again (review 2026-11-17 P2-11)
         return "same"
     doc = pages_of(content)
     rep = parse_report(doc["pages"])
@@ -930,13 +975,25 @@ def read_report(state: dict, month: str, info: dict, content: bytes, at: str, la
                last_modified=last_modified, created=doc.get("created"))
     attempt = {"url": rep["url"], "sha256": sha, "read_at": at, "rows": len(rep["rows"]), "rows_not_read": rep["not_read"],
                "total_stated": rep["total_stated"], "parser_version": PARSER_VERSION}
-    if prev and prev.get("parser_version") == PARSER_VERSION and rep["not_read"] > prev.get("not_read", 0):
-        prev.setdefault("attempts", []).append(attempt)       # a revision that reads less fully never replaces it
+    if prev and not complete(rep) and (complete(prev) or rep["not_read"] > prev.get("not_read", 0)
+                                       or len(rep["rows"]) < len(prev.get("rows") or [])):
+        # a revision that reads less completely than the copy held never replaces it, and the month is named until a
+        # copy reads whole (review 2026-11-17 P1-5, P1-6)
+        prev.setdefault("attempts", []).append(attempt)
+        pend = state.setdefault("pending", {})
+        pend[month] = {"url": info["url"], "since": (pend.get(month) or {}).get("since") or at, "last_tried": at,
+                       "reason": (f"a revised copy did not read completely ({len(rep['rows'])} rows read of "
+                                  f"{rep['total_stated']} stated, {rep['not_read']} not read); the earlier copy is kept")}
         return "kept"
     rep["attempts"] = ((prev or {}).get("attempts") or []) + [attempt]
     reps[month] = rep
     state.setdefault("pending", {}).pop(month, None)
     return "revised" if prev else "new"
+
+
+def complete(rep: dict) -> bool:
+    """Every row read and as many as the report states."""
+    return not rep.get("not_read") and rep.get("total_stated") is not None and rep["total_stated"] == len(rep.get("rows") or [])
 
 
 def due(state: dict, links: dict[str, dict], backfill: bool, since: str = BACKFILL_FROM) -> list[str]:
@@ -970,6 +1027,8 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
         links = report_links(r.text)
         if not links:
             raise ReadError("the index lists no monthly SSO report")
+        if not any(m >= since for m in links):          # nothing to carry is no read (review 2026-11-17 P1-8)
+            raise ReadError(f"the index lists no monthly SSO report from {since}")
     except (requests.RequestException, ValueError) as e:
         code = getattr(getattr(e, "response", None), "status_code", None)
         err = f"index not read ({type(e).__name__}{f', HTTP {code}' if code else ''})"      # never the message
@@ -1009,15 +1068,12 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
     held = retained(read_json(out if out else EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}, state, recs, voided)
     recs += held
     tdoc = read_json(tceq_path, {}) if tceq_path else {}
-    tceq = (tdoc or {}).get("records") or []
-    tlinks = link_tceq(recs, tceq)
-    if tceq_path and tdoc and tdoc.get("records") is not None:
-        tdoc["meta"] = {**(tdoc.get("meta") or {}), "houston_monthly_links": {"at": now, **dict(tlinks)}}
-        write_json(tceq_path, tdoc)
+    tlinks = link_tceq(recs, (tdoc or {}).get("records") or [])
     reps = state.get("reports") or {}
     listed = sorted(m for m in links if m >= since)
+    # a stated total that differs from the rows read, or that could not be read, is named (review 2026-11-17 P1-7)
     mismatch = {m: {"stated": v.get("total_stated"), "read": len(v.get("rows") or [])} for m, v in sorted(reps.items())
-                if v.get("total_stated") is not None and v["total_stated"] != len(v.get("rows") or [])}
+                if v.get("total_stated") != len(v.get("rows") or [])}
     meta = {"registry_ids": [SOURCE_ID], "index": INDEX, "credit": AUTHORITY, "legal_basis": DECREE,
             "time_zone": TZ_NAME, "covers_operator": DISCHARGER_ID, "carried_from": since,
             "reports_read": {m: {"title": v.get("title"), "rows": len(v.get("rows") or []),
@@ -1034,18 +1090,49 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
                                "same overflow names; never by its street or its permit")}
     problems = [f"report {m} not read ({v['reason']})" for m, v in sorted(pend.items())]
     problems += [f"report {m}: {n} rows not read" for m, n in meta["rows_not_read"].items()]
-    problems += [f"report {m}: {v['read']} rows read, {v['stated']} stated" for m, v in mismatch.items()]
+    problems += [f"report {m}: {v['read']} rows read, {v['stated'] if v['stated'] is not None else 'no total read'} "
+                 "stated" for m, v in mismatch.items()]
+    if not reps:
+        problems.append("no monthly report read")
+    # the City's records first, then TCEQ's marks that point to them (review 2026-11-17 P2-12)
     if problems:
-        path = write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta, path=out,
+        path = write_events(SOURCE_ID, recs, ok=False, partial=bool(reps), meta=meta, path=out,
                             error="; ".join(problems)[:500])
+    else:
+        path = write_events(SOURCE_ID, recs, meta=meta, path=out)
+    if tceq_path and tdoc and tdoc.get("records") is not None:
+        tdoc["meta"] = {**(tdoc.get("meta") or {}), "houston_monthly_links": {"at": now, **dict(tlinks)}}
+        write_json(tceq_path, tdoc)
+    if problems:
         print(f"{SOURCE_ID}: PARTIAL {len(recs)} records from {len(reps)} reports; {'; '.join(problems)} -> {path}",
               file=sys.stderr)
-        if backfill and reps:
+        if backfill:
+            # the index was read: the backfill saved what it could and names the rest (review 2026-11-17 P1-10)
             print(f"{SOURCE_ID}: backfill saved; not read: {'; '.join(problems)}", file=sys.stderr)
             return 0
         return 1
-    path = write_events(SOURCE_ID, recs, meta=meta, path=out)
     print(f"{SOURCE_ID}: {len(recs)} records from {len(reps)} reports (TCEQ links {dict(tlinks)}) -> {path}")
+    return 0
+
+
+def link_only(now: str, events_path: Path = EVENTS_DIR / f"{SOURCE_ID}.json", tceq_path: Path = TCEQ_EVENTS) -> int:
+    """The links again after the generic TCEQ reader has run (Makefile INGEST_SNAPSHOTS: ingest.tx_houston_tceq_link),
+    so a TCEQ batch read this hour is linked before the status build (review 2026-11-17 P1-9). The City's records are
+    read from its events file (whose health is left as its run wrote it); with no such file, or none of its records,
+    TCEQ's marks are cleared, so no TCEQ record points to a record the build does not have."""
+    tdoc = read_json(tceq_path, {}) or {}
+    if tdoc.get("records") is None:
+        print(f"{SOURCE_ID}: no TCEQ events file to link")
+        return 0
+    doc = read_json(events_path, {}) or {}
+    recs = [r for r in doc.get("records") or [] if isinstance(r, dict) and isinstance(r.get("raw"), dict)]
+    tlinks = link_tceq(recs, tdoc["records"])
+    if recs:
+        doc["meta"] = {**(doc.get("meta") or {}), "tceq_links": dict(tlinks), "tceq_links_at": now}
+        write_json(events_path, doc)
+    tdoc["meta"] = {**(tdoc.get("meta") or {}), "houston_monthly_links": {"at": now, **dict(tlinks)}}
+    write_json(tceq_path, tdoc)
+    print(f"{SOURCE_ID}: TCEQ links {dict(tlinks)}")
     return 0
 
 
@@ -1058,7 +1145,11 @@ def main(argv=None) -> int:
     ap.add_argument("--month", action="append")
     ap.add_argument("--tceq", help="a TCEQ events file to link against (with --file; the live one is never changed)")
     ap.add_argument("--out")
+    ap.add_argument("--link-only", action="store_true", help="only link the City's records to TCEQ's again (after the "
+                                                              "generic TCEQ reader)")
     a = ap.parse_args(argv)
+    if a.link_only:
+        return link_only(now_iso())
     if a.file:
         if not (a.month and len(a.month) == len(a.file) and a.out):
             ap.error("--file needs one --month per file and --out")
