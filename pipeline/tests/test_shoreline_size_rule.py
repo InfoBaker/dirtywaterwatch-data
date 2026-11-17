@@ -92,13 +92,15 @@ BAYS = dict([
 
 # ---------------------------------------------------------------- which waters (build/shoreline.py)
 
-def test_the_committed_rules_file_has_the_lake_switch_on_with_the_narrow_floor_and_the_islet_floor():
+def test_the_committed_rules_file_has_the_lake_switch_on_with_the_narrow_floor_and_the_islet_floor_off():
     """The lake switch (owner, 2026-11-16, decisions 26 and 28): lakes and reservoirs of 50 km2 or more, the long,
-    narrow ones (under 1.5 km wide on average and 40 km or more long) kept whole; and the islet floor (decision 29): a
-    ring under 5 km is not walked alone. Bays and sounds are a later switch, so their key is absent."""
+    narrow ones (under 1.5 km wide on average and 40 km or more long) kept whole. The islet floor (decision 29,
+    min_ring_km) is off again: its key makes every shoreline stretch due at once, and the first refresh with it did
+    not finish inside the job's time limit (2026-11-17); it returns with a limit on the stretches one run rebuilds.
+    Bays and sounds are a later switch, so their key is absent."""
     sh = RULES_FILE["reach"]["shoreline"]
     assert sh["min_area_km2"] == 50 and sh["min_mean_width_km"] == 1.5 and sh["narrow_min_length_km"] == 40
-    assert sh["min_ring_km"] == 5 and R.shore_sig(SH.rule(RULES_FILE)).endswith("|ring5")
+    assert "min_ring_km" not in sh and "ring" not in R.shore_sig(SH.rule(RULES_FILE))
     assert "min_area_kinds" not in sh
     committed = SH.rule(RULES_FILE)
     assert SH.size_on(committed) and SH.size_kinds(committed) == {"lake", "reservoir"}
