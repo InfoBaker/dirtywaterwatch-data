@@ -289,9 +289,20 @@ def row_ids(rows: list[dict], quarter: str) -> list[str]:
     return out
 
 
+def published_on(rep: dict) -> str | None:
+    """The certification page's date as the report's publication date, unless it falls before the quarter's last day
+    (the Q2 2024 report is dated 6/29/2024): a report of the whole quarter cannot be issued before it ends, so such a
+    date is kept as written (raw.report_signed_on) and no publication date is given."""
+    signed, period = rep.get("signed"), rep.get("period") or []
+    if signed and len(period) == 2 and signed < period[1]:
+        return None
+    return signed
+
+
 def to_records(quarter: str, rep: dict) -> list[dict]:
     out = []
     period = rep.get("period") or []
+    published = published_on(rep)
     url = rep.get("url")
     folder = UPLOAD.search(url or "")
     for rid, r in zip(row_ids(rep["rows"], quarter), rep["rows"]):
@@ -304,7 +315,10 @@ def to_records(quarter: str, rep: dict) -> list[dict]:
                "place_note": "the City's table gives a street location in Memphis (Shelby County); house numbers "
                              "are removed and no point is taken from the street",
                "parser_version": rep.get("parser_version")}
-        if folder and not rep.get("signed"):
+        if rep.get("signed") and not published:
+            raw["published_note"] = (f"the certification page is dated {rep['signed']}, before the quarter ended "
+                                     f"({period[1]}): kept as written, not used as the publication date")
+        if folder and not published:
             raw["report_posted_folder"] = f"{folder.group(1)}-{folder.group(2)}"
         if tnote:
             raw["time_note"] = tnote
@@ -345,7 +359,7 @@ def to_records(quarter: str, rep: dict) -> list[dict]:
             discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, npdes_permit=None,
             outfall_name=r.get("location"), waterbody_text=r.get("water"), water_slugs=[], water_match="none",
             started_at=st.isoformat(), ended_at=end, time_precision=prec,
-            reported_at=None, published_at=rep.get("signed"), source_updated_at=None,
+            reported_at=None, published_at=published, source_updated_at=None,
             fetched_at=rep.get("read_at") or now_iso(),
             material="untreated sewage", volume_gal=gal,
             volume_text=f"{r.get('volume')} gallons (estimated)" if gal is not None else None,
