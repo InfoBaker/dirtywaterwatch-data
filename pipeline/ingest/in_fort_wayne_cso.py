@@ -66,6 +66,9 @@ Failures: a failed request or a page with no summary link is a failed read (ok=F
 History: the page links only the latest week; earlier weeks stay at their addresses. --backfill asks each week's
   address from BACKFILL_FROM (the Wednesday, then the Thursday and the Tuesday), slowly, and reads what answers; a
   week that answers 404 on all three days is listed in meta.backfill_missing (not read, never "no overflows").
+Exit code: 1 for a failed read, and on the hourly run while a document is unread (health false). --backfill exits 0
+  when the page was read and at least one document is held, the unread documents named in meta.unread, the error and
+  the output line (health stays false); 1 when the page was not read or no document was read at all.
 Run from pipeline/: python -m ingest.in_fort_wayne_cso [--backfill [--from 2025-01-01]]
   [--pieces saved.json ... --out events.json] (saved piece files from pdf_pieces, read as documents of this run)
 Cadence: hourly with the refresh (Indiana is live); the city posts weekly.
@@ -632,6 +635,13 @@ def run(now: str, state_path: Path, out: Path | None = None, get=_get, backfill:
         write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta, path=out,
                      error="documents not read: " + "; ".join(f"{u.rsplit('/', 1)[-1]}: {w}" for u, w in unread.items()))
         print(f"{SOURCE_ID}: PARTIAL {len(recs)} records; {len(unread)} documents not read", file=sys.stderr)
+        if backfill and state.get("docs"):
+            # the one-time backfill saved what it read: it exits 0 so the refresh goes on and saves the history; the
+            # documents not read are named here and in meta.unread, and health stays false until they read. A
+            # backfill that read no document at all (a changed layout) still fails, as a failed page does above.
+            print(f"{SOURCE_ID}: backfill saved; not read: " + ", ".join(u.rsplit("/", 1)[-1] for u in unread),
+                  file=sys.stderr)
+            return 0
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta, path=out)
     print(f"{SOURCE_ID}: {len(recs)} records from {len(state.get('docs') or {})} weekly summaries -> {path}")

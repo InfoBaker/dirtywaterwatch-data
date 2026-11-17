@@ -411,3 +411,29 @@ def test_a_split_date_that_does_not_make_a_day_is_unread():
     gone["layout_text"] = None
     with pytest.raises(FW.SummaryError):
         FW.parse(gone)
+
+
+def test_runner_backfill_exit_tells_a_failed_read_from_unread_documents(tmp_path, capsys):
+    # refresh 43995607963 (2026-11-17): "PARTIAL 242 records; 3 documents not read" exited 1, failed the refresh and
+    # kept the history from being saved. A backfill that saved what it read exits 0 and names the rest.
+    u_bad = FW.BASE + "2026/11/CSO-7-Day-Summary-v2-2026-Nov-04.pdf"
+    broken = _edit(NOV, "Start of CSO", "Start of Event")
+    get = site({U_NOV: NOV, u_bad: broken}, page_links=[U_NOV])
+    rc, f = run(tmp_path, get, backfill=True, since="2026-11-03", today=date(2026, 11, 16))
+    assert rc == 0 and f["ok"] is False and u_bad in f["meta"]["unread"]
+    assert "not read" in capsys.readouterr().err
+    # the hourly run keeps today's rule: an unread document exits 1 (health false)
+    rc, f = run(tmp_path, site({U_NOV: NOV, u_bad: broken}, page_links=[U_NOV]))
+    assert rc == 1 and f["ok"] is False and u_bad in f["meta"]["unread"]
+
+
+def test_backfill_with_no_page_or_nothing_read_fails(tmp_path):
+    rc, _ = run(tmp_path, site({U_NOV: NOV}, page_code=403), backfill=True, since="2026-11-03",
+                today=date(2026, 11, 16))
+    assert rc == 1                                                          # the page not read
+    broken = _edit(NOV, "Start of CSO", "Start of Event")                   # every document unread: a layout change
+    fresh = tmp_path / "fresh"
+    fresh.mkdir()
+    rc, f = run(fresh, site({U_NOV: broken}, page_links=[U_NOV]), backfill=True, since="2026-11-10",
+                today=date(2026, 11, 16))
+    assert rc == 1 and f["ok"] is False and f["records"] == []
