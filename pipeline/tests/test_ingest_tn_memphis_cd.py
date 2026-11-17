@@ -46,9 +46,9 @@ def test_rows_read_and_footnotes():
 
 def test_times_volume_end_and_water():
     _, r = recs("q2_2026", "2026Q2", ["2026-04-01", "2026-06-30"])
-    pate = r["2026Q2:2026-04-27T0300PM:PATERD"]
+    pate = r["2026-04-27T0300PM:PATERD"]
     assert pate["started_at"] == "2026-04-27T15:00:00-05:00" and pate["time_precision"] == "minute"
-    assert pate["ended_at"] == "2026-04-28T14:30:00-05:00" and pate["status"] == "ended"   # 23.5 hours, the report's
+    assert pate["ended_at"] == "2026-04-29" and pate["status"] == "ended"   # the latest day 23.5 hours allows
     assert pate["waterbody_text"] == "Fletcher Creek" and pate["raw"]["_placement"] == "named_water_only"
     assert pate["raw"]["flags_as_written"] == ["YES", "NO", "NO"]
     assert pate["volume_gal"] == 260000 and pate["estimate_flag"] == "estimated"
@@ -57,36 +57,36 @@ def test_times_volume_end_and_water():
     assert pate["published_at"] is None and pate["fetched_at"] == "2026-11-17T12:00:00Z"
     assert pate["raw"]["report_posted_folder"] == "2026-07"
     # a two-digit year
-    assert r["2026Q2:2026-04-29T0700AM:AMERICANWAY"]["volume_gal"] == 14200000
+    assert r["2026-04-29T0700AM:AMERICANWAY"]["volume_gal"] == 14200000
 
 
 def test_bare_time_in_ampm_report_is_a_day():
     _, r = recs("q2_2026", "2026Q2", ["2026-04-01", "2026-06-30"])
-    c = r["2026Q2:2026-04-29T0149:CHICKASAWCOVE"]
-    assert c["time_precision"] == "day" and c["started_at"] == "2026-04-29T00:00:00-05:00"
+    c = r["2026-04-29T0149:CHICKASAWCOVE"]
+    assert c["time_precision"] == "day" and c["started_at"] == "2026-04-29"
     assert "no AM or PM" in c["raw"]["time_note"]
-    assert c["ended_at"] == "2026-04-30T00:00:00-05:00"          # the latest day 5.2 hours allows
+    assert c["ended_at"] == "2026-04-30"                          # the latest day 5.2 hours allows
 
 
 def test_marked_rows_name_no_water_and_keep_the_citys_words():
     _, r = recs("q2_2026", "2026Q2", ["2026-04-01", "2026-06-30"])
-    star = r["2026Q2:2026-06-18T0236PM:FORRESTAVE"]
+    star = r["2026-06-18T0236PM:FORRESTAVE"]
     assert star["waterbody_text"] is None and star["raw"]["reach_mark"] == "*"
     assert "unable to determine" in star["raw"]["reach_note"]
     assert "reached_water" not in star["raw"]               # the City does not say it reached no water
-    base = r["2026Q2:2026-06-13T1200PM:SYCAMOREVIEWRD"]
+    base = r["2026-06-13T1200PM:SYCAMOREVIEWRD"]
     assert base["raw"]["overflow_source"] == "BASEMENT" and base["waterbody_text"] is None
 
 
 def test_24_hour_report_and_midnight():
     rep, r = recs("q1_2023", "2023Q1", ["2023-01-01", "2023-03-31"])
     assert rep["ampm"] is False and rep["not_read"] == 0
-    a = r["2023Q1:2023-01-02T1525:CHICKASAWCV"]
+    a = r["2023-01-02T1525:CHICKASAWCV"]
     assert a["started_at"] == "2023-01-02T15:25:00-06:00" and a["volume_text"] == "354.76 gallons (estimated)"
-    assert a["ended_at"] == "2023-01-02T17:35:00-06:00"          # 2.16 hours rounded up to the minute
-    assert r["2023Q1:2023-01-03T0928:CINCINNATIPERSON"]["waterbody_text"] == "CANE CREEK"
-    assert r["2023Q1:2023-01-03T1707:NPKWY"]["raw"]["overflow_source"] == "4 AND 6"
-    mid = r["2023Q1:2023-03-03T0000:JONETTA"]
+    assert a["ended_at"] == "2023-01-03"                          # the latest day 2.16 hours allows
+    assert r["2023-01-03T0928:CINCINNATIPERSON"]["waterbody_text"] == "CANE CREEK"
+    assert r["2023-01-03T1707:NPKWY"]["raw"]["overflow_source"] == "4 AND 6"
+    mid = r["2023-03-03T0000:JONETTA"]
     assert mid["time_precision"] == "day" and "0:00" in mid["raw"]["time_note"]
 
 
@@ -177,7 +177,7 @@ def test_index_failure_is_unhealthy_and_keeps_records(tmp_path, monkeypatch):
     M.run("2026-11-17T12:00:00Z", tmp_path / "st.json", out, get=ok, tdec=[])
     assert M.run("2026-11-17T13:00:00Z", tmp_path / "st.json", out, get=lambda u: Resp(status=403), tdec=[]) == 1
     doc = json.loads(out.read_text())
-    assert doc["ok"] is False and doc["count"] == 18
+    assert doc["ok"] is False and doc["count"] == 9      # the two copies of one page are one record each
     assert M.run("2026-11-17T14:00:00Z", tmp_path / "st.json", out, get=lambda u: Resp(text="<html></html>"),
                  tdec=[]) == 1
 
@@ -191,7 +191,7 @@ def test_link_tdec_same_day_and_street():
              "outfall_name": "N HOMER ST", "raw": {"_outfall_name_basis": "street"}}]
     links = M.link_tdec(records, tdec)
     assert links["linked"] == 1
-    assert r["2026Q2:2026-04-27T0300PM:PATERD"]["duplicate_of"] == "tn-tdec-events-report:x"
+    assert r["2026-04-27T0300PM:PATERD"]["duplicate_of"] == "tn-tdec-events-report:x"
 
 
 def test_ids_stable_and_distinct():
@@ -234,3 +234,101 @@ def test_certification_date_before_quarter_end_is_not_the_publication_date():
     r = M.to_records("2023Q1", rep)[0]
     assert r["published_at"] is None and r["raw"]["report_signed_on"] == "2023-03-29"
     assert "before the quarter ended" in r["raw"]["published_note"]
+
+
+# ---------------------------------------------------------------- review 2026-11-17 (Astra) fixes
+
+def _one(row_line, key="q2_2026"):
+    head = PAGES[key][2].split("\n")[:5]
+    return M.parse_report(["x", "y", "\n".join(head + [row_line])])
+
+
+def test_p1_1_2_a_street_or_personal_text_is_never_a_water():
+    rep = _one("100 OAK ST 4/2/2026 12:00PM GREASE 798 M/L 1.3 Wolf River Road YES NO NO")
+    r = rep["rows"][0]
+    assert r["water"] is None and "withheld" in r["water_withheld"]
+    rep = _one("100 OAK ST 4/2/2026 12:00PM GREASE 798 M/L 1.3 someone@example.com Creek YES NO NO")
+    assert rep["rows"][0]["water"] is None and "example.com" not in json.dumps(rep)
+    rep.update(url="u", period=None)
+    rec = M.to_records("2026Q2", rep)[0]
+    assert rec["waterbody_text"] is None and "example.com" not in json.dumps(rec)
+
+
+def test_p1_3_errors_never_carry_exception_text(tmp_path, monkeypatch):
+    def boom(content):
+        raise ValueError("row 100 OAK ST someone@example.com")
+    monkeypatch.setattr(M, "pdf_pages", boom)
+    get = lambda u: Resp(text=INDEX) if u == M.INDEX else Resp(content=b"x")
+    out = tmp_path / "ev.json"
+    M.run("2026-11-17T12:00:00Z", tmp_path / "st.json", out, get=get, tdec=[])
+    text = out.read_text() + (tmp_path / "st.json").read_text()
+    assert "example.com" not in text and "OAK" not in text
+    assert json.loads(out.read_text())["meta"]["pending"]["2026Q2"]["reason"] == "the report could not be read (ValueError)"
+
+
+def test_p1_4_the_estimated_duration_gives_a_day_bound_end_only():
+    _, r = recs("q2_2026", "2026Q2", ["2026-04-01", "2026-06-30"])
+    pate = [x for x in r.values() if x["outfall_name"] and "PATE" in x["outfall_name"]][0]
+    # 23.5 hours from 4/27 15:00: the latest day it allows (the TDEC rows' rule), never a clock time
+    assert pate["ended_at"] == "2026-04-29" and pate["raw"]["ended_at_precision"] == "day"
+    assert "estimated duration" in pate["raw"]["ended_at_basis"]
+
+
+def test_p1_5_an_incomplete_revision_keeps_the_accepted_copy(monkeypatch):
+    _fake_pdf(monkeypatch)
+    state = {}
+    M.read_report(state, "2026Q2", {"url": "a", "period": None}, b"q2_2026", "t1")
+    PAGES["broken"] = ["x", "y", PAGES["q2_2026"][2].replace("GREASE 798 M/L 1.3 ?", "GREASE")]
+    try:
+        M.read_report(state, "2026Q2", {"url": "a", "period": None}, b"broken", "t2")
+    finally:
+        PAGES.pop("broken")
+    assert len(state["reports"]["2026Q2"]["rows"]) == 9 and state["reports"]["2026Q2"]["read_at"] == "t1"
+    assert state["reports"]["2026Q2"]["attempts"][-1]["rows_not_read"] == 1
+
+
+def test_p1_6_records_of_reports_missing_from_the_state_are_kept(tmp_path, monkeypatch):
+    _fake_pdf(monkeypatch)
+    out = tmp_path / "ev.json"
+    ok = lambda u: Resp(text=INDEX) if u == M.INDEX else Resp(content=b"q2_2026")
+    M.run("2026-11-17T12:00:00Z", tmp_path / "st.json", out, get=ok, tdec=[])
+    n = json.loads(out.read_text())["count"]
+    (tmp_path / "st.json").unlink()
+    bad = lambda u: Resp(text=INDEX) if u == M.INDEX else Resp(status=503)
+    assert M.run("2026-11-17T13:00:00Z", tmp_path / "st.json", out, get=bad, tdec=[]) == 0
+    assert json.loads(out.read_text())["count"] == n
+
+
+def test_p1_7_a_row_repeated_in_two_reports_is_one_record():
+    rep = M.parse_report(PAGES["q2_2026"])
+    a = dict(rep, url="a", period=None)
+    b = dict(rep, url="b", period=None)
+    recs_, _ = M.build({"reports": {"2026Q1": a, "2026Q2": b}}, tdec=[])
+    assert len(recs_) == 9 and all(not r["source_record_id"].startswith("2026Q") for r in recs_)
+    assert {r["raw"]["quarter"] for r in recs_} == {"2026Q2"}       # the newer report's row is kept
+
+
+def test_p1_8_tdec_link_needs_the_same_water():
+    _, r = recs("q2_2026", "2026Q2", ["2026-04-01", "2026-06-30"])
+    tdec = [{"event_id": "t:x", "npdes_permit": "TN0020711", "started_at": "2026-04-27", "waterbody_text": "Wolf River",
+             "outfall_name": "PATE RD", "raw": {"_outfall_name_basis": "street"}}]
+    assert M.link_tdec(list(r.values()), tdec)["linked"] == 0
+
+
+def test_p2_9_day_precision_starts_are_dates():
+    _, r = recs("q2_2026", "2026Q2", ["2026-04-01", "2026-06-30"])
+    c = [x for x in r.values() if x["time_precision"] == "day"][0]
+    assert c["started_at"] == "2026-04-29"
+
+
+def test_p2_11_a_changed_address_is_read_again_whatever_its_age():
+    links = M.report_links(INDEX)
+    state = {"reports": {q: {"url": v["url"], "parser_version": M.PARSER_VERSION} for q, v in links.items()}}
+    state["reports"]["2023Q1"]["url"] = "old"
+    assert M.due(state, links, backfill=False) == ["2023Q1"]
+
+
+def test_p2_12_dst_gap_and_overlap_are_dated_to_the_day():
+    for d, t in (("2026-03-08", "2:30"), ("2026-11-01", "1:30")):
+        st, prec, note = M._start({"date": d, "time": t, "ampm": "AM"}, True)
+        assert prec == "day" and "daylight" in note
