@@ -1,0 +1,30 @@
+id: "me-cbep-portland-cso"
+name: "Portland (Maine) combined sewer overflows by storm and outfall, 2015 to 2019 (Casco Bay Estuary Partnership archive of the City of Portland and Portland Water District filings)"
+url: "https://github.com/CBEP-SoCB-Details/Casco_Bay_CSOs/blob/99cadaabf605e1f46c619339c1e5220762b5d660/Derived_Data/Portland_CSO_data_2015_2019.csv"
+homepage: "https://github.com/CBEP-SoCB-Details/Casco_Bay_CSOs"
+kind: "csv"
+level: "nonprofit"
+# Notes (2026-11-17, sources research follow-up): the only public dated overflow record for Maine. The yearly
+#   "CSO Activity and Volumes" workbooks the City of Portland and PWD file with DEP, as received by CBEP from PWD
+#   staff for the 2020 State of the Bay report, with CBEP's merged file of 2015 to 2019. 2016 to 2018 in the merged
+#   file equal the workbooks; 2019 is read from the workbook because the merged file drops the storm of
+#   2019-12-13 to 2019-12-15 (filed as 2020; 56.5 million gallons). Yearly sums against DEP's status report
+#   (Portland & PWD, million gallons): 2015 221.1 / 254.7 (five outfalls not metered in 2015), 2016 318.4 / 318.4,
+#   2017 165.0 / 175.7, 2018 290.5 / 283.6, 2019 185.1 / 184.5.
+# Can fill: started_at and ended_at (the storm's first and last day), outfall, volume per outfall and storm,
+#   permit (by outfall number), coordinates and water (outfall registry), published_at (the archive commit)
+# Cannot fill: the day or time an outfall discharged within a storm; duration; reported_at; float-block trips
+#   with no metered volume (not in CBEP's file); anything after 2019
+# Waters: casco-bay-me (every outfall the registry places), per data/outfalls-new-england.json
+cadence: "Static archive: 2015 to 2019; the repository has not changed since 2021-12-03 (commit 99cadaab)."
+license: "CBEP's archive: MIT License for its code. Its notice: 'Most data sources used in the 2020 State of the Bay report are not Produced by CBEP. CBEP is not the copyright holder and cannot grant useage rights to others. ... CBEP has been granted a non-exclusive right to use data for preparation of the 2020 State of the Bay Report, including ... posting data online for study and non-commercial use. All other rights are retained by the data providers.' The workbooks are filings with a state agency."
+attribution: "City of Portland and Portland Water District (filings with Maine DEP), published by the Casco Bay Estuary Partnership"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["ME"]
+access: ["csv"]
+access_detail: "Tracked copies in data/reference/: cbep-portland-cso-2015-2019.csv (CBEP's merged file as published, SHA256 checked) and portland-cso-2019-filing.csv (numbers-only extract of 'Original_Data/Portland_Data/2019 Portland CSO Activity and Volumes - Final.xlsx'; the workbook names a city contact, the extract does not). Rebuild the extract: python -m ingest.me_cbep_portland_cso --extract."
+machine_readable: true
+legal_basis: "Filed under 06-096 CMR Ch. 570 s.6-7 and the MEPDES CSO permit conditions (yearly CSO activity and volumes, due March 1); CBEP's publication is voluntary."
+checked: "2026-11-17"
