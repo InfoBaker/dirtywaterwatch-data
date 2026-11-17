@@ -1,0 +1,27 @@
+id: "dc-water-sso"
+name: "DC Water: Sanitary Sewer dashboard data file (sanitary sewer overflows)"
+url: "https://serviceinfo.dcwater.com/dashboard/sso.csv"
+homepage: "https://www.dcwater.com/resources/open-data-portal/sanitary-sewer-dashboard"
+kind: "csv"
+level: "utility"
+# Feed row: written by pipeline/ingest/dc_water_sso.py (data/build/events/dc-water-sso.json); the file itself is never saved.
+# Read 2026-11-16: 36 rows reported 2023-05-08 to 2026-01-20, five columns (PremiseNo, Date Reported, SpillVolInGal,
+#   Location, Description). Kept: the report time, the gallons, the Location's street names with house and block
+#   numbers removed. Dropped before saving: PremiseNo, Description (it repeats the address and names no water), every
+#   house number. The file names no water and gives no coordinates: each row is a District report on no water.
+# Records: one per row, sso, status unknown, started_at null (the file gives the report time only), reported_at the
+#   Date Reported. A row that leaves the file is kept as a past report. An EPA overflow row of DC0021199 on the same
+#   days naming the same street is the same spill (duplicate_of).
+cadence: "the refresh (DC Water's page says the file is updated monthly)"
+license: "DC Water's page: 'not for any commercial, legal or other use'"
+attribution: "DC Water"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["DC"]
+registry_ids: ["dc-dcwater-sso-csv"]
+access: ["csv"]
+access_detail: "CSV, about 3.4 KB, no key; a backslash escapes some commas in Description."
+machine_readable: true
+legal_basis: "none (voluntary)"
+checked: "2026-11-16"

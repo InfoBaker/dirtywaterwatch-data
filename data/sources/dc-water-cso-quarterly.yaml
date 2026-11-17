@@ -1,0 +1,36 @@
+id: "dc-water-cso-quarterly"
+name: "DC Water: combined sewer overflow facilities quarterly reports, dated overflows at the inflatable dam structures (Table 2-7)"
+url: "https://www.dcwater.com/resources/publications?term_node_tid_depth=50"
+homepage: "https://www.dcwater.com/resources/publications?term_node_tid_depth=50"
+kind: "pdf"
+level: "utility"
+# Feed row: written by pipeline/ingest/dc_water_cso_quarterly.py (data/build/events/dc-water-cso-quarterly.json; the
+#   rows read from every report are kept in data/build/dc-water-cso-quarterly-state.json; the PDF is never saved).
+# Read 2026-11-16: the list's first page holds the reports for the third quarter of 2020 to the third quarter of 2026
+#   (document dates 2020-10-29 to 2026-10-28); pages 1 to 3 reach back to the first quarter of 2005 (older layouts, not
+#   read). Each report holds three monthly sections; each month's Table 2-7 gives the overflow dates and estimated
+#   durations at seven inflatable dam structures and three outfall-sewer structures. Read with pypdf from the first
+#   quarter of 2020 to the third quarter of 2026: 189 dated overflows in 27 quarters (2026-09-11 the newest, structure 35,
+#   47 minutes); 30 dates the table's own notes call "not an overflow to the river" set apart; 8 months unread (July and
+#   August 2026: pages without a text layer; April to June 2023: an encrypted file; August 2024: a date written
+#   "8/3/20024"; February 2024: the section runs onto attached pages with no text; January 2020: a note that cannot be
+#   tied to one of two dates).
+# Records: one per date at a structure, cso, status ended with no end time (DC Water gives a duration, raw.duration_*),
+#   day precision (data/rules.json unresolved.day_start_caution), published_at the report's document date. Structures
+#   are tied to registry outfalls only through DC Water's Table 2-1 "Associated NPDES Outfall": 14 to 011A, 15 and 15A
+#   to 010, 16 to 012, 34 to 020, 35 to 021, 52 to 034; point and water from the registry. No volume (the table gives
+#   none). The quarter's modeled totals per outfall are not records (each dated overflow is one of them).
+# Cannot fill: a time of day; an end time; a volume; dry weather overflows (stated in narrative, listed in meta only).
+cadence: "the list at most once a day; a new report fetched once; the newest two reports and any report with an unread month again every 30 days (quarterly, about four weeks after the quarter)"
+license: "none stated (public record required by the 2003 consent decree)"
+attribution: "DC Water"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["DC"]
+registry_ids: ["dc-dcwater-cso-quarterly-reports"]
+access: ["pdf"]
+access_detail: "One signed PDF per quarter (about 1 to 5 MB, 65 to 75 pages); Table 2-7 near page 13 of each monthly section; some pages carry fonts with no Unicode map and give no text."
+machine_readable: false
+legal_basis: "2003 consent decree, section V.16.b (the 12 most recent reports online); permit DC0021199 Part III"
+checked: "2026-11-16"
