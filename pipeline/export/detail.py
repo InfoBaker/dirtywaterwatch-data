@@ -30,7 +30,8 @@ FIELDS (every value is the source's own, never converted; a field the source doe
 
 The later record of the same event (links_of): records are one event only where the pipeline's own rules linked
 them (parent_event_id within one source: MassDEP's Ceased updates and Verified Data Reports to their notice,
-NY-Alert's notices of one chain; Georgia EPD's row to the EPA eRule report it was paired with, raw._epa_record).
+NY-Alert's notices of one chain; Georgia EPD's row to the EPA eRule report it was paired with, raw._epa_record; a
+row of Houston's monthly SSO table to TCEQ's record of the same overflow, raw._other_source_record).
 Nothing here pairs records itself. `later_volume` on a discharge record: the volume of the latest record of its
 family published after it, with that record's qualifier and publication time, when it differs from the record's
 own figure or qualifier. `linked_records`: its parent, its direct children and the other source's record, each with
@@ -222,6 +223,13 @@ SOURCES: dict[str, dict] = {
         "rainfall_label": lambda raw: "Precipitation" if plain_inches("precipitationAmount")(raw) else None,
     },
     "tx-tceq-sso-opendata": {"cause": text("_cause", "cause")},
+    # Houston's monthly SSO table (ingest/tx_houston_sso_monthly.py): its columns as written; "Est. Volume (Gallons)"
+    # is an estimate, and a "0" is no figure (the City's note, kept as raw.volume_note)
+    "tx-houston-sso-monthly": {"report_kind": const("Monthly SSO Report"),
+                               "cause": text("cause", "structure_and_cause_as_written"),
+                               "overflow_point": text("structure_type"), "town": text("city"),
+                               "volume_qualifier": lambda raw: "estimated" if not raw.get("volume_note") else None,
+                               "volume_method": text("volume_note")},
     # the notice's own form fields as the ingester reads them from its text (fl_dep_pnp.template_fields: "Cause:")
     "fl-dep-pnp": {"cause": text("_template.cause"), "town": text("FACILITY_CITY")},
     "ct-deep": CT, "ct-deep-annual": CT, "ct-deep-archive": CT,
@@ -385,7 +393,8 @@ def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset())
     # another source's record of the same event, as the pipeline paired them (Georgia EPD and EPA's eRule report)
     other = defaultdict(set)
     for e in by_id.values():
-        x = (e.get("raw") or {}).get("_epa_record") if isinstance(e.get("raw"), dict) else None
+        raw = e.get("raw") if isinstance(e.get("raw"), dict) else {}
+        x = raw.get("_epa_record") or raw.get("_other_source_record")
         for y in ([x] if isinstance(x, str) else x if isinstance(x, list) else []):   # one EPA report, or several
             if isinstance(y, str) and y in by_id and y != e["event_id"]:
                 other[e["event_id"]].add(y)
@@ -462,9 +471,10 @@ def _main(out_dir: str) -> None:
         d = detail_of(e)
         if d:
             x["detail"] = d
-        epa = (e.get("raw") or {}).get("_epa_record") if isinstance(e.get("raw"), dict) else None
-        if epa:
-            x["raw"] = {"_epa_record": epa}
+        raw = e.get("raw") if isinstance(e.get("raw"), dict) else {}
+        keep = {k: raw[k] for k in ("_epa_record", "_other_source_record") if raw.get(k)}
+        if keep:
+            x["raw"] = keep
         light.append(x)
     links = links_of(light)
     add = {x["event_id"]: {**({"detail": x["detail"]} if x.get("detail") else {}), **links.get(x["event_id"], {})}
