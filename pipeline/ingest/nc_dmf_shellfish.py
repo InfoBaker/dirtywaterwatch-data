@@ -31,12 +31,15 @@ clock times)
   - End: only a later reopening proclamation that names the area ends its closure: ended_at its effective day
     (raw.ended_at_precision day: DMF reopens "at sunrise", counted to the end of that day), raw.ended_by its number.
     A reopening whose effective day is after the read is DMF's plan (raw.reopening_proclaimed), never an end until
-    that day. A reopening of "a portion of" an area closed whole does not end it (raw.partial_reopenings). A closure
+    that day. A reopening of a portion ends only a closure of that portion in the same words ("a portion of" closed,
+    "a portion of" reopened), or is noted (raw.partial_reopenings); a reopening of the whole area ends any. A closure
     that no reopening names stays as DMF left it; the status build's rule for an advisory with no end then applies
     (red 14 days from its start and issue, then shown as not reconfirmed). Absence from the list never ends anything.
-  - Matching: the same area name (case, a leading "the", "a portion of" and the like set aside) with a county in
-    common (an area's own "(Pamlico County)" qualifier, else the proclamation's counties), in a proclamation issued
-    later (number order within a year).
+  - Matching: the same area name (case and a leading "the" set aside) with a county in common (an area's own
+    "(Pamlico County)" qualifier, else the proclamation's counties), in a proclamation issued later (number order
+    within a year). A name DMF uses in two counties (TWO_COUNTY_NAMES), unqualified in a proclamation that lists both,
+    is ambiguous: never placed and never ended (raw.ambiguous_reopenings). Only DMF's affirmative effective sentence
+    is taken (EFFECTIVE_WHOLE): a negation, a condition or a postponement is unread.
 
 Place
   A temporary closure closes DMF's Conditionally Approved-Open areas of that name. An area named whole whose name is
@@ -48,11 +51,13 @@ Place
 
 A bad read changes nothing: a failed request, a page without its closing tag, the title, the proclamation list or a
 row count as expected writes ok=False and keeps every earlier record. A row that cannot be read is listed in
-meta.unread (health false) while the readable rows update; since only an affirmative reopening ends a closure, an
-unread row can never end one.
+meta.unread (health false) while the readable rows update, and stays there, its page read again each run, until it
+is read (a later run that does not read its page carries it); since only an affirmative reopening ends a closure, an
+unread row can never end one. Every page but the last must list ten proclamations, or the read fails. An archive
+entry that is only a date with no proclamation (the oldest page) is skipped by name (meta.skipped).
 
-Reads: the first READ_PAGES pages every run; every page the pager names when no earlier record is held (the first
-run) or with --backfill. Privacy: only the proclamation list is read (the contact paragraph above it is not); every
+Reads: the first READ_PAGES pages and the pages of carried unread rows every run; every page the pager names when no
+earlier record is held (the first run) or with --backfill. Privacy: only the proclamation list is read (the contact paragraph above it is not); every
 field is cleaned before any save; the raw save is the parsed rows as JSON.
 
 Run from pipeline/:  python -m ingest.nc_dmf_shellfish [--file p0.html [p1.html ...]] [--backfill]
@@ -99,8 +104,21 @@ EFFECTIVE = re.compile(
     re.I)
 ISSUED = re.compile(r"^(?P<m>\d{1,2})/(?P<d>\d{1,2})/(?P<y>\d{2}|\d{4})$")
 PORTION = re.compile(r"^(?:a portion of|portions of|part of|the (?:north|south|east|west)(?:ern)? (?:side|portion|part) "
-                     r"of|all those waters in)\s+", re.I)
+                     r"of|all those waters in)\s+", re.I)       # its words are kept: a portion is matched only in the same words
 COUNTY_Q = re.compile(r"\s*\((?P<c>[A-Z][A-Za-z ]+?) County\)$")
+# the effective sentence must be DMF's affirmative order and end at its date (Astra review 2026-11-16 P1-8): a negation,
+# a condition or a postponement ("NOT effective", ", if results allow", "postponed") is unread, never an order
+EFFECTIVE_WHOLE = re.compile(
+    r"^Shellfish (?:Temporary Closures?|reopenings?) effect(?:ive)?\s+(?:at\s+)?(?:sunrise|\d{1,2}:\d{2}\s*[ap]\.?\s*m\.?)"
+    r"\s*,?\s*[A-Z][a-z]+day\s*,?\s*[A-Z][a-z]+\s+\d{1,2}(?:st|nd|rd|th)?\s*[,.]?\s*\d{4}\s*\.?$", re.I)
+NOT_AFFIRMED = re.compile(r"\b(?:not|no longer|unless|if|until|pending|postpon\w*|rescind\w*|cancel\w*|delay\w*|"
+                          r"suspend\w*|withdr[ae]w\w*)\b", re.I)
+# an archive entry that is only a date, with no proclamation (the list's oldest page, 2026-11-16): skipped by name
+BARE_DATE = re.compile(r"^\d{1,2}:\d{2}\s*[AP]\.?M\.?,\s*[A-Z][a-z]+day,\s*[A-Z][a-z]+\s+\d{1,2},\s*\d{4}$", re.I)
+PAGE_SIZE = 10
+# names DMF uses in two counties (it adds "(Pamlico County)" in some proclamations, not in all): an unqualified one in
+# a proclamation that lists both counties is ambiguous: never placed, never ended by a reopening (Astra P1-5)
+TWO_COUNTY_NAMES = {"oyster creek": {"Carteret", "Pamlico"}, "bear creek": {"Onslow", "Pamlico"}}
 MONTHS = {m: i for i, m in enumerate(("january", "february", "march", "april", "may", "june", "july", "august",
                                       "september", "october", "november", "december"), start=1)}
 
@@ -216,13 +234,16 @@ def split_areas(lst: str) -> list[dict]:
         t = re.sub(r"\s+", " ", raw).strip().rstrip(".").strip()
         if not t:
             continue
-        portion = bool(PORTION.match(t))
+        q = PORTION.match(t)
+        qualifier = re.sub(r"\s+", " ", q.group(0)).strip().lower() if q else ""
         name = PORTION.sub("", t)
         cq = COUNTY_Q.search(name)
-        county = cq.group("c").strip() if cq else None
-        name = COUNTY_Q.sub("", name)
+        county = P.clean_field(cq.group("c").strip(), "place") if cq else None
+        # the key comes from the cleaned name: a name withheld for privacy never reaches a key or an id (Astra P1-1)
+        name = P.clean_field(COUNTY_Q.sub("", name), "place")
         key = re.sub(r"^the\s+", "", re.sub(r"\s+", " ", name).strip().lower())
-        out.append({"text": P.clean_field(t, "place"), "key": key, "portion": portion, "county": county})
+        out.append({"text": P.clean_field(t, "place"), "key": key, "portion": bool(q), "qualifier": qualifier,
+                    "county": county})
     return out
 
 
@@ -268,6 +289,9 @@ def parse_row(block: str) -> dict:
     if c and NOT_POLLUTION.search(summary + " " + eff):
         row.update(kind="not_pollution", areas=[])
         return row
+    if (c or o) and (NOT_AFFIRMED.search(summary) or NOT_AFFIRMED.search(eff) or not EFFECTIVE_WHOLE.match(eff.strip())):
+        raise ValueError("wording the reader does not take as DMF's affirmative order (a negation, a condition or an "
+                         "unknown form)")
     if c and re.search(r"\bTemporary Closures?\b", eff, re.I):
         kind, lst = "temporary_closure", c.group("list")
     elif o and re.search(r"\breopenings?\b", eff, re.I):
@@ -303,14 +327,18 @@ def parse(page: str, n: int = 0) -> dict:
     if not starts:
         raise ValueError("the proclamation list has no row")
     blocks = [content.group("body")[a:b] for a, b in zip(starts, starts[1:] + [len(content.group("body"))])]
-    rows, unread = [], []
+    rows, unread, skipped = [], [], []
     for i, b in enumerate(blocks, start=1):
+        bare = text_of(b)
+        if not re.search(r"<h3\b", b, re.I) and BARE_DATE.match(bare):
+            skipped.append({"page": n, "row": i, "text": bare, "reason": "an archive entry with a date and no proclamation"})
+            continue
         try:
             rows.append(parse_row(b))
         except ValueError as e:
             h = re.search(r">(PA-[A-Z0-9-]+)<", b)
             unread.append({"page": n, "row": i, "id": h.group(1) if h else None, "reason": str(e)})
-    return {"rows": rows, "unread": unread, "last_page": last_page(after)}
+    return {"rows": rows, "unread": unread, "skipped": skipped, "last_page": last_page(after), "count": len(blocks)}
 
 
 def saved_form(parsed: list[dict]) -> str:
@@ -322,26 +350,53 @@ def order(row_or_raw: dict) -> tuple:
     return (row_or_raw.get("year") or 0, row_or_raw.get("number") or 0)
 
 
-def area_counties(area: dict, row: dict) -> set[str]:
-    return {area["county"]} if area.get("county") else set(row.get("counties") or [])
+def area_counties(area: dict, row: dict) -> tuple[set[str], bool]:
+    """(the counties the area can lie in, ambiguous): its own "(X County)" qualifier, else the proclamation's counties;
+    a name DMF uses in two counties, both listed and no qualifier, is ambiguous (Astra P1-5)."""
+    if area.get("county"):
+        return {area["county"]}, False
+    counties = set(row.get("counties") or [])
+    two = TWO_COUNTY_NAMES.get(area["key"])
+    if two:
+        cand = two & counties
+        return (cand, False) if len(cand) == 1 else (cand or counties, True)
+    return counties, False
 
 
 def srid_of(row: dict, area: dict) -> str:
     return (f"{row['id']}:{P.slug(area['key'])}" + (f"-{P.slug(area['county'])}" if area.get("county") else "")
-            + ("-portion" if area["portion"] else ""))
+            + (f"-{P.slug(area['qualifier'])}" if area.get("qualifier") else ""))
 
 
 def place(area: dict, row: dict) -> dict | None:
     a = AREAS.get(area["key"])
-    if a is None or area["portion"] or not a["counties"] <= area_counties(area, row):
+    counties, ambiguous = area_counties(area, row)
+    if a is None or area["portion"] or ambiguous or not a["counties"] <= counties:
         return None
     return a
 
 
-def build(pages: list[str], fetched: str, previous: list[dict]) -> tuple[list[dict], dict]:
-    parsed = [parse(pg, n) for n, pg in enumerate(pages)]
-    rows = [r for p in parsed for r in p["rows"]]
-    unread = [u for p in parsed for u in p["unread"]]
+def pages_to_read(unread: list[dict] | None, last: int) -> list[int]:
+    """The first READ_PAGES pages and every page an earlier read left a row unread on (Astra P1-7)."""
+    extra = {u["page"] for u in unread or [] if isinstance(u.get("page"), int) and 0 <= u["page"] <= last}
+    return sorted(set(range(min(READ_PAGES, last + 1))) | extra)
+
+
+def build(pages, fetched: str, previous: list[dict], previous_unread: list[dict] | None = None
+          ) -> tuple[list[dict], dict]:
+    """pages: the pages read, a list (page 0, 1, ...) or {page number: html}. previous_unread: meta.unread of the
+    last run; a row unread on a page not read again stays unread (health false) until its page is read."""
+    pages = dict(enumerate(pages)) if isinstance(pages, list) else dict(pages)
+    parsed = {n: parse(pg, n) for n, pg in sorted(pages.items())}
+    last = parsed[0]["last_page"] if 0 in parsed else max(parsed)
+    for n, p in parsed.items():
+        if n != last and p["count"] != PAGE_SIZE:
+            # a page short of rows is a read that missed a proclamation (Astra P1-6): fail the read, change nothing
+            raise ValueError(f"page {n} lists {p['count']} proclamations, not {PAGE_SIZE}")
+    rows = [r for p in parsed.values() for r in p["rows"]]
+    unread = [u for p in parsed.values() for u in p["unread"]]
+    unread += [dict(u, carried=True) for u in previous_unread or []
+               if isinstance(u.get("page"), int) and u["page"] not in parsed]
     read_day = datetime.fromisoformat(fetched.replace("Z", "+00:00")).astimezone(ZONE).date()
     seen_ids = set()
     for r in rows:
@@ -368,7 +423,10 @@ def build(pages: list[str], fetched: str, previous: list[dict]) -> tuple[list[di
             spot = place(area, row)
             raw = {"proclamation": row["id"], "year": row["year"], "number": row["number"], "order_url": row["order_url"],
                    "summary": row["summary"], "area_text": area["text"], "area_key": area["key"],
-                   "portion": area["portion"], "county_qualifier": area["county"], "counties": row["counties"],
+                   "portion": area["portion"], "portion_words": area["qualifier"] or None,
+                   "county_qualifier": area["county"], "counties": row["counties"],
+                   "resolved_counties": sorted(area_counties(area, row)[0]),
+                   "county_ambiguous": area_counties(area, row)[1],
                    "effective": row["effective"], "issued": row["issued"], "reason": None, "reason_basis": REASON_BASIS,
                    "start_basis": START_BASIS, "time_zone": "America/New_York", "state": "NC", "page_url": URL,
                    "_first_seen_at": praw.get("_first_seen_at") or fetched}
@@ -412,16 +470,25 @@ def build(pages: list[str], fetched: str, previous: list[dict]) -> tuple[list[di
         if rec.get("status") != "advisory_active":
             continue
         raw = dict(rec.get("raw") or {})
-        mine = {raw["county_qualifier"]} if raw.get("county_qualifier") else set(raw.get("counties") or [])
+        mine = set(raw.get("resolved_counties") or raw.get("counties") or [])
         hit = None
         pending = raw.get("reopening_proclaimed")
         for ro in reopenings:
             if order(ro) <= order(raw):
                 continue
             for a in ro["areas"]:
-                if a["key"] != raw.get("area_key") or not (area_counties(a, ro) & mine):
+                theirs, their_amb = area_counties(a, ro)
+                if a["key"] != raw.get("area_key") or not (theirs & mine):
                     continue
-                if a["portion"] and not raw.get("portion"):
+                if raw.get("county_ambiguous") or their_amb:
+                    # which county's area is meant cannot be told: never an end (Astra P1-5)
+                    amb = list(raw.get("ambiguous_reopenings") or [])
+                    if ro["id"] not in amb:
+                        amb.append(ro["id"])
+                    raw["ambiguous_reopenings"] = amb
+                    continue
+                if a["qualifier"] and a["qualifier"] != (raw.get("portion_words") or ""):
+                    # a reopening of a portion ends only a closure of that portion in the same words (Astra P1-4)
                     pr = list(raw.get("partial_reopenings") or [])
                     if ro["id"] not in [x.get("proclamation") for x in pr]:
                         pr.append({"proclamation": ro["id"], "text": a["text"], "effective": ro["effective"]["text"]})
@@ -448,14 +515,17 @@ def build(pages: list[str], fetched: str, previous: list[dict]) -> tuple[list[di
         elif hit:
             raw.update(reopening_proclaimed=dict(hit, basis=PLAN_BASIS))
         else:
-            raw["no_reopening_note"] = NO_REOPENING_NOTE
+            raw["no_reopening_note"] = NO_REOPENING_NOTE if not raw.get("ambiguous_reopenings") else (
+                "a later proclamation names an area of this name, but which county's area each means cannot be told: "
+                "shown as DMF left it, under the site's rule for an advisory with no stated end")
         rec["raw"] = raw
         records[sid] = rec
     out = sorted(records.values(), key=lambda r: (r["started_at"] or "", r["event_id"]), reverse=True)
     active = [r for r in out if r["status"] == "advisory_active"]
-    meta = {"registry_ids": [SOURCE_ID], "url": URL, "pages_read": len(pages),
-            "pages_listed": (parsed[0]["last_page"] + 1) if parsed else 0,
-            "proclamations": len(rows) + len([u for p in parsed for u in p["unread"]]),
+    meta = {"registry_ids": [SOURCE_ID], "url": URL, "pages_read": sorted(parsed),
+            "pages_listed": last + 1,
+            "proclamations": len(rows) + len([u for p in parsed.values() for u in p["unread"]]),
+            "skipped": [s for p in parsed.values() for s in p["skipped"]],
             "newest": max((r for r in rows if r.get("year")), key=order, default={}).get("id"),
             "newest_issued": max((r["issued"] for r in rows), default=None),
             "temporary_closures": sum(1 for r in rows if r["kind"] == "temporary_closure"),
@@ -467,7 +537,9 @@ def build(pages: list[str], fetched: str, previous: list[dict]) -> tuple[list[di
                                  "resource management is no sign of sewage or runoff: neither is a record"},
             "unread": unread, "opened": opened, "lifted_this_read": lifted, "advisory_active": len(active),
             "listed_only": sorted({r["raw"]["area_text"] for r in active if r["raw"].get("_placement") == "listed_only"}),
-            "no_reopening_named": sorted(r["source_record_id"] for r in active if r["raw"].get("no_reopening_note")),
+            "no_reopening_named": sorted(r["source_record_id"] for r in active if r["raw"].get("no_reopening_note")
+                                         and not r["raw"].get("ambiguous_reopenings")),
+            "held_county_ambiguous": sorted(r["source_record_id"] for r in active if r["raw"].get("ambiguous_reopenings")),
             "cadence": f"the first {READ_PAGES} pages of the list read every run; DMF issues a proclamation for each "
                        "closure and reopening",
             "coverage": "North Carolina's coastal shellfish growing areas: every temporary closure and reopening "
@@ -485,19 +557,24 @@ def main(argv=None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     fetched = now_iso()
     try:
-        prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
+        doc = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+        prev = doc.get("records", [])
+        prev_unread = (doc.get("meta") or {}).get("unread") or []
         if "--file" in argv:
             files = [a for a in argv[argv.index("--file") + 1:] if not a.startswith("--")]
             pages = [Path(f).read_text(errors="replace") for f in files]
         else:
-            pages = [fetch(0)]
-            want = (last_page(pages[0]) + 1) if ("--backfill" in argv or not prev) else READ_PAGES
-            for n in range(1, min(want, last_page(pages[0]) + 1)):
-                time.sleep(1)
-                pages.append(fetch(n))
-        recs, meta = build(pages, fetched, prev)
+            first = fetch(0)
+            last = last_page(first)
+            want = list(range(last + 1)) if ("--backfill" in argv or not prev) else pages_to_read(prev_unread, last)
+            pages = {0: first}
+            for n in want:
+                if n not in pages:
+                    time.sleep(1)
+                    pages[n] = fetch(n)
+        recs, meta = build(pages, fetched, prev, prev_unread)
         if "--file" not in argv:
-            save_raw(SOURCE_ID, saved_form([parse(pg, n) for n, pg in enumerate(pages)]), "json")
+            save_raw(SOURCE_ID, saved_form([parse(pg, n) for n, pg in sorted(pages.items())]), "json")
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
         P.write_refused(SOURCE_ID, P.safe_error(e), EVENTS_DIR)
         print(f"{SOURCE_ID}: FAILED {P.safe_error(e)}", file=sys.stderr)
@@ -509,8 +586,8 @@ def main(argv=None) -> int:
         print(f"{SOURCE_ID}: PARTIAL {len(meta['unread'])} row(s) unread -> {path}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
-    print(f"{SOURCE_ID}: {meta['proclamations']} proclamations on {meta['pages_read']} page(s), newest {meta['newest']}; "
-          f"{len(recs)} records, {meta['advisory_active']} active -> {path}")
+    print(f"{SOURCE_ID}: {meta['proclamations']} proclamations on {len(meta['pages_read'])} page(s), newest "
+          f"{meta['newest']}; {len(recs)} records, {meta['advisory_active']} active -> {path}")
     return 0
 
 

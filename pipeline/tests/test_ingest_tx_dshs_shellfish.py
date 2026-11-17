@@ -76,7 +76,7 @@ def test_a_closure_ends_only_on_a_complete_read_and_a_return_is_a_new_record():
     # the same date, TX 19 gone: an incomplete read; nothing ends, health false
     gone = re.sub(r"<tr><td>TX 19</td>.*?</tr>", "", PAGE, count=1)
     recs, meta = X.build(gone, T2, first)
-    assert [u["reason"] for u in meta["unread"]] == ["a closed area is missing from a table with the same date"]
+    assert [u["reason"] for u in meta["unread"]] == ["an area of DSHS's table is missing"]
     assert all(r["status"] == "advisory_active" for r in recs) and by_area(recs)["TX 20"]["raw"]["_last_seen_in_source"] == T2
     # a new date: TX 19 listed Open ends it; TX 21 closed now only for TPWD action ends the rainfall closure
     page = row(row(redate(PAGE, "11.17.2026"), "TX 19", "Open", "n/a", "n/a"), "TX 21", "Closed", "n/a", "TPWD Action")
@@ -194,3 +194,26 @@ def test_listed_only_closures_colour_no_water_in_the_status_build(tmp_path):
         assert st["placements"][r["event_id"]]["water_slugs"] == []
         assert st["placements"][r["event_id"]]["unplaced_reason"] == S.LISTED_ONLY_WHY
     assert not [w for w in st["waters"].values() if w.get("status") == "red"]
+
+
+# ---- the independent review (2026-11-16), one test per finding -------------------------------------------------------
+
+def test_review_p1_2_only_a_strictly_newer_table_ends_a_closure():
+    first, _ = X.build(PAGE, T1, [])
+    same = row(PAGE, "TX 19", "Open", "n/a", "n/a")                            # the same date, the row changed
+    recs, meta = X.build(same, T2, first)
+    assert by_area(recs)["TX 19"]["status"] == "advisory_active" and meta["unread"]
+    older = row(redate(PAGE, "11.15.2026"), "TX 19", "Open", "n/a", "n/a")      # an older table than the one held
+    with pytest.raises(ValueError):
+        X.build(older, T2, first)
+    with pytest.raises(ValueError):                                              # dated after the read's local day
+        X.parse(redate(PAGE, "11.18.2026"), T2)
+
+
+def test_review_p1_3_a_table_missing_known_areas_holds_every_closure():
+    first, _ = X.build(PAGE, T1, [])
+    only = re.sub(r"<tbody>.*?</tbody>", "<tbody><tr><td>TX 1</td><td>Open</td><td>Open</td><td>n/a</td></tr></tbody>",
+                  redate(PAGE, "11.17.2026"), flags=re.S)
+    recs, meta = X.build(only, T2, first)
+    assert all(r["status"] == "advisory_active" for r in recs) and len(recs) == 4
+    assert any(u["reason"] == "an area of DSHS's table is missing" for u in meta["unread"])

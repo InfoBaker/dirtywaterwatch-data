@@ -19,6 +19,12 @@ PAGES = [P0, P1, P2]
 # the first page with its pager naming three pages: a first run (which reads every page) reads the three fixtures
 P0L = P0.replace('href="?page=16" title="Go to last page"', 'href="?page=2" title="Go to last page"')
 LISTED = [P0L, P1, P2]
+
+
+def as_last(page):
+    """A first page whose pager names no other page: it may hold fewer than ten rows (the list as it stood before
+    the proclamations dropped from it were issued)."""
+    return page.replace('href="?page=16" title="Go to last page"', 'href="?page=0" title="Go to last page"')
 T = "2026-11-16T23:30:00Z"
 
 
@@ -76,8 +82,11 @@ def test_reopenings_make_no_record_and_open_areas_are_never_called_safe():
 def test_what_is_closed_today_on_the_three_pages():
     recs, meta = N.build(PAGES, T, [])
     active = sorted(r["source_record_id"] for r in recs if r["status"] == "advisory_active")
-    # PA-59-2026 closed Shallotte Inlet and Bay River; no later proclamation on the list reopens either whole
-    assert active == ["PA-59-2026:bay-river", "PA-59-2026:shallotte-inlet"]
+    # PA-59-2026 closed Shallotte Inlet and Bay River; no later proclamation on the list reopens either whole. Its
+    # Oyster Creek (PA-59 lists Carteret and Pamlico, each with an Oyster Creek) cannot be matched to a reopening
+    assert active == ["PA-59-2026:bay-river", "PA-59-2026:oyster-creek", "PA-59-2026:shallotte-inlet"]
+    assert meta["held_county_ambiguous"] == ["PA-59-2026:oyster-creek"]
+    active = ["PA-59-2026:bay-river", "PA-59-2026:shallotte-inlet"]
     bay = by_id(recs)["PA-59-2026:bay-river"]
     assert [p["proclamation"] for p in bay["raw"]["partial_reopenings"]] == ["PA-62-2026"]   # "A portion of Bay River"
     assert meta["no_reopening_named"] == active and bay["raw"]["no_reopening_note"] == N.NO_REOPENING_NOTE
@@ -91,7 +100,7 @@ def test_a_reopening_proclaimed_for_a_later_day_is_a_plan_not_an_end():
     assert core["raw"]["reopening_proclaimed"]["proclamation"] == "PA-67-2026"
     assert core["raw"]["reopening_proclaimed"]["basis"] == N.PLAN_BASIS
     # the next day the reopening is in effect; and it is applied even once PA-67 is no longer on the pages read
-    later, _ = N.build([drop(P0, "PA-67-2026")], "2026-10-17T15:00:00Z", recs)
+    later, _ = N.build([as_last(drop(P0, "PA-67-2026"))], "2026-10-17T15:00:00Z", recs)
     core = by_id(later)["PA-63-2026:core-creek"]
     assert core["status"] == "advisory_lifted" and core["ended_at"] == "2026-10-17" and core["raw"]["ended_by"] == "PA-67-2026"
 
@@ -100,7 +109,7 @@ def test_a_partial_reopening_never_ends_a_whole_closure_but_a_whole_one_ends_a_p
     recs, _ = N.build(PAGES, T, [])
     assert by_id(recs)["PA-59-2026:bay-river"]["status"] == "advisory_active"
     # "A portion of Myrtle Grove Sound" (PA-63) is ended by "Myrtle Grove Sound" (PA-66)
-    mg = by_id(recs)["PA-63-2026:myrtle-grove-sound-portion"]
+    mg = by_id(recs)["PA-63-2026:myrtle-grove-sound-a-portion-of"]
     assert mg["raw"]["portion"] is True and mg["status"] == "advisory_lifted" and mg["raw"]["ended_by"] == "PA-66-2026"
 
 
@@ -128,11 +137,11 @@ def test_absence_from_the_list_never_ends_or_drops_a_closure():
 
 
 def test_permanent_boundary_proclamations_are_left_out_and_counted():
-    recs, meta = N.build([P0, P16], T, [])
+    recs, meta = N.build({0: P0, 16: P16}, T, [])
     assert meta["left_out"]["permanent_boundary"] == ["PA-PC-2025"]
     assert not [r for r in recs if r["raw"]["proclamation"].startswith("PA-PC")]
-    # the archive's last row (a bare date of 2024, no proclamation number) is unread, never guessed
-    assert [u["reason"] for u in meta["unread"]] == ["a row with no proclamation number"]
+    # the archive's last row (a bare date of 2024, no proclamation number) is skipped by name, never guessed
+    assert meta["unread"] == [] and len(meta["skipped"]) == 1
 
 
 def test_a_biotoxin_or_season_closure_is_never_shown_as_a_sewage_sign():
@@ -154,7 +163,7 @@ def test_negations_and_unknown_kinds_are_unread_not_closures():
                                "reason": "a proclamation the reader cannot type (not a temporary closure or a reopening)"}]
     page = edit(P0, "Shellfish Temporary Closure effective at 7:45 a.m., Monday, October 12th, 2026.",
                 "Shellfish Temporary Closure effective when results allow.")                                # invented
-    assert N.build([page], T, [])[1]["unread"][0]["reason"] == "an effective date the reader cannot take"
+    assert N.build([page], T, [])[1]["unread"][0]["reason"].startswith("wording the reader does not take")
 
 
 def test_one_unreadable_row_keeps_the_rest_and_fails_health(run_nc):
@@ -233,7 +242,7 @@ def test_areas_are_placed_by_dmfs_polygon_or_listed_only():
     s = by_id(recs)["PA-63-2026:stump-sound"]
     assert (s["lat"], s["lon"]) == (34.469, -77.486) and s["water_slugs"] == ["stump-sound-nc"]
     assert s["raw"]["_point_extent_only"] is True and s["raw"]["area_polygon"]["objectids"] == [17928, 17934, 17984, 18054]
-    for sid in ("PA-63-2026:myrtle-grove-sound-portion",        # a portion: no outline of the part
+    for sid in ("PA-63-2026:myrtle-grove-sound-a-portion-of",        # a portion: no outline of the part
                 "PA-64-2026:queens-creek",
                 "PA-63-2026:north-river"):                       # DMF's polygon, but no water record holds it
         r = by_id(recs)[sid]
@@ -327,9 +336,8 @@ def test_a_first_run_reads_every_page_and_a_later_run_the_first_three(run_nc):
     assert N.last_page(first) == 3 and N.last_page(P0) == 16
     code, doc = run_nc([first, P1, P2, P16], T)
     assert run_nc.asked == [0, 1, 2, 3]
-    # the archive's last row (a bare 2024 date, no number) is unread: the first run's health is false, its records kept
-    assert code == 1 and doc["ok"] is False and [u["reason"] for u in doc["meta"]["unread"]] == [
-        "a row with no proclamation number"]
+    # the archive's last row (a bare 2024 date, no number) is skipped by name; the first run is healthy
+    assert code == 0 and doc["ok"] and doc["meta"]["unread"] == [] and len(doc["meta"]["skipped"]) == 1
     assert doc["records"] and doc["meta"]["left_out"]["permanent_boundary"] == ["PA-PC-2025"]
     code, doc = run_nc(PAGES, "2026-11-17T00:30:00Z")
     assert run_nc.asked == [0, 1, 2] and code == 0 and doc["ok"]
@@ -354,8 +362,8 @@ def test_on_the_day_of_pa_63_each_placed_closure_is_a_red_marker_and_no_water_is
     waters = {k: allw[k] for k in ("stump-sound-nc", "core-sound-nc", "bogue-sound-nc", "masonboro-sound-nc",
                                     "topsail-sound-nc", "shallotte-river-nc", "lockwoods-folly-river-nc",
                                     "intracoastal-waterway-calabash-nc")}
-    page = drop(drop(drop(P0, "PA-67-2026"), "PA-66-2026"), "PA-65-2026")
-    recs, _ = N.build([page, P1, P2], "2026-10-12T15:00:00Z", [])
+    page = as_last(drop(drop(drop(P0, "PA-67-2026"), "PA-66-2026"), "PA-65-2026"))
+    recs, _ = N.build([page], "2026-10-12T15:00:00Z", [])
     st = _status(S, tmp_path, recs, waters, datetime(2026, 10, 12, 16, 0, tzinfo=UTC))
     for slug in waters:
         assert (st["waters"].get(slug) or {}).get("status") != "red", slug
@@ -372,3 +380,85 @@ def test_on_the_day_of_pa_63_each_placed_closure_is_a_red_marker_and_no_water_is
     listed = [r for r in active if not r["water_slugs"]]
     for r in listed:
         assert st["placements"][r["event_id"]]["water_slugs"] == [] and r["event_id"] not in pts
+
+
+# ---- the independent review (2026-11-16), one test per finding -------------------------------------------------------
+
+def test_review_p1_1_a_withheld_name_never_reaches_a_key_or_an_id():
+    page = edit(P0, "This proclamation closes the following area in Onslow County: Queens Creek.",
+                "This proclamation closes the following area in Onslow County: Queens Creek near the home of Pat "
+                "Example.")                                                                              # invented
+    recs, meta = N.build([page, P1, P2], T, [])
+    blob = json.dumps(recs) + json.dumps(meta)
+    for p in ("Pat Example", "pat example", "pat-example", "home of"):
+        assert p not in blob, p
+
+
+def test_review_p1_4_a_different_portion_does_not_end_a_portion_closure():
+    page = edit(P0, "closes the following areas in New Hanover, Pender, Onslow, and Carteret Counties: A portion of "
+                    "Myrtle Grove Sound", "closes the following areas in New Hanover, Pender, Onslow, and Carteret "
+                    "Counties: the northern portion of Myrtle Grove Sound")                          # invented
+    page = edit(page, "normal closure boundaries: Myrtle Grove Sound, Stump Sound",
+                "normal closure boundaries: the southern portion of Myrtle Grove Sound, Stump Sound")  # invented
+    recs, _ = N.build([page, P1, P2], T, [])
+    mg = [r for r in recs if r["raw"]["proclamation"] == "PA-63-2026" and r["raw"]["area_key"] == "myrtle grove sound"]
+    assert len(mg) == 1 and mg[0]["status"] == "advisory_active"
+    # the same words ("A portion of", as DMF closed it) or the whole area do end it
+    recs, _ = N.build(PAGES, T, [])
+    assert by_id(recs)["PA-63-2026:myrtle-grove-sound-a-portion-of"]["status"] == "advisory_lifted"
+
+
+def test_review_p1_5_a_name_in_two_counties_is_neither_placed_nor_ended_by_another_county():
+    recs, _ = N.build(PAGES, T, [])
+    oc = by_id(recs)["PA-59-2026:oyster-creek"]          # PA-59 lists Carteret and Pamlico: which Oyster Creek is unknown
+    assert oc["raw"]["_placement"] == "listed_only" and oc["water_slugs"] == []
+    page = edit(P0, "normal closure boundaries: A portion of Bay River and Jones Bay.",
+                "normal closure boundaries: A portion of Bay River, Jones Bay, and Oyster Creek.")   # invented, Pamlico
+    p0 = edit(page, "boundaries: Myrtle Grove Sound, Topsail Sound, and Oyster Creek.",
+              "boundaries: Myrtle Grove Sound and Topsail Sound.") if "Topsail Sound, and Oyster Creek" in page else page
+    recs, _ = N.build([p0, P1, P2], T, [])
+    assert by_id(recs)["PA-59-2026:oyster-creek"]["raw"].get("ended_by") != "PA-62-2026"
+    oc63 = by_id(recs)["PA-63-2026:oyster-creek"]         # PA-63 lists no Pamlico: Carteret's, placed
+    assert oc63["water_slugs"] == ["core-sound-nc"]
+
+
+def test_review_p1_6_a_page_with_a_missing_row_fails_the_read():
+    with pytest.raises(ValueError):
+        N.build([drop(P0, "PA-64-2026"), P1, P2], T, [])
+    with pytest.raises(ValueError):
+        N.build({0: P0, 1: drop(P1, "PA-55-2026")}, T, [])
+    N.build({0: P0, 16: P16}, T, [])                      # the last page may hold fewer than ten
+
+
+def test_review_p1_7_an_unread_row_stays_unread_until_its_page_is_read_again(run_nc):
+    page2 = edit(P2, "<strong>Issued Date:</strong> 9/7/2026", "<strong>Issued Date:</strong> soon")   # invented
+    code, doc = run_nc([P0L, P1, page2], T)
+    assert code == 1 and [u["id"] for u in doc["meta"]["unread"]] == ["PA-47-2026"]
+    # the next run reads page 2 again (the first three pages) and the row is still unread: health stays false
+    code, doc = run_nc([P0L, P1, page2], "2026-11-17T00:30:00Z")
+    assert code == 1 and doc["ok"] is False
+    # a carried unread row on a page not read this run keeps health false, and its page is asked for again
+    prev = doc["meta"]["unread"]
+    recs, meta = N.build({0: P0}, "2026-11-17T01:30:00Z", doc["records"], prev)
+    assert [u["id"] for u in meta["unread"]] == ["PA-47-2026"] and meta["unread"][0]["carried"] is True
+    assert N.pages_to_read(prev, 16) == [0, 1, 2]
+    assert N.pages_to_read([{"page": 9, "id": "PA-1-2026"}], 16) == [0, 1, 2, 9]
+    # read whole again: resolved
+    code, doc = run_nc([P0L, P1, P2], "2026-11-17T02:30:00Z")
+    assert code == 0 and doc["ok"] and doc["meta"]["unread"] == []
+
+
+def test_review_p1_7_the_archives_bare_date_row_is_skipped_by_name_not_unread():
+    recs, meta = N.build({0: P0, 16: P16}, T, [])
+    assert meta["unread"] == [] and meta["skipped"] == [{"page": 16, "row": 3, "text": "2:01 A.M., Saturday, June 8, 2024",
+                                                         "reason": "an archive entry with a date and no proclamation"}]
+
+
+def test_review_p1_8_negated_or_conditional_effective_wording_is_unread():
+    for words in ("Shellfish reopenings NOT effective at sunrise, Thursday, October 15, 2026.",
+                  "Shellfish reopenings effective at sunrise, Thursday, October 15, 2026, if results allow.",
+                  "Shellfish reopenings postponed; previously effective at sunrise, Thursday, October 15, 2026."):
+        page = edit(P0, "Shellfish reopenings effective at sunrise, Thursday, October 15, 2026.", words)     # invented
+        recs, meta = N.build([page, P1, P2], T, [])
+        assert [u["id"] for u in meta["unread"]] == ["PA-65-2026"], words
+        assert by_id(recs)["PA-64-2026:queens-creek"]["status"] == "advisory_active", words
