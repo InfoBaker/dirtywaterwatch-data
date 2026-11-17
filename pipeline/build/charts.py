@@ -133,6 +133,7 @@ SOURCE_LABEL = {
     "me-dep-cso-annual": "Maine Department of Environmental Protection combined sewer overflow reports",
     "me-cbep-portland-cso": "City of Portland and Portland Water District overflow filings, 2015 to 2019, published by the Casco Bay Estuary Partnership",
     "ma-somerville-cso-table": "City of Somerville combined sewer overflow table",
+    "tx-houston-sso-monthly": "City of Houston monthly sanitary sewer overflow reports",
     "me-healthy-beaches": "Maine Healthy Beaches",
     "nh-des-swimming": "New Hampshire Department of Environmental Services Healthy Swimming",
     "ri-dem-cyano": "Rhode Island Department of Environmental Management cyanobacteria advisories",

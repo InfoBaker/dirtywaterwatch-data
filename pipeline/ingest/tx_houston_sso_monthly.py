@@ -157,8 +157,9 @@ FLOWS = ["Contained On Site, not within 5 ft. of Bayou/Surface Water/Drainage Di
 # the City's structure types (every one read in 2024-2026), longest first
 STRUCTURES = ["Private Sample Well", "Private Grease Trap", "Private Cleanout", "Private Manhole", "City Cleanout",
               "Service Lateral", "Building Backup", "Gravity Main", "Lift Station", "Force Main", "Manhole"]
-ZERO_NOTE = ("evidence of an SSO was observed but no active overflow was occurring. Consequently, flow rate and total "
-             "volume loss could not be calculated")
+# the City's words under every table (its "Additional Comments"), kept as written on each row it reports as "0"
+ZERO_NOTE = ("Where estimated volume and average flow are reported as \"0\", evidence of an SSO was observed but no active "
+             "overflow was occurring. Consequently, flow rate and total volume loss could not be calculated.")
 VOID = re.compile(r"SSO\s+ID\s*#?\s*(\d{4,6})\s+was\s+erroneously\s+reported\s+in\s+the\s+([A-Za-z]+\s+\d{4})\s+monthly"
                   r"\s+report[^.]*?\bvoided\b", re.I)
 ONE_NOTICE = re.compile(r"SSO\s+ID\s*#?\s*s?\s+((?:\d{4,6}(?:\s*,\s*|\s+and\s+|\s*&\s*)?)+)\s+were\s+included\s+in\s+one\s+"
@@ -602,7 +603,7 @@ def to_records(month: str, rep: dict) -> list[dict]:
                 "the City's exhibit of SSOs subject to the act-of-God defense under Texas Water Code § 7.251")}
         gal = _gallons(r["volume"])
         if gal is None:
-            raw["volume_note"] = f"the City writes \"0\" where {ZERO_NOTE}"
+            raw["volume_note"] = ZERO_NOTE
             vtext = "reported as 0 gallons: no active overflow when observed; volume not calculated"
         else:
             vtext = f"{r['volume']} gallons (estimated)"

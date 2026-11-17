@@ -408,3 +408,20 @@ def test_a_revision_that_reads_less_fully_keeps_the_held_copy():
     assert H.read_report(state, month, info, b"b", "t2", None, pages_of=lambda c: worse) == "kept"
     assert state["reports"][month]["sha256"] == __import__("hashlib").sha256(b"a").hexdigest()
     assert H.read_report(state, month, info, b"a", "t3", None, pages_of=lambda c: PAGES["2026-09"]) == "same"
+
+
+def test_detail_fields_and_both_records_reach_each_other():
+    from export import detail as D
+    records = list(recs("2026-09").values())
+    tceq = [tceq_rec("1", "2026-09-10", ["WQ0010495003"], 567, "Manhole at [house number removed] Graustark St")]
+    H.link_tceq(records, tceq)
+    by = {r["source_record_id"]: r for r in records}
+    d = D.detail_of(by["68784"])
+    assert d == {"report_kind": "Monthly SSO Report", "cause": "Grease Blockage", "overflow_point": "Manhole",
+                 "town": "Houston", "volume_qualifier": "estimated"}
+    z = D.detail_of(by["68726"])
+    assert "volume_qualifier" not in z and z["volume_method"].startswith("Where estimated volume and average flow")
+    links = D.links_of(records + tceq)
+    assert links["tx-houston-sso-monthly:68784"]["linked_records"][0] == {
+        "event_id": "tx-tceq-sso-opendata:1", "relation": "other_source", "source_id": "tx-tceq-sso-opendata"}
+    assert links["tx-tceq-sso-opendata:1"]["linked_records"][0]["event_id"] == "tx-houston-sso-monthly:68784"
