@@ -3,3 +3,4 @@ pyyaml>=6
 shapely>=2
 pytest>=8
 pypdf>=5
+cryptography>=3.1   # pypdf opens AES-encrypted PDFs (empty user password) only with it: DC Water 2023Q2
