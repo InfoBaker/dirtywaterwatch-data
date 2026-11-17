@@ -83,6 +83,8 @@ NOTICE_PDF = re.compile(r"href=\"(h?t?t?ps?://[^\"]+\.pdf)\"", re.I)
 
 def items(body: bytes) -> list[dict]:
     root = ET.fromstring(body)
+    if root.tag != "rss" or root.find("channel") is None:
+        raise ValueError("the SAWS feed answered with something other than an RSS channel")
     out = []
     for it in root.iter("item"):
         c = it.find("content:encoded", NS)
@@ -157,8 +159,8 @@ def record(it: dict, form_text: str | None, at: str) -> dict:
            "legal_basis": "30 TAC 319.302-319.303 (notice to local officials and the media within 24 hours)"}
     if f:
         raw.update(facility=facility, state_permit=permit, location=F.street_place(f.get("location")),
-                   spill_time_as_written=words, area_as_written=f.get("area"), cause=f.get("cause"),
-                   spill_type=f.get("type"))
+                   spill_time_as_written=words, area_as_written=F.safe_free_text(f.get("area")),
+                   cause=F.safe_free_text(f.get("cause")), spill_type=F.safe_free_text(f.get("type")))
         marked, swim = F.precautions(form_text or "")
         raw["precautions_marked"] = marked
         raw["precautions_read"] = marked is not None

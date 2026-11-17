@@ -5,7 +5,7 @@ Fixtures, read 2026-11-17:
   tx_saws_search_spill.xml: the search feed https://www.saws.org/search/spill/feed/rss2/ trimmed to four posts (three
     spill notices and the yearly summary "Highs and lows of SSOs"); the staff quotes, the creator and the public
     reporting telephone number are removed.
-  tx_saws_form_<pdf>.txt: the text pypdf reads from three notice PDFs (the release and TCEQ's form), with the press
+  tx_saws_form_<pdf>.txt: the text pypdf reads from three notice PDFs (the release and TCEQ's form); each house number is replaced by an invented 1234, and the press
     contact's name and telephone and the form's contact line replaced by "[removed]".
 """
 from pathlib import Path
@@ -53,7 +53,7 @@ def test_form_fields_both_layouts():
     assert "contact" not in a
     b = F.form_fields(form("20260428_TCEQPublicNotice"))          # filled as PDF form fields: values after the form
     assert b["area"] == "Rosillo Creek" and b["time"] == "April 27, 2026 at approximately 2:40 pm"
-    assert b["location"] == "5903 Bicentennial Dr near IH 10 E" and "contact" not in b
+    assert b["location"] == "1234 Bicentennial Dr near IH 10 E" and "contact" not in b
 
 
 def test_record_2026_rosillo_creek():
@@ -91,7 +91,7 @@ def test_no_personal_data_kept():
     import json
     recs, _ = X.run([FEED], [], AT, pdfs)
     s = json.dumps(recs)
-    for bad in ("[removed]", "Contact", "14819", "5903", "8708", "Duron", "No adverse impacts"):
+    for bad in ("[removed]", "Contact", "1234", "Duron", "No adverse impacts"):
         assert bad not in s, bad
 
 

@@ -158,7 +158,7 @@ def spill_time(text: str | None, tz: ZoneInfo, published: date | None = None) ->
 
 
 VOLUME = re.compile(r"((?:(?:approximately|about|an estimated|estimated|roughly|around|nearly|more than|over|greater than|"
-                    r"in excess of|exceed(?:ed|s|ing)?|[<>]=?)\s*)*)(\d[\d,]*(?:\.\d+)?)\s*(million\s+)?gallons(?!\s+(?:per|a|an)\s+"
+                    r"in excess of|exceed(?:ed|s|ing)?|less than|under|up to|at least|[<>]=?)\s*)*)(\d[\d,]*(?:\.\d+)?)\s*(million\s+)?gallons(?!\s+(?:per|a|an)\s+"
                     r"(?:minute|hour|day))", re.I)
 
 
@@ -168,7 +168,10 @@ def volume(text: str | None) -> tuple[int | None, str, str | None]:
     for m in VOLUME.finditer(text or ""):
         words = _clean(m.group(0))
         lead = (m.group(1) or "").lower()
-        bound = bool(re.search(r"more than|over|greater than|in excess|exceed|[<>]", lead))
+        tail = (text or "")[m.start():m.end() + 30]
+        bound = bool(re.search(r"more than|over|greater than|in excess|exceed|less than|under|up to|at least|[<>]", lead)) or \
+            bool(re.search(r"\b(?:less than|up to|at least|under|between|from)\s+$", (text or "")[:m.start()][-14:], re.I)) or \
+            bool(re.search(r"\d\s*(?:-|to|and)\s*\d", (text or "")[max(0, m.start() - 25):m.end()]))
         if bound:
             return None, "estimated", _clean(text) if len(_clean(text)) <= 80 else words
         gal, flag = common.parse_volume_gal(f"{m.group(2)} {'million ' if m.group(3) else ''}gallons")
@@ -181,8 +184,10 @@ def volume(text: str | None) -> tuple[int | None, str, str | None]:
 
 NOT_A_WATER = re.compile(r"\b(?:unnamed|un-named|intermittent|unknown|storm\s*(?:drain|sewer|water)|ditch|pond|ground|soil|"
                          r"street|property|plant|facility|contained|none|n/a|wet\s+pond|drainage)\b", re.I)
-WATER_NAME = re.compile(r"\b((?:[A-Z][\w'’.-]*\s+){1,4}(?:Creek|River|Bayou|Lake|Reservoir|Branch|Bay|Arroyo|Draw|Canal))\b|"
-                        r"\b(Rio\s+Grande)\b")
+NOT_AFTER_WATER = (r"(?!\s+(?:Road|Rd|Drive|Dr|Street|St|Avenue|Ave|Blvd|Boulevard|Lane|Ln|Parkway|Pkwy|Way|Court|Ct|Trail|"
+                   r"Park|Water|Wastewater|Treatment|Recycling|Plant|Lift|Pump|Interceptor|Basin|Estates|Subdivision)\b)")
+WATER_NAME = re.compile(r"\b((?:[A-Z][\w'’.-]*\s+){1,4}(?:Creek|River|Bayou|Lake|Reservoir|Branch|Bay|Arroyo|Draw|Canal))\b"
+                        + NOT_AFTER_WATER + r"|\b(Rio\s+Grande)\b" + NOT_AFTER_WATER)
 
 
 def water_of(area: str | None) -> str | None:
@@ -214,6 +219,11 @@ def street_place(text: str | None) -> str | None:
                r"(?<!\bInterstate )(?<!\bRoute )\d{2,6}[A-Za-z]?\s+(?=[A-Z][a-z]+)(?!Blocks?\b)", "", s)
     s = re.sub(r"\(\s*\)", "", s)
     return common.scrub_text(_clean(s)) or None
+
+
+def safe_free_text(text: str | None) -> str | None:
+    """Free text of a notice (area, cause) with house numbers dropped and contacts scrubbed."""
+    return street_place(text) if text else None
 
 
 def precautions(text: str) -> tuple[list[str] | None, str | None]:
@@ -256,6 +266,12 @@ def _day(ts) -> date | None:
         return None
 
 
+def _water_key(t) -> str:
+    """A water's name for comparison: lower case, letters only, without a TCEQ prefix ("SPILLED INTO")."""
+    t = re.sub(r"(?i)\bspilled\s+(?:in)?to\b|\briver/creek\b", " ", str(t or ""))
+    return re.sub(r"[^a-z]", "", t.lower())
+
+
 def _bound(rec: dict) -> int | None:
     m = re.search(r"(\d[\d,]*)", rec.get("volume_text") or "")
     return int(m.group(1).replace(",", "")) if m and rec.get("volume_gal") is None else None
@@ -284,26 +300,38 @@ def same_operator(rec: dict, row: dict) -> bool:
 def link_tceq(records: list[dict], rows: list[dict]) -> int:
     """Set duplicate_of on each notice that meets a TCEQ row (module docstring); returns the count."""
     n = 0
-    for rec in records:
+    used: set[str] = set()
+    # notices that name a water first, then the earliest, so a row goes to the notice it fits best
+    for rec in sorted(records, key=lambda r: (not r.get("waterbody_text"), r.get("started_at") or "")):
         rec["duplicate_of"] = None
         (rec.get("raw") or {}).pop("tceq_match", None)
         d = _day(rec.get("started_at"))
         if d is None:
             continue
         cands = []
+        mine = _water_key(rec.get("waterbody_text"))
+        permit = (rec.get("raw") or {}).get("state_permit")
         for row in rows:
             s = _day(row.get("started_at"))
-            if s is None or abs((s - d).days) > MATCH_PAD_DAYS or not same_operator(rec, row) or \
-                    not volume_consistent(rec, row):
+            if s is None or row["event_id"] in used or abs((s - d).days) > MATCH_PAD_DAYS or \
+                    not same_operator(rec, row) or not volume_consistent(rec, row):
                 continue
-            cands.append((abs((s - d).days), str(row.get("source_record_id") or ""), row))
+            theirs = _water_key(row.get("waterbody_text"))
+            if mine and theirs and mine not in theirs and theirs not in mine:
+                continue            # each names a different water: two spills
+            same_water = bool(mine and theirs)
+            same_permit = bool(permit) and permit in ((row.get("raw") or {}).get("state_permits") or [])
+            cands.append((0 if same_water else 1, 0 if same_permit else 1, abs((s - d).days),
+                          str(row.get("source_record_id") or ""), row))
         if not cands:
             continue
-        cands.sort(key=lambda c: (c[0], c[1]))
-        row = cands[0][2]
+        cands.sort(key=lambda c: c[:4])
+        row = cands[0][4]
+        used.add(row["event_id"])
         rec["duplicate_of"] = row["event_id"]
-        rec["raw"]["tceq_match"] = {"event_id": row["event_id"], "days_apart": cands[0][0],
+        rec["raw"]["tceq_match"] = {"event_id": row["event_id"], "days_apart": cands[0][2],
                                     "tceq_volume_gal": row.get("volume_gal"), "candidates": len(cands),
+                                    "same_water": cands[0][0] == 0,
                                     "basis": "same operator, start within a day, volume consistent with the notice's"}
         n += 1
     return n

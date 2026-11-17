@@ -94,17 +94,20 @@ UPDATE_TITLE = re.compile(r"\bupdate\b", re.I)
 SPILL = re.compile(r"\b(?:overflow(?:ed|s)?|spill(?:ed|s)?|leak(?:ing|ed)?|break|discharge[ds]?)\b", re.I)
 WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 WEEKDAY = re.compile(r"\b(?:on\s+)?(" + "|".join(WEEKDAYS) + r")\b", re.I)
-FOUND = re.compile(r"\b(?:discovered|reported|first\s+reported|responded)\b", re.I)
+FOUND = re.compile(r"\b(?:discovered|reported|first\s+reported|respond(?:ed|ing|s)?)\b", re.I)
 ENTRY = re.compile(r"\b(?:into|reach(?:ed|es)?|flow(?:ed|s)?|empt(?:ies|ied)|released\s+to|made\s+its\s+way|spilled\s+(?:in)?to)\b",
                    re.I)
 NOT_REACHED = re.compile(r"did\s+not\s+reach\s+((?:[A-Z][\w'’-]*\s+){1,3}(?:Creek|River)|the\s+Rio\s+Grande|Rio\s+Grande)", re.I)
 NO_WATER = re.compile(r"\bno\s+storm\s+drains?,\s+waterways|contain(?:ed)?\s+the\s+spill\s+within\s+the\s+[\w\s]{0,30}property|"
                       r"spilled\s+within\s+the\s+[\w\s]{0,30}property", re.I)
 ADVICE = re.compile(r"\b(?:avoid\s+contact|keep\s+(?:livestock|pets|children)[^.]{0,40}away|stay\s+(?:out|away))\b", re.I)
-REASSURE = re.compile(r"\bsafe\b|\bdiluted\b|\bno\s+(?:immediate\s+)?risk|not\s+at\s+risk|no\s+impact", re.I)
+REASSURE = re.compile(r"\bsafe\b|\bclean\b|\bsaid\b|\bsays\b|\bdiluted\b|\bno\s+(?:immediate\s+)?risk|not\s+at\s+risk|no\s+impact", re.I)
 STOPPED = re.compile(r"\bstopped(?:\s+the\s+(?:overflow|spill|flow|leak))?\s+at\s+(?:about\s+|approximately\s+)?(\d{1,2})(?::(\d{2}))?\s*"
                      r"([ap])\.?\s*m\b", re.I)
-WATER = re.compile(r"\b((?:[A-Z][\w'’-]*\s+){1,3}(?:Creek|River))\b|\b(Rio\s+Grande)\b")
+WATER = re.compile(r"\b((?:[A-Z][\w'’-]*\s+){1,3}(?:Creek|River))\b" + F.NOT_AFTER_WATER + r"|\b(Rio\s+Grande)\b" +
+                   F.NOT_AFTER_WATER)
+NEGATED_ENTRY = re.compile(r"\b(?:did\s+not|didn.t|never|not)\s+(?:flow|reach|enter|spill|make\s+its\s+way|get)\b|"
+                           r"\bno\s+(?:waste\s*water|sewage)\s+(?:reached|entered|flowed)", re.I)
 
 
 def _words(s: str) -> str:
@@ -176,11 +179,22 @@ def spill_times(ss: list[str], pub: date, tz) -> dict:
             break
     if day is None:
         return out
+    def other_day(x: str) -> bool:
+        """Whether the sentence gives a day other than the spill's (its clock belongs to that day)."""
+        for dm in F.DATE_WORDS.finditer(x):
+            got = F.spill_time(dm.group(0), tz, pub)[0]
+            if got and date.fromisoformat(got[:10]) != day:
+                return True
+        for wm in WEEKDAY.finditer(x):
+            if WEEKDAYS.index(wm.group(1).lower()) != day.weekday():
+                return True
+        return bool(re.search(r"\b(?:next|following)\s+(?:day|morning|afternoon|evening)\b", x, re.I))
+
     s = ss[si]
     cand = [s] + [x for x in ss[si + 1:si + 10] if FOUND.search(x) or re.search(r"\boccurred\b", x, re.I)]
     for x in cand:
         c = F.CLOCK.search(x)
-        if c and not STOPPED.search(x[:c.end() + 1]):
+        if c and not STOPPED.search(x[:c.end() + 1]) and (x is s or not other_day(x)):
             h, mi = F._clock(c)
             out.update(start=datetime(day.year, day.month, day.day, h, mi, tzinfo=tz).isoformat(), precision="minute",
                        words=_words(x)[:160])
@@ -192,7 +206,7 @@ def spill_times(ss: list[str], pub: date, tz) -> dict:
     if out["precision"] == "minute":
         for x in ss[si:si + 10]:
             m = STOPPED.search(x)
-            if m and not F.DATE_WORDS.search(x[m.start():]) and not re.search(r"\b(?:next|following)\s+day\b", x, re.I):
+            if m and not other_day(x):
                 h, mi = _clock(*m.groups())
                 end = datetime(day.year, day.month, day.day, h, mi, tzinfo=tz)
                 if end.isoformat() > out["start"]:
@@ -217,7 +231,7 @@ def waters_of(ss: list[str]) -> tuple[list[str], bool | None]:
     excluded = {re.sub(r"^the\s+", "", _words(m.group(1)), flags=re.I).lower() for m in NOT_REACHED.finditer(text)}
     out = []
     for s in ss:
-        if not ENTRY.search(s) or re.search(r"did\s+not\s+reach", s, re.I):
+        if not ENTRY.search(s) or NEGATED_ENTRY.search(s):
             continue
         for m in WATER.finditer(s):
             name = _words(m.group(1) or m.group(2))
@@ -236,7 +250,8 @@ def waters_of(ss: list[str]) -> tuple[list[str], bool | None]:
 def advice_of(ss: list[str]) -> str | None:
     for s in ss:
         if ADVICE.search(s) and not REASSURE.search(s):
-            return common.scrub_text(s if s.endswith(".") else s + ".")
+            s = F.street_place(s) or ""
+            return common.scrub_names(common.scrub_text(s if s.endswith(".") else s + "."))
     return None
 
 
@@ -304,43 +319,51 @@ def list_pages(name: str, backfill: bool, src: Path | None) -> list[str]:
     return pages
 
 
-def run_site(name: str, pages: list[str], prev: list[dict], at: str, get_release) -> tuple[list[dict], dict]:
+def run_site(name: str, pages: list[str], prev: list[dict], at: str, get_release,
+             retry: list[dict] | None = None) -> tuple[list[dict], dict]:
+    """retry: list items whose release could not be read on an earlier run (meta.unread_items), read again even
+    after they leave the first list page."""
     site = SITES[name]
     recs = {r["event_id"]: r for r in prev}
-    stats = {"items": 0, "notices": 0, "not_notices": {}, "unread": []}
+    stats = {"items": 0, "notices": 0, "not_notices": {}, "unread": [], "unread_items": []}
     seen = set()
-    for page in pages:
-        for it in list_items(page, site):
-            if it["slug"] in seen:
-                continue
-            seen.add(it["slug"])
-            stats["items"] += 1
-            if not NOTICE_TITLE.search(it["title"]):
-                continue
-            if UPDATE_TITLE.search(it["title"]):
-                stats["not_notices"]["follow-up of an earlier release"] = stats["not_notices"].get("follow-up of an earlier release", 0) + 1
-                continue
-            stats["notices"] += 1
-            eid = f"{site['source_id']}:{it['slug']}"
-            if eid in recs:
-                recs[eid]["fetched_at"] = at
-                continue
-            body = get_release(it["url"])
-            if body is None:
-                stats["unread"].append(it["url"])
-                continue
-            pub, text = release(body, site)
-            if pub is None:
-                stats["unread"].append(it["url"])
-                continue
-            r = record(it, pub, text, site, at)
-            r["raw"]["first_seen_at"] = at
-            recs[eid] = r
+    listed = [it for page in pages for it in list_items(page, site)]
+    for it in listed + [r for r in (retry or []) if isinstance(r, dict) and r.get("slug")]:
+        if it["slug"] in seen:
+            continue
+        seen.add(it["slug"])
+        stats["items"] += 1
+        if not NOTICE_TITLE.search(it["title"]):
+            continue
+        if UPDATE_TITLE.search(it["title"]):
+            stats["not_notices"]["follow-up of an earlier release"] = stats["not_notices"].get("follow-up of an earlier release", 0) + 1
+            continue
+        stats["notices"] += 1
+        eid = f"{site['source_id']}:{it['slug']}"
+        if eid in recs:
+            recs[eid]["fetched_at"] = at
+            continue
+        body = get_release(it["url"])
+        pub, text = release(body, site) if body is not None else (None, "")
+        if pub is None:
+            stats["unread"].append(it["url"])
+            stats["unread_items"].append({"title": F.street_place(it["title"]), "url": it["url"], "slug": it["slug"]})
+            continue
+        r = record(it, pub, text, site, at)
+        r["raw"]["first_seen_at"] = at
+        recs[eid] = r
     out = sorted(recs.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
     for r in out:      # the operator test of link_tceq: any of the utility's TCEQ entities
         r["raw"]["operator_ids"] = site["operator_ids"]
     stats["duplicates_of_tceq"] = F.link_tceq(out, F.tceq_rows())
     return out, stats
+
+
+def safe_list(pages: list[str], site: dict) -> str:
+    """What data/raw keeps of the list pages: the spill releases only, titles without house numbers."""
+    keep = [{"title": F.street_place(it["title"]), "url": it["url"]} for p in pages for it in list_items(p, site)
+            if NOTICE_TITLE.search(it["title"])]
+    return json.dumps(keep, ensure_ascii=False)
 
 
 def main(argv=None) -> int:
@@ -352,7 +375,9 @@ def main(argv=None) -> int:
     for name in names:
         site = SITES[name]
         path = common.EVENTS_DIR / f"{site['source_id']}.json"
-        prev = (read_json(path, {}) or {}).get("records") or []
+        prev_doc = read_json(path, {}) or {}
+        prev = prev_doc.get("records") or []
+        retry = (prev_doc.get("meta") or {}).get("unread_items") or []
 
         def get_release(url, name=name):
             if src:
@@ -368,15 +393,17 @@ def main(argv=None) -> int:
             pages = list_pages(name, backfill, src)
             if not pages or not any(list_items(p, site) for p in pages):
                 raise ValueError("no release listed on the list page (the layout may have changed)")
-            recs, stats = run_site(name, pages, prev, now_iso(), get_release)
+            recs, stats = run_site(name, pages, prev, now_iso(), get_release, retry)
         except (requests.RequestException, OSError, ValueError, KeyError, TypeError) as e:
             write_events(site["source_id"], [], ok=False, error=str(e))
             print(f"{site['source_id']}: run not ok ({e})", file=sys.stderr)
             rc = 1
             continue
         if not src:
-            save_raw(site["source_id"], json.dumps([list_items(p, site) for p in pages]).encode(), "json")
-        out = write_events(site["source_id"], recs, meta={
+            save_raw(site["source_id"], safe_list(pages, site).encode(), "json")
+        all_unread = bool(stats["unread"]) and len(stats["unread"]) >= stats["notices"]
+        out = write_events(site["source_id"], recs, ok=not all_unread, partial=all_unread,
+                           error="no spill release could be read" if all_unread else None, meta={
             "registry_ids": [site["source_id"]], "url": site["list"], **stats,
             "credit": site["authority"].replace(", news release", " news releases"),
             "caveat": ("The utility posts releases on large spills (the public-notice threshold of 30 TAC 319.302), not on "
