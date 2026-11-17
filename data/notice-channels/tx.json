@@ -25430,6 +25430,32 @@
    "barrier": null
   },
   {
+   "id": "tx-dshs-shellfish-harvest-status",
+   "state": "TX",
+   "operator_id": null,
+   "agency": "Texas Department of State Health Services",
+   "name": "Texas DSHS (Seafood and Aquatic Life Group)",
+   "permit": null,
+   "channel_kind": "feed",
+   "urls": [
+    "https://www.dshs.texas.gov/seafood-aquatic-life-group/information-on-consumption-advisories-possession-bans-rescinded-orders-seafood-aquatic-life/shellfish-harvest-map"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "status",
+   "note": "Status of Shellfish Harvesting Areas: a dated table of each Gulf coast harvest area's public and private status with DSHS's reason (rainfall, TPWD action), a dated PDF copy and a 24-hour in-state telephone line. Read by the pipeline since November 16, 2026 (ingest.tx_dshs_shellfish): one shellfish_closure record per area closed with rainfall, runoff, flooding, a spill, wastewater or sewage among the reasons; closures for TPWD action alone are left out. Table dated 11.16.2026: TX 14, TX 19, TX 20 and TX 21 closed with rainfall among the reasons. The legal duty to publish was not verified.",
+   "checked": "2026-11-16",
+   "noun": "Data feed",
+   "sources": [
+    "tx-dshs-shellfish-harvest-status"
+   ],
+   "barrier": null,
+   "feed_source_id": "tx-dshs-shellfish-harvest-status"
+  },
+  {
    "state": "TX",
    "operator_id": "tx-dtb-investments-lp",
    "agency": null,

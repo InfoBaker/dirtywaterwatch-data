@@ -1,0 +1,32 @@
+id: "tx-dshs-shellfish-harvest-status"
+name: "Texas DSHS Status of Shellfish Harvesting Areas (status table)"
+url: "https://www.dshs.texas.gov/seafood-aquatic-life-group/information-on-consumption-advisories-possession-bans-rescinded-orders-seafood-aquatic-life/shellfish-harvest-map"
+homepage: "https://www.dshs.texas.gov/seafood-aquatic-life-group/information-on-consumption-advisories-possession-bans-rescinded-orders-seafood-aquatic-life/shellfish-harvest-map"
+kind: "html"
+level: "state"
+# Notes (research/tx, status used, verified fetched, checked 2026-11-16): Read by ingest.tx_dshs_shellfish since
+#   2026-11-16 (register row tx-dshs-shellfish-harvest-status, a feed): one shellfish_closure record per area the
+#   table lists Closed (public harvest or private oyster leases) for rainfall, runoff, flooding, a spill, wastewater
+#   or sewage, from the first read that lists it (poll); the heading's date is the publication. Areas closed only
+#   for "TPWD Action" (seasons, resource management) or a harmful algal bloom are left out; an unknown reason is
+#   unread. DSHS's harvest-area layer names its polygons by bay and class, not by the table's TX codes, so every
+#   closure is listed only. Table dated 11.16.2026 on 2026-11-16: 28 areas, 4 closed with rainfall among the reasons
+#   (TX 14, TX 19, TX 20, TX 21), 16 closed for TPWD action only, 8 open.
+# Access detail: HTML table Harvest Area / Public Harvest Area Status / Private Oyster Area Status / Reason for
+#   Status under "Status of Shellfish Harvesting Areas <date>", with a dated PDF copy; harvest area maps (PDF) and the
+#   Texas Shellfish Harvest Area Viewer (ArcGIS). The page answers the pipeline's runner (runner probe 43885170112).
+# Can fill: status (public and private), reason as DSHS gives it, published_at (the table's date)
+# Cannot fill: closure date; reopening date; the area's outline by its TX code; volume; outfall
+# History: none on page (a dated PDF of each day's table is linked)
+cadence: "DSHS dates the table each time it changes (11.16.2026 on 2026-11-16); read every run."
+license: "none stated (Texas state government publication)"
+attribution: "Texas DSHS Seafood and Aquatic Life Group"
+enabled: true
+role: "advisories"
+event_types: ["shellfish_closure"]
+states: ["TX"]
+access: ["html", "pdf", "arcgis", "phone"]
+access_detail: "HTML status table with a dated PDF copy; a 24-hour in-state telephone line."
+machine_readable: false
+legal_basis: null
+checked: "2026-11-16"
