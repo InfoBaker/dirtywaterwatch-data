@@ -5403,7 +5403,7 @@
    "operator_id": "tx-city-of-austin",
    "agency": null,
    "permit": null,
-   "checked": "2026-11-07",
+   "checked": "2026-11-17",
    "id": "tx-city-of-austin-water-news",
    "name": "City of Austin (Austin Water)",
    "channel_kind": "news_page",
@@ -5411,16 +5411,18 @@
     "https://www.austintexas.gov/water/news"
    ],
    "method": "html",
-   "legal_basis": null,
+   "legal_basis": "30 TAC 319.302-319.303: a local government's facility tells local officials and the local media within 24 hours of a spill of 100,000 gallons or more (50,000 near a drinking water source or in a sensitive area), with the facts the rule lists; posting the notice on the web is the utility's own choice",
    "basis_kind": "voluntary",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
    "publishes": "notices",
-   "records": false,
-   "every_hours": 24,
-   "noun": "Voluntary page",
-   "note": "Austin Water's news list (answered 200 on 2026-11-07) carries releases on large overflows (one of more than 100,000 gallons near E. Howard Lane, September 2026). Watched without records: the overflows reach TCEQ's table. Voluntary beyond the 30 TAC 319.302 media notice.",
-   "barrier": null
+   "noun": "Spill news release",
+   "note": "Austin Water's news list carries a release on each large spill (five from December 2024 to September 2026 on November 17, 2026): the day, often the time it was discovered and stopped, the estimated volume, where it went and the public advice. Read hourly by the feed (tx-austin-water-spill-news).",
+   "barrier": null,
+   "feed_source_id": "tx-austin-water-spill-news",
+   "sources": [
+    "tx-austin-water-spill-news"
+   ]
   },
   {
    "state": "TX",
@@ -26135,20 +26137,26 @@
    "operator_id": "tx-el-paso-water-utilities-public-service-board",
    "agency": null,
    "permit": null,
-   "checked": "2026-11-07",
+   "checked": "2026-11-17",
    "id": "tx-el-paso-water-website",
    "name": "El Paso Water",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": null,
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.epwater.org/about-us/newsroom"
+   ],
+   "method": "html",
+   "legal_basis": "30 TAC 319.302-319.303: a local government's facility tells local officials and the local media within 24 hours of a spill of 100,000 gallons or more (50,000 near a drinking water source or in a sensitive area), with the facts the rule lists; posting the notice on the web is the utility's own choice",
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "none_found",
-   "publishes": "none",
-   "records": false,
-   "note": "El Paso Water's site (https://www.epwater.org/, 200 on 2026-11-07) gives no notice or list of overflows in a search of 2026-11-07. No web channel found.",
-   "barrier": "no_web_page"
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "El Paso Water's newsroom carries a release on large wastewater spills with TCEQ's required wording (eight from March 2020 to May 2026 on November 17, 2026; the search of November 7 missed them). Read hourly by the feed (tx-el-paso-water-spill-news).",
+   "barrier": null,
+   "feed_source_id": "tx-el-paso-water-spill-news",
+   "noun": "Spill news release",
+   "sources": [
+    "tx-el-paso-water-spill-news"
+   ]
   },
   {
    "state": "TX",
@@ -61201,20 +61209,27 @@
    "operator_id": "tx-san-antonio-water-system",
    "agency": null,
    "permit": null,
-   "checked": "2026-11-07",
+   "checked": "2026-11-17",
    "id": "tx-saws-website",
    "name": "San Antonio Water System",
-   "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
-   "legal_basis": null,
+   "channel_kind": "news_page",
+   "urls": [
+    "https://www.saws.org/feed/",
+    "https://www.saws.org/search/spill/feed/rss2/"
+   ],
+   "method": "rss",
+   "legal_basis": "30 TAC 319.302-319.303: a local government's facility tells local officials and the local media within 24 hours of a spill of 100,000 gallons or more (50,000 near a drinking water source or in a sensitive area), with the facts the rule lists; posting the notice on the web is the utility's own choice",
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "none_found",
-   "publishes": "none",
-   "records": false,
-   "note": "SAWS's site (https://www.saws.org/, 200 on 2026-11-07) gives no notice or list of overflows in a search of 2026-11-07; only news coverage was found. No web channel found.",
-   "barrier": "no_web_page"
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "SAWS posts a news release with TCEQ's spill notice form (PDF) attached when a spill meets the 30 TAC 319.302 threshold: facility and permit, location, estimated time and date, estimated volume, area potentially affected, cause and precautions. Read hourly by the feed (tx-saws-spill-notices), one record per notice; 19 notices from September 2019 to April 2026 on November 17, 2026. SAWS has posted fewer large spills than TCEQ's table lists.",
+   "barrier": null,
+   "feed_source_id": "tx-saws-spill-notices",
+   "noun": "Spill notice",
+   "sources": [
+    "tx-saws-spill-notices"
+   ]
   },
   {
    "state": "TX",

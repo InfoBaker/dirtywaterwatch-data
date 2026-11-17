@@ -528,7 +528,7 @@
     "verified": "search_only",
     "checked": "2026-11-03",
     "notes": ""
-    },
+  },
   {
     "id": "tx-dshs-shellfish-harvest-status",
     "name": "Texas DSHS Status of Shellfish Harvesting Areas (status table)",
@@ -579,5 +579,154 @@
     "verified": "fetched",
     "checked": "2026-11-16",
     "notes": "DSHS's harvest-area layer (Texas Shellfish Harvest Area Viewer, 2026-27) names its 287 polygons by bay and class; tying the table's TX codes to them needs DSHS's legal descriptions (PDF)."
+  },
+  {
+    "id": "tx-saws-spill-notices",
+    "name": "San Antonio Water System sewer spill notices (news releases with TCEQ's spill notice form)",
+    "jurisdiction": "TX",
+    "operator": "San Antonio Water System",
+    "operator_type": "utility",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "San Antonio's creeks and the San Antonio River (Salado, Leon, Rosillo, Olmos creeks)",
+    "water_slugs": [],
+    "url": "https://www.saws.org/search/spill/feed/rss2/",
+    "access": [
+      "rss",
+      "pdf"
+    ],
+    "access_detail": "WordPress RSS (main feed and the search feed for 'spill', ten posts a page); each spill post links a PDF with the release and TCEQ's Notice of Spill from a Wastewater Facility form.",
+    "machine_readable": false,
+    "sample_record": "Notice of April 28, 2026: Salado Creek Water Recycling Center (10137-008); Bicentennial Dr near IH 10 E; April 27, 2026 at approximately 2:40 pm; Spill estimated >100,000 gallons; Rosillo Creek; structural",
+    "fields": [
+      "Facility Name",
+      "Location of the spill",
+      "Estimated time and date of spill",
+      "Estimated volume of the spill",
+      "Type of spill",
+      "Area potentially affected",
+      "Suspected cause of spill",
+      "actions taken",
+      "personal precautions"
+    ],
+    "fills_event_fields": [
+      "started_at (minute)",
+      "published_at",
+      "volume_text",
+      "waterbody_text",
+      "outfall_name (street, no house number)",
+      "advice_text (where the form's marks can be read)"
+    ],
+    "cannot_fill": [
+      "ended_at (the form has none)",
+      "a volume figure (a bound is given)",
+      "coordinates"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "when a spill meets the notice threshold (19 notices from September 2019 to April 2026)",
+    "history": "every notice since 2019 in the search feed",
+    "license": "none stated",
+    "legal_basis": "30 TAC 319.302-319.303 (notice to local officials and the local media within 24 hours of a large spill)",
+    "status": "used",
+    "status_reason": "Read hourly by pipeline/ingest/tx_saws_spill_notices.py from 2026-11-17 (--backfill for the archive): one record per notice, timed by TCEQ's form. 19 notices read on 2026-11-17 (September 2019 to April 2026); 10 met a row of TCEQ's open data for the same spill, which is linked as the same event.",
+    "verified": "fetched",
+    "checked": "2026-11-17",
+    "notes": ""
+  },
+  {
+    "id": "tx-austin-water-spill-news",
+    "name": "Austin Water news releases on sanitary sewer overflows and wastewater spills",
+    "jurisdiction": "TX",
+    "operator": "City of Austin (Austin Water)",
+    "operator_type": "municipal",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "Austin's creeks (Gilliland, Williamson and others)",
+    "water_slugs": [],
+    "url": "https://www.austintexas.gov/water/news",
+    "access": [
+      "html"
+    ],
+    "access_detail": "HTML list ?page=N; each release gives its release date and text (day, discovery and stop times, volume, where the spill went, public advice).",
+    "machine_readable": false,
+    "sample_record": "Release of December 23, 2025: discovered 9:50 a.m. December 22; approximately 198,000 gallons into a tributary of Gilliland Creek",
+    "fields": [
+      "Release Date",
+      "text"
+    ],
+    "fills_event_fields": [
+      "started_at",
+      "ended_at (where stated)",
+      "published_at",
+      "volume_text",
+      "waterbody_text",
+      "advice_text"
+    ],
+    "cannot_fill": [
+      "coordinates",
+      "a time for every spill"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "when a spill is large (five releases from December 2024 to September 2026)",
+    "history": "about six list pages back to early 2023",
+    "license": "none stated",
+    "legal_basis": "30 TAC 319.302-319.303 (notice to local officials and the local media within 24 hours of a large spill)",
+    "status": "used",
+    "status_reason": "Read hourly by pipeline/ingest/tx_utility_spill_news.py (--site austin) from 2026-11-17: one record per spill release, by rule. Five releases read on 2026-11-17 (December 2024 to September 2026).",
+    "verified": "fetched",
+    "checked": "2026-11-17",
+    "notes": ""
+  },
+  {
+    "id": "tx-el-paso-water-spill-news",
+    "name": "El Paso Water news releases on wastewater spills and overflows",
+    "jurisdiction": "TX",
+    "operator": "El Paso Water Utilities Public Service Board",
+    "operator_type": "utility",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "Rio Grande at El Paso",
+    "water_slugs": [],
+    "url": "https://www.epwater.org/about-us/newsroom",
+    "access": [
+      "html"
+    ],
+    "access_detail": "HTML newsroom (?show=all lists every release since 2019); each release gives 'Published on' and the text with TCEQ's required wording.",
+    "machine_readable": false,
+    "sample_record": "Release of June 2, 2026: wastewater spill at the Roberto Bustamante plant on May 31; an estimated 560,000 gallons, contained on the plant's property",
+    "fields": [
+      "Published on",
+      "text"
+    ],
+    "fills_event_fields": [
+      "started_at",
+      "published_at",
+      "volume_text",
+      "waterbody_text",
+      "advice_text"
+    ],
+    "cannot_fill": [
+      "coordinates",
+      "end times"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "when a spill is large (eight releases from March 2020 to May 2026)",
+    "history": "every release since 2019",
+    "license": "none stated",
+    "legal_basis": "30 TAC 319.302-319.303 (notice to local officials and the local media within 24 hours of a large spill)",
+    "status": "used",
+    "status_reason": "Read hourly by pipeline/ingest/tx_utility_spill_news.py (--site elpaso) from 2026-11-17: one record per spill release, by rule, in Mountain time. Eight spill releases and one update read on 2026-11-17 (March 2020 to May 2026).",
+    "verified": "fetched",
+    "checked": "2026-11-17",
+    "notes": ""
   }
 ]
