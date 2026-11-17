@@ -61,20 +61,27 @@ Records (one sso record per row)
 One event, one record (link_tceq, the shape of tx_spill_notice_form.link_tceq and al_jefferson_county_soa.link_adem)
   TCEQ's open data (tx-tceq-sso-opendata, the generic reader) carries most of the same overflows months later, with a
   date and no time, no end since mid-2024, and a receiving water on a few. A row and a TCEQ record are one overflow
-  when TCEQ's record is of the row's permit (raw.state_permits), began on the row's local start day, and its volume
-  is consistent (the same figure, or both under 1 gallon where the City writes 0, or within a factor of 2), and,
-  where both give a street (TCEQ's source or description), the same street. A row has one TCEQ record and a TCEQ
-  record one row; candidates are ranked by street, then volume; a tie is left unlinked. Never linked: records that
+  when they are of the same sewer system (for the City's own rows any City permit or record: TCEQ often files an
+  overflow under another City plant's permit than the table's column; any other row needs its own permit), TCEQ's
+  start day is within a day of the row's local start day, the volume is consistent (the same figure; within a factor
+  of 2; TCEQ's 0 or 1 gallon placeholder beside the City's "0" or, at the same street, any figure), and both give the
+  same street (street_key_of: the name without its type, and the same direction where both give one; TCEQ's street
+  is the words after the house number its scrub removed). With no street on either side only the same permit, the
+  same day and the same figure above 1 gallon link; a TCEQ address whose street cannot be read never does. Pairs are
+  ranked by street, day, permit and volume and taken in rounds: a row and a record each other's best link; n rows and
+  n alike records at one street that day are paired in order; any other tie links none. Never linked: records that
   name different waters (build/status.py waters_differ), and a row the City marks as not reaching waters of the US
-  when TCEQ's record names a water (both are then shown: err on the side of safety).
+  when TCEQ's record names a water (both are then shown: err on the side of safety). A TCEQ water text that is a
+  segment number ("1007 of the San Jacinto River Basin") is no water's name and is not taken.
   The City's row is the record shown: it has the start and end to the minute, the reached-water flag and the flow
   location; TCEQ's record has days only and, since mid-2024, no end. The TCEQ record is marked duplicate_of the
   row and written back into TCEQ's events file (the Georgia EPD rule, ga_epd_spills.mark_epa_duplicates), with
   raw._duplicate_basis naming the row; the row names the TCEQ record (raw.tceq_record, raw._other_source_record,
   so each record's page links the other) and takes TCEQ's named water (waterbody_text, raw.water_basis) and county.
-  Every mark of an earlier run is cleared first, so the links are recomputed each run; the generic TCEQ reader runs
-  after this module and keeps the marks while its table is unchanged (if_changed); when TCEQ publishes a new batch,
-  its records stand alone for the hour until this module's next run. The counts are in meta.tceq_links.
+  Every mark of an earlier run is cleared first, so the links are recomputed each run; the City's events file is
+  written before TCEQ's marks. The generic TCEQ reader runs after this module and keeps the marks while its table is
+  unchanged (if_changed); a new TCEQ batch is linked in the same hour by ingest.tx_houston_tceq_link (link_only), run
+  after the generic readers (Makefile INGEST_SNAPSHOTS). The counts are in meta.tceq_links.
 
 Privacy: the cover letter is never read; no house number, name, telephone or e-mail is kept: the state file holds the
   parsed rows with streets only, never the PDF or its text; errors name a report and a reason, never a row's text.
@@ -83,10 +90,12 @@ Cadence: the index hourly with the refresh (Texas is live). A month never read i
   months listed; with --backfill every listed month from BACKFILL_FROM. A month already read is asked again (a
   conditional request) while it is among the NEWEST, and on a backfill whatever its age, and read again only when its
   file changed (a new address, a new Last-Modified date and content) or PARSER_VERSION changed. A month that cannot be
-  fetched or read stays pending (meta.pending) and is tried again each run. The run fails (exit 1, the previous
-  records kept) when the index cannot be read or lists no monthly report; a month pending, rows not read or a count
-  that differs make the run partial (health false, the records written); --backfill then exits 0 and names them.
-Run from pipeline/: python -m ingest.tx_houston_sso_monthly [--backfill] [--file report.pdf --month 2026-09 --out x]
+  fetched or read stays pending (meta.pending) and is tried again each run, as does one whose revised copy reads less
+  completely than the copy held (which is kept). The run fails (exit 1, the previous records kept) when the index
+  cannot be read or lists no monthly report from BACKFILL_FROM; a month pending, rows not read, a count that differs or
+  a total not read make the run partial (health false, the records written); --backfill then exits 0 and names them.
+Run from pipeline/: python -m ingest.tx_houston_sso_monthly [--backfill] [--link-only]
+  [--file report.pdf --month 2026-09 --out x [--tceq tceq-events.json]]
 """
 from __future__ import annotations
 

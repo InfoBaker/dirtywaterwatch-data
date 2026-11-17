@@ -285,7 +285,7 @@
     "license": "none stated",
     "legal_basis": "Consent decree",
     "status": "used",
-    "status_reason": "Read hourly by pipeline/ingest/tx_houston_sso_monthly.py from 2026-11-17 (--backfill for the months from January 2024): one record per row, start and end to the minute, the City's reached-water flag kept. 33 reports read on 2026-11-17, 4,407 rows (1,409 marked as reaching waters of the US), each month's count equal to its stated total. TCEQ's record of the same overflow (2,707 rows met one on TCEQ's Harris County rows from 2023) is linked as the same event, the City's row shown.",
+    "status_reason": "Read hourly by pipeline/ingest/tx_houston_sso_monthly.py from 2026-11-17 (--backfill for the months from January 2024): one record per row, start and end to the minute, the City's reached-water flag kept. 33 reports read on 2026-11-17, 4,407 rows (1,409 marked as reaching waters of the US), each month's count equal to its stated total. TCEQ's record of the same overflow (3,017 rows met one on TCEQ's Harris County rows from 2023) is linked as the same event, the City's row shown.",
     "verified": "fetched",
     "checked": "2026-11-17",
     "notes": ""

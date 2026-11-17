@@ -31,9 +31,10 @@ level: "municipal"
 # One event, one record: TCEQ's open data (tx-tceq-sso-opendata) carries many of the same overflows months later, with
 #   dates only and, since mid-2024, no end. A row and a TCEQ record of the same sewer system, start day (within a day),
 #   street and consistent volume are one overflow: the City's row is shown and TCEQ's record is marked its duplicate in
-#   TCEQ's events file; each record links the other. Measured 2026-11-17 on TCEQ's rows of Harris County from 2023:
-#   2,707 of the 4,406 rows met a TCEQ record (37 of them took the water TCEQ's record names); 83 were kept apart
-#   because the City says the overflow reached no water and TCEQ's record names one; 34 had two equally good candidates.
+#   TCEQ's events file; each record links the other (linked again after the generic readers: ingest.tx_houston_tceq_link).
+#   Measured 2026-11-17 on TCEQ's rows of Harris County from 2023: 3,017 of the 4,406 rows met a TCEQ record (40 of them
+#   took the water TCEQ's record names); 85 were kept apart because the City says the overflow reached no water and
+#   TCEQ's record names one; 37 had two unlike, equally good candidates; 1,389 have no TCEQ record.
 # Privacy: the address is a street address, often a home: its house number is removed (the leading number, and any
 #   number no route word precedes). The cover letter (officials' names and e-mail addresses) and the map page are never
 #   read into a record; the PDFs are not saved.
