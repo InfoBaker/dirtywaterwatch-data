@@ -29,7 +29,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ga | 7 | 0 | 4 | 1 | 0 | 12 |
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
-| wa | 5 | 4 | 4 | 1 | 0 | 14 |
+| wa | 6 | 3 | 4 | 1 | 0 | 14 |
 | ca | 9 | 1 | 10 | 3 | 0 | 23 |
 | il | 10 | 1 | 12 | 3 | 2 | 28 |
 | az | 3 | 1 | 3 | 3 | 1 | 11 |
@@ -54,7 +54,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wi | 8 | 0 | 10 | 2 | 1 | 21 |
 | de | 3 | 0 | 5 | 1 | 0 | 9 |
 | sc | 7 | 0 | 2 | 1 | 1 | 11 |
-| in | 8 | 0 | 16 | 0 | 2 | 26 |
+| in | 9 | 0 | 15 | 0 | 2 | 26 |
 | wv | 8 | 0 | 12 | 1 | 1 | 22 |
 | la | 4 | 0 | 7 | 3 | 2 | 16 |
 | nv | 4 | 1 | 8 | 3 | 0 | 16 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **628** | **234** | **550** | **229** | **81** | **1722** |
+| **all** | **630** | **233** | **549** | **229** | **81** | **1722** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1393,11 +1393,11 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `wa-epa-sobe` | EPA eRule SOBE extract (Washington permits) | used | fetched | events | Read by the national eRule ingester (echo-sewer-overflow) with Washington in its states: 1 of 36 rows kept (a bypass to Puget Sound); the SSOs name no water. |
 | `wa-kc-cso-status-csv` | King County / Seattle CSO overflow status CSV (behind the King County CSO status map) | used | fetched | events | Read every hour as a snapshot (data/sources/wa-kc-cso-status-csv.yaml, generic snapshot block); events open and close at the polls. |
 | `wa-rcw-90-48-636` | RCW 90.48.636 Sewage spills - Website - Notices (2025 c 315, Sewage Spill Right to Know) | used | fetched | law | State duty to publish each permitted facility's reported sewage spill on a public website. |
+| `wa-spokane-cso-update` | City of Spokane Real Time Combined Sewer Overflow Monitoring (CSOUpdate) | used | fetched | events | Read hourly by pipeline/ingest/wa_spokane_cso.py from 2026-11-16: each start the table shows becomes a dated record, end not confirmed; the history grows from the first read. Every site read none on 2026-11-16. |
 | `wa-wac-173-245` | WAC 173-245 Submission of plans and reports for construction and operation of combined sewer overflow reduction facilities | used | search_only | law | CSO annual reporting and reduction plans; the public-notice duty sits in individual permits (not read). |
 | `wa-beach-program` | Washington BEACH program (Ecology and DOH) swimming beach advisories and status map | candidate | search_only | advisories | Advisories are issued by local health departments; a status map exists; no service URL found in the time box. |
 | `wa-doh-shellfish-closures` | Washington DOH Shellfish Safety Map and commercial growing area closures (incl. sewage-spill emergency closures) | candidate | search_only | advisories | DOH closes shellfish beaches after sewage spills (Ecology's page points here); health line 800-525-0127. Service not examined. |
 | `wa-ecology-freshwater-algae` | Washington State Toxic Algae (Ecology freshwater algae program, nwtoxicalgae.org) | candidate | search_only | advisories | Bloom reports and toxin results by lake; not fetched. |
-| `wa-spokane-cso-update` | City of Spokane Real Time Combined Sewer Overflow Monitoring (CSOUpdate) | candidate | fetched | events | Dated CSO starts for Spokane; not collected yet. |
 | `wa-ecology-paris` | Ecology PARIS water quality permit database | watch | search_only | permits | Permits, DMRs and documents per facility; context for CSO annual reports. Not queried. |
 | `wa-kc-cso-outfall-locations` | King County GIS Open Data: Combined Sewer Outfall Locations | watch | search_only | outfalls | Outfall points and categories; the status CSV already carries coordinates. |
 | `wa-kc-swimming-beach-bacteria` | King County swimming beach bacteria monitoring | watch | search_only | monitoring | Lake beaches; not fetched. |
@@ -1857,6 +1857,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `in-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Indiana | used | inferred | events | Read by the national eRule module with IN in its states (2026-11-14): one Indiana report on the 2026-11-12 extract (Shelbyville's plant bypass, 2026-08-12); IDEM's own reports are not sent here until its move to NeT-SewerOverflow. |
 | `in-epa-cso-inventory` | EPA National CSO Inventory (Indiana extract) | used | fetched | outfalls | Baseline; IDEM layer is better. |
 | `in-epa-gl-cso-indiana` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Indiana | used | fetched | outfalls | Seeds the channel column for Great Lakes basin operators. |
+| `in-fort-wayne-cso-notifications` | Fort Wayne City Utilities CSO notifications | used | fetched | events | Read hourly by pipeline/ingest/in_fort_wayne_cso.py from 2026-11-16, with --backfill for the earlier weeks: one dated record per overflow (start, end, estimated volume), a quiet week none. The 35 weekly PDFs read on 2026-11-16 (weeks of 2026-02-25 to 2026-11-11, two weeks not at their usual addresses) held 139 overflows, the newest on 2026-09-20; the week of 2026-11-05 to 11-11 reported no overflows. |
 | `in-idem-cso-outfall-layer` | IDEM Indiana CSO Outfall Map (ArcGIS) | used | fetched | outfalls | Registry rows (scripts/build_in_outfalls.py, 2026-11-14): 981 points on 110 permits (578 Active, 318 Inactive, 85 Active but discharge prohibited; 136 with no point); 985 rows, 966 paired with EPA's inventory, which they outrank; IDEM's status kept even where it gives no point. |
 | `in-idem-cyanobacteria` | IDEM Blue-Green Algae dashboard (cyanobacteria and toxin results at state park beaches) | used | fetched | advisories | Read through the generic ArcGIS block (2026-11-14): 1,717 samples at 29 beaches, 2010 to 2026-09-14, each with IDEM's advisory level; 909 at an advisory level kept as IDEM's statements with their sample dates, never as advisory dates. |
 | `in-law-327-iac-5-2-1` | 327 IAC 5-2.1 Combined Sewer Overflow Public Notification | used | fetched | law | Statewide CSO notification rule: notice to the affected public, to people who ask after an annual March newspaper notice, and to local health departments and downstream intakes, whenever a CSO is occurring or imminent; signs at access points. No web channel and no clock. |
@@ -1865,7 +1866,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `in-citizens-cso-warnings` | Citizens Energy Group CSO warnings (email), Indianapolis | watch | fetched | events | 2018 post: 'CSO warnings are issued via email by Citizens Energy Group when' as little as a quarter-inch of rain is forecast; mandated by the consent decree; avoid contact downstream for four days (search). Sign-up page not found; the 2026 CSO page URL returned 404. |
 | `in-dnr-advisories-closings` | Indiana DNR state parks lake advisories and closings | watch | search_only | advisories | Read 2026-11-14: park alerts by property; the blue-green algae lines are a standing general note ('Found in lakes year round. Don't drink the water. Shower after you swim.'), not a report of a bloom, so they are not records. Watched in the register. |
 | `in-evansville-ewsu-clear-path` | Evansville Water and Sewer Utility (Clear Path CSO program) | watch | fetched | events | Homepage links a Combined Sewer Overflow page; notification channel not traced. |
-| `in-fort-wayne-cso-notifications` | Fort Wayne City Utilities CSO notifications | watch | search_only | events | HTTP 403 behind a Cloudflare check to this build's client (2026-11-14); the research of 2026-11-09 read weekly seven-day overflow summaries as PDFs. The pipeline's runner (GitHub) was answered on 2026-11-16; the earlier failure was met from a development machine. |
 | `in-goshen-cso-notice` | Goshen CSO Notice posts | watch | fetched | events | The notice page (https://goshen.in.gov/cso-notice/) holds one dated notice (2018-02-20) and the city's notification policy. Watched in the register. |
 | `in-hammond-cso-notification` | Hammond Sanitary District CSO notification program | watch | fetched | events | E-mail notification when CSOs discharge, by request sent to the district's postal address. |
 | `in-highland-sso-reports` | Highland bypass/overflow report PDFs | watch | search_only | events | Town posts its State Form 48373 SSO reports as PDFs (2025-2026). |

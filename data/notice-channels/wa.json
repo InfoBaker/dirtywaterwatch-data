@@ -1609,14 +1609,17 @@
     "wa-wac-173-245"
    ],
    "channel_kind": "operator_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://sewerfinder.spokanecity.org/CSOUpdate"
+   ],
+   "method": "html",
    "monitored": false,
-   "unmonitored_reason": "other",
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "wa-spokane-cso-update",
    "publishes": "status",
    "noun": "CSO status page",
-   "note": "Spokane's real-time CSO monitoring page (https://sewerfinder.spokanecity.org/CSOUpdate): a table of the monitoring sites with each one's status and the start time of an overflow occurring or in the last 48 hours. It answered the pipeline's runner on 2026-11-16 (the earlier refusal was met from a development machine); not collected yet, and how to read it was not verified in the research. (research/wa/report.md §2.3)",
-   "barrier": "not_verified"
+   "note": "Spokane's real-time CSO monitoring page: a table of its 20 monitoring sites with each one's status and the start time of an overflow occurring or in the last 48 hours; no end, volume or receiving water. Read hourly by the feed, which keeps every start it sees. (wa-spokane-cso-update)",
+   "barrier": null
   },
   {
    "state": "WA",
