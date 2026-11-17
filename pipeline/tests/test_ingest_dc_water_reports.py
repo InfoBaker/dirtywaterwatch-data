@@ -362,9 +362,75 @@ def test_backfill_is_accepted_and_reads_every_list_page(tmp_path, monkeypatch):
     rc = Q.main(["--backfill"])
     assert f"{Q.INDEX}&page=3" in asked
     out = json.loads((tmp_path / f"{Q.SOURCE_ID}.json").read_text())
-    # the fake copy gives September only for two quarters' worth of months: unread months fail health, records kept
-    assert rc == 1 and out["ok"] is False and out["count"] >= 2
+    # the fake copy gives September only for two quarters' worth of months: unread months fail health, records kept;
+    # the backfill saved what it read, so it exits 0 (the refresh's one-time backfill step goes on) and names the rest
+    assert rc == 0 and out["ok"] is False and out["count"] >= 2
     assert out["meta"]["unread"] and out["meta"]["totals_rule"]
+
+
+def _backfill_env(tmp_path, monkeypatch, pages_of, index_ok=True):
+    def fake_fetch(url, timeout=300):
+        if url == Q.INDEX:
+            if not index_ok:
+                raise Q.requests.ConnectionError("refused")
+            return INDEX_HTML.encode()
+        if "&page=" in url:
+            return b"<table></table>"
+        return b"%PDF"
+    monkeypatch.setattr(Q, "fetch", fake_fetch)
+    monkeypatch.setattr(Q, "pdf_pages", pages_of)
+    monkeypatch.setattr(Q, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(Q, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(Q, "ECHO_FILE", tmp_path / "none.json")
+    monkeypatch.setattr(Q.common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(Q, "registry_rows", lambda: REGISTRY)
+    import common
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    return lambda: json.loads((tmp_path / f"{Q.SOURCE_ID}.json").read_text())
+
+
+def test_runner_backfill_exit_tells_a_failed_read_from_unread_documents(tmp_path, monkeypatch, capsys):
+    # refresh 43995607963 (2026-11-17): the backfill read 189 overflows from 27 quarters with 8 months unread and
+    # exited 1, which failed the refresh and kept the history from being saved
+    out = _backfill_env(tmp_path, monkeypatch, lambda c: [SEP_2026])
+    assert Q.main(["--backfill"]) == 0
+    f = out()
+    assert f["ok"] is False and f["count"] >= 2 and f["meta"]["unread"]
+    assert "not read" in capsys.readouterr().err
+    # the hourly run on the same state keeps today's rule: unread months exit 1 (health false)
+    assert Q.main([]) == 1 and out()["ok"] is False
+
+
+def test_backfill_with_no_list_or_nothing_read_fails(tmp_path, monkeypatch):
+    _backfill_env(tmp_path, monkeypatch, lambda c: [SEP_2026], index_ok=False)
+    assert Q.main(["--backfill"]) == 1                                   # the list not read
+    out = _backfill_env(tmp_path / "x", monkeypatch, lambda c: ["a page in a layout this reader does not know " * 3])
+    (tmp_path / "x").mkdir()
+    assert Q.main(["--backfill"]) == 1                                   # every month unread: a changed layout
+    assert out()["ok"] is False and out()["count"] == 0
+
+
+def _blank_pdf(**enc) -> bytes:
+    pypdf = pytest.importorskip("pypdf")
+    pytest.importorskip("cryptography")
+    import io
+    w = pypdf.PdfWriter()
+    w.add_blank_page(width=200, height=200)
+    if enc:
+        w.encrypt(algorithm="AES-128", **enc)
+    b = io.BytesIO()
+    w.write(b)
+    return b.getvalue()
+
+
+def test_an_aes_report_with_an_empty_user_password_is_read():
+    # 2023Q2 is AES-128 encrypted with an empty user password; pypdf opens it only with the cryptography package
+    assert Q.pdf_pages(_blank_pdf(user_password="", owner_password="owner")) == [""]
+
+
+def test_a_report_that_needs_a_password_stays_unread():
+    with pytest.raises(Q.UnreadableReport, match="password"):
+        Q.pdf_pages(_blank_pdf(user_password="secret", owner_password="owner"))
 
 
 # ---------------------------------------------------------------- the status build's reading
