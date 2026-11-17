@@ -30,6 +30,13 @@ def rules_on(**over) -> dict:
     return r
 
 
+def rules_off() -> dict:
+    """The committed rules with the separate sewer switch off (the committed switch is on since 2026-11-16)."""
+    r = copy.deepcopy({"rain_likely": RULES["rain_likely"]})
+    r["rain_likely"]["separate_sewers"]["enabled"] = False
+    return r
+
+
 # ---------------------------------------------------------------- a synthetic record
 
 def rain_days() -> dict[date, float]:
@@ -62,7 +69,8 @@ def records(until=TODAY - timedelta(days=20)) -> list[dict]:
     for i, d in enumerate(d for d in DRY_DAYS[::3] if d <= until):                # blockages: on dry days
         out.append(rec(f"d{i}", "al-dry", d, water="dry-creek-al"))
     for i, d in enumerate(d for d in STORM_DAYS[::2] if d <= until):              # rain-driven, in a delayed state
-        out.append(rec(f"t{i}", "tx-wet", d, st="TX", water="tx-creek"))
+        # its state from its permit's prefix, as a real record carries it (no ingester writes a top-level state)
+        out.append(rec(f"t{i}", "tx-wet", d, st="TX", water="tx-creek", npdes_permit="TX0047431"))
     for i, d in enumerate(d for d in STORM_DAYS[::2] if d <= date(2025, 6, 1)):   # rain-driven until mid-2025, then none
         out.append(rec(f"g{i}", "al-gone", d, water="gone-creek-al"))
     for i, d in enumerate(d for d in STORM_DAYS[::2] if d <= until):              # rain-driven, but none for 4 months
@@ -118,9 +126,10 @@ def levels():
 
 # ---------------------------------------------------------------- the switch and the pinned test
 
-def test_rules_pin_the_assessments_test_with_the_switch_off_and_the_owners_words():
+def test_rules_pin_the_assessments_test_with_the_switch_on_and_the_owners_words():
     ss = RULES["rain_likely"]["separate_sewers"]
-    assert ss["enabled"] is False and "live_states" not in ss
+    assert ss["enabled"] is True and "live_states" not in ss      # switched on 2026-11-16, the day it was merged off
+    assert "switched on the same day" in ss["_enabled_rationale"] and "checked before its export is published" in ss["_enabled_rationale"]
     assert "Yes, build the rain caution for those 28 operators" in ss["_enabled_rationale"] and "28" in ss["_approved_note"]
     assert "2026-11-16" in ss["_enabled_rationale"] and "2026-11-16" in ss["_approved_note"]
     cfg = SS.settings(RULES)
@@ -134,7 +143,7 @@ def test_rules_pin_the_assessments_test_with_the_switch_off_and_the_owners_words
     for k in SS.DEFAULTS:
         if k not in ("enabled", "approved"):
             assert ss[k] == SS.DEFAULTS[k], k       # the code's defaults are the pinned values
-    assert not SS.enabled(RULES)
+    assert SS.enabled(RULES) and not SS.enabled(rules_off())
     public = json.dumps({k: v for k, v in ss.items() if not k.startswith("_")}).lower()
     assert "no risk" not in public and "safe" not in public
 
@@ -193,10 +202,13 @@ def test_a_state_not_graded_dated_reports_gets_nothing(levels):
     assert e["why_not"] == ['its state\'s reports grade "Dated reports, delayed", not "Dated reports"']
 
 
-def test_with_no_grades_on_file_nothing_qualifies():
+def test_with_no_grades_on_file_the_source_rule_decides_and_the_file_says_so():
+    """First run, 2026-11-16: with no grades on file every operator was turned off. Now the source rule (from the
+    events themselves) decides, the grade check is not made, and the file says the grades were missing."""
     d = built(grades={})
-    assert d["counts"]["qualify"] == 0
-    assert "the state's reporting grade is not on file yet" in d["operators"]["al-wet"]["why_not"]
+    assert d["state_grades_on_file"] is False
+    assert d["operators"]["al-wet"]["qualifies"] is True and d["operators"]["tx-wet"]["qualifies"] is True
+    assert not any("not on file" in w for e in d["operators"].values() for w in e["why_not"])
 
 
 def test_recency_a_repaired_system_drops_out(levels):
@@ -292,7 +304,8 @@ def test_trace_points_ask_for_a_stretch_from_each_river_report_point():
                    {"event_id": "e2", "point": [33.8402, -87.28], "water_slugs": ["town-creek-al"]},
                    {"event_id": "e3", "point": [30.6, -88.0], "water_slugs": ["mobile-bay-al"]},
                    {"event_id": "e4", "point": None, "water_slugs": ["town-creek-al"]}]}}}}
-    assert SS.trace_points(WATERS, {"rain_likely": RULES["rain_likely"]}, lv) == []          # switch off
+    assert SS.trace_points(WATERS, rules_off(), lv) == []          # switch off
+    assert SS.trace_points(WATERS, {"rain_likely": RULES["rain_likely"]}, lv) == []          # on, al-wet not approved
     pts = SS.trace_points(WATERS, rules_on(), lv)
     assert len(pts) == 1 and pts[0]["key"] == SS.trace_key("e1") and pts[0]["event_ids"] == ["e1", "e2"]
     assert pts[0]["water_slug"] == "town-creek-al"
@@ -303,7 +316,8 @@ def test_trace_points_ask_for_a_stretch_from_each_river_report_point():
 
 
 def test_live_points_only_with_the_switch_on(levels):
-    assert SS.live_points({"rain_likely": RULES["rain_likely"]}, levels) == []
+    assert SS.live_points(rules_off(), levels) == []
+    assert SS.live_points({"rain_likely": RULES["rain_likely"]}, levels) == []      # on, none of these approved
     pts = SS.live_points(rules_on(), levels)
     assert pts and {p["permit"] for p in pts} == {"sso:al-wet", "sso:al-stale", "sso:al-11", "sso:al-late"} and all(p["source"] == SS.POINT_SOURCE for p in pts)
 
@@ -399,8 +413,10 @@ def test_operators_that_fail_a_guard_get_nothing_and_say_why(levels):
     # a grade that has dropped since the daily pass: the hourly check leaves it out too
     by_water2, _, blk2 = run(levels, storm(range(0, 6), 1.2), grades={"AL": "Dated reports, delayed"})
     assert by_water2 == {} and blk2["operators"] == {} and "al-wet" in blk2["not_covered"]
-    by_water3, _, _ = run(levels, storm(range(0, 6), 1.2), grades=None if False else {})
-    assert by_water3 == {}
+    # no grades file (the first switched-on hour): the daily verdict stands and the block says the grades are missing
+    by_water3, _, blk3 = run(levels, storm(range(0, 6), 1.2), grades={})
+    assert by_water3 and set(blk3["operators"]) == set(blk["operators"])
+    assert any("no state grades file" in p for p in blk3["problems"])
 
 
 def test_with_the_switch_off_nothing_is_computed(levels):
@@ -593,13 +609,16 @@ def test_review_p2_6_the_batch_rule_reads_the_events_files(tmp_path, monkeypatch
 
 def test_review_p2_8_the_rules_export_carries_the_block_only_when_on():
     from export import build as X
-    off = X.live_rules(X.public_rules(RULES), {"AL"})
+    off_rules = {**copy.deepcopy(RULES), **rules_off()}
+    off = X.live_rules(X.public_rules(off_rules), {"AL"})
     assert "separate_sewers" not in off["rain_likely"]
     base = copy.deepcopy(RULES)
     del base["rain_likely"]["separate_sewers"]
     assert off == X.live_rules(X.public_rules(base), {"AL"})
     on = X.live_rules(X.public_rules(rules_on()), {"AL"})
     assert on["rain_likely"]["separate_sewers"]["enabled"] is True
+    committed = X.live_rules(X.public_rules(RULES), {"AL"})            # the committed rules: on since 2026-11-16
+    assert committed["rain_likely"]["separate_sewers"]["enabled"] is True
     assert not any(k.startswith("_") for k in on["rain_likely"]["separate_sewers"])
 
 

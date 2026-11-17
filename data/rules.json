@@ -712,8 +712,8 @@
    "system_changes": {}
   },
   "separate_sewers": {
-   "enabled": false,
-   "_enabled_rationale": "Owner, 2026-11-16: \"Yes, build the rain caution for those 28 operators.\" Built off; switched on by setting this to true once the first refresh's file (data/build/rain-levels-sso.json) has been checked. With it off nothing of this caution is read, computed or exported.",
+   "enabled": true,
+   "_enabled_rationale": "Owner, 2026-11-16: \"Yes, build the rain caution for those 28 operators.\" Built and merged off on 2026-11-16 and switched on the same day; the first refresh's file (data/build/rain-levels-sso.json) is checked before its export is published. With it off nothing of this caution is read, computed or exported.",
    "doc": "A separate sanitary sewer has no overflow outfall, but it can overflow in heavy rain at manholes and pump stations. For an operator whose own dated overflow reports show a strong link to rainfall, we show a caution while radar rain is heavy, on the stretches below the points where its past rain-driven reports were made, and nowhere else. The amounts come from its own record, by the same method as for combined sewers: possible from the smallest storm it ever reported an overflow after, likely only where it reported an overflow after at least half of the storms of a size. A reported overflow from the operator takes precedence over this caution. We compute it only for the operators named here, whose records show that link; heavy rain can cause overflows from any sewer system.",
    "source": "The operators' own dated sanitary sewer overflow reports, as the operators and state agencies publish them in the sources we read; NOAA MRMS daily rainfall totals from the Iowa Environmental Mesonet reanalysis point service; the live NOAA MRMS radar 24-hour total at the points of the operator's past rain-driven reports.",
    "_assessment": "Site repository docs/analysis/2026-11-16-sources-where-reports-lack.md section 6 (the test, the placement, the wording, the risks and their guards, the recommendation).",

@@ -1961,7 +1961,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     write_compact(OUT_DIR / "coverage.json", {"built": now_iso(), "status_now": st.get("now"), **cov})
     if rain_sso.enabled(status_mod.load_rules()):
         # each state's grade for the separate sewer caution's timeliness rule (build/rain_sso.py), pipeline state only
-        write_compact(rain_sso.GRADES_FILE, {"built": now_iso(), "states": rain_sso.grades_of(cov)})
+        rain_sso.write_grades(cov)
 
     # CSV downloads of the reports per water, operator and state, and all of them (export/csv.py,
     # docs/data-downloads.md). The same public records as above; a failure is logged and the export goes on.
