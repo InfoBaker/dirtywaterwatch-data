@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1722 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1725 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -40,7 +40,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | nm | 3 | 0 | 3 | 2 | 1 | 9 |
 | hi | 3 | 0 | 6 | 1 | 0 | 10 |
 | al | 5 | 0 | 6 | 2 | 0 | 13 |
-| tx | 5 | 0 | 7 | 1 | 0 | 13 |
+| tx | 8 | 0 | 7 | 1 | 0 | 16 |
 | ut | 4 | 0 | 3 | 2 | 1 | 10 |
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **632** | **232** | **548** | **229** | **81** | **1722** |
+| **all** | **635** | **232** | **548** | **229** | **81** | **1725** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1583,13 +1583,16 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `al-epa-sobe` | EPA SOBE (eRule) extract, Alabama rows | rejected | fetched | events | No Alabama rows. |
 | `al-hab-none` | Alabama freshwater cyanobacteria advisories | rejected | search_only | advisories | No program found. |
 
-## tx: Texas (13)
+## tx: Texas (16)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
 | `tx-30tac-319-302` | 30 TAC 319.302 Notification Requirements and 319.303 Notice to Local Officials and Local Media | used | fetched | law | The public-notice duty: media and local officials only, above 100,000 gallons (or 50,000 near water supplies). |
+| `tx-austin-water-spill-news` | Austin Water news releases on sanitary sewer overflows and wastewater spills | used | fetched | events | Read hourly by pipeline/ingest/tx_utility_spill_news.py (--site austin) from 2026-11-17: one record per spill release, by rule. Five releases read on 2026-11-17 (December 2024 to September 2026). |
 | `tx-dshs-shellfish-harvest-status` | Texas DSHS Status of Shellfish Harvesting Areas (status table) | used | fetched | advisories | Read by the tx-dshs-shellfish-harvest-status ingester (ingest.tx_dshs_shellfish): one shellfish_closure record per area listed Closed with rainfall, runoff, flooding, a spill, wastewater or sewage among DSHS's reasons, from the first read that lists it; closures for TPWD action alone (seasons, resource management) are left out, and an unknown reason is unread. Every closure is listed with DSHS's code and placed on no water. Table dated 11.16.2026: 28 areas, 4 closed with rainfall among the reasons (TX 14, TX 19, TX 20, TX 21), 16 closed for TPWD action only, 8 open. |
+| `tx-el-paso-water-spill-news` | El Paso Water news releases on wastewater spills and overflows | used | fetched | events | Read hourly by pipeline/ingest/tx_utility_spill_news.py (--site elpaso) from 2026-11-17: one record per spill release, by rule, in Mountain time. Eight spill releases and one update read on 2026-11-17 (March 2020 to May 2026). |
 | `tx-glo-beach-watch` | Texas General Land Office Texas Beach Watch (BW2025_Summary MapServer) | used | fetched | advisories | Read through the generic ArcGIS reader (data/sources/tx-glo-beach-watch.yaml): 174 stations on 2026-11-07 (Low 162, Medium 12, High 0); High is the program's advisory, Medium its label. |
+| `tx-saws-spill-notices` | San Antonio Water System sewer spill notices (news releases with TCEQ's spill notice form) | used | fetched | events | Read hourly by pipeline/ingest/tx_saws_spill_notices.py from 2026-11-17 (--backfill for the archive): one record per notice, timed by TCEQ's form. 19 notices read on 2026-11-17 (September 2019 to April 2026); 10 met a row of TCEQ's open data for the same spill, which is linked as the same event. |
 | `tx-tceq-sso-opendata` | TCEQ "Sanitary Sewer Overflows (SSO)" dataset on data.texas.gov (8kc5-95uk) | used | fetched | events | Read through the generic Socrata reader (data/sources/tx-tceq-sso-opendata.yaml): 56,545 rows on 2026-11-07, every one a record; safe fields only (customer_number, incident_action and incident_comment not requested); placed only by the water a row names, never geocoded. |
 | `tx-tceq-ud-sso-page` | TCEQ "Reporting Unauthorized Discharges and Sanitary Sewer Overflows" guidance page | used | fetched | law | Law and deadlines. |
 | `tx-bills-2025` | Texas 89th Legislature (2025) bills on overflow notice | watch | search_only | law | No change to the public duty found. |
