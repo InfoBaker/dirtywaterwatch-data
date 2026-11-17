@@ -1,0 +1,27 @@
+id: "tx-el-paso-water-spill-news"
+name: "El Paso Water news releases on wastewater spills and overflows"
+url: "https://www.epwater.org/about-us/newsroom"
+homepage: "https://www.epwater.org/about-us/newsroom"
+kind: "html"
+level: "utility"
+# Feed row: written by pipeline/ingest/tx_utility_spill_news.py --site elpaso (data/build/events/tx-el-paso-water-spill-news.json).
+# Built 2026-11-17: hourly; the newsroom's first 25 releases (--backfill reads ?show=all, every release since 2019). Read
+#   by the same rules as Austin Water's; Mountain time (America/Denver). A release saying the spill stayed on the
+#   plant's property or reached no waterway has raw.reached_water false. A title with "update" is a follow-up, not a
+#   new spill. Placed only on a named water (the Rio Grande); else listed with El Paso County. Quoted officials and the
+#   named division contact are never read into a record.
+#   Read 2026-11-17: 189 releases, eight spill releases and one update (March 2020 to May 2026); two met a TCEQ
+#   open-data row by day and plant (one with no volume in TCEQ's table). The newsroom answers GitHub's runner (probe
+#   43886270609).
+cadence: "1 hour"
+license: "none stated (public statements of a public utility)"
+attribution: "El Paso Water"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["TX"]
+access: ["html"]
+access_detail: "HTML list /about-us/newsroom (25 newest; ?show=all for every release); each card links /about-us/newsroom/<slug> with the title in the link's title attribute; release pages give 'Published on <Month D, YYYY>'. No feed."
+machine_readable: false
+legal_basis: "30 TAC 319.302-319.303 (notice to local officials and the local media within 24 hours of a large spill)"
+checked: "2026-11-17"

@@ -1,0 +1,26 @@
+id: "tx-austin-water-spill-news"
+name: "Austin Water news releases on sanitary sewer overflows and wastewater spills"
+url: "https://www.austintexas.gov/water/news"
+homepage: "https://www.austintexas.gov/water/news"
+kind: "html"
+level: "municipal"
+# Feed row: written by pipeline/ingest/tx_utility_spill_news.py --site austin (data/build/events/tx-austin-water-spill-news.json).
+# Built 2026-11-17: hourly; the first list page (--backfill reads ?page=0 to the last). A release whose title names a
+#   sewer overflow or wastewater spill is read by rule: the day it gives (a weekday without a date: the most recent one),
+#   the time it was discovered (raw.start_is_upper_bound) or occurred, the time it was stopped where the text gives one,
+#   the volume as written, a named creek it reached (not one it says the spill did not reach), the public advice quoted.
+#   Central time. Placed only on a named water; else listed with Travis County. No staff contact is read.
+#   Read 2026-11-17: six list pages, five releases (December 2024 to September 2026), one met a TCEQ open-data row.
+#   The list answers GitHub's runner (probe 43886270609).
+cadence: "1 hour"
+license: "none stated (City of Austin public statements)"
+attribution: "Austin Water, City of Austin"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["TX"]
+access: ["html"]
+access_detail: "HTML list /water/news?page=N (about ten items a page, 0-based); each release page gives 'Release Date: <Month D, YYYY>' and the text. No feed."
+machine_readable: false
+legal_basis: "30 TAC 319.302-319.303 (notice to local officials and the local media within 24 hours of a large spill)"
+checked: "2026-11-17"

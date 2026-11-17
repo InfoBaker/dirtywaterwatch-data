@@ -1,0 +1,31 @@
+id: "tx-saws-spill-notices"
+name: "San Antonio Water System sewer spill notices (news releases with TCEQ's spill notice form)"
+url: "https://www.saws.org/search/spill/feed/rss2/"
+homepage: "https://www.saws.org/"
+kind: "rss"
+level: "utility"
+# Feed row: written by pipeline/ingest/tx_saws_spill_notices.py (data/build/events/tx-saws-spill-notices.json).
+# Built 2026-11-17: hourly; the main feed (/feed/, ten newest posts) and the site search's feed for "spill" (first page;
+#   --backfill reads every page). A spill post links a PDF with the release and TCEQ's "Notice of Spill from a
+#   Wastewater Facility" (30 TAC 319.303): facility and permit, location, estimated time and date, estimated volume, area
+#   potentially affected, cause, precautions. One sso record per post; Central time; the form's time is the start
+#   (minute); no end. Volume as written ("Spill estimated >100,000 gallons": a bound, no figure). Placed only on the
+#   water the form names; an unnamed creek is listed with Bexar County. The form's contact line and the release's
+#   press contact are never read into a record. Linked to TCEQ's open-data row of the same spill (duplicate_of) when
+#   operator, day (within one) and volume agree: 10 of 19 notices of 2019-2026 met a row; 8 met none in the table.
+#   Read 2026-11-17: 19 notices (September 2019 to April 2026). The feed answers GitHub's runner (probe 43894348159).
+# Can fill: started_at (minute), published_at, volume_text, waterbody_text, outfall_name (street), advice_text (where the
+#   form's marks can be read), raw.cause, raw.state_permit
+# Cannot fill: ended_at (the form has none); a volume figure (SAWS gives a bound); coordinates
+cadence: "1 hour"
+license: "none stated (public statements of a public utility)"
+attribution: "San Antonio Water System"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["TX"]
+access: ["rss", "pdf"]
+access_detail: "WordPress RSS 2.0 with content:encoded; the search feed /search/spill/feed/rss2/?paged=N (ten posts a page, 404 past the last); each spill post links a PDF (apps.saws.org/latest_news/articles/<YYYYMMDD>_TCEQPublicNotice.pdf or wp-content/uploads)."
+machine_readable: false
+legal_basis: "30 TAC 319.302-319.303 (notice to local officials and the local media within 24 hours of a large spill)"
+checked: "2026-11-17"
