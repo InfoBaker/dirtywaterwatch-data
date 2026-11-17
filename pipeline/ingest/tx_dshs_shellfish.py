@@ -22,10 +22,12 @@ Which closures make records (the site's rule)
 Times (America/Chicago: the Texas coast lies in the Central zone; DSHS gives a day only)
   - DSHS gives no closure date. started_at is this site's first read that listed the closure (time_precision poll);
     the heading's date is DSHS's publication of the table (published_at, source_updated_at), never a start.
-  - End: a complete healthy read of a table with a new date in which the area is no longer closed for a reason taken
+  - End: a complete healthy read (every area of ROSTER listed, nothing unread) of a table dated after the one that
+    last listed the closure, in which the area is no longer closed for a reason taken
     (listed Open, or closed for a reason left out only, or gone from the table) ends it at that read (advisory_lifted,
-    raw.ended_at_precision poll, an upper bound; raw.end_seen_as). An area gone from a table with the same date is an
-    incomplete read (held, health false). raw._last_seen_in_source and raw._poll_confirmed: the colour runs to 14
+    raw.ended_at_precision poll, an upper bound; raw.end_seen_as). An area gone from, or changed in, a table with the
+    same date is an incomplete read (held, health false); a table dated before one already read, or after the read's
+    local day, fails the read. raw._last_seen_in_source and raw._poll_confirmed: the colour runs to 14
     days after the last read that listed the closure. A closure listed again after an end is a new record.
 
 Place: DSHS's harvest-area layer names its polygons by bay and class, not by the table's "TX" codes, so no area can be
@@ -64,6 +66,10 @@ HEADING = re.compile(r"<h2\b[^>]*>\s*Status of Shellfish Harvesting Areas\s+(?P<
 TABLE = re.compile(r"<table\b[^>]*>(?P<body>.*?)</table>", re.S | re.I)
 EXPECTED_HEAD = ["Harvest Area", "Public Harvest Area Status", "Private Oyster Area Status", "Reason for Status"]
 AREA = re.compile(r"^TX \d{1,2}[A-Z]?$")
+# the areas DSHS's table listed on 2026-11-16: a table missing any of them is not a complete read (Astra P1-3); an
+# area DSHS adds is read and listed in meta.new_areas
+ROSTER = frozenset(f"TX {n}" for n in (1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 24, 25, 26,
+                                       27, 29, 30, 32, 33, 34))
 STATUS = {"open": "open", "closed": "closed", "n/a": "n/a"}
 TAKEN = re.compile(r"^(?:high )?(?:rainfall|rain|runoff|rainfall and runoff|flooding|flood|freshwater inflow|"
                    r"(?:major )?spills?|sewage(?: spill)?|wastewater(?: treatment facility)?(?: failure)?|"
@@ -104,8 +110,8 @@ def parse(page: str, fetched: str | None = None) -> dict:
         raise ValueError("the table's date cannot be read") from None
     fetched_day = (datetime.fromisoformat(fetched.replace("Z", "+00:00")).astimezone(ZONE).date()
                    if fetched else date.today())
-    if updated > fetched_day + timedelta(days=1):
-        raise ValueError("the table's date is after the read")
+    if updated > fetched_day:
+        raise ValueError("the table's date is after the read's local day")
     after = page[hs[0].end():]
     t = TABLE.search(after)
     if not t or re.search(r"<h[1-6]\b", after[:t.start()], re.I):
@@ -145,7 +151,11 @@ def parse(page: str, fetched: str | None = None) -> dict:
         rows.append({"row": n, "area": area, "public_status": pub, "private_status": priv,
                      "reason": P.clean_text(reason)[0], "reasons_taken": taken, "reasons_left_out": left,
                      "kind": "closed" if closed and taken else "left_out" if closed else "open"})
-    return {"updated": updated.isoformat(), "rows": rows, "unread": unread}
+    present = {r["area"] for r in rows} | {u["area"] for u in unread if u.get("area")}
+    for a in sorted(ROSTER - present):
+        unread.append({"row": None, "area": a, "reason": "an area of DSHS's table is missing"})
+    return {"updated": updated.isoformat(), "rows": rows, "unread": unread,
+            "new_areas": sorted({r["area"] for r in rows} - ROSTER)}
 
 
 def key_of(area: str) -> str:
@@ -160,6 +170,10 @@ def saved_form(parsed: dict) -> str:
 def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], dict]:
     parsed = parse(page, fetched)
     unread = list(parsed["unread"])
+    held_dates = [(p.get("raw") or {}).get("table_updated") for p in previous if p.get("status") == "advisory_active"]
+    if any(d and parsed["updated"] < d for d in held_dates):
+        # an older table than one already read (a cached copy): never read as the current state (Astra P1-2)
+        raise ValueError("the table is dated before a table already read")
     open_prev = {}
     for p in previous:
         raw = p.get("raw") or {}
@@ -202,6 +216,14 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
             advice_text=(f"Shellfish harvest closure (Texas DSHS): area {row['area']}, closed to {which}. DSHS's "
                          f"reason: {row['reason']}. DSHS's table dated {parsed['updated']}."))
     listed_any = {key_of(r["area"]) for r in parsed["rows"]}
+    for p in previous:
+        raw = p.get("raw") or {}
+        if p.get("status") == "advisory_active" and raw.get("area_key") in listed_any \
+                and raw.get("area_key") not in {key_of(r["area"]) for r in parsed["rows"] if r["kind"] == "closed"} \
+                and raw.get("table_updated") == parsed["updated"]:
+            # the row changed under the same date: only a newly dated table ends a closure (Astra P1-2)
+            unread.append({"row": None, "area": raw.get("area_code"),
+                           "reason": "a closed area's row changed in a table with the same date"})
     unread_keys = {key_of(u["area"]) for u in unread if u.get("area")}
     for p in previous:
         raw = p.get("raw") or {}
@@ -240,6 +262,7 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
                          "rule": "closed only for TPWD action (a season or resource management) or a harmful algal "
                                  "bloom: no sign of sewage or runoff, not a record"},
             "open": sum(1 for r in parsed["rows"] if r["kind"] == "open"), "unread": unread, "opened": opened,
+            "new_areas": parsed["new_areas"],
             "lifted_this_read": lifted, "held_unread": held, "kept_from_previous": kept - lifted - held,
             "advisory_active": sum(1 for r in out if r["status"] == "advisory_active"),
             "cadence": "page read every run; DSHS dates the table each time it changes",
