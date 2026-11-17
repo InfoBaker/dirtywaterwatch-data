@@ -79,11 +79,16 @@ def test_the_great_lakes_are_shoreline_lakes_by_their_identifiers_and_small_name
     # New York's 0.7 km2 "Lake Superior" (Q35734889) is a pond, not the lake
     assert not SH.is_shoreline({"kind": "lake", "name": "Lake Superior", "wikidata": "Q35734889",
                                 "area_km2": 0.728}, SHORE)
-    # Lake Champlain stays a whole-water lake until min_area_km2 is set; a river named for a lake never is one
+    # Lake Champlain is a whole-water lake while min_area_km2 is null and a shoreline lake by size once it is set (the
+    # committed file sets 50: the lake switch of 2026-11-16), never by the Great Lakes' entries; a river named for a
+    # lake never is one
     champlain = {"kind": "lake", "name": "Lake Champlain", "wikidata": "Q68467", "area_km2": 1180.974}
-    assert not SH.is_shoreline(champlain, SHORE)
-    assert SH.is_shoreline(champlain, {**SHORE, "min_area_km2": 1000})
+    off = {**SHORE, "min_area_km2": None}
+    assert not SH.is_shoreline(champlain, off)
+    assert SH.is_shoreline(champlain, {**off, "min_area_km2": 1000})
+    assert SH.is_size_rule(champlain, SHORE) and SHORE["min_area_km2"] == 50
     assert not SH.is_shoreline({"kind": "river", "name": "Lake Erie", "wikidata": "Q5492"}, SHORE)
+    assert not SH.is_shoreline({"kind": "river", "name": "Lake Erie", "wikidata": "Q5492"}, off)
 
 
 def test_the_rule_in_rules_json_has_its_numbers_rationale_and_source():
@@ -91,7 +96,8 @@ def test_the_rule_in_rules_json_has_its_numbers_rationale_and_source():
     # 20 km each way: the evidence (Milwaukee 2 to 5 km for indicators, 8 km for human markers, the Chicago backflows
     # along the city's whole shore), not the 40 km river cap applied both ways
     assert r["each_way_km"] == 20 and RULES_FILE["reach"]["cap_km"] == 40
-    assert r["min_area_km2"] is None
+    # the size rule's switch for lakes and reservoirs (tests/test_shoreline_size_rule.py reads what it publishes)
+    assert r["min_area_km2"] == 50 and r["min_mean_width_km"] == 1.5 and r["narrow_min_length_km"] == 40
     assert [e["name"] for e in r["lakes"]] == ["Lake Superior", "Lake Michigan", "Lake Huron", "Lake Erie",
                                                "Lake Ontario", "Lake St. Clair", "Puget Sound", "San Francisco Bay"]
     # a lake added beyond the five carries its own reason, in the public voice (as do Puget Sound and San Francisco
@@ -171,9 +177,11 @@ def test_lake_outfalls_are_shoreline_candidates_plants_included_and_ponds_are_st
     assert "model" not in c[f"{PERMIT}-004"]
     assert skipped[f"{PERMIT}-002"]["why"] == "no_location"
     assert skipped[f"{PERMIT}-003"]["why"] == "not_river"
-    # with the rule's lake list empty, the Great Lake outfall is skipped as before
+    # with the rule's lake list empty and the size rule off, the Great Lake outfall is skipped as before (with the
+    # size rule on, a 26,000 km2 lake is a shoreline water by its size alone)
     skipped = {}
-    c = R.candidate_outfalls(WATERS, rows, {"PA"}, skipped, set(), plants=False, shore={**SHORE, "lakes": []})
+    c = R.candidate_outfalls(WATERS, rows, {"PA"}, skipped, set(), plants=False,
+                             shore={**SHORE, "lakes": [], "min_area_km2": None})
     assert [x["key"] for x in c] == [f"{PERMIT}-004"] and skipped[f"{PERMIT}-001"]["why"] == "not_river"
 
 
