@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1727 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1728 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -44,7 +44,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ut | 4 | 0 | 3 | 2 | 1 | 10 |
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
-| tn | 5 | 2 | 3 | 1 | 0 | 11 |
+| tn | 6 | 2 | 3 | 1 | 0 | 12 |
 | oh | 15 | 2 | 8 | 1 | 1 | 27 |
 | mn | 7 | 0 | 6 | 4 | 1 | 18 |
 | nd | 6 | 0 | 7 | 1 | 1 | 15 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **637** | **232** | **548** | **229** | **81** | **1727** |
+| **all** | **638** | **232** | **548** | **229** | **81** | **1728** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1656,12 +1656,13 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ky-dep-ert-incidents` | Kentucky DEP Environmental Response Team incident records | rejected | search_only | events | No public web output; records request only. |
 | `ky-orsanco-bacteria` | ORSANCO contact recreation bacteria monitoring (Ohio River: Louisville and others) | unreachable | search_only | monitoring | Bot wall; shared with WV. |
 
-## tn: Tennessee (11)
+## tn: Tennessee (12)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
 | `tn-kub-sso-log` | Knoxville Utilities Board, SSO Logs | used | fetched | events | Read hourly by pipeline/ingest/tn_kub_sso_log.py from 2026-11-17 (the previous and current month; --backfill to 2023-01-01): one dated record per row with its time, street and gallons, listed in Knox County and placed on no water. Status and Completion are the cleanup's, never the end of the overflow. A record of the same day and street as a TDEC Events Report record of a KUB permit is its duplicate. |
 | `tn-law-0400-40-05-07` | Tenn. Comp. R. & Regs. 0400-40-05-.07 (permit terms: bypass, SSO prohibition, 24-hour reporting) | used | fetched | law | Regulator report within 24 hours, written within five days; no public notice. |
+| `tn-memphis-cd-quarterly` | City of Memphis, consent-decree quarterly SSO reports | used | fetched | events | Read hourly by pipeline/ingest/tn_memphis_cd_quarterly.py from 2026-11-17 (the index and the newest two reports; --backfill from 2023 Q1): one record per row with its date and time, street, gallons and estimated duration; placed only on the stream the row names, otherwise on no water, with the City's footnote on whether a water was reached. 652 rows from 14 reports on 2026-11-17; 31 rows in layouts not read are named in meta. |
 | `tn-tdec-bacteriological-advisories` | TDEC Bacteriological and Fishing Advisories | used | fetched | advisories | Read by ingest/tn_tdec_posted_streams.py: the posted-streams PDF's bacteriological table, 25 segments (Rev. August 2026), 21 naming sewer systems, as TDEC's standing water-contact advisories; no posting gives a date. |
 | `tn-tdec-events-report` | TDEC Division of Water Resources Events Report (sewer overflows, releases, bypasses, upsets, washouts) | used | fetched | events | Read through the generic CSV reader (data/sources/tn-tdec-events-report.yaml): Tennessee's statewide table of every SSO, release, bypass, upset and washout since 2020, day precision, no receiving water, no CSO events. On 2026-11-07 the host answered 403 to the pipeline's identified client; the feed retries each run. |
 | `tn-tdec-hab-advisory-status` | TDEC HAB Advisory Status (Survey123 layer behind the Tennessee HAB Dashboard) | used | fetched | advisories | Read through the generic ArcGIS reader (data/sources/tn-tdec-hab-advisory-status.yaml), advisory fields only: 71 bloom reports, 21 TDEC advisories with their dates (2026-11-07); the reporters' names, phones and emails are never requested. |

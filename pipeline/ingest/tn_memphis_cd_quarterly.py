@@ -61,6 +61,7 @@ import html as htmllib
 import io
 import re
 import sys
+import unicodedata
 from collections import Counter
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -96,12 +97,19 @@ DATE = r"\d{1,2}/\d{1,2}/(?:\d{4}|\d{2})"
 DATE_IN_LINE = re.compile(rf"(?<![\d/]){DATE}(?![\d/])")
 NUM = r"\d[\d,]*(?:\.\d+)?"
 ROW = re.compile(
-    rf"^(?P<loc>.*?)\s*(?P<date>{DATE})\s+(?:(?P<time>\d{{1,2}}:\s*\d{{2}})\s*(?P<ampm>[AP]\.?M\.?)?)?\s*"
+    rf"^(?P<loc>.*?)\s*(?P<date>{DATE})(?:,\s*|\s+)(?:(?P<time>\d{{1,2}}:\s*\d{{2}})(?::\d{{2}})?\s*(?P<ampm>[AP]\.?M\.?)?)?\s*"
     rf"(?P<cause>[^\d\s].*?)\s+(?P<vol>{NUM}|UNKNOWN|UNK|N/?A)\s+(?P<src>\S.*?)\s+(?P<dur>{NUM})"
-    r"(?:\s+(?:(?P<mark>\*\*|\*|\?|†)|(?P<water>\S.*?)\s+(?P<f1>YES|NO)\s+(?P<f2>YES|NO)\s+(?P<f3>YES|NO)))?\s*$",
-    re.I)
+    r"(?:\s+(?P<tail>(?!\d)\S.*?))?\s*$", re.I)
+MARKS = r"(?:\*\*|\*|\?|†)"
+FLAGS = r"(?:YES|NO)(?:\s+(?:YES|NO)){0,2}"
+# what may follow the duration: a footnote mark (with YES/NO flags in some rows), or a receiving stream followed by
+# one to three YES/NO flags (and a mark in some rows). Anything else (the next row's address printed on this line, a
+# stream with no flag) makes the row not read: a stream is taken only where the flags close it.
+TAIL_MARK = re.compile(rf"^(?:(?P<mark>{MARKS})(?:\s+(?P<flags>{FLAGS}))?|(?P<flags_only>{FLAGS}))$", re.I)
+TAIL_WATER = re.compile(rf"^(?P<water>[^?*†\d][^\d]*?)\s+(?P<flags>{FLAGS})(?:\s+(?P<mark>{MARKS}))?$", re.I)
 MARK_LINE = re.compile(r"^\s*(\*\*|\*|\?|†)\s+(\S.*)$")
 SIGNED = re.compile(r"(?<![\d/])(\d{1,2}/\d{1,2}/\d{4})(?![\d/])")
+SUITE = re.compile(r"\b(?:STE|SUITE|APT|UNIT|BLDG)\.?\s*#?\s*[\w-]+", re.I)
 UPLOAD = re.compile(r"/uploads/(\d{4})/(\d{2})/")
 
 
@@ -140,7 +148,14 @@ def pdf_pages(content: bytes) -> list[str]:
 
 
 def _clean(s: str) -> str:
-    return " ".join((s or "").replace("‐", "-").replace(" ", " ").split())
+    """Spaces made plain, and the reports' font ligatures ('loca\u019fons' for 'locations') read as letters."""
+    s = unicodedata.normalize("NFKC", s or "").replace("\u019f", "ti").replace("\u2010", "-")
+    return " ".join(s.split())
+
+
+def location(cell: str) -> str | None:
+    """The Location - Address cell with the house number and any suite or unit number removed."""
+    return street_only(SUITE.sub(" ", _clean(cell)))
 
 
 def signed_date(pages: list[str]) -> str | None:
@@ -212,8 +227,13 @@ def parse_report(pages: list[str]) -> dict:
     rows, bad = [], 0
     raw_rows = join_rows(lines)
     for s in raw_rows:
-        m = ROW.match(s)
-        if not m:
+        m = ROW.match(re.sub(r"(\d)([?*†])", r"\1 \2", s))
+        tail = (m.group("tail") or "").strip() if m else ""
+        t_m = TAIL_MARK.match(tail) or TAIL_WATER.match(tail) if tail else None
+        # a row holding two events (a second date, a second volume in the Source cell) is not read: which figure
+        # goes with which date is not known
+        if not m or (tail and not t_m) or DATE_IN_LINE.search(m.group("loc") + " " + m.group("cause")) \
+                or re.search(r"\b\d{3,}\b|\d\.\d", m.group("src")):
             bad += 1
             continue
         try:
@@ -221,14 +241,15 @@ def parse_report(pages: list[str]) -> dict:
         except ValueError:
             bad += 1
             continue
+        g = t_m.groupdict() if t_m else {}
         t = (m.group("time") or "").replace(" ", "")
         row = {"date": d.isoformat(), "time": t or None,
                "ampm": (m.group("ampm") or "").replace(".", "").upper() or None,
-               "location": street_only(m.group("loc")) or None,
+               "location": location(m.group("loc")) if m.group("loc").strip() else None,
                "cause": _clean(m.group("cause")).upper(), "volume": m.group("vol"), "source": _clean(m.group("src")),
-               "duration": m.group("dur"), "mark": m.group("mark"),
-               "water": _clean(m.group("water")) or None,
-               "flags": [m.group(k).upper() for k in ("f1", "f2", "f3")] if m.group("f1") else None}
+               "duration": m.group("dur"), "mark": g.get("mark"),
+               "water": _clean(g.get("water") or "") or None,
+               "flags": (g.get("flags") or g.get("flags_only") or "").upper().split() or None}
         rows.append(row)
     if not rows:
         raise ReadError(f"the SSO table's {len(raw_rows)} lines read as no row")
@@ -247,10 +268,12 @@ def _start(r: dict, ampm_report: bool) -> tuple[datetime, str, str | None]:
         if r.get("ampm") and 1 <= h <= 12 and mi < 60:
             h = h % 12 + (12 if r["ampm"] == "PM" else 0)
             return datetime(d.year, d.month, d.day, h, mi, tzinfo=TZ), "minute", None
-        if not r.get("ampm") and not ampm_report and 0 <= h < 24 and mi < 60:
+        if not r.get("ampm") and not ampm_report and 0 <= h < 24 and mi < 60 and (h, mi) != (0, 0):
             return datetime(d.year, d.month, d.day, h, mi, tzinfo=TZ), "minute", None
         note = (f"the time is written '{t}' with no AM or PM in a report that writes AM and PM: the record is dated to "
-                "the day" if ampm_report else f"the time '{t}' is not a clock time: the record is dated to the day")
+                "the day" if ampm_report else f"the time is written '{t}', which the table may use for no time: the record "
+                "is dated to the day" if (h, mi) == (0, 0) else f"the time '{t}' is not a clock time: the record is dated "
+                "to the day")
         return datetime(d.year, d.month, d.day, tzinfo=TZ), "day", note
     return datetime(d.year, d.month, d.day, tzinfo=TZ), "day", "the row gives no time: the record is dated to the day"
 
@@ -287,7 +310,10 @@ def to_records(quarter: str, rep: dict) -> list[dict]:
             raw["time_note"] = tnote
         if r.get("water"):
             raw["receiving_water_as_written"] = r["water"]
-            raw["unpermitted_discharge"], raw["appendix_g_area"], raw["third_flag"] = r.get("flags") or [None] * 3
+            raw["flags_as_written"] = r.get("flags")      # Unpermitted Discharge, Appendix G Area, the third column
+        if not r.get("location"):
+            raw["place_note"] = ("the row's Location - Address cell is printed apart from its date in the report's text "
+                                 "and is not tied to this row; the record gives no location")
         if r.get("mark"):
             raw["reach_mark"] = r["mark"]
             note = (rep.get("notes") or {}).get(r["mark"])
@@ -305,7 +331,8 @@ def to_records(quarter: str, rep: dict) -> list[dict]:
         except ValueError:
             hours = 0.0
         if hours > 0:
-            e, basis = end_after(st, timedelta(hours=hours), prec)
+            # a fractional hour is rounded up to the whole minute, so the end is never earlier than the report allows
+            e, basis = end_after(st, timedelta(minutes=-(-hours * 60 // 1)), prec)
             end, status = e.isoformat(), "ended"
             raw["ended_at_basis"] = f"{basis} (the report's estimated duration, {dur} hours)"
         vol = (r.get("volume") or "").replace(",", "")
@@ -321,7 +348,7 @@ def to_records(quarter: str, rep: dict) -> list[dict]:
             reported_at=None, published_at=rep.get("signed"), source_updated_at=None,
             fetched_at=rep.get("read_at") or now_iso(),
             material="untreated sewage", volume_gal=gal,
-            volume_text=f"{gal:,} gallons (estimated)" if gal is not None else None,
+            volume_text=f"{r.get('volume')} gallons (estimated)" if gal is not None else None,
             estimate_flag="estimated", authority=AUTHORITY, source_url=url, raw=raw))
     return out
 
@@ -330,6 +357,8 @@ def link_tdec(records: list[dict], tdec: list[dict]) -> Counter:
     """Mark a record duplicate_of TDEC's record of a Memphis permit that began the same local day at the same street;
     none where either side has two of that day and street (tn_kub_sso_log.link_tdec)."""
     def day(v):
+        if isinstance(v, str) and len(v) == 10:
+            return date.fromisoformat(v)            # a date with no time is that day, in no zone
         try:
             return datetime.fromisoformat(str(v).replace("Z", "+00:00")).astimezone(TZ).date()
         except (TypeError, ValueError):

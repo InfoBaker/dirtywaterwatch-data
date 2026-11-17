@@ -1,0 +1,36 @@
+id: "tn-memphis-cd-quarterly"
+name: "City of Memphis, consent-decree quarterly SSO reports"
+url: "https://sarp10.com/reports/"
+homepage: "https://sarp10.com/reports/"
+kind: "pdf"
+level: "municipal"
+# Feed row: written by pipeline/ingest/tn_memphis_cd_quarterly.py (data/build/events/tn-memphis-cd-quarterly.json).
+# Built 2026-11-17: hourly. The City's consent-decree program site lists "City of Memphis Quarterly Report- <first day>
+#   - <last day>" PDFs under "Quarterly Reports - SSO Reports" (2016 on; 2023 Q1 to 2026 Q2 on 2026-11-17, Q3 2026 not
+#   yet posted). Each report "summarizes all SSO events" of the quarter (Section VIII.24 of the 2012 consent decree):
+#   one table row per overflow with Location - Address, Date and Time, Cause, Estimated Volume (gallons), Source,
+#   Duration (Hours), Receiving stream (if any) and three YES/NO columns, or a footnote mark (?, *, **, †) whose note
+#   says what the City believes about whether a water was reached. The hourly run reads the index and the newest two
+#   reports not yet read; --backfill reads every report from 2023 (14 reports, 652 rows read on 2026-11-17, 31 rows
+#   in layouts not read: two events in one row, an address printed on the row above; named in meta).
+# Times: Memphis (Central time), to the minute; a time with no AM or PM in a report that writes AM and PM, and a
+#   24-hour "0:00", are dated to the day. The end is the start plus the row's estimated duration (the City's figure).
+# Publication: the date written on the certification page, when filled in (blank on Q2 2026); fetch time kept apart.
+# Place: the receiving stream as written, placed only by the matcher on the water it names; a row with no stream
+#   names no water and is placed on none; the footnote's words are kept. No point is taken from the street.
+# One event, one record: Memphis's overflows are absent from TDEC's Events Report; a record of the same day and street
+#   as a TDEC record of a Memphis permit would be its duplicate (none on 2026-11-17).
+# Privacy: the location is a street address, often a home: house, suite and unit numbers are removed. The certification
+#   page's official's name and signature are never read into a record; the PDFs are not saved.
+cadence: "1 hour"
+license: "none stated"
+attribution: "City of Memphis"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["TN"]
+access: ["pdf"]
+access_detail: "HTML index https://sarp10.com/reports/ (200 to this build's client; 200 to GitHub's runner, probe 43885170112) linking one PDF per quarter under /wp-content/uploads/<YYYY>/<MM>/; the SSO table is a rotated landscape page read as plain text with pypdf."
+machine_readable: false
+legal_basis: "Consent decree, United States and State of Tennessee v. City of Memphis (W.D. Tenn., 2012), Section VIII.24 (quarterly report to EPA and TDEC)"
+checked: "2026-11-17"
