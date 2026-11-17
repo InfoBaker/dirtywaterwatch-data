@@ -91,6 +91,8 @@ TZ = ZoneInfo("America/New_York")
 LIVE_URL = "https://dirtywaterwatch.org/api/live"
 WRANGLER_DIR = ROOT / "worker"
 WRANGLER = WRANGLER_DIR / "node_modules" / ".bin" / "wrangler"
+# every call goes through the filter that keeps the token's account name and e-mail addresses out of the log
+WRANGLER_REDACT = ROOT / "scripts" / "wrangler_redact.py"
 D1_DATABASE = "dirtywaterwatch"
 WORKER_POLL_MIN = 5
 OBS_STATES = ("active", "ended", "absent")
@@ -476,9 +478,10 @@ def read_worker_d1(since: str | None) -> tuple[dict | None, str | None]:
            f"SELECT event_id, fetched_at, record FROM event_revision WHERE event_id LIKE '{SOURCE_ID}:%'"
            + (f" AND fetched_at > '{since}'" if since else "") + " ORDER BY fetched_at")
     try:
-        p = subprocess.run([str(WRANGLER), "d1", "execute", D1_DATABASE, "--remote", "--json", "--command", sql],
+        p = subprocess.run([sys.executable, "-I", str(WRANGLER_REDACT), "d1", "execute", D1_DATABASE, "--remote",
+                            "--json", "--command", sql],
                            cwd=WRANGLER_DIR, capture_output=True, text=True, timeout=120, stdin=subprocess.DEVNULL,
-                           env={**os.environ, "WRANGLER_SEND_METRICS": "false"})
+                           env={**os.environ, "WRANGLER_SEND_METRICS": "false", "WRANGLER_REAL": str(WRANGLER)})
     except (OSError, subprocess.TimeoutExpired) as e:
         return None, f"wrangler: {e}"
     out = p.stdout or ""

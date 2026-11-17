@@ -54,6 +54,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 from collections import Counter, defaultdict
@@ -70,6 +71,7 @@ from ingest.mail.message import outfall_number, parse_iso, parse_mail, verified
 LISTS_FILE = DATA_DIR / "mail-lists.json"
 INDEX_FILE = BUILD_DIR / "inbound-mail.json"
 D1_DATABASE = "dirtywaterwatch"
+WRANGLER_REDACT = Path(__file__).resolve().parents[2] / "scripts" / "wrangler_redact.py"
 D1_DATABASE_ID = "4231c50f-6207-4297-89d3-d4224b7cbb91"     # site repository worker-mail/wrangler.jsonc
 RAW_BUCKET = "dirtywaterwatch-raw"
 API = "https://api.cloudflare.com/client/v4"
@@ -128,7 +130,10 @@ class WranglerTransport:
         self.bin = os.environ.get("WRANGLER") or "wrangler"
 
     def _run(self, args: list[str], timeout: int = 120) -> subprocess.CompletedProcess:
-        return subprocess.run([self.bin, *args], cwd=self.cwd, capture_output=True, timeout=timeout)
+        # through the filter that keeps the token's account name and e-mail addresses out of any log; the --json and
+        # --pipe output a caller reads passes byte for byte when wrangler succeeds (scripts/wrangler_redact.py)
+        return subprocess.run([sys.executable, "-I", str(WRANGLER_REDACT), *args], cwd=self.cwd, capture_output=True,
+                              timeout=timeout, env={**os.environ, "WRANGLER_REAL": shutil.which(self.bin) or self.bin})
 
     def rows(self) -> list[dict]:
         p = self._run(["d1", "execute", D1_DATABASE, "--remote", "--json", "--command", ROWS_SQL])
