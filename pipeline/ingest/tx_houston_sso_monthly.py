@@ -107,7 +107,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 import common
-from common import BUILD_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
+from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
 from ingest.al_jefferson_county_soa import street_key
 
 SOURCE_ID = "tx-houston-sso-monthly"
@@ -133,20 +133,22 @@ LINK = re.compile(r"""<a\s[^>]*href=["']([^"']+\.pdf)["'][^>]*>(.*?)</a>""", re.
 TITLE = re.compile(rf"Monthly\s+SSO\s+Report\s*[-‐‑–—]\s*({'|'.join(MONTHS)})\s+(\d{{4}})\b", re.I)
 HEADER = re.compile(r"SSO\s*ID\s+TPDES")
 HEADER_END = re.compile(r"Corrective\s+Action\s*$")
-FOOTER = re.compile(r"^Docu[Ss]ign\s+Envelope\s+ID:", re.I)
-TOTALS_START = re.compile(r"^(?:Total\s+Number\s+of|Number\s+of\s+(?:Fish|Notif)|TWC\s*§|Additional\s+Comments)", re.I)
+# the page footers: the signing envelope's id, and the City's "Additional Comments" (on every table page in 2026)
+FOOTER = re.compile(r"^(?:Docu[Ss]ign\s+Envelope\s+ID:|Additional\s+Comments:)", re.I)
+TOTALS_START = re.compile(r"^(?:Total\s+Number\s+of|Number\s+of\s+(?:Fish|Notif)|TWC\s*§)", re.I)
 TOTAL = re.compile(r"Total\s+Number\s+of\s+SSOs\s*:\s*(\d+)", re.I)
 BARE_VALUE = re.compile(r"^(?:\d+\*?|Yes|No)$")
-PERMIT = r"WQ\s?\d{10}|\d{5}\s?-\s?\d{3}|NON-COH\s*\(\s*\d{5}\s*-\s*\d{3}\s*\)?|#N/A"
-ROW_START = re.compile(rf"^\d{{4,6}}\s+(?:{PERMIT})")
-ID_ONLY = re.compile(r"^\d{4,6}$")
+PERMIT = r"WQ\s?\d{10}|\d{5}\s?-\s?\d{2,3}\b|NON-COH\s*\(\s*\d{5}\s*-\s*\d{3}\s*\)?|#N/A"
+# a row starts with its SSO ID and its permit, or (a blank permit cell, February 2025) its ID and the address's house
+# number ("62541 1234 PANNELL ST"); a line that is an address alone ("12345 MAIN ST", an address cell wrapped) is not one
+ROW_START = re.compile(rf"^\d{{5,6}}\s+(?:{PERMIT}|\d+[A-Z]?\s+[A-Z])")
+ID_ONLY = re.compile(r"^\d{5,6}$")
 PERMIT_LINE = re.compile(rf"^(?:{PERMIT}|NON-COH\b)")
 DATE = r"\d{1,2}\s?/\s?\d{1,2}\s?/\s?\d{4}"
 TIME = r"\d{1,2}\s?:\s?\d{2}(?:\s?:\s?\d{2})?(?:\s?[AP]\s?M)?"
-ROW = re.compile(
-    rf"^(?P<id>\d{{4,6}})\s+(?P<permit>{PERMIT})\s*(?P<af>.*?)\s+(?P<flag>Y\s?e\s?s|N\s?o)\s+(?P<vol>\d[\d,]*(?:\.\d+)?)\s+"
-    rf"(?P<sc>\S.*?)\s+(?P<sd>{DATE})\s+(?P<st>{TIME})\s+(?P<ed>{DATE})\s+(?P<et>{TIME})\s*"
-    r"(?P<gpm>\d[\d,]*(?:\.\d+)?)?\s*(?P<act>\D.*)?$")
+ROW_TAIL = (rf"(?P<vol>\d[\d,]*(?:\.\d+)?)\s+(?P<sc>\S.*?)\s+(?P<sd>{DATE})\s+(?P<st>{TIME})\s+(?P<ed>{DATE})\s+"
+            rf"(?P<et>{TIME})\s*(?P<gpm>\d[\d,]*(?:\.\d+)?)?\s*(?P<act>\D.*)?$")
+ROW = re.compile(rf"^(?P<id>\d{{5,6}})\s+(?:(?P<permit>{PERMIT})\s*)?(?P<af>\S.*?)\s+(?P<flag>Y\s?e\s?s|N\s?o)\s+{ROW_TAIL}")
 # the City's flow locations (every one read in 2024-2026), longest first; matched with any spacing
 FLOWS = ["Contained On Site, not within 5 ft. of Bayou/Surface Water/Drainage Ditch",
          "Within 5 ft. of Bayou/Surface Water/Drainage Ditch", "Bayou/surface water/drainage ditch",
@@ -230,6 +232,11 @@ def _loose(text: str) -> re.Pattern:
 
 
 FLOW_RES = [(f, re.compile(rf"(?:^|\s){_loose(f).pattern}$", re.I)) for f in FLOWS]
+# a row whose "Reached Waters of the US" cell is blank (May 2026): read only when a flow location of the list closes
+# the address, so the volume is never taken from the address
+ROW_NO_FLAG = re.compile(rf"^(?P<id>\d{{5,6}})\s+(?:(?P<permit>{PERMIT})\s*)?(?P<af>\S.*?(?:\s|^)"
+                         rf"(?:{'|'.join(_loose(f).pattern for f in FLOWS)}))\s+{ROW_TAIL}", re.I)
+DATES = re.compile(DATE)
 STRUCTURE_RES = [(s, re.compile(rf"^{_loose(s).pattern}(?=\s|$)", re.I)) for s in STRUCTURES]
 
 
@@ -247,15 +254,16 @@ def street_of(cell: str | None) -> str | None:
     return s or None
 
 
-def permit_of(cell: str) -> tuple[str | None, bool]:
-    """(the TPDES permit as WQ00NNNNNNNN or None, whether the City marks the system as not its own)."""
-    c = re.sub(r"\s", "", cell)
+def permit_of(cell: str | None) -> tuple[str | None, bool]:
+    """(the TPDES permit as WQ00NNNNNNNN or None, whether the City marks the system as not its own). "10495-02" (two
+    rows of February 2025) is read as 10495-002, the number with its leading zero."""
+    c = re.sub(r"\s", "", cell or "")
     m = re.fullmatch(r"WQ(\d{10})", c)
     if m:
         return f"WQ{m.group(1)}", False
-    m = re.search(r"(\d{5})-(\d{3})", c)
+    m = re.search(r"(\d{5})-(\d{2,3})(?!\d)", c)
     if m:
-        return f"WQ00{m.group(1)}{m.group(2)}", c.upper().startswith("NON-COH")
+        return f"WQ00{m.group(1)}{int(m.group(2)):03d}", c.upper().startswith("NON-COH")
     return None, c.upper().startswith("NON-COH")
 
 
@@ -374,8 +382,9 @@ def totals(block: list[str], lines: list[str]) -> tuple[int | None, list[str]]:
     return None, lines
 
 
-def city_notes(block: list[str]) -> dict:
-    """The City's notes under the table: voided SSOs, SSOs given one public notification, its note on '0'."""
+def city_notes(block: list[str], pages_text: str = "") -> dict:
+    """The City's notes under the table: voided SSOs, SSOs given one public notification; and its note on '0' (in the
+    "Additional Comments" footer of the table pages)."""
     text = " ".join(block)
     out: dict = {"voided": {}, "one_notice": {}, "zero_note": None, "public_notifications": None}
     for m in VOID.finditer(text):
@@ -385,7 +394,7 @@ def city_notes(block: list[str]) -> dict:
     for m in ONE_NOTICE.finditer(text):
         for i in re.findall(r"\d{4,6}", m.group(1)):
             out["one_notice"][i] = common.scrub_text(" ".join(m.group(0).split())) + "."
-    if re.search(r"evidence\s+of\s+an\s+SSO\s+was\s+obser\s?ved\s+but\s+no\s+active\s+overflow", text, re.I):
+    if re.search(r"evidence\s+of\s+an\s+SSO\s+was\s+obser\s?ved\s+but\s+no\s+active\s+overflow", f"{text} {pages_text}", re.I):
         out["zero_note"] = ZERO_NOTE
     m = re.search(r"Notifications\s+to\s+the\s+Public\s*:\s*(\d+)", text, re.I)
     if m:
@@ -408,7 +417,9 @@ def act_of_god(pages: list[str | None], after: int) -> dict[str, dict]:
 
 def parse_row(s: str) -> dict | None:
     """One row's cells (house number removed), or None when the row does not read."""
-    m = ROW.match(s)
+    if len(DATES.findall(s)) != 2:
+        return None          # two rows run together (a row start not seen): neither is read, never half of one
+    m = ROW.match(s) or ROW_NO_FLAG.match(s)
     if not m:
         return None
     permit, non_city = permit_of(m.group("permit"))
@@ -419,8 +430,9 @@ def parse_row(s: str) -> dict | None:
         return None
     sc = " ".join(m.group("sc").split())
     structure, cause = split_structure(sc)
-    flag = re.sub(r"\s", "", m.group("flag"))
-    row = {"sso_id": m.group("id"), "tpdes_permit": permit, "tpdes_as_written": " ".join(m.group("permit").split()),
+    flag = re.sub(r"\s", "", m.groupdict().get("flag") or "") or None
+    row = {"sso_id": m.group("id"), "tpdes_permit": permit,
+           "tpdes_as_written": " ".join((m.group("permit") or "").split()) or None,
            "non_city": non_city, "street": street_of(addr) if addr else None, "flow_location": flow,
            "reached": flag, "volume": m.group("vol"), "structure_type": structure,
            "cause": common.scrub_text(cause) if cause else None,
@@ -456,11 +468,52 @@ def parse_report(pages: list[str | None]) -> dict:
     # the 24-hour clock is known when the report writes a time without AM or PM after 12:59
     clock24 = any((not r["start_ampm"] and r["start_clock"][0] >= 13) or (not r["end_ampm"] and r["end_clock"][0] >= 13)
                   for r in rows)
-    return {"rows": rows, "not_read": bad, "stray_lines": stray, "total_stated": total, "notes": city_notes(block),
+    pages_text = " ".join(_norm(t) for t in pages[1:after] if t)
+    return {"rows": rows, "not_read": bad, "stray_lines": stray, "total_stated": total,
+            "notes": city_notes(block, pages_text),
             "act_of_god": act_of_god(pages, after), "clock24": clock24, "parser_version": PARSER_VERSION}
 
 
 # ---------------------------------------------------------------- records
+
+_HOLDERS: dict[str, tuple[str, str]] | None = None
+
+
+def permit_holders() -> dict[str, tuple[str, str]]:
+    """{TPDES permit: (operator id, name)} from data/dischargers.json: its state permits, and the federal permits that
+    TCEQ's crosswalk (data/reference/tx-tceq-permits.json) gives for a TPDES number."""
+    global _HOLDERS
+    if _HOLDERS is None:
+        rows = read_json(DATA_DIR / "dischargers.json", []) or []
+        rows = rows if isinstance(rows, list) else []
+        wq = (read_json(DATA_DIR / "reference" / "tx-tceq-permits.json", {}) or {}).get("wq_to_npdes") or {}
+        by_npdes = {}
+        out: dict[str, tuple[str, str]] = {}
+        for d in rows:
+            if not isinstance(d, dict) or d.get("state") not in (None, "TX") or not d.get("id"):
+                continue
+            for p in d.get("state_permits") or []:
+                out.setdefault(str(p), (d["id"], d.get("name") or d["id"]))
+            for p in d.get("npdes_permits") or []:
+                by_npdes.setdefault(str(p), (d["id"], d.get("name") or d["id"]))
+        for w, ns in wq.items():
+            for n in ns or []:
+                if n in by_npdes:
+                    out.setdefault(w, by_npdes[n])
+        _HOLDERS = out
+    return _HOLDERS
+
+
+def holder_of(permit: str | None, non_city: bool) -> tuple[str | None, str | None]:
+    """(operator id, name) of the system the row's permit names: the City for its own permits (WQ0010495...) unless
+    the City marks the row NON-COH; else the permit's holder in the registry; (None, None) when not known."""
+    if permit and permit.startswith(CITY_PREFIX) and not non_city:
+        return DISCHARGER_ID, DISCHARGER
+    h = permit_holders().get(permit or "")
+    if h and h[0] == DISCHARGER_ID and non_city:
+        return None, None
+    return h if h else (None, None)
+
 
 def _local(d: date, h: int, mi: int) -> datetime | None:
     """The instant of a wall-clock time in Houston, or None when the change to or from daylight time skips it or
@@ -520,17 +573,26 @@ def to_records(month: str, rep: dict) -> list[dict]:
             raw["structure_and_cause_as_written"] = r["structure_and_cause_as_written"]
         if r.get("flow_location_read_by"):
             raw["flow_location_note"] = "the flow location is not one of the City's usual wordings; read as written"
+        did, dname = holder_of(r["tpdes_permit"], r["non_city"])
         if r["non_city"]:
             raw["system_note"] = (f"the City's table marks this overflow NON-COH, under permit {r['tpdes_permit']}: a "
-                                  "sewer system that is not the City's")
-        town = None if r["non_city"] else "Houston"
-        if town:
-            raw["city"] = town
+                                  "sewer system that is not the City's" + (f"; the permit is {dname}'s" if dname else ""))
+        elif did and did != DISCHARGER_ID:
+            raw["system_note"] = f"the City's table lists this overflow under permit {r['tpdes_permit']}, {dname}'s"
+        elif not r["tpdes_permit"]:
+            raw["system_note"] = "the City's table gives no permit for this overflow" + (
+                f" (written \"{r['tpdes_as_written']}\")" if r.get("tpdes_as_written") else "")
+        if r.get("tpdes_as_written") and re.fullmatch(r"\d{5}\s?-\s?\d{2}", r["tpdes_as_written"]):
+            raw["tpdes_note"] = f"written {r['tpdes_as_written']}; read as {r['tpdes_permit']}"
+        if did == DISCHARGER_ID:
+            raw["city"] = "Houston"
+        if r["reached"] is None:
+            raw["reached_waters_note"] = "the City's table leaves \"Reached Waters of the US\" blank for this overflow"
         if r["reached"] == "No":
             raw["reached_water"] = False
             raw["_no_water_reason"] = ("the City's table says the overflow did not reach waters of the United States"
                                        + (f" (flow location: {r['flow_location']})" if r.get("flow_location") else ""))
-        else:
+        elif r["reached"] == "Yes":
             raw["reached_water"] = True
         if r["sso_id"] in (notes.get("one_notice") or {}):
             raw["city_note"] = notes["one_notice"][r["sso_id"]]
@@ -559,8 +621,7 @@ def to_records(month: str, rep: dict) -> list[dict]:
                 raw["ended_at_precision"] = "minute"
         out.append(event(
             source_id=SOURCE_ID, source_record_id=r["sso_id"], event_type="sso", status=status,
-            discharger_id=None if r["non_city"] else DISCHARGER_ID,
-            discharger_name=None if r["non_city"] else DISCHARGER, npdes_permit=None,
+            discharger_id=did, discharger_name=dname, npdes_permit=None,
             outfall_name=r.get("street"), waterbody_text=None, water_slugs=[], water_match="none",
             started_at=started, ended_at=ended, time_precision=prec,
             reported_at=None, published_at=rep.get("last_modified"), source_updated_at=None,
@@ -587,30 +648,39 @@ def build(state: dict) -> tuple[list[dict], dict]:
 
 # ---------------------------------------------------------------- one event, one record
 
-TCEQ_STREET = re.compile(r"Address:\s*([^(\-]+?)\s*(?:\(|-|$)")
+AFTER_NUMBER = re.compile(r"(?<!#)(?<!ID)\s*" + re.escape(common.HOUSE_NUMBER_REMOVED) + r"\s*([^(/,;:]+)")
+NOT_A_STREET = re.compile(r"(?i)^(?:manhole|cleanout|city|private|service|gravity|force|lift|non-observed|storm|contained|"
+                          r"sso\b|gallons?)\b")
+MATCH_PAD_DAYS = 1
+# TCEQ's water text that is a segment number of a basin ("1007 of the San Jacinto River Basin", "Segment 1007 of San
+# Jacinto River Basin"): no water's name, and nothing places it; it is kept with the link, never taken as the water
+SEGMENT_TEXT = re.compile(r"(?i)^\W*(?:no\.?\s*)?(?:segment\s*(?:no\.?|number|#)?\s*)?\d{3,4}[a-z]{0,2}\s+(?:of|in)\s+"
+                          r"(?:the\s+)?[a-z\s-]+basin\W*$")
 
 
 def tceq_street(t: dict) -> str | None:
-    """The street TCEQ's record gives (its source, "Manhole at [house number removed] Kenwood Ln", or its description's
-    "Address: ..."), as a comparison key; None when it gives none."""
+    """The street TCEQ's record gives, as a comparison key: the words after the house number its scrub removed, in
+    its source ("Manhole at [house number removed] Kenwood Ln", "[house number removed] LEELAND STREET, HOUSTON, TX
+    ...", "[house number removed] SAM HOUSTON 77... (...)/Manhole"), else in its description; up to a ZIP code, a
+    parenthesis, a slash or a comma. None when it gives none ("City Cleanout", or a number that was an SSO ID)."""
     raw = t.get("raw") or {}
-    cands = []
-    name = str(t.get("outfall_name") or "")
-    if " at " in name:
-        cands.append(name.split(" at ", 1)[1])
-    elif name:
-        cands.append(name)
-    m = TCEQ_STREET.search(str((raw.get("row") or {}).get("incident_description") or ""))
-    if m:
-        cands.append(m.group(1))
-    for c in cands:
-        c = c.replace(common.HOUSE_NUMBER_REMOVED, " ")
-        c = re.sub(r"\b\d{5}(?:-\d{4})?\s*$", " ", c)               # a ZIP code
-        s = street_of(c)
-        if s and re.search(r"[A-Za-z]{3,}", s):
-            k = street_key(s)
-            if k != "NOLOCATION":
-                return k
+    for text in (str(t.get("outfall_name") or ""), str((raw.get("row") or {}).get("incident_description") or "")):
+        for m in AFTER_NUMBER.finditer(text):
+            c = re.split(r"\s\d{5}(?:-\d{4})?\b", m.group(1))[0]
+            c = re.sub(r"(?i)\bHOUSTON\s*,?\s*TX\b.*$", " ", c)
+            words = []
+            for w in c.split():                 # the street ends where a sentence goes on ("TARTAN was caused by")
+                if re.fullmatch(r"[a-z]+\.?", w) or len(words) == 6:
+                    break
+                words.append(w)
+            c = " ".join(words)
+            if not c or NOT_A_STREET.match(c):
+                continue
+            s = street_of(c)
+            if s and re.search(r"[A-Za-z]{3,}", s):
+                k = street_key(s)
+                if k != "NOLOCATION":
+                    return k
     return None
 
 
@@ -622,105 +692,169 @@ def _tceq_day(t: dict) -> date | None:
 
 
 def _volume_ok(r: dict, t: dict) -> tuple[bool, int]:
-    """(consistent, rank: 0 the same figure, 1 both under a gallon or within 2x)."""
+    """(consistent, rank: 0 the same figure, 1 within a factor of 2 or not given). The City's "0" (no figure) meets
+    TCEQ's placeholder figures for such rows (0 and 1 gallon) or none."""
     mine = r.get("volume_gal")
     theirs = t.get("volume_gal")
     if theirs is None:
         return True, 1
-    if mine is None:                     # the City's "0": TCEQ's placeholder figures (0, 0.00001, 1) or none
-        return theirs <= 1, 0 if theirs <= 1 else 9
+    if mine is None:
+        return theirs <= 1, 0
     if theirs == mine:
         return True, 0
+    if theirs <= 1:                      # TCEQ's placeholder (0 or 1 gallon) beside the City's figure
+        return True, 2
     return mine / 2 <= theirs <= mine * 2, 1
 
 
 def _same_street(a: str | None, b: str | None) -> bool | None:
-    if not a or not b or a == "NOLOCATION":
+    """True or False when both give a street (one key holding the other counts: "SHADOWVIEW", "SHADOWVIEWLN"); None
+    when either gives none."""
+    if not a or not b or "NOLOCATION" in (a, b):
         return None
     return a == b or (min(len(a), len(b)) >= 6 and (a in b or b in a))
 
 
+def _same_system(r: dict, t: dict) -> tuple[bool, bool]:
+    """(the same sewer system, the same permit). The City files many overflows with TCEQ under another of its plants'
+    permits than the table's TPDES column gives (on 2025-01-07 a 2,832-gallon overflow is WQ0010495037 in the table and
+    WQ0010495090 in TCEQ's), so for the City's own rows the City's records are the system; another permit's row needs
+    that permit."""
+    permits = (t.get("raw") or {}).get("state_permits") or []
+    same_permit = bool(r["raw"].get("tpdes_permit")) and r["raw"]["tpdes_permit"] in permits
+    if r.get("discharger_id") == DISCHARGER_ID:
+        return same_permit or t.get("discharger_id") == DISCHARGER_ID or any(
+            str(p).startswith(CITY_PREFIX) for p in permits), same_permit
+    return same_permit, same_permit
+
+
+def _link(r: dict, t: dict, rank: tuple, n: int, counts: Counter, S) -> int:
+    """Link one row and one TCEQ record (link_tceq), unless they name different waters or the City says no water was
+    reached where TCEQ names one; returns 1 when linked."""
+    rid, tid = r["event_id"], t["event_id"]
+    if S.waters_differ(r, t):
+        counts["not linked: the two name different waters"] += 1
+        return 0
+    named = t.get("waterbody_text") if not (S.no_water_flag(t) or S.no_receiving_water(t)) else None
+    segment = bool(named and SEGMENT_TEXT.match(named))
+    if segment:
+        named = None
+    if r["raw"].get("reached_water") is False and named:
+        counts["not linked: the City says no water was reached, TCEQ names one"] += 1
+        return 0
+    how = ["same " + ("permit" if rank[2] == 0 else "City system"),
+           "same start day" if rank[1] == 0 else "start a day apart"]
+    how += ["same street"] if rank[0] == 0 else []
+    how += [{0: "same volume", 1: "consistent volume", 2: "TCEQ gives 0 or 1 gallon"}[rank[3]]]
+    if n > 1:
+        how += [f"one of {n} alike overflows at that street that day, paired in order"]
+    r["raw"]["tceq_record"] = tid
+    r["raw"]["_other_source_record"] = tid
+    r["raw"]["tceq_match"] = {"basis": ", ".join(how), "tceq_volume_gal": t.get("volume_gal"),
+                              "tceq_received": t.get("reported_at"),
+                              "tceq_permits": (t.get("raw") or {}).get("state_permits")}
+    if segment:
+        r["raw"]["tceq_match"]["tceq_water_text"] = t.get("waterbody_text")     # a segment number: not a water's name
+    county = (t.get("raw") or {}).get("county")
+    if county:
+        r["raw"]["county"] = county
+    if named:
+        r["waterbody_text"] = named
+        r["raw"]["water_basis"] = (f"the water TCEQ's record of the same overflow ({tid}) names; the City's table "
+                                   "names none")
+    t["duplicate_of"] = rid
+    t.setdefault("raw", {})["_duplicate_basis"] = (
+        f"{LINK_BASIS} {rid} (SSO ID {r['raw']['sso_id']}) is the same overflow ({', '.join(how)}); the City's "
+        "row is shown: it gives the start and end times")
+    counts["linked"] += 1
+    counts["linked, with a TCEQ water"] += bool(named)
+    return 1
+
+
 def link_tceq(records: list[dict], tceq: list[dict]) -> Counter:
     """Mark each TCEQ record of the same overflow duplicate_of the City's row (module docstring); both lists change in
-    place, and every earlier mark is cleared first. Returns the counts."""
+    place (TCEQ's marks of an earlier run are cleared first). Returns the counts.
+    A pair: the same system (_same_system), TCEQ's start day within MATCH_PAD_DAYS of the row's local start day, a
+    consistent volume, and the same street where both give one; with no street on either side, only the same permit,
+    the same day and the same figure above 1 gallon. Ranked by street, day, permit and volume; each row and each TCEQ
+    record once (the rounds below); a tie at the best rank links neither, unless the tied records are alike."""
     from build import status as S          # here, not at the top: the status build's tests of a water and of none
     counts: Counter = Counter()
     for t in tceq:
         if str((t.get("raw") or {}).get("_duplicate_basis") or "").startswith(LINK_BASIS):
             t["duplicate_of"] = None
             t["raw"].pop("_duplicate_basis", None)
-    idx: dict[tuple, list[dict]] = {}
+    by_day: dict[date, list[dict]] = {}
     for t in tceq:
-        if t.get("duplicate_of") or t.get("event_type") != "sso":
-            continue
         d = _tceq_day(t)
-        for p in (t.get("raw") or {}).get("state_permits") or []:
-            if d:
-                idx.setdefault((p, d), []).append(t)
+        if d and not t.get("duplicate_of") and t.get("event_type") == "sso":
+            by_day.setdefault(d, []).append(t)
+    keys = {}
     pairs = []
     for r in records:
-        p = r["raw"].get("tpdes_permit")
-        d = date.fromisoformat(r["started_at"][:10]) if r.get("started_at") else None
-        if not p or not d:
+        if not r.get("started_at"):
             continue
-        mine = street_key(r["raw"].get("location")) if r["raw"].get("location") else None
-        for t in idx.get((p, d), []):
-            ok, vrank = _volume_ok(r, t)
-            if not ok:
-                continue
-            same = _same_street(mine, tceq_street(t))
-            if same is False:
-                continue
-            pairs.append((0 if same else 1, vrank, r["event_id"], t["event_id"]))
-    # each row and each TCEQ record once; a tie at the best rank is left unlinked
-    best_r: dict[str, list] = {}
-    best_t: dict[str, list] = {}
-    for rank in sorted(pairs):
-        best_r.setdefault(rank[2], []).append(rank)
-        best_t.setdefault(rank[3], []).append(rank)
+        d0 = date.fromisoformat(r["started_at"][:10])
+        mine = street_key(r["raw"]["location"]) if r["raw"].get("location") else None
+        for k in range(-MATCH_PAD_DAYS, MATCH_PAD_DAYS + 1):
+            for t in by_day.get(date.fromordinal(d0.toordinal() + k), []):
+                system, permit = _same_system(r, t)
+                if not system:
+                    continue
+                ok, vrank = _volume_ok(r, t)
+                if not ok:
+                    continue
+                if t["event_id"] not in keys:
+                    keys[t["event_id"]] = tceq_street(t)
+                same = _same_street(mine, keys[t["event_id"]])
+                if same is False:
+                    continue
+                if same is None and not (permit and k == 0 and vrank == 0 and (r.get("volume_gal") or 0) > 1):
+                    continue
+                pairs.append(((0 if same else 1, abs(k), 0 if permit else 1, vrank), r["event_id"], t["event_id"]))
+    # rounds: the pairs at the best rank of both their row and their TCEQ record (among those not yet linked), grouped
+    # (a row and a record joined by such a pair). A group of one row and one record links them. A group of n rows and n
+    # records all paired with each other at one rank (n overflows at one street that day, each in both lists) whose
+    # TCEQ records are alike (the same figure and water) links them in order: either order shows the same records. Any
+    # other group links none this round; the rows and records left are ranked again, until a round links none.
     by_r = {r["event_id"]: r for r in records}
     by_t = {t["event_id"]: t for t in tceq}
-    used_t: set[str] = set()
-    for rank in sorted(pairs):
-        rid, tid = rank[2], rank[3]
-        r, t = by_r[rid], by_t[tid]
-        if r["raw"].get("tceq_record") or tid in used_t:
-            continue
-        top_r = [x for x in best_r[rid] if x[:2] == best_r[rid][0][:2] and x[3] not in used_t]
-        top_t = [x for x in best_t[tid] if x[:2] == best_t[tid][0][:2] and not by_r[x[2]]["raw"].get("tceq_record")]
-        if rank[:2] != best_r[rid][0][:2] or len(top_r) > 1 or len(top_t) > 1:
-            if rank[:2] == best_r[rid][0][:2]:
-                counts["not linked: several equally good candidates"] += 1
-            continue
-        if S.waters_differ(r, t):
-            counts["not linked: the two name different waters"] += 1
-            continue
-        named = t.get("waterbody_text") if not (S.no_water_flag(t) or S.no_receiving_water(t)) else None
-        if r["raw"].get("reached_water") is False and named:
-            counts["not linked: the City says no water was reached, TCEQ names one"] += 1
-            continue
-        used_t.add(tid)
-        r["raw"]["tceq_record"] = tid
-        r["raw"]["_other_source_record"] = tid
-        r["raw"]["tceq_match"] = {"same_street": rank[0] == 0, "same_volume": rank[1] == 0,
-                                  "tceq_volume_gal": t.get("volume_gal"),
-                                  "tceq_received": t.get("reported_at"),
-                                  "basis": "same permit and start day, consistent volume"
-                                           + (", same street" if rank[0] == 0 else "")}
-        county = (t.get("raw") or {}).get("county")
-        if county:
-            r["raw"]["county"] = county
-        if named:
-            r["waterbody_text"] = named
-            r["raw"]["water_basis"] = (f"the water TCEQ's record of the same overflow ({tid}) names; the City's table "
-                                       "names none")
-        t["duplicate_of"] = rid
-        t.setdefault("raw", {})["_duplicate_basis"] = (
-            f"{LINK_BASIS} {rid} (SSO ID {r['raw']['sso_id']}) is the same overflow: same permit "
-            f"{r['raw']['tpdes_permit']} and start day" + (", same street" if rank[0] == 0 else "")
-            + ", consistent volume; the City's row is shown (it gives the start and end times)")
-        counts["linked"] += 1
-        counts["linked with a TCEQ water"] += bool(named)
+    done: set[str] = set()
+    while True:
+        live = [p for p in pairs if p[1] not in done and p[2] not in done]
+        best_r: dict[str, tuple] = {}
+        best_t: dict[str, tuple] = {}
+        for rank, rid, tid in live:
+            best_r[rid] = min(best_r.get(rid, rank), rank)
+            best_t[tid] = min(best_t.get(tid, rank), rank)
+        top = [(rank, rid, tid) for rank, rid, tid in live if rank == best_r[rid] == best_t[tid]]
+        parent: dict[str, str] = {}
+
+        def find(x):
+            while parent.setdefault(x, x) != x:
+                parent[x] = parent[parent[x]]
+                x = parent[x]
+            return x
+        for _, rid, tid in top:
+            parent[find("r" + rid)] = find("t" + tid)
+        groups: dict[str, list] = {}
+        for p in top:
+            groups.setdefault(find("r" + p[1]), []).append(p)
+        linked_now, ties = 0, 0
+        for g in groups.values():
+            rids = sorted({p[1] for p in g}, key=lambda i: (by_r[i]["started_at"], i))
+            tids = sorted({p[2] for p in g}, key=lambda i: (str(by_t[i].get("source_record_id")), i))
+            alike = len({(by_t[i].get("volume_gal"), by_t[i].get("waterbody_text")) for i in tids}) == 1
+            if len(rids) != len(tids) or len(g) != len(rids) * len(tids) or len({p[0] for p in g}) != 1 or not alike:
+                ties += len(rids)
+                continue
+            for rid, tid in zip(rids, tids):
+                done.update((rid, tid))       # tried once: linked, or kept apart (different waters, no water)
+                linked_now += _link(by_r[rid], by_t[tid], g[0][0], len(rids), counts, S)
+        if not linked_now:
+            if ties:
+                counts["not linked: two equally good candidates"] += ties
+            break
     counts["rows without a TCEQ record"] = sum(1 for r in records if not r["raw"].get("tceq_record"))
     return counts
 
