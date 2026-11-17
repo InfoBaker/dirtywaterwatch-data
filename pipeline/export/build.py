@@ -730,6 +730,7 @@ def note_wording(rec: dict) -> list[str]:
 # the placement texts a public record carries (from status.json placements); each can quote the record's
 # receiving-water, outfall or volume text, so each goes through the record's redaction (public_record)
 PLACEMENT_TEXT_KEYS = ("note", "unplaced_reason", "no_receiving_water")
+LINKED_TEXT_KEYS = ("advice_text", "volume_text", "volume_method")     # build.status.linked_notices
 
 
 def public_placement(pl: dict, r: Redactor, swaps=()) -> dict:
@@ -744,6 +745,9 @@ def public_placement(pl: dict, r: Redactor, swaps=()) -> dict:
     if out.get("set_aside"):
         out["set_aside"] = [{**a, "reason": public_note(r.note(a.get("reason"), swaps))} if isinstance(a, dict) else a
                             for a in out["set_aside"]]
+    if out.get("linked_notices"):           # an e-mail notice's own texts, through the same redaction
+        out["linked_notices"] = [{**n, **{k: r.note(n[k], swaps) for k in LINKED_TEXT_KEYS if isinstance(n.get(k), str)}}
+                                 for n in out["linked_notices"] if isinstance(n, dict)]
     return out
 
 
@@ -768,6 +772,8 @@ def public_record(e: dict, pl: dict, r: Redactor, swaps=()) -> dict:
     rec["set_aside"] = pl.get("set_aside")
     rec["superseded"] = pl.get("superseded")
     rec["duplicate_of"] = pl.get("duplicate_of")
+    if pl.get("linked_notices"):            # an operator's e-mail notice of this event (build.status.linked_notices)
+        rec["linked_notices"] = pl["linked_notices"]
     rec["reach"] = pl.get("reach")
     if pl.get("future_start"):              # a start in the future as published: page and archive row, no status
         rec["future_start"] = True

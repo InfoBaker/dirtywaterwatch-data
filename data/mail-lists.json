@@ -1,0 +1,143 @@
+{
+  "_about": "The notice lists the project's addresses at dirtywaterwatch.org are signed up to, one address per list (the mail Worker files each message under the address's local part as its list_id). Read by pipeline/ingest/operator_mail.py. kind: notices (a parser makes records), context (a list kept for its news; never a record), correspondence (an address used for letters to an agency; never parsed). senders: the From domains the list sends from; dkim: the signing domains accepted for them (a message counts only when Cloudflare's own Authentication-Results says DMARC passed for its From domain, or DKIM passed for one of these). quiet: how a list that has gone quiet is noticed (cross_check: another source's notice from the same operator after `since` with nothing from the list since that notice's start; max_quiet_days: no message for that long). since: when the address was signed up to the list (UTC).",
+  "lists": {
+    "holyoke": {
+      "kind": "notices",
+      "parser": "holyoke",
+      "source_id": "ma-holyoke-everbridge",
+      "address": "holyoke@dirtywaterwatch.org",
+      "operator": "ma-holyoke",
+      "npdes_permit": "MA0101630",
+      "outfall_prefix": "HOL",
+      "town": "HOLYOKE",
+      "senders": [
+        "everbridge.net",
+        "holyoke.org"
+      ],
+      "dkim": [
+        "everbridge.net",
+        "holyoke.org"
+      ],
+      "since": "2026-11-17T01:00:00Z",
+      "quiet": {
+        "cross_check": {
+          "source_id": "ma-massdep",
+          "npdes_permit": "MA0101630"
+        }
+      },
+      "source_url": "https://www.holyoke.org/emergency-notification-system/"
+    },
+    "springfield": {
+      "kind": "notices",
+      "parser": "springfield",
+      "source_id": "ma-swsc-cso-email",
+      "address": "springfield@dirtywaterwatch.org",
+      "operator": "ma-springfield-wsc",
+      "npdes_permit": "MA0101613",
+      "outfall_prefix": "SPR",
+      "town": "SPRINGFIELD",
+      "senders": [
+        "springfieldalerts.com",
+        "waterandsewer.org",
+        "veolia.com",
+        "constantcontact.com",
+        "ccsend.com",
+        "ccsend2.com"
+      ],
+      "dkim": [
+        "springfieldalerts.com",
+        "waterandsewer.org",
+        "veolia.com",
+        "constantcontact.com",
+        "ccsend.com",
+        "ccsend2.com"
+      ],
+      "since": "2026-11-02T21:00:00Z",
+      "quiet": {
+        "cross_check": {
+          "source_id": "ma-massdep",
+          "npdes_permit": "MA0101613"
+        }
+      },
+      "source_url": "https://springfieldalerts.com/Suez/"
+    },
+    "manchester": {
+      "kind": "notices",
+      "parser": "manchester",
+      "source_id": "nh-manchester-cso-email",
+      "address": "manchester@dirtywaterwatch.org",
+      "operator": "nh-manchester-epd",
+      "npdes_permit": "NH0100447",
+      "senders": [
+        "manchesternh.gov"
+      ],
+      "dkim": [
+        "manchesternh.gov"
+      ],
+      "since": "2026-11-02T21:30:00Z",
+      "quiet": {
+        "cross_check": {
+          "source_id": "nh-permittees",
+          "record_prefix": "manchester:",
+          "raw_kind": "activation"
+        }
+      },
+      "source_url": "https://www.manchesternh.gov/Residents/e-Services/Email-Notifications"
+    },
+    "somerville": {
+      "kind": "notices",
+      "parser": "somerville",
+      "source_id": "ma-somerville-cso-email",
+      "address": "somerville@dirtywaterwatch.org",
+      "operator": "ma-somerville",
+      "npdes_permit": "MA0101982",
+      "outfall_prefix": "SOM",
+      "town": "SOMERVILLE",
+      "senders": [
+        "somervillema.gov",
+        "formresponse.com",
+        "jotform.com"
+      ],
+      "dkim": [
+        "somervillema.gov",
+        "formresponse.com",
+        "jotform.com"
+      ],
+      "since": "2026-11-02T21:40:00Z",
+      "quiet": {
+        "cross_check": {
+          "source_id": "ma-massdep",
+          "npdes_permit": "MA0101982"
+        }
+      },
+      "source_url": "https://www.somervillema.gov/cso"
+    },
+    "ct-deep-press": {
+      "kind": "notices",
+      "parser": "ct_deep_press",
+      "source_id": "ct-deep-press-email",
+      "address": "ct-deep-press@dirtywaterwatch.org",
+      "operator": null,
+      "npdes_permit": null,
+      "senders": [
+        "ct.gov"
+      ],
+      "dkim": [
+        "ct.gov"
+      ],
+      "since": "2026-11-02T21:00:00Z",
+      "quiet": {
+        "max_quiet_days": 10
+      },
+      "source_url": "https://portal.ct.gov/deep/news-releases"
+    },
+    "usgs-waterdata": {
+      "kind": "context",
+      "address": "usgs-waterdata@dirtywaterwatch.org"
+    },
+    "ct-deep": {
+      "kind": "correspondence",
+      "address": "ct-deep@dirtywaterwatch.org"
+    }
+  }
+}

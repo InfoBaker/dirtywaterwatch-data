@@ -1,0 +1,22 @@
+id: "ma-somerville-cso-email"
+name: "City of Somerville CSO and SSO activation and discharge notifications by e-mail"
+url: "https://www.somervillema.gov/cso"
+homepage: "https://www.somervillema.gov/cso"
+kind: "email"
+level: "municipal"
+# Feed row: written by pipeline/ingest/operator_mail.py (parser ingest/mail/somerville.py; data/mail-lists.json
+#   "somerville", address somerville@dirtywaterwatch.org). Signed up 2026-11-02; only the form's receipts have arrived, so
+#   no notice layout is known and any other message is kept as a failure for a rule to be written. Checked against
+#   ma-massdep (permit MA0101982) for quiet.
+cadence: "per event"
+license: "none stated"
+attribution: "City of Somerville"
+enabled: true
+role: "events"
+event_types: ["cso", "sso"]
+states: ["MA"]
+access: ["email"]
+access_detail: "Sign-up form (Jotform) on the city's CSO page."
+machine_readable: false
+legal_basis: "M.G.L. c. 21 s. 43A; 314 CMR 16.04"
+checked: "2026-11-17"
