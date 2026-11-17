@@ -8167,25 +8167,29 @@
    "operator_id": "al-jefferson-county",
    "agency": null,
    "permit": "AL0022926",
-   "checked": "2026-11-07",
+   "checked": "2026-11-17",
    "id": "al-jefferson-county-public-notice",
    "name": "Jefferson County Commission",
    "legal_basis": "Ala. Admin. Code r. 335-6-6-.12(l)6.(v): \"The permittee shall report to the Director, the public, the county health department, and any other affected entity such as public water systems, as soon as possible upon becoming aware of any notifiable sanitary sewer overflow\" (a notifiable SSO, r. 335-6-6-.02(hh): one that reaches a surface water of the State or may imminently and substantially endanger human health)",
    "basis_kind": "law",
-   "channel_kind": "email_list",
-   "urls": [],
-   "method": null,
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://soa.jccal.org/"
+   ],
+   "method": "html",
    "monitored": false,
-   "unmonitored_reason": "email_only",
+   "unmonitored_reason": "feed_ingested",
    "publishes": "notices",
-   "records": false,
-   "noun": "Overflow alerts",
+   "records": true,
+   "noun": "Overflow advisories",
    "sources": [
+    "al-jefferson-county-soa",
     "al-jefferson-county-everbridge",
     "al-adem-rule-335-6-6-12"
    ],
-   "note": "No web form: Jefferson County Environmental Services gives its public notice as opt-in overflow alerts (Everbridge, since March 2021) and GovDelivery no-contact advisories, to subscribers only; www.jccal.org answered 403 to the project user agent on 2026-11-07. The same overflows are read from ADEM's layer. (al-jefferson-county-everbridge)",
-   "barrier": "no_web_page"
+   "note": "Jefferson County Environmental Services posts its sanitary sewer overflow advisories on a public page, soa.jccal.org: each overflow's date and time, street, city, the affected waterway (or \"NONE\"), the reason and the date the advisory was resolved, 3,057 since 2012 on 2026-11-17. Read hourly by the feed, with a backfill of the earlier years; the overflows the county also files with ADEM are counted once. Subscribers also get the alerts by Everbridge and GovDelivery. (al-jefferson-county-soa)",
+   "barrier": null,
+   "feed_source_id": "al-jefferson-county-soa"
   },
   {
    "state": "AL",

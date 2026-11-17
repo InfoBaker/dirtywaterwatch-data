@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1725 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1727 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -39,12 +39,12 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | ak | 3 | 0 | 2 | 0 | 3 | 8 |
 | nm | 3 | 0 | 3 | 2 | 1 | 9 |
 | hi | 3 | 0 | 6 | 1 | 0 | 10 |
-| al | 5 | 0 | 6 | 2 | 0 | 13 |
+| al | 6 | 0 | 6 | 2 | 0 | 14 |
 | tx | 8 | 0 | 7 | 1 | 0 | 16 |
 | ut | 4 | 0 | 3 | 2 | 1 | 10 |
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
 | ky | 7 | 0 | 3 | 1 | 1 | 12 |
-| tn | 4 | 2 | 3 | 1 | 0 | 10 |
+| tn | 5 | 2 | 3 | 1 | 0 | 11 |
 | oh | 15 | 2 | 8 | 1 | 1 | 27 |
 | mn | 7 | 0 | 6 | 4 | 1 | 18 |
 | nd | 6 | 0 | 7 | 1 | 1 | 15 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **635** | **232** | **548** | **229** | **81** | **1725** |
+| **all** | **637** | **232** | **548** | **229** | **81** | **1727** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1565,7 +1565,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `hi-swim-guide-surfrider` | Surfrider Blue Water Task Force (Hawaii chapters) and Swim Guide | watch | search_only | prior_art | Volunteer bacteria sampling; prior art. |
 | `hi-epa-sobe` | EPA eRule SOBE extract (Hawaii) | rejected | fetched | events | 0 Hawaii events in the local extract on 2026-11-03. |
 
-## al: Alabama (13)
+## al: Alabama (14)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1573,6 +1573,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `al-adem-rule-335-6-6-12` | ADEM Admin. Code r. 335-6-6-.12(l)6.(v) Immediate notification | used | fetched | law | Legal basis for the public duty and the 24-hour/5-day clock. |
 | `al-adem-sso-history` | ADEM SSO reports, all dates (SSOs_ALL_OB_ID MapServer layer 0) | used | fetched | events | Read hourly by pipeline/ingest/al_adem_sso.py (the last 60 days and ongoing reports; the whole layer every 20 hours): 14,758 reports on 2026-11-07 (2012-05-11 to 2026-11-06; 1,106 to 2,293 a year since 2017; 1,008 in 2026 to date), 319 permits, 9 marked ongoing; every report has a point; the receiving-water words name a water on 9,627, say none was reached on 4,113 and name only a storm drain or ditch or nothing on 1,018. |
 | `al-adem-sso-map-live` | ADEM Sanitary Sewer Overflow Map (SSO_Service MapServer layer 0, current SSOs) | used | fetched | events | Read with the history layer by pipeline/ingest/al_adem_sso.py: 31 reports on 2026-11-07; gives ADEM's received time, the report type, the cause and the volume range in full (the history layer cuts it at 15 characters). |
+| `al-jefferson-county-soa` | Jefferson County Environmental Services Department, Sanitary Sewer Overflow Advisories | used | fetched | events | Read hourly by pipeline/ingest/al_jefferson_county_soa.py from 2026-11-17 (the current year's export; --backfill for 2012 on): one dated record per advisory with its time, street, named water and point; records ADEM also carries are duplicate_of ADEM's report. The page does not say what 'Date Resolved' means, so it is kept as the advisory's resolved date, never the end of the overflow. |
 | `al-petition-2017-notice` | Petition to amend r. 335-6-6-.12 (Alabama Rivers Alliance and eight riverkeepers, March 2017) | used | fetched | law | Context for barriers. |
 | `al-adem-efile-sso` | ADEM eFile SSO report PDFs (per permit) | watch | fetched | events | Citation target for each event (the signed form); not needed for ingest. |
 | `al-adem-outfall-map` | ADEM Outfall_Map_Data and MunicipalOutfalls MapServers | watch | fetched | outfalls | Possibly better outfall points than ICIS; compare later. |
@@ -1655,10 +1656,11 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ky-dep-ert-incidents` | Kentucky DEP Environmental Response Team incident records | rejected | search_only | events | No public web output; records request only. |
 | `ky-orsanco-bacteria` | ORSANCO contact recreation bacteria monitoring (Ohio River: Louisville and others) | unreachable | search_only | monitoring | Bot wall; shared with WV. |
 
-## tn: Tennessee (10)
+## tn: Tennessee (11)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
+| `tn-kub-sso-log` | Knoxville Utilities Board, SSO Logs | used | fetched | events | Read hourly by pipeline/ingest/tn_kub_sso_log.py from 2026-11-17 (the previous and current month; --backfill to 2023-01-01): one dated record per row with its time, street and gallons, listed in Knox County and placed on no water. Status and Completion are the cleanup's, never the end of the overflow. A record of the same day and street as a TDEC Events Report record of a KUB permit is its duplicate. |
 | `tn-law-0400-40-05-07` | Tenn. Comp. R. & Regs. 0400-40-05-.07 (permit terms: bypass, SSO prohibition, 24-hour reporting) | used | fetched | law | Regulator report within 24 hours, written within five days; no public notice. |
 | `tn-tdec-bacteriological-advisories` | TDEC Bacteriological and Fishing Advisories | used | fetched | advisories | Read by ingest/tn_tdec_posted_streams.py: the posted-streams PDF's bacteriological table, 25 segments (Rev. August 2026), 21 naming sewer systems, as TDEC's standing water-contact advisories; no posting gives a date. |
 | `tn-tdec-events-report` | TDEC Division of Water Resources Events Report (sewer overflows, releases, bypasses, upsets, washouts) | used | fetched | events | Read through the generic CSV reader (data/sources/tn-tdec-events-report.yaml): Tennessee's statewide table of every SSO, release, bypass, upset and washout since 2020, day precision, no receiving water, no CSO events. On 2026-11-07 the host answered 403 to the pipeline's identified client; the feed retries each run. |

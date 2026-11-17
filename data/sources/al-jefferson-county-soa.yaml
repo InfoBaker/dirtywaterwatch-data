@@ -1,0 +1,38 @@
+id: "al-jefferson-county-soa"
+name: "Jefferson County Environmental Services Department, Sanitary Sewer Overflow Advisories"
+url: "https://soa.jccal.org/"
+homepage: "https://soa.jccal.org/"
+kind: "html"
+level: "municipal"
+# Feed row: written by pipeline/ingest/al_jefferson_county_soa.py (data/build/events/al-jefferson-county-soa.json).
+# Built 2026-11-17: hourly; the page (ASP.NET) shows ten rows per page, "3057 records available" on 2026-11-17
+#   (2012-06 to 2026-11-16; 102 to 354 a year, 111 in 2026), filtered and paged by form posts. Its button "Download as
+#   CSV file" posts the same form and returns OverflowAdvisories.csv with the columns Date, Time, Location, City, Zip,
+#   Affected Waterway, Downstream Of, Reason, Status, Date Resolved, MapLink (latitude, longitude). The hourly run posts
+#   the export for the current year (and the year before in January); --backfill posts each year from 2012, one every
+#   three seconds. The CSV is not quoted though fields hold commas: the reader anchors each row on both ends.
+# The page's own words on its columns are the headings alone: "Sanitary Sewer Overflow Advisories", "Status" (every
+#   row "Resolved") and "Date Resolved". It does not say what resolved means, so "Date Resolved" is kept as the date the
+#   county marked the advisory resolved (raw.date_resolved), never as the end of the overflow: each record has no end
+#   (status unknown, "end not confirmed").
+# Water: "Affected Waterway" names the water with its GNIS id ("Shades Creek - IDN: 00153377"), or "NONE" (kept as the
+#   county's statement that no waterway was affected: not placed on a water). The status build places a record by the
+#   name near the row's point. The point is the county's map link, rounded to three decimals (about 100 m).
+# One event, one record: most rows are also filed with ADEM (al-adem-sso-history). A county record is duplicate_of
+#   ADEM's report of a Jefferson County permit that began the same day with its point within 1 km, unless the two
+#   name different waters or ADEM's report says no water was reached while the county names one.
+# Placement: by the named water only (raw._placement named_water_only); never by the water nearest the point.
+# Privacy: no person's name, phone or e-mail in the export; the location is a street address, often a home: every
+#   house number is removed and the point is rounded.
+cadence: "1 hour"
+license: "none stated"
+attribution: "Jefferson County Environmental Services Department"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["AL"]
+access: ["html", "csv"]
+access_detail: "https://soa.jccal.org/: a GET for the form's hidden fields (__VIEWSTATE, __EVENTVALIDATION), then a POST of ddlYear=<year>, ddlMonth, ddlCity, ddlWaterway and btnExport=Download as CSV file returns text/csv (OverflowAdvisories.csv). No key, no sign-in. 200 to this build's client and to GitHub's runner (probe run 43885170112)."
+machine_readable: true
+legal_basis: "None named on the page. Ala. Admin. Code r. 335-6-6-.12(l)6.(v): the permittee reports a notifiable sanitary sewer overflow to ADEM and the public as soon as possible."
+checked: "2026-11-17"
