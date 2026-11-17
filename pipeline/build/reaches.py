@@ -716,13 +716,13 @@ def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None =
     listed as plant_deferred. An outfall on a shoreline lake (shore: data/rules.json reach.shoreline) is a
     candidate with model "shoreline" (a stretch built from its point, plants included); without a point it is
     no_location."""
-    from build.status import Resolver, load_waters, oid_key
-    waters = waters if waters is not None else load_waters()
+    from build.status import Resolver, load_waters, oid_key, with_outline_areas
+    shore = shore_rule() if shore is None else shore
+    waters = waters if waters is not None else with_outline_areas(load_waters(), shore)
     registry = registry if registry is not None else registry_outfalls()
     live = {str(s).upper() for s in (live if live is not None else live_states())}
     reported = reported if reported is not None else reported_outfalls()
     plants = TRACE_PLANTS if plants is None else plants
-    shore = shore_rule() if shore is None else shore
     skip: dict[str, dict] = {}
     by_po: dict[tuple, dict] = {}
     for o in registry:
@@ -1847,13 +1847,22 @@ def lake_outline(slug: str, waters: dict, land: dict | None, point: tuple | None
     g = water_geometry(slug, waters) if slug else None
     if g is not None:
         return g, "record"
+    if slug and SH.is_size_rule(w, shore):
+        # a water under the size rule has no Census fallback: the state's TIGER water less the land is shaped for the
+        # Great Lakes and the coasts, and for an inland lake it is a sliver or the neighbouring coastal water (on the
+        # real records with no outline files: Lake Washington 1.5 km2 of 99, Santa Rosa Sound 665 of 97). With no
+        # outline of its own this run there is no stretch, and the status build keeps the whole-water colour.
+        return None, None
     g = census_lake_outline(slug, waters, land) if slug else None
     return g, ("census" if g is not None else None)
 
 
 def shore_sig(shore: dict) -> str:
     """The rule values a cached stretch was built with: a change rebuilds every stretch."""
-    return "|".join(str(shore.get(k)) for k in ("each_way_km", "shore_m", "gap_km", "snap_km", "ocean_open_m"))
+    sig = "|".join(str(shore.get(k)) for k in ("each_way_km", "shore_m", "gap_km", "snap_km", "ocean_open_m"))
+    # the shortest ring walked alone (reach.shoreline.min_ring_km): in the signature only when set, so the stretches
+    # cached before the key existed keep theirs while it is null
+    return sig + (f"|ring{shore['min_ring_km']}" if shore.get("min_ring_km") is not None else "")
 
 
 # The shoreline model's version: raise it when the walk or the membership rules change, and every cached stretch is
@@ -1885,36 +1894,63 @@ def geometry_sig(slug: str, waters: dict) -> str:
     return _GEOM_SIG[key]
 
 
+_SIG_INDEX: dict = {}
+
+
+def _sig_index(waters: dict, shore: dict, water_geometry) -> dict:
+    """Per run (per waters dict and rule): every record's box as arrays, in slug order, and a memo of each record's
+    signature part. Built once, so shore_input_sig no longer walks every record for every cached stretch (about 0.23 s
+    a stretch, each hourly run; geometry pilot of 2026-11-16). Kept only while run_shorelines runs ("active"); outside
+    it each call builds its own. The dict itself is held, so its id is never reused."""
+    import numpy as np
+    key = json.dumps(shore, sort_keys=True, default=str)
+    if (_SIG_INDEX.get("active") and _SIG_INDEX.get("waters") is waters and _SIG_INDEX.get("key") == key
+            and _SIG_INDEX.get("n") == len(waters)):
+        return _SIG_INDEX
+    slugs, boxes = [], []
+    for x, w in sorted(waters.items()):
+        bb = w.get("bbox")
+        if not (bb and len(bb) == 4):
+            g = water_geometry(x, waters) if w.get("geometry") else None
+            bb = list(g.bounds) if g is not None and not g.is_empty else None
+        slugs.append(x)
+        boxes.append([min(bb[0], bb[2]), min(bb[1], bb[3]), max(bb[0], bb[2]), max(bb[1], bb[3])] if bb else [np.nan] * 4)
+    ix = {"waters": waters, "key": key, "n": len(waters), "slugs": slugs,
+          "boxes": np.asarray(boxes, dtype=float).reshape(-1, 4), "one": {}}
+    if _SIG_INDEX.get("active"):        # kept for the rest of run_shorelines only (records are not edited during it)
+        _SIG_INDEX.update(ix)
+    return ix
+
+
 def shore_input_sig(slug: str | None, segs: list[dict] | None, waters: dict, shore: dict) -> str:
     """What a shoreline stretch was built from besides its point and the shared rule values (SOL wave1 P2-10): the
     model version and membership rules, the walked record (its outline, kind, state, box and its own entry, open_m
     included), and every water record whose box lies within SHORE_SIG_PAD of the stretch (its kind, state, box,
     outline and entry: a corrected outline, an added bay or a changed entry can change the walk or the stretch's
-    waters). A change rebuilds the stretch; the rule values alone are shore_sig."""
+    waters). A change rebuilds the stretch; the rule values alone are shore_sig. The records' boxes and parts are read
+    once a run (_sig_index); the hash is the one the record-by-record walk gave."""
     import hashlib
-    from shapely.geometry import box
+    import numpy as np
     from build.status import water_geometry
+    ix = _sig_index(waters, shore, water_geometry)
+    memo = ix["one"]
 
     def one(x: str) -> list:
-        w = waters.get(x) or {}
-        return [x, w.get("kind"), str(w.get("state") or "").upper(), w.get("bbox"), w.get("name"), geometry_sig(x, waters),
-                SH.shoreline_entry(w, shore)]
+        if x not in memo:
+            w = waters.get(x) or {}
+            memo[x] = [x, w.get("kind"), str(w.get("state") or "").upper(), w.get("bbox"), w.get("name"),
+                       geometry_sig(x, waters), SH.shoreline_entry(w, shore)]
+        return memo[x]
     parts: list = [SHORE_MODEL_VERSION, sorted(ALONG_KINDS), ALONG_TOL_M, ALONG_MIN_KM, one(slug) if slug else None]
     xs = [float(x) for sg in segs or [] for x, _ in sg.get("coords") or []]
     ys = [float(y) for sg in segs or [] for _, y in sg.get("coords") or []]
     if xs:
-        area = box(min(xs) - SHORE_SIG_PAD, min(ys) - SHORE_SIG_PAD, max(xs) + SHORE_SIG_PAD, max(ys) + SHORE_SIG_PAD)
-        near = []
-        for x, w in sorted(waters.items()):
-            if x == slug:
-                continue
-            bb = w.get("bbox")
-            if not (bb and len(bb) == 4):
-                g = water_geometry(x, waters) if w.get("geometry") else None
-                bb = list(g.bounds) if g is not None and not g.is_empty else None
-            if bb and box(*bb).intersects(area):
-                near.append(one(x))
-        parts.append(near)
+        a0, a1 = min(xs) - SHORE_SIG_PAD, min(ys) - SHORE_SIG_PAD
+        a2, a3 = max(xs) + SHORE_SIG_PAD, max(ys) + SHORE_SIG_PAD
+        b = ix["boxes"]
+        with np.errstate(invalid="ignore"):
+            hit = (b[:, 0] <= a2) & (b[:, 2] >= a0) & (b[:, 1] <= a3) & (b[:, 3] >= a1)
+        parts.append([one(ix["slugs"][i]) for i in np.nonzero(hit)[0] if ix["slugs"][i] != slug])
     return hashlib.sha1(json.dumps(parts, sort_keys=True, default=str).encode()).hexdigest()[:16]
 
 
@@ -1960,7 +1996,8 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
         near = {st: x for st, x in land.items() if x.intersects(bb)}
     try:
         r = SH.stretch(c["lon"], c["lat"], g, unary_union(list(near.values())) if near else None, each,
-                       float(shore["shore_m"]), float(shore["gap_km"]), float(shore["snap_km"]), land_states=near)
+                       float(shore["shore_m"]), float(shore["gap_km"]), float(shore["snap_km"]), land_states=near,
+                       min_ring_km=(float(shore["min_ring_km"]) if shore.get("min_ring_km") is not None else None))
     except SH.NoShore as e:
         rec["error"] = str(e)
         return rec
@@ -1993,6 +2030,11 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
             end = {"coords": part["coords"][-1], "km_from_outfall": round(km0 + part["km"], 3),
                    "cut_reason": part["stop"]}
         stops.append(end)
+    # an islet nearer the point than the shore the stretch starts on (reach.shoreline.min_ring_km): marked whole, as a
+    # segment of its own with no stop (its length is not counted in the stretch's distance along the shore)
+    for isl in r.get("islets") or []:
+        segs.append({"comid": None, "km_start": 0.0, "km_end": 0.0, "gnis_name": rec["river"], "coords": isl["coords"],
+                     "islet": True, "ring_km": isl["km"]})
     states = sorted(found)
     lake_recs = SH.lake_waters(slug, states, waters, shore)
     for n_slug in onto:          # the other lake's records too (Lake Michigan's, from a Lake Huron outfall)
@@ -2062,6 +2104,15 @@ def run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool = F
     effect at once, not after CACHE_DAYS), built from other outlines, entries or nearby water records or by another
     model version (shore_input_sig), or older than CACHE_DAYS. Without the Census outlines nothing is built this
     run (and nothing cached as a failure). Returns counts."""
+    _SIG_INDEX.clear()
+    _SIG_INDEX["active"] = True
+    try:
+        return _run_shorelines(cands, waters, shore, force, log, land)
+    finally:
+        _SIG_INDEX.clear()
+
+
+def _run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool, log, land: dict | None) -> dict:
     now = datetime.now(UTC)
     cached = load_reaches()
     sig = shore_sig(shore)
@@ -2192,8 +2243,8 @@ def main() -> int:
                 live = live_states()
                 skipped: dict[str, dict] = {}
                 shore = shore_rule()
-                from build.status import load_waters
-                waters = load_waters()
+                from build.status import load_waters, with_outline_areas
+                waters = with_outline_areas(load_waters(), shore)    # the size rule's areas (rule on only)
                 cands = candidate_outfalls(waters=waters, live=live, skipped=skipped, plants=a.plants or None,
                                            shore=shore)
                 log = lambda m: print(m, flush=True)       # noqa: E731
