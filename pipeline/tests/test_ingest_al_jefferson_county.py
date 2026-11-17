@@ -273,3 +273,76 @@ def test_main_accepts_backfill_and_csv(tmp_path):
     out = tmp_path / "o.json"
     assert JC.main(["--csv", str(FIX / "al_jefferson_county_soa.csv"), "--out", str(out)]) == 0
     assert json.loads(out.read_text())["count"] == 21
+
+
+# ---------------------------------------------------------------- review 2026-11-17 (Astra) fixes
+
+def test_review_p1_1_no_house_number_in_the_state_or_errors(tmp_path):
+    run(tmp_path, Web(), backfill=True)
+    state = (tmp_path / "state.json").read_text()
+    for n in range(1, 21):
+        assert f"{n * 100} " not in state
+    assert "1400 AVENUE T" not in state
+    assert '"33.470975' not in state
+
+
+@pytest.mark.parametrize("text, want", [
+    ("12Main St", f"{HOUSE_NUMBER_REMOVED} Main St"),
+    ("n1234 Main St", f"n {HOUSE_NUMBER_REMOVED} Main St"),
+    ("15th Ave", "15th Ave"),
+])
+def test_review_p1_2_glued_numbers_any_length_or_case(text, want):
+    assert JC.street_only(text) == want
+    assert not any(ch.isdigit() for ch in JC.street_key(JC.street_only(text)).replace("15TH", ""))
+
+
+def test_review_p1_3_county_records_are_placed_only_by_the_water_they_name(tmp_path):
+    _, doc = run(tmp_path)
+    assert all(r["raw"]["_placement"] == "named_water_only" for r in doc["records"])
+
+
+def test_review_p1_4_no_link_when_the_reports_name_different_waters_or_adem_names_none(tmp_path):
+    a = [adem("SSO-1", "2026-11-16T08:50:00-06:00", 33.4712, -86.8528)]
+    a[0]["waterbody_text"] = "Village Creek"                # the county names Nabors Branch
+    b = adem("SSO-2", "2026-11-11T03:00:00-06:00", 33.4715, -86.7862)
+    b["waterbody_text"] = "Ground Absorbed"                 # dry-land words with no flag; the county names Shades Creek
+    c = adem("SSO-3", "2026-10-21T09:00:00-05:00", 33.458, -86.879)
+    c["waterbody_text"] = "UT to Valley Creek"              # the same creek
+    _, doc = run(tmp_path, adem=a + [b, c])
+    recs = by_start(doc)
+    assert recs["2026-11-16T09:19:00-06:00"]["duplicate_of"] is None
+    assert recs["2026-11-11T03:12:00-06:00"]["duplicate_of"] is None
+    assert recs["2026-10-21T09:38:00-05:00"]["duplicate_of"] == "al-adem-sso-history:SSO-3"
+
+
+def test_review_p2_5_ids_of_rows_sharing_a_key_do_not_depend_on_order(tmp_path):
+    lines = year_csv(2026).decode().split("\r\n")
+    twin = lines[1].replace("33.470, -86.852", "33.480, -86.860")
+    run(tmp_path, Web(export=lambda y: "\r\n".join([lines[0], lines[1], twin] + lines[2:]).encode()))
+    first = {r["event_id"]: r["lat"] for r in json.loads((tmp_path / "ev.json").read_text())["records"]}
+    _, doc = run(tmp_path, Web(export=lambda y: "\r\n".join([lines[0], twin] + lines[2:]).encode()))
+    now = {r["event_id"]: (r["lat"], r["raw"].get("_missing_from_source_since")) for r in doc["records"]}
+    gone = [e for e, (lat, miss) in now.items() if miss]
+    assert len(gone) == 1 and first[gone[0]] == 33.47
+    assert len(now) == len(first)
+
+
+def test_review_p2_8_a_bad_row_does_not_lose_the_good_ones(tmp_path):
+    bad = "2026-06-01,9:00AM,x,BIRMINGHAM,ABCDE,y,N/A,Other,Resolved,2026/06/01,33.4,-86.8,"
+
+    def export(y):
+        lines = year_csv(y).decode().split("\r\n")
+        return "\r\n".join(lines[:1] + ([bad] if y == 2026 else []) + lines[1:]).encode()
+    code, doc = run(tmp_path, Web(export=export), backfill=True)
+    assert code == 0 and not doc["ok"] and len(doc["records"]) == 21
+    assert doc["meta"]["rows_not_read"] == ["2026-06-01"] and "2026-06-01" in doc["error"]
+    code, doc = run(tmp_path, Web(export=export))
+    assert code == 1 and not doc["ok"] and len(doc["records"]) == 21
+
+
+def test_review_p2_7_a_row_with_no_time_stays_a_date():
+    row = JC.parse_line("2026-11-16,,100 A ST,BIRMINGHAM,35211,Nabors Branch,N/A,Other,Resolved,2026/11/16,33.4,-86.8,")
+    assert row is not None and row["time"] == ""
+    rid, = [k for k, _ in JC.keyed([row])]
+    rec = JC.to_record(rid, {"row": row})
+    assert rec["time_precision"] == "day" and rec["started_at"] == "2026-11-16T00:00:00-06:00"

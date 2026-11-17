@@ -25,14 +25,19 @@ Reading (one GET of the page for its hidden form fields, then form posts of the 
     from the right: the reason (one field, or the two or three "Roots, Grease or Debris" is split into), Downstream
     Of, Affected Waterway, Zip (digits as typed, often cut short: "3502") and City; the location is what remains.
     A row whose ZIP is not digits or whose city holds a digit does not line up and is not read.
-    A row that does not fit is not read (meta.rows_not_read, by date only); more than MAX_UNREAD_SHARE of a read's
-    rows not fitting, or a header that is not the one known, is a failed read (ok false, the records kept).
+    A row that does not fit is not read: the others are kept, the read is partial (health false) and the row is
+    named by its date only (meta.rows_not_read; review 2026-11-17 P2-8). A header that is not the one known, or rows
+    none of which fits, is a failed read (ok false, the records kept). A row with no time is read as a date.
   - Health: a page with no form fields, an export that is not this CSV, or a failed request is a failed read; an
     export with no row for the year (the first days of January) is a read with nothing new.
 
 Records (one sso record per row; the table has no id)
-  - source_record_id "<date>T<HHMM>:<street key>": the row's date and time and its location after the house-number
-    scrub, squeezed to letters and digits; repeats of one key are "~2", "~3" in the order of the export.
+  - Rows are kept only as safe_row gives them: the street and Downstream Of with every house number removed, the
+    point rounded or withheld (review 2026-11-17 P1-1); the export itself is not saved.
+  - source_record_id "<date>T<HHMM or 'day'>:<street key>": the row's date and time and its street, letters and
+    digits with street words in one form (street_key). Rows sharing that key get "~<6 hex>" from their water, reason,
+    point, city and ZIP, matched to the rows held before, so an id does not depend on the export's order
+    (assign_ids; review 2026-11-17 P2-5).
   - Every row read is kept in data/build/al-jefferson-county-soa-state.json (the archive); records are rebuilt from it
     each run, so the hourly read of one year never drops the years the backfill read. A row the export no longer
     lists when its year is read again keeps its record with raw._missing_from_source_since.
@@ -43,7 +48,9 @@ Records (one sso record per row; the table has no id)
     published_at stay null (the table gives no posting time); raw._first_seen_at is our clock.
   - Water: "Affected Waterway" names the water and its GNIS id ("Shades Creek - IDN: 00153377": the id is the
     feature's GNIS id, the id the NHD water records carry). waterbody_text is the name; raw.gnis_id the id. The status
-    build places the record by that name near the row's point (the repository's matcher, as for ADEM's reports).
+    build places the record by that name near the row's point (the repository's matcher), and only by that name:
+    raw._placement named_water_only, so a name it cannot match never falls back to whatever water lies at the point
+    (review 2026-11-17 P1-3).
     "NONE" is the county's statement that no waterway was affected: raw.reached_water false with the words, so the
     record is kept and placed on no water. "Downstream Of" is kept as written (raw.downstream_of; "N/A" is dropped).
   - Point: the MapLink latitude and longitude as the county gives them, rounded to three decimals (about 100 m;
@@ -58,9 +65,10 @@ Records (one sso record per row; the table has no id)
   - The same overflow is usually filed with ADEM (al-adem-sso-history, read before this module in the refresh): a
     county record is duplicate_of ADEM's report of the county's permits that began the same local day with its point
     within LINK_M metres (link_adem; the closest wins, one ADEM report per county record), so the status build counts
-    it once and shows ADEM's report, which carries the start, stop, volume and permit. The link is not made when ADEM's
-    report says the sewage reached no water and the county names a water (a dry-land record never absorbs a report of
-    a water, as in build/status.py find_duplicates); raw._duplicate_basis says why a link was made.
+    it once and shows ADEM's report, which carries the start, stop, volume and permit. The link is not made when the
+    two name different waters (build/status.py waters_differ), nor when ADEM's report names no water reached (its flag,
+    its words or a placeholder: status.no_water_flag, reached_no_water, no_receiving_water) and the county names one
+    (a dry-land record never absorbs a report of a water); raw._duplicate_basis says why a link was made.
 Failures: exit 1 for a failed read (the previous records kept); --backfill exits 0 when at least one year was read and
   names the years not read in meta.years_not_read (health false), 1 when none was.
 Run from pipeline/: python -m ingest.al_jefferson_county_soa [--backfill [--from 2012-01-01]] [--csv saved.csv --out events.json]
@@ -82,8 +90,8 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import (BUILD_DIR, EVENTS_DIR, HEADERS, HOUSE_NUMBER_REMOVED, event, now_iso, read_json, save_raw,
-                    write_events, write_json)
+from common import (BUILD_DIR, EVENTS_DIR, HEADERS, HOUSE_NUMBER_REMOVED, event, now_iso, read_json, write_events,
+                    write_json)
 from ingest.al_adem_sso import clean_text
 
 SOURCE_ID = "al-jefferson-county-soa"
@@ -101,7 +109,6 @@ HEADER = ["Date", "Time", "Location", "City", "Zip", "Affected Waterway", "Downs
           "Date Resolved", "MapLink", ""]
 BACKFILL_FROM = "2012-01-01"
 PAUSE_S = 3
-MAX_UNREAD_SHARE = 0.05
 LINK_M = 1000
 AL_BOX = (-88.6, -84.8, 30.1, 35.1)          # lon min, lon max, lat min, lat max
 POINT_DECIMALS = 3
@@ -116,8 +123,10 @@ NUM = r"-?\d{1,3}\.\d+"
 POINT = re.compile(rf"^\s*(?:lat\s*)?({NUM})\s*[,;/ ]\s*(?:long?\s*)?({NUM})\.?\s*$", re.I)
 # a number left in a street after the scrub: a house number unless a route word stands before it (I-65, Hwy 150)
 LEFT_NUMBER = re.compile(r"(?<![\w\-.\[])\d+[A-Za-z]?(?:\s*[-/]\s*\d+[A-Za-z]?)*(?![\w])")
-GLUED_NUMBER = re.compile(r"\b([NSEW])(\d{3,6})\b")      # "33RD COURT N3444 33RD COURT N": a number run into a direction
-GLUED_BEFORE = re.compile(r"\b\d{3,6}(?=[A-Za-z]{3,})")   # "5711Governor John Sevier": a number run into its street
+# "33RD COURT N3444", "n1234 Main St": a number run into a direction letter (any case, any length)
+GLUED_NUMBER = re.compile(r"(?i)\b([NSEW])(\d{1,6})\b")
+# "5711Governor John Sevier", "12Main St": a number run into its street (an ordinal's two letters are not a street)
+GLUED_BEFORE = re.compile(r"\b\d{1,6}(?=[A-Za-z]{3,}|(?!(?i:st|nd|rd|th)\b)[A-Za-z]{2}\b)")
 ROUTE_BEFORE = re.compile(r"(?i)\b(?:highway|hwy|interstate|i|us|u\.s\.|sr|cr|route|rte|rt|county\s+road|co\.?\s*rd|"
                           r"state\s+road|exit|mile|lift\s+station|ls|pump\s+station)\s*[-#]?\s*$")
 
@@ -145,9 +154,17 @@ def street_only(v: str | None) -> str | None:
     return " ".join(s.split()) or None
 
 
+SUFFIXES = {"ROAD": "RD", "STREET": "ST", "AVENUE": "AVE", "AV": "AVE", "DRIVE": "DR", "LANE": "LN", "COURT": "CT",
+            "PLACE": "PL", "CIRCLE": "CIR", "BOULEVARD": "BLVD", "PARKWAY": "PKWY", "PIKE": "PK", "HIGHWAY": "HWY",
+            "TERRACE": "TER", "TRAIL": "TRL", "NORTH": "N", "SOUTH": "S", "EAST": "E", "WEST": "W"}
+
+
 def street_key(v: str | None) -> str:
-    s = (v or "").replace(HOUSE_NUMBER_REMOVED, " ")
-    return re.sub(r"[^A-Z0-9]", "", s.upper())[:40] or "NOLOCATION"
+    """A comparison key for a scrubbed street: letters and digits, street words in one form ("PINE GROVE ROAD" and
+    "Pine Grove Rd." give "PINEGROVERD"; review 2026-11-17 P2-6)."""
+    s = (v or "").replace(HOUSE_NUMBER_REMOVED, " ").upper()
+    words = [SUFFIXES.get(w, w) for w in re.findall(r"[A-Z0-9]+", s)]
+    return "".join(words)[:40] or "NOLOCATION"
 
 
 def clock(v: str) -> tuple[int, int] | None:
@@ -197,7 +214,7 @@ def parse_csv(text: str) -> tuple[list[dict], list[str]]:
 
 def parse_line(line: str) -> dict | None:
     t = line.split(",")
-    if len(t) < 12 or not DATE.fullmatch(t[0].strip()) or clock(t[1]) is None or t[-1].strip():
+    if len(t) < 12 or not DATE.fullmatch(t[0].strip()) or t[-1].strip() or (t[1].strip() and clock(t[1]) is None):
         return None
     # Date Resolved: the last "YYYY/MM/DD" field; the status before it; the map point after it (to the trailing comma)
     ri = next((i for i in range(len(t) - 2, 2, -1) if RESOLVED.fullmatch(t[i])), None)
@@ -254,31 +271,85 @@ def row_hash(r: dict) -> str:
     return hashlib.sha256("\x1f".join(str(r.get(k) or "") for k in sorted(r)).encode()).hexdigest()[:16]
 
 
-def keyed(rows: list[dict]) -> list[tuple[str, dict]]:
-    """(source_record_id, row) for the rows of one read, repeats numbered in the order of the export."""
-    out, seen = [], Counter()
-    for r in rows:
-        c = clock(r["time"])
-        base = f"{r['date']}T{c[0]:02d}{c[1]:02d}:{street_key(street_only(r['location']))}"
-        seen[base] += 1
-        out.append((base if seen[base] == 1 else f"{base}~{seen[base]}", r))
+def safe_row(r: dict) -> dict:
+    """The row as it is kept (state, ids, records): the street and Downstream Of with every house number removed, the
+    map point rounded to three decimals or withheld with the reason (review 2026-11-17 P1-1: nothing finer is
+    stored)."""
+    lat, lon, why = point(r.get("maplink") or "")
+    ds = " ".join((r.get("downstream_of") or "").split())
+    out = {**r, "location": street_only(r.get("location")) or "",
+           "downstream_of": ds if ds.upper() in ("", "N/A", "NA", "NONE") else (street_only(ds) or ""),
+           "maplink": f"{lat}, {lon}" if lat is not None else ""}
+    if why:
+        out["point_withheld"] = r.get("point_withheld") or why     # safe_row of a kept row keeps the first reason
     return out
 
 
+def base_id(r: dict) -> str:
+    c = clock(r["time"]) if r.get("time") else None
+    hm = f"{c[0]:02d}{c[1]:02d}" if c else "day"
+    return f"{r['date']}T{hm}:{street_key(r['location'])}"
+
+
+def ident(r: dict) -> str:
+    """What tells two rows of one date, time and street apart (the water, reason, point, city and ZIP)."""
+    return hashlib.sha256("\x1f".join(str(r.get(k) or "") for k in ("waterway", "reason", "maplink", "city", "zip"))
+                          .encode()).hexdigest()[:6]
+
+
+def assign_ids(rows: list[dict], held: dict, base_of=base_id, ident_of=ident) -> list[tuple[str, dict]]:
+    """(source_record_id, row) for one read, stable across reads (review 2026-11-17 P2-5): a row whose date, time and
+    street no other row shares (in this read or the state) keeps the plain key; rows that share one are told apart by
+    ident_of, matched first to the held row with the same ident, then (one left on each side) to the one held row
+    left; a new one gets "<key>~<ident>" ("~2", "~3" more for rows identical in every field)."""
+    groups: dict[str, list[dict]] = {}
+    for r in rows:
+        groups.setdefault(base_of(r), []).append(r)
+    out = []
+    for base, grp in groups.items():
+        olds = {rid: h for rid, h in held.items() if rid == base or rid.startswith(base + "~")}
+        taken, left = set(), []
+        for r in grp:
+            i = ident_of(r)
+            rid = next((k for k, h in olds.items() if k not in taken and h.get("ident") == i), None)
+            if rid:
+                taken.add(rid)
+                out.append((rid, r))
+            else:
+                left.append(r)
+        spare = [k for k in olds if k not in taken]
+        if len(left) == 1 and len(spare) == 1:
+            out.append((spare[0], left[0]))
+            continue
+        for r in left:
+            rid = base if not olds and len(grp) == 1 else f"{base}~{ident_of(r)}"
+            n = 1
+            while rid in taken or (rid in olds and rid not in spare):
+                n += 1
+                rid = f"{base}~{ident_of(r)}~{n}"
+            taken.add(rid)
+            out.append((rid, r))
+    return out
+
+
+def keyed(rows: list[dict], held: dict | None = None) -> list[tuple[str, dict]]:
+    return assign_ids([safe_row(r) for r in rows], held or {})
+
+
 def take(state: dict, years: list[int], rows: list[dict], now: str) -> dict:
-    """Merge one read of the given years into the state; returns counts."""
+    """Merge one read of the given years into the state (rows kept only as safe_row gives them); returns counts."""
     held = state.setdefault("rows", {})
-    got = dict(keyed(rows))
+    got = dict(keyed(rows, held))
     counts = Counter()
     for rid, r in got.items():
         h = row_hash(r)
         prev = held.get(rid)
         if prev is None:
-            held[rid] = {"row": r, "hash": h, "first_seen_at": now, "last_seen_at": now}
+            held[rid] = {"row": r, "hash": h, "ident": ident(r), "first_seen_at": now, "last_seen_at": now}
             counts["new"] += 1
         else:
             if prev.get("hash") != h:
-                prev.update(row=r, hash=h, revised_at=now)
+                prev.update(row=r, hash=h, ident=ident(r), revised_at=now)
                 counts["revised"] += 1
             else:
                 counts["same"] += 1
@@ -294,27 +365,30 @@ def take(state: dict, years: list[int], rows: list[dict], now: str) -> dict:
 
 
 def to_record(rid: str, h: dict) -> dict:
-    r = h["row"]
-    hh, mm = clock(r["time"])
+    r = safe_row(h["row"])
+    c = clock(r["time"]) if r.get("time") else None
     d = date.fromisoformat(r["date"])
-    st = datetime(d.year, d.month, d.day, hh, mm, tzinfo=TZ)
-    lat, lon, why = point(r.get("maplink") or "")
+    st = datetime(d.year, d.month, d.day, *(c or (0, 0)), tzinfo=TZ)
+    lat, lon, _ = point(r.get("maplink") or "")
+    why = r.get("point_withheld")
     ww = " ".join((r.get("waterway") or "").split())
     m = IDN.match(ww)
     water, gnis = (m.group(1).strip(), m.group(2)) if m else (ww or None, None)
-    raw = {"state": "AL", "county": "Jefferson", "time_zone": TZ_NAME, "location": street_only(r.get("location")),
+    raw = {"state": "AL", "county": "Jefferson", "time_zone": TZ_NAME, "location": r.get("location") or None,
            "city": r.get("city") or None, "zip": r.get("zip") or None,
            "affected_waterway_as_written": ww or None, "gnis_id": gnis,
            "reason": r.get("reason") or None, "status_as_written": r.get("status") or None,
            "date_resolved": r.get("date_resolved") or None,
            "date_resolved_note": ("the table's \"Date Resolved\", the date the county marked the advisory resolved; "
                                   "the page does not say it is the end of the overflow, so it is not used as one"),
-           "time_note": "the export's Date and Time, local wall-clock with no zone; Jefferson County is on Central time",
+           "time_note": ("the export's Date and Time, local wall-clock with no zone; Jefferson County is on Central time"
+                         if c else "the export gives a date and no time: the record is dated to the day"),
+           "_placement": "named_water_only",
            "operator_permits": PERMITS,
            "_first_seen_at": h.get("first_seen_at"), "_last_seen_in_source": h.get("last_seen_at")}
     ds = " ".join((r.get("downstream_of") or "").split())
     if ds and ds.upper() not in ("N/A", "NA", "NONE"):
-        raw["downstream_of"] = street_only(ds)
+        raw["downstream_of"] = ds
     if water and water.strip().upper() == "NONE":
         water = None
         raw["reached_water"] = False
@@ -328,7 +402,7 @@ def to_record(rid: str, h: dict) -> dict:
         discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, npdes_permit=None,
         waterbody_text=water, lat=lat, lon=lon, coord_source="source" if lat is not None else None,
         coord_precision_m=100 if lat is not None else None,
-        started_at=st.isoformat(), ended_at=None, time_precision="minute",
+        started_at=st.isoformat(), ended_at=None, time_precision="minute" if c else "day",
         reported_at=None, published_at=None, source_updated_at=None, fetched_at=h.get("last_seen_at") or now_iso(),
         material="untreated sewage", volume_gal=None, volume_text=None, estimate_flag="unknown",
         authority=AUTHORITY, advice_text=None, source_url=URL, raw=raw)
@@ -351,7 +425,10 @@ def _local_day(v) -> date | None:
 
 
 def link_adem(records: list[dict], adem: list[dict]) -> Counter:
-    """Mark each county record duplicate_of ADEM's report of the same overflow (module docstring); returns counts."""
+    """Mark each county record duplicate_of ADEM's report of the same overflow (module docstring); returns counts.
+    Not when the two name different waters, nor when ADEM's report names no water reached (its flag, its words, or a
+    placeholder) and the county names one (build/status.py's own tests: review 2026-11-17 P1-4)."""
+    from build import status as S          # here, not at the top: the status build's tests of a water and of none
     by_day: dict[date, list[dict]] = {}
     for a in adem:
         if a.get("npdes_permit") not in PERMITS or a.get("duplicate_of"):
@@ -374,9 +451,12 @@ def link_adem(records: list[dict], adem: list[dict]) -> Counter:
         r, a = by_id[rid], adem_by[aid]
         if r.get("duplicate_of") or aid in used:
             continue
-        a_dry = (a.get("raw") or {}).get("reached_water") is False
+        if S.waters_differ(r, a):
+            counts["not linked: the two name different waters"] += 1
+            continue
+        a_dry = bool(S.no_water_flag(a) or S.reached_no_water(a) or S.no_receiving_water(a))
         if a_dry and r.get("waterbody_text"):
-            counts["not linked: ADEM says no water reached, the county names one"] += 1
+            counts["not linked: ADEM's report names no water reached, the county names one"] += 1
             continue
         r["duplicate_of"] = aid
         r["raw"]["_duplicate_basis"] = (f"ADEM's report {aid.split(':', 1)[-1]} of permit {a.get('npdes_permit')} "
@@ -434,8 +514,8 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, sess=N
             if "csv" not in (resp.headers.get("content-type") or "").lower():
                 raise ReadError(f"the export answered {resp.headers.get('content-type')!r}, not CSV")
             rows, bad = parse_csv(resp.content.decode("utf-8-sig", "replace"))
-            if bad and len(bad) > MAX_UNREAD_SHARE * (len(rows) + len(bad)):
-                raise ReadError(f"{len(bad)} of {len(rows) + len(bad)} rows do not fit the known columns")
+            if bad and not rows:
+                raise ReadError(f"all {len(bad)} rows do not fit the known columns")
             wrong = [x for x in rows if not x["date"].startswith(str(y))]
             if wrong:
                 raise ReadError(f"the export for {y} holds {len(wrong)} rows of other years")
@@ -445,8 +525,6 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, sess=N
         read_any = True
         bad_all += bad
         counts.update(take(state, [y], rows, now))
-        if save and rows:
-            save_raw(SOURCE_ID, resp.content, "csv")
     state["last_read"] = {"at": now, "years": years, "listed_on_page": record_count(page), **counts}
     if read_any:
         write_json(state_path, state)
@@ -454,8 +532,12 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, sess=N
     meta = {"registry_ids": [SOURCE_ID], "url": URL, "credit": AUTHORITY, "time_zone": TZ_NAME,
             "records_on_page": record_count(page), "years_read": years, "rows_not_read": bad_all,
             "adem_links": dict(links), "covers_operator": DISCHARGER_ID}
+    if bad_all:
+        # rows that do not line up: the others are kept, the read is partial (health false) and the rows are named
+        # by date only (review 2026-11-17 P2-8)
+        not_read["rows"] = f"{len(bad_all)} rows do not fit the known columns: " + ", ".join(bad_all[:10])
     if not_read:
-        meta["years_not_read"] = not_read
+        meta["years_not_read"] = {k: v for k, v in not_read.items() if k != "rows"}
         err = "export not read: " + "; ".join(f"{y}: {w}" for y, w in not_read.items())
         if not read_any:
             write_events(SOURCE_ID, [], ok=False, error=err, meta=meta, path=out)
