@@ -249,7 +249,8 @@ def street_of(cell: str | None) -> str | None:
         return None
     s = re.sub(r"^\d+[A-Za-z]?(?:\s*-\s*\d*[A-Za-z]?)?(?:\s+1/2)?\s+(?=\S)", "", s)
     s = NUMBER.sub(lambda m: m.group(0) if ROUTE_WORD.search(s[:m.start()]) else "", s)
-    s = re.sub(r"\s+([,&/])", r"\1", " ".join(s.split())).strip(" ,&/-")
+    s = re.sub(r"\s*([&/])\s*", r" \1 ", re.sub(r"\s+,", ",", " ".join(s.split())))
+    s = " ".join(s.split()).strip(" ,&/-")
     s = common.scrub_text(" ".join(s.split()))
     return s or None
 
@@ -646,6 +647,21 @@ def build(state: dict) -> tuple[list[dict], dict]:
     return recs, voided
 
 
+def retained(prev: dict, state: dict, recs: list[dict], voided: dict) -> list[dict]:
+    """The previous events file's records of reports with no copy in the state (a lost or emptied state file): kept,
+    so a lost state never drops an earlier record; a record the City voided is not kept."""
+    have = set(state.get("reports") or {})
+    ids = {r["event_id"] for r in recs}
+    out = []
+    for r in prev.get("records") or []:
+        raw = (r.get("raw") or {}) if isinstance(r, dict) else {}
+        if not isinstance(r, dict) or r.get("event_id") in ids or raw.get("report_month") in have \
+                or str(raw.get("sso_id")) in voided:
+            continue
+        out.append({**r, "raw": {**raw, "retained_from": "the previous events file (no copy of this report in the state)"}})
+    return out
+
+
 # ---------------------------------------------------------------- one event, one record
 
 AFTER_NUMBER = re.compile(r"(?<!#)(?<!ID)\s*" + re.escape(common.HOUSE_NUMBER_REMOVED) + r"\s*([^(/,;:]+)")
@@ -784,6 +800,11 @@ def link_tceq(records: list[dict], tceq: list[dict]) -> Counter:
         if str((t.get("raw") or {}).get("_duplicate_basis") or "").startswith(LINK_BASIS):
             t["duplicate_of"] = None
             t["raw"].pop("_duplicate_basis", None)
+    for r in records:                       # a record kept from the previous file carries the last run's link
+        if r["raw"].pop("water_basis", None):
+            r["waterbody_text"] = None
+        for k in ("tceq_record", "_other_source_record", "tceq_match", "county"):
+            r["raw"].pop(k, None)
     by_day: dict[date, list[dict]] = {}
     for t in tceq:
         d = _tceq_day(t)
@@ -968,6 +989,8 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
     state["last_read"] = {"at": now, "listed": len(links), **counts}
     write_json(state_path, state)
     recs, voided = build(state)
+    held = retained(read_json(out if out else EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}, state, recs, voided)
+    recs += held
     tdoc = read_json(tceq_path, {}) if tceq_path else {}
     tceq = (tdoc or {}).get("records") or []
     tlinks = link_tceq(recs, tceq)
@@ -989,6 +1012,7 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
             "rows_not_read": {m: v["not_read"] for m, v in sorted(reps.items()) if v.get("not_read")},
             "count_mismatch": mismatch, "voided": voided, "pending": dict(sorted(pend.items())),
             "tceq_links": dict(tlinks), "newest_listed": listed[-1] if listed else None,
+            "retained_from_previous_events": sorted({(r.get("raw") or {}).get("report_month") or "" for r in held}),
             "placement_rule": ("the City's table names no water: a row is placed only on the water TCEQ's record of the "
                                "same overflow names; never by its street or its permit")}
     problems = [f"report {m} not read ({v['reason']})" for m, v in sorted(pend.items())]
