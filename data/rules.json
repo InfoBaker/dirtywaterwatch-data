@@ -481,6 +481,17 @@
    "rationale": "An advisory the authority lists is shown as the authority's own for 14 days after the last read of the source that showed it. When a later read succeeds and no longer shows it, the advisory leaves the map after those 14 days. When the source could not be read at all since then, its end is not confirmed: the advisory stays on the map as end not confirmed, with the time of the last read that showed it, until the source can be read again. If that read lists it, it is shown as the authority's again from that read, and the unread time stays marked end not confirmed.",
    "_decided": "Owner, 2026-11-16: \"disclosure is public safety\", approving the recommendation that a standing advisory an authority listed must not turn grey just because the source could not be read (build/status.py outage_hold and carve_unread_gaps; common.no_ok_read_since and mark_unread_gaps)."
   },
+  "listed_ongoing": {
+   "enabled": true,
+   "sources": [
+    "ca-sd-regional-board-ibwc-spills"
+   ],
+   "listed_by": {
+    "ca-sd-regional-board-ibwc-spills": "the San Diego Regional Water Quality Control Board"
+   },
+   "rationale": "Some agencies keep a public list of discharges and mark a row ongoing until the discharge stops. While our last read of such a list shows a report as ongoing, we show it as reported ongoing for 7 days from its start and then with its end not confirmed, for as long as the list shows it as ongoing, past the usual 30 days. We show the date the agency last updated its page and the date of our last read. If the page cannot be read, the last read stands and its date stays visible. A row that gains an end date follows the usual rules for an ended report. A row that leaves the list, or that the list no longer marks ongoing, with no end is shown with its end not confirmed for 30 days after the last read that listed it as ongoing; then the record says the end was never reported.",
+   "_decided": "Owner, 2026-11-16 (\"go with recommendations\"): the San Diego Water Board's table lists transboundary flows in the Tijuana River as ongoing since 2023-10-11; they are shown as end not confirmed while the table lists them (build/status.py listed_ongoing_intervals)."
+  },
   "implausible_end": {
    "days_after_fetch": 31,
    "rationale": "An end time more than 31 days after we read a discharge report, or one before the discharge began, is most likely a typing error in the source. We do not draw a window from such an end: the report keeps the end as published, and the map treats the discharge as having no confirmed end. A planned window of some weeks keeps the end the authority gives, and so does an advisory."

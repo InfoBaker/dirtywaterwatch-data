@@ -1,5 +1,5 @@
 {
- "about": "Water records the San Diego Water Board's table of USIBWC spill and transboundary flow events (source ca-sd-regional-board-ibwc-spills, read 2026-11-15, 16 rows) would place its reports on, none of which is on file: no California record in data/waters-*.json is named Tijuana River, Tijuana River Estuary, Smuggler's Gulch, Goat Canyon, Stewart's Drain, Silva Drain or Canyon del Sol. Proposed only; nothing here is a water record. The feed (pipeline/ingest/ca_sd_tijuana_table.py) places a report on a California record of the name it gives (record name or alias) whose box meets the Tijuana River valley (-117.16, 32.50, -116.95, 32.62), so a record built under any slug with that name is picked up on the next run. The Pacific Ocean record (pacific-ocean-ca) exists; no row names it. The table gives no coordinates: the reference points are the USGS names service's, for building the records, never a report's point. Names and identifiers were looked up on 2026-11-15 in the National Map's NHD and geographic names services and the Census TIGERweb hydrography.",
+ "about": "Water records the San Diego Water Board's table of USIBWC spill and transboundary flow events (source ca-sd-regional-board-ibwc-spills, read 2026-11-15, 16 rows) would place its reports on, none of which is on file: no California record in data/waters-*.json is named Tijuana River, Tijuana River Estuary, Smuggler's Gulch, Goat Canyon, Stewart's Drain, Silva Drain or Canyon del Sol. Proposed only; nothing here is a water record. The feed (pipeline/ingest/ca_sd_tijuana_table.py) places a report on a California record of the name it gives (record name or alias) whose box meets the Tijuana River valley (-117.16, 32.50, -116.95, 32.62), so a record built under any slug with that name is picked up on the next run. The Pacific Ocean record (pacific-ocean-ca) exists; no row names it. The table gives no coordinates: the reference points are the USGS names service's (for the three drains, the permit's monitoring stations, 2026-11-16), for building the records, never a report's point. Names and identifiers were looked up on 2026-11-15 in the National Map's NHD and geographic names services and the Census TIGERweb hydrography.",
  "state": "CA",
  "source": "ca-sd-regional-board-ibwc-spills",
  "reports": 16,
@@ -49,7 +49,7 @@
     "Imperial Beach"
    ],
    "gnis_id": null,
-   "nhd": "no named NHD estuary or waterbody: NHD gives only unnamed marsh (FType 466) and pond polygons around the mouth, the river's own flowlines and Oneonta Slough (GNIS 246917, the estuary's northern arm, 32.56534, -117.13115)",
+   "nhd": "no named NHD estuary or waterbody: NHD gives only unnamed marsh (FType 466) and pond polygons around the mouth, the river's own flowlines and Oneonta Slough (GNIS 246917, the estuary's northern arm, 32.56534, -117.13115); 2026-11-16: no GNIS feature named Tijuana River Estuary or Tijuana Slough in the valley (geonames layers); the Census TIGER/Line area water at the mouth is the Tijuana River polygon (OID 11033199298433) and the Pacific Ocean only",
    "reference_points": [
     [
      32.56534,
@@ -57,7 +57,7 @@
     ]
    ],
    "reference_points_from": "USGS GNIS 246917 'Oneonta Slough' (Other Hydrographic Features layer)",
-   "build": "a hand record: an outline from the Tijuana River National Estuarine Research Reserve boundary (NOAA) or the NHD marsh polygons at the mouth, with alias 'Oneonta Slough'; not buildable by the NHD name pass",
+   "build": "not built (2026-11-16): no public outline names the estuary in a form the writer takes; NOAA's research reserve boundary (not read) is a management boundary, not a water outline, and the NHD marsh polygons at the mouth are unnamed. The permit's station TRV-7, 'Tijuana River Mouth; Saline or brackish/estuarine downstream station', 32\u00b033.1362'N 117\u00b07.5677'W (Order No. R9-2021-0001, Table E-1, page E-9), marks the mouth only.",
    "basis": "no table row names the estuary; it is needed for a modeled path from the river and the canyons to the sea"
   },
   {
@@ -136,10 +136,15 @@
    "aliases": [
     "Stewarts Drain"
    ],
-   "nhd": "no GNIS or NHD feature of this name in the valley box (queried 2026-11-15)",
-   "reference_points": [],
-   "reference_points_from": null,
-   "build": "a hand record from a public map of USIBWC's canyon collectors (none read yet); no coordinates guessed",
+   "nhd": "no GNIS or NHD feature of this name in the valley box (queried 2026-11-15); no USGS NHD high-resolution flowline passes the station (nearest: the Tijuana River, 189 m; queried 2026-11-16); no Census TIGER/Line water within 190 m. OpenStreetMap has an unnamed stream 11 m from the station (ways 241997755, 356062067, 356062068), not used: an unnamed web-map line is not a cited location.",
+   "reference_points": [
+    [
+     32.54047,
+     -117.05783
+    ]
+   ],
+   "reference_points_from": "San Diego Regional Water Quality Control Board, Order No. R9-2021-0001 (NPDES No. CA0108928), waste discharge requirements for the United States Section of the International Boundary and Water Commission, South Bay International Wastewater Treatment Plant (adopted May 12, 2021), Attachment E (Monitoring and Reporting Program), Table E-1 Monitoring Station Locations, pages E-8 and E-9, https://www.waterboards.ca.gov/sandiego/board_decisions/adopted_orders/2021/R9-2021-0001.pdf, read 2026-11-16. The table's note 2: the latitudes and longitudes are approximate for administrative purposes. Station TRV-2, as published: \"Stewart's Drain; Freshwater canyon collector station; Latitude: 32\u00b032.4282'N; Longitude: 117\u00b03.4698'W\" (degrees and decimal minutes; the point here is that value in decimal degrees, rounded to five places)",
+   "build": "not built (2026-11-16): the permit gives a monitoring station point only (the collector station), and a water record needs a line or an outline from a public geometry source (NHD, TIGER/Line or a named OpenStreetMap way, ingest/waters_from_nhd.py HAND); none carries this water. Buildable once a public line exists or the record form takes a cited point.",
    "basis": "the table's discharge location for two rows (dry weather Canyon Collector Transboundary Flow Events, 2026)"
   },
   {
@@ -155,10 +160,15 @@
     "San Diego"
    ],
    "gnis_id": null,
-   "nhd": "no GNIS or NHD feature of this name in the valley box (queried 2026-11-15)",
-   "reference_points": [],
-   "reference_points_from": null,
-   "build": "a hand record from a public map of USIBWC's canyon collectors (none read yet); no coordinates guessed",
+   "nhd": "no GNIS or NHD feature of this name in the valley box (queried 2026-11-15); no USGS NHD high-resolution flowline passes the station (nearest: an unnamed flowline, reach 18070305039118, 660 m; queried 2026-11-16); no Census TIGER/Line water within 690 m. OpenStreetMap has an unnamed intermittent basin 1 m from the station (way 1014143586), not used.",
+   "reference_points": [
+    [
+     32.53946,
+     -117.0654
+    ]
+   ],
+   "reference_points_from": "San Diego Regional Water Quality Control Board, Order No. R9-2021-0001 (NPDES No. CA0108928), waste discharge requirements for the United States Section of the International Boundary and Water Commission, South Bay International Wastewater Treatment Plant (adopted May 12, 2021), Attachment E (Monitoring and Reporting Program), Table E-1 Monitoring Station Locations, pages E-8 and E-9, https://www.waterboards.ca.gov/sandiego/board_decisions/adopted_orders/2021/R9-2021-0001.pdf, read 2026-11-16. The table's note 2: the latitudes and longitudes are approximate for administrative purposes. Station TRV-4, as published: \"Silva Drain; Freshwater canyon collector station; Latitude: 32\u00b032.3677'N; Longitude: 117\u00b03.924'W\" (degrees and decimal minutes; the point here is that value in decimal degrees, rounded to five places)",
+   "build": "not built (2026-11-16): the permit gives a monitoring station point only (the collector station), and a water record needs a line or an outline from a public geometry source (NHD, TIGER/Line or a named OpenStreetMap way, ingest/waters_from_nhd.py HAND); none carries this water. Buildable once a public line exists or the record form takes a cited point.",
    "basis": "the table's discharge location for one row (2025-03-21 to 2025-05-21)"
   },
   {
@@ -177,10 +187,15 @@
    "aliases": [
     "Del Sol Canyon"
    ],
-   "nhd": "no GNIS or NHD feature of this name in the valley box (queried 2026-11-15)",
-   "reference_points": [],
-   "reference_points_from": null,
-   "build": "a hand record from a public map of USIBWC's canyon collectors (none read yet); no coordinates guessed",
+   "nhd": "no GNIS or NHD feature of this name in the valley box (queried 2026-11-15); no USGS NHD high-resolution flowline passes the station (nearest: an unnamed flowline, reach 18070305039402, 591 m; queried 2026-11-16); no Census TIGER/Line water within 700 m. OpenStreetMap has an unnamed intermittent basin 2 m from the station (way 1014143579), not used.",
+   "reference_points": [
+    [
+     32.53917,
+     -117.06866
+    ]
+   ],
+   "reference_points_from": "San Diego Regional Water Quality Control Board, Order No. R9-2021-0001 (NPDES No. CA0108928), waste discharge requirements for the United States Section of the International Boundary and Water Commission, South Bay International Wastewater Treatment Plant (adopted May 12, 2021), Attachment E (Monitoring and Reporting Program), Table E-1 Monitoring Station Locations, pages E-8 and E-9, https://www.waterboards.ca.gov/sandiego/board_decisions/adopted_orders/2021/R9-2021-0001.pdf, read 2026-11-16. The table's note 2: the latitudes and longitudes are approximate for administrative purposes. Station TRV-3, as published: \"Canyon del Sol; Freshwater canyon collector station; Latitude: 32\u00b032.3502'N; Longitude: 117\u00b04.1197'W\" (degrees and decimal minutes; the point here is that value in decimal degrees, rounded to five places)",
+   "build": "not built (2026-11-16): the permit gives a monitoring station point only (the collector station), and a water record needs a line or an outline from a public geometry source (NHD, TIGER/Line or a named OpenStreetMap way, ingest/waters_from_nhd.py HAND); none carries this water. Buildable once a public line exists or the record form takes a cited point.",
    "basis": "the table's discharge location 'Del Sol Canyon Collector' for one row (2025-06-15 to 2025-11-19)"
   }
  ]

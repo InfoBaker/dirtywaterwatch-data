@@ -22,7 +22,9 @@ Record rules (one record per table row)
     hash of the location ("2024-06-17-goat-canyon-<6 hex>"; a second row with both the same gets "-n2"). A change of
     the tracked fields (notes included) across runs is kept in raw._revisions; a row that leaves the table keeps its
     record with raw._missing_from_table_since. A Board correction of a row's start date or location makes a new key:
-    the old record stays, marked missing from the table (no row identity survives such an edit).
+    the old record stays, marked missing from the table (no row identity survives such an edit). A row an earlier read
+    listed as ongoing whose end cell no longer reads ongoing and gives no end keeps raw._ongoing_listing (the last read
+    that listed it as ongoing, the first that did not), set once (mark_ongoing_listing).
   - Text: the location and the notes pass common.scrub_text and strip_house_numbers before any use.
   - Times: the table gives dates only (Pacific): started_at and ended_at are bare dates, time_precision "day",
     raw.time_zone America/Los_Angeles. reported_at and published_at are null: the table gives neither (the page says
@@ -355,10 +357,30 @@ def build_record(row: dict, rid: str, fetched_at: str, prev: dict | None, placed
     if revs:
         raw["_revisions"] = revs[-10:]
     try:
-        return _record(a, base, raw, fetched_at, placed)
+        rec = _record(a, base, raw, fetched_at, placed)
     except Exception as e:  # noqa: BLE001 - never drop a record
         return event(**base, event_type="unknown", status="unknown", raw=raw, authority=AUTHORITY,
                      parse_error=f"{type(e).__name__}: {e}")
+    mark_ongoing_listing(rec, prev, fetched_at)
+    return rec
+
+
+def mark_ongoing_listing(rec: dict, prev: dict | None, fetched_at: str) -> None:
+    """raw._ongoing_listing {"last_listed_at", "unmarked_since"} on a row the table still shows whose end cell no longer
+    reads ongoing and gives no end (status unknown, no end, no published end set aside), when an earlier read listed it
+    as ongoing: last_listed_at is the last read that listed it as ongoing (that record's fetched_at), unmarked_since the
+    first read that did not. Set once at the change and carried unchanged on later reads (not a tracked field, so no
+    revision); a row that reads ongoing again, or gets an end, carries none. The status build's listed-ongoing rule
+    (build/status.py listed_ongoing_intervals) counts its fallback from last_listed_at."""
+    raw = rec.setdefault("raw", {})
+    raw.pop("_ongoing_listing", None)
+    if rec.get("status") != "unknown" or rec.get("ended_at") or raw.get("_end_not_used"):
+        return
+    p_raw = (prev or {}).get("raw") or {}
+    if isinstance(p_raw.get("_ongoing_listing"), dict) and (prev or {}).get("status") == "unknown":
+        raw["_ongoing_listing"] = dict(p_raw["_ongoing_listing"])
+    elif (prev or {}).get("status") == "ongoing" and not (prev or {}).get("ended_at") and prev.get("fetched_at"):
+        raw["_ongoing_listing"] = {"last_listed_at": prev["fetched_at"], "unmarked_since": fetched_at}
 
 
 def _record(a: dict, base: dict, raw: dict, fetched_at: str, placed: dict) -> dict:

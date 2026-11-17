@@ -239,15 +239,20 @@ def test_the_feed_writes_only_its_own_file_and_its_records_count_under_californi
     assert doc["ok"] is False and len(doc["records"]) == 16
 
 
-def test_the_ongoing_river_flow_since_2023_sets_no_colour_now_and_an_ended_spill_its_caution():
+def test_the_ongoing_river_flow_since_2023_is_end_not_confirmed_now_and_an_ended_spill_its_caution():
     """What the status build makes of these records (the rules of data/rules.json): the ongoing Tijuana River row,
-    which started on 2023-10-11, is past the ongoing rule's 30 days, so it sets no colour today; an ended spill is red
-    from its start to the end of its end day, then the site's caution."""
+    which started on 2023-10-11, is past the ongoing rule's 30 days; the table still lists it as ongoing, so it is end
+    not confirmed now (unresolved.listed_ongoing, owner 2026-11-16); without that rule it would set no colour. An ended
+    spill is red from its start to the end of its end day, then the site's caution."""
     recs, _ = build()
     rules = S.load_rules()
     t = by_id(recs)[ID("10/11/2023", "Tijuana River")]
     now = datetime(2026, 11, 15, 22, tzinfo=UTC)
-    assert [iv for iv in S.event_intervals(t, "CA", now, None, rules) if iv["end"] is None or iv["end"] > now] == []
+    (iv,) = [iv for iv in S.event_intervals(t, "CA", now, None, rules) if iv["end"] is None or iv["end"] > now]
+    assert iv["rule"] == "listed_ongoing" and iv["color"] == "unresolved" and iv["end"] is None
+    off = copy.deepcopy(rules)
+    off["unresolved"].pop("listed_ongoing")
+    assert [iv for iv in S.event_intervals(t, "CA", now, None, off) if iv["end"] is None or iv["end"] > now] == []
     s = by_id(recs)[ID("3/14/2026", "Stewart's Drain")]
     ivs = S.event_intervals(s, "CA", datetime(2026, 3, 16, tzinfo=UTC), None, rules)
     assert ivs[0]["rule"] == "discharge" and ivs[0]["color"] == "red"
@@ -472,7 +477,7 @@ def test_registry_ten_of_the_sixteen_rows_are_placed_on_the_waters_the_table_nam
         assert res.resolve(r)["water_slugs"] == r["water_slugs"], r["event_id"]
 
 
-def test_registry_the_valley_waters_are_grey_today_and_the_ongoing_row_sets_no_colour(tmp_path):
+def test_registry_the_valley_waters_are_grey_today_and_the_ongoing_row_is_listed_not_drawn(tmp_path):
     waters = S.load_waters()
     recs, _ = build(placed=M.valley_waters(waters))
     d = tmp_path / "events"
@@ -487,7 +492,12 @@ def test_registry_the_valley_waters_are_grey_today_and_the_ongoing_row_sets_no_c
     st, _ = S.build(now=datetime(2026, 11, 16, 14, tzinfo=UTC), write=False, events_dir=d, waters=waters,
                     outfalls=[], registry={}, reaches={}, flows=({}, {}), rules=rules, placement_cache=False)
     with_events = {k: v["status"] for k, v in st["waters"].items() if v.get("events")}
-    assert with_events == {s: "grey" for s in VALLEY}
+    # the ongoing river row the table still lists is end not confirmed on the river's page (unresolved.listed_ongoing),
+    # listed with "downstream path not modeled"; a river is never filled whole, so the map draws its outline grey
+    assert with_events == {**{s: "grey" for s in VALLEY}, "tijuana-river-ca": "unresolved"}
+    river = st["waters"]["tijuana-river-ca"]
+    assert river["fill"] is False and [(r["rule"], r["placement"]) for r in river["reasons"]] == \
+        [("listed_ongoing", "unmodeled")]
 
 
 def test_registry_the_valley_names_file_builds_only_its_own_hand_records():
