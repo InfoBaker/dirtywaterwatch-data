@@ -174,12 +174,29 @@ def test_durations(text, want):
     assert S.parse_duration(text) == want
 
 
-def test_a_figure_that_is_not_a_number_keeps_its_text_and_no_gallons(tmp_path):
-    _, recs, _ = run(tmp_path, page(current=[tr("7/12/2026<br>3:25pm", "7/12/2026<br>3:40pm", "15 min", "TBD", "")],
-                                     past=[]))
+def test_a_placeholder_figure_keeps_its_text_no_gallons_and_is_not_a_failure(tmp_path):
+    code, recs, _ = run(tmp_path, page(current=[tr("7/12/2026<br>3:25pm", "", "TBD", "TBD", "")], past=[]))
     r = recs[0]
-    assert r["volume_gal"] is None and r["volume_text"] == "TBD" and r["estimate_flag"] == "unknown"
-    assert "volume 'TBD'" in r["parse_error"] and r["raw"]["rainfall_in"] is None
+    assert code == 0 and r["volume_gal"] is None and r["volume_text"] == "TBD" and r["estimate_flag"] == "unknown"
+    assert r["parse_error"] is None and r["raw"]["rainfall_in"] is None
+    assert r["ended_at"] is None and r["status"] == "unknown"           # no stop and no duration: end not confirmed
+
+
+def test_an_unreadable_figure_makes_the_read_partial_and_a_held_row_keeps_its_earlier_cells(tmp_path):
+    run(tmp_path)
+    garbled = [tr("7/12/2026<br>3:25pm", "about four", "a while", "0.2 or so", "0.71")] + CURRENT[1:]
+    code, recs, meta = run(tmp_path, page(current=garbled), now=LATER)
+    doc = read_json(tmp_path / "ev" / f"{S.SOURCE_ID}.json")
+    assert code == 1 and doc["ok"] is False and len(recs) == 10
+    assert "CSO Discharge Table row 1: stop time, duration, volume not read" in doc["error"]
+    assert "about four" not in doc["error"] and "0.2 or so" not in json.dumps(doc["records"])
+    r = by_start(recs)["2026-07-12T15:25:00-04:00"]
+    assert r["ended_at"] == "2026-07-12T15:40:00-04:00" and r["volume_gal"] == 211000      # the earlier cells
+    assert r["raw"]["_unread_version_seen_at"] == LATER
+    new = [tr("8/1/2026<br>1:00 pm", "later", "", "0.1", "0.4")]
+    code, recs, _ = run(tmp_path, page(current=new + CURRENT), now="2026-11-17T14:00:00Z")
+    fresh = by_start(recs)["2026-08-01T13:00:00-04:00"]
+    assert code == 1 and fresh["parse_error"] == "stop time not read" and fresh["status"] == "unknown"
 
 
 def test_placed_by_the_massdep_layer_when_it_is_cached(tmp_path):
@@ -235,27 +252,33 @@ def test_two_rows_never_share_one_portal_overflow(tmp_path):
     assert second["duplicate_of"] is None and second["raw"]["_portal_nearest"]["record"] == "ma-massdep:v1"
 
 
-def test_without_the_portal_file_the_previous_links_are_kept(tmp_path):
+def test_without_the_portal_file_every_row_stands_alone_and_is_shown(tmp_path):
     run(tmp_path, portal=PORTAL)
     (tmp_path / "ev" / "ma-massdep.json").unlink()
-    _, recs, meta = run(tmp_path, now=LATER)
+    code, recs, meta = run(tmp_path, now=LATER)
+    assert code == 0 and not any(r["duplicate_of"] for r in recs)      # never a link to a record the build lacks
+    assert "every row stands alone" in meta["links"]["portal"] and meta["links"]["linked_to_portal"] == 0
+
+
+def test_a_portal_record_marked_duplicate_is_left_out_and_its_family_still_links(tmp_path):
+    p = [{**PORTAL[0], "duplicate_of": "ma-massdep:v1"}, PORTAL[1]]
+    _, recs, _ = run(tmp_path, portal=p)
     assert by_start(recs)["2026-07-12T15:25:00-04:00"]["duplicate_of"] == "ma-massdep:v1"
-    assert "previous links kept" in meta["links"]["portal"] and meta["links"]["linked_to_portal"] == 2
 
 
 # ---------------------------------------------------------------- publication, state and revisions
 
-def test_rows_at_the_first_read_have_no_publication_time_and_later_rows_do(tmp_path):
+def test_no_publication_time_is_invented_and_reads_are_kept_as_fetch_times(tmp_path):
     _, recs, _ = run(tmp_path)
-    assert all(r["published_at"] is None and r["raw"]["_on_page_at_first_read"] for r in recs)
-    assert all(r["fetched_at"] == NOW for r in recs)
+    assert all(r["published_at"] is None and r["reported_at"] is None for r in recs)
+    assert all(r["fetched_at"] == NOW and r["raw"]["_first_seen_at"] == NOW for r in recs)
     new = tr("11/16/2026<br>9:05 PM", "11/16/2026<br>9:20 PM", "15 min", "0.15", "0.9")
     _, recs, _ = run(tmp_path, page(current=[new] + CURRENT), now=LATER)
     r = by_start(recs)
     fresh = r["2026-11-16T21:05:00-05:00"]
-    assert fresh["published_at"] == LATER and "_on_page_at_first_read" not in fresh["raw"]
+    assert fresh["published_at"] is None
     assert fresh["raw"]["_first_seen_at"] == LATER and fresh["fetched_at"] == LATER
-    assert r["2026-07-12T15:25:00-04:00"]["published_at"] is None
+    assert r["2026-07-12T15:25:00-04:00"]["raw"]["_first_seen_at"] == NOW
 
 
 def test_a_row_taken_off_the_page_stays_and_a_changed_row_keeps_its_earlier_cells(tmp_path):
@@ -274,6 +297,37 @@ def test_a_row_taken_off_the_page_stays_and_a_changed_row_keeps_its_earlier_cell
     assert "_missing_from_source_since" not in by_start(recs)["2023-09-13T13:35:00-04:00"]["raw"]
 
 
+def test_a_corrected_start_is_the_same_row_not_a_second_overflow(tmp_path):
+    run(tmp_path, portal=PORTAL)
+    fixed = [tr("7/12/2026<br>3:26pm", "7/12/2026<br>3:40pm", "15 min", "0.211", "0.71")] + CURRENT[1:]
+    _, recs, meta = run(tmp_path, page(current=fixed), now=LATER, portal=PORTAL)
+    assert len(recs) == 10 and meta["corrections_joined"] == 1 and meta["missing_from_source"] == 0
+    r = by_start(recs)
+    assert "2026-07-12T15:25:00-04:00" not in r
+    c = r["2026-07-12T15:26:00-04:00"]
+    assert c["duplicate_of"] == "ma-massdep:v1" and c["raw"]["_first_seen_at"] == NOW
+    assert c["raw"]["revisions"][-1]["key"] == "SOM001A:20260712T1525"
+
+
+def test_several_candidates_for_a_corrected_start_are_left_apart(tmp_path):
+    run(tmp_path)
+    two = [tr("7/12/2026<br>3:26pm", "7/12/2026<br>3:40pm", "15 min", "0.211", "0.71"),
+           tr("7/13/2026<br>3:25pm", "7/13/2026<br>3:40pm", "15 min", "0.211", "0.71")] + CURRENT[1:]
+    _, recs, meta = run(tmp_path, page(current=two), now=LATER)
+    assert meta["corrections_joined"] == 0 and len(recs) == 12 and meta["missing_from_source"] == 1
+    assert "SOM001A:20260712T1525" in meta["corrections_left_apart"]
+
+
+def test_a_lost_state_file_is_rebuilt_from_the_previous_events_file(tmp_path):
+    run(tmp_path)
+    (tmp_path / "state.json").unlink()
+    _, recs, meta = run(tmp_path, page(current=CURRENT, past=PAST[:2]), now=LATER)
+    assert len(recs) == 10 and "rebuilt from the previous events file" in meta["state_recovered"]
+    gone = by_start(recs)["2021-09-03T00:00:00-04:00"]
+    assert gone["raw"]["_missing_from_source_since"] == LATER and gone["raw"]["_first_seen_at"] == NOW
+    assert by_start(recs)["2026-07-12T15:25:00-04:00"]["raw"]["_first_seen_at"] == NOW
+
+
 def test_a_repeated_row_is_counted_once(tmp_path):
     _, recs, meta = run(tmp_path, page(current=CURRENT + CURRENT[:1], past=[]))
     assert len(recs) == 5 and meta["repeated_rows"] == 1
@@ -289,6 +343,22 @@ def test_a_changed_header_is_a_failed_read_that_keeps_the_previous_records(tmp_p
     assert code == 1 and doc["ok"] is False and "columns changed" in doc["error"] and doc["count"] == 10
 
 
+def test_a_header_renamed_in_one_table_only_still_fails_the_read(tmp_path):
+    run(tmp_path)
+    renamed = page().replace(HEAD, HEAD.replace("Start Time", "Began"), 1)
+    code, _, _ = run(tmp_path, renamed, now=LATER)
+    doc = read_json(tmp_path / "ev" / f"{S.SOURCE_ID}.json")
+    assert code == 1 and doc["ok"] is False and "columns changed" in doc["error"] and doc["count"] == 10
+
+
+def test_a_table_gone_since_the_last_read_makes_the_read_partial(tmp_path):
+    run(tmp_path)
+    one = page().split('<div class="has-more')[0] + "</body></html>"
+    code, recs, meta = run(tmp_path, one, now=LATER)
+    assert code == 1 and len(recs) == 10 and meta["missing_from_source"] == 5
+    assert any("'Past CSO Activations' seen at the previous read is not on the page" in u for u in meta["unread"])
+
+
 def test_a_page_without_the_table_is_a_failed_read(tmp_path):
     code, _, _ = run(tmp_path, "<html><body><h4>CSO Discharge Table</h4><p>Moved.</p>" + CONTACTS + "</body></html>")
     doc = read_json(tmp_path / "ev" / f"{S.SOURCE_ID}.json")
@@ -302,15 +372,53 @@ def test_an_unreadable_row_is_named_and_the_others_are_published(tmp_path):
     code, recs, meta = run(tmp_path, page(current=bad + CURRENT, past=[]))
     doc = read_json(tmp_path / "ev" / f"{S.SOURCE_ID}.json")
     assert code == 1 and doc["ok"] is False and len(recs) == 5 and doc["count"] == 5
-    assert "start time" in doc["error"] and "CSO number 'Outfall A'" in doc["error"] and "1 cells" in doc["error"]
+    assert "start time not read" in doc["error"] and "CSO number not read" in doc["error"] and "1 cells" in doc["error"]
+    assert "Outfall A" not in doc["error"] and "afternoon" not in doc["error"]       # names, never the cells' text
     assert len(meta["unread"]) == 3
 
 
-def test_the_contacts_table_is_never_read_or_saved(tmp_path):
+def test_a_held_row_that_no_longer_builds_is_named_and_the_rest_are_written(tmp_path):
     run(tmp_path)
+    state = read_json(tmp_path / "state.json")
+    state["rows"]["SOM001A:20990101T0000"] = {"table": "x", "cells": {"cso_number": "SOM-001A", "start": "garbled"},
+                                              "first_seen_at": NOW, "last_seen_at": NOW}
+    write_json(tmp_path / "state.json", state)
+    code, recs, meta = run(tmp_path, now=LATER)
+    assert code == 1 and len(recs) == 10 and any("SOM001A:20990101T0000" in u for u in meta["unread"])
+
+
+def test_the_contacts_table_is_never_decoded_or_saved(tmp_path, monkeypatch):
+    seen = []
+    for name in ("cell_text", "page_text"):
+        fn = getattr(S, name)
+        monkeypatch.setattr(S, name, lambda x, _fn=fn: (seen.append(x), _fn(x))[1])
+    run(tmp_path)
+    assert seen and not any("Pat Example" in x or "example.org" in x for x in seen)
     text = (tmp_path / "ev" / f"{S.SOURCE_ID}.json").read_text() + (tmp_path / "state.json").read_text()
     for s in ("Pat Example", "example.org", "555", "Director"):
         assert s not in text
+
+
+def test_a_contact_inside_a_discharge_cell_is_scrubbed_before_it_is_kept(tmp_path):
+    row = tr("7/12/2026<br>3:25pm", "7/12/2026<br>3:40pm", "15 min", "0.2", "0.7",
+             water="Alewife Brook, call 617-555-0123 or write pat@example.org")
+    run(tmp_path, page(current=[row], past=[]))
+    text = (tmp_path / "ev" / f"{S.SOURCE_ID}.json").read_text() + (tmp_path / "state.json").read_text()
+    assert "pat@example.org" not in text and "555-0123" not in text and "[email removed]" in text
+
+
+@pytest.mark.parametrize("start,stop,want_end,partial", [
+    ("3/8/2026<br>2:30 am", "3/8/2026<br>3:15 am", None, True),                 # the start does not exist: not read
+    ("3/8/2026<br>1:30 am", "3/8/2026<br>2:15 am", "2026-03-08T03:00:00-04:00", True),   # the stop does not exist
+    ("11/1/2026<br>1:30 am", "11/1/2026<br>1:50 am", "2026-11-01T01:50:00-04:00", False),  # repeated hour: first
+])
+def test_daylight_time_changes(tmp_path, start, stop, want_end, partial):
+    code, recs, _ = run(tmp_path, page(current=[tr(start, stop, "30 min", "0.1", "0.5")], past=[]))
+    assert (code == 1) == partial
+    if want_end is None:
+        assert recs == []
+    else:
+        assert recs[0]["ended_at"] == want_end
 
 
 def test_the_events_file_says_what_it_covers(tmp_path):

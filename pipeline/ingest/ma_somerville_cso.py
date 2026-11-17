@@ -10,27 +10,31 @@ Source (registry ma-somerville-cso-table)
   change."
   As written: dates as 7/22/2026 and 10/8/25, clocks as 4:25pm, 7:10 PM, 3:45 am, 8:15 A.M. and 0:55 am (just after
   midnight), line breaks and non-breaking spaces inside a cell; durations as "10 min", "1 hr 50 min", "275 min".
-  Read: the cells of tables whose header names the columns above (the columns are found by name; a discharge table
-  with a column renamed, added or dropped is a failed read), and three sentences of the page (the estimate and
-  "preliminary" sentences, the public health warning). Nothing else: the page's contacts table (staff names,
-  telephones, e-mail addresses) is never read, saved or logged, and the page itself is never saved (save_raw gets the
-  parsed rows only). The headline over the page ("Combined Sewer Overflow (CSO) Event on <date> at <time> at SOM-001A
-  on the Alewife Brook") and the vendor map in its frame are not read here.
+  Read: the cells of the discharge tables (a table whose header shares three column names with the layout above, or
+  that holds a SOM outfall number; its columns are then found by name, and one renamed, added or dropped is a failed
+  read), and three sentences above the first of them (the estimate and "preliminary" sentences, the public health
+  warning). A table with an e-mail or telephone link (the page's contacts: staff names, telephones, addresses) is never
+  decoded, and the text after the discharge tables is never read; every kept cell passes common.scrub_text, and errors
+  and logs name a table, row and field, never a cell's text. The page itself is never saved (save_raw gets the kept
+  rows only). The headline over the page ("Combined Sewer Overflow (CSO) Event on <date> at <time> at SOM-001A on the
+  Alewife Brook") and the vendor map in its frame are not read here.
 
 Records (one cso record per table row; the shape of ingest.ma_massdep's)
   - source_record_id "<outfall>:<start, local YYYYMMDDTHHMM>" ("SOM001A:20260722T1625"); permit MA0101982, outfall_id
     SOM001A (the portal's spelling; raw.row.cso_number as written), discharger ma-somerville.
   - started_at and ended_at in America/New_York to the minute (the page states no zone); an hour that repeats when
-    daylight time ends is read as its first occurrence. ended_at is the Stop Time as written; a stop that is missing,
-    unreadable or before the start gives start plus the Duration instead (raw._ended_at_basis says which), else no end
-    (status unknown, end not confirmed). Where the Duration and start-to-stop differ by more than DURATION_SLACK_MIN
-    minutes (7/29/2023: 6:15 pm to 8:35 pm, "30 min"), the stop is kept (the later end) and raw._duration_check says so.
+    daylight time ends is read as its first occurrence, and a clock time that does not exist (the hour skipped when
+    daylight time begins) is not read. Times are compared as instants. ended_at is the Stop Time as written; a stop that
+    is missing, unreadable or before the start gives start plus the Duration instead (raw._ended_at_basis says which),
+    else no end (status unknown, end not confirmed). Where the Duration and start-to-stop differ by more than
+    DURATION_SLACK_MIN minutes (7/29/2023: 6:15 pm to 8:35 pm, "30 min"), the stop is kept (the later end) and
+    raw._duration_check says so.
   - volume_gal from million gallons, exact (Decimal); volume_text "<cell> million gallons"; estimate_flag estimated,
     raw.volume_method the page's own estimate and "preliminary and subject to change" sentences. raw.rainfall_in the
     Event Rainfall cell as written.
-  - published_at is the first read that saw the row (the page gives no posting time). Rows already on the page at the
-    feed's first read keep published_at null (raw._on_page_at_first_read): that read is not when they were posted.
-    reported_at and source_updated_at null; fetched_at and raw._last_seen_in_source the latest read that listed it.
+  - published_at, reported_at and source_updated_at null: the page gives no posting time, and our reads are fetch
+    times, not publication times. raw._first_seen_at is the first read that listed the row; fetched_at and
+    raw._last_seen_in_source the latest.
   - advice_text the page's public health warning, quoted, with no window (its hours count from the end of a rainstorm,
     not of the discharge).
   - Place: ingest.mail.ma_common.place (the MassDEP CSOs layer as ma_massdep last cached it, the ECHO outfall registry,
@@ -42,16 +46,22 @@ One event, not two (operator_mail.link_portal, the e-mail notices' rule)
   duplicate_of the family's shown record (its Verified Data Report once filed), one to one, closest first. A row the
   portal lacks (before the portal's first day, 2022-07-06, or not filed) stands alone; one whose nearest portal record
   of the outfall starts within NEAR_HOURS but outside the link window names it in raw._portal_nearest, for review.
-  This module sorts after ma_massdep and reads its events file of the same run; when that file is missing or holds
-  nothing for the permit, the previous run's links are kept (meta.links.portal says so), so a missing file never
-  turns every row into a second count.
+  This module sorts after ma_massdep and links only to the records of that run's events file, the file the status build
+  reads: with no such file, or no record of the permit in it, every row stands alone and is shown (meta.links says so),
+  never hidden behind a record the build does not have. A portal record that is itself marked duplicate_of is left out.
 
 State: data/build/ma-somerville-cso-table-state.json keeps every row read (its cells, first and last seen, earlier
-  versions of its cells): a row taken off the page stays a past report (raw._missing_from_source_since). Do not
-  delete it; without it the next read is a new first read.
+  versions of its cells): a row taken off the page stays a past report (raw._missing_from_source_since). A start the
+  city corrects is the same row: a row that leaves the page at a read and one that first appears at that read, at the
+  same outfall, starts within CORRECTION_HOURS, with two of volume, rainfall and duration the same, are one row under
+  the new start (raw.revisions keeps the earlier cells and key); several candidates are left apart and listed in
+  meta.corrections_left_apart. A lost state file is rebuilt from the events file of the previous run
+  (meta.state_recovered), so rows taken off the page and their revisions are not lost.
 Failures: a failed request or a page without a discharge table is a failed read: ok=False, the previous records kept,
-  the state unchanged. A row whose CSO number or start is not read (or with merged cells) is named in the error and
-  health stays false (partial) until a rule reads it; the readable rows are published.
+  the state unchanged. A partial read (ok=False, the readable rows published, health false until a rule reads them)
+  names: a row whose CSO number or start is not read, or with merged cells; a stop, duration, volume or rainfall cell
+  that is not read (blank cells and placeholders such as "TBD" are not failures), in which case a row already held
+  keeps its earlier cells; a discharge table seen at the previous read that is gone.
 Run from pipeline/: python -m ingest.ma_somerville_cso [--file saved.html --out events.json]
 Cadence: hourly with the refresh (Massachusetts is live).
 """
@@ -85,6 +95,7 @@ STATE_PATH = BUILD_DIR / "ma-somerville-cso-table-state.json"
 SPEC = {"source_id": SOURCE_ID, "outfall_prefix": "SOM", "town": "SOMERVILLE"}      # ma_common.place's lookups
 DURATION_SLACK_MIN = 5          # a stated duration this close to start-to-stop agrees with it
 NEAR_HOURS = 36                 # an unlinked row names a portal record of its outfall this close (for review)
+CORRECTION_HOURS = 48           # a corrected start this close to the start it replaces is the same row
 MAX_REVISIONS = 20
 
 # the header's cell text (lower case, spaces collapsed) -> the row's field
@@ -103,10 +114,15 @@ TABLE_RE = re.compile(r"<table\b[^>]*>(.*?)</table\s*>", re.S | re.I)
 ROW_RE = re.compile(r"<tr\b[^>]*>(.*?)</tr\s*>", re.S | re.I)
 CELL_RE = re.compile(r"<t([dh])\b([^>]*)>(.*?)</t\1\s*>", re.S | re.I)
 HEADING_RE = re.compile(r"<h[1-6]\b[^>]*>(.*?)</h[1-6]\s*>", re.S | re.I)
+CONTACT_MARK = re.compile(r"(?i)\b(?:mailto|tel):")
 CSO_NO = re.compile(r"(?i)^SOM[\s_-]*0*(\d{1,3})\s*([A-Z]?)$")
+CSO_IN_CELL = re.compile(r"(?i)<t[dh]\b[^>]*>\s*(?:<[^>]+>\s*)*SOM[\s_-]*\d{1,3}")
 STAMP = re.compile(r"(?i)^(\d{1,2})/(\d{1,2})/(\d{4}|\d{2})\s*,?\s*(?:at\s+)?(\d{1,2}):(\d{2})\s*(?:([ap])\.?\s*m\.?)?$")
 DUR_PART = re.compile(r"(?i)(\d+(?:\.\d+)?)\s*(hours?|hrs?|h|minutes?|mins?|m)(?![a-z])")
 PLAIN_NUMBER = re.compile(r"^\d*\.?\d+$")
+# a cell that says the figure is not in yet: not a reading failure
+PLACEHOLDER = re.compile(r"(?i)^(?:tbd|tba|pending|n/?a|na|unknown|not available|under review|to be determined|"
+                         r"[-–—]+|\?+)$")
 # the page's own sentences (each within one block of the page's text)
 ESTIMATE_RE = re.compile(r"(?i)([^.\n]{0,200}\bestimated discharge duration and volume[^.\n]{0,100}\.)")
 PRELIM_RE = re.compile(r"(?i)([^.\n]{0,200}\bpreliminary and subject to change[^.\n]{0,100}\.)")
@@ -139,20 +155,28 @@ def sentence(rx: re.Pattern, text: str) -> str | None:
     return " ".join(m.group(1).split()).strip() if m else None
 
 
+def is_discharge_table(header: list[str], body: str) -> bool:
+    return len(set(header) & set(COLUMNS)) >= 3 or bool(CSO_IN_CELL.search(body))
+
+
 def parse(page: str) -> tuple[list[dict], list[str], dict]:
-    """(rows, unread, page facts). rows: {"table", "cells"} for each data row of each discharge table, in page order.
-    unread: the rows that cannot be read as one row of the header's columns (named by table and row number).
+    """(rows, unread, page facts). rows: {"table", "row", "cells"} for each data row of each discharge table, in page
+    order, the cells scrubbed. unread: the rows that are not one row of the header's columns (table and row number).
     Raises LayoutError when the page holds no discharge table, or one whose columns changed."""
-    rows, unread, tables = [], [], []
+    rows, unread, tables, first = [], [], [], None
     for tm in TABLE_RE.finditer(page):
-        trs = ROW_RE.findall(tm.group(1))
+        body = tm.group(1)
+        if CONTACT_MARK.search(body):
+            continue                    # the contacts table: never decoded
+        trs = ROW_RE.findall(body)
         if not trs:
             continue
         header = [cell_text(c[2]).lower() for c in CELL_RE.findall(trs[0])]
-        if not (any("start" in h for h in header) and any("cso" in h or "volume" in h for h in header)):
-            continue                    # not a discharge table (the contacts table, layout tables)
-        if sorted(header) != sorted(COLUMNS) or len(header) != len(COLUMNS):
+        if not is_discharge_table(header, body):
+            continue                    # a layout table
+        if sorted(header) != sorted(COLUMNS):
             raise LayoutError(f"a discharge table's columns changed: {header}")
+        first = tm.start() if first is None else first
         heads = HEADING_RE.findall(page[:tm.start()])
         name = cell_text(heads[-1]) if heads else "discharge table"
         tables.append(name)
@@ -165,10 +189,12 @@ def parse(page: str) -> tuple[list[dict], list[str], dict]:
             if len(cells) != len(fields) or any(re.search(r"(?i)\b(?:col|row)span\s*=", c[1]) for c in cells):
                 unread.append(f"{name} row {i}: {len(cells)} cells, not one per column")
                 continue
-            rows.append({"table": name, "cells": dict(zip(fields, texts))})
+            rows.append({"table": name, "row": i, "cells": {f: scrub_text(t) for f, t in zip(fields, texts)}})
     if not tables:
-        raise LayoutError("no CSO discharge table (a header with CSO Number and Start Time) on the page")
-    text = page_text(page)
+        raise LayoutError("no CSO discharge table (CSO Number ... Event Rainfall) on the page")
+    # the sentences sit above the first discharge table; nothing after it, and no contact table, is decoded
+    above = TABLE_RE.sub(lambda m: " " if CONTACT_MARK.search(m.group(1)) else m.group(0), page[:first])
+    text = page_text(above)
     facts = {"tables": tables, "estimate_sentence": sentence(ESTIMATE_RE, text),
              "preliminary_sentence": sentence(PRELIM_RE, text), "warning": sentence(WARNING_RE, text)}
     return rows, unread, facts
@@ -177,30 +203,33 @@ def parse(page: str) -> tuple[list[dict], list[str], dict]:
 # ---------------------------------------------------------------- cells
 
 def parse_stamp(text: str | None) -> tuple[datetime | None, str | None]:
-    """'7/22/2026 4:25pm', '10/8/25 8:55 AM', '8/15/2022 8:15 A.M.', '5/21/2023 0:55 am' -> local datetime. A clock
-    without am or pm is read only when it cannot be a 12-hour time (0:xx, 13:xx to 23:xx)."""
-    t = " ".join((text or "").split())
-    m = STAMP.match(t)
+    """'7/22/2026 4:25pm', '10/8/25 8:55 AM', '8/15/2022 8:15 A.M.', '5/21/2023 0:55 am' -> local datetime, else
+    (None, why). A clock without am or pm is read only when it cannot be a 12-hour time (0:xx, 13:xx to 23:xx). The why
+    never quotes the text."""
+    m = STAMP.match(" ".join((text or "").split()))
     if not m:
-        return None, f"{t!r} is not a date and time"
+        return None, "not a date and time"
     mo, d, y, hh, mm, ap = m.groups()
     year, h, mi = int(y), int(hh), int(mm)
     year += 2000 if year < 100 else 0
     if mi > 59:
-        return None, f"{t!r}: minutes out of range"
+        return None, "minutes out of range"
     if ap:
         if h == 0 and ap.lower() == "a":
             pass                        # "0:55 am": the midnight hour, as the 24-hour clock writes it
         elif 1 <= h <= 12:
             h = h % 12 + (12 if ap.lower() == "p" else 0)
         else:
-            return None, f"{t!r}: hour out of range for {ap.upper()}M"
+            return None, "hour out of range for AM or PM"
     elif not (h == 0 or 13 <= h <= 23):
-        return None, f"{t!r}: no AM or PM"
+        return None, "no AM or PM"
     try:
-        return datetime(year, int(mo), int(d), h, mi, tzinfo=TZ), None
+        dt = datetime(year, int(mo), int(d), h, mi, tzinfo=TZ)
     except ValueError:
-        return None, f"{t!r} is not a valid date"
+        return None, "not a valid date"
+    if dt.astimezone(UTC).astimezone(TZ).replace(tzinfo=None) != dt.replace(tzinfo=None):
+        return None, "a clock time that does not exist that day (the hour skipped when daylight time begins)"
+    return dt, None
 
 
 def parse_duration(text: str | None) -> int | None:
@@ -225,15 +254,38 @@ def outfall_of(text: str | None) -> tuple[int, str] | None:
     return (int(m.group(1)), m.group(2).upper()) if m else None
 
 
+def given(v: str | None) -> bool:
+    """A cell that states something: not blank and not a placeholder."""
+    return bool(v) and not PLACEHOLDER.match(v.strip())
+
+
+def unread_fields(cells: dict) -> list[str]:
+    """The stop, duration, volume and rainfall cells that state something no rule reads (names only)."""
+    bad = []
+    if given(cells.get("stop")) and parse_stamp(cells["stop"])[0] is None:
+        bad.append("stop time")
+    if given(cells.get("duration")) and parse_duration(cells["duration"]) is None:
+        bad.append("duration")
+    if given(cells.get("volume_mg")) and gallons(cells["volume_mg"]) is None:
+        bad.append("volume")
+    if given(cells.get("rainfall_in")) and not PLAIN_NUMBER.match(cells["rainfall_in"].strip()):
+        bad.append("event rainfall")
+    return bad
+
+
 def row_key(cells: dict) -> tuple[str | None, str | None]:
     """(source_record_id, problem): "SOM001A:20260722T1625" from the CSO number and the start."""
     of = outfall_of(cells.get("cso_number"))
     if of is None:
-        return None, f"CSO number {cells.get('cso_number')!r} not read"
+        return None, "CSO number not read"
     start, why = parse_stamp(cells.get("start"))
     if start is None:
-        return None, f"start time: {why}"
+        return None, f"start time not read ({why})"
     return f"SOM{of[0]:03d}{of[1]}:{start:%Y%m%dT%H%M}", None
+
+
+def key_start(key: str) -> datetime:
+    return datetime.strptime(key.split(":")[1], "%Y%m%dT%H%M").replace(tzinfo=TZ)
 
 
 def minutes_between(a: datetime, b: datetime) -> int:
@@ -242,15 +294,63 @@ def minutes_between(a: datetime, b: datetime) -> int:
 
 # ---------------------------------------------------------------- state
 
-def merge(rows: list[dict], state: dict, now: str) -> tuple[dict, list[str], int]:
-    """Fold this read's rows into the state. Returns (the rows of this read by key, unread, repeated rows)."""
+def recover_state(records: list[dict], now: str) -> dict:
+    """The state rebuilt from the previous events file's records (raw.row, first and last seen, revisions)."""
+    rows = {}
+    for r in records:
+        raw = r.get("raw") if isinstance(r, dict) and isinstance(r.get("raw"), dict) else None
+        if not raw or not isinstance(raw.get("row"), dict) or not r.get("source_record_id"):
+            continue
+        h = {"table": raw.get("table"), "cells": raw["row"], "first_seen_at": raw.get("_first_seen_at") or now,
+             "last_seen_at": raw.get("_last_seen_in_source") or now}
+        for k_raw, k in (("_missing_from_source_since", "missing_since"), ("revisions", "revisions")):
+            if raw.get(k_raw):
+                h[k] = raw[k_raw]
+        rows[r["source_record_id"]] = h
+    return {"rows": rows, "recovered_at": now}
+
+
+def _same_figures(a: dict, b: dict) -> bool:
+    """Two of volume, rainfall and duration stated and the same."""
+    return sum(1 for f in ("volume_mg", "rainfall_in", "duration") if given(a.get(f)) and a.get(f) == b.get(f)) >= 2
+
+
+def reconcile(held: dict, gone: list[str], fresh: list[str], now: str) -> tuple[int, list[str]]:
+    """Corrected starts: a row that left the page at this read and one that first appeared at it are one row when they
+    are the only candidates for each other (same outfall, starts within CORRECTION_HOURS, the same figures). The fresh
+    row takes the held one's history and its earlier cells and key go to revisions. Returns (rows joined, rows left
+    apart because several candidates matched)."""
+    cand = {g: [f for f in fresh if f.split(":")[0] == g.split(":")[0]
+                and abs(minutes_between(key_start(g), key_start(f))) <= CORRECTION_HOURS * 60
+                and _same_figures(held[g]["cells"], held[f]["cells"])] for g in gone}
+    back = {f: [g for g in gone if f in cand[g]] for f in fresh}
+    joined, apart = 0, []
+    for g, fs in cand.items():
+        if not fs:
+            continue
+        if len(fs) > 1 or len(back[fs[0]]) > 1:
+            apart += [g] + fs
+            continue
+        f, old = fs[0], held.pop(g)
+        new = held[f]
+        revs = (old.get("revisions") or []) + [{"key": g, "cells": old["cells"],
+                                                "first_seen_at": old.get("cells_since") or old["first_seen_at"],
+                                                "last_seen_at": old["last_seen_at"]}]
+        held[f] = {**new, "first_seen_at": old["first_seen_at"], "cells_since": now, "revisions": revs[-MAX_REVISIONS:]}
+        joined += 1
+    return joined, sorted(set(apart))
+
+
+def merge(rows: list[dict], state: dict, now: str) -> tuple[dict, list[str], dict]:
+    """Fold this read's rows into the state. Returns (this read's rows by key, unread, counts)."""
     held = state.setdefault("rows", {})
-    state.setdefault("first_read_at", now)
+    was_listed = {k for k, h in held.items() if not h.get("missing_since")}
     seen, unread, repeated = {}, [], 0
     for r in rows:
+        where = f"{r['table']} row {r['row']}"
         key, why = row_key(r["cells"])
         if key is None:
-            unread.append(f"{r['table']}: {why}")
+            unread.append(f"{where}: {why}")
             continue
         if key in seen:
             if seen[key]["cells"] == r["cells"]:
@@ -261,69 +361,76 @@ def merge(rows: list[dict], state: dict, now: str) -> tuple[dict, list[str], int
                 n += 1
             key = f"{key}:{n}"          # two different rows with one outfall and start: both kept
         seen[key] = r
+    fresh = []
     for key, r in seen.items():
+        where = f"{r['table']} row {r['row']}"
+        bad = unread_fields(r["cells"])
+        if bad:
+            unread.append(f"{where}: {', '.join(bad)} not read")
         prev = held.get(key)
         if prev is None:
             held[key] = {"table": r["table"], "cells": r["cells"], "first_seen_at": now, "last_seen_at": now}
+            fresh.append(key)
             continue
         if prev["cells"] != r["cells"]:
-            revs = prev.setdefault("revisions", [])
-            revs.append({"cells": prev["cells"], "first_seen_at": prev.get("cells_since") or prev["first_seen_at"],
-                         "last_seen_at": prev["last_seen_at"]})
-            del revs[:-MAX_REVISIONS]
-            prev["cells"], prev["cells_since"] = r["cells"], now
+            if bad and not (set(bad) & set(unread_fields(prev["cells"]))):
+                prev["unread_cells"] = {"cells": r["cells"], "seen_at": now}      # kept aside; the earlier cells stay
+            else:
+                revs = prev.setdefault("revisions", [])
+                revs.append({"cells": prev["cells"], "first_seen_at": prev.get("cells_since") or prev["first_seen_at"],
+                             "last_seen_at": prev["last_seen_at"]})
+                del revs[:-MAX_REVISIONS]
+                prev["cells"], prev["cells_since"] = r["cells"], now
+                prev.pop("unread_cells", None)
+        else:
+            prev.pop("unread_cells", None)
         prev["table"], prev["last_seen_at"] = r["table"], now
         prev.pop("missing_since", None)
+    gone = sorted(k for k in was_listed if k not in seen)
+    joined, apart = reconcile(held, gone, fresh, now)
     for key, h in held.items():
         if key not in seen:
             h.setdefault("missing_since", now)
-    state["last_read"] = {"at": now, "rows": len(rows), "keys": len(seen), "unread": len(unread), "repeated": repeated}
-    return seen, unread, repeated
+    counts = {"rows": len(rows), "keys": len(seen), "unread": len(unread), "repeated": repeated,
+              "corrections_joined": joined, "corrections_left_apart": apart}
+    return seen, unread, counts
 
 
 # ---------------------------------------------------------------- records
 
-def to_record(key: str, h: dict, facts: dict, ctx: dict, first_read_at: str | None) -> dict:
+def to_record(key: str, h: dict, facts: dict, ctx: dict) -> dict:
     from ingest.mail.ma_common import place
     cells = h["cells"]
-    num, suffix = outfall_of(cells.get("cso_number"))
+    of = outfall_of(cells.get("cso_number"))
     start, _ = parse_stamp(cells.get("start"))
+    if of is None or start is None:
+        raise ValueError("the held row's CSO number or start is not read")
+    num, suffix = of
     problems = []
-    raw = {"row": {k: scrub_text(v) for k, v in cells.items()}, "table": h.get("table"), "state": "MA",
-           "time_zone": TZ_NAME,
-           "time_note": ("the table's local clock, read as Eastern time (America/New_York): the page states no zone"),
+    raw = {"row": dict(cells), "table": h.get("table"), "state": "MA", "time_zone": TZ_NAME,
+           "time_note": "the table's local clock, read as Eastern time (America/New_York): the page states no zone",
            "_first_seen_at": h["first_seen_at"], "_last_seen_in_source": h["last_seen_at"],
            "_outfall_key": num, "_outfall_suffix": suffix, "_channel": "web"}
     if h.get("missing_since"):
         raw["_missing_from_source_since"] = h["missing_since"]
     if h.get("revisions"):
-        raw["revisions"] = [{"cells": {k: scrub_text(v) for k, v in rv["cells"].items()},
-                             "first_seen_at": rv["first_seen_at"], "last_seen_at": rv["last_seen_at"]}
-                            for rv in h["revisions"]]
-    published = h["first_seen_at"]
-    if first_read_at and h["first_seen_at"] == first_read_at:
-        published = None
-        raw["_on_page_at_first_read"] = (f"on the page at the feed's first read ({first_read_at}): posted before it, "
-                                         "at a time the page does not give")
+        raw["revisions"] = h["revisions"]
+    if h.get("unread_cells"):
+        raw["_unread_version_seen_at"] = h["unread_cells"]["seen_at"]
 
-    stop, stop_why = parse_stamp(cells.get("stop")) if cells.get("stop") else (None, None)
-    dur = parse_duration(cells.get("duration"))
+    stop = parse_stamp(cells["stop"])[0] if given(cells.get("stop")) else None
+    dur = parse_duration(cells.get("duration")) if given(cells.get("duration")) else None
     raw["duration_min"] = dur
-    if cells.get("duration") and dur is None:
-        problems.append(f"duration {cells['duration']!r} not read")
-    if stop_why:
-        problems.append(f"stop time: {stop_why}")
+    problems += [f"{f} not read" for f in unread_fields(cells)]
     end = None
-    if stop is not None and stop >= start:
+    if stop is not None and stop.astimezone(UTC) >= start.astimezone(UTC):
         end = stop
         raw["_ended_at_basis"] = "the table's stop time"
         span = minutes_between(start, stop)
         if dur is not None and abs(span - dur) > DURATION_SLACK_MIN:
             raw["_duration_check"] = (f"the table's duration ({cells['duration']}) differs from start to stop "
-                                      f"({span} min); the stop time is kept as written (the later end)"
-                                      if span > dur else
-                                      f"the table's duration ({cells['duration']}) is longer than start to stop "
-                                      f"({span} min); the stop time is kept as written")
+                                      f"({span} min); the stop time is kept as written"
+                                      + (" (the later end)" if span > dur else ""))
     else:
         if stop is not None:
             problems.append("stop time before the start time")
@@ -336,9 +443,7 @@ def to_record(key: str, h: dict, facts: dict, ctx: dict, first_read_at: str | No
 
     vol_cell = cells.get("volume_mg") or ""
     gal = gallons(vol_cell)
-    if vol_cell and gal is None:
-        problems.append(f"volume {vol_cell!r} not read as million gallons")
-    volume_text = f"{vol_cell} million gallons" if gal is not None else (scrub_text(vol_cell) or None)
+    volume_text = f"{vol_cell} million gallons" if gal is not None else (vol_cell or None)
     method = " ".join(f"“{s}”" for s in (facts.get("estimate_sentence"), facts.get("preliminary_sentence")) if s)
     if volume_text:
         raw["volume_method"] = (f"the city's table: {method}" if method
@@ -362,10 +467,10 @@ def to_record(key: str, h: dict, facts: dict, ctx: dict, first_read_at: str | No
         source_id=SOURCE_ID, source_record_id=key, event_type="cso", status="ended" if end else "unknown",
         discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, npdes_permit=PERMIT,
         outfall_id=f"SOM{num:03d}{suffix}", outfall_name=(lay or {}).get("address"),
-        waterbody_text=scrub_text(cells.get("waterbody") or "") or None, water_slugs=slugs, water_match=wmatch,
+        waterbody_text=cells.get("waterbody") or None, water_slugs=slugs, water_match=wmatch,
         lat=lat, lon=lon, coord_source=coord_source,
         started_at=iso(start), ended_at=iso(end), time_precision="minute",
-        reported_at=None, published_at=published, source_updated_at=None, fetched_at=h["last_seen_at"],
+        reported_at=None, published_at=None, source_updated_at=None, fetched_at=h["last_seen_at"],
         volume_gal=gal, volume_text=volume_text, estimate_flag="estimated" if gal is not None else "unknown",
         authority=CREDIT,
         advice_text=warning, advice_window_hours=None,
@@ -377,37 +482,27 @@ def to_record(key: str, h: dict, facts: dict, ctx: dict, first_read_at: str | No
 
 # ---------------------------------------------------------------- one event, not two
 
-def read_portal(events_dir: Path) -> list[dict] | None:
-    """MassDEP's records of Somerville's permit from this run's ma-massdep events file; None when there are none."""
+def read_portal(events_dir: Path) -> list[dict]:
+    """MassDEP's records of Somerville's permit in this run's ma-massdep events file (none when it is missing), less
+    any marked duplicate_of another record."""
     doc = read_json(events_dir / f"{PORTAL_SOURCE}.json", {}) or {}
-    recs = [r for r in doc.get("records") or [] if isinstance(r, dict) and r.get("npdes_permit") == PERMIT]
-    return recs or None
+    return [r for r in doc.get("records") or [] if isinstance(r, dict) and r.get("npdes_permit") == PERMIT
+            and not r.get("duplicate_of")]
 
 
-def link(records: list[dict], portal: list[dict] | None, previous: dict) -> dict:
+def link(records: list[dict], portal: list[dict]) -> dict:
     """Each row to MassDEP's record of the same overflow (operator_mail.link_portal: same permit and outfall number,
-    starts within 3 hours, one to one, to the family's shown record). portal None: the previous run's links."""
+    starts within 3 hours, one to one, to the family's shown record), only among the records the build will hold."""
     from ingest import operator_mail as O
     for r in records:
         r["duplicate_of"] = None
         r["raw"].pop("_link_basis", None)
         r["raw"].pop("_portal_nearest", None)
-    if portal is None:
-        kept = 0
-        for r in records:
-            p = previous.get(r["event_id"]) or {}
-            if p.get("duplicate_of"):
-                r["duplicate_of"] = p["duplicate_of"]
-                r["raw"]["_link_basis"] = p.get("_link_basis")
-                kept += 1
-        return {"portal": "the ma-massdep events file holds no record of the permit this run: the previous links kept",
-                "linked_to_portal": kept, "standing_alone": len(records) - kept}
-    for r in records:
         r["raw"]["_chain"] = r["event_id"]
-    n = O.link_portal(records, portal, PERMIT)
+    n = O.link_portal(records, portal, PERMIT) if portal else 0
     for r in records:
         r["raw"].pop("_chain", None)
-    fams = O.portal_families(portal, PERMIT)
+    fams = O.portal_families(portal, PERMIT) if portal else []
     near = 0
     for r in records:
         s = O.parse_iso(r.get("started_at"))
@@ -421,8 +516,9 @@ def link(records: list[dict], portal: list[dict] | None, previous: dict) -> dict
                 "record": f["target"]["event_id"], "starts_hours_apart": round(gap / 3600, 1),
                 "why_not_linked": "more than 3 hours apart, or that overflow is linked to a closer row"}
             near += 1
-    return {"portal": f"{len(portal)} records of {PERMIT}", "linked_to_portal": n,
-            "standing_alone": len(records) - n, "near_portal_record": near}
+    return {"portal": (f"{len(portal)} records of {PERMIT}" if portal else
+                       f"no record of {PERMIT} in the {PORTAL_SOURCE} events file: every row stands alone"),
+            "linked_to_portal": n, "standing_alone": len(records) - n, "near_portal_record": near}
 
 
 # ---------------------------------------------------------------- run
@@ -438,28 +534,44 @@ def run(page: str, now: str, state_path: Path = STATE_PATH, events_dir: Path = E
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1, [], {}
     state = read_json(state_path, {}) or {}
-    seen, bad, repeated = merge(rows, state, now)
+    recovered = None
+    if not state.get("rows"):
+        prev = (read_json(out, {}) or {}).get("records") or []
+        if prev:
+            state = recover_state(prev, now)
+            recovered = f"the state file was missing: {len(state['rows'])} rows rebuilt from the previous events file"
+    before = (state.get("last_read") or {}).get("tables") or []
+    seen, bad, counts = merge(rows, state, now)
     unread += bad
+    unread += [f"table {t!r} seen at the previous read is not on the page" for t in before if t not in facts["tables"]]
+    state["last_read"] = {"at": now, "tables": facts["tables"], **counts}
     write_json(state_path, state)
     if ctx is None:
         from ingest import operator_mail as O
         ctx = O.ma_context({"somerville": SPEC})
-    recs = [to_record(k, h, facts, ctx, state.get("first_read_at")) for k, h in state["rows"].items()]
-    previous = {r.get("event_id"): {"duplicate_of": r.get("duplicate_of"), "_link_basis": (r.get("raw") or {}).get("_link_basis")}
-                for r in (read_json(out, {}) or {}).get("records") or [] if isinstance(r, dict)}
-    links = link(recs, read_portal(events_dir), previous)
+    recs = []
+    for k, h in state["rows"].items():
+        try:
+            recs.append(to_record(k, h, facts, ctx))
+        except Exception as e:  # noqa: BLE001 - one held row that no longer builds never stops the others
+            unread.append(f"held row {k}: not built ({type(e).__name__})")
+    links = link(recs, read_portal(events_dir))
     recs.sort(key=lambda r: (r["started_at"] or "", r["event_id"]), reverse=True)
     meta = {"registry_ids": [SOURCE_ID], "url": URL, "credit": CREDIT, "tables": facts["tables"],
-            "rows_read": len(rows), "rows_held": len(state["rows"]), "repeated_rows": repeated,
+            "rows_read": len(rows), "rows_held": len(state["rows"]), "repeated_rows": counts["repeated"],
             "missing_from_source": sum(1 for h in state["rows"].values() if h.get("missing_since")),
-            "first_read_at": state.get("first_read_at"), "links": links,
+            "corrections_joined": counts["corrections_joined"], "links": links,
             "estimate_wording": " ".join(s for s in (facts.get("estimate_sentence"), facts.get("preliminary_sentence")) if s) or None,
             "time_note": "the table's times have no zone; read as America/New_York",
             "covers_permits": [PERMIT], "statewide": False}
+    if counts["corrections_left_apart"]:
+        meta["corrections_left_apart"] = counts["corrections_left_apart"]
+    if recovered:
+        meta["state_recovered"] = recovered
     if unread:
         meta["unread"] = unread
         write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta, path=out,
-                     error="rows not read: " + "; ".join(unread))
+                     error="not read: " + "; ".join(unread))
         print(f"{SOURCE_ID}: PARTIAL {len(recs)} records; not read: {unread}", file=sys.stderr)
         return 1, recs, meta
     write_events(SOURCE_ID, recs, meta=meta, path=out)
@@ -493,7 +605,7 @@ def main(argv=None) -> int:
     if not a.file and meta:
         rows = [{"table": h["table"], "cells": h["cells"]} for h in (read_json(state_path, {}) or {}).get("rows", {}).values()
                 if h.get("last_seen_at") == now]
-        save_raw(SOURCE_ID, json.dumps(rows, ensure_ascii=False), "json")     # the parsed rows only, never the page
+        save_raw(SOURCE_ID, json.dumps(rows, ensure_ascii=False), "json")     # the kept rows only, never the page
     return code
 
 
