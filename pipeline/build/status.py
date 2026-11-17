@@ -232,6 +232,18 @@ SOUND_STATUS_BASIS = "modeled shoreline stretches at the outfalls; the sound is 
 # a bay under the lake model (reach.shoreline.lakes with kinds ["bay"]: San Francisco Bay, 2026-11-06)
 BAY_STATUS_BASIS = "modeled shoreline stretches at the outfalls; the bay is not coloured whole"
 SHORE_SUMMARY = "affected along a modeled shoreline stretch"
+# The size rule (data/rules.json reach.shoreline.min_area_km2 and min_area_kinds, build/shoreline.py size_entry; owner,
+# 2026-11-16): a lake or reservoir at least that large is a shoreline water, and a report that can start a stretch
+# (its own point, or a registered outfall with a point on the shore) colours that stretch, not the lake. A discharge
+# report or rain caution there that can start no stretch keeps colouring the whole lake, as before the rule (placement
+# SHORE_WHOLE): the water's whole-water colour ("fill_status") comes from every interval not carried by a shoreline
+# stretch. A bay or sound under the size rule was never filled, so there is no such fallback: its reports with no
+# stretch stay listed with their markers, as before (placement "bay_shore_unmodeled" or "sound_shore_unmodeled").
+# The listed waters (the Great Lakes, Lake St. Clair, Puget Sound, San Francisco Bay) and the ocean keep their handling.
+SHORE_WHOLE = "shoreline_whole"
+SIZE_STATUS_BASIS = ("modeled shoreline stretches at the outfalls; a report that cannot be placed on the shore colours "
+                     "the whole water")
+SHORE_WHOLE_SUMMARY = "coloured whole: a report here could not be placed on the shore"
 _SHORE_REACHES: set[str] = set()       # the reach keys of this build's shoreline stretches (where())
 # An authority's advisory for a named stretch of a river (the record's `stretch`, docs/plan.md §3): build/reaches.py
 # traces the stretch (reach kind "advisory_stretch") and the advisory colours only that stretch, in its own category
@@ -1028,6 +1040,86 @@ def water_geometry(slug: str, waters: dict | None = None):
         g = None
     _GEOM_CACHE[slug] = g
     return g
+
+
+def outline_area_km2(g) -> float | None:
+    """The area of an outline's polygons in km2 (a local equirectangular projection; line pieces count nothing), or
+    None when it has no area."""
+    return (outline_shape(g) or (None, None))[0]
+
+
+def outline_shape(g) -> tuple[float, float, float] | None:
+    """(area in km2, mean width in km: twice the area over the length of every ring, islands included, length in km:
+    the long side of the smallest rotated rectangle) of an outline's polygons on a local equirectangular projection,
+    or None when it has no area."""
+    import math
+    import shapely
+    from shapely.ops import unary_union
+    polys = []
+
+    def walk(x):
+        if x is None or x.is_empty:
+            return
+        if x.geom_type in ("Polygon", "MultiPolygon"):
+            polys.append(x.buffer(0))
+        elif hasattr(x, "geoms"):
+            for y in x.geoms:
+                walk(y)
+    walk(g)
+    if not polys:
+        return None
+    u = unary_union(polys)
+    lat = (u.bounds[1] + u.bounds[3]) / 2
+    k = (111_320.0 * math.cos(math.radians(lat)), 110_574.0)
+    um = shapely.transform(u, lambda xy: xy * k)
+    a = um.area
+    if a <= 0:
+        return None
+    per = sum(p.exterior.length + sum(i.length for i in p.interiors)
+              for p in getattr(um, "geoms", [um]) if p.geom_type == "Polygon")
+    import numpy as np
+    xs = np.asarray(um.minimum_rotated_rectangle.exterior.coords)
+    long_km = max(float(np.hypot(*(xs[i + 1] - xs[i]))) for i in range(2)) / 1000 if len(xs) >= 3 else 0.0
+    return a / 1e6, (2 * a / per / 1000 if per else float("inf")), long_km
+
+
+def with_outline_areas(waters: dict, shore: dict) -> dict:
+    """The size rule reads a record's area_km2 (build/shoreline.py record_area); a record of a kind the rule applies to
+    that has none gets the area of its outline here (inline, or openboatlaunch's file), as outline_area_km2, so a large
+    lake without a recorded area (Wheeler Lake, Alabama) can cross. With the rule off (min_area_km2 null) the records
+    are returned as they are, the same object; on, a new dict whose measured records are copies."""
+    if not SH.size_on(shore):
+        return waters
+    kinds = SH.size_kinds(shore)
+    floor = shore.get("min_mean_width_km")
+    least = float(shore["min_area_km2"])
+    out = None
+    for slug, w in waters.items():
+        kind = w.get("kind")
+        if kind not in kinds:
+            continue
+        add = {}
+        area = SH.record_area(w)[0]
+        tidal = kind in ("bay", "sound")
+        # a record is measured when it has no area, when the width floor is set and it may cross, or (a bay or sound)
+        # to know whether it has an outline here at all
+        if area is None or (floor is not None and kind in SH.FILL_KINDS and area >= least) or tidal:
+            shp = outline_shape(water_geometry(slug, waters))
+            if shp is None:
+                if tidal:
+                    add[SH.NO_OUTLINE] = True
+            else:
+                if area is None:            # full precision: the threshold reads it (round only for display)
+                    add[SH.OUTLINE_AREA] = shp[0]
+                if floor is not None and kind in SH.FILL_KINDS and (area if area is not None else shp[0]) >= least:
+                    add[SH.OUTLINE_WIDTH] = shp[1]
+                    add[SH.OUTLINE_LENGTH] = shp[2]
+        if not add:
+            continue
+        if out is None:
+            out = dict(waters)
+        out[slug] = {**w, **add}
+    return waters if out is None else out
 
 
 OUTLINE_SHARE_MIN = 0.5        # a live state whose records have outlines here for less than this share is a problem
@@ -4214,6 +4306,43 @@ def point_extent_only(ev: dict) -> bool:
     return (ev.get("raw") or {}).get("_point_extent_only") is True
 
 
+FILL_COLOURS = ("red", "yellow", "unresolved")
+
+
+def whole_fill(ivs: list[dict], now: datetime, h0: datetime, monthly: list | None = None) -> dict:
+    """The whole-water colour of a lake under the size rule (SHORE_WHOLE): from every interval of the water that no
+    shoreline stretch carries (a stretch is drawn on its own). {"fill": whether the water is drawn filled (such an
+    interval colours it at some hour of the history, so a replay of a past hour shows it whole as before the rule),
+    "status" now, "by_category", "category" (the headline's)}. monthly: the water's monthly marks now (monthly_now);
+    they stand when no whole-water sewage status does, as for the water's own status."""
+    mine = [iv for iv in ivs if not (iv.get("placement") == "reach" and iv.get("reach") in _SHORE_REACHES)]
+    color, active = status_at(mine, now)
+    sew = max((RANK[iv["color"]] for iv in active if (iv.get("category") or "sewage") == "sewage"), default=-1)
+    marks = [] if sew > RANK["monthly"] else list(monthly or [])
+    if marks and RANK[color] < RANK["monthly"]:
+        color = "monthly"
+    by_cat = {c: "grey" for c in CATEGORIES}
+    for iv in active:
+        c = iv.get("category") or "sewage"
+        if RANK[iv["color"]] > RANK[by_cat[c]]:
+            by_cat[c] = iv["color"]
+    if marks and RANK[by_cat["sewage"]] < RANK["monthly"]:
+        by_cat["sewage"] = "monthly"
+    head = min(CATEGORIES, key=lambda c: (precedence(c, by_cat[c]), CATEGORIES.index(c)))
+    fill = any(iv["color"] in FILL_COLOURS and iv["start"] <= now and (iv["end"] is None or iv["end"] > h0)
+               for iv in mine)
+    return {"fill": fill, "status": color, "by_category": by_cat, "category": head}
+
+
+def size_record(w: dict, shore: dict) -> dict:
+    """What put a water under the size rule: the threshold, the kinds, the water's area and where it came from."""
+    e = SH.shoreline_entry(w, shore) or {}
+    return {"min_area_km2": shore.get("min_area_km2"), "kinds": sorted(SH.size_kinds(shore)),
+            "area_km2": round(e["area_km2"], 1) if e.get("area_km2") is not None else None,
+            "area_basis": e.get("area_basis"),
+            **({"mean_width_km": round(w[SH.OUTLINE_WIDTH], 2)} if w.get(SH.OUTLINE_WIDTH) is not None else {})}
+
+
 def colours_whole_water(w: dict) -> bool:
     """Beach, rain and HAB advisories colour a whole water only on a lake, pond or reservoir under
     SMALL_WATER_KM2 (an unknown area counts as small)."""
@@ -4397,7 +4526,11 @@ PLACEMENT_TEXT = {"reach": " · on a modeled downstream reach", "named": " · na
                   "tidal": " · tidal or estuary: movement not modeled",
                   "unmodeled": " · downstream path not modeled",
                   "shoreline_unmodeled": " · lake shore: stretch not modeled",
-                  "ocean_shore_unmodeled": " · ocean shore: stretch not modeled"}
+                  "ocean_shore_unmodeled": " · ocean shore: stretch not modeled",
+                  # the size rule (SHORE_WHOLE): no stretch, so the whole lake, as before the rule
+                  SHORE_WHOLE: " · no shoreline stretch: the whole water is coloured",
+                  "bay_shore_unmodeled": " · bay shore: stretch not modeled",
+                  "sound_shore_unmodeled": " · sound shore: stretch not modeled"}
 SHORE_PLACEMENT_TEXT = " · on a modeled shoreline stretch"
 STRETCH_PLACEMENT_TEXT = " · on the stretch the advisory names"
 
@@ -4667,8 +4800,21 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         from build import reaches as reaches_mod
         reaches = reaches_mod.load_reaches()
     shore = SH.rule(rules)
+    waters = with_outline_areas(waters, shore)           # the size rule's area for a record with none (rule on only)
     shore_slugs = SH.shoreline_slugs(waters, shore)      # the Great Lakes records: a stretch, never a whole-lake fill
     ocean_slugs = {x for x in shore_slugs if SH.is_ocean(waters[x], shore)}     # and the open ocean's (the same model)
+    # the size rule's waters (none while it is off), and those of them that were filled whole before the rule: there a
+    # report or rain caution that can start no stretch keeps the whole-water colour (SHORE_WHOLE)
+    size_slugs = {x for x in shore_slugs if SH.is_size_rule(waters[x], shore)}
+    whole_slugs = {x for x in size_slugs if waters[x].get("kind") not in NO_FILL_KINDS}
+    if size_slugs or SH.size_on(shore):
+        # a cached shoreline stretch is read only while its water is a shoreline water and it can be drawn: a water
+        # that left the size rule (its outline gone this run, its state now under an ocean entry) or a stretch with no
+        # drawable segment keeps its reports on the whole water (Astra review 2026-11-16, findings 5 and 7). With the
+        # rule off nothing is filtered here, so the reaches are read exactly as before
+        reaches = {k: r for k, r in (reaches or {}).items()
+                   if r.get("model") != SH.MODEL or (r.get("water_slug") in shore_slugs and
+                                                     (not r.get("segments") or SH.drawable(r)))}
     _SHORE_REACHES.clear()
     _SHORE_REACHES.update(k for k, r in (reaches or {}).items() if r.get("model") == SH.MODEL)
     _STRETCH_REACHES.clear()
@@ -4832,7 +4978,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 continue                       # a reach carries it (below)
             tag = None
             if is_discharge and slug in shore_slugs:
-                tag = "ocean_shore_unmodeled" if slug in ocean_slugs else "shoreline_unmodeled"
+                tag = ("ocean_shore_unmodeled" if slug in ocean_slugs else SHORE_WHOLE if slug in whole_slugs
+                       else f"{waters[slug]['kind']}_shore_unmodeled" if slug in size_slugs
+                       else "shoreline_unmodeled")
             elif is_discharge and slug in river_slugs:
                 cut = [r for r, c in carry if slug in c]
                 tag = "tidal" if any(r.get("cut_reason") in ("tidal_at_outfall", "lake_at_outfall") for r in cut) \
@@ -5069,6 +5217,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             if slug in waters:
                 covered[slug].update(w.get("sources") or [rain_mod.SOURCE_ID])
         for slug, ivs in by_water.items():
+            if slug in whole_slugs:     # the size rule: a caution with no stretch here colours the whole water, as before
+                ivs = [{**iv, "placement": SHORE_WHOLE} if iv.get("placement") is None else iv for iv in ivs]
             intervals[slug].extend(ivs)
             covered[slug].update({iv.get("source_id") or rain_mod.SOURCE_ID for iv in ivs})
             for iv in ivs:
@@ -5182,6 +5332,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                            and r.get("reach") not in _STRETCH_REACHES for r in reasons)
         on_stretch_now = any(r.get("placement") == "reach" and r["status"] != "grey"
                              and r.get("reach") in _STRETCH_REACHES for r in reasons)
+        whole = whole_fill(ivs, now, h0, monthly_now.get(slug, [])) if slug in whole_slugs else None
         out_waters[slug] = {
             "name": w.get("name"), "kind": kind, "state": w.get("state"),
             "status": color, "since": iso(since), "reason_short": reasons[0]["short"] if reasons else None,
@@ -5190,16 +5341,24 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             "status_by_category": by_cat,
             "headline": {"category": head, "status": by_cat[head],
                          "label": None if head == "sewage" else CATEGORY_LABEL[head]},
-            "fill": kind not in NO_FILL_KINDS and slug not in shore_slugs,
+            # a water under the size rule that was filled before it: filled while a report with no stretch colours it
+            # (whole_fill), its colour then from those reports alone ("fill_status"); its stretches are drawn apart
+            "fill": (kind not in NO_FILL_KINDS and slug not in shore_slugs) if whole is None else whole["fill"],
             "status_basis": ("modeled reaches" if kind in RIVER_KINDS else
                              OCEAN_STATUS_BASIS if slug in ocean_slugs else
                              SOUND_STATUS_BASIS if slug in shore_slugs and kind == "sound" else
                              BAY_STATUS_BASIS if slug in shore_slugs and kind == "bay" else
                              "markers only: tidal or estuary, movement not modeled" if kind in ("bay", "sound")
+                             else SIZE_STATUS_BASIS if slug in whole_slugs
                              else SHORE_STATUS_BASIS if slug in shore_slugs else "whole water"),
-            "summary": (SHORE_SUMMARY if slug in shore_slugs else "part of this water is on a modeled reach")
-            if on_reach_now else STRETCH_SUMMARY if on_stretch_now else None,
+            "summary": (SHORE_WHOLE_SUMMARY if whole is not None and whole["status"] not in ("grey", "monthly")
+                        else (SHORE_SUMMARY if slug in shore_slugs else "part of this water is on a modeled reach")
+                        if on_reach_now else STRETCH_SUMMARY if on_stretch_now else None),
             **({"stretch_model": SH.MODEL} if slug in shore_slugs else {}),
+            # the size rule's record: the threshold, the water's area and where it came from (rule on only)
+            **({"shore_size_rule": size_record(waters[slug], shore)} if slug in size_slugs else {}),
+            **({"fill_status": whole["status"], "fill_status_by_category": whole["by_category"],
+                "fill_category": whole["category"]} if whole is not None else {}),
             "reaches": sorted(reaches_on_water.get(slug, [])),
             "unresolved_events": sorted({r["event_id"] for r in reasons
                                          if r["rule"] in ("unresolved", "end_never_reported", "listed_ongoing")}),

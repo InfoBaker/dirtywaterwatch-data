@@ -593,8 +593,19 @@ def discharge_starts(events: list[dict], skip: set[tuple[str, str]] | None = Non
 
 # ---------------------------------------------------------------- where it goes
 
+def size_rule_whole(waters: dict, rules: dict) -> set[str]:
+    """The lakes and reservoirs under the shoreline size rule (data/rules.json reach.shoreline.min_area_km2,
+    build/shoreline.py size_entry), where an outfall with no stretch keeps the whole-water caution; empty while the
+    rule is off."""
+    from build import shoreline as SH
+    shore = SH.rule(rules)
+    if not SH.size_on(shore):
+        return set()
+    return {s for s, w in waters.items() if w.get("kind") in WHOLE_WATER_KINDS and SH.is_size_rule(w, shore)}
+
+
 def targets(permit: str, waters: dict, outfalls: list[dict], rain_outfalls: list[dict], reaches: dict,
-            reach_waters_fn) -> tuple[list[str], dict, dict, list[dict]]:
+            reach_waters_fn, whole: set[str] | None = None) -> tuple[list[str], dict, dict, list[dict]]:
     """(reach keys, {water slug: placement tag}, {slug: reach keys}, set aside) for a permittee: its
     traced reaches and the rivers they run along ("reach"), the waters its outfalls discharge to:
     lakes, ponds and reservoirs whole (None), rivers with no traced reach ("unmodeled"), bays, sounds
@@ -628,6 +639,15 @@ def targets(permit: str, waters: dict, outfalls: list[dict], rain_outfalls: list
         if o.get("water_slug"):
             found.setdefault(o["water_slug"], []).append((o.get("outfall"), o.get("water_match"), o.get("distance_m")))
     for s in sorted(found):
+        if s in (whole or ()) and tags.get(s) == "reach":
+            # a lake under the shoreline size rule: the stretches are drawn, and an outfall of the permit here that has
+            # no stretch (no point, too far from the shore, no outline this run) keeps the whole-water caution, as
+            # before the rule (build/status.py SHORE_WHOLE); the stretches stay this water's reaches too
+            drawn = {str(r.get("outfall") or "").strip().upper() for r in (reaches or {}).values()
+                     if r.get("permit") == permit and r.get("segments") and r.get("water_slug") == s}
+            if any(str(o or "").strip().upper() not in drawn for o, _, _ in found[s]):
+                tags[s] = None
+            continue
         if s not in waters or s in tags:
             continue
         kind = waters[s].get("kind")
@@ -661,6 +681,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
     id "rain_likely:<permit>:<start YYYYMMDDTHH>Z", rule "rain_likely" and a "rain" record for the
     page (the total, the threshold and its basis, the sources)."""
     cfg = settings(rules)
+    whole = size_rule_whole(waters, rules)      # the shoreline size rule's lakes (none while it is off)
     rf = (rain or {}).get("rainfall") or {}
     hist = (rain or {}).get("history") or {}
     thresholds = (rain or {}).get("thresholds") or {}
@@ -726,7 +747,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
         dis = ((rain or {}).get("dischargers") or {}).get(permit) or {}
         name = dis.get("name") or thr.get("name") or info.get("name")
         keys, tags, reach_of, aside = targets(permit, waters, outfalls, info.get("outfalls") or [], reaches,
-                                              reach_waters_fn)
+                                              reach_waters_fn, whole)
         stale_h = float(cfg["rainfall_stale_hours"])
         own = operator_rule(permit, rules)
         if use_hist:
@@ -947,6 +968,7 @@ def _site_flags(site: dict, cfg: dict, now, h_start, waters, reaches, reach_wate
     levels file the records carry level "likely" and evidence basis "shared_site" (the site's own thresholds stand)."""
     if not site:
         return
+    whole = size_rule_whole(waters, rules or {})
     site_thr = {"kind": "shared_site", "trigger_basis": "operator", "threshold_in": None}
     snap, hist = site.get("snapshot") or {}, site.get("history") or {}
     rows = {r.get("npdes_permit"): r for r in snap.get("permittees") or [] if r.get("npdes_permit")}
@@ -967,7 +989,7 @@ def _site_flags(site: dict, cfg: dict, now, h_start, waters, reaches, reach_wate
     for permit in sorted(set(rows) | set(obs)):
         row = rows.get(permit) or {}
         outs = [o for o in outs_by.get(permit, []) if o.get("water_slug")]
-        keys, tags, reach_of, aside = targets(permit, waters, [], outs, reaches, reach_waters_fn)
+        keys, tags, reach_of, aside = targets(permit, waters, [], outs, reaches, reach_waters_fn, whole)
         t0, vals = site_series(obs.get(permit) or [], now)
         eps = runs(vals, t0, 0.5, now, tail, float(cfg["rainfall_stale_hours"])) if t0 else []
         blocks = [(st, st + supp) for st, _ in starts.get(permit, []) if st <= now]
