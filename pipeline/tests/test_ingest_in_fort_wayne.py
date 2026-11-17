@@ -383,3 +383,58 @@ def test_error_text_is_scrubbed(tmp_path):
     rc, f = run(tmp_path, site({U_NOV: d}))
     st = (tmp_path / "state.json").read_text()
     assert rc == 1 and "jane.doe@" not in json.dumps(f) + st and "555-0123" not in json.dumps(f) + st
+
+
+# the runner's backfill (refresh 43995607963, 2026-11-17) left three weeks unread: 2025-12-17, 2026-01-07 and
+# 2026-02-25, each a "no overflows" week whose first block draws its dates a few characters at a time ("12", "/",
+# "31/2025"), as hand-edited cells are drawn
+JAN07 = json.loads((FIX / "in_fort_wayne_cso_jan07_2026.json").read_text())
+FEB25 = json.loads((FIX / "in_fort_wayne_cso_feb25_2026.json").read_text())
+DEC17 = json.loads((FIX / "in_fort_wayne_cso_dec17_2025.json").read_text())
+
+
+@pytest.mark.parametrize("doc,first", [(JAN07, "2025-12-31"), (FEB25, "2026-02-18"), (DEC17, "2025-12-10")])
+def test_dates_drawn_a_few_characters_at_a_time_are_read(doc, first):
+    p = FW.parse(doc)
+    assert p["no_overflows"] is True and p["rows"] == []
+    assert p["days"][0] == first and len(p["days"]) == 7 and len(p["outfalls"]) == 39
+
+
+def test_a_split_date_that_does_not_make_a_day_is_unread():
+    bad = copy.deepcopy(JAN07)
+    piece = next(p for p in bad["pieces"] if p[3] == "31/2025")
+    piece[3] = "31/20x5"
+    bad["layout_text"] = bad["layout_text"].replace("12/31/2025", "12/31/20x5", 1)
+    with pytest.raises(FW.SummaryError):
+        FW.parse(bad)
+    gone = copy.deepcopy(JAN07)                    # one piece of a split date lost: the week is not read
+    gone["pieces"] = [p for p in gone["pieces"] if p[3] != "31/2025"]
+    gone["layout_text"] = None
+    with pytest.raises(FW.SummaryError):
+        FW.parse(gone)
+
+
+def test_runner_backfill_exit_tells_a_failed_read_from_unread_documents(tmp_path, capsys):
+    # refresh 43995607963 (2026-11-17): "PARTIAL 242 records; 3 documents not read" exited 1, failed the refresh and
+    # kept the history from being saved. A backfill that saved what it read exits 0 and names the rest.
+    u_bad = FW.BASE + "2026/11/CSO-7-Day-Summary-v2-2026-Nov-04.pdf"
+    broken = _edit(NOV, "Start of CSO", "Start of Event")
+    get = site({U_NOV: NOV, u_bad: broken}, page_links=[U_NOV])
+    rc, f = run(tmp_path, get, backfill=True, since="2026-11-03", today=date(2026, 11, 16))
+    assert rc == 0 and f["ok"] is False and u_bad in f["meta"]["unread"]
+    assert "not read" in capsys.readouterr().err
+    # the hourly run keeps today's rule: an unread document exits 1 (health false)
+    rc, f = run(tmp_path, site({U_NOV: NOV, u_bad: broken}, page_links=[U_NOV]))
+    assert rc == 1 and f["ok"] is False and u_bad in f["meta"]["unread"]
+
+
+def test_backfill_with_no_page_or_nothing_read_fails(tmp_path):
+    rc, _ = run(tmp_path, site({U_NOV: NOV}, page_code=403), backfill=True, since="2026-11-03",
+                today=date(2026, 11, 16))
+    assert rc == 1                                                          # the page not read
+    broken = _edit(NOV, "Start of CSO", "Start of Event")                   # every document unread: a layout change
+    fresh = tmp_path / "fresh"
+    fresh.mkdir()
+    rc, f = run(fresh, site({U_NOV: broken}, page_links=[U_NOV]), backfill=True, since="2026-11-10",
+                today=date(2026, 11, 16))
+    assert rc == 1 and f["ok"] is False and f["records"] == []

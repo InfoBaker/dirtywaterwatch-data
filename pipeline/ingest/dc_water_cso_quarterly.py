@@ -52,7 +52,8 @@ Reading and failure (pypdf, plain text; the PDF is never saved)
   A month is read when its Table 2-7 is found on a page with a text layer, its header and its seven dam structures
   and three outfall-sewer structures are all present, every structure row's dates and durations pair up (or the
   row gives dates and no duration at all), and every denying note names its structure and date. Otherwise the month
-  is unread (meta.unread with the reason: no text layer, a missing structure, a changed header, an encrypted file);
+  is unread (meta.unread with the reason: no text layer, a missing structure, a changed header, a file encrypted
+  with a password; one that opens with the empty user password, as 2023Q2 does, is read);
   the months that were read give their records, the run is ok=False while anything is unread (partial: the records
   are written, last_ok_at stays), and a month read earlier is never replaced by a failed read of a later copy.
   A changed header or an unknown structure fails loudly as a changed table.
@@ -72,6 +73,10 @@ Cadence
   quarters from FIRST_QUARTER on that it shows); --backfill reads every page and every quarter from FIRST_QUARTER
   (2020Q1; older reports use earlier layouts and are listed in meta.not_read, not failed); --refresh reads every due
   quarter again.
+
+Exit code: the hourly run exits 1 while anything is unread. --backfill exits 0 when the list was read and at least
+  one month is read (the unread months are named in meta.unread, the error and the output line, and health stays
+  false), and 1 when the list was not read or no month was read (backfill_exit).
 
 Run from pipeline/: python -m ingest.dc_water_cso_quarterly [--backfill] [--refresh] [--file report.pdf --quarter 2026Q3]
 """
@@ -199,6 +204,10 @@ def pdf_pages(content: bytes) -> list[str]:
     import pypdf
     try:
         reader = pypdf.PdfReader(io.BytesIO(content))
+        # an encrypted report that opens with the empty user password (2023Q2: AES-128, which pypdf decrypts with the
+        # cryptography package, pipeline/requirements.txt) is read; one that needs a real password is not
+        if reader.is_encrypted and reader.decrypt("") == pypdf.PasswordType.NOT_DECRYPTED:
+            raise UnreadableReport("the file is encrypted with a password: not read")
         return [p.extract_text() or "" for p in reader.pages]
     except pypdf.errors.DependencyError as e:
         raise UnreadableReport(f"the file is encrypted with a cipher this reader cannot open ({e})") from e
@@ -693,6 +702,7 @@ def main(argv=None) -> int:
     backfill, refresh = "--backfill" in argv, "--refresh" in argv
     state = read_json(STATE_PATH, {}) or {}
     errors: list[str] = []
+    list_failed = False
     if "--file" in argv:
         qk = argv[argv.index("--quarter") + 1]
         y, q = int(qk[:4]), int(qk[-1])
@@ -709,6 +719,7 @@ def main(argv=None) -> int:
         except (requests.RequestException, RuntimeError) as e:
             errors.append(f"publications list not read: {type(e).__name__}: {e}")
             listed = []
+            list_failed = True
         for e in due(state, listed, at, refresh):
             try:
                 content = fetch(e["url"])
@@ -732,6 +743,8 @@ def main(argv=None) -> int:
                                   "structure_table": "own" if v.get("structures") is not None else "reference"}
                               for k, v in sorted(reps.items())},
             "unread": unread,
+            "pending": {k: {"reason": v.get("reason"), "since": v.get("since")}
+                        for k, v in sorted((state.get("pending") or {}).items())},
             "set_apart": [{**a, "quarter": k} for k, v in sorted(reps.items())
                           for mv in (v.get("months") or {}).values() for a in mv.get("set_apart") or []],
             "dry_weather_statements": [mv["dwo"] for v in reps.values() for mv in (v.get("months") or {}).values()
@@ -748,7 +761,28 @@ def main(argv=None) -> int:
                         partial=bool(errors))
     print(f"{SOURCE_ID}: {len(recs)} dated overflows from {len(reps)} quarters ({len(unread)} months unread, "
           f"{dups} linked to EPA rows) -> {path}")
-    return 0 if not errors else 1
+    return backfill_exit(errors, backfill, list_failed, reps, unread, state.get("pending") or {})
+
+
+def backfill_exit(errors: list[str], backfill: bool, list_failed: bool, reps: dict, unread: dict,
+                  pending: dict | None = None) -> int:
+    """The exit code. The hourly run: 1 while anything is unread (health false). --backfill: 0 when the list was read
+    and the history saved holds at least one month read, the unread months named in the events file (ok false,
+    meta.unread) and on this line, so the refresh's one-time backfill loads what can be read; 1 when the read itself
+    failed (the list not read, or no month read at all: a changed layout, or a list with no report from
+    FIRST_QUARTER on). A quarter whose fetch or read failed after an earlier read is named from meta.pending."""
+    read_any = any(mv.get("status") == "read" for v in reps.values() for mv in (v.get("months") or {}).values())
+    if backfill and (list_failed or not read_any):
+        if not errors:
+            print(f"{SOURCE_ID}: backfill read no month", file=sys.stderr)
+        return 1
+    if not errors:
+        return 0
+    if backfill:
+        print(f"{SOURCE_ID}: backfill saved; not read (named in meta.unread and meta.pending, health false until "
+              "read): " + ", ".join(sorted(unread) + sorted(pending or {})), file=sys.stderr)
+        return 0
+    return 1
 
 
 if __name__ == "__main__":

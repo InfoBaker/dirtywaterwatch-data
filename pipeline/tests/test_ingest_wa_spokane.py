@@ -184,3 +184,41 @@ def test_contact_text_in_a_location_is_scrubbed(tmp_path):
     st = tmp_path / "s.json"
     SP.run(rows, NOW, st, REG)
     assert "555-0123" not in json.dumps(rows) + st.read_text()
+
+
+# the hourly refresh of 2026-11-17 02:41Z read a page without the table ("no CSO table (MainContent_CSOGridView) on
+# the page"), while the runner probe 44016859738 (curl, the pipeline's user agent, 2026-11-17) received the whole page
+# with the table, as on 2026-11-16. The host sits behind Imperva Incapsula, whose bot check answers a refused client
+# in place of the page. Such an answer is a barrier: named plainly, never solved, never "no overflows".
+CHALLENGE = (FIX / "wa_spokane_cso_incapsula.html").read_text()
+PASS_THROUGH = ('<script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=0&ns=1&cb=0" async></script>'
+                "</body>")
+
+
+def test_the_bot_check_page_is_a_barrier_never_a_layout_or_none():
+    with pytest.raises(SP.BarrierError, match="Incapsula"):
+        SP.parse(CHALLENGE)
+
+
+def test_the_real_page_with_incapsulas_pass_through_script_reads():
+    # the page the runner receives ends with Incapsula's own script tag: still the page
+    rows, unread = SP.parse(PAGE.replace("</body>", PASS_THROUGH, 1))
+    assert len(rows) == 20 and unread == []
+
+
+def test_main_names_the_bot_check_and_keeps_records(tmp_path):
+    good = tmp_path / "good.html"
+    good.write_text(overflow(PAGE, 0, "11/16/2026 3:45:00 PM"))
+    out = tmp_path / "events.json"
+    assert SP.main(["--file", str(good), "--out", str(out)]) == 0
+    wall = tmp_path / "wall.html"
+    wall.write_text(CHALLENGE)
+    assert SP.main(["--file", str(wall), "--out", str(out)]) == 1
+    f = json.loads(out.read_text())
+    assert f["ok"] is False and len(f["records"]) == 1
+    assert "bot check" in f["error"] and "Incapsula" in f["error"]
+
+
+def test_a_page_without_the_table_says_what_came():
+    with pytest.raises(SP.LayoutError, match=r"bytes.*title 'Scheduled maintenance'"):
+        SP.parse("<html><head><title>Scheduled maintenance</title></head><body>Back soon</body></html>")
