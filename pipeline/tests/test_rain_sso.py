@@ -69,7 +69,8 @@ def records(until=TODAY - timedelta(days=20)) -> list[dict]:
     for i, d in enumerate(d for d in DRY_DAYS[::3] if d <= until):                # blockages: on dry days
         out.append(rec(f"d{i}", "al-dry", d, water="dry-creek-al"))
     for i, d in enumerate(d for d in STORM_DAYS[::2] if d <= until):              # rain-driven, in a delayed state
-        out.append(rec(f"t{i}", "tx-wet", d, st="TX", water="tx-creek"))
+        # its state from its permit's prefix, as a real record carries it (no ingester writes a top-level state)
+        out.append(rec(f"t{i}", "tx-wet", d, st="TX", water="tx-creek", npdes_permit="TX0047431"))
     for i, d in enumerate(d for d in STORM_DAYS[::2] if d <= date(2025, 6, 1)):   # rain-driven until mid-2025, then none
         out.append(rec(f"g{i}", "al-gone", d, water="gone-creek-al"))
     for i, d in enumerate(d for d in STORM_DAYS[::2] if d <= until):              # rain-driven, but none for 4 months
@@ -201,10 +202,13 @@ def test_a_state_not_graded_dated_reports_gets_nothing(levels):
     assert e["why_not"] == ['its state\'s reports grade "Dated reports, delayed", not "Dated reports"']
 
 
-def test_with_no_grades_on_file_nothing_qualifies():
+def test_with_no_grades_on_file_the_source_rule_decides_and_the_file_says_so():
+    """First run, 2026-11-16: with no grades on file every operator was turned off. Now the source rule (from the
+    events themselves) decides, the grade check is not made, and the file says the grades were missing."""
     d = built(grades={})
-    assert d["counts"]["qualify"] == 0
-    assert "the state's reporting grade is not on file yet" in d["operators"]["al-wet"]["why_not"]
+    assert d["state_grades_on_file"] is False
+    assert d["operators"]["al-wet"]["qualifies"] is True and d["operators"]["tx-wet"]["qualifies"] is True
+    assert not any("not on file" in w for e in d["operators"].values() for w in e["why_not"])
 
 
 def test_recency_a_repaired_system_drops_out(levels):
@@ -409,8 +413,10 @@ def test_operators_that_fail_a_guard_get_nothing_and_say_why(levels):
     # a grade that has dropped since the daily pass: the hourly check leaves it out too
     by_water2, _, blk2 = run(levels, storm(range(0, 6), 1.2), grades={"AL": "Dated reports, delayed"})
     assert by_water2 == {} and blk2["operators"] == {} and "al-wet" in blk2["not_covered"]
-    by_water3, _, _ = run(levels, storm(range(0, 6), 1.2), grades=None if False else {})
-    assert by_water3 == {}
+    # no grades file (the first switched-on hour): the daily verdict stands and the block says the grades are missing
+    by_water3, _, blk3 = run(levels, storm(range(0, 6), 1.2), grades={})
+    assert by_water3 and set(blk3["operators"]) == set(blk["operators"])
+    assert any("no state grades file" in p for p in blk3["problems"])
 
 
 def test_with_the_switch_off_nothing_is_computed(levels):
