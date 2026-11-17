@@ -616,11 +616,6 @@ def live_points(rules: dict | None = None, levels: dict | None = None) -> list[d
     return out
 
 
-def is_key(permit) -> bool:
-    """True for the key the live rainfall readings carry for a separate sewer operator ("sso:<operator>")."""
-    return str(permit).startswith(KEY_PREFIX)
-
-
 def trace_key(event_id: str) -> str:
     """The key build/reaches gives a stretch traced from a report's own point (event_points)."""
     return "pt-" + hashlib.sha1(event_id.encode()).hexdigest()[:12]
