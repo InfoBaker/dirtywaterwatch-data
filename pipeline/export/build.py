@@ -37,7 +37,9 @@ Files:
                      (data/rules.json reach.shoreline) a reach is a shoreline stretch (model "shoreline"):
                      a segment each way along the shore from the outfall, no arrival times, a stop marker
                      at each end (cut_reason shoreline_limit or shoreline_end), properties.states and
-                     waters (the lake's records in the states it touches); the lake itself is drawn as an
+                     waters (the lake's records in the states it touches), and an islet beside the point
+                     marked whole (reach.shoreline.min_ring_km) as a segment of its own with islet true,
+                     km 0 to 0 and no stop marker; the lake itself is drawn as an
                      outline (overlays display "outline", stretch_model "shoreline")
   reach-paths.geojson every traced outfall path with its status now (replay with history.json reaches)
   reaches/<st>.geojson the same per live state (write_reach_state_files): the traced paths (feature "path"), the
@@ -546,7 +548,10 @@ def shore_event_features(a: dict, r: dict, e: dict, waters_by_reach: dict) -> li
                                    "arrival_hours_leading_edge": None, "reached_fast": None, "reached_typical": None,
                                    "hours_since_start": a["hours_since_start"], "gauge": None, "flow_cfs": None,
                                    "flow_time": None, "flow_basis": None, "cut_reason": r.get("cut_reason"),
-                                   "line_text": SHORE_LINE_TEXT, "label": label, "fixture": bool(e.get("fixture"))}})
+                                   "line_text": SHORE_LINE_TEXT, "label": label, "fixture": bool(e.get("fixture")),
+                                   # an islet beside the point, marked whole (reach.shoreline.min_ring_km): its whole
+                                   # shore, not a distance along the stretch (its km are 0 to 0), and it has no stop
+                                   **({"islet": True} if sg.get("islet") else {})}})
     for s in r.get("stops") or []:
         out.append({"type": "Feature", "geometry": {"type": "Point", "coordinates": s["coords"]},
                     "properties": {**common_props, "feature": "stop", "cut_reason": s.get("cut_reason"),
