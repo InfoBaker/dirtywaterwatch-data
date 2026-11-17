@@ -383,3 +383,31 @@ def test_error_text_is_scrubbed(tmp_path):
     rc, f = run(tmp_path, site({U_NOV: d}))
     st = (tmp_path / "state.json").read_text()
     assert rc == 1 and "jane.doe@" not in json.dumps(f) + st and "555-0123" not in json.dumps(f) + st
+
+
+# the runner's backfill (refresh 43995607963, 2026-11-17) left three weeks unread: 2025-12-17, 2026-01-07 and
+# 2026-02-25, each a "no overflows" week whose first block draws its dates a few characters at a time ("12", "/",
+# "31/2025"), as hand-edited cells are drawn
+JAN07 = json.loads((FIX / "in_fort_wayne_cso_jan07_2026.json").read_text())
+FEB25 = json.loads((FIX / "in_fort_wayne_cso_feb25_2026.json").read_text())
+
+
+@pytest.mark.parametrize("doc,first", [(JAN07, "2025-12-31"), (FEB25, "2026-02-18")])
+def test_dates_drawn_a_few_characters_at_a_time_are_read(doc, first):
+    p = FW.parse(doc)
+    assert p["no_overflows"] is True and p["rows"] == []
+    assert p["days"][0] == first and len(p["days"]) == 7 and len(p["outfalls"]) == 39
+
+
+def test_a_split_date_that_does_not_make_a_day_is_unread():
+    bad = copy.deepcopy(JAN07)
+    piece = next(p for p in bad["pieces"] if p[3] == "31/2025")
+    piece[3] = "31/20x5"
+    bad["layout_text"] = bad["layout_text"].replace("12/31/2025", "12/31/20x5", 1)
+    with pytest.raises(FW.SummaryError):
+        FW.parse(bad)
+    gone = copy.deepcopy(JAN07)                    # one piece of a split date lost: the week is not read
+    gone["pieces"] = [p for p in gone["pieces"] if p[3] != "31/2025"]
+    gone["layout_text"] = None
+    with pytest.raises(FW.SummaryError):
+        FW.parse(gone)
