@@ -263,6 +263,12 @@ SOURCES: dict[str, dict] = {
     "ar-deq-overflow-incidents": {"cause": text("cause", "row.cause")},
     "wy-deq-spills": {"cause": text("CauseDescription", "row.CauseDescription")},
     "sc-florence-sso": {"cause": text("cause_text")},
+    # Somerville's discharge table (ingest/ma_somerville_cso.py): the cells as written; the page calls its volumes
+    # "estimated" ("their estimated discharge duration and volume")
+    "ma-somerville-cso-table": {"rainfall_in": plain_inches("row.rainfall_in"),
+                                "rainfall_label": lambda raw: "Event rainfall" if plain_inches("row.rainfall_in")(raw) else None,
+                                "duration_text": text("row.duration"),
+                                "volume_qualifier": lambda raw: "estimated" if text("row.volume_mg")(raw) else None},
 }
 
 
