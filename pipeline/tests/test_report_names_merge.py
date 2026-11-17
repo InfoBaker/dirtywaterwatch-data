@@ -201,5 +201,10 @@ def test_committed_files_hold_only_water_names(st, sid):
 
 def test_committed_willard_rows():
     d = json.loads((ROOT / "research" / "oh" / "receiving-waters-missing.json").read_text())
+    # Willard's two waters: a row while the names pass has not built the record, resolved once it has (Ohio's batch of
+    # 2026-11-17 built west-branch-huron-river-oh; Jacob Creek has no NHD feature of that name and stays a row)
     names = {(r["name"], r.get("county")) for r in d["rows"] if "oh-willard-cso-notices" in (r.get("sources") or {})}
-    assert names == {("Jacob Creek", "Huron County"), ("West Branch of Huron River", "Huron County")}
+    want = {("Jacob Creek", "Huron County"), ("West Branch of Huron River", "Huron County")}
+    built = {(r["name"], r.get("county")) for r in d.get("resolved") or [] if r.get("slugs")} & want
+    assert names | built == want
+    assert ("Jacob Creek", "Huron County") in names
