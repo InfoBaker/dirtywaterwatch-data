@@ -32,7 +32,8 @@ from pathlib import Path
 BUCKET = "dirtywaterwatch-data"
 WRANGLER_REDACT = Path(__file__).resolve().parents[1] / "scripts" / "wrangler_redact.py"
 KEY_RE = re.compile(r"inbox/[a-z0-9][a-z0-9._/-]{0,200}\.json")
-MISSING = re.compile(r"specified key does not exist|NoSuchKey|\(404\)|not found", re.I)
+MISSING = re.compile(r"specified key does not exist|NoSuchKey|\(404\)|not found", re.I)    # a category's word
+ANSWER_ABSENT = re.compile(r"The specified key does not exist")
 ABSENT = "absent"
 
 
@@ -53,7 +54,7 @@ def get(key: str, timeout: int = 120) -> tuple[bytes | None, str | None]:
     if p.returncode == 0 and p.stdout:
         return p.stdout, None
     err = (p.stderr or b"").decode("utf-8", "replace")
-    if MISSING.search(err):
+    if ANSWER_ABSENT.search(err):       # wrangler's own words, and the filter's for the S3 route: nothing else is absent
         return None, ABSENT
     c = category(err)
     return None, f"not read ({c if c != 'unreadable' else f'exit {p.returncode}'})"

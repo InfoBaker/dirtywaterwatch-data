@@ -83,6 +83,9 @@ ROWS_SQL = ("SELECT id, received_at, list_id, raw_key, size FROM inbound WHERE c
 MAX_FETCH = 200                 # raw messages read per run (new, re-parsed, retried)
 RETRY = {"fetch_failed"}
 RETRY_MAX = 12                  # fetch attempts before a message is left as fetch_failed for good (counted)
+# `aws s3 cp s3://... -` says this of an absent object; a bad key, a missing bucket or a refusal is a failure, never
+# "absent" (the r2-s3 review's P1, data repository 8551eb0): a refused state read must not look like a first run
+S3_ABSENT = re.compile(rb"An error occurred \(404\) when calling the HeadObject operation")
 ROOT = Path(__file__).resolve().parents[2]
 WRANGLER_REDACT = ROOT / "scripts" / "wrangler_redact.py"
 
@@ -162,10 +165,9 @@ class ApiTransport:
             raise RuntimeError(f"R2 S3 read could not run ({category_of(e)})") from None
         if p.returncode == 0:
             return p.stdout
-        c = category(p.stderr.decode("utf-8", "replace") + f" exit {p.returncode}")
-        if c == "absent":
+        if S3_ABSENT.search(p.stderr):       # an absent object and nothing else (as scripts/wrangler_redact.py reads it)
             return None
-        raise RuntimeError(f"R2 S3 read failed ({c})")
+        raise RuntimeError(f"R2 S3 read failed ({category(p.stderr.decode('utf-8', 'replace') + f' exit {p.returncode}')})")
 
     @classmethod
     def _raw_s3(cls, key: str) -> bytes:
