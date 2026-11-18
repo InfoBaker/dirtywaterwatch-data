@@ -1,7 +1,10 @@
 # Token check: do the repository's Cloudflare tokens verify, belong to the account named by CLOUDFLARE_ACCOUNT_ID,
-# and reach what the pipeline uses (R2 objects in dirtywaterwatch-data and dirtywaterwatch-raw, D1)? It writes and
-# removes one small test object. It prints HTTP codes, Cloudflare's success flags and error codes and lengths; never
-# a value, a name or an address.
+# and reach what the pipeline uses? Since 2026-11-18 that is R2 objects in dirtywaterwatch-data only (state/, and the
+# inbox/ files the private site repository writes: the e-mail lists and the Worker's NBC file); the pipeline no longer
+# reads D1 or dirtywaterwatch-raw (the site repository's mail-feed job does, with the site's token). The raw-bucket and
+# D1 lines stay, labelled "not needed by the pipeline": an answer of allowed there is access the token can give up.
+# It writes and removes one small test object. It prints HTTP codes, Cloudflare's success flags and error codes and
+# lengths; never a value, a name or an address.
 name: Token check
 on: workflow_dispatch
 permissions: { contents: read }
@@ -23,12 +26,12 @@ jobs:
             echo "   user token verify: $(api /user/tokens/verify) $(flags)"
             echo "   account token verify: $(api /accounts/$ACCT/tokens/verify) $(flags)"
             echo "   R2 read dirtywaterwatch-data/state/PAUSE: $(api /accounts/$ACCT/r2/buckets/dirtywaterwatch-data/objects/state/PAUSE) (200 or 404 = allowed)"
-            echo "   R2 read dirtywaterwatch-raw (absent key): $(api /accounts/$ACCT/r2/buckets/dirtywaterwatch-raw/objects/ci-check/absent) (404 = allowed)"
+            echo "   R2 read dirtywaterwatch-raw (absent key; not needed by the pipeline): $(api /accounts/$ACCT/r2/buckets/dirtywaterwatch-raw/objects/ci-check/absent) (404 = allowed)"
             printf 'token check %s\n' "$(date -u +%FT%TZ)" > t.txt
             w=$(curl -s -o r.json -w '%{http_code}' -X PUT -H "Authorization: Bearer $T" --data-binary @t.txt "https://api.cloudflare.com/client/v4/accounts/$ACCT/r2/buckets/dirtywaterwatch-data/objects/ci-check/token-check.txt")
             d=$(curl -s -o r.json -w '%{http_code}' -X DELETE -H "Authorization: Bearer $T" "https://api.cloudflare.com/client/v4/accounts/$ACCT/r2/buckets/dirtywaterwatch-data/objects/ci-check/token-check.txt")
             echo "   R2 write dirtywaterwatch-data/ci-check: put $w, delete $d (200 = allowed)"
-            echo "   D1 database list: $(api /accounts/$ACCT/d1/database) $(flags)"
+            echo "   D1 database list (not needed by the pipeline): $(api /accounts/$ACCT/d1/database) $(flags)"
             rm -f t.txt r.json
           }
           echo "account id length ${#ACCT} (an account id has 32)"
@@ -46,7 +49,8 @@ jobs:
           echo "== S3 keys from CLOUDFLARE_R2_TOKEN: key id length ${#KID}"
           echo "   S3 head dirtywaterwatch-data/state/PAUSE: $(s3 head-object --bucket dirtywaterwatch-data --key state/PAUSE) (exit 0, or 404/Not Found = allowed)"
           echo "   S3 head dirtywaterwatch-data/state/build.tar.gz: $(s3 head-object --bucket dirtywaterwatch-data --key state/build.tar.gz) (exit 0 = allowed)"
-          echo "   S3 head dirtywaterwatch-raw (absent key): $(s3 head-object --bucket dirtywaterwatch-raw --key ci-check/absent) (404/Not Found = allowed)"
+          echo "   S3 head dirtywaterwatch-data/inbox/nbc-worker.json: $(s3 head-object --bucket dirtywaterwatch-data --key inbox/nbc-worker.json) (exit 0, or 404/Not Found before the Worker writes it = allowed)"
+          echo "   S3 head dirtywaterwatch-raw (absent key; not needed by the pipeline): $(s3 head-object --bucket dirtywaterwatch-raw --key ci-check/absent) (404/Not Found = allowed)"
           printf 'token check %s\n' "$(date -u +%FT%TZ)" > t.txt
           echo "   S3 put dirtywaterwatch-data/ci-check: $(s3 put-object --bucket dirtywaterwatch-data --key ci-check/token-check.txt --body t.txt) (exit 0 = allowed)"
           echo "   S3 delete dirtywaterwatch-data/ci-check: $(s3 delete-object --bucket dirtywaterwatch-data --key ci-check/token-check.txt) (exit 0 = allowed)"

@@ -1,5 +1,5 @@
 """NBC CSO Alarm Map: activations accumulated across polls (open, continue, close, reappear), the
-Worker's 5-minute sightings folded in from D1 or /api/live (no network)."""
+Worker's 5-minute sightings folded in from its file in the bucket or /api/live (no network)."""
 import json
 
 from ingest import ri_nbc as N
@@ -155,3 +155,82 @@ def test_a_missing_row_or_a_short_answer_is_not_an_end():
     stats = N.poll(st2, [pin()], [], "2026-11-03T19:00:00Z", REFS)
     (k2, e2), = st2["events"].items()
     assert e2["state"] == "ongoing" and stats["pins_complete"] is False and stats["not_judged"] == 1
+
+
+# ---------------------------------------------------------------- the Worker's file (inbox/nbc-worker.json, 2026-11-18)
+
+def worker_file(written="2026-11-03T21:05:00Z", poller_ok="2026-11-03T21:05:00Z", **over):
+    rec = json.dumps({"event_id": "ri-nbc:OF220-20261103T1530", "status": "ongoing",
+                      "started_at": "2026-11-03T15:30:00-05:00", "ended_at": None, "outfall_name": "OF 220_Moshassuck_Esten",
+                      "lat": 41.86, "lon": -71.4, "raw": {}})
+    return {"schema": 1, "source_id": "ri-nbc", "written_at": written, "window_days": 7,
+            "since": "2026-10-27T21:05:00Z", "poller": {"last_ok_at": poller_ok, "last_error": None},
+            "events": [{"event_id": "ri-nbc:OF220-20261103T1530", "first_seen_at": "2026-11-03T20:35:58Z",
+                        "last_changed_at": "2026-11-03T21:00:58Z", "status": "ongoing"}],
+            "revisions": [{"event_id": "ri-nbc:OF220-20261103T1530", "fetched_at": "2026-11-01T20:35:58Z", "record": rec},
+                          {"event_id": "ri-nbc:OF220-20261103T1530", "fetched_at": "2026-11-03T20:35:58Z", "record": rec}],
+            **over}
+
+
+def test_the_workers_file_is_read_in_place_of_d1():
+    now = "2026-11-03T22:00:00Z"
+    wk, why = N.read_worker_inbox(None, now, reader=lambda key: (worker_file(), None))
+    assert why is None and set(wk) == {"OF220-20261103T1530"} and len(wk["OF220-20261103T1530"]["obs"]) == 2
+    # after a good read, only the revisions since two days before it
+    wk, _ = N.read_worker_inbox("2026-11-02T00:00:00Z", now, reader=lambda key: (worker_file(), None))
+    assert [o[0] for o in wk["OF220-20261103T1530"]["obs"]] == ["2026-11-03T20:35:58Z"]
+    assert wk["OF220-20261103T1530"]["first_seen_at"] == "2026-11-03T20:35:58Z"
+
+
+def test_a_stale_absent_or_odd_workers_file_is_not_used():
+    now = "2026-11-03T23:30:00Z"
+    cases = {
+        "written at 2026-11-03T21:05:00Z, more than 2 hours ago": (worker_file(), None),
+        "the Worker's NBC poller last succeeded at 2026-11-03T20:00:00Z": (
+            worker_file(written="2026-11-03T23:25:00Z", poller_ok="2026-11-03T20:00:00Z"), None),
+        "does not say when the Worker's NBC poller": (worker_file(written="2026-11-03T23:25:00Z", poller=None), None),
+        "no file": (None, "absent"),
+        "not read (exit 1": (None, "not read (exit 1: refused)"),
+        "not in the Worker's form": (worker_file(written="2026-11-03T23:25:00Z", schema=2), None),
+    }
+    for want, answer in cases.items():
+        wk, why = N.read_worker_inbox(None, now, reader=lambda key, a=answer: a)
+        assert wk is None and want in why, (want, why)
+
+
+def test_ri_nbc_reads_the_inbox_through_the_filtered_wrangler(tmp_path, monkeypatch):
+    (tmp_path / "inbox").mkdir()
+    (tmp_path / "inbox" / "nbc-worker.json").write_text(json.dumps(worker_file()))
+    monkeypatch.setenv("DWW_INBOX_DIR", str(tmp_path))
+    wk, why = N.read_worker_inbox(None, "2026-11-03T22:00:00Z")
+    assert why is None and "OF220-20261103T1530" in wk
+
+
+def test_p2_4_a_malformed_workers_file_falls_back(tmp_path):
+    now = "2026-11-03T22:00:00Z"
+    for bad in ({"revisions": [None]}, {"events": [None]}, {"revisions": [{"event_id": 5, "fetched_at": "x"}]},
+                {"open_records": [None]}, {"open_records": {"x": 1}}, {"revisions": [{"event_id": "ri-nbc:A",
+                                                                                         "fetched_at": None}]}):
+        wk, why = N.read_worker_inbox(None, now, reader=lambda key, b=bad: (worker_file(**b), None))
+        assert wk is None and "not in the Worker's form" in why, bad
+
+
+def test_p2_5_an_open_record_older_than_the_window_is_folded_in():
+    old = json.dumps({"event_id": "ri-nbc:OF101-20261020T0100", "status": "ongoing",
+                      "started_at": "2026-10-20T01:00:00-04:00", "ended_at": None, "outfall_name": "OF 101_x",
+                      "lat": 41.9, "lon": -71.4, "raw": {}})
+    doc = worker_file(open_records=[{"event_id": "ri-nbc:OF101-20261020T0100", "fetched_at": "2026-10-20T05:10:00Z",
+                                     "record": old}])
+    # a later read (since after the open record's last change) still gets it: it is never filtered by `since`
+    wk, why = N.read_worker_inbox("2026-11-02T00:00:00Z", "2026-11-03T22:00:00Z", reader=lambda key: (doc, None))
+    assert why is None and "OF101-20261020T0100" in wk and wk["OF101-20261020T0100"]["record"]["status"] == "ongoing"
+    st = {}
+    assert N.merge_worker(st, wk, REFS, "inbox")["worker_new"] == 2
+
+
+def test_p1_3_the_live_fallbacks_error_is_a_category():
+    class Boom:
+        def get(self, *a, **k):
+            raise ConnectionError(f"HTTPSConnectionPool: {'0123456789abcdef' * 2}.r2.cloudflarestorage.com refused")
+    wk, why = N.read_worker_live(Boom())
+    assert wk is None and why == f"{N.LIVE_URL}: unreachable"

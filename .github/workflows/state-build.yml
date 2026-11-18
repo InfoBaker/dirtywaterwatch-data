@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}   # R2 objects on the pipeline's two buckets (S3 endpoint) and D1 read
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}   # R2 objects in dirtywaterwatch-data (S3 endpoint); nothing else since 2026-11-18
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       OBL_API_KEY: ${{ secrets.OBL_API_KEY }}
       PYTHONUNBUFFERED: '1'

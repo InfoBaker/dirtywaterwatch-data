@@ -1,4 +1,7 @@
-"""Operators' e-mail notices (ingest/operator_mail.py, ingest/mail/): invented messages in the real shapes.
+"""Operators' e-mail notices: invented messages in the real shapes. Since the split (2026-11-18) the read (the index,
+the archive, trust, the parsers, retries: pipeline/mailfeed/read.py, run by the site repository's mail-feed job) and the
+link (placement, the one-event rules, the platform hold, the quiet check: ingest/operator_mail.py, run by the refresh)
+are tested here side by side; run_feed runs both, the way the job and the refresh do one after the other.
 
 Nothing here is a real message: the operators' layouts are copied, the names, numbers and contacts are made up."""
 from __future__ import annotations
@@ -7,12 +10,14 @@ import json
 import re
 from datetime import UTC, datetime, timedelta
 from email.message import EmailMessage
+from pathlib import Path
 
 import pytest
 
 from ingest import operator_mail as O
 from ingest.mail import PARSERS, ct_deep_press, holyoke, manchester, springfield
 from ingest.mail.message import Mail, parse_mail, read_auth, verified
+from mailfeed import read as R
 
 LISTS = {
     "holyoke": {"kind": "notices", "parser": "holyoke", "source_id": "ma-holyoke-everbridge",
@@ -373,6 +378,19 @@ class FakeTransport:
         return self.raws[key]
 
 
+def run_feed(tr, lists, state, events_dir, now):
+    """The split feed in one call: the read (mailfeed/read.py) writes its state at `state` and the lists' inbox files
+    beside it, then the link (ingest/operator_mail.py) reads those files and writes events_dir. The read's exit code."""
+    files = Path(state).parent / "inbox-files"
+    rc = R.run(tr, lists, Path(state), files, now=now)
+
+    def reader(key):
+        p = files / Path(key).name
+        return (json.loads(p.read_text()), None) if p.is_file() else (None, "absent")
+    O.run(lists, Path(events_dir), now=now, reader=reader)
+    return rc
+
+
 def world(tmp_path):
     rows, raws = [], {}
 
@@ -398,7 +416,7 @@ def test_run_writes_one_file_per_list_and_an_index_without_personal_data(tmp_pat
     rows, raws = world(tmp_path)
     tr = FakeTransport(rows, raws)
     lists = {k: v for k, v in LISTS.items() if k in ("holyoke", "usgs-waterdata", "ct-deep")}
-    assert O.run(tr, lists, tmp_path / "idx.json", tmp_path / "events", now=NOW) == 0
+    assert run_feed(tr, lists, tmp_path / "idx.json", tmp_path / "events", now=NOW) == 0
     ev = json.loads((tmp_path / "events/ma-holyoke-everbridge.json").read_text())
     assert ev["ok"] is True and ev["count"] == 1 and ev["records"][0]["event_id"] == "ma-holyoke-everbridge:h1:1"
     assert ev["meta"]["results"] == {"failed": 1, "notice": 1, "unverified": 1}
@@ -411,11 +429,11 @@ def test_run_writes_one_file_per_list_and_an_index_without_personal_data(tmp_pat
     assert "CSO Notification" not in (tmp_path / "idx.json").read_text()           # no subjects kept
     # a second run reads nothing again; a parser change re-reads its list's messages only
     n = tr.reads
-    O.run(tr, lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
+    run_feed(tr, lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
     assert tr.reads == n
     holyoke.VERSION += 1
     try:
-        O.run(tr, lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
+        run_feed(tr, lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
         assert tr.reads == n + 3
     finally:
         holyoke.VERSION -= 1
@@ -424,14 +442,14 @@ def test_run_writes_one_file_per_list_and_an_index_without_personal_data(tmp_pat
 def test_an_unreadable_index_keeps_the_previous_records(tmp_path):
     rows, raws = world(tmp_path)
     lists = {"holyoke": LISTS["holyoke"]}
-    O.run(FakeTransport(rows, raws), lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
-    O.run(FakeTransport(rows, raws, fail_rows=True), lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
+    run_feed(FakeTransport(rows, raws), lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
+    run_feed(FakeTransport(rows, raws, fail_rows=True), lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
     ev = json.loads((tmp_path / "events/ma-holyoke-everbridge.json").read_text())
     assert ev["ok"] is False and ev["count"] == 1 and "could not be read" in ev["error"] and "403" in ev["error"]
 
 
 def test_no_credentials_is_a_recorded_failure(tmp_path):
-    assert O.run(None, {"holyoke": LISTS["holyoke"]}, tmp_path / "idx.json", tmp_path / "events", now=NOW) == 1
+    assert run_feed(None, {"holyoke": LISTS["holyoke"]}, tmp_path / "idx.json", tmp_path / "events", now=NOW) == 1
     ev = json.loads((tmp_path / "events/ma-holyoke-everbridge.json").read_text())
     assert ev["ok"] is False and "credentials" in ev["error"]
 
@@ -442,12 +460,12 @@ def test_a_fetch_failure_is_tried_again(tmp_path):
     broken = dict(raws)
     del broken["email/h1.eml"]
     tr = FakeTransport(rows, broken)
-    O.run(tr, lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
+    run_feed(tr, lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
     idx = json.loads((tmp_path / "idx.json").read_text())
     assert idx["messages"]["h1"]["result"] == "fetch_failed"
-    O.run(FakeTransport(rows, raws), lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
+    run_feed(FakeTransport(rows, raws), lists, tmp_path / "idx.json", tmp_path / "events", now=NOW)
     assert json.loads((tmp_path / "idx.json").read_text())["messages"]["h1"]["result"] == "fetch_failed"   # waits an hour
-    O.run(FakeTransport(rows, raws), lists, tmp_path / "idx.json", tmp_path / "events", now=NOW + timedelta(hours=2))
+    run_feed(FakeTransport(rows, raws), lists, tmp_path / "idx.json", tmp_path / "events", now=NOW + timedelta(hours=2))
     assert json.loads((tmp_path / "idx.json").read_text())["messages"]["h1"]["result"] == "notice"
 
 
@@ -457,7 +475,7 @@ def test_portal_link_and_quiet_flag_in_the_written_file(tmp_path):
     ev_dir.mkdir()
     (ev_dir / "ma-massdep.json").write_text(json.dumps({"records": [
         portal("p1", "HOL021", "2026-01-10T18:50:00-05:00", "2026-01-12T09:00:00-05:00")]}))
-    O.run(FakeTransport(rows, raws), {"holyoke": LISTS["holyoke"]}, tmp_path / "idx.json", ev_dir, now=NOW)
+    run_feed(FakeTransport(rows, raws), {"holyoke": LISTS["holyoke"]}, tmp_path / "idx.json", ev_dir, now=NOW)
     ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
     assert ev["records"][0]["duplicate_of"] == "ma-massdep:p1" and ev["meta"]["linked_to_portal"] == 1
     assert ev["meta"]["quiet"] is None
@@ -550,12 +568,12 @@ def test_p1_1_a_platform_only_notice_never_stands_alone(tmp_path):
               auth=cf("everbridge.net"))
     rows = [{"id": "e1", "received_at": "2026-11-17T02:00:00Z", "list_id": "holyoke", "raw_key": "k1", "size": 1}]
     ev_dir = tmp_path / "events"
-    O.run(FakeTransport(rows, {"k1": raw}), {"holyoke": LISTS["holyoke"]}, tmp_path / "i.json", ev_dir, now=NOW)
+    run_feed(FakeTransport(rows, {"k1": raw}), {"holyoke": LISTS["holyoke"]}, tmp_path / "i.json", ev_dir, now=NOW)
     ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
     assert ev["count"] == 0 and ev["meta"]["held_platform_only"] == 1 and ev["meta"]["results"] == {"notice": 1}
     (ev_dir / "ma-massdep.json").write_text(json.dumps({"records": [
         portal("p1", "HOL021", "2026-01-10T18:50:00-05:00", "2026-01-12T09:00:00-05:00")]}))
-    O.run(FakeTransport(rows, {"k1": raw}), {"holyoke": LISTS["holyoke"]}, tmp_path / "i.json", ev_dir, now=NOW)
+    run_feed(FakeTransport(rows, {"k1": raw}), {"holyoke": LISTS["holyoke"]}, tmp_path / "i.json", ev_dir, now=NOW)
     ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
     assert ev["count"] == 1 and ev["records"][0]["duplicate_of"] == "ma-massdep:p1"   # it adds to the portal's record
 
@@ -576,7 +594,7 @@ def test_p1_2_failure_notes_never_quote_the_message():
     PARSERS["boom"] = Boom
     try:
         row = {"id": "b1", "received_at": "2026-11-17T02:00:00Z", "list_id": "holyoke"}
-        e = O.read_message(eml("C <cso@holyoke.org>", "holyoke@x", "CSO", "x", auth=cf("holyoke.org")), row,
+        e = R.read_message(eml("C <cso@holyoke.org>", "holyoke@x", "CSO", "x", auth=cf("holyoke.org")), row,
                            {**LISTS["holyoke"], "parser": "boom"}, {})
     finally:
         del PARSERS["boom"]
@@ -604,8 +622,8 @@ def test_p1_4_the_local_reader_never_writes_the_message_to_a_file(monkeypatch):
 
     class P:
         returncode, stdout = 0, b"raw bytes"
-    monkeypatch.setattr(O.subprocess, "run", lambda args, **kw: calls.append(args) or P())
-    assert O.WranglerTransport().raw("email/x.eml") == b"raw bytes"
+    monkeypatch.setattr(R.subprocess, "run", lambda args, **kw: calls.append(args) or P())
+    assert R.WranglerTransport().raw("email/x.eml") == b"raw bytes"
     assert "--pipe" in calls[0] and "--file" not in calls[0]
 
 
@@ -614,18 +632,18 @@ def test_p1_5_new_mail_is_read_before_retries_and_failures_back_off(tmp_path):
              "size": 1} for i in range(3)]
     raw = eml("City of Holyoke <cso@holyoke.org>", "holyoke@x", "CSO", HOLYOKE_ACTIVE, auth=cf("holyoke.org"))
     idx = {"messages": {}}
-    O.update_index(idx, rows, FakeTransport(rows, {}), {"holyoke": LISTS["holyoke"]}, {}, max_fetch=2, now=NOW)
+    R.update_index(idx, rows, FakeTransport(rows, {}), {"holyoke": LISTS["holyoke"]}, {}, max_fetch=2, now=NOW)
     assert sorted(e["result"] for e in idx["messages"].values()) == ["fetch_failed", "fetch_failed", "pending"]
     rows2 = rows + [{"id": "new", "received_at": "2026-11-17T03:00:00Z", "list_id": "holyoke", "raw_key": "k", "size": 1}]
     tr = FakeTransport(rows2, {"k": raw})
-    O.update_index(idx, rows2, tr, {"holyoke": LISTS["holyoke"]}, {}, max_fetch=2, now=NOW + timedelta(minutes=5))
+    R.update_index(idx, rows2, tr, {"holyoke": LISTS["holyoke"]}, {}, max_fetch=2, now=NOW + timedelta(minutes=5))
     assert idx["messages"]["new"]["result"] == "notice"                    # read first
     assert tr.reads == 2                                                    # the pending one, not the waiting failures
     later = NOW + timedelta(hours=30)
-    for _ in range(O.RETRY_MAX + 2):
-        O.update_index(idx, rows2, FakeTransport(rows2, {"k": raw}), {"holyoke": LISTS["holyoke"]}, {}, max_fetch=10, now=later)
+    for _ in range(R.RETRY_MAX + 2):
+        R.update_index(idx, rows2, FakeTransport(rows2, {"k": raw}), {"holyoke": LISTS["holyoke"]}, {}, max_fetch=10, now=later)
         later += timedelta(hours=25)
-    assert all(idx["messages"][f"old{i}"]["tries"] == O.RETRY_MAX for i in range(3))   # then left, still counted
+    assert all(idx["messages"][f"old{i}"]["tries"] == R.RETRY_MAX for i in range(3))   # then left, still counted
 
 
 @pytest.mark.parametrize("status", ["Ongoing for over 8 hours", "Not ceased", "Not active", "Ceased or ongoing"])
@@ -722,9 +740,9 @@ def test_p1_12_a_ceased_only_notice_never_makes_a_reversed_window():
 def test_a_pending_list_keeps_its_messages_and_makes_no_record():
     spec = {"kind": "pending", "address": "revere@dirtywaterwatch.org"}
     row = {"id": "r1", "received_at": "2026-11-17T06:00:00Z", "list_id": "revere"}
-    e = O.read_message(eml("Revere <alerts@publicinput.com>", "revere@x", "Please confirm your subscription", "Click.",
+    e = R.read_message(eml("Revere <alerts@publicinput.com>", "revere@x", "Please confirm your subscription", "Click.",
                            auth=cf("publicinput.com")), row, spec, {})
     assert e["result"] == "account" and e["records"] == []
-    e = O.read_message(eml("Revere <alerts@publicinput.com>", "revere@x", "SSO Notice", "An overflow at ...",
+    e = R.read_message(eml("Revere <alerts@publicinput.com>", "revere@x", "SSO Notice", "An overflow at ...",
                            auth=cf("publicinput.com")), row, spec, {})
     assert e["result"] == "needs_rule" and e["records"] == []

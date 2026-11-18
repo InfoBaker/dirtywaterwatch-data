@@ -1,5 +1,5 @@
 """R2 objects through R2's S3 endpoint (2026-11-18): scripts/wrangler_redact.py's S3 route, scripts/r2-s3-keys.sh,
-operator_mail's S3 read, and the workflows' wiring. A stand-in AWS CLI keeps objects in a folder; no network."""
+the mail read's S3 read, the refresh's inbox read, and the workflows' wiring. A stand-in AWS CLI keeps objects in a folder; no network."""
 from __future__ import annotations
 
 import hashlib
@@ -169,11 +169,12 @@ def test_d1_calls_still_go_to_wrangler_with_the_endpoint_set(s3, tmp_path):
     assert p.returncode == 0 and b"real wrangler: d1 execute" in p.stdout and calls(store) == []
 
 
-def test_operator_mail_reads_raw_mail_through_s3(s3, monkeypatch):
+def test_the_mail_read_reads_raw_mail_through_s3(s3, monkeypatch):
+    # the private mail job's reader (mailfeed/read.py since 2026-11-18; the refresh no longer reads raw mail)
     store, env = s3
     for k in ("R2_S3_ENDPOINT", "AWS_CLI", "FAKE_S3", "AWS_DEFAULT_REGION"):
         monkeypatch.setenv(k, env[k])
-    from ingest import operator_mail as M
+    from mailfeed import read as M
     (store / "dirtywaterwatch-raw" / "email" / "2026" / "11").mkdir(parents=True)
     (store / "dirtywaterwatch-raw" / "email" / "2026" / "11" / "a.eml").write_bytes(b"raw message")
     t = M.ApiTransport("token", "acct")
@@ -181,6 +182,93 @@ def test_operator_mail_reads_raw_mail_through_s3(s3, monkeypatch):
     with pytest.raises(RuntimeError, match=r"R2 S3 read failed \(absent\)"):
         t.raw("email/2026/11/missing.eml")
     assert all(c.split()[-2:] == ["-", "--only-show-errors"] for c in calls(store))    # to stdout, never a file
+
+
+def test_the_refresh_reads_its_inbox_through_s3(s3, monkeypatch):
+    # pipeline/inbox.py (operator_mail's lists, ri_nbc's Worker file): wrangler's get --pipe through the filter, which
+    # takes the S3 route; the bytes to memory, an absent key told apart from a refusal
+    store, env = s3
+    for k in ("R2_S3_ENDPOINT", "AWS_CLI", "FAKE_S3", "AWS_DEFAULT_REGION", "WRANGLER_REAL"):
+        monkeypatch.setenv(k, env[k])
+    monkeypatch.delenv("DWW_INBOX_DIR", raising=False)
+    import inbox
+    (store / "dirtywaterwatch-data" / "inbox" / "mail").mkdir(parents=True)
+    (store / "dirtywaterwatch-data" / "inbox" / "mail" / "ma-swsc-cso-email.json").write_text('{"schema": 1}')
+    assert inbox.get_json("inbox/mail/ma-swsc-cso-email.json") == ({"schema": 1}, None)
+    assert inbox.get("inbox/mail/nothing.json") == (None, inbox.ABSENT)
+    assert all(" s3 cp s3://dirtywaterwatch-data/inbox/mail/" in f" {c}" and c.endswith("- --only-show-errors")
+               for c in calls(store))
+    monkeypatch.setenv("FAKE_S3_DENY", "1")
+    data, why = inbox.get("inbox/mail/ma-swsc-cso-email.json")
+    assert data is None and why == "not read (denied)"                       # a category, never the words
+    with pytest.raises(ValueError):
+        inbox.get("state/build.tar.gz")                     # inbox/ only
+
+
+def test_the_mail_job_reads_and_writes_the_data_bucket_through_s3(s3, monkeypatch):
+    # the mail job's own token is limited to its buckets (review 2026-11-18 P1-2): the state and the inbox go through
+    # R2's S3 endpoint, never the REST API
+    store, env = s3
+    for k in ("R2_S3_ENDPOINT", "AWS_CLI", "FAKE_S3", "AWS_DEFAULT_REGION"):
+        monkeypatch.setenv(k, env[k])
+    from mailfeed import read as M
+
+    class NoRest:
+        headers = {}
+
+        def __getattr__(self, name):
+            raise AssertionError(f"REST call {name}")
+    t = M.ApiTransport("token", "acct", sess=NoRest())
+    assert t.get_object("inbox/mail/state/inbound-mail.json") is None                   # absent: a first run
+    t.put_object("inbox/mail/ma-swsc-cso-email.json", b'{"schema": 1}')
+    assert (store / "dirtywaterwatch-data" / "inbox" / "mail" / "ma-swsc-cso-email.json").read_bytes() == b'{"schema": 1}'
+    assert t.get_object("inbox/mail/ma-swsc-cso-email.json") == b'{"schema": 1}'
+    monkeypatch.setenv("FAKE_S3_DENY", "1")
+    with pytest.raises(RuntimeError) as e:
+        t.get_object("inbox/mail/ma-swsc-cso-email.json")
+    assert "@" not in str(e.value) and "acct.r2" not in str(e.value)
+
+
+def test_the_inbox_read_saves_a_category_never_the_endpoint(s3, monkeypatch, tmp_path):
+    # review 2026-11-18 P1-3: an AWS error naming the endpoint (the account id is in its host) is never kept
+    store, env = s3
+    loud = _exe(tmp_path / "aws-loud", "#!/bin/sh\necho \"Could not connect to the endpoint URL: $2/x\" >&2\nexit 255\n")
+    for k in ("R2_S3_ENDPOINT", "FAKE_S3", "AWS_DEFAULT_REGION", "WRANGLER_REAL"):
+        monkeypatch.setenv(k, env[k])
+    monkeypatch.setenv("AWS_CLI", str(loud))
+    monkeypatch.delenv("DWW_INBOX_DIR", raising=False)
+    import inbox
+    data, why = inbox.get("inbox/mail/ma-swsc-cso-email.json")
+    assert data is None and why == "not read (unreachable)"
+
+
+def test_the_s3_routes_errors_never_carry_the_endpoint_or_the_account(s3, tmp_path):
+    # Astra review 2026-11-18 P1-3: R2's endpoint host is the account id; an AWS CLI error that names it reaches the
+    # public log or a caller's saved error only as [endpoint] / [account]
+    store, env = s3
+    acct = "0123456789abcdef0123456789abcdef"
+    endpoint = f"https://{acct}.r2.cloudflarestorage.com"
+    loud = _exe(tmp_path / "aws-loud", "#!/bin/sh\necho \"Could not connect to the endpoint URL: $2/b/k\" >&2\n"
+                f"echo \"account {acct} refused\" >&2\nexit 255\n")
+    e = {**env, "AWS_CLI": str(loud), "R2_S3_ENDPOINT": endpoint, "CLOUDFLARE_ACCOUNT_ID": acct}
+    for args in (("r2", "object", "get", "dirtywaterwatch-data/state/x.json", "--pipe"),
+                 ("r2", "object", "get", "dirtywaterwatch-data/state/x.json", "--file", str(tmp_path / "x")),
+                 ("r2", "object", "put", "dirtywaterwatch-data/state/x.json", "--file", str(REDACT))):
+        p = run(e, *args)
+        err = p.stderr.decode()
+        assert p.returncode != 0 and acct not in err and "cloudflarestorage" not in err, err
+        assert "[endpoint]/b/k" in err and "account [account] refused" in err
+    # the same for anything the filter passes from wrangler itself
+    import importlib.util as u
+    spec = u.spec_from_file_location("wr", REDACT)
+    wr = u.module_from_spec(spec)
+    spec.loader.exec_module(wr)
+    os.environ["R2_S3_ENDPOINT"], os.environ["CLOUDFLARE_ACCOUNT_ID"] = endpoint, acct
+    try:
+        line = wr.redact_line(f"GET {endpoint}/x and /accounts/{acct}/d1 failed\n".encode())
+    finally:
+        del os.environ["R2_S3_ENDPOINT"], os.environ["CLOUDFLARE_ACCOUNT_ID"]
+    assert line == b"GET [endpoint]/x and /accounts/[account]/d1 failed\n"
 
 
 def _keys_env(tmp_path, verify_json: str):

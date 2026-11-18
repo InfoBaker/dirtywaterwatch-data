@@ -15,8 +15,9 @@ name: Refresh data
 # to date, and the folder is saved back to R2 when the API changed it. Without either the run goes on without the
 # outlines (a warning). Each state object is capped at 200 MB
 # (the raw caches are not saved over it; the build state warns over it and is still saved up to wrangler's limit).
-# Needs the CLOUDFLARE_R2_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (R2 objects on dirtywaterwatch-data and
-# dirtywaterwatch-raw through R2's S3 endpoint, scripts/r2-s3-keys.sh; D1 read), for the model steps
+# Needs the CLOUDFLARE_R2_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (R2 objects in dirtywaterwatch-data through R2's S3
+# endpoint, scripts/r2-s3-keys.sh: the state, and the inbox/ files the private site repository writes, the e-mail
+# notice lists and the Worker's NBC file, pipeline/inbox.py; the refresh reads no D1 and no raw mail), for the model steps
 # OPENROUTER_API_KEY (without it they run rules-only), and for openboatlaunch's API OBL_API_KEY (without it, or with
 # the API down, the R2 copy is used as before).
 on:
@@ -41,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 100   # a one-time backfill plus the refresh ran past 55 minutes on 2026-11-04
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}   # R2 objects on the pipeline's two buckets (S3 endpoint) and D1 read
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}   # R2 objects in dirtywaterwatch-data (S3 endpoint); nothing else since 2026-11-18
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       OBL_API_KEY: ${{ secrets.OBL_API_KEY }}

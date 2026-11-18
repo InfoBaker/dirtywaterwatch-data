@@ -218,4 +218,6 @@ def test_no_script_calls_wrangler_around_the_guard():
                     "state_paths.py must call wrangler by its bare name, so the guard on the PATH filters it"
             else:
                 assert "wrangler_redact" in t, f"{p.relative_to(ROOT)} starts wrangler without scripts/wrangler_redact.py"
-    assert {"state_paths.py", "ri_nbc.py", "operator_mail.py"} <= set(callers)
+    # the refresh's inbox reader (pipeline/inbox.py: ri_nbc and operator_mail since 2026-11-18) and the private mail
+    # job's hand path (mailfeed/read.py)
+    assert {"state_paths.py", "inbox.py", "read.py"} <= set(callers)
