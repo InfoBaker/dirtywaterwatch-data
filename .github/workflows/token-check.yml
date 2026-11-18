@@ -18,6 +18,14 @@ jobs:
           echo "token length ${#CLOUDFLARE_API_TOKEN}; account id length ${#CLOUDFLARE_ACCOUNT_ID} (an account id has 32)"
           echo "user token verify: $(api /user/tokens/verify) $(flags)"
           echo "account token verify: $(api /accounts/$CLOUDFLARE_ACCOUNT_ID/tokens/verify) $(flags)"
-          echo "R2 bucket list: $(api /accounts/$CLOUDFLARE_ACCOUNT_ID/r2/buckets) $(flags)"
+          echo "R2 bucket list (needs account-wide R2; not needed by the pipeline): $(api /accounts/$CLOUDFLARE_ACCOUNT_ID/r2/buckets) $(flags)"
+          # the calls the pipeline makes (wrangler r2 object get/put use these endpoints); 404 = allowed, key absent
+          echo "R2 read dirtywaterwatch-data/state/PAUSE: $(api /accounts/$CLOUDFLARE_ACCOUNT_ID/r2/buckets/dirtywaterwatch-data/objects/state/PAUSE) (200 or 404 = allowed)"
+          echo "R2 read dirtywaterwatch-raw (absent key): $(api /accounts/$CLOUDFLARE_ACCOUNT_ID/r2/buckets/dirtywaterwatch-raw/objects/ci-check/absent) (404 = allowed)"
+          printf 'token check %s\n' "$(date -u +%FT%TZ)" > t.txt
+          w=$(curl -s -o r.json -w '%{http_code}' -X PUT -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" --data-binary @t.txt "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/r2/buckets/dirtywaterwatch-data/objects/ci-check/token-check.txt")
+          d=$(curl -s -o r.json -w '%{http_code}' -X DELETE -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/r2/buckets/dirtywaterwatch-data/objects/ci-check/token-check.txt")
+          echo "R2 write dirtywaterwatch-data/ci-check: put $w, delete $d (200 = allowed)"
+          rm -f t.txt
           echo "D1 database list: $(api /accounts/$CLOUDFLARE_ACCOUNT_ID/d1/database) $(flags)"
           rm -f r.json
