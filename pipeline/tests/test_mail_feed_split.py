@@ -184,3 +184,21 @@ def test_the_private_read_is_never_a_refresh_feed():
     assert "pipeline/ingest/*.py" in make                  # INGEST_MODULES: ingest/*.py only, not mailfeed/
     assert not (ROOT / "pipeline" / "ingest" / "mailfeed").exists()
     assert "mailfeed" not in (ROOT / ".github" / "workflows" / "refresh.yml").read_text()
+
+
+def test_an_index_that_answers_no_rows_is_a_failed_read_not_an_empty_list(world, monkeypatch):
+    # the mail index only grows: no rows at all is a wrong database or a broken query, never "no mail"; the lists keep
+    # their records rather than being emptied by a healthy-looking read of nothing
+    now, missing, fail = W.STEPS[1]
+    at(monkeypatch, now)
+    W.run_split(world, now, missing, fail)
+    before = W.snapshot(world / "events")
+    (world / "state" / "inbound-mail.json").unlink()            # a lost state as well: nothing to fall back on
+    later = now + timedelta(hours=1)
+    at(monkeypatch, later)
+    assert R.run(W.FakeTransport([], {}), W.LISTS, world / "state" / "inbound-mail.json", world / "inbox" / "mail",
+                 now=later) == 1
+    monkeypatch.setenv("DWW_INBOX_DIR", str(world))
+    O.run(W.LISTS, world / "events", now=later)
+    for sid, f in W.snapshot(world / "events").items():
+        assert f["ok"] is False and "no rows" in f["error"] and f["records"] == before[sid]["records"]

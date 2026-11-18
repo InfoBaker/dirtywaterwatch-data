@@ -346,6 +346,9 @@ def run(tr, lists: dict, state_path: Path, out_dir: Path, now: datetime | None =
             rows = tr.rows()
         except Exception as e:  # noqa: BLE001
             error = f"the inbound mail index could not be read: {safe(str(e), account)[:200]}"
+        else:
+            if not rows:        # the index only grows: no rows is a wrong database or query, never "no mail"
+                error = "the inbound mail index answered no rows"
     if not error:
         stats = update_index(index, rows, tr, lists, None, max_fetch, now)
         index["read_at"] = now.isoformat()
