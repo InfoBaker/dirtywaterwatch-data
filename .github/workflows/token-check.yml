@@ -1,0 +1,23 @@
+# Token check: does the repository's Cloudflare token verify, belong to the account named by CLOUDFLARE_ACCOUNT_ID,
+# and reach R2 and D1? Read only. It prints HTTP codes, Cloudflare's success flags and error codes, and the length
+# of the account id; never a value, a name or an address.
+name: Token check
+on: workflow_dispatch
+permissions: { contents: read }
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Checks
+        run: |
+          api() { curl -s -o r.json -w '%{http_code}' -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4$1"; }
+          flags() { python3 -c "import json;d=json.load(open('r.json'));r=d.get('result');print('success', d.get('success'), 'errors', [e.get('code') for e in d.get('errors') or []], 'status', r.get('status') if isinstance(r, dict) else '-')"; }
+          echo "token length ${#CLOUDFLARE_API_TOKEN}; account id length ${#CLOUDFLARE_ACCOUNT_ID} (an account id has 32)"
+          echo "user token verify: $(api /user/tokens/verify) $(flags)"
+          echo "account token verify: $(api /accounts/$CLOUDFLARE_ACCOUNT_ID/tokens/verify) $(flags)"
+          echo "R2 bucket list: $(api /accounts/$CLOUDFLARE_ACCOUNT_ID/r2/buckets) $(flags)"
+          echo "D1 database list: $(api /accounts/$CLOUDFLARE_ACCOUNT_ID/d1/database) $(flags)"
+          rm -f r.json
