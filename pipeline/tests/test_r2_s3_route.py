@@ -242,6 +242,35 @@ def test_the_inbox_read_saves_a_category_never_the_endpoint(s3, monkeypatch, tmp
     assert data is None and why == "not read (unreachable)"
 
 
+def test_the_s3_routes_errors_never_carry_the_endpoint_or_the_account(s3, tmp_path):
+    # Astra review 2026-11-18 P1-3: R2's endpoint host is the account id; an AWS CLI error that names it reaches the
+    # public log or a caller's saved error only as [endpoint] / [account]
+    store, env = s3
+    acct = "0123456789abcdef0123456789abcdef"
+    endpoint = f"https://{acct}.r2.cloudflarestorage.com"
+    loud = _exe(tmp_path / "aws-loud", "#!/bin/sh\necho \"Could not connect to the endpoint URL: $2/b/k\" >&2\n"
+                f"echo \"account {acct} refused\" >&2\nexit 255\n")
+    e = {**env, "AWS_CLI": str(loud), "R2_S3_ENDPOINT": endpoint, "CLOUDFLARE_ACCOUNT_ID": acct}
+    for args in (("r2", "object", "get", "dirtywaterwatch-data/state/x.json", "--pipe"),
+                 ("r2", "object", "get", "dirtywaterwatch-data/state/x.json", "--file", str(tmp_path / "x")),
+                 ("r2", "object", "put", "dirtywaterwatch-data/state/x.json", "--file", str(REDACT))):
+        p = run(e, *args)
+        err = p.stderr.decode()
+        assert p.returncode != 0 and acct not in err and "cloudflarestorage" not in err, err
+        assert "[endpoint]/b/k" in err and "account [account] refused" in err
+    # the same for anything the filter passes from wrangler itself
+    import importlib.util as u
+    spec = u.spec_from_file_location("wr", REDACT)
+    wr = u.module_from_spec(spec)
+    spec.loader.exec_module(wr)
+    os.environ["R2_S3_ENDPOINT"], os.environ["CLOUDFLARE_ACCOUNT_ID"] = endpoint, acct
+    try:
+        line = wr.redact_line(f"GET {endpoint}/x and /accounts/{acct}/d1 failed\n".encode())
+    finally:
+        del os.environ["R2_S3_ENDPOINT"], os.environ["CLOUDFLARE_ACCOUNT_ID"]
+    assert line == b"GET [endpoint]/x and /accounts/[account]/d1 failed\n"
+
+
 def _keys_env(tmp_path, verify_json: str):
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir()

@@ -11,8 +11,10 @@ fails when a workflow installs wrangler without the guard, or a script calls it 
   python3 -I scripts/wrangler_redact.py <wrangler arguments...>
 
 The real wrangler is $WRANGLER_REAL, else the first `wrangler` on the PATH that is not this guard. Both streams are
-filtered line by line: an e-mail-shaped string becomes "[redacted]", and a line that names the account ("associated
-with the account", "'s Account", "logged in with") is replaced whole by a fixed line. Everything else (the HTTP
+filtered line by line: an e-mail-shaped string becomes "[redacted]", a line that names the account ("associated
+with the account", "'s Account", "logged in with") is replaced whole by a fixed line, and the job's R2 endpoint and
+account id (R2_S3_ENDPOINT, CLOUDFLARE_ACCOUNT_ID; the endpoint's host is the account id) become "[endpoint]" and
+"[account]" (2026-11-18). Everything else (the HTTP
 status, Cloudflare's error code and message, the object key) passes as it was. The exit code is wrangler's (a signal
 gives 128 + its number). A file wrangler writes itself (--file) is never touched. With --json or --pipe, stdout is
 the caller's data: it is held and passed byte for byte when wrangler succeeds, and filtered only when it failed.
@@ -38,10 +40,23 @@ DATA_FLAGS = {"--json", "--pipe", "-p"}
 GUARD_MARK = "wrangler-guard"   # the shim's directory name (scripts/wrangler-guard.sh); never taken as the real one
 
 
+def _ids() -> list[tuple[bytes, bytes]]:
+    """The values this job knows that name the account: R2's S3 endpoint (its host is the account id) and the account
+    id itself, longest first (Astra review 2026-11-18 P1-3: an AWS CLI error names the endpoint URL)."""
+    out = []
+    for env, mark in (("R2_S3_ENDPOINT", b"[endpoint]"), ("CLOUDFLARE_ACCOUNT_ID", b"[account]")):
+        v = (os.environ.get(env) or "").strip().rstrip("/")
+        if len(v) >= 8:
+            out.append((v.encode(), mark))
+    return out
+
+
 def redact_line(line: bytes) -> bytes:
     if ACCOUNT.search(line):
         end = line[len(line.rstrip(b"\r\n")):]
         return ACCOUNT_LINE + (end or b"")
+    for v, mark in _ids():
+        line = line.replace(v, mark)
     return EMAIL.sub(REDACTED, line)
 
 
