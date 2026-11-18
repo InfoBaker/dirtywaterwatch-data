@@ -204,3 +204,33 @@ def test_ri_nbc_reads_the_inbox_through_the_filtered_wrangler(tmp_path, monkeypa
     monkeypatch.setenv("DWW_INBOX_DIR", str(tmp_path))
     wk, why = N.read_worker_inbox(None, "2026-11-03T22:00:00Z")
     assert why is None and "OF220-20261103T1530" in wk
+
+
+def test_p2_4_a_malformed_workers_file_falls_back(tmp_path):
+    now = "2026-11-03T22:00:00Z"
+    for bad in ({"revisions": [None]}, {"events": [None]}, {"revisions": [{"event_id": 5, "fetched_at": "x"}]},
+                {"open_records": [None]}, {"open_records": {"x": 1}}, {"revisions": [{"event_id": "ri-nbc:A",
+                                                                                         "fetched_at": None}]}):
+        wk, why = N.read_worker_inbox(None, now, reader=lambda key, b=bad: (worker_file(**b), None))
+        assert wk is None and "not in the Worker's form" in why, bad
+
+
+def test_p2_5_an_open_record_older_than_the_window_is_folded_in():
+    old = json.dumps({"event_id": "ri-nbc:OF101-20261020T0100", "status": "ongoing",
+                      "started_at": "2026-10-20T01:00:00-04:00", "ended_at": None, "outfall_name": "OF 101_x",
+                      "lat": 41.9, "lon": -71.4, "raw": {}})
+    doc = worker_file(open_records=[{"event_id": "ri-nbc:OF101-20261020T0100", "fetched_at": "2026-10-20T05:10:00Z",
+                                     "record": old}])
+    # a later read (since after the open record's last change) still gets it: it is never filtered by `since`
+    wk, why = N.read_worker_inbox("2026-11-02T00:00:00Z", "2026-11-03T22:00:00Z", reader=lambda key: (doc, None))
+    assert why is None and "OF101-20261020T0100" in wk and wk["OF101-20261020T0100"]["record"]["status"] == "ongoing"
+    st = {}
+    assert N.merge_worker(st, wk, REFS, "inbox")["worker_new"] == 2
+
+
+def test_p1_3_the_live_fallbacks_error_is_a_category():
+    class Boom:
+        def get(self, *a, **k):
+            raise ConnectionError(f"HTTPSConnectionPool: {'0123456789abcdef' * 2}.r2.cloudflarestorage.com refused")
+    wk, why = N.read_worker_live(Boom())
+    assert wk is None and why == f"{N.LIVE_URL}: unreachable"

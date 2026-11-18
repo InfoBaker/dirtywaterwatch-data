@@ -35,6 +35,17 @@ def at(monkeypatch, now):
     monkeypatch.setattr(common, "now_iso", lambda: now.strftime("%Y-%m-%dT%H:%M:%SZ"))
 
 
+# The differences from the single-process feed, each decided on purpose:
+# - meta.address is not written; meta.inbox is new;
+# - a list with a message not read yet or whose fetch failed keeps its previous records with health false (Astra review
+#   2026-11-18 P1-1): in step 0 Springfield's Ceased notice cannot be fetched, so Springfield keeps its records (none
+#   yet) where the single-process feed wrote its one readable record as healthy; from step 1 on Springfield's records
+#   are the golden ones, its prev_ok_at follows from the held step;
+# - a failed read is saved as a fixed category (review P1-3), not Cloudflare's words.
+HELD = {(0, "ma-swsc-cso-email")}
+ERRORS = {2: "the inbound mail index could not be read (HTTP 403, code 10000)"}
+
+
 def test_the_split_feed_writes_what_the_single_process_feed_wrote(world, monkeypatch):
     golden = json.loads(W.GOLDEN.read_text())["steps"]
     assert len(golden) == len(W.STEPS)
@@ -45,9 +56,17 @@ def test_the_split_feed_writes_what_the_single_process_feed_wrote(world, monkeyp
         assert sorted(got) == sorted(want)
         for sid in want:
             g, w = got[sid], want[sid]
+            if (n, sid) in HELD:
+                assert g["ok"] is False and g["records"] == [] and "could not be fetched" in g["error"]
+                assert g["meta"]["inbox"]["not_read"] == {"fetch_failed": 1}
+                continue
             assert g["records"] == w["records"], f"step {n} {sid}: records differ"
-            for k in ("ok", "error", "count", "fetched_at", "last_ok_at", "prev_ok_at"):
+            for k in ("ok", "count", "fetched_at", "last_ok_at", "prev_ok_at"):
+                if k == "prev_ok_at" and sid == "ma-swsc-cso-email":
+                    continue
                 assert g.get(k) == w.get(k), f"step {n} {sid}: {k}"
+            assert g["error"] == (ERRORS[n] if n in ERRORS else w["error"]), f"step {n} {sid}: error"
+            assert w["error"] is None or w["error"].startswith(ERRORS[n].split(" (")[0])
             gm = {k: v for k, v in g["meta"].items() if k != "inbox"}
             wm = {k: v for k, v in w["meta"].items() if k != "address"}
             assert gm == wm, f"step {n} {sid}: meta differs"
@@ -202,3 +221,110 @@ def test_an_index_that_answers_no_rows_is_a_failed_read_not_an_empty_list(world,
     O.run(W.LISTS, world / "events", now=later)
     for sid, f in W.snapshot(world / "events").items():
         assert f["ok"] is False and "no rows" in f["error"] and f["records"] == before[sid]["records"]
+
+
+# ---------------------------------------------------------------- Astra review 2026-11-18, one test each
+
+def test_p1_1_a_list_with_messages_not_read_yet_or_failed_keeps_its_records(world, monkeypatch):
+    now, missing, fail = W.STEPS[1]
+    at(monkeypatch, now)
+    W.run_split(world, now, missing, fail)
+    before = W.snapshot(world / "events")
+    # the state is lost and the run may read one message: every list with a message not read yet keeps its records
+    (world / "state" / "inbound-mail.json").unlink()
+    later = now + timedelta(hours=1)
+    at(monkeypatch, later)
+    rows, raws = W.rows_and_raws()
+    R.run(W.FakeTransport(rows, raws), W.LISTS, world / "state" / "inbound-mail.json", world / "inbox" / "mail",
+          now=later, max_fetch=1)
+    monkeypatch.setenv("DWW_INBOX_DIR", str(world))
+    O.run(W.LISTS, world / "events", now=later)
+    after = W.snapshot(world / "events")
+    for sid, f in after.items():
+        assert f["ok"] is False and f["records"] == before[sid]["records"] and "not read yet" in f["error"], sid
+    # a raw message that cannot be fetched holds its own list only
+    later2 = later + timedelta(hours=1)
+    at(monkeypatch, later2)
+    (world / "state" / "inbound-mail.json").unlink()
+    rows, raws = W.rows_and_raws(missing=("h2",))
+    R.run(W.FakeTransport(rows, raws), W.LISTS, world / "state" / "inbound-mail.json", world / "inbox" / "mail",
+          now=later2)
+    O.run(W.LISTS, world / "events", now=later2)
+    after = W.snapshot(world / "events")
+    hol = after["ma-holyoke-everbridge"]
+    assert hol["ok"] is False and hol["records"] == before["ma-holyoke-everbridge"]["records"]
+    assert "1 message could not be fetched" in hol["error"]
+    assert all(f["ok"] is True for sid, f in after.items() if sid != "ma-holyoke-everbridge")
+    unfetched = lambda rs: [{k: v for k, v in r.items() if k != "fetched_at"} for r in rs]    # read again, later
+    assert unfetched(after["ma-swsc-cso-email"]["records"]) == unfetched(before["ma-swsc-cso-email"]["records"])
+
+
+ACCOUNT = "0123456789abcdef0123456789abcdef"
+ENDPOINT_ERR = (f"Could not connect to the endpoint URL: https://{ACCOUNT}.r2.cloudflarestorage.com/dirtywaterwatch-raw/"
+                f"email/x.eml (owner@example.com)")
+
+
+def test_p1_3_what_is_saved_about_a_failure_is_a_fixed_category(world, monkeypatch):
+    class Leaky(W.FakeTransport):
+        def rows(self):
+            raise RuntimeError(f"D1 inbound index answered HTTP 403 (7403: The account {ACCOUNT} is not valid)")
+
+        def raw(self, key):
+            raise RuntimeError(ENDPOINT_ERR)
+    now, missing, fail = W.STEPS[0]
+    at(monkeypatch, now)
+    rows, raws = W.rows_and_raws()
+    R.run(Leaky(rows, raws), W.LISTS, world / "state" / "inbound-mail.json", world / "inbox" / "mail", now=now)
+    monkeypatch.setenv("DWW_INBOX_DIR", str(world))
+    O.run(W.LISTS, world / "events", now=now)
+    saved = "".join(p.read_text() for p in world.rglob("*.json"))
+    assert ACCOUNT not in saved and "cloudflarestorage" not in saved and "owner@" not in saved
+    f = W.snapshot(world / "events")["ma-swsc-cso-email"]
+    assert f["ok"] is False and f["error"] == "the inbound mail index could not be read (HTTP 403, code 7403)"
+    # a fetch failure's note
+    R.run(type("T", (W.FakeTransport,), {"raw": Leaky.raw})(rows, raws), W.LISTS,
+          world / "state" / "inbound-mail.json", world / "inbox" / "mail", now=now)
+    state = (world / "state" / "inbound-mail.json").read_text()
+    assert ACCOUNT not in state and "cloudflarestorage" not in state
+    assert json.loads(state)["messages"]["h1"]["note"] == "fetch failed (unreachable)"
+    # an inbox file whose error is not a known shape is never copied out
+    doc = json.loads((world / "inbox" / "mail" / "ma-swsc-cso-email.json").read_text())
+    doc.update(ok=False, error=ENDPOINT_ERR, entries=[])
+    (world / "inbox" / "mail" / "ma-swsc-cso-email.json").write_text(json.dumps(doc))
+    O.run(W.LISTS, world / "events", now=now)
+    f = W.snapshot(world / "events")["ma-swsc-cso-email"]
+    assert f["error"] == "the mail feed's read failed" and ACCOUNT not in json.dumps(f)
+
+
+@pytest.mark.parametrize("bad", ["entries [None]", "record None", "record without raw", "entry without id",
+                                 "another list's file", "records not a list"])
+def test_p2_4_malformed_inbox_contents_keep_the_list_and_the_others_run(world, monkeypatch, bad):
+    now, missing, fail = W.STEPS[1]
+    at(monkeypatch, now)
+    W.run_split(world, now, missing, fail)
+    before = W.snapshot(world / "events")
+    p = world / "inbox" / "mail" / "ma-holyoke-everbridge.json"
+    doc = json.loads(p.read_text())
+    e = next(x for x in doc["entries"] if x["records"])
+    if bad == "entries [None]":
+        doc["entries"].append(None)
+    elif bad == "record None":
+        e["records"].append(None)
+    elif bad == "record without raw":
+        e["records"][0]["raw"] = None
+    elif bad == "entry without id":
+        e.pop("id")
+    elif bad == "another list's file":
+        doc["list_id"] = "springfield"
+    else:
+        e["records"] = {"not": "a list"}
+    p.write_text(json.dumps(doc))
+    later = now + timedelta(minutes=30)
+    at(monkeypatch, later)
+    monkeypatch.setenv("DWW_INBOX_DIR", str(world))
+    O.run(W.LISTS, world / "events", now=later)
+    after = W.snapshot(world / "events")
+    hol = after["ma-holyoke-everbridge"]
+    assert hol["ok"] is False and hol["records"] == before["ma-holyoke-everbridge"]["records"]
+    assert "expected form" in hol["error"]
+    assert all(f["ok"] is True for sid, f in after.items() if sid != "ma-holyoke-everbridge")     # the others ran

@@ -31,8 +31,15 @@ What it writes (bucket dirtywaterwatch-data)
     failures whose wait is over. An absent state (the first run) reads every message (--max-fetch per run, newest
     first); a state that is there but cannot be read stops the run before anything is written.
 
-Trust, the per-message results and the retries are as before the split (rule_of, read_message, update_index). Errors
-from Cloudflare are kept without the account id or anything shaped like an address or the token's account name.
+Trust, the per-message results and the retries are as before the split (rule_of, read_message, update_index). What is
+saved or logged about a failure is a fixed category (inbox.category: an HTTP status with Cloudflare's numeric codes,
+absent, denied, unreachable, timeout), never the words of Cloudflare or the AWS CLI, which can carry the account id or
+an address (Astra review 2026-11-18 P1-3).
+
+Credentials (review P1-2): the job's own token (the site's MAIL_FEED_CLOUDFLARE_TOKEN: D1 Read, R2 object Read on
+dirtywaterwatch-raw, Write on dirtywaterwatch-data). With R2_S3_ENDPOINT set (scripts/r2-s3-keys.sh) every R2 call,
+raw reads and the data bucket's state and inbox alike, goes through R2's S3 endpoint with the AWS CLI; D1 through the
+REST API.
 
 Usage (from pipeline/):
   python -m mailfeed.read --r2 [--max-fetch N]        the job: state from and files to the bucket (REST API, the
@@ -60,6 +67,7 @@ from urllib.parse import quote
 import requests
 
 from common import read_json, write_json
+from inbox import category, category_of
 from ingest.mail import PARSERS
 from ingest.mail.message import parse_iso, parse_mail, verified
 from ingest.operator_mail import INBOX_PREFIX, INBOX_SCHEMA, load_lists
@@ -109,12 +117,13 @@ class ApiTransport:
         self.sess.headers.update({"Authorization": f"Bearer {token}"})
 
     def _why(self, r: requests.Response) -> str:
+        """The answer's HTTP status and Cloudflare's numeric error codes, never their messages."""
         try:
             errs = r.json().get("errors") or []
-            codes = ", ".join(f"{e.get('code')}: {str(e.get('message'))[:80]}" for e in errs[:2])
-        except ValueError:
+            codes = ", ".join(f"{int(e.get('code'))}:" for e in errs[:2] if str(e.get("code") or "").isdigit())
+        except (ValueError, AttributeError):
             codes = ""
-        return safe(f"HTTP {r.status_code}" + (f" ({codes})" if codes else ""), self.account)
+        return f"HTTP {r.status_code}" + (f" ({codes})" if codes else "")
 
     def rows(self) -> list[dict]:
         r = self.sess.post(f"{API}/accounts/{self.account}/d1/database/{D1_DATABASE_ID}/query",
@@ -138,25 +147,39 @@ class ApiTransport:
         return r.content
 
     @staticmethod
-    def _raw_s3(key: str) -> bytes:
-        """The raw message through R2's S3 endpoint (scripts/r2-s3-keys.sh: a token limited to named buckets, which
-        Cloudflare's REST API refuses for object reads). To stdout, never to a file; the error is reported by its kind
-        only."""
+    def _aws(*args: str) -> list[str]:
         aws = os.environ.get("AWS_CLI") or shutil.which("aws") or "aws"
-        cmd = [aws, "--endpoint-url", os.environ["R2_S3_ENDPOINT"], "--region",
-               os.environ.get("AWS_DEFAULT_REGION") or "auto", "s3", "cp", f"s3://{RAW_BUCKET}/{key}", "-",
-               "--only-show-errors"]
+        return [aws, "--endpoint-url", os.environ["R2_S3_ENDPOINT"], "--region",
+                os.environ.get("AWS_DEFAULT_REGION") or "auto", *args]
+
+    @classmethod
+    def _s3_get(cls, bucket: str, key: str) -> bytes | None:
+        """An object through R2's S3 endpoint, to stdout (never a file); None when absent; an error by its category."""
         try:
-            p = subprocess.run(cmd, capture_output=True, timeout=120)
+            p = subprocess.run(cls._aws("s3", "cp", f"s3://{bucket}/{key}", "-", "--only-show-errors"),
+                               capture_output=True, timeout=120)
         except (OSError, subprocess.TimeoutExpired) as e:
-            raise RuntimeError(f"R2 S3 read could not run ({type(e).__name__})") from None
-        if p.returncode != 0 or not p.stdout:
-            kind = "absent" if re.search(rb"\(404\)|NoSuchKey|Not Found", p.stderr) else f"exit {p.returncode}"
-            raise RuntimeError(f"R2 S3 read failed ({kind})")
-        return p.stdout
+            raise RuntimeError(f"R2 S3 read could not run ({category_of(e)})") from None
+        if p.returncode == 0:
+            return p.stdout
+        c = category(p.stderr.decode("utf-8", "replace") + f" exit {p.returncode}")
+        if c == "absent":
+            return None
+        raise RuntimeError(f"R2 S3 read failed ({c})")
+
+    @classmethod
+    def _raw_s3(cls, key: str) -> bytes:
+        """The raw message through R2's S3 endpoint (scripts/r2-s3-keys.sh: a token limited to named buckets, which
+        Cloudflare's REST API refuses for object reads)."""
+        data = cls._s3_get(RAW_BUCKET, key)
+        if not data:
+            raise RuntimeError("R2 S3 read failed (absent)")
+        return data
 
     def get_object(self, key: str) -> bytes | None:
         """An object of the data bucket; None when there is no such key."""
+        if os.environ.get("R2_S3_ENDPOINT"):
+            return self._s3_get(DATA_BUCKET, key)
         r = self.sess.get(self._object_url(DATA_BUCKET, key), timeout=60)
         if r.status_code == 404:
             return None
@@ -165,6 +188,20 @@ class ApiTransport:
         return r.content
 
     def put_object(self, key: str, data: bytes) -> None:
+        if os.environ.get("R2_S3_ENDPOINT"):
+            # the inbox and the state only (no raw text): a temporary file for the AWS CLI's body, removed at once
+            with tempfile.NamedTemporaryFile(dir=os.environ.get("RUNNER_TEMP"), suffix=".json") as fh:
+                fh.write(data)
+                fh.flush()
+                try:
+                    p = subprocess.run(self._aws("s3api", "put-object", "--bucket", DATA_BUCKET, "--key", key,
+                                                 "--body", fh.name, "--content-type", "application/json; charset=utf-8"),
+                                       capture_output=True, timeout=300)
+                except (OSError, subprocess.TimeoutExpired) as e:
+                    raise RuntimeError(f"R2 S3 write could not run ({category_of(e)})") from None
+            if p.returncode != 0:
+                raise RuntimeError(f"R2 S3 write failed ({category(p.stderr.decode('utf-8', 'replace') + f' exit {p.returncode}')})")
+            return
         r = self.sess.put(self._object_url(DATA_BUCKET, key), data=data, timeout=120,
                           headers={"Content-Type": "application/json; charset=utf-8"})
         if r.status_code != 200:
@@ -300,7 +337,8 @@ def update_index(index: dict, rows: list[dict], tr, lists: dict, ctx: dict | Non
             raw = tr.raw(row["raw_key"])
         except Exception as e:  # noqa: BLE001 - kept, tried again later
             tries = ((old or {}).get("tries") or 0) + 1 if (old or {}).get("result") == "fetch_failed" else 1
-            msgs[mid] = {**(old or {}), **base, "result": "fetch_failed", "note": safe(str(e))[:200], "tries": tries,
+            msgs[mid] = {**(old or {}), **base, "result": "fetch_failed", "note": f"fetch failed ({category_of(e)})",
+                         "tries": tries,
                          "next_try_at": (now + timedelta(hours=min(2 ** (tries - 1), 24))).isoformat(),
                          "records": (old or {}).get("records") or []}
             stats["fetch_failed"] += 1
@@ -338,14 +376,13 @@ def run(tr, lists: dict, state_path: Path, out_dir: Path, now: datetime | None =
     now = now or datetime.now(UTC)
     index = read_json(state_path, {}) or {}
     error, stats = None, Counter()
-    account = getattr(tr, "account", None)
     if tr is None:
         error = "no Cloudflare credentials in the environment (CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID)"
     else:
         try:
             rows = tr.rows()
         except Exception as e:  # noqa: BLE001
-            error = f"the inbound mail index could not be read: {safe(str(e), account)[:200]}"
+            error = f"the inbound mail index could not be read ({category_of(e)})"
         else:
             if not rows:        # the index only grows: no rows is a wrong database or query, never "no mail"
                 error = "the inbound mail index answered no rows"
@@ -386,7 +423,7 @@ def run_r2(tr, lists: dict, max_fetch: int = MAX_FETCH, now: datetime | None = N
     try:
         data = tr.get_object(STATE_KEY)
     except Exception as e:  # noqa: BLE001
-        print(f"mail-feed: the saved state could not be read ({safe(str(e), tr.account)[:200]}); nothing written",
+        print(f"mail-feed: the saved state could not be read ({category_of(e)}); nothing written",
               file=sys.stderr)
         return 1
     if data is None:
@@ -410,7 +447,7 @@ def run_r2(tr, lists: dict, max_fetch: int = MAX_FETCH, now: datetime | None = N
             done += 1
         except Exception as e:  # noqa: BLE001
             failed += 1
-            print(f"mail-feed: {key} not uploaded ({safe(str(e), tr.account)[:200]})", file=sys.stderr)
+            print(f"mail-feed: {key} not uploaded ({category_of(e)})", file=sys.stderr)
     print(f"mail-feed: uploaded {done} object(s) to {DATA_BUCKET}/{INBOX_PREFIX}" + (f"; {failed} failed" if failed else ""),
           file=sys.stderr)
     shutil.rmtree(work, ignore_errors=True)

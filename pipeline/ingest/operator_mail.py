@@ -14,9 +14,12 @@ Where the records come from (since 2026-11-18)
   same mail it writes the same records (tests/test_mail_feed_split.py).
 
 An inbox that cannot be used (meta.inbox says which)
-  No file, a file that cannot be read, one written more than INBOX_MAX_AGE_H hours ago, or one whose read failed in the
-  private job: the list keeps its previous records and its health is false with the reason (common.write_events
-  ok=False). A list is never emptied for want of a file.
+  No file, a file that cannot be read, one not in the expected form (any entry or record malformed, or another list's
+  file: Astra review 2026-11-18 P2-4), one written more than INBOX_MAX_AGE_H hours ago, one whose read failed in the
+  private job, or one holding messages not read yet or whose fetch failed (review P1-1): the list keeps its previous
+  records and its health is false with the reason (common.write_events ok=False). A list is never emptied for want of a
+  file or by a partial read. The reason saved is this module's sentence or a fixed category, never the file's words
+  (review P1-3).
 
 One event, not two
   A Massachusetts notice and MassDEP's portal record of the same overflow (same permit, same outfall number, starts
@@ -40,6 +43,7 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 import sys
 from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
@@ -329,18 +333,57 @@ def read_events(source_id: str, events_dir: Path = EVENTS_DIR) -> list[dict]:
     return (read_json(events_dir / f"{source_id}.json", {}) or {}).get("records") or []
 
 
-def read_inbox(source_id: str, now: datetime, reader=None) -> tuple[dict | None, str | None, dict]:
+SAFE_ERROR = re.compile(r"[A-Za-z0-9 ,.()_:'-]{1,200}")
+UNSAFE = re.compile(r"[0-9a-f]{32}|@|://|cloudflarestorage", re.I)
+
+
+def safe_error(text) -> str:
+    """The private read's error as saved: its own sentences and categories pass; anything else is withheld."""
+    t = str(text or "")
+    return t if SAFE_ERROR.fullmatch(t) and not UNSAFE.search(t) else "the mail feed's read failed"
+
+
+def _entries_ok(entries, source_id: str) -> bool:
+    """Every entry a dict with an id, a receipt time, a result, a note and a trust that are strings (or None where
+    they may be), and records that are a list of record dicts of this list's source, each with an event id and raw."""
+    if not isinstance(entries, list):
+        return False
+    for e in entries:
+        if not isinstance(e, dict) or not isinstance(e.get("id"), str) or not e["id"] \
+                or not isinstance(e.get("result"), str):
+            return False
+        if any(e.get(k) is not None and not isinstance(e.get(k), str) for k in ("received_at", "note", "trust")):
+            return False
+        recs = e.get("records")
+        if not isinstance(recs, list):
+            return False
+        for r in recs:
+            if not isinstance(r, dict) or not isinstance(r.get("event_id"), str) \
+                    or r.get("source_id") != source_id or not isinstance(r.get("raw"), dict):
+                return False
+    return True
+
+
+def read_inbox(source_id: str, now: datetime, reader=None, list_id: str | None = None
+               ) -> tuple[dict | None, str | None, dict]:
     """(the list's inbox file, None, about) when it can be used; (None, why, about) when it cannot: absent, unreadable,
-    of another schema, older than INBOX_MAX_AGE_H, or a failed read in the private job. about goes to meta.inbox."""
+    not in the expected form, older than INBOX_MAX_AGE_H, a failed read in the private job, or messages not read yet
+    or whose fetch failed. about goes to meta.inbox."""
     doc, why = (reader or inbox.get_json)(f"{INBOX_PREFIX}{source_id}.json")
     about = {"key": f"{INBOX_PREFIX}{source_id}.json"}
     if doc is None:
-        return None, ("no file from the mail feed" if why == inbox.ABSENT else f"the mail feed's file: {why}"), about
-    written = parse_iso(doc.get("written_at"))
-    about["written_at"] = doc.get("written_at")
-    about["stats"] = doc.get("stats") or {}
-    if doc.get("schema") != INBOX_SCHEMA or doc.get("source_id") != source_id or not isinstance(doc.get("entries"), list):
-        return None, "the mail feed's file is not in the expected form", about
+        return None, ("no file from the mail feed" if why == inbox.ABSENT else
+                      f"the mail feed's file was {safe_error(why)}"), about
+    written = parse_iso(doc.get("written_at")) if isinstance(doc.get("written_at"), str) else None
+    about["written_at"] = doc.get("written_at") if written else None
+    stats = doc.get("stats")
+    about["stats"] = {k: v for k, v in stats.items() if isinstance(k, str) and isinstance(v, int)} \
+        if isinstance(stats, dict) else {}
+    form = "the mail feed's file is not in the expected form"
+    if doc.get("schema") != INBOX_SCHEMA or doc.get("source_id") != source_id \
+            or (list_id is not None and doc.get("list_id") != list_id) or not isinstance(doc.get("ok"), bool) \
+            or not _entries_ok(doc.get("entries"), source_id):
+        return None, form, about
     if written is None:
         return None, "the mail feed's file has no time", about
     age_h = (now - written).total_seconds() / 3600
@@ -348,13 +391,21 @@ def read_inbox(source_id: str, now: datetime, reader=None) -> tuple[dict | None,
     if age_h > INBOX_MAX_AGE_H:
         return None, (f"the mail feed's file was written {written.astimezone(UTC):%Y-%m-%d %H:%MZ}, more than "
                       f"{INBOX_MAX_AGE_H} hours ago"), about
-    if not doc.get("ok"):
-        return None, str(doc.get("error") or "the mail feed's read failed"), about
+    if not doc["ok"]:
+        return None, safe_error(doc.get("error")), about
+    left = Counter(e["result"] for e in doc["entries"] if e["result"] in ("pending", "fetch_failed"))
+    if left:
+        about["not_read"] = dict(sorted(left.items()))
+        parts = [f"{n} message{'s' if n != 1 else ''} {w}" for n, w in (
+            (left.get("pending", 0), "not read yet (the reader's limit per run)"),
+            (left.get("fetch_failed", 0), "could not be fetched (tried again later)")) if n]
+        return None, "; ".join(parts) + "; the list keeps its previous records until they are read", about
     return doc, None, about
 
 
 def run(lists: dict, events_dir: Path = EVENTS_DIR, now: datetime | None = None, reader=None) -> int:
-    """Each notice list's file from the inbox -> its events file. 0 when every list was written from a usable file."""
+    """Each notice list's file from the inbox -> its events file. 0 when every list was written from a usable file.
+    A list whose file cannot be used, or whose linking fails, keeps its previous records; the other lists go on."""
     now = now or datetime.now(UTC)
     notice_lists = {k: v for k, v in lists.items() if v.get("kind") == "notices" and v.get("source_id")}
     others = {sid: read_events(sid, events_dir) for sid in ("ma-massdep", "nh-permittees")}
@@ -363,14 +414,20 @@ def run(lists: dict, events_dir: Path = EVENTS_DIR, now: datetime | None = None,
     for lid, spec in sorted(notice_lists.items()):
         sid = spec["source_id"]
         path = events_dir / f"{sid}.json"
-        doc, why, about = read_inbox(sid, now, reader)
+        doc, why, about = read_inbox(sid, now, reader, lid)
+        if not why:
+            try:
+                entries = [{**{k: v for k, v in e.items() if k != "id"}, "_id": e["id"],
+                            "note": e.get("note") if not UNSAFE.search(str(e.get("note") or "")) else "[withheld]"}
+                           for e in doc["entries"]]
+                recs, meta = build_list(lid, spec, entries, others, now, ctx)
+            except Exception as e:  # noqa: BLE001 - one list's failure never stops the others
+                why = f"the mail feed's file could not be linked ({type(e).__name__})"
         if why:
             write_events(sid, [], ok=False, error=why, meta={"inbox": about}, path=path)
             print(f"  {lid}: {why}; the list keeps its previous records", file=sys.stderr)
             kept += 1
             continue
-        entries = [{**{k: v for k, v in e.items() if k != "id"}, "_id": str(e.get("id"))} for e in doc["entries"]]
-        recs, meta = build_list(lid, spec, entries, others, now, ctx)
         meta["inbox"] = about
         write_events(sid, recs, ok=True, meta=meta, path=path)
         q = " quiet" if meta.get("quiet") else ""

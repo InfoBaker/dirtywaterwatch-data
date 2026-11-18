@@ -200,9 +200,46 @@ def test_the_refresh_reads_its_inbox_through_s3(s3, monkeypatch):
                for c in calls(store))
     monkeypatch.setenv("FAKE_S3_DENY", "1")
     data, why = inbox.get("inbox/mail/ma-swsc-cso-email.json")
-    assert data is None and why.startswith("not read (exit") and "@" not in why
+    assert data is None and why == "not read (denied)"                       # a category, never the words
     with pytest.raises(ValueError):
         inbox.get("state/build.tar.gz")                     # inbox/ only
+
+
+def test_the_mail_job_reads_and_writes_the_data_bucket_through_s3(s3, monkeypatch):
+    # the mail job's own token is limited to its buckets (review 2026-11-18 P1-2): the state and the inbox go through
+    # R2's S3 endpoint, never the REST API
+    store, env = s3
+    for k in ("R2_S3_ENDPOINT", "AWS_CLI", "FAKE_S3", "AWS_DEFAULT_REGION"):
+        monkeypatch.setenv(k, env[k])
+    from mailfeed import read as M
+
+    class NoRest:
+        headers = {}
+
+        def __getattr__(self, name):
+            raise AssertionError(f"REST call {name}")
+    t = M.ApiTransport("token", "acct", sess=NoRest())
+    assert t.get_object("inbox/mail/state/inbound-mail.json") is None                   # absent: a first run
+    t.put_object("inbox/mail/ma-swsc-cso-email.json", b'{"schema": 1}')
+    assert (store / "dirtywaterwatch-data" / "inbox" / "mail" / "ma-swsc-cso-email.json").read_bytes() == b'{"schema": 1}'
+    assert t.get_object("inbox/mail/ma-swsc-cso-email.json") == b'{"schema": 1}'
+    monkeypatch.setenv("FAKE_S3_DENY", "1")
+    with pytest.raises(RuntimeError) as e:
+        t.get_object("inbox/mail/ma-swsc-cso-email.json")
+    assert "@" not in str(e.value) and "acct.r2" not in str(e.value)
+
+
+def test_the_inbox_read_saves_a_category_never_the_endpoint(s3, monkeypatch, tmp_path):
+    # review 2026-11-18 P1-3: an AWS error naming the endpoint (the account id is in its host) is never kept
+    store, env = s3
+    loud = _exe(tmp_path / "aws-loud", "#!/bin/sh\necho \"Could not connect to the endpoint URL: $2/x\" >&2\nexit 255\n")
+    for k in ("R2_S3_ENDPOINT", "FAKE_S3", "AWS_DEFAULT_REGION", "WRANGLER_REAL"):
+        monkeypatch.setenv(k, env[k])
+    monkeypatch.setenv("AWS_CLI", str(loud))
+    monkeypatch.delenv("DWW_INBOX_DIR", raising=False)
+    import inbox
+    data, why = inbox.get("inbox/mail/ma-swsc-cso-email.json")
+    assert data is None and why == "not read (unreachable)"
 
 
 def _keys_env(tmp_path, verify_json: str):

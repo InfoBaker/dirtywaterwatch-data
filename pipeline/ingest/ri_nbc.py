@@ -31,9 +31,10 @@ Quirks:
   the same keys, and writes its NBC records and revisions to this pipeline's bucket (since 2026-11-18;
   worker/src/live/nbc-export.ts in the site repository): inbox/nbc-worker.json, after a poll that changed
   something (at most every 15 minutes) and at least hourly, with every record changed in the last 7 days or
-  still open, the revisions of those 7 days and written_at. Each run reads it (pipeline/inbox.py, through R2's
-  S3 endpoint) and folds the revisions since two days before the last good read (all of the file's on a first
-  read or with `--backfill-worker`) in as "worker" sightings, so an activation that comes and goes between
+  still open, the revisions of those 7 days, the current record of every open one and written_at. Each run
+  reads it (pipeline/inbox.py, through R2's S3 endpoint) and folds the revisions since two days before the last
+  good read (all of the file's on a first read or with `--backfill-worker`), and every open record, in as
+  "worker" sightings, so an activation that comes and goes between
   hourly runs is still a record, and start and end sightings are known to 5 minutes. A file that is absent,
   unreadable or written more than WORKER_INBOX_MAX_AGE_H hours ago, or whose poller has not succeeded for that
   long, is not used: the public GET /api/live (events first seen since the last static fetch) is read instead,
@@ -464,19 +465,48 @@ def merge_worker(state: dict, wk: dict, refs: tuple, channel: str) -> dict:
     return stats
 
 
+def _rows_ok(rows, *, times: tuple[str, ...], record: bool) -> bool:
+    """A list of the Worker's rows: dicts with an NBC event id, the given times as ISO strings (or None for an
+    event's), and a record (JSON text or an object) where one is carried."""
+    if not isinstance(rows, list):
+        return False
+    for r in rows:
+        if not isinstance(r, dict) or not isinstance(r.get("event_id"), str) \
+                or not r["event_id"].startswith(f"{SOURCE_ID}:"):
+            return False
+        for k in times:
+            v = r.get(k)
+            if record and v is None:                        # a revision's or an open record's time is required
+                return False
+            if v is not None:
+                try:
+                    if not isinstance(v, str) or z(v) is None:
+                        return False
+                except ValueError:
+                    return False
+        if record and not isinstance(r.get("record"), (str, dict)):
+            return False
+    return True
+
+
 def read_worker_inbox(since: str | None, now: str, reader=None) -> tuple[dict | None, str | None]:
-    """The Worker's NBC records and revisions from its file in this pipeline's bucket (inbox/nbc-worker.json), the
-    revisions newer than `since` (all of the file's when None). (None, why) when the file is absent, unreadable, not
-    in the Worker's form, written more than WORKER_INBOX_MAX_AGE_H hours before `now`, or its poller has not succeeded
-    for that long."""
+    """The Worker's NBC records and revisions from its file in this pipeline's bucket (inbox/nbc-worker.json): the
+    revisions newer than `since` (all of the file's when None) and, whatever `since`, the current record of every open
+    NBC record (open_records: a first read or a lost state still has an open record older than the file's 7 days;
+    Astra review 2026-11-18 P2-5). (None, why) when the file is absent, unreadable, not in the Worker's form (any row
+    malformed: review P2-4), written more than WORKER_INBOX_MAX_AGE_H hours before `now`, or its poller has not
+    succeeded for that long; `why` is a fixed category or a sentence of this module's, never the file's words."""
     import inbox
     doc, why = (reader or inbox.get_json)(WORKER_INBOX_KEY)
     if doc is None:
         return None, ("no file" if why == inbox.ABSENT else why)
-    events, revisions = doc.get("events"), doc.get("revisions")
-    if doc.get("schema") != 1 or doc.get("source_id") != SOURCE_ID or not isinstance(events, list) \
-            or not isinstance(revisions, list):
-        return None, "the file is not in the Worker's form"
+    events, revisions, open_records = doc.get("events"), doc.get("revisions"), doc.get("open_records", [])
+    form = "the file is not in the Worker's form"
+    if doc.get("schema") != 1 or doc.get("source_id") != SOURCE_ID \
+            or not _rows_ok(events, times=("first_seen_at", "last_changed_at"), record=False) \
+            or not _rows_ok(revisions, times=("fetched_at",), record=True) \
+            or not _rows_ok(open_records, times=("fetched_at",), record=True):
+        return None, form
     t_now = datetime.fromisoformat(now.replace("Z", "+00:00"))
     limit = timedelta(hours=WORKER_INBOX_MAX_AGE_H)
     for what, v in (("it was written", doc.get("written_at")),
@@ -490,17 +520,23 @@ def read_worker_inbox(since: str | None, now: str, reader=None) -> tuple[dict | 
         if t_now - t > limit:
             return None, f"{what} at {z(v)}, more than {WORKER_INBOX_MAX_AGE_H} hours ago"
     if since and re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", since):
-        revisions = [r for r in revisions if z(r.get("fetched_at")) > since]
-    return worker_from_d1([r for r in events if isinstance(r, dict)], [r for r in revisions if isinstance(r, dict)]), None
+        revisions = [r for r in revisions if z(r["fetched_at"]) > since]
+    seen = {(r["event_id"], z(r["fetched_at"])) for r in revisions}
+    rows = revisions + [r for r in open_records if (r["event_id"], z(r["fetched_at"])) not in seen]
+    try:
+        return worker_from_d1(events, rows), None
+    except Exception:  # noqa: BLE001 - a row the decoder cannot use: the public /api/live is read instead
+        return None, form
 
 
 def read_worker_live(session: requests.Session) -> tuple[dict | None, str | None]:
+    from inbox import category_of
     try:
         r = session.get(LIVE_URL, timeout=30)
         r.raise_for_status()
         return worker_from_live(r.json()), None
-    except Exception as e:
-        return None, f"{LIVE_URL}: {e}"
+    except Exception as e:  # noqa: BLE001 - kept as a fixed category (review 2026-11-18 P1-3)
+        return None, f"{LIVE_URL}: {category_of(e)}"
 
 
 # ---------------------------------------------------------------- fetch and state
