@@ -34,3 +34,20 @@ jobs:
           echo "account id length ${#ACCT} (an account id has 32)"
           check CLOUDFLARE_API_TOKEN "$API_TOKEN"
           check CLOUDFLARE_R2_TOKEN "$R2_TOKEN"
+          # R2's S3 endpoint with keys derived from CLOUDFLARE_R2_TOKEN (Cloudflare: access key id = the token's id,
+          # secret access key = SHA-256 of the token's value); both masked before use
+          curl -s -o v.json -H "Authorization: Bearer $R2_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$ACCT/tokens/verify"
+          KID=$(python3 -c "import json;print((json.load(open('v.json')).get('result') or {}).get('id',''))"); rm -f v.json
+          SEC=$(printf '%s' "$R2_TOKEN" | sha256sum | cut -d' ' -f1)
+          echo "::add-mask::$KID"; echo "::add-mask::$SEC"
+          export AWS_ACCESS_KEY_ID="$KID" AWS_SECRET_ACCESS_KEY="$SEC" AWS_DEFAULT_REGION=auto
+          E="https://$ACCT.r2.cloudflarestorage.com"
+          s3() { aws s3api "$@" --endpoint-url "$E" > /dev/null 2> e.txt; rc=$?; m=$(grep -o -E '\((40[0-9]|NoSuchKey|AccessDenied|NotFound|InvalidAccessKeyId|SignatureDoesNotMatch)[^)]*\)|Not Found|Forbidden' e.txt | head -1); echo "exit $rc ${m}"; rm -f e.txt; }
+          echo "== S3 keys from CLOUDFLARE_R2_TOKEN: key id length ${#KID}"
+          echo "   S3 head dirtywaterwatch-data/state/PAUSE: $(s3 head-object --bucket dirtywaterwatch-data --key state/PAUSE) (exit 0, or 404/Not Found = allowed)"
+          echo "   S3 head dirtywaterwatch-data/state/build.tar.gz: $(s3 head-object --bucket dirtywaterwatch-data --key state/build.tar.gz) (exit 0 = allowed)"
+          echo "   S3 head dirtywaterwatch-raw (absent key): $(s3 head-object --bucket dirtywaterwatch-raw --key ci-check/absent) (404/Not Found = allowed)"
+          printf 'token check %s\n' "$(date -u +%FT%TZ)" > t.txt
+          echo "   S3 put dirtywaterwatch-data/ci-check: $(s3 put-object --bucket dirtywaterwatch-data --key ci-check/token-check.txt --body t.txt) (exit 0 = allowed)"
+          echo "   S3 delete dirtywaterwatch-data/ci-check: $(s3 delete-object --bucket dirtywaterwatch-data --key ci-check/token-check.txt) (exit 0 = allowed)"
+          rm -f t.txt
