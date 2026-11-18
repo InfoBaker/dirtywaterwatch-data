@@ -57,6 +57,7 @@ STANDINS = {
     "Branch and pull request": "echo publish > publish.done",
     "python -m venv": "true",
     "npm install": "true",
+    "sh scripts/r2-s3-keys.sh": "true",   # the S3 keys (tests/test_r2_s3_route.py); the stand-in wrangler is the R2 here
     "Backfill": "true",
     "System tools": "true",
 }

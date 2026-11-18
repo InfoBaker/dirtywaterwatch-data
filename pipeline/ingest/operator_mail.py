@@ -115,11 +115,32 @@ class ApiTransport:
         return res.get("results") or []
 
     def raw(self, key: str) -> bytes:
+        if os.environ.get("R2_S3_ENDPOINT"):
+            return self._raw_s3(key)
         r = self.sess.get(f"{API}/accounts/{self.account}/r2/buckets/{RAW_BUCKET}/objects/{quote(key, safe='/')}",
                           timeout=60)
         if r.status_code != 200:
             raise RuntimeError(f"R2 object answered {self._why(r)}")
         return r.content
+
+    @staticmethod
+    def _raw_s3(key: str) -> bytes:
+        """The raw message through R2's S3 endpoint (scripts/r2-s3-keys.sh: the token is limited to the pipeline's
+        buckets, which Cloudflare's REST API refuses for object reads). To stdout, never to a file; the error is
+        reported by its kind only."""
+        aws = os.environ.get("AWS_CLI") or shutil.which("aws") or "aws"
+        cmd = [aws, "--endpoint-url", os.environ["R2_S3_ENDPOINT"], "--region",
+               os.environ.get("AWS_DEFAULT_REGION") or "auto", "s3", "cp", f"s3://{RAW_BUCKET}/{key}", "-",
+               "--only-show-errors"]
+        try:
+            p = subprocess.run(cmd, capture_output=True, timeout=120)
+        except (OSError, subprocess.TimeoutExpired) as e:
+            raise RuntimeError(f"R2 S3 read could not run ({type(e).__name__})") from None
+        if p.returncode != 0 or not p.stdout:
+            kind = "absent" if re.search(rb"An error occurred \(404\) when calling the HeadObject operation", p.stderr) \
+                else f"exit {p.returncode}"
+            raise RuntimeError(f"R2 S3 read failed ({kind})")
+        return p.stdout
 
 
 class WranglerTransport:
