@@ -283,8 +283,31 @@ def snapshot(events_dir: Path) -> dict:
     return {sid: json.loads((events_dir / f"{sid}.json").read_text()) for sid in notice_sources()}
 
 
-def _write_golden_with_the_single_process_feed() -> None:     # pragma: no cover - run by hand
-    """The golden file from ingest/operator_mail.run as it was before the split (data repository 862eb00)."""
+def run_split(work: Path, now: datetime, missing: tuple[str, ...], fail: bool) -> None:
+    """One step of the split feed: the private read (mailfeed/read.py) writes the state and the inbox files under work,
+    the public link (ingest/operator_mail.py) reads them (DWW_INBOX_DIR) and writes work/events. The caller fixes the
+    clock (common.now_iso) and ingest.operator_mail.ma_context (ctx)."""
+    import os
+
+    from ingest import operator_mail as O
+    from mailfeed import read as R
+    rows, raws = rows_and_raws(missing)
+    R.run(FakeTransport(rows, raws, fail), LISTS, work / "state" / "inbound-mail.json", work / "inbox" / "mail", now=now)
+    old = os.environ.get("DWW_INBOX_DIR")
+    os.environ["DWW_INBOX_DIR"] = str(work)
+    try:
+        O.run(LISTS, work / "events", now=now)
+    finally:
+        if old is None:
+            os.environ.pop("DWW_INBOX_DIR", None)
+        else:
+            os.environ["DWW_INBOX_DIR"] = old
+
+
+def _write_golden() -> None:     # pragma: no cover - run by hand
+    """The golden file. The committed one came from ingest/operator_mail.run before the split (data repository
+    862eb00, the single-process feed); since the split it is written by the split feed, for a parser change made on
+    purpose only."""
     import tempfile
 
     import common
@@ -296,16 +319,15 @@ def _write_golden_with_the_single_process_feed() -> None:     # pragma: no cover
         write_others(d / "events")
         for now, missing, fail in STEPS:
             common.now_iso = lambda now=now: now.strftime("%Y-%m-%dT%H:%M:%SZ")
-            rows, raws = rows_and_raws(missing)
-            O.run(FakeTransport(rows, raws, fail), LISTS, d / "inbound-mail.json", d / "events", now=now)
+            run_split(d, now, missing, fail)
             out.append(snapshot(d / "events"))
     GOLDEN.parent.mkdir(parents=True, exist_ok=True)
-    GOLDEN.write_text(json.dumps({"_about": "ingest/operator_mail.run (single process, before the split, data "
-                                            "repository 862eb00) on tests/mail_feed_world.py, one entry per step",
+    GOLDEN.write_text(json.dumps({"_about": "the e-mail feed on tests/mail_feed_world.py, one entry per step; first "
+                                            "written by the single-process feed before the split (862eb00)",
                                   "steps": out}, indent=1, sort_keys=True) + "\n")
     print(f"wrote {GOLDEN}")
 
 
 if __name__ == "__main__":     # pragma: no cover
     if "--write-golden" in sys.argv:
-        _write_golden_with_the_single_process_feed()
+        _write_golden()

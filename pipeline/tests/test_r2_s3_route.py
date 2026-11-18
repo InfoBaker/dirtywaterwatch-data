@@ -1,5 +1,5 @@
 """R2 objects through R2's S3 endpoint (2026-11-18): scripts/wrangler_redact.py's S3 route, scripts/r2-s3-keys.sh,
-operator_mail's S3 read, and the workflows' wiring. A stand-in AWS CLI keeps objects in a folder; no network."""
+the mail read's S3 read, the refresh's inbox read, and the workflows' wiring. A stand-in AWS CLI keeps objects in a folder; no network."""
 from __future__ import annotations
 
 import hashlib
@@ -169,11 +169,12 @@ def test_d1_calls_still_go_to_wrangler_with_the_endpoint_set(s3, tmp_path):
     assert p.returncode == 0 and b"real wrangler: d1 execute" in p.stdout and calls(store) == []
 
 
-def test_operator_mail_reads_raw_mail_through_s3(s3, monkeypatch):
+def test_the_mail_read_reads_raw_mail_through_s3(s3, monkeypatch):
+    # the private mail job's reader (mailfeed/read.py since 2026-11-18; the refresh no longer reads raw mail)
     store, env = s3
     for k in ("R2_S3_ENDPOINT", "AWS_CLI", "FAKE_S3", "AWS_DEFAULT_REGION"):
         monkeypatch.setenv(k, env[k])
-    from ingest import operator_mail as M
+    from mailfeed import read as M
     (store / "dirtywaterwatch-raw" / "email" / "2026" / "11").mkdir(parents=True)
     (store / "dirtywaterwatch-raw" / "email" / "2026" / "11" / "a.eml").write_bytes(b"raw message")
     t = M.ApiTransport("token", "acct")
@@ -181,6 +182,27 @@ def test_operator_mail_reads_raw_mail_through_s3(s3, monkeypatch):
     with pytest.raises(RuntimeError, match=r"R2 S3 read failed \(absent\)"):
         t.raw("email/2026/11/missing.eml")
     assert all(c.split()[-2:] == ["-", "--only-show-errors"] for c in calls(store))    # to stdout, never a file
+
+
+def test_the_refresh_reads_its_inbox_through_s3(s3, monkeypatch):
+    # pipeline/inbox.py (operator_mail's lists, ri_nbc's Worker file): wrangler's get --pipe through the filter, which
+    # takes the S3 route; the bytes to memory, an absent key told apart from a refusal
+    store, env = s3
+    for k in ("R2_S3_ENDPOINT", "AWS_CLI", "FAKE_S3", "AWS_DEFAULT_REGION", "WRANGLER_REAL"):
+        monkeypatch.setenv(k, env[k])
+    monkeypatch.delenv("DWW_INBOX_DIR", raising=False)
+    import inbox
+    (store / "dirtywaterwatch-data" / "inbox" / "mail").mkdir(parents=True)
+    (store / "dirtywaterwatch-data" / "inbox" / "mail" / "ma-swsc-cso-email.json").write_text('{"schema": 1}')
+    assert inbox.get_json("inbox/mail/ma-swsc-cso-email.json") == ({"schema": 1}, None)
+    assert inbox.get("inbox/mail/nothing.json") == (None, inbox.ABSENT)
+    assert all(" s3 cp s3://dirtywaterwatch-data/inbox/mail/" in f" {c}" and c.endswith("- --only-show-errors")
+               for c in calls(store))
+    monkeypatch.setenv("FAKE_S3_DENY", "1")
+    data, why = inbox.get("inbox/mail/ma-swsc-cso-email.json")
+    assert data is None and why.startswith("not read (exit") and "@" not in why
+    with pytest.raises(ValueError):
+        inbox.get("state/build.tar.gz")                     # inbox/ only
 
 
 def _keys_env(tmp_path, verify_json: str):

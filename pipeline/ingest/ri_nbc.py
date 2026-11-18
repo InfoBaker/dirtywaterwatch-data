@@ -27,13 +27,17 @@ Quirks:
     already older than the map's ~48 h window by then (MAP_WINDOW_H), it may have aged off the map
     while still running: status unknown, the end not invented (raw.vanished_without_deactivation);
   reappear: an activation seen active again after it left /pins is ongoing again (raw.spells_seen_active).
-- The site's Worker (worker/src/live/nbc.ts) polls the same endpoints every 5 minutes into D1 with the
-  same keys. Each run reads its records and revisions (`wrangler d1 execute --remote`, read-only,
-  revisions of the last two days after the first full read; `--backfill-worker` reads all; set
-  DWW_WORKER_D1=0 to skip) and folds them in as "worker" sightings, so an activation that comes and
-  goes between hourly runs is still a record, and start and end sightings are known to 5 minutes.
-  Without wrangler the public GET /api/live (events first seen since the last static fetch) is read
-  instead. R2 RAW holds every Worker response but cannot be listed from wrangler; it is not read.
+- The site's Worker (worker/src/live/nbc.ts) polls the same endpoints every 5 minutes into its database with
+  the same keys, and writes its NBC records and revisions to this pipeline's bucket (since 2026-11-18;
+  worker/src/live/nbc-export.ts in the site repository): inbox/nbc-worker.json, after a poll that changed
+  something (at most every 15 minutes) and at least hourly, with every record changed in the last 7 days or
+  still open, the revisions of those 7 days and written_at. Each run reads it (pipeline/inbox.py, through R2's
+  S3 endpoint) and folds the revisions since two days before the last good read (all of the file's on a first
+  read or with `--backfill-worker`) in as "worker" sightings, so an activation that comes and goes between
+  hourly runs is still a record, and start and end sightings are known to 5 minutes. A file that is absent,
+  unreadable or written more than WORKER_INBOX_MAX_AGE_H hours ago, or whose poller has not succeeded for that
+  long, is not used: the public GET /api/live (events first seen since the last static fetch) is read instead,
+  and meta.worker_channel and meta.worker_error say so. This pipeline does not read the Worker's database.
 - Timezone is not stated. The map calls moment(t).utcOffset("4"), which moment ignores (a string
   without a sign is not an offset), so the page shows the value as the viewer's local wall clock.
   Values without an offset are therefore read as America/New_York wall-clock times; raw keeps the
@@ -55,7 +59,8 @@ Cadence: hourly with the refresh, plus the Worker's 5-minute polls (the map's ow
 disabled); /dryoverflows has a 30-day window, so a gap of more than ~28 days in polling loses
 verified events for good.
 
-Run: python -m ingest.ri_nbc [--backfill-worker | --no-worker]   (from pipeline/)
+Run: python -m ingest.ri_nbc [--backfill-worker | --no-worker]   (from pipeline/; DWW_INBOX_DIR=<folder> reads a
+local copy of inbox/nbc-worker.json)
 """
 from __future__ import annotations
 
@@ -63,9 +68,7 @@ import argparse
 import csv
 import hashlib
 import json
-import os
 import re
-import subprocess
 import sys
 from datetime import UTC, datetime, timedelta
 from zoneinfo import ZoneInfo
@@ -86,14 +89,11 @@ STATE_PATH = BUILD_DIR / "ri-nbc-state.json"
 OUTFALL_CSV = ROOT / "research" / "ri" / "raw" / "nbc-outfalls-from-api.csv"
 RIGIS_CACHE = RAW_DIR / SOURCE_ID / "rigis-nbc-sewer-overflows.json"
 TZ = ZoneInfo("America/New_York")
-# The site's Worker polls /pins and /dryoverflows every 5 minutes into D1 (worker/src/live/nbc.ts,
-# same event keys); its records and revisions are read with wrangler, else from the public /api/live.
+# The site's Worker polls /pins and /dryoverflows every 5 minutes (worker/src/live/nbc.ts, same event keys) and
+# writes its records and revisions to inbox/nbc-worker.json (worker/src/live/nbc-export.ts); else the public /api/live.
 LIVE_URL = "https://dirtywaterwatch.org/api/live"
-WRANGLER_DIR = ROOT / "worker"
-WRANGLER = WRANGLER_DIR / "node_modules" / ".bin" / "wrangler"
-# every call goes through the filter that keeps the token's account name and e-mail addresses out of the log
-WRANGLER_REDACT = ROOT / "scripts" / "wrangler_redact.py"
-D1_DATABASE = "dirtywaterwatch"
+WORKER_INBOX_KEY = "inbox/nbc-worker.json"
+WORKER_INBOX_MAX_AGE_H = 2      # the Worker writes it at least hourly; an older file is not used
 WORKER_POLL_MIN = 5
 OBS_STATES = ("active", "ended", "absent")
 MAP_WINDOW_H = 44   # /pins keeps an alarm ~48 h: an activation that leaves it later may have aged off, not ended
@@ -377,7 +377,7 @@ def record_obs(rec: dict, at: str) -> list[tuple[str, str]]:
 
 
 def worker_from_d1(event_rows: list[dict], revision_rows: list[dict]) -> dict:
-    """D1 rows (event: event_id, first_seen_at, last_changed_at; event_revision: event_id,
+    """The Worker's rows (event: event_id, first_seen_at, last_changed_at; event_revision: event_id,
     fetched_at, record) -> {key: {record, first_seen_at, last_changed_at, obs}}."""
     out = {}
     first = {r["event_id"]: r for r in event_rows}
@@ -464,35 +464,34 @@ def merge_worker(state: dict, wk: dict, refs: tuple, channel: str) -> dict:
     return stats
 
 
-def read_worker_d1(since: str | None) -> tuple[dict | None, str | None]:
-    """The Worker's NBC records and revisions from D1 (wrangler d1 execute --remote, read-only), the
-    revisions newer than `since` (all when None). (None, why) when wrangler is missing, not logged in
-    or DWW_WORKER_D1=0."""
-    if os.environ.get("DWW_WORKER_D1", "1").lower() in ("0", "no", "false", "off"):
-        return None, "disabled (DWW_WORKER_D1=0)"
-    if not WRANGLER.exists():
-        return None, "wrangler is not installed in worker/"
-    if since and not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", since):
-        since = None
-    sql = (f"SELECT event_id, first_seen_at, last_changed_at, status FROM event WHERE source_id = '{SOURCE_ID}'; "
-           f"SELECT event_id, fetched_at, record FROM event_revision WHERE event_id LIKE '{SOURCE_ID}:%'"
-           + (f" AND fetched_at > '{since}'" if since else "") + " ORDER BY fetched_at")
-    try:
-        p = subprocess.run([sys.executable, "-I", str(WRANGLER_REDACT), "d1", "execute", D1_DATABASE, "--remote",
-                            "--json", "--command", sql],
-                           cwd=WRANGLER_DIR, capture_output=True, text=True, timeout=120, stdin=subprocess.DEVNULL,
-                           env={**os.environ, "WRANGLER_SEND_METRICS": "false", "WRANGLER_REAL": str(WRANGLER)})
-    except (OSError, subprocess.TimeoutExpired) as e:
-        return None, f"wrangler: {e}"
-    out = p.stdout or ""
-    if p.returncode != 0 or "[" not in out:
-        return None, f"wrangler exit {p.returncode}: {(p.stderr or out).strip()[-300:]}"
-    try:
-        js = json.loads(out[out.index("["):])
-        events, revisions = js[0]["results"], js[1]["results"]
-    except (ValueError, KeyError, IndexError, TypeError) as e:
-        return None, f"wrangler output: {e}"
-    return worker_from_d1(events, revisions), None
+def read_worker_inbox(since: str | None, now: str, reader=None) -> tuple[dict | None, str | None]:
+    """The Worker's NBC records and revisions from its file in this pipeline's bucket (inbox/nbc-worker.json), the
+    revisions newer than `since` (all of the file's when None). (None, why) when the file is absent, unreadable, not
+    in the Worker's form, written more than WORKER_INBOX_MAX_AGE_H hours before `now`, or its poller has not succeeded
+    for that long."""
+    import inbox
+    doc, why = (reader or inbox.get_json)(WORKER_INBOX_KEY)
+    if doc is None:
+        return None, ("no file" if why == inbox.ABSENT else why)
+    events, revisions = doc.get("events"), doc.get("revisions")
+    if doc.get("schema") != 1 or doc.get("source_id") != SOURCE_ID or not isinstance(events, list) \
+            or not isinstance(revisions, list):
+        return None, "the file is not in the Worker's form"
+    t_now = datetime.fromisoformat(now.replace("Z", "+00:00"))
+    limit = timedelta(hours=WORKER_INBOX_MAX_AGE_H)
+    for what, v in (("it was written", doc.get("written_at")),
+                    ("the Worker's NBC poller last succeeded", (doc.get("poller") or {}).get("last_ok_at"))):
+        try:
+            t = datetime.fromisoformat(str(v).replace("Z", "+00:00"))
+        except ValueError:
+            t = None
+        if t is None or t.tzinfo is None:
+            return None, f"the file does not say when {what}"
+        if t_now - t > limit:
+            return None, f"{what} at {z(v)}, more than {WORKER_INBOX_MAX_AGE_H} hours ago"
+    if since and re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", since):
+        revisions = [r for r in revisions if z(r.get("fetched_at")) > since]
+    return worker_from_d1([r for r in events if isinstance(r, dict)], [r for r in revisions if isinstance(r, dict)]), None
 
 
 def read_worker_live(session: requests.Session) -> tuple[dict | None, str | None]:
@@ -677,7 +676,8 @@ def to_record(key: str, ev: dict) -> dict:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--backfill-worker", action="store_true", help="read every revision the Worker holds in D1")
+    ap.add_argument("--backfill-worker", action="store_true",
+                    help="fold in every revision of the Worker's file (its last 7 days), not only the newer ones")
     ap.add_argument("--no-worker", action="store_true", help="do not read the Worker's polls")
     args = ap.parse_args(argv)
     state = read_json(STATE_PATH, {}) or {}
@@ -704,15 +704,16 @@ def main(argv=None) -> int:
     wk_state = state.setdefault("worker", {})
     worker_err, channel = None, None
     if not args.no_worker:
-        last = wk_state.get("d1_read_ok_at")
+        last = wk_state.get("inbox_read_ok_at")
         since = None if args.backfill_worker or not last else z(
             (datetime.fromisoformat(last.replace("Z", "+00:00")) - timedelta(days=2)).isoformat())
-        wk, worker_err = read_worker_d1(since)
-        channel = "d1"
+        wk, worker_err = read_worker_inbox(since, now)
+        channel = "inbox"
         if wk is None:
             wk, live_err = read_worker_live(s)
             channel = "api_live" if wk is not None else None
-            worker_err = f"D1: {worker_err}" + (f"; {live_err}" if live_err else "; read /api/live instead")
+            worker_err = f"the Worker's file {WORKER_INBOX_KEY}: {worker_err}" + \
+                (f"; {live_err}" if live_err else "; read /api/live instead")
         if wk is not None:
             stats.update(merge_worker(state, wk, refs, channel))
             wk_state[f"{channel}_read_ok_at"] = now

@@ -1,34 +1,22 @@
 """Operators' e-mail notices -> data/build/events/<list's source>.json, one file per notice list (data/mail-lists.json).
 
-Where the mail comes from
-  The mail Worker `dirtywaterwatch-mail` (site repository, worker-mail/) receives every message sent to an address at
-  dirtywaterwatch.org, archives it in R2 (bucket dirtywaterwatch-raw, email/<yyyy>/<mm>/<dd>/<id>.eml) and indexes it in
-  D1 (database dirtywaterwatch, table inbound: id, received_at, to_addr, list_id, raw_key, ...). The list_id is the
-  local part of the address the list was signed up with (springfield@ -> "springfield").
+Where the records come from (since 2026-11-18)
+  This repository's token reaches R2 objects in dirtywaterwatch-data only, so the refresh no longer reads the mail. The
+  private site repository's mail-feed job (its .github/workflows/mail-feed.yml, hourly, with the site's own token)
+  runs this repository's pipeline/mailfeed/read.py: it reads the site's mail index and the archived messages, checks
+  each sender, parses each notice in memory and writes, per notice list, the parsed records and each message's result
+  to the bucket dirtywaterwatch-data, inbox/mail/<list's source id>.json (pipeline/inbox.py; the layout is in
+  mailfeed/read.py and in the site repository's docs/mail-feed.md). No raw message, subject, address or body reaches
+  this repository, its bucket or its log.
+  This step, in the hourly refresh, reads each list's file through R2's S3 endpoint, places the Massachusetts records
+  with ma_massdep's lookups of this run (ingest/mail/ma_common.apply_place), applies the one-event rules below, holds
+  back what only a platform proves, checks for a quiet list, and writes the events file as before the split; for the
+  same mail it writes the same records (tests/test_mail_feed_split.py).
 
-How it is read (design, 2026-11-17)
-  The hourly refresh reads that index and archive itself, read-only, with the Cloudflare token the workflow already
-  carries (CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID): one D1 query for the index rows, one R2 object read per new
-  message. Chosen over a read endpoint on a Worker (a new shared secret in this public repository's settings and a
-  deploy) and over an export the mail Worker would write into the dirtywaterwatch-data bucket that the refresh restores
-  (a second copy of raw mail, which holds staff names, phones and signatures, and a deploy): it adds no secret, no
-  Worker code and no copy, and reads nothing the token cannot already read. The raw message is parsed in memory and
-  never written to disk, logged or saved; the log prints counts per list only. Off the runner (a developer's machine
-  with wrangler signed in) set MAIL_WRANGLER=1 (and MAIL_WRANGLER_CWD to a folder whose wrangler config names the
-  database, such as the site repository's worker/) to read through wrangler instead.
-
-What is kept between runs (data/build/inbound-mail.json, saved with the pipeline state, never published)
-  Per message: its list, receipt time, R2 key, size, the sender's domain, whether Cloudflare's check verified the
-  sender, the parser and its version, the result (notice, not_notice, account, needs_rule, failed, unverified,
-  unknown_list, correspondence, fetch_failed), the reason, and the records it made. No subject, address, name or body.
-  A message is read again only when its parser's VERSION or its list's settings change, or its fetch failed; a
-  message that does not parse is kept and counted with its reason, never dropped and never guessed.
-
-Trust
-  Anyone can write to these addresses. A message makes records only when Cloudflare's own Authentication-Results (the
-  first one, written by mx.cloudflare.net) shows DMARC passed for its From domain, or DKIM passed for one of the
-  list's signing domains, and that From domain is one of the list's senders; otherwise it is "unverified", counted,
-  never read further.
+An inbox that cannot be used (meta.inbox says which)
+  No file, a file that cannot be read, one written more than INBOX_MAX_AGE_H hours ago, or one whose read failed in the
+  private job: the list keeps its previous records and its health is false with the reason (common.write_events
+  ok=False). A list is never emptied for want of a file.
 
 One event, not two
   A Massachusetts notice and MassDEP's portal record of the same overflow (same permit, same outfall number, starts
@@ -37,6 +25,8 @@ One event, not two
   lacks (the estimated volume, the cessation time) are attached to it by the status build (linked_notices).
   Manchester's e-mails repeat the city's page posts (ingest.nh_permittees): each becomes the duplicate of its post.
   This module runs after ma_massdep and nh_permittees (sorted order) and reads their events files of the same run.
+  A message proven only by a shared sending platform (raw._trust "platform", Holyoke's Everbridge) may add to another
+  source's record of the same discharge and never stands alone: its chain is held back unless linked as a duplicate.
 
 A list that goes quiet (meta.quiet; the status build lists it as a stale reason)
   Lists that send only when something happens are checked against another source that sees the same operator: a
@@ -44,194 +34,35 @@ A list that goes quiet (meta.quiet; the status build lists it as a stale reason)
   from the list since an hour before its start, means the list is not reaching us. A list of regular releases (CT
   DEEP's press list, weekly at least) is quiet after max_quiet_days without a message.
 
-Usage (from pipeline/):  python -m ingest.operator_mail [--max-fetch N]
+Usage (from pipeline/):  python -m ingest.operator_mail      (DWW_INBOX_DIR=<folder> reads local copies of inbox/)
 """
 from __future__ import annotations
 
-import argparse
 import copy
-import hashlib
 import json
-import os
-import re
-import shutil
-import subprocess
 import sys
 from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from urllib.parse import quote
 
-import requests
-
-from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, read_json, write_events, write_json
+import inbox
+from common import DATA_DIR, EVENTS_DIR, read_json, write_events
 from ingest.mail import PARSERS
-from ingest.mail.message import outfall_number, parse_iso, parse_mail, verified
+from ingest.mail.ma_common import apply_place
+from ingest.mail.message import outfall_number, parse_iso
 
 LISTS_FILE = DATA_DIR / "mail-lists.json"
-INDEX_FILE = BUILD_DIR / "inbound-mail.json"
-D1_DATABASE = "dirtywaterwatch"
-WRANGLER_REDACT = Path(__file__).resolve().parents[2] / "scripts" / "wrangler_redact.py"
-D1_DATABASE_ID = "4231c50f-6207-4297-89d3-d4224b7cbb91"     # site repository worker-mail/wrangler.jsonc
-RAW_BUCKET = "dirtywaterwatch-raw"
-API = "https://api.cloudflare.com/client/v4"
-ROWS_SQL = ("SELECT id, received_at, list_id, raw_key, size FROM inbound WHERE channel = 'email' "
-            "ORDER BY received_at")
-MAX_FETCH = 200                 # raw messages read per run (new, re-parsed, retried)
+INBOX_PREFIX = "inbox/mail/"
+INBOX_SCHEMA = 1
+INBOX_MAX_AGE_H = 3             # an older file keeps the list's previous records (the job runs hourly)
 PORTAL_LINK_HOURS = 3           # ma_massdep's own rule for a notice and its verified report
 CHAIN_HOURS = 72                # a Ceased notice closes the open notice of its outfall that started at most this long before
 QUIET_GRACE_H = 6               # a cross-check notice counts once it was published this long ago
 QUIET_LEAD_H = 1                # ... and the list said nothing from an hour before its start
-RETRY = {"fetch_failed"}
 
-
-# ---------------------------------------------------------------- reading the index and the archive
-
-class ApiTransport:
-    """Cloudflare's REST API with the workflow's token (D1 query, R2 object read)."""
-
-    def __init__(self, token: str, account: str, sess: requests.Session | None = None):
-        self.account = account
-        self.sess = sess or requests.Session()
-        self.sess.headers.update({"Authorization": f"Bearer {token}"})
-
-    @staticmethod
-    def _why(r: requests.Response) -> str:
-        try:
-            errs = r.json().get("errors") or []
-            codes = ", ".join(f"{e.get('code')}: {str(e.get('message'))[:80]}" for e in errs[:2])
-        except ValueError:
-            codes = ""
-        return f"HTTP {r.status_code}" + (f" ({codes})" if codes else "")
-
-    def rows(self) -> list[dict]:
-        r = self.sess.post(f"{API}/accounts/{self.account}/d1/database/{D1_DATABASE_ID}/query",
-                           json={"sql": ROWS_SQL}, timeout=60)
-        if r.status_code != 200:
-            raise RuntimeError(f"D1 inbound index answered {self._why(r)}")
-        res = (r.json().get("result") or [{}])[0]
-        if not res.get("success", True):
-            raise RuntimeError("D1 inbound query did not succeed")
-        return res.get("results") or []
-
-    def raw(self, key: str) -> bytes:
-        if os.environ.get("R2_S3_ENDPOINT"):
-            return self._raw_s3(key)
-        r = self.sess.get(f"{API}/accounts/{self.account}/r2/buckets/{RAW_BUCKET}/objects/{quote(key, safe='/')}",
-                          timeout=60)
-        if r.status_code != 200:
-            raise RuntimeError(f"R2 object answered {self._why(r)}")
-        return r.content
-
-    @staticmethod
-    def _raw_s3(key: str) -> bytes:
-        """The raw message through R2's S3 endpoint (scripts/r2-s3-keys.sh: the token is limited to the pipeline's
-        buckets, which Cloudflare's REST API refuses for object reads). To stdout, never to a file; the error is
-        reported by its kind only."""
-        aws = os.environ.get("AWS_CLI") or shutil.which("aws") or "aws"
-        cmd = [aws, "--endpoint-url", os.environ["R2_S3_ENDPOINT"], "--region",
-               os.environ.get("AWS_DEFAULT_REGION") or "auto", "s3", "cp", f"s3://{RAW_BUCKET}/{key}", "-",
-               "--only-show-errors"]
-        try:
-            p = subprocess.run(cmd, capture_output=True, timeout=120)
-        except (OSError, subprocess.TimeoutExpired) as e:
-            raise RuntimeError(f"R2 S3 read could not run ({type(e).__name__})") from None
-        if p.returncode != 0 or not p.stdout:
-            kind = "absent" if re.search(rb"An error occurred \(404\) when calling the HeadObject operation", p.stderr) \
-                else f"exit {p.returncode}"
-            raise RuntimeError(f"R2 S3 read failed ({kind})")
-        return p.stdout
-
-
-class WranglerTransport:
-    """wrangler on a developer's machine (its own sign-in), for a hand run."""
-
-    def __init__(self, cwd: str | None = None):
-        self.cwd = cwd
-        self.bin = os.environ.get("WRANGLER") or "wrangler"
-
-    def _run(self, args: list[str], timeout: int = 120) -> subprocess.CompletedProcess:
-        # through the filter that keeps the token's account name and e-mail addresses out of any log; the --json and
-        # --pipe output a caller reads passes byte for byte when wrangler succeeds (scripts/wrangler_redact.py)
-        return subprocess.run([sys.executable, "-I", str(WRANGLER_REDACT), *args], cwd=self.cwd, capture_output=True,
-                              timeout=timeout, env={**os.environ, "WRANGLER_REAL": shutil.which(self.bin) or self.bin})
-
-    def rows(self) -> list[dict]:
-        p = self._run(["d1", "execute", D1_DATABASE, "--remote", "--json", "--command", ROWS_SQL])
-        if p.returncode != 0:
-            raise RuntimeError(f"wrangler d1 execute exited {p.returncode}")
-        return (json.loads(p.stdout.decode()) or [{}])[0].get("results") or []
-
-    def raw(self, key: str) -> bytes:
-        # to stdout (--pipe): the raw message is never written to a file (Astra mail review 2026-11-17 P1-4)
-        p = self._run(["r2", "object", "get", f"{RAW_BUCKET}/{key}", "--remote", "--pipe"])
-        if p.returncode != 0 or not p.stdout:
-            raise RuntimeError(f"wrangler r2 object get exited {p.returncode}")
-        return p.stdout
-
-
-def transport_from_env():
-    if os.environ.get("MAIL_WRANGLER"):
-        return WranglerTransport(os.environ.get("MAIL_WRANGLER_CWD"))
-    token, account = os.environ.get("CLOUDFLARE_API_TOKEN"), os.environ.get("CLOUDFLARE_ACCOUNT_ID")
-    if token and account:
-        return ApiTransport(token, account)
-    return None
-
-
-# ---------------------------------------------------------------- the lists and the index
 
 def load_lists(path: Path = LISTS_FILE) -> dict:
     return (read_json(path, {}) or {}).get("lists") or {}
-
-
-def rule_of(spec: dict | None) -> str:
-    """What a message's reading depends on: the list's settings and its parser's version."""
-    if not spec:
-        return "unknown_list"
-    parser = PARSERS.get(spec.get("parser") or "")
-    body = json.dumps({k: v for k, v in spec.items() if k not in ("quiet", "since")}, sort_keys=True)
-    return f"{spec.get('kind')}:{spec.get('parser')}:{getattr(parser, 'VERSION', 0)}:" \
-           f"{hashlib.sha1(body.encode()).hexdigest()[:10]}"
-
-
-def read_message(raw: bytes, row: dict, spec: dict | None, ctx: dict) -> dict:
-    """One message -> its index entry (result, reason, records). Never raises for a message's content."""
-    entry = {"list_id": row.get("list_id"), "received_at": row.get("received_at"), "raw_key": row.get("raw_key"),
-             "size": row.get("size"), "rule": rule_of(spec)}
-    try:
-        mail = parse_mail(raw, str(row["id"]), str(row.get("received_at")), row.get("list_id"))
-    except Exception as e:  # noqa: BLE001 - an unreadable message is kept and counted
-        return {**entry, "result": "failed", "note": f"message could not be read: {type(e).__name__}", "records": []}
-    entry["from_domain"] = mail.from_domain
-    if spec is None:
-        return {**entry, "result": "unknown_list", "note": "no list in data/mail-lists.json for this address",
-                "records": []}
-    if spec.get("kind") == "correspondence":
-        return {**entry, "result": "correspondence", "note": "an address for letters, never parsed", "records": []}
-    if spec.get("kind") == "context":
-        return {**entry, "result": "not_notice", "note": "a context list (news), never a record", "records": []}
-    if spec.get("kind") == "pending":
-        # a list signed up to before its parser exists: kept and counted under its list, never a record
-        acct = re.search(r"(?i)confirm|verif|welcome|thank(?:s| you) for|subscri", mail.subject or "")
-        return {**entry, "result": "account" if acct else "needs_rule",
-                "note": "a sign-up or confirmation message" if acct else "a list without a parser yet", "records": []}
-    trust, how = verified(mail, spec)
-    entry["trust"], entry["verified"] = trust, how
-    if not trust:
-        return {**entry, "result": "unverified", "note": how, "records": []}
-    parser = PARSERS.get(spec.get("parser") or "")
-    if parser is None:
-        return {**entry, "result": "failed", "note": f"no parser named {spec.get('parser')!r}", "records": []}
-    try:
-        res = parser.parse(mail, spec, ctx)
-    except Exception as e:  # noqa: BLE001 - a parser error is a failure of that message, kept with its reason
-        # the exception's type only: its message can quote the notice (Astra mail review 2026-11-17 P1-2)
-        return {**entry, "result": "failed", "note": f"parser error ({type(e).__name__})", "records": []}
-    recs = res.records if res.kind == "notice" else []
-    for r in recs:
-        r["raw"]["_trust"] = trust
-    return {**entry, "result": res.kind, "note": res.note, "records": recs}
 
 
 def ma_context(lists: dict) -> dict:
@@ -249,61 +80,6 @@ def ma_context(lists: dict) -> dict:
             print(f"operator_mail: {key} lookup not loaded ({type(e).__name__})", file=sys.stderr)
     ctx["layer"] = (read_json(M.LAYER_CACHE, {}) or {}).get("outfalls") or {}
     return ctx
-
-
-RETRY_MAX = 12                  # fetch attempts before a message is left as fetch_failed for good (counted)
-
-
-def update_index(index: dict, rows: list[dict], tr, lists: dict, ctx: dict, max_fetch: int = MAX_FETCH,
-                 now: datetime | None = None) -> Counter:
-    """Read the messages that need it, in this order: never read (newest first), read under an older rule, then
-    fetch failures whose wait is over (1, 2, 4 ... 24 hours apart, RETRY_MAX tries). A row left for a later run is
-    entered as "pending" at once, so it is counted (Astra mail review 2026-11-17 P1-5)."""
-    now = now or datetime.now(UTC)
-    msgs = index.setdefault("messages", {})
-    stats = Counter()
-    new, reread, retry = [], [], []
-    for row in rows:
-        mid = str(row.get("id") or "")
-        if not mid or not row.get("raw_key"):
-            stats["index_row_without_key"] += 1
-            continue
-        spec = lists.get(row.get("list_id") or "")
-        old = msgs.get(mid)
-        if old is None or old.get("result") == "pending":
-            new.append(row)
-        elif old.get("rule") != rule_of(spec):
-            reread.append(row)
-        elif old.get("result") == "fetch_failed" and (old.get("tries") or 0) < RETRY_MAX \
-                and (parse_iso(old.get("next_try_at")) or now) <= now:
-            retry.append(row)
-    new.sort(key=lambda r: str(r.get("received_at") or ""), reverse=True)
-    fetched = 0
-    for row in new + reread + retry:
-        mid = str(row["id"])
-        spec = lists.get(row.get("list_id") or "")
-        old = msgs.get(mid)
-        base = {"list_id": row.get("list_id"), "received_at": row.get("received_at"), "raw_key": row.get("raw_key"),
-                "size": row.get("size"), "rule": rule_of(spec)}
-        if fetched >= max_fetch:
-            if old is None:
-                msgs[mid] = {**base, "result": "pending", "note": "not read yet (the run's reading limit)", "records": []}
-            stats["left_for_next_run"] += 1
-            continue
-        fetched += 1
-        try:
-            raw = tr.raw(row["raw_key"])
-        except Exception as e:  # noqa: BLE001 - kept, tried again later
-            tries = ((old or {}).get("tries") or 0) + 1 if (old or {}).get("result") == "fetch_failed" else 1
-            msgs[mid] = {**(old or {}), **base, "result": "fetch_failed", "note": str(e)[:200], "tries": tries,
-                         "next_try_at": (now + timedelta(hours=min(2 ** (tries - 1), 24))).isoformat(),
-                         "records": (old or {}).get("records") or []}
-            stats["fetch_failed"] += 1
-            continue
-        msgs[mid] = read_message(raw, row, spec, ctx)
-        stats["read"] += 1
-    stats["fetched"] = fetched
-    return stats
 
 
 # ---------------------------------------------------------------- linking
@@ -502,13 +278,20 @@ def list_records(entries: list[dict]) -> list[dict]:
     return out
 
 
-def build_list(lid: str, spec: dict, entries: list[dict], others: dict, now: datetime) -> tuple[list[dict], dict]:
+def build_list(lid: str, spec: dict, entries: list[dict], others: dict, now: datetime,
+               ctx: dict | None = None) -> tuple[list[dict], dict]:
+    """One list's records and meta from its entries (each message's result and records, with its inbound id as _id).
+    ctx: ma_massdep's lookups, which place each Massachusetts record (a list with an outfall_prefix) afresh."""
     recs = list_records(entries)
     for r in recs:                  # links are made afresh each run
         r["duplicate_of"] = None
         r["parent_event_id"] = None
         for k in ("_chain", "_link_basis"):
             r["raw"].pop(k, None)
+    if spec.get("outfall_prefix") and ctx is not None:
+        for r in recs:              # placed with this run's lookups (the private read does not place)
+            if (r.get("raw") or {}).get("_outfall_key") is not None:
+                apply_place(r, spec, ctx)
     stats = {}
     if spec.get("parser") == "manchester":
         PARSERS["manchester"].pair(recs)
@@ -526,7 +309,7 @@ def build_list(lid: str, spec: dict, entries: list[dict], others: dict, now: dat
     res = Counter(e.get("result") for e in entries)
     received = [e.get("received_at") for e in entries if e.get("received_at")]
     meta = {
-        "channel": "email", "list_id": lid, "address": spec.get("address"), "signed_up": spec.get("since"),
+        "channel": "email", "list_id": lid, "signed_up": spec.get("since"),      # the sign-up address is not published
         "messages": len(entries), "results": dict(sorted(res.items())), "records": len(recs), **stats,
         "last_message_at": max(received) if received else None,
         "failures": [{"inbound_id": mid, "received_at": e.get("received_at"), "result": e.get("result"),
@@ -540,56 +323,67 @@ def build_list(lid: str, spec: dict, entries: list[dict], others: dict, now: dat
     return recs, meta
 
 
+
+
 def read_events(source_id: str, events_dir: Path = EVENTS_DIR) -> list[dict]:
     return (read_json(events_dir / f"{source_id}.json", {}) or {}).get("records") or []
 
 
-def run(tr, lists: dict, index_path: Path = INDEX_FILE, events_dir: Path = EVENTS_DIR, now: datetime | None = None,
-        max_fetch: int = MAX_FETCH) -> int:
+def read_inbox(source_id: str, now: datetime, reader=None) -> tuple[dict | None, str | None, dict]:
+    """(the list's inbox file, None, about) when it can be used; (None, why, about) when it cannot: absent, unreadable,
+    of another schema, older than INBOX_MAX_AGE_H, or a failed read in the private job. about goes to meta.inbox."""
+    doc, why = (reader or inbox.get_json)(f"{INBOX_PREFIX}{source_id}.json")
+    about = {"key": f"{INBOX_PREFIX}{source_id}.json"}
+    if doc is None:
+        return None, ("no file from the mail feed" if why == inbox.ABSENT else f"the mail feed's file: {why}"), about
+    written = parse_iso(doc.get("written_at"))
+    about["written_at"] = doc.get("written_at")
+    about["stats"] = doc.get("stats") or {}
+    if doc.get("schema") != INBOX_SCHEMA or doc.get("source_id") != source_id or not isinstance(doc.get("entries"), list):
+        return None, "the mail feed's file is not in the expected form", about
+    if written is None:
+        return None, "the mail feed's file has no time", about
+    age_h = (now - written).total_seconds() / 3600
+    about["age_hours"] = round(age_h, 2)
+    if age_h > INBOX_MAX_AGE_H:
+        return None, (f"the mail feed's file was written {written.astimezone(UTC):%Y-%m-%d %H:%MZ}, more than "
+                      f"{INBOX_MAX_AGE_H} hours ago"), about
+    if not doc.get("ok"):
+        return None, str(doc.get("error") or "the mail feed's read failed"), about
+    return doc, None, about
+
+
+def run(lists: dict, events_dir: Path = EVENTS_DIR, now: datetime | None = None, reader=None) -> int:
+    """Each notice list's file from the inbox -> its events file. 0 when every list was written from a usable file."""
     now = now or datetime.now(UTC)
     notice_lists = {k: v for k, v in lists.items() if v.get("kind") == "notices" and v.get("source_id")}
-    index = read_json(index_path, {}) or {}
-    error = None
-    if tr is None:
-        error = "no Cloudflare credentials in the environment (CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID)"
-    else:
-        try:
-            rows = tr.rows()
-        except Exception as e:  # noqa: BLE001
-            error = f"the inbound mail index could not be read: {str(e)[:200]}"
-    if error:
-        for lid, spec in notice_lists.items():
-            write_events(spec["source_id"], [], ok=False, error=error, path=events_dir / f"{spec['source_id']}.json")
-        print(f"operator_mail: {error}; every list keeps its previous records", file=sys.stderr)
-        return 1
-    ctx = ma_context(notice_lists)
-    stats = update_index(index, rows, tr, lists, ctx, max_fetch, now)
-    index["read_at"] = now.isoformat()
-    index["index_rows"] = len(rows)
-    write_json(index_path, index)
-    by_list = defaultdict(list)
-    for mid, e in (index.get("messages") or {}).items():
-        by_list[e.get("list_id")].append({**e, "_id": mid})
     others = {sid: read_events(sid, events_dir) for sid in ("ma-massdep", "nh-permittees")}
+    ctx = ma_context(notice_lists)
+    kept = 0
     for lid, spec in sorted(notice_lists.items()):
-        recs, meta = build_list(lid, spec, by_list.get(lid, []), others, now)
-        write_events(spec["source_id"], recs, ok=True, meta=meta, path=events_dir / f"{spec['source_id']}.json")
+        sid = spec["source_id"]
+        path = events_dir / f"{sid}.json"
+        doc, why, about = read_inbox(sid, now, reader)
+        if why:
+            write_events(sid, [], ok=False, error=why, meta={"inbox": about}, path=path)
+            print(f"  {lid}: {why}; the list keeps its previous records", file=sys.stderr)
+            kept += 1
+            continue
+        entries = [{**{k: v for k, v in e.items() if k != "id"}, "_id": str(e.get("id"))} for e in doc["entries"]]
+        recs, meta = build_list(lid, spec, entries, others, now, ctx)
+        meta["inbox"] = about
+        write_events(sid, recs, ok=True, meta=meta, path=path)
         q = " quiet" if meta.get("quiet") else ""
         print(f"  {lid}: {meta['messages']} messages, {meta['records']} records, "
               f"results {json.dumps(meta['results'], sort_keys=True)}{q}", file=sys.stderr)
-    other = Counter(e.get("result") for lid, es in by_list.items() if lid not in notice_lists for e in es)
-    print(f"operator_mail: {len(rows)} index rows; read {stats.get('read', 0)}, fetch failed "
-          f"{stats.get('fetch_failed', 0)}, left for next run {stats.get('left_for_next_run', 0)}; other addresses "
-          f"{json.dumps(dict(sorted(other.items())), sort_keys=True)}", file=sys.stderr)
-    return 0
+    print(f"operator_mail: {len(notice_lists)} lists from {inbox.BUCKET}/{INBOX_PREFIX}; "
+          f"{kept} kept their previous records", file=sys.stderr)
+    return 1 if kept else 0
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
-    ap.add_argument("--max-fetch", type=int, default=MAX_FETCH)
-    a = ap.parse_args(argv)
-    run(transport_from_env(), load_lists(), max_fetch=a.max_fetch)
-    return 0    # a failed read is recorded as the lists' health; the refresh goes on
+    run(load_lists())
+    return 0    # a list that could not be read is recorded as its health; the refresh goes on
 
 
 if __name__ == "__main__":
