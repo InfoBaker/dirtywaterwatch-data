@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}   # R2 objects on the pipeline's two buckets (S3 endpoint) and D1 read
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       OBL_API_KEY: ${{ secrets.OBL_API_KEY }}
       PYTHONUNBUFFERED: '1'
@@ -36,6 +36,7 @@ jobs:
       - run: python -m venv .venv && .venv/bin/pip install -q -r requirements.txt
         working-directory: pipeline
       - run: npm install -g wrangler@4 && sh scripts/wrangler-guard.sh   # every later wrangler call is filtered (no account name in the log)
+      - run: sh scripts/r2-s3-keys.sh   # R2 objects through R2's S3 endpoint: the token is limited to the pipeline's buckets
       - name: Restore pipeline state from R2 (read only here)
         run: |
           rc=0; python3 -I scripts/state_paths.py fetch state/build.tar.gz build.tar.gz || rc=$?
