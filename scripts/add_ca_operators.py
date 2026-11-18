@@ -261,7 +261,7 @@ def read_enrollees() -> list[dict]:
     if ENROLLEES.exists():
         content = ENROLLEES.read_bytes()
     else:
-        req = urllib.request.Request(ENROLLEES_URL, headers={"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org)"})
+        req = urllib.request.Request(ENROLLEES_URL, headers={"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org/contact/)"})
         content = urllib.request.urlopen(req, timeout=120).read()
         ENROLLEES.parent.mkdir(parents=True, exist_ok=True)
         ENROLLEES.write_bytes(content)

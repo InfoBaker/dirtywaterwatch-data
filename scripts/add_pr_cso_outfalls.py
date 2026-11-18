@@ -30,7 +30,7 @@ SAVED = ROOT / "data" / "raw" / "pr-prasa-cso-data" / "layer.json"
 LAYER = "https://gis.acueductospr.com/arcgis_local/rest/services/Hosted/CSO_Data/FeatureServer/0"
 PERMIT = "PR0021555"
 READ = "2026-11-14"
-UA = {"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org)"}
+UA = {"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org/contact/)"}
 
 
 def clean(v) -> str | None:

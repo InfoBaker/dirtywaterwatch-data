@@ -32,7 +32,7 @@ LAYERS = {
     "lake": (f"{BASE}/LAKES_WBID_AGOL/FeatureServer/0", "NAME,WBID,TYPE",
              "https://www.arcgis.com/home/item.html?id=eecba603b39f49789bf60388fbeba5b7"),
 }
-UA = {"User-Agent": "DirtyWaterWatch/1.0 (+https://dirtywaterwatch.org)"}
+UA = {"User-Agent": "DirtyWaterWatch/1.0 (+https://dirtywaterwatch.org/contact/)"}
 
 
 def clean(v):

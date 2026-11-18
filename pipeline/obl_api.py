@@ -5,7 +5,7 @@ Base https://openboatlaunch.org/api/v1/ (OBL_API_BASE overrides it: https, or ht
 tests). GET, JSON. The key is read from the environment variable OBL_API_KEY and sent as `Authorization: Bearer`;
 it is never printed, logged, written to a file or put in a message: every message here is built from the path, the
 HTTP status and the answer's own `error` word, and any text that could carry the key is scrubbed first (scrub()).
-The user agent is DirtyWaterWatch-pipeline/1 (+https://dirtywaterwatch.org).
+The user agent is DirtyWaterWatch-pipeline/1 (+https://dirtywaterwatch.org/contact/).
 
 Endpoints used (the contract is openboatlaunch's docs/api/v1.md):
   meta                          snapshot, built, counts, licence, bulk URLs with size and sha256; ETag/304
@@ -35,7 +35,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 BASE = "https://openboatlaunch.org/api/v1/"
-USER_AGENT = "DirtyWaterWatch-pipeline/1 (+https://dirtywaterwatch.org)"
+USER_AGENT = "DirtyWaterWatch-pipeline/1 (+https://dirtywaterwatch.org/contact/)"
 KEY_ENV = "OBL_API_KEY"
 ROOT = Path(__file__).resolve().parent.parent
 CACHE_DIR = Path(os.environ.get("OBL_API_CACHE_DIR") or ROOT / "data" / "raw" / "obl-api")   # the tests point it elsewhere

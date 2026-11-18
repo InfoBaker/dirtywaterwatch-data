@@ -33,7 +33,7 @@ from shapely.geometry import Point, shape
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "reference" / "id-permit-authority.json"
-HEADERS = {"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org; admin@infobakery.com)"}
+HEADERS = {"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org/contact/)"}
 DEQ = "https://www.deq.idaho.gov/permits/issued-permits-and-water-quality-certifications/"
 RES = ("https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/AIANNHA/MapServer/2/query?where=1%3D1"
        "&geometry=-117.3,41.9,-111.0,49.1&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects"

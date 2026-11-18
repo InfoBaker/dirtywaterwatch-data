@@ -18,7 +18,7 @@ EVENTS_DIR = BUILD_DIR / "events"
 OUT_DIR = ROOT / "out"
 SOURCES_DIR = DATA_DIR / "sources"
 
-HEADERS = {"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org; admin@infobakery.com)"}
+HEADERS = {"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org/contact/)"}
 BROWSER_HEADERS = {  # some state hosts (maine.gov, des.nh.gov) answer only a browser user agent
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36",
     "Accept": "text/html,application/json;q=0.9,*/*;q=0.8",

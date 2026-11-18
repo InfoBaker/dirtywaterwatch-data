@@ -30,7 +30,7 @@ sys.path.insert(0, str(ROOT / "pipeline"))
 from ingest import nh_pdftext  # noqa: E402
 
 OUT = ROOT / "data" / "reference" / "ia-focomp-facilities.json"
-HEADERS = {"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org; admin@infobakery.com)"}
+HEADERS = {"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org/contact/)"}
 EXPORT = ("https://programs.iowadnr.gov/focomp/Search/SitesSearchExport?ProgramTypeID=21&FacilityTypeID={t}"
           "&IncludeInactive=false&HasSpills=false&OrderBy=SiteName&SortOrder=asc&ExportAs=pdf")
 TYPES = {"911": "Major Municipal", "933": "Combined Sewer"}

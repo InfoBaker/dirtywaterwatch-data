@@ -48,7 +48,7 @@ PAGE = "https://dnr.mo.gov/data-e-services/geographic-information-systems"
 FIELDS = ("OBJECTID,PERMIT_ID,P_FEAT_ID,GIS_LOC_ID,FAC_NAME,FAC_COUNTY,STATUS,CSO,CSO_FLAG,PF_TYPE,REC_STREAM,WB_NAME,"
           "WBID,NHD_ID,HUC_8,HACCURACY,HCOLLTEXT,EPE,DATECOLL,PF_ACTIVE,PF_EXPIRE,P_TYPE,P_CAT,WASTE_TYPE,MAJOR,CA_NAME,"
           "CA_LEVEL,PRIMARY_PF,TOTAL_PF,FLOW_DSGN,SIC_DESC")
-HEADERS = {"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org; admin@infobakery.com)"}
+HEADERS = {"User-Agent": "DirtyWaterWatch/0.1 (+https://dirtywaterwatch.org/contact/)"}
 NOT_SEWAGE = {"MO0134198": ("An ethanol plant's outfall that EPA's CSO inventory flags as a combined sewer overflow; the "
                             "permit is an industrial one and no combined sewer is shown, so the row is kept off the map "
                             "and out of the outfall count until the permit confirms one.")}
