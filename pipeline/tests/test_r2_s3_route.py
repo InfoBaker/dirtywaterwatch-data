@@ -27,6 +27,9 @@ with open(store / "calls.log", "a") as fh:
     fh.write(" ".join(a) + "\n")
 def opt(name):
     return a[a.index(name) + 1]
+if os.environ.get("FAKE_S3_ERROR"):
+    sys.stderr.write(os.environ["FAKE_S3_ERROR"] + "\n")
+    sys.exit(254)
 if os.environ.get("FAKE_S3_DENY"):
     sys.stderr.write("An error occurred (AccessDenied) when calling the GetObject operation: Access Denied for someone@example.com\n")
     sys.exit(254)
@@ -37,6 +40,8 @@ if "s3api" in a:
         if not obj.is_file():
             sys.stderr.write("An error occurred (NoSuchKey) when calling the GetObject operation: The specified key does not exist.\n")
             sys.exit(254)
+        if os.environ.get("FAKE_S3_SLEEP"):
+            Path(a[-1]).write_bytes(b"partial"); import time; time.sleep(float(os.environ["FAKE_S3_SLEEP"]))
         shutil.copyfile(obj, a[-1]); print('{"ContentLength": 1}'); sys.exit(0)
     if op == "put-object":
         obj.parent.mkdir(parents=True, exist_ok=True); shutil.copyfile(opt("--body"), obj); print('{"ETag": "x"}'); sys.exit(0)
@@ -67,7 +72,8 @@ def s3(tmp_path):
     aws = _exe(tmp_path / "aws", FAKE_AWS)
     env = {**os.environ, "R2_S3_ENDPOINT": ENDPOINT, "AWS_CLI": str(aws), "FAKE_S3": str(store),
            "AWS_DEFAULT_REGION": "auto", "WRANGLER_REAL": str(tmp_path / "no-wrangler")}
-    env.pop("FAKE_S3_DENY", None)
+    for k in ("FAKE_S3_DENY", "FAKE_S3_ERROR", "FAKE_S3_SLEEP", "R2_S3_GET_TIMEOUT"):
+        env.pop(k, None)
     return store, env
 
 
@@ -227,3 +233,55 @@ def test_workflows_run_the_keys_step_after_the_guard_with_the_r2_token():
         assert re.search(r"CLOUDFLARE_API_TOKEN: \$\{\{ secrets\.CLOUDFLARE_R2_TOKEN \}\}", t), wf.name
         assert "secrets.CLOUDFLARE_API_TOKEN" not in t, wf.name
     assert seen >= 3
+
+
+@pytest.mark.parametrize("error", [
+    "An error occurred (InvalidAccessKeyId) when calling the GetObject operation: The AWS Access Key Id you provided does not exist in our records.",
+    "An error occurred (NoSuchBucket) when calling the GetObject operation: The specified bucket does not exist",
+    "An error occurred (AccessDenied) when calling the GetObject operation: Access Denied",
+])
+def test_a_credential_or_bucket_error_is_a_failure_never_an_absent_key(s3, tmp_path, monkeypatch, error):
+    # Astra r2-s3 review P1: "does not exist" in a bad-key or missing-bucket message must not read as no pause switch
+    store, env = s3
+    env = {**env, "FAKE_S3_ERROR": error}
+    p = run(env, "r2", "object", "get", "dirtywaterwatch-data/state/PAUSE", "--file", str(tmp_path / "p"), "--remote")
+    assert p.returncode != 0 and b"The specified key does not exist." not in p.stderr
+    shim = _exe(tmp_path / "wrangler", f"#!/bin/sh\nexec {sys.executable} -I {REDACT} \"$@\"\n")
+    for k, v in env.items():
+        monkeypatch.setenv(k, v)
+    monkeypatch.setenv("STATE_FETCH_RETRY_S", "0")
+    spec = importlib.util.spec_from_file_location("state_paths_r2b", ROOT / "scripts" / "state_paths.py")
+    sp = importlib.util.module_from_spec(spec)
+    monkeypatch.setitem(sys.modules, "state_paths_r2b", sp)
+    spec.loader.exec_module(sp)
+    assert sp.fetch("state/PAUSE", tmp_path / "pause.check", tries=1, wrangler=str(shim)) == sp.FAILED
+
+
+def test_a_pipe_read_of_a_missing_bucket_by_head_is_the_only_404(s3):
+    store, env = s3
+    p = run({**env, "FAKE_S3_ERROR": "fatal error: An error occurred (403) when calling the HeadObject operation: Forbidden"},
+            "r2", "object", "get", "dirtywaterwatch-raw/email/x.eml", "--pipe")
+    assert p.returncode != 0 and b"does not exist" not in p.stderr
+
+
+def test_a_download_that_times_out_leaves_no_file(s3, tmp_path):
+    # Astra r2-s3 review P2: the AWS CLI is killed at the wrapper's deadline and nothing partial stays behind
+    store, env = s3
+    (store / "dirtywaterwatch-data" / "state" / "build.tar.gz").write_bytes(b"full state")
+    out = tmp_path / "build.tar.gz"
+    p = run({**env, "FAKE_S3_SLEEP": "20", "R2_S3_GET_TIMEOUT": "1"},
+            "r2", "object", "get", "dirtywaterwatch-data/state/build.tar.gz", "--file", str(out), "--remote")
+    assert p.returncode == 1 and b"did not finish" in p.stderr
+    assert not out.exists() and not list(tmp_path.glob("build.tar.gz.part-*"))
+    p = run(env, "r2", "object", "get", "dirtywaterwatch-data/state/build.tar.gz", "--file", str(out), "--remote")
+    assert p.returncode == 0 and out.read_bytes() == b"full state" and not list(tmp_path.glob("*.part-*"))
+
+
+def test_keys_script_prints_no_credential_even_when_traced(tmp_path):
+    # Astra r2-s3 review P2: `sh -x` while troubleshooting must not print the key id or the secret before masking
+    kid = "0123456789abcdef0123456789abcdef"
+    env, ghenv = _keys_env(tmp_path, json.dumps({"success": True, "result": {"id": kid, "status": "active"}}))
+    p = subprocess.run(["sh", "-x", str(KEYS)], env=env, capture_output=True, text=True, timeout=60)
+    assert p.returncode == 0
+    sec = hashlib.sha256(b"tok-value").hexdigest()
+    assert kid not in p.stderr and sec not in p.stderr and "tok-value" not in p.stderr

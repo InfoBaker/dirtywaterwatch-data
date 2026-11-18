@@ -137,7 +137,8 @@ class ApiTransport:
         except (OSError, subprocess.TimeoutExpired) as e:
             raise RuntimeError(f"R2 S3 read could not run ({type(e).__name__})") from None
         if p.returncode != 0 or not p.stdout:
-            kind = "absent" if re.search(rb"\(404\)|NoSuchKey|Not Found", p.stderr) else f"exit {p.returncode}"
+            kind = "absent" if re.search(rb"An error occurred \(404\) when calling the HeadObject operation", p.stderr) \
+                else f"exit {p.returncode}"
             raise RuntimeError(f"R2 S3 read failed ({kind})")
         return p.stdout
 

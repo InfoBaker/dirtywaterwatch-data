@@ -80,7 +80,13 @@ def _pump(src, dst) -> None:
 # object's bytes to stdout and nothing else. Any other r2 object call is refused (exit 2) rather than sent where it
 # would be refused anyway; every other wrangler call (d1, ...) runs wrangler as before.
 S3_OPS = ("get", "put", "delete")
-S3_MISSING = re.compile(rb"\(404\)|NoSuchKey|Not Found|does not exist", re.I)
+# an absent object, and nothing else: get-object says (NoSuchKey); `s3 cp` (the --pipe path) says (404) on its
+# HeadObject. A bad key, a missing bucket or a refusal (InvalidAccessKeyId, NoSuchBucket, AccessDenied) is a failure,
+# never "absent": state_paths reads "absent" as no pause switch and no saved history (Astra r2-s3 review P1).
+S3_MISSING_FILE = re.compile(rb"An error occurred \(NoSuchKey\) when calling the GetObject operation")
+S3_MISSING_PIPE = re.compile(rb"An error occurred \(404\) when calling the HeadObject operation")
+S3_GET_TIMEOUT = float(os.environ.get("R2_S3_GET_TIMEOUT") or 270)   # under state_paths.fetch's 300 s on the wrapper
+S3_PUT_TIMEOUT = 1800.0
 UNSUPPORTED = "unsupported"
 
 
@@ -117,19 +123,35 @@ def s3_main(op: str, bucket: str, key: str, file: str | None, pipe: bool) -> int
         sys.stderr.write("wrangler_redact: R2_S3_ENDPOINT is set but the AWS CLI is not installed\n")
         return 127
     base = [aws, "--endpoint-url", os.environ["R2_S3_ENDPOINT"], "--region", os.environ.get("AWS_DEFAULT_REGION") or "auto"]
+    part = f"{file}.part-{os.getpid()}" if op == "get" and file else None   # renamed into place only when complete
     if op == "get" and pipe:
         cmd = base + ["s3", "cp", f"s3://{bucket}/{key}", "-", "--only-show-errors"]
     elif op == "get":
-        cmd = base + ["s3api", "get-object", "--bucket", bucket, "--key", key, file]
+        cmd = base + ["s3api", "get-object", "--bucket", bucket, "--key", key, part]
     elif op == "put":
         cmd = base + ["s3api", "put-object", "--bucket", bucket, "--key", key, "--body", file]
     else:
         cmd = base + ["s3api", "delete-object", "--bucket", bucket, "--key", key]
-    try:
-        p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=1800)
+    def drop_part() -> None:
+        if part:
+            try:
+                os.unlink(part)
+            except OSError:
+                pass
+    try:   # subprocess.run kills the AWS CLI when the deadline passes
+        p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                           timeout=S3_GET_TIMEOUT if op == "get" else S3_PUT_TIMEOUT)
     except (OSError, subprocess.TimeoutExpired) as e:
-        sys.stderr.write(f"wrangler_redact: the AWS CLI could not run ({type(e).__name__})\n")
+        drop_part()
+        sys.stderr.write(f"wrangler_redact: the AWS CLI could not run or did not finish ({type(e).__name__})\n")
         return 1
+    if p.returncode == 0 and part:
+        try:
+            os.replace(part, file)
+        except OSError as e:
+            drop_part()
+            sys.stderr.write(f"wrangler_redact: the download could not be put in place ({type(e).__name__})\n")
+            return 1
     if p.returncode == 0:
         if pipe:
             sys.stdout.buffer.write(p.stdout)
@@ -137,12 +159,8 @@ def s3_main(op: str, bucket: str, key: str, file: str | None, pipe: bool) -> int
         else:
             sys.stdout.write(f"r2 object {op} {bucket}/{key}: done (S3 endpoint)\n")
         return 0
-    if op == "get" and file:
-        try:
-            os.unlink(file)
-        except OSError:
-            pass
-    if op == "get" and S3_MISSING.search(p.stderr):
+    drop_part()
+    if op == "get" and (S3_MISSING_PIPE if pipe else S3_MISSING_FILE).search(p.stderr):
         sys.stderr.write("The specified key does not exist.\n")
         return 1
     for line in p.stderr.splitlines(keepends=True)[-5:]:

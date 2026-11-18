@@ -8,6 +8,7 @@
 # AWS_DEFAULT_REGION and R2_S3_ENDPOINT to $GITHUB_ENV, so every later `wrangler r2 object get|put|delete` goes
 # through the S3 endpoint (scripts/wrangler_redact.py) and the mail feed reads the raw bucket the same way. It fails
 # the step when the token does not verify or the AWS CLI is missing. Run after the wrangler guard step.
+set +x   # never trace this script: the key id and the secret are assigned below (Astra r2-s3 review P2)
 set -eu
 : "${CLOUDFLARE_API_TOKEN:?CLOUDFLARE_API_TOKEN is needed}" "${CLOUDFLARE_ACCOUNT_ID:?CLOUDFLARE_ACCOUNT_ID is needed}"
 : "${GITHUB_ENV:?GITHUB_ENV is needed}"
