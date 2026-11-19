@@ -512,7 +512,11 @@ def test_the_lists_file_is_consistent():
     from common import SOURCES_DIR
     lists = O.load_lists()
     for lid, spec in lists.items():
-        assert spec.get("kind") in ("notices", "context", "correspondence", "pending"), lid
+        assert spec.get("kind") in ("notices", "context", "correspondence", "pending", "copy"), lid
+        if spec["kind"] == "copy":
+            assert spec.get("copy_of") and "parser" not in spec and "source_id" not in spec, lid
+            for sid in spec["copy_of"]:
+                assert (SOURCES_DIR / f"{sid}.yaml").exists(), sid
         if spec["kind"] == "notices":
             assert spec.get("parser") in PARSERS, lid
             assert (SOURCES_DIR / f"{spec['source_id']}.yaml").exists(), spec["source_id"]
@@ -746,3 +750,20 @@ def test_a_pending_list_keeps_its_messages_and_makes_no_record():
     e = R.read_message(eml("Revere <alerts@publicinput.com>", "revere@x", "SSO Notice", "An overflow at ...",
                            auth=cf("publicinput.com")), row, spec, {})
     assert e["result"] == "needs_rule" and e["records"] == []
+
+
+def test_a_copy_list_counts_its_notices_as_copies_and_makes_no_record():
+    spec = {"kind": "copy", "copy_of": ["al-adem-sso-map-live", "al-adem-sso-history"],
+            "address": "al-adem-sso@dirtywaterwatch.org"}
+    row = {"id": "a1", "received_at": "2026-11-18T13:38:57Z", "list_id": "al-adem-sso"}
+    e = R.read_message(eml("ADEM <noreply@adem.example.gov>", "al-adem-sso@x", "ADEM Email Notification Confirmation",
+                           "Confirm.", auth=cf("adem.example.gov")), row, spec, None)
+    assert e["result"] == "account" and e["records"] == []
+    e = R.read_message(eml("ADEM <noreply@adem.example.gov>", "al-adem-sso@x", "SSO Notification",
+                           "An initial SSO report has been submitted to ADEM ...\nNPDES Permit No. AL0000001",
+                           auth=cf("adem.example.gov")), row, spec, None)
+    assert e["result"] == "copy" and e["records"] == []
+    assert "al-adem-sso-map-live" in e["note"] and "AL0000001" not in e["note"]
+    # the kind is part of the rule, so a list moved from pending to copy has its stored messages read again
+    assert R.rule_of(spec) != R.rule_of({**spec, "kind": "pending"})
+    assert O.load_lists()["al-adem-sso"]["kind"] == "copy"

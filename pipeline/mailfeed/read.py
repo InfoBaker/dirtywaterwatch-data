@@ -275,11 +275,17 @@ def read_message(raw: bytes, row: dict, spec: dict | None, ctx: dict | None = No
         return {**entry, "result": "correspondence", "note": "an address for letters, never parsed", "records": []}
     if spec.get("kind") == "context":
         return {**entry, "result": "not_notice", "note": "a context list (news), never a record", "records": []}
-    if spec.get("kind") == "pending":
-        # a list signed up to before its parser exists: kept and counted under its list, never a record
+    if spec.get("kind") in ("pending", "copy"):
+        # pending: a list signed up to before its parser exists. copy: a list whose notices repeat reports another
+        # source already reads (spec.copy_of), monitored as a public-notice channel. Either way the message is kept and
+        # counted under its list, never a record.
         acct = re.search(r"(?i)confirm|verif|welcome|thank(?:s| you) for|subscri", mail.subject or "")
-        return {**entry, "result": "account" if acct else "needs_rule",
-                "note": "a sign-up or confirmation message" if acct else "a list without a parser yet", "records": []}
+        if acct:
+            return {**entry, "result": "account", "note": "a sign-up or confirmation message", "records": []}
+        if spec["kind"] == "copy":
+            return {**entry, "result": "copy", "records": [],
+                    "note": f"the same reports as {', '.join(spec.get('copy_of') or [])}, which the pipeline reads"}
+        return {**entry, "result": "needs_rule", "note": "a list without a parser yet", "records": []}
     trust, how = verified(mail, spec)
     entry["trust"], entry["verified"] = trust, how
     if not trust:

@@ -1,5 +1,5 @@
 {
-  "_about": "The notice lists the project's addresses at dirtywaterwatch.org are signed up to, one address per list (the mail Worker files each message under the address's local part as its list_id). Read by pipeline/ingest/operator_mail.py. kind: notices (a parser makes records), context (a list kept for its news; never a record), correspondence (an address used for letters to an agency; never parsed), pending (a list signed up to before its parser exists: its messages are kept and counted, never a record). senders: the operator's own domains (a message is the operator's when Cloudflare's own Authentication-Results says DMARC passed for its From domain, or DKIM passed for that domain); platform: a shared sending platform the list uses (Everbridge, Constant Contact), whose customers can all send from it, with the marks that must appear in the text (body_marks) or headers (header_marks) and whether its own From address is allowed (allow_platform_from); a message proven only by the platform may add detail to another source's record of the same discharge and never stands as a record of its own. quiet: how a list that has gone quiet is noticed (cross_check: another source's notice from the same operator after `since` with nothing from the list since that notice's start; max_quiet_days: no message for that long). since: when the address was signed up to the list (UTC).",
+  "_about": "The notice lists the project's addresses at dirtywaterwatch.org are signed up to, one address per list (the mail Worker files each message under the address's local part as its list_id). Read by pipeline/ingest/operator_mail.py. kind: notices (a parser makes records), context (a list kept for its news; never a record), correspondence (an address used for letters to an agency; never parsed), pending (a list signed up to before its parser exists: its messages are kept and counted, never a record), copy (a list whose notices repeat the reports of the sources named in copy_of, which the pipeline reads: kept, counted and monitored as a public-notice channel, never a record). senders: the operator's own domains (a message is the operator's when Cloudflare's own Authentication-Results says DMARC passed for its From domain, or DKIM passed for that domain); platform: a shared sending platform the list uses (Everbridge, Constant Contact), whose customers can all send from it, with the marks that must appear in the text (body_marks) or headers (header_marks) and whether its own From address is allowed (allow_platform_from); a message proven only by the platform may add detail to another source's record of the same discharge and never stands as a record of its own. quiet: how a list that has gone quiet is noticed (cross_check: another source's notice from the same operator after `since` with nothing from the list since that notice's start; max_quiet_days: no message for that long). since: when the address was signed up to the list (UTC).",
   "lists": {
     "holyoke": {
       "kind": "notices",
@@ -152,9 +152,13 @@
       "since": "2026-11-17T05:20:00Z"
     },
     "al-adem-sso": {
-      "kind": "pending",
+      "kind": "copy",
+      "copy_of": [
+        "al-adem-sso-map-live",
+        "al-adem-sso-history"
+      ],
       "address": "al-adem-sso@dirtywaterwatch.org",
-      "note": "Alabama ADEM sanitary sewer overflow notifications, all counties; confirmed 2026-11-17",
+      "note": "Alabama ADEM sanitary sewer overflow notifications, all counties; confirmed 2026-11-17. Each e-mail repeats one report on ADEM's SSO layers (permit, point, location, stream, start, end, volume; no report id or cause), sent 2 to 4 minutes after the layer's received time (checked 2026-11-18), so ingest/al_adem_sso keeps the record",
       "since": "2026-11-17T05:20:00Z"
     },
     "ar-deq-news": {
