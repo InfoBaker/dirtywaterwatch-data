@@ -1,6 +1,6 @@
 {
  "state": "WI",
- "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
  "count": 1868,
  "waters": [
   {
@@ -2748,12 +2748,13 @@
    "gnis_id": null,
    "geometry_hash": "6994d36637abb32db95970a9cb03473077e6024c46862fc981fc4599a9ce002d",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "bass-lake-rhinelander-wi",
@@ -4833,12 +4834,13 @@
    "gnis_id": null,
    "geometry_hash": "190876fb642cdf0b77b02ea9fcde23c7bf4d9291d25eec048165f91234e1f113",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "big-lake-three-lakes-wi",
@@ -6652,12 +6654,13 @@
    "gnis_id": null,
    "geometry_hash": "91fcf917025f5df44cefb254ff7c266309044973852415ee9ad2536df594d9ba",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "boulder-lake-markton-wi",
@@ -9476,12 +9479,13 @@
    "gnis_id": null,
    "geometry_hash": "7959a712007d16df8f34e3ff342d32f45868ac73689caf2b0625d6e5e320e4cf",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "clear-lake-winchester-wi",
@@ -12922,12 +12926,13 @@
    "gnis_id": null,
    "geometry_hash": "c58cbb865ed06815de05e5aba30ad10d2172f8a31d48f04d0fdbc69328068052",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "eagle-nest-flowage-wi",
@@ -13478,12 +13483,13 @@
    "gnis_id": null,
    "geometry_hash": "90b09bf9c13f33dad9109102e61f13711eb77e7ae40b1e2d62fab748d86ed2e7",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "echo-lake-dudley-wi",
@@ -16563,12 +16569,13 @@
    "gnis_id": null,
    "geometry_hash": "d2f52823cce0302bc93eb60d8bdf1927b11a28012611cef2d0a55bdf14a5ebfa",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "gerber-lakes-wi",
@@ -21673,12 +21680,13 @@
    "gnis_id": null,
    "geometry_hash": "a3517473ccaa3f31ba8151745c85b0f642ed4cbc2ec99578227cdab2118e5adb",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "island-lake-winter-wi",
@@ -36237,12 +36245,13 @@
    "gnis_id": null,
    "geometry_hash": "318ca2986873d45eacdd7ef8204143dbdda0d840a3797f522a9500cfcf71ccfb",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "moraine-lake-wi",
@@ -36667,12 +36676,13 @@
    "gnis_id": "1792247",
    "geometry_hash": "2988c6fba9de4f7ceaa1e8c318c63f53ff2667e4d0f2ad25ba5169889b0b4c94",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T06:35:50+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "mueller-lake-wi",
@@ -37006,12 +37016,13 @@
    "gnis_id": null,
    "geometry_hash": "b2858fda8c01f9b3e2c7bcbbef1019e31809c03b5077bbc6350eb7eccc5c13ec",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "musser-creek-wi",
@@ -41375,12 +41386,13 @@
    "gnis_id": "1571331",
    "geometry_hash": "8e65136888c1f9a873676837fadfafd83d7b4f1a5fc4fa600de46d81976e9364",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "pier-lake-wi",
@@ -44829,12 +44841,13 @@
    "gnis_id": null,
    "geometry_hash": "74791f6233fca5feeb1b19620d2efc0d4cb4a60a463590813c76314585f2f0d2",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "rinehart-lake-wi",
@@ -46552,12 +46565,13 @@
    "gnis_id": null,
    "geometry_hash": "a2a22efe91697fc995a04998552e2fa65b45f848fb89ba7d28f51145b4f77e34",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "sand-lake-island-lake-wi",
@@ -50095,12 +50109,13 @@
    "gnis_id": null,
    "geometry_hash": "3c44a20471e7dfff3687985b6f09fad9be9d7a151d25da79ca873dbe0b5c3b6f",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "spillerberg-lake-wi",
@@ -52777,12 +52792,13 @@
    "gnis_id": null,
    "geometry_hash": "57a883379f364e9a52d5ecf56290e5a9cc66261311742ec7aaabb22dc9cf3fb3",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "tichigan-lake-wi",
@@ -52867,12 +52883,13 @@
    "gnis_id": null,
    "geometry_hash": "db6f649cec8cd5ad28603429a6ca6ca745971b29e9a0790098a6258d7369d6b0",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "tilden-millpond-wi",
@@ -53085,12 +53102,13 @@
    "gnis_id": null,
    "geometry_hash": "86eed4b7d2730d6c05272d644804a0f7283c67d9393052a22329bcd925870536",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "tomahawk-river-wi",
@@ -56515,12 +56533,13 @@
    "gnis_id": null,
    "geometry_hash": "efc7945bfdf24e8641c64a72cea61334a13c8442f7d7f140c6889cf3720c0503",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "west-horsehead-lake-wi",
@@ -57961,12 +57980,13 @@
    "gnis_id": null,
    "geometry_hash": "628ad1019c662ab1144bd669e501ee959d99263b770b4722d0e295e8479a3565",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "wilson-lake-mercer-wi",
