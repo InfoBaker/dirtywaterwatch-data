@@ -351,7 +351,7 @@ def test_state_text_is_in_the_page_shape():
     t = (ROOT / "research" / "hi" / "state-text.md").read_text()
     assert t.startswith("---\nstate: HI\nname: Hawaii\nupdated: ")
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
-              "Known problems in the data", "What this site does about it"):
+              "Known problems in the data", "What we do about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     body = t.replace("Clean Water Branch", "")                               # the agency's name, not a verdict

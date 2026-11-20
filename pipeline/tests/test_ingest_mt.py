@@ -161,7 +161,7 @@ def test_rules_row_and_state_text():
     assert row["hours"] is None and "MT0020168" in row["source"]
     t = (ROOT / "research" / "mt" / "state-text.md").read_text()
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
-              "Known problems in the data", "What this site does about it"):
+              "Known problems in the data", "What we do about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and not re.search(r"\b(safe|clean)\b", t) and ".json" not in t
 

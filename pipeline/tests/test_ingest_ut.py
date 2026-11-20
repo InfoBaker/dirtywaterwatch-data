@@ -249,7 +249,7 @@ def test_state_text_is_in_the_page_shape():
     t = (ROOT / "research" / "ut" / "state-text.md").read_text()
     assert t.startswith("---\nstate: UT\nname: Utah\nupdated: ")
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
-              "Known problems in the data", "What this site does about it"):
+              "Known problems in the data", "What we do about it"):
         assert f"**{h}.**" in t
     assert "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     # the share line, filled with the go-live audit's counts (P2-4 applied) and the tail Utah needs (P2-6)

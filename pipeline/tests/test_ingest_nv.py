@@ -186,7 +186,7 @@ def test_nevada_rules_row_and_text():
     t = (ROOT / "research" / "nv" / "state-text.md").read_text()
     assert t.startswith("---\nstate: NV\nname: Nevada\nupdated: ")
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
-              "Known problems in the data", "What this site does about it"):
+              "Known problems in the data", "What we do about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t
@@ -362,7 +362,7 @@ def test_p1_3_nevada_goes_live_only_after_a_successful_current_read():
         assert src["first_successful_read"] == "2026-11-16T04:23:49Z"
     t = (ROOT / "research" / "nv" / "state-text.md").read_text()
     assert "not yet made a current reading" not in t and "last good reading is kept" not in t
-    assert "We read that page" in t or "This site reads that page" in t or "This site reads both" in t
+    assert "We read that page" in t or "We read both" in t
     reg = {c["id"]: c for c in json.loads((ROOT / "data" / "notice-channels" / "nv.json").read_text())["channels"]}
     assert "first successful read 2026-11-16T04:23:49Z" in reg["nv-state-parks-hab"]["note"]
     assert "no successful current read" not in reg["nv-state-parks-hab"]["note"]

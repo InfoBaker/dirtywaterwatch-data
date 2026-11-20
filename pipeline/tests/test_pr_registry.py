@@ -76,7 +76,7 @@ def test_state_text_is_in_the_page_shape_and_names_puerto_rico():
     t = (ROOT / "research" / "pr" / "state-text.md").read_text()
     assert t.startswith("---\nstate: PR\nname: Puerto Rico\nupdated: ")
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
-              "Known problems in the data", "What this site does about it"):
+              "Known problems in the data", "What we do about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "Of Puerto Rico's reports" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I)
