@@ -604,7 +604,7 @@ def test_state_text_is_in_the_page_shape():
     t = (ROOT / "research" / "sc" / "state-text.md").read_text()
     assert t.startswith("---\nstate: SC\nname: South Carolina\nupdated: ")
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
-              "Known problems in the data", "What this site does about it"):
+              "Known problems in the data", "What we do about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
@@ -682,14 +682,14 @@ def test_an_owner_is_named_from_epas_permittee_never_from_a_facility():
 
 
 def test_the_state_texts_cite_their_reads_and_say_what_the_code_does():
-    # re-review P2-6: direct links and read dates on empirical claims; calculated counts marked as this site's; the
+    # re-review P2-6: direct links and read dates on empirical claims; calculated counts marked as ours; the
     # Florence and bloom descriptions match the records (no start, separate advice, no whole-reservoir colour)
     rules = json.loads((ROOT / "data" / "rules.json").read_text())["unresolved"]
     sc = (ROOT / "research" / "sc" / "state-text.md").read_text()
     for url in ("https://www.cityofflorencesc.gov/city-news", "https://gis.des.sc.gov/beachaccess/",
                 "https://des.sc.gov/programs/bureau-water/aquatic-science/harmful-algal-blooms"):
         assert f"]({url})" in sc
-    assert "this site's count" in sc and "November 14, 2026" in sc
+    assert "our count" in sc and "November 14, 2026" in sc
     assert "gives no start for the overflow" in sc and "never as the whole lake or reservoir" in sc
     assert f"for {int(rules['unknown_status_yellow_days'])} days from that day" in sc
     assert "50 square kilometres" not in sc and "red for up to 7 days" not in sc

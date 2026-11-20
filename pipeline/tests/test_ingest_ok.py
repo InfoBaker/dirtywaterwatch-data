@@ -171,7 +171,7 @@ def test_oklahoma_rules_row_and_text():
     t = (ROOT / "research" / "ok" / "state-text.md").read_text()
     assert t.startswith("---\nstate: OK\nname: Oklahoma\nupdated: ")
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
-              "Known problems in the data", "What this site does about it"):
+              "Known problems in the data", "What we do about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t

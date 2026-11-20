@@ -239,7 +239,7 @@ def test_rules_row_sets_no_window_and_cites_the_statute():
 def test_state_text_has_the_six_paragraphs_and_the_placeholders():
     t = (ROOT / "research" / "co" / "state-text.md").read_text()
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
-              "Known problems in the data", "What this site does about it"):
+              "Known problems in the data", "What we do about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t.replace("as clean water", ""))

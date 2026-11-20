@@ -194,7 +194,7 @@ def test_state_text_shape():
     t = (ROOT / "research" / "wv" / "state-text.md").read_text()
     heads = re.findall(r"^\*\*(.+?)\*\*", t, re.M)
     assert heads == ["What the law requires.", "What is published.", "What is not published.",
-                     "What stands in the way.", "Known problems in the data.", "What this site does about it."]
+                     "What stands in the way.", "Known problems in the data.", "What we do about it."]
     assert "{{share_line}}" in t and "{{grade}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t
     assert not re.search(r"\b(safe|clean)\b", t.replace("never clean", ""), re.I)
 

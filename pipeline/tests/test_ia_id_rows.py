@@ -109,7 +109,7 @@ def test_state_text_is_in_the_page_shape(st, name):
     t = (ROOT / "research" / st / "state-text.md").read_text()
     assert t.startswith(f"---\nstate: {st.upper()}\nname: {name}\nupdated: ")
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
-              "Known problems in the data", "What this site does about it"):
+              "Known problems in the data", "What we do about it"):
         assert f"**{h}.**" in t
     assert "{{share_line}}" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean)\b", t, re.I) and ".json" not in t and ".py" not in t
@@ -117,7 +117,7 @@ def test_state_text_is_in_the_page_shape(st, name):
 
 def test_idaho_text_says_plainly_that_no_sewage_report_is_public():
     t = (ROOT / "research" / "id" / "state-text.md").read_text()
-    assert "No Idaho sewage report is public." in t and "shows only blooms for Idaho" in t
+    assert "No Idaho sewage report is public." in t and "we show only blooms for Idaho" in t
     assert "13 under a health advisory, 1 at the Health Alert level and 5 at the Health Watch level" in t
 
 

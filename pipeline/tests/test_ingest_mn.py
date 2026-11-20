@@ -263,7 +263,7 @@ def test_state_text_is_in_the_page_shape():
     t = (ROOT / "research" / "mn" / "state-text.md").read_text()
     assert t.startswith("---\nstate: MN\nname: Minnesota\nupdated: ")
     for h in ("What the law requires", "What is published", "What is not published", "What stands in the way",
-              "Known problems in the data", "What this site does about it"):
+              "Known problems in the data", "What we do about it"):
         assert f"**{h}.**" in t
     assert "\n{{share_line}}\n" in t and "{{dated_share}}" in t and "{{latest_dated}}" in t and "{{grade}}" in t
     assert not re.search(r"\b(safe|clean|green)\b", t, re.I) and ".json" not in t and ".py" not in t
