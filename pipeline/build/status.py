@@ -183,7 +183,10 @@ MONTHLY_CURRENT_DAYS = 90
 DAYS_TEXT = re.compile(r"(\d+)\s+days?\s+with\s+discharge", re.I)
 EVENTS_TEXT = re.compile(r"(\d+)\s+discharge\s+events?", re.I)
 EPA_MONTHLY_SOURCES = ("nj-echo-monthly", "echo-cso-dmr-monthly",
-                       "in-echo-dmr-cso", "wv-echo-dmr-cso")
+                       "in-echo-dmr-cso", "wv-echo-dmr-cso",
+                       # EPA's per-state DMR files (ingest/echo_dmr_cso_states.py STATES; decision 45)
+                       "oh-echo-dmr-cso", "ky-echo-dmr-cso", "il-echo-dmr-cso", "tn-echo-dmr-cso", "ks-echo-dmr-cso",
+                       "ga-echo-dmr-cso", "ma-echo-dmr-cso-files")
 POINT_ADVISORY_TYPES = {"beach_advisory", "beach_closure", "rain_advisory", "hab_advisory"}
 WHOLE_WATER_KINDS = {"lake", "pond", "reservoir"}
 SMALL_WATER_KM2 = 50
@@ -609,7 +612,9 @@ def monthly_mark(ev: dict) -> dict | None:
     events = int(em.group(1)) if em else None
     vol = ev.get("volume_gal") if isinstance(ev.get("volume_gal"), (int, float)) else None
     known = [x for x in (days, events, vol) if x is not None]
-    discharged = not known or any(x > 0 for x in known)
+    # a record whose collector says it is a discharge month (EPA's state DMR files: raw.discharged) is one whatever its
+    # text gives (a zero count beside positive hours; Astra review 2026-11-21 P1-6); other records as before
+    discharged = not known or any(x > 0 for x in known) or (ev.get("raw") or {}).get("discharged") is True
     rt = parse_time(ev.get("reported_at"))       # when EPA (or the agency) received it; never our fetch time (SOL P1-5)
     when = f"{rt.astimezone(LOCAL):%b} {rt.astimezone(LOCAL).day}, {rt.astimezone(LOCAL).year}" if rt else None
     mtext = f"{start.astimezone(LOCAL):%B %Y}"

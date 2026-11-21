@@ -1057,7 +1057,7 @@
  },
  {
   "id": "il-echo-dmr-cso",
-  "name": "ECHO DMR CSO monitoring parameters for Illinois CSO permits",
+  "name": "EPA ECHO monthly DMR CSO figures for Illinois CSO permits (EPA's state DMR file)",
   "jurisdiction": "IL",
   "operator": "U.S. EPA",
   "operator_type": "federal",
@@ -1067,26 +1067,29 @@
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://echo.epa.gov/",
+  "url": "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set",
   "access": [
-   "api"
+   "csv"
   ],
-  "access_detail": "Not queried for Illinois in this round.",
-  "machine_readable": false,
+  "access_detail": "EPA ECHO's per-state DMR and limit ZIP per fiscal year (NPDES_by_state_year/IL_FY<yyyy>_NPDES_DMRS_LIMITS.zip), no key.",
+  "machine_readable": true,
   "sample_record": null,
   "fields": [],
   "fills_event_fields": [],
-  "cannot_fill": [],
+  "cannot_fill": [
+   "the day or hour of a discharge",
+   "an end"
+  ],
   "has_coordinates": false,
-  "has_outfall_ids": false,
-  "cadence": null,
-  "history": null,
-  "license": null,
-  "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Monthly fallback for downstate CSO permits that do not file SOBE CSO rows; unknown whether their permits carry CSO count parameters.",
-  "verified": "inferred",
-  "checked": "2026-11-03",
+  "has_outfall_ids": true,
+  "cadence": "Weekly file; monthly figures, weeks' lag",
+  "history": "FY2009 on (read from FY2025)",
+  "license": "EPA public data (US government work)",
+  "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+  "status": "used",
+  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 1,472 outfall-months with a discharge from 63 of 119 permits, 2025-01 to 2026-09, received a median 22 days after the month. Month precision: the monthly mark only.",
+  "verified": "verified",
+  "checked": "2026-11-21",
   "notes": ""
  },
  {

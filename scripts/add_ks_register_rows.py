@@ -128,6 +128,33 @@ OWN = {
 }
 
 
+# EPA's state DMR file (ks-epa-echo-cso-dmr-file; ingest/echo_dmr_cso_states.py, decision 45): the operators' monthly CSO figures
+AGENCY.append({
+    "operator_id": None,
+    "agency": "U.S. Environmental Protection Agency (ECHO)",
+    "permit": None,
+    "checked": "2026-11-21",
+    "id": "ks-epa-echo-cso-dmr-file",
+    "name": "U.S. Environmental Protection Agency (discharge monitoring reports)",
+    "channel_kind": "feed",
+    "urls": [
+        "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set"
+    ],
+    "method": "html",
+    "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+    "basis_kind": "permit",
+    "monitored": False,
+    "unmonitored_reason": "feed_ingested",
+    "feed_source_id": "ks-echo-dmr-cso",
+    "publishes": "results",
+    "noun": "Data feed",
+    "note": "Each combined sewer outfall's monthly overflow figures from the operators' discharge monitoring reports, read from EPA's Kansas DMR file per fiscal year: 84 outfall-months with a discharge from 1 of 3 permits with an open combined sewer outfall, 2025-01 to 2026-09 (2026-11-21). Month precision, a median 18 days after the month.",
+    "sources": [
+        "ks-echo-dmr-cso"
+    ]
+})
+
+
 def base(**kw) -> dict:
     r = {"state": "KS", "operator_id": None, "agency": None, "permit": None, "checked": CHECKED}
     r.update(kw)
