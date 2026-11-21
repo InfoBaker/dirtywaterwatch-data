@@ -134,6 +134,7 @@ SOURCE_LABEL = {
     "echo-cso-dmr-monthly": "U.S. Environmental Protection Agency discharge monitoring reports",
     "me-dep-cso-annual": "Maine Department of Environmental Protection combined sewer overflow reports",
     "me-cbep-portland-cso": "City of Portland and Portland Water District overflow filings, 2015 to 2019, published by the Casco Bay Estuary Partnership",
+    "me-bangor-sso-log": "City of Bangor sewer overflow logs, from its yearly reports to the U.S. Environmental Protection Agency",
     "ma-somerville-cso-table": "City of Somerville combined sewer overflow table",
     "tx-houston-sso-monthly": "City of Houston monthly sanitary sewer overflow reports",
     "me-healthy-beaches": "Maine Healthy Beaches",
@@ -166,6 +167,7 @@ SOURCE_NOTES = {
     "ri-nbc": {"events": "The Narragansett Bay Commission feed shows current overflows only; our record begins {first}."},
     "me-cbep-portland-cso": {"events": "Portland's filings cover {first} to {last}, storm by storm, with the gallons at each outlet; each report is dated to the storm's first and last day. Only measured discharges are listed: several outlets were not metered in 2015, and a discharge with no measured volume is missing.",
                              "volume": "Portland's sums leave out outlets that were not metered (several in 2015) and discharges with no measured volume."},
+    "me-bangor-sso-log": {"events": "Bangor's yearly reports list each sanitary sewer overflow the city found, {first} to {last}, with the time it was found and, where known, stopped."},
 }
 # Sources whose volume note is shown on the volume chart whenever they are in it (not only when they give ranges).
 VOLUME_NOTE_ALWAYS = {"me-cbep-portland-cso"}
