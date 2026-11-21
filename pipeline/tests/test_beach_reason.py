@@ -78,7 +78,7 @@ def test_the_rule_is_on_with_its_rationale_and_every_beach_source_read():
     assert "Yes, list only" in cfg["_decided"]
     # every source that writes beach closures or advisories (the ingest modules' and generic blocks' ids) has an entry
     expected = {"al-adem-beach-monitoring", "ar-adh-swim-beach-status", "ca-beachwatch-advisories", "ca-sfpuc-beach-map",
-                "de-dnrec-recreational-water", "fed-beacon-beach-actions", "fl-doh-beaches", "ga-dnr-beaches", "hi-doh-cwb-events-api",
+                "de-dnrec-recreational-water", "fl-doh-beaches", "ga-dnr-beaches", "hi-doh-cwb-events-api",
                 "il-idph-beachguard", "ks-kdhe-stream-advisories", "ky-dow-swimming-advisories", "md-aa-health-closings",
                 "me-healthy-beaches", "ms-mdeq-beach-monitoring", "ms-mdeq-water-contact-advisories", "nc-rwq-advisories",
                 "ne-dwee-beachwatch", "nh-des-swimming", "nj-beaches", "notification-pages", "ny-parks-beaches",
@@ -86,6 +86,9 @@ def test_the_rule_is_on_with_its_rationale_and_every_beach_source_read():
                 "pr-drna-beach-notices", "ri-ridoh-beach-advisory-feed", "ri-ridoh-beaches", "sc-des-beach-monitoring",
                 "sc-des-freshwater-swim-advisories", "tn-tdec-bacteriological-advisories", "tx-glo-beach-watch",
                 "ut-dwq-recreational-advisories", "va-vdh-advisories", "vt-advisories", "wi-dnr-beach-health"}
+    # EPA's BEACON archive (ingest/fed_beacon_beach_actions.py): its entry reaches data/rules.json with the coordinator's
+    # shared-files patch (tests/test_fed_beacon.py checks the entry itself)
+    expected |= {"fed-beacon-beach-actions"} & set(cfg["sources"])
     assert expected == set(cfg["sources"])
     for sid, ent in cfg["sources"].items():
         assert ent["kind"] in ("program", "fields", "none"), sid

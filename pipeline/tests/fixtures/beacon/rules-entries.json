@@ -1,0 +1,35 @@
+{
+ "doc": "The data/rules.json entries the EPA BEACON feed needs. They reach main in the coordinator's shared-files patch (one writer for rules.json); tests/test_fed_beacon.py lays them over the rules it reads, and when data/rules.json already holds them, checks that they are the same.",
+ "beach_reason_source": {
+  "kind": "fields",
+  "fields": [
+   "reason_comments"
+  ],
+  "program_values": {
+   "reasons": [
+    "ELEV_BACT",
+    "RAINFALL",
+    "MODEL",
+    "SEWAGE",
+    "POLICY"
+   ]
+  },
+  "program_basis": "EPA's BEACON system records each state's reason for a beach action as a code. Bacteria above the state's standard (ELEV_BACT), rainfall (RAINFALL), a predictive model of bacteria levels (MODEL), sewage (SEWAGE) and an action the state's policy issues without a sample (POLICY) are water-quality reasons. For any other reason (OTHER) we read the state's comment.",
+  "read": "the reason code and the reason comment in the state's report to EPA's BEACON system",
+  "labels": {
+   "beach_closure": "Beach closed; the state's report to EPA gives no water-quality reason",
+   "beach_advisory": "Advisory listed; the state's report to EPA gives no water-quality reason"
+  }
+ },
+ "history_only": {
+  "sources": [
+   "fed-beacon-beach-actions"
+  ],
+  "cut": "first_seen",
+  "rationale": "Some records reach us after the season, from the archive of beach advisories and closures that states file with EPA once a year. We show them on a water's page and in its history as the authority's own past window, up to the time we first read them. They never colour the map now or start our caution period, even when the window runs past the day we read them.",
+  "source": "U.S. EPA, BEACON 2.0 (Beach Advisory and Closing On-line Notification), as reported by each state's beach program",
+  "_doc": "build/status.py event_intervals (cut_history_only): every interval of a listed source ends at the record's raw._first_seen_at (else its fetched_at), so none is in effect at the build time; a record of a listed source never lends its stated beach reason to another record (annotate_beach_reasons). cut first_seen is the only form.",
+  "_decided": "Owner, 2026-11-21: \"Yes, build it\" to the BEACON reader and beach registry (the EPA beaches review's question 1: history for every BEACH Act state, shown as past reports that never colour the current map)."
+ },
+ "reason_pattern_units": "|\\bcfu\\b|\\bmpn\\b"
+}

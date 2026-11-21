@@ -21,7 +21,29 @@ FIX = Path(__file__).resolve().parent / "fixtures" / "beacon"
 ROOT = Path(__file__).resolve().parents[2]
 READ = "2026-11-21T05:40:00Z"
 NOW = datetime(2026, 11, 21, 12, tzinfo=UTC)
-RULES = S.load_rules()
+ENTRIES = json.loads((FIX / "rules-entries.json").read_text())
+
+
+def with_beacon_entries(rules: dict) -> dict:
+    """The rules with this feed's entries (fixtures/beacon/rules-entries.json: its beach_reason entry, the bacteria
+    count's units in the reason pattern, unresolved.history_only). They reach data/rules.json in the coordinator's
+    shared-files patch; where the file already holds them they must be the same."""
+    r = copy.deepcopy(rules)
+    br, un = r["beach_reason"], r.setdefault("unresolved", {})
+    have = br["sources"].get(B.SOURCE_ID)
+    assert have is None or have == ENTRIES["beach_reason_source"]
+    br["sources"][B.SOURCE_ID] = copy.deepcopy(ENTRIES["beach_reason_source"])
+    if ENTRIES["reason_pattern_units"] not in br["reason_pattern"]:
+        br["reason_pattern"] += ENTRIES["reason_pattern_units"]
+    assert un.get("history_only") in (None, ENTRIES["history_only"])
+    un["history_only"] = copy.deepcopy(ENTRIES["history_only"])
+    return r
+
+
+RULES = with_beacon_entries(S.load_rules())
+NEEDS_PATCH = pytest.mark.skipif(not hasattr(S, "cut_history_only"),
+                                 reason="the history-only cut and the beach-reason labels arrive in the coordinator's "
+                                        "shared-files patch (build/status.py, build/beach_reason.py)")
 
 
 def registry_module():
@@ -242,6 +264,7 @@ def test_a_point_link_is_not_made_when_the_two_name_different_waters(tmp_path, r
 
 # ---------------------------------------------------------------- decision 40 and history only
 
+@NEEDS_PATCH
 def test_an_other_closure_for_hurricane_rip_currents_is_listed_only_and_a_bacteria_closure_keeps_its_window(
         tmp_path, registry):
     _, _, recs = run_saved(tmp_path, registry)
@@ -294,6 +317,7 @@ def _status(tmp_path, monkeypatch, recs, now, rules=None):
                    flows=({}, {}), rules=copy.deepcopy(rules or RULES), placement_cache=False)
 
 
+@NEEDS_PATCH
 def test_a_record_read_inside_its_window_never_colours_the_map_now_nor_starts_a_caution(tmp_path, registry, monkeypatch):
     # Louisiana's advisory at CYPT1 ran from Oct 15 to Oct 22, 2026; had we read BEACON on Oct 18, its end was ahead
     read = "2026-10-18T12:00:00Z"
@@ -321,6 +345,7 @@ def test_a_record_read_inside_its_window_never_colours_the_map_now_nor_starts_a_
     assert st3["waters"]["test-water-la"]["status"] == "red"
 
 
+@NEEDS_PATCH
 def test_a_history_only_copy_never_lends_its_reason_to_the_state_record_shown(tmp_path, registry):
     _, _, recs = run_saved(tmp_path, registry)
     pa = recs["728218-closure"]
@@ -524,6 +549,11 @@ def test_the_link_step_after_the_state_feeds_relinks_without_the_network(tmp_pat
     assert len([r for r in after["records"] if r["duplicate_of"]]) == 3
     assert (after["ok"], after["last_ok_at"], after["fetched_at"]) == (before["ok"], before["last_ok_at"],
                                                                       before["fetched_at"])
+
+
+@pytest.mark.skipif("fed_beacon_beach_link" not in (ROOT / "Makefile").read_text(),
+                    reason="the Makefile line arrives in the coordinator's shared-files patch")
+def test_the_makefile_runs_the_link_step_after_the_feeds():
     import re
     make = (ROOT / "Makefile").read_text()
     assert re.search(r"^INGEST_SNAPSHOTS = .*\bfed_beacon_beach_link\b", make, re.M)
@@ -552,6 +582,7 @@ def test_a_backfill_with_no_year_to_read_or_an_empty_report_reads_nothing_and_sa
     assert code == 1 and doc["ok"] is False
 
 
+@NEEDS_PATCH
 def test_a_history_only_parent_never_lends_its_reason_either(tmp_path, registry):
     _, _, recs = run_saved(tmp_path, registry)
     pa = next(r for r in recs.values() if r["source_record_id"].startswith("728218"))

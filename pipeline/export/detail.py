@@ -267,9 +267,6 @@ SOURCES: dict[str, dict] = {
                                        "overflow_point": text("appearance_points")},
     "or-deq-oers-spills-2013-2025": {"cause": text("cause")},
     "ca-beachwatch-advisories": {"cause": text("cause")},
-    # EPA's BEACON archive (ingest/fed_beacon_beach_actions.py): BEACON's action type, and the state's own reason
-    # comment where it wrote one (the coded reason stays in the record and the CSV)
-    "fed-beacon-beach-actions": {"report_kind": text("action_type"), "cause": text("reason_comments")},
     # feeds built after the 2026-11-14 export (fields as their ingesters keep them)
     "ar-deq-overflow-incidents": {"cause": text("cause", "row.cause")},
     "wy-deq-spills": {"cause": text("CauseDescription", "row.CauseDescription")},
