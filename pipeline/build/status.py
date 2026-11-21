@@ -4128,6 +4128,105 @@ def event_reaches(ev: dict, pl: dict, reach_index: dict) -> list[tuple[dict, str
     return out
 
 
+# A report naming no outlet (no outfall_id, no point, no outfall in its text) of an event type that by its nature
+# leaves through a permitted outlet: its stretch is drawn from its permit's most upstream registered outlet on each
+# river it names (permit_outlet_reaches), marked reach_basis PERMIT_OUTLET_BASIS with the outfall chosen, the count
+# of candidates and PERMIT_OUTLET_NOTE. Sanitary sewer overflows are not here: a collection-system spill can be
+# anywhere on the system, and its place is never guessed. The event record itself is never changed.
+PERMIT_OUTLET_TYPES = {"cso", "bypass", "plant_bypass", "blended"}
+PERMIT_OUTLET_BASIS = "permit_outlet_unnamed"
+PERMIT_OUTLET_NOTE = ("The report names no outlet. The stretch is drawn from the operator's most upstream registered "
+                      "outlet on this river (outfall {outfall} of {n}); our choice, not the report's.")
+PERMIT_OUTLET_NOTE_MANY = ("The report names no outlet. The stretches are drawn from the operator's most upstream "
+                           "registered outlet on each river ({each}); our choice, not the report's.")
+
+
+def permit_outlet_index(reaches: dict, registry_rows: list | None) -> dict[str, list[tuple[dict, str]]]:
+    """permit -> [(cached reach, "cso" | "plant")]: the traces of its registry outfalls that can stand for a report
+    naming no outlet: a river trace (no shoreline stretch, advisory stretch or event point) with segments, not
+    no_trace, whose registry row is not closed (a CLS token: build.reaches.is_closed). The kind is the registry
+    row's outfall_kind, else the trace's own."""
+    from build import reaches as reaches_mod
+    rows = {}
+    for o in registry_rows or []:
+        if isinstance(o, dict) and o.get("npdes_permit") and o.get("outfall") not in (None, ""):
+            k = oid_key(o["outfall"])
+            rows.setdefault((o["npdes_permit"], k if k else norm_oid(o["outfall"])), o)
+    out = defaultdict(list)
+    for key, r in sorted((reaches or {}).items()):
+        if (not r.get("permit") or r.get("outfall") in (None, "") or not r.get("segments")
+                or r.get("cut_reason") == "no_trace" or r.get("model") == SH.MODEL or r.get("kind") == ADVISORY_STRETCH):
+            continue
+        k = oid_key(r["outfall"])
+        row = rows.get((r["permit"], k if k else norm_oid(r["outfall"])))
+        if row is not None and reaches_mod.is_closed(row):
+            continue
+        out[r["permit"]].append((r, reaches_mod.outfall_kind(row if row is not None else r)))
+    return dict(out)
+
+
+def _covers(a: dict, b: dict) -> bool:
+    """Whether trace a runs through the start of trace b: b's first NHDPlus flowline is on a's path, past a's first
+    flowline, or both start on the same flowline and a has the longer run left on it (a trace is trimmed at its
+    outfall, so the longer remainder starts higher up)."""
+    b0 = b["segments"][0]
+    comids = [s.get("comid") for s in a["segments"]]
+    if b0.get("comid") is None or b0["comid"] not in comids:
+        return False
+    i = comids.index(b0["comid"])
+    if i > 0:
+        return True
+    a0 = a["segments"][0]
+    return (a0["km_end"] - a0["km_start"]) >= (b0["km_end"] - b0["km_start"])
+
+
+def most_upstream(cands: list[dict]) -> dict:
+    """The candidate whose trace covers most of the others' starts (_covers); ties by the NHDPlus hydroseq of its first
+    flowline (higher is upstream), then the longer run on that flowline, then the lower key."""
+    def rank(r):
+        hs = r["segments"][0].get("hydroseq")
+        s0 = r["segments"][0]
+        return (sum(1 for o in cands if o is not r and _covers(r, o)),
+                float(hs) if isinstance(hs, (int, float)) else float("-inf"),
+                s0["km_end"] - s0["km_start"])
+    return max(sorted(cands, key=lambda r: r["key"]), key=rank)        # max keeps the first of equals: the lower key
+
+
+def permit_outlet_reaches(ev: dict, river_slugs: list[str], index: dict, waters: dict) -> list[dict]:
+    """[{"reach", "water_slugs", "outfall", "candidates"}] for a report naming no outlet (PERMIT_OUTLET_TYPES): per river
+    water it is placed on, its permit's traces (permit_outlet_index) that run along that water (the trace's start
+    water or reach_waters); for a CSO its CSO outfalls, for a plant's bypass or blend its plant outfalls, else any of
+    its outfalls there; those that start on the water itself when any does; then the most upstream (most_upstream),
+    which covers the others' course. A trace chosen for two waters is listed once with both. [] when none qualifies."""
+    permit = ev.get("npdes_permit")
+    if not permit or ev.get("event_type") not in PERMIT_OUTLET_TYPES or permit not in index:
+        return []
+    picks: dict[str, dict] = {}
+    for slug in river_slugs:
+        along = [(r, k) for r, k in index[permit] if r.get("water_slug") == slug or slug in reach_waters(r, waters)]
+        if ev["event_type"] == "cso":
+            pool = [r for r, k in along if k == "cso"]
+        else:
+            pool = [r for r, k in along if k == "plant"] or [r for r, _ in along]
+        pool = [r for r in pool if r.get("water_slug") == slug] or pool
+        if not pool:
+            continue
+        r = most_upstream(pool)
+        p = picks.setdefault(r["key"], {"reach": r, "water_slugs": [], "outfall": r.get("outfall"), "candidates": {}})
+        p["water_slugs"].append(slug)
+        p["candidates"][slug] = len(pool)
+    return list(picks.values())
+
+
+def permit_outlet_note(picks: list[dict], waters: dict) -> str:
+    """PERMIT_OUTLET_NOTE for one river, PERMIT_OUTLET_NOTE_MANY naming each river and its outfall for several."""
+    each = [(slug, p["outfall"], p["candidates"][slug]) for p in picks for slug in p["water_slugs"]]
+    if len(each) == 1:
+        return PERMIT_OUTLET_NOTE.format(outfall=each[0][1], n=each[0][2])
+    return PERMIT_OUTLET_NOTE_MANY.format(each="; ".join(
+        f"{(waters.get(s) or {}).get('name') or s}: outfall {o} of {n}" for s, o, n in each))
+
+
 def index_reaches(reaches: dict) -> dict:
     """(permit, outfall number key) -> cached reach (MassDEP 'SPR010', ECHO '010' both -> (10, ''));
     ("event", event_id) -> a reach traced from an event's own point (a sewer break, no outfall)."""
@@ -4922,6 +5021,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         from build import reaches as reaches_mod
         flows = (read_json(reaches_mod.GAUGES_BY_RIVER) or {}, read_json(reaches_mod.GAUGES_LATEST) or {})
     reach_index = index_reaches(reaches)
+    outlet_index = permit_outlet_index(reaches, placement_outfalls)     # a report naming no outlet (PERMIT_OUTLET_TYPES)
     if not rules.get("version"):
         problems.append("data/rules.json missing or without a version: no red windows, no caution windows")
     discharger_towns = load_discharger_towns() if discharger_towns is None else discharger_towns
@@ -5058,9 +5158,30 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 placements[eid]["stretch_fallback"] = stretch_fallback(sr)
         # rivers, and the shoreline lakes, whose stretches carry a report as a river reach does
         river_slugs = [x for x in pl["water_slugs"] if waters[x].get("kind") in RIVER_KINDS or x in shore_slugs]
+        # a report naming no outlet and giving no point, of a type that leaves through a permitted outlet: the stretch
+        # of its permit's most upstream registered outlet on each river it names (PERMIT_OUTLET_BASIS); the record
+        # itself is not changed
+        outlet_basis = False
+        if (not found and is_discharge and not stretched and not pl.get("no_receiving_water") and not future
+                and not coarse and ev.get("event_type") in PERMIT_OUTLET_TYPES and ev.get("npdes_permit")
+                and ev.get("outfall_id") in (None, "") and ev.get("lat") is None and not pl.get("outfalls")):
+            picks = permit_outlet_reaches(ev, [x for x in river_slugs if waters[x].get("kind") in RIVER_KINDS
+                                               and x not in shore_slugs], outlet_index, waters)
+            if picks:
+                outlet_basis = True
+                found = [(p["reach"], list(p["water_slugs"])) for p in picks]
+                placements[eid]["reach_basis"] = PERMIT_OUTLET_BASIS
+                placements[eid]["reach_basis_outfalls"] = [
+                    {"water_slug": slug, "reach": p["reach"]["key"], "permit": p["reach"].get("permit"),
+                     "outfall": p["outfall"], "candidates": p["candidates"][slug]}
+                    for p in picks for slug in p["water_slugs"]]
+                placements[eid]["reach_basis_note"] = permit_outlet_note(picks, waters)
+        basis_tag = {"reach_basis": PERMIT_OUTLET_BASIS} if outlet_basis else {}
         # the river waters each reach carries: all of the record's (its own outfall or point), or the water of the
-        # one registry outfall it starts at (a report naming several outfalls: one reach per outfall)
-        carry = [(r, list(river_slugs) if s is None else [x for x in river_slugs if x == s]) for r, s in found]
+        # one registry outfall it starts at (a report naming several outfalls: one reach per outfall), or the waters
+        # a permit's outlet was chosen for (a list: PERMIT_OUTLET_BASIS)
+        carry = [(r, list(river_slugs) if s is None else [x for x in river_slugs if x in ([s] if isinstance(s, str) else s)])
+                 for r, s in found]
         modeled = [(r, c) for r, c in carry if r.get("segments") and c]
         carried = {x for _, c in modeled for x in c}
         reach = found[0][0] if found else None
@@ -5114,7 +5235,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 w0 = {**waters[start_slug], "slug": start_slug}
                 ivs = event_intervals(eff, w0.get("state"), now, water=w0, rules=rules)
                 for iv in ivs:
-                    reach_ivs[reach["key"]].append({**iv, "placement": "reach", "reach": reach["key"]})
+                    reach_ivs[reach["key"]].append({**iv, "placement": "reach", "reach": reach["key"], **basis_tag})
                 on_reach = set(reach_waters(reach, waters)) | {start_slug}
                 for slug in sorted(on_reach | set(carries)):
                     if eid not in per_water_events[slug]:
@@ -5125,7 +5246,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     done.add(slug)
                     tag = "reach" if slug in on_reach else "named"
                     for iv in ivs:
-                        intervals[slug].append({**iv, "placement": tag, "reach": reach["key"]})
+                        intervals[slug].append({**iv, "placement": tag, "reach": reach["key"], **basis_tag})
                 reach_events[reach["key"]].append(eid)
         # the monthly mark (docs/plan.md §2.x): the reported month in the history, and the outfall's latest report
         mark = monthly_mark(ev) if live and pl["water_slugs"] else None
@@ -5387,6 +5508,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             # why a stretch is not traced (kept for any interval that carries it)
                             **({"stretch_fallback": iv["stretch_fallback"]} if iv.get("stretch_fallback") else {}),
                             "reach": iv.get("reach"), "category": iv.get("category") or "sewage",
+                            # the stretch is drawn from an outlet the report does not name (PERMIT_OUTLET_BASIS)
+                            **({"reach_basis": iv["reach_basis"]} if iv.get("reach_basis") else {}),
                             "ended_at": iv["ended_at"],
                             # rain_likely: the radar total, the threshold and its basis (build/rain_likely.py)
                             **({"permit": iv.get("permit"), "rain": iv["rain"]} if iv.get("rain") else {}),
@@ -5559,6 +5682,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     "started_at": by_id[eid].get("started_at"), "hours_since_start": round(elapsed, 1),
                     **{k: v for k, v in flow.items() if k != "q_ratio"}, "q_ratio": round(flow["q_ratio"], 3),
                     "segments": segs,
+                    # the stretch is drawn from an outlet the report does not name (PERMIT_OUTLET_BASIS)
+                    **({"reach_basis": top["reach_basis"],
+                        "reach_basis_note": (placements.get(eid) or {}).get("reach_basis_note")}
+                       if top.get("reach_basis") else {}),
                     **({"kind": ADVISORY_STRETCH, "category": out_reaches[key]["category"]}
                        if r.get("kind") == ADVISORY_STRETCH else {})})
 
