@@ -45,6 +45,7 @@ fetch:
   format: "csv"            # the 2023 table's SODA endpoint sits behind a firewall that blocked a compound query
   metadata: true           # rowsUpdatedAt -> source_updated_at (MDE publishes no per-row times)
   if_changed: true         # frozen since 2023-02-23: each run asks the metadata and keeps the records
+  min_rows: 27000          # 27,479 rows on 2026-11-21: a cut-off download is never accepted as the table
   time_zone: "America/New_York"
   safe_fields: [overflow_type, municipality_facility, npdes, date_discovered, time_discovered, duration_days,
                 duration_hours, duration_minutes, location, zip_code, collection_system, quantity_in_gallons_estimated,
@@ -74,7 +75,8 @@ fetch:
     county_field: county
     no_water: ["^\\s*(nope|duplicate\\b.*)\\s*[.!]*\\s*$"]
   dedupe: {repeats: suffix, order: ["-volume_gal"]}
-  post: "ingest.generic.transforms.md_mde_history_duplicates"    # within the table; rows also in the 2023 table
+  post: "ingest.generic.transforms.md_mde_history_duplicates"    # within the table; rows also in the 2023 table (the
+                                                                 # run fails without the 2023 table's events file)
   history:
     keep_missing: true
     revisions: true

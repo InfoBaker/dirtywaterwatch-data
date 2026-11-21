@@ -43,7 +43,7 @@ SHORT_RUNS_TO_ACCEPT = 3      # a short response that persists this many runs in
 # keys every block may carry, and the keys of each platform (every block setting is checked)
 COMMON_KEYS = {"platform", "live", "time_zone", "safe_fields", "reviewed_fields", "free_text", "filter", "bounds",
                "record", "transform", "waters", "dedupe", "post", "after_history", "history", "meta", "raw_notes", "decoded_times",
-               "headers", "browser_headers", "max_error_share", "min_rows_ratio", "after", "module",
+               "headers", "browser_headers", "max_error_share", "min_rows_ratio", "min_rows", "after", "module",
                "short_runs_to_accept", "free_text_scrub", "operator_fields", "round_coords", "bounded_errors"}
 PLATFORM_KEYS = {
     "socrata": {"domain", "dataset", "format", "metadata", "where", "order", "page_size", "max_rows", "if_changed"},
@@ -208,6 +208,9 @@ def validate_block(block: dict, source_id: str = "") -> list[str]:
             errs.append("if_changed is true or false")
         elif block["if_changed"] and not block.get("metadata"):
             errs.append("if_changed needs metadata: true (the table's version is its metadata's rowsUpdatedAt)")
+    m = block.get("min_rows")
+    if m is not None and (isinstance(m, bool) or not isinstance(m, int) or m < 1):
+        errs.append("min_rows is a whole number of rows, 1 or more")
     k = block.get("short_runs_to_accept")
     if k is not None and (isinstance(k, bool) or not isinstance(k, int) or k < 1):
         errs.append("short_runs_to_accept is a whole number of runs, 1 or more")
@@ -738,6 +741,10 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
         if snap.too_few(units, extra["state"], ratio):
             short = {"units": units, "last_good": extra["state"].get("last_units_n")}
     else:
+        # min_rows: a source of known size (a frozen table) whose response has fewer rows is a failed read, first run
+        # included, where min_rows_ratio has no earlier run to compare with
+        if block.get("min_rows") and len(rows) < int(block["min_rows"]):
+            return fail(f"{len(rows)} rows in the response; the block expects at least {block['min_rows']}")
         prev_rows = prev_meta.get("rows")
         ratio = float(block.get("min_rows_ratio", MIN_ROWS_RATIO))
         if isinstance(prev_rows, int) and prev_rows and len(rows) < prev_rows * ratio:
