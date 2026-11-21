@@ -60459,7 +60459,7 @@
    "api",
    "map_only"
   ],
-  "access_detail": "React app; JSON at https://publicapps.odh.ohio.gov/beachguardpublic/api/advisorieslist?queryParams={\"filter\":[{\"isCurrentAdvisory\":true}]} (unfiltered call fails: response exceeds 10 MB serializer limit), /api/advisorieslistlookups, /api/beacheslist (192 beaches with coordinates, EPA beach id, HUC). Advisory types CONTAM_ADV (bacteria), HAB_WATCH_ADV, HAB_WARNING_ADV, HAB_CAUTION. Current on 2026-11-03: 5 (4 HAB warnings at Grand Lake St. Marys since 2026-05-20; 1 bacteria advisory at Crystal Lake Club since 2026-07-31).",
+  "access_detail": "React app; JSON at https://publicapps.odh.ohio.gov/beachguardpublic/api/advisorieslist?queryParams={\"filter\":[{\"isCurrentAdvisory\":true}]} (the unfiltered call fails whole: response exceeds 10 MB serializer limit; it pages with queryParams={\"top\":1500,\"skip\":N,\"orderBy\":[\"id desc\"]}, hasResultsRemaining false on the last page: 8,657 advisories since 2008 on 2026-11-21, 468 begun in 2026 at 110 beaches), /api/advisorieslistlookups, /api/beacheslist (192 beaches with coordinates, EPA beach id, HUC). Advisory types CONTAM_ADV (bacteria), HAB_WATCH_ADV, HAB_WARNING_ADV, HAB_CAUTION. Current on 2026-11-03: 5 (4 HAB warnings at Grand Lake St. Marys since 2026-05-20; 1 bacteria advisory at Crystal Lake Club since 2026-07-31).",
   "machine_readable": true,
   "sample_record": {
    "id": "-3509472276091755669",
@@ -60531,13 +60531,13 @@
   "has_coordinates": true,
   "has_outfall_ids": false,
   "cadence": "As local health districts and ODNR post; season Memorial Day to Labor Day.",
-  "history": null,
+  "history": "2008 on (the full list, paged)",
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Read hourly by pipeline/ingest/oh_odh_beachguard.py: current advisories (5 on 2026-11-08: 4 HAB warnings at Grand Lake St. Marys since 20 May, 1 bacteria advisory since 31 July), lifted at the first poll that no longer lists them; bacteria as beach advisories, HAB types as blooms. Past advisories: the API refuses the whole list (too large to serialise), so the archive grows from the polls.",
+  "status_reason": "Read hourly by pipeline/ingest/oh_odh_beachguard.py: current advisories, lifted at the first poll that no longer lists them; bacteria as beach advisories, HAB types as blooms. The full list of past advisories (8,657 since 2008 on 2026-11-21) is read by pages on --backfill and weekly, each past advisory ended at the reopening BeachGuard gives.",
   "verified": "fetched",
-  "checked": "2026-11-08",
+  "checked": "2026-11-21",
   "notes": "Endpoint 'acceptadvisorynotifications' in the app code suggests an advisory notification sign-up.",
   "area": "oh"
  },
