@@ -80,6 +80,7 @@ import requests
 
 import zones
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail, error_text
 
 SOURCE_ID = "or-deq-oers-spills-2013-2025"
 LAYER = ("https://services.arcgis.com/uUvqNMGPm7axC2dD/arcgis/rest/services/all_spills_Aug1_2013_Mar27_2025_pts/"
@@ -342,8 +343,8 @@ def main(argv: list[str] | None = None) -> int:
             save_raw(SOURCE_ID, json.dumps({"format": SAFE_FORMAT, "layer": LAYER, "fields": list(SAFE_FIELDS),
                                             "meta": lmeta, "rows": rows}, ensure_ascii=False), "json")
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     recs, stats = build(rows, fetched_at)
     edit = lmeta.get("lastEditDate")

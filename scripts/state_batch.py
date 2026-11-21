@@ -436,15 +436,29 @@ def obl_check(state: str, root: Path = ROOT) -> tuple[bool, list[str]]:
 
 # ---------------------------------------------------------------- run
 
+def _log_filter():
+    """scripts/log_redact.py's redact (addresses as scheme, host and path; no key, token, account id or e-mail),
+    loaded by its path."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("log_redact", Path(__file__).resolve().parent / "log_redact.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.redact
+
+
 def _stream(cmd: Cmd, root: Path, log: Path) -> tuple[int, list[str]]:
+    """Run a step, its output filtered (scripts/log_redact.py) before it reaches the console, the step's .log file
+    (kept as a public artifact) or the summary (security review 2026-11-17 #7, Astra 2026-11-21 P1-5)."""
     env = {**os.environ, **cmd.env, "PYTHONUNBUFFERED": "1"}
+    clean = _log_filter()
     lines: list[str] = []
     with open(log, "w") as fh:
-        fh.write(f"$ {cmd.shown()}\n")
+        fh.write(clean(f"$ {cmd.shown()}\n"))
         p = subprocess.Popen(cmd.argv, cwd=root / cmd.cwd, env=env, stdout=subprocess.PIPE,
                              stderr=subprocess.STDOUT, text=True, errors="replace")
         assert p.stdout is not None
-        for line in p.stdout:
+        for raw in p.stdout:
+            line = clean(raw)
             sys.stdout.write(line)
             fh.write(line)
             lines.append(line.rstrip("\n"))

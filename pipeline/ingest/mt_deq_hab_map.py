@@ -56,6 +56,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events
+from common import error_detail, error_text
 from ingest.mountain_scrub import scrub
 
 SOURCE_ID = "mt-deq-hab-map"
@@ -483,8 +484,8 @@ def main(argv=None) -> int:
         # the earlier records are kept, sanitized again on this save path too
         kept = [sanitized(r) for r in (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
                 if isinstance(r, dict)]
-        write_events(SOURCE_ID, kept, ok=False, partial=True, error=scrub_text(f"{type(e).__name__}: {e}")[:300])
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, kept, ok=False, partial=True, error=scrub_text(f"{error_text(e)}")[:300])
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     if meta["incomplete"]:
         # readable rows updated, the earlier records kept, health false and a non-zero exit (lessons, items 4 and 5)

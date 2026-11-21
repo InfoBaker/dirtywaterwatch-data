@@ -52,6 +52,7 @@ import requests
 
 from common import (BUILD_DIR, EVENTS_DIR, HEADERS, event, now_iso, path_notes_to_meta, read_json, scrub_text,
                     strip_house_numbers, write_events, write_json)
+from common import error_detail, error_text
 from ingest import ca_datagov
 
 SOURCE_ID = "ca-beachwatch-advisories"
@@ -225,8 +226,8 @@ def main(argv=None) -> int:
         if not rows:
             raise RuntimeError("the table answered no rows")
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     confirmed = as_of(rows)
     recs, stats = build(rows, fetched_at, confirmed, prev.get("records") or [])

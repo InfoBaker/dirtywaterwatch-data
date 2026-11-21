@@ -52,6 +52,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, path_notes_to_meta, read_json, save_raw, write_events
+from common import error_detail, error_text
 
 SOURCE_ID = "nc-dwr-algal-bloom-reports"
 ARCHIVE_ID = "nc-fish-kill-algal-bloom"
@@ -228,8 +229,8 @@ def main(argv=None) -> int:
     try:
         feats = _features(args.file) if args.file else query(sess, LAYER, FIELDS, "objectid", SOURCE_ID)
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
     records, stats = build(feats, fetched_at, prev)
@@ -245,8 +246,8 @@ def main(argv=None) -> int:
             af = _features(args.backfill_file) if args.backfill_file else \
                 query(sess, ARCHIVE_LAYER, ARCHIVE_FIELDS, "OBJECTID", ARCHIVE_ID)
         except Exception as e:  # noqa: BLE001
-            write_events(ARCHIVE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-            print(f"{ARCHIVE_ID}: FAILED {e}", file=sys.stderr)
+            write_events(ARCHIVE_ID, [], ok=False, error=f"{error_text(e)}")
+            print(f"{ARCHIVE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
             return 1
         arecs, astats = build(af, fetched_at, [], archive=True)
         astats["duplicate_of_current"] = mark_duplicates(arecs, records)

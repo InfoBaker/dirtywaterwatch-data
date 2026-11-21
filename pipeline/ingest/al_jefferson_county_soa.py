@@ -92,6 +92,7 @@ import requests
 
 from common import (BUILD_DIR, EVENTS_DIR, HEADERS, HOUSE_NUMBER_REMOVED, event, now_iso, read_json, write_events,
                     write_json)
+from common import error_detail, error_text
 from ingest.al_adem_sso import clean_text
 
 SOURCE_ID = "al-jefferson-county-soa"
@@ -493,8 +494,8 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, sess=N
         page = r.text
         fields = form_fields(page)
     except (requests.RequestException, ReadError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"page: {type(e).__name__}: {e}"[:300], path=out)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"page: {error_text(e)}"[:300], path=out)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     offered = year_options(page)
     if backfill:
@@ -520,7 +521,7 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, sess=N
             if wrong:
                 raise ReadError(f"the export for {y} holds {len(wrong)} rows of other years")
         except (requests.RequestException, ReadError) as e:
-            not_read[str(y)] = f"{type(e).__name__}: {e}"[:200]
+            not_read[str(y)] = f"{error_text(e)}"[:200]
             continue
         read_any = True
         bad_all += bad

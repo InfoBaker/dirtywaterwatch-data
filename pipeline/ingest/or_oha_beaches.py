@@ -41,6 +41,7 @@ from pathlib import Path
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail, error_text
 
 SOURCE_ID = "or-oha-beach-monitoring"
 URL = "https://www.oregon.gov/oha/PH/HEALTHYENVIRONMENTS/RECREATION/BEACHWATERQUALITY/Pages/status.aspx"
@@ -136,8 +137,8 @@ def main(argv: list[str] | None = None) -> int:
         if not rows:
             raise ValueError("no beach rows in OHA's table: the page has changed")
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     recs, stats = build(rows, prev, fetched_at)
     meta = {**stats, "page": URL, "registry_ids": [SOURCE_ID], "timezone": TZ,

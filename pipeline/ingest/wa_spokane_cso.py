@@ -59,6 +59,7 @@ import requests
 
 from common import (BUILD_DIR, HEADERS, event, load_outfall_registry, now_iso, outfall_number, read_json, save_raw,
                     scrub_text, strip_house_numbers, write_events, write_json)
+from common import error_detail, error_text
 from ingest.oh_cso_pdf_notices import existing
 
 SOURCE_ID = "wa-spokane-cso-update"
@@ -306,8 +307,8 @@ def main(argv=None) -> int:
             complete(len(rows) + len(unread), state_path)
             unread += missing_sites(rows, unread, state_path)
     except (requests.RequestException, LayoutError, OSError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"page: {type(e).__name__}: {e}", path=out)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"page: {error_text(e)}", path=out)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     recs, meta, unread = [], {}, []
     for rows, unread in parsed:

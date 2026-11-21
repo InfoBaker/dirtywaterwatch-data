@@ -44,6 +44,7 @@ import requests
 import common
 from ingest import poll_periods
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail
 
 SOURCE_ID = "mo-dnr-hab-map"
 LAYER = "https://gis.dnr.mo.gov/host/rest/services/wqm/HAB_SUBMIT_POINTS/MapServer/6"
@@ -172,8 +173,8 @@ def main(argv=None) -> int:
             save_raw(SOURCE_ID, json.dumps(rounded(doc)), "json")
         recs, stats = run(doc, prev, now_iso())
     except (requests.RequestException, OSError, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=error_detail(e))
+        print(f"{SOURCE_ID}: {error_detail(e)}", file=sys.stderr)
         return 1
     out = write_events(SOURCE_ID, recs, meta={
         "registry_ids": [SOURCE_ID], "url": LAYER, "page": PAGE, **stats,

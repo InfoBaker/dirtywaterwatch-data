@@ -78,6 +78,7 @@ import requests
 
 from common import (BUILD_DIR, DATA_DIR, HEADERS, RAW_DIR, ROOT, event, now_iso, path_notes_to_meta, read_json,
                     save_raw, strip_personal, write_events, write_json)
+from common import error_detail
 from ingest import ri_waters
 
 SOURCE_ID = "ri-nbc"
@@ -226,7 +227,7 @@ def load_rigis(session: requests.Session) -> dict:
             cached = {"fetched_at": now_iso(), "url": RIGIS_URL, "features": js["features"]}
             write_json(RIGIS_CACHE, cached)
         except Exception as e:  # cross-check only; never fatal
-            print(f"ri-nbc: RIGIS layer unavailable ({e})", file=sys.stderr)
+            print(f"ri-nbc: RIGIS layer unavailable ({error_detail(e)})", file=sys.stderr)
     out = {}
     for f in (cached or {}).get("features", []):
         a, g = f.get("attributes", {}), f.get("geometry") or {}
@@ -581,7 +582,7 @@ def poll(state: dict, pins: list, dry: list | None, now: str, refs: tuple) -> di
             key = f"SITE{pin.get('SITE_ID')}-unparsed-{pin.get('CSO_ALARM_HISTORYID')}"
             ev = evs.setdefault(key, {"first_seen_at": now})
             ev.update({"site": site, "info": info, "pins_raw": strip_personal(pin), "last_seen_at": now,
-                       "parse_error": str(e), "started_at": None, "ended_at": None, "state": "unknown"})
+                       "parse_error": error_detail(e), "started_at": None, "ended_at": None, "state": "unknown"})
             seen.add(key)
             continue
         ev = evs.setdefault(key, {"first_seen_at": now})
@@ -622,7 +623,7 @@ def poll(state: dict, pins: list, dry: list | None, now: str, refs: tuple) -> di
             stats["parse_errors"] += 1
             key = "DRY-unparsed-" + hashlib.sha1(json.dumps(row, sort_keys=True).encode()).hexdigest()[:10]
             ev = evs.setdefault(key, {"first_seen_at": now})
-            ev.update({"site": site, "info": info, "dry_raw": row, "last_seen_at": now, "parse_error": str(e),
+            ev.update({"site": site, "info": info, "dry_raw": row, "last_seen_at": now, "parse_error": error_detail(e),
                        "started_at": None, "ended_at": None, "state": "unknown"})
             continue
         if key not in evs:
@@ -724,14 +725,14 @@ def main(argv=None) -> int:
     try:
         pins, pins_bytes = fetch(s, PINS_URL)
     except Exception as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"pins: {e}")
-        print(f"ri-nbc: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"pins: {error_detail(e)}")
+        print(f"ri-nbc: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     dry, dry_err = None, None
     try:
         dry, dry_bytes = fetch(s, DRY_URL)
     except Exception as e:
-        dry_err = f"dryoverflows: {e}"
+        dry_err = f"dryoverflows: {error_detail(e)}"
     save_if_changed(state, "pins", pins_bytes)
     if dry is not None:
         save_if_changed(state, "dryoverflows", dry_bytes)

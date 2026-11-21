@@ -20,3 +20,37 @@ out.tar.gz
 data/name-blocklist.json
 # agent settings stay local (a copy is kept untracked where sessions need it)
 .claude/
+# secrets and private files in every other place a tool keeps them (security review 2026-11-17 #13): environment
+# files, wrangler's local secrets and state, credential and key files, package-registry tokens, HTTP archives (they
+# carry cookies and headers), and diagnostic output with any extension
+*.env
+.envrc
+.dev.vars
+.dev.vars.*
+.wrangler/
+.netrc
+.npmrc
+.pypirc
+.aws/
+credentials*.json
+service-account*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+id_rsa*
+id_ed25519*
+*.har
+*.log.*
+*.trace
+nohup.out
+*.bak
+*.orig
+*.swp
+*~
+# the workflows' scratch files when a step is run by hand (runner-probe's bodies, the release archive)
+probe/
+dataset.zip
+obl-water.tar.gz
+pause.check

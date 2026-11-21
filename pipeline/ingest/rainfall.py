@@ -127,6 +127,7 @@ from datetime import UTC, datetime, timedelta
 import requests
 
 from common import BUILD_DIR, DATA_DIR, HEADERS, RAW_DIR, load_outfall_registry, now_iso, read_json, save_raw, write_json
+from common import error_text
 from ingest import mrms_grid as grid_mod
 
 SOURCE_ID = "noaa-mrms-qpe-imageserver"
@@ -532,7 +533,7 @@ def gauge_check(session, box: dict, valid_time: str, now: datetime, gauges: dict
                 c = obs_c[st] = {"valid_time": valid_time, "fetched_at": iso(now), "observations": trim_observations(r.json())}
                 fetched += 1
             except Exception as e:  # noqa: BLE001
-                errors[st] = f"{type(e).__name__}: {e}"[:200]
+                errors[st] = f"{error_text(e)}"[:200]
                 down = True
                 continue
         w = gauge_window(c.get("observations") or [], vt)
@@ -547,7 +548,7 @@ def gauge_check(session, box: dict, valid_time: str, now: datetime, gauges: dict
             try:
                 m = parse_identify(identify(session, la, lo))
             except Exception as e:  # noqa: BLE001
-                errors[p["station"]] = f"identify: {type(e).__name__}: {e}"[:200]
+                errors[p["station"]] = f"identify: {error_text(e)}"[:200]
                 continue
             c = idf_c[p["station"]] = {"valid_time": m.get("valid_time"),
                                        **{f"h{h}": m.get(f"h{h}") for h, _ in GAUGE_FIELDS}}
@@ -736,7 +737,7 @@ def export_tile(session, objectid: int, box: dict, log: list | None = None) -> t
             if log is not None:
                 log.append({"attempt": attempt + 1, "bytes": len(b) if b else None,
                             "sha256": hashlib.sha256(b).hexdigest() if b else None,
-                            "error": f"{type(e).__name__}: {e}"[:300]})
+                            "error": f"{error_text(e)}"[:300]})
             if attempt == 0:
                 time.sleep(2)
     raise last
@@ -798,8 +799,8 @@ def read_grid(session, points: dict[str, dict], hours, region: str = "conus", ca
             except Exception as e:  # noqa: BLE001
                 if b is not None:        # an answer received and read, then rejected: its bytes and hash kept too
                     log.append({"attempt": len(log) + 1, "bytes": len(b), "sha256": hashlib.sha256(b).hexdigest(),
-                                **(g.meta() if g is not None else {}), "error": f"{type(e).__name__}: {e}"[:300]})
-                err = f"{name}: {type(e).__name__}: {e}"[:300]
+                                **(g.meta() if g is not None else {}), "error": f"{error_text(e)}"[:300]})
+                err = f"{name}: {error_text(e)}"[:300]
                 products[str(h)].setdefault("rejected", {})[t["tile"]] = log
                 if h == 24:
                     failed[t["tile"]] = err
@@ -1207,7 +1208,7 @@ def run_gauge_check(session, box, valid_time, now, gauges: dict | None = None) -
     try:
         return gauge_check(session, box, valid_time, now, gauges)
     except Exception as e:  # noqa: BLE001
-        return {"verdict": None, "text": f"skipped: {type(e).__name__}: {e}"[:300]}
+        return {"verdict": None, "text": f"skipped: {error_text(e)}"[:300]}
 
 
 def read_before(p: dict) -> bool:
@@ -1236,7 +1237,7 @@ def region_statistics(session, g: dict, region: str) -> dict:
         return {"item": p.get("item"), "objectid": p.get("objectid"), "valid_time": p.get("valid_time"),
                 "extent": grid_mod.REGIONS[region], **st}
     except Exception as e:  # noqa: BLE001
-        return {"item": p.get("item"), "objectid": p.get("objectid"), "error": f"{type(e).__name__}: {e}"[:300]}
+        return {"item": p.get("item"), "objectid": p.get("objectid"), "error": f"{error_text(e)}"[:300]}
 
 
 def read_region(session, region: str, points: dict[str, dict], keys: list[str], todo: list[str], hours: list[int],
@@ -1270,7 +1271,7 @@ def read_region(session, region: str, points: dict[str, dict], keys: list[str], 
             time.sleep(MRMS_PAUSE_S)
             return k, d, None
         except Exception as e:  # noqa: BLE001
-            return k, None, f"{type(e).__name__}: {e}"[:300]
+            return k, None, f"{error_text(e)}"[:300]
 
     def by_point(ks):
         """identify at the points of ks not asked yet this run (fallback_order, within what is left of cap)."""
@@ -1321,7 +1322,7 @@ def read_region(session, region: str, points: dict[str, dict], keys: list[str], 
                               seen)
                 break
             except Exception as e:  # noqa: BLE001
-                errs.append(f"{type(e).__name__}: {e}"[:300])
+                errs.append(f"{error_text(e)}"[:300])
                 if getattr(e, "evidence", None):
                     rejected.append({"error": errs[-1], **e.evidence})
                 g = None
@@ -1357,7 +1358,7 @@ def read_region(session, region: str, points: dict[str, dict], keys: list[str], 
             try:
                 chk = check_grid(session, {**g, "values": conv}, points, units["factor"], region)
             except Exception as e:  # noqa: BLE001
-                chk = {"result": f"skipped: identify failed ({type(e).__name__}: {e})"[:300]}
+                chk = {"result": f"skipped: identify failed ({error_text(e)})"[:300]}
             if chk.get("result") == "differs":
                 errs.append(f"check at {chk['point']}: grid {chk['grid_h24']} in, identify {chk['identify_h24']} in")
                 rejected.append({"error": errs[-1], "check": chk, "units": units, "hours": hours,
@@ -1567,7 +1568,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
         try:
             cat = grid_mod.catalog(session, names)
         except Exception as e:  # noqa: BLE001
-            problems.append(f"catalog query failed, each region queries its own: {type(e).__name__}: {e}"[:300])
+            problems.append(f"catalog query failed, each region queries its own: {error_text(e)}"[:300])
     res: dict[str, dict] = {}
     for r in regions:
         before = Counter(session.counts)
@@ -1639,7 +1640,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                 pr = d.get("properties") or {}
                 grids_cache[k] = {"grid": f"{pr['gridId']}/{pr['gridX']},{pr['gridY']}", "checked": iso(now)}
             except Exception as e:  # noqa: BLE001
-                grids_cache[k] = {"grid": None, "failed_at": iso(now), "error": f"{type(e).__name__}: {e}"[:200]}
+                grids_cache[k] = {"grid": None, "failed_at": iso(now), "error": f"{error_text(e)}"[:200]}
             qpf_info["lookups"] += 1
             time.sleep(NWS_PAUSE_S)
         write_json(GRIDS, grids_cache)
@@ -1659,7 +1660,7 @@ def run(force: bool = False, qpf: bool = True, limit: int | None = None, now: da
                 grid_data[cell] = {**t, "values": window_values(t["values"], now), "fetched_at": iso(datetime.now(UTC))}
                 qpf_info["fetched"] += 1
             except Exception as e:  # noqa: BLE001
-                qpf_info["failed"][cell] = f"{type(e).__name__}: {e}"[:200]
+                qpf_info["failed"][cell] = f"{error_text(e)}"[:200]
             time.sleep(NWS_PAUSE_S)
         if raw_q:
             save_raw("nws-qpf", gzip.compress(json.dumps(raw_q).encode()), "json.gz")

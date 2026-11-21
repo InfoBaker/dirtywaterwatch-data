@@ -27,6 +27,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import time
 import urllib.error
 import urllib.parse
@@ -111,11 +112,14 @@ _OPENER = urllib.request.build_opener(_NoRedirect)
 
 
 def _error_word(body: bytes) -> str:
+    """The API's error code ("rate_limited", "not_found"): one word of letters, digits, _ . -, else nothing; never a
+    sentence of its answer (security review 2026-11-17 #7)."""
     try:
         d = json.loads(body.decode("utf-8"))
-        return str(d.get("error") or "")[:40] if isinstance(d, dict) else ""
+        w = str(d.get("error") or "") if isinstance(d, dict) else ""
     except Exception:  # noqa: BLE001 - an HTML error page from the CDN
         return ""
+    return w if re.fullmatch(r"[A-Za-z0-9_.-]{1,40}", w) else ""
 
 
 def get(path: str, params: dict | None = None, etag: str | None = None, timeout: float = 120,

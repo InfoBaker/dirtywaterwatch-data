@@ -58,6 +58,7 @@ import requests
 
 from common import (BUILD_DIR, DATA_DIR, HEADERS, PERSONAL_KEYS, ROOT, event, now_iso,
                     parse_volume_gal, read_json, save_raw, write_events, write_json)
+from common import error_detail, error_text
 
 SOURCE_ID = "ma-massdep"
 API = "https://eeaonline.eea.state.ma.us/dep/CSOAPI/api/"
@@ -198,9 +199,9 @@ def load_cso_layer(sess) -> tuple[dict, dict]:
         how = {"source": "live", "fetched_at": now_iso()}
     except Exception as e:  # noqa: BLE001
         if cache:
-            return cache["outfalls"], {"source": "stale cache", "fetched_at": cache["fetched_at"], "error": str(e)}
+            return cache["outfalls"], {"source": "stale cache", "fetched_at": cache["fetched_at"], "error": error_detail(e)}
         data = json.loads(LAYER_FALLBACK.read_text())
-        how = {"source": "research copy 2026-11-01", "fetched_at": None, "error": str(e)}
+        how = {"source": "research copy 2026-11-01", "fetched_at": None, "error": error_detail(e)}
     outfalls = {}
     for f in data["features"]:
         a = f["attributes"]
@@ -421,7 +422,7 @@ def normalise(entry: dict, ctx: dict) -> dict:
         raw = dict(row)
         raw["_report_class"] = row.get("reporterClass")
         return event(**base, event_type="unknown", status="unknown", raw=raw,
-                     parse_error=f"{type(e).__name__}: {e}")
+                     parse_error=f"{error_text(e)}")
 
 
 def build_event(row: dict, entry: dict, ctx: dict, base: dict) -> dict:
@@ -696,8 +697,8 @@ def main(argv=None) -> int:
     try:
         fetched, info = fetch_rows(sess, args.since, args.backfill)
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"fetch failed: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"fetch failed: {error_detail(e)}", file=sys.stderr)
         return 1
 
     stamp_now = now_iso()
@@ -745,7 +746,7 @@ def main(argv=None) -> int:
                                      "via": "detail", "detail": detail_extra(pd)}
             time.sleep(0.5)
         except Exception as ex:  # noqa: BLE001
-            e["detail_error"] = f"{type(ex).__name__}: {ex}"
+            e["detail_error"] = f"{error_text(ex)}"
 
     write_json(ROWS_PATH, {"source_id": SOURCE_ID, "updated_at": stamp_now, "count": len(rows), "rows": rows})
 

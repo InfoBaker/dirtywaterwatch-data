@@ -71,6 +71,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail
 
 SOURCE_ID = "ms-mdeq-water-contact-advisories"
 FEED = "https://www.mdeq.ms.gov/category/news-release/feed/"
@@ -353,8 +354,8 @@ def main(argv=None) -> int:
         else:
             feed, pages = fetch()
     except (requests.RequestException, OSError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=error_detail(e))
+        print(f"{SOURCE_ID}: {error_detail(e)}", file=sys.stderr)
         return 1
     recs, stats = run(feed, pages, prev, now_iso())
     out = write_events(SOURCE_ID, recs, meta={"registry_ids": [SOURCE_ID], "url": FEED, **stats,

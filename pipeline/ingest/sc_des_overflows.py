@@ -126,6 +126,7 @@ import requests
 
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, NAME_REMOVED, ROOT, event, now_iso, path_notes_to_meta,
                     read_json, save_raw, scrub_text, strip_house_numbers, write_events, write_json)
+from common import error_text
 from ingest import mi_egle_mienviro as mi
 
 SOURCE_ID = "sc-des-overflow-list"
@@ -296,7 +297,7 @@ def build_record(row: dict, fetched_at: str, prev: dict | None, permits: dict) -
         return _record(a, base, raw, fetched_at, permits, water, named)
     except Exception as e:  # noqa: BLE001 - never drop a record
         return event(**base, event_type="sso", status="unknown", raw=raw, authority=AUTHORITY,
-                     parse_error=f"{type(e).__name__}: {e}")
+                     parse_error=f"{error_text(e)}")
 
 
 def _record(a, base, raw, fetched_at, permits, water, named) -> dict:
@@ -642,7 +643,7 @@ def main(argv=None) -> int:
             rows, how = fetch_all(session(), today)
         check_read(rows, None if args.file else state.get("last_complete_rows"))
     except Exception as e:  # noqa: BLE001
-        msg = f"{type(e).__name__}: {scrub_text(str(e))[:300]}"
+        msg = scrub_text(error_text(e))
         write_events(SOURCE_ID, [], ok=False, error=msg,
                      meta={"completeness": {"failed_at": fetched_at, "last_complete_rows": state.get("last_complete_rows")}})
         print(f"{SOURCE_ID}: FAILED {msg}", file=sys.stderr)

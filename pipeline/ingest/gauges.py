@@ -43,9 +43,12 @@ import time
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
+from urllib.parse import urlsplit
+
 import requests
 
 from common import BUILD_DIR, DATA_DIR, HEADERS, ROOT, now_iso, read_json, write_json
+from common import error_text
 
 OBL_DIR = Path(os.environ.get("OBL_DIR", ROOT.parent / "openboatlaunch"))
 OBL_LAUNCH_DIR = OBL_DIR / "out" / "launch"
@@ -86,16 +89,60 @@ STREAM_TYPES = {"ST", "ST-TS", "ST-CA", "ST-DCH"}
 LEVEL_PARAMS = {"62614", "62615"}
 
 _session: requests.Session | None = None
+_usgs_session: requests.Session | None = None
+
+# The optional free USGS key (environment usgs_api_key; it raises the USGS rate limit) goes to USGS hosts only
+# (security review 2026-11-17 #11: the shared session once sent it to NOAA's NWPS too). It rides on each request to
+# a USGS host, never on a session's headers, and a redirect off USGS drops it (UsgsSession.rebuild_auth; requests
+# itself drops only Authorization). A request for another host through usgs_get is refused.
+USGS_KEY_ENV = "usgs_api_key"
+USGS_KEY_HEADER = "X-Api-Key"
+
+
+def is_usgs_host(url: str) -> bool:
+    try:
+        u = urlsplit(str(url))
+    except ValueError:
+        return False
+    h = (u.hostname or "").lower()
+    return u.scheme == "https" and (h == "usgs.gov" or h.endswith(".usgs.gov"))
+
+
+class UsgsSession(requests.Session):
+    """A session that carries the USGS key on USGS hosts only: a redirect to any other host loses it."""
+
+    def rebuild_auth(self, prepared_request, response):
+        super().rebuild_auth(prepared_request, response)
+        if not is_usgs_host(prepared_request.url):
+            prepared_request.headers.pop(USGS_KEY_HEADER, None)
 
 
 def session() -> requests.Session:
+    """The plain session (NOAA's NWPS and anything that is not USGS): never the USGS key."""
     global _session
     if _session is None:
         _session = requests.Session()
         _session.headers.update(HEADERS)
-        if os.environ.get("usgs_api_key"):          # optional free key; raises the USGS rate limit
-            _session.headers["X-Api-Key"] = os.environ["usgs_api_key"]
     return _session
+
+
+def usgs_session() -> requests.Session:
+    global _usgs_session
+    if _usgs_session is None:
+        _usgs_session = UsgsSession()
+        _usgs_session.headers.update(HEADERS)
+    return _usgs_session
+
+
+def usgs_get(url: str, **kw) -> requests.Response:
+    """GET a USGS address, with the key when one is set; refused for any other host."""
+    if not is_usgs_host(url):
+        raise ValueError(f"not a USGS address: {urlsplit(str(url)).hostname}")
+    key = os.environ.get(USGS_KEY_ENV)
+    headers = dict(kw.pop("headers", None) or {})
+    if key:
+        headers[USGS_KEY_HEADER] = key
+    return usgs_session().get(url, headers=headers, **kw)
 
 
 def km(lon1, lat1, lon2, lat2) -> float:
@@ -414,7 +461,7 @@ def parse_latest(features: list) -> dict[str, dict]:
 def fetch_state(st: str) -> dict[str, dict]:
     feats, offset = [], 0
     while True:
-        r = session().get(LATEST, params={
+        r = usgs_get(LATEST, params={
             "f": "json", "state_code": STATE_FIPS[st], "parameter_code": ",".join(PARAMS), "limit": 10000,
             "offset": offset, "skipGeometry": "true",
             "properties": "monitoring_location_id,parameter_code,time,value,unit_of_measure"}, timeout=120)
@@ -445,7 +492,7 @@ def refresh_readings(states, force: bool = False, now: datetime | None = None, f
                             "sites": len(got)}
             fetched.append(st)
         except Exception as e:
-            by_state[st] = {**info, "ok": False, "error": f"{type(e).__name__}: {e}"[:200],
+            by_state[st] = {**info, "ok": False, "error": f"{error_text(e)}"[:200],
                             "failed_at": now.isoformat(timespec="seconds")}
         time.sleep(PAUSE_S if fetch is fetch_state else 0)
     out = {"source": LATEST, "params": list(PARAMS), "states": by_state, "sites": sites, "refetched": fetched}
@@ -465,7 +512,7 @@ def percentile(vals: list[float], q: float) -> float | None:
 
 
 def fetch_daily(site: str, y0: int, y1: int) -> list[float]:
-    r = session().get(DAILY, params={
+    r = usgs_get(DAILY, params={
         "f": "json", "monitoring_location_id": f"USGS-{site}", "parameter_code": "00060", "statistic_id": "00003",
         "time": f"{y0}-01-01/{y1}-12-31", "limit": 10000, "skipGeometry": "true", "properties": "time,value"},
         timeout=120)
@@ -497,7 +544,7 @@ def flow_stats(sites, now: datetime | None = None, fetch=fetch_daily) -> dict:
         except Exception as e:
             limited = isinstance(e, requests.HTTPError) and e.response is not None and e.response.status_code == 429
             stats[site] = {**{k: v for k, v in s.items() if k not in ("failed_at", "error")},
-                           "error": f"{type(e).__name__}: {e}"[:200],
+                           "error": f"{error_text(e)}"[:200],
                            # over the rate limit: this one and the rest are tried again on the next run
                            **({} if limited else {"failed_at": now.isoformat(timespec="seconds")})}
             if limited:
@@ -562,7 +609,7 @@ def flood_stages(pairs: dict[str, str], now: datetime | None = None, fetch=fetch
                          "fetched_at": now.isoformat(timespec="seconds")}
         except Exception as e:
             rows[lid] = {**{k: v for k, v in r.items() if k != "failed_at"}, "site": site,
-                         "failed_at": now.isoformat(timespec="seconds"), "error": f"{type(e).__name__}: {e}"[:200]}
+                         "failed_at": now.isoformat(timespec="seconds"), "error": f"{error_text(e)}"[:200]}
         if fetch is fetch_nwps:
             time.sleep(PAUSE_S)
     out = {"source": NWPS + "<lid>", "gauges": rows}

@@ -51,6 +51,7 @@ from collections import Counter
 from pathlib import Path
 
 from common import DATA_DIR, gnis_num, write_json
+from common import error_detail
 
 LAUNCH_SHORT = {"s": "slug", "n": "name", "k": "kind", "st": "state", "t": "town", "x": "lon", "y": "lat", "f": "fee"}
 API_FIELDS = ("water_id", "gnis_id", "geometry_hash", "geometry_tolerance_m", "status", "successor_slug",
@@ -471,7 +472,7 @@ def extract(state: str, obl_dir: Path | None, out_json: Path | None = None, snap
         except obl_api.ApiError as ex:
             if obl_dir is None or not Path(obl_dir).is_dir():
                 raise
-            print(f"obl_waters: the API could not be read ({ex}); the folder is read instead", file=sys.stderr)
+            print(f"obl_waters: the API could not be read ({error_detail(ex)}); the folder is read instead", file=sys.stderr)
     if obl_dir is None or not Path(obl_dir).is_dir():
         raise FileNotFoundError(f"{obl_dir}: no openboatlaunch out/water directory here")
     obl_dir = Path(obl_dir)
@@ -509,12 +510,12 @@ def main(argv=None) -> int:
         out = extract(args.state, Path(args.obl_dir) if args.obl_dir else None, Path(args.out) if args.out else None,
                       args.snapshot, from_api=args.from_api)
     except Partial as ex:
-        print(f"obl_waters: refused: {ex}", file=sys.stderr)
+        print(f"obl_waters: refused: {error_detail(ex)}", file=sys.stderr)
         return 1
     except Exception as ex:  # noqa: BLE001 - the API's errors carry no key (obl_api.scrub)
         if type(ex).__name__ != "ApiError":
             raise
-        print(f"obl_waters: the API could not be read and no folder was given ({ex})", file=sys.stderr)
+        print(f"obl_waters: the API could not be read and no folder was given ({error_detail(ex)})", file=sys.stderr)
         return 1
     kinds = Counter(w["kind"] for w in out["waters"])
     print(f"obl_waters: {out['count']} {out['state']} waters -> {args.out or f'data/waters-{out['state'].lower()}.json'} "

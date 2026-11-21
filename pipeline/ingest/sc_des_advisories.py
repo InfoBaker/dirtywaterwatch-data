@@ -83,6 +83,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_text
 from ingest.de_dnrec_derns import scrub
 from ingest.de_sc_periods import extend as extend_periods
 
@@ -680,7 +681,7 @@ def run(args) -> int:
             swim = safe_features(check_swim(r.json(), c.json()), "geometry", SWIM_FIELDS)
         except Exception as e:                         # any failure of this read is its own (Astra P1-3)
             ok_s, swim = False, None
-            write_events(SWIM_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=SWIM_META, path=args.out_swim)
+            write_events(SWIM_ID, [], ok=False, error=f"{error_text(e)}", meta=SWIM_META, path=args.out_swim)
         try:
             r = requests.get(BEACH_LAYER, headers=HEADERS, timeout=TIMEOUT)
             r.raise_for_status()
@@ -689,7 +690,7 @@ def run(args) -> int:
                 raise RuntimeError("no stations")
         except (requests.RequestException, ValueError, KeyError, RuntimeError) as e:
             ok_b = False
-            write_events(BEACH_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=BEACH_META)
+            write_events(BEACH_ID, [], ok=False, error=f"{error_text(e)}", meta=BEACH_META)
         try:
             r = requests.get(HAB_LAYER, headers=HEADERS, timeout=TIMEOUT)
             r.raise_for_status()
@@ -701,7 +702,7 @@ def run(args) -> int:
                 raise ValueError("the program page's watches and advisories table was not found")
         except (requests.RequestException, ValueError, KeyError) as e:
             ok_h = False
-            write_events(HAB_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=HAB_META)
+            write_events(HAB_ID, [], ok=False, error=f"{error_text(e)}", meta=HAB_META)
         beach, hab = safe_features(beach, "geometry"), safe_features(hab, "centroid")
         save_raw("sc-des-advisories", json.dumps({"format": SAFE_FORMAT, "beach": beach, "hab": hab,
                                                   "hab_table": table, "swim": swim}), "json")
@@ -721,7 +722,7 @@ def run(args) -> int:
             recs, swim_state, n = swim_records(swim, prev, now)
         except Exception as e:
             ok_s = False
-            write_events(SWIM_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=SWIM_META, path=args.out_swim)
+            write_events(SWIM_ID, [], ok=False, error=f"{error_text(e)}", meta=SWIM_META, path=args.out_swim)
         else:
             new["swim"] = swim_state
             write_events(SWIM_ID, recs, meta={**SWIM_META, "counts": n}, path=args.out_swim)

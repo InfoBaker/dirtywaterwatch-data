@@ -67,6 +67,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events
+from common import error_detail, error_text
 from ingest.mountain_scrub import scrub
 
 SOURCE_ID = "wy-deq-hcb-bulletins"
@@ -480,8 +481,8 @@ def main(argv=None) -> int:
         prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
         recs, meta, saved = build(text, fetched, prev)
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
-        write_events(SOURCE_ID, [], ok=False, error=scrub_text(f"{type(e).__name__}: {e}")[:300])
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=scrub_text(f"{error_text(e)}")[:300])
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     if "--file" not in argv:
         save_raw(SOURCE_ID, json.dumps(saved, indent=1), "json")      # the parsed rows only (no staff names)

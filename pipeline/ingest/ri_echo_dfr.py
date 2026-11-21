@@ -54,6 +54,7 @@ import requests
 
 from common import (DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, ROOT, event, now_iso, path_notes_to_meta, read_json,
                     save_raw, write_events)
+from common import error_detail
 
 SOURCE_ID = "ri-echo-dfr"
 DFR_URL = "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr"
@@ -156,7 +157,7 @@ def main(argv: list[str]) -> int:
             if res.get("Message") not in (None, "Success") and not res.get("CWASECompliance"):
                 raise ValueError(f"ECHO message: {res.get('Message')}")
         except Exception as e:
-            errors[permit] = str(e)[:300]
+            errors[permit] = error_detail(e)
             continue
         extract = next((x["SystemExtractDate"] for x in (res.get("SystemExtractDates") or {}).get("Dates", [])
                         if x.get("EPASystem") == "ICIS-NPDES"), None)

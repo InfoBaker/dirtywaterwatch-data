@@ -41,6 +41,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, path_notes_to_meta, read_json, save_raw, write_events
+from common import error_detail
 from ingest import ri_waters
 
 SOURCE_ID = "ri-dem-cyano"
@@ -117,8 +118,8 @@ def main() -> int:
             raise ValueError(f"no features: {str(js)[:200]}")
         save_raw(SOURCE_ID, r.content, "json")
     except Exception as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"ri-dem-cyano: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=error_detail(e))
+        print(f"ri-dem-cyano: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     domain, edited = {}, None
     try:
@@ -128,7 +129,7 @@ def main() -> int:
                 domain = {c["code"]: c["name"] for c in f["domain"].get("codedValues", [])}
         edited, _ = ms_iso((meta_js.get("editingInfo") or {}).get("dataLastEditDate"))
     except Exception as e:
-        print(f"ri-dem-cyano: layer metadata unavailable ({e}); using built-in town list", file=sys.stderr)
+        print(f"ri-dem-cyano: layer metadata unavailable ({error_detail(e)}); using built-in town list", file=sys.stderr)
 
     records, tracked = {}, []
     for f in js["features"]:

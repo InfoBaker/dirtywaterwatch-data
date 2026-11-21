@@ -66,6 +66,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, strip_personal, write_events, write_json
+from common import error_detail
 from ingest import pa_waters
 
 SOURCE_ID = "pa-phila-csocast"
@@ -329,8 +330,8 @@ def main() -> int:
         if not rows or (prev_n and len(rows) < prev_n / 2):
             raise ValueError(f"{len(rows)} outfalls in the layer (previous poll {prev_n})")
     except Exception as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"layer: {e}")
-        print(f"pa-phila-csocast: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"layer: {error_detail(e)}")
+        print(f"pa-phila-csocast: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     h = hashlib.sha256(json.dumps(sorted(rows, key=lambda a: str(a.get("Name"))), sort_keys=True).encode()).hexdigest()
     if state.get("raw_hash") != h:

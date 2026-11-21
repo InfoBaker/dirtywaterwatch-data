@@ -45,6 +45,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, read_json, save_raw, write_events
+from common import error_detail
 from ingest import pa_waters
 
 SOURCE_ID = "pa-erie"
@@ -143,7 +144,7 @@ def to_record(row: dict, markers: dict, url: str) -> dict:
         end = parse_time(row.get("Date Event Ended"))
     except ValueError as e:
         start = end = None
-        problems.append(str(e))
+        problems.append(error_detail(e))
     if start is None and not problems:
         problems.append("no start time")
     if start and end and end < start:
@@ -199,7 +200,7 @@ def main(argv=None) -> int:
         if (prev.get("meta") or {}).get("markers") != markers:
             save_raw(SOURCE_ID, r.text, "map.html")
     except Exception as e:
-        map_err = f"map: {e}"
+        map_err = f"map: {error_detail(e)}"
         markers = (prev.get("meta") or {}).get("markers") or {}
     url, params = report_url(d0, d1)
     try:
@@ -209,8 +210,8 @@ def main(argv=None) -> int:
         if "reportCreated" not in r.text:
             raise ValueError("report table missing (layout changed?)")
     except Exception as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"report: {e}")
-        print(f"pa-erie: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"report: {error_detail(e)}")
+        print(f"pa-erie: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     full_url = r.url
     sig = hashlib.sha256(json.dumps(rows, sort_keys=True).encode()).hexdigest()

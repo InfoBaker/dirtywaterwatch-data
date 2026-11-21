@@ -10,6 +10,7 @@ from pathlib import Path
 import pytest
 import requests
 
+from common import url_key
 from ingest import in_fort_wayne_cso as FW
 
 FIX = Path(__file__).parent / "fixtures"
@@ -234,7 +235,7 @@ def test_an_unread_document_holds_health_false_and_is_retried(tmp_path):
     run(tmp_path, site({U_APR: APR}))
     broken = _edit(NOV, "Start of CSO", "Start of Event")
     rc, f = run(tmp_path, site({U_APR: APR, U_NOV: broken}, page_links=[U_NOV]))
-    assert rc == 1 and f["ok"] is False and len(f["records"]) == 14 and U_NOV in f["meta"]["unread"]
+    assert rc == 1 and f["ok"] is False and len(f["records"]) == 14 and url_key(U_NOV) in f["meta"]["unread"]
     # the next run asks it again; still on the server, now readable
     rc, f = run(tmp_path, site({U_APR: APR, U_NOV: NOV}, page_links=[U_NOV]))
     assert rc == 0 and f["ok"] is True and "unread" not in f["meta"]
@@ -354,7 +355,7 @@ def test_a_revision_missing_a_block_is_unread_and_keeps_the_records(tmp_path):
     d["pieces"] = [p for p in d["pieces"] if p[2] > 200]          # the last block (27, 33, 36) cut off
     d["layout_text"] = None
     rc, f = run(tmp_path, site({U_APR: d}))
-    assert rc == 1 and f["ok"] is False and len(f["records"]) == 14 and U_APR in f["meta"]["unread"]
+    assert rc == 1 and f["ok"] is False and len(f["records"]) == 14 and url_key(U_APR) in f["meta"]["unread"]
 
 
 def test_a_broken_pdf_is_unread_and_fails_health(tmp_path):
@@ -366,14 +367,14 @@ def test_a_broken_pdf_is_unread_and_fails_health(tmp_path):
     rc = FW.run("2026-11-17T20:00:00Z", tmp_path / "state.json", out, get=site({U_APR: APR, U_NOV: NOV},
                 page_links=[U_NOV]), pieces_of=bad, registry=REG, save=False, sleep=lambda s: None)
     f = json.loads(out.read_text())
-    assert rc == 1 and f["ok"] is False and len(f["records"]) == 14 and U_NOV in f["meta"]["unread"]
+    assert rc == 1 and f["ok"] is False and len(f["records"]) == 14 and url_key(U_NOV) in f["meta"]["unread"]
 
 
 def test_a_404_does_not_clear_an_unread_document(tmp_path):
     broken = _edit(NOV, "Start of CSO", "Start of Event")
     run(tmp_path, site({U_NOV: broken}))
     rc, f = run(tmp_path, site({U_APR: APR}, page_links=[U_APR]))       # U_NOV now answers 404
-    assert rc == 1 and U_NOV in f["meta"]["unread"]
+    assert rc == 1 and url_key(U_NOV) in f["meta"]["unread"]
 
 
 def test_error_text_is_scrubbed(tmp_path):
@@ -421,11 +422,11 @@ def test_runner_backfill_exit_tells_a_failed_read_from_unread_documents(tmp_path
     broken = _edit(NOV, "Start of CSO", "Start of Event")
     get = site({U_NOV: NOV, u_bad: broken}, page_links=[U_NOV])
     rc, f = run(tmp_path, get, backfill=True, since="2026-11-03", today=date(2026, 11, 16))
-    assert rc == 0 and f["ok"] is False and u_bad in f["meta"]["unread"]
+    assert rc == 0 and f["ok"] is False and url_key(u_bad) in f["meta"]["unread"]
     assert "not read" in capsys.readouterr().err
     # the hourly run keeps today's rule: an unread document exits 1 (health false)
     rc, f = run(tmp_path, site({U_NOV: NOV, u_bad: broken}, page_links=[U_NOV]))
-    assert rc == 1 and f["ok"] is False and u_bad in f["meta"]["unread"]
+    assert rc == 1 and f["ok"] is False and url_key(u_bad) in f["meta"]["unread"]
 
 
 def test_backfill_with_no_page_or_nothing_read_fails(tmp_path):

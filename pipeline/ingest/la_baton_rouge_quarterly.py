@@ -71,6 +71,7 @@ import requests
 
 import common
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
+from common import error_detail, error_text
 from ingest import wv_la_privacy
 
 SOURCE_ID = "la-baton-rouge-quarterly"
@@ -532,8 +533,8 @@ def main(argv=None) -> int:
         except requests.RequestException as e:
             # the index not read: nothing new is fetched, but the state and the retained records are written again
             # from the state after its rows are checked again (migrate), so no earlier text bypasses the check
-            print(f"{SOURCE_ID}: index not read ({e})", file=sys.stderr)
-            errors.append(f"index: {e}")
+            print(f"{SOURCE_ID}: index not read ({error_detail(e)})", file=sys.stderr)
+            errors.append(f"index: {error_detail(e)}")
             links = None
         for n, url in (due(state, links, at, "--refresh" in argv) if links is not None else []):
             try:
@@ -546,8 +547,8 @@ def main(argv=None) -> int:
                 else:
                     note_success(state, n)
             except Exception as e:                    # a report that cannot be read is named; the others go on
-                errors.append(f"report {n}: {type(e).__name__}: {e}")
-                note_failure(state, n, url, f"{type(e).__name__}: {e}", at)
+                errors.append(f"report {n}: {error_text(e)}")
+                note_failure(state, n, url, f"{error_text(e)}", at)
         if links is not None:
             state["index_read_at"] = at
             state["index_reports"] = {str(k): v for k, v in sorted(links.items())}

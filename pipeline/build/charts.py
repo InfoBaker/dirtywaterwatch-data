@@ -65,6 +65,7 @@ from build.status import (ADVISORY_TYPES, BEACH_CHAR, BLOOM_CHAR, COARSE_PRECISI
                           future_start, load_events, live_waters, load_rules, load_waters, make_resolver, parse_time, resolve_revisions)
 from common import (BUILD_DIR, DATA_DIR, OUT_DIR, discharger_alias_map, now_iso, read_json, rules_live_states,
                     system_wide_advisory, write_json)
+from common import error_detail
 
 CHARTS_DIR = OUT_DIR / "charts"
 WINDOW_YEARS = 5                 # monthly charts: January of (this year - 4) to this month
@@ -390,7 +391,7 @@ class Data:
         try:
             pl = self._resolver.resolve(ev)
         except Exception as e:  # placement must never stop the charts
-            self.problems.append(f"{ev['event_id']}: placement failed ({e})")
+            self.problems.append(f"{ev['event_id']}: placement failed ({error_detail(e)})")
             return []
         return [s for s in pl.get("water_slugs") or [] if s in self.waters]
 

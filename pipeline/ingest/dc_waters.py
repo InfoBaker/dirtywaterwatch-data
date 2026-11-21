@@ -54,6 +54,7 @@ from shapely.geometry import LineString, MultiLineString, Point, Polygon, mappin
 from shapely.ops import linemerge, unary_union
 
 from common import DATA_DIR, HEADERS, RAW_DIR, ROOT, now_iso, read_json, save_raw, write_json
+from common import answer_error, error_detail, error_text, url_host
 
 RESEARCH = ROOT / "research" / "dc" / "waters-dc.json"
 RESEARCH_FLOWLINES = ROOT / "research" / "dc" / "raw" / "nhd" / "flowlines-dc-named.json"
@@ -95,12 +96,12 @@ def get_json(url: str, params: dict, tries: int = 3, timeout: int = 90) -> dict:
             r.raise_for_status()
             d = r.json()
             if isinstance(d, dict) and d.get("error"):
-                raise RuntimeError(f"service error {d['error']}")
+                raise RuntimeError(f"service {answer_error(d['error'])}")
             return d
         except (requests.RequestException, ValueError, RuntimeError) as e:
             err = e
             time.sleep(2 * (i + 1))
-    raise RuntimeError(f"{url}: {type(err).__name__}: {err}")
+    raise RuntimeError(f"{url_host(url)}: {error_text(err)}")
 
 
 def fetch_boundary() -> dict:
@@ -142,7 +143,7 @@ def district_boundary() -> dict:
             write_json(BOUNDARY_CACHE, d)
             return d
     except RuntimeError as e:
-        print(f"warn: DC boundary fetch failed ({e}); using the research copy", file=sys.stderr)
+        print(f"warn: DC boundary fetch failed ({error_detail(e)}); using the research copy", file=sys.stderr)
     return read_json(RESEARCH_BOUNDARY, {}) or {}
 
 
@@ -304,7 +305,7 @@ def main(argv=None) -> int:
             try:
                 responses[s["gnis_id"]] = fetch_flowlines(s["gnis_id"], bounds)
             except RuntimeError as e:
-                problems.append(f"{s['proposed_slug']}: {e}")
+                problems.append(f"{s['proposed_slug']}: {error_detail(e)}")
             time.sleep(PAUSE_S)
         if responses:
             p = save_raw("dc-waters", json.dumps({"fetched_at": fetched_at, "source": NHD_FLOWLINES, "boundary": district_boundary(),

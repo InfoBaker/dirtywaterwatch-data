@@ -95,6 +95,7 @@ from pathlib import Path
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, write_events, write_json
+from common import error_text
 
 SOURCE_ID = "pr-drna-beach-notices"
 URL = "https://www.drna.pr.gov/wp-json/wp/v2/posts"
@@ -692,7 +693,7 @@ def main(argv=None) -> int:
         else:
             posts, _ = fetch("--all" in argv or not known)
     except (requests.RequestException, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {str(e)[:200]}")
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
         print(f"{SOURCE_ID}: {type(e).__name__}", file=sys.stderr)
         return 1
     parsed = [parse_notice(p) for p in posts if isinstance(p, dict) and p.get("id") and p.get("date_gmt")]

@@ -53,6 +53,7 @@ from datetime import UTC, datetime, timedelta
 import requests
 
 from common import HEADERS, event, now_iso, save_raw, write_events
+from common import error_text
 from ingest.ct_deep import (TZ, clean, discharger_for, match_ct_waters, midnight_end, scrub, volume)
 
 SOURCE_ID = "ct-deep-archive"
@@ -91,7 +92,7 @@ def get(session: requests.Session, url: str, params: dict) -> dict:
             else:
                 last = f"HTTP {r.status_code}"
         except (requests.RequestException, ValueError) as e:
-            last = f"{type(e).__name__}: {e}"
+            last = f"{error_text(e)}"
         time.sleep(2 * (attempt + 1))
     raise RuntimeError(f"{url}: {last}")
 
@@ -252,8 +253,8 @@ def main(argv=None) -> int:
         for layer in LAYERS:
             feats[layer] = fetch_layer(s, layer)
     except Exception as e:
-        print(f"ct_deep_archive: fetch failed: {type(e).__name__}: {e}", file=sys.stderr)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
+        print(f"ct_deep_archive: fetch failed: {error_text(e)}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
         return 1
     # CSO layer: UTILITY_NAME is a code; learn its label from the rows that carry both (one label per code)
     seen = {}
@@ -278,7 +279,7 @@ def main(argv=None) -> int:
                 records.append(event(source_id=SOURCE_ID, source_record_id=f"{layer}-{a.get('OBJECTID')}", fetched_at=fetched,
                                      source_url=LAYERS[layer], authority="CT DEEP reporting archive 2016-2021",
                                      raw=scrub({k: v for k, v in a.items() if k not in PERSONAL}),
-                                     parse_error=f"{type(e).__name__}: {e}"))
+                                     parse_error=f"{error_text(e)}"))
     records.sort(key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
     meta = {"layers": LAYERS, "features": {k: len(v) for k, v in feats.items()}, "cso_utility_codes": code_labels,
             "counts": {"by_type": dict(Counter(r["event_type"] for r in records)),

@@ -31,7 +31,9 @@ import threading
 
 REDACTED = b"[redacted]"
 ACCOUNT_LINE = b"[wrangler: the token's account is not printed]"
-EMAIL = re.compile(rb"[A-Za-z0-9._%+\-]+(?:@|%40)[A-Za-z0-9\-]+(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}")
+# tried only where a run of local-part characters begins (the lookbehind): the same matches, in linear time on a long
+# line (scripts/log_redact.py passes whole pipeline logs through redact_line; a 3 MB line took minutes without it)
+EMAIL = re.compile(rb"(?<![A-Za-z0-9._%+\-])[A-Za-z0-9._%+\-]+(?:@|%40)[A-Za-z0-9\-]+(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}")
 # a line that names the account: wrangler's "associated with the account X", the whoami table's "X's Account" cell
 # (straight or curly apostrophe), and the logged-in banner whatever follows it
 ACCOUNT = re.compile(rb"associated with the (?:account|email)|(?:'|\xe2\x80\x99)s Account\b|logged in with",

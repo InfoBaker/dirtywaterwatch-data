@@ -69,6 +69,7 @@ import requests
 
 from common import (BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, strip_house_numbers,
                     write_events, write_json)
+from common import error_detail, error_text
 
 SOURCE_ID = "sc-florence-sso-notices"
 BASE = "https://www.cityofflorencesc.gov"
@@ -434,8 +435,8 @@ def run(args) -> int:
         if pages == BACKFILL_PAGES:
             state["backfilled_at"] = now
     except (requests.RequestException, RuntimeError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=META)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}", meta=META)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     counts["items"] = len(items)
     now_dt = datetime.fromisoformat(now.replace("Z", "+00:00"))

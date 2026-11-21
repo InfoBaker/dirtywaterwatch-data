@@ -56,6 +56,7 @@ from pathlib import Path
 import requests
 
 from common import DATA_DIR, HEADERS, event, now_iso, save_raw, write_events
+from common import answer_error, error_detail, error_text, url_host
 from ingest.oh_neorsd_cso import scrub_location
 
 SOURCE_ID = "oh-columbus-sewer-overflow"
@@ -86,7 +87,7 @@ def _get(sess, url: str, params: dict) -> dict:
     r.raise_for_status()
     d = r.json()
     if "error" in d:
-        raise ValueError(f"{url} answered an error: {d['error'].get('message')}")
+        raise ValueError(f"{url_host(url)} answered {answer_error(d['error'])}")   # a code, never its message
     return d
 
 
@@ -256,8 +257,8 @@ def main(argv=None) -> int:
         if not evs:
             raise ValueError("the events table answered no rows")
     except (requests.RequestException, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"service: {type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"service: {error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     save_raw(SOURCE_ID, json.dumps({"points": pts, "events": evs}), "json")
     recs, meta = run(pts, evs, now)
