@@ -613,6 +613,253 @@ def event(**f) -> dict:
     return scrub_discharger(rec)
 
 
+# ---------------------------------------------------------------- errors fit to keep (security review 2026-11-17 #7)
+# What a failure leaves in a saved or published file (an events file's error and the error fields of its meta, the
+# feeds' health in out/sources.json and the waters' stale reasons, out/meta.json's problems, a module's state file)
+# and in the hourly log: the pipeline's own words, the kind of exception, a fixed category and the host at most:
+#   "page: HTTPError: HTTP 404 at www.example.gov", "ConnectionError: refused at gis.example.gov",
+#   "ValueError: no features" (a message the pipeline raised itself keeps its words up to any quoted answer).
+# Never a library's or a provider's own text, which can quote a full address with its query string, an account id
+# or the answer's body. The categories: HTTP <code>, timeout, refused, dns, tls, reset, redirects, unreachable,
+# not JSON, unreadable, missing file, denied, exit <code>, failed. inbox.category is the same rule for the inbox files.
+PIPELINE_DIR = Path(__file__).resolve().parent
+_OWN_CODE = (str(PIPELINE_DIR), str(ROOT / "scripts"))
+_LIBRARY_PARTS = ("site-packages", "dist-packages", f"{Path('/')}lib{Path('/')}python")
+_URL_RE = re.compile(r"(?i)\b(?:https?|ftp|s3|wss?)://[^\s'\"<>`]+")
+_HOST_ARG_RE = re.compile(r"host='([A-Za-z0-9.-]{1,253})'")
+_HOSTNAME_RE = re.compile(r"(?i)^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?)*$")
+# where a library's or a transport's own words begin (requests, urllib3, urllib, ssl, socket, json)
+_LIBRARY_TEXT = re.compile(
+    r"\b\d{3} (?:Client|Server) Error\b|HTTPS?ConnectionPool\(|\bMax retries exceeded\b|\bRead timed out\b|"
+    r"\[Errno -?\d+\]|\[SSL[:\] ]|\bCaused by \w|<urllib3\.|\bConnection aborted\b|\bConnection broken\b|"
+    r"\bNameResolutionError\b|\bFailed to (?:resolve|establish)\b|\bRemoteDisconnected\b|\bExceeded \d+ redirects\b|"
+    r"\bExpecting (?:value|property name|',' delimiter|':' delimiter)\b|\bHTTP Error \d{3}\b|<urlopen error\b|"
+    r"\bcertificate verify failed\b|\bNo such file or directory\b")
+_TEXT_CATEGORIES = (
+    (re.compile(r"\b(\d{3}) (?:Client|Server) Error\b|\bHTTP Error (\d{3})\b|\bHTTP (\d{3})\b|"
+                r"\bstatus(?: code)?[ :=]+(\d{3})\b|\((\d{3})\) when calling\b"), None),
+    (re.compile(r"(?i)timed? ?out\b|\btimeout\b"), "timeout"),
+    (re.compile(r"(?i)connection refused|\[Errno (?:111|61|10061)\]|ECONNREFUSED"), "refused"),
+    (re.compile(r"(?i)name ?resolution|failed to resolve|name or service not known|nodename nor servname|"
+                r"getaddrinfo|\[Errno -?(?:2|3|5|8)\] (?:Name|nodename|Temporary)"), "dns"),
+    (re.compile(r"(?i)\bssl\b|certificate|\[SSL"), "tls"),
+    (re.compile(r"(?i)connection (?:reset|aborted)|connection broken|RemoteDisconnected|IncompleteRead|"
+                r"ChunkedEncodingError|ProtocolError"), "reset"),
+    (re.compile(r"(?i)redirects"), "redirects"),
+    (re.compile(r"(?i)max retries|connection|unreachable|network is"), "unreachable"),
+    (re.compile(r"\bExpecting (?:value|property name|',' delimiter|':' delimiter)\b|JSONDecodeError"), "not JSON"),
+    (re.compile(r"(?i)no such file or directory|FileNotFoundError"), "missing file"),
+    (re.compile(r"(?i)permission denied|AccessDenied|Forbidden"), "denied"),
+)
+# an answer quoted into a message: a JSON object or list, markup, a bytes literal, a long quoted string
+_BODY_START = re.compile(r"[{]|\[\s*[{\['\"]|<[A-Za-z!/?]|\bb['\"]|(?<![^\s:(=,\[])['\"][^'\"\n]{41}")
+_SECRET_PARAM = re.compile(r"(?i)\b((?:api[_-]?key|apikey|access[_-]?key|key|token|access_token|secret|password|passwd|"
+                           r"signature|sig|auth|session(?:id)?)=)[^&\s'\";,)]+")
+_BEARER = re.compile(r"(?i)\b(bearer|basic)\s+[A-Za-z0-9._~+/=-]{8,}")
+_HEX_ID = re.compile(r"(?i)(?<![0-9a-z])(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[0-9a-f]{32,})"
+                     r"(?![0-9a-z])")
+_LONG_TOKEN = re.compile(r"(?<![\w/.-])[A-Za-z0-9_+/=-]{40,}(?![\w/.-])")
+# the meta keys that hold failure text (a key such as "failed" or "permits_failed" holds ids or counts, which a run may
+# read back, and is left alone; their text is made with error_text where it is written)
+_ERRORISH_KEY = re.compile(r"(?i)^(?:errors?|exception|problems|last_error|[a-z0-9]+(?:_[a-z0-9]+)*_(?:error|errors))$")
+_EXC_NAME = re.compile(r"^[A-Za-z_][A-Za-z0-9_]{0,60}$")
+
+
+def url_host(url) -> str | None:
+    """The host of an address (no user, no port, no path), or None."""
+    try:
+        from urllib.parse import urlsplit
+        h = urlsplit(str(url)).hostname
+    except ValueError:
+        return None
+    return h if h and _HOSTNAME_RE.match(h) else None
+
+
+def _account_values() -> list[tuple[str, str]]:
+    import os
+    out = []
+    for env, mark in (("R2_S3_ENDPOINT", "[endpoint]"), ("CLOUDFLARE_ACCOUNT_ID", "[account]")):
+        v = (os.environ.get(env) or "").strip().rstrip("/")
+        if len(v) >= 8:
+            out.append((v, mark))
+    return out
+
+
+def redact_secrets(text: str) -> str:
+    """Account ids, the R2 endpoint, e-mail addresses, keys in key=value form, bearer tokens and long ids out of text
+    (addresses are left to the caller)."""
+    t = str(text)
+    for v, mark in _account_values():
+        t = t.replace(v, mark)
+    t = EMAIL_RE.sub("[address]", t)
+    t = _BEARER.sub(lambda m: f"{m.group(1)} [redacted]", t)
+    t = _SECRET_PARAM.sub(lambda m: f"{m.group(1)}[redacted]", t)
+    t = _HEX_ID.sub("[id]", t)
+    return _LONG_TOKEN.sub("[id]", t)
+
+
+def text_category(text) -> str:
+    """The fixed category a failure's words name (HTTP <code>, timeout, refused, ...), else "failed"."""
+    t = str(text or "")
+    for rx, word in _TEXT_CATEGORIES:
+        m = rx.search(t)
+        if m:
+            return word or f"HTTP {next(g for g in m.groups() if g)}"
+    return "failed"
+
+
+def _host_in_text(text: str) -> str | None:
+    m = _URL_RE.search(text)
+    if m:
+        h = url_host(m.group(0))
+        if h:
+            return h
+    m = _HOST_ARG_RE.search(text)
+    return m.group(1) if m and _HOSTNAME_RE.match(m.group(1)) else None
+
+
+def _tidy(text: str, limit: int) -> str:
+    t = re.sub(r"\s+", " ", text).strip().rstrip(":;,-–— (").strip()
+    return t if len(t) <= limit else t[:limit - 1].rstrip() + "…"
+
+
+def clean_error_text(text, limit: int = 300) -> str:
+    """One failure's words as they may be kept: up to where a library's or a transport's own text begins, which
+    becomes its category and host; any quoted answer cut off; addresses as their host; secrets and ids out."""
+    t = str(text or "")
+    m = _LIBRARY_TEXT.search(t)
+    tail = ""
+    if m:
+        host = _host_in_text(t)
+        tail = text_category(t[m.start():])
+        if tail == "failed":
+            tail = text_category(t)
+        if host:
+            tail += f" at {host}"
+        t = t[:m.start()]
+    b = _BODY_START.search(t)
+    if b:
+        t = t[:b.start()]
+    t = _URL_RE.sub(lambda u: url_host(u.group(0)) or "[address]", t)
+    t = redact_secrets(t)
+    t = _tidy(t, limit)
+    if tail:
+        t = f"{t}: {tail}" if t else tail
+    return _tidy(t, limit)
+
+
+def _raised_in_own_code(e: BaseException) -> bool:
+    """True when the exception was raised by this repository's code (its last frame is under pipeline/ or scripts/
+    and not in an installed library), so its message is the pipeline's own words."""
+    tb = e.__traceback__
+    if tb is None:
+        return True
+    while tb.tb_next is not None:
+        tb = tb.tb_next
+    f = str(tb.tb_frame.f_code.co_filename)
+    return f.startswith(_OWN_CODE) and not any(p in f for p in _LIBRARY_PARTS)
+
+
+def error_category(e: BaseException) -> str:
+    """The fixed category of an exception: an answer's HTTP status, the kind of a transport failure, else what kind of
+    thing went wrong. Never the exception's own words."""
+    resp = getattr(e, "response", None)
+    code = getattr(resp, "status_code", None) if resp is not None else None
+    if not isinstance(code, int):
+        code = getattr(e, "code", None) if type(e).__name__ == "HTTPError" else None
+    if isinstance(code, int) and 100 <= code <= 599:
+        return f"HTTP {code}"
+    names = {c.__name__ for c in type(e).__mro__}
+    if names & {"Timeout", "TimeoutError", "TimeoutExpired", "ReadTimeout", "ConnectTimeout", "timeout"}:
+        return "timeout"
+    if "ConnectionRefusedError" in names:
+        return "refused"
+    if names & {"SSLError", "SSLCertVerificationError", "CertificateError"}:
+        return "tls"
+    if "TooManyRedirects" in names:
+        return "redirects"
+    if names & {"ConnectionResetError", "ConnectionAbortedError", "RemoteDisconnected", "ChunkedEncodingError",
+                "IncompleteRead", "ProtocolError", "BrokenPipeError"}:
+        return "reset"
+    if names & {"gaierror", "NameResolutionError"}:
+        return "dns"
+    if names & {"ConnectionError", "URLError", "NewConnectionError", "MaxRetryError", "RequestException"}:
+        c = text_category(str(e))
+        return c if c in ("refused", "dns", "tls", "reset", "timeout", "redirects") else "unreachable"
+    if "JSONDecodeError" in names:
+        return "not JSON"
+    if "CalledProcessError" in names and isinstance(getattr(e, "returncode", None), int):
+        return f"exit {e.returncode}"
+    if "FileNotFoundError" in names:
+        return "missing file"
+    if "PermissionError" in names:
+        return "denied"
+    if names & {"ValueError", "KeyError", "IndexError", "TypeError", "AttributeError", "LookupError",
+                "UnicodeError", "BadZipFile", "ParseError", "ExpatError", "EOFError", "DecodeError"}:
+        return "unreadable"
+    return "failed"
+
+
+def error_host(e: BaseException) -> str | None:
+    """The host a failed request went to (its response's or request's address), or None."""
+    for obj in (getattr(e, "response", None), getattr(e, "request", None)):
+        u = getattr(obj, "url", None) if obj is not None else None
+        if u:
+            h = url_host(u)
+            if h:
+                return h
+    u = getattr(e, "url", None) or getattr(e, "filename", None) if type(e).__name__ == "HTTPError" else None
+    return url_host(u) if u else _host_in_text(str(e))
+
+
+def error_text(e: BaseException, limit: int = 300) -> str:
+    """What may be kept and printed of a caught exception: its kind and, for one this repository raised, its own
+    words (clean_error_text); for a library's, a fixed category and the host. "HTTPError: HTTP 404 at host",
+    "ReadTimeout: timeout at host", "ValueError: no features"."""
+    name = type(e).__name__ if _EXC_NAME.match(type(e).__name__) else "Error"
+    if _raised_in_own_code(e) and not _LIBRARY_TEXT.search(str(e)):
+        detail = clean_error_text(str(e), limit) or error_category(e)
+    else:
+        cat = error_category(e)
+        if cat == "failed":
+            cat = text_category(str(e))
+        host = error_host(e)
+        detail = cat + (f" at {host}" if host else "")
+    return _tidy(f"{name}: {detail}", limit)
+
+
+def public_error(value, limit: int = 300):
+    """An error as it may be saved or published (write_events, the feeds' health, meta.json's problems): an exception
+    becomes error_text; a text keeps each part's own words (parts split at "; ") with library text, answers,
+    addresses and secrets taken out (clean_error_text). None stays None; it is idempotent."""
+    if value is None:
+        return None
+    if isinstance(value, BaseException):
+        return error_text(value, limit)
+    parts = [clean_error_text(p, limit) for p in re.split(r";\s+", str(value))]
+    return _tidy("; ".join(p for p in parts if p), limit) or "failed"
+
+
+def public_meta_errors(obj, _under: bool = False):
+    """A copy of an events file's meta (or any state dict) whose error fields (error, errors, *_error, *_errors,
+    problems, last_error, exception) hold only public_error text; every other field is left as it is (a source's own
+    address in meta.url is a citation and stays whole)."""
+    if isinstance(obj, dict):
+        out = {}
+        for k, v in obj.items():
+            under = _under or bool(_ERRORISH_KEY.match(str(k)))
+            key = k
+            if under and isinstance(k, str) and _URL_RE.search(k):
+                key = _URL_RE.sub(lambda u: url_host(u.group(0)) or "[address]", k)
+            out[key] = public_meta_errors(v, under)
+        return out
+    if isinstance(obj, list):
+        return [public_meta_errors(v, _under) for v in obj]
+    if _under and isinstance(obj, str):
+        return public_error(obj)
+    return obj
+
+
 def write_events(source_id: str, records: list[dict], ok: bool = True, error: str | None = None, meta: dict | None = None,
                  path: Path | None = None, partial: bool = False) -> Path:
     """Write data/build/events/<source>.json (or path). On failure (ok=False) keep the previous records and
@@ -637,8 +884,10 @@ def write_events(source_id: str, records: list[dict], ok: bool = True, error: st
     at = now_iso()
     if ok or partial:
         mark_unread_gaps(prev, records, at, listed_only=not ok)
-    out = {"source_id": source_id, "fetched_at": at, "ok": ok, "error": error,
-           "last_ok_at": at if ok else prev.get("last_ok_at"), "meta": meta or {},
+    # the error and meta's error fields as they may be kept (public_error; security review 2026-11-17 #7): the file is
+    # saved with the pipeline state, and the error reaches out/sources.json
+    out = {"source_id": source_id, "fetched_at": at, "ok": ok, "error": public_error(error),
+           "last_ok_at": at if ok else prev.get("last_ok_at"), "meta": public_meta_errors(meta or {}),
            "count": len(records), "records": records}
     # prev_ok_at: the successful read before last_ok_at, so the status build can tell whether a successful read came
     # after the one that last listed an advisory (no_ok_read_since; owner, 2026-11-16). Written only where it is

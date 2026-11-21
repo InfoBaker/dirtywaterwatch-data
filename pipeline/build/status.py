@@ -53,7 +53,7 @@ from zoneinfo import ZoneInfo
 
 import zones
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharger_alias_map, load_outfall_registry,
-                    system_wide_advisory, no_ok_read_since,
+                    system_wide_advisory, no_ok_read_since, error_text, public_error,
                     now_iso, read_json, rules_live_states, write_json)
 from build import beach_reason as BR
 from build import shoreline as SH
@@ -4367,7 +4367,7 @@ def stretch_fallback(r: dict | None) -> str:
     tail = "the advisory is shown at its point, and the river is not coloured"
     if not r:
         return f"the stretch the advisory names is not traced yet; {tail}"
-    why = r.get("error") or r.get("cut_reason") or "no stretch could be traced"
+    why = public_error(r.get("error")) or r.get("cut_reason") or "no stretch could be traced"
     return f"the stretch the advisory names could not be traced ({why}); {tail}"
 
 
@@ -4777,7 +4777,9 @@ def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
     reasons = []
     if not f.get("fixture"):
         if f.get("ok") is False:
-            reasons.append(f"last fetch failed: {f.get('error')}")
+            # the error as it may be published (common.public_error): out/sources.json and the waters' stale
+            # reasons carry it, and an events file written before 2026-11-21 can still hold a library's own text
+            reasons.append(f"last fetch failed: {public_error(f.get('error'))}")
         if last_ok is None:
             reasons.append("never fetched successfully")
         elif cad is not None and now - last_ok > timedelta(hours=cad):
@@ -4787,7 +4789,7 @@ def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
             # an e-mail notice list that has gone quiet (ingest/operator_mail.py quiet_check): read well, yet nothing
             # arrives while another source shows the operator's notices
             reasons.append(f"list quiet: {quiet['reason']}")
-    return {"source_id": sid, "ok": f.get("ok"), "error": f.get("error"), "fetched_at": f.get("fetched_at"),
+    return {"source_id": sid, "ok": f.get("ok"), "error": public_error(f.get("error")), "fetched_at": f.get("fetched_at"),
             "last_ok_at": f.get("last_ok_at"), "count": f.get("records"), "fixture": f.get("fixture"),
             "expected_cadence_hours": cad,
             "published_in_batches": bool((f.get("meta") or {}).get("published_in_batches")),
@@ -5287,7 +5289,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     continue
                 covered[sl].add(sid)
                 partial_stale[sl].append({"source_id": sid, "permittee": who, "last_ok_at": pf.get("last_ok_at"),
-                                          "reason": f"{who}: {pf.get('error')} (last good fetch {pf.get('last_ok_at')})"})
+                                          "reason": f"{who}: {public_error(pf.get('error'))} (last good fetch {pf.get('last_ok_at')})"})
 
     # discharge likely: heavy rain over a CSO permittee's outfalls, no notice received (rules.rain_likely)
     from build import rain_likely as rain_mod
@@ -5299,8 +5301,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                                               reaches, reach_waters)
         except Exception as e:  # noqa: BLE001
             by_water, by_reach = {}, {}
-            rain_block = {**rain_block, "enabled": True, "error": f"{type(e).__name__}: {e}"[:300]}
-            problems.append(f"rain_likely: not computed ({type(e).__name__}: {e})"[:300])
+            rain_block = {**rain_block, "enabled": True, "error": error_text(e)}
+            problems.append(f"rain_likely: not computed ({error_text(e)})"[:300])
         # the same caution for the separate sewer operators of rules.rain_likely.separate_sewers (build/rain_sso.py);
         # with its switch off nothing here runs and the block is what it was
         from build import rain_sso

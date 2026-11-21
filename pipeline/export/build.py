@@ -108,7 +108,7 @@ from build.redact import BlockScan, Redactor, blocklist, quote_swaps, redact_eve
 from common import scrub_residence_numbers
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, OUT_DIR, OUTFALL_REGISTRY_GLOB, OUTFALL_REGISTRY_SKIPPED,
                     PROVISIONAL_FIELDS, REPORTED_OUTFALLS, ROOT, STATE_CODE, discharger_alias_map, is_provisional, now_iso, read_json,
-                    scrub_names, split_path_notes, strip_personal, write_json)
+                    error_text, public_error, scrub_names, split_path_notes, strip_personal, write_json)
 from export import detail as detail_mod
 from export import outfalls as outfalls_mod
 
@@ -2026,8 +2026,8 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
             print(f"export: {note}")
             problems.append(note)
     except Exception as exc:
-        print(f"export: CSV files not written ({type(exc).__name__}: {exc})")
-        problems.append(f"csv export failed: {type(exc).__name__}: {exc}")
+        print(f"export: CSV files not written ({error_text(exc)})")
+        problems.append(f"csv export failed: {error_text(exc)}")
 
     # meta
     by_state_status = defaultdict(lambda: Counter())
@@ -2090,7 +2090,8 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                        "with_temperature": sum(1 for r in conditions["waters"].values() if r.get("temp_c") is not None),
                        "with_turbidity": sum(1 for r in conditions["waters"].values() if r.get("turbidity_ntu") is not None)},
         "waters_without_geometry": missing_geom,
-        "problems": (st.get("problems") or []) + problems,
+        # as they may be published: a problem that quotes an exception keeps its kind and category (common.public_error)
+        "problems": [public_error(p) for p in (st.get("problems") or []) + problems],
     }
     write_compact(OUT_DIR / "meta.json", meta)
     rules_src = DATA_DIR / "rules.json"
