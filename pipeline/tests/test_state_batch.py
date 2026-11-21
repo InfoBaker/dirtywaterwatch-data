@@ -665,7 +665,10 @@ def test_state_build_workflow_restores_the_openboatlaunch_object():
     assert "state_paths.py unpack-obl obl-water.tar.gz" in job["steps"][ro]["run"]
     # the API first (fetch-obl), the R2 copy only when it was not used
     assert job["steps"][ro]["run"].index("fetch-obl") < job["steps"][ro]["run"].index("fetch state/obl-water.tar.gz")
-    assert job["env"]["OBL_API_KEY"] == "${{ secrets.OBL_API_KEY }}"
+    # the key is on the steps that use it, never the job's (security review 2026-11-17 #12)
+    assert job["steps"][ro]["env"]["OBL_API_KEY"] == "${{ secrets.OBL_API_KEY }}"
+    assert job["steps"][run]["env"]["OBL_API_KEY"] == "${{ secrets.OBL_API_KEY }}"
+    assert "OBL_API_KEY" not in job["env"]
     for s in job["steps"]:
         if s.get("run") and "state_batch.py" in s["run"] and ("plan" in s["run"] or " run " in s["run"]):
             assert '--osm-budget "$OSM_BUDGET"' in s["run"]

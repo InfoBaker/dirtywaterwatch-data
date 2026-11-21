@@ -680,6 +680,13 @@ def url_label(url) -> str:
     return name or (u.hostname or "[address]")
 
 
+def url_key(url) -> str:
+    """An address used as a key among a file's error fields: its host and the last part of its path, no query
+    string ("utilities.example.gov/week-12.pdf"), so two documents on one host stay apart."""
+    host, label = url_host(url) or "[address]", url_label(url)
+    return host if label in (host, "[address]") else f"{host}/{label}"
+
+
 def url_host(url) -> str | None:
     """The host of an address (no user, no port, no path), or None."""
     try:
@@ -947,7 +954,7 @@ def public_meta_errors(obj, _under: bool = False):
             under = _under or bool(_ERRORISH_KEY.match(str(k)))
             key = k
             if under and isinstance(k, str) and _URL_RE.search(k):
-                key = base = _URL_RE.sub(lambda u: url_host(u.group(0)) or "[address]", k)
+                key = base = _URL_RE.sub(lambda u: url_key(u.group(0)), k)
                 n = 1
                 while key in out:                   # two addresses on one host stay two entries
                     n += 1

@@ -121,9 +121,9 @@ def test_write_events_saves_no_query_string_account_id_or_body_in_error_or_meta(
     rest = {k: v for k, v in d["meta"].items() if k != "url"}
     assert_safe(json.dumps(rest).replace('"', "").replace("{", "").replace("}", ""))
     assert ACCOUNT not in json.dumps(rest) and "SECRETTOKEN" not in json.dumps(rest)
-    assert list(d["meta"]["errors"]) == ["gis.example.gov"]
+    assert list(d["meta"]["errors"]) == ["gis.example.gov/query"]
     two = public_meta_errors({"errors": {QUERY_URL: "a", QUERY_URL.replace("/0/", "/1/"): "b"}})
-    assert two == {"errors": {"gis.example.gov": "a", "gis.example.gov (2)": "b"}}
+    assert two == {"errors": {"gis.example.gov/query": "a", "gis.example.gov/query (2)": "b"}}
 
 
 def test_a_meta_key_that_holds_ids_is_left_as_it_was():
