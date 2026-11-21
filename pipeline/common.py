@@ -726,7 +726,7 @@ def _tidy(text: str, limit: int) -> str:
 def clean_error_text(text, limit: int = 300) -> str:
     """One failure's words as they may be kept: up to where a library's or a transport's own text begins, which
     becomes its category and host; any quoted answer cut off; addresses as their host; secrets and ids out."""
-    t = str(text or "")
+    t = str(text or "")[:max(limit, 300) * 4]       # the regular expressions below never see a whole body
     m = _LIBRARY_TEXT.search(t)
     tail = ""
     if m:
@@ -865,7 +865,11 @@ def public_meta_errors(obj, _under: bool = False):
             under = _under or bool(_ERRORISH_KEY.match(str(k)))
             key = k
             if under and isinstance(k, str) and _URL_RE.search(k):
-                key = _URL_RE.sub(lambda u: url_host(u.group(0)) or "[address]", k)
+                key = base = _URL_RE.sub(lambda u: url_host(u.group(0)) or "[address]", k)
+                n = 1
+                while key in out:                   # two addresses on one host stay two entries
+                    n += 1
+                    key = f"{base} ({n})"
             out[key] = public_meta_errors(v, under)
         return out
     if isinstance(obj, list):
