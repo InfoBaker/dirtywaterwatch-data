@@ -192,6 +192,9 @@ jobs:
       - name: Keep the summary and the step logs (14 days)
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02   # v4.6.2
+        env:
+          AWS_ACCESS_KEY_ID: ''       # no storage keys here (scripts/r2-s3-keys.sh put them in the job's environment)
+          AWS_SECRET_ACCESS_KEY: ''
         with:
           name: state-batch-${{ github.run_id }}
           path: |
@@ -203,12 +206,17 @@ jobs:
         if: ${{ !cancelled() && steps.batch.outcome == 'success' }}
         env:
           GH_TOKEN: ${{ github.token }}
+          AWS_ACCESS_KEY_ID: ''       # no storage keys here (scripts/r2-s3-keys.sh put them in the job's environment)
+          AWS_SECRET_ACCESS_KEY: ''
         run: |
           pipeline/.venv/bin/python scripts/state_batch.py publish --state "$STATE" --body "$OUT/pr-body.md" \
             --date "$BATCH_DATE"
       - name: Keep the privacy scan's findings (file, place and kind only; for the next round to correct)
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02   # v4.6.2
+        env:
+          AWS_ACCESS_KEY_ID: ''       # no storage keys here (scripts/r2-s3-keys.sh put them in the job's environment)
+          AWS_SECRET_ACCESS_KEY: ''
         with:
           name: state-batch-privacy-${{ github.run_id }}
           path: data/build/batch/out/privacy-findings.json

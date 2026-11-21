@@ -11,6 +11,7 @@ Run from pipeline/: python -m pytest tests -q
 """
 from __future__ import annotations
 
+import json
 import os
 import re
 import shutil
@@ -187,8 +188,10 @@ def test_the_probe_logs_host_and_path_only_and_never_a_body_or_curls_words(tmp_p
     (bin_dir / "curl").chmod(0o755)
     urls = ("https://gis.example.gov/a/b?where=1&token=SECRETTOKEN https://fail.example.gov/x?k=SECRETTOKEN "
             "https://user:pw@private.example.gov/y ftp://x.example.gov/z")
+    event = tmp_path / "event.json"                       # the dispatch's inputs, as the runner hands them over
+    event.write_text(json.dumps({"inputs": {"urls": urls, "save": False}}))
     p = subprocess.run(["bash", "-e", "-c", run], cwd=tmp_path, capture_output=True, text=True, timeout=60,
-                       env={**os.environ, "PATH": f"{bin_dir}:{os.environ['PATH']}", "URLS": urls,
+                       env={**os.environ, "PATH": f"{bin_dir}:{os.environ['PATH']}", "GITHUB_EVENT_PATH": str(event),
                             "CURL_LOG": str(tmp_path / "curl.log")})
     assert p.returncode == 0, p.stdout + p.stderr
     log = p.stdout + p.stderr
@@ -238,3 +241,43 @@ def test_security_md_names_the_contact_page_and_no_address():
     assert not re.search(r"[\w.+-]+@[\w-]+\.[\w.-]+", text)
     for word in ("public records", "No secrets", "bucket"):
         assert word.lower() in text.lower(), word
+
+
+# ------------------------------------------------------------------ Astra review 2026-11-21 (fix pass)
+
+def test_the_probe_never_puts_the_addresses_in_a_step_env_or_the_script_text():
+    # P1-1: the runner prints a step's env and its script before running it; the addresses come from the event file
+    for _, st in steps(PROBE):
+        assert "inputs.urls" not in str(st.get("env") or {}) and "inputs.urls" not in (st.get("run") or "")
+    assert "GITHUB_EVENT_PATH" in step(PROBE, "One ordinary request")["run"]
+
+
+def test_the_steps_that_need_no_storage_hold_no_storage_keys():
+    # P2-10: scripts/r2-s3-keys.sh puts the S3 keys in the job's environment; the steps after it that never reach
+    # R2 (the poppler install, the release, the artifacts, the publish steps, the extracts rewrite) blank them
+    want = {"AWS_ACCESS_KEY_ID": "", "AWS_SECRET_ACCESS_KEY": ""}
+    names = [("refresh.yml", "System tools"), ("refresh.yml", "Dataset release (daily"),
+             ("state-build.yml", "Keep the summary"), ("state-build.yml", "Branch and pull request"),
+             ("state-build.yml", "Keep the privacy scan"), ("obl-extracts.yml", "Rewrite the live states"),
+             ("obl-extracts.yml", "Branch and pull request")]
+    for wf, prefix in names:
+        env = step(ROOT / ".github/workflows" / wf, prefix).get("env") or {}
+        assert {k: env.get(k) for k in want} == want, f"{wf}: {prefix}"
+
+
+def test_the_state_batch_logs_and_their_artifacts_are_filtered_before_they_are_written(tmp_path, monkeypatch, capsys):
+    # P1-5: _stream writes the steps' output to data/build/batch/out/*.log, which is uploaded as an artifact
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("state_batch_t", ROOT / "scripts" / "state_batch.py")
+    sb = importlib.util.module_from_spec(spec)
+    import sys as _sys
+    monkeypatch.setitem(_sys.modules, "state_batch_t", sb)       # its dataclasses look their module up
+    spec.loader.exec_module(sb)
+    cmd = sb.Cmd("waters", [_sys.executable, "-c",
+                            "print('GET https://gis.example.gov/q?where=1&token=SECRETTOKEN'); print('done')"])
+    rc, lines = sb._stream(cmd, tmp_path, tmp_path / "waters.log")
+    log = (tmp_path / "waters.log").read_text()
+    out = capsys.readouterr().out
+    assert rc == 0 and "done" in log
+    for text in (log, out, "\n".join(lines)):
+        assert "SECRETTOKEN" not in text and "https://gis.example.gov/q" in text

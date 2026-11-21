@@ -6,7 +6,9 @@ responses in data/raw/<source>/, personal fields stripped, nothing invented.
 from __future__ import annotations
 
 import json
+import os
 import re
+import sys
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
@@ -661,8 +663,21 @@ _HEX_ID = re.compile(r"(?i)(?<![0-9a-z])(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[
 _LONG_TOKEN = re.compile(r"(?<![\w/.-])[A-Za-z0-9_+/=-]{40,}(?![\w/.-])")
 # the meta keys that hold failure text (a key such as "failed" or "permits_failed" holds ids or counts, which a run may
 # read back, and is left alone; their text is made with error_text where it is written)
-_ERRORISH_KEY = re.compile(r"(?i)^(?:errors?|exception|problems|last_error|[a-z0-9]+(?:_[a-z0-9]+)*_(?:error|errors))$")
+_ERRORISH_KEY = re.compile(r"(?i)^(?:errors?|exception|problems|last_error|unread|"
+                           r"[a-z0-9]+(?:_[a-z0-9]+)*_(?:error|errors))$")
+_CODE_IN_BODY = re.compile(r"""["']code["']\s*:\s*["']?(\d{3,5})\b""")
 _EXC_NAME = re.compile(r"^[A-Za-z_][A-Za-z0-9_]{0,60}$")
+
+
+def url_label(url) -> str:
+    """A failed document's name for a message: the last part of its path (no query string), else its host."""
+    try:
+        from urllib.parse import urlsplit
+        u = urlsplit(str(url))
+    except ValueError:
+        return "[address]"
+    name = u.path.rstrip("/").rsplit("/", 1)[-1]
+    return name or (u.hostname or "[address]")
 
 
 def url_host(url) -> str | None:
@@ -723,9 +738,70 @@ def _tidy(text: str, limit: int) -> str:
     return t if len(t) <= limit else t[:limit - 1].rstrip() + "…"
 
 
+def _body_end(t: str, s: int) -> int:
+    """Where an answer quoted into a message from s ends: its closing bracket (double-quoted strings inside skipped),
+    markup's ">", its closing quote; the end of the text when it is never closed."""
+    c = t[s]
+    if c in "{[":
+        depth, in_str, j = 0, False, s
+        while j < len(t):
+            ch = t[j]
+            if in_str:
+                if ch == "\\":
+                    j += 1
+                elif ch == '"':
+                    in_str = False
+            elif ch == '"':
+                in_str = True
+            elif ch in "{[":
+                depth += 1
+            elif ch in "}]":
+                depth -= 1
+                if depth == 0:
+                    return j + 1
+            j += 1
+        return len(t)
+    if c == "<":
+        j = t.find(">", s + 1)
+        return len(t) if j < 0 else j + 1
+    if c == "b" and s + 1 < len(t) and t[s + 1] in "'\"":
+        j = t.find(t[s + 1], s + 2)
+        return len(t) if j < 0 else j + 1
+    if c in "'\"":
+        j = t.find(c, s + 1)
+        return len(t) if j < 0 else j + 1
+    return s + 1
+
+
+def _body_spans(t: str) -> list[tuple[int, int]]:
+    out, i = [], 0
+    while True:
+        m = _BODY_START.search(t, i)
+        if not m:
+            return out
+        e = max(_body_end(t, m.start()), m.start() + 1)
+        out.append((m.start(), e))
+        i = e
+
+
+def remove_bodies(text: str) -> str:
+    """Every answer quoted into a message taken out whole (a JSON object or list, markup, a bytes literal, a long
+    quoted string), up to its end, or to the end of the text when it is never closed. An object's numeric "code"
+    stays, as " (code 403)": a refusal still reads as one (export/coverage.py)."""
+    t, out, i = str(text), "", 0
+    for s, e in _body_spans(t):
+        out += t[i:s]
+        code = _CODE_IN_BODY.search(t, s, e) if t[s] in "{[" else None
+        if code:
+            out = out.rstrip().rstrip(":").rstrip() + f" (code {code.group(1)}) "
+        i = e
+    return out + t[i:]
+
+
 def clean_error_text(text, limit: int = 300) -> str:
     """One failure's words as they may be kept: up to where a library's or a transport's own text begins, which
-    becomes its category and host; any quoted answer cut off; addresses as their host; secrets and ids out."""
+    becomes its category and host; any quoted answer taken out (remove_bodies); addresses as their host; secrets,
+    ids and the job's account id out of the whole result, host included."""
     t = str(text or "")[:max(limit, 300) * 4]       # the regular expressions below never see a whole body
     m = _LIBRARY_TEXT.search(t)
     tail = ""
@@ -737,15 +813,12 @@ def clean_error_text(text, limit: int = 300) -> str:
         if host:
             tail += f" at {host}"
         t = t[:m.start()]
-    b = _BODY_START.search(t)
-    if b:
-        t = t[:b.start()]
+    t = remove_bodies(t)
     t = _URL_RE.sub(lambda u: url_host(u.group(0)) or "[address]", t)
-    t = redact_secrets(t)
     t = _tidy(t, limit)
     if tail:
         t = f"{t}: {tail}" if t else tail
-    return _tidy(t, limit)
+    return _tidy(redact_secrets(t), limit)
 
 
 def _raised_in_own_code(e: BaseException) -> bool:
@@ -822,7 +895,7 @@ def error_detail(e: BaseException, limit: int = 300) -> str:
     if cat == "failed":
         cat = text_category(str(e))
     host = error_host(e)
-    return _tidy(cat + (f" at {host}" if host else ""), limit)
+    return _tidy(redact_secrets(cat + (f" at {host}" if host else "")), limit)
 
 
 def error_text(e: BaseException, limit: int = 300) -> str:
@@ -851,7 +924,16 @@ def public_error(value, limit: int = 1000):
         return None
     if isinstance(value, BaseException):
         return error_text(value, limit)
-    parts = [clean_error_text(p, limit) for p in re.split(r";\s+", str(value))]
+    t = str(value)[:max(limit, 300) * 4]
+    # split at "; " only outside a quoted answer, so a semicolon inside a body never makes a part of its own
+    spans = _body_spans(t)
+    cuts = [m for m in re.finditer(r";\s+", t) if not any(s <= m.start() < e for s, e in spans)]
+    pieces, i = [], 0
+    for m in cuts:
+        pieces.append(t[i:m.start()])
+        i = m.end()
+    pieces.append(t[i:])
+    parts = [clean_error_text(p, limit) for p in pieces]
     return _tidy("; ".join(p for p in parts if p), limit) or "failed"
 
 
@@ -877,6 +959,36 @@ def public_meta_errors(obj, _under: bool = False):
     if _under and isinstance(obj, str):
         return public_error(obj)
     return obj
+
+
+def safe_traceback(e: BaseException) -> str:
+    """A traceback fit for a public log: the frames (file, line, function, the code line) and error_text, never the
+    exception's own words or a chained exception's."""
+    import traceback
+    return f"Traceback (most recent call last):\n{''.join(traceback.format_tb(e.__traceback__))}{error_text(e)}\n"
+
+
+def _safe_excepthook(tp, value, tb) -> None:
+    try:
+        e = value if value is not None else tp()
+        sys.stderr.write(safe_traceback(e.with_traceback(tb)))
+        sys.stderr.flush()
+    except Exception:  # noqa: BLE001 - the plain hook rather than nothing
+        sys.__excepthook__(tp, value, tb)
+
+
+def _safe_thread_hook(args) -> None:
+    if args.exc_type is SystemExit:
+        return
+    _safe_excepthook(args.exc_type, args.exc_value, args.exc_traceback)
+
+
+# On GitHub's runner (the logs are public) an exception no module caught prints safe_traceback (security review
+# 2026-11-17 #7, Astra 2026-11-21 P1-4); a developer's run keeps Python's own traceback.
+if os.environ.get("GITHUB_ACTIONS") == "true":
+    import threading
+    sys.excepthook = _safe_excepthook
+    threading.excepthook = _safe_thread_hook
 
 
 def write_events(source_id: str, records: list[dict], ok: bool = True, error: str | None = None, meta: dict | None = None,

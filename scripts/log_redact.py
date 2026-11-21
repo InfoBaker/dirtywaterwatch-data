@@ -12,8 +12,9 @@ openboatlaunch extracts) pass their output through this filter, line by line:
   - scripts/wrangler_redact.py's filter: a line naming the token's account is replaced, the R2 endpoint and the
     account id (R2_S3_ENDPOINT, CLOUDFLARE_ACCOUNT_ID) become [endpoint] and [account], an e-mail address [redacted].
 Everything else passes unchanged, a line at a time and flushed, so the log keeps its order and GitHub's ::warning::
-and ::error:: lines still work. The filter never stops early and always exits 0: a line it cannot read is replaced
-by a fixed line, so the step's exit code is the pipeline's (the step sets pipefail). Bodies of answers are kept out
+and ::error:: lines still work. A line over 1 MiB is replaced by a fixed line (read in pieces, a query string could
+straddle two). The filter never stops early and always exits 0: a line it cannot read is replaced by a fixed line,
+so the step's exit code is the pipeline's (the step sets pipefail). Bodies of answers are kept out
 of the log by the pipeline itself (pipeline/common.py error_text).
 """
 from __future__ import annotations
@@ -30,6 +31,8 @@ SECRET_PARAM = re.compile(rb"(?i)\b((?:api[_-]?key|apikey|access[_-]?key|access_
                           rb"signature|sig|session(?:id)?)=)[^&\s'\";,)]+")
 BEARER = re.compile(rb"(?i)\b(bearer|basic)\s+[A-Za-z0-9._~+/=-]{8,}")
 UNREADABLE = b"[log_redact: a line was withheld]\n"
+LINE_MAX = 1 << 20
+TOO_LONG = b"[log_redact: a line over 1 MiB was withheld]\n"
 
 
 def _wrangler_redact():
@@ -69,13 +72,19 @@ def main() -> int:
     src, dst = sys.stdin.buffer, sys.stdout.buffer
     while True:
         try:
-            line = src.readline(1 << 20)            # a longer line goes through in pieces
+            line = src.readline(LINE_MAX)
+            if len(line) == LINE_MAX and not line.endswith(b"\n"):
+                # a line too long to read whole is withheld and drained: a piece of it read on its own could carry
+                # the query string or the key of an address that began in the piece before (Astra 2026-11-21 P2-9)
+                while (more := src.readline(LINE_MAX)) and not more.endswith(b"\n"):
+                    pass
+                line = TOO_LONG
         except Exception:  # noqa: BLE001 - nothing more can be read
             break
         if not line:
             break
         try:
-            out = redact_line(line)
+            out = line if line is TOO_LONG else redact_line(line)
         except Exception:  # noqa: BLE001
             out = UNREADABLE
         try:

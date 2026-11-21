@@ -197,7 +197,8 @@ class Judge:
             except ValueError:
                 parsed = None
             if not isinstance(parsed, dict):
-                raise RuntimeError(f"no JSON answer: {text[:160]}")      # never cached
+                # never cached; the answer's words stay out of the error and the model log (security #7)
+                raise RuntimeError(f"no JSON answer ({len(text)} characters)")
             return {"parsed": parsed, "raw": text[:2000], "model": d.get("model")}, u, float(cost or 0)
 
         e = self._cached_or_call("luna", model, version, payload, call)

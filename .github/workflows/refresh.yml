@@ -108,6 +108,9 @@ jobs:
         # ingest/il_mwrd_lake_reversals.py reads the PDF with poppler's pdftotext; without it that feed writes ok=False
         # and keeps its previous records, so a failed install warns and never stops the run
         if: steps.pause.outputs.paused != '1'
+        env:
+          AWS_ACCESS_KEY_ID: ''       # no storage keys here (scripts/r2-s3-keys.sh put them in the job's environment)
+          AWS_SECRET_ACCESS_KEY: ''
         run: |
           command -v pdftotext >/dev/null || sudo apt-get install -y -qq poppler-utils >/dev/null \
             || echo "::warning::poppler-utils could not be installed; MWRD's reversals table is not read this run"
@@ -277,6 +280,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           WEEKLY: ${{ steps.release.outputs.weekly }}
+          AWS_ACCESS_KEY_ID: ''       # no storage keys here (scripts/r2-s3-keys.sh put them in the job's environment)
+          AWS_SECRET_ACCESS_KEY: ''
         run: |
           [ -f data/build/export-blocked.json ] && { echo "export blocked; no release"; exit 0; }
           (cd out && zip -qr ../dataset.zip . -x 'csv/*')

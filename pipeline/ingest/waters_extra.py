@@ -56,7 +56,7 @@ import shapely
 from shapely.ops import linemerge, polygonize, unary_union
 
 from common import DATA_DIR, HEADERS, RAW_DIR, ROOT, now_iso, read_json, write_json
-from common import error_detail
+from common import error_detail, text_category
 
 OVERPASS = "https://overpass-api.de/api/interpreter"
 CACHE_DIR = RAW_DIR / "osm-waters"
@@ -482,7 +482,7 @@ def fetch(spec: dict, refresh: bool, offline: bool) -> tuple[dict, bool]:
         r.raise_for_status()
         d = r.json()
         if d.get("remark") and "error" in d["remark"].lower():
-            print(f"  {key}: remark {d['remark'][:160]}; retrying")
+            print(f"  {key}: remark ({text_category(d['remark'])}); retrying")   # never Overpass's words
             time.sleep(20 * (attempt + 1))
             continue
         d["_query"] = q

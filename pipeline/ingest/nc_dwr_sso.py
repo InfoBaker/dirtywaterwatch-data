@@ -431,7 +431,7 @@ def query_layer(sess: requests.Session, url: str, fields: list[str], oid: str) -
         d = r.json()
         if "error" in d:
             if unavailable(d["error"]):
-                raise LayerUnavailable(f"{url}: {d['error'].get('message')}")
+                raise LayerUnavailable(f"{url_host(url)}: {answer_error(d['error'])}")   # a code, never its message
             # never ask for every field: the Survey123 layers hold reporters' and staff names
             raise RuntimeError(f"ArcGIS error: {d['error']}")
         pages.append(d)

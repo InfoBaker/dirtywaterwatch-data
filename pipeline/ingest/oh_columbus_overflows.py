@@ -56,7 +56,7 @@ from pathlib import Path
 import requests
 
 from common import DATA_DIR, HEADERS, event, now_iso, save_raw, write_events
-from common import error_detail, error_text
+from common import answer_error, error_detail, error_text, url_host
 from ingest.oh_neorsd_cso import scrub_location
 
 SOURCE_ID = "oh-columbus-sewer-overflow"
@@ -87,7 +87,7 @@ def _get(sess, url: str, params: dict) -> dict:
     r.raise_for_status()
     d = r.json()
     if "error" in d:
-        raise ValueError(f"{url} answered an error: {d['error'].get('message')}")
+        raise ValueError(f"{url_host(url)} answered {answer_error(d['error'])}")   # a code, never its message
     return d
 
 

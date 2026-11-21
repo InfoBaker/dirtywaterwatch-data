@@ -9,6 +9,7 @@ from __future__ import annotations
 import ast
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -56,8 +57,8 @@ def test_public_error_keeps_the_pipelines_words_the_kind_the_category_and_the_ho
     assert public_error(LIBRARY_TEXTS[0]) == "HTTPError: HTTP 404 at gis.example.gov"
     assert public_error(LIBRARY_TEXTS[1]) == "ConnectionError: refused at gis.example.gov"
     assert public_error(LIBRARY_TEXTS[2]) == "ReadTimeout: timeout at gis.example.gov"
-    assert public_error(LIBRARY_TEXTS[3]) == "ValueError: no features"
-    assert public_error(LIBRARY_TEXTS[4]) == "RuntimeError: HTTP 401"
+    assert public_error(LIBRARY_TEXTS[3]) == "ValueError: no features (code 498)"   # the answer's code stays
+    assert public_error(LIBRARY_TEXTS[4]) == "RuntimeError: HTTP 401 (code 498)"
     assert public_error("MA0101508:82220: " + LIBRARY_TEXTS[0]) == "MA0101508:82220: HTTPError: HTTP 404 at gis.example.gov"
     # the pipeline's own sentences pass as they were, part by part
     assert public_error("3 notice(s) unreadable; advisory wording not recognised: Beach closed") == \
@@ -99,6 +100,8 @@ def test_error_text_of_a_library_exception_is_its_kind_category_and_host():
 
 def test_error_text_of_the_pipelines_own_exception_keeps_its_words_up_to_the_answer():
     e = _raise(ValueError(f"layer 3 did not answer with features: {BODY}"))
+    assert error_text(e) == "ValueError: layer 3 did not answer with features (code 498)"
+    e = _raise(ValueError("layer 3 did not answer with features: {'features': None, 'token': 'SECRETTOKEN'}"))
     assert error_text(e) == "ValueError: layer 3 did not answer with features"
     e = _raise(RuntimeError(f"no CSRF_TOKEN cookie from {QUERY_URL}"))
     assert error_text(e) == "RuntimeError: no CSRF_TOKEN cookie from gis.example.gov"
@@ -262,9 +265,93 @@ def test_the_log_filter_keeps_scheme_host_and_path_and_drops_queries_users_and_k
     ]
 
 
-def test_the_log_filter_passes_bytes_it_cannot_decode_and_long_lines_and_always_exits_0():
+def test_the_log_filter_passes_bytes_it_cannot_decode_withholds_an_overlong_line_and_always_exits_0():
     data = b"binary \xff\xfe line\n" + b"x" * (3 << 20) + b"\nlast line without newline"
     p = run_filter(data)
     assert p.returncode == 0
     assert p.stdout.startswith(b"binary \xff\xfe line\n") and p.stdout.endswith(b"last line without newline")
-    assert len(p.stdout) == len(data)
+    assert len(p.stdout) < 200 and b"withheld" in p.stdout
+
+
+# ------------------------------------------------------------------ Astra review 2026-11-21 (fix pass)
+
+def test_a_semicolon_inside_an_answer_never_splits_it_into_a_kept_part():
+    # P1-3: the body is taken out whole before the parts are split
+    out = public_error('ValueError: layer: {"message": "failure; BODY_SENTINEL", "code": 400}; 2 rows unread')
+    assert "BODY_SENTINEL" not in out and out.endswith("2 rows unread")
+    out = public_error("RuntimeError: x: {'error': {'message': 'a; LEFT_OPEN")
+    assert "LEFT_OPEN" not in out
+
+
+def test_an_answers_numeric_code_is_kept_and_a_refusal_still_reads_as_one():
+    # P2-8: ArcGIS's error object (and any {"code": ...} answer) keeps its code, so coverage still says "refused"
+    from export.coverage import unreadable
+    from ingest.generic.arcgis import ArcGISError
+    e = _raise(ArcGISError({"code": 403, "message": "Forbidden: secret words", "details": []}))
+    assert error_text(e) == "ArcGISError: ArcGIS error (code 403)"
+    assert unreadable([{"ok": False, "last_ok_at": None, "error": error_text(e)}]) == "refused"
+    assert public_error("ValueError: layer 3 answered an error: {'code': 498, 'message': 'Invalid token'}") == \
+        "ValueError: layer 3 answered an error (code 498)"
+
+
+def test_a_host_that_holds_the_account_id_is_redacted_too(monkeypatch):
+    # P2-7: the host is redacted with the rest, on the first pass
+    monkeypatch.setenv("CLOUDFLARE_ACCOUNT_ID", ACCOUNT)
+    r = requests.Response()
+    r.status_code, r.url = 403, f"https://{ACCOUNT}.r2.cloudflarestorage.com/b/k?X-Amz-Signature=1"
+    try:
+        r.raise_for_status()
+    except requests.HTTPError as e:
+        assert ACCOUNT not in error_text(e)
+    legacy = f"HTTPError: 403 Client Error: Forbidden for url: https://{ACCOUNT}.r2.cloudflarestorage.com/b/k?x=1"
+    once = public_error(legacy)
+    assert ACCOUNT not in once and public_error(once) == once
+
+
+def test_provider_messages_raised_by_the_modules_are_kept_as_codes():
+    # P1-2: an error object's message never rides in an exception the pipeline raises
+    src = {p: (ROOT / "pipeline" / p).read_text() for p in
+           ("ingest/oh_columbus_overflows.py", "ingest/nc_dwr_sso.py", "ingest/generic/socrata.py", "build/llm_judge.py")}
+    assert ".get('message')" not in src["ingest/oh_columbus_overflows.py"]
+    assert "d['error'].get('message')" not in src["ingest/nc_dwr_sso.py"]
+    assert "page.get('message')" not in src["ingest/generic/socrata.py"]
+    assert "no JSON answer: {text" not in src["build/llm_judge.py"]
+
+
+def test_a_failed_documents_label_and_the_unread_layout_keep_no_query_string():
+    # P1-6
+    from common import url_label
+    assert url_label("https://x.example.gov/docs/week%2012.pdf?customer=SECRET#p") == "week%2012.pdf"
+    assert url_label("https://x.example.gov/") == "x.example.gov"
+    meta = public_meta_errors({"unread": {"https://x.example.gov/a.pdf?customer=SECRET": "ValueError: bad"}})
+    assert "SECRET" not in json.dumps(meta)
+    for p in ("ingest/in_fort_wayne_cso.py", "ingest/oh_cso_pdf_notices.py"):
+        assert "rsplit('/', 1)[-1]}: " not in (ROOT / "pipeline" / p).read_text(), p
+
+
+def test_an_uncaught_exception_on_the_runner_prints_its_frames_and_error_text_only(tmp_path):
+    # P1-4: a module that crashes on GitHub's runner prints no message of a library or provider
+    code = "import common, os\nraise ValueError(os.environ['MSG'])\n"      # the message only at run time
+    msg = f'no features: {{"token": "SECRETTOKEN"}} at {QUERY_URL}'
+    run = lambda env: subprocess.run([sys.executable, "-c", code], cwd=ROOT / "pipeline", capture_output=True,
+                                     text=True, timeout=60, env={**os.environ, "MSG": msg, **env})
+    p = run({"GITHUB_ACTIONS": "true"})
+    assert p.returncode == 1 and "Traceback" in p.stderr and "\nValueError: " in p.stderr
+    assert "SECRETTOKEN" not in p.stderr and "?" not in p.stderr
+    assert "SECRETTOKEN" in run({"GITHUB_ACTIONS": ""}).stderr          # a developer's run is unchanged
+
+
+def test_no_module_prints_a_raw_traceback():
+    files = [p for p in (ROOT / "pipeline").rglob("*.py")
+             if ".venv" not in p.parts and "tests" not in p.parts and p.name != "common.py"]
+    bad = [f"{p.relative_to(ROOT)}" for p in files
+           if re.search(r"traceback\.(print_exc|format_exc|print_exception)\(", p.read_text())]
+    assert not bad, bad
+
+
+def test_the_log_filter_withholds_a_line_too_long_to_read_whole():
+    # P2-9: a line over the limit is never cut into pieces that each pass on their own
+    data = b"a" * ((1 << 20) - 3) + b"?token=SECRETTOKEN&x=1 tail\nnext line\n"
+    p = run_filter(data)
+    assert p.returncode == 0 and b"SECRETTOKEN" not in p.stdout
+    assert p.stdout.endswith(b"next line\n") and b"withheld" in p.stdout

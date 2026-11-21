@@ -70,6 +70,9 @@ jobs:
       - name: Rewrite the live states' extracts
         # the output reaches the public log through scripts/log_redact.py (security review 2026-11-17 #7); pipefail
         # keeps the rewrite's exit code
+        env:
+          AWS_ACCESS_KEY_ID: ''       # no storage keys here (scripts/r2-s3-keys.sh put them in the job's environment)
+          AWS_SECRET_ACCESS_KEY: ''
         run: |
           set -o pipefail
           pipeline/.venv/bin/python scripts/obl_extracts.py run --body data/build/obl-extracts-pr.md 2>&1 \
@@ -77,4 +80,6 @@ jobs:
       - name: Branch and pull request (the changed extracts, for a person to review)
         env:
           GH_TOKEN: ${{ github.token }}
+          AWS_ACCESS_KEY_ID: ''       # no storage keys here (scripts/r2-s3-keys.sh put them in the job's environment)
+          AWS_SECRET_ACCESS_KEY: ''
         run: pipeline/.venv/bin/python scripts/obl_extracts.py publish --body data/build/obl-extracts-pr.md

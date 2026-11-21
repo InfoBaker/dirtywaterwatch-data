@@ -186,7 +186,7 @@ from shapely.strtree import STRtree
 from build import status as S
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, ROOT, gnis_num, now_iso, same_gnis, read_json,
                     write_json, write_rows_json)
-from common import answer_error, error_detail, error_text, text_category, url_host
+from common import answer_error, error_detail, error_text, safe_traceback, text_category, url_host
 from ingest import waters_extra as WX
 
 NLDI_HYDROLOCATION = "https://api.water.usgs.gov/nldi/linked-data/hydrolocation"
@@ -4574,8 +4574,7 @@ def main(argv=None):
         except BudgetExhausted as ex:
             run.stop(t, ex)
         except Exception as ex:      # one bad feature must not stop the run
-            import traceback
-            traceback.print_exc()
+            sys.stderr.write(safe_traceback(ex))     # frames and error_text, never the exception's own words
             run.problems.append(f"{t['key']}: {error_text(ex)}")
             row = run.rows[-1] if run.rows and run.rows[-1]["_key"] == t["key"] else None
             if row is not None and not row["how"]:
@@ -4818,8 +4817,7 @@ def state_main(args) -> int:
         except BudgetExhausted as ex:
             run.stop(t, ex)
         except Exception as ex:      # one bad feature must not stop the run
-            import traceback
-            traceback.print_exc()
+            sys.stderr.write(safe_traceback(ex))     # frames and error_text, never the exception's own words
             run.problems.append(f"{t['key']}: {error_text(ex)}")
             row = run.rows[-1] if run.rows and run.rows[-1]["_key"] == t["key"] else None
             if row is not None and not row["how"]:
@@ -5531,8 +5529,7 @@ def names_main(args) -> int:
         except BudgetExhausted as ex:
             run.stop(t, ex)
         except Exception as ex:      # one bad name must not stop the run
-            import traceback
-            traceback.print_exc()
+            sys.stderr.write(safe_traceback(ex))     # frames and error_text, never the exception's own words
             run.problems.append(f"{t['key']}: {error_text(ex)}")
             row["reason"] = row["reason"] or f"build error ({error_text(ex)})"
         run.checkpoint(i, len(targets))

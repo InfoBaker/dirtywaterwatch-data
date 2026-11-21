@@ -33,7 +33,7 @@ from urllib.parse import urljoin
 import requests
 
 from common import HEADERS, read_json, save_raw, write_events, write_json
-from common import error_detail, error_text
+from common import error_detail, error_text, url_label
 
 
 class NoticeError(ValueError):
@@ -135,7 +135,7 @@ def run_feed(source_id: str, index_url: str, pattern: re.Pattern, parse: Callabl
     if unread:
         meta["unread"] = unread
         write_events(source_id, recs, ok=False, partial=True, meta=meta, path=out,
-                     error="notices not read: " + "; ".join(f"{u.rsplit('/', 1)[-1]}: {why}" for u, why in unread.items()))
+                     error="notices not read: " + "; ".join(f"{url_label(u)}: {why}" for u, why in unread.items()))
         print(f"{source_id}: PARTIAL {len(recs)} records; {len(unread)} notices not read", file=sys.stderr)
         return 1
     write_events(source_id, recs, meta=meta, path=out)

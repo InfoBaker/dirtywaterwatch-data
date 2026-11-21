@@ -12,8 +12,8 @@ we confirm.
 - The pipeline that collects public records of sewage discharges, beach advisories and algal blooms, and the
   registries behind them: outfalls, operators, water bodies, public-notice channels and reporting rules.
 - Public records only. Each record carries its source, the source's own times and our fetch time.
-- No secrets. Credentials live in the repository's encrypted settings and reach only the workflow steps that use
-  them. Workflow logs leave out account details, keys and the query strings of addresses.
+- No secrets. Credentials live in the repository's encrypted settings and are given only to the workflow steps
+  that use them. Workflow logs leave out account details, keys and the query strings of addresses.
 
 Personal details are removed from what we publish: a private person's name, phone number, e-mail address and
 house number. The sources are public records, so a detail can slip through. When we find one, or someone reports

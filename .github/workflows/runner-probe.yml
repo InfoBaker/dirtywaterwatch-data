@@ -44,10 +44,11 @@ jobs:
             scripts/wrangler_redact.py
           sparse-checkout-cone-mode: false
       - name: One ordinary request per address
-        env:
-          URLS: ${{ inputs.urls }}
+        # the addresses are read from the dispatch's event file, never put in the step's env or this text: the runner
+        # prints both in the public log before the script runs (Astra 2026-11-21 P1-1)
         run: |
           set -u -o pipefail
+          URLS=$(python3 -I -c 'import json, os; print((json.load(open(os.environ["GITHUB_EVENT_PATH"])).get("inputs") or {}).get("urls") or "")')
           UA=$(grep -m1 -o '"User-Agent": "[^"]*"' pipeline/common.py | cut -d'"' -f4)
           [ -n "$UA" ] || { echo "::error::the pipeline's user agent was not found in pipeline/common.py"; exit 1; }
           why() {   # curl's exit code as a kind, never its message
