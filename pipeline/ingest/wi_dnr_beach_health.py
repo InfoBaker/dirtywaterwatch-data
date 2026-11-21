@@ -87,6 +87,7 @@ import requests
 from urllib3.exceptions import ReadTimeoutError
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_text
 from ingest.de_dnrec_derns import scrub
 from ingest.de_sc_periods import extend as extend_periods
 
@@ -630,7 +631,7 @@ def run(args) -> int:
             c.raise_for_status()
             feats = safe_features(check_read(r.json(), c.json(), prev.get("last_count")))
         except Exception as e:                         # any failure: nothing lifted, greyed, dropped or saved
-            write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}"[:300], meta=META, path=out)
+            write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}"[:300], meta=META, path=out)
             print(f"{SOURCE_ID}: read failed: {type(e).__name__}", file=sys.stderr)
             return 1
         try:
@@ -638,18 +639,18 @@ def run(args) -> int:
             p.raise_for_status()
             table = check_table(parse_table(p.text), prev.get("last_table_count"))
         except Exception as e:                         # the table alone failed: its held records stand
-            table, table_err = None, f"the report table: {type(e).__name__}: {e}"[:300]
+            table, table_err = None, f"the report table: {error_text(e)}"[:300]
         save_raw(SOURCE_ID, json.dumps({"format": SAFE_FORMAT, "beaches": feats, "table": table}), "json")
     try:
         recs, new, n = records(feats, prev, now, table, table_ok=table is not None)
     except ValueError as e:
         if table is None:
-            write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}"[:300], meta=META, path=out)
+            write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}"[:300], meta=META, path=out)
             return 1
-        table_err = f"the report table: {type(e).__name__}: {e}"[:300]     # a table that cannot be applied
+        table_err = f"the report table: {error_text(e)}"[:300]     # a table that cannot be applied
         recs, new, n = records(feats, prev, now, None, table_ok=False)
     except Exception as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}"[:300], meta=META, path=out)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}"[:300], meta=META, path=out)
         return 1
     if table_err:
         # the layer's read stands; the table's held records are carried, and health is false for this read

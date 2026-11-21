@@ -45,6 +45,7 @@ import time
 import requests
 
 from common import BROWSER_HEADERS, BUILD_DIR, HEADERS, ROOT, now_iso, read_json, save_raw, write_json
+from common import error_text
 
 SOURCE_ID = "nj-cso-likely"
 URL = "https://njcsonotifications.com/?handler=Status"
@@ -68,7 +69,7 @@ def fetch() -> tuple[dict | None, bytes | None, str | None]:
                 raise ValueError(f"no permittees: {str(js)[:200]}")
             return js, r.content, None
         except (requests.RequestException, ValueError) as e:
-            err = f"{type(e).__name__}: {e}"
+            err = f"{error_text(e)}"
             time.sleep(2 * (i + 1))
     return None, None, err
 

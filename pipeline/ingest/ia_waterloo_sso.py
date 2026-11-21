@@ -50,6 +50,7 @@ import requests
 
 from common import EVENTS_DIR, HEADERS, end_after, event, now_iso, read_json, save_raw, scrub_text, \
     strip_house_numbers, write_events
+from common import error_detail
 from ingest.ia_id_privacy import home_place
 from ingest.ia_id_privacy import scrub as strict_scrub
 
@@ -239,7 +240,7 @@ def build(paras: list[str], at: str, previous: list[dict]) -> tuple[list[dict], 
                              authority=AUTHORITY,
                              source_url=URL, raw={"notice": text, "time_zone": TZ_NAME, "county": "Black Hawk County",
                                                   "city": "Waterloo", "state": "IA"},
-                             parse_error=f"{e}: {text[:120]!r}")
+                             parse_error=f"{error_detail(e)}: {text[:120]!r}")
             continue
         sid = next(ids)
         if home_place(f["text"], f["location"]):
@@ -323,8 +324,8 @@ def main(argv=None) -> int:
         if not paras and (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records"):
             raise ValueError("the list is empty where notices were listed before: a failed read")
     except (requests.RequestException, OSError, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=error_detail(e))
+        print(f"{SOURCE_ID}: {error_detail(e)}", file=sys.stderr)
         return 1
     prev_doc = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
     scrubbed = [strict_scrub(strip_house_numbers(scrub_text(p))) for p in paras]

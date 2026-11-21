@@ -53,6 +53,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail
 from ingest.mo_kc_water_news import (TIME, clock, find_date, migrate_water_text, safe_link, safe_text, sentences, volume,
                                      water_text, waters)
 
@@ -287,8 +288,8 @@ def main(argv=None) -> int:
         # fails the run with the earlier records kept, never escapes without a health write (re-review P2-4)
         recs, stats = run(pages, prev, now_iso())
     except (requests.RequestException, OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=error_detail(e))
+        print(f"{SOURCE_ID}: {error_detail(e)}", file=sys.stderr)
         return 1
     out = write_events(SOURCE_ID, recs, meta={
         "registry_ids": [SOURCE_ID], "url": HOME, "api": API, **stats,

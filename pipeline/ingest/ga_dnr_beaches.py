@@ -42,6 +42,7 @@ from pathlib import Path
 import requests
 
 from common import EVENTS_DIR, HEADERS, RAW_DIR, event, now_iso, read_json, write_events
+from common import error_text
 
 SOURCE_ID = "ga-dnr-beaches"
 URL = "https://webapp.gadnr.org/beach/working/beach.geojson"
@@ -184,8 +185,8 @@ def main(argv=None) -> int:
         if not n_beaches or n_beaches < prev_n / 2:
             raise ValueError(f"{n_beaches} beaches in the file (previous poll {prev_n})")
     except Exception as e:  # noqa: BLE001 - an outage keeps the advisories as they were
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_text(e)}", file=sys.stderr)
         return 1
     records, n = apply_snapshot(prev_doc.get("records", []), doc, {"fetched_at": fetched_at, "last_modified": lm})
     meta = {"url": URL, "page_url": PAGE_URL, "last_modified": lm, "beaches": n_beaches, "changes": n,

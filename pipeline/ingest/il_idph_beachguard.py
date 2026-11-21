@@ -50,6 +50,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
+from common import error_detail, error_text
 
 SOURCE_ID = "il-idph-beachguard"
 BASE = "https://idph.illinois.gov/envhealth/ilbeaches/public/"
@@ -270,8 +271,8 @@ def main(argv=None) -> int:
         r.raise_for_status()
         items = parse_rss(r.content)
     except (requests.RequestException, ET.ParseError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"RSS: {type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"RSS: {error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     details = fetch_details(items, state, now, sess)
     recs, meta = run(state, r.content, details, now)

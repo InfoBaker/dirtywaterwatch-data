@@ -46,6 +46,7 @@ from pathlib import Path
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text
 
 SOURCE_ID = "ar-adh-swim-beach-status"
 URL = ("https://healthy.arkansas.gov/programs-services/public-health-safety/marine-sanitation/"
@@ -212,8 +213,8 @@ def main(argv=None) -> int:
         page = Path(argv[argv.index("--file") + 1]).read_text() if "--file" in argv else fetch()
         found = read(list_lines(page))
     except (requests.RequestException, OSError, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=out)
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}", path=out)
+        print(f"{SOURCE_ID}: {error_detail(e)}", file=sys.stderr)
         return 1
     state = migrate(read_json(state_path, {}) or {})
     if "--file" not in argv and state.get("last_found") != found:

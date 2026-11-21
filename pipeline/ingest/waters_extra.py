@@ -56,6 +56,7 @@ import shapely
 from shapely.ops import linemerge, polygonize, unary_union
 
 from common import DATA_DIR, HEADERS, RAW_DIR, ROOT, now_iso, read_json, write_json
+from common import error_detail
 
 OVERPASS = "https://overpass-api.de/api/interpreter"
 CACHE_DIR = RAW_DIR / "osm-waters"
@@ -471,7 +472,7 @@ def fetch(spec: dict, refresh: bool, offline: bool) -> tuple[dict, bool]:
         try:
             r = requests.post(OVERPASS, data={"data": q}, headers=HEADERS, timeout=360)
         except requests.RequestException as ex:
-            print(f"  {key}: {ex}; retrying")
+            print(f"  {key}: {error_detail(ex)}; retrying")
             time.sleep(10 * (attempt + 1))
             continue
         if r.status_code in (429, 502, 503, 504):

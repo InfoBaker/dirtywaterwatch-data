@@ -812,23 +812,38 @@ def error_host(e: BaseException) -> str | None:
     return url_host(u) if u else _host_in_text(str(e))
 
 
-def error_text(e: BaseException, limit: int = 300) -> str:
-    """What may be kept and printed of a caught exception: its kind and, for one this repository raised, its own
-    words (clean_error_text); for a library's, a fixed category and the host. "HTTPError: HTTP 404 at host",
-    "ReadTimeout: timeout at host", "ValueError: no features"."""
-    name = type(e).__name__ if _EXC_NAME.match(type(e).__name__) else "Error"
+def error_detail(e: BaseException, limit: int = 300) -> str:
+    """What may be kept and printed of a caught exception's message (in place of str(e)): for one this repository
+    raised, its own words (clean_error_text); for a library's, a fixed category and the host ("HTTP 404 at host",
+    "timeout at host", "not JSON")."""
     if _raised_in_own_code(e) and not _LIBRARY_TEXT.search(str(e)):
-        detail = clean_error_text(str(e), limit) or error_category(e)
-    else:
-        cat = error_category(e)
-        if cat == "failed":
-            cat = text_category(str(e))
-        host = error_host(e)
-        detail = cat + (f" at {host}" if host else "")
-    return _tidy(f"{name}: {detail}", limit)
+        return clean_error_text(str(e), limit) or error_category(e)
+    cat = error_category(e)
+    if cat == "failed":
+        cat = text_category(str(e))
+    host = error_host(e)
+    return _tidy(cat + (f" at {host}" if host else ""), limit)
 
 
-def public_error(value, limit: int = 300):
+def error_text(e: BaseException, limit: int = 300) -> str:
+    """error_detail with the exception's kind first (in place of f"{type(e).__name__}: {e}"):
+    "HTTPError: HTTP 404 at host", "ReadTimeout: timeout at host", "ValueError: no features"."""
+    name = type(e).__name__ if _EXC_NAME.match(type(e).__name__) else "Error"
+    return _tidy(f"{name}: {error_detail(e, limit)}", limit)
+
+
+def answer_error(err) -> str:
+    """An error a service put in its answer (ArcGIS's {"code": 400, "message": ...} and the like) as it may be kept:
+    its numeric code, never its message."""
+    c = err.get("code") if isinstance(err, dict) else None
+    if isinstance(c, bool):
+        c = None
+    if isinstance(c, int) or (isinstance(c, str) and c.strip().isdigit()):
+        return f"error code {int(c)}"
+    return "error"
+
+
+def public_error(value, limit: int = 1000):
     """An error as it may be saved or published (write_events, the feeds' health, meta.json's problems): an exception
     becomes error_text; a text keeps each part's own words (parts split at "; ") with library text, answers,
     addresses and secrets taken out (clean_error_text). None stays None; it is idempotent."""

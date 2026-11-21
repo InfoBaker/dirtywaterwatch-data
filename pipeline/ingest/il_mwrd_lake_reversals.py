@@ -45,6 +45,7 @@ from pathlib import Path
 import requests
 
 from common import BUILD_DIR, HEADERS, event, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text
 from ingest import il_mwrd as M
 
 SOURCE_ID = "il-mwrd-lake-michigan-reversals"
@@ -181,8 +182,8 @@ def main(argv=None) -> int:
             text = pdf_text(pdf)
         recs, meta = build(text, lm)
     except (requests.RequestException, RuntimeError, ValueError, subprocess.SubprocessError, OSError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=out)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}", path=out)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta, path=out)
     print(f"{SOURCE_ID}: {meta['reversals']} reversals, {len(recs)} records, problems {len(meta['problems'])} -> {path}")

@@ -47,6 +47,8 @@ import sys
 from array import array
 from datetime import UTC, datetime
 
+from common import error_text
+
 MRMS_URL = "https://mapservices.weather.noaa.gov/raster/rest/services/obs/mrms_qpe/ImageServer"
 CELL = 0.01                    # degrees: the MRMS grid and the rounding of the outfall points
 MARGIN_CELLS = 5               # pixels of margin around the outfall points
@@ -357,10 +359,12 @@ def export(session, objectid: int, box: dict, timeout: int = 120) -> bytes:
     try:
         r.raise_for_status()
     except Exception as e:  # noqa: BLE001
-        raise ExportError(f"{type(e).__name__}: {e}", getattr(r, "content", None)) from e
+        raise ExportError(f"{error_text(e)}", getattr(r, "content", None)) from e
     ctype = r.headers.get("content-type", "")
     if "json" in ctype or "html" in ctype or r.content[:1] in (b"{", b"<"):
-        raise ExportError(f"no image in the answer ({ctype}): {r.content[:200]!r}", r.content)
+        # the body travels on the exception (rainfall hashes it); its text is never put in the message (security
+        # review 2026-11-17 #7: an answer's body is not kept in a log or an error field)
+        raise ExportError(f"no image in the answer ({ctype})", r.content)
     return r.content
 
 

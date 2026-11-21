@@ -102,6 +102,7 @@ import requests
 import common
 from common import (BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, strip_house_numbers,
                     write_events, write_json)
+from common import error_detail, error_text
 
 SOURCE_ID = "de-dnrec-derns-recent-releases"
 LIST_URL = "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"
@@ -687,9 +688,9 @@ def read_details(client: Client, state: dict, keys: list[str], now: str) -> dict
             n["details_failed"] += 1
             state["rows"][k]["detail_failures"] = state["rows"][k].get("detail_failures", 0) + 1
             state["rows"][k]["detail_failed_at"] = now
-            state["rows"][k]["detail_error"] = f"{type(e).__name__}: {e}"[:200]
+            state["rows"][k]["detail_error"] = f"{error_text(e)}"[:200]
             n.setdefault("failed_keys", []).append(k)
-            print(f"{SOURCE_ID}: detail {k}: {e}", file=sys.stderr)
+            print(f"{SOURCE_ID}: detail {k}: {error_detail(e)}", file=sys.stderr)
             continue
         if d is None:
             n["details_failed"] += 1
@@ -760,8 +761,8 @@ def run(args) -> int:
     try:
         rows = client.recent(args.pages)
     except (requests.RequestException, RuntimeError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=META)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}", meta=META)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     if args.backfill or not state.get("backfilled_at"):
         # each substance search is read whole or not at all; a term that failed is asked again on the next run and
@@ -774,7 +775,7 @@ def run(args) -> int:
                 rows += client.search(term)
                 done.add(term)
             except (requests.RequestException, RuntimeError) as e:
-                errors.append(f"search {term!r} not read ({type(e).__name__}: {e})")
+                errors.append(f"search {term!r} not read ({error_text(e)})")
         if done >= set(SEARCH_TERMS):
             state["backfilled_at"] = now
             state.pop("backfill_terms_done", None)

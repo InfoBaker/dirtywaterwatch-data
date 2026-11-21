@@ -28,6 +28,7 @@ import yaml
 from build import redact
 from common import (BUILD_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, event, now_iso, path_notes_to_meta, read_json, save_raw,
                     write_events, write_json)
+from common import error_detail, error_text
 from ingest.generic import fieldmap as F
 from ingest.generic.base import session
 
@@ -172,7 +173,7 @@ def validate_block(block: dict, source_id: str = "") -> list[str]:
     try:
         mod = platform(block.get("platform", ""))
     except F.SpecError as e:
-        return errs + [str(e)]
+        return errs + [error_detail(e)]
     p = block["platform"]
     inner = block.get("rows_from") if p == "snapshot" else p
     allowed = COMMON_KEYS | PLATFORM_KEYS.get(inner, set()) | ({"rows_from", "snapshot"} if p == "snapshot" else set())
@@ -217,7 +218,7 @@ def validate_block(block: dict, source_id: str = "") -> list[str]:
             try:
                 platform(inner)
             except F.SpecError as e:
-                errs.append(str(e))
+                errs.append(error_detail(e))
     return errs
 
 
@@ -268,10 +269,10 @@ def to_record(row: dict, ctx: F.Ctx, dropped: list | None = None) -> dict:
     except F.SpecError:
         raise
     except Exception as e:  # noqa: BLE001 - never drop a record
-        raw["_hook_errors"] = [f"field map: {type(e).__name__}: {e}"]
+        raw["_hook_errors"] = [f"field map: {error_text(e)}"]
         return event(source_id=ctx.source_id, source_record_id="row-" + F.row_sha(row)[:12],
                      fetched_at=ctx.fetched_at, source_updated_at=ctx.source_updated_at, raw=raw,
-                     parse_error=f"the field map could not read this row ({type(e).__name__}: {e})")
+                     parse_error=f"the field map could not read this row ({error_text(e)})")
     errors = []
     for fn in F.listify(block.get("transform")):
         try:
@@ -279,7 +280,7 @@ def to_record(row: dict, ctx: F.Ctx, dropped: list | None = None) -> dict:
         except F.SpecError:
             raise
         except Exception as e:  # noqa: BLE001
-            errors.append(f"{fn}: {type(e).__name__}: {e}")
+            errors.append(f"{fn}: {error_text(e)}")
     if rec.get("lat") is not None and not rec.get("coord_source"):
         rec["coord_source"] = "source"
     try:
@@ -287,7 +288,7 @@ def to_record(row: dict, ctx: F.Ctx, dropped: list | None = None) -> dict:
     except F.SpecError:
         raise
     except Exception as e:  # noqa: BLE001
-        errors.append(f"{(block.get('waters') or {}).get('matcher')}: {type(e).__name__}: {e}")
+        errors.append(f"{(block.get('waters') or {}).get('matcher')}: {error_text(e)}")
         slugs, how = [], "none"
         notes["_water"] = {"why_none": "the water matcher failed on this row"}
     hook_errors = notes.get("_hook_errors", []) + errors        # a value spec's failures, then the hooks'
@@ -710,8 +711,10 @@ def run(source_id: str, file: str | None = None, meta_file: str | None = None, o
             return 0
     def failed(e: Exception) -> str:
         # bounded_errors (a source whose error text could quote its answer: in-idem-cyanobacteria, verification
-        # 2026-11-15 P1-2): only a category is saved and printed; every other source keeps its message as before
-        return error_category(e) if block.get("bounded_errors") else f"{type(e).__name__}: {e}"
+        # 2026-11-15 P1-2): only a category is saved and printed; every other source keeps the exception's kind and
+        # its own words, with a library's text as its category and host (common.error_text, security review
+        # 2026-11-17 #7)
+        return error_category(e) if block.get("bounded_errors") else error_text(e)
 
     try:
         rows, pmeta, raw_path = fetch_rows(source_id, block, file, meta_file)
@@ -797,5 +800,5 @@ def main(argv=None) -> int:
     try:
         return run(a.source_id, a.file, a.meta, a.out)
     except F.SpecError as e:
-        print(f"{a.source_id}: {e}", file=sys.stderr)
+        print(f"{a.source_id}: {error_detail(e)}", file=sys.stderr)
         return 2

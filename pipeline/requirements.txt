@@ -1,6 +1,25 @@
-requests>=2.32
-pyyaml>=6
-shapely>=2
-pytest>=8
-pypdf>=5
-cryptography>=3.1   # pypdf opens AES-encrypted PDFs (empty user password) only with it: DC Water 2023Q2
+# Exact versions (security review 2026-11-17 #12): every package the pipeline installs, its direct requirements and
+# what they pull in, resolved 2026-11-21 for CPython 3.12 on the runner's Linux (the same set resolves on macOS with
+# 3.14). Pins, not hashes: the repository has no hash lock to extend. To update, change a version here (or resolve
+# the direct ones afresh with `pip install --dry-run --ignore-installed --report -`) and run the whole suite.
+#
+# direct
+requests==2.34.2
+PyYAML==6.0.4
+shapely==2.2.0
+pytest==9.2.0
+pypdf==7.1.1
+cryptography==50.0.2   # pypdf opens AES-encrypted PDFs (empty user password) only with it: DC Water 2023Q2
+#
+# what they pull in
+certifi==2026.11.20
+cffi==2.1.1
+charset-normalizer==3.5.2
+idna==3.20
+iniconfig==2.3.1
+numpy==2.5.5
+packaging==26.3
+pluggy==1.7.0
+pycparser==3.12
+Pygments==2.21.0
+urllib3==2.8.0

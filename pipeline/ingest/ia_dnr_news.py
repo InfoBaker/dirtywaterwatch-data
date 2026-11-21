@@ -61,6 +61,7 @@ import requests
 
 from common import BUILD_DIR, DATA_DIR, HEADERS, event, now_iso, parse_volume_gal, read_json, save_raw, scrub_text, \
     strip_house_numbers, write_events, write_json
+from common import error_detail
 from ingest.ia_id_privacy import scrub_sentences
 
 SOURCE_ID = "ia-dnr-news-releases"
@@ -387,7 +388,7 @@ def main(argv=None) -> int:
             page = files[it["url"]] if it["url"] in files else get(it["url"])
             art = parse_article(page)
         except (requests.RequestException, ValueError, KeyError) as e:
-            errors.append(scrub_title(f"{it['url']}: {e}"))
+            errors.append(scrub_title(f"{it['url']}: {error_detail(e)}"))
             continue
         why = incomplete_revision(cur, art, it["url"], at)
         if why:

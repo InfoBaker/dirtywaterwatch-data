@@ -42,6 +42,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text
 from ingest import va_waters
 
 SOURCE_ID = "va-alexrenew-cso"
@@ -193,8 +194,8 @@ def main(argv=None) -> int:
         if "error" in d or "features" not in d:
             raise ValueError(str(d)[:200])
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     h = hashlib.sha256(json.dumps(d.get("features"), sort_keys=True).encode()).hexdigest()
     if state.get("raw_hash") != h:

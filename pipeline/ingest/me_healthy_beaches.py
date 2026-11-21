@@ -76,6 +76,7 @@ import requests
 
 from common import (BROWSER_HEADERS, BUILD_DIR, DATA_DIR, RAW_DIR, ROOT, event, now_iso, read_json,
                     save_raw, stamp, write_events, write_json)
+from common import error_text
 
 SOURCE_ID = "me-healthy-beaches"
 BASE = "https://apps.web.maine.gov/online/healthy_beaches"
@@ -566,7 +567,7 @@ def main(argv=None) -> int:
         save_raw(SOURCE_ID, r.content, "bma.geojson")
         named, snap_error = validate_snapshot(r.json(), state.get("last_feature_count"))
     except (requests.RequestException, ValueError) as e:
-        named, snap_error = None, f"{type(e).__name__}: {e}"
+        named, snap_error = None, f"{error_text(e)}"
     if snap_error:
         state["failed_polls"] = state.get("failed_polls", 0) + 1
         state["last_failure"] = {"at": poll_at, "error": snap_error}
@@ -581,7 +582,7 @@ def main(argv=None) -> int:
         rs = fetch(SITE_URL)
         save_raw(SOURCE_ID, rs.content, "site.geojson")
     except requests.RequestException as e:
-        errors.append(f"site geojson: {type(e).__name__}: {e}")
+        errors.append(f"site geojson: {error_text(e)}")
 
     matcher = WaterMatcher()
     beaches = {}

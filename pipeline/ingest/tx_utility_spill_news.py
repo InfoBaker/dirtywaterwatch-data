@@ -59,6 +59,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail
 from ingest import tx_spill_notice_form as F
 
 SITES = {
@@ -395,8 +396,8 @@ def main(argv=None) -> int:
                 raise ValueError("no release listed on the list page (the layout may have changed)")
             recs, stats = run_site(name, pages, prev, now_iso(), get_release, retry)
         except (requests.RequestException, OSError, ValueError, KeyError, TypeError) as e:
-            write_events(site["source_id"], [], ok=False, error=str(e))
-            print(f"{site['source_id']}: run not ok ({e})", file=sys.stderr)
+            write_events(site["source_id"], [], ok=False, error=error_detail(e))
+            print(f"{site['source_id']}: run not ok ({error_detail(e)})", file=sys.stderr)
             rc = 1
             continue
         if not src:

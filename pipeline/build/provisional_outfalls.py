@@ -78,6 +78,7 @@ from pathlib import Path
 from build import status as S
 from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, load_outfall_registry, now_iso, read_json, strip_personal, \
     write_json
+from common import error_text
 
 SOURCE_ID = "outfalls-reported"
 OUT = BUILD_DIR / "outfalls-reported.json"
@@ -1467,7 +1468,7 @@ def run(args) -> dict:
             extra, gstats = RG.geolocate(unlocated, args, key=key, by_id=by_id, anchors=anchors)
             gstats["joined_to_a_place_from_coordinates"] = join_places(places, extra)
         except Exception as ex:                     # the geolocation step never stops the build
-            gstats = {"error": f"{type(ex).__name__}: {ex}"[:300]}
+            gstats = {"error": f"{error_text(ex)}"[:300]}
     else:
         gstats = {"skipped": "geolocation not asked this run (--geolocate)"}
     if args.judge is not None:
@@ -1521,7 +1522,7 @@ def run(args) -> dict:
             from build import report_geolocate as RG
             RG.after_water(places, args, gstats)
         except Exception as ex:
-            gstats["after_water_error"] = f"{type(ex).__name__}: {ex}"[:300]
+            gstats["after_water_error"] = f"{error_text(ex)}"[:300]
     places.sort(key=lambda p: (p.get("state") or "", p["discharger_id"], -p["report_count"], p["id"]))
     rows = [public_row(p) for p in places]
     summary = summarize(places, drops, unlocated, key, by_id, registry)

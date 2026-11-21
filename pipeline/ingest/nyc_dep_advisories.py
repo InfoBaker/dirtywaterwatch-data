@@ -49,6 +49,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text
 from ingest import ny_waters
 
 SOURCE_ID = "nyc-dep-advisories"
@@ -146,7 +147,7 @@ def geometries(sess) -> dict:
         write_json(GEOM_CACHE, {"fetched_at": now_iso(), "url": LAYERS["wq"], "waterbodies": out})
         return out
     except Exception as e:  # noqa: BLE001 - placement only; never fatal
-        print(f"nyc-dep-advisories: polygons unavailable ({e})", file=sys.stderr)
+        print(f"nyc-dep-advisories: polygons unavailable ({error_detail(e)})", file=sys.stderr)
         return (cache or {}).get("waterbodies", {})
 
 
@@ -253,8 +254,8 @@ def main(argv=None) -> int:
         if not isinstance(wq, list):          # an empty list is a valid answer: no advisory in effect
             raise ValueError(f"advisory API answered {str(wq)[:200]}")
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"nyc-dep-advisories: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"nyc-dep-advisories: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     save_if_changed(state, "advisory-WQ", wq_bytes)
     errors, cso_differs = [], None
@@ -264,20 +265,20 @@ def main(argv=None) -> int:
         key = lambda r: (str((r.get("waterbody") or {}).get("id")), r.get("duration"), r.get("message"))  # noqa: E731
         cso_differs = len({key(r) for r in cso} ^ {key(r) for r in wq})
     except Exception as e:  # noqa: BLE001
-        errors.append(f"advisoryType=CSO: {e}")
+        errors.append(f"advisoryType=CSO: {error_detail(e)}")
     layers = {}
     for k in LAYERS:
         try:
             layers[k] = layer_attrs(sess, k, state)
         except Exception as e:  # noqa: BLE001
             layers[k] = {}
-            errors.append(f"layer {k}: {e}")
+            errors.append(f"layer {k}: {error_detail(e)}")
     try:
         sensors, s_bytes = get_json(sess, API + "sensors")
         save_if_changed(state, "sensors", s_bytes)
         state["sensors_last"] = [{k: s.get(k) for k in ("id", "name", "accumulatedLast24Hours", "active")} for s in sensors]
     except Exception as e:  # noqa: BLE001
-        errors.append(f"sensors: {e}")
+        errors.append(f"sensors: {error_detail(e)}")
     stats = poll(state, wq, now, layers["wq"], layers["csov2"])
     state["last_poll_at"] = iso(now)
     state["polls"] = state.get("polls", 0) + 1

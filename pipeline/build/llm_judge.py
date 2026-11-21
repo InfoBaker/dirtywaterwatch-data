@@ -20,6 +20,7 @@ import time
 from pathlib import Path
 
 from common import BUILD_DIR, ROOT, now_iso, read_json
+from common import error_detail
 
 CACHE_PATH = BUILD_DIR / "provisional-outfalls-llm.json"
 LOG_PATH = BUILD_DIR / "provisional-outfalls-llm-log.jsonl"
@@ -91,7 +92,9 @@ class Judge:
                 time.sleep(3 * 2 ** attempt)
                 continue
             if r.status_code >= 400:
-                raise RuntimeError(f"HTTP {r.status_code}: {r.text[:200]}")
+                # the status only: OpenRouter's answer can name the account or quote the request (security review
+                # 2026-11-17 #7), and this text reaches the model log and the run's output
+                raise RuntimeError(f"HTTP {r.status_code}")
             return r.json()
         raise RuntimeError("no answer after 3 tries")
 
@@ -141,7 +144,7 @@ class Judge:
             with self.lock:
                 self.calls["failed"] += 1
                 self.model_seconds += time.monotonic() - t0
-            self._log({"at": now_iso(), "kind": kind, "model": model, "version": version, "error": str(ex)[:200]})
+            self._log({"at": now_iso(), "kind": kind, "model": model, "version": version, "error": error_detail(ex)})
             return None
         entry = {"model": model, "version": version, "at": now_iso(), "answer": answer, "usage": usage, "cost": cost,
                  "input": payload}

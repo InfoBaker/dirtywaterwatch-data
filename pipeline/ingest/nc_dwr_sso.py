@@ -124,6 +124,7 @@ import requests
 
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, ROOT, event, now_iso, path_notes_to_meta, read_json,
                     save_raw, write_events, write_json)
+from common import answer_error, error_detail, error_text, url_host
 
 SOURCE_ID = "nc-dwr-sso-2026"
 HIST_ID = "nc-dwr-sso-2022-2025"
@@ -410,12 +411,13 @@ def layer_meta(sess: requests.Session, url: str) -> dict:
         r.raise_for_status()
         d = r.json()
         if isinstance(d.get("error"), dict):
-            return {"error": f"{url}: {d['error'].get('message')}", "unavailable": unavailable(d["error"])}
+            # the layer's error code, never its message (common.answer_error; security review 2026-11-17 #7)
+            return {"error": f"{url_host(url)}: {answer_error(d['error'])}", "unavailable": unavailable(d["error"])}
         e = d.get("editingInfo") or {}
         return {"name": d.get("name"), "data_last_edit": iso(local(e.get("dataLastEditDate"))),
                 "fields": [f.get("name") for f in d.get("fields") or []]}
     except Exception as e:  # noqa: BLE001
-        return {"error": f"{type(e).__name__}: {e}"}
+        return {"error": f"{error_text(e)}"}
 
 
 def query_layer(sess: requests.Session, url: str, fields: list[str], oid: str) -> tuple[list[dict], dict]:
@@ -542,7 +544,7 @@ def build_record(a: dict, layer: str, fetched_at: str, prev: dict | None, permit
         return _record(a, base, raw, prev, permits, survey)
     except Exception as e:  # noqa: BLE001 - never drop a record
         return event(**base, event_type="unknown", status="unknown", raw=raw, authority=AUTHORITY,
-                     parse_error=f"{type(e).__name__}: {e}")
+                     parse_error=f"{error_text(e)}")
 
 
 def _record(a: dict, base: dict, raw: dict, prev: dict | None, permits: dict[str, str], survey: bool = False) -> dict:
@@ -794,7 +796,7 @@ def hist_record(a: dict, fetched_at: str, rid: str, permits: dict[str, str], dup
         )
     except Exception as e:  # noqa: BLE001
         rec = event(**base, event_type="unknown", status="unknown", raw=raw, authority=AUTHORITY,
-                    parse_error=f"{type(e).__name__}: {e}")
+                    parse_error=f"{error_text(e)}")
     if dup_of:
         rec["raw"]["_duplicate_basis"] = "the same DWR incident number is in this year's layer, which carries both reports"
     return rec
@@ -877,7 +879,7 @@ def main(argv=None) -> int:
                     feats, doc = query_layer(sess, url, fields, oid)
                 except LayerUnavailable as e:
                     gone.append(url)
-                    layers_meta[url] = {"error": str(e), "unavailable": True}
+                    layers_meta[url] = {"error": error_detail(e), "unavailable": True}
                     continue
                 have = layer_fields(feats, doc)
                 lacking = Counter(k for a in feats for k in key if k not in {c.lower() for c in a})
@@ -905,8 +907,8 @@ def main(argv=None) -> int:
                 print(f"{SOURCE_ID}: {msg}", file=sys.stderr)
                 return 1
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     state = read_json(STATE_FILE, {}) or {}
     raw_path = state.get("raw_path")
@@ -949,8 +951,8 @@ def main(argv=None) -> int:
                         at["facility_owner"] = owner_kind(at.get("facility_owner"))[1]
                 save_raw(HIST_ID, json.dumps(doc, ensure_ascii=False), "json")
         except Exception as e:  # noqa: BLE001
-            write_events(HIST_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-            print(f"{HIST_ID}: FAILED {e}", file=sys.stderr)
+            write_events(HIST_ID, [], ok=False, error=f"{error_text(e)}")
+            print(f"{HIST_ID}: FAILED {error_detail(e)}", file=sys.stderr)
             return 1
         hrecs, hstats = build_history(hist, fetched_at, records, permits)
         hrecs = redact.redact_events(hrecs)

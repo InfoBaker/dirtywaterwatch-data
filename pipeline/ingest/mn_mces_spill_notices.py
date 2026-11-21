@@ -90,6 +90,7 @@ import requests
 
 import common
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail, error_text
 from ingest.generic.fieldmap import scrub_strict_names
 
 SOURCE_ID = "mn-mces-spill-notices"
@@ -619,10 +620,10 @@ def main(argv=None) -> int:
         # health stays false and last_ok_at the previous one (partial; verification pass 2 2026-11-15 P1-3)
         kept = [scrub_narrative(json.loads(json.dumps(p))) for p in prev]
         cities = (prev_doc.get("meta") or {}).get("cities_without_county")
-        write_events(SOURCE_ID, kept, ok=False, partial=True, error=f"{type(e).__name__}: {e}",
+        write_events(SOURCE_ID, kept, ok=False, partial=True, error=f"{error_text(e)}",
                      meta={"cities_without_county": sorted({scrubbed(c) for c in cities if c})}
                      if isinstance(cities, list) else None)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {meta['on_index']} on the index, {len(recs)} records, {meta['advisory_active']} signs standing"

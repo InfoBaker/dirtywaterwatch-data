@@ -70,6 +70,7 @@ import requests
 
 from common import (EVENTS_DIR, HEADERS, ROOT, event, now_iso, parse_volume_gal, read_json,
                     save_raw, write_events)
+from common import error_detail, error_text
 from ingest.nh_vt_waters import facility_town, match_waters, norm
 
 SOURCE_ID = "vt-dec"
@@ -493,7 +494,7 @@ class Normaliser:
                     rid = r.get("ID") or r.get("Submission Number") or hashlib.sha1(
                         json.dumps(r, sort_keys=True).encode()).hexdigest()[:12]
                     out.append(event(source_id=SOURCE_ID, source_record_id=f"unparsed:{kind}:{rid}", source_url=URL,
-                                     fetched_at=self.fetched_at, raw=_scrub(r), parse_error=f"{type(e).__name__}: {e}"))
+                                     fetched_at=self.fetched_at, raw=_scrub(r), parse_error=f"{error_text(e)}"))
         return out
 
 
@@ -608,8 +609,8 @@ def main(argv=None) -> int:
             tables = fetch_range(sess, today - timedelta(days=args.since), today, f"since{args.since}")
             new = norm_.tables(tables)
     except Exception as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: fetch failed: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: fetch failed: {error_detail(e)}", file=sys.stderr)
         return 1
     # one id per record: later (newer) rows win when years overlap
     dedup = {}

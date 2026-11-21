@@ -56,6 +56,7 @@ from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharg
                     system_wide_advisory, no_ok_read_since, error_text, public_error,
                     now_iso, read_json, rules_live_states, write_json)
 from build import beach_reason as BR
+from common import error_detail
 from build import shoreline as SH
 from build.redact import REDACTED, person_shaped
 
@@ -701,7 +702,7 @@ def load_registry(sources_dir: Path = SOURCES_DIR) -> dict[str, dict]:
         try:
             d = yaml.safe_load(p.read_text()) or {}
         except Exception as e:  # a half-written file from another builder must not stop the build
-            reg[p.stem] = {"id": p.stem, "_error": f"unreadable yaml: {e}"}
+            reg[p.stem] = {"id": p.stem, "_error": f"unreadable yaml: {error_detail(e)}"}
             continue
         if isinstance(d, dict):
             reg[d.get("id") or p.stem] = d
@@ -768,7 +769,7 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
         try:
             d = json.loads(p.read_text())
         except Exception as e:
-            problems.append(f"{p.name}: unreadable ({e})")
+            problems.append(f"{p.name}: unreadable ({error_detail(e)})")
             continue
         if not isinstance(d, dict) or "records" not in d:
             problems.append(f"{p.name}: not an events file")
@@ -845,7 +846,7 @@ def apply_water_aliases(waters: dict[str, dict], path: Path, moved: dict[str, st
     try:
         d = read_json(path)
     except Exception as e:                  # a half-written file must not stop the build
-        return [f"{name}: unreadable ({type(e).__name__}: {e})"[:300]]
+        return [f"{name}: unreadable ({error_text(e)})"[:300]]
     if d is None:
         return []
     if not isinstance(d, dict):
@@ -890,7 +891,7 @@ def apply_state_parts(waters: dict[str, dict], path: Path, moved: dict[str, str]
     try:
         d = read_json(path)
     except Exception as e:                  # a half-written file must not stop the build
-        return [f"{name}: unreadable ({type(e).__name__}: {e})"[:300]]
+        return [f"{name}: unreadable ({error_text(e)})"[:300]]
     if not d:
         return []
     if not isinstance(d, dict):
@@ -5323,7 +5324,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     if slug in waters:
                         covered[slug].add(rain_mod.SOURCE_ID)
             except Exception as e:  # noqa: BLE001
-                problems.append(f"rain_likely.separate_sewers: not computed ({type(e).__name__}: {e})"[:300])
+                problems.append(f"rain_likely.separate_sewers: not computed ({error_text(e)})"[:300])
         # the rainfall watch covers every CSO permittee's waters: the radar's, or New Jersey's shared site's
         for slug, w in (rain_block.get("waters") or {}).items():
             if slug in waters:
@@ -5538,7 +5539,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                          "hours_fast": None, "hours_leading_edge": None, "velocity_peak_ms": None,
                          "velocity_max_ms": None} for _ in r["segments"]]
             except Exception as e:
-                problems.append(f"reach {key}: travel time unavailable ({type(e).__name__}: {e})"[:300])
+                problems.append(f"reach {key}: travel time unavailable ({error_text(e)})"[:300])
                 flow = {"q_ratio": 1.0, "gauge": None, "gauge_name": None, "flow_cfs": None, "flow_time": None,
                         "gauge_km": None, "flow_basis": "travel time unavailable"}
                 band = [{"hours_typical_start": None, "hours_typical": None, "hours_fast_start": None,

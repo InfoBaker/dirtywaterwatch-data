@@ -84,6 +84,7 @@ import requests
 
 from common import (BROWSER_HEADERS, BUILD_DIR, EVENTS_DIR, ROOT, event, now_iso, parse_volume_gal, read_json,
                     save_raw, scrub_text, write_events, write_json)
+from common import error_detail, error_text
 from ingest import va_waters
 
 SOURCE_ID = "va-deq-prep"
@@ -569,7 +570,7 @@ def to_record(rep: dict, refs: tuple, point: dict | None, fetched_at: str) -> di
         end = api_time(rep.get("incident_end"))
     except ValueError as e:
         start = received = modified = end = None
-        problems.append(f"time not read: {e}")
+        problems.append(f"time not read: {error_detail(e)}")
     precision = None
     if start:
         precision = "day" if (start.hour, start.minute, start.second) == (0, 0, 0) else "minute"
@@ -856,10 +857,10 @@ def main(argv=None) -> int:
             for r in fetch_api(sess, params, meta, raw_sigs=raw_sigs):
                 reps[str(r.get("id"))] = from_api(r)
     except Blocked as e:
-        meta["blocked"] = {"at": now_iso(), "what": "PReP API", "error": str(e)}
+        meta["blocked"] = {"at": now_iso(), "what": "PReP API", "error": error_detail(e)}
         via = "export"
     except Exception as e:  # noqa: BLE001
-        errors.append(f"API: {type(e).__name__}: {e}")
+        errors.append(f"API: {error_text(e)}")
         via = "export"
     if via == "export":
         reps = {}
@@ -867,9 +868,9 @@ def main(argv=None) -> int:
             for a in fetch_export(sess, since, meta):
                 reps[str(a.get("IR_NUMBER"))] = from_export(a)
         except Blocked as e:
-            meta.setdefault("blocked", {}).update({"export": str(e)})
+            meta.setdefault("blocked", {}).update({"export": error_detail(e)})
         except Exception as e:  # noqa: BLE001
-            errors.append(f"export: {type(e).__name__}: {e}")
+            errors.append(f"export: {error_text(e)}")
     if not reps:
         err = "; ".join(errors) or (meta.get("blocked") or {}).get("error") or "no reports fetched"
         write_events(SOURCE_ID, [], ok=False, error=err, meta=meta)
@@ -893,7 +894,7 @@ def main(argv=None) -> int:
             else:
                 missing.pop(i, None)
     except Exception as e:  # noqa: BLE001
-        errors.append(f"EDMA points: {type(e).__name__}: {e}")
+        errors.append(f"EDMA points: {error_text(e)}")
     write_json(STATE_PATH, {"updated": now_iso(), "layer": EDMA, "points": points, "missing": missing, "raw_sigs": raw_sigs})
 
     refs = load_dischargers()

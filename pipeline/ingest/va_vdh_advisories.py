@@ -57,6 +57,7 @@ import requests
 
 from common import (BROWSER_HEADERS, BUILD_DIR, event, now_iso, parse_volume_gal, read_json, save_raw,
                     scrub_text, write_events, write_json)
+from common import error_text
 from ingest import va_waters
 from ingest.nh_vt_waters import norm
 from ingest.va_deq_prep import load_dischargers, operators_named, scrub_free
@@ -429,7 +430,7 @@ def fetch_pages(sess, query: str, until: date | None, max_pages: int, state: dic
                 break                                   # WordPress: past the last page
             r.raise_for_status()
         except Exception as e:  # noqa: BLE001
-            errors.append(f"{query} p{page}: {type(e).__name__}: {e}")
+            errors.append(f"{query} p{page}: {error_text(e)}")
             break
         items = parse_feed(r.text)
         save_raw(SOURCE_ID, json.dumps({"url": r.url, "items": items}, ensure_ascii=False, indent=0),

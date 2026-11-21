@@ -48,6 +48,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_text
 from ingest.nh_vt_waters import match_waters, norm
 
 SOURCE_ID = "vt-advisories"
@@ -234,13 +235,13 @@ def main(argv=None) -> int:
         new += cyano_records(feats, fetched_at, updated)
         meta["cyano_count"], meta["cyano_data_last_edit"] = len(feats), updated
     except Exception as e:
-        errors.append(f"cyano: {type(e).__name__}: {e}")
+        errors.append(f"cyano: {error_text(e)}")
     try:
         feats = _query_all(sess, BTV, "btv")
         new += btv_records(feats, fetched_at)
         meta["btv_count"] = len(feats)
     except Exception as e:
-        errors.append(f"btv: {type(e).__name__}: {e}")
+        errors.append(f"btv: {error_text(e)}")
     if not new and errors:
         write_events(SOURCE_ID, [], ok=False, error="; ".join(errors))
         print(f"{SOURCE_ID}: failed: {errors}", file=sys.stderr)

@@ -64,6 +64,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, strip_personal, write_events
+from common import error_detail
 from zones import nevada_zone
 
 SOURCE_ID = "nv-state-parks-hab"
@@ -215,7 +216,7 @@ def write_refused(source_id: str, error: str, events_dir: Path) -> None:
 
 def safe_error(e: Exception) -> str:
     """A failure's text for the health file: its class and its message cleaned like the page's text."""
-    return f"{type(e).__name__}: {clean_text(str(e))[0] or 'details withheld'}"
+    return f"{type(e).__name__}: {clean_text(error_detail(e))[0] or 'details withheld'}"
 
 
 # a paragraph that states an advisory ("Marlette Lake, located in ..., has been placed under a HAB Watch Advisory")

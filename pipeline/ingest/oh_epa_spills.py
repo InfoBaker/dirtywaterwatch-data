@@ -55,6 +55,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import DATA_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail, error_text
 
 SOURCE_ID = "oh-epa-spills-opendata"
 SERVICE = "https://geo.epa.ohio.gov/arcgis/rest/services/EmergResponse/Spills2_OpenData/MapServer"
@@ -285,8 +286,8 @@ def main(argv=None) -> int:
     try:
         layers = fetch(sess)
     except (requests.RequestException, ValueError, KeyError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"layers: {type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"layers: {error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     save_raw(SOURCE_ID, json.dumps(layers), "json")
     recs, meta = run(layers, now)

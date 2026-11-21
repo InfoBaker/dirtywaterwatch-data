@@ -49,6 +49,7 @@ import requests
 
 from common import (BROWSER_HEADERS, BUILD_DIR, EVENTS_DIR, HEADERS, event, now_iso, path_notes_to_meta,
                     read_json, save_raw, strip_personal, write_events, write_json)
+from common import error_detail, error_text
 from ingest import ny_sprtk, ny_waters
 
 SOURCE_ID = "ny-dec-sprtk-web"
@@ -193,11 +194,11 @@ def build(state: dict, wb_idx: dict, ctx: dict) -> list[dict]:
         try:
             issued = local_dt(m["issued"])
         except ValueError as e:
-            issued, _ = None, problems.append(str(e))
+            issued, _ = None, problems.append(error_detail(e))
         try:
             start = local_dt(m["discharge_datetime"])
         except ValueError as e:
-            start, _ = None, problems.append(str(e))
+            start, _ = None, problems.append(error_detail(e))
         view = datetime.fromisoformat(row["view_time"].replace("Z", "+00:00")) if row.get("view_time") else None
         word = m["word"] or (re.match(r"\s*(UPDATE|ENDED)\b", row.get("headline") or "").group(1)
                              if re.match(r"\s*(UPDATE|ENDED)\b", row.get("headline") or "") else None)
@@ -334,8 +335,8 @@ def main(argv=None) -> int:
         page = fetch(sess)
         rows = page_rows(page)
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"ny-dec-sprtk-web: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"ny-dec-sprtk-web: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     h = hashlib.sha256(page.encode()).hexdigest()
     # the page's own HTML changes with every Drupal build token; keep a copy when the rows change

@@ -54,6 +54,7 @@ from pathlib import Path
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail, error_text
 from ingest.mountain_scrub import scrub
 
 SOURCE_ID = "co-cdphe-toxic-algae"
@@ -306,8 +307,8 @@ def main(argv=None) -> int:
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records, sanitized again)
         kept = [sanitized(r) for r in (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
                 if isinstance(r, dict)]
-        write_events(SOURCE_ID, kept, ok=False, partial=True, error=scrub(f"{type(e).__name__}: {e}")[:300])
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, kept, ok=False, partial=True, error=scrub(f"{error_text(e)}")[:300])
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     if meta["incomplete"]:
         path = write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta,

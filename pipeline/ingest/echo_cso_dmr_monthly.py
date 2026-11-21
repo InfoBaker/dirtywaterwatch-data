@@ -52,6 +52,7 @@ import requests
 
 import common
 from common import DATA_DIR, HEADERS, ROOT, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_text
 
 SOURCE_ID = "echo-cso-dmr-monthly"
 URL = "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart"
@@ -123,7 +124,7 @@ def fetch(permit: str, code: str, since: date, budget: Budget | None = None) -> 
             budget.consecutive = 0
             return js["Results"], "live"
         except (requests.RequestException, ValueError) as e:
-            err = f"{type(e).__name__}: {e}"
+            err = f"{error_text(e)}"
             budget.consecutive += 1
             if not budget.stopped:
                 time.sleep(3 * (i + 1))

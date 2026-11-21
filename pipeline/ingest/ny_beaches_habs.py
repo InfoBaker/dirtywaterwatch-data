@@ -55,6 +55,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text
 from ingest import ny_waters
 
 BEACH_SOURCE = "ny-parks-beaches"
@@ -265,8 +266,8 @@ def run_beaches(sess, fetched: str) -> str:
             raise ValueError(str(rows)[:200])
         save_if_changed(state, BEACH_SOURCE, "wwwd-za77", r.content)
     except Exception as e:  # noqa: BLE001
-        write_events(BEACH_SOURCE, [], ok=False, error=f"wwwd-za77: {type(e).__name__}: {e}")
-        return f"{BEACH_SOURCE}: FAILED {e}"
+        write_events(BEACH_SOURCE, [], ok=False, error=f"wwwd-za77: {error_text(e)}")
+        return f"{BEACH_SOURCE}: FAILED {error_detail(e)}"
     errors = []
     try:
         feats = arcgis(sess, BEACH_LAYER, {"where": "1=1", "outFields": "*", "returnGeometry": "false"})
@@ -274,7 +275,7 @@ def run_beaches(sess, fetched: str) -> str:
         save_if_changed(state, BEACH_SOURCE, "beach-status-layer", json.dumps(clean, sort_keys=True).encode())
     except Exception as e:  # noqa: BLE001
         feats, clean = [], []
-        errors.append(f"beach status layer: {type(e).__name__}: {e}")
+        errors.append(f"beach status layer: {error_text(e)}")
     stats = {"not_water_quality": {}}
     points = beach_points(feats)
     recs = dataset_episodes(rows, points, fetched, stats)
@@ -321,8 +322,8 @@ def run_habs(sess, fetched: str) -> str:
         feats = arcgis(sess, HAB_LAYER, {"where": "1=1", "outFields": "*", "outSR": "4326", "returnGeometry": "true"})
         save_if_changed(state, HAB_SOURCE, "current-hab-reports", json.dumps(feats, sort_keys=True).encode())
     except Exception as e:  # noqa: BLE001
-        write_events(HAB_SOURCE, [], ok=False, error=f"{type(e).__name__}: {e}")
-        return f"{HAB_SOURCE}: FAILED {e}"
+        write_events(HAB_SOURCE, [], ok=False, error=f"{error_text(e)}")
+        return f"{HAB_SOURCE}: FAILED {error_detail(e)}"
     seen = state.setdefault("reports", {})
     current = set()
     for f in feats:

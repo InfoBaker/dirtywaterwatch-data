@@ -70,6 +70,7 @@ from datetime import UTC, date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from common import BUILD_DIR, DATA_DIR, read_json
+from common import error_detail
 
 METHOD_VERSION = 2       # 2: the review fixes of 2026-11-14 (gaps keep followed storms, observed days, lag from
 #                          coverage, advisories left out); a version-1 file or entry is never loaded or carried forward
@@ -845,7 +846,7 @@ def build(offline: bool = False, budget: int = DEFAULT_BUDGET, only=None, today:
             try:
                 series = [reader(lat, lon, years, False, bud) for lat, lon in pts]
             except (BudgetSpent, ServiceRefused) as e:
-                stopped = f"{type(e).__name__} at {p}: {e}"
+                stopped = f"{type(e).__name__} at {p}: {error_detail(e)}"
                 print(f"rain_history: stopped asking the point service ({stopped}); the next run continues from the cache")
                 series = []
         if not series:

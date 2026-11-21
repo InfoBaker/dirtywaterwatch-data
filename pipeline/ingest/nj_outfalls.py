@@ -41,6 +41,7 @@ from datetime import UTC, datetime, timedelta
 import requests
 
 from common import BUILD_DIR, DATA_DIR, HEADERS, now_iso, read_json, save_raw, write_json
+from common import error_text
 from ingest import nj_waters
 
 SOURCE_ID = "nj-cso-outfalls"
@@ -133,7 +134,7 @@ def fetch() -> tuple[dict | None, str | None]:
             save_raw(SOURCE_ID, r.content, "json")
             return js, None
         except (requests.RequestException, ValueError) as e:
-            err = f"{type(e).__name__}: {e}"
+            err = f"{error_text(e)}"
             time.sleep(3 * (i + 1))
     return None, err
 

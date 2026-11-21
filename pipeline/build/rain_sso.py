@@ -65,6 +65,7 @@ from datetime import UTC, date, datetime, timedelta
 
 from build import rain_history as rh
 from common import BUILD_DIR, DATA_DIR, read_json
+from common import error_detail
 
 METHOD_VERSION = 1
 # the file's revision within the method: a build copy of an earlier revision is rebuilt at once rather than kept for
@@ -607,7 +608,7 @@ def build(offline: bool = False, budget: int = 600, today: date | None = None, n
             try:
                 series = [reader(lat, lon, years, False, bud) for lat, lon in pts]
             except (BudgetSpent, ServiceRefused) as e:
-                stopped = f"{type(e).__name__} at {op}: {e}"
+                stopped = f"{type(e).__name__} at {op}: {error_detail(e)}"
                 series = []
         if not series and all(have(lat, lon, years) for lat, lon in pts):
             series = [reader(lat, lon, years, True, None) for lat, lon in pts]
@@ -1029,7 +1030,7 @@ def main(argv=None) -> int:
     try:
         d = build(offline=a.offline, budget=a.budget, rules=rules)
     except MissingInput as e:
-        print(f"rain_sso: stopped: {e}; nothing written, the previous levels file stays")
+        print(f"rain_sso: stopped: {error_detail(e)}; nothing written, the previous levels file stays")
         return 1
     c = d["counts"]
     print(f"rain_sso: {c['operators']} operators with reports, {c['read']} read, {c['qualify']} qualify "

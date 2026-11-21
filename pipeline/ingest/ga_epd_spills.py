@@ -155,6 +155,7 @@ import requests
 from build import redact
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, event, now_iso, read_json, write_events,
                     write_json, path_notes_to_meta)
+from common import answer_error, error_text
 from ingest import echo_sewer_overflow_events as E
 
 SOURCE_ID = "ga-epd-spills"
@@ -877,10 +878,10 @@ def fetch_layer(sess: requests.Session) -> tuple[dict | None, str | None]:
         r.raise_for_status()
         doc = r.json()
         if "features" not in doc:
-            return None, f"map layer: {str(doc.get('error'))[:200]}"
+            return None, f"map layer: {answer_error(doc.get('error'))}"
         return doc, None
     except (requests.RequestException, ValueError) as e:
-        return None, f"map layer: {type(e).__name__}: {e}"
+        return None, f"map layer: {error_text(e)}"
 
 
 def keep_posting(ymd: str, content: bytes, last_modified: str | None, fetched_at: str, archive: Path | None = None) -> None:
@@ -961,7 +962,7 @@ def build(postings: list[tuple[str, str, bytes, str | None]], prev_records: list
         except (ValueError, KeyError, IndexError, zipfile.BadZipFile, ET.ParseError) as e:
             if i == len(postings) - 1:
                 raise                                   # the newest posting must be read
-            stats["unreadable_postings"].append(f"{ymd}: {type(e).__name__}: {e}"[:300])
+            stats["unreadable_postings"].append(f"{ymd}: {error_text(e)}"[:300])
             continue
         posting = posting_date(posting, ymd, stats)
         archived = ((read_at or {}).get(ymd) or fetched_at) if i < len(postings) - 1 else None
@@ -1104,8 +1105,8 @@ def main(argv=None) -> int:
         records, stats = build(postings, prev, layer, epa, load_permits(), fetched_at, rebuild=rebuild,
                                read_at=read_at, epa_dropped=(read_json(EPA_DROPPED, {}) or {}).get("dropped", []))
     except Exception as e:  # noqa: BLE001 - a failed run keeps the previous records
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_text(e)}", file=sys.stderr)
         return 1
     meta = {**stats, "page_url": PAGE_URL, "linked_posting": linked,
             "last_posting_read": max(f"{p[0][:4]}-{p[0][4:6]}-{p[0][6:]}" for p in postings),

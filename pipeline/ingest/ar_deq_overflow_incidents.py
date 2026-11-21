@@ -65,6 +65,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, ROOT, now_iso, path_notes_to_meta, read_json, save_raw, write_events
+from common import error_text
 from ingest.generic import runner
 
 SOURCE_ID = "ar-deq-overflow-incidents"
@@ -357,8 +358,8 @@ def main(argv: list[str] | None = None) -> int:
     except (requests.RequestException, SearchFailed, ValueError, OSError) as e:
         # the previous records, every one of them, written back with their points cut (partial: health false,
         # last_ok_at kept, the previous meta kept)
-        write_events(SOURCE_ID, prev, ok=False, error=f"{type(e).__name__}: {e}", path=path, partial=True)
-        print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, prev, ok=False, error=f"{error_text(e)}", path=path, partial=True)
+        print(f"{SOURCE_ID}: FAILED {error_text(e)}", file=sys.stderr)
         return 1
     raw_path = None
     if not a.file:
@@ -372,8 +373,8 @@ def main(argv: list[str] | None = None) -> int:
         records, stats = runner.build(SOURCE_ID, block, rows, fetched_at, prev, None)
         records = carried_state(records)
     except Exception as e:  # noqa: BLE001 - a run that cannot finish keeps the previous records
-        write_events(SOURCE_ID, prev, ok=False, error=f"{type(e).__name__}: {e}", path=path, partial=True)
-        print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, prev, ok=False, error=f"{error_text(e)}", path=path, partial=True)
+        print(f"{SOURCE_ID}: FAILED {error_text(e)}", file=sys.stderr)
         return 1
     if no_id:
         stats = {**stats, "unreadable_reports": {"count": no_id, "reason": NO_ID_REASON}}

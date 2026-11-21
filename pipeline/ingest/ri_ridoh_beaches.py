@@ -44,6 +44,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, RAW_DIR, event, now_iso, path_notes_to_meta, read_json, save_raw, write_events, write_json
+from common import error_detail
 from ingest import ri_waters
 
 SOURCE_ID = "ri-ridoh-beaches"
@@ -133,7 +134,7 @@ def load_beaches(session: requests.Session) -> list[dict]:
             cached = {"fetched_at": now_iso(), "url": BV, "points": pts["features"], "masterlist": ml["features"]}
             write_json(BV_CACHE, cached)
         except Exception as e:
-            print(f"ri-ridoh-beaches: beach layer unavailable ({e}); no coordinates this run", file=sys.stderr)
+            print(f"ri-ridoh-beaches: beach layer unavailable ({error_detail(e)}); no coordinates this run", file=sys.stderr)
             if not cached:
                 return []
     master = {f["attributes"]["BeachID"]: f["attributes"] for f in cached.get("masterlist", [])}
@@ -249,11 +250,11 @@ def row_to_record(item: dict, url: str, beaches: list[dict], today: date, fetche
     try:
         closed = parse_date(c.get("Closed On"))
     except ValueError as e:
-        closed, parse_error = None, str(e)
+        closed, parse_error = None, error_detail(e)
     try:
         reopened = parse_date(c.get("Re-Opened"))
     except ValueError as e:
-        reopened, parse_error = None, (parse_error + "; " if parse_error else "") + str(e)
+        reopened, parse_error = None, (parse_error + "; " if parse_error else "") + error_detail(e)
     if closed and reopened and (reopened - closed).days > 300 and days is not None:
         for fix in (reopened.replace(year=closed.year), ):
             if (fix - closed).days == days:
@@ -317,7 +318,7 @@ def main(argv: list[str]) -> int:
             items += rows
             urls[which] = url
         except Exception as e:
-            errors.append(f"{which}: {e}")
+            errors.append(f"{which}: {error_detail(e)}")
     if "current" not in urls:
         write_events(SOURCE_ID, [], ok=False, error="; ".join(errors))
         print(f"ri-ridoh-beaches: FAILED {errors}", file=sys.stderr)

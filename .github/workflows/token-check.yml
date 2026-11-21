@@ -11,12 +11,12 @@ permissions: { contents: read }
 jobs:
   check:
     runs-on: ubuntu-latest
-    env:
-      API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      R2_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
-      ACCT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - name: Checks
+        env:   # on the step, as in every workflow here (security review 2026-11-17 #12); the job has no other step
+          API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          R2_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          ACCT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           flags() { python3 -c "import json;d=json.load(open('r.json'));r=d.get('result');print('success', d.get('success'), 'errors', [e.get('code') for e in d.get('errors') or []], 'status', r.get('status') if isinstance(r, dict) else '-')" 2>/dev/null || echo "(not JSON)"; }
           check() {  # $1 label, $2 token

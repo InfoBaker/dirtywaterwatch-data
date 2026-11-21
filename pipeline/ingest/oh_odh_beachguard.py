@@ -50,6 +50,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text
 
 SOURCE_ID = "oh-odh-beachguard"
 API = "https://publicapps.odh.ohio.gov/beachguardpublic/api/advisorieslist"
@@ -231,8 +232,8 @@ def main(argv=None) -> int:
     try:
         rows = fetch(sess)
     except (requests.RequestException, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"API: {type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"API: {error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     save_raw(SOURCE_ID, json.dumps(rows), "json")
     recs, meta = run(state, rows, now)

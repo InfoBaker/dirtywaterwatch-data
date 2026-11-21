@@ -5,12 +5,19 @@ name: Runner probe
 # runner reads, and Wisconsin and Nevada had been recorded as having no readable source. A barrier (a 403, a bot wall,
 # a timeout) is recorded in the register only when the runner meets it too.
 #
-# It prints, per address: the HTTP status, the size, the time, the content type and the final address. Nothing of the
-# body goes to the log. With save, the bodies are kept for three days as an artifact, for building test fixtures:
-# never save a page that can hold personal data (a name, a phone number, an e-mail address), because this
-# repository is public. This workflow reads only; it takes no secret, commits nothing and is in no concurrency group,
-# so it never waits for a refresh or a water batch and never holds one up. It makes one request per address: never
-# use it to work around a refusal.
+# It prints, per address: the HTTP status, the size, the time, the content type and the final address. The log is
+# public (security review 2026-11-17 #8): each address, asked and final, is printed as its scheme, host and path only
+# (no user, query string or fragment; scripts/log_redact.py), a failure as curl's exit code and its kind (dns,
+# refused, timeout, tls, ...), never curl's own words, and nothing of the body. An address carrying a user or a
+# password is not requested.
+#
+# With save, the bodies and that summary are kept as an artifact for one day, for building test fixtures. The
+# artifact is public like the repository, so save is for pages that carry no personal data: no private person's
+# name, street address, phone number or e-mail address. Nothing here can tell such a page apart: the person who
+# dispatches decides, and pages that can hold personal data (complaint logs, permit holders, sign-up lists) are probed
+# without save. This workflow reads only; it takes no secret, commits nothing and is in no concurrency group, so it
+# never waits for a refresh or a water batch and never holds one up. It makes one request per address: never use it
+# to work around a refusal.
 on:
   workflow_dispatch:
     inputs:
@@ -18,7 +25,7 @@ on:
         description: addresses, separated by spaces or new lines (at most 40)
         required: true
       save:
-        description: keep the bodies as an artifact for three days (pages without personal data only)
+        description: keep the bodies as a public artifact for one day (pages without personal data only)
         type: boolean
         default: false
 permissions:
@@ -28,32 +35,46 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262   # v4.4.0
         with:
-          sparse-checkout: pipeline/common.py
+          persist-credentials: false
+          sparse-checkout: |
+            pipeline/common.py
+            scripts/log_redact.py
+            scripts/wrangler_redact.py
           sparse-checkout-cone-mode: false
       - name: One ordinary request per address
         env:
           URLS: ${{ inputs.urls }}
         run: |
-          set -u
+          set -u -o pipefail
           UA=$(grep -m1 -o '"User-Agent": "[^"]*"' pipeline/common.py | cut -d'"' -f4)
           [ -n "$UA" ] || { echo "::error::the pipeline's user agent was not found in pipeline/common.py"; exit 1; }
+          why() {   # curl's exit code as a kind, never its message
+            case "$1" in
+              6) echo dns ;; 7) echo refused ;; 28) echo timeout ;; 47) echo redirects ;; 52) echo "empty answer" ;;
+              55|56) echo reset ;; 35|51|53|54|58|59|60|64|66|77|80|82|83|90|91) echo tls ;; *) echo failed ;;
+            esac
+          }
           mkdir -p probe
           i=0
           for u in $URLS; do
             i=$((i+1))
             [ "$i" -le 40 ] || { echo "more than 40 addresses: the rest are not requested"; break; }
             case "$u" in https://*|http://*) ;; *) echo "$i (not an http address, skipped)"; continue;; esac
+            rest=${u#*://}
+            case "${rest%%[/?#]*}" in *@*) echo "$i (an address with a user or password is not requested)"; continue;; esac
+            rc=0
             out=$(curl -sS -L --max-redirs 5 --connect-timeout 20 -m 60 -A "$UA" -o "probe/$i.body" \
-                  -w "%{http_code} %{size_download}B %{time_total}s %{content_type} -> %{url_effective}" "$u" 2>"probe/$i.err") \
-              || out="no answer ($(head -c 160 "probe/$i.err" | tr '\n' ' '))"
+                  -w "%{http_code} %{size_download}B %{time_total}s %{content_type} -> %{url_effective}" "$u" 2>/dev/null) \
+              || rc=$?
+            [ "$rc" = 0 ] || out="no answer (curl exit $rc, $(why "$rc"))"
             echo "$i $u : $out"
-          done | tee probe/summary.txt
-      - name: Keep the bodies (pages without personal data only)
+          done | python3 -I scripts/log_redact.py | tee probe/summary.txt
+      - name: Keep the bodies (pages without personal data only; one day)
         if: ${{ inputs.save }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02   # v4.6.2
         with:
           name: runner-probe-${{ github.run_id }}
           path: probe
-          retention-days: 3
+          retention-days: 1
