@@ -48,7 +48,7 @@ nothing else, never current/ or any public path):
                                          with -a<attempt> for a re-run attempt
 The history guard. Right after the restore the workflow keeps the restored archive (restored-build.tar.gz) and its
 records per source (counts: restored-counts.json; both in the runner's workspace, outside data/build). Before the
-save, guard counts data/build/events again. A source whose records fell by at least DROP_MIN_PERCENT per cent and at
+save, guard counts data/build/events again. A source whose records fell by at least DROP_MIN_PERCENT percent and at
 least DROP_MIN_RECORDS records, or whose events file disappeared or can no longer be read, is a drop: one ::warning::
 per source with its counts, the restored archive held, and data/build/history-guard.json written (time, run, each
 drop's counts, the held key and whether it uploaded; earlier drop runs kept below it). The save still goes on
@@ -919,7 +919,7 @@ def write_counts(src: Path, out: Path, now: datetime | None = None) -> dict:
 
 
 def history_drops(before: dict, after: dict) -> list[dict]:
-    """The sources whose records fell by at least DROP_MIN_RECORDS and DROP_MIN_PERCENT per cent of the restored
+    """The sources whose records fell by at least DROP_MIN_RECORDS and DROP_MIN_PERCENT percent of the restored
     count, or whose events file disappeared or can no longer be read. A source unreadable when restored has no
     count to compare and is left out."""
     out = []

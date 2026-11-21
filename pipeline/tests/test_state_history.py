@@ -115,10 +115,10 @@ def test_counts_of_a_damaged_tarball_fail_cleanly(tmp_path, capsys):
 # ---------------------------------------------------------------- what is a drop
 
 @pytest.mark.parametrize("before,after,drop", [
-    (500, 495, True),      # 5 records and exactly 1 per cent
+    (500, 495, True),      # 5 records and exactly 1%
     (500, 496, False),     # 4 records: under the 5
-    (1000, 991, False),    # 9 records: under 1 per cent
-    (1000, 990, True),     # 10 records: exactly 1 per cent
+    (1000, 991, False),    # 9 records: under 1%
+    (1000, 990, True),     # 10 records: exactly 1%
     (4, 0, False),         # all of a small file, but 4 records
     (5, 0, True),
     (3567, 218, True),     # a backfill cut to a 60-day window

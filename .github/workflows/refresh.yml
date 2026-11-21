@@ -277,7 +277,7 @@ jobs:
           fi
           rm -f obl-water.tar.gz
       - name: History guard (records per source against the restored state, before the save)
-        # a source whose records fell by at least 1 per cent and at least 5 records, or whose events file is gone, is
+        # a source whose records fell by at least 1% and at least 5 records, or whose events file is gone, is
         # a warning with its counts and data/build/history-guard.json, and the restored archive is held in R2 at
         # state/held/build-<date>-<run>.tar.gz; the save goes on either way (scripts/state_paths.py guard)
         if: success() && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
