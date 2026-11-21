@@ -167,7 +167,7 @@ SOURCE_NOTES = {
     "ri-nbc": {"events": "The Narragansett Bay Commission feed shows current overflows only; our record begins {first}."},
     "me-cbep-portland-cso": {"events": "Portland's filings cover {first} to {last}, storm by storm, with the gallons at each outlet; each report is dated to the storm's first and last day. Only measured discharges are listed: several outlets were not metered in 2015, and a discharge with no measured volume is missing.",
                              "volume": "Portland's sums leave out outlets that were not metered (several in 2015) and discharges with no measured volume."},
-    "me-bangor-sso-log": {"events": "Bangor's yearly reports list each sanitary sewer overflow the City found, {first} to {last}, with the time it was found and, where known, stopped."},
+    "me-bangor-sso-log": {"events": "Bangor's yearly reports list each sanitary sewer overflow the city found, {first} to {last}, with the time it was found and, where known, stopped."},
 }
 # Sources whose volume note is shown on the volume chart whenever they are in it (not only when they give ranges).
 VOLUME_NOTE_ALWAYS = {"me-cbep-portland-cso"}

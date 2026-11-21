@@ -32,6 +32,7 @@ def test_every_row_once_placed_only_on_a_water_the_log_names():
     assert not any(k.lower().startswith(("location", "address")) for r in out for k in r["raw"])
     assert {s for r in out for s in r["water_slugs"]} == {"penobscot-river-me", "kenduskeag-stream-me"}
     assert sorted(counts["water_without_record"]) == ["Birch Stream", "Penjajawoc Stream"]
+    assert (counts["with_water"], counts["no_water"], counts["open"]) == (15, 49, 8)
 
 
 def test_the_disposition_decides_the_water_and_whether_any_was_reached():
@@ -43,7 +44,7 @@ def test_the_disposition_decides_the_water_and_whether_any_was_reached():
     # a water with no record is named but not placed
     assert r["2024:24-06"]["waterbody_text"] == "Birch Stream" and r["2024:24-06"]["water_slugs"] == []
     # the ground alone, a basement, back into the system: the log's words are the reason no water was reached
-    for k in ("2024:24-01", "2024:24-03", "2020:20-01", "2017:17-01"):
+    for k in ("2024:24-01", "2024:24-03", "2020:20-01", "2017:17-01", "2020:20-03", "2020:20-04"):
         assert r[k]["raw"]["reached_water"] is False and r[k]["raw"]["final_disposition"] in r[k]["raw"]["_no_water_reason"]
     # a storm drain, a ditch or an unnamed stream stays open
     for k in ("2017:17-02", "2021:21-10", "2018:18-04", "2016:16-10"):
@@ -113,6 +114,14 @@ def test_an_unreadable_page_keeps_the_records_and_shows_the_failure(tmp_path, mo
     assert m.main([]) == 1
     out = json.loads((tmp_path / "events" / f"{m.SOURCE_ID}.json").read_text())
     assert out["ok"] is False and out["count"] == 72 and "report page" in out["error"]
+
+
+def test_a_page_that_lists_no_report_is_a_failed_check(tmp_path, monkeypatch):
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
+    monkeypatch.setattr(m.requests, "get", lambda *a, **k: Resp("<html>Site maintenance in progress</html>"))
+    assert m.main([]) == 1
+    out = json.loads((tmp_path / "events" / f"{m.SOURCE_ID}.json").read_text())
+    assert out["ok"] is False and out["count"] == 72 and "lists no Annual Report" in out["error"]
 
 
 def test_the_charts_name_the_source():

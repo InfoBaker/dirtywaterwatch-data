@@ -12,8 +12,9 @@ Source
   holds them as transcribed by two independent readings that agree on every row (the file's header says how), without
   the location column. The ingester reads that file and asks the City's page which reports are listed: a report year
   the file lacks (the 2025 report is due on 2026-01-31 and was not listed on 2026-11-21) or a known year whose link
-  changed is named in meta.unread_reports for a session to transcribe, and the run stays ok. A page that cannot be read
-  writes the records with ok=False (partial), so the check's failure shows and the records stay.
+  changed is named in meta.unread_reports for a session to transcribe, and the run stays ok. A page that cannot be read,
+  or that lists no report at all, writes the records with ok=False (partial), so the check's failure shows and the
+  records stay.
 
 Records
   One per log row: event_type sso, discharger me-bangor (ME0100781). started_at the time reported or discovered (the
@@ -65,7 +66,7 @@ LINK = re.compile(r"DocumentCenter/View/(\d+)/Annual-Report-on-Compliance-Calend
 WATER_NAMES = ("penobscot river", "kenduskeag stream", "birch stream", "penjajawoc stream")
 BANGOR_BOX = (-68.90, 44.74, -68.66, 44.90)       # lon/lat box of the city, for telling a same-named water elsewhere
 NO_WATER = re.compile(r"basement|back into|flowed back|returned to system|placed back|pumped back")
-OPEN_WATER = re.compile(r"possib|ms4|ditch|stream|river|storm|street|outfall")
+OPEN_WATER = re.compile(r"possib|\bms4\b|\bditch\b|\bstream\b|\briver\b|\bstorm\w*|\bstreet\b|\boutfall\b")   # word starts: "downstream" is no stream
 
 
 def report_url(year: int) -> str:
@@ -248,7 +249,9 @@ def main(argv=None) -> int:
     meta["counts"] = counts
     try:
         listed = listed_reports()
-    except requests.RequestException as e:
+        if not listed:          # a maintenance page, a challenge or a new link format: the check did not happen
+            raise ValueError("the page lists no Annual Report on Compliance")
+    except (requests.RequestException, ValueError) as e:
         meta["index_error"] = str(e)[:300]
         write_events(SOURCE_ID, records, ok=False, partial=True, error=f"the City's report page: {e}"[:300], meta=meta)
         print(f"{SOURCE_ID}: {len(records)} records; the City's report page was not read ({e})", file=sys.stderr)
