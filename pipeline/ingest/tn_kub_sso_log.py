@@ -78,6 +78,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
+from common import error_text
 from ingest.al_jefferson_county_soa import assign_ids, street_key, street_only
 
 SOURCE_ID = "tn-kub-sso-log"
@@ -315,7 +316,7 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
             resp.raise_for_status()
             rows, bad = parse(resp.json())
         except (requests.RequestException, ValueError) as e:
-            not_read[f"{first:%Y-%m}" if backfill else f"{first:%Y-%m}..{last:%Y-%m}"] = f"{type(e).__name__}: {e}"[:200]
+            not_read[f"{first:%Y-%m}" if backfill else f"{first:%Y-%m}..{last:%Y-%m}"] = f"{error_text(e)}"[:200]
             continue
         read_any = True
         counts.update(take(state, first, last, rows, now))

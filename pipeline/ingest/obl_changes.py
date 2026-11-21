@@ -37,6 +37,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from common import BUILD_DIR, DATA_DIR, write_json
+from common import error_detail, error_text
 from ingest import obl_waters
 
 ROOT = DATA_DIR.parent
@@ -129,7 +130,7 @@ def rewrite(states, obl_dir: Path, until: str | None, data_dir: Path = DATA_DIR)
         try:
             obl_waters.extract(st, obl_dir, path, until=until)
         except obl_waters.Partial as ex:
-            out[st] = f"refused ({ex})"
+            out[st] = f"refused ({error_detail(ex)})"
             continue
         # the records are what matters: an extract on file with the same records (its source line perhaps naming
         # an older date) is current, and is left exactly as it was
@@ -208,7 +209,7 @@ def check(obl_dir: Path | None = None, state_file: Path = STATE_FILE, status_fil
             ans = obl_api.changes(st["until"], etag=st.get("etag"))
         except obl_api.ApiError as ex:
             ans = None
-            say(f"the API could not be read ({ex}); this run goes on with the folder as restored")
+            say(f"the API could not be read ({error_detail(ex)}); this run goes on with the folder as restored")
         if ans and ans["status"] == 304:
             say(f"no change since {st['until']} (304)")
         elif ans and ans["status"] == 410:
@@ -272,7 +273,7 @@ def apply(latest: dict, obl_dir: Path, live: set, reported: set, run: dict, pend
         try:
             code, rec, succ = obl_api.water(slug)
         except obl_api.ApiError as ex:
-            say(f"{slug}: not fetched ({ex})")
+            say(f"{slug}: not fetched ({error_detail(ex)})")
             ok = False
             continue
         run["fetched"] += 1
@@ -305,7 +306,7 @@ def main(argv=None) -> int:
         check(Path(a.obl_dir) if a.obl_dir else None, max_records=a.max_records)
     except Exception as ex:  # noqa: BLE001 - never fails the refresh; the message carries no key (obl_api.scrub)
         import obl_api
-        say(f"not completed ({type(ex).__name__}: {obl_api.scrub(str(ex))[:300]}); the run goes on")
+        say(f"not completed ({obl_api.scrub(error_text(ex))}); the run goes on")
     return 0
 
 

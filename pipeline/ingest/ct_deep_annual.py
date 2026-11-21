@@ -74,6 +74,7 @@ from io import BytesIO
 import requests
 
 from common import EVENTS_DIR, HEADERS, RAW_DIR, event, now_iso, read_json, save_raw, write_events
+from common import error_text
 from ingest.ct_deep import TZ, clean, discharger_for, normalise, report_parts, scrub
 from ingest.ct_deep_archive import utility_key
 
@@ -330,8 +331,8 @@ def main(argv=None) -> int:
                         records.append(make_record(kind, row, orig, rec["_row"], name, sheet, ry, published, fetched, now,
                                                    dash, seen_ids))
     except Exception as e:
-        print(f"ct_deep_annual: failed: {type(e).__name__}: {e}", file=sys.stderr)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
+        print(f"ct_deep_annual: failed: {error_text(e)}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
         return 1
 
     records.sort(key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
@@ -357,7 +358,7 @@ def make_record(kind, row, orig, rownum, name, sheet, ry, published, fetched, no
         rec = normalise(kind, row, fetched, now)
         rec.pop("_key", None)
     except Exception as e:  # never drop a row
-        rec = event(source_id=SOURCE_ID, source_record_id="tmp", raw=scrub(dict(row)), parse_error=f"{type(e).__name__}: {e}")
+        rec = event(source_id=SOURCE_ID, source_record_id="tmp", raw=scrub(dict(row)), parse_error=f"{error_text(e)}")
     notes = [n for n in rec["raw"].get("_dww_note", []) if n != "no source status"]
     # the raw record is the workbook row as DEEP wrote it (not the translated one)
     rec["raw"] = {**scrub({k: (v.strip() if isinstance(v, str) else v) for k, v in orig.items()}),

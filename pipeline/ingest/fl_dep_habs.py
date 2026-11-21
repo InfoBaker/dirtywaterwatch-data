@@ -45,6 +45,7 @@ import requests
 
 from common import (BUILD_DIR, EVENTS_DIR, HEADERS, ROOT, event, now_iso, path_notes_to_meta, read_json, save_raw,
                     strip_house_numbers, write_events, write_json)
+from common import error_detail, error_text
 
 SOURCE_ID = "fl-dep-habs"
 LAYER = ("https://services1.arcgis.com/nRHtyn3uE1kyzoYc/arcgis/rest/services/AlgalBloom_Final_View/FeatureServer/0")
@@ -215,8 +216,8 @@ def main(argv=None) -> int:
             sess.headers.update(HEADERS)
             features = query_layer(sess)
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     features = [{k: a.get(k) for k in FIELDS} for a in features]
     state = read_json(STATE_FILE, {}) or {}

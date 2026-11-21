@@ -54,6 +54,7 @@ import requests
 
 from common import (DATA_DIR, BUILD_DIR, HEADERS, ROOT, event, now_iso, read_json, save_raw,
                     write_events, write_json)
+from common import error_text
 
 SOURCE_ID = "me-dep-cso-annual"
 OUTFALL_SOURCE_ID = "me-dep-mepdes-cso-outfalls"
@@ -174,7 +175,7 @@ def fetch_layer() -> tuple[list[dict], str, str | None]:
         return js["features"], "live", None
     except (requests.RequestException, ValueError) as e:
         p = RESEARCH / "raw" / "mepdes_cso_all.json"
-        err = f"MEPDES CSO layer: {type(e).__name__}: {e}"
+        err = f"MEPDES CSO layer: {error_text(e)}"
         print(f"warn: {err}; using {p} for water matching", file=sys.stderr)
         return (read_json(p, {}) or {}).get("features", []), "research copy", err
 

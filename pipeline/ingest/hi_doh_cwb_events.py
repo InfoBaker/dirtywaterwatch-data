@@ -104,6 +104,7 @@ import requests
 
 from common import (DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, parse_volume_gal, read_json, save_raw,
                     strip_house_numbers, write_events)
+from common import error_detail, error_text
 
 SOURCE_ID = "hi-doh-cwb-events-api"
 URL = "https://eha-cloud.doh.hawaii.gov/cwb/api/events"
@@ -660,8 +661,8 @@ def run(file: str | None = None, out: str | None = None) -> int:
         if isinstance(last_read, int) and len(doc["list"]) < MIN_ROWS_RATIO * last_read:
             raise ValueError(f"{len(doc['list'])} events, fewer than half the last good read's")
     except Exception as e:                       # an outage keeps the records
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}"[:300], path=path)
-        print(f"{SOURCE_ID}: read failed: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}"[:300], path=path)
+        print(f"{SOURCE_ID}: read failed: {error_detail(e)}", file=sys.stderr)
         return 1
     records, meta = build(doc, fetched_at, previous)
     write_events(SOURCE_ID, records, meta=meta, path=path)

@@ -70,6 +70,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text
 from ingest.oh_cso_pdf_notices import existing
 
 SOURCE_ID = "oh-willard-cso-notices"
@@ -346,8 +347,8 @@ def main(argv=None) -> int:
             page = r.text
         notices, unread = parse(page)
     except (requests.RequestException, LayoutError, OSError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"page: {type(e).__name__}: {e}", path=out)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"page: {error_text(e)}", path=out)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     if not a.file:
         save_raw(SOURCE_ID, json.dumps(notices), "json")          # the parsed notices only, never the page

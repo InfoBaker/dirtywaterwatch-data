@@ -49,6 +49,7 @@ from pathlib import Path
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
+from common import error_detail, error_text
 
 SOURCE_ID = "ca-sfpuc-beach-map"
 SERVICE = "https://infrastructure.sfwater.org/lims.asmx/getBeaches"
@@ -208,8 +209,8 @@ def main(argv=None) -> int:
         if not stations or len(stations) * 2 < last:
             raise RuntimeError(f"{len(stations)} stations answered (last good answer {last}): read as an outage")
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", path=out)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}", path=out)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     changes = step(state, stations, fetched_at)
     state.update(last_count=len(stations), polled_at=fetched_at)

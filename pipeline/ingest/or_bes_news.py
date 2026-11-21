@@ -99,6 +99,7 @@ import requests
 
 from common import (EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, scrub_text, strip_house_numbers,
                     write_events)
+from common import error_detail, error_text
 
 SOURCE_ID = "or-bes-news-rss"
 FEED = "https://www.portland.gov/bes/news/rss"
@@ -615,8 +616,8 @@ def main(argv: list[str] | None = None) -> int:
             doc = fetch_safe(sess, {r["source_record_id"]: r for r in prev})
             save_raw(SOURCE_ID, json.dumps(doc, ensure_ascii=False, indent=1), "json")
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     recs, stats = build(doc, prev, fetched_at)
     meta = {**stats, "feed": FEED, "registry_ids": [SOURCE_ID], "timezone": TZ.key,

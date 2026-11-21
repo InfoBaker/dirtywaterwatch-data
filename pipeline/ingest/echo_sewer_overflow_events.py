@@ -554,6 +554,7 @@ import requests
 import common
 from common import (BUILD_DIR, DATA_DIR, HEADERS, ROOT, event, now_iso, read_json, save_raw,
                     write_events, write_json)
+from common import error_detail, error_text
 
 SOURCE_ID = "echo-sewer-overflow"
 URL = "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"
@@ -1458,12 +1459,12 @@ def fetch() -> tuple[dict[str, list[dict]], dict]:
     try:
         return fetch_current()
     except (requests.RequestException, zipfile.BadZipFile, KeyError) as e:
-        why = f"{type(e).__name__}: {e.args[0] if isinstance(e, KeyError) and e.args else e}"
+        why = f"{type(e).__name__}: {e.args[0] if isinstance(e, KeyError) and e.args else error_detail(e)}"
         print(f"warn: ECHO current-version ZIP failed ({why}); trying the all-versions ZIP", file=sys.stderr)
     try:
         return fetch_all_versions(why)
     except (requests.RequestException, zipfile.BadZipFile, KeyError, RuntimeError) as e2:
-        why = f"{why}; all-versions ZIP: {type(e2).__name__}: {e2}"
+        why = f"{why}; all-versions ZIP: {error_text(e2)}"
     print(f"warn: ECHO downloads failed ({why}); using {FALLBACK_DIR}", file=sys.stderr)
     info: dict = {"url": URL, "via": "research copy", "last_modified": None, "raw_saved": None,
                   "error": f"ECHO download: {why}"}
@@ -2162,8 +2163,8 @@ def main(argv=None) -> int:
     try:
         tables, info = read_zip(path) if path else fetch()
     except RuntimeError as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=error_detail(e))
+        print(f"{SOURCE_ID}: {error_detail(e)}", file=sys.stderr)
         return 1
     errors = [info["error"]] if info.get("error") else []
     missing = [TABLES[k] for k in TABLES if k not in tables]

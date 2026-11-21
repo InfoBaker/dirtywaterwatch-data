@@ -73,6 +73,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, HOUSE_NUMBER_REMOVED, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text
 
 SOURCE_ID = "oh-neorsd-cso-notification-map"
 SERVICE = ("https://utility.arcgis.com/usrsvcs/servers/d1477ea79422426b90560e015ce2bad9/rest/services/Public/"
@@ -314,8 +315,8 @@ def main(argv=None) -> int:
         docs = fetch(sess)
         rows = [r for lid, doc in docs.items() for r in rows_of(doc, LAYERS[lid])]
     except (requests.RequestException, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"layers: {type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"layers: {error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     save_raw(SOURCE_ID, json.dumps(rows), "json")          # the filtered safe-field rows only
     recs, meta = run(docs, now, STATE_PATH)

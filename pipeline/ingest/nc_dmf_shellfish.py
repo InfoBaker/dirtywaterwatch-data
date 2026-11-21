@@ -75,6 +75,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail
 from ingest import nv_state_parks_hab as P
 
 SOURCE_ID = "nc-dmf-polluted-area-proclamations"
@@ -337,7 +338,7 @@ def parse(page: str, n: int = 0) -> dict:
             rows.append(parse_row(b))
         except ValueError as e:
             h = re.search(r">(PA-[A-Z0-9-]+)<", b)
-            unread.append({"page": n, "row": i, "id": h.group(1) if h else None, "reason": str(e)})
+            unread.append({"page": n, "row": i, "id": h.group(1) if h else None, "reason": error_detail(e)})
     return {"rows": rows, "unread": unread, "skipped": skipped, "last_page": last_page(after), "count": len(blocks)}
 
 

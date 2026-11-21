@@ -52,6 +52,7 @@ import requests
 
 import common
 from common import BUILD_DIR, DATA_DIR, HEADERS, RAW_DIR, ROOT, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_text
 
 SOURCE_ID = "nj-echo-monthly"
 URL = "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart"
@@ -99,7 +100,7 @@ def fetch(permit: str, since: date) -> tuple[dict | None, str]:
             save_raw(SOURCE_ID, r.content, f"{permit}-{PARAM}.json")
             return js["Results"], "live"
         except (requests.RequestException, ValueError) as e:
-            err = f"{type(e).__name__}: {e}"
+            err = f"{error_text(e)}"
             time.sleep(3 * (i + 1))
     return None, f"failed ({err})"
 

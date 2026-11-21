@@ -81,6 +81,7 @@ import requests
 
 from common import (BUILD_DIR, EVENTS_DIR, HEADERS, end_after, event, now_iso, read_json, save_raw, scrub_text,
                     write_events, write_json)
+from common import error_detail, error_text
 
 SOURCE_ID = "ma-somerville-cso-table"
 URL = "https://www.somervillema.gov/cso"
@@ -530,8 +531,8 @@ def run(page: str, now: str, state_path: Path = STATE_PATH, events_dir: Path = E
     try:
         rows, unread, facts = parse(page)
     except LayoutError as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"page: {e}", path=out)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"page: {error_detail(e)}", path=out)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1, [], {}
     state = read_json(state_path, {}) or {}
     recovered = None
@@ -597,8 +598,8 @@ def main(argv=None) -> int:
             r.raise_for_status()
             page = r.text
         except requests.RequestException as e:
-            write_events(SOURCE_ID, [], ok=False, error=f"page: {type(e).__name__}: {e}")
-            print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+            write_events(SOURCE_ID, [], ok=False, error=f"page: {error_text(e)}")
+            print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
             return 1
     state_path = out.with_suffix(".state.json") if out else STATE_PATH
     code, recs, meta = run(page, now, state_path=state_path, out=out)

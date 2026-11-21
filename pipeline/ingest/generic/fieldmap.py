@@ -35,6 +35,7 @@ from zoneinfo import ZoneInfo
 
 from common import (DATA_DIR, EVENT_TYPES, KEEP_KEYS, NAME_KEYS, NAME_REMOVED, PERSONAL_KEYS, STATUSES, end_after,
                     parse_volume_gal, read_json, scrub_discharger, scrub_text)
+from common import error_detail, error_text
 
 TIME_FIELDS = ("started_at", "ended_at", "reported_at", "published_at", "source_updated_at")
 PRECISIONS = {"minute", "hour", "day", "month", "year", "poll"}
@@ -758,7 +759,7 @@ def spec_errors(where: str, spec, safe: list, target: str | None = None) -> list
         try:
             resolve(s["transform"])
         except SpecError as e:
-            errs.append(f"{where}: {e}")
+            errs.append(f"{where}: {error_detail(e)}")
     return errs
 
 
@@ -884,7 +885,7 @@ def validate(block: dict, source_id: str = "") -> list[str]:
         try:
             resolve(fn)
         except SpecError as e:
-            errs.append(f"{k}: {e}")
+            errs.append(f"{k}: {error_detail(e)}")
     if str(w.get("matcher") or "").endswith(".state_waters"):
         if not w.get("state"):
             errs.append("waters.state is missing: the state matcher needs the state")
@@ -1004,7 +1005,7 @@ def _guarded(notes: dict, target: str, default, fn, *args):
     except SpecError:
         raise
     except Exception as e:  # noqa: BLE001 - never drop a record
-        notes.setdefault("_hook_errors", []).append(f"record.{target}: {type(e).__name__}: {e}")
+        notes.setdefault("_hook_errors", []).append(f"record.{target}: {error_text(e)}")
         return default
 
 

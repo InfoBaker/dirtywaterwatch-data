@@ -47,6 +47,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail, error_text
 from ingest.nh_vt_waters import match_waters
 
 SOURCE_ID = "nh-des-swimming"
@@ -183,7 +184,7 @@ def beach_records(feats: list[dict], fetched_at: str, updated: str | None) -> li
             except ValueError as ex:
                 out.append(event(**common, source_record_id=f"{key}:hist:unparsed:{part.strip()}", status="unknown",
                                  raw={"Advisory_history": hist, "EPA_ID": epa, "_site_key": key + ":hist"},
-                                 parse_error=f"advisory history range not a date: {part.strip()!r} ({ex})"))
+                                 parse_error=f"advisory history range not a date: {part.strip()!r} ({error_detail(ex)})"))
                 continue
             out.append(event(**common, source_record_id=f"{key}:hist:{s.isoformat()}", status="advisory_lifted",
                              started_at=_day(s), ended_at=_day(e), time_precision="day",
@@ -303,7 +304,7 @@ def main(argv=None) -> int:
             meta[f"{tag}_records"], meta[f"{tag}_data_last_edit"] = len(recs), updated
             meta.setdefault("attribution", info.get("copyrightText"))
         except Exception as e:
-            errors.append(f"{tag}: {type(e).__name__}: {e}")
+            errors.append(f"{tag}: {error_text(e)}")
     meta.update({
         "service": SERVICE, "item": ITEM,
         "licence": licence, "licence_access_information": access,

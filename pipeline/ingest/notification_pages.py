@@ -81,6 +81,7 @@ from zoneinfo import ZoneInfo
 
 from common import (BROWSER_HEADERS, BUILD_DIR, DATA_DIR, HEADERS, ROOT, event, now_iso, read_json, save_raw,
                     scrub_text, write_events, write_json)
+from common import error_detail, error_text
 
 SOURCE_ID = "notification-pages"
 REGISTER = DATA_DIR / "notice-channels.json"
@@ -530,7 +531,7 @@ def validate_layout(path: Path | None = None, dischargers: list[dict] | None = N
         try:
             parts.append((single.name, read_json(single, None), None))
         except ValueError as e:
-            errs.append(f"{single.name}: not JSON ({e})")
+            errs.append(f"{single.name}: not JSON ({error_detail(e)})")
     for f in state_files(folder):
         name = f"{folder.name}/{f.name}"
         m = STATE_FILE.match(f.name)
@@ -540,7 +541,7 @@ def validate_layout(path: Path | None = None, dischargers: list[dict] | None = N
         try:
             parts.append((name, read_json(f, None), m.group(1).upper()))
         except ValueError as e:
-            errs.append(f"{name}: not JSON ({e})")
+            errs.append(f"{name}: not JSON ({error_detail(e)})")
     for name, doc, st in parts:
         errs += [f"{name}: {e}" for e in validate_register(doc, dischargers, root)]
         if not isinstance(doc, dict) or not isinstance(doc.get("channels"), list):
@@ -696,7 +697,7 @@ def extract(method: str, body: bytes) -> tuple[list[str], str | None]:
             return rss_lines(body), None
         return html_lines(body.decode("utf-8", "replace")), None
     except Exception as e:                                    # a page that cannot be read is still reachable
-        return [], f"{type(e).__name__}: {e}"
+        return [], f"{error_text(e)}"
 
 
 def filtered(lines: list[str], ignore: list[str]) -> list[str]:
@@ -1189,7 +1190,7 @@ def fetch(url: str, browser: bool = False) -> dict:
     try:
         r = requests.get(url, headers=hdr, timeout=TIMEOUT, allow_redirects=True)
     except Exception as e:
-        return {"at": at, "ok": False, "http_status": None, "error": f"{type(e).__name__}: {e}"[:300], "body": b""}
+        return {"at": at, "ok": False, "http_status": None, "error": f"{error_text(e)}"[:300], "body": b""}
     ok = 200 <= r.status_code < 300 and bool(r.content)
     return {"at": at, "ok": ok, "http_status": r.status_code, "final_url": r.url,
             "content_type": r.headers.get("Content-Type"), "last_modified": r.headers.get("Last-Modified"),
@@ -1332,7 +1333,7 @@ def main(argv=None) -> int:
         try:
             counts = split_register(where, None)
         except ValueError as e:
-            print(f"{SOURCE_ID}: not split: {e}", file=sys.stderr)
+            print(f"{SOURCE_ID}: not split: {error_detail(e)}", file=sys.stderr)
             return 1
         folder = (Path(where) if where else REGISTER).with_suffix("")
         print(f"{folder}: {sum(counts.values())} channels in {len(counts)} state files "
@@ -1351,12 +1352,12 @@ def main(argv=None) -> int:
             print(f"{shown}: barriers written ({register_layout(where)}): {apply_barriers(where)}")
             return 0
     except ValueError as e:
-        print(f"{SOURCE_ID}: nothing written: {e}", file=sys.stderr)
+        print(f"{SOURCE_ID}: nothing written: {error_detail(e)}", file=sys.stderr)
         return 1
     try:
         doc = load_register(where)
     except (OSError, ValueError) as e:                     # another builder mid-write: try again next refresh
-        print(f"{SOURCE_ID}: the register could not be read ({e}); nothing fetched", file=sys.stderr)
+        print(f"{SOURCE_ID}: the register could not be read ({error_detail(e)}); nothing fetched", file=sys.stderr)
         return 1
     errs = validate_layout(where, read_json(DATA_DIR / "dischargers.json", []), ROOT)
     if errs:

@@ -170,6 +170,7 @@ import zones
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, OPERATOR_WORDS, ROOT, drop_house_numbers, event, now_iso,
                     parse_volume_gal, path_notes_to_meta, read_json, residence_numbers, save_raw, scrub_text,
                     strip_house_numbers, write_events, write_json)
+from common import error_detail, error_text
 
 SOURCE_ID = "fl-dep-pnp"
 SERVICE = "https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer"
@@ -1138,7 +1139,7 @@ def build_record(a: dict, key: str, fetched_at: str, prev: dict | None, permits:
         return _record(a, base, raw, text, facility, kind, et, rule, prev, permits)
     except Exception as e:  # noqa: BLE001 - never drop a record
         return event(**base, event_type="unknown", status="unknown", raw=raw, authority=AUTHORITY,
-                     parse_error=f"{type(e).__name__}: {e}")
+                     parse_error=f"{error_text(e)}")
 
 
 def pnp_url(a: dict) -> str:
@@ -1447,8 +1448,8 @@ def main(argv=None) -> int:
             if not features:
                 raise RuntimeError("the layer returned no notices")
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     # the saved page holds the safe fields and the scrubbed text only (the relationship is a code)
     safe = [safe_attributes(a) for a in features]

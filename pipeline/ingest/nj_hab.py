@@ -50,6 +50,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, read_json, save_raw, strip_personal, write_events, write_json
+from common import error_text
 from ingest import nj_waters
 
 SOURCE_ID = "nj-hab"
@@ -291,7 +292,7 @@ def main(argv=None) -> int:
         elif prev and len(feats) < prev / 2:
             err = f"incomplete response: {len(feats)} visits against {prev} before"
     except (requests.RequestException, ValueError) as e:
-        feats, err = [], f"{type(e).__name__}: {e}"
+        feats, err = [], f"{error_text(e)}"
     if err:
         write_events(SOURCE_ID, [], ok=False, error=err)
         print(f"{SOURCE_ID}: fetch failed, records kept: {err}", file=sys.stderr)

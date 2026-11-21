@@ -73,6 +73,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, read_json, save_raw, strip_personal, write_events, write_json
+from common import error_text
 from ingest import nj_waters
 
 SOURCE_ID = "nj-beaches"
@@ -444,7 +445,7 @@ def backfill(state: dict, years: list[int], now: datetime, errors: list[str]) ->
             rows = parse_incidents(r.content.decode("utf-8-sig", errors="replace"))
             save_raw(SOURCE_ID, r.content, f"incident-{y}.csv")
         except (requests.RequestException, ValueError) as e:
-            errors.append(f"incident CSV {y}: {type(e).__name__}: {e}")
+            errors.append(f"incident CSV {y}: {error_text(e)}")
             continue
         # a year's runs are replaced by the new download (revised rows win)
         for k in [k for k, v in state["history"].items() if v.get("year") == y]:
@@ -475,7 +476,7 @@ def main(argv=None) -> int:
         js = r.json()
         stations, _, snap_error = validate_snapshot(js, state.get("last_station_count"))
     except (requests.RequestException, ValueError) as e:
-        stations, snap_error = None, f"{type(e).__name__}: {e}"
+        stations, snap_error = None, f"{error_text(e)}"
     if snap_error:
         state["failed_polls"] = state.get("failed_polls", 0) + 1
         state["last_failure"] = {"at": poll_at, "error": snap_error}

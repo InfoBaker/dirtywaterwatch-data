@@ -79,6 +79,7 @@ import requests
 
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, parse_volume_gal,
                     path_notes_to_meta, read_json, save_raw, write_events, write_json)
+from common import error_detail, error_text
 from ingest import ny_waters
 
 SOURCE_ID = "ny-dec-sprtk"
@@ -530,7 +531,7 @@ def parse_notice(n: dict) -> dict:
             raw_vals[key] = parse_dt(f.get(key))
         except ValueError as e:
             raw_vals[key] = (None, None)
-            problems.append(f"{key}: {e}")
+            problems.append(f"{key}: {error_detail(e)}")
     era, near = row_era(*raw_vals["airDateTime"])
     p = {"problems": problems, "near_cutover": near, "basis": {}}
     for key, short in (("airDateTime", "air"), ("startDateTime", "start"), ("endDateTime", "end"),
@@ -769,7 +770,7 @@ def to_record(n: dict, chain_id: str, chain: list[dict], pos: int, parent: str |
     try:
         return build_record(n, f, p, chain_id, chain, pos, base, raw, ctx)
     except Exception as e:  # noqa: BLE001 - never drop a record
-        return event(**base, event_type="unknown", status="unknown", raw=raw, parse_error=f"{type(e).__name__}: {e}")
+        return event(**base, event_type="unknown", status="unknown", raw=raw, parse_error=f"{error_text(e)}")
 
 
 def build_record(n, f, p, chain_id, chain, pos, base, raw, ctx) -> dict:
@@ -889,7 +890,7 @@ def fetch_workbook(sess: requests.Session, refetch: bool, max_age_h: float, file
                 content, info = r.content, {"via": "dec", "url": r.url, "last_modified": r.headers.get("Last-Modified")}
                 break
             except Exception as e:  # noqa: BLE001
-                errors.append(f"{url}: {type(e).__name__}: {str(e)[:160]}")
+                errors.append(f"{url}: {error_text(e)}")
         if content is None:
             url = ARCHIVE_URL.format(ts=datetime.now(UTC).strftime("%Y%m%d%H%M%S"))
             for attempt in range(3):
@@ -908,7 +909,7 @@ def fetch_workbook(sess: requests.Session, refetch: bool, max_age_h: float, file
                             "dec_errors": errors}
                     break
                 except Exception as e:  # noqa: BLE001
-                    errors.append(f"archive.org: {type(e).__name__}: {str(e)[:160]}")
+                    errors.append(f"archive.org: {error_text(e)}")
                     time.sleep(10 * (attempt + 1))
         if content is None:
             if cached_file and cached_file.exists():
@@ -967,8 +968,8 @@ def main(argv=None) -> int:
         content, wb = fetch_workbook(sess, args.refetch, args.max_age, args.file)
         tabs = read_workbook(content)
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"ny-dec-sprtk: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"ny-dec-sprtk: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
 
     notices, website, stats = notices_from(tabs)

@@ -57,6 +57,7 @@ from datetime import date, timedelta
 from urllib.parse import quote
 
 from common import DATA_DIR, HEADERS, event, write_events
+from common import error_detail
 from ingest.me_dep_cso import dischargers, me_waters_by_name, outfall_water, registry_index
 
 SOURCE_ID = "me-cbep-portland-cso"
@@ -325,8 +326,8 @@ def main(argv=None) -> int:
         records = merged_records(MERGED_REF.read_text(), place, counts)
         records += filing_records(FILING_REF.read_text(), place, counts)
     except (KeyError, ValueError, TypeError, csv.Error) as e:      # a file that matches its pin cannot do this
-        write_events(SOURCE_ID, [], ok=False, error=f"reference files could not be read: {e!r}", meta=meta)
-        print(f"{SOURCE_ID}: reference files could not be read: {e!r}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"reference files could not be read: {error_detail(e)}", meta=meta)
+        print(f"{SOURCE_ID}: reference files could not be read: {error_detail(e)}", file=sys.stderr)
         return 1
     records.sort(key=lambda e: (e["started_at"], e["event_id"]), reverse=True)
     meta["counts"] = counts

@@ -33,6 +33,7 @@ from urllib.parse import urljoin
 import requests
 
 from common import HEADERS, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text, url_label
 
 
 class NoticeError(ValueError):
@@ -94,8 +95,8 @@ def run_feed(source_id: str, index_url: str, pattern: re.Pattern, parse: Callabl
         if not links:
             raise LayoutError("no notice PDF link on the index page")
     except (requests.RequestException, LayoutError) as e:
-        write_events(source_id, [], ok=False, error=f"index: {type(e).__name__}: {e}", path=out)
-        print(f"{source_id}: FAILED {e}", file=sys.stderr)
+        write_events(source_id, [], ok=False, error=f"index: {error_text(e)}", path=out)
+        print(f"{source_id}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     state = read_json(state_path, {}) or {}
     held = state.setdefault("notices", {})
@@ -118,7 +119,7 @@ def run_feed(source_id: str, index_url: str, pattern: re.Pattern, parse: Callabl
                 continue
             parsed = parse(text)
         except (requests.RequestException, NoticeError, ValueError, ImportError) as e:
-            unread[url] = f"{type(e).__name__}: {str(e)[:120]}"      # pypdf missing: unread, never "no notices"
+            unread[url] = f"{error_text(e)}"      # pypdf missing: unread, never "no notices"
             continue
         merge(state, url, parsed, now)
         new.append(parsed)
@@ -134,7 +135,7 @@ def run_feed(source_id: str, index_url: str, pattern: re.Pattern, parse: Callabl
     if unread:
         meta["unread"] = unread
         write_events(source_id, recs, ok=False, partial=True, meta=meta, path=out,
-                     error="notices not read: " + "; ".join(f"{u.rsplit('/', 1)[-1]}: {why}" for u, why in unread.items()))
+                     error="notices not read: " + "; ".join(f"{url_label(u)}: {why}" for u, why in unread.items()))
         print(f"{source_id}: PARTIAL {len(recs)} records; {len(unread)} notices not read", file=sys.stderr)
         return 1
     write_events(source_id, recs, meta=meta, path=out)

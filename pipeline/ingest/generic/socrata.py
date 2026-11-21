@@ -17,6 +17,7 @@ fetch block keys
 from __future__ import annotations
 
 import json
+import re
 from datetime import UTC, datetime
 
 from ingest.generic.base import Fetched, get, get_json, load_pages, pages_doc
@@ -69,7 +70,9 @@ def read_pages(block: dict, sess, u: dict) -> tuple[list, int]:
     while True:
         page = get_json(sess, u["json"], {**params, "$offset": n})
         if isinstance(page, dict) and page.get("error"):
-            raise RuntimeError(f"Socrata error: {page.get('message') or page}")
+            # the answer's code word ("query.soql.no-such-column") or nothing; never its message (security #7)
+            code = str(page.get("code") or "")
+            raise RuntimeError("Socrata error" + (f" ({code})" if re.fullmatch(r"[A-Za-z0-9_.-]{1,60}", code) else ""))
         pages.append(page)
         n += len(page)
         if len(page) < size:

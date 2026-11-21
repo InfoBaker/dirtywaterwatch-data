@@ -41,11 +41,14 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 100   # a one-time backfill plus the refresh ran past 55 minutes on 2026-11-04
+    # The secrets are given to the steps that use them, never to the job (security review 2026-11-17 #12): the
+    # actions and the installs of the Python packages, wrangler and poppler run without them. CLOUDFLARE_API_TOKEN is
+    # the secret CLOUDFLARE_R2_TOKEN (R2 objects in dirtywaterwatch-data through R2's S3 endpoint; nothing else since
+    # 2026-11-18); scripts/r2-s3-keys.sh writes the S3 keys derived from it to the job's environment for the steps
+    # after it. CLOUDFLARE_ACCOUNT_ID also goes to each step that runs wrangler, whose filter takes it out of the log.
+    # Actions are pinned to a full commit (the version in the comment), wrangler and the Python packages to exact
+    # versions (pipeline/requirements.txt).
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}   # R2 objects in dirtywaterwatch-data (S3 endpoint); nothing else since 2026-11-18
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-      OBL_API_KEY: ${{ secrets.OBL_API_KEY }}
       PYTHONUNBUFFERED: '1'
     steps:
       - name: Dataset release due (decided from the run's own start time)
@@ -64,24 +67,34 @@ jobs:
           echo "due=$due" >> "$GITHUB_OUTPUT"; echo "weekly=$weekly" >> "$GITHUB_OUTPUT"
           echo "dataset release: due=$due weekly=$weekly ($EVENT, $(date -u +%FT%TZ))"
       - name: Secrets present
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ] || {
             echo "::error::CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID are needed"; exit 1; }
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262   # v4.4.0
+        with: { persist-credentials: false }   # nothing here pushes; the release uses GH_TOKEN
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065   # v5.6.0
         with: { python-version: '3.12', cache: pip, cache-dependency-path: pipeline/requirements.txt }
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020   # v4.4.0
         with: { node-version: 22 }
       # requirements.txt carries shapely, which also places South Dakota's EPA overflow reports in the Mountain or Central
       # zone by their points (data/reference/sd-mountain-time-counties.json, committed; nothing to fetch here)
       - run: python -m venv .venv && .venv/bin/pip install -q -r requirements.txt
         working-directory: pipeline
-      - run: npm install -g wrangler@4 && sh scripts/wrangler-guard.sh   # every later wrangler call is filtered (no account name in the log)
+      - run: npm install -g wrangler@4.158.0 && sh scripts/wrangler-guard.sh   # every later wrangler call is filtered (no account name in the log)
       - run: sh scripts/r2-s3-keys.sh   # R2 objects through R2's S3 endpoint: the token is limited to the pipeline's buckets
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       - name: Pause switch (R2 state/PAUSE, shared with the site's publish workflow)
         id: pause
         # set: nothing is collected, published or saved this run (every later step is skipped and the run succeeds);
         # not set: the run goes on; could not be checked: the run stops, so a pause is never missed (SOL wave1 P2-9)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           rc=0; python3 -I scripts/state_paths.py fetch state/PAUSE pause.check || rc=$?
           rm -f pause.check
@@ -95,11 +108,17 @@ jobs:
         # ingest/il_mwrd_lake_reversals.py reads the PDF with poppler's pdftotext; without it that feed writes ok=False
         # and keeps its previous records, so a failed install warns and never stops the run
         if: steps.pause.outputs.paused != '1'
+        env:
+          AWS_ACCESS_KEY_ID: ''       # no storage keys here (scripts/r2-s3-keys.sh put them in the job's environment)
+          AWS_SECRET_ACCESS_KEY: ''
         run: |
           command -v pdftotext >/dev/null || sudo apt-get install -y -qq poppler-utils >/dev/null \
             || echo "::warning::poppler-utils could not be installed; MWRD's reversals table is not read this run"
       - name: Restore pipeline state from R2
         if: steps.pause.outputs.paused != '1'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           # a missing object is a first run; one that is there but cannot be fetched or unpacked stops the run here, so
           # nothing is published without the history and the blocklist and the stored state is never saved over.
@@ -117,6 +136,9 @@ jobs:
       - name: Restore the raw caches from R2 (after the build state, which names the NY workbook entry)
         id: restore_raw
         if: steps.pause.outputs.paused != '1'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           # only the listed cache paths are written (scripts/state_paths.py unpack), whatever the tarball holds. Never
           # fails the run: without the caches it fetches what it needs. One that is there but could not be fetched is
@@ -133,6 +155,10 @@ jobs:
           fi
       - name: openboatlaunch's water records and outlines (its API, else the last good copy in R2)
         if: steps.pause.outputs.paused != '1'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          OBL_API_KEY: ${{ secrets.OBL_API_KEY }}
         run: |
           # into ../openboatlaunch/out (water/<slug>.json and meta.json only: scripts/state_paths.py unpack-obl rules).
           # fetch-obl pulls the API's national bulk file (sha256 checked) at most once a day and only for a new
@@ -156,28 +182,48 @@ jobs:
         if: steps.pause.outputs.paused != '1' && github.event_name == 'workflow_dispatch' && github.event.inputs.backfill != ''
         env:
           BACKFILL: ${{ github.event.inputs.backfill }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OBL_API_KEY: ${{ secrets.OBL_API_KEY }}
         run: |
           # each module reads its full history once (--backfill); the refresh that follows dedupes and the state save keeps it.
           # The rule for a backfill's exit code (2026-11-17, after refresh 43995607963): a module exits 0 when it read its
           # list and saved what it could read, naming the documents it could not read in its meta and its output line
           # (the feed stays unhealthy until they read); it exits non-zero only when the read itself failed (no list, nothing
           # read, a changed layout), and that fails this step. A module must accept --backfill (an unknown flag fails here).
+          # the module's output reaches the public log through scripts/log_redact.py (addresses as scheme, host and
+          # path; no key, token or account id; security review 2026-11-17 #7); pipefail keeps the module's exit code
+          set -o pipefail
           rc=0
           for m in $BACKFILL; do
             case "$m" in *[!a-z0-9_]*) echo "::error::bad module name: $m"; exit 1 ;; esac
             [ -f "pipeline/ingest/$m.py" ] || { echo "::error::no such ingest module: $m"; exit 1; }
             echo "== backfill ingest.$m"
-            (cd pipeline && .venv/bin/python -m "ingest.$m" --backfill) || { echo "::error::ingest.$m --backfill failed"; rc=1; }
+            (cd pipeline && .venv/bin/python -m "ingest.$m" --backfill) 2>&1 | python3 -I scripts/log_redact.py \
+              || { echo "::error::ingest.$m --backfill failed"; rc=1; }
           done
           exit $rc
       - name: Refresh (feeds, status, reaches, charts, export, tally, R2 current/)
         id: refresh
         if: steps.pause.outputs.paused != '1'
         # a refresh that stopped at once (data/build/PAUSE, or another run's lock) says skipped=1: nothing after it is
-        # published or saved (SOL wave1 P2-9)
-        run: sh scripts/refresh-data.sh
+        # published or saved (SOL wave1 P2-9). Its output reaches the public log through scripts/log_redact.py
+        # (addresses as scheme, host and path; no key, token or account id; security review 2026-11-17 #7); pipefail
+        # keeps the refresh's own exit code (the filter always exits 0)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OBL_API_KEY: ${{ secrets.OBL_API_KEY }}
+        run: |
+          set -o pipefail
+          sh scripts/refresh-data.sh 2>&1 | python3 -I scripts/log_redact.py
       - name: Full export to R2 for the site build (state/out.tar.gz; the site repository's publish workflow reads it)
         if: success() && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           [ -f data/build/export-blocked.json ] && { echo "export blocked; out/ not published"; exit 0; }
           [ -d out ] || { echo "::error::no out/ folder: nothing to publish, and no state is saved"; exit 1; }
@@ -189,6 +235,9 @@ jobs:
         # before the build state: when the upload fails, data/build/obl-changes.json goes back to before this run
         # (obl-not-saved), so the next run, restoring the older copy, asks for the same changes again
         if: success() && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           rc=0; python3 -I scripts/state_paths.py pack-obl obl-water.tar.gz || rc=$?
           if [ "$rc" = 0 ]; then
@@ -203,6 +252,9 @@ jobs:
         # only after a refresh that ran to the end: a cancelled or failed run must not overwrite the saved history
         # (a seed from the owner's machine, or the last good run) with a partial one; nor a paused or skipped one
         if: success() && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           tar -czf build.tar.gz data/build
           # over 200 MB a warning (the history is still saved); over wrangler's 300 MiB upload limit, an error
@@ -214,6 +266,9 @@ jobs:
         # continue-on-error keeps the dataset release going while that is looked at.
         if: success() && steps.restore_raw.outcome == 'success' && steps.restore_raw.outputs.keep != '1' && steps.refresh.outputs.skipped != '1'
         continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           python3 -I scripts/state_paths.py pack raw-cache.tar.gz
           wrangler r2 object put dirtywaterwatch-data/state/raw-cache.tar.gz --file raw-cache.tar.gz --remote
@@ -225,6 +280,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           WEEKLY: ${{ steps.release.outputs.weekly }}
+          AWS_ACCESS_KEY_ID: ''       # no storage keys here (scripts/r2-s3-keys.sh put them in the job's environment)
+          AWS_SECRET_ACCESS_KEY: ''
         run: |
           [ -f data/build/export-blocked.json ] && { echo "export blocked; no release"; exit 0; }
           (cd out && zip -qr ../dataset.zip . -x 'csv/*')

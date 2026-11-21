@@ -54,6 +54,7 @@ import requests
 from build import redact
 from common import (BUILD_DIR, HEADERS, ROOT, event, now_iso, path_notes_to_meta, read_json, save_raw,
                     scrub_text, write_events, write_json)
+from common import error_detail, error_text
 from ingest import md_waters
 
 SOURCE_ID = "md-aa-health-closings"
@@ -445,8 +446,8 @@ def main(argv=None) -> int:
                 fetched += 1
                 time.sleep(0.3)
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
 
     # keep the list and every notice page read (raw HTML) whenever their text changed

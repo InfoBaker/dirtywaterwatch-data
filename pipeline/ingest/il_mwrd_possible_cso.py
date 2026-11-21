@@ -54,6 +54,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, DATA_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text
 from ingest import il_mwrd as M
 
 SOURCE_ID = "il-mwrd-possible-cso-events-layer"
@@ -258,8 +259,8 @@ def main(argv=None) -> int:
         doc, content = fetch()
         rows_of(doc)
     except (requests.RequestException, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"layer: {type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"layer: {error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     if doc.get("features"):
         save_raw(SOURCE_ID, content, "json")
