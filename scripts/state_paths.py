@@ -35,6 +35,44 @@ Three state objects:
                            manifest.json), public map-layer answers kept so the weekly job fetches a state again only
                            when EPA reloaded it; written and read by the weekly job only (unpack-attains).
 
+History copies of state/build.tar.gz (2026-11-21). R2 keeps no versions and the bucket has no expiry rule, so each
+save of state/build.tar.gz replaces the only copy: a run that ends well with less history than it restored (a module
+that rewrites its file from a short window, a code change, a bad merge) would lose the rest for good. The refresh
+keeps three kinds of copy of the same archive, private like it and under state/ only (GENERATION_KEY; put() writes
+nothing else, never current/ or any public path):
+  state/daily/build-<Mon..Sun>.tar.gz    the first save of each UTC day: a ring of seven keys, each overwritten a week
+                                         later, so nothing is listed or deleted
+  state/monthly/build-<YYYY-MM>.tar.gz   the first save of each calendar month (UTC); kept
+  state/held/build-<date>-<run>.tar.gz   the archive as restored (the history before the run), uploaded by the
+                                         history guard when a source lost records; kept. <run> is the Actions run id,
+                                         with -a<attempt> for a re-run attempt
+The history guard. Right after the restore the workflow keeps the restored archive (restored-build.tar.gz) and its
+records per source (counts: restored-counts.json; both in the runner's workspace, outside data/build). Before the
+save, guard counts data/build/events again. A source whose records fell by at least DROP_MIN_PERCENT per cent and at
+least DROP_MIN_RECORDS records, or whose events file disappeared or can no longer be read, is a drop: one ::warning::
+per source with its counts, the restored archive held, and data/build/history-guard.json written (time, run, each
+drop's counts, the held key and whether it uploaded; earlier drop runs kept below it). The save still goes on
+(operations are not disrupted; the held copy and the warning are the safeguard). No drop: nothing uploaded. No
+restored state (a first run): nothing compared.
+The generation record, data/build/state-generations.json, travels with the state. Before the archive is made,
+generations plan writes the copies due (the day's daily when the record does not hold this UTC date for that weekday,
+the month's monthly when it does not hold this month) as this run's pending ones; the record claims nothing yet.
+After the save, generations put uploads the saved archive to each and records each that uploaded, and the workflow
+saves the state once more so the record travels. A failed upload is a warning, never fails the run and is not
+recorded, so the next run makes it again; if that second save fails, the saved record still shows the copies as not
+made and the next run makes them again. The record never claims a copy that was not uploaded.
+Cost at R2 list prices (Standard storage $0.015 per GB-month, Class A operations $4.50 per million; no free allowance
+netted out), for a 123 MB archive: the daily ring holds 7 x 123 MB = 0.86 GB, $0.013 a month; each monthly copy adds
+0.123 GB, $0.0018 a month, kept (12 copies, 1.48 GB, $0.022 a month after a year); the uploads are about 62 Class A
+operations a month (30 daily copies, 1 monthly, 30 second saves of state/build.tar.gz), $0.0003. A held copy is one
+more operation and 0.123 GB ($0.0018 a month) until someone deletes it. No reads are added. In all about $0.015 a
+month at first, $0.035 a month after a year and $0.30 over the first year; every figure grows in step with the archive.
+Rollback, by hand (never automated): set the pause (any small file at state/PAUSE); wait until a running refresh has
+ended (one past its pause check still saves); fetch the chosen daily, monthly or held copy (fetch KEY FILE; counts
+FILE OUT shows its records per source) and put that file as state/build.tar.gz; delete state/PAUSE. The generation
+record goes back with the state, so the next run makes the day's daily again, and the month's monthly when the copy
+predates it, over those keys: copy either to a state/held/ key first to keep it as it was.
+
 Restore order: build.tar.gz, then raw-cache.tar.gz (the NY workbook entry is named by a data/build file). Save: both
 only after a run that ended well (a cancelled or failed refresh never overwrites the saved state). A state object
 that is there but cannot be fetched (fetch exits 1) is never saved over: the refresh stops when build.tar.gz cannot be
@@ -101,6 +139,17 @@ that cannot be read is replaced by the next good run's.
                                                             3 when there is no such object (a first run), 1 when it
                                                             could not be fetched (the workflow then keeps the stored
                                                             object: a run that could not restore it never saves over it)
+    python3 -I scripts/state_paths.py counts SRC OUT        records per source (records, duplicate_of,
+                                                            missing_from_source) of SRC, the data/build folder or a
+                                                            state tarball (read, never unpacked), as JSON in OUT
+    python3 -I scripts/state_paths.py guard COUNTS [--restored FILE] [--out FILE] [--run-id ID]
+                                                            the history guard (above) against COUNTS, the counts taken
+                                                            at the restore; FILE (default restored-build.tar.gz) is
+                                                            held on a drop; exit 0 (the save goes on)
+    python3 -I scripts/state_paths.py generations plan|put [FILE] [--record FILE] [--run-id ID]
+                                                            plan: print the daily and monthly copies due and write them
+                                                            as pending; put FILE: upload the saved archive to them;
+                                                            exit 0 recorded (save the state again), 3 nothing recorded
 
 The cap is 200 MB (STATE_MAX_MB in the environment, or --max-mb, overrides it). The build state's save warns over the
 cap and fails only over wrangler's upload limit (300 MiB, --hard-mb 314), where the upload would fail anyway: a build
@@ -132,7 +181,13 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MAX_MB = 200.0
 WRANGLER_MAX_MB = 314.0          # wrangler r2 object put refuses a file over 300 MiB (314.6 MB)
 BUCKET = "dirtywaterwatch-data"
-STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz|state/PAUSE")   # state/PAUSE: the shared pause switch
+# the history copies of state/build.tar.gz (put() writes these keys only; never current/ or any public path)
+WEEKDAYS = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+GENERATION_KEY = re.compile(r"state/daily/build-(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\.tar\.gz"
+                            r"|state/monthly/build-[0-9]{4}-(?:0[1-9]|1[0-2])\.tar\.gz"
+                            r"|state/held/build-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9a-z][0-9a-z-]{0,39}\.tar\.gz")
+# state/PAUSE: the shared pause switch; the history copies may be fetched too (to look at one before a rollback)
+STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz|state/PAUSE|" + GENERATION_KEY.pattern)
 # wrangler's answer for a key that is not there ("The specified key does not exist."): a first run, not a failure
 MISSING = re.compile(r"specified key does not exist|NoSuchKey", re.I)
 FETCHED, ABSENT, FAILED = 0, 3, 1
@@ -760,6 +815,284 @@ def pack_obl(out: Path, src: Path = OBL_OUT, always: bool = False) -> int:
     return FETCHED
 
 
+# ---------------------------------------------------------------- history copies of state/build.tar.gz (2026-11-21)
+
+EVENT_FILE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*\.json")   # data/build/events/<source>.json; no AppleDouble '._'
+DROP_MIN_RECORDS = 5               # a drop: at least this many records fewer...
+DROP_MIN_PERCENT = 1               # ...and at least this share of the restored count
+GUARD_FILE = ROOT / BUILD_DIR / "history-guard.json"
+GUARD_KEEP = 50                    # earlier drop runs kept in it (their held keys among them)
+GENERATIONS_FILE = ROOT / BUILD_DIR / "state-generations.json"
+NOTHING = 3                        # generations put: nothing recorded (no second save needed)
+
+
+def utc_now() -> datetime:
+    """The clock in UTC; STATE_NOW (an ISO time, for the tests) stands in for it."""
+    t = _iso_time(os.environ["STATE_NOW"]) if os.environ.get("STATE_NOW") else None
+    return t.astimezone(timezone.utc) if t is not None else datetime.now(timezone.utc)
+
+
+def stamp(t: datetime) -> str:
+    return t.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def run_token(arg: str | None = None) -> str:
+    """This run's id in keys and records: --run-id, else GITHUB_RUN_ID with '-a<attempt>' for a re-run attempt (a
+    re-run never overwrites the first attempt's held copy), else 'local'. ValueError for anything that could not be
+    part of a key."""
+    if arg:
+        tok = str(arg)
+    else:
+        rid, att = os.environ.get("GITHUB_RUN_ID") or "", os.environ.get("GITHUB_RUN_ATTEMPT") or "1"
+        tok = (rid + (f"-a{att}" if att != "1" else "")) if rid else "local"
+    tok = tok.lower()
+    if not re.fullmatch(r"[0-9a-z][0-9a-z-]{0,39}", tok):
+        raise ValueError(f"not a run id: {tok[:60]!r}")
+    return tok
+
+
+def read_json_dict(path: Path) -> dict:
+    try:
+        d = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return d if isinstance(d, dict) else {}
+
+
+def write_json(path: Path, d) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(json.dumps(d, indent=1, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
+    tmp.replace(path)
+
+
+def _record_counts(d) -> dict:
+    """Counts of one events file: records, those marked duplicate_of (another source's copy) and those marked
+    missing from the source (raw._missing_from_source_since); {"unreadable": True} when it is not an events file."""
+    recs = d.get("records") if isinstance(d, dict) else None
+    if not isinstance(recs, list):
+        return {"unreadable": True}
+    dup = miss = 0
+    for r in recs:
+        if isinstance(r, dict):
+            dup += bool(r.get("duplicate_of"))
+            raw = r.get("raw")
+            miss += isinstance(raw, dict) and bool(raw.get("_missing_from_source_since"))
+    return {"records": len(recs), "duplicate_of": dup, "missing_from_source": miss}
+
+
+def event_counts(src: Path) -> dict:
+    """{source: counts} for every data/build/events/<source>.json in src: the data/build folder, or a state tarball
+    (state/build.tar.gz, a daily, monthly or held copy; read, never unpacked). Counts only, never a record."""
+    src = Path(src)
+    out: dict = {}
+    if src.is_dir():
+        d = src / "events"
+        for p in sorted(d.glob("*.json")) if d.is_dir() else []:
+            if not EVENT_FILE.fullmatch(p.name) or p.is_symlink() or not p.is_file():
+                continue
+            try:
+                out[p.name[:-5]] = _record_counts(json.loads(p.read_text(encoding="utf-8")))
+            except (OSError, ValueError):
+                out[p.name[:-5]] = {"unreadable": True}
+        return out
+    with tarfile.open(src, "r:gz") as tf:
+        for m in tf:
+            parts = [x for x in PurePosixPath(m.name).parts if x != "."]
+            if len(parts) != 4 or parts[:3] != ["data", "build", "events"] or not m.isfile() \
+                    or not EVENT_FILE.fullmatch(parts[3]):
+                continue
+            try:
+                out[parts[3][:-5]] = _record_counts(json.load(tf.extractfile(m)))
+            except (OSError, ValueError, EOFError, zlib.error):
+                out[parts[3][:-5]] = {"unreadable": True}
+    return dict(sorted(out.items()))
+
+
+def write_counts(src: Path, out: Path, now: datetime | None = None) -> dict:
+    sources = event_counts(src)
+    n = sum(c.get("records") or 0 for c in sources.values())
+    write_json(out, {"counted_at": stamp(now or utc_now()), "of": Path(src).name, "sources": sources})
+    say(f"{len(sources)} events file(s), {n} record(s) counted in {Path(src).name}")
+    return sources
+
+
+def history_drops(before: dict, after: dict) -> list[dict]:
+    """The sources whose records fell by at least DROP_MIN_RECORDS and DROP_MIN_PERCENT per cent of the restored
+    count, or whose events file disappeared or can no longer be read. A source unreadable when restored has no
+    count to compare and is left out."""
+    out = []
+    for sid in sorted(before):
+        b = before[sid] if isinstance(before[sid], dict) else {}
+        n = b.get("records")
+        if b.get("unreadable") or not isinstance(n, int):
+            continue
+        a = after.get(sid)
+        if a is None:
+            out.append({"source": sid, "why": "events file gone", "before": b, "after": None})
+        elif a.get("unreadable") or not isinstance(a.get("records"), int):
+            out.append({"source": sid, "why": "events file unreadable", "before": b, "after": None})
+        elif (fell := n - a["records"]) >= DROP_MIN_RECORDS and fell * 100 >= n * DROP_MIN_PERCENT:
+            out.append({"source": sid, "why": "records fell", "before": b, "after": a})
+    return out
+
+
+def _shown(sid: str) -> str:
+    return re.sub(r"[^A-Za-z0-9._-]", "?", str(sid))[:80]
+
+
+def put(key: str, src: Path, tries: int = 2, wrangler: str | None = None) -> int:
+    """Upload src to a history-copy key (GENERATION_KEY only) with `wrangler r2 object put BUCKET/KEY --file F
+    --remote`, the form the workflow uses: FETCHED (0) uploaded, FAILED (1) not (the last line of wrangler's answer
+    is said; the caller warns)."""
+    if not GENERATION_KEY.fullmatch(key):
+        raise ValueError(f"not a history copy key: {key!r}")
+    cmd = [wrangler or os.environ.get("WRANGLER") or "wrangler", "r2", "object", "put", f"{BUCKET}/{key}",
+           "--file", str(src), "--remote"]
+    pause = float(os.environ.get("STATE_FETCH_RETRY_S") or 15)
+    last = "no answer"
+    for n in range(tries):
+        try:
+            p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
+                               timeout=900)
+        except (OSError, subprocess.TimeoutExpired) as ex:
+            p, text = None, type(ex).__name__
+        else:
+            text = p.stdout or ""
+        if p is not None and p.returncode == 0:
+            say(f"{key}: uploaded, {mb(Path(src).stat().st_size)}")
+            return FETCHED
+        lines = [x.strip() for x in text.splitlines() if x.strip()]
+        last = lines[-1][:300] if lines else (f"exit {p.returncode}" if p is not None else text)
+        if n < tries - 1:
+            say(f"{key}: not uploaded ({last}); trying again")
+            time.sleep(pause * (n + 1))
+    say(f"{key}: not uploaded ({last})")
+    return FAILED
+
+
+def guard(restored_counts: Path, build: Path = ROOT / BUILD_DIR, out: Path = GUARD_FILE,
+          restored: Path | None = None, run: str = "local", now: datetime | None = None,
+          wrangler: str | None = None) -> list[dict]:
+    """Before the save: compare data/build/events with the counts taken at the restore (restored_counts; the kept
+    archive `restored` is counted instead when they are missing). On a drop: one ::warning:: per source (counts
+    only), the restored archive uploaded to state/held/build-<UTC date>-<run>.tar.gz, and `out` written (time, run,
+    the drops, the held key and whether it uploaded; earlier drop runs kept below). Returns the drops; never stops
+    the save. No restored state (a first run): nothing compared."""
+    now = now or utc_now()
+    restored = Path(restored) if restored else None
+    before = None
+    if Path(restored_counts).is_file():
+        s = read_json_dict(restored_counts).get("sources")
+        if isinstance(s, dict):
+            before = s
+        else:
+            say(f"history guard: {Path(restored_counts).name} cannot be read")
+    if before is None:
+        if restored is None or not restored.is_file():
+            say("history guard: no restored state (a first run); nothing to compare")
+            return []
+        try:
+            before = event_counts(restored)
+            say(f"history guard: the restored records were counted from {restored.name}")
+        except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
+            print(f"::warning::history guard: the restored state could not be counted ({type(ex).__name__}); the "
+                  "history was not compared this run", flush=True)
+            return []
+    drops = history_drops(before, event_counts(build))
+    if not drops:
+        say(f"history guard: {len(before)} source(s) compared with the restored state; no drop")
+        return []
+    key = f"state/held/build-{now.strftime('%Y-%m-%d')}-{run}.tar.gz"
+    held = restored is not None and restored.is_file() and put(key, restored, wrangler=wrangler) == FETCHED
+    for d in drops:
+        b, a = d["before"]["records"], (d["after"] or {}).get("records")
+        print(f"::warning::history guard: {_shown(d['source'])}: {d['why']}, {b} record(s) restored, "
+              f"{'none readable' if a is None else a} now; the state is saved as usual", flush=True)
+    if held:
+        say(f"history guard: {len(drops)} source(s) lost records; the restored state is held at {key}")
+    else:
+        print(f"::warning::history guard: the restored state could not be held at {key}; the state is saved as "
+              "usual", flush=True)
+    prev = read_json_dict(out)
+    earlier = ([{k: prev[k] for k in ("time", "run", "drops", "held") if k in prev}] if prev.get("time") else []) \
+        + [e for e in prev.get("earlier") or [] if isinstance(e, dict)]
+    write_json(out, {"time": stamp(now), "run": run, "drops": drops, "held": {"key": key, "uploaded": held},
+                     "earlier": earlier[:GUARD_KEEP]})
+    return drops
+
+
+def generation_key(kind: str, slot: str) -> str:
+    key = f"state/{kind}/build-{slot}.tar.gz"
+    if kind not in ("daily", "monthly") or not GENERATION_KEY.fullmatch(key):
+        raise ValueError(f"not a generation: {kind} {slot!r}")
+    return key
+
+
+def generations_due(rec: dict, now: datetime) -> list[dict]:
+    """The copies a save at `now` is due for: the day's daily (state/daily/build-<weekday>.tar.gz) when the record
+    does not hold this UTC date for that weekday, the month's monthly when the record does not hold this month."""
+    day, slot, month = now.strftime("%Y-%m-%d"), WEEKDAYS[now.weekday()], now.strftime("%Y-%m")
+    daily = rec.get("daily") if isinstance(rec.get("daily"), dict) else {}
+    monthly = rec.get("monthly") if isinstance(rec.get("monthly"), dict) else {}
+    due = []
+    if (daily.get(slot) or {}).get("date") != day:
+        due.append({"kind": "daily", "slot": slot, "date": day, "key": generation_key("daily", slot)})
+    if month not in monthly:
+        due.append({"kind": "monthly", "slot": month, "date": day, "key": generation_key("monthly", month)})
+    return due
+
+
+def generations_plan(record: Path = GENERATIONS_FILE, run: str = "local", now: datetime | None = None) -> list[str]:
+    """Before the archive is made: write the copies due as this run's pending ones (the record travels in the
+    archive; it claims nothing until generations_put records an upload) and print their keys."""
+    now = now or utc_now()
+    rec = read_json_dict(record)
+    due = generations_due(rec, now)
+    if due:
+        rec["pending"] = {"run": run, "planned_at": stamp(now), "copies": due}
+    else:
+        rec.pop("pending", None)
+    write_json(record, rec)
+    for g in due:
+        say(f"generation due: {g['key']}")
+    if not due:
+        say("no generation due (the day's daily and the month's monthly are made)")
+    return [g["key"] for g in due]
+
+
+def generations_put(src: Path, record: Path = GENERATIONS_FILE, run: str = "local", now: datetime | None = None,
+                    wrangler: str | None = None) -> int:
+    """After the save: upload src (the archive just saved) to each copy this run planned and record each that
+    uploaded. FETCHED (0): something recorded, so the state is to be saved again for the record to travel; NOTHING
+    (3): nothing planned by this run, or no upload went through. A failed upload is a warning and is not recorded,
+    so the next run makes it again."""
+    now = now or utc_now()
+    rec = read_json_dict(record)
+    pend = rec.get("pending") if isinstance(rec.get("pending"), dict) else {}
+    if pend.get("run") != run or not isinstance(pend.get("copies"), list) or not pend["copies"]:
+        say("no generation planned by this run")
+        return NOTHING
+    made = 0
+    for g in pend["copies"]:
+        try:
+            kind, slot = g["kind"], g["slot"]
+            key = generation_key(kind, slot)
+        except (KeyError, TypeError, ValueError):
+            say("a pending generation that is not one was left out")
+            continue
+        if put(key, src, wrangler=wrangler) == FETCHED:
+            rec.setdefault(kind, {})[slot] = {"date": g.get("date"), "run": run, "made_at": stamp(now)}
+            made += 1
+        else:
+            print(f"::warning::state generation {key} was not uploaded; the next run makes it again (the run goes "
+                  "on)", flush=True)
+    rec.pop("pending", None)
+    write_json(record, rec)
+    return FETCHED if made else NOTHING
+
+
 def obl_not_saved(state_file: Path = OBL_CHANGES, src: Path = OBL_OUT) -> int:
     """The folder the API changed this run could not be saved to R2: put the national pull and the changes' until
     back to where they were before this run (data/build/obl-changes.json "national_before", "until_before", and
@@ -820,7 +1153,46 @@ def main(argv=None) -> int:
     s = sub.add_parser("fetch")
     s.add_argument("key")
     s.add_argument("file")
+    s = sub.add_parser("counts", help="records per source of the data/build folder or a state tarball")
+    s.add_argument("src")
+    s.add_argument("out")
+    s = sub.add_parser("guard", help="the history guard before the save")
+    s.add_argument("restored_counts")
+    s.add_argument("--restored", help="the restored archive, held in R2 on a drop (default restored-build.tar.gz)",
+                   default="restored-build.tar.gz")
+    s.add_argument("--build", default=str(ROOT / BUILD_DIR))
+    s.add_argument("--out", default=str(GUARD_FILE))
+    s.add_argument("--run-id")
+    s = sub.add_parser("generations", help="the daily and monthly copies: plan before the archive, put after the save")
+    s.add_argument("action", choices=("plan", "put"))
+    s.add_argument("file", nargs="?", help="put: the archive just saved")
+    s.add_argument("--record", default=str(GENERATIONS_FILE))
+    s.add_argument("--run-id")
     a = ap.parse_args(argv)
+    if a.cmd in ("guard", "generations"):
+        try:
+            run = run_token(a.run_id)
+        except ValueError as ex:
+            print(f"::error::{ex}", flush=True)
+            return 2
+    if a.cmd == "counts":
+        try:
+            write_counts(Path(a.src), Path(a.out))
+        except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
+            print(f"::error::{Path(a.src).name} could not be counted ({type(ex).__name__})", flush=True)
+            return 1
+        return 0
+    if a.cmd == "guard":
+        guard(Path(a.restored_counts), Path(a.build), Path(a.out), Path(a.restored) if a.restored else None, run)
+        return 0
+    if a.cmd == "generations":
+        if a.action == "plan":
+            generations_plan(Path(a.record), run)
+            return 0
+        if not a.file or not Path(a.file).is_file():
+            print("::error::generations put needs the archive just saved", flush=True)
+            return 2
+        return generations_put(Path(a.file), Path(a.record), run)
     if a.cmd == "list":
         print("\n".join(raw_paths()))
         return 0

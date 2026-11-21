@@ -16,6 +16,8 @@ node_modules/
 build.tar.gz
 raw-cache.tar.gz
 out.tar.gz
+restored-build.tar.gz
+restored-counts.json
 .env.*
 data/name-blocklist.json
 # agent settings stay local (a copy is kept untracked where sessions need it)
