@@ -5,7 +5,10 @@ name: Refresh data
 # hour). A file at R2 state/PAUSE (the site's publish workflow reads the same switch) pauses it: nothing is collected,
 # published or saved. Standard hosted runners are free on a public repository. The ingesters keep state between runs
 # (history and snapshot files in data/build), so that folder is restored from R2 state/build.tar.gz at the start and
-# saved back at the end. The answers the code reads back from data/raw (NHD, NLDI and Overpass answers, the Census outlines, IEM rainfall, the RI layers, the DC
+# saved back at the end. R2 keeps no versions, so before the save a history guard compares the records per source
+# with the restored state (a source that lost records holds the restored archive at state/held/), and the day's first
+# save is also copied to state/daily/ (a ring of seven) and the month's to state/monthly/ (scripts/state_paths.py: what
+# is kept, the cost, how to roll back). The answers the code reads back from data/raw (NHD, NLDI and Overpass answers, the Census outlines, IEM rainfall, the RI layers, the DC
 # boundary, the NY workbook, this month's NJ ECHO answers: scripts/state_paths.py lists them with the reasons) are
 # state/raw-cache.tar.gz, restored after it and saved with it. Every other raw fetch stays on the runner (bulk raw
 # saves can carry personal fields and are never saved or committed). openboatlaunch's water records and outlines
@@ -128,6 +131,11 @@ jobs:
           rc=0; python3 -I scripts/state_paths.py fetch state/build.tar.gz build.tar.gz || rc=$?
           if [ "$rc" = 0 ]; then
             python3 -I scripts/state_paths.py unpack-build build.tar.gz || { echo "::error::state/build.tar.gz could not be unpacked; nothing is published or saved this run"; exit 1; }
+            # kept, with its records per source, for the history guard before the save (held in R2 when a source
+            # lost records; scripts/state_paths.py guard)
+            mv build.tar.gz restored-build.tar.gz
+            python3 -I scripts/state_paths.py counts data/build restored-counts.json \
+              || echo "::warning::the restored records could not be counted; the history guard counts the kept archive instead"
           elif [ "$rc" = 3 ]; then
             echo "no state yet"
           else
@@ -268,6 +276,15 @@ jobs:
             python3 -I scripts/state_paths.py obl-not-saved
           fi
           rm -f obl-water.tar.gz
+      - name: History guard (records per source against the restored state, before the save)
+        # a source whose records fell by at least 1 per cent and at least 5 records, or whose events file is gone, is
+        # a warning with its counts and data/build/history-guard.json, and the restored archive is held in R2 at
+        # state/held/build-<date>-<run>.tar.gz; the save goes on either way (scripts/state_paths.py guard)
+        if: success() && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
+        continue-on-error: true
+        run: |
+          python3 -I scripts/state_paths.py guard restored-counts.json --restored restored-build.tar.gz \
+            || echo "::warning::the history guard did not run to its end; the state is saved as usual"
       - name: Save pipeline state to R2
         # only after a refresh that ran to the end: a cancelled or failed run must not overwrite the saved history
         # (a seed from the owner's machine, or the last good run) with a partial one; nor a paused or skipped one
@@ -276,10 +293,33 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          # the daily and monthly copies this save is due for, written as pending into data/build before the archive
+          # is made (data/build/state-generations.json travels with the state); made by the next step
+          python3 -I scripts/state_paths.py generations plan \
+            || echo "::warning::the state generations could not be planned; none is made this run"
           tar -czf build.tar.gz data/build
           # over 200 MB a warning (the history is still saved); over wrangler's 300 MiB upload limit, an error
           python3 -I scripts/state_paths.py check-size build.tar.gz --hard-mb 314
           wrangler r2 object put dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote
+      - name: State generations (the day's first save to the daily ring, the month's to its monthly copy)
+        # state/daily/build-<weekday>.tar.gz (seven keys, overwritten weekly) and state/monthly/build-<YYYY-MM>.tar.gz
+        # (kept), the archive just saved; the record names a copy only after its upload, and the state is saved once
+        # more so the record travels. A failed upload or second save is a warning and the next run tries again; never
+        # fails the run
+        if: success() && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
+        continue-on-error: true
+        run: |
+          rc=0; python3 -I scripts/state_paths.py generations put build.tar.gz || rc=$?
+          if [ "$rc" = 0 ]; then
+            if tar -czf build.tar.gz data/build && python3 -I scripts/state_paths.py check-size build.tar.gz --hard-mb 314 \
+                && wrangler r2 object put dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote; then
+              echo "state saved again with its generation record"
+            else
+              echo "::warning::the state could not be saved again with its generation record; the next run makes the copies again"
+            fi
+          elif [ "$rc" != 3 ]; then
+            echo "::warning::the state generations were not made this run (exit $rc); the next run tries again"
+          fi
       - name: Save the raw caches to R2 (state/raw-cache.tar.gz; the same rule)
         # the cached answers only (scripts/state_paths.py); the next run's waters-nhd target and NLDI's hourly quota
         # resume from them. Over the cap the save fails with the sizes printed and the build state above still stands;

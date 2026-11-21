@@ -5,6 +5,7 @@ Run from pipeline/: python -m pytest tests -q
 """
 from __future__ import annotations
 
+import json
 import os
 import re
 import shutil
@@ -31,6 +32,8 @@ case "$op" in
     cp "$FAKE_R2/$key" "$file" ;;
   put)
     case " $FAKE_R2_FAIL_PUT " in *" $key "*) echo "X [ERROR] upload failed"; exit 1 ;; esac
+    # FAKE_R2_FAIL_REPUT: a key whose first upload goes through and every later one fails
+    case " $FAKE_R2_FAIL_REPUT " in *" $key "*) grep -qx "put $key" "$FAKE_R2/.puts" 2>/dev/null && { echo "X [ERROR] upload failed"; exit 1; } ;; esac
     mkdir -p "$(dirname "$FAKE_R2/$key")"; cp "$file" "$FAKE_R2/$key"; echo "put $key" >> "$FAKE_R2/.puts" ;;
 esac
 """
@@ -42,6 +45,8 @@ mkdir -p data/build data/raw/nhd-waters/nldi data/raw/va-deq-prep out
 echo '{"run": 1}' > data/build/history-new.json
 echo '{"response": "new answer"}' > data/raw/nhd-waters/nldi/new.json
 echo '{}' > data/raw/va-deq-prep/bulk.json
+# REFRESH_DROPS: a module rewrites its events file from a short window and another's file is gone
+[ -z "$REFRESH_DROPS" ] || { echo '{"records": [{"event_id": "ca:1"}]}' > data/build/events/ca-spills.json; rm -f data/build/events/gone.json; }
 [ -z "$REFRESH_FAILS" ] || exit 1
 """
 BATCH_STANDIN = """
@@ -123,6 +128,8 @@ def simulate(workflow: str, tmp: Path, env: dict | None = None, event: str = "sc
         w.chmod(w.stat().st_mode | stat.S_IEXEC)
     base = {**os.environ, "PATH": f"{bin_dir}:{os.environ['PATH']}", "FAKE_R2": str(tmp / "r2"),
             "CLOUDFLARE_API_TOKEN": "t", "CLOUDFLARE_ACCOUNT_ID": "a", "STATE_FETCH_RETRY_S": "0",
+            "STATE_NOW": NOW, "GITHUB_RUN_ID": "1234", "GITHUB_RUN_ATTEMPT": "1",
+            "COPYFILE_DISABLE": "1",          # a Mac's tar adds AppleDouble members the runner's GNU tar never writes
             **(env or {})}
     github_env = tmp / "github_env"
     github_env.write_text("")
@@ -165,12 +172,26 @@ def checkout(tmp: Path) -> Path:
     return tmp
 
 
-def seed(tmp: Path) -> None:
-    """Stored objects as a good earlier run left them."""
+# the stand-in clock for the state generations (a Saturday): the daily copy is state/daily/build-Sat.tar.gz
+NOW = "2026-11-21T15:07:00Z"
+GENS = json.dumps({"daily": {"Sat": {"date": "2026-11-21", "run": "1200"}},
+                   "monthly": {"2026-11": {"date": "2026-11-01", "run": "900"}}})
+
+
+def seed(tmp: Path, generations: bool = True, events: dict | None = None) -> None:
+    """Stored objects as a good earlier run left them. generations: the record holds the day's daily and the month's
+    monthly (NOW), so a run makes no copy; events: {source: number of records} in data/build/events."""
     src = tmp / "seed"
     (src / "data/build").mkdir(parents=True)
     (src / "data/build/history-old.json").write_text('{"kept": true}')
     (src / "data/build/name-blocklist.json").write_text('["Placeholder Name"]')
+    if generations:
+        (src / "data/build/state-generations.json").write_text(GENS)
+    if events:
+        (src / "data/build/events").mkdir()
+        for sid, n in events.items():
+            recs = [{"event_id": f"{sid}:{i}", "raw": {"note": "RECORD-TEXT-SENTINEL"}} for i in range(n)]
+            (src / f"data/build/events/{sid}.json").write_text(json.dumps({"source_id": sid, "records": recs}))
     with tarfile.open(tmp / "r2/state/build.tar.gz", "w:gz") as tf:
         tf.add(src / "data", arcname="data")
     (src / "data/raw/nhd-waters/nldi").mkdir(parents=True)
@@ -215,7 +236,11 @@ def test_refresh_first_run_with_no_state_objects(tmp_path):
     r = simulate("refresh.yml", tmp)
     assert not r["failed"], r["log"]
     assert "no state yet" in r["log"] and "no raw cache yet" in r["log"]
-    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+    assert "nothing to compare" in r["log"]                          # the history guard: no restored state
+    # the first save of the day and of the month: both copies, then the state again with the record that names them
+    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Sat.tar.gz",
+                         "put state/monthly/build-2026-11.tar.gz", "put state/build.tar.gz",
+                         "put state/raw-cache.tar.gz"]
     assert members(tmp, "state/raw-cache.tar.gz") == ["data/raw/nhd-waters/nldi/new.json"]     # no bulk raw
 
 
@@ -596,3 +621,168 @@ def test_unpack_build_restores_data_build_and_skips_appledouble(tmp_path):
     with pytest.raises(SP.Unreadable):
         SP.unpack_build(tgz, root2)
     assert list(other.iterdir()) == []
+
+
+# ---------------------------------------------------------------- history copies: the guard and the generations
+
+def build_record(tmp: Path, name: str, key: str = "state/build.tar.gz"):
+    """A data/build file inside a stored archive, parsed (None when it is not there)."""
+    with tarfile.open(tmp / "r2" / key) as tf:
+        try:
+            return json.load(tf.extractfile(f"data/build/{name}"))
+        except KeyError:
+            return None
+
+
+def next_checkout(tmp: Path, new: Path) -> Path:
+    """A fresh runner for the next run, with the bucket as the last run left it."""
+    nxt = checkout(new)
+    shutil.rmtree(nxt / "r2")
+    shutil.copytree(tmp / "r2", nxt / "r2")
+    (nxt / "r2" / ".puts").unlink(missing_ok=True)
+    return nxt
+
+
+def step(name: str) -> dict:
+    steps = next(iter(load("refresh.yml")["jobs"].values()))["steps"]
+    return next(s for s in steps if (s.get("name") or "").startswith(name))
+
+
+def test_the_new_steps_run_on_the_save_steps_conditions_and_never_fail_the_run():
+    steps = next(iter(load("refresh.yml")["jobs"].values()))["steps"]
+    names = [s.get("name") or "" for s in steps]
+    save = names.index("Save pipeline state to R2")
+    guard = next(i for i, n in enumerate(names) if n.startswith("History guard"))
+    gens = next(i for i, n in enumerate(names) if n.startswith("State generations"))
+    assert guard == save - 1 and gens == save + 1
+    for i in (guard, gens):
+        assert steps[i]["if"] == steps[save]["if"] and steps[i].get("continue-on-error") is True
+    assert "generations plan" in steps[save]["run"].split("tar -czf")[0]          # the record before the archive
+    restore = step("Restore pipeline state from R2")["run"]
+    assert "mv build.tar.gz restored-build.tar.gz" in restore and "counts data/build restored-counts.json" in restore
+
+
+def test_refresh_history_drop_holds_the_restored_state_warns_and_still_saves(tmp_path):
+    tmp = checkout(tmp_path)
+    seed(tmp, events={"ca-spills": 300, "gone": 3, "steady": 10})
+    restored = (tmp / "r2/state/build.tar.gz").read_bytes()
+    r = simulate("refresh.yml", tmp, {"REFRESH_DROPS": "1"})
+    assert not r["failed"], r["log"]
+    held = "state/held/build-2026-11-21-1234.tar.gz"
+    assert puts(tmp) == ["put state/out.tar.gz", f"put {held}", "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+    assert (tmp / "r2" / held).read_bytes() == restored                     # the history before the run
+    warnings = [x for x in r["log"].splitlines() if x.startswith("::warning::history guard")]
+    assert len(warnings) == 2
+    assert "ca-spills: records fell, 300 record(s) restored, 1 now" in warnings[0]
+    assert "gone: events file gone, 3 record(s) restored, none readable now" in warnings[1]
+    assert "RECORD-TEXT-SENTINEL" not in r["log"]
+    g = build_record(tmp, "history-guard.json")                             # saved with the state
+    assert g["run"] == "1234" and g["held"] == {"key": held, "uploaded": True}
+    assert [(d["source"], d["before"]["records"], (d["after"] or {}).get("records")) for d in g["drops"]] == \
+        [("ca-spills", 300, 1), ("gone", 3, None)]
+    assert "RECORD-TEXT-SENTINEL" not in json.dumps(g)
+    assert build_record(tmp, "events/ca-spills.json")["records"] == [{"event_id": "ca:1"}]   # the save went on
+
+
+def test_refresh_without_a_drop_uploads_nothing_extra(tmp_path):
+    tmp = checkout(tmp_path)
+    seed(tmp, events={"ca-spills": 300, "steady": 10})
+    r = simulate("refresh.yml", tmp)
+    assert not r["failed"], r["log"]
+    assert "2 source(s) compared with the restored state; no drop" in r["log"]
+    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+    assert build_record(tmp, "history-guard.json") is None
+
+
+def test_refresh_held_copy_that_fails_to_upload_is_a_warning_and_the_save_goes_on(tmp_path):
+    tmp = checkout(tmp_path)
+    seed(tmp, events={"ca-spills": 300})
+    held = "state/held/build-2026-11-21-1234.tar.gz"
+    r = simulate("refresh.yml", tmp, {"REFRESH_DROPS": "1", "FAKE_R2_FAIL_PUT": held})
+    assert not r["failed"], r["log"]
+    assert f"::warning::history guard: the restored state could not be held at {held}" in r["log"]
+    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+    assert build_record(tmp, "history-guard.json")["held"] == {"key": held, "uploaded": False}
+
+
+def test_refresh_generations_the_first_save_of_the_day_and_of_the_month(tmp_path):
+    tmp = checkout(tmp_path / "a")
+    seed(tmp, generations=False)
+    r = simulate("refresh.yml", tmp)
+    assert not r["failed"], r["log"]
+    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Sat.tar.gz",
+                         "put state/monthly/build-2026-11.tar.gz", "put state/build.tar.gz",
+                         "put state/raw-cache.tar.gz"]
+    daily = (tmp / "r2/state/daily/build-Sat.tar.gz").read_bytes()
+    assert daily == (tmp / "r2/state/monthly/build-2026-11.tar.gz").read_bytes()
+    assert build_record(tmp, "state-generations.json", "state/daily/build-Sat.tar.gz")["pending"]["run"] == "1234"
+    rec = build_record(tmp, "state-generations.json")                       # the state saved again: copies named
+    assert "pending" not in rec
+    assert rec["daily"]["Sat"]["date"] == "2026-11-21" and rec["monthly"]["2026-11"]["run"] == "1234"
+    # a later save the same day: no copy
+    b = next_checkout(tmp, tmp_path / "b")
+    r = simulate("refresh.yml", b, {"STATE_NOW": "2026-11-21T22:07:00Z"})
+    assert not r["failed"], r["log"]
+    assert puts(b) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+    assert (b / "r2/state/daily/build-Sat.tar.gz").read_bytes() == daily
+    # the next day: its own daily, no monthly
+    c = next_checkout(b, tmp_path / "c")
+    r = simulate("refresh.yml", c, {"STATE_NOW": "2026-11-22T00:07:00Z"})
+    assert not r["failed"], r["log"]
+    assert puts(c) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Sun.tar.gz",
+                       "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+    # the first save of December: Tuesday's daily and December's monthly; November's monthly is kept
+    d = next_checkout(c, tmp_path / "d")
+    r = simulate("refresh.yml", d, {"STATE_NOW": "2026-12-01T00:07:00Z"})
+    assert not r["failed"], r["log"]
+    assert puts(d) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Tue.tar.gz",
+                       "put state/monthly/build-2026-12.tar.gz", "put state/build.tar.gz",
+                       "put state/raw-cache.tar.gz"]
+    assert (d / "r2/state/monthly/build-2026-11.tar.gz").read_bytes() == daily
+    assert sorted(build_record(d, "state-generations.json")["monthly"]) == ["2026-11", "2026-12"]
+
+
+def test_refresh_failed_generation_upload_is_not_recorded_and_the_next_run_makes_it(tmp_path):
+    tmp = checkout(tmp_path / "a")
+    seed(tmp, generations=False)
+    r = simulate("refresh.yml", tmp, {"FAKE_R2_FAIL_PUT": "state/daily/build-Sat.tar.gz"})
+    assert not r["failed"], r["log"]
+    assert "::warning::state generation state/daily/build-Sat.tar.gz was not uploaded" in r["log"]
+    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/monthly/build-2026-11.tar.gz",
+                         "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+    rec = build_record(tmp, "state-generations.json")
+    assert "Sat" not in rec.get("daily", {}) and "2026-11" in rec["monthly"]
+    b = next_checkout(tmp, tmp_path / "b")
+    r = simulate("refresh.yml", b, {"STATE_NOW": "2026-11-21T16:07:00Z"})
+    assert not r["failed"], r["log"]
+    assert puts(b) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Sat.tar.gz",
+                       "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+
+
+def test_refresh_second_save_that_fails_leaves_the_copies_unclaimed(tmp_path):
+    """The copies uploaded but the state could not be saved again: the saved record still shows them as pending
+    (claimed by nothing), so the next run makes them again."""
+    tmp = checkout(tmp_path / "a")
+    seed(tmp, generations=False)
+    r = simulate("refresh.yml", tmp, {"FAKE_R2_FAIL_REPUT": "state/build.tar.gz"})
+    assert not r["failed"], r["log"]
+    assert "::warning::the state could not be saved again with its generation record" in r["log"]
+    rec = build_record(tmp, "state-generations.json")
+    assert not rec.get("daily") and not rec.get("monthly") and rec["pending"]["run"] == "1234"
+    b = next_checkout(tmp, tmp_path / "b")
+    r = simulate("refresh.yml", b, {"STATE_NOW": "2026-11-21T16:07:00Z", "GITHUB_RUN_ID": "1235"})
+    assert not r["failed"], r["log"]
+    assert puts(b) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Sat.tar.gz",
+                       "put state/monthly/build-2026-11.tar.gz", "put state/build.tar.gz",
+                       "put state/raw-cache.tar.gz"]
+    assert build_record(b, "state-generations.json")["daily"]["Sat"]["run"] == "1235"
+
+
+def test_refresh_generations_never_run_after_a_failed_save(tmp_path):
+    tmp = checkout(tmp_path)
+    seed(tmp, generations=False)
+    r = simulate("refresh.yml", tmp, {"FAKE_R2_FAIL_PUT": "state/build.tar.gz"})
+    assert r["failed"]
+    assert next(v for k, v in r["results"].items() if k.startswith("State generations")) == "skipped"
+    assert puts(tmp) == ["put state/out.tar.gz"]
+    assert not (tmp / "r2/state/daily").exists() and not (tmp / "r2/state/monthly").exists()
