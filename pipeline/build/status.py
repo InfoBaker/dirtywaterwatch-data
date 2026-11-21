@@ -3287,32 +3287,39 @@ def annotate_beach_reasons(events: list[dict], by_id: dict, duplicates: dict, ru
     """Set `_beach_reason` on every beach closure and advisory (build/beach_reason.py judge): an update whose own text
     gives no reason takes its parent's (Anne Arundel County's "the Department of Health has rescinded this advisory"
     under a notice naming the sewage spill); a record shown for a closure takes the reason a linked duplicate of the same
-    closure states (RIDOH's feed beside its sheet). Returns the counts for status.json (beach_reason block)."""
+    closure states (RIDOH's feed beside its sheet). Both are resolved together until nothing changes, so a reason passes
+    through any chain of parents and duplicates (Astra review 2026-11-21, finding 4); a cycle ends, as each step only
+    turns a record with no reason into one with a reason. Returns the counts for status.json (beach_reason block)."""
     if not BR.config(rules):
         return {"enabled": False}
-    own = {}
+    cur = {}
     for ev in events:
         v = BR.judge(ev, rules)
         if v is not None:
-            own[ev["event_id"]] = v
-    linked = BR.linked_reasons(events, duplicates, rules)
-    unlisted = Counter()
-    for eid, v in own.items():
-        if v["how"] == "unlisted":
-            unlisted[by_id[eid].get("source_id")] += 1
-        if v["stated"] is False:
-            seen, par = {eid}, by_id[eid].get("parent_event_id")
-            while par and par in by_id and par not in seen:
-                pv = own.get(par)
-                if pv and pv["stated"] and pv["how"] != "unlisted":
-                    v = {**pv, "how": "parent", "parent": par}
-                    break
-                seen.add(par)
-                par = by_id[par].get("parent_event_id")
-        if v["stated"] is False and eid in linked:
-            v = linked[eid]
+            cur[ev["event_id"]] = v
+    dups_of = defaultdict(list)
+    for dup, keep in duplicates.items():
+        dups_of[keep].append(dup)
+    good = lambda v: bool(v) and v["stated"] is True and v["how"] != "unlisted"    # noqa: E731
+    changed = True
+    while changed:
+        changed = False
+        for eid, v in cur.items():
+            if v["stated"] is not False:
+                continue
+            par = by_id[eid].get("parent_event_id")
+            if par and par != eid and good(cur.get(par)):
+                cur[eid] = {**cur[par], "how": "parent", "parent": par}
+                changed = True
+                continue
+            d = next((d for d in sorted(dups_of.get(eid, ())) if good(cur.get(d))), None)
+            if d:
+                cur[eid] = {**cur[d], "how": "linked", "linked": d}
+                changed = True
+    unlisted = Counter(by_id[eid].get("source_id") for eid, v in cur.items() if v["how"] == "unlisted")
+    for eid, v in cur.items():
         by_id[eid]["_beach_reason"] = v
-    return {"enabled": True, "judged": len(own), "unlisted_sources": dict(sorted(unlisted.items()))}
+    return {"enabled": True, "judged": len(cur), "unlisted_sources": dict(sorted(unlisted.items()))}
 
 
 def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None:

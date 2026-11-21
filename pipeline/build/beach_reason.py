@@ -85,9 +85,9 @@ def judge(ev: dict, rules: dict | None) -> dict | None:
         pat = _pattern(cfg.get("reason_pattern") or r"(?!x)x")
         for path in ent.get("fields") or []:
             for text in field_texts(ev, path):
-                m = pat.search(text)
-                if m:
-                    return {"stated": True, "how": "field", "field": path, "words": text.strip()[:200]}
+                text = " ".join(text.split())        # "E.  coli", a line break inside a reason
+                if pat.search(text):
+                    return {"stated": True, "how": "field", "field": path, "words": text[:200]}
         return {"stated": False, "how": "no_field_match", "read": ent.get("read"), "fields": list(ent.get("fields") or [])}
     if kind == "none":
         return {"stated": False, "how": "none", "read": ent.get("read")}
@@ -106,19 +106,3 @@ def note(ev: dict, verdict: dict, rules: dict) -> dict:
     cfg = config(rules) or {}
     return {"rule": "beach_reason", "label": label(ev, cfg), "read": verdict.get("read"), "source": "data/rules.json"}
 
-
-def linked_reasons(events: list[dict], duplicates: dict, rules: dict | None) -> dict[str, dict]:
-    """{shown event id: the verdict of a linked duplicate that states the reason}: the record shown takes the reason a
-    record of the same closure states (RIDOH's feed beside its sheet)."""
-    if not config(rules):
-        return {}
-    by_id = {e.get("event_id"): e for e in events}
-    out = {}
-    for dup, keep in duplicates.items():
-        d, k = by_id.get(dup), by_id.get(keep)
-        if not d or not k:
-            continue
-        v = judge(d, rules)
-        if v and v["stated"] and v["how"] != "unlisted":
-            out.setdefault(keep, {**v, "how": "linked", "linked": dup})
-    return out

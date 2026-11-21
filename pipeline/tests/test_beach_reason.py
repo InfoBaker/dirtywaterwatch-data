@@ -279,3 +279,51 @@ def test_a_maine_live_feed_closure_reads_its_public_comment():
     assert v["stated"] is True and v["field"] == "public_comment"
     rec["raw"]["public_comment"] = ""
     assert BR.judge(rec, RULES)["stated"] is False
+
+
+# ---- review 2026-11-21 (Astra, reviews/beach-astra.md): findings 1 to 4 and 6
+
+def test_review_1_delawares_comment_is_read_from_the_records_advice():
+    """ingest/de_dnrec_recwater.py keeps DNREC's advcomment as the record's advice_text."""
+    rec = {"source_id": "de-dnrec-recreational-water", "event_type": "beach_closure", "advice_text": "Closed due to a sewage spill",
+           "raw": {"advisory_type": "Recreational Water Closure", "advisory_reason": "Other", "advisory_description": None}}
+    v = BR.judge(rec, RULES)
+    assert v["stated"] is True and v["field"] == "event.advice_text"
+
+
+def test_review_2_hawaiis_cause_is_read():
+    """ingest/hi_doh_cwb_events.py keeps the Department's cause in raw.row.cause."""
+    rec = {"source_id": "hi-doh-cwb-events-api", "event_type": "beach_advisory",
+           "raw": {"row": {"type": "Beach Advisory", "title": "Advisory at Example Beach", "description": "The public is advised.",
+                           "cause": "High enterococci levels"}}}
+    v = BR.judge(rec, RULES)
+    assert v["stated"] is True and v["field"] == "row.cause"
+
+
+@pytest.mark.parametrize("text,stated", [
+    ("High Escherichia coli levels", True), ("E.  coli", True), ("E.\ncoli result over the standard", True),
+    ("Beach closed for spillway maintenance", False), ("Beach closed for the season at Rain Lake", False),
+    ("Closed after an oil spill", True), ("Closed: heavy rain", True), ("Closed after rainfall", True)])
+def test_review_3_and_6_the_reason_words(text, stated):
+    ev = {"source_id": "il-idph-beachguard", "event_type": "beach_closure", "raw": {"advisory_type": "Closure", "comment": text}}
+    assert BR.judge(ev, RULES)["stated"] is stated
+
+
+def test_review_4_a_reason_passes_through_a_duplicate_and_then_a_revision():
+    """Parent P states none; D, a duplicate of P, states a sewage spill; C revises P and says it remains in effect: C, the
+    record the rules use, keeps the reason D gives for P."""
+    def rec(eid, comment, **kw):
+        return {"event_id": eid, "source_id": "il-idph-beachguard", "event_type": "beach_closure",
+                "raw": {"advisory_type": "Closure", "comment": comment}, **kw}
+    p = rec("x:P", None)
+    d = rec("x:D", "Closure due to sewage spill", duplicate_of="x:P")
+    c = rec("x:C", "Remains in effect", parent_event_id="x:P")
+    by_id = {e["event_id"]: e for e in (p, d, c)}
+    S.annotate_beach_reasons([p, d, c], by_id, {"x:D": "x:P"}, RULES)
+    assert p["_beach_reason"]["stated"] is True and p["_beach_reason"]["how"] == "linked"
+    assert c["_beach_reason"]["stated"] is True and c["_beach_reason"]["how"] == "parent"
+    # and a cycle of links ends
+    a, b = rec("x:A", None, parent_event_id="x:B"), rec("x:B", None, parent_event_id="x:A")
+    by2 = {"x:A": a, "x:B": b}
+    S.annotate_beach_reasons([a, b], by2, {}, RULES)
+    assert a["_beach_reason"]["stated"] is False and b["_beach_reason"]["stated"] is False
