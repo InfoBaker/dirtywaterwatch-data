@@ -327,3 +327,16 @@ def test_review_4_a_reason_passes_through_a_duplicate_and_then_a_revision():
     by2 = {"x:A": a, "x:B": b}
     S.annotate_beach_reasons([a, b], by2, {}, RULES)
     assert a["_beach_reason"]["stated"] is False and b["_beach_reason"]["stated"] is False
+
+
+def test_the_charts_count_an_update_with_its_parents_reason_as_the_status_build_does():
+    """build/charts.py counts hours under an official advisory from the effective records (an update with its parent's
+    start): an update that gives no reason of its own counts with its parent's, as on the water's status strip."""
+    from build import charts as C
+    recs = copy.deepcopy(json.loads((BRF / "md_aa_records.json").read_text())["records"])
+    by_id = {r["event_id"]: r for r in recs}
+    superseded, effective = S.resolve_revisions(recs, by_id)
+    C.beach_verdicts(recs, by_id, {}, effective, RULES)
+    lift = effective.get(recs[1]["event_id"], recs[1])
+    assert lift["_beach_reason"]["how"] == "parent"
+    assert C.red_intervals(lift, "MD", datetime(2026, 6, 5, 12, tzinfo=UTC), __import__("collections").Counter(), rules=RULES)
