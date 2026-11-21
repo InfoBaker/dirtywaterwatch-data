@@ -47,7 +47,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import DATA_DIR, HEADERS, event, write_events
+from common import DATA_DIR, HEADERS, error_detail, event, write_events
 
 SOURCE_ID = "me-bangor-sso-log"
 REGISTRY_ID = "me-bangor-sso-log"
@@ -243,8 +243,9 @@ def main(argv=None) -> int:
     try:
         records, counts = records_from(REFERENCE.read_text(), bangor_waters())
     except (KeyError, ValueError, csv.Error) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{REFERENCE.name} could not be read: {e}", meta=meta)
-        print(f"{SOURCE_ID}: {REFERENCE.name} could not be read: {e}", file=sys.stderr)
+        why = error_detail(e)
+        write_events(SOURCE_ID, [], ok=False, error=f"{REFERENCE.name} could not be read: {why}", meta=meta)
+        print(f"{SOURCE_ID}: {REFERENCE.name} could not be read: {why}", file=sys.stderr)
         return 1
     meta["counts"] = counts
     try:
@@ -252,9 +253,10 @@ def main(argv=None) -> int:
         if not listed:          # a maintenance page, a challenge or a new link format: the check did not happen
             raise ValueError("the page lists no Annual Report on Compliance")
     except (requests.RequestException, ValueError) as e:
-        meta["index_error"] = str(e)[:300]
-        write_events(SOURCE_ID, records, ok=False, partial=True, error=f"the City's report page: {e}"[:300], meta=meta)
-        print(f"{SOURCE_ID}: {len(records)} records; the City's report page was not read ({e})", file=sys.stderr)
+        why = error_detail(e)          # never the exception's own text (common.error_detail; SECURITY.md)
+        meta["index_error"] = why
+        write_events(SOURCE_ID, records, ok=False, partial=True, error=f"the City's report page: {why}", meta=meta)
+        print(f"{SOURCE_ID}: {len(records)} records; the City's report page was not read ({why})", file=sys.stderr)
         return 1
     unread = [{"year": y, "url": f"https://bangormaine.gov/DocumentCenter/View/{i}/"
                                  f"Annual-Report-on-Compliance-Calendar-Year-{y}",
