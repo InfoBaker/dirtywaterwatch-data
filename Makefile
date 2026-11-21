@@ -18,7 +18,9 @@
 #                  nj_beaches --backfill (incident CSVs, 2025 to this year) is run by hand. Maryland:
 #                  md_aa_health_closings (Anne Arundel health closings), md_baltimore_sso (City DPW SSO
 #                  layer), md_mde_overflows (MDE statewide table; sorted order matters: it marks its
-#                  copies of City SSOs duplicate_of the md-baltimore-sso records, so it runs after);
+#                  copies of City SSOs duplicate_of the md-baltimore-sso records, so it runs after), and the
+#                  generic block md-mde-sewer-overflows-2005-2023 (MDE's frozen 2005 - January 2023 table: read
+#                  once, then only its version; a report also in the 2023 table is duplicate_of that record);
 #                  md_waters is a helper (`python -m ingest.md_waters --extract` re-extracts waters-md.json).
 #                  Virginia: va_alexrenew_cso (status layer snapshot state machine: poll every 15
 #                  minutes), va_deq_prep (DEQ PReP sewage reports, last 30 days; `--backfill` from

@@ -4,6 +4,12 @@ url: "https://opendata.maryland.gov/Energy-and-Environment/Reported-Sewer-Overfl
 homepage: "https://opendata.maryland.gov/Energy-and-Environment/Reported-Sewer-Overflows/3rgd-zjxx"
 kind: "api"
 level: "state"
+# Feed row (2026-11-21): the fetch block below reads the whole table once; each hourly run then asks only its
+#   metadata (if_changed) and keeps the records while rowsUpdatedAt stays 1677163934 (2023-02-23). Rows are read
+#   under the 2023 table's column names (ingest/generic/transforms.md_history_row), so md_mde_overflows.py's
+#   coordinate repairs, operator match and duplicate rules apply to both tables. Notes and Penalty Comments are not
+#   read. Checked 2026-11-21: 27,479 rows, 2005-01-01 to 2023-02-10; 25,123 name a receiving water, 18,191 give a
+#   point; the 2023 table (stgj-u72u) starts 2023-01-04, so 29 rows fall in both tables' span.
 # Notes (research/md, status used, verified fetched, checked 2026-11-02): Archive and per-operator
 #   history (counts per outfall, typical volumes); one-time load.
 # Access detail (research, quoted): SODA: https://opendata.maryland.gov/resource/3rgd-zjxx.json ;
@@ -28,4 +34,51 @@ access: ["api", "csv", "json"]
 access_detail: "SODA: https://opendata.maryland.gov/resource/3rgd-zjxx.json ; fetched metadata and 2 sample rows; 27,479 rows, date_discovered 2005-01-01 to 2023-02-10. rowsUpdatedAt 2023-02-23."
 machine_readable: true
 legal_basis: "COMAR 26.08.10"
-checked: "2026-11-02"
+checked: "2026-11-21"
+# Generic Socrata block (docs/generic-ingesters.md), live: the table is frozen, so it is read once and then asked
+# only for its version. Field names are the CSV headers in snake case.
+fetch:
+  platform: "socrata"
+  live: true
+  domain: "https://opendata.maryland.gov"
+  dataset: "3rgd-zjxx"
+  format: "csv"            # the 2023 table's SODA endpoint sits behind a firewall that blocked a compound query
+  metadata: true           # rowsUpdatedAt -> source_updated_at (MDE publishes no per-row times)
+  if_changed: true         # frozen since 2023-02-23: each run asks the metadata and keeps the records
+  time_zone: "America/New_York"
+  safe_fields: [overflow_type, municipality_facility, npdes, date_discovered, time_discovered, duration_days,
+                duration_hours, duration_minutes, location, zip_code, collection_system, quantity_in_gallons_estimated,
+                net_in_gallons_estimated, cause, watershed, receiving_waters, county, penalty_collected, latitude,
+                longitude]
+  operator_fields: [municipality_facility]
+  free_text: [cause, receiving_waters, watershed]
+  record:
+    started_at: {field: date_discovered, time: time_discovered}
+    ended_at: {duration: {days: duration_days, hours: duration_hours, minutes: duration_minutes}}
+    # the table has no row id: the key is permit, start and address, as for the 2023 table
+    source_record_id: {template: "{npdes|upper|slug|default:none}-{@started_at|compact|default:nodate}-{location|address|slug|default:no-address}"}
+    event_type:
+      field: overflow_type
+      map: {CSO: cso, SSO: sso, Bypass: bypass, BYPASS: bypass}
+    discharger_name: municipality_facility
+    authority: municipality_facility
+    npdes_permit: {field: npdes, upper: true, regex: "^MD\\d{7}$"}
+    outfall_name: location
+    waterbody_text: receiving_waters
+    volume: {field: quantity_in_gallons_estimated, bare_number_text: "gallons"}
+    source_url: {const: "https://opendata.maryland.gov/Energy-and-Environment/Reported-Sewer-Overflows/3rgd-zjxx"}
+  transform: "ingest.generic.transforms.md_mde_history_record"   # the 2023 module's coordinate repairs and operators
+  waters:
+    matcher: "ingest.generic.transforms.state_waters"
+    state: "MD"
+    county_field: county
+    no_water: ["^\\s*(nope|duplicate\\b.*)\\s*[.!]*\\s*$"]
+  dedupe: {repeats: suffix, order: ["-volume_gal"]}
+  post: "ingest.generic.transforms.md_mde_history_duplicates"    # within the table; rows also in the 2023 table
+  history:
+    keep_missing: true
+    revisions: true
+  meta:
+    credit: "Maryland Department of the Environment, Reported Sewer Overflows (2005 to January 2023), opendata.maryland.gov"
+    license: "Public Domain (Socrata metadata)"
+    caveat: "Reported to MDE by the owner or operator. MDE stopped updating this table in February 2023; later reports are in its 2023 table."
