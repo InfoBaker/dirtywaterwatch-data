@@ -262,6 +262,7 @@ def _stated(spec: dict, inp: dict) -> dict | None:
     """{minutes, from, text} of the duration the record states as a number, or None."""
     text = inp.get("duration_text")
     mins, state = spec["duration"](text) if text else (None, None)
+    mins = round(mins) if mins is not None else None            # whole minutes: the basis says what the figure used
     if mins is None or not 0 < mins <= MAX_DAYS * 1440:
         return None
     how = {"ongoing": "expected", "ended": "reported"}.get(state or "", "given")
@@ -275,7 +276,7 @@ def _span(e: dict, inp: dict) -> dict | None:
     if not (inp.get("own_end") and st is not None and en is not None and e.get("time_precision") == "minute"
             and e.get("ended_at_precision") in (None, "minute")):
         return None
-    mins = (en.astimezone(UTC) - st.astimezone(UTC)).total_seconds() / 60
+    mins = round((en.astimezone(UTC) - st.astimezone(UTC)).total_seconds() / 60)
     if not 0 < mins <= MAX_DAYS * 1440:
         return None
     return {"minutes": mins, "from": "start_to_end", "started_at": e.get("started_at"), "ended_at": e.get("ended_at")}

@@ -125,7 +125,8 @@ INDEX_FIELDS = ["event_id", "event_type", "status", "state", "started_at", "ende
                 "discharger_name", "npdes_permit", "outfall_id", "volume_gal", "lat", "lon", "fixture", "sampled_at",
                 "time_precision", "ended_at_precision"]
 WATER_EVENT_EXTRA = ["source_id", "waterbody_text", "outfall_name", "volume_text", "water_match", "superseded",
-                     "duplicate_of", "file", "estimate_flag", "detail", "later_volume", "linked_notices"]
+                     "duplicate_of", "file", "estimate_flag", "detail", "later_volume", "linked_notices",
+                     "volume_estimate", "end_estimate"]
 # the report tables' part of an operator's e-mail notice linked to a record (build.status.linked_notices); the event's
 # own file carries the notice whole (its advice and how the volume was estimated)
 LINKED_NOTICE_CELL = ("event_id", "source_id", "published_at", "ended_at", "volume_gal", "volume_text", "estimate_flag")
@@ -172,6 +173,15 @@ def slim_event(rec: dict) -> dict:
         out["linked_notices"] = linked_notices_cell(out["linked_notices"])
         if not out["linked_notices"]:
             del out["linked_notices"]
+    # our computed volume and estimated end (export/estimates.py): the figure and its basis; the inputs stay in the
+    # event's own file
+    for k in detail_mod.ESTIMATE_KEYS:
+        if k in out:
+            cell = detail_mod.estimate_cell(out[k])
+            if cell:
+                out[k] = cell
+            else:
+                del out[k]
     own = (rec.get("raw") or {}).get("ended_at_precision") if isinstance(rec.get("raw"), dict) else None
     if rec.get("ended_at") and own and own != rec.get("time_precision"):
         out["ended_at_precision"] = own

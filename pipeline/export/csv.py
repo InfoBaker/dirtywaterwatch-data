@@ -21,7 +21,8 @@ line ends, a quote inside a value doubled), one report per row, newest first. Co
 
 The rows come from the public event objects the export writes (build.py: personal fields stripped
 under the current rules, staff and private names redacted, no keys starting with "_"), and only from
-the fixed top-level fields named here, the named fields of `detail` and `later_volume` (export/detail.py: each
+the fixed top-level fields named here, our `volume_estimate` and `end_estimate` (export/estimates.py), the named
+fields of `detail` and `later_volume` (export/detail.py: each
 read from a source key named there, scrubbed) plus two link and municipality values read from their `raw`
 (RAW_NOTICE_KEYS, status.TOWN_KEYS). Nothing else of `raw` is copied, so a field the sources add later
 cannot reach a download by accident. Text that begins with = + - or @ gets a leading apostrophe so a
@@ -59,7 +60,13 @@ COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id"
            # an operator's e-mail notice of the same event linked to this record (build.status.linked_notices)
            "notice_volume_gal", "notice_record_id",
            # a beach closure or advisory whose source gives no reason: listed, not coloured (rules.json beach_reason)
-           "listed_without_colour"]
+           "listed_without_colour",
+           # the source's descriptions and a rate it gives in place of a volume (export/detail.py)
+           "description", "location_description", "rate_text",
+           # our own figures, apart from the source's (export/estimates.py): a volume computed from the record's rate
+           # and duration, and an end estimated from its start and the duration it gives, each with its basis
+           "volume_estimate_gal", "volume_estimate_low_gal", "volume_estimate_high_gal", "volume_estimate_bound",
+           "volume_estimate_basis", "end_estimate_at", "end_estimate_basis"]
 DETAIL_COLUMNS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
                   "volume_method", "volume_to_water_gal", "overflow_point", "town")
 LIST_SEP = ";"
@@ -436,6 +443,12 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     row += [_number((notice or {}).get("volume_gal")), _text((notice or {}).get("event_id"))]
     nsr = e.get("no_stated_reason") if isinstance(e.get("no_stated_reason"), dict) else {}
     row.append(_text(nsr.get("label")))
+    rate = d.get("rate") if isinstance(d.get("rate"), dict) else {}
+    row += [_text(d.get("description")), _text(d.get("location_description")), _text(rate.get("text"))]
+    ve = e.get("volume_estimate") if isinstance(e.get("volume_estimate"), dict) else {}
+    ee = e.get("end_estimate") if isinstance(e.get("end_estimate"), dict) else {}
+    row += [_number(ve.get("gallons")), _number(ve.get("low")), _number(ve.get("high")), _text(ve.get("bound")),
+            _text(ve.get("basis")), _text(ee.get("at")), _text(ee.get("basis"))]
     return row, ops
 
 
