@@ -70,9 +70,9 @@ QUALIFIERS = ("estimated", "measured", "modeled", "verified by the operator")
 ADDRESS_FIELDS = {"location_description", "description", "overflow_point"}
 # fields whose value is an object the reader builds and checks itself (not a source string)
 OBJECT_FIELDS = {"rate"}
-# the fields the report tables carry (slim rows): the cell's cause and duration, the qualifier of its volume, and a rate
-# given in place of a volume
-CELL_FIELDS = ("cause", "duration_text", "volume_qualifier", "rate")
+# the fields the report tables carry (slim rows): the cell's cause, description and duration, the qualifier of its
+# volume, and a rate given in place of a volume
+CELL_FIELDS = ("cause", "description", "duration_text", "volume_qualifier", "rate")
 DISCHARGE_TYPES = {"cso", "sso", "bypass", "blended", "plant_bypass", "unknown"}
 MAX_TEXT = 300          # a field longer than this is cut at a word with "…" (the record's raw keeps the whole text)
 MAX_LINKED = 12

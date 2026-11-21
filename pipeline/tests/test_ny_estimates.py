@@ -252,7 +252,10 @@ def test_slim_rows_carry_our_figures_without_their_inputs(recs):
     s = X.slim_event({**e, "file": "events/x.json", "fixture": False})
     assert s["volume_estimate"] == {"gallons": 324000, "basis": e["volume_estimate"]["basis"]}
     assert s["end_estimate"] == {"at": "2026-02-18T12:50:00-05:00", "precision": "minute", "basis": e["end_estimate"]["basis"]}
-    assert s["detail"]["rate"]["low"] == 1350 and "description" not in s["detail"]
+    assert s["detail"]["rate"]["low"] == 1350 and "overflow_point" not in s["detail"]     # the cell's fields only
+    k = wb(recs, "2625738457226843")
+    D.enrich([k])
+    assert X.slim_event({**k, "file": "events/k.json", "fixture": False})["detail"]["description"] == "Sanitary sewer overflow into storm sewer"
     assert "volume_gal" not in s or s["volume_gal"] is None
     for k in ("volume_estimate", "end_estimate"):
         assert k in X.WATER_EVENT_EXTRA
