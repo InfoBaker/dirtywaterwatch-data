@@ -12,7 +12,8 @@ The rules are written out in docs/plan.md §2 (kept in step with this module and
 discharge windows (ongoing red 72 h, yellow to 7 days, then "end never reported"; ended: red to
 the authority window, yellow to 72 h; unknown-status no end: yellow 7 days); state default
 windows and caution windows from data/rules.json (red_rule / yellow_rule); month/year records never colour; beach/rain/HAB advisories colour only lakes,
-ponds and reservoirs under 50 km² and are otherwise advisory points; active advisories age out
+ponds and reservoirs under 50 km² and are otherwise advisory points; a beach closure or advisory whose source gives no
+water-quality reason is listed and colours nothing (rules.json beach_reason, build/beach_reason.py, decision 40); active advisories age out
 14 days after the last confirmation; a discharge's end before its start or more than
 unresolved.implausible_end.days_after_fetch days after the report was read is not used (end_not_credible: the record
 has no confirmed end, the published value stays, intervals carry end_not_used); revisions (resolve_revisions); ECHO
@@ -54,6 +55,7 @@ import zones
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharger_alias_map, load_outfall_registry,
                     system_wide_advisory, no_ok_read_since,
                     now_iso, read_json, rules_live_states, write_json)
+from build import beach_reason as BR
 from build import shoreline as SH
 from build.redact import REDACTED, person_shaped
 
@@ -3265,6 +3267,61 @@ def code_undecoded(ev: dict) -> str | None:
     return v if isinstance(v, str) and v.strip() else None
 
 
+# A beach closure or advisory whose source gives no water-quality reason (data/rules.json beach_reason, decision 40;
+# build/beach_reason.py): kept on the record and listed on its water's page and in the report tables, with no interval,
+# so it colours no water, no reach, no history hour and no marker. build() sets `_beach_reason` on each
+# record (its own verdict, else its parent's for an update, else a linked duplicate's); a record judged outside build()
+# is judged on its own fields.
+def beach_verdict(ev: dict, rules: dict | None) -> dict | None:
+    if "_beach_reason" in ev:
+        return ev["_beach_reason"]
+    return BR.judge(ev, rules)
+
+
+def listed_without_reason(ev: dict, rules: dict | None) -> bool:
+    v = beach_verdict(ev, rules)
+    return bool(v) and v.get("stated") is False
+
+
+def annotate_beach_reasons(events: list[dict], by_id: dict, duplicates: dict, rules: dict) -> dict:
+    """Set `_beach_reason` on every beach closure and advisory (build/beach_reason.py judge): an update whose own text
+    gives no reason takes its parent's (Anne Arundel County's "the Department of Health has rescinded this advisory"
+    under a notice naming the sewage spill); a record shown for a closure takes the reason a linked duplicate of the same
+    closure states (RIDOH's feed beside its sheet). Both are resolved together until nothing changes, so a reason passes
+    through any chain of parents and duplicates (Astra review 2026-11-21, finding 4); a cycle ends, as each step only
+    turns a record with no reason into one with a reason. Returns the counts for status.json (beach_reason block)."""
+    if not BR.config(rules):
+        return {"enabled": False}
+    cur = {}
+    for ev in events:
+        v = BR.judge(ev, rules)
+        if v is not None:
+            cur[ev["event_id"]] = v
+    dups_of = defaultdict(list)
+    for dup, keep in duplicates.items():
+        dups_of[keep].append(dup)
+    good = lambda v: bool(v) and v["stated"] is True and v["how"] != "unlisted"    # noqa: E731
+    changed = True
+    while changed:
+        changed = False
+        for eid, v in cur.items():
+            if v["stated"] is not False:
+                continue
+            par = by_id[eid].get("parent_event_id")
+            if par and par != eid and good(cur.get(par)):
+                cur[eid] = {**cur[par], "how": "parent", "parent": par}
+                changed = True
+                continue
+            d = next((d for d in sorted(dups_of.get(eid, ())) if good(cur.get(d))), None)
+            if d:
+                cur[eid] = {**cur[d], "how": "linked", "linked": d}
+                changed = True
+    unlisted = Counter(by_id[eid].get("source_id") for eid, v in cur.items() if v["how"] == "unlisted")
+    for eid, v in cur.items():
+        by_id[eid]["_beach_reason"] = v
+    return {"enabled": True, "judged": len(cur), "unlisted_sources": dict(sorted(unlisted.items()))}
+
+
 def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None:
     """Turn a red interval into the site's caution under rule (no authority window applies)."""
     was = iv["rule"]
@@ -3524,6 +3581,8 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
     not used: the intervals are those of a record with no end, each with end_not_used (the published end, why, and
     the rule)."""
     rules = load_rules() if rules is None else rules
+    if listed_without_reason(ev, rules):
+        return []           # beach_reason: listed, not coloured (decision 40)
     raw = ev.get("raw") or {}
     periods = raw.get("listed_periods")
     if ev.get("source_id") in POLL_END_HORIZON_SOURCES and isinstance(periods, list) and len(periods) > 1 \
@@ -4786,7 +4845,8 @@ def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules
 
 def record_hash(ev: dict) -> str:
     import hashlib
-    ev = {k: v for k, v in ev.items() if k != "_feed_health"}      # feed health is not the record (load_events)
+    # feed health is not the record (load_events), nor is the beach verdict build() sets (placement does not read it)
+    ev = {k: v for k, v in ev.items() if k not in ("_feed_health", "_beach_reason")}
     return hashlib.blake2b(json.dumps(ev, sort_keys=True, default=str).encode(), digest_size=16).hexdigest()
 
 
@@ -4911,6 +4971,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             duplicates[ev["event_id"]] = ev["duplicate_of"]
     duplicates = shown_over_links(events, duplicates)
     linked = linked_notices(events, duplicates)
+    beach_reason = annotate_beach_reasons(events, by_id, duplicates, rules)
+    for sid, n in (beach_reason.get("unlisted_sources") or {}).items():
+        problems.append(f"beach_reason: {sid} has no entry in data/rules.json; its {n} beach closures and advisories "
+                        "keep their colour until it is read and given one")
+    for eid, e in effective.items():        # the revisions' copies carry the verdict their record has
+        if "_beach_reason" in by_id[eid]:
+            e["_beach_reason"] = by_id[eid]["_beach_reason"]
     h_start = now - timedelta(days=HISTORY_DAYS)
     points = []
     latest_month = {}       # outfall -> (event, water slugs, monthly mark) of its latest month report
@@ -4967,6 +5034,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         eff = effective.get(eid, ev)
         point_on, river_point, outline_less = [], [], []
         live = eid not in superseded and eid not in duplicates
+        if live and listed_without_reason(eff, rules):
+            placements[eid]["no_stated_reason"] = BR.note(eff, beach_verdict(eff, rules), rules)
         is_discharge = ev.get("event_type") in DISCHARGE_TYPES or (
             ev.get("event_type") == "unknown" and ev.get("status") == "ongoing")
         coarse = ev.get("time_precision") in COARSE_PRECISION     # a monthly or annual total: never a reach
@@ -5551,7 +5620,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                                       if ev["event_id"] not in duplicates)),
                    "future_start": sum(future_starts.values()),
                    "monthly_outfalls": len(monthly_outfalls),
-                   "duplicates": len(duplicates)},
+                   "duplicates": len(duplicates),
+                   "no_stated_reason": sum(1 for p in placements.values() if p.get("no_stated_reason"))},
+        "beach_reason": {**beach_reason, "listed_without_colour": dict(sorted(Counter(
+            by_id[i]["source_id"] for i, p in placements.items() if p.get("no_stated_reason")).items()))},
         "waters": out_waters,
         "placements": placements,
         "sources": health,

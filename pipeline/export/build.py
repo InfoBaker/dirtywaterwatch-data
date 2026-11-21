@@ -794,6 +794,8 @@ def public_record(e: dict, pl: dict, r: Redactor, swaps=()) -> dict:
     if pl.get("linked_notices"):            # an operator's e-mail notice of this event (build.status.linked_notices)
         rec["linked_notices"] = pl["linked_notices"]
     rec["reach"] = pl.get("reach")
+    if pl.get("no_stated_reason"):          # a beach closure whose source gives no reason: listed, not coloured
+        rec["no_stated_reason"] = pl["no_stated_reason"]        # (data/rules.json beach_reason; build.beach_reason)
     if pl.get("future_start"):              # a start in the future as published: page and archive row, no status
         rec["future_start"] = True
     rec["file"] = f"events/{event_file_name(e['event_id'])}"

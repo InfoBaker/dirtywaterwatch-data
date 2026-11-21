@@ -286,12 +286,17 @@ def test_beachguard_an_advisory_the_feed_still_lists_stays_in_effect_however_old
     from ingest import il_idph_beachguard as B
     state = {}
     recs, _ = B.run(state, (BG / "rss.xml").read_bytes(), _bg_details(), "2026-11-04T12:00:00Z")
-    c = {r["source_record_id"]: r for r in recs}["467-20260901T0800"]
+    by = {r["source_record_id"]: r for r in recs}
+    # the contamination advisory (a stated reason): the ageing is measured on it. Deep Lake's "Closure" with no
+    # comment gives no reason and colours nothing since decision 40 (data/rules.json beach_reason; test_beach_reason.py)
+    c = by["273-20260904T0800"]
     assert c["source_updated_at"] == "2026-11-04T12:00:00Z"
     now = datetime(2026, 11, 4, 13, tzinfo=UTC)
     ivs = S.event_intervals(c, "IL", now)
     live = [iv for iv in ivs if iv["rule"] == "advisory_active"]
     assert live and S.parse_time(live[0]["end"]) > now        # before the fix it ended 2026-09-15: aged out
+    assert by["467-20260901T0800"]["source_updated_at"] == "2026-11-04T12:00:00Z"
+    assert S.event_intervals(by["467-20260901T0800"], "IL", now) == []
 
 
 def test_beachguard_an_empty_feed_lifts_nothing_until_the_next_poll_is_empty_too():

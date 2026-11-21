@@ -1,0 +1,82 @@
+{
+ "_note": "Two rows of the real answer of DWQ's AutoMap_Source_Data layer 0, read 2026-11-21 (MLID 4957000 \"Off Season\", MLID 4953250 \"E coli HW\"), in the shape of fixtures/ut/recreational.json.",
+ "objectIdFieldName": "FID",
+ "fields": [
+  {
+   "name": "MLID",
+   "type": "x"
+  },
+  {
+   "name": "Waterbody",
+   "type": "x"
+  },
+  {
+   "name": "Site_Name",
+   "type": "x"
+  },
+  {
+   "name": "Public_Name",
+   "type": "x"
+  },
+  {
+   "name": "Monitored_Date",
+   "type": "x"
+  },
+  {
+   "name": "Lat",
+   "type": "x"
+  },
+  {
+   "name": "Long",
+   "type": "x"
+  },
+  {
+   "name": "Advisory",
+   "type": "x"
+  },
+  {
+   "name": "Advisory_Date",
+   "type": "x"
+  },
+  {
+   "name": "Additional_Advisory_Notes",
+   "type": "x"
+  },
+  {
+   "name": "FID",
+   "type": "x"
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "MLID": 4953250,
+    "Waterbody": "San Juan River",
+    "Site_Name": "SAN JUAN R AT SAND ISLAND",
+    "Public_Name": "Sand Island Boat Launch",
+    "Monitored_Date": "2026-11-12",
+    "Lat": 37.2602799999993,
+    "Long": -109.613729999998,
+    "Advisory": "E coli HW",
+    "Advisory_Date": null,
+    "Additional_Advisory_Notes": null,
+    "FID": 103
+   }
+  },
+  {
+   "attributes": {
+    "MLID": 4957000,
+    "Waterbody": "Colorado River",
+    "Site_Name": "COLORADO R AT US191 XING NEAR MOAB",
+    "Public_Name": "US-191 Crossing (Moab)",
+    "Monitored_Date": "2026-10-29",
+    "Lat": 38.6038699999993,
+    "Long": -109.574839999998,
+    "Advisory": "Off Season",
+    "Advisory_Date": null,
+    "Additional_Advisory_Notes": null,
+    "FID": 109
+   }
+  }
+ ]
+}

@@ -115,9 +115,11 @@ def test_ga_unpairing_clears_the_end_precision():
 
 
 def test_illinois_poll_lift_ends_red_at_the_poll():
+    # a contamination advisory, as BeachGuard types it (a closure with no stated reason colours nothing: decision 40,
+    # data/rules.json beach_reason; tests/test_beach_reason.py)
     r = ev(event_id="il-idph-beachguard:1", source_id="il-idph-beachguard", event_type="beach_advisory",
            status="advisory_lifted", started_at="2026-07-01", ended_at="2026-07-05T13:00:00Z", time_precision="day",
-           raw={"ended_at_precision": "poll"})
+           raw={"ended_at_precision": "poll", "advisory_type": "Contamination Advisory"})
     assert colour(r, "IL", "2026-07-05T12:59:00Z") == "red"
     assert colour(r, "IL", "2026-07-05T18:00:00Z") is None
     # the start is a Chicago day: 05:00Z, not 04:00Z
@@ -129,7 +131,7 @@ def test_a_poll_clearing_of_a_day_dated_beach_record_is_exact():
     # own precision: the ms_mdeq_* ingesters are another fixer's; this asserts the status side
     r = ev(event_id="ms-mdeq-beach-monitoring:1", source_id="ms-mdeq-beach-monitoring", event_type="beach_advisory",
            status="advisory_lifted", started_at="2026-07-01", ended_at="2026-07-03T16:00:00Z", time_precision="day",
-           raw={"ended_at_precision": "poll"})
+           raw={"ended_at_precision": "poll", "row": {"eventtype": "Enterococci"}})     # MDEQ's layer, as ms_mdeq_beaches keeps it
     assert colour(r, "MS", "2026-07-03T15:59:00Z") == "red"
     assert colour(r, "MS", "2026-07-03T16:01:00Z") is None
 

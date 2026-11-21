@@ -848,5 +848,248 @@
   "forecast_source": "NOAA National Weather Service gridpoint forecast (api.weather.gov), quantitative precipitation, next 24 hours",
   "source": "Permittees' own reports (MassDEP Sewage Notification Data System; Michigan EGLE, MiEnviro CSO/SSO List); NOAA MRMS radar rainfall; Rhode Island DEM shellfish program; Maine Healthy Beaches program; New York City Department of Environmental Protection; Maryland Department of the Environment and Anne Arundel County Department of Health; Anacostia Riverkeeper (District of Columbia)"
  },
+ "beach_reason": {
+  "enabled": true,
+  "event_types": [
+   "beach_closure",
+   "beach_advisory"
+  ],
+  "rationale": "We colour a beach closure or advisory when its source gives a water-quality reason for it: a bacteria result or exceedance, sewage, an algal bloom or a spill. Beaches also close for the season or at the operator's choice, and some sources give no reason at all. When the source gives no reason, we list the closure with the source's own words on its water's page and among its reports, and we colour neither the water nor the map (a listing without a colour is not a finding about the water).",
+  "labels": {
+   "beach_closure": "Beach closed; the source gives no reason",
+   "beach_advisory": "Advisory listed; the source gives no reason",
+   "default": "Listed; the source gives no reason"
+  },
+  "reason_pattern": "(?i)bacteri|\\be\\.?\\s?coli\\b|\\becoli\\b|escherichia|enterococ|coliform|fecal|faecal|sewage|sewer|\\bcso\\b|\\bsso\\b|overflow|bypass|\\bspill(?:s|ed|age)?\\b|wastewater|waste\\s?water|manure|livestock waste|medical waste|contaminat|pollut|exceed|elev_bact|harmful.algal|bloom|\\balga|cyano|microcystin|toxin|\\bhab\\b|water[\\s-]quality|storm\\s?water|runoff|\\brain(?:fall|s|y)?\\b(?!\\s+(?:lake|creek|river|pond|beach|park|reservoir|bay)\\b)|preempt|chemical|\\boil\\b|\\bfuel\\b|petroleum",
+  "_reason_pattern_doc": "Case-insensitive, read with its whitespace collapsed; a match in one of a source's fields is the stated reason: bacteria, E. coli or Escherichia coli, enterococci, coliform, fecal, sewage or sewer, overflow, bypass, a spill (not a spillway), wastewater, manure or livestock or medical waste, contamination, pollution, exceedance, algal bloom, algae, cyanobacteria, microcystin, toxin, HAB, water quality, stormwater, runoff, rain or rainfall (not a place named Rain Lake, Rain Creek and the like), preemptive, chemical, oil, fuel, petroleum.",
+  "_decided": "Owner, 2026-11-17 about 16:50Z (docs/decisions.md item 40), of Deep Lake, Illinois: \"are we possibly lighting things up in red for a seasonal closure? Is there a report on file that adds detail? I just saw closed.\" Asked \"Should a beach closure whose source gives no water-quality reason be listed without a colour?\", he answered \"Yes, list only\". Built 2026-11-21 (build/beach_reason.py, build/status.py event_intervals; the export's no_stated_reason). Utah's \"Off Season\" rows were read first: 67 on 2026-11-21, no Advisory_Date and no note on any; the same case.",
+  "_doc": "Per source (the event's source_id): kind program (the source states the reason for every record, its words in basis), fields (the record's own fields are read for reason_pattern; records names a record whose reason the source states elsewhere) or none (no reason given for any record). A beach source with no entry keeps its colour and is named in status.json problems. read: what we read for the reason, as a reader would name it.",
+  "sources": {
+   "al-adem-beach-monitoring": {
+    "kind": "program",
+    "basis": "The Coastal Alabama Beach Monitoring Program samples for enterococci under the federal BEACH Act; the Alabama Department of Public Health issues swim advisories from those samples and lifts them when enterococci fall below 104 per 100 mL."
+   },
+   "ar-adh-swim-beach-status": {
+    "kind": "none",
+    "read": "the Arkansas Department of Health's list under “Closed Swim Beaches”, which gives no reason or date"
+   },
+   "ca-beachwatch-advisories": {
+    "kind": "program",
+    "basis": "California requires the county health officer to post a beach when bacteria exceed the state standards and to close it after a known untreated sewage release (Health and Safety Code 115885; 17 CCR 7958); each record gives the cause the county entered."
+   },
+   "ca-sfpuc-beach-map": {
+    "kind": "program",
+    "basis": "SFPUC posts a beach when “Concentrations of bacteria were elevated at this location within the past 24 hours” or a combined sewer discharge has recently occurred there."
+   },
+   "de-dnrec-recreational-water": {
+    "kind": "fields",
+    "fields": [
+     "advisory_type",
+     "advisory_reason",
+     "advisory_description",
+     "current_advisory_label",
+     "event.advice_text"
+    ],
+    "program_values": {
+     "current_advisory_label": [
+      "Monitoring – Current Advisory"
+     ]
+    },
+    "program_basis": "DNREC's Recreational Water Program map marks a sampling station \"Monitoring – Current Advisory\" while the programme's water-quality advisory is in effect there; the map's other codes are its monitoring states (no current advisory, outside the advisory area, resampling an enterococcus spike, not sampling in winter).",
+    "read": "DNREC's notice type, reason, description and comment, or its map's label"
+   },
+   "fl-doh-beaches": {
+    "kind": "program",
+    "basis": "The Florida Healthy Beaches Program issues an advisory from its enterococcus samples; each record carries the sample result marked “Advisory: Yes”."
+   },
+   "ga-dnr-beaches": {
+    "kind": "program",
+    "basis": "Georgia's Healthy Beaches program samples for enterococci (its map: “Temporary Advisory: Bacteria Levels are Elevated”); each record carries the latest enterococci result."
+   },
+   "hi-doh-cwb-events-api": {
+    "kind": "fields",
+    "fields": [
+     "row.type",
+     "row.title",
+     "row.description",
+     "_agency_label",
+     "row.cause"
+    ],
+    "read": "the Department's notice title, text and cause"
+   },
+   "il-idph-beachguard": {
+    "kind": "fields",
+    "fields": [
+     "advisory_type",
+     "comment"
+    ],
+    "read": "the advisory type and the comment on the beach's page in the Illinois BeachGuard System"
+   },
+   "ks-kdhe-stream-advisories": {
+    "kind": "fields",
+    "fields": [
+     "cause",
+     "title",
+     "event.advice_text"
+    ],
+    "read": "KDHE's news flash: its title, cause and advice"
+   },
+   "ky-dow-swimming-advisories": {
+    "kind": "program",
+    "basis": "The Kentucky Division of Water and Division of Public Health Protection and Safety: “People should avoid recreational contact with waters in the areas specified because of the bacteria, which occur in human and animal waste and indicate the presence of untreated or inadequately treated sewage.”"
+   },
+   "md-aa-health-closings": {
+    "kind": "fields",
+    "fields": [
+     "page.title",
+     "section.text",
+     "event.advice_text"
+    ],
+    "read": "the Department of Health's notice title and text"
+   },
+   "me-healthy-beaches": {
+    "kind": "fields",
+    "fields": [
+     "status",
+     "comment",
+     "advisory_type",
+     "public_comment"
+    ],
+    "read": "Maine Healthy Beaches' status and comment"
+   },
+   "ms-mdeq-beach-monitoring": {
+    "kind": "fields",
+    "fields": [
+     "row.eventtype",
+     "row.advisorydesc",
+     "row.closuredesc"
+    ],
+    "read": "MDEQ's event type and its advisory or closure text"
+   },
+   "ms-mdeq-water-contact-advisories": {
+    "kind": "fields",
+    "fields": [
+     "title",
+     "release_text",
+     "quote"
+    ],
+    "read": "MDEQ's news release",
+    "records": {
+     "pearl-river-hanging-moss-creek-to-byram-swinging-bridge": {
+      "basis": "MDEQ, May 16, 2019: “The advisory is being issued due to ongoing sanitary sewer overflows around the City of Jackson.”",
+      "source": "https://www.mdeq.ms.gov/mdeq-issues-water-contact-advisory-for-pearl-river-and-other-streams-in-the-jackson-area/"
+     }
+    }
+   },
+   "nc-rwq-advisories": {
+    "kind": "program",
+    "basis": "North Carolina's swimming advisories follow bacteria samples over the standard or a wastewater spill, and its precautionary advisories mark storm-water discharge areas (15A NCAC 18A .3403 and .3404)."
+   },
+   "ne-dwee-beachwatch": {
+    "kind": "program",
+    "basis": "Nebraska's Beach Watch label is set from the week's E. coli sample, which each record gives."
+   },
+   "nh-des-swimming": {
+    "kind": "program",
+    "basis": "NHDES issues fecal-bacteria advisories under Env-Wq 1108.14 from its beach samples."
+   },
+   "nj-beaches": {
+    "kind": "program",
+    "basis": "New Jersey's beach policy: “Any initial sample that exceeds the state standard requires that the local health agency issue a swimming advisory”; “Beaches are closed if two consecutive samples collected at a bathing beach exceed the state standard.”"
+   },
+   "notification-pages": {
+    "kind": "fields",
+    "fields": [
+     "notice_text",
+     "page_line"
+    ],
+    "read": "the notice's text on the operator's or agency's page"
+   },
+   "ny-parks-beaches": {
+    "kind": "fields",
+    "fields": [
+     "rows[].status_reason",
+     "rows[].Status_Reason"
+    ],
+    "read": "NYS Parks' reason for the beach's status"
+   },
+   "oh-odh-beachguard": {
+    "kind": "fields",
+    "fields": [
+     "advisory.typeText",
+     "reason"
+    ],
+    "read": "Ohio BeachGuard's advisory type, reason and comment"
+   },
+   "ok-nps-chickasaw-bacteria": {
+    "kind": "program",
+    "basis": "The park posts a sign when E. coli results exceed its threshold (“Threshold limit = weekly ≥ measurement 235 or 30 day geometric mean ≥126”)."
+   },
+   "or-oha-beach-monitoring": {
+    "kind": "program",
+    "basis": "The Oregon Beach Monitoring Program's advisories follow its bacteria samples; its SEWAGE status reads “Sewage spills or major pollution events occurred.”"
+   },
+   "pa-erie-beaches": {
+    "kind": "program",
+    "basis": "Erie County Department of Health's advisories and restrictions follow its E. coli samples; each record carries the sample's result."
+   },
+   "pr-drna-beach-notices": {
+    "kind": "program",
+    "basis": "DRNA lists the beaches that “no son aptas para bañistas por exceder el “Beach Action Value” (BAV) para el parámetro de Enterococos”."
+   },
+   "ri-ridoh-beach-advisory-feed": {
+    "kind": "fields",
+    "fields": [
+     "reason"
+    ],
+    "read": "the reason in RIDOH's notice"
+   },
+   "ri-ridoh-beaches": {
+    "kind": "program",
+    "basis": "RIDOH's beach pages: closures are “based on exceedances of more than 60 cfu/100 ml in saltwater and in freshwater”."
+   },
+   "sc-des-beach-monitoring": {
+    "kind": "program",
+    "basis": "SCDES: “Long-term swimming advisories ... are issued for beach water monitoring locations that have an increased possibility of high bacteria levels”; a short-term advisory follows two results above 104 per 100 mL, or one above 500."
+   },
+   "sc-des-freshwater-swim-advisories": {"kind": "program", "basis": "SCDES publishes these river and lake sites in its \u201cWater Advisories\u201d service, in the layer titled \u201cSwimming Advisory\u201d: the state environmental agency's advisory against swimming at the site. The layer gives no further reason, date or status; the advisory itself concerns the water, so we keep the agency's colour."},
+   "tn-tdec-bacteriological-advisories": {
+    "kind": "program",
+    "basis": "TDEC's list of bacteriological advisories: “streams and lakes with high levels of bacteria or other contaminants are not suitable for recreational activities such as swimming or wading”."
+   },
+   "tx-glo-beach-watch": {
+    "kind": "program",
+    "basis": "Texas Beach Watch's levels are set from the enterococcus sample each record gives."
+   },
+   "ut-dwq-recreational-advisories": {
+    "kind": "fields",
+    "fields": [
+     "row.Advisory",
+     "row.Additional_Advisory_Notes"
+    ],
+    "read": "DWQ's map label and note for the site"
+   },
+   "va-vdh-advisories": {
+    "kind": "fields",
+    "fields": [
+     "event.advice_text",
+     "releases[].title",
+     "releases[].lead"
+    ],
+    "read": "VDH's news release"
+   },
+   "vt-advisories": {
+    "kind": "program",
+    "basis": "The City of Burlington's Beach Closure Tracker: Closed means the swimming area is “closed due to cyanobacteria blooms, combined sewer outflow or high E. coli”."
+   },
+   "wi-dnr-beach-health": {
+    "kind": "fields",
+    "fields": [
+     "reason"
+    ],
+    "read": "the DNR's reason for the advisory or closure"
+   }
+  }
+ },
  "_internal_doc": "Advisory windows the status computation applies (docs/plan.md section 2). Owner decision 2026-11-02: 72 hours is the site default for the yellow caution, overridable by event type, water kind and water body, each with its rationale, so the rule can be adjusted and explained. Hours count from the reported end of the discharge (ended_at); while a discharge is ongoing it is red. Resolution order for yellow: by_water > by_water_kind > by_event_type > default. Every override must carry a rationale and a source. Public wording (2026-11-02d, from the public-copy review docs/reviews/2026-11-02-copy-review.md): principle, every doc, basis, rationale and *_rationale string and every source is printed on the site exactly as written here (out/rules.json is the site's only copy of the rule text), so they stay in the public voice: no owner, project or file references, citations in source. A rationale that states a number of hours, days or kilometres must match the number beside it (pipeline/tests/test_public_export.py checks). The evidence behind each number is in research/science/report.md; the rain-likely design (per-outfall rainfall thresholds from permittee notices, RIDEM and NYC DEP rules, MRMS radar) is in docs/plan.md section 2 and docs/source-checklist.md. Keys starting with an underscore are internal and are stripped from the public export (out/rules.json)."
 }

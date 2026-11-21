@@ -23,7 +23,8 @@ HEADER = ("event_id,water,water_slug,state,operator,operator_id,outlet_id,outlet
           "reported_at,source_updated_at,retrieved_at,report_url,notice_url,site_url,duplicate_of,superseded_by,sampled_at,time_precision,ended_at_precision,"
           "report_kind,cause,weather,rainfall_in,rainfall_label,duration_text,volume_qualifier,volume_method,volume_to_water_gal,"
           "overflow_point,town_named,later_volume_gal,later_volume_text,later_volume_qualifier,later_record_kind,"
-          "later_record_published_at,later_record_id,linked_record_ids,notice_volume_gal,notice_record_id").split(",")
+          "later_record_published_at,later_record_id,linked_record_ids,notice_volume_gal,notice_record_id,"
+          "listed_without_colour").split(",")
 AS_OF = "2026-11-02T12:00:00Z"
 
 

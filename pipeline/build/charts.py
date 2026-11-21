@@ -59,6 +59,7 @@ import sys
 from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 
+from build.status import annotate_beach_reasons
 from build.status import (ADVISORY_TYPES, BEACH_CHAR, BLOOM_CHAR, COARSE_PRECISION, DISCHARGE_TYPES, LOCAL, POINT_ADVISORY_TYPES,
                           colours_whole_water, point_extent_only, end_not_credible, event_intervals, event_state, find_duplicates,
                           future_start, load_events, live_waters, load_rules, load_waters, make_resolver, parse_time, resolve_revisions)
@@ -347,6 +348,7 @@ class Data:
         for k, v in (self.status.get("duplicates") or {}).items():
             if k in by_id:
                 self.duplicates.setdefault(k, v)
+        beach_verdicts(self.events, by_id, self.duplicates, self.effective, self.rules)
         # every water status.py puts an event on (placed, or on a modeled reach that runs into it)
         self.members: dict[str, set] = defaultdict(set)
         for slug, w in (self.status.get("waters") or {}).items():
@@ -644,6 +646,16 @@ def gaps_text(x: list[str], cov: list) -> str | None:
 def series_meta(sources, first, last, caveats):
     cav = " ".join(c for c in dict.fromkeys(c for c in caveats if c)) or None
     return {"source_ids": sorted(sources), "first": day(first), "last": day(last), "caveat": cav}
+
+
+def beach_verdicts(events: list[dict], by_id: dict, duplicates: dict, effective: dict, rules: dict) -> None:
+    """A beach closure or advisory whose source gives no reason colours nothing in the charts either, judged as the
+    status build judges it: with its parent's reason for an update, a linked duplicate's for the record shown
+    (status.annotate_beach_reasons; rules.json beach_reason). The effective copies of the revisions carry it too."""
+    annotate_beach_reasons(events, by_id, duplicates, rules)
+    for eid, e in effective.items():
+        if "_beach_reason" in (by_id.get(eid) or {}):
+            e["_beach_reason"] = by_id[eid]["_beach_reason"]
 
 
 def red_intervals(ev: dict, state: str | None, now: datetime, capped: Counter, water: dict | None = None,
