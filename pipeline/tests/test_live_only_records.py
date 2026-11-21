@@ -93,6 +93,9 @@ def _charts(tmp_path: Path, monkeypatch, live: list[str], with_al: bool = True) 
     monkeypatch.setattr(S, "_STATES", set(live))
     monkeypatch.setattr(C, "load_rules", lambda: rules)
     monkeypatch.setattr(C, "load_waters", lambda: waters)
+    # each chart document carries its build stamp (generated_at, the clock to the second): fixed at NOW, so worlds
+    # built a moment apart compare byte for byte on any clock (they differed when the builds straddled a second)
+    monkeypatch.setattr(C, "now_iso", lambda: NOW.strftime("%Y-%m-%dT%H:%M:%SZ"))
     monkeypatch.setattr(C, "BUILD_DIR", build_dir)
     monkeypatch.setattr(C, "DATA_DIR", data_dir)
     real = S.load_events

@@ -230,7 +230,17 @@ def test_hab_episodes():
     assert "Collector_ID" not in json.dumps(r1["raw"])
 
 
-def test_beach_rows():
+class _HabsClock(H.datetime):
+    """The module's clock in November 2026: parse_day accepts years up to the current one plus one, so the 2026 dates
+    below are read on any day the suite runs."""
+    @classmethod
+    def now(cls, tz=None):
+        t = H.datetime(2026, 11, 17, 12, 0, tzinfo=H.UTC)
+        return t.astimezone(tz) if tz else t.replace(tzinfo=None)
+
+
+def test_beach_rows(monkeypatch):
+    monkeypatch.setattr(H, "datetime", _HabsClock)
     assert H.advisory_kind("Restriction")[0] == "beach_closure"
     assert H.advisory_kind("RESTRICTION")[0] == "beach_closure"
     assert H.advisory_kind("Advisory  ")[0] == "beach_advisory"

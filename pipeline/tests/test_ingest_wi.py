@@ -635,6 +635,9 @@ def test_r3_p1_5_a_failed_old_post_never_freezes_a_new_one(monkeypatch, tmp_path
         monkeypatch.setattr(M.requests, "Session", lambda: Sess({1: _list_page(pages)}, posts))
         return M.main(["--pages", "1"])
 
+    # the runs read the module's clock (now_iso) at fixed times, so the 30 days between them hold on any day the
+    # suite runs (with the real clock the first run's read was after the second's from 2027-06-10 on)
+    monkeypatch.setattr(M, "now_iso", lambda: "2027-06-10T00:00:00Z")
     assert run([old], {old[0]: good_old}) == 0                     # the first good run
     first_ok = json.loads(out.read_text())["last_ok_at"]
     # 30 days on, the old post is refused while a new one is posted: the new one is written at once, health false
