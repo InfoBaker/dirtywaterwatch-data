@@ -3283,6 +3283,45 @@ def listed_without_reason(ev: dict, rules: dict | None) -> bool:
     return bool(v) and v.get("stated") is False
 
 
+# Records that reach us after their season (data/rules.json unresolved.history_only: EPA's BEACON archive,
+# ingest/fed_beacon_beach_actions.py): history only. Every interval of such a record ends at the time it was first
+# read (raw._first_seen_at, else its fetched_at), so none is in effect at any build after that read: no current colour,
+# no caution drawn now, whatever end the record gives or lacks. Keyed on the source list, so no other feed changes.
+def history_only_rule(ev: dict, rules: dict | None) -> dict | None:
+    """unresolved.history_only of the rules when the record's source is listed in it, else None."""
+    h = (((rules or {}).get("unresolved") or {}).get("history_only") or {})
+    return h if ev.get("source_id") in (h.get("sources") or []) else None
+
+
+def history_only_cut(ev: dict) -> datetime | None:
+    """When a history-only record was first read: raw._first_seen_at, else fetched_at (UTC); None when neither parses."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    for v in (raw.get("_first_seen_at"), ev.get("fetched_at")):
+        t = parse_time(v) if v else None
+        if t is not None:
+            return t
+    return None
+
+
+def cut_history_only(ivs: list[dict], ev: dict, rules: dict | None) -> list[dict]:
+    """The intervals of a history-only record ended at its first read (history_only_rule); a record whose first read
+    is unknown sets none."""
+    h = history_only_rule(ev, rules)
+    if not h:
+        return ivs
+    cut = history_only_cut(ev)
+    out = []
+    for iv in ivs:
+        if cut is None or iv["start"] >= cut:
+            continue
+        if iv["end"] is None or iv["end"] > cut:
+            iv = {**iv, "end": cut, "cut_at_first_read": iso(cut)}
+        iv["history_only"] = {"rule": "unresolved.history_only", "first_read": iso(cut),
+                              "rationale": h.get("rationale"), "source": "data/rules.json"}
+        out.append(iv)
+    return out
+
+
 def annotate_beach_reasons(events: list[dict], by_id: dict, duplicates: dict, rules: dict) -> dict:
     """Set `_beach_reason` on every beach closure and advisory (build/beach_reason.py judge): an update whose own text
     gives no reason takes its parent's (Anne Arundel County's "the Department of Health has rescinded this advisory"
@@ -3312,7 +3351,10 @@ def annotate_beach_reasons(events: list[dict], by_id: dict, duplicates: dict, ru
                 cur[eid] = {**cur[par], "how": "parent", "parent": par}
                 changed = True
                 continue
-            d = next((d for d in sorted(dups_of.get(eid, ())) if good(cur.get(d))), None)
+            # a history-only record (unresolved.history_only: EPA's archive, read after the season) never lends its
+            # reason to the record shown, so it never colours a record that is in effect now
+            d = next((d for d in sorted(dups_of.get(eid, ())) if good(cur.get(d))
+                      and not history_only_rule(by_id[d], rules)), None)
             if d:
                 cur[eid] = {**cur[d], "how": "linked", "linked": d}
                 changed = True
@@ -3673,7 +3715,7 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
         for iv in out:
             if iv["rule"] == "sample_caution":
                 iv["label"] = slab
-    return carve_unread_gaps(earlier + out, ev, state, rules)
+    return cut_history_only(carve_unread_gaps(earlier + out, ev, state, rules), ev, rules)
 
 
 def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | None, rules: dict) -> list[dict]:

@@ -2,7 +2,7 @@
  "doc": "EPA's beach registry from BEACON 2.0: one row per beach the states filed with EPA, in the fifty states, the District of Columbia and Puerto Rico. Each group of fields cites its BEACON report and year (cited). Built by scripts/build_epa_beach_registry.py.",
  "source": "U.S. EPA BEACON 2.0 (https://beacon.epa.gov/ords/beacon2/r/beacon_apex/beacon2/), as reported by each state's beach program",
  "licence": "U.S. EPA, public domain",
- "built": "2026-11-21T13:46:07Z",
+ "built": "2026-11-21T13:52:20Z",
  "years": [
   2025,
   2026
@@ -50,14 +50,14 @@
   "with_season": 3942,
   "with_criteria": 3562,
   "out_of_scope": {
-   "AS": 100,
-   "BR": 30,
-   "GP": 38,
-   "GU": 66,
-   "MK": 30,
-   "MP": 174,
-   "ST": 12,
-   "VI": 92
+   "AS": 50,
+   "BR": 15,
+   "GP": 19,
+   "GU": 33,
+   "MK": 15,
+   "MP": 87,
+   "ST": 6,
+   "VI": 46
   }
  },
  "beaches": [

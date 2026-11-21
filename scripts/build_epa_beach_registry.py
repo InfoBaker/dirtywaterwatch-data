@@ -163,7 +163,7 @@ def read_reports(years: list[int], from_dir: Path | None, sess=None, sleep=None)
 
 def build(data: dict, built: str) -> dict:
     years = sorted(data, reverse=True)          # the latest year first: its row wins
-    beaches, out_scope = {}, Counter()
+    beaches, out_scope = {}, {}
     groups = {"season": season, "possible_sources": sources}
     for y in years:
         for r in data[y].get("attributes") or []:
@@ -171,8 +171,7 @@ def build(data: dict, built: str) -> dict:
             if not bid:
                 continue
             if st not in B.IN_SCOPE:
-                if bid not in beaches:
-                    out_scope[st or "(none)"] += 1
+                out_scope.setdefault(st or "(none)", set()).add(bid)
                 continue
             if bid in beaches:
                 continue
@@ -219,7 +218,7 @@ def build(data: dict, built: str) -> dict:
                    "with_point": sum(1 for b in rows if b.get("start_lat") is not None or b.get("end_lat") is not None),
                    "with_season": sum(1 for b in rows if (b.get("season") or {}).get("start")),
                    "with_criteria": sum(1 for b in rows if b.get("criteria")),
-                   "out_of_scope": dict(sorted(out_scope.items()))},
+                   "out_of_scope": {k: len(v) for k, v in sorted(out_scope.items())}},
         "beaches": rows,
     }
 

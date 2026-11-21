@@ -1,0 +1,12 @@
+Jurisdiction,Year,Beach ID,Beach Name,County,WaterbodyName,IsBeachActBeach?,Tier,IsHistorical?,IsDormant?,BeachAccess,BeachOwner,Poll.SourcesInvesti-gated?,Poll. SourcesFound?,Runoff,Storm,Agri-cultural,Algae,Boat,CAFO,CSO,SSO,POTW,SewerLine,Septic,Wildlife,TBD,Other,Unknown
+AL,2026,AL656449,BEAR POINT CIVIC ASSOCIATION,BALDWIN,Gulf of America,Y,3,N,N,Public,Private,Yes,Yes,,,,,,,,,,,,,,,
+BR,2026,WI432346,Second Landing,ASHLAND,Lake Superior,Y,1,N,N,Public,Private,Yes,Yes,,,,,,,,,,,,,,,Yes
+BR,2026,WI123451,Waverly,ASHLAND,Lake Superior,Y,1,N,N,Private,Private,Yes,Yes,,,,,,,,,,,,,,,Yes
+CA,2026,CA298722,Aliso County Beach - ACM1U,ORANGE,Pacific Ocean,Y,1,N,N,Public,Public,Yes,Yes,,,,,,,,,,,,,,,
+GU,2026,GU732200,"ASAN MEMORIAL BEACH,Head of Asan Bay",GUAM,Pacific Ocean,Y,1,N,N,Public,Public,Yes,Yes,"<span style=""color:#24cb7f;text-decoration:underline;font-weight:bold;"" title=""TMDL"">Yes</span>","<span style=""color:#24cb7f;text-decoration:underline;font-weight:bold;"" title=""TMDL"">Yes</span>",,,,,,"<span style=""color:#24cb7f;text-decoration:underline;font-weight:bold;"" title=""TMDL"">Yes</span>",,"<span style=""color:#24cb7f;text-decoration:underline;font-weight:bold;"" title=""TMDL"">Yes</span>",,,,"<span style=""color:#24cb7f;text-decoration:underline;font-weight:bold;"" title=""person-to-person transmission"">Yes</span>",Activity SOURCE
+IL,2026,IL928218,Winnetka Elder Park Beach,COOK,Lake Michigan,Y,1,N,N,Public,Public,Yes,Yes,,,,,,,,,,,,,,,
+LA,2026,LA971783,CYPT1,ST. MARY,Gulf of America,Y,1,N,N,Public,Public,Yes,Yes,,,,,,,,,,,,,,,Yes
+MI,2026,MI001504,Agate Beach,HOUGHTON,Lake Superior,Y,3,N,N,Public,Public,Yes,Yes,,,,,,,,,,,,,,,
+NJ,2026,NJ290142,Barnegat Light Borough at 25th St Bay Front,OCEAN,Atlantic Ocean,Y,1,N,N,Public,Public,Yes,Yes,,,,,,,,,,,,,,,
+NY,2026,NY989199,FISHER'S ISLAND COUNTRY CLUB,SUFFOLK,Atlantic Ocean,Y,3,N,N,Private,Private,Yes,Yes,,,,,,,,,,,,,,,
+PA,2026,PA102094,BEACH 11,ERIE,Lake Erie,Y,1,N,N,Public,Public,Yes,Yes,,,,,,,,,,,,,,,

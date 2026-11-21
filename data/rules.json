@@ -535,6 +535,16 @@
    ],
    "hours": 72,
    "rationale": "Some state lists give only the day a spill began, with no time of day and no end (Georgia's daily list of municipal sewage spills; the Texas Commission on Environmental Quality's table, which has given no end date since July 2024; the Tennessee Department of Environment and Conservation's Events Report, which gives no end date on most reports). These reports show caution for 72 hours from the start of that day, with the day shown as the precision; after that the end is marked unconfirmed until 30 days after the spill began."
+  },
+  "history_only": {
+   "sources": [
+    "fed-beacon-beach-actions"
+   ],
+   "cut": "first_seen",
+   "rationale": "Some records reach us after the season, from the archive of beach advisories and closures that states file with EPA once a year. We show them on a water's page and in its history as the authority's own past window, up to the time we first read them. They never colour the map now or start our caution period, even when the window runs past the day we read them.",
+   "source": "U.S. EPA, BEACON 2.0 (Beach Advisory and Closing On-line Notification), as reported by each state's beach program",
+   "_doc": "build/status.py event_intervals (history_only_cut): every interval of a listed source ends at the record's raw._first_seen_at (else its fetched_at), so none is in effect at the build time; a record of a listed source never lends its stated beach reason to another record (annotate_beach_reasons). cut first_seen is the only form.",
+   "_decided": "Owner, 2026-11-21: \"Yes, build it\" to the BEACON reader and beach registry (the EPA beaches review's question 1: history for every BEACH Act state, shown as past reports that never colour the current map)."
   }
  },
  "reach": {
@@ -897,6 +907,27 @@
     },
     "program_basis": "DNREC's Recreational Water Program map marks a sampling station \"Monitoring – Current Advisory\" while the programme's water-quality advisory is in effect there; the map's other codes are its monitoring states (no current advisory, outside the advisory area, resampling an enterococcus spike, not sampling in winter).",
     "read": "DNREC's notice type, reason, description and comment, or its map's label"
+   },
+   "fed-beacon-beach-actions": {
+    "kind": "fields",
+    "fields": [
+     "reason_comments"
+    ],
+    "program_values": {
+     "reasons": [
+      "ELEV_BACT",
+      "RAINFALL",
+      "MODEL",
+      "SEWAGE",
+      "POLICY"
+     ]
+    },
+    "program_basis": "EPA's BEACON system records each state's reason for a beach action as a code. Bacteria above the state's standard (ELEV_BACT), rainfall (RAINFALL), a predictive model of bacteria levels (MODEL), sewage (SEWAGE) and an action the state's policy issues without a sample (POLICY) are water-quality reasons. For any other reason (OTHER) we read the state's comment.",
+    "read": "the reason code and the reason comment in the state's report to EPA's BEACON system",
+    "labels": {
+     "beach_closure": "Beach closed; the state's report to EPA gives no water-quality reason",
+     "beach_advisory": "Advisory listed; the state's report to EPA gives no water-quality reason"
+    }
    },
    "fl-doh-beaches": {
     "kind": "program",

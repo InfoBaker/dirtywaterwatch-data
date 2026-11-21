@@ -1,0 +1,261 @@
+{
+ "nj-beaches": {
+  "source_id": "nj-beaches",
+  "ok": true,
+  "meta": {},
+  "records": [
+   {
+    "event_id": "nj-beaches:OC0142:beach_closure:2025-08-19",
+    "source_id": "nj-beaches",
+    "source_record_id": "OC0142:beach_closure:2025-08-19",
+    "parent_event_id": null,
+    "event_type": "beach_closure",
+    "status": "advisory_lifted",
+    "discharger_id": null,
+    "discharger_name": null,
+    "npdes_permit": null,
+    "outfall_id": null,
+    "outfall_name": null,
+    "waterbody_text": "25th St Bay Front (Barnegat Light Borough)",
+    "water_slugs": [
+     "barnegat-bay-nj"
+    ],
+    "water_match": "inferred",
+    "lat": 39.7453063767,
+    "lon": -74.117924658,
+    "coord_source": "source",
+    "coord_precision_m": null,
+    "started_at": "2025-08-19",
+    "ended_at": "2025-08-21",
+    "time_precision": "day",
+    "reported_at": null,
+    "published_at": null,
+    "source_updated_at": "2026-11-02T20:47:51Z",
+    "fetched_at": "2026-11-14T17:04:21Z",
+    "material": null,
+    "volume_gal": null,
+    "volume_text": null,
+    "estimate_flag": "unknown",
+    "authority": "New Jersey Cooperative Coastal Monitoring Program (NJDEP)",
+    "advice_text": "Beaches are closed if two consecutive samples collected at a bathing beach exceed the state standard. Beach closings remain in effect until subsequent sampling indicates bacteria levels are again below the standard. The closure applies to water activities like swimming, wading, and playing in the water. Health authorities may close beaches at any time for any reason as a precaution in order to protect public health.",
+    "advice_window_hours": null,
+    "advice_window_basis": "njbeaches.org Beach Closing / Advisory Policies (N.J.A.C. 8:26): in effect until sampling shows Enterococci below 104 per 100 mL; no fixed window",
+    "source_url": "https://njbeaches.org/",
+    "raw": {
+     "from": "incident CSV",
+     "cause": null,
+     "reasons": [
+      "ELEV_BACT"
+     ],
+     "indicators": [
+      "ENTERO"
+     ],
+     "incident_rows": [
+      {
+       "Incident_Start_Date": "08/19/2025",
+       "Incident_End_Date": "08/20/2025",
+       "Beach_Act_Type_Name": "CLOSURE",
+       "Beach_Reason_Type_Name": "ELEV_BACT",
+       "Beach_Reason_Type_Desc": "Monitoring that revealed elevated bacteria levels",
+       "Beach_Source_Type_Name": "UNKNOWN",
+       "Beach_Indicator_Type_Name": "ENTERO",
+       "Beach_Indicator_Type_Desc": "Enterococci",
+       "Incident_Additional_Comments": "Incident continues; Text to be updated."
+      },
+      {
+       "Incident_Start_Date": "08/20/2025",
+       "Incident_End_Date": "08/21/2025",
+       "Beach_Act_Type_Name": "CLOSURE",
+       "Beach_Reason_Type_Name": "ELEV_BACT",
+       "Beach_Reason_Type_Desc": "Monitoring that revealed elevated bacteria levels",
+       "Beach_Source_Type_Name": "UNKNOWN",
+       "Beach_Indicator_Type_Name": "ENTERO",
+       "Beach_Indicator_Type_Desc": "Enterococci",
+       "Incident_Additional_Comments": "Incident continues; Text to be updated."
+      }
+     ],
+     "station": "OC0142",
+     "program": "Cooperative Coastal Monitoring Program",
+     "location_type": "Bay",
+     "county": "Ocean County",
+     "local_health_authority": "Ocean County Health Department",
+     "epa_beach_id": "NJ290142",
+     "water_match_notes": [
+      "the one bay water listing Barnegat Light Borough whose box holds the station point"
+     ]
+    },
+    "parse_error": null,
+    "duplicate_of": null
+   },
+   {
+    "event_id": "nj-beaches:OC0142:beach_advisory:2025-08-18",
+    "source_id": "nj-beaches",
+    "source_record_id": "OC0142:beach_advisory:2025-08-18",
+    "parent_event_id": null,
+    "event_type": "beach_advisory",
+    "status": "advisory_lifted",
+    "discharger_id": null,
+    "discharger_name": null,
+    "npdes_permit": null,
+    "outfall_id": null,
+    "outfall_name": null,
+    "waterbody_text": "25th St Bay Front (Barnegat Light Borough)",
+    "water_slugs": [
+     "barnegat-bay-nj"
+    ],
+    "water_match": "inferred",
+    "lat": 39.7453063767,
+    "lon": -74.117924658,
+    "coord_source": "source",
+    "coord_precision_m": null,
+    "started_at": "2025-08-18",
+    "ended_at": "2025-08-19",
+    "time_precision": "day",
+    "reported_at": null,
+    "published_at": null,
+    "source_updated_at": "2026-11-02T20:47:51Z",
+    "fetched_at": "2026-11-14T17:04:21Z",
+    "material": null,
+    "volume_gal": null,
+    "volume_text": null,
+    "estimate_flag": "unknown",
+    "authority": "New Jersey Cooperative Coastal Monitoring Program (NJDEP)",
+    "advice_text": "Any initial sample that exceeds the state standard requires that the local health agency issue a swimming advisory at the bathing beach where the sample was collected. Swimming Advisories warn the public of potentially unhealthy water conditions. Additional sampling is conducted until water quality results are again within the standard.",
+    "advice_window_hours": null,
+    "advice_window_basis": "njbeaches.org Beach Closing / Advisory Policies (N.J.A.C. 8:26): in effect until sampling shows Enterococci below 104 per 100 mL; no fixed window",
+    "source_url": "https://njbeaches.org/",
+    "raw": {
+     "from": "incident CSV",
+     "cause": null,
+     "reasons": [
+      "ELEV_BACT"
+     ],
+     "indicators": [
+      "ENTERO"
+     ],
+     "incident_rows": [
+      {
+       "Incident_Start_Date": "08/18/2025",
+       "Incident_End_Date": "08/19/2025",
+       "Beach_Act_Type_Name": "CONTAM_ADV",
+       "Beach_Reason_Type_Name": "ELEV_BACT",
+       "Beach_Reason_Type_Desc": "Monitoring that revealed elevated bacteria levels",
+       "Beach_Source_Type_Name": "UNKNOWN",
+       "Beach_Indicator_Type_Name": "ENTERO",
+       "Beach_Indicator_Type_Desc": "Enterococci",
+       "Incident_Additional_Comments": "First result that triggered an incident."
+      }
+     ],
+     "station": "OC0142",
+     "program": "Cooperative Coastal Monitoring Program",
+     "location_type": "Bay",
+     "county": "Ocean County",
+     "local_health_authority": "Ocean County Health Department",
+     "epa_beach_id": "NJ290142",
+     "water_match_notes": [
+      "the one bay water listing Barnegat Light Borough whose box holds the station point"
+     ]
+    },
+    "parse_error": null,
+    "duplicate_of": null
+   }
+  ]
+ },
+ "pa-erie-beaches": {
+  "source_id": "pa-erie-beaches",
+  "ok": true,
+  "meta": {},
+  "records": [
+   {
+    "event_id": "pa-erie-beaches:PA102094-20250715",
+    "source_id": "pa-erie-beaches",
+    "source_record_id": "PA102094-20250715",
+    "parent_event_id": null,
+    "event_type": "beach_closure",
+    "status": "advisory_lifted",
+    "discharger_id": null,
+    "discharger_name": null,
+    "npdes_permit": null,
+    "outfall_id": null,
+    "outfall_name": "Beach 11",
+    "waterbody_text": "Lake Erie",
+    "water_slugs": [
+     "lake-erie-pa"
+    ],
+    "water_match": "inferred",
+    "lat": 42.163003,
+    "lon": -80.079651,
+    "coord_source": "source",
+    "coord_precision_m": null,
+    "started_at": "2025-07-15T00:00:00-04:00",
+    "ended_at": "2025-07-16T00:00:00-04:00",
+    "time_precision": "day",
+    "reported_at": null,
+    "published_at": null,
+    "source_updated_at": null,
+    "fetched_at": "2026-11-14T17:06:05Z",
+    "material": null,
+    "volume_gal": null,
+    "volume_text": null,
+    "estimate_flag": "unknown",
+    "authority": "Erie County Department of Health beach monitoring",
+    "advice_text": "A precautionary restriction or a restriction. Swimming is not permitted at this time. Swimming can resume when water quality testing confirms that E. coli levels have dropped to acceptable limits.",
+    "advice_window_hours": null,
+    "advice_window_basis": null,
+    "source_url": "https://docs.google.com/spreadsheets/d/1PQsacgoCuwnF0Okr8Tv2SgY2Lq523nAVHKONx4hOaM8/edit",
+    "raw": {
+     "row": {
+      "Beach ID": "PA102094",
+      "Beach Name": "Beach 11",
+      "Collection Date": "7/15/2025",
+      "Collection Time": "7:36:00 AM",
+      "Air Temperature": "71.5",
+      "Air Temperature Unit": "Fahrenheit",
+      "Water Temperature": "80.1",
+      "Water Temperature Unit": "Fahrenheit",
+      "Wind Direction": "",
+      "Wind Speed": "",
+      "Wind Speed Unit": "MPH",
+      "Previous 24hr rainfall": "",
+      "Rainfall Unit": "Inches",
+      "Previous 48hr rainfall": "",
+      "Rainfall Unit 2": "Inches",
+      "Sky conditions": "Clear",
+      "Wave Height": "0",
+      "Wave Height Unit": "Inches",
+      "Bather load in water": "0",
+      "Bather load on beach": "1",
+      "Algae": "Visible Floating",
+      "Debris": "None",
+      "Fecal": "None",
+      "Geese": "40",
+      "Gulls": "0",
+      "Dogs": "0",
+      "EPA Method": "Colilert-18",
+      "Substance": "E. coli",
+      "Result Value": "357.6",
+      "Result Value Unit": "MPN/100mL",
+      "Advisory type": "Restriction",
+      "": ""
+     },
+     "sheet_row": 341,
+     "beach": {
+      "name": "Beach 11",
+      "current_status": "Closed for the season",
+      "date_updated": "9/8/2026"
+     },
+     "start_basis": "the sample's collection date; when the advisory was posted is not stated",
+     "end_basis": "the next sample's collection date at this beach",
+     "reading_note": null,
+     "next_sample": {
+      "date": "2025-07-16",
+      "advisory_type": "Restriction"
+     },
+     "water_basis": "Presque Isle State Park and Freeport beaches are Lake Erie beaches; the sheets name no water."
+    },
+    "parse_error": null,
+    "duplicate_of": null
+   }
+  ]
+ }
+}
