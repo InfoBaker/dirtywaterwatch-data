@@ -4837,7 +4837,8 @@ def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules
 
 def record_hash(ev: dict) -> str:
     import hashlib
-    ev = {k: v for k, v in ev.items() if k != "_feed_health"}      # feed health is not the record (load_events)
+    # feed health is not the record (load_events), nor is the beach verdict build() sets (placement does not read it)
+    ev = {k: v for k, v in ev.items() if k not in ("_feed_health", "_beach_reason")}
     return hashlib.blake2b(json.dumps(ev, sort_keys=True, default=str).encode(), digest_size=16).hexdigest()
 
 

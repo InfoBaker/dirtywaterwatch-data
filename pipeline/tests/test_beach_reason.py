@@ -249,3 +249,9 @@ def test_the_export_carries_the_note_on_the_record_and_in_the_csv(tmp_path, monk
     with (out / "all-reports-2026.csv").open(newline="", encoding="utf-8") as f:
         got = {x["record_id"]: x["listed_without_colour"] for x in _csv.DictReader(f)}
     assert got == {deep["source_record_id"]: "Beach closed; the source gives no reason", masc["source_record_id"]: ""}
+
+
+def test_the_verdict_build_sets_is_not_part_of_the_record_placement_caches():
+    rec = illinois()["467"]
+    h = S.record_hash(rec)
+    assert S.record_hash({**rec, "_beach_reason": {"stated": False, "how": "no_field_match"}}) == h
