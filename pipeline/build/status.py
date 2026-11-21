@@ -181,7 +181,10 @@ MONTHLY_CURRENT_DAYS = 90
 DAYS_TEXT = re.compile(r"(\d+)\s+days?\s+with\s+discharge", re.I)
 EVENTS_TEXT = re.compile(r"(\d+)\s+discharge\s+events?", re.I)
 EPA_MONTHLY_SOURCES = ("nj-echo-monthly", "echo-cso-dmr-monthly",
-                       "in-echo-dmr-cso", "wv-echo-dmr-cso")
+                       "in-echo-dmr-cso", "wv-echo-dmr-cso",
+                       # EPA's per-state DMR files (ingest/echo_dmr_cso_states.py STATES; decision 45)
+                       "oh-echo-dmr-cso", "ky-echo-dmr-cso", "il-echo-dmr-cso", "tn-echo-dmr-cso", "ks-echo-dmr-cso",
+                       "ga-echo-dmr-cso", "ma-echo-dmr-cso-files")
 POINT_ADVISORY_TYPES = {"beach_advisory", "beach_closure", "rain_advisory", "hab_advisory"}
 WHOLE_WATER_KINDS = {"lake", "pond", "reservoir"}
 SMALL_WATER_KM2 = 50

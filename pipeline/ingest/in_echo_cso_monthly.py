@@ -249,10 +249,12 @@ def revision_key(row: dict) -> tuple:
 
 
 def collect(results: dict[tuple[str, str], dict], reg: dict, stats: dict,
-            params: dict[str, str] | None = None) -> tuple[dict, dict]:
+            params: dict[str, str] | None = None, location_ok=None) -> tuple[dict, dict]:
     """(permit, feature, month) -> {param: DMR row}; and permit -> ECHO facility name. results is keyed (permit, code).
-    params: parameter code -> figure name (events, hours, volume); Indiana's PARAMS unless given (the state files)."""
+    params: parameter code -> figure name (events, hours, volume); Indiana's PARAMS unless given (the state files).
+    location_ok: monitoring location description -> read or not; 'Effluent Gross' lines only unless given."""
     params = PARAMS if params is None else params
+    location_ok = location_ok or (lambda desc: "gross" in str(desc or "").lower())
     cells: dict[tuple, dict] = defaultdict(dict)
     names = {}
     for (permit, code), res in results.items():
@@ -263,7 +265,7 @@ def collect(results: dict[tuple[str, str], dict], reg: dict, stats: dict,
                 if str(par.get("ParameterCode")) not in params:
                     continue
                 rows = par.get("DischargeMonitoringReports") or []
-                if "gross" not in str(par.get("MonitoringLocationDesc") or "").lower() or \
+                if not location_ok(par.get("MonitoringLocationDesc")) or \
                         "external" not in str(f.get("PermFeatureTypeDesc") or "external").lower():
                     stats["skipped_not_effluent_gross"][f"{permit}:{feat}"] += len(rows)
                     continue
@@ -492,8 +494,12 @@ def volume_text(fg: dict, ym: str) -> str:
     elif fg["volume_raw"]:
         parts.append(fg["volume_raw"])
     filed = [t for _, t in sorted((fg.get("filed") or {}).items())]
-    text = ", ".join(parts) + f" in {ym} (monthly DMR totals)" if not filed else \
-        "; ".join(([", ".join(parts)] if parts else []) + filed) + f" in {ym} (monthly discharge monitoring report)"
+    if not filed:
+        text = ", ".join(parts) + f" in {ym} (monthly DMR totals)"
+    else:
+        # a figure that is not the month's total (the state files): written as filed after the month's own figures
+        text = (f"{', '.join(parts)} in {ym}; " if parts else f"{ym}: ") + "; ".join(filed) + \
+            (", not monthly totals" if len(filed) > 1 else ", not a monthly total")
     if fg.get("conflicts"):
         label = {"events": "discharge event count", "hours": "hours", "volume": "volume"}
         text += "; " + "; ".join(f"the {label.get(n, n)} is in conflict: equally ranked reports filed "
@@ -729,7 +735,7 @@ def finish(results: dict, reg: dict, disc: dict, *, since: str, permits: list[st
     source_id = feed.get("source_id") or SOURCE_ID
     params = feed.get("params") or PARAMS
     stats = defaultdict(Counter)
-    cells, names = collect(results, reg, stats, params)
+    cells, names = collect(results, reg, stats, params, feed.get("location_ok"))
     prev_doc = read_json(common.EVENTS_DIR / f"{source_id}.json", {}) or {}
     store = merge_previous(cells, prev_doc.get("records") or [], stats, evidence_store)
     save_store(store)

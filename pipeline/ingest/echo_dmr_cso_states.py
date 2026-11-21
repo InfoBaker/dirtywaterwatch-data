@@ -103,9 +103,9 @@ LOCATIONS = {"1": "Effluent Gross", "Y": "Effluent Gross (Supplementary)"}
 # statistical bases (ECHO's REF_STATISTICAL_BASE.csv, read 2026-11-21): short form as the effluent-chart service gives it
 BASES = {"MP": "MO TOTAL", "TB": "TOTAL", "ET": "EVNT TOT", "DD": "DAILY MX", "MK": "MO AVG", "DB": "DAILY AV",
          "DC": "DAILY MN", "AF": "AVERAGE", "MB": "MAXIMUM", "ME": "MINIMUM", "AB": "ANNL AVG", "M6": "MAXIMUM"}
-BASE_WORDS = {"MP": "monthly total", "TB": "total", "ET": "event total", "DD": "daily maximum", "MK": "monthly average",
-              "DB": "daily average", "DC": "daily minimum", "AF": "average", "MB": "maximum", "ME": "minimum",
-              "AB": "annual average", "M6": "maximum"}
+BASE_WORDS = {"MP": "a monthly total", "TB": "a total", "ET": "an event total", "DD": "a daily maximum",
+              "MK": "a monthly average", "DB": "a daily average", "DC": "a daily minimum", "AF": "an average",
+              "MB": "a maximum", "ME": "a minimum", "AB": "an annual average", "M6": "a maximum"}
 TOTAL_BASES = {"MP", "TB"}
 FIGURE_WORDS = {"events": "overflow count", "hours": "hours of discharge", "volume": "overflow volume"}
 HOUR_UNITS = {"hr", "hr/mo", "hrs", "hours"}
@@ -129,8 +129,9 @@ STATES = {
     "KS": {"source_id": "ks-echo-dmr-cso", "agency": "the Kansas Department of Health and Environment"},
     "GA": {"source_id": "ga-echo-dmr-cso", "agency": "Georgia's Environmental Protection Division"},
     # Springfield, Holyoke and Chicopee are read by ingest/echo_cso_dmr_monthly.py (echo-cso-dmr-monthly)
+    # Region 1's CSO permits put the CSO lines at the 'Storm Water' monitoring location (SW) as well as at 1
     "MA": {"source_id": "ma-echo-dmr-cso-files", "agency": "EPA Region 1 and MassDEP",
-           "exclude": ("MA0101613", "MA0101630", "MA0101508")},
+           "exclude": ("MA0101613", "MA0101630", "MA0101508"), "locations": {"SW": "Storm Water"}},
 }
 
 
@@ -166,14 +167,21 @@ def _fmt(v: float) -> str:
     return f"{v:g}"
 
 
-def figured_as(name: str, unit: str, kept: list[tuple[str, float]], why: str) -> str:
-    """The filed form of a figure that is not the month's own total, for the record's text."""
-    unit_txt = f" {_unit_words(unit)}" if unit and name != "events" else ""
-    vals = " and ".join(f"{_fmt(v)}{unit_txt} ({BASE_WORDS.get(b, b)})" for b, v in kept)
-    return f"{FIGURE_WORDS[name]} filed as {vals}; {why}"
+def _unit_txt(name: str, unit: str) -> str:
+    if name == "events" or not unit or (name == "hours" and unit in HOUR_UNITS):
+        return ""
+    return f" {_unit_words(unit)}"
 
 
-def fold_rows(rows: list[dict], name: str, stats: Counter) -> dict | None:
+def figured_as(name: str, unit: str, kept: list[tuple[str, float]]) -> str:
+    """The filed form of a figure that is not the month's own total, for the record's text ('overflow volume filed
+    as a daily maximum of 0.5 million gallons and a monthly average of 0.33 million gallons')."""
+    vals = " and ".join(f"{BASE_WORDS.get(b, 'a figure (' + b + ')')} of {_fmt(v)}{_unit_txt(name, unit)}"
+                        for b, v in kept)
+    return f"{FIGURE_WORDS[name]} filed as {vals}"
+
+
+def fold_rows(rows: list[dict], name: str, stats: Counter, locations: dict[str, str] | None = None) -> dict | None:
     """One row per permit, outfall, parameter, month, version and receipt from the lines EPA's file gives it (one per
     statistical base and value type): the effluent-chart row in_echo_cso_monthly reads, or None when no line says
     anything. Module docstring, 'Statistical bases'."""
@@ -192,7 +200,7 @@ def fold_rows(rows: list[dict], name: str, stats: Counter) -> dict | None:
                       for r in sorted(rows, key=lambda x: x["STATISTICAL_BASE_CODE"]))
     row = {"permit": first["EXTERNAL_PERMIT_NMBR"].strip().upper(), "feature": first["PERM_FEATURE_NMBR"].strip().upper(),
            "ParameterCode": first["PARAMETER_CODE"], "ParameterDesc": first["PARAMETER_DESC"],
-           "MonitoringLocationDesc": LOCATIONS[first["MONITORING_LOCATION_CODE"]],
+           "MonitoringLocationDesc": (locations or LOCATIONS)[first["MONITORING_LOCATION_CODE"]],
            "MonitoringPeriodEndDate": ddmon(first["MONITORING_PERIOD_END_DATE"]),
            "DMRUnitDesc": unit, "UnitFrom": None if unit_dmr else ("limit" if unit_lim else None),
            "StatisticalBases": bases, "FiguredAs": None, "NODIDesc": None,
@@ -219,36 +227,60 @@ def fold_rows(rows: list[dict], name: str, stats: Counter) -> dict | None:
     top = max(said, key=lambda x: (x[1] or 0))
     row.update(DMRValueId=top[2]["DMR_VALUE_ID"], DMRValueNmbr=top[2]["DMR_VALUE_NMBR"], NODICode=None,
                StatisticalBaseDesc=" and ".join(sorted({BASES.get(b, b) for b, _, _ in said})))
-    kept = sorted({(b, v) for b, v, _ in said}, key=lambda x: (BASE_WORDS.get(x[0], x[0]), x[1]))
+    kept = sorted({(b, v) for b, v, _ in said}, key=lambda x: (["DD", "MK"].index(x[0]) if x[0] in ("DD", "MK") else 2,
+                                                                x[0], x[1]))
+    if not totals and {b for b, _, _ in said} >= {"DD", "MK"}:
+        # Ohio's two columns: one figure in both is the month's (unless the report holds daily entries: mark_daily)
+        row["_pair"] = "agree" if len(values) == 1 else "differ"
     if len(values) > 1:
-        row["FiguredAs"] = figured_as(name, unit, kept, "the month's total is not given")
+        row["FiguredAs"] = figured_as(name, unit, kept)
         stats["figures_with_disagreeing_bases"] += 1
     elif not totals and len({b for b, _, _ in said}) < 2:
         # one statistic alone (a monthly average, a maximum): not the month's total
-        row["FiguredAs"] = figured_as(name, unit, kept, "the month's total is not given")
+        row["FiguredAs"] = figured_as(name, unit, kept)
         stats["figures_given_only_as_a_statistic"] += 1
     elif unit == "N=0;Y=1":
-        row["FiguredAs"] = "a discharge filed as observed (yes); the number is not given"
+        row["FiguredAs"] = "a discharge filed as observed (yes)"
         stats["figures_filed_yes_or_no"] += 1
     elif unit.endswith("/d") or unit in ("MGD", "gpd"):
-        row["FiguredAs"] = f"{FIGURE_WORDS[name]} filed as {_fmt(positive[0])} {unit}, a rate; the month's total is not given"
+        row["FiguredAs"] = f"{FIGURE_WORDS[name]} filed as a rate of {_fmt(positive[0])} {unit}"
         stats["figures_filed_as_a_rate"] += 1
     elif name == "events" and positive[0] > MAX_EVENTS_PER_MONTH:
-        row["FiguredAs"] = (f"overflow count filed as {_fmt(positive[0])}, more than one an hour of the month: "
-                            "kept as filed, not counted")
+        row["FiguredAs"] = f"overflow count filed as {_fmt(positive[0])}, more than one an hour of the month"
         stats["implausible_counts"] += 1
     elif name == "hours" and unit not in HOUR_UNITS:
-        row["FiguredAs"] = f"duration filed as {_fmt(positive[0])} {unit}; not counted as hours"
+        row["FiguredAs"] = f"duration filed as {_fmt(positive[0])} {unit}"
         stats["durations_in_other_units"] += 1
     return row
+
+
+def mark_daily(rows: list[dict], stats: Counter) -> list[dict]:
+    """A report (permit, outfall, month, version, receipt) in which one figure's daily maximum and monthly average
+    differ holds daily entries; a figure whose two columns agree there is one day's figure, not the month's total."""
+    daily = {(r["permit"], r["feature"], r["MonitoringPeriodEndDate"], r["VersionNmbr"], r["ValueReceivedDate"])
+             for r in rows if r.get("_pair") == "differ"}
+    for r in rows:
+        k = (r["permit"], r["feature"], r["MonitoringPeriodEndDate"], r["VersionNmbr"], r["ValueReceivedDate"])
+        if r.pop("_pair", None) == "agree" and k in daily and not r.get("FiguredAs") and (_num(r["DMRValueNmbr"]) or 0) > 0:
+            name = CODES[r["ParameterCode"]]
+            r["FiguredAs"] = (f"{FIGURE_WORDS[name]} filed as {_fmt(_num(r['DMRValueNmbr']))}"
+                              f"{_unit_txt(name, r['DMRUnitDesc'])} for both the daily maximum and the monthly "
+                              "average of daily entries")
+            stats["figures_in_reports_of_daily_entries"] += 1
+    for r in rows:
+        r.pop("_pair", None)
+    return rows
 
 
 def _not_monthly_unit(unit: str) -> bool:
     return any(unit.endswith(s) for s in ("/yr", "/qtr", "/year", "/quarter"))
 
 
-def parse_zip(path: Path, keys: set[tuple[str, str]], permits: set[str], stats: Counter) -> list[dict]:
-    """The folded rows of EPA's state file for the registry's combined sewer outfalls (keys) of the permits read."""
+def parse_zip(path: Path, keys: set[tuple[str, str]], permits: set[str], stats: Counter,
+              locations: dict[str, str] | None = None) -> list[dict]:
+    """The folded rows of EPA's state file for the registry's combined sewer outfalls (keys) of the permits read, at
+    the monitoring locations given (code -> description; LOCATIONS unless given)."""
+    locations = locations or LOCATIONS
     with zipfile.ZipFile(path) as z:
         name = next((n for n in z.namelist() if n.upper().endswith("_NPDES_DMRS.CSV")), None)
         if name is None:
@@ -274,7 +306,7 @@ def parse_zip(path: Path, keys: set[tuple[str, str]], permits: set[str], stats: 
                 if r["PERM_FEATURE_TYPE_CODE"] != "EXO":
                     stats["lines_not_at_an_external_outfall"] += 1
                     continue
-                if r["MONITORING_LOCATION_CODE"] not in LOCATIONS:
+                if r["MONITORING_LOCATION_CODE"] not in locations:
                     stats[f"lines_at_other_monitoring_locations:{r['MONITORING_LOCATION_CODE']}"] += 1
                     continue
                 if r["NMBR_OF_REPORT"] not in ("", "1"):
@@ -287,11 +319,12 @@ def parse_zip(path: Path, keys: set[tuple[str, str]], permits: set[str], stats: 
                         r["VERSION_NMBR"], r["VALUE_RECEIVED_DATE"], r["LIMIT_SET_SCHEDULE_ID"])].append(r)
     out = []
     for k, rows in groups.items():
-        row = fold_rows(rows, CODES[k[2]], stats)
+        row = fold_rows(rows, CODES[k[2]], stats, locations)
         if row is not None:
             out.append(row)
         else:
             stats["blank_lines"] += 1
+    out = mark_daily(out, stats)
     out.sort(key=lambda r: (r["permit"], r["feature"], r["ParameterCode"], r["MonitoringPeriodEndDate"] or "",
                             r["VersionNmbr"]))
     return out
@@ -397,12 +430,16 @@ def cache_file(source_id: str) -> Path:
     return BUILD_DIR / f"{source_id}-cache.json"
 
 
+def locations_of(state: str) -> dict[str, str]:
+    return {**LOCATIONS, **(STATES[state].get("locations") or {})}
+
+
 def read_state_files(state: str, keys: set, permits: set, since: date, today: date, cache: dict, budget: Budget,
                      stats: Counter, local: dict[int, Path] | None = None) -> tuple[list[dict], dict, dict]:
     """(folded rows of every fiscal year read, fetch log by year, file facts by year); cache['files'] updated."""
     files = cache.setdefault("files", {})
     rows, log, facts = [], {}, {}
-    rh = registry_hash(keys)
+    rh = registry_hash(keys | {("locations", ",".join(sorted(locations_of(state))))})
     sid = STATES[state]["source_id"]
     for fy in fiscal_years(since, today):
         k, url = f"FY{fy}", file_url(state, fy)
@@ -464,7 +501,7 @@ def read_state_files(state: str, keys: set, permits: set, since: date, today: da
                 continue
         file_stats: Counter = Counter()
         try:
-            got = parse_zip(path, keys, permits, file_stats)
+            got = parse_zip(path, keys, permits, file_stats, locations_of(state))
         except (ValueError, zipfile.BadZipFile, OSError) as e:
             log[k] = f"failed (unreadable file: {e if isinstance(e, ValueError) else type(e).__name__})"
             if old.get("rows"):
@@ -519,6 +556,7 @@ def run_state(state: str, since: date, today: date, budget: Budget, registry_row
     feed = {"source_id": sid, "params": {c: n for c, n in CODES.items()},
             "authority": AUTHORITY.format(agency=cfg["agency"]), "zone": zone_for(state),
             "source_url": lambda permit: f"https://echo.epa.gov/effluent-charts#{permit}",
+            "location_ok": lambda desc, ok=frozenset(locations_of(state).values()): desc in ok,
             "cadence": ("EPA's state file per fiscal year, read when its Last-Modified changes (weekly for the current "
                         "and previous year); DMRs reach EPA weeks after the month"),
             "note": ("the operator's monthly DMR figures for this outfall, not an individual discharge: no day is "
@@ -533,7 +571,7 @@ def run_state(state: str, since: date, today: date, budget: Budget, registry_row
     meta_extra = {"state": state, "files": facts, "file_log": log,
                   **{k: v for k, v in stats.items() if ":" not in k},
                   **{f"{k}_total": v for k, v in lines.items()}, "skipped_lines": skipped,
-                  "codes": FIGURES, "monitoring_locations_read": LOCATIONS,
+                  "codes": FIGURES, "monitoring_locations_read": locations_of(state),
                   **({"permits_read_by_another_feed": list(cfg["exclude"])} if cfg.get("exclude") else {})}
     rc = M.finish(to_results(rows), reg, M.dischargers(state), since=since.isoformat(), permits=permits,
                   fetch_log=log, evidence_store=evidence_store, save_store=save_store, feed=feed,
