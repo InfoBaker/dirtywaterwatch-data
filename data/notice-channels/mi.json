@@ -9757,22 +9757,27 @@
    "operator_id": null,
    "agency": "Michigan Department of Environment, Great Lakes, and Energy",
    "permit": null,
-   "checked": "2026-11-04",
+   "checked": "2026-11-21",
    "id": "mi-egle-beachguard",
    "name": "Michigan EGLE BeachGuard (beach monitoring)",
    "channel_kind": "state_alert_page",
-   "urls": [],
-   "method": null,
+   "urls": [
+    "https://mienviro.michigan.gov/nsite/beach/map/"
+   ],
+   "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": false,
-   "unmonitored_reason": "login",
+   "monitored": true,
+   "unmonitored_reason": null,
    "publishes": "status",
-   "note": "Advisory and sample detail need a MiEnviro login; not read yet: the BeachGuard map (https://mienviro.michigan.gov/nsite/beach/map/, answered 200 on 2026-11-04) shows only a current status colour per beach site (2,913 sites) through a POST service. Local health departments enter results and issue advisories within 24 hours of an exceedance (E. coli 300 per 100 mL daily geometric mean or 130 30-day). The research did not trace the statute behind the program, so the row is filed voluntary. (research/mi/report.md §2.5)",
+   "note": "EGLE's BeachGuard map (MiEnviro nSITE, beach mode) and its Export are public without a login. The export (GET https://mienviro.michigan.gov/nsite/ss/explorersiteexports with responseContentType=text/csv and a queryParams filter of reportId, a statewide box and modeId BEACH, sent with the map's Referer; the body is gzip) answered this project's named client on 2026-11-21: report 2082 \"Closures and Contamination Advisories\" held 3,655 advisories since 1994, 246 of them begun in 2026 at 152 beaches, each with StartDate, EndDate (dates only), AdvisoryType (Closed or Contamination Advisory), Reason and PollutionSource; reports 2078 (Sampling Results) and 2081 (Beach Details) are offered the same way. GitHub's runner read the map page on 2026-11-21 (run 44913220623); the export answers 400 without the map's Referer, which the runner probe does not send. Only the map's per-beach detail services (beachadvisories, beachresults) answer 401: the earlier login barrier rested on those. Not collected yet (no reader built); watched for availability. Local health departments enter results and issue advisories within 24 hours of an exceedance (E. coli 300 per 100 mL daily geometric mean or 130 30-day). The research did not trace the statute behind the program, so the row is filed voluntary. Never request report 2081's \"Private Comments\" or keep the advisories' AdvisoryComments. (research/mi/report.md §2.5)",
    "sources": [
     "mi-egle-beachguard"
    ],
-   "barrier": "login_required"
+   "barrier": null,
+   "records": false,
+   "availability_only": true,
+   "every_hours": 24
   },
   {
    "state": "MI",

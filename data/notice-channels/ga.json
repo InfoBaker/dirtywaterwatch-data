@@ -2301,8 +2301,8 @@
    "monitored": false,
    "unmonitored_reason": "other",
    "publishes": "unknown",
-   "note": "No web form: VALDOSTA, CITY OF (MUD CREEK WPCP): an immediate report of each spill to the local health department(s); the rule does not require the department to publish it. No web channel found. The rule binds the owner of a publicly owned treatment works. (research/ga/report.md §2.1)",
-   "checked": "2026-11-04",
+   "note": "No web form: VALDOSTA, CITY OF (MUD CREEK WPCP): an immediate report of each spill to the local health department(s); the rule does not require the department to publish it. No web channel found for this report; the city's river results and spill-testing pages are a channel of their own (ga-valdosta-river-water-quality). The rule binds the owner of a publicly owned treatment works. (research/ga/report.md §2.1)",
+   "checked": "2026-11-21",
    "records": false,
    "noun": "Health department report",
    "sources": [
@@ -21507,8 +21507,8 @@
    "monitored": false,
    "unmonitored_reason": "other",
    "publishes": "unknown",
-   "note": "No web form: VALDOSTA, CITY OF (WITHLACOOCHEE WPCP): an immediate report of each spill to the local health department(s); the rule does not require the department to publish it. No web channel found. The rule binds the owner of a publicly owned treatment works. (research/ga/report.md §2.1)",
-   "checked": "2026-11-04",
+   "note": "No web form: VALDOSTA, CITY OF (WITHLACOOCHEE WPCP): an immediate report of each spill to the local health department(s); the rule does not require the department to publish it. No web channel found for this report; the city's river results and spill-testing pages are a channel of their own (ga-valdosta-river-water-quality). The rule binds the owner of a publicly owned treatment works. (research/ga/report.md §2.1)",
+   "checked": "2026-11-21",
    "records": false,
    "noun": "Health department report",
    "sources": [
@@ -58494,6 +58494,34 @@
    "noun": "Swim Guide listing",
    "barrier": null,
    "barrier_review": "an app only (Swim Guide): no web page of its own, but no login wall either"
+  },
+  {
+   "id": "ga-valdosta-river-water-quality",
+   "state": "GA",
+   "operator_id": null,
+   "agency": "City of Valdosta Utilities Department",
+   "name": "City of Valdosta Utilities (river and stream water quality, spill testing)",
+   "permit": null,
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://www.valdostacity.com/utilities/river-stream-water-quality-monitoring",
+    "https://www.valdostacity.com/utilities/river-stream-water-quality-data/20252026-withlacoochee-river-bacteriological-monitoring"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": true,
+   "unmonitored_reason": null,
+   "publishes": "results",
+   "records": false,
+   "availability_only": true,
+   "every_hours": 24,
+   "note": "The city's Utilities Department posts its Withlacoochee River E. coli results (MPN/100 mL) at two stations, HWY 133 and HWY 84, weekly: 72 dates from 2025-07-02 to 2026-11-16 on 2026-11-21. Its index page also lists a page of upstream and downstream testing for each recent major spill (Nov 2024 Overflow Testing Results, 2025 Sugar Creek Spill Testing, August 2025 Sanitary Sewer Spills), each giving the spill's date, place, receiving stream and, on two, the amount; the city calls this \"the required assessment of the effects from major sewage spills\". Not collected yet (HTML tables). Both pages answered GitHub's runner on 2026-11-21 (run 44913220623). Filed voluntary: no rule found requires posting the results online. Covers: ga-ga0020222, ga-ga0033235.",
+   "checked": "2026-11-21",
+   "sources": [
+    "ga-valdosta-river-water-quality"
+   ],
+   "barrier": null
   },
   {
    "id": "ga-wwals-spill-archive",

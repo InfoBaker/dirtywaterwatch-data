@@ -10,7 +10,7 @@ updated: 2026-11-15
 
 **What is not published.** The Department keeps the reports it receives in its document system, one document at a time, behind a CAPTCHA, and publishes no list; the federal overflow records hold no Louisiana report. Baton Rouge's reports give no time of day, no end and no map point, and list its treatment plants' discharges (one to eight a quarter) only as scanned forms. No other operator publishes its overflows in a form we could read.
 
-**What stands in the way.** A report is published once a quarter, about a month after the quarter ends, so a discharge appears here one to four months after it happened (73 days at the median). The Department of Health's beach monitoring and algal bloom pages refuse automated reading, so Louisiana's beach advisories are not shown here.
+**What stands in the way.** A report is published once a quarter, about a month after the quarter ends, so a discharge appears here one to four months after it happened (73 days at the median). We do not yet collect the Department of Health's beach advisories, posted weekly from May through October on its beach monitoring page and map, or the algal bloom advisories it issues as news releases, so neither is shown here.
 
 **Known problems in the data.** Three of Baton Rouge's eight quarterly reports since October 2024 (October to December 2024, January to March 2025 and April to June 2026) are not shown, because the rows we read from them do not match the reports' own counts; in the April to June 2026 report, the table lists two discharges from December 2025 that its count leaves out. Of the 219 discharges, 95 name no receiving water. One row is dated a year before the quarter its report covers.
 

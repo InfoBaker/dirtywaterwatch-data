@@ -496,5 +496,49 @@
   "verified": "verified",
   "checked": "2026-11-21",
   "notes": ""
+ },
+ {
+  "id": "ga-valdosta-river-water-quality",
+  "name": "City of Valdosta Utilities: Withlacoochee River bacteriological monitoring and spill-testing pages",
+  "jurisdiction": "GA",
+  "operator": "City of Valdosta Utilities Department",
+  "operator_type": "municipal",
+  "role": "results",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Withlacoochee River (HWY 133, HWY 84); Sugar Creek, One Mile Branch (spill testing)",
+  "water_slugs": [],
+  "url": "https://www.valdostacity.com/utilities/river-stream-water-quality-monitoring",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Index https://www.valdostacity.com/utilities/river-stream-water-quality-monitoring (the old address .../river-stream-water-quality-data redirects there) links the pages: https://www.valdostacity.com/utilities/river-stream-water-quality-data/20252026-withlacoochee-river-bacteriological-monitoring (date, HWY 133 and HWY 84 E. coli MPN/100 mL; 72 weekly dates 2025-07-02 to 2026-11-16), .../nov-2024-overflow-testing-results, .../2025-sugar-creek-spill-testing, .../august-2025-sanitary-sewer-spills (spill date, amount where given, place, receiving stream, upstream and downstream sampling places, daily DO, temperature, pH, fecal coliform and E. coli). Checked 2026-11-21 with the named client; GitHub's runner read the index and the results page (run 44913220623).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [
+   "DATE",
+   "HWY 133 E coli (MPN/100ml)",
+   "HWY 84 E coli (MPN/100ml)"
+  ],
+  "fills_event_fields": [
+   "sampled_at",
+   "waterbody"
+  ],
+  "cannot_fill": [
+   "coordinates",
+   "the spill's end"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "weekly (river results); per major spill",
+  "history": "2025-07 on (river results); spill pages from November 2024",
+  "license": "none stated",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Official results and spill-testing pages, watched in the register (ga-valdosta-river-water-quality); not collected yet (HTML tables).",
+  "verified": "fetched",
+  "checked": "2026-11-21",
+  "notes": ""
  }
 ]

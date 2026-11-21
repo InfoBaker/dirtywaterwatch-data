@@ -4,21 +4,22 @@ url: "https://mienviro.michigan.gov/nsite/beach/map/"
 homepage: "https://mienviro.michigan.gov/nsite/beach/map/"
 kind: "api"
 level: "state"
-# Notes (research/mi, status candidate, verified fetched, checked 2026-11-03): Statewide current
-#   status with points; history and reasons need the logged-in detail or snapshots.
-# Access detail (research, quoted): React app; POST
+# Notes (research/mi, status candidate, verified fetched, checked 2026-11-21): public without a login. The map's
+#   Export gives every advisory with its dates, type and reason (report 2082: 3,655 since 1994, 246 begun in 2026 at
+#   152 beaches); not collected yet (no reader built). The earlier "history and reasons need the logged-in detail"
+#   rested on the map's per-beach detail services, which do answer 401; the export does not need them.
+# Access detail (research, quoted): see access_detail below. The map's status service: POST
 #   https://mienviro.michigan.gov/nsite/ss/explorersites with JSON
 #   {insertUpdateList:[{displayHeight,displayWidth,filterValuesJson:null,isIncludeUnmappable,latitudeMin/Max,longitudeMin/Max,modeId:'BEACH',searchTerm:''}]}
 #   and headers Origin/Referer from the site (without Referer it returns 400). Statewide extent
 #   returns clusters (totalSiteCount 2913); a small bbox returns sites: id, siteId, siteName,
 #   geographyWKT POINT, color (#188018 no advisory, #AAAAAA no data; red closed, yellow advisory per
-#   EGLE). Advisory detail endpoints (beachadvisories, beachresults) need login (401). Mode settings
-#   at /nsite/api/settings/getWslSettings?environment=beach.
-# Can fill: coordinates, waterbody, source_status
-# Cannot fill: started_at; ended_at; advice_text; volume
+#   EGLE). Mode settings and the export report ids at /nsite/api/settings/getWslSettings?environment=beach.
+# Can fill: started_at, ended_at (dates), event_type, authority, waterbody, source_status
+# Cannot fill: time of day; volume
 # Waters: 2,913 beach sites (Great Lakes and inland)
 # Research notes: Status colour includes green for 'no advisory'; the site must not map that to
-#   green (grey = no report).
+#   green (grey = no report). Never request report 2081's "Private Comments"; drop AdvisoryComments (free text).
 cadence: "Local health departments enter results; EGLE says advisories/closures 'within 24 hours' of an exceedance; weekly sampling Memorial Day to Labor Day."
 license: "none stated"
 attribution: "EGLE with local health departments"
@@ -26,8 +27,8 @@ enabled: true
 role: "advisories"
 event_types: ["beach_advisory", "beach_closure"]
 states: ["MI"]
-access: ["map_only", "api"]
-access_detail: "React app; POST https://mienviro.michigan.gov/nsite/ss/explorersites with JSON {insertUpdateList:[{displayHeight,displayWidth,filterValuesJson:null,isIncludeUnmappable,latitudeMin/Max,longitudeMin/Max,modeId:'BEACH',searchTerm:''}]} and headers Origin/Referer from the site (without Referer it returns 400). Statewide extent returns clusters (totalSiteCount 2913); a small bbox returns sites: id, siteId, siteName, geographyWKT POINT, color (#188018 no advisory, #AAAAAA no data; red closed, yellow advisory per EGLE). Advisory detail endpoints (beachadvisories, beachresults) need login (401). Mode settings at /nsite/api/settings/getWslSettings?environment=beach."
+access: ["map_only", "api", "csv"]
+access_detail: "Export, no login (checked 2026-11-21): GET https://mienviro.michigan.gov/nsite/ss/explorersiteexports?responseContentType=text/csv&includeMetadataInResponse=false&loadChildren=true&queryParams={\"filter\":[{\"reportId\":2082,\"latitudeMin\":41.0,\"latitudeMax\":48.5,\"longitudeMin\":-90.5,\"longitudeMax\":-82.0,\"modeId\":\"BEACH\",\"searchTerm\":\"\",\"isIncludeUnmappable\":true,\"filterValuesJson\":null}]}&filterString= with the map's Referer (400 without it); gzip CSV. Reports: 2082 Closures and Contamination Advisories (StartDate, EndDate, AdvisoryType, Reason, PollutionSource, IssuingOrganization, Name, Identifier), 2078 Sampling Results, 2081 Beach Details. Only the map's per-beach detail services (beachadvisories, beachresults) answer 401."
 machine_readable: true
 legal_basis: "BEACH Act; Michigan Part 31 water quality standard (E. coli 300/100 mL daily geometric mean, 130/100 mL 30-day)"
-checked: "2026-11-03"
+checked: "2026-11-21"

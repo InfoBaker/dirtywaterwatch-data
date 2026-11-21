@@ -155,32 +155,45 @@
     ],
     "waters_covered": "23 coastal beach sites (Gulf beaches, Cameron to Grand Isle; Lake Pontchartrain north shore)",
     "water_slugs": [],
-    "url": "https://www.ldh.la.gov/bureau-of-sanitarian-services/beach-monitoring-program",
+    "url": "https://ldh.la.gov/page/beach-monitoring-program",
     "access": [
-      "html",
-      "pdf"
+      "arcgis",
+      "html"
     ],
-    "access_detail": "HTTP 403 to both WebFetch and curl on 2026-11-03 (bot protection); not retried. Per search snippets: enterococci sampling at 23 sites; advisories issued weekly every Thursday from May 1 to October 31; media advisory and a swim-advisory sign when high; annual report PDF (LA2025_AnnualBeachReport_Final.pdf) with a 2026 risk table. Data also reach Swim Guide.",
-    "machine_readable": false,
+    "access_detail": "The program page https://ldh.la.gov/page/beach-monitoring-program answers 403 to the named client (this Mac and GitHub's runner, 2026-11-21) and 200 to a browser's user agent (this Mac, 2026-11-21): an HTML table of the 23 sites with the most recent sample date and advisory status, weekly every Thursday May 1 to October 31, and a link to LDH's map (ladhh.maps.arcgis.com web app f68d74740bbb4eda9ceffca7ef71a404, web map a8ec9ba61a7e49ca8750a78a8c093223). Its layer https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/BEACH_ADVISORY_STATUS/FeatureServer/0 is open to the named client (this Mac and the runner): STATE_ID, BEACH_NAME, LAT, LONG, DATE_SAMPL, STATUS (ADVISORY / NO ADVISORY), ENTEROCOCCI, GEO_MEAN, ADVISORY_REASON, TIME_SAMPL, SAMPLE_DATE; 23 rows, 1 ADVISORY on 2026-11-21 (Lake Charles North Beach, sampled 2026-10-20). Annual report PDF (LA2025_AnnualBeachReport_Final.pdf) per earlier search.",
+    "machine_readable": true,
     "sample_record": null,
-    "fields": [],
+    "fields": [
+      "STATE_ID",
+      "BEACH_NAME",
+      "LAT",
+      "LONG",
+      "STATUS",
+      "ADVISORY_REASON",
+      "SAMPLE_DATE",
+      "TIME_SAMPL",
+      "ENTEROCOCCI",
+      "GEO_MEAN"
+    ],
     "fills_event_fields": [
       "source_status",
+      "coordinates",
+      "sampled_at",
       "advice_text"
     ],
     "cannot_fill": [
-      "coordinates (not seen)"
+      "the advisory's issue and lift dates (current status only)"
     ],
-    "has_coordinates": false,
+    "has_coordinates": true,
     "has_outfall_ids": false,
     "cadence": "weekly (Thursday) May to October",
     "history": "annual reports",
     "license": "unknown",
     "legal_basis": "BEACH Act",
-    "status": "unreachable",
-    "status_reason": "Both addresses answer 403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16): registered as a barrier (bot wall); a data request to LDH is the owner's item.",
-    "verified": "search_only",
-    "checked": "2026-11-16",
+    "status": "candidate",
+    "status_reason": "The map layer is open and the page answers a browser's user agent (2026-11-21); not collected yet. The generic ArcGIS reader can read the layer with a fetch block only.",
+    "verified": "fetched",
+    "checked": "2026-11-21",
     "notes": ""
   },
   {
@@ -571,10 +584,10 @@
     "history": null,
     "license": null,
     "legal_basis": null,
-    "status": "unreachable",
-    "status_reason": "403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16).",
+    "status": "candidate",
+    "status_reason": "The program page: 403 to the named client (this Mac and GitHub's runner, 2026-11-21), 200 to a browser's user agent (this Mac, 2026-11-21). Its data are on the open map layer (la-ldh-beach-monitoring).",
     "verified": "fetched",
-    "checked": "2026-11-16",
+    "checked": "2026-11-21",
     "notes": null
   }
 ]

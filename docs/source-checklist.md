@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1734 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1735 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -26,7 +26,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | va | 22 | 11 | 28 | 7 | 1 | 69 |
 | dc | 24 | 7 | 25 | 12 | 5 | 73 |
 | nc | 10 | 1 | 5 | 1 | 0 | 17 |
-| ga | 8 | 0 | 4 | 1 | 0 | 13 |
+| ga | 8 | 1 | 4 | 1 | 0 | 14 |
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
 | wa | 6 | 3 | 4 | 1 | 0 | 14 |
@@ -56,7 +56,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | sc | 7 | 0 | 2 | 1 | 1 | 11 |
 | in | 9 | 0 | 15 | 0 | 2 | 26 |
 | wv | 8 | 0 | 12 | 1 | 1 | 22 |
-| la | 4 | 0 | 7 | 3 | 2 | 16 |
+| la | 4 | 2 | 7 | 3 | 0 | 16 |
 | nv | 4 | 1 | 8 | 3 | 0 | 16 |
 | ok | 3 | 0 | 6 | 1 | 0 | 10 |
 | pr | 6 | 0 | 4 | 1 | 0 | 11 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **646** | **232** | **546** | **229** | **81** | **1734** |
+| **all** | **646** | **235** | **546** | **229** | **79** | **1735** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1333,7 +1333,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nc-wwals-and-swim-guide` | Swim Guide affiliates in NC (riverkeepers; WNC program) | watch | search_only | prior_art | NC beaches and WNC river stations appear on Swim Guide; not checked one by one. |
 | `nc-epa-sobe` | EPA SOBE extract, NC rows | rejected | inferred | events | Only a handful of NC rows; NC uses its own reporting. The DWR layer is complete and faster. |
 
-## ga: Georgia (13)
+## ga: Georgia (14)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1345,6 +1345,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ga-epd-spills-map-layer` | Georgia EPD Spills in Georgia StoryMap layer (Spill_Summary_Continuous_Update) | used | fetched | events | Public ArcGIS layer behind the "Spills in Georgia" StoryMap (updated weekly): same 30-day rows with LATITUDE/LONGITUDE. BEGIN_DATE was null in all 61 rows on 2026-11-03, so it supplies points only, joined to the spreadsheet. Built: read by pipeline/ingest/ga_epd_spills.py (feed ga-epd-spills), which lends a layer point to a workbook row of the same permit and address. |
 | `ga-law-ocgs-12-5-30-1` | O.C.G.A. 12-5-30.1 Major spills by publicly owned treatment works | used | search_only | law | Statutory base for the legal-organ notice and downstream notice within 20 miles. Text not fetched (search only). |
 | `ga-rule-391-3-6-05` | Ga. Comp. R. & Regs. 391-3-6-.05 Emergency Actions (spills and major spills by POTWs) | used | fetched | law | Public-notice duties: media within 24 hours, sign at the site immediately for at least 7 days, legal organ within 7 days for a major spill, downstream water suppliers within 24 hours. |
+| `ga-valdosta-river-water-quality` | City of Valdosta Utilities: Withlacoochee River bacteriological monitoring and spill-testing pages | candidate | fetched | results | Official results and spill-testing pages, watched in the register (ga-valdosta-river-water-quality); not collected yet (HTML tables). |
 | `ga-epd-hab` | Georgia EPD harmful algal bloom information | watch | inferred | advisories | No statewide bloom feed found; not searched in depth. |
 | `ga-flint-riverkeeper-atlanta-notice` | Flint Riverkeeper / SELC notice of intent to sue Atlanta (2026) | watch | search_only | news | Pending Clean Water Act case over spills to the Flint headwaters (60-day notice, July 2026). |
 | `ga-georgia-water-coalition-dirty-dozen` | Georgia Water Coalition "Dirty Dozen" | watch | search_only | prior_art | Annual advocacy report naming problem sites (sewer spills feature often). Context, not events. |
@@ -1377,7 +1378,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `mi-epa-gl-cso-michigan` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Michigan (operator list with websites) | used | fetched | outfalls | Seeds the per-operator website column of dischargers.json. |
 | `mi-glwa-cso-notification-plan` | Great Lakes Water Authority CSO Public Notification Plan (2018) | used | fetched | law | Shows the largest Michigan CSO permittee uses the state list as its public 4-hour notice channel. |
 | `mi-law-mcl-324-3112a` | MCL 324.3112a (NREPA Part 31): discharge of untreated or partially treated sewage; notice, posting, E. coli testing | used | fetched | law | Primary legal basis: 24-hour notice to EGLE, local health departments and daily newspapers; EGLE must post on its website; E. coli testing of affected waters. |
-| `mi-egle-beachguard` | EGLE BeachGuard (MiEnviro nSITE beach explorer) | candidate | fetched | advisories | Statewide current status with points; history and reasons need the logged-in detail or snapshots. |
+| `mi-egle-beachguard` | EGLE BeachGuard (MiEnviro nSITE beach explorer) | candidate | fetched | advisories | Public export with each advisory's dates, type and reason (verified 2026-11-21); no reader built yet. The earlier login barrier applied only to the map's per-beach detail services. |
 | `mi-egle-hab-reports-map` | EGLE/MDHHS Michigan HAB Reports Map and reporting form | candidate | search_only | advisories | State HAB reports with locations; trace the map's layer next. |
 | `mi-egle-annual-cso-sso-rtb-reports` | EGLE Annual CSO/SSO/RTB Reports (PDF) | watch | search_only | events | Annual PDFs with event appendices; superseded by the live list for current data; latest found is 2021. |
 | `mi-egle-mienviro-subscriptions` | MiEnviro email subscriptions (beach advisories, permit notices) | watch | inferred | advisories | Owner sign-up for beach advisory emails; no overflow alert exists. |
@@ -1927,6 +1928,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `la-lac-33-i-ch39` | LAC 33:I Chapter 39, Notification Regulations and Procedures for Unauthorized Discharges | used | search_only | law | Regulator duty only; no public-notice duty found. |
 | `la-ldeq-spoc` | LDEQ Single Point of Contact (SPOC) incident reporting | used | fetched | law | Regulator-report route; no public list. |
 | `la-ldeq-written-notification-guidance` | LDEQ written notification procedures | used | search_only | law | Nonbinding summary of the seven-day written report. |
+| `la-ldh-beach-alternate` | LDH beach monitoring page (alternate address) | candidate | fetched | advisories | The program page: 403 to the named client (this Mac and GitHub's runner, 2026-11-21), 200 to a browser's user agent (this Mac, 2026-11-21). Its data are on the open map layer (la-ldh-beach-monitoring). |
+| `la-ldh-beach-monitoring` | Louisiana Department of Health Beach Monitoring Program | candidate | fetched | advisories | The map layer is open and the page answers a browser's user agent (2026-11-21); not collected yet. The generic ArcGIS reader can read the layer with a fetch block only. |
 | `la-baton-rouge-consent-decree` | City of Baton Rouge / East Baton Rouge Parish sewer consent decree (2002, modified 2012-2013) | watch | search_only | events | EPA's settlement page: context; the City-Parish's quarterly reports are the feed (la-baton-rouge-quarterly-reports). |
 | `la-ldeq-edms` | LDEQ Electronic Document Management System (EDMS) | watch | fetched | events | The site is readable: GitHub's runner was answered (200) on 2026-11-16. A CAPTCHA guards the search: no document read; registered as a barrier (records request or a supported export needed). |
 | `la-ldh-hab-advisories` | LDH algal bloom advisories (news releases) | watch | search_only | advisories | Ad hoc only. |
@@ -1937,8 +1940,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `la-epa-sobe` | EPA SOBE (eRule) extract, Louisiana rows | rejected | fetched | events | Rechecked 2026-11-14 (current and all-versions extracts): no Louisiana report; 17 Louisiana collection-system permits are listed in EPA's permits table. |
 | `la-industrial-cso-permits` | EPA CSO inventory rows for Louisiana (industrial) | rejected | fetched | outfalls | EPA's two Louisiana 'CSO' rows are petrochemical plants' combined outfalls: kind other in data/outfalls-la.json, off the combined sewer outlets and the rain caution. |
 | `la-ldeq-uas-incidents` | LDEQ_UAS_Incident_Report_View_Layer (ArcGIS Online) | rejected | search_only | events | Not an overflow feed (by title); verify if time allows. |
-| `la-ldh-beach-alternate` | LDH beach monitoring page (alternate address) | unreachable | fetched | advisories | 403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16). |
-| `la-ldh-beach-monitoring` | Louisiana Department of Health Beach Monitoring Program | unreachable | search_only | advisories | Both addresses answer 403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16): registered as a barrier (bot wall); a data request to LDH is the owner's item. |
 
 ## nv: Nevada (16)
 
