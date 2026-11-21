@@ -396,7 +396,7 @@ def test_the_dmr_cache_is_compact_and_a_run_keeps_to_its_request_budget(tmp_path
     monkeypatch.setattr(M, "SLEEP_S", 0)
     asked = []
     monkeypatch.setattr(M, "fetch", lambda p, code, since: (asked.append(code) or _results()[(p, code)], "live"))
-    assert M.main(["--since", "2025-01-01"]) == 0
+    assert M.main(["--since", "2025-01-01"], today=today) == 0    # the cache's ages count to the same day as above
     doc = json.loads((tmp_path / "events" / "in-echo-dmr-cso.json").read_text())
     assert asked == ["74063"]                              # never fetched: asked first; the budget then ends
     assert doc["meta"]["fetch"]["IN0000004-50037"].startswith("stale cache")

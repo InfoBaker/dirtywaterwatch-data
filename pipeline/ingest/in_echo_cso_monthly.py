@@ -624,13 +624,14 @@ def median_lag_days(records: list[dict]) -> float | None:
     return statistics.median(lags) if lags else None
 
 
-def main(argv=None) -> int:
+def main(argv=None, today: date | None = None) -> int:
+    """today (the UTC day the cache's ages are counted to) is for tests; the refresh passes none and uses the clock."""
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--since", default=DEFAULT_SINCE)
     ap.add_argument("--refresh", action="store_true", help="ignore the cached responses")
     args = ap.parse_args(argv)
     since = date.fromisoformat(args.since)
-    today = datetime.now(UTC).date()
+    today = today or datetime.now(UTC).date()
 
     reg = registry_outfalls()
     permits = permits_to_read(reg)
