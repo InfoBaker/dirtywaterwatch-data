@@ -16,6 +16,16 @@ ROOT = Path(__file__).resolve().parents[2]
 FIX = Path(__file__).resolve().parent / "fixtures" / "mi"
 T0 = "2026-11-21T18:22:00Z"
 SENTINELS = ("COMMENT SENTINEL", "PRIVATE SENTINEL", "ADDITIONAL SENTINEL", "DESCRIPTION SENTINEL")
+REAL_MIN_SITES = M.MIN_SITES
+
+
+@pytest.fixture(autouse=True)
+def small_site_floor(monkeypatch):
+    monkeypatch.setattr(M, "MIN_SITES", 5)          # the fixture's 12 beaches; the real floor is tested below
+
+
+def test_the_real_floors_fit_the_export_of_2026_11_21():
+    assert 2000 <= REAL_MIN_SITES <= 2914 and M.MIN_ROWS <= 3650 and M.MAX_REJECTED >= 1
 
 
 def adv_text():
@@ -229,3 +239,84 @@ def test_the_feed_is_in_the_ingest_list_and_its_source_record_exists():
     text = (ROOT / "pipeline" / "ingest" / "mi_egle_beaches.py").read_text()
     assert "__name__ == \"__main__\"" in text and "not a feed" not in text
     assert (ROOT / "data" / "sources" / f"{M.SOURCE_ID}.yaml").exists()
+
+
+# ---- Astra review 2026-11-21 (.coordinator/reviews/2026-11-21-astra-mi-egle-beaches.md), each failing first
+
+HEADER = ",".join(M.ADV_COLUMNS)
+
+
+def test_a_row_with_an_extra_cell_is_rejected_so_shifted_comment_text_is_never_kept():
+    good = adv_text().splitlines()
+    # an unquoted comma inside a comment shifts the comment's second half into Name
+    bad = '9/1/2026 12:00:00 AM,9/2/2026 12:00:00 AM,Closed,High bacteria levels,Unknown,1,Some HD,COMMENT SENTINEL a,' \
+          'COMMENT SENTINEL b,Beach X,1491'
+    rows, rejected = M.read_advisories("\n".join(good + [bad]) + "\n")
+    assert rejected == 1 and len(rows) == 16
+    assert "COMMENT SENTINEL" not in json.dumps(rows)
+
+
+@pytest.mark.parametrize("cells", [
+    ",,,,,,,,,",                                                            # every cell empty
+    "9/1/2026 12:00:00 AM,,Closed,High bacteria levels,Unknown,1,HD,,Beach,",  # no identifier
+    "not a date,,Closed,High bacteria levels,Unknown,1,HD,,Beach,1491",     # no start date
+    "9/1/2026 12:00:00 AM,soon,Closed,High bacteria levels,Unknown,1,HD,,Beach,1491",   # an end that is no date
+    "9/1/2026 12:00:00 AM",                                                 # a short row
+])
+def test_a_malformed_row_is_rejected(cells):
+    rows, rejected = M.read_advisories(HEADER + "\n" + cells + "\n")
+    assert rows == [] and rejected == 1
+
+
+def test_a_read_of_mostly_malformed_rows_is_refused_whatever_its_length():
+    with pytest.raises(M.ReadError):
+        M.parse_advisories(HEADER + "\n" + "x\n" * 3655)
+
+
+def test_the_floor_counts_distinct_advisories_not_rows():
+    rows = M.parse_advisories(adv_text())
+    with pytest.raises(M.ReadError):
+        M.check_rows([rows[0]] * 3655, {})                 # 3,655 copies of one advisory
+
+
+def test_a_partial_beach_list_keeps_the_complete_one(monkeypatch, tmp_path):
+    monkeypatch.setattr(M, "SITES_PATH", tmp_path / "sites.json")
+    full = site_text()
+    lines = full.splitlines()
+    answers = [full, "\n".join(lines[:2]) + "\n"]          # then a list cut after one site
+    monkeypatch.setattr(M, "fetch_report", lambda sess, rid: answers.pop(0))
+    rows = M.parse_advisories(adv_text())
+    first = M.load_sites(None, rows, T0)
+    second = M.load_sites(None, rows, "2026-11-23T21:00:00Z")    # stale: read again, answered short
+    assert second == first and len(second) == 12
+    assert len(json.loads((tmp_path / "sites.json").read_text())["sites"]) == 12
+
+
+@pytest.mark.parametrize("lat,lon", [("42.58", ""), ("", "-83.84"), ("42.58", "west"), ("north", "-83.84")])
+def test_a_point_missing_either_coordinate_is_no_point(lat, lon):
+    import csv as _csv
+    import io as _io
+    rd = list(_csv.DictReader(_io.StringIO(site_text())))
+    rd[0]["Latitude"], rd[0]["Longitude"] = lat, lon
+    out = _io.StringIO()
+    w = _csv.DictWriter(out, fieldnames=list(rd[0].keys()))
+    w.writeheader()
+    w.writerows(rd)
+    sites = M.parse_sites(out.getvalue())
+    s = sites[rd[0]["Beach ID"].strip()]
+    assert s["lat"] is None and s["lon"] is None
+
+
+def test_correcting_one_end_of_a_same_day_pair_never_swaps_their_ids():
+    state = {}
+    rows = M.parse_advisories(adv_text())
+    before = by_id(run(state=state, rows=rows)[0])
+    assert before["2093-20060620-closure"]["ended_at"] == "2006-07-05"
+    assert before["2093-20060620-closure-2"]["ended_at"] == "2006-07-18"
+    fixed = [dict(r) for r in rows]
+    for r in fixed:
+        if r["Identifier"] == "2093" and r["EndDate"].startswith("7/5/2006"):
+            r["EndDate"] = "7/20/2006 12:00:00 AM"
+    after = by_id(run(state=state, rows=fixed, at="2026-11-21T19:22:00Z")[0])
+    assert after["2093-20060620-closure-2"]["ended_at"] == "2006-07-18"      # the unchanged one keeps its id
+    assert after["2093-20060620-closure"]["ended_at"] == "2006-07-20"        # the corrected one keeps its own

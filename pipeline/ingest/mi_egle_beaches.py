@@ -30,7 +30,8 @@ Privacy (what is kept)
 Records (category beach: beach_closure or beach_advisory; never a sewage discharge record)
   - One per advisory row. Key (source_record_id): "<Identifier>-<start YYYYMMDD>-<closure|advisory>". Rows that are
     identical in every kept field are one advisory (8 such pairs on 2026-11-21); rows that share the key and differ (two
-    in 2005 and 2006, with different ends) take "-2", "-3" by the order of (end, reason, source, issuer).
+    in 2005 and 2006, with different ends) take "-2", "-3" by the order of (end, reason, source, issuer) when first
+    seen, and keep them after: the assignment is saved (state collision_ids), so a corrected end never swaps ids.
   - AdvisoryType Closed -> beach_closure; Contamination Advisory -> beach_advisory; any other type -> beach_advisory
     with raw.type_unmapped.
   - started_at and ended_at are the dates as EGLE gives them (the export carries no time of day: 12:00 AM on every
@@ -54,9 +55,12 @@ Records (category beach: beach_closure or beach_advisory; never a sewage dischar
     source_updated_at are empty (the export gives no posting or entry time); fetched_at the read; raw._first_seen_at
     the first read that listed the advisory (kept in the state file).
 
-Checks: the header must be the expected one; a read with no rows, or with fewer than MIN_SHARE of the rows the last
-  good read held, is refused (the export is cumulative, so it only grows); a refused or failed read keeps the previous
-  records (write_events ok false).
+Checks: the header must be the expected one. A row must be as wide as the header, with a numeric Identifier, a start
+  date, a type, a name and an end that is empty or a date; a malformed row is left out whole (meta.rows_rejected), and
+  a read with more than MAX_REJECTED of them (or 1%) is refused. A read with fewer than MIN_ROWS distinct advisories,
+  or fewer than MIN_SHARE of those the last good read held, is refused (the export is cumulative, so it only grows). A
+  beach list under MIN_SITES or MIN_SHARE of the saved one never replaces it. A refused or failed read keeps the
+  previous records (write_events ok false).
 State: data/build/mi-egle-beaches-state.json (first_seen per key, the last good row count) and
   data/build/mi-egle-beaches-sites.json (report 2081's kept fields).
 Run from pipeline/: python -m ingest.mi_egle_beaches [--advisories saved.csv --sites saved.csv --out events.json]
@@ -100,8 +104,11 @@ MI_CENTRAL_COUNTIES = frozenset({"GOGEBIC", "IRON", "DICKINSON", "MENOMINEE"})
 STATE_PATH = BUILD_DIR / "mi-egle-beaches-state.json"
 SITES_PATH = BUILD_DIR / "mi-egle-beaches-sites.json"
 SITES_MAX_AGE_H = 24
-MIN_ROWS = 1000          # the export held 3,655 on 2026-11-21 and only grows
-MIN_SHARE = 0.9          # a read with fewer rows than this share of the last good read is refused
+MIN_ROWS = 1000          # distinct advisories; the export held 3,650 on 2026-11-21 and only grows
+MIN_SHARE = 0.9          # a read with fewer advisories than this share of the last good read is refused
+MAX_REJECTED = 10        # malformed rows a read may carry (each left out and counted); more refuses the read
+MAX_REJECTED_SHARE = 0.01
+MIN_SITES = 2000         # report 2081 listed 2,914 sites on 2026-11-21
 CREDIT = "Michigan EGLE, MiEnviro beach monitoring"
 GENERIC_WATER = re.compile(r"^(lake|pond|beach|river|reservoir|quarry|creek)$", re.I)
 TYPES = {"closed": ("beach_closure", "closure"), "contamination advisory": ("beach_advisory", "advisory")}
@@ -138,17 +145,42 @@ def fetch_report(sess, report_id: int) -> str:
     return decode(r.content)
 
 
-def parse_advisories(text: str) -> list[dict]:
-    """The advisory rows with ADV_KEPT only (AdvisoryComments dropped here, before anything is saved)."""
-    rd = csv.DictReader(io.StringIO(text))
+def _valid(r: dict) -> bool:
+    """A row as wide as the header with an identifier, a start date, a type and a name, and an end that is empty or
+    a date (Astra review 2026-11-21 P1: a row shifted by an unquoted comma is never kept)."""
+    if "__extra__" in r or any(r.get(k) is None for k in ADV_COLUMNS):
+        return False
+    return bool(re.fullmatch(r"\d+", _clean(r["Identifier"])) and parse_date(r["StartDate"])
+                and (not _clean(r["EndDate"]) or parse_date(r["EndDate"]))
+                and _clean(r["AdvisoryType"]) and _clean(r["Name"]))
+
+
+def read_advisories(text: str) -> tuple[list[dict], int]:
+    """(the valid advisory rows with ADV_KEPT only, the number of malformed rows left out). AdvisoryComments is
+    dropped here, before anything is saved; a malformed row is dropped whole."""
+    rd = csv.DictReader(io.StringIO(text), restkey="__extra__", restval=None)
     if [c.strip() for c in (rd.fieldnames or [])] != ADV_COLUMNS:
         raise ReadError(f"report {REPORT_ADVISORIES}: header changed: {rd.fieldnames}")
-    rows = []
+    rows, rejected = [], 0
     for r in rd:
+        if not _valid(r):
+            rejected += 1
+            continue
         rows.append({k: _clean(r.get(k)) for k in ADV_KEPT})
+    return rows, rejected
+
+
+def accept(rows: list[dict], rejected: int) -> list[dict]:
+    """The rows of a read, or ReadError when it has none or too many malformed rows."""
     if not rows:
-        raise ReadError(f"report {REPORT_ADVISORIES}: no rows")
+        raise ReadError(f"report {REPORT_ADVISORIES}: no valid rows ({rejected} malformed)")
+    if rejected > MAX_REJECTED or rejected > MAX_REJECTED_SHARE * (len(rows) + rejected):
+        raise ReadError(f"report {REPORT_ADVISORIES}: {rejected} malformed rows of {len(rows) + rejected}")
     return rows
+
+
+def parse_advisories(text: str) -> list[dict]:
+    return accept(*read_advisories(text))
 
 
 def parse_sites(text: str) -> dict[str, dict]:
@@ -160,11 +192,10 @@ def parse_sites(text: str) -> dict[str, dict]:
     out = {}
     for r in rd:
         s = {v: _clean(r.get(k)) or None for k, v in SITE_FIELDS.items()}
-        for k in ("lat", "lon"):
-            try:
-                s[k] = round(float(s[k]), POINT_DECIMALS) if s[k] is not None else None
-            except ValueError:
-                s[k] = None
+        try:                                      # a point is both coordinates or none (Astra review P2-3)
+            s["lat"], s["lon"] = round(float(s["lat"]), POINT_DECIMALS), round(float(s["lon"]), POINT_DECIMALS)
+        except (TypeError, ValueError):
+            s["lat"] = s["lon"] = None
         if s["lat"] is not None and not (40 <= s["lat"] <= 49 and -91.5 <= s["lon"] <= -81):
             s["lat"] = s["lon"] = None            # a point outside Michigan's box is not used
         if s["beach_id"]:
@@ -189,11 +220,28 @@ def zone_of(site: dict | None) -> str:
     return zones.CENTRAL if county in MI_CENTRAL_COUNTIES else zones.EASTERN
 
 
-def keyed(rows: list[dict]) -> list[tuple[str, dict]]:
-    """(source_record_id, row) for each distinct advisory (module docstring: Key)."""
+def _sig(r: dict) -> list:
+    return [r.get(k) for k in ADV_KEPT]
+
+
+def _order(r: dict):
+    return ((parse_date(r["EndDate"]) or date.max).isoformat(), r["Reason"], r["PollutionSource"],
+            r["IssuingOrganization"])
+
+
+def _suffix(key: str, base: str) -> int:
+    return 1 if key == base else int(key[len(base) + 1:])
+
+
+def keyed(rows: list[dict], state: dict | None = None) -> list[tuple[str, dict]]:
+    """(source_record_id, row) for each distinct advisory (module docstring: Key). The ids of rows that share a key
+    are kept in state["collision_ids"] (key -> the row's kept fields), so a correction of one row never moves its id
+    to the other (Astra review 2026-11-21 P2-4): exact matches keep their ids, a changed row takes the id left free,
+    a new row the next suffix."""
+    assigned = state.setdefault("collision_ids", {}) if state is not None else {}
     seen, groups = set(), {}
     for r in rows:
-        sig = tuple(r.get(k) for k in ADV_KEPT)
+        sig = tuple(_sig(r))
         if sig in seen:
             continue
         seen.add(sig)
@@ -203,10 +251,25 @@ def keyed(rows: list[dict]) -> list[tuple[str, dict]]:
         groups.setdefault(base, []).append(r)
     out = []
     for base, rs in groups.items():
-        rs.sort(key=lambda r: ((parse_date(r["EndDate"]) or date.max).isoformat(), r["Reason"], r["PollutionSource"],
-                               r["IssuingOrganization"]))
-        for i, r in enumerate(rs):
-            out.append((base if i == 0 else f"{base}-{i + 1}", r))
+        prev = assigned.get(base) or {}
+        if len(rs) == 1 and not prev:
+            out.append((base, rs[0]))
+            continue
+        left, used = sorted(rs, key=_order), {}
+        for key in sorted(prev, key=lambda k: _suffix(k, base)):
+            hit = next((r for r in left if _sig(r) == prev[key]), None)
+            if hit is not None:
+                used[key] = hit
+                left.remove(hit)
+        for key in sorted((k for k in prev if k not in used), key=lambda k: _suffix(k, base)):
+            if left:
+                used[key] = left.pop(0)
+        n = max([_suffix(k, base) for k in list(prev) + list(used)], default=0)
+        for r in left:
+            n += 1
+            used[base if n == 1 else f"{base}-{n}"] = r
+        assigned[base] = {k: _sig(r) for k, r in used.items()}
+        out.extend(sorted(used.items(), key=lambda kv: _suffix(kv[0], base)))
     return out
 
 
@@ -254,7 +317,7 @@ def to_record(key: str, r: dict, site: dict | None, fetched_at: str, first_seen:
 def build(rows: list[dict], sites: dict[str, dict], state: dict, fetched_at: str) -> tuple[list[dict], dict]:
     first = state.setdefault("first_seen", {})
     recs, no_site = [], 0
-    for key, r in keyed(rows):
+    for key, r in keyed(rows, state):
         site = sites.get(r["Identifier"])
         if site is None:
             no_site += 1
@@ -292,12 +355,17 @@ def _count(vals) -> dict:
     return out
 
 
+def distinct(rows: list[dict]) -> int:
+    return len({tuple(_sig(r)) for r in rows})
+
+
 def check_rows(rows: list[dict], state: dict) -> None:
-    prev = int(state.get("last_rows") or 0)
-    if len(rows) < MIN_ROWS:
-        raise ReadError(f"report {REPORT_ADVISORIES}: {len(rows)} rows, under the floor of {MIN_ROWS}")
-    if prev and len(rows) < MIN_SHARE * prev:
-        raise ReadError(f"report {REPORT_ADVISORIES}: {len(rows)} rows against {prev} at the last good read")
+    """The floor and the drop check, on distinct advisories (Astra review P1: 3,655 copies of one row are one)."""
+    n, prev = distinct(rows), int(state.get("last_rows") or 0)
+    if n < MIN_ROWS:
+        raise ReadError(f"report {REPORT_ADVISORIES}: {n} distinct advisories, under the floor of {MIN_ROWS}")
+    if prev and n < MIN_SHARE * prev:
+        raise ReadError(f"report {REPORT_ADVISORIES}: {n} distinct advisories against {prev} at the last good read")
 
 
 def load_sites(sess, rows: list[dict], fetched_at: str) -> dict[str, dict]:
@@ -311,7 +379,10 @@ def load_sites(sess, rows: list[dict], fetched_at: str) -> dict[str, dict]:
         return sites
     try:
         fresh = parse_sites(fetch_report(sess, REPORT_SITES))
-    except (requests.RequestException, ReadError, ValueError, OSError) as e:
+        floor = max(MIN_SITES, int(MIN_SHARE * len(sites)))      # a cut answer never replaces the list (review P2-2)
+        if len(fresh) < floor:
+            raise ReadError(f"report {REPORT_SITES}: {len(fresh)} sites, under {floor}")
+    except (requests.RequestException, ReadError, ValueError, TypeError, OSError) as e:
         if sites:                       # the saved list still places what it knows
             print(f"{SOURCE_ID}: sites not refreshed ({type(e).__name__}); using the list of {at}", file=sys.stderr)
             return sites
@@ -344,16 +415,18 @@ def main(argv=None) -> int:
     sess.headers.update(HEADERS)
     state = read_json(STATE_PATH, {}) or {}
     try:
-        rows = parse_advisories(fetch_report(sess, REPORT_ADVISORIES))
+        rows, rejected = read_advisories(fetch_report(sess, REPORT_ADVISORIES))
+        accept(rows, rejected)
         check_rows(rows, state)
         sites = load_sites(sess, rows, now)
-    except (requests.RequestException, ReadError, ValueError, OSError) as e:
+    except (requests.RequestException, ReadError, ValueError, TypeError, OSError) as e:
         write_events(SOURCE_ID, [], ok=False, error=f"export: {type(e).__name__}: {str(e)[:300]}")
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
     save_raw(SOURCE_ID, json.dumps(rows), "json")        # the kept fields only: AdvisoryComments never reaches it
     recs, meta = build(rows, sites, state, now)
-    state["last_rows"] = len(rows)
+    meta["rows_rejected"] = rejected
+    state["last_rows"] = distinct(rows)
     state["last_ok_at"] = now
     write_json(STATE_PATH, state)
     path = write_events(SOURCE_ID, recs, meta=meta)
