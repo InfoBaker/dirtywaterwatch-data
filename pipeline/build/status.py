@@ -12,7 +12,8 @@ The rules are written out in docs/plan.md §2 (kept in step with this module and
 discharge windows (ongoing red 72 h, yellow to 7 days, then "end never reported"; ended: red to
 the authority window, yellow to 72 h; unknown-status no end: yellow 7 days); state default
 windows and caution windows from data/rules.json (red_rule / yellow_rule); month/year records never colour; beach/rain/HAB advisories colour only lakes,
-ponds and reservoirs under 50 km² and are otherwise advisory points; active advisories age out
+ponds and reservoirs under 50 km² and are otherwise advisory points; a beach closure or advisory whose source gives no
+water-quality reason is listed and colours nothing (rules.json beach_reason, build/beach_reason.py, decision 40); active advisories age out
 14 days after the last confirmation; a discharge's end before its start or more than
 unresolved.implausible_end.days_after_fetch days after the report was read is not used (end_not_credible: the record
 has no confirmed end, the published value stays, intervals carry end_not_used); revisions (resolve_revisions); ECHO
