@@ -1163,5 +1163,42 @@
   "verified": "search_only",
   "checked": "2026-11-03",
   "notes": ""
+ },
+ {
+  "id": "oh-echo-dmr-cso",
+  "name": "EPA ECHO monthly DMR CSO figures for Ohio CSO permits (EPA's state DMR file)",
+  "jurisdiction": "OH",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "EPA ECHO's per-state DMR and limit ZIP per fiscal year (NPDES_by_state_year/OH_FY<yyyy>_NPDES_DMRS_LIMITS.zip), no key.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "the day or hour of a discharge",
+   "an end"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "Weekly file; monthly figures, weeks' lag",
+  "history": "FY2009 on (read from FY2025)",
+  "license": "EPA public data (US government work)",
+  "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+  "status": "used",
+  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 4,514 outfall-months with a discharge from 53 of 66 permits, 2025-01 to 2026-09, received by EPA a median 15 days after the month. Month precision: the monthly mark only.",
+  "verified": "verified",
+  "checked": "2026-11-21",
+  "notes": ""
  }
 ]

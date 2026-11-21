@@ -14166,6 +14166,44 @@
   "area": "ma"
  },
  {
+  "id": "ma-echo-dmr-cso-files",
+  "name": "EPA ECHO monthly DMR CSO figures for Massachusetts CSO permits (EPA's state DMR file)",
+  "jurisdiction": "MA",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "EPA ECHO's per-state DMR and limit ZIP per fiscal year (NPDES_by_state_year/MA_FY<yyyy>_NPDES_DMRS_LIMITS.zip), no key.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "the day or hour of a discharge",
+   "an end"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "Weekly file; monthly figures, weeks' lag",
+  "history": "FY2009 on (read from FY2025)",
+  "license": "EPA public data (US government work)",
+  "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+  "status": "used",
+  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 74 outfall-months with a discharge from 4 of 16 permits, 2025-01 to 2026-09, received by EPA a median 14 days after the month. Month precision: the monthly mark only.",
+  "verified": "verified",
+  "checked": "2026-11-21",
+  "notes": "",
+  "area": "ma"
+ },
+ {
   "id": "ct-deep-performance-dashboard-zoho",
   "name": "CT DEEP Performance Dashboard - CSO and SSO/bypass reports (QScend QAlert data in Zoho Analytics open views)",
   "jurisdiction": "CT",
@@ -49351,6 +49389,44 @@
   "area": "ga"
  },
  {
+  "id": "ga-echo-dmr-cso",
+  "name": "EPA ECHO monthly DMR CSO figures for Georgia CSO permits (EPA's state DMR file)",
+  "jurisdiction": "GA",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "EPA ECHO's per-state DMR and limit ZIP per fiscal year (NPDES_by_state_year/GA_FY<yyyy>_NPDES_DMRS_LIMITS.zip), no key.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "the day or hour of a discharge",
+   "an end"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "Weekly file; monthly figures, weeks' lag",
+  "history": "FY2009 on (read from FY2025)",
+  "license": "EPA public data (US government work)",
+  "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+  "status": "used",
+  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 20 outfall-months with a discharge from 1 of 4 permits, 2025-01 to 2026-09, received by EPA a median 12 days after the month. Month precision: the monthly mark only.",
+  "verified": "verified",
+  "checked": "2026-11-21",
+  "notes": "",
+  "area": "ga"
+ },
+ {
   "id": "fl-dep-pnp-arcgis",
   "name": "Florida DEP Public Notice of Pollution (PNP) ArcGIS feature service",
   "jurisdiction": "FL",
@@ -53071,7 +53147,7 @@
  },
  {
   "id": "il-echo-dmr-cso",
-  "name": "ECHO DMR CSO monitoring parameters for Illinois CSO permits",
+  "name": "EPA ECHO monthly DMR CSO figures for Illinois CSO permits (EPA's state DMR file)",
   "jurisdiction": "IL",
   "operator": "U.S. EPA",
   "operator_type": "federal",
@@ -53081,26 +53157,29 @@
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://echo.epa.gov/",
+  "url": "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set",
   "access": [
-   "api"
+   "csv"
   ],
-  "access_detail": "Not queried for Illinois in this round.",
-  "machine_readable": false,
+  "access_detail": "EPA ECHO's per-state DMR and limit ZIP per fiscal year (NPDES_by_state_year/IL_FY<yyyy>_NPDES_DMRS_LIMITS.zip), no key.",
+  "machine_readable": true,
   "sample_record": null,
   "fields": [],
   "fills_event_fields": [],
-  "cannot_fill": [],
+  "cannot_fill": [
+   "the day or hour of a discharge",
+   "an end"
+  ],
   "has_coordinates": false,
-  "has_outfall_ids": false,
-  "cadence": null,
-  "history": null,
-  "license": null,
-  "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Monthly fallback for downstate CSO permits that do not file SOBE CSO rows; unknown whether their permits carry CSO count parameters.",
-  "verified": "inferred",
-  "checked": "2026-11-03",
+  "has_outfall_ids": true,
+  "cadence": "Weekly file; monthly figures, weeks' lag",
+  "history": "FY2009 on (read from FY2025)",
+  "license": "EPA public data (US government work)",
+  "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+  "status": "used",
+  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 1,472 outfall-months with a discharge from 63 of 119 permits, 2025-01 to 2026-09, received by EPA a median 22 days after the month. Month precision: the monthly mark only.",
+  "verified": "verified",
+  "checked": "2026-11-21",
   "notes": "",
   "area": "il"
  },
@@ -58790,6 +58869,44 @@
   "area": "ky"
  },
  {
+  "id": "ky-echo-dmr-cso",
+  "name": "EPA ECHO monthly DMR CSO figures for Kentucky CSO permits (EPA's state DMR file)",
+  "jurisdiction": "KY",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "EPA ECHO's per-state DMR and limit ZIP per fiscal year (NPDES_by_state_year/KY_FY<yyyy>_NPDES_DMRS_LIMITS.zip), no key.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "the day or hour of a discharge",
+   "an end"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "Weekly file; monthly figures, weeks' lag",
+  "history": "FY2009 on (read from FY2025)",
+  "license": "EPA public data (US government work)",
+  "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+  "status": "used",
+  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 1,908 outfall-months with a discharge from 8 of 13 permits, 2025-01 to 2026-09, received by EPA a median 27 days after the month. Month precision: the monthly mark only.",
+  "verified": "verified",
+  "checked": "2026-11-21",
+  "notes": "",
+  "area": "ky"
+ },
+ {
   "id": "tn-tdec-events-report",
   "name": "TDEC Division of Water Resources Events Report (sewer overflows, releases, bypasses, upsets, washouts)",
   "jurisdiction": "TN",
@@ -59278,6 +59395,44 @@
   "status_reason": "Read hourly by pipeline/ingest/tn_memphis_cd_quarterly.py from 2026-11-17 (the index and the newest two reports; --backfill from 2023 Q1): one record per row with its date and time, street, gallons and estimated duration; placed only on the stream the row names, otherwise on no water, with the City's footnote on whether a water was reached. 652 rows from 14 reports on 2026-11-17; 31 rows in layouts not read are named in meta.",
   "verified": "fetched",
   "checked": "2026-11-17",
+  "notes": "",
+  "area": "tn"
+ },
+ {
+  "id": "tn-echo-dmr-cso",
+  "name": "EPA ECHO monthly DMR CSO figures for Tennessee CSO permits (EPA's state DMR file)",
+  "jurisdiction": "TN",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "EPA ECHO's per-state DMR and limit ZIP per fiscal year (NPDES_by_state_year/TN_FY<yyyy>_NPDES_DMRS_LIMITS.zip), no key.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "the day or hour of a discharge",
+   "an end"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "Weekly file; monthly figures, weeks' lag",
+  "history": "FY2009 on (read from FY2025)",
+  "license": "EPA public data (US government work)",
+  "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+  "status": "used",
+  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 151 outfall-months with a discharge from 2 of 3 permits, 2025-01 to 2026-08, received by EPA a median 14 days after the month. Month precision: the monthly mark only.",
+  "verified": "verified",
+  "checked": "2026-11-21",
   "notes": "",
   "area": "tn"
  },
@@ -60470,6 +60625,44 @@
   "status_reason": "No sewage-overflow notification bill found by search; HB 92 surfaced but its subject was not confirmed.",
   "verified": "search_only",
   "checked": "2026-11-03",
+  "notes": "",
+  "area": "oh"
+ },
+ {
+  "id": "oh-echo-dmr-cso",
+  "name": "EPA ECHO monthly DMR CSO figures for Ohio CSO permits (EPA's state DMR file)",
+  "jurisdiction": "OH",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "EPA ECHO's per-state DMR and limit ZIP per fiscal year (NPDES_by_state_year/OH_FY<yyyy>_NPDES_DMRS_LIMITS.zip), no key.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "the day or hour of a discharge",
+   "an end"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "Weekly file; monthly figures, weeks' lag",
+  "history": "FY2009 on (read from FY2025)",
+  "license": "EPA public data (US government work)",
+  "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+  "status": "used",
+  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 4,514 outfall-months with a discharge from 53 of 66 permits, 2025-01 to 2026-09, received by EPA a median 15 days after the month. Month precision: the monthly mark only.",
+  "verified": "verified",
+  "checked": "2026-11-21",
   "notes": "",
   "area": "oh"
  },
@@ -62602,6 +62795,44 @@
   "verified": "fetched",
   "checked": "2026-11-14",
   "notes": null,
+  "area": "ks"
+ },
+ {
+  "id": "ks-echo-dmr-cso",
+  "name": "EPA ECHO monthly DMR CSO figures for Kansas CSO permits (EPA's state DMR file)",
+  "jurisdiction": "KS",
+  "operator": "U.S. EPA",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": null,
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "EPA ECHO's per-state DMR and limit ZIP per fiscal year (NPDES_by_state_year/KS_FY<yyyy>_NPDES_DMRS_LIMITS.zip), no key.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [],
+  "fills_event_fields": [],
+  "cannot_fill": [
+   "the day or hour of a discharge",
+   "an end"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "Weekly file; monthly figures, weeks' lag",
+  "history": "FY2009 on (read from FY2025)",
+  "license": "EPA public data (US government work)",
+  "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+  "status": "used",
+  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 84 outfall-months with a discharge from 1 of 3 permits, 2025-01 to 2026-09, received by EPA a median 18 days after the month. Month precision: the monthly mark only.",
+  "verified": "verified",
+  "checked": "2026-11-21",
+  "notes": "",
   "area": "ks"
  },
  {

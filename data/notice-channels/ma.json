@@ -1167,6 +1167,32 @@
    "barrier": null
   },
   {
+   "state": "MA",
+   "operator_id": null,
+   "agency": "U.S. Environmental Protection Agency (ECHO)",
+   "permit": null,
+   "checked": "2026-11-21",
+   "id": "ma-epa-echo-cso-dmr-file",
+   "name": "U.S. Environmental Protection Agency (discharge monitoring reports)",
+   "channel_kind": "feed",
+   "urls": [
+    "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set"
+   ],
+   "method": "html",
+   "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
+   "basis_kind": "permit",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "ma-echo-dmr-cso-files",
+   "publishes": "results",
+   "noun": "Data feed",
+   "note": "Each combined sewer outfall's monthly overflow figures from the operators' discharge monitoring reports, read from EPA's Massachusetts DMR file per fiscal year: 74 outfall-months with a discharge from 4 of 16 permits with an open combined sewer outfall, 2025-01 to 2026-09 (2026-11-21). Month precision, a median 14 days after the month.",
+   "sources": [
+    "ma-echo-dmr-cso-files"
+   ],
+   "barrier": null
+  },
+  {
    "id": "ma-epa-echo-overflow-events",
    "state": "MA",
    "operator_id": null,

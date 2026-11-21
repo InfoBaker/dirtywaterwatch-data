@@ -1,0 +1,32 @@
+id: "ga-echo-dmr-cso"
+name: "EPA ECHO discharge monitoring reports: Georgia combined sewer outfalls' monthly figures (EPA's state DMR file)"
+url: "https://echo.epa.gov/files/echodownloads/NPDES_by_state_year/GA_FY2026_NPDES_DMRS_LIMITS.zip"
+homepage: "https://echo.epa.gov/tools/data-downloads/icis-npdes-dmr-and-limit-data-set"
+kind: "csv"
+level: "federal"
+# Feed row: written by pipeline/ingest/echo_dmr_cso_states.py (data/build/events/ga-echo-dmr-cso.json), the state-file route of
+#   in_echo_cso_monthly (decision 45; docs/analysis/2026-11-17-echo-downloads.md, C1).
+# Built 2026-11-21: EPA's Georgia DMR file per fiscal year (FY2025 and FY2026; FY2027 not yet published), the
+#   4 permits with an open combined sewer outfall in the registry; lines at their registry CSO outfalls,
+#   'Effluent Gross' monitoring, one-month periods, parameters that count or measure an overflow.
+#   Albany files 74063 (TOTAL) and 81381; Atlanta and Columbus file zeros or no discharge.
+# Real read (2026-11-21): 15 outfalls of 3 permits file such lines; 20 outfall-months with a
+#   discharge from 1 permits (2025-01 to 2026-09), 169 filed no discharge. A median 12.0 days
+#   from the month's end to EPA's receipt.
+# Records: month precision (the monthly mark, never red or yellow; build/status.py EPA_MONTHLY_SOURCES); placed at the
+#   registry outfall (point rounded to three decimals, and water; never a plant's point). Revisions and reconciliation
+#   as Indiana's (in_echo_cso_monthly). Cited per figure: permit, outfall, month, parameter, value, DMR value id.
+# Cannot fill: the day or hour of any discharge; an end; whether a figure is measured or modelled.
+cadence: "weekly (EPA's file for the current and previous year; read when its Last-Modified changes); DMRs reach EPA weeks after the month"
+license: "EPA public data (US government work)"
+attribution: "U.S. EPA ECHO (data reported by permittees to Georgia EPD)"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["GA"]
+registry_ids: ["ga-echo-dmr-cso"]
+access: ["csv"]
+access_detail: "EPA ECHO's per-state DMR and limit ZIP per fiscal year (NPDES_by_state_year/GA_FY<yyyy>_NPDES_DMRS_LIMITS.zip), no key; HEAD each hour, downloaded when changed. The file names permits and plants, no person."
+machine_readable: true
+legal_basis: "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)"
+checked: "2026-11-21"

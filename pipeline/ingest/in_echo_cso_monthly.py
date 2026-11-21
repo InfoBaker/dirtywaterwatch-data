@@ -420,7 +420,7 @@ def figures(cell: dict) -> dict:
     unit = (cell.get("volume") or {}).get("DMRUnitDesc") or "Mgal"
     out["volume_gal"] = round(vol * MGAL[unit]) if vol is not None and unit in MGAL else None
     out["volume_mgal"] = vol if unit in ("Mgal", "MG", "MG/mo", "Mgal/mo") else None
-    out["volume_raw"] = None if vol is None else f"{vol:g} {unit}"
+    out["volume_raw"] = None if vol is None else f"{_g(vol)} {unit}"
     out["any"] = any((x or 0) > 0 for x in (out["events"], out["hours"], vol)) or any(v > 0 for v in marked.values())
     out["said"] = bool(vals) or bool(marked)
     out["filed"] = filed
@@ -432,6 +432,12 @@ def figures(cell: dict) -> dict:
     out["disputed"] = any((num(x.get("DMRValueNmbr")) or 0) > 0
                           for row in cell.values() if "_conflict" in row for x in row["_conflict"])
     return out
+
+
+def _g(v: float) -> str:
+    """A filed figure as written: 28482, 1.1, 0.0018; never in exponent form (7841548, not 7.84155e+06)."""
+    t = f"{v:g}"
+    return f"{v:.6f}".rstrip("0").rstrip(".") if "e" in t else t
 
 
 def _filed(row: dict) -> str:
@@ -477,7 +483,7 @@ def volume_text(fg: dict, ym: str) -> str:
         # a zero from it (build/status.py monthly_mark: a month it cannot read counts as a discharge)
         label = {"events": "discharge event count", "hours": "hours", "volume": "volume"}
         parts = [f"{label[n]} filed as " + " and ".join(fg["conflicts"][n]) + " in equally ranked reports"
-                 if n in fg["conflicts"] else f"{label[n]} {fg[k]:g}" + (" million gallons" if n == "volume" else "")
+                 if n in fg["conflicts"] else f"{label[n]} {_g(fg[k])}" + (" million gallons" if n == "volume" else "")
                  for n, k in (("events", "events"), ("hours", "hours"), ("volume", "volume_mgal"))
                  if n in fg["conflicts"] or fg[k] is not None]
         parts += [t for n, t in sorted((fg.get("filed") or {}).items()) if n not in fg["conflicts"]]
@@ -486,11 +492,11 @@ def volume_text(fg: dict, ym: str) -> str:
     parts = []
     if fg["events"] is not None:
         n = fg["events"]
-        parts.append(f"{n:g} discharge event{'s' if n != 1 else ''}")
+        parts.append(f"{_g(n)} discharge event{'s' if n != 1 else ''}")
     if fg["hours"] is not None:
-        parts.append(f"{fg['hours']:g} hours")
+        parts.append(f"{_g(fg['hours'])} hours")
     if fg["volume_mgal"] is not None:
-        parts.append(f"{fg['volume_mgal']:g} million gallons")
+        parts.append(f"{_g(fg['volume_mgal'])} million gallons")
     elif fg["volume_raw"]:
         parts.append(fg["volume_raw"])
     filed = [t for _, t in sorted((fg.get("filed") or {}).items())]
@@ -604,10 +610,16 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict, 
         slug = o.get("water_slug")
         tz = zone_of(o, lat, lon)
         vol_note = None
+        cap = feed.get("max_mgal_per_month")       # the state files: a ceiling where no hours are filed
         if fg["volume_gal"] and fg["hours"] and fg["volume_gal"] / 1e6 / fg["hours"] > MAX_MGAL_PER_HOUR:
             vol_note = (f"the filed volume ({fg['volume_raw']} in {fg['hours']:g} hours) implies more than "
                         f"{MAX_MGAL_PER_HOUR:g} million gallons an hour, likely gallons filed as million gallons: "
                         "kept as filed in the text, not counted as a volume")
+            fg = dict(fg, volume_gal=None)
+        elif cap and fg["volume_gal"] and fg["volume_gal"] / 1e6 > cap:
+            vol_note = (f"the filed volume ({fg['volume_raw']}) is more than {cap:,g} million gallons in a month at "
+                        "one outfall, likely gallons filed as million gallons: kept as filed in the text, not counted "
+                        "as a volume")
             fg = dict(fg, volume_gal=None)
         raw = {"month": ym, "permit_feature": feat,
                "events": fg["events"], "hours": fg["hours"], "volume": fg["volume_raw"],

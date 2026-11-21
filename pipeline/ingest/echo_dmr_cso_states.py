@@ -43,7 +43,8 @@ Statistical bases (fold_rows)
 Records (in_echo_cso_monthly.finish, the same as Indiana's)
   One per permit + outfall + month in which any figure is above zero: event_type cso, status ended, started_at the first
   and ended_at the last day of the month, time_precision month, reported_at the DMR's VALUE_RECEIVED_DATE (the day EPA
-  received it), volume_gal from million gallons (a month's total only), the figures in volume_text, raw.dmr per figure
+  received it), volume_gal from million gallons (a month's total only; above MAX_MGAL_PER_MONTH, or Indiana's
+  MAX_MGAL_PER_HOUR where hours are filed, kept in the text only), the figures in volume_text, raw.dmr per figure
   (DMR value id, value, unit, statistical bases, NODI code, receipt date, version, parameter): permit, outfall, month,
   parameter and value cite EPA's DMR record. These are monthly figures, not events: the status build gives them the
   monthly mark and never red or yellow (build/status.py EPA_MONTHLY_SOURCES), and the charts never add them to the
@@ -97,6 +98,11 @@ MAX_DOWNLOAD_BYTES = 300_000_000       # a run downloads at most this much; the 
 WALL_S = 360                           # no download starts after this many seconds (the refresh caps a feed at 600 s)
 CURRENT_FY_GRACE_DAYS = 120            # the current year's file answering 404 this soon after October 1 is not yet out
 MAX_EVENTS_PER_MONTH = 744             # a count above one an hour of a 31-day month is kept as filed, not counted
+# a month's volume at one outfall above this (about 130 million gallons a day, day and night for 31 days) is kept as
+# filed in the text and not counted (2026-11-21: 7,841,548 'Mgal/mo' at IL0021113 002 and 17,412 'Mgal' at KY0035467
+# 008, gallons filed as million gallons; MWRD's largest monthly figures run to 3,372); with hours filed, Indiana's
+# MAX_MGAL_PER_HOUR applies first
+MAX_MGAL_PER_MONTH = 4000
 FIGURES = {"events": ("74062", "84165", "51484"), "hours": ("50037", "81381", "82517"), "volume": ("74063", "82220")}
 CODES = {c: name for name, cs in FIGURES.items() for c in cs}
 LOCATIONS = {"1": "Effluent Gross", "Y": "Effluent Gross (Supplementary)"}
@@ -164,7 +170,7 @@ def _unit_words(unit: str) -> str:
 
 
 def _fmt(v: float) -> str:
-    return f"{v:g}"
+    return M._g(v)
 
 
 def _unit_txt(name: str, unit: str) -> str:
@@ -330,6 +336,23 @@ def parse_zip(path: Path, keys: set[tuple[str, str]], permits: set[str], stats: 
     return out
 
 
+def in_window(rows: list[dict], since: date, stats: Counter) -> list[dict]:
+    """The rows of months from --since's month on (a fiscal year's file starts in the October before)."""
+    first = since.replace(day=1)
+    out = []
+    for r in rows:
+        try:
+            end = datetime.strptime(r["MonitoringPeriodEndDate"], "%d-%b-%y").date()
+        except (TypeError, ValueError):
+            stats["rows_with_no_monitoring_period"] += 1
+            continue
+        if end >= first:
+            out.append(r)
+        else:
+            stats["rows_before_since"] += 1
+    return out
+
+
 def preferred(rows: list[dict], stats: Counter) -> list[dict]:
     """An outfall that files two codes for one figure keeps the first code of FIGURES in any month read."""
     have: dict[tuple, set] = defaultdict(set)
@@ -466,6 +489,7 @@ def read_state_files(state: str, keys: set, permits: set, since: date, today: da
             if old.get("rows"):
                 rows += unpack(old["rows"])
                 stats.update(old.get("stats") or {})
+                log[k] += f"; cached rows of the file of {old.get('last_modified')} used"
             continue
         if st is None:
             log[k] = f"failed ({how})"
@@ -498,6 +522,7 @@ def read_state_files(state: str, keys: set, permits: set, since: date, today: da
                 if old.get("rows"):
                     rows += unpack(old["rows"])
                     stats.update(old.get("stats") or {})
+                    log[k] += f"; cached rows of the file of {old.get('last_modified')} used"
                 continue
         file_stats: Counter = Counter()
         try:
@@ -507,6 +532,7 @@ def read_state_files(state: str, keys: set, permits: set, since: date, today: da
             if old.get("rows"):
                 rows += unpack(old["rows"])
                 stats.update(old.get("stats") or {})
+                log[k] += f"; cached rows of the file of {old.get('last_modified')} used"
             continue
         finally:
             if not (local and fy in local):
@@ -538,7 +564,7 @@ def run_state(state: str, since: date, today: date, budget: Budget, registry_row
     cache = {"files": doc.get("files") or {}}
     stats: Counter = Counter()
     rows, log, facts = read_state_files(state, keys, set(permits), since, today, cache, budget, stats, local)
-    rows = preferred(rows, stats)
+    rows = preferred(in_window(rows, since, stats), stats)
     evidence_store = doc.get("evidence") or {}
 
     def save_store(store: dict) -> None:
@@ -547,7 +573,7 @@ def run_state(state: str, since: date, today: date, budget: Budget, registry_row
                           "winning DMR row of every outfall, month and parameter ever read (in_echo_cso_monthly."
                           "merge_previous)", "files": cache["files"], "evidence": dict(sorted(store.items()))})
     save_store(evidence_store)
-    if not any(v.startswith(("live", "cache", "stale")) for v in log.values()):
+    if not any(v.startswith(("live", "cache", "stale")) or "cached rows" in v for v in log.values()):
         # nothing read this run and nothing cached: never written as a healthy feed with no records
         err = "no file read: " + "; ".join(f"{k} {v}" for k, v in log.items())
         write_events(sid, [], ok=False, error=err)
@@ -557,6 +583,7 @@ def run_state(state: str, since: date, today: date, budget: Budget, registry_row
             "authority": AUTHORITY.format(agency=cfg["agency"]), "zone": zone_for(state),
             "source_url": lambda permit: f"https://echo.epa.gov/effluent-charts#{permit}",
             "location_ok": lambda desc, ok=frozenset(locations_of(state).values()): desc in ok,
+            "max_mgal_per_month": MAX_MGAL_PER_MONTH,
             "cadence": ("EPA's state file per fiscal year, read when its Last-Modified changes (weekly for the current "
                         "and previous year); DMRs reach EPA weeks after the month"),
             "note": ("the operator's monthly DMR figures for this outfall, not an individual discharge: no day is "
