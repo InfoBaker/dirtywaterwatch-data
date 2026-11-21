@@ -68,8 +68,10 @@ Record rules
     which). published_at is null (the file gives no posting time). source_updated_at is the latest of the draft,
     first certification and certification dates.
   - Water: the file names no receiving water (the only water texts are narratives, which are not read):
-    waterbody_text is null and the record carries its point; the status build places it by the point when that lies
-    on a mapped water.
+    waterbody_text is null and the record carries its point. The status build places such a record by the point when
+    it lies within 400 m of a mapped water (GEOMETRY_MATCH_M), else on the operator's one listed receiving water; on
+    2026-11-21 that placed 2,141 of the 10,536 records by point and 1,313 on the operator's water, and left 7,082
+    unplaced (listed, colouring nothing).
   - Operator: npdes_permit is the enrollee's WDID (the General Order is not an NPDES permit); discharger_id is the
     data/dischargers.json California row that holds the WDID; discharger_name is that row's name, else the agency the
     2022 order's file names for the WDID (the 2006 file gives no agency name).
@@ -81,10 +83,13 @@ Record rules
 Reading (what each run costs)
   The file is history. A run asks for it at most once every REREAD_DAYS (7) days, with If-Modified-Since; between
   those reads, and on a 304, the records are kept as they are (no request, nothing rebuilt). A read downloads the
-  whole file (about 52 MB, less when the server compresses it) and parses it in seconds; every spill is read (no
-  window), so `--backfill` reads the whole file at once, without If-Modified-Since or the seven-day wait. A spill on
-  record that leaves the file keeps its record with raw._missing_from_file_since. The overlap with the 2022 order's
-  events file is checked again on every run, so a spill it gains later is dropped here without a new read.
+  whole file (about 52 MB, less when the server compresses it) and builds the records in about 20 seconds, most of
+  it the shared scrub and redaction; every spill is read (no window), so `--backfill` reads the whole file at once,
+  without If-Modified-Since or the seven-day wait. A spill on record that leaves the file keeps its record with
+  raw._missing_from_file_since. The overlap with the 2022 order's events file is checked again on every run, so a
+  spill it gains later is dropped here without a new read. meta.frozen is true (the status build never calls the
+  feed stale for its age, only for a failed read) and meta.statewide false (history watches no water now, so the
+  feed is not counted as covering every California outfall).
 
 Run from pipeline/:  python -m ingest.ca_swrcb_ciwqs_sso_2006 [--file SSO.txt] [--backfill]
 """
