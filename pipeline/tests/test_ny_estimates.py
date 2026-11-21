@@ -39,8 +39,6 @@ def wb(recs, rid):
 @pytest.mark.parametrize("text, want", [
     ("75 Gallons per Minute Estimated", {"unit": "gallons per minute", "low": 75, "high": 75, "qualifier": "estimated"}),
     ("Estimated at 75gpm Gallons per Minute Estimated", {"unit": "gallons per minute", "low": 75, "high": 75, "qualifier": "estimated"}),
-    # Kenmore files "5 gallons" under the form's "Gallons per Minute" on every notice, whatever the duration: a rate
-    ("5 gallons Gallons per Minute Estimated", {"unit": "gallons per minute", "low": 5, "high": 5, "qualifier": "estimated"}),
     ("16 Gallons per Minute Actual", {"unit": "gallons per minute", "low": 16, "high": 16, "qualifier": "actual"}),
     ("10,277 Gallons per Minute Estimated", {"unit": "gallons per minute", "low": 10277, "high": 10277, "qualifier": "estimated"}),
     ("100-150gpm Gallons per Minute Estimated", {"unit": "gallons per minute", "low": 100, "high": 150, "qualifier": "estimated"}),
@@ -139,7 +137,7 @@ def test_a_range_of_rates_gives_a_range_and_a_bound_gives_a_bound(recs):
     assert (v["low"], v["high"]) == (10 * 2880, 15 * 2880) and "bound" not in v
     assert v["basis"].startswith("We multiplied the rate range the notice gives, 10 to 15 gallons per minute, by")
     v = E.volume_estimate_of(wb(recs, "2709404419944422"))           # less than 0.1 mgd for 3 minutes
-    assert v == {**v, "high": round(100000 / 1440 * 3), "bound": "less_than"} and "low" not in v and "gallons" not in v
+    assert v == {**v, "high": 209, "bound": "less_than"} and "low" not in v and "gallons" not in v   # 208 1/3, rounded up
     assert "less than 0.1 million gallons per day" in v["basis"]
     e = wb(recs, "2428857156430377")                                 # 100+ gpm, "Ongoing Hours - Ongoing"
     assert E.rate_of(e)["bound"] == "at_least" and E.volume_estimate_of(e) is None   # no duration: no volume
@@ -311,3 +309,124 @@ def test_an_existing_export_gets_our_figures(tmp_path, recs):
     assert rows[chosen[0]["event_id"]]["volume_estimate"] == {"gallons": 324000, "basis": full["volume_estimate"]["basis"]}
     w = json.loads((out / "waters" / "onondaga-creek-ny.json").read_text())["events"][0]
     assert "volume_estimate" not in w and w["end_estimate"]["at"] == "2026-06-11T15:10:00-04:00"
+
+
+# ------------------------------------------------------------------------------------------------ review fixes
+# Astra's review of 2026-11-21 ($C/reviews/ny-fields-astra.md): each finding taken, with the input that showed it
+
+
+def test_review_1_a_hyphenated_house_number_leaves_a_description():
+    raw = {"row": {"addressDescription": "Manhole outside 123-45 Example Avenue",
+                   "dischargeDescription": "Overflow between 12-14 Sample Road and the creek",
+                   "streetNumber": "123-45", "streetName": "Example Avenue"}}
+    d = D.detail_of({"source_id": "ny-dec-sprtk", "raw": raw, "outfall_name": "Manhole"})
+    assert d["location_description"] == "Manhole outside [house number removed] Example Avenue"
+    assert d["description"] == "Overflow between [house number removed] Sample Road and the creek"
+    raw = {"row": {"addressDescription": "Manhole on the lawn of 123-45 Example", "streetNumber": "123-45", "streetName": "Example St"}}
+    assert "123" not in D.ny_place_text("row.addressDescription")(raw)          # the notice's own number, no street word
+
+
+def test_review_2_a_bound_or_a_small_figure_is_never_rounded_into_a_stronger_claim(recs):
+    v = E.volume_estimate_of(wb(recs, "2709404419944422"))           # less than 0.1 mgd for 3 minutes = 208 1/3 gallons
+    assert (v["high"], v["bound"]) == (209, "less_than")             # rounded outward
+    e = wb(recs, "2345603510134952")
+    more = {**e, "raw": {**e["raw"], "row": {**e["raw"]["row"], "quantity": "more than 1.6 Gallons per Minute Estimated",
+                                             "dischargeDuration": "1 Minutes - Ongoing"}}}
+    assert (E.volume_estimate_of(more)["low"], E.volume_estimate_of(more)["bound"]) == (1, "more_than")
+    tiny = {**e, "raw": {**e["raw"], "row": {**e["raw"]["row"], "quantity": "0.1 Gallons per Minute Estimated",
+                                             "dischargeDuration": "1 Minutes - Ongoing"}}}
+    t = E.volume_estimate_of(tiny)                                   # 0.1 gallon: never printed as zero gallons
+    assert t.get("gallons") is None and (t["high"], t["bound"]) == (1, "less_than")
+    rng = {**e, "raw": {**e["raw"], "row": {**e["raw"]["row"], "quantity": "1.5-2.5 Gallons per Minute Estimated",
+                                            "dischargeDuration": "1 Minutes - Ongoing"}}}
+    assert (E.volume_estimate_of(rng)["low"], E.volume_estimate_of(rng)["high"]) == (1, 3)
+
+
+def test_review_3_a_web_notices_computed_end_is_labelled_ours(recs):
+    web = copy.deepcopy(recs["ny-dec-sprtk-web:NYS900021-20261106T162658Z"])
+    ended = {**web, "status": "ended", "ended_at": "2026-11-06T11:00:00-05:00",
+             "raw": {**web["raw"], "_ended_at_basis": "computed: discharge start + reported duration (2 hours 30 minutes Hours)"}}
+    got = E.estimates_of(ended)
+    assert got["ended_at_ours"] == {"basis": "We added the duration the notice gives, 2 hours, 30 minutes, to its start time."}
+    assert "end_estimate" not in got and ended["ended_at"] == "2026-11-06T11:00:00-05:00"   # the record and status unchanged
+    assert "ended_at_ours" not in E.estimates_of(wb(recs, "2397177477336798"))               # a workbook end is the source's
+    D.enrich([ended])
+    assert X.slim_event({**ended, "file": "events/w.json", "fixture": False})["ended_at_ours"] == got["ended_at_ours"]
+
+
+def test_review_4_a_total_typed_under_the_rate_unit_is_not_multiplied(recs):
+    assert E.parse_ny_rate("60,000 gallons Gallons per Minute Estimated") is None
+    assert E.parse_ny_rate("5 gallons Gallons per Minute Estimated") is None     # the units disagree: no figure of ours
+    e = wb(recs, "2345603510134952")
+    e["raw"]["row"]["quantity"] = "60,000 gallons Gallons per Minute Estimated"
+    assert E.volume_estimate_of(e) is None and D.detail_of(e).get("rate") is None
+
+
+def test_review_5_a_fractional_duration_is_kept_in_the_arithmetic(recs):
+    e = wb(recs, "2345603510134952")
+    e["raw"]["row"].update(quantity="100 Gallons per Minute Estimated", dischargeDuration=".025 Hours - Ongoing")
+    v = E.volume_estimate_of(e)
+    assert v["gallons"] == 150 and v["inputs"]["duration_minutes"] == 1.5
+    assert v["basis"].endswith("by the expected duration it gives, 1.5 minutes.")
+    assert E.end_estimate_of(e)["at"] == "2026-02-18T08:51:30-05:00"
+    k = wb(recs, "2625738457226843")                                 # 17:45:00 to 19:45:52: 120.87 minutes
+    v = E.volume_estimate_of(k)
+    assert v["gallons"] == 1209 and "2 hours, 0.9 minutes" in v["basis"]
+
+
+def test_review_6_a_later_total_given_as_words_also_wins(recs):
+    new, close = wb(recs, "2560558033413876"), wb(recs, "2560558033432051")
+    close.update(volume_gal=None, volume_text="more than 830,010 Gallons Estimated")
+    D.enrich([new, close])
+    assert "later_volume" not in new and "volume_estimate" not in new
+    new2, close2 = wb(recs, "2560558033413876"), wb(recs, "2560558033432051")
+    close2.update(volume_gal=None, volume_text="unknown Gallons Estimated")      # no figure at all: ours stays
+    D.enrich([new2, close2])
+    assert "volume_estimate" in new2
+
+
+def test_review_7_the_fixture_keeps_no_address_in_any_field():
+    import re
+    text = FIXTURE.read_text()
+    doc = json.loads(text)
+    for r in doc["records"]:
+        assert "_chain" not in (r.get("raw") or {}), r["event_id"]
+    # the only numbered addresses are the two fictional ones the note names
+    assert not re.search(r"\b\d{2,6} (?!Sample|Example)[A-Z][a-z]+ (?:St|Ave|Rd|Blvd|Dr)\b", text)
+
+
+def test_review_13_the_applier_removes_a_stale_figure_from_an_event_file(tmp_path, recs):
+    out = tmp_path / "out"
+    (out / "events").mkdir(parents=True)
+    (out / "waters").mkdir()
+    e = wb(recs, "2713046552293488")                                 # "NA Hours - Ongoing": no figure of ours now
+    e["file"] = f"events/{X.event_file_name(e['event_id'])}"
+    e["raw"]["row"].pop("dischargeReason", None)
+    for k in ("receivingWaterBody", "treatedState", "notificationStatus", "city", "dischargeDescription", "addressDescription",
+              "componentDescription", "systemComponent", "quantity", "dischargeDuration"):
+        e["raw"]["row"].pop(k, None)
+    stale = {**e, "volume_estimate": {"gallons": 600, "basis": "old"}, "detail": {"cause": "old"}}
+    (out / e["file"]).write_text(json.dumps(stale))
+    (out / "events.json").write_text(json.dumps({"events": [{"event_id": e["event_id"], "file": e["file"]}]}))
+    D._main(str(out))
+    after = json.loads((out / e["file"]).read_text())
+    assert "volume_estimate" not in after and "detail" not in after
+
+
+def test_review_3_the_csv_says_a_computed_end_was_not_reported(tmp_path, covered, recs):
+    web = copy.deepcopy(recs["ny-dec-sprtk-web:NYS900021-20261106T162658Z"])
+    web.update(status="ended", ended_at="2026-11-06T11:00:00-05:00")
+    web["raw"]["_ended_at_basis"] = "computed: discharge start + reported duration (2 hours 30 minutes Hours)"
+    D.enrich([web])
+    x = event(**{k: v for k, v in web.items() if k in {"event_id", "source_id", "source_record_id", "event_type", "status",
+                                                        "started_at", "ended_at", "discharger_name", "published_at",
+                                                        "volume_gal", "volume_text"}})
+    x.update(fixture=False, water_slugs=[], detail=web.get("detail"), volume_estimate=web.get("volume_estimate"),
+             ended_at_ours=web.get("ended_at_ours"), raw={}, state="NY")
+    out = tmp_path / "csv"
+    csv_export.write_csvs([x], [], [], out, page_ids=set())
+    import csv as _csv
+    with (out / "state" / "ny.csv").open(newline="", encoding="utf-8") as f:
+        row = next(_csv.DictReader(f))
+    assert row["ended_at"] == "2026-11-06T11:00:00-05:00" and row["end_reported"] == "false"
+    assert row["end_estimate_at"] == row["ended_at"] and row["end_estimate_basis"].startswith("We added the duration")

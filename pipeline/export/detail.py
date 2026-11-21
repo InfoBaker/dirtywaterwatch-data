@@ -58,8 +58,8 @@ from pathlib import Path
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from common import (HOUSE_NUMBER_REMOVED, NAME_KEYS, PERSONAL_KEYS, drop_house_numbers, scrub_names, scrub_residence_numbers,  # noqa: E402
-                    scrub_text, strip_house_numbers)
+from common import (HOUSE_NUMBER_REMOVED, NAME_KEYS, PERSONAL_KEYS, VOLUME_RATE, _BEFORE_STREET_WORD,  # noqa: E402
+                    drop_house_numbers, scrub_names, scrub_residence_numbers, scrub_text, strip_house_numbers)
 from export import estimates as estimates_mod  # noqa: E402
 
 FIELDS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
@@ -225,9 +225,9 @@ def _ny_own_number(raw: dict) -> list[tuple[str, str | None]]:
     num, street = str(row.get("streetNumber") or "").strip(), str(row.get("streetName") or row.get("sprtkStreetName") or "").strip()
     if not num:
         parsed = raw.get("parsed") if isinstance(raw.get("parsed"), dict) else {}
-        m = re.match(r"\s*(\d{1,6}[A-Za-z]?)\s+((?:[NSEW]\.?\s+)?[\w']+)", str(parsed.get("discharge_location") or ""))
+        m = re.match(r"\s*(\d{1,6}[A-Za-z]?(?:-\d{1,6}[A-Za-z]?)?)\s+((?:[NSEW]\.?\s+)?[\w']+)", str(parsed.get("discharge_location") or ""))
         num, street = (m.group(1), m.group(2)) if m else ("", "")
-    if not re.fullmatch(r"\d{1,6}[A-Za-z]?", num):
+    if not re.fullmatch(r"\d{1,6}[A-Za-z]?(?:-\d{1,6}[A-Za-z]?)?", num):
         return []
     word = street.split()[0] if street.split() else None
     return [(num, word)] if word else []
@@ -349,6 +349,11 @@ SOURCES: dict[str, dict] = {
 }
 
 
+# a hyphenated house number or a range of them before a street word ("123-45 Example Avenue", "12-14 Sample Road"),
+# which common.strip_house_numbers does not take (review 1)
+HYPHEN_NUMBER_RE = re.compile(rf"(?<![\w.,/:-])\d{{1,6}}[A-Za-z]?[ ]?-[ ]?\d{{1,6}}[A-Za-z]?(?={_BEFORE_STREET_WORD})")
+
+
 def _clean(v, address: bool = False):
     """A source string through the same scrub as raw (emails, phones, staff names, a residence's house number), and for
     a place description every street address's house number (common.strip_house_numbers), cut at MAX_TEXT."""
@@ -356,7 +361,7 @@ def _clean(v, address: bool = False):
         return v
     v = scrub_residence_numbers(scrub_names(scrub_text(v)))
     if address:
-        v = strip_house_numbers(v)
+        v = strip_house_numbers(HYPHEN_NUMBER_RE.sub(HOUSE_NUMBER_REMOVED, v))
     if len(v) > MAX_TEXT:
         cut = v[:MAX_TEXT].rsplit(" ", 1)[0].rstrip(",;:")
         v = f"{cut}…"
@@ -470,19 +475,14 @@ def _qualifier(e: dict) -> str | None:
     return {"estimated": "estimated", "measured": "measured"}.get(e.get("estimate_flag") or "")
 
 
-def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset()) -> dict[str, dict]:
-    """{event_id: {"later_volume": ..., "linked_records": [...]}} for every record with a link (see the docstring).
-    duplicates: records the status build marks duplicate_of (its placements), which neither give nor take a later
-    volume, besides the records' own duplicate_of."""
-    by_id = {e["event_id"]: e for e in events if e.get("event_id")}
-    dup = lambda x: bool(x.get("duplicate_of")) or x["event_id"] in duplicates   # noqa: E731
-    times = {eid: _t(e) for eid, e in by_id.items()}
+def _families(by_id: dict[str, dict]):
+    """(children, family_of): each record's direct children within one feed, and the records joined to it by parent
+    links within one feed (union-find), or None for a record in no family."""
     children = defaultdict(list)
     for e in by_id.values():
         p = e.get("parent_event_id")
         if p and p != e["event_id"] and p in by_id and same_feed(by_id[p], e):
             children[p].append(e)
-    # families: the records joined by parent links within one source (union-find)
     root = {}
 
     def find(x):
@@ -499,6 +499,52 @@ def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset())
     for eid in by_id:
         if eid in root or eid in children:
             family[find(eid)].append(by_id[eid])
+    return children, (lambda eid: family.get(find(eid)) if (eid in root or eid in children) else None)
+
+
+def states_total(e: dict) -> bool:
+    """Whether a record states a total volume: a figure (volume_gal), or words with a figure that are not a rate
+    ("more than 830,010 Gallons Estimated", "between 10,000 and 20,000 Gallons")."""
+    if isinstance(e.get("volume_gal"), (int, float)) and not isinstance(e.get("volume_gal"), bool):
+        return True
+    vt = e.get("volume_text")
+    return (isinstance(vt, str) and bool(re.search(r"\d", vt)) and not VOLUME_RATE.search(vt.lower())
+            and not (isinstance(e.get("raw"), dict) and estimates_mod.rate_of(e)))
+
+
+def later_totals(events: list[dict], duplicates: set[str] | frozenset = frozenset()) -> set[str]:
+    """event ids of the records a later record of the same event (linked as links_of links them) gives a total for, as
+    a figure or in words: our computed volume yields to it (a stated total wins; review 6). A record carrying
+    `_states_total` (the applier's light copies) is read from that flag."""
+    by_id = {e["event_id"]: e for e in events if e.get("event_id")}
+    dup = lambda x: bool(x.get("duplicate_of")) or x["event_id"] in duplicates   # noqa: E731
+    _children, family_of = _families(by_id)
+    out = set()
+    for eid, e in by_id.items():
+        fam = family_of(eid)
+        mine = _t(e) if fam else None
+        if not fam or mine is None:
+            continue
+        for x in fam:
+            if x is e or dup(x):
+                continue
+            tx = _t(x)
+            total = x["_states_total"] if "_states_total" in x else states_total(x)
+            if tx is not None and tx > mine and total:
+                out.add(eid)
+                break
+    return out
+
+
+def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset()) -> dict[str, dict]:
+    """{event_id: {"later_volume": ..., "linked_records": [...]}} for every record with a link (see the docstring).
+    duplicates: records the status build marks duplicate_of (its placements), which neither give nor take a later
+    volume, besides the records' own duplicate_of."""
+    by_id = {e["event_id"]: e for e in events if e.get("event_id")}
+    dup = lambda x: bool(x.get("duplicate_of")) or x["event_id"] in duplicates   # noqa: E731
+    times = {eid: _t(e) for eid, e in by_id.items()}
+    # families: the records joined by parent links within one source (union-find)
+    children, family_of = _families(by_id)
     # another source's record of the same event, as the pipeline paired them (Georgia EPD and EPA's eRule report)
     other = defaultdict(set)
     for e in by_id.values():
@@ -529,7 +575,7 @@ def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset())
         add = {}
         if linked:
             add["linked_records"] = linked[:MAX_LINKED]
-        fam = family.get(find(eid)) if (eid in root or eid in children) else None
+        fam = family_of(eid)
         if fam and e.get("event_type") in DISCHARGE_TYPES and not dup(e):
             mine = times[eid]
             later = [x for x in fam if x is not e and isinstance(x.get("volume_gal"), (int, float)) and not dup(x)
@@ -547,14 +593,14 @@ def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset())
     return out
 
 
-ESTIMATE_KEYS = ("volume_estimate", "end_estimate")
+ESTIMATE_KEYS = ("volume_estimate", "end_estimate", "ended_at_ours")
 
 
-def estimates(e: dict, later_volume: dict | None) -> dict:
+def estimates(e: dict, later_total: bool) -> dict:
     """Our figures for one record (export/estimates.py), without a computed volume where a later record of the same
-    event states one (a stated total wins)."""
+    event states a total (a stated total wins: later_totals)."""
     out = estimates_mod.estimates_of(e)
-    if later_volume and isinstance(later_volume.get("volume_gal"), (int, float)):
+    if later_total:
         out.pop("volume_estimate", None)
     return out
 
@@ -577,13 +623,14 @@ def enrich(events: list[dict], duplicates: set[str] | frozenset = frozenset()) -
         else:
             e.pop("detail", None)
     links = links_of(events, duplicates)
+    later = later_totals(events, duplicates)
     for e in events:
         e.pop("later_volume", None)
         e.pop("linked_records", None)
         e.update(links.get(e["event_id"], {}))
         for k in ESTIMATE_KEYS:
             e.pop(k, None)
-        e.update(estimates(e, e.get("later_volume")))
+        e.update(estimates(e, e["event_id"] in later or bool(e.get("later_volume"))))
 
 
 LIGHT = ("event_id", "source_id", "event_type", "parent_event_id", "volume_gal", "volume_text", "estimate_flag",
@@ -593,7 +640,8 @@ LIGHT = ("event_id", "source_id", "event_type", "parent_event_id", "volume_gal",
 def _main(out_dir: str) -> None:
     """Adds the fields to an existing export (out/events/*.json, events.json, waters/*.json), for a check of the
     site against a real export before the next refresh writes them itself. Reads each record twice rather than
-    holding the whole export in memory."""
+    holding the whole export in memory. The CSV downloads are not rewritten here: the full export (build.py) writes
+    them from the same records."""
     out = Path(out_dir)
     files = sorted((out / "events").glob("*.json"))
     light = []
@@ -610,21 +658,22 @@ def _main(out_dir: str) -> None:
         ours = estimates_mod.estimates_of(e)
         if ours:
             x["_ours"] = ours
+        x["_states_total"] = states_total(e)
         light.append(x)
     links = links_of(light)
+    later = later_totals(light)
     add = {}
     for x in light:
         lk = links.get(x["event_id"], {})
         ours = dict(x.get("_ours") or {})
-        if lk.get("later_volume"):
+        if lk.get("later_volume") or x["event_id"] in later:
             ours.pop("volume_estimate", None)          # a stated total wins
         add[x["event_id"]] = {**({"detail": x["detail"]} if x.get("detail") else {}), **lk, **ours}
     for p, x in zip(files, light):
         a = add[x["event_id"]]
         e = json.loads(p.read_text())
-        for k in ("detail", "later_volume", "linked_records", *ESTIMATE_KEYS):
-            e.pop(k, None)
-        if a:
+        removed = [k for k in ("detail", "later_volume", "linked_records", *ESTIMATE_KEYS) if e.pop(k, None) is not None]
+        if a or removed:                               # a field gone since the last run is removed from the file too
             e.update(a)
             p.write_text(json.dumps(e, separators=(",", ":"), ensure_ascii=False))
 

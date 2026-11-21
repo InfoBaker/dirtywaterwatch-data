@@ -415,7 +415,9 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     towns = _join_towns(_own_towns(e) or d.get("towns") or [])
     eid = e["event_id"]
     ended_precision = status_mod.end_precision(e) if e.get("ended_at") else None
-    end_reported = bool(e.get("ended_at")) and not (e.get("sampled_at") and ended_precision == "poll")
+    # an end the pipeline worked out (export/estimates.py ended_at_ours) is ours, not the source's report
+    end_reported = (bool(e.get("ended_at")) and not (e.get("sampled_at") and ended_precision == "poll")
+                    and not isinstance(e.get("ended_at_ours"), dict))
     notice = linked_notice(e)
     row = [
         _text(eid), _text(water), _text(LIST_SEP.join(slugs)), _text(state), _text(operator), _text(operator_id),
@@ -447,6 +449,8 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     row += [_text(d.get("description")), _text(d.get("location_description")), _text(rate.get("text"))]
     ve = e.get("volume_estimate") if isinstance(e.get("volume_estimate"), dict) else {}
     ee = e.get("end_estimate") if isinstance(e.get("end_estimate"), dict) else {}
+    if not ee and isinstance(e.get("ended_at_ours"), dict) and e.get("ended_at"):
+        ee = {"at": e["ended_at"], "basis": e["ended_at_ours"].get("basis")}      # the record's own end, worked out by us
     row += [_number(ve.get("gallons")), _number(ve.get("low")), _number(ve.get("high")), _text(ve.get("bound")),
             _text(ve.get("basis")), _text(ee.get("at")), _text(ee.get("basis"))]
     return row, ops

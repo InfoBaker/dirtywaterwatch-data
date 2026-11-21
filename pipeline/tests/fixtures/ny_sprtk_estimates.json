@@ -1,5 +1,5 @@
 {
- "note": "Real NY-Alert records (ny-dec-sprtk, ny-dec-sprtk-web) from the export of 2026-11-14, trimmed to the fields export/estimates.py and export/detail.py read; street numbers, geocodes and free-text contact fields removed. In two records the house number and street of a manhole on a residential lawn are replaced with fictional ones (\"100 Sample\", \"200 Example\") and a matching street number added, so the house-number scrub can be tested.",
+ "note": "Real NY-Alert records (ny-dec-sprtk, ny-dec-sprtk-web) from the export of 2026-11-14, trimmed to the fields export/estimates.py and export/detail.py read; street numbers, geocodes, chain keys (which hold the address) and free-text contact fields removed. In two records the house number and street of a manhole on a residential lawn are replaced with fictional ones (\"100 Sample\", \"200 Example\") and a matching street number added, so the house-number scrub can be tested.",
  "records": [
   {
    "event_id": "ny-dec-sprtk:2397177477336798",
@@ -40,11 +40,6 @@
      "dischargeReason": "System Capacity,Weather Conditions - collection system has reached capacity which in turn the pumps have reached capacity which activates the station overflow",
      "systemComponent": "-",
      "addressDescription": "Pump station is in the woods between ulster Ave and Tin Brook Creek"
-    },
-    "_chain": {
-     "id": "key:NY0030490|183 ulster ave walden|2026-03-06T00:25Z",
-     "position": 2,
-     "of": 2
     }
    },
    "_fixture_note": "Close; rate with words (\"Estimated at 75gpm\"); start and end; free-text duration"
@@ -89,11 +84,6 @@
      "systemComponent": "Pump Station - Storm bypass pump",
      "componentDescription": "Storm bypass pump",
      "addressDescription": "Pump station"
-    },
-    "_chain": {
-     "id": "key:NYS900020|489 roycroft blvd cheektowaga|2026-02-18T13:50Z",
-     "position": 1,
-     "of": 2
     }
    },
    "_fixture_note": "New, ongoing; 1,350 gpm; \"4 Hours - Ongoing\""
@@ -137,11 +127,6 @@
      "dischargeReason": "Weather Conditions - HEAVY RAIN",
      "systemComponent": "Manhole - Portable pump used",
      "componentDescription": "Portable pump used"
-    },
-    "_chain": {
-     "id": "key:NYS900020|372 beach rd cheektowaga|2026-05-23T16:30Z",
-     "position": 2,
-     "of": 2
     }
    },
    "_fixture_note": "Close; 650 gpm; start-to-end 6 h 32 min, duration \"05:30 Hours - Ended\""
@@ -186,11 +171,6 @@
      "systemComponent": "CSO Outfall - Multiple CSO outfalls along Onondaga Creek.",
      "componentDescription": "Multiple CSO outfalls along Onondaga Creek.",
      "addressDescription": "CSO outfall is farthest upstream."
-    },
-    "_chain": {
-     "id": "key:NY0027081|631 w newell st syracuse|2026-06-10T19:10Z",
-     "position": 1,
-     "of": 2
     }
    },
    "_fixture_note": "New, ongoing; 2,274 gpm; a later Close in the chain states 830,010 gallons"
@@ -235,11 +215,6 @@
      "systemComponent": "CSO Outfall - Multiple CSO outfalls along Onondaga Creek.",
      "componentDescription": "Multiple CSO outfalls along Onondaga Creek.",
      "addressDescription": "CSO outfall is farthest upstream."
-    },
-    "_chain": {
-     "id": "key:NY0027081|631 w newell st syracuse|2026-06-10T19:10Z",
-     "position": 2,
-     "of": 2
     }
    },
    "_fixture_note": "that Close: 830,010 Gallons Estimated"
@@ -285,11 +260,6 @@
      "componentDescription": "sewer pipe break.",
      "dischargeDescription": "Notified of a sewer discharge under the Louisa Street Bridge.  Repairs will be made on 3/18/2026.",
      "addressDescription": "louisa Street Bridge"
-    },
-    "_chain": {
-     "id": "key:NYS300017|2 john walsh blvd peekskill|2026-03-16T14:00Z",
-     "position": 1,
-     "of": 2
     }
    },
    "_fixture_note": "New, ongoing; a range \"10-15 Gallons per Minute\"; \"48 Hours - Ongoing\""
@@ -334,11 +304,6 @@
      "systemComponent": "Pump Station,Pump Station,Pump Station,Pump Station,Pump Station,Pump Station - Permitted outfall",
      "componentDescription": "Permitted outfall",
      "addressDescription": "At treatment plant"
-    },
-    "_chain": {
-     "id": "key:NY0028410|92 west ferry st buffalo|2026-08-27T16:46Z",
-     "position": 1,
-     "of": 1
     }
    },
    "_fixture_note": "Close; \"less than .1 mgd\" under \"Gallons\"; 3 minutes"
@@ -382,11 +347,6 @@
      "dischargeReason": "System Capacity,Weather Conditions - Heavy rain with inflow/infiltration into sanitary sewer system",
      "systemComponent": "Manhole,Manhole -",
      "addressDescription": "Intersection of West Main St, River St, and Horseshoe Blvd"
-    },
-    "_chain": {
-     "id": "key:NY0024449|284 w main st avon|2026-03-31T22:30Z",
-     "position": 1,
-     "of": 2
     }
    },
    "_fixture_note": "a lower bound \"100+\"; free-text duration"
@@ -431,11 +391,6 @@
      "systemComponent": "CSO Outfall -",
      "dischargeDescription": "Description of Discharge: Wet weather-related combined sewer overflows may have occurred. Please see the Current NYC Waterbody Advisories page on DEP's website to see how rainfall may have Impacted NYC waterways.",
      "addressDescription": "Please see DEP’s website below"
-    },
-    "_chain": {
-     "id": "key:NYCDEPCSO|please see dep s website below please see dep s website below please see dep s website below|2026-03-23T11:00Z",
-     "position": 1,
-     "of": 1
     }
    },
    "_fixture_note": "a zero rate; \"2 Hours - Ongoing\""
@@ -480,11 +435,6 @@
      "systemComponent": "Manhole -",
      "dischargeDescription": "Sanitary sewer overflow into storm sewer",
      "addressDescription": "Manhole is at the northwest corner of Wabash and Melrose, SSO #003"
-    },
-    "_chain": {
-     "id": "key:NYS900021|403 wabash kenmore|2026-08-31T13:50Z",
-     "position": 1,
-     "of": 1
     }
    },
    "_fixture_note": "a rate with \"NA Hours - Ongoing\""
@@ -530,11 +480,6 @@
      "componentDescription": "Influent A CSO",
      "dischargeDescription": "Combination of rainwater and sewage",
      "addressDescription": "Influent A CSO"
-    },
-    "_chain": {
-     "id": "key:NY0025984|700 william t field drive dexter|2025-10-20T08:39Z",
-     "position": 1,
-     "of": 3
     }
    },
    "_fixture_note": "a stated total, open, \"31 Minutes - Ongoing\""
@@ -581,11 +526,6 @@
      "addressDescription": "Manhole is on the front lawn of 100 Sample sso #12",
      "streetNumber": "100",
      "streetName": "Sample Blvd"
-    },
-    "_chain": {
-     "id": "key:NYS900021|749 colvin blvd kenmore|2026-07-21T21:45Z",
-     "position": 2,
-     "of": 2
     }
    },
    "_fixture_note": "Close; manhole; discharge description"

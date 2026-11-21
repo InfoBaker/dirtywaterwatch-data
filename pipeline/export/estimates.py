@@ -15,7 +15,10 @@ The rules, all of them:
     wins: a record that gives a volume gets none, and export/detail.py drops it where a later record of the same event
     gives one (`later_volume`).
   - A range of rates gives a range of volumes; a "more than" or "at least" rate a lower bound; a "less than" rate an
-    upper bound. A rate or a duration of zero gives no estimate (a computed zero would read as no discharge).
+    upper bound. A rate or a duration of zero gives no estimate (a computed zero would read as no discharge). Figures
+    are whole gallons, a limit rounded outward (never a stronger claim than the arithmetic), and a figure under one
+    gallon is "less than 1 gallon". The arithmetic keeps the duration's fractions; the words show them to a tenth.
+  - A figure that says two things gives none: "60,000 gallons" typed under the form's "Gallons per Minute".
   - The duration: the time between the record's own start and end, both to the minute, where the record gives an end
     the source reported; else a duration the record states as a number ("4 Hours - Ongoing", "2 hours 30 min"); free
     text ("ongoing", "all day", "intermittent 2", "unknown") gives none. A duration over MAX_DAYS gives none (a typing
@@ -23,12 +26,15 @@ The rules, all of them:
   - An estimated end only where the record gives no end: its start plus the duration it states (common.end_after, so a
     start known only to the day gives a day, never a clock time). The status rules do not read it: the map's windows,
     ageing and colours are unchanged.
+  - Where a record's own ended_at is one the pipeline worked out (ny_sprtk_web: start + duration on an ENDED notice),
+    `ended_at_ours` gives its basis, so the end is shown as ours; the end itself and the status are unchanged.
   - The basis is a sentence for the public: what we did, with the inputs, in the editors' guide's voice ("we", "our").
 
 A source is added with a reader in SOURCES that says where its rate, duration and end come from.
 """
 from __future__ import annotations
 
+import math
 import re
 from datetime import UTC, datetime, timedelta
 
@@ -83,9 +89,11 @@ def parse_ny_rate(text) -> dict | None:
         return None
     unit = next((k for k in ("gpm", "gph", "mgd", "gpd") if f.group(k)), None)
     if unit is None:
-        if form_unit != "Gallons per Minute":
-            return None                                  # "500 gallons" under "Gallons": a total, not a rate
-        unit = "gpm"                                     # the form's unit ("5 gallons" under "Gallons per Minute")
+        # "500 gallons" under "Gallons" is a total; "60,000 gallons" under "Gallons per Minute" says two things (a total
+        # typed under the rate unit, or a rate with "gallons" for its unit): no value of ours from either (review 4)
+        if form_unit != "Gallons per Minute" or f.group("gal"):
+            return None
+        unit = "gpm"                                     # a bare figure under the form's "Gallons per Minute"
     out: dict = {"text": s, "unit": UNIT_NAME[unit]}
     if f.group("lo"):
         lo, hi = _num(f.group("lo")), _num(f.group("hi"))
@@ -175,9 +183,15 @@ def _ny_web(e: dict, raw: dict) -> dict:
             "own_end": False}
 
 
+def _ny_web_computed_end(e: dict, raw: dict) -> bool:
+    """Whether the web record's ended_at is ny_sprtk_web's start + duration (an ENDED notice gives no end time)."""
+    return bool(e.get("ended_at")) and str(raw.get("_ended_at_basis") or "").startswith("computed")
+
+
 SOURCES = {
     "ny-dec-sprtk": {"inputs": _ny_workbook, "rate": parse_ny_rate, "duration": parse_ny_duration},
-    "ny-dec-sprtk-web": {"inputs": _ny_web, "rate": parse_ny_rate, "duration": parse_ny_duration},
+    "ny-dec-sprtk-web": {"inputs": _ny_web, "rate": parse_ny_rate, "duration": parse_ny_duration,
+                         "computed_end": _ny_web_computed_end},
 }
 
 
@@ -205,9 +219,13 @@ def rate_words(rate: dict) -> str:
 
 
 def duration_words(minutes: float) -> str:
-    total = int(round(minutes))
-    h, m = divmod(total, 60)
-    parts = ([f"{h:,} hour{'' if h == 1 else 's'}"] if h else []) + ([f"{m} minute{'' if m == 1 else 's'}"] if m else [])
+    """"14 hours, 35 minutes"; a part of a minute kept to a tenth ("1.5 minutes", "2 hours, 0.9 minutes"), so the words
+    give the figure the arithmetic used (review 5)."""
+    tenths = int(round(minutes * 10))
+    h, rem = divmod(tenths, 600)
+    m = rem / 10
+    mw = f"{_clean_num(m)} minute{'' if m == 1 else 's'}" if m else ""
+    parts = ([f"{h:,} hour{'' if h == 1 else 's'}"] if h else []) + ([mw] if mw else [])
     return ", ".join(parts) or "0 minutes"
 
 
@@ -262,7 +280,6 @@ def _stated(spec: dict, inp: dict) -> dict | None:
     """{minutes, from, text} of the duration the record states as a number, or None."""
     text = inp.get("duration_text")
     mins, state = spec["duration"](text) if text else (None, None)
-    mins = round(mins) if mins is not None else None            # whole minutes: the basis says what the figure used
     if mins is None or not 0 < mins <= MAX_DAYS * 1440:
         return None
     how = {"ongoing": "expected", "ended": "reported"}.get(state or "", "given")
@@ -276,7 +293,7 @@ def _span(e: dict, inp: dict) -> dict | None:
     if not (inp.get("own_end") and st is not None and en is not None and e.get("time_precision") == "minute"
             and e.get("ended_at_precision") in (None, "minute")):
         return None
-    mins = round((en.astimezone(UTC) - st.astimezone(UTC)).total_seconds() / 60)
+    mins = (en.astimezone(UTC) - st.astimezone(UTC)).total_seconds() / 60
     if not 0 < mins <= MAX_DAYS * 1440:
         return None
     return {"minutes": mins, "from": "start_to_end", "started_at": e.get("started_at"), "ended_at": e.get("ended_at")}
@@ -318,16 +335,29 @@ def volume_estimate_of(e: dict) -> dict | None:
         return None
     per_min = PER_MINUTE[next(k for k, v in UNIT_NAME.items() if v == rate["unit"])]
     d_lo, d_hi = (dur["low"], dur["high"]) if "low" in dur else (dur["minutes"], dur["minutes"])
-    gal = lambda r, m: int(round(r * per_min * m))   # noqa: E731
+    gal = lambda r, m: r * per_min * m   # noqa: E731
+    # whole gallons, rounded outward where a figure is a limit, so the claim is never stronger than the arithmetic; a
+    # figure under one gallon is "less than 1 gallon", never zero (review 2)
     out: dict = {}
     if b in ("more_than", "at_least"):
-        out.update(low=gal(lo, d_lo), bound=b)
+        x = math.floor(gal(lo, d_lo))
+        if x < 1:
+            return None
+        out.update(low=x, bound=b)
     elif b == "less_than":
-        out.update(high=gal(hi, d_hi), bound=b)
+        out.update(high=math.ceil(gal(hi, d_hi)), bound=b)
     elif lo == hi and d_lo == d_hi:
-        out["gallons"] = gal(lo, d_lo)
+        x = gal(lo, d_lo)
+        if x >= 1:
+            out["gallons"] = int(round(x))
+        else:
+            out.update(high=1, bound="less_than")
     else:
-        out.update(low=gal(lo, d_lo), high=gal(hi, d_hi))
+        x_lo, x_hi = gal(lo, d_lo), gal(hi, d_hi)
+        if x_lo >= 1:
+            out.update(low=math.floor(x_lo), high=math.ceil(x_hi))
+        else:
+            out.update(high=math.ceil(x_hi), bound="less_than")
     noun = inp.get("noun") or "report"
     rw = rate_words(rate)
     what = "the rate range" if (lo is not None and hi is not None and lo != hi and not b) else "the rate"
@@ -386,9 +416,23 @@ def end_estimate_of(e: dict) -> dict | None:
                        "duration_from": dur["from"], "duration_text": dur["text"]}}
 
 
+def ended_at_ours_of(e: dict) -> dict | None:
+    """{basis} where the record's own ended_at is one the pipeline worked out (ny_sprtk_web: start + the duration an ENDED
+    notice gives), so it is shown as our estimate, not as the source's end (review 3). The status build reads that end
+    as before; only its label changes."""
+    spec, inp = _spec(e)
+    if not spec or not spec.get("computed_end") or not spec["computed_end"](e, e.get("raw") or {}):
+        return None
+    dur = _stated(spec, inp)
+    if not dur:
+        return {"basis": f"We worked out this end from the {inp.get('noun') or 'report'}'s start and the duration it gives."}
+    return {"basis": f"We added {EXPECTS[dur['from']].format(noun=inp.get('noun') or 'report')}, "
+                     f"{duration_words(dur['minutes'])}, to its start time."}
+
+
 def estimates_of(e: dict) -> dict:
     out = {}
-    for k, fn in (("volume_estimate", volume_estimate_of), ("end_estimate", end_estimate_of)):
+    for k, fn in (("volume_estimate", volume_estimate_of), ("end_estimate", end_estimate_of), ("ended_at_ours", ended_at_ours_of)):
         try:
             v = fn(e)
         except Exception:  # noqa: BLE001 - an odd value never stops the export; the figure is left out
