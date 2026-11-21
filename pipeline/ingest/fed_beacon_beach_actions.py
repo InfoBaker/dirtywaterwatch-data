@@ -23,15 +23,17 @@ Cadence (MIN_HOURS): a full pull of the current and the previous calendar year (
 Scope: the fifty states, the District of Columbia and Puerto Rico (IN_SCOPE). American Samoa, Guam, the Northern
   Mariana Islands, the Virgin Islands and the four tribal programs (BR, GP, MK, ST) are counted in meta
   (out_of_scope), not written.
-Records (one per Beach Actions row; event_id fed-beacon-beach-actions:<the row's lowest action id>, with the action
-  type's slug when two rows list the same ids)
+Records (one per Beach Actions row; event_id fed-beacon-beach-actions:<the row's lowest action id>-<the action type's
+  code> (TYPE_CODE: closure, advisory, rain, posting), so an id never depends on other rows)
   - event_type: Closure -> beach_closure; Contamination Advisory, Rain Advisory and Posting -> beach_advisory.
-  - started_at, ended_at: the action's start and end in the beach's local time (zones.zone_for by the state and the
-    beach's point; raw.time_zone). A time of exactly 12:00 AM is a date: precision day, for the start
+  - started_at, ended_at: the action's start and end in the beach's local time (beach_zone: zones.zone_for by the
+    state and the beach's point, and Michigan's four Central-time counties by BEACON's county; raw.time_zone). A time of exactly 12:00 AM is a date: precision day, for the start
     (time_precision) and the end (raw.ended_at_precision) apart; any other time is to the minute. status
-    advisory_lifted when the end is at or before the pull, else advisory_active (the end as the state filed it).
+    advisory_lifted when the end (the end of its local day for a date) is at or before the pull, else advisory_active
+    (the end as the state filed it). raw.state is the jurisdiction (the state the status build counts it under).
   - published_at, reported_at and source_updated_at stay empty (BEACON gives no publication time); fetched_at is the
-    pull that read the row; raw._first_seen_at the first pull that did.
+    pull that read the row; raw._first_seen_at the first pull that listed any of its action ids (kept for good in the
+    saved state's first_seen).
   - raw: the beach id, name, county, waterbody name and type, tier, station ids, action ids, the action type, the
     reason, indicator and possible-source codes (with our plain words for each), the duration in days, and from the
     detailed report the state's comments for the row's action ids, scrubbed as the beach comments of other feeds are
@@ -48,10 +50,16 @@ Copies, not second reports (link_copies; the ingester's own duplicate_of, as ing
   entry of rules.json beach_reason, this one aside), its type is a beach closure, beach advisory or rain advisory, it
   is no one's duplicate, its file is not withheld from the public export (meta.distribution_discouraged: a link to it
   would hide the action from the public site) and its start is within a day of the action's (each in its own local
-  day). By EPA beach id where the feed keeps it (BY_ID_PATHS); elsewhere by the beach's point (within LINK_M of the
+  day) and of the same kind (COMPATIBLE: a closure repeats a closure, an advisory an advisory or a rain advisory). By
+  EPA beach id where the feed keeps it (BY_ID_PATHS); elsewhere by the beach's point (within LINK_M of the
   beach's line from its start to its end point) or by the same beach name in the same state, never when the two name
   different waters (build/status.py waters_differ). Each state record takes at most one copy, the closest first;
-  raw.copy_of and raw._duplicate_basis say how. meta.links counts them.
+  raw.copy_of and raw._duplicate_basis say how. meta.links counts them. The links are made again after every feed
+  (ingest/fed_beacon_beach_link.py, Makefile INGEST_SNAPSHOTS: this module runs before most state feeds) and on a
+  failed pull (the saved rows written again, health false), so a copy never hides behind a record that has gone.
+Checks (check_year): every row of both reports is the requested year, and the detailed report covers at least 95% of
+  the main report's action ids (100% in 2014 to 2026); a year whose rows we hold, or a backfill year, may not come
+  back empty; both refresh years empty is a failed pull. A backfill naming no year exits 2 and writes nothing.
 Meta: counts by state and year, the newest action per state (a source-health signal: when each state last filed),
   the out-of-scope count, the private-owner and historical beaches' actions, the links and the rows with no point.
 Run from pipeline/: python -m ingest.fed_beacon_beach_actions [--force] [--backfill FROM_YEAR]
