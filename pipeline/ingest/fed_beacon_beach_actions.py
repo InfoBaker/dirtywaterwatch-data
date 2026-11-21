@@ -104,6 +104,7 @@ MAIN_COLUMNS = ("Jurisdiction", "Year", "Beach ID", "BeachName", "County", "Wate
 DETAIL_COLUMNS = ("Jurisdiction", "Year", "Beach Id", "Activity ID", "Action Type", "Action StartDate",
                   "Action EndDate", "Action Reasons", "Action ReasonsComment", "Action Indicator",
                   "Action IndicatorComment", "Action Possible Source", "Action PossibleSourceComment")
+TYPE_CODE = {"Closure": "closure", "Contamination Advisory": "advisory", "Rain Advisory": "rain", "Posting": "posting"}
 EVENT_TYPE = {"Closure": "beach_closure", "Contamination Advisory": "beach_advisory", "Rain Advisory": "beach_advisory",
               "Posting": "beach_advisory"}
 # EPA's codes in plain words (ours, for a reader; the codes stay as filed in raw.reasons and the others)
@@ -142,6 +143,12 @@ BY_ID_PATHS = {"al-adem-beach-monitoring": "beacon_id", "ms-mdeq-beach-monitorin
                "fl-doh-beaches": "epa_beach_id", "me-healthy-beaches": "epa_beach_id", "nj-beaches": "epa_beach_id",
                "ga-dnr-beaches": "beach.beachId", "nc-rwq-advisories": "EPA_ID", "nh-des-swimming": "EPA_ID"}
 LINK_TYPES = frozenset({"beach_closure", "beach_advisory", "rain_advisory"})
+# a BEACON closure repeats a state's closure, an advisory a state's advisory or rain advisory; never across them
+COMPATIBLE = {"beach_closure": frozenset({"beach_closure"}),
+              "beach_advisory": frozenset({"beach_advisory", "rain_advisory"})}
+# Michigan's Central-time counties (49 CFR 71.5: the four Upper Peninsula counties bordering Wisconsin); zones.zone_for
+# reads Michigan as Eastern
+MI_CENTRAL_COUNTIES = frozenset({"GOGEBIC", "IRON", "DICKINSON", "MENOMINEE"})
 NOT_LINKED_SOURCES = frozenset({SOURCE_ID, "notification-pages"})
 
 
@@ -249,26 +256,24 @@ def action_ids(v: str) -> list[str]:
 
 
 def normalize(main_text: str, detail_text: str) -> tuple[dict[str, dict], Counter]:
-    """{row key: the row as saved} from one year's two reports, and counts. The key is the row's lowest action id (with
-    the action type's slug when two rows list the same ids). Comments are scrubbed here, before anything is saved."""
+    """{row key: the row as saved} from one year's two reports, and counts. The key is the row's lowest action id and
+    its action type's code (TYPE_CODE), whatever the other rows hold: two rows that list the same ids under two types
+    (California's Aliso County Beach, 2025) are two records. Comments are scrubbed here, before anything is saved."""
     detail = defaultdict(list)
     for d in rows_of(detail_text):
         detail[d.get("Activity ID", "")].append(d)
     rows = rows_of(main_text)
-    by_ids = Counter(",".join(sorted(action_ids(r.get("Action ID")), key=_num)) for r in rows)
     out, n = {}, Counter()
     for r in rows:
         ids = sorted(action_ids(r.get("Action ID")), key=_num)
         if not ids or not r.get("Beach ID"):
             n["rows_without_id"] += 1
             continue
-        key = ids[0]
-        if by_ids[",".join(ids)] > 1:
-            key = f"{ids[0]}-{_slug(r.get('Action Type'))}"
-        i = 1
-        while key in out:
+        base = f"{ids[0]}-{TYPE_CODE.get(r.get('Action Type') or '') or _slug(r.get('Action Type'))}"
+        key, i = base, 1
+        while key in out:              # the same ids and type twice in one report (not seen in 2014 to 2026)
             i += 1
-            key = f"{key.split('~')[0]}~{i}"
+            key = f"{base}~{i}"
         ds = [d for a in ids for d in detail.get(a, [])]
         comments = {k: _unique(scrub(d.get(col) or "") for d in ds)
                     for k, col in (("reason_comments", "Action ReasonsComment"),
@@ -287,6 +292,23 @@ def normalize(main_text: str, detail_text: str) -> tuple[dict[str, dict], Counte
         }
         n["rows"] += 1
     return out, n
+
+
+DETAIL_COVERAGE = 0.95      # 2014 to 2026: every main-report action id is in the detailed report
+
+
+def check_year(year: int, main_text: str, detail_text: str) -> None:
+    """PullError unless both reports are the requested year's (every row's Year) and the detailed report covers the
+    main report's action ids (a header-only or cut-short detailed report would drop every state's comment)."""
+    main, detail = rows_of(main_text), rows_of(detail_text)
+    for name, rows in (("main", main), ("detail", detail)):
+        if any(r.get("Year") != str(year) for r in rows):
+            raise PullError(f"the {name} report holds rows of another year than {year}")
+    ids = {a for r in main for a in action_ids(r.get("Action ID"))}
+    if ids:
+        have = {d.get("Activity ID") for d in detail}
+        if len(ids & have) < DETAIL_COVERAGE * len(ids):
+            raise PullError(f"the detailed report covers {len(ids & have)} of {len(ids)} action ids")
 
 
 def _num(x: str):
@@ -326,14 +348,24 @@ def beach_point(b: dict | None) -> tuple[float | None, float | None, str | None]
     return None, None, None
 
 
-def to_record(row: dict, reg: dict | None, fetched_at: str, prev: dict | None) -> dict:
+def beach_zone(st: str, lat, lon, county) -> str:
+    """The beach's clock: zones.zone_for by the state and the point, and Michigan's four Central-time counties by the
+    county BEACON names (MI_CENTRAL_COUNTIES)."""
+    if st == "MI" and str(county or "").strip().upper() in MI_CENTRAL_COUNTIES:
+        return zones.CENTRAL
+    return zones.zone_for(st, lat, lon) or "America/New_York"
+
+
+def to_record(row: dict, reg: dict | None, fetched_at: str, prev: dict | None, first_seen: str | None = None) -> dict:
     st = row["jurisdiction"]
     lat, lon, basis = beach_point(reg)
-    tz = ZoneInfo(zones.zone_for(st, lat, lon) or "America/New_York")
+    tz = ZoneInfo(beach_zone(st, lat, lon, row.get("county")))
     start, sprec = when(row.get("start_text"), tz)
     end, eprec = when(row.get("end_text"), tz)
     pulled = _t(fetched_at)
     end_t = _t(end)
+    if end_t is not None and eprec == "day":
+        end_t = end_t + timedelta(days=1)          # a date: the action ran through that local day
     lifted = end_t is not None and pulled is not None and end_t <= pulled
     praw = (prev or {}).get("raw") or {}
     raw = {k: row.get(k) for k in ("jurisdiction", "year", "beach_id", "beach_name", "county", "waterbody_name",
@@ -344,6 +376,7 @@ def to_record(row: dict, reg: dict | None, fetched_at: str, prev: dict | None) -
     raw["reason_words"] = [REASON_WORDS.get(c, c) for c in row.get("reasons") or []]
     raw["indicator_words"] = [INDICATOR_WORDS.get(c, c) for c in row.get("indicators") or []]
     raw["possible_source_words"] = [SOURCE_WORDS.get(c, c) for c in row.get("possible_sources") or []]
+    raw["state"] = st                              # the state the record counts under (status.event_state)
     raw["report"] = f"BEACON Beach Actions report, {row.get('year')}"
     raw["time_zone"] = tz.key
     raw["ended_at_precision"] = eprec
@@ -352,7 +385,7 @@ def to_record(row: dict, reg: dict | None, fetched_at: str, prev: dict | None) -
                         if reg.get(k) not in (None, "")}
     if basis:
         raw["point_basis"] = basis
-    raw["_first_seen_at"] = praw.get("_first_seen_at") or (prev or {}).get("fetched_at") or fetched_at
+    raw["_first_seen_at"] = first_seen or praw.get("_first_seen_at") or (prev or {}).get("fetched_at") or fetched_at
     rec = event(
         source_id=SOURCE_ID, source_record_id=row["key"], fetched_at=fetched_at,
         source_url=BEACH_PAGE.format(row["beach_id"]),
@@ -469,17 +502,18 @@ def link_copies(records: list[dict], cands: list[dict], registry: dict[str, dict
         if d is None:
             continue
         reg = registry.get(raw.get("beach_id"))
+        kinds = COMPATIBLE.get(rec.get("event_type"), frozenset())
         seen = set()
         for c in by_id.get(str(raw.get("beach_id") or "").upper(), []):
             days = abs((c["day"] - d).days)
-            if days <= LINK_DAYS:
+            if days <= LINK_DAYS and c["ev"].get("event_type") in kinds:
                 seen.add(c["ev"]["event_id"])
                 pairs.append(((0, days, 0.0), rec, c, "epa_beach_id", None, days))
         mine = norm_name(raw.get("beach_name"))
         near = [c for k in range(-LINK_DAYS, LINK_DAYS + 1)
                 for c in by_day.get((raw.get("jurisdiction"), d + timedelta(days=k)), [])]
         for c in near:
-            if c["ev"]["event_id"] in seen:
+            if c["ev"]["event_id"] in seen or c["ev"].get("event_type") not in kinds:
                 continue
             days = abs((c["day"] - d).days)
             try:
@@ -537,6 +571,7 @@ def load_files(events_dir: Path = EVENTS_DIR) -> dict[str, dict]:
 
 def build(state: dict, registry: dict[str, dict], files: dict[str, dict], prev_records: list[dict]) -> tuple[list[dict], dict]:
     prev = {r["event_id"]: r for r in prev_records if isinstance(r, dict) and r.get("event_id")}
+    first = state.get("first_seen") or {}         # {action id: the first pull that listed it}, kept for good
     records, out_scope = [], Counter()
     seen = set()
     by_sy, newest, no_point, no_reg, private, historical = Counter(), {}, Counter(), Counter(), Counter(), Counter()
@@ -552,7 +587,9 @@ def build(state: dict, registry: dict[str, dict], files: dict[str, dict], prev_r
                 continue            # a row a later year's report lists again: the later report's copy is kept
             seen.add(eid)
             reg = registry.get(row.get("beach_id"))
-            rec = to_record(row, reg, yd.get("pulled_at") or state.get("pulled_at") or now_iso(), prev.get(eid))
+            seen_at = [first[a] for a in row.get("action_ids") or [] if first.get(a)]
+            rec = to_record(row, reg, yd.get("pulled_at") or state.get("pulled_at") or now_iso(), prev.get(eid),
+                            min(seen_at, key=lambda v: _t(v) or datetime.max.replace(tzinfo=UTC)) if seen_at else None)
             records.append(rec)
             by_sy[(st, str(row.get("year")))] += 1
             if rec["started_at"] and (st not in newest or rec["started_at"] > newest[st]["start"]):
@@ -609,6 +646,24 @@ def read_saved(from_dir: Path, year: int) -> tuple[str, str]:
             (from_dir / f"{DETAIL}_{year}.csv").read_text(encoding="utf-8-sig"))
 
 
+def note_first_seen(state: dict, pulled: dict) -> None:
+    """state["first_seen"]: each action id's first pull, kept for good (a row that leaves a report and comes back, or
+    is regrouped with other ids, keeps its first read)."""
+    first = state.setdefault("first_seen", {})
+    for y, yd in pulled.items():
+        for row in (yd.get("rows") or {}).values():
+            for a in row.get("action_ids") or []:
+                first.setdefault(a, yd["pulled_at"])
+
+
+def summary(records: list[dict], meta: dict, what: str) -> str:
+    links = meta["links"]
+    return (f"{SOURCE_ID}: {what}; {len(records)} records in scope, {links['linked']} linked as copies of state records "
+            f"({links.get('by_epa_beach_id', 0)} by EPA id, {links.get('by_point', 0)} by point, "
+            f"{links.get('by_name', 0)} by name), {meta['out_of_scope']['rows']} out of scope, "
+            f"{meta['no_point']['rows']} with no point")
+
+
 def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, events_dir: Path = EVENTS_DIR,
         state_file: Path = STATE_FILE, registry_file: Path = REGISTRY_FILE) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
@@ -627,6 +682,10 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
     years = refresh_years(now)
     if args.backfill:
         years = list(range(args.backfill, years[0]))
+        if not years:
+            print(f"{SOURCE_ID}: --backfill {args.backfill} names no year before {refresh_years(now)[0]}: nothing read",
+                  file=sys.stderr)
+            return 2
     last = _t(state.get("pulled_at"))
     due = bool(args.force or args.backfill or args.from_dir or last is None or not out_path.exists()
                or now - last >= timedelta(hours=MIN_HOURS))
@@ -636,10 +695,12 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
         for y in years:
             try:
                 main_text, detail_text = read_saved(args.from_dir, y) if args.from_dir else pull_year(sess, y, sleep)
+                check_year(y, main_text, detail_text)
                 rows, n = normalize(main_text, detail_text)
                 had = len((state["years"].get(str(y)) or {}).get("rows") or {})
-                if not rows and had:
-                    raise PullError(f"the {y} report listed no action, the saved rows hold {had}")
+                if not rows and (had or args.backfill):
+                    # a past year's national report is never empty, nor one whose rows we hold
+                    raise PullError(f"the {y} report listed no action")
                 pulled[str(y)] = {"pulled_at": fetched_at, "rows": rows}
                 counts.update(n)
             except (requests.RequestException, PullError, OSError, csv.Error, UnicodeError) as e:
@@ -650,10 +711,19 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
             failed.append("every year: PullError")      # the reports answered, and listed no action at all
         if failed and (not args.backfill or not pulled):
             err = f"BEACON pull failed ({'; '.join(failed)})"
-            write_events(SOURCE_ID, [], ok=False, error=err, path=out_path)
+            if state["years"]:
+                # the saved rows written again and linked to this hour's state files: a link to a state record that
+                # has gone is dropped, though BEACON could not be read (health stays false, last_ok_at the last pull)
+                prev = (read_json(out_path, {}) or {}).get("records") or []
+                records, meta = build(state, load_registry(registry_file), load_files(events_dir), prev)
+                meta["years_not_read"] = failed
+                write_events(SOURCE_ID, records, ok=False, error=err, meta=meta, path=out_path, partial=True)
+            else:
+                write_events(SOURCE_ID, [], ok=False, error=err, path=out_path)
             print(f"{SOURCE_ID}: FAILED {err}", file=sys.stderr)
             return 1
         state["years"].update(pulled)
+        note_first_seen(state, pulled)
         if not args.backfill:
             state["pulled_at"] = fetched_at
         write_json(state_file, state)
@@ -669,12 +739,23 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
                      partial=bool(failed))
     else:
         rewrite(records, meta, out_path)
-    links = meta["links"]
-    print(f"{SOURCE_ID}: {'pulled ' + ', '.join(pulled) if due else 'no pull due (last ' + str(state.get('pulled_at')) + ')'}"
-          f"; {len(records)} records in scope, {links['linked']} linked as copies of state records "
-          f"({links.get('by_epa_beach_id', 0)} by EPA id, {links.get('by_point', 0)} by point, "
-          f"{links.get('by_name', 0)} by name), {meta['out_of_scope']['rows']} out of scope, "
-          f"{meta['no_point']['rows']} with no point" + (f"; not read: {', '.join(failed)}" if failed else ""))
+    print(summary(records, meta, "pulled " + ", ".join(pulled) if due else
+                  f"no pull due (last {state.get('pulled_at')})") + (f"; not read: {', '.join(failed)}" if failed else ""))
+    return 0
+
+
+def relink_only(events_dir: Path = EVENTS_DIR, state_file: Path = STATE_FILE, registry_file: Path = REGISTRY_FILE) -> int:
+    """The records written again from the saved rows and linked to the state feeds' files as they stand after this
+    hour's feeds (ingest/fed_beacon_beach_link.py, Makefile INGEST_SNAPSHOTS); no network, the header kept."""
+    out_path = events_dir / f"{SOURCE_ID}.json"
+    state = read_json(state_file, {}) or {}
+    if not state.get("years") or not out_path.exists():
+        print(f"{SOURCE_ID}: no saved rows or no events file: nothing to link")
+        return 0
+    prev = (read_json(out_path, {}) or {}).get("records") or []
+    records, meta = build(state, load_registry(registry_file), load_files(events_dir), prev)
+    rewrite(records, meta, out_path)
+    print(summary(records, meta, "linked again after the state feeds"))
     return 0
 
 

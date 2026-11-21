@@ -81,11 +81,14 @@ class FakeSession:
         if url.endswith("/report-page-content"):
             return FakeResponse('<script>apex.env = {APP_SESSION: "70112233445566"};</script>')
         if (params or {}).get("request") == "CSV":
-            return FakeResponse(self.detail if url.endswith("-detail") else self.main, "text/csv")
+            text = self.detail if url.endswith("-detail") else self.main
+            return FakeResponse(text.replace(",2025,", f",{self.year},"), "text/csv")   # the year the session set
         return FakeResponse("<html>report</html>")
 
     def post(self, url, data=None, headers=None, timeout=None):
         self.calls.append(("POST", url, list(data or []), dict(headers or {})))
+        args = dict(zip([v for k, v in data or [] if k == "p_arg_names"], [v for k, v in data or [] if k == "p_arg_values"]))
+        self.year = args.get("F101_CALENDAR_YEAR", getattr(self, "year", "2025"))
         return FakeResponse("{}", "application/json")
 
 
@@ -131,14 +134,14 @@ def test_a_changed_report_is_a_failed_pull_that_keeps_the_records_and_names_only
 
 def test_dates_are_the_beachs_local_time_and_midnight_is_a_date_for_the_start_and_the_end_apart(tmp_path, registry):
     _, _, recs = run_saved(tmp_path, registry)
-    al = recs["710924"]                         # 10-SEP-2025 12:00AM to 12-SEP-2025 12:00AM, Alabama
+    al = recs["710924-advisory"]                         # 10-SEP-2025 12:00AM to 12-SEP-2025 12:00AM, Alabama
     assert (al["started_at"], al["ended_at"]) == ("2025-09-10T00:00:00-05:00", "2025-09-12T00:00:00-05:00")
     assert al["time_precision"] == "day" and al["raw"]["ended_at_precision"] == "day"
     assert al["raw"]["time_zone"] == "America/Chicago"
-    pa = recs["728218"]                         # 15-JUL-2025 07:36AM to 02-SEP-2025 12:00AM, Erie County
+    pa = recs["728218-closure"]                         # 15-JUL-2025 07:36AM to 02-SEP-2025 12:00AM, Erie County
     assert pa["started_at"] == "2025-07-15T07:36:00-04:00" and pa["time_precision"] == "minute"
     assert pa["ended_at"] == "2025-09-02T00:00:00-04:00" and pa["raw"]["ended_at_precision"] == "day"
-    ny = recs["726528"]                         # 20-AUG-2025 05:25PM to 23-AUG-2025 12:00PM: noon is a time
+    ny = recs["726528-closure"]                         # 20-AUG-2025 05:25PM to 23-AUG-2025 12:00PM: noon is a time
     assert ny["ended_at"] == "2025-08-23T12:00:00-04:00" and ny["raw"]["ended_at_precision"] == "minute"
     assert B.when("31-DEC-2025 12:00AM", S.ZoneInfo("America/Los_Angeles")) == ("2025-12-31T00:00:00-08:00", "day")
     assert B.when("not a date", S.ZoneInfo("America/New_York")) == (None, None)
@@ -153,7 +156,7 @@ def test_dates_are_the_beachs_local_time_and_midnight_is_a_date_for_the_start_an
 
 def test_a_record_keeps_the_codes_the_words_and_the_states_comment_and_its_point_from_the_registry(tmp_path, registry):
     _, _, recs = run_saved(tmp_path, registry)
-    ny = recs["726528"]
+    ny = recs["726528-closure"]
     assert ny["raw"]["reasons"] == ["OTHER"] and ny["raw"]["indicators"] == ["PREEMPT"]
     assert ny["raw"]["possible_sources"] == ["STORM"] and ny["raw"]["reason_words"] == ["another reason"]
     assert ny["raw"]["reason_comments"] == ["Hurricane rip currents"]
@@ -164,11 +167,11 @@ def test_a_record_keeps_the_codes_the_words_and_the_states_comment_and_its_point
     assert ny["raw"]["point_basis"] == "the beach's start point in EPA's beach attributes (BEACON Beach Attributes, 2026)"
     assert ny["waterbody_text"] == "Atlantic Ocean" and ny["water_slugs"] == [] and ny["water_match"] == "none"
     # a row that lists several action ids (one window at several stations): one record, every id kept
-    pa = recs["728218"]
+    pa = recs["728218-closure"]
     assert pa["raw"]["station_ids"] == ["21PABCH|31", "21PABCH|32", "21PABCH|33"]
     # two rows that list the same ids under two action types: two records, told apart by the type
     ca = [k for k in recs if k.startswith("721526")]
-    assert sorted(ca) == ["721526-contamination-advisory", "721526-rain-advisory"]
+    assert sorted(ca) == ["721526-advisory", "721526-rain"]
 
 
 def test_a_beach_with_no_registry_row_stays_a_record_unplaced_and_counted(tmp_path, registry):
@@ -176,7 +179,7 @@ def test_a_beach_with_no_registry_row_stays_a_record_unplaced_and_counted(tmp_pa
     doc["beaches"] = [b for b in doc["beaches"] if b["beach_id"] != "IL928218"]
     registry.write_text(json.dumps(doc))
     _, out, recs = run_saved(tmp_path, registry)
-    il = recs["729819"]
+    il = recs["729819-closure"]
     assert il["lat"] is None and il["coord_source"] is None and il["waterbody_text"] == "Lake Michigan"
     assert out["meta"]["no_point"] == {"rows": 1, "by_state": {"IL": 1}}
     assert out["meta"]["no_registry_row"]["by_state"] == {"IL": 1}
@@ -194,12 +197,12 @@ def test_the_territories_and_the_tribal_programs_are_counted_not_written(tmp_pat
 
 def test_a_copy_is_linked_by_epa_beach_id_and_another_by_the_beach_point(tmp_path, registry):
     _, doc, recs = run_saved(tmp_path, registry)
-    nj_c, nj_a = recs["723982"], recs["723981"]
+    nj_c, nj_a = recs["723982-closure"], recs["723981-advisory"]
     assert nj_c["duplicate_of"] == "nj-beaches:OC0142:beach_closure:2025-08-19"
     assert nj_a["duplicate_of"] == "nj-beaches:OC0142:beach_advisory:2025-08-18"
     assert nj_c["raw"]["copy_of"] == {"event_id": "nj-beaches:OC0142:beach_closure:2025-08-19",
                                       "source_id": "nj-beaches", "by": "epa_beach_id", "days_apart": 0}
-    pa = recs["728218"]                 # Erie County's sheet keeps no EPA id field: its point, 100 m from Beach 11
+    pa = recs["728218-closure"]                 # Erie County's sheet keeps no EPA id field: its point, 100 m from Beach 11
     assert pa["duplicate_of"] == "pa-erie-beaches:PA102094-20250715"
     assert pa["raw"]["copy_of"]["by"] == "point" and pa["raw"]["copy_of"]["metres"] <= B.LINK_M
     assert "100 m from the beach's line" in pa["raw"]["_duplicate_basis"]
@@ -221,9 +224,9 @@ def test_no_link_a_day_and_a_half_apart_nor_to_a_file_withheld_from_the_public_e
     B.run(["--from-dir", str(FIX), "--fetched-at", READ], now=NOW, events_dir=ev, state_file=tmp_path / "s.json",
           registry_file=registry)
     recs = {r["source_record_id"]: r for r in json.loads((ev / f"{B.SOURCE_ID}.json").read_text())["records"]}
-    assert recs["723982"]["duplicate_of"] is None          # two days apart
-    assert recs["723981"]["duplicate_of"] is not None      # the advisory still is the same day
-    assert recs["728218"]["duplicate_of"] is None          # a withheld file is never the record shown
+    assert recs["723982-closure"]["duplicate_of"] is None          # two days apart
+    assert recs["723981-advisory"]["duplicate_of"] is not None      # the advisory still is the same day
+    assert recs["728218-closure"]["duplicate_of"] is None          # a withheld file is never the record shown
 
 
 def test_a_point_link_is_not_made_when_the_two_name_different_waters(tmp_path, registry):
@@ -234,7 +237,7 @@ def test_a_point_link_is_not_made_when_the_two_name_different_waters(tmp_path, r
     B.run(["--from-dir", str(FIX), "--fetched-at", READ], now=NOW, events_dir=ev, state_file=tmp_path / "s.json",
           registry_file=registry)
     recs = {r["source_record_id"]: r for r in json.loads((ev / f"{B.SOURCE_ID}.json").read_text())["records"]}
-    assert recs["728218"]["duplicate_of"] is None
+    assert recs["728218-closure"]["duplicate_of"] is None
 
 
 # ---------------------------------------------------------------- decision 40 and history only
@@ -242,7 +245,7 @@ def test_a_point_link_is_not_made_when_the_two_name_different_waters(tmp_path, r
 def test_an_other_closure_for_hurricane_rip_currents_is_listed_only_and_a_bacteria_closure_keeps_its_window(
         tmp_path, registry):
     _, _, recs = run_saved(tmp_path, registry)
-    ny, il = recs["726528"], recs["729819"]
+    ny, il = recs["726528-closure"], recs["729819-closure"]
     v = BR.judge(ny, RULES)
     assert v == {"stated": False, "how": "no_field_match", "fields": ["reason_comments"],
                  "read": "the reason code and the reason comment in the state's report to EPA's BEACON system"}
@@ -296,7 +299,7 @@ def test_a_record_read_inside_its_window_never_colours_the_map_now_nor_starts_a_
     read = "2026-10-18T12:00:00Z"
     now = datetime(2026, 10, 19, 12, tzinfo=UTC)
     _, _, recs = run_saved(tmp_path, registry, fetched_at=read, now=now)
-    la = recs["736651"]
+    la = recs["736651-advisory"]
     assert la["status"] == "advisory_active" and la["ended_at"] == "2026-10-22T07:00:00-05:00"
     st, hist = _status(tmp_path, monkeypatch, [la], now)
     w = st["waters"]["test-water-la"]
@@ -320,7 +323,7 @@ def test_a_record_read_inside_its_window_never_colours_the_map_now_nor_starts_a_
 
 def test_a_history_only_copy_never_lends_its_reason_to_the_state_record_shown(tmp_path, registry):
     _, _, recs = run_saved(tmp_path, registry)
-    pa = recs["728218"]
+    pa = recs["728218-closure"]
     shown = {"event_id": "x-state:1", "source_id": "il-idph-beachguard", "event_type": "beach_closure",
              "raw": {"advisory_type": "Closure", "comment": None}}
     by_id = {pa["event_id"]: pa, shown["event_id"]: shown}
@@ -413,5 +416,147 @@ def test_a_comment_is_scrubbed_before_it_is_saved():
         "Call 555-867-5309 or mail ranger@example.org,")
     assert "555-867-5309" in detail
     rows, _ = B.normalize(main, detail)
-    com = rows["736651"]["reason_comments"][0]
+    com = rows["736651-advisory"]["reason_comments"][0]
     assert "555-867-5309" not in com and "example.org" not in com
+
+
+# ---------------------------------------------------------------- review fixes (Astra, 2026-11-21)
+
+def test_every_record_counts_under_its_own_state(tmp_path, registry):
+    # the status build reads a record's state from raw.state first; a federal source's id carries none
+    _, _, recs = run_saved(tmp_path, registry)
+    got = {k.split("-")[0]: S.event_state(r) for k, r in recs.items()}
+    assert {k: got[k] for k in ("723982", "728218", "729819", "736651")} == {
+        "723982": "NJ", "728218": "PA", "729819": "IL", "736651": "LA"}
+
+
+def test_a_day_precision_end_is_lifted_only_after_that_day(tmp_path, registry):
+    # Alabama's 710924 ends "12-SEP-2025 12:00AM": the date, so the advisory runs through Sep 12 (local)
+    _, _, recs = run_saved(tmp_path, registry, fetched_at="2025-09-12T20:00:00Z")
+    assert recs["710924-advisory"]["status"] == "advisory_active"
+    (tmp_path / "x").mkdir()
+    _, _, recs = run_saved(tmp_path / "x", registry, fetched_at="2025-09-13T06:00:00Z")
+    assert recs["710924-advisory"]["status"] == "advisory_lifted"
+
+
+def test_the_registry_scrubs_the_states_free_text():
+    R = registry_module()
+    row = {"Indicator Name": "ENTEROCOCCUS", "MeasureType": "SSM", "MeasureValue": "104", "MeasureUnit": "cfu/100mL",
+           "Criteria Comments": "Questions: call 555-867-5309 or ranger@example.org"}
+    c = R.criterion(row)
+    assert "555-867-5309" not in c["comment"] and "example.org" not in c["comment"]
+
+
+def test_a_closure_never_links_to_an_advisory(tmp_path, registry):
+    # BEACON's Aug. 19 closure at 25th St Bay Front, and only the state's Aug. 18 advisory there: no link
+    _, _, recs = run_saved(tmp_path, registry, with_state=False)
+    closure = next(r for r in recs.values() if r["source_record_id"].startswith("723982"))
+    nj = json.loads((FIX / "state-records.json").read_text())["nj-beaches"]["records"]
+    advisory = [r for r in nj if r["event_type"] == "beach_advisory"]
+    reg = B.load_registry(registry)
+    assert B.link_copies([closure], advisory, reg) == {} and closure["duplicate_of"] is None
+    assert B.link_copies([closure], nj, reg) == {"by_epa_beach_id": 1}
+    assert closure["duplicate_of"] == "nj-beaches:OC0142:beach_closure:2025-08-19"
+
+
+def test_an_epa_id_link_stands_where_the_two_name_the_water_at_different_scales(tmp_path, registry):
+    # BEACON names the water "Atlantic Ocean"; NJDEP names the bay-front station: the same beach by EPA's own id
+    _, _, recs = run_saved(tmp_path, registry)
+    nj = next(r for r in recs.values() if r["source_record_id"].startswith("723982"))
+    assert nj["waterbody_text"] == "Atlantic Ocean" and nj["raw"]["copy_of"]["by"] == "epa_beach_id"
+
+
+def test_michigans_four_central_time_counties_read_central_time():
+    assert B.beach_zone("MI", None, None, "MENOMINEE") == "America/Chicago"
+    assert B.beach_zone("MI", None, None, "Gogebic") == "America/Chicago"
+    assert B.beach_zone("MI", None, None, "WAYNE") == "America/New_York"
+    assert B.beach_zone("FL", 30.39, -87.27, "ESCAMBIA") == "America/Chicago"
+
+
+def test_record_ids_do_not_depend_on_other_rows_and_the_first_read_is_kept(tmp_path, registry):
+    _, _, recs = run_saved(tmp_path, registry)
+    keys = set(recs)
+    assert "710924-advisory" in keys and "729819-closure" in keys
+    assert {"721526-advisory", "721526-rain"} <= keys
+    first = recs["721526-advisory"]["raw"]["_first_seen_at"]
+    # a later pull without the rain row, from a copy of the reports: the advisory keeps its id and its first read
+    later = tmp_path / "later"
+    later.mkdir()
+    for f in FIX.glob("beach-actions*.csv"):
+        text = f.read_text()
+        if f.name == "beach-actions_2025.csv":
+            text = "\n".join(l for l in text.split("\n") if not ("721526" in l and "Rain Advisory" in l))
+        (later / f.name).write_text(text)
+    ev = tmp_path / "events"
+    (ev / f"{B.SOURCE_ID}.json").unlink()            # the events file lost: the first read comes from the saved state
+    B.run(["--from-dir", str(later), "--fetched-at", "2026-11-23T05:40:00Z"], now=NOW, events_dir=ev,
+          state_file=tmp_path / "state.json", registry_file=registry)
+    again = {r["source_record_id"]: r for r in json.loads((ev / f"{B.SOURCE_ID}.json").read_text())["records"]}
+    assert "721526-rain" not in again
+    assert again["721526-advisory"]["raw"]["_first_seen_at"] == first == READ
+
+
+def test_a_failed_pull_still_drops_a_link_whose_state_record_is_gone(tmp_path, registry):
+    run_saved(tmp_path, registry)
+    ev = tmp_path / "events"
+    nj = json.loads((ev / "nj-beaches.json").read_text())
+    nj["records"] = []
+    (ev / "nj-beaches.json").write_text(json.dumps(nj))
+    bad = FakeSession(main="Jurisdiction,Year,Something Else\nAL,2025,x\n")
+    code = B.run(["--force"], sess=bad, sleep=lambda s: None, now=NOW, events_dir=ev,
+                 state_file=tmp_path / "state.json", registry_file=registry)
+    doc = json.loads((ev / f"{B.SOURCE_ID}.json").read_text())
+    assert code == 1 and doc["ok"] is False and doc["count"] == 21
+    nj_recs = [r for r in doc["records"] if r["raw"]["jurisdiction"] == "NJ"]
+    assert nj_recs and all(r["duplicate_of"] is None for r in nj_recs)
+
+
+def test_the_link_step_after_the_state_feeds_relinks_without_the_network(tmp_path, registry):
+    ev = events_dir(tmp_path, with_state=False)
+    B.run(["--from-dir", str(FIX), "--fetched-at", READ], now=NOW, events_dir=ev, state_file=tmp_path / "s.json",
+          registry_file=registry)
+    before = json.loads((ev / f"{B.SOURCE_ID}.json").read_text())
+    assert not [r for r in before["records"] if r["duplicate_of"]]
+    for sid, f in json.loads((FIX / "state-records.json").read_text()).items():       # the state feeds run after
+        (ev / f"{sid}.json").write_text(json.dumps(f))
+    assert B.relink_only(events_dir=ev, state_file=tmp_path / "s.json", registry_file=registry) == 0
+    after = json.loads((ev / f"{B.SOURCE_ID}.json").read_text())
+    assert len([r for r in after["records"] if r["duplicate_of"]]) == 3
+    assert (after["ok"], after["last_ok_at"], after["fetched_at"]) == (before["ok"], before["last_ok_at"],
+                                                                      before["fetched_at"])
+    import re
+    make = (ROOT / "Makefile").read_text()
+    assert re.search(r"^INGEST_SNAPSHOTS = .*\bfed_beacon_beach_link\b", make, re.M)
+
+
+def test_a_detailed_report_that_lost_its_rows_or_a_report_of_another_year_is_a_failed_pull(tmp_path, registry):
+    main = (FIX / "beach-actions_2025.csv").read_text()
+    header = (FIX / "beach-actions-detail_2025.csv").read_text().split("\n", 1)[0] + "\n"
+    with pytest.raises(B.PullError):
+        B.check_year(2025, main, header)
+    with pytest.raises(B.PullError):
+        B.check_year(2026, main, (FIX / "beach-actions-detail_2025.csv").read_text())
+    B.check_year(2025, main, (FIX / "beach-actions-detail_2025.csv").read_text())       # the real pair passes
+
+
+def test_a_backfill_with_no_year_to_read_or_an_empty_report_reads_nothing_and_says_so(tmp_path, registry):
+    ev = events_dir(tmp_path)
+    code = B.run(["--backfill", "2025"], sess=FakeSession(), sleep=lambda s: None, now=NOW, events_dir=ev,
+                 state_file=tmp_path / "state.json", registry_file=registry)
+    assert code == 2 and not (ev / f"{B.SOURCE_ID}.json").exists()
+    empty = FakeSession(main=(FIX / "beach-actions_2025.csv").read_text().split("\n", 1)[0] + "\n",
+                        detail=(FIX / "beach-actions-detail_2025.csv").read_text().split("\n", 1)[0] + "\n")
+    code = B.run(["--backfill", "2024"], sess=empty, sleep=lambda s: None, now=NOW, events_dir=ev,
+                 state_file=tmp_path / "state.json", registry_file=registry)
+    doc = json.loads((ev / f"{B.SOURCE_ID}.json").read_text())
+    assert code == 1 and doc["ok"] is False
+
+
+def test_a_history_only_parent_never_lends_its_reason_either(tmp_path, registry):
+    _, _, recs = run_saved(tmp_path, registry)
+    pa = next(r for r in recs.values() if r["source_record_id"].startswith("728218"))
+    child = {"event_id": "x-state:2", "source_id": "il-idph-beachguard", "event_type": "beach_closure",
+             "parent_event_id": pa["event_id"], "raw": {"advisory_type": "Closure", "comment": None}}
+    by_id = {pa["event_id"]: pa, child["event_id"]: child}
+    S.annotate_beach_reasons([pa, child], by_id, {}, RULES)
+    assert child["_beach_reason"]["stated"] is False

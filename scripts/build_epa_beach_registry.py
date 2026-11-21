@@ -121,7 +121,7 @@ def criterion(r: dict) -> dict:
               "unit": blank(r.get("MeasureUnit"))})
     com = blank(r.get("Criteria Comments"))
     if com and not NO_COMMENT.match(com):
-        c["comment"] = com
+        c["comment"] = B.scrub(com)             # the state's free text, scrubbed as the beach comments are
     return c
 
 

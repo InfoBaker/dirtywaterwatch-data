@@ -273,7 +273,7 @@ FIXTURES ?= 0
 FIXTURE_FLAG = $(if $(filter 1 yes true,$(FIXTURES)),--fixtures,) $(if $(filter 1 yes true,$(NHDES)),--include-nhdes,)
 INGEST_SKIP ?= outfalls waters_extra waters_from_nhd   # waters_from_nhd runs as waters-nhd (INGEST_EXTRA), with a budget
 INGEST_PRE = nj_outfalls             # registries the feeds join (not feeds), run before them
-INGEST_SNAPSHOTS = nj_cso_likely tx_houston_tceq_link   # snapshots read by build/ and links across feeds (not feeds), run after them
+INGEST_SNAPSHOTS = nj_cso_likely tx_houston_tceq_link fed_beacon_beach_link   # snapshots read by build/ and links across feeds (not feeds), run after them
 INGEST_EXTRA = waters-nhd conditions rainfall   # not feeds (no events file), run after them
 # the NHD receiving-water build in the hourly run: new targets from this hour's reports, within a time budget (it stops
 # before a request, writes what it built merged into data/waters-nhd.json, and the next run resumes from data/raw's

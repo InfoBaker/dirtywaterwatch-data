@@ -3347,7 +3347,7 @@ def annotate_beach_reasons(events: list[dict], by_id: dict, duplicates: dict, ru
             if v["stated"] is not False:
                 continue
             par = by_id[eid].get("parent_event_id")
-            if par and par != eid and good(cur.get(par)):
+            if par and par != eid and good(cur.get(par)) and not history_only_rule(by_id.get(par) or {}, rules):
                 cur[eid] = {**cur[par], "how": "parent", "parent": par}
                 changed = True
                 continue
