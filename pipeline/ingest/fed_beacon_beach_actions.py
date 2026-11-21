@@ -628,7 +628,7 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
     if args.backfill:
         years = list(range(args.backfill, years[0]))
     last = _t(state.get("pulled_at"))
-    due = bool(args.force or args.backfill or args.from_dir or last is None
+    due = bool(args.force or args.backfill or args.from_dir or last is None or not out_path.exists()
                or now - last >= timedelta(hours=MIN_HOURS))
     pulled, failed, counts = {}, [], Counter()
     if due:
@@ -659,6 +659,8 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
         write_json(state_file, state)
     prev = (read_json(out_path, {}) or {}).get("records") or []
     records, meta = build(state, load_registry(registry_file), load_files(events_dir), prev)
+    if counts:
+        meta["this_pull"] = dict(sorted(counts.items()))
     if failed:
         meta["years_not_read"] = failed
     if due:
