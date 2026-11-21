@@ -1,0 +1,148 @@
+{
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 242,
+    "STATION": 27,
+    "COUNTY": "ONSLOW",
+    "TIER": 2,
+    "LATITUDE": 34.6848326804,
+    "LONGITUDE": -77.1232351803,
+    "EFFECTIVE": 2003,
+    "EPA_ID": "NC892318",
+    "StationID": "27A",
+    "GlobalID": "{2F9D7D34-544B-485E-83D0-6F7858BB12EE}",
+    "Status": "No Alert",
+    "Data": "https://xapps.ncdenr.org/mf/beaches/smplData.do?parm.siteId=C27A&parm.county=133&parm.tierClass=-1",
+    "ASN": "C27A",
+    "ASN2": "C27A",
+    "DESCRIPTIO": "Wards Shore Access in Swansboro",
+    "LOCATION": "sound"
+   },
+   "geometry": {
+    "x": -77.12323727410859,
+    "y": 34.68483957197663
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 258,
+    "STATION": 48,
+    "COUNTY": "CARTERET",
+    "TIER": 2,
+    "LATITUDE": 34.7185065475,
+    "LONGITUDE": -76.724400172,
+    "EFFECTIVE": 2008,
+    "EPA_ID": "NC727802",
+    "StationID": "48C",
+    "GlobalID": "{80F83608-96D9-4FE7-8C37-277B9C6272A9}",
+    "Status": "No Alert",
+    "Data": "https://xapps.ncdenr.org/mf/beaches/smplData.do?parm.siteId=C48C&parm.county=031&parm.tierClass=-1",
+    "ASN": "C48C",
+    "ASN2": "C48C",
+    "DESCRIPTIO": "Drain Pipe at 16th street in MHC",
+    "LOCATION": "sound"
+   },
+   "geometry": {
+    "x": -76.72440214597512,
+    "y": 34.71851345939267
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 306,
+    "STATION": 14,
+    "COUNTY": "DARE",
+    "TIER": 1,
+    "LATITUDE": 36.0142046701,
+    "LONGITUDE": -75.6546370908,
+    "EFFECTIVE": 2001,
+    "EPA_ID": "NC148512",
+    "StationID": "14A",
+    "GlobalID": "{0687EBA9-E6D0-4506-B244-5CFFAB40F3AD}",
+    "Status": "No Alert",
+    "Data": "https://xapps.ncdenr.org/mf/beaches/smplData.do?parm.siteId=N14A&parm.county=055&parm.tierClass=-1",
+    "ASN": "N14A",
+    "ASN2": "N14A",
+    "DESCRIPTIO": "Drain Pipe at Oregon St in KDH",
+    "LOCATION": "ocean"
+   },
+   "geometry": {
+    "x": -75.65463879920993,
+    "y": 36.01421190034474
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 307,
+    "STATION": 15,
+    "COUNTY": "DARE",
+    "TIER": 1,
+    "LATITUDE": 35.9984826297,
+    "LONGITUDE": -75.6457437706,
+    "EFFECTIVE": 1997,
+    "EPA_ID": "NC701853",
+    "StationID": "15",
+    "GlobalID": "{79DBF6B3-14BC-4966-863A-B69A7668A1D5}",
+    "Status": "Precautionary",
+    "Data": "https://xapps.ncdenr.org/mf/beaches/smplData.do?parm.siteId=N15&parm.county=055&parm.tierClass=-1",
+    "ASN": "N15",
+    "ASN2": "N15",
+    "DESCRIPTIO": "Drain Pipe at Lake Dr. in KDH",
+    "LOCATION": "ocean"
+   },
+   "geometry": {
+    "x": -75.64574547547328,
+    "y": 35.99848985685721
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 344,
+    "STATION": 88,
+    "COUNTY": "DARE",
+    "TIER": 1,
+    "LATITUDE": 35.9522873902,
+    "LONGITUDE": -75.6329643497,
+    "EFFECTIVE": 1997,
+    "EPA_ID": "NC981058",
+    "StationID": "88",
+    "GlobalID": "{5B604440-2F32-40A6-ABC7-E294F346C0E8}",
+    "Status": "Advisory",
+    "Data": "https://xapps.ncdenr.org/mf/beaches/smplData.do?parm.siteId=N88&parm.county=055&parm.tierClass=-1",
+    "ASN": "N88",
+    "ASN2": "N88",
+    "DESCRIPTIO": "Jockey's Ridge Soundside Access",
+    "LOCATION": "sound"
+   },
+   "geometry": {
+    "x": -75.63296604841798,
+    "y": 35.95229460774291
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 403,
+    "STATION": 43,
+    "COUNTY": "BRUNSWICK",
+    "TIER": 2,
+    "LATITUDE": 33.9173184604,
+    "LONGITUDE": -78.0161067097,
+    "EFFECTIVE": 2004,
+    "EPA_ID": "NC642348",
+    "StationID": "43A",
+    "GlobalID": "{DAEDE92C-D8B4-4C80-922B-15208A15158F}",
+    "Status": "No Alert",
+    "Data": "https://xapps.ncdenr.org/mf/beaches/smplData.do?parm.siteId=S43A&parm.county=019&parm.tierClass=-1",
+    "ASN": "S43A",
+    "ASN2": "S43A",
+    "DESCRIPTIO": "Southport municipal pier",
+    "LOCATION": "sound"
+   },
+   "geometry": {
+    "x": -78.01610903791136,
+    "y": 33.91732515256692
+   }
+  }
+ ]
+}

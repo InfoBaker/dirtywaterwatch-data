@@ -1,0 +1,119 @@
+{
+ "objectIdFieldName": "OBJECTID",
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 1494,
+    "ACTIVITY_ID": null,
+    "BEACH_ID": "NC642348",
+    "STATE_ID": "S43A",
+    "PUBLIC_DESCRIPTION": "Southport municipal pier",
+    "FIPS_COUNTY_DESC": "BRUNSWICK",
+    "ACTIVITY_NAME": "S43A_Pending2026-10-14",
+    "ACTIVITY_CODE": "Pending",
+    "START_DATE": 1791995820000,
+    "END_DATE": 1792084966000,
+    "ACTIVITY_STATION": "21NCBCH|S43A",
+    "REASON": "ELEV_BACT",
+    "INDICATOR": "ENTERO",
+    "EditDate": 1792084968152,
+    "GlobalID": "d2950a2b-8863-4b89-858e-f79d7e6ab1ed"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 1493,
+    "ACTIVITY_ID": null,
+    "BEACH_ID": "NC727802",
+    "STATE_ID": "C48C",
+    "PUBLIC_DESCRIPTION": "Drain Pipe at 16th street in MHC",
+    "FIPS_COUNTY_DESC": "CARTERET",
+    "ACTIVITY_NAME": "C48C_Posting2026-10-13",
+    "ACTIVITY_CODE": "CONTAM_ADV",
+    "START_DATE": 1791913320000,
+    "END_DATE": 1793101740000,
+    "ACTIVITY_STATION": "21NCBCH|C48C",
+    "REASON": "ELEV_BACT",
+    "INDICATOR": "ENTERO",
+    "EditDate": 1793101780229,
+    "GlobalID": "e418e4e0-d472-4aa7-b671-2ab359baf03e"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 1481,
+    "ACTIVITY_ID": null,
+    "BEACH_ID": "NC981058",
+    "STATE_ID": "N88",
+    "PUBLIC_DESCRIPTION": "Jockey's Ridge Soundside Access",
+    "FIPS_COUNTY_DESC": "DARE",
+    "ACTIVITY_NAME": "N88_Posting2026-09-29",
+    "ACTIVITY_CODE": "CONTAM_ADV",
+    "START_DATE": 1790267700000,
+    "END_DATE": 1793465765000,
+    "ACTIVITY_STATION": "21NCBCH|N88",
+    "REASON": "ELEV_BACT",
+    "INDICATOR": "ENTERO",
+    "EditDate": 1793707819454,
+    "GlobalID": "48b184ee-569b-4f83-92c9-45c93338025e"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 1462,
+    "ACTIVITY_ID": null,
+    "BEACH_ID": "NC701853",
+    "STATE_ID": "N15",
+    "PUBLIC_DESCRIPTION": "Drain Pipe at Lake Dr. in KDH",
+    "FIPS_COUNTY_DESC": "DARE",
+    "ACTIVITY_NAME": "N15_Pending2026-09-24",
+    "ACTIVITY_CODE": "Pending",
+    "START_DATE": 1790262480000,
+    "END_DATE": 1790699920000,
+    "ACTIVITY_STATION": "21NCBCH|N15",
+    "REASON": "ELEV_BACT",
+    "INDICATOR": "ENTERO",
+    "EditDate": 1790699921161,
+    "GlobalID": "2e4b7047-a11e-45d8-9c61-d5d8674044e5"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 1386,
+    "ACTIVITY_ID": null,
+    "BEACH_ID": "NC727802",
+    "STATE_ID": "C48C",
+    "PUBLIC_DESCRIPTION": "Drain Pipe at 16th street in MHC",
+    "FIPS_COUNTY_DESC": "CARTERET",
+    "ACTIVITY_NAME": "C48C_Posting2025-08-12",
+    "ACTIVITY_CODE": "CONTAM_ADV",
+    "START_DATE": 1755021600000,
+    "END_DATE": 1754768460000,
+    "ACTIVITY_STATION": "21NCBCH|C48C",
+    "REASON": "ELEV_BACT",
+    "INDICATOR": "ENTERO",
+    "EditDate": 1768224516445,
+    "GlobalID": "a3fe4f26-daf5-4342-86e9-24f04978626c"
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 1017,
+    "ACTIVITY_ID": 781,
+    "BEACH_ID": "NC892318",
+    "STATE_ID": "C27A",
+    "PUBLIC_DESCRIPTION": "Wards Shore Public Access off South Waters St. - Swansboro",
+    "FIPS_COUNTY_DESC": "Onslow",
+    "ACTIVITY_NAME": "C27A_SSM_POSTING20091016",
+    "ACTIVITY_CODE": "CONTAM_ADV",
+    "START_DATE": 1255693801000,
+    "END_DATE": 1255780201000,
+    "ACTIVITY_STATION": "21NCBCH|C27A",
+    "REASON": "ELEV_BACT",
+    "INDICATOR": "ENTERO",
+    "EditDate": 1761047901920,
+    "GlobalID": "eaeea743-1b0b-4d92-8bcc-5dafbdf2f36c"
+   }
+  }
+ ]
+}

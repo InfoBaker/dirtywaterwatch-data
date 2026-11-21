@@ -217,6 +217,78 @@ def test_the_same_status_on_a_later_run_is_reconfirmed_not_duplicated():
     assert a["started_at"] == "2026-09-03T14:50:03-04:00" and a["source_updated_at"] == "2026-11-05T09:00:00-05:00"
 
 
+# ---------------------------------------------------------------- the PUBLICVIEW service (own-fixes 2026-11-21)
+# The Swim Guide review: the feed read the 2022 layer (RWQ_Advisory_EXTERNAL), which on 2026-11-21 still showed N88 as
+# an advisory DMF ended on 2026-10-31; DMF's dashboard reads PUBLICVIEWRecreationWaterQualityDatabase. Trimmed real
+# fixtures of both, read 2026-11-21: six stations, six activities (one with its end typed before its start).
+
+PV_AT = "2026-11-21T15:00:00Z"
+
+
+def pv(prev=()):
+    feats = json.loads((FIX / "nc_pv_stations.json").read_text())["features"]
+    meta = json.loads((FIX / "nc_pv_stations_meta.json").read_text())
+    acts = [f["attributes"] for f in json.loads((FIX / "nc_pv_activity.json").read_text())["features"]]
+    tmeta = json.loads((FIX / "nc_pv_activity_meta.json").read_text())
+    return R.build(feats, meta, PV_AT, list(prev), activities=acts, table_meta=tmeta)
+
+
+def old_2022():
+    feats = json.loads((FIX / "nc_rwq2022_stations.json").read_text())["features"]
+    meta = json.loads((FIX / "nc_rwq2022_meta.json").read_text())
+    return R.build(feats, meta, "2026-11-20T15:00:00Z", [])[0]
+
+
+def test_the_feed_reads_the_publicview_service():
+    assert "PUBLICVIEWRecreationWaterQualityDatabase/FeatureServer/0" in R.LAYER and R.TABLE.endswith("/FeatureServer/2")
+    assert "RWQ_Advisory_EXTERNAL" not in R.LAYER
+    assert not {"Creator", "Editor"} & set(R.FIELDS + R.ACTIVITY_FIELDS)
+
+
+def test_dmfs_activities_are_records_with_dmfs_own_start_and_end():
+    recs, stats = pv()
+    by = {r["source_record_id"]: r for r in recs}
+    n88 = by["N88_Posting2026-09-29"]
+    assert n88["event_type"] == "beach_advisory" and n88["status"] == "advisory_lifted"
+    assert n88["started_at"] == "2026-09-24T12:35:00-04:00" and n88["ended_at"] == "2026-10-31T12:56:05-04:00"
+    assert n88["time_precision"] == "minute" and n88["raw"]["_kind"] == "activity" and n88["raw"]["_reason"] == "elevated bacteria"
+    assert "Division of Marine Fisheries' own" in n88["raw"]["_date_basis"] and n88["lat"] is not None
+    assert n88["waterbody_text"] == "Jockey's Ridge Soundside Access (estuary)" and "200'" in n88["advice_text"]
+    pend = by["S43A_Pending2026-10-14"]
+    assert pend["raw"]["_status_code"] == "Pending Swimming Advisory" and pend["status"] == "advisory_lifted"
+    old = by["C27A_SSM_POSTING20091016"]
+    assert old["started_at"].startswith("2009-10-16") and old["status"] == "advisory_lifted"
+    bad = by["C48C_Posting2025-08-12"]                 # the end typed before the start: not used, said so
+    assert bad["ended_at"] is None and bad["status"] == "unknown" and "before" in bad["parse_error"]
+    assert stats["activities"] == 6 and stats["activities_open"] == 0
+
+
+def test_precautionary_spells_still_come_from_the_station_status():
+    recs, stats = pv()
+    pre = [r for r in recs if r["raw"].get("_status_code") == "Precautionary"]
+    assert sorted(r["raw"]["ASN"] for r in pre) == ["N14A", "N15"]
+    n14a = next(r for r in pre if r["raw"]["ASN"] == "N14A")      # dated by the station row's own last edit
+    assert n14a["event_type"] == "rain_advisory" and n14a["started_at"] == "2026-09-29T11:50:45-04:00"
+    assert "station row's last edit" in n14a["raw"]["_start_basis"]
+    assert {t["station"] for t in stats["tracked"]} == {"C27A", "C48C", "N88", "S43A"}     # "No Advisory" is no event
+
+
+def test_the_2022_layers_records_keep_their_ids_or_point_to_dmfs_record():
+    first = old_2022()
+    by_old = {r["source_record_id"]: r for r in first}
+    adv = next(k for k, r in by_old.items() if r["raw"]["ASN"] == "N88")
+    pre = next(k for k, r in by_old.items() if r["raw"]["ASN"] == "N15")
+    recs, stats = pv(first)
+    by = {r["source_record_id"]: r for r in recs}
+    a = by[adv]                                         # the stale 2022 advisory: DMF's activity record replaces it
+    assert a["duplicate_of"] == by["N88_Posting2026-09-29"]["event_id"]
+    assert a["raw"]["_superseded_by_activity"] == "N88_Posting2026-09-29"
+    p = by[pre]                                         # the precautionary spell continues under the same id
+    assert p["status"] == "advisory_active" and p["duplicate_of"] is None and p["raw"]["_last_seen_at"] == PV_AT
+    assert sum(1 for r in recs if r["raw"].get("ASN") == "N15" and r["raw"].get("_status_code") == "Precautionary") == 1
+    assert stats["superseded"] == 1 and stats["open"] == 2
+
+
 # ---------------------------------------------------------------- algal bloom reports
 
 def test_bloom_reports_are_unconfirmed_bloom_records_and_fish_kills_alone_are_not_events():
