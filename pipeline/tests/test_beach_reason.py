@@ -340,3 +340,17 @@ def test_the_charts_count_an_update_with_its_parents_reason_as_the_status_build_
     lift = effective.get(recs[1]["event_id"], recs[1])
     assert lift["_beach_reason"]["how"] == "parent"
     assert C.red_intervals(lift, "MD", datetime(2026, 6, 5, 12, tzinfo=UTC), __import__("collections").Counter(), rules=RULES)
+
+
+def test_delawares_map_label_of_a_current_advisory_is_its_water_quality_advisory():
+    """DNREC's Recreational Water Program map (ingest/de_dnrec_recwater.py CODES): a station under "Monitoring – Current
+    Advisory" is under the programme's water-quality advisory (its codes are monitoring states, among them "Resampling
+    Enterococcus Spike"), so the map's record keeps its colour; a closure whose own reason is "End of Sampling Season" or
+    "Other", with no comment, is listed."""
+    m = {"source_id": "de-dnrec-recreational-water", "event_type": "beach_advisory",
+         "raw": {"current_advisory_label": "Monitoring – Current Advisory"}}
+    v = BR.judge(m, RULES)
+    assert v["stated"] is True and v["how"] == "program_value" and "water-quality" in v["basis"]
+    c = {"source_id": "de-dnrec-recreational-water", "event_type": "beach_closure", "advice_text": None,
+         "raw": {"advisory_type": "Recreational Water Closure", "advisory_reason": "End of Sampling Season"}}
+    assert BR.judge(c, RULES)["stated"] is False

@@ -12,6 +12,8 @@ Each beach source has one entry under `sources`, by the event's source_id:
     record keeps its colour;
   - kind "fields": the record's own fields (`fields`, paths into raw; "event.<field>" reads the record itself, "[]"
     walks a list) are read, and a match of `reason_pattern` there is the stated reason; no match: listed only;
+    `program_values` names values of a field that the source's programme defines as its water-quality advisory
+    (`program_basis`);
     `records` names a record whose reason the source states elsewhere (its own words, cited);
   - kind "none": the source gives no reason for any record (listed only).
 A record linked to another as its duplicate (status.find_duplicates, an ingester's duplicate_of) lends its stated
@@ -82,6 +84,11 @@ def judge(ev: dict, rules: dict | None) -> dict | None:
         rec = (ent.get("records") or {}).get(str(ev.get("source_record_id")))
         if isinstance(rec, dict):
             return {"stated": True, "how": "record", "basis": rec.get("basis"), "source": rec.get("source")}
+        # a value the source's own programme defines as its water-quality advisory (Delaware's map label of a current
+        # advisory): stated by the programme, its words in program_basis
+        for path, values in (ent.get("program_values") or {}).items():
+            if any(" ".join(t.split()) in values for t in field_texts(ev, path)):
+                return {"stated": True, "how": "program_value", "field": path, "basis": ent.get("program_basis")}
         pat = _pattern(cfg.get("reason_pattern") or r"(?!x)x")
         for path in ent.get("fields") or []:
             for text in field_texts(ev, path):

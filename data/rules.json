@@ -879,7 +879,7 @@
    },
    "ca-sfpuc-beach-map": {
     "kind": "program",
-    "basis": "SFPUC posts a beach when “Concentrations of bacteria were elevated at this location within the past 24 hours or a combined sewer discharge has recently occurred at this site.”"
+    "basis": "SFPUC posts a beach when “Concentrations of bacteria were elevated at this location within the past 24 hours” or a combined sewer discharge has recently occurred there."
    },
    "de-dnrec-recreational-water": {
     "kind": "fields",
@@ -890,6 +890,12 @@
      "current_advisory_label",
      "event.advice_text"
     ],
+    "program_values": {
+     "current_advisory_label": [
+      "Monitoring – Current Advisory"
+     ]
+    },
+    "program_basis": "DNREC's Recreational Water Program map marks a sampling station \"Monitoring – Current Advisory\" while the programme's water-quality advisory is in effect there; the map's other codes are its monitoring states (no current advisory, outside the advisory area, resampling an enterococcus spike, not sampling in winter).",
     "read": "DNREC's notice type, reason, description and comment, or its map's label"
    },
    "fl-doh-beaches": {
