@@ -58,11 +58,20 @@ def test_times_are_central_wall_clock_and_received_time_from_the_live_layer():
     assert recs["SSO-00000285"]["reported_at"] is None and recs["SSO-00000285"]["published_at"] is None
 
 
-def test_ongoing_kept_as_adem_marks_it_with_its_age():
+class _ReadClock(S.datetime):
+    """The module's clock at the fixtures' read (AT): the age of an ongoing report is counted to it on any day."""
+    @classmethod
+    def now(cls, tz=None):
+        t = S.datetime(2026, 11, 7, 14, 0, tzinfo=S.UTC)
+        return t.astimezone(tz) if tz else t.replace(tzinfo=None)
+
+
+def test_ongoing_kept_as_adem_marks_it_with_its_age(monkeypatch):
+    monkeypatch.setattr(S, "datetime", _ReadClock)
     recs, stats = _build()
     r = recs["SSO-00008447"]
     assert r["status"] == "ongoing" and r["ended_at"] is None and r["started_at"].startswith("2018-03-18T17:00")
-    assert r["raw"]["_ongoing_days"] > 3000
+    assert r["raw"]["_ongoing_days"] > 3000 and r["raw"]["_ongoing_days"] == 3155   # 2018-03-18 17:00 to the read
     assert stats["by_status"]["ongoing"] == 2      # 8447 and SSO-00212910 (Dallas County, influent lift station)
 
 
