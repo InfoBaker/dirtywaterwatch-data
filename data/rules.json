@@ -1052,7 +1052,7 @@
     "kind": "program",
     "basis": "SCDES: “Long-term swimming advisories ... are issued for beach water monitoring locations that have an increased possibility of high bacteria levels”; a short-term advisory follows two results above 104 per 100 mL, or one above 500."
    },
-   "sc-des-freshwater-swim-advisories": {"kind": "program", "basis": "SCDES publishes these river and lake sites in its \u201cWater Advisories\u201d service, in the layer titled \u201cSwimming Advisory\u201d: the state environmental agency's advisory against swimming at the site. The layer gives no further reason, date or status; the advisory itself concerns the water, so the site keeps the authority's colour (erring on safety, coordinator 2026-11-21; the owner may list them instead)."},
+   "sc-des-freshwater-swim-advisories": {"kind": "program", "basis": "SCDES publishes these river and lake sites in its \u201cWater Advisories\u201d service, in the layer titled \u201cSwimming Advisory\u201d: the state environmental agency's advisory against swimming at the site. The layer gives no further reason, date or status; the advisory itself concerns the water, so we keep the agency's colour."},
    "tn-tdec-bacteriological-advisories": {
     "kind": "program",
     "basis": "TDEC's list of bacteriological advisories: “streams and lakes with high levels of bacteria or other contaminants are not suitable for recreational activities such as swimming or wading”."
