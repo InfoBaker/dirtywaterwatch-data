@@ -24,10 +24,16 @@ SAT = datetime(2026, 11, 21, 15, 7, tzinfo=timezone.utc)
 SENTINEL = "RECORD-TEXT-SENTINEL"                  # in every record: never in anything printed or written by the guard
 
 WRANGLER = r"""#!/bin/sh
-# stand-in: wrangler r2 object put BUCKET/KEY --file F --remote, objects kept under $FAKE_R2
+# stand-in: wrangler r2 object get|put BUCKET/KEY --file F --remote, objects kept under $FAKE_R2
 key="${4#*/}"
-case " $FAKE_R2_FAIL_PUT " in *" $key "*) echo "X [ERROR] upload failed"; exit 1 ;; esac
-mkdir -p "$FAKE_R2/$(dirname "$key")"; cp "$6" "$FAKE_R2/$key"; echo "$key" >> "$FAKE_R2/.puts"
+case "$3" in
+  get)
+    [ -f "$FAKE_R2/$key" ] || { : > "$6"; echo "X [ERROR] The specified key does not exist."; exit 1; }
+    cp "$FAKE_R2/$key" "$6"; echo "$key" >> "$FAKE_R2/.gets" ;;
+  put)
+    case " $FAKE_R2_FAIL_PUT " in *" $key "*) echo "X [ERROR] upload failed"; exit 1 ;; esac
+    mkdir -p "$FAKE_R2/$(dirname "$key")"; cp "$6" "$FAKE_R2/$key"; echo "$key" >> "$FAKE_R2/.puts" ;;
+esac
 """
 
 
@@ -228,17 +234,29 @@ def test_daily_ring_key_by_weekday():
         assert SP.GENERATION_KEY.fullmatch(k) and SP.STATE_KEY.fullmatch(k)
 
 
-def run_day(rec_path: Path, src: Path, now: datetime, run: str) -> tuple[list[str], int]:
+def run_day(rec_path: Path, src: Path, now: datetime, run: str) -> tuple[list[str], list[str]]:
+    """One run's two calls: plan before the archive, put after the save. (planned keys, copies made)."""
     planned = SP.generations_plan(rec_path, run, now)
     return planned, SP.generations_put(src, rec_path, run, now)
+
+
+def gets(bucket: Path) -> list[str]:
+    p = bucket / ".gets"
+    return p.read_text().split() if p.exists() else []
 
 
 def test_monthly_once_a_month_and_daily_once_a_day(tmp_path, r2):
     rec, src = tmp_path / "state-generations.json", tmp_path / "build.tar.gz"
     src.write_bytes(b"archive")
-    assert run_day(rec, src, SAT, "1") == (["state/daily/build-Sat.tar.gz", "state/monthly/build-2026-11.tar.gz"],
-                                          SP.FETCHED)
-    assert run_day(rec, src, SAT + timedelta(hours=7), "2") == ([], SP.NOTHING)          # same day: none
+    both = ["state/daily/build-Sat.tar.gz", "state/monthly/build-2026-11.tar.gz"]
+    assert run_day(rec, src, SAT, "1") == (both, both)
+    assert puts(r2) == ["state/daily/build-Sat.tar.gz", "state/daily/build-Sat.json",
+                        "state/monthly/build-2026-11.tar.gz", "state/monthly/build-2026-11.json"]
+    assert json.loads((r2 / "state/monthly/build-2026-11.json").read_text()) == {
+        "key": "state/monthly/build-2026-11.tar.gz", "date": "2026-11-21", "run": "1",
+        "made_at": "2026-11-21T15:07:00Z", "bytes": 7}
+    assert run_day(rec, src, SAT + timedelta(hours=7), "2") == ([], [])       # same day: recorded, none due
+    assert gets(r2) == ["state/daily/build-Sat.json", "state/monthly/build-2026-11.json"]
     assert run_day(rec, src, datetime(2026, 11, 22, 0, 7, tzinfo=timezone.utc), "3")[0] == \
         ["state/daily/build-Sun.tar.gz"]
     assert run_day(rec, src, datetime(2026, 11, 30, 23, 7, tzinfo=timezone.utc), "4")[0] == \
@@ -247,45 +265,82 @@ def test_monthly_once_a_month_and_daily_once_a_day(tmp_path, r2):
         ["state/daily/build-Tue.tar.gz", "state/monthly/build-2026-12.tar.gz"]
     # a week on, the ring key is overwritten; the monthly keys stay
     assert run_day(rec, src, SAT + timedelta(days=7), "6")[0] == ["state/daily/build-Sat.tar.gz"]
+    SP.generations_plan(rec, "7", SAT + timedelta(days=7, hours=1))
     r = json.loads(rec.read_text())
-    assert r["daily"]["Sat"] == {"date": "2026-11-28", "run": "6", "made_at": "2026-11-28T15:07:00Z"}
+    assert r["daily"]["Sat"] == {"date": "2026-11-28", "run": "6"}
     assert sorted(r["monthly"]) == ["2026-11", "2026-12"] and "pending" not in r
     assert puts(r2).count("state/monthly/build-2026-11.tar.gz") == 1
 
 
-def test_a_failed_generation_upload_is_not_recorded_and_the_next_run_makes_it(tmp_path, r2, monkeypatch, capsys):
+def test_a_failed_copy_is_not_recorded_and_the_next_run_makes_it(tmp_path, r2, monkeypatch, capsys):
     rec, src = tmp_path / "state-generations.json", tmp_path / "build.tar.gz"
     src.write_bytes(b"archive")
     monkeypatch.setenv("FAKE_R2_FAIL_PUT", "state/daily/build-Sat.tar.gz")
-    assert run_day(rec, src, SAT, "1")[1] == SP.FETCHED                        # the monthly went through
+    assert run_day(rec, src, SAT, "1")[1] == ["state/monthly/build-2026-11.tar.gz"]
     assert "::warning::state generation state/daily/build-Sat.tar.gz was not uploaded" in capsys.readouterr().out
-    r = json.loads(rec.read_text())
-    assert "Sat" not in r.get("daily", {}) and "2026-11" in r["monthly"]
+    assert "state/daily/build-Sat.json" not in puts(r2)                      # no marker for a copy that failed
     monkeypatch.setenv("FAKE_R2_FAIL_PUT", "")
-    assert run_day(rec, src, SAT + timedelta(hours=1), "2") == (["state/daily/build-Sat.tar.gz"], SP.FETCHED)
+    assert run_day(rec, src, SAT + timedelta(hours=1), "2") == (["state/daily/build-Sat.tar.gz"],
+                                                                ["state/daily/build-Sat.tar.gz"])
+    r = json.loads(rec.read_text())
+    assert "Sat" not in r.get("daily", {}) and r["monthly"]["2026-11"]["run"] == "1"
+    SP.generations_plan(rec, "3", SAT + timedelta(hours=2))
     assert json.loads(rec.read_text())["daily"]["Sat"]["run"] == "2"
+
+
+def test_a_failed_marker_leaves_the_copy_unrecorded_and_it_is_made_again(tmp_path, r2, monkeypatch, capsys):
+    rec, src = tmp_path / "state-generations.json", tmp_path / "build.tar.gz"
+    src.write_bytes(b"archive")
+    monkeypatch.setenv("FAKE_R2_FAIL_PUT", "state/daily/build-Sat.json")
+    assert run_day(rec, src, SAT, "1")[1] == ["state/monthly/build-2026-11.tar.gz"]
+    assert "uploaded but its marker state/daily/build-Sat.json did not" in capsys.readouterr().out
+    monkeypatch.setenv("FAKE_R2_FAIL_PUT", "")
+    assert run_day(rec, src, SAT + timedelta(hours=1), "2")[0] == ["state/daily/build-Sat.tar.gz"]
+
+
+def test_a_marker_from_an_earlier_week_records_nothing(tmp_path, r2):
+    """Last week's marker is still at the ring key: a pending copy of this week whose upload failed is not taken for
+    it."""
+    rec, src = tmp_path / "state-generations.json", tmp_path / "build.tar.gz"
+    src.write_bytes(b"archive")
+    (r2 / "state/daily").mkdir(parents=True)
+    (r2 / "state/daily/build-Sat.json").write_text(json.dumps(
+        {"key": "state/daily/build-Sat.tar.gz", "date": "2026-11-14", "run": "1"}))
+    SP.generations_plan(rec, "9", SAT)                                       # pending, its upload never made
+    SP.generations_plan(rec, "10", SAT + timedelta(hours=1))
+    r = json.loads(rec.read_text())
+    assert "Sat" not in r.get("daily", {}) and r["pending"]["run"] == "10"
+    assert [g["key"] for g in r["pending"]["copies"]][0] == "state/daily/build-Sat.tar.gz"
 
 
 def test_when_every_upload_fails_nothing_is_recorded_and_both_are_due_again(tmp_path, r2, monkeypatch):
     rec, src = tmp_path / "state-generations.json", tmp_path / "build.tar.gz"
     src.write_bytes(b"archive")
     monkeypatch.setenv("FAKE_R2_FAIL_PUT", "state/daily/build-Sat.tar.gz state/monthly/build-2026-11.tar.gz")
-    assert run_day(rec, src, SAT, "1")[1] == SP.NOTHING                        # no second save needed
-    r = json.loads(rec.read_text())
-    assert not r.get("daily") and not r.get("monthly")
-    assert len(SP.generations_due(r, SAT + timedelta(hours=1))) == 2
+    assert run_day(rec, src, SAT, "1")[1] == []
+    monkeypatch.setenv("FAKE_R2_FAIL_PUT", "")
+    assert len(SP.generations_plan(rec, "2", SAT + timedelta(hours=1))) == 2
 
 
 def test_the_plan_claims_nothing_and_a_plan_from_another_run_is_not_put(tmp_path, r2):
     """The record saved in the archive (written by plan) names no copy; a pending plan restored from an earlier run
-    (whose second save failed) is never uploaded by this run's put."""
+    is never uploaded by this run's put."""
     rec, src = tmp_path / "state-generations.json", tmp_path / "build.tar.gz"
     src.write_bytes(b"archive")
     SP.generations_plan(rec, "1", SAT)
     r = json.loads(rec.read_text())
     assert r["pending"]["run"] == "1" and not r.get("daily") and not r.get("monthly")
     assert SP.generations_due(r, SAT) != []                                     # still due by the record
-    assert SP.generations_put(src, rec, "2", SAT) == SP.NOTHING and puts(r2) == []
+    assert SP.generations_put(src, rec, "2", SAT) == [] and puts(r2) == []
+
+
+def test_a_marker_that_cannot_be_read_records_nothing(tmp_path, monkeypatch):
+    """No wrangler at all (or R2 down): the earlier run's copies stay unrecorded and are due again."""
+    monkeypatch.setenv("WRANGLER", str(tmp_path / "not-installed"))
+    monkeypatch.setenv("STATE_FETCH_RETRY_S", "0")
+    rec = tmp_path / "state-generations.json"
+    SP.generations_plan(rec, "1", SAT)
+    assert len(SP.generations_plan(rec, "2", SAT + timedelta(hours=1))) == 2
 
 
 def test_generations_cli(tmp_path, r2, monkeypatch, capsys):
@@ -298,9 +353,11 @@ def test_generations_cli(tmp_path, r2, monkeypatch, capsys):
     assert SP.main(["generations", "put", "--record", str(rec)]) == 2         # no archive named
     src = tmp_path / "build.tar.gz"
     src.write_bytes(b"archive")
-    assert SP.main(["generations", "put", str(src), "--record", str(rec)]) == 0
-    assert puts(r2) == ["state/daily/build-Sat.tar.gz", "state/monthly/build-2026-11.tar.gz"]
-    assert SP.main(["generations", "put", str(src), "--record", str(rec)]) == SP.NOTHING
+    monkeypatch.setenv("FAKE_R2_FAIL_PUT", "state/daily/build-Sat.tar.gz")
+    assert SP.main(["generations", "put", str(src), "--record", str(rec)]) == 0   # a failed copy: a warning only
+    assert puts(r2) == ["state/monthly/build-2026-11.tar.gz", "state/monthly/build-2026-11.json"]
+    monkeypatch.setenv("GITHUB_RUN_ID", "89")
+    assert SP.main(["generations", "put", str(src), "--record", str(rec)]) == 0   # nothing planned by this run
     assert SP.main(["generations", "plan", "--record", str(rec), "--run-id", "../x"]) == 2
 
 
@@ -310,7 +367,8 @@ def test_generations_cli(tmp_path, r2, monkeypatch, capsys):
                                  "state/daily/build-Funday.tar.gz", "state/daily/build-sat.tar.gz",
                                  "state/monthly/build-2026-13.tar.gz", "state/held/build-2026-11-21-../x.tar.gz",
                                  "state/held/build-2026-11-21-.tar.gz", "state/daily/../build.tar.gz",
-                                 "state/PAUSE", "out/events.json"])
+                                 "state/PAUSE", "out/events.json", "state/held/build-2026-11-21-1.json",
+                                 "state/daily/build-Sat.txt", "state/monthly/build-2026-11.json/x"])
 def test_put_writes_history_copies_only(tmp_path, r2, key):
     src = tmp_path / "f"
     src.write_bytes(b"x")
@@ -322,7 +380,7 @@ def test_put_writes_history_copies_only(tmp_path, r2, key):
 def test_history_copies_may_be_fetched_and_the_other_keys_stand():
     for k in ("state/daily/build-Sun.tar.gz", "state/monthly/build-2026-11.tar.gz",
               "state/held/build-2026-11-21-1234.tar.gz", "state/held/build-2026-11-21-1234-a2.tar.gz",
-              "state/build.tar.gz", "state/PAUSE"):
+              "state/daily/build-Sun.json", "state/monthly/build-2026-11.json", "state/build.tar.gz", "state/PAUSE"):
         assert SP.STATE_KEY.fullmatch(k), k
     for k in ("state/daily/x.tar.gz", "state/held/x.tar.gz", "current/x.tar.gz", "state/monthly/build-26-11.tar.gz"):
         assert not SP.STATE_KEY.fullmatch(k), k

@@ -95,7 +95,7 @@ def test_no_job_hands_a_secret_to_every_step_and_no_action_or_install_gets_one()
                     assert not secret_names(st.get("env")), f"{p.name}: {st.get('uses') or st.get('run')[:40]}"
 
 
-WRANGLER_USERS = re.compile(r"\bwrangler r2\b|state_paths\.py (?:fetch|fetch-obl)\b|refresh-data\.sh|r2-s3-keys\.sh")
+WRANGLER_USERS = re.compile(r"\bwrangler r2\b|state_paths\.py (?:fetch|fetch-obl|guard|generations)\b|refresh-data\.sh|r2-s3-keys\.sh")
 
 
 def test_each_step_that_reaches_r2_has_the_token_and_the_account_id_its_filter_needs():

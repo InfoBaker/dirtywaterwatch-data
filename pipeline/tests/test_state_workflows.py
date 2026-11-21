@@ -32,8 +32,6 @@ case "$op" in
     cp "$FAKE_R2/$key" "$file" ;;
   put)
     case " $FAKE_R2_FAIL_PUT " in *" $key "*) echo "X [ERROR] upload failed"; exit 1 ;; esac
-    # FAKE_R2_FAIL_REPUT: a key whose first upload goes through and every later one fails
-    case " $FAKE_R2_FAIL_REPUT " in *" $key "*) grep -qx "put $key" "$FAKE_R2/.puts" 2>/dev/null && { echo "X [ERROR] upload failed"; exit 1; } ;; esac
     mkdir -p "$(dirname "$FAKE_R2/$key")"; cp "$file" "$FAKE_R2/$key"; echo "put $key" >> "$FAKE_R2/.puts" ;;
 esac
 """
@@ -174,6 +172,9 @@ def checkout(tmp: Path) -> Path:
 
 # the stand-in clock for the state generations (a Saturday): the daily copy is state/daily/build-Sat.tar.gz
 NOW = "2026-11-21T15:07:00Z"
+# the day's daily and the month's monthly, each with its marker (NOW)
+COPIES_SAT = ["put state/daily/build-Sat.tar.gz", "put state/daily/build-Sat.json",
+              "put state/monthly/build-2026-11.tar.gz", "put state/monthly/build-2026-11.json"]
 GENS = json.dumps({"daily": {"Sat": {"date": "2026-11-21", "run": "1200"}},
                    "monthly": {"2026-11": {"date": "2026-11-01", "run": "900"}}})
 
@@ -237,10 +238,8 @@ def test_refresh_first_run_with_no_state_objects(tmp_path):
     assert not r["failed"], r["log"]
     assert "no state yet" in r["log"] and "no raw cache yet" in r["log"]
     assert "nothing to compare" in r["log"]                          # the history guard: no restored state
-    # the first save of the day and of the month: both copies, then the state again with the record that names them
-    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Sat.tar.gz",
-                         "put state/monthly/build-2026-11.tar.gz", "put state/build.tar.gz",
-                         "put state/raw-cache.tar.gz"]
+    # the first save of the day and of the month: both copies after the save, each followed by its marker
+    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz"] + COPIES_SAT + ["put state/raw-cache.tar.gz"]
     assert members(tmp, "state/raw-cache.tar.gz") == ["data/raw/nhd-waters/nldi/new.json"]     # no bulk raw
 
 
@@ -710,72 +709,75 @@ def test_refresh_generations_the_first_save_of_the_day_and_of_the_month(tmp_path
     seed(tmp, generations=False)
     r = simulate("refresh.yml", tmp)
     assert not r["failed"], r["log"]
-    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Sat.tar.gz",
-                         "put state/monthly/build-2026-11.tar.gz", "put state/build.tar.gz",
-                         "put state/raw-cache.tar.gz"]
+    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz"] + COPIES_SAT + ["put state/raw-cache.tar.gz"]
     daily = (tmp / "r2/state/daily/build-Sat.tar.gz").read_bytes()
-    assert daily == (tmp / "r2/state/monthly/build-2026-11.tar.gz").read_bytes()
-    assert build_record(tmp, "state-generations.json", "state/daily/build-Sat.tar.gz")["pending"]["run"] == "1234"
-    rec = build_record(tmp, "state-generations.json")                       # the state saved again: copies named
-    assert "pending" not in rec
-    assert rec["daily"]["Sat"]["date"] == "2026-11-21" and rec["monthly"]["2026-11"]["run"] == "1234"
-    # a later save the same day: no copy
+    assert daily == (tmp / "r2/state/build.tar.gz").read_bytes() == (tmp / "r2/state/monthly/build-2026-11.tar.gz")\
+        .read_bytes()                                                    # the same archive: saved once, copied twice
+    assert json.loads((tmp / "r2/state/daily/build-Sat.json").read_text()) | {"made_at": None, "bytes": None} == \
+        {"key": "state/daily/build-Sat.tar.gz", "date": "2026-11-21", "run": "1234", "made_at": None, "bytes": None}
+    rec = build_record(tmp, "state-generations.json")                   # saved: pending, claiming nothing
+    assert rec["pending"]["run"] == "1234" and not rec.get("daily") and not rec.get("monthly")
+    # a later save the same day: the markers record both copies; none is made again
     b = next_checkout(tmp, tmp_path / "b")
-    r = simulate("refresh.yml", b, {"STATE_NOW": "2026-11-21T22:07:00Z"})
+    r = simulate("refresh.yml", b, {"STATE_NOW": "2026-11-21T22:07:00Z", "GITHUB_RUN_ID": "1240"})
     assert not r["failed"], r["log"]
     assert puts(b) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
     assert (b / "r2/state/daily/build-Sat.tar.gz").read_bytes() == daily
+    rec = build_record(b, "state-generations.json")
+    assert rec["daily"]["Sat"] == {"date": "2026-11-21", "run": "1234"} and "2026-11" in rec["monthly"]
+    assert "pending" not in rec
     # the next day: its own daily, no monthly
     c = next_checkout(b, tmp_path / "c")
-    r = simulate("refresh.yml", c, {"STATE_NOW": "2026-11-22T00:07:00Z"})
+    r = simulate("refresh.yml", c, {"STATE_NOW": "2026-11-22T00:07:00Z", "GITHUB_RUN_ID": "1241"})
     assert not r["failed"], r["log"]
     assert puts(c) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Sun.tar.gz",
-                       "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+                       "put state/daily/build-Sun.json", "put state/raw-cache.tar.gz"]
     # the first save of December: Tuesday's daily and December's monthly; November's monthly is kept
     d = next_checkout(c, tmp_path / "d")
-    r = simulate("refresh.yml", d, {"STATE_NOW": "2026-12-01T00:07:00Z"})
+    r = simulate("refresh.yml", d, {"STATE_NOW": "2026-12-01T00:07:00Z", "GITHUB_RUN_ID": "1242"})
     assert not r["failed"], r["log"]
     assert puts(d) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Tue.tar.gz",
-                       "put state/monthly/build-2026-12.tar.gz", "put state/build.tar.gz",
-                       "put state/raw-cache.tar.gz"]
+                       "put state/daily/build-Tue.json", "put state/monthly/build-2026-12.tar.gz",
+                       "put state/monthly/build-2026-12.json", "put state/raw-cache.tar.gz"]
     assert (d / "r2/state/monthly/build-2026-11.tar.gz").read_bytes() == daily
-    assert sorted(build_record(d, "state-generations.json")["monthly"]) == ["2026-11", "2026-12"]
+    rec = build_record(d, "state-generations.json")
+    assert sorted(rec["monthly"]) == ["2026-11"] and sorted(rec["daily"]) == ["Sat", "Sun"]   # Sunday's, via its marker
+    assert [g["key"] for g in rec["pending"]["copies"]] == ["state/daily/build-Tue.tar.gz",
+                                                            "state/monthly/build-2026-12.tar.gz"]
 
 
-def test_refresh_failed_generation_upload_is_not_recorded_and_the_next_run_makes_it(tmp_path):
+@pytest.mark.parametrize("failing", ["state/daily/build-Sat.tar.gz", "state/daily/build-Sat.json"])
+def test_refresh_failed_copy_or_marker_is_not_recorded_and_the_next_run_makes_it(tmp_path, failing):
     tmp = checkout(tmp_path / "a")
     seed(tmp, generations=False)
-    r = simulate("refresh.yml", tmp, {"FAKE_R2_FAIL_PUT": "state/daily/build-Sat.tar.gz"})
+    r = simulate("refresh.yml", tmp, {"FAKE_R2_FAIL_PUT": failing})
     assert not r["failed"], r["log"]
-    assert "::warning::state generation state/daily/build-Sat.tar.gz was not uploaded" in r["log"]
-    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/monthly/build-2026-11.tar.gz",
-                         "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
-    rec = build_record(tmp, "state-generations.json")
-    assert "Sat" not in rec.get("daily", {}) and "2026-11" in rec["monthly"]
-    b = next_checkout(tmp, tmp_path / "b")
-    r = simulate("refresh.yml", b, {"STATE_NOW": "2026-11-21T16:07:00Z"})
-    assert not r["failed"], r["log"]
-    assert puts(b) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Sat.tar.gz",
-                       "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
-
-
-def test_refresh_second_save_that_fails_leaves_the_copies_unclaimed(tmp_path):
-    """The copies uploaded but the state could not be saved again: the saved record still shows them as pending
-    (claimed by nothing), so the next run makes them again."""
-    tmp = checkout(tmp_path / "a")
-    seed(tmp, generations=False)
-    r = simulate("refresh.yml", tmp, {"FAKE_R2_FAIL_REPUT": "state/build.tar.gz"})
-    assert not r["failed"], r["log"]
-    assert "::warning::the state could not be saved again with its generation record" in r["log"]
-    rec = build_record(tmp, "state-generations.json")
-    assert not rec.get("daily") and not rec.get("monthly") and rec["pending"]["run"] == "1234"
+    assert "::warning::state generation state/daily/build-Sat.tar.gz" in r["log"]
+    assert not (tmp / "r2/state/daily/build-Sat.json").exists()
     b = next_checkout(tmp, tmp_path / "b")
     r = simulate("refresh.yml", b, {"STATE_NOW": "2026-11-21T16:07:00Z", "GITHUB_RUN_ID": "1235"})
     assert not r["failed"], r["log"]
     assert puts(b) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/daily/build-Sat.tar.gz",
-                       "put state/monthly/build-2026-11.tar.gz", "put state/build.tar.gz",
-                       "put state/raw-cache.tar.gz"]
-    assert build_record(b, "state-generations.json")["daily"]["Sat"]["run"] == "1235"
+                       "put state/daily/build-Sat.json", "put state/raw-cache.tar.gz"]
+    rec = build_record(b, "state-generations.json")
+    assert "Sat" not in rec.get("daily", {}) and rec["monthly"]["2026-11"]["run"] == "1234"
+    c = next_checkout(b, tmp_path / "c")
+    r = simulate("refresh.yml", c, {"STATE_NOW": "2026-11-21T17:07:00Z", "GITHUB_RUN_ID": "1236"})
+    assert build_record(c, "state-generations.json")["daily"]["Sat"]["run"] == "1235"
+
+
+def test_refresh_new_r2_calls_stay_under_the_history_prefixes(tmp_path):
+    """Every object this work adds is under state/held/, state/daily/ or state/monthly/ of the one bucket; the save
+    writes state/build.tar.gz once."""
+    tmp = checkout(tmp_path)
+    seed(tmp, generations=False, events={"ca-spills": 300})
+    r = simulate("refresh.yml", tmp, {"REFRESH_DROPS": "1"})
+    assert not r["failed"], r["log"]
+    new = [x for x in puts(tmp) if x not in ("put state/out.tar.gz", "put state/build.tar.gz",
+                                             "put state/raw-cache.tar.gz")]
+    assert new and all(re.fullmatch(r"put state/(held|daily|monthly)/build-[0-9A-Za-z-]+\.(tar\.gz|json)", x)
+                       for x in new), new
+    assert puts(tmp).count("put state/build.tar.gz") == 1
 
 
 def test_refresh_generations_never_run_after_a_failed_save(tmp_path):

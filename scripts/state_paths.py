@@ -38,14 +38,19 @@ Three state objects:
 History copies of state/build.tar.gz (2026-11-21). R2 keeps no versions and the bucket has no expiry rule, so each
 save of state/build.tar.gz replaces the only copy: a run that ends well with less history than it restored (a module
 that rewrites its file from a short window, a code change, a bad merge) would lose the rest for good. The refresh
-keeps three kinds of copy of the same archive, private like it and under state/ only (GENERATION_KEY; put() writes
-nothing else, never current/ or any public path):
+keeps three kinds of copy of the same archive, private like it, in the bucket dirtywaterwatch-data under state/held/,
+state/daily/ and state/monthly/ only (GENERATION_KEY; put() writes nothing else, never current/ or any public path).
+Every call is `wrangler r2 object get|put`, which the workflows route to R2's S3 endpoint (scripts/wrangler-guard.sh,
+scripts/r2-s3-keys.sh), as the state save does:
   state/daily/build-<Mon..Sun>.tar.gz    the first save of each UTC day: a ring of seven keys, each overwritten a week
                                          later, so nothing is listed or deleted
   state/monthly/build-<YYYY-MM>.tar.gz   the first save of each calendar month (UTC); kept
   state/held/build-<date>-<run>.tar.gz   the archive as restored (the history before the run), uploaded by the
                                          history guard when a source lost records; kept. <run> is the Actions run id,
                                          with -a<attempt> for a re-run attempt
+  state/daily/build-<Mon..Sun>.json and state/monthly/build-<YYYY-MM>.json
+                                         each copy's marker (its key, date and run; a few hundred bytes), uploaded
+                                         only after the copy
 The history guard. Right after the restore the workflow keeps the restored archive (restored-build.tar.gz) and its
 records per source (counts: restored-counts.json; both in the runner's workspace, outside data/build). Before the
 save, guard counts data/build/events again. A source whose records fell by at least DROP_MIN_PERCENT percent and at
@@ -55,18 +60,19 @@ drop's counts, the held key and whether it uploaded; earlier drop runs kept belo
 (operations are not disrupted; the held copy and the warning are the safeguard). No drop: nothing uploaded. No
 restored state (a first run): nothing compared.
 The generation record, data/build/state-generations.json, travels with the state. Before the archive is made,
-generations plan writes the copies due (the day's daily when the record does not hold this UTC date for that weekday,
-the month's monthly when it does not hold this month) as this run's pending ones; the record claims nothing yet.
-After the save, generations put uploads the saved archive to each and records each that uploaded, and the workflow
-saves the state once more so the record travels. A failed upload is a warning, never fails the run and is not
-recorded, so the next run makes it again; if that second save fails, the saved record still shows the copies as not
-made and the next run makes them again. The record never claims a copy that was not uploaded.
-Cost at R2 list prices (Standard storage $0.015 per GB-month, Class A operations $4.50 per million; no free allowance
-netted out), for a 123 MB archive: the daily ring holds 7 x 123 MB = 0.86 GB, $0.013 a month; each monthly copy adds
-0.123 GB, $0.0018 a month, kept (12 copies, 1.48 GB, $0.022 a month after a year); the uploads are about 62 Class A
-operations a month (30 daily copies, 1 monthly, 30 second saves of state/build.tar.gz), $0.0003. A held copy is one
-more operation and 0.123 GB ($0.0018 a month) until someone deletes it. No reads are added. In all about $0.015 a
-month at first, $0.035 a month after a year and $0.30 over the first year; every figure grows in step with the archive.
+generations plan records the copies the previous run left pending whose markers name that run (one small read each),
+then writes the copies due (the day's daily when the record does not hold this UTC date for that weekday, the month's
+monthly when it does not hold this month) as this run's pending ones, claiming nothing for them. After the save,
+generations put uploads the saved archive to each, then its marker. A failed upload is a warning, never fails the run
+and leaves no marker that names the run, so the next run finds the copy still due and makes it again. The record
+never claims a copy that was not uploaded (it can miss one whose marker failed; that copy is simply made again).
+Cost at R2 list prices (Standard storage $0.015 per GB-month, Class A operations $4.50 per million, Class B $0.36 per
+million; no free allowance netted out), for a 123 MB archive: the daily ring holds 7 x 123 MB = 0.86 GB, $0.013 a
+month; each monthly copy adds 0.123 GB, $0.0018 a month, kept (12 copies, 1.48 GB, $0.022 a month after a year); the
+uploads are about 63 Class A operations a month (31 copies and 31 markers), $0.0003, and the marker reads about 31
+Class B operations, $0.00001. A held copy is one more Class A operation and 0.123 GB ($0.0018 a month) until someone
+deletes it. In all about $0.015 a month at first, $0.035 a month after a year and $0.30 over the first year; every
+figure grows in step with the archive.
 Rollback, by hand (never automated): set the pause (any small file at state/PAUSE); wait until a running refresh has
 ended (one past its pause check still saves); fetch the chosen daily, monthly or held copy (fetch KEY FILE; counts
 FILE OUT shows its records per source) and put that file as state/build.tar.gz; delete state/PAUSE. The generation
@@ -147,9 +153,10 @@ that cannot be read is replaced by the next good run's.
                                                             at the restore; FILE (default restored-build.tar.gz) is
                                                             held on a drop; exit 0 (the save goes on)
     python3 -I scripts/state_paths.py generations plan|put [FILE] [--record FILE] [--run-id ID]
-                                                            plan: print the daily and monthly copies due and write them
-                                                            as pending; put FILE: upload the saved archive to them;
-                                                            exit 0 recorded (save the state again), 3 nothing recorded
+                                                            plan: record the previous run's copies their markers name,
+                                                            print the copies due and write them as pending; put FILE:
+                                                            upload the saved archive to them, then their markers;
+                                                            exit 0 (a failed upload is a warning)
 
 The cap is 200 MB (STATE_MAX_MB in the environment, or --max-mb, overrides it). The build state's save warns over the
 cap and fails only over wrangler's upload limit (300 MiB, --hard-mb 314), where the upload would fail anyway: a build
@@ -183,8 +190,8 @@ WRANGLER_MAX_MB = 314.0          # wrangler r2 object put refuses a file over 30
 BUCKET = "dirtywaterwatch-data"
 # the history copies of state/build.tar.gz (put() writes these keys only; never current/ or any public path)
 WEEKDAYS = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-GENERATION_KEY = re.compile(r"state/daily/build-(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\.tar\.gz"
-                            r"|state/monthly/build-[0-9]{4}-(?:0[1-9]|1[0-2])\.tar\.gz"
+GENERATION_KEY = re.compile(r"state/daily/build-(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\.(?:tar\.gz|json)"
+                            r"|state/monthly/build-[0-9]{4}-(?:0[1-9]|1[0-2])\.(?:tar\.gz|json)"
                             r"|state/held/build-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9a-z][0-9a-z-]{0,39}\.tar\.gz")
 # state/PAUSE: the shared pause switch; the history copies may be fetched too (to look at one before a rollback)
 STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz|state/PAUSE|" + GENERATION_KEY.pattern)
@@ -823,7 +830,6 @@ DROP_MIN_PERCENT = 1               # ...and at least this share of the restored 
 GUARD_FILE = ROOT / BUILD_DIR / "history-guard.json"
 GUARD_KEEP = 50                    # earlier drop runs kept in it (their held keys among them)
 GENERATIONS_FILE = ROOT / BUILD_DIR / "state-generations.json"
-NOTHING = 3                        # generations put: nothing recorded (no second save needed)
 
 
 def utc_now() -> datetime:
@@ -955,7 +961,7 @@ def put(key: str, src: Path, tries: int = 2, wrangler: str | None = None) -> int
     for n in range(tries):
         try:
             p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
-                               timeout=900)
+                               timeout=1900)    # over wrangler_redact's own 1800 s deadline for an S3 upload
         except (OSError, subprocess.TimeoutExpired) as ex:
             p, text = None, type(ex).__name__
         else:
@@ -1023,8 +1029,9 @@ def guard(restored_counts: Path, build: Path = ROOT / BUILD_DIR, out: Path = GUA
     return drops
 
 
-def generation_key(kind: str, slot: str) -> str:
-    key = f"state/{kind}/build-{slot}.tar.gz"
+def generation_key(kind: str, slot: str, mark: bool = False) -> str:
+    """state/<kind>/build-<slot>.tar.gz, the copy, or with mark its .json marker (written only after the copy)."""
+    key = f"state/{kind}/build-{slot}.{'json' if mark else 'tar.gz'}"
     if kind not in ("daily", "monthly") or not GENERATION_KEY.fullmatch(key):
         raise ValueError(f"not a generation: {kind} {slot!r}")
     return key
@@ -1044,11 +1051,42 @@ def generations_due(rec: dict, now: datetime) -> list[dict]:
     return due
 
 
-def generations_plan(record: Path = GENERATIONS_FILE, run: str = "local", now: datetime | None = None) -> list[str]:
-    """Before the archive is made: write the copies due as this run's pending ones (the record travels in the
-    archive; it claims nothing until generations_put records an upload) and print their keys."""
+def _marker_says(kind: str, slot: str, date, run: str, wrangler: str | None = None) -> bool:
+    """True when the copy's marker in R2 names this copy, date and run: the copy uploaded. Absent, unreadable or
+    naming another run (an earlier week's, or a copy whose upload failed after an earlier one): False."""
+    import tempfile
+    fd, name = tempfile.mkstemp(prefix="dww-mark-", suffix=".json")
+    os.close(fd)
+    tmp = Path(name)
+    try:
+        if fetch(generation_key(kind, slot, mark=True), tmp, tries=1, wrangler=wrangler) != FETCHED:
+            return False
+        m = read_json_dict(tmp)
+    finally:
+        tmp.unlink(missing_ok=True)
+    return m.get("key") == generation_key(kind, slot) and m.get("date") == date and m.get("run") == run
+
+
+def generations_plan(record: Path = GENERATIONS_FILE, run: str = "local", now: datetime | None = None,
+                     wrangler: str | None = None) -> list[str]:
+    """Before the archive is made. First the copies an earlier run left pending are recorded when their markers say
+    they uploaded (one small read each, once a day); then the copies this save is due for are written as this run's
+    pending ones (the record travels in the archive and claims nothing for them) and their keys printed."""
     now = now or utc_now()
     rec = read_json_dict(record)
+    pend = rec.get("pending") if isinstance(rec.get("pending"), dict) else {}
+    if pend.get("run") and pend.get("run") != run and isinstance(pend.get("copies"), list):
+        for g in pend["copies"]:
+            try:
+                kind, slot = g["kind"], g["slot"]
+                key = generation_key(kind, slot)
+            except (KeyError, TypeError, ValueError):
+                continue
+            if _marker_says(kind, slot, g.get("date"), str(pend["run"]), wrangler):
+                rec.setdefault(kind, {})[slot] = {"date": g.get("date"), "run": pend["run"]}
+                say(f"generation {key} of run {pend['run']}: uploaded, recorded")
+            else:
+                say(f"generation {key} of run {pend['run']}: no marker for it, so not recorded (made again when due)")
     due = generations_due(rec, now)
     if due:
         rec["pending"] = {"run": run, "planned_at": stamp(now), "copies": due}
@@ -1063,34 +1101,45 @@ def generations_plan(record: Path = GENERATIONS_FILE, run: str = "local", now: d
 
 
 def generations_put(src: Path, record: Path = GENERATIONS_FILE, run: str = "local", now: datetime | None = None,
-                    wrangler: str | None = None) -> int:
-    """After the save: upload src (the archive just saved) to each copy this run planned and record each that
-    uploaded. FETCHED (0): something recorded, so the state is to be saved again for the record to travel; NOTHING
-    (3): nothing planned by this run, or no upload went through. A failed upload is a warning and is not recorded,
-    so the next run makes it again."""
+                    wrangler: str | None = None) -> list[str]:
+    """After the save: upload src (the archive just saved) to each copy this run planned, then each copy's marker
+    (state/<kind>/build-<slot>.json: key, date, run), which the next run's plan reads to record it. Returns the
+    copies uploaded with their markers. A failed upload is a warning and leaves no marker, so the next run makes the
+    copy again; it never stops the run."""
+    import tempfile
     now = now or utc_now()
-    rec = read_json_dict(record)
-    pend = rec.get("pending") if isinstance(rec.get("pending"), dict) else {}
+    pend = read_json_dict(record).get("pending")
+    pend = pend if isinstance(pend, dict) else {}
     if pend.get("run") != run or not isinstance(pend.get("copies"), list) or not pend["copies"]:
         say("no generation planned by this run")
-        return NOTHING
-    made = 0
+        return []
+    made = []
     for g in pend["copies"]:
         try:
             kind, slot = g["kind"], g["slot"]
-            key = generation_key(kind, slot)
+            key, mark = generation_key(kind, slot), generation_key(kind, slot, mark=True)
         except (KeyError, TypeError, ValueError):
             say("a pending generation that is not one was left out")
             continue
-        if put(key, src, wrangler=wrangler) == FETCHED:
-            rec.setdefault(kind, {})[slot] = {"date": g.get("date"), "run": run, "made_at": stamp(now)}
-            made += 1
-        else:
+        if put(key, src, wrangler=wrangler) != FETCHED:
             print(f"::warning::state generation {key} was not uploaded; the next run makes it again (the run goes "
                   "on)", flush=True)
-    rec.pop("pending", None)
-    write_json(record, rec)
-    return FETCHED if made else NOTHING
+            continue
+        fd, name = tempfile.mkstemp(prefix="dww-mark-", suffix=".json")
+        os.close(fd)
+        tmp = Path(name)
+        try:
+            write_json(tmp, {"key": key, "date": g.get("date"), "run": run, "made_at": stamp(now),
+                             "bytes": Path(src).stat().st_size})
+            ok = put(mark, tmp, wrangler=wrangler) == FETCHED
+        finally:
+            tmp.unlink(missing_ok=True)
+        if ok:
+            made.append(key)
+        else:
+            print(f"::warning::state generation {key} uploaded but its marker {mark} did not; it is not recorded and "
+                  "the next run makes it again", flush=True)
+    return made
 
 
 def obl_not_saved(state_file: Path = OBL_CHANGES, src: Path = OBL_OUT) -> int:
@@ -1192,7 +1241,8 @@ def main(argv=None) -> int:
         if not a.file or not Path(a.file).is_file():
             print("::error::generations put needs the archive just saved", flush=True)
             return 2
-        return generations_put(Path(a.file), Path(a.record), run)
+        generations_put(Path(a.file), Path(a.record), run)
+        return 0
     if a.cmd == "list":
         print("\n".join(raw_paths()))
         return 0
