@@ -54,6 +54,7 @@ import zones
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharger_alias_map, load_outfall_registry,
                     system_wide_advisory, no_ok_read_since,
                     now_iso, read_json, rules_live_states, write_json)
+from build import beach_reason as BR
 from build import shoreline as SH
 from build.redact import REDACTED, person_shaped
 
@@ -3265,6 +3266,54 @@ def code_undecoded(ev: dict) -> str | None:
     return v if isinstance(v, str) and v.strip() else None
 
 
+# A beach closure or advisory whose source gives no water-quality reason (data/rules.json beach_reason, decision 40;
+# build/beach_reason.py): kept on the record and listed on its water's page and in the report tables, with no interval,
+# so it colours no water, no reach, no history hour and no marker. build() sets `_beach_reason` on each
+# record (its own verdict, else its parent's for an update, else a linked duplicate's); a record judged outside build()
+# is judged on its own fields.
+def beach_verdict(ev: dict, rules: dict | None) -> dict | None:
+    if "_beach_reason" in ev:
+        return ev["_beach_reason"]
+    return BR.judge(ev, rules)
+
+
+def listed_without_reason(ev: dict, rules: dict | None) -> bool:
+    v = beach_verdict(ev, rules)
+    return bool(v) and v.get("stated") is False
+
+
+def annotate_beach_reasons(events: list[dict], by_id: dict, duplicates: dict, rules: dict) -> dict:
+    """Set `_beach_reason` on every beach closure and advisory (build/beach_reason.py judge): an update whose own text
+    gives no reason takes its parent's (Anne Arundel County's "the Department of Health has rescinded this advisory"
+    under a notice naming the sewage spill); a record shown for a closure takes the reason a linked duplicate of the same
+    closure states (RIDOH's feed beside its sheet). Returns the counts for status.json (beach_reason block)."""
+    if not BR.config(rules):
+        return {"enabled": False}
+    own = {}
+    for ev in events:
+        v = BR.judge(ev, rules)
+        if v is not None:
+            own[ev["event_id"]] = v
+    linked = BR.linked_reasons(events, duplicates, rules)
+    unlisted = Counter()
+    for eid, v in own.items():
+        if v["how"] == "unlisted":
+            unlisted[by_id[eid].get("source_id")] += 1
+        if v["stated"] is False:
+            seen, par = {eid}, by_id[eid].get("parent_event_id")
+            while par and par in by_id and par not in seen:
+                pv = own.get(par)
+                if pv and pv["stated"] and pv["how"] != "unlisted":
+                    v = {**pv, "how": "parent", "parent": par}
+                    break
+                seen.add(par)
+                par = by_id[par].get("parent_event_id")
+        if v["stated"] is False and eid in linked:
+            v = linked[eid]
+        by_id[eid]["_beach_reason"] = v
+    return {"enabled": True, "judged": len(own), "unlisted_sources": dict(sorted(unlisted.items()))}
+
+
 def _caution_only(iv: dict, rule: str, applied: str, basis: str, source) -> None:
     """Turn a red interval into the site's caution under rule (no authority window applies)."""
     was = iv["rule"]
@@ -3524,6 +3573,8 @@ def event_intervals(ev: dict, state: str | None, now: datetime, water: dict | No
     not used: the intervals are those of a record with no end, each with end_not_used (the published end, why, and
     the rule)."""
     rules = load_rules() if rules is None else rules
+    if listed_without_reason(ev, rules):
+        return []           # beach_reason: listed, not coloured (decision 40)
     raw = ev.get("raw") or {}
     periods = raw.get("listed_periods")
     if ev.get("source_id") in POLL_END_HORIZON_SOURCES and isinstance(periods, list) and len(periods) > 1 \
@@ -4911,6 +4962,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             duplicates[ev["event_id"]] = ev["duplicate_of"]
     duplicates = shown_over_links(events, duplicates)
     linked = linked_notices(events, duplicates)
+    beach_reason = annotate_beach_reasons(events, by_id, duplicates, rules)
+    for sid, n in (beach_reason.get("unlisted_sources") or {}).items():
+        problems.append(f"beach_reason: {sid} has no entry in data/rules.json; its {n} beach closures and advisories "
+                        "keep their colour until it is read and given one")
+    for eid, e in effective.items():        # the revisions' copies carry the verdict their record has
+        if "_beach_reason" in by_id[eid]:
+            e["_beach_reason"] = by_id[eid]["_beach_reason"]
     h_start = now - timedelta(days=HISTORY_DAYS)
     points = []
     latest_month = {}       # outfall -> (event, water slugs, monthly mark) of its latest month report
@@ -4967,6 +5025,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         eff = effective.get(eid, ev)
         point_on, river_point, outline_less = [], [], []
         live = eid not in superseded and eid not in duplicates
+        if live and listed_without_reason(eff, rules):
+            placements[eid]["no_stated_reason"] = BR.note(eff, beach_verdict(eff, rules), rules)
         is_discharge = ev.get("event_type") in DISCHARGE_TYPES or (
             ev.get("event_type") == "unknown" and ev.get("status") == "ongoing")
         coarse = ev.get("time_precision") in COARSE_PRECISION     # a monthly or annual total: never a reach
@@ -5551,7 +5611,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                                       if ev["event_id"] not in duplicates)),
                    "future_start": sum(future_starts.values()),
                    "monthly_outfalls": len(monthly_outfalls),
-                   "duplicates": len(duplicates)},
+                   "duplicates": len(duplicates),
+                   "no_stated_reason": sum(1 for p in placements.values() if p.get("no_stated_reason"))},
+        "beach_reason": {**beach_reason, "listed_without_colour": dict(sorted(Counter(
+            by_id[i]["source_id"] for i, p in placements.items() if p.get("no_stated_reason")).items()))},
         "waters": out_waters,
         "placements": placements,
         "sources": health,

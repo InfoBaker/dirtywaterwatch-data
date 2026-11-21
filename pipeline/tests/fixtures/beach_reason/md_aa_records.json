@@ -1,0 +1,118 @@
+{
+ "_note": "Two real records of md-aa-health-closings as the 2026-11-14 export carried them (the export's own fields removed; the notice's text cut to its first sentence): the closure and the update that lifts it.",
+ "records": [
+  {
+   "event_id": "md-aa-health-closings:node-1847",
+   "source_id": "md-aa-health-closings",
+   "source_record_id": "node-1847",
+   "parent_event_id": null,
+   "event_type": "beach_closure",
+   "status": "advisory_active",
+   "discharger_id": null,
+   "discharger_name": null,
+   "npdes_permit": null,
+   "outfall_id": null,
+   "outfall_name": null,
+   "waterbody_text": "Cypress Creek in Severna Park to the headwaters of the Magothy River",
+   "lat": null,
+   "lon": null,
+   "coord_source": null,
+   "coord_precision_m": null,
+   "started_at": "2026-06-02T00:00:00-04:00",
+   "ended_at": "2026-06-09T00:00:00-04:00",
+   "time_precision": "day",
+   "reported_at": null,
+   "published_at": "2026-06-02T00:00:00-04:00",
+   "source_updated_at": "2026-06-09T00:00:00-04:00",
+   "fetched_at": "2026-11-10T05:04:32Z",
+   "material": null,
+   "volume_gal": null,
+   "volume_text": null,
+   "estimate_flag": "unknown",
+   "authority": "Anne Arundel County Department of Health",
+   "advice_text": "The affected waters are closed for direct water contact. The emergency closing will remain in effect for one week following a spill, unless the sewage spill is determined to adversely impact a designated bathing beach. In these cases, the emergency closing will remain in effect until water quality results are acceptable.",
+   "advice_window_hours": null,
+   "advice_window_basis": null,
+   "source_url": "https://www.aahealth.org/environmental-health/recreational-water-quality/closings-and-advisories/update-6-9-26-emergency",
+   "raw": {
+    "page": {
+     "nid": "1847",
+     "url": "https://www.aahealth.org/environmental-health/recreational-water-quality/closings-and-advisories/update-6-9-26-emergency",
+     "title": "*Update 6-9-26* Emergency Closing Issued for Cypress Creek due to a Large Sewage Spill",
+     "list_date": "2026-06-09T16:38:21",
+     "title_update_date": "2026-06-09",
+     "sections": [
+      {
+       "date": "2026-06-02",
+       "dateline": "Severna Park, (June 2, 2026) -"
+      },
+      {
+       "date": "2026-06-09",
+       "dateline": "Severna Park, MD (June 9, 2026) –"
+      }
+     ]
+    },
+    "section": {
+     "date": "2026-06-02",
+     "dateline": "Severna Park, (June 2, 2026) -",
+     "text": "The Anne Arundel County Department of Health has issued an emergency closure for Cypress Creek in Severna Park to the headwaters of the Magothy River due to a large sewage spill."
+    },
+    "_water": {
+     "stretch": "Cypress Creek in Severna Park to the headwaters of the Magothy River"
+    },
+    "_valid_until": "2026-06-09",
+    "_valid_until_basis": "the notice: 'in effect for one week following a spill', counted from the notice date (the spill date is not given)"
+   },
+   "parse_error": null,
+   "duplicate_of": null
+  },
+  {
+   "event_id": "md-aa-health-closings:node-1847:20260609-lifted",
+   "source_id": "md-aa-health-closings",
+   "source_record_id": "node-1847:20260609-lifted",
+   "parent_event_id": "md-aa-health-closings:node-1847",
+   "event_type": "beach_closure",
+   "status": "advisory_lifted",
+   "discharger_id": null,
+   "discharger_name": null,
+   "npdes_permit": null,
+   "outfall_id": null,
+   "outfall_name": null,
+   "waterbody_text": "Cypress Creek in Severna Park to the headwaters of the Magothy River",
+   "lat": null,
+   "lon": null,
+   "coord_source": null,
+   "coord_precision_m": null,
+   "started_at": "2026-06-02T00:00:00-04:00",
+   "ended_at": "2026-06-09T00:00:00-04:00",
+   "time_precision": "day",
+   "reported_at": null,
+   "published_at": "2026-06-09T00:00:00-04:00",
+   "source_updated_at": "2026-06-09T00:00:00-04:00",
+   "fetched_at": "2026-11-10T05:04:32Z",
+   "material": null,
+   "volume_gal": null,
+   "volume_text": null,
+   "estimate_flag": "unknown",
+   "authority": "Anne Arundel County Department of Health",
+   "advice_text": null,
+   "advice_window_hours": null,
+   "advice_window_basis": null,
+   "source_url": "https://www.aahealth.org/environmental-health/recreational-water-quality/closings-and-advisories/update-6-9-26-emergency",
+   "raw": {
+    "page": {
+     "nid": "1847",
+     "url": "https://www.aahealth.org/environmental-health/recreational-water-quality/closings-and-advisories/update-6-9-26-emergency"
+    },
+    "section": {
+     "date": "2026-06-09",
+     "dateline": "Severna Park, MD (June 9, 2026) –",
+     "text": "Effective June 9, 2026, the Department of Health has rescinded this advisory.."
+    },
+    "_update_kind": "lifted"
+   },
+   "parse_error": null,
+   "duplicate_of": null
+  }
+ ]
+}
