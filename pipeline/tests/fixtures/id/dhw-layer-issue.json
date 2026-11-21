@@ -8,6 +8,7 @@
  "features": [
   {
    "attributes": {
+    "objectid": 104,
     "LocationDiscription": "Crane Creek Reservoir",
     "RiskTier": "Health Advisory",
     "DisplayOnWebsite": "Yes",
@@ -22,6 +23,7 @@
   },
   {
    "attributes": {
+    "objectid": 134,
     "LocationDiscription": "Lake Lowell",
     "RiskTier": "Health Watch",
     "DisplayOnWebsite": "No",
@@ -36,6 +38,7 @@
   },
   {
    "attributes": {
+    "objectid": 136,
     "LocationDiscription": "Mann Lake",
     "RiskTier": "Health Advisory",
     "DisplayOnWebsite": "Yes",
@@ -50,6 +53,7 @@
   },
   {
    "attributes": {
+    "objectid": 90001,
     "LocationDiscription": "Mann Lake",
     "RiskTier": null,
     "DisplayOnWebsite": "Yes",

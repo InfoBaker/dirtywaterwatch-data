@@ -163,7 +163,8 @@ def test_points_are_dhws_own_rounded_and_named_arms_keep_their_place():
 
 def test_layer_query_never_asks_for_staff_fields():
     fields = H.LAYER_QUERY.split("outFields=")[1].split("&")[0].split(",")
-    assert fields == ["LocationDiscription", "RiskTier", "DisplayOnWebsite", "Issue", "Issue_other", "WebNote"]
+    assert fields == ["objectid", "LocationDiscription", "RiskTier", "DisplayOnWebsite", "Issue", "Issue_other",
+                      "WebNote"]
     raw = (FIX / "dhw-layer.json").read_text()
     for k in ("Email", "Creator", "Editor", "InternalNote", "ContactInfo", '"Name"'):
         assert k not in raw
@@ -281,3 +282,32 @@ def test_swimmers_itch_and_other_are_beach_advisories_with_the_issuers_words():
     doc["features"][-1]["attributes"].update(Issue="Swimmer's Itch", Issue_other=None)
     _, recs = run_issues({}, H.parse_table(page()), T0, doc)
     assert find(recs, "dhw:mann-lake:swimmers-itch:")["event_type"] == "beach_advisory"
+
+
+def test_review_dhw_listings_keep_dhws_own_row_identity():
+    doc = issue_doc()
+    twin = json.loads(json.dumps(doc["features"][-1]))
+    twin["attributes"]["objectid"] = 999
+    twin["geometry"] = {"x": -117.0, "y": 46.0}
+    doc["features"].append(twin)                       # a second closure row of the same name: two listings
+    state, recs = run_issues({}, H.parse_table(page()), T0, doc)
+    closures = [r for r in recs.values() if r["event_type"] == "beach_closure"]
+    assert len(closures) == 2 and {r["raw"]["dhw_objectid"] for r in closures} == {doc["features"][-2]["attributes"]["objectid"], 999}
+    doc2 = issue_doc()
+    doc2["features"][-1]["attributes"]["LocationDiscription"] = "Mann Lake (north beach)"      # renamed, same row
+    state2, recs2 = run_issues({}, H.parse_table(page()), T0, issue_doc())
+    state2, recs2 = run_issues(state2, H.parse_table(page()), T1, doc2)
+    closures = [r for r in recs2.values() if r["event_type"] == "beach_closure"]
+    assert len(closures) == 1 and closures[0]["status"] == "advisory_active" and closures[0]["started_at"] == T0
+
+
+def test_review_a_failed_deq_read_still_updates_dhws_listings(tmp_path, monkeypatch):
+    monkeypatch.setattr(H, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(H, "save_raw", lambda *a, **k: None)
+    written = {}
+    monkeypatch.setattr(H, "write_events", lambda sid, recs, **kw: written.update(recs=recs, **kw) or tmp_path / "e.json")
+    (tmp_path / "bad.html").write_text("<html><p>no table today</p></html>")
+    (tmp_path / "layer.json").write_text(json.dumps(issue_doc()))
+    assert H.main(["--file", str(tmp_path / "bad.html"), "--layer-file", str(tmp_path / "layer.json"), "--at", T0]) == 1
+    assert written["ok"] is False and written.get("partial") is True
+    assert [r["event_type"] for r in written["recs"]] == ["beach_closure"]

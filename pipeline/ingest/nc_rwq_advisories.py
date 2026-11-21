@@ -167,12 +167,16 @@ def fetch_activities(sess: requests.Session) -> tuple[list[dict], dict]:
         r.raise_for_status()
         js = r.json()
         page = [f.get("attributes") or {} for f in _features(js)]
+        if not page and js.get("exceededTransferLimit"):
+            raise ValueError("an empty page of the activity table said more rows remain")
         rows += page
         if not js.get("exceededTransferLimit") or not page:
             break
         offset += len(page)
         if offset >= MAX_ROWS:
             raise ValueError(f"the activity table did not end within {MAX_ROWS} rows")
+    if not rows:
+        raise ValueError("the activity table answered no rows (it held 605 on 2026-11-21)")
     ids = [a.get("OBJECTID") for a in rows]
     if len(ids) != len(set(ids)):
         raise ValueError("the activity table repeated rows while it was read")
@@ -198,7 +202,7 @@ def build(features: list[dict], layer_meta: dict, fetched_at: str, prev_records:
             records[r["event_id"]] = r
             if r["status"] == "advisory_active":
                 covered.add((r["raw"].get("ASN"), r["raw"].get("_status_code")))
-        act_stats["superseded"] = supersede_snapshots(records, acts)
+        act_stats["superseded"] = supersede_snapshots(records, acts, fetched_at)
     for p in records.values():
         raw = p.get("raw") or {}
         if raw.get("_kind") == "activity" or p.get("duplicate_of"):
@@ -260,17 +264,33 @@ def activity_records(rows: list[dict], stations: dict, table_meta: dict, fetched
     """One record per Beach_Activity row (DMF's own advisory or pending resample, with its dates); a row that left the
     table keeps its earlier record, marked."""
     table_edit = ms_iso((table_meta.get("editingInfo") or {}).get("dataLastEditDate"))
-    out, ids = [], set()
+    out = []
+    # identity: DMF's ACTIVITY_NAME; a name the table repeats goes bare to its lowest OBJECTID and as <name>~<OBJECTID>
+    # to the others, so an id never moves to another row when one of them leaves (Astra 2026-11-21 P2)
+    def name_of(a):
+        return clean(a.get("ACTIVITY_NAME")) or f"{clean(a.get('STATE_ID'))}:{clean(a.get('ACTIVITY_CODE'))}:{a.get('START_DATE')}"
+    first_oid = {}
+    for a in rows:
+        k, oid = name_of(a), a.get("OBJECTID")
+        if k not in first_oid or (oid is not None and (first_oid[k] is None or oid < first_oid[k])):
+            first_oid[k] = oid
+    held = {}                  # the id each earlier record of a row (OBJECTID) had: an id, once given, stays
+    for eid, p in prev.items():
+        pr = p.get("raw") or {}
+        if pr.get("_kind") == "activity" and pr.get("OBJECTID") is not None:
+            held[pr["OBJECTID"]] = p["source_record_id"]
+    taken = set(held.values())
     for a in sorted(rows, key=lambda x: (x.get("START_DATE") or 0, x.get("OBJECTID") or 0)):
         a = {k: a.get(k) for k in ACTIVITY_FIELDS}
         sid = clean(a.get("STATE_ID")) or None
         code = clean(a.get("ACTIVITY_CODE"))
         st = ACTIVITY_STATUS.get(code)
-        name = clean(a.get("ACTIVITY_NAME")) or f"{sid}:{code}:{a.get('START_DATE')}"
-        rid, n = name, 2
-        while rid in ids:
-            rid, n = f"{name}~{n}", n + 1
-        ids.add(rid)
+        name = name_of(a)
+        rid = held.get(a.get("OBJECTID"))
+        if rid is None:
+            rid = name if a.get("OBJECTID") == first_oid.get(name) else f"{name}~{a.get('OBJECTID')}"
+            if rid in taken:                     # held by another row's earlier record
+                rid = f"{name}~{a.get('OBJECTID')}"
         f = stations.get(sid) or {}
         sa, g = f.get("attributes") or {}, f.get("geometry") or {}
         lat = g.get("y") if g.get("y") is not None else sa.get("LATITUDE")
@@ -320,25 +340,37 @@ def activity_records(rows: list[dict], stations: dict, table_meta: dict, fetched
     return out, stats
 
 
-def supersede_snapshots(records: dict, acts: list[dict]) -> int:
+def supersede_snapshots(records: dict, acts: list[dict], fetched_at: str) -> int:
     """Point each Advisory or Pending snapshot spell (the 2022 layer's, or one kept for a station with no activity row)
-    at DMF's activity row of the same class at its station that began on or before the spell's start, the latest
-    such; returns how many are linked."""
+    at DMF's activity row of the same class at its station whose time overlaps the spell's (its start to its end, or
+    to now), the longest overlap; a spell no activity overlaps stays its own record (Astra 2026-11-21 P1: production
+    dated N88's 2022 spell 2026-09-03, before DMF's posting of 2026-09-24, and an earlier activity is no evidence).
+    Returns how many are linked."""
     by_station: dict[tuple, list[dict]] = {}
     for r in acts:
         raw = r["raw"]
-        if r.get("started_at") and raw.get("_status_code"):
+        # an activity whose end is not known (typed before its start) gives no interval to compare
+        if r.get("started_at") and raw.get("_status_code") and r["status"] != "unknown":
             by_station.setdefault((raw.get("ASN"), raw["_status_code"]), []).append(r)
     n = 0
     for p in records.values():
         raw = p.get("raw") or {}
         if raw.get("_kind") == "activity" or raw.get("_status_code") not in ("Advisory", "Pending Swimming Advisory"):
             continue
-        cands = [r for r in by_station.get((raw.get("ASN"), raw["_status_code"]), [])
-                 if p.get("started_at") and when(r["started_at"]) <= when(p["started_at"])]
-        if not cands:
+        if not p.get("started_at"):
             continue
-        best = max(cands, key=lambda r: when(r["started_at"]))
+        s0, s1 = when(p["started_at"]), when(p.get("ended_at") or fetched_at)
+
+        def overlap(r):
+            a0, a1 = when(r["started_at"]), when(r.get("ended_at") or fetched_at)
+            return (min(s1, a1) - max(s0, a0)).total_seconds()
+        cands = [r for r in by_station.get((raw.get("ASN"), raw["_status_code"]), []) if overlap(r) > 0]
+        if not cands:
+            p["duplicate_of"] = None
+            raw.pop("_superseded_by_activity", None)
+            raw.pop("_superseded_note", None)
+            continue
+        best = max(cands, key=overlap)
         p["duplicate_of"] = best["event_id"]
         raw.update(_superseded_by_activity=best["source_record_id"], _superseded_note=SUPERSEDED_NOTE)
         n += 1

@@ -93,8 +93,8 @@ SOURCE_ID = "id-deq-cyanohab-risk-table"
 URL = "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-harmful-algal-blooms/"
 LAYER = ("https://services1.arcgis.com/CNPdEkvnGl65jCX8/arcgis/rest/services/"
          "Public_Health_Advisories_for_Recreational_Waters_in_Idaho_V2_view/FeatureServer/0")
-LAYER_QUERY = (LAYER + "/query?where=1%3D1&outFields=LocationDiscription,RiskTier,DisplayOnWebsite,Issue,Issue_other,"
-               "WebNote&returnGeometry=true&outSR=4326&f=json")
+LAYER_QUERY = (LAYER + "/query?where=1%3D1&outFields=objectid,LocationDiscription,RiskTier,DisplayOnWebsite,Issue,"
+               "Issue_other,WebNote&returnGeometry=true&outSR=4326&f=json")
 LAYER_ITEM = "https://www.arcgis.com/home/item.html?id=8f6fe24f43d044fc8a9e88aa721f101d"
 STATE_PATH = BUILD_DIR / "id-deq-cyanohab-state.json"
 AUTHORITY = ("Idaho Department of Health and Welfare and Idaho Department of Environmental Quality "
@@ -242,7 +242,7 @@ def parse_issues(doc: dict) -> list[dict]:
         if not name or is_bloom_issue(a.get("Issue")):
             continue
         lat, lon = _point(g)
-        out.append({"name": name, "issue": scrub(clean(a.get("Issue"))),
+        out.append({"objectid": a.get("objectid"), "name": name, "issue": scrub(clean(a.get("Issue"))),
                     "issue_other": scrub(clean(a.get("Issue_other"))) or None,
                     "web_note": scrub(clean(a.get("WebNote"))) or None,
                     "shown": clean(a.get("DisplayOnWebsite")) or None, "lat": lat, "lon": lon})
@@ -256,17 +256,21 @@ def update_issues(state: dict, issues: list[dict] | None, at: str, layer_partial
     eps = state.setdefault("dhw_episodes", {})
     if issues is None:
         return
+    # a listing is DHW's row (objectid) with its issue: two rows of one name are two listings, and a renamed row
+    # keeps its listing (Astra 2026-11-21 P1); a row without an objectid falls back to its name and issue
     shown = {}
     for it in issues:
         if str(it.get("shown") or "").strip().lower() == "yes":
-            shown[f"{slug(it['name'])}:{slug(it['issue'])}"] = it
+            oid = it.get("objectid")
+            shown[f"oid{oid}:{slug(it['issue'])}" if oid is not None else f"{slug(it['name'])}:{slug(it['issue'])}"] = it
     open_by = {ep["key"]: sid for sid, ep in eps.items() if not ep.get("ended_at")}
     for wk, it in shown.items():
         sid = open_by.get(wk)
         if sid is None:
-            sid, n = f"dhw:{wk}:{at[:10]}", 2
+            base = f"dhw:{slug(it['name'])}:{slug(it['issue'])}:{at[:10]}"
+            sid, n = base, 2
             while sid in eps:
-                sid, n = f"dhw:{wk}:{at[:10]}~{n}", n + 1
+                sid, n = f"{base}~{n}", n + 1
             eps[sid] = {"key": wk, "first_seen": at}
         ep = eps[sid]
         ep.update(last_seen=at, row=dict(it))
@@ -593,7 +597,8 @@ def dhw_records(state: dict) -> list[dict]:
         pt = _placed(ep.get("point"))
         zone = zones.idaho_zone(county=None, lat=(pt or {}).get("lat"), lon=(pt or {}).get("lon"))
         words = issue + (f": {it['issue_other']}" if it.get("issue_other") else "")
-        raw = {"dhw_issue": issue, "dhw_issue_other": it.get("issue_other"), "dhw_web_note": it.get("web_note"),
+        raw = {"dhw_objectid": it.get("objectid"), "dhw_issue": issue, "dhw_issue_other": it.get("issue_other"),
+               "dhw_web_note": it.get("web_note"),
                "location_as_listed": it["name"], "part": part, "state": "ID", "first_seen_at": ep["first_seen"],
                "_last_seen_in_source": ep.get("last_seen"), "time_zone": zone, "start_basis": DHW_START_BASIS,
                "category_basis": ("DHW's Issue field: a Beach Closure is a beach closure, Swimmer's Itch and Other "
@@ -633,6 +638,22 @@ def fetch_layer() -> dict:
     return r.json()
 
 
+def read_layer(argv: list[str]) -> tuple[dict | None, list[dict] | None, str | None, str | None]:
+    """(bloom points, DHW's other listings, why the read is partial, the error as it may be kept); (None, None, ...)
+    when the layer was not read (an error, or --file without --layer-file)."""
+    try:
+        doc = (json.loads(Path(argv[argv.index("--layer-file") + 1]).read_text()) if "--layer-file" in argv
+               else (None if "--file" in argv else fetch_layer()))
+        if doc is None:
+            return None, None, None, None
+        layer, issues, partial = parse_layer(doc), parse_issues(doc), layer_problem(doc)
+        err = (f"DHW's layer: {partial} (no water is ended on this read; the last good points are kept)"
+               if partial else None)
+        return layer, issues, partial, err
+    except (requests.RequestException, OSError, ValueError) as e:
+        return None, None, None, scrub(f"DHW's layer: {error_detail(e)} (the last good points are kept)")
+
+
 def main(argv=None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     at = argv[argv.index("--at") + 1] if "--at" in argv else now_iso()
@@ -645,20 +666,21 @@ def main(argv=None) -> int:
             raise ValueError("no row of DEQ's table could be read")
     except (requests.RequestException, OSError, ValueError) as e:
         err = scrub(str(e))
-        write_events(SOURCE_ID, [], ok=False, error=err)
-        print(f"{SOURCE_ID}: {err}", file=sys.stderr)
+        # DEQ's table failed: nothing of the blooms changes, but DHW's own listings are read and kept up to date
+        # (Astra 2026-11-21 P2); the feed stays unhealthy
+        _, issues, layer_partial, layer_error = read_layer(argv)
+        if issues is None:
+            write_events(SOURCE_ID, [], ok=False, error=err)
+            print(f"{SOURCE_ID}: {err}", file=sys.stderr)
+            return 1
+        state = scrub_state(read_json(STATE_PATH, {}) or {})
+        update_issues(state, issues, at, layer_partial)
+        write_json(STATE_PATH, state)
+        write_events(SOURCE_ID, records(state), ok=False, partial=True, error=err,
+                     meta={"layer_error": layer_error, "dhw_listings_read_at": at})
+        print(f"{SOURCE_ID}: {err} (DHW's listings updated)", file=sys.stderr)
         return 1
-    layer, layer_error, layer_partial, issues = None, None, None, None
-    try:
-        doc = (json.loads(Path(argv[argv.index("--layer-file") + 1]).read_text()) if "--layer-file" in argv
-               else (None if "--file" in argv else fetch_layer()))
-        layer = parse_layer(doc) if doc is not None else None
-        issues = parse_issues(doc) if doc is not None else None
-        layer_partial = layer_problem(doc) if doc is not None else None
-        if layer_partial:
-            layer_error = f"DHW's layer: {layer_partial} (no water is ended on this read; the last good points are kept)"
-    except (requests.RequestException, OSError, ValueError) as e:
-        layer_error = scrub(f"DHW's layer: {error_detail(e)} (the last good points are kept)")
+    layer, issues, layer_partial, layer_error = read_layer(argv)
     state = scrub_state(read_json(STATE_PATH, {}) or {})
     snapshot = {"rows": rows, "points": layer, "dhw_listings": issues}
     if "--file" not in argv and state.get("last_snapshot") != snapshot:

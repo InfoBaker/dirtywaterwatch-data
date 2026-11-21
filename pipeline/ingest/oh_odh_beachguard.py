@@ -59,7 +59,7 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -167,12 +167,16 @@ def fetch_history(sess, page_size: int = PAGE_SIZE) -> list[dict]:
         if isinstance(doc, dict) and (doc.get("responseStatus") or {}).get("errorCode"):
             raise ValueError(f"the API answered an error on page {n + 1}: {doc['responseStatus'].get('errorCode')}")
         page = rows_of(doc)
+        if not page and doc.get("hasResultsRemaining"):
+            raise ValueError(f"page {n + 1} of the full list was empty but said more rows remain")
         for a in page:
             k = str(a.get("id"))
             if k not in seen:
                 seen.add(k)
                 out.append(a)
         if not page or not doc.get("hasResultsRemaining"):
+            if not out:
+                raise ValueError("the full list answered no rows (it held 8,657 on 2026-11-21)")
             return out
     raise ValueError(f"the full list did not end within {MAX_PAGES} pages of {page_size}")
 
@@ -184,8 +188,10 @@ def history_due(state: dict, now: str) -> bool:
 
 
 def apply_history(state: dict, rows: list[dict], now: str) -> dict:
-    """Fold the full list into the archive: a past advisory not seen before becomes a record; one already held takes
-    the list's row (its reopening date). An advisory in effect (isCurrentAdvisory true) is left to the current list."""
+    """Fold the full list into the archive: a past advisory not seen before becomes a record; one the current list
+    listed keeps its own row, and the full list's row is kept beside it (history_row: its reopening date), so the full
+    list never rewrites an advisory the current list shows (Astra 2026-11-21 P1). An advisory in effect
+    (isCurrentAdvisory true) is left to the current list."""
     recs = state.setdefault("records", {})
     counts = {"rows": len(rows), "past": 0, "current": 0, "new": 0}
     for a in rows:
@@ -198,6 +204,8 @@ def apply_history(state: dict, rows: list[dict], now: str) -> dict:
         if rec is None:
             recs[key] = {"row": a, "history_seen_at": now}
             counts["new"] += 1
+        elif rec.get("last_listed_at"):
+            rec.update(history_row=a, history_seen_at=now)
         else:
             rec.update(row=a, history_seen_at=now)
     state["history"] = {"read_at": now, **counts}
@@ -250,7 +258,10 @@ def apply(state: dict, rows: list[dict], now: str) -> dict:
 def _end(r: dict, a: dict, raw: dict) -> tuple[str, str | None, str | None]:
     """(status, ended_at, parse_error) of one archived advisory; writes the end's precision and basis into raw."""
     listed, lifted = r.get("last_listed_at"), r.get("lifted_at")
-    past = a.get("isCurrentAdvisory") is False and r.get("history_seen_at")
+    h = r.get("history_row") if listed else a              # the full list's row for an advisory the polls listed
+    past = bool(h) and h.get("isCurrentAdvisory") is False and r.get("history_seen_at")
+    if listed and h:
+        a = dict(a, reopenDate=h.get("reopenDate"))
     reopen, rprec = when(a.get("reopenDate"))
     start = when(a.get("startDate"))[0]
     if reopen and start and _t(reopen) < _t(start):
@@ -267,7 +278,7 @@ def _end(r: dict, a: dict, raw: dict) -> tuple[str, str | None, str | None]:
         return "advisory_active", None, None
     raw.update(lift_observed_between=r["lift_between"],
                lift_basis="BeachGuard's list of current advisories stopped listing it")
-    if past and reopen and _t(listed) <= _t(reopen) <= _t(lifted):
+    if past and reopen and _in_window(reopen, rprec, listed, lifted):
         raw.update(ended_at_precision=rprec, end_basis=REOPEN_BASIS)
         return "advisory_lifted", reopen, None
     raw["ended_at_precision"] = "poll"
@@ -275,6 +286,17 @@ def _end(r: dict, a: dict, raw: dict) -> tuple[str, str | None, str | None]:
         raw["reopen_note"] = (f"BeachGuard listed a reopening date of {a['reopenDate']}; it is not used as the end "
                               "(it falls outside the polls that last listed it and then lifted it)")
     return "advisory_lifted", lifted, None
+
+
+def _in_window(reopen: str, prec: str, listed: str, lifted: str) -> bool:
+    """True when the reopening falls between the last poll that listed the advisory and the poll that lifted it; a
+    reopening given as a date only counts as its whole local day (any part of the day inside the window)."""
+    r0 = _t(reopen)
+    if prec == "day":
+        nxt = (r0.astimezone(UTC) + timedelta(days=1, hours=1)).astimezone(TZ)
+        r1 = datetime(nxt.year, nxt.month, nxt.day, tzinfo=TZ)
+        return r0 <= _t(lifted) and r1 >= _t(listed)
+    return _t(listed) <= r0 <= _t(lifted)
 
 
 def to_record(key: str, r: dict) -> dict:

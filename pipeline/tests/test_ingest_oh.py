@@ -391,6 +391,59 @@ def test_beachguard_hourly_run_rereads_history_only_when_a_week_old(monkeypatch)
     assert BG.history_due({"history": {"read_at": "2026-10-31T00:00:00Z"}}, NOW) is True
 
 
+def _sess(pages):
+    class Resp:
+        def __init__(self, doc):
+            self.doc = doc
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self.doc
+
+    class Sess:
+        def get(self, url, params=None, timeout=None):
+            return Resp(pages.pop(0))
+    return Sess()
+
+
+def test_review_an_empty_page_that_says_more_remain_or_an_empty_list_is_a_failed_read():
+    import pytest
+    with pytest.raises(ValueError):
+        BG.fetch_history(_sess([{"queryResults": [], "hasResultsRemaining": True}]), page_size=3)
+    with pytest.raises(ValueError):
+        BG.fetch_history(_sess([{"queryResults": [], "hasResultsRemaining": False}]), page_size=3)
+
+
+def test_review_the_full_list_never_rewrites_an_advisory_the_current_list_shows():
+    state = {}
+    rows = BG.rows_of(_load("oh_odh_beachguard.json"))
+    past = copy.deepcopy(_history())
+    row = next(r for r in past if r["id"] == "3707863259281249333")
+    row.update(isCurrentAdvisory=False, typeId="HAB_WARNING_ADV", latitudeCenter=40.0, reopenDate="11/07/2026 7:40 PM")
+    recs, _ = BG.run(state, rows, NOW, history=past)
+    r = next(x for x in recs if x["source_record_id"] == "3707863259281249333")
+    assert r["status"] == "advisory_active" and r["event_type"] == "beach_advisory" and r["lat"] != 40.0
+
+
+def test_review_a_date_only_reopening_counts_as_its_whole_day_inside_the_lift_window():
+    state = {}
+    rows = BG.rows_of(_load("oh_odh_beachguard.json"))
+    BG.run(state, rows, NOW)
+    BG.run(state, rows[:1], LATER)
+    past = copy.deepcopy(_history())
+    row = next(r for r in past if r["id"] == "3707863259281249333")
+    row.update(isCurrentAdvisory=False, reopenDate="11/07/2026")      # the day of the polls, Ohio's clock
+    recs, _ = BG.run(copy.deepcopy(state), rows[:1], LATER, history=past)
+    r = next(x for x in recs if x["source_record_id"] == "3707863259281249333")
+    assert r["ended_at"] == "2026-11-07T00:00:00-05:00" and r["raw"]["ended_at_precision"] == "day"
+    row["reopenDate"] = "11/05/2026"                                  # a day before the last listing: the poll stands
+    recs, _ = BG.run(copy.deepcopy(state), rows[:1], LATER, history=past)
+    r = next(x for x in recs if x["source_record_id"] == "3707863259281249333")
+    assert r["ended_at"] == LATER and r["raw"]["ended_at_precision"] == "poll"
+
+
 # County-aware placement (build/status.py COUNTY_STATES) --------------------------------------------------------------
 
 def test_ohio_name_placement_is_county_aware(monkeypatch):
