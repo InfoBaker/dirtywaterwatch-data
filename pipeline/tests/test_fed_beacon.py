@@ -260,6 +260,12 @@ def test_an_other_closure_for_hurricane_rip_currents_is_listed_only_and_a_bacter
     # OTHER with a comment that states a water-quality reason keeps its colour
     other = {**ny, "raw": {**ny["raw"], "reason_comments": ["Elevated bacteria after the storm"]}}
     assert BR.judge(other, RULES)["stated"] is True
+    # Texas's OTHER advisories give only the count as their comment (BEACON 2025): a bacteria result, so a stated reason
+    tx = {**ny, "event_type": "beach_advisory", "raw": {**ny["raw"], "reason_comments": ["134.00 cfu/100ml"]}}
+    assert BR.judge(tx, RULES)["how"] == "field"
+    # Delaware's "System Test" and Michigan's "(No information provided)" give none
+    for words in ("System Test", "(No information provided)", "Poor Water Clarity", "Tropical Storm and Rip Tides"):
+        assert BR.judge({**ny, "raw": {**ny["raw"], "reason_comments": [words]}}, RULES)["stated"] is False, words
 
 
 def _lake(slug, name, lat, lon, state, d=0.02):
