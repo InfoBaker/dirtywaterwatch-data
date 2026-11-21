@@ -157,19 +157,6 @@ def test_utahs_off_season_label_is_listed_and_its_e_coli_health_watch_stays_red(
     assert [iv["color"] for iv in S.event_intervals(hw, "UT", NOW, rules=RULES)][:1] == ["red"]
 
 
-def test_scdes_swimming_advisory_layer_gives_no_reason_so_its_sites_are_listed():
-    from ingest import sc_des_advisories as A
-    d = json.loads((FIX / "sc" / "swimming_advisory.json").read_text())
-    feats = A.safe_features(A.check_swim(d["layer"], d["count"]), "geometry", A.SWIM_FIELDS)
-    recs, _, _ = A.swim_records(feats, {}, "2026-11-15T15:00:00Z")
-    assert len(recs) == 5
-    for r in recs:
-        assert BR.judge(r, RULES) == {"stated": False, "how": "none",
-                                      "read": "SCDES's map layer titled “Swimming Advisory”, which gives no reason, "
-                                              "date or status"}
-        assert S.event_intervals(r, "SC", datetime(2026, 11, 15, 16, tzinfo=UTC), rules=RULES) == []
-
-
 def test_the_pearl_river_keeps_red_on_mdeqs_2019_release_and_trahon_creek_on_its_own_text():
     from ingest import ms_mdeq_water_contact as W
     rel = FIX / "ms_mdeq_releases"
@@ -354,3 +341,19 @@ def test_delawares_map_label_of_a_current_advisory_is_its_water_quality_advisory
     c = {"source_id": "de-dnrec-recreational-water", "event_type": "beach_closure", "advice_text": None,
          "raw": {"advisory_type": "Recreational Water Closure", "advisory_reason": "End of Sampling Season"}}
     assert BR.judge(c, RULES)["stated"] is False
+
+
+def test_south_carolina_river_and_lake_swimming_advisories_keep_their_colour():
+    # SCDES's "Water Advisories" service, layer "Swimming Advisory" (real fixture): the agency's advisory against
+    # swimming at the site; no further reason is given, and the advisory itself concerns the water (coordinator,
+    # 2026-11-21: erring on safety; the owner may list them instead)
+    from ingest import sc_des_advisories as A
+    ent = RULES["beach_reason"]["sources"]["sc-des-freshwater-swim-advisories"]
+    assert ent["kind"] == "program" and "Swimming Advisory" in ent["basis"]
+    d = json.loads((FIX / "sc" / "swimming_advisory.json").read_text())
+    feats = A.safe_features(A.check_swim(d["layer"], d["count"]), "geometry", A.SWIM_FIELDS)
+    recs, _, _ = A.swim_records(feats, {}, "2026-11-15T15:00:00Z")
+    assert len(recs) == 5
+    for r in recs:
+        v = BR.judge(r, RULES)
+        assert v["stated"] is True and v["how"] == "program" and v["basis"] == ent["basis"]
