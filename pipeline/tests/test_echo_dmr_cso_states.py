@@ -112,7 +112,8 @@ def test_lines_off_the_registry_per_year_and_off_the_permits_read_are_not_read(e
     assert not [x for x in rows if x["feature"] == "300" or x["ParameterCode"] == "51709"]
     assert stats["lines_at_outfalls_not_in_registry_as_cso:OH0024732:300"] == 2      # Columbus's station 300
     assert "51709" not in S.CODES and S._not_monthly_unit("occur/yr") and S._not_monthly_unit("hr/qtr")
-    assert not S.parse_zip(_zip(tmp, "OH"), keys, {"OH0099999"}, Counter())
+    with pytest.raises(ValueError, match="no line for any permit read"):          # Astra review P1-7
+        S.parse_zip(_zip(tmp, "OH"), keys, {"OH0099999"}, Counter())
 
 
 def test_kentuckys_monthly_totals_and_a_yes_no_line(env):
@@ -206,7 +207,7 @@ def test_a_second_run_reads_the_cache_and_a_changed_file_is_read_again(env, monk
             return 404, None, None, "HTTP 404"
         return 200, heads["lm"], z.stat().st_size, "ok"
 
-    def download(url, dest):
+    def download(url, dest, **kw):
         asked.append(url)
         shutil.copy(z, dest.parent.mkdir(parents=True, exist_ok=True) or dest)
         return ""
@@ -340,3 +341,190 @@ def test_a_volume_above_the_monthly_ceiling_is_kept_as_text_only(env):
     # Indiana's records have no ceiling of their own (feed without max_mgal_per_month)
     r = M.build_records(cells, names, reg, {}, stats, {"source_id": "x"})[0]
     assert r["volume_gal"] == 7_841_548_000_000
+
+
+# ------------------------------------------------------------------------------------------------ Astra review 2026-11-21
+
+def _line(base, value="", nodi="", unit="", limit_unit="Mgal", code="74063", version="0", received="10/20/2026",
+          end="09/30/2026", nrep="1", vid="1"):
+    return {"EXTERNAL_PERMIT_NMBR": "OH0000001", "PERM_FEATURE_NMBR": "002", "PERM_FEATURE_TYPE_CODE": "EXO",
+            "PARAMETER_CODE": code, "PARAMETER_DESC": "Overflow volume", "MONITORING_LOCATION_CODE": "1",
+            "NMBR_OF_REPORT": nrep, "STATISTICAL_BASE_CODE": base, "MONITORING_PERIOD_END_DATE": end,
+            "DMR_VALUE_ID": vid, "DMR_VALUE_NMBR": value, "DMR_UNIT_DESC": unit, "LIMIT_UNIT_DESC": limit_unit,
+            "VALUE_RECEIVED_DATE": received, "DAYS_LATE": "", "NODI_CODE": nodi, "VERSION_NMBR": version,
+            "LIMIT_SET_SCHEDULE_ID": "9"}
+
+
+def test_p1_1_a_zero_or_blank_total_beside_a_positive_statistic_is_a_discharge_month():
+    from ingest import echo_dmr_cso_states as S
+    r = S.fold_rows([_line("MP", "0"), _line("DD", "2")], "volume", Counter())
+    assert S._num(r["DMRValueNmbr"]) == 2 and r["FiguredAs"] and "a monthly total of 0" in r["FiguredAs"]
+    r = S.fold_rows([_line("MP", ""), _line("DD", "2")], "volume", Counter())
+    assert r is not None and S._num(r["DMRValueNmbr"]) == 2 and r["FiguredAs"]
+    # a daily minimum of zero alone is no finding of no discharge (a statistic, never the month's figure)
+    r = S.fold_rows([_line("DC", "0"), _line("DD", "3")], "volume", Counter())
+    assert S._num(r["DMRValueNmbr"]) == 3 and r["FiguredAs"]
+
+
+def test_p1_2_the_permit_version_is_not_a_revision():
+    from collections import defaultdict
+
+    from ingest import echo_dmr_cso_states as S
+    from ingest import in_echo_cso_monthly as M
+    old = S.fold_rows([_line("MP", "4", code="74062", unit="#/mo", version="2", received="10/05/2026", vid="a")],
+                      "events", Counter())
+    new = S.fold_rows([_line("MP", "0", code="74062", unit="#/mo", version="0", received="10/20/2026", vid="b")],
+                      "events", Counter())
+    assert old["VersionNmbr"] == new["VersionNmbr"] == "0" and old["PermitVersion"] == "2"
+    res = S.to_results([old, new])
+    cells, _ = M.collect(res, {("OH0000001", "2"): {"state": "OH"}}, defaultdict(Counter), dict(S.CODES))
+    assert cells[("OH0000001", "002", "2026-09")]["events"]["DMRValueNmbr"] == "0"      # the later receipt wins
+
+
+def test_p1_3_each_lines_own_unit():
+    from ingest import echo_dmr_cso_states as S
+    r = S.fold_rows([_line("MP", "1", unit="", limit_unit="Mgal"), _line("DD", "1", unit="gal", limit_unit="gal")],
+                    "volume", Counter())
+    assert r["DMRUnitDesc"] == "Mgal" and r["FiguredAs"] is None                         # the total's own unit
+    r = S.fold_rows([_line("DD", "1", unit="Mgal"), _line("MK", "1", unit="gal")], "volume", Counter())
+    assert r["FiguredAs"] and "gal" in r["FiguredAs"] and "million gallons" in r["FiguredAs"]
+
+
+def test_p1_4_only_the_validated_pair_or_a_total_is_a_months_figure_and_annual_lines_are_not_read(env):
+    from ingest import echo_dmr_cso_states as S
+    r = S.fold_rows([_line("DD", "2"), _line("DB", "2")], "volume", Counter())
+    assert r["FiguredAs"]
+    assert S.fold_rows([_line("DD", "2"), _line("MK", "2")], "volume", Counter())["FiguredAs"] is None
+    _, M, tmp = env
+    p = tmp / "x.zip"
+    import csv as _csv
+    import io as _io
+    buf = _io.StringIO()
+    w = _csv.DictWriter(buf, fieldnames=list(_line("MP").keys()))
+    w.writeheader()
+    w.writerow(_line("AB", "5"))
+    w.writerow(_line("MP", "5", nrep=""))
+    with zipfile.ZipFile(p, "w") as z:
+        z.writestr("OH_FY2026_NPDES_DMRS.csv", buf.getvalue())
+    st = Counter()
+    assert S.parse_zip(p, {("OH0000001", "2")}, {"OH0000001"}, st) == []
+    assert st["lines_with_an_annual_or_season_base"] == 1 and st["lines_with_a_monitoring_period_longer_than_a_month"] == 1
+
+
+def test_p1_5_a_total_and_a_statistic_of_the_same_value_are_different_evidence():
+    from ingest import in_echo_cso_monthly as M
+    a = {"DMRValueNmbr": "1", "NODICode": None, "DMRUnitDesc": "Mgal", "StatisticalBases": "MO TOTAL 1"}
+    b = dict(a, StatisticalBases="DAILY MX 1", FiguredAs="overflow volume filed as a daily maximum of 1 million gallons")
+    assert M.evidence(a) != M.evidence(b)
+    assert M.evidence({"DMRValueNmbr": "1", "NODICode": None}) == (1.0, "")              # Indiana's rows as before
+
+
+def test_p1_6_a_state_file_record_is_always_a_discharge_mark():
+    from build import status
+    ev = {"source_id": "il-echo-dmr-cso", "event_type": "cso", "time_precision": "month", "started_at": "2026-04-01",
+          "ended_at": "2026-04-30", "reported_at": "2026-05-20", "volume_gal": 0,
+          "volume_text": "0 discharge events, 78.1 hours, 0 million gallons in 2026-04 (monthly DMR totals)",
+          "raw": {"discharged": True}}
+    assert status.monthly_mark(ev)["discharged"] is True
+    ev["raw"] = {}
+    assert status.monthly_mark(ev)["discharged"] is False                                 # other feeds as before
+
+
+def test_p1_7_an_empty_table_or_one_with_no_line_for_the_permits_is_a_failed_read(env):
+    S, M, tmp = env
+    p = tmp / "empty.zip"
+    with zipfile.ZipFile(p, "w") as z:
+        z.writestr("OH_FY2026_NPDES_DMRS.csv", (FIX / "OH_FY2026_NPDES_DMRS.csv").read_text().splitlines()[0] + "\n")
+    with pytest.raises(ValueError, match="empty"):
+        S.parse_zip(p, set(), {"OH0024732"}, Counter())
+    with pytest.raises(ValueError, match="no line for any permit read"):
+        S.parse_zip(_zip(tmp, "OH"), set(), {"OH0099999"}, Counter())
+
+
+def test_p2_8_no_header_request_starts_after_the_wall_clock(env, monkeypatch):
+    S, M, tmp = env
+    assert _run(S, tmp, "KY") == 0
+    asked = []
+    monkeypatch.setattr(S, "head", lambda url: asked.append(url) or (200, "x", 1, "ok"))
+    b = S.Budget(None, None)
+    b.until = S.time.monotonic() - 1                 # the wall clock has run out
+    assert S.run_state("KY", date(2025, 10, 1), TODAY, b, _reg_rows()) == 0
+    doc = _doc(tmp, "ky-echo-dmr-cso")
+    assert asked == [] and doc["meta"]["fetch"]["FY2026"].startswith("stale cache")
+
+
+def test_p2_9_the_preferred_code_is_chosen_month_by_month():
+    from ingest import echo_dmr_cso_states as S
+    rows = [{"permit": "P", "feature": "1", "ParameterCode": "74062", "MonitoringPeriodEndDate": "31-AUG-26"},
+            {"permit": "P", "feature": "1", "ParameterCode": "84165", "MonitoringPeriodEndDate": "30-SEP-26"},
+            {"permit": "P", "feature": "1", "ParameterCode": "74062", "MonitoringPeriodEndDate": "31-JUL-26"},
+            {"permit": "P", "feature": "1", "ParameterCode": "84165", "MonitoringPeriodEndDate": "31-JUL-26"}]
+    kept = S.preferred(rows, Counter())
+    assert [(r["ParameterCode"], r["MonitoringPeriodEndDate"]) for r in kept] == [
+        ("74062", "31-AUG-26"), ("84165", "30-SEP-26"), ("74062", "31-JUL-26")]
+
+
+def test_p2_10_a_current_year_file_read_before_that_answers_404_is_a_failure(env, monkeypatch):
+    S, M, tmp = env
+    z = _zip(tmp, "KY")
+    monkeypatch.setattr(S, "head", lambda url: (200, "lm", z.stat().st_size, "ok"))
+    monkeypatch.setattr(S, "download", lambda url, dest, **kw: shutil.copy(z, dest.parent.mkdir(parents=True, exist_ok=True) or dest) and "")
+    today = date(2025, 11, 21)                      # FY2026 is the current year
+    assert S.run_state("KY", date(2025, 10, 1), today, S.Budget(None, None), _reg_rows()) == 0
+    monkeypatch.setattr(S, "head", lambda url: (404, None, None, "HTTP 404"))
+    assert S.run_state("KY", date(2025, 10, 1), today, S.Budget(None, None), _reg_rows()) == 1
+    assert _doc(tmp, "ky-echo-dmr-cso")["meta"]["fetch"]["FY2026"].startswith("failed (HTTP 404")
+
+
+def test_p2_11_monthly_figures_are_left_out_of_a_grade_only_beside_dated_reports():
+    from export import coverage as C
+    annual = {"event_id": "oh-a:1", "source_id": "oh-annual", "event_type": "annual_total", "state": "OH",
+              "time_precision": "year", "published_at": "2026-06-01T00:00:00Z", "started_at": "2025-01-01",
+              "water_slugs": ["sample-creek-oh"]}
+    monthly = [{"event_id": f"oh-echo-dmr-cso:{i}", "source_id": "oh-echo-dmr-cso", "event_type": "cso", "state": "OH",
+                "time_precision": "month", "started_at": f"2026-{1 + i % 9:02d}-01", "reported_at": "2026-10-20",
+                "water_slugs": ["sample-creek-oh"]} for i in range(40)]
+    out = C.coverage([annual] + monthly, [{"slug": "sample-creek-oh", "state": "OH",
+                                           "events": ["oh-a:1"] + [m["event_id"] for m in monthly]}],
+                     [], [], [], {}, "2026-11-21T03:00:00Z", source_names={})
+    assert out["states"]["OH"]["grade"] == "Monthly totals only"
+    assert out["waters"]["sample-creek-oh"]["grade"] == "Monthly totals only"
+
+
+def test_p2_12_the_receipt_is_the_permitting_authoritys_not_epas():
+    root = Path(__file__).resolve().parents[2]
+    for st in ("oh", "ky"):
+        t = (root / "research" / st / "state-text.md").read_text()
+        assert "reached the agency" not in t and "each month's report was received a median of" in t
+
+
+def test_p3_13_filed_figures_are_written_whole():
+    from ingest import in_echo_cso_monthly as M
+    assert M._g(0.0000001) == "0.0000001" and M._g(7841548.0) == "7841548" and M._g(28482.0) == "28482"
+    assert M._g(1.1) == "1.1"
+
+
+def test_p3_14_a_failed_download_leaves_no_file(env, monkeypatch):
+    S, M, tmp = env
+    monkeypatch.setattr(S, "head", lambda url: (200, "lm", 10, "ok") if "FY2026" in url else (404, None, None, "x"))
+
+    def bad(url, dest, **kw):
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(b"<html>")
+        return "not a ZIP"
+    monkeypatch.setattr(S, "download", bad)
+    S.run_state("KY", date(2025, 10, 1), TODAY, S.Budget(None, None), _reg_rows())
+    assert not list((tmp / "raw").rglob("*.zip"))
+
+
+def test_the_register_scripts_keep_the_dmr_file_rows():
+    """The whole-suite run of 2026-11-21: add_il_register_rows rebuilds every Illinois row, so a row added only to
+    il.json would be dropped by its next run (test_il_registry counted 265 against 266)."""
+    import importlib.util
+    root = Path(__file__).resolve().parents[2]
+    for st in ("oh", "ky", "il", "tn", "ks"):
+        spec = importlib.util.spec_from_file_location(f"reg_{st}", root / "scripts" / f"add_{st}_register_rows.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        ids = {r["id"] for r in mod.AGENCY}
+        assert f"{st}-epa-echo-cso-dmr-file" in ids, st

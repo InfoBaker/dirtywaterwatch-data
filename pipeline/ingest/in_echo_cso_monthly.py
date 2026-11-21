@@ -104,7 +104,8 @@ RAW_FIELDS = ("DMRValueId", "DMRValueNmbr", "DMRUnitDesc", "StatisticalBaseDesc"
 # the evidence store when present, so Indiana's records and store are unchanged. FiguredAs marks a figure that is not
 # the month's own total (the statistical bases disagree, a yes/no observation, an implausible count): it says whether
 # there was a discharge, never how much (figures).
-STATE_FILE_FIELDS = ("ParameterCode", "MonitoringLocationDesc", "StatisticalBases", "FiguredAs", "UnitFrom")
+STATE_FILE_FIELDS = ("ParameterCode", "MonitoringLocationDesc", "StatisticalBases", "FiguredAs", "UnitFrom",
+                     "PermitVersion")
 
 
 def registry_outfalls(rows: list[dict] | None = None, state: str = "IN") -> dict[tuple[str, str], dict]:
@@ -298,8 +299,13 @@ def collect(results: dict[tuple[str, str], dict], reg: dict, stats: dict,
 
 
 def evidence(row: dict) -> tuple:
-    """What a DMR row says: (its value, its NODI code)."""
-    return num(row.get("DMRValueNmbr")), str(row.get("NODICode") or "").upper()
+    """What a DMR row says: (its value, its NODI code); for a row of EPA's state files (StatisticalBases) also its unit
+    and whether it is the month's total, so a total and a daily maximum of the same value disagree (Astra review
+    2026-11-21 P1-5). Indiana's rows carry no StatisticalBases: their evidence is unchanged."""
+    base = (num(row.get("DMRValueNmbr")), str(row.get("NODICode") or "").upper())
+    if row.get("StatisticalBases"):
+        return base + (str(row.get("DMRUnitDesc") or ""), bool(row.get("FiguredAs")))
+    return base
 
 
 def _rank(entry: dict) -> tuple:
@@ -435,9 +441,13 @@ def figures(cell: dict) -> dict:
 
 
 def _g(v: float) -> str:
-    """A filed figure as written: 28482, 1.1, 0.0018; never in exponent form (7841548, not 7.84155e+06)."""
+    """A filed figure as written: 28482, 1.1, 0.0018; never in exponent form (7841548, not 7.84155e+06; 0.0000001,
+    never rounded to 0: Astra review 2026-11-21 P3-13)."""
     t = f"{v:g}"
-    return f"{v:.6f}".rstrip("0").rstrip(".") if "e" in t else t
+    if "e" not in t:
+        return t
+    from decimal import Decimal
+    return format(Decimal(repr(float(v))).normalize(), "f")
 
 
 def _filed(row: dict) -> str:
@@ -639,6 +649,9 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict, 
                # the chart builder's monthly measures (build/charts.py total_measures): events and hours
                "parameters": {k: {"DMRValueNmbr": v} for k, v in (("events", fg["events"]), ("duration", fg["hours"]))
                               if v is not None},
+               # the state files: every record is a month with a figure above zero, so the status build marks it
+               # whatever its text says (a zero count beside positive hours; Astra review 2026-11-21 P1-6)
+               **({"discharged": True} if feed.get("source_id") else {}),
                "note": feed.get("note") or ("the operator's monthly DMR totals for this outfall (events, hours, million "
                                             "gallons), not an individual discharge: no day is given")}
         records.append(event(

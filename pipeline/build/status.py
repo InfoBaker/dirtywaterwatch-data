@@ -610,7 +610,9 @@ def monthly_mark(ev: dict) -> dict | None:
     events = int(em.group(1)) if em else None
     vol = ev.get("volume_gal") if isinstance(ev.get("volume_gal"), (int, float)) else None
     known = [x for x in (days, events, vol) if x is not None]
-    discharged = not known or any(x > 0 for x in known)
+    # a record whose collector says it is a discharge month (EPA's state DMR files: raw.discharged) is one whatever its
+    # text gives (a zero count beside positive hours; Astra review 2026-11-21 P1-6); other records as before
+    discharged = not known or any(x > 0 for x in known) or (ev.get("raw") or {}).get("discharged") is True
     rt = parse_time(ev.get("reported_at"))       # when EPA (or the agency) received it; never our fetch time (SOL P1-5)
     when = f"{rt.astimezone(LOCAL):%b} {rt.astimezone(LOCAL).day}, {rt.astimezone(LOCAL).year}" if rt else None
     mtext = f"{start.astimezone(LOCAL):%B %Y}"

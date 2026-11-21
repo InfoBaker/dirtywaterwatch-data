@@ -13,7 +13,7 @@ level: "federal"
 #   month is marked and no count is taken; lines at 'See Comments' and 'Prior to Disinfection' are not read.
 # Real read (2026-11-21): 14 outfalls of 2 permits file such lines; 151 outfall-months with a
 #   discharge from 2 permits (2025-01 to 2026-08), 143 filed no discharge. A median 14 days
-#   from the month's end to EPA's receipt.
+#   from the month's end to the report's receipt (VALUE_RECEIVED_DATE: by the permitting authority).
 # Records: month precision (the monthly mark, never red or yellow; build/status.py EPA_MONTHLY_SOURCES); placed at the
 #   registry outfall (point rounded to three decimals, and water; never a plant's point). Revisions and reconciliation
 #   as Indiana's (in_echo_cso_monthly). Cited per figure: permit, outfall, month, parameter, value, DMR value id.

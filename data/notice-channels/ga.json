@@ -868,7 +868,7 @@
    "feed_source_id": "ga-echo-dmr-cso",
    "publishes": "results",
    "noun": "Data feed",
-   "note": "Each combined sewer outfall's monthly overflow figures from the operators' discharge monitoring reports, read from EPA's Georgia DMR file per fiscal year: 20 outfall-months with a discharge from 1 of 4 permits with an open combined sewer outfall, 2025-01 to 2026-09 (2026-11-21). Month precision, a median 12 days after the month.",
+   "note": "Each combined sewer outfall's monthly overflow figures from the operators' discharge monitoring reports, read from EPA's Georgia DMR file per fiscal year: 71 outfall-months with a discharge from 1 of 4 permits with an open combined sewer outfall, 2025-01 to 2026-09 (2026-11-21). Month precision, a median 12 days after the month.",
    "sources": [
     "ga-echo-dmr-cso"
    ],

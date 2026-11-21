@@ -407,7 +407,7 @@
   "license": "EPA public data (US government work)",
   "legal_basis": "NPDES permit monitoring and reporting conditions: results reported on a discharge monitoring report (40 CFR 122.41(l)(4)), filed electronically and shared with EPA (40 CFR part 127)",
   "status": "used",
-  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 84 outfall-months with a discharge from 1 of 3 permits, 2025-01 to 2026-09, received by EPA a median 18 days after the month. Month precision: the monthly mark only.",
+  "status_reason": "Read by echo_dmr_cso_states (2026-11-21, decision 45): 84 outfall-months with a discharge from 1 of 3 permits, 2025-01 to 2026-09, received a median 18 days after the month. Month precision: the monthly mark only.",
   "verified": "verified",
   "checked": "2026-11-21",
   "notes": ""
