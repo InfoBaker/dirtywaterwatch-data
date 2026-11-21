@@ -225,3 +225,27 @@ def test_other_types_and_a_switched_off_rule_are_not_judged():
     rules = copy.deepcopy(RULES)
     rules["beach_reason"]["enabled"] = False
     assert BR.judge({**ev, "event_type": "beach_closure"}, rules) is None
+
+
+def test_the_export_carries_the_note_on_the_record_and_in_the_csv(tmp_path, monkeypatch):
+    from build import redact as R
+    from export import build as X
+    from export import csv as csv_export
+    il, (st, _) = _illinois_status(tmp_path, monkeypatch)
+    deep = il["467"]
+    r = R.redactor_for([deep], tmp_path)
+    rec = X.public_record(deep, st["placements"][deep["event_id"]], r)
+    assert rec["no_stated_reason"]["label"] == "Beach closed; the source gives no reason"
+    masc = il["203"]
+    assert "no_stated_reason" not in X.public_record(masc, st["placements"][masc["event_id"]], r)
+    monkeypatch.setattr(S, "_STATES", {"IL"})
+    rows = []
+    for e in (rec, X.public_record(masc, st["placements"][masc["event_id"]], r)):
+        e["fixture"] = False
+        rows.append(e)
+    out = tmp_path / "csv"
+    csv_export.write_csvs(rows, [], [], out, page_ids=set())
+    import csv as _csv
+    with (out / "all-reports-2026.csv").open(newline="", encoding="utf-8") as f:
+        got = {x["record_id"]: x["listed_without_colour"] for x in _csv.DictReader(f)}
+    assert got == {deep["source_record_id"]: "Beach closed; the source gives no reason", masc["source_record_id"]: ""}
