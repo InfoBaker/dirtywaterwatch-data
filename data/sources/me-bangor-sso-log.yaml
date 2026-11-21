@@ -1,0 +1,27 @@
+id: "me-bangor-sso-log"
+name: "City of Bangor (Maine) SSO Event Log, annual consent-decree compliance reports to EPA, 2016 to 2024"
+url: "https://bangormaine.gov/411/Consent-Decree---US-EPA"
+homepage: "https://bangormaine.gov/411/Consent-Decree---US-EPA"
+kind: "pdf"
+level: "municipal"
+# Notes (2026-11-21, sources research follow-up): every sanitary sewer overflow the City found each calendar year
+#   (4 to 11 a year; 72 rows for 2016 to 2024), appendix E or F of the yearly Annual Report on Compliance under the
+#   2015 consent decree. The page and the reports answer GitHub's runner (200).
+#   The 2016 to 2022 logs are rotated scans (2021 has no text layer), so the rows are transcribed by two independent
+#   readings into data/reference/bangor-sso-log-2016-2024.csv, without the location column (street addresses).
+# Can fill: started_at (reported or discovered; minute where printed), ended_at (stopped), volume (one number where
+#   given), cause, final disposition, the water where the disposition names one (Penobscot River, Kenduskeag Stream)
+# Cannot fill: coordinates (the location is a street address and is not kept); the water for "ground", basements,
+#   storm drains and ditches; Birch Stream and Penjajawoc Stream have no water record yet
+cadence: "Yearly, dated January 31 for the year before; the 2025 report was not listed on 2026-11-21."
+license: "None stated; a public report of the City of Bangor to EPA and Maine DEP."
+attribution: "City of Bangor, Annual Report on Compliance (consent decree, United States v. City of Bangor)"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["ME"]
+access: ["pdf"]
+access_detail: "PDF per year at https://bangormaine.gov/DocumentCenter/View/<id>/Annual-Report-on-Compliance-Calendar-Year-<year>; the log is a rotated scan for 2016 to 2022. The ingester reads the transcription and checks the page for a report it has not transcribed (meta.unread_reports)."
+machine_readable: false
+legal_basis: "Consent decree, United States v. City of Bangor, No. 1:15-cv-00350-NT (D. Me., entered 2015-11-13; first modification January 2016): annual report on compliance with an SSO event log. Posting the reports on the City's site is voluntary."
+checked: "2026-11-21"

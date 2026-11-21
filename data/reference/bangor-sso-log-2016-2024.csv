@@ -1,0 +1,78 @@
+# City of Bangor, Maine: SSO Event Log tables of the annual consent-decree compliance reports to EPA, calendar years 2016 to 2024
+# (https://bangormaine.gov/411/Consent-Decree---US-EPA). Transcribed 2026-11-21 from each report's log page (page = PDF page;
+# 2016 to 2022 are rotated scans) by two independent readings that agree on every row and on every date, disposition, cause and
+# volume cell. Cells as printed; wrapped lines joined. The Location (Nearest Address) column is not transcribed; the notifier is
+# kept as a category only. Read by pipeline/ingest/me_bangor_sso_log.py.
+report_year,page,event_no,reported_or_discovered,stopped,final_disposition,source_of_notification_kind,suspected_cause,due_to_blockage_or_hydraulic_limitation,estimated_volume,prior_sso_date
+2024,78,24-01,1/10/2024,1/10/2024,Ground,city staff,Snow melt combined with 2-3' storm surge during heavy snow/rain event,No,"<99,970",9/30/2015
+2024,78,24-02,1/11/2024,1/11/2024,Ground,city staff,"Heavy wind, snow, and rain event",No,Unknown,10/17/2022
+2024,78,24-03,3/11/2024,3/11/2024,Residental Basement,resident,Collapsed sewer/storm main,Yes,"1,200 Gallons",None
+2024,78,23-04,4/1/2024,4/1/2024,Ground,city staff,"2.56"" of rain over duration of day long rain event",No,Unknown,1/11/2024
+2024,78,24-05,4/22/2024,4/22/2024,Ground,city staff,Force main had leak in line,No,380 Gallons,1/30/2023
+2024,78,24-06,5/29/2024,6/10/2024,Airport retention pond eventually draining to Birch Stream,city staff,Failed sewer main,No,Unknown,None
+2024,78,24-07,6/17/2024,6/17/2024,Ground,city staff,Collapsed sewer/storm main,Yes,Unknown,None
+2024,78,24-08,6/21/2024,6/21/2024,Residental Basement,contractor,Sewer main plugged with paper due to lack of flow,Yes,75 Gallons,None
+2024,78,24-9,8/2/2024,8/2/2024,Penobscot River,city staff,"Operator shut wrong valve on Contact Chamber, causing chamber to over flow",No,Unknown,11/24/2021
+2024,78,24-10,12/12/2024,12/12/2024,Ground,city staff,"Unknown cause, potential high flows",No,10 Gallons,None
+2023,64,23-01,1/10/2023,1/10/2023,Apartment Basement through floor drains,contractor,Root Blockage in City Sewer Main,Yes,162 Gallons,None
+2023,64,23-02,1/30/2023,1/30/2023,Ground,city staff,Malfunction of Vacuum Truck,No,5 Gallons,None
+2023,64,23-03,5/28/2023,5/28/2023,Ground,resident,Root Blockage in City Sewer Main,Yes,10 Gallons,3/26/2016
+2023,64,23-04,8/9/2023,8/9/2023,Ground,city staff,Damaged Manhole and Heavy Rain Event,Yes,Unknown,10/19/2022
+2023,64,23-05,8/15/2023,8/15/2023,Ground,contractor,Contractor struck sewer main while working on water main,No,250 Gallons,None
+2023,64,23-06,10/7/2023 to 10/8/2023,10/8/2023,Ground,city staff,3.06 inches of rain over 6 hour period,No,Unknown,10/19/2022
+2023,64,23-07,10/8/2023,10/8/2023 - Total duration of discharge was about 17 minutes,Ground,other,"Pump 1 failed and pump 2 was inadvertantly left in ""Off"" position rather than ""Auto"" after routine inspection.",No,unknown,4/20/2021
+2023,64,23-08,12/10/2023 to 12/11/2023,12/11/2023,Ground,city staff,3.35 inches of rain and snow melt in 18 hour period,No,Unknown,10/8/2023
+2023,64,23-9,12/18/2023,12/18/2023,Ground,city staff,2.56 inches of heavy rain,No,Unknown,12/11/2023
+2022,55,22-01,1/14/2022,1/14/2022,Ground,city staff,Rags and wipes blocking system from medical facility,Yes,900 Gallons estimated by volume of ice/snow cleanup,None
+2022,55,22-02,2/11/2022,2/11/2022,Basement backup that drained to sanitary collection system,resident,Collapse of sewer main,Yes,"5,000 Gallons by area and depth of reported water in basement",None
+2022,55,22-03,2/18/2022,2/18/2022,Drained overland to Penobscot River,city staff,"Heavy rain and fernco connection gave way on 6"" service.",yes,300 Gallons based on size of ponding area.,None
+2022,55,22-04,6/30/2022,6/30/2022,Small back up in basement which drained to sanitary collection system,other,Rain event and blockage in main due to industrial rags.,yes,4 Gallons based on visual inspection,None
+2022,55,22-05,10/14/2022-10/19/2022,10/19/2022,Ground to Kenduskeag Stream and Penobscot River,city staff,Back to back rain events that included 7 inches of rain,Yes,Unknown,7/9/2021
+2022,55,22-06,11/14/2022,11/14/2022,Penobscot River,city staff,Accidental SCADA input for effluent gate draining storage tank,No,"4,770 Gallons",None
+2022,55,22-07,12/27/2022,12/27/2022,Ground,city staff,Possibly heavy rain event on 12-23-2022,No,Unknown,None
+2021,55,21-01,3/30/2021,4/6/2022,Ground,resident,Crack in sewer main and rain event,Yes,"10,213 Gallons estimated by units serviced",None
+2021,55,21-02,4/20/2021,4/20/2021,Ground,city staff,Power outage at pump station,No,<200 gallons by area and depth of ponded area.,None
+2021,55,21-03,7/9/2021,7/9/2021,Drained to stormwater system that drains to Penobscot River,city staff,Heavy rain from Tropical Storm Elsa on 7-9-2021,yes,Unknown,None
+2021,55,21-04,7/9/2021,7/9/2021,Ground,city staff,Heavy rain from Tropical Storm Elsa on 7-9-2021,No,Unknown,None
+2021,55,21-05,7/9/2021,7/9/2021,Ground,city staff,Heavy rain from Tropical Storm Elsa on 7-9-2021,No,Unknown,Fall of 2015
+2021,56,21-06,7/9/2021,7/9/2021,Ground,city staff,Heavy rain from Tropical Storm Elsa on 7-9-2021,No,Unknown,None
+2021,56,21-07,7/9/2021,7/9/2021,Ground,city staff,Heavy rain from Tropical Storm Elsa on 7-9-2021,No,Unknown,None
+2021,56,21-08,9/27/2021,9/27/2021,Placed back into sanitary system,city staff,Power outage at treatment plant,No,Unknown,None
+2021,56,21-09,9/30/2021,9/30/2021,Penobscot River,other,"Davis Brook Storage Conduit was taken off line for Davis Brook Tank Construction. A brief, but intense rainfall event overwhelmed 42"" interceptor where flows were diverted.",No,"<150,000 Gallons measured at DB Regulator Structure.",None
+2021,56,21-10,10/27/2021,10/27/2021,To drainage ditch,city staff,Sewer main blocked by roots.,Yes,Unknown,None
+2021,56,21-11,11/24/2021,11/24/2021,Ground,city staff,Minor leak in primary clarifier tank.,No,<50 gallons Visual estimate,None
+2020,67,20-01,2/26/2020,2/26/2020,Back into collection system,city staff,Sewer crew was flushing city sewer main caused toilet overflow,No,Minimal,None
+2020,67,20-02,3/2/2020,3/6/2020,Drained to street stormwater line and discharged to Kenduskeag Stream outfall,city staff,Sewer line was unkowingly damaged from previous utility construction project,No,Unknown,None
+2020,67,20-03,4/3/2020,4/3/2020,Pumped back into collection system downstream of construction site.,city staff,Heavy rain and minor leaks in exposed storage conduit within construction area for Davis Brook CSO Tank,No,"181,525 gallons based on volume calculation of area and depth",None
+2020,67,20-04,4/13/2020,4/13/2020,Pumped back into collection system downstream of construction site.,city staff,"Heavy rain, snow melt, and minor leaks in exposed storage conduit within construction area for Davis Brook CSO Tank",No,"32,400 gallons based on volume calculation of area and depth",None
+2020,67,20-05,7/23/2020,7/23/2020,Drained to street stormwater line and discharged to Penjajawoc Stream outfall,business,Excessive grease in sewer main from area restaurants,Yes,50 -100 gallons/ visual estimate,None
+2019,65,19-01,7/18/2019,unknown,Birch Stream via MS4,city staff,roots blockage in sewer main or laterals,probably,unknown,none
+2019,65,19-02,8/8/2019,8/8/2019,Penobscot River through CSO outfall,city staff,"heavy rain, hydraulically inadequate lines",yes,"5,000 gallons/ visual estimate",1/13/2018
+2019,65,19-03,8/8/2019,8/8/2019,back into system,city staff,"heavy rain, hydraulically inadequate lines",yes,"5,000 gallons/ visual estimate",3/7/2011
+2019,65,19-04,8/8/2019,8/8/2019,ground,city staff,heavy rain,unknown,"1,000 gallons/ visual estimate",none
+2019,65,19-05,9/4/2019,9/4/2019,back into system,resident,sewer crew flushing lines caused overflow of toilet,no,10 gallons/ visual estimate,none
+2018,53,18-01,1/13/2018,1/13/2018,Penobscot River through CSO outfall,city staff,"heavy rain, hydraulically inadequate lines",yes,3000 gal / visual evidence,2/17/2016
+2018,53,18-02,2/16/2018,2/16/2018,returned to system,city staff,grease,yes,10 gal/ field estimate,none
+2018,53,18-03,5/16/2018,5/16/2018,"ground, possibly reaching Penobscot River",city staff,"surcharged interceptor, flow escaped defective manhole",no,unknown,none
+2018,53,18-04,6/6/2018,6/6/2018,"ground, possible reaching small stream",property owner,grease,yes,100 gal/ visual estimate,none
+2018,53,18-05,6/19/2018,6/19/2018,"contained in basement, returned to system",contractor,grease and rags,yes,15 gal/ field estimate,none
+2018,53,18-06,8/9/2018,8/9/2018,Kenduskeag Stream,city staff,failure of temporary connection during construction,no,unknown (combined with rain),none
+2018,53,18-07,8/14/2018,8/14/2018,ground,city staff,"surcharged interceptor, flow escaped defective manhole cone",no,unknown,6/11/2015
+2018,53,18-08,8/14/2018,8/14/2018,ground,city staff,"surcharged line, flow escaped manholes",no,unknown,none
+2018,53,18-09,9/29/2018,9/29/2018,MS4 to Birch Stream,city staff,grease,yes,200 gal/ visual estimate,none
+2018,53,18-10,12/18/2018,12/18/2018,returned to system,property owner,grease and rags in line with reduced capacity due to roots and breaks,yes,minimal,none
+2017,58,17-01,6/27/2017,6/27/2017,back into sewer system,property owner,Contractor flushing lines in vicinity,neither,returned to system,none known
+2017,58,17-02,7/5/2017,unknown,"ground, MS4 ditch",city staff,Sewer main surcharged due to blockage caused by misuse,blockage,unknown,none known
+2017,58,17-03,8/34/17,8/23/2017,back into sewer system,property owner,Sewer main surcharged due to blockage of excessive grease,blockage,returned to system,none known
+2017,58,17-04,11/9/2017,11/10/2017,back into sewer system,property owner,Sewer main replaced and new hookup not completed,neither,returned to system,none known
+2016,57,16-01,1/10/16 at 10:30 PM,Unknown,MS4 via CB F08-4036 to Penobscot River,business,Heavy rainfall overnight,Yes,Unknown,9/30/2015
+2016,57,16-02,1/11/16 at 9:30 AM,Unknown,Kenduskeag Stream,city staff,Heavy rainfall and astronomical high tide,No,Unknown,12/3/2009
+2016,57,16-03,1/11/16 at 12:20 pm,1/11/16 at 12:30 pm,"Basement backup, flowed back into system",resident,Surcharge of system due to heavy rain,Yes,500 gal/ on site estimate,none recorded
+2016,57,16-04,1/12/16 at 8:00 AM,1/12/16 at 8:15 AM,"Basement backup, flowed back into system",resident,Surcharge of system due to heavy rain,Yes,1200 gal/ calculated estimate,none recorded
+2016,57,16-05,2/17/16 at 9:00 AM,Unknown,MS4 via CB F08-4036 to Penobscot River,city staff,Heavy rainfall overnight with snowmelt,Yes,Unknown,1/10/2016
+2016,57,16-06,3/26/16 at 12:10 PM,3/26/16 at 12:30 PM,"Backup in manhole, flowed back into main",resident,Backup due to grease and roots in main line,Yes,Trace/ on site observation,none recorded
+2016,57,16-07,3/29/16 at 1:45 PM,Unknown,"Basement backup, flowed back into system",city staff,Debris in line,Yes,1200 gal/ calculated estimate,none recorded
+2016,57,16-08,4/23/16 at 1:30 PM,Unknown,Penobscot River,city staff,Floor drain was tied into a discharge line that overflowed,No,Trace/ onsite observation,none recorded
+2016,57,16-09,6/17/16 at 9:50 AM,6/17/16 at 10:00 AM,"Floor drain backup, flowed back into system",city staff,Sewer jetting caused main line back up,No,Trace/ onsite observation,none recorded
+2016,57,16-10,11/28/16 at 4:03 PM,11/29/16 at 2:30 AM,n/a,city staff,Private sewer line failed and overflowed onto roadway,No,500 gal/ on site estimate,none recorded
+2016,57,16-11,11/30/16 at 9:30 AM,11/30/16 at 9:45 AM,"Basement backup, flowed back into system",contractor,Backup due to rootballs blocking main line,Yes,3200 gal/ calculated estimate,9/30/2015
