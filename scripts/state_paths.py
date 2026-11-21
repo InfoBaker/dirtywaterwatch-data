@@ -26,6 +26,15 @@ Three state objects:
                            not used; the refresh saves the folder back here (pack-obl) whenever the API changed it,
                            so this object is the last good copy, the fallback when the API is down.
 
+  state/attains.tar.gz     the state assessments joined to the water records (data/build/attains/attains-waters.json,
+                           pipeline/build/attains.py, docs/attains.md), written only by the weekly ATTAINS workflow
+                           (.github/workflows/attains.yml) and restored read only by the hourly refresh after the build
+                           state (unpack-attains), so the export reads this week's file; the copy that rides in
+                           build.tar.gz is the fallback when this object cannot be fetched.
+  state/attains-geom.tar.gz the ATTAINS assessment-unit geometry per state (data/raw/attains/geom/<ST>.json.gz and its
+                           manifest.json), public map-layer answers kept so the weekly job fetches a state again only
+                           when EPA reloaded it; written and read by the weekly job only (unpack-attains).
+
 Restore order: build.tar.gz, then raw-cache.tar.gz (the NY workbook entry is named by a data/build file). Save: both
 only after a run that ended well (a cancelled or failed refresh never overwrites the saved state). A state object
 that is there but cannot be fetched (fetch exits 1) is never saved over: the refresh stops when build.tar.gz cannot be
@@ -77,6 +86,13 @@ that cannot be read is replaced by the next good run's.
                                                             .dww-changed there); exit 0 packed, 3 nothing to save
     python3 -I scripts/state_paths.py obl-not-saved         that pack was not uploaded: data/build/obl-changes.json's
                                                             national pull and changes until go back to before the run
+    python3 -I scripts/state_paths.py unpack-attains FILE [--only cache|geom]
+                                                            restore state/attains.tar.gz (--only cache:
+                                                            data/build/attains/attains-waters.json) or
+                                                            state/attains-geom.tar.gz (--only geom:
+                                                            data/raw/attains/geom/<ST>.json.gz and manifest.json),
+                                                            regular files; the whole archive is read and checked first,
+                                                            and anything else refuses it whole (exit 1, nothing written)
     python3 -I scripts/state_paths.py check-size FILE [--max-mb N] [--hard-mb N]
                                                             exit 1 when a tarball is over the cap; with --hard-mb,
                                                             over the cap is a warning and only over N fails
@@ -418,6 +434,67 @@ def unpack_build(src: Path, root: Path = ROOT) -> dict:
     return {"files": n, "skipped": len(ms) - len(keep)}
 
 
+ATTAINS_CACHE = "data/build/attains/attains-waters.json"
+ATTAINS_GEOM = re.compile(r"data/raw/attains/geom/(?:[A-Z]{2}\.json\.gz|manifest\.json)")
+ATTAINS_DIRS = {"data", "data/build", "data/build/attains", "data/raw", "data/raw/attains", "data/raw/attains/geom"}
+
+
+def attains_member_problem(m: tarfile.TarInfo, only: str | None = None) -> str | None:
+    """Why a member of state/attains.tar.gz or state/attains-geom.tar.gz may not be restored, or None: only the
+    assessment cache, the per-state geometry files and their manifest (regular files) and the folders above them;
+    only="cache" or "geom" allows the one kind of file."""
+    name = m.name
+    if not name or name.startswith("/") or "\\" in name:
+        return "an absolute or odd path"
+    parts = [x for x in PurePosixPath(name).parts if x != "."]
+    if not parts or any(x in ("..", "") for x in parts):
+        return "an odd path"
+    path = "/".join(parts)
+    if not (m.isfile() or m.isdir()):
+        return "a link or special file"
+    if m.isdir():
+        return None if path in ATTAINS_DIRS else "a folder that is not the cache's"
+    ok = (path == ATTAINS_CACHE and only in (None, "cache")) or (bool(ATTAINS_GEOM.fullmatch(path))
+                                                                 and only in (None, "geom"))
+    return None if ok else "a file that is not the cache's"
+
+
+def unpack_attains(src: Path, root: Path = ROOT, only: str | None = None) -> dict:
+    """Restore state/attains.tar.gz (the assessment cache) or state/attains-geom.tar.gz (the geometry cache) under
+    root. The whole archive is read and checked first (attains_member_problem); one member that may not be restored,
+    or a damaged gzip, raises Unreadable having written nothing. Refused when a folder on the way is a link."""
+    root = Path(root)
+    for d in ATTAINS_DIRS:
+        if (root / d).is_symlink():
+            raise Unreadable(f"{d} is a link: not written through")
+    try:
+        with open(src, "rb") as fh:
+            if fh.read(2) != b"\x1f\x8b":
+                raise Unreadable(f"{Path(src).name} is not a gzip file")
+        with gzip.open(src, "rb") as g:
+            while g.read(1 << 20):
+                pass
+        with tarfile.open(src, "r:gz") as tf:
+            ms = tf.getmembers()
+            # AppleDouble '._*' files from a tarball made on a Mac are skipped, as in unpack-build
+            ms = [m for m in ms if not any(x.startswith("._") for x in PurePosixPath(m.name).parts)]
+            bad = [(m.name, why) for m in ms if (why := attains_member_problem(m, only))]
+            if bad:
+                shown = "; ".join(f"{n[:120]!r}: {w}" for n, w in bad[:3])
+                raise Unreadable(f"{Path(src).name} holds {len(bad)} member(s) that may not be restored ({shown}); "
+                                 "nothing was written")
+            if not any(m.isfile() for m in ms):
+                raise Unreadable(f"{Path(src).name} holds no file; nothing was written")
+            tf.extractall(root, members=ms, filter="data")
+    except Unreadable:
+        raise
+    except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
+        raise Unreadable(f"{Path(src).name}: {type(ex).__name__}") from None
+    n = sum(1 for m in ms if m.isfile())
+    say(f"restored {n} file(s) from {Path(src).name}")
+    return {"files": n}
+
+
 def obl_allowed(name: str) -> bool:
     """A member of state/obl-water.tar.gz that may be restored: water/<slug>.json (one level, no AppleDouble '._'),
     meta.json, or the water directory itself; relative, no '..'."""
@@ -704,6 +781,9 @@ def main(argv=None) -> int:
     s.add_argument("file")
     s = sub.add_parser("unpack-build")
     s.add_argument("file")
+    s = sub.add_parser("unpack-attains")
+    s.add_argument("file")
+    s.add_argument("--only", choices=("cache", "geom"), help="allow only the assessment cache, or only the geometry")
     s = sub.add_parser("unpack-obl")
     s.add_argument("file")
     s.add_argument("--to", default=str(OBL_OUT), help="openboatlaunch's out folder (default ../openboatlaunch/out)")
@@ -746,6 +826,13 @@ def main(argv=None) -> int:
             unpack_build(Path(a.file))
         except Unreadable as ex:
             print(f"::error::the build state could not be restored ({ex})", flush=True)
+            return 1
+        return 0
+    if a.cmd == "unpack-attains":
+        try:
+            unpack_attains(Path(a.file), only=a.only)
+        except Unreadable as ex:
+            say(f"the assessment object could not be read ({ex}); nothing was restored from it")
             return 1
         return 0
     if a.cmd == "unpack-obl":

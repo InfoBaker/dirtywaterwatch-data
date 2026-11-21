@@ -54,6 +54,12 @@ changed registry files and the counts, for a person to review. It never runs bes
 its queue, which holds one waiting run, so dispatch one batch at a time and not while a refresh is waiting.
 `scripts/state_batch.py` is the same batch by hand (`plan` prints the commands without running them).
 
+The states' own Clean Water Act assessments (EPA ATTAINS) are joined to the water records once a week by a
+separate, keyless workflow (`.github/workflows/attains.yml`, `scripts/attains_context.py`): EPA's national Expert Query
+files and the ATTAINS map layers, matched by geometry within 100 m and the water's name. The result is saved as the
+private state object `state/attains.tar.gz`; the hourly refresh restores it read only, and the export shows it on a
+water's page as standing context beside the status, never as a status or a colour (`docs/attains.md`).
+
 openboatlaunch's water records and their outlines come from openboatlaunch's API (`https://openboatlaunch.org/api/v1/`,
 read only, one way), with the private state object `state/obl-water.tar.gz` as the last good copy:
 
@@ -114,7 +120,8 @@ per-state run yet.
 
 The dataset release (`out/`) holds every normalised report (`events.json`, one record per report with its source,
 record id, times, water, operator, volume as reported and the rule applied), the water statuses, the coverage
-grades, the outfalls, the operators and the sources. CSV downloads per water, operator and state are on the site.
+grades, the outfalls, the operators and the sources, and, per water, the state's own assessment units and findings
+(`assessments.json` and `assessment` in `waters/<slug>.json`; `docs/attains.md`). CSV downloads per water, operator and state are on the site.
 The dataset is released under the Open Database License (ODbL) 1.0 with attribution to DirtyWaterWatch and to each
 source named in the records; the code under MIT. See `DATA-LICENSE.md`.
 
