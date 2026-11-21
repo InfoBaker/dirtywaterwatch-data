@@ -265,8 +265,6 @@ SOURCES: dict[str, dict] = {
     "nh-permittees": {"duration_text": with_unit("duration_min", "minutes")},
     "ca-swrcb-ciwqs-spills-flatfile": {"report_kind": text("spill_type"), "cause": text("causes"),
                                        "overflow_point": text("appearance_points")},
-    "ca-swrcb-ciwqs-sso-2006-order": {"report_kind": text("spill_type"), "cause": text("causes"),
-                                      "overflow_point": text("appearance_points")},
     "or-deq-oers-spills-2013-2025": {"cause": text("cause")},
     "ca-beachwatch-advisories": {"cause": text("cause")},
     # feeds built after the 2026-11-14 export (fields as their ingesters keep them)
