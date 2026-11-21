@@ -255,3 +255,27 @@ def test_the_verdict_build_sets_is_not_part_of_the_record_placement_caches():
     rec = illinois()["467"]
     h = S.record_hash(rec)
     assert S.record_hash({**rec, "_beach_reason": {"stated": False, "how": "no_field_match"}}) == h
+
+
+def test_a_new_york_live_layer_closure_reads_its_reason_from_the_layers_own_field_name():
+    """NYS Parks' live layer writes Status_Reason (the yearly dataset status_reason): a closure for an exceedance keeps
+    its colour from either. The layer is off season now; the row is in its field names with the dataset's values."""
+    from ingest import ny_beaches_habs as N
+    feat = {"attributes": {"StateParkBeach": "Wildwood SP", "Beach_status": "Closed", "Status_Reason": "Exceedance",
+                           "Date_sampled": "08-Sep-26", "Latitude": 40.96, "Longitude": -72.80}}
+    recs = N.live_beaches([feat], {}, datetime(2026, 9, 8, 15, tzinfo=UTC), "2026-09-08T15:00:00Z", {}, {})
+    assert len(recs) == 1 and recs[0]["event_type"] == "beach_closure"
+    v = BR.judge(recs[0], RULES)
+    assert v["stated"] is True and v["field"] == "rows[].Status_Reason" and v["words"] == "Exceedance"
+
+
+def test_a_maine_live_feed_closure_reads_its_public_comment():
+    """Maine's live feed keeps the comment as public_comment (the status history page's rows as comment): a closure
+    whose comment names a sewage spill keeps its colour; the raw shape is the ingester's (me_healthy_beaches.py)."""
+    rec = {"source_id": "me-healthy-beaches", "event_type": "beach_closure",
+           "raw": {"from": "mapdata_bma.geojson", "advisory_type": "Beach Closure", "advisory_status": "Active",
+                   "public_comment": "Closed due to a sewage spill upstream."}}
+    v = BR.judge(rec, RULES)
+    assert v["stated"] is True and v["field"] == "public_comment"
+    rec["raw"]["public_comment"] = ""
+    assert BR.judge(rec, RULES)["stated"] is False
