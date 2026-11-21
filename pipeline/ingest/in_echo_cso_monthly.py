@@ -97,17 +97,22 @@ MAX_CONSECUTIVE_FAILURES = 5
 # a filed volume implying more than this many million gallons an hour is kept as text only (one outfall-month on
 # 2026-11-14: 28,482 'Mgal' in 15 hours, IN0024741 001, 2026-09; the largest plausible ones run 2 to 4 an hour)
 MAX_MGAL_PER_HOUR = 100
-MGAL = {"Mgal": 1_000_000, "MG": 1_000_000, "MG/mo": 1_000_000, "gal": 1, "gal/mo": 1}
+MGAL = {"Mgal": 1_000_000, "MG": 1_000_000, "MG/mo": 1_000_000, "Mgal/mo": 1_000_000, "gal": 1, "gal/mo": 1}
 RAW_FIELDS = ("DMRValueId", "DMRValueNmbr", "DMRUnitDesc", "StatisticalBaseDesc", "NODICode", "NODIDesc",
               "ValueReceivedDate", "DMRDueDate", "DaysLate", "VersionNmbr", "LimitSetScheduleId")
+# Fields only EPA's per-state DMR files give a row (ingest/echo_dmr_cso_states.py fold_rows); kept in raw.dmr and in
+# the evidence store when present, so Indiana's records and store are unchanged. FiguredAs marks a figure that is not
+# the month's own total (the statistical bases disagree, a yes/no observation, an implausible count): it says whether
+# there was a discharge, never how much (figures).
+STATE_FILE_FIELDS = ("ParameterCode", "MonitoringLocationDesc", "StatisticalBases", "FiguredAs", "UnitFrom")
 
 
-def registry_outfalls(rows: list[dict] | None = None) -> dict[tuple[str, str], dict]:
-    """(permit, outfall key) -> the registry row of every Indiana combined sewer outfall (open or closed)."""
+def registry_outfalls(rows: list[dict] | None = None, state: str = "IN") -> dict[tuple[str, str], dict]:
+    """(permit, outfall key) -> the registry row of every combined sewer outfall of the state (open or closed)."""
     rows = common.load_outfall_registry(provisional=False) if rows is None else rows
     out = {}
     for r in rows:
-        if r.get("state") != "IN" or str(r.get("outfall_kind") or "cso") != "cso":
+        if r.get("state") != state or str(r.get("outfall_kind") or "cso") != "cso":
             continue
         out[common.outfall_key(r.get("npdes_permit"), r.get("outfall"))] = r
     return out
@@ -118,10 +123,10 @@ def permits_to_read(reg: dict) -> list[str]:
     return sorted({p for (p, _), r in reg.items() if not str(r.get("outfall_status") or "").upper().startswith("CLS")})
 
 
-def dischargers() -> dict[str, dict]:
+def dischargers(state: str = "IN") -> dict[str, dict]:
     out = {}
     for d in read_json(DATA_DIR / "dischargers.json", []) or []:
-        if d.get("state") != "IN":
+        if d.get("state") != state:
             continue
         for p in d.get("npdes_permits") or [d.get("npdes_permit")]:
             if p:
@@ -243,8 +248,11 @@ def revision_key(row: dict) -> tuple:
     return version, received, says
 
 
-def collect(results: dict[tuple[str, str], dict], reg: dict, stats: dict) -> tuple[dict, dict]:
-    """(permit, feature, month) -> {param: DMR row}; and permit -> ECHO facility name. results is keyed (permit, code)."""
+def collect(results: dict[tuple[str, str], dict], reg: dict, stats: dict,
+            params: dict[str, str] | None = None) -> tuple[dict, dict]:
+    """(permit, feature, month) -> {param: DMR row}; and permit -> ECHO facility name. results is keyed (permit, code).
+    params: parameter code -> figure name (events, hours, volume); Indiana's PARAMS unless given (the state files)."""
+    params = PARAMS if params is None else params
     cells: dict[tuple, dict] = defaultdict(dict)
     names = {}
     for (permit, code), res in results.items():
@@ -252,7 +260,7 @@ def collect(results: dict[tuple[str, str], dict], reg: dict, stats: dict) -> tup
         for f in res.get("PermFeatures") or []:
             feat = str(f.get("PermFeatureNmbr") or "").upper()
             for par in f.get("Parameters") or []:
-                if str(par.get("ParameterCode")) not in PARAMS:
+                if str(par.get("ParameterCode")) not in params:
                     continue
                 rows = par.get("DischargeMonitoringReports") or []
                 if "gross" not in str(par.get("MonitoringLocationDesc") or "").lower() or \
@@ -262,7 +270,7 @@ def collect(results: dict[tuple[str, str], dict], reg: dict, stats: dict) -> tup
                 if common.outfall_key(permit, feat) not in reg:
                     stats["skipped_not_cso_outfall"][f"{permit}:{feat}"] += len(rows)
                     continue
-                name = PARAMS[str(par["ParameterCode"])]
+                name = params[str(par["ParameterCode"])]
                 for row in rows:
                     pend = row.get("MonitoringPeriodEndDate")
                     if not pend:
@@ -301,7 +309,7 @@ def _evidences(entry: dict) -> list[tuple]:
 
 
 EVIDENCE_FIELDS = ("DMRValueId", "DMRValueNmbr", "DMRUnitDesc", "NODICode", "NODIDesc", "ValueReceivedDate",
-                   "VersionNmbr")
+                   "VersionNmbr", "StatisticalBases", "FiguredAs")
 
 
 def _ev_key(permit, feat, ym, name) -> str:
@@ -385,6 +393,9 @@ def figures(cell: dict) -> dict:
     """{events, hours, volume_mgal, no_discharge, received, unit_volume} of one outfall-month."""
     out = {"no_discharge": False, "received": None}
     vals = {}
+    # a figure that is not the month's own total (row FiguredAs, the state files only): above zero it says there was a
+    # discharge, never how much, so it is no count, hours or volume and its filed form is written out (out["filed"])
+    marked, filed = {}, {}
     for name, row in cell.items():
         if "_conflict" in row:
             continue
@@ -395,7 +406,9 @@ def figures(cell: dict) -> dict:
             continue
         else:
             v = num(row.get("DMRValueNmbr"))
-            if v is not None:
+            if v is not None and row.get("FiguredAs") and v != 0:
+                marked[name], filed[name] = v, str(row["FiguredAs"])
+            elif v is not None:
                 vals[name] = v
         rec = ddmon(row.get("ValueReceivedDate"))
         if rec and (out["received"] is None or rec > out["received"]):
@@ -404,10 +417,11 @@ def figures(cell: dict) -> dict:
     vol = vals.get("volume")
     unit = (cell.get("volume") or {}).get("DMRUnitDesc") or "Mgal"
     out["volume_gal"] = round(vol * MGAL[unit]) if vol is not None and unit in MGAL else None
-    out["volume_mgal"] = vol if unit in ("Mgal", "MG", "MG/mo") else None
+    out["volume_mgal"] = vol if unit in ("Mgal", "MG", "MG/mo", "Mgal/mo") else None
     out["volume_raw"] = None if vol is None else f"{vol:g} {unit}"
-    out["any"] = any((x or 0) > 0 for x in (out["events"], out["hours"], vol))
-    out["said"] = bool(vals)
+    out["any"] = any((x or 0) > 0 for x in (out["events"], out["hours"], vol)) or any(v > 0 for v in marked.values())
+    out["said"] = bool(vals) or bool(marked)
+    out["filed"] = filed
     # equally ranked rows that disagree (verification 3, 2026-11-15, P2-1): what each filed, and whether any of them
     # files a discharge; a disputed discharge is a discharge month with that figure unknown, whatever order the rows
     # arrived in, never a no-discharge finding
@@ -464,6 +478,7 @@ def volume_text(fg: dict, ym: str) -> str:
                  if n in fg["conflicts"] else f"{label[n]} {fg[k]:g}" + (" million gallons" if n == "volume" else "")
                  for n, k in (("events", "events"), ("hours", "hours"), ("volume", "volume_mgal"))
                  if n in fg["conflicts"] or fg[k] is not None]
+        parts += [t for n, t in sorted((fg.get("filed") or {}).items()) if n not in fg["conflicts"]]
         return (f"monthly DMR totals for {ym} in conflict, one report filing a discharge: " + "; ".join(parts)
                 + " (the figures in conflict are unknown until a higher revision settles them)")
     parts = []
@@ -476,7 +491,9 @@ def volume_text(fg: dict, ym: str) -> str:
         parts.append(f"{fg['volume_mgal']:g} million gallons")
     elif fg["volume_raw"]:
         parts.append(fg["volume_raw"])
-    text = ", ".join(parts) + f" in {ym} (monthly DMR totals)"
+    filed = [t for _, t in sorted((fg.get("filed") or {}).items())]
+    text = ", ".join(parts) + f" in {ym} (monthly DMR totals)" if not filed else \
+        "; ".join(([", ".join(parts)] if parts else []) + filed) + f" in {ym} (monthly discharge monitoring report)"
     if fg.get("conflicts"):
         label = {"events": "discharge event count", "hours": "hours", "volume": "volume"}
         text += "; " + "; ".join(f"the {label.get(n, n)} is in conflict: equally ranked reports filed "
@@ -550,7 +567,14 @@ def reconcile_latest(prev: dict, store: dict, stats: dict) -> dict:
     return out
 
 
-def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) -> list[dict]:
+def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict, feed: dict | None = None) -> list[dict]:
+    """The records of the outfall-months with a discharge. feed (the state files, ingest/echo_dmr_cso_states.py):
+    source_id, authority, zone (o, lat, lon -> IANA zone), source_url (permit -> address), material; Indiana's
+    otherwise."""
+    feed = feed or {}
+    source_id, authority = feed.get("source_id") or SOURCE_ID, feed.get("authority") or AUTHORITY
+    zone_of = feed.get("zone") or (lambda o, lat, lon: zones.indiana_zone(county=o.get("county"), lat=lat, lon=lon))
+    url_of = feed.get("source_url") or (lambda permit: f"https://echo.epa.gov/effluent-charts#{permit}")
     records = []
     for (permit, feat, ym), cell in sorted(cells.items()):
         fg = figures(cell)
@@ -572,7 +596,7 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) 
         if lat is not None:
             lat, lon = round(float(lat), 3), round(float(lon), 3)
         slug = o.get("water_slug")
-        tz = zones.indiana_zone(county=o.get("county"), lat=lat, lon=lon)
+        tz = zone_of(o, lat, lon)
         vol_note = None
         if fg["volume_gal"] and fg["hours"] and fg["volume_gal"] / 1e6 / fg["hours"] > MAX_MGAL_PER_HOUR:
             vol_note = (f"the filed volume ({fg['volume_raw']} in {fg['hours']:g} hours) implies more than "
@@ -582,6 +606,7 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) 
         raw = {"month": ym, "permit_feature": feat,
                "events": fg["events"], "hours": fg["hours"], "volume": fg["volume_raw"],
                "dmr": {name: {k: row.get(k) for k in RAW_FIELDS} | {"parameter": row.get("_param")}
+                       | {k: row[k] for k in STATE_FILE_FIELDS if row.get(k) not in (None, "")}
                        | ({"from_previous_run": True} if row.get("_from_previous_run") else {})
                        for name, row in sorted(cell.items()) if "_conflict" not in row},
                **({"conflicting_rows": sorted(fg["conflicts"]), "conflicts": fg["conflicts"],
@@ -596,10 +621,10 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) 
                # the chart builder's monthly measures (build/charts.py total_measures): events and hours
                "parameters": {k: {"DMRValueNmbr": v} for k, v in (("events", fg["events"]), ("duration", fg["hours"]))
                               if v is not None},
-               "note": ("the operator's monthly DMR totals for this outfall (events, hours, million gallons), not an "
-                        "individual discharge: no day is given")}
+               "note": feed.get("note") or ("the operator's monthly DMR totals for this outfall (events, hours, million "
+                                            "gallons), not an individual discharge: no day is given")}
         records.append(event(
-            source_id=SOURCE_ID, source_record_id=f"{permit}:{feat}:{ym}", event_type="cso", status="ended",
+            source_id=source_id, source_record_id=f"{permit}:{feat}:{ym}", event_type="cso", status="ended",
             discharger_id=d.get("id"), discharger_name=d.get("name") or names.get(permit), npdes_permit=permit,
             outfall_id=feat, outfall_name=o.get("outfall_name"),
             waterbody_text=o.get("receiving_water_echo"),
@@ -608,7 +633,7 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict) 
             started_at=start, ended_at=end, time_precision="month", reported_at=fg["received"],
             material="combined sewage and stormwater", volume_gal=fg["volume_gal"],
             volume_text=volume_text(fg, ym), estimate_flag="unknown",
-            authority=AUTHORITY, source_url=f"https://echo.epa.gov/effluent-charts#{permit}", raw=raw,
+            authority=authority, source_url=url_of(permit), raw=raw,
         ))
     records.sort(key=lambda r: (r["started_at"], r["event_id"]), reverse=True)
     return records
@@ -689,12 +714,26 @@ def main(argv=None) -> int:
         print(f"{SOURCE_ID}: all requests failed", file=sys.stderr)
         return 1
 
+    return finish(results, reg, dischargers(), since=args.since, permits=permits, fetch_log=fetch_log,
+                  evidence_store=evidence_store, save_store=save_cache)
+
+
+def finish(results: dict, reg: dict, disc: dict, *, since: str, permits: list[str], fetch_log: dict,
+           evidence_store: dict, save_store, feed: dict | None = None, meta_extra: dict | None = None) -> int:
+    """Records, reconciliation with the previous file and the events file, from the answers read (results, keyed
+    (permit, parameter code), in the effluent-chart shape compact() keeps). Indiana's main() and the state files
+    (ingest/echo_dmr_cso_states.py, feed: source_id, params, authority, zone, source_url, cadence, note) share it.
+    fetch_log values starting "failed" make the run not ok (the previous records kept); save_store(store) keeps the
+    evidence store (merge_previous). Returns the exit code."""
+    feed = feed or {}
+    source_id = feed.get("source_id") or SOURCE_ID
+    params = feed.get("params") or PARAMS
     stats = defaultdict(Counter)
-    cells, names = collect(results, reg, stats)
-    prev_doc = read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+    cells, names = collect(results, reg, stats, params)
+    prev_doc = read_json(common.EVENTS_DIR / f"{source_id}.json", {}) or {}
     store = merge_previous(cells, prev_doc.get("records") or [], stats, evidence_store)
-    save_cache(store)
-    records = build_records(cells, names, reg, dischargers(), stats)
+    save_store(store)
+    records = build_records(cells, names, reg, disc, stats, feed)
     carried = carried_params(store_cells(store))
     # reconcile with the previous run (review 2026-11-14 P1-2): a month the source no longer lists at all is kept,
     # marked missing from the source; a month the source now reports as no discharge is withdrawn; a month whose
@@ -730,30 +769,32 @@ def main(argv=None) -> int:
     records.sort(key=lambda r: (r["started_at"], r["event_id"]), reverse=True)
     latest = reconcile_latest((prev_doc.get("meta") or {}).get("latest_month_by_outfall") or {}, store, stats)
     per_permit = Counter(r["npdes_permit"] for r in records)
-    meta = {"registry_ids": [SOURCE_ID], "since": args.since,
-            "parameters": {c: n for c, n in PARAMS.items()}, "permits": permits,
+    meta = {"registry_ids": [source_id], "since": since,
+            "parameters": {c: n for c, n in params.items()}, "permits": permits,
             "fetch": fetch_log, "records_per_permit": dict(sorted(per_permit.items())),
             "permits_without_records": sorted(set(permits) - set(per_permit)),
             "median_days_month_end_to_receipt": median_lag_days(records),
             **{k: dict(v) for k, v in stats.items()},
-            "cadence": f"cached per permit and parameter for {CACHE_DAYS} days; DMRs reach ECHO weeks after the month",
+            "cadence": feed.get("cadence") or (f"cached per permit and parameter for {CACHE_DAYS} days; DMRs "
+                                               "reach ECHO weeks after the month"),
             "latest_month_by_outfall": dict(sorted(latest.items())),
-            "history_only": "month precision: the monthly mark, never red or yellow"}
+            "history_only": "month precision: the monthly mark, never red or yellow",
+            **(meta_extra or {})}
     failed = {k: v for k, v in fetch_log.items() if v.startswith("failed")}
     meta["not_asked_this_run"] = sorted(k for k, v in fetch_log.items() if v.startswith(("not asked", "stale")))
     if failed:
         err = f"{len(failed)} requests failed: " + "; ".join(f"{k} {v}" for k, v in list(failed.items())[:10])
-        path = common.EVENTS_DIR / f"{SOURCE_ID}.json"
+        path = common.EVENTS_DIR / f"{source_id}.json"
         prev = read_json(path, {}) or {}
         if prev.get("records") or not records:
-            write_events(SOURCE_ID, [], ok=False, error=err, meta=meta)
+            write_events(source_id, [], ok=False, error=err, meta=meta)
         else:
-            write_json(path, {"source_id": SOURCE_ID, "fetched_at": now_iso(), "ok": False, "error": err,
+            write_json(path, {"source_id": source_id, "fetched_at": now_iso(), "ok": False, "error": err,
                               "last_ok_at": None, "meta": meta, "count": len(records), "records": records})
-        print(f"{SOURCE_ID}: run not ok ({err})", file=sys.stderr)
+        print(f"{source_id}: run not ok ({err})", file=sys.stderr)
         return 1
-    path = write_events(SOURCE_ID, records, meta=meta)
-    print(f"{SOURCE_ID}: {len(records)} outfall-months from {len(per_permit)} permits -> {path}")
+    path = write_events(source_id, records, meta=meta)
+    print(f"{source_id}: {len(records)} outfall-months from {len(per_permit)} permits -> {path}")
     return 0
 
 
