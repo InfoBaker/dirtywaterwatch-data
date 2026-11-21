@@ -1,0 +1,66 @@
+{
+ "objectIdFieldName": "objectid",
+ "geometryType": "esriGeometryPoint",
+ "spatialReference": {
+  "wkid": 4326,
+  "latestWkid": 4326
+ },
+ "features": [
+  {
+   "attributes": {
+    "LocationDiscription": "Crane Creek Reservoir",
+    "RiskTier": "Health Advisory",
+    "DisplayOnWebsite": "Yes",
+    "Issue": "Cyanobacterial Bloom",
+    "Issue_other": null,
+    "WebNote": null
+   },
+   "geometry": {
+    "x": -116.58244982301034,
+    "y": 44.36304012668153
+   }
+  },
+  {
+   "attributes": {
+    "LocationDiscription": "Lake Lowell",
+    "RiskTier": "Health Watch",
+    "DisplayOnWebsite": "No",
+    "Issue": "Cyanobacterial Bloom",
+    "Issue_other": null,
+    "WebNote": null
+   },
+   "geometry": {
+    "x": -116.6643752133827,
+    "y": 43.54991303320107
+   }
+  },
+  {
+   "attributes": {
+    "LocationDiscription": "Mann Lake",
+    "RiskTier": "Health Advisory",
+    "DisplayOnWebsite": "Yes",
+    "Issue": "Cyanobacterial Bloom",
+    "Issue_other": null,
+    "WebNote": null
+   },
+   "geometry": {
+    "x": -116.85334619272973,
+    "y": 46.371833293320734
+   }
+  },
+  {
+   "attributes": {
+    "LocationDiscription": "Mann Lake",
+    "RiskTier": null,
+    "DisplayOnWebsite": "Yes",
+    "Issue": "Beach Closure",
+    "Issue_other": null,
+    "WebNote": null
+   },
+   "geometry": {
+    "x": -116.85334619272973,
+    "y": 46.371833293320734
+   }
+  }
+ ]
+}

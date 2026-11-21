@@ -163,7 +163,7 @@ def test_points_are_dhws_own_rounded_and_named_arms_keep_their_place():
 
 def test_layer_query_never_asks_for_staff_fields():
     fields = H.LAYER_QUERY.split("outFields=")[1].split("&")[0].split(",")
-    assert fields == ["LocationDiscription", "RiskTier", "DisplayOnWebsite"]
+    assert fields == ["LocationDiscription", "RiskTier", "DisplayOnWebsite", "Issue", "Issue_other", "WebNote"]
     raw = (FIX / "dhw-layer.json").read_text()
     for k in ("Email", "Creator", "Editor", "InternalNote", "ContactInfo", '"Name"'):
         assert k not in raw
@@ -212,3 +212,72 @@ def test_zone_for_idaho_by_point_and_other_states_unchanged():
     doc = json.loads((Path(zones.__file__).resolve().parents[1] / "data" / "reference" / "id-counties.json").read_text())
     assert doc["time_zone"]["law"]["cite"] == "49 CFR 71.9(a) and (d)"
     assert len(doc["time_zone"]["pacific_counties"]) == 9 and doc["time_zone"]["split_county"] == "Idaho County"
+
+
+# ---------------------------------------------------------------- DHW's Issue field (own-fixes 2026-11-21)
+# The Swim Guide review: the reader ignored DHW's Issue (Cyanobacterial Bloom, Beach Closure, Swimmer's Itch, Other),
+# so a closure row read as a bloom's point and tier. Fixture: three real rows of DHW's layer (2026-11-21) and a copy
+# of Mann Lake's row with DHW's own Issue value "Beach Closure" (no closure row was on the layer that day).
+
+def issue_doc():
+    return json.loads((FIX / "dhw-layer-issue.json").read_text())
+
+
+def run_issues(state, rows, at, doc, partial=None):
+    lay = H.parse_layer(doc) if doc is not None else None
+    iss = H.parse_issues(doc) if doc is not None else None
+    state = H.update(state, rows, at, lay, partial, issues=iss)
+    return state, {r["source_record_id"]: r for r in H.records(state)}
+
+
+def test_a_closure_row_is_never_a_blooms_point_or_tier():
+    lay = H.parse_layer(issue_doc())
+    assert lay[H.key("Mann Lake")]["tier"] == "Health Advisory"         # the bloom row's, not the closure copy's
+    iss = H.parse_issues(issue_doc())
+    assert [(i["name"], i["issue"], i["shown"]) for i in iss] == [("Mann Lake", "Beach Closure", "Yes")]
+    doc = issue_doc()
+    doc["features"] = [f for f in doc["features"] if f["attributes"]["Issue"] != "Cyanobacterial Bloom"
+                       or f["attributes"]["LocationDiscription"] != "Mann Lake"]
+    assert H.key("Mann Lake") not in H.parse_layer(doc)                 # a closure alone does not keep a bloom shown
+
+
+def test_a_dhw_closure_is_a_beach_closure_listed_without_a_colour_unless_its_note_gives_a_reason():
+    from build import beach_reason as BR
+    _, recs = run_issues({}, H.parse_table(page()), T0, issue_doc())
+    r = find(recs, "dhw:mann-lake:beach-closure:")
+    assert r["event_type"] == "beach_closure" and r["status"] == "advisory_active" and r["time_precision"] == "poll"
+    assert r["started_at"] == T0 and r["raw"]["_last_seen_in_source"] == T0 and r["lat"] is not None
+    assert r["raw"]["dhw_issue"] == "Beach Closure" and "Health and Welfare" in r["authority"]
+    assert r["waterbody_text"] == "Mann Lake" and "Beach Closure" in r["advice_text"]
+    assert BR.judge(r, RULES)["stated"] is False                        # decision 40: listed, not coloured
+    doc = issue_doc()
+    doc["features"][-1]["attributes"]["WebNote"] = "Closed after E. coli results above the standard."
+    _, recs = run_issues({}, H.parse_table(page()), T0, doc)
+    assert BR.judge(find(recs, "dhw:mann-lake:beach-closure:"), RULES)["stated"] is True
+    blooms = [x for x in recs.values() if x["event_type"] == "hab_advisory"]
+    assert len(blooms) == 7 and not [x for x in recs.values() if x["source_record_id"].startswith("dhw:")
+                                     and x["event_type"] == "hab_advisory"]
+
+
+def test_a_dhw_listing_ends_only_on_a_complete_read_of_the_map():
+    state, _ = run_issues({}, H.parse_table(page()), T0, issue_doc())
+    state, recs = run_issues(state, H.parse_table(page()), T1, None)                  # the map was not read
+    assert find(recs, "dhw:mann-lake:beach-closure:")["status"] == "advisory_active"
+    state, recs = run_issues(state, H.parse_table(page()), T1, issue_doc(), "a feature of DHW's layer has no name")
+    assert find(recs, "dhw:mann-lake:beach-closure:")["status"] == "advisory_active"
+    doc = issue_doc()
+    doc["features"][-1]["attributes"]["DisplayOnWebsite"] = "End"                    # DHW ends it on its map
+    state, recs = run_issues(state, H.parse_table(page()), T2, doc)
+    r = find(recs, "dhw:mann-lake:beach-closure:")
+    assert r["status"] == "advisory_lifted" and r["ended_at"] == T2 and r["raw"]["ended_at_precision"] == "poll"
+
+
+def test_swimmers_itch_and_other_are_beach_advisories_with_the_issuers_words():
+    doc = issue_doc()
+    doc["features"][-1]["attributes"].update(Issue="Other", Issue_other="Debris in the swim area")
+    _, recs = run_issues({}, H.parse_table(page()), T0, doc)
+    r = find(recs, "dhw:mann-lake:other:")
+    assert r["event_type"] == "beach_advisory" and "Debris in the swim area" in r["advice_text"]
+    doc["features"][-1]["attributes"].update(Issue="Swimmer's Itch", Issue_other=None)
+    _, recs = run_issues({}, H.parse_table(page()), T0, doc)
+    assert find(recs, "dhw:mann-lake:swimmers-itch:")["event_type"] == "beach_advisory"

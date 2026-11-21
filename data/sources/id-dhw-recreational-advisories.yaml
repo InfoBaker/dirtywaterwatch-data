@@ -4,15 +4,18 @@ url: "https://services1.arcgis.com/CNPdEkvnGl65jCX8/arcgis/rest/services/Public_
 homepage: "https://www.gethealthy.dhw.idaho.gov/recreational-water-health-advisories"
 kind: "arcgis"
 level: "state"
-# Read by ingest/id_deq_cyanohab.py for the points only: LocationDiscription, RiskTier, DisplayOnWebsite and the
-#   geometry. The layer's Name, Email, ContactInfo, Creator, Editor and InternalNote fields are never requested.
+# Read by ingest/id_deq_cyanohab.py: LocationDiscription, RiskTier, DisplayOnWebsite, Issue, Issue_other, WebNote and
+#   the geometry. The layer's Name, Email, ContactInfo, Creator, Editor and InternalNote fields are never requested.
+#   A Cyanobacterial Bloom row (or one with no Issue) gives a bloom's point; since 2026-11-21 a row with another
+#   Issue that the map shows is a record of its own: Beach Closure as a beach closure, Swimmer's Itch and Other as
+#   beach advisories (data/rules.json beach_reason reads its issue and note). All 16 rows were blooms on 2026-11-21.
 # Real read 2026-11-14: 19 features, the same waters as DEQ's table (Lake Lowell DisplayOnWebsite No).
 cadence: "with the refresh"
 license: "none stated"
 attribution: "Idaho Department of Health and Welfare"
 enabled: true
 role: "advisories"
-event_types: ["hab_advisory"]
+event_types: ["hab_advisory", "beach_closure", "beach_advisory"]
 states: ["ID"]
 access: ["arcgis"]
 access_detail: "Public ArcGIS layer (item 8f6fe24f43d044fc8a9e88aa721f101d); safe fields only."

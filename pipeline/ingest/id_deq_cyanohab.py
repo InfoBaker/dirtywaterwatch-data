@@ -14,9 +14,11 @@ Source
   Points: the Idaho Department of Health and Welfare's map layer "Public Health Advisories for Recreational Waters in
   Idaho" (registry id-dhw-recreational-advisories; ArcGIS item 8f6fe24f43d044fc8a9e88aa721f101d,
   Public_Health_Advisories_for_Recreational_Waters_in_Idaho_V2_view/FeatureServer/0), the map DEQ's page points to,
-  lists the same waters with DHW's own point and RiskTier. Only LocationDiscription, RiskTier, DisplayOnWebsite and the
-  point are requested: the layer's Name, Email, ContactInfo, Creator, Editor and InternalNote fields (staff and
-  internal notes) are never requested or saved. A DEQ row whose water DHW's layer names (case, apostrophes and dashes
+  lists the same waters with DHW's own point and RiskTier. Only LocationDiscription, RiskTier, DisplayOnWebsite, Issue,
+  Issue_other, WebNote and the point are requested: the layer's Name, Email, ContactInfo, Creator, Editor and
+  InternalNote fields (staff and internal notes) are never requested or saved. DHW's Issue (a coded value:
+  Cyanobacterial Bloom, Beach Closure, Swimmer's Itch, Other) decides what a row is: only a bloom row (or one with no
+  Issue) is a bloom's point and tier; any other row is DHW's own listing (below), never a bloom. A DEQ row whose water DHW's layer names (case, apostrophes and dashes
   ignored) takes DHW's point, rounded to 0.001 degree (coord_source "source", raw.point_basis): the authority's own
   marker on the water, so the advisory draws there and a named arm (C. J. Strike's Bruneau and Snake River arms,
   Hayden Lake's north end) keeps its own place. The points of the last good read are kept in the state file, so a
@@ -56,6 +58,14 @@ Records (a list read as a snapshot; never an invented date)
   - A page whose table cannot be found, or with no rows, is ok=False: the records stay and nothing ends.
   - Clock: the record's zone is its county's (pipeline/zones.py idaho_zone: Pacific north of the Salmon River, 49 CFR
     71.9), in raw.time_zone; the Collection Date is that zone's calendar day.
+  - DHW's other listings (own-fixes 2026-11-21, after the Swim Guide review): a row of DHW's map whose Issue is not a
+    cyanobacterial bloom and that the map shows (DisplayOnWebsite Yes) is a record of its own: Beach Closure ->
+    beach_closure, Swimmer's Itch and Other -> beach_advisory, with DHW's Issue, its description of an Other issue and
+    its web note in raw (dhw_issue, dhw_issue_other, dhw_web_note) and advice_text. It is in effect from the first read
+    that showed it (time_precision poll) to the first complete read of the map that no longer shows it (or shows it
+    as End or No); a failed or partial read ends nothing. data/rules.json beach_reason reads those three fields: a
+    closure whose entry gives no water-quality reason is listed without a colour (decision 40). Identity:
+    dhw:<location slug>:<issue slug>:<first read's UTC date>.
   Privacy: the table carries no personal data today; every row, DHW's names and the carried state go through
   ingest/ia_id_privacy.scrub before any save (raw, state, records, error text), and errors never quote the page.
 
@@ -83,8 +93,8 @@ SOURCE_ID = "id-deq-cyanohab-risk-table"
 URL = "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-harmful-algal-blooms/"
 LAYER = ("https://services1.arcgis.com/CNPdEkvnGl65jCX8/arcgis/rest/services/"
          "Public_Health_Advisories_for_Recreational_Waters_in_Idaho_V2_view/FeatureServer/0")
-LAYER_QUERY = (LAYER + "/query?where=1%3D1&outFields=LocationDiscription,RiskTier,DisplayOnWebsite"
-               "&returnGeometry=true&outSR=4326&f=json")
+LAYER_QUERY = (LAYER + "/query?where=1%3D1&outFields=LocationDiscription,RiskTier,DisplayOnWebsite,Issue,Issue_other,"
+               "WebNote&returnGeometry=true&outSR=4326&f=json")
 LAYER_ITEM = "https://www.arcgis.com/home/item.html?id=8f6fe24f43d044fc8a9e88aa721f101d"
 STATE_PATH = BUILD_DIR / "id-deq-cyanohab-state.json"
 AUTHORITY = ("Idaho Department of Health and Welfare and Idaho Department of Environmental Quality "
@@ -114,6 +124,12 @@ START_BASIS = ("the first read of DEQ's table that listed this water at this lev
 WINDOW_BASIS = "in effect while DEQ's CyanoHAB Risk Data Table lists the water as a Health Advisory"
 END_GONE = "the first read of DEQ's table that no longer listed the water"
 END_LEVEL = "the first read of DEQ's table that listed the water at another level ({})"
+BLOOM_ISSUE = "cyanobacterial bloom"
+DHW_AUTHORITY = "Idaho Department of Health and Welfare (Public Health Advisories for Recreational Waters map)"
+DHW_START_BASIS = ("the first read of DHW's map that showed this listing: the map gives no issue date, so it began "
+                   "before this time")
+DHW_END_BASIS = "the first complete read of DHW's map that no longer showed it"
+DHW_WINDOW_BASIS = "in effect while DHW's map shows it"
 
 
 def clean(s) -> str:
@@ -186,8 +202,8 @@ def parse_layer(doc: dict) -> dict[str, dict]:
     for f in doc["features"]:
         a, g = f.get("attributes") or {}, f.get("geometry") or {}
         name = scrub(clean(a.get("LocationDiscription")))
-        if not name:
-            continue
+        if not name or not is_bloom_issue(a.get("Issue")):
+            continue                          # a closure, swimmer's itch or other listing is never a bloom's point
         lat = lon = None
         try:
             if g.get("x") is not None and g.get("y") is not None:
@@ -197,6 +213,74 @@ def parse_layer(doc: dict) -> dict[str, dict]:
         out[key(name)] = {"name": name, "tier": clean(a.get("RiskTier")) or None,
                           "shown": clean(a.get("DisplayOnWebsite")) or None, "lat": lat, "lon": lon}
     return out
+
+
+def is_bloom_issue(issue) -> bool:
+    """True for DHW's Issue "Cyanobacterial Bloom" or none given (the layer's rows before the field was filled)."""
+    k = key(issue or "")
+    return not k or k == BLOOM_ISSUE
+
+
+def _point(g: dict) -> tuple[float | None, float | None]:
+    try:
+        if g.get("x") is not None and g.get("y") is not None:
+            return round(float(g["y"]), 3), round(float(g["x"]), 3)
+    except (TypeError, ValueError):
+        pass
+    return None, None
+
+
+def parse_issues(doc: dict) -> list[dict]:
+    """DHW's rows whose Issue is not a cyanobacterial bloom (Beach Closure, Swimmer's Itch, Other), each as {name,
+    issue, issue_other, web_note, shown, lat, lon}, every text scrubbed; ValueError on an error answer."""
+    if not isinstance(doc, dict) or doc.get("error") or "features" not in doc:
+        raise ValueError("DHW's layer answered no features")
+    out = []
+    for f in doc["features"]:
+        a, g = f.get("attributes") or {}, f.get("geometry") or {}
+        name = scrub(clean(a.get("LocationDiscription")))
+        if not name or is_bloom_issue(a.get("Issue")):
+            continue
+        lat, lon = _point(g)
+        out.append({"name": name, "issue": scrub(clean(a.get("Issue"))),
+                    "issue_other": scrub(clean(a.get("Issue_other"))) or None,
+                    "web_note": scrub(clean(a.get("WebNote"))) or None,
+                    "shown": clean(a.get("DisplayOnWebsite")) or None, "lat": lat, "lon": lon})
+    return out
+
+
+def update_issues(state: dict, issues: list[dict] | None, at: str, layer_partial: str | None = None) -> None:
+    """Open, continue and end DHW's own listings (parse_issues). None (the map was not read) changes nothing; a partial
+    read opens and continues but ends nothing; a listing the map no longer shows as Yes ends at the first complete
+    read without it."""
+    eps = state.setdefault("dhw_episodes", {})
+    if issues is None:
+        return
+    shown = {}
+    for it in issues:
+        if str(it.get("shown") or "").strip().lower() == "yes":
+            shown[f"{slug(it['name'])}:{slug(it['issue'])}"] = it
+    open_by = {ep["key"]: sid for sid, ep in eps.items() if not ep.get("ended_at")}
+    for wk, it in shown.items():
+        sid = open_by.get(wk)
+        if sid is None:
+            sid, n = f"dhw:{wk}:{at[:10]}", 2
+            while sid in eps:
+                sid, n = f"dhw:{wk}:{at[:10]}~{n}", n + 1
+            eps[sid] = {"key": wk, "first_seen": at}
+        ep = eps[sid]
+        ep.update(last_seen=at, row=dict(it))
+        ep.pop("pending", None)
+        if not ep.get("point") and it.get("lat") is not None and it.get("lon") is not None:
+            ep["point"] = {"name": it["name"], "lat": it["lat"], "lon": it["lon"]}
+    for sid, ep in eps.items():
+        if ep.get("ended_at") or ep["key"] in shown:
+            continue
+        if layer_partial:
+            ep["pending"] = f"DHW's map was read only in part ({layer_partial})"
+            continue
+        ep.pop("pending", None)
+        ep.update(ended_at=at, end_basis=DHW_END_BASIS)
 
 
 def _placed(pt: dict | None) -> dict | None:
@@ -274,6 +358,11 @@ def scrub_state(state: dict) -> dict:
             snap["points"] = _scrub_points(snap["points"])
     if isinstance(state.get("points"), dict):
         state["points"] = _scrub_points(state["points"])
+    for ep in (state.get("dhw_episodes") or {}).values():
+        if isinstance(ep.get("row"), dict):
+            ep["row"] = scrub_row(ep["row"])
+        if isinstance(ep.get("point"), dict):
+            ep["point"] = dict(ep["point"], name=scrub(clean(ep["point"].get("name"))))
     return state
 
 
@@ -288,7 +377,8 @@ def _on_layer(layer: dict, ep: dict) -> bool:
     return tier is None or tier == want
 
 
-def update(state: dict, rows: list[dict], at: str, layer: dict | None, layer_partial: str | None = None) -> dict:
+def update(state: dict, rows: list[dict], at: str, layer: dict | None, layer_partial: str | None = None,
+           issues: list[dict] | None = None) -> dict:
     """Fold one read of the table into the state: open, continue and close level episodes.
 
     A water shown at another level closes its episode at this read (DEQ's own row says so). A water the table no
@@ -370,8 +460,11 @@ def update(state: dict, rows: list[dict], at: str, layer: dict | None, layer_par
         d = read_date(r["collection_date"])
         if d and d not in ep["collection_dates"]:
             ep["collection_dates"].append(d)
+    update_issues(state, issues, at, layer_partial)
     state["last_poll"] = {"at": at, "rows": len(rows), "listed": sorted(seen), "unread_rows": unread,
-                          "pending": sorted(pending)}
+                          "pending": sorted(pending),
+                          "dhw_listings": sorted(ep["key"] for ep in (state.get("dhw_episodes") or {}).values()
+                                                 if not ep.get("ended_at"))}
     return state
 
 
@@ -485,6 +578,46 @@ def records(state: dict) -> list[dict]:
                              parse_error=scrub(f"a row the reader cannot read: {r!r}")))
         if level != "unknown" and r["collection_date"] and not read_date(r["collection_date"]):
             out[-1]["parse_error"] = f"unreadable Collection Date {r['collection_date']!r}"
+    out.extend(dhw_records(state))
+    return out
+
+
+def dhw_records(state: dict) -> list[dict]:
+    """DHW's own listings (update_issues) as beach closures and advisories, never blooms."""
+    out = []
+    for sid, ep in sorted((state.get("dhw_episodes") or {}).items()):
+        it, ended = ep["row"], ep.get("ended_at")
+        issue = it["issue"]
+        et = "beach_closure" if key(issue) == "beach closure" else "beach_advisory"
+        base, part = split_water(it["name"])
+        pt = _placed(ep.get("point"))
+        zone = zones.idaho_zone(county=None, lat=(pt or {}).get("lat"), lon=(pt or {}).get("lon"))
+        words = issue + (f": {it['issue_other']}" if it.get("issue_other") else "")
+        raw = {"dhw_issue": issue, "dhw_issue_other": it.get("issue_other"), "dhw_web_note": it.get("web_note"),
+               "location_as_listed": it["name"], "part": part, "state": "ID", "first_seen_at": ep["first_seen"],
+               "_last_seen_in_source": ep.get("last_seen"), "time_zone": zone, "start_basis": DHW_START_BASIS,
+               "category_basis": ("DHW's Issue field: a Beach Closure is a beach closure, Swimmer's Itch and Other "
+                                  "are beach advisories; only Cyanobacterial Bloom is a bloom")}
+        if pt:
+            raw.update(point_basis=(f"Idaho Department of Health and Welfare's map point for “{pt['name']}”, rounded "
+                                    "to 0.001 degree"), point_url=LAYER_ITEM)
+        if ended:
+            raw.update(ended_at_precision="poll", end_basis=ep.get("end_basis"))
+        if ep.get("pending"):
+            raw["unlisted_pending"] = ep["pending"]
+        if part:
+            raw["advisory_extent"] = "part_of_water"
+        note = it.get("web_note")
+        out.append(event(source_id=SOURCE_ID, source_record_id=sid, event_type=et,
+                         status="advisory_lifted" if ended else "advisory_active", waterbody_text=base,
+                         water_slugs=[], water_match="none", lat=(pt or {}).get("lat"), lon=(pt or {}).get("lon"),
+                         coord_source="source" if pt else None, coord_precision_m=150 if pt else None,
+                         started_at=ep["first_seen"], ended_at=ended, time_precision="poll", reported_at=None,
+                         published_at=None, source_updated_at=None, authority=DHW_AUTHORITY,
+                         advice_text=(f"{words} (Idaho Department of Health and Welfare's map)"
+                                      + (f": “{note}”" if note else "")),
+                         advice_window_hours=None, advice_window_basis=DHW_WINDOW_BASIS, source_url=LAYER_ITEM,
+                         raw=raw))
     return out
 
 
@@ -515,22 +648,23 @@ def main(argv=None) -> int:
         write_events(SOURCE_ID, [], ok=False, error=err)
         print(f"{SOURCE_ID}: {err}", file=sys.stderr)
         return 1
-    layer, layer_error, layer_partial = None, None, None
+    layer, layer_error, layer_partial, issues = None, None, None, None
     try:
         doc = (json.loads(Path(argv[argv.index("--layer-file") + 1]).read_text()) if "--layer-file" in argv
                else (None if "--file" in argv else fetch_layer()))
         layer = parse_layer(doc) if doc is not None else None
+        issues = parse_issues(doc) if doc is not None else None
         layer_partial = layer_problem(doc) if doc is not None else None
         if layer_partial:
             layer_error = f"DHW's layer: {layer_partial} (no water is ended on this read; the last good points are kept)"
     except (requests.RequestException, OSError, ValueError) as e:
         layer_error = scrub(f"DHW's layer: {error_detail(e)} (the last good points are kept)")
     state = scrub_state(read_json(STATE_PATH, {}) or {})
-    snapshot = {"rows": rows, "points": layer}
+    snapshot = {"rows": rows, "points": layer, "dhw_listings": issues}
     if "--file" not in argv and state.get("last_snapshot") != snapshot:
         save_raw(SOURCE_ID, json.dumps({"fetched_at": at, **snapshot}, indent=1).encode(), "json")
     state["last_snapshot"] = snapshot
-    state = update(state, rows, at, layer, layer_partial)
+    state = update(state, rows, at, layer, layer_partial, issues=issues)
     write_json(STATE_PATH, state)
     recs = records(state)
     meta = {"registry_ids": [SOURCE_ID, "id-dhw-recreational-advisories"], "url": URL, "layer": LAYER,
