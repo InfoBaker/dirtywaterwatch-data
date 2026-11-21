@@ -210,9 +210,15 @@ def decode(content: bytes) -> str:
         return content.decode("cp1252", errors="replace")
 
 
-def read_rows(text: str) -> list[dict]:
-    """Rows of the file with only the read columns, under their short keys. Raises when a needed column is missing
-    (a changed layout must not pass silently)."""
+REQUIRED = ("SPILL_EVENT_ID", "SPILL_REPORT_VERSION", "SPILL_TYPE", "WDID", "ESTIMATED_SPILL_START_DATE_AND_TIME")
+
+
+def read_rows(text: str, columns: dict[str, str] | None = None, required: tuple[str, ...] | None = None) -> list[dict]:
+    """Rows of the file with only the read columns (COLUMNS, or `columns`: file header -> short key), under their
+    short keys. Raises when a needed column (REQUIRED, or `required`) is missing (a changed layout must not pass
+    silently). ingest/ca_swrcb_ciwqs_sso_2006.py reads the 2006 order's file with its own columns."""
+    columns = COLUMNS if columns is None else columns
+    required = REQUIRED if required is None else required
     csv.field_size_limit(10 ** 8)
     reader = csv.reader(io.StringIO(text), delimiter="\t")
     try:
@@ -220,8 +226,7 @@ def read_rows(text: str) -> list[dict]:
     except StopIteration:
         raise ValueError("the file is empty") from None
     idx = {h: i for i, h in enumerate(header) if h}
-    missing = [c for c in ("SPILL_EVENT_ID", "SPILL_REPORT_VERSION", "SPILL_TYPE", "WDID",
-                           "ESTIMATED_SPILL_START_DATE_AND_TIME") if c not in idx]
+    missing = [c for c in required if c not in idx]
     if missing:
         raise ValueError(f"the file lacks the columns {missing}")
     out = []
@@ -229,7 +234,7 @@ def read_rows(text: str) -> list[dict]:
         if not any(c.strip() for c in cells):
             continue
         out.append({key: clean(cells[idx[col]]) if col in idx and idx[col] < len(cells) else ""
-                    for col, key in COLUMNS.items()})
+                    for col, key in columns.items()})
     return out
 
 
@@ -659,12 +664,13 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], wdids: di
 
 # ---------------------------------------------------------------- fetching and main
 
-def fetch(sess: requests.Session, state: dict) -> tuple[bytes | None, str | None]:
-    """(content or None when not modified, Last-Modified as ISO UTC)."""
+def fetch(sess: requests.Session, state: dict, url: str = FILE_URL) -> tuple[bytes | None, str | None]:
+    """(content or None when not modified, Last-Modified as ISO UTC) of the file at url (the 2022 order's by
+    default)."""
     headers = {}
     if state.get("last_modified_http"):
         headers["If-Modified-Since"] = state["last_modified_http"]
-    r = sess.get(FILE_URL, headers=headers, timeout=(20, 300))
+    r = sess.get(url, headers=headers, timeout=(20, 300))
     lm = r.headers.get("Last-Modified")
     lm_iso = None
     if lm:

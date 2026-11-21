@@ -48,7 +48,10 @@
 #                  eRule tables carry JBLM and Puyallup (echo_sewer_overflow_events)
 #                  California: ca_swrcb_ciwqs_spills (State Water Board CIWQS spill file: If-Modified-Since, a
 #                  304 most hours and about 11 MB once a day; spills of the last 60 days and those on record;
-#                  `--backfill` once for every spill since June 2023), ca_sfpuc_beaches (SFPUC beach map snapshot:
+#                  `--backfill` once for every spill since June 2023), ca_swrcb_ciwqs_sso_2006 (the Board's spill
+#                  history under the 2006 order, SSO.txt, 2007 to June 2023: Category 1 only, read at most weekly with
+#                  If-Modified-Since, about 52 MB; a spill also in Cat1-2-3-Spills.txt is kept there; sorted order
+#                  matters: it reads the events file of ca_swrcb_ciwqs_spills, which runs before it), ca_sfpuc_beaches (SFPUC beach map snapshot:
 #                  the combined sewer discharge sign and postings), ca_swrcb_fhab (FHAB bloom reports) and
 #                  ca_beachwatch (Beach Watch postings and closures; `--backfill` once for 1985 on), both read
 #                  only when their data.ca.gov table changes; ca_datagov is a helper
