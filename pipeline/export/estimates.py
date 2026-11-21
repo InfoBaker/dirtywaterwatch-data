@@ -311,6 +311,7 @@ def _duration(e: dict, spec: dict, inp: dict) -> dict | None:
     return span or stated
 
 
+SHORT = {"duration_expected": "expected", "duration_reported": "reported", "duration_given": "given"}
 EXPECTS = {"duration_expected": "the expected duration the {noun} gives", "duration_reported": "the duration the {noun} reports",
            "duration_given": "the duration the {noun} gives"}
 BY = {"duration_expected": "the expected duration it gives", "duration_reported": "the duration it reports",
@@ -370,6 +371,14 @@ def volume_estimate_of(e: dict) -> dict | None:
                         "start and end times.")
     else:
         out["basis"] = f"We multiplied {what} the {noun} gives, {rw}, by {BY[dur['from']]}, {duration_words(dur['minutes'])}."
+    # the same in short, for a report table's cell: the inputs, so the figure can be checked there too (review 9)
+    if dur["from"] == "start_to_end_and_duration":
+        out["basis_short"] = (f"{rw} × {duration_words(dur['stated']['minutes'])} reported, or × "
+                              f"{duration_words(dur['span']['minutes'])} from start to end")
+    elif dur["from"] == "start_to_end":
+        out["basis_short"] = f"{rw} × {duration_words(dur['minutes'])} from start to end"
+    else:
+        out["basis_short"] = f"{rw} × {duration_words(dur['minutes'])} {SHORT[dur['from']]}"
     out["formula"] = "rate × duration"
     inputs: dict = {"rate": {k: rate[k] for k in ("text", "unit", "low", "high", "bound", "qualifier") if rate.get(k) is not None},
                     "duration_from": dur["from"]}
@@ -411,7 +420,7 @@ def end_estimate_of(e: dict) -> dict | None:
         basis = (f"We added {what}, {dw}, to the day it gives as the start. The {noun} gives no time of day, so this is "
                  "the last day the duration allows.")
         at = end.date().isoformat()
-    return {"at": at, "precision": prec, "basis": basis,
+    return {"at": at, "precision": prec, "basis": basis, "basis_short": f"start + {dw} {SHORT[dur['from']]}",
             "inputs": {"started_at": e.get("started_at"), "duration_minutes": _clean_num(round(dur["minutes"], 2)),
                        "duration_from": dur["from"], "duration_text": dur["text"]}}
 
@@ -425,9 +434,11 @@ def ended_at_ours_of(e: dict) -> dict | None:
         return None
     dur = _stated(spec, inp)
     if not dur:
-        return {"basis": f"We worked out this end from the {inp.get('noun') or 'report'}'s start and the duration it gives."}
+        return {"basis": f"We worked out this end from the {inp.get('noun') or 'report'}'s start and the duration it gives.",
+                "basis_short": "start + duration given"}
     return {"basis": f"We added {EXPECTS[dur['from']].format(noun=inp.get('noun') or 'report')}, "
-                     f"{duration_words(dur['minutes'])}, to its start time."}
+                     f"{duration_words(dur['minutes'])}, to its start time.",
+            "basis_short": f"start + {duration_words(dur['minutes'])} {SHORT[dur['from']]}"}
 
 
 def estimates_of(e: dict) -> dict:

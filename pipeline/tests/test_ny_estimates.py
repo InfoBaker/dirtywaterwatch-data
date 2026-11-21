@@ -118,6 +118,7 @@ def test_an_open_notice_gives_our_volume_and_our_end_from_its_expected_duration(
     end = E.end_estimate_of(e)
     assert end == {"at": "2026-02-18T12:50:00-05:00", "precision": "minute",
                    "basis": "We added the expected duration the notice gives, 4 hours, to its start time.",
+                   "basis_short": "start + 4 hours expected",
                    "inputs": {"started_at": "2026-02-18T08:50:00-05:00", "duration_minutes": 240,
                               "duration_from": "duration_expected", "duration_text": "4 Hours - Ongoing"}}
     assert e["ended_at"] is None and e["status"] == "ongoing"     # the record and its status are unchanged
@@ -248,8 +249,9 @@ def test_slim_rows_carry_our_figures_without_their_inputs(recs):
     D.enrich([e])
     assert e["volume_estimate"]["inputs"]["duration_minutes"] == 240        # the event's own file has the inputs
     s = X.slim_event({**e, "file": "events/x.json", "fixture": False})
-    assert s["volume_estimate"] == {"gallons": 324000, "basis": e["volume_estimate"]["basis"]}
-    assert s["end_estimate"] == {"at": "2026-02-18T12:50:00-05:00", "precision": "minute", "basis": e["end_estimate"]["basis"]}
+    assert s["volume_estimate"] == {"gallons": 324000, "basis": e["volume_estimate"]["basis"], "basis_short": "1,350 gallons per minute × 4 hours expected"}
+    assert s["end_estimate"] == {"at": "2026-02-18T12:50:00-05:00", "precision": "minute", "basis": e["end_estimate"]["basis"],
+                                 "basis_short": "start + 4 hours expected"}
     assert s["detail"]["rate"]["low"] == 1350 and "overflow_point" not in s["detail"]     # the cell's fields only
     k = wb(recs, "2625738457226843")
     D.enrich([k])
@@ -306,7 +308,8 @@ def test_an_existing_export_gets_our_figures(tmp_path, recs):
     new = json.loads((out / chosen[1]["file"]).read_text())
     assert "volume_estimate" not in new and new["later_volume"]["volume_gal"] == 830010 and "end_estimate" in new
     rows = {r["event_id"]: r for r in json.loads((out / "events.json").read_text())["events"]}
-    assert rows[chosen[0]["event_id"]]["volume_estimate"] == {"gallons": 324000, "basis": full["volume_estimate"]["basis"]}
+    assert rows[chosen[0]["event_id"]]["volume_estimate"] == {"gallons": 324000, "basis": full["volume_estimate"]["basis"],
+                                                              "basis_short": full["volume_estimate"]["basis_short"]}
     w = json.loads((out / "waters" / "onondaga-creek-ny.json").read_text())["events"][0]
     assert "volume_estimate" not in w and w["end_estimate"]["at"] == "2026-06-11T15:10:00-04:00"
 
@@ -347,7 +350,8 @@ def test_review_3_a_web_notices_computed_end_is_labelled_ours(recs):
     ended = {**web, "status": "ended", "ended_at": "2026-11-06T11:00:00-05:00",
              "raw": {**web["raw"], "_ended_at_basis": "computed: discharge start + reported duration (2 hours 30 minutes Hours)"}}
     got = E.estimates_of(ended)
-    assert got["ended_at_ours"] == {"basis": "We added the duration the notice gives, 2 hours, 30 minutes, to its start time."}
+    assert got["ended_at_ours"] == {"basis": "We added the duration the notice gives, 2 hours, 30 minutes, to its start time.",
+                                    "basis_short": "start + 2 hours, 30 minutes given"}
     assert "end_estimate" not in got and ended["ended_at"] == "2026-11-06T11:00:00-05:00"   # the record and status unchanged
     assert "ended_at_ours" not in E.estimates_of(wb(recs, "2397177477336798"))               # a workbook end is the source's
     D.enrich([ended])
@@ -430,3 +434,15 @@ def test_review_3_the_csv_says_a_computed_end_was_not_reported(tmp_path, covered
         row = next(_csv.DictReader(f))
     assert row["ended_at"] == "2026-11-06T11:00:00-05:00" and row["end_reported"] == "false"
     assert row["end_estimate_at"] == row["ended_at"] and row["end_estimate_basis"].startswith("We added the duration")
+
+
+def test_review_9_a_short_basis_names_the_inputs_for_the_report_cell(recs):
+    assert E.volume_estimate_of(wb(recs, "2397177477336798"))["basis_short"] == "75 gallons per minute × 14 hours, 35 minutes from start to end"
+    assert E.volume_estimate_of(wb(recs, "2345603510134952"))["basis_short"] == "1,350 gallons per minute × 4 hours expected"
+    assert E.volume_estimate_of(wb(recs, "2527641404017062"))["basis_short"] == (
+        "650 gallons per minute × 5 hours, 30 minutes reported, or × 6 hours, 32 minutes from start to end")
+    assert E.end_estimate_of(wb(recs, "2345603510134952"))["basis_short"] == "start + 4 hours expected"
+    e = wb(recs, "2345603510134952")
+    D.enrich([e])
+    s = X.slim_event({**e, "file": "events/x.json", "fixture": False})
+    assert s["volume_estimate"]["basis_short"] and s["end_estimate"]["basis_short"]

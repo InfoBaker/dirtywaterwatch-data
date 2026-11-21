@@ -609,7 +609,7 @@ def estimate_cell(v: dict | None) -> dict | None:
     """The report tables' copy of one of our figures: the figure and its basis (the record's own file has the inputs)."""
     if not isinstance(v, dict):
         return None
-    out = {k: v[k] for k in ("gallons", "low", "high", "bound", "at", "precision", "basis") if v.get(k) is not None}
+    out = {k: v[k] for k in ("gallons", "low", "high", "bound", "at", "precision", "basis", "basis_short") if v.get(k) is not None}
     return out or None
 
 
