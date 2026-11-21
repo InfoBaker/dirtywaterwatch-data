@@ -320,3 +320,31 @@ def test_correcting_one_end_of_a_same_day_pair_never_swaps_their_ids():
     after = by_id(run(state=state, rows=fixed, at="2026-11-21T19:22:00Z")[0])
     assert after["2093-20060620-closure-2"]["ended_at"] == "2006-07-18"      # the unchanged one keeps its id
     assert after["2093-20060620-closure"]["ended_at"] == "2006-07-20"        # the corrected one keeps its own
+
+
+# ---- Astra re-review 2026-11-21 (.coordinator/reviews/2026-11-21-astra-mi-egle-beaches-rereview.md)
+
+def test_a_same_day_row_absent_for_one_read_gets_its_own_id_back():
+    state = {}
+    rows = M.parse_advisories(adv_text())
+    first = by_id(run(state=state, rows=rows)[0])
+    early = first["2093-20060620-closure"]
+    without = [r for r in rows if not (r["Identifier"] == "2093" and r["EndDate"].startswith("7/5/2006"))]
+    run(state=state, rows=without, at="2026-11-21T19:22:00Z")
+    back = by_id(run(state=state, rows=rows, at="2026-11-21T20:22:00Z")[0])
+    assert back["2093-20060620-closure"]["ended_at"] == "2006-07-05"
+    assert back["2093-20060620-closure-2"]["ended_at"] == "2006-07-18"
+    assert "2093-20060620-closure-3" not in back
+    assert back["2093-20060620-closure"]["raw"]["_first_seen_at"] == early["raw"]["_first_seen_at"]
+
+
+def test_a_shorter_beach_list_adds_to_the_saved_one_and_never_drops_a_beach(monkeypatch, tmp_path):
+    monkeypatch.setattr(M, "SITES_PATH", tmp_path / "sites.json")
+    full = site_text()
+    lines = full.splitlines()
+    answers = [full, "\n".join(lines[:-1]) + "\n"]          # then the list without its last beach (11 of 12)
+    monkeypatch.setattr(M, "fetch_report", lambda sess, rid: answers.pop(0))
+    rows = M.parse_advisories(adv_text())
+    first = M.load_sites(None, rows, T0)
+    second = M.load_sites(None, rows, "2026-11-23T21:00:00Z")
+    assert set(second) == set(first) and len(second) == 12

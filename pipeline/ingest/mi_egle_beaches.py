@@ -15,7 +15,8 @@ Source (registry mi-egle-beachguard; docs/analysis/2026-11-21-swimguide.md in th
     (the beach's id). One request each run (about 63 KB gzip).
   - 2081 "Beach Details": the 2,914 sites with their point, county, waterbody, EPA beach id and access. Read at most
     once a day (SITES_MAX_AGE_H) and whenever an advisory names a beach the saved list lacks; only SITE_FIELDS are
-    kept (data/build/mi-egle-beaches-sites.json).
+    kept (data/build/mi-egle-beaches-sites.json). A new answer is added to the saved list (a beach it lacks keeps its
+    saved point) and one under MIN_SITES or MIN_SHARE of the saved list is not used.
   - 2078 "Sampling Results" (452,680 rows) is not read.
   No licence statement (michigan.gov: "Copyright State of Michigan"). Credit "Michigan EGLE, MiEnviro beach
   monitoring". Law: the BEACH Act (CWA 406) and Part 31 of Michigan's NREPA (Rule 62: E. coli 300 per 100 mL as a
@@ -268,7 +269,8 @@ def keyed(rows: list[dict], state: dict | None = None) -> list[tuple[str, dict]]
         for r in left:
             n += 1
             used[base if n == 1 else f"{base}-{n}"] = r
-        assigned[base] = {k: _sig(r) for k, r in used.items()}
+        # every id keeps its row, present or not, so a row absent for a read gets its own id back (re-review P2)
+        assigned[base] = {**prev, **{k: _sig(r) for k, r in used.items()}}
         out.extend(sorted(used.items(), key=lambda kv: _suffix(kv[0], base)))
     return out
 
@@ -387,8 +389,9 @@ def load_sites(sess, rows: list[dict], fetched_at: str) -> dict[str, dict]:
             print(f"{SOURCE_ID}: sites not refreshed ({type(e).__name__}); using the list of {at}", file=sys.stderr)
             return sites
         raise
-    write_json(SITES_PATH, {"fetched_at": fetched_at, "report": REPORT_SITES, "sites": fresh})
-    return fresh
+    merged = {**sites, **fresh}          # a beach the answer lacks keeps its saved point (re-review: never dropped)
+    write_json(SITES_PATH, {"fetched_at": fetched_at, "report": REPORT_SITES, "sites": merged})
+    return merged
 
 
 def main(argv=None) -> int:
