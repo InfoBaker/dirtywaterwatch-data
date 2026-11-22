@@ -431,3 +431,9 @@ def test_corrective_actions_split_by_pypdf_are_written_as_the_city_writes_them()
     assert H.actions("Cleaned and D isinfected; Cleared M ain Line; Throttled down a lift station") == (
         "Cleaned and Disinfected; Cleared Main Line; Throttled down a lift station")
     assert H.actions("") is None
+
+
+@pytest.fixture(autouse=True)
+def monthly_transport_only(monkeypatch):
+    """These existing cases isolate the PDF/link transport; history paging has its own integration tests."""
+    monkeypatch.setattr(H, "read_history", lambda held, at, get: held)

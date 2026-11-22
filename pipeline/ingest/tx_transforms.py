@@ -159,7 +159,9 @@ def tx_tceq_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     # raw.row keeps the source's fields the record does not already carry (review 2026-11-07 P2-6): the dates, volume,
     # material, source, cause and region are the record's own fields or notes; the water text as given stays when the
     # record clears it (raw._water_text_as_given)
-    notes["row"] = {k: v for k, v in row.items() if k not in ROW_IN_RECORD}
+    notes["row"] = {k: v for k, v in row.items() if k not in ROW_IN_RECORD and k != "_houston_sso_ids"}
+    if row.get("_houston_sso_ids"):
+        notes["houston_sso_ids"] = row["_houston_sso_ids"]
     notes["_placement"] = "named_water_only"       # the rule: PLACEMENT (in the feed's meta, placement_rule)
     seg = F.clean(row.get("river_segment"))
     if seg and seg.strip("0"):

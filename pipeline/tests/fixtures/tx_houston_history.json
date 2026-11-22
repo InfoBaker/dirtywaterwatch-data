@@ -1,0 +1,134 @@
+[
+  {
+    "attributes": {
+      "OBJECTID": 372059,
+      "EXCURSIONID": 1075,
+      "ADDRESS": "SINGLETON ST",
+      "BASIN": null,
+      "NOTOBSERVED": null,
+      "STARTDATE": 1568125860000,
+      "STARTTIME": null,
+      "ENDDATE": null,
+      "ENDTIME": null,
+      "GPM": null,
+      "TOTALVOLLOST": 17,
+      "DURATION": 0,
+      "STRUCTURETYPE": "Service Lateral",
+      "FLOWLOCATION": "Cont'd On Site - Not 5 ft",
+      "SYSTEM": "Private System",
+      "CAUSE": "Rags/Wipes"
+    },
+    "geometry": null
+  },
+  {
+    "attributes": {
+      "OBJECTID": 391058,
+      "EXCURSIONID": 57707,
+      "ADDRESS": "WESTHOLLOW DR",
+      "BASIN": "CC002",
+      "NOTOBSERVED": "Active",
+      "STARTDATE": 1706508000000,
+      "STARTTIME": -2209109700000,
+      "ENDDATE": 1706508000000,
+      "ENDTIME": -2209086000000,
+      "GPM": 3,
+      "TOTALVOLLOST": 1185,
+      "DURATION": 395,
+      "STRUCTURETYPE": "Manhole",
+      "FLOWLOCATION": "Cont'd On Site - Not 5 ft",
+      "SYSTEM": "Public System",
+      "CAUSE": "Grease Blockage"
+    },
+    "geometry": {
+      "x": -95.637,
+      "y": 29.734
+    }
+  },
+  {
+    "attributes": {
+      "OBJECTID": 399344,
+      "EXCURSIONID": 67077,
+      "ADDRESS": "ROXELLA ST",
+      "BASIN": "IB080",
+      "NOTOBSERVED": "Non-Observed",
+      "STARTDATE": 1773896400000,
+      "STARTTIME": -2209081140000,
+      "ENDDATE": 1774069200000,
+      "ENDTIME": -2209088760000,
+      "GPM": 0,
+      "TOTALVOLLOST": 0,
+      "DURATION": 2753,
+      "STRUCTURETYPE": "City Cleanout",
+      "FLOWLOCATION": "Cont'd On Site - Not 5 ft",
+      "SYSTEM": "Public System",
+      "CAUSE": "Rags/Wipes"
+    },
+    "geometry": null
+  },
+  {
+    "attributes": {
+      "OBJECTID": 401078,
+      "EXCURSIONID": 68966,
+      "ADDRESS": "WILLOWBEND BLVD",
+      "BASIN": "SW046",
+      "NOTOBSERVED": "Active",
+      "STARTDATE": 1790658000000,
+      "STARTTIME": -2209086060000,
+      "ENDDATE": 1790830800000,
+      "ENDTIME": -2209100700000,
+      "GPM": 3,
+      "TOTALVOLLOST": 7908,
+      "DURATION": 2636,
+      "STRUCTURETYPE": "Private Cleanout",
+      "FLOWLOCATION": "Storm Sewer - Not Cont\u2019d",
+      "SYSTEM": "Public System",
+      "CAUSE": "Grease Blockage"
+    },
+    "geometry": null
+  },
+  {
+    "attributes": {
+      "OBJECTID": 401082,
+      "EXCURSIONID": 68977,
+      "ADDRESS": "LAVENDER ST",
+      "BASIN": "IB049",
+      "NOTOBSERVED": "Non-Observed",
+      "STARTDATE": 1790744400000,
+      "STARTTIME": -2209083600000,
+      "ENDDATE": 1790744400000,
+      "ENDTIME": -2209083540000,
+      "GPM": 0,
+      "TOTALVOLLOST": 0,
+      "DURATION": 1,
+      "STRUCTURETYPE": "Gravity Main",
+      "FLOWLOCATION": "Storm Sewer - Not Cont\u2019d",
+      "SYSTEM": "Public System",
+      "CAUSE": "Grease Blockage"
+    },
+    "geometry": null
+  },
+  {
+    "attributes": {
+      "OBJECTID": 401088,
+      "EXCURSIONID": 68784,
+      "ADDRESS": "GRAUSTARK ST",
+      "BASIN": "AS085",
+      "NOTOBSERVED": "Active",
+      "STARTDATE": 1789016400000,
+      "STARTTIME": -2209105620000,
+      "ENDDATE": 1789016400000,
+      "ENDTIME": -2209095900000,
+      "GPM": 4,
+      "TOTALVOLLOST": 567,
+      "DURATION": 162,
+      "STRUCTURETYPE": "Manhole",
+      "FLOWLOCATION": "Storm Sewer - Not Cont\u2019d",
+      "SYSTEM": "Public System",
+      "CAUSE": "Grease Blockage"
+    },
+    "geometry": {
+      "x": -95.395,
+      "y": 29.737
+    }
+  }
+]
